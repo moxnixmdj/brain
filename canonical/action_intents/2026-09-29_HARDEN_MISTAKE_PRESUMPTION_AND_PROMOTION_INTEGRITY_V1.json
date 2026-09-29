@@ -181,6 +181,12 @@
         "detection": "Boot requirements point to superseded OBS/acquisition schema versions while current frontier uses newer versions.",
         "prevention": "Exact-head coherence check compares boot, current_frontier, execution_governance, scoreboard, and gate authorities.",
         "abort_or_rollback": "Reject merge until all live authority references converge on current versions."
+      },
+      {
+        "failure_mode": "NEW_MANDATORY_STRATEGY_NOT_GOVERNANCE_PROTECTED",
+        "detection": "Current mandatory strategy path is absent from candidate validator PROTECTED_GUARD_PATHS.",
+        "prevention": "Exact-head protection sweep covers every newly mandatory law/gate/schema/template/strategy.",
+        "abort_or_rollback": "Reject merge until strategy V5 is protected."
       }
     ],
     "circularity_check": {
@@ -205,6 +211,8 @@
     "state_transition": {
       "coupled_canonical_paths": [
         "canonical/CANONICAL_POINTER.json",
+        "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
         "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
       ],
       "atomic_update_required": true,
@@ -222,7 +230,10 @@
         "coupled core state atomicity enforced",
         "scoreboard promotion evidence enforced",
         "exact-head readback and rollback triggers mandatory",
-        "stale OBS V1/V2/template V1 boot references replaced by current V3/V4/template V4 authorities"
+        "stale OBS V1/V2/template V1 boot references replaced by current V3/V4/template V4 authorities",
+        "active hierarchy, frontier queue, pointer, scoreboard, real acquisition mission, and strategy converge on current V3/V4/V5/V7/V8/V4 authority set",
+        "all four coupled core canonical files are present in the exact final atomic commit",
+        "queue objective reconciled to recurrent evidence-to-finalization seam and fresh Task C proof path"
       ]
     },
     "evidence_claim_map": [
@@ -260,7 +271,10 @@
       "pointer and scoreboard exact-head readback agree",
       "scoreboard counters unchanged",
       "active frontier blocker/next action unchanged",
-      "boot requirements, current frontier, execution governance, and scoreboard all reference current OBS V3 / receipt V4 / acquisition V5"
+      "boot requirements, current frontier, execution governance, and scoreboard all reference current OBS V3 / receipt V4 / acquisition V5",
+      "active hierarchy and frontier queue use OBS V3 / receipt V4 / acquisition V5 / gates V7-V8",
+      "real acquisition mission authority uses current strategy V5 and mistake-prevention law",
+      "every newly mandatory law/gate/schema/template/strategy is in candidate PROTECTED_GUARD_PATHS"
     ],
     "rollback_triggers": [
       "any active frontier drift",

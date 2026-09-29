@@ -145,8 +145,8 @@
   "real_task_first": true,
   "recursive_obs": {
     "required": true,
-    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
@@ -156,7 +156,10 @@
       "REPAIR",
       "BUILD"
     ],
-    "exact_base_commit_binding_required": true
+    "exact_base_commit_binding_required": true,
+    "live_challenger_frontier_required": true,
+    "selected_route_execution_preflight_required": true,
+    "selected_route_preflight_max_age_hours": 2
   },
   "last_real_output_event": {
     "event_id": "FRONTIER_CAPABILITY_EVIDENCE_A_SPACE_CARGO_20260929",
@@ -173,5 +176,15 @@
     "useful_partial_behavior": "THREE_AUTHORITATIVE_NCBI_SOURCES_SELECTED_AND_FETCHED",
     "first_causal_blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH",
     "frontier_capability_credit": false
+  },
+  "mistake_prevention": {
+    "required": true,
+    "law": "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
+    "receipt_schema": "canonical/governance/MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1.json",
+    "failure_default": "PRESUME_CONSEQUENTIAL_ACTION_WRONG_UNTIL_FALSIFIED",
+    "circular_frontier_proof_forbidden": true,
+    "self_certification_forbidden": true,
+    "strict_claim_ladder": true,
+    "exact_head_readback_required": true
   }
 }

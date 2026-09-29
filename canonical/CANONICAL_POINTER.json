@@ -28,10 +28,10 @@
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md",
     "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
-    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
     "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
-    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md"
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V5.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -78,7 +78,7 @@
     "frontier_capability_obsolescence_mission_lock_required": true,
     "frontier_capability_obsolescence_mission_lock_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md",
     "capability_obsolescence_strategy_required": true,
-    "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
+    "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V5.md",
     "frontier_capability_obsolescence_queue_required": true,
     "frontier_capability_obsolescence_queue_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "frontier_intelligence_operational_decomposition": "KNOWLEDGE_PLUS_CAPABILITIES",
@@ -609,7 +609,9 @@
     },
     "mistake_prevention_law": "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
     "mistake_prevention_receipt_schema": "canonical/governance/MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1.json",
-    "mistake_prevention_status": "MANDATORY__FAILURE_PRESUMED__CIRCULAR_PROOF_BANNED__ATOMIC_COUPLED_STATE__PROMOTION_EVIDENCE_GATED"
+    "mistake_prevention_status": "MANDATORY__FAILURE_PRESUMED__CIRCULAR_PROOF_BANNED__ATOMIC_COUPLED_STATE__PROMOTION_EVIDENCE_GATED",
+    "strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V5.md",
+    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V5.md"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -684,7 +686,7 @@
     "frontier_capability_target_map": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "frontier_comparison_rule": "FRONTIER_BEHAVIOR_DEFINES_A_MINIMUM_CAPABILITY_BAR__THE_WINNING_ROUTE_MAY_BE_EXTERNAL_COMPOSED_DETERMINISTIC_SPECIALIZED_OR_MODEL_BASED",
     "scaling_gate": "SCALE_ONLY_WHEN_THE_OBSOLESCENCE_CORE_IS_GENERAL_REPRODUCIBLE_AND_USEFUL_THROUGHPUT_WOULD_INCREASE",
-    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
+    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V5.md",
     "goal_hierarchy_law": "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
     "active_goal_hierarchy": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
     "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V7.json",
