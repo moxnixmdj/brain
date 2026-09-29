@@ -1,0 +1,167 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
+  "decision_id": "REAL-TASK-A-ZERO-SPEND-CARRIER-20260930",
+  "question": "Which currently available carrier should execute Project Brain's next zero-spend remote verification work?",
+  "alternatives": [
+    {
+      "id": "PUBLIC_GITHUB_ACTIONS",
+      "label": "Public GitHub Actions standard Ubuntu runner"
+    },
+    {
+      "id": "PRIVATE_GITHUB_ACTIONS",
+      "label": "Private-repository GitHub Actions runner"
+    },
+    {
+      "id": "INSTACLOUD",
+      "label": "InstaCloud free compute route"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "public-zero-spend",
+      "alternative": "PUBLIC_GITHUB_ACTIONS",
+      "required": true,
+      "state": "SATISFIED",
+      "description": "Must have hard-zero incremental spend for the intended public-repository run.",
+      "provenance": [
+        {
+          "source": "GitHub Docs",
+          "ref": "Standard GitHub-hosted runners for public repositories are free and unlimited."
+        }
+      ]
+    },
+    {
+      "id": "public-current-ready",
+      "alternative": "PUBLIC_GITHUB_ACTIONS",
+      "required": true,
+      "state": "SATISFIED",
+      "description": "Must be executable in the current account context.",
+      "provenance": [
+        {
+          "source": "Direct probe",
+          "ref": "verification-capsule-runner run 36637357927 acquired a hosted runner and executed checkout/setup."
+        }
+      ]
+    },
+    {
+      "id": "private-zero-spend",
+      "alternative": "PRIVATE_GITHUB_ACTIONS",
+      "required": true,
+      "state": "SATISFIED",
+      "description": "No incremental payment may be required.",
+      "provenance": [
+        {
+          "source": "GitHub Docs",
+          "ref": "Private runners consume account free-minute allotment before paid usage."
+        }
+      ]
+    },
+    {
+      "id": "private-current-ready",
+      "alternative": "PRIVATE_GITHUB_ACTIONS",
+      "required": true,
+      "state": "VIOLATED",
+      "description": "Must actually start a job in the current account context.",
+      "provenance": [
+        {
+          "source": "Direct probes",
+          "ref": "Repeated private-repository Actions jobs terminated before Set up job with runner_id 0."
+        }
+      ]
+    },
+    {
+      "id": "insta-zero-spend",
+      "alternative": "INSTACLOUD",
+      "required": true,
+      "state": "UNKNOWN",
+      "description": "Must be provably usable with zero payment commitment in the current account context.",
+      "provenance": [
+        {
+          "source": "Route investigation",
+          "ref": "Free-credit capability was identified, but exact payment commitment/account readiness remained unproven."
+        }
+      ]
+    },
+    {
+      "id": "insta-current-ready",
+      "alternative": "INSTACLOUD",
+      "required": true,
+      "state": "UNKNOWN",
+      "description": "Must have a currently callable verified account route.",
+      "provenance": [
+        {
+          "source": "Route investigation",
+          "ref": "No account-scoped live execution probe has been completed."
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "public-docs-free",
+      "alternative": "PUBLIC_GITHUB_ACTIONS",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "github-docs",
+      "claim": "Public standard hosted runners are free and unlimited.",
+      "provenance": [
+        {
+          "source": "GitHub Docs",
+          "ref": "GitHub-hosted runners reference"
+        }
+      ]
+    },
+    {
+      "id": "public-direct-ready",
+      "alternative": "PUBLIC_GITHUB_ACTIONS",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "direct-public-run",
+      "claim": "The public runner started and executed setup in this account.",
+      "provenance": [
+        {
+          "source": "GitHub Actions direct probe",
+          "ref": "run 36637357927"
+        }
+      ]
+    },
+    {
+      "id": "private-prestart-failure",
+      "alternative": "PRIVATE_GITHUB_ACTIONS",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "direct-private-runs",
+      "claim": "Private Actions repeatedly failed before any runner was assigned.",
+      "provenance": [
+        {
+          "source": "GitHub Actions direct probes",
+          "ref": "Drift Immunity Guard and unrelated private runs on 2026-09-29"
+        }
+      ]
+    },
+    {
+      "id": "insta-public-free-credit",
+      "alternative": "INSTACLOUD",
+      "relation": "SUPPORTS",
+      "confidence": 0.6,
+      "strength": 0.7,
+      "independence_group": "instacloud-public-docs",
+      "claim": "A free-credit route is publicly advertised.",
+      "provenance": [
+        {
+          "source": "InstaCloud public documentation",
+          "ref": "Free tier / usage credit documentation reviewed 2026-09-29"
+        }
+      ]
+    }
+  ],
+  "policy": {
+    "minimum_support_ratio": 0.65,
+    "maximum_conflict_ratio": 0.45,
+    "minimum_independent_support_groups": 2,
+    "minimum_net_margin": 0.25
+  }
+}
