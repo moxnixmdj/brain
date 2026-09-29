@@ -4837,6 +4837,31 @@ def _load_goal_compiler():
     spec.loader.exec_module(module)
     return module
 
+def _load_plain_goal_bound_grounding():
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"plain_goal_bound_grounding.py"
+    spec=importlib.util.spec_from_file_location("project_brain_plain_goal_bound_grounding",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("PLAIN_GOAL_BOUND_GROUNDING_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+def _ground_plain_goal_to_bound_capabilities(mission, goal):
+    module=_load_plain_goal_bound_grounding()
+    registry=_load_bound_capability_registry()
+    try:
+        result=module.ground(goal,registry)
+    except Exception as exc:
+        raise Blocker(
+            "PLAIN_GOAL_BOUND_GROUNDING_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__BOUND_CAPABILITY_GROUNDING.json"
+    writej(path,result)
+    return path,result
+
 def _load_auto_capability_acquisition():
     _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("auto_capability_acquisition.py")
@@ -5431,6 +5456,22 @@ def run_goal(step, mission):
                       "capability_acquisition_attempted":False,
                     },sort_keys=True)
                 ) from e
+            grounding_path,grounding=_ground_plain_goal_to_bound_capabilities(
+                mission,acquisition_goal
+            )
+            grounded_count=int(grounding.get("grounded_clause_count") or 0)
+            if grounded_count>0:
+                raise Blocker(
+                    "BOUND_CAPABILITY_GROUNDING_AVAILABLE:"+json.dumps({
+                      "evidence_path":str(grounding_path.relative_to(ROOT)),
+                      "candidate_capability_ids":grounding.get("candidate_capability_ids") or [],
+                      "unresolved_clause_indexes":grounding.get("unresolved_clause_indexes") or [],
+                      "grounded_clause_count":grounded_count,
+                      "external_capability_acquisition_attempted":False,
+                      "policy":"RESOLVE_EXISTING_BOUND_GROUNDING_BEFORE_EXTERNAL_DISCOVERY",
+                    },sort_keys=True)
+                ) from e
+
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
             auto=_load_auto_capability_acquisition()
