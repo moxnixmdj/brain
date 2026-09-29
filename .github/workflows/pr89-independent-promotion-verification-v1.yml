@@ -4,13 +4,12 @@ on:
   push:
     branches:
       - verify/pr89-independent-promotion-v1-20260929
-  pull_request:
-    branches:
-      - main
+    paths-ignore:
+      - verification-results/**
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   pr89-independent-verification:
@@ -105,17 +104,28 @@ jobs:
 
           echo "$STATUS" >/tmp/pr89-verification.rc
           echo "FINAL_STATUS=$STATUS" | tee -a "$REPORT"
-          exit 0
 
-      - name: Upload verifier report
+      - name: Publish verifier report to isolated branch
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr89-independent-verification-report
-          path: |
-            /tmp/pr89-verification.log
-            /tmp/pr89-verification.rc
-          if-no-files-found: error
+        shell: bash
+        run: |
+          set -e
+          mkdir -p verification-results
+          {
+            echo "schema=PROJECT_BRAIN_PR89_INDEPENDENT_VERIFICATION_V1"
+            echo "target_evidence_head=63c8c38baf56c9cb0a34566ecaeaeb1dc5d5d002"
+            echo "tested_runtime_blob=b9e7423ab24bf2da98869b02d782e791a779892a"
+            echo "verifier_commit=$GITHUB_SHA"
+            echo "runner=github-actions/ubuntu-latest"
+            echo "incremental_spend_usd=0"
+            echo
+            cat /tmp/pr89-verification.log
+          } > verification-results/PR89_INDEPENDENT_VERIFICATION.txt
+          git config user.name "project-brain-verifier"
+          git config user.email "project-brain-verifier@users.noreply.github.com"
+          git add verification-results/PR89_INDEPENDENT_VERIFICATION.txt
+          git commit -m "Record PR89 independent verification result"
+          git push origin HEAD:verify/pr89-independent-promotion-v1-20260929
 
       - name: Enforce verifier result
         if: always()
