@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_SOURCE_PRECHECK_V1",
+  "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+  "checked_on": "2026-09-29",
+  "frozen_runtime_blob_checked": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
+  "oracle_families": {
+    "ghostscript": {
+      "brain_prior_refs": 0,
+      "runtime_literal": false,
+      "ubuntu_noble_available": true
+    },
+    "ripgrep": {
+      "brain_prior_refs": 0,
+      "runtime_literal": false,
+      "ubuntu_noble_available": true
+    },
+    "dos2unix": {
+      "brain_prior_refs": 0,
+      "runtime_literal": false,
+      "ubuntu_noble_available": true
+    },
+    "7zip": {
+      "brain_prior_refs": 0,
+      "runtime_literal": false,
+      "ubuntu_noble_available": true
+    }
+  },
+  "pass": true,
+  "source_notes": [
+    "Ubuntu Noble package metadata verified from packages.ubuntu.com before freeze.",
+    "No oracle family string appeared in Brain repository search before freeze.",
+    "No oracle family string appeared in frozen repair runtime before freeze."
+  ]
+}
