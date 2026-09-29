@@ -122,7 +122,7 @@
       ],
       "search_stop_decision": "The same forced-finalization pattern is independently implemented by smolagents and AgentScope; no unresolved challenger can beat the minimal in-place composition enough to justify delaying the fresh real-task test.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Fresh route frontier assembled after the 9B material route failure and before any repair continuation; no unresolved plausible dominator remains."
+      "challenger_refresh_decision": "Live challenger frontier rechecked against the current UTC clock at 2026-09-29T21:20:02Z after the 9B failure and before merge/repair continuation; no unresolved plausible dominator remains."
     },
     "routes_considered": [
       "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
@@ -144,7 +144,7 @@
     "stop_condition": "Stop after the generic forced-finalization composition is implemented and regression-verified without replaying spent real tasks. Do not promote the frontier capability until a fresh materially different dependency-free real Task C completes and is independently verified.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-29T21:15:00Z",
+      "checked_at_utc": "2026-09-29T21:20:02Z",
       "max_age_hours": 24,
       "incumbent_route": "ASTRA_SINGLE_PHASE_OPTIONAL_PLANNER_WITH_LOCAL_QWEN3_5_9B",
       "source_classes_checked": [
