@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_EXECUTION_LEASE_V1",
+  "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
+  "status": "CLAIMED_NOT_STARTED",
+  "holder": "chatgpt-directjoin-20260929",
+  "claimed_on": "2026-09-29",
+  "source_branch": "repair/batched-executable-evidence-acquisition-v1-20260928",
+  "protected_candidate_blobs": {
+    "runtime": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
+    "runner": "3cdcbd427676f6b1324d1b1c7e11cec805211327",
+    "manifest": "312a2dac7ec2d0acf0def049d36533729cd80103"
+  },
+  "carrier": {
+    "provider": "Railway",
+    "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+    "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+    "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f"
+  },
+  "qualification_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_005_EXECUTION_SURFACE_QUALIFICATION_V1.json",
+  "execution_budget_remaining": 1,
+  "freshness": "UNSPENT",
+  "concurrency_rule": "NO_OTHER_WORKER_MAY_EXECUTE_PREVIEW_REPLAY_OR_SPEND_GATE_005_WHILE_THIS_LEASE_IS_OPEN",
+  "next_action": "STAGE_EXACT_BYTES__VERIFY_GIT_BLOB_IDENTITIES_AND_SURFACE__EMIT_START_MARKER_ONCE__EXECUTE_ONCE__CAPTURE__RECONCILE__RELEASE"
+}
