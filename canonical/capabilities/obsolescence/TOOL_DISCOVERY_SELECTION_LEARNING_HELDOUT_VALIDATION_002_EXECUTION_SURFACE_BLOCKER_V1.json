@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_002_EXECUTION_SURFACE_BLOCKER_V1",
+  "status": "EXTERNAL_CONNECTOR_REQUIRED__HELDOUT_GATE_UNSPENT",
+  "checked_on": "2026-09-29",
+  "source_pr": 85,
+  "pr_head_before_receipt": "6cc8fb7b3e1bb5697de6bef43d0f64e4844c218a",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "execution_count": 0,
+  "freshness": "UNSPENT",
+  "user_device_policy": "USER_LAPTOP_EXECUTION_FORBIDDEN",
+  "required_surface": [
+    "complete Debian/Ubuntu APT Packages metadata",
+    "apt-file with all applicable Contents indexes including architecture-all",
+    "outbound HTTPS for bounded Ubuntu manpage enrichment",
+    "exact PR85 runtime bytes",
+    "hard zero incremental monetary spend",
+    "600 second hard validation wall"
+  ],
+  "verified_candidate_surfaces": [
+    {
+      "surface": "Railway anonymous VM",
+      "technical_fit": "HIGH",
+      "cost_fit": "VERIFIED_FREE_ANONYMOUS_VM_NO_CARD",
+      "invocation": "ssh railway.new",
+      "current_blocker": "Railway ChatGPT plugin is not installed and current ChatGPT container has no outbound SSH/socket path. Generic SSH connector search found no installable generic shell connector."
+    },
+    {
+      "surface": "GitHub Codespaces",
+      "technical_fit": "HIGH",
+      "cost_fit": "PERSONAL_INCLUDED_USAGE_EXISTS_BUT_ACCOUNT_SPECIFIC_REMAINING_QUOTA_NOT_EXPOSED",
+      "current_blocker": "Connected GitHub MCP exposes no Codespaces create/exec action; browser automation wallet is negative and therefore unusable under hard-$0."
+    },
+    {
+      "surface": "Daytona Sandbox API",
+      "technical_fit": "HIGH",
+      "cost_fit": "FREE_TIER_EXISTS_BUT_NO_AUTHENTICATED_DIRECT_CONNECTOR",
+      "current_blocker": "Public API requires Daytona authentication/API key; no Daytona ChatGPT plugin is available in the plugin directory and Brainbase's Daytona-backed credits are exhausted."
+    },
+    {
+      "surface": "Modal Sandbox",
+      "technical_fit": "HIGH",
+      "cost_fit": "FREE_MONTHLY_COMPUTE_ADVERTISED_BUT_ACCOUNT_SPECIFIC_STATE_UNAVAILABLE",
+      "current_blocker": "No connected Modal tool/plugin or authenticated API surface."
+    }
+  ],
+  "rejected_or_forbidden": [
+    "user laptop Mo",
+    "private-repo GitHub Actions pre-runner failure class",
+    "Render requiring payment information",
+    "DigitalOcean zero-credit account",
+    "Brainbase credits exhausted",
+    "TinyFish browser wallet negative",
+    "Sprites account-specific free-credit state unverified",
+    "Replit no raw shell and no hard-zero attestation",
+    "Camber no hard-zero attestation/arbitrary shell proof"
+  ],
+  "next_truth_transition": "CONNECT_OR_DISCOVER_ONE_ZERO_SPEND_REMOTE_SHELL_SANDBOX_SURFACE__THEN_EXECUTE_HELDOUT_002_EXACTLY_ONCE__THEN_RECONCILE",
+  "anti_drift": [
+    "DO_NOT_PREVIEW_OR_SIMULATE_HELDOUT_002_RESULTS",
+    "DO_NOT_USE_USER_LAPTOP",
+    "DO_NOT_IMPLEMENT_SECOND_REPAIR",
+    "DO_NOT_MERGE_OR_PROMOTE_PR85",
+    "DO_NOT_CONSUME_UNVERIFIED_METERED_CREDIT",
+    "DO_NOT_RETRY_UNCHANGED_PRIVATE_GITHUB_ACTIONS_FAILURE_CLASS"
+  ]
+}
