@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_H004_PUBLIC_RUNNER_PRESTART_SAFE_DIRECTORY_FAILURE_V1",
+  "evidence_id": "H004-PUBLIC-RUNNER-PRESTART-SAFE-DIRECTORY-20260929-V1",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "workflow_run_id": 36598630743,
+  "workflow_run_attempt": 1,
+  "arm_commit": "dd055b618a678bfeb7c1cc78c2481596d4691112",
+  "failed_step": "Enforce one-shot event identity",
+  "exact_failure": "fatal: detected dubious ownership in repository at '/__w/verification-capsule-runner/verification-capsule-runner'",
+  "completed_before_failure": [
+    "job setup",
+    "Debian Trixie container initialization",
+    "checkout bootstrap",
+    "actions/checkout"
+  ],
+  "skipped_after_failure": [
+    "faithful Debian surface install",
+    "sealed capsule preflight",
+    "H004 execution"
+  ],
+  "root_cause": "actions/checkout marked safe.directory under a temporary HOME; subsequent Debian-container shell used a different HOME, so git log failed before the guard could evaluate arm-file creation identity.",
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "admissible_fix": "new workflow lane + new ARM filename; add `git config --global --add safe.directory \"$GITHUB_WORKSPACE\"` before the git-history identity check; change no runtime/evaluator/sealed payload bytes; do not rerun attempt 1.",
+  "incremental_spend_usd": 0,
+  "required_next_action": "STAGE_NEW_PUBLIC_WORKFLOW_AND_ARM_V2_WITH_ONLY_SAFE_DIRECTORY_CARRIER_FIX__DO_NOT_RERUN_RUN_36598630743__VERIFY_PRESTART_SURFACE__THEN_ALLOW_H004_START_EXACTLY_ONCE",
+  "prohibitions": [
+    "NO_RERUN_OF_RUN_36598630743",
+    "NO_RUNTIME_MUTATION",
+    "NO_EVALUATOR_MUTATION",
+    "NO_H004_START_BEFORE_NEW_CARRIER_PREFLIGHT_PASSES",
+    "NO_REPLAY_AFTER_FIRST_H004_START"
+  ]
+}
