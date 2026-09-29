@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SELECT-FRESH-DISCOVERY-TO-EXECUTION-GATE-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "FRESH-DISCOVERY-TO-EXECUTION-GATE-001",
+  "causal_blocker": "VERIFIED_XAPIAN_APT_DISCOVERY_ROUTE_IS_NOT_YET_CONNECTED_TO_AUTONOMOUS_APT_PROBE_CONTRACT_EXECUTE_VERIFY__FRESH_ORTHOGONAL_END_TO_END_GATE_NOT_YET_FROZEN",
+  "action_kind": "ORTHOGONAL_PROBE_SELECTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::VERIFIED_XAPIAN_APT_DISCOVERY_ROUTE_IS_NOT_YET_CONNECTED_TO_AUTONOMOUS_APT_PROBE_CONTRACT_EXECUTE_VERIFY__FRESH_ORTHOGONAL_END_TO_END_GATE_NOT_YET_FROZEN::ORTHOGONAL_PROBE_SELECTION",
+  "expected_parent_frontier_change": "Freeze one previously unseen, package-hint-free, multi-effect end-to-end gate that can falsify or validate the generic discovery→APT admission→probe→contract inference→execution→independent verification path after exactly one provider-neutral admission repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR89 HELDOUT-005 authoritative supplier-discovery PASS__SPENT",
+    "PR96 exact verified Xapian discovery inheritance",
+    "main 155b5a696b5d03ae83393ec51ad7bddf6d0ca11d frontier correction",
+    "ORTHO-TOOL-LEARNING-PORTFOLIO-001 gzip/sqlite/xml cases",
+    "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001 exif/xml/jpeg cases",
+    "repository search: dos2unix/rsvg-convert/librsvg2-bin/pdftotext/poppler-utils/optipng absent"
+  ],
+  "evidence_presence_classification": "FIRST_CAUSAL_INTERFACE_BREAK_STATICALLY_PROVEN__FRESH_END_TO_END_GENERALIZATION_GATE_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "The gate manifest is committed and frozen before any runtime repair; task goals contain no package/executable hints; fixtures and independent acceptance invariants are fully specified; HELDOUT-005 is untouched; no gate case has been executed.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
