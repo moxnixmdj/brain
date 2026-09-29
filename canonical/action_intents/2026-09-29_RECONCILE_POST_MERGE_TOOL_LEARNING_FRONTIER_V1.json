@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-MERGE-TOOL-LEARNING-FRONTIER-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "POST_MERGE_CANONICAL_FRONTIER_SOURCES_DISAGREE_AND_VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BY_AUTO_APT_CLI_ACQUISITION_SOURCE_ADMISSION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_MERGE_CANONICAL_FRONTIER_SOURCES_DISAGREE_AND_VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BY_AUTO_APT_CLI_ACQUISITION_SOURCE_ADMISSION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Remove stale pre-Xapian and pending-merge state from canonical frontier sources, record the verified discovery route as inherited on main, and localize the next residual parent-capability blocker to the generic discovery-to-APT-acquisition interface before any runtime repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd (Merge PR #96)",
+    "PR89 authoritative HELDOUT-005 terminal reconciliation",
+    "canonical/runtime/capability_discovery.py on main",
+    "canonical/runtime/auto_capability_acquisition.py on main",
+    "canonical/runtime/auto_apt_cli_acquisition.py on main",
+    "TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1",
+    "TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical pointer, hierarchy, and queue agree that the Debian full-metadata/Xapian/direct-Contents route is inherited; the next blocker is the generic discovery-to-acquisition admission mismatch; no runtime mutation is performed in this reconciliation PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
