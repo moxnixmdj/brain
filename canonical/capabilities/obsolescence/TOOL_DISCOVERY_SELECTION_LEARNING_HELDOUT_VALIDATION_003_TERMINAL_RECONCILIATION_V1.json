@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+  "status": "EXECUTED_ONCE__TERMINAL_FAIL__SPENT__NO_REPLAY",
+  "checked_on": "2026-09-29",
+  "source_pr": 86,
+  "execution_count": 1,
+  "freshness": "SPENT",
+  "same_case_replay_allowed": false,
+  "execution_surface": {
+    "provider": "Railway",
+    "project": "brain-heldout-002",
+    "service": "heldout-002-carrier",
+    "service_id": "50cd23d6-5b94-40fd-8763-1da99718b12e",
+    "deployment_id": "9e1c5735-6572-468e-85a8-377317ad1a6d",
+    "execution_started_at": "2026-09-29T02:10:27.473897022Z",
+    "terminal_readback_at": "2026-09-29T02:14:18.713063347Z",
+    "packages_index_count": 3,
+    "contents_amd64_count": 2,
+    "contents_all_count": 2,
+    "incremental_monetary_spend_usd": 0
+  },
+  "protected_identity": {
+    "successor_head": "ab2f44153163028c850dee50e30c38b6287a9456",
+    "runtime_git_blob": "f5f2330f6b08250b8d21f56c1bd8e71218609214",
+    "tests_git_blob": "1228ba50b4aade64489b2dfa50c1528676230f16",
+    "manifest_git_blob": "e597bb1a290efa7b2cdd7a4270064eca08d20cef",
+    "runner_git_blob": "c2bba52e549be6b083fcf3f5c9724d429762638a"
+  },
+  "preflight": {
+    "opaque_name_tests_passed": 3,
+    "opaque_name_tests_total": 3,
+    "package_indexes_present": true,
+    "architecture_specific_contents_present": true,
+    "architecture_all_contents_present": true
+  },
+  "terminal_result": {
+    "validator_exit_code": 2,
+    "validator_timeout": false,
+    "validator_wall_s": 236.131347673,
+    "total_wall_s": 236.059785,
+    "hard_validation_wall_s": 300,
+    "heldout_oracle_family_recall": 0.5,
+    "heldout_top20_oracle_recall": 0.5,
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false,
+    "stdout_sha256": "a97b923db9b3aa796db5fbd30e35faf314adc25c3625dc7b059a143c42592273",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases": [
+      {
+        "effect_id": "HELDOUT-QR-003",
+        "oracle_family": "qrencode",
+        "oracle_found": true,
+        "oracle_rank": 1
+      },
+      {
+        "effect_id": "HELDOUT-AUDIO-CONVERT-003",
+        "oracle_family": "sox",
+        "oracle_found": false,
+        "oracle_rank": null
+      },
+      {
+        "effect_id": "HELDOUT-JSON-TRANSFORM-003",
+        "oracle_family": "jq",
+        "oracle_found": true,
+        "oracle_rank": 4
+      },
+      {
+        "effect_id": "HELDOUT-PDF-LINEARIZE-003",
+        "oracle_family": "qpdf",
+        "oracle_found": false,
+        "oracle_rank": null
+      }
+    ]
+  },
+  "comparison_to_heldout_002": {
+    "family_recall_before": 0.25,
+    "family_recall_after": 0.5,
+    "top20_recall_before": 0.25,
+    "top20_recall_after": 0.5,
+    "total_wall_s_before": 358.370173,
+    "total_wall_s_after": 236.059785,
+    "interpretation": "MATERIAL_PARTIAL_GAIN__STRUCTURAL_FILENAME_GATE_REMOVAL_HELPED_BUT_DID_NOT_SOLVE_SEMANTIC_RETRIEVAL"
+  },
+  "classification": "PARTIAL_STRUCTURAL_GAIN__SEMANTIC_RETRIEVAL_AND_RANKING_RESIDUAL",
+  "causal_localization": [
+    "EXECUTABLE_NAME_ADMISSION_GATE_REMOVAL_IS_VALIDATED_AS_USEFUL_BY_GAIN_FROM_0_25_TO_0_50_RECALL",
+    "HOMEMADE_LEXICAL_SCORING_OVER_APT_DUMPAVAIL_REMAINS_TOO_SHALLOW_FOR_CAPABILITY_SEMANTICS",
+    "SOX_AND_QPDF_NOT_RETRIEVED_IN_TOP50_DESPITE_RELEVANT_PACKAGE_METADATA"
+  ],
+  "required_next_action": "SEARCH_AND_REUSE_EXISTING_DEBIAN_SEMANTIC_PACKAGE_INDEX_OR_RELEVANCE_ENGINE_BEFORE_INVENTING_ANOTHER_SCORER__FREEZE_NEW_UNSEEN_GATE_BEFORE_ANY_SECOND_RUNTIME_MUTATION",
+  "prohibitions": [
+    "NO_REPLAY_OF_HELDOUT_003",
+    "NO_SECOND_REPAIR_ON_PR86",
+    "NO_PROMOTION_FROM_THIS_RESULT",
+    "NO_USER_LAPTOP",
+    "NO_VAL_TOWN"
+  ]
+}
