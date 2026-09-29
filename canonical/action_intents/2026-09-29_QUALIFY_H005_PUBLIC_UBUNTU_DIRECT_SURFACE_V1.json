@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QUALIFY-H005-PUBLIC-UBUNTU-DIRECT-SURFACE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005",
+  "causal_blocker": "H005_FROZEN_UNSPENT__DIRECT_UBUNTU_24_04_PUBLIC_CARRIER_REQUIRES_GENERIC_SURFACE_QUALIFICATION_BEFORE_START",
+  "action_kind": "GENERIC_EXECUTION_SURFACE_QUALIFICATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::H005_FROZEN_UNSPENT__DIRECT_UBUNTU_24_04_PUBLIC_CARRIER_REQUIRES_GENERIC_SURFACE_QUALIFICATION_BEFORE_START::GENERIC_EXECUTION_SURFACE_QUALIFICATION",
+  "expected_parent_frontier_change": "Prove or reject the direct Ubuntu 24.04 public GitHub runner as H005's precommitted execution surface without starting H005. Require Packages, Translation-en, package Tags, Contents-all, architecture-specific Contents, python3-xapian, generic full-metadata Xapian discovery with executable ownership, exact repaired verifier import closure, and zbar Code39 configuration recognition. No held-out payload, producer discovery, candidate install, or H005 START.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR205 froze H005 UNSPENT with domain + execution-surface orthogonality",
+    "PR201 proved equivalent Debian Trixie metadata/Xapian surface",
+    "PR204 repaired semantic verifier admission and verified 6/6",
+    "public standard GitHub runner is hard-$0 for this public repo"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "stop_condition": "Qualification only. No H005 mission runner invocation, no H005 START/RESULT, no held-out payload generation, no producer candidate probing or install. Stop on first failed surface predicate and reconcile.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
