@@ -94,8 +94,8 @@ def _viable_candidates(discovery, goal=""):
     producer_words=("generate","generator","encode","encoder","create","render","write","output")
     consumer_words=("decode","decoder","scan","scanner","reader","inspect","viewer")
     goal_terms=_acquisition_terms(goal)
-    for c in discovery.get("candidates",[]):
-        if c.get("discovery_source")!="APT_CATALOG":
+    for provider_rank,c in enumerate(discovery.get("candidates",[]),1):
+        if c.get("binding_kind")!="apt":
             continue
         if not c.get("zero_cost_eligible",False):
             continue
@@ -105,11 +105,9 @@ def _viable_candidates(discovery, goal=""):
             continue
         if not c.get("version") or not re.fullmatch(r"[0-9a-f]{64}",str(c.get("archive_sha256") or "")):
             continue
-        if float(c.get("score",0))<12:
-            continue
         x=dict(c)
         role_blob=(" "+str(c.get("name") or "")+" "+str(c.get("description") or "")+" ").lower()
-        role_score=float(c.get("score",0))
+        role_score=0.0
         object_matches=sum(1 for t in goal_terms if t in role_blob or t in (c.get("matched_terms") or []))
         if producer_intent:
             if any(w in role_blob for w in producer_words):
@@ -122,12 +120,17 @@ def _viable_candidates(discovery, goal=""):
                 role_score-=28
         x["_acquisition_role_score"]=role_score
         x["_acquisition_object_matches"]=object_matches
+        x["_acquisition_provider_rank"]=provider_rank
         viable.append(x)
     if not viable:
         raise AutoAcquisitionFailure("NO_LOW_FRICTION_APT_CLI_CANDIDATE")
-    viable.sort(key=lambda c:(-float(c.get("_acquisition_role_score",0)),-float(c.get("score",0)),str(c.get("name",""))))
+    viable.sort(key=lambda c:(
+        -float(c.get("_acquisition_role_score",0)),
+        -int(c.get("_acquisition_object_matches",0)),
+        int(c.get("_acquisition_provider_rank",10**9)),
+        str(c.get("name","")),
+    ))
     return viable[:12]
-
 
 def _merge_role_conditioned_apt(discovery,goal):
     merged=json.loads(json.dumps(discovery))
