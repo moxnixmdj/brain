@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CHATGPT-BUILTIN-CARRIER-FALSIFICATION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Record only the freshly re-observed non-held-out falsification of the built-in ChatGPT Debian 13 carrier for HELDOUT-004: Debian-family identity passes, but the first frozen execution-surface predicate NORMAL_APT_PACKAGES_METADATA_REQUIRED fails because /var/lib/apt/lists has zero regular files; same diagnostic snapshot also observes python xapian absent, zbarimg absent, and Debian HTTPS unavailable due DNS resolution failure. Preserve HELDOUT-004 UNSPENT. Advance only to qualification of an already-discovered accountless/cardless hard-zero connected remote Linux route with exact content-addressed source closure/path/hash/import preflight, under a separate later intent.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 corrected the PR172 evidence boundary and kept HELDOUT-004 frozen UNSPENT",
+    "PR178 established a valid intent/guard but was quarantined unmerged after read-only scope overrun; its branch is not merge authority",
+    "fresh current-session non-held-out diagnostic independently re-observed Debian 13 trixie, zero regular APT list files, python xapian absent, zbarimg absent, and Debian HTTPS DNS failure",
+    "PR20/PR35/PR45 preserve reusable exact-source/content-addressed materialization mechanisms",
+    "Railway accountless anonymous VM and existing Railway account project are discovered candidates but MUST NOT be provisioned in this reconciliation lane"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after one carrier-qualification evidence record and minimal canonical pointer/hierarchy/queue reconciliation. Do not transport project source, create HELDOUT-004 START/RESULT, invoke its evaluator/dispatch, replay HELDOUT-003, mutate capability runtime/evaluator/frozen gate/executor policy, provision Railway or any other host, access Sprite, use Val Town, use the user laptop, or incur paid/unproven-cost infrastructure.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
