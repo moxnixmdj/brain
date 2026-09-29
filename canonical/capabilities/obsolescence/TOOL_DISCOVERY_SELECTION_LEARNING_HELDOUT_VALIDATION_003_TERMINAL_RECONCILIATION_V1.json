@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+  "status": "EXECUTED_ONCE__FAITHFUL_SURFACE__FAIL__SPENT",
+  "source_pr": 86,
+  "railway_deployment_id": "9e1c5735-6572-468e-85a8-377317ad1a6d",
+  "execution_count": 1,
+  "freshness": "SPENT",
+  "preflight": {
+    "packages_indexes": 3,
+    "contents_amd64_indexes": 2,
+    "contents_all_indexes": 2,
+    "pretests": "3/3 PASS"
+  },
+  "result": {
+    "validator_exit_code": 2,
+    "timeout": false,
+    "wall_s": 236.131347673,
+    "heldout_oracle_family_recall": 0.5,
+    "heldout_top20_oracle_recall": 0.5,
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false
+  },
+  "evidence_sha256": {
+    "stdout": "a97b923db9b3aa796db5fbd30e35faf314adc25c3625dc7b059a143c42592273",
+    "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "observed_residual": "EXACT_LEXICAL_PACKAGE_METADATA_MATCHING_REMAINS_TOO_BRITTLE_FOR_DIFFERENT_VOCABULARY__DEBIAN_TAG_ONTOLOGY_WAS_DISCARDED",
+  "required_next_action": "FREEZE_NEW_UNSEEN_GATE__THEN_ONE_GENERIC_DEBTAGS_METADATA_REPAIR__NO_REPLAY_OF_003"
+}
