@@ -1,0 +1,149 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-EVIDENCE-DECISION-WIN-TO-PARENT-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_VERIFIED__PARENT_COMPOSITION_REVALIDATION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_VERIFIED__PARENT_COMPOSITION_REVALIDATION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Record MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 as verified and inherited, delete its stale blocker, restore OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1 as the active frontier, and require one fresh model-independent parent real task before naming any next subcapability.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR244 at 2f4f3d7042f055003daf85a93e01e2f78678cec6",
+    "Independent component proof run 36642428325",
+    "ASTRA integration proof run 36642601675",
+    "ProbLog challenger fresh B+C run 36642420312 preserved as non-dominating supplier evidence",
+    "canonical/capabilities/frontier/MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1.json",
+    "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "Existing model-independent planner, goal compiler, semantic authorities, capability discovery, verification and continuation machinery"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after canonical target, hierarchy, queue, pointer and scoreboard all record the synthesis acquisition and restore the parent capability as active. Do not implement another primitive in this reconciliation. The next consequential action must be one fresh real parent task through the composed model-independent stack; localize only its first causal failure.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "2f4f3d7042f055003daf85a93e01e2f78678cec6",
+    "real_outcome": "Convert the verified synthesis win into canonical inherited state and resume direct parent-capability acquisition without guessing the next blocker.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Use the acquired model-independent synthesis primitive inside the real parent capability as soon as possible.",
+      "proxy_goals_deleted": [
+        "Continue evidence-to-decision route research after promotion bar was met",
+        "Rerun PR244 proofs",
+        "Rerun ProbLog B+C",
+        "Predeclare arbitrary-language structuring as the next blocker without a parent-task failure",
+        "Build another reasoning subsystem before fresh parent composition"
+      ],
+      "surviving_necessity": "Canonical state is stale after the verified PR244 merge and must be reconciled before the next consequential parent task."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib",
+        "capability_planner.py",
+        "goal_compiler.py",
+        "semantic_authorities.py",
+        "capability_discovery.py",
+        "astra_runtime.py",
+        "existing JIT authority/source discovery and verification capabilities"
+      ],
+      "external_existing_routes_checked": [
+        "ProbLog fresh B+C route remains preserved as an optional weighted-rule supplier but does not dominate the canonical stdlib synthesis core."
+      ],
+      "capability_work_deleted": [
+        "No synthesis implementation work",
+        "No model supplier work",
+        "No framework migration",
+        "No speculative sibling-subcapability implementation"
+      ],
+      "surviving_gap": "The parent open-ended research capability has not yet been freshly executed end-to-end after the model-independent synthesis acquisition."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical-state and composition-proof gap, not an implementation defect.",
+      "delete_bypass_substitute_options": [
+        "DELETE stale synthesis blocker: required.",
+        "BYPASS parent fresh reuse and immediately name another subcapability: rejected because it would guess the failure.",
+        "REUSE acquired synthesis plus existing deterministic parent substrate on a fresh real parent task: survives."
+      ],
+      "surviving_causal_blocker": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_WIN_THEN_EXECUTE_FRESH_PARENT_REAL_TASK",
+        "PREDECLARE_NEXT_SUBCAPABILITY",
+        "CONTINUE_SYNTHESIS_ROUTE_RESEARCH"
+      ],
+      "losing_routes_reason": "The synthesis promotion bar is already met. Only a fresh parent real task can reveal which remaining parent behavior is actually missing; speculative decomposition would add work before evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "This reconciliation is verified by exact canonical coherence against already-merged independent proof. No new synthetic experiment is necessary."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE blocker",
+        "Any queued model-backed evidence finalizer work",
+        "Any duplicate synthesis route race for the same core behavior"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "typed evidence-to-decision synthesis",
+        "hard-constraint filtering",
+        "support/contradiction aggregation",
+        "conflict/uncertainty preservation",
+        "terminal abstention/decision",
+        "producer-independent decision verification"
+      ],
+      "fresh_reuse_plan": "Restore the parent frontier and run one fresh consequential technical/scientific task through existing model-independent planning/discovery/execution/verification plus the newly inherited synthesis route. The first causal failure, if any, defines the next subcapability."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR244 and public-run receipts as final synthesis proof",
+        "Reuse closed ProbLog challenger adjudication",
+        "Do not search new synthesis suppliers",
+        "Defer next subcapability naming until direct parent composition evidence exists"
+      ],
+      "search_stop_decision": "The active synthesis blocker is already solved and independently verified. Further synthesis search cannot change the reconciliation decision; the next information-bearing action is a fresh parent real task.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_WIN_THEN_EXECUTE_FRESH_PARENT_REAL_TASK",
+      "PREDECLARE_NEXT_SUBCAPABILITY",
+      "CONTINUE_SYNTHESIS_ROUTE_RESEARCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CONTINUE_SYNTHESIS_ROUTE_RESEARCH",
+      "PREDECLARE_NEXT_SUBCAPABILITY",
+      "MODEL_BACKED_SYNTHESIS"
+    ],
+    "selected_surviving_route": "RECONCILE_WIN_THEN_EXECUTE_FRESH_PARENT_REAL_TASK",
+    "why_selected_route_is_fastest_sufficient": "It performs no new implementation, consumes already-verified evidence, deletes a solved blocker, and moves immediately to the only action that can expose the next real parent limitation.",
+    "expected_parent_level_state_change": "Record MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 as verified and inherited, delete its stale blocker, restore OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1 as the active frontier, and require one fresh model-independent parent real task before naming any next subcapability.",
+    "stop_condition": "Stop after canonical target, hierarchy, queue, pointer and scoreboard all record the synthesis acquisition and restore the parent capability as active. Do not implement another primitive in this reconciliation. The next consequential action must be one fresh real parent task through the composed model-independent stack; localize only its first causal failure.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action consuming already-verified canonical evidence; it selects no new external supplier or execution route."
+    }
+  }
+}
