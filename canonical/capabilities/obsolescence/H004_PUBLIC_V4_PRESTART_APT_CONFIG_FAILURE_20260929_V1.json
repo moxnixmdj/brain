@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_H004_PUBLIC_V4_PRESTART_APT_CONFIG_FAILURE_V1",
+  "evidence_id": "H004-PUBLIC-V4-PRESTART-APT-CONFIG-FAILURE-20260929-V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "public_repo": "moxnixmdj/verification-capsule-runner",
+  "workflow": ".github/workflows/h004-public-oneshot-004.yml",
+  "workflow_blob": "f0f9e540bccaa352ff95a6b7e30f0f515fdc303e",
+  "arm_file": "ARM_H004_PUBLIC_ONESHOT_004",
+  "arm_commit": "0df54565ca7d0e9b7fadec17f2840b33b68ccac2",
+  "run_id": 36600684421,
+  "job_id": 109516962546,
+  "run_attempt": 1,
+  "conclusion": "FAILURE_BEFORE_H004_START",
+  "successful_steps": [
+    "Set up job",
+    "Initialize containers",
+    "Bootstrap checkout tools",
+    "Checkout exact arm commit",
+    "Enforce one-shot event identity"
+  ],
+  "first_failed_step": "Install faithful Debian surface before START",
+  "exact_failure": "E: Syntax error /etc/apt/apt.conf.d/zzzz-project-brain-languages:1: Extra junk at end of file",
+  "exact_cause": "V4 used printf format containing double-escaped backslash-n, producing a literal \\\\n sequence in APT config instead of a newline.",
+  "execution_step_conclusion": "skipped",
+  "verify_step_conclusion": "skipped",
+  "start_created": false,
+  "result_created": false,
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0
+  },
+  "candidate_runtime_mutated": false,
+  "evaluator_mutated": false,
+  "repair_class": "CARRIER_WRAPPER_ONLY",
+  "generic_diagnostic_reference": {
+    "run_id": 36600121869,
+    "result": "PASS",
+    "working_apt_language_line": "printf 'Acquire::Languages \"en\";\\n' > /etc/apt/apt.conf.d/zzzz-project-brain-languages"
+  },
+  "authorized_next_change": "NEW_V5_WORKFLOW_AND_ARM_FILENAME__COPY_V4_EXCEPT_USE_EXACT_WORKING_APT_LANGUAGE_PRINTF_FORM",
+  "forbidden": [
+    "NO_RERUN_OF_V4",
+    "NO_RUNTIME_REPAIR",
+    "NO_EVALUATOR_REPAIR",
+    "NO_CANDIDATE_PRODUCER_PREINSTALL",
+    "NO_H004_REPLAY_AFTER_FIRST_START"
+  ],
+  "incremental_spend_usd": 0
+}

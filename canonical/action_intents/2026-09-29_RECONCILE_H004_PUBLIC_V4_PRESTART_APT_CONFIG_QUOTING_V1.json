@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-PUBLIC-V4-PRESTART-APT-CONFIG-QUOTING-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_GENERIC_CARRIER_DIAGNOSTIC_PASS__FINAL_ONE_SHOT_EXECUTION_READY",
+  "action_kind": "PRESTART_CARRIER_FAILURE_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::H004_PUBLIC_V4_APT_CONFIG_QUOTING::PRESTART_CARRIER_FAILURE_RECONCILIATION",
+  "expected_parent_frontier_change": "Record V4 run 36600684421 as pre-START carrier-only failure. Exact failure is malformed APT language config produced by double-escaped newline in printf. H004 execution step was skipped, so freshness remains UNSPENT. Authorize only a new V5 workflow/ARM lane changing that one carrier line to the exact newline form proven by generic carrier diagnostic run 36600121869.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR201 generic carrier diagnostic PASS run 36600121869",
+    "public V4 workflow blob f0f9e540bccaa352ff95a6b7e30f0f515fdc303e",
+    "V4 arm commit 0df54565ca7d0e9b7fadec17f2840b33b68ccac2",
+    "V4 run 36600684421 job 109516962546",
+    "V4 execution step skipped",
+    "generic diagnostic used exact working line: printf 'Acquire::Languages \"en\";\\n'"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile only. No H004 rerun in this branch. Preserve runtime/evaluator/frozen mission bytes. After merge, only V5 may be staged with a new workflow/ARM filename and the single proven carrier quoting correction.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
