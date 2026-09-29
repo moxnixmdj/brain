@@ -1,0 +1,347 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRESH-TASK-C-MURAKUMO-QWEN38-ANDROID-GRAPHICS-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PR227_SAFE_FINALIZATION_MERGED__FRESH_REAL_TASK_C_UNSPENT",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PR227_SAFE_FINALIZATION_MERGED__FRESH_REAL_TASK_C_UNSPENT::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute exactly one fresh real software-systems Task C with the repaired ASTRA controller and an explicit non-frontier Qwen3.8-27B supplier, then independently adjudicate whether the route completes the real research/diagnosis task without replay or frontier-model dependence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR227 exact-byte safe-evidence finalization repair",
+    "Superseded unspent PR223 Android-emulator graphics Task C",
+    "PR223 direct probes: Murakumo anonymous OpenAI-style tool_call HTTP 200 and Vireonix anonymous inference HTTP 200",
+    "Public verification carrier run 36635838394 SUCCESS at 2026-09-29T21:50:01Z",
+    "Murakumo current public API docs and free-inference contract",
+    "Vireonix current auto-routing docs and terms"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute Task C exactly once on the selected current route; preserve terminal evidence; independently adjudicate the real answer and supplier/runtime provenance; do not replay or tune on the result. Promote only the evidence level actually earned.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+    "real_outcome": "Produce a correct evidence-backed diagnosis and smallest non-destructive falsification probe for a real Android-emulator graphics freeze on a fresh cross-domain task.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain the first fresh end-to-end real-task proof after PR227, not another support artifact.",
+      "proxy_goals_deleted": [
+        "Merge PR228 governance first",
+        "Replay Task A or Task B",
+        "Run a synthetic benchmark",
+        "Download another local model",
+        "Use the user's laptop"
+      ],
+      "surviving_necessity": "One fresh materially different real task is the direct remaining proof action."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Current ASTRA runtime blob 1e8252415c60a553bad8a05fae2d98217d0f5833",
+        "PR227 exact-byte public validation",
+        "Public verification-capsule-runner",
+        "Prior Qwen3.5-9B task route and bridge"
+      ],
+      "external_existing_routes_checked": [
+        "Murakumo explicit public qwen3.8-27b-throughput-5090 route",
+        "Vireonix anonymous auto route",
+        "Local Qwen3.5-9B on public runner",
+        "AgentScope/smolagents full framework substitution"
+      ],
+      "capability_work_deleted": [
+        "No new framework",
+        "No local 5 GB model download",
+        "No new carrier",
+        "No governance work before Task C",
+        "No same-task tuning"
+      ],
+      "surviving_gap": "Fresh real end-to-end capability evidence remains unspent."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Proof gap after the generic controller defect was repaired and independently validated.",
+      "delete_bypass_substitute_options": [
+        "Delete fresh real proof: invalid because frontier capability is still unproven.",
+        "Reuse local Qwen3.5-9B: sufficient but slower due model download/build/startup.",
+        "Use Vireonix auto: fast, but public model identity is dynamic and may select GPT, contaminating supplier independence.",
+        "Use explicit Murakumo Qwen3.8-27B: survives as faster, auditable, no-key non-frontier route."
+      ],
+      "surviving_causal_blocker": "Task C has not yet executed on a current, auditable, ready route."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ASTRA_SAFE_FINALIZATION_PLUS_MURAKUMO_QWEN3_8_27B_PUBLIC_RUNNER",
+        "ASTRA_SAFE_FINALIZATION_PLUS_VIREONIX_AUTO_PUBLIC_RUNNER",
+        "ASTRA_SAFE_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+        "FULL_AGENT_FRAMEWORK_SUBSTITUTION"
+      ],
+      "losing_routes_reason": "Vireonix auto obscures the exact upstream model and may select GPT; local 9B adds several minutes of build/download/startup; replacing ASTRA adds integration surface. Murakumo exposes an explicit Qwen3.8-27B route with no account/key and compatible tool calls.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Verify the terminal diagnosis against authoritative Android graphics architecture and verify that the proposed probe discriminates the claimed failure classes without destructive mutation."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Further finalization-seam repair if Task C passes",
+        "Local Qwen model-size escalation for this proof",
+        "Deferred governance PR228 as a prerequisite"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "software root-cause localization",
+        "evidence selection",
+        "discriminating-probe design",
+        "bounded final synthesis"
+      ],
+      "fresh_reuse_plan": "Task C itself is the required fresh reuse of the repaired generic route. If it passes, recompute the frontier and immediately test whether the frontier-model dependency can be removed at the parent capability level."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR223 task definition",
+        "Reuse PR227 validated runtime bytes",
+        "Reuse already-proven public carrier",
+        "Reuse PR223 Murakumo direct probe within the current preflight lease"
+      ],
+      "search_stop_decision": "The only plausible faster route, Vireonix auto, fails proof cleanliness because its upstream supplier is dynamic and may include GPT. Murakumo therefore dominates the remaining auditable routes for wall-clock to defensible evidence.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Supplier and carrier layers refreshed after PR227 merge; current public docs plus direct probes remain within the required route/preflight leases."
+    },
+    "routes_considered": [
+      "ASTRA_SAFE_FINALIZATION_PLUS_MURAKUMO_QWEN3_8_27B_PUBLIC_RUNNER",
+      "ASTRA_SAFE_FINALIZATION_PLUS_VIREONIX_AUTO_PUBLIC_RUNNER",
+      "ASTRA_SAFE_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "FULL_AGENT_FRAMEWORK_SUBSTITUTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR228_AS_PREREQUISITE",
+      "VIREONIX_AUTO_FOR_FRONTIER_INDEPENDENCE_PROOF",
+      "LOCAL_QWEN3_5_9B_DOWNLOAD_STARTUP",
+      "FULL_AGENT_FRAMEWORK_SUBSTITUTION"
+    ],
+    "selected_surviving_route": "ASTRA_SAFE_FINALIZATION_PLUS_MURAKUMO_QWEN3_8_27B_PUBLIC_RUNNER",
+    "why_selected_route_is_fastest_sufficient": "It preserves explicit non-frontier supplier identity, uses the already-live $0 public carrier, removes local model build/download latency, reuses the exact PR227 runtime, and retains direct independent verification.",
+    "expected_parent_level_state_change": "Execute exactly one fresh real software-systems Task C with the repaired ASTRA controller and an explicit non-frontier Qwen3.8-27B supplier, then independently adjudicate whether the route completes the real research/diagnosis task without replay or frontier-model dependence.",
+    "stop_condition": "Execute Task C exactly once on the selected current route; preserve terminal evidence; independently adjudicate the real answer and supplier/runtime provenance; do not replay or tune on the result. Promote only the evidence level actually earned.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T21:58:20Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ASTRA_SAFE_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "https://github.com/moxnixmdj/brain/pull/227",
+          "https://github.com/moxnixmdj/brain/pull/223#issuecomment-5899309721",
+          "canonical/runtime/astra_runtime.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://murakumo.cloud/docs",
+          "https://murakumo.cloud/free",
+          "https://vireonix.ai/docs",
+          "https://source.android.com/docs/core/graphics",
+          "https://developer.android.com/topic/performance/issues/slow-session"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/huggingface/smolagents",
+          "https://github.com/agentscope-ai/agentscope"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh web discovery on 2026-09-29 for anonymous/no-key agentic inference and bounded agent finalization routes"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "no-key explicit-model agentic reasoning tool-call API for evidence-backed software diagnosis"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Murakumo Qwen3.8 27B versus Vireonix anonymous inference current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "remote OpenAI-compatible planner versus local GGUF planner on GitHub Actions"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current free anonymous reasoning API explicit model tool calling"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "ASTRA_SAFE_FINALIZATION_PLUS_MURAKUMO_QWEN3_8_27B_PUBLIC_RUNNER",
+          "evidence": [
+            "PR223 direct HTTP 200 tool_call probe",
+            "Current Murakumo docs expose public qwen3.8-27b-throughput-5090",
+            "PR227 public carrier run 36635838394 success"
+          ],
+          "qualification_evidence": [
+            "https://github.com/moxnixmdj/brain/pull/223#issuecomment-5899309721",
+            "https://murakumo.cloud/docs",
+            "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36635838394"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Explicit auditable non-frontier Qwen3.8-27B supplier; compatible with exact repaired ASTRA bridge contract.",
+            "CAPABILITY_STRENGTH": "27B reasoning/tool-call route is stronger than the prior 9B incumbent while remaining supplier-identifiable.",
+            "WALL_CLOCK": "Avoids ~5 GB model download and local llama.cpp build/startup; warm requests can complete in seconds, with bounded cold start.",
+            "INCREMENTAL_COST": "$0 public first-value inference and $0 public GitHub Actions carrier.",
+            "RELIABILITY": "Volatile and capacity-limited, but directly preflighted and documented with explicit readiness behavior.",
+            "VERIFIABILITY": "Exact model selector, exact runtime blob, public workflow provenance, and independent Android-source adjudication."
+          }
+        },
+        {
+          "route": "ASTRA_SAFE_FINALIZATION_PLUS_VIREONIX_AUTO_PUBLIC_RUNNER",
+          "evidence": [
+            "Current Vireonix docs: anonymous no-key auto route with large limits and tool/agent positioning."
+          ],
+          "qualification_evidence": [
+            "https://vireonix.ai/docs",
+            "https://vireonix.ai/terms"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "General route appears capable, but exact upstream identity is not controlled.",
+            "CAPABILITY_STRENGTH": "Potentially high because auto pool includes multiple strong models.",
+            "WALL_CLOCK": "Likely very fast.",
+            "INCREMENTAL_COST": "$0 under public limits.",
+            "RELIABILITY": "High published fair-use limits but no SLA.",
+            "VERIFIABILITY": "Weaker for this proof because auto may silently select a GPT-family upstream, making independence ambiguous."
+          }
+        },
+        {
+          "route": "ASTRA_SAFE_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+          "evidence": [
+            "Prior exact Qwen3.5-9B route and public execution evidence."
+          ],
+          "qualification_evidence": [
+            "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36627371993"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Explicit non-frontier model and already-proven bridge.",
+            "CAPABILITY_STRENGTH": "Useful research actions previously observed.",
+            "WALL_CLOCK": "Loses because each clean public run downloads ~5 GB and builds/starts local inference.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Auditable but heavy on ephemeral carrier.",
+            "VERIFIABILITY": "Strong provenance, slower path."
+          }
+        }
+      ],
+      "negative_search_summary": "No remaining challenger offers both lower wall-clock and equally clean supplier independence. Vireonix wins convenience but loses proof cleanliness; local 9B wins provenance but loses time.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ASTRA_SAFE_FINALIZATION_PLUS_MURAKUMO_QWEN3_8_27B_PUBLIC_RUNNER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T21:58:20Z",
+        "max_age_hours": 2,
+        "selected_route": "ASTRA_SAFE_FINALIZATION_PLUS_MURAKUMO_QWEN3_8_27B_PUBLIC_RUNNER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T21:50:01Z",
+            "evidence": [
+              "DIRECT_PROBE: workflow run 36635838394 completed SUCCESS on this account's public verification repository"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "MURAKUMO_PUBLIC_QWEN3_8_27B_CHAT_COMPLETIONS",
+            "kind": "MODEL_API",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T21:29:16Z",
+            "evidence": [
+              "DIRECT_PROBE preserved in PR223 closure: Murakumo anonymous inference returned HTTP 200 with valid OpenAI-style tool_call",
+              "OFFICIAL_PRIMARY current docs: https://murakumo.cloud/docs"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "ANDROID_PUBLIC_ARCHITECTURE_EVIDENCE_ENDPOINTS",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T21:58:20Z",
+            "evidence": [
+              "DIRECT_PROBE current web retrieval of https://source.android.com/docs/core/graphics and Android performance documentation during route refresh"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
