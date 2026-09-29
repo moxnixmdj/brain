@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_OBS_INHERITED_SYSTEM_RECONCILIATION_V1",
   "reconciliation_id": "SPACE-CARGO-WIN1-OBS6-DOWNSTREAM-DELETION-20260929-V1",
-  "status": "COMPLETE",
-  "source_capability": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1",
+  "status": "CORRECTED__TASK_A_COMPLETE__FRONTIER_CAPABILITY_NOT_YET_ACQUIRED",
+  "source_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "source_real_task": "SPACE-CARGO-ARCHITECTURE-ENVELOPE-WIN1-20260929-V1",
   "deleted_or_superseded": [
     {
@@ -34,21 +34,27 @@
       "item": "SYNTHETIC_HELDOUT_GATE_FOR_THIS_CAPABILITY",
       "disposition": "DELETED",
       "reason": "Direct real-project verification plus independent calculations are available."
+    },
+    {
+      "item": "LAUNCH_ARCHITECTURE_ENVELOPE_AS_FRONTIER_CAPABILITY",
+      "disposition": "DELETED_AS_PROMOTION_CLAIM",
+      "reason": "It is a narrow deterministic domain tool, not the broad documented frontier behavior."
+    },
+    {
+      "item": "5G_PARAMETER_VARIATION_AS_FRONTIER_FRESH_REUSE",
+      "disposition": "DELETED_AS_FRONTIER_CREDIT",
+      "reason": "Same-domain parameter reuse does not establish cross-domain transfer."
     }
   ],
   "surviving_primary_residuals": [
-    "REAL_AERODYNAMIC_SHAPE_AND_EFFECTIVE_CD_AT_6KM_HYPERSONIC_EXIT",
-    "REPETITIVE_TPS_OR_ACTIVE_COOLING_LIFECYCLE_AT_HIGH_CADENCE",
-    "115T_CLASS_EM_ACCELERATION_TO_NEAR_9KM_S_WITH_REPETITIVE_FAULT_TOLERANCE",
-    "CARGO_SCALE_VACUUM_MUZZLE_OR_EQUIVALENT_EXIT_ISOLATION",
-    "ORBIT_INSERTION_SYSTEM",
-    "SYSTEM_AVAILABILITY_AND_FAILURE_CONTAINMENT"
+    "CROSS_DOMAIN_REAL_TASK_B_FOR_GENERAL_FRONTIER_CAPABILITY_TRANSFER"
   ],
   "next_frontier_recommendation": {
-    "capability_gap": "LOW_ALTITUDE_NEAR_ORBITAL_AERODYNAMIC_AND_AEROTHERMAL_CLOSURE",
-    "reason": "The inherited model shows candidate viability is highly sensitive to effective Cd/ballistic coefficient and thermal lifecycle; closing this uncertainty changes pod geometry, exit speed, energy, and infrastructure before detailed launcher design is worth doing.",
-    "default_route": "SEARCH_EXISTING_HYPERSONIC_BLUNT_BODY_DATA_AND_VALIDATED_OPEN_TOOLS__THEN_COMPOSE_LOWEST_FIDELITY_SUFFICIENT_AERO_THERMAL_MODEL__CFD_ONLY_IF_REQUIRED",
+    "capability_gap": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1__CROSS_DOMAIN_TRANSFER",
+    "reason": "Task A verifies one real technical/scientific mission, but broad frontier capability requires transfer to a materially different real domain without rediscovering the operating method.",
+    "default_route": "SELECT_ONE_ACTIVE_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_IN_A_DIFFERENT_DOMAIN__RUN_EXACT_BASE_OBS__REUSE_GENERAL_ROUTE__VERIFY_DIRECTLY",
     "synthetic_probe_required": false
   },
-  "progress_credit": false
+  "progress_credit": false,
+  "supporting_domain_tool": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1"
 }
