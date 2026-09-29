@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRONTIER_RECONCILIATION_V1",
+  "reconciliation_id": "TOOL-DISCOVERY-SELECTION-LEARNING-POST-PR111-LAWFUL-RESIDUAL-V1",
+  "status": "RESIDUAL_GAP_VERIFIED__NO_RUNTIME_MUTATION",
+  "canonical_base": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "law_basis": {
+    "mission_lock": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md",
+    "mandatory_sequence": [
+      "DEFINE",
+      "BAR",
+      "SEARCH",
+      "RACE",
+      "TEST",
+      "VERIFY",
+      "OBSOLETE_OR_RETAIN",
+      "INHERIT",
+      "RECOMPUTE"
+    ],
+    "decisive_rule": "If a substitute does not obsolete the target, record the exact residual capability gap and continue only on that residual.",
+    "pr111_recorded_parent_obsolete": false,
+    "conclusion": "PR111_GLOBAL_TARGET_SWITCH_WAS_PREMATURE"
+  },
+  "preserved_verified_discovery_win": {
+    "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "source_pr": 89,
+    "inheritance_pr": 96,
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "heldout_validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "heldout_status": "PASS__SPENT",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "validator_wall_s": 16.233238,
+    "incremental_spend_usd": 0
+  },
+  "exact_current_main_interface_trace": {
+    "discovery_runtime": {
+      "path": "canonical/runtime/capability_discovery.py",
+      "git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "emits": {
+        "discovery_source": "APT_FULL_METADATA_XAPIAN",
+        "binding_kind": "apt",
+        "matched_terms": [],
+        "zero_cost_eligible": true,
+        "required_secret_count": 0,
+        "integration_friction": 0,
+        "version": true,
+        "archive_sha256": true,
+        "executable_ownership_evidence": "WHEN_AVAILABLE"
+      }
+    },
+    "supplier_router": {
+      "path": "canonical/runtime/auto_capability_acquisition.py",
+      "git_blob": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+      "behavior": "binding_kind=apt maps to apt_cli",
+      "result": "XAPIAN_CANDIDATES_REACH_APT_SUPPLIER_ROUTING"
+    },
+    "first_failing_consumer": {
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "git_blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
+      "behavior": "_viable_candidates rejects candidate when discovery_source != APT_CATALOG",
+      "result": "EVERY_APT_FULL_METADATA_XAPIAN_CANDIDATE_IS_DROPPED_BEFORE_APT_CLI_PROBE_AND_CONTRACT_INFERENCE"
+    },
+    "adjacent_same_interface_risk": {
+      "behavior": "_viable_candidates also applies legacy absolute score >= 12",
+      "current_score_semantics": "Xapian BM25 match.weight",
+      "result": "ABSOLUTE_LEGACY_SCORE_THRESHOLD_IS_NOT_A_SOURCE_NEUTRAL_CANDIDATE_CONTRACT",
+      "official_xapian_reference": "https://xapian.org/docs/apidoc/html/classXapian_1_1MSet.html"
+    },
+    "downstream_preserved_residual": {
+      "path": "canonical/runtime/verify_pending_cli_binding.py",
+      "git_blob": "8ec4da92080e885a15266389c0318688e6408d43",
+      "behavior": "semantic verifier candidate admission requires len(matched_terms) >= 2",
+      "current_route_behavior": "full-metadata Xapian candidates emit matched_terms=[]",
+      "causal_order": "DOWNSTREAM_OF_FIRST_APT_ADMISSION_FAILURE__PRESERVE_NOT_REPAIR_YET"
+    }
+  },
+  "reuse_before_invention": {
+    "invention_required": false,
+    "stable_existing_abstraction": "binding_kind=apt",
+    "existing_downstream_stack": [
+      "auto_capability_acquisition",
+      "auto_apt_cli_acquisition",
+      "apt_cli_probe",
+      "cli_contract_inference",
+      "pending binding",
+      "independent verification",
+      "promotion/replan"
+    ],
+    "repair_principle": "Consumer admission must depend on stable APT binding/evidence contract rather than discovery implementation name or nonportable scorer scale."
+  },
+  "decision": {
+    "active_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "exact_residual": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__SOURCE_LITERAL_IS_FIRST_DETERMINISTIC_DROP__LEGACY_SCORE_SCALE_IS_ADJACENT_CONSTRAINT",
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_ONE_GENERIC_SOURCE_NEUTRAL_APT_CANDIDATE_ADMISSION_REPAIR__EXECUTE_ONCE__RECONCILE",
+    "deferred_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "deferred_reason": "PRESERVE_PR111_AS_NEXT_GLOBAL_CANDIDATE_AFTER_CURRENT_PARENT_REACHES_OBSOLETE_OR_RETAIN_TERMINAL_ADJUDICATION"
+  },
+  "prohibitions": [
+    "NO_HELDOUT_005_REPLAY",
+    "NO_RUNTIME_MUTATION_IN_THIS_RECONCILIATION",
+    "NO_MULTI_TOOL_FRESH_GATE_SPEND_BEFORE_CURRENT_PARENT_TERMINAL_ADJUDICATION",
+    "NO_TASK_SPECIFIC_PACKAGE_HINTS",
+    "NO_SOURCE_NAME_WHITELIST_ONLY_PATCH",
+    "NO_BLIND_LEGACY_ABSOLUTE_SCORE_THRESHOLD_ON_XAPIAN",
+    "NO_BROAD_CONTRACT_REWRITE_BEFORE_FIRST_FAILING_GATE_IS_REMOVED_OR_FALSIFIED"
+  ],
+  "incremental_spend_usd": 0,
+  "user_laptop_used": false,
+  "val_town_used": false
+}
