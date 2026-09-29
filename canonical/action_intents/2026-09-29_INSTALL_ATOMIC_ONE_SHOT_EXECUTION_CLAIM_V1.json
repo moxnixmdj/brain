@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INSTALL-ATOMIC-ONE-SHOT-EXECUTION-CLAIM-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "ONE_SHOT_HELDOUT_EXECUTION_HAS_NO_ATOMIC_ADMISSION_CLAIM__POST_SPEND_REPLAYS_OBSERVED",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::ONE_SHOT_HELDOUT_EXECUTION_HAS_NO_ATOMIC_ADMISSION_CLAIM__POST_SPEND_REPLAYS_OBSERVED::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Extend the existing blocker-lease system with one atomic Git-ref admission claim per validation-id plus manifest identity, so only the first claimant is eligible to start a fresh one-shot execution and later physical replays cannot become canonical evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR74",
+    "PR75",
+    "PR76",
+    "PR89",
+    "HELDOUT005_POST_SPEND_REPLAY_INCIDENT_20260929_V1",
+    "GitHub atomic Git references/updateRefs documentation"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Guard is merged; a trusted canary proves first atomic claim succeeds and an identical second claim fails closed before any external executor is touched; existing blocker-lease behavior remains intact.",
+  "governance_change": true,
+  "weakens_existing_guard": false
+}
