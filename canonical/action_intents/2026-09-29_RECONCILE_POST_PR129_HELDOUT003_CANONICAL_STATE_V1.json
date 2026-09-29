@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR129-HELDOUT003-CANONICAL-STATE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "CANONICAL_AUTHORITY_SURFACES_STILL_DESCRIBE_PRE_PR129_REPAIR_STATE_AFTER_PROVIDER_NEUTRAL_ADMISSION_REPAIR_MERGED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::CANONICAL_AUTHORITY_SURFACES_STILL_DESCRIBE_PRE_PR129_REPAIR_STATE_AFTER_PROVIDER_NEUTRAL_ADMISSION_REPAIR_MERGED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make canonical pointer, hierarchy, and obsolescence queue agree with exact main: PR129 provider-neutral APT admission repair is merged and consumes the single pre-execution repair budget; HELDOUT-003 remains UNSPENT with execution_count=0; the next capability action is exactly one fresh HELDOUT-003 execution followed immediately by frontier reconciliation.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 frozen XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+    "merged PR129 provider-neutral APT admission repair and 4/4 focused regressions",
+    "canonical/CANONICAL_POINTER.json at main 5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json at main 5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json at main 5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+    "canonical/runtime/auto_apt_cli_acquisition.py blob 0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+    "draft execution PR133 preserved but execution paused before any HELDOUT-003 start"
+  ],
+  "evidence_presence_classification": "CANONICAL_CONTRADICTION_CONFIRMED_FROM_EXACT_MAIN__NO_NEW_RUNTIME_EVIDENCE_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "probe_budget_usage": {
+    "generic_repairs_used_before_reconciliation": 1,
+    "max_generic_repairs_from_single_probe": 1,
+    "fresh_execution_count": 0,
+    "same_case_replay_allowed": false
+  },
+  "stop_condition": "After the three canonical authority surfaces encode repair-consumed plus HELDOUT-003-UNSPENT and select exactly-one fresh execution as the next action, stop. Do not mutate runtime, execute HELDOUT-003, replay any spent gate, or open a second repair in this reconciliation PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
