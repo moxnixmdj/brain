@@ -25,9 +25,10 @@
     "Direct source-checkout preflight run 36641463213 failed causally because dsharp is not present in source checkout",
     "One OBS correction spent: official ProbLog 2.3.0 manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e",
     "Direct wheel preflight run 36641617082 PASS on ubuntu-24.04 / Python 3.12",
-    "PySDD 1.0.6 original CPython-3.12 manylinux_2_17_x86_64 wheel, SHA-256 aadde250ea13375f67feabdb7963c2cbcaa2727c80e6ba6544cb07e579a7a019",
     "First real Task A attempt: public run 36642005503 failed before semantic inference because source-installed ProbLog selected missing external dsharp compiler; exact candidate/task blobs and source license/provenance passed first.",
-    "Existing public ProbLog preflight run 36641617082 passed exact inference using official problog==2.3.0 manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e; this route ships the needed compiler path."
+    "Existing public ProbLog preflight run 36641617082 passed exact inference using official problog==2.3.0 manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e; this route ships the needed compiler path.",
+    "Public verifier run 36641617082: hash-pinned ProbLog 2.3.0 manylinux wheel executed exact unconditioned and conditioned inference successfully on Python 3.12",
+    "ProbLog v2.3.0 tag commit 1c0df586a1cb4e276b38bbf222d0578f3db58bde compared against later a294fa24; later changes are not required by this Linux basic weighted-query route"
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -74,7 +75,7 @@
         "waleedqk subjective-logic",
         "ctoth doxa/argumentation",
         "formal-argumentation 0.3.0: technically strong and directly preflighted, but exact wheel has no declared or bundled reusable license; disqualified for Brain inheritance",
-        "PySDD 1.0.6 pinned SDD knowledge-compiler backend for exact ProbLog evaluation"
+        "ProbLog 2.3.0 manylinux wheel, SHA-256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e, directly preflighted on public carrier"
       ],
       "capability_work_deleted": [
         "No model supplier",
@@ -112,7 +113,7 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+        "PROBLOG_2_3_0_HASH_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
         "INSTALL_PYSDD_AND_CHANGE_EVALUATOR",
         "INSTALL_DSHARP_SEPARATELY",
         "SWITCH_REASONING_ENGINE"
@@ -173,15 +174,15 @@
       "PROBLOG_SOURCE_INSTALL_WITH_MISSING_DSHARP",
       "REPLAY_SPACE_CARGO_TASK_A"
     ],
-    "selected_surviving_route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
-    "why_selected_route_is_fastest_sufficient": "The unchanged adapter was not semantically falsified. Public run 36641617082 already proves the official problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e executes the same get_evaluatable exact-inference path on the same carrier, making it the smallest verified substrate correction.",
+    "selected_surviving_route": "PROBLOG_2_3_0_HASH_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+    "why_selected_route_is_fastest_sufficient": "The hash-pinned ProbLog 2.3.0 manylinux release wheel already passed exact weighted and conditioned inference on the current public carrier, includes its working backend, requires no solver build or PySDD dependency, and needs only the thin deterministic Brain adapter for typed schema, provenance trace, hard constraints, and stop policy.",
     "expected_parent_level_state_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two fresh materially distinct real tasks after preserving the spent pre-inference Task A failure, using one unchanged adapter with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal decisions, and auditable trace.",
     "stop_condition": "Do not replay spent space-cargo Task A. Keep adapter blob 99c8bd0ab0b0f5b4e6c517d189c06165a954bc5c unchanged. Switch only the ProbLog execution dependency from source install to the already-qualified official problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e. Execute fresh real Task B (Qwen cognitive-credit eligibility) and fresh materially distinct real Task C (HELDOUT-005 exact-runtime inheritance) exactly once each with the same adapter. Independently verify B=REJECT against canonical model-independence policy and C=ACCEPT against the preserved H005 terminal reconciliation. Require fail-closed conflict/hard-constraint negatives. On both real passes, bind the route; on failure, preserve evidence and recompute. No model or same-task replay.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-29T22:51:42Z",
       "max_age_hours": 24,
-      "incumbent_route": "PROBLOG_SOURCE_INSTALL_A294FA24_WITH_MISSING_DSHARP_ON_CARRIER",
+      "incumbent_route": "PROBLOG_A294FA24_SOURCE_CHECKOUT_WITH_MISSING_DSHARP",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
@@ -211,7 +212,7 @@
           "https://github.com/waleedqk/subjective-logic/commit/8afba9de564c6165e4ba401d08b3dd7f5a78ded0",
           "https://github.com/seamus-brady/DriftNARS/commit/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3",
           "https://pypi.org/project/formal-argumentation/0.3.0/",
-          "https://pypi.org/project/PySDD/1.0.6/"
+          "https://pypi.org/project/problog/2.3.0/"
         ],
         "BROAD_WEB_OR_COMMUNITY": [
           "Fresh 2026-09-30 search across probabilistic logic, subjective logic, formal argumentation, influence diagrams, NARS, ASP, SMT, and planning engines."
@@ -237,54 +238,55 @@
       ],
       "challenger_routes": [
         {
-          "route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+          "route": "PROBLOG_2_3_0_HASH_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
           "evidence": [
-            "Public run 36641617082 installed exact official problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e and passed unconditioned plus evidence-conditioned exact inference.",
-            "Run 36642005503 shows the source-install route fails specifically at missing dsharp before any decision result."
+            "Public verifier run 36641617082 installed the exact ProbLog 2.3.0 manylinux wheel by SHA-256 and passed exact weighted inference.",
+            "ProbLog v2.3.0 release wheel contains a working Linux exact-inference backend; the later raw-source checkout does not ship built solver binaries."
           ],
           "qualification_evidence": [
-            "DIRECT_PROBE: public run 36641617082",
-            "DIRECT_PROBE: public run 36642005503"
+            "DIRECT_PROBE: moxnixmdj/verification-capsule-runner run 36641617082",
+            "https://pypi.org/project/problog/2.3.0/",
+            "https://github.com/ML-KULeuven/problog/tree/v2.3.0"
           ],
           "qualification_evidence_classes": [
-            "DIRECT_PROBE"
+            "DIRECT_PROBE",
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
           ],
           "resolution": "SELECTED",
           "comparison": {
             "CORRECTNESS": "Same pinned ProbLog 2.3.0 inference semantics; official wheel route directly passed exact inference on the carrier.",
             "CAPABILITY_STRENGTH": "Unchanged from the selected ProbLog logic route.",
-            "WALL_CLOCK": "No compiler build/debug; wheel installs in seconds and already works.",
+            "WALL_CLOCK": "One small prebuilt release wheel; no compiler build, model download, PySDD install, or solver discovery.",
             "INCREMENTAL_COST": "$0.",
-            "RELIABILITY": "Exact wheel hash and same-carrier direct probe are already available.",
-            "VERIFIABILITY": "Wheel hash, version, exact adapter blob, generated program hashes, and hidden real-task oracles remain independently checkable."
+            "RELIABILITY": "Exact wheel hash already executed successfully on the same public carrier.",
+            "VERIFIABILITY": "Wheel SHA-256, v2.3.0 tag commit, adapter blob, input hashes, generated ProbLog program, probabilities, terminal policy, and independent task oracle are all preservable."
           }
         },
         {
-          "route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+          "route": "PROBLOG_2_3_0_HASH_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
           "evidence": [
-            "ProbLog 2.3.0 official Linux release wheel packages the knowledge-compiler binary absent from source checkout.",
-            "Exact pinned manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e.",
-            "Direct live preflight run 36641617082 passed weighted inference and evidence conditioning on Python 3.12.",
-            "PySDD 1.0.6 original CPython-3.12 Linux wheel selected explicitly for ProbLog SDD evaluation."
+            "Public verifier run 36641617082 installed the exact ProbLog 2.3.0 manylinux wheel by SHA-256 and passed exact weighted inference.",
+            "ProbLog v2.3.0 release wheel contains a working Linux exact-inference backend; the later raw-source checkout does not ship built solver binaries."
           ],
           "qualification_evidence": [
+            "DIRECT_PROBE: moxnixmdj/verification-capsule-runner run 36641617082",
             "https://pypi.org/project/problog/2.3.0/",
-            "DIRECT_PROBE: https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36641617082",
-            "https://pypi.org/project/PySDD/1.0.6/"
+            "https://github.com/ML-KULeuven/problog/tree/v2.3.0"
           ],
           "qualification_evidence_classes": [
-            "CODE_OR_PACKAGE_REGISTRY",
             "DIRECT_PROBE",
-            "CODE_OR_PACKAGE_REGISTRY"
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
           ],
           "resolution": "SELECTED",
           "comparison": {
             "CORRECTNESS": "Formal probabilistic logic with exact weighted model counting; adapter preserves source provenance and explicit policy rather than asking the engine to interpret prose.",
             "CAPABILITY_STRENGTH": "Directly covers derived claims, weighted evidence, contradictory conclusions, queries, explanations, and decision-theoretic logic inside the target's structured-input boundary.",
-            "WALL_CLOCK": "Pinned prebuilt ~484 kB PySDD wheel plus pure-Python ProbLog source; no solver build, model download, or framework integration.",
+            "WALL_CLOCK": "One small prebuilt release wheel; no compiler build, model download, PySDD install, or solver discovery.",
             "INCREMENTAL_COST": "$0.",
-            "RELIABILITY": "ProbLog exact source plus explicit SDD backend; wheel identity is hash-verified before execution.",
-            "VERIFIABILITY": "Wheel identity, generated ProbLog program, query probabilities, policy and independent real-task oracle are all preservable."
+            "RELIABILITY": "Exact wheel hash already executed successfully on the same public carrier.",
+            "VERIFIABILITY": "Wheel SHA-256, v2.3.0 tag commit, adapter blob, input hashes, generated ProbLog program, probabilities, terminal policy, and independent task oracle are all preservable."
           }
         },
         {
@@ -387,7 +389,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+      "selected_route": "PROBLOG_2_3_0_HASH_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -397,7 +399,7 @@
       "selected_route_preflight": {
         "checked_at_utc": "2026-09-29T22:51:42Z",
         "max_age_hours": 2,
-        "selected_route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+        "selected_route": "PROBLOG_2_3_0_HASH_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
@@ -448,6 +450,26 @@
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PROBLOG_2_3_0_MANYLINUX_2_28_X86_64_WHEEL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:47:37Z",
+            "evidence": [
+              "DIRECT_PROBE: public workflow run 36641617082 installed problog-2.3.0-py3-none-manylinux_2_28_x86_64.whl and passed exact weighted plus conditioned inference",
+              "SHA256:8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e",
+              "OFFICIAL_PRIMARY: v2.3.0 tag commit 1c0df586a1cb4e276b38bbf222d0578f3db58bde"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY",
+              "OFFICIAL_PRIMARY"
             ],
             "evidence_scope": "GLOBAL"
           }
