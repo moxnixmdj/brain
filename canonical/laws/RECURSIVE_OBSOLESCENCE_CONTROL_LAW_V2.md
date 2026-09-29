@@ -70,6 +70,18 @@ Where relevant, discovery should span official sources, GitHub or equivalent cod
 
 The purpose is not ritual coverage. It is to make terminology and ecosystem blind spots less able to hide a superior route.
 
+### Discovery is not qualification
+
+Broad web, community, social, launch, and discussion surfaces are discovery sensors, not truth authority.
+
+A material challenger may be surfaced there, but promotion, rejection, or comparison claims that determine the route decision MUST be grounded in at least one qualification-grade source class:
+- official/primary documentation, specification, changelog, pricing, or release evidence;
+- code/package/model registry evidence for registry-verifiable properties;
+- direct probe evidence;
+- independent verifier evidence.
+
+Community evidence alone can trigger investigation. It cannot by itself qualify or disqualify a consequential route.
+
 ## Freshness lease
 
 For externally supplied capabilities, the challenger frontier lease MUST be <=24 hours.
