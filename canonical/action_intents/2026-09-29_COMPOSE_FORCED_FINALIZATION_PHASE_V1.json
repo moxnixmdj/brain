@@ -93,19 +93,19 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+        "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA_WITH_COMPLETE_BOUNDED_EVIDENCE_PACKET_AND_UNTRUSTED_EVIDENCE_BOUNDARY",
         "ADOPT_SMOLAGENTS_1_26_0_AGENT_LOOP",
         "ADOPT_AGENTSCOPE_REACT_LOOP",
         "ADOPT_QWEN_AGENT_0_0_34",
         "SUBSTITUTE_QWEN3_8_27B_LOCAL"
       ],
-      "losing_routes_reason": "Framework replacement adds integration/provenance machinery. Larger or anonymous supplier substitution may improve inference strength/availability but does not by itself add the missing controller transition. The selected repair is supplier-agnostic and remains the smallest causal change.",
+      "losing_routes_reason": "Framework replacement adds integration/provenance machinery. Supplier substitution can improve inference but does not add the missing transition. The surviving in-place repair must preserve all bounded admitted observations, never raw-truncate serialized evidence, and mark fetched evidence as untrusted data.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Use a deterministic regression that proves evidence-phase exhaustion causes exactly one finalization-only call and still fails closed on invalid finalization. This support test earns no capability credit; real proof requires a fresh different Task C."
+      "synthetic_verification_necessity": "Use deterministic regressions proving: evidence exhaustion causes exactly one finalization-only call; invalid finalization fails closed; every bounded observation including first and last reaches the finalizer; and the finalizer prompt marks admitted evidence as untrusted data. These support tests earn no capability credit; real proof still requires fresh Task C."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
@@ -146,8 +146,8 @@
       "FULL_AGENT_FRAMEWORK_REPLACEMENT",
       "MODEL_SIZE_ESCALATION_BEFORE_SEAM_FIX"
     ],
-    "selected_surviving_route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
-    "why_selected_route_is_fastest_sufficient": "It changes only the recurrent missing controller transition, is supplier-agnostic, costs $0 to implement, preserves existing evidence and verification semantics, and remains necessary even after directly qualifying stronger anonymous Vireonix/Murakumo supplier routes.",
+    "selected_surviving_route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA_WITH_COMPLETE_BOUNDED_EVIDENCE_PACKET_AND_UNTRUSTED_EVIDENCE_BOUNDARY",
+    "why_selected_route_is_fastest_sufficient": "It adds only the recurrent missing transition while preserving every bounded admitted observation, forbidding new evidence/tool use in the finalizer, treating fetched evidence as untrusted data, and remaining supplier-agnostic. No broader framework or carrier change is required.",
     "expected_parent_level_state_change": "Add one generic bounded forced-finalization phase to the existing ASTRA goal loop after evidence/action budget exhaustion, without increasing the evidence-action budget, changing supplier, replaying spent tasks, or granting capability credit; make the repaired composition eligible only for a fresh different real Task C.",
     "stop_condition": "Stop after the generic forced-finalization composition is implemented and regression-verified without replaying spent real tasks. Do not promote the frontier capability until a fresh materially different dependency-free real Task C completes and is independently verified.",
     "route_frontier": {
@@ -208,7 +208,7 @@
       ],
       "challenger_routes": [
         {
-          "route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+          "route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA_WITH_COMPLETE_BOUNDED_EVIDENCE_PACKET",
           "evidence": [
             "Direct 4B+9B orthogonal recurrence shows the seam",
             "AgentScope current source performs one forced tools-disabled finalization call at max iterations",
@@ -226,10 +226,10 @@
           ],
           "resolution": "SELECTED",
           "comparison": {
-            "CORRECTNESS": "Preserves existing evidence/actions and requires final output to pass the same mission verifier; finalizer cannot gather new evidence.",
+            "CORRECTNESS": "Preserves every admitted bounded observation, forbids tool use during finalization, marks fetched content as untrusted data, and fails closed rather than truncating oversized serialized evidence.",
             "CAPABILITY_STRENGTH": "Directly adds the missing research-to-answer transition without weakening evidence collection.",
-            "WALL_CLOCK": "One extra bounded local model call; no framework migration or larger-model download.",
-            "INCREMENTAL_COST": "$0 on existing public-runner/local-model route.",
+            "WALL_CLOCK": "One extra bounded planner call with deterministic evidence compaction; no framework migration or model download is inherent to the repair.",
+            "INCREMENTAL_COST": "$0 structural code composition; supplier is intentionally re-raced before fresh Task C.",
             "RELIABILITY": "Same pattern independently implemented by AgentScope and smolagents; recurrence identifies this seam across two models/tasks.",
             "VERIFIABILITY": "Can be regression-tested deterministically and then adjudicated on a fresh real Task C."
           }
@@ -387,7 +387,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+      "selected_route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA_WITH_COMPLETE_BOUNDED_EVIDENCE_PACKET_AND_UNTRUSTED_EVIDENCE_BOUNDARY",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
