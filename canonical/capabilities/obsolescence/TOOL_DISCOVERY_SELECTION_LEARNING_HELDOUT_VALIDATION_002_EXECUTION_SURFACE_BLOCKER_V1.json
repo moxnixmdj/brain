@@ -81,7 +81,13 @@
     },
     "railway": {
       "status": "VERIFIED_FREE_ANONYMOUS_VM__PUBLISHED_CHATGPT_PLUGIN_NOT_AN_ANONYMOUS_SSH_BRIDGE",
-      "evidence": "Railway officially documents ssh railway.new as a no-account/no-card unclaimed Linux VM with 60-minute build time, 2 vCPU, and 2 GB RAM. Railway's published ChatGPT plugin connects through OAuth to the user's Railway account and hosted MCP. Railway's own use-railway skill routes SSH and exact command execution through the Railway CLI, not the hosted Remote MCP. Railway Sandboxes require a Railway account plus an existing project/environment and consume resource usage. Therefore installing/connecting the published ChatGPT plugin alone does not establish a callable or hard-$0 bridge to the anonymous ssh railway.new VM."
+      "evidence": "Railway officially documents ssh railway.new as a no-account/no-card unclaimed Linux VM with 60-minute build time, 2 vCPU, and 2 GB RAM. Railway's published ChatGPT plugin connects through OAuth to the user's Railway account and hosted MCP. Railway's own use-railway skill routes SSH and exact command execution through the Railway CLI, not the hosted Remote MCP. Railway Sandboxes require a Railway account plus an existing project/environment and consume resource usage. Therefore installing/connecting the published ChatGPT plugin alone does not establish a callable or hard-$0 bridge to the anonymous ssh railway.new VM.",
+      "source_urls": [
+        "https://railway.com/free-vm",
+        "https://docs.railway.com/ai/chatgpt-plugin",
+        "https://github.com/railwayapp/railway-skills/blob/main/plugins/railway/skills/use-railway/SKILL.md",
+        "https://docs.railway.com/sandboxes/quickstart"
+      ]
     },
     "generic_ssh": {
       "status": "UNAVAILABLE",
