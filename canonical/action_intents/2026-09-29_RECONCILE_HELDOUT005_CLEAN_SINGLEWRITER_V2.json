@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-HELDOUT005-CLEAN-SINGLEWRITER-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "PR89_HELDOUT005_SOLE_FRESH_PASS_IS_VALID_EVIDENCE_BUT_DRIFTED_PR89_CANNOT_MERGE__MAIN_REQUIRES_CLEAN_PARENT_RECONCILIATION_AND_EXACT_BYTE_INHERITANCE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::PR89_HELDOUT005_SOLE_FRESH_PASS_IS_VALID_EVIDENCE_BUT_DRIFTED_PR89_CANNOT_MERGE__MAIN_REQUIRES_CLEAN_PARENT_RECONCILIATION_AND_EXACT_BYTE_INHERITANCE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile the sole admissible HELDOUT-005 PASS into the TOOL_DISCOVERY_SELECTION_AND_LEARNING parent frontier, permanently close the spent probe, inherit only the exact already-tested PR89 runtime/test bytes through this clean branch, and recompute the residual parent capability without claiming the broader family obsolete unless evidence supports it.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main@33d607338ebf300b00465ddb40a911bf87c3bc02",
+    "PR89 evidence-only drifted execution lane",
+    "PR92/PR93/PR96/PR98/PR99 closed duplicate reconciliation lanes",
+    "HELDOUT-005 authoritative Railway deployment 805a36d4-04cf-4938-bfac-74d29418081f",
+    "GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1",
+    "TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1",
+    "trusted base canonical/runtime/enforce_goal_hierarchy.py"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "stop_condition": "One clean PR contains the immutable intent, truthful first-execution reconciliation and replay quarantine, exact tested runtime/test bytes only, parent hierarchy/queue reconciliation, and passes the canonical anti-drift validator on its final exact head; then merge, refresh main, and recompute the next highest-leverage residual capability. No HELDOUT-005 replay or runtime retuning.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
