@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_VOLATILE_SELECTED_ROUTE_PREFLIGHT_REGRESSION_V1",
+  "status": "CANONICAL_REGRESSION_SPEC",
+  "authority": [
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
+    "canonical/runtime/enforce_goal_hierarchy.py"
+  ],
+  "failure_class": "FRESH_ROUTE_FRONTIER_TIMESTAMP_CAN_LAUNDER_STALE_OR_FAILED_VOLATILE_EXECUTION_CAPABILITY",
+  "incident_trigger": "A fresh Task-C route frontier selected a GitHub-hosted runner as reliable even while direct repository evidence showed hosted jobs failing before job setup. Discovery freshness was current; execution readiness was not.",
+  "required_rejections": [
+    {
+      "case": "MISSING_SELECTED_ROUTE_PREFLIGHT",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_MISSING"
+    },
+    {
+      "case": "PREFLIGHT_OLDER_THAN_2H",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_EXPIRED"
+    },
+    {
+      "case": "PREFLIGHT_STATUS_NOT_READY",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_NOT_READY"
+    },
+    {
+      "case": "REQUIRED_DEPENDENCY_NOT_READY",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_REQUIRED_DEPENDENCY_NOT_READY"
+    },
+    {
+      "case": "CARRIER_MARKED_STATIC",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_INTRINSIC_VOLATILE_DEPENDENCY_MARKED_STATIC"
+    },
+    {
+      "case": "DEPENDENCY_INVENTORY_NOT_ASSERTED_COMPLETE",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_INVENTORY_NOT_ASSERTED_COMPLETE"
+    },
+    {
+      "case": "UNKNOWN_KIND_USED_TO_HIDE_CARRIER",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_KIND_INVALID"
+    },
+    {
+      "case": "NO_EXECUTION_SUBSTRATE_ENUMERATED",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_EXECUTION_SUBSTRATE_MISSING"
+    },
+    {
+      "case": "VOLATILE_DEPENDENCY_ONLY_OFFICIAL_DOCS_OR_PUBLIC_STATUS",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_VOLATILE_DEPENDENCY_LACKS_DIRECT_OR_INDEPENDENT_EVIDENCE"
+    },
+    {
+      "case": "ACCOUNT_SPECIFIC_DEPENDENCY_ONLY_GLOBAL_STATUS",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_SCOPED_DEPENDENCY_EVIDENCE_SCOPE_MISMATCH",
+      "setup": "Use current DIRECT_PROBE-class evidence whose declared evidence_scope is GLOBAL for an ACCOUNT_SPECIFIC dependency, proving class alone cannot launder scope."
+    },
+    {
+      "case": "HISTORICAL_SUCCESS_WITHOUT_CURRENT_PROBE",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_VOLATILE_DEPENDENCY_STALE"
+    },
+    {
+      "case": "PREFLIGHT_ROUTE_DIFFERS_FROM_SELECTED_ROUTE",
+      "expected_failure": "SELECTED_ROUTE_PREFLIGHT_ROUTE_MISMATCH"
+    }
+  ],
+  "required_acceptance": {
+    "case": "FRESH_ROUTE_FRONTIER_PLUS_CURRENT_SELECTED_ROUTE_PREFLIGHT",
+    "predicates": [
+      "preflight_checked_at_within_2h",
+      "preflight_selected_route_matches_route_frontier_and_recursive_obs",
+      "all_required_dependencies_ready_true",
+      "failed_dependencies_empty",
+      "execution_dependency_inventory_nonempty",
+      "every_required_volatile_dependency_observed_within_preflight_lease",
+      "every_required_volatile_dependency_has_direct_probe_or_independent_verifier_evidence",
+      "account_or_region_scoped_dependencies_have_exact_scope_evidence",
+      "execution_dependencies_complete_true",
+      "dependency_kinds_controlled",
+      "at_least_one_execution_substrate_kind_present",
+      "account_or_region_evidence_scope_exactly_matches_dependency_scope"
+    ]
+  },
+  "counterexample_reference": {
+    "pr": 223,
+    "property": "ROUTE_FRONTIER_CHECKED_AT_WAS_FRESH_WHILE_SELECTED_PUBLIC_RUNNER_WAS_CURRENTLY_UNABLE_TO_START_HOSTED_JOBS"
+  },
+  "progress_credit": false
+}
