@@ -1,16 +1,30 @@
 {
   "schema": "PROJECT_BRAIN_ONE_SHOT_EXECUTION_LEASE_V1",
   "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
-  "status": "LEASED_NOT_STARTED",
+  "status": "SUPERSEDED_BY_EARLIER_AUTHORITATIVE_SPEND__TERMINAL_STOP",
   "lease_branch": "lease/heldout-005-execution-20260929",
-  "candidate_head": "ba6aa9297618310aaa59aa4f1dd9d32f49a234c0",
-  "execution_token": "HELDOUT005-BA6AA929-LEASE1",
-  "fresh_acceptance_execution_count": 0,
+  "local_execution_token": "HELDOUT005-BA6AA929-LEASE1",
+  "local_execution_started": false,
+  "local_fresh_acceptance_execution_count": 0,
+  "authoritative_fresh_execution": {
+    "railway_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "execution_start": "2026-09-29T02:52:21.958374122Z",
+    "validated_head": "48c53d0f1b2474c334fcfbb87bd6946c1dc850bb",
+    "runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "manifest_blob": "82854b92b2253ba607ff5c521102c50ae49fd47d",
+    "runner_blob": "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781",
+    "acceptance_gate_pass": true,
+    "oracle_family_recall": 1,
+    "top20_oracle_recall": 1,
+    "total_wall_s": 16.233238
+  },
   "forbidden": [
+    "ANY_HELDOUT_005_EXECUTION",
     "REDEPLOY",
-    "DUPLICATE_EXECUTION",
+    "REPLAY",
+    "SIMULATION_AS_FRESH_EVIDENCE",
     "VAL_TOWN",
     "USER_LAPTOP"
   ],
-  "next_action": "BUILD_FRESH_DEDICATED_CARRIER__PREFLIGHT__EXECUTE_EXACTLY_ONCE__RECONCILE"
+  "next_action": "CANONICAL_RECONCILIATION_AND_CLEAN_INHERITANCE__NO_HELDOUT_005_REPLAY"
 }
