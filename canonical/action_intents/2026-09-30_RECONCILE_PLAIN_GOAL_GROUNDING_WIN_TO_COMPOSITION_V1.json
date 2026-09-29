@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PLAIN-GOAL-GROUNDING-WIN-TO-COMPOSITION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "probe_id": null,
+  "causal_blocker": "GROUNDING_SUBCAPABILITY_ACQUIRED_VERIFIED__PARENT_FRONTIER_RECOMPUTE_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SUBCAPABILITY_ACQUIRED_VERIFIED__PARENT_FRONTIER_RECOMPUTE_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Credit and inherit the verified plain-goal bound-capability grounding win, delete the superseded grounding blocker, and advance the active parent frontier to the next observed seam: composing grounded bound-capability candidates into an executable verified action plan.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR250 commit 95543fe8591c2b490901143fb165ce6571b7140d.",
+    "Grounding producer/verifier promoted into BOUND_CAPABILITY_REGISTRY_V1.",
+    "Regression run 36646224008 passed exact candidate integration.",
+    "Real Task A run 36646322912 passed software test-audit grounding and independent verification.",
+    "Fresh reuse B run 36646400507 passed visual QR grounding and independent decoding.",
+    "Independent exact-final-head run 36646452335 independently covered software-quality and browser-domain grounding plus runtime precedence.",
+    "Bound-registry ASTRA invocation run 36646710975 passed exact registry producer/verifier callability.",
+    "Runtime terminal state after successful grounding is BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED."
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile canonical target, queue, hierarchy, pointer, and scoreboard to the verified grounding win and the composition-required residual gap. Do not implement composition in this reconciliation PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "95543fe8591c2b490901143fb165ce6571b7140d",
+    "real_outcome": "Move the parent frontier forward using verified grounding evidence without re-proving or overclaiming the parent capability.",
+    "required_capability": "POST_WIN_FRONTIER_RECONCILIATION",
+    "obs_goal": {
+      "real_outcome": "Credit the real subcapability gain and expose only the next causal gap.",
+      "proxy_goals_deleted": [
+        "Run a third grounding task",
+        "Replay serialization",
+        "Implement composition inside reconciliation",
+        "Treat PR count as progress"
+      ],
+      "surviving_necessity": "Canonical state still points at an acquired subcapability and therefore misstates the live frontier."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 acquired package",
+        "capability_planner.py existing deterministic graph planner",
+        "goal_compiler.py",
+        "capability_proposal_generators.py",
+        "BOUND_CAPABILITY_REGISTRY_V1"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to reconciliation; no supplier is selected in this action."
+      ],
+      "capability_work_deleted": [
+        "No new runtime code",
+        "No new model route",
+        "No new verification gate",
+        "No replay"
+      ],
+      "surviving_gap": "Grounded capability candidates are not yet generically converted into an executable bound-capability composition."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent residual gap directly observed after the acquired grounding step.",
+      "delete_bypass_substitute_options": [
+        "Delete composition requirement: invalid because grounding identifies candidates but does not execute a multi-step task.",
+        "Bypass with hand-authored controller plan: invalid because it hides the parent cognition gap.",
+        "Reuse existing capability planner/goal compiler/proposal generators: mandatory first challenger for next action.",
+        "Build a new planner now: forbidden until reuse race."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_UNPROVEN"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_ONLY_NOW__THEN_RACE_EXISTING_CAPABILITY_PLANNER_COMPOSITION",
+        "IMPLEMENT_COMPOSITION_IN_THIS_PR"
+      ],
+      "losing_routes_reason": "Combining reconciliation with implementation would stale the action boundary and hide whether existing composition machinery already suffices.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None. Reconciliation is supported by preserved public run IDs, artifact digests, exact candidate blobs, merged registry inheritance, and callable integration evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Grounding acquisition frontier",
+        "Any further grounding proof tasks",
+        "External supplier discovery before grounded composition is resolved"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "plain-goal to existing-bound-capability grounding",
+        "ambiguity preservation",
+        "pre-discovery bound-route precedence",
+        "independent grounding verification"
+      ],
+      "fresh_reuse_plan": "The next action begins with OBS over existing model-independent composition machinery and then a fresh parent task, not another grounding task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR250 evidence and artifact digests",
+        "Reuse acquired capability record",
+        "Do not re-search grounding alternatives"
+      ],
+      "search_stop_decision": "Reconciliation decision is fully determined by merged verified evidence; additional search cannot alter the accounting action.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_CANONICAL_STATE_NOW",
+      "MIX_RECONCILIATION_AND_COMPOSITION_IMPLEMENTATION",
+      "RERUN_GROUNDING_EVIDENCE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MIX_RECONCILIATION_AND_COMPOSITION_IMPLEMENTATION",
+      "RERUN_GROUNDING_EVIDENCE"
+    ],
+    "selected_surviving_route": "RECONCILE_CANONICAL_STATE_NOW",
+    "why_selected_route_is_fastest_sufficient": "The grounding win is already merged and independently verified. Updating canonical frontier state is the minimum action that prevents workers from continuing on a solved blocker and exposes the next real seam.",
+    "expected_parent_level_state_change": "Credit and inherit the verified plain-goal bound-capability grounding win, delete the superseded grounding blocker, and advance the active parent frontier to the next observed seam: composing grounded bound-capability candidates into an executable verified action plan.",
+    "stop_condition": "Reconcile canonical target, queue, hierarchy, pointer, and scoreboard to the verified grounding win and the composition-required residual gap. Do not implement composition in this reconciliation PR.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Post-win canonical reconciliation only; no external capability supplier or execution route is being selected."
+    }
+  }
+}
