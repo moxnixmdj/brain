@@ -4,10 +4,10 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
-  "probe_state": "FRESH_HELDOUT_003_FROZEN__PR129_PROVIDER_NEUTRAL_ADMISSION_REPAIR_MERGED__EXECUTION_DUE",
-  "current_parent_blocker": "XAPIAN_APT_E2E_HELDOUT_003_REMAINS_UNSPENT_AFTER_MERGED_PR129_PROVIDER_NEUTRAL_ADMISSION_REPAIR__PARENT_CAPABILITY_INTEGRATION_NOT_YET_TERMINALLY_ADJUDICATED",
-  "next_required_action_class": "EXECUTE_FROZEN_HELDOUT_003_EXACTLY_ONCE__THEN_RECONCILE_FIRST_TERMINAL_RESULT",
+  "active_probe": null,
+  "probe_state": "HELDOUT_003_SPENT_FAIL__CARRIER_MATERIALIZATION_DEPENDENCY_CLOSURE_INCOMPLETE__NO_REPLAY",
+  "current_parent_blocker": "REMOTE_CARRIER_MATERIALIZATION_OMITTED_EXISTING_VERIFIER_DEPENDENCIES__TOOL_DISCOVERY_PARENT_E2E_UNADJUDICATED",
+  "next_required_action_class": "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE__THEN_GENERIC_CARRIER_REPOSITORY_CLOSURE_REPAIR__THEN_EXECUTE_NEW_GATE_ONCE__RECONCILE",
   "forbidden_local_frontier": "HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SECOND_RUNTIME_REPAIR_BEFORE_HELDOUT_003_RECONCILIATION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
+  "active_probe_manifest": null,
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -84,23 +84,22 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   },
   "last_terminal_probe": {
-    "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
-    "source_pr": 89,
-    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
-    "status": "PASS__SPENT",
-    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
-    "heldout_oracle_family_recall": 1,
-    "heldout_top20_oracle_recall": 1,
-    "total_wall_s": 16.233238,
-    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
-    "replay_incident_path": "canonical/capabilities/obsolescence/HELDOUT005_POST_SPEND_REPLAY_INCIDENT_20260929_V1.json"
+    "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+    "source_pr": 140,
+    "carrier": "brain-heldout003-one-shot",
+    "status": "FAIL__SPENT__NO_REPLAY",
+    "acceptance_gate_pass": false,
+    "total_wall_s": 140.213006,
+    "exact_first_blocker": "REMOTE_CARRIER_MATERIALIZATION_OMITTED_EXISTING_VERIFIER_DEPENDENCIES__TOOL_DISCOVERY_PARENT_E2E_UNADJUDICATED",
+    "result_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json",
+    "reconciliation_path": "canonical/capabilities/obsolescence/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003_TERMINAL_RECONCILIATION_V1.json"
   },
   "inherited_route": {
     "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
     "runtime_path": "canonical/runtime/capability_discovery.py",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
     "source_pr": 89,
-    "status": "VERIFIED_ROUTE_INHERITED_ON_MAIN__PR129_PROVIDER_NEUTRAL_AUTO_APT_ADMISSION_MERGED__FRESH_HELDOUT_003_EXECUTION_DUE"
+    "status": "VERIFIED_DISCOVERY_ROUTE_INHERITED__PR129_ADMISSION_REACHED_CONTRACT_INFERRED_IN_SPENT_HELDOUT_003__PARENT_E2E_UNADJUDICATED_DUE_CARRIER_FIDELITY_FAILURE"
   },
   "post_pr111_correction": {
     "status": "PR111_SELECTION_DEFERRED_AFTER_OMITTED_CONCRETE_RESIDUAL_FOUND",
@@ -113,12 +112,13 @@
   "active_probe_freeze": {
     "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
     "source_pr": 128,
-    "status": "FROZEN_UNSPENT__ONE_AUTHORIZED_REPAIR_CONSUMED__EXECUTION_DUE",
-    "execution_count": 0,
+    "status": "SPENT_FAIL__NO_REPLAY__CARRIER_DEPENDENCY_CLOSURE_INCOMPLETE",
+    "execution_count": 1,
     "allowed_repairs_before_execution": 0,
     "required_repair_class": "PROVIDER_NEUTRAL_SCORE_SCALE_SAFE_APT_ADMISSION",
     "same_case_replay_allowed": false,
     "repairs_consumed_before_execution": 1,
-    "repair_source_pr": 129
+    "repair_source_pr": 129,
+    "first_terminal_result_authoritative": true
   }
 }
