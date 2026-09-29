@@ -1,0 +1,21 @@
+{
+  "acceptance_gate_pass": false,
+  "error": "RuntimeError:EXISTING_INDEPENDENT_VERIFIER_FAILED:Traceback (most recent call last):\n  File \"/work/canonical/runtime/verify_pending_cli_binding.py\", line 13, in <module>\n    from bound_capabilities import (\n        cli_command, python_library_codec, node_library_codec, python_source_tree_codec\n    )\nImportError: cannot import name 'python_library_codec' from 'bound_capabilities' (unknown location). Did you mean: 'node_library_codec'?\n",
+  "hard_validation_wall_s": 180,
+  "observed_runtime_blobs": {
+    "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119",
+    "canonical/runtime/auto_apt_cli_acquisition.py": "0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+    "canonical/runtime/auto_capability_acquisition.py": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "canonical/runtime/cli_contract_inference.py": "009c3c45040178844d84eaa15b0d47ca2e1f259f",
+    "canonical/runtime/verify_pending_cli_binding.py": "8ec4da92080e885a15266389c0318688e6408d43"
+  },
+  "package_hints_used_by_runtime": false,
+  "prebound_registry_route_used": false,
+  "promotion_authorized": false,
+  "required_next_action": "RECONCILE_EXACT_FIRST_TERMINAL_BLOCKER__NO_SECOND_REPAIR_BEFORE_RECONCILIATION",
+  "schema": "PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_RESULT_V1",
+  "total_wall_s": 140.213006,
+  "traceback": "Traceback (most recent call last):\n  File \"/work/canonical/experiments/run_xapian_apt_e2e_integration_heldout_003.py\", line 118, in worker_main\n    raise RuntimeError(\"EXISTING_INDEPENDENT_VERIFIER_FAILED:\"+proc.stderr[-3000:])\nRuntimeError: EXISTING_INDEPENDENT_VERIFIER_FAILED:Traceback (most recent call last):\n  File \"/work/canonical/runtime/verify_pending_cli_binding.py\", line 13, in <module>\n    from bound_capabilities import (\n        cli_command, python_library_codec, node_library_codec, python_source_tree_codec\n    )\nImportError: cannot import name 'python_library_codec' from 'bound_capabilities' (unknown location). Did you mean: 'node_library_codec'?\n\n",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003"
+}
