@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRONTIER_RECOMPUTATION_V1",
+  "reconciliation_id": "TOOL-DISCOVERY-SELECTION-LEARNING-POST-HELDOUT005-RESIDUAL-RECOMPUTATION-V1",
+  "status": "RECOMPUTED__REUSE_EXISTING_DOWNSTREAM_IR_BEFORE_INVENTION",
+  "canonical_base": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "closed_upstream_blocker": {
+    "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "source_pr": 89,
+    "inherited_by_pr": 96,
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "incremental_spend_usd": 0
+  },
+  "downstream_evidence": {
+    "source_pr": 56,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1.json",
+    "repair_scope": "GENERIC_CLI_IO_CONTRACT_IR",
+    "focused_and_legacy_regressions": "PASS",
+    "full_loop_pass_count": 0,
+    "causal_limitation": "REAL_REPLAYS_DID_NOT_ESTABLISH_VIABLE_EFFECT_PRODUCING_EXECUTABLE_CANDIDATES_BEFORE_CONTRACT_INFERENCE",
+    "prior_reclassification": "VIABLE_EXECUTABLE_CAPABILITY_CANDIDATE_DISCOVERY_AND_ROLE_RANKING_NOT_YET_PROVEN",
+    "current_interpretation": "PR89_PLUS_PR96_REMOVE_THE_RECLASSIFIED_UPSTREAM_BLOCKER_FOR_THE_VERIFIED_DEBIAN_APT_ROUTE__PR56_IR_SUFFICIENCY_MUST_NOW_BE_RETESTED_NOT_ASSUMED"
+  },
+  "decision": {
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_END_TO_END_TOOL_LEARNING_GATE__THEN_REUSE_PR56_GENERIC_CLI_IO_CONTRACT_IR__EXECUTE_ONCE__RECONCILE",
+    "invention_required_now": false,
+    "reason": "EXISTING_GENERIC_IR_ALREADY_PASSED_REGRESSIONS_AND_WAS_NEVER_CLEANLY_EXERCISED_AFTER_VIABLE_CLI_SUPPLIER_DISCOVERY__REUSE_TEST_HAS_LOWER_PART_COUNT_AND_HIGHER_INFORMATION_VALUE_THAN_NEW_PARSER_DESIGN",
+    "parent_obsolescence_claim": false
+  },
+  "prohibitions": [
+    "NO_HELDOUT005_REPLAY",
+    "NO_NEW_CONTRACT_PARSER_INVENTION_BEFORE_PR56_REUSE_TEST",
+    "NO_RUNTIME_TRANSPLANT_BEFORE_FRESH_GATE_FREEZE",
+    "NO_PACKAGE_HINTS",
+    "NO_TASK_SPECIFIC_LITERALS"
+  ]
+}
