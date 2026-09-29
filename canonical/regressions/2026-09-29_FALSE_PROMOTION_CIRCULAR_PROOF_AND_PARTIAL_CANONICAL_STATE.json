@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CASE_V1",
+  "id": "2026-09-29_FALSE_PROMOTION_CIRCULAR_PROOF_AND_PARTIAL_CANONICAL_STATE",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "incidents": [
+    "A narrow real-task/domain result was initially at risk of being treated as frontier capability acquisition.",
+    "Same-domain parameter reuse was initially counted as frontier fresh reuse and later rolled back.",
+    "A GPT-5.6-executed Task B was recognized as circular evidence for GPT-5.6-class dependency removal and closed unmerged.",
+    "A multi-file correction produced commits that did not all survive on the live PR head; an atomic tree commit was required.",
+    "Hosted workflow failures with steps=null were observed and could not be treated as semantic validator failures."
+  ],
+  "prohibited_patterns": [
+    "LOWER_CLAIM_RUNG_PROMOTED_WITHOUT_REQUIRED_EVIDENCE",
+    "TARGET_FRONTIER_SUPPLIER_EXECUTES_ITS_OWN_REPLACEMENT_PROOF",
+    "TARGET_FRONTIER_SUPPLIER_DECISIVELY_VERIFIES_ITS_OWN_REMOVAL",
+    "SELF_CERTIFIED_CAPABILITY_PROMOTION",
+    "PARTIAL_COUPLED_CANONICAL_STATE_UPDATE",
+    "SCOREBOARD_INCREMENT_WITHOUT_PROMOTION_EVIDENCE",
+    "WORKFLOW_UI_STATUS_SUBSTITUTED_FOR_EXECUTED_VALIDATOR_SEMANTICS"
+  ],
+  "required_prevention": [
+    "MISTAKE_PREVENTION_RECEIPT_V1",
+    "MATERIAL_PREMORTEM",
+    "CIRCULARITY_CHECK",
+    "STRICT_CLAIM_LADDER",
+    "ATOMIC_COUPLED_CORE_STATE_COMMIT",
+    "EXACT_HEAD_READBACK",
+    "BASE_HEAD_SCOREBOARD_DELTA_VALIDATION",
+    "PROMOTION_EVIDENCE_PATH_EXISTENCE",
+    "PRODUCER_VERIFIER_SUPPLIER_INDEPENDENCE",
+    "ROLLBACK_UNSUPPORTED_HIGHER_CLAIMS"
+  ],
+  "passing_condition": "Malformed, circular, self-certified, unsupported-promotion, or non-atomic coupled-state PRs fail closed; valid lower-level evidence remains preservable.",
+  "canonical_law": "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
+  "receipt_schema": "canonical/governance/MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1.json",
+  "trusted_validator": "canonical/runtime/enforce_goal_hierarchy.py"
+}

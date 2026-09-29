@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1",
+  "status": "CANONICAL_SCHEMA__MANDATORY__FAIL_CLOSED",
+  "authority": "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
+  "required_fields": [
+    "schema",
+    "failure_default",
+    "claim_scope",
+    "pre_mortem",
+    "circularity_check",
+    "independence_check",
+    "state_transition",
+    "evidence_claim_map",
+    "post_action_checks",
+    "rollback_triggers",
+    "residual_uncertainty"
+  ],
+  "failure_default": "PRESUME_CONSEQUENTIAL_ACTION_WRONG_UNTIL_FALSIFIED",
+  "allowed_claim_scopes": [
+    "NO_PROMOTION",
+    "GOVERNANCE_HARDENING_NO_CAPABILITY_PROMOTION",
+    "REAL_TASK_EVIDENCE",
+    "RESIDUAL_GAP_LOCALIZATION",
+    "CAPABILITY_ACQUISITION",
+    "FRONTIER_DEPENDENCY_REMOVAL"
+  ],
+  "pre_mortem": {
+    "minimum_material_failure_modes": 3,
+    "required_entry_fields": [
+      "failure_mode",
+      "detection",
+      "prevention",
+      "abort_or_rollback"
+    ]
+  },
+  "promotion_scopes": [
+    "CAPABILITY_ACQUISITION",
+    "FRONTIER_DEPENDENCY_REMOVAL"
+  ],
+  "coupled_core_state_paths": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+  ],
+  "coupled_state_rule": "IF_MORE_THAN_ONE_COUPLED_CORE_PATH_CHANGES__FINAL_HEAD_COMMIT_MUST_CONTAIN_ALL_CHANGED_COUPLED_PATHS__STRATEGY_ATOMIC_SINGLE_TREE_COMMIT",
+  "any_counter_increase_requires_promotion_evidence": true,
+  "counter_decrease_requires_explicit_rollback_authorization": true,
+  "exact_head_readback_required": true,
+  "self_certification_allowed": false,
+  "circular_frontier_proof_allowed": false,
+  "progress_credit": false
+}

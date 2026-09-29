@@ -36,10 +36,22 @@
     "direct_real_effect_verification_preferred": true,
     "material_state_change_invalidates_obs_receipt": true,
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_schema_v2_structural_validation_required": true,
     "frontier_capability_credit_requires_documented_frontier_reference": true,
     "same_domain_parameter_variation_is_not_frontier_fresh_reuse": true,
-    "narrow_domain_tool_is_not_frontier_capability": true
+    "narrow_domain_tool_is_not_frontier_capability": true,
+    "mistake_prevention_receipt_required": true,
+    "failure_presumption_default": true,
+    "self_certification_forbidden": true,
+    "circular_frontier_proof_forbidden": true,
+    "claim_level_may_not_exceed_evidence_level": true,
+    "coupled_core_state_multi_path_update_requires_atomic_final_commit": true,
+    "exact_head_readback_required_before_promotion": true,
+    "any_counter_increase_requires_promotion_evidence": true,
+    "producer_verifier_supplier_independence_required_for_promotion": true,
+    "frontier_dependency_removal_requires_target_supplier_absent_from_execution_and_verification": true,
+    "recursive_obs_current_schema_structural_and_live_route_validation_required": true,
+    "selected_route_execution_preflight_required": true,
+    "selected_route_preflight_max_age_hours": 2
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -77,13 +89,14 @@
   },
   "next_progress_event_target": "OBS_V3_RECURRENT_EVIDENCE_TO_FINALIZATION_TERMINATION_SEAM__THEN_FRESH_REAL_TASK_C_IF_GENERIC_ROUTE_SURVIVES",
   "authority": [
-    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
-    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md"
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V5.md"
   ],
   "compliance_state": {
-    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "implementation_actions_without_current_obs_receipt_allowed": 0,
     "deletion_first_order": [
       "DELETE",
@@ -95,7 +108,13 @@
       "BUILD"
     ],
     "exact_base_commit_binding_required": true,
-    "placeholder_receipts_allowed": false
+    "placeholder_receipts_allowed": false,
+    "mistake_prevention_law": "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
+    "mistake_prevention_receipt_schema": "canonical/governance/MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1.json",
+    "self_certification_allowed": false,
+    "circular_frontier_proof_allowed": false,
+    "selected_route_execution_preflight_required": true,
+    "selected_route_preflight_max_age_hours": 2
   },
   "progress_events": [
     {
