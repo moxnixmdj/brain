@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_PACKAGE_DISCOVERY_HELDOUT_VALIDATION_V1",
+  "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-HELDOUT-VALIDATION-003",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_GENERIC_REPAIR_IMPLEMENTATION",
+  "frozen_on": "2026-09-29",
+  "provenance": {
+    "selected_after": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002_RECONCILIATION",
+    "selected_before_repair_runtime_mutation": true,
+    "repository_precheck_no_prior_references_for_oracle_families": true,
+    "prior_spent_oracle_families_excluded": [
+      "tesseract-ocr",
+      "optipng",
+      "genisoimage",
+      "ffmpeg",
+      "poppler-utils",
+      "librsvg2-bin",
+      "inkscape",
+      "imagemagick",
+      "bzip2",
+      "mediainfo",
+      "sqlite3",
+      "gzip",
+      "graphviz"
+    ]
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-MARKDOWN-EPUB-003",
+      "goal": "Convert a Markdown document into an EPUB ebook file.",
+      "oracle_families": [
+        "pandoc"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-QR-GENERATE-003",
+      "goal": "Generate a QR code PNG image from a short text string.",
+      "oracle_families": [
+        "qrencode"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-WAV-FLAC-003",
+      "goal": "Convert a WAV audio file into lossless FLAC audio.",
+      "oracle_families": [
+        "flac"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-RAR-EXTRACT-003",
+      "goal": "Extract the contents of a RAR archive into a directory.",
+      "oracle_families": [
+        "unar"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 600,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu 24.04/Noble preferred; equivalent complete Debian-family APT surface acceptable if normal Packages metadata and all applicable Contents indexes are present.",
+    "apt_file_required": true,
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_manpage_enrichment_required": true,
+    "apt_xapian_index": "REQUIRED_IF_SELECTED_REPAIR_DEPENDS_ON_AXI_CACHE",
+    "exact_runtime_bytes_required": true
+  },
+  "execution_count": 0,
+  "freshness": "UNSPENT",
+  "promotion_authorized": false
+}
