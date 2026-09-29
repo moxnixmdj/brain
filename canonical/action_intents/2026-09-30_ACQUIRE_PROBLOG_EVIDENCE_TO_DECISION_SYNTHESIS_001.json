@@ -10,7 +10,7 @@
   "causal_blocker": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1::NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE::REAL_CAPABILITY_ACQUISITION",
-  "expected_parent_frontier_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two materially distinct real tasks, with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal insufficient-evidence behavior, and auditable trace.",
+  "expected_parent_frontier_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two fresh materially distinct real tasks after preserving the spent pre-inference Task A failure, using one unchanged adapter with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal decisions, and auditable trace.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "PR240 active target MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 and its exact scope/promotion bar",
@@ -25,30 +25,34 @@
     "Direct source-checkout preflight run 36641463213 failed causally because dsharp is not present in source checkout",
     "One OBS correction spent: official ProbLog 2.3.0 manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e",
     "Direct wheel preflight run 36641617082 PASS on ubuntu-24.04 / Python 3.12",
-    "PySDD 1.0.6 original CPython-3.12 manylinux_2_17_x86_64 wheel, SHA-256 aadde250ea13375f67feabdb7963c2cbcaa2727c80e6ba6544cb07e579a7a019"
+    "PySDD 1.0.6 original CPython-3.12 manylinux_2_17_x86_64 wheel, SHA-256 aadde250ea13375f67feabdb7963c2cbcaa2727c80e6ba6544cb07e579a7a019",
+    "First real Task A attempt: public run 36642005503 failed before semantic inference because source-installed ProbLog selected missing external dsharp compiler; exact candidate/task blobs and source license/provenance passed first.",
+    "Existing public ProbLog preflight run 36641617082 passed exact inference using official problog==2.3.0 manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e; this route ships the needed compiler path."
   ],
-  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
   "generic_repair_from_single_probe": false,
   "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Implement only a thin typed-evidence-to-ProbLog adapter and execute two precommitted materially distinct real decisions with the exact same adapter bytes: (A) space-cargo reference-search-region final-design promotion adjudication from preserved verified evidence with verdict labels withheld; (B) fresh reuse on model-backed Qwen cognitive-credit eligibility from canonical policy/execution evidence. Independently verify each against pre-existing authoritative outcomes. Also require negative synthetic checks for unresolved conflict/insufficient evidence. On two real passes, bind the route and stop; on any failure, preserve evidence and recompute. No model, pretrained artifact, natural-language parser, new agent framework, or broad cognitive architecture.",
+  "stop_condition": "Do not replay spent space-cargo Task A. Keep adapter blob 99c8bd0ab0b0f5b4e6c517d189c06165a954bc5c unchanged. Switch only the ProbLog execution dependency from source install to the already-qualified official problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e. Execute fresh real Task B (Qwen cognitive-credit eligibility) and fresh materially distinct real Task C (HELDOUT-005 exact-runtime inheritance) exactly once each with the same adapter. Independently verify B=REJECT against canonical model-independence policy and C=ACCEPT against the preserved H005 terminal reconciliation. Require fail-closed conflict/hard-constraint negatives. On both real passes, bind the route; on failure, preserve evidence and recompute. No model or same-task replay.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "9bc734ad835a25dccf89c1a3f888c3c4208db00f",
-    "real_outcome": "Convert already-structured evidence into reproducible terminal decisions across distinct real domains without any model dependency.",
+    "real_outcome": "Recover from the pre-inference ProbLog packaging failure without tuning the decision logic, then prove the unchanged model-free evidence synthesizer on two fresh real decisions.",
     "required_capability": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
     "obs_goal": {
-      "real_outcome": "Acquire exactly the active evidence-to-decision subcapability, not general reasoning, natural-language understanding, discovery, or a replacement agent architecture.",
+      "real_outcome": "Recover from the pre-inference ProbLog packaging failure without tuning the decision logic, then prove the unchanged model-free evidence synthesizer on two fresh real decisions.",
       "proxy_goals_deleted": [
         "Qualify a broad cognitive architecture before a real task",
         "Run a symbolic benchmark instead of real decisions",
         "Use a model to synthesize the decision",
         "Rebuild evidence acquisition or natural-language parsing",
-        "Adopt a no-license argumentation implementation"
+        "Adopt a no-license argumentation implementation",
+        "Replay spent space-cargo Task A after fixing the package substrate",
+        "Modify the adapter logic in response to a missing-compiler packaging failure"
       ],
       "surviving_necessity": "Two distinct real structured-evidence decisions with one model-free reusable route are the exact canonical promotion bar."
     },
@@ -83,7 +87,7 @@
       "surviving_gap": "Brain lacks a bound deterministic route that converts typed weighted evidence and hard constraints into a terminal auditable decision while preserving conflict and uncertainty."
     },
     "obs_blocker": {
-      "intrinsic_or_path_specific": "Narrow composition gap after evidence is already structured.",
+      "intrinsic_or_path_specific": "Execution-substrate packaging defect: source-installed ProbLog 2.3.0 lacked dsharp on the carrier, while the already-qualified official manylinux wheel provides a working exact inference path.",
       "delete_bypass_substitute_options": [
         "DELETE synthesis: invalid because parent research capability requires a terminal decision.",
         "BYPASS with fixed if/else policy only: insufficient for weighted multi-source support/contradiction and derived claims.",
@@ -92,9 +96,10 @@
         "REUSE pyAgrum: strong decision-under-uncertainty engine but less direct for explicit logical support/contradiction proofs.",
         "REUSE subjective-logic MIT kernel: preserves ignorance well but lacks a complete claim/rule/decision engine, increasing custom code.",
         "REUSE ctoth argumentation/doxa: semantic fit but inspected revisions have no reusable license.",
-        "REUSE formal-argumentation 0.3.0: technically closest and already preflighted, but exact wheel/repo provide no reusable license declaration, so legal reuse fails closed."
+        "REUSE formal-argumentation 0.3.0: technically closest and already preflighted, but exact wheel/repo provide no reusable license declaration, so legal reuse fails closed.",
+        "REUSE official pinned ProbLog 2.3.0 manylinux wheel already proven by run 36641617082: survives and deletes any need to change adapter logic or install PySDD/dsharp separately."
       ],
-      "surviving_causal_blocker": "No bound Brain adapter and real-task proof yet exists for the now-directly-qualified ProbLog 2.3.0 release-wheel route."
+      "surviving_causal_blocker": "The selected ProbLog source-install substrate omitted the compiler required by get_evaluatable(); no evidence has falsified the unchanged synthesis logic."
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -107,25 +112,25 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
-        "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
-        "DRIFTNARS_REASONING_ADAPTER",
-        "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
-        "BUILD_CUSTOM_EVIDENCE_REASONER"
+        "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+        "INSTALL_PYSDD_AND_CHANGE_EVALUATOR",
+        "INSTALL_DSHARP_SEPARATELY",
+        "SWITCH_REASONING_ENGINE"
       ],
-      "losing_routes_reason": "ProbLog's source-checkout default evaluator was falsified because it lacks packaged dsharp binaries. The one allowed correction to the official 2.3.0 Linux release wheel passed exact live inference and remains faster than broader solver or custom routes.",
+      "losing_routes_reason": "The official wheel route already passed exact inference on the same public carrier and requires zero adapter changes. Adding PySDD/dsharp or switching engines increases dependencies and proof surface without addressing a logic defect.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "The two real tasks are the acquisition proof. Synthetic checks are subordinate negative tests only: contradictory near-balanced evidence must terminate as INSUFFICIENT_EVIDENCE and hard-constraint precedence must remain fail-closed."
+      "synthetic_verification_necessity": "No replay of spent Task A. Execute fresh Task B and fresh Task C with the exact unchanged adapter and pinned official wheel; synthetic conflict/hard-constraint cases remain subordinate negative checks."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
         "Broad DriftNARS qualification as prerequisite for this subcapability",
         "Any model-backed evidence finalizer",
-        "Any bespoke probabilistic inference implementation"
+        "Any bespoke probabilistic inference implementation",
+        "Source-install ProbLog execution route that relies on unavailable external dsharp"
       ],
       "adjacent_capabilities_absorbed": [
         "weighted logical support/contradiction synthesis",
@@ -133,7 +138,7 @@
         "terminal accept/reject/insufficient decision",
         "auditable generated-program and probability trace"
       ],
-      "fresh_reuse_plan": "Task A uses verified space-cargo evidence with original verdict labels withheld. Without changing adapter bytes or route policy, Task B fresh-reuses the same route on Qwen cognitive-credit eligibility. Both must match independent pre-existing oracles before binding."
+      "fresh_reuse_plan": "Use fresh Task B Qwen cognitive-credit eligibility and fresh Task C H005 runtime-inheritance eligibility with identical adapter bytes. B must independently match canonical REJECT; C must match canonical ACCEPT. Space-cargo Task A remains spent and is never replayed."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
@@ -143,36 +148,40 @@
         "Reuse public GitHub Actions carrier",
         "Stop broad symbolic-architecture search once the target narrowed to structured evidence synthesis",
         "Reuse exact public semantic preflight run 36640692648 and exact license probe run 36641473835 instead of requalifying formal-argumentation",
-        "Falsified source-checkout path cached; do not retry or build dsharp from source."
+        "Falsified source-checkout path cached; do not retry or build dsharp from source.",
+        "Reuse successful ProbLog wheel preflight run 36641617082 instead of debugging or installing dsharp",
+        "Preserve run 36642005503 as first-failure evidence; do not repeat its space-cargo payload"
       ],
-      "search_stop_decision": "After the source-checkout failure, the one permitted correction to the official 2.3.0 release wheel passed live. No unresolved licensed challenger plausibly removes enough adapter work to justify further route search before real-task execution.",
+      "search_stop_decision": "The failure localized entirely to source-package compiler closure and an exact official wheel already passed inference on the same carrier. No further engine search can justify delaying fresh real tasks.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Route frontier was refreshed after PR240 changed the target; prior DriftNARS selection was discarded rather than rebased."
+      "challenger_refresh_decision": "Affected execution-substrate layer refreshed immediately after run 36642005503; candidate adapter logic and target remain unchanged."
     },
     "routes_considered": [
-      "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+      "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+      "INSTALL_PYSDD_AND_CHANGE_EVALUATOR",
+      "INSTALL_DSHARP_SEPARATELY",
       "FORMAL_ARGUMENTATION_0_3_0_EXACT_WHEEL",
       "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
       "DRIFTNARS_REASONING_ADAPTER",
-      "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
-      "CTOTH_ARGUMENTATION_DOXA",
-      "BUILD_CUSTOM_EVIDENCE_REASONER"
+      "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH"
     ],
     "deleted_or_bypassed_paths": [
       "MODEL_BACKED_SYNTHESIS",
       "BROAD_COGNITIVE_ARCHITECTURE_FIRST",
       "NO_LICENSE_CODE_REUSE",
-      "CUSTOM_PROBABILISTIC_INFERENCE_ENGINE"
+      "CUSTOM_PROBABILISTIC_INFERENCE_ENGINE",
+      "PROBLOG_SOURCE_INSTALL_WITH_MISSING_DSHARP",
+      "REPLAY_SPACE_CARGO_TASK_A"
     ],
-    "selected_surviving_route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
-    "why_selected_route_is_fastest_sufficient": "ProbLog directly consumes formal facts/rules and computes weighted logical consequences; the adapter pins its SDD evaluator to the original PySDD 1.0.6 CPython-3.12 Linux wheel by SHA-256, eliminating compiler discovery ambiguity while retaining a small deterministic model-free route.",
-    "expected_parent_level_state_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two materially distinct real tasks, with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal insufficient-evidence behavior, and auditable trace.",
-    "stop_condition": "Implement only a thin typed-evidence-to-ProbLog adapter and execute two precommitted materially distinct real decisions with the exact same adapter bytes: (A) space-cargo reference-search-region final-design promotion adjudication from preserved verified evidence with verdict labels withheld; (B) fresh reuse on model-backed Qwen cognitive-credit eligibility from canonical policy/execution evidence. Independently verify each against pre-existing authoritative outcomes. Also require negative synthetic checks for unresolved conflict/insufficient evidence. On two real passes, bind the route and stop; on any failure, preserve evidence and recompute. No model, pretrained artifact, natural-language parser, new agent framework, or broad cognitive architecture.",
+    "selected_surviving_route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+    "why_selected_route_is_fastest_sufficient": "The unchanged adapter was not semantically falsified. Public run 36641617082 already proves the official problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e executes the same get_evaluatable exact-inference path on the same carrier, making it the smallest verified substrate correction.",
+    "expected_parent_level_state_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two fresh materially distinct real tasks after preserving the spent pre-inference Task A failure, using one unchanged adapter with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal decisions, and auditable trace.",
+    "stop_condition": "Do not replay spent space-cargo Task A. Keep adapter blob 99c8bd0ab0b0f5b4e6c517d189c06165a954bc5c unchanged. Switch only the ProbLog execution dependency from source install to the already-qualified official problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e. Execute fresh real Task B (Qwen cognitive-credit eligibility) and fresh materially distinct real Task C (HELDOUT-005 exact-runtime inheritance) exactly once each with the same adapter. Independently verify B=REJECT against canonical model-independence policy and C=ACCEPT against the preserved H005 terminal reconciliation. Require fail-closed conflict/hard-constraint negatives. On both real passes, bind the route; on failure, preserve evidence and recompute. No model or same-task replay.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-29T22:47:40Z",
+      "checked_at_utc": "2026-09-29T22:51:42Z",
       "max_age_hours": 24,
-      "incumbent_route": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
+      "incumbent_route": "PROBLOG_SOURCE_INSTALL_A294FA24_WITH_MISSING_DSHARP_ON_CARRIER",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
@@ -187,7 +196,9 @@
           "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
           "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
           "PUBLIC_CARRIER_RUN_36640692648_FORMAL_ARGUMENTATION_SEMANTIC_PREFLIGHT_PASS",
-          "PUBLIC_CARRIER_RUN_36641473835_EXACT_WHEEL_LICENSE_PROBE_NO_REUSABLE_LICENSE"
+          "PUBLIC_CARRIER_RUN_36641473835_EXACT_WHEEL_LICENSE_PROBE_NO_REUSABLE_LICENSE",
+          "PUBLIC_RUN_36642005503_TASK_A_PRE_INFERENCE_MISSING_DSHARP_FAILURE",
+          "PUBLIC_RUN_36641617082_PROBLOG_2_3_0_WHEEL_EXACT_INFERENCE_PASS"
         ],
         "OFFICIAL_PRIMARY": [
           "https://dtai.cs.kuleuven.be/problog/",
@@ -225,6 +236,29 @@
         }
       ],
       "challenger_routes": [
+        {
+          "route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
+          "evidence": [
+            "Public run 36641617082 installed exact official problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e and passed unconditioned plus evidence-conditioned exact inference.",
+            "Run 36642005503 shows the source-install route fails specifically at missing dsharp before any decision result."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: public run 36641617082",
+            "DIRECT_PROBE: public run 36642005503"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Same pinned ProbLog 2.3.0 inference semantics; official wheel route directly passed exact inference on the carrier.",
+            "CAPABILITY_STRENGTH": "Unchanged from the selected ProbLog logic route.",
+            "WALL_CLOCK": "No compiler build/debug; wheel installs in seconds and already works.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact wheel hash and same-carrier direct probe are already available.",
+            "VERIFIABILITY": "Wheel hash, version, exact adapter blob, generated program hashes, and hidden real-task oracles remain independently checkable."
+          }
+        },
         {
           "route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
           "evidence": [
@@ -343,7 +377,7 @@
           }
         }
       ],
-      "negative_search_summary": "Source-checkout ProbLog was falsified by missing dsharp; official 2.3.0 wheel corrected that exact dependency and passed. Other licensed challengers still require materially more adapter/encoding work. formal-argumentation was not selected because the inspected repository/package did not expose a reusable license.",
+      "negative_search_summary": "The incumbent source-install path failed only because dsharp was absent. The official ProbLog 2.3.0 manylinux wheel already passed exact inference on the same carrier and dominates separate compiler installation, evaluator changes, or engine substitution.",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -353,7 +387,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+      "selected_route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -361,9 +395,9 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-29T22:47:40Z",
+        "checked_at_utc": "2026-09-29T22:51:42Z",
         "max_age_hours": 2,
-        "selected_route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+        "selected_route": "REUSE_OFFICIAL_PROBLOG_2_3_0_MANYLINUX_WHEEL_WITH_UNCHANGED_BRAIN_ADAPTER",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
@@ -375,9 +409,9 @@
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T22:47:40Z",
+            "observed_at_utc": "2026-09-29T22:51:42Z",
             "evidence": [
-              "DIRECT_PROBE: workflow run 36641617082 received ubuntu-24.04 runner and completed"
+              "DIRECT_PROBE: run 36642005503 received a runner, verified exact candidate blobs, installed dependencies, and reached Task A."
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -385,7 +419,7 @@
             "evidence_scope": "ACCOUNT_SPECIFIC"
           },
           {
-            "dependency": "PROBLOG_2_3_0_MANYLINUX_2_28_X86_64_WHEEL",
+            "dependency": "PROBLOG_2_3_0_MANYLINUX_WHEEL_8D18BEAE480BCE9F54037DFA9CF8C058DA874524C118D8FFAE96FD210B68E71E",
             "kind": "CODE_ARTIFACT",
             "required": true,
             "volatility": "STATIC",
@@ -393,12 +427,11 @@
             "status": "READY",
             "observed_at_utc": "2026-09-29T22:47:40Z",
             "evidence": [
-              "CODE_OR_PACKAGE_REGISTRY: PyPI problog 2.3.0 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e",
-              "DIRECT_PROBE: workflow run 36641617082 exact hash/install/inference PASS"
+              "DIRECT_PROBE: run 36641617082 verified wheel SHA256 and passed exact inference plus evidence conditioning."
             ],
             "evidence_classes": [
-              "CODE_OR_PACKAGE_REGISTRY",
-              "DIRECT_PROBE"
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
             ],
             "evidence_scope": "GLOBAL"
           },
@@ -406,49 +439,15 @@
             "dependency": "PYTHON_3_12_RUNTIME",
             "kind": "LOCAL_RUNTIME",
             "required": true,
-            "volatility": "VOLATILE",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "observed_at_utc": "2026-09-29T22:47:40Z",
-            "evidence": [
-              "DIRECT_PROBE: workflow run 36641617082 Python 3.12 inference PASS"
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "GLOBAL"
-          },
-          {
-            "dependency": "PYPI_PUBLIC_PACKAGE_REGISTRY",
-            "kind": "PACKAGE_REGISTRY",
-            "required": true,
-            "volatility": "VOLATILE",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "observed_at_utc": "2026-09-29T22:47:40Z",
-            "evidence": [
-              "DIRECT_PROBE: workflow run 36641617082 downloaded exact wheel"
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "GLOBAL"
-          },
-          {
-            "dependency": "PYSDD_1_0_6_CP312_MANYLINUX_2_17_X86_64_WHEEL",
-            "kind": "CODE_ARTIFACT",
-            "required": true,
             "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T22:45:00Z",
+            "observed_at_utc": "2026-09-29T22:51:42Z",
             "evidence": [
-              "OFFICIAL_PRIMARY/PYPI: PySDD 1.0.6 original CPython-3.12 manylinux_2_17_x86_64 wheel published 2025-11-13",
-              "SHA256:aadde250ea13375f67feabdb7963c2cbcaa2727c80e6ba6544cb07e579a7a019"
+              "DIRECT_PROBE: run 36642005503 executed Python 3.12.14 and imported source-installed ProbLog before the missing external compiler error."
             ],
             "evidence_classes": [
-              "OFFICIAL_PRIMARY",
-              "CODE_OR_PACKAGE_REGISTRY"
+              "DIRECT_PROBE"
             ],
             "evidence_scope": "GLOBAL"
           }
