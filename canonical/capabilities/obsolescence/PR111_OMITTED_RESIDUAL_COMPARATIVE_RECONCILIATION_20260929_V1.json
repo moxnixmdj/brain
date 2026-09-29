@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_FRONTIER_COMPARATIVE_RECONCILIATION_V1",
+  "reconciliation_id": "PR111-OMITTED-RESIDUAL-COMPARISON-20260929",
+  "status": "COMPLETE__PRESERVE_MULTI_TOOL_AS_ACTIVE_FRONTIER",
+  "canonical_base_commit": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "correction_trigger": "PR111 omitted the newly localized concrete TOOL_DISCOVERY_SELECTION_AND_LEARNING integration residual from its candidate comparison.",
+  "tool_learning_candidate": {
+    "capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "verified_gain_preserved": "Debian full-metadata + Xapian + direct Contents supplier discovery/ranking is verified and inherited.",
+    "residual": {
+      "first_hard_drop": "auto_apt_cli_acquisition._viable_candidates requires discovery_source == APT_CATALOG while the inherited verified route emits APT_FULL_METADATA_XAPIAN",
+      "adjacent_score_contract": "the same consumer applies legacy absolute score >= 12 to raw Xapian BM25 weights, so source-only admission is not a sufficient generic interface repair",
+      "downstream_preserved_evidence": "PR113 reports the inherited Xapian route currently emits matched_terms=[] while semantic-verifier admission requires at least two matched terms",
+      "historical_breadth": "orthogonal SQLite/XML evidence preserves generic CLI contract-inference shape limits",
+      "parent_status": "UNRESOLVED__DISCOVERY_SUBCAPABILITY_VERIFIED__END_TO_END_TOOL_LEARNING_NOT_VERIFIED"
+    },
+    "shortest_known_path_to_new_parent_level_evidence": [
+      "separate generic runtime-repair intent is required before mutation",
+      "repair discovery-to-APT candidate contract without source-name special casing and without assuming legacy score scale",
+      "fresh non-HELDOUT end-to-end integration evidence is then required",
+      "known downstream verifier-admission and historical contract-shape limits can still prevent a parent-level tool-learning win"
+    ],
+    "runtime_mutation_required_before_new_end_to_end_proof": true
+  },
+  "multi_tool_candidate": {
+    "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "existing_assets": [
+      "deterministic capability graph planner",
+      "runtime dynamic fanout",
+      "conditional execution",
+      "multi-source join",
+      "heterogeneous capability adapters",
+      "durable intermediate state",
+      "independent verifiers"
+    ],
+    "shortest_known_path_to_new_parent_level_evidence": [
+      "define one bounded frontier-relevant compound subcapability",
+      "freeze one fresh unseen deterministic gate",
+      "execute the existing route unchanged exactly once",
+      "reconcile PASS or first causal FAIL before any repair"
+    ],
+    "runtime_mutation_required_before_new_proof": false,
+    "multi_capability_leverage": true
+  },
+  "ranking_under_canonical_order": {
+    "correctness_and_capability_strength": "NO_CLAIM_OF_WHOLE_PARENT_OBSOLESCENCE_FOR_EITHER_CANDIDATE",
+    "wall_clock_to_next_verified_reusable_capability": "MULTI_TOOL_DOMINATES_CURRENTLY__NO_RUNTIME_REPAIR_REQUIRED_BEFORE_FRESH_PROOF",
+    "incremental_cost": "TIE__ZERO_DOLLAR_PATHS",
+    "reliability": "MULTI_TOOL_HAS_EXISTING_COMPONENT_REAL_WORK_EVIDENCE__TOOL_LEARNING_HAS_MULTIPLE_KNOWN_INTERFACE_BREAKS",
+    "generalization": "MULTI_TOOL_HAS_HIGH_COMPOSITION_LEVERAGE__TOOL_LEARNING_DISCOVERY_WIN_REMAINS_REUSABLE_AND_DEFERRED",
+    "conclusion": "PRESERVE_MULTI_TOOL_ORCHESTRATION_AND_PLANNING_AS_ACTIVE_FRONTIER"
+  },
+  "truth_boundary": {
+    "pr111_process": "INCOMPLETE_COMPARISON__CORRECTED_BY_THIS_RECEIPT",
+    "pr111_selected_capability": "PRESERVED_AFTER_EXPLICIT_COMPARISON",
+    "tool_learning_residual": "REAL__DEFERRED_NOT_DISMISSED",
+    "orchestration_gate_freshness": "UNSPENT",
+    "runtime_mutation_in_this_reconciliation": false
+  },
+  "next_action": "OPEN_ONE_FRESH_CURRENT_TARGET_GATE_INTENT__FREEZE_BOUNDED_DEPENDENCY_AWARE_MULTI_TOOL_SUBCAPABILITY_AND_DETERMINISTIC_EVALUATOR__TEST_EXISTING_ROUTE_UNCHANGED__THEN_RECONCILE",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "user_laptop": false,
+    "val_town": false,
+    "heldout005_replay": false,
+    "tool_learning_runtime_repair": false,
+    "orchestration_runtime_repair_before_fresh_result": false
+  }
+}
