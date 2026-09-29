@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QUALIFY-H004-RAILWAY-ANONYMOUS-HARDZERO-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXISTING_CHATGPT_LINUX_CARRIER_REJECTED__NORMAL_APT_PACKAGES_METADATA_REQUIRED_FAILED__EXACT_CLOSURE_PREFLIGHT_PENDING__HARD_ZERO_REMOTE_CARRIER_UNQUALIFIED",
+  "action_kind": "CARRIER_FIDELITY_AND_HARD_ZERO_QUALIFICATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXISTING_CHATGPT_LINUX_CARRIER_REJECTED__NORMAL_APT_PACKAGES_METADATA_REQUIRED_FAILED__EXACT_CLOSURE_PREFLIGHT_PENDING__HARD_ZERO_REMOTE_CARRIER_UNQUALIFIED::CARRIER_FIDELITY_AND_HARD_ZERO_QUALIFICATION",
+  "expected_parent_frontier_change": "Qualify exactly one already-discovered anonymous Railway Linux VM as a hard-zero HELDOUT-004 carrier without executing the held-out. First independently bind the current public zero-spend contract; then create at most one unclaimed VM through ssh railway.new using an ephemeral ChatGPT-side SSH identity, prove callable command transport, Debian-family APT/network suitability, required APT metadata classes and python3-xapian/sudo/zbarimg surface, and materialize the exact H004 runtime closure using already-proven content-addressed source mechanisms with path/blob/import checks. If any mandatory predicate fails, stop at that first failure and reconcile. If all qualification predicates pass, preserve a deterministic carrier/preflight receipt and advance only to a separate guarded one-shot H004 execution lease.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR184 merged clean rejection of the built-in ChatGPT Linux carrier at NORMAL_APT_PACKAGES_METADATA_REQUIRED while HELDOUT-004 remained UNSPENT",
+    "Railway official 2026-09-25 free-VM page and changelog state ssh railway.new creates an unclaimed Linux VM with no account or card; while unclaimed nobody pays for its compute; build window 60 minutes",
+    "Railway current pricing FAQ explicitly points to ssh railway.new as a free VM without an account",
+    "PR20 exact Git-blob private-repository reconstruction is verified at zero incremental spend without user-device execution",
+    "PR35 content-addressed source-tree materialization/hash checking and PR45 content-addressed execution are reusable",
+    "legacy railway-heldout-002-carrier.sh contains reusable blob/APT/Contents/manpage preflight mechanics but its held-out execution section is forbidden here",
+    "HELDOUT-004 immutable runtime blob map and execution-surface requirements are frozen in canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After a trusted exact intent-head guard, provision at most one anonymous unclaimed ssh railway.new VM and perform carrier qualification plus exact-source-closure preflight only. No HELDOUT-004 START marker, dispatch, evaluator, candidate execution, or RESULT. No HELDOUT-003 replay. No Sprite, Val Town, user laptop, account-paid Railway project, card, claim/upgrade, or paid/unproven-cost infrastructure. Reuse existing source/materialization mechanisms; do not invent a new runtime. Stop immediately at the first failed mandatory carrier/preflight predicate and reconcile before any second carrier.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
