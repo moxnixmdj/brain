@@ -422,6 +422,177 @@ def _local_apt_executable_evidence(effect,limit=36):
     return out
 
 
+
+def _axi_cache_package_candidates(effect,limit=36):
+    """Reuse Apt Xapian relevance search as a package-level candidate generator.
+
+    This does not install or execute candidates. It only broadens package
+    discovery beyond exact executable-name overlap. axi-cache results are
+    already relevance sorted and may use indexed package metadata and Debtags.
+    """
+    if shutil.which("axi-cache") is None:
+        return []
+    queries=effect_queries(effect)
+    if not queries:
+        return []
+
+    def run(query_terms):
+        try:
+            p=subprocess.run(
+                ["axi-cache","--all","search",*query_terms],
+                text=True,capture_output=True,timeout=12
+            )
+        except Exception:
+            return []
+        if p.returncode!=0:
+            return []
+        out=[]
+        for line in p.stdout.splitlines():
+            m=re.match(r"^\s*(\d+)%\s+(\S+)\s+-\s+(.*)$",line)
+            if not m:
+                continue
+            score=int(m.group(1))
+            name=m.group(2).strip()
+            description=m.group(3).strip()
+            if not name:
+                continue
+            out.append({
+                "name":name,
+                "description":description,
+                "relevance":score,
+                "acquisition_mode":"APT_XAPIAN_RELEVANCE",
+            })
+            if len(out)>=max(1,min(int(limit),100)):
+                break
+        return out
+
+    # Prefer one relevance query. If it returns nothing, fall back to a few
+    # independent terms rather than multiplying calls in the common case.
+    found=run(queries)
+    if not found:
+        merged={}
+        for query in queries[:4]:
+            for row in run([query]):
+                prior=merged.get(row["name"])
+                if prior is None or row["relevance"]>prior["relevance"]:
+                    merged[row["name"]]=row
+        found=sorted(
+            merged.values(),
+            key=lambda x:(-int(x["relevance"]),str(x["name"]))
+        )
+    return found[:max(1,min(int(limit),100))]
+
+
+def _preferred_package_command(package,paths,terms):
+    package_compact=re.sub(r"[^a-z0-9]+","",str(package or "").lower())
+    def key(path):
+        command=path.rsplit("/",1)[-1].lower()
+        compact=re.sub(r"[^a-z0-9]+","",command)
+        exact_pkg=(compact==package_compact)
+        term_hits=sum(
+            1 for term in terms
+            if re.sub(r"[^a-z0-9]+","",term) in compact
+        )
+        return (not exact_pkg,-term_hits,len(command),command)
+    return min(paths,key=key).rsplit("/",1)[-1] if paths else None
+
+
+def _batched_package_executable_evidence(effect,package_names,limit=36):
+    """Enumerate executables for relevant packages in one apt-file list batch.
+
+    Unlike the older name-first path, admission here is package relevance.
+    Executable names do not need to contain literal task tokens.
+    """
+    if shutil.which("apt-file") is None:
+        return []
+    terms=_effect_semantic_terms(effect)
+    ordered=[]
+    for raw in package_names:
+        name=str(raw or "").strip()
+        if name and name not in ordered:
+            ordered.append(name)
+    ordered=ordered[:max(1,min(int(limit),50))]
+    if not ordered:
+        return []
+
+    try:
+        p=subprocess.run(
+            ["apt-file","--from-file","--stream-results","list","-"],
+            input="\n".join(ordered)+"\n",
+            text=True,capture_output=True,timeout=45
+        )
+    except Exception:
+        return []
+    if p.returncode not in (0,1):
+        return []
+
+    allowed=set(ordered)
+    paths_by_package={name:set() for name in ordered}
+    for line in p.stdout.splitlines():
+        if ": " not in line:
+            continue
+        package,path=line.split(": ",1)
+        package=package.strip(); path=path.strip()
+        normalized=path.lstrip("/")
+        if package not in allowed or not normalized.startswith("usr/bin/"):
+            continue
+        paths_by_package[package].add("/"+normalized)
+
+    selected=[]
+    for package in ordered:
+        paths=sorted(paths_by_package.get(package) or [])
+        if not paths:
+            continue
+        command=_preferred_package_command(package,paths,terms)
+        selected.append((package,paths,command))
+
+    # Preserve the existing bounded semantic-enrichment budget.
+    jobs=[]
+    for package,paths,command in selected[:12]:
+        if command:
+            jobs.append((package,command))
+    man_by_package={}
+    if jobs:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(8,len(jobs))) as pool:
+            future_map={
+                pool.submit(_fetch_ubuntu_manpage_text,command):(package,command)
+                for package,command in jobs
+            }
+            for future in concurrent.futures.as_completed(future_map):
+                package,command=future_map[future]
+                try:
+                    text=future.result()
+                except Exception:
+                    text=""
+                if text:
+                    man_by_package[package]={"command":command,"text":text[:16000]}
+
+    out=[]
+    for package,paths,command in selected:
+        page=man_by_package.get(package)
+        combined=" ".join(path.rsplit("/",1)[-1] for path in paths)
+        if page:
+            combined+=" "+page["text"]
+        low=combined.lower()
+        compact=re.sub(r"[^a-z0-9]+","",low)
+        semantic_hits=[]
+        for term in terms:
+            tc=re.sub(r"[^a-z0-9]+","",term)
+            if term in low or (tc and tc in compact):
+                semantic_hits.append(term)
+        out.append({
+            "name":package,
+            "command_paths":paths,
+            "command_terms":[],
+            "manpage_commands":[page["command"]] if page else [],
+            "semantic_terms":terms,
+            "semantic_hits":sorted(set(semantic_hits)),
+            "semantic_coverage":len(set(semantic_hits))/len(terms) if terms else 0.0,
+            "acquisition_mode":"APT_XAPIAN_RELEVANCE_PLUS_BATCH_PACKAGE_ENUMERATION",
+        })
+    return out
+
+
 def _apt_executable_evidence(effect,limit=36):
     if callable(_EXTERNAL_APT_EXECUTABLE_EVIDENCE_SEARCHER):
         try:
@@ -557,9 +728,77 @@ def search_apt_packages(effect, limit=12):
             }
             if prior is None or cand["score"]>prior["score"]:
                 seen[name]=cand
-    executable_evidence=_apt_executable_evidence(
+    # Reuse the existing Apt Xapian index when available. This broadens
+    # package-level recall without requiring task words to appear in binary names.
+    for ax in _axi_cache_package_candidates(
+        effect,limit=max(24,min(50,max(1,int(limit))*3))
+    ):
+        name=str(ax.get("name") or "").strip()
+        if not name:
+            continue
+        prior=seen.get(name)
+        xscore=60+float(ax.get("relevance") or 0)
+        if prior is None:
+            seen[name]={
+                "discovery_source":"APT_CATALOG",
+                "name":name,
+                "description":str(ax.get("description") or ""),
+                "query":"APT_XAPIAN_RELEVANCE",
+                "matched_terms":[],
+                "score":xscore,
+                "integration_friction":0,
+                "required_secret_count":0,
+                "required_environment_count":0,
+                "zero_cost_eligible":True,
+                "eligibility_status":"LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+                "binding_kind":"apt",
+                "packages":[],
+                "remotes":[],
+                "package_relevance_source":"APT_XAPIAN_RELEVANCE",
+            }
+        else:
+            cand=dict(prior)
+            cand["score"]=max(float(cand.get("score",0)),xscore)
+            cand["package_relevance_source"]="APT_XAPIAN_RELEVANCE"
+            if not cand.get("description"):
+                cand["description"]=str(ax.get("description") or "")
+            seen[name]=cand
+
+    literal_evidence=_apt_executable_evidence(
         effect,limit=max(24,min(50,max(1,int(limit))*3))
     )
+    relevance_seed_names=[
+        x["name"] for x in sorted(
+            seen.values(),
+            key=lambda x:(-float(x.get("score",0)),int(x.get("integration_friction",0)),str(x.get("name","")))
+        )[:max(24,min(50,max(1,int(limit))*3))]
+    ]
+    relevance_evidence=_batched_package_executable_evidence(
+        effect,relevance_seed_names,
+        limit=max(24,min(50,max(1,int(limit))*3))
+    )
+
+    evidence_by_name={}
+    for ev in list(literal_evidence)+list(relevance_evidence):
+        name=str(ev.get("name") or "").strip()
+        if not name:
+            continue
+        prior=evidence_by_name.get(name)
+        if prior is None:
+            evidence_by_name[name]=dict(ev)
+            continue
+        merged=dict(prior)
+        merged["command_paths"]=sorted(set(prior.get("command_paths") or [])|set(ev.get("command_paths") or []))
+        merged["command_terms"]=sorted(set(prior.get("command_terms") or [])|set(ev.get("command_terms") or []))
+        merged["manpage_commands"]=sorted(set(prior.get("manpage_commands") or [])|set(ev.get("manpage_commands") or []))
+        merged["semantic_terms"]=sorted(set(prior.get("semantic_terms") or [])|set(ev.get("semantic_terms") or []))
+        merged["semantic_hits"]=sorted(set(prior.get("semantic_hits") or [])|set(ev.get("semantic_hits") or []))
+        terms=merged.get("semantic_terms") or []
+        merged["semantic_coverage"]=len(merged["semantic_hits"])/len(terms) if terms else 0.0
+        modes={str(prior.get("acquisition_mode") or ""),str(ev.get("acquisition_mode") or "")}
+        merged["acquisition_mode"]="+".join(sorted(x for x in modes if x))
+        evidence_by_name[name]=merged
+    executable_evidence=list(evidence_by_name.values())
     for ev in executable_evidence:
         name=str(ev.get("name") or "").strip()
         if not name:
@@ -600,7 +839,10 @@ def search_apt_packages(effect, limit=12):
         cand["matched_terms"]=sorted(
             set(cand.get("matched_terms") or [])|set(command_terms)|set(semantic_hits)
         )
-        evidence_bonus=120*len(command_terms)+80*coverage+12*len(semantic_hits)
+        # Direct executable evidence matters, but literal filename overlap is
+        # no longer an absolute semantic proxy. Package relevance and manpage
+        # evidence can now compete in the same score space.
+        evidence_bonus=20+35*len(command_terms)+100*coverage+16*len(semantic_hits)
         cand["score"]=float(cand.get("score",0))+evidence_bonus
         cand["executable_semantic_evidence"]={
             "command_paths":command_paths,
@@ -619,22 +861,12 @@ def search_apt_packages(effect, limit=12):
 
     def _apt_rank_key(x):
         ev=x.get("executable_semantic_evidence") or {}
-        paths=ev.get("command_paths") or []
-        terms=ev.get("command_terms") or []
         semantic=ev.get("semantic_hits") or []
-        if paths and semantic:
-            tier=0
-        elif paths and terms:
-            tier=1
-        else:
-            tier=2
         return (
-            tier,
+            -float(x.get("score",0)),
             -float(ev.get("semantic_coverage") or 0.0),
             -len(semantic),
-            -len(terms),
             int(x.get("integration_friction",0)),
-            -float(x.get("score",0)),
             str(x.get("name","")),
         )
 
