@@ -5543,7 +5543,66 @@ def run_goal(step, mission):
               "final_summary":summary
             }
         observations.append({"action":action,"result":result})
-    raise Blocker("GOAL_MAX_CYCLES_WITHOUT_FINISH")
+
+    # The ordinary evidence/action budget is exhausted. Do not silently turn
+    # that into a task failure when useful observations already exist: reserve
+    # exactly one separate finalization-only model call. This is not an extra
+    # research cycle. The finalizer cannot request tools or gather new evidence;
+    # it may only synthesize a terminal answer from the observations already
+    # admitted by the bounded controller.
+    compact=[]
+    for item in observations[-6:]:
+        a=item.get("action",{})
+        r=item.get("result",{})
+        rr=dict(r) if isinstance(r,dict) else {"value":str(r)}
+        if isinstance(rr.get("items"),list):
+            rr["items"]=rr["items"][:40]
+        if isinstance(rr.get("hits"),list):
+            rr["hits"]=rr["hits"][:30]
+        if isinstance(rr.get("content"),str):
+            rr["content"]=rr["content"][:2500]
+        if isinstance(rr.get("body_excerpt"),str):
+            rr["body_excerpt"]=rr["body_excerpt"][:2500]
+        compact.append({"action":a,"result":rr})
+    final_obs=json.dumps(compact,sort_keys=True)[:5000]
+    final_prompt=(
+      "You are the FINALIZATION-ONLY phase of a bounded controller. "
+      "DO NOT invoke tools or function calls. DO NOT request more evidence. "
+      "Use only the admitted observations below. Produce the best complete "
+      "answer to the Goal in the exact output format requested by the Goal. "
+      "Return JSON text only with exactly this schema: "
+      '{"summary":"complete final answer"}. '
+      "Goal: "+goal+"\nAdmitted observations: "+final_obs
+    )
+    finalized=_planner_post(final_prompt, timeout_s=20)
+    fobj=_extract_json_object(finalized.get("text",""))
+    summary=fobj.get("summary")
+    if not isinstance(summary,str) or not summary.strip():
+        raise Blocker("GOAL_FORCED_FINALIZATION_INVALID")
+    final_action={
+      "type":"finish",
+      "args":{"summary":summary},
+      "why":"forced bounded finalization from admitted evidence only"
+    }
+    final_result=_goal_action(final_action)
+    trace.append({
+      "cycle":max_cycles,
+      "phase":"forced_finalization",
+      "plan":final_action,
+      "result":final_result
+    })
+    return {
+      "adapter":"goal","returncode":0,
+      "stdout":summary,
+      "controller_mode":"OPTIONAL_MODEL_ADVISORY_FORCED_FINALIZATION",
+      "planner_source":"BOUNDED_EXISTING_PLANNER_BRIDGE",
+      "planner_transport":"POST_BOUNDED_FINALIZATION_ONLY",
+      "planner_model_last":finalized.get("model"),
+      "cycles":max_cycles,
+      "forced_finalization":True,
+      "trace":trace,
+      "final_summary":summary
+    }
 
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
