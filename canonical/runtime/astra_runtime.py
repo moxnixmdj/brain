@@ -4827,6 +4827,30 @@ def _load_capability_discovery():
         module.set_external_package_name_searcher(_external_package_name_searcher)
     return module
 
+def _load_plain_goal_bound_grounding():
+    path=ROOT/"canonical"/"runtime"/"bound_capabilities"/"plain_goal_bound_grounding.py"
+    if not path.is_file():
+        raise Blocker("PLAIN_GOAL_BOUND_GROUNDING_MODULE_MISSING")
+    spec=importlib.util.spec_from_file_location("project_brain_plain_goal_bound_grounding",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("PLAIN_GOAL_BOUND_GROUNDING_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+def _ground_plain_goal_to_bound_capabilities(mission, goal):
+    module=_load_plain_goal_bound_grounding()
+    registry=_load_bound_capability_registry()
+    result=module.ground(goal,registry,max_candidates=16)
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__BOUND_CAPABILITY_GROUNDING.json"
+    evidence=dict(result)
+    evidence["mission_id"]=mid
+    evidence["observed_at_utc"]=utc()
+    writej(path,evidence)
+    return path,evidence
+
 def _load_goal_compiler():
     path=pathlib.Path(__file__).resolve().with_name("goal_compiler.py")
     spec=importlib.util.spec_from_file_location("project_brain_goal_compiler",path)
@@ -5418,6 +5442,22 @@ def run_goal(step, mission):
             if not acquisition_goal:
                 raise
         if (is_no_match or is_unresolved_subgoal) and not optional_planner:
+            grounding_path,grounding=_ground_plain_goal_to_bound_capabilities(
+                mission,acquisition_goal
+            )
+            if grounding.get("status")=="GROUNDED" and grounding.get("candidate_count",0)>0:
+                raise Blocker(
+                    "BOUND_CAPABILITY_GROUNDING_AVAILABLE:"+json.dumps({
+                      "goal":acquisition_goal,
+                      "evidence_path":str(grounding_path.relative_to(ROOT)),
+                      "candidate_ids":[
+                        x.get("capability_id")
+                        for x in grounding.get("candidates",[])
+                        if isinstance(x,dict)
+                      ],
+                      "external_discovery_attempted":False,
+                    },sort_keys=True)
+                ) from e
             gap_class=_classify_plain_goal_gap(acquisition_goal)
             gap_path,gap_evidence=_write_goal_gap_classification(
                 mission,acquisition_goal,gap_class,error_text
