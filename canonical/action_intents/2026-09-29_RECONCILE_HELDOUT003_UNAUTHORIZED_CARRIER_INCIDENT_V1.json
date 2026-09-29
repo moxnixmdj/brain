@@ -18,9 +18,10 @@
     "issue 131 comment 5883877486 records the first real HELDOUT-003 evaluator START and explicitly classifies the Sprite as unauthorized because account-native hard-zero-spend proof was absent",
     "quarantined PR160 preserves raw HELDOUT-003 RESULT and AUTO_APT_CLI_ACQUISITION diagnostic evidence",
     "raw result shows verifier import failure after acquisition reached CONTRACT_INFERRED, but unauthorized-carrier policy prevents treating that run as an admissible capability PASS/FAIL verdict",
-    "HELDOUT-003 replay is forbidden after the first exclusive evaluator START regardless of carrier admissibility"
+    "HELDOUT-003 replay is forbidden after the first exclusive evaluator START regardless of carrier admissibility",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V2.json evidence class CAPABILITY_UNPROVEN selected because the unauthorized start spends freshness but does not provide an admissible parent-capability verdict"
   ],
-  "evidence_presence_classification": "FRESHNESS_SPENT_UNAUTHORIZED_CARRIER_INCIDENT__CANONICAL_PROVENANCE_RECONCILIATION_REQUIRED",
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
   "generic_repair_from_single_probe": false,
   "orthogonal_recurrence_count": 0,
