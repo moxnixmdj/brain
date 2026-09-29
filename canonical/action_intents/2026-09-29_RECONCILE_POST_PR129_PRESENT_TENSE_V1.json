@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR129-PRESENT-TENSE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "POST_PR129_CANONICAL_PRESENT_TENSE_FIELDS_STILL_DESCRIBE_ADMISSION_REPAIR_AS_PENDING_WHILE_EXECUTION_IS_DUE__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR129_CANONICAL_PRESENT_TENSE_FIELDS_STILL_DESCRIBE_ADMISSION_REPAIR_AS_PENDING_WHILE_EXECUTION_IS_DUE__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make all present-tense canonical authority fields agree with the already-merged PR129 state: provider-neutral APT admission repair is complete, HELDOUT-003 remains unspent, and exactly one guarded HELDOUT-003 execution followed by first-result reconciliation is the current frontier. No runtime, gate, evaluator, carrier, or execution mutation.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR129 provider-neutral APT admission repair",
+    "merged PR136 post-PR129 repair-consumption reconciliation",
+    "merged PR135 action-intent guard hardening",
+    "canonical/CANONICAL_POINTER.json abort_on_frontier_contradiction=true",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json inherited_route.status",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json immediate_frontier objective and inherited Xapian route next_action",
+    "open PR140 one-shot execution lease"
+  ],
+  "evidence_presence_classification": "CANONICAL_AUTHORITY_CONTRADICTION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After the stale present-tense authority descriptors are reconciled and the trusted current-base guard passes, merge only this state correction. Do not execute HELDOUT-003, change runtime bytes, add a repair, or claim terminal capability progress in this PR. Rebind the execution-only lease to the new exact main before the single fresh start.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "heldout_execution_forbidden": true,
+    "runtime_mutation_forbidden": true,
+    "incremental_spend_usd": 0,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true
+  }
+}
