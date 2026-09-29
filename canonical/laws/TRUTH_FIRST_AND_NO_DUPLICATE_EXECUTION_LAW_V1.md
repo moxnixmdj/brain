@@ -137,3 +137,31 @@ A frontier workflow MUST NOT begin expensive execution before its pull request e
 
 The PR #72 / PR #73 duplicate executable-semantic repair incident is a permanent regression case. Any future equivalent duplicate MUST fail closed.
 
+
+
+## 14. Atomic single-flight claim for one-shot validations
+A frozen held-out or otherwise freshness-sensitive validation that forbids same-case replay MUST NOT rely on comments, process memory, deployment naming, or a mutable service configuration as its execution lock.
+
+After every non-fresh preflight has passed, but BEFORE any carrier capable of exposing the fresh cases is triggered, the executor MUST acquire exactly one atomic execution claim in the canonical GitHub control plane.
+
+Claim identity:
+- key fields: `validation_id` and the frozen manifest Git blob SHA;
+- serialization: `validation_id + "\n" + lowercase(manifest_git_blob)`;
+- claim digest: SHA-256 of that UTF-8 serialization;
+- immutable branch ref: `execution-claims/v1/<claim_digest>`;
+- ref target: the exact protected candidate commit SHA to be executed.
+
+The claim MUST be acquired with GitHub's create-reference operation. Creation success is the monotonic spend boundary. The claim ref MUST NEVER be deleted, moved, reused, or reset.
+
+If creation returns "Reference already exists" or any result other than a verified first creation:
+- ABORT before any fresh-case carrier trigger;
+- treat the gate as already claimed/spent by another executor;
+- refresh canonical evidence and join read-only reconciliation.
+
+Only the worker that successfully creates the claim may trigger the fresh-case carrier, and that carrier MUST remain bound to the claim's validation ID, manifest blob, and protected candidate bytes.
+
+A preflight failure before claim creation does not spend the gate. Any failure after successful claim creation leaves the gate permanently spent, possibly with NO_VERDICT; retrying the same validation ID + manifest is forbidden.
+
+Any fresh-case execution that lacks the canonical claim, uses a different claim identity, or occurs after a conflicting claim is inadmissible evidence.
+
+This rule is deliberately one primitive wide: use the existing atomic GitHub ref store. Do not add a database, lock server, queue, or metered coordination service unless this primitive is independently falsified.
