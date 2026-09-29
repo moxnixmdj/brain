@@ -2499,7 +2499,12 @@
         "public_job_id": 109657545598,
         "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
-        "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd"
+        "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd",
+        "astra_integration_status": "PASS",
+        "astra_integration_run_id": 36642601675,
+        "astra_integration_job_id": 109658111026,
+        "astra_integration_receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN"
       }
     },
     "decision.synthesis.verify.stdlib": {
@@ -2570,7 +2575,12 @@
         "public_job_id": 109657545598,
         "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
-        "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+        "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+        "astra_integration_status": "PASS",
+        "astra_integration_run_id": 36642601675,
+        "astra_integration_job_id": 109658111026,
+        "astra_integration_receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN"
       }
     }
   },
