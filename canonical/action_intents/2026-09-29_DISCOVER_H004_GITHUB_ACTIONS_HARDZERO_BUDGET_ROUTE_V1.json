@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "DISCOVER-H004-GITHUB-ACTIONS-HARDZERO-BUDGET-ROUTE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__IXIMIUZ_REMOTE_MCP_CANDIDATE_VALID__CURRENT_AUTHORIZED_CHATGPT_CUSTOM_MCP_BINDING_UNAVAILABLE__NEXT_CALLABLE_HARD_ZERO_REMOTE_LINUX_ROUTE_UNQUALIFIED",
+  "action_kind": "CARRIER_ROUTE_DISCOVERY_AND_HARDZERO_ACCOUNT_CONTROL_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__IXIMIUZ_REMOTE_MCP_CANDIDATE_VALID__CURRENT_AUTHORIZED_CHATGPT_CUSTOM_MCP_BINDING_UNAVAILABLE__NEXT_CALLABLE_HARD_ZERO_REMOTE_LINUX_ROUTE_UNQUALIFIED::CARRIER_ROUTE_DISCOVERY_AND_HARDZERO_ACCOUNT_CONTROL_RECONCILIATION",
+  "expected_parent_frontier_change": "Replace broad provider discovery with the existing private GitHub Actions execution path if a hard-$0 Actions budget blocks metered overage. Preserve exact private Brain bytes, use one Debian Trixie container on the GitHub-hosted Linux runner so APT preparation, exact source verification, START marker, runtime execution, and independent zbar evaluation occur in one filesystem/container. Do not execute HELDOUT-004 until the $0 budget state is independently verified and carrier preflight passes.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR184 rejected built-in ChatGPT Linux carrier at missing normal APT Packages metadata",
+    "PR190 rejected anonymous Railway only because current direct SSH transport was unavailable",
+    "PR193 rejected iximiuz only because current ChatGPT custom-MCP binding is unavailable",
+    "PR89 preserved faithful Debian full-metadata/Xapian surface evidence including Translation-en, Contents-amd64, Contents-all, python3-xapian, and exact runtime hashes",
+    "GitHub email dated 2026-09-28 states private Actions included usage is 2000/2000 minutes and that a $0 Actions budget blocks further usage instead of billing overage",
+    "current GitHub connector exposes private Brain bytes and Actions workflows but not billing/budget mutation or readback"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Discovery/reconciliation only. No HELDOUT-004 START/dispatch/evaluator/result until account-side $0 Actions budget is verified. No public repository, no source disclosure, no Railway, no iximiuz, no Sprite, no Val Town, no user-laptop execution, and no paid/unproven-cost infrastructure. If the $0 budget cannot be verified, stop and retain provider discovery frontier.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}

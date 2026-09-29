@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_H004_GITHUB_ACTIONS_HARDZERO_BUDGET_ROUTE_V1",
+  "evidence_id": "H004-GITHUB-ACTIONS-HARDZERO-BUDGET-ROUTE-20260929-V1",
+  "canonical_base_sha": "4bb0dc8e520bf57f149a858a3a7213f035dc912f",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "discovery_scope": "ACCOUNT_COST_BOUNDARY_AND_CARRIER_ARCHITECTURE_ONLY__NO_HELDOUT_START",
+  "account_evidence": {
+    "source": "GitHub usage email 2026-09-28",
+    "included_actions_minutes": 2000,
+    "used_actions_minutes": 2000,
+    "usage_fraction": 1,
+    "reset_date": "2026-10-01",
+    "billing_statement": "USAGE_BEYOND_INCLUDED_AMOUNT_IS_BILLED_UNLESS_A_ZERO_DOLLAR_ACTIONS_BUDGET_IS_SET__ZERO_BUDGET_BLOCKS_FURTHER_USAGE_UNTIL_RESET",
+    "current_zero_budget_state": "UNVERIFIED",
+    "connector_budget_read_available": false,
+    "connector_budget_write_available": false
+  },
+  "carrier_architecture": {
+    "provider": "GitHub Actions",
+    "repository": "moxnixmdj/brain",
+    "repository_visibility": "private",
+    "runner": "GitHub-hosted Linux runner",
+    "execution_capsule": "Debian Trixie container",
+    "source_transport": "NONE__USE_EXACT_CHECKED_OUT_PRIVATE_BRAIN_TREE",
+    "filesystem_model": "ONE_CONTAINER_FOR_APT_PREP_SOURCE_HASH_PREFLIGHT_START_RUNTIME_AND_EVALUATOR",
+    "apt_surface_requirements": [
+      "normal Packages metadata",
+      "Translation-en",
+      "Debian package tags",
+      "Contents-all",
+      "architecture-specific Contents",
+      "python3-xapian",
+      "sudo/root apt install capability",
+      "zbarimg QR support"
+    ],
+    "exact_pre_start_requirements": [
+      "verify frozen mission blob",
+      "verify every immutable runtime Git blob",
+      "verify required runtime paths exist",
+      "verify required Python imports resolve",
+      "verify no preexisting START or RESULT",
+      "verify hard-zero account predicate"
+    ]
+  },
+  "prior_surface_evidence": {
+    "source": "PR89 preserved faithful Debian full-metadata/Xapian preflight",
+    "observed": [
+      "Translation-en targets=3",
+      "Contents-amd64=2",
+      "Contents-all=2",
+      "8/8 generic tests PASS",
+      "python3-xapian available on faithful surface",
+      "full-metadata route ~17.39s diagnostic wall"
+    ],
+    "use": "ARCHITECTURE_FEASIBILITY_ONLY__DOES_NOT_SPEND_OR_ADJUDICATE_H004"
+  },
+  "adjudication": {
+    "route_strength": "DOMINANT_IF_ZERO_BUDGET_VERIFIED",
+    "reasons": [
+      "reuses existing authenticated control plane",
+      "keeps Brain private",
+      "removes source transport",
+      "removes custom MCP dependency",
+      "removes Railway split-container fidelity failure",
+      "avoids new provider account"
+    ],
+    "first_unproven_predicate": "GITHUB_ACTIONS_ZERO_DOLLAR_BUDGET_ACTIVE_AND_BLOCKING_METERED_OVERAGE",
+    "carrier_admission": "NOT_REACHED",
+    "parent_capability_verdict": "UNPROVEN"
+  },
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "incremental_spend_usd": 0,
+  "required_next_action": "VERIFY_GITHUB_ACTIONS_ZERO_DOLLAR_BUDGET_ACTIVE__IF_PASS_STAGE_ONE_SINGLEFLIGHT_PRIVATE_ACTIONS_DEBIAN_TRIXIE_CARRIER_WITH_SAME_CONTAINER_PREFLIGHT_AND_EXACT_H004_ONE_SHOT__IF_FAIL_RESUME_HARD_ZERO_PROVIDER_DISCOVERY",
+  "prohibitions": [
+    "NO_PRIVATE_ACTIONS_H004_EXECUTION_UNTIL_ZERO_DOLLAR_BUDGET_IS_VERIFIED",
+    "NO_PUBLIC_REPOSITORY_OR_PRIVATE_SOURCE_DISCLOSURE",
+    "NO_HELDOUT_004_START_IN_THIS_RECONCILIATION_LANE",
+    "NO_RAILWAY_OR_IXIMIUZ_RETRY_WITHOUT_NEW_ROOT_CAUSE_CHANGE",
+    "NO_SPRITE",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
+  ]
+}
