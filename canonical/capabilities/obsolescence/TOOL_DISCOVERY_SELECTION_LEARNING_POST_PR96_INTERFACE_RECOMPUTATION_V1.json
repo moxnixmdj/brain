@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PARENT_FRONTIER_RECOMPUTATION_V1",
   "reconciliation_id": "TOOL-DISCOVERY-SELECTION-LEARNING-POST-PR96-INTERFACE-RECOMPUTATION-V1",
-  "status": "RECOMPUTED__RESIDUAL_GAP_VERIFIED",
+  "status": "RECOMPUTED__FIRST_RESIDUAL_INTERFACE_BLOCKER_LOCALIZED",
   "checked_on": "2026-09-29",
   "canonical_base": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
   "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
@@ -14,72 +14,61 @@
     "heldout_oracle_family_recall": 1,
     "heldout_top20_oracle_recall": 1,
     "total_wall_s": 16.233238,
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "heldout_005": "PASS__SPENT__NO_REPLAY"
   },
   "inspected_exact_blobs": {
     "capability_discovery_py": "b9e7423ab24bf2da98869b02d782e791a779892a",
     "auto_capability_acquisition_py": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
     "auto_apt_cli_acquisition_py": "786f7de7df853cfaec2826f9471942b001e7eadc"
   },
-  "static_interface_evidence": {
-    "discovery_output": {
-      "discovery_source": "APT_FULL_METADATA_XAPIAN",
-      "binding_kind": "apt",
-      "evidence_tier": "SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP",
-      "zero_cost_eligible": true,
-      "required_secret_count": 0,
-      "integration_friction": 0,
-      "version_and_archive_sha256_supplied": true
+  "static_causal_trace": [
+    {
+      "stage": "PRODUCER",
+      "fact": "The inherited discovery path emits candidates with discovery_source=APT_FULL_METADATA_XAPIAN and binding_kind=apt, plus zero-cost/zero-secret/zero-friction and pinned package metadata."
     },
-    "supplier_router": {
-      "behavior": "Uses binding_kind before discovery_source and maps apt to apt_cli.",
-      "result": "NEW_XAPIAN_CANDIDATES_REACH_APT_CLI_SUPPLIER_ROUTING"
+    {
+      "stage": "ROUTER",
+      "fact": "auto_capability_acquisition._discovery_supplier_order reads binding_kind before discovery_source and maps apt to apt_cli; the top-level router is not the failure."
     },
-    "apt_candidate_admission": {
-      "deterministic_rejection": "auto_apt_cli_acquisition._viable_candidates continues whenever discovery_source != APT_CATALOG.",
-      "consequence": "On a faithful surface where search_apt_packages returns the full-metadata route, every APT_FULL_METADATA_XAPIAN candidate is rejected before apt_cli_probe or cli_contract_inference can run.",
-      "terminal_local_error": "NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+    {
+      "stage": "APT_MERGE",
+      "fact": "auto_apt_cli_acquisition._merge_role_conditioned_apt calls capability_discovery.search_apt_packages and preserves returned discovery_source."
     },
-    "score_contract": {
-      "legacy_rule": "Reject score < 12.",
-      "current_route": "Xapian BM25 match.weight score.",
-      "finding": "The absolute threshold belongs to a different scorer scale and is not a valid cross-scorer admission contract. This is a secondary interface defect; the source-name rejection alone is sufficient to prove the current break."
+    {
+      "stage": "FIRST_FAILURE",
+      "fact": "auto_apt_cli_acquisition._viable_candidates unconditionally drops every candidate whose discovery_source is not APT_CATALOG, so the inherited winner cannot reach apt_cli_probe or cli_contract_inference."
+    },
+    {
+      "stage": "EXISTING_DOWNSTREAM",
+      "fact": "apt_cli_probe, cli_contract_inference, pending-binding verification, promotion, and same-invocation replan already exist and must be reused before inventing replacements."
     }
+  ],
+  "exact_blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BEFORE_APT_CLI_PROBE_BY_LEGACY_APT_CATALOG_ONLY_SOURCE_ADMISSION",
+  "focused_probe": {
+    "probe_id": "APT-XAPIAN-ACQUISITION-INTEGRATION-DELTA-001",
+    "manifest_path": "canonical/experiments/APT_XAPIAN_ACQUISITION_INTEGRATION_DELTA_001.json",
+    "status": "FROZEN_BEFORE_RUNTIME_REPAIR__UNEXECUTED",
+    "purpose": "Verify only that a provenance-valid APT_FULL_METADATA_XAPIAN candidate can cross candidate admission while legacy APT behavior remains accepted and malformed/untrusted APT candidates remain rejected."
   },
-  "reuse_before_invention": {
-    "existing_downstream_components": [
-      "canonical/runtime/auto_capability_acquisition.py",
-      "canonical/runtime/auto_apt_cli_acquisition.py",
-      "canonical/runtime/cli_contract_inference.py",
-      "canonical/runtime/verify_pending_cli_binding.py",
-      "canonical/runtime/promote_pending_binding.py",
-      "canonical/runtime/astra_runtime.py"
+  "repair_scope": {
+    "minimum_change": "Replace the obsolete discovery-source-name coupling with the existing stable APT binding contract at candidate admission while retaining zero-cost, zero-secret, zero-friction, pinned version/hash and all downstream verification gates.",
+    "deliberately_deferred": [
+      "XAPIAN score calibration",
+      "contract inference adequacy",
+      "end-to-end capability obsolescence claim"
     ],
-    "prior_verified_behavior": [
-      "discovery-driven supplier routing",
-      "generic CLI contract inference from supplier help",
-      "typed causal input binding",
-      "independent pending-binding verification and promotion",
-      "same-invocation replan after verified acquisition"
-    ],
-    "invention_required_now": false
+    "reason": "The source-name rejection is the first unconditional failure. Downstream hypotheses are not causally observable until it is removed."
   },
-  "decision": {
-    "current_parent_blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_REACH_APT_ROUTING_BUT_ARE_DROPPED_BY_LEGACY_APT_CATALOG_ONLY_ADMISSION__LEGACY_ABSOLUTE_SCORE_THRESHOLD_NOT_PORTABLE_TO_XAPIAN",
-    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_ONE_GENERIC_SOURCE_NEUTRAL_APT_CANDIDATE_ADMISSION_REPAIR__REUSE_EXISTING_CONTRACT_BIND_VERIFY_STACK__EXECUTE_ONCE__RECONCILE",
-    "repair_design_constraint": "Admit APT candidates by stable binding/evidence properties rather than discovery-source name; do not compare Xapian BM25 weights to a legacy absolute lexical-score threshold. Preserve source-native score for ordering only.",
-    "fresh_gate_required_before_runtime_mutation": true,
-    "parent_capability_obsolescence_claim": false
-  },
+  "next_action": "ONE_GENERIC_DISCOVERY_TO_APT_ACQUISITION_ADMISSION_REPAIR__ADMIT_BY_STABLE_APT_BINDING_CONTRACT__RUN_FOCUSED_INTEGRATION_DELTA_ONCE__RECONCILE",
+  "runtime_mutated": false,
+  "experiment_executed": false,
+  "incremental_spend_usd": 0,
   "prohibitions": [
-    "NO_HELDOUT_005_REPLAY",
-    "NO_TUNING_TO_SPENT_CASES",
+    "NO_HELDOUT005_REPLAY",
     "NO_PACKAGE_HINTS",
     "NO_TASK_SPECIFIC_LITERALS",
-    "NO_SOURCE_NAME_WHITELIST_ONLY_PATCH",
-    "NO_BLIND_LEGACY_SCORE_THRESHOLD_ON_XAPIAN",
-    "NO_NEW_CONTRACT_PARSER_BEFORE_EXISTING_STACK_RETEST"
-  ],
-  "runtime_mutated": false,
-  "incremental_spend_usd": 0
+    "NO_XAPIAN_SCORE_RETUNING_BEFORE_SOURCE_GATE_REMOVAL",
+    "NO_NEW_CONTRACT_LEARNER_BEFORE_EXISTING_STACK_RETEST"
+  ]
 }
