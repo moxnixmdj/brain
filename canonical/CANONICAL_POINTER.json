@@ -148,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "ONE_GENERIC_DISCOVERY_TO_APT_ACQUISITION_COMPATIBILITY_REPAIR__ADMIT_APT_BY_GENERIC_BINDING_AND_ELIGIBILITY_EVIDENCE__PRESERVE_SOURCE_NATIVE_RANKING__THEN_RUN_FRESH_ORTHOGONAL_INTEGRATION_DIAGNOSTIC__THEN_RECONCILE",
+    "next_step": "FREEZE_FRESH_XAPIAN_TO_AUTO_APT_ACQUISITION_INTEGRATION_GATE__THEN_SMALLEST_GENERIC_SOURCE_ADMISSION_REPAIR_IF_CAUSAL__THEN_FRESH_UNSEEN_END_TO_END_VALIDATION__RECONCILE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "INHERITED_XAPIAN_DISCOVERY_ROUTE_EMITS_APT_FULL_METADATA_XAPIAN_BUT_AUTO_APT_ACQUISITION_SOURCE_ADMISSION_ACCEPTS_ONLY_APT_CATALOG__VERIFIED_SUPPLIERS_ARE_DROPPED_BEFORE_PROBE_CONTRACT_EXECUTE_VERIFY",
+    "critical_blocker": "INHERITED_XAPIAN_DISCOVERY_ROUTE_EMITS_APT_FULL_METADATA_XAPIAN_BUT_AUTO_APT_ACQUISITION_ACCEPTS_ONLY_APT_CATALOG__VERIFIED_SUPPLIERS_CANNOT_ENTER_EXISTING_PROBE_CONTRACT_EXECUTE_VERIFY_LOOP",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -229,7 +229,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__DISCOVERY_TO_APT_ACQUISITION_SOURCE_CONTRACT_COMPATIBILITY",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__VERIFIED_XAPIAN_DISCOVERY_CANNOT_ENTER_EXISTING_AUTONOMOUS_ACQUISITION_LOOP",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -491,14 +491,12 @@
       ],
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
     },
-    "post_heldout005_recompute": {
-      "status": "RECOMPUTED_FROM_INHERITED_EXACT_RUNTIME_AND_CURRENT_CONSUMER_CODE",
-      "main_sha": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
-      "producer_runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
-      "consumer_runtime_blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
-      "producer_source": "APT_FULL_METADATA_XAPIAN",
-      "consumer_source_gate": "APT_CATALOG_ONLY",
-      "heldout005_state": "SPENT__NEVER_REPLAY"
+    "post_tool_discovery_recompute_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
+    "frontier_selection_correction_20260929": {
+      "source_pr": 111,
+      "evidence_path": "canonical/capabilities/obsolescence/POST_PR111_FRONTIER_SELECTION_CORRECTION_20260929_V1.json",
+      "corrected_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "multi_tool_orchestration": "DEFERRED_NOT_DISCARDED"
     }
   },
   "provider_rules": {
