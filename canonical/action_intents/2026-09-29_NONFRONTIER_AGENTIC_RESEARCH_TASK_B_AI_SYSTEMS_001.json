@@ -1,0 +1,152 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "NONFRONTIER-AGENTIC-RESEARCH-TASK-B-AI-SYSTEMS-001",
+  "status": "TERMINAL_FAIL_RECONCILED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "NONFRONTIER_OPEN_ENDED_PLANNER_ROUTE_NOT_YET_PROVEN_ON_REAL_CROSS_DOMAIN_TASK",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::NONFRONTIER_OPEN_ENDED_PLANNER_ROUTE_NOT_YET_PROVEN_ON_REAL_CROSS_DOMAIN_TASK::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute one real cross-domain AI-systems research task through the public $0 ASTRA runtime using a credential-free non-frontier GPT-OSS planner, independently verify the decision artifact and supplier/runtime identity, and localize any remaining gap without claiming frontier capability acquisition unless dependency-free breadth evidence is sufficient.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "SUPERWORKER_UNIFIED_1 identity and whole-definition adjudication",
+    "same_identity_supervisor.py",
+    "astra_runtime.py current exact blob",
+    "public verification-capsule-runner runtime blob equality",
+    "Pollinations anonymous openai-fast live structured response",
+    "current Pollinations model registry showing openai-fast as GPT-OSS 20B",
+    "Mistral free API fallback"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exactly one public-runner Task-B execution reaches a terminal result and is reconciled. If it passes, record dependency-free Task-B evidence and recompute whether Task A must be rerun without the frontier supplier. If it fails, preserve the first causal failure and acquire only that missing sub-capability. No replay of the same task without a documented root-cause change.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4520aec1f31baba438af5f30f9416a3eb53f5bfd",
+    "real_outcome": "Independently determine whether Brain's existing public GitHub Actions runner plus exact ASTRA runtime plus anonymous GPT-OSS 20B planner is an admissible zero-cost non-frontier route for open-ended technical research, using the real current frontier-dependency blocker as the task.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Produce dependency-free real Task-B evidence for the active frontier capability, or one exact causal failure.",
+      "proxy_goals_deleted": [
+        "another synthetic planner benchmark",
+        "private GitHub Actions repair",
+        "Mistral account creation",
+        "new cognition engine"
+      ],
+      "surviving_necessity": "Run one real cross-domain research task on a non-frontier execution path."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "SUPERWORKER-UNIFIED-1 orchestration/execution machinery",
+        "exact current ASTRA runtime",
+        "public verification-capsule-runner GitHub Actions surface",
+        "legacy Pollinations anonymous planner route",
+        "Brain model-independent controller and verification machinery"
+      ],
+      "external_existing_routes_checked": [
+        "Pollinations legacy anonymous openai-fast route currently live",
+        "current Pollinations model registry identifies openai-fast as GPT-OSS 20B",
+        "Mistral free API route exists but requires account/key and loses to anonymous reuse"
+      ],
+      "capability_work_deleted": [
+        "No new planner implementation",
+        "No private runner repair",
+        "No Mistral account/key",
+        "No new provider infrastructure"
+      ],
+      "surviving_gap": "Need one real dependency-free open-ended research execution with exact supplier/runtime provenance and independent verification."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The current blocker is proof of non-frontier open-ended planning quality; persistence, tool execution, provenance, and public compute already exist.",
+      "delete_bypass_substitute_options": [
+        "Delete private Actions from this path and use public runner",
+        "Reuse anonymous GPT-OSS before provisioning any provider account",
+        "Use exact existing ASTRA runtime rather than rewriting orchestration"
+      ],
+      "surviving_causal_blocker": "Non-frontier planner route has not yet completed a real cross-domain open-ended research task under current frontier bar."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "PUBLIC_GITHUB_ACTIONS + EXACT_ASTRA_RUNTIME + ANONYMOUS_POLLINATIONS_OPENAI_FAST_GPT_OSS_20B",
+        "MISTRAL_FREE_API + ASTRA_RUNTIME",
+        "BUILD_NEW_NONFRONTIER_PLANNER"
+      ],
+      "losing_routes_reason": "The first route is already reachable, credential-free, zero incremental spend, and reuses byte-identical runtime; alternatives add accounts or implementation work before falsification.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Verify the real decision artifact against live public model-registry evidence, exact runtime blob identity, planner transcript, and independent deterministic checks."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Assumption that SUPERWORKER-UNIFIED-1 itself proves frontier research breadth",
+        "Assumption that a new planner provider/account is required",
+        "Private Actions as required execution surface"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "credential-free non-frontier planning route qualification",
+        "public zero-cost execution",
+        "planner provenance capture"
+      ],
+      "fresh_reuse_plan": "If Task B passes, rerun or replace Task A through the same non-frontier route because the current target requires frontier-model dependency removed for both independent real tasks."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused current runtime inspection",
+        "Reused existing public runner",
+        "Reused current live planner endpoint evidence",
+        "No provider-account search beyond the already inferior Mistral fallback"
+      ],
+      "search_stop_decision": "An adequate zero-cost non-frontier candidate route is already live; additional provider search cannot justify delaying one decisive real execution.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PUBLIC_GITHUB_ACTIONS_EXACT_ASTRA_GPT_OSS_20B",
+      "MISTRAL_FREE_API_ASTRA",
+      "NEW_PLANNER_IMPLEMENTATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PRIVATE_GITHUB_ACTIONS_REPAIR",
+      "NEW_MISTRAL_ACCOUNT",
+      "NEW_COGNITION_ENGINE",
+      "SYNTHETIC_PLANNER_BENCHMARK"
+    ],
+    "selected_surviving_route": "PUBLIC_GITHUB_ACTIONS_EXACT_ASTRA_GPT_OSS_20B",
+    "why_selected_route_is_fastest_sufficient": "It is already live, anonymous, credential-free, public-runner compatible, zero incremental spend, and uses Brain's exact current ASTRA runtime. One real execution can decisively pass or expose the next causal gap.",
+    "expected_parent_level_state_change": "Execute one real cross-domain AI-systems research task through the public $0 ASTRA runtime using a credential-free non-frontier GPT-OSS planner, independently verify the decision artifact and supplier/runtime identity, and localize any remaining gap without claiming frontier capability acquisition unless dependency-free breadth evidence is sufficient.",
+    "stop_condition": "Stop after exactly one public-runner Task-B execution reaches a terminal result and is reconciled. If it passes, record dependency-free Task-B evidence and recompute whether Task A must be rerun without the frontier supplier. If it fails, preserve the first causal failure and acquire only that missing sub-capability. No replay of the same task without a documented root-cause change."
+  },
+  "execution_result": {
+    "route": "PUBLIC_GITHUB_ACTIONS_EXACT_ASTRA_ANONYMOUS_POLLINATIONS",
+    "public_runs": [
+      36622236168,
+      36622510442
+    ],
+    "verdict": "FAIL",
+    "first_terminal_route_failure": "PLANNER_ALL_ROUTES_FAILED_HTTP_402_ON_REAL_PROMPT",
+    "evidence_path": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json",
+    "capability_credit": false,
+    "residual_gap_credit": true
+  }
+}

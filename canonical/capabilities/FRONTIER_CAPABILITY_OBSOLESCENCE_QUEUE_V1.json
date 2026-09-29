@@ -72,15 +72,16 @@
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "objective": "Acquire the documented real frontier capability of open-ended agentic technical research and scientific problem-solving. Space cargo is Evidence Task A only; complete a materially different real Task B before any acquisition claim.",
     "selection_metric": "VERIFIED_FRONTIER_CAPABILITY_STRENGTH_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "CROSS_DOMAIN_GENERAL_TRANSFER_AND_FRONTIER_DEPENDENCY_REMOVAL_REMAIN_UNPROVEN",
+    "exact_blocker": "RELIABLE_ZERO_COST_NONFRONTIER_OPEN_ENDED_PLANNER_FOR_REAL_PROMPT_UNPROVEN__POLLINATIONS_ANONYMOUS_REJECTED_402",
     "evidence_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
-    "repair_status": "CANDIDATE_EVIDENCE_A_ONLY__NO_FRONTIER_CAPABILITY_PROMOTION",
-    "prohibition": "DO_NOT_COUNT_NARROW_DOMAIN_TOOL_AS_FRONTIER_CAPABILITY__DO_NOT_COUNT_SAME_DOMAIN_PARAMETER_VARIATION_AS_FRONTIER_FRESH_REUSE__NO_SYNTHETIC_BENCHMARK_SUBSTITUTE_FOR_REAL_TASK_B",
-    "next_action": "SELECT_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__RUN_EXACT_BASE_OBS__REUSE_GENERAL_ROUTE__VERIFY_REAL_RESULT__ADJUDICATE_FRONTIER_CAPABILITY",
+    "repair_status": "POLLINATIONS_ANONYMOUS_ROUTE_FALSIFIED__LOCAL_OPEN_MODEL_ROUTE_SELECTED_FOR_FRESH_OBS",
+    "prohibition": "NO_POLLINATIONS_TASK_REPLAY__NO_API_KEY_OR_ACCOUNT_REQUEST_BEFORE_LOCAL_OPEN_MODEL_ROUTE_IS_FALSIFIED__NO_SYNTHETIC_BENCHMARK_SUBSTITUTE_FOR_REAL_TASK_B",
+    "next_action": "FRESH_EXACT_BASE_OBS__PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_4B_GGUF__REAL_TASK_B_ONCE__INDEPENDENT_VERIFY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "frontier_target_record": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
     "evidence_A": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
-    "supporting_domain_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json"
+    "supporting_domain_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json",
+    "last_route_falsification": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [

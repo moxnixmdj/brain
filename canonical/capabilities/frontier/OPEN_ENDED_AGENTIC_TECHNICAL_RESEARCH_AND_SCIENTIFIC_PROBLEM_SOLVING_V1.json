@@ -50,8 +50,12 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "REQUIRED__UNSPENT"
+    "status": "UNSPENT_AFTER_PROVIDER_ROUTE_FALSIFICATION",
+    "failed_route": "ANONYMOUS_POLLINATIONS_LEGACY_PLANNER",
+    "falsification_evidence": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json",
+    "next_candidate": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_4B_GGUF",
+    "requirement": "Complete a materially different dependency-free real Task B through a non-frontier route; Pollinations attempt did not reach planner execution."
   },
   "obsolescence_status": "NOT_YET_PROVEN",
-  "residual_gap": "Cross-domain transfer and frontier-dependency removal remain unproven."
+  "residual_gap": "Dependency-free open-ended planning for real prompt load remains unproven; anonymous Pollinations is rejected, local open-model execution is next."
 }

@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_ROUTE_FALSIFICATION_V1",
+  "evidence_id": "NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1",
+  "status": "TERMINAL_ROUTE_FAIL_RECONCILED__NO_TASK_REPLAY",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_task": "Adjudicate the live non-frontier zero-cost planning/execution route for Brain using public runner evidence.",
+  "execution_surface": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "public": true,
+    "runtime_git_blob": "dae3f042da75ec5289063bcf74f913f7f31bebbc"
+  },
+  "attempt_1": {
+    "run_id": 36622236168,
+    "public_commit": "802870009be44cd0ee3244448cbdc01c867980e2",
+    "result": "BLOCKED_PRE_PLANNER",
+    "first_causal_failure": "GOAL_COMPILATION_FAILED:FileNotFoundError",
+    "root_cause": "PUBLIC_CAPSULE_MISSING_BOUND_CAPABILITY_REGISTRY_V1",
+    "independent_facts": {
+      "openai_fast_registry_description": "GPT-OSS 20B Reasoning LLM (OVH)",
+      "openai_fast_tier": "anonymous",
+      "tiny_credential_free_structured_probe": "PASS"
+    }
+  },
+  "root_cause_repair": {
+    "public_commit": "44c8e2a6384341d6f0d424cbe8b3ebab2793996f",
+    "changes": [
+      "add exact Brain BOUND_CAPABILITY_REGISTRY_V1.json",
+      "set allow_optional_model_planner=true"
+    ],
+    "cognition_algorithm_changed": false,
+    "task_changed": false,
+    "provider_changed": false
+  },
+  "attempt_2": {
+    "run_id": 36622510442,
+    "result": "BLOCKED_AT_REAL_PLANNER_TRANSPORT",
+    "first_causal_failure": "PLANNER_ALL_ROUTES_FAILED",
+    "planner_errors": [
+      {
+        "model": "openai-fast",
+        "http_status": 402
+      },
+      {
+        "model": "openai",
+        "http_status": 402
+      },
+      {
+        "model": "mistral",
+        "http_status": 402
+      }
+    ],
+    "independent_live_registry_check": "PASS_OPENAI_FAST_IS_GPT_OSS_20B_TIER_ANONYMOUS",
+    "independent_tiny_structured_probe": "PASS",
+    "interpretation": "Anonymous legacy access is live for tiny requests but is not reliable/admissible for the real open-ended planner payload; current Pollinations documentation/debug guidance treats 402 as billing/Pollen failure."
+  },
+  "route_verdict": "REJECT_POLLINATIONS_ANONYMOUS_AS_CURRENT_REAL_PLANNER_ROUTE",
+  "capability_verdict": "FRONTIER_CAPABILITY_ACQUISITION_UNPROVEN",
+  "frontier_dependency_removed": false,
+  "real_task_B_completed": false,
+  "progress_credit": {
+    "reusable_capability": false,
+    "verified_real_task": false,
+    "fresh_reuse": false,
+    "frontier_dependency_removed": false,
+    "residual_gap_localized": true
+  },
+  "localized_gap": "RELIABLE_ZERO_INCREMENTAL_COST_NONFRONTIER_OPEN_ENDED_PLANNER_SUPPLIER_FOR_REAL_PROMPT_LOAD",
+  "obs_recompute": {
+    "support_actions_without_real_output": 2,
+    "support_budget_exhausted": true,
+    "next_rule": "RECOMPUTE_ROUTE__DO_NOT_REPLAY_POLLINATIONS_TASK",
+    "strongest_current_candidate": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_4B_GGUF",
+    "reason": "No account/key/payment, public zero-cost compute, open model, current reasoning/tool-use capable 4B GGUF, and no frontier supplier in the planning loop."
+  },
+  "incremental_spend_usd": 0
+}
