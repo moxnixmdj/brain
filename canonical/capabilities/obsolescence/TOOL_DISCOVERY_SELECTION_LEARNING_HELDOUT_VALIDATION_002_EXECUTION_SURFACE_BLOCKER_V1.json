@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_002_EXECUTION_SURFACE_BLOCKER_V1",
-  "status": "WAITING_ON_CALLABLE_TOOLSET_CONNECTION__HELDOUT_GATE_002_UNSPENT",
+  "status": "WAITING_ON_CALLABLE_SSH_OR_EQUIVALENT_ZERO_SPEND_REMOTE_LINUX_BRIDGE__HELDOUT_GATE_002_UNSPENT",
   "checked_on": "2026-09-29",
   "source_pr": 85,
   "pr_head_before_receipt": "6cc8fb7b3e1bb5697de6bef43d0f64e4844c218a",
@@ -63,7 +63,8 @@
     "DO_NOT_CREATE_UNVERIFIABLY_METERED_SPRITES_OR_OTHER_INFRASTRUCTURE",
     "DO_NOT_RETRY_PRIVATE_GITHUB_ACTIONS_PRE_RUNNER_FAILURE",
     "DO_NOT_SEARCH_MORE_EXECUTOR_PROVIDERS_UNLESS_THE_CALLABLE_TOOLSET_CHANGES",
-    "DO_NOT_REPEAT_PLUGIN_DIRECTORY_OR_EXECUTOR_PROVIDER SEARCH UNTIL TOOLSET OR CONNECTION STATE CHANGES"
+    "DO_NOT_REPEAT_PLUGIN_DIRECTORY_OR_EXECUTOR_PROVIDER SEARCH UNTIL TOOLSET OR CONNECTION STATE CHANGES",
+    "DO_NOT_TREAT_RAILWAY_CHATGPT_PLUGIN_CONNECTION_AS_SUFFICIENT_FOR_ANONYMOUS_SSH_UNLESS_A_CALLABLE_TOOL_EXPLICITLY_EXPOSES_THAT_PATH"
   ],
   "latest_recheck": {
     "vercel": {
@@ -79,8 +80,8 @@
       "evidence": "Current Sprites MCP is loaded and authenticated; list_sprites reports org mohammad-sadek with zero sprites and zero running/warm/cold environments. The callable tool surface exposes create/exec/files/network policy but no account billing, trial-credit balance, spend cap, or remaining-credit primitive. Official Sprites pricing is metered during active use and trial credit eligibility is account/org-specific, so creating a sprite remains fail-closed under hard-$0 governance."
     },
     "railway": {
-      "status": "VERIFIED_FREE_ANONYMOUS_VM__CHATGPT_PLUGIN_AVAILABLE_BUT_UNINSTALLED",
-      "evidence": "Official Railway documentation on 2026-09-29 confirms ssh railway.new provides an unclaimed Linux VM for 60 minutes with 2 vCPU/2 GB RAM, no account and no card; nobody pays for unclaimed compute. Plugin-directory search returns the Railway ChatGPT plugin as AVAILABLE but installed=false. Current session therefore has a verified-zero-spend substrate but no connected invocation bridge."
+      "status": "VERIFIED_FREE_ANONYMOUS_VM__PUBLISHED_CHATGPT_PLUGIN_NOT_AN_ANONYMOUS_SSH_BRIDGE",
+      "evidence": "Railway officially documents ssh railway.new as a no-account/no-card unclaimed Linux VM with 60-minute build time, 2 vCPU, and 2 GB RAM. Railway's published ChatGPT plugin connects through OAuth to the user's Railway account and hosted MCP. Railway's own use-railway skill routes SSH and exact command execution through the Railway CLI, not the hosted Remote MCP. Railway Sandboxes require a Railway account plus an existing project/environment and consume resource usage. Therefore installing/connecting the published ChatGPT plugin alone does not establish a callable or hard-$0 bridge to the anonymous ssh railway.new VM."
     },
     "generic_ssh": {
       "status": "UNAVAILABLE",
@@ -123,10 +124,10 @@
       "evidence": "Official E2B pricing currently advertises a free Hobby tier with $100 one-time usage credit, no credit card, sessions up to one hour. Current ChatGPT plugin-directory search returns no E2B plugin, so no authenticated/callable bridge exists in this session."
     }
   },
-  "only_remaining_truth_transition": "CONNECT_RAILWAY_PLUGIN_OR_EQUIVALENT_VERIFIED_ZERO_SPEND_REMOTE_LINUX_BRIDGE__RUN_HELDOUT_VALIDATION_002_EXACTLY_ONCE__RECONCILE",
+  "only_remaining_truth_transition": "CONNECT_A_TOOL_THAT_CAN_INVOKE_SSH_RAILWAY_NEW_WITHOUT_USER_LAPTOP_OR_EQUIVALENT_PROVABLY_ZERO_SPEND_REMOTE_LINUX_BRIDGE__RUN_HELDOUT_VALIDATION_002_EXACTLY_ONCE__RECONCILE",
   "latest_connector_directory_recheck": {
     "checked_on": "2026-09-29",
-    "result": "ONE_VERIFIED_ZERO_SPEND_EXECUTOR_PLUGIN_EXISTS_BUT_REQUIRES_CONNECTION",
+    "result": "VERIFIED_ZERO_SPEND_EXECUTOR_EXISTS__NO_CURRENT_CONNECTOR_PROVEN_TO_INVOKE_ITS_ANONYMOUS_SSH_PATH",
     "searched_categories": [
       "Railway remote Linux VM",
       "E2B sandbox",
@@ -136,16 +137,18 @@
       "Modal sandbox"
     ],
     "findings": [
-      "Railway plugin is available in the ChatGPT plugin directory but is not installed/connected.",
+      "Railway anonymous ssh railway.new is a verified zero-spend execution substrate.",
+      "Railway's published ChatGPT plugin is available but uninstalled; official Railway routing says SSH/exact command execution belongs to the CLI path while the published plugin uses OAuth-scoped hosted MCP.",
+      "Railway Sandboxes require an account/project/environment and consume resource usage, so they do not replace the anonymous hard-$0 SSH route.",
       "No E2B, iximiuz, Daytona, Modal, or generic SSH sandbox plugin was returned.",
-      "Sprites is already callable, but account-specific zero-spend eligibility cannot be proven through its current MCP surface.",
-      "DigitalOcean and Remote Desktop remain installed but are already disqualified by zero-credit and no-user-laptop constraints."
+      "Sprites is callable, but account-specific zero-spend eligibility cannot be proven through its current MCP surface.",
+      "DigitalOcean and Remote Desktop remain disqualified by zero-credit and no-user-laptop constraints."
     ]
   },
   "shortest_known_route": {
     "surface": "Railway anonymous VM",
     "invocation": "ssh railway.new",
-    "status": "VERIFIED_ZERO_SPEND_SUBSTRATE__PENDING_CHATGPT_PLUGIN_CONNECTION",
-    "reason": "Railway officially states unclaimed VMs are free, require no account/card, last 60 minutes, and nobody pays for their compute. The Railway ChatGPT plugin is available but not connected; installing/connecting a plugin requires explicit user action and cannot be completed autonomously from this session."
+    "status": "VERIFIED_ZERO_SPEND_SUBSTRATE__NO_CURRENT_INVOCATION_BRIDGE",
+    "reason": "Railway officially states unclaimed VMs are free, require no account/card, last 60 minutes, and nobody pays for their compute. The current ChatGPT container cannot reach SSH/DNS. The published Railway ChatGPT plugin is OAuth/account scoped and Railway's own skill routes SSH through the CLI, so plugin connection by itself is not sufficient evidence that this anonymous route is callable."
   }
 }
