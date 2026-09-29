@@ -70,20 +70,21 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Keep HELDOUT-004 frozen/unspent. Exhausted currently connected command-capable routes under hard-$0 constraints. iximiuz Labs exposes an official remote MCP tested with ChatGPT and a $0/no-card Basic plan plus an official Debian Trixie playground, but the connector is not bound in the current session and free-tier Internet egress is explicitly limited. Bind the custom MCP first, then separately qualify required Debian metadata/manpage egress, faithful APT/Xapian/QR surface, and exact runtime closure before any HELDOUT-004 START.",
+    "objective": "Keep HELDOUT-004 frozen/unspent. iximiuz Labs remains a technically valid hard-zero MCP candidate, but current OpenAI custom-MCP developer-mode availability and the current authorized ChatGPT tool surface do not provide a callable binding path here. Resume discovery/qualification of one directly callable hard-zero remote Linux route before any H004 START.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__IXIMIUZ_REMOTE_MCP_HARD_ZERO_CONTRACT_AND_CHATGPT_CUSTOM_CONNECTOR_PATH_PROVEN__CONNECTOR_NOT_BOUND_IN_CURRENT_SESSION__FREE_TIER_REQUIRED_EGRESS_UNQUALIFIED",
-    "evidence_path": "canonical/capabilities/obsolescence/H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_20260929_V1.json",
-    "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__BUILTIN_AND_RAILWAY_CARRIERS_REJECTED__IXIMIUZ_HARD_ZERO_REMOTE_MCP_ROUTE_DISCOVERED__CUSTOM_CONNECTOR_UNBOUND__EGRESS_UNQUALIFIED__NO_CAPABILITY_RUNTIME_REPAIR_REQUIRED",
-    "prohibition": "NO_IXIMIUZ_PLAYGROUND_START_BEFORE_GUARDED_QUALIFICATION_INTENT__NO_HELDOUT_004_START__NO_HELDOUT_003_REPLAY__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE",
+    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__IXIMIUZ_REMOTE_MCP_CANDIDATE_VALID__CURRENT_AUTHORIZED_CHATGPT_CUSTOM_MCP_BINDING_UNAVAILABLE__NEXT_CALLABLE_HARD_ZERO_REMOTE_LINUX_ROUTE_UNQUALIFIED",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_IXIMIUZ_ACCESS_PATH_REJECTION_20260929_V1.json",
+    "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__BUILTIN_RAILWAY_AND_IXIMIUZ_CURRENT_ACCESS_PATHS_REJECTED__NO_CAPABILITY_RUNTIME_REPAIR_REQUIRED",
+    "prohibition": "NO_IXIMIUZ_PLAYGROUND_START_WITHOUT_CALLABLE_AUTHORIZED_BINDING__NO_HELDOUT_004_START__NO_HELDOUT_003_REPLAY__NO_SPRITE_UNLESS_HARD_ZERO_PROVEN__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "BIND_IXIMIUZ_LABS_CUSTOM_MCP_THROUGH_CHATGPT_DEVELOPER_MODE__THEN_GUARDED_FREE_TIER_EGRESS_AND_DEBIAN_APT_XAPIAN_QR_EXACT_RUNTIME_CLOSURE_PREFLIGHT__NO_HELDOUT_004_START",
+    "next_action": "DISCOVER_AND_QUALIFY_ONE_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_DIRECT_CALLABLE_COMMAND_TRANSPORT__THEN_FAITHFUL_APT_XAPIAN_QR_SURFACE_AND_EXACT_RUNTIME_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
     "existing_chatgpt_linux_carrier_qualification_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json",
     "railway_anonymous_transport_qualification_path": "canonical/capabilities/obsolescence/H004_RAILWAY_ANONYMOUS_TRANSPORT_QUALIFICATION_20260929_V1.json",
-    "iximiuz_mcp_external_dependency_path": "canonical/capabilities/obsolescence/H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_20260929_V1.json"
+    "iximiuz_mcp_external_dependency_path": "canonical/capabilities/obsolescence/H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_20260929_V1.json",
+    "iximiuz_access_path_rejection": "canonical/capabilities/obsolescence/H004_IXIMIUZ_ACCESS_PATH_REJECTION_20260929_V1.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -200,13 +201,14 @@
     "next_action": "DISCOVER_AND_QUALIFY_ONE_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_DIRECT_CALLABLE_COMMAND_TRANSPORT__THEN_FAITHFUL_APT_XAPIAN_QR_SURFACE_AND_EXACT_RUNTIME_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START"
   },
   "iximiuz_mcp_h004_external_dependency_v1": {
-    "status": "DISCOVERED_HARD_ZERO_ROUTE__CUSTOM_CONNECTOR_UNBOUND__EGRESS_UNQUALIFIED",
+    "status": "TECHNICALLY_VALID_ROUTE__CURRENT_CHATGPT_BINDING_PATH_UNAVAILABLE__REJECTED_FOR_CURRENT_SURFACE",
     "evidence_path": "canonical/capabilities/obsolescence/H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_20260929_V1.json",
     "remote_mcp_endpoint": "https://labs.iximiuz.com/mcp",
     "chatgpt_custom_connector_path_proven": true,
     "basic_plan_hard_zero_contract_proven": true,
     "free_tier_required_egress_proven": false,
     "heldout_004_freshness": "UNSPENT",
-    "next_action": "BIND_IXIMIUZ_LABS_CUSTOM_MCP_THROUGH_CHATGPT_DEVELOPER_MODE__THEN_GUARDED_FREE_TIER_EGRESS_AND_DEBIAN_APT_XAPIAN_QR_EXACT_RUNTIME_CLOSURE_PREFLIGHT__NO_HELDOUT_004_START"
+    "next_action": "DISCOVER_AND_QUALIFY_ONE_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_DIRECT_CALLABLE_COMMAND_TRANSPORT__THEN_FAITHFUL_APT_XAPIAN_QR_SURFACE_AND_EXACT_RUNTIME_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START",
+    "access_path_rejection": "canonical/capabilities/obsolescence/H004_IXIMIUZ_ACCESS_PATH_REJECTION_20260929_V1.json"
   }
 }
