@@ -4,11 +4,11 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "SEMANTIC-PACKAGE-DISCOVERY-HELDOUT-VALIDATION-003",
-  "probe_state": "HELDOUT_003_FROZEN_UNSPENT__ONE_GENERIC_REPAIR_IMPLEMENTED_AND_BYTES_FROZEN__AWAITING_ZERO_SPEND_SURFACE_QUALIFICATION",
-  "current_parent_blocker": "HELDOUT_003_REQUIRES_ONE_QUALIFIED_ZERO_SPEND_REMOTE_EXECUTION_OF_FROZEN_REPAIR_BYTES",
-  "next_required_action_class": "QUALIFY_ZERO_SPEND_REMOTE_SURFACE_FOR_EXACT_REPAIR_BYTES_WITH_APT_XAPIAN_INDEX_APT_FILE_COMPLETE_APT_METADATA_AND_OUTBOUND_MANPAGES__THEN_EXECUTE_HELDOUT_003_EXACTLY_ONCE",
-  "forbidden_local_frontier": "TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__HELDOUT_002_REPLAY__MORE_THAN_ONE_GENERIC_REPAIR__HELDOUT_003_PREVIEW_OR_EXECUTION_BEFORE_REPAIR_FREEZE__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__TIMEOUT_INCREASE",
+  "active_probe": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
+  "probe_state": "COMPOSITE_HELDOUT_004_FROZEN_UNSPENT_FROM_PRE_REPAIR_UNEXPOSED_CASES__REPAIR_BYTES_FROZEN",
+  "current_parent_blocker": "COMPOSITE_HELDOUT_004_REQUIRES_ONE_QUALIFIED_ZERO_SPEND_REMOTE_EXECUTION_OF_EXACT_FROZEN_REPAIR_BYTES",
+  "next_required_action_class": "QUALIFY_EXISTING_ZERO_SPEND_RAILWAY_SURFACE_FOR_EXACT_REPAIR_BYTES__APT_XAPIAN_INDEX__APT_FILE__COMPLETE_APT_METADATA__OUTBOUND_MANPAGES__THEN_EXECUTE_COMPOSITE_HELDOUT_004_EXACTLY_ONCE",
+  "forbidden_local_frontier": "ANY_HELDOUT_003_EXECUTION__PREVIEW_OR_REPLAY__SECOND_RUNTIME_REPAIR__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__MERGE_OR_PROMOTION_BEFORE_004_RECONCILIATION",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 1,
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_HELDOUT_VALIDATION_003.json",
+  "active_probe_manifest": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_COMPOSITE_HELDOUT_VALIDATION_004.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -108,22 +108,22 @@
     "new_held_out_gate_required": true
   },
   "new_held_out_gate": {
-    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-HELDOUT-VALIDATION-003",
+    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
     "frozen_date": "2026-09-29",
-    "manifest_path": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_HELDOUT_VALIDATION_003.json",
-    "runner_path": "canonical/experiments/run_semantic_package_discovery_heldout_validation_003.py",
+    "manifest_path": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_COMPOSITE_HELDOUT_VALIDATION_004.json",
+    "runner_path": "canonical/experiments/run_semantic_package_discovery_composite_heldout_validation_004.py",
+    "contamination_receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_CONCURRENCY_CONTAMINATION_AND_004_COMPOSITE_FREEZE_V1.json",
     "cases": 4,
     "oracle_family_recall_min": 0.75,
     "top20_oracle_recall_min": 0.75,
-    "hard_validation_wall_s": 600,
+    "hard_validation_wall_s": 300,
     "execution_count": 0,
     "freshness": "UNSPENT",
-    "replay_authorized": false,
-    "promotion_authorized": false,
     "repair_runtime_blob_sha": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
     "repair_commit_sha": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
-    "repair_id": "RELEVANCE_FIRST_PACKAGE_CANDIDATE_GENERATION_WITH_BOUNDED_EXECUTABLE_ENUMERATION_V1",
-    "repair_freeze_commit_sha": "86406b1254b3b8eb290795a76661b7e57dcacf67"
+    "repair_freeze_commit_sha": "86406b1254b3b8eb290795a76661b7e57dcacf67",
+    "replay_authorized": false,
+    "promotion_authorized": false
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -185,5 +185,10 @@
     "synthetic_verification": "PASS__OPAQUE_EXECUTABLE_ADMITTED_BY_PACKAGE_RELEVANCE__SINGLE_BATCH_ENUMERATION__NON_TIERED_RANK",
     "heldout_literals_in_runtime": false,
     "freeze_commit": "86406b1254b3b8eb290795a76661b7e57dcacf67"
+  },
+  "heldout_003_concurrency_contamination": {
+    "receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_CONCURRENCY_CONTAMINATION_AND_004_COMPOSITE_FREEZE_V1.json",
+    "status": "QUARANTINED__DO_NOT_EXECUTE_ANY_003_AS_FRESH",
+    "contaminating_deployment": "6a941b93-71b0-47ab-878e-3c46c6993e22"
   }
 }

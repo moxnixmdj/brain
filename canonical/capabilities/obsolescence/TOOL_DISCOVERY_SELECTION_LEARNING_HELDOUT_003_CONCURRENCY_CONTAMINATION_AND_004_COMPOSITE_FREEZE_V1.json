@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_CONCURRENCY_CONTAMINATION_RECONCILIATION_V1",
+  "recorded_on": "2026-09-29",
+  "contaminating_validation": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+  "contaminating_deployment": "6a941b93-71b0-47ab-878e-3c46c6993e22",
+  "observed_start_marker": true,
+  "contaminating_source_head": "ab2f44153163028c850dee50e30c38b6287a9456",
+  "exposed_oracle_families": [
+    "qrencode",
+    "sox",
+    "jq",
+    "qpdf"
+  ],
+  "affected_pre_frozen_gates": [
+    "SEMANTIC-PACKAGE-DISCOVERY-HELDOUT-VALIDATION-003",
+    "SEMANTIC-RELEVANCE-EXECUTABLE-VERIFICATION-HELDOUT-VALIDATION-003"
+  ],
+  "rule": "NO_003_GATE_MAY_BE_EXECUTED_AS_FRESH_AFTER_THIS_MARKER",
+  "salvage_method": "COMPOSE_ONLY_CASES_ALREADY_FROZEN_BEFORE_REPAIR_AND_NOT_EXPOSED_BY_CONTAMINATING_EXECUTION",
+  "composite_gate": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
+  "composite_cases": [
+    {
+      "effect_id": "HELDOUT-MARKDOWN-EPUB-004",
+      "source_freeze": "89569377a6facbacdc959ef114c40514c4a413e4"
+    },
+    {
+      "effect_id": "HELDOUT-WAV-FLAC-004",
+      "source_freeze": "89569377a6facbacdc959ef114c40514c4a413e4"
+    },
+    {
+      "effect_id": "HELDOUT-RAR-EXTRACT-004",
+      "source_freeze": "89569377a6facbacdc959ef114c40514c4a413e4"
+    },
+    {
+      "effect_id": "HELDOUT-WEBP-CONVERT-004",
+      "source_freeze": "8aaf3369b35f9b8ed4a867a47d47bac8d16a220a"
+    }
+  ],
+  "no_new_test_case_invention": true,
+  "runtime_mutated": false
+}

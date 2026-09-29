@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_PACKAGE_DISCOVERY_COMPOSITE_HELDOUT_VALIDATION_V1",
+  "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_FROM_PRE_REPAIR_UNEXPOSED_CASES_AFTER_CONCURRENT_003_CONTAMINATION",
+  "frozen_on": "2026-09-29",
+  "provenance": {
+    "repair_commit": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
+    "repair_runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
+    "no_new_case_invention_after_repair": true,
+    "selection_rule": "UNION_OF_CASES_FROZEN_BEFORE_REPAIR__REMOVE_ANY_ORACLE_FAMILY_EXPOSED_BY_CONCURRENT_SEMANTIC_APT_CAPABILITY_HELDOUT_VALIDATION_003_EXECUTION__TAKE_ALL_REMAINING_DISTINCT_CASES",
+    "source_freezes": [
+      "8aaf3369b35f9b8ed4a867a47d47bac8d16a220a",
+      "89569377a6facbacdc959ef114c40514c4a413e4"
+    ],
+    "contaminating_execution": {
+      "validation_id": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+      "deployment_id": "6a941b93-71b0-47ab-878e-3c46c6993e22",
+      "execution_start_marker": "PB_HELDOUT_003_EXECUTION_START=1",
+      "exposed_oracle_families": [
+        "qrencode",
+        "sox",
+        "jq",
+        "qpdf"
+      ]
+    },
+    "excluded_due_exposure": [
+      "qrencode",
+      "sox",
+      "jq"
+    ],
+    "runtime_oracle_literal_precheck": {
+      "found": [
+        "webp"
+      ],
+      "pass": false
+    }
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-MARKDOWN-EPUB-004",
+      "goal": "Convert a Markdown document into an EPUB ebook file.",
+      "oracle_families": [
+        "pandoc"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-WAV-FLAC-004",
+      "goal": "Convert a WAV audio file into lossless FLAC audio.",
+      "oracle_families": [
+        "flac"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-RAR-EXTRACT-004",
+      "goal": "Extract the contents of a RAR archive into a directory.",
+      "oracle_families": [
+        "unar"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-WEBP-CONVERT-004",
+      "goal": "Convert a PNG image into WebP format.",
+      "oracle_families": [
+        "webp"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 300,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu 24.04/Noble preferred; equivalent complete Debian-family APT surface acceptable only with normal Packages metadata, all applicable Contents indexes, apt-file, apt-xapian-index/axi-cache, and outbound manpage access used by the frozen repair.",
+    "apt_file_required": true,
+    "apt_xapian_index_required": true,
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_manpage_enrichment_required": true,
+    "exact_runtime_bytes_required": true
+  },
+  "execution_count": 0,
+  "freshness": "UNSPENT",
+  "replay_authorized": false,
+  "promotion_authorized": false
+}
