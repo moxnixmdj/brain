@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_EXECUTION_NECESSITY_V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "bound_main_sha": "5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "unresolved_predicate": "The merged provider-neutral APT admission route has not yet been exercised end-to-end on the frozen unseen HELDOUT-003 mission through discovery, acquisition, real effect, independent verification, and external semantic oracle.",
+  "current_canonical_evidence": [
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json marks HELDOUT-003 FROZEN_UNSPENT with execution_count 0",
+    "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json forbids replay and makes the first terminal result authoritative",
+    "merged PR129 supplies the single authorized generic admission repair and focused regression proof"
+  ],
+  "prior_work_checked": [
+    "PR128",
+    "PR129",
+    "HELDOUT-005 authoritative result and replay incident",
+    "Railway carrier inventory",
+    "open pull requests"
+  ],
+  "recovery_ladder_decision": "No prior end-to-end HELDOUT-003 result exists to recover or re-adjudicate; fresh one-shot execution is the highest applicable step.",
+  "direct_causal_value": "This one execution decides whether TOOL_DISCOVERY_SELECTION_AND_LEARNING crosses the current discovery-to-real-effect integration residual or exposes the next exact causal blocker.",
+  "execution_constraints": {
+    "exactly_one_remote_carrier": true,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true,
+    "incremental_spend_usd": 0,
+    "replay_forbidden": true,
+    "second_repair_before_reconciliation_forbidden": true
+  },
+  "status": "LEASE_GUARD_PENDING__NO_EXECUTION_STARTED"
+}
