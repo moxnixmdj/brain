@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_FRONTIER_COMPARATIVE_RECONCILIATION_V1",
+  "reconciliation_id": "PR111-OMITTED-UPSTREAM-RESIDUAL-LEVERAGE-RECONCILIATION-20260929",
+  "status": "CURRENT_MULTI_TOOL_FRONTIER_REAFFIRMED_AFTER_TRUTH_FIRST_CHALLENGE",
+  "bound_main_sha": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "challenged_selection": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+  "omitted_candidate": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY",
+  "optimization_rule": "CORRECTNESS_AND_REAL_CAPABILITY_STRENGTH__THEN_MINIMUM_WALL_CLOCK__THEN_ZERO_INCREMENTAL_SPEND__THEN_MINIMUM_COMPUTE_COMPLEXITY",
+  "tool_learning_candidate": {
+    "verified_gain_already_inherited": {
+      "route": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+      "heldout_family_recall": 1,
+      "heldout_top20_recall": 1,
+      "wall_s": 16.233238,
+      "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a"
+    },
+    "known_unresolved_interfaces": [
+      {
+        "stage": "DISCOVERY_TO_APT_ACQUISITION_ADMISSION",
+        "proof": "auto_apt_cli_acquisition._viable_candidates rejects discovery_source != APT_CATALOG while inherited candidates emit APT_FULL_METADATA_XAPIAN and binding_kind apt",
+        "first_hard_drop": true
+      },
+      {
+        "stage": "APT_ACQUISITION_SCORE_CONTRACT",
+        "proof": "consumer applies legacy absolute score >= 12 while inherited route exposes Xapian match.weight on a distinct relevance scale",
+        "first_hard_drop": false
+      },
+      {
+        "stage": "INDEPENDENT_SEMANTIC_VERIFIER_ADMISSION",
+        "proof": "verify_pending_cli_binding requires len(matched_terms) >= 2 while inherited Xapian candidates currently emit matched_terms=[]",
+        "first_hard_drop": false
+      }
+    ],
+    "broader_residual": "Cross-ecosystem/open-ended tool learning remains wider than the verified Debian/APT CLI route even if these interfaces are repaired.",
+    "minimum_path_to_new_parent_level_win": [
+      "generic candidate-contract repair",
+      "fresh orthogonal end-to-end discover-bind-execute-verify validation",
+      "reconcile first downstream failure or verified gain"
+    ],
+    "first_repair_alone_can_close_parent_capability": false
+  },
+  "multi_tool_candidate": {
+    "existing_complete_real_work_evidence": [
+      {
+        "id": "ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001",
+        "status": "COMPLETE",
+        "proof": "deterministic capability graph planning and execution"
+      },
+      {
+        "id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
+        "status": "COMPLETE",
+        "proof": "runtime-dependent conditional branch plus independent verification"
+      },
+      {
+        "id": "ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001",
+        "status": "COMPLETE",
+        "proof": "runtime collection-dependent fan-out with per-item capability selection and independent decoding verification"
+      },
+      {
+        "id": "ASTRA-RUNTIME-MULTI-SOURCE-JOIN-002",
+        "status": "COMPLETE",
+        "proof": "two live sources joined into JSON and XLSX with independent cross-source verification"
+      },
+      {
+        "id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-004",
+        "status": "COMPLETE",
+        "proof": "heterogeneous rendered-browser to normalized JSON to XLSX composition with independent verification"
+      }
+    ],
+    "only_missing_high_leverage_predicate": "Fresh unseen composition of dependency planning, runtime branch/fan-out, join/state propagation, heterogeneous artifact production, and independent terminal verification in one bounded DAG.",
+    "next_action_runtime_mutation_required": false,
+    "next_action_count": 1,
+    "next_action": "Freeze then execute one fresh existing-route-only compound DAG gate.",
+    "pass_value": "Direct bounded frontier-obsolescence evidence for a high-leverage orchestration subcapability.",
+    "fail_value": "Localizes the first causal integration failure without speculative repair."
+  },
+  "external_frontier_calibration": [
+    {
+      "source": "Toolathlon-Verified",
+      "url": "https://github.com/hkust-nlp/Toolathlon",
+      "relevance": "108 verified real-world long-horizon tasks spanning multiple applications/tools; supports verifiable multi-tool execution as a frontier bar."
+    },
+    {
+      "source": "PeakBench",
+      "url": "https://arxiv.org/abs/2608.24509",
+      "relevance": "Separates logical dependency planning from physical scheduling; supports explicitly testing DAG correctness rather than counting tool calls."
+    },
+    {
+      "source": "OpenAI GPT-5.6",
+      "url": "https://openai.com/index/gpt-5-6/",
+      "relevance": "Reports Toolathlon as a tool-use evaluation, confirming multi-tool long-horizon execution is a current frontier comparison axis."
+    },
+    {
+      "source": "Anthropic Claude Opus 5.5",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "relevance": "Describes complex multi-tool orchestration as a core agent capability."
+    }
+  ],
+  "execution_surface_note": "GitHub Actions is currently failing before job execution with runner_id=0 and steps=[]; this is an execution-surface outage, not a capability result. Do not spend/falsify the fresh gate on that surface until admission is real.",
+  "decision": {
+    "selected_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "result": "PR111_SELECTION_REAFFIRMED",
+    "reason": "The omitted tool-learning residual is real and preserved, but closing its first tiny code seam cannot close the parent capability and exposes known downstream interfaces. The multi-tool route needs no repair before one fresh composition test and can produce a larger parent-level capability decision in one experiment.",
+    "deferred_residual": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY",
+    "invention_required_now": false
+  },
+  "next_action": "FREEZE_FRESH_RUNTIME_DEPENDENT_DAG_ORCHESTRATION_GATE__TEST_EXISTING_ROUTE_UNCHANGED__RECONCILE"
+}
