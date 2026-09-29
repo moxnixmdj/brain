@@ -635,6 +635,48 @@ def search_apt_packages(effect, limit=12):
             "errors":[{"error":"APT_CACHE_UNAVAILABLE"}],"binding_performed":False,
         }
     queries=effect_queries(effect)
+
+    # Fast discovery path: package relevance is enough to choose candidates.
+    # Executable enumeration, remote manpages, and archive hashing belong to
+    # binding/verification after a package has been selected, not discovery.
+    xapian_fast=_axi_cache_package_candidates(
+        effect,limit=max(24,min(50,max(1,int(limit))*3))
+    )
+    if xapian_fast:
+        candidates=[]
+        for ax in xapian_fast[:max(1,min(int(limit),50))]:
+            name=str(ax.get("name") or "").strip()
+            if not name:
+                continue
+            candidates.append({
+                "discovery_source":"APT_CATALOG",
+                "name":name,
+                "description":str(ax.get("description") or ""),
+                "query":"APT_XAPIAN_RELEVANCE",
+                "matched_terms":[],
+                "score":60+float(ax.get("relevance") or 0),
+                "integration_friction":0,
+                "required_secret_count":0,
+                "required_environment_count":0,
+                "zero_cost_eligible":True,
+                "eligibility_status":"LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+                "binding_kind":"apt",
+                "packages":[],
+                "remotes":[],
+                "package_relevance_source":"APT_XAPIAN_RELEVANCE",
+            })
+        return {
+            "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+            "effect":effect,
+            "source":"APT_CATALOG",
+            "source_url":None,
+            "queries":queries,
+            "candidate_count":len(candidates),
+            "candidates":candidates,
+            "errors":[],
+            "binding_performed":False,
+        }
+
     apt_queries=_apt_query_variants(queries)
     seen={}
     errors=[]
@@ -728,42 +770,6 @@ def search_apt_packages(effect, limit=12):
             }
             if prior is None or cand["score"]>prior["score"]:
                 seen[name]=cand
-    # Reuse the existing Apt Xapian index when available. This broadens
-    # package-level recall without requiring task words to appear in binary names.
-    for ax in _axi_cache_package_candidates(
-        effect,limit=max(24,min(50,max(1,int(limit))*3))
-    ):
-        name=str(ax.get("name") or "").strip()
-        if not name:
-            continue
-        prior=seen.get(name)
-        xscore=60+float(ax.get("relevance") or 0)
-        if prior is None:
-            seen[name]={
-                "discovery_source":"APT_CATALOG",
-                "name":name,
-                "description":str(ax.get("description") or ""),
-                "query":"APT_XAPIAN_RELEVANCE",
-                "matched_terms":[],
-                "score":xscore,
-                "integration_friction":0,
-                "required_secret_count":0,
-                "required_environment_count":0,
-                "zero_cost_eligible":True,
-                "eligibility_status":"LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-                "binding_kind":"apt",
-                "packages":[],
-                "remotes":[],
-                "package_relevance_source":"APT_XAPIAN_RELEVANCE",
-            }
-        else:
-            cand=dict(prior)
-            cand["score"]=max(float(cand.get("score",0)),xscore)
-            cand["package_relevance_source"]="APT_XAPIAN_RELEVANCE"
-            if not cand.get("description"):
-                cand["description"]=str(ax.get("description") or "")
-            seen[name]=cand
-
     literal_evidence=_apt_executable_evidence(
         effect,limit=max(24,min(50,max(1,int(limit))*3))
     )
