@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-RECURSIVE-OBS-CONTROL-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": "NONE__USER_AUTHORIZED_GOVERNANCE_CHANGE",
+  "causal_blocker": "OBS_USED_AS_OPTIONAL_STRATEGY_MEMORY_INSTEAD_OF_MANDATORY_RECURSIVE_PRE_ACTION_CONTROL_LOOP",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::OBS_USED_AS_OPTIONAL_STRATEGY_MEMORY_INSTEAD_OF_MANDATORY_RECURSIVE_PRE_ACTION_CONTROL_LOOP::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make recursive obsolescence analysis mandatory before consequential implementation work. Every action must OBS the goal, capability, blocker, proposed solution, verification method, inherited system, and OBS process itself; select the fastest sufficient surviving route; fail closed if an entire path can be deleted/bypassed/substituted. Make the OBS receipt generation-bound and invalidated by material state changes. Correct stale policy pointers so boot loads current laws/gates.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "CAPABILITY_ACQUISITION_ENGINE_LAW_V1 already requires real-task-first and search/reuse",
+    "CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3 already defines route ordering but does not require recursive OBS at every consequential action",
+    "GOAL_HIERARCHY_ACTION_GATE_V2 and CRITICAL_PATH_PRE_ACTION_GATE_V3 lack explicit seven-layer recursive OBS evidence",
+    "CANONICAL_POINTER still contains stale V2/V1 strategy/gate references after PR208"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Promote recursive OBS control law and versioned strategy/gates, correct canonical boot pointers, preserve terminal objective/hard-$0/truth-first/no-duplicate constraints, and do not create new synthetic capability probes.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly selected the recursive OBS control-loop design and ordered Brain to be updated perfectly as it should.",
+  "weakens_existing_guard": false
+}
