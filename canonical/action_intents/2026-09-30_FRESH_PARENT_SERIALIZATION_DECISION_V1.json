@@ -1,0 +1,355 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRESH-PARENT-SERIALIZATION-DECISION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute one fresh consequential model-independent technical decision from a plain goal through the current composed Brain stack; if it fails, localize only the first causal cognition gap; if it passes, count one parent fresh-reuse result.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR244 merged and independently verified MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "PR245 merged and restored OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1 as active",
+    "MODEL_NON_DEPENDENCE_LAW_V1 and trusted guard forbid models in credited cognitive execution paths",
+    "Existing deterministic capability_planner.py, goal_compiler.py, semantic_authorities.py, capability_discovery.py, astra_runtime.py, decision.synthesis.typed.stdlib, decision.synthesis.verify.stdlib",
+    "Fresh external challenger check: Z3 and pySMT supply typed SMT/optimization but still require symbolic problem formulation; ProbLog supplier evidence is preserved from run 36642420312 and does not remove plain-goal-to-structured-reasoning need",
+    "PR247 merged at 20259a493b8180d490e65448cbedd3ccf54ddaf0 and completed PR245 canonical coherence without runtime changes."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute this fresh parent task exactly once without model cognition or hand-authored controller actions. Preserve the first terminal result. On failure, localize only the first causal gap and do not repair against this same task. On success, independently verify and update only the parent evidence actually earned.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "20259a493b8180d490e65448cbedd3ccf54ddaf0",
+    "real_outcome": "Test whether Brain's current model-independent parent stack can turn one plain consequential technical objective into verified evidence-backed action and decision without hand-authored reasoning.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain fresh direct evidence about the full model-independent parent composition.",
+      "proxy_goals_deleted": [
+        "Build a generic reasoning kernel before observing a real parent failure",
+        "Add another model supplier",
+        "Hand-author the controller plan",
+        "Pre-type the decision evidence",
+        "Run a synthetic benchmark instead of a real project decision"
+      ],
+      "surviving_necessity": "The parent capability has not been freshly exercised after the verified synthesis acquisition."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "capability_planner.py",
+        "goal_compiler.py",
+        "semantic_authorities.py",
+        "capability_discovery.py",
+        "astra_runtime.py",
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib",
+        "existing verified CBOR, MessagePack, and BSON bound capabilities"
+      ],
+      "external_existing_routes_checked": [
+        "Z3 Optimize / SMT",
+        "pySMT",
+        "ProbLog preserved challenger",
+        "prior DriftNARS candidate evidence from PR241"
+      ],
+      "capability_work_deleted": [
+        "No new model",
+        "No new reasoning framework",
+        "No new decision engine",
+        "No bespoke controller action graph",
+        "No hand-authored typed decision input"
+      ],
+      "surviving_gap": "Unknown until fresh parent execution: whether deterministic plain-goal interpretation/planning can compose the existing capabilities into this technical decision."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Fresh composition proof gap. Do not assume a missing primitive before execution.",
+      "delete_bypass_substitute_options": [
+        "DELETE fresh parent proof: rejected because parent remains unproven.",
+        "BYPASS plain-goal reasoning by hand-authoring controller actions: rejected because it would hide the cognition gap.",
+        "SUBSTITUTE Z3/pySMT/ProbLog: non-dominating because each still requires typed symbolic/rule formulation before solving.",
+        "REUSE current composed Brain stack on one fresh task: survives."
+      ],
+      "surviving_causal_blocker": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_STACK_ON_FRESH_PLAIN_GOAL",
+        "SUBSTITUTE_Z3_OR_PYSMT_AFTER_MANUAL_FORMULATION",
+        "SUBSTITUTE_PROBLOG_AFTER_MANUAL_RULE_FORMULATION",
+        "BUILD_NEW_REASONING_KERNEL"
+      ],
+      "losing_routes_reason": "The current stack already contains planning, discovery, execution, verification and synthesis. A fresh parent task is cheaper and more informative than replacing or extending it before the first actual failure.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. The real effect is whether the plain goal reaches a verified repository-local decision artifact without model cognition or a hand-authored controller plan."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any speculative next reasoning primitive if the current parent stack succeeds",
+        "Any model-backed parent cognition route",
+        "Any duplicate fresh parent task while this single-flight task is unresolved"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "plain-goal compilation",
+        "capability planning",
+        "capability discovery",
+        "binary serialization execution",
+        "evidence-to-decision synthesis",
+        "independent decision verification"
+      ],
+      "fresh_reuse_plan": "This task is the required first fresh parent composition after synthesis acquisition. If it passes, a materially different parent task is required before any broad frontier-obsolescence claim."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR244 proof and PR245 reconciliation",
+        "Reuse existing public carrier",
+        "Reuse existing bound serialization suppliers",
+        "Stop framework search after typed-solver challengers fail to remove the plain-goal formulation boundary",
+        "Reissue exact-base binding after PR247 metadata-only reconciliation; mission/runtime/selected route unchanged."
+      ],
+      "search_stop_decision": "Current Brain composition is already executable and no challenger removes the untested plain-goal-to-structured-cognition boundary without requiring equivalent formulation work. Execute the fresh task now.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed immediately before action on 2026-09-29T23:13:00Z using inherited Brain routes plus current Z3/pySMT/ProbLog/DriftNARS challenger evidence.",
+      "revalidation_note": "PR247 changed canonical pointer/hierarchy/scoreboard coherence only. The selected model-independent parent stack, mission bytes, bound capability suppliers, and public carrier route are unchanged; route frontier and selected-route preflight remain within their leases."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_STACK_ON_FRESH_PLAIN_GOAL",
+      "SUBSTITUTE_Z3_OR_PYSMT_AFTER_MANUAL_FORMULATION",
+      "SUBSTITUTE_PROBLOG_AFTER_MANUAL_RULE_FORMULATION",
+      "BUILD_NEW_REASONING_KERNEL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "HAND_AUTHORED_CONTROLLER_ACTIONS",
+      "HAND_AUTHORED_TYPED_DECISION_INPUT",
+      "MODEL_BACKED_COGNITION",
+      "PREEMPTIVE_NEW_REASONING_KERNEL"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_STACK_ON_FRESH_PLAIN_GOAL",
+    "why_selected_route_is_fastest_sufficient": "It uses already-verified zero-cost Brain components and the already-qualified public carrier, while challengers add formulation/integration work before providing any new information about the actual parent composition gap.",
+    "expected_parent_level_state_change": "Execute one fresh consequential model-independent technical decision from a plain goal through the current composed Brain stack; if it fails, localize only the first causal cognition gap; if it passes, count one parent fresh-reuse result.",
+    "stop_condition": "Execute this fresh parent task exactly once without model cognition or hand-authored controller actions. Preserve the first terminal result. On failure, localize only the first causal gap and do not repair against this same task. On success, independently verify and update only the parent evidence actually earned.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T23:13:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_BRAIN_MODEL_INDEPENDENT_COMPOSED_PARENT_STACK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR244 merged model-independent synthesis",
+          "PR245 merged parent reconciliation",
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://microsoft.github.io/z3guide/docs/optimization/apioptimization/",
+          "https://pysmt.readthedocs.io/en/latest/",
+          "ProbLog documentation and preserved Brain public-run evidence"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/Z3Prover/z3",
+          "https://github.com/pysmt/pysmt",
+          "Brain verified bound CBOR/MessagePack/BSON supplier metadata"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh web search 2026-09-29 for model-independent symbolic reasoning/optimization alternatives",
+          "Prior Brain DriftNARS and formal-argumentation route discovery"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent open-ended technical decision planning evidence synthesis symbolic reasoning"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Z3 pySMT ProbLog DriftNARS non-LLM reasoning planning"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "constraint solver logic programming symbolic planner evidence decision composition"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current model-independent symbolic reasoning solver planning releases"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "Z3_OR_PYSMT_TYPED_CONSTRAINT_OPTIMIZATION",
+          "evidence": [
+            "Current Z3 optimization API and pySMT docs support symbolic constraints, optimization, model enumeration and multiple solvers."
+          ],
+          "qualification_evidence": [
+            "https://microsoft.github.io/z3guide/docs/optimization/apioptimization/",
+            "https://pysmt.readthedocs.io/en/latest/"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong for explicitly formalized constraints.",
+            "CAPABILITY_STRENGTH": "Powerful symbolic solving but does not itself convert arbitrary technical goals/evidence into a formal problem.",
+            "WALL_CLOCK": "Switching requires new formulation and integration before the diagnostic parent task.",
+            "INCREMENTAL_COST": "$0 open-source route.",
+            "RELIABILITY": "Mature deterministic solvers.",
+            "VERIFIABILITY": "Excellent once formalized, but does not remove the untested formulation boundary."
+          }
+        },
+        {
+          "route": "PROBLOG_WEIGHTED_LOGIC",
+          "evidence": [
+            "Fresh B+C public run 36642420312 already proved a model-independent weighted-rule supplier."
+          ],
+          "qualification_evidence": [
+            "Brain public run 36642420312",
+            "ProbLog documentation"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Useful for encoded probabilistic rules.",
+            "CAPABILITY_STRENGTH": "Adds weighted logical derivation but still requires rule/evidence encoding.",
+            "WALL_CLOCK": "Already available as supplier evidence but replacing current synthesis does not test the full parent stack faster.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Directly proven on public carrier after earlier substrate repairs.",
+            "VERIFIABILITY": "Strong supplier evidence; formulation boundary remains."
+          }
+        },
+        {
+          "route": "CURRENT_BRAIN_MODEL_INDEPENDENT_COMPOSED_PARENT_STACK",
+          "evidence": [
+            "Merged PR244 synthesis proof",
+            "Merged PR245 parent reconciliation",
+            "existing deterministic planner/compiler/discovery/runtime/verification capabilities"
+          ],
+          "qualification_evidence": [
+            "public runs 36642428325 and 36642601675",
+            "canonical bound capability registry"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "All credited components are deterministic/model-free and fail closed on unknowns.",
+            "CAPABILITY_STRENGTH": "Only route already composing Brain-owned planning/discovery/execution/verification with newly acquired synthesis.",
+            "WALL_CLOCK": "Immediate executable diagnostic with no new framework integration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Core components and synthesis were independently verified; parent composition itself is the exact unresolved question.",
+            "VERIFIABILITY": "Fresh terminal state directly identifies success or first causal failure."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger removes the plain-goal formulation/composition uncertainty faster than directly exercising the current stack.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_STACK_ON_FRESH_PLAIN_GOAL",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T23:13:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_STACK_ON_FRESH_PLAIN_GOAL",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:58:54Z",
+            "evidence": [
+              "DIRECT_PROBE: public ASTRA integration run 36642601675 completed SUCCESS on the same account carrier"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "CURRENT_BRAIN_MODEL_INDEPENDENT_RUNTIME_AND_BOUND_CAPABILITY_BYTES",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:13:00Z",
+            "evidence": [
+              "Current main 20259a493b8180d490e65448cbedd3ccf54ddaf0; PR247 changed only canonical coherence surfaces, while runtime/bound-capability bytes remain those independently verified by PR244."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "FRESH_PARENT_SERIALIZATION_FIXTURE",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:13:00Z",
+            "evidence": [
+              "Repository-local neutral fixture on exact action branch"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}

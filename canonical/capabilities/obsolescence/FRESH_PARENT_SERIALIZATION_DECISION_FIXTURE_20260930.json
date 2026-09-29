@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_CAPSULE_FIXTURE_V1",
+  "records": [
+    {
+      "id": "E1",
+      "claim": "carrier_ready",
+      "value": true,
+      "confidence": 1,
+      "source": "direct_probe",
+      "ref": "RUN-36642601675"
+    },
+    {
+      "id": "E2",
+      "claim": "incremental_spend_usd",
+      "value": 0,
+      "confidence": 1,
+      "source": "account_contract",
+      "ref": "HARD_ZERO"
+    },
+    {
+      "id": "E3",
+      "claim": "runtime_blob",
+      "value": "1e8252415c60a553bad8a05fae2d98217d0f5833",
+      "confidence": 1,
+      "source": "git",
+      "ref": "canonical/runtime/astra_runtime.py"
+    },
+    {
+      "id": "E4",
+      "claim": "status",
+      "value": "VERIFIED",
+      "confidence": 0.99,
+      "source": "independent_verifier",
+      "ref": "MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1"
+    }
+  ]
+}

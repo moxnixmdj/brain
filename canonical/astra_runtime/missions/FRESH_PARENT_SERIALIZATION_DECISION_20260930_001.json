@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "FRESH-PARENT-SERIALIZATION-DECISION-20260930-001",
+  "purpose": "Fresh real parent-capability composition test after verified model-independent evidence-to-decision synthesis. Start from a plain technical objective only; no hand-authored controller actions and no model planner.",
+  "goal": "Choose the best already-verified zero-cost binary serialization route for Project Brain evidence capsules among CBOR, MessagePack, and BSON. Use the representative source records in canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_DECISION_FIXTURE_20260930.json. For each viable already-bound route, preserve exact round-trip semantics, determine the encoded byte size and dependency/integration surface from authoritative bound capability metadata, reject any route that cannot be independently verified or violates hard zero incremental spend, preserve unresolved tradeoffs instead of guessing, and save an auditable final decision to canonical/astra_runtime/tmp/FRESH_PARENT_SERIALIZATION_DECISION_RESULT.json. Independently verify the selected decision and finish only after that verification.",
+  "steps": [
+    {
+      "id": "fresh-parent-serialization-decision",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "allow_optional_model_planner": false,
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "hand_authored_controller_actions_forbidden": true,
+    "plain_goal_compilation_required": true,
+    "independent_verification_required": true,
+    "prior_parent_task_replay_forbidden": true
+  }
+}
