@@ -259,5 +259,47 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertEqual(result["planner_model_last"], "stub")
         self.assertIn("OPTIONAL_MODEL_ROUTE_USED", result["stdout"])
 
+    def test_optional_model_planner_forces_one_finalization_after_evidence_budget(self):
+        evidence_plan = '{"actions":[{"type":"search_text","args":{"query":"MODEL_NON_DEPENDENCE_LAW_V1"},"why":"gather one admitted evidence item"}]}'
+        final_plan = '{"summary":"FORCED_FINALIZATION_FROM_EXISTING_EVIDENCE"}'
+        with mock.patch.object(
+            runtime,
+            "_planner_post",
+            side_effect=[
+                {"text": evidence_plan, "model": "stub", "duration_s": 0, "errors": []},
+                {"text": final_plan, "model": "stub", "duration_s": 0, "errors": []},
+            ],
+        ) as planner:
+            result = runtime.run_goal(
+                {"allow_optional_model_planner": True, "max_cycles": 1},
+                {"goal": "Research one fact, then provide a complete final answer."},
+            )
+        self.assertEqual(planner.call_count, 2)
+        self.assertEqual(result["controller_mode"], "OPTIONAL_MODEL_ADVISORY_FORCED_FINALIZATION")
+        self.assertTrue(result["forced_finalization"])
+        self.assertEqual(result["cycles"], 1)
+        self.assertEqual(result["trace"][-1]["phase"], "forced_finalization")
+        self.assertIn("FORCED_FINALIZATION_FROM_EXISTING_EVIDENCE", result["stdout"])
+        final_prompt = planner.call_args_list[-1].args[0]
+        self.assertIn("FINALIZATION-ONLY", final_prompt)
+        self.assertIn("DO NOT request more evidence", final_prompt)
+
+    def test_forced_finalization_fails_closed_on_empty_summary(self):
+        evidence_plan = '{"actions":[{"type":"search_text","args":{"query":"MODEL_NON_DEPENDENCE_LAW_V1"},"why":"gather evidence"}]}'
+        invalid_final = '{"summary":""}'
+        with mock.patch.object(
+            runtime,
+            "_planner_post",
+            side_effect=[
+                {"text": evidence_plan, "model": "stub", "duration_s": 0, "errors": []},
+                {"text": invalid_final, "model": "stub", "duration_s": 0, "errors": []},
+            ],
+        ):
+            with self.assertRaisesRegex(runtime.Blocker, "GOAL_FORCED_FINALIZATION_INVALID"):
+                runtime.run_goal(
+                    {"allow_optional_model_planner": True, "max_cycles": 1},
+                    {"goal": "Research one fact, then provide a complete final answer."},
+                )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
