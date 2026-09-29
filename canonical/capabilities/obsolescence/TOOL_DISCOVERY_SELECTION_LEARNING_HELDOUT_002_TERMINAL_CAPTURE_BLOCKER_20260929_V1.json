@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_TERMINAL_CAPTURE_BLOCKER_V1",
+  "recorded_on": "2026-09-29",
+  "source_pr": 85,
+  "source_head": "e44db80fdb53abfe9de3b4bc7d0a1537f596bfc2",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "deployment": {
+    "provider": "Railway",
+    "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+    "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+    "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
+    "deployment_id": "aa411a03-2a63-4708-bf1a-758acae7f72c"
+  },
+  "execution_count": 1,
+  "freshness": "SPENT",
+  "replay_authorized": false,
+  "terminal_result_observed": false,
+  "evidence": [
+    {
+      "source": "Railway Remote MCP",
+      "operation": "list_deployments + get_status + get_logs",
+      "outcome": "BLOCKED",
+      "exact_error": "You are sending tool calls too quickly. Try again in 1042s."
+    },
+    {
+      "source": "Railway Agent",
+      "operation": "read-only exact deployment inspection",
+      "outcome": "BLOCKED",
+      "exact_error": "Agent usage limit reached. Update your limit in usage settings."
+    },
+    {
+      "source": "Brain repository",
+      "operation": "fetch expected result artifact",
+      "path": "canonical/astra_runtime/evidence/BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002__RESULT.json",
+      "outcome": "ABSENT_404"
+    },
+    {
+      "source": "Brain repository",
+      "operation": "post-execution commit diff inspection",
+      "outcome": "NO_TERMINAL_RESULT_ARTIFACT_FOUND"
+    },
+    {
+      "source": "public web",
+      "operation": "exact deployment/project ID lookup on railway.com",
+      "outcome": "NO_RESULTS"
+    }
+  ],
+  "admissible_conclusion": "TERMINAL_RESULT_CAPTURE_CURRENTLY_UNAVAILABLE__NO_PASS_FAIL_OR_INFRA_VERDICT_AUTHORIZED",
+  "invariants": [
+    "DO_NOT_REPLAY_OR_REEXECUTE_HELDOUT_002",
+    "DO_NOT_RELEASE_EXECUTION_LEASE_BEFORE_TERMINAL_RECONCILIATION",
+    "DO_NOT_MERGE_OR_PROMOTE_PR85",
+    "DO_NOT_AUTHORIZE_SECOND_REPAIR",
+    "DO_NOT_INFER_TERMINAL_OUTCOME_FROM_START_MARKER"
+  ],
+  "next_truth_transition": "READ_ONLY_CAPTURE_EXACT_EXISTING_RAILWAY_DEPLOYMENT_TERMINAL_RESULT_WHEN_A_READ_SURFACE_IS_AVAILABLE__THEN_RECONCILE_ONCE__THEN_RELEASE_LEASE"
+}
