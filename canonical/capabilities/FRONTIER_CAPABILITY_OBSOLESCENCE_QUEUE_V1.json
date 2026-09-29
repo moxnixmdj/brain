@@ -72,16 +72,30 @@
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "objective": "Acquire the documented real frontier capability of open-ended agentic technical research and scientific problem-solving. Space cargo is Evidence Task A only; complete a materially different real Task B before any acquisition claim.",
     "selection_metric": "VERIFIED_FRONTIER_CAPABILITY_STRENGTH_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "RELIABLE_ZERO_COST_NONFRONTIER_OPEN_ENDED_PLANNER_FOR_REAL_PROMPT_UNPROVEN__POLLINATIONS_ANONYMOUS_REJECTED_402",
+    "exact_blocker": "DEPENDENCY_FREE_REAL_TASK_B_REMAINS_UNPROVEN__POLLINATIONS_REJECTED_402__QWEN3_5_4B_FAILED_TO_TERMINATE_BOUNDED_REAL_TASK",
     "evidence_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
-    "repair_status": "POLLINATIONS_ANONYMOUS_ROUTE_FALSIFIED__LOCAL_OPEN_MODEL_ROUTE_SELECTED_FOR_FRESH_OBS",
-    "prohibition": "NO_POLLINATIONS_TASK_REPLAY__NO_API_KEY_OR_ACCOUNT_REQUEST_BEFORE_LOCAL_OPEN_MODEL_ROUTE_IS_FALSIFIED__NO_SYNTHETIC_BENCHMARK_SUBSTITUTE_FOR_REAL_TASK_B",
-    "next_action": "FRESH_EXACT_BASE_OBS__PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_4B_GGUF__REAL_TASK_B_ONCE__INDEPENDENT_VERIFY",
+    "repair_status": "QWEN3_5_4B_REAL_TASK_ROUTE_FALSIFIED__STRONGER_LOCAL_9B_ROUTE_SELECTED_FOR_FRESH_OBS",
+    "prohibition": "NO_POLLINATIONS_REPLAY__NO_QWEN3_5_4B_SAME_TASK_REPLAY__NO_CYCLE_LIMIT_INFLATION_TO_FORCE_PASS__NO_API_ACCOUNT_OR_KEY_WHILE_STRONGER_LOCAL_ZERO_ACCOUNT_ROUTE_REMAINS_EXECUTABLE__NO_SYNTHETIC_BENCHMARK",
+    "next_action": "MERGE_4B_FALSIFICATION__THEN_FRESH_EXACT_BASE_OBS__PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF__FRESH_DIFFERENT_REAL_TASK_B_ONCE__INDEPENDENT_VERIFY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "frontier_target_record": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
     "evidence_A": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
     "supporting_domain_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json",
-    "last_route_falsification": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json"
+    "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
+    "next_candidate": {
+      "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
+      "base_model": "Qwen/Qwen3.5-9B",
+      "quantization_repo": "TheStageAI/Qwen3.5-9B-GGUF",
+      "quantization_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+      "quantization_bytes": 5060174144,
+      "quantization_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+      "source_urls": [
+        "https://huggingface.co/Qwen/Qwen3.5-9B",
+        "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF",
+        "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF/blob/main/release-manifest.json"
+      ],
+      "task_rule": "FRESH_DIFFERENT_REAL_TASK_B__NO_AI_SYSTEMS_TASK_REPLAY"
+    }
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
