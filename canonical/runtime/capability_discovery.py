@@ -313,8 +313,21 @@ def _semantic_term_variants(term):
 
 
 def _package_tag_tokens(tags):
-    """Flatten Debian's controlled Tag/Debtags ontology into semantic tokens."""
-    ordered=re.findall(r"[a-z0-9]+",str(tags or "").lower())
+    """Extract semantic values from Debian Tag/Debtags entries, not ontology keys."""
+    values=[]
+    for raw in str(tags or "").split(","):
+        item=raw.strip().lower()
+        if not item:
+            continue
+        value=item.split("::",1)[1] if "::" in item else item
+        value=value.strip("{} ")
+        for part in re.split(r"[|/]+",value):
+            part=part.strip("{} ")
+            if part:
+                values.append(part)
+    ordered=[]
+    for value in values:
+        ordered.extend(re.findall(r"[a-z0-9]+",value))
     tokens=set(ordered)
     tokens.update(
         ordered[i]+ordered[i+1]
@@ -322,7 +335,6 @@ def _package_tag_tokens(tags):
         if len(ordered[i])>=2 and len(ordered[i+1])>=2
     )
     return tokens
-
 
 def _package_lexical_tokens(name,description,tags=""):
     ordered=re.findall(r"[a-z0-9]+",(str(name)+" "+str(description)).lower())
