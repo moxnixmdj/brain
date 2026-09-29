@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1",
+  "status": "RESIDUAL_GAP_VERIFIED__ROUTE_DISCOVERY_REQUIRED",
+  "real_capability": true,
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "parent_families": [
+    "GOAL_DECOMPOSITION_AND_PLANNING",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "UNKNOWN_DOMAIN_ADAPTATION"
+  ],
+  "useful_behavior": "Given a fresh open-ended technical objective expressed in ordinary task language, deterministically derive an auditable structured graph of subgoals, unknowns, measurements, hard constraints, evidence needs, decision variables, and verification obligations; map solvable leaves to already-bound Brain capabilities before declaring any missing supplier effect; emit a precise missing effect only when no existing composition satisfies a leaf.",
+  "required_properties": [
+    "MODEL_INDEPENDENT",
+    "NO_PRETRAINED_ARTIFACT_IN_CREDITED_COGNITION_PATH",
+    "EXISTING_CAPABILITY_GRAPH_FIRST",
+    "DISTINGUISH_COMPOSITION_GAP_FROM_SUPPLIER_GAP",
+    "AUDITABLE_DECOMPOSITION",
+    "FAIL_CLOSED_ON_AMBIGUITY",
+    "PRESERVE_UNRESOLVED_UNKNOWNS",
+    "OUTPUT_EXECUTABLE_OR_VERIFIABLE_TYPED_TASK_GRAPH"
+  ],
+  "evidence": {
+    "source_pr": 246,
+    "public_run_id": 36644374149,
+    "artifact_id": 11067706810,
+    "artifact_digest": "sha256:57c6a188f8027c2788f4e2c6991fa8066799a55fb40771f17be6072a819e71d",
+    "classification": "PARENT_FRESH_TASK_FAIL_FIRST_CAUSAL_GAP_PRESERVED",
+    "exact_blocker": "PLAIN_GOAL_MULTI_CAPABILITY_OBJECTIVE_NOT_FORMULATED_INTO_STRUCTURED_EXISTING_CAPABILITY_GRAPH_BEFORE_SUPPLIER_DISCOVERY",
+    "model_free_execution": true,
+    "task_spent": true,
+    "replay_authorized": false
+  },
+  "known_non_solutions": [
+    "HAND_AUTHORED_CONTROLLER_ACTIONS",
+    "MODEL_PLANNER",
+    "WHOLE_GOAL_LEXICAL_SUPPLIER_DISCOVERY",
+    "DIRECT_PDDL_OR_SMT_WITHOUT_FORMULATION_LAYER",
+    "REPLAY_OR_TUNING_ON_SPENT_SERIALIZATION_TASK"
+  ],
+  "inherited_components": [
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/semantic_authorities.py",
+    "canonical/runtime/capability_discovery.py",
+    "decision.synthesis.typed.stdlib",
+    "decision.synthesis.verify.stdlib"
+  ],
+  "candidate_route_classes": [
+    "REUSE_OR_EXTEND_EXISTING_BRAIN_SEMANTIC_TASK_IR",
+    "CONTROLLED_NATURAL_LANGUAGE_OR_GRAMMAR_TO_TYPED_TASK_IR",
+    "HTN_OR_CLASSICAL_PLANNING_AFTER_GENERIC_ROLE_EXTRACTION",
+    "NARS_STYLE_GOAL_BELIEF_OPERATION_FORMULATION",
+    "PROGRAM_SYNTHESIS_OR_SEARCH_OVER_BOUND_CAPABILITY_EFFECT_GRAPH"
+  ],
+  "acceptance_evidence": {
+    "task_A": "One fresh real technical objective, materially different from the spent serialization task, compiled from plain goal to a correct typed task/evidence graph and independently verified.",
+    "task_B": "One materially different fresh objective transferred through the inherited same formulation route without task-specific grammar or replay tuning.",
+    "spent_serialization_task_may_be_reused": false,
+    "model_dependency_count": 0
+  },
+  "obsolescence_status": "NOT_YET_PROVEN",
+  "residual_gap": "NO_VERIFIED_MODEL_INDEPENDENT_ROUTE_YET_PROVEN_FOR_GENERIC_PLAIN_GOAL_TO_TYPED_TASK_EVIDENCE_GRAPH_FORMULATION",
+  "next_action": "RUN_EXACT_BASE_OBS_V3_LIVE_ROUTE_RACE_FOR_FORMULATION_CAPABILITY__SEARCH_EXISTING_BRAIN_AND_EXTERNAL_NON_MODEL_ROUTES__SELECT_FASTEST_SUFFICIENT_ROUTE__NO_SERIALIZATION_TASK_REPLAY"
+}
