@@ -59,7 +59,19 @@
       "BEFORE_SCARCE_GATE_SPEND"
     ],
     "unresolved_plausible_dominators_must_be_empty": true,
-    "selected_route_must_match_top_level": true
+    "selected_route_must_match_top_level": true,
+    "challenger_item_required_fields": [
+      "route",
+      "evidence",
+      "resolution",
+      "comparison"
+    ],
+    "challenger_resolution_values": [
+      "SELECTED",
+      "NON_DOMINATING",
+      "DISQUALIFIED"
+    ],
+    "no_challenger_rule": "EMPTY_CHALLENGER_LIST_REQUIRES_NONEMPTY_NEGATIVE_SEARCH_SUMMARY"
   },
   "route_frontier_types": {
     "discovery_required": "BOOLEAN",
@@ -113,8 +125,7 @@
     "obs_obs": [
       "analysis_steps_deleted_or_cached",
       "search_stop_decision",
-      "affected_layers_only_on_revalidation",
-      "challenger_refresh_decision"
+      "affected_layers_only_on_revalidation"
     ]
   },
   "deletion_first_order": [
