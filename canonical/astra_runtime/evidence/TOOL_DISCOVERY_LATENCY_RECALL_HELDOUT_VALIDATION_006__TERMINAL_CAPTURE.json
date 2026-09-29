@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_LATENCY_RECALL_HELDOUT_VALIDATION_006_TERMINAL_CAPTURE_V1",
+  "recorded_on": "2026-09-29",
+  "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+  "provider": "Railway",
+  "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+  "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+  "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
+  "deployment_id": "2c50a506-8a5f-452a-be2a-4c8a4f8a62b3",
+  "frozen_blobs": {
+    "runtime": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+    "runner": "cbae7e4d1a0de5ddf5df67f7a869bab7a3f66317",
+    "manifest": "3439e26ef4c650098db50f745105eed9b68be776"
+  },
+  "prestart_evidence": {
+    "exact_blob_match": true,
+    "surface_requalified": true,
+    "packages_index_count": 3,
+    "contents_all_count": 2,
+    "contents_total_count": 4,
+    "xapian_available": true,
+    "apt_file_available": true,
+    "pinned_apt_xapian_deb_sha256_verified": true,
+    "heldout_start_marker": "PB_HELDOUT_006_EXECUTION_START=1"
+  },
+  "execution": {
+    "validator_exit_code": 2,
+    "result_json_present": true,
+    "one_shot_complete": true,
+    "cases_completed": 4,
+    "cases_total": 4,
+    "total_wall_s": 50.988927,
+    "hard_validation_wall_s": 300,
+    "heldout_oracle_family_recall": 0.5,
+    "heldout_top20_oracle_recall": 0.5,
+    "acceptance_gate_pass": false,
+    "runtime_mutated_by_validator": false,
+    "candidate_packages_installed": false,
+    "candidate_binaries_executed": false,
+    "package_hints_used_by_runtime": false
+  },
+  "per_case": [
+    {
+      "effect_id": "HELDOUT-POSTSCRIPT-PDF-006",
+      "oracle_family": "ghostscript",
+      "oracle_found": true,
+      "oracle_name": "ghostscript-doc",
+      "oracle_rank": 3,
+      "wall_s": 1.598457
+    },
+    {
+      "effect_id": "HELDOUT-RECURSIVE-REGEX-006",
+      "oracle_family": "ripgrep",
+      "oracle_found": false,
+      "oracle_rank": null,
+      "wall_s": 17.552594
+    },
+    {
+      "effect_id": "HELDOUT-CRLF-LF-006",
+      "oracle_family": "dos2unix",
+      "oracle_found": true,
+      "oracle_name": "dos2unix",
+      "oracle_rank": 1,
+      "wall_s": 18.304119
+    },
+    {
+      "effect_id": "HELDOUT-7ZIP-CREATE-006",
+      "oracle_family": "7zip",
+      "oracle_found": false,
+      "oracle_rank": null,
+      "wall_s": 13.455648
+    }
+  ],
+  "monotonic_spend": {
+    "execution_count": 1,
+    "freshness": "SPENT",
+    "replay_authorized": false,
+    "rule": "NEVER_REPLAY_GATE_006"
+  }
+}
