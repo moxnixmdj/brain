@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "LOCAL-QWEN3_5-9B-BIOPHYSICS-REAL-TASK-B-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "DEPENDENCY_FREE_OPEN_ENDED_REAL_TASK_B_UNPROVEN__LOCAL_4B_FALSIFIED__STRONGER_LOCAL_9B_UNSPENT",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::DEPENDENCY_FREE_OPEN_ENDED_REAL_TASK_B_UNPROVEN__LOCAL_4B_FALSIFIED__STRONGER_LOCAL_9B_UNSPENT::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute a fresh materially different dependency-free real scientific Task B on rapid organism-scale growth using pinned local Qwen3.5-9B plus Brain's existing bounded research/tool loop, independently verify the scientific result and supplier provenance, and adjudicate only the cross-domain evidence actually earned.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Pollinations terminal falsification PR215",
+    "Qwen3.5-4B terminal falsification PR216 and run 36624408059",
+    "exact ASTRA runtime and public carrier",
+    "Qwen/Qwen3.5-9B official model",
+    "TheStageAI Qwen3.5-9B release manifest M Q4_K_M SHA256 f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exactly one fresh Qwen3.5-9B biophysics Task-B execution reaches a terminal result and is reconciled. No same-task replay or task-specific prompt/cycle tuning after seeing the result. Do not promote the parent frontier capability unless both the real result and dependency-removal requirements are independently satisfied.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9f272f59523d6bf1023a539a3479a35f1f897fd4",
+    "real_outcome": "Produce a scientifically defensible answer to the user's real question: whether an approximately 70 kg organism could become approximately 700 kg in seconds or minutes through massively parallel cellular growth, and identify the binding conservation/physiology limits.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Fresh cross-domain dependency-free research result in biology/biophysics.",
+      "proxy_goals_deleted": [
+        "replay failed AI-systems Task B",
+        "benchmark Qwen3.5-9B",
+        "increase cycle budget until a pass appears",
+        "design wet-lab procedures"
+      ],
+      "surviving_necessity": "Run one real non-procedural scientific task and verify the useful result."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "public GitHub Actions carrier",
+        "exact ASTRA goal loop",
+        "external local-model bridge",
+        "Qwen3.5-4B falsification evidence",
+        "Task A space-cargo evidence"
+      ],
+      "external_existing_routes_checked": [
+        "Qwen/Qwen3.5-9B official model",
+        "TheStageAI Qwen3.5-9B M Q4_K_M reproducible GGUF manifest",
+        "authoritative NCBI/PMC physiology and cell-cycle sources"
+      ],
+      "capability_work_deleted": [
+        "No new orchestrator",
+        "No hosted API",
+        "No account/key",
+        "No custom biological simulator",
+        "No synthetic benchmark"
+      ],
+      "surviving_gap": "Whether a materially stronger local non-frontier model can complete a genuinely different open-ended research task through the existing bounded tool loop."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The 4B supplier was behaviorally insufficient on the prior task, while carrier, runtime, model loading, bridge and provenance all passed.",
+      "delete_bypass_substitute_options": [
+        "Delete 4B replay",
+        "Bypass hosted-provider/account routes",
+        "Reuse same carrier/runtime/bridge",
+        "Substitute stronger 9B local supplier",
+        "Keep fresh task to avoid tuning against prior failure"
+      ],
+      "surviving_causal_blocker": "Dependency-free useful open-ended real-task completion remains unproven."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Qwen3.5-9B M Q4_K_M on existing public carrier with fresh biophysics Task B",
+        "larger local model if 9B falsified and carrier permits",
+        "Cloudflare free inference after explicit authorization",
+        "new planner implementation"
+      ],
+      "losing_routes_reason": "9B preserves every verified subsystem, needs no new account or infrastructure, fits the 16 GB public runner, and materially strengthens the one failed supplier component.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No benchmark. Verify exact model/runtime provenance, live use of authoritative scientific sources, deterministic mass/doubling/flow calculations, bounded task completion, and a structured scientific conclusion."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Qwen3.5-4B as active candidate",
+        "AI-systems Task-B replay",
+        "hosted planner assumption if 9B works"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "local open-model research planning",
+        "safe public-source retrieval",
+        "quantitative scientific synthesis"
+      ],
+      "fresh_reuse_plan": "This biophysics mission is the fresh cross-domain Task B. If it passes, separately reassess Task A dependency removal before any parent capability promotion."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse 4B carrier/build/bridge pattern",
+        "Reuse exact ASTRA runtime",
+        "Reuse public-runner proof",
+        "Use existing authoritative sources instead of broad provider search"
+      ],
+      "search_stop_decision": "The 9B M quant is a pinned, stronger, zero-account local route with ample carrier headroom; further supplier search cannot justify delaying one decisive fresh real execution.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "LARGER_LOCAL_MODEL",
+      "CLOUDFLARE_AFTER_AUTH",
+      "NEW_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "QWEN3_5_4B_REPLAY",
+      "POLLINATIONS_REPLAY",
+      "HOSTED_API_ACCOUNT_PROVISIONING",
+      "SYNTHETIC_BENCHMARK",
+      "WET_LAB_PROCEDURAL_DESIGN"
+    ],
+    "selected_surviving_route": "LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+    "why_selected_route_is_fastest_sufficient": "It changes only the falsified supplier, preserves the already-proven zero-cost carrier/runtime/bridge, materially increases model capability, and tests transfer on a fresh real domain without frontier-model execution.",
+    "expected_parent_level_state_change": "Execute a fresh materially different dependency-free real scientific Task B on rapid organism-scale growth using pinned local Qwen3.5-9B plus Brain's existing bounded research/tool loop, independently verify the scientific result and supplier provenance, and adjudicate only the cross-domain evidence actually earned.",
+    "stop_condition": "Stop after exactly one fresh Qwen3.5-9B biophysics Task-B execution reaches a terminal result and is reconciled. No same-task replay or task-specific prompt/cycle tuning after seeing the result. Do not promote the parent frontier capability unless both the real result and dependency-removal requirements are independently satisfied."
+  }
+}
