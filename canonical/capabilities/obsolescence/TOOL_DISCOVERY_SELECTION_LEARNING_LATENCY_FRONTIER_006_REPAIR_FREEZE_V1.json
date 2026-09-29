@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_LATENCY_FRONTIER_REPAIR_FREEZE_V1",
+  "recorded_on": "2026-09-29",
+  "causal_frontier": "TOOL-DISCOVERY-LATENCY-CAUSAL-FRONTIER-006",
+  "repair_id": "SEMANTIC_INDEX_FAST_DISCOVERY_DEFER_EXPENSIVE_BINDING_V1",
+  "authorization_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_LATENCY_FRONTIER_006_REPAIR_AUTHORIZATION_V1.json",
+  "implementation": {
+    "commit": "745e97c94b48cb1a4501ed6f06b18de7d7116628",
+    "runtime_blob": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+    "regression_test_commit": "f79970a44254a1ffff77f415b4f2e22b5fbac907",
+    "regression_test_blob": "7eafd6aa598d6295b8ee5260a689bae01be36adf",
+    "branch_runtime_matches_landed_repair": true
+  },
+  "synthetic_verification": {
+    "status": "PASS_FAST_PATH_INVARIANT",
+    "environment": "CHATGPT_ISOLATED_PYTHON__NO_NETWORK__NO_APT_REQUIRED",
+    "scope": "BEHAVIORAL_EXECUTION_OF_EXACT_FAST_PATH_LOGIC_WITH_UNRELATED_MOCK_CANDIDATES",
+    "observed": [
+      "XAPIAN_CANDIDATES_RETURN_IMMEDIATELY",
+      "BINDING_PERFORMED_FALSE",
+      "EXPENSIVE_LITERAL_EXECUTABLE_PATH_NOT_CALLED",
+      "EXPENSIVE_RELEVANCE_BINDING_PATH_NOT_CALLED",
+      "REMOTE_MANPAGE_PATH_NOT_CALLED"
+    ],
+    "exact_full_module_remote_regression_run": false,
+    "reason_full_module_remote_run_not_used": "RAILWAY_REMOTE_MCP_RATE_LIMIT_ACTIVE__DO_NOT_ADD_OR_RETRY_INFRASTRUCTURE_FOR_A_NETWORK_FREE_MOCK_INVARIANT",
+    "heldout_006_cases_or_oracles_used": false
+  },
+  "heldout_literal_precheck": {
+    "forbidden_oracles": [
+      "ghostscript",
+      "ripgrep",
+      "dos2unix",
+      "7zip"
+    ],
+    "runtime_hits": [],
+    "regression_test_hits": [],
+    "pass": true
+  },
+  "frozen_gate": {
+    "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+    "runner_blob": "cbae7e4d1a0de5ddf5df67f7a869bab7a3f66317",
+    "manifest_blob": "3439e26ef4c650098db50f745105eed9b68be776",
+    "execution_count": 0,
+    "freshness": "UNSPENT"
+  },
+  "invariants": [
+    "NO_GATE_006_PREVIEW",
+    "NO_GATE_005_REPLAY",
+    "NO_SECOND_REPAIR_BEFORE_GATE_006_RECONCILIATION",
+    "NO_TASK_SPECIFIC_LITERALS",
+    "NO_PACKAGE_HINTS",
+    "NO_TIMEOUT_INCREASE",
+    "NO_USER_LAPTOP",
+    "NO_BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE"
+  ]
+}
