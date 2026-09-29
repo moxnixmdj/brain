@@ -17,7 +17,11 @@
       "runner": "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
     },
     "preflight": {
-      "generic_tests": "8/8 PASS ON EXACT RUNTIME IN PRIOR LEASED GENERIC PREFLIGHT; NOT RERUN INSIDE AUTHORITATIVE H5 CARRIER",
+      "generic_tests": "8/8 PASS",
+      "generic_tests_deployment_id": "a3fbf877-95fe-44d5-a1ae-ed18e8c32515",
+      "generic_tests_same_runtime_blob_as_authoritative_execution": true,
+      "generic_tests_ran_before_authoritative_spend": true,
+      "generic_tests_not_rerun_inside_authoritative_execution_carrier": true,
       "translation_en_count": 3,
       "contents_amd64_count": 2,
       "contents_all_count": 2,
@@ -98,5 +102,6 @@
   "same_case_replay_allowed": false,
   "promotion_authorized_by_gate": true,
   "promotion_authorized_final": false,
-  "required_next_action": "REUSE_OR_IMPLEMENT_AN_ATOMIC_SINGLEFLIGHT_EXECUTION_GUARD_FOR_FUTURE_ONE_SHOT_GATES__RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_MAKE_A_SEPARATE_PR89_PROMOTION_DECISION_USING_ONLY_THE_FIRST_FRESH_HELDOUT_005_RESULT__NEVER_RERUN_HELDOUT_005"
+  "required_next_action": "REUSE_OR_IMPLEMENT_AN_ATOMIC_SINGLEFLIGHT_EXECUTION_GUARD_FOR_FUTURE_ONE_SHOT_GATES__RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_MAKE_A_SEPARATE_PR89_PROMOTION_DECISION_USING_ONLY_THE_FIRST_FRESH_HELDOUT_005_RESULT__NEVER_RERUN_HELDOUT_005",
+  "procedural_note": "The 8 generic tests ran before the fresh spend on the same exact runtime blob and leased faithful service, in deployment a3fbf877-95fe-44d5-a1ae-ed18e8c32515. The authoritative 805a36d4 execution reverified exact runtime/manifest/runner identity plus Translation-en, Contents and Xapian before spend, but did not rerun pytest inside that carrier. The frozen HELDOUT-005 manifest did not require an in-carrier pytest rerun."
 }
