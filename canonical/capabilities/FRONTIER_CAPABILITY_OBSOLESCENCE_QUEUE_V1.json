@@ -69,13 +69,13 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
-    "objective": "Coordinate dependent tools/subtasks across long horizons while preserving state, scope, causal ordering, runtime data dependencies, and verification.",
-    "selection_metric": "VERIFIED_CAPABILITY_GAIN_X_OBSOLESCENCE_LEVERAGE_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "POST_TOOL_DISCOVERY_WIN_FRONTIER_NOT_RECOMPUTED__EXISTING_MULTI_TOOL_PLANNER_FANOUT_CONDITIONAL_JOIN_AND_ARTIFACT_COMPOSITION_ROUTE_NOT_YET_FRONTIER_OBSOLESCENCE_ADJUDICATED",
-    "evidence_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
-    "repair_status": "ROUTE_RECOVERY_AND_FRONTIER_BAR_DEFINITION__NO_REPAIR_AUTHORIZED",
-    "prohibition": "TEST_EXISTING_ROUTE_FIRST__NO_RUNTIME_MUTATION_BEFORE_FRESH_UNSEEN_GATE__NO_PROXY_GOALS"
+    "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "objective": "Connect the already-verified Debian full-metadata/Xapian/direct-Contents supplier-discovery route to the existing autonomous APT probe→contract→execute→independent-verify pipeline through one generic representation-compatible interface, then test that end-to-end route on fresh orthogonal work.",
+    "selection_metric": "FRESH_ORTHOGONAL_END_TO_END_TOOL_ACQUISITION_SUCCESS_X_REUSE_LEVERAGE_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__VERIFIED_XAPIAN_APT_CANDIDATES_ARE_DROPPED_BY_LEGACY_SOURCE_AND_SCORE_ASSUMPTIONS__DOWNSTREAM_MATCHED_TERMS_VERIFIER_ADMISSION_IS_ALSO_INCOMPATIBLE",
+    "evidence_path": "canonical/capabilities/obsolescence/PR111_OMITTED_UPSTREAM_RESIDUAL_FRONTIER_RECONCILIATION_V1.json",
+    "repair_status": "ONE_MINIMAL_GENERIC_INTERFACE_REPAIR_AUTHORIZED__NO_DISCOVERY_RETUNING",
+    "prohibition": "NO_HELDOUT005_REPLAY__NO_SOURCE_RELABELING__NO_UNCALIBRATED_LEGACY_SCORE_THRESHOLD_ON_XAPIAN__NO_FABRICATED_MATCHED_TERMS__NO_TASK_SPECIFIC_LITERALS__RECONCILE_AFTER_FRESH_GATE"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -166,5 +166,22 @@
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
     "next_action": "PRESERVE_AND_REUSE__REOPEN_ONLY_IF_REAL_WORK_FALSIFIES"
+  },
+  "tool_discovery_selection_learning_post_xapian_integration_v2": {
+    "status": "RESELECTED_AS_HIGHEST_LEVERAGE_RESIDUAL",
+    "verified_discovery_route": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "first_failing_interface": "capability_discovery.search_apt_packages -> auto_apt_cli_acquisition._viable_candidates",
+    "first_hard_drop": "APT_FULL_METADATA_XAPIAN rejected by APT_CATALOG-only source admission",
+    "additional_known_constraints": [
+      "legacy absolute score >= 12 is not a source-independent relevance contract for raw Xapian weight",
+      "independent verifier skips candidates with matched_terms length < 2 while inherited full-metadata candidates emit []"
+    ],
+    "reconciliation_path": "canonical/capabilities/obsolescence/PR111_OMITTED_UPSTREAM_RESIDUAL_FRONTIER_RECONCILIATION_V1.json",
+    "next_action": "ONE_MINIMAL_GENERIC_DISCOVERY_TO_ACQUISITION_INTERFACE_REPAIR__CONSUME_BINDING_KIND_AND_VERIFIED_EVIDENCE_WITHOUT_LEGACY_SOURCE_OR_SCORE_SCALE_COUPLING__PRESERVE_DOWNSTREAM_VERIFIER_CONTRACT__THEN_FRESH_ORTHOGONAL_END_TO_END_GATE__RECONCILE"
+  },
+  "deferred_multi_tool_orchestration_v1": {
+    "status": "DEFERRED_AFTER_GLOBAL_FRONTIER_CORRECTION__EVIDENCE_AND_UNSPENT_GATE_DESIGN_PRESERVED",
+    "reason": "Known upstream tool-learning interface break now outranks fresh orchestration adjudication on expected capability gain per wall-clock.",
+    "reopen_condition": "Tool-learning integration residual reaches terminal reconciliation and global frontier recomputation reselects orchestration."
   }
 }
