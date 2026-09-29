@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CHATGPT-LINUX-READONLY-CARRIER-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__GENERIC_CARRIER_SOURCE_TREE_AND_IMPORT_PATH_FIDELITY_PLUS_HARD_ZERO_REMOTE_CARRIER_QUALIFICATION_REQUIRED",
+  "action_kind": "CARRIER_FIDELITY_AND_HARD_ZERO_QUALIFICATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__GENERIC_CARRIER_SOURCE_TREE_AND_IMPORT_PATH_FIDELITY_PLUS_HARD_ZERO_REMOTE_CARRIER_QUALIFICATION_REQUIRED::CARRIER_FIDELITY_AND_HARD_ZERO_QUALIFICATION",
+  "expected_parent_frontier_change": "Reproduce only the minimal read-only carrier facts needed to adjudicate the current built-in ChatGPT Linux surface for HELDOUT-004. Check OS/platform, presence of required commands/modules/index files, and outbound DNS without mutating package state. If any required carrier predicate fails, preserve exactly one evidence record, reject this carrier, and advance to the already-discovered accountless/cardless hard-zero connected remote Linux route. Do not transport project source because source fidelity is irrelevant once the execution surface itself fails.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 truth correction; HELDOUT-004 remains UNSPENT",
+    "quarantined PR178 read-only-scope overrun; its apt-update mutation is not authoritative",
+    "PR178 preserved a useful hypothesis that current ChatGPT Linux lacks connected Debian APT/Xapian/QR surface",
+    "PR20 exact private-source transport, PR35 content-addressed materialization, PR45 content-addressed execution remain reusable only after carrier surface admission",
+    "Railway official anonymous VM route is already discovered and publicly claims no account, no card, and nobody pays for unclaimed compute"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Read-only qualification only. Allowed: uname/os-release, command discovery, filesystem listing/stat/hash, Python import attempt, DNS resolution attempt, and reading frozen repository metadata through connected GitHub. Forbidden: apt update/install, package-manager writes, file mutation on the carrier, project source transport, HELDOUT-004 START/dispatch/evaluator, HELDOUT-003 replay, Sprite, Railway provisioning, Val Town, user laptop, or paid/unproven-cost infrastructure. Stop at the first required carrier predicate failure and reconcile.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
