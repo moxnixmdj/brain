@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Keep HELDOUT-004 frozen/unspent. Prefer the existing private GitHub Actions control plane over new-provider discovery if metered overage is provably impossible. GitHub account evidence shows included private Actions usage is exhausted at 2000/2000 minutes and explicitly states a $0 Actions budget blocks further usage instead of billing. The only remaining carrier predicate is whether that $0 budget is currently active. If verified, execute one Debian Trixie same-container carrier using exact private Brain bytes and full APT/Xapian/zbar preflight before H004 START.",
+    "objective": "Keep HELDOUT-004 frozen/unspent. A minimal publication-safe content-addressed capsule is sealed and a fail-closed public GitHub Actions one-shot workflow is staged. Current blocker is only the absence of an authorized GitHub repository-creation/visibility-mutation primitive: create one empty public repo, grant the current GitHub app access, copy the exact capsule/workflow, then create the arm file last and capture the first terminal result.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__GITHUB_ACTIONS_PRIVATE_CARRIER_ARCHITECTURE_READY__ZERO_DOLLAR_ACTIONS_BUDGET_STATE_UNVERIFIED__NO_EXECUTION",
-    "evidence_path": "canonical/capabilities/obsolescence/H004_GITHUB_ACTIONS_HARDZERO_BUDGET_ROUTE_20260929_V1.json",
-    "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__BUILTIN_RAILWAY_IXIMIUZ_PATHS_REJECTED__PRIVATE_GITHUB_ACTIONS_CARRIER_COLLAPSES_SOURCE_TRANSPORT_AND_FIDELITY_IF_HARD_ZERO_BUDGET_VERIFIED__NO_RUNTIME_REPAIR_REQUIRED",
-    "prohibition": "NO_PRIVATE_ACTIONS_H004_EXECUTION_UNTIL_ZERO_DOLLAR_BUDGET_VERIFIED__NO_PUBLIC_REPO__NO_HELDOUT_004_START_IN_DISCOVERY_LANE__NO_HELDOUT_003_REPLAY__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE",
+    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_HARD_ZERO_CAPSULE_SEALED_PUBLICATION_SAFE__CURRENT_GITHUB_CONNECTOR_HAS_NO_PUBLIC_REPOSITORY_CREATE_OR_VISIBILITY_MUTATION_ACTION__NO_EXECUTION",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_PUBLIC_CAPSULE_EXECUTION_READINESS_20260929_V1.json",
+    "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__H004_EXACT_RUNNER_REUSED__PUBLIC_CAPSULE_22_FILES_SEALED__H003_IMPORT_CLOSURE_FAILURE_CLASS_CORRECTED__NO_RUNTIME_OR_EVALUATOR_REPAIR_REQUIRED",
+    "prohibition": "NO_H004_START_BEFORE_PUBLIC_REPOSITORY_EXISTS_AND_EXACT_CAPSULE_COPY_PREFLIGHT_PASSES__NO_PRIVATE_REPO_PUBLICATION__NO_PRIVATE_ACTIONS_OVERAGE__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_METERED_BROWSER_OR_UNPROVEN_COST_INFRASTRUCTURE__NO_REPLAY",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "VERIFY_GITHUB_ACTIONS_ZERO_DOLLAR_BUDGET_ACTIVE__IF_PASS_STAGE_ONE_SINGLEFLIGHT_PRIVATE_ACTIONS_DEBIAN_TRIXIE_CARRIER_WITH_SAME_CONTAINER_PREFLIGHT_AND_EXACT_H004_ONE_SHOT__IF_FAIL_RESUME_HARD_ZERO_PROVIDER_DISCOVERY",
+    "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_SEALED_CAPSULE_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_WITHOUT_REPLAY",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -86,7 +86,8 @@
     "iximiuz_mcp_external_dependency_path": "canonical/capabilities/obsolescence/H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_20260929_V1.json",
     "iximiuz_access_path_rejection": "canonical/capabilities/obsolescence/H004_IXIMIUZ_ACCESS_PATH_REJECTION_20260929_V1.json",
     "current_carrier_surface_exhaustion_path": "canonical/capabilities/obsolescence/H004_CURRENT_CARRIER_SURFACE_EXHAUSTION_20260929_V1.json",
-    "github_actions_hardzero_budget_route_path": "canonical/capabilities/obsolescence/H004_GITHUB_ACTIONS_HARDZERO_BUDGET_ROUTE_20260929_V1.json"
+    "github_actions_hardzero_budget_route_path": "canonical/capabilities/obsolescence/H004_GITHUB_ACTIONS_HARDZERO_BUDGET_ROUTE_20260929_V1.json",
+    "h004_public_capsule_path": "canonical/astra_runtime/verification_capsules/H004_PUBLIC_GITHUB_ACTIONS_ONESHOT_001.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -223,5 +224,19 @@
     "same_container_debian_trixie_plan": true,
     "heldout_004_freshness": "UNSPENT",
     "next_action": "VERIFY_GITHUB_ACTIONS_ZERO_DOLLAR_BUDGET_ACTIVE__IF_PASS_STAGE_ONE_SINGLEFLIGHT_PRIVATE_ACTIONS_DEBIAN_TRIXIE_CARRIER_WITH_SAME_CONTAINER_PREFLIGHT_AND_EXACT_H004_ONE_SHOT__IF_FAIL_RESUME_HARD_ZERO_PROVIDER_DISCOVERY"
+  },
+  "h004_public_capsule_v1": {
+    "status": "SEALED_PUBLICATION_SAFE__EXECUTION_BLOCKED_ONLY_ON_PUBLIC_REPOSITORY_AUTHORITY_BOUNDARY",
+    "capsule_path": "canonical/astra_runtime/verification_capsules/H004_PUBLIC_GITHUB_ACTIONS_ONESHOT_001.json",
+    "readiness_path": "canonical/capabilities/obsolescence/H004_PUBLIC_CAPSULE_EXECUTION_READINESS_20260929_V1.json",
+    "sealed_file_count": 22,
+    "workflow_template": ".github/workflows/h004-public-oneshot-template.yml",
+    "public_standard_runner_hard_zero_contract_proven": true,
+    "publication_safety_pass": true,
+    "source_tree_import_closure_static_pass": true,
+    "repository_create_action_available": false,
+    "visibility_mutation_action_available": false,
+    "heldout_004_freshness": "UNSPENT",
+    "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_SEALED_CAPSULE_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_WITHOUT_REPLAY"
   }
 }

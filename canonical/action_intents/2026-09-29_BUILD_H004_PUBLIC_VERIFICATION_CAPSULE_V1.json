@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "BUILD-H004-PUBLIC-VERIFICATION-CAPSULE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__PRIVATE_GITHUB_ACTIONS_INCLUDED_MINUTES_EXHAUSTED__PUBLIC_STANDARD_RUNNER_INTRINSIC_HARD_ZERO_ROUTE_REQUIRES_PUBLICATION_SAFE_CONTENT_ADDRESSED_CAPSULE",
+  "action_kind": "PUBLIC_VERIFICATION_CAPSULE_BUILD_AND_PUBLICATION_SAFETY_AUDIT",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__PRIVATE_GITHUB_ACTIONS_INCLUDED_MINUTES_EXHAUSTED__PUBLIC_STANDARD_RUNNER_INTRINSIC_HARD_ZERO_ROUTE_REQUIRES_PUBLICATION_SAFE_CONTENT_ADDRESSED_CAPSULE::PUBLIC_VERIFICATION_CAPSULE_BUILD_AND_PUBLICATION_SAFETY_AUDIT",
+  "expected_parent_frontier_change": "Reuse the existing PROJECT_BRAIN_VERIFICATION_CAPSULE_V1 pattern to seal the exact H004 mission, exact existing H004 runner, full import-visible runtime dependency closure, H003 orthogonality reference evidence, executor policy, and a public GitHub Actions workflow template. Audit every sealed byte for secrets/private user data/private authenticated URLs and fail closed before any publication. Do not start H004 in this lane.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR195 GitHub Actions hard-zero route",
+    "existing verification capsules PR15 and PR20",
+    "existing exact H004 runner canonical/experiments/run_xapian_apt_e2e_integration_heldout_004.py",
+    "H003 incident proving source-tree/import-visible closure divergence and specifically absent python_library_codec.py and python_source_tree_codec.py",
+    "TinyFish wallet currently negative and metered; rejected",
+    "DigitalOcean balance and usage zero with no visible credit reserve; rejected",
+    "current GitHub connector has no repository-creation or visibility mutation action"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Build and audit capsule only. No public disclosure until audit passes. No H004 START, dispatch, evaluator result, or private Actions execution. Stop at the first publication-safety or closure failure. If capsule passes but no authorized public-repository creation primitive exists, reconcile exactly that external authority boundary without provider drift.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "incremental_spend_usd": 0,
+    "hard_zero_spend": true,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true,
+    "private_source_disclosure_forbidden": true,
+    "h004_execution_forbidden_in_this_lane": true
+  }
+}

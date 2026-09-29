@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFICATION_CAPSULE_V1",
+  "capsule_id": "H004-PUBLIC-GITHUB-ACTIONS-ONESHOT-001",
+  "source_revision": "b836ed3d7a801b904c3f9b5d4729ae200a488b2e",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "epistemic_state": "SEALED_NOT_EXECUTED",
+  "incremental_spend_usd": 0,
+  "hard_zero_spend_required": true,
+  "executor_policy": {
+    "required_platform": "linux",
+    "gpu_allowed": false,
+    "heavy_compute_allowed": false,
+    "user_device_used_must_be": false,
+    "val_town_forbidden": true,
+    "hard_zero_evidence_reference_required": true
+  },
+  "intended_executor": {
+    "provider": "GitHub Actions",
+    "runner_label": "ubuntu-latest",
+    "repository_visibility_required": "public",
+    "standard_runner_required": true,
+    "hard_zero_evidence": {
+      "source_class": "GITHUB_OFFICIAL_DOCUMENTATION",
+      "reference": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+      "claim": "Use of standard GitHub-hosted runners is free and unlimited on public repositories."
+    },
+    "job_container": "debian:trixie"
+  },
+  "sealed_files": {
+    "canonical/experiments/run_xapian_apt_e2e_integration_heldout_004.py": "512057ecf967b3cee7c0e96a0337c2c41980b0b6",
+    "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json": "7cecab5be574a41ce2a546bf46e09047b534e46e",
+    "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__AUTO_APT_CLI_ACQUISITION.json": "02812d6457e4a8ae74e93e944f08fead0f59ea91",
+    "canonical/runtime/executor_broker.py": "3322715d9c703a4ed4563275681c27ba20e76d04",
+    "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "canonical/runtime/auto_capability_acquisition.py": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "canonical/runtime/auto_apt_cli_acquisition.py": "0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+    "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119",
+    "canonical/runtime/cli_contract_inference.py": "009c3c45040178844d84eaa15b0d47ca2e1f259f",
+    "canonical/runtime/goal_compiler.py": "195d5dd5f4fabb8a897fb6407433e691a8fdaf26",
+    "canonical/runtime/verify_pending_cli_binding.py": "8ec4da92080e885a15266389c0318688e6408d43",
+    "canonical/runtime/astra_runtime.py": "dae3f042da75ec5289063bcf74f913f7f31bebbc",
+    "canonical/runtime/auto_npm_library_acquisition.py": "b74cdf34a96fc2d591b902e1d582e0381a8a8d08",
+    "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "65453b2eed5e678def3f0ab1c4d44182fb0b9a78",
+    "canonical/runtime/independent_npm_codec_verifier.py": "06fe2fbd7d5169e2cf455868747ac7077466c221",
+    "canonical/runtime/npm_package_utils.py": "05fd0591083034df48c3ee426d6b3e11e0183555",
+    "canonical/runtime/bound_capabilities/cli_command.py": "6782773801cd8f2258e4368a4debbe6e66c4a393",
+    "canonical/runtime/bound_capabilities/python_library_codec.py": "e9b9f5c4991ba1f11b9f377a275b3e17bad22886",
+    "canonical/runtime/bound_capabilities/python_source_tree_codec.py": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05",
+    "canonical/runtime/bound_capabilities/node_library_codec.py": "0babcf3adf7762b5e24d9c8be4f8ecb3a7b2e805",
+    "canonical/runtime/EXECUTOR_POLICY_V1.json": "bc4bd1088e5d31eb584325e50e74a9df3f7d5dcc"
+  },
+  "closure_rationale": {
+    "immutable_h004_runtime_blobs": "All blobs named by the frozen H004 mission are sealed unchanged.",
+    "verifier_import_closure": "Top-level imports required by verify_pending_cli_binding.py are sealed, including all four bound_capabilities adapters.",
+    "h003_incident_correction": "python_library_codec.py and python_source_tree_codec.py are explicitly sealed because their absence caused the contaminated H003 carrier import failure.",
+    "orthogonality_reference": "Exact H003 acquisition evidence is sealed because the unchanged H004 runner reads it to enforce supplier ecosystem difference.",
+    "unrelated_private_state_included": false
+  },
+  "publication_safety": {
+    "status": "PASS_STATIC_SECRET_PII_AUTHENTICATED_URL_SCAN",
+    "scanned_file_count": 22,
+    "prohibited_pattern_classes": [
+      "GitHub/PAT/API key/token literals",
+      "Bearer credentials",
+      "password/secret/API-key assignments",
+      "authenticated ?token= URLs",
+      "private-user-images URLs",
+      "known user/account identifiers and email addresses"
+    ],
+    "findings": "No prohibited credential, PII, authenticated URL, known user/account identifier, or private repository identity is present in the sealed public payload. Lexical variable names such as token are code variables only.",
+    "fail_closed": true
+  },
+  "pre_start_surface_requirements": [
+    "Debian trixie container",
+    "normal Packages metadata",
+    "English Translation index",
+    "Debian package Tag metadata",
+    "Contents-all index",
+    "architecture-specific Contents index",
+    "python3-xapian import",
+    "sudo and apt-cache available",
+    "zbarimg with QR support",
+    "all sealed Git blob hashes match",
+    "verify_pending_cli_binding import closure resolves",
+    "H004 START absent",
+    "H004 RESULT absent"
+  ],
+  "execution": "Use the existing unchanged canonical/experiments/run_xapian_apt_e2e_integration_heldout_004.py supervisor with a provider-neutral public-GitHub executor attestation. No wrapper may create START before all carrier preflight predicates pass.",
+  "no_replay": true,
+  "public_workflow_template": ".github/workflows/h004-public-oneshot-template.yml",
+  "public_repository_creation_state": "BLOCKED_BY_CURRENT_GITHUB_CONNECTOR_MISSING_CREATE_REPOSITORY_OR_VISIBILITY_MUTATION_ACTION",
+  "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_SEALED_FILES_PLUS_TEMPLATE_AND_RUN_ONCE",
+  "source_class": "PRIVATE_CANONICAL_CONTENT_ADDRESSED_SOURCE",
+  "carrier_files": {
+    ".github/workflows/h004-public-oneshot.yml": "20569bb392941894d8d66c204b75c2d18c170257",
+    "ARM_H004_PUBLIC_ONESHOT_001": "TO_BE_CREATED_LAST_IN_PUBLIC_REPOSITORY"
+  }
+}
