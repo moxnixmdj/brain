@@ -20,7 +20,8 @@
     "DriftNARS 541f809 model-free broader cognitive route",
     "pyAgrum current influence-diagram route",
     "waleedqk/subjective-logic MIT operator kernel",
-    "ctoth/doxa and ctoth/argumentation semantic fit but no LICENSE file at inspected revisions"
+    "ctoth/doxa and ctoth/argumentation semantic fit but no LICENSE file at inspected revisions",
+    "formal-argumentation==0.3.0 exact wheel 4b0a242b4bf006cd58c5cbfb313b5b20d2a2895a22ea2b4ddbc4706e8cd56bc8 passed public semantic preflight run 36640692648 but exact license probe run 36641473835 found no license metadata and no bundled license file"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -62,7 +63,8 @@
         "pyAgrum influence diagrams",
         "Fast Downward/clingo/Z3",
         "waleedqk subjective-logic",
-        "ctoth doxa/argumentation"
+        "ctoth doxa/argumentation",
+        "formal-argumentation 0.3.0: technically strong and directly preflighted, but exact wheel has no declared or bundled reusable license; disqualified for Brain inheritance"
       ],
       "capability_work_deleted": [
         "No model supplier",
@@ -83,7 +85,8 @@
         "REUSE DriftNARS: broader temporal/goal architecture than the current target requires.",
         "REUSE pyAgrum: strong decision-under-uncertainty engine but less direct for explicit logical support/contradiction proofs.",
         "REUSE subjective-logic MIT kernel: preserves ignorance well but lacks a complete claim/rule/decision engine, increasing custom code.",
-        "REUSE ctoth argumentation/doxa: semantic fit but inspected revisions have no reusable license."
+        "REUSE ctoth argumentation/doxa: semantic fit but inspected revisions have no reusable license.",
+        "REUSE formal-argumentation 0.3.0: technically closest and already preflighted, but exact wheel/repo provide no reusable license declaration, so legal reuse fails closed."
       ],
       "surviving_causal_blocker": "No existing bound adapter maps Brain's structured evidence contract into a licensed exact inference/decision engine and emits a fail-closed auditable terminal decision."
     },
@@ -132,14 +135,16 @@
         "Reuse verified space-cargo evidence as real Task A input source",
         "Reuse canonical model-independence law and Qwen execution provenance as real Task B source",
         "Reuse public GitHub Actions carrier",
-        "Stop broad symbolic-architecture search once the target narrowed to structured evidence synthesis"
+        "Stop broad symbolic-architecture search once the target narrowed to structured evidence synthesis",
+        "Reuse exact public semantic preflight run 36640692648 and exact license probe run 36641473835 instead of requalifying formal-argumentation"
       ],
-      "search_stop_decision": "ProbLog is correctness-sufficient for the target's structured-input boundary and no remaining licensed challenger plausibly removes enough adapter work to justify delaying direct real-task execution.",
+      "search_stop_decision": "The strongest newly discovered technical challenger, formal-argumentation 0.3.0, was directly preflighted but fails the reusable-license requirement on the exact wheel. ProbLog remains the fastest correctness-sufficient licensed route; further broad search cannot currently justify delaying direct real-task execution.",
       "affected_layers_only_on_revalidation": true,
       "challenger_refresh_decision": "Route frontier was refreshed after PR240 changed the target; prior DriftNARS selection was discarded rather than rebased."
     },
     "routes_considered": [
       "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+      "FORMAL_ARGUMENTATION_0_3_0_EXACT_WHEEL",
       "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
       "DRIFTNARS_REASONING_ADAPTER",
       "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
@@ -153,12 +158,12 @@
       "CUSTOM_PROBABILISTIC_INFERENCE_ENGINE"
     ],
     "selected_surviving_route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
-    "why_selected_route_is_fastest_sufficient": "It directly consumes formal facts/rules, computes exact weighted logical consequences, supports decision and explanation modes, is Apache-2.0 and Python-embeddable, requires no pretrained artifact, and needs only a small deterministic adapter for Brain's typed schema, provenance trace, and explicit stop policy.",
+    "why_selected_route_is_fastest_sufficient": "ProbLog remains the fastest legally reusable correctness-sufficient route after the strongest technical challenger, formal-argumentation 0.3.0, was directly disqualified by an exact-wheel license probe. ProbLog is Apache-2.0, Python-embeddable, active, model-free, and needs only a small deterministic adapter for Brain's typed schema, provenance trace, and stop policy.",
     "expected_parent_level_state_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two materially distinct real tasks, with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal insufficient-evidence behavior, and auditable trace.",
     "stop_condition": "Implement only a thin typed-evidence-to-ProbLog adapter and execute two precommitted materially distinct real decisions with the exact same adapter bytes: (A) space-cargo reference-search-region final-design promotion adjudication from preserved verified evidence with verdict labels withheld; (B) fresh reuse on model-backed Qwen cognitive-credit eligibility from canonical policy/execution evidence. Independently verify each against pre-existing authoritative outcomes. Also require negative synthetic checks for unresolved conflict/insufficient evidence. On two real passes, bind the route and stop; on any failure, preserve evidence and recompute. No model, pretrained artifact, natural-language parser, new agent framework, or broad cognitive architecture.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-29T22:36:00Z",
+      "checked_at_utc": "2026-09-29T22:46:03Z",
       "max_age_hours": 24,
       "incumbent_route": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
       "source_classes_checked": [
@@ -173,7 +178,9 @@
           "canonical/runtime/capability_planner.py",
           "canonical/runtime/evidence_state.py",
           "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
-          "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+          "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
+          "PUBLIC_CARRIER_RUN_36640692648_FORMAL_ARGUMENTATION_SEMANTIC_PREFLIGHT_PASS",
+          "PUBLIC_CARRIER_RUN_36641473835_EXACT_WHEEL_LICENSE_PROBE_NO_REUSABLE_LICENSE"
         ],
         "OFFICIAL_PRIMARY": [
           "https://dtai.cs.kuleuven.be/problog/",
@@ -184,7 +191,8 @@
         "CODE_OR_PACKAGE_REGISTRY": [
           "https://github.com/ML-KULeuven/problog/commit/a294fa24c3cfb4bae3a2acea3a128386113889f4",
           "https://github.com/waleedqk/subjective-logic/commit/8afba9de564c6165e4ba401d08b3dd7f5a78ded0",
-          "https://github.com/seamus-brady/DriftNARS/commit/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3"
+          "https://github.com/seamus-brady/DriftNARS/commit/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3",
+          "https://pypi.org/project/formal-argumentation/0.3.0/"
         ],
         "BROAD_WEB_OR_COMMUNITY": [
           "Fresh 2026-09-30 search across probabilistic logic, subjective logic, formal argumentation, influence diagrams, NARS, ASP, SMT, and planning engines."
@@ -232,6 +240,31 @@
             "INCREMENTAL_COST": "$0.",
             "RELIABILITY": "Mature research system, active 2026 repository, Apache-2.0.",
             "VERIFIABILITY": "Generated ProbLog program, exact input hash, query probabilities, decision policy, and independent real-task oracle can all be preserved."
+          }
+        },
+        {
+          "route": "FORMAL_ARGUMENTATION_0_3_0_EXACT_WHEEL",
+          "evidence": [
+            "Exact PyPI wheel SHA256 4b0a242b4bf006cd58c5cbfb313b5b20d2a2895a22ea2b4ddbc4706e8cd56bc8 passed Dung grounded/preferred and bipolar derived-defeat semantic preflight on public carrier run 36640692648.",
+            "Exact same wheel license probe run 36641473835 found metadata_license_lines=[], bundled_license_files=[], declared_reusable_license=false."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: public run 36640692648",
+            "DIRECT_PROBE: public run 36641473835",
+            "OFFICIAL_PRIMARY: https://pypi.org/project/formal-argumentation/0.3.0/"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Technically strong fit for claims, attacks/support, probabilistic acceptance, gradual semantics, and explicit witnesses.",
+            "CAPABILITY_STRENGTH": "Potentially closer than ProbLog to argument-centric synthesis.",
+            "WALL_CLOCK": "Already preflighted and would otherwise be extremely fast to reuse.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact pinned wheel executed successfully.",
+            "VERIFIABILITY": "Strong technical traceability, but legal/provenance admissibility fails because the exact wheel and repository provide no reusable license declaration."
           }
         },
         {
@@ -299,7 +332,7 @@
           }
         }
       ],
-      "negative_search_summary": "The closest richer argumentation libraries inspected lacked a reusable license; remaining licensed challengers require more custom inference or broader integration than ProbLog for the exact structured evidence-to-decision target.",
+      "negative_search_summary": "The strongest newly surfaced challenger, formal-argumentation 0.3.0, passed exact semantic preflight but is disqualified because its exact wheel contains no declared/bundled reusable license and the inspected repository also has no LICENSE. Other licensed challengers require more custom inference or broader integration than ProbLog.",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
