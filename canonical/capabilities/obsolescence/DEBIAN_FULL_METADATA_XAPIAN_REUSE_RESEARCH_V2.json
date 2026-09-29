@@ -13,9 +13,24 @@
     "direct_contents_indexes_available": true
   },
   "spent_diagnostics": {
-    "short_description_xapian": {"qrencode_rank": 2,"jq_rank": 9,"sox_rank": null,"qpdf_rank": null},
-    "full_translation_xapian": {"qrencode_rank": 1,"jq_rank": 1,"qpdf_rank": 1,"sox_rank": 61},
-    "full_translation_plus_tags_weight4_xapian": {"qrencode_rank": 1,"jq_rank": 1,"qpdf_rank": 3,"sox_rank": 10}
+    "short_description_xapian": {
+      "qrencode_rank": 2,
+      "jq_rank": 9,
+      "sox_rank": null,
+      "qpdf_rank": null
+    },
+    "full_translation_xapian": {
+      "qrencode_rank": 1,
+      "jq_rank": 1,
+      "qpdf_rank": 1,
+      "sox_rank": 61
+    },
+    "full_translation_plus_tags_weight4_xapian": {
+      "qrencode_rank": 1,
+      "jq_rank": 1,
+      "qpdf_rank": 3,
+      "sox_rank": 10
+    }
   },
   "selected_design": [
     "DEBIAN_TRANSLATION_EN_JOIN_BY_DESCRIPTION_MD5",
