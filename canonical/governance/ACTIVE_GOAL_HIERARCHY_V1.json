@@ -88,19 +88,20 @@
     "carrier": "brain-heldout003-one-shot",
     "status": "UNAUTHORIZED_CARRIER_INCIDENT__FRESHNESS_SPENT_CONTAMINATED__NONPROMOTABLE__NO_REPLAY",
     "acceptance_gate_pass": false,
-    "admissible_capability_verdict": false,
     "total_wall_s": 140.213006,
     "first_technical_blocker": "CARRIER_VERIFIER_DEPENDENCY_CLOSURE_OMITTED_PYTHON_LIBRARY_CODEC",
     "result_authority": "DIAGNOSTIC_ONLY__NOT_ACCEPTANCE_OR_PROMOTION",
     "result_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json",
-    "reconciliation_path": "canonical/capabilities/obsolescence/HELDOUT003_UNAUTHORIZED_CARRIER_AND_PR149_PROVENANCE_RECONCILIATION_20260929_V1.json"
+    "reconciliation_path": "canonical/capabilities/obsolescence/HELDOUT003_UNAUTHORIZED_CARRIER_AND_PR149_PROVENANCE_RECONCILIATION_20260929_V1.json",
+    "capability_verdict_admissible": false,
+    "admissible_capability_verdict": null
   },
   "inherited_route": {
     "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
     "runtime_path": "canonical/runtime/capability_discovery.py",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
     "source_pr": 89,
-    "status": "VERIFIED_DISCOVERY_ROUTE_INHERITED__PR129_ADMISSION_REACHED_PENDING_INDEPENDENT_VERIFICATION_ON_UNAUTHORIZED_HELDOUT003_CARRIER__PARENT_E2E_UNADJUDICATED"
+    "status": "VERIFIED_DISCOVERY_ROUTE_INHERITED__PR129_ADMISSION_REACHED_CONTRACT_INFERRED_ON_UNAUTHORIZED_HELDOUT003_CARRIER__PARENT_E2E_UNADJUDICATED"
   },
   "post_pr111_correction": {
     "status": "PR111_SELECTION_DEFERRED_AFTER_OMITTED_CONCRETE_RESIDUAL_FOUND",
