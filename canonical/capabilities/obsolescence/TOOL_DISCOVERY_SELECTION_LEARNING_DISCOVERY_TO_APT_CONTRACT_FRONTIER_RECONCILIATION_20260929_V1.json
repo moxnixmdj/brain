@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SELECTION_LEARNING_DISCOVERY_TO_APT_CONTRACT_FRONTIER_RECONCILIATION_V1",
+  "status": "RECONCILED_NO_RUNTIME_MUTATION",
+  "date_utc": "2026-09-29",
+  "source_main": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "correction_of": "POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "exact_blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BY_LEGACY_APT_ACQUISITION_CONTRACT_BEFORE_PROBE__SOURCE_IDENTITY_AND_SCORE_SCALE_COUPLING",
+  "causal_trace": [
+    {
+      "producer": "canonical/runtime/capability_discovery.py",
+      "producer_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "proven_output_contract": [
+        "binding_kind=apt",
+        "discovery_source=APT_FULL_METADATA_XAPIAN",
+        "verified executable ownership evidence",
+        "raw Xapian match weight"
+      ]
+    },
+    {
+      "router": "canonical/runtime/auto_capability_acquisition.py",
+      "finding": "Stable binding_kind=apt is already sufficient to route to apt_cli; no new source-specific router is needed."
+    },
+    {
+      "first_failing_consumer": "canonical/runtime/auto_apt_cli_acquisition.py::_viable_candidates",
+      "consumer_blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
+      "proven_failures": [
+        "Rejects candidates unless discovery_source == APT_CATALOG.",
+        "Applies legacy absolute score >= 12 to a producer whose score is raw Xapian BM25 weight; no shared score-scale contract is established."
+      ]
+    }
+  ],
+  "preserved_downstream_residual": {
+    "component": "canonical/runtime/verify_pending_cli_binding.py::_acquire_and_run_semantic_verifier",
+    "blob": "8ec4da92080e885a15266389c0318688e6408d43",
+    "finding": "The inherited full-metadata producer currently emits matched_terms=[] while this verifier path requires at least two matched terms before probing.",
+    "role": "DOWNSTREAM_KNOWN_RESIDUAL__NOT_THE_FIRST_REPAIR_TARGET"
+  },
+  "minimal_repair_principle": [
+    "Use stable semantic/provenance fields such as binding_kind=apt and verified executable ownership rather than adding another historical discovery-source literal.",
+    "Do not compare raw Xapian BM25 weights to a legacy lexical absolute threshold unless a valid cross-scorer calibration is established.",
+    "Change only the first failing candidate-admission contract, then run one fresh orthogonal end-to-end tool-learning gate and reconcile before any second repair."
+  ],
+  "heldout_005": {
+    "status": "PASS__SPENT__REPLAY_FORBIDDEN",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "validator_wall_s": 16.233238
+  },
+  "deferred_frontier": {
+    "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "gate_design_preserved_from_pr": 116,
+    "freshness_spent": false,
+    "status": "DEFERRED_UNTIL_CURRENT_SEAM_CLOSED_OR_FALSIFIED_AND_GLOBAL_FRONTIER_RECOMPUTED"
+  },
+  "runtime_mutated": false,
+  "heldout_005_replayed": false,
+  "orchestration_fresh_gate_spent": false,
+  "incremental_spend_usd": 0,
+  "next_action": "ONE_GENERIC_DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_REPAIR__THEN_ONE_FRESH_ORTHOGONAL_END_TO_END_GATE__THEN_RECONCILE"
+}
