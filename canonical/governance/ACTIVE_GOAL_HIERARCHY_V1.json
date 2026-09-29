@@ -6,8 +6,8 @@
   "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "active_probe": null,
   "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__REAL_TASK_SELECTION_AND_RECURSIVE_OBS_REQUIRED",
-  "current_parent_blocker": "DEPENDENCY_FREE_OPEN_ENDED_REAL_TASK_B_UNPROVEN__LOCAL_QWEN3_5_4B_TERMINATED_WITH_GOAL_MAX_CYCLES_WITHOUT_FINISH",
-  "next_required_action_class": "MERGE_4B_TERMINAL_RECONCILIATION__RUN_FRESH_EXACT_BASE_OBS__USE_STRONGER_LOCAL_QWEN3_5_9B_ON_FRESH_DIFFERENT_REAL_TASK_B__VERIFY_DIRECTLY__NO_4B_REPLAY",
+  "current_parent_blocker": "RECURRENT_GOAL_MAX_CYCLES_WITHOUT_FINISH_ACROSS_LOCAL_4B_AND_9B__GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_SEAM_UNRESOLVED__SUPPLIER_REACHABILITY_NO_LONGER_PRIMARY_BLOCKER",
+  "next_required_action_class": "RUN_EXACT_BASE_RECURSIVE_OBS_V3_ON_MURAKUMO_TOOL_DECISION__DETERMINISTIC_WOLFRAM_SEARCH_FETCH_MATH__VIREONIX_FINALIZATION__INDEPENDENT_SOURCE_AND_DETERMINISTIC_CHECKS__NO_RUNTIME_CHANGE_BEFORE_ROUTE_SURVIVES__IF_SURVIVES_TEST_ON_FRESH_REAL_TASK_C",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -145,8 +145,8 @@
   "real_task_first": true,
   "recursive_obs": {
     "required": true,
-    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
@@ -156,7 +156,9 @@
       "REPAIR",
       "BUILD"
     ],
-    "exact_base_commit_binding_required": true
+    "exact_base_commit_binding_required": true,
+    "live_challenger_frontier_required": true,
+    "max_external_route_frontier_age_hours": 24
   },
   "last_real_output_event": {
     "event_id": "FRONTIER_CAPABILITY_EVIDENCE_A_SPACE_CARGO_20260929",
@@ -171,5 +173,6 @@
     "workflow_run_id": 36624408059,
     "task_completed": false,
     "frontier_capability_credit": false
-  }
+  },
+  "live_challenger_frontier_path": "canonical/capabilities/obsolescence/OPEN_ENDED_RESEARCH_LIVE_CHALLENGER_FRONTIER_20260929_V1.json"
 }
