@@ -17,7 +17,9 @@
     "Terminal trace shows whole-goal supplier discovery ranked leela-zero/openjdk-*-zero and ended NO_COMPATIBLE_SUPPLIER_CONTRACT.",
     "Existing capability_planner.py, goal_compiler.py, semantic_authorities.py, decision.synthesis.typed.stdlib, decision.synthesis.verify.stdlib are already model-independent and verified.",
     "Existing decompose_goal only splits a narrow verb set and there is no generic decision-workflow compiler before supplier discovery.",
-    "External challenger search checked Attempto APE, Lark, and textX: all parse a supplied controlled language/grammar but do not remove arbitrary technical-goal semantic grounding."
+    "External challenger search checked Attempto APE, Lark, and textX: all parse a supplied controlled language/grammar but do not remove arbitrary technical-goal semantic grounding.",
+    "Exact public run 36646452335 passed current candidate executable/test blobs with model_dependency_count=0.",
+    "Fresh real-registry task A: Python unittest audit grounding; fresh reuse task B: rendered browser capture grounding."
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -86,12 +88,12 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
-        "SUBSTITUTE_ATTEMPTO_CONTROLLED_ENGLISH",
-        "SUBSTITUTE_LARK_OR_TEXTX_DSL",
-        "REPAIR_CAPABILITY_DISCOVERY_RANKING"
+        "REUSE_EXISTING_BOUND_REGISTRY_SEMANTICS_WITH_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
+        "SPACY_BLANK_RULE_MATCHER_PLUS_BRAIN_REGISTRY",
+        "ATTEMPTO_OR_LARK_OR_TEXTX_CONTROLLED_GRAMMAR",
+        "HTN_PDDL_OR_NARS_AFTER_MANUAL_FORMULATION"
       ],
-      "losing_routes_reason": "External parsers require a grammar and do not eliminate semantic grounding; discovery ranking is downstream of the wrong branch. Existing compiler already owns clause decomposition, registry matching, runtime decision primitives, and fail-closed behavior.",
+      "losing_routes_reason": "The proved winner reuses Brain's existing deterministic registry semantics, preserves multiple justified candidates, and blocks external discovery without adding a parser/planner dependency. External parser/planning systems still require authored semantics or a structured problem representation.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
@@ -133,15 +135,15 @@
       "NEW_PARSER_FRAMEWORK",
       "DOWNSTREAM_SUPPLIER_RANKING_TUNING"
     ],
-    "selected_surviving_route": "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
-    "why_selected_route_is_fastest_sufficient": "The current compiler already decomposes goals, binds verified capabilities, and fails closed; the missing behavior is one upstream semantic workflow class. Repairing that branch reuses all downstream verified machinery and avoids new dependencies.",
+    "selected_surviving_route": "REUSE_EXISTING_BOUND_REGISTRY_SEMANTICS_WITH_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
+    "why_selected_route_is_fastest_sufficient": "Exact PR250 bytes passed deterministic regressions, independent verification, two materially distinct fresh real-registry grounding tasks, and runtime precedence on public run 36646452335. The route adds no model and no external parser framework.",
     "expected_parent_level_state_change": "Acquire a generic model-independent plain-goal grounding route that maps required operations, entities, constraints, and output contracts to semantically compatible already-bound Brain capabilities before external supplier discovery.",
     "stop_condition": "Implement only the smallest generic existing-capability grounding repair; prove compiler behavior with deterministic regressions; then execute one fresh non-serialization real task and one materially distinct fresh-reuse task before any acquisition claim. Never replay spent serialization run 36644374149.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-29T23:25:30Z",
+      "checked_at_utc": "2026-09-29T23:40:46Z",
       "max_age_hours": 24,
-      "incumbent_route": "EXISTING_GOAL_COMPILER_PLUS_SEMANTIC_AUTHORITIES",
+      "incumbent_route": "EXISTING_SINGLE_WINNER_GOAL_COMPILER_PLUS_SEMANTIC_AUTHORITIES",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
@@ -189,14 +191,14 @@
       ],
       "challenger_routes": [
         {
-          "route": "EXISTING_GOAL_COMPILER_PLUS_SEMANTIC_AUTHORITIES_REPAIR",
+          "route": "REUSE_EXISTING_BOUND_REGISTRY_SEMANTICS_WITH_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
           "evidence": [
-            "Direct failure trace localizes misrouting before supplier execution",
-            "Existing compiler already owns generic clause and verified registry logic"
+            "Exact current PR250 grounding module preserves GROUNDED/AMBIGUOUS_BOUNDED/UNRESOLVED per clause.",
+            "Exact public run 36646452335 passed fresh software-quality grounding, fresh browser reuse, independent verifier, and runtime precedence."
           ],
           "qualification_evidence": [
-            "DIRECT_PROBE run 36644374149",
-            "BRAIN_INHERITED canonical compiler and tests"
+            "DIRECT_PROBE public run 36646452335",
+            "artifact 11068728150 digest sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
           ],
           "qualification_evidence_classes": [
             "DIRECT_PROBE",
@@ -266,7 +268,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
+      "selected_route": "REUSE_EXISTING_BOUND_REGISTRY_SEMANTICS_WITH_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -274,25 +276,27 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-29T23:25:30Z",
+        "checked_at_utc": "2026-09-29T23:40:46Z",
         "max_age_hours": 2,
-        "selected_route": "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
+        "selected_route": "REUSE_EXISTING_BOUND_REGISTRY_SEMANTICS_WITH_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
         "execution_dependencies": [
           {
-            "dependency": "CURRENT_BRAIN_GOAL_COMPILER_AND_TESTS",
+            "dependency": "CURRENT_PR250_GROUNDING_RUNTIME_MODULE_VERIFIER_AND_TESTS",
             "kind": "CODE_ARTIFACT",
             "required": true,
             "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T23:25:30Z",
+            "observed_at_utc": "2026-09-29T23:40:46Z",
             "evidence": [
-              "BRAIN_INHERITED current main 20259a493b8180d490e65448cbedd3ccf54ddaf0"
+              "DIRECT_PROBE exact PR250 executable/test blobs passed public run 36646452335",
+              "BRAIN_INHERITED exact base f4abfcdd5e44f83e2c591b22817f39ec0e0800b3"
             ],
             "evidence_classes": [
+              "DIRECT_PROBE",
               "BRAIN_INHERITED"
             ],
             "evidence_scope": "GLOBAL"
@@ -304,9 +308,9 @@
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T23:25:30Z",
+            "observed_at_utc": "2026-09-29T23:40:46Z",
             "evidence": [
-              "DIRECT_PROBE run 36644374149 completed on hosted runner"
+              "DIRECT_PROBE public run 36646452335 completed SUCCESS on the exact candidate bytes"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
