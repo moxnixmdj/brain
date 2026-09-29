@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_002_EXECUTION_SURFACE_BLOCKER_V1",
-  "status": "SINGLE_EXTERNAL_BOUNDARY__NO_CONNECTED_VERIFIED_ZERO_SPEND_REMOTE_SHELL",
+  "status": "WAITING_ON_CALLABLE_TOOLSET_CHANGE__HELDOUT_GATE_002_UNSPENT",
   "checked_on": "2026-09-29",
   "source_pr": 85,
   "pr_head_before_receipt": "6cc8fb7b3e1bb5697de6bef43d0f64e4844c218a",
@@ -62,7 +62,8 @@
     "DO_NOT_MERGE_OR_PROMOTE_PR85",
     "DO_NOT_CREATE_UNVERIFIABLY_METERED_SPRITES_OR_OTHER_INFRASTRUCTURE",
     "DO_NOT_RETRY_PRIVATE_GITHUB_ACTIONS_PRE_RUNNER_FAILURE",
-    "DO_NOT_SEARCH_MORE_EXECUTOR_PROVIDERS_UNLESS_THE_CALLABLE_TOOLSET_CHANGES"
+    "DO_NOT_SEARCH_MORE_EXECUTOR_PROVIDERS_UNLESS_THE_CALLABLE_TOOLSET_CHANGES",
+    "DO_NOT_REPEAT_PLUGIN_DIRECTORY_OR_EXECUTOR_PROVIDER SEARCH UNTIL TOOLSET OR CONNECTION STATE CHANGES"
   ],
   "latest_recheck": {
     "vercel": {
@@ -86,5 +87,21 @@
       "evidence": "Plugin directory search found no generic SSH/remote-shell connector beyond Remote Desktop Commander and DigitalOcean; laptop execution remains forbidden and DigitalOcean has zero credits."
     }
   },
-  "only_remaining_truth_transition": "CONNECT_ONE_REMOTE_LINUX_EXECUTOR_WITH_PROVABLE_ZERO_INCREMENTAL_SPEND__THEN_RUN_HELDOUT_VALIDATION_002_EXACTLY_ONCE__THEN_RECONCILE"
+  "only_remaining_truth_transition": "CALLABLE_TOOLSET_CHANGE_TO_ONE_VERIFIED_ZERO_SPEND_REMOTE_LINUX_EXECUTOR__THEN_RUN_HELDOUT_VALIDATION_002_ONCE__THEN_RECONCILE",
+  "latest_connector_directory_recheck": {
+    "checked_on": "2026-09-29",
+    "result": "NO_NEW_CALLABLE_ZERO_SPEND_REMOTE_LINUX_EXECUTOR",
+    "searched_categories": [
+      "Google server-side script/notebook execution",
+      "Gitpod/Coder/Devbox/cloud IDE",
+      "Fly.io/Modal/E2B/Cloudflare sandbox compute",
+      "generic SSH/remote shell"
+    ],
+    "findings": [
+      "Connected Google tooling exposes document/sheet/slide APIs but no Apps Script, Colab, notebook, or arbitrary compute execution.",
+      "Plugin directory exposes no Gitpod, Coder, Devbox, Fly.io, Modal, E2B, or Cloudflare sandbox executor.",
+      "Railway remains the only relevant available remote-compute plugin surfaced by directory search, but it remains not installed/connected.",
+      "No generic SSH connector exists beyond Remote Desktop Commander; user laptop execution remains forbidden."
+    ]
+  }
 }
