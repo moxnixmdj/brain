@@ -162,6 +162,7 @@ def compose(goal,grounding,registry,compiler,root):
         "initial_facts":initial_facts,
         "target_effects":target_effects,
         "capabilities":derived,
+        "restrict_inherited_bound_capabilities":True,
         "finish_summary":"GROUNDED_CAPABILITY_COMPOSITION_COMPLETE",
         "max_expansions":5000,
     }
