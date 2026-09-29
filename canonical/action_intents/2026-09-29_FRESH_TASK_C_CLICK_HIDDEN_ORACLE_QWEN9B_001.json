@@ -1,0 +1,374 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRESH-TASK-C-CLICK-HIDDEN-ORACLE-QWEN9B-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PR227_SAFE_FINALIZATION_MERGED__FRESH_REAL_TASK_C_UNSPENT",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PR227_SAFE_FINALIZATION_MERGED__FRESH_REAL_TASK_C_UNSPENT::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute exactly one fresh real software-systems Task C using the repaired ASTRA controller and explicit local Qwen3.5-9B, derive a patch for a real pre-fix Click race without access to the maintainer fix, and independently verify the generated patch against withheld behavioral tests before any capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR227 safe-evidence finalization repair and exact runtime blob 1e8252415c60a553bad8a05fae2d98217d0f5833",
+    "Closed unspent PR229 after exact Murakumo selector response identity mismatch",
+    "Public route preflight runs 36636745398, 36636846714, and 36637308753",
+    "Prior explicit local Qwen3.5-9B public execution run 36627371993 with exact model hash and llama.cpp provenance",
+    "Real Click pre-fix commit cbb5b2df1ee3492115f8c2ee5cbb09e2271fc714 and merged human-maintainer repair PR3818 retained as verifier-only oracle"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute this hidden-oracle Task C exactly once; preserve the terminal ASTRA trace, exact local-model/runtime provenance, generated patch, and withheld behavioral-test result; never reveal the oracle before completion and never replay or tune on the same task. Promote only the evidence level actually earned.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+    "real_outcome": "Obtain a hard-to-self-certify fresh end-to-end proof of open-ended technical research by solving a real software race from pre-fix code and passing withheld behavioral tests.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Produce one defensible fresh capability result now, not another benchmark or governance artifact.",
+      "proxy_goals_deleted": [
+        "Finish the stale mistake-presumption governance PR first",
+        "Replay space-cargo or biophysics tasks",
+        "Use a subjective Android diagnosis as the only oracle",
+        "Continue anonymous-provider discovery after the current route race resolved it",
+        "Use the user's laptop"
+      ],
+      "surviving_necessity": "One fresh materially different real task with an independent behavioral oracle is the direct remaining proof action."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR227 exact repaired ASTRA runtime",
+        "Public verification-capsule-runner",
+        "Prior Qwen3.5-4B and Qwen3.5-9B execution evidence",
+        "Existing local Qwen3.5-9B bridge and pinned llama.cpp route",
+        "Existing ASTRA bounded read/list/search action surface"
+      ],
+      "external_existing_routes_checked": [
+        "Murakumo explicit qwen3.8 selector",
+        "Vireonix anonymous auto",
+        "PersorAI GLM5.2",
+        "llmfaucet smart route",
+        "LLM7 deepseek-v4-flash",
+        "Full smolagents/AgentScope substitution"
+      ],
+      "capability_work_deleted": [
+        "No new controller",
+        "No new provider integration",
+        "No new benchmark framework",
+        "No frontier-hosted model",
+        "No same-task tuning",
+        "No new execution carrier"
+      ],
+      "surviving_gap": "The repaired controller has not yet completed a fresh real task with a hidden behavioral oracle."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Proof gap only. The recurrent finalization defect was repaired and exact-byte validated in PR227.",
+      "delete_bypass_substitute_options": [
+        "Delete fresh proof: invalid because reusable frontier-level capability remains unproven.",
+        "Use Murakumo qwen3.8: execution is fast, but fresh exact-selector probe returned response_model= murakumo-main, so supplier identity is not proven.",
+        "Use Vireonix/PersorAI/llmfaucet/LLM7: current carrier probes failed with 403, DNS failure, or model unavailable.",
+        "Use local Qwen3.5-4B: lighter but previous real-task evidence was weaker and terminated before sufficient research completion.",
+        "Reuse explicit local Qwen3.5-9B: survives as current clean supplier-independent route."
+      ],
+      "surviving_causal_blocker": "One fresh hidden-oracle Task C must execute on a provenance-clean route."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_9B_HIDDEN_ORACLE_CLICK_TASK_C",
+        "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_4B_HIDDEN_ORACLE_CLICK_TASK_C",
+        "ASTRA_PR227_PLUS_MURAKUMO_QWEN38_HIDDEN_ORACLE_CLICK_TASK_C",
+        "FULL_AGENT_FRAMEWORK_SUBSTITUTION"
+      ],
+      "losing_routes_reason": "Remote anonymous routes currently fail execution or supplier-identity requirements; 4B saves runtime but has weaker prior real-task research evidence; full framework substitution adds integration delay. Existing local 9B is explicit, already exercised on this carrier, and only its generic finalization blocker changed.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "This is not a synthetic benchmark. The planner receives a real historical Click bug and exact pre-fix source but not its issue number, maintainer patch, or verifier. After the planner finishes, its production-code patch is applied to the pre-fix tree and run against withheld behavioral tests derived independently from the actual accepted race semantics."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Further finalization repair if Task C passes",
+        "PR229 Murakumo Android Task C",
+        "Additional anonymous-provider fishing for this proof",
+        "Model-size escalation beyond Qwen3.5-9B"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "source-tree evidence navigation",
+        "root-cause localization",
+        "minimal patch synthesis",
+        "termination under bounded evidence",
+        "behavioral self-correction through independent verification"
+      ],
+      "fresh_reuse_plan": "If Task C passes, reconcile it as the first fresh reuse of the PR227 generic repair, recompute the parent capability frontier, and only then decide whether one more orthogonal fresh reuse is required for dependency removal."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR227 runtime validation rather than retesting finalizer internals",
+        "Reuse the proven public carrier and existing local Qwen9B bridge",
+        "Use a real accepted upstream fix as hidden oracle instead of building a subjective evaluator",
+        "Stop provider discovery after direct probes resolved the current candidate set"
+      ],
+      "search_stop_decision": "The current candidate race is resolved: remote routes are either unavailable or provenance-ambiguous, while local Qwen9B is clean and executable. Further search would delay the only action that can now produce frontier capability evidence.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External planner and carrier routes were directly refreshed on the public execution surface between 2026-09-29T21:58Z and 22:04Z; the selected local route uses direct execution evidence still inside the 2-hour preflight lease."
+    },
+    "routes_considered": [
+      "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_9B_HIDDEN_ORACLE_CLICK_TASK_C",
+      "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_4B_HIDDEN_ORACLE_CLICK_TASK_C",
+      "ASTRA_PR227_PLUS_MURAKUMO_QWEN38_HIDDEN_ORACLE_CLICK_TASK_C",
+      "ASTRA_PR227_PLUS_VIREONIX_AUTO",
+      "ASTRA_PR227_PLUS_PERSORAI",
+      "ASTRA_PR227_PLUS_LLMFAUCET",
+      "ASTRA_PR227_PLUS_LLM7",
+      "FULL_AGENT_FRAMEWORK_SUBSTITUTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MURAKUMO_QWEN38_FOR_INDEPENDENCE_PROOF_DUE_RESPONSE_IDENTITY_MISMATCH",
+      "VIREONIX_AUTO_CURRENT_CARRIER_403",
+      "PERSORAI_CURRENT_CARRIER_403",
+      "LLMFAUCET_CURRENT_CARRIER_DNS_FAILURE",
+      "LLM7_SELECTED_MODEL_CURRENTLY_UNAVAILABLE",
+      "FULL_AGENT_FRAMEWORK_SUBSTITUTION"
+    ],
+    "selected_surviving_route": "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_9B_HIDDEN_ORACLE_CLICK_TASK_C",
+    "why_selected_route_is_fastest_sufficient": "It is the fastest currently defensible route to verified output after current route failures are accounted for: exact non-frontier model identity, already-proven bridge and carrier, no new integration, and a withheld behavioral oracle that can falsify superficially plausible diagnoses.",
+    "expected_parent_level_state_change": "Execute exactly one fresh real software-systems Task C using the repaired ASTRA controller and explicit local Qwen3.5-9B, derive a patch for a real pre-fix Click race without access to the maintainer fix, and independently verify the generated patch against withheld behavioral tests before any capability credit.",
+    "stop_condition": "Execute this hidden-oracle Task C exactly once; preserve the terminal ASTRA trace, exact local-model/runtime provenance, generated patch, and withheld behavioral-test result; never reveal the oracle before completion and never replay or tune on the same task. Promote only the evidence level actually earned.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T22:04:18Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "https://github.com/moxnixmdj/brain/pull/227",
+          "https://github.com/moxnixmdj/brain/pull/229#issuecomment-5899939138",
+          "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36627371993"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://murakumo.cloud/docs",
+          "https://vireonix.ai/docs",
+          "https://persorai.com/",
+          "https://llm7.io/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/huggingface/smolagents",
+          "https://github.com/agentscope-ai/agentscope",
+          "https://github.com/pallets/click"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-29 discovery of anonymous OpenAI-compatible planner routes and current free-model gateways"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "zero-cost non-frontier planner for open-ended code diagnosis patch synthesis with tool-directed source inspection"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Murakumo Vireonix PersorAI llmfaucet LLM7 versus local Qwen current anonymous inference"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "remote OpenAI-compatible planner versus local GGUF on public GitHub Actions hidden-oracle software task"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current no-key inference exact model identity availability and free planner routes"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_9B_HIDDEN_ORACLE_CLICK_TASK_C",
+          "evidence": [
+            "workflow 36627371993 exact local 9B execution",
+            "PR227 exact runtime validation",
+            "current public carrier run 36637308753"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36627371993",
+            "DIRECT_PROBE run 36637308753"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact model bytes, exact llama.cpp commit, exact repaired ASTRA runtime, and withheld behavioral patch oracle.",
+            "CAPABILITY_STRENGTH": "Prior 9B task selected multiple authoritative sources before the generic finalization defect stopped completion.",
+            "WALL_CLOCK": "Slower startup than remote inference, but remote current candidates fail provenance or availability; therefore fastest route to defensible verified output.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Already executed on the same public carrier with exact provenance; only repaired generic controller bytes differ.",
+            "VERIFIABILITY": "Strong: model hash, runtime blob, trace, generated patch, and hidden behavior tests."
+          }
+        },
+        {
+          "route": "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_4B_HIDDEN_ORACLE_CLICK_TASK_C",
+          "evidence": [
+            "prior local 4B real-task execution 36624408059"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36624408059"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Explicit non-frontier model but weaker prior research trace before termination.",
+            "CAPABILITY_STRENGTH": "Lower than 9B and previously gathered fewer live evidence items.",
+            "WALL_CLOCK": "Faster model startup/inference.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Proven runnable.",
+            "VERIFIABILITY": "Strong provenance, but lower expected first-pass patch success makes wall-clock to verified output worse."
+          }
+        },
+        {
+          "route": "ASTRA_PR227_PLUS_MURAKUMO_QWEN38",
+          "evidence": [
+            "exact-selector current probe workflow 36637308753"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE workflow 36637308753"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Inference returned the requested sentinel, but response model identity did not bind to the requested explicit selector.",
+            "CAPABILITY_STRENGTH": "Potentially strong.",
+            "WALL_CLOCK": "2.659 s warm probe.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Currently executable.",
+            "VERIFIABILITY": "Insufficient for frontier-independence supplier identity because request qwen3.8-27b-throughput-5090 returned response_model murakumo-main."
+          }
+        },
+        {
+          "route": "CURRENT_ANONYMOUS_REMOTE_ALTERNATIVES",
+          "evidence": [
+            "workflows 36636745398 and 36636846714"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE workflows 36636745398 and 36636846714"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "No currently usable clean route from the selected carrier.",
+            "CAPABILITY_STRENGTH": "Unmeasured because execution readiness failed.",
+            "WALL_CLOCK": "Fast failures.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Vireonix/PersorAI 403, llmfaucet DNS failure, LLM7 model unavailable.",
+            "VERIFIABILITY": "Directly falsified on current carrier."
+          }
+        }
+      ],
+      "negative_search_summary": "Current direct probes removed the apparent remote dominators. Local Qwen3.5-9B is the surviving clean route; further provider search is less likely to beat the cost of simply executing the fresh real task.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_9B_HIDDEN_ORACLE_CLICK_TASK_C",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T22:04:18Z",
+        "max_age_hours": 2,
+        "selected_route": "ASTRA_PR227_PLUS_LOCAL_QWEN3_5_9B_HIDDEN_ORACLE_CLICK_TASK_C",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:04:19Z",
+            "evidence": [
+              "DIRECT_PROBE: workflow 36637308753 received GitHub-hosted runner 1000002089 and completed successfully"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PINNED_QWEN3_5_9B_GGUF_AND_LLAMA_CPP_ROUTE",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T20:52:52Z",
+            "evidence": [
+              "DIRECT_PROBE: workflow 36627371993 on the same public repository downloaded and hash-verified Qwen3.5-9B, built pinned llama.cpp, started local inference, and served planner calls"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_CLONE_FOR_PALLETS_CLICK_PREFX_COMMIT",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:04:19Z",
+            "evidence": [
+              "DIRECT_PROBE: current public GitHub Actions run successfully checked out from github.com; GitHub connector independently fetched exact Click pre-fix source commit cbb5b2df1ee3492115f8c2ee5cbb09e2271fc714"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
