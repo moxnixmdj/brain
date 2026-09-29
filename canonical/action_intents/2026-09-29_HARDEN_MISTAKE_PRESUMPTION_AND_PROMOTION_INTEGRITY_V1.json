@@ -175,6 +175,12 @@
         "detection": "Claim scope is weaker than counter or frontier promotion.",
         "prevention": "Strict claim scope mapping.",
         "abort_or_rollback": "Downgrade claim; preserve valid lower-level evidence."
+      },
+      {
+        "failure_mode": "STALE_BOOT_AUTHORITY_REFERENCES",
+        "detection": "Boot requirements point to superseded OBS/acquisition schema versions while current frontier uses newer versions.",
+        "prevention": "Exact-head coherence check compares boot, current_frontier, execution_governance, scoreboard, and gate authorities.",
+        "abort_or_rollback": "Reject merge until all live authority references converge on current versions."
       }
     ],
     "circularity_check": {
@@ -215,7 +221,8 @@
         "circular proof and self certification rejected",
         "coupled core state atomicity enforced",
         "scoreboard promotion evidence enforced",
-        "exact-head readback and rollback triggers mandatory"
+        "exact-head readback and rollback triggers mandatory",
+        "stale OBS V1/V2/template V1 boot references replaced by current V3/V4/template V4 authorities"
       ]
     },
     "evidence_claim_map": [
@@ -252,7 +259,8 @@
       "exact head preserves selected-route preflight controls",
       "pointer and scoreboard exact-head readback agree",
       "scoreboard counters unchanged",
-      "active frontier blocker/next action unchanged"
+      "active frontier blocker/next action unchanged",
+      "boot requirements, current frontier, execution governance, and scoreboard all reference current OBS V3 / receipt V4 / acquisition V5"
     ],
     "rollback_triggers": [
       "any active frontier drift",

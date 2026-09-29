@@ -36,7 +36,6 @@
     "direct_real_effect_verification_preferred": true,
     "material_state_change_invalidates_obs_receipt": true,
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_schema_v2_structural_validation_required": true,
     "frontier_capability_credit_requires_documented_frontier_reference": true,
     "same_domain_parameter_variation_is_not_frontier_fresh_reuse": true,
     "narrow_domain_tool_is_not_frontier_capability": true,
@@ -49,7 +48,10 @@
     "exact_head_readback_required_before_promotion": true,
     "any_counter_increase_requires_promotion_evidence": true,
     "producer_verifier_supplier_independence_required_for_promotion": true,
-    "frontier_dependency_removal_requires_target_supplier_absent_from_execution_and_verification": true
+    "frontier_dependency_removal_requires_target_supplier_absent_from_execution_and_verification": true,
+    "recursive_obs_current_schema_structural_and_live_route_validation_required": true,
+    "selected_route_execution_preflight_required": true,
+    "selected_route_preflight_max_age_hours": 2
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -110,7 +112,9 @@
     "mistake_prevention_law": "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
     "mistake_prevention_receipt_schema": "canonical/governance/MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1.json",
     "self_certification_allowed": false,
-    "circular_frontier_proof_allowed": false
+    "circular_frontier_proof_allowed": false,
+    "selected_route_execution_preflight_required": true,
+    "selected_route_preflight_max_age_hours": 2
   },
   "progress_events": [
     {
