@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-HELDOUT003-EVIDENCE-BOUNDARY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "MERGED_HELDOUT003_INCIDENT_OVERSTATES_EXACT_MATERIALIZATION_CAUSE__QUALIFIED_CARRIER_SOURCE_CONTAINS_AND_PREFLIGHTS_REQUIRED_MODULES__CANONICAL_EVIDENCE_BOUNDARY_MUST_BE_NARROWED_BEFORE_NEXT_GATE",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::MERGED_HELDOUT003_INCIDENT_OVERSTATES_EXACT_MATERIALIZATION_CAUSE__QUALIFIED_CARRIER_SOURCE_CONTAINS_AND_PREFLIGHTS_REQUIRED_MODULES__CANONICAL_EVIDENCE_BOUNDARY_MUST_BE_NARROWED_BEFORE_NEXT_GATE::EVIDENCE_PRESERVATION",
+  "expected_parent_frontier_change": "Correct only the merged HELDOUT-003 incident and hierarchy wording so canonical truth distinguishes the proven live verifier import failure from an unproven exact Sprite materialization cause. Preserve every existing governance conclusion and the next action to freeze a fresh orthogonal gate; make no runtime, carrier, frozen-gate, pointer, queue, or execution change.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR166 incident reconciliation on main 8ef3b701276cd01a4fb5e0b5f3b930a735f898c2",
+    "carrier/heldout003-one-shot-20260929 contains python_library_codec.py blob e9b9f5c4991ba1f11b9f377a275b3e17bad22886",
+    "carrier/heldout003-one-shot-20260929 contains python_source_tree_codec.py blob 8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05",
+    "carrier one-shot shell blob 97ebc82c9f7c529f88bd5ecfe393544c173b19ac hash-checks both modules before evaluator invocation",
+    "authoritative HELDOUT-003 RESULT records python_library_codec import failure on live Sprite",
+    "exact live Sprite materialization transcript is not preserved in canonical evidence"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After incident evidence and hierarchy state only that the live import failure is proven, qualified source/preflight contained the required modules, source-branch omission is false, and exact live materialization cause is unproven, merge this evidence correction. Do not alter the next frontier, freeze or execute a gate, mutate runtime/carrier, replay HELDOUT-003, promote the capability, use Val, or use the user laptop in this action.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "heldout_execution_forbidden": true,
+    "runtime_mutation_forbidden": true,
+    "carrier_mutation_forbidden": true,
+    "replay_forbidden": true,
+    "incremental_spend_usd": 0,
+    "hard_zero_spend": true,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true
+  }
+}
