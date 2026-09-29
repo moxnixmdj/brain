@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-XAPIAN-APT-E2E-HELDOUT-006-CODE39-ZXING-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-006",
+  "causal_blocker": "H005_BLOCKED_UNSPENT__UBUNTU_DIRECT_SURFACE_LACKS_REQUIRED_CONTENTS_ALL__FROZEN_GATE_MUST_NOT_BE_WEAKENED",
+  "action_kind": "FREEZE_NEW_ORTHOGONAL_FRESH_GATE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::H005_BLOCKED_UNSPENT__UBUNTU_DIRECT_SURFACE_LACKS_REQUIRED_CONTENTS_ALL__FROZEN_GATE_MUST_NOT_BE_WEAKENED::FREEZE_NEW_ORTHOGONAL_FRESH_GATE",
+  "expected_parent_frontier_change": "Freeze a realizable post-repair gate before any H006 execution. H006 differs materially from H004 in domain (1-D variable-length Code 39 vs 2-D QR) and verification mechanism (ZXingReader/zxing-cpp-tools vs zbarimg/zbar). Reuse the already-qualified Debian Trixie public GitHub carrier. Runtime receives no producer/verifier package hints. H004 stays spent/no-replay; H005 stays blocked/unspent/immutable.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "H004 terminal FAIL and no-replay merged PR203",
+    "generic verifier admission repair merged PR204, repaired verifier blob a6b028c25d79d2dff59c87e3b3ad91d9fe934dae",
+    "H005 frozen PR205 then blocked pre-START by Ubuntu Contents-all absence in PR206",
+    "PR55 archived evidence independently verified zxing-cpp-tools 2.2.1-3 /usr/bin/ZXingReader recovered exact payload with positional file-to-stdout contract",
+    "repository search found no H006 ID or PB-H006-C39-A91D72 before freeze"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_BUT_INTEGRATION_BLOCKED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [
+    "PB-H006-C39-A91D72",
+    "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-006"
+  ],
+  "stop_condition": "Freeze mission/evaluator only. No H006 producer discovery, candidate install, held-out payload generation, oracle execution, START, or RESULT in this PR. After merge, qualify ZXingReader availability/positional output contract generically on Debian without H006 payload, then execute H006 exactly once if qualification passes.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
