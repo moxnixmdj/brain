@@ -525,7 +525,8 @@
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
     "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V2.json",
-    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V3.json"
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V3.json",
+    "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -699,7 +700,8 @@
     "strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md",
     "target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "operating_mode": "REAL_CAPABILITY_ACQUISITION_ENGINE",
-    "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT"
+    "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
+    "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json"
   },
   "active_persistent_controllers": [
     {
