@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-GITHUB-APP-ALL-REPOSITORIES-SCOPE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_HARD_ZERO_CAPSULE_SEALED_PUBLICATION_SAFE__CURRENT_GITHUB_CONNECTOR_HAS_NO_PUBLIC_REPOSITORY_CREATE_OR_VISIBILITY_MUTATION_ACTION__NO_EXECUTION",
+  "action_kind": "EXTERNAL_AUTHORITY_BOUNDARY_MINIMIZATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_HARD_ZERO_CAPSULE_SEALED_PUBLICATION_SAFE__CURRENT_GITHUB_CONNECTOR_HAS_NO_PUBLIC_REPOSITORY_CREATE_OR_VISIBILITY_MUTATION_ACTION__NO_EXECUTION::EXTERNAL_AUTHORITY_BOUNDARY_MINIMIZATION",
+  "expected_parent_frontier_change": "Delete the redundant post-creation GitHub App grant step because the live installation reports repository_selection=all for the user account. Reduce the user boundary to creating one empty public repository only. Preserve H004 unspent and perform no execution.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR196 sealed publication-safe 22-file H004 capsule and one-shot workflow",
+    "live GitHub installation id 160697100 on account moxnixmdj reports repository_selection=all",
+    "current GitHub connector repository list contains only private repositories brain and rabitto",
+    "current GitHub connector still exposes no repository-create or visibility-mutation action"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile descriptor state only. Do not create or publish any repository, do not copy capsule bytes externally, and do not create H004 START or RESULT.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
