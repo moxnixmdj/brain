@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_002_EXECUTION_SURFACE_BLOCKER_V1",
-  "status": "WAITING_ON_CALLABLE_TOOLSET_CHANGE__HELDOUT_GATE_002_UNSPENT",
+  "status": "WAITING_ON_CALLABLE_TOOLSET_CONNECTION__HELDOUT_GATE_002_UNSPENT",
   "checked_on": "2026-09-29",
   "source_pr": 85,
   "pr_head_before_receipt": "6cc8fb7b3e1bb5697de6bef43d0f64e4844c218a",
@@ -71,16 +71,16 @@
       "evidence": "Connected Vercel account returns zero teams; no callable Sandbox context is available through the MCP surface."
     },
     "github_public_runner": {
-      "status": "BLOCKED_NO_PUBLIC_REPOSITORY_AND_NO_REPOSITORY_CREATE_OR_VISIBILITY_ACTION",
-      "evidence": "GitHub search for owner moxnixmdj returns only private repositories brain and rabitto. Connected GitHub MCP exposes no create-repository or visibility-change action."
+      "status": "BLOCKED_NO_PUBLIC_REPOSITORY_CREATION_OR_FORK_PRIMITIVE",
+      "evidence": "Current GitHub connector exposes neither create_repository, fork, visibility mutation, nor workflow_dispatch primitives. Existing owner repositories remain private, so the free-public-Actions carrier route cannot be instantiated through the connected GitHub surface."
     },
     "sprites": {
-      "status": "REJECTED_HARD_ZERO_UNPROVABLE",
-      "evidence": "Sprites exposes create/exec but no billing, credit, or hard-spend-cap state. Creating a sprite would violate fail-closed $0 governance."
+      "status": "CALLABLE_BUT_CREATION_FORBIDDEN_HARD_ZERO_UNPROVABLE",
+      "evidence": "Current Sprites MCP is loaded and authenticated; list_sprites reports org mohammad-sadek with zero sprites and zero running/warm/cold environments. The callable tool surface exposes create/exec/files/network policy but no account billing, trial-credit balance, spend cap, or remaining-credit primitive. Official Sprites pricing is metered during active use and trial credit eligibility is account/org-specific, so creating a sprite remains fail-closed under hard-$0 governance."
     },
     "railway": {
-      "status": "TECHNICAL_FIT_BUT_CONNECTOR_NOT_INSTALLED",
-      "evidence": "Railway plugin exists in the plugin directory but is not installed/connected in this session; current tool surface therefore cannot invoke its remote Linux runtime."
+      "status": "VERIFIED_FREE_ANONYMOUS_VM__CHATGPT_PLUGIN_AVAILABLE_BUT_UNINSTALLED",
+      "evidence": "Official Railway documentation on 2026-09-29 confirms ssh railway.new provides an unclaimed Linux VM for 60 minutes with 2 vCPU/2 GB RAM, no account and no card; nobody pays for unclaimed compute. Plugin-directory search returns the Railway ChatGPT plugin as AVAILABLE but installed=false. Current session therefore has a verified-zero-spend substrate but no connected invocation bridge."
     },
     "generic_ssh": {
       "status": "UNAVAILABLE",
@@ -88,7 +88,7 @@
     },
     "chatgpt_container": {
       "status": "REJECTED_NETWORK_POLICY_BLOCKS_FAITHFUL_APT_SURFACE",
-      "evidence": "Current ChatGPT container is Debian 13/root but NETWORK=caas_packages_only; apt-file is absent, APT lists are empty, deb.debian.org cannot resolve, and direct outbound TCP tests are refused. It cannot acquire normal Packages/Contents metadata or Ubuntu manpage HTTPS evidence."
+      "evidence": "Fresh direct recheck: Debian GNU/Linux 13 (trixie), apt-file absent, /var/lib/apt/lists contains zero files, DNS resolution for manpages.ubuntu.com and deb.debian.org fails, HTTPS curl returns no connection, and the dedicated container download path also fails to fetch Debian trixie Release. A faithful Packages+Contents+manpage surface cannot be built here."
     },
     "github_private_actions": {
       "status": "REJECTED_CONFIRMED_PRE_RUNNER_FAILURE",
@@ -117,29 +117,35 @@
     "replit": {
       "status": "REJECTED_NO_RAW_SHELL_OR_EXACT_SURFACE_CONTROL",
       "evidence": "Connected Replit actions expose app-agent create/update/question/publish operations, not an arbitrary shell with direct control of APT metadata, apt-file indexes, exact branch bytes, and bounded network behavior."
+    },
+    "e2b": {
+      "status": "TECHNICALLY_PLAUSIBLE_FREE_CREDIT__NO_CALLABLE_PLUGIN",
+      "evidence": "Official E2B pricing currently advertises a free Hobby tier with $100 one-time usage credit, no credit card, sessions up to one hour. Current ChatGPT plugin-directory search returns no E2B plugin, so no authenticated/callable bridge exists in this session."
     }
   },
-  "only_remaining_truth_transition": "CALLABLE_TOOLSET_CHANGE_TO_ONE_VERIFIED_ZERO_SPEND_REMOTE_LINUX_EXECUTOR__THEN_RUN_HELDOUT_VALIDATION_002_ONCE__THEN_RECONCILE",
+  "only_remaining_truth_transition": "CONNECT_RAILWAY_PLUGIN_OR_EQUIVALENT_VERIFIED_ZERO_SPEND_REMOTE_LINUX_BRIDGE__RUN_HELDOUT_VALIDATION_002_EXACTLY_ONCE__RECONCILE",
   "latest_connector_directory_recheck": {
     "checked_on": "2026-09-29",
-    "result": "NO_NEW_CALLABLE_ZERO_SPEND_REMOTE_LINUX_EXECUTOR",
+    "result": "ONE_VERIFIED_ZERO_SPEND_EXECUTOR_PLUGIN_EXISTS_BUT_REQUIRES_CONNECTION",
     "searched_categories": [
-      "Google server-side script/notebook execution",
-      "Gitpod/Coder/Devbox/cloud IDE",
-      "Fly.io/Modal/E2B/Cloudflare sandbox compute",
-      "generic SSH/remote shell"
+      "Railway remote Linux VM",
+      "E2B sandbox",
+      "iximiuz Linux playground",
+      "generic SSH/remote shell",
+      "Daytona sandbox",
+      "Modal sandbox"
     ],
     "findings": [
-      "Connected Google tooling exposes document/sheet/slide APIs but no Apps Script, Colab, notebook, or arbitrary compute execution.",
-      "Plugin directory exposes no Gitpod, Coder, Devbox, Fly.io, Modal, E2B, or Cloudflare sandbox executor.",
-      "Railway remains the only relevant available remote-compute plugin surfaced by directory search, but it remains not installed/connected.",
-      "No generic SSH connector exists beyond Remote Desktop Commander; user laptop execution remains forbidden."
+      "Railway plugin is available in the ChatGPT plugin directory but is not installed/connected.",
+      "No E2B, iximiuz, Daytona, Modal, or generic SSH sandbox plugin was returned.",
+      "Sprites is already callable, but account-specific zero-spend eligibility cannot be proven through its current MCP surface.",
+      "DigitalOcean and Remote Desktop remain installed but are already disqualified by zero-credit and no-user-laptop constraints."
     ]
   },
   "shortest_known_route": {
     "surface": "Railway anonymous VM",
     "invocation": "ssh railway.new",
-    "status": "EXTERNALLY_AVAILABLE_BUT_NOT_CALLABLE_FROM_CURRENT_TOOLSET",
-    "reason": "Railway documents a free VM without an account; the Railway ChatGPT plugin is available but not installed/connected, and this ChatGPT container cannot make outbound SSH connections."
+    "status": "VERIFIED_ZERO_SPEND_SUBSTRATE__PENDING_CHATGPT_PLUGIN_CONNECTION",
+    "reason": "Railway officially states unclaimed VMs are free, require no account/card, last 60 minutes, and nobody pays for their compute. The Railway ChatGPT plugin is available but not connected; installing/connecting a plugin requires explicit user action and cannot be completed autonomously from this session."
   }
 }
