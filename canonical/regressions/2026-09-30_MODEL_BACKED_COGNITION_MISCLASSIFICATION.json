@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_V1",
+  "regression_id": "MODEL_BACKED_COGNITION_MISCLASSIFICATION_20260930",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "incident": {
+    "pr": 230,
+    "workflow_run": 36637782165,
+    "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "invalid_route": "REPAIRED_ASTRA_PLUS_REQUIRED_LOCAL_QWEN3_5_9B_PLANNER",
+    "violated_law": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
+    "failure": "A required pretrained model was admitted as the planner/reasoning source for a capability whose substance is reasoning, planning, synthesis, falsification, adaptation, and tool selection."
+  },
+  "invariant": "Brain may use models as optional external sources/tools, but a cognitive capability cannot be acquired, fresh-reused, promoted, or credited when successful cognition requires MODEL_API, LOCAL_MODEL, or MODEL_ARTIFACT.",
+  "trusted_guard_predicate": "MODEL_REQUIRED_AS_COGNITION_DEPENDENCY_FOR_COGNITIVE_CAPABILITY",
+  "negative_case": {
+    "action_kind": "FRESH_REUSE",
+    "cognitive_parent_family": "TECHNICAL_SCIENTIFIC_REASONING",
+    "execution_dependency": {
+      "kind": "LOCAL_MODEL",
+      "required": true
+    },
+    "expected": "REJECT"
+  },
+  "positive_case": {
+    "action_kind": "FRESH_REUSE",
+    "cognitive_parent_family": "TECHNICAL_SCIENTIFIC_REASONING",
+    "execution_dependencies": [
+      {
+        "kind": "LOCAL_RUNTIME",
+        "required": true
+      },
+      {
+        "kind": "CODE_ARTIFACT",
+        "required": true
+      },
+      {
+        "kind": "DATA_SOURCE",
+        "required": true
+      }
+    ],
+    "expected": "PASS_THIS_PREDICATE"
+  },
+  "no_credit_from_incident_run": [
+    "BRAIN_REASONING_ACQUIRED",
+    "FRESH_COGNITIVE_REUSE",
+    "REUSABLE_COGNITIVE_CAPABILITY_INHERITED",
+    "FRONTIER_MODEL_DEPENDENCY_REMOVED"
+  ]
+}
