@@ -4862,39 +4862,6 @@ def _ground_plain_goal_to_bound_capabilities(mission, goal):
     writej(path,result)
     return path,result
 
-def _load_plain_goal_bound_grounding():
-    path=pathlib.Path(__file__).resolve().parent/"bound_capabilities"/"plain_goal_bound_grounding.py"
-    spec=importlib.util.spec_from_file_location("project_brain_plain_goal_bound_grounding",path)
-    if spec is None or spec.loader is None:
-        raise Blocker("PLAIN_GOAL_BOUND_GROUNDING_LOAD_FAILED")
-    module=importlib.util.module_from_spec(spec)
-    sys.modules[spec.name]=module
-    spec.loader.exec_module(module)
-    return module
-
-
-def _ground_existing_bound_capabilities(goal,mission):
-    """Ground a plain goal against verified bound capabilities before supplier discovery.
-
-    Returns None only when every clause is genuinely unresolved. Any credible
-    bound grounding is preserved as evidence and forces the caller to remain on
-    the internal composition path instead of searching for new suppliers.
-    """
-    module=_load_plain_goal_bound_grounding()
-    registry=_load_bound_capability_registry()
-    result=module.ground(goal,registry)
-    if int(result.get("grounded_clause_count") or 0)<=0:
-        return None
-    mid=str((mission or {}).get("mission_id") or "UNKNOWN")
-    path=EVID_DIR/f"{mid}__BOUND_CAPABILITY_GROUNDING.json"
-    evidence=dict(result)
-    evidence["mission_id"]=mid
-    evidence["policy"]="BOUND_CAPABILITIES_BEFORE_EXTERNAL_DISCOVERY__FAIL_CLOSED_ON_INTERNAL_COMPOSITION_GAP"
-    evidence["observed_at_utc"]=utc()
-    writej(path,evidence)
-    return path,evidence
-
-
 def _load_auto_capability_acquisition():
     _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("auto_capability_acquisition.py")
@@ -5502,24 +5469,6 @@ def run_goal(step, mission):
                       "grounded_clause_count":grounded_count,
                       "external_capability_acquisition_attempted":False,
                       "policy":"RESOLVE_EXISTING_BOUND_GROUNDING_BEFORE_EXTERNAL_DISCOVERY",
-                    },sort_keys=True)
-                ) from e
-
-            # Before any external supplier search, prove whether Brain already
-            # has semantically compatible verified zero-spend capabilities.
-            # This is deliberately fail-closed: partial/ambiguous grounding
-            # stays inside Brain and becomes the next composition problem.
-            grounded=_ground_existing_bound_capabilities(acquisition_goal,mission)
-            if grounded is not None:
-                grounding_path,grounding_evidence=grounded
-                raise Blocker(
-                    "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED:"
-                    +json.dumps({
-                      "evidence_path":str(grounding_path.relative_to(ROOT)),
-                      "grounded_clause_count":grounding_evidence.get("grounded_clause_count"),
-                      "unresolved_clause_indexes":grounding_evidence.get("unresolved_clause_indexes"),
-                      "candidate_capability_ids":grounding_evidence.get("candidate_capability_ids"),
-                      "external_discovery_attempted":False,
                     },sort_keys=True)
                 ) from e
 
