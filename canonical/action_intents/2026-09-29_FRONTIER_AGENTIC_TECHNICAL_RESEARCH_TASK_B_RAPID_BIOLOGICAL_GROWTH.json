@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRONTIER-AGENTIC-TECHNICAL-RESEARCH-TASK-B-RAPID-BIOLOGICAL-GROWTH",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CROSS_DOMAIN_REAL_TASK_B_UNSPENT__GENERAL_FRONTIER_RESEARCH_TRANSFER_UNPROVEN",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CROSS_DOMAIN_REAL_TASK_B_UNSPENT__GENERAL_FRONTIER_RESEARCH_TRANSFER_UNPROVEN::FRESH_REUSE",
+  "expected_parent_frontier_change": "Complete a materially different real scientific Task B by evaluating rapid organism-scale mass growth under conservation laws and measured biological growth/transport limits, independently verify the conclusion, and use it as cross-domain transfer evidence without promoting the frontier capability unless the evidence supports it.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Task A space-cargo evidence",
+    "Frontier target record",
+    "No existing cross-domain Task B evidence"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when the rapid-growth Task B is quantitatively resolved enough to identify the binding mass, energy, heat, transport, and cell-cycle limits; key claims are independently cross-checked; provenance is recorded; and cross-domain transfer evidence is ready for adjudication.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4520aec1f31baba438af5f30f9416a3eb53f5bfd",
+    "real_outcome": "Answer the user's real scientific feasibility question: can a roughly 70 kg organism become roughly 700 kg in seconds or minutes through highly parallel biological growth, under conservation laws and known physiology?",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Decision-quality scientific feasibility analysis in a materially different domain from aerospace.",
+      "proxy_goals_deleted": [
+        "biology benchmark",
+        "custom cell simulator",
+        "procedural bioengineering design"
+      ],
+      "surviving_necessity": "Resolve the question with published biology and first-principles bounds."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Task A general research/problem-solving route",
+        "Brain deterministic calculation",
+        "web literature search",
+        "independent computational verification"
+      ],
+      "external_existing_routes_checked": [
+        "mammalian cell-cycle literature",
+        "body composition references",
+        "cardiac-output/transport physiology",
+        "bioenergetic growth literature"
+      ],
+      "capability_work_deleted": [
+        "No custom simulator",
+        "No wet-lab procedure design",
+        "No synthetic benchmark"
+      ],
+      "surviving_gap": "Need to transfer the same general route to biology/biophysics and quantify the dominant limits."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Scientific feasibility uncertainty, not infrastructure.",
+      "delete_bypass_substitute_options": [
+        "Use mass conservation before genetics details",
+        "Use measured physiological transport before microscopic simulation",
+        "Use order-of-magnitude bounds before specialized modeling"
+      ],
+      "surviving_causal_blocker": "Need quantitative bounds on matter inflow, cell-cycle generations, biosynthetic energy, and heat/transport."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Authoritative literature + first-principles bounds + independent recalculation",
+        "Detailed biological simulation",
+        "Custom modeling stack"
+      ],
+      "losing_routes_reason": "First-order conservation and measured rates can decide the high-level feasibility envelope faster and more robustly.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic gate. Cross-check arithmetic independently and ground biological rates in authoritative literature."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Gene-only framing if mass conservation dominates",
+        "Detailed simulation if first-order bounds already decide feasibility"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Mass-balance reasoning",
+        "parallel-process scaling analysis",
+        "bioenergetic and transport bounding"
+      ],
+      "fresh_reuse_plan": "This task is the cross-domain fresh-reuse test versus aerospace Task A."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse Task A research pattern",
+        "Search only decision-changing biological facts",
+        "Stop before unnecessary molecular detail"
+      ],
+      "search_stop_decision": "Stop when independent sources and first-principles bounds agree on the dominant feasibility constraints and further detail cannot change the high-level result.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "LITERATURE_PLUS_FIRST_PRINCIPLES_BOUNDS",
+      "DETAILED_BIOLOGICAL_SIMULATION",
+      "CUSTOM_MODELING_STACK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SYNTHETIC_BENCHMARK",
+      "CUSTOM_CELL_SIMULATOR",
+      "PROCEDURAL_BIOENGINEERING_DESIGN"
+    ],
+    "selected_surviving_route": "LITERATURE_PLUS_FIRST_PRINCIPLES_BOUNDS",
+    "why_selected_route_is_fastest_sufficient": "It directly tests the real scientific question, transfers the same general research method across domains, is independently verifiable, and avoids unnecessary or unsafe procedural detail.",
+    "expected_parent_level_state_change": "Complete a materially different real scientific Task B by evaluating rapid organism-scale mass growth under conservation laws and measured biological growth/transport limits, independently verify the conclusion, and use it as cross-domain transfer evidence without promoting the frontier capability unless the evidence supports it.",
+    "stop_condition": "Stop when the rapid-growth Task B is quantitatively resolved enough to identify the binding mass, energy, heat, transport, and cell-cycle limits; key claims are independently cross-checked; provenance is recorded; and cross-domain transfer evidence is ready for adjudication."
+  }
+}
