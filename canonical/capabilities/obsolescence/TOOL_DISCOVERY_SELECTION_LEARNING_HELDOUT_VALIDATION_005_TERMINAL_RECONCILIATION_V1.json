@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+  "status": "EXECUTED_ONCE_FRESH__PASS__SPENT__LATER_REPLAY_INCIDENT_QUARANTINED",
+  "checked_on": "2026-09-29",
+  "authoritative_first_execution": {
+    "railway_deployment_id": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "execution_started_at": "2026-09-29T02:52:21.958374122Z",
+    "result_observed_at": "2026-09-29T02:52:41.891761154Z",
+    "runner_rc": 0,
+    "pr_head": "48c53d0f1b2474c334fcfbb87bd6946c1dc850bb",
+    "protected_blobs": {
+      "runtime": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "new_test": "4e8c43ddf32a10947462e36198ec957c2f23094f",
+      "preserved_test": "0b9bcd25cf4cea2ad1a410efd43f8f8b2f618f0a",
+      "manifest": "82854b92b2253ba607ff5c521102c50ae49fd47d",
+      "runner": "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
+    },
+    "preflight": {
+      "generic_tests": "8/8 PASS",
+      "translation_en_count": 3,
+      "contents_amd64_count": 2,
+      "contents_all_count": 2,
+      "python3_xapian": "PASS"
+    },
+    "result": {
+      "acceptance_gate_pass": true,
+      "heldout_oracle_family_recall": 1,
+      "heldout_top20_oracle_recall": 1,
+      "total_wall_s": 16.233238,
+      "hard_validation_wall_s": 120,
+      "cases": [
+        {
+          "effect_id": "HELDOUT-YAML-PROCESS-005",
+          "oracle": "yq",
+          "rank": 4,
+          "found": true
+        },
+        {
+          "effect_id": "HELDOUT-PARALLEL-JOBS-005",
+          "oracle": "parallel",
+          "rank": 1,
+          "found": true
+        },
+        {
+          "effect_id": "HELDOUT-DIRECTORY-SYNC-005",
+          "oracle": "rsync",
+          "rank": 12,
+          "found": true
+        },
+        {
+          "effect_id": "HELDOUT-COMMAND-BENCHMARK-005",
+          "oracle": "hyperfine",
+          "rank": 1,
+          "found": true
+        }
+      ],
+      "candidate_packages_installed": false,
+      "candidate_binaries_executed": false,
+      "package_hints_used_by_runtime": false
+    }
+  },
+  "replay_incident": {
+    "railway_deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
+    "execution_started_at": "2026-09-29T02:52:52.828526746Z",
+    "classification": "FORBIDDEN_POST_SPEND_REPLAY__DO_NOT_USE_AS_ACCEPTANCE_EVIDENCE",
+    "effect_on_authoritative_first_execution": "NONE__FIRST_FRESH_EXECUTION_COMPLETED_BEFORE_REPLAY_START"
+  },
+  "aborted_concurrent_deployment": {
+    "railway_deployment_id": "825cf351-a1dd-4222-8f63-94fad7dac1c2",
+    "classification": "ABORTED_PRE_EXECUTION_HEAD_MISMATCH",
+    "acceptance_evidence": false
+  },
+  "freshness": "SPENT",
+  "effective_fresh_execution_count": 1,
+  "same_case_replay_allowed": false,
+  "promotion_authorized_by_gate": true,
+  "required_next_action": "RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_PROMOTE_CLEAN_ROUTE_IF_ALL_PASS"
+}
