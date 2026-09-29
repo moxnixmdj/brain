@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SELECTION_LEARNING_POST_XAPIAN_INTEGRATION_DELTA_RECONCILIATION_V1",
+  "status": "STATIC_INTERFACE_BREAK_CONFIRMED__NO_RUNTIME_MUTATION",
+  "checked_on": "2026-09-29",
+  "bound_main_sha": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "inherited_discovery_route": {
+    "runtime_path": "canonical/runtime/capability_discovery.py",
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "source_pr": 89,
+    "inherited_by_merge_pr": 96,
+    "behavior": {
+      "result_source": "APT_FULL_METADATA_XAPIAN",
+      "candidate_discovery_source": "APT_FULL_METADATA_XAPIAN",
+      "candidate_binding_kind": "apt",
+      "executable_ownership_tier": "SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP"
+    }
+  },
+  "downstream_router": {
+    "path": "canonical/runtime/auto_capability_acquisition.py",
+    "git_blob": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "observation": "_discovery_supplier_order already maps candidate binding_kind apt to supplier class apt_cli."
+  },
+  "blocking_consumer": {
+    "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+    "git_blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
+    "function": "_viable_candidates",
+    "blocking_predicate": "candidate.discovery_source must equal APT_CATALOG",
+    "consequence": "Candidates from the inherited APT_FULL_METADATA_XAPIAN route are discarded before apt_cli_probe, cli_contract_inference, execution, and verification."
+  },
+  "causal_conclusion": "VERIFIED_DISCOVERY_GAIN_CANNOT_FLOW_INTO_EXISTING_AUTONOMOUS_APT_ACQUISITION_LOOP_BECAUSE_A_LEGACY_SOURCE_LITERAL_IS_USED_AS_AN_ADMISSION_GATE",
+  "minimal_generic_repair": "Admit APT candidates by the already-existing binding_kind == apt interface (retaining legacy APT_CATALOG compatibility) while preserving all existing zero-cost, zero-secret, integration-friction, version, archive-SHA256, score, and role checks. Do not add an APT_FULL_METADATA_XAPIAN special-case literal.",
+  "unknown_after_repair": "Whether later score, probe, contract-inference, binding, execution, or verification stages expose a distinct residual blocker is intentionally unclaimed until fresh end-to-end evidence.",
+  "prohibited": [
+    "HELDOUT-005 replay",
+    "package hints",
+    "task-specific literals",
+    "Xapian ranking retuning from spent cases",
+    "source-specific exception patch when binding_kind already supplies the generic interface"
+  ],
+  "next_action": "ONE_GENERIC_DISCOVERY_TO_APT_ACQUISITION_INTERFACE_REPAIR__THEN_FRESH_END_TO_END_DISCOVER_BIND_EXECUTE_VERIFY_VALIDATION__THEN_RECONCILE"
+}
