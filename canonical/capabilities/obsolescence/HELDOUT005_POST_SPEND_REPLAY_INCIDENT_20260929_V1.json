@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_COORDINATION_INCIDENT_V1",
+  "incident_id": "HELDOUT005_POST_SPEND_REPLAY_20260929",
+  "status": "QUARANTINED",
+  "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+  "authoritative_first_execution": "805a36d4-04cf-4938-bfac-74d29418081f",
+  "first_execution_started_at": "2026-09-29T02:52:21.958374122Z",
+  "first_result_observed_at": "2026-09-29T02:52:41.891761154Z",
+  "first_execution_completed_before_replay": true,
+  "later_replay_deployment": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
+  "later_replay_started_at": "2026-09-29T02:52:52.828526746Z",
+  "root_class": "CONCURRENT_WORKER_MUTATED_LEASED_RAILWAY_SERVICE_AFTER_SPEND",
+  "invariant": "VALIDATION_ID_PLUS_MANIFEST_BLOB_IS_MONOTONIC_IDENTITY__FIRST_FRESH_EXECUTION_ONLY",
+  "corrective_rule": "AFTER_FIRST_EXECUTION_START_ALL_LATER_DEPLOYMENTS_FOR_THE_SAME_VALIDATION_ID_PLUS_MANIFEST_HASH_ARE_REPLAY_ONLY_AND_MUST_NEVER_AFFECT_ACCEPTANCE_OR_REPAIR_SELECTION",
+  "no_candidate_change": true
+}
