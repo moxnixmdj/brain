@@ -4,38 +4,40 @@
   "canonical_base_sha": "c37a4e479b4cc571d74535790696c9f4d17dc32f",
   "action_intent": "canonical/action_intents/2026-09-29_RECONCILE_H004_CHATGPT_LINUX_CARRIER_READONLY_QUALIFICATION_V1.json",
   "evidence_authority": "CARRIER_QUALIFICATION_ONLY__NOT_PARENT_CAPABILITY_VERDICT",
-  "source_guard": {
-    "pr": 178,
-    "guarded_intent_head": "657435e028636d3c895712aeebdd0569e9bbfd6c",
-    "authorization": "READ_ONLY_NON_HELDOUT_CARRIER_DIAGNOSTICS_ONLY__STOP_ON_FIRST_FAILED_PREDICATE",
-    "later_pr_history": "QUARANTINED__POST_SNAPSHOT_APT_UPDATE_SCOPE_OVERRUN_AND_DUPLICATE_LABELS_EXCLUDED"
+  "qualification_scope": "READ_ONLY_CARRIER_SURFACE__ORDERED_STOP_AT_FIRST_REQUIRED_FAILURE__NO_SOURCE_TRANSPORT__NO_HELDOUT_START",
+  "carrier": {
+    "class": "CHATGPT_BUILTIN_LINUX_CONTAINER",
+    "os_id": "debian",
+    "os_version_id": "13",
+    "os_codename": "trixie",
+    "user_device_used": false,
+    "val_town_used": false,
+    "incremental_infrastructure_provisioned": false,
+    "incremental_spend_incurred_usd": 0
   },
-  "preserved_read_only_snapshot": {
-    "text_sha256": "34947e62bee9248ac311c10979b79c25b6a3d5a1769523b816cc0d48cd5b13c3",
-    "carrier": {
-      "class": "CHATGPT_BUILTIN_LINUX_CONTAINER",
-      "os": "Debian GNU/Linux 13 (trixie)",
-      "uid": 0,
-      "user_device_used": false,
-      "val_town_used": false
+  "ordered_required_surface_predicates": [
+    {
+      "id": "LINUX_DEBIAN_FAMILY",
+      "result": "PASS",
+      "evidence": "Debian 13 trixie"
     },
-    "observed": {
-      "apt_present": true,
-      "sudo_noninteractive_available": true,
-      "apt_lists_regular_files": 0,
-      "apt_file_present": false,
-      "python_xapian_present": false,
-      "zbarimg_present": false,
-      "deb_debian_org_dns_resolved": false,
-      "debian_https_resolution_available": false
+    {
+      "id": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
+      "result": "FAIL",
+      "evidence": "APT_PACKAGES_METADATA_FILES=0",
+      "first_terminal_failure": true
     }
-  },
+  ],
+  "stopped_after_first_required_failure": true,
+  "later_surface_predicates": "NOT_ADJUDICATED_AFTER_FIRST_FAILURE",
+  "package_manager_mutation_attempted": false,
+  "project_source_transport_attempted": false,
   "adjudication": {
     "qualified": false,
     "first_failed_required_predicate": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
-    "corroborating_same_snapshot_failure": "CONFIGURED_DEBIAN_MIRROR_UNREACHABLE_AT_DNS",
     "carrier_admissible_for_h004": false,
     "capability_runtime_failure": false,
+    "parent_capability_verdict": "UNPROVEN",
     "hard_zero_executor_admission": "NOT_ADJUDICATED_AFTER_EARLIER_REQUIRED_SURFACE_FAILURE",
     "exact_source_materialization": "NOT_PERFORMED_AFTER_EARLIER_REQUIRED_SURFACE_FAILURE"
   },
@@ -43,24 +45,26 @@
     "freshness_state": "UNSPENT",
     "execution_count": 0,
     "start_marker_created": false,
+    "result_created": false,
     "dispatch_invoked": false,
     "evaluator_invoked": false
   },
   "excluded_from_authority": [
     "PR178 apt-get update attempt",
     "PR178 post-overrun first-failure relabelings",
-    "any provider documentation treated as executor admission without live callable qualification"
+    "any carrier observation after the ordered first required failure",
+    "provider documentation treated as executor admission without live callable qualification"
   ],
   "reusable_existing_mechanisms": [
     "PR20 exact Git-blob private-repository reconstruction",
     "PR35 content-addressed source-tree materialization and hash checking",
     "PR45 content-addressed exact-source execution"
   ],
-  "required_next_action": "QUALIFY_ONE_ALREADY_DISCOVERED_HARD_ZERO_CONNECTED_REMOTE_LINUX_ROUTE__PROVE_CALLABLE_COMMAND_TRANSPORT_AND_ZERO_SPEND__THEN_PREFLIGHT_EXACT_SOURCE_CLOSURE_PATHS_HASHES_AND_IMPORTS__SEPARATE_H004_ONE_SHOT_EXECUTION_LEASE",
+  "required_next_action": "QUALIFY_NEXT_ALREADY_DISCOVERED_HARD_ZERO_REMOTE_LINUX_ROUTE__REQUIRE_CALLABLE_COMMAND_TRANSPORT_AND_FAITHFUL_APT_SURFACE__PREFLIGHT_EXACT_RUNTIME_CLOSURE_PATHS_HASHES_AND_IMPORTS__NO_HELDOUT_004_START",
   "prohibitions": [
     "NO_HELDOUT_004_START_BEFORE_SEPARATE_GUARDED_EXECUTION_LEASE",
     "NO_HELDOUT_003_REPLAY",
-    "NO_APT_MUTATION_IN_THIS_RECONCILIATION",
+    "NO_APT_UPDATE_OR_INSTALL",
     "NO_SOURCE_TRANSPORT_IN_THIS_RECONCILIATION",
     "NO_SPRITE",
     "NO_VAL_TOWN",
