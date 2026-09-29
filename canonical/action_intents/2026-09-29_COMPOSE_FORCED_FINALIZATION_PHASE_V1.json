@@ -18,7 +18,8 @@
     "smolagents 1.26.0 source/package",
     "AgentScope current ReAct source",
     "Qwen-Agent 0.0.34 source/package",
-    "Qwen3.8-27B official model/quant/runner fit"
+    "Qwen3.8-27B official model/quant/runner fit",
+    "Fresh anonymous inference discovery and direct Wolfram-carrier probes: Vireonix HTTP 200 nontrivial generation via MiniMax-M3; Murakumo HTTP 200 reasoning plus valid OpenAI-style tool_call; Bing HTML search HTTP 200."
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -55,18 +56,23 @@
         "Hugging Face smolagents 1.26.0 max-step final-answer path",
         "AgentScope current ReAct forced finalization call",
         "Qwen-Agent 0.0.34 agent framework",
-        "Qwen3.8-27B current open-weight model"
+        "Qwen3.8-27B current open-weight model",
+        "Vireonix anonymous OpenAI-compatible auto route: directly callable without key; nontrivial generation returned HTTP 200 via MiniMax-M3.",
+        "Murakumo anonymous route: directly callable without key; direct probe emitted a valid OpenAI-style tool_call.",
+        "Wolfram URLRead/HTTPRequest plus Bing HTML search: directly callable zero-key transport/search primitives."
       ],
       "capability_work_deleted": [
         "No new agent runtime",
         "No model upgrade",
         "No cycle-limit inflation",
-        "No same-task tuning"
+        "No same-task tuning",
+        "No GitHub Actions carrier repair is required to establish supplier reachability",
+        "No provider account/API-key acquisition before anonymous routes are exhausted"
       ],
-      "surviving_gap": "ASTRA terminates with GOAL_MAX_CYCLES_WITHOUT_FINISH instead of reserving a distinct finalization-only phase after evidence collection."
+      "surviving_gap": "ASTRA still lacks a bounded finalization-only transition after evidence/action budget exhaustion. Fresh anonymous suppliers can replace the planner backend later, but do not remove this controller-state transition."
     },
     "obs_blocker": {
-      "intrinsic_or_path_specific": "Generic composition/control seam, supported by the same terminal blocker across Qwen3.5-4B and Qwen3.5-9B on different real tasks.",
+      "intrinsic_or_path_specific": "Generic composition/control seam: the missing evidence-to-finalization transition is supplier-independent. 4B and 9B reproduced it; Vireonix/Murakumo remove supplier reachability as a first blocker but do not delete the transition.",
       "delete_bypass_substitute_options": [
         "DELETE: deterministic synthesis alone rejected as insufficiently general for open-ended research outputs",
         "BYPASS: separate finalization phase using same supplier survives",
@@ -93,7 +99,7 @@
         "ADOPT_QWEN_AGENT_0_0_34",
         "SUBSTITUTE_QWEN3_8_27B_LOCAL"
       ],
-      "losing_routes_reason": "Existing frameworks independently validate the forced-finalization pattern but replacing ASTRA adds integration and provenance machinery. A larger model leaves the same bounded-loop semantics and is far heavier on the current carrier. The selected composition adds only one bounded finalizer call and reuses all existing execution/verification infrastructure.",
+      "losing_routes_reason": "Framework replacement adds integration/provenance machinery. Larger or anonymous supplier substitution may improve inference strength/availability but does not by itself add the missing controller transition. The selected repair is supplier-agnostic and remains the smallest causal change.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
@@ -110,7 +116,8 @@
       "adjacent_capabilities_absorbed": [
         "Bounded evidence collection",
         "Forced answer synthesis from accumulated observations",
-        "Fail-closed final-answer validation"
+        "Fail-closed final-answer validation",
+        "Anonymous zero-key supplier option set preserved for the post-repair Task C route race"
       ],
       "fresh_reuse_plan": "Run the repaired dependency-free composition exactly once on a fresh materially different real Task C; never replay the 4B or 9B spent tasks."
     },
@@ -118,11 +125,12 @@
       "analysis_steps_deleted_or_cached": [
         "Reused exact 4B/9B terminal evidence",
         "Reused current framework implementations as design qualification",
-        "Stopped framework search after two independent implementations plus current Qwen-Agent and stronger-model challenger were resolved"
+        "Stopped framework search after two independent implementations plus current Qwen-Agent and stronger-model challenger were resolved",
+        "Fresh direct supplier probes deleted provider-signup and raw carrier-repair work from the critical path"
       ],
-      "search_stop_decision": "The same forced-finalization pattern is independently implemented by smolagents and AgentScope; no unresolved challenger can beat the minimal in-place composition enough to justify delaying the fresh real-task test.",
+      "search_stop_decision": "Fresh discovery found directly callable anonymous Vireonix and Murakumo suppliers, but neither eliminates the generic need for a bounded finalization transition. AgentScope and smolagents independently validate the same transition. Therefore stop structural-route search and implement only the supplier-agnostic transition; supplier selection is re-raced before Task C.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Live challenger frontier rechecked against the current UTC clock at 2026-09-29T21:20:02Z after the 9B failure and before merge/repair continuation; no unresolved plausible dominator remains."
+      "challenger_refresh_decision": "Live challenger frontier materially refreshed with direct anonymous Vireonix/Murakumo probes from 2026-09-29T21:13:59Z through 21:15:34Z. Supplier reachability changed, but the selected structural finalization transition remains necessary; supplier choice must refresh again before Task C."
     },
     "routes_considered": [
       "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
@@ -139,12 +147,12 @@
       "MODEL_SIZE_ESCALATION_BEFORE_SEAM_FIX"
     ],
     "selected_surviving_route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
-    "why_selected_route_is_fastest_sufficient": "It changes only the recurrent missing transition, reuses the already-proven local planner bridge and evidence memory, costs $0, adds one bounded model call, preserves existing independent verification, and is supported by two independent agent-framework implementations of the same termination pattern.",
+    "why_selected_route_is_fastest_sufficient": "It changes only the recurrent missing controller transition, is supplier-agnostic, costs $0 to implement, preserves existing evidence and verification semantics, and remains necessary even after directly qualifying stronger anonymous Vireonix/Murakumo supplier routes.",
     "expected_parent_level_state_change": "Add one generic bounded forced-finalization phase to the existing ASTRA goal loop after evidence/action budget exhaustion, without increasing the evidence-action budget, changing supplier, replaying spent tasks, or granting capability credit; make the repaired composition eligible only for a fresh different real Task C.",
     "stop_condition": "Stop after the generic forced-finalization composition is implemented and regression-verified without replaying spent real tasks. Do not promote the frontier capability until a fresh materially different dependency-free real Task C completes and is independently verified.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-29T21:20:02Z",
+      "checked_at_utc": "2026-09-29T21:15:34Z",
       "max_age_hours": 24,
       "incumbent_route": "ASTRA_SINGLE_PHASE_OPTIONAL_PLANNER_WITH_LOCAL_QWEN3_5_9B",
       "source_classes_checked": [
@@ -162,13 +170,17 @@
         "OFFICIAL_PRIMARY": [
           "https://huggingface.co/docs/smolagents/reference/agents",
           "https://huggingface.co/Qwen/Qwen3.8-27B",
-          "https://docs.github.com/en/actions/reference/runners/github-hosted-runners"
+          "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+          "https://vireonix.ai/docs",
+          "https://vireonix.ai/terms",
+          "https://murakumo.cloud/docs"
         ],
         "CODE_OR_PACKAGE_REGISTRY": [
           "https://pypi.org/project/smolagents/ (1.26.0)",
           "https://pypi.org/project/qwen-agent/ (0.0.34)",
           "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py",
-          "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+          "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py",
+          "https://github.com/llmfaucet/llmfaucet"
         ],
         "BROAD_WEB_OR_COMMUNITY": [
           "https://www.reddit.com/r/LocalLLaMA/comments/1sdhvc5/qwen_35_tool_calling_fixes_for_agentic_use_whats/",
@@ -179,19 +191,19 @@
       "query_families": [
         {
           "intent": "CAPABILITY_VECTOR",
-          "query": "bounded agent evidence gathering final answer termination after max steps"
+          "query": "anonymous no-key agentic inference plus bounded evidence-to-final-answer transition"
         },
         {
           "intent": "SUPPLIER_OR_PRODUCT",
-          "query": "smolagents AgentScope Qwen-Agent max iterations final answer"
+          "query": "Vireonix Murakumo smolagents AgentScope free tool calling finalization"
         },
         {
           "intent": "IMPLEMENTATION_FORM",
-          "query": "forced finalization call tools disabled ReAct max iterations source"
+          "query": "forced finalization tools disabled after bounded research actions OpenAI-compatible anonymous tool calling"
         },
         {
           "intent": "RECENCY_OR_NEW_RELEASE",
-          "query": "latest 2026 Qwen3.8 local agentic model long horizon tool use"
+          "query": "September 2026 free anonymous inference API tool calling latest agent framework finalization"
         }
       ],
       "challenger_routes": [
@@ -312,9 +324,60 @@
             "RELIABILITY": "Normal-quality quantizations exceed or nearly consume the 16 GB RAM/14 GB SSD carrier; ultra-low-bit variants trade quality and remain subject to same harness seam.",
             "VERIFIABILITY": "Would require a fresh large-model execution and still would not isolate the generic termination defect."
           }
+        },
+        {
+          "route": "MURAKUMO_ANONYMOUS_TOOL_CALLER",
+          "evidence": [
+            "Direct Wolfram-carrier HTTP 200 tool-call probe at 2026-09-29T21:15:34Z",
+            "https://murakumo.cloud/docs"
+          ],
+          "qualification_evidence": [
+            "Direct probe returned finish_reason=tool_calls with lookup_constant({name:alpha})",
+            "https://murakumo.cloud/docs"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Valid OpenAI-style tool decision directly observed.",
+            "CAPABILITY_STRENGTH": "Stronger supplier/tool-calling option than the prior local planner path.",
+            "WALL_CLOCK": "No provisioning or model download; directly callable from Wolfram transport.",
+            "INCREMENTAL_COST": "$0, no API key used in direct probe.",
+            "RELIABILITY": "Live endpoint/model surface observed; provider aliases can change, so refresh remains mandatory.",
+            "VERIFIABILITY": "Direct HTTP response plus official docs."
+          }
+        },
+        {
+          "route": "VIREONIX_ANONYMOUS_FINALIZER",
+          "evidence": [
+            "Direct Wolfram-carrier HTTP 200 nontrivial generation at 2026-09-29T21:13:59Z routed via MiniMax-M3",
+            "Live /api/limits and /v1/models returned HTTP 200",
+            "https://vireonix.ai/docs",
+            "https://vireonix.ai/terms"
+          ],
+          "qualification_evidence": [
+            "Direct nontrivial inference probe",
+            "Direct live quota/model probes",
+            "https://vireonix.ai/terms"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Nontrivial thermodynamics answer was materially correct.",
+            "CAPABILITY_STRENGTH": "Strong synthesis/finalization candidate with current model routing and large context.",
+            "WALL_CLOCK": "Direct call, no provisioning.",
+            "INCREMENTAL_COST": "$0 under current public terms; no account/key used.",
+            "RELIABILITY": "Live remaining quota observed; public service has no SLA.",
+            "VERIFIABILITY": "Direct HTTP probes plus official terms/docs."
+          }
         }
       ],
-      "negative_search_summary": "No additional qualified route was found that both deletes the recurrent termination seam and beats the in-place forced-finalization composition on correctness, wall-clock, $0 cost, integration risk and verifiability.",
+      "negative_search_summary": "Fresh anonymous suppliers materially improve the backend race, but no qualified challenger removes the controller's missing bounded evidence-to-finalization transition. Supplier choice is intentionally deferred to the Task C route refresh.",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
