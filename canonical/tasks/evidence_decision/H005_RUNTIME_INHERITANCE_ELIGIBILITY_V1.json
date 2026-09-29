@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_TASK_V1",
+  "task_id": "H005_RUNTIME_INHERITANCE_ELIGIBILITY_001",
+  "question": "Should the exact HELDOUT-005 runtime be inherited/promoted from its authoritative first fresh execution despite a later quarantined replay incident?",
+  "decision_id": "INHERIT_H005_EXACT_VERIFIED_RUNTIME",
+  "evidence": [
+    {
+      "id": "fresh_first_execution",
+      "probability": 1,
+      "statement": "The authoritative HELDOUT-005 execution ran exactly once fresh before any replay began.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+        "field": "authoritative_first_execution/freshness"
+      }
+    },
+    {
+      "id": "acceptance_gate_pass",
+      "probability": 1,
+      "statement": "The authoritative first execution passed its acceptance gate.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+        "field": "authoritative_first_execution.result.acceptance_gate_pass"
+      }
+    },
+    {
+      "id": "full_family_recall",
+      "probability": 1,
+      "statement": "Held-out oracle family recall was 1.0.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+        "field": "authoritative_first_execution.result.heldout_oracle_family_recall"
+      }
+    },
+    {
+      "id": "full_top20_recall",
+      "probability": 1,
+      "statement": "Held-out top-20 oracle recall was 1.0.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+        "field": "authoritative_first_execution.result.heldout_top20_oracle_recall"
+      }
+    },
+    {
+      "id": "regression_pass",
+      "probability": 1,
+      "statement": "Exact runtime regression evidence recorded 8/8 focused tests passing before the authoritative fresh spend.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+        "field": "exact_runtime_regression_evidence.focused_tests"
+      }
+    },
+    {
+      "id": "no_candidate_execution",
+      "probability": 1,
+      "statement": "Validation did not install candidate packages or execute candidate binaries and did not mutate the runtime.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+        "field": "authoritative_first_execution.result"
+      }
+    },
+    {
+      "id": "later_replay_incident",
+      "probability": 1,
+      "statement": "A forbidden post-spend replay occurred after the authoritative first execution and is quarantined from acceptance evidence.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+        "field": "replay_incident"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "support_fresh_gate",
+      "antecedents": [
+        "fresh_first_execution",
+        "acceptance_gate_pass"
+      ],
+      "strength": 1,
+      "stance": "SUPPORT",
+      "description": "A fresh authoritative acceptance-gate pass supports inheritance."
+    },
+    {
+      "id": "support_recall",
+      "antecedents": [
+        "full_family_recall",
+        "full_top20_recall"
+      ],
+      "strength": 1,
+      "stance": "SUPPORT",
+      "description": "Complete held-out recall supports the verified capability claim."
+    },
+    {
+      "id": "support_regression_integrity",
+      "antecedents": [
+        "regression_pass",
+        "no_candidate_execution"
+      ],
+      "strength": 1,
+      "stance": "SUPPORT",
+      "description": "Exact regression pass and non-mutating validation strengthen inheritance evidence."
+    },
+    {
+      "id": "oppose_replay_noise",
+      "antecedents": [
+        "later_replay_incident"
+      ],
+      "strength": 0.2,
+      "stance": "OPPOSE",
+      "description": "A later forbidden replay is provenance noise that must be preserved but cannot erase the earlier authoritative result."
+    }
+  ],
+  "hard_constraints": [],
+  "policy": {
+    "accept_threshold": 0.75,
+    "reject_threshold": 0.75,
+    "min_margin": 0.2,
+    "conflict_threshold": 0.35,
+    "evidence_floor": 0.6
+  }
+}
