@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Keep HELDOUT-004 frozen/unspent. Current connected and directly callable execution surfaces have been exhausted under the hard-$0, no-user-device, non-Val constraints. Do not repeat unchanged provider searches. Resume only when a directly callable executor, transport, runner allocation, custom-MCP/sandbox capability, or account-specific hard-zero predicate materially changes; then qualify faithful Debian APT/Xapian/QR plus exact runtime closure before any START.",
+    "objective": "Keep HELDOUT-004 frozen/unspent. Prefer the existing private GitHub Actions control plane over new-provider discovery if metered overage is provably impossible. GitHub account evidence shows included private Actions usage is exhausted at 2000/2000 minutes and explicitly states a $0 Actions budget blocks further usage instead of billing. The only remaining carrier predicate is whether that $0 budget is currently active. If verified, execute one Debian Trixie same-container carrier using exact private Brain bytes and full APT/Xapian/zbar preflight before H004 START.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__CURRENT_CONNECTED_AND_DIRECTLY_CALLABLE_HARD_ZERO_REMOTE_LINUX_CARRIER_SURFACE_EXHAUSTED__WAIT_FOR_MATERIAL_EXECUTOR_CAPABILITY_CHANGE_OR_NEW_HARD_ZERO_DIRECT_COMMAND_SURFACE",
-    "evidence_path": "canonical/capabilities/obsolescence/H004_CURRENT_CARRIER_SURFACE_EXHAUSTION_20260929_V1.json",
-    "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__CURRENT_CONNECTED_CARRIER_PORTFOLIO_EXHAUSTED__NO_CAPABILITY_RUNTIME_REPAIR_REQUIRED",
-    "prohibition": "NO_REPEAT_SEARCH_OR_RETRY_ON_UNCHANGED_EXECUTOR_FAILURE_CLASSES__NO_HELDOUT_004_START__NO_HELDOUT_003_REPLAY__NO_SPRITE_WITHOUT_ACCOUNT_HARD_ZERO_PROOF__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE",
+    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__GITHUB_ACTIONS_PRIVATE_CARRIER_ARCHITECTURE_READY__ZERO_DOLLAR_ACTIONS_BUDGET_STATE_UNVERIFIED__NO_EXECUTION",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_GITHUB_ACTIONS_HARDZERO_BUDGET_ROUTE_20260929_V1.json",
+    "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__BUILTIN_RAILWAY_IXIMIUZ_PATHS_REJECTED__PRIVATE_GITHUB_ACTIONS_CARRIER_COLLAPSES_SOURCE_TRANSPORT_AND_FIDELITY_IF_HARD_ZERO_BUDGET_VERIFIED__NO_RUNTIME_REPAIR_REQUIRED",
+    "prohibition": "NO_PRIVATE_ACTIONS_H004_EXECUTION_UNTIL_ZERO_DOLLAR_BUDGET_VERIFIED__NO_PUBLIC_REPO__NO_HELDOUT_004_START_IN_DISCOVERY_LANE__NO_HELDOUT_003_REPLAY__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "WAIT_FOR_MATERIAL_EXECUTOR_CAPABILITY_CHANGE_OR_NEW_HARD_ZERO_DIRECT_COMMAND_SURFACE__ON_CHANGE_QUALIFY_FAITHFUL_APT_XAPIAN_QR_AND_EXACT_RUNTIME_CLOSURE__NO_HELDOUT_004_START_BEFORE_PASS",
+    "next_action": "VERIFY_GITHUB_ACTIONS_ZERO_DOLLAR_BUDGET_ACTIVE__IF_PASS_STAGE_ONE_SINGLEFLIGHT_PRIVATE_ACTIONS_DEBIAN_TRIXIE_CARRIER_WITH_SAME_CONTAINER_PREFLIGHT_AND_EXACT_H004_ONE_SHOT__IF_FAIL_RESUME_HARD_ZERO_PROVIDER_DISCOVERY",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -85,7 +85,8 @@
     "railway_anonymous_transport_qualification_path": "canonical/capabilities/obsolescence/H004_RAILWAY_ANONYMOUS_TRANSPORT_QUALIFICATION_20260929_V1.json",
     "iximiuz_mcp_external_dependency_path": "canonical/capabilities/obsolescence/H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_20260929_V1.json",
     "iximiuz_access_path_rejection": "canonical/capabilities/obsolescence/H004_IXIMIUZ_ACCESS_PATH_REJECTION_20260929_V1.json",
-    "current_carrier_surface_exhaustion_path": "canonical/capabilities/obsolescence/H004_CURRENT_CARRIER_SURFACE_EXHAUSTION_20260929_V1.json"
+    "current_carrier_surface_exhaustion_path": "canonical/capabilities/obsolescence/H004_CURRENT_CARRIER_SURFACE_EXHAUSTION_20260929_V1.json",
+    "github_actions_hardzero_budget_route_path": "canonical/capabilities/obsolescence/H004_GITHUB_ACTIONS_HARDZERO_BUDGET_ROUTE_20260929_V1.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -211,5 +212,16 @@
     "heldout_004_freshness": "UNSPENT",
     "next_action": "DISCOVER_AND_QUALIFY_ONE_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_DIRECT_CALLABLE_COMMAND_TRANSPORT__THEN_FAITHFUL_APT_XAPIAN_QR_SURFACE_AND_EXACT_RUNTIME_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START",
     "access_path_rejection": "canonical/capabilities/obsolescence/H004_IXIMIUZ_ACCESS_PATH_REJECTION_20260929_V1.json"
+  },
+  "github_actions_h004_hardzero_budget_route_v1": {
+    "status": "DOMINANT_IF_ZERO_BUDGET_VERIFIED__ACCOUNT_STATE_UNVERIFIED",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_GITHUB_ACTIONS_HARDZERO_BUDGET_ROUTE_20260929_V1.json",
+    "private_actions_minutes_used": 2000,
+    "private_actions_minutes_included": 2000,
+    "hard_zero_control": "ACTIONS_BUDGET_0_USD_BLOCKS_METERED_OVERAGE",
+    "exact_private_source_reuse": true,
+    "same_container_debian_trixie_plan": true,
+    "heldout_004_freshness": "UNSPENT",
+    "next_action": "VERIFY_GITHUB_ACTIONS_ZERO_DOLLAR_BUDGET_ACTIVE__IF_PASS_STAGE_ONE_SINGLEFLIGHT_PRIVATE_ACTIONS_DEBIAN_TRIXIE_CARRIER_WITH_SAME_CONTAINER_PREFLIGHT_AND_EXACT_H004_ONE_SHOT__IF_FAIL_RESUME_HARD_ZERO_PROVIDER_DISCOVERY"
   }
 }
