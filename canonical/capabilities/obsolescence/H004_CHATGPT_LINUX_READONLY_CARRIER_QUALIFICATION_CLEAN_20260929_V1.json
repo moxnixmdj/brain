@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_V1",
+  "evidence_id": "H004-CHATGPT-LINUX-READONLY-CARRIER-QUALIFICATION-CLEAN-20260929-V1",
+  "canonical_base_sha": "c37a4e479b4cc571d74535790696c9f4d17dc32f",
+  "action_intent": "canonical/action_intents/2026-09-29_RECONCILE_H004_CHATGPT_LINUX_CARRIER_READONLY_QUALIFICATION_V1.json",
+  "source_guard": {
+    "pr": 178,
+    "guarded_intent_head": "657435e028636d3c895712aeebdd0569e9bbfd6c",
+    "authorization": "READ_ONLY_NON_HELDOUT_CARRIER_DIAGNOSTICS_ONLY__STOP_ON_FIRST_FAILED_PREDICATE",
+    "later_pr_history": "QUARANTINED__CONFLICTING_EVIDENCE_AND_APT_UPDATE_OVERRUN_EXCLUDED_FROM_AUTHORITY"
+  },
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "heldout_validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "qualification_scope": "READ_ONLY_CARRIER_SURFACE_ONLY__NO_SOURCE_TRANSPORT__NO_HELDOUT_START",
+  "carrier": {
+    "class": "CHATGPT_BUILTIN_LINUX_CONTAINER",
+    "os_id": "debian",
+    "os_version_id": "13",
+    "os_codename": "trixie",
+    "uid": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "incremental_infrastructure_provisioned": false,
+    "incremental_spend_incurred_usd": 0
+  },
+  "preserved_read_only_probe": {
+    "text_sha256": "34947e62bee9248ac311c10979b79c25b6a3d5a1769523b816cc0d48cd5b13c3",
+    "observed": {
+      "python3": "/opt/pyvenv/bin/python3",
+      "apt": "/usr/bin/apt",
+      "apt_get": "/usr/bin/apt-get",
+      "apt_cache": "/usr/bin/apt-cache",
+      "sudo": "/usr/bin/sudo",
+      "git": "/usr/bin/git",
+      "apt_file": "ABSENT",
+      "xapian_config": "ABSENT",
+      "zbarimg": "ABSENT",
+      "apt_list_regular_file_count": 0,
+      "package_python3_xapian": "ABSENT",
+      "package_apt_file": "ABSENT",
+      "package_zbar_tools": "ABSENT",
+      "sudo_noninteractive": "PASS",
+      "dns_deb_debian_org": "FAIL",
+      "https_deb_debian_org": "FAIL"
+    },
+    "http_failure_stderr_sha256": "5d3cf72bb60ffe7c6b6b98327661af03e800c59144a00d3389cd7e091d30a6cd",
+    "http_failure": "curl resolving deb.debian.org timed out after 5 seconds"
+  },
+  "adjudication": {
+    "qualified": false,
+    "first_failed_required_predicate": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
+    "evidence": "/var/lib/apt/lists contained zero regular files in the guarded read-only snapshot",
+    "additional_same_snapshot_observations": [
+      "apt-file absent",
+      "python3-xapian/xapian tooling absent",
+      "zbarimg absent",
+      "deb.debian.org DNS failed",
+      "HTTPS reachability failed at DNS resolution"
+    ],
+    "hard_zero_executor_admission": "NOT_ADJUDICATED_AFTER_EARLIER_REQUIRED_SURFACE_FAILURE",
+    "exact_source_materialization": "NOT_PERFORMED_AFTER_EARLIER_REQUIRED_SURFACE_FAILURE",
+    "capability_runtime_failure": false,
+    "carrier_admissible_for_h004": false
+  },
+  "heldout_004": {
+    "freshness_state": "UNSPENT",
+    "execution_count": 0,
+    "start_marker_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "excluded_from_authority": [
+    "PR178 apt-get update attempt",
+    "PR178 post-overrun first-failure relabelings",
+    "any claim that provider documentation alone proves current executor admission"
+  ],
+  "required_next_action": "QUALIFY_NEXT_ALREADY_DISCOVERED_HARD_ZERO_CONNECTED_REMOTE_LINUX__PROVE_HARD_ZERO_ATTESTATION__PROVE_FAITHFUL_APT_XAPIAN_QR_SURFACE__MATERIALIZE_CONTENT_ADDRESSED_EXACT_CLOSURE__PREFLIGHT_PATHS_HASHES_IMPORTS__NO_HELDOUT_004_START",
+  "prohibitions": [
+    "NO_HELDOUT_004_START_BEFORE_SEPARATE_GUARDED_EXECUTION_LEASE",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_CAPABILITY_RUNTIME_OR_EVALUATOR_MUTATION",
+    "NO_SPRITE",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
+  ]
+}
