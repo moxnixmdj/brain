@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QUALIFY-H004-EXISTING-CHATGPT-LINUX-CARRIER-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "CARRIER_FIDELITY_AND_HARD_ZERO_QUALIFICATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::CARRIER_FIDELITY_AND_HARD_ZERO_QUALIFICATION",
+  "expected_parent_frontier_change": "Reuse already-proven device-independent exact-source transport before inventing or provisioning anything. Qualify the current built-in ChatGPT Linux execution surface against HELDOUT-004's required Debian-family APT/Xapian/sudo/network surface and the carrier-fidelity requirement using read-only/non-held-out diagnostics only. Reuse PR20 exact Git-blob reconstruction and PR35/PR45 content-addressed source-tree mechanisms as the materialization design. If the existing carrier is admissible with independently supportable hard-zero incremental spend, preserve a deterministic exact-tree/path/hash/import preflight recipe and advance directly to a separate guarded one-shot HELDOUT-004 execution lease. If any required carrier predicate fails, preserve the first exact failure and reconcile before considering any new remote infrastructure.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 corrected the carrier evidence boundary and left HELDOUT-004 frozen UNSPENT",
+    "PR20 promoted device-independent private-repo execution via ChatGPT Linux with exact Git-blob verification, $0 incremental spend, no user device, and no Val Town",
+    "PR35 verified content-addressed source-tree materialization and hash checking",
+    "PR45 closed a real content-addressed source execution loop with independent verification",
+    "canonical/runtime/executor_broker.py requires AVAILABLE + platform match + incremental_spend_usd=0 + hard_zero_spend=true",
+    "Railway brain-heldout-004 project exists but has no service/deployment; do not provision while an already-proven carrier class may suffice",
+    "the prior Sprite carrier is inadmissible and further unauthorized Sprite access is forbidden"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after carrier qualification and deterministic materialization/preflight evidence. Do not create a HELDOUT-004 START marker, invoke its evaluator/dispatch, replay HELDOUT-003, mutate capability runtime/evaluator/frozen gate/executor policy, access the old Sprite, provision Railway or any new host, use Val Town, use the user laptop, or incur paid/unproven-cost infrastructure. On the first failed carrier predicate, preserve it and reconcile.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
