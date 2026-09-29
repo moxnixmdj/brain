@@ -17,7 +17,11 @@
       "runner": "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
     },
     "preflight": {
-      "generic_tests": "8/8 PASS",
+      "generic_tests": "8/8 PASS ON EXACT RUNTIME BLOB IN IMMEDIATELY PRECEDING LEASED PREFLIGHT; NOT RERUN INSIDE AUTHORITATIVE H5 CARRIER",
+      "generic_tests_deployment_id": "a3fbf877-95fe-44d5-a1ae-ed18e8c32515",
+      "generic_tests_same_runtime_blob_as_authoritative_execution": true,
+      "generic_tests_ran_before_authoritative_spend": true,
+      "generic_tests_not_rerun_inside_authoritative_execution_carrier": true,
       "translation_en_count": 3,
       "contents_amd64_count": 2,
       "contents_all_count": 2,
@@ -57,14 +61,9 @@
       ],
       "candidate_packages_installed": false,
       "candidate_binaries_executed": false,
-      "package_hints_used_by_runtime": false
+      "package_hints_used_by_runtime": false,
+      "runtime_mutated_by_validator": false
     }
-  },
-  "replay_incident": {
-    "railway_deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
-    "execution_started_at": "2026-09-29T02:52:52.828526746Z",
-    "classification": "FORBIDDEN_POST_SPEND_REPLAY__DO_NOT_USE_AS_ACCEPTANCE_EVIDENCE",
-    "effect_on_authoritative_first_execution": "NONE__FIRST_FRESH_EXECUTION_COMPLETED_BEFORE_REPLAY_START"
   },
   "aborted_concurrent_deployment": {
     "railway_deployment_id": "825cf351-a1dd-4222-8f63-94fad7dac1c2",
@@ -75,5 +74,32 @@
   "effective_fresh_execution_count": 1,
   "same_case_replay_allowed": false,
   "promotion_authorized_by_gate": true,
-  "required_next_action": "RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_PROMOTE_CLEAN_ROUTE_IF_ALL_PASS"
+  "required_next_action": "RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_PROMOTE_CLEAN_ROUTE_IF_ALL_PASS",
+  "pre_spend_procedural_discrepancy": {
+    "classification": "CARRIER_DID_NOT_RERUN_PREVIOUSLY_PASSED_GENERIC_PYTEST_BEFORE_SPEND",
+    "frozen_gate_acceptance_condition": false,
+    "exact_runtime_previously_passed_generic_tests": true,
+    "effect_on_frozen_acceptance_result": "NONE",
+    "note": "The exact runtime blob passed 8/8 generic tests on the same leased faithful service before the authoritative spend. The authoritative H5 carrier reverified exact runtime/manifest/runner identity plus Translation-en, Contents and Xapian, but did not rerun pytest inside that carrier."
+  },
+  "replay_incidents": {
+    "classification": "FORBIDDEN_POST_SPEND_REPLAYS__DO_NOT_USE_AS_ACCEPTANCE_EVIDENCE",
+    "observed_minimum_count": 2,
+    "effect_on_authoritative_first_execution": "NONE__FIRST_FRESH_EXECUTION_COMPLETED_BEFORE_ALL_OBSERVED_REPLAY_STARTS",
+    "deployments": [
+      {
+        "railway_deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
+        "execution_started_at": "2026-09-29T02:52:52.828526746Z",
+        "railway_meta_reason": "redeploy",
+        "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+      },
+      {
+        "railway_deployment_id": "a1a4464d-4278-4d2c-be44-0a8436158d82",
+        "execution_started_at": "2026-09-29T02:53:04.502909849Z",
+        "railway_meta_reason": "deploy",
+        "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+      }
+    ]
+  },
+  "physical_post_spend_replays_observed_minimum": 2
 }
