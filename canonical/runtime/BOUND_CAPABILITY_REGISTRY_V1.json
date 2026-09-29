@@ -2572,6 +2572,156 @@
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
         "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
       }
+    },
+    "plain_goal.bound_capability.grounding.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "plain_goal.bound_capability.grounding"
+      ],
+      "result_fields": [
+        "output_path",
+        "grounded_clause_count",
+        "candidate_capability_ids",
+        "unresolved_clause_indexes",
+        "model_dependency_count"
+      ],
+      "keywords": [
+        "plain",
+        "goal",
+        "grounding",
+        "bound",
+        "capability",
+        "semantic",
+        "existing",
+        "registry",
+        "reuse",
+        "ambiguity"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "${input.goal}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "plain_goal_bound_grounding",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Grounds only to capabilities already marked VERIFIED_BOUND_CAPABILITY in the canonical registry.",
+        "Preserves multiple plausible matches as AMBIGUOUS_BOUNDED and leaves unsupported clauses UNRESOLVED.",
+        "Does not plan, execute, acquire suppliers, or treat constraint-only vocabulary as capability evidence.",
+        "External discovery remains allowed only for unresolved clauses after bound grounding."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "difflib",
+          "hashlib",
+          "json",
+          "re",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py"
+      },
+      "verification": {
+        "independently_verified_by": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "regression_run_id": 36646224008,
+        "real_task_A_run_id": 36646322912,
+        "real_task_A_artifact_id": 11068403761,
+        "real_task_A_artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3",
+        "fresh_reuse_B_run_id": 36646400507,
+        "fresh_reuse_B_artifact_id": 11067819136,
+        "fresh_reuse_B_artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48",
+        "producer_git_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json"
+      }
+    },
+    "plain_goal.bound_capability.grounding.verify.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "plain_goal.bound_capability.grounding"
+      ],
+      "provides": [
+        "plain_goal.bound_capability.grounding.verified"
+      ],
+      "result_fields": [
+        "verified",
+        "reason",
+        "producer_independent",
+        "model_dependency_count"
+      ],
+      "keywords": [
+        "plain",
+        "goal",
+        "grounding",
+        "verify",
+        "independent",
+        "bound",
+        "capability",
+        "registry",
+        "evidence"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "${input.goal}",
+          "result_path": "${input.result_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "plain_goal_bound_grounding_verify",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Verifies grounding structure, goal hash, candidate registry status, zero-spend status, clause-supported match evidence, ambiguity cardinality, and discovery policy.",
+        "Does not import the producer module."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py"
+      },
+      "verification": {
+        "producer_independent": true,
+        "model_dependency_count": 0,
+        "regression_run_id": 36646224008,
+        "real_task_A_run_id": 36646322912,
+        "fresh_reuse_B_run_id": 36646400507,
+        "verifier_git_blob": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
