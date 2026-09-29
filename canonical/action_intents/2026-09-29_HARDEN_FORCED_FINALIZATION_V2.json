@@ -1,0 +1,303 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-FORCED-FINALIZATION-V2-20260929",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MERGED_FORCED_FINALIZER_DROPS_EARLY_BOUNDED_EVIDENCE_RAW_TRUNCATES_SERIALIZED_JSON_AND_LACKS_UNTRUSTED_EVIDENCE_BOUNDARY",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MERGED_FORCED_FINALIZER_DROPS_EARLY_BOUNDED_EVIDENCE_RAW_TRUNCATES_SERIALIZED_JSON_AND_LACKS_UNTRUSTED_EVIDENCE_BOUNDARY::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Harden the merged bounded forced-finalization transition so it preserves every admitted bounded observation, never raw-truncates serialized evidence, fails closed on an oversized or empty evidence packet, and treats fetched observations as untrusted data before any fresh real Task C is spent.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR #222 runtime on current main cd6c117b160a9fd5dda66af4b9795b7642ec39ab.",
+    "Merged run_goal permits up to eight normal cycles but forced finalization retains only observations[-6:].",
+    "Merged final_obs uses json.dumps(... )[:5000], which can cut serialized JSON mid-value.",
+    "Merged finalization prompt does not classify fetched observations as untrusted data.",
+    "Fresh Task C PR #223 was closed unspent because these defects and a materially changed supplier frontier invalidate its proof.",
+    "Fresh direct anonymous supplier probes: Vireonix HTTP 200 nontrivial MiniMax-M3 generation; Murakumo HTTP 200 reasoning and valid OpenAI-style tool_call; Bing HTML search HTTP 200 via Wolfram."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the merged finalizer is hardened and focused regressions pass. Do not execute a fresh Task C, bind a new supplier, or grant capability credit in this PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd6c117b160a9fd5dda66af4b9795b7642ec39ab",
+    "real_outcome": "Make the already-merged bounded finalization transition preserve the full bounded evidence set and fail closed across evidence truncation and prompt-injection boundaries before spending fresh proof.",
+    "required_capability": "Correct bounded evidence-to-finalization transition for open-ended research/problem-solving.",
+    "obs_goal": {
+      "real_outcome": "A finalization phase that can terminate from all admitted evidence without silently deleting or corrupting evidence and without treating fetched content as instructions.",
+      "proxy_goals_deleted": [
+        "Run Task C immediately",
+        "Replace the whole agent runtime",
+        "Increase max_cycles",
+        "Choose a new provider in this repair",
+        "Make GitHub Actions green"
+      ],
+      "surviving_necessity": "Repair only the correctness defects in the merged finalization transition before any fresh proof can be admissible."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/astra_runtime.py current merged forced-finalization implementation",
+        "canonical/tests/test_astra_runtime_model_independence.py",
+        "AgentScope/smolagents forced-finalization design precedent already used by PR #222",
+        "Qwen3.5-4B and 9B terminal falsification evidence"
+      ],
+      "external_existing_routes_checked": [
+        "Murakumo anonymous tool-calling route directly reached by current Wolfram carrier.",
+        "Vireonix anonymous finalization route directly reached by current Wolfram carrier.",
+        "Bing HTML search directly reachable by current Wolfram carrier.",
+        "AgentScope and smolagents remain broader framework substitutions rather than a reason to keep evidence-loss defects."
+      ],
+      "capability_work_deleted": [
+        "No Task C execution",
+        "No provider binding",
+        "No framework replacement",
+        "No GitHub Actions carrier repair",
+        "No model-size escalation"
+      ],
+      "surviving_gap": "The merged finalizer's evidence packet is correctness-unsafe even though the structural finalization transition itself remains necessary."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific correctness defects in the selected structural repair, not a reason to abandon the generic finalization transition.",
+      "delete_bypass_substitute_options": [
+        "DELETE finalization: rejected because two orthogonal real tasks localized the evidence-to-finish seam.",
+        "BYPASS with immediate Task C: rejected because proof would be contaminated by known evidence loss.",
+        "SUBSTITUTE whole framework: rejected as broader/slower than repairing three local correctness defects.",
+        "REPAIR merged finalizer only: survives."
+      ],
+      "surviving_causal_blocker": "Preserve all bounded observations, serialize an intact bounded packet or fail closed, and establish an explicit untrusted-data boundary."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "HARDEN_MERGED_FORCED_FINALIZATION_COMPLETE_EVIDENCE_PACKET_AND_UNTRUSTED_DATA_BOUNDARY",
+        "REPLACE_ASTRA_WITH_AGENTSCOPE_OR_SMOLAGENTS",
+        "RUN_TASK_C_WITH_CURRENT_MERGED_FINALIZER",
+        "SUBSTITUTE_STRONGER_SUPPLIER_WITHOUT_FIXING_PACKET"
+      ],
+      "losing_routes_reason": "Framework replacement is broader than the defects; spending Task C is invalid while known correctness defects remain; a stronger supplier cannot recover evidence that the controller silently deleted or malformed.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use focused deterministic regressions proving first and last bounded observations both reach the finalizer, the evidence block is structurally intact, the prompt declares observations untrusted, empty evidence fails closed, and invalid finalization remains rejected. These tests earn no frontier capability credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Fresh Task C PR #223",
+        "Any assumption that merged PR #222 is already proof-ready"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Complete bounded-evidence preservation",
+        "Fail-closed evidence-budget handling",
+        "Prompt-injection trust boundary for fetched evidence"
+      ],
+      "fresh_reuse_plan": "After this repair merges, refresh the supplier frontier and issue a new exact-base Task C intent. Do not replay spent tasks."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused merged finalization structure rather than redesigning it.",
+        "Reused direct anonymous supplier probes rather than provisioning providers.",
+        "Closed Task C instead of spending it on a known-defective base."
+      ],
+      "search_stop_decision": "The causal defects are exact and local. External suppliers can change inference quality but cannot restore observations the controller drops or repair malformed evidence packets, so further provider search cannot change this repair decision.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh direct supplier evidence from 2026-09-29T21:13:59Z through 21:15:34Z was included. It changes future supplier selection but does not dominate the supplier-agnostic correctness repair."
+    },
+    "routes_considered": [
+      "HARDEN_MERGED_FORCED_FINALIZATION_COMPLETE_EVIDENCE_PACKET_AND_UNTRUSTED_DATA_BOUNDARY",
+      "REPLACE_ASTRA_WITH_AGENTSCOPE_OR_SMOLAGENTS",
+      "RUN_TASK_C_WITH_CURRENT_MERGED_FINALIZER",
+      "SUBSTITUTE_STRONGER_SUPPLIER_WITHOUT_FIXING_PACKET"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_C_BEFORE_FINALIZER_HARDENING",
+      "FRAMEWORK_REPLACEMENT",
+      "PROVIDER_BINDING_IN_THIS_PR",
+      "GITHUB_ACTIONS_CARRIER_REPAIR",
+      "MODEL_SIZE_ESCALATION"
+    ],
+    "selected_surviving_route": "HARDEN_MERGED_FORCED_FINALIZATION_COMPLETE_EVIDENCE_PACKET_AND_UNTRUSTED_DATA_BOUNDARY",
+    "why_selected_route_is_fastest_sufficient": "It changes only the known merged correctness defects, preserves the successful structural idea, is independent of supplier choice, adds no infrastructure, and can be deterministically regression-tested before any scarce fresh real-task proof is spent.",
+    "expected_parent_level_state_change": "Harden the merged bounded forced-finalization transition so it preserves every admitted bounded observation, never raw-truncates serialized evidence, fails closed on an oversized or empty evidence packet, and treats fetched observations as untrusted data before any fresh real Task C is spent.",
+    "stop_condition": "Stop after the merged finalizer is hardened and focused regressions pass. Do not execute a fresh Task C, bind a new supplier, or grant capability credit in this PR.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T21:15:34Z",
+      "max_age_hours": 24,
+      "incumbent_route": "MERGED_PR222_FORCED_FINALIZATION_WITH_LAST6_AND_RAW_5000_CHAR_TRUNCATION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/astra_runtime.py@cd6c117b160a9fd5dda66af4b9795b7642ec39ab",
+          "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://vireonix.ai/docs",
+          "https://vireonix.ai/terms",
+          "https://murakumo.cloud/docs"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py",
+          "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.reddit.com/r/LocalLLaMA/"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "bounded evidence finalization preserve all observations untrusted fetched data"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Murakumo Vireonix AgentScope smolagents finalization tool calling"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "forced finalization after bounded tool loop complete evidence packet fail closed"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 anonymous inference API tool calling finalizer latest"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "HARDEN_MERGED_FORCED_FINALIZATION_COMPLETE_EVIDENCE_PACKET_AND_UNTRUSTED_DATA_BOUNDARY",
+          "evidence": [
+            "Direct inspection of merged main shows observations[-6:] despite max_cycles up to 8 and raw [:5000] JSON truncation.",
+            "Focused deterministic repair is already defined against exact failure predicates."
+          ],
+          "qualification_evidence": [
+            "Direct code inspection of canonical/runtime/astra_runtime.py on current main.",
+            "Independent deterministic regression design against first/last evidence preservation."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Eliminates silent early-evidence loss and mid-JSON truncation and establishes an untrusted-data boundary.",
+            "CAPABILITY_STRENGTH": "Preserves the merged finalization capability while making its evidence interface sound.",
+            "WALL_CLOCK": "Small local repair and focused regressions; no model download, provider setup, or framework migration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Deterministic bounded packet behavior with explicit fail-closed conditions.",
+            "VERIFIABILITY": "Direct static predicates plus focused regressions before fresh real-task proof."
+          }
+        },
+        {
+          "route": "MURAKUMO_ANONYMOUS_TOOL_CALLER",
+          "evidence": [
+            "Direct HTTP 200 reasoning and valid OpenAI-style tool_call through Wolfram."
+          ],
+          "qualification_evidence": [
+            "Direct Murakumo tool-call probe at 2026-09-29T21:15:34Z.",
+            "https://murakumo.cloud/docs"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Supplier is directly callable and tool-capable but cannot recover controller-discarded evidence.",
+            "CAPABILITY_STRENGTH": "Strong future planner/tool-decider candidate.",
+            "WALL_CLOCK": "Fast direct call with no provisioning.",
+            "INCREMENTAL_COST": "$0 in direct probe.",
+            "RELIABILITY": "Live endpoint observed; provider aliases can change.",
+            "VERIFIABILITY": "Direct HTTP response plus official docs."
+          }
+        },
+        {
+          "route": "VIREONIX_ANONYMOUS_FINALIZER",
+          "evidence": [
+            "Direct HTTP 200 nontrivial generation routed via MiniMax-M3; live quota/model endpoints returned HTTP 200."
+          ],
+          "qualification_evidence": [
+            "Direct Vireonix inference and limit/model probes.",
+            "https://vireonix.ai/terms"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong synthesis candidate but receives whatever evidence packet the controller supplies.",
+            "CAPABILITY_STRENGTH": "Large-context anonymous finalizer candidate.",
+            "WALL_CLOCK": "Direct call, no provisioning.",
+            "INCREMENTAL_COST": "$0 under current public access.",
+            "RELIABILITY": "Live remaining quota observed; no SLA.",
+            "VERIFIABILITY": "Direct HTTP probes plus official terms."
+          }
+        },
+        {
+          "route": "REPLACE_ASTRA_WITH_AGENTSCOPE_OR_SMOLAGENTS",
+          "evidence": [
+            "Both frameworks implement bounded final-answer patterns."
+          ],
+          "qualification_evidence": [
+            "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py",
+            "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can implement correct finalization but does not justify broader migration.",
+            "CAPABILITY_STRENGTH": "Broader agent frameworks than required.",
+            "WALL_CLOCK": "Migration and re-verification slower.",
+            "INCREMENTAL_COST": "$0 software, higher integration cost.",
+            "RELIABILITY": "Mature codebases but larger dependency surface.",
+            "VERIFIABILITY": "Source-visible but expands proof scope unnecessarily."
+          }
+        }
+      ],
+      "negative_search_summary": "No qualified challenger deletes the need to fix the controller's known evidence-loss and trust-boundary defects before a fresh Task C.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "HARDEN_MERGED_FORCED_FINALIZATION_COMPLETE_EVIDENCE_PACKET_AND_UNTRUSTED_DATA_BOUNDARY",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ]
+    }
+  }
+}
