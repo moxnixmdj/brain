@@ -81,7 +81,7 @@
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
-    "existing_chatgpt_linux_carrier_qualification_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_20260929_V1.json",
+    "existing_chatgpt_linux_carrier_qualification_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json",
     "chatgpt_linux_carrier_qualification_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_REJECTION_20260929_V1.json"
   },
   "promotion_claim": false,
