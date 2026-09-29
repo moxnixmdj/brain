@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_ADMISSION_RUNTIME_MUTATION",
+  "freshness": {
+    "state": "UNSPENT",
+    "execution_count": 0,
+    "same_case_replay_allowed": false,
+    "first_terminal_result_authoritative": true
+  },
+  "provenance": {
+    "selected_after": "PR120_MISSION_LOCK_STEP7_RESIDUAL_RESTORATION",
+    "selected_before_admission_repair": true,
+    "replacement_for_invalidated_unspent_validation": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-002",
+    "replacement_reason": "PREVIOUS_FROZEN_GOAL_USED_UNQUOTED_FOR_THE_DIGITS_FORM_NOT_ACCEPTED_BY_IMMUTABLE_TEXT_INPUT_BINDER",
+    "repository_search_precheck": "No 7312345678909 references found in repository code, issue/PR search, or commit history before freeze.",
+    "prior_probe_families_excluded": [
+      "Data Matrix",
+      "Code 128",
+      "QR",
+      "gzip",
+      "SQLite",
+      "JSON->XML",
+      "HELDOUT-005 supplier families"
+    ]
+  },
+  "frozen_goal": "Generate an EAN-13 barcode image for the text \"7312345678909\" and save it as canonical/astra_runtime/tmp/XAPIAN_APT_E2E_HELDOUT_003.png.",
+  "real_effect": {
+    "output_path": "canonical/astra_runtime/tmp/XAPIAN_APT_E2E_HELDOUT_003.png",
+    "media_type": "image/png",
+    "symbology": "EAN-13",
+    "payload": "7312345678909",
+    "payload_checksum_valid": true
+  },
+  "pre_freeze_static_validation": {
+    "text_binding_form": "EXACTLY_ONE_QUOTED_STRING__ACCEPTED_BY_IMMUTABLE_GOAL_COMPILER_EXTRACT_TEXT_ARGUMENT",
+    "expected_bound_text": "7312345678909",
+    "repository_output_path_count": 1,
+    "output_suffix": ".png",
+    "heldout_case_executed": false,
+    "candidate_binary_executed": false,
+    "runtime_mutated": false
+  },
+  "execution_boundary": {
+    "entrypoint": "canonical/runtime/auto_apt_cli_acquisition.py::dispatch",
+    "start_with_discovery_argument": null,
+    "prebound_registry_route_forbidden": true,
+    "package_or_executable_hints_to_runtime_forbidden": true,
+    "runtime_may_receive_only": [
+      "frozen_goal",
+      "mission_id",
+      "mission_path",
+      "repository_root"
+    ],
+    "promotion_during_gate": false
+  },
+  "acceptance": {
+    "dispatch_status": "ACQUISITION_DISPATCHED",
+    "selected_supplier_discovery_source": "APT_FULL_METADATA_XAPIAN",
+    "selected_supplier_binding_kind": "apt",
+    "selected_supplier_zero_cost_eligible": true,
+    "pending_binding_required": true,
+    "existing_independent_verifier_must_return_status": "VERIFIED",
+    "existing_independent_verifier_must_return_independent_verified": true,
+    "external_semantic_oracle": {
+      "invocation_class": "INDEPENDENT_BARCODE_IMAGE_DECODER",
+      "expected_stdout_exact": "EAN-13:7312345678909",
+      "producer_package_name_must_not_be_supplied_to_oracle": true,
+      "oracle_package_name_must_not_be_supplied_to_runtime": true
+    },
+    "output_nonempty": true,
+    "output_png_magic_required": true,
+    "hard_validation_wall_s": 180,
+    "incremental_spend_usd": 0
+  },
+  "runtime_integrity": {
+    "immutable_baseline_blobs": {
+      "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "canonical/runtime/auto_capability_acquisition.py": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+      "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119",
+      "canonical/runtime/cli_contract_inference.py": "009c3c45040178844d84eaa15b0d47ca2e1f259f",
+      "canonical/runtime/verify_pending_cli_binding.py": "8ec4da92080e885a15266389c0318688e6408d43"
+    },
+    "single_permitted_repair_path": "canonical/runtime/auto_apt_cli_acquisition.py",
+    "pre_repair_blob_for_permitted_path": "786f7de7df853cfaec2826f9471942b001e7eadc",
+    "other_runtime_mutation_forbidden": true,
+    "contract_parser_mutation_forbidden": true,
+    "discovery_retuning_forbidden": true
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Debian trixie or equivalent faithful Debian-family APT surface",
+    "normal_apt_packages_metadata_required": true,
+    "english_translation_index_required": true,
+    "package_tag_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "architecture_specific_contents_required": true,
+    "python3_xapian_required": true,
+    "sudo_apt_install_available": true,
+    "external_evaluator_requires": "zbarimg with EAN-13 support",
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true
+  },
+  "singleflight": {
+    "exactly_one_remote_carrier": true,
+    "local_start_marker_create_exclusive": true,
+    "result_preexistence_aborts": true,
+    "deployment_redeploy_forbidden": true,
+    "concurrent_execution_forbidden": true,
+    "post_start_replays_are_inadmissible_even_if_they_pass": true
+  },
+  "expected_first_pre_repair_blocker": "NO_LOW_FRICTION_APT_CLI_CANDIDATE caused by legacy APT_CATALOG-only admission / nonportable legacy score assumptions",
+  "known_downstream_static_risk_not_repaired_pre_execution": "XAPIAN_CANDIDATES_CURRENTLY_EMIT_EMPTY_MATCHED_TERMS_WHILE_EXISTING_SEMANTIC_VERIFIER_REQUIRES_AT_LEAST_TWO__PRESERVE_AS_POTENTIAL_NEXT_CAUSAL_RESIDUAL",
+  "evaluator_is_hidden_from_runtime": true,
+  "heldout005_replay_allowed": false,
+  "invalidated_heldout002_execution_allowed": false,
+  "promotion_authorized": false
+}
