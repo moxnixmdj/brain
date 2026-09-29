@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-QWEN3-5-9B-BIOPHYSICS-TASK-B-TERMINAL-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "SPENT_QWEN3_5_9B_TASK_B_TERMINAL_EVIDENCE_NOT_YET_RECONCILED_IN_CURRENT_CANONICAL_STATE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::SPENT_QWEN3_5_9B_TASK_B_TERMINAL_EVIDENCE_NOT_YET_RECONCILED_IN_CURRENT_CANONICAL_STATE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile the already-spent local Qwen3.5-9B biophysics Task B as an end-to-end failure with useful source-selection evidence, localize the orthogonally recurrent GOAL_MAX_CYCLES_WITHOUT_FINISH failure to the generic evidence-to-finalization composition seam, and grant no frontier capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
+    "verification-capsule-runner workflow run 36627371993",
+    "verification artifact 11062081181 digest sha256:5eaaf60cfa924e1ea56e07020b290ff16cc526621eb133c6fd83b0ba2143b806"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after immutable 9B execution evidence is preserved, false capability credit remains zero, and the next frontier is exact-base OBS of the recurrent termination/composition seam; do not replay 4B/9B, inflate cycle limits, or escalate model size in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ae02ed6d76f394888092bf64dde8c70522357ba0",
+    "real_outcome": "Reconcile the already-spent local Qwen3.5-9B biophysics Task B as an end-to-end failure with useful source-selection evidence, localize the orthogonally recurrent GOAL_MAX_CYCLES_WITHOUT_FINISH failure to the generic evidence-to-finalization composition seam, and grant no frontier capability credit.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Reconcile the already-spent local Qwen3.5-9B biophysics Task B as an end-to-end failure with useful source-selection evidence, localize the orthogonally recurrent GOAL_MAX_CYCLES_WITHOUT_FINISH failure to the generic evidence-to-finalization composition seam, and grant no frontier capability credit.",
+      "proxy_goals_deleted": [
+        "Replay the spent 9B task",
+        "Treat partial source selection as capability acquisition",
+        "Use this reconciliation to choose a new supplier"
+      ],
+      "surviving_necessity": "Preserve the terminal evidence and update the causal frontier truthfully."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Qwen3.5-4B terminal falsification record",
+        "Qwen3.5-9B public-runner workflow evidence",
+        "Current frontier target record"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to evidence reconciliation; external route discovery is deferred to the next repair/continuation OBS."
+      ],
+      "capability_work_deleted": [
+        "No new model run",
+        "No runtime change",
+        "No supplier change"
+      ],
+      "surviving_gap": "Canonical state does not yet record that the 9B route also terminated with GOAL_MAX_CYCLES_WITHOUT_FINISH after useful research actions."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence reconciliation blocker only; the spent execution result exists outside canonical Brain state.",
+      "delete_bypass_substitute_options": [
+        "Do not rerun because exact workflow logs/artifact already exist",
+        "Do not repair because this action only reconciles evidence",
+        "Import the immutable result and recompute frontier"
+      ],
+      "surviving_causal_blocker": "Canonical frontier is stale relative to the already-spent 9B terminal result."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Reuse preserved workflow logs/artifact and reconcile canonical state",
+        "Rerun 9B task",
+        "Infer result from prior 4B failure"
+      ],
+      "losing_routes_reason": "Exact primary evidence exists; rerun is forbidden and inference would be weaker.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic verifier. Use exact GitHub workflow/job/artifact evidence and immutable hashes."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Qwen3.5-9B as unspent next candidate",
+        "Raw model-size escalation as default next move"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Local 9B source-selection behavior is preserved as partial evidence only"
+      ],
+      "fresh_reuse_plan": "Not applicable to reconciliation; any generic seam repair must later be tested on a fresh different real Task C."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse already-recovered workflow/job/artifact evidence",
+        "No external challenger search because action kind is reconciliation-only"
+      ],
+      "search_stop_decision": "Exact terminal evidence is sufficient to update canonical truth; further reconciliation research cannot change the spent result.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External challenger discovery is not part of this RECONCILE_FRONTIER action. The next repair/continuation action must perform a fresh V3 challenger frontier."
+    },
+    "routes_considered": [
+      "PRESERVE_AND_RECONCILE_EXISTING_9B_EVIDENCE",
+      "RERUN_SPENT_9B_TASK",
+      "INFER_FROM_4B_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RERUN_SPENT_9B_TASK",
+      "INFER_FROM_4B_ONLY"
+    ],
+    "selected_surviving_route": "PRESERVE_AND_RECONCILE_EXISTING_9B_EVIDENCE",
+    "why_selected_route_is_fastest_sufficient": "The exact one-shot workflow, job logs, model hashes and artifact already establish the terminal result, so evidence recovery is both stronger and faster than any new execution.",
+    "expected_parent_level_state_change": "Reconcile the already-spent local Qwen3.5-9B biophysics Task B as an end-to-end failure with useful source-selection evidence, localize the orthogonally recurrent GOAL_MAX_CYCLES_WITHOUT_FINISH failure to the generic evidence-to-finalization composition seam, and grant no frontier capability credit.",
+    "stop_condition": "Stop after immutable 9B execution evidence is preserved, false capability credit remains zero, and the next frontier is exact-base OBS of the recurrent termination/composition seam; do not replay 4B/9B, inflate cycle limits, or escalate model size in this reconciliation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action is RECONCILE_FRONTIER only: it preserves an already-spent immutable execution result and does not select, repair, continue, or execute an external capability route."
+    }
+  }
+}

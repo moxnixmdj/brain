@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 1,
     "fresh_reuse_passes": 0,
     "frontier_dependencies_removed": 0,
-    "residual_gaps_localized": 3
+    "residual_gaps_localized": 4
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -75,7 +75,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_FRESH_DIFFERENT_REAL_TASK_B_ON_STRONGER_DEPENDENCY_FREE_LOCAL_QWEN3_5_9B_ROUTE__NO_4B_REPLAY__VERIFY_REAL_RESULT",
+  "next_progress_event_target": "OBS_V3_RECURRENT_EVIDENCE_TO_FINALIZATION_TERMINATION_SEAM__THEN_FRESH_REAL_TASK_C_IF_GENERIC_ROUTE_SURVIVES",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -132,6 +132,18 @@
         "RESIDUAL_GAP_LOCALIZED"
       ],
       "residual_gap": "QWEN3_5_4B_LOCAL_PLANNER_DID_NOT_TERMINATE_REAL_OPEN_ENDED_TASK_WITHIN_BOUNDED_CONTROLLER_POLICY",
+      "execution_count": 1,
+      "incremental_spend_usd": 0
+    },
+    {
+      "event_id": "LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_ROUTE_FALSIFIED_20260929",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "ROUTE_END_TO_END_FAIL__USEFUL_RESEARCH_ACTIONS_OBSERVED__NO_CAPABILITY_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+      "parent_level_changes": [
+        "RESIDUAL_GAP_LOCALIZED"
+      ],
+      "residual_gap": "GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_OR_TERMINATION_SEAM",
       "execution_count": 1,
       "incremental_spend_usd": 0
     }
