@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Recompute the residual tool-discovery, selection, and learning frontier after inheriting the verified Debian full-metadata + Xapian + direct-Contents route. Do not repeat the closed HELDOUT-005 gate.",
-    "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PRIOR_EVIDENCE_ACQUISITION_AND_SEMANTIC_RECALL_BLOCKER_VERIFIED_REMOVED__RESIDUAL_CAPABILITY_GAP_NOT_YET_RECOMPUTED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
-    "repair_status": "VERIFIED_ROUTE_INHERITED_PENDING_MERGE__FRONTIER_RECOMPUTE_REQUIRED",
-    "prohibition": "NO_HELDOUT005_REPLAY__NO_TUNING_TO_SPENT_CASES__NO_NEW_RUNTIME_REPAIR_BEFORE_PARENT_FRONTIER_RECOMPUTE"
+    "objective": "Retest the already-existing PR56 generic CLI I/O contract IR end-to-end now that the upstream viable-supplier discovery/selection blocker is verified removed. Freeze a fresh orthogonal gate before any runtime transplantation; do not invent a second contract learner first.",
+    "selection_metric": "FRESH_ORTHOGONAL_END_TO_END_TOOL_LEARNING_SUCCESS_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "DOWNSTREAM_GENERIC_CLI_CONTRACT_LEARNING_SUFFICIENCY_NOT_YET_RETESTED_AFTER_UPSTREAM_SUPPLIER_DISCOVERY_FIX",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1.json",
+    "repair_status": "PR56_GENERIC_CLI_IO_CONTRACT_IR_PASSED_FOCUSED_AND_LEGACY_REGRESSIONS__REAL_REPLAYS_WERE_UPSTREAM_BLOCKED__FRESH_ORTHOGONAL_RETEST_REQUIRED_BEFORE_ANY_NEW_CONTRACT_REPAIR",
+    "prohibition": "NO_HELDOUT005_REPLAY__NO_NEW_CONTRACT_PARSER_INVENTION_BEFORE_PR56_REUSE_TEST__NO_RUNTIME_TRANSPLANT_BEFORE_FRESH_GATE_FREEZE__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -165,6 +165,7 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "RECOMPUTE_RESIDUAL_PARENT_CAPABILITY_FRONTIER"
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_END_TO_END_GATE__REUSE_PR56_GENERIC_CLI_IO_CONTRACT_IR__EXECUTE_ONCE__RECONCILE",
+    "residual_retest_basis": "PR57_RECONCILIATION_PROVED_PR56_GENERIC_CONTRACT_IR_REGRESSIONS_PASS_BUT_REAL_PROBES_FAILED_BEFORE_VIABLE_EFFECT_PRODUCING_EXECUTABLES_REACHED_CONTRACT_INFERENCE"
   }
 }
