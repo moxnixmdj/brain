@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Preserve HELDOUT-003 as freshness-spent/contaminated by an unauthorized carrier without treating its raw result as a capability verdict; freeze a fresh orthogonal Xapian→APT end-to-end gate before any carrier correction, then correct generic carrier materialization to complete repository/verifier dependency closure on an authorized hard-zero-spend carrier and execute only the new gate once.",
+    "objective": "Preserve HELDOUT-003 as freshness-spent/contaminated by an unauthorized carrier without treating its raw result as a capability verdict; freeze a fresh orthogonal Xapian→APT end-to-end gate before any carrier change, then localize the generic live carrier-fidelity root cause on one authorized hard-zero-spend remote carrier, correct only the proven cause, and execute only the new gate once.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
     "exact_blocker": "HELDOUT_003_FRESHNESS_SPENT_CONTAMINATED_BY_UNAUTHORIZED_CARRIER__PARENT_CAPABILITY_UNADJUDICATED__FRESH_ORTHOGONAL_GATE_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/HELDOUT003_UNAUTHORIZED_CARRIER_AND_PR149_PROVENANCE_RECONCILIATION_20260929_V1.json",
     "repair_status": "PR129_RUNTIME_REPAIR_REACHED_CONTRACT_INFERRED_ON_UNAUTHORIZED_CARRIER__HELDOUT_003_SPENT_CONTAMINATED__NO_ADMISSIBLE_CAPABILITY_VERDICT__PARENT_UNADJUDICATED",
     "prohibition": "NO_HELDOUT_003_REPLAY__NO_SECOND_CARRIER_FOR_HELDOUT_003__NO_PROMOTION_FROM_UNAUTHORIZED_RESULT__NO_CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_RESULT__NO_CARRIER_CORRECTION_BEFORE_FRESH_GATE_FREEZE__NO_HAND_PICKED_CARRIER_SUBSET__NO_HELDOUT_005_REPLAY__NO_HELDOUT_002_EXECUTION__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS",
     "frozen_gate": null,
-    "next_action": "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_GENERIC_COMPLETE_REPOSITORY_CARRIER_CORRECTION__THEN_EXECUTE_NEW_GATE_ONCE__RECONCILE",
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_GENERIC_CARRIER_FIDELITY_ROOT_CAUSE_LOCALIZATION__THEN_CORRECT_ONLY_PROVEN_CAUSE__QUALIFY_HARD_ZERO_SPEND_REMOTE_CARRIER__EXECUTE_NEW_GATE_ONCE__RECONCILE",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json"
@@ -170,7 +170,7 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_GENERIC_COMPLETE_REPOSITORY_CARRIER_CORRECTION__THEN_EXECUTE_NEW_GATE_ONCE__RECONCILE"
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_GENERIC_CARRIER_FIDELITY_ROOT_CAUSE_LOCALIZATION__THEN_CORRECT_ONLY_PROVEN_CAUSE__QUALIFY_HARD_ZERO_SPEND_REMOTE_CARRIER__EXECUTE_NEW_GATE_ONCE__RECONCILE"
   },
   "deferred_frontier_candidate": {
     "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
