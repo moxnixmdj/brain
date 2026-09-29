@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR129-AUTHORITY-CLEAN-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "POST_PR129_PRESENT_TENSE_AUTHORITY_DESCRIPTORS_CONTRADICT_EXECUTION_DUE_FRONTIER__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR129_PRESENT_TENSE_AUTHORITY_DESCRIPTORS_CONTRADICT_EXECUTION_DUE_FRONTIER__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make the three present-tense canonical authority descriptors agree with merged PR129 and merged PR136: provider-neutral APT admission repair is complete, HELDOUT-003 is UNSPENT, and exactly one guarded HELDOUT-003 execution followed by first-result reconciliation is the current frontier.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR129 provider-neutral APT admission repair",
+    "merged PR136 truthful post-PR129 repair-consumption reconciliation",
+    "merged PR135 action-intent guard hardening",
+    "closed PR140/141/142/148 stale or duplicate execution leases; no HELDOUT-003 start",
+    "closed PR147/149 reconciliation attempts preserved as evidence only",
+    "current main a178254126ad7a09cdf48dee172a728ba27bccdc pointer, hierarchy, and queue"
+  ],
+  "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After changing only the stale hierarchy inherited_route.status plus the queue immediate_frontier.objective and inherited Xapian next_action, revalidate the exact final head and merge only this reconciliation. Do not execute HELDOUT-003, mutate runtime/gate/evaluator/carrier bytes, add a repair, replay, or promote.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "heldout_execution_forbidden": true,
+    "runtime_mutation_forbidden": true,
+    "incremental_spend_usd": 0,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true
+  }
+}
