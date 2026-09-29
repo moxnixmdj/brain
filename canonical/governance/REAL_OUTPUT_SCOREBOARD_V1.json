@@ -39,7 +39,17 @@
     "recursive_obs_schema_v2_structural_validation_required": true,
     "frontier_capability_credit_requires_documented_frontier_reference": true,
     "same_domain_parameter_variation_is_not_frontier_fresh_reuse": true,
-    "narrow_domain_tool_is_not_frontier_capability": true
+    "narrow_domain_tool_is_not_frontier_capability": true,
+    "adversarial_error_control_required": true,
+    "assume_action_wrong_required": true,
+    "unresolved_material_risks_must_be_empty": true,
+    "target_fidelity_required": true,
+    "circular_frontier_proof_forbidden": true,
+    "execution_supplier_manifest_required_for_frontier_credit": true,
+    "unknown_execution_supplier_for_frontier_credit_forbidden": true,
+    "opaque_supplier_alias_for_frontier_credit_forbidden": true,
+    "exact_sensitive_path_contract_required": true,
+    "exact_head_postconditions_required": true
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -95,7 +105,10 @@
       "BUILD"
     ],
     "exact_base_commit_binding_required": true,
-    "placeholder_receipts_allowed": false
+    "placeholder_receipts_allowed": false,
+    "adversarial_error_control_law": "canonical/laws/ADVERSARIAL_ERROR_CONTROL_LAW_V1.md",
+    "adversarial_error_control_schema": "canonical/governance/ADVERSARIAL_ERROR_CONTROL_SCHEMA_V1.json",
+    "circular_frontier_proof_allowed": 0
   },
   "progress_events": [
     {

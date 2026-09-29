@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_ADVERSARIAL_ERROR_CONTROL_SCHEMA_V1",
+  "status": "CANONICAL_FAIL_CLOSED_SCHEMA",
+  "authority": "canonical/laws/ADVERSARIAL_ERROR_CONTROL_LAW_V1.md",
+  "required_fields": [
+    "schema",
+    "assume_action_wrong",
+    "strongest_disconfirming_hypotheses",
+    "known_failure_classes_checked",
+    "unresolved_material_risks",
+    "abort_if_any_unresolved",
+    "target_fidelity",
+    "proof_claim",
+    "expected_sensitive_paths",
+    "postconditions"
+  ],
+  "required_known_failure_classes": [
+    "STALE_STATE",
+    "TARGET_SUBSTITUTION",
+    "PROXY_GOAL",
+    "CIRCULAR_PROOF",
+    "SELF_CERTIFICATION",
+    "NARROW_CAPABILITY_INFLATION",
+    "SAME_DOMAIN_REUSE_INFLATION",
+    "ROUTE_READINESS",
+    "DUPLICATE_EXECUTION",
+    "ACTIVITY_AS_PROGRESS",
+    "POST_STATE_MISMATCH",
+    "HIDDEN_DEPENDENCY",
+    "FALSIFIED_ROUTE_REPLAY"
+  ],
+  "target_fidelity": {
+    "required_fields": [
+      "intended_target",
+      "proxy_substitution_detected"
+    ],
+    "intended_target_must_equal_action_capability_target": true,
+    "proxy_substitution_detected_must_be_false": true
+  },
+  "proof_claim": {
+    "required_fields": [
+      "claim_level",
+      "target_frontier_supplier_in_producer_path",
+      "target_frontier_supplier_in_verifier_path",
+      "producer_verifier_independent",
+      "independent_verifier_present",
+      "execution_supplier_manifest_complete",
+      "unknown_execution_suppliers",
+      "opaque_supplier_aliases"
+    ],
+    "claim_levels": [
+      "GOVERNANCE_ONLY",
+      "SUPPORT_ONLY",
+      "TASK_EVIDENCE",
+      "FRESH_REUSE_PROOF",
+      "CAPABILITY_PROMOTION",
+      "FRONTIER_DEPENDENCY_REMOVAL"
+    ],
+    "promotion_or_removal_rules": {
+      "execution_supplier_manifest_complete": true,
+      "unknown_execution_suppliers": [],
+      "opaque_supplier_aliases": [],
+      "target_frontier_supplier_in_producer_path": false,
+      "target_frontier_supplier_in_verifier_path": false,
+      "producer_verifier_independent": true,
+      "independent_verifier_present": true
+    }
+  },
+  "changed_path_contract": {
+    "expected_sensitive_paths_must_exactly_equal_non_intent_sensitive_paths": true,
+    "unexpected_sensitive_path_aborts": true,
+    "missing_expected_sensitive_path_aborts": true
+  },
+  "postcondition_types": [
+    "file_exists",
+    "json_field_equals",
+    "text_contains"
+  ],
+  "progress_credit": false
+}

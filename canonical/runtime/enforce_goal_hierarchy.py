@@ -28,6 +28,7 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
+    "canonical/laws/ADVERSARIAL_ERROR_CONTROL_LAW_V1.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
@@ -36,11 +37,15 @@ PROTECTED_GUARD_PATHS={
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V6.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V7.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
+    "canonical/governance/ADVERSARIAL_ERROR_CONTROL_SCHEMA_V1.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
 }
@@ -103,6 +108,20 @@ OBS_LAYER_REQUIRED={
     "obs_verification":("direct_real_effect_verification_considered","existing_oracle_considered","synthetic_verification_necessity"),
     "obs_inherited_system":("downstream_work_to_delete_or_supersede","adjacent_capabilities_absorbed","fresh_reuse_plan"),
     "obs_obs":("analysis_steps_deleted_or_cached","search_stop_decision","affected_layers_only_on_revalidation"),
+}
+
+ADVERSARIAL_REQUIRED_FAILURE_CLASSES={
+    "STALE_STATE","TARGET_SUBSTITUTION","PROXY_GOAL","CIRCULAR_PROOF","SELF_CERTIFICATION",
+    "NARROW_CAPABILITY_INFLATION","SAME_DOMAIN_REUSE_INFLATION","ROUTE_READINESS",
+    "DUPLICATE_EXECUTION","ACTIVITY_AS_PROGRESS","POST_STATE_MISMATCH","HIDDEN_DEPENDENCY",
+    "FALSIFIED_ROUTE_REPLAY",
+}
+ADVERSARIAL_CLAIM_LEVELS={
+    "GOVERNANCE_ONLY","SUPPORT_ONLY","TASK_EVIDENCE","FRESH_REUSE_PROOF",
+    "CAPABILITY_PROMOTION","FRONTIER_DEPENDENCY_REMOVAL",
+}
+ADVERSARIAL_PROOF_BEARING_LEVELS={
+    "FRESH_REUSE_PROOF","CAPABILITY_PROMOTION","FRONTIER_DEPENDENCY_REMOVAL",
 }
 FAIL=[]
 
@@ -494,6 +513,131 @@ def enforce_recursive_obs(intent,files,base):
     enforce_live_route_frontier(intent,obs)
 
 
+
+def _load_json_at_ref(ref,path):
+    raw=git("show",f"{ref}:{path}")
+    value=json.loads(raw)
+    if not isinstance(value,dict):
+        raise ValueError("json_object_required")
+    return value
+
+def _nested_json_field(value,field):
+    cur=value
+    for part in str(field or "").split("."):
+        if not part or not isinstance(cur,dict) or part not in cur:
+            raise KeyError(part)
+        cur=cur[part]
+    return cur
+
+def _score_counter_delta(base,name):
+    path="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+    try:
+        before=_load_json_at_ref(base,path).get("counters_since_epoch_start") or {}
+        after=load(path).get("counters_since_epoch_start") or {}
+        return int(after.get(name) or 0)-int(before.get(name) or 0)
+    except Exception:
+        return 0
+
+def enforce_adversarial_error_control(intent,files,base):
+    ctrl=intent.get("adversarial_error_control")
+    if not isinstance(ctrl,dict):
+        fail("ADVERSARIAL_ERROR_CONTROL_MISSING_OR_INVALID")
+        return
+    if ctrl.get("schema")!="PROJECT_BRAIN_ADVERSARIAL_ERROR_CONTROL_V1":
+        fail("ADVERSARIAL_ERROR_CONTROL_SCHEMA_INVALID")
+    if ctrl.get("assume_action_wrong") is not True:
+        fail("ADVERSARIAL_ASSUME_ACTION_WRONG_REQUIRED")
+
+    hypotheses=ctrl.get("strongest_disconfirming_hypotheses")
+    if not isinstance(hypotheses,list) or len(hypotheses)<3 or not all(_nonempty_string(x) for x in hypotheses):
+        fail("ADVERSARIAL_DISCONFIRMING_HYPOTHESES_INSUFFICIENT")
+
+    checked=ctrl.get("known_failure_classes_checked")
+    if not isinstance(checked,list) or not ADVERSARIAL_REQUIRED_FAILURE_CLASSES.issubset(set(checked)):
+        fail("ADVERSARIAL_KNOWN_FAILURE_CLASS_SWEEP_INCOMPLETE")
+
+    risks=ctrl.get("unresolved_material_risks")
+    if not isinstance(risks,list) or risks:
+        fail("ADVERSARIAL_UNRESOLVED_MATERIAL_RISK")
+    if ctrl.get("abort_if_any_unresolved") is not True:
+        fail("ADVERSARIAL_ABORT_ON_UNRESOLVED_REQUIRED")
+
+    fidelity=ctrl.get("target_fidelity")
+    if not isinstance(fidelity,dict):
+        fail("TARGET_FIDELITY_MISSING")
+    else:
+        if fidelity.get("intended_target")!=intent.get("capability_target"):
+            fail("TARGET_FIDELITY_MISMATCH")
+        if fidelity.get("proxy_substitution_detected") is not False:
+            fail("TARGET_PROXY_SUBSTITUTION_DETECTED")
+
+    proof=ctrl.get("proof_claim")
+    if not isinstance(proof,dict):
+        fail("ADVERSARIAL_PROOF_CLAIM_MISSING")
+        proof={}
+    level=str(proof.get("claim_level") or "")
+    if level not in ADVERSARIAL_CLAIM_LEVELS:
+        fail("ADVERSARIAL_CLAIM_LEVEL_INVALID")
+    if proof.get("execution_supplier_manifest_complete") is not True:
+        fail("EXECUTION_SUPPLIER_MANIFEST_INCOMPLETE")
+    unknown=proof.get("unknown_execution_suppliers")
+    opaque=proof.get("opaque_supplier_aliases")
+    if not isinstance(unknown,list) or unknown:
+        fail("UNKNOWN_EXECUTION_SUPPLIER_FORBIDDEN")
+    if not isinstance(opaque,list) or opaque:
+        fail("OPAQUE_EXECUTION_SUPPLIER_ALIAS_FORBIDDEN")
+
+    promotion_delta=_score_counter_delta(base,"reusable_capabilities_inherited")
+    reuse_delta=_score_counter_delta(base,"fresh_reuse_passes")
+    dependency_delta=_score_counter_delta(base,"frontier_dependencies_removed")
+    proof_bearing=(level in ADVERSARIAL_PROOF_BEARING_LEVELS or promotion_delta>0 or reuse_delta>0 or dependency_delta>0)
+    if proof_bearing:
+        if proof.get("target_frontier_supplier_in_producer_path") is not False:
+            fail("CIRCULAR_FRONTIER_PROOF_FORBIDDEN:TARGET_SUPPLIER_IN_PRODUCER_PATH")
+        if proof.get("target_frontier_supplier_in_verifier_path") is not False:
+            fail("CIRCULAR_FRONTIER_PROOF_FORBIDDEN:TARGET_SUPPLIER_IN_VERIFIER_PATH")
+        if proof.get("producer_verifier_independent") is not True:
+            fail("CIRCULAR_FRONTIER_PROOF_FORBIDDEN:PRODUCER_VERIFIER_NOT_INDEPENDENT")
+        if proof.get("independent_verifier_present") is not True:
+            fail("CIRCULAR_FRONTIER_PROOF_FORBIDDEN:INDEPENDENT_VERIFIER_MISSING")
+
+    expected=ctrl.get("expected_sensitive_paths")
+    actual=sorted(x for x in files if is_sensitive(x) and not x.startswith("canonical/action_intents/"))
+    if not isinstance(expected,list) or not all(_nonempty_string(x) for x in expected):
+        fail("EXPECTED_SENSITIVE_PATHS_INVALID")
+    elif sorted(set(expected))!=actual or len(set(expected))!=len(expected):
+        fail("SENSITIVE_PATH_CONTRACT_MISMATCH")
+
+    post=ctrl.get("postconditions")
+    if not isinstance(post,list) or not post:
+        fail("EXACT_HEAD_POSTCONDITIONS_MISSING")
+        return
+    for i,cond in enumerate(post):
+        if not isinstance(cond,dict):
+            fail(f"EXACT_HEAD_POSTCONDITION_INVALID:{i}")
+            continue
+        typ=str(cond.get("type") or "")
+        path=str(cond.get("path") or "").strip()
+        if not path or not is_sensitive(path):
+            fail(f"EXACT_HEAD_POSTCONDITION_PATH_INVALID:{i}")
+            continue
+        target=ROOT/path
+        try:
+            if typ=="file_exists":
+                ok=target.is_file()
+            elif typ=="json_field_equals":
+                ok=target.is_file() and _nested_json_field(json.loads(target.read_text(encoding="utf-8")),cond.get("field"))==cond.get("value")
+            elif typ=="text_contains":
+                token=cond.get("text")
+                ok=target.is_file() and _nonempty_string(token) and token in target.read_text(encoding="utf-8")
+            else:
+                fail(f"EXACT_HEAD_POSTCONDITION_TYPE_UNKNOWN:{i}")
+                continue
+        except Exception:
+            ok=False
+        if not ok:
+            fail(f"EXACT_HEAD_POSTCONDITION_FAILED:{i}")
+
 def blocker_lease_key(intent):
     parts=[
         str(intent.get("canonical_generation") or ""),
@@ -603,6 +747,7 @@ def main():
     if intent:
         enforce_blocker_lease(intent)
         enforce_recursive_obs(intent,files,ns.base)
+        enforce_adversarial_error_control(intent,files,ns.base)
 
     terminal=str(pointer.get("mission_lock",{}).get("terminal_objective") or "")
     if hierarchy.get("terminal_objective")!=terminal:

@@ -1,0 +1,275 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4",
+  "status": "AUTHORING_TEMPLATE__COPY_AND_FILL__NEVER_EXECUTE_DIRECTLY",
+  "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+  "instructions": [
+    "Copy into canonical/action_intents/<date>_<ACTION>.json.",
+    "Replace every __REQUIRED_* placeholder before opening a PR.",
+    "Bind recursive_obs.canonical_base_commit to the exact current main commit used to branch.",
+    "For normal capability/support/repair/infrastructure actions, set route_frontier.discovery_required=true and refresh it within 24 hours of trusted validation.",
+    "Search by capability vectors and alternate supplier/implementation/recency wording, not provider names alone.",
+    "Treat broad web/community/social/launch sources as discovery sensors only; every material challenger decision needs qualification-grade evidence.",
+    "Do not continue while unresolved_plausible_dominators is non-empty.",
+    "For every normal executable action, attach route_frontier.selected_route_preflight checked within 2 hours of trusted validation.",
+    "Enumerate every execution-critical dependency. Required VOLATILE dependencies need DIRECT_PROBE or INDEPENDENT_VERIFIER evidence; historical success and generic public status do not prove account-scoped readiness.",
+    "Set execution_dependencies_complete=true only after enumerating every execution-critical dependency.",
+    "Use only controlled dependency kinds. At least one execution substrate kind is required: CARRIER, LOCAL_RUNTIME, MODEL_API, or REMOTE_SERVICE.",
+    "Declare evidence_scope explicitly; ACCOUNT_SPECIFIC and REGION_SPECIFIC dependencies require evidence_scope to match the dependency scope.",
+    "If main or the external route surface materially changes, refresh affected OBS layers before execution.",
+    "OBS/discovery activity receives zero progress credit.",
+    "Assume the action is wrong: fill adversarial_error_control before authorization.",
+    "Declare exactly every non-intent frontier-sensitive path expected to change; the trusted guard compares the set to the exact PR head.",
+    "For capability promotion, frontier dependency removal, or frontier fresh-reuse credit, provide a complete explicit supplier manifest. Unknown suppliers and opaque aliases fail closed.",
+    "The target frontier supplier may be a comparator/reference but cannot be in the producer or verifier path of a claim that it has been made unnecessary.",
+    "Declare deterministic postconditions that the trusted guard can evaluate on the exact PR head."
+  ],
+  "action_intent": {
+    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+    "action_id": "__REQUIRED_ACTION_ID__",
+    "status": "PROPOSED",
+    "canonical_generation": "__REQUIRED_CANONICAL_GENERATION__",
+    "terminal_objective": "__REQUIRED_TERMINAL_OBJECTIVE__",
+    "active_program": "__REQUIRED_ACTIVE_PROGRAM__",
+    "capability_target": "__REQUIRED_CAPABILITY_TARGET__",
+    "probe_id": null,
+    "causal_blocker": "__REQUIRED_CAUSAL_BLOCKER_OR_DIRECT_ROUTE__",
+    "action_kind": "__REQUIRED_ACTION_KIND__",
+    "blocker_lease_key": "__REQUIRED_GENERATION::CAPABILITY::BLOCKER::ACTION_KIND__",
+    "expected_parent_frontier_change": "__REQUIRED_PARENT_LEVEL_CHANGE__",
+    "highest_leverage_now": true,
+    "prior_work_checked": [
+      "__REQUIRED_PRIOR_WORK_SEARCH__"
+    ],
+    "evidence_presence_classification": "__REQUIRED_CANONICAL_EVIDENCE_CLASS__",
+    "probe_specific": false,
+    "generic_repair_from_single_probe": false,
+    "orthogonal_recurrence_count": 0,
+    "precommitted_acceptance_gate_exception": false,
+    "probe_specific_literals": [],
+    "stop_condition": "__REQUIRED_STOP_CONDITION__",
+    "governance_change": false,
+    "weakens_existing_guard": false,
+    "recursive_obs": {
+      "canonical_generation_or_commit": "__REQUIRED_CANONICAL_GENERATION__",
+      "canonical_base_commit": "__REQUIRED_EXACT_40_HEX_BASE_COMMIT__",
+      "real_outcome": "__REQUIRED_REAL_USEFUL_OUTCOME__",
+      "required_capability": "__REQUIRED_CAPABILITY__",
+      "obs_goal": {
+        "real_outcome": "__REQUIRED_REAL_USEFUL_OUTCOME__",
+        "proxy_goals_deleted": [],
+        "surviving_necessity": "__REQUIRED_SURVIVING_NECESSITY__"
+      },
+      "obs_capability": {
+        "existing_inherited_routes_checked": [],
+        "external_existing_routes_checked": [],
+        "capability_work_deleted": [],
+        "surviving_gap": "__REQUIRED_SURVIVING_CAPABILITY_GAP__"
+      },
+      "obs_blocker": {
+        "intrinsic_or_path_specific": "__REQUIRED_CLASSIFICATION__",
+        "delete_bypass_substitute_options": [],
+        "surviving_causal_blocker": "__REQUIRED_SURVIVING_BLOCKER_OR_NONE__"
+      },
+      "obs_solution": {
+        "deletion_first_order_applied": [
+          "DELETE",
+          "BYPASS",
+          "REUSE",
+          "SUBSTITUTE",
+          "COMPOSE",
+          "REPAIR",
+          "BUILD"
+        ],
+        "routes_ranked": [
+          "__REQUIRED_AT_LEAST_ONE_ROUTE__"
+        ],
+        "losing_routes_reason": "__REQUIRED_WHY_ALTERNATIVES_LOST__",
+        "implementation_still_necessary": true
+      },
+      "obs_verification": {
+        "direct_real_effect_verification_considered": true,
+        "existing_oracle_considered": true,
+        "synthetic_verification_necessity": "__REQUIRED_DIRECT_OR_SYNTHETIC_JUSTIFICATION__"
+      },
+      "obs_inherited_system": {
+        "downstream_work_to_delete_or_supersede": [],
+        "adjacent_capabilities_absorbed": [],
+        "fresh_reuse_plan": "__REQUIRED_FRESH_REUSE_OR_JUSTIFIED_NOT_PRACTICAL__"
+      },
+      "obs_obs": {
+        "analysis_steps_deleted_or_cached": [],
+        "search_stop_decision": "__REQUIRED_REASON_SEARCH_CAN_STOP_NOW__",
+        "affected_layers_only_on_revalidation": true,
+        "challenger_refresh_decision": "__REQUIRED_WHEN_AND_WHY_ROUTE_FRONTIER_IS_CURRENT__"
+      },
+      "routes_considered": [
+        "__REQUIRED_AT_LEAST_ONE_ROUTE__"
+      ],
+      "deleted_or_bypassed_paths": [],
+      "selected_surviving_route": "__REQUIRED_SELECTED_ROUTE__",
+      "why_selected_route_is_fastest_sufficient": "__REQUIRED_CORRECTNESS_WALL_CLOCK_COST_JUSTIFICATION__",
+      "expected_parent_level_state_change": "__MUST_MATCH_ACTION_INTENT_EXPECTED_PARENT_FRONTIER_CHANGE__",
+      "stop_condition": "__MUST_MATCH_ACTION_INTENT_STOP_CONDITION__",
+      "route_frontier": {
+        "discovery_required": true,
+        "checked_at_utc": "__REQUIRED_RFC3339_UTC_TIMESTAMP__",
+        "max_age_hours": 24,
+        "incumbent_route": "__REQUIRED_INCUMBENT_OR_NONE__",
+        "source_classes_checked": [
+          "BRAIN_INHERITED",
+          "OFFICIAL_PRIMARY",
+          "CODE_OR_PACKAGE_REGISTRY",
+          "BROAD_WEB_OR_COMMUNITY"
+        ],
+        "source_evidence": {
+          "BRAIN_INHERITED": [
+            "__REQUIRED_EVIDENCE_REFERENCE__"
+          ],
+          "OFFICIAL_PRIMARY": [
+            "__REQUIRED_EVIDENCE_REFERENCE__"
+          ],
+          "CODE_OR_PACKAGE_REGISTRY": [
+            "__REQUIRED_EVIDENCE_REFERENCE__"
+          ],
+          "BROAD_WEB_OR_COMMUNITY": [
+            "__REQUIRED_EVIDENCE_REFERENCE__"
+          ]
+        },
+        "query_families": [
+          {
+            "intent": "CAPABILITY_VECTOR",
+            "query": "__REQUIRED_QUERY__"
+          },
+          {
+            "intent": "SUPPLIER_OR_PRODUCT",
+            "query": "__REQUIRED_QUERY__"
+          },
+          {
+            "intent": "IMPLEMENTATION_FORM",
+            "query": "__REQUIRED_QUERY__"
+          },
+          {
+            "intent": "RECENCY_OR_NEW_RELEASE",
+            "query": "__REQUIRED_QUERY__"
+          }
+        ],
+        "challenger_routes": [
+          {
+            "route": "__REQUIRED_CHALLENGER_ROUTE__",
+            "evidence": [
+              "__REQUIRED_DISCOVERY_EVIDENCE_REFERENCE__"
+            ],
+            "qualification_evidence": [
+              "__REQUIRED_PRIMARY_DIRECT_OR_INDEPENDENT_EVIDENCE__"
+            ],
+            "qualification_evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ],
+            "resolution": "__REQUIRED_SELECTED_NON_DOMINATING_OR_DISQUALIFIED__",
+            "comparison": {
+              "CORRECTNESS": "__REQUIRED__",
+              "CAPABILITY_STRENGTH": "__REQUIRED__",
+              "WALL_CLOCK": "__REQUIRED__",
+              "INCREMENTAL_COST": "__REQUIRED__",
+              "RELIABILITY": "__REQUIRED__",
+              "VERIFIABILITY": "__REQUIRED__"
+            }
+          }
+        ],
+        "negative_search_summary": "__REQUIRED_IF_NO_MATERIAL_CHALLENGER_FOUND__",
+        "comparison_dimensions": [
+          "CORRECTNESS",
+          "CAPABILITY_STRENGTH",
+          "WALL_CLOCK",
+          "INCREMENTAL_COST",
+          "RELIABILITY",
+          "VERIFIABILITY"
+        ],
+        "unresolved_plausible_dominators": [],
+        "selected_route": "__MUST_MATCH_RECURSIVE_OBS_SELECTED_SURVIVING_ROUTE__",
+        "refresh_triggers": [
+          "BEFORE_EXPENSIVE_EXECUTION",
+          "AFTER_MATERIAL_ROUTE_FAILURE",
+          "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+          "BEFORE_SCARCE_GATE_SPEND"
+        ],
+        "selected_route_preflight": {
+          "checked_at_utc": "__REQUIRED_RFC3339_UTC_TIMESTAMP_WITHIN_2_HOURS__",
+          "max_age_hours": 2,
+          "selected_route": "__MUST_MATCH_ROUTE_FRONTIER_SELECTED_ROUTE__",
+          "status": "READY",
+          "all_required_dependencies_ready": true,
+          "failed_dependencies": [],
+          "execution_dependencies": [
+            {
+              "dependency": "__REQUIRED_EXECUTION_DEPENDENCY__",
+              "kind": "CARRIER",
+              "required": true,
+              "volatility": "VOLATILE",
+              "scope": "ACCOUNT_SPECIFIC",
+              "status": "READY",
+              "observed_at_utc": "__REQUIRED_RFC3339_UTC_TIMESTAMP_WITHIN_PREFLIGHT_LEASE__",
+              "evidence": [
+                "__REQUIRED_CURRENT_EVIDENCE_REFERENCE__"
+              ],
+              "evidence_classes": [
+                "DIRECT_PROBE"
+              ],
+              "evidence_scope": "ACCOUNT_SPECIFIC"
+            }
+          ],
+          "execution_dependencies_complete": true
+        }
+      }
+    },
+    "adversarial_error_control": {
+      "schema": "PROJECT_BRAIN_ADVERSARIAL_ERROR_CONTROL_V1",
+      "assume_action_wrong": true,
+      "strongest_disconfirming_hypotheses": [
+        "__REQUIRED_STRONG_DISCONFIRMING_HYPOTHESIS_1__",
+        "__REQUIRED_STRONG_DISCONFIRMING_HYPOTHESIS_2__",
+        "__REQUIRED_STRONG_DISCONFIRMING_HYPOTHESIS_3__"
+      ],
+      "known_failure_classes_checked": [
+        "STALE_STATE",
+        "TARGET_SUBSTITUTION",
+        "PROXY_GOAL",
+        "CIRCULAR_PROOF",
+        "SELF_CERTIFICATION",
+        "NARROW_CAPABILITY_INFLATION",
+        "SAME_DOMAIN_REUSE_INFLATION",
+        "ROUTE_READINESS",
+        "DUPLICATE_EXECUTION",
+        "ACTIVITY_AS_PROGRESS",
+        "POST_STATE_MISMATCH",
+        "HIDDEN_DEPENDENCY",
+        "FALSIFIED_ROUTE_REPLAY"
+      ],
+      "unresolved_material_risks": [],
+      "abort_if_any_unresolved": true,
+      "target_fidelity": {
+        "intended_target": "__MUST_MATCH_ACTION_INTENT_CAPABILITY_TARGET__",
+        "proxy_substitution_detected": false
+      },
+      "proof_claim": {
+        "claim_level": "__REQUIRED_CLAIM_LEVEL__",
+        "target_frontier_supplier_in_producer_path": false,
+        "target_frontier_supplier_in_verifier_path": false,
+        "producer_verifier_independent": true,
+        "independent_verifier_present": true,
+        "execution_supplier_manifest_complete": true,
+        "unknown_execution_suppliers": [],
+        "opaque_supplier_aliases": []
+      },
+      "expected_sensitive_paths": [
+        "__REQUIRED_EXACT_NON_INTENT_SENSITIVE_PATH__"
+      ],
+      "postconditions": [
+        {
+          "type": "file_exists",
+          "path": "__REQUIRED_EXACT_HEAD_PATH__"
+        }
+      ]
+    }
+  }
+}

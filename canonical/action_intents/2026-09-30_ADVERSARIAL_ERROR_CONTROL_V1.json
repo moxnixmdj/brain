@@ -171,7 +171,10 @@
       "target_frontier_supplier_in_producer_path": false,
       "target_frontier_supplier_in_verifier_path": false,
       "producer_verifier_independent": true,
-      "independent_verifier_present": true
+      "independent_verifier_present": true,
+      "execution_supplier_manifest_complete": true,
+      "unknown_execution_suppliers": [],
+      "opaque_supplier_aliases": []
     },
     "expected_sensitive_paths": [
       "canonical/CANONICAL_POINTER.json",
