@@ -36,10 +36,11 @@
     "direct_real_effect_verification_preferred": true,
     "material_state_change_invalidates_obs_receipt": true,
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_schema_v2_structural_validation_required": true,
     "frontier_capability_credit_requires_documented_frontier_reference": true,
     "same_domain_parameter_variation_is_not_frontier_fresh_reuse": true,
-    "narrow_domain_tool_is_not_frontier_capability": true
+    "narrow_domain_tool_is_not_frontier_capability": true,
+    "recursive_obs_schema_v3_live_frontier_validation_required": true,
+    "live_challenger_frontier_max_age_hours": 24
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -75,15 +76,15 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_FRESH_DIFFERENT_REAL_TASK_B_ON_STRONGER_DEPENDENCY_FREE_LOCAL_QWEN3_5_9B_ROUTE__NO_4B_REPLAY__VERIFY_REAL_RESULT",
+  "next_progress_event_target": "OBS_V3_MURAKUMO_TOOL_DECISION__DETERMINISTIC_WOLFRAM_SEARCH_FETCH_MATH__VIREONIX_FINALIZATION__INDEPENDENT_SOURCE_AND_DETERMINISTIC_CHECKS__THEN_FRESH_REAL_TASK_C_IF_GENERIC_ROUTE_SURVIVES",
   "authority": [
-    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md"
   ],
   "compliance_state": {
-    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "implementation_actions_without_current_obs_receipt_allowed": 0,
     "deletion_first_order": [
       "DELETE",
@@ -95,7 +96,9 @@
       "BUILD"
     ],
     "exact_base_commit_binding_required": true,
-    "placeholder_receipts_allowed": false
+    "placeholder_receipts_allowed": false,
+    "live_challenger_frontier_required": true,
+    "max_external_route_frontier_age_hours": 24
   },
   "progress_events": [
     {
