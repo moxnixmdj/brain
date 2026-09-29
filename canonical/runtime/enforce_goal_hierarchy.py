@@ -27,6 +27,7 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
@@ -70,7 +71,9 @@ ROUTE_PREFLIGHT_VOLATILE_EVIDENCE_CLASSES={"DIRECT_PROBE","INDEPENDENT_VERIFIER"
 ROUTE_PREFLIGHT_DEPENDENCY_EVIDENCE_CLASSES={"OFFICIAL_PRIMARY","CODE_OR_PACKAGE_REGISTRY","DIRECT_PROBE","INDEPENDENT_VERIFIER","BRAIN_INHERITED"}
 ROUTE_PREFLIGHT_VOLATILITY={"STATIC","VOLATILE"}
 ROUTE_PREFLIGHT_SCOPES={"GLOBAL","ACCOUNT_SPECIFIC","LOCAL","REGION_SPECIFIC"}
-ROUTE_PREFLIGHT_INTRINSIC_VOLATILE_KINDS={"CARRIER","ACCOUNT_ENTITLEMENT","MODEL_API","NETWORK_ENDPOINT","REMOTE_SERVICE","CAPACITY_POOL"}
+ROUTE_PREFLIGHT_KINDS={"CARRIER","ACCOUNT_ENTITLEMENT","MODEL_API","NETWORK_ENDPOINT","REMOTE_SERVICE","CAPACITY_POOL","AUTH_CREDENTIAL","LOCAL_RUNTIME","LOCAL_MODEL","CODE_ARTIFACT","DATA_SOURCE","STORAGE","PACKAGE_REGISTRY","MODEL_ARTIFACT"}
+ROUTE_PREFLIGHT_INTRINSIC_VOLATILE_KINDS={"CARRIER","ACCOUNT_ENTITLEMENT","MODEL_API","NETWORK_ENDPOINT","REMOTE_SERVICE","CAPACITY_POOL","AUTH_CREDENTIAL"}
+ROUTE_PREFLIGHT_EXECUTION_SUBSTRATE_KINDS={"CARRIER","LOCAL_RUNTIME","MODEL_API","REMOTE_SERVICE"}
 ROUTE_FRONTIER_DISCOVERY_EXEMPT_ACTIONS=GOVERNANCE_ACTIONS|{"RECONCILE_FRONTIER","EVIDENCE_PRESERVATION"}
 OBS_REQUIRED_FIELDS=(
     "canonical_generation_or_commit",
@@ -194,6 +197,8 @@ def enforce_selected_route_preflight(frontier,obs):
         fail("SELECTED_ROUTE_PREFLIGHT_NOT_READY")
     if preflight.get("all_required_dependencies_ready") is not True:
         fail("SELECTED_ROUTE_PREFLIGHT_REQUIRED_DEPENDENCIES_NOT_READY")
+    if preflight.get("execution_dependencies_complete") is not True:
+        fail("SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_INVENTORY_NOT_ASSERTED_COMPLETE")
 
     failed=preflight.get("failed_dependencies")
     if not isinstance(failed,list):
@@ -206,6 +211,7 @@ def enforce_selected_route_preflight(frontier,obs):
         fail("SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_INVENTORY_MISSING")
         return
 
+    substrate_seen=False
     for i,dep in enumerate(deps):
         if not isinstance(dep,dict):
             fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_INVALID:{i}")
@@ -215,6 +221,10 @@ def enforce_selected_route_preflight(frontier,obs):
         kind=str(dep.get("kind") or "")
         if not kind:
             fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_KIND_MISSING:{i}")
+        elif kind not in ROUTE_PREFLIGHT_KINDS:
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_KIND_INVALID:{i}")
+        if kind in ROUTE_PREFLIGHT_EXECUTION_SUBSTRATE_KINDS:
+            substrate_seen=True
         required=dep.get("required")
         if not isinstance(required,bool):
             fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_REQUIRED_NOT_BOOLEAN:{i}")
@@ -225,6 +235,9 @@ def enforce_selected_route_preflight(frontier,obs):
         scope=str(dep.get("scope") or "")
         if scope not in ROUTE_PREFLIGHT_SCOPES:
             fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_SCOPE_INVALID:{i}")
+        evidence_scope=str(dep.get("evidence_scope") or "")
+        if evidence_scope not in ROUTE_PREFLIGHT_SCOPES:
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_EVIDENCE_SCOPE_INVALID:{i}")
         status=str(dep.get("status") or "")
         if required and status!="READY":
             fail(f"SELECTED_ROUTE_PREFLIGHT_REQUIRED_DEPENDENCY_NOT_READY:{i}")
@@ -262,6 +275,11 @@ def enforce_selected_route_preflight(frontier,obs):
         if required and scope in {"ACCOUNT_SPECIFIC","REGION_SPECIFIC"}:
             if not class_set.intersection(ROUTE_PREFLIGHT_VOLATILE_EVIDENCE_CLASSES):
                 fail(f"SELECTED_ROUTE_PREFLIGHT_SCOPED_DEPENDENCY_LACKS_DIRECT_OR_INDEPENDENT_EVIDENCE:{i}")
+            if evidence_scope!=scope:
+                fail(f"SELECTED_ROUTE_PREFLIGHT_SCOPED_DEPENDENCY_EVIDENCE_SCOPE_MISMATCH:{i}")
+
+    if not substrate_seen:
+        fail("SELECTED_ROUTE_PREFLIGHT_EXECUTION_SUBSTRATE_MISSING")
 
 
 def enforce_live_route_frontier(intent,obs):
