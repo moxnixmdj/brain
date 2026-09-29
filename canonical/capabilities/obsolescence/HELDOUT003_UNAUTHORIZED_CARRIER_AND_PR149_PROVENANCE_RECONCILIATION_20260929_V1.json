@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_INCIDENT_AND_PROVENANCE_RECONCILIATION_V1",
+  "reconciliation_id": "HELDOUT003_UNAUTHORIZED_CARRIER_AND_PR149_PROVENANCE_20260929",
+  "status": "RECONCILED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "pr149_transition_provenance": {
+    "status": "QUARANTINED_GOVERNANCE_VIOLATION__DESCRIPTOR_VALUES_PRESERVED",
+    "pr": 149,
+    "trusted_intent_head": "b3475695d670e7228bf22c35b14d696b92faa297",
+    "trusted_intent_blob": "c84674c84fc07c9a0de6a25fa151c4fd9c36a115",
+    "merged_intent_blob": "f6558b431b68a27e32b62a1262a2c81d9f7d37a6",
+    "violation": "ACTION_INTENT_MUTATED_AFTER_TRUSTED_IMMUTABILITY_RECEIPT",
+    "state_value_disposition": "KEEP_THREE_DESCRIPTOR_CORRECTIONS__INDEPENDENTLY_SUPPORTED_BY_MERGED_PR129_AND_PR136",
+    "promotion_or_execution_authority_from_pr149_provenance": false
+  },
+  "heldout003_incident": {
+    "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+    "carrier": {
+      "provider": "Sprites",
+      "sprite": "brain-heldout003-one-shot"
+    },
+    "carrier_admission": "UNAUTHORIZED_AT_START__ACCOUNT_NATIVE_HARD_ZERO_SPEND_PROOF_NOT_ESTABLISHED",
+    "primary_evidence": {
+      "execution_start_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__EXECUTION_START.json",
+      "execution_start_sha256": "6e67de16db94c5d9a01c0c22915888519191b5bc8bbe0a283d6bae1d50e70c07",
+      "result_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json",
+      "result_sha256": "49f687fcd3b6ec8bcac68aaf2c177a0b0b66385105e19c2c476069b07ca07497",
+      "acquisition_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__AUTO_APT_CLI_ACQUISITION.json",
+      "acquisition_sha256": "ad13c127f8cbced41b01dee92e880c67c039161edff6615ff0ca196626fb1726"
+    },
+    "freshness": {
+      "status": "SPENT_CONTAMINATED_NO_REPLAY",
+      "effective_execution_count": 1,
+      "exclusive_start_authoritative_for_freshness": true,
+      "same_gate_replay_allowed": false,
+      "second_carrier_for_same_gate_allowed": false
+    },
+    "capability_verdict": {
+      "status": "UNADJUDICATED",
+      "raw_acceptance_gate_pass": false,
+      "admissible_pass_fail_verdict": false,
+      "promotion_authorized": false,
+      "reason": "EXECUTOR_POLICY_HARD_ZERO_SPEND_ADMISSION_NOT_PROVEN_BEFORE_START"
+    },
+    "diagnostic_result": {
+      "total_wall_s": 140.213006,
+      "discovery_source": "APT_FULL_METADATA_XAPIAN",
+      "selected_supplier": "zint",
+      "selected_supplier_binding_kind": "apt",
+      "selected_supplier_zero_cost_eligible": true,
+      "package_hints_used_by_runtime": false,
+      "prebound_registry_route_used": false,
+      "terminal_error_class": "EXISTING_INDEPENDENT_VERIFIER_FAILED_IMPORT_ERROR",
+      "missing_import": "python_library_codec",
+      "carrier_dependency_closure_defect_proven": true,
+      "canonical_main_required_modules_present": [
+        {
+          "path": "canonical/runtime/bound_capabilities/python_library_codec.py",
+          "git_blob": "e9b9f5c4991ba1f11b9f377a275b3e17bad22886"
+        },
+        {
+          "path": "canonical/runtime/bound_capabilities/python_source_tree_codec.py",
+          "git_blob": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05"
+        }
+      ],
+      "carrier_modules_present": [
+        "canonical/runtime/bound_capabilities/cli_command.py",
+        "canonical/runtime/bound_capabilities/node_library_codec.py"
+      ],
+      "interpretation": "REAL_CARRIER_MATERIALIZATION_DEFECT__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION"
+    }
+  },
+  "parent_frontier": {
+    "status": "CAPABILITY_UNPROVEN",
+    "runtime_repair_from_unauthorized_result_authorized": false,
+    "next_sequence": [
+      "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_ANY_CARRIER_CORRECTION",
+      "GENERIC_COMPLETE_REPOSITORY_OR_VERIFIER_DEPENDENCY_CLOSURE_CARRIER_CORRECTION_ON_AUTHORIZED_HARD_ZERO_SPEND_REMOTE_CARRIER",
+      "EXECUTE_ONLY_NEW_FRESH_GATE_EXACTLY_ONCE",
+      "RECONCILE_FIRST_TERMINAL_RESULT"
+    ]
+  },
+  "invariants": [
+    "NO_HELDOUT_003_REPLAY",
+    "NO_SECOND_CARRIER_FOR_HELDOUT_003",
+    "NO_PROMOTION_FROM_UNAUTHORIZED_RESULT",
+    "NO_CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_RESULT",
+    "NO_CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP_EXECUTION"
+  ]
+}
