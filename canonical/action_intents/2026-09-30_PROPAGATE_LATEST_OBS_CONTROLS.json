@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROPAGATE-LATEST-OBS-CONTROLS-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "LIVE_AUTHORITY_SURFACES_STILL_REFERENCE_SUPERSEDED_OBS_AND_ACQUISITION_CONTROLS_AFTER_V3_V4_V6_V7_PROMOTION",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::LIVE_AUTHORITY_SURFACES_STILL_REFERENCE_SUPERSEDED_OBS_AND_ACQUISITION_CONTROLS_AFTER_V3_V4_V6_V7_PROMOTION::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "All live boot, hierarchy, frontier-queue, and scoreboard compliance surfaces point to the already-canonical OBS Law V3, Receipt V4, Action Template V3, Goal Gate V6, Critical Gate V7, and Capability Acquisition Law V4, eliminating stale-control boot drift before fresh Task C.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Live CANONICAL_POINTER",
+    "ACTIVE_GOAL_HIERARCHY",
+    "FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE",
+    "REAL_OUTPUT_SCOREBOARD",
+    "PR225 controls",
+    "PR227 runtime repair"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only authority-reference propagation; create no new law, gate, workflow, model supplier, or benchmark. Immediately proceed to fresh real Task C through the repaired runtime.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly ordered Brain and everything necessary to be updated perfectly and to make repeated mistakes impossible while pursuing the real frontier-capability goal.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+    "real_outcome": "Prevent future Brain workers from booting or planning under superseded OBS/acquisition controls, then return immediately to real frontier-capability execution.",
+    "required_capability": "CURRENT_CANONICAL_CONTROL_PROPAGATION",
+    "obs_goal": {
+      "real_outcome": "One coherent live authority surface using the newest already-canonical controls.",
+      "proxy_goals_deleted": [
+        "new governance law",
+        "new gate design",
+        "new workflow",
+        "additional benchmark"
+      ],
+      "surviving_necessity": "Repoint stale live references only."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3",
+        "RECURSIVE_OBS_RECEIPT_SCHEMA_V4",
+        "ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3",
+        "GOAL_HIERARCHY_ACTION_GATE_V6",
+        "CRITICAL_PATH_PRE_ACTION_GATE_V7",
+        "CAPABILITY_ACQUISITION_ENGINE_LAW_V4"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: this is canonical internal reference propagation."
+      ],
+      "capability_work_deleted": [
+        "No new control mechanism"
+      ],
+      "surviving_gap": "Pointer, hierarchy, queue, and scoreboard still cite superseded controls."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic authority-reference drift.",
+      "delete_bypass_substitute_options": [
+        "Ignore drift rejected because fresh workers may boot stale rules",
+        "Add yet another law rejected",
+        "Propagate existing canonical references survives"
+      ],
+      "surviving_causal_blocker": "Stale live references."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPOINT_EXISTING_LIVE_AUTHORITY_REFERENCES"
+      ],
+      "losing_routes_reason": "Anything larger creates more governance without reducing the capability gap.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Directly read the four live JSON surfaces after merge and verify every control path/version."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any instruction to boot V1/V2/V4/V5-era controls"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Current challenger-frontier and selected-route preflight enforcement"
+      ],
+      "fresh_reuse_plan": "Fresh Task C must author against OBS V3/Receipt V4 and execute immediately."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused already-merged controls instead of redesigning them"
+      ],
+      "search_stop_decision": "The contradiction is explicit in live canonical JSON; no external research can improve this repair.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External route discovery is inapplicable to this governance-only pointer propagation."
+    },
+    "routes_considered": [
+      "REPOINT_EXISTING_LIVE_AUTHORITY_REFERENCES",
+      "IGNORE_STALE_REFERENCES",
+      "CREATE_NEW_GOVERNANCE_VERSION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "IGNORE_STALE_REFERENCES",
+      "CREATE_NEW_GOVERNANCE_VERSION"
+    ],
+    "selected_surviving_route": "REPOINT_EXISTING_LIVE_AUTHORITY_REFERENCES",
+    "why_selected_route_is_fastest_sufficient": "It changes only stale references to controls already merged and protected, preventing stale boot behavior with minimal wall-clock and zero new machinery.",
+    "expected_parent_level_state_change": "All live boot, hierarchy, frontier-queue, and scoreboard compliance surfaces point to the already-canonical OBS Law V3, Receipt V4, Action Template V3, Goal Gate V6, Critical Gate V7, and Capability Acquisition Law V4, eliminating stale-control boot drift before fresh Task C.",
+    "stop_condition": "Merge only authority-reference propagation; create no new law, gate, workflow, model supplier, or benchmark. Immediately proceed to fresh real Task C through the repaired runtime.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized governance-only propagation of already-canonical internal references; no external capability route is being selected."
+    }
+  }
+}
