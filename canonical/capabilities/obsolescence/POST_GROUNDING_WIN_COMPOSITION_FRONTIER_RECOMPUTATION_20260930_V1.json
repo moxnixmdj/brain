@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_POST_WIN_FRONTIER_RECOMPUTATION_V1",
+  "status": "GROUNDING_WIN_RECONCILED__NEXT_COMPOSITION_GAP_LOCALIZED",
+  "canonical_base_commit": "95543fe8591c2b490901143fb165ce6571b7140d",
+  "acquired_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "acquired_route": [
+    "plain_goal.bound_capability.grounding.stdlib",
+    "plain_goal.bound_capability.grounding.verify.stdlib"
+  ],
+  "verification": {
+    "regression_run_id": 36646224008,
+    "real_task_A_run_id": 36646322912,
+    "fresh_reuse_B_run_id": 36646400507,
+    "exact_final_head_validation_run_id": 36646452335,
+    "bound_registry_integration_run_id": 36646710975,
+    "real_task_A_artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3",
+    "fresh_reuse_B_artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48",
+    "exact_final_head_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
+  },
+  "progress_credit_applied": {
+    "reusable_capabilities_inherited": 1,
+    "verified_real_tasks_completed": 1,
+    "fresh_reuse_passes": 1,
+    "frontier_dependencies_removed": 1,
+    "residual_gaps_localized": 1
+  },
+  "deleted_frontier": [
+    "PLAIN_GOAL_FAILED_TO_GROUND_EXISTING_BOUND_CAPABILITIES_AND_FELL_THROUGH_TO_IRRELEVANT_EXTERNAL_DISCOVERY",
+    "FURTHER_GROUNDING_PROOF_TASKS",
+    "EXTERNAL_SUPPLIER_DISCOVERY_BEFORE_EXISTING_BOUND_GROUNDING"
+  ],
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "parent_status": "NOT_YET_ACQUIRED",
+  "next_capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "next_blocker": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_UNPROVEN",
+  "next_search_first": [
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/capability_proposal_generators.py",
+    "canonical/runtime/astra_runtime.py::_run_capability_planned_goal",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+  ],
+  "no_replay": true,
+  "no_model_cognition": true,
+  "incremental_spend_usd": 0
+}
