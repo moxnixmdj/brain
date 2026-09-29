@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+  "status": "ACTIVE_ACQUISITION_TARGET__UNPROVEN",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
+  "useful_behavior": "Given a typed set of evidence items with provenance, claims, constraints, conflicts, confidence/uncertainty metadata, and a target question or decision, deterministically derive a terminal answer or decision, preserve unresolved conflicts and uncertainty, and emit an auditable inference/decision trace without any model dependency.",
+  "why_real_frontier_capability": "The parent frontier capability requires combining evidence, resolving relevance/conflict, synthesizing a terminal answer, and deciding when evidence is sufficient to stop. This target isolates that real behavior rather than a benchmark predicate.",
+  "scope_boundary": {
+    "includes": [
+      "evidence normalization after evidence has been acquired",
+      "claim/support/contradiction relationships",
+      "constraint satisfaction and conflict detection",
+      "decision/answer synthesis",
+      "uncertainty preservation",
+      "terminal stop/insufficient-evidence decision",
+      "auditable reasoning trace"
+    ],
+    "excludes": [
+      "arbitrary natural-language interpretation before structuring",
+      "web discovery itself",
+      "model-backed reasoning",
+      "GUI/computer use",
+      "domain-specific answer memorization"
+    ]
+  },
+  "inherited_components_available": [
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/capability_reality_auditor.py",
+    "canonical/runtime/capability_discovery.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "canonical/runtime/astra_runtime.py"
+  ],
+  "evidence_for_selection": [
+    "Pollinations route falsified",
+    "local Qwen3.5-4B route falsified",
+    "local Qwen3.5-9B route falsified",
+    "PR227 repaired evidence preservation/finalization mechanics",
+    "PR236 forbids any model in the credited cognition path",
+    "Brain already owns deterministic planning/discovery/execution/verification machinery; the remaining broad seam is evidence-to-terminal-decision cognition"
+  ],
+  "minimum_acquisition_evidence": {
+    "model_dependency_count": 0,
+    "real_task_required": true,
+    "independent_verification_required": true,
+    "auditable_trace_required": true,
+    "uncertainty_or_conflict_handling_required": true,
+    "fresh_reuse_on_distinct_real_task_required": true,
+    "parent_capability_credit": "ONLY_AFTER_COMPOSITION_WITH_OTHER_REQUIRED_SUBCAPABILITIES"
+  },
+  "promotion_bar": "Two materially distinct real tasks must use the same model-independent synthesis route without rediscovery; outputs must be independently verified and the trace must make the decision reproducible.",
+  "current_status": "UNPROVEN",
+  "residual_after_success": "Arbitrary-language-to-structured-evidence interpretation and any other parent subcapabilities not yet independently acquired remain separate gaps."
+}
