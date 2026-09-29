@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QUALIFY-HELDOUT004-EXACT-CLOSURE-HARDZERO-CARRIER-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "CARRIER_FIDELITY_CORRECTION_AND_EXECUTOR_QUALIFICATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::CARRIER_FIDELITY_CORRECTION_AND_EXECUTOR_QUALIFICATION",
+  "expected_parent_frontier_change": "Eliminate the carrier-fidelity blocker without spending HELDOUT-004: derive a deterministic exact runtime/import closure from canonical main, attest every transported path and Git blob/content hash, prove the verifier imports resolve from that exact closure immediately before any future START, and qualify an accountless/cardless hard-zero remote Linux carrier. Prefer Railway anonymous ssh railway.new because Railway explicitly states unclaimed VMs are free and nobody pays for their compute. Stop before HELDOUT-004 execution; execution requires a fresh guarded one-shot lease after qualification evidence is reconciled.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 corrected PR172 overclaim and preserved HELDOUT-004 UNSPENT",
+    "Railway official free-vm surface: ssh railway.new, no account, no card, unclaimed compute free",
+    "existing brain-heldout-004 Railway account project is not used because account plan/billing state is not exposed strongly enough for hard-zero proof",
+    "GitHub Actions historical execution exists but recent runner-start failures make current callable availability unproven",
+    "Sprites carrier is forbidden because hard-zero admission was not established before HELDOUT-003 START",
+    "HELDOUT-003 carrier failure proves hand-picked partial source materialization is unacceptable"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after preserving reproducible carrier-fidelity preflight evidence and accountless/cardless hard-zero carrier qualification. Do not create a HELDOUT-004 START marker, invoke the HELDOUT-004 evaluator, replay HELDOUT-003, mutate capability runtime/evaluator/gate semantics, use Val Town, use the user laptop, wake the unauthorized Sprite, or incur paid/unproven spend. Any later HELDOUT-004 execution must begin from fresh canonical main under a separate guarded one-shot execution lease.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
