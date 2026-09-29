@@ -55,6 +55,18 @@ def _semantic_help_contract(probe):
     return {"executable":path,"help_excerpt":text[:4000],"argv":[path,"--quiet","--raw","__OUTPUT_PATH__"]}
 
 
+def _semantic_verifier_candidate_has_sufficient_evidence(cand):
+    if len(cand.get("matched_terms") or [])>=2:
+        return True
+    evidence=cand.get("executable_semantic_evidence") or {}
+    return (
+        cand.get("eligibility_status")=="LOCAL_EXECUTABLE_OWNERSHIP_VERIFIED"
+        and cand.get("evidence_tier")=="SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP"
+        and bool(evidence.get("command_paths"))
+        and bool(str(evidence.get("semantic_source") or "").strip())
+    )
+
+
 def _acquire_and_run_semantic_verifier(pending, output_path):
     semantic=pending.get("semantic_verification") or {}
     expected=str(semantic.get("expected_text") or "")
@@ -73,7 +85,7 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
             continue
         if int(cand.get("integration_friction",99))!=0:
             continue
-        if len(cand.get("matched_terms") or [])<2:
+        if not _semantic_verifier_candidate_has_sufficient_evidence(cand):
             continue
         version=str(cand.get("version") or "")
         sha=str(cand.get("archive_sha256") or "").lower()
