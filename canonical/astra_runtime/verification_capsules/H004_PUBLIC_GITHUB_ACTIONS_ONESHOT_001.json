@@ -1,7 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_VERIFICATION_CAPSULE_V1",
   "capsule_id": "H004-PUBLIC-GITHUB-ACTIONS-ONESHOT-001",
-  "source_repository": "moxnixmdj/brain",
   "source_revision": "b836ed3d7a801b904c3f9b5d4729ae200a488b2e",
   "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
   "epistemic_state": "SEALED_NOT_EXECUTED",
@@ -69,7 +68,7 @@
       "private-user-images URLs",
       "known user/account identifiers and email addresses"
     ],
-    "findings": "No prohibited credential, PII, authenticated URL, or known user/account identifier match. Lexical variable names such as token were code variables only.",
+    "findings": "No prohibited credential, PII, authenticated URL, known user/account identifier, or private repository identity is present in the sealed public payload. Lexical variable names such as token are code variables only.",
     "fail_closed": true
   },
   "pre_start_surface_requirements": [
@@ -91,5 +90,10 @@
   "no_replay": true,
   "public_workflow_template": ".github/workflows/h004-public-oneshot-template.yml",
   "public_repository_creation_state": "BLOCKED_BY_CURRENT_GITHUB_CONNECTOR_MISSING_CREATE_REPOSITORY_OR_VISIBILITY_MUTATION_ACTION",
-  "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_SEALED_FILES_PLUS_TEMPLATE_AND_RUN_ONCE"
+  "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_SEALED_FILES_PLUS_TEMPLATE_AND_RUN_ONCE",
+  "source_class": "PRIVATE_CANONICAL_CONTENT_ADDRESSED_SOURCE",
+  "carrier_files": {
+    ".github/workflows/h004-public-oneshot.yml": "20569bb392941894d8d66c204b75c2d18c170257",
+    "ARM_H004_PUBLIC_ONESHOT_001": "TO_BE_CREATED_LAST_IN_PUBLIC_REPOSITORY"
+  }
 }
