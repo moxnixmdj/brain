@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-PR111-FRONTIER-SELECTION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "PR111_FRONTIER_SELECTION_OMITTED_PROVEN_LOWER_WALL_TOOL_LEARNING_INTERFACE_RESIDUAL__HIGHEST_LEVERAGE_CLAIM_NOT_SUPPORTED_BY_COMPLETE_CANDIDATE_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::PR111_FRONTIER_SELECTION_OMITTED_PROVEN_LOWER_WALL_TOOL_LEARNING_INTERFACE_RESIDUAL__HIGHEST_LEVERAGE_CLAIM_NOT_SUPPORTED_BY_COMPLETE_CANDIDATE_SET::RECONCILE_FRONTIER",
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "expected_parent_frontier_change": "Supersede PR111's incomplete capability selection, reselect the unresolved TOOL_DISCOVERY_SELECTION_AND_LEARNING parent because a deterministic low-part-count discovery-to-APT-acquisition blocker is already proven, preserve MULTI_TOOL_ORCHESTRATION_AND_PLANNING as the next global candidate, and authorize no runtime mutation until a fresh orthogonal end-to-end gate is frozen.",
+  "highest_leverage_now": true,
+  "highest_leverage_evidence": [
+    "Current canonical capability_discovery emits APT_FULL_METADATA_XAPIAN candidates with binding_kind=apt and verified executable ownership evidence.",
+    "Current auto_capability_acquisition already routes binding_kind=apt to apt_cli.",
+    "Current auto_apt_cli_acquisition._viable_candidates drops every non-APT_CATALOG source before probe or contract inference.",
+    "The same function applies a legacy absolute score>=12 threshold to a different Xapian BM25 score scale.",
+    "Existing downstream apt probe, generic CLI contract inference, binding, execution, independent verification, and promotion machinery already exists.",
+    "PR111's candidate table did not include this proven residual and used qualitative HIGH/VERY_HIGH/LOW estimates for its replacement capability selection."
+  ],
+  "prior_work_checked": [
+    "merged PR96 exact Xapian route inheritance",
+    "merged PR111 frontier selection",
+    "PR107/108/110 preserved static interface evidence",
+    "canonical/runtime/capability_discovery.py",
+    "canonical/runtime/auto_capability_acquisition.py",
+    "canonical/runtime/auto_apt_cli_acquisition.py",
+    "canonical/tests/test_discovery_driven_supplier_routing.py",
+    "TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical pointer, hierarchy, and queue reselect the proven tool-learning residual; PR111 multi-tool evidence remains preserved as a future candidate; no runtime mutation, experiment execution, or HELDOUT-005 replay occurs in this reconciliation PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
