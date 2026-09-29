@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__EVIDENCE_A_ONLY__TASK_B_STILL_UNSPENT_AFTER_ROUTE_FALSIFICATIONS",
+  "status": "FRONTIER_BAR_DEFINED__EVIDENCE_A_ONLY__DEPENDENCY_FREE_TASK_B_FAILED_AFTER_9B_RESEARCH_ACTIONS__TERMINATION_SEAM_LOCALIZED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -50,7 +50,7 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "UNSPENT_AFTER_TWO_PROVIDER_ROUTE_FALSIFICATIONS",
+    "status": "UNSPENT_AFTER_THREE_ROUTE_FAILURES__9B_PARTIAL_RESEARCH_BEHAVIOR_PRESENT_BUT_REAL_TASK_NOT_COMPLETED",
     "failed_routes": [
       {
         "route": "ANONYMOUS_POLLINATIONS_LEGACY_PLANNER",
@@ -59,25 +59,20 @@
       {
         "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_4B_GGUF",
         "evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
-        "task_completed": false
+        "task_completed": false,
+        "blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH"
+      },
+      {
+        "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
+        "evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+        "task_completed": false,
+        "blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH",
+        "useful_partial_behavior": "Selected and fetched three authoritative NCBI sources through the local planner bridge."
       }
     ],
-    "next_candidate": {
-      "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
-      "base_model": "Qwen/Qwen3.5-9B",
-      "quantization_repo": "TheStageAI/Qwen3.5-9B-GGUF",
-      "quantization_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
-      "quantization_bytes": 5060174144,
-      "quantization_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
-      "source_urls": [
-        "https://huggingface.co/Qwen/Qwen3.5-9B",
-        "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF",
-        "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF/blob/main/release-manifest.json"
-      ],
-      "task_rule": "FRESH_DIFFERENT_REAL_TASK_B__NO_AI_SYSTEMS_TASK_REPLAY"
-    },
-    "requirement": "Complete a fresh materially different dependency-free real Task B through a non-frontier route. Do not replay either failed task/provider route merely to tune for a pass."
+    "next_candidate": "GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_OBS_V3",
+    "requirement": "Resolve the recurrent termination/composition seam under a fresh live challenger frontier, then complete a fresh dependency-free real Task C without frontier-model execution or same-task tuning."
   },
   "obsolescence_status": "NOT_YET_PROVEN",
-  "residual_gap": "Dependency-free open-ended real-task completion remains unproven. Pollinations failed transport/payment; local Qwen3.5-4B ran but failed to terminate the bounded real task. Stronger local Qwen3.5-9B on a fresh different real Task B is next."
+  "residual_gap": "Dependency-free open-ended research action selection is partially demonstrated, but end-to-end completion remains unproven because 4B and 9B hit the same evidence-to-finish termination seam."
 }
