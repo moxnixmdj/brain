@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_H004_EXISTING_CHATGPT_LINUX_CARRIER_QUALIFICATION_V1",
+  "qualification_id": "H004-EXISTING-CHATGPT-LINUX-CARRIER-QUALIFICATION-001",
+  "bound_main_sha": "c37a4e479b4cc571d74535790696c9f4d17dc32f",
+  "action_intent": "canonical/action_intents/2026-09-29_QUALIFY_H004_EXISTING_CHATGPT_LINUX_CARRIER_V1.json",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "heldout_validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "heldout_state": "FROZEN_UNSPENT__NO_START__NO_DISPATCH__NO_EVALUATOR",
+  "carrier": {
+    "carrier_class": "BUILT_IN_CHATGPT_LINUX_CONTAINER",
+    "platform_kernel": "Linux x86_64 6.18.44",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "os_release_sha256": "8b8c2f53770c96bf2996f8e9feb3705d4fec1a4579251eea8c996cb458257731",
+    "effective_uid": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "railway_provisioned": false,
+    "sprite_accessed": false
+  },
+  "qualification_method": "NON_HELDOUT_READ_ONLY_SURFACE_DIAGNOSTIC_AFTER_TRUSTED_PR178_INTENT_GUARD",
+  "ordered_required_surface_predicates": [
+    {
+      "id": "LINUX_DEBIAN_FAMILY",
+      "result": "PASS",
+      "evidence": "Debian GNU/Linux 13 (trixie)"
+    },
+    {
+      "id": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
+      "result": "FAIL",
+      "evidence": "/var/lib/apt/lists contained zero entries and zero regular files",
+      "first_terminal_failure": true
+    },
+    {
+      "id": "ENGLISH_TRANSLATION_INDEX_REQUIRED",
+      "result": "NOT_ADJUDICATED_AFTER_FIRST_FAILURE"
+    },
+    {
+      "id": "DEBTAGS_TAG_METADATA_REQUIRED",
+      "result": "NOT_ADJUDICATED_AFTER_FIRST_FAILURE"
+    },
+    {
+      "id": "CONTENTS_ALL_REQUIRED",
+      "result": "NOT_ADJUDICATED_AFTER_FIRST_FAILURE"
+    },
+    {
+      "id": "CONTENTS_ARCH_SPECIFIC_REQUIRED",
+      "result": "NOT_ADJUDICATED_AFTER_FIRST_FAILURE"
+    },
+    {
+      "id": "PYTHON3_XAPIAN_REQUIRED",
+      "result": "OBSERVED_UNAVAILABLE_IN_SAME_DIAGNOSTIC_SNAPSHOT__NOT_NEEDED_FOR_FIRST_FAILURE",
+      "evidence": "ModuleNotFoundError: No module named 'xapian'"
+    },
+    {
+      "id": "SUDO_APT_INSTALL_AVAILABLE",
+      "result": "OBSERVED_PASS_IN_SAME_DIAGNOSTIC_SNAPSHOT__NOT_NEEDED_FOR_FIRST_FAILURE",
+      "evidence": "sudo -n true exit 0; effective uid 0"
+    },
+    {
+      "id": "ZBARIMG_REQUIRED",
+      "result": "OBSERVED_UNAVAILABLE_IN_SAME_DIAGNOSTIC_SNAPSHOT__NOT_NEEDED_FOR_FIRST_FAILURE",
+      "evidence": "command not found"
+    }
+  ],
+  "network_observation": {
+    "result": "UNAVAILABLE",
+    "evidence": "curl -I -L --max-time 8 https://deb.debian.org/debian/ -> Could not resolve host: deb.debian.org",
+    "interpretation": "Current container cannot replenish the absent APT metadata through the required Debian source from this execution surface."
+  },
+  "source_materialization": {
+    "existing_design_reused": [
+      "PR20 exact Git-blob private-repo reconstruction",
+      "PR35 content-addressed source-tree materialization/hash checking",
+      "PR45 real content-addressed source execution loop"
+    ],
+    "executed_for_h004": false,
+    "reason": "Carrier surface failed before exact-source materialization became decision-relevant."
+  },
+  "hard_zero_spend": {
+    "incremental_infrastructure_provisioned": false,
+    "incremental_spend_incurred_usd": 0,
+    "executor_hard_zero_admission": "NOT_ADJUDICATED_AFTER_EARLIER_REQUIRED_SURFACE_FAILURE"
+  },
+  "result": {
+    "carrier_admissible_for_h004": false,
+    "first_terminal_failure": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
+    "classification": "EXISTING_CHATGPT_LINUX_CARRIER_REJECTED_BEFORE_HELDOUT_START",
+    "h004_freshness_preserved": true
+  },
+  "prohibitions_preserved": [
+    "NO_HELDOUT_004_START",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_SPRITE_ACCESS",
+    "NO_RAILWAY_PROVISIONING",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
+  ],
+  "next_action": "RECONCILE_EXISTING_CARRIER_REJECTION__THEN_QUALIFY_THE_NEXT_ALREADY_DISCOVERED_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_COMMAND_TRANSPORT_AND_FAITHFUL_APT_SURFACE_BEFORE_ANY_HELDOUT_START"
+}
