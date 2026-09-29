@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR129-REPAIR-CONSUMPTION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "MERGED_PR129_REPAIR_NOT_REFLECTED_IN_CANONICAL_PROBE_BUDGET_AND_NEXT_ACTION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::MERGED_PR129_REPAIR_NOT_REFLECTED_IN_CANONICAL_PROBE_BUDGET_AND_NEXT_ACTION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make canonical pointer, hierarchy, and queue reflect the already-merged PR129 provider-neutral APT admission repair: mark the single repair budget consumed, preserve HELDOUT-003 as UNSPENT, and make the sole next frontier action one exact held-out execution followed by immediate reconciliation. No runtime, gate, evaluator, discovery, contract, verifier, or held-out bytes change.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 frozen HELDOUT-003 specification and watchdog",
+    "merged PR129 action intent, provider-neutral APT admission repair, and regressions",
+    "current canonical pointer/hierarchy/queue on main 5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+    "open PR133 execution-only lease whose own probe_budget_usage already records generic_repairs_used_before_execution=1"
+  ],
+  "evidence_presence_classification": "MERGED_REPAIR_PRESENT__CANONICAL_POST_REPAIR_STATE_STALE__HELDOUT_003_UNSPENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After pointer/hierarchy/queue agree that PR129 consumed the sole pre-execution repair and HELDOUT-003 remains UNSPENT, make no runtime change. The only next frontier action is exactly one HELDOUT-003 execution on the qualified zero-spend remote carrier, then reconcile the first terminal result before any replay, second repair, or promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
