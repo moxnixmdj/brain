@@ -69,24 +69,23 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "objective": "Acquire the documented real frontier capability of open-ended agentic technical research and scientific problem-solving. Space cargo is Evidence Task A only; complete a materially different real Task B before any acquisition claim.",
-    "selection_metric": "VERIFIED_FRONTIER_CAPABILITY_STRENGTH_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "RECURRENT_GOAL_MAX_CYCLES_WITHOUT_FINISH_ACROSS_LOCAL_4B_AND_9B_ON_DIFFERENT_REAL_TASKS__GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_SEAM_UNRESOLVED",
-    "evidence_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
-    "repair_status": "QWEN3_5_9B_END_TO_END_FAIL__SOURCE_SELECTION_PASSED__RECURRENT_TERMINATION_SEAM_LOCALIZED",
-    "prohibition": "NO_POLLINATIONS_REPLAY__NO_QWEN3_5_4B_REPLAY__NO_QWEN3_5_9B_BIOPHYSICS_REPLAY__NO_BLIND_CYCLE_INFLATION__NO_MODEL_ESCALATION_BEFORE_OBS_V3_LIVE_CHALLENGER_RACE__NO_SYNTHETIC_BENCHMARK",
-    "next_action": "RUN_EXACT_BASE_RECURSIVE_OBS_V3_ON_RECURRENT_EVIDENCE_TO_FINALIZATION_TERMINATION_SEAM__REFRESH_LIVE_CHALLENGER_FRONTIER__NO_REPLAY_OR_CYCLE_INFLATION__IF_GENERIC_ROUTE_SURVIVES_TEST_ON_FRESH_REAL_TASK_C",
+    "selected_capability": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "objective": "Acquire the real frontier subcapability that converts structured evidence into a terminal auditable decision without any model dependency, then compose it upward into open-ended agentic technical/scientific research.",
+    "selection_metric": "VERIFIED_REAL_SUBCAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
+    "evidence_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1.json",
+    "repair_status": "UNPROVEN__ROUTE_RACE_REQUIRED",
+    "prohibition": "NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT_IN_CREDITED_COGNITION_PATH__NO_WHOLE_MODEL_SUPPLIER_SWAP__NO_SYNTHETIC_BENCHMARK_AS_SUBSTITUTE_FOR_REAL_TASK",
+    "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS__REUSE_BRAIN_DETERMINISTIC_SUBSTRATE__EXECUTE_FRESHEST_SUFFICIENT_REAL_TASK__VERIFY__INHERIT__FRESH_REUSE",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "frontier_target_record": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
-    "evidence_A": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
-    "supporting_domain_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json",
-    "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
-    "next_candidate": {
-      "route": "GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_OBS_V3",
-      "status": "OBS_AND_LIVE_CHALLENGER_REFRESH_REQUIRED",
-      "test_rule": "FRESH_DIFFERENT_REAL_TASK_C_AFTER_ANY_GENERIC_CHANGE__NO_SAME_TASK_REPLAY"
-    },
+    "existing_components": [
+      "canonical/runtime/capability_planner.py",
+      "canonical/runtime/capability_reality_auditor.py",
+      "canonical/runtime/capability_discovery.py",
+      "canonical/runtime/goal_compiler.py",
+      "canonical/runtime/astra_runtime.py"
+    ],
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json"
   },
