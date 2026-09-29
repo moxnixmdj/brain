@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_APT_DESCRIPTION_HELDOUT_VALIDATION_V1",
+  "validation_id": "FULL-APT-DESCRIPTION-HELDOUT-VALIDATION-005",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_FULL_APT_DESCRIPTION_RUNTIME_REPAIR",
+  "provenance": {
+    "selected_after": "DEBTAGS-SEMANTIC-APT-HELDOUT-VALIDATION-004_TERMINAL_FAIL",
+    "selected_before_any_successor_runtime_mutation": true,
+    "repository_search_precheck": "No prior Brain references found on main for mkvtoolnix, unpaper, rclone, or enscript before freeze.",
+    "spent_and_prior_diagnostic_families_excluded": true
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-MATROSKA-MUX-005",
+      "goal": "Combine separate video and audio streams into a Matroska container file from the command line.",
+      "oracle_families": [
+        "mkvtoolnix"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-SCAN-CLEANUP-005",
+      "goal": "Clean scanned page images to improve readability before document processing.",
+      "oracle_families": [
+        "unpaper"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-CLOUD-COPY-005",
+      "goal": "Copy a directory tree to remote cloud storage from the command line.",
+      "oracle_families": [
+        "rclone"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-TEXT-POSTSCRIPT-005",
+      "goal": "Convert a plain text source file to PostScript with syntax highlighting from the command line.",
+      "oracle_families": [
+        "enscript"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 300,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu/Debian with complete normal APT package metadata and all applicable Contents indexes.",
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_network_required": false,
+    "exact_runtime_bytes_required": true
+  },
+  "promotion_authorized": false
+}
