@@ -74,6 +74,8 @@ ROUTE_PREFLIGHT_SCOPES={"GLOBAL","ACCOUNT_SPECIFIC","LOCAL","REGION_SPECIFIC"}
 ROUTE_PREFLIGHT_KINDS={"CARRIER","ACCOUNT_ENTITLEMENT","MODEL_API","NETWORK_ENDPOINT","REMOTE_SERVICE","CAPACITY_POOL","AUTH_CREDENTIAL","LOCAL_RUNTIME","LOCAL_MODEL","CODE_ARTIFACT","DATA_SOURCE","STORAGE","PACKAGE_REGISTRY","MODEL_ARTIFACT"}
 ROUTE_PREFLIGHT_INTRINSIC_VOLATILE_KINDS={"CARRIER","ACCOUNT_ENTITLEMENT","MODEL_API","NETWORK_ENDPOINT","REMOTE_SERVICE","CAPACITY_POOL","AUTH_CREDENTIAL"}
 ROUTE_PREFLIGHT_EXECUTION_SUBSTRATE_KINDS={"CARRIER","LOCAL_RUNTIME","MODEL_API","REMOTE_SERVICE"}
+MODEL_DEPENDENCY_KINDS={"MODEL_API","LOCAL_MODEL","MODEL_ARTIFACT"}
+COGNITIVE_PARENT_FAMILIES={"RESEARCH_AND_KNOWLEDGE_SYNTHESIS","TECHNICAL_SCIENTIFIC_REASONING","TOOL_SELECTION_AND_TOOL_LEARNING","MULTI_CAPABILITY_COMPOSITION","SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION","UNKNOWN_DOMAIN_ADAPTATION"}
 ROUTE_FRONTIER_DISCOVERY_EXEMPT_ACTIONS=GOVERNANCE_ACTIONS|{"RECONCILE_FRONTIER","EVIDENCE_PRESERVATION"}
 OBS_REQUIRED_FIELDS=(
     "canonical_generation_or_commit",
@@ -406,6 +408,57 @@ def enforce_live_route_frontier(intent,obs):
     enforce_selected_route_preflight(frontier,obs)
 
 
+def enforce_model_independent_cognition(intent,obs):
+    action_kind=str(intent.get("action_kind") or "")
+    if action_kind not in REAL_TASK_ACTIONS:
+        return
+
+    capability_id=str(intent.get("capability_target") or "").strip()
+    if not capability_id:
+        fail("MODEL_NON_DEPENDENCE_CAPABILITY_TARGET_MISSING")
+        return
+
+    target_path=ROOT/"canonical"/"capabilities"/"frontier"/(capability_id+".json")
+    if not target_path.is_file():
+        fail("MODEL_NON_DEPENDENCE_TARGET_METADATA_MISSING:"+capability_id)
+        return
+    try:
+        target=json.loads(target_path.read_text(encoding="utf-8"))
+    except Exception:
+        fail("MODEL_NON_DEPENDENCE_TARGET_METADATA_INVALID:"+capability_id)
+        return
+
+    families=set(str(x) for x in (target.get("parent_families") or []))
+    if not families.intersection(COGNITIVE_PARENT_FAMILIES):
+        return
+
+    frontier=obs.get("route_frontier")
+    if not isinstance(frontier,dict):
+        fail("MODEL_NON_DEPENDENCE_ROUTE_FRONTIER_MISSING")
+        return
+    preflight=frontier.get("selected_route_preflight")
+    if not isinstance(preflight,dict):
+        fail("MODEL_NON_DEPENDENCE_SELECTED_ROUTE_PREFLIGHT_MISSING")
+        return
+    deps=preflight.get("execution_dependencies")
+    if not isinstance(deps,list):
+        fail("MODEL_NON_DEPENDENCE_DEPENDENCY_INVENTORY_MISSING")
+        return
+
+    required_models=[]
+    for dep in deps:
+        if not isinstance(dep,dict):
+            continue
+        if dep.get("required") is True and str(dep.get("kind") or "") in MODEL_DEPENDENCY_KINDS:
+            required_models.append(str(dep.get("dependency") or dep.get("kind") or "MODEL"))
+
+    if required_models:
+        fail(
+            "MODEL_REQUIRED_AS_COGNITION_DEPENDENCY_FOR_COGNITIVE_CAPABILITY:"
+            +",".join(sorted(required_models))
+        )
+
+
 def enforce_recursive_obs(intent,files,base):
     bootstrap_path="canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md"
     bootstrap=(
@@ -492,6 +545,7 @@ def enforce_recursive_obs(intent,files,base):
         fail("RECURSIVE_OBS_SEARCH_STOP_DECISION_MISSING")
 
     enforce_live_route_frontier(intent,obs)
+    enforce_model_independent_cognition(intent,obs)
 
 
 def blocker_lease_key(intent):
