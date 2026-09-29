@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_EXECUTION_LEASE_V1",
   "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
-  "status": "CLAIMED_EXECUTING",
+  "status": "EXECUTION_STARTED__SPENT__AWAITING_TERMINAL_RECONCILIATION",
   "holder": "chatgpt-directjoin-20260929-0307",
   "claimed_on": "2026-09-29T01:12:00Z",
   "source_pr": 85,
@@ -18,13 +18,23 @@
     "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
     "service_id": "50cd23d6-5b94-40fd-8763-1da99718b12e"
   },
-  "concurrency_rule": "NO_OTHER_WORKER_MAY_EXECUTE_HELDOUT_002_WHILE_THIS_LEASE_IS_CLAIMED_EXECUTING",
-  "execution_budget_remaining": 1,
-  "next_action": "STABILIZE_CARRIER__NON_HELDOUT_PREFLIGHT__IF_FAITHFUL_RUN_EXACT_GATE_ONCE__RECONCILE__RELEASE_LEASE",
+  "concurrency_rule": "NO_WORKER_MAY_EXECUTE_OR_REPLAY_HELDOUT_002__ONLY_READ_ONLY_CAPTURE_OF_THE_EXACT_STARTED_DEPLOYMENT_AND_CANONICAL_RECONCILIATION_ARE_ALLOWED",
+  "execution_budget_remaining": 0,
+  "next_action": "READ_ONLY_CAPTURE_EXACT_DEPLOYMENT_TERMINAL_RESULT__RECONCILE__THEN_RELEASE_LEASE",
   "anti_drift": [
     "NO_SECOND_REPAIR",
     "NO_MERGE_OR_PROMOTION_BEFORE_RECONCILIATION",
     "NO_USER_LAPTOP",
-    "NO_PARALLEL_HELDOUT_EXECUTION"
-  ]
+    "NO_PARALLEL_HELDOUT_EXECUTION",
+    "NO_RETRY_OR_REPLAY_OF_SPENT_HELDOUT_002"
+  ],
+  "execution_started_at": "2026-09-29T01:13:06.870928592Z",
+  "observed_execution": {
+    "provider": "Railway",
+    "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+    "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+    "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
+    "deployment_id": "aa411a03-2a63-4708-bf1a-758acae7f72c",
+    "start_marker": "PB_HELDOUT_002_EXECUTION_START=1"
+  }
 }
