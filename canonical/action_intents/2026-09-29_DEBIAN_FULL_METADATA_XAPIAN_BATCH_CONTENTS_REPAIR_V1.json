@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "DEBIAN-FULL-METADATA-XAPIAN-BATCH-CONTENTS-REPAIR-V1",
-  "status": "PROPOSED",
+  "status": "EXECUTED_RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -32,5 +32,12 @@
   "probe_specific_literals": [],
   "stop_condition": "Implement exactly one generic full-metadata/Xapian/direct-Contents repair after HELDOUT-005 is frozen. Execute HELDOUT-005 exactly once on exact bytes and faithful zero-incremental-spend Debian-family APT metadata, then reconcile before any further repair.",
   "governance_change": false,
-  "weakens_existing_guard": false
+  "weakens_existing_guard": false,
+  "result": "FRESH_ONE_SHOT_ACCEPTANCE_PASS",
+  "result_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+  "heldout_freshness": "SPENT",
+  "fresh_execution_count": 1,
+  "promotion_authorized_by_gate": true,
+  "merge_authorized": false,
+  "required_next_action": "RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_PROMOTE_CLEAN_ROUTE_IF_ALL_PASS"
 }
