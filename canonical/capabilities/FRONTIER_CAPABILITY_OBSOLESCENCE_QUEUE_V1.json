@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Replace repeated regex index scans and blanket remote manpage fanout with one batched literal multi-pattern executable-evidence acquisition pass plus bounded progressive cached enrichment, preserving supplier recall on fresh unseen work.",
+    "objective": "Inherit the exact HELDOUT-005-verified PR89 Debian full-metadata/Xapian/direct-Contents route, then recompute the highest-leverage remaining capability target.",
     "selection_metric": "FRESH_UNSEEN_VIABLE_SUPPLIER_TOP_K_RECALL_AND_ROLE_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json",
-    "repair_status": "ONE_GENERIC_BATCHED_LITERAL_ACQUISITION_REPAIR_AUTHORIZED",
-    "prohibition": "NO_PER_TERM_REGEX_APT_FILE_LOOPS__NO_UNBOUNDED_MANPAGE_FANOUT__NO_TIMEOUT_INCREASE__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__FRESH_UNSEEN_GATE_REQUIRED"
+    "exact_blocker": "VERIFIED_PR89_ROUTE_EXISTS_BUT_IS_NOT_YET_INHERITED_ON_CANONICAL_MAIN",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_PASS_RECONCILIATION_V1.json",
+    "repair_status": "CANDIDATE_MATCH__HELDOUT_005_PASS__PENDING_INHERITANCE",
+    "prohibition": "NO_HELDOUT_005_REPLAY__NO_POST_SPEND_RESULT_USE__NO_SECOND_REPAIR__NO_RUNTIME_TUNING_AGAINST_FROZEN_CASES__INHERIT_EXACT_TESTED_BYTES_ONLY"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -153,5 +153,19 @@
       36486527162
     ],
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+  },
+  "debian_full_metadata_xapian_direct_contents_candidate_v1": {
+    "status": "CANDIDATE_MATCH__VERIFIED_PENDING_INHERITANCE",
+    "source_pr": 89,
+    "exact_head": "48c53d0f1b2474c334fcfbb87bd6946c1dc850bb",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "hard_wall_s": 120,
+    "incremental_spend_usd": 0,
+    "duplicate_post_spend_results_excluded": true,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_PASS_RECONCILIATION_V1.json",
+    "inheritance_required_before_obsolescence_claim": true
   }
 }
