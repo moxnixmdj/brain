@@ -186,8 +186,8 @@
     "SYSTEM_AVAILABILITY_AND_FAILURE_CONTAINMENT_AT_100MT_YEAR"
   ],
   "real_task_verdict": "PASS__USEFUL_PROJECT_STATE_CHANGED__COUNTS_AS_REAL_TASK_A_ONLY",
-  "next": "SELECT_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__REUSE_GENERAL_RESEARCH_PROBLEM_SOLVING_ROUTE__VERIFY_END_TO_END__THEN_ADJUDICATE_FRONTIER_CAPABILITY",
+  "next": "SELECT_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__REUSE_GENERAL_ROUTE__VERIFY_END_TO_END__THEN_ADJUDICATE_FRONTIER_CAPABILITY",
   "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "frontier_capability_acquired": false,
-  "frontier_capability_note": "This real task demonstrates useful components of the frontier behavior, but one domain plus a same-domain parameter reuse cannot prove broad cross-domain frontier capability."
+  "frontier_capability_note": "One real domain plus same-domain parameter reuse cannot prove broad cross-domain frontier capability."
 }

@@ -90,8 +90,8 @@
   "inheritance_rule": "Reuse this capability before any new launch-architecture simulator, benchmark, or MDO framework. Escalate only when an exact residual requires higher fidelity.",
   "fresh_reuse_status": "PASS_SUPPORTING_TOOL_REUSE__NOT_FRONTIER_FRESH_REUSE",
   "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_FRESH_REUSE_5G_001.json",
-  "fresh_reuse_summary": "The 5 g case proves same-domain deterministic reuse only. It does not prove cross-domain transfer of the frontier-level agentic research/problem-solving capability.",
+  "fresh_reuse_summary": "The 5 g case proves same-domain deterministic reuse only and does not prove cross-domain frontier capability transfer.",
   "frontier_capability_credit": false,
   "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "classification_note": "This deterministic launch-domain model is useful inherited machinery, but it is narrower than the documented frontier capability. It may support Evidence Task A but cannot itself satisfy frontier capability acquisition."
+  "classification_note": "Useful inherited launch-domain machinery only; narrower than the real documented frontier capability."
 }

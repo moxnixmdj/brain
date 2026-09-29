@@ -573,8 +573,7 @@
       },
       "status": "REAL_TASK_A_VERIFIED__FRONTIER_CAPABILITY_NOT_YET_ACQUIRED",
       "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
-      "frontier_target_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
-      "supporting_domain_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json"
+      "frontier_target_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json"
     }
   },
   "provider_rules": {

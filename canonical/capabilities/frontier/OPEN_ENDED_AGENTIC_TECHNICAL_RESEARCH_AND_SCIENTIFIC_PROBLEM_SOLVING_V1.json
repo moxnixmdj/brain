@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "FRONTIER_BAR_DEFINED__CANDIDATE_EVIDENCE_A_ONLY__ACQUISITION_UNPROVEN",
+  "real_capability": true,
+  "parent_families": [
+    "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
+    "TECHNICAL_SCIENTIFIC_REASONING",
+    "TOOL_SELECTION_AND_TOOL_LEARNING",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION",
+    "UNKNOWN_DOMAIN_ADAPTATION"
+  ],
+  "useful_behavior": "Given a consequential open-ended technical or scientific objective in a domain that may not be pre-mapped, autonomously decompose the problem, discover and evaluate relevant existing knowledge and tools, perform quantitative reasoning and computation, revise the plan when evidence falsifies assumptions, synthesize evidence across sources, independently verify consequential claims, and deliver a decision-quality real-world result with provenance and a reusable operating method.",
+  "frontier_reference": {
+    "model_family": "GPT-5.6 Sol / ChatGPT Deep Research",
+    "evidence": [
+      {
+        "source": "OpenAI — GPT-5.6: Frontier intelligence that scales with your ambition",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "observed_capabilities": [
+          "complex work across research and science",
+          "tool-heavy agentic work",
+          "programmatic tool coordination and next-action selection"
+        ]
+      },
+      {
+        "source": "OpenAI Help — Deep research in ChatGPT",
+        "url": "https://help.openai.com/en/articles/10500283-research-faq",
+        "observed_capabilities": [
+          "multi-step research planning",
+          "multi-source analysis and synthesis",
+          "structured cited output",
+          "iterative refinement"
+        ]
+      }
+    ],
+    "frontier_bar": "Reproduce the useful end-to-end behavior on real consequential work without depending on the frontier implementation. A narrow deterministic domain calculator is insufficient."
+  },
+  "minimum_acquisition_evidence": {
+    "real_task_A": "One difficult real technical/scientific task completed end-to-end and independently verified.",
+    "real_task_B": "One materially different real technical/scientific domain completed using the inherited general route without rediscovery.",
+    "cross_domain_transfer_required": true,
+    "frontier_model_dependency_removed_for_both_tasks": true,
+    "same_domain_parameter_variation_does_not_count_as_frontier_fresh_reuse": true
+  },
+  "evidence_A": {
+    "task": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
+    "status": "VERIFIED_REAL_TASK_A__CANDIDATE_EVIDENCE_ONLY",
+    "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
+  },
+  "evidence_B": {
+    "status": "REQUIRED__UNSPENT"
+  },
+  "obsolescence_status": "NOT_YET_PROVEN",
+  "residual_gap": "Cross-domain transfer and frontier-dependency removal remain unproven."
+}

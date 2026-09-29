@@ -51,7 +51,7 @@
   ],
   "next_frontier_recommendation": {
     "capability_gap": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1__CROSS_DOMAIN_TRANSFER",
-    "reason": "Task A verifies one real technical/scientific mission, but broad frontier capability requires transfer to a materially different real domain without rediscovering the operating method.",
+    "reason": "Task A alone cannot prove broad cross-domain frontier capability.",
     "default_route": "SELECT_ONE_ACTIVE_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_IN_A_DIFFERENT_DOMAIN__RUN_EXACT_BASE_OBS__REUSE_GENERAL_ROUTE__VERIFY_DIRECTLY",
     "synthetic_probe_required": false
   },
