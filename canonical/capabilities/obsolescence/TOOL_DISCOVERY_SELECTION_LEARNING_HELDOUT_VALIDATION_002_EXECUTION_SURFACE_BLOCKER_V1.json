@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_002_EXECUTION_SURFACE_BLOCKER_V1",
-  "status": "EXTERNAL_CONNECTOR_REQUIRED__HELDOUT_GATE_UNSPENT",
+  "status": "SINGLE_EXTERNAL_BOUNDARY__NO_CONNECTED_VERIFIED_ZERO_SPEND_REMOTE_SHELL",
   "checked_on": "2026-09-29",
   "source_pr": 85,
   "pr_head_before_receipt": "6cc8fb7b3e1bb5697de6bef43d0f64e4844c218a",
@@ -56,11 +56,35 @@
   ],
   "next_truth_transition": "CONNECT_OR_DISCOVER_ONE_ZERO_SPEND_REMOTE_SHELL_SANDBOX_SURFACE__THEN_EXECUTE_HELDOUT_002_EXACTLY_ONCE__THEN_RECONCILE",
   "anti_drift": [
-    "DO_NOT_PREVIEW_OR_SIMULATE_HELDOUT_002_RESULTS",
     "DO_NOT_USE_USER_LAPTOP",
+    "DO_NOT_PREVIEW_OR_SIMULATE_HELDOUT_002_RESULTS",
     "DO_NOT_IMPLEMENT_SECOND_REPAIR",
     "DO_NOT_MERGE_OR_PROMOTE_PR85",
-    "DO_NOT_CONSUME_UNVERIFIED_METERED_CREDIT",
-    "DO_NOT_RETRY_UNCHANGED_PRIVATE_GITHUB_ACTIONS_FAILURE_CLASS"
-  ]
+    "DO_NOT_CREATE_UNVERIFIABLY_METERED_SPRITES_OR_OTHER_INFRASTRUCTURE",
+    "DO_NOT_RETRY_PRIVATE_GITHUB_ACTIONS_PRE_RUNNER_FAILURE",
+    "DO_NOT_SEARCH_MORE_EXECUTOR_PROVIDERS_UNLESS_THE_CALLABLE_TOOLSET_CHANGES"
+  ],
+  "latest_recheck": {
+    "vercel": {
+      "status": "REJECTED_NO_CONNECTED_TEAM_CONTEXT",
+      "evidence": "Connected Vercel account returns zero teams; no callable Sandbox context is available through the MCP surface."
+    },
+    "github_public_runner": {
+      "status": "BLOCKED_NO_PUBLIC_REPOSITORY_AND_NO_REPOSITORY_CREATE_OR_VISIBILITY_ACTION",
+      "evidence": "GitHub search for owner moxnixmdj returns only private repositories brain and rabitto. Connected GitHub MCP exposes no create-repository or visibility-change action."
+    },
+    "sprites": {
+      "status": "REJECTED_HARD_ZERO_UNPROVABLE",
+      "evidence": "Sprites exposes create/exec but no billing, credit, or hard-spend-cap state. Creating a sprite would violate fail-closed $0 governance."
+    },
+    "railway": {
+      "status": "TECHNICAL_FIT_BUT_CONNECTOR_NOT_INSTALLED",
+      "evidence": "Railway plugin exists in the plugin directory but is not installed/connected in this session; current tool surface therefore cannot invoke its remote Linux runtime."
+    },
+    "generic_ssh": {
+      "status": "UNAVAILABLE",
+      "evidence": "Plugin directory search found no generic SSH/remote-shell connector beyond Remote Desktop Commander and DigitalOcean; laptop execution remains forbidden and DigitalOcean has zero credits."
+    }
+  },
+  "only_remaining_truth_transition": "CONNECT_ONE_REMOTE_LINUX_EXECUTOR_WITH_PROVABLE_ZERO_INCREMENTAL_SPEND__THEN_RUN_HELDOUT_VALIDATION_002_EXACTLY_ONCE__THEN_RECONCILE"
 }
