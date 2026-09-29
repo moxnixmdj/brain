@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTION_SURFACE_QUALIFICATION_BLOCKER_V1",
+  "recorded_on": "2026-09-29",
+  "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-HELDOUT-VALIDATION-003",
+  "status": "NO_CURRENT_CALLABLE_SURFACE_SATISFIES_EXACT_EXECUTION_AND_PROVABLE_ZERO_INCREMENTAL_SPEND",
+  "gate_state": {
+    "execution_count": 0,
+    "freshness": "UNSPENT",
+    "runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
+    "repair_commit": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
+    "manifest_blob": "b926e8ca39b55adfce77e0a2046c5a672a830ce9",
+    "runner_blob": "22f30db09155b9b1c2cc9b93b6c620a41ec1a224"
+  },
+  "rejected_surfaces": [
+    {
+      "surface": "Railway",
+      "reason": "CALLABLE_RAW_EXECUTION_EXISTS_BUT_CONNECTED_TOOLS_EXPOSE_NO_BILLING_CREDIT_OR_HARD_SPEND_CAP_STATE__CANNOT_PROVE_ZERO_INCREMENTAL_SPEND"
+    },
+    {
+      "surface": "Render Free",
+      "reason": "FREE_INSTANCE_COMPUTE_EXISTS_BUT_BUILD_PIPELINE_MINUTES_CAN_AUTO_PURCHASE_OVERAGE_WHEN_PAYMENT_METHOD_EXISTS__CONNECTED_TOOLS_EXPOSE_NO_PAYMENT_METHOD_OR_PIPELINE_SPEND_LIMIT_STATE__FAIL_CLOSED"
+    },
+    {
+      "surface": "DigitalOcean",
+      "evidence": {
+        "account_balance_usd": "0.00",
+        "month_to_date_usage_usd": "0.00",
+        "droplets": []
+      },
+      "reason": "NO_EXISTING_DROPLET_TO_REUSE__CREATING_A_DROPLET_IS_METERED__NO_FREE_SERVERLESS_EXECUTION_TOOL_EXPOSED"
+    },
+    {
+      "surface": "Sprites",
+      "reason": "RAW_SHELL_AND_FILES_AVAILABLE_BUT_NO BILLING_CREDIT_OR_SPEND_STATE IS EXPOSED__CREATION_NOT_ZERO_SPEND_PROVABLE"
+    },
+    {
+      "surface": "Camber",
+      "reason": "MCP_USAGE_GUIDE_EXPLICITLY_STATES_COMMANDS_RUN_ON_THE_USER_MACHINE__USER_LAPTOP_EXECUTION_FORBIDDEN"
+    },
+    {
+      "surface": "GitHub Actions",
+      "reason": "ONLY_INSTALLED_REPOSITORIES_BRAIN_AND_RABITTO_ARE_PRIVATE__CONNECTOR_HAS_NO_CREATE_REPOSITORY_OR_VISIBILITY_MUTATION__NO_PROVABLY_FREE_PUBLIC_RUNNER_PATH"
+    },
+    {
+      "surface": "ChatGPT isolated container",
+      "evidence": {
+        "os": "Debian GNU/Linux 13 (trixie)",
+        "apt_version": "3.0.3",
+        "apt_lists": "EMPTY",
+        "apt_file": "ABSENT",
+        "axi_cache": "ABSENT",
+        "direct_network": "BLOCKED",
+        "required_native_bindings": [
+          "AptPkg::Config",
+          "Regexp::Assemble",
+          "python3-apt",
+          "python3-debian",
+          "python3-xapian"
+        ]
+      },
+      "reason": "COMPUTE_IS_ZERO_INCREMENTAL_SPEND_BUT_OFFICIAL_APT_METADATA_AND_REQUIRED TOOLING CANNOT CURRENTLY BE TRANSPORTED INTO THE NETWORK-ISOLATED CONTAINER THROUGH AVAILABLE BINARY FETCH PATHS"
+    },
+    {
+      "surface": "Wolfram transport bridge",
+      "reason": "WOLFRAM CONTEXT AND LANGUAGE EVALUATOR CURRENTLY FAIL INTERNALLY_BEFORE_EVALUATION__NO RELIABLE BINARY TRANSPORT"
+    },
+    {
+      "surface": "TinyFish binary fetch",
+      "reason": "DIRECT OFFICIAL UBUNTU DEB FETCH RETURNED TARGET_UNREACHABLE__METERED_BROWSER AUTOMATION NOT USED"
+    },
+    {
+      "surface": "Plugin ecosystem",
+      "reason": "SEARCHED E2B_SANDBOX_LINUX_SHELL_CREDITS_AND_GENERIC_REMOTE_LINUX_CLOUD_QUOTA_TERMS__NO ADDITIONAL CALLABLE RAW-SHELL PROVIDER WITH BILLING STATE FOUND"
+    }
+  ],
+  "minimum_surface_requirements": [
+    "REMOTE_OR_ISOLATED__NEVER_USER_LAPTOP",
+    "INCREMENTAL_SPEND_USD_EXACTLY_0_OR_HARD_STOP_PROVEN_BEFORE_EXECUTION",
+    "EXACT_FROZEN_RUNTIME_AND_RUNNER_BYTES",
+    "COMPLETE_DEBIAN_FAMILY_APT_PACKAGES_METADATA",
+    "ALL_APPLICABLE_CONTENTS_INDEXES_INCLUDING_ARCH_ALL",
+    "APT_FILE_SEMANTICS",
+    "OUTBOUND_UBUNTU_MANPAGE_ENRICHMENT",
+    "NO_TASK_SPECIFIC_HINTS_OR_ORACLE_LEAKAGE",
+    "ONE_SHOT_GATE_EXECUTION_ONLY_AFTER_GENERIC_CANARY_QUALIFICATION"
+  ],
+  "non_actions": [
+    "DO_NOT_SPEND_HELDOUT_003",
+    "DO_NOT_MUTATE_RUNTIME",
+    "DO_NOT_CREATE_METERED_COMPUTE",
+    "DO_NOT_USE_USER_LAPTOP",
+    "DO_NOT_WEAKEN_GATE_SURFACE_REQUIREMENTS_TO_FIT_AVAILABLE_INFRASTRUCTURE"
+  ],
+  "next_action": "ESTABLISH_OR_DISCOVER_ONE_CALLABLE_FAITHFUL_HARD_ZERO_SPEND_REMOTE_APT_SURFACE__QUALIFY_WITH_UNRELATED_CANARIES__THEN_EXECUTE_HELDOUT_003_EXACTLY_ONCE"
+}
