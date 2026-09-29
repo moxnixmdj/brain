@@ -2649,7 +2649,11 @@
         "fresh_reuse_B_artifact_id": 11067819136,
         "fresh_reuse_B_artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48",
         "producer_git_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json"
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+        "exact_final_head_validation_run_id": 36646452335,
+        "exact_final_head_validation_artifact_id": 11068728150,
+        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
+        "astra_runtime_integration_blob": "801d226ab589595f376da54833de6b925ff96f15"
       }
     },
     "plain_goal.bound_capability.grounding.verify.stdlib": {
@@ -2720,7 +2724,10 @@
         "real_task_A_run_id": 36646322912,
         "fresh_reuse_B_run_id": 36646400507,
         "verifier_git_blob": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json"
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+        "exact_final_head_validation_run_id": 36646452335,
+        "exact_final_head_validation_artifact_id": 11068728150,
+        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
       }
     }
   },
