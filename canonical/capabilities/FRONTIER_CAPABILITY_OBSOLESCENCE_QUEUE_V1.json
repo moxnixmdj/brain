@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Keep HELDOUT-004 frozen/unspent. A minimal publication-safe content-addressed capsule is sealed and a fail-closed public GitHub Actions one-shot workflow is staged. Current blocker is only the absence of an authorized GitHub repository-creation/visibility-mutation primitive: create one empty public repo, grant the current GitHub app access, copy the exact capsule/workflow, then create the arm file last and capture the first terminal result.",
+    "objective": "Keep HELDOUT-004 frozen/unspent. The publication-safe H004 capsule and one-shot workflow are already sealed. Live GitHub App installation reports repository_selection=all, so no separate app-access grant is needed after repository creation. The only external authority action is creation of one empty public GitHub repository; then copy exact sealed bytes, create the arm file last, capture first terminal result, and reconcile without replay.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_HARD_ZERO_CAPSULE_SEALED_PUBLICATION_SAFE__CURRENT_GITHUB_CONNECTOR_HAS_NO_PUBLIC_REPOSITORY_CREATE_OR_VISIBILITY_MUTATION_ACTION__NO_EXECUTION",
+    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_HARD_ZERO_CAPSULE_SEALED_PUBLICATION_SAFE__GITHUB_APP_ALL_REPOSITORIES_SCOPE_CONFIRMED__ONLY_PUBLIC_REPOSITORY_CREATION_REMAINS_EXTERNAL__NO_EXECUTION",
     "evidence_path": "canonical/capabilities/obsolescence/H004_PUBLIC_CAPSULE_EXECUTION_READINESS_20260929_V1.json",
     "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__H004_EXACT_RUNNER_REUSED__PUBLIC_CAPSULE_22_FILES_SEALED__H003_IMPORT_CLOSURE_FAILURE_CLASS_CORRECTED__NO_RUNTIME_OR_EVALUATOR_REPAIR_REQUIRED",
     "prohibition": "NO_H004_START_BEFORE_PUBLIC_REPOSITORY_EXISTS_AND_EXACT_CAPSULE_COPY_PREFLIGHT_PASSES__NO_PRIVATE_REPO_PUBLICATION__NO_PRIVATE_ACTIONS_OVERAGE__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_METERED_BROWSER_OR_UNPROVEN_COST_INFRASTRUCTURE__NO_REPLAY",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_SEALED_CAPSULE_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_WITHOUT_REPLAY",
+    "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY__APP_ACCESS_EXPECTED_AUTOMATIC_FROM_ALL_REPOSITORIES_INSTALLATION__THEN_COPY_EXACT_SEALED_CAPSULE_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_WITHOUT_REPLAY",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -237,6 +237,8 @@
     "repository_create_action_available": false,
     "visibility_mutation_action_available": false,
     "heldout_004_freshness": "UNSPENT",
-    "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_SEALED_CAPSULE_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_WITHOUT_REPLAY"
+    "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY__APP_ACCESS_EXPECTED_AUTOMATIC_FROM_ALL_REPOSITORIES_INSTALLATION__THEN_COPY_EXACT_SEALED_CAPSULE_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_WITHOUT_REPLAY",
+    "github_app_repository_selection": "all",
+    "separate_app_grant_required": false
   }
 }
