@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_V1",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_ANY_SECOND_RUNTIME_REPAIR",
+  "provenance": {
+    "selected_after": "PR85-POSTHOC-ENVIRONMENT-ATTRIBUTION-001_RECONCILIATION",
+    "selected_before_any_second_runtime_mutation": true,
+    "prior_spent_cases_excluded": [
+      "EXIF_METADATA_EXTRACTION",
+      "XML_SYNTAX_VALIDATION",
+      "LOSSLESS_JPEG_TRANSFORMATION"
+    ],
+    "prior_diagnostic_families_excluded": [
+      "poppler-utils",
+      "librsvg2-bin",
+      "inkscape",
+      "imagemagick",
+      "bzip2",
+      "mediainfo",
+      "sqlite3",
+      "gzip",
+      "graphviz"
+    ],
+    "repository_search_precheck": "No prior Brain references found for tesseract, optipng, genisoimage, or ffmpeg before freeze."
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-OCR-002",
+      "goal": "Recognize printed text in a scanned PNG image and output the detected text.",
+      "oracle_families": [
+        "tesseract-ocr"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-PNG-OPTIMIZE-002",
+      "goal": "Optimize a PNG image to reduce file size without changing its pixel content.",
+      "oracle_families": [
+        "optipng"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-ISO-IMAGE-002",
+      "goal": "Create an ISO 9660 filesystem image from the contents of a directory.",
+      "oracle_families": [
+        "genisoimage"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-AUDIO-TRANSCODE-002",
+      "goal": "Transcode an MP3 audio file into Ogg Vorbis audio.",
+      "oracle_families": [
+        "ffmpeg"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 600,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu 24.04/Noble preferred; equivalent complete Debian-family APT surface only if both normal Packages metadata and all applicable Contents indexes are present.",
+    "apt_file_required": true,
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_manpage_enrichment_required": true,
+    "exact_runtime_bytes_required": true
+  },
+  "promotion_authorized": false
+}
