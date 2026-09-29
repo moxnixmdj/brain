@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_READ_ONLY_EVALUATOR_REVIEW_V1",
+  "review_id": "XAPIAN-APT-HELDOUT-002-EVALUATOR-REVIEW-C5683B",
+  "subject_pr": 127,
+  "reviewed_base": "155b5a696b5d03ae83393ec51ad7bddf6d0ca11d",
+  "reviewed_head": "e5f853feaf48316bf6d9990bd401aed5864dc4df",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "purpose": "Independent review within the existing gate-freeze lane; preserve exact evaluator findings without opening a competing gate, runtime repair, or execution lane.",
+  "verdict": "EVALUATOR_SERIALIZATION_FIXES_INDEPENDENTLY_VERIFIED__EXECUTION_READINESS_NOT_ESTABLISHED",
+  "reviewed_files": [
+    {
+      "path": "canonical/action_intents/2026-09-29_SELECT_XAPIAN_APT_E2E_INTEGRATION_GATE_002.json",
+      "git_blob_sha": "4cd2b662f46b504ab1d85dabd11fd76d6f005134"
+    },
+    {
+      "path": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_002.json",
+      "git_blob_sha": "78074e5de95859acd8c04217d6575e3dd09a783f"
+    },
+    {
+      "path": "canonical/experiments/run_xapian_apt_e2e_integration_heldout_002.py",
+      "git_blob_sha": "44d85ca90158b22a4487246fd68427871c49c089"
+    }
+  ],
+  "serialization_review": {
+    "original_evaluator_blob": "e2225e1913c3dfbb2d6cf9b6a25904df410aac00",
+    "corrected_evaluator_blob": "44d85ca90158b22a4487246fd68427871c49c089",
+    "fix_authorship": "The owning session corrected the evaluator while this independent review was in progress. This reviewer aborted its planned edit after detecting the changed source blob; no duplicate patch was written.",
+    "synthetic_fixture_utf8": "unrelated synthetic metadata\n",
+    "original_git_blob_helper_result": "dfa8fabed447af2d5ff56c3222805180eaa90310",
+    "git_hash_object_oracle_result": "520f3740d7c43caf67ae1a3d89ab1c353b652ca8",
+    "original_json_roundtrip": "JSONDecodeError: Extra data: line 3 column 2 (char 23)",
+    "corrected_checks_passed": [
+      "Git blob helper equals git hash-object on an unrelated synthetic file",
+      "JSON result serialization round-trips through json.loads",
+      "Execution marker suffix is a real newline",
+      "Python compilation without importing the runtime or invoking main"
+    ],
+    "method": "Parse the evaluator with ast; execute only git_blob_sha in an isolated namespace; evaluate only terminal_result's JSON serialization expression with {'synthetic': true}; inspect the marker constant; compile syntax without executing the module."
+  },
+  "execution_readiness_findings": [
+    {
+      "id": "WHOLE_RUN_DEADLINE_NOT_ENFORCED_IN_EVALUATOR",
+      "priority": "BLOCKER_BEFORE_EXECUTION_UNLESS_CARRIER_PROVIDES_THE_BOUND",
+      "evidence": "auto_apt_cli_acquisition.dispatch runs synchronously without a surrounding hard deadline. The 180-second remaining-budget timeout is computed only after dispatch returns. The external oracle then has an independent 30-second timeout. A final elapsed-time comparison rejects late results but cannot bound the total run.",
+      "required_resolution": "Before the one execution, identify and verify an existing carrier-level hard timeout covering discovery, acquisition, verification, and descendant processes, with a terminal timeout record. If no such carrier exists, correct the evaluator under the same gate-freeze intent before any runtime repair or case execution."
+    },
+    {
+      "id": "TRUSTED_GUARD_EXECUTION_HOLD_REMAINS",
+      "priority": "BLOCKER_BEFORE_EXECUTION",
+      "evidence": "GitHub guard run 36517107596/job 109242384717 failed before any step (runner_id 0, empty steps). The separate unchanged-validator local check of the earlier intent-only head d5763ff16b82262eacb94c3dbae4a744a6d5bb80 exited 0 through the no-frontier-sensitive-changes branch.",
+      "scope_limit": "That earlier local pass did not evaluate this newly added experiment, hierarchy consistency, or the live open-PR duplicate lease. It is not a GitHub check success and does not lift the execution hold.",
+      "required_resolution": "Validate the completed gate at its exact commit using the trusted validator and a real fresh duplicate-lease check before any expensive execution; do not count a missing-authentication early return as lease verification."
+    }
+  ],
+  "claim_limits": [
+    "The frozen spec explicitly sets promotion_during_gate and promotion_authorized to false. A pass would establish this acquisition-and-verification integration case, not promotion, cold reuse, inheritance, or frontier-wide tool-learning obsolescence.",
+    "The gate is one fresh EAN-13 case within the barcode-image family. It is not broad independent evidence across unrelated tool-learning families.",
+    "The unchanged semantic verifier still requires at least two matched_terms while the inherited Xapian producer emits an empty list; this previously reproduced downstream interface risk remains. No verifier repair is authorized by this review.",
+    "Read-only inspection of the unchanged goal_compiler._extract_text_argument shows support for quoted text or 'text ...' forms; the frozen goal uses unquoted 'for the digits ...'. This is a downstream runtime-contract risk, not permission to rewrite the frozen goal or expand the current admission-only repair.",
+    "Local exclusive start markers protect one preserved filesystem. Cross-carrier exclusion and no-redeploy behavior must be established on the selected execution carrier before use."
+  ],
+  "freshness": {
+    "heldout_case_executed_by_this_review": false,
+    "runtime_imported_by_this_review": false,
+    "package_installation": false,
+    "candidate_binaries_executed": false,
+    "runtime_mutation": false,
+    "probe_goal_mutation": false,
+    "heldout005_replay": false,
+    "gate_runtime_start_marker_created": false
+  },
+  "resource_scope": {
+    "executor": "existing_chatgpt_cloud_linux_workspace",
+    "new_infrastructure": false,
+    "user_device_used": false,
+    "val_used": false,
+    "incremental_spend_usd": 0
+  },
+  "required_next_action": "Resolve execution-readiness blockers in the existing lane; preserve the frozen goal; then follow the authorized admission-repair / exactly-one-execution / reconciliation sequence. This review does not authorize an additional runtime repair or claim a gate PASS."
+}
