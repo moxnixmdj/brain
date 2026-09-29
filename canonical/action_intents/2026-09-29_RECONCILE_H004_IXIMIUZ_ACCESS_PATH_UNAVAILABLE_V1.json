@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-IXIMIUZ-ACCESS-PATH-UNAVAILABLE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "IXIMIUZ_ROUTE_DISCOVERED_BUT_CUSTOM_MCP_BINDING_NOT_AVAILABLE_FROM_CURRENT_AUTHORIZED_CHATGPT_SURFACE__HELDOUT_004_REMAINS_UNSPENT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::IXIMIUZ_ROUTE_DISCOVERED_BUT_CUSTOM_MCP_BINDING_NOT_AVAILABLE_FROM_CURRENT_AUTHORIZED_CHATGPT_SURFACE__HELDOUT_004_REMAINS_UNSPENT::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reject iximiuz Labs as a currently callable H004 carrier without changing the capability runtime or spending HELDOUT-004; resume discovery of one directly callable hard-zero remote Linux route.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR192 iximiuz MCP external-dependency reconciliation",
+    "current OpenAI developer-mode/custom-MCP availability",
+    "current Plugin Management tool surface"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile iximiuz access-path rejection only. No H004 START, no capability runtime mutation, no Sprite, no Val Town, no user laptop, no paid or unproven-cost carrier.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
