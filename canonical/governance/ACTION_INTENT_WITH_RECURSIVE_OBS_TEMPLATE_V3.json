@@ -12,6 +12,9 @@
     "Do not continue while unresolved_plausible_dominators is non-empty.",
     "For every normal executable action, attach route_frontier.selected_route_preflight checked within 2 hours of trusted validation.",
     "Enumerate every execution-critical dependency. Required VOLATILE dependencies need DIRECT_PROBE or INDEPENDENT_VERIFIER evidence; historical success and generic public status do not prove account-scoped readiness.",
+    "Set execution_dependencies_complete=true only after enumerating every execution-critical dependency.",
+    "Use only controlled dependency kinds. At least one execution substrate kind is required: CARRIER, LOCAL_RUNTIME, MODEL_API, or REMOTE_SERVICE.",
+    "Declare evidence_scope explicitly; ACCOUNT_SPECIFIC and REGION_SPECIFIC dependencies require evidence_scope to match the dependency scope.",
     "If main or the external route surface materially changes, refresh affected OBS layers before execution.",
     "OBS/discovery activity receives zero progress credit."
   ],
@@ -195,10 +198,10 @@
           "execution_dependencies": [
             {
               "dependency": "__REQUIRED_EXECUTION_DEPENDENCY__",
-              "kind": "__REQUIRED_KIND__",
+              "kind": "CARRIER",
               "required": true,
               "volatility": "VOLATILE",
-              "scope": "__REQUIRED_GLOBAL_ACCOUNT_SPECIFIC_LOCAL_OR_REGION_SPECIFIC__",
+              "scope": "ACCOUNT_SPECIFIC",
               "status": "READY",
               "observed_at_utc": "__REQUIRED_RFC3339_UTC_TIMESTAMP_WITHIN_PREFLIGHT_LEASE__",
               "evidence": [
@@ -206,9 +209,11 @@
               ],
               "evidence_classes": [
                 "DIRECT_PROBE"
-              ]
+              ],
+              "evidence_scope": "ACCOUNT_SPECIFIC"
             }
-          ]
+          ],
+          "execution_dependencies_complete": true
         }
       }
     }
