@@ -1,0 +1,276 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CHALLENGER_FRONTIER_EVIDENCE_V1",
+  "evidence_id": "OPEN_ENDED_RESEARCH_LIVE_CHALLENGER_FRONTIER_20260929_V1",
+  "status": "FRESH_DIRECT_PROBES_COMPLETE__SUPPLIER_AND_SEARCH_PRIMITIVES_AVAILABLE__STRUCTURAL_FINALIZATION_PR222_REMAINS_NECESSARY",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "canonical_base_commit": "20f6f22d09b8628d854e0c53f2e345567e632265",
+  "checked_at_utc": "2026-09-29T21:15:34Z",
+  "freshness_lease_hours": 24,
+  "progress_credit": false,
+  "purpose": "Delete stale carrier/model assumptions and identify the fastest zero-incremental-spend route to the recurrent evidence-to-finalization seam.",
+  "incumbent": {
+    "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
+    "status": "SUPERSEDED_AND_FALSIFIED",
+    "evidence": [
+      "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+      "PR #218 closed unmerged after PR #219 promotion"
+    ],
+    "causal_result": "Model and source selection worked; real task failed with GOAL_MAX_CYCLES_WITHOUT_FINISH."
+  },
+  "discovery_queries": [
+    {
+      "intent": "CAPABILITY_VECTOR",
+      "query": "anonymous LLM inference API no API key OpenAI compatible free 2026"
+    },
+    {
+      "intent": "SUPPLIER_OR_PRODUCT",
+      "query": "free hosted reasoning model API 120B no credit card zero cost inference 2026"
+    },
+    {
+      "intent": "IMPLEMENTATION_FORM",
+      "query": "public anonymous AI inference endpoint no authentication API model"
+    },
+    {
+      "intent": "RECENCY_OR_NEW_RELEASE",
+      "query": "September 2026 new free inference API release open source model"
+    },
+    {
+      "intent": "CAPABILITY_VECTOR",
+      "query": "free AI model inference API no signup anonymous tool calling 2026"
+    }
+  ],
+  "source_classes": {
+    "BRAIN_INHERITED": [
+      "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
+      "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+      "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json"
+    ],
+    "OFFICIAL_PRIMARY": [
+      "https://vireonix.ai/docs",
+      "https://vireonix.ai/terms",
+      "https://murakumo.cloud/docs",
+      "https://www.peerwave.ai/docs",
+      "https://freeinference.org/"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+      "https://github.com/llmfaucet/llmfaucet"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+      "https://freeinference.dev/",
+      "https://itsfree.ai/"
+    ]
+  },
+  "direct_transport": "WOLFRAM_LANGUAGE_URLREAD_HTTPREQUEST",
+  "direct_probes": [
+    {
+      "route": "LLMFAUCET_ANONYMOUS",
+      "timestamp_utc": "2026-09-29T21:12:00Z",
+      "endpoint": "https://api.llmfaucet.dev/v1/chat/completions",
+      "result": "TRANSPORT_REJECTED_BEFORE_ENDPOINT_RESPONSE",
+      "observation": "Wolfram outbound CONNECT tunnel returned 503.",
+      "qualification": "NOT_CURRENTLY_CALLABLE_FROM_THIS_TRANSPORT"
+    },
+    {
+      "route": "VIREONIX_AUTO_ANONYMOUS",
+      "timestamp_utc": "2026-09-29T21:13:59Z",
+      "endpoint": "https://vireonix.ai/v1/chat/completions",
+      "result": "HTTP_200_NONTRIVIAL_GENERATION",
+      "observed_backend": "MiniMax-M3",
+      "output_summary": "Correct concise thermodynamics explanation generated.",
+      "auth_header_required": false,
+      "qualification": "DIRECTLY_CALLABLE_ZERO_KEY_MODEL_SUPPLIER"
+    },
+    {
+      "route": "MURAKUMO_MISHIMA_ANONYMOUS",
+      "timestamp_utc": "2026-09-29T21:14:24Z",
+      "endpoint": "https://api.murakumo.cloud/v1/chat/completions",
+      "result": "HTTP_200_REASONING_GENERATION",
+      "observed_model": "mishima",
+      "auth_header_required": false,
+      "qualification": "DIRECTLY_CALLABLE_ZERO_KEY_REASONING_SUPPLIER"
+    },
+    {
+      "route": "VIREONIX_TOOL_CALL",
+      "timestamp_utc": "2026-09-29T21:15:16Z",
+      "result": "HTTP_200_BUT_TOOL_CALL_NOT_EMITTED",
+      "observed_backend": "MiniMax-M3",
+      "qualification": "NOT_RELIABLE_AS_FORCED_TOOL_DECISION_FROM_SINGLE_PROBE"
+    },
+    {
+      "route": "MURAKUMO_TOOL_CALL",
+      "timestamp_utc": "2026-09-29T21:15:34Z",
+      "result": "HTTP_200_VALID_OPENAI_TOOL_CALL",
+      "requested_tool": "lookup_constant",
+      "observed_arguments": {
+        "name": "alpha"
+      },
+      "qualification": "DIRECTLY_PROVEN_TOOL_DECISION_SUPPLIER"
+    },
+    {
+      "route": "BING_HTML_SEARCH_VIA_WOLFRAM",
+      "result": "HTTP_200",
+      "qualification": "DIRECTLY_CALLABLE_WEB_SEARCH_PRIMITIVE",
+      "note": "HTML link extraction works; Bing click URLs require deterministic redirect decoding before generic source traversal."
+    },
+    {
+      "route": "VIREONIX_LIMITS_AND_MODELS",
+      "result": "HTTP_200",
+      "observed": {
+        "remaining_input_percent": 99.99,
+        "remaining_output_percent": 99.85,
+        "input_tokens_per_hour": 20000000,
+        "output_tokens_per_hour": 200000,
+        "context_window": 1000000,
+        "public_model_id": "auto"
+      },
+      "qualification": "LIVE_FREE_CAPACITY_AND_MODEL_SURFACE_OBSERVED"
+    },
+    {
+      "route": "MURAKUMO_MODELS",
+      "result": "HTTP_200",
+      "observed": {
+        "ready_model": "mishima",
+        "context_window": 131072,
+        "max_output_tokens": 32768,
+        "free_alias": "murakumo/free"
+      },
+      "qualification": "LIVE_ANONYMOUS_MODEL_SURFACE_OBSERVED"
+    }
+  ],
+  "challengers": [
+    {
+      "route": "MURAKUMO_ANONYMOUS_TOOL_CALLER",
+      "resolution": "SURVIVES_AS_COMPOSITION_COMPONENT",
+      "evidence": [
+        "DIRECT_PROBE_HTTP_200_TOOL_CALL",
+        "https://murakumo.cloud/docs"
+      ],
+      "comparison": {
+        "CORRECTNESS": "Tool-call schema/arguments correct on direct forced-tool probe.",
+        "CAPABILITY_STRENGTH": "Reasoning generation plus native OpenAI-style tool calls directly observed.",
+        "WALL_CLOCK": "Seconds to tens of seconds on observed calls; no provisioning.",
+        "INCREMENTAL_COST": "0 USD; no account or key used.",
+        "RELIABILITY": "Current route callable; provider docs/model aliases show some churn, so lease remains mandatory.",
+        "VERIFIABILITY": "Direct HTTP response and live model-list introspection."
+      }
+    },
+    {
+      "route": "VIREONIX_ANONYMOUS_FINALIZER",
+      "resolution": "SURVIVES_AS_COMPOSITION_COMPONENT",
+      "evidence": [
+        "DIRECT_PROBE_HTTP_200_MINIMAX_M3",
+        "DIRECT_LIMITS_GET_HTTP_200",
+        "https://vireonix.ai/docs",
+        "https://vireonix.ai/terms"
+      ],
+      "comparison": {
+        "CORRECTNESS": "Nontrivial thermodynamics answer materially correct in direct probe.",
+        "CAPABILITY_STRENGTH": "Anonymous auto-routing to strong current model pool; 1M context advertised and live model surface observed.",
+        "WALL_CLOCK": "Low-latency direct call; no provisioning.",
+        "INCREMENTAL_COST": "0 USD under current terms and live anonymous access.",
+        "RELIABILITY": "Large observed remaining hourly budget; no SLA.",
+        "VERIFIABILITY": "Direct HTTP 200 generation, live quota endpoint, official terms."
+      }
+    },
+    {
+      "route": "LLMFAUCET_ANONYMOUS",
+      "resolution": "NON_DOMINATING_ON_CURRENT_TRANSPORT",
+      "evidence": [
+        "DIRECT_WOLFRAM_CONNECT_503",
+        "https://github.com/llmfaucet/llmfaucet"
+      ],
+      "comparison": {
+        "CORRECTNESS": "Not reached.",
+        "CAPABILITY_STRENGTH": "Potential multi-provider anonymous router; unqualified here.",
+        "WALL_CLOCK": "Blocked before endpoint.",
+        "INCREMENTAL_COST": "Claims free; not execution-qualified.",
+        "RELIABILITY": "Current transport cannot reach it.",
+        "VERIFIABILITY": "Transport failure directly observed."
+      }
+    },
+    {
+      "route": "PEERWAVE_ANONYMOUS",
+      "resolution": "NON_DOMINATING_ON_CURRENT_TRANSPORT",
+      "evidence": [
+        "DIRECT_WOLFRAM_CONNECTION_FAILURE",
+        "https://www.peerwave.ai/docs"
+      ],
+      "comparison": {
+        "CORRECTNESS": "Not reached.",
+        "CAPABILITY_STRENGTH": "Docs expose anonymous chat/tool surface; unqualified here.",
+        "WALL_CLOCK": "Connection failed from current transport.",
+        "INCREMENTAL_COST": "Anonymous access exists but credit economics apply beyond initial access.",
+        "RELIABILITY": "Not currently callable from inherited transport.",
+        "VERIFIABILITY": "Transport failure direct; official docs for advertised surface."
+      }
+    },
+    {
+      "route": "FREEINFERENCE",
+      "resolution": "DISQUALIFIED",
+      "evidence": [
+        "https://freeinference.org/"
+      ],
+      "comparison": {
+        "CORRECTNESS": "Not probed.",
+        "CAPABILITY_STRENGTH": "Frontier open models advertised.",
+        "WALL_CLOCK": "New account onboarding paused.",
+        "INCREMENTAL_COST": "Free tier advertised.",
+        "RELIABILITY": "Unavailable to new users now.",
+        "VERIFIABILITY": "Official site states onboarding paused."
+      }
+    },
+    {
+      "route": "GROQ_OPENROUTER_CLOUDFLARE_FICELLE_CREDENTIALLED_FREE_ROUTES",
+      "resolution": "NON_DOMINATING_FOR_FIRST_EXECUTION",
+      "evidence": [
+        "Fresh web discovery and prior Brain search found no declared current key binding."
+      ],
+      "comparison": {
+        "CORRECTNESS": "Strong model options exist.",
+        "CAPABILITY_STRENGTH": "Potentially strong.",
+        "WALL_CLOCK": "Require credential/account binding before first call.",
+        "INCREMENTAL_COST": "Free tiers exist, but anonymous directly callable routes already remove the credential step.",
+        "RELIABILITY": "Not currently bound in Brain authority.",
+        "VERIFIABILITY": "No current Brain code/reference binding found."
+      }
+    },
+    {
+      "route": "INSTACLOUD_FREE_CPU",
+      "resolution": "NON_DOMINATING_FOR_CURRENT_GAP",
+      "evidence": [
+        "Fresh provider pricing discovery."
+      ],
+      "comparison": {
+        "CORRECTNESS": "Compute carrier, not direct research capability.",
+        "CAPABILITY_STRENGTH": "Useful CPU hosting only for this purpose.",
+        "WALL_CLOCK": "Would add deployment/provisioning.",
+        "INCREMENTAL_COST": "Free credit exists but unnecessary.",
+        "RELIABILITY": "Not needed while direct inference transport exists.",
+        "VERIFIABILITY": "Provider pricing page."
+      }
+    }
+  ],
+  "surviving_hypothesis": {
+    "route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA__THEN_RACE_MURAKUMO_TOOL_CALLER_AND_VIREONIX_FINALIZER_FOR_FRESH_TASK_C",
+    "status": "PR222_STRUCTURAL_REPAIR_OPEN__SUPPLIER_BINDING_DEFERRED_TO_POST_REPAIR_FRESH_OBS",
+    "reason": "It composes only directly available primitives and specifically targets the recurrent evidence-to-finalization seam instead of changing carrier or raw model size.",
+    "required_next_proof": [
+      "Deterministically decode/normalize Bing result targets or substitute an equally direct search endpoint.",
+      "Define explicit finish contract that forces transition from sufficient evidence to final synthesis.",
+      "Use Murakumo tool decisions only where deterministic controller cannot decide.",
+      "Use Vireonix to synthesize final answer from bounded evidence packet.",
+      "Verify citations and quantitative claims independently.",
+      "Run once on a materially different fresh real Task C with no same-task tuning."
+    ]
+  },
+  "unresolved_plausible_dominators": [],
+  "parent_blocker_after_reconciliation": "GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_OR_TERMINATION_SEAM",
+  "prohibited_next_actions": [
+    "QWEN3_5_9B_BIOPHYSICS_REPLAY",
+    "BLIND_MAX_CYCLES_INFLATION",
+    "MODEL_SIZE_ESCALATION_AS_DEFAULT",
+    "GITHUB_ACTIONS_CARRIER_REPAIR",
+    "NEW_ACCOUNT_OR_API_KEY_ACQUISITION_BEFORE_ANONYMOUS_ROUTES_FAIL",
+    "NEW_INFRASTRUCTURE_BEFORE_DIRECT_COMPOSITION_OBS"
+  ]
+}
