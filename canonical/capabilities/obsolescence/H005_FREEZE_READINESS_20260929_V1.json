@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_H005_FREEZE_READINESS_V1",
+  "evidence_id": "H005-FREEZE-READINESS-20260929-V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005",
+  "source_pr": 205,
+  "frozen_after_repair_pr": 204,
+  "mission_path": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_005.json",
+  "mission_blob": "d6690ec5839c1b7621be3ae113b60919b55e30c7",
+  "runner_path": "canonical/experiments/run_xapian_apt_e2e_integration_heldout_005.py",
+  "runner_blob": "ae74f974ecf62f2b5c87a036c13df54d6e521c22",
+  "freshness": {
+    "state": "UNSPENT",
+    "execution_count": 0,
+    "same_case_replay_allowed": false
+  },
+  "orthogonality": {
+    "dimensions": [
+      "domain",
+      "execution_surface"
+    ],
+    "reference_domain": "TWO_DIMENSIONAL_QR_MATRIX_CODE",
+    "new_domain": "ONE_DIMENSIONAL_VARIABLE_LENGTH_CODE39_BARCODE",
+    "reference_execution_surface": "GITHUB_ACTIONS_DEBIAN_TRIXIE_JOB_CONTAINER",
+    "new_execution_surface": "GITHUB_ACTIONS_UBUNTU_24_04_DIRECT_HOST",
+    "material_dimensions": 2
+  },
+  "static_verification": {
+    "public_run_id": 36604860292,
+    "public_job_id": 109531175152,
+    "conclusion": "success",
+    "syntax_compile": "PASS",
+    "frozen_manifest_checks": "PASS",
+    "stale_h004_references": false,
+    "stale_reference_supplier_logic": false,
+    "required_surface_guard_present": true,
+    "raw_external_oracle_present": true,
+    "heldout_case_executed": false,
+    "candidate_binary_executed": false,
+    "incremental_spend_usd": 0
+  },
+  "runtime_integrity": {
+    "verifier_blob": "a6b028c25d79d2dff59c87e3b3ad91d9fe934dae",
+    "verifier_repair_source_pr": 204,
+    "mutation_after_freeze_forbidden": true
+  },
+  "required_next_action": "QUALIFY_DIRECT_UBUNTU_24_04_PUBLIC_GITHUB_SURFACE_GENERICALLY_BEFORE_H005_START"
+}

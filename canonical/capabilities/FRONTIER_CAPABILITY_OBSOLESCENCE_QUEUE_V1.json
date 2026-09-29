@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "H004 remains permanently spent and nonreplayable. The exact causal verifier-admission seam is now repaired generically and verified 6/6 with no held-out execution. Freeze a new orthogonal fresh gate against the repaired runtime before any fresh execution, then execute that new gate exactly once on the already-qualified public carrier.",
+    "objective": "H005 is frozen fresh after the verified generic semantic-verifier admission repair. It is orthogonal to H004 in domain and execution surface. Before START, qualify the direct Ubuntu 24.04 public GitHub runner generically for full APT metadata/Xapian/Contents, zbar Code39 decoding support, and exact repaired runtime closure. If and only if qualification passes, execute H005 exactly once and reconcile the first terminal result. H004 remains permanently no-replay.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_VERIFIED__H004_SPENT_NO_REPLAY__NEW_ORTHOGONAL_GATE_REQUIRED",
-    "evidence_path": "canonical/capabilities/obsolescence/GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_20260929_V1.json",
+    "exact_blocker": "H005_FROZEN_UNSPENT__DIRECT_UBUNTU_24_04_PUBLIC_CARRIER_REQUIRES_GENERIC_SURFACE_QUALIFICATION_BEFORE_START",
+    "evidence_path": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_005.json",
     "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__H004_EXACT_RUNNER_REUSED__PUBLIC_CAPSULE_22_FILES_SEALED__H003_IMPORT_CLOSURE_FAILURE_CLASS_CORRECTED__NO_RUNTIME_OR_EVALUATOR_REPAIR_REQUIRED",
-    "prohibition": "NO_H004_REPLAY__NO_SECOND_H004_CARRIER__NO_TASK_SPECIFIC_VERIFIER_PACKAGE_HINTS__NO_SOURCE_NAME_WHITELISTS__NO_HELDOUT_EXECUTION_BEFORE_NEW_GATE_FREEZE",
+    "prohibition": "NO_H005_START_BEFORE_GENERIC_UBUNTU_SURFACE_QUALIFICATION__NO_H004_REPLAY__NO_PACKAGE_HINTS_TO_RUNTIME__NO_RUNTIME_MUTATION_AFTER_FREEZE__NO_DUPLICATE_H005_EXECUTION",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "FREEZE_NEW_ORTHOGONAL_FRESH_TOOL_LEARNING_GATE_AGAINST_REPAIRED_RUNTIME__NO_H004_REPLAY__THEN_EXECUTE_NEW_GATE_EXACTLY_ONCE_ON_QUALIFIED_PUBLIC_CARRIER",
+    "next_action": "QUALIFY_DIRECT_UBUNTU_24_04_PUBLIC_GITHUB_SURFACE_GENERICALLY__REQUIRE_PACKAGES_TRANSLATION_TAGS_CONTENTS_XAPIAN_ZBAR_CODE39_SUPPORT_AND_EXACT_RUNTIME_CLOSURE__NO_H005_START__IF_PASS_EXECUTE_H005_EXACTLY_ONCE",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -253,12 +253,25 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/H004_FIRST_TERMINAL_RECONCILIATION_20260929_V1.json"
   },
   "generic_semantic_verifier_evidence_admission_repair_v1": {
-    "status": "VERIFIED_PENDING_MERGE",
+    "status": "VERIFIED_MERGED_PR204",
     "evidence_path": "canonical/capabilities/obsolescence/GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_20260929_V1.json",
     "runtime_blob": "a6b028c25d79d2dff59c87e3b3ad91d9fe934dae",
     "regression_run_id": 36603922229,
     "tests_passed": 6,
     "heldout_executions": 0,
     "next_action": "FREEZE_NEW_ORTHOGONAL_FRESH_TOOL_LEARNING_GATE_AGAINST_REPAIRED_RUNTIME__NO_H004_REPLAY__THEN_EXECUTE_NEW_GATE_EXACTLY_ONCE_ON_QUALIFIED_PUBLIC_CARRIER"
+  },
+  "h005_fresh_gate_v1": {
+    "status": "FROZEN_UNSPENT",
+    "mission_path": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_005.json",
+    "runner_path": "canonical/experiments/run_xapian_apt_e2e_integration_heldout_005.py",
+    "mission_blob": "d6690ec5839c1b7621be3ae113b60919b55e30c7",
+    "runner_blob": "ae74f974ecf62f2b5c87a036c13df54d6e521c22",
+    "orthogonal_dimensions": [
+      "domain",
+      "execution_surface"
+    ],
+    "execution_count": 0,
+    "next_action": "QUALIFY_DIRECT_UBUNTU_24_04_PUBLIC_GITHUB_SURFACE_GENERICALLY__REQUIRE_PACKAGES_TRANSLATION_TAGS_CONTENTS_XAPIAN_ZBAR_CODE39_SUPPORT_AND_EXACT_RUNTIME_CLOSURE__NO_H005_START__IF_PASS_EXECUTE_H005_EXACTLY_ONCE"
   }
 }

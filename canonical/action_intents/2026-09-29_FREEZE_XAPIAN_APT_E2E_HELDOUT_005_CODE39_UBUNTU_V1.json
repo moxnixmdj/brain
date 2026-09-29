@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-XAPIAN-APT-E2E-HELDOUT-005-CODE39-UBUNTU-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005",
+  "causal_blocker": "GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_VERIFIED__H004_SPENT_NO_REPLAY__NEW_ORTHOGONAL_GATE_REQUIRED",
+  "action_kind": "FREEZE_NEW_ORTHOGONAL_FRESH_GATE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_VERIFIED__H004_SPENT_NO_REPLAY__NEW_ORTHOGONAL_GATE_REQUIRED::FREEZE_NEW_ORTHOGONAL_FRESH_GATE",
+  "expected_parent_frontier_change": "Freeze a fresh post-repair gate before any execution. H005 tests the repaired independent-verifier admission on a materially orthogonal effect and execution surface: one-dimensional variable-length Code 39 on direct Ubuntu 24.04 GitHub-hosted runner, versus H004 two-dimensional QR in Debian Trixie container. No supplier/package hints to runtime. H004 remains closed forever.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "H004 first terminal FAIL merged in PR203 and permanently no-replay",
+    "generic verifier admission repair merged in PR204 at runtime blob a6b028c25d79d2dff59c87e3b3ad91d9fe934dae",
+    "PR204 focused regressions 6/6 PASS, run 36603922229",
+    "repository precheck found no XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005, no PB-H005-C39-7F3A91, and no Code 39 gate references",
+    "orthogonality law requires two material dimensions; H005 precommits domain plus execution surface"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_BUT_INTEGRATION_BLOCKED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [
+    "PB-H005-C39-7F3A91",
+    "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005"
+  ],
+  "stop_condition": "Freeze mission and evaluator only. No H005 execution, producer probing, candidate package install, or task-specific carrier run in this PR. After merge, qualify the direct Ubuntu surface generically before START, then execute H005 exactly once. H004 never replayed.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
