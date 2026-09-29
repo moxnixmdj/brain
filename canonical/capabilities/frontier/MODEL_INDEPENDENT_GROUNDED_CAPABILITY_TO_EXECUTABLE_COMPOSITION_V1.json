@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "status": "ACTIVE_LOCALIZED_SUBCAPABILITY__UNPROVEN",
+  "real_capability": true,
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "parent_families": [
+    "MULTI_CAPABILITY_COMPOSITION",
+    "TOOL_SELECTION_AND_TOOL_LEARNING",
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION"
+  ],
+  "useful_behavior": "Given verified plain-goal grounding that identifies one or more semantically compatible already-bound Brain capabilities, deterministically compose the grounded candidates into an executable action plan by satisfying declared requires/provides/result-field/input contracts, preserving unresolved ambiguity, refusing hidden hand-authored cognition, executing only verified bound capabilities, and independently verifying the resulting real-world effect.",
+  "current_inherited_assets": [
+    "plain_goal.bound_capability.grounding.stdlib",
+    "plain_goal.bound_capability.grounding.verify.stdlib",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/capability_proposal_generators.py",
+    "canonical/runtime/astra_runtime.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+  ],
+  "exact_blocker": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_UNPROVEN",
+  "localization_evidence": {
+    "source_terminal_state": "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+    "grounding_acquisition_commit": "95543fe8591c2b490901143fb165ce6571b7140d",
+    "grounding_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json"
+  },
+  "minimum_acquisition_evidence": {
+    "real_task_A": "One fresh consequential non-serialization task must start from a plain goal, use the acquired grounding route, compose grounded existing bound capabilities without hand-authored controller actions or model cognition, complete the real effect, and be independently verified.",
+    "fresh_reuse_B": "One materially different domain must reuse the same generic composition route without rediscovery or task-specific code.",
+    "no_model_cognition": true,
+    "no_hand_authored_controller_plan_hiding_gap": true,
+    "existing_capability_planner_and_compiler_reuse_race_required": true,
+    "external_supplier_discovery_before_grounded_composition_resolution_forbidden": true,
+    "independent_verification_required": true,
+    "hard_incremental_spend_usd": 0
+  },
+  "search_first_candidates": [
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/capability_proposal_generators.py",
+    "canonical/runtime/astra_runtime.py::_run_capability_planned_goal",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+  ],
+  "prohibited_shortcuts": [
+    "SERIALIZATION_TASK_REPLAY",
+    "HAND_AUTHORED_CONTROLLER_ACTIONS_AS_PROOF",
+    "MODEL_API",
+    "LOCAL_MODEL",
+    "MODEL_ARTIFACT",
+    "TASK_SPECIFIC_LITERAL_ROUTING",
+    "NEW_PLANNER_BEFORE_REUSE_RACE",
+    "EXTERNAL_SUPPLIER_DISCOVERY_BEFORE_GROUNDED_BOUND_COMPOSITION_RESOLUTION"
+  ],
+  "obsolescence_status": "NOT_YET_PROVEN",
+  "residual_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_UNPROVEN"
+}
