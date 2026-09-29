@@ -35,7 +35,13 @@ GOVERNANCE_ACTIONS={
     "GOVERNANCE_GUARD",
     "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
 }
-ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|{
+REAL_TASK_ACTIONS={
+    "REAL_CAPABILITY_ACQUISITION",
+    "REAL_TASK_EXECUTION",
+    "CAPABILITY_INHERITANCE",
+    "FRESH_REUSE",
+}
+ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|REAL_TASK_ACTIONS|{
     "RECONCILE_FRONTIER",
     "ORTHOGONAL_PROBE_SELECTION",
     "EVIDENCE_PRESERVATION",
@@ -348,14 +354,20 @@ def main():
         if x.get("may_define_frontier") is False
     }
     if not governance_action:
-        if probe and str(probe) in quarantined:
-            fail("QUARANTINED_PROBE_CANNOT_DEFINE_NEW_ACTION")
-        if probe and active_probe and probe!=active_probe:
-            fail("INTENT_PROBE_NOT_ACTIVE_PROBE")
-        if probe and active_probe is None and action_kind not in {"ORTHOGONAL_PROBE_SELECTION","RECONCILE_FRONTIER"}:
-            fail("NO_ACTIVE_PROBE_BUT_ACTION_TARGETS_PROBE")
-        if not probe and action_kind not in ALLOWED_NO_PROBE_ACTIONS:
-            fail("PROBE_REQUIRED_FOR_THIS_ACTION_KIND")
+        if action_kind in REAL_TASK_ACTIONS:
+            if probe:
+                fail("REAL_TASK_ACTION_MUST_NOT_TARGET_SYNTHETIC_PROBE")
+            if active_probe is not None:
+                fail("REAL_TASK_ACTION_WHILE_ACTIVE_PROBE_NOT_RECONCILED")
+        else:
+            if probe and str(probe) in quarantined:
+                fail("QUARANTINED_PROBE_CANNOT_DEFINE_NEW_ACTION")
+            if probe and active_probe and probe!=active_probe:
+                fail("INTENT_PROBE_NOT_ACTIVE_PROBE")
+            if probe and active_probe is None and action_kind not in {"ORTHOGONAL_PROBE_SELECTION","RECONCILE_FRONTIER"}:
+                fail("NO_ACTIVE_PROBE_BUT_ACTION_TARGETS_PROBE")
+            if not probe and action_kind not in ALLOWED_NO_PROBE_ACTIONS:
+                fail("PROBE_REQUIRED_FOR_THIS_ACTION_KIND")
 
     probe_specific=bool(intent.get("probe_specific"))
     one_probe_repair=bool(intent.get("generic_repair_from_single_probe"))
