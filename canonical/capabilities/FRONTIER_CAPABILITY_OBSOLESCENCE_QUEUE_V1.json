@@ -69,7 +69,7 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "LOW_ALTITUDE_NEAR_ORBITAL_AERODYNAMIC_AND_AEROTHERMAL_CLOSURE",
+    "selected_capability": "REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE",
     "objective": "Close the highest-leverage residual exposed by Capability Win 1: determine a defensible aerodynamic/thermal envelope for cargo-sized near-orbital atmospheric exit so pod geometry, exit speed, TPS/cooling, and accelerator energy can be selected without assuming an unproven effective Cd.",
     "selection_metric": "VERIFIED_REUSABLE_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
     "exact_blocker": "REFERENCE_SPACE_CARGO_ARCHITECTURE_IS_HIGHLY_SENSITIVE_TO_EFFECTIVE_CD_BALLISTIC_COEFFICIENT_AND_REPETITIVE_THERMAL_LIFECYCLE",
@@ -81,7 +81,12 @@
     "inherited_capability": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json",
     "prior_win_evidence": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json"
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "next_residual_candidate": {
+      "capability": "LOW_ALTITUDE_NEAR_ORBITAL_AERODYNAMIC_AND_AEROTHERMAL_CLOSURE",
+      "status": "SELECT_AFTER_WIN1_MERGE_AND_FRESH_EXACT_BASE_OBS",
+      "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_WIN1_OBS6_DOWNSTREAM_DELETION_RECONCILIATION_V1.json"
+    }
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
