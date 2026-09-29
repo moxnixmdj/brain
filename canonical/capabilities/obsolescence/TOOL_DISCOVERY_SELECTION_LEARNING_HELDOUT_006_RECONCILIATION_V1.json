@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_RECONCILIATION_V1",
+  "recorded_on": "2026-09-29",
+  "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+  "terminal_capture_path": "canonical/astra_runtime/evidence/TOOL_DISCOVERY_LATENCY_RECALL_HELDOUT_VALIDATION_006__TERMINAL_CAPTURE.json",
+  "verdict": "VALID_QUALIFIED_SURFACE_ALGORITHM_ACCEPTANCE_FAILURE__LATENCY_FIXED__SEMANTIC_RECALL_INSUFFICIENT",
+  "observed": {
+    "acceptance_gate_pass": false,
+    "heldout_oracle_family_recall": 0.5,
+    "heldout_top20_oracle_recall": 0.5,
+    "total_wall_s": 50.988927,
+    "hard_wall_s": 300,
+    "latency_gate_pass": true,
+    "semantic_recall_gate_pass": false
+  },
+  "causal_boundary": {
+    "proven": [
+      "DELETION_FIRST_FAST_PATH_REMOVED_THE_PREVIOUS_300S_LATENCY_BLOCKER",
+      "PACKAGE_LEVEL_XAPIAN_RELEVANCE_ALONE_IS_NOT_SUFFICIENT_FOR_REQUIRED_HELDOUT_RECALL",
+      "TWO_OF_FOUR_ORACLE_FAMILIES_WERE_NOT_RETRIEVED_IN_TOP50_OR_TOP20",
+      "FAILURE_IS_NOT_EXPLAINED_BY_TIMEOUT_SURFACE_FIDELITY_PACKAGE_HINTS_BINARY_EXECUTION_OR_RUNTIME_MUTATION"
+    ],
+    "not_yet_proven": [
+      "EXACT_QUERY_CONSTRUCTION_DEFECT_FOR_EACH_MISS",
+      "WHETHER_CHEAP_LOCAL_RERANKING_IS_SUFFICIENT",
+      "WHETHER_BOUNDED_POST_SELECTION_EXECUTABLE_EVIDENCE_IS_REQUIRED",
+      "WHETHER_A_DIFFERENT_EXISTING_INDEX_OR_RETRIEVER_DOMINATES_AXI_CACHE"
+    ]
+  },
+  "authorization": {
+    "replay_gate_006": false,
+    "second_repair_under_gate_006": false,
+    "promotion": false,
+    "new_causal_frontier_required": true
+  },
+  "next_action": "FREEZE_NEW_UNSEEN_GATE_BEFORE_ANY_NEW_RUNTIME_MUTATION__THEN_COMPARE_DELETE_BYPASS_REUSE_ROUTES_FOR_SEMANTIC_RECALL_WITH_LATENCY_BUDGET_PRESERVED"
+}
