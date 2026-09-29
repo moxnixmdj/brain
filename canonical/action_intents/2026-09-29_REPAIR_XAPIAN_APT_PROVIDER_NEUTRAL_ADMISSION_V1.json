@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-XAPIAN-APT-PROVIDER-NEUTRAL-ADMISSION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_REACH_APT_ROUTING_BUT_ARE_DROPPED_BY_LEGACY_APT_CATALOG_ONLY_ADMISSION__LEGACY_ABSOLUTE_SCORE_THRESHOLD_NOT_PORTABLE_TO_XAPIAN",
+  "action_kind": "GENERIC_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::APT_FULL_METADATA_XAPIAN_CANDIDATES_REACH_APT_ROUTING_BUT_ARE_DROPPED_BY_LEGACY_APT_CATALOG_ONLY_ADMISSION__LEGACY_ABSOLUTE_SCORE_THRESHOLD_NOT_PORTABLE_TO_XAPIAN::GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Activate the already-frozen HELDOUT-003 gate in canonical hierarchy and replace legacy source-name plus absolute-score APT admission with the smallest provider-neutral, score-scale-safe admission rule using the existing binding_kind/eligibility/integrity contract and provider-relative candidate order. Do not change discovery, contract inference, semantic verification, heldout data, or any downstream residual.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 corrected fresh HELDOUT-003 freeze",
+    "PR127 pre-spend invalidation evidence",
+    "canonical/runtime/auto_apt_cli_acquisition.py first-drop static proof",
+    "canonical/runtime/capability_discovery.py legacy APT and Xapian candidate schemas",
+    "canonical/tests/test_discovery_driven_supplier_routing.py",
+    "canonical/tests/test_supplier_neutral_acquisition.py"
+  ],
+  "evidence_presence_classification": "FROZEN_FRESH_GATE_PRESENT__STATIC_FIRST_DROP_PROVEN__ONE_GENERIC_ADMISSION_REPAIR_AUTHORIZED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After the provider-neutral score-scale-safe admission repair and focused regression proof, make no second runtime repair. Execute XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 exactly once on one faithful zero-spend remote carrier, then reconcile the first terminal result before any further mutation.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
