@@ -96,7 +96,14 @@
         "DIRECT_PROBE",
         "INDEPENDENT_VERIFIER"
       ],
-      "generic_public_status_alone_insufficient_for_account_specific_or_capacity_scoped_dependencies": true
+      "generic_public_status_alone_insufficient_for_account_specific_or_capacity_scoped_dependencies": true,
+      "execution_dependencies_complete_must_be_true": true,
+      "required_execution_substrate_kinds": [
+        "CARRIER",
+        "LOCAL_RUNTIME",
+        "MODEL_API",
+        "REMOTE_SERVICE"
+      ]
     }
   },
   "route_frontier_types": {
@@ -195,11 +202,12 @@
     "status": "READY",
     "all_required_dependencies_ready": "BOOLEAN_TRUE",
     "failed_dependencies": "EMPTY_LIST",
-    "execution_dependencies": "NONEMPTY_LIST"
+    "execution_dependencies": "NONEMPTY_LIST",
+    "execution_dependencies_complete": "BOOLEAN_TRUE"
   },
   "execution_dependency_types": {
     "dependency": "NONEMPTY_STRING",
-    "kind": "NONEMPTY_STRING",
+    "kind": "ENUM",
     "required": "BOOLEAN",
     "volatility": "STATIC_OR_VOLATILE",
     "scope": "GLOBAL_OR_ACCOUNT_SPECIFIC_OR_LOCAL_OR_REGION_SPECIFIC",
@@ -213,6 +221,24 @@
       "DIRECT_PROBE",
       "INDEPENDENT_VERIFIER",
       "BRAIN_INHERITED"
-    ]
+    ],
+    "allowed_kinds": [
+      "CARRIER",
+      "ACCOUNT_ENTITLEMENT",
+      "MODEL_API",
+      "NETWORK_ENDPOINT",
+      "REMOTE_SERVICE",
+      "CAPACITY_POOL",
+      "AUTH_CREDENTIAL",
+      "LOCAL_RUNTIME",
+      "LOCAL_MODEL",
+      "CODE_ARTIFACT",
+      "DATA_SOURCE",
+      "STORAGE",
+      "PACKAGE_REGISTRY",
+      "MODEL_ARTIFACT"
+    ],
+    "evidence_scope": "GLOBAL_OR_ACCOUNT_SPECIFIC_OR_LOCAL_OR_REGION_SPECIFIC",
+    "account_or_region_specific_evidence_scope_rule": "MUST_EQUAL_DEPENDENCY_SCOPE"
   }
 }
