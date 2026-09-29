@@ -148,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "STAGE_PUBLIC_WORKFLOW_AND_ARM_V3_WITH_EXPLICIT_APT_ENGLISH_TRANSLATIONS__DO_NOT_RERUN_PRIOR_LANES__REQUIRE_FULL_PRESTART_SURFACE__THEN_ALLOW_H004_START_EXACTLY_ONCE",
+    "next_step": "RUN_GENERIC_PUBLIC_CARRIER_DIAGNOSTIC_WITH_PERSISTENT_APT_ENGLISH_POLICY__VERIFY_FULL_METADATA_XAPIAN_CONTENTS_TAGS_ZBAR_HASHES_IMPORT_CLOSURE__NO_H004_START__ONLY_THEN_STAGE_NEW_ONE_SHOT_H004_LANE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36599056622_ATTEMPT_1_FAILED_PRESTART_TRANSLATION_EN_METADATA_MISSING__NO_EXECUTION",
+    "critical_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36599477886_ATTEMPT_1_FAILED_PRESTART_TRANSLATION_TARGET_VIEW_MISMATCH__TRANSLATION_EN_FETCHED_BUT_INDEXTARGETS_DEFAULT_LANGUAGE_POLICY_HID_IT__NO_EXECUTION",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -512,7 +512,8 @@
     "h004_public_capsule_readiness_path": "canonical/capabilities/obsolescence/H004_PUBLIC_CAPSULE_EXECUTION_READINESS_20260929_V1.json",
     "github_app_repository_selection": "all",
     "h004_prestart_failure_path": "canonical/capabilities/obsolescence/H004_PUBLIC_RUNNER_PRESTART_SAFE_DIRECTORY_FAILURE_20260929_V1.json",
-    "h004_translation_en_prestart_failure_path": "canonical/capabilities/obsolescence/H004_PUBLIC_RUNNER_PRESTART_TRANSLATION_EN_FAILURE_20260929_V1.json"
+    "h004_translation_en_prestart_failure_path": "canonical/capabilities/obsolescence/H004_PUBLIC_RUNNER_PRESTART_TRANSLATION_EN_FAILURE_20260929_V1.json",
+    "h004_translation_target_view_mismatch_path": "canonical/capabilities/obsolescence/H004_PUBLIC_RUNNER_PRESTART_TRANSLATION_TARGET_VIEW_MISMATCH_20260929_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
