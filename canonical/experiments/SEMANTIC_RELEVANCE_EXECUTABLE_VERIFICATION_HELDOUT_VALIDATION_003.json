@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_RELEVANCE_EXECUTABLE_VERIFICATION_HELDOUT_VALIDATION_V1",
+  "validation_id": "SEMANTIC-RELEVANCE-EXECUTABLE-VERIFICATION-HELDOUT-VALIDATION-003",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_REPLACEMENT_REPAIR_RUNTIME_MUTATION",
+  "frozen_date": "2026-09-29",
+  "provenance": {
+    "selected_after": "HELDOUT-002-CAUSAL-ATTRIBUTION-AND-ROUTE-COMPARISON-V1",
+    "selected_before_replacement_runtime_mutation": true,
+    "source_precheck_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_003_SOURCE_PRECHECK_V1.json",
+    "prior_spent_families_excluded": [
+      "libimage-exiftool-perl",
+      "libxml2-utils",
+      "libjpeg-turbo-progs",
+      "tesseract-ocr",
+      "optipng",
+      "genisoimage",
+      "ffmpeg"
+    ],
+    "prior_diagnostic_families_excluded": [
+      "poppler-utils",
+      "librsvg2-bin",
+      "inkscape",
+      "imagemagick",
+      "graphicsmagick",
+      "bzip2",
+      "mediainfo",
+      "sqlite3",
+      "gzip",
+      "graphviz"
+    ]
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-MARKUP-CONVERT-003",
+      "goal": "Convert a Markdown document into HTML while preserving the document structure.",
+      "oracle_families": [
+        "pandoc"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-JSON-SELECT-003",
+      "goal": "Read a JSON document, select a nested field, and print only the selected value.",
+      "oracle_families": [
+        "jq"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-AUDIO-NORMALIZE-003",
+      "goal": "Normalize the volume of a WAV audio file and write a processed WAV file.",
+      "oracle_families": [
+        "sox"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-WEBP-CONVERT-003",
+      "goal": "Convert a PNG image into WebP format.",
+      "oracle_families": [
+        "webp"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "hard_validation_wall_s": 300,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu 24.04/Noble preferred; equivalent complete Debian-family APT surface only if normal Packages metadata and all applicable Contents indexes are present.",
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "exact_runtime_bytes_required": true,
+    "repair_dependencies": "Only standard repository packages needed by the selected generic route may be preinstalled during surface preparation; no task-specific packages or oracle packages may be installed as hints.",
+    "incremental_spend_usd": 0
+  },
+  "evaluator_boundary": "Runtime receives only each natural-language goal. Oracle family names are evaluator-only and must not be injected into runtime queries, package hints, environment preparation, or ranking logic.",
+  "execution_count": 0,
+  "freshness": "UNSPENT",
+  "replay_authorized": false,
+  "promotion_authorized": false
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_SOURCE_PRECHECK_V1",
+  "validation_id": "SEMANTIC-RELEVANCE-EXECUTABLE-VERIFICATION-HELDOUT-VALIDATION-003",
+  "checked_on": "2026-09-29",
+  "source_pr": 85,
+  "branch": "repair/batched-executable-evidence-acquisition-v1-20260928",
+  "checked_before_runtime_mutation": true,
+  "repository_search": {
+    "queries": [
+      "pandoc",
+      "jq",
+      "sox",
+      "cwebp"
+    ],
+    "result": "NO_PRIOR_BRAIN_CODE_SEARCH_REFERENCES_RETURNED_FOR_ANY_QUERY"
+  },
+  "ubuntu_noble_availability": [
+    {
+      "oracle_family": "pandoc",
+      "source": "https://packages.ubuntu.com/search?keywords=pandoc",
+      "present": true
+    },
+    {
+      "oracle_family": "jq",
+      "source": "https://packages.ubuntu.com/noble/jq",
+      "present": true
+    },
+    {
+      "oracle_family": "sox",
+      "source": "https://packages.ubuntu.com/noble/sox",
+      "present": true
+    },
+    {
+      "oracle_family": "webp",
+      "source": "https://packages.ubuntu.com/en/noble/graphics/webp",
+      "present": true
+    }
+  ],
+  "separation_from_prior_cases": true,
+  "runtime_oracle_injection_forbidden": true,
+  "result": "ELIGIBLE_AS_NEW_UNSEEN_GATE_BEFORE_GENERIC_REPLACEMENT_REPAIR"
+}

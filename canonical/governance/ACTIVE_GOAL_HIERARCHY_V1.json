@@ -4,18 +4,18 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
-  "probe_state": "HELDOUT_002_RECONCILED__CAUSAL_ATTRIBUTION_COMPLETE__REUSE_REPLACEMENT_ROUTE_SELECTED",
-  "current_parent_blocker": "SEMANTIC_RETRIEVAL_CAUSAL_INVERSION__EXECUTABLE_FILENAME_LEXICAL_GATING_PRECEDES_SEMANTIC_RELEVANCE_AND_DIRECT_EVIDENCE_TIER_DOMINANCE_SUPPRESSES_SEMANTIC_PACKAGE_CANDIDATES",
-  "next_required_action_class": "FREEZE_NEW_UNSEEN_HELDOUT_GATE_003_BEFORE_ANY_RUNTIME_MUTATION__THEN_ONE_GENERIC_REPLACEMENT_REPAIR_USING_RELEVANCE_FIRST_PACKAGE_RETRIEVAL_AND_BATCH_EXECUTABLE_VERIFICATION",
-  "forbidden_local_frontier": "RUNTIME_MUTATION_BEFORE_GATE_003_FREEZE__REPLAY_OR_REEXECUTION_OF_HELDOUT_002__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__ADDITIVE_SCORE_TUNING__REMOTE_MANPAGE_FANOUT_REPAIR__TIMEOUT_INCREASE__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__MERGE_OR_PROMOTION_BEFORE_FRESH_GATE",
+  "active_probe": "SEMANTIC-RELEVANCE-EXECUTABLE-VERIFICATION-HELDOUT-VALIDATION-003",
+  "probe_state": "HELDOUT_003_FROZEN_BEFORE_REPLACEMENT_RUNTIME_MUTATION__UNSPENT",
+  "current_parent_blocker": "SEMANTIC_RETRIEVAL_CAUSAL_INVERSION__REPLACEMENT_ROUTE_SELECTED__NEW_UNSEEN_GATE_003_NOW_FROZEN",
+  "next_required_action_class": "IMPLEMENT_AT_MOST_ONE_GENERIC_REPLACEMENT_REPAIR__SEMANTIC_RELEVANCE_FIRST_THEN_BATCH_EXECUTABLE_VERIFICATION__NO_HELDOUT_003_EXECUTION_UNTIL_SOURCE_AND_SURFACE_PRECHECK",
+  "forbidden_local_frontier": "PREVIEW_OR_EXECUTE_HELDOUT_003_BEFORE_REPAIR_AND_QUALIFIED_SURFACE__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__REPLAY_HELDOUT_002__ADDITIVE_SCORE_TUNING__REMOTE_MANPAGE_FANOUT_REPAIR__TIMEOUT_INCREASE__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__SECOND_REPAIR__MERGE_OR_PROMOTION_BEFORE_FRESH_GATE_RECONCILIATION",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
     "max_repairs_from_single_probe": 1,
     "same_probe_replays_used": 0,
     "max_same_probe_replays": 0,
-    "first_execution_required": false
+    "first_execution_required": true
   },
   "quarantined_probes": [
     {
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/experiments/BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002.json",
+  "active_probe_manifest": "canonical/experiments/SEMANTIC_RELEVANCE_EXECUTABLE_VERIFICATION_HELDOUT_VALIDATION_003.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -108,48 +108,20 @@
     "new_held_out_gate_required": true
   },
   "new_held_out_gate": {
-    "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+    "validation_id": "SEMANTIC-RELEVANCE-EXECUTABLE-VERIFICATION-HELDOUT-VALIDATION-003",
     "frozen_date": "2026-09-29",
-    "manifest_path": "canonical/experiments/BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002.json",
-    "runner_path": "canonical/experiments/run_batched_executable_evidence_heldout_validation_002.py",
-    "source_precheck_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_002_SOURCE_PRECHECK_V1.json",
+    "manifest_path": "canonical/experiments/SEMANTIC_RELEVANCE_EXECUTABLE_VERIFICATION_HELDOUT_VALIDATION_003.json",
+    "runner_path": "canonical/experiments/run_semantic_relevance_executable_verification_heldout_validation_003.py",
+    "source_precheck_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_003_SOURCE_PRECHECK_V1.json",
     "cases": 4,
     "oracle_family_recall_min": 0.75,
     "top20_oracle_recall_min": 0.75,
-    "hard_validation_wall_s": 600,
+    "hard_validation_wall_s": 300,
+    "execution_count": 0,
+    "freshness": "UNSPENT",
     "second_repair_precedes_freeze": false,
-    "execution_count": 1,
-    "freshness": "SPENT",
-    "execution_started_at": "2026-09-29T01:13:06.870928592Z",
-    "execution_surface": {
-      "provider": "Railway",
-      "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
-      "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
-      "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
-      "deployment_id": "aa411a03-2a63-4708-bf1a-758acae7f72c"
-    },
-    "execution_boundary_evidence": {
-      "pr_head": "95c3b910b474233b75396f92b2f704a0f3fca916",
-      "runtime_blob": "eddddaa84dacda5d679c22d34f101aeb1d431678",
-      "runner_blob": "42ddd8958134fb27974346889937434b4477fe03",
-      "manifest_blob": "acd44dc94c900a16bd09ec88b0d51025c0cab58b",
-      "apt_packages_index_count": 3,
-      "contents_amd64_index_count": 2,
-      "contents_all_index_count": 2,
-      "manpage_https": "PASS",
-      "execution_start_marker": "PB_HELDOUT_002_EXECUTION_START=1"
-    },
-    "terminal_result_state": "RECONCILED__VALID_QUALIFIED_SURFACE_ACCEPTANCE_FAIL",
     "replay_authorized": false,
-    "terminal_capture_blocker_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_002_TERMINAL_CAPTURE_BLOCKER_20260929_V1.json",
-    "terminal_capture_path": "canonical/astra_runtime/evidence/BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002__TERMINAL_CAPTURE.json",
-    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002_RECONCILIATION_V1.json",
-    "observed_acceptance_gate_pass": false,
-    "observed_oracle_family_recall": 0.25,
-    "observed_top20_oracle_recall": 0.25,
-    "observed_total_wall_s": 358.370173,
-    "promotion_authorized": false,
-    "repair_authorized": false
+    "promotion_authorized": false
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
