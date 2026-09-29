@@ -196,8 +196,6 @@
     "state_transition": {
       "coupled_canonical_paths": [
         "canonical/CANONICAL_POINTER.json",
-        "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
-        "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
         "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
       ],
       "atomic_update_required": true,
@@ -258,6 +256,18 @@
       "new rule can be bypassed by omitting fields",
       "atomic-state rule cannot be mechanically verified"
     ],
-    "residual_uncertainty": "No finite guard can make all future mistakes impossible; the goal is to make consequential errors detectable, non-promotable, and reversible before they become canonical truth."
+    "residual_uncertainty": "No finite guard can make all future mistakes impossible; the goal is to make consequential errors detectable, non-promotable, and reversible before they become canonical truth.",
+    "promotion_evidence": {
+      "evidence_paths": [],
+      "independent_verifier_id": "",
+      "producer_supplier_ids": [],
+      "verifier_supplier_ids": [],
+      "supplier_independent": false,
+      "replacement_route_id": "",
+      "frontier_reference_id": "",
+      "fresh_reuse_evidence_path": ""
+    },
+    "counter_rollback_authorized": false,
+    "counter_rollback_reason": ""
   }
 }

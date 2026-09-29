@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1",
+  "status": "CANONICAL_SCHEMA__MANDATORY__FAIL_CLOSED",
+  "authority": "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
+  "required_fields": [
+    "schema",
+    "failure_default",
+    "claim_scope",
+    "pre_mortem",
+    "circularity_check",
+    "independence_check",
+    "state_transition",
+    "evidence_claim_map",
+    "post_action_checks",
+    "rollback_triggers",
+    "residual_uncertainty"
+  ],
+  "failure_default": "PRESUME_CONSEQUENTIAL_ACTION_WRONG_UNTIL_FALSIFIED",
+  "allowed_claim_scopes": [
+    "NO_PROMOTION",
+    "GOVERNANCE_HARDENING_NO_CAPABILITY_PROMOTION",
+    "REAL_TASK_EVIDENCE",
+    "RESIDUAL_GAP_LOCALIZATION",
+    "CAPABILITY_ACQUISITION",
+    "FRONTIER_DEPENDENCY_REMOVAL"
+  ],
+  "pre_mortem": {
+    "minimum_material_failure_modes": 3,
+    "required_entry_fields": [
+      "failure_mode",
+      "detection",
+      "prevention",
+      "abort_or_rollback"
+    ]
+  },
+  "circularity_check_required_fields": [
+    "target_frontier_implementation_in_execution_path",
+    "target_frontier_implementation_in_verification_path",
+    "proof_depends_on_claim_being_proven"
+  ],
+  "independence_check_required_fields": [
+    "self_certification_allowed",
+    "producer_verifier_independent",
+    "verifier_identity",
+    "target_supplier_excluded_from_proof_path"
+  ],
+  "promotion_scopes": [
+    "CAPABILITY_ACQUISITION",
+    "FRONTIER_DEPENDENCY_REMOVAL"
+  ],
+  "promotion_rules": {
+    "self_certification_allowed": false,
+    "producer_verifier_independent": true,
+    "target_supplier_excluded_from_proof_path": true,
+    "target_frontier_implementation_in_execution_path": false,
+    "target_frontier_implementation_in_verification_path": false
+  },
+  "coupled_core_state_paths": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+  ],
+  "coupled_state_rule": "IF_MORE_THAN_ONE_COUPLED_CORE_PATH_CHANGES__FINAL_HEAD_COMMIT_MUST_CONTAIN_ALL_CHANGED_COUPLED_PATHS__STRATEGY_ATOMIC_SINGLE_TREE_COMMIT",
+  "scoreboard_promotion_rules": {
+    "any_counter_increase_requires_promotion_evidence": true,
+    "evidence_paths_must_exist_at_head": true,
+    "independent_verifier_required": true,
+    "producer_verifier_supplier_sets_must_be_disjoint": true,
+    "frontier_dependency_removal_requires": [
+      "replacement_route_id",
+      "frontier_reference_id",
+      "fresh_reuse_evidence_path",
+      "target_frontier_supplier_ids",
+      "execution_supplier_ids",
+      "verification_supplier_ids"
+    ]
+  },
+  "counter_decrease_rule": "REQUIRES_EXPLICIT_COUNTER_ROLLBACK_AUTHORIZATION_AND_REASON",
+  "exact_head_readback_required": true,
+  "progress_credit": false
+}
