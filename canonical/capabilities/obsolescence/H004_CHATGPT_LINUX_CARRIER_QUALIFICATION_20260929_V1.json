@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_CARRIER_QUALIFICATION_EVIDENCE_V1",
+  "evidence_id": "H004_CHATGPT_LINUX_CARRIER_QUALIFICATION_20260929_V1",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "qualification_scope": "CARRIER_ONLY__NO_HELDOUT_START__NO_PROJECT_SOURCE_TRANSPORT",
+  "carrier": {
+    "class": "CHATGPT_BUILTIN_LINUX_CONTAINER",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "uid": 0,
+    "gid": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "incremental_infrastructure_spend_usd": 0
+  },
+  "observed_tools": {
+    "python3": "/opt/pyvenv/bin/python3",
+    "apt_get": "/usr/bin/apt-get",
+    "apt_cache": "/usr/bin/apt-cache",
+    "sudo": "/usr/bin/sudo",
+    "git": "/usr/bin/git",
+    "zbarimg": null
+  },
+  "observations": {
+    "apt_lists_regular_files": 0,
+    "apt_cache_policy_python3_xapian_output_present": false,
+    "dns_deb_debian_org_resolved": false,
+    "apt_update_attempted": true,
+    "apt_update_process_rc": 0,
+    "apt_update_semantic_success": false,
+    "apt_update_errors": [
+      "Temporary failure resolving 'deb.debian.org' for trixie InRelease",
+      "Temporary failure resolving 'deb.debian.org' for trixie-updates InRelease",
+      "Temporary failure resolving 'deb.debian.org' for trixie-security InRelease"
+    ],
+    "disk_root": "32G overlay; approximately 30G available at qualification time"
+  },
+  "first_failed_predicate": {
+    "predicate": "CONNECTED_DEBIAN_APT_SURFACE_AVAILABLE",
+    "expected": "Carrier can resolve Debian mirrors and materialize a fresh connected APT package/index surface required by HELDOUT-004.",
+    "observed": "DNS resolution for deb.debian.org failed; no usable APT list files were present; python3-xapian had no available policy record.",
+    "result": "FAIL"
+  },
+  "interpretation": "The already-proven ChatGPT Linux exact-source transport class is not currently sufficient for HELDOUT-004 because this execution surface cannot reach the required connected Debian APT metadata/package network. apt-get update returning process code 0 is not accepted as success because every configured Debian index fetch failed and no usable package lists were materialized.",
+  "materialization_work_skipped": true,
+  "materialization_skip_reason": "PR178 stop condition requires stopping on the first failed carrier predicate; transporting project bytes cannot repair a missing connected APT surface and would add no parent-level evidence.",
+  "heldout_004": {
+    "freshness_state": "UNSPENT",
+    "execution_count": 0,
+    "start_marker_created": false,
+    "evaluator_invoked": false,
+    "dispatch_invoked": false
+  },
+  "next_candidate_class": "ACCOUNTLESS_CARDLESS_HARD_ZERO_REMOTE_LINUX_WITH_OUTBOUND_APT_NETWORK",
+  "preferred_existing_route": "Railway anonymous VM via ssh railway.new; Railway publicly states no account/card and nobody pays for unclaimed compute.",
+  "prohibitions": [
+    "NO_HELDOUT_004_EXECUTION_IN_THIS_PR",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_RUNTIME_OR_EVALUATOR_MUTATION",
+    "NO_SPRITE_ACCESS",
+    "NO_RAILWAY_PROVISIONING_IN_THIS_PR",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_SPEND"
+  ]
+}
