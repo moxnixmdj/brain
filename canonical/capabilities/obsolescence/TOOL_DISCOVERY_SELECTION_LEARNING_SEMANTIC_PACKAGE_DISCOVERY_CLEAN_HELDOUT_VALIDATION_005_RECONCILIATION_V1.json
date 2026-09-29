@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_RECONCILIATION_V1",
+  "status": "EXECUTED_ONCE__QUALIFIED_SURFACE__HARD_WALL_TIMEOUT__FRESHNESS_SPENT__RECONCILED",
+  "checked_on": "2026-09-29",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
+  "terminal_capture_path": "canonical/astra_runtime/evidence/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005__TERMINAL_CAPTURE.json",
+  "replay_budget": {
+    "executions_observed": 1,
+    "freshness": "SPENT",
+    "same_case_replay_allowed": false
+  },
+  "surface_admissibility": {
+    "classification": "QUALIFIED_INTENDED_EXECUTION_SURFACE",
+    "exact_runtime_bytes": true,
+    "normal_apt_packages_metadata_present": true,
+    "architecture_all_contents_present": true,
+    "apt_file_present": true,
+    "apt_xapian_index_present": true,
+    "outbound_manpage_enrichment_qualified": true,
+    "hard_zero_spend_qualified": true
+  },
+  "observed_result": {
+    "acceptance_gate_pass": false,
+    "failure_mode": "HARD_VALIDATION_WALL_TIMEOUT",
+    "hard_validation_wall_s": 300,
+    "validator_exit_code": 124,
+    "result_json_present": false,
+    "heldout_oracle_family_recall": null,
+    "heldout_top20_oracle_recall": null,
+    "promotion_authorized": false
+  },
+  "verdict": "VALID_ACCEPTANCE_FAILURE_ON_QUALIFIED_SURFACE__TIME_BUDGET_EXCEEDED_BEFORE_RESULT",
+  "causal_conclusion": "EXACT_EARLIEST_RUNTIME_CAUSE_NOT_YET_ATTRIBUTED__NO_RECALL_CONCLUSION_AUTHORIZED",
+  "repair_authorization": "NO_SECOND_REPAIR_AUTHORIZED_FROM_THIS_PROBE__ONE_GENERIC_REPAIR_BUDGET_ALREADY_USED",
+  "next_action": "NO_MUTATION_CAUSAL_ATTRIBUTION_OF_TIMEOUT__COMPARE_DELETE_REPLACE_REUSE_BYPASS__DO_NOT_PATCH_AGAIN_UNDER_THIS_PROBE",
+  "prohibitions": [
+    "NO_REPLAY_OR_REEXECUTION_OF_GATE_005",
+    "NO_PROMOTION_OR_MERGE_FROM_FAILED_GATE",
+    "NO_SECOND_RUNTIME_REPAIR_UNDER_THIS_PROBE",
+    "NO_PACKAGE_HINTS_OR_TASK_SPECIFIC_LITERALS",
+    "NO_TIMEOUT_INCREASE",
+    "NO_BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE",
+    "NO_USER_LAPTOP"
+  ],
+  "promotion_authorized": false,
+  "repair_merge_authorized": false
+}
