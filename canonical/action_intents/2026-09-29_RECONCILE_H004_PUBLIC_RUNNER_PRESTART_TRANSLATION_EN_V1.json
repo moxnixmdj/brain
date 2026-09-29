@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-PUBLIC-RUNNER-PRESTART-TRANSLATION-EN-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36599056622_ATTEMPT_1_FAILED_PRESTART_TRANSLATION_EN_METADATA_MISSING__NO_EXECUTION",
+  "action_kind": "PRESTART_CARRIER_METADATA_SURFACE_RECONCILIATION_AND_MINIMAL_APT_LANGUAGE_FIX",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36599056622_ATTEMPT_1_FAILED_PRESTART_TRANSLATION_EN_METADATA_MISSING__NO_EXECUTION::PRESTART_CARRIER_METADATA_SURFACE_RECONCILIATION_AND_MINIMAL_APT_LANGUAGE_FIX",
+  "expected_parent_frontier_change": "Record that public GitHub Actions lane 002 run 36599056622 attempt 1 passed one-shot identity and Debian package/Contents installation but failed before START because Translation-en metadata was absent under the container's default APT language policy. H004 remains unspent. Authorize lane 003 with a new workflow and ARM filename, changing only carrier APT configuration to explicitly enable English translations before apt-get update.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "run 36599056622 attempt 1 exact ARM commit 8b74201e58c80d6998433de2c8dcab8211a07f67",
+    "one-shot identity guard PASS",
+    "faithful Debian surface install step PASS",
+    "apt-file update fetched trixie/main amd64 Contents and all Contents",
+    "preflight exact terminal predicate TRANSLATION_EN_METADATA_MISSING",
+    "H004 execution step skipped and no START/RESULT emitted"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile this carrier-only failure first. No rerun of lanes 001 or 002. New lane must use a new workflow/ARM filename and alter only carrier APT language configuration; runtime/evaluator/sealed payload remain exact.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
