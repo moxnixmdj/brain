@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_H004_PUBLIC_CARRIER_DIAGNOSTIC_PASS_V1",
+  "evidence_id": "H004-PUBLIC-CARRIER-DIAGNOSTIC-PASS-20260929-V1",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "diagnostic_workflow_blob": "1ff796dd8f0c01ce17bd22d40002b2a16702b6bf",
+  "diagnostic_arm_commit": "cf708ba458272c9dbbcfa736769f7516148e357c",
+  "workflow_run_id": 36600121869,
+  "job_id": 109515026200,
+  "conclusion": "PASS",
+  "observed": {
+    "sealed_files": 22,
+    "packages_metadata": true,
+    "translation_en": true,
+    "package_tags": true,
+    "contents_all": true,
+    "contents_arch": true,
+    "architecture": "amd64",
+    "contents_targets": 4,
+    "xapian_import": true,
+    "full_metadata_xapian_route": true,
+    "contents_direct_stream": true,
+    "verifier_import_closure": true,
+    "candidate_count": 12,
+    "qr_encode_decode_smoke": "PASS_EXACT"
+  },
+  "qr_smoke": {
+    "producer": "qrencode",
+    "decoder": "zbarimg",
+    "expected": "PROJECT-BRAIN-CARRIER-DIAGNOSTIC-001",
+    "observed": "PROJECT-BRAIN-CARRIER-DIAGNOSTIC-001",
+    "note": "Nonfatal zbar D-Bus connection warning occurred; decode output still matched exactly."
+  },
+  "qualification": "PUBLIC_GITHUB_ACTIONS_DEBIAN_TRIXIE_CARRIER_QUALIFIED",
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "final_lane_requirements": [
+    "persistent late-loading APT Acquire::Languages=en policy",
+    "no preinstall of candidate producer package",
+    "same 22 sealed blobs exact",
+    "same full metadata/Xapian/Contents/Tags pre-START verification",
+    "same provider-neutral hard-zero executor attestation",
+    "new ARM004 creation commit only",
+    "no rerun of prior lanes",
+    "first H004 START permanently spends gate"
+  ],
+  "incremental_spend_usd": 0,
+  "required_next_action": "STAGE_FINAL_PUBLIC_H004_ONE_SHOT_V4_FROM_QUALIFIED_CARRIER_RECIPE__NO_CANDIDATE_PRODUCER_PREINSTALL__CREATE_ARM004_LAST__EXECUTE_EXACTLY_ONCE__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_NO_REPLAY"
+}
