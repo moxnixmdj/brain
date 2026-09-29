@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_005_PASS_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED_PENDING_MERGE",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 89,
+  "source_head": "48c53d0f1b2474c334fcfbb87bd6946c1dc850bb",
+  "candidate_route": "DEBIAN_TRANSLATION_EN_PLUS_PACKAGE_TAGS_PLUS_XAPIAN_BM25_PLUS_DIRECT_APT_CONTENTS_EXECUTABLE_OWNERSHIP",
+  "exact_tested_blobs": {
+    "runtime": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "focused_test": "4e8c43ddf32a10947462e36198ec957c2f23094f",
+    "preserved_test": "0b9bcd25cf4cea2ad1a410efd43f8f8b2f618f0a",
+    "heldout_manifest": "82854b92b2253ba607ff5c521102c50ae49fd47d",
+    "heldout_runner": "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
+  },
+  "pre_spend_carrier_failure": {
+    "deployment_id": "1976be34-01fb-4091-a7a4-8bb2ffb16ccb",
+    "classification": "CARRIER_QUOTING_FAILURE_BEFORE_EXECUTION_START__DID_NOT_SPEND_GATE",
+    "exact_blobs_verified": true,
+    "generic_tests_passed": 8,
+    "execution_start_observed": false
+  },
+  "authoritative_execution": {
+    "provider": "Railway",
+    "service_id": "d76be0c4-52b7-42c6-b389-4fd472c68c35",
+    "deployment_id": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "execution_start": "2026-09-29T02:52:21.958374122Z",
+    "effective_fresh_execution_count": 1,
+    "runner_rc": 0,
+    "faithful_surface": {
+      "translation_en_indexes": 3,
+      "contents_amd64_indexes": 2,
+      "contents_all_indexes": 2,
+      "xapian_smoke_check": "PASS"
+    },
+    "acceptance_gate_pass": true,
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "hard_validation_wall_s": 120,
+    "heldout_results": [
+      {
+        "effect_family": "YAML_PROCESS",
+        "oracle": "yq",
+        "oracle_found": true,
+        "oracle_rank": 4
+      },
+      {
+        "effect_family": "PARALLEL_JOBS",
+        "oracle": "parallel",
+        "oracle_found": true,
+        "oracle_rank": 1
+      },
+      {
+        "effect_family": "DIRECTORY_SYNC",
+        "oracle": "rsync",
+        "oracle_found": true,
+        "oracle_rank": 12
+      },
+      {
+        "effect_family": "COMMAND_BENCHMARK",
+        "oracle": "hyperfine",
+        "oracle_found": true,
+        "oracle_rank": 1
+      }
+    ],
+    "package_hints_used": false,
+    "candidate_packages_installed": false,
+    "candidate_binaries_executed": false,
+    "validator_runtime_mutation": false
+  },
+  "duplicate_execution_incident": {
+    "classification": "POST_SPEND_DUPLICATE_REPLAYS_EXCLUDED_FROM_ACCEPTANCE_EVIDENCE",
+    "first_spend_remains_authoritative": true,
+    "excluded_deployments": [
+      {
+        "deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
+        "execution_start": "2026-09-29T02:52:52.828526746Z",
+        "reason": "CREATED_AFTER_AUTHORITATIVE_FIRST_SPEND__FORBIDDEN_REDEPLOY"
+      },
+      {
+        "deployment_id": "a1a4464d-4278-4d2c-be44-0a8436158d82",
+        "execution_start_observed": true,
+        "reason": "CREATED_AFTER_AUTHORITATIVE_FIRST_SPEND__POST_SPEND_RESULT_EXCLUDED"
+      }
+    ],
+    "post_spend_announced_deployment": {
+      "deployment_id": "a3c6810c-4f0e-4756-a562-de23c6397401",
+      "treatment": "INADMISSIBLE_IF_EXECUTED__NOT_NEEDED_FOR_ACCEPTANCE"
+    },
+    "rule": "NEVER_AVERAGE_SELECT_OR_COMBINE_POST_SPEND_RESULTS_WITH_FIRST_AUTHORITATIVE_EXECUTION"
+  },
+  "causal_reconciliation": [
+    "The first admissible fresh execution passed the precommitted recall and wall-clock gates on exact PR89 bytes.",
+    "The full Debian metadata plus Xapian plus direct Contents route removed the previously observed repeated-process and remote-manpage-fanout wall-clock failure class on fresh unseen families.",
+    "All post-spend starts are coordination violations and are excluded; they do not alter the first precommitted result.",
+    "The route is a verified candidate match but is not yet inherited into canonical main, so capability obsolescence is not claimed yet."
+  ],
+  "parent_capability_state": "CANDIDATE_MATCH__VERIFIED_ROUTE_PENDING_INHERITANCE",
+  "heldout_005_state": "SPENT__CLOSED__NEVER_REPLAY",
+  "promotion_authorized": false,
+  "promotion_condition": "THIS_RECONCILIATION_MERGED__THEN_EXACT_TESTED_PR89_ROUTE_PASSES_NORMAL_GUARDS_AND_IS_INHERITED",
+  "next_required_action": "INHERIT_EXACT_TESTED_PR89_ROUTE__THEN_RECOMPUTE_HIGHEST_LEVERAGE_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "user_laptop_used": false,
+  "evidence_refs": {
+    "pr89_terminal_reconciliation_comment_id": 5882736996,
+    "pr89_spend_barrier_comment_id": 5882724809,
+    "pr89_collision_barrier_comment_id": 5882727634
+  }
+}
