@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_H004_READONLY_CARRIER_QUALIFICATION_V1",
+  "qualification_id": "H004-CHATGPT-LINUX-READONLY-CARRIER-QUALIFICATION-20260929-V1",
+  "canonical_base_sha": "c37a4e479b4cc571d74535790696c9f4d17dc32f",
+  "action_intent": "canonical/action_intents/2026-09-29_RECONCILE_H004_CHATGPT_LINUX_CARRIER_READONLY_QUALIFICATION_V1.json",
+  "snapshot_text_sha256": "34947e62bee9248ac311c10979b79c25b6a3d5a1769523b816cc0d48cd5b13c3",
+  "evidence_authority": "CARRIER_QUALIFICATION_ONLY__NOT_CAPABILITY_VERDICT",
+  "observation_mode": "READ_ONLY__NO_PACKAGE_MANAGER_MUTATION__NO_SOURCE_TRANSPORT__NO_HELDOUT_EXECUTION",
+  "carrier": {
+    "class": "CHATGPT_BUILTIN_LINUX_CONTAINER",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "effective_uid": 0,
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "observed_read_only_surface": {
+    "apt_present": true,
+    "sudo_noninteractive_available": true,
+    "apt_lists_regular_files": 0,
+    "apt_file_present": false,
+    "python_xapian_present": false,
+    "zbarimg_present": false,
+    "deb_debian_org_dns_resolved": false,
+    "debian_https_resolution_available": false
+  },
+  "first_required_surface_failure": {
+    "predicate": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
+    "result": "FAIL",
+    "evidence": "/var/lib/apt/lists contained zero regular files in the bound read-only snapshot."
+  },
+  "result": {
+    "carrier_admissible_for_h004": false,
+    "classification": "BUILTIN_CHATGPT_LINUX_CARRIER_REJECTED_BEFORE_HELDOUT_START",
+    "capability_runtime_failure": false,
+    "heldout_004_freshness": "UNSPENT",
+    "heldout_004_execution_count": 0
+  },
+  "excluded_history": {
+    "quarantined_pr": 178,
+    "excluded_action": "apt-get update attempt recorded after PR178 guard",
+    "reason": "Exceeded PR178 read-only precommitted scope; not used as qualification evidence."
+  },
+  "reusable_source_fidelity_mechanisms": [
+    "PR20 exact Git-blob reconstruction",
+    "PR35 content-addressed materialization",
+    "PR45 content-addressed execution"
+  ],
+  "required_next_action": "QUALIFY_ACCOUNTLESS_CARDLESS_HARD_ZERO_CONNECTED_REMOTE_LINUX__PREFER_RAILWAY_ANONYMOUS_VM__REQUIRE_EXACT_CONTENT_ADDRESSED_SOURCE_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START",
+  "prohibitions": [
+    "NO_HELDOUT_004_START",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_APT_MUTATION_IN_THIS_RECONCILIATION",
+    "NO_SOURCE_TRANSPORT_IN_THIS_RECONCILIATION",
+    "NO_SPRITE",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_SPEND"
+  ]
+}
