@@ -342,7 +342,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-29T23:03:00Z",
+        "checked_at_utc": "2026-09-29T23:04:30Z",
         "max_age_hours": 2,
         "selected_route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
         "status": "READY",
@@ -356,9 +356,10 @@
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T22:04:38Z",
+            "observed_at_utc": "2026-09-29T22:58:49Z",
             "evidence": [
-              "DIRECT_PROBE: verification-capsule-runner run 36637357927 acquired a standard hosted runner and executed checkout/setup steps.",
+              "DIRECT_PROBE: verification-capsule-runner run 36642601675 acquired a standard hosted runner and completed exact ASTRA bound-capability integration for this candidate.",
+              "DIRECT_PROBE: independent component run 36642428325 acquired a standard hosted runner and verified the exact producer/verifier bytes.",
               "OFFICIAL_PRIMARY: GitHub documents standard hosted runners for public repositories as free and unlimited."
             ],
             "evidence_classes": [
