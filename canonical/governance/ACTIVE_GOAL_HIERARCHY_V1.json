@@ -119,5 +119,32 @@
     "hard_validation_wall_s": 600,
     "second_repair_precedes_freeze": false,
     "execution_count": 0
+  },
+  "antidrift_interlock": {
+    "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
+    "mode": "FAIL_CLOSED",
+    "deny_unknown_authority": true,
+    "require_exact_hierarchy_hash": true,
+    "require_task_binding": true,
+    "enforce_astra_runtime_entrypoint": true,
+    "enforce_action_dispatch": true,
+    "enforce_adapter_dispatch": true,
+    "shell_policy": "EXACT_SHA256_ALLOWLIST_ONLY",
+    "denied_action_classes": [
+      "PROVIDER_SEARCH",
+      "USER_LAPTOP_EXECUTION",
+      "HELDOUT_PREVIEW_OR_SIMULATION",
+      "SECOND_RUNTIME_REPAIR_BEFORE_RECONCILIATION",
+      "MERGE_OR_PROMOTION_BEFORE_RECONCILIATION",
+      "BILLABLE_OR_UNVERIFIED_METERED_INFRASTRUCTURE",
+      "RETRY_UNCHANGED_FAILURE_SURFACE"
+    ],
+    "binding_fields": [
+      "active_capability_target",
+      "current_parent_blocker",
+      "next_required_action_class",
+      "active_probe"
+    ],
+    "policy_goal": "No runnable task or runtime action may execute unless content-bound to the exact current canonical frontier and explicitly allowlisted."
   }
 }
