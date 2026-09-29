@@ -4,19 +4,18 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "TOOL-DISCOVERY-LATENCY-CAUSAL-FRONTIER-006",
-  "probe_state": "GATE_005_RECONCILED__STRUCTURAL_LATENCY_BUDGET_MISMATCH_ATTRIBUTED__NEW_CAUSAL_FRONTIER_NOT_YET_REPAIRED",
-  "current_parent_blocker": "TOOL_DISCOVERY_PIPELINE_HAS_REDUNDANT_SERIAL_EVIDENCE_ACQUISITION_AND_STACKED_PER_CALL_TIMEOUTS_WITHOUT_ONE_END_TO_END_BUDGET__300S_GATE_EXCEEDED",
-  "next_required_action_class": "FREEZE_NEW_UNSEEN_LATENCY_AND_RECALL_GATE_BEFORE_ANY_RUNTIME_MUTATION__THEN_FIRST_PRINCIPLES_DELETE_REPLACE_REUSE_BYPASS_SELECTION__NO_PATCH_YET",
+  "active_probe": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+  "probe_state": "HELDOUT_006_FROZEN_UNSPENT__ONE_DELETION_FIRST_LATENCY_REPAIR_AUTHORIZED_NOT_YET_IMPLEMENTED",
+  "current_parent_blocker": "TOOL_DISCOVERY_COMMON_PATH_PERFORMS_EXPENSIVE_EXECUTABLE_AND_REMOTE_EVIDENCE_ACQUISITION_BEFORE_PACKAGE_SELECTION__HARD_WALL_EXCEEDED",
+  "next_required_action_class": "IMPLEMENT_EXACTLY_ONE_GENERIC_DELETION_FIRST_FAST_DISCOVERY_REPAIR__SYNTHETIC_VERIFY_WITHOUT_006_CASES__FREEZE_BYTES__THEN_QUALIFY_AND_EXECUTE_006_ONCE",
   "forbidden_local_frontier": "REPLAY_003_004_OR_005__SECOND_REPAIR_UNDER_005_PROBE__RUNTIME_MUTATION_BEFORE_NEW_UNSEEN_GATE_FREEZE_AND_NEW_CAUSAL_FRONTIER_AUTHORITY__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE__LAPTOP_EXECUTION__PROMOTION_FROM_FAILED_GATE",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
-    "prior_probe_repairs_used": 1,
-    "prior_probe_max_repairs": 1,
-    "new_causal_frontier_repair_authorized": false,
+    "repairs_used_on_active_probe": 0,
+    "max_repairs_from_single_probe": 1,
     "same_probe_replays_used": 0,
     "max_same_probe_replays": 0,
-    "new_unseen_gate_required_before_any_mutation": true
+    "first_execution_required": true
   },
   "quarantined_probes": [
     {
@@ -27,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005.json",
+  "active_probe_manifest": "canonical/experiments/TOOL_DISCOVERY_LATENCY_RECALL_HELDOUT_VALIDATION_006.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -109,45 +108,19 @@
     "new_held_out_gate_required": true
   },
   "new_held_out_gate": {
-    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
+    "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
     "frozen_date": "2026-09-29",
-    "manifest_path": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005.json",
-    "runner_path": "canonical/experiments/run_semantic_package_discovery_clean_heldout_validation_005.py",
-    "contamination_receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_004_LITERAL_CONTAMINATION_AND_005_CLEAN_FREEZE_V1.json",
-    "cases": 3,
+    "manifest_path": "canonical/experiments/TOOL_DISCOVERY_LATENCY_RECALL_HELDOUT_VALIDATION_006.json",
+    "runner_path": "canonical/experiments/run_tool_discovery_latency_recall_heldout_validation_006.py",
+    "source_precheck_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_006_SOURCE_PRECHECK_V1.json",
+    "cases": 4,
     "oracle_family_recall_min": 0.75,
     "top20_oracle_recall_min": 0.75,
-    "effective_minimum_cases_passing": 3,
     "hard_validation_wall_s": 300,
-    "execution_count": 1,
-    "freshness": "SPENT",
-    "repair_runtime_blob_sha": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
-    "repair_commit_sha": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
+    "execution_count": 0,
+    "freshness": "UNSPENT",
     "replay_authorized": false,
-    "promotion_authorized": false,
-    "execution_surface_qualification_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_005_EXECUTION_SURFACE_QUALIFICATION_V1.json",
-    "execution_lease_path": "canonical/execution_leases/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005_EXECUTION_LEASE_V1.json",
-    "execution_started_at": "2026-09-29T02:43:38.437956983Z",
-    "execution_surface": {
-      "provider": "Railway",
-      "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
-      "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
-      "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
-      "deployment_id": "2e158cd3-4643-4c61-bbbc-b803be2a277e"
-    },
-    "execution_boundary_evidence": {
-      "runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
-      "runner_blob": "3cdcbd427676f6b1324d1b1c7e11cec805211327",
-      "manifest_blob": "312a2dac7ec2d0acf0def049d36533729cd80103",
-      "apt_packages_index_count": 3,
-      "contents_all_index_count": 2,
-      "contents_total_index_count": 4,
-      "surface_requalified": "PASS",
-      "execution_start_marker": "PB_HELDOUT_005_EXECUTION_START=1"
-    },
-    "terminal_result_state": "RECONCILED__QUALIFIED_SURFACE_HARD_WALL_TIMEOUT",
-    "terminal_capture_path": "canonical/astra_runtime/evidence/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005__TERMINAL_CAPTURE.json",
-    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005_RECONCILIATION_V1.json"
+    "promotion_authorized": false
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -239,5 +212,10 @@
     "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_005_TIMEOUT_CAUSAL_ATTRIBUTION_AND_ROUTE_COMPARISON_V1.json",
     "conclusion": "PROVEN_STRUCTURAL_LATENCY_BUDGET_MISMATCH__DELETE_REDUNDANT_EVIDENCE_PATHS_BEFORE_CONSIDERING_ANY_NEW_REPAIR",
     "runtime_mutated": false
+  },
+  "latency_frontier_repair_authorization": {
+    "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_LATENCY_FRONTIER_006_REPAIR_AUTHORIZATION_V1.json",
+    "repair_id": "SEMANTIC_INDEX_FAST_DISCOVERY_DEFER_EXPENSIVE_BINDING_V1",
+    "authorized": true
   }
 }
