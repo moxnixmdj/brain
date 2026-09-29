@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Replace repeated regex index scans and blanket remote manpage fanout with one batched literal multi-pattern executable-evidence acquisition pass plus bounded progressive cached enrichment, preserving supplier recall on fresh unseen work.",
-    "selection_metric": "FRESH_UNSEEN_VIABLE_SUPPLIER_TOP_K_RECALL_AND_ROLE_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json",
-    "repair_status": "ONE_GENERIC_BATCHED_LITERAL_ACQUISITION_REPAIR_AUTHORIZED",
-    "prohibition": "NO_PER_TERM_REGEX_APT_FILE_LOOPS__NO_UNBOUNDED_MANPAGE_FANOUT__NO_TIMEOUT_INCREASE__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__FRESH_UNSEEN_GATE_REQUIRED"
+    "objective": "Recompute the highest-leverage unresolved sub-capability after inheriting the verified Debian/APT CLI discovery route; do not equate the narrow discovery win with obsolescence of the broader tool-selection-and-learning family.",
+    "selection_metric": "PARENT_CAPABILITY_DISTANCE_REDUCTION_PER_WALL_CLOCK_WITH_CORRECTNESS_FIRST_AND_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "NONE_SELECTED__POST_HELDOUT_005_RECONCILIATION_REQUIRES_FRESH_FRONTIER_RECOMPUTATION",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "repair_status": "VERIFIED_ROUTE_INHERITED__FRONTIER_RECOMPUTATION_REQUIRED",
+    "prohibition": "NO_HELDOUT_005_REPLAY__NO_POST_SPEND_RESULT_USE__NO_TASK_SPECIFIC_TUNING__NO_SECOND_REPAIR_BEFORE_FRESH_FRONTIER_SELECTION"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -153,5 +153,23 @@
       36486527162
     ],
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+  },
+  "debian_full_metadata_xapian_route_v1": {
+    "capability_id": "DEBIAN_APT_CLI_TOOL_DISCOVERY_V1",
+    "parent_family": "TOOL_SELECTION_AND_TOOL_LEARNING",
+    "status": "CANDIDATE_MATCH",
+    "scope": "Discover viable Debian-family CLI supplier packages from unseen capability descriptions using repository metadata only, with no package hints, installs, or candidate execution.",
+    "route": "Debian Translation-en joined by Description-md5 + Package Tags + python3-xapian BM25/English stemming + one streaming APT Contents ownership pass",
+    "authoritative_validation": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "incremental_spend_usd": 0,
+    "inheritance_path": "canonical/runtime/capability_discovery.py",
+    "runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "obsolescence_status": "CANDIDATE_MATCH",
+    "residual_gap": "Direct equal-or-better frontier-model comparison for the broader tool-selection-and-learning family is not established; non-Debian ecosystems, tool learning after discovery, composition, execution, and adaptation remain outside this verified scope.",
+    "replay_policy": "HELDOUT_005_PERMANENTLY_SPENT__NO_REPLAY"
   }
 }
