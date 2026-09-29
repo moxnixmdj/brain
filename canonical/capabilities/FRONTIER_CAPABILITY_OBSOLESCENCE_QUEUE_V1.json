@@ -70,7 +70,7 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Connect the verified Debian full-metadata/Xapian/direct-Contents supplier output to the existing autonomous APT probe → contract-learn → execute → independently-verify loop through a provider-neutral candidate contract.",
+    "objective": "Connect the verified Debian full-metadata/Xapian/direct-Contents supplier output to the existing autonomous APT probe, contract-learning, execution, and independent-verification loop through a provider-neutral candidate contract.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
     "exact_blocker": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__VERIFIED_XAPIAN_APT_CANDIDATES_CANNOT_ENTER_EXISTING_AUTONOMOUS_APT_LEARNING_LOOP",
     "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
