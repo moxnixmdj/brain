@@ -1,0 +1,319 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-CHEMISTRY-CITRIC-ACID-BICARBONATE-STOICHIOMETRY-REAL-TASK-20260930-002",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either complete the second materially different, runtime-provenance-verified zero-model parent Task B from a genuinely plain scientific objective and unlock separate parent adjudication, or localize the first causal gap that prevents open-ended objective-to-research execution.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current exact main 0292dc91d7b2354beede3e530256054330fb94d8 after promotion-firewall/runtime-provenance merge",
+    "one clean model-independent parent Task A is verified; exactly one materially different Task B remains",
+    "demography, astronomy, geophysics, and biophysics replays are prohibited",
+    "PR304 chemistry mass-balance task was scope-insufficient because it prewired source URLs, paths, formula, and threshold; it receives zero parent-proof authority",
+    "existing model-independent grounding, composition, typed scalar expression, numeric relation, and decision-synthesis capabilities remain inherited",
+    "public GitHub Actions carrier executed exact Brain runtime successfully on run 36669136068 at zero incremental spend",
+    "official chemistry source classes are currently available through PubChem PUG REST and NIST Chemistry WebBook, but this task does not mandate either source or inject a source/tool plan into the producer"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze the plain objective before inspecting task-answer values, execute it exactly once on exact current Brain runtime bytes using the zero-spend public carrier, require runtime-derived model_dependency_count=0, stop on the first causal gap, never replay the spent task, and award no parent credit unless an independent post-producer oracle verifies the complete scientific result.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Establish or falsify genuine model-independent open-ended scientific research transfer by giving the inherited runtime a fresh chemistry objective without a prewritten research plan.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Complete the sole remaining cross-domain Task B obligation only if the runtime itself selects and composes the research route from the plain scientific objective.",
+      "proxy_goals_deleted": [
+        "another pre-decomposed benchmark",
+        "another source-wired task",
+        "manual chemistry answer",
+        "task-specific runtime patch",
+        "frontier-model planning"
+      ],
+      "surviving_necessity": "The parent minimum acquisition contract still requires one materially different zero-model Task B, and PR304 showed that a prewired workflow cannot establish open-ended capability."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "current deterministic controller/compiler and verified bound capability registry"
+      ],
+      "external_existing_routes_checked": [
+        "PubChem PUG REST official programmatic chemistry data surface",
+        "NIST Chemistry WebBook official public chemistry reference surface",
+        "frontier-model cognition excluded by the acquisition contract",
+        "one-off hand-coded chemistry calculation rejected as parent-capability proof"
+      ],
+      "capability_work_deleted": [
+        "no new framework before evidence",
+        "no source URL injected into task",
+        "no task-specific compiler rule",
+        "no model route",
+        "no replay of PR304"
+      ],
+      "surviving_gap": "Unknown until the frozen plain-objective task is attempted on the inherited runtime; stop at the first observed causal failure."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent-level evidence obligation; the task is intentionally constructed to expose whether objective-to-research-plan selection is truly inherited rather than supplied by the benchmark.",
+      "delete_bypass_substitute_options": [
+        "reuse the full inherited runtime first",
+        "keep source and tool choice inside the producer",
+        "reject manual answer as proof",
+        "stop on first causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PLAIN_OBJECTIVE_CHEMISTRY_TASK",
+        "HAND_CODE_ONE_OFF_CHEMISTRY_SOLVER",
+        "USE_FRONTIER_MODEL_RESEARCH_PLANNER"
+      ],
+      "losing_routes_reason": "The inherited route is the only route that can directly satisfy Task B now. A one-off solver proves only the instance, while model cognition invalidates the zero-model dependency-removal evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Direct fresh-task execution is required. On producer success, an independent non-producer oracle will separately choose authoritative chemistry evidence, balance the reaction, and recompute the theoretical mass without importing producer modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "prewired chemistry benchmark variants",
+        "further child capability polishing before this parent task resolves"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "authoritative evidence acquisition",
+        "plain-goal grounding",
+        "capability composition",
+        "typed scalar arithmetic",
+        "numeric relations",
+        "decision synthesis",
+        "runtime cognition provenance"
+      ],
+      "fresh_reuse_plan": "If Task B passes, immediately adjudicate the parent minimum contract without another benchmark. If it fails, preserve only the first causal gap and use a fresh materially different task after any generic repair."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current capability inventory",
+        "reused current public zero-spend carrier",
+        "reused two independent official chemistry source classes only as route-availability evidence",
+        "discarded PR304 as scope-insufficient parent proof"
+      ],
+      "search_stop_decision": "The next information-bearing event is direct execution of a task that withholds the research plan; more benchmark design or child polishing cannot answer whether the parent capability is real.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and public carrier were refreshed after PR303 merged; official source classes were rechecked on 2026-09-30 and no unresolved route challenger can satisfy Task B faster without violating the zero-model proof contract."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PLAIN_OBJECTIVE_CHEMISTRY_TASK",
+      "HAND_CODE_ONE_OFF_CHEMISTRY_SOLVER",
+      "USE_FRONTIER_MODEL_RESEARCH_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_SOURCE_PLAN",
+      "HAND_CODED_INSTANCE_AS_CAPABILITY_PROOF",
+      "FRONTIER_MODEL_COGNITION",
+      "OLD_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PLAIN_OBJECTIVE_CHEMISTRY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It directly spends the only remaining parent proof obligation against the already-acquired zero-model runtime, with no implementation unless real execution exposes a causal gap, zero incremental spend, and independent verification if successful.",
+    "expected_parent_level_state_change": "Either complete the second materially different, runtime-provenance-verified zero-model parent Task B from a genuinely plain scientific objective and unlock separate parent adjudication, or localize the first causal gap that prevents open-ended objective-to-research execution.",
+    "stop_condition": "Freeze the plain objective before inspecting task-answer values, execute it exactly once on exact current Brain runtime bytes using the zero-spend public carrier, require runtime-derived model_dependency_count=0, stop on the first causal gap, never replay the spent task, and award no parent credit unless an independent post-producer oracle verifies the complete scientific result.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:34:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PLAIN_OBJECTIVE_CHEMISTRY_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main 0292dc91d7b2354beede3e530256054330fb94d8; five acquired model-independent subcapabilities; PR303 runtime provenance firewall merged"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "PubChem PUG REST official documentation verified current on 2026-09-30",
+          "NIST Chemistry WebBook SRD 69 official public chemistry reference verified current on 2026-09-30"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Current verified Brain registry already binds SymPy numeric expression and jq structured numeric relation; no new package supplier selected before task evidence"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Broad-web results are discovery-only and are not authorized as producer or verifier authority for Task B"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent open-ended chemistry research authoritative evidence stoichiometric reasoning provenance"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "official public chemistry molecular property and reaction data sources"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing Brain inherited research stack versus one-off chemistry solver"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current official PubChem PUG REST and NIST Chemistry WebBook availability"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PLAIN_OBJECTIVE_CHEMISTRY_TASK",
+          "evidence": [
+            "current Brain parent acquisition stack is already verified on one clean real task",
+            "task withholds source URLs, JSON paths, tool names, reaction equation, and numeric answer"
+          ],
+          "qualification_evidence": [
+            "Brain main 0292dc91d7b2354beede3e530256054330fb94d8",
+            "public carrier run 36669136068 executed current inherited runtime class",
+            "official PubChem and NIST chemistry source classes are reachable/public"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the missing parent behavior instead of a proxy.",
+            "CAPABILITY_STRENGTH": "Requires research-route selection, authoritative evidence, chemical reasoning, calculation, provenance, and verification from a plain objective.",
+            "WALL_CLOCK": "No repair or new supplier before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Uses existing exact runtime and established public runner; source choice remains fail-closed.",
+            "VERIFIABILITY": "Success requires an independent non-producer recomputation and provenance audit."
+          }
+        },
+        {
+          "route": "HAND_CODE_ONE_OFF_CHEMISTRY_SOLVER",
+          "evidence": [
+            "Can solve the instance but bypasses the capability under test."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can answer one instance.",
+            "CAPABILITY_STRENGTH": "Does not establish open-ended transfer.",
+            "WALL_CLOCK": "Fast to an answer but not to parent proof.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High only for the frozen instance.",
+            "VERIFIABILITY": "Instance verification cannot substitute for inherited-route evidence."
+          }
+        }
+      ],
+      "negative_search_summary": "No route dominates direct inherited-stack execution for time-to-valid parent proof while preserving zero model dependency and withholding a task-specific research plan.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PLAIN_OBJECTIVE_CHEMISTRY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:34:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PLAIN_OBJECTIVE_CHEMISTRY_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:30:25Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36669136068 started a public ubuntu-24.04 job and executed the frozen Brain runtime at $0 incremental spend"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_0292dc91d7b2354beede3e530256054330fb94d8",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:33:48Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact current main after PR303 merge"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_OUTBOUND_HTTPS_FROM_GITHUB_ACTIONS",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:30:36Z",
+            "evidence": [
+              "DIRECT_PROBE: public runner run 36669136068 reached live PubChem during the chemistry attempt; earlier clean Task A reached World Bank"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
