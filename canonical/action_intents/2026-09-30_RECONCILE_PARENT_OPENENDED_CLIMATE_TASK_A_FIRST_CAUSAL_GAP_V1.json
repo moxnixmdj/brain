@@ -1,0 +1,161 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PARENT-OPENENDED-TASK-A-FIRST-SPEND-COMPILE-GAP-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile the authoritative first-spend open-ended Task A failure, mark the climate objective permanently spent, increase only residual_gaps_localized by one, and replace PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A with MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING; next action ACQUIRE_MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING__FRESH_CHILD_QUALIFICATION__NO_PARENT_TASK_REPLAY. No runtime repair or parent promotion is authorized.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical Brain main ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "authoritative semantic first-spend public runner run 36669918546 / job 109742518213",
+    "artifact 11077637577 digest sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "first-spend task PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001 blob 61d7334c1c866027260025d0d147d16ee9e0cb02",
+    "first causal failure GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH before source/tool discovery",
+    "later run 36670516407 and subsequent duplicate climate lanes quarantined as replay/duplicate contamination",
+    "model planner disabled; model_dependency_count=0; incremental spend $0",
+    "same climate objective replay forbidden"
+  ],
+  "evidence_presence_classification": "EXISTING_IMMUTABLE_FIRST_SPEND_TERMINAL_EVIDENCE_REQUIRES_ATOMIC_RECONCILIATION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after all canonical mirrors agree on the localized blocker and next action; preserve later duplicate runs as zero-authority contamination; perform no runtime repair or parent-task execution in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "real_outcome": "Atomically convert the authoritative first-spend open-ended Task A failure into the exact current parent residual without replay, repair, or promotion.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Atomically convert the authoritative first-spend open-ended Task A failure into the exact current parent residual without replay, repair, or promotion.",
+      "proxy_goals_deleted": [
+        "replay climate",
+        "use later duplicate receipt as authority",
+        "repair runtime before reconciliation",
+        "promote parent from failed task"
+      ],
+      "surviving_necessity": "Make all canonical mirrors agree on the exact first causal compile-stage semantic-planning gap."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current parent target record",
+        "current goal compiler",
+        "authoritative first-spend terminal artifact",
+        "later duplicate/replay receipts for quarantine only"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions first-spend run 36669918546 and artifact 11077637577"
+      ],
+      "capability_work_deleted": [
+        "no runtime mutation",
+        "no new execution",
+        "no task replay",
+        "no model route",
+        "no capability promotion"
+      ],
+      "surviving_gap": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic front-edge failure: the broad natural-language research objective cannot be transformed into a verified research plan/bound capability route before any source or tool discovery occurs.",
+      "delete_bypass_substitute_options": [
+        "reuse immutable first-spend evidence",
+        "delete later duplicate authority",
+        "defer all repair until mirrors reconcile"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_FIRST_SPEND_RECEIPT_ATOMICALLY",
+        "REPLAY_TASK",
+        "REPAIR_BEFORE_RECONCILIATION"
+      ],
+      "losing_routes_reason": "Replay violates freshness; repair before reconciliation mutates a stale frontier. Atomic zero-execution reconciliation is sufficient.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None. The task failure is direct execution evidence; the reconciliation only preserves its earliest causal boundary."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all climate replay lanes",
+        "broad missing-task blocker",
+        "premature parent promotion"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "first-spend authority",
+        "duplicate quarantine",
+        "causal failure localization"
+      ],
+      "fresh_reuse_plan": "After reconciliation, search/reuse before invention for the semantic planning gap and qualify any repair on fresh child tasks, never the spent climate task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused first-spend artifact",
+        "reused target scope contract",
+        "reused duplicate-contamination audit"
+      ],
+      "search_stop_decision": "No additional discovery can improve the factual reconciliation of an already-spent task; the first-spend receipt directly determines the blocker.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main ca16a72e8e83f5274b04265fe02eb7729451da93, first-spend run 36669918546, and later duplicate receipts were re-read immediately before this mutation."
+    },
+    "routes_considered": [
+      "RECONCILE_FIRST_SPEND_RECEIPT_ATOMICALLY",
+      "REPLAY_TASK",
+      "REPAIR_BEFORE_RECONCILIATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CLIMATE_TASK_REPLAY",
+      "LATER_DUPLICATE_AUTHORITY",
+      "PREMATURE_RUNTIME_REPAIR",
+      "PREMATURE_PARENT_PROMOTION"
+    ],
+    "selected_surviving_route": "RECONCILE_FIRST_SPEND_RECEIPT_ATOMICALLY",
+    "why_selected_route_is_fastest_sufficient": "It requires zero execution and converts direct immutable evidence into one coherent current blocker, enabling the next search/repair decision without stale-state risk.",
+    "expected_parent_level_state_change": "Reconcile the authoritative first-spend open-ended Task A failure, mark the climate objective permanently spent, increase only residual_gaps_localized by one, and replace PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A with MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING; next action ACQUIRE_MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING__FRESH_CHILD_QUALIFICATION__NO_PARENT_TASK_REPLAY. No runtime repair or parent promotion is authorized.",
+    "stop_condition": "Stop after all canonical mirrors agree on the localized blocker and next action; preserve later duplicate runs as zero-authority contamination; perform no runtime repair or parent-task execution in this reconciliation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action only reconciles an already-spent immutable first-causal-gap receipt into canonical mirrors; no executable supplier or route is being selected."
+    },
+    "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93"
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared first-spend run 36669918546 against later run 36670516407 and subsequent duplicate climate lanes; later executions are quarantined and receive zero authority.",
+      "Checked that failure occurred before source/tool discovery, quantitative work, synthesis, or verification; no later stage is blamed or credited."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [],
+    "independent_verification_evidence_paths": [],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": false,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "",
+    "producer_execution_suppliers": [],
+    "independent_verifier_suppliers": []
+  }
+}
