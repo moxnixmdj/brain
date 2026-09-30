@@ -440,5 +440,13 @@
         ]
       }
     }
+  },
+  "trusted_current_base_validation_request": {
+    "requested_against_main_sha": "f7ac78d3b6158a4169039961d6d8d1fa9e9a35d7",
+    "purpose": "Run trusted drift/lease guard against the exact current canonical action before benchmark instruction exposure or expensive execution.",
+    "changes_capability_claim": false,
+    "changes_route": false,
+    "changes_benchmark_task": false,
+    "incremental_spend_usd": 0
   }
 }
