@@ -157,6 +157,24 @@ def _threshold(units,spec,expected_unit):
         raise ValueError("NUMERIC_RELATION_THRESHOLD_UNIT_MISMATCH")
     return value,unit,provenance
 
+def _objective_literal(units,spec,expected_unit):
+    if not isinstance(spec,(int,float,str)) or isinstance(spec,bool):
+        raise ValueError("NUMERIC_RELATION_OBJECTIVE_LITERAL_REQUIRED")
+    m=re.fullmatch(
+        r"\s*([-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?)"
+        r"(?:\s*([%A-Za-zµμ°][A-Za-z0-9µμ°/%^·*._-]{0,31}))?\s*",
+        str(spec),
+    )
+    if not m:
+        raise ValueError("NUMERIC_RELATION_OBJECTIVE_LITERAL_INVALID")
+    value=Decimal(m.group(1).replace(",",""))
+    unit=_canon(m.group(2)).lower().rstrip(".,;:")
+    if not value.is_finite():
+        raise ValueError("NUMERIC_RELATION_OBJECTIVE_LITERAL_NONFINITE")
+    if unit!=expected_unit:
+        raise ValueError("NUMERIC_RELATION_OBJECTIVE_LITERAL_UNIT_MISMATCH")
+    return value,unit
+
 def evaluate(extraction,spec):
     units=_validated_units(extraction)
     if not isinstance(spec,dict):
@@ -249,6 +267,41 @@ def evaluate(extraction,spec):
                 }
                 if threshold_value is not None else None
             ),
+            "output_verified":True,
+        }
+
+    if mode=="NUMERIC_LITERAL_THRESHOLD_RELATION":
+        op=str(spec.get("operator") or "").upper()
+        if op not in {"LT","LTE","GT","GTE","EQ","NE"}:
+            raise ValueError("NUMERIC_LITERAL_THRESHOLD_OPERATOR_INVALID")
+        left=_resolve_numeric(units,spec.get("left"))
+        threshold_value,threshold_unit=_objective_literal(
+            units,spec.get("threshold"),left["unit"]
+        )
+        lv=left["value"]
+        if op=="LT": predicate=lv<threshold_value
+        elif op=="LTE": predicate=lv<=threshold_value
+        elif op=="GT": predicate=lv>threshold_value
+        elif op=="GTE": predicate=lv>=threshold_value
+        elif op=="EQ": predicate=lv==threshold_value
+        else: predicate=lv!=threshold_value
+        public_left={
+            **{k:v for k,v in left.items() if k!="value"},
+            "value":str(left["value"]),
+        }
+        return {
+            **base,
+            "status":"NUMERIC_RELATION_VERIFIED",
+            "relation_scope":"EXPLICIT_DECIMAL_RELATION_OVER_EVIDENCE_LITERAL_AND_OBJECTIVE_LITERAL_THRESHOLD",
+            "operator":op,
+            "predicate":bool(predicate),
+            "left":public_left,
+            "right":None,
+            "threshold":{
+                "value":str(threshold_value),
+                "unit":threshold_unit,
+                "provenance":"OBJECTIVE_LITERAL",
+            },
             "output_verified":True,
         }
 
