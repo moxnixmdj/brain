@@ -1,0 +1,204 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REOPEN-GENERIC-EVIDENCE-EXTRACTION-MODERN-CONTAINER-GAP-20260930-V1",
+  "status": "FALSIFICATION_RECONCILIATION__ZERO_NEW_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "GENERIC_EVIDENCE_EXTRACTOR_MISSES_MODERN_CONTAINER_ONLY_VISIBLE_CONTENT",
+  "action_kind": "TRUTH_FIRST_POST_PROMOTION_FALSIFICATION_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::GENERIC_EVIDENCE_EXTRACTOR_MODERN_CONTAINER_GAP::FALSIFICATION_RECONCILIATION",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR #426 generic extraction promotion",
+    "public qualification run 36680967490",
+    "post-qualification regression commit e984e3196305f9a92750947d692bbae2bef9707b",
+    "objective_evidence_unit_extract.py block-tag parser",
+    "generic extraction registry and parent frontier mirrors"
+  ],
+  "evidence_presence_classification": "PROMOTED_CAPABILITY_FALSIFIED_OUTSIDE_QUALIFIED_PAGE_STRUCTURE",
+  "expected_parent_frontier_change": "Reopen generic evidence extraction as the active blocker, revoke only the generic reusable-capability credit, preserve narrow exact-ROR-bound extraction and all historical qualification evidence, then repair and requalify exact new producer bytes.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "progress_credit": "FALSIFICATION_AND_RESIDUAL_GAP_LOCALIZATION_ONLY",
+  "stop_condition": "All current mirrors and registry stop treating the generic extractor as verified; prior run remains historical evidence; narrow ROR child remains verified; no parent replay; next action is exact-byte parser repair and requalification.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+    "real_outcome": "Make current canonical authority reflect the newly discovered page-structure failure before any further promotion.",
+    "required_capability": "TRUTH_FIRST_POST_PROMOTION_FALSIFICATION_RECONCILIATION_V1",
+    "obs_goal": {
+      "real_outcome": "Revoke unsupported generic coverage while preserving all behavior actually proven by prior runs.",
+      "proxy_goals_deleted": [
+        "delete historical successful qualification evidence",
+        "revoke the narrow ROR child",
+        "replay a spent parent task",
+        "advance to relation evaluation despite earlier extraction failure",
+        "repair runtime before current authority is corrected"
+      ],
+      "surviving_necessity": "A known failing modern-container page shape prevents the current producer from supporting a generic evidence-extraction claim."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current objective_evidence_unit_extract parser",
+        "new regression test_modern_div_main_content_is_visible_evidence",
+        "runner run 36680967490 scope",
+        "current bound capability registry entry"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No new runtime change in reconciliation step",
+        "No new public carrier",
+        "No model cognition"
+      ],
+      "surviving_gap": "Visible evidence located only inside modern container elements can be omitted by the current block-tag parser."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic parser coverage defect, not domain-specific and earlier than claim relation evaluation.",
+      "delete_bypass_substitute_options": [
+        "Ignore regression rejected by claim-scope law.",
+        "Treat prior SQLite/Python pass as universal rejected because it did not cover this structure.",
+        "Preserve capability as verified with limitation rejected because generic parent blocker remains unsatisfied.",
+        "Reopen blocker, repair parser generically, and requalify survives."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Reconcile authority now, then repair parser and requalify",
+        "Hot-patch parser while leaving current generic promotion active",
+        "Ignore modern-container gap"
+      ],
+      "losing_routes_reason": "Reconciliation first prevents known-false authority from remaining live during repair.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Current producer can be deterministically exercised on the new container fixture; generic verified status must remain revoked until exact repaired producer bytes pass that regression and independent fresh live qualification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "active relation-evaluation frontier based on generic extraction closure",
+        "VERIFIED_BOUND_CAPABILITY status for source.evidence.extract.objective_grounded.stdlib"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "After correction merges, repair boundary-aware visible-text segmentation on a new exact base and rerun public non-ROR qualification."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused the post-qualification regression as direct falsification",
+        "Reused prior exact-byte public qualification as historical positive evidence"
+      ],
+      "search_stop_decision": "The failing structure is directly encoded in a deterministic regression; external search cannot negate it.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh during repair lane only if the parser design materially changes beyond boundary segmentation."
+    },
+    "routes_considered": [
+      "RECONCILE_THEN_REPAIR",
+      "HOT_PATCH_WITH_FALSE_PROMOTION_LIVE",
+      "IGNORE_FALSIFICATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RELATION_FRONTIER_WHILE_EXTRACTION_GENERICITY_FALSE",
+      "PARENT_REPLAY"
+    ],
+    "selected_surviving_route": "RECONCILE_THEN_REPAIR",
+    "why_selected_route_is_fastest_sufficient": "The correction is metadata/authority only and can merge immediately from exact current base, after which the repair lane starts from a truthful state.",
+    "expected_parent_level_state_change": "Generic extraction becomes active blocker again; generic reusable-capability credit is revoked; narrow verified extraction remains.",
+    "stop_condition": "Registry and all frontier mirrors agree the generic capability is reopened and next action is repair/requalification.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T07:03:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "PROMOTED_GENERIC_EXTRACTOR_WITH_KNOWN_CONTAINER_GAP",
+      "source_classes_checked": [
+        "BRAIN_RUNTIME",
+        "BRAIN_REGRESSION",
+        "PUBLIC_QUALIFICATION_HISTORY"
+      ],
+      "source_evidence": {
+        "BRAIN_RUNTIME": [
+          "objective_evidence_unit_extract original block parser"
+        ],
+        "BRAIN_REGRESSION": [
+          "e984e319 modern-container regression"
+        ],
+        "PUBLIC_QUALIFICATION_HISTORY": [
+          "run 36680967490 remains valid for its exact old bytes and tested page structures only"
+        ]
+      },
+      "challenger_routes": [
+        {
+          "route": "RECONCILE_THEN_REPAIR",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Restores truth immediately",
+            "CAPABILITY_STRENGTH": "Preserves proven narrow behavior",
+            "WALL_CLOCK": "Minimal",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Deterministic",
+            "VERIFIABILITY": "Direct current-code regression"
+          }
+        }
+      ],
+      "negative_search_summary": "No evidence supports retaining generic verified status after a deterministic uncovered structure was identified.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RECONCILE_THEN_REPAIR",
+      "refresh_triggers": [
+        "AFTER_CORRECTION_MERGE",
+        "BEFORE_REPROMOTION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:03:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RECONCILE_THEN_REPAIR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CANONICAL_GITHUB_WRITE_PATH",
+            "kind": "CONTROL_PLANE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:03:00Z",
+            "evidence": [
+              "repair branch created from exact merged head a2b528830e59e6ff69d01b1670b99a05125edc2c"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
