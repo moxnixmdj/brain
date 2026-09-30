@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Freeze and execute one new genuinely open-ended consequential technical/scientific Task A on the inherited model-independent route. The task must not predeclare exact sources, JSON paths, formulas, tool recipes, or answers. Stop on the first new causal gap. If it passes end-to-end, independently verify it before freezing a materially different genuine open-ended Task B.",
+    "objective": "Close the guarded-proven parent composition defect by integrating generic evidence extraction -> guarded-verified objective claim-spec/operand binding -> verified generic relation evaluation in the canonical open-research path. Guarded-qualify non-parent before touching the frozen HTTP/2 task.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
-    "repair_status": "CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-    "prohibition": "NO_PARENT_REPLAY__NO_PREDECLARED_EXACT_SOURCE_OR_FORMULA_RECIPE__NO_MODEL_COGNITION_IN_CREDITED_ROUTE__NO_PARENT_PROMOTION_FROM_CHILD_EVIDENCE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
-    "next_action": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "exact_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_CLAIM_RELATION_INTEGRATION_FRONTIER_CORRECTION_20260930_V3.json",
+    "repair_status": "GUARDED_RED_INTEGRATION_FAILURE_CONFIRMED__HTTP2_PRESTART_REJECTED__TASK_UNSPENT",
+    "prohibition": "NO_HTTP2_RETRY_BEFORE_INTEGRATION_PASS_AND_RESERVATION_RECONCILIATION__NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_RELATION_EQUALS_TRUTH__NO_CONFIDENCE_SUFFICIENCY_OR_INDEPENDENCE_INVENTION",
+    "next_action": "INTEGRATE_VERIFIED_CLAIM_SPEC_BINDER_AND_GENERIC_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_SOURCE_FRONTEND__GUARDED_NON_PARENT_QUALIFICATION__RECONCILE_HTTP2_GUARD_RESERVATION__THEN_EXECUTE_FROZEN_HTTP2_ONCE",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -157,7 +157,16 @@
     "latest_claim_relation_qualification_artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
     "latest_claim_spec_operand_binding_qualification_run_id": 36686583882,
     "latest_claim_spec_operand_binding_qualification_artifact_id": 11083254225,
-    "latest_claim_spec_operand_binding_qualification_artifact_digest": "sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d"
+    "latest_claim_spec_operand_binding_qualification_artifact_digest": "sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d",
+    "deferred_http2_parent_task": {
+      "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+      "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+      "scientific_execution_count": 0,
+      "status": "FROZEN_UNSPENT__DEFERRED",
+      "integration_red_run_id": 36687982814,
+      "prestart_rejected_run_id": 36688247475,
+      "replay_allowed": false
+    }
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -374,7 +383,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "INTEGRATE_VERIFIED_CLAIM_SPEC_BINDER_AND_GENERIC_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_SOURCE_FRONTEND__GUARDED_NON_PARENT_QUALIFICATION__RECONCILE_HTTP2_GUARD_RESERVATION__THEN_EXECUTE_FROZEN_HTTP2_ONCE",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
