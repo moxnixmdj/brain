@@ -71,17 +71,18 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Acquire and independently guard-qualify the smallest generic model-independent bridge that binds an explicit numeric threshold stated in the objective to an extracted evidence quantity for deterministic relation evaluation. Do not replay seismology.",
+    "objective": "Repair and independently guard-qualify the generic source-frontend seam that excludes verified bibliographic provenance candidates from relevance selection; if a bibliographic candidate wins, require live retrieval provenance before extraction.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+    "exact_blocker": "OPEN_RESEARCH_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_EXCLUDED_FROM_RELEVANCE_AND_LIVE_EVIDENCE_ROUTE",
     "evidence_paths": [
       "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
       "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json",
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_CORRECTION_20260930_V1.json"
     ],
-    "repair_status": "SEISMOLOGY_TASK_B_SPENT__EVIDENCE_EXTRACTION_SUCCEEDED__OBJECTIVE_LITERAL_THRESHOLD_RELATION_GAP_LOCALIZED",
-    "prohibition": "NO_SEISMOLOGY_REPLAY__NO_SPENT_TASK_REPLAY__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_1_METER_PATCH__NO_PARENT_PROMOTION_FROM_CHILD_REPAIR_ONLY",
-    "next_action": "ACQUIRE_AND_GUARD_QUALIFY_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING__NO_SEISMOLOGY_REPLAY",
+    "repair_status": "SEISMOLOGY_TASK_B_SPENT__PRIMARY_ARTIFACT_CAUSAL_CORRECTION__BIBLIOGRAPHIC_PROVENANCE_ADMISSION_GAP_LOCALIZED",
+    "prohibition": "NO_SEISMOLOGY_REPLAY__NO_TASK_SPECIFIC_SOURCE_WHITELIST__NO_BINDER_WEAKENING__NO_MODEL_COGNITION__NO_PARENT_PROMOTION",
+    "next_action": "REPAIR_AND_GUARD_QUALIFY_BIBLIOGRAPHIC_PROVENANCE_ADMISSION_TO_RELEVANCE_THEN_LIVE_RETRIEVAL__NO_SEISMOLOGY_REPLAY",
     "latest_routing_qualification_run_id": 36689658815,
     "latest_routing_qualification_artifact_id": 11085092932,
     "latest_routing_qualification_artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
@@ -310,7 +311,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "ACQUIRE_AND_GUARD_QUALIFY_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING__NO_SEISMOLOGY_REPLAY",
+  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_BIBLIOGRAPHIC_PROVENANCE_ADMISSION_TO_RELEVANCE_THEN_LIVE_RETRIEVAL__NO_SEISMOLOGY_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -321,12 +322,12 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "SEISMOLOGY_TASK_B_SPENT__OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+    "status": "SEISMOLOGY_TASK_B_SPENT__PRIMARY_ARTIFACT_CAUSAL_CORRECTION",
     "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "previous_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
-    "blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+    "previous_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+    "blocker": "OPEN_RESEARCH_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_EXCLUDED_FROM_RELEVANCE_AND_LIVE_EVIDENCE_ROUTE",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_CORRECTION_20260930_V1.json"
     ],
     "spent_parent_task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
     "spent_parent_run_id": 36693929830,
@@ -334,12 +335,13 @@
     "parent_capability_promoted": false
   },
   "last_real_output_event": {
-    "event_id": "SEISMOLOGY_TASK_B_FIRST_CAUSAL_GAP_20260930",
+    "event_id": "SEISMOLOGY_TASK_B_PRIMARY_ARTIFACT_CAUSAL_CORRECTION_20260930",
     "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "status": "FRESH_TASK_B_SPENT__EVIDENCE_EXTRACTED__LITERAL_THRESHOLD_BINDING_GAP_LOCALIZED__NO_PARENT_CREDIT",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+    "status": "EVIDENCE_SCOPE_CORRECTION_ONLY__NO_CAPABILITY_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_CORRECTION_20260930_V1.json",
     "public_run_id": 36693929830,
     "parent_capability_promoted": false,
-    "capability_credit_delta": 0
+    "capability_credit_delta": 0,
+    "next_causal_gap": "OPEN_RESEARCH_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_EXCLUDED_FROM_RELEVANCE_AND_LIVE_EVIDENCE_ROUTE"
   }
 }
