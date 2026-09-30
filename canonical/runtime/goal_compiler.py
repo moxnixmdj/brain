@@ -8,6 +8,8 @@ observable instead of being guessed.
 """
 from __future__ import annotations
 
+import ast
+
 import hashlib
 import importlib.util
 import json
@@ -3483,6 +3485,208 @@ def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
     }
 
 
+def _restricted_numeric_expression_names(expression):
+    """Validate the compiler-visible arithmetic grammar and return names in first-use order."""
+    try:
+        tree=ast.parse(str(expression or "").strip(),mode="eval")
+    except SyntaxError as exc:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_SYNTAX_INVALID") from exc
+    nodes=list(ast.walk(tree))
+    if len(nodes)>64:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_NODE_LIMIT")
+    names=[]
+    def visit(node,depth=0):
+        if depth>16:
+            raise GoalCompilationFailure("NUMERIC_EXPRESSION_DEPTH_LIMIT")
+        if isinstance(node,ast.Expression):
+            return visit(node.body,depth+1)
+        if isinstance(node,ast.Constant):
+            if isinstance(node.value,bool) or not isinstance(node.value,(int,float)):
+                raise GoalCompilationFailure("NUMERIC_EXPRESSION_LITERAL_TYPE_REJECTED")
+            if not math.isfinite(float(node.value)) or abs(float(node.value))>1e100:
+                raise GoalCompilationFailure("NUMERIC_EXPRESSION_LITERAL_INVALID")
+            return
+        if isinstance(node,ast.Name):
+            if node.id not in names:
+                names.append(node.id)
+            return
+        if isinstance(node,ast.UnaryOp) and isinstance(node.op,(ast.UAdd,ast.USub)):
+            return visit(node.operand,depth+1)
+        if isinstance(node,ast.BinOp) and isinstance(node.op,(ast.Add,ast.Sub,ast.Mult,ast.Div,ast.Pow)):
+            visit(node.left,depth+1); visit(node.right,depth+1)
+            if isinstance(node.op,ast.Pow) and isinstance(node.right,ast.Constant):
+                if isinstance(node.right.value,bool) or not isinstance(node.right.value,(int,float)):
+                    raise GoalCompilationFailure("NUMERIC_EXPRESSION_EXPONENT_INVALID")
+                if abs(float(node.right.value))>32:
+                    raise GoalCompilationFailure("NUMERIC_EXPRESSION_EXPONENT_LIMIT")
+            return
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_AST_NODE_REJECTED",type(node).__name__)
+    visit(tree)
+    return names
+
+
+_NUMERIC_BINDING_GENERIC_TOKENS={
+    "canonical","astra","runtime","tmp","parent","knowledge","evidence","json",
+    "value","result","source","input","output","numeric","expression","data",
+}
+
+def _numeric_binding_tokens(value):
+    return [
+        token.lower()
+        for token in re.findall(r"[A-Za-z0-9]+",str(value or ""))
+        if token and token.lower() not in _NUMERIC_BINDING_GENERIC_TOKENS
+    ]
+
+def _numeric_producer_tokens(part):
+    tokens=[]
+    evidence_path=str((part or {}).get("evidence_path") or "")
+    if evidence_path:
+        tokens.extend(_numeric_binding_tokens(pathlib.Path(evidence_path).stem))
+    for item in (part or {}).get("json_path") or []:
+        tokens.extend(_numeric_binding_tokens(item))
+    # Preserve order only for diagnostics; matching itself is set-based.
+    return list(dict.fromkeys(tokens))
+
+def _numeric_binding_score(name,part):
+    name_tokens=_numeric_binding_tokens(name)
+    producer_tokens=_numeric_producer_tokens(part)
+    score=0
+    matched=[]
+    for left in name_tokens:
+        best=0
+        best_token=None
+        for right in producer_tokens:
+            if left==right:
+                candidate=6 if len(left)>1 else 3
+            elif len(left)>=3 and len(right)>=3 and (left.startswith(right) or right.startswith(left)):
+                candidate=2
+            else:
+                candidate=0
+            if candidate>best:
+                best=candidate
+                best_token=right
+        if best:
+            score+=best
+            matched.append([left,best_token])
+    return score,matched
+
+def _bind_numeric_expression_producers(names,producers):
+    if len(producers)<len(names):
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_INSUFFICIENT_PRIOR_SCALARS")
+    if len(names)==1 and len(producers)==1:
+        return [(names[0],producers[0],{"mode":"ONLY_PRIOR_SCALAR"})]
+
+    selected=[]
+    used_cycles=set()
+    for name in names:
+        scored=[]
+        for part in producers:
+            cycle=int(part["result_cycle"])
+            if cycle in used_cycles:
+                continue
+            score,matched=_numeric_binding_score(name,part)
+            scored.append((score,cycle,part,matched))
+        if not scored:
+            raise GoalCompilationFailure("NUMERIC_EXPRESSION_PRODUCER_BINDING_REQUIRED",name)
+        best_score=max(x[0] for x in scored)
+        if best_score<=0:
+            # Elimination is safe only when exactly one producer and one name
+            # remain after prior semantic bindings.
+            remaining_names=len(names)-len(selected)
+            remaining_parts=[x for x in scored if x[1] not in used_cycles]
+            if remaining_names==1 and len(remaining_parts)==1:
+                _,cycle,part,matched=remaining_parts[0]
+                selected.append((name,part,{"mode":"UNIQUE_REMAINDER","matched":matched}))
+                used_cycles.add(cycle)
+                continue
+            raise GoalCompilationFailure("NUMERIC_EXPRESSION_PRODUCER_BINDING_REQUIRED",name)
+        winners=[x for x in scored if x[0]==best_score]
+        if len(winners)!=1:
+            raise GoalCompilationFailure(
+                "NUMERIC_EXPRESSION_PRODUCER_BINDING_AMBIGUOUS",
+                name+":"+",".join(str(x[1]) for x in winners),
+            )
+        score,cycle,part,matched=winners[0]
+        selected.append((name,part,{"mode":"SEMANTIC_TOKEN_MATCH","score":score,"matched":matched}))
+        used_cycles.add(cycle)
+
+    if len(selected)!=len(names):
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_PRODUCER_BINDING_INCOMPLETE")
+    return selected
+
+
+def _compile_typed_scalar_numeric_expression(clause,compiled_parts,registry,action_cycle):
+    text=str(clause or "").strip()
+    m=re.match(
+        r"^(?:calculate|compute|derive|evaluate)\s+.+?\s+using\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$",
+        text,re.IGNORECASE,
+    )
+    if not m:
+        return None
+    result_name=m.group(1)
+    expression=m.group(2).strip()
+    if len(expression)>512:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_TOO_LONG")
+    names=_restricted_numeric_expression_names(expression)
+    if not names:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_VARIABLE_REQUIRED")
+    entry=(registry or {}).get("math.numeric_expression.sympy")
+    if not isinstance(entry,dict) or entry.get("status") not in {"VERIFIED_BOUND_CAPABILITY","CANDIDATE_BOUND_CAPABILITY"}:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_VERIFIED_SYMPY_REQUIRED")
+    producers=[
+        part for part in (compiled_parts or [])
+        if isinstance(part,dict)
+        and part.get("mode") in {"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH","EXTERNAL_JSON_KNOWLEDGE_FETCH"}
+        and isinstance(part.get("result_cycle"),int)
+    ]
+    selected_bindings=_bind_numeric_expression_producers(names,producers)
+    variables={
+        name:{"$result":{"cycle":int(part["result_cycle"]),"field":"value"}}
+        for name,part,_evidence in selected_bindings
+    }
+    digest=hashlib.sha256((text+"\n"+json.dumps(
+        [(name,int(part["result_cycle"])) for name,part,_evidence in selected_bindings],
+        separators=(",",":")
+    )).encode("utf-8")).hexdigest()[:12].upper()
+    output_path=f"canonical/astra_runtime/tmp/NUMERIC_EXPRESSION_{digest}_RESULT.json"
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"math.numeric_expression.sympy",
+        "expression":expression,
+        "variables":variables,
+        "output_path":output_path,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":output_path,
+      "evidence":{
+        "selected_capability":"math.numeric_expression.sympy",
+        "result_name":result_name,
+        "expression":expression,
+        "variable_names":names,
+        "variable_bindings":{
+          name:{
+            "cycle":int(part["result_cycle"]),
+            "field":"value",
+            "binding_evidence":binding_evidence,
+          }
+          for name,part,binding_evidence in selected_bindings
+        },
+        "producer_result_cycles":[
+          int(part["result_cycle"]) for _name,part,_evidence in selected_bindings
+        ],
+        "result_cycle":int(action_cycle),
+        "result_field":"value",
+        "output_path":output_path,
+        "model_dependency_count":0,
+      },
+    }
+
+
 def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,registry):
     """Lower one bounded numeric relation onto existing native JSON + jq machinery.
 
@@ -3508,20 +3712,45 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
     if not isinstance(jq_entry,dict) or jq_entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
         raise GoalCompilationFailure("NUMERIC_RELATION_VERIFIED_JQ_REQUIRED")
 
-    producers=[
+    source_producers=[
         part for part in (compiled_parts or [])
         if isinstance(part,dict)
         and part.get("mode") in {"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH","EXTERNAL_JSON_KNOWLEDGE_FETCH"}
         and isinstance(part.get("result_cycle"),int)
     ]
-    if len(producers)!=2:
-        raise GoalCompilationFailure(
-            "NUMERIC_RELATION_REQUIRES_EXACTLY_TWO_PRIOR_SCALARS",
-            str(len(producers)),
-        )
+    expression_producers=[
+        part for part in (compiled_parts or [])
+        if isinstance(part,dict)
+        and part.get("mode")=="VERIFIED_BOUND_NUMERIC_EXPRESSION"
+        and isinstance(part.get("result_cycle"),int)
+    ]
+    producer_specs=[]
+    if expression_producers:
+        derived=expression_producers[-1]
+        used=set(int(x) for x in (derived.get("producer_result_cycles") or []))
+        unused=[p for p in source_producers if int(p["result_cycle"]) not in used]
+        if len(unused)!=1:
+            raise GoalCompilationFailure(
+                "NUMERIC_RELATION_DERIVED_REQUIRES_ONE_UNUSED_PRIOR_SCALAR",
+                str(len(unused)),
+            )
+        producer_specs=[
+            {"cycle":int(derived["result_cycle"]),"field":str(derived.get("result_field") or "value")},
+            {"cycle":int(unused[0]["result_cycle"]),"field":"value"},
+        ]
+    else:
+        if len(source_producers)!=2:
+            raise GoalCompilationFailure(
+                "NUMERIC_RELATION_REQUIRES_EXACTLY_TWO_PRIOR_SCALARS",
+                str(len(source_producers)),
+            )
+        producer_specs=[
+            {"cycle":int(source_producers[0]["result_cycle"]),"field":"value"},
+            {"cycle":int(source_producers[1]["result_cycle"]),"field":"value"},
+        ]
 
     digest=hashlib.sha256(
-        (text+"\\n"+str(producers[0]["result_cycle"])+"\\n"+str(producers[1]["result_cycle"])).encode("utf-8")
+        (text+"\\n"+str(producer_specs[0]["cycle"])+"\\n"+str(producer_specs[1]["cycle"])).encode("utf-8")
     ).hexdigest()[:12].upper()
     input_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_INPUT.json"
     output_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_RESULT.json"
@@ -3531,8 +3760,8 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
         "output_path":input_path,
         "fields":["left","right","threshold"],
         "records":[{
-          "left":{"$result":{"cycle":producers[0]["result_cycle"],"field":"value"}},
-          "right":{"$result":{"cycle":producers[1]["result_cycle"],"field":"value"}},
+          "left":{"$result":{"cycle":producer_specs[0]["cycle"],"field":producer_specs[0]["field"]}},
+          "right":{"$result":{"cycle":producer_specs[1]["cycle"],"field":producer_specs[1]["field"]}},
           "threshold":threshold,
         }],
       },
@@ -3568,7 +3797,7 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
         "threshold":threshold,
         "input_path":input_path,
         "output_path":output_path,
-        "producer_result_cycles":[producers[0]["result_cycle"],producers[1]["result_cycle"]],
+        "producer_result_cycles":[producer_specs[0]["cycle"],producer_specs[1]["cycle"]],
         "model_dependency_count":0,
       },
     }
@@ -3725,6 +3954,19 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH",
                 **knowledge_fetch["evidence"],
+            })
+            continue
+
+        numeric_expression=_compile_typed_scalar_numeric_expression(
+            clause,compiled_parts,registry,len(actions)
+        )
+        if numeric_expression is not None:
+            actions.append(numeric_expression["action"])
+            context_paths.append(numeric_expression["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_BOUND_NUMERIC_EXPRESSION",
+                **numeric_expression["evidence"],
             })
             continue
 
