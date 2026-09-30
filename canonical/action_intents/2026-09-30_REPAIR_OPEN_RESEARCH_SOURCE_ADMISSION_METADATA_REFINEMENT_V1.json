@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-OPEN-RESEARCH-SOURCE-ADMISSION-METADATA-REFINEMENT-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "1970d89246c6e33616e8e67effd1b01aaa35224f",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "action_kind": "GENERIC_OPEN_RESEARCH_SOURCE_ADMISSION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "expected_parent_frontier_change": "Preserve every provenance-verified candidate class through objective relevance, fail closed on weak lexical subject coverage, and allow a selected bibliographic record to drive one bounded metadata-anchored live-retrieval refinement pass before evidence extraction. No parent replay or credit from repair alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Canonical Brain main 1970d89246c6e33616e8e67effd1b01aaa35224f after merged PR523.",
+    "Authoritative seismology Task B run 36693929830 is permanently spent and replay-forbidden.",
+    "PR523 primary-artifact correction proves the selected live Simple Wikipedia page matched only 2 of 16 focused query tokens while stronger bibliographic candidates were excluded before relevance.",
+    "Current source frontend filters to RETRIEVAL_PROVENANCE_VERIFIED before BM25 and treats any positive BM25 result as relevance-ready.",
+    "Current discovery already provides Crossref bibliographic metadata and current provenance verifier already validates DOI identity; those primitives should be reused rather than replaced."
+  ],
+  "evidence_presence_classification": "GENERIC_GAP_VERIFIED_BY_FRESH_PARENT_TASK_B_PRIMARY_ARTIFACT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact candidate bytes pass authored adversarial regression and independent guarded fresh cross-domain qualification. Never replay seismology. Then freeze a materially different fresh parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_base_commit": "1970d89246c6e33616e8e67effd1b01aaa35224f",
+    "real_outcome": "Make open-ended research retain strong provenance-bearing metadata long enough to improve source selection and obtain a genuinely objective-relevant live source before extraction.",
+    "required_capability": "MODEL_INDEPENDENT_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_LIVE_RETRIEVAL_REFINEMENT_V1",
+    "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "routes_ranked": [
+      "REUSE_EXISTING_CROSSREF_PROVENANCE_BM25_AND_WEB_DISCOVERY_WITH_ONE_METADATA_ANCHORED_RETRIEVAL_PASS",
+      "ADMIT_ALL_POSITIVE_LIVE_BM25_RESULTS",
+      "TASK_SPECIFIC_SOURCE_WHITELIST",
+      "MODEL_SEMANTIC_RERANKER",
+      "BUILD_NEW_SEARCH_INFRASTRUCTURE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "DOWNSTREAM_LITERAL_THRESHOLD_PATCH",
+      "TASK_SPECIFIC_SOURCE_HINTS",
+      "MODEL_RERANKER",
+      "NEW_SEARCH_PROVIDER"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_CROSSREF_PROVENANCE_BM25_AND_WEB_DISCOVERY_WITH_ONE_METADATA_ANCHORED_RETRIEVAL_PASS",
+    "why_selected_route_is_fastest_sufficient": "The missing information is already discovered and provenance-verified. The failure is internal information loss and weak admission, so preserving verified metadata through relevance and reusing the existing web discovery path for exactly one anchored refinement pass is smaller and faster than acquiring a new search or reasoning system.",
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "synthetic_verification_necessity": "Fresh non-seismology cases must prove that weak live pages are rejected, strong bibliographic metadata can win relevance without becoming evidence, metadata refinement yields only live-retrieval-verified extraction candidates, irrelevant metadata cannot hijack retrieval, refinement is bounded to one pass, and existing query-focus/source-front-end regressions remain intact."
+    },
+    "expected_parent_level_state_change": "GENERIC_SOURCE_ADMISSION_REPAIR_ONLY__NO_PARENT_CREDIT",
+    "stop_rule": "QUALIFY_EXACT_REPAIR_BYTES__THEN_FRESH_MATERIALLY_DIFFERENT_PARENT_TASK__NO_SEISMOLOGY_REPLAY"
+  }
+}
