@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_INTERNALIZE_STIRRUP_PROFESSIONAL_WORK_V1",
+  "status": "CURRENT",
+  "real_objective": "Acquire the existing reusable mechanism behind strong professional agentic work, configure it into Brain, and verify Brain itself against Opus 5.5.",
+  "governing_invariants": [
+    "Knowledge remains external/JIT.",
+    "Opaque model/service performance is specimen evidence only.",
+    "Capability mechanism must be Brain-owned.",
+    "No underlying capability invention.",
+    "Brain-configured route itself must verify >= Opus 5.5.",
+    "$0 incremental spend."
+  ],
+  "material_premises": [
+    "GDPval-AA evaluates professional deliverables using an agentic harness with shell/web access.",
+    "Artificial Analysis publishes Stirrup as an MIT-licensed reusable agent framework and uses it for GDPval-AA.",
+    "Stirrup exposes the agent loop, context management, tools, document/file flow, skills, multimodal handling, and sub-agent mechanisms rather than hiding them inside a proprietary model.",
+    "The pinned 247f24d source mechanism has been imported into Brain with 54/54 exact file hashes and zero mismatches."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+    "https://github.com/ArtificialAnalysis/Stirrup",
+    "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "https://huggingface.co/datasets/openai/gdpval"
+  ],
+  "conclusion": "Stirrup is the strongest directly relevant exposed professional-work harness found so far and should be internalized now. Internalization receives zero Opus credit until the Brain-configured route is behaviorally verified.",
+  "selected_route": "PINNED_STIRRUP_INTERNALIZATION_PLUS_BRAIN_TOOL_ADAPTER_PLUS_STAGED_GDPVAL_FALSIFICATION",
+  "rejected_material_alternatives": [
+    {
+      "route": "ROUTE_TO_OPUS_OR_SONNET",
+      "reason": "Externalizes the target capability."
+    },
+    {
+      "route": "ROUTE_TO_ASTRA",
+      "reason": "External model specimen, not owned mechanism."
+    },
+    {
+      "route": "BUILD_NEW_PROFESSIONAL_AGENT",
+      "reason": "Forbidden invention and slower than reusing the exposed benchmark harness."
+    },
+    {
+      "route": "RUN_FULL_GDPVAL_IMMEDIATELY",
+      "reason": "Too expensive in wall-clock and unnecessary before cheap cross-artifact falsification."
+    }
+  ],
+  "uncertainties": [
+    "Stirrup may not be sufficient by itself to reproduce Opus-level professional quality on the current cognition substrate.",
+    "GDPval-AA Elo requires pairwise evaluation and cannot be reproduced exactly from a few public tasks."
+  ],
+  "assumptions": [
+    "Current Brain artifact tools can supply the document/spreadsheet/presentation/file actions needed by selected public tasks without paid APIs."
+  ],
+  "non_goals": [
+    "No Opus credit from source copying.",
+    "No paid E2B/API usage.",
+    "No use of public human gold deliverables before submission."
+  ],
+  "next_action": "Complete the Brain execution adapter, choose a deterministic uncontaminated small GDPval sample, and run a cheap cross-artifact falsification before any broader comparison.",
+  "supersession_conditions": [
+    "A stronger exposed professional-work harness is found before evaluation spend, or Stirrup fails the cheap configured-route falsification."
+  ],
+  "supersedes": [
+    "Professional-work state as opaque-external-specimen-only."
+  ]
+}
