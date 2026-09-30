@@ -22,7 +22,9 @@
     "task frozen before querying the exact Eros source URL",
     "exact frozen JPL source preflight run 36664673653 PASS; task not executed",
     "public JPL schema preflight run 36664734289 PASS on exact frozen URL",
-    "schema-only preflight located semimajor axis at orbit.elements[1] name=a units=au and orbital period at orbit.elements[8] name=per units=d; no task result was computed"
+    "schema-only preflight located semimajor axis at orbit.elements[1] name=a units=au and orbital period at orbit.elements[8] name=per units=d; no task result was computed",
+    "preflight run 36664673653 invalidated because its task blob 74b9ccf... was superseded before execution",
+    "corrected exact-task preflight run 36664983224 PASS on task blob 4cb0fbb4...; configured elements[1] -> a and elements[8] -> per verified; task still unexecuted"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -264,7 +266,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T03:30:58Z",
+        "checked_at_utc": "2026-09-30T03:34:20Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
         "status": "READY",
@@ -310,9 +312,10 @@
             "volatility": "VOLATILE",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T03:30:58Z",
+            "observed_at_utc": "2026-09-30T03:34:20Z",
             "evidence": [
-              "DIRECT_PROBE: public run 36664734289 returned HTTP JSON for exact frozen JPL URL and schema-verified object Eros, a at index 1 units au, per at index 8 units d"
+              "DIRECT_PROBE: run 36664983224 validated exact task blob 4cb0fbb4f46cf3c7302688197117cbaffe2d3943 and its configured paths orbit.elements[1].value -> a=1.458243716760167 au and orbit.elements[8].value -> per=643.1963890927677 d",
+              "ARTIFACT:11075747915 sha256:218b5081ebc0c6af7fc9c2a04e5d504f82800e797b62e4f6a4ac55f83faeae61"
             ],
             "evidence_classes": [
               "DIRECT_PROBE",
