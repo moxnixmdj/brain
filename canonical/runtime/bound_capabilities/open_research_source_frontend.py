@@ -6,8 +6,9 @@ provenance, generic deterministic BM25 objective relevance, and fresh exact
 same-source evidence extraction. ROR organization identity is optional metadata,
 not an admission gate.
 
-The frontend deliberately stops before claim support/contradiction, factual
-correctness, evidence sufficiency, relation evaluation, or answer synthesis.
+The frontend composes the already-qualified bounded claim/operand binder and
+relation evaluator after verified evidence extraction, then deliberately stops
+before factual correctness, evidence sufficiency, or decision synthesis.
 """
 from __future__ import annotations
 
@@ -47,6 +48,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     relevance_ranker=_load_sibling("objective_relevance_bm25")
     evidence_extractor=_load_sibling("objective_evidence_unit_extract")
     authority_identity=_load_sibling("source_authority_binding_ror")
+    claim_binder=_load_sibling("objective_claim_operand_binding")
 
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
@@ -148,6 +150,30 @@ def run(objective,decomposition,limit=12,timeout=15):
     ]
     evidence_ready=bool(evidence_extracted)
 
+    claim_relation_evaluations=[]
+    for item in evidence_extracted:
+        binding=claim_binder.bind(
+            objective,item.get("extraction") or {},evaluate_relation=True
+        )
+        claim_relation_evaluations.append({
+            "candidate":item.get("candidate"),
+            "extraction":item.get("extraction"),
+            "binding":binding,
+        })
+    claim_relation_evaluated=[
+        x for x in claim_relation_evaluations
+        if (x.get("binding") or {}).get("status") in {
+            "CLAIM_SPEC_BOUND","CLAIM_SPEC_AND_OPERANDS_BOUND"
+        }
+        and ((x.get("binding") or {}).get("relation_result") or {}).get("output_verified") is True
+        and ((x.get("binding") or {}).get("relation_result") or {}).get("status") in {
+            "NUMERIC_RELATION_VERIFIED",
+            "EXACT_TEXT_SUPPORT_VERIFIED",
+            "EXACT_TEXT_SUPPORT_NOT_VERIFIED",
+        }
+    ]
+    relation_ready=bool(claim_relation_evaluated)
+
     return {
         "schema":SCHEMA,
         "status":"SOURCE_FRONTEND_READY",
@@ -169,6 +195,8 @@ def run(objective,decomposition,limit=12,timeout=15):
         "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_OBJECTIVE_RELEVANCE_ONLY",
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
+        "claim_relation_evaluations":claim_relation_evaluations,
+        "claim_relation_evaluated_count":len(claim_relation_evaluated),
         "authority_verified_candidate_count":0,
         "primary_source_verified_candidate_count":0,
         "role_progress":{
@@ -188,11 +216,21 @@ def run(objective,decomposition,limit=12,timeout=15):
                 if evidence_ready else
                 "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
             ),
-            "RELATION_EVALUATION":"NOT_STARTED",
-            "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
+            "RELATION_EVALUATION":(
+                "OBJECTIVE_BOUND_EXPLICIT_RELATION_EVALUATED__FACTUAL_CORRECTNESS_UNVERIFIED"
+                if relation_ready else
+                "CLAIM_SPEC_AND_OPERAND_BINDING_REQUIRED"
+                if evidence_ready else "NOT_STARTED"
+            ),
+            "DECISION_SYNTHESIS_AND_VERIFICATION":(
+                "RELATION_READY__SYNTHESIS_AND_INDEPENDENT_VERIFICATION_REQUIRED"
+                if relation_ready else "NOT_STARTED"
+            ),
         },
         "next_required_capability":(
-            "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+            "MODEL_INDEPENDENT_DECISION_QUALITY_SYNTHESIS_AND_VERIFICATION_FROM_OBJECTIVE_BOUND_RELATION_V1"
+            if relation_ready else
+            "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
             if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
