@@ -58,6 +58,20 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertTrue(out["broad_objective_decomposition_available"])
         self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
 
+    def test_grounding_exposes_decomposition_when_all_multiclause_parts_are_unresolved(self):
+        objective=(
+            "Assess whether a material property differs between two operating regimes. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Identify material scope limitations and independently verify the consequential result."
+        )
+        out=self.grounding.ground(objective,{})
+        self.assertGreater(len(out["clauses"]),1)
+        self.assertEqual(out["grounded_clause_count"],0)
+        self.assertEqual(len(out["unresolved_clause_indexes"]),len(out["clauses"]))
+        self.assertTrue(out["broad_objective_decomposition_available"])
+        self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+        self.assertEqual(out["model_dependency_count"],0)
+
     def test_grounding_keeps_unsupported_goal_unresolved_without_decomposition(self):
         out=self.grounding.ground("Create output.json with one record",{})
         self.assertEqual(out["grounded_clause_count"],0)
