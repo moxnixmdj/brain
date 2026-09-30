@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "REOPENED_BY_POST_PROMOTION_REGRESSION__DOWNSTREAM_PATH_PROVENANCE_FALSIFIED",
+  "status": "REPAIRED_AND_COMPONENT_VALIDATED__AWAIT_FRESH_REAL_REQUALIFICATION",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,11 +28,11 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "REOPENED_BY_REGRESSION",
-  "next_action": "RUN_AFFECTED_LAYER_OBS_FOR_GENERIC_DOWNSTREAM_PATH_PROVENANCE__REUSE_PROPOSAL_BINDINGS_EFFECT_RESULT_FIRST__NO_PR267_REPLAY__THEN_FRESH_DIFFERENT_REQUALIFICATION_TASK",
-  "obsolescence_status": "REOPENED_BY_REGRESSION",
+  "current_status": "REPAIR_COMPLETE__CREDIT_WITHHELD",
+  "next_action": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_REPLAY__INDEPENDENT_ORACLE",
+  "obsolescence_status": "REOPENED_PENDING_FRESH_REQUALIFICATION",
   "winning_route": null,
-  "capability_strength_result": "PRIOR_UNIFIED_PLANNING_AND_YAML_TASKS_PASS__POST_PROMOTION_TYPED_DECISION_CHAIN_FALSIFIES_GENERIC_EXPLICIT_DATA_EFFECT_DEPENDENCY_SCOPE",
+  "capability_strength_result": "PRIOR_REAL_TASKS_PRESERVED__POST_PROMOTION_REGRESSION_REPAIRED_AND_EXACTLY_VALIDATED__FRESH_REQUALIFICATION_UNSPENT",
   "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
   "independent_verification": {
@@ -60,8 +60,8 @@
     "canonical/runtime/capability_planner.py",
     "canonical/runtime/astra_runtime.py"
   ],
-  "residual_gap": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
-  "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
+  "residual_gap": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
+  "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_VALIDATION_20260930_V1.json",
   "component_verification": {
     "status": "PASS",
     "public_run_id": 36647904127,
@@ -90,5 +90,14 @@
       36652623916
     ],
     "same_task_replay_allowed": false
+  },
+  "post_repair_validation": {
+    "status": "PASS",
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_VALIDATION_20260930_V1.json",
+    "pr271_validation_run_id": 36654897859,
+    "pr273_validation_run_id": 36655498906,
+    "pr275_validation_run_id": 36656123767,
+    "provider_backed_path_binding_violations": 0,
+    "capability_credit_restored": false
   }
 }
