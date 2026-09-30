@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "REPAIR-BROAD-MULTICLAUSE-RESEARCH-ROUTING-20260930-V2",
-  "status": "AUTHORIZED_PENDING_INDEPENDENT_QUALIFICATION",
+  "status": "PROPOSED_AFTER_INDEPENDENT_FALSIFICATION_REPAIR_V2",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "causal_blocker": "BROAD_MULTI_CLAUSE_ROUTING_PLUS_OVERBROAD_GENERIC_RUN_LANGUAGE_RECIPE_REJECTION",
+  "causal_blocker": "BROAD_MULTI_CLAUSE_OBJECTIVES_SUPPRESS_BROAD_RESEARCH_DECOMPOSITION_AND_GENERIC_RUN_METHOD_LANGUAGE_FALSELY_TRIGGERS_EXPLICIT_RECIPE_GATE",
   "action_kind": "GENERIC_ROUTING_AND_DECOMPOSITION_ADMISSION_REPAIR",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_MULTI_CLAUSE_ROUTING_PLUS_OVERBROAD_GENERIC_RUN_LANGUAGE_RECIPE_REJECTION::GENERIC_ROUTING_AND_DECOMPOSITION_ADMISSION_REPAIR",
   "evidence_presence_classification": "CAPABILITY_FAILED",
@@ -35,8 +35,8 @@
   "recursive_obs": {
     "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
     "real_outcome": "Make genuinely broad multi-sentence research objectives enter the already-qualified generic research path rather than package acquisition or false explicit-recipe rejection.",
-    "surviving_necessity": "The physical parent run exposed multi-clause admission failure; independent preserved-input qualification then exposed the adjacent generic-language false positive in the decomposer.",
-    "selected_surviving_route": "TWO_SERIAL_PRESERVED_INPUT_GENERIC_SEAMS__NO_PARENT_REPLAY__EXACT_REGRESSION__INDEPENDENT_GREEN_QUALIFICATION",
+    "surviving_necessity": "The parent spend proved the multi-clause admission defect. Independent non-parent qualification then proved the unchanged decomposer still rejects ordinary 'run a verification method' language. Both generic predicates are causally necessary before a fresh Task B.",
+    "selected_surviving_route": "TWO_PROVEN_GENERIC_PREDICATE_REPAIRS_PLUS_EXACT_ORTHOGONAL_REGRESSION_AND_INDEPENDENT_QUALIFICATION",
     "deleted_or_bypassed_paths": [
       "HTTP2_PARENT_REPLAY",
       "NEW_PACKAGE_DISCOVERY",
@@ -46,6 +46,17 @@
       "BROAD_PARSER_REWRITE"
     ],
     "why_selected_route_is_fastest_sufficient": "Both failures are localized on preserved input and require only two bounded admission predicates already surrounded by fail-closed controls.",
-    "stop_rule": "QUALIFY_EXACT_GENERIC_BYTES_INDEPENDENTLY__THEN_FREEZE_A_NEW_PARENT_TASK__NO_HTTP2_REPLAY"
+    "stop_rule": "NO_PARENT_REPLAY__QUALIFY_BOTH_GENERIC_PREDICATE_REPAIRS_ON_EXACT_BYTES_AND_ORTHOGONAL_RECURRENCE__THEN_FREEZE_A_NEW_PARENT_TASK"
+  },
+  "exact_repair": "Apply both independently demonstrated generic predicates: admit broad decomposition for all-unresolved multi-clause objectives, and treat run/execute as an explicit recipe only when followed by a concrete command/tool or executable script rather than ordinary research-method language.",
+  "independent_falsification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 174,
+    "workflow_run_id": 36689484259,
+    "result": "FAIL",
+    "exact_grounding_blob": "46e8e7466479ea298c34e5fa682d49c374510ce9",
+    "exact_broad_dependency_blob": "6eb2b20e860da466ad8b793c20060ded1fbf389b",
+    "first_new_failure": "BROAD_OBJECTIVE_DECOMPOSER_FALSE_POSITIVE_ON_GENERIC_RUN_METHOD_LANGUAGE",
+    "orthogonal_recurrence": "MATERIALS_FATIGUE_OBJECTIVE_REPRODUCED_SAME_FALSE_POSITIVE"
   }
 }
