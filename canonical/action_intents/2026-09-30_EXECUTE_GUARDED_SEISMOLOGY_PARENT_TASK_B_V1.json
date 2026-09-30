@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-GUARDED-SEISMOLOGY-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_B_REQUIRED_AFTER_BROAD_ROUTING_REPAIR",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_SEISMOLOGY_TASK_B::GUARDED_FRESH_PARENT_EXECUTION",
+  "task_id": "PARENT-OPENENDED-SEISMOLOGY-EARTHQUAKE-MAGNITUDE-COMPARISON-REAL-TASK-20260930-004",
+  "task_blob_sha": "67d2e73225daa3c3aa084c5f16e4044f144fdcfd",
+  "mission_blob_sha": "f311571a512f151a2580f08cb24eff11d67cbdb5",
+  "execution_authorization_blob_sha": "4263690d6a57abf4b1f922fc029051bf9f15b15e",
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "expected_parent_frontier_change": "Exactly one guarded physical execution of fresh seismology Task B. On first causal failure preserve the gap and mark the task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
+  "highest_leverage_now": true,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Exactly one physical child start. Never replay the task after a child start.",
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "real_outcome": "Reality-test the repaired model-independent open-ended research stack on one fresh scientific task without leaking authority, source, values, formula, tool recipe, or answer.",
+    "surviving_necessity": "Broad routing is now guarded-qualified and merged; the shortest remaining proof is a materially different fresh parent execution.",
+    "selected_surviving_route": "FRESH_SEISMOLOGY_PARENT_TASK_B_EXACTLY_ONCE",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "NEW_CHILD_REPAIR_WITHOUT_FRESH_PARENT_FALSIFICATION",
+      "MODEL_COGNITION",
+      "TASK_SPECIFIC_PATCH"
+    ],
+    "stop_rule": "SEISMOLOGY_TASK_B_SPENT_AFTER_FIRST_CHILD_START"
+  }
+}
