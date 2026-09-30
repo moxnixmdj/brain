@@ -31,6 +31,9 @@ _STOP={
  "with","assess","investigate","verify","source","evidence","states","contains",
  "includes","says","exact","text","claim",
 }
+_NON_UNIT_FOLLOWERS={
+ "was","were","is","are","be","been","being","and","or","to","from","in","on","at","by",
+}
 _WORD=re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]*")
 _NUM_SURFACE=(
  r"[-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)"
@@ -117,7 +120,7 @@ def _parse_objective(objective):
         if not m:
             continue
         left=_clean_entity(m.group(1)); right=_clean_entity(m.group(2))
-        threshold=_canon(m.group(threshold_group)) if threshold_group else None
+        threshold=_canon(m.group(threshold_group)).rstrip(".,;:") if threshold_group else None
         row=(op,left,right,threshold)
         if left and right and row not in matches:
             matches.append(row)
@@ -206,6 +209,8 @@ def _numbers(text):
     rows=[]
     for index,m in enumerate(_NUM.finditer(text)):
         unit=_canon(m.group(2)).lower().rstrip(".,;:")
+        if unit in _NON_UNIT_FOLLOWERS:
+            unit=""
         rows.append({
           "numeric_literal_index":index,
           "surface":m.group(0).strip(),
