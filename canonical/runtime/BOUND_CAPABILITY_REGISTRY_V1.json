@@ -3227,6 +3227,83 @@
         "exact_regression_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
         "independent_fresh_live_generic_v2_status": "PASS"
       }
+    },
+    "evidence.claim_spec.bind.explicit_comparison.stdlib": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+          "objective": "${input.objective}",
+          "extraction_path": "${input.extraction_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "objective_claim_operand_binding",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "objective",
+        "claim",
+        "relation",
+        "operand",
+        "binding",
+        "compare",
+        "higher",
+        "lower",
+        "greater",
+        "less",
+        "exceed",
+        "evidence",
+        "numeric",
+        "at least",
+        "at most",
+        "equal",
+        "different",
+        "differ",
+        "threshold",
+        "quoted",
+        "exact text"
+      ],
+      "limitations": [
+        "Supports only explicit bounded binary comparison forms for GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE and explicit exact quoted-claim support forms covered by the verified grammar.",
+        "Each semantic numeric role must bind uniquely to a distinct evidence unit by lexical anchors.",
+        "Operand selection requires one unique exact-unit-compatible numeric-literal pair; ambiguity fails closed.",
+        "ABS_DIFF_LTE accepts only an explicit finite nonnegative literal threshold whose unit surface exactly matches both operands.",
+        "Exact quoted claims bind only by exact normalized substring occurrence and require one unique evidence unit.",
+        "No unit conversion, paraphrase/semantic entailment, factual correctness, causality, evidence sufficiency, source independence, or latent semantic-role inference."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "evidence.claim_spec.explicit_bounded",
+        "evidence.numeric_relation.objective_bound",
+        "evidence.claim.exact_quoted_bound"
+      ],
+      "requires": [
+        "source.evidence.objective_grounded_units",
+        "evidence.numeric_relation.explicit"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "re",
+          "pathlib",
+          "importlib.util"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py"
+      },
+      "status": "CANDIDATE_BOUND_CAPABILITY",
+      "verification": {
+        "inherited_relation_capability": "evidence.claim_relation.generic_units.stdlib",
+        "new_interface_status": "PENDING_FRESH_CROSS_DOMAIN_INDEPENDENT_QUALIFICATION_FULL_BOUNDED_OPERATOR_SURFACE"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
