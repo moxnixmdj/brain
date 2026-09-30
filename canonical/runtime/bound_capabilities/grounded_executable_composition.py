@@ -49,6 +49,54 @@ def _common_effects(entries):
 def _clause_target(index):
     return "grounded.clause.%d.satisfied" % int(index)
 
+
+def _replace_exact(value,old,new):
+    if isinstance(value,dict):
+        return {k:_replace_exact(v,old,new) for k,v in value.items()}
+    if isinstance(value,list):
+        return [_replace_exact(v,old,new) for v in value]
+    if value==old:
+        return copy.deepcopy(new)
+    return value
+
+def _inject_effect_result_dataflow(capabilities):
+    providers={}
+    for cap in capabilities:
+        for effect in cap.get("provides") or []:
+            if str(effect).startswith("grounded.clause."):
+                continue
+            providers.setdefault(str(effect),[]).append(cap)
+
+    for consumer in capabilities:
+        bindings=[]
+        action=consumer.get("action")
+        for effect in consumer.get("requires") or []:
+            candidates=[x for x in providers.get(str(effect),[]) if x is not consumer]
+            if len(candidates)!=1:
+                continue
+            provider=candidates[0]
+            provider_inputs=provider.get("inputs") or {}
+            for field in provider.get("result_fields") or []:
+                if field not in provider_inputs:
+                    continue
+                source_value=provider_inputs[field]
+                if not isinstance(source_value,(str,int,float,bool)):
+                    continue
+                marker={"$effect_result":{"effect":str(effect),"field":str(field)}}
+                replaced=_replace_exact(action,source_value,marker)
+                if replaced!=action:
+                    action=replaced
+                    bindings.append({
+                      "effect":str(effect),
+                      "provider_instance_id":provider.get("id"),
+                      "provider_result_field":str(field),
+                      "matched_literal":source_value,
+                    })
+        consumer["action"]=action
+        consumer["action_sha256"]=_sha(action)
+        consumer["effect_result_bindings"]=bindings
+    return capabilities
+
 def compose(goal,grounding,registry,compiler,root):
     if not isinstance(grounding,dict) or grounding.get("schema")!="PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1":
         raise CompositionError("GROUNDING_INVALID")
@@ -150,11 +198,19 @@ def compose(goal,grounding,registry,compiler,root):
             "binding_failures":binding_failures,
             "ambiguity_preserved":status!="AMBIGUOUS_BOUNDED" or len(admitted)>=2,
         })
-        prior_paths.extend(
-            str(x) for x in ((clause.get("output_contract") or {}).get("paths") or [])
-            if str(x) not in prior_paths
-        )
+        for cap in admitted:
+            inputs=cap.get("inputs") or {}
+            for field in cap.get("result_fields") or []:
+                value=inputs.get(field)
+                if (
+                    isinstance(field,str)
+                    and field.endswith("_path")
+                    and isinstance(value,str)
+                    and value not in prior_paths
+                ):
+                    prior_paths.append(value)
 
+    derived=_inject_effect_result_dataflow(derived)
     target_effects=[_clause_target(i) for i in range(len(clauses))]
     initial_facts=sorted(effect for effect in all_requires if effect not in all_provides)
     problem={
