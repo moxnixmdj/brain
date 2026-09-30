@@ -8,8 +8,10 @@ verified registry entry plus the existing deterministic input binder.
 from __future__ import annotations
 import copy
 import hashlib
+import importlib.util
 import json
 import re
+import sys
 
 SCHEMA="PROJECT_BRAIN_GROUNDED_EXECUTABLE_COMPOSITION_V1"
 
@@ -49,6 +51,36 @@ def _common_effects(entries):
 def _clause_target(index):
     return "grounded.clause.%d.satisfied" % int(index)
 
+def _load_proposal_binder(root):
+    path=root/"canonical"/"runtime"/"capability_proposal_generators.py"
+    if not path.is_file():
+        raise CompositionError("PROPOSAL_BINDER_MISSING")
+    name="project_brain_grounded_composition_proposal_binder"
+    spec=importlib.util.spec_from_file_location(name,path)
+    if spec is None or spec.loader is None:
+        raise CompositionError("PROPOSAL_BINDER_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[name]=module
+    spec.loader.exec_module(module)
+    if not callable(getattr(module,"_bind_planned_inputs",None)):
+        raise CompositionError("PROPOSAL_BINDER_ENTRYPOINT_MISSING")
+    return module
+
+def _provider_slot_alias(effect,index):
+    return str(effect)+".grounded_clause_%d" % int(index)
+
+def _intersection_result_fields(admitted):
+    sets=[
+        set(str(x) for x in (cap.get("result_fields") or []))
+        for cap in admitted
+    ]
+    if not sets:
+        return []
+    out=set(sets[0])
+    for values in sets[1:]:
+        out &= values
+    return sorted(out)
+
 def compose(goal,grounding,registry,compiler,root):
     if not isinstance(grounding,dict) or grounding.get("schema")!="PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1":
         raise CompositionError("GROUNDING_INVALID")
@@ -61,12 +93,17 @@ def compose(goal,grounding,registry,compiler,root):
     if unresolved:
         raise CompositionError("UNRESOLVED_GROUNDED_CLAUSES:"+",".join(map(str,unresolved)))
 
+    proposal_binder=_load_proposal_binder(root)
     future=[str(x.get("text") or "") for x in clauses]
     prior_paths=[]
     derived=[]
     clause_records=[]
     all_provides=set()
     all_requires=set()
+    # Each slot is one prior clause/effect, even when that clause has multiple
+    # equivalent candidate implementations. This preserves ambiguity without
+    # accidentally treating alternatives as fan-in observations.
+    provider_slots={}
 
     for index,clause in enumerate(clauses):
         if not isinstance(clause,dict) or clause.get("index")!=index:
@@ -96,14 +133,47 @@ def compose(goal,grounding,registry,compiler,root):
         admitted=[]
         binding_failures=[]
         for ordinal,(cid,entry,candidate) in enumerate(candidate_entries):
+            cap_id="grounded.%d.%d.%s" % (
+                index,ordinal,re.sub(r"[^A-Za-z0-9_.-]+","_",cid)
+            )
+            original_requires=[str(x) for x in (entry.get("requires") or [])]
+            original_provides=[str(x) for x in (entry.get("provides") or [])]
+            requires_as=[]
+            provider_map={}
+            for effect in original_requires:
+                slots=list(provider_slots.get(effect) or [])
+                if len(slots)==1:
+                    slot=slots[0]
+                    provider_map[effect]=(slot["provider_id"],slot["provider_entry"])
+                elif len(slots)>1:
+                    for slot in slots:
+                        requires_as.append({"effect":effect,"as":slot["alias"]})
+                        provider_map[slot["alias"]]=(
+                            slot["provider_id"],slot["provider_entry"]
+                        )
+
             try:
-                inputs=compiler._bind_inputs(
-                    str(clause.get("text") or ""),
-                    root,
-                    entry,
-                    context_paths=prior_paths,
-                    future_clauses=future[index+1:],
-                )
+                if entry.get("proposal_bindings"):
+                    inputs,binding_evidence=proposal_binder._bind_planned_inputs(
+                        str(clause.get("text") or ""),
+                        root,
+                        compiler,
+                        cap_id,
+                        cid,
+                        entry,
+                        provider_map,
+                        goal_value_index=None,
+                        require_aliases=requires_as,
+                    )
+                else:
+                    inputs=compiler._bind_inputs(
+                        str(clause.get("text") or ""),
+                        root,
+                        entry,
+                        context_paths=prior_paths,
+                        future_clauses=future[index+1:],
+                    )
+                    binding_evidence={}
                 action=_render(entry.get("action_template"),inputs)
             except Exception as exc:
                 binding_failures.append({
@@ -112,15 +182,22 @@ def compose(goal,grounding,registry,compiler,root):
                 })
                 continue
 
-            original_requires=[str(x) for x in (entry.get("requires") or [])]
-            original_provides=[str(x) for x in (entry.get("provides") or [])]
-            cap_id="grounded.%d.%d.%s" % (index,ordinal,re.sub(r"[^A-Za-z0-9_.-]+","_",cid))
+            alias_by_effect={}
+            for item in requires_as:
+                alias_by_effect.setdefault(str(item["effect"]),[]).append(str(item["as"]))
+            effective_requires=[]
+            for effect in original_requires:
+                aliases=alias_by_effect.get(effect) or []
+                effective_requires.extend(aliases if aliases else [effect])
+
             cap={
                 "id":cap_id,
                 "source_capability_id":cid,
                 "clause_index":index,
-                "requires":original_requires,
+                "requires":effective_requires,
+                "source_requires":original_requires,
                 "provides":list(dict.fromkeys(original_provides+[target])),
+                "source_provides":original_provides,
                 "cost":float(entry.get("cost",1)),
                 "action":action,
                 "result_fields":[str(x) for x in (entry.get("result_fields") or [])],
@@ -128,17 +205,46 @@ def compose(goal,grounding,registry,compiler,root):
                 "source_action_template_sha256":_sha(entry.get("action_template")),
                 "action_sha256":_sha(action),
                 "grounding_match_tokens":list((candidate or {}).get("matched_distinctive_tokens") or []),
+                "proposal_binding_evidence":binding_evidence,
+                "requires_as":requires_as,
+                "provides_as":[],
             }
             admitted.append(cap)
-            all_requires.update(original_requires)
-            all_provides.update(cap["provides"])
-            derived.append(cap)
 
         if not admitted:
             raise CompositionError("NO_BINDABLE_CANDIDATE_FOR_CLAUSE:%d" % index)
 
-        # Ambiguity is preserved structurally. The downstream planner may choose
-        # among these alternatives only because they share a declared effect.
+        # Only effects shared by every admitted alternative can represent this
+        # clause as one provider slot.
+        slot_effects=(
+            sorted(common)
+            if status=="AMBIGUOUS_BOUNDED"
+            else list(admitted[0].get("source_provides") or [])
+        )
+        common_result_fields=_intersection_result_fields(admitted)
+        for effect in slot_effects:
+            alias=_provider_slot_alias(effect,index)
+            for cap in admitted:
+                cap["provides"]=list(dict.fromkeys((cap.get("provides") or [])+[alias]))
+                cap["provides_as"].append({"effect":effect,"as":alias})
+            provider_slots.setdefault(effect,[]).append({
+                "alias":alias,
+                "provider_id":"grounded.clause.%d.provider" % index,
+                "provider_entry":{"result_fields":common_result_fields},
+                "clause_index":index,
+            })
+
+        for cap in admitted:
+            all_requires.update(cap["requires"])
+            all_provides.update(cap["provides"])
+            derived.append(cap)
+            for key,value in (cap.get("inputs") or {}).items():
+                if (
+                    isinstance(key,str) and key.endswith("_path")
+                    and isinstance(value,str) and value not in prior_paths
+                ):
+                    prior_paths.append(value)
+
         clause_records.append({
             "index":index,
             "text":str(clause.get("text") or ""),
@@ -148,6 +254,7 @@ def compose(goal,grounding,registry,compiler,root):
             "candidate_instance_ids":[x["id"] for x in admitted],
             "source_capability_ids":[x["source_capability_id"] for x in admitted],
             "binding_failures":binding_failures,
+            "provider_slot_effects":slot_effects,
             "ambiguity_preserved":status!="AMBIGUOUS_BOUNDED" or len(admitted)>=2,
         })
         prior_paths.extend(
@@ -166,6 +273,7 @@ def compose(goal,grounding,registry,compiler,root):
         "finish_summary":"GROUNDED_CAPABILITY_COMPOSITION_COMPLETE",
         "max_expansions":5000,
     }
+
     canonical_goal=" ".join(str(goal or "").strip().split())
     return {
         "schema":SCHEMA,
