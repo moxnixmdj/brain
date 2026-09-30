@@ -710,13 +710,6 @@ def _collect_key_values(value,key):
             out.extend(_collect_key_values(item,key))
     return out
 
-def active_frontier_target_path(hierarchy):
-    target_id=str((hierarchy or {}).get("active_capability_target") or "").strip()
-    if not target_id or len(target_id)>160 or not all(ch.isalnum() or ch=="_" for ch in target_id):
-        fail("ACTIVE_FRONTIER_TARGET_ID_INVALID")
-        return None
-    return "canonical/capabilities/frontier/"+target_id+".json"
-
 def enforce_active_target_record_consistency(hierarchy,target):
     target_id=str(hierarchy.get("active_capability_target") or "").strip()
     if not target_id:
@@ -935,8 +928,9 @@ def main():
     if str(hierarchy.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH")
 
-    target_path=active_frontier_target_path(hierarchy)
-    if target_path is None or not (ROOT/target_path).is_file():
+    target_id=str(hierarchy.get("active_capability_target") or "").strip()
+    target_path="canonical/capabilities/frontier/"+target_id+".json" if target_id else ""
+    if not target_path or not (ROOT/target_path).is_file():
         fail("ACTIVE_FRONTIER_TARGET_RECORD_MISSING")
         target={}
     else:
