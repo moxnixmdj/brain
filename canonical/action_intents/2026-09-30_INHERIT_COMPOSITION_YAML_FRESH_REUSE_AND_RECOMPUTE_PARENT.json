@@ -1,0 +1,171 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INHERIT-COMPOSITION-YAML-FRESH-REUSE-AND-RECOMPUTE-PARENT-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Inherit the already-complete materially distinct YAML-to-JSON fresh reuse, promote model-independent grounded executable composition at exact scope, count one reusable capability + one verified real task + one fresh reuse event, and recompute the active frontier to a new parent-level technical/scientific task without awarding parent capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical composition Task A reconciliation main 7c1817f454fc89ec80214cd208b09dc1cbcd3bec",
+    "composition component validation run 36647904127 PASS",
+    "Unified Planning composition Task A run 36652169397 PASS",
+    "YAML-to-JSON materially distinct fresh reuse run 36652623916 PASS",
+    "YAML fresh reuse artifact 11071595189 digest sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a",
+    "failed SQLite route run 36652276971 preserved as non-crediting adapter-contract rejection"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exact-scope composition acquisition, one fresh-reuse/real-task counter increment, and parent frontier recomputation are canonicalized. Do not execute another child task and do not award parent capability credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "NEXT_FRONTIER_AFTER_VERIFIED_CHILD_ACQUISITION",
+    "evidence": [
+      "public run 36652169397 composition Task A PASS",
+      "public run 36652623916 materially distinct YAML fresh reuse PASS",
+      "artifact sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "7c1817f454fc89ec80214cd208b09dc1cbcd3bec",
+    "real_outcome": "Convert already-complete fresh-reuse evidence into exact-scope composition inheritance and advance immediately to the parent real-task gap.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Promote composition only at its verified scope and remove all further child-layer work from the critical path.",
+      "proxy_goals_deleted": [
+        "another composition benchmark",
+        "SQLite adapter repair",
+        "new planner search",
+        "new model route"
+      ],
+      "surviving_necessity": "Canonical inheritance and parent frontier recomputation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "grounded_executable_composition exact component validation",
+        "Unified Planning Task A evidence",
+        "YAML-to-JSON distinct fresh reuse evidence"
+      ],
+      "external_existing_routes_checked": [
+        "not applicable to evidence-only frontier reconciliation"
+      ],
+      "capability_work_deleted": [
+        "no implementation",
+        "no new execution",
+        "no provider search",
+        "no adapter repair"
+      ],
+      "surviving_gap": "Composition acquisition bar is fully satisfied; only parent end-to-end capability remains."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence-state reconciliation only.",
+      "delete_bypass_substitute_options": [
+        "Delete further child execution",
+        "Reuse existing successful YAML fresh reuse",
+        "Preserve failed SQLite route as non-crediting evidence"
+      ],
+      "surviving_causal_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "INHERIT_COMPOSITION_AND_RECOMPUTE_PARENT"
+      ],
+      "losing_routes_reason": "All child acquisition predicates are already evidenced; more child work is strictly dominated by parent execution.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new verification. Reuse successful exact Task A plus independently verified materially distinct YAML fresh reuse."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all further composition benchmarking absent new falsification",
+        "SQLite adapter repair on the current critical path"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "grounding-to-composition-to-planner execution path"
+      ],
+      "fresh_reuse_plan": "Complete: YAML-to-JSON run 36652623916. Move to parent capability."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse prior challenger race",
+        "reuse two successful public runs",
+        "no new route search for pure reconciliation"
+      ],
+      "search_stop_decision": "Composition Task A plus materially distinct fresh reuse satisfy every acquisition predicate. Parent execution now dominates all child work.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable: RECONCILE_FRONTIER selects no new external execution route."
+    },
+    "routes_considered": [
+      "INHERIT_COMPOSITION_AND_RECOMPUTE_PARENT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKING",
+      "SQLITE_ADAPTER_REPAIR",
+      "NEW_PLANNER_SEARCH",
+      "MODEL_ROUTE"
+    ],
+    "selected_surviving_route": "INHERIT_COMPOSITION_AND_RECOMPUTE_PARENT",
+    "why_selected_route_is_fastest_sufficient": "The exact capability bar is already satisfied by preserved direct evidence; reconciliation is the only remaining work at this layer.",
+    "expected_parent_level_state_change": "Inherit the already-complete materially distinct YAML-to-JSON fresh reuse, promote model-independent grounded executable composition at exact scope, count one reusable capability + one verified real task + one fresh reuse event, and recompute the active frontier to a new parent-level technical/scientific task without awarding parent capability credit.",
+    "stop_condition": "Stop after exact-scope composition acquisition, one fresh-reuse/real-task counter increment, and parent frontier recomputation are canonicalized. Do not execute another child task and do not award parent capability credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER consumes already-verified evidence and selects no external execution route."
+    }
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Requests regression previously falsified upstream grounding and was repaired before this composition evidence was accepted.",
+      "SQLite fresh-reuse route run 36652276971 failed on SQLITE_STATUS_VALUE_UNRESOLVED and was rejected without adapting Brain."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_COMPOSITION_TASK_A_UNIFIED_PLANNING_20260930_V1.json",
+      "public run 36652623916"
+    ],
+    "independent_verification_evidence_paths": [
+      "public run 36652169397 independent verifier PASS",
+      "public run 36652623916 independent verifier PASS"
+    ],
+    "capability_package_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1.json",
+    "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+    "fresh_reuse_distinct_task": true,
+    "cross_domain_distinct": true,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "",
+    "producer_execution_suppliers": [
+      "Project Brain deterministic runtime",
+      "Ubuntu yq"
+    ],
+    "independent_verifier_suppliers": [
+      "Independent Python JSON semantic verifier"
+    ]
+  }
+}

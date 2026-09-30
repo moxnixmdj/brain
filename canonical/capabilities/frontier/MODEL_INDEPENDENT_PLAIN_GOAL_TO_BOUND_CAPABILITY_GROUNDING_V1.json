@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-  "status": "ACQUIRED_VERIFIED_AFTER_REGRESSION_REPAIR__FRESH_REAL_REQUALIFICATION_PASS",
+  "status": "ACQUIRED_VERIFIED_AFTER_REGRESSION_REPAIR__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given a plain consequential goal, deterministically map the goal's required operations, entities, constraints, and output contract onto semantically compatible capabilities already present in Brain's bound capability registry before invoking external supplier discovery; preserve ambiguity and fail closed when no binding is justified.",
@@ -29,11 +29,11 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "ACQUIRED_VERIFIED",
-  "next_action": "RECONCILE_FRONTIER_TO_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__FRESH_REAL_TASK_A_ALREADY_PASSED__FRESH_REUSE_STILL_REQUIRED",
+  "current_status": "ACQUIRED_VERIFIED__FRESH_REUSE_PASS",
+  "next_action": "PARENT_FRONTIER_RECOMPUTE__GROUNDING_AND_COMPOSITION_VERIFIED",
   "obsolescence_status": "ACQUIRED_VERIFIED",
   "winning_route": "DETERMINISTIC_BOUND_GROUNDING_WITH_EXECUTABLE_INPUT_BINDABILITY_AND_EXPLICIT_VERIFIED_INITIAL_FACTS",
-  "capability_strength_result": "PRIOR_BROAD_REAL_TASKS_PRESERVED__REQUESTS_REGRESSION_REPAIRED__FRESH_UNIFIED_PLANNING_REAL_TASK_PASS",
+  "capability_strength_result": "REQUESTS_REGRESSION_REPAIRED__UNIFIED_PLANNING_FRESH_REAL_PASS__YAML_JSON_DISTINCT_FRESH_REUSE_PASS",
   "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
   "independent_verification": {
@@ -69,6 +69,14 @@
       "conclusion": "success",
       "method": "independent live GitHub API refetch and identity/assessment reconstruction",
       "model_dependency_count": 0
+    },
+    "fresh_reuse": {
+      "run_id": 36652623916,
+      "job_id": 109689985771,
+      "artifact_id": 11071595189,
+      "artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a",
+      "domain": "LOCAL_STRUCTURED_DATA_TRANSFORMATION",
+      "producer_independent": true
     }
   },
   "inheritance_path": [
@@ -147,5 +155,9 @@
     "observed_public_requalification_run_wall_s_including_runner_setup": 13,
     "note": "GitHub run timestamps 00:49:30Z to 00:49:43Z include checkout/setup/upload; capability-only latency was not separately isolated."
   },
-  "fresh_reuse_evidence_status": "PRIOR_MATERIALLY_DISTINCT_QR_REUSE_PRESERVED_AS_HISTORICAL_EVIDENCE__AGGREGATE_FRESH_REUSE_COUNTER_NOT_RESTORED_IN_THIS_ACTION"
+  "fresh_reuse_evidence_status": "PRIOR_MATERIALLY_DISTINCT_QR_REUSE_PRESERVED_AS_HISTORICAL_EVIDENCE__AGGREGATE_FRESH_REUSE_COUNTER_NOT_RESTORED_IN_THIS_ACTION",
+  "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+  "fresh_reuse_run_id": 36652623916,
+  "fresh_reuse_artifact_id": 11071595189,
+  "fresh_reuse_artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a"
 }
