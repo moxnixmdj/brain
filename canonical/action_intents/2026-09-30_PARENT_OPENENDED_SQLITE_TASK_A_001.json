@@ -1,0 +1,301 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-OPENENDED-SQLITE-ONLINE-BACKUP-TASK-A-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "REAL_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::REAL_TASK_EXECUTION",
+  "expected_parent_frontier_change": "Either produce the first admissible genuinely open-ended model-independent parent Task A with autonomous decomposition and material source/tool discovery, or localize exactly the first generic causal gap without replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e is the exact current authority",
+    "PR318 revoked parent-promotion admissibility of the structured demography task while preserving its verified supporting result",
+    "canonical parent evidence now has zero admissible genuinely open-ended model-independent parent tasks and requires Task A first",
+    "PR304 chemistry execution is spent and scope-insufficient because the producer received a predeclared research recipe",
+    "stale Task-B/open-ended leases against 0292dc91 were closed without execution",
+    "five model-independent child capabilities and the promotion/provenance firewall remain inherited"
+  ],
+  "evidence_presence_classification": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__ZERO_ADMISSIBLE_OPEN_ENDED_TASKS",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute the frozen objective-only SQLite Task A exactly once on exact current Brain bytes with model planning disabled and runtime-derived cognition provenance. On producer success run a producer-independent verifier before any parent credit; on failure preserve only the first causal blocker, award zero parent credit, and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+    "real_outcome": "Establish or falsify the inherited system's genuine open-ended model-independent research capability on a fresh software-systems objective with no prewired research plan.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain the first admissible open-ended parent Task A by forcing autonomous decomposition, material source/tool discovery, experimentation, synthesis, and independent verification.",
+      "proxy_goals_deleted": [
+        "structured worksheet success",
+        "same-task replay",
+        "task-specific SQLite solver",
+        "predeclared source list",
+        "predeclared tool chain",
+        "child benchmark before a parent failure",
+        "frontier-model-assisted answer"
+      ],
+      "surviving_necessity": "The canonical frontier now requires one genuinely open-ended objective-only model-independent parent Task A."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "ASTRA_RUNTIME_DERIVED_V1 cognition provenance"
+      ],
+      "external_existing_routes_checked": [
+        "public GitHub Actions verification carrier with recent successful and terminal-failure artifact preservation",
+        "CPython standard-library sqlite3 plus embedded SQLite are available without a new paid or model dependency"
+      ],
+      "capability_work_deleted": [
+        "no new research framework",
+        "no task-specific implementation",
+        "no preselected authority or URL",
+        "no preselected experiment procedure",
+        "no preemptive child repair"
+      ],
+      "surviving_gap": "Only a real objective-only execution can determine whether the inherited route actually performs autonomous open-ended decomposition and discovery; static tailoring would destroy the evidence."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent evidence-scope blocker. The defining behavior itself is unproven, not merely a missing scalar/tool adapter.",
+      "delete_bypass_substitute_options": [
+        "reuse inherited general route unchanged",
+        "reject prewired worksheets",
+        "reject task-specific code as parent proof",
+        "reject model cognition as circular",
+        "execute once and stop on first causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
+        "TASK_SPECIFIC_SQLITE_RESEARCH_SCRIPT",
+        "FRONTIER_MODEL_OPEN_ENDED_RESEARCH"
+      ],
+      "losing_routes_reason": "A one-off SQLite script can solve the domain problem but cannot demonstrate inherited generality; frontier-model research violates the zero-model-dependency proof. Reusing the current general route unchanged is the sole admissible direct test.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "If the producer reaches a terminal answer, a separately implemented verifier will inspect the cited evidence and rerun an independent WAL/concurrent-writer backup consistency experiment without importing producer modules. If the producer fails, the first causal gap itself is the terminal evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all child repairs until a specific fresh parent failure identifies one",
+        "all prewired parent variants",
+        "all stale Task-B leases",
+        "all spent-task replays"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime-derived cognition provenance",
+        "canonical frontier mirror lock",
+        "plain-goal grounding",
+        "grounded composition",
+        "numeric relation and typed-expression execution",
+        "public one-shot evidence preservation"
+      ],
+      "fresh_reuse_plan": "If Task A passes, immediately freeze a materially different objective-only Task B and require inherited-route transfer without task-specific rediscovery. If Task A fails, repair only the first generic gap and use a new fresh Task A afterward."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR318 evidence-scope correction",
+        "reused current public carrier",
+        "reused inherited child capability set",
+        "closed stale same-frontier task leases instead of running them",
+        "did not research a task answer or source plan before freeze"
+      ],
+      "search_stop_decision": "The uncertainty is whether the inherited route can perform the open-ended behavior at all. One guarded objective-only execution has strictly higher information gain than more architecture search.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Frontier and carrier evidence were refreshed after aa8f55bd. Re-run affected preflight only if main, runtime, or carrier changes before arming."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
+      "TASK_SPECIFIC_SQLITE_RESEARCH_SCRIPT",
+      "FRONTIER_MODEL_OPEN_ENDED_RESEARCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "STRUCTURED_WORKSHEET_AS_PARENT_PROOF",
+      "TASK_SPECIFIC_SQLITE_SCRIPT_AS_PARENT_PROOF",
+      "FRONTIER_MODEL_COGNITION",
+      "SPENT_TASK_REPLAY",
+      "PREEMPTIVE_CHILD_REPAIR"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
+    "why_selected_route_is_fastest_sufficient": "It is already built, $0, model-independent, and the only route whose success can satisfy the parent scope. Its failure directly identifies the first missing generic capability, so no additional route-building is justified before execution.",
+    "expected_parent_level_state_change": "Either produce the first admissible genuinely open-ended model-independent parent Task A with autonomous decomposition and material source/tool discovery, or localize exactly the first generic causal gap without replay.",
+    "stop_condition": "Execute the frozen objective-only SQLite Task A exactly once on exact current Brain bytes with model planning disabled and runtime-derived cognition provenance. On producer success run a producer-independent verifier before any parent credit; on failure preserve only the first causal blocker, award zero parent credit, and never replay the task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:40:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "brain main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+          "canonical parent record now requires genuine objective-only Task A",
+          "five verified model-independent child capabilities remain inherited"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "CPython standard-library sqlite3 and SQLite documentation constitute authoritative evidence available for discovery by the producer; no authority or URL is supplied in the producer goal"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "selected task needs no third-party package acquisition merely to access the local Python sqlite3 execution surface"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "broad-web/community material remains discovery-only; it cannot replace primary evidence or producer-independent verification"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "objective only model independent open ended technical research autonomous decomposition source tool discovery experiment synthesis verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "zero cost public execution general research runtime Python sqlite systems task authoritative evidence"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "inherited general research route versus task specific solver for open ended software systems objective"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current Brain parent scope runtime provenance public runner Python SQLite 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
+          "evidence": [
+            "brain main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "public runner run 36668380406 proved successful model-independent exact-capsule execution",
+            "public runner run 36669136068 proved terminal-failure artifact preservation on a later one-shot"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: verification-capsule-runner has current successful/terminal public execution evidence",
+            "OFFICIAL_PRIMARY: CPython includes sqlite3 as standard-library functionality; no model supplier is execution-critical"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exercises the actual inherited route with runtime provenance and fail-closed one-shot evidence rather than a substitute solver.",
+            "CAPABILITY_STRENGTH": "Directly tests autonomous decomposition, source/tool discovery, experimentation, synthesis, and verification on an objective-only task.",
+            "WALL_CLOCK": "Requires no new framework or provider; freeze and execute once.",
+            "INCREMENTAL_COST": "Public runner plus standard-library surface preserve the $0 target.",
+            "RELIABILITY": "Carrier has recent evidence for both successful execution and preservation of terminal failures.",
+            "VERIFIABILITY": "Exact task/runtime blobs and an independent post-success verifier make the result falsifiable."
+          }
+        }
+      ],
+      "negative_search_summary": "No alternative can satisfy the open-ended parent proof sooner: task-specific scripting answers the domain but not the target capability, while model cognition contaminates dependency-removal evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:40:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:30:25Z",
+            "evidence": [
+              "DIRECT_PROBE: public runner run 36669136068 started the one-shot harness and preserved terminal evidence"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:40:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact current main includes merged promotion firewall and current parent scope correction"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "CPYTHON_STDLIB_SQLITE3",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:40:00Z",
+            "evidence": [
+              "OFFICIAL_PRIMARY: sqlite3 is standard-library functionality in CPython; no third-party package is required for the local experiment surface"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
