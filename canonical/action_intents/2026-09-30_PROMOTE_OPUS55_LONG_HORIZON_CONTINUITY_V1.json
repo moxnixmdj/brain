@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "PROMOTE-OPUS55-LONG-HORIZON-CONTINUITY-20260930-V1",
+  "status": "AUTHORIZED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "4cdac1830804aab373f462c294d984c011a49897",
+  "capability_target": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+  "action_kind": "CAPABILITY_INTERNALIZATION_AND_VERIFICATION",
+  "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::LONG_HORIZON_MEMORY_AND_CONTINUITY::EXISTING_BRAIN_CONTINUITY_MECHANISM_NOT_YET_SCOPED_AND_FRESHLY_REVERIFIED",
+  "expected_parent_frontier_change": "If current Brain continuity bytes pass a fresh forced-process-boundary verification and existing independent receipts remain coherent, promote only the scoped long-horizon memory/continuity behavior defined in the Opus 5.5 envelope; otherwise preserve zero credit and localize the first failed continuity invariant.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "brain_artifact_test": "PASS_EXISTING_CANONICAL_SUPERVISOR_CHECKPOINT_AND_GIT_STATE",
+    "no_hidden_capability_provider_test": "PASS__CONTINUITY_MECHANISM_IS_DETERMINISTIC_BRAIN_CODE_AND_STATE",
+    "general_substrate_test": "NOT_REQUIRED_FOR_FRESH_MECHANICAL_CONTINUITY_CAPSULE",
+    "specimen_separation_test": "PASS__ANTHROPIC_DESCRIPTION_USED_ONLY_TO_DEFINE_TARGET_BEHAVIOR",
+    "reexecution_without_rediscovery_test": "PASS_HISTORICALLY__FRESH_REVERIFY_PENDING",
+    "brain_configured_verification_test": "PENDING_FRESH_PUBLIC_CAPSULE",
+    "ownership_package_test": "PENDING_PROMOTION_PACKAGE"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_PROMOTE_OPUS55_LONG_HORIZON_CONTINUITY_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4cdac1830804aab373f462c294d984c011a49897",
+    "real_outcome": "Permanently own and recognize the existing Brain mechanism for cross-session durable state and coherent checkpoint resume at or above the useful Opus 5.5 long-horizon continuity behavior, with no model-dependent ownership claim.",
+    "required_capability": "DURABLE_CROSS_SESSION_STATE__CHECKPOINT_RELAUNCH__SAME_MISSION_RESUME_WITHOUT_DUPLICATE_COMPLETED_WORK",
+    "obs_goal": {
+      "real_outcome": "Close one whole Opus-envelope family by recognizing and freshly verifying an already-existing Brain-owned mechanism rather than building or buying another memory system.",
+      "proxy_goals_deleted": [
+        "Build a new memory subsystem",
+        "Use an external model's hidden memory as ownership evidence",
+        "Wait for coding-substrate credits before progressing another family",
+        "Claim autonomous wake or semantic memory quality not supported by evidence"
+      ],
+      "surviving_necessity": "Freshly verify current canonical continuity bytes across a real process boundary and package only the supported family scope."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/same_identity_supervisor.py",
+        "canonical/tests/test_same_identity_supervisor.py",
+        "canonical/astra_runtime/state/ASTRA-RUNTIME-CONTROLLER-RESUME-001.json",
+        "canonical/astra_runtime/state/ASTRA-RUNTIME-CHECKPOINT-REWIND-001.json",
+        "canonical/same_identity_worker/evidence/SAME_IDENTITY_SUPERVISOR_V1__VERIFICATION.json",
+        "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+        "canonical/qualification/SUPERWORKER_INTEGRATED_2_CLEANROOM_WOLFRAM_ADJUDICATION_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "Anthropic Opus 5.5 documented agents behavior: uses memory across sessions and drives long-running work forward",
+        "Anthropic long-running-agent harness pattern: persistent artifacts bridge discrete sessions"
+      ],
+      "capability_work_deleted": [
+        "No new database",
+        "No vector-memory layer",
+        "No model API",
+        "No autonomous scheduler",
+        "No provider-specific state service"
+      ],
+      "surviving_gap": "Current exact supervisor bytes have not been freshly reverified in a clean zero-cost public process-boundary capsule under the Opus-family ownership framing."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Proof/recognition gap, not missing mechanism.",
+      "delete_bypass_substitute_options": [
+        "DELETE new implementation work: survives",
+        "REUSE existing supervisor/checkpoints/receipts: survives",
+        "External managed-agent memory: rejected as ownership route",
+        "New memory framework: rejected as unnecessary"
+      ],
+      "surviving_causal_blocker": "FRESH_CURRENT_BYTES_PROCESS_BOUNDARY_VERIFICATION_AND_SCOPED_OWNERSHIP_PACKAGE_MISSING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_BRAIN_CONTINUITY_MECHANISM_AND_FRESHLY_VERIFY",
+        "IMPORT_EXTERNAL_AGENT_MEMORY_FRAMEWORK",
+        "BUILD_NEW_MEMORY_SYSTEM"
+      ],
+      "losing_routes_reason": "The required mechanism already exists in Brain and has historical independent evidence; importing or building adds machinery without deleting any requirement.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Fresh public capsule will run two separate Python processes over the exact current supervisor blob: process A checkpoints before runtime; process B starts from disk state, resumes same identity/task/mission exactly once, and completes. An independent third process will recompute task/mission hashes and inspect the event/state ledger. Historical genuine later-chat and independent Wolfram clean-room receipts provide non-synthetic corroboration."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Future searches for generic persistent-memory infrastructure for this scoped family",
+        "External model memory as a required capability provider for durable continuity"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "task manifest drift rejection",
+        "same-identity lease binding",
+        "checkpoint/relaunch",
+        "provider-loss recovery",
+        "completed-work reuse without reexecution"
+      ],
+      "fresh_reuse_plan": "After promotion, route long-running work through the canonical checkpoint/same-identity continuity package by default and treat semantic memory quality/autonomous wake as separate capabilities."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused historical clean-room and genuine later-chat evidence",
+        "Reused current canonical supervisor implementation",
+        "Used current Anthropic description only to bound the target behavior"
+      ],
+      "search_stop_decision": "Existing Brain mechanism directly covers the target behavior and has historical independent evidence. Further supplier search cannot plausibly improve time-to-proof enough to justify delaying a fresh current-byte verification.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_BRAIN_CONTINUITY_MECHANISM_AND_FRESHLY_VERIFY",
+      "IMPORT_EXTERNAL_AGENT_MEMORY_FRAMEWORK",
+      "BUILD_NEW_MEMORY_SYSTEM"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_MEMORY_SYSTEM",
+      "EXTERNAL_OPAQUE_MEMORY_AS_OWNERSHIP",
+      "WAIT_FOR_CODING_BENCHMARK_SUBSTRATE"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_BRAIN_CONTINUITY_MECHANISM_AND_FRESHLY_VERIFY",
+    "why_selected_route_is_fastest_sufficient": "The mechanism already exists, is Brain-owned, has prior real and independent clean-room evidence, requires no cognition substrate or paid service, and can be freshly verified at the behavioral ceiling with two deterministic process invocations plus an independent state check.",
+    "expected_parent_level_state_change": "If current Brain continuity bytes pass a fresh forced-process-boundary verification and existing independent receipts remain coherent, promote only the scoped long-horizon memory/continuity behavior defined in the Opus 5.5 envelope; otherwise preserve zero credit and localize the first failed continuity invariant.",
+    "stop_condition": "Stop after one fresh current-byte process-boundary capsule and one independent ledger verification. Promote only if all continuity invariants pass and $0 incremental spend is preserved; do not expand the claim to autonomous wake, arbitrary semantic memory quality, or general cognition."
+  }
+}
