@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-PARENT-OPENENDED-TASK-A-HARNESS-CAUSAL-ATTRIBUTION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Correct PR347's unsupported runtime/compiler causal attribution: preserve the Mauna Loa objective as spent/no-replay, classify run 36670516407 as harness-confounded because runner PR49 directly precompiled with goal_compiler.compile_goal and never invoked public runtime.run_goal, and make generic harness repair/qualification the next frontier action with zero parent capability or runtime-gap credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "merged Brain PR347 canonicalized run 36670516407 as a broad-objective compiler/grounding gap",
+    "exact public runner PR49 patch run_pr328_openended_climate_task_a_once.py",
+    "runner PR49 directly calls compiler.compile_goal(goal, registry, ROOT), exits on COMPILE failure, and never calls public runtime.run_goal",
+    "current astra_runtime public run_goal owns open-ended fallback/grounding/discovery behavior that PR49 bypassed",
+    "Mauna Loa task execution_count=1 and replay_allowed=false remain immutable"
+  ],
+  "evidence_presence_classification": "EXISTING_PRIMARY_RUNNER_CODE_FALSIFIES_CURRENT_CANONICAL_CAUSAL_ATTRIBUTION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after canonical cross-surface truth correction. Do not change runtime, replay Mauna Loa, grant residual-gap/capability credit, or freeze a fresh parent task until a generic one-shot harness that enters through public runtime.run_goal without direct compiler/controller prewiring is independently qualified.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore truthful parent evidence authority so the next capability action tests Brain rather than a carrier-side precompiler.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve the spent real-task receipt while removing causal credit that the producer harness never had authority to establish.",
+      "proxy_goals_deleted": [
+        "repair goal_compiler from the spent climate task",
+        "replay or rephrase the Mauna Loa task",
+        "treat a carrier preflight failure as a Brain runtime failure",
+        "award residual-gap or capability credit from the confounded run"
+      ],
+      "surviving_necessity": "Canonical truth correction plus a generic valid-entrypoint harness qualification before the next fresh parent task."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "public astra_runtime.run_goal entrypoint",
+        "model-independent fallback/grounding/composition path behind run_goal",
+        "public runner PR49 one-shot harness"
+      ],
+      "external_existing_routes_checked": [
+        "verification-capsule-runner PR49 exact script patch",
+        "workflow run 36670516407 terminal receipt"
+      ],
+      "capability_work_deleted": [
+        "no runtime change",
+        "no goal_compiler repair",
+        "no task replay",
+        "no new model route"
+      ],
+      "surviving_gap": "PARENT_OPEN_ENDED_TASK_A_HARNESS_BYPASS__DIRECT_COMPILER_PREFLIGHT_SKIPPED_PUBLIC_RUN_GOAL"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific carrier harness defect. Runner PR49 invoked goal_compiler.compile_goal directly and terminated before public runtime.run_goal could exercise the intended open-ended fallback.",
+      "delete_bypass_substitute_options": [
+        "delete the false runtime/compiler causal attribution",
+        "reuse the immutable spent/no-replay receipt only for freshness/accounting",
+        "repair the generic harness entrypoint rather than the Brain runtime",
+        "qualify harness semantics on non-parent evidence before another scarce task"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_TASK_A_HARNESS_BYPASS__DIRECT_COMPILER_PREFLIGHT_SKIPPED_PUBLIC_RUN_GOAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CORRECT_CANONICAL_CAUSAL_ATTRIBUTION_AND_MIRRORS",
+        "PATCH_BRAIN_RUNTIME_FROM_CONFOUNDED_TASK",
+        "REPLAY_SPENT_TASK"
+      ],
+      "losing_routes_reason": "Runtime repair is unsupported because the runtime entrypoint was never exercised; replay is forbidden and cannot recover freshness.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution is needed for the correction: the exact runner source establishes control flow, and the immutable terminal receipt establishes the one spent execution."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR347 broad-objective compiler-gap causal attribution",
+        "any route-frontier work that assumes run 36670516407 exercised public runtime.run_goal",
+        "any task-specific compiler/runtime repair derived from Mauna Loa"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime-derived cognition provenance guard",
+        "one-shot/no-replay discipline",
+        "public run_goal entrypoint hardening from PR329"
+      ],
+      "fresh_reuse_plan": "After correction, repair and qualify the generic parent harness on non-parent evidence; only then freeze one materially different fresh open-ended Task A against exact current Brain bytes."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused immutable task-spend receipt",
+        "reused exact PR49 patch",
+        "reused current run_goal boundary semantics"
+      ],
+      "search_stop_decision": "The exact producer source proves the confound directly; further supplier discovery cannot change which function PR49 called.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Bound to exact current main dc38bf8370d692d3f18a5aff446d26933f9dd03a; refresh if main changes before merge."
+    },
+    "routes_considered": [
+      "CORRECT_CANONICAL_CAUSAL_ATTRIBUTION_AND_MIRRORS",
+      "PATCH_BRAIN_RUNTIME_FROM_CONFOUNDED_TASK",
+      "REPLAY_SPENT_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "FALSE_RUNTIME_CAUSAL_ATTRIBUTION",
+      "TASK_REPLAY",
+      "TASK_SPECIFIC_RUNTIME_REPAIR"
+    ],
+    "selected_surviving_route": "CORRECT_CANONICAL_CAUSAL_ATTRIBUTION_AND_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "Primary source control flow already falsifies the current attribution. A state-only reconciliation is exact, $0, and avoids an invalid runtime mutation or scarce-task spend.",
+    "expected_parent_level_state_change": "Correct PR347's unsupported runtime/compiler causal attribution: preserve the Mauna Loa objective as spent/no-replay, classify run 36670516407 as harness-confounded because runner PR49 directly precompiled with goal_compiler.compile_goal and never invoked public runtime.run_goal, and make generic harness repair/qualification the next frontier action with zero parent capability or runtime-gap credit.",
+    "stop_condition": "Stop after canonical cross-surface truth correction. Do not change runtime, replay Mauna Loa, grant residual-gap/capability credit, or freeze a fresh parent task until a generic one-shot harness that enters through public runtime.run_goal without direct compiler/controller prewiring is independently qualified.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action corrects a falsified causal attribution from exact already-known producer source; it performs no capability-route selection or execution."
+    }
+  }
+}
