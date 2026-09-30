@@ -1,0 +1,344 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-RP2040-ADC-OPEN-ENDED-DESIGN-REAL-TASK-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either produce the second admissible cross-domain model-independent open-ended parent real-task PASS and immediately adjudicate frontier dependency removal, or localize the first genuinely open-ended causal gap without replay or task-specific repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "PR301 demography is the one admissible clean parent task and cannot be replayed",
+    "PR304 PubChem chemistry task is SPENT exactly once at public run 36669136068 and is inadmissible for parent proof because its research plan was prewired; do not replay it",
+    "PR304 incidental first failure JQ_FAILED: NUMERIC_RELATION_INPUT_NOT_NUMBER is preserved as diagnostic evidence but does not displace the parent open-ended proof obligation",
+    "PR303 promotion firewall is merged and requires ASTRA_RUNTIME_DERIVED_V1 cognition provenance for cognitive credit",
+    "no open Brain PR currently owns this blocker lease",
+    "Raspberry Pi currently publishes official RP2040 and Raspberry Pi Pico datasheets/documentation; exact source selection and values remain intentionally unprovided to the producer"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze this plain open-ended engineering objective before exact source discovery; execute exactly once through runtime execute_step with optional model planning disabled; independently verify only after producer success; on failure preserve the first causal gap and never replay this task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Demonstrate the parent capability on a genuinely open-ended embedded-electronics design task that forces decomposition, source/tool discovery and selection, quantitative reasoning, provenance, and independent verification without frontier-model cognition.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Satisfy the sole remaining parent acquisition proof with evidence that exercises the defining open-ended behavior rather than another prewired calculator.",
+      "proxy_goals_deleted": [
+        "another narrow URL/path/formula benchmark",
+        "repairing the incidental PR304 type seam before open-ended evidence",
+        "replaying any spent parent task",
+        "another governance layer",
+        "model qualification"
+      ],
+      "surviving_necessity": "One fresh materially different parent task whose research plan is not prewired and whose producer path is runtime-proven model-independent."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "knowledge.json.fetch.external",
+        "web.browser.rendered.capture.chromedriver",
+        "json.query.jq",
+        "math.numeric_expression.sympy",
+        "current run_goal deterministic grounding/composition and bounded generic capability-acquisition fallback"
+      ],
+      "external_existing_routes_checked": [
+        "official Raspberry Pi RP2040/Pico documentation surface exists and is current",
+        "one-off hand calculation or prewired datasheet route rejected because it cannot prove open-ended transfer",
+        "frontier-model cognition rejected because it invalidates the dependency-removal claim"
+      ],
+      "capability_work_deleted": [
+        "no preemptive type-seam repair",
+        "no new source-specific parser",
+        "no task-specific formula/compiler patch",
+        "no new model route",
+        "no preselected datasheet URL in the task"
+      ],
+      "surviving_gap": "Unknown until this frozen open-ended task executes; static inspection cannot prove the parent behavior."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The remaining blocker is evidentiary: one admissible cross-domain open-ended real task is still required. PR304 was both spent and scope-insufficient for this proof.",
+      "delete_bypass_substitute_options": [
+        "delete prewired-task interpretation of Task B",
+        "reuse the current inherited runtime and verified bound capabilities",
+        "allow generic zero-cost capability acquisition only if the runtime itself selects it",
+        "reject one-off human/model answers as parent proof"
+      ],
+      "surviving_causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_OPEN_ENDED_RUNTIME_ON_FRESH_EMBEDDED_ELECTRONICS_TASK",
+        "PREWIRE_PRIMARY_SOURCE_URLS_AND_FORMULAS",
+        "HAND_CODE_ONE_OFF_RP2040_DIVIDER_ANSWER",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Only a plain-goal execution through the inherited model-independent runtime can test the missing parent behavior. Prewiring removes the capability under test, a one-off answer proves no transfer, and frontier cognition invalidates dependency-removal credit.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Direct real effect first: the producer must autonomously produce a quantitatively constrained engineering decision. Only after producer success, an independent verifier finds primary documentation separately and recomputes the consequential electrical constraints."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all narrow Task-B candidates with preselected sources/formulas",
+        "PR304 replay",
+        "preemptive repair of a diagnostic-only type seam unless a fresh open-ended task makes it causal"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "plain-goal grounding",
+        "executable composition",
+        "live evidence acquisition",
+        "browser capture",
+        "typed arithmetic",
+        "numeric relation evaluation",
+        "decision synthesis",
+        "runtime cognition provenance"
+      ],
+      "fresh_reuse_plan": "If this task passes, adjudicate the parent two-task acquisition contract immediately. If it fails, OBS only the first causal gap and use a new materially different task after any generic repair."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical inventory and five verified child capabilities",
+        "reused the public zero-cost verification carrier",
+        "reused PR303 runtime provenance firewall",
+        "preserved PR304 only as spent diagnostic evidence"
+      ],
+      "search_stop_decision": "A genuinely open-ended fresh task now has higher information gain than more architecture inspection or preemptive repair; no unresolved route can prove the parent capability without executing such a task.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main, official Raspberry Pi documentation availability, bound registry, and public runner evidence were refreshed immediately before freeze."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_OPEN_ENDED_RUNTIME_ON_FRESH_EMBEDDED_ELECTRONICS_TASK",
+      "PREWIRE_PRIMARY_SOURCE_URLS_AND_FORMULAS",
+      "HAND_CODE_ONE_OFF_RP2040_DIVIDER_ANSWER",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_TASK_B",
+      "PR304_REPLAY",
+      "ONE_OFF_HUMAN_OR_SCRIPT_ANSWER_AS_PARENT_PROOF",
+      "FRONTIER_MODEL_COGNITION",
+      "PREEMPTIVE_INCIDENTAL_TYPE_SEAM_REPAIR"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_OPEN_ENDED_RUNTIME_ON_FRESH_EMBEDDED_ELECTRONICS_TASK",
+    "why_selected_route_is_fastest_sufficient": "It attacks the sole parent proof obligation directly on current verified model-independent machinery, costs $0 incrementally, preserves one-shot falsifiability, and avoids implementing anything before evidence shows a causal gap.",
+    "expected_parent_level_state_change": "Either produce the second admissible cross-domain model-independent open-ended parent real-task PASS and immediately adjudicate frontier dependency removal, or localize the first genuinely open-ended causal gap without replay or task-specific repair.",
+    "stop_condition": "Freeze this plain open-ended engineering objective before exact source discovery; execute exactly once through runtime execute_step with optional model planning disabled; independently verify only after producer success; on failure preserve the first causal gap and never replay this task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:35:30Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_OPEN_ENDED_RUNTIME_ON_FRESH_EMBEDDED_ELECTRONICS_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 0292dc91d7b2354beede3e530256054330fb94d8",
+          "parent package requires a second cross-domain real task; current runtime has five verified child capabilities plus runtime-derived cognition provenance"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Raspberry Pi RP2040 Product Information Portal and datasheet surface observed current on 2026-09-30",
+          "Raspberry Pi Pico Product Information Portal and datasheet surface observed current on 2026-09-30"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "current BOUND_CAPABILITY_REGISTRY_V1 contains verified browser capture, external JSON evidence fetch, jq, restricted SymPy, plain-goal grounding and decision synthesis"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "broad search confirms the RP2040/Pico ADC design problem is externally documented; discovery results are sensors only and no community answer is admitted as proof"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent open-ended embedded electronics research source discovery tool selection quantitative verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "authoritative Raspberry Pi Pico RP2040 electrical documentation ADC"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "plain-goal deterministic research workflow source discovery engineering calculation independent verifier"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current Raspberry Pi RP2040 Pico datasheet documentation September 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_OPEN_ENDED_RUNTIME_ON_FRESH_EMBEDDED_ELECTRONICS_TASK",
+          "evidence": [
+            "current inherited Brain stack and merged PR303 provenance firewall",
+            "current official Raspberry Pi documentation surface exists without embedding exact answer facts into the task"
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED main 0292dc91d7b2354beede3e530256054330fb94d8",
+            "OFFICIAL_PRIMARY Raspberry Pi documentation availability check",
+            "DIRECT_PROBE public runner task execution 36669136068 proves current account-scoped carrier and outbound HTTPS"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly exercises the parent capability definition and preserves runtime-derived model-independence evidence.",
+            "CAPABILITY_STRENGTH": "Requires decomposition, source/tool selection, quantitative design, provenance and verification rather than a prewired calculation.",
+            "WALL_CLOCK": "No implementation before evidence; current runtime and carrier are reused.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Current public GitHub Actions carrier executed successfully at the task step minutes earlier; official primary documentation surface is available.",
+            "VERIFIABILITY": "Producer is one-shot and answer-blind; an independent post-success verifier can re-find primary documents and recompute electrical constraints."
+          }
+        },
+        {
+          "route": "PREWIRE_PRIMARY_SOURCE_URLS_AND_FORMULAS",
+          "evidence": [
+            "PR304 demonstrated why a fully prewired research plan is scope-insufficient for the parent bar"
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED corrected PR304 historical record"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could answer a narrow calculation but does not prove the open-ended capability.",
+            "CAPABILITY_STRENGTH": "Weaker than the target because decomposition and source/tool selection are removed.",
+            "WALL_CLOCK": "Potentially faster per task but invalid for the required proof.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for the narrow calculation only.",
+            "VERIFIABILITY": "Narrow result is verifiable but the parent promotion claim would be invalid."
+          }
+        }
+      ],
+      "negative_search_summary": "No route can dominate direct execution because the unresolved obligation is itself evidence of open-ended transfer. Prewiring or frontier cognition would make the proof inadmissible.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_OPEN_ENDED_RUNTIME_ON_FRESH_EMBEDDED_ELECTRONICS_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:35:30Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_OPEN_ENDED_RUNTIME_ON_FRESH_EMBEDDED_ELECTRONICS_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_0292dc91d7b2354beede3e530256054330fb94d8",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:35:30Z",
+            "evidence": [
+              "BRAIN_INHERITED main 0292dc91d7b2354beede3e530256054330fb94d8 with merged PR303 cognition provenance firewall"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:31:34Z",
+            "evidence": [
+              "DIRECT_PROBE runner workflow 36669136068 reached and executed the frozen producer task on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PUBLIC_HTTPS_EGRESS_FROM_VERIFICATION_CARRIER",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:28:12Z",
+            "evidence": [
+              "DIRECT_PROBE generic JSON source preflight 36668957399 reached all frozen PubChem HTTPS endpoints from the same carrier"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "CURRENT_BOUND_CAPABILITY_REGISTRY_AND_RUNTIME_CODE",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:35:30Z",
+            "evidence": [
+              "BRAIN_INHERITED BOUND_CAPABILITY_REGISTRY_V1 and current runtime on exact base"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
