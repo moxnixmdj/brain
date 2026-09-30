@@ -1,0 +1,324 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-GROUNDING-INPUT-CONTRACT-BINDABILITY-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "probe_id": null,
+  "causal_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Repair grounding so a clause is resolved only when at least one semantically justified bound capability is also executable-input-bindable under Brain's existing compiler contract.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR260 reopened grounding after fresh real-task falsification run 36649042160.",
+    "Composition correctly failed closed with NO_BINDABLE_CANDIDATE_FOR_CLAUSE:0.",
+    "Existing goal_compiler._bind_inputs already provides the trusted deterministic binding contract.",
+    "Existing grounding currently ranks candidates semantically without calling the binder.",
+    "Existing knowledge.json.fetch.external exposes a goal_url binding and is the appropriate capability for a literal URL clause.",
+    "Prior external parser alternatives Attempto APE, Lark, textX do not remove the capability input-bindability seam.",
+    "Broader symbolic architectures Soar, OpenNARS, Hyperon, PrologAI were checked but add representation/integration machinery and do not dominate the one-function binder reuse."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reuse the existing compiler binder during grounding candidate admission; add generic positive/negative regressions including a fresh non-Requests literal-URL case; validate exact bytes; do not replay run 36649042160.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a965ec72336dfdcb92f5a17c28b608f3b017a341",
+    "real_outcome": "Restore truthful model-independent grounding by refusing semantic candidates that cannot be instantiated from currently available clause/context data.",
+    "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "obs_goal": {
+      "real_outcome": "A plain goal clause is grounded only when at least one bound capability is both semantically justified and executably input-bindable.",
+      "proxy_goals_deleted": [
+        "Replay the Requests task",
+        "Patch composition to guess missing inputs",
+        "Special-case psf/requests or GitHub URLs",
+        "Integrate a new parser/cognitive architecture"
+      ],
+      "surviving_necessity": "Fresh real-task evidence proved semantic-only grounding can lie about executable readiness."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "plain_goal_bound_grounding.py",
+        "goal_compiler._bind_inputs",
+        "grounded_executable_composition.py",
+        "BOUND_CAPABILITY_REGISTRY_V1.json",
+        "PR260 falsification evidence"
+      ],
+      "external_existing_routes_checked": [
+        "Attempto APE",
+        "Lark",
+        "textX",
+        "Soar",
+        "OpenNARS",
+        "OpenCog Hyperon",
+        "PrologAI/Mentova"
+      ],
+      "capability_work_deleted": [
+        "No new binder",
+        "No new parser",
+        "No task-specific URL handler",
+        "No model",
+        "No composition guessing"
+      ],
+      "surviving_gap": "Grounding candidate admission does not test executable input compatibility."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic interface defect between semantic candidate ranking and the existing deterministic input binder.",
+      "delete_bypass_substitute_options": [
+        "DELETE semantic grounding: invalid; parent needs plain-goal intake.",
+        "BYPASS with composition guessing: rejected because it invents inputs.",
+        "SUBSTITUTE parser/cognitive frameworks: non-dominating because input contracts remain Brain-specific.",
+        "REUSE compiler._bind_inputs during grounding admission: survives."
+      ],
+      "surviving_causal_blocker": "SEMANTIC_MATCH_WITHOUT_BINDABLE_ACTION_TEMPLATE_INPUTS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_GOAL_COMPILER_BINDER_DURING_GROUNDING_ADMISSION",
+        "DUPLICATE_BINDER_RULES_IN_GROUNDING",
+        "PATCH_COMPOSITION_TO_GUESS_INPUTS",
+        "EXTERNAL_SYMBOLIC_ARCHITECTURE_SUBSTITUTION"
+      ],
+      "losing_routes_reason": "The existing binder is already the execution contract trusted downstream. Reusing it removes the contradiction with the smallest change and avoids divergent semantics.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Regression tests must prove an unbindable semantically strong candidate is rejected while a bindable candidate survives; then exact bytes can be exercised on a fresh non-Requests literal-URL task."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any downstream composition repair whose only purpose is to guess inputs for bad grounding candidates",
+        "Broad symbolic-architecture substitution for this localized seam"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Input-contract-aware grounding admission"
+      ],
+      "fresh_reuse_plan": "After exact-byte validation, execute a new literal-URL real task different from Requests and then a materially distinct reuse before restoring broad grounding credit."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR260 causal localization",
+        "Reuse compiler binder",
+        "Reuse prior parser challenger search",
+        "Stop broad cognition-architecture search because live Brain localized a narrower first blocker"
+      ],
+      "search_stop_decision": "The causal seam and reusable binder are both directly observed in current main; no external route removes the Brain-specific bindability requirement with less work.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed after PR260 using current Brain state plus current deterministic/symbolic challenger scan; no plausible dominator remains."
+    },
+    "routes_considered": [
+      "REUSE_GOAL_COMPILER_BINDER_DURING_GROUNDING_ADMISSION",
+      "DUPLICATE_GROUNDING_BINDER",
+      "COMPOSITION_INPUT_GUESSING",
+      "EXTERNAL_PARSER_OR_COGNITIVE_ARCHITECTURE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REQUESTS_TASK_REPLAY",
+      "COMPOSITION_INPUT_GUESSING",
+      "TASK_SPECIFIC_URL_PATCH",
+      "NEW_MODEL",
+      "NEW_PARSER",
+      "BROAD_COGNITIVE_ARCHITECTURE_INTEGRATION"
+    ],
+    "selected_surviving_route": "REUSE_GOAL_COMPILER_BINDER_DURING_GROUNDING_ADMISSION",
+    "why_selected_route_is_fastest_sufficient": "It reuses the already-trusted execution binder, changes only candidate admission, preserves fail-closed semantics, adds no dependency, and directly addresses the first falsified seam.",
+    "expected_parent_level_state_change": "Repair grounding so a clause is resolved only when at least one semantically justified bound capability is also executable-input-bindable under Brain's existing compiler contract.",
+    "stop_condition": "Reuse the existing compiler binder during grounding candidate admission; add generic positive/negative regressions including a fresh non-Requests literal-URL case; validate exact bytes; do not replay run 36649042160.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T00:19:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "SEMANTIC_ONLY_BOUND_REGISTRY_GROUNDING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR260",
+          "run 36649042160",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://lark-parser.readthedocs.io/",
+          "https://hyperon.opencog.org/",
+          "https://soar.eecs.umich.edu/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/Attempto/APE",
+          "https://github.com/SoarGroup/Soar",
+          "https://github.com/opennars/opennars",
+          "https://github.com/ai-university-aiu/PrologAI"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-30 search for deterministic symbolic planning/reasoning and semantic parsing alternatives"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic semantic grounding action input contract bindability without model"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Attempto Lark textX Soar OpenNARS Hyperon PrologAI grounding planning"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "reuse action template binder during semantic grounding candidate admission"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current model-independent symbolic reasoning planning semantic parsing"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_GOAL_COMPILER_BINDER_DURING_GROUNDING_ADMISSION",
+          "evidence": [
+            "Current compiler _bind_inputs is already the downstream execution contract.",
+            "PR260 proves semantic-only admission is insufficient."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36649042160",
+            "BRAIN_INHERITED current main code"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Uses the same fail-closed contract as execution.",
+            "CAPABILITY_STRENGTH": "Directly closes semantic-to-executable mismatch.",
+            "WALL_CLOCK": "Small local change.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Reuses existing tested binder.",
+            "VERIFIABILITY": "Deterministic positive/negative tests plus fresh real task."
+          }
+        },
+        {
+          "route": "EXTERNAL_SYMBOLIC_OR_PARSER_SUBSTITUTION",
+          "evidence": [
+            "Attempto/Lark/textX need authored grammar/semantics; Soar/OpenNARS/Hyperon/PrologAI require integration and still need Brain-specific action contracts."
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY and repository source inspection"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially useful broader reasoning substrates but do not automatically satisfy Brain action-template inputs.",
+            "CAPABILITY_STRENGTH": "Broader than needed for this seam.",
+            "WALL_CLOCK": "Much slower integration.",
+            "INCREMENTAL_COST": "$0 software possible.",
+            "RELIABILITY": "Varies by system.",
+            "VERIFIABILITY": "Requires new integration qualification."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger removes the Brain-specific input-contract compatibility seam more directly than reusing Brain's existing binder.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_GOAL_COMPILER_BINDER_DURING_GROUNDING_ADMISSION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T00:19:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_GOAL_COMPILER_BINDER_DURING_GROUNDING_ADMISSION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_MAIN_AND_GITHUB_MUTATION",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:19:00Z",
+            "evidence": [
+              "DIRECT_PROBE branch creation succeeded from exact main a965ec72336dfdcb92f5a17c28b608f3b017a341"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:11:04Z",
+            "evidence": [
+              "DIRECT_PROBE run 36649042160 received a runner and executed through the real-task grounding/composition path; failure was semantic, not carrier startup"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "CURRENT_GOAL_COMPILER_BINDER",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:19:00Z",
+            "evidence": [
+              "BRAIN_INHERITED canonical/runtime/goal_compiler.py _bind_inputs inspected on exact base"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
