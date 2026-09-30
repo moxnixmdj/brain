@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V5",
+  "action_id": "OBSOLETE-OPUS55-WHOLE-ENVELOPE-20260930-V1",
+  "status": "AUTHORIZED_EXECUTION",
+  "canonical_generation": "2026-09-30-opus55-capability-ownership-v5",
+  "canonical_base_commit": "80ff84b907b7cb6fa1ad90b67072c94ba8e2bba4",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "WHOLE_ENVELOPE_CAPABILITY_OBSOLESCENCE",
+  "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::WHOLE_ENVELOPE_NOT_YET_OBSOLETED::WHOLE_ENVELOPE_CAPABILITY_OBSOLESCENCE",
+  "expected_parent_frontier_change": "Recover the complete useful Opus 5.5 envelope, promote every currently defensible equal-or-better configured route, and reduce the frontier to exact unresolved Opus-leading capability bars.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "opus_acceptance_bar": "GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_policy": "FIND_EXISTING__CONFIGURE__VERIFY__SAVE_PERMANENTLY",
+    "capability_externalization": "FORBIDDEN_AS_NORMAL_OPERATION",
+    "underlying_capability_invention": "FORBIDDEN",
+    "hard_incremental_spend_usd": 0
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1.json"
+  },
+  "prior_work_checked": [
+    "Full historical scoreboard and capability events",
+    "Historical frontier capability target map",
+    "Astra external parity correction",
+    "Current V5 queue/pointer/hierarchy",
+    "Current public Opus/Astra/Sonnet benchmark evidence"
+  ],
+  "evidence_presence_classification": "WHOLE_ENVELOPE_PUBLIC_AND_CANONICAL_EVIDENCE_RECOVERED",
+  "stop_condition": "Promote only exact scopes that clear Opus 5.5 with durable configuration; leave all others explicit and continue existing-route search. Never invent or lower the bar.",
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_base_commit": "80ff84b907b7cb6fa1ad90b67072c94ba8e2bba4",
+    "obs_goal": {
+      "real_outcome": "Make all useful Opus 5.5 capabilities permanently Brain-owned at equal-or-better strength.",
+      "proxy_goals_deleted": [
+        "More internal predicates",
+        "Old open-research micro-repair",
+        "worker scaling",
+        "model independence"
+      ],
+      "surviving_necessity": "Whole-envelope ownership remains incomplete."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Historical Brain packages",
+        "Astra internal suite evidence",
+        "Wolfram/SymPy",
+        "GitHub/Replit/Vercel/Figma/Remote Desktop/Superpowers",
+        "ChatGPT Work/Codex"
+      ],
+      "external_existing_routes_checked": [
+        "GPT-6 Astra",
+        "GPT-6.1 Sol",
+        "Claude Sonnet 5.5",
+        "current public benchmark leaders"
+      ],
+      "capability_work_deleted": [
+        "No new underlying capability construction",
+        "No replay of spent parent research tasks"
+      ],
+      "surviving_gap": "Three current public Opus-leading bars plus several unbenchmarked broad-family comparisons."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Capability-by-capability evidence/access gap, not a generic runtime micro-bug.",
+      "delete_bypass_substitute_options": [
+        "Use already-owned historical package",
+        "Use GPT-6 Astra included route",
+        "Use another existing leader if zero-cost/configurable",
+        "Compose existing tools and verify"
+      ],
+      "surviving_causal_blocker": "NO_VERIFIED_EXISTING_ZERO_INCREMENTAL_ROUTE_AT_OR_ABOVE_OPUS_FOR_ALL_REMAINING_FAMILIES"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "GPT-6 Astra included Work/Codex",
+        "Historical Brain-owned packages",
+        "Other benchmark-leading existing systems",
+        "Existing compositions"
+      ],
+      "losing_routes_reason": "Routes below target bar or without zero-incremental durable access cannot be promoted.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use current public matched benchmarks where available; use direct same-harness tasks only for families lacking adequate comparable evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Old open-research micro-repair priority",
+        "Any universal Astra parity assumption"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Exact symbolic computation",
+        "Historical grounding/composition/synthesis components"
+      ],
+      "fresh_reuse_plan": "Use permanent ownership packages directly in future tasks; do not rediscover them."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused canonical history and current benchmark tables",
+        "Searched exact residual bars rather than generic AI model lists"
+      ],
+      "search_stop_decision": "Current pass stops only after all immediately promotable routes are saved and unresolved leaders are explicitly localized.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "selected_surviving_route": "WHOLE_ENVELOPE_MATRIX_PLUS_SCOPED_PROMOTION_PLUS_PARALLEL_RESIDUAL_EXISTING_ROUTE_SEARCH",
+    "why_selected_route_is_fastest_sufficient": "It converts existing evidence into permanent ownership immediately and focuses all remaining search only on exact Opus-leading residuals.",
+    "expected_parent_level_state_change": "WHOLE_ENVELOPE_RECOVERED__TWO_NEW_SCOPED_CAPABILITIES_OWNED__RESIDUAL_FRONTIER_COMPRESSED",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action reconciles multiple existing suppliers and public evidence into canonical ownership state; each future unresolved supplier selection must run its own fresh challenger frontier."
+    }
+  }
+}
