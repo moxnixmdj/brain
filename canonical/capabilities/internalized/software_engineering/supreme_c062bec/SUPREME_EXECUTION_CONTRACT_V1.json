@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_SUPREME_EXECUTION_CONTRACT_V1",
+  "status": "MANDATORY_FAIL_CLOSED_INTEGRATION_GLUE",
+  "capability_configuration": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
+  "source_configuration": [
+    "SKILL.md",
+    "references/constitution.md",
+    "references/operating-protocol.md",
+    "references/environment-profile.md",
+    "references/persistent-state.md"
+  ],
+  "purpose": "Compile already-owned Supreme operating discipline into enforceable evidence gates so configured execution cannot silently skip verification-before-completion.",
+  "invention_status": "INTEGRATION_GLUE_ONLY__NO_NEW_UNDERLYING_CODING_METHOD",
+  "submission_gates": [
+    {
+      "id": "CONFIGURATION_BOUND",
+      "required": true,
+      "evidence": "Exact Supreme manifest/configuration revision recorded before task work."
+    },
+    {
+      "id": "ENVIRONMENT_EVIDENCE",
+      "required": true,
+      "evidence": "Runtime, repository/environment snapshot, allowed dependencies/tools, and task artifacts inspected before implementation."
+    },
+    {
+      "id": "ACCEPTANCE_AND_INVARIANTS",
+      "required": true,
+      "evidence": "Requested behavior, preserved behavior, explicit invariants, and forbidden changes enumerated from task bytes before coding."
+    },
+    {
+      "id": "RISK_CLASSIFICATION",
+      "required": true,
+      "evidence": "Task risk classified and verification depth selected. Security, concurrency, persistence, performance, parsing, and recovery tasks require adversarial/boundary verification."
+    },
+    {
+      "id": "REPRODUCTION_OR_BASELINE",
+      "required": true,
+      "evidence": "For repair tasks, causal failure reproduced before change when possible. For greenfield tasks, a concrete threat/boundary model or failing local check exists before completion."
+    },
+    {
+      "id": "SURGICAL_IMPLEMENTATION",
+      "required": true,
+      "evidence": "Changes stay inside the smallest sufficient causal surface and preserve explicit invariants."
+    },
+    {
+      "id": "INDEPENDENT_SELF_VERIFICATION",
+      "required": true,
+      "evidence": "Candidate passes task-relevant independent checks that do not depend on benchmark solution/verifier logic. Public standards/corpora/fuzz/property checks should be reused when available."
+    },
+    {
+      "id": "ADVERSARIAL_NEGATIVE_TESTS",
+      "required": true,
+      "conditional": "MANDATORY_FOR_SECURITY_PARSING_CONCURRENCY_RECOVERY_AND_OTHER_HIGH_RISK_TASKS",
+      "evidence": "At least one adversarial/boundary test class beyond happy-path checks is executed and preserved."
+    },
+    {
+      "id": "COMPLETION_AUDIT",
+      "required": true,
+      "evidence": "Every acceptance criterion and invariant is mapped to observed evidence; unresolved known gaps block submission."
+    },
+    {
+      "id": "FRESHNESS_AND_CONTAMINATION",
+      "required": true,
+      "evidence": "No solution/task-specific verifier logic was read before submission; spent tasks cannot be recycled as fresh promotion evidence."
+    }
+  ],
+  "fail_closed_rules": [
+    "MISSING_REQUIRED_GATE_EVIDENCE_BLOCKS_EXTERNAL_SUBMISSION",
+    "KNOWN_ACCEPTANCE_GAP_BLOCKS_EXTERNAL_SUBMISSION",
+    "SELF_TESTS_NOT_RISK_APPROPRIATE_BLOCK_EXTERNAL_SUBMISSION",
+    "BENCHMARK_SOLUTION_OR_TASK_SPECIFIC_VERIFIER_READ_BEFORE_SUBMISSION_INVALIDATES_FRESH_EVIDENCE",
+    "FAILED_EXTERNAL_BENCHMARK_TASK_BECOMES_SPENT_AND_CANNOT_BE_REPAIRED_THEN_COUNTED_AS_FRESH_PROMOTION_EVIDENCE"
+  ],
+  "generic_regression_from_first_preflight": {
+    "evidence_path": "verification/HTML_JS_FILTER_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+    "lesson": "Textual configuration ownership is insufficient if execution can bypass its mandatory verification discipline.",
+    "task_specific_fix_not_internalized": true
+  },
+  "required_execution_receipt_fields": [
+    "configuration_revision",
+    "task_identity",
+    "environment_evidence",
+    "acceptance_criteria",
+    "invariants",
+    "risk_class",
+    "pre_change_reproduction_or_threat_model",
+    "implementation_scope",
+    "self_tests",
+    "adversarial_tests",
+    "completion_audit",
+    "contamination_state",
+    "submission_authorized"
+  ],
+  "capability_credit": 0
+}
