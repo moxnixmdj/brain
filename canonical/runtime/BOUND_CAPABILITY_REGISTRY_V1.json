@@ -3299,10 +3299,38 @@
         ],
         "adapter_path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py"
       },
-      "status": "CANDIDATE_BOUND_CAPABILITY",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
-        "inherited_relation_capability": "evidence.claim_relation.generic_units.stdlib",
-        "new_interface_status": "PENDING_FRESH_CROSS_DOMAIN_INDEPENDENT_QUALIFICATION_FULL_BOUNDED_OPERATOR_SURFACE"
+        "status": "INDEPENDENT_PUBLIC_FRESH_CROSS_DOMAIN_PASS",
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_pr": 165,
+        "public_run_id": 36685349465,
+        "public_job_id": 109789819554,
+        "exact_producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+        "exact_regression_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+        "downstream_relation_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
+        "fresh_domains": [
+          "HYDROLOGY",
+          "ASTRONOMY",
+          "DATABASES",
+          "MATERIALS",
+          "CHEMISTRY",
+          "ENERGY"
+        ],
+        "operators": [
+          "GT",
+          "LT",
+          "GTE",
+          "LTE",
+          "EQ",
+          "NE",
+          "ABS_DIFF_LTE",
+          "VERBATIM_SUPPORT"
+        ],
+        "ambiguity_fails_closed": true,
+        "single_character_entity_discriminators_verified": true,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
       }
     }
   },
