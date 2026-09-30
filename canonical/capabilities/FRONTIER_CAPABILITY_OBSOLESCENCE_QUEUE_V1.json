@@ -126,7 +126,7 @@
     "latest_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1",
       "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
-      "route": "source.authority.bind.ror",
+      "route": "source.authority.identity.ror",
       "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
       "public_run_id": 36676947006,
       "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
