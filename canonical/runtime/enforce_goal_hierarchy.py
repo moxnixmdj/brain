@@ -710,6 +710,26 @@ def _collect_key_values(value,key):
             out.extend(_collect_key_values(item,key))
     return out
 
+def active_frontier_target_path(hierarchy):
+    target_id=str((hierarchy or {}).get("active_capability_target") or "").strip()
+    if not target_id or len(target_id)>160 or not all(ch.isalnum() or ch=="_" for ch in target_id):
+        fail("ACTIVE_FRONTIER_TARGET_ID_INVALID")
+        return None
+    return "canonical/capabilities/frontier/"+target_id+".json"
+
+def enforce_active_target_record_consistency(hierarchy,target):
+    target_id=str((hierarchy or {}).get("active_capability_target") or "").strip()
+    if not isinstance(target,dict) or not target:
+        fail("ACTIVE_FRONTIER_TARGET_RECORD_INVALID")
+        return
+    if str(target.get("capability_id") or "")!=target_id:
+        fail("TARGET_RECORD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(target.get("residual_gap") or "")!=str((hierarchy or {}).get("current_parent_blocker") or ""):
+        fail("TARGET_RECORD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+    if str(target.get("next_action") or "")!=str((hierarchy or {}).get("next_required_action_class") or ""):
+        fail("TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH")
+
+
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
         fail(label+"_MISSING")
@@ -897,8 +917,26 @@ def main():
         fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
     if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
+    if str(hierarchy.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH")
+
+    target_path=active_frontier_target_path(hierarchy)
+    target={}
+    if target_path is None or not (ROOT/target_path).is_file():
+        fail("ACTIVE_FRONTIER_TARGET_RECORD_MISSING")
+    else:
+        try:
+            target=load(target_path)
+        except Exception as exc:
+            fail("ACTIVE_FRONTIER_TARGET_RECORD_INVALID:"+type(exc).__name__)
+    if target:
+        enforce_active_target_record_consistency(hierarchy,target)
 
     boot=pointer.get("boot_requirements") or {}
+    if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
+        fail("CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY_NOT_REQUIRED")
+    if boot.get("runtime_cognition_provenance_required_for_cognitive_credit") is not True:
+        fail("RUNTIME_COGNITION_PROVENANCE_NOT_REQUIRED_FOR_COGNITIVE_CREDIT")
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
     if boot.get("operator_obs_decision_boundary_required") is not True:
         fail("OPERATOR_OBS_DECISION_BOUNDARY_NOT_REQUIRED")
