@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_TECHNICAL_REAL_TASK_V1",
+  "task_id": "PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "MATERIALS_ENGINEERING_STRUCTURAL_DESIGN_OPTIMIZATION",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "problem_statement": "Among 6061-T6 aluminum, ASTM A36 steel, and Grade 5 Ti-6Al-4V, design the minimum-mass solid circular tie rod for a 1.0 m length carrying 20 kN static axial tension at room temperature. The design must have a safety factor of at least 2.0 against tensile yield and elastic elongation no greater than 1.0 mm. Use authoritative public evidence for the material properties you decide are necessary. For each candidate, report the governing minimum diameter and resulting mass, then identify the lightest compliant candidate. State assumptions, preserve source provenance, and provide a calculation trail suitable for independent verification.",
+  "goal_text": "Solve the frozen materials-engineering design problem in problem_statement using the inherited model-independent parent runtime. Select and justify the required evidence sources, decompose the problem, choose the needed tools or bound capabilities, perform the quantitative work, preserve provenance, and produce a complete answer that satisfies the acceptance contract. Stop at the first causal capability gap rather than hand-coding around it.",
+  "acceptance_contract": {
+    "genuinely_open_ended": true,
+    "producer_must_choose_sources": true,
+    "producer_must_choose_decomposition": true,
+    "producer_must_choose_tool_sequence": true,
+    "predeclared_source_urls": [],
+    "predeclared_json_paths": [],
+    "predeclared_equations": [],
+    "predeclared_runtime_action_plan": [],
+    "required_outcomes": [
+      "authoritative public material-property evidence with provenance for every consequential numeric input",
+      "constraint analysis for each of the three candidate materials",
+      "governing minimum solid-round diameter for each candidate",
+      "resulting rod mass for each candidate",
+      "lightest compliant candidate",
+      "explicit assumptions and units",
+      "independently reproducible calculation trail"
+    ],
+    "independent_verification_required": true,
+    "claim_scope": "ONLY_THIS_FROZEN_PARENT_TASK_AND_ANY_GENERIC_CAPABILITY_GAP_OR_TRANSFER_EVIDENCE_IT_DIRECTLY_ESTABLISHES"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "required_cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_optional_model_advisory": true,
+    "no_task_specific_runtime_patch": true,
+    "no_hand_authored_source_binding_after_freeze": true,
+    "exactly_one_parent_execution": true,
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  },
+  "independent_oracle": {
+    "method": "After producer completion, independently recover the cited source values from the cited authoritative sources, recompute both mechanical constraints, minimum diameters and masses without importing producer modules, and compare every consequential numeric conclusion. If the producer fails before completion, verify only the first claimed causal gap without replaying the task.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "frozen_before_source_discovery": true
+}
