@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-GUARDED-GENOMICS-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3866a84b87248fe2b80b54301370b75c00245869",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005::GUARDED_EXECUTION",
+  "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+  "task_blob_sha": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
+  "mission_blob_sha": "03e718a9c779c26d26e7af140f2f65549c1a7f6e",
+  "runtime_blob_sha": "426ffe58e405dc4f1ba2eb4e838e03a1df771964",
+  "prior_work_checked": [
+    "PR474 merged and its exact corrected broad-routing bytes passed guarded run 36689721937",
+    "PR478 merged and froze this exact genomics Task B on post-PR474 main",
+    "frontier reconciliation commit 3866a84b87248fe2b80b54301370b75c00245869 authorizes one materially different fresh parent Task B",
+    "HTTP/2 parent run 36688193204 is spent and replay-forbidden",
+    "no execution is performed by this lease PR"
+  ],
+  "evidence_presence_classification": "FRESH_PARENT_TASK_B_FROZEN_UNSPENT__GUARDED_EXECUTION_REQUIRED",
+  "expected_parent_frontier_change": "Exactly one live-guard-admitted physical execution of the frozen genomics Task B. On first causal failure preserve the gap and mark the task spent. On semantic completion preserve producer evidence for independent verification before any parent credit.",
+  "highest_leverage_now": true,
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "One atomic-guard-admitted execution only. Never retry after reservation, dispatch uncertainty, or physical child start.",
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "surviving_necessity": "The guarded-qualified open-research stack must now be reality-tested once on the frozen materially different genomics parent.",
+    "selected_surviving_route": "EXACTLY_ONE_GUARDED_GENOMICS_PARENT_TASK_B_EXECUTION",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "SECOND_PARENT_TASK_B",
+      "DIRECT_UNGUARDED_EXECUTION",
+      "MODEL_COGNITION",
+      "TASK_SPECIFIC_RUNTIME_PATCH"
+    ],
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
+  }
+}
