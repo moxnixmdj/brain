@@ -1,0 +1,146 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-COMPOSITION-FRESH-REQUALIFICATION-PASS-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT__NOW_SATISFIED_BY_RUN_36659312279_AND_INDEPENDENT_VERIFIER_36659436525",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT__NOW_SATISFIED_BY_RUN_36659312279_AND_INDEPENDENT_VERIFIER_36659436525::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Restore only the model-independent grounded executable composition capability credit after a fresh materially distinct direct-compiler reuse and independent verifier pass, then return the active frontier to the parent open-ended technical/scientific capability for one new cross-domain end-to-end real task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR281 merged direct compound compiler/proposal-binding unification",
+    "public exact repair validation run 36658401010 PASS",
+    "fresh materially distinct artifact-integrity decision execution run 36659312279 completed producer, direct compiler, causal lowering, and independent decision verifier successfully before a post-execution harness assertion",
+    "verifier-only run 36659436525 PASS without replay of the spent task",
+    "verifier artifact 11073407709 digest sha256:b70a033d0d1cf7b6e61dd4b83aad20ee61e3621b2d9d6bb6f5790e7240e343e7",
+    "PR277 task was not replayed",
+    "current main ecec260cd0fd64dd820d0b86ec6f3162880f448e still withholds composition credit pending exactly one fresh materially distinct requalification"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile evidence only. Restore composition reusable-capability and fresh-reuse credit, preserve all falsification history, do not credit the harness failure as capability failure, do not increment parent capability credit, then recompute to one new materially different parent technical/scientific task. No more composition repair or requalification absent a new falsification.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "CHILD_REQUALIFIED_AFTER_DIRECT_COMPILER_REPAIR__RETURN_TO_PARENT",
+    "evidence": [
+      "public run 36659312279 / job 109710324356",
+      "public verifier-only run 36659436525 / job 109710704725",
+      "artifact 11073407709 digest sha256:b70a033d0d1cf7b6e61dd4b83aad20ee61e3621b2d9d6bb6f5790e7240e343e7"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ecec260cd0fd64dd820d0b86ec6f3162880f448e",
+    "real_outcome": "Truthfully restore only the composition capability that the fresh post-repair evidence now supports and immediately move back to the parent frontier.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Canonical state must reflect that the one required fresh materially distinct composition requalification has passed, without promoting the parent capability.",
+      "proxy_goals_deleted": [
+        "rerun the spent task",
+        "repair a successful execution because its harness asserted the wrong result shape",
+        "run another composition benchmark",
+        "claim parent frontier capability"
+      ],
+      "surviving_necessity": "Evidence reconciliation and parent-frontier recomputation only."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR281 direct compiler repair",
+        "run 36659312279 exact-current-byte fresh execution",
+        "run 36659436525 verifier-only no-replay adjudication",
+        "preserved prior composition real-task and fresh-reuse evidence"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to reconciliation."
+      ],
+      "capability_work_deleted": [
+        "no code change",
+        "no supplier change",
+        "no model",
+        "no task replay",
+        "no new verifier design"
+      ],
+      "surviving_gap": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical bookkeeping is now behind verified capability truth.",
+      "delete_bypass_substitute_options": [
+        "Delete stale fresh-requalification-pending state and restore the previously revoked composition credit.",
+        "Treat the post-execution harness assertion as a capability failure: rejected by independent verifier-only run."
+      ],
+      "surviving_causal_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_COMPOSITION_PASS_AND_RETURN_TO_PARENT"
+      ],
+      "losing_routes_reason": "Additional composition work cannot change truth after the required fresh task and independent verification already passed.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution. Reuse immutable prior job log plus independent verifier-only semantic recomputation."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all further composition support work absent new falsification",
+        "fresh composition requalification pending state"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "shared proposal-binding authority",
+        "direct compiler effect-result lowering",
+        "model-independent decision producer-to-verifier composition"
+      ],
+      "fresh_reuse_plan": "Return to parent and execute one new materially different technical/scientific task end-to-end."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse current exact byte hashes",
+        "reuse spent-run immutable logs",
+        "reuse verifier-only run and artifact"
+      ],
+      "search_stop_decision": "The required fresh evidence exists and is independently adjudicated; further composition search or testing is strictly dominated by parent execution.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to state-only reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_COMPOSITION_PASS_AND_RETURN_TO_PARENT",
+      "REPLAY_SPENT_TASK",
+      "CONTINUE_COMPOSITION_TESTING"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_SPENT_TASK",
+      "CONTINUE_COMPOSITION_TESTING"
+    ],
+    "selected_surviving_route": "RECONCILE_COMPOSITION_PASS_AND_RETURN_TO_PARENT",
+    "why_selected_route_is_fastest_sufficient": "It changes canonical truth using already-produced independent evidence and immediately exposes the next parent capability gap without any new execution.",
+    "expected_parent_level_state_change": "Restore only the model-independent grounded executable composition capability credit after a fresh materially distinct direct-compiler reuse and independent verifier pass, then return the active frontier to the parent open-ended technical/scientific capability for one new cross-domain end-to-end real task.",
+    "stop_condition": "Reconcile evidence only. Restore composition reusable-capability and fresh-reuse credit, preserve all falsification history, do not credit the harness failure as capability failure, do not increment parent capability credit, then recompute to one new materially different parent technical/scientific task. No more composition repair or requalification absent a new falsification.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER does not select an execution supplier."
+    }
+  }
+}
