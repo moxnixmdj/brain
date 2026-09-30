@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 import importlib.util
+import json
 import pathlib
+import shutil
+import subprocess
 import sys
+import tempfile
 import unittest
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
@@ -70,6 +74,44 @@ class NumericRelationJqReuseTests(unittest.TestCase):
         self.assertEqual(compute["args"]["capability_id"],"json.query.jq")
         self.assertIn("fabs",compute["args"]["filter"])
         self.assertIn("predicate",compute["args"]["filter"])
+
+    def test_numeric_string_scalar_is_normalized_and_invalid_types_fail_closed(self):
+        compiled=self.compile_relation()
+        filt=compiled["controller_actions"][3]["args"]["filter"]
+        self.assertIn("tonumber",filt)
+        self.assertIn("isinfinite",filt)
+        self.assertIn("NUMERIC_RELATION_INPUT_NOT_NUMBER",filt)
+
+        jq=shutil.which("jq")
+        if jq is None:
+            self.skipTest("jq executable unavailable")
+
+        def execute(right):
+            with tempfile.TemporaryDirectory() as td:
+                src=pathlib.Path(td)/"input.json"
+                src.write_text(
+                    json.dumps([{"left":10.0,"right":right,"threshold":0.1}]),
+                    encoding="utf-8",
+                )
+                return subprocess.run(
+                    [jq,filt,str(src)],
+                    text=True,
+                    capture_output=True,
+                    timeout=10,
+                )
+
+        good=execute("9.95")
+        self.assertEqual(good.returncode,0,good.stderr)
+        payload=json.loads(good.stdout)
+        self.assertIsInstance(payload["right"],(int,float))
+        self.assertAlmostEqual(payload["right"],9.95)
+        self.assertTrue(payload["predicate"])
+
+        for bad in ("not-a-number",True,"1e999"):
+            with self.subTest(bad=bad):
+                rejected=execute(bad)
+                self.assertNotEqual(rejected.returncode,0)
+                self.assertIn("NUMERIC_RELATION_INPUT_NOT_NUMBER",rejected.stderr)
 
     def test_domain_wording_and_scientific_notation_do_not_change_route(self):
         compiled=self.compile_relation(noun="temperatures",threshold="2e-1")
