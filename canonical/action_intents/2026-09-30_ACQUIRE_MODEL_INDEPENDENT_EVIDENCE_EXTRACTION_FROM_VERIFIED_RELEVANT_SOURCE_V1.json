@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-EVIDENCE-EXTRACTION-FROM-VERIFIED-RELEVANT-SOURCE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE::REAL_CAPABILITY_ACQUISITION",
+  "canonical_base_commit": "8c4d76e62cee474fc97844d59c12aa907b7ba44f",
+  "expected_parent_frontier_change": "Acquire only a narrow model-independent passage extractor for sources that already passed first-party provenance and objective-relevance verification. No parent promotion or replay.",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "CAPABILITY_GAP_ACTIVE__UPSTREAM_SOURCE_AND_RELEVANCE_GATES_ALREADY_VERIFIED",
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "stop_condition": "Stop after exact-base implementation, fail-closed regressions, fresh cross-domain live qualification, independent verifier agreement, and canonical promotion of only the bounded extraction scope.",
+  "recursive_obs": {
+    "canonical_base_commit": "8c4d76e62cee474fc97844d59c12aa907b7ba44f",
+    "real_outcome": "Extract verbatim decision-relevant evidence passages from an already first-party and objective-relevance-verified live source without model cognition.",
+    "obs_goal": {
+      "real_outcome": "Produce bounded verbatim passages plus URL provenance from a previously verified relevant source.",
+      "proxy_goals_deleted": [
+        "general semantic understanding",
+        "factual truth adjudication",
+        "evidence sufficiency adjudication",
+        "primary-source classification",
+        "parent task replay"
+      ],
+      "surviving_necessity": "A deterministic extraction seam between verified relevant source acquisition and downstream typed decision synthesis."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "first_party_objective_relevance_verify already fetches and normalizes visible source text",
+        "source.objective_relevance.rank.bm25 provides deterministic lexical ranking",
+        "web.browser.rendered.capture.chromedriver provides rendered visible text but is broader than needed"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib html.parser/re/urllib for exact source refetch and visible-text segmentation"
+      ],
+      "capability_work_deleted": [
+        "No model/API/local-model cognition",
+        "No new browser stack",
+        "No new supplier/package",
+        "No task-specific source whitelist",
+        "No truth/sufficiency inference"
+      ],
+      "surviving_gap": "No verified bound capability converts a verified relevant live source into bounded verbatim evidence passages tied to the same frozen objective."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic parent research pipeline seam after source authority and objective relevance admission.",
+      "delete_bypass_substitute_options": [
+        "Reuse first-party relevance receipt as mandatory input gate",
+        "Reuse stdlib HTML/text normalization",
+        "Reuse deterministic lexical ranking principles",
+        "Reject browser rebuild and model extraction"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_VERIFIED_RELEVANCE_RECEIPT_PLUS_STDLIB_REFETCH_SEGMENT_AND_LEXICAL_PASSAGE_RANKING",
+        "REUSE_RENDERED_BROWSER_CAPTURE_PLUS_NEW_PASSAGE_RANKER",
+        "MODEL_BASED_EXTRACTION"
+      ],
+      "losing_routes_reason": "The verified relevance receipt already proves exact first-party host continuity and bounded objective relevance. Re-fetching that exact URL with stdlib and ranking verbatim passages adds the smallest new surface and no new supplier. Browser reuse is broader/slower; model extraction is circular.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Deterministic regressions plus fresh live cross-domain pages. Independent verifier must refetch the same URL, confirm every emitted passage is verbatim visible text, re-evaluate objective-token support, and reject altered/wrong-domain receipts without importing producer code."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any parallel evidence-extraction implementation for the same blocker lease",
+        "Any parent replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "source.authority.identity.ror",
+        "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
+      ],
+      "fresh_reuse_plan": "After bounded extraction promotion, freeze a materially different fresh open-ended parent task and stop on its first new causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused current canonical blocker and exact base",
+        "Reused verified first-party relevance implementation",
+        "Reused registry inventory",
+        "Stopped supplier search once stdlib composition dominated"
+      ],
+      "search_stop_decision": "No new external supplier can beat zero-dependency stdlib composition for this bounded extraction seam.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen only if the exact base changes materially or fresh qualification falsifies this route."
+    },
+    "selected_surviving_route": "COMPOSE_VERIFIED_RELEVANCE_RECEIPT_PLUS_STDLIB_REFETCH_SEGMENT_AND_LEXICAL_PASSAGE_RANKING",
+    "why_selected_route_is_fastest_sufficient": "It reuses all already-qualified upstream trust/relevance work, adds only deterministic passage extraction, requires no package acquisition, and is independently auditable from exact source text.",
+    "selected_route_preflight": {
+      "status": "READY",
+      "all_required_dependencies_ready": true,
+      "execution_dependencies": [
+        {
+          "dependency": "CURRENT_BRAIN_MAIN_8c4d76e62cee474fc97844d59c12aa907b7ba44f",
+          "status": "READY"
+        },
+        {
+          "dependency": "VERIFIED_FIRST_PARTY_OBJECTIVE_RELEVANCE_RECEIPT",
+          "status": "READY"
+        },
+        {
+          "dependency": "PYTHON_STDLIB_HTML_PARSER_RE_URLLIB",
+          "status": "READY"
+        }
+      ]
+    }
+  }
+}
