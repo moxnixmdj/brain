@@ -5629,11 +5629,23 @@ def _run_goal_unstamped(step, mission):
                   "relevance_verified_candidate_count":int(
                       source_frontend.get("relevance_verified_candidate_count") or 0
                   ),
+                  "claim_relation_evaluated_count":int(
+                      source_frontend.get("claim_relation_evaluated_count") or 0
+                  ),
                   "next_required_capability":source_frontend.get("next_required_capability"),
                   "capability_acquisition_attempted":False,
                   "policy":"BROAD_RESEARCH_DECOMPOSITION_ROUTES_TO_RESEARCH_SOURCE_FRONTEND_BEFORE_PACKAGE_ACQUISITION",
                 }
                 if status=="SOURCE_FRONTEND_READY":
+                    if int(source_frontend.get("claim_relation_evaluated_count") or 0)>0:
+                        payload["claim_relation_evaluated_count"]=int(
+                            source_frontend.get("claim_relation_evaluated_count") or 0
+                        )
+                        raise Blocker(
+                            "OPEN_ENDED_RESEARCH_RELATION_EVALUATED__"
+                            "DECISION_SYNTHESIS_AND_VERIFICATION_REQUIRED:"
+                            +json.dumps(payload,sort_keys=True)
+                        ) from e
                     if int(source_frontend.get("evidence_extracted_candidate_count") or 0)>0:
                         payload["evidence_extracted_candidate_count"]=int(
                             source_frontend.get("evidence_extracted_candidate_count") or 0
