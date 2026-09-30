@@ -44,7 +44,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     discovery=_load_sibling("open_web_source_candidate_discovery")
     verifier=_load_sibling("source_candidate_provenance_verify")
     authority_identity=_load_sibling("source_authority_binding_ror")
-    relevance_verifier=_load_sibling("first_party_objective_relevance_verify")
+    evidence_extractor=_load_sibling("relevant_source_evidence_extract")
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
         return {
@@ -110,27 +110,40 @@ def run(objective,decomposition,limit=12,timeout=15):
     ]
     identity_ready=bool(authority_verified)
 
+    evidence_extractions=[]
     objective_relevance_verifications=[]
     for item in authority_verified:
-        checked=relevance_verifier.verify(
+        extracted=evidence_extractor.extract(
             objective,
             item["candidate"],
             item["provenance"],
             item["authority_identity"],
             timeout=timeout,
         )
+        evidence_extractions.append({
+            "candidate":item["candidate"],
+            "provenance":item["provenance"],
+            "authority_identity":item["authority_identity"],
+            "extraction":extracted,
+        })
         objective_relevance_verifications.append({
             "candidate":item["candidate"],
             "provenance":item["provenance"],
             "authority_identity":item["authority_identity"],
-            "relevance":checked,
+            "relevance":extracted.get("relevance_verification") or {},
         })
     relevance_verified=[
         x for x in objective_relevance_verifications
         if x["relevance"].get("objective_relevance_status")=="VERIFIED"
         and x["relevance"].get("status")=="FIRST_PARTY_RELEVANT_SOURCE_VERIFIED"
     ]
+    evidence_extracted=[
+        x for x in evidence_extractions
+        if (x.get("extraction") or {}).get("status")=="OBJECTIVE_ANCHORED_EVIDENCE_EXTRACTED"
+        and int((x.get("extraction") or {}).get("evidence_record_count") or 0)>0
+    ]
     relevance_ready=bool(relevance_verified)
+    evidence_ready=bool(evidence_extracted)
 
     return {
         "schema":SCHEMA,
@@ -145,6 +158,8 @@ def run(objective,decomposition,limit=12,timeout=15):
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"HOST_TO_ROR_ORGANIZATION_DOMAIN_BINDING_ONLY",
         "objective_relevance_verifications":objective_relevance_verifications,
+        "evidence_extractions":evidence_extractions,
+        "evidence_extracted_candidate_count":len(evidence_extracted),
         "relevance_verified_candidate_count":len(relevance_verified),
         "relevance_claim_scope":"FIRST_PARTY_EXACT_ROR_DOMAIN_PLUS_STRICT_BOUNDED_LEXICAL_OBJECTIVE_COVERAGE_ONLY",
         "authority_verified_candidate_count":0,
@@ -158,6 +173,8 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE"
             ),
             "EVIDENCE_ACQUISITION":(
+                "PROVENANCE_BEARING_OBJECTIVE_ANCHORED_EVIDENCE_AVAILABLE"
+                if evidence_ready else
                 "RELEVANT_SOURCE_AVAILABLE__EVIDENCE_EXTRACTION_REQUIRED"
                 if relevance_ready else
                 "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
@@ -165,12 +182,16 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "BLOCKED_ON_AUTHORITY_IDENTITY_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
             ),
             "EVIDENCE_EXTRACTION":(
+                "OBJECTIVE_ANCHORED_TYPED_CLAIM_CANDIDATES_AVAILABLE__FACTUAL_CORRECTNESS_UNVERIFIED"
+                if evidence_ready else
                 "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
             ),
             "RELATION_EVALUATION":"NOT_STARTED",
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
         "next_required_capability":(
+            "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+            if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
             "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"

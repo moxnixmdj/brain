@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_RECEIPT_V1",
+  "capability_id": "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_CROSS_DOMAIN_PASS",
+  "useful_behavior": "Given a provenance-verified, exact-ROR-bound, relevance-admitted source, reuse the relevance verifier's single fresh page fetch and extract bounded verbatim objective-anchored textual claim candidates plus numeric literals with page/text hashes and source provenance.",
+  "replacement_route": "relevant_source_evidence_extract",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 153,
+    "workflow_run_id": 36679523741,
+    "job_id": 109771712025,
+    "authored_regressions": "PASS",
+    "independent_live_domains": [
+      "nist.gov",
+      "who.int"
+    ],
+    "independent_refetch_passage_membership": "PASS",
+    "parent_integration_markers": "PASS"
+  },
+  "claim_scope": {
+    "verified": "VERBATIM_OBJECTIVE_ANCHORED_TEXT_CLAIM_CANDIDATES_AND_NUMERIC_LITERALS_FROM_THE_SAME_FRESH_RELEVANT_PAGE_BYTES",
+    "unverified": [
+      "FACTUAL_CORRECTNESS",
+      "CLAIM_SUPPORT",
+      "SEMANTIC_ENTAILMENT",
+      "EVIDENCE_SUFFICIENCY",
+      "CAUSALITY",
+      "PARENT_CAPABILITY_COMPLETION"
+    ]
+  },
+  "single_fetch_reuse": true,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false,
+  "parent_score_credit": 0,
+  "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+}
