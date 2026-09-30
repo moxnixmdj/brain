@@ -13,6 +13,7 @@
   "expected_parent_frontier_change": "Close the two post-PR303 fail-open seams so ambiguous cognition cannot be certified model-independent and the active frontier target record cannot drift from pointer, hierarchy, queue, and scoreboard; award no capability credit.",
   "highest_leverage_now": true,
   "prior_work_checked": [
+    "Current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e after merged PR318 open-ended parent evidence-scope correction",
     "Merged PR303 promotion firewall and runtime provenance implementation",
     "Current main canonical/runtime/astra_runtime.py cognition stamping logic",
     "Current main canonical/runtime/enforce_goal_hierarchy.py mirror checks",
@@ -25,14 +26,14 @@
   "orthogonal_recurrence_count": 2,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to the other canonical frontier mirrors; negative regressions prove both holes closed; zero progress credit; immediately return to the second clean cross-domain parent real task.",
+  "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to pointer, hierarchy, queue, and scoreboard; negative regressions prove both holes closed; zero progress credit; immediately return to the genuinely open-ended model-independent parent real Task A required by current main.",
   "governance_change": true,
   "user_authorized_governance_change": true,
   "user_authorization_summary": "User instructed the Brain to go real now and previously required recurring and adjacent mistake classes to be made fail-closed while pursuing the terminal objective.",
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
     "real_outcome": "Prevent false zero-model cognition certification and active target-record drift from surviving the trusted authority boundary.",
     "required_capability": "FAIL_CLOSED_RUNTIME_COGNITION_CLASSIFICATION_AND_FIVE_SURFACE_FRONTIER_MIRROR",
     "obs_goal": {
@@ -105,16 +106,18 @@
         "Fail-closed cognition provenance",
         "Five-surface canonical frontier consistency"
       ],
-      "fresh_reuse_plan": "The next cross-domain parent real task must pass the strengthened guard without governance-specific accommodations."
+      "fresh_reuse_plan": "The next genuinely open-ended model-independent parent real Task A must pass the strengthened guard without governance-specific accommodations."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
         "Reused the exact PR303 audit and implementation",
         "Did not reopen broader governance design",
-        "Limited work to proven false-negative branches"
+        "Limited work to proven false-negative branches",
+        "Reused merged PR318 scope correction and refreshed exact base without reopening its evidence judgment"
       ],
       "search_stop_decision": "Both defects are directly demonstrated in current source and have one minimal repair each; broader search would delay real execution without improving the repair.",
-      "affected_layers_only_on_revalidation": true
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed exact base to merged PR318 main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e; this remains a local internal trusted-boundary repair with no external route selection."
     },
     "routes_considered": [
       "REPAIR_EXISTING_RUNTIME_AND_VALIDATOR",
@@ -129,7 +132,7 @@
     "selected_surviving_route": "REPAIR_EXISTING_RUNTIME_AND_VALIDATOR",
     "why_selected_route_is_fastest_sufficient": "Two local fail-closed checks plus regressions close the proven holes with no new moving parts.",
     "expected_parent_level_state_change": "Close the two post-PR303 fail-open seams so ambiguous cognition cannot be certified model-independent and the active frontier target record cannot drift from pointer, hierarchy, queue, and scoreboard; award no capability credit.",
-    "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to the other canonical frontier mirrors; negative regressions prove both holes closed; zero progress credit; immediately return to the second clean cross-domain parent real task.",
+    "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to pointer, hierarchy, queue, and scoreboard; negative regressions prove both holes closed; zero progress credit; immediately return to the genuinely open-ended model-independent parent real Task A required by current main.",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "User-authorized internal governance repair on already-identified trusted-boundary defects; external route discovery cannot substitute for correcting the authoritative code."
