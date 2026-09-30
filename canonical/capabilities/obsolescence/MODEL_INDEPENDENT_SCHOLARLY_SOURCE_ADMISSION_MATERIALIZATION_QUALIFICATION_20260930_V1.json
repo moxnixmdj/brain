@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFIED_CAPABILITY_REPAIR_QUALIFICATION_V1",
+  "status": "VERIFIED_GENERIC_REPAIR__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_CROSS_DOMAIN_PASS__NO_PARENT_CREDIT",
+  "capability_id": "MODEL_INDEPENDENT_PROVENANCE_VERIFIED_SCHOLARLY_CANDIDATE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "brain_pr": 529,
+  "qualified_brain_commit": "4df38e5aa55cfd86a1fda6fbe11666ab6221da2c",
+  "merge_commit": "4b0c1839289cb1d41c7f77d5f81b8419cb62ac4a",
+  "qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 221,
+    "run_id": 36697481130,
+    "job_id": 109828804723,
+    "artifact_id": 11088094431,
+    "artifact_digest": "sha256:dd66dd78c8cec765d9c968e6580adfbd6be1dfae3caf50341c0f4b70ef6617d2",
+    "guard_attempt_id": "ff54ebe40e3f4145ae45ae46e8f85433",
+    "child_started": true,
+    "child_returncode": 0,
+    "independent_report_status": "PASS",
+    "failures": [],
+    "parent_task_execution": false,
+    "parent_task_replay": false
+  },
+  "exact_blobs": {
+    "source_candidate_provenance_verify": "8f6f80403dc48268ecbf244ae633ea2928204148",
+    "open_research_source_frontend": "830fd35c816140cb6ddb2d3dac9f0886e595d993",
+    "objective_relevance_bm25": "31d3703b38dcec3215b77d1038e2521b1a89ea95",
+    "open_web_source_candidate_discovery": "81f73bca882d35603e5be43e8c40dd57e73ffce0",
+    "objective_evidence_unit_extract": "227877b9f7c80c8e810a1042a0bad5c0ed94577d",
+    "authored_test": "d99e2fdf0db70a62d0c7483cb223a6159f681f0e"
+  },
+  "verified_behavior": [
+    "LOW_SUBJECT_COVERAGE_POSITIVE_BM25_FAILS_ADMISSION",
+    "BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_COMPETE_IN_RELEVANCE",
+    "SELECTED_BIBLIOGRAPHIC_CANDIDATE_REQUIRES_IDENTITY_BOUND_LIVE_MATERIALIZATION",
+    "FAILED_DIRECT_MATERIALIZATION_ALLOWS_EXACTLY_ONE_METADATA_ANCHORED_RETRIEVAL_RETRY",
+    "FAILED_REFINED_RETRIEVAL_FAILS_CLOSED",
+    "EVIDENCE_EXTRACTION_REQUIRES_SUBJECT_COVERAGE_ADMISSION"
+  ],
+  "claim_limits": [
+    "NO_FACTUAL_CORRECTNESS_CLAIM",
+    "NO_PRIMARY_SOURCE_CLAIM",
+    "NO_EVIDENCE_SUFFICIENCY_CLAIM",
+    "NO_PARENT_OPEN_ENDED_RESEARCH_CAPABILITY_PROMOTION"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_required_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SEISMOLOGY_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+}
