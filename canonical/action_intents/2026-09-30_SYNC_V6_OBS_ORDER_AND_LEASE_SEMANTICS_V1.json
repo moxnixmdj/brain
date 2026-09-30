@@ -79,8 +79,8 @@
         "REUSE",
         "SUBSTITUTE",
         "COMPOSE",
-        "REPAIR",
-        "BUILD"
+        "CONFIGURE",
+        "INTEGRATE"
       ],
       "routes_ranked": [
         "Synchronize existing validator+schema+gates+pointer references in place through versioned artifacts"
