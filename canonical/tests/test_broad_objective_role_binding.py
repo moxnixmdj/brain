@@ -45,6 +45,13 @@ class BroadObjectiveRoleBindingTests(unittest.TestCase):
         ids=[x.get("capability_id") for x in source.get("candidates") or []]
         self.assertIn("research.source_candidates.discover.open_web",ids,rg)
         self.assertNotEqual(source.get("status"),"UNRESOLVED",rg)
+        source_cid="research.source_candidates.discover.open_web"
+        for clause in clauses[1:]:
+            ids=[x.get("capability_id") for x in clause.get("candidates") or []]
+            self.assertNotIn(source_cid,ids,rg)
+        self.assertEqual(
+            rg.get("unresolved_clause_indexes"),[1,2,3,4],rg
+        )
         for item in source.get("candidates") or []:
             cid=item.get("capability_id")
             self.assertEqual(self.registry[cid].get("status"),"VERIFIED_BOUND_CAPABILITY")
