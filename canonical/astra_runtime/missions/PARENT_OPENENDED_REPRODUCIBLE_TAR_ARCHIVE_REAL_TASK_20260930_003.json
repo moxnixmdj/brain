@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-REPRODUCIBLE-TAR-ARCHIVE-REAL-TASK-20260930-003",
+  "purpose": "Faithful fresh parent Task A execution through canonical ASTRA CLI mission loading. Frozen task goal copied byte-for-byte as JSON value; no direct compiler/run_goal harness and no task-specific research recipe.",
+  "goal": "Determine whether GNU tar can produce byte-for-byte identical archives from directory trees with identical file names and file contents but different filesystem modification times, using documented reproducibility controls. Use authoritative primary technical evidence and a real executable experiment. Choose and justify the research method, discover and verify the necessary source and tool route, test the claim, identify material limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-fresh-open-ended-archive-determinism-parent-task",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "allow_optional_model_planner": false,
+      "max_controller_actions": 64,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "task_path": "canonical/tasks/PARENT_OPENENDED_REPRODUCIBLE_TAR_ARCHIVE_REAL_TASK_20260930_003.json",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true,
+    "source_task_replay": false,
+    "no_task_specific_runtime_patch": true
+  }
+}
