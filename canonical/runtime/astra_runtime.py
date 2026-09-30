@@ -4849,9 +4849,18 @@ def _load_plain_goal_bound_grounding():
 
 def _ground_plain_goal_to_bound_capabilities(mission, goal):
     module=_load_plain_goal_bound_grounding()
-    registry=_load_bound_capability_registry()
+    compiler=_load_goal_compiler()
+    registry=compiler._platform_admissible_registry(_load_bound_capability_registry())
+    def bind_candidate(clause, cid, entry, context_paths=None, future_clauses=None):
+        return compiler._bind_inputs(
+            str(clause or ""),
+            ROOT,
+            entry,
+            context_paths=context_paths,
+            future_clauses=future_clauses,
+        )
     try:
-        result=module.ground(goal,registry)
+        result=module.ground(goal,registry,bind_candidate=bind_candidate)
     except Exception as exc:
         raise Blocker(
             "PLAIN_GOAL_BOUND_GROUNDING_FAILED:"
