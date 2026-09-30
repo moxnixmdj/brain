@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_EVIDENCE_V1",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
+  "route": "DETERMINISTIC_GROUNDED_EXECUTABLE_COMPOSITION_PLUS_CAPABILITY_GRAPH_PLANNER",
+  "component_verification": {
+    "run_id": 36647904127,
+    "status": "PASS"
+  },
+  "fresh_real_task": {
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+    "run_id": 36652169397,
+    "job_id": 109688570787,
+    "artifact_id": 11070249875,
+    "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1",
+    "status": "PASS"
+  },
+  "fresh_reuse": {
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+    "run_id": 36652623916,
+    "job_id": 109689985771,
+    "artifact_id": 11071595189,
+    "artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a",
+    "materially_distinct": true,
+    "status": "PASS"
+  },
+  "acquisition_bar": {
+    "generic_composition_required": true,
+    "fresh_real_task_required": true,
+    "fresh_reuse_on_materially_distinct_real_task_required": true,
+    "explicit_dependency_trace_required": true,
+    "independent_verification_required": true,
+    "no_hand_authored_task_actions": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "verdict": "PASS_EXACT_SCOPE",
+  "frontier_dependency_removed": false,
+  "incremental_spend_usd": 0
+}
