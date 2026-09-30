@@ -6,11 +6,11 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 3,
+    "reusable_capabilities_inherited": 2,
     "verified_real_tasks_completed": 6,
-    "fresh_reuse_passes": 2,
+    "fresh_reuse_passes": 1,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 5
+    "residual_gaps_localized": 6
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_progress_event_target": "RUN_AFFECTED_LAYER_OBS_FOR_GENERIC_DOWNSTREAM_PATH_PROVENANCE__REUSE_PROPOSAL_BINDINGS_EFFECT_RESULT_FIRST__NO_PR267_REPLAY__THEN_FRESH_DIFFERENT_REQUALIFICATION_TASK",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -279,12 +279,30 @@
       ],
       "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
       "incremental_spend_usd": 0
+    },
+    {
+      "event_id": "GROUNDED_COMPOSITION_PATH_PROVENANCE_REGRESSION_20260930",
+      "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+      "status": "PRIOR_PROMOTION_REOPENED__CAPABILITY_AND_FRESH_REUSE_CREDIT_REVOKED__PRIOR_REAL_TASK_RESULTS_PRESERVED",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
+      "source_pr": 267,
+      "public_run_id": 36653756561,
+      "counter_effects": {
+        "reusable_capabilities_inherited": -1,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": -1,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED",
+      "residual_gap": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
+      "reason": "Fresh materially distinct in-scope decision-chain task falsified generic explicit data/effect dependency composition after promotion."
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_ACQUIRED_VERIFIED",
+    "active_subcapability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "subcapability_status": "REOPENED_BY_POST_PROMOTION_REGRESSION__DOWNSTREAM_PATH_PROVENANCE_FALSIFIED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
