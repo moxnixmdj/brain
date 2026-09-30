@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "real_objective": "Permanently own advanced agentic software-engineering capability at or above the useful Claude Opus 5.5 level with Brain-owned configuration and $0 incremental spend.",
+  "governing_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false
+  },
+  "material_premises": [
+    "Current main explicitly leaves advanced coding as the highest-leverage unresolved ownership gap.",
+    "mini-SWE-agent 2.4.6 and Superpowers 6.4.2 are already fully internalized with exact pins.",
+    "The mini-SWE CLI supports recursive configuration merge without forking its control loop.",
+    "The Supreme route is falsified for advancement and must not absorb more task-specific repair work.",
+    "Anthropic reports 66.4% on Terminal-Bench 4.0 at xhigh; Artificial Analysis independently reports 59.6% for Opus 5.5 under its mini-SWE methodology. These are different harness/settings and must not be silently conflated."
+  ],
+  "evidence_refs": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/EVALUATION_PROTOCOL_V1.json",
+    "Brain PR #560 Supreme fresh-preflight falsification",
+    "Brain PR #570 mini-SWE 2.4.6 internalization",
+    "Brain PR #574 V6 OBS synchronization"
+  ],
+  "conclusion": "Compose the exact owned mini-SWE harness with exact owned Superpowers skill bytes through deterministic overlay glue, retain the strict 66.4 outer reference without mislabeling the 59.6 matched independent reference, give zero capability credit now, and require fresh independent execution next.",
+  "selected_route": "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
+  "rejected_material_alternatives": [
+    {
+      "route": "Continue Supreme",
+      "reason": "Falsified for advancement; further task-specific repair risks benchmark overfitting."
+    },
+    {
+      "route": "Superpowers only",
+      "reason": "Already subsumed by the composition and lacks the near-bar harness evidence."
+    },
+    {
+      "route": "Internalize OpenHands first",
+      "reason": "Plausible but not evidenced to dominate current assets; much larger wall-clock before a decisive test."
+    },
+    {
+      "route": "Use external Claude capability directly",
+      "reason": "Fails Brain ownership and $0 guarantees."
+    }
+  ],
+  "uncertainties": [
+    "No fresh execution yet proves that the composed configuration improves mini-SWE behavior.",
+    "66.4 and 59.6 are not directly comparable because they come from different system/harness settings.",
+    "A future external route release may dominate after this route is falsified or the 24-hour route lease expires."
+  ],
+  "assumptions": [
+    "Exact current Brain pins remain unchanged until PR validation.",
+    "Configuration composition is allowed integration glue under V6 and does not constitute underlying capability invention."
+  ],
+  "non_goals": [
+    "Capability promotion in this PR",
+    "Benchmark solution exposure",
+    "Task-specific coding repair",
+    "New execution infrastructure"
+  ],
+  "next_action": "Exact package qualification, then one fresh contamination-controlled composed-route execution on an approved zero-incremental general cognition substrate.",
+  "supersession_conditions": [
+    "Canonical main changes materially before merge.",
+    "Any pinned component blob changes.",
+    "A stronger Brain-ownable route is independently qualified before this composition is validated.",
+    "Package verifier falsifies deterministic composition."
+  ],
+  "supersedes": [
+    "Superpowers-only exclusive coding candidate",
+    "Supreme continuation as active coding route"
+  ]
+}
