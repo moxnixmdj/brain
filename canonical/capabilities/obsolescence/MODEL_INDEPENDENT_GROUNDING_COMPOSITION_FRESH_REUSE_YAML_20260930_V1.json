@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FRESH_REUSE_EVIDENCE_V1",
+  "evidence_id": "MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_JSON_20260930",
+  "status": "PASS__MATERIALLY_DISTINCT_FRESH_REUSE",
+  "capabilities": [
+    "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1"
+  ],
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task": {
+    "domain": "LOCAL_STRUCTURED_DATA_TRANSFORMATION",
+    "goal": "Convert a repository-local YAML artifact to deterministic JSON through model-independent bound-capability grounding, composition, planning, and execution; independently verify the JSON semantic value.",
+    "distinct_from_fresh_real_task": true,
+    "fresh_real_task_reference": "MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_branch": "verify/pr261-fresh-reuse-yaml-json-20260930",
+    "public_head": "bbfff4646e73f895aa8f0271f4f6d4c477ad252f",
+    "run_id": 36652623916,
+    "job_id": 109689985771,
+    "conclusion": "success",
+    "artifact_id": 11071595189,
+    "artifact_name": "pr261-fresh-reuse-yaml-json",
+    "artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a"
+  },
+  "exact_runtime": {
+    "repair_merge_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
+    "astra_runtime_blob": "e23789745c053868d026f66f8c1258c0444b6552",
+    "grounding_blob": "6385b469f1287c971217dcac58af2ffebd81f9fd",
+    "composition_blob": "c19466687fd2d17e45dc6ba263b42301bed432d1",
+    "composition_verifier_blob": "ab9f6fc19937d23edb24dc26a2affed96cea0a9a",
+    "planner_blob": "64ff65cb184f50d3336326f33cccfcc0a53301a8",
+    "registry_blob": "82514d06b45c72f04cdaea316d872609559a53a4",
+    "yaml_adapter_blob": "8dce9a679d51153e0e779e4fcc5380a1ce106637"
+  },
+  "execution_assertions": {
+    "input_contract_bindability_enforced": true,
+    "grounding_unresolved_clause_indexes": [],
+    "selected_capability": "yaml.to_json.yq",
+    "verified_initial_facts": [
+      "yaml.file.available"
+    ],
+    "required_external_initials": [
+      "yaml.file.available"
+    ],
+    "problem_initial_facts": [
+      "yaml.file.available"
+    ],
+    "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+    "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+    "model_dependency_count": 0,
+    "hand_authored_controller_action_sequence": false,
+    "incremental_spend_usd": 0
+  },
+  "independent_verification": {
+    "producer_independent": true,
+    "method": "Independent JSON parser compared the produced artifact against the precommitted semantic object represented by the YAML fixture.",
+    "semantic_value_match": true,
+    "verifier_step_conclusion": "success"
+  },
+  "non_crediting_attempts": [
+    {
+      "route": "SQLITE_FRESH_REUSE",
+      "run_id": 36652276971,
+      "status": "NON_CREDITING_ROUTE_REJECTED",
+      "cause": "SQLITE_STATUS_VALUE_UNRESOLVED",
+      "interpretation": "Narrow SQLite adapter contract; not a grounding/composition falsification. Route abandoned without Brain repair."
+    }
+  ],
+  "verdict": "PASS_EXACT_SCOPE__GROUNDING_AND_COMPOSITION_FRESH_REUSE",
+  "progress_credit": {
+    "fresh_reuse_passes": 1,
+    "verified_real_tasks_completed": 1
+  }
+}
