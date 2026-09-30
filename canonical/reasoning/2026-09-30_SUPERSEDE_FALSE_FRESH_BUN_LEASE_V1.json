@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_LEASE_SUPERSESSION_V1",
+  "status": "BUN_LEASE_INVALID__PRIOR_TASK_SPENT__SUPERSEDED_FAIL_CLOSED",
+  "recorded_utc": "2026-09-30T21:30:00Z",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "invalid_lease": {
+    "path": "canonical/action_intents/2026-09-30_LEASE_BUN_SOURCEMAP_LEAK_TB4_V1.json",
+    "task": "bun-sourcemap-leak",
+    "canonical_commit": "2b08ef782a17f76ea5861552f56204cd4bca252b",
+    "invalid_reason": "FALSE_FRESHNESS_CLASSIFICATION"
+  },
+  "preexisting_spent_evidence": {
+    "runner_pr": 240,
+    "title": "[SPENT / FALSIFICATION EVIDENCE] Run Supreme TB4 bun-sourcemap-leak fresh preflight",
+    "outcome": "INDEPENDENT_VERIFIER_REWARD_0",
+    "test_summary": "25 pass, 9 fail, 2 errors",
+    "task_state": "SPENT_BEFORE_FALSE_LEASE"
+  },
+  "invalidated_duplicate_execution": {
+    "runner_pr": 251,
+    "status": "CLOSED_INVALID__NO_PROMOTION_CREDIT",
+    "observation_state_seen": "READY_FOR_COMMAND next_step=1",
+    "instruction_or_runtime_progress_does_not_restore_freshness": true
+  },
+  "causal_process_defect": "Freshness check searched canonical Brain incompletely and failed to query prior verification-capsule-runner execution history before leasing.",
+  "permanent_guard": "Before authorizing any benchmark task as fresh, query both Brain history and verification-capsule-runner PR/session history for the exact task name. Any prior verifier exposure makes the task spent for promotion.",
+  "capability_credit_delta": 0
+}
