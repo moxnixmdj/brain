@@ -89,6 +89,52 @@ class BinderTests(unittest.TestCase):
         )
         self.assertEqual(out["reason"],"LEFT_AMBIGUOUS_EVIDENCE_UNIT_FOR_ENTITY",out)
 
+    def test_full_coverage_extra_words_still_fail_closed_as_ambiguous(self):
+        data=fixture()
+        extra=dict(data["evidence_units"][0])
+        extra["text"]="River Alpha annual discharge at second gauge was 1240 percent."
+        extra["text_sha256"]=sha(extra["text"])
+        extra["visible_text_start"]=100
+        extra["visible_text_end"]=100+len(extra["text"])
+        extra["evidence_unit_id"]=sha(
+          f'{data["page_raw_sha256"]}:{extra["visible_text_start"]}:{extra["visible_text_end"]}:{extra["text_sha256"]}'
+        )
+        data["evidence_units"]=[
+          {
+            **data["evidence_units"][0],
+            "text":"River Alpha annual discharge was 0.35 percent.",
+            "text_sha256":sha("River Alpha annual discharge was 0.35 percent."),
+          },
+          extra,
+          data["evidence_units"][1],
+        ]
+        # Rebuild the first unit ID after changing its text.
+        first=data["evidence_units"][0]
+        first["visible_text_end"]=first["visible_text_start"]+len(first["text"])
+        first["evidence_unit_id"]=sha(
+          f'{data["page_raw_sha256"]}:{first["visible_text_start"]}:{first["visible_text_end"]}:{first["text_sha256"]}'
+        )
+        out=self.m.bind(
+          "Determine whether River Alpha annual discharge is higher than Germany population growth.",
+          data,evaluate_relation=False
+        )
+        self.assertEqual(out["reason"],"LEFT_AMBIGUOUS_EVIDENCE_UNIT_FOR_ENTITY",out)
+
+    def test_uppercase_single_letter_entity_labels_are_distinct(self):
+        data=fixture(
+          left_text="Database A checkpoint latency was 42 ms.",
+          right_text="Database B checkpoint latency was 35 ms."
+        )
+        out=self.m.bind(
+          "Does Database A checkpoint latency exceed Database B checkpoint latency?",
+          data
+        )
+        self.assertEqual(out["status"],"CLAIM_SPEC_AND_OPERANDS_BOUND",out)
+        self.assertEqual(out["relation_spec"]["operator"],"GT",out)
+        self.assertTrue(out["relation_result"]["predicate"],out)
+        self.assertIn("a",out["parsed_objective"]["left_tokens"])
+        self.assertIn("b",out["parsed_objective"]["right_tokens"])
+
     def test_multiple_compatible_numbers_fail_closed(self):
         data=fixture("France population growth was 0.35 percent and revised to 0.40 percent.")
         out=self.m.bind(
