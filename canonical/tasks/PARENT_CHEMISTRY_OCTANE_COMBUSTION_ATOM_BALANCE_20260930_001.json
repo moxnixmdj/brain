@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-CHEMISTRY-OCTANE-COMBUSTION-ATOM-BALANCE-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRIC_ATOM_CONSERVATION",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "sources": {
+    "octane": {
+      "authority": "PubChem / NCBI",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/octane/property/HeavyAtomCount/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "HeavyAtomCount"
+      ]
+    },
+    "oxygen": {
+      "authority": "PubChem / NCBI",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxygen/property/HeavyAtomCount/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "HeavyAtomCount"
+      ]
+    },
+    "carbon_dioxide": {
+      "authority": "PubChem / NCBI",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/carbon%20dioxide/property/HeavyAtomCount/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "HeavyAtomCount"
+      ]
+    },
+    "water": {
+      "authority": "PubChem / NCBI",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/HeavyAtomCount/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "HeavyAtomCount"
+      ]
+    }
+  },
+  "scientific_contract": {
+    "balanced_reaction": "2 C8H18 + 25 O2 -> 16 CO2 + 18 H2O",
+    "derived_rule": "predicted_octane_heavy_atom_count = (16 * carbon_dioxide_heavy_atom_count + 18 * water_heavy_atom_count - 25 * oxygen_heavy_atom_count) / 2",
+    "comparison_threshold_atoms": 0,
+    "relation_rule": "Evaluate whether abs(predicted_octane_heavy_atom_count - octane_heavy_atom_count) <= 0",
+    "numeric_inputs_must_be_parsed_from_live_sources": true
+  },
+  "goal_text": "Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/octane/property/HeavyAtomCount/JSON, extract JSON path PropertyTable.Properties.0.HeavyAtomCount and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_OCTANE_HEAVY_ATOM_COUNT.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxygen/property/HeavyAtomCount/JSON, extract JSON path PropertyTable.Properties.0.HeavyAtomCount and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_OXYGEN_HEAVY_ATOM_COUNT.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/carbon%20dioxide/property/HeavyAtomCount/JSON, extract JSON path PropertyTable.Properties.0.HeavyAtomCount and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_CARBON_DIOXIDE_HEAVY_ATOM_COUNT.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/HeavyAtomCount/JSON, extract JSON path PropertyTable.Properties.0.HeavyAtomCount and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_WATER_HEAVY_ATOM_COUNT.json. Calculate the predicted octane heavy atom count using predicted_octane_heavy_atom_count = (16 * carbon_dioxide_heavy_atom_count + 18 * water_heavy_atom_count - 25 * oxygen_heavy_atom_count) / 2. Determine whether the predicted and authoritative octane heavy atom counts differ by at most 0.",
+  "required_result": {
+    "producer_result": "The final bounded numeric relation artifact emitted by the compiled controller plan.",
+    "required_fields": [
+      "left",
+      "right",
+      "threshold",
+      "absolute_difference",
+      "relation",
+      "predicate"
+    ],
+    "threshold": 0
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true,
+    "runtime_cognition_provenance_required": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch all four exact PubChem URLs outside the Brain producer, independently parse PropertyTable.Properties.0.HeavyAtomCount, recompute the octane heavy-atom count implied by 2 C8H18 + 25 O2 -> 16 CO2 + 18 H2O, recompute the absolute difference and <=0 predicate, and compare every consequential relation field.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false
+}
