@@ -224,6 +224,67 @@ def _crossref(query, limit, timeout):
         "candidate_count": len(out),
     }
 
+
+def discover_query(query, original_objective=None, limit=12, timeout=15, include_crossref=False):
+    """Discover candidates for an already-qualified deterministic query.
+
+    This is used only by bounded refinement callers. It deliberately does not
+    refocus or semantically expand the supplied query.
+    """
+    query=_canon(query)
+    original_objective=_canon(original_objective or query)
+    if not query:
+        raise ValueError("QUERY_REQUIRED")
+    limit=max(1,min(int(limit),40))
+    timeout=max(2,min(int(timeout),30))
+    candidates=[]; traces=[]; errors=[]
+    backends=[("BING_RSS",_bing_rss),("DUCKDUCKGO_HTML",_ddg)]
+    if include_crossref:
+        backends.append(("CROSSREF",_crossref))
+    for name,fn in backends:
+        try:
+            found,trace=fn(query,limit,timeout)
+            candidates.extend(found); traces.append(trace)
+        except Exception as exc:
+            errors.append({
+                "backend":name,
+                "error_class":type(exc).__name__,
+                "error":str(exc)[:500],
+            })
+    unique=[]; seen=set()
+    for item in candidates:
+        key=item.get("url")
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        x=dict(item); x["rank"]=len(unique)
+        unique.append(x)
+        if len(unique)>=limit:
+            break
+    return {
+        "schema":SCHEMA,
+        "status":"CANDIDATES_DISCOVERED" if unique else "DISCOVERY_UNAVAILABLE",
+        "objective":original_objective,
+        "query":query,
+        "query_focus":{
+            "schema":"PROJECT_BRAIN_REFINEMENT_QUERY_V1",
+            "status":"REFINEMENT_QUERY_ACCEPTED",
+            "query":query,
+            "claim_scope":"CALLER_QUALIFIED_QUERY_ONLY__NO_SEMANTIC_EXPANSION",
+        },
+        "query_sha256":hashlib.sha256(query.encode("utf-8")).hexdigest(),
+        "query_origin":"METADATA_ANCHORED_REFINEMENT",
+        "candidates":unique,
+        "candidate_count":len(unique),
+        "retrieval_provenance":traces,
+        "backend_errors":errors,
+        "authority_verification":"NOT_PERFORMED",
+        "primary_source_verification":"NOT_PERFORMED",
+        "evidence_sufficiency_verification":"NOT_PERFORMED",
+        "model_dependency_count":0,
+        "incremental_spend_usd":0,
+    }
+
 def discover(objective, limit=12, timeout=15):
     original_objective=_canon(objective)
     focus=_query_focus(original_objective)
