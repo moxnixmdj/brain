@@ -17,7 +17,8 @@
     "PR318/current main corrected the parent evidence scope: structured demography remains supporting evidence only and no admissible model-independent open-ended parent Task A exists yet",
     "current ACTIVE_GOAL_HIERARCHY_V1 requires one genuinely open-ended model-independent parent real Task A with no prewired research plan and stop-on-first-causal-gap",
     "the frozen climate objective from the stale predecessor is preserved without authority name/domain, source URL, dataset identifier, quantitative formula, or controller action graph",
-    "current inherited model-independent stack and zero-cost public carrier remain the execution route; model planning/local model/model artifacts remain forbidden"
+    "current inherited model-independent stack and zero-cost public carrier remain the execution route; model planning/local model/model artifacts remain forbidden",
+    "push run 36670351881 on main ca16a72e8e83f5274b04265fe02eb7729451da93 executed a mismatched World Bank EN.ATM.CO2E.PC source-discovery mission, not this Mauna Loa growth-rate task; it produced no admissible Task A evidence and must not be replayed or counted as execution of task 002"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -129,7 +130,8 @@
         "reused historical target-capability reality reconciliation",
         "reused historical World Bank and PSF domain-free source-discovery proofs",
         "reused current exact runner closure",
-        "checked current classical-planning/ProbLog challengers only to determine whether they remove semantic formalization"
+        "checked current classical-planning/ProbLog challengers only to determine whether they remove semantic formalization",
+        "Preserved failed push run 36670351881 as wrong-goal execution evidence and excluded it from Mauna Loa Task A execution count"
       ],
       "search_stop_decision": "Stop route search and execute. The current inherited stack is already the only route that can answer whether the missing open-ended behavior exists without first implementing it; all remaining challengers either require a formalized problem, hand-author the answer path, or violate model independence.",
       "affected_layers_only_on_revalidation": true,
@@ -148,7 +150,7 @@
       "MODEL_PLANNER",
       "OLD_TASK_REPLAY"
     ],
-    "selected_surviving_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+    "selected_surviving_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
     "why_selected_route_is_fastest_sufficient": "It requires zero new implementation, directly tests the exact missing parent scope, and converts uncertainty into either verified real capability evidence or one precise causal gap.",
     "expected_parent_level_state_change": "Either produce one admissible genuinely open-ended, materially different, model-independent parent real-task A result with independent verification, or replace the broad parent-scope blocker with the first specific causal gap in autonomous decomposition, source/tool discovery, quantitative execution, synthesis, or verification. No repair or parent promotion is authorized by this intent alone.",
     "stop_condition": "Execute the frozen climate Task A exactly once on exact current Brain runtime bytes with model planning disabled. On success, independently verify producer-cited primary data and calculations before any parent adjudication. On failure, preserve only the earliest causal blocker, do not replay the task, and recompute the frontier before any repair.",
@@ -327,22 +329,6 @@
             "evidence_classes": [
               "BRAIN_INHERITED",
               "DIRECT_PROBE"
-            ],
-            "evidence_scope": "GLOBAL"
-          },
-          {
-            "dependency": "MODEL_PLANNER_DISABLED",
-            "kind": "POLICY",
-            "required": true,
-            "volatility": "STATIC",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "observed_at_utc": "2026-09-30T04:38:35Z",
-            "evidence": [
-              "Execution capsule will set ASTRA_DISABLE_MODEL_PLANNER=1; task forbids model/local-model/model-artifact routes."
-            ],
-            "evidence_classes": [
-              "BRAIN_INHERITED"
             ],
             "evidence_scope": "GLOBAL"
           }
