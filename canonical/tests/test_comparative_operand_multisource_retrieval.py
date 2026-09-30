@@ -169,7 +169,7 @@ class ComparativeOperandMultisourceTests(unittest.TestCase):
         binding=out["claim_relation_evaluations"][0]["binding"]
         self.assertEqual(binding["status"],"CLAIM_SPEC_AND_OPERANDS_BOUND",binding)
         self.assertEqual(binding["relation_result"]["status"],"NUMERIC_RELATION_VERIFIED",binding)
-        self.assertTrue(binding["relation_result"]["result"],binding)
+        self.assertTrue(binding["relation_result"]["predicate"],binding)
 
     def test_missing_operand_source_fails_closed(self):
         objective=(
