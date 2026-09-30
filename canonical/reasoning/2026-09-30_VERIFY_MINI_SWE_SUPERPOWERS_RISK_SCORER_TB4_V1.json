@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_RISK_SCORER_TB4_V1",
+  "status": "CURRENT",
+  "real_objective": "Replace contaminated Next.js evidence with one clean current-harness task for the canonical mini-SWE + Superpowers route.",
+  "governing_invariants": [
+    "$0 incremental spend",
+    "no solution/tests before submission",
+    "runtime-visible-only cognition boundary",
+    "one task earns zero whole-family promotion by itself",
+    "no opaque substrate capability credit"
+  ],
+  "material_premises": [
+    "nextjs-performance is contaminated for this cognition session before any official verifier run.",
+    "risk-scorer-replay was selected from task.toml metadata only.",
+    "risk-scorer-replay declares a single /app artifact surface and separate verifier."
+  ],
+  "conclusion": "Freeze risk-scorer-replay and execute it only after this lease is authoritative. Use the canonical mini-SWE + Superpowers package and exactly one untouched independent verifier submission.",
+  "evidence_refs": [
+    "canonical/capabilities/opus55/NEXTJS_PERFORMANCE_SESSION_CONTAMINATION_20260930_V1.json",
+    "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e:tasks/risk-scorer-replay/task.toml@6149176428062da0dc3d66cde1eca79f8d2abf72"
+  ],
+  "next_action": "Merge this current-base lease, then inspect risk-scorer-replay Dockerfile semantics and only runtime-visible task files."
+}
