@@ -2,6 +2,20 @@
 
 Status: CANONICAL / MANDATORY / FAIL-CLOSED
 
+## V5 capability-ownership override
+
+This law is subordinate to `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md`.
+
+Model-independence is **not** a default capability requirement. The older model-independence clauses below apply only when a specific claim explicitly asserts model-independence or provider-removal. They MUST NOT be used to reject a faster Opus-5.5-or-better configured capability merely because a model participates.
+
+Current promotion requirements additionally include:
+- capability >= corresponding Opus 5.5 useful capability;
+- durable Brain ownership package;
+- no JIT capability rediscovery/externalization;
+- knowledge external/JIT;
+- no invention of the underlying useful capability;
+- durable reasoning decision receipt for consequential promotion/route decisions.
+
 ## Purpose
 
 Project Brain assumes consequential plans, classifications, route selections, promotion claims, and remembered state are fallible by default.
