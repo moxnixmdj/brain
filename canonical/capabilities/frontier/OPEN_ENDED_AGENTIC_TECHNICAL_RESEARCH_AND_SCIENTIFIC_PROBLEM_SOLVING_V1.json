@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__CARRIER_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT",
+  "status": "FRONTIER_BAR_DEFINED__SQLITE_TASK_A_SPENT__OPEN_ENDED_PLAN_BINDING_GAP_LOCALIZED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__NO_ADMISSIBLE_FRESH_OPEN_ENDED_PARENT_PASS__CARRIER_PRECHECK_VALIDATED",
-  "residual_gap": "FRESH_OPEN_ENDED_PARENT_TASK_A_UNEXECUTED_AFTER_CARRIER_VALIDATION",
+  "obsolescence_status": "NOT_YET_PROVEN__FRESH_OPEN_ENDED_PARENT_TASK_FAILED_AT_GENERIC_PLAN_BINDING",
+  "residual_gap": "MODEL_INDEPENDENT_OPEN_ENDED_OBJECTIVE_TO_CAUSAL_RESEARCH_PLAN_AND_BINDABLE_CAPABILITY_COMPOSITION_MISSING",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -118,7 +118,7 @@
       "public_run_id": 36666659921
     }
   ],
-  "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+  "next_action": "REPAIR_GENERIC_OPEN_ENDED_OBJECTIVE_GROUNDING_AND_BINDABLE_PLAN_COMPOSITION__QUALIFY_ON_FRESH_NON_PARENT_TASKS__NO_SQLITE_REPLAY",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -144,40 +144,18 @@
     "incremental_spend_usd": 0
   },
   "latest_parent_task_failure": {
-    "substantive_objective": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013",
-    "domain": "ATMOSPHERIC_CLIMATE_SCIENCE_TIME_SERIES_REASONING",
-    "status": "SUBSTANTIVE_OPEN_ENDED_OBJECTIVE_SPENT__FIRST_COMPILE_GAP_OBSERVED__TWO_LATER_REPLAYS_QUARANTINED__NO_PARENT_CREDIT",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930_V1.json",
-    "first_spend": {
-      "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001",
-      "source_brain_pr": 317,
-      "task_blob_sha": "61d7334c1c866027260025d0d147d16ee9e0cb02",
-      "public_run_id": 36669918546,
-      "job_id": 109742518213,
-      "artifact_id": 11077637577,
-      "artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953"
-    },
-    "later_replays": [
-      {
-        "public_run_id": 36670516407,
-        "job_id": 109744305866,
-        "artifact_id": 11077861584,
-        "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
-        "freshness_credit": false
-      },
-      {
-        "public_run_id": 36670981076,
-        "job_id": 109745705157,
-        "artifact_id": 11077589879,
-        "artifact_digest": "sha256:ee2d095c5615ad7d4e355fbe60b5ba8eec805285d594e5237a06611d94993ab3",
-        "freshness_credit": false,
-        "diagnostic_only": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH"
-      }
-    ],
-    "first_causal_stage": "COMPILE",
-    "first_causal_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "exact_cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "task": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
+    "status": "FRESH_GENUINELY_OPEN_ENDED_TASK_SPENT__FAIL_FIRST_CAUSAL_GAP__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPENENDED_TASK_A_FIRST_CAUSAL_GAP_20260930_V1.json",
+    "public_run_id": 36674086293,
+    "public_job_id": 109755152141,
+    "artifact_id": 11078414137,
+    "artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
+    "first_causal_stage": "OPEN_ENDED_GOAL_GROUNDING_AND_COMPOSITION",
+    "first_causal_gap": "MODEL_INDEPENDENT_OPEN_ENDED_OBJECTIVE_TO_CAUSAL_RESEARCH_PLAN_AND_BINDABLE_CAPABILITY_COMPOSITION_MISSING",
+    "grounded_clause_count": 0,
+    "unresolved_clause_count": 5,
     "fresh_parent_evidence_admissible": false,
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
@@ -277,11 +255,12 @@
   "fresh_open_ended_task_A_freeze": {
     "task": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
-    "status": "FROZEN_UNSPENT",
-    "execution_count": 0,
+    "status": "SPENT__FAIL_FIRST_CAUSAL_GAP__NO_PARENT_CREDIT",
+    "execution_count": 1,
     "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "replay_allowed": false,
     "no_predeclared_research_recipe": true,
-    "task_path": "canonical/tasks/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json"
+    "task_path": "canonical/tasks/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPENENDED_TASK_A_FIRST_CAUSAL_GAP_20260930_V1.json"
   }
 }
