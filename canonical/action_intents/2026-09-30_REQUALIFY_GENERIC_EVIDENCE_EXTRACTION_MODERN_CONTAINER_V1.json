@@ -1,0 +1,145 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REQUALIFY-GENERIC-EVIDENCE-EXTRACTION-MODERN-CONTAINER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Restore generic evidence extraction authority only after exact repaired producer bytes pass modern-container regressions and independent live non-ROR qualification; then advance to claim support/relation evaluation with no parent promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+    "modern-container falsification receipt",
+    "repaired producer blob fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "unchanged parent frontend blob 46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+    "public requalification run 36681655780 job 109778209177",
+    "9 authored extractor regressions including modern div/main content",
+    "2 generic BM25 route regressions",
+    "1 parent-effective frontend regression",
+    "4 independent live/oracle tests on RFC 9110 and SQLite WAL"
+  ],
+  "evidence_presence_classification": "CAPABILITY_REPAIRED_AND_REQUALIFIED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after registry, package, queue, hierarchy, scoreboard, parent target, and canonical pointer agree the repaired exact bytes are verified again and the next blocker is claim support/relation evaluation. Do not execute or replay a parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "SAME_PARENT_TARGET__SUBCAPABILITY_REQUALIFIED_AFTER_FALSIFICATION",
+    "evidence": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_REQUALIFICATION_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+    "real_outcome": "Restore only the generic extraction authority that was truthfully revoked, now that the exact repaired bytes have independently passed the missing modern-container case and fresh live cross-domain verification.",
+    "required_capability": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+    "obs_goal": {
+      "real_outcome": "Close the reopened extraction gap with exact repaired-byte evidence and resume at the next genuine causal seam.",
+      "proxy_goals_deleted": [
+        "rerun parent task",
+        "rebuild extractor",
+        "ignore falsification",
+        "reuse old qualification for changed bytes",
+        "inflate parent credit"
+      ],
+      "surviving_necessity": "Repaired exact bytes must be independently requalified before generic extraction authority can return."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "repaired current extractor",
+        "existing parent frontend",
+        "BM25 relevance",
+        "provenance verifier",
+        "prior qualification oracle"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no new runtime code",
+        "no new supplier",
+        "no parent replay",
+        "no model route"
+      ],
+      "surviving_gap": "Authority reconciliation after exact repaired-byte PASS."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Qualification authority gap after a generic parser repair.",
+      "delete_bypass_substitute_options": [
+        "old receipt rejected for changed bytes",
+        "new exact-byte requalification survives"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RESTORE_AUTHORITY_FROM_EXACT_REQUALIFICATION",
+        "REBUILD_EXTRACTOR",
+        "REPLAY_PARENT"
+      ],
+      "losing_routes_reason": "The runtime repair already exists and independently passed. Anything beyond reconciliation repeats solved work or violates freshness.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Already completed: exact repaired bytes, deterministic regression suite, independent live refetch/reconstruction on two domains."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "reopened extraction blocker after successful exact-byte requalification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic evidence extraction with modern container coverage"
+      ],
+      "fresh_reuse_plan": "Proceed to claim support/relation subcapability without parent replay."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused falsification diagnosis",
+        "reused prior verifier structure",
+        "requalified only affected producer layer"
+      ],
+      "search_stop_decision": "Exact repaired bytes passed the missing deterministic regression and independent live cross-domain oracle. Further route search cannot improve this authority restoration.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No route challenger needed for reconciliation-only action."
+    },
+    "routes_considered": [
+      "RESTORE_AUTHORITY_FROM_EXACT_REQUALIFICATION",
+      "REBUILD_EXTRACTOR",
+      "REPLAY_PARENT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REBUILD_ALREADY_REPAIRED_EXTRACTOR",
+      "PARENT_REPLAY",
+      "OLD_RECEIPT_FOR_CHANGED_BYTES"
+    ],
+    "selected_surviving_route": "RESTORE_AUTHORITY_FROM_EXACT_REQUALIFICATION",
+    "why_selected_route_is_fastest_sufficient": "The repaired runtime already exists on main and its exact bytes independently passed; only canonical authority needs restoration.",
+    "expected_parent_level_state_change": "Generic extraction becomes verified again and the active blocker advances to MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1. Parent remains unproven.",
+    "stop_condition": "All authority mirrors align; no parent execution.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Reconciliation of an already repaired and independently requalified local capability."
+    }
+  }
+}
