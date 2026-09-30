@@ -3,7 +3,7 @@
 
 This composes qualified decomposition, open-web discovery, live retrieval
 provenance, generic deterministic BM25 objective relevance, fresh exact
-same-source evidence extraction, and the independently verified bounded
+bounded multi-source evidence extraction, and the independently verified
 objective-to-claim-spec/relation evaluator. ROR organization identity is
 optional metadata, not an admission gate.
 
@@ -100,13 +100,28 @@ def run(objective,decomposition,limit=12,timeout=15):
 
     authority_verifications=[]
     evidence_extractions=[]
-    selected_item=None
+    selected_items=[]
     if relevance_ready:
-        index=int(relevance["top_candidate_original_index"])
-        if 0<=index<len(retrieval_verified):
-            selected_item=retrieval_verified[index]
+        seen_indices=set()
+        for row in relevance.get("ranked_candidates") or []:
+            if not isinstance(row,dict):
+                continue
+            if float(row.get("lexical_relevance_score") or 0.0)<=0:
+                continue
+            if not list(row.get("matched_terms") or []):
+                continue
+            try:
+                index=int(row.get("original_index"))
+            except (TypeError,ValueError):
+                continue
+            if index in seen_indices or not (0<=index<len(retrieval_verified)):
+                continue
+            seen_indices.add(index)
+            selected_items.append(retrieval_verified[index])
+            if len(selected_items)>=4:
+                break
 
-    if selected_item is not None:
+    for selected_item in selected_items:
         candidate=dict(selected_item["candidate"])
         provenance=selected_item["verification"]
         enriched=dict(candidate)
@@ -172,21 +187,47 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "source_url":extraction.get("source_url"),
                 "extraction":extraction,
                 "binding":bound,
+                "multi_source":False,
             })
 
-    relation_evaluated=[
-        item for item in claim_relation_evaluations
-        if (item.get("binding") or {}).get("status") in {
-            "CLAIM_SPEC_AND_OPERANDS_BOUND","CLAIM_SPEC_BOUND"
-        }
-        and isinstance((item.get("binding") or {}).get("relation_result"),dict)
-        and ((item.get("binding") or {}).get("relation_result") or {}).get("output_verified") is True
-        and ((item.get("binding") or {}).get("relation_result") or {}).get("status") in {
-            "NUMERIC_RELATION_VERIFIED",
-            "EXACT_TEXT_SUPPORT_VERIFIED",
-            "EXACT_TEXT_SUPPORT_NOT_VERIFIED",
-        }
-    ]
+    def verified_relations():
+        return [
+            item for item in claim_relation_evaluations
+            if (item.get("binding") or {}).get("status") in {
+                "CLAIM_SPEC_AND_OPERANDS_BOUND","CLAIM_SPEC_BOUND"
+            }
+            and isinstance((item.get("binding") or {}).get("relation_result"),dict)
+            and ((item.get("binding") or {}).get("relation_result") or {}).get("output_verified") is True
+            and ((item.get("binding") or {}).get("relation_result") or {}).get("status") in {
+                "NUMERIC_RELATION_VERIFIED",
+                "EXACT_TEXT_SUPPORT_VERIFIED",
+                "EXACT_TEXT_SUPPORT_NOT_VERIFIED",
+            }
+        ]
+
+    relation_evaluated=verified_relations()
+    if not relation_evaluated and len(evidence_extracted)>=2 and hasattr(claim_binder,"bind_many"):
+        extractions=[x.get("extraction") or {} for x in evidence_extracted]
+        try:
+            bound=claim_binder.bind_many(
+                objective,extractions,evaluate_relation=True
+            )
+        except Exception as exc:
+            bound={
+                "status":"UNBOUND",
+                "reason":"MULTI_SOURCE_CLAIM_SPEC_OR_RELATION_EVALUATION_FAILED",
+                "error_class":type(exc).__name__,
+                "error":str(exc)[:1000],
+                "model_dependency_count":0,
+                "incremental_spend_usd":0,
+            }
+        claim_relation_evaluations.append({
+            "source_urls":[x.get("source_url") for x in extractions],
+            "extractions":extractions,
+            "binding":bound,
+            "multi_source":True,
+        })
+        relation_evaluated=verified_relations()
     relation_ready=bool(relation_evaluated)
 
     return {
@@ -202,17 +243,17 @@ def run(objective,decomposition,limit=12,timeout=15):
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"OPTIONAL_HOST_TO_ROR_ORGANIZATION_METADATA_ONLY__NOT_ADMISSION_GATE",
         "authority_identity_required_for_admission":False,
-        "objective_relevance_verifications":[{
-            "relevance":relevance,
-            "candidate":selected_item["candidate"] if selected_item else None,
-        }],
-        "relevance_verified_candidate_count":1 if relevance_ready else 0,
+        "objective_relevance_verifications":[
+            {"relevance":relevance,"candidate":item["candidate"]}
+            for item in selected_items
+        ],
+        "relevance_verified_candidate_count":len(selected_items),
         "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_OBJECTIVE_RELEVANCE_ONLY",
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
         "claim_relation_evaluations":claim_relation_evaluations,
         "claim_relation_evaluated_count":len(relation_evaluated),
-        "claim_relation_claim_scope":"OBJECTIVE_BOUND_BOUNDED_EXPLICIT_RELATION_OR_EXACT_QUOTED_SUPPORT_ONLY__FACTUAL_CORRECTNESS_UNVERIFIED",
+        "claim_relation_claim_scope":"OBJECTIVE_BOUND_BOUNDED_EXPLICIT_RELATION_OR_EXACT_QUOTED_SUPPORT_ACROSS_UP_TO_FOUR_POSITIVELY_RANKED_PROVENANCE_VERIFIED_SOURCES__FACTUAL_CORRECTNESS_UNVERIFIED",
         "authority_verified_candidate_count":0,
         "primary_source_verified_candidate_count":0,
         "role_progress":{
