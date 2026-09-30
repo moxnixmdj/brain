@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PRESERVED_EXECUTION_EVIDENCE_V1",
+  "evidence_id": "COMPOSITION_EVIDENCE_SURFACE_REQUAL_PRIMARY_EVIDENCE_20260930",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "source_pr": 283,
+  "source_public_run_id": 36659637634,
+  "source_public_job_id": 109711314434,
+  "source_runner_head": "f2f906e35a1d56ee37beb44544d5a81a982e9de3",
+  "source_workflow": ".github/workflows/composition-requal-evidence-surface.yml",
+  "exact_task_path": "canonical/tasks/COMPOSITION_REQUAL_EVIDENCE_SURFACE_20260930.json",
+  "exact_task_git_blob": "70db3e3ba900df9479ed330b611a0f0bfa7c8647",
+  "workflow_conclusion": "failure",
+  "classification": "SEMANTIC_TASK_PASS__STALE_HARNESS_ASSERTION__FINAL_EVIDENCE_ADJUDICATION_PENDING",
+  "exact_route_bytes_step": "PASS",
+  "first_failed_harness_assertion": {
+    "python_line": 31,
+    "expression": "result.get('composition_mode') == 'MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH'",
+    "reason": "PR281 changed the authoritative successful route to DETERMINISTIC_COMPOUND_ACTION_PLAN with shared proposal-binding authority; the obsolete top-level composition_mode field is no longer emitted on this path.",
+    "capability_semantic_predicate": false
+  },
+  "preserved_semantic_execution": {
+    "returncode": 0,
+    "stdout": "COMPOUND_GOAL_COMPLETE",
+    "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+    "planner_model_last": null,
+    "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+    "cycles": 3,
+    "producer": {
+      "adapter": "evidence_decision_synthesis",
+      "status": "DECIDED",
+      "selected_alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "decision_confidence": 1,
+      "input_path": "canonical/tasks/COMPOSITION_REQUAL_EVIDENCE_SURFACE_20260930.json",
+      "output_path": "canonical/astra_runtime/tmp/COMPOSITION_REQUAL_EVIDENCE_SURFACE_OUTPUT.json",
+      "output_sha256": "035e807cbb8adba0e5159452a9562832f8fc9c5b9085a868b873fac5514ec3ad",
+      "output_verified": true,
+      "model_dependency_count": 0
+    },
+    "verifier": {
+      "adapter": "evidence_decision_verify",
+      "verified": true,
+      "reason": "VERIFIED",
+      "decision_id": "COMPOSITION-REQUAL-EVIDENCE-SURFACE-20260930",
+      "status": "DECIDED",
+      "selected_alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "producer_independent": true,
+      "model_dependency_count": 0
+    },
+    "direct_compiler_causal_bindings": {
+      "verifier_input_path": {
+        "$result": {
+          "cycle": 0,
+          "field": "input_path"
+        }
+      },
+      "verifier_result_path": {
+        "$result": {
+          "cycle": 0,
+          "field": "output_path"
+        }
+      }
+    },
+    "finish_summary": "COMPOUND_GOAL_COMPLETE"
+  },
+  "missing_due_to_harness_abort": [
+    "separate final independent recomputation workflow step did not execute",
+    "artifact upload step did not execute"
+  ],
+  "recovery_policy": {
+    "rerun_source_task": false,
+    "allowed": "Recover preserved job-log evidence and independently reprove only the missing final adjudication predicate.",
+    "promotion_before_recovery": false
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
