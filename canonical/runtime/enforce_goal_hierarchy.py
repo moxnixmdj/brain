@@ -710,6 +710,55 @@ def _collect_key_values(value,key):
             out.extend(_collect_key_values(item,key))
     return out
 
+def enforce_frontier_surface_consistency(pointer,hierarchy,queue,scoreboard,target):
+    surfaces={
+        "POINTER":pointer,
+        "HIERARCHY":hierarchy,
+        "QUEUE":queue,
+        "SCOREBOARD":scoreboard,
+        "TARGET":target,
+    }
+    for name,value in surfaces.items():
+        if not isinstance(value,dict):
+            fail("FRONTIER_SURFACE_NOT_OBJECT:"+name)
+            return
+
+    current=pointer.get("current_frontier") or {}
+    immediate=queue.get("immediate_frontier") or {}
+    accounting=scoreboard.get("active_frontier_accounting") or {}
+    if not all(isinstance(x,dict) for x in (current,immediate,accounting)):
+        fail("FRONTIER_SURFACE_SECTION_NOT_OBJECT")
+        return
+
+    active=str(hierarchy.get("active_capability_target") or "")
+    blocker=str(hierarchy.get("current_parent_blocker") or "")
+    next_action=str(hierarchy.get("next_required_action_class") or "")
+    if not active:
+        fail("HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISSING")
+    if not blocker:
+        fail("HIERARCHY_CURRENT_PARENT_BLOCKER_MISSING")
+    if not next_action:
+        fail("HIERARCHY_NEXT_REQUIRED_ACTION_MISSING")
+
+    comparisons=(
+        ("POINTER_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH",current.get("active_capability_target"),active),
+        ("POINTER_HIERARCHY_CRITICAL_BLOCKER_MISMATCH",current.get("critical_blocker"),blocker),
+        ("POINTER_HIERARCHY_HIGHEST_LEVERAGE_GAP_MISMATCH",current.get("highest_leverage_capability_gap"),blocker),
+        ("POINTER_HIERARCHY_NEXT_ACTION_MISMATCH",current.get("next_step"),next_action),
+        ("QUEUE_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH",immediate.get("selected_capability"),active),
+        ("QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH",immediate.get("exact_blocker"),blocker),
+        ("QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH",immediate.get("next_action"),next_action),
+        ("TARGET_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH",target.get("capability_id"),active),
+        ("TARGET_HIERARCHY_CRITICAL_BLOCKER_MISMATCH",target.get("residual_gap"),blocker),
+        ("TARGET_HIERARCHY_NEXT_ACTION_MISMATCH",target.get("next_action"),next_action),
+        ("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH",accounting.get("parent_frontier_capability"),active),
+        ("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH",scoreboard.get("next_progress_event_target"),next_action),
+    )
+    for label,observed,expected in comparisons:
+        if str(observed or "")!=str(expected or ""):
+            fail(label)
+
+
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
         fail(label+"_MISSING")
@@ -880,25 +929,19 @@ def main():
     queue=load("canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json")
     scoreboard=load("canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json")
 
-    current=pointer.get("current_frontier") or {}
-    immediate=queue.get("immediate_frontier") or {}
-    if str(current.get("active_capability_target") or "")!=str(hierarchy.get("active_capability_target") or ""):
-        fail("POINTER_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
-    if str(current.get("critical_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
-        fail("POINTER_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
-    if str(current.get("next_step") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-        fail("POINTER_HIERARCHY_NEXT_ACTION_MISMATCH")
-    if str(immediate.get("exact_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
-        fail("QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
-    if str(immediate.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-        fail("QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH")
-    accounting=scoreboard.get("active_frontier_accounting") or {}
-    if str(accounting.get("parent_frontier_capability") or "")!=str(hierarchy.get("active_capability_target") or ""):
-        fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
-    if str(accounting.get("current_parent_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
-        fail("SCOREBOARD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
-    if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-        fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
+    scoreboard=load("canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json")
+    target_id=str(hierarchy.get("active_capability_target") or "")
+    if not target_id or "/" in target_id or ".." in target_id:
+        fail("HIERARCHY_ACTIVE_CAPABILITY_TARGET_INVALID")
+        target={}
+    else:
+        target_path="canonical/capabilities/frontier/"+target_id+".json"
+        try:
+            target=load(target_path)
+        except Exception as exc:
+            fail("ACTIVE_FRONTIER_TARGET_READ_FAILED:"+target_path+":"+type(exc).__name__)
+            target={}
+    enforce_frontier_surface_consistency(pointer,hierarchy,queue,scoreboard,target)
 
     boot=pointer.get("boot_requirements") or {}
     if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
