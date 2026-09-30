@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "FREEZE-FRESH-HTTP2-FLOW-CONTROL-OPENENDED-PARENT-TASK-A-20260930-V1",
-  "status": "PROPOSED",
+  "status": "FROZEN_UNSPENT__EXECUTION_DEFERRED_PENDING_PARENT_PATH_INTEGRATION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "bab96da313ac8c9b4476e8d466f1fe1fcbb5f240",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -44,5 +44,8 @@
     "why_selected_route_is_fastest_sufficient": "The HTTP/2 objective is materially different from spent parent domains, requires autonomous authoritative-source discovery, extraction of two protocol limits, a deterministic comparison, executable verification and scoped interpretation, while fitting the newly verified bounded claim/relation stack without leaking the answer.",
     "expected_parent_level_state_change": "Either obtain the first admissible genuine open-ended parent Task A pass or localize the next narrower causal gap without replay.",
     "stop_condition": "Exactly one execution; no same-task replay."
-  }
+  },
+  "execution_authorized": false,
+  "execution_deferred_by": "canonical/capabilities/obsolescence/PARENT_CLAIM_RELATION_INTEGRATION_FRONTIER_CORRECTION_20260930_V1.json",
+  "execution_defer_reason": "Verified claim-spec/relation child is not yet invoked by canonical open_research_source_frontend/astra_runtime. Spending this task before parent-effective integration would test a known missing edge."
 }
