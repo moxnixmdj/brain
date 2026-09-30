@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "REPAIR-SCHOLARLY-PROVENANCE-ADMISSION-AND-SELECTED-SOURCE-MATERIALIZATION-20260930-V1",
-  "status": "PROPOSED",
+  "status": "PROPOSED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "3e2435efb9398a062ee40a7bdbb3e3610724b330",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -11,7 +11,7 @@
   "causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
   "action_kind": "GENERIC_SOURCE_PIPELINE_REPAIR",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
-  "expected_parent_frontier_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION_AND_SELECTED_ONLY_LIVE_MATERIALIZATION__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
+  "expected_parent_frontier_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION__SUBJECT_COVERAGE_GATE__SELECTED_LIVE_MATERIALIZATION__ONE_METADATA_REFINED_RETRIEVAL_FALLBACK__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "Brain main 3e2435efb9398a062ee40a7bdbb3e3610724b330 / merged PR526 current-base reconciliation.",
@@ -30,7 +30,7 @@
   "orthogonal_recurrence_count": 2,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Implement only generic provenance-class-preserving relevance admission plus selected-only live materialization. Independently guard-qualify exact bytes on fresh cross-domain fixtures. Do not replay seismology, do not add source whitelists, and do not award parent capability credit from the repair alone.",
+  "stop_condition": "Run exact authored regressions and a guarded independent non-parent cross-domain qualification of subject-coverage admission, provenance-class-preserving relevance, selected-only materialization, one metadata-anchored retry, downstream extraction enforcement, and fail-closed uncertainty. Do not replay seismology; no parent credit from repair alone.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "model_dependency_count": 0,
@@ -94,7 +94,8 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+        "REUSE_EXISTING_DISCOVERY_PROVENANCE_BM25_AND_EXTRACTION__ADD_SUBJECT_COVERAGE_ADMISSION__PRESERVE_BIBLIOGRAPHIC_CANDIDATES__MATERIALIZE_SELECTED_ONLY__ONE_METADATA_REFINED_RETRIEVAL_RETRY",
+        "PRESERVE_BIBLIOGRAPHIC_AND_MATERIALIZE_SELECTED_ONLY_WITHOUT_REFINEMENT",
         "ADD_NEW_SCHOLARLY_DOWNLOADER",
         "SOURCE_WHITELIST",
         "MODEL_RERANKER"
@@ -105,7 +106,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Use fresh non-parent cross-domain fixtures to prove bibliographic candidates can outrank weak live pages, selected-only materialization occurs, materialization failure is fail-closed, and ordinary retrieval candidates remain unchanged."
+      "synthetic_verification_necessity": "Fresh non-parent cross-domain exact-byte qualification must independently verify: low-coverage positive BM25 is not admitted; bibliographic candidates compete in relevance; only the selected bibliographic candidate is materialized; direct materialization success preserves retrieval provenance; failure triggers exactly one metadata-anchored query retry; failed retry fails closed; extraction rejects weak admission receipts."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
@@ -140,10 +141,11 @@
       "THRESHOLD_ONLY_PATCH",
       "NEW_SEARCH_ENGINE",
       "SOURCE_WHITELIST",
-      "MODEL_RERANKER"
+      "MODEL_RERANKER",
+      "UNBOUNDED_QUERY_RETRY"
     ],
-    "selected_surviving_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
-    "why_selected_route_is_fastest_sufficient": "Two generic transitions reuse current verified components, preserve fail-closed semantics, cost $0, and directly eliminate the demonstrated upstream information loss.",
+    "selected_surviving_route": "REUSE_EXISTING_DISCOVERY_PROVENANCE_BM25_AND_EXTRACTION__ADD_SUBJECT_COVERAGE_ADMISSION__PRESERVE_BIBLIOGRAPHIC_CANDIDATES__MATERIALIZE_SELECTED_ONLY__ONE_METADATA_REFINED_RETRIEVAL_RETRY",
+    "why_selected_route_is_fastest_sufficient": "It repairs the demonstrated information-loss seam using existing components, rejects low-subject-coverage live pages without an absolute BM25 score threshold, materializes only the selected bibliographic source, and makes at most one provenance-anchored retrieval retry if direct materialization fails.",
     "expected_parent_level_state_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION_AND_SELECTED_ONLY_LIVE_MATERIALIZATION__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
     "stop_condition": "Implement only generic provenance-class-preserving relevance admission plus selected-only live materialization. Independently guard-qualify exact bytes on fresh cross-domain fixtures. Do not replay seismology, do not add source whitelists, and do not award parent capability credit from the repair alone.",
     "route_frontier": {
