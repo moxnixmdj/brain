@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-COMPOSITION-REPAIR-COMPLETE-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_STATE_STILL_DESCRIBES_REPAIR_AS_PENDING_AFTER_EXACT_REPAIR_VALIDATION_PASSED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::CANONICAL_STATE_STILL_DESCRIBES_REPAIR_AS_PENDING_AFTER_EXACT_REPAIR_VALIDATION_PASSED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Mark composition repair complete and component-validated while keeping capability/fresh-reuse credit revoked; make one fresh materially distinct real requalification task the sole next action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR271 validation run 36654897859 PASS",
+    "PR273 corrected validation run 36655498906 PASS",
+    "PR275 validation run 36656123767 PASS",
+    "current graph audit has zero provider-backed path-binding violations",
+    "composition counters remain revoked after PR270"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile canonical state only. Counters and capability credit remain unchanged. Next action becomes exactly one fresh materially distinct model-independent real composition task; no further repair unless that task falsifies a new seam.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "new_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "relationship": "SAME_TARGET_REPAIR_COMPLETE_AWAIT_FRESH_REQUALIFICATION",
+    "evidence": [
+      "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_VALIDATION_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e7881d00a16f673de626f380b4b1c18469a8fd59",
+    "real_outcome": "Remove stale repair bookkeeping so the only remaining action is real fresh requalification.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Canonical state says repair complete, credit withheld, one fresh task required.",
+      "proxy_goals_deleted": [
+        "more repair work",
+        "restore credit from component tests",
+        "replay PR267",
+        "new planner/provider"
+      ],
+      "surviving_necessity": "Fresh real evidence is now the only missing predicate."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR271",
+        "PR273",
+        "PR275",
+        "public validation runs 36654897859, 36655498906, 36656123767"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to reconciliation."
+      ],
+      "capability_work_deleted": [
+        "no code",
+        "no provider",
+        "no model",
+        "no new test"
+      ],
+      "surviving_gap": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical bookkeeping lag only.",
+      "delete_bypass_substitute_options": [
+        "Delete stale repair blocker and replace with fresh requalification requirement."
+      ],
+      "surviving_causal_blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_TO_FRESH_REQUALIFICATION_ONLY"
+      ],
+      "losing_routes_reason": "All repair branches are merged and independently validated; more repair has no evidence basis.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new verification is needed for reconciliation; exact public validations already exist."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all further repair work absent new falsification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "explicit effect-result provenance",
+        "generic fail-closed path guard",
+        "closed known registry path gaps"
+      ],
+      "fresh_reuse_plan": "Run exactly one fresh materially distinct real task and adjudicate."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse all exact repair validation receipts"
+      ],
+      "search_stop_decision": "Repair frontier is exhausted; fresh execution dominates further search.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_TO_FRESH_REQUALIFICATION_ONLY",
+      "CONTINUE_REPAIR_WITHOUT_NEW_FAILURE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CONTINUE_REPAIR_WITHOUT_NEW_FAILURE",
+      "PR267_REPLAY"
+    ],
+    "selected_surviving_route": "RECONCILE_TO_FRESH_REQUALIFICATION_ONLY",
+    "why_selected_route_is_fastest_sufficient": "All known repair predicates pass and graph audit is clean; only real fresh evidence can change capability truth now.",
+    "expected_parent_level_state_change": "Mark composition repair complete and component-validated while keeping capability/fresh-reuse credit revoked; make one fresh materially distinct real requalification task the sole next action.",
+    "stop_condition": "Reconcile canonical state only. Counters and capability credit remain unchanged. Next action becomes exactly one fresh materially distinct model-independent real composition task; no further repair unless that task falsifies a new seam.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER does not select an execution supplier."
+    }
+  }
+}
