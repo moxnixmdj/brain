@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-ASTRA-SHARED-RUNTIME-PRESTART-AND-REARM-SQLITE-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "ASTRA_SHARED_RUNTIME_WORKFLOW_INVALID_PRESTART__SQLITE_PARENT_TASK_UNSPENT",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::ASTRA_SHARED_RUNTIME_WORKFLOW_INVALID_PRESTART__SQLITE_PARENT_TASK_UNSPENT::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Restore the canonical ASTRA carrier to an executable fail-closed workflow and re-arm the already-frozen SQLite parent mission without changing its objective, so exactly one real producer execution can occur or expose the first genuine runtime causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main 78f4b425fa5fbcfe1fd94f56e3f5dddc0670c67a adds the frozen SQLite mission",
+    "workflow blob 6e9ac39caf4b8971a2f48368f51e1a10c22de368 has an unterminated grep expression and duplicated workflow body introduced by a7c2944dde3e7993b3d044c588ce282bc54ed3f2",
+    "last known-good workflow at 3ce64b1abb2e6542659617563af48e44eb33f996 is structurally intact",
+    "no open PR owns the SQLite task or this carrier repair at current refresh",
+    "SQLite task objective and source task blob remain frozen and unchanged"
+  ],
+  "evidence_presence_classification": "EXECUTION_PRESTART_BLOCKED__PRODUCER_EXECUTION_COUNT_ZERO",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Repair only the malformed carrier syntax by restoring the last known-good workflow plus the intended first-parent diff option; re-arm the existing SQLite mission solely because the prior trigger could not start. Stop after the first producer execution result or first genuine runtime causal gap; never replay a started producer task.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "explicit_user_authorization": "User directed: Join the brain and make the goal real now.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "78f4b425fa5fbcfe1fd94f56e3f5dddc0670c67a",
+    "real_outcome": "Make the frozen SQLite parent capability test physically execute once through the canonical ASTRA carrier instead of mistaking a malformed workflow trigger for execution.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain one admissible producer result or first genuine runtime blocker from the frozen SQLite parent task.",
+      "proxy_goals_deleted": [
+        "counting the mission commit as execution",
+        "rewriting the frozen task",
+        "building a new carrier",
+        "replaying any started producer run"
+      ],
+      "surviving_necessity": "The current carrier workflow is syntactically malformed before ASTRA can start, so exact carrier restoration is causally necessary."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "last known-good astra-shared-runtime workflow at 3ce64b1",
+        "current canonical SQLite mission at 78f4b425",
+        "validated mission-origin carrier evidence from run 36672975512"
+      ],
+      "external_existing_routes_checked": [
+        "none required: the exact prior-good carrier is already inherited"
+      ],
+      "capability_work_deleted": [
+        "no runtime cognition change",
+        "no task-specific runtime patch",
+        "no alternate execution substrate",
+        "no new mission identity"
+      ],
+      "surviving_gap": "Canonical workflow syntax prevents the frozen mission from reaching ASTRA at all."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific prestart carrier corruption, not evidence against the parent cognitive capability.",
+      "delete_bypass_substitute_options": [
+        "DELETE duplicated accidental workflow body",
+        "REUSE last known-good workflow",
+        "REPAIR only intended merge first-parent diff line"
+      ],
+      "surviving_causal_blocker": "ASTRA_SHARED_RUNTIME_WORKFLOW_INVALID_PRESTART__SQLITE_PARENT_TASK_UNSPENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_LAST_KNOWN_GOOD_WORKFLOW_PLUS_MINIMAL_FIRST_PARENT_DIFF_FIX",
+        "BUILD_NEW_WORKFLOW",
+        "BYPASS_CANONICAL_CARRIER"
+      ],
+      "losing_routes_reason": "A clean prior-good workflow already exists. Rebuilding adds risk; bypassing the canonical carrier would invalidate the evidence contract.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic capability probe is needed. Parseable workflow plus the frozen mission's first durable ASTRA evidence is the direct effect check."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "malformed a7c2944 workflow body",
+        "false assumption that 78f4b425 physically executed the task"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "existing mission-origin validation",
+        "existing frozen SQLite task",
+        "existing ASTRA runtime persistence path"
+      ],
+      "fresh_reuse_plan": "After this prestart repair, allow exactly one producer execution of the already-frozen unspent mission; any started result is terminal for this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR377 carrier validation",
+        "reused frozen SQLite task",
+        "diffed malformed workflow against last known-good blob"
+      ],
+      "search_stop_decision": "Stop searching: the corruption is exact, local, directly observed in canonical source, and the prior-good replacement is available in-repo.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current-base refresh found no open lease owner; only carrier syntax changed materially."
+    },
+    "routes_considered": [
+      "REUSE_LAST_KNOWN_GOOD_WORKFLOW_PLUS_MINIMAL_FIRST_PARENT_DIFF_FIX",
+      "BUILD_NEW_WORKFLOW",
+      "BYPASS_CANONICAL_CARRIER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "DUPLICATED_WORKFLOW_BODY",
+      "NEW_CARRIER_BUILD",
+      "DIRECT_RUNTIME_BYPASS"
+    ],
+    "selected_surviving_route": "REUSE_LAST_KNOWN_GOOD_WORKFLOW_PLUS_MINIMAL_FIRST_PARENT_DIFF_FIX",
+    "why_selected_route_is_fastest_sufficient": "It restores a previously working carrier with one intended diff-resolution change, at $0, minimum code delta, and preserves the exact canonical execution surface required by the frozen task.",
+    "expected_parent_level_state_change": "Restore the canonical ASTRA carrier to an executable fail-closed workflow and re-arm the already-frozen SQLite parent mission without changing its objective, so exactly one real producer execution can occur or expose the first genuine runtime causal gap.",
+    "stop_condition": "Repair only the malformed carrier syntax by restoring the last known-good workflow plus the intended first-parent diff option; re-arm the existing SQLite mission solely because the prior trigger could not start. Stop after the first producer execution result or first genuine runtime causal gap; never replay a started producer task.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Exact repository-local governance/carrier corruption with a known-good in-repo predecessor; external route discovery cannot dominate exact restoration."
+    }
+  }
+}
