@@ -168,6 +168,40 @@ def _similarity_method(clause,cid,entry):
     }
 
 
+def _flatten_template(value):
+    if isinstance(value,dict):
+        return " ".join(_flatten_template(v) for v in value.values())
+    if isinstance(value,list):
+        return " ".join(_flatten_template(v) for v in value)
+    return str(value or "")
+
+def _template_inputs(entry):
+    return set(re.findall(
+        r"\$\{input\.([A-Za-z0-9_]+)\}",
+        _flatten_template((entry or {}).get("action_template") or {}),
+    ))
+
+def _binding_affordance(clause,entry):
+    placeholders=_template_inputs(entry)
+    declared=(entry or {}).get("proposal_bindings") or {}
+    if not isinstance(declared,dict):
+        declared={}
+    urls=[
+        x.rstrip(".,;:!?")
+        for x in re.findall(r"https?://[^\s)\]}>]+",str(clause or ""))
+    ]
+    goal_url_declared=any(
+        isinstance(spec,dict) and spec.get("type")=="goal_url"
+        for spec in declared.values()
+    )
+    direct_url=("url" in placeholders)
+    return {
+        "has_goal_url":bool(urls),
+        "url_consumable":bool(urls and (goal_url_declared or direct_url)),
+        "proposal_binding_count":len(declared),
+        "proposal_bindings_cover_all_inputs":bool(placeholders and placeholders.issubset(set(declared))),
+    }
+
 def _output_contract(clause):
     paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",clause)
     return {
@@ -214,6 +248,7 @@ def ground(goal,registry,max_candidates_per_clause=8):
             if not matched:
                 continue
             combined=float(lexical["score"])+float(semantic["score"])
+            affordance=_binding_affordance(text,entry)
             ranked.append({
                 "capability_id":str(cid),
                 "combined_score":combined,
@@ -222,7 +257,15 @@ def ground(goal,registry,max_candidates_per_clause=8):
                 "matched_distinctive_tokens":sorted(matched),
                 "provides":[str(x) for x in entry.get("provides") or []],
                 "requires":[str(x) for x in entry.get("requires") or []],
+                "binding_affordance":affordance,
             })
+        # A literal URL is strong executable input evidence. If any semantically
+        # supported candidate explicitly consumes a goal URL, candidates that
+        # cannot consume a URL are not executable alternatives for this clause.
+        if re.search(r"https?://[^\s)\]}>]+",text):
+            url_ready=[x for x in ranked if (x.get("binding_affordance") or {}).get("url_consumable")]
+            if url_ready:
+                ranked=url_ready
         ranked.sort(key=lambda x:(-x["combined_score"],x["capability_id"]))
         if ranked:
             best=ranked[0]["combined_score"]
