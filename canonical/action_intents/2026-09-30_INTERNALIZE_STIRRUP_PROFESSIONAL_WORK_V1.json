@@ -1,0 +1,231 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "INTERNALIZE-STIRRUP-PROFESSIONAL-WORK-20260930-V1",
+  "status": "INTERNALIZATION_COMPLETE__BRAIN_CONFIGURED_VERIFICATION_PENDING",
+  "canonical_generation": "2026-09-30-opus55-capability-internalization-v6",
+  "canonical_base_commit": "5481ae7d3de8325ed7b67e5b43a703229adf8d82",
+  "capability_target": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "action_kind": "EXISTING_MECHANISM_INTERNALIZATION",
+  "blocker_lease_key": "5481ae7d3de8325ed7b67e5b43a703229adf8d82::OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1::PROFESSIONAL_WORK_EXTERNAL_SPECIMEN_WITHOUT_BRAIN_OWNED_AGENT_HARNESS",
+  "expected_parent_frontier_change": "Convert the GDPval-AA professional-work agent harness from an external mechanism into a permanently Brain-owned operative configuration, with zero Opus credit until Brain-configured verification.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "hard_incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS__VENDORED_SOURCE",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_FOR_AGENT_HARNESS_MECHANISM",
+    "GENERAL_SUBSTRATE_TEST": "PENDING_FUTURE_VERIFICATION__GENERAL_COGNITION_ONLY",
+    "SPECIMEN_SEPARATION_TEST": "PASS__GDPVAL_LEADERBOARD_MODELS_REMAIN_SPECIMENS_ONLY",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS__PINNED_VENDORED_SOURCE_AND_CONFIG",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING__ZERO_OPUS_CREDIT_UNTIL_PASS",
+    "OWNERSHIP_PACKAGE_TEST": "PASS_FOR_MECHANISM__PARITY_PENDING"
+  },
+  "reasoning_durability": {
+    "receipt_required": true,
+    "fields": [
+      "real_objective",
+      "governing_invariants",
+      "material_premises",
+      "evidence_refs",
+      "conclusion",
+      "selected_route",
+      "rejected_material_alternatives",
+      "uncertainties",
+      "assumptions",
+      "non_goals",
+      "next_action",
+      "supersession_conditions",
+      "supersedes"
+    ],
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-30-opus55-capability-internalization-v6",
+    "canonical_base_commit": "5481ae7d3de8325ed7b67e5b43a703229adf8d82",
+    "real_outcome": "Own an exposed professional-work agent mechanism used by the GDPval-AA benchmark instead of externalizing professional-work capability to a frontier model.",
+    "required_capability": "PROFESSIONAL_WORK_AGENT_LOOP__FILE_INPUT_OUTPUT__TOOL_LIFECYCLE__CONTEXT_MANAGEMENT__SKILLS__MULTIMODAL_IO",
+    "obs_goal": {
+      "real_outcome": "Brain-internalized professional-work operative configuration ready for direct verification.",
+      "proxy_goals_deleted": [
+        "Find another high-scoring model",
+        "Buy professional-work API access",
+        "Build a new office agent framework"
+      ],
+      "surviving_necessity": "Acquire an existing exposed reusable mechanism."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain artifact tools",
+        "Brain long-horizon state",
+        "Brain deterministic verification components"
+      ],
+      "external_existing_routes_checked": [
+        "ArtificialAnalysis/Stirrup",
+        "GDPval-AA methodology"
+      ],
+      "capability_work_deleted": [
+        "No new agent loop invention",
+        "No new tool lifecycle architecture"
+      ],
+      "surviving_gap": "Stirrup mechanism is not yet represented as durable Brain-owned source/configuration."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Ownership/internalization gap, not missing capability existence.",
+      "delete_bypass_substitute_options": [
+        "Vendor exact MIT-licensed Stirrup implementation into Brain"
+      ],
+      "surviving_causal_blocker": "EXTERNAL_EXPOSED_HARNESS_NOT_YET_INTERNALIZED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Vendor pinned Stirrup source and manifest",
+        "Reference external package only",
+        "Build new professional-work agent loop"
+      ],
+      "losing_routes_reason": "External-only reference fails ownership; new build is slower and violates reuse-first/invention law.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Internalization receives zero Opus credit. Direct GDPval/professional-work verification follows after Brain-owned source is frozen."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any plan that treats GPT-6 Astra/Opus professional-work behavior as owned capability"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "file I/O",
+        "code execution",
+        "web tools",
+        "MCP",
+        "skills",
+        "context summarization",
+        "multimodal support"
+      ],
+      "fresh_reuse_plan": "Run Brain-internalized Stirrup on fresh professional-work tasks with a general cognition substrate and compare against the Opus 5.5 bar."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Used benchmark-owner harness identity and upstream repository directly"
+      ],
+      "search_stop_decision": "The benchmark harness itself is exposed, current, MIT-licensed, and designed for the target task class; internalize before searching for another framework.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "VENDOR_PINNED_STIRRUP",
+      "REFERENCE_EXTERNAL_PACKAGE",
+      "BUILD_NEW_FRAMEWORK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "OPAQUE_MODEL_AS_OWNERSHIP",
+      "BUILD_NEW_FRAMEWORK"
+    ],
+    "selected_surviving_route": "VENDOR_PINNED_STIRRUP",
+    "why_selected_route_is_fastest_sufficient": "It is the exposed harness used for GDPval-AA, already contains the needed professional-work agent mechanics, is MIT-licensed, and can be copied into Brain immediately.",
+    "expected_parent_level_state_change": "PROFESSIONAL_WORK_MOVES_FROM_EXTERNAL_SPECIMEN_FOUND_TO_INTERNALIZATION_IN_PROGRESS",
+    "stop_condition": "Internalize exact current source and license, freeze manifest, award zero Opus credit, then verify the Brain-configured route.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T19:45:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "VENDOR_PINNED_STIRRUP",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/ArtificialAnalysis/Stirrup",
+          "https://artificialanalysis.ai/evaluations/gdpval-aa"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "ArtificialAnalysis/Stirrup commit 247f24d56b2108235880ed2a2baea5d35b5a67ee, MIT license"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "GDPval-AA benchmark documentation identifying Stirrup as its agent harness"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "professional knowledge work agent harness documents spreadsheets slides GDPval"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GDPval-AA Stirrup agent harness"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "open-source professional work agent loop file output code web context management"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 Stirrup current agent framework"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "VENDOR_PINNED_STIRRUP",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Benchmark-owner harness mechanism.",
+            "CAPABILITY_STRENGTH": "Directly used for GDPval-AA professional work.",
+            "WALL_CLOCK": "Immediate source internalization.",
+            "INCREMENTAL_COST": "$0 MIT.",
+            "RELIABILITY": "Pinned source and license.",
+            "VERIFIABILITY": "Can test Brain route directly."
+          }
+        }
+      ],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "selected_route": "VENDOR_PINNED_STIRRUP",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ]
+    }
+  },
+  "execution_result": {
+    "upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+    "vendored_root": "canonical/capabilities/internalized/professional_work/stirrup_247f24d",
+    "compared_file_count": 45,
+    "byte_identical": true,
+    "compileall_pass": true,
+    "configuration": "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
+    "capability_credit": 0,
+    "next_state": "BRAIN_CONFIGURED_VERIFICATION_PENDING"
+  }
+}

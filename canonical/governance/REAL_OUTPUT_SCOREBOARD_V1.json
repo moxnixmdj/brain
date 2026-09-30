@@ -910,6 +910,18 @@
         "SCOPED_BRAIN_OWNED_COMPONENT_ADDED"
       ],
       "claim_scope": "XLSX_PPTX_READ_WRITE_TABLES_FORMATTING_SLIDES_NOTES_ROUNDTRIP"
+    },
+    {
+      "event_id": "OPUS55_PROFESSIONAL_WORK_STIRRUP_INTERNALIZED_20260930",
+      "capability_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "capability_package": "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
+      "verification": "canonical/capabilities/opus55/OPUS55_STIRRUP_INTERNALIZATION_VERIFICATION_V1.json",
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "EXTERNAL_SPECIMEN_TO_BRAIN_INTERNALIZED_MECHANISM"
+      ],
+      "capability_credit": 0
     }
   ],
   "last_real_output_event": {
