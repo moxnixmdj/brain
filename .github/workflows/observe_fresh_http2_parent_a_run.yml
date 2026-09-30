@@ -1,0 +1,33 @@
+name: Observe Fresh HTTP2 Parent A Run
+
+on:
+  pull_request:
+    branches: [main]
+    types: [synchronize]
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  observe:
+    if: github.head_ref == 'execute/fresh-http2-parent-a-once-20260930-v1'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Read prior one-shot run without replay
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: "36686791971"
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          mkdir -p observer
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs?filter=latest" > observer/jobs.json
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/artifacts" > observer/artifacts.json
+          jq '{total_count, jobs: [.jobs[] | {id,name,status,conclusion,started_at,completed_at,steps:[.steps[]? | {name,status,conclusion,number}]}]}' observer/jobs.json > observer/summary.json
+          summary=$(cat observer/summary.json)
+          artifacts=$(jq '{total_count,artifacts:[.artifacts[]?|{id,name,size_in_bytes,expired,digest}]}' observer/artifacts.json)
+          body=$(printf 'ONE_SHOT_RUN_OBSERVER\nRUN_ID=%s\n\nJOBS:\n```json\n%s\n```\n\nARTIFACTS:\n```json\n%s\n```' "$RUN_ID" "$summary" "$artifacts")
+          gh api --method POST "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" -f body="$body" >/dev/null
