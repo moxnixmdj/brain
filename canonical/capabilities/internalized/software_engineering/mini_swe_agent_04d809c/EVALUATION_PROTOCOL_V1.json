@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_INTERNALIZED_CODING_EVALUATION_PROTOCOL_V1",
+  "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_AGENT_V1",
+  "configuration_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_agent_04d809c/INTERNALIZATION_MANIFEST.json",
+  "substrate_policy": {
+    "preferred": "APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_INCREMENTAL_SPEND",
+    "zero_incremental_only": true,
+    "external_api_billing_forbidden": true,
+    "substrate_is_not_owned_capability": true
+  },
+  "execution_contract": {
+    "configuration_load_order": [
+      "upstream/src/minisweagent/config/benchmarks/swebench.yaml",
+      "upstream/src/minisweagent/agents/default.py",
+      "upstream/src/minisweagent/environments/local.py"
+    ],
+    "preserve_linear_history": true,
+    "preserve_one_action_at_a_time_semantics": true,
+    "preserve_explicit_submission_semantics": true,
+    "preserve_limits": true,
+    "solution_or_verifier_pre_read_forbidden": true,
+    "task_specific_online_hint_pre_read_forbidden": true
+  },
+  "stage_order": [
+    {
+      "stage": 1,
+      "benchmark": "Terminal-Bench 4.0",
+      "purpose": "Fresh uncontaminated zero-credit falsification preflight on one unspent task.",
+      "decision": "FAIL_ROUTE_ADVANCEMENT_ON_CLEAN_BEHAVIORAL_FAILURE"
+    },
+    {
+      "stage": 2,
+      "benchmark": "Terminal-Bench 4.0",
+      "target_bar": 66.4,
+      "comparator": "Claude Opus 5.5",
+      "prerequisite": "STAGE_1_PASS"
+    },
+    {
+      "stage": 3,
+      "benchmark": "FrontierCode v1.1 Main or equivalent direct behavioral bar",
+      "target_bar": 54.4,
+      "comparator": "Claude Opus 5.5",
+      "prerequisite": "STAGE_2_PASS"
+    }
+  ],
+  "attribution_gate": {
+    "configured_must_materially_differ_from_baseline": true,
+    "same_substrate_required_for_comparison": true,
+    "one_task_never_promotes_whole_family": true
+  },
+  "independent_verification": {
+    "required": true,
+    "verifier_must_not_be_configured_route_itself": true,
+    "benchmark_solution_or_verifier_logic_must_not_be_read_before_submission": true
+  },
+  "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_CURRENT_BRAIN_CONFIGURED_ROUTE_MEETS_OR_EXCEEDS_CURRENT_OPUS_5_5_BAR",
+  "current_state": "INTERNALIZED_EXACT_BYTES__DIRECT_VERIFICATION_PENDING"
+}
