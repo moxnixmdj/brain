@@ -134,6 +134,30 @@ def _resolve_numeric(units,ref):
     })
     return x
 
+def _objective_literal(spec,expected_unit):
+    surface=spec.get("surface") if isinstance(spec,dict) else spec
+    if not isinstance(surface,(int,float,str)) or isinstance(surface,bool):
+        raise ValueError("OBJECTIVE_LITERAL_REQUIRED")
+    m=re.fullmatch(
+        r"\s*([-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?)"
+        r"(?:\s*([%A-Za-zµμ°][A-Za-z0-9µμ°/%^·*._-]{0,31}))?\s*",
+        str(surface),
+    )
+    if not m:
+        raise ValueError("OBJECTIVE_LITERAL_INVALID")
+    value=Decimal(m.group(1).replace(",",""))
+    if not value.is_finite():
+        raise ValueError("OBJECTIVE_LITERAL_NONFINITE")
+    unit=_canon(m.group(2)).lower().rstrip(".,;:")
+    if unit!=expected_unit:
+        raise ValueError("OBJECTIVE_LITERAL_UNIT_MISMATCH")
+    return {
+        "value":value,
+        "unit":unit,
+        "surface":_canon(surface).rstrip(".,;:"),
+        "provenance_class":"OBJECTIVE_TEXT_EXPLICIT_LITERAL",
+    }
+
 def _threshold(units,spec,expected_unit):
     if isinstance(spec,dict):
         x=_resolve_numeric(units,spec)
@@ -212,9 +236,18 @@ def evaluate(extraction,spec):
         if op not in OPS:
             raise ValueError("NUMERIC_RELATION_OPERATOR_INVALID")
         left=_resolve_numeric(units,spec.get("left"))
-        right=_resolve_numeric(units,spec.get("right"))
-        if left["unit"]!=right["unit"]:
-            raise ValueError("NUMERIC_RELATION_UNIT_MISMATCH")
+        right_ref=spec.get("right")
+        right_literal=spec.get("right_literal")
+        if right_ref is not None and right_literal is not None:
+            raise ValueError("NUMERIC_RELATION_RIGHT_OPERAND_AMBIGUOUS")
+        if right_literal is not None:
+            if op=="ABS_DIFF_LTE":
+                raise ValueError("OBJECTIVE_LITERAL_RIGHT_UNSUPPORTED_FOR_ABS_DIFF")
+            right=_objective_literal(right_literal,left["unit"])
+        else:
+            right=_resolve_numeric(units,right_ref)
+            if left["unit"]!=right["unit"]:
+                raise ValueError("NUMERIC_RELATION_UNIT_MISMATCH")
         lv,rv=left["value"],right["value"]
         threshold_value=None
         threshold_unit=None
@@ -236,7 +269,11 @@ def evaluate(extraction,spec):
         return {
             **base,
             "status":"NUMERIC_RELATION_VERIFIED",
-            "relation_scope":"EXPLICIT_DECIMAL_RELATION_OVER_CALLER_REFERENCED_LITERALS_ONLY",
+            "relation_scope":(
+                "EXPLICIT_DECIMAL_RELATION_OVER_EVIDENCE_AND_OBJECTIVE_LITERAL"
+                if right_literal is not None
+                else "EXPLICIT_DECIMAL_RELATION_OVER_CALLER_REFERENCED_EVIDENCE_LITERALS"
+            ),
             "operator":op,
             "predicate":bool(predicate),
             "left":public(left),
