@@ -403,5 +403,17 @@
     "incremental_spend_usd": 0
   },
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
-  "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+  "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+  "internalization_records": [
+    {
+      "capability_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+      "parent_family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "internalization_manifest": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+      "configuration": "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
+      "verification": "canonical/capabilities/opus55/OPUS55_STIRRUP_INTERNALIZATION_VERIFICATION_V1.json",
+      "capability_credit": 0,
+      "residual": "BRAIN_CONFIGURED_PROFESSIONAL_WORK_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5"
+    }
+  ]
 }
