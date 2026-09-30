@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-SEISMOLOGY-TSUNAMI-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_REQUIRED_AFTER_ROUTING_REPAIR",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_SEISMOLOGY_TSUNAMI_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended seismology parent task on the repaired broad-routing runtime; execute exactly once and stop on the first new causal gap or semantic completion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current repaired main a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "HTTP/2 parent Task A spent exactly once in guarded run 36688193204 and replay forbidden",
+    "generic broad multi-clause routing repair qualified and merged by PR474",
+    "earlier seismology lease PR476 closed as premature without execution"
+  ],
+  "evidence_presence_classification": "ROUTING_REPAIR_VERIFIED__FRESH_PARENT_VALIDATION_REQUIRED",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "stop_condition": "Freeze only. Execute later through atomic guard exactly once; no same-task replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "The repaired full model-independent route now needs a materially different real open-ended parent validation.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_SEISMOLOGY_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "PREDECLARED_SOURCE_OR_STATION",
+      "PREDECLARED_NUMERIC_VALUES",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "PREWIRED_TOOL_OR_CALCULATION_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It reuses the repaired generic route, is materially different from the spent network-protocol task, requires autonomous source discovery, evidence extraction, threshold/jurisdiction evaluation, executable verification and scoped interpretation, and costs $0.",
+    "stop_rule": "EXACTLY_ONE_GUARDED_EXECUTION__NO_SAME_TASK_REPLAY"
+  }
+}
