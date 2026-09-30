@@ -4872,6 +4872,65 @@ def _load_plain_goal_bound_grounding():
     spec.loader.exec_module(module)
     return module
 
+def _load_open_web_source_candidate_discovery():
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"open_web_source_candidate_discovery.py"
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_open_web_source_candidate_discovery",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("OPEN_WEB_SOURCE_CANDIDATE_DISCOVERY_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _run_broad_objective_source_discovery(
+    mission, goal, grounding, discovery_module=None
+):
+    broad=grounding.get("broad_objective_decomposition")
+    if not (
+        grounding.get("broad_objective_decomposition_available")
+        and isinstance(broad,dict)
+        and broad.get("status")=="DECOMPOSED"
+    ):
+        return None,None
+    module=discovery_module or _load_open_web_source_candidate_discovery()
+    try:
+        discovery=module.discover(goal,limit=12,timeout=20)
+    except Exception as exc:
+        discovery={
+          "schema":"PROJECT_BRAIN_OPEN_WEB_SOURCE_CANDIDATE_DISCOVERY_V1",
+          "status":"DISCOVERY_ERROR",
+          "objective":str(goal or ""),
+          "candidate_count":0,
+          "candidates":[],
+          "error_class":type(exc).__name__,
+          "error":str(exc)[:1000],
+          "authority_verification":"NOT_PERFORMED",
+          "primary_source_verification":"NOT_PERFORMED",
+          "model_dependency_count":0,
+          "incremental_spend_usd":0,
+        }
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__BROAD_OBJECTIVE_SOURCE_CANDIDATES.json"
+    evidence={
+      "schema":"PROJECT_BRAIN_BROAD_OBJECTIVE_SOURCE_DISCOVERY_BRIDGE_V1",
+      "mission_id":mid,
+      "goal":str(goal or ""),
+      "broad_objective_decomposition":broad,
+      "source_candidate_discovery":discovery,
+      "authority_verification_required":True,
+      "primary_source_verification_required":True,
+      "package_capability_acquisition_attempted":False,
+      "model_dependency_count":0,
+      "incremental_spend_usd":0,
+      "observed_at_utc":utc(),
+    }
+    writej(path,evidence)
+    return path,evidence
+
+
 def _ground_plain_goal_to_bound_capabilities(mission, goal):
     module=_load_plain_goal_bound_grounding()
     compiler=_load_goal_compiler()
@@ -5582,6 +5641,32 @@ def _run_goal_unstamped(step, mission):
                 composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
                 composed_result["model_dependency_count"]=0
                 return composed_result
+
+            source_path,source_bridge=_run_broad_objective_source_discovery(
+                mission,grounding_goal,grounding
+            )
+            if source_bridge is not None:
+                source_discovery=source_bridge.get("source_candidate_discovery") or {}
+                source_status=str(source_discovery.get("status") or "")
+                source_count=int(source_discovery.get("candidate_count") or 0)
+                source_detail={
+                  "evidence_path":str(source_path.relative_to(ROOT)),
+                  "source_discovery_status":source_status,
+                  "candidate_count":source_count,
+                  "authority_verification_required":True,
+                  "primary_source_verification_required":True,
+                  "package_capability_acquisition_attempted":False,
+                  "model_dependency_count":0,
+                }
+                if source_status=="CANDIDATES_DISCOVERED" and source_count>0:
+                    raise Blocker(
+                        "BROAD_OBJECTIVE_SOURCE_AUTHORITY_VERIFICATION_REQUIRED:"
+                        +json.dumps(source_detail,sort_keys=True)
+                    ) from e
+                raise Blocker(
+                    "BROAD_OBJECTIVE_SOURCE_DISCOVERY_UNAVAILABLE:"
+                    +json.dumps(source_detail,sort_keys=True)
+                ) from e
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
