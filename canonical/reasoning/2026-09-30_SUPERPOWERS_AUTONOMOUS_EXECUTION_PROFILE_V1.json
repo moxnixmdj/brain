@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_SUPERPOWERS_AUTONOMOUS_EXECUTION_PROFILE_V1",
+  "status": "CURRENT",
+  "real_objective": "Verify the Brain-owned software-engineering methodology on an objective headless coding task without weakening its causal engineering discipline.",
+  "governing_invariants": [
+    "The capability mechanism is already Brain-owned.",
+    "Interactive approval gates may be substituted only when the benchmark task itself supplies complete explicit requirements.",
+    "The configured route receives zero Opus ownership credit until external objective verification passes at the target bar.",
+    "The model remains a general cognition substrate, not the owned capability."
+  ],
+  "material_premises": [
+    "Several upstream Superpowers skills assume an interactive human approval step.",
+    "DeepSWE tasks provide explicit requirements, pinned repository state, and deterministic verifiers, so a headless benchmark profile can reuse the same planning/TDD/debugging/review/verification mechanisms without inventing new capability."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/AUTONOMOUS_EXECUTION_PROFILE_V1.md"
+  ],
+  "conclusion": "Use the autonomous execution profile for fully specified benchmark tasks; preserve all causal engineering and verification requirements; keep capability credit at zero pending benchmark evidence.",
+  "selected_route": "BRAIN_OWNED_SUPERPOWERS_AUTONOMOUS_PROFILE",
+  "rejected_material_alternatives": [
+    {
+      "route": "USE_INTERACTIVE_SKILLS_VERBATIM",
+      "reason": "Would block indefinitely on human approval during a headless benchmark."
+    },
+    {
+      "route": "REMOVE_PLANNING_AND_VERIFICATION_GATES",
+      "reason": "Would discard the very mechanism being tested."
+    }
+  ],
+  "uncertainties": [
+    "The profile may not improve Astra enough to cross the Opus 5.5 bar."
+  ],
+  "assumptions": [
+    "A benchmark task with explicit requirements can serve as the approved requirements boundary."
+  ],
+  "non_goals": [
+    "Do not alter verifier/test files.",
+    "Do not claim Opus parity from a smoke task."
+  ],
+  "next_action": "Run a baseline and configured DeepSWE smoke task on the same Astra substrate, then expand only if configured behavior shows useful evidence.",
+  "supersession_conditions": [
+    "The profile causes systematic degradation or violates benchmark rules."
+  ],
+  "supersedes": []
+}
