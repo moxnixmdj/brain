@@ -1,0 +1,195 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-OPEN-ENDED-CLIMATE-SPENT-FIRST-GAP-RECONCILIATION-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Reconcile the already-spent genuine open-ended Mauna Loa producer run, forbid semantic replay, and replace the broad parent-evidence blocker with the first observed generic causal gap: model-independent open-ended objective decomposition into a research/source/tool plan before package acquisition.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "public verification-capsule-runner run 36669918546 executed the substantive Mauna Loa 2004-2013 versus 2014-2023 objective exactly once",
+    "run 36669918546 artifact 11077637577 digest sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "producer terminal status FAIL_FIRST_CAUSAL_GAP with GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH followed by CAPABILITY_ACQUISITION_REQUIRED",
+    "current main goal_compiler.py blob 4b61fe911471854ec15c7900816f61e9e55f602e is identical to the compiler blob on the spent producer path",
+    "later public run 36670531005 was PRESTART ONLY / UNSPENT and therefore does not supersede the spent producer fact",
+    "Brain PR342 duplicate semantic replay lease closed fail-closed"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN__FIRST_CAUSAL_GAP_OBSERVED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge evidence/frontier reconciliation only. Do not replay the Mauna Loa task and do not spend another open-ended parent task while the identical compiler front door remains. Next work must OBS and acquire the generic open-ended objective-to-research-plan/source-tool-selection capability, then validate it on fresh non-parent evidence before another parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "real_outcome": "Turn the already-executed open-ended parent attempt into truthful reusable causal state and prevent duplicate task spend.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Advance from an uninformative broad scope blocker to the first evidenced causal child gap without replaying a spent task.",
+      "proxy_goals_deleted": [
+        "rename the Mauna Loa task and run it again",
+        "treat a prestart carrier failure as proof the substantive task is unspent",
+        "spend SQLite or another parent task on an unchanged compiler front door",
+        "promote the parent from a source-finding-only World Bank mission"
+      ],
+      "surviving_necessity": "The spent producer evidence already answers the current uncertainty: the inherited model-independent runtime cannot compile the first broad research clause."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "deterministic plain-goal compiler",
+        "plain-goal bound-capability grounding",
+        "generic capability acquisition fallback",
+        "domain-free authority identity/source discovery downstream",
+        "typed quantitative execution and independent verification"
+      ],
+      "external_existing_routes_checked": [
+        "public zero-cost runner terminal artifact from the actual producer execution",
+        "later PR337 carrier attempts only as prestart evidence"
+      ],
+      "capability_work_deleted": [
+        "no parent replay",
+        "no second parent task before front-door repair",
+        "no climate-specific source/formula/controller patch",
+        "no model planner"
+      ],
+      "surviving_gap": "MODEL_INDEPENDENT_OPEN_ENDED_OBJECTIVE_TO_RESEARCH_PLAN_SOURCE_TOOL_DISCOVERY_REQUIRED"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic compiler-path blocker. The first broad research clause has no verified capability match, then generic acquisition incorrectly treats the clause as a software-package demand.",
+      "delete_bypass_substitute_options": [
+        "delete duplicate execution",
+        "reuse spent terminal artifact as decisive causal evidence",
+        "reuse existing downstream authority/source discovery after a generic research-frontier step exists",
+        "reject another unchanged parent execution as non-informative"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_OPEN_ENDED_OBJECTIVE_TO_RESEARCH_PLAN_SOURCE_TOOL_DISCOVERY_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_SPENT_RUN_AND_REPAIR_GENERIC_RESEARCH_FRONT_DOOR",
+        "RUN_DIFFERENT_PARENT_TASK_ON_IDENTICAL_COMPILER",
+        "REPLAY_MAUNA_LOA_UNDER_NEW_TASK_ID",
+        "USE_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "A second parent run on identical compiler bytes does not test a changed mechanism; semantic replay violates no-duplicate execution; a model planner violates the target dependency-removal contract.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution is needed for reconciliation. Preserve public run/artifact identifiers, exact compiler blob identity, and explicit no-replay state. Any repair must later receive fresh child-level regression/semantic verification before another parent task."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all open or future Mauna Loa semantic replay leases",
+        "parent Task-A spends whose first clause reaches the unchanged generic compiler no-match path"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "domain-free authority identity/source discovery",
+        "plain-goal grounding",
+        "grounded composition",
+        "typed numeric execution",
+        "decision synthesis and verification"
+      ],
+      "fresh_reuse_plan": "After the generic research-front-door capability is acquired and independently qualified, freeze a materially different genuinely open-ended parent task. Never replay Mauna Loa."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused public terminal artifact instead of rerunning",
+        "reused exact compiler blob identity from current main",
+        "reused PR329 provenance hardening",
+        "reused target contract and anti-replay law"
+      ],
+      "search_stop_decision": "Stop parent execution search. Existing evidence is sufficient to localize the front-door gap and any additional parent spend before repair has lower information value.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main, current compiler blob, current parent target, spent public run, and latest prestart carrier attempts were refreshed before this reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_SPENT_RUN_AND_REPAIR_GENERIC_RESEARCH_FRONT_DOOR",
+      "RUN_DIFFERENT_PARENT_TASK_ON_IDENTICAL_COMPILER",
+      "REPLAY_MAUNA_LOA_UNDER_NEW_TASK_ID",
+      "USE_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SEMANTIC_MAUNA_LOA_REPLAY",
+      "UNCHANGED_COMPILER_PARENT_SPEND",
+      "CLIMATE_SPECIFIC_PATCH",
+      "MODEL_PLANNER"
+    ],
+    "selected_surviving_route": "RECONCILE_SPENT_RUN_AND_REPAIR_GENERIC_RESEARCH_FRONT_DOOR",
+    "why_selected_route_is_fastest_sufficient": "The real one-shot already produced the causal answer at zero additional execution cost. Reconciliation converts it into reusable state and points directly at the generic missing capability.",
+    "expected_parent_level_state_change": "Broad parent-scope blocker becomes a specific generic child causal gap; task remains incomplete and receives zero parent promotion credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:50:30Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RECONCILE_SPENT_RUN_AND_REPAIR_GENERIC_RESEARCH_FRONT_DOOR",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "DIRECT_PROBE",
+        "INDEPENDENT_VERIFIER"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current main ca16a72e8e83f5274b04265fe02eb7729451da93",
+          "current goal_compiler.py blob 4b61fe911471854ec15c7900816f61e9e55f602e"
+        ],
+        "DIRECT_PROBE": [
+          "verification-capsule-runner run 36669918546",
+          "artifact 11077637577 digest sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953"
+        ],
+        "INDEPENDENT_VERIFIER": [
+          "later run 36670531005 marked PRESTART ONLY / UNSPENT, separating carrier-prestart attempts from the actual earlier producer execution"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [],
+      "negative_search_summary": "No new supplier search is needed to decide whether the already-spent run happened or where it first failed.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RECONCILE_SPENT_RUN_AND_REPAIR_GENERIC_RESEARCH_FRONT_DOOR",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:50:30Z",
+        "max_age_hours": 2,
+        "selected_route": "RECONCILE_SPENT_RUN_AND_REPAIR_GENERIC_RESEARCH_FRONT_DOOR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
