@@ -6,11 +6,11 @@
   "canonical_base_commit": "b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
-  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_AGENT_2_4_6_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "probe_id": null,
-  "causal_blocker": "BRAIN_INTERNALIZED_MINI_SWE_AGENT_2_4_6_COMPOSED_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_AGENT_2_4_6_V1::BRAIN_INTERNALIZED_MINI_SWE_AGENT_2_4_6_COMPOSED_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
   "expected_parent_frontier_change": "Spend one previously frozen, still-unread Terminal-Bench 4.0 task to directly verify or falsify the Brain-owned mini-SWE-agent 2.4.6 + Superpowers composed route on the current included GPT-5.6 Sol cognition substrate, with independent public verification and zero ownership credit from a single task.",
   "highest_leverage_now": true,
   "prior_work_checked": [
@@ -57,7 +57,7 @@
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
     "real_outcome": "Obtain the cheapest uncontaminated independent evidence on the strongest currently Brain-owned advanced-coding challenger, without inventing a new coding methodology or buying model API access.",
-    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_AGENT_2_4_6_V1",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "obs_goal": {
       "real_outcome": "Directly exercise the Brain-owned mini-SWE harness plus Superpowers discipline on one fresh current Terminal-Bench task.",
       "proxy_goals_deleted": [
@@ -95,7 +95,7 @@
         "Reuse public independent verifier",
         "Reject paid API and new provider search"
       ],
-      "surviving_causal_blocker": "BRAIN_INTERNALIZED_MINI_SWE_AGENT_2_4_6_COMPOSED_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5"
+      "surviving_causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -158,17 +158,17 @@
     "selected_surviving_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
     "why_selected_route_is_fastest_sufficient": "It uses the exact Brain-owned current benchmark harness, the already-included GPT-5.6 Sol cognition, the existing independent public verifier, and an already-frozen unread task. The only integration is replacing an HTTP model callback with this session's model turn while preserving one-action mini-SWE semantics.",
     "expected_parent_level_state_change": "Produce the first independent execution evidence for the Brain-owned mini-SWE+Superpowers composed route. Single-task outcome changes route confidence only; capability ownership credit remains zero.",
-    "stop_condition": "One frozen task, one terminal submission, no solution/tests before submission, zero credit regardless of pass, no same-task repair replay for promotion.",
+    "stop_condition": "Freeze exact task bytes before cognition; execute the mini-SWE control-loop semantics through the current ChatGPT session with one shell action per step; apply Brain-owned Superpowers verification/debugging discipline; do not read solution/** or tests/** before terminal submission; submit once to the untouched independent verifier; award zero Opus ownership credit from this single task.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-30T20:48:00Z",
+      "checked_at_utc": "2026-09-30T20:52:15Z",
       "max_age_hours": 24,
       "incumbent_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
         "CODE_OR_PACKAGE_REGISTRY",
-        "INDEPENDENT_VERIFIER"
+        "BROAD_WEB_OR_COMMUNITY"
       ],
       "negative_search_summary": "No stronger already-owned exposed route with a faster zero-incremental execution path is known after Supreme falsification and mini-SWE internalization.",
       "comparison_dimensions": [
@@ -184,10 +184,11 @@
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T20:48:00Z",
+        "checked_at_utc": "2026-09-30T20:52:15Z",
         "max_age_hours": 2,
         "selected_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
         "status": "READY",
@@ -207,7 +208,8 @@
             "evidence_classes": [
               "DIRECT_PROBE"
             ],
-            "evidence_scope": "ACCOUNT_SPECIFIC"
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "observed_at_utc": "2026-09-30T20:52:15Z"
           },
           {
             "dependency": "BRAIN_OWNED_MINI_SWE_AGENT_2_4_6",
@@ -252,7 +254,8 @@
             "evidence_classes": [
               "INDEPENDENT_VERIFIER"
             ],
-            "evidence_scope": "ACCOUNT_SPECIFIC"
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "observed_at_utc": "2026-09-30T20:52:15Z"
           },
           {
             "dependency": "TERMINAL_BENCH_4_PRETRAIN_SHARD_CORRUPTION_FROZEN_BYTES",
@@ -274,7 +277,45 @@
           }
         ],
         "execution_dependencies_complete": true
-      }
+      },
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
+          "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+          "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "SWE-agent/mini-swe-agent commit 04d809ceab9df28f9adaed044884180159172930",
+          "harbor-framework/terminal-bench release commit 452bf305c6daa62fc59061d22133a7cbc7c1572e",
+          "obra/superpowers 6.4.2 pinned Brain copy"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Brain PR570 exact mini-SWE-agent 2.4.6 vendoring",
+          "Terminal-Bench pretrain-shard-corruption instruction blob 82c66df8e3e8b7dd5d1bb0dfea8c5913378f9c7f"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Previously preserved 2026 coding-agent framework comparisons in PR571 route frontier; discovery sensor only, not qualification authority."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "advanced agentic coding debugging verification TDD current 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "mini-SWE-agent Superpowers coding agent harness current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "open source model agnostic software engineering agent harness prompts control loop"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 Terminal-Bench 4 mini-SWE-agent latest coding harness"
+        }
+      ],
+      "challenger_routes": []
     }
   }
 }
