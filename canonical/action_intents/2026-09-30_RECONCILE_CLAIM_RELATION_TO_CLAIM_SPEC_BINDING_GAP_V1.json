@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-CLAIM-RELATION-PROMOTION-TO-CLAIM-SPEC-BINDING-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "CANONICAL_MIRRORS_STALE_AFTER_VERIFIED_GENERIC_V2_CLAIM_RELATION_PROMOTION",
+  "action_kind": "CANONICAL_FRONTIER_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_MIRRORS_STALE_AFTER_VERIFIED_GENERIC_V2_CLAIM_RELATION_PROMOTION::CANONICAL_FRONTIER_RECONCILIATION",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Credit exactly one verified reusable claim/relation child from PR439 receipt and advance all frontier mirrors to MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1. Zero parent credit.",
+  "prior_work_checked": [
+    "main 92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "PR439 merged exact qualified producer/test bytes",
+    "promotion receipt MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+    "runner PR162 run 36682488104 success",
+    "current hierarchy/queue/scoreboard/target/pointer still stale on satisfied claim-relation blocker"
+  ],
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "stop_condition": "All canonical frontier mirrors agree that the verified explicit claim/relation primitive is acquired, reusable capability count is incremented exactly once, parent credit remains zero, and the active blocker is automatic claim-spec and semantic operand binding.",
+  "recursive_obs": {
+    "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "real_outcome": "Restore canonical truth after verified child promotion without running or rebuilding anything.",
+    "obs_goal": {
+      "real_outcome": "Make authority surfaces reflect the exact PR439 receipt and its next_causal_gap.",
+      "proxy_goals_deleted": [
+        "rerun qualified capability",
+        "fresh parent task before automatic binding exists",
+        "duplicate capability implementation",
+        "parent promotion"
+      ],
+      "surviving_necessity": "Atomic canonical mirror reconciliation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR439 exact producer",
+        "PR439 exact regression",
+        "runner PR162 qualification",
+        "canonical promotion receipt"
+      ],
+      "capability_work_deleted": [
+        "No runtime mutation",
+        "No verifier rerun",
+        "No parent execution"
+      ],
+      "surviving_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Authority mirror lag after a real verified capability landed.",
+      "delete_bypass_substitute_options": [
+        "Reuse receipt as sole promotion authority",
+        "Do not infer fresh-parent readiness beyond receipt scope"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_MIRRORS_FROM_EXACT_PROMOTION_RECEIPT",
+        "RERUN_QUALIFICATION",
+        "REBUILD_CHILD"
+      ],
+      "losing_routes_reason": "Qualification and implementation are already complete; only stale authority surfaces remain.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new capability verifier. Cross-surface equality of blocker, next action, last verified child and scoreboard credit is the reconciliation check."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "fresh-parent execution before claim-spec binding",
+        "duplicate claim relation acquisition"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic V2 extraction",
+        "explicit claim support/numeric relation"
+      ],
+      "fresh_reuse_plan": "Immediately run current-base OBS on automatic claim-spec and operand binding after reconciliation."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact PR439 receipt and PR162 evidence"
+      ],
+      "search_stop_decision": "No further route search is relevant to mirror reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh current main immediately after reconciliation before opening binding implementation."
+    },
+    "selected_surviving_route": "RECONCILE_MIRRORS_FROM_EXACT_PROMOTION_RECEIPT",
+    "why_selected_route_is_fastest_sufficient": "It converts already-proven capability state into coherent authority with no execution or implementation work."
+  }
+}
