@@ -23,7 +23,7 @@ import re
 
 SCHEMA="PROJECT_BRAIN_DECISION_ROLE_RELEVANCE_ADMISSION_V1"
 _WORD=re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]*")
-_SIMPLE_WORD=re.compile(r"[a-z0-9]+")
+_SIMPLE_WORD=re.compile(r"[a-z0-9]+")\n_NUMERIC_START=re.compile(r"^\\s*[-+]?(?:\\d|\\.\\d)")
 _GENERIC={
     "a","an","and","are","as","at","be","by","for","from","in","is","it","of",
     "on","or","that","the","this","to","was","were","whether","which","with",
@@ -186,6 +186,18 @@ def evaluate(objective,candidate_text):
         return {
             **base,
             "reason":reason or "OBJECTIVE_OUTSIDE_NUMERIC_RELATION_SCOPE",
+        }
+
+    right_entity=_canon(parsed.get("right_entity"))
+    if _NUMERIC_START.match(right_entity):
+        return {
+            **base,
+            "reason":"NUMERIC_THRESHOLD_COMPARISON_PRESERVES_INCUMBENT_RELEVANCE",
+            "parsed_objective":{
+                "operator":parsed.get("operator"),
+                "left_entity":parsed.get("left_entity"),
+                "right_entity":right_entity,
+            },
         }
 
     roles=_roles(parsed)
