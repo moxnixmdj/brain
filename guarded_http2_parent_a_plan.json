@@ -1,0 +1,86 @@
+{
+  "schema": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+  "goal_text": "Assess whether the maximum permitted HTTP/2 initial stream flow-control window is greater than the protocol's default initial stream flow-control window. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant specification, determine how to extract and interpret the required limits, choose and run a zero-cost verification method, identify material protocol-scope or interpretation limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "frozen": {
+    "gate_id": "BRAIN-HTTP2-OPENENDED-PARENT-TASK-A-GUARDED-EXECUTION-20260930-V1",
+    "problem_sha256": "2152e9eacc967ecc0a83cd88d09770bc810463274f4b78e17cf04ab4d112c2b8",
+    "task_sha256": "2f370fad8a545e73449b294c360b8c9a2e591d2a41572bde0b0bd6a59db59e46",
+    "runtime_sha256": "752851b5a8dcf1d3f9d7b99a4463469cdeacd818a09209fc54afc75bf39f393b",
+    "canonical_base": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+    "authorization_sha256": "94784474bb1e463e36655738e45adeb9518c024fb1adbda34dfa25c8d05d693d"
+  },
+  "pinned_files": [
+    {
+      "path": "canonical/action_intents/2026-09-30_EXECUTE_GUARDED_HTTP2_PARENT_TASK_A_V1.json",
+      "git_blob_sha1": "0fd94d0b522053161a99da66265d375da5a3aa6c"
+    },
+    {
+      "path": "canonical/tasks/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json",
+      "git_blob_sha1": "539cadd30e7e8ac548638157b7f36a1814b97dcd"
+    },
+    {
+      "path": "canonical/astra_runtime/missions/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json",
+      "git_blob_sha1": "fac316bc6d273bf84e06843a6850d358fd3a2e56"
+    },
+    {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha1": "e60345e3814deacc5b79ffd7fcf713febfee0425"
+    },
+    {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha1": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/broad_objective_decompose.py",
+      "git_blob_sha1": "6eb2b20e860da466ad8b793c20060ded1fbf389b"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+      "git_blob_sha1": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+      "git_blob_sha1": "da42f0615380027f963044f80e55ddfa1d73ced1"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+      "git_blob_sha1": "48fd058430d8d361fc75beced567c7b6d1166531"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py",
+      "git_blob_sha1": "d66a7eb30774f66160b698d8082947776888293d"
+    },
+    {
+      "path": "_guard_src/execution_guard/github_actions_guarded_run_live.py",
+      "git_blob_sha1": "30ea2fd2cc548444477c7b234a59129ff8386235"
+    },
+    {
+      "path": "_guard_src/execution_guard/actions_admission.py",
+      "git_blob_sha1": "6c46abef66c036f5382d5792b11a82a289b4dd94"
+    },
+    {
+      "path": "_guard_src/execution_guard/github_ref_store_live.py",
+      "git_blob_sha1": "a8b0cf3facd91f4d4248bd4d2ed53f72f7d480c3"
+    }
+  ],
+  "command": [
+    "bash",
+    "-lc",
+    "set -euo pipefail; mkdir -p _terminal; BASE=f0f87c981d77b552caa21844e6bcc7b83116f339; test \"$(git merge-base HEAD \"$BASE\")\" = \"$BASE\"; git diff --name-only \"$BASE\"...HEAD | sort > _terminal/changed_files.txt; printf '%s\\n' '.github/workflows/execute_guarded_http2_parent_a_once.yml' 'guarded_http2_parent_a_plan.json' | sort > _terminal/expected_changed_files.txt; diff -u _terminal/expected_changed_files.txt _terminal/changed_files.txt; test -z \"$(find canonical/astra_runtime/state -maxdepth 1 -type f -iname '*HTTP2*' -print -quit 2>/dev/null || true)\"; python -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/bound_capabilities/broad_objective_decompose.py canonical/runtime/bound_capabilities/open_research_source_frontend.py canonical/runtime/bound_capabilities/objective_claim_operand_binding.py canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py; python canonical/tests/test_objective_claim_operand_binding.py > _terminal/prestart_claim_binding_tests.log 2>&1; printf '%s\\n' PARENT_PRESTART_QUALIFIED > _terminal/prestart_report.txt; set +e; python canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json 2>&1 | tee _terminal/producer.log; code=${PIPESTATUS[0]}; set -e; printf '%s\\n' \"$code\" > _terminal/producer_exit_code.txt; mkdir -p _terminal/snapshot; cp canonical/tasks/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json _terminal/snapshot/task.json; cp canonical/astra_runtime/missions/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json _terminal/snapshot/mission.json; if [ -d canonical/astra_runtime/evidence ]; then cp -R canonical/astra_runtime/evidence _terminal/snapshot/evidence; fi; if [ -d canonical/astra_runtime/state ]; then cp -R canonical/astra_runtime/state _terminal/snapshot/state; fi; grep -E -m20 'PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1|Blocker:|CAPABILITY_ACQUISITION_REQUIRED|OPEN_ENDED_RESEARCH_|COMPOUND_GOAL_COMPLETE' _terminal/producer.log > _terminal/first_signals.txt || true; if [ \"$code\" -eq 0 ] && grep -Fq COMPOUND_GOAL_COMPLETE _terminal/producer.log; then exit 0; fi; if [ \"$code\" -eq 0 ]; then exit 3; fi; exit \"$code\""
+  ],
+  "authority": {
+    "brain_pr": 458,
+    "brain_authorization_commit": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+    "action_intent_blob_sha1": "0fd94d0b522053161a99da66265d375da5a3aa6c",
+    "task_blob_sha1": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+    "runtime_blob_sha1": "e60345e3814deacc5b79ffd7fcf713febfee0425",
+    "guard_source_repository": "moxnixmdj/verification-capsule-runner",
+    "guard_source_commit": "b1d5ada6b827098e24d795c41c02545c12fd8fc1",
+    "prior_unguarded_run_id": 36686791971,
+    "prior_unguarded_execution_count": 0,
+    "exactly_one_execution": true,
+    "no_same_task_replay": true,
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0
+  }
+}
