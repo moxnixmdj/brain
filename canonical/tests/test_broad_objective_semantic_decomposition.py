@@ -58,6 +58,33 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertTrue(out["broad_objective_decomposition_available"])
         self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
 
+    def test_grounding_exposes_decomposition_when_all_multiclause_parts_are_unresolved(self):
+        objective=(
+            "Assess whether the maximum permitted HTTP/2 initial stream flow-control window "
+            "is greater than the protocol's default initial stream flow-control window. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Autonomously discover and verify the relevant specification, determine how to "
+            "extract and interpret the required limits, choose and run a zero-cost verification "
+            "method, identify material protocol-scope or interpretation limitations, independently "
+            "verify the consequential result, and produce a decision-quality answer with provenance."
+        )
+        out=self.grounding.ground(objective,{})
+        self.assertEqual(out["grounded_clause_count"],0)
+        self.assertEqual(
+            out["unresolved_clause_indexes"],
+            list(range(len(out["clauses"]))),
+        )
+        self.assertGreater(len(out["clauses"]),1)
+        self.assertTrue(out["broad_objective_decomposition_available"])
+        self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+        self.assertEqual(
+            [r["role"] for r in out["broad_objective_decomposition"]["roles"]],
+            [
+                "SOURCE_DISCOVERY","EVIDENCE_ACQUISITION","EVIDENCE_EXTRACTION",
+                "RELATION_EVALUATION","DECISION_SYNTHESIS_AND_VERIFICATION",
+            ],
+        )
+
     def test_grounding_keeps_unsupported_goal_unresolved_without_decomposition(self):
         out=self.grounding.ground("Create output.json with one record",{})
         self.assertEqual(out["grounded_clause_count"],0)
