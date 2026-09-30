@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
   "status": "ACTIVE__V5_OPUS_5_5_CAPABILITY_OWNERSHIP_QUEUE",
-  "phase": "RECOVER_MAP_AND_PERMANENTLY_OWN_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE",
+  "phase": "WHOLE_OPUS_5_5_ENVELOPE_RECOVERED__SCOPED_OWNERSHIP_PROMOTED__RESIDUAL_SEARCH_ACTIVE",
   "p_real": 1,
   "theory": {
     "effective_frontier_intelligence": "PERMANENTLY_OWNED_CAPABILITIES_PLUS_EXTERNAL_JIT_KNOWLEDGE",
@@ -74,16 +74,19 @@
   "immediate_frontier": {
     "selected_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "parent_frontier_capability": null,
-    "objective": "Recover the defensible useful Opus 5.5 capability envelope, map what Brain already permanently owns, then find existing equal-or-better realizations for gaps, configure them into Brain, verify them, and save them permanently. Knowledge remains external/JIT.",
-    "selection_metric": "VERIFIED_PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
+    "objective": "Obsolete every remaining useful Opus 5.5 capability by finding existing equal-or-better routes, configuring winners into Brain, verifying them at exact scope, and saving them permanently.",
+    "selection_metric": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
     "evidence_paths": [
-      "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
+      "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "canonical/reasoning/2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1.json"
     ],
-    "repair_status": "LOCAL_OPEN_RESEARCH_MICRO_REPAIR_FRONTIER_DEFERRED_BY_TOP_LEVEL_THEORY_CORRECTION",
-    "prohibition": "NO_JIT_CAPABILITY_EXTERNALIZATION__NO_UNDERLYING_CAPABILITY_INVENTION__NO_CAPABILITY_CREDIT_BELOW_OPUS_5_5__NO_PER_TASK_CAPABILITY_REDISCOVERY__KNOWLEDGE_JIT_ONLY",
-    "next_action": "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE__MAP_ALREADY_OWNED_CAPABILITIES__SEARCH_EXISTING_EQUAL_OR_BETTER_REALIZATIONS__CONFIGURE_VERIFY_AND_SAVE_WINNERS__KNOWLEDGE_JIT_ONLY__NO_CAPABILITY_INVENTION",
+    "repair_status": "WHOLE_ENVELOPE_RECOVERED__TWO_NEW_SCOPED_OPUS55_OR_BETTER_PACKAGES_PROMOTED__EXACT_SYMBOLIC_ALREADY_OWNED",
+    "prohibition": "NO_JIT_CAPABILITY_EXTERNALIZATION__NO_UNDERLYING_CAPABILITY_INVENTION__NO_CAPABILITY_CREDIT_BELOW_OPUS_5_5__NO_INTERNAL_SUITE_PARITY_INFERENCE__KNOWLEDGE_JIT_ONLY",
+    "next_action": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_PRODUCTION_CODING__PROFESSIONAL_KNOWLEDGE_WORK__HLE_WITH_TOOLS__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
     "parent_capability_promoted": false,
+    "whole_envelope_complete": false,
     "incremental_spend_usd": 0
   },
   "promotion_claim": false,
@@ -99,6 +102,28 @@
       "independent_verifier": "Wolfram Language",
       "capability_route_process_wall_s": 0.59,
       "incremental_spend_usd": 0
+    },
+    {
+      "capability_id": "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
+      "parent_family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+      "adjudication_path": "canonical/capabilities/opus55/OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1.json",
+      "frontier_bar": "Terminal-Bench-Science 0.1 Opus 5.5 = 58.7",
+      "winning_route": "GPT-6 Astra via included ChatGPT Work/Codex allowance",
+      "winning_result": "64.6",
+      "incremental_spend_usd": 0,
+      "claim_scope": "BENCHMARKED_AGENTIC_SCIENTIFIC_RESEARCH"
+    },
+    {
+      "capability_id": "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
+      "parent_family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+      "adjudication_path": "canonical/capabilities/opus55/OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1.json",
+      "frontier_bar": "AutomationBench Opus 5.5 = 40.0",
+      "winning_route": "GPT-6 Astra via included ChatGPT Work allowance",
+      "winning_result": "41.4",
+      "incremental_spend_usd": 0,
+      "claim_scope": "BENCHMARKED_BUSINESS_WORKFLOW_AUTOMATION"
     }
   ],
   "task_semantic_conjunctive_role_v1": {
@@ -308,7 +333,7 @@
     "opus_5_5_or_better_required": true,
     "permanent_capability_package_required": true
   },
-  "next_progress_event_target": "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE__MAP_ALREADY_OWNED_CAPABILITIES__SEARCH_EXISTING_EQUAL_OR_BETTER_REALIZATIONS__CONFIGURE_VERIFY_AND_SAVE_WINNERS__KNOWLEDGE_JIT_ONLY__NO_CAPABILITY_INVENTION",
+  "next_progress_event_target": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_PRODUCTION_CODING__PROFESSIONAL_KNOWLEDGE_WORK__HLE_WITH_TOOLS__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -319,14 +344,22 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "V5_THEORY_RESET_TO_OPUS_5_5_PERMANENT_CAPABILITY_OWNERSHIP",
-    "previous_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
-    "blocker": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
+    "status": "OPUS_5_5_WHOLE_ENVELOPE_FIRST_OBSOLESCENCE_PASS_COMPLETE",
+    "blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
     "evidence_paths": [
-      "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
+      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "canonical/reasoning/2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1.json"
+    ],
+    "newly_owned_scoped_capabilities": [
+      "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
+      "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1"
+    ],
+    "previously_owned_scoped_capabilities": [
+      "EXACT_SYMBOLIC_COMPUTATION_V1"
     ],
     "parent_capability_promoted": false,
-    "counter_delta": 0
+    "whole_envelope_complete": false,
+    "counter_delta": 2
   },
   "last_real_output_event": {
     "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_CORRECTED_20260930",
@@ -343,5 +376,7 @@
     "correction_of": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_20260930",
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
-  }
+  },
+  "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+  "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
 }
