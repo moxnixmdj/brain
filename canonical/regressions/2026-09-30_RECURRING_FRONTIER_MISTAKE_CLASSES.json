@@ -6,8 +6,8 @@
   "cases": [
     {
       "id": "ACCIDENTAL_DUPLICATE_BLOCKER_LEASE",
-      "observed_incident": "PR254 and PR255 opened on the exact same blocker lease.",
-      "must_fail_or_resolve": "Exactly one deterministic owner survives: lowest PR number. Later duplicate fails closed. Intentional route races require matching explicit route_race_id."
+      "observed_incident": "PR254/PR255 previously duplicated an exact lease; PR510/PR512 later duplicated the same generation+capability+causal blocker under different action_kind labels, proving action_kind cannot be part of causal lease identity.",
+      "must_fail_or_resolve": "Lease identity is generation+capability_target+causal_blocker only. Exactly one deterministic owner survives: lowest PR number. Different action_kind labels do not create distinct leases. Intentional route races require matching explicit nonempty route_race_id and intentional_route_race=true."
     },
     {
       "id": "NARROW_TOOL_PROMOTED_AS_BROAD_FRONTIER_CAPABILITY",
