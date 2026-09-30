@@ -10,14 +10,15 @@
   "causal_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::REAL_CAPABILITY_ACQUISITION",
-  "expected_parent_frontier_change": "Repair the reopened model-independent grounding capability so a clause is resolved only when at least one semantically justified candidate is actually instantiable by Brain's existing proposal-binding/input-binding contract.",
+  "expected_parent_frontier_change": "Repair the reopened model-independent grounding capability so a clause is resolved only when at least one semantically justified candidate is input-bindable and every otherwise-unprovided prerequisite is explicitly present in verified_initial_facts.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "Fresh real-task falsification run 36649042160",
     "Registry proposal_bindings metadata",
     "capability_proposal_generators generic binding/fan-in",
     "closed stale PR259",
-    "jsonschema and Unified Planning challengers"
+    "jsonschema and Unified Planning challengers",
+    "PR261 independent audit comment 5901755341: implicit initial-fact promotion unsoundness"
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -25,23 +26,23 @@
   "orthogonal_recurrence_count": 1,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Reuse capability_proposal_generators._bind_planned_inputs plus goal_compiler._bind_inputs during grounding admission; add URL and non-URL adversarial regressions; validate exact bytes; do not replay Requests Task A, promote capability, or change scoreboard before a new fresh real task.",
+  "stop_condition": "Reuse capability_proposal_generators._bind_planned_inputs plus goal_compiler._bind_inputs during grounding admission; require all external prerequisites of the composed route to be a subset of verified_initial_facts; independently verify both contracts; add URL, non-URL, and unverified-prerequisite adversarial regressions; validate exact bytes; do not replay Requests Task A, promote capability, or change scoreboard before a new fresh real task.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "a965ec72336dfdcb92f5a17c28b608f3b017a341",
-    "real_outcome": "Close the generic semantic-match-without-executable-bindability seam using Brain's existing proposal-binding interpreter, without task-specific literals or new planning machinery.",
+    "real_outcome": "Close the generic semantic-match-without-executable-bindability seam and prevent composed capabilities from manufacturing unverified prerequisites as initial facts.",
     "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
     "obs_goal": {
-      "real_outcome": "A grounded clause is considered resolved only after at least one semantically supported candidate successfully binds every action-template input from clause literals, declared defaults/auto paths, or prior grounded effects.",
+      "real_outcome": "A clause is resolved only when at least one semantically supported candidate binds every action-template input, and the composed route may execute only when every externally required prerequisite is explicitly verified.",
       "proxy_goals_deleted": [
         "Requests URL special case",
         "new planner",
         "model-based argument filling",
         "replay failed task"
       ],
-      "surviving_necessity": "Integrate the already-existing proposal_bindings contract into grounding/composition."
+      "surviving_necessity": "Reuse the existing proposal/input binder and verified_initial_facts contract in grounding/composition."
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
@@ -49,7 +50,8 @@
         "capability_proposal_generators._bind_planned_inputs",
         "goal_compiler._bind_inputs",
         "grounded_executable_composition PR255",
-        "fresh falsification run 36649042160"
+        "fresh falsification run 36649042160",
+        "existing verified_initial_facts contract in _capability_problem_proposal"
       ],
       "external_existing_routes_checked": [
         "python-jsonschema defaults documentation",
@@ -61,16 +63,16 @@
         "No task-specific URL logic",
         "No model"
       ],
-      "surviving_gap": "Grounding itself did not invoke the already-existing generic proposal/input binder before declaring a semantic candidate resolved."
+      "surviving_gap": "Grounding previously skipped binding admission; after that repair, independent audit found composition also promoted all unprovided requirements into initial facts instead of requiring explicit verified_initial_facts."
     },
     "obs_blocker": {
-      "intrinsic_or_path_specific": "Generic integration omission.",
+      "intrinsic_or_path_specific": "Two adjacent generic integration omissions in the same model-independent grounding/composition route.",
       "delete_bypass_substitute_options": [
         "Delete binding contract rejected because execution needs concrete inputs",
         "Bypass with guessed literals rejected",
         "Reuse proposal_bindings survives"
       ],
-      "surviving_causal_blocker": "Semantic ranking could mark a clause resolved before candidate action-template inputs were actually bindable."
+      "surviving_causal_blocker": "Semantic candidates must be executable-input-bindable, and composed external prerequisites must never become true merely because a candidate requires them."
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -83,29 +85,32 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
+        "REUSE_EXISTING_PROPOSAL_BINDER_PLUS_VERIFIED_INITIAL_FACTS_CONTRACT",
+        "REUSE_EXISTING_PROPOSAL_BINDER_ONLY",
         "URL_AFFORDANCE_HEURISTIC_ONLY",
         "EXTEND_JSONSCHEMA_DEFAULT_FILLING",
         "SUBSTITUTE_UNIFIED_PLANNING_PARAMETERIZATION"
       ],
-      "losing_routes_reason": "URL affordance fixes only one observed subclass. External schema/planning layers still need Brain-specific binding semantics. The existing proposal binder already handles goal_url, literal, auto_path, effect_result, and compiler-bound inputs generically.",
+      "losing_routes_reason": "Binder-only closes input arguments but still permits implicit prerequisite truth. The existing verified_initial_facts contract closes that adjacent seam with less machinery than any external planning/schema layer.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Component regressions must reproduce the failed URL clause with a different fresh fixture and independently verify no unbindable semantic candidate is promoted. Real task remains fresh and unspent after repair."
+      "synthetic_verification_necessity": "Component regressions must prove URL and non-URL unbindable candidates are rejected and prove an input-bindable capability with an unverified external prerequisite fails closed; producer and independent verifier must reconstruct the same verified-initial-fact rule. Real Requests task remains spent and is not replayed."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
         "Ad hoc compiler-only binding in grounded composer when proposal_bindings exists",
-        "Semantic-only URL candidate promotion"
+        "Semantic-only URL candidate promotion",
+        "Implicit all_requires-minus-all_provides initial-fact promotion"
       ],
       "adjacent_capabilities_absorbed": [
         "goal_url binding",
         "literal defaults",
         "auto_path derivation",
-        "effect_result fan-in"
+        "effect_result fan-in",
+        "verified initial-fact admission"
       ],
       "fresh_reuse_plan": "After component verification, run a new real task not using psf/requests, then materially distinct fresh reuse."
     },
@@ -113,9 +118,10 @@
       "analysis_steps_deleted_or_cached": [
         "Reused existing proposal_bindings implementation",
         "Reused fresh falsification evidence",
-        "Stopped external search when existing native route dominated"
+        "Stopped external search when existing native route dominated",
+        "Reused existing verified_initial_facts contract instead of introducing a new prerequisite authority model"
       ],
-      "search_stop_decision": "Brain already contains a verified generic binder contract covering every missing input class observed; external challengers add layers rather than remove the seam.",
+      "search_stop_decision": "The existing proposal binder closes input bindability and the existing verified_initial_facts contract closes prerequisite authority. Together they exactly cover both observed generic seams; further planner/schema research cannot improve the route enough to justify delay.",
       "affected_layers_only_on_revalidation": true,
       "challenger_refresh_decision": "Fresh route check completed after falsification; native proposal_bindings dominates on correctness, wall-clock, zero spend, and integration size."
     },
@@ -131,9 +137,9 @@
       "EXTERNAL_PLANNER"
     ],
     "selected_surviving_route": "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
-    "why_selected_route_is_fastest_sufficient": "It invokes the already-existing generic binding interpreter before grounding status is assigned, closes both URL and non-URL unbindable-candidate cases, adds no dependency, and preserves the downstream composition/verifier contract.",
-    "expected_parent_level_state_change": "Repair the reopened model-independent grounding capability so a clause is resolved only when at least one semantically justified candidate is actually instantiable by Brain's existing proposal-binding/input-binding contract.",
-    "stop_condition": "Reuse capability_proposal_generators._bind_planned_inputs plus goal_compiler._bind_inputs during grounding admission; add URL and non-URL adversarial regressions; validate exact bytes; do not replay Requests Task A, promote capability, or change scoreboard before a new fresh real task.",
+    "why_selected_route_is_fastest_sufficient": "It reuses the already-present generic binder for input admission and the already-present verified_initial_facts authority contract for prerequisites, adds no supplier or model, and makes both observed false-success states fail closed.",
+    "expected_parent_level_state_change": "Repair the reopened model-independent grounding capability so a clause is resolved only when at least one semantically justified candidate is input-bindable and every otherwise-unprovided prerequisite is explicitly present in verified_initial_facts.",
+    "stop_condition": "Reuse capability_proposal_generators._bind_planned_inputs plus goal_compiler._bind_inputs during grounding admission; require all external prerequisites of the composed route to be a subset of verified_initial_facts; independently verify both contracts; add URL, non-URL, and unverified-prerequisite adversarial regressions; validate exact bytes; do not replay Requests Task A, promote capability, or change scoreboard before a new fresh real task.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T00:20:00Z",
@@ -186,7 +192,8 @@
           "route": "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
           "evidence": [
             "native proposal_bindings already covers goal_url literal auto_path effect_result",
-            "existing fan-in implementation handles repeated goal URLs"
+            "existing fan-in implementation handles repeated goal URLs",
+            "existing _capability_problem_proposal verified_initial_facts contract reused after PR261 independent audit"
           ],
           "qualification_evidence": [
             "current main direct code inspection"
@@ -197,8 +204,8 @@
           ],
           "resolution": "SELECTED",
           "comparison": {
-            "CORRECTNESS": "Actual binding success is required before a semantic candidate may make a clause resolved; no heuristic proxy.",
-            "CAPABILITY_STRENGTH": "Covers compiler-bound inputs plus declared goal_url, literal, auto_path, effect_result and prior-effect fan-in.",
+            "CORRECTNESS": "Actual binding success is required before semantic resolution, and every otherwise-unprovided prerequisite must also be explicitly verified before composition can succeed.",
+            "CAPABILITY_STRENGTH": "Covers compiler-bound inputs, declared proposal bindings, prior-effect fan-in, and explicit verified prerequisite authority.",
             "WALL_CLOCK": "Small integration patch.",
             "INCREMENTAL_COST": "$0",
             "RELIABILITY": "Already exercised elsewhere in Brain.",
@@ -270,7 +277,7 @@
           }
         }
       ],
-      "negative_search_summary": "No external route removes Brain-specific literal/provider binding more directly than the already-present proposal_bindings contract.",
+      "negative_search_summary": "No external route removes Brain-specific binding and prerequisite-authority integration more directly than reusing the already-present proposal binder plus verified_initial_facts contract.",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
