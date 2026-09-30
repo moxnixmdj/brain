@@ -43,6 +43,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     discovery=_load_sibling("open_web_source_candidate_discovery")
     verifier=_load_sibling("source_candidate_provenance_verify")
     authority_identity=_load_sibling("source_authority_binding_ror")
+    objective_relevance=_load_sibling("objective_relevance_bm25")
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
         return {
@@ -108,6 +109,19 @@ def run(objective,decomposition,limit=12,timeout=15):
     ]
     identity_ready=bool(authority_verified)
 
+    relevance_input=[
+        dict(x.get("candidate") or {})
+        for x in (authority_verified if identity_ready else verified)
+        if isinstance(x,dict) and isinstance(x.get("candidate"),dict)
+    ]
+    relevance=objective_relevance.rank(
+        objective,relevance_input,limit=min(limit,len(relevance_input) or limit)
+    )
+    relevance_ready=bool(
+        relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
+        and int(relevance.get("positive_relevance_count") or 0)>0
+    )
+
     return {
         "schema":SCHEMA,
         "status":"SOURCE_FRONTEND_READY",
@@ -122,7 +136,12 @@ def run(objective,decomposition,limit=12,timeout=15):
         "authority_identity_claim_scope":"HOST_TO_ROR_ORGANIZATION_DOMAIN_BINDING_ONLY",
         "authority_verified_candidate_count":0,
         "primary_source_verified_candidate_count":0,
-        "relevance_verified_candidate_count":0,
+        "relevance_verified_candidate_count":(
+            int(relevance.get("positive_relevance_count") or 0)
+            if relevance_ready else 0
+        ),
+        "objective_relevance":relevance,
+        "objective_relevance_claim_scope":"LEXICAL_BM25_OBJECTIVE_RELEVANCE_ONLY",
         "role_progress":{
             "SOURCE_DISCOVERY":(
                 "CANDIDATES_WITH_PROVENANCE_AND_ORGANIZATION_IDENTITY_AVAILABLE"
@@ -130,6 +149,8 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE"
             ),
             "EVIDENCE_ACQUISITION":(
+                "READY_FOR_RELEVANCE_SELECTED_SOURCE_EVIDENCE_ACQUISITION"
+                if relevance_ready else
                 "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
                 if identity_ready else
                 "BLOCKED_ON_AUTHORITY_IDENTITY_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
@@ -139,6 +160,8 @@ def run(objective,decomposition,limit=12,timeout=15):
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
         "next_required_capability":(
+            "MODEL_INDEPENDENT_RELEVANCE_SELECTED_SOURCE_EVIDENCE_ACQUISITION_V1"
+            if relevance_ready else
             "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
             if identity_ready else
             "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION"
@@ -148,7 +171,7 @@ def run(objective,decomposition,limit=12,timeout=15):
         "primary_source_gate_required":False,
         "primary_source_status_role":"OPTIONAL_METADATA_NOT_UNIVERSAL_RESEARCH_ADMISSION_GATE",
         "primary_source_claims_made":False,
-        "relevance_claims_made":False,
+        "relevance_claims_made":relevance_ready,
         "evidence_sufficiency_claims_made":False,
         "model_dependency_count":0,
         "incremental_spend_usd":0,
