@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import importlib.util, pathlib, unittest
+import importlib.util, json, pathlib, unittest
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 P=ROOT/"canonical/runtime/bound_capabilities/first_party_objective_relevance_verify.py"
@@ -59,5 +59,24 @@ class Tests(unittest.TestCase):
         self.assertEqual(x["reason"],"LIVE_RETRIEVAL_PROVENANCE_REQUIRED")
         y=self.m.verify("Assess x",{},self.prov(),{"status":"UNVERIFIED"})
         self.assertEqual(y["reason"],"QUALIFIED_AUTHORITY_IDENTITY_REQUIRED")
+
+    def test_bound_run_contract_writes_fail_closed_result(self):
+        inp=ROOT/"canonical/astra_runtime/tmp/first_party_relevance_input.json"
+        outp=ROOT/"canonical/astra_runtime/tmp/first_party_relevance_output.json"
+        inp.parent.mkdir(parents=True,exist_ok=True)
+        inp.write_text(json.dumps({
+            "objective":"Assess floating point summation accuracy",
+            "candidate":{"url":"https://example.org/report"},
+            "provenance":{"status":"UNVERIFIED"},
+            "authority_identity":self.auth(),
+        }),encoding="utf-8")
+        out=self.m.run({
+            "input_path":str(inp.relative_to(ROOT)),
+            "output_path":str(outp.relative_to(ROOT)),
+            "timeout":5,
+        },ROOT)
+        self.assertFalse(out["output_verified"],out)
+        self.assertTrue(outp.is_file())
+        self.assertEqual(json.loads(outp.read_text())["reason"],"LIVE_RETRIEVAL_PROVENANCE_REQUIRED")
 
 if __name__=="__main__": unittest.main(verbosity=2)
