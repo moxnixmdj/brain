@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Return immediately to the parent open-ended technical/scientific capability with one new materially different genuinely open-ended model-independent real task using the inherited source, relevance, extraction, claim-support, numeric, composition and decision routes; stop on the first new causal gap.",
+    "objective": "Acquire the minimum model-independent route that derives a bounded typed claim_spec from the open-ended objective plus provenance-bound extracted evidence, so the already-verified claim/relation evaluator can be invoked autonomously without a model or caller-authored semantic binding.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_MATERIALLY_DIFFERENT_REAL_TASK_REQUIRED_AFTER_CLAIM_RELATION_ACQUISITION",
+    "exact_blocker": "MODEL_INDEPENDENT_TYPED_CLAIM_SPEC_GENERATION_FROM_OPEN_ENDED_OBJECTIVE_AND_EXTRACTED_EVIDENCE_V1",
     "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EXTRACTED_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-    "repair_status": "CLAIM_SUPPORT_AND_TYPED_NUMERIC_RELATION_VERIFIED__PARENT_NOT_PROMOTED__FRESH_OPEN_ENDED_REAL_TASK_REQUIRED",
-    "prohibition": "NO_SPENT_TASK_REPLAY__NO_MODEL_COGNITION__NO_PREDECLARED_RESEARCH_RECIPE__NO_PARENT_PROMOTION_FROM_CHILD_EVIDENCE",
-    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK__NO_SPENT_TASK_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "repair_status": "EXTRACTED_EVIDENCE_AND_BOUNDED_CLAIM_RELATION_EVALUATOR_VERIFIED__AUTONOMOUS_TYPED_CLAIM_SPEC_GENERATION_UNPROVEN",
+    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_CALLER_AUTHORED_CLAIM_SPEC_IN_PARENT_RUN__NO_PARAPHRASE_ENTAILMENT_OVERCLAIM__NO_NUMERIC_LITERAL_ROLE_INVENTION",
+    "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_TYPED_CLAIM_SPEC_GENERATION__REUSE_BROAD_OBJECTIVE_SHAPE_EXTRACTED_RECORDS_AND_VERIFIED_CLAIM_RELATION_CAPABILITY__NO_PARENT_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -138,7 +138,8 @@
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Exact normalized verbatim support and explicit typed numeric relations only; paraphrase/semantic entailment, factual correctness, evidence sufficiency, causality and semantic role remain unverified."
+      "limitations": "Exact normalized verbatim support and explicit typed numeric relations only; paraphrase/semantic entailment, factual correctness, evidence sufficiency, causality and semantic role remain unverified.",
+      "next_causal_gap": "MODEL_INDEPENDENT_TYPED_CLAIM_SPEC_GENERATION_FROM_OPEN_ENDED_OBJECTIVE_AND_EXTRACTED_EVIDENCE_V1"
     }
   },
   "promotion_claim": false,
@@ -356,7 +357,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK__NO_SPENT_TASK_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_TYPED_CLAIM_SPEC_GENERATION__REUSE_BROAD_OBJECTIVE_SHAPE_EXTRACTED_RECORDS_AND_VERIFIED_CLAIM_RELATION_CAPABILITY__NO_PARENT_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
