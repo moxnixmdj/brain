@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-CHEMISTRY-AMMONIA-STOICHIOMETRY-CROSSCHECK-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRY_MOLECULAR_MASS_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "sources": {
+    "nitrogen": {
+      "authority": "NIH PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/nitrogen/property/MolecularFormula,MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "expected_formula": "N2"
+    },
+    "hydrogen": {
+      "authority": "NIH PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydrogen/property/MolecularFormula,MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "expected_formula": "H2"
+    },
+    "ammonia": {
+      "authority": "NIH PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ammonia/property/MolecularFormula,MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "expected_formula": "H3N"
+    }
+  },
+  "scientific_contract": {
+    "reaction": "N2 + 3 H2 -> 2 NH3",
+    "derived_rule": "predicted_ammonia_mw = (nitrogen_mw + 3 * hydrogen_mw) / 2",
+    "comparison_threshold_g_per_mol": 0.05,
+    "relation_rule": "Evaluate whether abs(predicted_ammonia_mw - authoritative_ammonia_mw) <= 0.05",
+    "numeric_inputs_must_be_parsed_from_live_sources": true
+  },
+  "goal_text": "Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/nitrogen/property/MolecularFormula,MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_NITROGEN_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydrogen/property/MolecularFormula,MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_HYDROGEN_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ammonia/property/MolecularFormula,MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_AUTHORITATIVE_AMMONIA_MW.json. Calculate the stoichiometric predicted ammonia molecular weight using predicted_ammonia_mw = (nitrogen_mw + 3 * hydrogen_mw) / 2. Determine whether the predicted and authoritative ammonia scalars differ by at most 0.05.",
+  "required_result": {
+    "producer_result": "The final bounded numeric relation artifact emitted by the compiled controller plan.",
+    "required_fields": [
+      "left",
+      "right",
+      "threshold",
+      "absolute_difference",
+      "relation",
+      "predicate"
+    ],
+    "threshold": 0.05
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch the three exact PubChem URLs outside the Brain producer, independently parse MolecularWeight, recompute predicted_ammonia_mw=(N2+3*H2)/2 with Python arithmetic, recompute the absolute difference and <=0.05 predicate, and compare every consequential relation field.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false
+}
