@@ -30,6 +30,81 @@ def _load_sibling(name):
 def _canon(value):
     return " ".join(str(value or "").strip().split())
 
+_PROVENANCE_RELEVANCE_STATUSES={
+    "RETRIEVAL_PROVENANCE_VERIFIED",
+    "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+}
+
+def _rankable_item(item):
+    candidate=dict((item or {}).get("candidate") or {})
+    verification=dict((item or {}).get("verification") or {})
+    record_title=_canon(verification.get("record_title"))
+    page_title=_canon(verification.get("page_title"))
+    if record_title:
+        candidate["record_title"]=record_title
+    elif page_title and not _canon(candidate.get("title")):
+        candidate["record_title"]=page_title
+    return {"candidate":candidate,"verification":verification}
+
+def _selected_ranked_item(relevance,items):
+    if not isinstance(relevance,dict):
+        return None
+    if relevance.get("status")!="LEXICAL_RELEVANCE_RANKED" or relevance.get("output_verified") is not True:
+        return None
+    index=relevance.get("top_candidate_original_index")
+    if not isinstance(index,int) or index<0 or index>=len(items):
+        return None
+    rows=relevance.get("ranked_candidates") or []
+    selected_row=next(
+        (row for row in rows if isinstance(row,dict) and row.get("original_index")==index),
+        None,
+    )
+    if not selected_row or selected_row.get("lexical_admission_status")!="ADMITTED":
+        return None
+    return items[index]
+
+def _metadata_anchor_query(objective,item):
+    item=dict(item or {})
+    verification=dict(item.get("verification") or {})
+    candidate=dict(item.get("candidate") or {})
+    if verification.get("status")!="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+        return None
+    title=_canon(verification.get("record_title") or candidate.get("record_title") or candidate.get("title"))
+    doi=_canon(verification.get("doi") or candidate.get("doi"))
+    if not title and not doi:
+        return None
+    focus=_load_sibling("research_query_focus")
+    objective_focus=focus.focus(objective,max_tokens=32)
+    if objective_focus.get("status")!="FOCUSED":
+        return None
+    title_tokens=[]
+    if title:
+        title_focus=focus.focus(title,max_tokens=32)
+        if title_focus.get("status")=="FOCUSED":
+            title_tokens=list(title_focus.get("tokens") or [])
+    objective_tokens=list(objective_focus.get("tokens") or [])
+    combined=list(objective_tokens)
+    for token in title_tokens:
+        if token not in combined:
+            combined.append(token)
+    combined=combined[:48]
+    parts=([doi] if doi else [])+combined
+    query=_canon(" ".join(parts))
+    if not query:
+        return None
+    return {
+        "status":"METADATA_ANCHOR_READY",
+        "query":query,
+        "doi":doi or None,
+        "record_title":title or None,
+        "objective_query":objective_focus.get("query"),
+        "objective_tokens":objective_tokens,
+        "metadata_title_tokens":title_tokens,
+        "new_metadata_tokens":[x for x in title_tokens if x not in objective_tokens],
+        "refinement_pass_limit":1,
+        "factual_evidence_status":"NOT_EVIDENCE__QUERY_ANCHOR_ONLY",
+    }
+
 def run(objective,decomposition,limit=12,timeout=15):
     objective=_canon(objective)
     if not objective:
@@ -70,11 +145,19 @@ def run(objective,decomposition,limit=12,timeout=15):
         verification=verifier.verify(candidate,timeout=timeout)
         verifications.append({"candidate":candidate,"verification":verification})
 
-    retrieval_verified=[
-        x for x in verifications
+    provenance_verified=[
+        _rankable_item(x) for x in verifications
+        if (x.get("verification") or {}).get("status") in _PROVENANCE_RELEVANCE_STATUSES
+    ]
+    retrieval_verified_initial=[
+        x for x in provenance_verified
         if x["verification"].get("status")=="RETRIEVAL_PROVENANCE_VERIFIED"
     ]
-    if not retrieval_verified:
+    bibliographic_verified=[
+        x for x in provenance_verified
+        if x["verification"].get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+    ]
+    if not provenance_verified:
         return {
             "schema":SCHEMA,
             "status":"SOURCE_RETRIEVAL_PROVENANCE_BLOCKED",
@@ -85,26 +168,87 @@ def run(objective,decomposition,limit=12,timeout=15):
             "authority_identity_verifications":[],
             "objective_relevance_verifications":[],
             "evidence_extractions":[],
-            "next_required_capability":"MODEL_INDEPENDENT_LIVE_RETRIEVAL_PROVENANCE_FOR_DISCOVERED_WEB_SOURCE",
+            "next_required_capability":"MODEL_INDEPENDENT_PROVENANCE_VERIFICATION_FOR_DISCOVERED_SOURCE",
             "model_dependency_count":0,
             "incremental_spend_usd":0,
         }
 
-    candidates=[x["candidate"] for x in retrieval_verified]
-    relevance=relevance_ranker.rank(objective,candidates)
-    relevance_ready=(
-        relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
-        and relevance.get("output_verified") is True
-        and relevance.get("top_candidate_original_index") is not None
+    initial_relevance=relevance_ranker.rank(
+        objective,[x["candidate"] for x in provenance_verified]
     )
+    initial_selected=_selected_ranked_item(initial_relevance,provenance_verified)
+    selected_item=None
+    relevance=initial_relevance
+    relevance_ready=False
+    refined_discovery=None
+    refined_verifications=[]
+    refined_retrieval_verified=[]
+    refined_relevance=None
+    metadata_refinement={
+        "status":"NOT_REQUIRED",
+        "attempt_count":0,
+        "pass_limit":1,
+        "bibliographic_metadata_used_as_evidence":False,
+    }
+
+    if initial_selected is not None:
+        selected_status=initial_selected["verification"].get("status")
+        if selected_status=="RETRIEVAL_PROVENANCE_VERIFIED":
+            selected_item=initial_selected
+            relevance_ready=True
+        elif selected_status=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+            anchor=_metadata_anchor_query(objective,initial_selected)
+            if anchor is None:
+                metadata_refinement={
+                    **metadata_refinement,
+                    "status":"METADATA_ANCHOR_UNAVAILABLE",
+                    "attempt_count":0,
+                }
+            else:
+                refined_discovery=discovery.discover(
+                    objective,limit=limit,timeout=timeout,
+                    query_override=anchor["query"],
+                )
+                if refined_discovery.get("status")=="CANDIDATES_DISCOVERED":
+                    for candidate in refined_discovery.get("candidates") or []:
+                        verification=verifier.verify(candidate,timeout=timeout)
+                        refined_verifications.append({
+                            "candidate":candidate,
+                            "verification":verification,
+                        })
+                    refined_retrieval_verified=[
+                        _rankable_item(x) for x in refined_verifications
+                        if (x.get("verification") or {}).get("status")
+                        =="RETRIEVAL_PROVENANCE_VERIFIED"
+                    ]
+                    if refined_retrieval_verified:
+                        refined_relevance=relevance_ranker.rank(
+                            objective,[x["candidate"] for x in refined_retrieval_verified]
+                        )
+                        refined_selected=_selected_ranked_item(
+                            refined_relevance,refined_retrieval_verified
+                        )
+                        if refined_selected is not None:
+                            selected_item=refined_selected
+                            relevance=refined_relevance
+                            relevance_ready=True
+                metadata_refinement={
+                    "status":(
+                        "LIVE_RETRIEVAL_REFINED_AND_SELECTED"
+                        if relevance_ready
+                        else "LIVE_RETRIEVAL_REFINEMENT_UNRESOLVED"
+                    ),
+                    "attempt_count":1,
+                    "pass_limit":1,
+                    "anchor":anchor,
+                    "discovery":refined_discovery,
+                    "provenance_verifications":refined_verifications,
+                    "relevance":refined_relevance,
+                    "bibliographic_metadata_used_as_evidence":False,
+                }
 
     authority_verifications=[]
     evidence_extractions=[]
-    selected_item=None
-    if relevance_ready:
-        index=int(relevance["top_candidate_original_index"])
-        if 0<=index<len(retrieval_verified):
-            selected_item=retrieval_verified[index]
 
     if selected_item is not None:
         candidate=dict(selected_item["candidate"])
@@ -197,17 +341,40 @@ def run(objective,decomposition,limit=12,timeout=15):
         "decomposition":decomposition,
         "discovery":discovered,
         "provenance_verifications":verifications,
-        "provenance_verified_candidate_count":len(retrieval_verified),
+        "refined_provenance_verifications":refined_verifications,
+        "provenance_verified_candidate_count":len(provenance_verified),
+        "live_retrieval_provenance_verified_candidate_count":(
+            len(retrieval_verified_initial)+len(refined_retrieval_verified)
+        ),
+        "bibliographic_provenance_verified_candidate_count":len(bibliographic_verified),
+        "relevance_pool_candidate_count":len(provenance_verified),
+        "metadata_anchored_retrieval_refinement":metadata_refinement,
         "authority_identity_verifications":authority_verifications,
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"OPTIONAL_HOST_TO_ROR_ORGANIZATION_METADATA_ONLY__NOT_ADMISSION_GATE",
         "authority_identity_required_for_admission":False,
-        "objective_relevance_verifications":[{
-            "relevance":relevance,
-            "candidate":selected_item["candidate"] if selected_item else None,
-        }],
+        "objective_relevance_verifications":[
+            {
+                "phase":"INITIAL_ALL_PROVENANCE_VERIFIED_CANDIDATES",
+                "relevance":initial_relevance,
+                "candidate":initial_selected["candidate"] if initial_selected else None,
+                "candidate_provenance_status":(
+                    initial_selected["verification"].get("status")
+                    if initial_selected else None
+                ),
+            },
+            *([{
+                "phase":"METADATA_ANCHORED_LIVE_RETRIEVAL",
+                "relevance":refined_relevance,
+                "candidate":selected_item["candidate"] if selected_item else None,
+                "candidate_provenance_status":(
+                    selected_item["verification"].get("status")
+                    if selected_item else None
+                ),
+            }] if metadata_refinement.get("attempt_count") else []),
+        ],
         "relevance_verified_candidate_count":1 if relevance_ready else 0,
-        "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_OBJECTIVE_RELEVANCE_ONLY",
+        "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_WITH_QUERY_COMPLEXITY_SCALED_TERM_COVERAGE__BIBLIOGRAPHIC_METADATA_MAY_REFINE_QUERY_BUT_IS_NEVER_EVIDENCE",
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
         "claim_relation_evaluations":claim_relation_evaluations,
@@ -217,8 +384,12 @@ def run(objective,decomposition,limit=12,timeout=15):
         "primary_source_verified_candidate_count":0,
         "role_progress":{
             "SOURCE_DISCOVERY":(
-                "OBJECTIVE_RELEVANCE_SELECTED_PROVENANCE_VERIFIED_SOURCE_AVAILABLE"
-                if relevance_ready else "CANDIDATES_WITH_LIVE_RETRIEVAL_PROVENANCE_AVAILABLE"
+                "OBJECTIVE_RELEVANCE_SELECTED_LIVE_RETRIEVAL_SOURCE_AVAILABLE"
+                if relevance_ready else
+                "BIBLIOGRAPHICALLY_RELEVANT_METADATA_AVAILABLE__LIVE_RETRIEVAL_REFINEMENT_UNRESOLVED"
+                if initial_selected is not None
+                and initial_selected["verification"].get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+                else "CANDIDATES_WITH_VERIFIED_PROVENANCE_AVAILABLE"
             ),
             "EVIDENCE_ACQUISITION":(
                 "GENERIC_PROVENANCE_BEARING_OBJECTIVE_GROUNDED_EVIDENCE_AVAILABLE"
@@ -251,7 +422,10 @@ def run(objective,decomposition,limit=12,timeout=15):
             if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
-            "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
+            "MODEL_INDEPENDENT_METADATA_ANCHORED_LIVE_RETRIEVAL_FOR_SELECTED_PROVENANCE_RECORD"
+            if metadata_refinement.get("attempt_count")
+            and metadata_refinement.get("status")!="LIVE_RETRIEVAL_REFINED_AND_SELECTED"
+            else "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
         ),
         "authority_identity_claims_made":bool(authority_verified),
         "authority_claims_made":False,
