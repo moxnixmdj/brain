@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_PARENT_FRESH_TASK_CAUSAL_GAP_RECONCILIATION_V1",
-  "status": "FRESH_TASK_C_SPENT__FIRST_GENERIC_CAUSAL_GAP_LOCALIZED__NO_PARENT_CREDIT",
+  "status": "FRESH_TASK_C_SPENT__CAUSAL_INTERPRETATION_CORRECTED__DECISION_ROLE_RELEVANCE_ADMISSION_FALSIFIED__NO_PARENT_CREDIT",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "task_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
   "domain": "MATERIALS_ENGINEERING_THERMOPHYSICAL_PROPERTY_COMPARATIVE_RESEARCH",
@@ -24,49 +24,84 @@
   "observed_pipeline_state": {
     "source_frontend_status": "SELECTED_SOURCE_MATERIALIZATION_BLOCKED",
     "provenance_verified_candidate_count": 12,
-    "claim_relation_evaluated_count": 0,
-    "selected_initial_candidate": {
+    "initial_relevance_selected": {
       "url": "https://doi.org/10.1080/00102208708947033",
       "title": "Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
-      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
-      "live_materialization_status": "UNVERIFIED",
-      "live_materialization_error": "HTTP_403_FORBIDDEN"
+      "lexical_relevance_score": 10.971146169415,
+      "matched_terms": [
+        "6061",
+        "aluminum",
+        "bulk",
+        "stainless",
+        "steel",
+        "temperature"
+      ],
+      "top_candidate_admission_verified": true
     },
-    "metadata_refined_query_executed": true,
-    "metadata_refined_candidate_count": 12,
-    "metadata_refined_relevant_bibliographic_candidate_observed": {
+    "requested_decision": {
+      "property": "room-temperature thermal conductivity",
+      "left_operand": "annealed 6061 aluminum",
+      "right_operand": "annealed 304 stainless steel"
+    },
+    "falsifying_mismatches": [
+      "SELECTED_TITLE_HAS_NO_THERMAL_CONDUCTIVITY",
+      "SELECTED_TITLE_HAS_NO_ANNEALED_ROLE",
+      "SELECTED_TITLE_USES_302_STAINLESS_STEEL_NOT_304"
+    ],
+    "initial_discovery_relevant_record": {
       "url": "https://doi.org/10.6028/nbs.rpt.9869",
       "title": "Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
-      "publisher": "National Bureau of Standards",
-      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+      "initial_relevance_score": 6.20257746199,
+      "matched_terms": [
+        "304",
+        "conductivity",
+        "stainless",
+        "steel",
+        "thermal"
+      ]
     },
-    "metadata_refined_live_retrieval_candidates_after_filter": 1,
-    "metadata_refined_only_live_candidate": {
-      "url": "https://maltaexpat.com/tools/rent-prices/",
-      "relevance_score": 0.0,
-      "matched_terms": []
+    "selected_materialization": {
+      "status": "UNVERIFIED",
+      "reason": "BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION_FAILED",
+      "error": "HTTP Error 403: Forbidden"
     },
-    "metadata_refined_relevance_status": "RELEVANCE_UNRESOLVED",
-    "metadata_refined_selected": false
+    "metadata_refined_discovery_titles": [
+      "Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+      "Unveiling the High-Temperature Corrosion Mechanism of 304 Stainless Steel by Aluminum Dihydrogen Phosphate",
+      "Failure Strain and Related Triaxiality of Aluminum 6061-T6, A36 Carbon Steel, 304 Stainless Steel, and Nitronic 60 Metals, Part I: Experimental Investigation",
+      "Response of 304L stainless steel and 6061-T651 aluminum alloy at -40 °C",
+      "Uniaxial Tension of Friction‐Welded 304‐Stainless Steel and 6061 Aluminum",
+      "Electroplating factors influencing the deposition rate of nickel and copper layers on Steel (A36), Stainless Steel (304), and Aluminum (6061) Substrates for Industrial and Protective Applications",
+      "Nozzle Clogging in Cold Spray of Aluminum 6061 through 304 Stainless Steel Split Nozzles: Mechanisms, Observations, and Quantitative Measurements",
+      "Ignition of Bulk 302 Stainless Steel in Oxygen by Laser Heating",
+      "Numerical and experimental investigation on aluminum 6061-V-grooved stainless steel 304 explosive cladding",
+      "Effect of Propylene Glycol Coolant pH on the Galvanic Corrosion Behavior of 6061 Aluminum Alloy/304 Stainless Steel",
+      "Unbalanced thermal field assisted thermo-compensated resistance brazing welding 6061 aluminum alloy to 304 stainless steel"
+    ],
+    "canonical_pr536_error": "PR536 attributed the NBS 10.6028/nbs.rpt.9869 record to metadata-refined discovery. The preserved artifact shows that record only in the initial discovery; it is absent from metadata-refined candidates."
   },
-  "first_generic_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
-  "causal_interpretation": "The initial source path correctly preserves BIBLIOGRAPHIC_PROVENANCE_VERIFIED candidates through relevance after PR529. After direct materialization of the selected bibliographic candidate failed, the one allowed metadata-refined fallback reintroduced the old information-loss seam by retaining only RETRIEVAL_PROVENANCE_VERIFIED candidates before refined relevance. A directly relevant National Bureau of Standards bibliographic record was therefore excluded while an unrelated live web result remained.",
-  "generic_repair_requirement": "The bounded metadata-refined fallback must preserve every provenance-verified candidate class through deterministic relevance, then live-materialize only the refined selected bibliographic winner under the same identity-bound fail-closed contract. It must remain bounded to the existing single refinement attempt and must not replay Task C.",
+  "first_generic_causal_gap": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "causal_interpretation": "The earliest demonstrated failure occurred before source materialization: deterministic lexical token coverage admitted a source that did not preserve the requested decision property and mismatched the right operand identity (302 vs 304). Materialization and refined-provenance behavior are downstream. A generic source must be decision-role compatible before it is eligible for materialization or evidence extraction.",
+  "generic_repair_requirement": "Reuse the bounded objective relation/operand parser to derive decision-role anchors and require source relevance admission to preserve the decision property and operand identity discriminators. Ambiguity must fail closed. Do not add task-specific 6061/304 literals, source whitelists, or model reranking.",
+  "downstream_known_defect": "The metadata-refined fallback also drops bibliographic provenance classes before refined relevance. Preserve as downstream candidate work; do not promote it ahead of the first causal gap.",
   "explicitly_not_claimed": [
-    "parent open-ended research capability completion",
-    "factual correctness of the materials comparison",
+    "parent capability completion",
+    "factual correctness of materials comparison",
     "evidence sufficiency",
     "primary-source status",
-    "source independence"
+    "source independence",
+    "multi-source evidence acquisition as already-proven first gap"
   ],
   "counter_effects": {
     "reusable_capabilities_inherited": 0,
     "verified_real_tasks_completed": 0,
     "fresh_reuse_passes": 0,
     "frontier_dependencies_removed": 0,
-    "residual_gaps_localized": 1
+    "residual_gaps_localized": 0
   },
+  "correction_only": true,
+  "parent_capability_promoted": false,
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
-  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY"
+  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_AWARE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY"
 }
