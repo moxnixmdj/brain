@@ -3047,6 +3047,71 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "evidence.claim_relation.evaluate.stdlib": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "evidence.claim_relation.evaluate.stdlib",
+          "extraction_path": "${input.extraction_path}",
+          "claim_spec": "${input.claim_spec}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "extracted_evidence_claim_relation",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "claim",
+        "support",
+        "verbatim",
+        "relation",
+        "numeric",
+        "compare",
+        "comparison",
+        "predicate",
+        "extracted",
+        "literal"
+      ],
+      "limitations": [
+        "Verbatim support means exact normalized substring support only; paraphrases and semantic entailment are not inferred.",
+        "Numeric relations operate only on explicitly referenced numeric_literals emitted by a verified extracted-evidence artifact.",
+        "Numeric units must match exactly; no unit conversion is performed.",
+        "Does not establish factual correctness, evidence sufficiency, causality, or that a referenced literal has the intended semantic role."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "evidence.claim.verbatim_support",
+        "evidence.numeric_relation.typed"
+      ],
+      "requires": [
+        "evidence.objective_anchored.extracted"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "decimal",
+          "json",
+          "math",
+          "pathlib",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/extracted_evidence_claim_relation.py"
+      },
+      "status": "CANDIDATE_BOUND_CAPABILITY",
+      "verification": {
+        "inherited_upstream_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+        "new_interface_status": "PENDING_FRESH_CROSS_DOMAIN_INDEPENDENT_QUALIFICATION"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
