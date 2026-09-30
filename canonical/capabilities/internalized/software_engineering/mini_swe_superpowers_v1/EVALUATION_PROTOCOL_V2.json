@@ -12,18 +12,20 @@
   },
   "contamination_policy": {
     "configured_cognition_may_read": [
-      "instruction.md",
-      "task.toml",
-      "environment/**",
-      "task workspace source required by instruction"
+      "task instruction supplied to the agent",
+      "task metadata explicitly supplied to the agent",
+      "files and command outputs actually present in the built runtime workspace after task environment startup"
     ],
     "configured_cognition_must_not_read_before_submission": [
       "solution/**",
-      "tests/**",
+      "tests/** or hidden verifier logic not present in the runtime workspace",
+      "build-only benchmark source or Docker build context removed before runtime",
       "task-specific online analyses or hints",
-      "hidden verifier logic"
+      "repository environment/** source merely because it was used to build the runtime"
     ],
-    "task_spent_after_hidden_verifier_exposure": true
+    "runtime_visibility_rule": "AGENT_KNOWLEDGE_BOUNDARY_EQUALS_WHAT_THE_REAL_TASK_RUNTIME_EXPOSES__BUILD_SOURCE_IS_NOT_AGENT_VISIBLE_UNLESS_IT_SURVIVES_IN_RUNTIME",
+    "task_spent_after_hidden_verifier_exposure": true,
+    "task_invalidated_after_task_specific_build_source_exposure": true
   },
   "stage_order": [
     {
@@ -58,5 +60,8 @@
     ]
   },
   "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_BRAIN_CONFIGURED_COMPOSED_ROUTE_ITSELF_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
-  "current_state": "COMPOSED_CONFIGURATION_READY_FOR_PACKAGE_QUALIFICATION_THEN_FRESH_EXECUTION"
+  "current_state": "COMPOSED_CONFIGURATION_READY_FOR_PACKAGE_QUALIFICATION__PRETRAIN_TASK_CONTAMINATED__NEW_RUNTIME_VISIBLE_TASK_REQUIRED",
+  "contamination_events": [
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
+  ]
 }
