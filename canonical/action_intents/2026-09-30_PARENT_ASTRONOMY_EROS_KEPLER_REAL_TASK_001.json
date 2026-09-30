@@ -20,7 +20,9 @@
     "model-independent evidence synthesis, grounding, and executable composition remain acquired",
     "NASA/JPL SBDB API official documentation exposes machine-readable orbital elements including semimajor axis and period",
     "task frozen before querying the exact Eros source URL",
-    "exact frozen JPL source preflight run 36664673653 PASS; task not executed"
+    "exact frozen JPL source preflight run 36664673653 PASS; task not executed",
+    "public JPL schema preflight run 36664734289 PASS on exact frozen URL",
+    "schema-only preflight located semimajor axis at orbit.elements[1] name=a units=au and orbital period at orbit.elements[8] name=per units=d; no task result was computed"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -262,7 +264,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T03:30:20Z",
+        "checked_at_utc": "2026-09-30T03:30:58Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
         "status": "READY",
@@ -308,10 +310,9 @@
             "volatility": "VOLATILE",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T03:30:20Z",
+            "observed_at_utc": "2026-09-30T03:30:58Z",
             "evidence": [
-              "DIRECT_PROBE: run 36664673653 returned HTTP 200, JPL SBDB v1.3, object 433 Eros, numeric a=1.458243716760167 au and per=643.1963890927677 d",
-              "ARTIFACT:11076086227 sha256:012318a57183c3639d22a7550707a9d63d8930f5943f04042b5beec63866d1f4"
+              "DIRECT_PROBE: public run 36664734289 returned HTTP JSON for exact frozen JPL URL and schema-verified object Eros, a at index 1 units au, per at index 8 units d"
             ],
             "evidence_classes": [
               "DIRECT_PROBE",
