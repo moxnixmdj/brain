@@ -65,12 +65,12 @@ class ObjectiveRelevanceTests(unittest.TestCase):
         )
         candidates=[
           {
-            "title":"Thermal ignition temperature of annealed Alloy 6061 and Steel 302",
-            "snippet":"room-temperature alloy 6061 annealed stainless steel ignition temperature measurements",
+            "title":"Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+            "snippet":"bulk 6061 aluminum 302 stainless steel ignition temperature measurements",
           },
           {
-            "title":"Thermal conductivity of annealed Alloy 6061 and Steel 304",
-            "snippet":"room-temperature conductivity measurements for annealed alloy 6061 and steel 304",
+            "title":"Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+            "snippet":"thermal conductivity measurements for AISI 304 stainless steel",
           },
         ]
         out=self.m.rank(objective,candidates)
@@ -79,6 +79,7 @@ class ObjectiveRelevanceTests(unittest.TestCase):
         rows={x["original_index"]:x for x in out["ranked_candidates"]}
         self.assertFalse(rows[0]["decision_role_admission"]["verified"],rows[0])
         self.assertTrue(rows[1]["decision_role_admission"]["verified"],rows[1])
+        self.assertEqual(rows[1]["decision_role_admission"]["operand_roles_covered"],1,rows[1])
         self.assertEqual(out["top_candidate_original_index"],1,out)
         self.assertTrue(out["top_candidate_admission"]["verified"],out)
 
@@ -96,9 +97,40 @@ class ObjectiveRelevanceTests(unittest.TestCase):
         ]
         out=self.m.rank(objective,candidates)
         rows={x["original_index"]:x for x in out["ranked_candidates"]}
+        self.assertTrue(rows[0]["decision_role_admission"]["verified"],rows[0])
+        self.assertEqual(rows[0]["decision_role_admission"]["operand_roles_covered"],1,rows[0])
+        self.assertTrue(rows[1]["decision_role_admission"]["verified"],rows[1])
+        self.assertEqual(rows[1]["decision_role_admission"]["operand_roles_covered"],2,rows[1])
+        self.assertEqual(out["top_candidate_original_index"],1,out)
+
+    def test_preserved_task_c_titles_select_property_plus_304_operand(self):
+        objective=(
+          "Determine whether the room-temperature thermal conductivity of annealed 6061 aluminum "
+          "is greater than that of annealed 304 stainless steel under comparable bulk-material conditions. "
+          "Use authoritative primary or reference technical evidence and a real executable check."
+        )
+        candidates=[
+          {
+            "title":"Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+            "record_title":"Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+            "publisher":"Informa UK Limited",
+          },
+          {
+            "title":"Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+            "record_title":"Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+            "publisher":"National Bureau of Standards",
+          },
+        ]
+        out=self.m.rank(objective,candidates)
+        rows={x["original_index"]:x for x in out["ranked_candidates"]}
         self.assertFalse(rows[0]["decision_role_admission"]["verified"],rows[0])
         self.assertTrue(rows[1]["decision_role_admission"]["verified"],rows[1])
+        self.assertEqual(rows[1]["decision_role_admission"]["operand_roles_covered"],1,rows[1])
+        self.assertIn("thermal",rows[1]["decision_role_admission"]["property"]["matched_tokens"])
+        self.assertIn("conductivity",rows[1]["decision_role_admission"]["property"]["matched_tokens"])
+        self.assertIn("304",rows[1]["decision_role_admission"]["right_operand"]["matched_identifier_tokens"])
         self.assertEqual(out["top_candidate_original_index"],1,out)
+        self.assertTrue(out["top_candidate_admission"]["verified"],out)
 
     def test_noncomparison_objective_preserves_legacy_coverage_contract(self):
         out=self.m.rank(
