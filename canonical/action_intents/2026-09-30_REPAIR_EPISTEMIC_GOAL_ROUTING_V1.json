@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-EPISTEMIC-GOAL-ROUTING-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_VERIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3ce64b1abb2e6542659617563af48e44eb33f996",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_AND_AUTHORITY_DATA_GROUNDING_MISSING",
+  "action_kind": "GENERIC_RUNTIME_REPAIR",
+  "expected_parent_frontier_change": "Prevent broad epistemic objectives from being misrouted into package acquisition, hold scarce fresh parent tasks, and expose the exact missing generic decomposition/authority-data-grounding capability without claiming it is solved.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR370 first-spend provenance correction",
+    "public runner PR79 run 36672816106 mission-origin PASS",
+    "public runner PR74 run 36671302163 four fresh broad-objective grounding diagnostics",
+    "current queue already preserves the broad-objective semantic gap",
+    "current hierarchy/frontier incorrectly advanced to parent execution despite PR74 falsification"
+  ],
+  "selected_surviving_route": "FAIL_CLOSED_EPISTEMIC_ROUTING_GUARD__THEN_GENERIC_DECOMPOSITION_IR",
+  "stop_condition": "Do not execute SQLite, thermophysics, Mauna, or any other fresh parent benchmark until a generic model-independent decomposition/authority-data-grounding route is implemented and independently qualified on fresh non-parent cases.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_path": "canonical/capabilities/obsolescence/OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_20260930_V1.json",
+  "next_action": "VERIFY_EPISTEMIC_GOAL_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_DECOMPOSITION_IR__KEEP_ALL_FROZEN_PARENT_TASKS_UNSPENT_UNTIL_REPAIR"
+}
