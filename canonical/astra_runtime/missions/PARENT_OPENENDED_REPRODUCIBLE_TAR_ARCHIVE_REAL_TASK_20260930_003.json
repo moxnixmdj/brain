@@ -25,6 +25,7 @@
     "exactly_one_execution": true,
     "stop_on_first_causal_gap": true,
     "source_task_replay": false,
-    "no_task_specific_runtime_patch": true
+    "no_task_specific_runtime_patch": true,
+    "task_blob_sha": "01709828035951b7f33014ac0c516dae50fa1786"
   }
 }
