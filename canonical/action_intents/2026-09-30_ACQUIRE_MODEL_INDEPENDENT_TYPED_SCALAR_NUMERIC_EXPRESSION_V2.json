@@ -1,0 +1,346 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-TYPED-SCALAR-NUMERIC-EXPRESSION-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1::MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and bind one generic model-independent typed scalar arithmetic/exponentiation capability by reusing verified SymPy 1.14.0, qualify it on fresh non-astronomy evidence with independent recomputation, then return immediately to a new parent real task. No astronomy or geophysics replay and no parent promotion from child evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+    "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json",
+    "astronomy one-shot run 36664896545 localized multiplication+exponentiation as the first causal gap",
+    "prior geophysics task independently exposed bounded numeric-expression/predicate absence before PR293 closed only ABS_DIFF_LTE",
+    "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+    "SymPy 1.14.0 exact-symbolic producer previously reached 12/12 with independent Wolfram adjudication",
+    "PR293 jq relation child remains acquired and is not broadened by this action",
+    "public carrier run 36664896545 proves current zero-spend carrier callable",
+    "SymPy 1.14.0 public dependency preflight run 36662597415 remains within the selected-route preflight lease"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__ORTHOGONAL_RECURRENCE_2",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Bind only a restricted typed scalar arithmetic/exponentiation child using programmatic SymPy construction from a fail-closed AST; prove generic compiler/dataflow behavior, fresh non-astronomy execution, independent recomputation, and unsafe-syntax rejection. Do not replay astronomy or geophysics and do not promote the parent from child evidence.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+    "real_outcome": "Acquire and bind a reusable model-independent typed scalar arithmetic/exponentiation capability on current main, closing the recurring multiplication/exponentiation seam exposed by fresh astronomy after the earlier geophysics numeric-expression failure.",
+    "required_capability": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire and bind a reusable model-independent typed scalar arithmetic/exponentiation capability on current main, closing the recurring multiplication/exponentiation seam exposed by fresh astronomy after the earlier geophysics numeric-expression failure.",
+      "proxy_goals_deleted": [
+        "Replay astronomy",
+        "Replay geophysics",
+        "Broaden jq into an expression language",
+        "Build a new math supplier",
+        "Use model cognition",
+        "Patch the Kepler formula"
+      ],
+      "surviving_necessity": "The parent has now failed in two orthogonal scientific domains at generic scalar numeric composition; multiplication and exponentiation remain unbound."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "EXACT_SYMBOLIC_COMPUTATION_V1 / SymPy 1.14.0",
+        "current bound capability registry",
+        "current proposal binder and grounded composition path"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib AST/operator",
+        "asteval/restricted evaluator libraries",
+        "current PyPI SymPy/mpmath artifacts"
+      ],
+      "capability_work_deleted": [
+        "No new planner",
+        "No new agent framework",
+        "No arbitrary-code evaluator",
+        "No geophysics-specific adapter",
+        "No model API/local model/model artifact"
+      ],
+      "surviving_gap": "The controller cannot execute a typed scalar expression such as constant * (prior_scalar ** literal_power) through a verified bound capability."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic recurring controller capability gap, not astronomy-specific.",
+      "delete_bypass_substitute_options": [
+        "Replay deleted: spent task cannot be replayed.",
+        "One-off script deleted: would solve an instance but not acquire the reusable child.",
+        "Model fallback forbidden: circular frontier proof.",
+        "Reuse existing SymPy route survives."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+        "BUILD_RESTRICTED_PYTHON_STDLIB_AST_EVALUATOR",
+        "ADD_THIRD_PARTY_SAFE_EVAL_LIBRARY"
+      ],
+      "losing_routes_reason": "The inherited SymPy supplier already has independent correctness evidence and current carrier readiness; alternatives create new proof/supplier burden without a capability advantage.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use a fresh generic non-geophysics child suite plus independent Wolfram checks. Negative unsafe-expression cases must fail closed. The spent geophysics task is not a verifier and is not replayed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any planned standalone numeric reasoning framework",
+        "Geophysics-specific numeric patch",
+        "Model fallback for bounded scalar operations"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Bounded scalar arithmetic/exponentiation",
+        "numeric relation predicates",
+        "threshold-to-label decisions"
+      ],
+      "fresh_reuse_plan": "After fresh non-astronomy child qualification, return to a new materially different parent task; never replay astronomy or geophysics."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused exact-symbolic adjudication",
+        "Reused existing bound-capability and proposal-binding runtime",
+        "Stopped supplier discovery after current carrier and challenger race showed no plausible dominator"
+      ],
+      "search_stop_decision": "Existing SymPy route is correctness-sufficient, currently callable, independently verifiable, $0, and no challenger can beat it enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh route frontier and selected-route preflight completed on current main before implementation."
+    },
+    "routes_considered": [
+      "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+      "BUILD_RESTRICTED_PYTHON_STDLIB_AST_EVALUATOR",
+      "ADD_THIRD_PARTY_SAFE_EVAL_LIBRARY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ASTRONOMY_REPLAY",
+      "GEOPHYSICS_REPLAY",
+      "TASK_SPECIFIC_KEPLER_FORMULA_PATCH",
+      "MODEL_COGNITION",
+      "NEW_NUMERIC_SUPPLIER"
+    ],
+    "selected_surviving_route": "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+    "why_selected_route_is_fastest_sufficient": "SymPy 1.14.0 is already independently adjudicated in Brain. Only a restricted typed binding and compiler/dataflow lowering are missing; every alternative adds a new evaluator or supplier proof burden.",
+    "expected_parent_level_state_change": "Acquire and bind one generic model-independent typed scalar arithmetic/exponentiation capability by reusing verified SymPy 1.14.0, qualify it on fresh non-astronomy evidence with independent recomputation, then return immediately to a new parent real task. No astronomy or geophysics replay and no parent promotion from child evidence.",
+    "stop_condition": "Bind only a restricted typed scalar arithmetic/exponentiation child using programmatic SymPy construction from a fail-closed AST; prove generic compiler/dataflow behavior, fresh non-astronomy execution, independent recomputation, and unsafe-syntax rejection. Do not replay astronomy or geophysics and do not promote the parent from child evidence.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:41:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BIND_EXISTING_VERIFIED_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json: SymPy 1.14.0 reached 12/12 exact correctness with independent Wolfram adjudication",
+          "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json: parent failure localized to generic numeric relation/expression gap",
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json: no verified bound generic numeric-expression capability currently exists"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.sympy.org/latest/modules/core.html: SymPy core programmatic expression construction",
+          "https://docs.sympy.org/latest/modules/core.html: sympify string evaluation warning means unsanitized string sympify is forbidden",
+          "https://docs.python.org/3.12/library/ast.html: Python AST can parse syntax but literal_eval does not evaluate arithmetic operators"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/sympy/1.14.0/json: exact wheel sympy-1.14.0-py3-none-any.whl sha256 e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+          "https://pypi.org/pypi/mpmath/1.3.0/json: exact dependency wheel sha256 a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+          "DIRECT_PROBE public run 36662597415: exact sympy==1.14.0 installed on ubuntu-24.04 and programmatic Abs/Pow/Le/Ge primitives passed without string sympify"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "lmfit/asteval: restricted evaluator is broader than the needed scalar envelope and would add a new supplier",
+          "community safe-eval implementations exist but are unverified relative to Brain's already-adjudicated SymPy route"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "safe deterministic scalar numeric expression comparison exponentiation threshold execution without model cognition"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SymPy 1.14 Python AST asteval safe arithmetic evaluator current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "programmatic SymPy objects versus restricted Python AST versus safe evaluator library"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current SymPy 1.14 PyPI package availability 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+          "evidence": [
+            "Existing Brain exact-symbolic adjudication reached the correctness ceiling for its frozen operation classes.",
+            "Current public carrier preflight run 36662597415 materialized exact SymPy 1.14.0 and exercised required primitives.",
+            "Independent Wolfram direct probe agreed on representative comparison/exponentiation/threshold chain."
+          ],
+          "qualification_evidence": [
+            "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+            "DIRECT_PROBE: verification-capsule-runner run 36662597415",
+            "OFFICIAL_PRIMARY: SymPy documentation and PyPI 1.14.0 metadata"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Reuses an independently adjudicated exact-symbolic supplier and adds a strictly bounded typed interface; no string eval.",
+            "CAPABILITY_STRENGTH": "Covers the observed generic scalar operations: arithmetic, exponentiation, absolute difference, comparisons, and threshold labels.",
+            "WALL_CLOCK": "Small adapter/binding extension; avoids proving an entirely new evaluator supplier.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact package version and dependency closure are pinned; current carrier preflight passed.",
+            "VERIFIABILITY": "Fresh generic cases can be independently checked by Wolfram and negative unsafe-syntax cases fail closed."
+          }
+        },
+        {
+          "route": "BUILD_RESTRICTED_PYTHON_STDLIB_AST_EVALUATOR",
+          "evidence": [
+            "Python ast/operator could implement the bounded arithmetic envelope without third-party math dependency."
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY: Python 3.12 ast documentation"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially correct but would be a new unadjudicated evaluator implementation.",
+            "CAPABILITY_STRENGTH": "Sufficient for the immediate scalar envelope but starts with zero inherited verification.",
+            "WALL_CLOCK": "More proof work than binding the already-verified SymPy route.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Small surface but new code and new proof burden.",
+            "VERIFIABILITY": "Straightforward, but no advantage over reused SymPy sufficient to justify delay."
+          }
+        },
+        {
+          "route": "ADD_THIRD_PARTY_SAFE_EVAL_LIBRARY",
+          "evidence": [
+            "Restricted evaluator libraries exist."
+          ],
+          "qualification_evidence": [
+            "BROAD_WEB_OR_COMMUNITY: asteval and small safe-eval projects"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Would require new supplier qualification.",
+            "CAPABILITY_STRENGTH": "Broader execution surface than required.",
+            "WALL_CLOCK": "Adds supplier and verification work.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Additional external dependency and larger evaluator surface.",
+            "VERIFIABILITY": "No inherited Brain adjudication; inferior to existing SymPy evidence."
+          }
+        }
+      ],
+      "negative_search_summary": "No plausible current challenger beats binding the already-verified SymPy route on correctness-first time-to-verified-capability. The stdlib route is smaller but starts a new evaluator proof; third-party evaluator routes add supplier and surface without capability benefit.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:41:00Z",
+        "max_age_hours": 2,
+        "selected_route": "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:33:06Z",
+            "evidence": [
+              "DIRECT_PROBE: astronomy one-shot run 36664896545 executed on ubuntu-24.04 and uploaded artifact 11075578533"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "SYMPY_1_14_0_AND_MPMATH_1_3_0_PINNED_WHEELS",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:02:44Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact symbolic adjudication is 12/12",
+              "DIRECT_PROBE: public SymPy dependency preflight run 36662597415 passed"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:41:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: current exact main"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
