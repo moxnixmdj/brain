@@ -69,28 +69,27 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-    "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "objective": "Requalify the fully repaired model-independent grounded executable composition route on one fresh materially distinct real task with an independent oracle.",
+    "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "parent_frontier_capability": null,
+    "objective": "Execute a new materially different technical/scientific task end-to-end through the verified model-independent synthesis, grounding, composition, planning, execution, and verification stack; either earn parent capability evidence or localize the first remaining causal gap.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
-    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_REPAIR_VALIDATION_20260930_V1.json",
-    "repair_status": "ALL_KNOWN_BINDING_SEAMS_REPAIRED__EXACT_PUBLIC_VALIDATION_PASS__CREDIT_WITHHELD",
-    "prohibition": "NO_PR267_REPLAY__NO_PR277_REPLAY__NO_MORE_REPAIR_OR_AUDIT_WITHOUT_NEW_FALSIFICATION__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__ONE_FRESH_TASK_ONLY",
-    "next_action": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_OR_PR277_REPLAY__INDEPENDENT_ORACLE",
+    "exact_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_FRESH_REQUALIFICATION_20260930_V1.json",
+    "repair_status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_REQUALIFIED_VERIFIED",
+    "prohibition": "NO_SPACE_CARGO_REUSE__NO_SERIALIZATION_REPLAY__NO_PR267_REPLAY__NO_PR277_REPLAY__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__NO_MORE_CHILD_BENCHMARKING_WITHOUT_PARENT_FAILURE",
+    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
-      "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1"
+      "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1"
     ],
     "latest_fresh_real_run_id": 36652169397,
     "latest_fresh_reuse_run_id": 36652623916,
+    "latest_composition_requalification_run_id": 36659312279,
+    "latest_composition_independent_verifier_run_id": 36659436525,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
-    "latest_post_promotion_falsification_run_id": 36653756561,
-    "known_provider_backed_path_binding_violations": 0,
-    "latest_post_repair_requalification_run_id": 36656793034,
-    "latest_direct_compiler_repair_validation_run_id": 36658401010
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
