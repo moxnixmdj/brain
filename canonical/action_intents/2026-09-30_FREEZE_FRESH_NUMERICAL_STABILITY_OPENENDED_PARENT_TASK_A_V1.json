@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-NUMERICAL-STABILITY-OPENENDED-PARENT-TASK-A-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_REQUIRED_AFTER_BROAD_OBJECTIVE_DECOMPOSITION_QUALIFICATION",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_PARENT_AFTER_BROAD_OBJECTIVE_DECOMPOSITION_QUALIFICATION::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended parent task with no supplied source, tool, command, experiment procedure, answer, or task-specific runtime patch; execute exactly once only after canonical carrier qualification and stop on the first causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current base fde8a9cc8b365f434d4aa147effbcbedcb234126",
+    "broad-objective semantic decomposition promoted at 6ce5313d8bc587c1ff73f143dbb1b593707f2ccd",
+    "public non-parent qualification run 36674587839 PASS",
+    "SQLite parent task spent at run 36674086293 and permanently replay-forbidden",
+    "prior climate, demography, astronomy, geophysics, biophysics, thermophysics, and software/database parent domains excluded from freshness"
+  ],
+  "evidence_presence_classification": "CAPABILITY_VERIFIED__FRESH_PARENT_VALIDATION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen task. On semantic completion, independently verify before any parent promotion. On failure, preserve only the earliest integrated causal gap and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "surviving_necessity": "The newly qualified model-independent broad-objective decomposition bridge must now be tested inside the full inherited parent route on a materially different real domain.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_NUMERICAL_COMPUTING_PARENT_TASK",
+    "deleted_or_bypassed_paths": [
+      "SQLITE_REPLAY",
+      "MAUNA_REPLAY",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_OR_TOOL_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "A fresh numerical-computing objective is materially different from the spent database-concurrency task, admits authoritative documentary evidence and a real zero-cost executable experiment, and directly tests whether the new decomposition bridge hands off into inherited source/tool/experiment/synthesis capabilities.",
+    "expected_parent_level_state_change": "Either obtain the first admissible genuine open-ended parent Task A pass or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
