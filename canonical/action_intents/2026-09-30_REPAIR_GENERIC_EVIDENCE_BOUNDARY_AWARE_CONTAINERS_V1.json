@@ -1,0 +1,254 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-GENERIC-EVIDENCE-BOUNDARY-AWARE-CONTAINERS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__MODERN_CONTAINER_BOUNDARY_SEGMENTATION_GAP",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__MODERN_CONTAINER_BOUNDARY_SEGMENTATION_GAP::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Requalify generic model-independent evidence extraction only if exact repaired bytes preserve prior non-ROR live qualification and additionally pass deterministic boundary-aware modern-container coverage without parent-container duplication.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main fc6f91e411d44851a6578fd7edc3207ad89f39e6 reopened generic extraction after falsification",
+    "prior qualified producer blob 6598ba92307c55fe6e645b4ecba070d2259818e2",
+    "failed container expansion blob fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "post-promotion regression test_modern_div_main_content_is_visible_evidence",
+    "public qualification run 36680967490 on sqlite.org and docs.python.org",
+    "failed PyPI challenge-page requalification is transport/content availability evidence, not parser semantic authority",
+    "HTMLParser existing stack implementation"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FALSIFIED_AT_GENERIC_CONTAINER_SCOPE__NARROW_OLD_PAGE_STRUCTURES_PRESERVED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exact repaired producer/test bytes pass authored fail-closed regressions, a new anti-duplication nested-container regression, and independent fresh live non-ROR qualification on stable accessible domains; then restore generic extraction credit only, with relation/correctness/sufficiency still unverified.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+    "real_outcome": "Make generic evidence extraction handle modern semantic/container-only visible text without collapsing nested page structure into noisy duplicate parent blocks.",
+    "required_capability": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "obs_goal": {
+      "real_outcome": "Restore truthful generic evidence extraction across old leaf-block pages and modern container-only pages.",
+      "proxy_goals_deleted": [
+        "support PyPI anti-bot/client-challenge pages",
+        "advance to claim relation before extraction requalifies",
+        "replay parent tasks",
+        "add a third-party HTML extraction framework"
+      ],
+      "surviving_necessity": "The parser needs one generic structural rule that captures direct container text while preserving nested semantic blocks."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "qualified old leaf-block parser",
+        "failed naive main/article/section/div expansion",
+        "current HTMLParser stack and split/hash/offset machinery",
+        "independent live refetch oracle"
+      ],
+      "external_existing_routes_checked": [
+        "stdlib HTMLParser",
+        "BeautifulSoup-style DOM traversal",
+        "readability/trafilatura-style article extraction"
+      ],
+      "capability_work_deleted": [
+        "No new dependency",
+        "No browser renderer",
+        "No model extractor",
+        "No site-specific PyPI handling"
+      ],
+      "surviving_gap": "Nested container text must be segmented at the deepest active evidence boundary so leaf/semantic children survive and outer containers do not duplicate the whole page."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic structural segmentation defect in the visible-text block parser.",
+      "delete_bypass_substitute_options": [
+        "Ignore modern containers rejected by deterministic falsification.",
+        "Add all container tags with all-parent text accumulation rejected because it collapses/duplicates page text.",
+        "Use deepest-active-block accumulation survives as minimal generic repair.",
+        "Adopt third-party DOM extraction rejected because it adds dependency and still needs Brain provenance/hash contracts."
+      ],
+      "surviving_causal_blocker": "BOUNDARY_AWARE_VISIBLE_TEXT_SEGMENTATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_HTMLPARSER_DEEPEST_ACTIVE_BLOCK_WITH_CONTAINER_TAGS",
+        "THIRD_PARTY_DOM_EXTRACTOR_WITH_BRAIN_WRAPPER",
+        "SITE_SPECIFIC_CONTAINER_RULES",
+        "MODEL_TEXT_EXTRACTION"
+      ],
+      "losing_routes_reason": "Deepest-active-block accumulation changes one existing primitive, preserves exact provenance/hash machinery, avoids dependencies, and directly addresses both missed container text and parent-duplication risk.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Synthetic nested-container tests are required to prove boundary semantics deterministically; independent live cross-domain refetch remains required to ensure no regression on real pages."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "restore-old-bytes PR431",
+        "stale claim-relation PR429",
+        "naive all-parent container accumulation"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "After exact-byte qualification, restore only generic extraction credit and resume claim relation acquisition on a fresh exact base."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused prior qualified live domains",
+        "Reused current parser and independent oracle",
+        "Rejected PyPI challenge response as semantic extraction oracle",
+        "Localized defect to block-boundary accumulation"
+      ],
+      "search_stop_decision": "The causal defect is fully localized and the minimal stdlib repair dominates heavier DOM extraction routes.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh only if boundary-aware repair fails stable live qualification or deterministic anti-duplication regression."
+    },
+    "routes_considered": [
+      "REPAIR_HTMLPARSER_DEEPEST_ACTIVE_BLOCK_WITH_CONTAINER_TAGS",
+      "THIRD_PARTY_DOM_EXTRACTOR_WITH_BRAIN_WRAPPER",
+      "SITE_SPECIFIC_CONTAINER_RULES",
+      "MODEL_TEXT_EXTRACTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RESTORE_KNOWN_INSUFFICIENT_OLD_GENERIC_BYTES",
+      "PYPI_CHALLENGE_PAGE_TUNING",
+      "DOWNSTREAM_RELATION_WORK_BEFORE_EXTRACTION",
+      "NEW_DEPENDENCY"
+    ],
+    "selected_surviving_route": "REPAIR_HTMLPARSER_DEEPEST_ACTIVE_BLOCK_WITH_CONTAINER_TAGS",
+    "why_selected_route_is_fastest_sufficient": "It is a one-rule repair inside the already-qualified stdlib parser and can be falsified with deterministic nested-container tests plus the existing independent live oracle.",
+    "expected_parent_level_state_change": "Requalify generic model-independent evidence extraction only if exact repaired bytes preserve prior non-ROR live qualification and additionally pass deterministic boundary-aware modern-container coverage without parent-container duplication.",
+    "stop_condition": "Exact repaired bytes pass all authored regressions, nested-container anti-duplication test, independent stable live cross-domain qualification, and negative controls; no parent replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T07:05:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "NAIVE_CONTAINER_EXPANSION_WITH_ALL_PARENT_ACCUMULATION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current parser and falsification receipt on main",
+          "run 36680967490 old-byte live qualification",
+          "failed naive container expansion requalification"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python stdlib html.parser contract and current Brain HTMLParser implementation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No dependency needed; stdlib route retained"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "PyPI live client-challenge response demonstrates transport/challenge behavior must not be conflated with parser semantics"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "HTML visible text nested container deepest active block extraction"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Python HTMLParser nested block text segmentation"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "DOM leaf block extraction avoid parent duplicate text"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "modern HTML main article section div content extraction semantics"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REPAIR_HTMLPARSER_DEEPEST_ACTIVE_BLOCK_WITH_CONTAINER_TAGS",
+          "evidence": [
+            "Current parser source and deterministic modern-container falsification"
+          ],
+          "qualification_evidence": [
+            "BRAIN_RUNTIME + independent public qualification after repair"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Captures direct container text while preserving nested child boundaries.",
+            "CAPABILITY_STRENGTH": "Covers legacy leaf blocks and modern semantic/container-only text.",
+            "WALL_CLOCK": "Minimal one-rule runtime repair plus tests.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "No new dependency.",
+            "VERIFIABILITY": "Deterministic nested regressions plus independent live refetch/hash/offset oracle."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger removes the Brain-specific provenance/relevance/hash contract or beats a minimal stdlib boundary repair on wall-clock and dependency surface.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_HTMLPARSER_DEEPEST_ACTIVE_BLOCK_WITH_CONTAINER_TAGS",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_REPROMOTION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:05:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_HTMLPARSER_DEEPEST_ACTIVE_BLOCK_WITH_CONTAINER_TAGS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VERIFICATION_CAPSULE_RUNNER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:05:00Z",
+            "evidence": [
+              "Recent public verification-capsule-runner jobs reached normal hosted runners and executed Python test steps."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
