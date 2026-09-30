@@ -2,19 +2,20 @@
 
 Status: CANONICAL / MANDATORY / FAIL-CLOSED
 
-## V5 capability-ownership override
+## V6 capability-internalization override
 
-This law is subordinate to `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md`.
+This law is subordinate to `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md`.
 
-Model-independence is **not** a default capability requirement. The older model-independence clauses below apply only when a specific claim explicitly asserts model-independence or provider-removal. They MUST NOT be used to reject a faster Opus-5.5-or-better configured capability merely because a model participates.
+Model-independence is not a default requirement. Models may be general cognition substrates.
 
-Current promotion requirements additionally include:
-- capability >= corresponding Opus 5.5 useful capability;
-- durable Brain ownership package;
-- no JIT capability rediscovery/externalization;
-- knowledge external/JIT;
-- no invention of the underlying useful capability;
-- durable reasoning decision receipt for consequential promotion/route decisions.
+However:
+- provider/model access is not capability ownership;
+- external benchmark superiority is specimen evidence only;
+- opaque hidden model capability cannot receive Brain ownership credit;
+- promotion requires Brain-owned operative configuration;
+- promotion evidence must test the Brain-configured route itself;
+- underlying capability invention remains forbidden;
+- consequential promotions require durable reasoning receipts.
 
 ## Purpose
 
