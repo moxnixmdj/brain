@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CLOSE-POST-PR303-PROVENANCE-AND-TARGET-MIRROR-HOLES-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO_AND_ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO_AND_ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Close the two post-PR303 fail-open seams so ambiguous cognition cannot be certified model-independent and the active frontier target record cannot drift from pointer, hierarchy, queue, and scoreboard; award no capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR303 promotion firewall and runtime provenance implementation",
+    "Current main canonical/runtime/astra_runtime.py cognition stamping logic",
+    "Current main canonical/runtime/enforce_goal_hierarchy.py mirror checks",
+    "Current runtime cognition provenance regression tests",
+    "Current active frontier record and scoreboard mirrors"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to the other canonical frontier mirrors; negative regressions prove both holes closed; zero progress credit; immediately return to the second clean cross-domain parent real task.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User instructed the Brain to go real now and previously required recurring and adjacent mistake classes to be made fail-closed while pursuing the terminal objective.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Prevent false zero-model cognition certification and active target-record drift from surviving the trusted authority boundary.",
+    "required_capability": "FAIL_CLOSED_RUNTIME_COGNITION_CLASSIFICATION_AND_FIVE_SURFACE_FRONTIER_MIRROR",
+    "obs_goal": {
+      "real_outcome": "Make the merged PR303 firewall actually enforce its declared zero-model and all-surface consistency contract.",
+      "proxy_goals_deleted": [
+        "new governance architecture",
+        "new workflow",
+        "new provider",
+        "new benchmark"
+      ],
+      "surviving_necessity": "Repair only the two exact post-merge false-negative paths found by adversarial review."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR303 runtime cognition provenance stamper",
+        "PR303 promotion truth checks",
+        "PR303 pointer/hierarchy/queue/scoreboard mirror checks",
+        "Existing frontier target record",
+        "Existing runtime provenance unit tests"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: both defects are internal trusted-boundary logic defects."
+      ],
+      "capability_work_deleted": [
+        "No new law",
+        "No new service",
+        "No new carrier",
+        "No capability runtime expansion"
+      ],
+      "surviving_gap": "Runtime infers zero model dependency from absence of model markers, and mirror enforcement omits the active target record."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic fail-open authority defects on the current canonical promotion path.",
+      "delete_bypass_substitute_options": [
+        "Ignore because PR303 merged rejected",
+        "Manual review rejected",
+        "Repair existing runtime and validator survives"
+      ],
+      "surviving_causal_blocker": "POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO_AND_ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Repair existing runtime classification and validator mirror checks",
+        "Add a second promotion service",
+        "Rely on review discipline"
+      ],
+      "losing_routes_reason": "The existing machinery already owns both boundaries; parallel machinery adds state and manual discipline cannot fail closed.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Add negative unit regressions for missing/unknown controller provenance and target-record divergence, plus run the trusted PR guard on exact head."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any inference that missing planner markers alone proves model independence",
+        "Any manual target-record cross-check before promotion"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Fail-closed cognition provenance",
+        "Five-surface canonical frontier consistency"
+      ],
+      "fresh_reuse_plan": "The next cross-domain parent real task must pass the strengthened guard without governance-specific accommodations."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused the exact PR303 audit and implementation",
+        "Did not reopen broader governance design",
+        "Limited work to proven false-negative branches"
+      ],
+      "search_stop_decision": "Both defects are directly demonstrated in current source and have one minimal repair each; broader search would delay real execution without improving the repair.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_RUNTIME_AND_VALIDATOR",
+      "NEW_PROMOTION_SERVICE",
+      "MANUAL_REVIEW_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_PROMOTION_SERVICE",
+      "MANUAL_REVIEW_ONLY",
+      "NEW_LAW_VERSION"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_RUNTIME_AND_VALIDATOR",
+    "why_selected_route_is_fastest_sufficient": "Two local fail-closed checks plus regressions close the proven holes with no new moving parts.",
+    "expected_parent_level_state_change": "Close the two post-PR303 fail-open seams so ambiguous cognition cannot be certified model-independent and the active frontier target record cannot drift from pointer, hierarchy, queue, and scoreboard; award no capability credit.",
+    "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to the other canonical frontier mirrors; negative regressions prove both holes closed; zero progress credit; immediately return to the second clean cross-domain parent real task.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized internal governance repair on already-identified trusted-boundary defects; external route discovery cannot substitute for correcting the authoritative code."
+    }
+  }
+}
