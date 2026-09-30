@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "COMPONENT_VERIFIED__REAL_TASK_ACQUISITION_BLOCKED_BY_UPSTREAM_GROUNDING_REGRESSION",
+  "status": "ACQUIRED_VERIFIED__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,26 +28,55 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "UNPROVEN_REAL_TASK__DOWNSTREAM_BLOCKED",
-  "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION__SEARCH_EXISTING_BRAIN_PLANNER_AND_DETERMINISTIC_COMPOSITION_ROUTES_FIRST__NO_SPENT_PARENT_REPLAY",
-  "obsolescence_status": "NOT_YET_PROVEN",
-  "winning_route": null,
-  "capability_strength_result": null,
-  "incremental_cost_result_usd": null,
+  "current_status": "ACQUIRED_VERIFIED",
+  "next_action": "PARENT_FRONTIER_RECOMPUTE__RUN_NEW_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK",
+  "obsolescence_status": "ACQUIRED_VERIFIED",
+  "winning_route": "DETERMINISTIC_GROUNDED_EXECUTABLE_COMPOSITION_PLUS_CAPABILITY_GRAPH_PLANNER",
+  "capability_strength_result": "UNIFIED_PLANNING_FRESH_REAL_COMPOSITION_PASS__YAML_JSON_MATERIALLY_DISTINCT_FRESH_REUSE_PASS",
+  "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
-  "independent_verification": null,
-  "inheritance_path": [],
-  "residual_gap": "WAIT_FOR_REPAIRED_VERIFIED_GROUNDING_INPUT_BEFORE_NEW_FRESH_REAL_TASK",
-  "evidence_path": null,
+  "independent_verification": {
+    "status": "PASS",
+    "component_verification_run_id": 36647904127,
+    "fresh_real_task": {
+      "run_id": 36652169397,
+      "job_id": 109688570787,
+      "domain": "LIVE_KNOWLEDGE_CONSISTENCY__PLANNING_TOOL_PROJECT_IDENTITY",
+      "artifact_id": 11070249875,
+      "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1"
+    },
+    "fresh_reuse": {
+      "run_id": 36652623916,
+      "job_id": 109689985771,
+      "domain": "LOCAL_STRUCTURED_DATA_TRANSFORMATION",
+      "artifact_id": 11071595189,
+      "artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a"
+    }
+  },
+  "inheritance_path": [
+    "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+    "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+    "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/astra_runtime.py"
+  ],
+  "residual_gap": null,
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
   "component_verification": {
     "status": "PASS",
     "public_run_id": 36647904127,
     "exact_pr255_head": "1d958cc3ea8f18c42a3bf190c6d4cfeda2556487"
   },
   "real_task_attempt": {
-    "run_id": 36649042160,
-    "result": "BLOCKED_BEFORE_BINDABLE_COMPOSITION",
-    "cause": "UPSTREAM_GROUNDING_INPUT_CONTRACT_COMPATIBILITY_FALSIFIED",
-    "composition_behavior": "CORRECT_FAIL_CLOSED"
+    "run_id": 36652169397,
+    "result": "PASS",
+    "model_dependency_count": 0,
+    "independent_verification": "PASS"
+  },
+  "fresh_reuse": {
+    "run_id": 36652623916,
+    "result": "PASS",
+    "materially_distinct": true,
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json"
   }
 }
