@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import html
 import ipaddress
+import json
+import pathlib
 import re
 import urllib.parse
 import urllib.request
@@ -192,3 +194,30 @@ def verify(objective,candidate,provenance,authority_identity,timeout=20,fetch=No
       "matched_title_or_url_tokens":matched_title_or_url,
       "scope_note":"Verifies first-party hosting by the independently bound organization and bounded lexical objective relevance only. Original/primary research status, factual correctness, evidence sufficiency, and claim endorsement remain unverified.",
     }
+
+def _safe_path(root,raw):
+    root=pathlib.Path(root).resolve()
+    p=(root/str(raw or "")).resolve()
+    if p==root or root not in p.parents:
+        raise ValueError("PATH_OUTSIDE_REPOSITORY")
+    return p
+
+def run(args,root):
+    args=dict(args or {})
+    inp=_safe_path(root,args.get("input_path"))
+    out=_safe_path(root,args.get("output_path"))
+    if not inp.is_file():
+        raise ValueError("OBJECTIVE_RELEVANCE_INPUT_MISSING")
+    data=json.loads(inp.read_text(encoding="utf-8"))
+    result=verify(
+        data.get("objective"),
+        data.get("candidate"),
+        data.get("provenance"),
+        data.get("authority_identity"),
+        timeout=args.get("timeout",20),
+    )
+    out.parent.mkdir(parents=True,exist_ok=True)
+    out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    result["output_path"]=str(out.relative_to(pathlib.Path(root).resolve())).replace("\\","/")
+    result["output_verified"]=result.get("status")=="FIRST_PARTY_RELEVANT_SOURCE_VERIFIED"
+    return result
