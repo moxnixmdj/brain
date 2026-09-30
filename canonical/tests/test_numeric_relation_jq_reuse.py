@@ -77,6 +77,22 @@ class NumericRelationJqReuseTests(unittest.TestCase):
         self.assertEqual(relation["selected_capability"],"json.query.jq")
         self.assertAlmostEqual(relation["threshold"],0.2)
 
+    def test_relation_filter_normalizes_only_bounded_numeric_strings(self):
+        compiled=self.compile_relation()
+        compute=compiled["controller_actions"][3]
+        filt=compute["args"]["filter"]
+        self.assertIn("def scalar_number",filt)
+        self.assertIn('type=="number"',filt)
+        self.assertIn('type=="string"',filt)
+        self.assertIn("length <= 96",filt)
+        self.assertIn("tonumber",filt)
+        self.assertIn("NUMERIC_RELATION_INPUT_NOT_NUMBER",filt)
+        self.assertIn("$r.left|scalar_number",filt)
+        self.assertIn("$r.right|scalar_number",filt)
+        self.assertIn("$r.threshold|scalar_number",filt)
+        self.assertIn("left:$left",filt)
+        self.assertIn("right:$right",filt)
+
     def test_three_prior_scalars_fail_closed(self):
         goal=(
             "Using the authoritative JSON source https://one.example/data, "
