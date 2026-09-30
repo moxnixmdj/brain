@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-GUARDED-HTTP2-OPENENDED-PARENT-TASK-A-20260930-V1",
+  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a85b21811c62560ab6657b061c902f632d9d367c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED::GUARDED_FRESH_PARENT_EXECUTION",
+  "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+  "prior_work_checked": [
+    "PR455 froze the exact HTTP2 task on canonical main.",
+    "PR456 carrier was rejected as unguarded and produced no steps/logs/artifacts; canonical reconciliation classifies execution_count=0 and task UNSPENT.",
+    "PR457 repaired claim-spec evidence authority using guarded run 36686583882.",
+    "Open-PR search on current main found no competing HTTP2 execution."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "expected_parent_frontier_change": "Exactly one guarded physical execution of the frozen HTTP2 Task A; on first causal failure preserve the gap and mark task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
+  "highest_leverage_now": true,
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "One atomic-guard-admitted execution only. Never retry automatically after reservation/dispatch uncertainty or after physical child start.",
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "a85b21811c62560ab6657b061c902f632d9d367c",
+    "real_outcome": "Reality-test the inherited model-independent open-ended research stack on one fresh network-protocol task without leaking source, values, formula, tool recipe, or answer.",
+    "surviving_necessity": "All currently localized child seams through bounded claim-spec/operand binding are now guarded-qualified; parent-level end-to-end evidence is the shortest remaining proof.",
+    "selected_surviving_route": "EXACTLY_ONE_GUARDED_HTTP2_PARENT_TASK_A_EXECUTION",
+    "deleted_or_bypassed_paths": [
+      "PARENT_REPLAY",
+      "DIRECT_UNGUARDED_WORKFLOW",
+      "NEW_CHILD_REPAIR_WITHOUT_PARENT_FALSIFICATION",
+      "MODEL_COGNITION",
+      "TASK_SPECIFIC_PATCH"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The task is already frozen, unspent, materially different, and directly exercises autonomous decomposition, source discovery, evidence extraction, claim binding, executable verification, synthesis, and provenance.",
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
+  }
+}
