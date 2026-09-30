@@ -367,7 +367,7 @@
     "knowledge_side_status": "EXTERNAL_JIT_ONLY__KNOWLEDGE_NOT_ACCUMULATED_AS_CAPABILITY",
     "active_research_side": "CAPABILITY_OWNERSHIP",
     "obsolescence_definition": "OPUS_5_5_IMPLEMENTATION_UNNECESSARY_WHEN_BRAIN_PERMANENTLY_OWNS_A_VERIFIED_EQUAL_OR_BETTER_USEFUL_CAPABILITY",
-    "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_OWNERSHIP_ARBITRAGE_STRATEGY_V5.md",
+    "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
     "capability_obsolescence_queue_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "first_v4_obsolescence_win": {
       "capability_id": "EXACT_SYMBOLIC_COMPUTATION_V1",
@@ -609,7 +609,7 @@
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "recursive_obs_status": "MANDATORY_PRE_ACTION_CONTROL_LOOP__EXACT_BASE_BOUND__LIVE_CHALLENGER_FRONTIER__SELECTED_ROUTE_PREFLIGHT__24H_ROUTE_LEASE__2H_PREFLIGHT_LEASE__FAIL_CLOSED",
-    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V5.json",
+    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V6.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
       "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_CORRECTED_20260930",
@@ -631,7 +631,7 @@
     "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "frontier_decomposition_status": "MATERIALS_TASK_C_SPENT__FIRST_GAP_CORRECTED_TO_INITIAL_RELEVANCE_DECISION_ROLE_COVERAGE__NO_PARENT_CREDIT",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V5.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V6.json",
     "grounding_requalification": {
       "status": "VERIFIED_ACQUIRED__FRESH_REUSE_PASS",
       "fresh_real_run_id": 36652169397,
