@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_TERMINAL_RECONCILIATION_V1",
-  "status": "EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__TASK_SPENT__REPLAY_FORBIDDEN__PARENT_NOT_PROMOTED",
+  "status": "EXECUTED_ONCE__TASK_SPENT__CARRIER_PRECOMPILE_FAILED_BEFORE_PUBLIC_RUNTIME_BOUNDARY__REPLAY_FORBIDDEN__PARENT_NOT_PROMOTED",
   "checked_on": "2026-09-30",
   "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
@@ -43,16 +43,33 @@
     "compiled_prefix": []
   },
   "classification": {
-    "evidence_scope": "ADMISSIBLE_REAL_OPEN_ENDED_MODEL_INDEPENDENT_EXECUTION_FAILURE",
-    "producer_reached_current_runtime": true,
+    "evidence_scope": "ADMISSIBLE_TASK_SPEND_AND_CARRIER_FAILURE_ONLY__NOT_ADMISSIBLE_AS_PUBLIC_RUNTIME_CAPABILITY_GAP",
+    "producer_loaded_exact_runtime_bytes": true,
+    "producer_reached_public_runtime_boundary": false,
+    "public_runtime_entrypoint_invoked": false,
+    "canonical_run_goal_fallback_exercised": false,
     "failure_before_source_discovery": true,
     "failure_before_tool_execution": true,
     "failure_before_quantitative_analysis": true,
     "parent_capability_proven": false,
     "parent_capability_falsified": false,
-    "exact_missing_capability": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING",
-    "exact_residual": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "implication": "The inherited model-independent stack does not currently compile the first broad natural-language research objective clause into any verified capability. The previous broad evidence-absence blocker is therefore replaced by this concrete compiler/grounding gap."
+    "exact_missing_capability": "UNADJUDICATED__AUTHORITATIVE_CARRIER_BYPASSED_PUBLIC_RUNTIME_FALLBACK",
+    "exact_residual": "PARENT_OPEN_ENDED_PUBLIC_RUNTIME_PATH_UNPROVEN__AUTHORITATIVE_TASK_A_HARNESS_BYPASSED_RUN_GOAL",
+    "carrier_harness_path": [
+      "load exact goal_compiler.py and astra_runtime.py bytes",
+      "call compiler.compile_goal(goal, registry, ROOT) directly",
+      "on compile exception emit FAIL_FIRST_CAUSAL_GAP and exit",
+      "runtime._run_model_independent_goal is reachable only after successful direct compile",
+      "runtime.run_goal is never invoked"
+    ],
+    "canonical_runtime_path_not_exercised": [
+      "run_goal(step, mission)",
+      "_run_goal_unstamped(step, mission)",
+      "compile-miss classification",
+      "bound-capability grounding/composition fallback",
+      "targeted/federated capability acquisition"
+    ],
+    "implication": "The authoritative task spend is real and replay remains forbidden, but its terminal compile error is scoped to the carrier harness. It cannot establish that the canonical public Brain runtime lacks broad-objective grounding or acquisition fallback because that boundary was never invoked."
   },
   "replay_budget": {
     "executions_observed": 1,
@@ -67,9 +84,9 @@
     "The run consumed zero incremental monetary spend."
   ],
   "canonical_state_transition": {
-    "previous_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
-    "new_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "task_A_status": "SPENT_FAIL_FIRST_CAUSAL_GAP",
+    "previous_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "new_parent_blocker": "PARENT_OPEN_ENDED_PUBLIC_RUNTIME_PATH_UNPROVEN__AUTHORITATIVE_TASK_A_HARNESS_BYPASSED_RUN_GOAL",
+    "task_A_status": "SPENT_CARRIER_PRECOMPILE_FAIL_PUBLIC_RUNTIME_PATH_UNPROVEN",
     "capability_credit_delta": 0,
     "promotion_authorized": false
   },
@@ -79,7 +96,25 @@
     "NO_PARENT_PROMOTION_FROM_THIS_FAILED_RUN",
     "NO_TASK_SPECIFIC_COMPILER_RULE",
     "NO_MODEL_PLANNER_OR_LOCAL_MODEL_TO_MASK_THE_GAP",
-    "NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION"
+    "NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION",
+    "NO_RUNTIME_REPAIR_FROM_PR49_CARRIER_ONLY_COMPILE_FAILURE",
+    "NO_REPLAY_TO_TEST_THE_CORRECTED_ENTRYPOINT",
+    "NO_PARENT_PROMOTION_FROM_DUPLICATE_RUNS",
+    "NO_FRESH_PARENT_TASK_BEFORE_PUBLIC_RUNTIME_PATH_QUALIFICATION"
   ],
-  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
+  "next_action": "QUALIFY_CANONICAL_PUBLIC_RUNTIME_RUN_GOAL_AND_CLI_BOUNDARY_WITH_FRESH_NON_PARENT_DIAGNOSTIC__MISSION_PATH_PROVENANCE_REQUIRED__NO_PARENT_CREDIT__THEN_FREEZE_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_A",
+  "path_validity_correction": {
+    "checked_on": "2026-09-30",
+    "authoritative_carrier_pr": 49,
+    "authoritative_run_id": 36670516407,
+    "authoritative_job_id": 109744305866,
+    "harness_file": "run_pr328_openended_climate_task_a_once.py",
+    "exact_runtime_blob": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "observed_direct_call": "compiler.compile_goal(goal, registry, ROOT)",
+    "observed_exit_on_compile_exception": true,
+    "observed_public_run_goal_call": false,
+    "canonical_public_boundary": "astra_runtime.run_goal(step, mission)",
+    "canonical_cli_sets_runtime_mission_path": true,
+    "correction_basis": "Exact PR49 harness patch plus exact PR337 runtime source inspection."
+  }
 }
