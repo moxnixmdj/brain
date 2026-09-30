@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__SOURCE_ADMISSION_REPAIR_GUARD_QUALIFIED_MERGED__FRESH_TASK_C_REQUIRED__NO_PARENT_CREDIT",
+  "status": "FRONTIER_BAR_DEFINED__MATERIALS_TASK_C_SPENT__DECISION_ROLE_RELEVANCE_GAP__NO_PARENT_CREDIT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -86,8 +86,8 @@
     "first_causal_gap": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
   },
-  "obsolescence_status": "NOT_YET_PROVEN__SEISMOLOGY_TASK_B_SPENT__SOURCE_ADMISSION_ROOT_CAUSE_REOPENED",
-  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+  "obsolescence_status": "NOT_YET_PROVEN__MATERIALS_TASK_C_SPENT__DECISION_ROLE_RELEVANCE_GAP",
+  "residual_gap": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -192,7 +192,7 @@
       "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
     }
   ],
-  "next_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SEISMOLOGY_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_AWARE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -379,18 +379,12 @@
     "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
   },
   "last_frontier_reconciliation": {
-    "status": "SOURCE_ADMISSION_REPAIR_GUARD_QUALIFIED_AND_MERGED__FRESH_TASK_C_REQUIRED",
-    "previous_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
-    "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+    "status": "MATERIALS_TASK_C_SPENT__ROLE_RELEVANCE_GAP_LOCALIZED",
+    "blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
     ],
-    "parent_capability_promoted": false,
-    "counter_delta": 0,
-    "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "spent_parent_task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
-    "spent_parent_run_id": 36693929830,
-    "spent_parent_replay_allowed": false
+    "parent_capability_promoted": false
   },
   "next_parent_validation": {
     "status": "READY_FOR_FRESH_MATERIALLY_DIFFERENT_TASK_C",
@@ -407,5 +401,19 @@
     "qualification_run_id": 36697424705,
     "artifact_id": 11088004744,
     "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json"
+  },
+  "last_real_output_event": {
+    "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_20260930",
+    "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "status": "FRESH_TASK_C_SPENT__DECISION_ROLE_RELEVANCE_ADMISSION_FALSIFIED__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+    "public_run_id": 36698638943,
+    "public_job_id": 109832558595,
+    "artifact_id": 11089076913,
+    "artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162",
+    "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
+    "parent_capability_promoted": false,
+    "capability_credit_delta": 0,
+    "next_causal_gap": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT"
   }
 }
