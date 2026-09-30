@@ -1,0 +1,298 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-BROAD-OBJECTIVE-SEMANTIC-DECOMPOSITION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire the minimum generic model-independent broad-objective semantic decomposition bridge so a fresh open-ended task advances beyond the undifferentiated compile miss to action-shaped research roles or the first narrower causal gap; no Mauna replay and no parent promotion from child evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 86dae95f0b0a872df005dd35ea0110cd3914536f",
+    "PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930_V1.json",
+    "plain_goal_bound_grounding.py verified inherited grounding",
+    "grounded_executable_composition.py verified inherited composition",
+    "goal_compiler.py conservative explicit-action decomposition",
+    "external challenger: spaCy rule matcher",
+    "external challenger: NLTK RegexpParser"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when a generic stdlib-only broad-objective decomposer is fail-closed, independently regression-checked on materially different non-Mauna objectives, emits no invented sources/facts, and is wired only as a pre-grounding bridge; then freeze one materially different fresh open-ended parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "86dae95f0b0a872df005dd35ea0110cd3914536f",
+    "real_outcome": "Turn one broad open-ended research objective into a bounded typed research-role graph that existing Brain grounding/composition can consume or fail more narrowly, without model cognition or task-specific research recipes.",
+    "required_capability": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_SEMANTIC_DECOMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Turn one broad open-ended research objective into a bounded typed research-role graph that existing Brain grounding/composition can consume or fail more narrowly, without model cognition or task-specific research recipes.",
+      "proxy_goals_deleted": [
+        "Mauna replay",
+        "more math primitives",
+        "new carrier",
+        "new general agent framework",
+        "task-specific climate compiler rule"
+      ],
+      "surviving_necessity": "The earliest fresh parent execution fails before inherited capabilities can be considered because the broad objective remains one undifferentiated semantic clause."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "goal_compiler.decompose_goal",
+        "plain_goal.bound_capability.grounding.stdlib",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "decision synthesis and numeric expression/relation inherited children"
+      ],
+      "external_existing_routes_checked": [
+        "spaCy rule-based Matcher",
+        "NLTK RegexpParser",
+        "statistical/LLM semantic parsing rejected because credited parent cognition must remain model-independent"
+      ],
+      "capability_work_deleted": [
+        "No new NLP dependency",
+        "No statistical language model",
+        "No source discovery implementation in this repair",
+        "No climate/domain literals",
+        "No task answer"
+      ],
+      "surviving_gap": "A deterministic generic bridge from broad objective semantics to bounded research roles does not exist."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic semantic interface gap between broad-objective input and already-verified action-shaped grounding/composition.",
+      "delete_bypass_substitute_options": [
+        "Direct compiler reuse fails on the broad clause",
+        "Existing grounding reuse receives the same undifferentiated clause and cannot invent hidden steps",
+        "spaCy/NLTK only provide rule engines and still require authored semantics",
+        "model cognition is forbidden for credited parent capability"
+      ],
+      "surviving_causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "EXTEND_EXISTING_STDLIB_GROUNDING_WITH_BOUNDED_BROAD_OBJECTIVE_RESEARCH_ROLE_DECOMPOSITION",
+        "ADD_SPACY_RULE_MATCHER",
+        "ADD_NLTK_REGEXP_PARSER",
+        "USE_MODEL_SEMANTIC_PLANNER"
+      ],
+      "losing_routes_reason": "External rule engines do not supply the missing semantics and add dependency/proof burden; model planners violate the model-independent cognition target. Extending the existing stdlib grounding surface is the smallest path.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Fresh non-Mauna objectives must prove stable role extraction, fail-closed rejection of unsupported forms, and zero invented source/fact literals before any parent task uses the bridge."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "package-supplier search as a substitute for semantic decomposition",
+        "mission-path parent repair diagnosis"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "plain-goal grounding",
+        "grounded executable composition",
+        "numeric expression/relation",
+        "decision synthesis"
+      ],
+      "fresh_reuse_plan": "After qualification, freeze one materially different genuine open-ended parent task with no prewired recipe and stop at its first new causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused latest first-spend correction",
+        "reused acquired capability inventory",
+        "reused current grounding/composition implementations"
+      ],
+      "search_stop_decision": "The missing semantics must be authored under every rule-based route; stdlib extension therefore dominates remaining wall-clock and dependency count.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed current main and external rule-based NLP challengers immediately before implementation."
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_STDLIB_GROUNDING_WITH_BOUNDED_BROAD_OBJECTIVE_RESEARCH_ROLE_DECOMPOSITION",
+      "ADD_SPACY_RULE_MATCHER",
+      "ADD_NLTK_REGEXP_PARSER",
+      "USE_MODEL_SEMANTIC_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MAUNA_REPLAY",
+      "NEW_NLP_DEPENDENCY",
+      "MODEL_PLANNER",
+      "TASK_SPECIFIC_RECIPE"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_STDLIB_GROUNDING_WITH_BOUNDED_BROAD_OBJECTIVE_RESEARCH_ROLE_DECOMPOSITION",
+    "why_selected_route_is_fastest_sufficient": "It reuses the verified stdlib grounding boundary, adds no supplier/model dependency, can be independently tested immediately, and converts the exact broad-objective failure into explicit research roles without inventing evidence.",
+    "expected_parent_level_state_change": "Acquire the minimum generic model-independent broad-objective semantic decomposition bridge so a fresh open-ended task advances beyond the undifferentiated compile miss to action-shaped research roles or the first narrower causal gap; no Mauna replay and no parent promotion from child evidence.",
+    "stop_condition": "Stop when a generic stdlib-only broad-objective decomposer is fail-closed, independently regression-checked on materially different non-Mauna objectives, emits no invented sources/facts, and is wired only as a pre-grounding bridge; then freeze one materially different fresh open-ended parent task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T05:26:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "EXISTING_STDLIB_PLAIN_GOAL_GROUNDING_WITH_NO_BROAD_OBJECTIVE_BRIDGE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current exact goal_compiler/plain_goal_grounding/grounded_composition source on 86dae95f"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "spaCy official rule-based matcher documentation",
+          "NLTK official RegexpParser documentation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "spaCy and NLTK are external dependency alternatives; neither supplies task semantics without authored rules"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No discovered model-free package removes the need to author objective-to-research-role semantics"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent broad research objective semantic decomposition into research roles"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "rule based NLP objective decomposition Python spaCy NLTK"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "stdlib regex finite state semantic decomposition versus rule matcher dependency"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current spaCy rule based Matcher NLTK RegexpParser"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "EXTEND_EXISTING_STDLIB_GROUNDING_WITH_BOUNDED_BROAD_OBJECTIVE_RESEARCH_ROLE_DECOMPOSITION",
+          "evidence": [
+            "Current grounding already owns deterministic clause semantics and zero-spend registry matching."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED current exact source"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Fail-closed bounded patterns; no invented evidence.",
+            "CAPABILITY_STRENGTH": "Closes observed broad-objective interface seam.",
+            "WALL_CLOCK": "Smallest code delta.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "No external dependency.",
+            "VERIFIABILITY": "Direct structural tests and fresh cross-domain objectives."
+          }
+        },
+        {
+          "route": "ADD_SPACY_RULE_MATCHER",
+          "evidence": [
+            "Official rule matcher exists."
+          ],
+          "qualification_evidence": [
+            "spaCy official documentation"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Rule engine only; semantics still authored locally.",
+            "CAPABILITY_STRENGTH": "No stronger for current bounded need.",
+            "WALL_CLOCK": "Adds package integration and proof.",
+            "INCREMENTAL_COST": "$0 monetary.",
+            "RELIABILITY": "Extra dependency.",
+            "VERIFIABILITY": "Still requires same semantic tests."
+          }
+        },
+        {
+          "route": "ADD_NLTK_REGEXP_PARSER",
+          "evidence": [
+            "Official regexp chunk parser exists."
+          ],
+          "qualification_evidence": [
+            "NLTK official documentation"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Rule engine only.",
+            "CAPABILITY_STRENGTH": "No semantic advantage.",
+            "WALL_CLOCK": "Adds dependency.",
+            "INCREMENTAL_COST": "$0 monetary.",
+            "RELIABILITY": "Extra dependency.",
+            "VERIFIABILITY": "Same semantic proof burden."
+          }
+        }
+      ],
+      "negative_search_summary": "No external model-free challenger supplies the missing research semantics with less remaining work than a stdlib extension to the already-verified grounding boundary.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "EXTEND_EXISTING_STDLIB_GROUNDING_WITH_BOUNDED_BROAD_OBJECTIVE_RESEARCH_ROLE_DECOMPOSITION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T05:26:00Z",
+        "max_age_hours": 2,
+        "selected_route": "EXTEND_EXISTING_STDLIB_GROUNDING_WITH_BOUNDED_BROAD_OBJECTIVE_RESEARCH_ROLE_DECOMPOSITION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "GITHUB_REPOSITORY_RUNTIME_AND_PYTHON_STDLIB_ON_CURRENT_EXACT_BASE",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:25:08Z",
+            "evidence": [
+              "DIRECT_PROBE: ASTRA Shared Runtime run 36673308260 accepted exact main canary commit and entered queue"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
