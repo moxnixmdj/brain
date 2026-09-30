@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_FALSIFICATION_V1",
+  "status": "PARENT_TASK_SPENT__FAILED_AT_FIRST_CAUSAL_GAP__NO_REPLAY",
+  "checked_on": "2026-09-30",
+  "canonical_base_commit_at_authorization": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+  "current_reconciliation_base_commit": "73f8331cddf556af0daece3aa32998ac992981d0",
+  "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+  "guard": {
+    "attempt_id": "c8a9972496fd4f5391995fc51ed15111",
+    "run_id": 36688193204,
+    "job_id": 109798852831,
+    "admission_status": "CURRENT_RUN_ADMITTED",
+    "child_started": true,
+    "child_returncode": 3,
+    "stable_problem_sha256": "2152e9eacc967ecc0a83cd88d09770bc810463274f4b78e17cf04ab4d112c2b8"
+  },
+  "terminal_artifact": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "artifact_id": 11084357364,
+    "artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
+    "run_conclusion": "failure"
+  },
+  "observed_runtime_state": "BLOCKED",
+  "observed_blocker_class": "CAPABILITY_ACQUISITION_REQUIRED",
+  "first_causal_gap": {
+    "id": "MULTI_CLAUSE_BROAD_RESEARCH_OBJECTIVE_BYPASSES_QUALIFIED_RESEARCH_FRONTEND_V1",
+    "grounded_clause_count": 0,
+    "unresolved_clause_indexes": [0, 1, 2, 3, 4],
+    "broad_objective_decomposition_available": false,
+    "mechanism": "plain_goal_bound_grounding only invoked broad_objective_decompose when len(records)==1 and unresolved==[0]",
+    "effect": "The verified open-research frontend was bypassed. Generic supplier discovery then matched lexical fragments such as assess, initial, and stream to unrelated APT/PyPI packages and failed with NO_COMPATIBLE_SUPPLIER_CONTRACT."
+  },
+  "capability_credit_delta": 0,
+  "parent_capability_promoted": false,
+  "parent_task_execution_count": 1,
+  "same_task_replay_allowed": false,
+  "next_causal_action": "Apply one generic routing repair on current base, validate it independently of the spent HTTP/2 task, then recompute and freeze a distinct fresh parent task."
+}
