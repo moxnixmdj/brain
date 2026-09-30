@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-NUMERIC-RELATION-STRICT-SCALAR-COERCION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_REJECTS_STRICT_FINITE_NUMERIC_TEXT_FROM_AUTHORITATIVE_JSON",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_REJECTS_STRICT_FINITE_NUMERIC_TEXT_FROM_AUTHORITATIVE_JSON::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Repair the generic scalar representation seam so an already-verified bounded relation can consume either JSON numbers or strict finite numeric-text scalars without task-specific handling; then return immediately to a fresh genuinely open-ended parent task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "spent PR304 public run 36669136068 localized JQ_FAILED: NUMERIC_RELATION_INPUT_NOT_NUMBER",
+    "PR306 answer-blind preflight independently observed PubChem MolecularWeight encoded as JSON string and closed unspent",
+    "canonical/runtime/goal_compiler.py relation lowering rejects every non-number before jq arithmetic",
+    "canonical/runtime/bound_capabilities/numeric_expression_sympy.py already accepts a strict finite decimal/scientific numeric-text grammar",
+    "local jq 1.7 direct diagnostics confirm tonumber plus isnan/isinfinite can preserve the same fail-closed finite scalar contract"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Change only the generic numeric-relation scalar boundary and direct regressions; accept finite JSON numbers and strict finite decimal/scientific numeric strings, reject booleans/junk/nonfinite values, qualify on fresh non-parent evidence, never replay PR304, and award no parent capability credit from this repair alone.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Make the inherited bounded numeric-relation route representation-robust for authoritative scalar JSON while preserving strict fail-closed semantics and zero model dependency.",
+    "required_capability": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_STRICT_SCALAR_NORMALIZATION",
+    "obs_goal": {
+      "real_outcome": "Consume semantically numeric authoritative scalar results whether encoded as a JSON number or a strict finite numeric string, without changing the requested relation.",
+      "proxy_goals_deleted": [
+        "make PR304 pass",
+        "special-case PubChem",
+        "replay the spent chemistry task",
+        "broaden arbitrary string coercion"
+      ],
+      "surviving_necessity": "A real execution proved the inherited relation rejects a common authoritative scalar representation before reaching its verified arithmetic."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "json.query.jq already verified and bound",
+        "native write_json_records already materializes causal producer results",
+        "math.numeric_expression.sympy already defines strict finite numeric-text acceptance",
+        "current relation lowering already owns the final type boundary"
+      ],
+      "external_existing_routes_checked": [
+        "jq 1.7 built-in tonumber",
+        "jq 1.7 isnan and isinfinite predicates exercised directly on the execution-equivalent jq version"
+      ],
+      "capability_work_deleted": [
+        "no new package",
+        "no new adapter",
+        "no new model",
+        "no task-specific source rule",
+        "no parent-task replay"
+      ],
+      "surviving_gap": "The relation filter's input contract is narrower than the already-verified typed scalar contract and therefore rejects strict finite numeric text."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic representation-boundary mismatch exposed by a real task; not chemistry-specific.",
+      "delete_bypass_substitute_options": [
+        "DELETE new supplier work",
+        "BYPASS task-specific conversion",
+        "REUSE existing jq and existing strict numeric grammar",
+        "COMPOSE normalization directly at the relation boundary"
+      ],
+      "surviving_causal_blocker": "STRICT_FINITE_NUMERIC_TEXT_IS_NOT_NORMALIZED_BEFORE_VERIFIED_JQ_RELATION_ARITHMETIC"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_EXISTING_JQ_RELATION_FILTER_WITH_STRICT_FINITE_NORMALIZATION",
+        "INSERT_EXISTING_SYMPY_IDENTITY_NORMALIZATION_ACTIONS_BEFORE_RELATION",
+        "BUILD_NEW_NUMERIC_SCALAR_NORMALIZER_ADAPTER"
+      ],
+      "losing_routes_reason": "The first route adds no action cycles, supplier, adapter, or dependency and preserves the existing relation evidence path. SymPy identity normalization adds unnecessary controller work; a new adapter duplicates an already-defined scalar contract.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run deterministic regressions plus a fresh child-level execution on the public zero-spend Ubuntu carrier, including positive numeric-text cases and negative boolean/junk/overflow cases. Do not reuse the spent parent task."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "task authors adding '+ 0' or '* 1' solely to coerce authoritative numeric strings",
+        "future source-specific type patches"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "typed scalar numeric expression strict parsing contract",
+        "bounded two-scalar numeric relation",
+        "verified jq execution"
+      ],
+      "fresh_reuse_plan": "After generic qualification and merge, freeze one genuinely open-ended cross-domain parent Task B with no prewired source/tool/formula plan, then execute exactly once."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR304 first-causal-gap receipt",
+        "reused PR306 answer-blind type observation",
+        "reused existing numeric-expression scalar grammar",
+        "tested jq 1.7 conversion and nonfinite rejection directly"
+      ],
+      "search_stop_decision": "Stop route discovery because an already-bound zero-spend supplier plus an existing strict scalar contract gives a smaller sufficient repair than every challenger.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Live GitHub state was refreshed after PR303 merged; no competing open repair lease existed before branch creation."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_JQ_RELATION_FILTER_WITH_STRICT_FINITE_NORMALIZATION",
+      "INSERT_EXISTING_SYMPY_IDENTITY_NORMALIZATION_ACTIONS_BEFORE_RELATION",
+      "BUILD_NEW_NUMERIC_SCALAR_NORMALIZER_ADAPTER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_PR304",
+      "TASK_SPECIFIC_PUBCHEM_COERCION",
+      "NEW_NUMERIC_NORMALIZER_ADAPTER",
+      "EXTRA_SYMPY_IDENTITY_ACTIONS"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_JQ_RELATION_FILTER_WITH_STRICT_FINITE_NORMALIZATION",
+    "why_selected_route_is_fastest_sufficient": "It is a local contract alignment inside the already-verified relation composition: zero new supplier, zero added action cycles, zero model dependency, and strict failure on anything outside the inherited finite numeric scalar grammar.",
+    "expected_parent_level_state_change": "Close only the representation seam; parent capability remains unpromoted until a fresh genuinely open-ended cross-domain task passes with independent verification.",
+    "stop_condition": "Qualify and merge only this strict scalar-boundary repair, preserve PR304 as spent/no-replay evidence, then return to a fresh open-ended parent task.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The causal gap is an internal contract mismatch between two already-bound verified scalar paths. Direct inspection plus execution-equivalent jq diagnostics resolved the route race without adding an external capability."
+    }
+  }
+}
