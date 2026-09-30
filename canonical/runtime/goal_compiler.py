@@ -3573,6 +3573,238 @@ def _compile_knowledge_revalidation(clause,compiled_parts,future_clauses=None):
     }
 
 
+def _numeric_result_ref(cycle,field="value"):
+    return {"$result":{"cycle":int(cycle),"field":str(field)}}
+
+
+def _numeric_literal(raw):
+    token=str(raw or "").strip()
+    if not re.fullmatch(r"[-+]?(?:(?:\\d+(?:\\.\\d*)?)|(?:\\.\\d+))(?:[eE][-+]?\\d+)?",token):
+        return None
+    try:
+        value=float(token)
+    except Exception:
+        return None
+    if not math.isfinite(value):
+        return None
+    return token
+
+
+def _numeric_bound_entry(registry):
+    entry=(registry or {}).get("numeric.expression.predicate.sympy")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    if entry.get("adapter_module")!="numeric_expression_predicate_sympy":
+        return None
+    return entry
+
+
+def _numeric_invoke_action(expression,variables,*,guard=True,guard_failure_label=None,true_label=None,false_label=None):
+    return {
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"numeric.expression.predicate.sympy",
+        "expression":str(expression),
+        "variables":variables,
+        "guard":guard,
+        "guard_failure_label":guard_failure_label,
+        "true_label":true_label,
+        "false_label":false_label,
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+
+
+def _compile_generic_numeric_clause(clause, actions, registry, state):
+    """Compile bounded generic scalar math onto the verified SymPy capability.
+
+    This is deliberately grammar-limited. It binds only to prior typed runtime
+    values and never interprets domain nouns as mathematical semantics.
+    """
+    if _numeric_bound_entry(registry) is None:
+        return None
+    text=" ".join(str(clause or "").strip().split())
+    lower=text.lower()
+    source_cycles=list(state.get("source_cycles") or [])
+
+    relation=re.match(
+        r"^(?:determine|check|verify)\\s+whether\\s+the\\s+two\\s+.+?\\s+"
+        r"differ\\s+by\\s+at\\s+most\\s+"
+        r"([-+]?(?:(?:\\d+(?:\\.\\d*)?)|(?:\\.\\d+))(?:[eE][-+]?\\d+)?)$",
+        text,re.IGNORECASE
+    )
+    if relation:
+        threshold=_numeric_literal(relation.group(1))
+        if threshold is None or len(source_cycles)<2:
+            return None
+        cycles=source_cycles[-2:]
+        expression="abs(x0 - x1) <= "+threshold
+        action=_numeric_invoke_action(
+            expression,
+            {
+              "x0":_numeric_result_ref(cycles[0]),
+              "x1":_numeric_result_ref(cycles[1]),
+            },
+        )
+        state["predicate_cycle"]=len(actions)
+        state["guard_failure_label"]=None
+        return {
+          "action":action,
+          "mode":"VERIFIED_NUMERIC_TOLERANCE_PREDICATE",
+          "evidence":{
+            "selected_capability":"numeric.expression.predicate.sympy",
+            "expression":expression,
+            "source_result_cycles":cycles,
+            "result_field":"value",
+          },
+        }
+
+    conditional_mean=re.match(
+        r"^if\\s+.+?,\\s*set\\s+the\\s+.+?\\s+to\\s+their\\s+arithmetic\\s+mean"
+        r"(?:;|,)\\s*otherwise\\s+stop\\s+with\\s+([A-Z][A-Z0-9_]{0,63})$",
+        text,re.IGNORECASE
+    )
+    plain_mean=(
+        re.search(r"\\barithmetic\\s+mean\\b",lower)
+        and re.match(r"^(?:calculate|compute|set|determine)\\b",lower)
+    )
+    if conditional_mean or plain_mean:
+        if len(source_cycles)<2:
+            return None
+        cycles=source_cycles[-2:]
+        predicate_cycle=state.get("predicate_cycle")
+        guard=True
+        failure=None
+        if conditional_mean:
+            if predicate_cycle is None:
+                return None
+            guard=_numeric_result_ref(predicate_cycle,"value")
+            failure=conditional_mean.group(1).upper()
+            state["guard_failure_label"]=failure
+        expression="(x0 + x1) / 2"
+        action=_numeric_invoke_action(
+            expression,
+            {
+              "x0":_numeric_result_ref(cycles[0]),
+              "x1":_numeric_result_ref(cycles[1]),
+            },
+            guard=guard,
+            guard_failure_label=failure,
+        )
+        state["scalar_cycle"]=len(actions)
+        return {
+          "action":action,
+          "mode":"VERIFIED_NUMERIC_ARITHMETIC_MEAN",
+          "evidence":{
+            "selected_capability":"numeric.expression.predicate.sympy",
+            "expression":expression,
+            "source_result_cycles":cycles,
+            "guard_result_cycle":predicate_cycle if conditional_mean else None,
+            "guard_failure_label":failure,
+            "result_field":"value",
+          },
+        }
+
+    formula=re.match(
+        r"^(?:calculate|compute|evaluate)\\s+.+?\\s+using\\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*(.+)$",
+        text,re.IGNORECASE
+    )
+    if formula:
+        lhs=formula.group(1)
+        expression=formula.group(2).strip()
+        try:
+            parsed=ast.parse(expression,mode="eval")
+        except SyntaxError:
+            return None
+        names=sorted({
+            node.id for node in ast.walk(parsed)
+            if isinstance(node,ast.Name) and node.id not in {"abs","min","max"}
+        })
+        scalar_cycle=state.get("scalar_cycle")
+        if len(names)>1 or (names and scalar_cycle is None):
+            return None
+        variables={}
+        if names:
+            variables[names[0]]=_numeric_result_ref(scalar_cycle,"value")
+        predicate_cycle=state.get("predicate_cycle")
+        guard=(
+            _numeric_result_ref(predicate_cycle,"value")
+            if predicate_cycle is not None else True
+        )
+        failure=state.get("guard_failure_label")
+        action=_numeric_invoke_action(
+            expression,variables,
+            guard=guard,
+            guard_failure_label=failure,
+        )
+        cycle=len(actions)
+        state["scalar_cycle"]=cycle
+        state.setdefault("named_scalar_cycles",{})[lhs]=cycle
+        return {
+          "action":action,
+          "mode":"VERIFIED_NUMERIC_EXPLICIT_FORMULA",
+          "evidence":{
+            "selected_capability":"numeric.expression.predicate.sympy",
+            "expression":expression,
+            "bound_symbol":names[0] if names else None,
+            "input_result_cycle":scalar_cycle if names else None,
+            "output_symbol":lhs,
+            "guard_result_cycle":predicate_cycle,
+            "result_field":"value",
+          },
+        }
+
+    threshold=re.match(
+        r"^decide\\s+([A-Z][A-Z0-9_]{0,63})\\s+if\\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\\s+is\\s+at\\s+least\\s+"
+        r"([-+]?(?:(?:\\d+(?:\\.\\d*)?)|(?:\\.\\d+))(?:[eE][-+]?\\d+)?)"
+        r"(?:\\s+[^,;]+)?[,]?\\s+otherwise\\s+([A-Z][A-Z0-9_]{0,63})$",
+        text,re.IGNORECASE
+    )
+    if threshold:
+        true_label=threshold.group(1).upper()
+        symbol=threshold.group(2)
+        limit=_numeric_literal(threshold.group(3))
+        false_label=threshold.group(4).upper()
+        if limit is None:
+            return None
+        named=state.get("named_scalar_cycles") or {}
+        scalar_cycle=named.get(symbol,state.get("scalar_cycle"))
+        if scalar_cycle is None:
+            return None
+        predicate_cycle=state.get("predicate_cycle")
+        guard=(
+            _numeric_result_ref(predicate_cycle,"value")
+            if predicate_cycle is not None else True
+        )
+        expression="x0 >= "+limit
+        action=_numeric_invoke_action(
+            expression,
+            {"x0":_numeric_result_ref(scalar_cycle,"value")},
+            guard=guard,
+            guard_failure_label=state.get("guard_failure_label"),
+            true_label=true_label,
+            false_label=false_label,
+        )
+        state["decision_cycle"]=len(actions)
+        return {
+          "action":action,
+          "mode":"VERIFIED_NUMERIC_THRESHOLD_DECISION",
+          "evidence":{
+            "selected_capability":"numeric.expression.predicate.sympy",
+            "expression":expression,
+            "input_symbol":symbol,
+            "input_result_cycle":scalar_cycle,
+            "true_label":true_label,
+            "false_label":false_label,
+            "result_field":"label",
+          },
+        }
+
+    return None
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -3588,6 +3820,13 @@ def _compile_compound_goal(goal, clauses, registry, root):
     )
     effect_providers={}
     runtime_effect_providers={}
+    numeric_state={
+      "source_cycles":[],
+      "predicate_cycle":None,
+      "scalar_cycle":None,
+      "named_scalar_cycles":{},
+      "guard_failure_label":None,
+    }
     for index,clause in enumerate(clauses):
         if index in consumed_indices:
             continue
@@ -3602,6 +3841,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "mode":"EXTERNAL_JSON_KNOWLEDGE_FETCH",
                 **external_knowledge_fetch["evidence"],
             })
+            numeric_state["source_cycles"].append(len(actions)-1)
             continue
 
         knowledge_assessment=_compile_knowledge_consistency_assessment(clause,context_paths)
@@ -3634,6 +3874,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "mode":"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH",
                 **knowledge_fetch["evidence"],
             })
+            numeric_state["source_cycles"].append(len(actions)-1)
             continue
 
         learned_record=_compile_learned_value_record(clause,compiled_parts)
@@ -4065,6 +4306,19 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"VERIFIED_STRUCTURED_SEMANTIC_EXTRACTION",
                 **semantic_fact["evidence"],
+            })
+            continue
+
+        numeric_clause=_compile_generic_numeric_clause(
+            clause,actions,registry,numeric_state
+        )
+        if numeric_clause is not None:
+            actions.append(numeric_clause["action"])
+            compiled_parts.append({
+                "index":index,
+                "subgoal":clause,
+                "mode":numeric_clause["mode"],
+                **numeric_clause["evidence"],
             })
             continue
 
