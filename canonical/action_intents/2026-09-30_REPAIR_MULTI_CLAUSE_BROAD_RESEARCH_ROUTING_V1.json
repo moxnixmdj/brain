@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-MULTI-CLAUSE-BROAD-RESEARCH-ROUTING-20260930-V1",
+  "status": "AUTHORIZED_REPAIR_AND_VALIDATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "73f8331cddf556af0daece3aa32998ac992981d0",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MULTI_CLAUSE_BROAD_RESEARCH_OBJECTIVE_BYPASSES_QUALIFIED_RESEARCH_FRONTEND_V1",
+  "action_kind": "GENERIC_PARENT_ROUTING_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MULTI_CLAUSE_BROAD_RESEARCH_OBJECTIVE_BYPASSES_QUALIFIED_RESEARCH_FRONTEND_V1::GENERIC_PARENT_ROUTING_REPAIR",
+  "highest_leverage_now": true,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "observed_parent_run_id": 36688193204,
+  "observed_parent_artifact_id": 11084357364,
+  "observed_parent_artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
+  "observed_guard_attempt_id": "c8a9972496fd4f5391995fc51ed15111",
+  "first_causal_gap": "The plain-goal grounding layer only attempted broad-objective decomposition when the entire goal produced exactly one unresolved clause. The fresh HTTP/2 parent goal produced five unresolved clauses, so the qualified open-research frontend was skipped and the runtime incorrectly fell through to generic package acquisition.",
+  "selected_surviving_route": "GENERALIZE_BROAD_DECOMPOSITION_GATE_FROM_SINGLE_UNRESOLVED_CLAUSE_TO_ALL_CLAUSES_UNRESOLVED_WHILE_PRESERVING_GROUNDED_CAPABILITY_PRECEDENCE",
+  "validation_requirements": [
+    "multi-clause broad research objectives route to the qualified broad-objective decomposition",
+    "non-broad multi-clause text remains fail-closed",
+    "any already-grounded clause continues to block whole-goal broad fallback",
+    "no HTTP/2-specific literals or source/value/tool recipe are added",
+    "no replay of the spent HTTP/2 parent task"
+  ],
+  "stop_condition": "Repair and validate only the generic routing condition. Recompute the parent frontier before any new fresh parent execution."
+}
