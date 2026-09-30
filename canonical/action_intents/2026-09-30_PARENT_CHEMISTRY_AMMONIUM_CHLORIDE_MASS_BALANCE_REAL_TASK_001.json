@@ -19,7 +19,8 @@
     "five required model-independent subcapabilities are acquired and inherited",
     "PubChem PUG REST official specification updated 2026-09-15 supports compound property tables and MolecularWeight in JSON",
     "generic answer-blind JSON source preflight is already installed on the public $0 carrier",
-    "task frozen before exact ammonia, hydrogen chloride, or ammonium chloride property endpoints are probed"
+    "task frozen before exact ammonia, hydrogen chloride, or ammonium chloride property endpoints are probed",
+    "Answer-blind exact PubChem source preflight run 36668957399 PASS; artifact 11076597954 sha256:3ca237dee35abf62635b8622437d6a71297e19289c12064ac1658e5636ec9a9a; values_recorded=false"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -235,11 +236,11 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T04:24:00Z",
+        "checked_at_utc": "2026-09-30T04:28:15Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
-        "status": "PENDING_EXACT_SOURCE_PREFLIGHT",
-        "all_required_dependencies_ready": false,
+        "status": "READY",
+        "all_required_dependencies_ready": true,
         "failed_dependencies": [],
         "execution_dependencies": [
           {
@@ -280,18 +281,21 @@
             "required": true,
             "volatility": "VOLATILE",
             "scope": "GLOBAL",
-            "status": "PENDING_PREFLIGHT",
-            "observed_at_utc": null,
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:28:15Z",
             "evidence": [
-              "OFFICIAL_PRIMARY PUG REST docs only; exact new compound endpoints intentionally unprobed before freeze"
+              "DIRECT_PROBE: generic answer-blind source preflight run 36668957399 PASS",
+              "ARTIFACT:11076597954 sha256:3ca237dee35abf62635b8622437d6a71297e19289c12064ac1658e5636ec9a9a",
+              "values_recorded=false; task_executed=false"
             ],
             "evidence_classes": [
+              "DIRECT_PROBE",
               "OFFICIAL_PRIMARY"
             ],
             "evidence_scope": "GLOBAL"
           }
         ],
-        "execution_dependencies_complete": false
+        "execution_dependencies_complete": true
       }
     }
   }
