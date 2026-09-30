@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
   "action_id": "PROMOTE-OPUS55-SUBAGENT-DELEGATION-COORDINATION-20260930-V1",
-  "status": "AUTHORIZED_EXECUTION",
+  "status": "EXECUTED_PASS__SCOPED_COMPONENT_PROMOTED__WHOLE_FAMILY_REMAINS_OPEN",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "3baed7faefcf86d559e8e673d115372e3db2f9a7",
   "capability_target": "SUBAGENT_DELEGATION_AND_COORDINATION",
@@ -25,8 +25,8 @@
     "general_substrate_test": "PASS__FRESH_MECHANICAL_DELEGATION_CAPSULE_REQUIRES_NO_EXTERNAL_COGNITION_SUBSTRATE",
     "specimen_separation_test": "PASS__OPUS_DESCRIPTION_ONLY_DEFINES_TARGET_BEHAVIOR",
     "reexecution_without_rediscovery_test": "PASS_HISTORICALLY__FRESH_INTEGRATED_REVERIFY_PENDING",
-    "brain_configured_verification_test": "PENDING_FRESH_PUBLIC_CAPSULE",
-    "ownership_package_test": "PENDING_PROMOTION_PACKAGE"
+    "brain_configured_verification_test": "PASS_SCOPED_MECHANICAL_COORDINATION",
+    "ownership_package_test": "PASS_SCOPED"
   },
   "reasoning_durability": {
     "receipt": "canonical/reasoning/2026-09-30_PROMOTE_OPUS55_SUBAGENT_COORDINATION_V1.json"
@@ -139,5 +139,14 @@
     "why_selected_route_is_fastest_sufficient": "Every constituent behavior already has Brain-owned implementation or verified evidence. The only unresolved predicate is their integrated delegation/coordination seam, which can be decided in one zero-cost public run.",
     "expected_parent_level_state_change": "If the current Brain-owned task/lease, multi-worker, fan-out/fan-in, and independent-verification mechanisms pass one fresh integrated delegation capsule, promote only the scoped subagent delegation-and-coordination behavior; otherwise preserve zero credit and localize the first failed seam.",
     "stop_condition": "Stop after one fresh integrated delegation capsule and one independent fan-in adjudication. Promote only if two distinct delegated tasks are bound to distinct worker identities, execute successfully, no duplicate ownership/output exists, parent fan-in contains exactly both results, independent checks pass, and incremental spend remains $0."
+  },
+  "execution_result": {
+    "status": "PASS",
+    "verification": "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json",
+    "package": "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json",
+    "reasoning": "canonical/reasoning/2026-09-30_OPUS55_SCOPED_SUBAGENT_COORDINATION_PROMOTION_V1.json",
+    "capability_credit": "SCOPED_COMPONENT_ONLY",
+    "whole_family_promoted": false,
+    "incremental_spend_usd": 0
   }
 }
