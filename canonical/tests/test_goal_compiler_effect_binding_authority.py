@@ -18,6 +18,14 @@ class EffectBindingAuthorityTest(unittest.TestCase):
         self.assertTrue(compiler._contains_effect_result_binding({
             "input_path":{"$effect_result":{"effect":"x.ready","field":"input_path"}}
         }))
+        self.assertTrue(compiler._contains_effect_result_binding({
+            "input_path":{
+                "type":"effect_result",
+                "effect":"x.ready",
+                "field":"input_path",
+                "container":"scalar",
+            }
+        }))
         self.assertFalse(compiler._contains_effect_result_binding({
             "input_path":"canonical/input.json"
         }))
