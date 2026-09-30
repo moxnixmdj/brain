@@ -1,0 +1,290 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MAUNA-FIRST-SPEND-PROVENANCE-AND-FRONTIER-MIRRORS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Correct Mauna Loa first-spend provenance, quarantine the later PR337 execution as replay, preserve the generic broad-objective compile gap, and atomically align hierarchy/queue/target/scoreboard mirrors with zero capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "merged PR347 reconciliation and all four canonical mirrors",
+    "PR317 and PR337 frozen task contents compared field-by-field",
+    "public workflow 36669918546 and artifact 11077637577",
+    "public workflow 36670516407 and artifact 11077861584",
+    "current goal_compiler.py blob 4b61fe911471854ec15c7900816f61e9e55f602e equals the first-spend artifact compiler blob",
+    "stale/wrong-provenance PRs 344, 345, 346, and 348 closed fail-closed"
+  ],
+  "evidence_presence_classification": "EXISTING_PRIMARY_EVIDENCE_PROVENANCE_CONFLICT_AND_CANONICAL_MIRROR_DRIFT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Correct evidence provenance and mirror state only. Do not mutate capability runtime, replay Mauna Loa, increment capability counters, or authorize parent promotion. Stop with route-frontier recomputation as the sole next action.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore a single truthful causal history and one aligned current frontier so all workers optimize the same real blocker.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Correct first-spend identity without discarding the real generic compile-gap observation.",
+      "proxy_goals_deleted": [
+        "treat a renamed task as fresh",
+        "award parent credit",
+        "repair runtime during evidence correction",
+        "let stale queue/scoreboard request another Task A"
+      ],
+      "surviving_necessity": "One canonical provenance chain and aligned mirrors are prerequisites to any safe capability acquisition."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current goal compiler",
+        "domain-free authority/source planner",
+        "grounding/composition/numeric/synthesis capabilities",
+        "fail-closed duplicate/replay controls"
+      ],
+      "external_existing_routes_checked": [
+        "public GitHub Actions run receipts and immutable artifacts for both Mauna executions"
+      ],
+      "capability_work_deleted": [
+        "no new runtime",
+        "no new supplier",
+        "no model cognition",
+        "no task execution"
+      ],
+      "surviving_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The compile gap is generic at the broad-objective semantic formalization boundary; the evidence-history error and mirror split are governance/provenance defects that must be deleted before repair.",
+      "delete_bypass_substitute_options": [
+        "delete false exactly-once attribution to run 36670516407",
+        "quarantine later replay",
+        "reuse earliest immutable receipt",
+        "reuse byte-identical current compiler evidence",
+        "align mirrors without runtime mutation"
+      ],
+      "surviving_causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CORRECT_FIRST_SPEND_AND_ALIGN_MIRRORS",
+        "KEEP_PR347_PROVENANCE",
+        "REPLAY_MAUNA",
+        "PATCH_COMPILER_NOW"
+      ],
+      "losing_routes_reason": "Keeping false provenance violates one-shot truth; replay cannot restore freshness; runtime repair before a clean current-base route race would violate search/reuse-before-repair.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution. Verify task substantive identity from repository bytes, execution ordering and receipts from public workflow artifacts, and causal continuity by exact goal_compiler blob equality."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR347 exactly-once attribution to run 36670516407",
+        "stale queue request to run Task A",
+        "stale scoreboard request to run Task A",
+        "open wrong-provenance reconciliation lanes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "one-shot freshness control",
+        "runtime-derived cognition provenance",
+        "source discovery",
+        "numeric execution",
+        "decision synthesis",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "After correction, run a current-base route frontier for the generic decomposition gap; only after a generic capability is independently qualified may a materially different fresh open-ended task be frozen."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused downloaded PR317 terminal artifact",
+        "reused PR337 terminal receipt",
+        "reused direct task-byte comparison",
+        "reused current compiler blob check"
+      ],
+      "search_stop_decision": "Primary evidence already resolves chronology, task identity, and current causal continuity; more task execution would only contaminate freshness.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main dc38bf8370d692d3f18a5aff446d26933f9dd03a, PR347 state, current compiler blob, and conflicting execution receipts were refreshed immediately before this action."
+    },
+    "routes_considered": [
+      "CORRECT_FIRST_SPEND_AND_ALIGN_MIRRORS",
+      "KEEP_PR347_PROVENANCE",
+      "REPLAY_MAUNA",
+      "PATCH_COMPILER_NOW"
+    ],
+    "deleted_or_bypassed_paths": [
+      "FALSE_EXACTLY_ONCE_ATTRIBUTION",
+      "MAUNA_REPLAY",
+      "TASK_METADATA_RENAME_AS_FRESHNESS",
+      "PREMATURE_RUNTIME_REPAIR",
+      "STALE_FRONTIER_MIRRORS"
+    ],
+    "selected_surviving_route": "CORRECT_FIRST_SPEND_AND_ALIGN_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "It changes no runtime, costs $0, uses existing immutable evidence, restores fail-closed freshness truth, and leaves one precise generic blocker for the next current-base route race.",
+    "expected_parent_level_state_change": "Correct Mauna Loa first-spend provenance, quarantine the later PR337 execution as replay, preserve the generic broad-objective compile gap, and atomically align hierarchy/queue/target/scoreboard mirrors with zero capability credit.",
+    "stop_condition": "Correct evidence provenance and mirror state only. Do not mutate capability runtime, replay Mauna Loa, increment capability counters, or authorize parent promotion. Stop with route-frontier recomputation as the sole next action.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:58:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CORRECT_FIRST_SPEND_AND_ALIGN_MIRRORS",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+          "PR317/PR337 task bytes",
+          "current goal_compiler blob 4b61fe911471854ec15c7900816f61e9e55f602e",
+          "merged PR347 canonical state"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions run 36669918546 + artifact 11077637577",
+          "GitHub Actions run 36670516407 + artifact 11077861584"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [
+        {
+          "route": "CORRECT_FIRST_SPEND_AND_ALIGN_MIRRORS",
+          "evidence": [
+            "earliest producer run predates the later renamed-task run",
+            "substantive task bodies are identical",
+            "current compiler bytes equal the first-spend compiler bytes"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: run 36669918546",
+            "DIRECT_PROBE: run 36670516407",
+            "BRAIN_INHERITED: current main dc38bf8370d692d3f18a5aff446d26933f9dd03a"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Only route consistent with chronology and freshness.",
+            "CAPABILITY_STRENGTH": "Preserves the generic causal observation without inflating capability.",
+            "WALL_CLOCK": "No execution or implementation.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Immutable receipts plus exact byte identity.",
+            "VERIFIABILITY": "Direct repository and workflow evidence."
+          }
+        },
+        {
+          "route": "KEEP_PR347_PROVENANCE",
+          "evidence": [
+            "PR347 names run 36670516407 as exactly-once"
+          ],
+          "qualification_evidence": [
+            "contradicted by earlier run 36669918546"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "False chronology.",
+            "CAPABILITY_STRENGTH": "Would contaminate freshness accounting.",
+            "WALL_CLOCK": "Zero work but wrong.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Contradicted by primary evidence.",
+            "VERIFIABILITY": "Fails direct comparison."
+          }
+        }
+      ],
+      "negative_search_summary": "No new capability route is relevant to this provenance-only correction; primary evidence fully resolves the dispute.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "CORRECT_FIRST_SPEND_AND_ALIGN_MIRRORS",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:58:00Z",
+        "max_age_hours": 2,
+        "selected_route": "CORRECT_FIRST_SPEND_AND_ALIGN_MIRRORS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "IMMUTABLE_PUBLIC_WORKFLOW_AND_REPOSITORY_EVIDENCE",
+            "kind": "EVIDENCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:58:00Z",
+            "evidence": [
+              "run 36669918546 artifact 11077637577",
+              "run 36670516407 artifact 11077861584",
+              "Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  },
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "SAME_TARGET__PROVENANCE_AND_MIRROR_CORRECTION_ONLY",
+    "evidence": [
+      "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_PROVENANCE_AND_FRONTIER_MIRROR_CORRECTION_20260930_V1.json"
+    ]
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared execution chronology, task bytes, and current compiler blob; later run is a replay."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [],
+    "independent_verification_evidence_paths": [],
+    "capability_package_path": null,
+    "fresh_reuse_evidence_path": null,
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": false,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": null,
+    "producer_execution_suppliers": [],
+    "independent_verifier_suppliers": []
+  }
+}
