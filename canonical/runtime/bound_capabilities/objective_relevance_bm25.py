@@ -97,6 +97,164 @@ def _top_candidate_admission(query_tokens,matched_terms):
         "verified":bool(qn and mn>=required),
     }
 
+
+_ROLE_CONTEXT_GENERIC={
+    "under","comparable","condition","conditions","bulk","material","materials",
+    "maximum","minimum","default","initial","permitted","complete","observed",
+    "measured","sample","samples",
+}
+_NUMERIC_START=re.compile(r"^\s*[-+]?(?:\d|\.\d)")
+_ANAPHORIC_OF=re.compile(r"^(?:that|those)\s+(?:of|for)\s+(.+)$",re.I)
+_PHRASE_OF=re.compile(r"^(?:the\s+)?(.+?)\s+(?:of|for)\s+(.+)$",re.I)
+
+def _load_relation_parser():
+    path=pathlib.Path(__file__).resolve().with_name("objective_claim_operand_binding.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_objective_claim_operand_binding_for_relevance",path
+    )
+    if spec is None or spec.loader is None:
+        return None
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    parser=getattr(module,"_parse_objective",None)
+    return parser if callable(parser) else None
+
+def _comparison_role_signature(objective):
+    parser=_load_relation_parser()
+    if parser is None:
+        return None
+    try:
+        parsed,reason=parser(objective)
+    except Exception:
+        return None
+    if reason or not isinstance(parsed,dict) or parsed.get("mode")!="NUMERIC_RELATION":
+        return None
+    left=_canon(parsed.get("left_entity"))
+    right=_canon(parsed.get("right_entity"))
+    if not left or not right or _NUMERIC_START.match(right):
+        # Literal-threshold comparisons are not entity-vs-entity source roles.
+        return None
+
+    left_tokens=_tokens(left)
+    right_tokens=_tokens(right)
+    if not left_tokens or not right_tokens:
+        return None
+
+    property_tokens=[]
+    left_operand=list(left_tokens)
+    right_operand=list(right_tokens)
+
+    right_anaphor=_ANAPHORIC_OF.match(right)
+    left_of=_PHRASE_OF.match(left)
+    if right_anaphor and left_of:
+        property_tokens=_tokens(left_of.group(1))
+        left_operand=_tokens(left_of.group(2))
+        right_operand=_tokens(right_anaphor.group(1))
+    else:
+        left_of=_PHRASE_OF.match(left)
+        right_of=_PHRASE_OF.match(right)
+        if left_of and right_of:
+            lp=_tokens(left_of.group(1))
+            rp=_tokens(right_of.group(1))
+            rps=set(rp)
+            common=[x for x in lp if x in rps]
+            if common:
+                property_tokens=common
+                left_operand=_tokens(left_of.group(2))
+                right_operand=_tokens(right_of.group(2))
+        if not property_tokens:
+            rset=set(right_tokens)
+            common=[x for x in left_tokens if x in rset]
+            if common:
+                property_tokens=common
+                common_set=set(common)
+                left_operand=[x for x in left_tokens if x not in common_set]
+                right_operand=[x for x in right_tokens if x not in common_set]
+
+    if not left_operand or not right_operand:
+        return None
+    return {
+        "method":"BOUNDED_EXPLICIT_COMPARISON_LEXICAL_ROLE_SIGNATURE_V1",
+        "operator":parsed.get("operator"),
+        "property_tokens":property_tokens,
+        "property_head":property_tokens[-1] if property_tokens else None,
+        "left_operand_tokens":left_operand,
+        "right_operand_tokens":right_operand,
+        "semantic_entailment_status":"UNVERIFIED",
+    }
+
+def _operand_coverage(candidate_tokens,operand_tokens):
+    tokens=[
+        x for x in operand_tokens
+        if x not in _ROLE_CONTEXT_GENERIC and x not in GENERIC
+    ]
+    if not tokens:
+        tokens=list(operand_tokens)
+    cset=set(candidate_tokens)
+    matched=[x for x in tokens if x in cset]
+    discriminators=[x for x in tokens if any(ch.isdigit() for ch in x)]
+    lexical=[x for x in tokens if x not in discriminators]
+    matched_discriminators=[x for x in discriminators if x in cset]
+    matched_lexical=[x for x in lexical if x in cset]
+    if discriminators:
+        required_lexical=1 if lexical else 0
+        verified=(
+            len(matched_discriminators)==len(discriminators)
+            and len(matched_lexical)>=required_lexical
+        )
+        method="ALL_EXPLICIT_ALPHANUMERIC_DISCRIMINATORS_PLUS_LEXICAL_ANCHOR"
+    else:
+        required=1 if len(lexical)<=1 else 2
+        verified=len(matched_lexical)>=required
+        required_lexical=required
+        method="BOUNDED_LEXICAL_ENTITY_ANCHOR"
+    return {
+        "verified":bool(verified),
+        "method":method,
+        "tokens":tokens,
+        "matched_tokens":matched,
+        "discriminator_tokens":discriminators,
+        "matched_discriminator_tokens":matched_discriminators,
+        "required_lexical_matches":required_lexical,
+        "matched_lexical_tokens":matched_lexical,
+    }
+
+def _candidate_role_coverage(candidate,signature):
+    candidate_tokens=_tokens(_candidate_text(candidate))
+    cset=set(candidate_tokens)
+    property_tokens=list(signature.get("property_tokens") or [])
+    property_matches=[x for x in property_tokens if x in cset]
+    property_head=signature.get("property_head")
+    if property_tokens:
+        property_required=1 if len(property_tokens)==1 else 2
+        property_verified=(
+            property_head in cset
+            and len(property_matches)>=property_required
+        )
+    else:
+        property_required=0
+        property_verified=True
+
+    left=_operand_coverage(candidate_tokens,signature["left_operand_tokens"])
+    right=_operand_coverage(candidate_tokens,signature["right_operand_tokens"])
+    return {
+        "method":"DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_V1",
+        "verified":bool(property_verified and (left["verified"] or right["verified"])),
+        "property":{
+            "tokens":property_tokens,
+            "head":property_head,
+            "matched_tokens":property_matches,
+            "required_matches":property_required,
+            "verified":bool(property_verified),
+        },
+        "left_operand":left,
+        "right_operand":right,
+        "matched_operand_roles":[
+            role for role,row in (("left",left),("right",right)) if row["verified"]
+        ],
+        "semantic_entailment_status":"UNVERIFIED",
+    }
+
 def rank(objective,candidates,limit=None):
     objective=_canon(objective)
     base={
@@ -142,8 +300,46 @@ def rank(objective,candidates,limit=None):
             "query_tokens":q,
             "ranked_candidates":rows,
         }
-    top=positive[0]
-    admission=_top_candidate_admission(q,top.get("matched_terms") or [])
+
+    role_signature=_comparison_role_signature(objective)
+    if role_signature is not None:
+        for row in rows:
+            row["decision_role_coverage"]=_candidate_role_coverage(
+                row["candidate"],role_signature
+            )
+        admitted=[
+            x for x in positive
+            if (x.get("decision_role_coverage") or {}).get("verified") is True
+        ]
+        if not admitted:
+            return {
+                **base,
+                "status":"RELEVANCE_UNRESOLVED",
+                "reason":"NO_DECISION_ROLE_COVERAGE_CANDIDATE",
+                "query_tokens":q,
+                "decision_role_signature":role_signature,
+                "ranked_candidates":rows,
+            }
+        top=admitted[0]
+    else:
+        admitted=positive
+        top=positive[0]
+
+    token_admission=_top_candidate_admission(q,top.get("matched_terms") or [])
+    if role_signature is not None:
+        role_coverage=top["decision_role_coverage"]
+        admission={
+            **token_admission,
+            "method":"FOCUSED_QUERY_TOKEN_PLUS_DECISION_ROLE_COVERAGE_V1",
+            "token_coverage_verified":token_admission.get("verified") is True,
+            "decision_role_coverage":role_coverage,
+            "verified":bool(
+                token_admission.get("verified") is True
+                and role_coverage.get("verified") is True
+            ),
+        }
+    else:
+        admission=token_admission
     if limit is not None:
         rows=rows[:max(1,min(int(limit),len(rows)))]
     return {
@@ -154,10 +350,16 @@ def rank(objective,candidates,limit=None):
         "query_focus":focus,
         "candidate_count":len(candidates),
         "positive_relevance_count":len(positive),
+        "decision_role_signature":role_signature,
+        "decision_role_admitted_candidate_count":len(admitted),
         "ranked_candidates":rows,
         "top_candidate_original_index":top["original_index"],
         "top_candidate_admission":admission,
-        "admission_claim_scope":"BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY",
+        "admission_claim_scope":(
+            "BOUNDED_FOCUSED_QUERY_TOKEN_PLUS_EXPLICIT_COMPARISON_LEXICAL_ROLE_COVERAGE_ONLY"
+            if role_signature is not None else
+            "BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY"
+        ),
         "output_verified":True,
     }
 
