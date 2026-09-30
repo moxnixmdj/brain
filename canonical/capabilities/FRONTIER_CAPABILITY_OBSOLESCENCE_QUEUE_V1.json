@@ -73,17 +73,17 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "parent_frontier_capability": null,
-    "objective": "Internalize existing equal-or-better capability mechanisms into Brain. External models/services are specimens, not owned capability implementations.",
+    "selected_capability": "PARALLEL_OPUS55_INTERNALIZATION__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK",
+    "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "objective": "In parallel, find/internalize a stronger existing advanced-coding mechanism and directly falsify/verify the Brain-owned Stirrup professional-work route.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+    "exact_blocker": "PARALLEL_RESIDUAL__ADVANCED_AGENTIC_CODING_NEEDS_STRONGER_EXISTING_INTERNALIZABLE_ROUTE__PROFESSIONAL_WORK_STIRRUP_ROUTE_NEEDS_DIRECT_VERIFICATION",
     "evidence_paths": [
-      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
-      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+      "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+      "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+      "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
     ],
-    "next_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+    "next_action": "PARALLEL__SEARCH_AND_INTERNALIZE_STRONGER_EXISTING_CODING_CONFIGURATION__RUN_CHEAP_CONTAMINATION_CONTROLLED_STIRRUP_PROFESSIONAL_WORK_FALSIFICATION__ZERO_CREDIT_UNTIL_PASS",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0
   },
@@ -357,7 +357,7 @@
     "opus_5_5_or_better_required": true,
     "permanent_capability_package_required": true
   },
-  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+  "next_progress_event_target": "PARALLEL__SEARCH_AND_INTERNALIZE_STRONGER_EXISTING_CODING_CONFIGURATION__RUN_CHEAP_CONTAMINATION_CONTROLLED_STIRRUP_PROFESSIONAL_WORK_FALSIFICATION__ZERO_CREDIT_UNTIL_PASS",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -368,14 +368,10 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "ADVANCED_AGENTIC_CODING_REUSABLE_MECHANISM_INTERNALIZED__VERIFICATION_PENDING",
-    "blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
-    "evidence_paths": [
-      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
-    ],
-    "parent_capability_promoted": false,
-    "whole_envelope_complete": false,
-    "counter_delta": 0
+    "status": "SUPREME_ROUTE_STOPPED__STIRRUP_INTERNALIZED__PARALLEL_LANES_ACTIVE",
+    "blocker": "PARALLEL_RESIDUAL__ADVANCED_AGENTIC_CODING_NEEDS_STRONGER_EXISTING_INTERNALIZABLE_ROUTE__PROFESSIONAL_WORK_STIRRUP_ROUTE_NEEDS_DIRECT_VERIFICATION",
+    "counter_delta": 0,
+    "whole_envelope_complete": false
   },
   "last_real_output_event": {
     "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_CORRECTED_20260930",
