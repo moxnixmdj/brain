@@ -5623,6 +5623,9 @@ def _run_goal_unstamped(step, mission):
                   "provenance_verified_candidate_count":int(
                       source_frontend.get("provenance_verified_candidate_count") or 0
                   ),
+                  "retrieval_provenance_verified_candidate_count":int(
+                      source_frontend.get("retrieval_provenance_verified_candidate_count") or 0
+                  ),
                   "authority_identity_verified_candidate_count":int(
                       source_frontend.get("authority_identity_verified_candidate_count") or 0
                   ),
@@ -5649,15 +5652,15 @@ def _run_goal_unstamped(step, mission):
                             "EVIDENCE_EXTRACTION_REQUIRED:"
                             +json.dumps(payload,sort_keys=True)
                         ) from e
-                    if int(source_frontend.get("authority_identity_verified_candidate_count") or 0)>0:
+                    if int(source_frontend.get("retrieval_provenance_verified_candidate_count") or 0)>0:
                         raise Blocker(
-                            "OPEN_ENDED_RESEARCH_SOURCE_IDENTITY_READY__"
-                            "OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
+                            "OPEN_ENDED_RESEARCH_RETRIEVAL_PROVENANCE_READY__"
+                            "OBJECTIVE_RELEVANCE_OR_RELEVANT_SOURCE_COVERAGE_REQUIRED:"
                             +json.dumps(payload,sort_keys=True)
                         ) from e
                     raise Blocker(
                         "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_READY__"
-                        "AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
+                        "LIVE_RETRIEVAL_PROVENANCE_REQUIRED:"
                         +json.dumps(payload,sort_keys=True)
                     ) from e
                 raise Blocker(
