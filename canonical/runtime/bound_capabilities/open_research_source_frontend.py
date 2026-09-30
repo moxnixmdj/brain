@@ -91,7 +91,8 @@ def run(objective,decomposition,limit=12,timeout=15):
         }
 
     candidates=[x["candidate"] for x in retrieval_verified]
-    relevance=relevance_ranker.rank(objective,candidates)
+    relevance_query=_canon(discovered.get("query")) or objective
+    relevance=relevance_ranker.rank(relevance_query,candidates)
     relevance_ready=(
         relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
         and relevance.get("output_verified") is True
@@ -206,8 +207,9 @@ def run(objective,decomposition,limit=12,timeout=15):
             "relevance":relevance,
             "candidate":selected_item["candidate"] if selected_item else None,
         }],
+        "relevance_query":relevance_query,
         "relevance_verified_candidate_count":1 if relevance_ready else 0,
-        "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_OBJECTIVE_RELEVANCE_ONLY",
+        "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_RELEVANCE_TO_DECISION_CLAUSE_QUERY_ONLY",
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
         "claim_relation_evaluations":claim_relation_evaluations,
