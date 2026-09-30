@@ -26,17 +26,18 @@
   "orthogonal_recurrence_count": 2,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
+  "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass, including numeric-threshold compatibility; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "candidate_blobs": {
-    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "4a0d49386c3c1410a09d847fddd9772545ba0095",
+    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "3036734a9f63945a7b76a5ca7cac86618fbc3677",
     "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "0abb5225fe9fba2443f2df46b2e41bd1c7dd7436",
     "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": "48fd058430d8d361fc75beced567c7b6d1166531",
-    "canonical/tests/test_decision_role_relevance_admission.py": "2deabf08cad9476afd3467edcf7db5224927488b",
-    "canonical/runtime/bound_capabilities/research_query_focus.py": "5403e1dc05716fcfc4f9a91b4534f55dc547eb7f"
+    "canonical/tests/test_decision_role_relevance_admission.py": "dcfd4bf6da7a7ef01d1f21dff541d9b79b3c8f26",
+    "canonical/runtime/bound_capabilities/research_query_focus.py": "5403e1dc05716fcfc4f9a91b4534f55dc547eb7f",
+    "canonical/tests/test_objective_relevance_bm25.py": "a4736194a063d05d60f0fc3ca13314956cb5e3de"
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
@@ -50,7 +51,8 @@
         "improve BM25 score quality for its own sake",
         "repair downstream metadata refinement before the upstream selection defect",
         "add a source whitelist or materials-specific literals",
-        "introduce a model reranker"
+        "introduce a model reranker",
+        "apply entity-role gating to literal numeric-threshold comparisons that are outside the bounded entity-vs-entity role contract"
       ],
       "surviving_necessity": "The guarded Task C artifact proves aggregate lexical coverage can authorize a wrong-property/wrong-operand source even when a decision-relevant source is already available."
     },
@@ -59,7 +61,8 @@
         "objective_relevance_bm25.py deterministic BM25 ranking",
         "research_query_focus.py deterministic decision-subject query focus",
         "objective_claim_operand_binding.py independently qualified bounded explicit-comparison parser",
-        "Task C initial discovery/provenance evidence containing both the rejected NBS 304 thermal-conductivity record and selected ignition/302 record"
+        "Task C initial discovery/provenance evidence containing both the rejected NBS 304 thermal-conductivity record and selected ignition/302 record",
+        "threshold-safe PR549 candidate 85a572980596f50c18ea6645b0a72b3681185c14"
       ],
       "external_existing_routes_checked": [
         "scikit-learn 1.9.1 TF-IDF/cosine similarity",
@@ -109,7 +112,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "A non-parent exact-byte qualification is required because the spent Materials Task C cannot be replayed. Qualification must include fresh cross-domain adversaries, wrong-property/wrong-operand decoys, single-operand evidence, protocol identifiers, and legacy noncomparison behavior."
+      "synthetic_verification_necessity": "A non-parent exact-byte qualification is required because the spent Materials Task C cannot be replayed. Qualification must include fresh cross-domain adversaries, wrong-property/wrong-operand decoys, correct single-operand evidence, protocol identifiers, numeric-threshold compatibility, and legacy noncomparison behavior."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
@@ -154,7 +157,7 @@
     "selected_surviving_route": "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
     "why_selected_route_is_fastest_sufficient": "It reuses already-qualified parsing and incumbent ranking, adds only the missing bounded admission predicate, needs no package or model, and can be independently qualified without consuming another parent task.",
     "expected_parent_level_state_change": "QUALIFY_MODEL_INDEPENDENT_DECISION_ROLE_AWARE_RELEVANCE_ADMISSION__NO_PARENT_CREDIT_UNTIL_FRESH_REUSE",
-    "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
+    "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass, including numeric-threshold compatibility; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T10:10:00Z",
@@ -375,6 +378,13 @@
       }
     }
   },
-  "supersedes_frozen_pr": 548,
-  "supersession_reason": "PR548 exact code/test bytes preserved; abbreviated pre-V4 authority closed so the deterministic blocker lease has one current owner."
+  "supersedes_frozen_pr": 549,
+  "supersession_reason": "PR549 threshold-safe code/test bytes preserved exactly; abbreviated authority closed so the blocker lease has one V4 owner.",
+  "implementation_summary": {
+    "new_capability": "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py",
+    "changed_capability": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+    "inherited_parser": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+    "authored_test": "canonical/tests/test_decision_role_relevance_admission.py",
+    "behavior": "Rank by incumbent BM25, but for bounded entity-vs-entity explicit comparisons require deterministic decision-property plus at least one requested operand identity; literal numeric-threshold and unsupported shapes remain NOT_APPLICABLE to the role gate and preserve incumbent behavior."
+  }
 }
