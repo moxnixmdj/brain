@@ -1,0 +1,358 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-NUMERIC-EXPRESSION-PREDICATE-SYMPY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and controller-bind a generic model-independent typed numeric-expression/predicate capability by reusing the already-verified SymPy 1.14 route; independently qualify the missing arithmetic/relation classes and preserve a fresh non-geophysics reuse path. Do not promote the broad parent capability or replay geophysics under this intent.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json localizes the first parent failure to an unbound numeric relation/computation capability and forbids geophysics replay",
+    "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1.json records SymPy 1.14.0 at 12/12 exact correctness and $0",
+    "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json records independent Wolfram verification of the existing symbolic route",
+    "public verification run 36662597415 completed successfully on 2026-09-30 and directly exercised SymPy 1.14.0 tolerance comparison, bounded exponential energy evaluation, and threshold labeling",
+    "stale branch capability/numeric-expression-predicate-route-qualification-20260930 contains only a candidate generic capability definition and is 20 commits behind current main; its concept may be reused but its base is not authoritative",
+    "current SymPy 1.14 documentation supports numerical evaluation, relations, and inequality solving; simpleeval 1.0.8 and asteval 1.0.10 were checked as challenger routes"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PRESENT_BUT_NOT_CONTROLLER_BOUND",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only the smallest generic typed controller binding around SymPy needed for bounded scalar arithmetic, bounded exponentiation, comparisons, and caller-supplied predicate labels. Validate it on a frozen generic suite plus producer-independent recomputation and one materially distinct non-geophysics fresh reuse. Stop immediately on insufficiency; do not replay the spent geophysics task and do not add another evaluator or model route unless this selected route is falsified.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "6f2c98a160bb0b954071fbcc22a0130b2bad2906",
+    "real_outcome": "Turn Brain's already-proven deterministic SymPy supplier into a reusable controller-bound numeric relation/computation capability so fetched typed numeric evidence can be compared, combined, exponentiated within bounds, thresholded, and carried forward with explicit provenance without model cognition.",
+    "required_capability": "MODEL_INDEPENDENT_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION_V1",
+    "obs_goal": {
+      "real_outcome": "Turn Brain's already-proven deterministic SymPy supplier into a reusable controller-bound numeric relation/computation capability so fetched typed numeric evidence can be compared, combined, exponentiated within bounds, thresholded, and carried forward with explicit provenance without model cognition.",
+      "proxy_goals_deleted": [
+        "replay the spent geophysics task",
+        "qualify another model",
+        "add a new CAS",
+        "adopt an agent framework",
+        "solve only the earthquake formula with a task-specific script"
+      ],
+      "surviving_necessity": "The parent cannot progress until typed numeric relations and formulas are reachable as a verified bound capability."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "EXACT_SYMBOLIC_COMPUTATION_V1 SymPy 1.14.0 producer route",
+        "independent Wolfram adjudication of the existing exact-symbolic route",
+        "current bound capability registry",
+        "current model-independent grounding/composition/planning stack",
+        "stale candidate definition MODEL_INDEPENDENT_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION_V1"
+      ],
+      "external_existing_routes_checked": [
+        "SymPy 1.14.0 official numeric evaluation and relational APIs",
+        "simpleeval 1.0.8 restricted expression evaluator",
+        "asteval 1.0.10 restricted interpreter",
+        "stdlib ast/operator evaluator as a build-last route"
+      ],
+      "capability_work_deleted": [
+        "No new symbolic engine",
+        "No model supplier",
+        "No arbitrary Python eval/exec",
+        "No geophysics-specific formula adapter",
+        "No generic interpreter broader than the required numeric surface"
+      ],
+      "surviving_gap": "The verified SymPy supplier is not represented as a safe typed VERIFIED_BOUND_CAPABILITY with controller-readable proposal bindings and an independent qualification package for the new numeric relation/formula envelope."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific controller reachability gap around an already-existing deterministic mathematical supplier, plus qualification of the exact new bounded operation envelope.",
+      "delete_bypass_substitute_options": [
+        "DELETE the blocker: impossible because the parent task stopped exactly at numeric relation reachability",
+        "BYPASS with a one-off geophysics script: rejected because it cannot earn reusable capability credit and replay is forbidden",
+        "REUSE SymPy 1.14.0 behind a small safe typed adapter: survives",
+        "SUBSTITUTE simpleeval 1.0.8: unnecessary new dependency and weaker exact-symbolic provenance",
+        "SUBSTITUTE asteval 1.0.10: broader interpreter surface than needed and explicitly safe(ish)",
+        "BUILD stdlib AST evaluator: build-last and dominated while existing SymPy reuse is sufficient"
+      ],
+      "surviving_causal_blocker": "EXISTING_VERIFIED_SYMPY_ROUTE_LACKS_SAFE_TYPED_CONTROLLER_BINDING_FOR_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_SYMPY_1_14_WITH_MINIMAL_TYPED_BOUND_CAPABILITY_ADAPTER",
+        "SUBSTITUTE_SIMPLEEVAL_1_0_8",
+        "SUBSTITUTE_ASTEVAL_1_0_10",
+        "BUILD_STDLIB_AST_OPERATOR_EVALUATOR"
+      ],
+      "losing_routes_reason": "SymPy is already inherited, version-pinned, independently adjudicated, and freshly proven on the exact missing relation/formula classes. simpleeval and asteval add new supplier dependencies and larger or weaker trust surfaces; a new stdlib evaluator duplicates existing mathematical machinery.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A frozen generic numeric suite is needed to qualify the typed adapter independently of the spent geophysics task. The producer result must be recomputed by an implementation that does not import the new adapter, and security-negative cases must prove arbitrary code/import/attribute access are unreachable. Then one materially distinct non-geophysics fresh reuse must pass before parent return."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "unbound ad-hoc exact symbolic routing for covered scalar numeric clauses",
+        "future search for new numeric evaluators inside this bounded envelope",
+        "task-specific scientific arithmetic patches"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "numeric tolerance comparison",
+        "bounded scalar arithmetic",
+        "bounded exponentiation",
+        "numeric threshold predicate",
+        "caller-supplied true/false label mapping"
+      ],
+      "fresh_reuse_plan": "After generic qualification, run one materially distinct non-geophysics task that consumes typed numeric values through the same controller-bound capability without changing the adapter. Only then return to the parent frontier; never replay the spent geophysics task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused canonical geophysics falsification instead of re-diagnosing it",
+        "Reused existing SymPy exact-symbolic evidence and Wolfram adjudication",
+        "Reused public SymPy preflight run 36662597415 instead of launching another probe",
+        "Rejected stale candidate branch as authority because it is 20 commits behind main"
+      ],
+      "search_stop_decision": "Search can stop because an inherited zero-cost supplier already passed the old exact suite, independent verification, and a fresh live probe on the exact missing operation classes. Remaining work is controller binding, not supplier discovery.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "The challenger frontier was refreshed on 2026-09-30 against current SymPy docs plus current simpleeval and asteval releases, and the selected route received a direct public-runner preflight minutes before this current-base OBS."
+    },
+    "routes_considered": [
+      "REUSE_SYMPY_1_14_WITH_MINIMAL_TYPED_BOUND_CAPABILITY_ADAPTER",
+      "SUBSTITUTE_SIMPLEEVAL_1_0_8",
+      "SUBSTITUTE_ASTEVAL_1_0_10",
+      "BUILD_STDLIB_AST_OPERATOR_EVALUATOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "GEOPHYSICS_REPLAY",
+      "MODEL_COGNITION",
+      "NEW_CAS",
+      "GENERIC_AGENT_FRAMEWORK",
+      "TASK_SPECIFIC_SEISMIC_FORMULA_PATCH"
+    ],
+    "selected_surviving_route": "REUSE_SYMPY_1_14_WITH_MINIMAL_TYPED_BOUND_CAPABILITY_ADAPTER",
+    "why_selected_route_is_fastest_sufficient": "SymPy 1.14.0 is already integrated as a verified deterministic supplier, reached 12/12 exact correctness with independent Wolfram adjudication, and a fresh current public probe proved the exact missing tolerance, exponential, and threshold operation classes. Binding that route removes only the actual reachability gap and avoids new dependencies or duplicated evaluators.",
+    "expected_parent_level_state_change": "Acquire and controller-bind a generic model-independent typed numeric-expression/predicate capability by reusing the already-verified SymPy 1.14 route; independently qualify the missing arithmetic/relation classes and preserve a fresh non-geophysics reuse path. Do not promote the broad parent capability or replay geophysics under this intent.",
+    "stop_condition": "Implement only the smallest generic typed controller binding around SymPy needed for bounded scalar arithmetic, bounded exponentiation, comparisons, and caller-supplied predicate labels. Validate it on a frozen generic suite plus producer-independent recomputation and one materially distinct non-geophysics fresh reuse. Stop immediately on insufficiency; do not replay the spent geophysics task and do not add another evaluator or model route unless this selected route is falsified.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:04:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "EXISTING_UNBOUND_SYMPY_1_14_DETERMINISTIC_ROUTE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1.json",
+          "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+          "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+          "public run 36662597415 Probe SymPy 1.14 Current PASS"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "SymPy 1.14 official Numerical Evaluation documentation",
+          "SymPy 1.14 official Inequality Solvers documentation",
+          "SymPy 1.14 official Core Relational documentation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI simpleeval 1.0.8 released 2026-09-12",
+          "PyPI asteval 1.0.10 released 2026-08-21",
+          "SymPy 1.14.0 exact package materialized successfully in public run 36662597415"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh route search compared restricted expression evaluators, restricted interpreters, existing CAS reuse, and a new stdlib evaluator; no challenger dominated inherited SymPy on time-to-verified-capability."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent typed scalar arithmetic bounded exponentiation numeric comparison predicate label deterministic"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SymPy simpleeval asteval restricted numeric expression evaluator current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing CAS safe typed adapter versus restricted interpreter versus stdlib AST evaluator"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 latest SymPy simpleeval asteval releases restricted expression evaluation"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_SYMPY_1_14_WITH_MINIMAL_TYPED_BOUND_CAPABILITY_ADAPTER",
+          "evidence": [
+            "EXACT_SYMBOLIC_COMPUTATION_V1: SymPy 1.14.0 12/12 exact suite PASS",
+            "Independent Wolfram adjudication PASS",
+            "Public run 36662597415 current SymPy 1.14 probe PASS on tolerance, exponential energy formula, threshold label"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: public run 36662597415",
+            "INDEPENDENT_VERIFIER: EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION",
+            "OFFICIAL_PRIMARY: SymPy 1.14 numerical and relational documentation"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Existing route reached the exact-correctness ceiling on its frozen symbolic suite and freshly passed the specific missing operation classes.",
+            "CAPABILITY_STRENGTH": "Supports exact/symbolic arithmetic, relations, controlled numerical evaluation, and the bounded operations needed by the target capability.",
+            "WALL_CLOCK": "Only a small controller adapter/binding is missing; no supplier installation research or framework integration is needed.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Already executed historically and passed a fresh current public probe.",
+            "VERIFIABILITY": "Producer can be checked by independent stdlib/decimal arithmetic for the bounded generic suite; historical route also has independent Wolfram adjudication."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_SIMPLEEVAL_1_0_8",
+          "evidence": [
+            "PyPI simpleeval 1.0.8 is current and provides restricted AST expression evaluation.",
+            "Project documentation describes basic protection and configurable operators/functions."
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY: PyPI simpleeval 1.0.8",
+            "OFFICIAL_PRIMARY: danthedeckie/simpleeval project documentation"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Suitable for scalar expressions but lacks Brain's existing independent exact-symbolic adjudication.",
+            "CAPABILITY_STRENGTH": "Sufficient for many target expressions, but narrower mathematical provenance than SymPy.",
+            "WALL_CLOCK": "Requires a new dependency integration and qualification package.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Production/stable package, but not yet exercised in Brain.",
+            "VERIFIABILITY": "Verifiable, but would duplicate qualification work already earned for SymPy."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_ASTEVAL_1_0_10",
+          "evidence": [
+            "PyPI asteval 1.0.10 is current.",
+            "Project documentation describes a restricted but broader Python interpreter and labels it safe(ish)."
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY: PyPI asteval 1.0.10",
+            "OFFICIAL_PRIMARY: lmfit/asteval project documentation"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can evaluate numerical expressions but is not superior to the already-proven SymPy route.",
+            "CAPABILITY_STRENGTH": "Broader scripting surface than required.",
+            "WALL_CLOCK": "New dependency and a larger security qualification surface make it slower to trusted deployment.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Maintained, but not currently inherited by Brain.",
+            "VERIFIABILITY": "Broader interpreter semantics increase the negative-security surface without adding needed capability."
+          }
+        }
+      ],
+      "negative_search_summary": "No fresh challenger dominates inherited SymPy on correctness evidence, integration wall-clock, security surface, or verification cost. Building a new stdlib evaluator is also dominated by reuse until SymPy binding is falsified.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_SYMPY_1_14_WITH_MINIMAL_TYPED_BOUND_CAPABILITY_ADAPTER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:03:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_SYMPY_1_14_WITH_MINIMAL_TYPED_BOUND_CAPABILITY_ADAPTER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:02:29Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36662597415 started on ubuntu-24.04, installed SymPy 1.14.0, executed the qualification expressions, and completed successfully."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "SYMPY_1_14_0",
+            "kind": "PACKAGE_REGISTRY",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:02:29Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36662597415 materialized sympy==1.14.0 and verified sp.__version__ == 1.14.0",
+              "BRAIN_INHERITED: EXACT_SYMBOLIC_COMPUTATION_V1 historical exact suite and adjudication"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "EXISTING_SYMPY_EXACT_SYMBOLIC_ROUTE_CODE",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:04:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: canonical/obsolescence/run_exact_symbolic_v1.py",
+              "BRAIN_INHERITED: EXACT_SYMBOLIC_COMPUTATION_V1 status OBSOLETE_VERIFIED"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
