@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import importlib.util
+import json
 import os
 import pathlib
 import sys
@@ -139,6 +140,26 @@ class MistakeImmunityGuardTests(unittest.TestCase):
         finally:
             guard.load_at_ref=old_ref
             guard.load=old_load
+
+
+    def test_canonical_frontier_mirrors_are_synchronized(self):
+        pointer=json.loads((ROOT/"CANONICAL_POINTER.json").read_text(encoding="utf-8"))
+        hierarchy=json.loads((ROOT/"governance"/"ACTIVE_GOAL_HIERARCHY_V1.json").read_text(encoding="utf-8"))
+        queue=json.loads((ROOT/"capabilities"/"FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json").read_text(encoding="utf-8"))
+        scoreboard=json.loads((ROOT/"governance"/"REAL_OUTPUT_SCOREBOARD_V1.json").read_text(encoding="utf-8"))
+
+        current=pointer.get("current_frontier") or {}
+        immediate=queue.get("immediate_frontier") or {}
+        accounting=scoreboard.get("active_frontier_accounting") or {}
+
+        self.assertEqual(current.get("active_capability_target"),hierarchy.get("active_capability_target"))
+        self.assertEqual(current.get("critical_blocker"),hierarchy.get("current_parent_blocker"))
+        self.assertEqual(current.get("next_step"),hierarchy.get("next_required_action_class"))
+        self.assertEqual(immediate.get("exact_blocker"),hierarchy.get("current_parent_blocker"))
+        self.assertEqual(immediate.get("next_action"),hierarchy.get("next_required_action_class"))
+        self.assertEqual(accounting.get("parent_frontier_capability"),hierarchy.get("active_capability_target"))
+        self.assertEqual(accounting.get("current_parent_blocker"),hierarchy.get("current_parent_blocker"))
+        self.assertEqual(scoreboard.get("next_progress_event_target"),hierarchy.get("next_required_action_class"))
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
