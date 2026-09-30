@@ -29,10 +29,12 @@ from html.parser import HTMLParser
 SCHEMA = "PROJECT_BRAIN_OBJECTIVE_EVIDENCE_UNIT_EXTRACTION_V2"
 UA = "ProjectBrain-EvidenceUnitExtraction/2.0"
 
-_BLOCK_TAGS = {
+_BOUNDARY_TAGS = {
+    "html","body","main","article","section","aside","div",
     "h1","h2","h3","h4","h5","h6",
-    "p","li","dt","dd","blockquote","td","th","pre",
-    "main","article","section","div",
+    "p","li","dt","dd","blockquote","pre",
+    "table","thead","tbody","tfoot","tr","td","th",
+    "figure","figcaption","address","details","summary","hr","br",
 }
 _SUPPRESS = {"script","style","noscript","svg","nav","footer","header","form"}
 _STOP = {
@@ -117,27 +119,26 @@ def _tokens(text):
             out.append(token)
     return out
 
-class _Blocks(HTMLParser):
-    """Capture visible text as boundary-flushed runs, not nested frame copies.
+class _VisibleRuns(HTMLParser):
+    """Capture visible text once, independent of nested container choice.
 
-    Text is always collected unless it is inside an explicitly suppressed UI/
-    non-content subtree. Common semantic containers act only as flush boundaries;
-    they are not prerequisites for visibility. This means custom elements and
-    inline-only layouts remain extractable without weakening objective matching.
+    Data is accumulated into one current run. Structural boundaries flush the
+    run; nested containers never receive duplicate copies of descendant text.
+    Unknown/custom and inline elements are transparent, so their visible text
+    remains capturable without maintaining an exhaustive tag whitelist.
     """
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.suppress = 0
-        self.boundary_stack = []
-        self.blocks = []
         self.parts = []
+        self.current = []
         self.current_tag = "text"
 
-    def _flush(self, tag=None):
-        text = _canon(" ".join(self.parts))
-        self.parts = []
+    def _flush(self):
+        text = _canon(" ".join(self.current))
         if text:
-            self.blocks.append((tag or self.current_tag or "text", text))
+            self.parts.append((self.current_tag, text))
+        self.current = []
 
     def handle_starttag(self, tag, attrs):
         low = tag.lower()
@@ -148,12 +149,9 @@ class _Blocks(HTMLParser):
             return
         if self.suppress:
             return
-        if low in _BLOCK_TAGS:
+        if low in _BOUNDARY_TAGS:
             self._flush()
-            self.boundary_stack.append(low)
             self.current_tag = low
-        elif low in {"br", "hr"}:
-            self._flush()
 
     def handle_endtag(self, tag):
         low = tag.lower()
@@ -161,31 +159,25 @@ class _Blocks(HTMLParser):
             if self.suppress:
                 self.suppress -= 1
             if not self.suppress:
-                self.current_tag = self.boundary_stack[-1] if self.boundary_stack else "text"
+                self.current_tag = "text"
             return
         if self.suppress:
             return
-        if low in _BLOCK_TAGS:
-            self._flush(low)
-            idx = None
-            for i in range(len(self.boundary_stack) - 1, -1, -1):
-                if self.boundary_stack[i] == low:
-                    idx = i
-                    break
-            if idx is not None:
-                del self.boundary_stack[idx]
-            self.current_tag = self.boundary_stack[-1] if self.boundary_stack else "text"
+        if low in _BOUNDARY_TAGS:
+            self._flush()
+            self.current_tag = "text"
 
     def handle_data(self, data):
         if self.suppress:
             return
         text = _canon(data)
         if text:
-            self.parts.append(text)
+            self.current.append(text)
 
     def close(self):
         super().close()
-        self._flush()
+        if not self.suppress:
+            self._flush()
 
 def _split_long(text, max_chars=900):
     text = _canon(text)
@@ -219,7 +211,7 @@ def _split_long(text, max_chars=900):
 
 def _extract_blocks(raw, content_type):
     decoded = raw.decode("utf-8", "replace")
-    parser = _Blocks()
+    parser = _VisibleRuns()
     if "html" in str(content_type or "").lower() or "<html" in decoded[:2000].lower():
         try:
             parser.feed(decoded)
