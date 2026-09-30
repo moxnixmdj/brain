@@ -27,6 +27,11 @@ _BROAD_QUERY_PREFIX = re.compile(
     re.IGNORECASE,
 )
 _COMPARE_QUERY_PREFIX = re.compile(r"^compare\\s+", re.IGNORECASE)
+_ORCHESTRATION_BOUNDARY = re.compile(
+    r"[.!?]\\s+(?=(?:use|autonomously|independently|choose|run|identify|"
+    r"produce|preserve|verify|determine\\s+how|state|report)\\b)",
+    re.IGNORECASE,
+)
 
 def _query(objective):
     q = _canon(objective)
@@ -39,7 +44,7 @@ def _query(objective):
     # orchestration prose around it.  Using the full imperative objective makes
     # generic control words such as "assess", "verify", and "quality" dominate
     # retrieval and can select pages about those words instead of the subject.
-    first = re.split(r"(?<=[.!?])\\s+", q, maxsplit=1)[0].strip()
+    first = _ORCHESTRATION_BOUNDARY.split(q, maxsplit=1)[0].strip()
     focused = _BROAD_QUERY_PREFIX.sub("", first, count=1)
     focused = _COMPARE_QUERY_PREFIX.sub("", focused, count=1)
     focused = focused.strip(" \\t\\r\\n.,;:")
