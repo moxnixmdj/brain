@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION",
+  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -625,13 +625,13 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
-    "active_subcapability_target": "CAPABILITY_INTERNALIZATION_FROM_EXISTING_SPECIMENS_V1",
-    "subcapability_status": "ACTIVE__EXTERNAL_SPECIMENS_DO_NOT_COUNT_AS_OWNERSHIP",
+    "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "subcapability_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
-    "reconciliation_credit": -3,
-    "residual_gap": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_required_action": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION",
-    "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+    "reconciliation_credit": 0,
+    "residual_gap": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+    "next_required_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+    "internalization_manifest": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
   },
   "events": [
     {
@@ -708,10 +708,10 @@
     }
   ],
   "last_subcapability_event": {
-    "event_id": "OPUS55_HLE_DIAMOND_REASONING_OWNED_20260930",
-    "status": "ONE_MORE_SCOPED_CAPABILITY_OWNED__WHOLE_ENVELOPE_INCOMPLETE",
-    "evidence_path": "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json",
-    "counter_delta": 1
+    "event_id": "ADVANCED_CODING_SUPERPOWERS_INTERNALIZED_20260930",
+    "status": "REAL_INTERNALIZATION_PROGRESS__ZERO_OPUS_OWNERSHIP_CREDIT",
+    "evidence_path": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "counter_delta": 0
   },
   "capability_events": [
     {
@@ -823,6 +823,18 @@
       "reusable_capabilities_inherited_after_correction": 9,
       "preserved_owned_capability": "EXACT_SYMBOLIC_COMPUTATION_V1",
       "evidence_path": "canonical/reasoning/2026-09-30_OPAQUE_MODEL_CAPABILITY_OWNERSHIP_CORRECTION_V1.json"
+    },
+    {
+      "event_id": "ADVANCED_CODING_SUPERPOWERS_INTERNALIZED_20260930",
+      "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "capability_package": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+      "capability_credit_delta": 0,
+      "source_repository": "obra/superpowers",
+      "source_commit": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+      "license": "MIT",
+      "exact_import_integrity": "14_OF_14_BLOBS_MATCH",
+      "next_causal_gap": "BRAIN_CONFIGURED_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5"
     }
   ],
   "last_real_output_event": {
