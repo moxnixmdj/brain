@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_EVIDENCE_SCOPE_ADMISSIBILITY_CORRECTION_V1",
+  "correction_id": "OPEN-ENDED-PARENT-SCOPE-ADMISSIBILITY-CORRECTION-20260930-V1",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "STRUCTURED_TASK_EVIDENCE_PRESERVED__OPEN_ENDED_PARENT_PROMOTION_CREDIT_REVOKED",
+  "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+  "trigger": {
+    "source_pr": 304,
+    "source_pr_status": "CLOSED_SCOPE_INSUFFICIENT_UNSPENT",
+    "finding": "A task with authority, URLs, JSON paths, formula, threshold, and full execution recipe predeclared can verify inherited deterministic execution but cannot prove the parent target's defining autonomous decomposition and source/tool discovery behavior."
+  },
+  "affected_prior_evidence": {
+    "task": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
+    "prior_status": "VERIFIED_MODEL_INDEPENDENT_REAL_TASK_A__INHERITED_ROUTE__INDEPENDENT_ORACLE_PASS",
+    "real_task_result_preserved": true,
+    "verified_real_task_counter_preserved": true,
+    "model_independent_execution_preserved": true,
+    "open_ended_parent_promotion_admissible": false,
+    "reason": [
+      "Producer goal predeclared three exact World Bank URLs.",
+      "Producer goal predeclared exact JSON paths and output evidence paths.",
+      "Producer goal predeclared the full CAGR formula and comparison threshold.",
+      "The task therefore did not require autonomous source discovery, tool selection, or research-plan decomposition."
+    ]
+  },
+  "claim_scope_rule": {
+    "open_ended_parent_task_must_require_autonomous_decomposition": true,
+    "at_least_one_material_source_or_tool_must_be_discovered_or_selected_by_runtime": true,
+    "complete_research_plan_must_not_be_predeclared_to_producer": true,
+    "predeclared_objective_constraints_and_acceptance_criteria_allowed": true,
+    "predeclared_full_source_url_path_formula_tool_sequence_disqualifies_open_ended_scope_credit": true
+  },
+  "corrected_parent_state": {
+    "admissible_open_ended_model_independent_parent_tasks": 0,
+    "structured_model_independent_supporting_tasks": 1,
+    "blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP"
+  },
+  "progress_credit": {
+    "counters_delta": {
+      "reusable_capabilities_inherited": 0,
+      "verified_real_tasks_completed": 0,
+      "fresh_reuse_passes": 0,
+      "frontier_dependencies_removed": 0,
+      "residual_gaps_localized": 0
+    },
+    "reason": "Evidence-scope correction only; no prior real task result is erased and no new capability output is claimed."
+  }
+}
