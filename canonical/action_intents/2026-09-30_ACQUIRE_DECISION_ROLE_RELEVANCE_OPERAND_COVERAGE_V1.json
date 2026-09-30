@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "ACQUIRE-DECISION-ROLE-RELEVANCE-OPERAND-COVERAGE-20260930-V1",
-  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION__PRESTART_SYNTAX_CORRECTED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -18,7 +18,8 @@
     "Frozen Brain PR548 exact candidate 9ffe718550a08021ea14c73a22894737be6592cb; code bytes preserved exactly in this successor.",
     "Inherited objective_claim_operand_binding.py blob 48fd058430d8d361fc75beced567c7b6d1166531 already provides bounded explicit comparison parsing.",
     "Current incumbent relevance is deterministic BM25 plus aggregate focused-query token coverage.",
-    "Open-PR search performed before successor creation; PR548 is frozen code capsule but fails trusted governance validation and no guarded qualification PR exists for exact 9ffe718 bytes."
+    "Open-PR search performed before successor creation; PR548 is frozen code capsule but fails trusted governance validation and no guarded qualification PR exists for exact 9ffe718 bytes.",
+    "Guarded qualification PR235 run 36702509398 stopped before admission on a literal backslash-n SyntaxError; no semantic candidate verdict was spent."
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED__FIRST_CAUSAL_GAP_DIRECTLY_OBSERVED_IN_SPENT_GUARDED_PARENT_TASK",
   "probe_specific": false,
@@ -32,7 +33,7 @@
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "candidate_blobs": {
-    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "3036734a9f63945a7b76a5ca7cac86618fbc3677",
+    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "f0b9095ed2439645ebc9d9ec2f66fb8ec1de3669",
     "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "0abb5225fe9fba2443f2df46b2e41bd1c7dd7436",
     "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": "48fd058430d8d361fc75beced567c7b6d1166531",
     "canonical/tests/test_decision_role_relevance_admission.py": "dcfd4bf6da7a7ef01d1f21dff541d9b79b3c8f26",
@@ -386,5 +387,16 @@
     "inherited_parser": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
     "authored_test": "canonical/tests/test_decision_role_relevance_admission.py",
     "behavior": "Rank by incumbent BM25, but for bounded entity-vs-entity explicit comparisons require deterministic decision-property plus at least one requested operand identity; literal numeric-threshold and unsupported shapes remain NOT_APPLICABLE to the role gate and preserve incumbent behavior."
+  },
+  "prestart_correction": {
+    "prior_candidate_blob": "3036734a9f63945a7b76a5ca7cac86618fbc3677",
+    "corrected_candidate_blob": "f0b9095ed2439645ebc9d9ec2f66fb8ec1de3669",
+    "failure_run_id": 36702509398,
+    "failure_job_id": 109844995637,
+    "phase": "PRESTART_EXACT_FROZEN_CANDIDATE_CLOSURE",
+    "error": "SyntaxError: literal backslash-n between _SIMPLE_WORD and _NUMERIC_START definitions",
+    "guard_admission_spent": false,
+    "semantic_candidate_verdict": "NONE__PRESTART_ONLY",
+    "correction_scope": "ONE_LITERAL_BACKSLASH_N_TO_NEWLINE__NO_LOGIC_CHANGE"
   }
 }

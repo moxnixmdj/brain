@@ -23,7 +23,8 @@ import re
 
 SCHEMA="PROJECT_BRAIN_DECISION_ROLE_RELEVANCE_ADMISSION_V1"
 _WORD=re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]*")
-_SIMPLE_WORD=re.compile(r"[a-z0-9]+")\n_NUMERIC_START=re.compile(r"^\\s*[-+]?(?:\\d|\\.\\d)")
+_SIMPLE_WORD=re.compile(r"[a-z0-9]+")
+_NUMERIC_START=re.compile(r"^\\s*[-+]?(?:\\d|\\.\\d)")
 _GENERIC={
     "a","an","and","are","as","at","be","by","for","from","in","is","it","of",
     "on","or","that","the","this","to","was","were","whether","which","with",
