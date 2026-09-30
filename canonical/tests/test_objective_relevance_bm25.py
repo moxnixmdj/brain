@@ -58,6 +58,97 @@ class ObjectiveRelevanceTests(unittest.TestCase):
         out=self.m.rank("sqlite backup consistency",c)
         self.assertEqual(out["top_candidate_original_index"],0,out)
 
+    def test_task_c_wrong_property_and_wrong_alloy_cannot_win_on_token_count(self):
+        objective=(
+          "Determine whether the room-temperature thermal conductivity of annealed "
+          "6061 aluminum is greater than that of annealed 304 stainless steel "
+          "under comparable bulk-material conditions."
+        )
+        candidates=[
+          {
+            "title":"Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+            "record_title":"Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+            "snippet":"6061 aluminum 302 stainless steel bulk temperature oxygen ignition",
+          },
+          {
+            "title":"Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+            "record_title":"Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+            "snippet":"National Bureau of Standards thermal conductivity 304 stainless steel",
+          },
+        ]
+        out=self.m.rank(objective,candidates)
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertEqual(out["top_candidate_original_index"],1,out)
+        self.assertEqual(out["verification_method"],"DETERMINISTIC_BM25_PLUS_DECISION_ROLE_ADMISSION",out)
+        self.assertEqual(out["role_admissible_candidate_count"],1,out)
+        self.assertTrue(out["top_candidate_admission"]["verified"],out)
+        wrong=next(x for x in out["ranked_candidates"] if x["original_index"]==0)
+        self.assertFalse(wrong["decision_role_admission"]["verified"],wrong)
+        self.assertFalse(wrong["decision_role_admission"]["property"]["verified"],wrong)
+
+    def test_exact_numeric_operand_discriminator_is_mandatory(self):
+        objective=(
+          "Determine whether the thermal conductivity of alloy 6061 aluminum "
+          "is greater than that of alloy 304 stainless steel."
+        )
+        out=self.m.rank(objective,[
+          {
+            "title":"Thermal conductivity of alloy 302 stainless steel",
+            "snippet":"thermal conductivity stainless steel alloy 302",
+          }
+        ])
+        self.assertEqual(out["status"],"RELEVANCE_UNRESOLVED",out)
+        self.assertEqual(out["reason"],"NO_DECISION_ROLE_ADMISSIBLE_CANDIDATE",out)
+        role=out["ranked_candidates"][0]["decision_role_admission"]
+        self.assertFalse(role["right_operand"]["verified"],role)
+        self.assertIn("304",role["right_operand"]["missing_mandatory_discriminators"],role)
+
+    def test_cross_domain_property_plus_operand_filtering(self):
+        objective="Determine whether France population growth is higher than Germany population growth."
+        candidates=[
+          {"title":"France GDP growth outlook","snippet":"France economic growth forecast"},
+          {"title":"France population growth","snippet":"France population growth demographic estimate"},
+          {"title":"Germany population growth","snippet":"Germany population growth demographic estimate"},
+        ]
+        out=self.m.rank(objective,candidates)
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertIn(out["top_candidate_original_index"],{1,2},out)
+        wrong=next(x for x in out["ranked_candidates"] if x["original_index"]==0)
+        self.assertFalse(wrong["decision_role_admission"]["verified"],wrong)
+        self.assertFalse(wrong["decision_role_admission"]["property"]["verified"],wrong)
+
+    def test_single_character_operand_discriminator_survives_role_gate(self):
+        objective=(
+          "Determine whether the orbital period of Planet Kepler A is greater "
+          "than that of Planet Kepler B."
+        )
+        out=self.m.rank(objective,[
+          {"title":"Orbital period of Planet Kepler B","snippet":"Planet Kepler B orbital period measurement"},
+          {"title":"Orbital period of Planet Kepler C","snippet":"Planet Kepler C orbital period measurement"},
+        ])
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertEqual(out["top_candidate_original_index"],0,out)
+        bad=next(x for x in out["ranked_candidates"] if x["original_index"]==1)
+        self.assertFalse(bad["decision_role_admission"]["verified"],bad)
+        self.assertIn("label:b",bad["decision_role_admission"]["right_operand"]["missing_mandatory_discriminators"],bad)
+
+    def test_explicit_comparison_with_unresolvable_property_fails_closed(self):
+        out=self.m.rank("Determine whether France is greater than Germany.",[
+          {"title":"France and Germany comparison","snippet":"France Germany"}
+        ])
+        self.assertEqual(out["status"],"RELEVANCE_UNRESOLVED",out)
+        self.assertEqual(out["reason"],"DECISION_ROLE_SPEC_UNRESOLVED",out)
+
+    def test_non_relation_objective_preserves_existing_bm25_admission(self):
+        out=self.m.rank("find official python csv module documentation",[
+          {"title":"Python csv module","snippet":"CSV file reading writing documentation"},
+          {"title":"Python weather","snippet":"forecast"},
+        ])
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertEqual(out["top_candidate_original_index"],0,out)
+        self.assertEqual(out["verification_method"],"DETERMINISTIC_BM25",out)
+        self.assertEqual(out["top_candidate_admission"]["method"],"FOCUSED_QUERY_TOKEN_COVERAGE_V1",out)
+
     def test_run_writes_narrow_claim(self):
         inp=ROOT/"canonical/astra_runtime/tmp/relevance_input.json"
         outp=ROOT/"canonical/astra_runtime/tmp/relevance_output.json"
