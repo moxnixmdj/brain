@@ -5893,7 +5893,12 @@ def _stamp_cognition_provenance(result):
     if mode!="MODEL_INDEPENDENT_ACTION_PLAN" and not mode.startswith("OPTIONAL_MODEL_ADVISORY"):
         raise Blocker("COGNITION_PROVENANCE_CONTROLLER_MODE_UNKNOWN:"+mode)
     count=_collect_model_dependency_count(out)
-    if mode.startswith("OPTIONAL_MODEL_ADVISORY"):
+    planner_markers=(
+        out.get("planner_source"),
+        out.get("planner_transport"),
+        out.get("planner_model_last"),
+    )
+    if mode.startswith("OPTIONAL_MODEL_ADVISORY") or any(v not in (None,"") for v in planner_markers):
         count=max(count,1)
     out["model_dependency_count"]=count
     out["cognition_dependency_class"]="MODEL_INDEPENDENT" if count==0 else "MODEL_ASSISTED"
