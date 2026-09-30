@@ -68,12 +68,25 @@ def _canon(value):
 
 def _tokens(value):
     out=[]
-    for raw in _WORD.findall(_canon(value).lower()):
-        t=raw.strip("._+-")
-        if len(t)<2 or t in _STOP:
+    for raw in _WORD.findall(_canon(value)):
+        surface=raw.strip("._+-")
+        if not surface:
             continue
-        if t not in out:
-            out.append(t)
+        t=surface.lower()
+        # Preserve explicit one-character scientific/entity discriminators such
+        # as "A", "B", "1", and "2" without turning the ordinary lowercase
+        # article "a" into a semantic role token.
+        if len(t)==1:
+            if surface.isdigit() or (surface.isalpha() and surface.isupper()):
+                token="label:"+t
+            else:
+                continue
+        else:
+            if t in _STOP:
+                continue
+            token=t
+        if token not in out:
+            out.append(token)
     return out
 
 def _clean_entity(value):
