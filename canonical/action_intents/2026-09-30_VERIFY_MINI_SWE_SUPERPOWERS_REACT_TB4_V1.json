@@ -1,0 +1,444 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "VERIFY-MINI-SWE-SUPERPOWERS-TB4-REACT-LEAD-FORM-20260930-V1",
+  "status": "PROPOSED_CURRENT_BASE__COMPOSED_PACKAGE_CANONICAL__PUBLIC_SESSION_BRIDGE_READY__TASK_UNREAD",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "ce67eb200cb6ab7644fb432be46006ed8941fd32",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "probe_id": null,
+  "causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "expected_parent_frontier_change": "Obtain one fresh independently verified current Terminal-Bench 4.0 result for the Brain-owned mini-SWE-agent 2.4.6 + Superpowers composition on GPT-5.6 Sol, or preserve the exact first causal failure with zero false ownership credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main ce67eb200cb6ab7644fb432be46006ed8941fd32 with canonical mini-SWE + Superpowers composed package",
+    "Public session-mediated runtime bridge merged in moxnixmdj/verification-capsule-runner at b2d7cd5f86057f77cda246b5358f286ef9f7dc15",
+    "pretrain-shard-corruption quarantined before execution after build-only corruption source exposure",
+    "nextjs-performance quarantined before execution after configured cognition accidentally read official README solution explanation during over-broad metadata discovery",
+    "react-lead-form has no prior Brain lease/search hit and only README metadata lines 1-15 plus filtered verifier-mode metadata have been exposed",
+    "Supreme route falsified for advancement on fresh TB4 evidence"
+  ],
+  "evidence_presence_classification": "BRAIN_OWNED_ROUTE_PRESENT__FRESH_UNCONTAMINATED_CURRENT_TASK_EVIDENCE_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "fresh_task": {
+    "benchmark": "Terminal-Bench 4.0",
+    "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "task": "react-lead-form",
+    "instruction_git_blob": "23837ed3302f12d62719002ed4ad36e071cb7289",
+    "task_toml_git_blob": "49348d384b5c158d4027d4f1c5bdcda906128f88",
+    "environment_tree_git_sha": "4a28d8a63a94ab2793e44f9900e61009e4ff3d68",
+    "instruction_read_by_configured_cognition_before_lease": false,
+    "solution_tree_read_by_configured_cognition": false,
+    "tests_tree_read_by_configured_cognition": false,
+    "metadata_only_exposure": [
+      "README.md lines 1-15: author/category/tags/expert-time/resources",
+      "task.toml filtered keys only: verifier mode/timeouts/resources"
+    ],
+    "verifier_mode": "separate"
+  },
+  "contamination_contract": {
+    "cognition_may_read": [
+      "frozen instruction.md after lease becomes authoritative",
+      "task metadata needed to bind environment/artifacts",
+      "only source/config/data files actually present in the built agent runtime"
+    ],
+    "cognition_must_not_read": [
+      "solution/**",
+      "tests/** before terminal submission",
+      "Docker build-context-only files that are not present in the final agent runtime",
+      "task-specific online solutions, analyses, hints, or verifier logic"
+    ],
+    "runtime_visibility_rule": "Determine file visibility from Docker COPY/RUN semantics without exposing the contents of build-context-only removed files to configured cognition.",
+    "violation_effect": "FAIL_CLOSED__TASK_CONTAMINATED__NO_OFFICIAL_SUBMISSION_FOR_PROMOTION"
+  },
+  "stop_condition": "After trusted current-base lease validation, read the frozen react-lead-form instruction and only files/command outputs actually present in the built agent runtime; execute mini-SWE one-action-per-step semantics through this GPT-5.6 Sol session with Brain-owned Superpowers debugging/TDD/verification discipline via the public session bridge; preserve solution/**, tests/**, build-only source, and task-specific online hints unread until terminal submission; submit exactly once to the untouched independent verifier; award zero whole-family ownership credit from this single task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "CURRENT_GPT_5_6_SOL_SESSION_AS_GENERAL_COGNITION_ONLY__NO_OPAQUE_TARGET_CAPABILITY_CREDIT",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS_CANONICAL_COMPOSED_PACKAGE",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_ARCHITECTURALLY__PERFORMANCE_PENDING",
+    "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_CANONICAL_COMPOSED_PACKAGE",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING_THIS_ACTION",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_FINAL_MULTI_TASK_VERIFICATION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_REACT_TB4_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ce67eb200cb6ab7644fb432be46006ed8941fd32",
+    "real_outcome": "Get fresh uncontaminated independently verified evidence on the canonical mini-SWE + Superpowers route using the new public runtime-only session bridge, after two prior candidate tasks were invalidated before execution.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Directly exercise mini-SWE-agent 2.4.6 + Superpowers on untouched Terminal-Bench react-lead-form through the isolated public runtime bridge.",
+      "proxy_goals_deleted": [
+        "Submit contaminated pretrain-shard-corruption",
+        "Submit contaminated nextjs-performance",
+        "Replay spent Supreme tasks",
+        "Build a paid model API bridge",
+        "Claim family parity from one task",
+        "Expose build/verifier source to cognition"
+      ],
+      "surviving_necessity": "One distinct untouched current-harness task executed once through a bridge that exposes only runtime observations."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Canonical mini-SWE + Superpowers composed package",
+        "Brain-owned mini-SWE-agent 2.4.6",
+        "Brain-owned Superpowers 6.4.2",
+        "Brain fail-closed evidence/completion gates",
+        "Public session runtime bridge b2d7cd5f86057f77cda246b5358f286ef9f7dc15"
+      ],
+      "external_existing_routes_checked": [
+        "Current matched TB4 mini-SWE evidence remains the route-selection specimen; direct clean Brain execution now has higher information value than further supplier search."
+      ],
+      "capability_work_deleted": [
+        "No new coding methodology",
+        "No paid API",
+        "No new benchmark framework",
+        "No contaminated-task salvage",
+        "No local Docker/WSL infrastructure detour"
+      ],
+      "surviving_gap": "The durable composed route and runtime-only bridge are ready; only fresh uncontaminated real-task evidence is missing."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence gap only. Prior task choices were contaminated before execution; the underlying Brain-owned route and bridge remain untested on a clean task.",
+      "delete_bypass_substitute_options": [
+        "DELETE contaminated pretrain task",
+        "DELETE contaminated Next.js task",
+        "REUSE canonical mini-SWE + Superpowers package",
+        "REUSE public runtime bridge",
+        "SUBSTITUTE untouched react-lead-form",
+        "REUSE untouched independent verifier"
+      ],
+      "surviving_causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+        "PAID_API_MODEL_ADAPTER",
+        "SEARCH_MORE_CODING_CONFIGURATIONS_BEFORE_DIRECT_TEST",
+        "CONTAMINATED_TASK_SUBMISSION"
+      ],
+      "losing_routes_reason": "Paid API violates hard zero; more route search delays an already-owned near-bar composition; contaminated tasks cannot yield admissible evidence.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use runtime-visible project checks during development and the untouched separate Terminal-Bench verifier exactly once after terminal submission. One task remains zero whole-family credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR578 task choice nextjs-performance only; preserve its route and runtime-only contamination contract",
+        "Any metadata discovery method that reads beyond the explicit metadata header"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "canonical mini-SWE + Superpowers composed package",
+        "mini-SWE linear control loop",
+        "Superpowers systematic debugging",
+        "Superpowers TDD",
+        "Superpowers verification-before-completion",
+        "Brain contamination guard"
+      ],
+      "fresh_reuse_plan": "If react-lead-form passes, preserve the zero-credit result and advance to distinct matched tasks. If it fails, mark the task spent, preserve the first causal failure, and recompute without replay."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse canonical composed package",
+        "Reuse exact mini-SWE and Superpowers packages",
+        "Reuse public session runtime bridge",
+        "Reuse prior route search",
+        "Quarantine both contaminated tasks instead of salvaging them"
+      ],
+      "search_stop_decision": "A clean untouched Software task, a canonical composed route, and a runtime-only public bridge are ready now; direct evidence dominates more route or infrastructure work.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh after the task result or any material main/frontier change."
+    },
+    "routes_considered": [
+      "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+      "PAID_API_MODEL_ADAPTER",
+      "SEARCH_MORE_CODING_CONFIGURATIONS_BEFORE_DIRECT_TEST",
+      "CONTAMINATED_TASK_SUBMISSION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PAID_API_MODEL_ADAPTER",
+      "CONTAMINATED_PRETRAIN_SUBMISSION",
+      "CONTAMINATED_NEXTJS_SUBMISSION",
+      "SPENT_TASK_REPLAY",
+      "NEW_BENCHMARK_HARNESS",
+      "LOCAL_DOCKER_OR_WSL_ENABLEMENT"
+    ],
+    "selected_surviving_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+    "why_selected_route_is_fastest_sufficient": "It uses the exact canonical Brain-owned coding composition, the included GPT-5.6 Sol cognition, the now-merged public runtime-only bridge, an untouched low-resource Software task, and the existing independent verifier at $0 incremental spend.",
+    "expected_parent_level_state_change": "Obtain one fresh independently verified current Terminal-Bench 4.0 result for the Brain-owned mini-SWE-agent 2.4.6 + Superpowers composition on GPT-5.6 Sol, or preserve the exact first causal failure with zero false ownership credit.",
+    "stop_condition": "After trusted current-base lease validation, read the frozen react-lead-form instruction and only files/command outputs actually present in the built agent runtime; execute mini-SWE one-action-per-step semantics through this GPT-5.6 Sol session with Brain-owned Superpowers debugging/TDD/verification discipline via the public session bridge; preserve solution/**, tests/**, build-only source, and task-specific online hints unread until terminal submission; submit exactly once to the untouched independent verifier; award zero whole-family ownership credit from this single task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T21:08:53Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+          "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
+          "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+          "canonical/capabilities/opus55/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json",
+          "canonical/capabilities/opus55/NEXTJS_PERFORMANCE_CONTAMINATION_20260930_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "harbor-framework/terminal-bench release commit 452bf305c6daa62fc59061d22133a7cbc7c1572e",
+          "SWE-agent/mini-swe-agent pinned commit 04d809ceab9df28f9adaed044884180159172930",
+          "obra/superpowers pinned Brain copy"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "react-lead-form instruction blob 23837ed3302f12d62719002ed4ad36e071cb7289",
+          "react-lead-form task.toml blob 49348d384b5c158d4027d4f1c5bdcda906128f88",
+          "public session bridge main b2d7cd5f86057f77cda246b5358f286ef9f7dc15"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Current Terminal-Bench coding-agent framework comparisons were used only as a discovery sensor; qualification remains direct benchmark verification."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "advanced agentic coding debugging verification TDD current 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "mini-SWE-agent Superpowers coding agent harness current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "open source model agnostic software engineering agent harness control loop verification discipline"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 Terminal-Bench 4 mini-SWE-agent latest coding harness"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "CONTAMINATED_PRETRAIN_SUBMISSION",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Invalid due unavailable-at-runtime corruption source exposure.",
+            "CAPABILITY_STRENGTH": "No valid measurement.",
+            "WALL_CLOCK": "Fast but inadmissible.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Invalid.",
+            "VERIFIABILITY": "Canonical contamination receipt."
+          },
+          "evidence": [
+            "canonical/capabilities/opus55/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: no official submission occurred after contamination."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "CONTAMINATED_NEXTJS_SUBMISSION",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Invalid due official task solution-explanation exposure before execution.",
+            "CAPABILITY_STRENGTH": "No valid measurement.",
+            "WALL_CLOCK": "Fast but inadmissible.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Invalid.",
+            "VERIFIABILITY": "Contamination receipt records the exposure."
+          },
+          "evidence": [
+            "canonical/capabilities/opus55/NEXTJS_PERFORMANCE_CONTAMINATION_20260930_V1.json"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: nextjs-performance was not executed or submitted after solution-explanation exposure."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "selected_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+      "negative_search_summary": "No stronger already-owned zero-incremental route can produce valid current-harness evidence faster than the canonical mini-SWE + Superpowers route through the merged runtime-only bridge on the clean React task.",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T21:08:53Z",
+        "max_age_hours": 2,
+        "selected_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies_complete": true,
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_CANONICAL_MINI_SWE_SUPERPOWERS_COMPOSED_PACKAGE_D4C51207",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "Merged PR577; exact package verifier passed on authorized local runtime before merge at head 38b43369d047693175e04d4c28f2c3433222fecc."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "CURRENT_CHATGPT_GPT_5_6_SOL_INCLUDED_SESSION",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T21:08:53Z",
+            "evidence": [
+              "DIRECT_PROBE: current conversation is actively executing as GPT-5.6 Sol"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_OWNED_MINI_SWE_AGENT_2_4_6",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "BRAIN_OWNED_SUPERPOWERS_6_4_2",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VERIFICATION_CAPSULE_RUNNER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T21:08:53Z",
+            "evidence": [
+              "Recent independent Terminal-Bench verifier runs completed on moxnixmdj/verification-capsule-runner"
+            ],
+            "evidence_classes": [
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PUBLIC_SESSION_MINI_SWE_RUNTIME_BRIDGE_B2D7CD5",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T21:08:53Z",
+            "evidence": [
+              "moxnixmdj/verification-capsule-runner main b2d7cd5f86057f77cda246b5358f286ef9f7dc15; controller py_compile/CLI direct probe passed before merge."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "TERMINAL_BENCH_4_REACT_LEAD_FORM_FROZEN_BYTES",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "release 452bf305c6daa62fc59061d22133a7cbc7c1572e",
+              "instruction blob 23837ed3302f12d62719002ed4ad36e071cb7289",
+              "task.toml blob 49348d384b5c158d4027d4f1c5bdcda906128f88",
+              "verifier mode separate confirmed through metadata-only filter"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ]
+      }
+    }
+  }
+}
