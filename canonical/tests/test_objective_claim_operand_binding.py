@@ -60,6 +60,21 @@ class BinderTests(unittest.TestCase):
         self.assertIn("Germany",out["left_binding"]["text"])
         self.assertIn("France",out["right_binding"]["text"])
 
+    def test_single_letter_entity_discriminators_are_preserved(self):
+        data=fixture(
+          left_text="Planet Kepler A orbital period was 120 days.",
+          right_text="Planet Kepler B orbital period was 180 days."
+        )
+        out=self.relation(
+          "Planet Kepler A orbital period exceeds Planet Kepler B orbital period.",
+          data
+        )
+        self.assertEqual(out["status"],"CLAIM_SPEC_AND_OPERANDS_BOUND",out)
+        self.assertEqual(out["relation_spec"]["operator"],"GT",out)
+        self.assertFalse(out["relation_result"]["predicate"],out)
+        self.assertIn("Kepler A",out["left_binding"]["text"])
+        self.assertIn("Kepler B",out["right_binding"]["text"])
+
     def test_gte_and_lte(self):
         a=self.relation("Determine whether France population growth is at least Germany population growth.")
         b=self.relation("Determine whether Germany population growth is at most France population growth.")
