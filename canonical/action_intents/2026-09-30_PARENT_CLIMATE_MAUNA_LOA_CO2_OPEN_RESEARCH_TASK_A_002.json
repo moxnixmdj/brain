@@ -95,7 +95,7 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+        "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
         "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
         "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
         "USE_MODEL_PLANNER"
@@ -138,7 +138,7 @@
       "challenger_refresh_decision": "Current Brain base, runner closure, inherited source-discovery route, and external planner/logic framework roles were refreshed before task execution."
     },
     "routes_considered": [
-      "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+      "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
       "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
       "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
       "USE_MODEL_PLANNER"
