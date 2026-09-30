@@ -47,6 +47,18 @@ def _auto_output_path(goal,instance_id,key,suffix):
         +digest+"_"+slug+"_"+input_slug+suffix
     )
 
+def _placeholders(value):
+    out=set()
+    if isinstance(value,dict):
+        for v in value.values():
+            out.update(_placeholders(v))
+    elif isinstance(value,list):
+        for v in value:
+            out.update(_placeholders(v))
+    elif isinstance(value,str):
+        out.update(re.findall(r"\$\{input\.([A-Za-z0-9_]+)\}",value))
+    return out
+
 def _effect_refs(value):
     out=[]
     if isinstance(value,dict):
@@ -227,6 +239,25 @@ def verify(goal,composition,grounding,registry,verified_initial_facts=None):
             effect_providers.setdefault(str(effect),[]).append(provider)
     for consumer in caps:
         consumer_id=str(consumer.get("id") or "")
+        source_id=str(consumer.get("source_capability_id") or "")
+        source_entry=registry.get(source_id) or {}
+        path_placeholders=sorted(
+            x for x in _placeholders(source_entry.get("action_template") or {})
+            if str(x).endswith("_path")
+        )
+        provider_backed=any(
+            [
+                x for x in effect_providers.get(str(effect),[])
+                if str(x.get("id") or "")!=consumer_id
+            ]
+            for effect in (consumer.get("requires") or [])
+        )
+        if provider_backed and path_placeholders and not source_entry.get("proposal_bindings"):
+            return (
+                False,
+                "CAUSAL_PATH_PROVENANCE_BINDING_REQUIRED:"
+                +consumer_id+":"+",".join(path_placeholders),
+            )
         for effect,field in _effect_refs(consumer.get("inputs") or {}):
             if not effect or not field:
                 return False,"EFFECT_RESULT_REF_INVALID:"+consumer_id
