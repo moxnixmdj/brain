@@ -64,6 +64,35 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertEqual(out["status"],"UNSUPPORTED")
         self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
 
+    def test_absolute_executable_path_remains_explicit_recipe(self):
+        out=self.dec.decompose(
+            "Assess whether two measured values differ. Run /usr/bin/python verify_values.py"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED",out)
+        self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
+
+    def test_unknown_cli_command_remains_explicit_recipe(self):
+        out=self.dec.decompose(
+            "Assess whether two measured values differ. Run customtool --verify values.json"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED",out)
+        self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
+
+    def test_generic_method_with_concrete_tool_remains_recipe(self):
+        out=self.dec.decompose(
+            "Assess whether two measured values differ. Run a verification method with python verify.py"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED",out)
+        self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
+
+    def test_generic_execute_method_variants_remain_broad(self):
+        for objective in [
+            "Assess whether two measured values differ. Execute a validation procedure, and independently verify the result.",
+            "Evaluate whether two regimes differ. Run an independently chosen verification approach; preserve material limitations.",
+        ]:
+            out=self.dec.decompose(objective)
+            self.assertEqual(out["status"],"DECOMPOSED",out)
+
     def test_non_broad_action_goal_is_not_reinterpreted(self):
         out=self.dec.decompose("Create canonical/astra_runtime/tmp/x.json with one record")
         self.assertEqual(out["status"],"UNSUPPORTED")
