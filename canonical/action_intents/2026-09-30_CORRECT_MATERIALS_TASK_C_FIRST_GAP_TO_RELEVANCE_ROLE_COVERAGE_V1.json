@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-MATERIALS-TASK-C-FIRST-GAP-TO-RELEVANCE-ROLE-COVERAGE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "expected_parent_frontier_change": "Correct the already-counted Task C residual gap to the earlier initial relevance/role-coverage failure; preserve spent/no-replay status and zero parent credit.",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "PRIMARY_ARTIFACT_REVIEW_CORRECTS_CAUSAL_ORDER",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "real_outcome": "Make canonical state name the earliest demonstrated generic failure, not a downstream symptom.",
+    "selected_surviving_route": "CORRECT_CAUSAL_INTERPRETATION_ONLY__THEN_REUSE_EXISTING_OBJECTIVE_RELATION_ROLE_PARSING_FOR_MINIMUM_RELEVANCE_REPAIR_IF_QUALIFIED",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "METADATA_REFINED_PROVENANCE_REPAIR_AS_CURRENT_BLOCKER",
+      "CROSSREF_FULLTEXT_REPAIR_AS_CURRENT_BLOCKER",
+      "SOURCE_WHITELIST",
+      "MODEL_RERANKER"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The primary artifact proves the selection error precedes every materialization/refinement step and existing bounded objective relation parsing may supply role anchors without new semantic machinery.",
+    "stop_rule": "RECONCILE_TRUTH_ONLY__NO_COUNTER_INCREMENT__THEN_RECOMPUTE_REPAIR_ROUTE_ON_CURRENT_MAIN"
+  }
+}
