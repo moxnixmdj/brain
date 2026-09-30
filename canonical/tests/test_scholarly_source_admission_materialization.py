@@ -16,6 +16,7 @@ class ScholarlyAdmissionTests(unittest.TestCase):
         cls.rank=load("canonical/runtime/bound_capabilities/objective_relevance_bm25.py","scholarly_rank_test")
         cls.discovery=load("canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py","scholarly_discovery_test")
         cls.prov=load("canonical/runtime/bound_capabilities/source_candidate_provenance_verify.py","scholarly_prov_test")
+        cls.extractor=load("canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py","scholarly_extract_test")
         cls.front=load("canonical/runtime/bound_capabilities/open_research_source_frontend.py","scholarly_front_test")
 
     def test_low_subject_coverage_positive_bm25_is_not_admitted(self):
@@ -26,6 +27,22 @@ class ScholarlyAdmissionTests(unittest.TestCase):
         self.assertFalse(out["top_candidate_admission"]["verified"],out)
         self.assertEqual(out["top_candidate_admission"]["matched_term_count"],1,out)
         self.assertEqual(out["top_candidate_admission"]["required_matched_term_count"],2,out)
+
+    def test_extractor_rejects_weak_positive_relevance_receipt(self):
+        objective="Assess alpha beta gamma delta epsilon zeta eta theta"
+        candidate={"url":"https://example.org/year","title":"alpha annual index"}
+        relevance=self.rank.rank(objective,[candidate])
+        provenance={
+          "status":"RETRIEVAL_PROVENANCE_VERIFIED",
+          "candidate_url":candidate["url"],
+          "final_url":candidate["url"],
+          "final_host":"example.org",
+        }
+        admitted,reason=self.extractor._qualified_relevance_source(
+          objective,candidate,provenance,relevance
+        )
+        self.assertIsNone(admitted)
+        self.assertEqual(reason,"RELEVANCE_SUBJECT_COVERAGE_ADMISSION_REQUIRED")
 
     def test_high_subject_coverage_is_admitted_without_absolute_score_gate(self):
         objective="Assess alpha beta gamma delta epsilon zeta eta theta"
