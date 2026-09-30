@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_RESEARCH_FIRST_CAUSAL_GAP_V1",
+  "status": "FRESH_TASK_C_SPENT__NO_PARENT_CREDIT__DECISION_ROLE_RELEVANCE_ADMISSION_FALSIFIED",
+  "task_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
+  "domain": "MATERIALS_ENGINEERING_THERMOPHYSICAL_PROPERTY_COMPARATIVE_RESEARCH",
+  "source_task_replay": false,
+  "guarded_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 223,
+    "run_id": 36698638943,
+    "job_id": 109832558595,
+    "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
+    "child_started": true,
+    "child_returncode": 3,
+    "artifact_id": 11089076913,
+    "artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162"
+  },
+  "observed_pipeline": {
+    "source_frontend_status": "SELECTED_SOURCE_MATERIALIZATION_BLOCKED",
+    "provenance_verified_candidate_count": 12,
+    "selected_candidate": {
+      "title": "Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+      "doi": "10.1080/00102208708947033",
+      "matched_query_terms": [
+        "6061",
+        "aluminum",
+        "bulk",
+        "stainless",
+        "steel",
+        "temperature"
+      ],
+      "matched_term_count": 6,
+      "focused_query_token_count": 16,
+      "subject_coverage_gate_verified": true,
+      "materialization_result": "HTTP_403"
+    },
+    "requested_decision_roles": {
+      "property": "room-temperature thermal conductivity",
+      "left_operand": "annealed 6061 aluminum",
+      "right_operand": "annealed 304 stainless steel"
+    },
+    "selected_candidate_missing_or_wrong": [
+      "NO_THERMAL_CONDUCTIVITY_ROLE",
+      "NO_ANNEALED_ROLE",
+      "RIGHT_ALLOY_302_NOT_304"
+    ],
+    "metadata_refinement_behavior": "APPENDED_SELECTED_RECORD_TITLE_TO_FOCUSED_QUERY",
+    "metadata_refinement_result": "FAILED_TO_PRODUCE_AN_ADMITTED_LIVE_SOURCE"
+  },
+  "causal_interpretation": {
+    "earliest_gap": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+    "why_materialization_is_downstream": "The selected candidate had already been falsely admitted as decision-relevant before materialization. A successful download of the ignition-temperature/302-steel paper would not satisfy the requested thermal-conductivity/304-steel decision roles.",
+    "generic_failure_class": "TOKEN_COVERAGE_CAN_ACCEPT_HIGH_OVERLAP_BUT_DECISION_ROLE_INCOMPATIBLE_SOURCES",
+    "required_repair_scope": "Decision-role-aware relevance must preserve the requested property and operand identities, including exact discriminators such as alloy numbers, before a source is eligible for materialization/evidence extraction.",
+    "multi_source_status": "MAY_BE_REQUIRED_FOR_COMPARATIVE_OBJECTIVES__NOT_YET_PROMOTED_AS_PROVEN_FIRST_GAP"
+  },
+  "parent_capability_promoted": false,
+  "capability_credit_delta": 0,
+  "replay_allowed": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_AWARE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY"
+}
