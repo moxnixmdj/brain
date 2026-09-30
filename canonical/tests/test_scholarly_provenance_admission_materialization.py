@@ -219,6 +219,72 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
         self.assertEqual(len(extractor.calls),1,out)
         self.assertEqual(extractor.calls[0][0]["url"],"https://refined.example/live")
 
+    def test_metadata_refinement_preserves_bibliographic_candidate_until_relevance(self):
+        objective="Determine whether a measured material property exceeds a documented threshold."
+        discovery,verifier,relevance,extractor=self.install(
+            selected_index=1,materialize_ok=False,refined_available=True
+        )
+        original_discover=discovery.discover
+        def refined_discover(objective,limit=12,timeout=15,query_override=None):
+            if query_override is None:
+                return original_discover(objective,limit=limit,timeout=timeout,query_override=None)
+            discovery.calls.append(query_override)
+            return {
+                "status":"CANDIDATES_DISCOVERED",
+                "objective":objective,
+                "query":query_override,
+                "query_origin":"METADATA_REFINED_OVERRIDE",
+                "candidates":[
+                    {
+                        "rank":0,"url":"https://noise.example/live","host":"noise.example",
+                        "title":"Unrelated live page","snippet":"generic unrelated content",
+                        "source_class":"OPEN_WEB_SEARCH_CANDIDATE","discovery_backend":"TEST_REFINED",
+                    },
+                    {
+                        "rank":1,"url":"https://doi.org/10.1234/refined","host":"doi.org",
+                        "doi":"10.1234/refined","title":"Strong domain measurement study",
+                        "source_class":"SCHOLARLY_REGISTRY_CANDIDATE","discovery_backend":"CROSSREF",
+                    },
+                ],
+            }
+        discovery.discover=refined_discover
+        materialization_calls=[]
+        def staged_materialize(candidate,bibliographic_verification,timeout=15,fetch=None):
+            materialization_calls.append(candidate["url"])
+            if len(materialization_calls)==1:
+                return {
+                    "status":"UNVERIFIED",
+                    "reason":"SELECTED_SOURCE_LIVE_MATERIALIZATION_FAILED",
+                    "candidate_url":candidate["url"],
+                }
+            return {
+                "status":"RETRIEVAL_PROVENANCE_VERIFIED",
+                "verification_method":"SELECTED_BIBLIOGRAPHIC_CANDIDATE_LIVE_HTTP_MATERIALIZATION",
+                "candidate_url":candidate["url"],
+                "final_url":"https://publisher.example/refined",
+                "final_host":"publisher.example",
+                "selected_only_materialization":True,
+            }
+        verifier.materialize=staged_materialize
+        out=self.front.run(objective,decomposition(objective))
+        self.assertEqual(out["status"],"SOURCE_FRONTEND_READY",out)
+        self.assertEqual(
+            materialization_calls,
+            ["https://doi.org/10.1234/strong","https://doi.org/10.1234/refined"],
+        )
+        self.assertEqual(len(relevance.seen),2,relevance.seen)
+        self.assertEqual(relevance.seen[1]["record_title"],"Strong domain measurement study")
+        self.assertEqual(
+            out["selected_source_origin"],
+            "BIBLIOGRAPHIC_METADATA_REFINED_SELECTED_LIVE_MATERIALIZATION",
+            out,
+        )
+        self.assertEqual(len(extractor.calls),1,out)
+        candidate,provenance=extractor.calls[0]
+        self.assertEqual(candidate["doi"],"10.1234/refined")
+        self.assertEqual(provenance["status"],"RETRIEVAL_PROVENANCE_VERIFIED")
+        self.assertEqual(provenance["final_url"],"https://publisher.example/refined")
+
     def test_failed_materialization_and_failed_refinement_is_fail_closed(self):
         objective="Determine whether a measured coastal quantity exceeds a threshold."
         discovery,verifier,relevance,extractor=self.install(
