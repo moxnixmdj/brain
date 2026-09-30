@@ -130,6 +130,49 @@ class ResearchQueryFocusTests(unittest.TestCase):
         out=self.rank.rank(objective,candidates)
         self.assertEqual(out["top_candidate_original_index"],1,out)
 
+    def test_abbreviation_does_not_truncate_decision_subject(self):
+        objective=(
+            "Evaluate whether U.S. GDP growth was higher than U.S. CPI growth from 2021 to 2025. "
+            "Use authoritative primary evidence and independently verify the result."
+        )
+        out=self.focus.focus(objective)
+        self.assertEqual(out["status"],"FOCUSED",out)
+        q=out["query"].lower()
+        self.assertIn("u.s",q,out)
+        self.assertIn("gdp",q,out)
+        self.assertIn("cpi",q,out)
+        self.assertIn("2021",q,out)
+        self.assertIn("2025",q,out)
+        self.assertNotIn("authoritative",q,out)
+
+    def test_technical_use_and_primary_reference_terms_are_not_misread_as_control(self):
+        objective=(
+            "Assess whether CPU use is higher for primary reference workloads than for cached workloads. "
+            "Use authoritative technical evidence and run a zero-cost verification method."
+        )
+        out=self.focus.focus(objective)
+        self.assertEqual(out["status"],"FOCUSED",out)
+        q=out["query"].lower()
+        for required in ("cpu","use","primary","reference","workloads","cached"):
+            self.assertIn(required,q,out)
+        self.assertNotIn("authoritative",q,out)
+        self.assertNotIn("verification",q,out)
+
+    def test_single_sentence_control_tail_is_cut_only_at_clause_boundary(self):
+        objective=(
+            "Determine whether database run length differs by page size, using authoritative evidence "
+            "and independently verify the result"
+        )
+        out=self.focus.focus(objective)
+        self.assertEqual(out["status"],"FOCUSED",out)
+        q=out["query"].lower()
+        self.assertIn("database",q,out)
+        self.assertIn("run",q,out)
+        self.assertIn("length",q,out)
+        self.assertIn("page",q,out)
+        self.assertIn("size",q,out)
+        self.assertNotIn("authoritative",q,out)
+
     def test_focus_is_deterministic_and_model_free(self):
         objective="Compare sodium battery energy density with lithium battery energy density."
         a=self.focus.focus(objective)
