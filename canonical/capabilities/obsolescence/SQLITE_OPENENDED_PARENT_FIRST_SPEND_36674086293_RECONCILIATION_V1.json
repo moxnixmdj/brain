@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FIRST_SPEND_RECONCILIATION_V1",
+  "reconciliation_id": "SQLITE_OPENENDED_PARENT_FIRST_SPEND_36674086293_20260930",
+  "observed_at_utc": "2026-09-30T05:37:35Z",
+  "canonical_base_sha": "e5b111b8eea2767013e84e93385704005d1beb34",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+  "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+  "first_spend": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 95,
+    "workflow_run_id": 36674086293,
+    "workflow_job_id": 109755152141,
+    "artifact_id": 11078414137,
+    "artifact_name": "openended-sqlite-taska-canonical-cli-terminal",
+    "artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
+    "closure_preflight": "PASS",
+    "canonical_cli_execution_started": true,
+    "terminal_status": "BLOCKED",
+    "parent_task_completed": false
+  },
+  "authoritative_terminal_evidence": {
+    "runtime_status": "BLOCKED",
+    "runtime_mission_path": "canonical/astra_runtime/missions/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json",
+    "goal_gap_classification": "CAPABILITY_CANDIDATE",
+    "capability_acquisition_allowed": true,
+    "bound_capability_grounding": {
+      "grounded_clause_count": 0,
+      "unresolved_clause_indexes": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "candidate_capability_ids": [],
+      "model_dependency_count": 0
+    },
+    "terminal_stage": "CAPABILITY_ACQUISITION",
+    "terminal_error_class": "CAPABILITY_ACQUISITION_REQUIRED",
+    "exact_generic_failure": "NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "supplier_failures": [
+      "APT_CLI:NO_COMPATIBLE_APT_CLI_CONTRACT",
+      "PYPI_PYTHON_LIBRARY:PYPI_CONTRACT_CLASS_UNSUPPORTED"
+    ],
+    "apt_contract_surface_at_failure": "TEXT_TO_OUTPUT_FILE_CLI_ONLY",
+    "pypi_contract_surface_at_failure": "STRUCTURED_CODEC_ONLY"
+  },
+  "causal_adjudication": {
+    "previous_terminal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "previous_terminal_blocker_superseded": true,
+    "reason": "Canonical run_goal crossed the compile miss, classified the unresolved subgoal as CAPABILITY_CANDIDATE, executed bound-capability grounding, and attempted targeted plus federated capability acquisition.",
+    "current_parent_blocker": "GENERIC_OPEN_ENDED_RESEARCH_CAPABILITY_ACQUISITION_CONTRACT_MISSING",
+    "repair_scope": "GENERIC_ONLY__NO_SQLITE_TASK_SPECIFIC_RUNTIME_PATCH"
+  },
+  "replay_firewall": {
+    "same_task_replay_allowed": false,
+    "first_spend_authority_run_id": 36674086293,
+    "duplicate_runs": [
+      {
+        "run_id": 36674110900,
+        "authority": "ZERO_FRESHNESS_ZERO_REPAIR_ZERO_PROMOTION"
+      },
+      {
+        "run_id": 36674110980,
+        "authority": "ZERO_FRESHNESS_ZERO_REPAIR_ZERO_PROMOTION"
+      }
+    ]
+  },
+  "next_action": {
+    "order": [
+      "SEARCH_REUSE",
+      "BYPASS_OR_COMPOSE_EXISTING_VERIFIED_CAPABILITIES",
+      "REPAIR_MINIMUM_GENERIC_CONTRACT_SURFACE",
+      "QUALIFY_WITH_FRESH_NON_PARENT_EVIDENCE",
+      "FREEZE_NEW_MATERIALLY_DIFFERENT_OPEN_ENDED_PARENT_TASK"
+    ],
+    "required_generic_effect": "Represent and verify an open-ended research capability contract spanning authoritative-source discovery, method/tool selection, executable experiment, independent verification, and evidence synthesis without model cognition.",
+    "prohibited": [
+      "REPLAY_SQLITE_TASK",
+      "USE_DUPLICATE_RUN_FOR_REPAIR_AUTHORITY",
+      "SQLITE_SPECIFIC_PATCH",
+      "PROMOTE_PARENT_CAPABILITY_FROM_THIS_FAILURE"
+    ]
+  },
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0
+}
