@@ -184,11 +184,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+    "next_step": "RUN_RECURSIVE_OBS_FOR_PARENT_NUMERIC_RELATION_GAP__QUALIFY_REUSE_OF_EXISTING_DETERMINISTIC_SYMPY_ROUTE_BEFORE_BUILDING__NO_GEOPHYSICS_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+    "critical_blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -265,7 +265,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_REACHABLE_TYPED_NUMERIC_RELATION_AND_QUANTITATIVE_COMPUTATION",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -576,23 +576,23 @@
     "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
-      "event_id": "COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERED_PASS_20260930",
-      "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-      "status": "REQUALIFIED__FRESH_MATERIALLY_DISTINCT_REUSE_RECOVERED_AND_INDEPENDENTLY_ADJUDICATED_WITHOUT_REPLAY",
-      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
-      "source_public_run_id": 36659637634,
-      "recovery_public_run_id": 36660108447,
+      "event_id": "PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FRESH_PARENT_REAL_TASK_FAILED__FIRST_CAUSAL_GAP_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+      "public_run_id": 36661188188,
+      "public_job_id": 109716113402,
       "scoreboard": {
         "reusable_capabilities_inherited": 3,
         "verified_real_tasks_completed": 6,
         "fresh_reuse_passes": 2,
         "frontier_dependencies_removed": 1,
-        "residual_gaps_localized": 7
+        "residual_gaps_localized": 8
       }
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "GROUNDING_AND_COMPOSITION_REQUALIFIED__PARENT_NEW_CROSS_DOMAIN_REAL_TASK_REQUIRED",
+    "frontier_decomposition_status": "PARENT_GEOPHYSICS_FRESH_TASK_FAILED__LIVE_EVIDENCE_FETCH_WORKS__FIRST_NUMERIC_RELATION_SUBGOAL_UNREACHABLE",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
     "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "grounding_requalification": {
@@ -615,13 +615,15 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "COMPOSITION_REQUALIFIED__RETURN_TO_PARENT_FRONTIER",
-      "reason": "The fresh evidence-surface task completed semantically on the repaired direct compiler. Its red workflow came from an obsolete post-success harness assertion, and a separate no-replay recovery run independently verified the preserved trace and recomputed the decision.",
+      "status": "PARENT_FRESH_GEOPHYSICS_TASK_FALSIFIED_AT_NUMERIC_RELATION_REACHABILITY",
+      "reason": "Both frozen live scientific source fetches compiled and source preflight passed, but the first quantitative subgoal had no verified bound capability match. An independently verified exact-symbolic SymPy route exists elsewhere in Brain but is not inherited into the bound controller surface.",
       "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+      "blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json"
-      ]
+        "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json"
+      ],
+      "source_run_id": 36661188188,
+      "same_task_replay_allowed": false
     }
   },
   "provider_rules": {

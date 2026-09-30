@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 6,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 7
+    "residual_gaps_localized": 8
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_progress_event_target": "RUN_RECURSIVE_OBS_FOR_PARENT_NUMERIC_RELATION_GAP__QUALIFY_REUSE_OF_EXISTING_DETERMINISTIC_SYMPY_ROUTE_BEFORE_BUILDING__NO_GEOPHYSICS_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -334,12 +334,30 @@
       ],
       "verified_real_tasks_completed_delta": 0,
       "reason": "The fresh task semantically completed on exact current bytes; preserved job-log evidence and an independent no-replay recomputation proved the red workflow came from an obsolete post-success harness assertion."
+    },
+    {
+      "event_id": "PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FRESH_PARENT_REAL_TASK_FAILED__FIRST_CAUSAL_GAP_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+      "public_run_id": 36661188188,
+      "public_job_id": 109716113402,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED",
+      "residual_gap": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+      "reason": "The exact frozen task reached both source-acquisition clauses but the earliest quantitative relation clause had no verified bound capability match."
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_ACQUIRED_VERIFIED_AFTER_RECOVERED_REQUALIFICATION",
+    "subcapability_status": "PARENT_FRESH_GEOPHYSICS_TASK_FAILED__NUMERIC_RELATION_GAP_LOCALIZED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }

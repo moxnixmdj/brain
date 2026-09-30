@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_REAL_TASK_FALSIFICATION_V1",
+  "evidence_id": "PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
+  "status": "FRESH_PARENT_REAL_TASK_FAILED__FIRST_CAUSAL_GAP_LOCALIZED",
+  "source_pr": 286,
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/parent-geophysics-energy-20260930-v2",
+    "run_id": 36661188188,
+    "job_id": 109716113402,
+    "head_sha": "6101738645bc1d3a78a9d9be5f83848d1f1efc4e",
+    "workflow_conclusion": "success",
+    "semantic_task_status": "FAIL",
+    "artifact_id": 11074272541,
+    "artifact_digest": "sha256:106d28719e5c6bc0bc676b3d54a811874202b1e30985c4c0c59f0aa3560ded5b"
+  },
+  "frozen_task": {
+    "path": "canonical/tasks/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002.json",
+    "git_blob": "6354394ce589cb399b61141dfc7b49ae25236a3b",
+    "frozen_before_source_preflight": true,
+    "source_preflight_run_id": 36660813340,
+    "source_preflight_status": "PASS",
+    "execution_count": 1,
+    "replay_allowed": false,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "primary_evidence_hashes": {
+    "terminal_sha256": "181c9f6c45842662935df6940c3fd459cfab0de6fe69e81b2f012b8ad8b7eaf1",
+    "oracle_sha256": "fbb070b8c4645c4bec05ff7431bcfa33be2492589784b7f908f0955682202876",
+    "grounding_sha256": "a2099ec94690946eb2ee94761674d717a7620cc1f10f6d17dd1ac343592296b8",
+    "gap_classification_sha256": "3adffa14926e7bb961830b174a7b2479bf233faaf0a56cd8909889d3169f6a97"
+  },
+  "execution_progress": {
+    "exact_brain_and_task_bytes": "PASS",
+    "usgs_exact_source_preflight": "PASS",
+    "emsc_exact_source_preflight": "PASS",
+    "direct_compiler_prefix": [
+      "USGS authoritative JSON magnitude fetch compiled",
+      "EMSC authoritative JSON magnitude fetch compiled"
+    ],
+    "oracle_status": "NOT_RUN_DUE_TO_BRAIN_SEMANTIC_FAILURE"
+  },
+  "first_causal_gap": {
+    "gap_class": "CAPABILITY_CANDIDATE",
+    "earliest_direct_compile_subgoal_index": 2,
+    "earliest_direct_compile_subgoal": "Determine whether the two magnitudes differ by at most 0.2",
+    "grounding_clause_index": 4,
+    "grounding_clause_status": "UNRESOLVED",
+    "direct_compile_error": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "runtime_policy": "RESOLVE_EXISTING_BOUND_GROUNDING_BEFORE_EXTERNAL_DISCOVERY",
+    "external_capability_acquisition_attempted": false,
+    "canonical_blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER"
+  },
+  "additional_unresolved_grounding_clauses": [
+    {
+      "index": 6,
+      "text": "Calculate the seismic energy in joules using E_J = 10 ** (1.5 * M + 4.8)",
+      "status": "UNRESOLVED"
+    },
+    {
+      "index": 7,
+      "text": "Decide ABOVE_OR_EQUAL_1E14_J if E_J is at least 100000000000000 joules, otherwise BELOW_1E14_J",
+      "status": "UNRESOLVED"
+    }
+  ],
+  "existing_route_discovery": {
+    "capability_record": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1.json",
+    "adjudication_record": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+    "status": "OBSOLETE_VERIFIED",
+    "producer": "SymPy 1.14.0",
+    "independent_verifier": "Wolfram Language kernel",
+    "exact_suite_result": "12/12 PASS",
+    "incremental_spend_usd": 0,
+    "controller_bound_registry_presence": false,
+    "implication": "A verified deterministic mathematical supplier already exists, but the parent controller cannot currently route this numeric-relation subgoal to it. Sufficiency for the exact new numeric relation/computation chain remains to be qualified; do not assume the old bounded symbolic suite covers all new operations."
+  },
+  "credit_effect": {
+    "verified_real_tasks_completed_delta": 0,
+    "reusable_capabilities_inherited_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 1,
+    "parent_capability_promoted": false
+  },
+  "next_action": "RUN_RECURSIVE_OBS_FOR_PARENT_NUMERIC_RELATION_GAP__QUALIFY_REUSE_OF_EXISTING_DETERMINISTIC_SYMPY_ROUTE_BEFORE_BUILDING__NO_GEOPHYSICS_REPLAY"
+}

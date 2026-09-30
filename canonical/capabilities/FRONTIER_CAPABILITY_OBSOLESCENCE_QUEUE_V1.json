@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Execute a new materially different technical/scientific task end-to-end through the verified model-independent synthesis, grounding, composition, planning, execution, and verification stack; either earn parent capability evidence or localize the first remaining causal gap.",
+    "objective": "Close the first parent-level causal gap exposed by the frozen geophysics task: route fetched numeric evidence into a verified model-independent quantitative relation/computation capability, reusing the existing verified deterministic math route if sufficient.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
-    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
-    "repair_status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_REQUALIFIED_VERIFIED",
-    "prohibition": "NO_SPACE_CARGO_REUSE__NO_SERIALIZATION_REPLAY__NO_PR267_REPLAY__NO_PR277_REPLAY__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__NO_MORE_CHILD_BENCHMARKING_WITHOUT_PARENT_FAILURE",
-    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+    "exact_blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+    "repair_status": "FRESH_PARENT_TASK_FALSIFIED__NUMERIC_RELATION_GAP_LOCALIZED__REPAIR_UNSTARTED",
+    "prohibition": "NO_GEOPHYSICS_REPLAY__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__NO_TASK_SPECIFIC_EVENT_OR_MAGNITUDE_PATCH__SEARCH_AND_QUALIFY_EXISTING_SYMPY_ROUTE_BEFORE_BUILD",
+    "next_action": "RUN_RECURSIVE_OBS_FOR_PARENT_NUMERIC_RELATION_GAP__QUALIFY_REUSE_OF_EXISTING_DETERMINISTIC_SYMPY_ROUTE_BEFORE_BUILDING__NO_GEOPHYSICS_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -89,7 +89,10 @@
     "latest_composition_requalification_run_id": 36659637634,
     "latest_composition_recovery_run_id": 36660108447,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json"
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
+    "latest_parent_real_task_run_id": 36661188188,
+    "latest_parent_real_task_artifact_id": 11074272541,
+    "latest_parent_real_task_artifact_digest": "sha256:106d28719e5c6bc0bc676b3d54a811874202b1e30985c4c0c59f0aa3560ded5b"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
