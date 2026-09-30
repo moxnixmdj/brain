@@ -1,0 +1,146 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-OPUS55-PERMANENT-CAPABILITY-OWNERSHIP-THEORY-20260930-V1",
+  "status": "AUTHORIZED_BY_EXPLICIT_USER_THEORY_CORRECTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "81f2f813f03b5d80ac2e44080bd19d967bd06463",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "explicit_user_authorization": "User explicitly corrected the theory: knowledge is externalized/JIT; capabilities are found initially, configured into Brain, verified equal-or-better than Opus 5.5, saved permanently, and are not externalized like knowledge.",
+  "previous_terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "new_terminal_objective": "PERMANENTLY_ACQUIRE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "CANONICAL_THEORY_STILL_PERMITTED_JIT_CAPABILITY_EXTERNALIZATION_CAPABILITY_INVENTION_AND_MODEL_INDEPENDENCE_AS_DEFAULT",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::CANONICAL_THEORY_CORRECTION::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make permanent Opus-5.5-or-better capability ownership the terminal target; externalize knowledge JIT only; forbid underlying capability invention; retire default model-independence; require durable reasoning receipts.",
+  "theory_invariants": {
+    "knowledge": "EXTERNAL_JIT",
+    "capabilities": "FIND_EXISTING__CONFIGURE_IN_BRAIN__VERIFY_GE_OPUS55__SAVE_PERMANENTLY",
+    "jit_capability_externalization": false,
+    "underlying_capability_invention": false,
+    "model_independence_terminal_requirement": false,
+    "reasoning_receipt_required": true
+  },
+  "reasoning_durability": {
+    "receipt_path": "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json",
+    "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "chat_only_authority": false
+  },
+  "prior_work_checked": [
+    "Current main 81f2f813f03b5d80ac2e44080bd19d967bd06463",
+    "Existing V4 mission lock allowed JIT capability acquisition and invention.",
+    "MODEL_NON_DEPENDENCE_LAW_V1 imposed model-independence as a default architecture requirement.",
+    "Current open PR550 is authorized under superseded V4 theory and must not outrank the user-authorized theory correction."
+  ],
+  "evidence_presence_classification": "USER_AUTHORIZED_THEORY_CORRECTION_WITH_DIRECT_CANONICAL_CONTRADICTIONS_IDENTIFIED",
+  "stop_condition": "Merge only the governance/theory correction. Award zero capability credit. Then close/supersede V4-authorized implementation work and begin Opus 5.5 capability-envelope recovery/mapping.",
+  "model_dependency_count": null,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "81f2f813f03b5d80ac2e44080bd19d967bd06463",
+    "real_outcome": "Make the user's corrected capability/knowledge theory durable and fail-closed across every authoritative Brain control surface.",
+    "required_capability": "CANONICAL_THEORY_DURABILITY_AND_DRIFT_IMMUNITY",
+    "obs_goal": {
+      "real_outcome": "Prevent future work from treating capabilities as JIT knowledge, inventing underlying capabilities, or imposing model-independence by default.",
+      "proxy_goals_deleted": [
+        "Continue PR550 first",
+        "Preserve V4 wording for compatibility",
+        "Rely on chat memory"
+      ],
+      "surviving_necessity": "Canonical governance must change before further frontier work."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Canonical mission locks",
+        "goal hierarchy",
+        "pointer",
+        "gates",
+        "OBS schema",
+        "scoreboard",
+        "operator authority boundary"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No new capability implementation",
+        "No benchmark execution",
+        "No parent-task replay"
+      ],
+      "surviving_gap": "Contradictory V4 theory and model-nondependence rules still authorize wrong work."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Top-level governance contradiction, not a local runtime defect.",
+      "delete_bypass_substitute_options": [
+        "Delete stale authority",
+        "Supersede V4 entry points",
+        "Promote V5 theory",
+        "Require durable decision receipts"
+      ],
+      "surviving_causal_blocker": "CANONICAL_THEORY_CONTRADICTION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "PROMOTE_V5_AND_SUPERSEDE_CONTRADICTORY_V4",
+        "CHAT_ONLY_MEMORY",
+        "CONTINUE_LOCAL_REPAIRS"
+      ],
+      "losing_routes_reason": "Chat memory is non-authoritative; local repairs perpetuate drift.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Cross-surface string/schema consistency scan is sufficient for governance-only change; no capability test or scarce parent execution is required."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR550 if still open under V4 authority",
+        "Any new work requiring model-independence by default",
+        "Any capability-invention lane"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Canonical drift immunity",
+        "Reasoning durability",
+        "Provider resilience"
+      ],
+      "fresh_reuse_plan": "Next consequential capability action must use V5 action-intent template and reasoning receipt."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused current canonical pointer and existing governance surfaces",
+        "No external supplier search because this is a user-authorized governance correction"
+      ],
+      "search_stop_decision": "The contradiction is explicit and user-authorized; further route search cannot change the required theory correction.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PROMOTE_V5_AND_SUPERSEDE_CONTRADICTORY_V4",
+      "CHAT_ONLY_MEMORY",
+      "CONTINUE_LOCAL_REPAIRS"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CHAT_ONLY_MEMORY",
+      "CAPABILITY_JIT_EXTERNALIZATION",
+      "UNDERLYING_CAPABILITY_INVENTION",
+      "DEFAULT_MODEL_INDEPENDENCE",
+      "CONTINUE_PR550_BEFORE_THEORY_FIX"
+    ],
+    "selected_surviving_route": "PROMOTE_V5_AND_SUPERSEDE_CONTRADICTORY_V4",
+    "why_selected_route_is_fastest_sufficient": "It changes the authoritative control surfaces directly, preserves history, and makes future guarded actions fail closed on the corrected theory.",
+    "expected_parent_level_state_change": "OPUS_5_5_PERMANENT_CAPABILITY_OWNERSHIP_BECOMES_CANONICAL_TERMINAL_TARGET",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Explicit user-authorized governance theory correction; no external capability supplier is being selected."
+    }
+  }
+}
