@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Execute the already-frozen fresh SQLite open-ended parent Task A exactly once through the qualified canonical ASTRA CLI carrier; preserve only the first integrated causal gap on failure and never replay the task.",
+    "objective": "Repair the generic model-independent semantic front-end for open-ended epistemic objectives: decompose the research question, discover/verify authority and data routes, then reuse existing quantitative/synthesis/verification capabilities. Parent SQLite is spent and replay-forbidden.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "FRESH_OPEN_ENDED_PARENT_TASK_A_REQUIRED_AFTER_CARRIER_MISSION_ORIGIN_VALIDATION",
-    "evidence_path": "canonical/capabilities/obsolescence/CARRIER_MISSION_ORIGIN_CANARY_RECONCILIATION_20260930_V1.json",
-    "repair_status": "CANONICAL_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT__NO_PARENT_EXECUTION_YET",
-    "prohibition": "NO_MAUNA_REPLAY_OR_RENAME_AS_FRESH__NO_SQLITE_REPLAY_AFTER_EXECUTION_START__NO_PARENT_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_RESEARCH_RECIPE__NO_DIRECT_GOAL_COMPILER_HARNESS",
-    "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+    "exact_blocker": "OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_MISSING__BROAD_RESEARCH_GOALS_MISROUTED_TO_PACKAGE_ACQUISITION",
+    "evidence_path": "canonical/capabilities/obsolescence/OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_20260930_V1.json",
+    "repair_status": "SQLITE_PARENT_SPENT_ONCE_FAILED_AT_PACKAGE_ACQUISITION__MISSION_ORIGIN_VALIDATED__GENERIC_GROUNDING_BYPASS_FALSIFIED__EPISTEMIC_ROUTING_GUARD_IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION",
+    "prohibition": "NO_SQLITE_THERMOPHYSICS_OR_MAUNA_REPLAY__NO_NEW_PARENT_TASK_BEFORE_GENERIC_DECOMPOSITION_QUALIFICATION__NO_TASK_SPECIFIC_RESEARCH_RECIPE__NO_MODEL_COGNITION",
+    "next_action": "VERIFY_EPISTEMIC_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_EPISTEMIC_DECOMPOSITION_IR_AND_AUTHORITY_DATA_DISCOVERY__FREEZE_NEW_PARENT_TASK_ONLY_AFTER_QUALIFICATION",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -114,12 +114,13 @@
     "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
     "fresh_open_ended_task_A_freeze": {
       "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
-      "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
       "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
-      "status": "FROZEN_UNSPENT",
-      "execution_count": 0,
-      "replay_allowed": false,
-      "required_entrypoint": "canonical/runtime/astra_runtime.py <canonical mission path>"
+      "status": "SPENT_ONCE__FAIL_FIRST_CAUSAL_GAP__REPLAY_FORBIDDEN",
+      "execution_count": 1,
+      "public_run_id": 36674205874,
+      "artifact_id": 11078364401,
+      "artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9",
+      "replay_allowed": false
     }
   },
   "promotion_claim": false,
@@ -337,5 +338,5 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY"
+  "next_progress_event_target": "VERIFY_EPISTEMIC_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_EPISTEMIC_DECOMPOSITION_IR_AND_AUTHORITY_DATA_DISCOVERY__FREEZE_NEW_PARENT_TASK_ONLY_AFTER_QUALIFICATION"
 }
