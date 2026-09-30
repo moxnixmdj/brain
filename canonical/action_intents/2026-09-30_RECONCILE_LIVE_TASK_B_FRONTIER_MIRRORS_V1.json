@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-LIVE-TASK-B-FRONTIER-MIRRORS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_POINTER_AND_FRONTIER_TARGET_STALE_TASK_A_WHILE_HIERARCHY_QUEUE_SCOREBOARD_REQUIRE_TASK_B",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_POINTER_AND_FRONTIER_TARGET_STALE_TASK_A_WHILE_HIERARCHY_QUEUE_SCOREBOARD_REQUIRE_TASK_B",
+  "expected_parent_frontier_change": "Make all canonical frontier mirrors agree that the active blocker is one fresh materially different genuinely open-ended parent Task B; preserve zero parent-promotion credit and preserve the already-frozen authorized seismology Task B as the next one-shot execution.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main 89e91fc0bca9f099a728e7b6c19c1cefd97102ce",
+    "hierarchy/queue/scoreboard all require fresh Task B",
+    "pointer/active target still require older Task A",
+    "PR517 authorizes frozen seismology Task B",
+    "automatic shared-runtime run 36693304431 failed pre-start with steps=null and no logs",
+    "PR516 and PR518 closed as stale Task-C advances"
+  ],
+  "evidence_presence_classification": "CANONICAL_MIRROR_DRIFT__PROOF_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the truth-only pointer and active frontier-target mirror correction. Do not change runtime, mission bytes, scoreboard counters, or capability credit. Then execute the already-frozen authorized seismology Task B exactly once through a fresh carrier lane because the automatic shared-runtime run failed before START.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "89e91fc0bca9f099a728e7b6c19c1cefd97102ce",
+    "real_outcome": "Restore one coherent canonical frontier before the scarce seismology Task B spend.",
+    "required_capability": "CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "All live frontier mirrors identify the same Task-B blocker and next action.",
+      "proxy_goals_deleted": [
+        "advance to Task C",
+        "rerun prior parent tasks",
+        "modify runtime",
+        "change scoreboard credit"
+      ],
+      "surviving_necessity": "Repair only the stale pointer and frontier-target mirror."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "ACTIVE_GOAL_HIERARCHY_V1 already requires fresh Task B",
+        "FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1 already requires fresh Task B",
+        "REAL_OUTPUT_SCOREBOARD_V1 already requires fresh Task B",
+        "merged PR517 authorizes frozen seismology Task B"
+      ],
+      "external_existing_routes_checked": [
+        "No external route is relevant to canonical mirror reconciliation."
+      ],
+      "capability_work_deleted": [
+        "No new governance law",
+        "No new runtime",
+        "No new mission",
+        "No Task-C lease"
+      ],
+      "surviving_gap": "Pointer and active frontier-target record still advertise older Task-A state."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific canonical mirror drift after rapid concurrent frontier updates.",
+      "delete_bypass_substitute_options": [
+        "Ignore split authority: rejected fail-closed",
+        "Advance to Task C: rejected because Task B unspent",
+        "Repair two stale mirrors: survives"
+      ],
+      "surviving_causal_blocker": "Two stale canonical mirrors contradict three current authoritative mirrors."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_TWO_STALE_MIRRORS",
+        "CREATE_NEW_FRONTIER_STATE",
+        "EXECUTE_WITH_SPLIT_AUTHORITY"
+      ],
+      "losing_routes_reason": "New state adds duplication; executing with contradictory authority risks false spend and false promotion.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic verifier. Directly compare pointer, hierarchy, queue, scoreboard, and active frontier-target blocker/next-action fields after the change."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Task-C PRs #516 and #518 already closed as stale",
+        "Old Task-A pointer text",
+        "Old Task-A frontier-target residual/next-action"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Cross-surface canonical consistency"
+      ],
+      "fresh_reuse_plan": "Immediately use the reconciled state to admit the already-frozen seismology Task B execution; do not create another task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing hierarchy/queue/scoreboard truth",
+        "No external route search because this is a RECONCILE_FRONTIER action"
+      ],
+      "search_stop_decision": "The contradiction is exact and fully localized to two mirrors; further search cannot improve the correction.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Route discovery is not applicable to truth-only reconciliation; no execution route is selected here."
+    },
+    "routes_considered": [
+      "REPAIR_TWO_STALE_MIRRORS",
+      "CREATE_NEW_FRONTIER_STATE",
+      "EXECUTE_WITH_SPLIT_AUTHORITY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CREATE_NEW_FRONTIER_STATE",
+      "EXECUTE_WITH_SPLIT_AUTHORITY",
+      "ADVANCE_TO_TASK_C"
+    ],
+    "selected_surviving_route": "REPAIR_TWO_STALE_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "It changes only the two contradictory records and restores the existing canonical consensus without touching execution machinery or credit.",
+    "expected_parent_level_state_change": "Make all canonical frontier mirrors agree that the active blocker is one fresh materially different genuinely open-ended parent Task B; preserve zero parent-promotion credit and preserve the already-frozen authorized seismology Task B as the next one-shot execution.",
+    "stop_condition": "Merge only the truth-only pointer and active frontier-target mirror correction. Do not change runtime, mission bytes, scoreboard counters, or capability credit. Then execute the already-frozen authorized seismology Task B exactly once through a fresh carrier lane because the automatic shared-runtime run failed before START.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER truth-only action; no supplier, implementation, infrastructure, or execution route is being selected."
+    }
+  }
+}
