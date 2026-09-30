@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_NON_ASTRONOMY_EXECUTION_PASS",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
+  "useful_behavior": "Given explicitly named causally prior scalar values, deterministically evaluate a bounded arithmetic expression containing numeric literals, named scalar variables, +, -, *, /, **, and unary signs without model cognition or arbitrary evaluation.",
+  "winning_route": "EXPLICIT_RESULT_ALIASES__STRICT_PYTHON_AST_ALLOWLIST__PROGRAMMATIC_SYMPY_1_14_OBJECTS",
+  "scope": {
+    "grammar": [
+      "numeric literal",
+      "named scalar variable",
+      "+",
+      "-",
+      "*",
+      "/",
+      "**",
+      "unary +",
+      "unary -"
+    ],
+    "rejected": [
+      "calls",
+      "attributes",
+      "subscripts",
+      "strings",
+      "containers",
+      "comparisons",
+      "arbitrary eval",
+      "string sympify",
+      "unknown aliases",
+      "nonfinite results"
+    ],
+    "max_expression_chars": 1000,
+    "max_ast_nodes": 64,
+    "max_variables": 16,
+    "max_abs_exponent": 100,
+    "result": "finite real scalar"
+  },
+  "supplier": {
+    "project": "sympy",
+    "version": "1.14.0",
+    "dependency": "mpmath==1.3.0",
+    "closure_sha256": "72f749d3eadfaa28d62e6788e13c5ca55baf2d8f5e2347341b79aaa077876d6a"
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
+  "verification_run_id": 36666277034,
+  "verification_artifact_id": 11075549084,
+  "current_status": "ACQUIRED_VERIFIED",
+  "parent_capability_promoted": false,
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_SPENT_TASK_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+}
