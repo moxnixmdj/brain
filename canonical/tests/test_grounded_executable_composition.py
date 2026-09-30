@@ -42,7 +42,7 @@ class FakeCompiler:
             for v in value:
                 out.update(FakeCompiler._placeholders(v))
         elif isinstance(value,str):
-            out.update(re.findall(r"\\$\\{input\\.([A-Za-z0-9_]+)\\}",value))
+            out.update(re.findall(r"\$\{input\.([A-Za-z0-9_]+)\}",value))
         return out
     @staticmethod
     def _bind_inputs(goal,root,entry,context_paths=None,future_clauses=None):
