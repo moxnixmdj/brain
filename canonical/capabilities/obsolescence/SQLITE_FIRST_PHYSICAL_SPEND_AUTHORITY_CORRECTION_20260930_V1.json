@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_SQLITE_FIRST_PHYSICAL_SPEND_AUTHORITY_CORRECTION_V1",
+  "status": "FIRST_PHYSICAL_SPEND_CORRECTED__LATER_SQLITE_EXECUTIONS_QUARANTINED__ACTIVE_MIRROR_REPLAY_DIAGNOSIS_INVALIDATED",
+  "checked_on": "2026-09-30",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task": {
+    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+    "substantive_objective": "Determine whether SQLite's online backup capability can produce a logically consistent destination database while the source database is being modified concurrently.",
+    "freshness_status": "SPENT_BY_EARLIEST_PHYSICAL_EXECUTION",
+    "replay_allowed": false,
+    "parent_pass": false
+  },
+  "first_physical_spend": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "run_id": 36670808367,
+    "job_id": 109745195120,
+    "head_branch": "arm/openended-sqlite-taska-20260930-v1",
+    "head_sha": "c112ed0f42cf6d17c1c5232763a09972b8ca99a9",
+    "artifact_id": 11077757767,
+    "artifact_name": "openended-sqlite-taska-terminal",
+    "artifact_digest": "sha256:dd095506132364f189c232dbf21cdd4b59d599ea8b3001b994552f25f738335c",
+    "terminal_schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_TERMINAL_V1",
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "execution_count": 1,
+    "task_executed": true,
+    "source_task_replay": false,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "carrier_execution_form": "DIRECT_RUNTIME_RUN_GOAL_HARNESS",
+    "canonical_cli_mission_file_entrypoint": false,
+    "observed_gap": "CAPABILITY_ACQUISITION_REQUIRED",
+    "acquisition_errors": [
+      "APT_ORIGIN_MISSION_PATH_INVALID",
+      "PYPI_ORIGIN_MISSION_PATH_INVALID"
+    ]
+  },
+  "chronology_rule": {
+    "rule": "EARLIEST_PHYSICAL_PRODUCER_EXECUTION_OF_EXACT_FROZEN_TASK_CONSUMES_FRESHNESS",
+    "consequence": "Later executions cannot become fresh or first by using a better carrier, a renamed mission, a later reconciliation, or a later discovery time."
+  },
+  "causal_authority": {
+    "first_spend_freshness_authority": true,
+    "first_spend_current_runtime_repair_authority": false,
+    "reason": "The earliest carrier called runtime.run_goal(step, mission) directly and did not establish the canonical mission-file path required by autonomous acquisition. Its path-invalid acquisition errors are therefore carrier-path artifacts for present-runtime diagnosis.",
+    "fresh_non_parent_falsification": {
+      "authoritative_canary_run_id": 36672816106,
+      "authoritative_canary_job_id": 109751299770,
+      "authoritative_canary_artifact_id": 11078921733,
+      "authoritative_canary_artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+      "result": "PASS_CANONICAL_MISSION_ORIGIN_PROPAGATION",
+      "implication": "APT/PyPI origin-mission-path failure from the early SQLite carrier is not a surviving current causal blocker."
+    }
+  },
+  "later_sqlite_executions": [
+    {
+      "run_id": 36674086293,
+      "job_id": 109755152141,
+      "artifact_id": 11078414137,
+      "artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
+      "carrier_execution_form": "CANONICAL_ASTRA_CLI_MISSION_FILE",
+      "observed_gap": "NO_COMPATIBLE_SUPPLIER_CONTRACT",
+      "authority": "REPLAY_DIAGNOSTIC_ONLY",
+      "freshness_credit": false,
+      "parent_credit": false,
+      "scoreboard_credit": false,
+      "standalone_runtime_repair_authority": false
+    },
+    {
+      "run_id": 36674205874,
+      "authority": "LATER_REPLAY_ONLY",
+      "freshness_credit": false,
+      "parent_credit": false,
+      "scoreboard_credit": false,
+      "standalone_runtime_repair_authority": false
+    }
+  ],
+  "supersedes": [
+    {
+      "brain_pr": 384,
+      "false_claim": "PR95/run 36674086293 is the sole first spend",
+      "disposition": "SUPERSEDED_BY_EARLIER_IMMUTABLE_RUN_36670808367"
+    },
+    {
+      "brain_pr": 386,
+      "false_claim": "run 36674205874 is the sole canonical first spend",
+      "disposition": "SUPERSEDED_BY_EARLIER_IMMUTABLE_RUN_36670808367"
+    }
+  ],
+  "accounting": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0,
+    "parent_capability_promoted": false,
+    "note": "Existing scoreboard counters are not changed by this chronology/provenance correction."
+  },
+  "fail_closed_override": {
+    "active_mirror_claim_to_ignore": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT as authoritative SQLite first-spend blocker",
+    "prohibition": [
+      "NO_SQLITE_REPLAY",
+      "NO_THERMOPHYSICS_REPLAY",
+      "NO_RUNTIME_REPAIR_JUSTIFIED_SOLELY_BY_LATER_SQLITE_REPLAY_DIAGNOSTICS",
+      "NO_PARENT_PROMOTION_FROM_SQLITE_REPLAYS",
+      "NO_SCOREBOARD_CREDIT_FROM_SQLITE_REPLAYS"
+    ],
+    "surviving_information_need": "Obtain admissible fresh parent evidence on a materially different open-ended task through the already-qualified canonical ASTRA mission entrypoint."
+  },
+  "next_action": "RECOMPUTE_CURRENT_ROUTE_FRONTIER_FROM_CORRECTED_CHRONOLOGY__SEARCH_REUSE_BEFORE_REPAIR__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_CANONICAL_ASTRA_MISSION_ENTRYPOINT__NEVER_REPLAY_SQLITE_OR_THERMOPHYSICS"
+}
