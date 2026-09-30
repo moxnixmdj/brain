@@ -20,6 +20,14 @@
     "incremental_spend_usd": 0,
     "model_planner_disabled": true,
     "fresh_parent_task": true,
-    "exactly_one_execution": true
+    "exactly_one_execution": true,
+    "replay_allowed": false,
+    "stop_on_first_causal_gap": true
+  },
+  "dispatch_authority": {
+    "reason": "POST_SQLITE_FIRST_SPEND_FRESHNESS_RECONCILIATION",
+    "sqlite_first_spend_evidence": "canonical/capabilities/obsolescence/SQLITE_PARENT_FIRST_SPEND_RECONCILIATION_20260930_V1.json",
+    "exactly_once": true,
+    "replay_allowed": false
   }
 }
