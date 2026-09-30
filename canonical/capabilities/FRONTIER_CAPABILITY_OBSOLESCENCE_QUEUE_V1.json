@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Execute the already-frozen fresh SQLite open-ended parent Task A exactly once through the qualified canonical ASTRA CLI carrier; preserve only the first integrated causal gap on failure and never replay the task.",
+    "objective": "Eliminate or bypass the general model-independent open-ended capability-acquisition contract gap exposed by the one permitted SQLite parent execution, then validate the surviving general route on new fresh parent work without replaying SQLite.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "FRESH_OPEN_ENDED_PARENT_TASK_A_REQUIRED_AFTER_CARRIER_MISSION_ORIGIN_VALIDATION",
-    "evidence_path": "canonical/capabilities/obsolescence/CARRIER_MISSION_ORIGIN_CANARY_RECONCILIATION_20260930_V1.json",
-    "repair_status": "CANONICAL_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT__NO_PARENT_EXECUTION_YET",
-    "prohibition": "NO_MAUNA_REPLAY_OR_RENAME_AS_FRESH__NO_SQLITE_REPLAY_AFTER_EXECUTION_START__NO_PARENT_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_RESEARCH_RECIPE__NO_DIRECT_GOAL_COMPILER_HARNESS",
-    "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+    "exact_blocker": "MODEL_INDEPENDENT_OPEN_ENDED_CAPABILITY_ACQUISITION_NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPENENDED_TASK_A_FIRST_SPEND_ACQUISITION_GAP_20260930_V1.json",
+    "repair_status": "SQLITE_PARENT_TASK_A_SPENT_ONCE__APT_AND_PYPI_CONTRACT_ROUTES_INSUFFICIENT__FRESH_OBS_REQUIRED_BEFORE_REPAIR",
+    "prohibition": "NO_SQLITE_SAME_TASK_REPLAY__NO_TASK_SPECIFIC_SQLITE_PATCH__NO_PARENT_PROMOTION__NO_MODEL_COGNITION__NO_IMPLEMENTATION_BEFORE_FRESH_OBS",
+    "next_action": "RUN_RECURSIVE_OBS_ON_PARENT_ACQUISITION_GAP__DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE_REPAIR_BUILD__SELECT_FASTEST_GENERAL_ROUTE__NO_SQLITE_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -92,9 +92,9 @@
     "latest_composition_recovery_run_id": 36660108447,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
-    "latest_parent_real_task_run_id": 36667844172,
-    "latest_parent_real_task_artifact_id": 11076359417,
-    "latest_parent_real_task_artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+    "latest_parent_real_task_run_id": 36674086293,
+    "latest_parent_real_task_artifact_id": 11078414137,
+    "latest_parent_real_task_artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
     "latest_numeric_relation_qualification_run_id": 36664102642,
     "latest_numeric_relation_qualification_artifact_id": 11075158049,
     "latest_numeric_relation_qualification_artifact_digest": "sha256:b47bbe491db198bcbd4c09b7a9e8cfeac95062989300eca8f8784c117a1222d1",
@@ -116,10 +116,33 @@
       "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
       "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
       "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
-      "status": "FROZEN_UNSPENT",
-      "execution_count": 0,
+      "status": "SPENT_FAIL_FIRST_CAUSAL_GAP",
+      "execution_count": 1,
       "replay_allowed": false,
-      "required_entrypoint": "canonical/runtime/astra_runtime.py <canonical mission path>"
+      "required_entrypoint": "canonical/runtime/astra_runtime.py <canonical mission path>",
+      "first_spend_run_id": 36674086293
+    },
+    "sqlite_parent_first_spend": {
+      "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+      "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
+      "status": "FRESH_OPEN_ENDED_PARENT_SPENT_ONCE__FIRST_INTEGRATED_ACQUISITION_GAP__NO_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPENENDED_TASK_A_FIRST_SPEND_ACQUISITION_GAP_20260930_V1.json",
+      "public_pr": 95,
+      "public_run_id": 36674086293,
+      "job_id": 109755152141,
+      "artifact_id": 11078414137,
+      "artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
+      "runtime_status": "BLOCKED",
+      "runtime_exit_code": 3,
+      "first_causal_stage": "OPEN_ENDED_CAPABILITY_ACQUISITION",
+      "first_causal_gap": "MODEL_INDEPENDENT_OPEN_ENDED_CAPABILITY_ACQUISITION_CONTRACT_GENERALIZATION",
+      "exact_cause": "CAPABILITY_ACQUISITION_REQUIRED__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+      "apt_observation": "NO_COMPATIBLE_APT_CLI_CONTRACT",
+      "pypi_observation": "PYPI_CONTRACT_CLASS_UNSUPPORTED",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "same_or_equivalent_task_replay_allowed": false,
+      "parent_capability_promoted": false
     }
   },
   "promotion_claim": false,
@@ -337,5 +360,5 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY"
+  "next_progress_event_target": "VERIFY_GENERAL_OPEN_ENDED_CAPABILITY_ACQUISITION_ROUTE_ON_NEW_FRESH_PARENT_WORK__NO_SQLITE_REPLAY"
 }
