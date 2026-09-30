@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_REAL_TASK_TERMINAL_RECONCILIATION_V1",
+  "task_id": "PARENT-BIOPHYSICS-RAPID-GROWTH-REAL-TASK-20260930-004",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "BIOPHYSICS_GROWTH_PHYSIOLOGY_UNSTRUCTURED_EVIDENCE_REASONING",
+  "status": "FAILED_FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT__NO_REPLAY__REPAIR_DEFERRED",
+  "canonical_base_commit": "43476b77a1314988183e3daed5f3f0d603f79877",
+  "source_brain_pr": 295,
+  "source_brain_pr_status": "CLOSED_DUPLICATE_LEASE__UNMERGED",
+  "public_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 10,
+    "run_id": 36665681972,
+    "job_id": 109729732147,
+    "artifact_id": 11076227702,
+    "artifact_digest": "sha256:e1d5f1b73fe0a77c84a7f2abd5eb973187570da2bb153fd80561d25956c36802",
+    "execution_count": 1,
+    "replay_allowed": false,
+    "model_planner_disabled": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "preflight": {
+    "exact_brain_bytes": true,
+    "jq": true,
+    "chromedriver": true,
+    "chrome": true,
+    "authoritative_sources_http_200": 3,
+    "producer_started": true
+  },
+  "causal_failure": {
+    "compiled_prefix": [
+      {
+        "clause_index": 0,
+        "selected_capability": "web.browser.rendered.capture.chromedriver",
+        "status": "VERIFIED_CAPABILITY_MATCH",
+        "inputs_bound": [
+          "url",
+          "result_path",
+          "screenshot_path"
+        ]
+      }
+    ],
+    "failing_clause_index": 1,
+    "failing_subgoal": "From that rendered source, determine the typical mammalian cell-cycle timing and one reported human-cell-line cycle timing, preserving the supporting source text and URL",
+    "direct_error": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "localized_gap": "MODEL_INDEPENDENT_RENDERED_EVIDENCE_QUANTITATIVE_CLAIM_EXTRACTION_V1",
+    "fallback_external_discovery": "IRRELEVANT_DOWNSTREAM_NOISE__NOT_CAUSAL",
+    "fallback_examples": [
+      "acl2-books-source",
+      "acl2-infix-source",
+      "acl2-source",
+      "alsa-source",
+      "apt-show-source"
+    ],
+    "fallback_contract_errors": [
+      "APT_ORIGIN_MISSION_PATH_INVALID",
+      "PYPI_ORIGIN_MISSION_PATH_INVALID"
+    ]
+  },
+  "evidence_scope": {
+    "browser_access_missing": false,
+    "rendered_capture_missing": false,
+    "quantitative_claim_extraction_from_unstructured_rendered_text_missing": true,
+    "general_web_research_capability_missing": "NOT_PROVEN_BY_SINGLE_OCCURRENCE",
+    "parent_capability_promoted": false
+  },
+  "repair_authority": {
+    "immediate_repair_authorized": false,
+    "reason": "Single clean occurrence; concurrent PR296 has stronger orthogonal recurrence_count=2 on typed scalar expression gap.",
+    "recurrence_count": 1,
+    "next_trigger": "Fresh materially different parent task independently exposes equivalent rendered-evidence claim-extraction gap."
+  },
+  "progress_credit": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0
+  },
+  "note": "Evidence preserved without scoreboard increment because it does not supersede the current higher-evidence active repair frontier."
+}

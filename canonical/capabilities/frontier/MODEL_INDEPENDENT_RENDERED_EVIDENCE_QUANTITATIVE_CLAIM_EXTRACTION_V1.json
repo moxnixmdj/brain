@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_RENDERED_EVIDENCE_QUANTITATIVE_CLAIM_EXTRACTION_V1",
+  "status": "OBSERVED_ONCE__DEFERRED_PENDING_ORTHOGONAL_RECURRENCE",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "useful_behavior": "Given an already-rendered authoritative web source and a natural-language request for specific quantitative facts, identify the relevant values and units, preserve supporting source text and URL provenance, and return typed evidence without model cognition.",
+  "observed_evidence": "canonical/capabilities/obsolescence/PARENT_BIOPHYSICS_RENDERED_CLAIM_EXTRACTION_GAP_20260930_V1.json",
+  "recurrence_count": 1,
+  "immediate_repair_authorized": false,
+  "known_non_gaps": [
+    "web.browser.rendered.capture.chromedriver access and rendering"
+  ],
+  "known_failure": "No verified bound capability matched semantic quantitative claim extraction from rendered prose.",
+  "prohibited": [
+    "BIOPHYSICS_REPLAY",
+    "BROWSER_REPAIR_FROM_THIS_EVIDENCE",
+    "APT_PYPI_PACKAGE_DISCOVERY_REPAIR_FROM_THIS_EVIDENCE",
+    "PROMOTION_FROM_SINGLE_OCCURRENCE"
+  ],
+  "next_trigger": "ORTHOGONAL_PARENT_RECURRENCE_OR_CURRENT_FRONTIER_RECOMPUTATION_AFTER_PR296"
+}
