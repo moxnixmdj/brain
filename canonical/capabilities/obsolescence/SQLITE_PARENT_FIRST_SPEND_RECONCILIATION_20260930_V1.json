@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_SQLITE_PARENT_FIRST_SPEND_RECONCILIATION_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "EXACT_TASK_PHYSICALLY_SPENT_ONCE__ZERO_PARENT_CREDIT__NO_REPLAY",
+  "task": {
+    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+    "substantive_objective": "Determine whether SQLite's online backup capability can produce a logically consistent destination database while the source database is being modified concurrently.",
+    "current_canonical_task_path": "canonical/tasks/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json"
+  },
+  "first_physical_spend": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 61,
+    "public_run_id": 36670808367,
+    "job_id": 109745195120,
+    "artifact_id": 11077757767,
+    "artifact_digest": "sha256:dd095506132364f189c232dbf21cdd4b59d599ea8b3001b994552f25f738335c",
+    "carrier_head_sha": "c112ed0f42cf6d17c1c5232763a09972b8ca99a9",
+    "checked_out_merge_sha": "07d600e512cb8c10fd9008e741058ffae7434833",
+    "source_brain_base": "797d5fbea5f230a31044006755beb98ae387134b",
+    "source_brain_pr": 338,
+    "task_executed": true,
+    "execution_count": 1,
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "parent_task_completed": false,
+    "independent_oracle_executed": false
+  },
+  "terminal_observation": {
+    "earliest_runtime_failure": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "downstream_acquisition_failure": "NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "origin_path_errors": [
+      "APT_ORIGIN_MISSION_PATH_INVALID",
+      "PYPI_ORIGIN_MISSION_PATH_INVALID"
+    ],
+    "authority_scope": "FRESHNESS_CONSUMPTION_ONLY__NONCANONICAL_LOSING_LANE_HAS_ZERO_PARENT_CAPABILITY_AND_RUNTIME_REPAIR_AUTHORITY"
+  },
+  "correction": {
+    "prior_false_state": "FROZEN_UNSPENT",
+    "corrected_state": "SPENT_ONCE__NO_REPLAY__ZERO_PARENT_CREDIT",
+    "rule": "Physical execution of the exact substantive task consumes freshness even when the lane is later quarantined or denied capability credit.",
+    "replay_allowed": false,
+    "parent_promotion_authorized": false,
+    "runtime_repair_authorized_from_this_run": false
+  },
+  "next_fresh_task": {
+    "task_id": "PARENT-THERMOPHYSICS-WATER-VISCOSITY-OPEN-RESEARCH-TASK-A-20260930-002",
+    "domain": "THERMOPHYSICAL_CHEMISTRY_TRANSPORT_PROPERTIES",
+    "status": "FROZEN_UNSPENT",
+    "task_path": "canonical/tasks/PARENT_THERMOPHYSICS_WATER_VISCOSITY_OPEN_RESEARCH_TASK_A_20260930_002.json",
+    "mission_path": "canonical/astra_runtime/missions/PARENT_THERMOPHYSICS_WATER_VISCOSITY_OPEN_RESEARCH_TASK_A_20260930_002.json",
+    "replay_allowed": false
+  },
+  "next_action": "EXECUTE_FROZEN_THERMOPHYSICS_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_SHARED_ASTRA_RUNTIME__STOP_ON_FIRST_CAUSAL_GAP__NO_REPLAY"
+}
