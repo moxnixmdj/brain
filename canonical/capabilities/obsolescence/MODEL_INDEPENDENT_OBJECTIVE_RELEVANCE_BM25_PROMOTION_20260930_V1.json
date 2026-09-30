@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PROMOTION_V1",
+  "capability_id": "source.objective_relevance.rank.bm25",
+  "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "exact_producer_git_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+  "public_qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 143,
+    "head_sha": "2b7b8a9b7e2ee4d879a0e1388dedf72a472996b7",
+    "workflow_run_id": 36678278264,
+    "conclusion": "success",
+    "independent_verifier": "rank-bm25 0.2.2 BM25Okapi",
+    "fresh_domains": [
+      "ORBITAL_MECHANICS",
+      "DATABASE_CONSISTENCY",
+      "ATMOSPHERIC_CO2_TRENDS"
+    ]
+  },
+  "proven_effect": "Ranks discovered source candidates by deterministic lexical BM25 relevance to the explicit research objective and fails closed when no lexical objective evidence exists.",
+  "nonclaims": [
+    "semantic entailment",
+    "primary-source status",
+    "source authority",
+    "factual correctness",
+    "evidence sufficiency",
+    "claim endorsement"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false,
+  "next_gap": "FRESH_PARENT_OPEN_RESEARCH_EXECUTION_USING_QUALIFIED_SOURCE_FRONTEND_ROR_IDENTITY_AND_OBJECTIVE_RELEVANCE_RANKING"
+}
