@@ -3151,6 +3151,72 @@
         "incremental_spend_usd": 0,
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json"
       }
+    },
+    "evidence.claim_relation.generic_units.stdlib": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "evidence.claim_relation.generic_units.stdlib",
+          "extraction_path": "${input.extraction_path}",
+          "spec": "${input.spec}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "generic_evidence_claim_relation",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "claim",
+        "support",
+        "verbatim",
+        "relation",
+        "numeric",
+        "compare",
+        "predicate",
+        "objective",
+        "grounded",
+        "unit"
+      ],
+      "limitations": [
+        "Claim support is exact normalized substring occurrence only; paraphrase and semantic entailment are not inferred.",
+        "Numeric relations operate only on explicitly caller-referenced numeric literals inside integrity-checked generic evidence units.",
+        "Units must match exactly; no unit conversion or semantic role inference is performed.",
+        "Does not establish factual correctness, causality, evidence quality, sufficiency, source independence, or parent completion."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "evidence.claim.exact_text_support",
+        "evidence.numeric_relation.explicit"
+      ],
+      "requires": [
+        "source.evidence.objective_grounded_units"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "decimal",
+          "hashlib",
+          "json",
+          "pathlib",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py"
+      },
+      "status": "CANDIDATE_BOUND_CAPABILITY",
+      "verification": {
+        "inherited_upstream_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+        "prior_narrow_schema_evidence": "runner PR155 / run 36680322787 as behavioral reuse evidence only",
+        "new_interface_status": "PENDING_FRESH_GENERIC_V2_CROSS_DOMAIN_QUALIFICATION"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
