@@ -69,18 +69,23 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-    "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "objective": "Repair the reopened grounding capability so a clause is considered resolved only when at least one semantically justified candidate is also executably input-bindable from clause literals, initial facts, or prior effects.",
+    "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "parent_frontier_capability": null,
+    "objective": "Execute a new materially different technical/scientific task end-to-end through the now-verified model-independent synthesis, grounding, composition, planning, execution, and verification stack; either earn parent capability evidence or localize the first remaining causal gap.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
-    "evidence_path": "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json",
-    "repair_status": "REOPENED_BY_FRESH_REAL_TASK_FALSIFICATION",
-    "prohibition": "NO_REQUESTS_TASK_REPLAY__NO_COMPOSITION_GUESSING__NO_TASK_SPECIFIC_URL_LITERAL_PATCH__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT",
-    "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_GENERIC_GROUNDING_INPUT_CONTRACT_COMPATIBILITY__REUSE_EXISTING_REGISTRY_ACTION_TEMPLATES_AND_BINDER_FIRST__NO_REQUESTS_TASK_REPLAY",
+    "exact_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
+    "repair_status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_VERIFIED_ACQUIRED",
+    "prohibition": "NO_SPACE_CARGO_REUSE__NO_SERIALIZATION_REPLAY__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__NO_MORE_CHILD_BENCHMARKING_WITHOUT_PARENT_FAILURE",
+    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "prior_grounding_acquisition_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
-    "downstream_composition_component_status": "EXACT_COMPONENT_VALIDATION_PASS_RUN_36647904127__REAL_TASK_ACQUISITION_UNPROVEN",
+    "acquired_subcapabilities": [
+      "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+      "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1"
+    ],
+    "latest_fresh_real_run_id": 36652169397,
+    "latest_fresh_reuse_run_id": 36652623916,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json"
   },
