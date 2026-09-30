@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_RECEIPT_V1",
+  "capability_id": "MODEL_INDEPENDENT_EXTRACTED_EVIDENCE_VERBATIM_SUPPORT_AND_NUMERIC_RELATION_V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_CROSS_DOMAIN_PASS",
+  "useful_behavior": "Given an already verified objective-anchored extracted-evidence artifact, verify exact normalized verbatim claim support and evaluate explicit numeric relations over referenced extracted numeric literals with exact unit matching.",
+  "replacement_route": "evidence.claim_relation.evaluate.stdlib",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 155,
+    "workflow_run_id": 36680322787,
+    "job_id": 109774123301,
+    "artifact_id": 11081621591,
+    "artifact_digest": "sha256:7388e9e89c9272c1031d5d532a34e1f3c4841144d4a3e02a1359562a406c3249",
+    "exact_producer_blob": "f4ee15d0be0235fceeb12dea3c1a64fa88bef532",
+    "exact_test_blob": "3da7df056faa87e26528a2874860073b5489f1eb",
+    "deterministic_regressions": "PASS",
+    "fresh_cross_domain_cases": [
+      "WORLD_BANK_EGY_GDP_NUMERIC_RELATION",
+      "PYPI_SYMPY_VERBATIM_SUPPORT"
+    ],
+    "independent_recomputation": "PASS",
+    "paraphrase_negative_control": "PASS",
+    "unit_mismatch_negative_control": "PASS"
+  },
+  "claim_scope": {
+    "verified": [
+      "EXACT_NORMALIZED_VERBATIM_SUBSTRING_SUPPORT_IN_EXTRACTED_PASSAGES",
+      "EXPLICIT_DECIMAL_NUMERIC_RELATIONS_OVER_REFERENCED_EXTRACTED_LITERALS",
+      "EXACT_UNIT_MATCH_FAIL_CLOSED"
+    ],
+    "unverified": [
+      "PARAPHRASE_OR_SEMANTIC_ENTAILMENT",
+      "FACTUAL_CORRECTNESS",
+      "EVIDENCE_SUFFICIENCY",
+      "CAUSALITY",
+      "SEMANTIC_ROLE_OF_NUMERIC_LITERAL",
+      "PARENT_CAPABILITY_COMPLETION"
+    ]
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false,
+  "parent_score_credit": 0,
+  "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_MATERIALLY_DIFFERENT_REAL_TASK_REQUIRED_AFTER_CLAIM_RELATION_ACQUISITION"
+}
