@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_REQUALIFICATION_EVIDENCE_V1",
+  "evidence_id": "MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930",
+  "status": "PASS__REOPENED_GROUNDING_SCOPE_REQUALIFIED_ON_FRESH_REAL_TASK",
+  "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "prior_regression": {
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json",
+    "run_id": 36649042160,
+    "falsified_scope": "SEMANTIC_CANDIDATE_SELECTED_WITHOUT_EXECUTABLE_INPUT_BINDABILITY",
+    "replayed": false
+  },
+  "generic_repair": {
+    "pr": 261,
+    "merge_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
+    "exact_component_validation_run_id": 36651748631,
+    "component_validation_conclusion": "success",
+    "repaired_invariants": [
+      "semantic grounding candidate must be input-bindable",
+      "unprovided capability prerequisites may not be promoted to initial facts",
+      "all external prerequisites must be explicitly present in verified_initial_facts",
+      "producer and independent verifier reconstruct the same prerequisite-authority contract"
+    ]
+  },
+  "fresh_real_task": {
+    "domain": "LIVE_KNOWLEDGE_CONSISTENCY__PLANNING_TOOL_PROJECT_IDENTITY",
+    "goal": "Fetch two authoritative GitHub API identities for aiplan4eu/unified-planning and assess consistency.",
+    "urls": [
+      "https://api.github.com/repos/aiplan4eu/unified-planning",
+      "https://api.github.com/repositories/343455633"
+    ],
+    "distinct_from_spent_requests_task": true,
+    "distinct_from_prior_python_audit": true,
+    "distinct_from_prior_qr_reuse": true,
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_branch": "verify/grounding-fresh-real-unified-planning-20260930",
+    "public_head": "2a57e06be4770cc4c960fa547ed3974a09c2c36f",
+    "workflow": ".github/workflows/fresh-real-grounding-unified-planning.yml",
+    "run_id": 36652169397,
+    "job_id": 109688570787,
+    "conclusion": "success",
+    "artifact_id": 11070249875,
+    "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1",
+    "artifact_name": "grounding-fresh-real-unified-planning"
+  },
+  "exact_execution_assertions": {
+    "exact_merged_repair_blobs_verified": true,
+    "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+    "planner_model_last": null,
+    "composition_mode": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH",
+    "model_dependency_count": 0,
+    "grounding_unresolved_clause_indexes": [],
+    "grounding_input_contract_bindability_enforced": true,
+    "correct_fetch_capability_present": "knowledge.json.fetch.external",
+    "prior_false_match_absent": "http.json.fetch_from_state",
+    "required_external_initials": [
+      "network.http.available"
+    ],
+    "verified_initial_facts": [
+      "network.http.available"
+    ],
+    "problem_initial_facts": [
+      "network.http.available"
+    ],
+    "fetch_count": 2,
+    "consistency_assessment_count": 1
+  },
+  "independent_verification": {
+    "producer_independent": true,
+    "method": "Independent GitHub API refetch of both owner/name and numeric repository identities, followed by independent checks of repository id, full_name, default branch, and producer assessment.",
+    "repo_id": 343455633,
+    "full_name": "aiplan4eu/unified-planning",
+    "expected_assessment_status": "SUPPORTED",
+    "observed_assessment_status": "SUPPORTED",
+    "fresh_evidence_count": 2,
+    "invalid_evidence_count": 0,
+    "verifier_step_conclusion": "success"
+  },
+  "adversarial_falsification": [
+    "Spent Requests task previously falsified semantic-only grounding; that task was not replayed.",
+    "PR261 regression explicitly proves input-bindable candidates still fail when an external prerequisite is not in verified_initial_facts.",
+    "Fresh task asserts the old false candidate http.json.fetch_from_state is absent."
+  ],
+  "requalification_verdict": "PASS_EXACT_NARROW_SCOPE",
+  "fresh_reuse_credit_in_this_action": false,
+  "frontier_dependency_removed": false,
+  "incremental_spend_usd": 0,
+  "next_causal_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__FIRST_REAL_TASK_NOW_PASSED__MATERIALLY_DISTINCT_FRESH_REUSE_STILL_REQUIRED"
+}
