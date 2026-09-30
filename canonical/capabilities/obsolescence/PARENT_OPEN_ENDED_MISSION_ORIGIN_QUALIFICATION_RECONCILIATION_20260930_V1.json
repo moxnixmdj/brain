@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_MISSION_ORIGIN_QUALIFICATION_RECONCILIATION_V1",
+  "observed_at_utc": "2026-09-30T05:22:03Z",
+  "canonical_brain_base": "f94650b3727a6e35774b465312bbedc295cded2c",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "MISSION_ORIGIN_GAP_FALSIFIED_BY_FRESH_NON_PARENT_CANARIES__DEEPER_CARRIER_CLOSURE_GAP_LOCALIZED",
+  "parent_capability_promoted": false,
+  "parent_task_executed": false,
+  "parent_task_replay_authorized": false,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "counter_effects": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "primary_canaries": [
+    {
+      "runner_pr": 81,
+      "workflow_run_id": 36672844129,
+      "job_id": 109751391226,
+      "artifact_id": 11078517264,
+      "artifact_digest": "sha256:98cc5f63a6ad3add0385c6f5b19a59f518555fa68323871d83c829c0b912acf8",
+      "status": "PASS_MISSION_ORIGIN_PROPAGATION_CANARY",
+      "supplier_class": "apt_cli",
+      "mission_path": "canonical/astra_runtime/missions/CANARY_RUNTIME_MISSION_ORIGIN_PROPAGATION_20260930_001.json",
+      "mission_sha256": "ba9234ece54dbbcf72550485302112e0bb74461e1d3c3a943c4dd6e772a6d84b",
+      "origin_mission_path_invalid_observed": false,
+      "deeper_result": "CAPABILITY_ACQUISITION_REQUIRED__NO_COMPATIBLE_APT_CLI_CONTRACT"
+    },
+    {
+      "runner_pr": 80,
+      "workflow_run_id": 36672910427,
+      "job_id": 109751598530,
+      "artifact_id": 11079061211,
+      "artifact_digest": "sha256:35b35cb4bc346cd1555047bf66e2e46b85112a2f029eef6b9b0339ffd09f15e4",
+      "status": "PASS_CANONICAL_CLI_PROPAGATES_MISSION_PATH_TO_AUTO_ACQUISITION",
+      "supplier_class": "pypi_python_library",
+      "mission_path": "canonical/astra_runtime/missions/NONPARENT_MISSION_PATH_PYPI_AVRO_CANARY_20260930_001.json",
+      "origin_mission_path_invalid_observed": false,
+      "auto_acquisition_reached": true,
+      "first_deeper_carrier_gap": "PYPI_PROBE_HELPER_MISSING",
+      "missing_path": "canonical/runtime/python_codec_probe.py"
+    }
+  ],
+  "supplemental_canary": {
+    "runner_pr": 83,
+    "workflow_run_id": 36672950320,
+    "job_id": 109751716499,
+    "artifact_id": 11079080866,
+    "artifact_digest": "sha256:14f47e2a09a898fb6d1d96549a71a2ce55113551ce9139d069ffaa44060d6a61",
+    "status": "PASS_MISSION_ORIGIN_BRIDGE__DEEPER_CANARY_BLOCKER",
+    "note": "CBOR objective found an already-bound NPM candidate and stopped at grounded composition policy before external acquisition; useful bridge corroboration but not selected as the next carrier closure blocker."
+  },
+  "falsified_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+  "surviving_blocker": "PUBLIC_CARRIER_RUNTIME_CLOSURE_MISSING_CANONICAL_PYTHON_CODEC_PROBE_FOR_PYPI_AUTO_ACQUISITION",
+  "causal_basis": {
+    "canonical_helper_exists_in_brain": true,
+    "canonical_helper_path": "canonical/runtime/python_codec_probe.py",
+    "canonical_helper_blob": "fc8b5005a9888422e3cb61f6cf0bd147c740ec84",
+    "runner_helper_present_on_main": false,
+    "auto_pypi_library_acquisition_blob": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
+    "conclusion": "The canonical mission-file entrypoint propagates mission identity into acquisition. The next PyPI failure is a public-carrier runtime closure omission, not a missing runtime mission-origin bridge."
+  },
+  "next_action": "SYNC_EXISTING_CANONICAL_PYTHON_CODEC_PROBE_INTO_PUBLIC_CARRIER__RUN_ONE_FRESH_NON_PARENT_PYPI_CODEC_ACQUISITION_CANARY__THEN_FREEZE_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_PARENT_TASK_A",
+  "fresh_parent_task_authorized": false,
+  "spent_parent_task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+  "spent_parent_task_replay_allowed": false
+}
