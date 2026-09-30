@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-MAUNA-FIRST-SPEND-MISSION-ORIGIN-TRUTH-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_FRONTIER_PROVENANCE_AND_MIRRORS_DISAGREE_ON_FIRST_MAUNA_SPEND",
+  "action_kind": "CANONICAL_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_FRONTIER_PROVENANCE_AND_MIRRORS_DISAGREE_ON_FIRST_MAUNA_SPEND::CANONICAL_RECONCILIATION",
+  "expected_parent_frontier_change": "Correct first-spend authority to run 36669918546, preserve the observed mission-origin blocker, quarantine later same-objective executions as zero-freshness replays, synchronize pointer/hierarchy/queue/scoreboard/frontier, and award exactly one previously-missing residual-gap localization.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "exact current main da64d00b971d5fb4e465af09f8ebb3242831f7bb",
+    "primary first-spend producer log run 36669918546 / job 109742518213",
+    "corroborating later producer run 36670981076 / job 109745705157",
+    "current astra_runtime.py mission entrypoint and supplier origin-path guards",
+    "current pointer, hierarchy, frontier target, queue and scoreboard"
+  ],
+  "evidence_presence_classification": "PRIMARY_FIRST_SPEND_EVIDENCE_EXISTS__CURRENT_CANONICAL_MIRRORS_PARTIALLY_STALE__NO_NEW_PARENT_EXECUTION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "All canonical frontier mirrors identify run 36669918546 as the first spend, later same-objective runs as replays, the mission-origin gap as the current blocker, and the canonical mission-entrypoint canary as the next action. No Mauna execution occurs.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "da64d00b971d5fb4e465af09f8ebb3242831f7bb",
+    "real_outcome": "Restore one truthful current frontier before any further scarce execution.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Correct provenance and cross-surface state without changing the technical blocker or replaying the parent objective.",
+      "proxy_goals_deleted": [
+        "merge the newest reconciliation by recency",
+        "replay Mauna to settle chronology",
+        "count every corroborating replay",
+        "patch runtime before testing existing entrypoint"
+      ],
+      "surviving_necessity": "One zero-execution canonical truth correction."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "primary workflow logs",
+        "current canonical mirrors",
+        "existing astra_runtime mission entrypoint",
+        "APT/PyPI origin guards"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions run 36669918546",
+        "GitHub Actions run 36670981076"
+      ],
+      "capability_work_deleted": [
+        "no parent replay",
+        "no runtime mutation",
+        "no task-specific compiler rule"
+      ],
+      "surviving_gap": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific integration seam at the producer boundary: direct run_goal omits canonical mission identity while existing astra_runtime.main already supplies it.",
+      "delete_bypass_substitute_options": [
+        "reuse earliest immutable receipt",
+        "quarantine later replays",
+        "reuse existing canonical mission entrypoint"
+      ],
+      "surviving_causal_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ATOMIC_CANONICAL_PROVENANCE_AND_MIRROR_CORRECTION",
+        "REUSE_EXISTING_CANONICAL_ASTRA_MISSION_ENTRYPOINT",
+        "PATCH_RUNTIME",
+        "REPLAY_PARENT_TASK"
+      ],
+      "losing_routes_reason": "Execution before truth reconciliation risks duplicate spend; runtime patch is larger than existing entrypoint reuse; replay is forbidden.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None for provenance correction; primary producer logs and current code are direct evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "run 36670981076 as first-spend authority",
+        "stale pointer/queue/scoreboard Task-A request",
+        "any Mauna replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "mission provenance firewall",
+        "one-shot evidence preservation"
+      ],
+      "fresh_reuse_plan": "After merge, validate the existing canonical mission-file entrypoint with one fresh non-parent acquisition canary."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused primary run logs",
+        "reused current code inspection",
+        "reused existing reconciliation evidence"
+      ],
+      "search_stop_decision": "First-spend chronology and terminal mission-origin defect are directly observed; broader search cannot alter the next minimal route.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and primary producer evidence were refreshed immediately before this action."
+    },
+    "routes_considered": [
+      "ATOMIC_CANONICAL_PROVENANCE_AND_MIRROR_CORRECTION",
+      "REUSE_EXISTING_CANONICAL_ASTRA_MISSION_ENTRYPOINT",
+      "PATCH_RUNTIME",
+      "REPLAY_PARENT_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PARENT_TASK_REPLAY",
+      "SECOND_CREDIT_FOR_REPLAY",
+      "PREMATURE_RUNTIME_PATCH"
+    ],
+    "selected_surviving_route": "ATOMIC_CANONICAL_PROVENANCE_AND_MIRROR_CORRECTION",
+    "why_selected_route_is_fastest_sufficient": "It restores truthful authority with zero execution and unblocks a narrow existing-route canary.",
+    "expected_parent_level_state_change": "Same parent capability remains unacquired; blocker stays mission-origin propagation; next action becomes canonical-entrypoint canary; residual_gaps_localized increases once because the scoreboard had no Mauna event.",
+    "stop_condition": "Stop after cross-surface truth is synchronized; execute no parent task in this action."
+  }
+}
