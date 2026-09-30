@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY",
+  "next_progress_event_target": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SEISMOLOGY_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -605,6 +605,29 @@
       "progress_credit": "GENERIC_ROUTING_REPAIR_ONLY",
       "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "MODEL_INDEPENDENT_SCHOLARLY_SOURCE_PIPELINE_REPAIR_QUALIFIED_20260930",
+      "capability_id": "MODEL_INDEPENDENT_PROVENANCE_VERIFIED_SCHOLARLY_CANDIDATE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+      "status": "VERIFIED_GENERIC_REPAIR__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_CROSS_DOMAIN_PASS__NO_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_MATERIALIZATION_QUALIFICATION_20260930_V1.json",
+      "public_run_id": 36697481130,
+      "public_job_id": 109828804723,
+      "artifact_id": 11088094431,
+      "artifact_digest": "sha256:dd66dd78c8cec765d9c968e6580adfbd6be1dfae3caf50341c0f4b70ef6617d2",
+      "guard_attempt_id": "ff54ebe40e3f4145ae45ae46e8f85433",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "GENERIC_SOURCE_PIPELINE_REPAIR_ONLY__FRESH_PARENT_REUSE_REQUIRED",
+      "parent_capability_promoted": false,
+      "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0
     }
   ],
   "active_frontier_accounting": {
@@ -689,10 +712,10 @@
     }
   ],
   "last_subcapability_event": {
-    "event_id": "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_QUALIFIED_20260930",
-    "status": "VERIFIED_SUBCAPABILITY__ZERO_PARENT_SCORE_CREDIT",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
-    "public_run_id": 36676947006,
+    "event_id": "MODEL_INDEPENDENT_SCHOLARLY_SOURCE_PIPELINE_REPAIR_QUALIFIED_20260930",
+    "status": "VERIFIED_GENERIC_REPAIR__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_CROSS_DOMAIN_PASS__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_MATERIALIZATION_QUALIFICATION_20260930_V1.json",
+    "public_run_id": 36697481130,
     "counter_delta": 0
   },
   "capability_events": [
@@ -751,22 +774,34 @@
     }
   ],
   "last_real_output_event": {
-    "event_id": "SEISMOLOGY_TASK_B_FIRST_CAUSAL_GAP_20260930",
-    "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "status": "FRESH_TASK_B_SPENT__UPSTREAM_SOURCE_ADMISSION_ROOT_CAUSE_REOPENED__NO_PARENT_CREDIT",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
-    "public_run_id": 36693929830,
+    "event_id": "MODEL_INDEPENDENT_SCHOLARLY_SOURCE_PIPELINE_REPAIR_QUALIFIED_20260930",
+    "capability_id": "MODEL_INDEPENDENT_PROVENANCE_VERIFIED_SCHOLARLY_CANDIDATE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+    "status": "VERIFIED_GENERIC_REPAIR__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_CROSS_DOMAIN_PASS__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_MATERIALIZATION_QUALIFICATION_20260930_V1.json",
+    "public_run_id": 36697481130,
+    "public_job_id": 109828804723,
+    "artifact_id": 11088094431,
+    "artifact_digest": "sha256:dd66dd78c8cec765d9c968e6580adfbd6be1dfae3caf50341c0f4b70ef6617d2",
+    "guard_attempt_id": "ff54ebe40e3f4145ae45ae46e8f85433",
+    "counter_effects": {
+      "reusable_capabilities_inherited": 0,
+      "verified_real_tasks_completed": 0,
+      "fresh_reuse_passes": 0,
+      "frontier_dependencies_removed": 0,
+      "residual_gaps_localized": 0
+    },
+    "progress_credit": "GENERIC_SOURCE_PIPELINE_REPAIR_ONLY__FRESH_PARENT_REUSE_REQUIRED",
     "parent_capability_promoted": false,
-    "capability_credit_delta": 0,
-    "next_causal_gap": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT"
+    "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "REOPENED_BY_FALSIFICATION",
-    "previous_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
-    "blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
+    "status": "SOURCE_PIPELINE_REPAIR_QUALIFIED__FRESH_PARENT_TASK_C_REQUIRED",
+    "previous_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
+    "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
-      "canonical/action_intents/2026-09-30_RECONCILE_SEISMOLOGY_SOURCE_ADMISSION_ROOT_CAUSE_V1.json"
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_MATERIALIZATION_QUALIFICATION_20260930_V1.json"
     ],
     "parent_capability_promoted": false
   }
