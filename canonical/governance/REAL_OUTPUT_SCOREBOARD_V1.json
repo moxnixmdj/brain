@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+  "next_progress_event_target": "VERIFY_EPISTEMIC_GOAL_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_DECOMPOSITION_IR__KEEP_ALL_FROZEN_PARENT_TASKS_UNSPENT_UNTIL_REPAIR",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -485,12 +485,29 @@
       },
       "progress_credit": "EVIDENCE_PROVENANCE_AND_MIRROR_CORRECTION_ONLY",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "GENERIC_BYPASS_FALSIFIED__FRESH_PARENT_TASKS_HELD__ROUTING_GUARD_IMPLEMENTED_PENDING_VERIFICATION",
+      "evidence_path": "canonical/capabilities/obsolescence/OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_20260930_V1.json",
+      "public_grounding_run_id": 36671302163,
+      "mission_origin_run_id": 36672816106,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "CAUSAL_LOCALIZATION_AND_FAIL_CLOSED_RUNTIME_REPAIR_ONLY",
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "GENERIC_BROAD_OBJECTIVE_COMPILE_GAP_UNRESOLVED__MAUNA_OBJECTIVE_SPENT__TWO_LATER_REPLAYS_QUARANTINED__NO_ADMISSIBLE_FRESH_PARENT_PASS",
+    "active_subcapability_target": "MODEL_INDEPENDENT_OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_AND_AUTHORITY_DATA_GROUNDING",
+    "subcapability_status": "MISSING__ROUTING_GUARD_IMPLEMENTED_PENDING_VERIFICATION",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
