@@ -8,6 +8,7 @@ Verified candidate scope:
 - unique lexical binding of left/right entity phrases to distinct generic V2
   evidence units;
 - unique exact-unit-compatible numeric-literal binding;
+- explicit objective-literal numeric operands for bounded GT/LT/GTE/LTE/EQ/NE comparisons;
 - composition into the already-verified generic V2 claim/relation evaluator.
 
 This module does not infer paraphrases, factual truth, causality, unit
@@ -45,6 +46,19 @@ _NUM=re.compile(
  r"([-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?)"
  r"(?:\s*([%A-Za-zµμ°][A-Za-z0-9µμ°/%^·*._-]{0,31}))?"
 )
+
+# Literal comparison forms are evaluated before evidence-vs-evidence forms.
+# They bind one semantic evidence role plus one explicit numeric literal written
+# in the objective. Trailing scope text is allowed after the literal.
+_LITERAL_RELATION_PATTERNS=[
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:exceeds|exceeded|exceeding)\s+("+_NUM_SURFACE+r")\b",re.I),"GT"),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:higher|greater|larger)\s+than\s+("+_NUM_SURFACE+r")\b",re.I),"GT"),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:lower|less|smaller)\s+than\s+("+_NUM_SURFACE+r")\b",re.I),"LT"),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+below\s+("+_NUM_SURFACE+r")\b",re.I),"LT"),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:at\s+least|no\s+less\s+than)\s+("+_NUM_SURFACE+r")\b",re.I),"GTE"),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:at\s+most|no\s+more\s+than)\s+("+_NUM_SURFACE+r")\b",re.I),"LTE"),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:equal\s+to)\s+("+_NUM_SURFACE+r")\b",re.I),"EQ"),
+]
 
 # Order matters: more specific forms precede more general comparison forms.
 _RELATION_PATTERNS=[
@@ -100,6 +114,32 @@ def _clean_entity(value):
     )
     return text.strip(" ,:;-")
 
+def _clean_literal_entity(value):
+    text=_clean_entity(value)
+    # Broad research objectives often wrap the actual measured role in context
+    # ("... generated X with an observed maximum amplitude ..."). Keep only the
+    # final bounded role after generic context introducers; never add domain
+    # vocabulary or infer a latent role.
+    parts=re.split(r"\b(?:with|that)\s+(?:an?\s+|the\s+)?",text,flags=re.I)
+    if len(parts)>1 and _canon(parts[-1]):
+        text=_canon(parts[-1])
+    return text.strip(" ,:;-")
+
+def _literal_surface(value):
+    text=_canon(value).rstrip(".,;:")
+    m=re.fullmatch(
+      r"([-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?)"
+      r"(?:\s*([%A-Za-zµμ°][A-Za-z0-9µμ°/%^·*._-]{0,31}))?",
+      text,
+    )
+    if not m:
+        return None
+    return {
+      "surface":text,
+      "number_surface":m.group(1),
+      "unit":_canon(m.group(2)).lower().rstrip(".,;:"),
+    }
+
 def _parse_objective(objective):
     objective=_canon(objective)
     quoted=[]
@@ -113,6 +153,33 @@ def _parse_objective(objective):
         if len(quoted)!=1:
             return None,"OBJECTIVE_CLAIM_AMBIGUOUS"
         return {"mode":"VERBATIM_SUPPORT","claim_text":quoted[0]},None
+
+    literal_matches=[]
+    for rx,op in _LITERAL_RELATION_PATTERNS:
+        m=rx.search(objective)
+        if not m:
+            continue
+        left=_clean_literal_entity(m.group(1))
+        literal=_literal_surface(m.group(2))
+        if left and literal:
+            row=(op,left,literal["surface"],literal["unit"])
+            if row not in literal_matches:
+                literal_matches.append(row)
+    if len(literal_matches)>1:
+        return None,"OBJECTIVE_LITERAL_RELATION_AMBIGUOUS"
+    if len(literal_matches)==1:
+        op,left,literal_surface,literal_unit=literal_matches[0]
+        lt=_tokens(left)
+        if not lt:
+            return None,"OBJECTIVE_ENTITY_TOKENS_REQUIRED"
+        return {
+          "mode":"NUMERIC_RELATION_OBJECTIVE_LITERAL",
+          "operator":op,
+          "left_entity":left,
+          "left_tokens":lt,
+          "right_literal":literal_surface,
+          "right_literal_unit":literal_unit,
+        },None
 
     matches=[]
     for rx,op,threshold_group in _RELATION_PATTERNS:
@@ -247,6 +314,23 @@ def _choose_pair(left_binding,right_binding):
       "left_surface":a["surface"],"right_surface":b["surface"],
     },None
 
+def _choose_literal_operand(left_binding,expected_unit):
+    nums=_numbers(left_binding["text"])
+    compatible=[x for x in nums if x["unit"]==expected_unit]
+    if not compatible:
+        return None,"NO_EXACT_UNIT_COMPATIBLE_LITERAL_OPERAND"
+    if len(compatible)!=1:
+        return None,"AMBIGUOUS_LITERAL_COMPATIBLE_OPERAND"
+    x=compatible[0]
+    return {
+      "left":{
+        "evidence_unit_id":left_binding["evidence_unit_id"],
+        "numeric_literal_index":x["numeric_literal_index"],
+      },
+      "unit_surface":x["unit"] or None,
+      "left_surface":x["surface"],
+    },None
+
 def _load_evaluator():
     path=pathlib.Path(__file__).resolve().with_name("generic_evidence_claim_relation.py")
     spec=importlib.util.spec_from_file_location("project_brain_verified_generic_claim_relation",path)
@@ -309,6 +393,30 @@ def bind(objective,extraction,evaluate_relation=True):
           "status":"CLAIM_SPEC_BOUND",
           "parsed_objective":parsed,
           **bound,
+          "output_verified":True,
+        }
+    elif parsed["mode"]=="NUMERIC_RELATION_OBJECTIVE_LITERAL":
+        left,reason=_bind_role(units,parsed["left_tokens"])
+        if reason:
+            return {**base,"reason":"LEFT_"+reason,"parsed_objective":parsed}
+        operand,reason=_choose_literal_operand(left,parsed["right_literal_unit"])
+        if reason:
+            return {**base,"reason":reason,"parsed_objective":parsed,
+                    "left_binding":left}
+        relation_spec={
+          "mode":"NUMERIC_RELATION",
+          "operator":parsed["operator"],
+          "left":operand["left"],
+          "right_literal":parsed["right_literal"],
+        }
+        result={
+          **base,
+          "status":"CLAIM_SPEC_AND_LITERAL_OPERAND_BOUND",
+          "parsed_objective":parsed,
+          "left_binding":left,
+          "operand_pair":operand,
+          "relation_spec":relation_spec,
+          "objective_literal_provenance":"OBJECTIVE_TEXT_EXPLICIT_LITERAL",
           "output_verified":True,
         }
     else:
