@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-  "action_id": "REPAIR-BROAD-MULTICLAUSE-RESEARCH-ROUTING-20260930-V1",
-  "status": "PROPOSED",
+  "action_id": "REPAIR-BROAD-MULTICLAUSE-RESEARCH-ROUTING-20260930-V2",
+  "status": "AUTHORIZED_PENDING_INDEPENDENT_QUALIFICATION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "73f8331cddf556af0daece3aa32998ac992981d0",
+  "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "causal_blocker": "BROAD_MULTI_CLAUSE_OBJECTIVES_SUPPRESS_VERIFIED_BROAD_RESEARCH_DECOMPOSITION_AND_FALL_THROUGH_TO_IRRELEVANT_PACKAGE_ACQUISITION",
-  "action_kind": "GENERIC_ROUTING_REPAIR",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_MULTI_CLAUSE_OBJECTIVES_SUPPRESS_VERIFIED_BROAD_RESEARCH_DECOMPOSITION_AND_FALL_THROUGH_TO_IRRELEVANT_PACKAGE_ACQUISITION::GENERIC_ROUTING_REPAIR",
+  "causal_blocker": "BROAD_MULTI_CLAUSE_ROUTING_PLUS_OVERBROAD_GENERIC_RUN_LANGUAGE_RECIPE_REJECTION",
+  "action_kind": "GENERIC_ROUTING_AND_DECOMPOSITION_ADMISSION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_MULTI_CLAUSE_ROUTING_PLUS_OVERBROAD_GENERIC_RUN_LANGUAGE_RECIPE_REJECTION::GENERIC_ROUTING_AND_DECOMPOSITION_ADMISSION_REPAIR",
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "parent_task_execution": false,
   "parent_task_replay": false,
@@ -17,29 +17,35 @@
   "authoritative_parent_run": 36688193204,
   "authoritative_parent_artifact_id": 11084357364,
   "authoritative_parent_artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
-  "observed_parent_blocker": "CAPABILITY_ACQUISITION_REQUIRED after broad_objective_decomposition_available=false on five fully unresolved clauses",
-  "prior_work_checked": [
-    "Brain PR #465 integrated the already-qualified claim binder/relation evaluator but does not change broad decomposition admission.",
-    "Brain PRs #461 and #464 had zero workflow job steps and were closed after the authoritative public-runner spend.",
-    "Brain PR #463 was closed stale because its claimed seam was downstream of the actual physical parent blocker."
+  "red_qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 174,
+    "workflow_run_id": 36689184674,
+    "workflow_job_id": 109802070117,
+    "outcome": "FAILED_AS_EXPECTED_AFTER_ROUTING_PREDICATE_REPAIR",
+    "observed_next_gap": "broad_objective_decompose rejected generic phrase 'choose and run a zero-cost verification method' as an explicit execution recipe, leaving broad_objective_decomposition_available=false"
+  },
+  "exact_repairs": [
+    "Admit the existing broad-objective decomposer when records are nonempty, zero clauses are grounded, and every parsed clause is unresolved.",
+    "Refine explicit-recipe detection so generic research-language 'run a ... verification method' is not treated as a concrete command, while concrete commands, script paths, URLs, save/create/extract recipes remain fail-closed."
   ],
-  "exact_repair": "Permit broad-objective decomposition whenever there is at least one parsed clause, zero grounded clauses, and every parsed clause is unresolved; preserve the broad decomposer's own fail-closed recipe/prefix checks.",
-  "expected_parent_frontier_change": "Convert the observed upstream routing failure into a reusable generic routing capability; do not replay the spent HTTP2 parent.",
+  "expected_parent_frontier_change": "Make broad multi-sentence research objectives reach the generic research-role graph without weakening rejection of concrete execution recipes; do not replay the spent HTTP/2 parent.",
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "recursive_obs": {
-    "canonical_base_commit": "73f8331cddf556af0daece3aa32998ac992981d0",
-    "real_outcome": "Make genuinely broad multi-sentence research objectives enter the already-qualified generic research-role path instead of irrelevant package acquisition.",
-    "surviving_necessity": "The first physical parent run proved a generic admission predicate is false for multi-clause all-unresolved objectives.",
-    "selected_surviving_route": "ONE_PREDICATE_GENERALIZATION_PLUS_EXACT_REGRESSION_AND_INDEPENDENT_QUALIFICATION",
+    "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
+    "real_outcome": "Make genuinely broad multi-sentence research objectives enter the already-qualified generic research path rather than package acquisition or false explicit-recipe rejection.",
+    "surviving_necessity": "The physical parent run exposed multi-clause admission failure; independent preserved-input qualification then exposed the adjacent generic-language false positive in the decomposer.",
+    "selected_surviving_route": "TWO_SERIAL_PRESERVED_INPUT_GENERIC_SEAMS__NO_PARENT_REPLAY__EXACT_REGRESSION__INDEPENDENT_GREEN_QUALIFICATION",
     "deleted_or_bypassed_paths": [
       "HTTP2_PARENT_REPLAY",
       "NEW_PACKAGE_DISCOVERY",
       "TASK_SPECIFIC_HTTP2_PATCH",
       "MODEL_COGNITION",
-      "NEW_SOURCE_FRONTEND"
+      "NEW_SOURCE_FRONTEND",
+      "BROAD_PARSER_REWRITE"
     ],
-    "why_selected_route_is_fastest_sufficient": "The preserved evidence localizes the failure to a single fail-closed predicate; the broad decomposer already supports the objective and needs only to be admitted when all parsed clauses are unresolved.",
-    "stop_rule": "NO_PARENT_REPLAY__QUALIFY_GENERIC_ROUTING_ON_PRESERVED_INPUT__THEN_FREEZE_A_NEW_PARENT_TASK"
+    "why_selected_route_is_fastest_sufficient": "Both failures are localized on preserved input and require only two bounded admission predicates already surrounded by fail-closed controls.",
+    "stop_rule": "QUALIFY_EXACT_GENERIC_BYTES_INDEPENDENTLY__THEN_FREEZE_A_NEW_PARENT_TASK__NO_HTTP2_REPLAY"
   }
 }
