@@ -59,5 +59,36 @@ class CognitionProvenanceTests(unittest.TestCase):
             })
 
 
+    def test_direct_run_goal_entrypoint_is_runtime_stamped(self):
+        original=astra_runtime._run_goal_unstamped
+        try:
+            astra_runtime._run_goal_unstamped=lambda step,mission: {
+                "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+                "planner_model_last":None,
+                "final_summary":"direct",
+            }
+            result=astra_runtime.run_goal({}, {})
+        finally:
+            astra_runtime._run_goal_unstamped=original
+        self.assertEqual(result["model_dependency_count"],0)
+        self.assertEqual(result["cognition_dependency_class"],"MODEL_INDEPENDENT")
+        self.assertEqual(result["cognition_provenance_authority"],"ASTRA_RUNTIME_DERIVED_V1")
+
+    def test_direct_run_goal_advisory_path_cannot_stamp_zero(self):
+        original=astra_runtime._run_goal_unstamped
+        try:
+            astra_runtime._run_goal_unstamped=lambda step,mission: {
+                "controller_mode":"OPTIONAL_MODEL_ADVISORY",
+                "planner_source":"test-model-source",
+                "planner_model_last":"test-model",
+                "final_summary":"direct",
+            }
+            result=astra_runtime.run_goal({}, {})
+        finally:
+            astra_runtime._run_goal_unstamped=original
+        self.assertGreaterEqual(result["model_dependency_count"],1)
+        self.assertEqual(result["cognition_dependency_class"],"MODEL_ASSISTED")
+
+
 if __name__=="__main__":
     unittest.main()
