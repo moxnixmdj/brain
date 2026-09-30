@@ -104,7 +104,7 @@
   "ownership_tests": {
     "brain_artifact_test": "PASS",
     "no_hidden_capability_provider_test": "PASS",
-    "general_substrate_test": "PASS_NOT_REQUIRED_FOR_MECHANICAL_CONTINUITY",
+    "general_substrate_test": "PASS__NO_EXTERNAL_COGNITION_SUBSTRATE_IN_CONTINUITY_CAPABILITY_PATH",
     "specimen_separation_test": "PASS",
     "reexecution_without_rediscovery_test": "PASS",
     "brain_configured_verification_test": "PASS",
