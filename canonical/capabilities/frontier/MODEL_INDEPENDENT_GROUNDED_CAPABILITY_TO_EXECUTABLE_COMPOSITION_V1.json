@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "COMPONENT_VERIFIED__REAL_TASK_ACQUISITION_BLOCKED_BY_UPSTREAM_GROUNDING_REGRESSION",
+  "status": "REAL_TASK_A_VERIFIED__FRESH_REUSE_UNSPENT",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,26 +28,38 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "UNPROVEN_REAL_TASK__DOWNSTREAM_BLOCKED",
-  "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION__SEARCH_EXISTING_BRAIN_PLANNER_AND_DETERMINISTIC_COMPOSITION_ROUTES_FIRST__NO_SPENT_PARENT_REPLAY",
+  "current_status": "REAL_TASK_A_VERIFIED__FRESH_REUSE_UNSPENT",
+  "next_action": "RUN_ONE_MATERIALLY_DISTINCT_FRESH_REAL_TASK_THROUGH_EXISTING_MODEL_INDEPENDENT_GROUNDED_COMPOSITION_ROUTE__NO_REDISCOVERY__NO_SPENT_TASK_REPLAY",
   "obsolescence_status": "NOT_YET_PROVEN",
   "winning_route": null,
-  "capability_strength_result": null,
-  "incremental_cost_result_usd": null,
+  "capability_strength_result": "COMPONENT_VERIFICATION_PASS__UNIFIED_PLANNING_REAL_TASK_A_PASS__FRESH_REUSE_UNSPENT",
+  "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
-  "independent_verification": null,
-  "inheritance_path": [],
-  "residual_gap": "WAIT_FOR_REPAIRED_VERIFIED_GROUNDING_INPUT_BEFORE_NEW_FRESH_REAL_TASK",
-  "evidence_path": null,
+  "independent_verification": {
+    "status": "PASS_REAL_TASK_A",
+    "public_run_id": 36652169397,
+    "job_id": 109688570787,
+    "method": "independent live GitHub API refetch and consistency reconstruction",
+    "producer_independent": true,
+    "artifact_id": 11070249875,
+    "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1"
+  },
+  "inheritance_path": [
+    "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+    "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+    "canonical/runtime/capability_planner.py"
+  ],
+  "residual_gap": "MATERIALLY_DISTINCT_FRESH_REUSE_WITHOUT_REDISCOVERY",
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_COMPOSITION_TASK_A_UNIFIED_PLANNING_20260930_V1.json",
   "component_verification": {
     "status": "PASS",
     "public_run_id": 36647904127,
     "exact_pr255_head": "1d958cc3ea8f18c42a3bf190c6d4cfeda2556487"
   },
   "real_task_attempt": {
-    "run_id": 36649042160,
-    "result": "BLOCKED_BEFORE_BINDABLE_COMPOSITION",
-    "cause": "UPSTREAM_GROUNDING_INPUT_CONTRACT_COMPATIBILITY_FALSIFIED",
-    "composition_behavior": "CORRECT_FAIL_CLOSED"
+    "run_id": 36652169397,
+    "result": "PASS",
+    "cause": null,
+    "composition_behavior": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH_EXECUTED_AND_INDEPENDENTLY_VERIFIED"
   }
 }

@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_SUBCAPABILITY_REAL_TASK_EVIDENCE_V1",
+  "evidence_id": "MODEL_INDEPENDENT_GROUNDED_COMPOSITION_TASK_A_UNIFIED_PLANNING_20260930",
+  "status": "REAL_TASK_A_VERIFIED__NO_CAPABILITY_PROMOTION__FRESH_REUSE_UNSPENT",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "source_task_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+  "public_run": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "run_id": 36652169397,
+    "job_id": 109688570787,
+    "head": "2a57e06be4770cc4c960fa547ed3974a09c2c36f",
+    "conclusion": "success",
+    "artifact_id": 11070249875,
+    "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1"
+  },
+  "task": {
+    "domain": "LIVE_KNOWLEDGE_CONSISTENCY__PLANNING_TOOL_PROJECT_IDENTITY",
+    "goal": "Fetch two authoritative GitHub API identities for aiplan4eu/unified-planning and assess consistency.",
+    "grounded_clause_count_minimum": 3,
+    "unresolved_clause_indexes": [],
+    "model_dependency_count": 0
+  },
+  "composition_evidence": {
+    "composition_mode": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH",
+    "composition_ready": true,
+    "required_external_initials": [
+      "network.http.available"
+    ],
+    "verified_initial_facts": [
+      "network.http.available"
+    ],
+    "problem_initial_facts": [
+      "network.http.available"
+    ],
+    "generated_actions_not_hand_authored": true,
+    "fetch_actions": 2,
+    "assessor_actions": 1
+  },
+  "independent_verification": {
+    "method": "independent live refetch of both GitHub repository identity endpoints plus reconstruction of expected consistency result",
+    "repo_id": 343455633,
+    "full_name": "aiplan4eu/unified-planning",
+    "assessment_status": "SUPPORTED",
+    "producer_independent": true
+  },
+  "acquisition_effect": {
+    "first_real_task_passed": true,
+    "fresh_reuse_required": true,
+    "capability_acquired": false,
+    "scoreboard_credit_in_this_reconciliation": false
+  },
+  "next_requirement": "ONE_MATERIALLY_DISTINCT_REAL_TASK_USING_THE_SAME_COMPOSITION_ROUTE_WITHOUT_REDISCOVERY"
+}

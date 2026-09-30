@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-GROUNDING-TO-COMPOSITION-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile the active frontier from requalified plain-goal grounding to model-independent grounded-capability composition, preserving Unified Planning run 36652169397 as composition Real Task A evidence and setting the sole surviving acquisition gap to materially distinct fresh reuse without rediscovery.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "grounding requalification merge f1bbb570d7397fa8a1583ede111ebcaea6952e29",
+    "Unified Planning fresh real run 36652169397 PASS",
+    "composition component validation run 36647904127 PASS",
+    "composition target record already declares downstream block was upstream grounding"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after canonical target, queue, pointer, composition target record, and noncrediting scoreboard frontier-accounting all agree that grounding is closed and composition has one verified real Task A with fresh reuse unspent; do not execute the reuse task or change progress counters in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "new_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "relationship": "NEXT_FRONTIER_AFTER_VERIFIED_CLOSURE",
+    "evidence": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+      "canonical/capabilities/frontier/MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1.json",
+      "canonical/capabilities/frontier/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f1bbb570d7397fa8a1583ede111ebcaea6952e29",
+    "real_outcome": "Move the active frontier to the first surviving post-grounding causal gap without rerunning already-proven work.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Reconcile the active frontier from requalified plain-goal grounding to model-independent grounded-capability composition, preserving Unified Planning run 36652169397 as composition Real Task A evidence and setting the sole surviving acquisition gap to materially distinct fresh reuse without rediscovery.",
+      "proxy_goals_deleted": [
+        "repeat grounding proof",
+        "restart composition from component-only state",
+        "new planner search before fresh reuse"
+      ],
+      "surviving_necessity": "Canonicalize the evidence-supported next frontier."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "grounding requalified on main",
+        "composition component validation already passed",
+        "Unified Planning fresh run exercised grounded composition end-to-end"
+      ],
+      "external_existing_routes_checked": [
+        "not applicable to pure frontier reconciliation"
+      ],
+      "capability_work_deleted": [
+        "no implementation",
+        "no new execution",
+        "no provider search"
+      ],
+      "surviving_gap": "Composition has first real task evidence but acquisition bar still requires materially distinct fresh reuse."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence-state reconciliation only.",
+      "delete_bypass_substitute_options": [
+        "Delete all further grounding work",
+        "Reuse Unified Planning run as composition Task A evidence",
+        "Do not count composition acquired until fresh reuse"
+      ],
+      "surviving_causal_blocker": "COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_TO_COMPOSITION_FRESH_REUSE_GAP"
+      ],
+      "losing_routes_reason": "Any implementation/search continuation before target reconciliation would work against stale state.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new verification. Reuse exact grounding requalification evidence and successful Unified Planning composition trace; reconciliation itself receives zero progress credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all further grounding repair/requalification absent new falsification",
+        "composition component revalidation already covered by exact merged run and Unified Planning execution"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "grounding→composition handoff"
+      ],
+      "fresh_reuse_plan": "Select one materially distinct real task that requires multi-capability composition and execute it through the same model-independent composition route without rediscovery."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse prior challenger race",
+        "reuse run 36652169397",
+        "no external route search for a pure state reconciliation"
+      ],
+      "search_stop_decision": "The next causal gap is directly observed in canonical evidence; further search cannot change the target-selection decision.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable: this action changes canonical frontier state only and selects no external implementation route."
+    },
+    "routes_considered": [
+      "RECONCILE_TO_COMPOSITION_FRESH_REUSE_GAP"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPEAT_GROUNDING",
+      "RESTART_COMPOSITION_FROM_ZERO",
+      "NEW_IMPLEMENTATION_BEFORE_RECONCILIATION"
+    ],
+    "selected_surviving_route": "RECONCILE_TO_COMPOSITION_FRESH_REUSE_GAP",
+    "why_selected_route_is_fastest_sufficient": "Grounding is closed and Unified Planning directly exercised composition successfully; the only acquisition evidence still missing is a materially distinct fresh reuse.",
+    "expected_parent_level_state_change": "Reconcile the active frontier from requalified plain-goal grounding to model-independent grounded-capability composition, preserving Unified Planning run 36652169397 as composition Real Task A evidence and setting the sole surviving acquisition gap to materially distinct fresh reuse without rediscovery.",
+    "stop_condition": "Stop after canonical target, queue, pointer, composition target record, and noncrediting scoreboard frontier-accounting all agree that grounding is closed and composition has one verified real Task A with fresh reuse unspent; do not execute the reuse task or change progress counters in this reconciliation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER changes canonical target state from existing evidence and does not choose an external capability route."
+    }
+  }
+}
