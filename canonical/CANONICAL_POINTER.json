@@ -30,7 +30,8 @@
     "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
     "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md"
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
+    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -115,12 +116,21 @@
     "obs_receipt_invalidated_on_material_state_change": true,
     "stop_search_when_adequate_route_cannot_be_beaten_enough_to_justify_delay": true,
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_action_intent_template_path": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+    "recursive_obs_action_intent_template_path": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "recursive_obs_regression_path": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_external_route_frontier_age_hours": 24,
-    "max_selected_route_preflight_age_hours": 2
+    "max_selected_route_preflight_age_hours": 2,
+    "fail_closed_mistake_immunity_required": true,
+    "fail_closed_mistake_immunity_law_path": "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
+    "recurring_mistake_regression_catalog_path": "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
+    "deterministic_duplicate_lease_owner_required": true,
+    "active_capability_target_change_requires_explicit_reconciliation": true,
+    "scoreboard_increase_requires_promotion_evidence": true,
+    "circular_frontier_proof_forbidden": true,
+    "claim_scope_must_not_exceed_evidence_scope": true,
+    "adversarial_falsification_before_promotion_required": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -573,7 +583,9 @@
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "FRESH_PARENT_TASK_EXECUTED__FIRST_CAUSAL_GROUNDING_GAP_LOCALIZED__NO_PARENT_CAPABILITY_CREDIT"
+    "frontier_decomposition_status": "FRESH_PARENT_TASK_EXECUTED__FIRST_CAUSAL_GROUNDING_GAP_LOCALIZED__NO_PARENT_CAPABILITY_CREDIT",
+    "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",

@@ -28,6 +28,7 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
+    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
@@ -41,6 +42,8 @@ PROTECTED_GUARD_PATHS={
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
+    "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
 }
@@ -110,6 +113,13 @@ FAIL=[]
 
 def load(path):
     return json.loads((ROOT/path).read_text(encoding="utf-8"))
+
+def load_at_ref(ref,path):
+    try:
+        raw=git("show",f"{ref}:{path}")
+    except Exception as exc:
+        raise RuntimeError("REF_JSON_READ_FAILED:"+str(path)+":"+type(exc).__name__) from exc
+    return json.loads(raw)
 
 def fail(msg):
     FAIL.append(msg)
@@ -408,6 +418,30 @@ def enforce_live_route_frontier(intent,obs):
     enforce_selected_route_preflight(frontier,obs)
 
 
+def _frontier_scope_chain(capability_id):
+    chain=[]
+    visited=set()
+    current=str(capability_id or "").strip()
+    while current:
+        if current in visited:
+            fail("FRONTIER_CAPABILITY_PARENT_CYCLE:"+current)
+            break
+        visited.add(current)
+        path=ROOT/"canonical"/"capabilities"/"frontier"/(current+".json")
+        if not path.is_file():
+            if not chain:
+                fail("MODEL_NON_DEPENDENCE_TARGET_METADATA_MISSING:"+current)
+            break
+        try:
+            record=json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            fail("MODEL_NON_DEPENDENCE_TARGET_METADATA_INVALID:"+current)
+            break
+        chain.append(record)
+        parent=str(record.get("parent_frontier_capability") or "").strip()
+        current=parent
+    return chain
+
 def enforce_model_independent_cognition(intent,obs):
     action_kind=str(intent.get("action_kind") or "")
     if action_kind not in REAL_TASK_ACTIONS:
@@ -418,17 +452,12 @@ def enforce_model_independent_cognition(intent,obs):
         fail("MODEL_NON_DEPENDENCE_CAPABILITY_TARGET_MISSING")
         return
 
-    target_path=ROOT/"canonical"/"capabilities"/"frontier"/(capability_id+".json")
-    if not target_path.is_file():
-        fail("MODEL_NON_DEPENDENCE_TARGET_METADATA_MISSING:"+capability_id)
+    chain=_frontier_scope_chain(capability_id)
+    if not chain:
         return
-    try:
-        target=json.loads(target_path.read_text(encoding="utf-8"))
-    except Exception:
-        fail("MODEL_NON_DEPENDENCE_TARGET_METADATA_INVALID:"+capability_id)
-        return
-
-    families=set(str(x) for x in (target.get("parent_families") or []))
+    families=set()
+    for target in chain:
+        families.update(str(x) for x in (target.get("parent_families") or []))
     if not families.intersection(COGNITIVE_PARENT_FAMILIES):
         return
 
@@ -614,6 +643,7 @@ def enforce_blocker_lease(intent):
     except Exception as exc:
         fail("BLOCKER_LEASE_DEDUPE_CHECK_FAILED:"+str(exc))
         return
+    current=int(os.environ.get("CURRENT_PR_NUMBER") or "0")
     for peer in peers:
         other=peer["intent"]
         if blocker_lease_key(other)!=expected:
@@ -625,7 +655,162 @@ def enforce_blocker_lease(intent):
             race_b=str(other.get("route_race_id") or "")
             if race_a and race_a==race_b:
                 continue
-        fail(f"DUPLICATE_BLOCKER_LEASE_OPEN_PR:{peer['pr']}")
+
+        peer_pr=int(peer.get("pr") or 0)
+        # Accidental duplicate leases use a deterministic single owner so a
+        # near-simultaneous race cannot deadlock both PRs. Lowest PR number wins.
+        if current>0 and peer_pr>current:
+            continue
+        if current>0 and peer_pr<current:
+            fail(f"DUPLICATE_BLOCKER_LEASE_OWNER_EXISTS:{peer_pr}")
+        else:
+            fail(f"DUPLICATE_BLOCKER_LEASE_OPEN_PR:{peer_pr}")
+
+def enforce_target_continuity(intent,base,hierarchy):
+    action_kind=str(intent.get("action_kind") or "")
+    try:
+        prior=load_at_ref(base,"canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
+    except Exception as exc:
+        fail("BASE_HIERARCHY_READ_FAILED:"+str(exc))
+        return
+    before=str(prior.get("active_capability_target") or "")
+    after=str(hierarchy.get("active_capability_target") or "")
+    if before==after:
+        return
+    if action_kind in GOVERNANCE_ACTIONS:
+        return
+    if action_kind!="RECONCILE_FRONTIER":
+        fail("ACTIVE_CAPABILITY_TARGET_CHANGE_REQUIRES_EXPLICIT_RECONCILIATION:"+before+"->"+after)
+        return
+    rec=intent.get("frontier_reconciliation")
+    if not isinstance(rec,dict):
+        fail("FRONTIER_RECONCILIATION_EVIDENCE_REQUIRED")
+        return
+    if str(rec.get("previous_target") or "")!=before:
+        fail("FRONTIER_RECONCILIATION_PREVIOUS_TARGET_MISMATCH")
+    if str(rec.get("new_target") or "")!=after:
+        fail("FRONTIER_RECONCILIATION_NEW_TARGET_MISMATCH")
+    relationship=str(rec.get("relationship") or "")
+    if relationship not in {"SUBCAPABILITY_OF","RESIDUAL_OF","NEXT_FRONTIER_AFTER_VERIFIED_CLOSURE","REOPENED_BY_FALSIFICATION"}:
+        fail("FRONTIER_RECONCILIATION_RELATIONSHIP_INVALID")
+    if not _nonempty_string_list(rec.get("evidence")):
+        fail("FRONTIER_RECONCILIATION_EVIDENCE_MISSING")
+
+def _require_existing_paths(values,label):
+    if not isinstance(values,list) or not values:
+        fail(label+"_MISSING")
+        return
+    for raw in values:
+        if not _nonempty_string(raw):
+            fail(label+"_INVALID")
+            continue
+        path=ROOT/str(raw)
+        if not path.is_file():
+            fail(label+"_PATH_MISSING:"+str(raw))
+
+def enforce_promotion_truth(intent,files,base):
+    score_path="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+    if score_path not in files:
+        return
+    try:
+        old=load_at_ref(base,score_path)
+        new=load(score_path)
+    except Exception as exc:
+        fail("SCOREBOARD_COMPARISON_FAILED:"+str(exc))
+        return
+
+    oldc=old.get("counters_since_epoch_start") or {}
+    newc=new.get("counters_since_epoch_start") or {}
+    counters=(
+        "reusable_capabilities_inherited",
+        "verified_real_tasks_completed",
+        "fresh_reuse_passes",
+        "frontier_dependencies_removed",
+        "residual_gaps_localized",
+    )
+    deltas={}
+    for key in counters:
+        try:
+            delta=int(newc.get(key,0))-int(oldc.get(key,0))
+        except Exception:
+            fail("SCOREBOARD_COUNTER_INVALID:"+key)
+            continue
+        if delta>0:
+            deltas[key]=delta
+
+    if not deltas:
+        return
+
+    evidence=intent.get("promotion_evidence")
+    if not isinstance(evidence,dict):
+        fail("PROMOTION_EVIDENCE_REQUIRED_FOR_SCOREBOARD_INCREASE")
+        return
+    if evidence.get("claim_scope_exact") is not True:
+        fail("PROMOTION_CLAIM_SCOPE_NOT_EXACT")
+    falsification=evidence.get("falsification_attempts")
+    no_cheap=str(evidence.get("cheap_falsification_not_available_reason") or "").strip()
+    if not isinstance(falsification,list) or not falsification:
+        if not no_cheap:
+            fail("PROMOTION_ADVERSARIAL_FALSIFICATION_REQUIRED")
+
+    action_kind=str(intent.get("action_kind") or "")
+    allowed={
+        "reusable_capabilities_inherited":{"CAPABILITY_INHERITANCE"},
+        "verified_real_tasks_completed":{"REAL_CAPABILITY_ACQUISITION","REAL_TASK_EXECUTION","CAPABILITY_INHERITANCE","FRESH_REUSE"},
+        "fresh_reuse_passes":{"FRESH_REUSE"},
+        "frontier_dependencies_removed":{"CAPABILITY_INHERITANCE","FRESH_REUSE","RECONCILE_FRONTIER"},
+        "residual_gaps_localized":{"REAL_CAPABILITY_ACQUISITION","REAL_TASK_EXECUTION","FRESH_REUSE","RECONCILE_FRONTIER"},
+    }
+    for key in deltas:
+        if action_kind not in allowed[key]:
+            fail("SCOREBOARD_COUNTER_ACTION_KIND_MISMATCH:"+key+":"+action_kind)
+
+    if any(k in deltas for k in ("reusable_capabilities_inherited","verified_real_tasks_completed","fresh_reuse_passes","frontier_dependencies_removed")):
+        _require_existing_paths(evidence.get("real_task_evidence_paths"),"PROMOTION_REAL_TASK_EVIDENCE")
+
+    if any(k in deltas for k in ("reusable_capabilities_inherited","frontier_dependencies_removed")):
+        _require_existing_paths(evidence.get("independent_verification_evidence_paths"),"PROMOTION_INDEPENDENT_VERIFICATION_EVIDENCE")
+
+    if "reusable_capabilities_inherited" in deltas:
+        package=str(evidence.get("capability_package_path") or "").strip()
+        if not package or not (ROOT/package).is_file():
+            fail("PROMOTION_CAPABILITY_PACKAGE_MISSING")
+
+    if "fresh_reuse_passes" in deltas:
+        reuse=str(evidence.get("fresh_reuse_evidence_path") or "").strip()
+        if not reuse or not (ROOT/reuse).is_file():
+            fail("PROMOTION_FRESH_REUSE_EVIDENCE_MISSING")
+        if evidence.get("fresh_reuse_distinct_task") is not True:
+            fail("PROMOTION_FRESH_REUSE_NOT_DISTINCT_TASK")
+
+    capability_id=str(intent.get("capability_target") or "")
+    chain=_frontier_scope_chain(capability_id) if capability_id else []
+    cross_domain_required=any(
+        bool((record.get("minimum_acquisition_evidence") or {}).get("cross_domain_transfer_required"))
+        for record in chain
+    )
+    if cross_domain_required and any(k in deltas for k in ("fresh_reuse_passes","frontier_dependencies_removed")):
+        if evidence.get("cross_domain_distinct") is not True:
+            fail("PROMOTION_CROSS_DOMAIN_EVIDENCE_REQUIRED")
+
+    if "frontier_dependencies_removed" in deltas:
+        if evidence.get("frontier_dependency_removed") is not True:
+            fail("PROMOTION_FRONTIER_DEPENDENCY_REMOVAL_NOT_PROVEN")
+        target_supplier=str(evidence.get("target_frontier_supplier") or "").strip()
+        producer=[str(x).strip() for x in (evidence.get("producer_execution_suppliers") or []) if str(x).strip()]
+        verifiers=[str(x).strip() for x in (evidence.get("independent_verifier_suppliers") or []) if str(x).strip()]
+        if not target_supplier:
+            fail("PROMOTION_TARGET_FRONTIER_SUPPLIER_MISSING")
+        else:
+            folded=target_supplier.casefold()
+            if any(x.casefold()==folded for x in producer):
+                fail("CIRCULAR_FRONTIER_PROOF_TARGET_SUPPLIER_IN_PRODUCER_PATH")
+            if any(x.casefold()==folded for x in verifiers):
+                fail("CIRCULAR_FRONTIER_PROOF_TARGET_SUPPLIER_IS_VERIFIER")
+        if not producer:
+            fail("PROMOTION_PRODUCER_SUPPLIERS_MISSING")
+        if not verifiers:
+            fail("PROMOTION_INDEPENDENT_VERIFIER_SUPPLIERS_MISSING")
 
 def main():
     ap=argparse.ArgumentParser()
@@ -657,6 +842,8 @@ def main():
     if intent:
         enforce_blocker_lease(intent)
         enforce_recursive_obs(intent,files,ns.base)
+        enforce_target_continuity(intent,ns.base,hierarchy)
+        enforce_promotion_truth(intent,files,ns.base)
 
     terminal=str(pointer.get("mission_lock",{}).get("terminal_objective") or "")
     if hierarchy.get("terminal_objective")!=terminal:

@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FAIL-CLOSED-MISTAKE-IMMUNITY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "KNOWN_RECURRING_MISTAKE_CLASSES_NOT_ALL_MACHINE_REJECTED_BEFORE_CANONICAL_EFFECT",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::KNOWN_RECURRING_MISTAKE_CLASSES_NOT_ALL_MACHINE_REJECTED_BEFORE_CANONICAL_EFFECT::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make recurring high-cost reasoning/governance mistakes fail closed before they can change canonical frontier state, while preserving deterministic forward progress and zero-credit governance.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR254 and PR255 exact duplicate blocker lease incident",
+    "PR213 false narrow-domain frontier capability promotion correction",
+    "PR214 circular frontier-proof route closed unmerged",
+    "existing truth-first, OBS V3/V4, and model-nondependence guards"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal deterministic lease-owner rule, promotion-truth guard, anti-circular-proof invariant, anti-proxy frontier invariant, regression catalog, and canonical pointer wiring; then stop governance work and resume the active model-independent capability acquisition frontier.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly required making these recurring mistakes and other foreseeable mistake classes fail closed and asked for the cleverest fastest route to the terminal objective.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "36bb1372702badad6a0c71c4a0b09e1c80c5a7a6",
+    "real_outcome": "Prevent recurring mistake classes from reaching canonical state or consuming duplicated capability work, without slowing the active frontier more than necessary.",
+    "required_capability": "FAIL_CLOSED_MISTAKE_IMMUNITY_FOR_FRONTIER_CAPABILITY_ACQUISITION",
+    "obs_goal": {
+      "real_outcome": "Known recurring mistakes become machine-rejected invariants rather than reminders.",
+      "proxy_goals_deleted": [
+        "general caution checklist",
+        "confidence scoring",
+        "new governance framework",
+        "new scheduler"
+      ],
+      "surviving_necessity": "Patch the existing trusted guard and encode permanent regressions only."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "enforce_goal_hierarchy.py",
+        "truth-first law",
+        "recursive OBS V3/V4",
+        "capability acquisition law V4",
+        "duplicate blocker lease mechanism"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: this is internal canonical guard semantics."
+      ],
+      "capability_work_deleted": [
+        "No new control plane",
+        "No new workflow",
+        "No new policy engine"
+      ],
+      "surviving_gap": "Current guard can deadlock simultaneous duplicate leases and does not centrally encode all proven false-promotion/circular-proof failure classes."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic control defect observed in live PR #254/#255 duplicate lease and prior false frontier-capability accounting incidents.",
+      "delete_bypass_substitute_options": [
+        "Delete guard: rejected",
+        "Human reminder only: rejected",
+        "Deterministic existing-guard repair: survives"
+      ],
+      "surviving_causal_blocker": "Known mistake classes are not all represented as deterministic fail-closed predicates."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Patch existing trusted validator + one compact law + one regression catalog",
+        "Add separate meta-controller",
+        "Add confidence/scoring bureaucracy"
+      ],
+      "losing_routes_reason": "Separate controllers and scoring add machinery without increasing enforcement authority.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Direct predicate tests against the exact known failure cases are sufficient; no benchmark is needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "manual duplicate-PR reconciliation",
+        "informal reminders against circular proof",
+        "manual correction of obvious false frontier promotion where machine-detectable"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "deterministic duplicate ownership",
+        "frontier claim provenance enforcement",
+        "proxy-target continuity enforcement"
+      ],
+      "fresh_reuse_plan": "Next normal capability PR must pass the hardened guard without special handling."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse existing guard architecture",
+        "No external route search for internal governance semantics"
+      ],
+      "search_stop_decision": "Known live failure classes and their exact enforcement points are identified; further governance research would delay the active capability frontier.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External challenger discovery is inapplicable to this internal governance repair."
+    },
+    "routes_considered": [
+      "PATCH_EXISTING_TRUSTED_GUARD",
+      "ADD_META_CONTROLLER",
+      "ADD_CONFIDENCE_SCORING"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADD_META_CONTROLLER",
+      "ADD_CONFIDENCE_SCORING"
+    ],
+    "selected_surviving_route": "PATCH_EXISTING_TRUSTED_GUARD",
+    "why_selected_route_is_fastest_sufficient": "The existing guard is already trusted and authoritative. Adding a few deterministic invariants closes the observed failure classes with minimum wall-clock and machinery.",
+    "expected_parent_level_state_change": "Make recurring high-cost reasoning/governance mistakes fail closed before they can change canonical frontier state, while preserving deterministic forward progress and zero-credit governance.",
+    "stop_condition": "Merge only the minimal deterministic lease-owner rule, promotion-truth guard, anti-circular-proof invariant, anti-proxy frontier invariant, regression catalog, and canonical pointer wiring; then stop governance work and resume the active model-independent capability acquisition frontier.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Internal governance predicate repair; no external supplier or implementation route can replace the trusted repository guard."
+    }
+  }
+}
