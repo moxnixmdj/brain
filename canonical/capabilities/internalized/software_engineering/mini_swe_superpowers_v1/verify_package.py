@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import hashlib, json, pathlib, tempfile, subprocess, sys
+import json, pathlib, tempfile, subprocess, sys
 
 ROOT=pathlib.Path(__file__).resolve().parents[5]
 PKG=pathlib.Path(__file__).resolve().parent
@@ -8,8 +8,9 @@ MANIFEST=PKG/"COMPOSED_CONFIGURATION_V1.json"
 BUILDER=PKG/"build_overlay.py"
 
 def blob_sha(path):
-    raw=path.read_bytes()
-    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+    p=path.resolve()
+    cp=subprocess.run(["git","hash-object",str(p)],cwd=ROOT,text=True,capture_output=True,check=True)
+    return cp.stdout.strip()
 
 m=json.loads(MANIFEST.read_text())
 assert m["underlying_capability_invention"] is False
