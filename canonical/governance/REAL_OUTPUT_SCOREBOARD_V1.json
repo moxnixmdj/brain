@@ -3,8 +3,8 @@
   "status": "CANONICAL_PROGRESS_ACCOUNTING",
   "epoch_id": "CAPABILITY_ACQUISITION_ENGINE_V3_EPOCH_20260929",
   "epoch_reason": "USER_AUTHORIZED_RESET_FROM_PROBE_BENCHMARK_ACTIVITY_TO_REUSABLE_REAL_CAPABILITY_OUTPUT",
-  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
-  "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
+  "terminal_objective": "PERMANENTLY_ACQUIRE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "progress_currency": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "counters_since_epoch_start": {
     "reusable_capabilities_inherited": 9,
     "verified_real_tasks_completed": 9,
@@ -83,11 +83,14 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
+  "next_progress_event_target": "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE__MAP_ALREADY_OWNED_CAPABILITIES__SEARCH_EXISTING_EQUAL_OR_BETTER_REALIZATIONS__CONFIGURE_VERIFY_AND_SAVE_WINNERS__KNOWLEDGE_JIT_ONLY__NO_CAPABILITY_INVENTION",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
-    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md"
+    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md"
   ],
   "compliance_state": {
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
@@ -608,40 +611,15 @@
     }
   ],
   "active_frontier_accounting": {
-    "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": "MODEL_INDEPENDENT_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_V1",
-    "subcapability_status": "TASK_C_CAUSAL_CORRECTION__INITIAL_RELEVANCE_ROLE_COVERAGE_UNACQUIRED",
+    "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "active_subcapability_target": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_RECOVERY_AND_OWNERSHIP_MAPPING_V1",
+    "subcapability_status": "ACTIVE__THEORY_RESET__NO_CAPABILITY_CREDIT_FROM_LOCAL_RESEARCH_REPAIRS",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "fresh_task_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
-    "fresh_task_blob_sha": "592732d21f72c1344b82640f99fb50c9ea6ece78",
-    "execution_count": 1,
-    "replay_allowed": false,
-    "residual_gap": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
-    "first_physical_spend_run_id": 36698638943,
-    "last_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
-      "status": "VERIFIED_ACQUIRED__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
-      "route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
-      "public_run_id": 36686583882,
-      "public_job_id": 109793738883,
-      "artifact_id": 11083254225,
-      "artifact_digest": "sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d",
-      "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
-      "test_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
-      "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
-      "model_dependency_count": 0,
-      "incremental_spend_usd": 0,
-      "parent_capability_promoted": false,
-      "limitations": "Verified only for bounded explicit GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE objectives and exact quoted-support objectives with unique lexical role binding, exact-unit-compatible operand selection, and fail-closed ambiguity. General semantic entailment, truth, causality, sufficiency, unit conversion, source independence, and parent completion remain unverified.",
-      "qualification_authority": "GLOBAL_EXECUTION_GUARD_ATOMIC_ADMISSION_V1",
-      "guard_attempt_id": "7d9e1ed58e61497a9a1ab4ab8ee779ce",
-      "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
-    },
-    "last_spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
-    "last_spent_parent_run_id": 36698638943,
-    "next_required_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY"
+    "residual_gap": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
+    "next_required_action": "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE__MAP_ALREADY_OWNED_CAPABILITIES__SEARCH_EXISTING_EQUAL_OR_BETTER_REALIZATIONS__CONFIGURE_VERIFY_AND_SAVE_WINNERS__KNOWLEDGE_JIT_ONLY__NO_CAPABILITY_INVENTION",
+    "previous_local_frontier": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "previous_local_frontier_status": "DEFERRED_SUBORDINATE"
   },
   "events": [
     {
@@ -718,11 +696,9 @@
     }
   ],
   "last_subcapability_event": {
-    "event_id": "SCHOLARLY_SOURCE_ADMISSION_REPAIR_QUALIFIED_20260930",
-    "status": "GUARD_QUALIFIED_MERGED__ZERO_SCOREBOARD_CREDIT_PENDING_FRESH_PARENT_REUSE",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json",
-    "public_run_id": 36697424705,
-    "artifact_id": 11088004744,
+    "event_id": "CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_20260930",
+    "status": "GOVERNANCE_CORRECTION__ZERO_CAPABILITY_CREDIT",
+    "evidence_path": "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json",
     "counter_delta": 0
   },
   "capability_events": [
@@ -797,15 +773,11 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "MATERIALS_TASK_C_SPENT__FIRST_GAP_CORRECTED_TO_INITIAL_RELEVANCE_DECISION_ROLE_COVERAGE__NO_PARENT_CREDIT",
-    "previous_interpretation": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
-    "blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
-    "spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
-    "spent_parent_run_id": 36698638943,
-    "spent_parent_replay_allowed": false,
-    "parent_capability_promoted": false,
+    "status": "V5_THEORY_RESET_TO_PERMANENT_OPUS_5_5_CAPABILITY_OWNERSHIP",
+    "blocker": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
-    ]
+      "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
+    ],
+    "counter_delta": 0
   }
 }
