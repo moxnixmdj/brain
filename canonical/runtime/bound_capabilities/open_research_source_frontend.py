@@ -69,6 +69,32 @@ def run(objective,decomposition,limit=12,timeout=15):
             "RETRIEVAL_PROVENANCE_VERIFIED",
         }
     ]
+
+    # Authority identity is a separate, independently qualified stage. Feed only
+    # provenance-verified candidates forward, and carry the independently
+    # observed final host when retrieval provenance supplies one.
+    authority=_load_sibling("source_authority_binding_ror")
+    authority_candidates=[]
+    for item in verified:
+        candidate=dict(item["candidate"])
+        verification=item["verification"]
+        if verification.get("final_host"):
+            candidate["final_host"]=verification.get("final_host")
+        if verification.get("final_url"):
+            candidate["final_url"]=verification.get("final_url")
+        authority_candidates.append(candidate)
+    authority_result=authority.bind_discovery(
+        {"candidates":authority_candidates},
+        timeout=timeout,
+        max_candidates=limit,
+    ) if authority_candidates else {
+        "status":"AUTHORITY_UNRESOLVED",
+        "verified_candidate_count":0,
+        "verified_candidates":[],
+        "model_dependency_count":0,
+        "incremental_spend_usd":0,
+    }
+    authority_verified=int(authority_result.get("verified_candidate_count") or 0)
     if not verified:
         return {
             "schema":SCHEMA,
@@ -91,18 +117,27 @@ def run(objective,decomposition,limit=12,timeout=15):
         "discovery":discovered,
         "provenance_verifications":verifications,
         "provenance_verified_candidate_count":len(verified),
-        "authority_verified_candidate_count":0,
+        "authority_verification":authority_result,
+        "authority_verified_candidate_count":authority_verified,
         "primary_source_verified_candidate_count":0,
         "relevance_verified_candidate_count":0,
         "role_progress":{
             "SOURCE_DISCOVERY":"CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE",
-            "EVIDENCE_ACQUISITION":"BLOCKED_ON_AUTHORITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION",
+            "EVIDENCE_ACQUISITION":(
+                "BLOCKED_ON_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+                if authority_verified>0
+                else "BLOCKED_ON_AUTHORITY_IDENTITY_OR_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+            ),
             "EVIDENCE_EXTRACTION":"NOT_STARTED",
             "RELATION_EVALUATION":"NOT_STARTED",
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
-        "next_required_capability":"MODEL_INDEPENDENT_SOURCE_AUTHORITY_PRIMARY_EVIDENCE_AND_RELEVANCE_VERIFICATION",
-        "authority_claims_made":False,
+        "next_required_capability":(
+            "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
+            if authority_verified>0
+            else "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_COVERAGE_OR_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+        ),
+        "authority_claims_made":authority_verified>0,
         "primary_source_claims_made":False,
         "relevance_claims_made":False,
         "evidence_sufficiency_claims_made":False,
