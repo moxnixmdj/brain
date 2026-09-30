@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_REPAIR_VALIDATION_V1",
+  "evidence_id": "GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_REPAIR_VALIDATION_20260930",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "status": "DIRECT_COMPILER_BINDING_REPAIR_COMPLETE__COMPONENT_VALIDATED__CAPABILITY_CREDIT_WITHHELD",
+  "repaired_seam": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
+  "merged_repair": {
+    "pr": 281,
+    "merge_commit": "3c6ef5185a646ff0d0f1b970fc8017dff5966a72",
+    "public_validation_run": 36658401010,
+    "public_validation_job": 109707559771
+  },
+  "validation": {
+    "exact_candidate_and_shared_binder_stack": "PASS",
+    "direct_causal_binding_regression": "PASS",
+    "full_goal_compiler_regression_file": "PASS",
+    "public_run_conclusion": "success",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "architecture_result": {
+    "direct_compound_compiler_uses_shared_proposal_binding_authority_for_effect_result": true,
+    "effect_result_lowering_reuses_capability_planner": true,
+    "path_recency_tuning": false,
+    "task_specific_patch": false
+  },
+  "credit_effect": {
+    "reusable_capability_credit_restored": false,
+    "fresh_reuse_credit_restored": false,
+    "verified_real_task_count_change": 0,
+    "residual_gap_count_change": 0
+  },
+  "next_required_evidence": "ONE_FRESH_MATERIALLY_DISTINCT_REAL_COMPOSITION_REQUALIFICATION_TASK__NO_PR277_REPLAY__MODEL_DEPENDENCY_COUNT_0"
+}
