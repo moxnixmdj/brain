@@ -296,5 +296,23 @@
     "incremental_spend_usd": 0
   },
   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
-  "progress_credit": "VERIFIED_REUSABLE_GENERIC_SUBCAPABILITY_AND_NEXT_GAP_LOCALIZED"
+  "progress_credit": "VERIFIED_REUSABLE_SUBCAPABILITY_PACKAGE_RECORDED__ZERO_GLOBAL_SCORE_CREDIT",
+  "capability_package_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1.json",
+  "scoreboard_counter_increase_requested": false,
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "scoreboard_counter_increase_requested": false,
+    "capability_package_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1.json",
+    "independent_verification_evidence_paths": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json"
+    ],
+    "falsification_attempts": [
+      "non-selected candidate rejected before network",
+      "wrong relevance receipt fails closed",
+      "redirect/source identity drift fails closed",
+      "irrelevant fresh page fails closed",
+      "navigation-only anchors fail closed"
+    ],
+    "note": "Promotion evidence is retained as provenance, but this PR intentionally requests zero global scoreboard increase. The verified deterministic child is packaged without implying parent cognitive capability promotion."
+  }
 }
