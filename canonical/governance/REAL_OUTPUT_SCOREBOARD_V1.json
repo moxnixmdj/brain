@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_B__NO_HTTP2_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -585,19 +585,39 @@
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
       "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    {
+      "event_id": "MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_REPAIRED_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "GENERIC_PARENT_ROUTING_REPAIR_GUARDED_QUALIFIED__NO_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json",
+      "public_run_id": 36689658815,
+      "public_job_id": 109803582621,
+      "artifact_id": 11085092932,
+      "artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "GENERIC_ROUTING_REPAIR_ONLY",
+      "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "subcapability_status": "BROAD_MULTICLAUSE_RESEARCH_ROUTING_REPAIRED_GUARDED_QUALIFIED__FRESH_TASK_B_REQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
     "first_physical_spend_run_id": 36670808367,
     "last_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
@@ -618,7 +638,9 @@
       "qualification_authority": "GLOBAL_EXECUTION_GUARD_ATOMIC_ADMISSION_V1",
       "guard_attempt_id": "7d9e1ed58e61497a9a1ab4ab8ee779ce",
       "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
-    }
+    },
+    "last_spent_parent_task": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+    "last_spent_parent_run_id": 36688193204
   },
   "events": [
     {
