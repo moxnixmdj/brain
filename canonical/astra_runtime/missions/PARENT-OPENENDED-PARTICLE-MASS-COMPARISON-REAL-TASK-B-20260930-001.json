@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-PARTICLE-MASS-COMPARISON-REAL-TASK-B-20260930-001",
+  "purpose": "Execute the frozen, unspent particle-physics open-ended parent Task B exactly once through the canonical ASTRA runtime after guarded-qualified broad-research routing repair. No prewired source, authority, numeric values, tool, command, calculation recipe, answer, or task-specific runtime patch.",
+  "goal": "Assess whether the neutron mass is greater than the proton mass. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant evidence, determine how to extract and interpret the required masses, choose and run a zero-cost verification method, identify material definition, unit, uncertainty, or interpretation limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-particle-mass-open-ended-parent-task-b",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-OPENENDED-PARTICLE-MASS-COMPARISON-REAL-TASK-B-20260930-001.json",
+    "source_task_blob_sha": "f412df7bf7f21947dbd5e728b4925440a057b9ae",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
