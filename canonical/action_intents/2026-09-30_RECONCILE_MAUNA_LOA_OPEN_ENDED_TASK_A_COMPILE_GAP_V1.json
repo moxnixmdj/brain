@@ -1,0 +1,170 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MAUNA-LOA-OPEN-ENDED-TASK-A-COMPILE-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_TASK_A_SPENT__BROAD_OBJECTIVE_COMPILE_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_TASK_A_SPENT__BROAD_OBJECTIVE_COMPILE_NO_VERIFIED_CAPABILITY_MATCH::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Replace the pre-execution broad evidence-scope blocker with the exact first causal gap exposed by the one spent Mauna Loa open-ended Task A: the first broad research-objective clause reaches COMPILE but has no verified bound capability match. Preserve uncertainty about whether the missing mechanism is decomposition, grounding, planning, binding, or composition until a fresh current-base OBS adjudicates it. Award no capability credit and authorize no repair or replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current exact verified main ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "PR337 canonical Mauna Loa open-ended Task A lane and terminal receipt",
+    "PR342 duplicate lane closed fail-closed with no execution",
+    "PR337 terminal comment 5904283607",
+    "PR342 spent-task reconciliation comments 5904274384, 5904277970, and 5904288940",
+    "frozen task blob 6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "public carrier run 36670516407",
+    "artifact 11077861584",
+    "artifact digest sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "current goal compiler failure surface GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "already inherited model-independent grounding, executable composition, numeric relation, typed scalar expression, source/tool discovery, synthesis, and verification capabilities"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Record the exact one-shot terminal receipt and localize only the compile-stage capability-match seam. Do not replay the Mauna Loa task, do not patch climate-specific literals, do not modify runtime code, and do not promote the parent capability. Then return to a fresh exact-base recursive OBS of the localized generic seam.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "real_outcome": "Make canonical frontier reasoning agree with the primary one-shot Task A receipt and convert the broad pre-execution uncertainty into the narrowest evidence-supported generic compile-stage gap.",
+    "required_capability": "TRUTHFUL_SPENT_TASK_RECONCILIATION_AND_FIRST_CAUSAL_GAP_LOCALIZATION",
+    "obs_goal": {
+      "real_outcome": "Preserve exactly what the genuine open-ended Task A proved and failed to prove, without replay or speculative repair.",
+      "proxy_goals_deleted": [
+        "rerun the Mauna Loa task",
+        "patch climate literals",
+        "claim parent capability acquisition",
+        "infer a planner defect without evidence",
+        "merge stale PR340 as current-base authority"
+      ],
+      "surviving_necessity": "The task is spent and its terminal receipt changes the frontier from an untested open-ended-scope obligation to a concrete compile-stage reachability gap."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "plain-goal bound-capability grounding",
+        "grounded executable composition",
+        "domain-free authority/source discovery",
+        "knowledge fetch and evidence materialization",
+        "two-scalar numeric relation execution",
+        "typed scalar numeric expression execution",
+        "evidence-to-decision synthesis",
+        "independent verification"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no new execution",
+        "no new carrier",
+        "no runtime mutation",
+        "no task-specific compiler rule",
+        "no model planner",
+        "no capability promotion"
+      ],
+      "surviving_gap": "The first broad research-objective clause is not compiled to any verified bound capability. The receipt does not yet distinguish whether the missing generic mechanism is decomposition, grounding, planning, binding, or composition."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic front-end reachability failure observed on a genuinely open-ended task; exact deeper mechanism remains unadjudicated.",
+      "delete_bypass_substitute_options": [
+        "reuse the terminal receipt instead of replaying",
+        "preserve already-acquired downstream subcapabilities",
+        "defer implementation until current-base OBS determines whether composition can bridge the seam"
+      ],
+      "surviving_causal_blocker": "BROAD_OBJECTIVE_COMPILE_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_PRIMARY_TERMINAL_RECEIPT_AND_LOCALIZE_GENERIC_COMPILE_GAP",
+        "REPLAY_SPENT_TASK",
+        "PATCH_CLIMATE_LITERALS",
+        "PREEMPTIVELY_BUILD_GENERAL_PLANNER"
+      ],
+      "losing_routes_reason": "Replay violates the one-shot contract; climate literals destroy generality; planner construction is premature because the receipt proves only a capability-match failure, not which generic mechanism is missing.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution is admissible. The public runner terminal receipt is the primary oracle for execution count and first causal failure.",
+      "primary_receipt": {
+        "source_pr": 337,
+        "runner_pr": 49,
+        "public_run_id": 36670516407,
+        "artifact_id": 11077861584,
+        "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+        "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+        "execution_count": 1,
+        "task_executed": true,
+        "status": "FAIL_FIRST_CAUSAL_GAP",
+        "stage": "COMPILE",
+        "terminal_error": "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+        "cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "source_tool_discovery_executed": false,
+        "independent_oracle_executed": false,
+        "replay_allowed": false
+      }
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "the pre-execution claim that no admissible open-ended Task A has been attempted",
+        "any Mauna Loa replay lane",
+        "any climate-specific repair lane",
+        "any speculative claim that the exact missing mechanism is already known"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "the inherited downstream model-independent execution stack remains valid",
+        "one-shot spent-task provenance",
+        "first-causal-gap evidence"
+      ],
+      "fresh_reuse_plan": "Run a fresh current-base OBS on the generic compile seam. Search/reuse/compose inherited capabilities before repair. Any eventual repair must be validated on a fresh materially different task, never by replaying Mauna Loa."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR337 primary terminal receipt",
+        "reused PR342 duplicate closure and repeated spent-task reconciliation",
+        "reused current canonical pointer, hierarchy, queue, scoreboard, and operator OBS boundary"
+      ],
+      "search_stop_decision": "Receipt truth is decisive: exactly one execution failed at compile before source/tool discovery. Further execution would be duplicate and cannot improve this reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not required for evidence-only reconciliation; external implementation-route competition is deferred to the next current-base OBS of the localized seam."
+    },
+    "routes_considered": [
+      "RECONCILE_PRIMARY_TERMINAL_RECEIPT_AND_LOCALIZE_GENERIC_COMPILE_GAP",
+      "REPLAY_SPENT_TASK",
+      "PATCH_CLIMATE_LITERALS",
+      "PREEMPTIVELY_BUILD_GENERAL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_SPENT_TASK",
+      "PATCH_CLIMATE_LITERALS",
+      "PREEMPTIVE_GENERAL_PLANNER_BUILD",
+      "PARENT_PROMOTION_FROM_FAILED_TASK"
+    ],
+    "selected_surviving_route": "RECONCILE_PRIMARY_TERMINAL_RECEIPT_AND_LOCALIZE_GENERIC_COMPILE_GAP",
+    "why_selected_route_is_fastest_sufficient": "It uses primary evidence, requires no execution or runtime change, preserves the exact one-shot contract, and yields the narrowest defensible next blocker.",
+    "expected_parent_level_state_change": "The broad pre-execution blocker is superseded by BROAD_OBJECTIVE_COMPILE_NO_VERIFIED_CAPABILITY_MATCH for the active parent target. Parent capability remains unpromoted.",
+    "next_required_action": "RUN_CURRENT_BASE_RECURSIVE_OBS_ON_BROAD_OBJECTIVE_COMPILE_NO_VERIFIED_CAPABILITY_MATCH__SEARCH_REUSE_COMPOSE_BEFORE_REPAIR__NO_MAUNA_LOA_REPLAY",
+    "stop_condition": "Commit only reconciliation evidence and hand the localized generic seam to a fresh current-base OBS."
+  }
+}
