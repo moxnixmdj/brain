@@ -1,0 +1,326 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-DECISION-ROLE-RELEVANCE-OPERAND-COVERAGE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "expected_parent_frontier_change": "Stage one bounded model-independent relevance repair that reuses the verified objective relation parser to require decision-property coverage plus exact applicable operand identity before BM25 candidates can be admitted; preserve materials Task C as spent/no-replay and award zero capability credit until independent exact-byte qualification.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Task C authoritative artifact correction",
+    "verified claim/operand binder promotion",
+    "current BM25 relevance ranker",
+    "current BM25 package challengers",
+    "closed downstream PRs 537-540"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__FRESH_TASK_C_SPENT__EARLIEST_GENERIC_GAP_LOCALIZED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the bounded role-aware relevance candidate and fail-closed regressions are frozen. Do not replay materials Task C, do not repair downstream materialization, and do not award parent/subcapability credit before guarded independent qualification.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "81f2f813f03b5d80ac2e44080bd19d967bd06463",
+    "real_outcome": "Repair exactly the earliest routing error exposed by spent materials Task C: source relevance admission that ignores decision-property and operand roles.",
+    "required_capability": "MODEL_INDEPENDENT_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_V1",
+    "obs_goal": {
+      "real_outcome": "Prevent generic token overlap from admitting an off-property or wrong-operand source in explicit comparison research.",
+      "proxy_goals_deleted": [
+        "Task C replay",
+        "materialization repair",
+        "metadata fallback repair",
+        "new BM25 package",
+        "model reranker"
+      ],
+      "surviving_necessity": "Add bounded decision-role admission to existing deterministic ranking."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "objective_relevance_bm25",
+        "verified objective_claim_operand_binding parser",
+        "research_query_focus"
+      ],
+      "external_existing_routes_checked": [
+        "rank-bm25",
+        "BM25 0.3.11",
+        "model reranker route"
+      ],
+      "capability_work_deleted": [
+        "new retrieval stack",
+        "new semantic model",
+        "downstream source repair"
+      ],
+      "surviving_gap": "Existing admission verifies only aggregate query-token count and can pass while missing decision property and exact operand."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic relevance-admission defect evidenced by fresh Task C; not task-specific materialization.",
+      "delete_bypass_substitute_options": [
+        "Delete Task C replay",
+        "Reuse verified relation parser",
+        "Retain BM25 only as score after role gating"
+      ],
+      "surviving_causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Compose verified relation parser with deterministic role-aware BM25 admission",
+        "Swap BM25 implementation",
+        "Model semantic reranking",
+        "Build semantic retrieval system"
+      ],
+      "losing_routes_reason": "Alternatives either leave the structural gap intact, violate model-independent proof, or add unnecessary machinery.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Regression must reproduce Task-C decoy versus correct NBS-style source plus unrelated cross-domain explicit comparisons and fail-closed ambiguity. Independent public qualification required before credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Crossref materialization-first PR540",
+        "metadata refined provenance repairs 537-539 as first-gap work"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "explicit comparison role parsing for relevance admission"
+      ],
+      "fresh_reuse_plan": "After independent qualification, freeze a new materially different parent Task D rather than replay Task C."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "used primary artifact causal correction",
+        "reused verified parser rather than inventing semantics",
+        "stopped package search after generic BM25 challengers failed missing-role criterion"
+      ],
+      "search_stop_decision": "The verified parser composition is the only zero-model route that directly closes the observed first gap with fewer parts than alternatives.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_VERIFIED_RELATION_PARSER_PLUS_ROLE_AWARE_BM25_ADMISSION",
+      "SWAP_TO_NEW_BM25_PACKAGE",
+      "MODEL_SEMANTIC_RERANKER",
+      "BUILD_NEW_SEMANTIC_RETRIEVAL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_C_REPLAY",
+      "DOWNSTREAM_MATERIALIZATION_REPAIR",
+      "DOWNSTREAM_METADATA_FALLBACK_REPAIR",
+      "MODEL_RERANKER"
+    ],
+    "selected_surviving_route": "REUSE_VERIFIED_RELATION_PARSER_PLUS_ROLE_AWARE_BM25_ADMISSION",
+    "why_selected_route_is_fastest_sufficient": "It reuses an independently qualified model-independent relation parser to add exactly the missing structural constraints to the existing deterministic ranker, with no new provider or dependency.",
+    "expected_parent_level_state_change": "Stage one bounded model-independent relevance repair that reuses the verified objective relation parser to require decision-property coverage plus exact applicable operand identity before BM25 candidates can be admitted; preserve materials Task C as spent/no-replay and award zero capability credit until independent exact-byte qualification.",
+    "stop_condition": "Stop after the bounded role-aware relevance candidate and fail-closed regressions are frozen. Do not replay materials Task C, do not repair downstream materialization, and do not award parent/subcapability credit before guarded independent qualification.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T09:47:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BM25_PLUS_AGGREGATE_FOCUSED_QUERY_TOKEN_COVERAGE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Task C primary-artifact correction proves BM25 admitted ignition-temperature/302 source while correct thermal-conductivity/304 NBS record was already present",
+          "Verified objective relation/operand parser blob 48fd058430d8d361fc75beced567c7b6d1166531"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Crossref REST metadata docs confirm title/identifier metadata used by current candidates: https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+          "Crossref bibliographic metadata guidance emphasizes accurate titles and identifiers for discovery: https://www.crossref.org/documentation/principles-practices/best-practices/bibliographic/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI rank-bm25 0.2.2 provides generic BM25 only; no decision-role/operand admission layer",
+          "PyPI BM25 0.3.11 (Aug 2026) likewise provides BM25 retrieval but does not dominate the existing exact local scorer plus verified role parser composition"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Current retrieval alternatives checked; changing BM25 implementation does not solve missing property/operand role constraints",
+          "No external zero-cost route found that can beat reusing Brain's already-qualified explicit comparison parser for this bounded role gate"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "decision property operand role coverage source relevance admission explicit comparison"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "BM25 Python rank package field role constrained relevance"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "two stage BM25 lexical score plus mandatory entity property constraints"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 BM25 Python package latest relevance ranking"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_VERIFIED_RELATION_PARSER_PLUS_ROLE_AWARE_BM25_ADMISSION",
+          "evidence": [
+            "Existing verified parser extracts bounded comparison left/right roles",
+            "Task C proves aggregate token threshold is insufficient"
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED exact verified parser",
+            "DIRECT primary-artifact Task C diagnosis"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Requires decision property plus exact applicable operand anchors; fails closed when roles unresolved",
+            "CAPABILITY_STRENGTH": "Adds the missing structural constraint while retaining generic BM25 ranking",
+            "WALL_CLOCK": "Small local composition; no model/API/package",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Reuses independently qualified parser and deterministic token matching",
+            "VERIFIABILITY": "Positive/negative cross-domain fixtures can independently exercise role coverage"
+          }
+        },
+        {
+          "route": "SWAP_TO_NEW_BM25_PACKAGE",
+          "evidence": [
+            "PyPI BM25 0.3.11 and rank-bm25 exist"
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY PyPI"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Still lexical BM25; does not enforce property or operand identity",
+            "CAPABILITY_STRENGTH": "No missing role capability",
+            "WALL_CLOCK": "Adds dependency/integration",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Additional package surface",
+            "VERIFIABILITY": "Easy but irrelevant to demonstrated gap"
+          }
+        },
+        {
+          "route": "MODEL_SEMANTIC_RERANKER",
+          "evidence": [
+            "General model reranking could infer roles"
+          ],
+          "qualification_evidence": [
+            "BROAD_WEB_OR_COMMUNITY general route"
+          ],
+          "qualification_evidence_classes": [
+            "BROAD_WEB_OR_COMMUNITY"
+          ],
+          "resolution": "REJECTED",
+          "comparison": {
+            "CORRECTNESS": "Potentially stronger semantics but violates model-independent cognitive proof path",
+            "CAPABILITY_STRENGTH": "Broad",
+            "WALL_CLOCK": "Supplier integration and cognition provenance cost",
+            "INCREMENTAL_COST": "May violate hard-zero or frontier-independence",
+            "RELIABILITY": "External supplier dependence",
+            "VERIFIABILITY": "Harder and circular for target proof"
+          }
+        }
+      ],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "selected_route": "REUSE_VERIFIED_RELATION_PARSER_PLUS_ROLE_AWARE_BM25_ADMISSION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "negative_search_summary": "New BM25 packages do not add the missing structural role constraints; model reranking violates the proof path. Existing verified relation parsing plus deterministic admission dominates.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T09:47:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_VERIFIED_RELATION_PARSER_PLUS_ROLE_AWARE_BM25_ADMISSION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies_complete": true,
+        "execution_dependencies": [
+          {
+            "dependency": "GitHub Brain mutation",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:47:00Z",
+            "evidence": [
+              "DIRECT_PROBE authenticated branch creation/fetch"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "objective_relevance_bm25.py",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:47:00Z",
+            "evidence": [
+              "BRAIN_INHERITED blob 31d3703b38dcec3215b77d1038e2521b1a89ea95"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "objective_claim_operand_binding.py verified parser",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:47:00Z",
+            "evidence": [
+              "BRAIN_INHERITED independently qualified blob 48fd058430d8d361fc75beced567c7b6d1166531"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          }
+        ]
+      }
+    }
+  }
+}
