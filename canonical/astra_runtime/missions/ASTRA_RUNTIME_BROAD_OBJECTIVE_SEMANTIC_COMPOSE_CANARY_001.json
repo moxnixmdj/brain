@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BROAD-OBJECTIVE-SEMANTIC-COMPOSE-CANARY-001",
+  "purpose": "Fresh non-parent qualification of the current broad-objective grounding blocker. Prove that existing deterministic semantic quorum plus the existing multi-verified-capability proposal generator can turn one natural-language evidence objective into a verified multi-capability execution graph without mission-authored target effects, capability instances, supplier ids, or a task-specific recipe.",
+  "goal": "Determine whether the two independent JSON observations at https://httpbin.org/get?claim=alpha and https://httpbin.org/anything?claim=alpha agree that claim equals alpha, and save the supported fact to canonical/astra_runtime/tmp/BROAD_OBJECTIVE_SEMANTIC_COMPOSE_CANARY_FACT.json.",
+  "steps": [
+    {
+      "id": "execute-semantic-compose-canary",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verified_initial_facts": [
+        "network.http.available"
+      ],
+      "semantic_goal_authority_generators": [
+        "registry-effect-lexical-v1",
+        "compiler-score-v1"
+      ],
+      "semantic_authority_policy": {
+        "min_distinct_authority_classes": 2,
+        "authorities": {
+          "registry-effect-lexical-v1": "independent-registry-effect-lexical",
+          "compiler-score-v1": "existing-goal-compiler-generic-score"
+        }
+      },
+      "capability_proposal_generator": "multi-verified-capability-v1",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "VERIFIED_CAPABILITY_PROPOSAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "parent_capability_credit": false,
+    "non_parent_canary": true,
+    "model_controller_required": false,
+    "mission_authored_target_effects": false,
+    "mission_authored_capability_instances": false,
+    "mission_authored_supplier_ids": false,
+    "task_specific_recipe": false,
+    "exact_goal_hash_binding_required": true,
+    "semantic_quorum_required": true,
+    "verified_registry_references_only": true,
+    "stop_on_first_causal_gap": true,
+    "acceptance": "Runtime must derive a semantic goal contract by quorum, generate a multi-capability proposal from verified registry entries, execute it model-independently, and materialize the exact supported fact. Any mission-authored target effect or capability instance invalidates the canary."
+  }
+}
