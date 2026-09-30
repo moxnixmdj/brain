@@ -74,10 +74,21 @@ def run(objective,decomposition,limit=12,timeout=15):
         x for x in verifications
         if x["verification"].get("status")=="RETRIEVAL_PROVENANCE_VERIFIED"
     ]
-    if not retrieval_verified:
+    bibliographic_verified=[
+        x for x in verifications
+        if x["verification"].get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+    ]
+    relevance_admitted=[
+        x for x in verifications
+        if x["verification"].get("status") in {
+            "RETRIEVAL_PROVENANCE_VERIFIED",
+            "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+        }
+    ]
+    if not relevance_admitted:
         return {
             "schema":SCHEMA,
-            "status":"SOURCE_RETRIEVAL_PROVENANCE_BLOCKED",
+            "status":"SOURCE_PROVENANCE_BLOCKED",
             "objective":objective,
             "decomposition":decomposition,
             "discovery":discovered,
@@ -85,12 +96,12 @@ def run(objective,decomposition,limit=12,timeout=15):
             "authority_identity_verifications":[],
             "objective_relevance_verifications":[],
             "evidence_extractions":[],
-            "next_required_capability":"MODEL_INDEPENDENT_LIVE_RETRIEVAL_PROVENANCE_FOR_DISCOVERED_WEB_SOURCE",
+            "next_required_capability":"MODEL_INDEPENDENT_PROVENANCE_VERIFICATION_FOR_DISCOVERED_SOURCE",
             "model_dependency_count":0,
             "incremental_spend_usd":0,
         }
 
-    candidates=[x["candidate"] for x in retrieval_verified]
+    candidates=[x["candidate"] for x in relevance_admitted]
     relevance=relevance_ranker.rank(objective,candidates)
     relevance_ready=(
         relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
@@ -101,44 +112,56 @@ def run(objective,decomposition,limit=12,timeout=15):
     authority_verifications=[]
     evidence_extractions=[]
     selected_item=None
+    selected_source_materialization=None
+    selected_retrieval_provenance=None
     if relevance_ready:
         index=int(relevance["top_candidate_original_index"])
-        if 0<=index<len(retrieval_verified):
-            selected_item=retrieval_verified[index]
+        if 0<=index<len(relevance_admitted):
+            selected_item=relevance_admitted[index]
 
     if selected_item is not None:
         candidate=dict(selected_item["candidate"])
-        provenance=selected_item["verification"]
-        enriched=dict(candidate)
-        if provenance.get("final_url"):
-            enriched["final_url"]=provenance["final_url"]
-        if provenance.get("final_host"):
-            enriched["final_host"]=provenance["final_host"]
-        try:
-            optional_authority=authority_identity.bind_candidate(enriched,timeout=timeout)
-        except Exception as exc:
-            optional_authority={
-                "status":"UNVERIFIED",
-                "reason":"OPTIONAL_AUTHORITY_IDENTITY_LOOKUP_FAILED",
-                "error_class":type(exc).__name__,
-            }
-        authority_verifications.append({
-            "candidate":candidate,
-            "provenance":provenance,
-            "authority_identity":optional_authority,
-            "used_for_admission":False,
-        })
-        extracted=evidence_extractor.extract(
-            objective,candidate,provenance,relevance,timeout=timeout
-        )
-        evidence_extractions.append({
-            "candidate":candidate,
-            "provenance":provenance,
-            "relevance":relevance,
-            "authority_identity_metadata":optional_authority,
-            "authority_identity_used_for_admission":False,
-            "extraction":extracted,
-        })
+        selected_provenance=selected_item["verification"]
+        if selected_provenance.get("status")=="RETRIEVAL_PROVENANCE_VERIFIED":
+            selected_retrieval_provenance=selected_provenance
+        elif selected_provenance.get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+            selected_source_materialization=verifier.materialize(candidate,timeout=timeout)
+            if selected_source_materialization.get("status")=="RETRIEVAL_PROVENANCE_VERIFIED":
+                selected_retrieval_provenance=selected_source_materialization
+
+        if selected_retrieval_provenance is not None:
+            provenance=selected_retrieval_provenance
+            enriched=dict(candidate)
+            if provenance.get("final_url"):
+                enriched["final_url"]=provenance["final_url"]
+            if provenance.get("final_host"):
+                enriched["final_host"]=provenance["final_host"]
+            try:
+                optional_authority=authority_identity.bind_candidate(enriched,timeout=timeout)
+            except Exception as exc:
+                optional_authority={
+                    "status":"UNVERIFIED",
+                    "reason":"OPTIONAL_AUTHORITY_IDENTITY_LOOKUP_FAILED",
+                    "error_class":type(exc).__name__,
+                }
+            authority_verifications.append({
+                "candidate":candidate,
+                "provenance":provenance,
+                "authority_identity":optional_authority,
+                "used_for_admission":False,
+            })
+            extracted=evidence_extractor.extract(
+                objective,candidate,provenance,relevance,timeout=timeout
+            )
+            evidence_extractions.append({
+                "candidate":candidate,
+                "original_provenance":selected_provenance,
+                "provenance":provenance,
+                "relevance":relevance,
+                "authority_identity_metadata":optional_authority,
+                "authority_identity_used_for_admission":False,
+                "extraction":extracted,
+            })
 
     authority_verified=[
         x for x in authority_verifications
@@ -198,6 +221,12 @@ def run(objective,decomposition,limit=12,timeout=15):
         "discovery":discovered,
         "provenance_verifications":verifications,
         "provenance_verified_candidate_count":len(retrieval_verified),
+        "retrieval_provenance_verified_candidate_count":len(retrieval_verified),
+        "bibliographic_provenance_verified_candidate_count":len(bibliographic_verified),
+        "relevance_admitted_provenance_candidate_count":len(relevance_admitted),
+        "selected_source_original_provenance":selected_item["verification"] if selected_item else None,
+        "selected_source_materialization":selected_source_materialization,
+        "selected_source_live_materialized":selected_retrieval_provenance is not None,
         "authority_identity_verifications":authority_verifications,
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"OPTIONAL_HOST_TO_ROR_ORGANIZATION_METADATA_ONLY__NOT_ADMISSION_GATE",
@@ -223,6 +252,12 @@ def run(objective,decomposition,limit=12,timeout=15):
             "EVIDENCE_ACQUISITION":(
                 "GENERIC_PROVENANCE_BEARING_OBJECTIVE_GROUNDED_EVIDENCE_AVAILABLE"
                 if evidence_ready else
+                "SELECTED_SCHOLARLY_SOURCE_LIVE_MATERIALIZATION_BLOCKED"
+                if (
+                    selected_item is not None
+                    and selected_item["verification"].get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+                    and selected_retrieval_provenance is None
+                ) else
                 "RELEVANCE_SELECTED_SOURCE_AVAILABLE__GENERIC_EVIDENCE_EXTRACTION_REQUIRED"
                 if relevance_ready else
                 "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
@@ -249,6 +284,12 @@ def run(objective,decomposition,limit=12,timeout=15):
             if relation_ready else
             "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
             if evidence_ready else
+            "MODEL_INDEPENDENT_SELECTED_PROVENANCE_VERIFIED_SOURCE_LIVE_MATERIALIZATION_V1"
+            if (
+                selected_item is not None
+                and selected_item["verification"].get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+                and selected_retrieval_provenance is None
+            ) else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
             "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
