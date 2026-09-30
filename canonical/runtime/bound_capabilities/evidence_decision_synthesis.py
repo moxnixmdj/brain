@@ -390,6 +390,7 @@ def run(args, root):
         "status": result["status"],
         "selected_alternative": result["selected_alternative"],
         "decision_confidence": result["decision_confidence"],
+        "input_path": str(input_path.relative_to(pathlib.Path(root).resolve())).replace("\\", "/"),
         "output_path": str(output_path.relative_to(pathlib.Path(root).resolve())).replace("\\", "/"),
         "output_sha256": hashlib.sha256(raw).hexdigest(),
         "output_verified": True,

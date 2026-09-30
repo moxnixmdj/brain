@@ -2434,6 +2434,7 @@
         "status",
         "selected_alternative",
         "decision_confidence",
+        "input_path",
         "output_path",
         "output_sha256"
       ],
@@ -2571,6 +2572,20 @@
         "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
         "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+      },
+      "proposal_bindings": {
+        "input_path": {
+          "type": "effect_result",
+          "effect": "decision.synthesis.typed",
+          "field": "input_path",
+          "container": "scalar"
+        },
+        "result_path": {
+          "type": "effect_result",
+          "effect": "decision.synthesis.typed",
+          "field": "output_path",
+          "container": "scalar"
+        }
       }
     },
     "plain_goal.bound_capability.grounding.stdlib": {

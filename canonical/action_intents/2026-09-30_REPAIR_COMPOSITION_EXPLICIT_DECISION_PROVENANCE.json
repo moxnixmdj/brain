@@ -1,0 +1,319 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-COMPOSITION-EXPLICIT-DECISION-PROVENANCE-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Repair the reopened composition capability so downstream decision verification receives source input and produced result through explicit causal effect-result provenance rather than implicit path recency, without changing planner/compiler heuristics.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR270 post-promotion falsification reconciliation merged at 401870aaab5ae40cb6bbf2d704244d525915313b",
+    "PR267 public run 36653756561 exact route bytes PASS then verifier failure",
+    "capability_proposal_generators._bind_planned_inputs already supports proposal_bindings.effect_result",
+    "grounded_executable_composition.py already delegates entries with proposal_bindings to the generic proposal binder",
+    "decision.synthesis.typed.stdlib producer already knows input_path and output_path",
+    "decision.synthesis.verify.stdlib requires both original decision input and produced decision result"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Expose producer input_path as a declared result field; bind verifier input_path and result_path explicitly from the upstream decision.synthesis.typed effect through existing effect_result proposal bindings; add focused causal-provenance regression; validate exact repair bytes independently; do not replay PR267, promote composition, change scoreboard, or execute a fresh real task in this repair PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "401870aaab5ae40cb6bbf2d704244d525915313b",
+    "real_outcome": "Make downstream capability dataflow explicit and causally correct for the decision-synthesis→independent-verification chain without adding another planner or heuristic.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Downstream verifier consumes the producer's original source path and produced result path through declared provenance.",
+      "proxy_goals_deleted": [
+        "Replay PR267",
+        "Patch task wording",
+        "Teach compiler to guess by path recency",
+        "Add a new planner",
+        "Add a model argument filler"
+      ],
+      "surviving_necessity": "Repair the generic capability contract at the producer/verifier boundary."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "proposal_bindings.effect_result",
+        "capability_proposal_generators._bind_planned_inputs",
+        "grounded_executable_composition proposal-binding integration",
+        "decision.synthesis producer/verifier bound capabilities"
+      ],
+      "external_existing_routes_checked": [
+        "Prior same-day Unified Planning and jsonschema route research remains sufficient; neither can replace Brain-specific result-field provenance integration."
+      ],
+      "capability_work_deleted": [
+        "No new binding DSL",
+        "No planner/compiler heuristic",
+        "No external provider",
+        "No model",
+        "No task-specific literal"
+      ],
+      "surviving_gap": "Producer does not expose source input_path in result_fields and verifier has no declared effect_result provenance for either path."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic capability-contract metadata omission in a causal producer→verifier chain.",
+      "delete_bypass_substitute_options": [
+        "DELETE downstream verification rejected because independent verification is required.",
+        "BYPASS with path recency rejected by direct falsification.",
+        "REUSE existing effect_result binding survives.",
+        "SUBSTITUTE planner/compiler rejected as larger and unnecessary."
+      ],
+      "surviving_causal_blocker": "decision verifier path inputs are not explicitly bound to producer result provenance."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_EFFECT_RESULT_BINDINGS_FOR_BOTH_VERIFIER_PATHS",
+        "ADD_GENERIC_GOAL_PATH_BINDING_PRIMITIVE",
+        "CHANGE_COMPILER_PATH_RECENCY_HEURISTIC",
+        "PATCH_TASK_WORDING"
+      ],
+      "losing_routes_reason": "The producer already knows both paths and the existing binder already transports provider result fields. Exposing and binding those fields is smaller, more causal, and more verifiable than new path-selection machinery.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A focused component regression must prove the rendered downstream verifier action receives original producer input_path as input_path and producer output_path as result_path, while old implicit recency behavior is no longer used for this chain. The spent PR267 task is never replayed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any generic compiler path-recency repair for this causal seam",
+        "Any PR267 replay",
+        "Parent geophysics execution until requalification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "effect_result provenance",
+        "producer result-field contracts",
+        "producer-independent verification"
+      ],
+      "fresh_reuse_plan": "After focused exact-byte validation, run a new materially different composition task, not the spent decision-chain task, before re-promoting composition."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR267 causal log",
+        "Reused PR261 proposal-binding machinery",
+        "Reused current registry and composition code inspection"
+      ],
+      "search_stop_decision": "The existing effect_result route exactly matches the missing causal contract and is already integrated into grounded composition; further search cannot justify delaying this smaller repair.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Affected-layer refresh completed after PR270. Existing internal route dominates all larger alternatives; same-day external planner/schema research remains non-dominating."
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_EFFECT_RESULT_BINDINGS_FOR_BOTH_VERIFIER_PATHS",
+      "ADD_GENERIC_GOAL_PATH_BINDING_PRIMITIVE",
+      "CHANGE_COMPILER_PATH_RECENCY_HEURISTIC",
+      "PATCH_TASK_WORDING"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADD_GENERIC_GOAL_PATH_BINDING_PRIMITIVE",
+      "CHANGE_COMPILER_PATH_RECENCY_HEURISTIC",
+      "PATCH_TASK_WORDING",
+      "PR267_REPLAY"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_EFFECT_RESULT_BINDINGS_FOR_BOTH_VERIFIER_PATHS",
+    "why_selected_route_is_fastest_sufficient": "It reuses existing provider-result transport, changes only the producer contract plus registry metadata, leaves planner/compiler behavior untouched, costs $0, and directly removes the observed ambiguity.",
+    "expected_parent_level_state_change": "Repair the reopened composition capability so downstream decision verification receives source input and produced result through explicit causal effect-result provenance rather than implicit path recency, without changing planner/compiler heuristics.",
+    "stop_condition": "Expose producer input_path as a declared result field; bind verifier input_path and result_path explicitly from the upstream decision.synthesis.typed effect through existing effect_result proposal bindings; add focused causal-provenance regression; validate exact repair bytes independently; do not replay PR267, promote composition, change scoreboard, or execute a fresh real task in this repair PR.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T01:18:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "IMPLICIT_CONTEXT_PATH_RECENCY_FOR_DOWNSTREAM_VERIFIER_PATHS",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR270 falsification evidence",
+          "capability_proposal_generators.py effect_result binding",
+          "grounded_executable_composition.py proposal-binding delegation",
+          "BOUND_CAPABILITY_REGISTRY_V1 decision entries"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Same-day Unified Planning explicit action parameter documentation used in prior binding route comparison",
+          "Same-day python-jsonschema default/binding documentation used in prior binding route comparison"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Project Brain current bound capability registry",
+          "Unified Planning and jsonschema repositories from same-day prior challenger search"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Same-day prior generic binding research found no external mechanism that removes Brain-specific causal result-field binding."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic downstream action input provenance from provider result fields"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "existing Brain effect result binding capability proposal generator"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "producer result field explicit causal binding versus path recency"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current Brain composition binding route after post promotion regression 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_EXISTING_EFFECT_RESULT_BINDINGS_FOR_BOTH_VERIFIER_PATHS",
+          "evidence": [
+            "proposal binder supports effect_result scalar binding",
+            "grounded composition already invokes proposal binder when metadata exists",
+            "producer already has both path values at execution time"
+          ],
+          "qualification_evidence": [
+            "direct current-main code inspection",
+            "PR267 causal failure evidence"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Explicitly binds each downstream path to the exact producer result field.",
+            "CAPABILITY_STRENGTH": "General for any declared producer-result provenance contract.",
+            "WALL_CLOCK": "Two-file contract delta plus focused test.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Reuses already-exercised proposal binding machinery.",
+            "VERIFIABILITY": "Rendered action inputs can be asserted exactly."
+          }
+        },
+        {
+          "route": "ADD_GENERIC_GOAL_PATH_BINDING_PRIMITIVE",
+          "evidence": [
+            "Would require a new binding type despite producer already exposing the needed values."
+          ],
+          "qualification_evidence": [
+            "current proposal binder contract inspection"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could bind source paths but duplicates information the producer already has.",
+            "CAPABILITY_STRENGTH": "Broader but unnecessary.",
+            "WALL_CLOCK": "Slower due new binder semantics and regressions.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "New surface.",
+            "VERIFIABILITY": "Possible but larger."
+          }
+        },
+        {
+          "route": "CHANGE_COMPILER_PATH_RECENCY_HEURISTIC",
+          "evidence": [
+            "PR267 directly falsified implicit recency as causal provenance."
+          ],
+          "qualification_evidence": [
+            "public run 36653756561"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Still heuristic rather than causal.",
+            "CAPABILITY_STRENGTH": "Could silently misbind other multi-path chains.",
+            "WALL_CLOCK": "Small patch but high regression risk.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Low for heterogeneous pipelines.",
+            "VERIFIABILITY": "Cannot establish generic causal identity from recency."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger matches the causal contract with less code or fewer new semantics than reusing existing effect_result bindings.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_EXISTING_EFFECT_RESULT_BINDINGS_FOR_BOTH_VERIFIER_PATHS",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T01:18:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_EXISTING_EFFECT_RESULT_BINDINGS_FOR_BOTH_VERIFIER_PATHS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_PROPOSAL_BINDER_AND_REGISTRY",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:18:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current main 401870aaab5ae40cb6bbf2d704244d525915313b"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VALIDATION_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:09:32Z",
+            "evidence": [
+              "DIRECT_PROBE public run 36653756561 executed exact byte validation and task execution on this account's public carrier"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
