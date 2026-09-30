@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_EVIDENCE_V1",
+  "capability_id": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_CROSS_DOMAIN_EXECUTION_PASS",
+  "canonical_base_commit": "6f2c98a160bb0b954071fbcc22a0130b2bad2906",
+  "source_pr": 293,
+  "candidate_head_sha": "542831247f176435035d331a0123289b47207185",
+  "route": "NATIVE_RESULT_REFS__WRITE_JSON_RECORDS__VERIFIED_BOUND_JSON_QUERY_JQ",
+  "scope": "Two causally prior numeric scalar results; compute absolute difference and <= a literal finite nonnegative threshold; fail closed on nonnumeric inputs or ambiguous producer count.",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "producer_supplier": {
+    "capability_id": "json.query.jq",
+    "status": "PREEXISTING_VERIFIED_BOUND_CAPABILITY",
+    "adapter_path": "canonical/runtime/bound_capabilities/jq_query.py",
+    "registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "new_supplier_added": false,
+    "new_adapter_added": false
+  },
+  "deterministic_regression": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36664102642,
+    "job_id": 109724968059,
+    "conclusion": "success",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "properties": [
+      "domain wording does not alter route selection",
+      "scientific notation thresholds are supported",
+      "negative thresholds fail closed",
+      "three-prior-scalar ambiguity fails closed",
+      "compiler emits only existing fetch + native JSON materialization + verified jq + finish"
+    ]
+  },
+  "fresh_cross_domain_task": {
+    "task_id": "FRESH-NUMERIC-RELATION-WORLD-BANK-20260930-V1",
+    "domain": "DEMOGRAPHY_PUBLIC_STATISTICS",
+    "source_task_replay": false,
+    "source_urls": [
+      "https://api.worldbank.org/v2/country/FRA/indicator/SP.POP.TOTL?format=json&date=2023",
+      "https://api.worldbank.org/v2/country/DEU/indicator/SP.POP.TOTL?format=json&date=2023"
+    ],
+    "threshold": 20000000,
+    "producer_result": {
+      "left": 68372286,
+      "right": 83287273,
+      "absolute_difference": 14914987,
+      "predicate": true,
+      "relation": "ABS_DIFF_LTE"
+    },
+    "independent_oracle": {
+      "method": "fresh direct World Bank refetch plus independent Python arithmetic",
+      "producer_adapter_imported": false,
+      "left": 68372286,
+      "right": 83287273,
+      "absolute_difference": 14914987,
+      "predicate": true
+    },
+    "failures": [],
+    "controller_cycles": 5,
+    "compiler_clause_coverage_verified": true
+  },
+  "artifact": {
+    "artifact_id": 11075158049,
+    "name": "pr293-numeric-relation-jq-reuse-report",
+    "digest": "sha256:b47bbe491db198bcbd4c09b7a9e8cfeac95062989300eca8f8784c117a1222d1"
+  },
+  "credit_effect": {
+    "reusable_capabilities_inherited_delta": 1,
+    "verified_real_tasks_completed_delta": 1,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0,
+    "parent_capability_promoted": false
+  },
+  "parent_reconciliation": {
+    "prior_blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+    "blocker_status": "CLOSED_FOR_VERIFIED_BOUNDED_TWO_SCALAR_ABS_DIFF_LTE_SCOPE",
+    "parent_capability_status": "NOT_PROMOTED",
+    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+  },
+  "anti_overclaim": [
+    "Does not obsolete general mathematical reasoning.",
+    "Does not prove arbitrary arithmetic expressions, exponentiation, means, or chained scientific formulas are acquired.",
+    "Does not promote OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.",
+    "Does not authorize replay of the spent geophysics task."
+  ]
+}
