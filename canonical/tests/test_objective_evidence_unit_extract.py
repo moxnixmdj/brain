@@ -25,7 +25,10 @@ class Tests(unittest.TestCase):
         return {
           "status":"FIRST_PARTY_RELEVANT_SOURCE_VERIFIED",
           "objective_relevance_status":"VERIFIED",
+          "verification_method":"EXACT_ROR_DOMAIN_PLUS_FRESH_PAGE_OBJECTIVE_TERM_COVERAGE",
+          "bound_domain":"example.org",
           "fresh_url":"https://example.org/report",
+          "matched_token_coverage":0.8,
         }
 
     def test_extracts_hashed_objective_grounded_units_without_relation_claim(self):
@@ -63,7 +66,42 @@ class Tests(unittest.TestCase):
           {"url":"https://example.org/report"},self.prov(),self.auth(),self.rel(),fetch=fetch
         )
         self.assertEqual(x["status"],"UNVERIFIED",x)
-        self.assertEqual(x["reason"],"NO_OBJECTIVE_GROUNDED_EVIDENCE_UNITS",x)
+        self.assertEqual(x["reason"],"FRESH_PAGE_OBJECTIVE_RELEVANCE_DRIFT",x)
+
+    def test_forged_or_unqualified_relevance_shape_is_rejected_before_fetch(self):
+        x=self.m.extract(
+          "Assess post quantum cryptography",
+          {"url":"https://example.org/report"},self.prov(),self.auth(),
+          {
+            "status":"FIRST_PARTY_RELEVANT_SOURCE_VERIFIED",
+            "objective_relevance_status":"VERIFIED",
+            "fresh_url":"https://example.org/report",
+          },
+          fetch=lambda *a: (_ for _ in ()).throw(AssertionError("must not fetch")),
+        )
+        self.assertEqual(x["reason"],"QUALIFIED_OBJECTIVE_RELEVANCE_RECEIPT_REQUIRED",x)
+
+    def test_relevance_bound_domain_must_match_authority(self):
+        rel=self.rel(); rel["bound_domain"]="other.example.net"
+        x=self.m.extract(
+          "Assess post quantum cryptography",
+          {"url":"https://example.org/report"},self.prov(),self.auth(),rel,
+          fetch=lambda *a: (_ for _ in ()).throw(AssertionError("must not fetch")),
+        )
+        self.assertEqual(x["reason"],"RELEVANCE_RECEIPT_BOUND_DOMAIN_MISMATCH",x)
+
+    def test_fresh_page_drift_fails_before_unit_promotion(self):
+        def fetch(url,timeout):
+            return (
+              b"<html><body><p>Post quantum overview and unrelated administration material.</p></body></html>",
+              "https://example.org/report","text/html",200
+            )
+        x=self.m.extract(
+          "Assess post quantum cryptography standards migration resilience",
+          {"url":"https://example.org/report"},self.prov(),self.auth(),self.rel(),fetch=fetch
+        )
+        self.assertEqual(x["reason"],"FRESH_PAGE_OBJECTIVE_RELEVANCE_DRIFT",x)
+        self.assertLess(x["fresh_page_objective_token_coverage"],0.5,x)
 
     def test_unverified_relevance_is_rejected_before_fetch(self):
         x=self.m.extract(
@@ -72,7 +110,7 @@ class Tests(unittest.TestCase):
           {"status":"UNVERIFIED","objective_relevance_status":"UNVERIFIED"},
           fetch=lambda *a: (_ for _ in ()).throw(AssertionError("must not fetch")),
         )
-        self.assertEqual(x["reason"],"VERIFIED_OBJECTIVE_RELEVANCE_REQUIRED",x)
+        self.assertEqual(x["reason"],"QUALIFIED_OBJECTIVE_RELEVANCE_RECEIPT_REQUIRED",x)
 
     def test_redirect_outside_bound_domain_fails_closed(self):
         x=self.m.extract(
