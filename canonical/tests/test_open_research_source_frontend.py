@@ -40,11 +40,24 @@ class OpenResearchSourceFrontendTests(unittest.TestCase):
         self.assertIn(
             x["next_required_capability"],
             {
-                "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION",
+                "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
                 "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION",
             },
         )
         self.assertFalse(x["authority_claims_made"])
+
+    def test_primary_source_is_not_a_universal_gate(self):
+        x=self._run("Assess whether a technical claim is supported by authoritative evidence")
+        if x.get("authority_identity_verified_candidate_count",0)>0:
+            self.assertFalse(x["primary_source_gate_required"],x)
+            self.assertEqual(
+                x["primary_source_status_role"],
+                "OPTIONAL_METADATA_NOT_UNIVERSAL_RESEARCH_ADMISSION_GATE",
+            )
+            self.assertEqual(
+                x["next_required_capability"],
+                "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+            )
 
     def test_mismatch_fails_closed(self):
         d=self.decomp.decompose("Assess whether A is greater than B")
