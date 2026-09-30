@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_RECEIPT_V1",
+  "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FRESH_CROSS_DOMAIN_PASS",
+  "route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+  "producer_path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+  "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 165,
+    "run_id": 36685349465,
+    "job_id": 109789819554,
+    "conclusion": "SUCCESS",
+    "regression_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+    "downstream_relation_blob": "d66a7eb30774f66160b698d8082947776888293d"
+  },
+  "verified_scope": [
+    "BOUNDED_EXPLICIT_GT_LT_GTE_LTE_EQ_NE",
+    "BOUNDED_EXPLICIT_ABS_DIFF_LTE_WITH_EXACT_UNIT_THRESHOLD",
+    "EXACT_QUOTED_VERBATIM_SUPPORT_BINDING",
+    "UNIQUE_LEXICAL_OPERAND_ROLE_BINDING_TO_GENERIC_V2_EVIDENCE",
+    "EXACT_UNIT_COMPATIBLE_NUMERIC_REFERENCE_BINDING",
+    "FAIL_CLOSED_AMBIGUITY_ROLE_COLLISION_MULTIVALUE_UNIT_MISMATCH_UNSUPPORTED_LANGUAGE_TAMPER"
+  ],
+  "nonclaims": [
+    "PARAPHRASE_OR_SEMANTIC_ENTAILMENT",
+    "FACTUAL_CORRECTNESS",
+    "CAUSALITY",
+    "EVIDENCE_QUALITY",
+    "EVIDENCE_SUFFICIENCY",
+    "SOURCE_INDEPENDENCE",
+    "UNIT_CONVERSION",
+    "PARENT_CAPABILITY_COMPLETION"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false,
+  "next_causal_gap": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1"
+}
