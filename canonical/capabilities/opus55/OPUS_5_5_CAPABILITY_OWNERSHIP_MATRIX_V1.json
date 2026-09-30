@@ -28,7 +28,7 @@
   "rows": [
     {
       "family": "ADVANCED_AGENTIC_CODING",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
       "best_existing_routes": [
         "GPT-6 Astra + Codex + GitHub + Superpowers",
         "Claude Sonnet 5.5 for Terminal-Bench only"
@@ -40,8 +40,10 @@
         "https://www.anthropic.com/claude-sonnet-5-5",
         "https://prod.cursor.com/evals"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "internalization_required": false,
+      "ownership_note": "Reusable software-engineering methodology is now Brain-owned at pinned MIT source. Opus-level ownership credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
+      "internalized_configuration": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+      "next_required_action": "Run controlled comparative evaluation of the Brain-internalized Superpowers configuration on an approved general cognition substrate."
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -303,7 +305,6 @@
       "EXACT_SYMBOLIC_COMPUTATION"
     ],
     "external_specimen_backed_families": [
-      "ADVANCED_AGENTIC_CODING",
       "COMPLEX_MULTI_TOOL_AGENCY",
       "PROFESSIONAL_KNOWLEDGE_WORK",
       "BUSINESS_WORKFLOW_AUTOMATION",
@@ -330,6 +331,9 @@
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
     "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_optimization_target": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION"
+    "next_optimization_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5__IN_PARALLEL_CONTINUE_INTERNALIZABLE_MECHANISM_SEARCH_FOR_OTHER_SPECIMEN_BACKED_FAMILIES",
+    "brain_configured_verification_pending": [
+      "ADVANCED_AGENTIC_CODING"
+    ]
   }
 }
