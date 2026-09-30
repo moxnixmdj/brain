@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_TERMINAL_RECONCILIATION_V1",
+  "status": "CANONICAL_EVIDENCE_RECONCILIATION__TASK_SPENT_FAIL_FIRST_CAUSAL_GAP__NO_REPLAY",
+  "canonical_reconciliation_base": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task": {
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "domain": "ATMOSPHERIC_CLIMATE_SCIENCE_TIME_SERIES_REASONING",
+    "brain_pr": 337,
+    "brain_task_head": "aa1f60088b645439ff1eb15284dee828cb6b0671",
+    "brain_execution_base": "38421b41da15f82d81d0595bc4c25624398258c6",
+    "task_blob": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "source_task_replay": false,
+    "replay_allowed": false
+  },
+  "authoritative_public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "runner_pr": 49,
+    "workflow_run_id": 36670516407,
+    "job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_name": "pr328-openended-climate-task-a-terminal",
+    "artifact_zip_sha256": "8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "terminal_schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_TERMINAL_V1",
+    "execution_count": 1,
+    "task_executed": true,
+    "parent_task_completed": false,
+    "model_dependency_count": 0,
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "independent_oracle_executed": false,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP"
+  },
+  "anti_leakage_observed": {
+    "authority_domain_preprovided": false,
+    "authority_name_preprovided": false,
+    "controller_action_graph_preprovided": false,
+    "dataset_identifier_preprovided": false,
+    "expected_answer_precommitted": false,
+    "json_or_table_path_preprovided": false,
+    "quantitative_formula_preprovided": false,
+    "source_url_preprovided": false
+  },
+  "first_causal_gap": {
+    "stage": "COMPILE",
+    "outer_code": "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+    "cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "cause_detail": null,
+    "subgoal_index": 0,
+    "compiled_prefix": [],
+    "context_paths": [],
+    "failed_subgoal": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013",
+    "frozen_clauses": [
+      "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013",
+      "Use authoritative primary data, choose and justify an appropriate quantitative method, quantify the difference in growth rate, identify material limitations or uncertainty, independently verify consequential calculations, and save a decision-quality result with source and method provenance"
+    ]
+  },
+  "scope_of_claim": {
+    "proven": [
+      "A genuinely open-ended, model-independent parent Task A reached producer execution exactly once.",
+      "The producer failed before source discovery, quantitative work, or independent oracle execution.",
+      "The earliest observed causal gap is broad-objective compilation: no verified capability match for the first objective clause.",
+      "The frozen Task A is permanently spent and must not be replayed."
+    ],
+    "not_proven": [
+      "The parent open-ended capability is acquired.",
+      "The climate objective is solved.",
+      "A particular implementation repair is sufficient.",
+      "Any task-specific climate patch is authorized."
+    ]
+  },
+  "canonical_effect": {
+    "old_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "new_blocker": "OPEN_ENDED_PARENT_TASK_A_COMPILE_GAP__BROAD_OBJECTIVE_NO_VERIFIED_CAPABILITY_MATCH",
+    "next_action": "ACQUIRE_GENERIC_MODEL_INDEPENDENT_BROAD_OBJECTIVE_DECOMPOSITION_AND_CAPABILITY_GROUNDING_ROUTE__SEARCH_REUSE_BEFORE_REPAIR__NO_TASK_A_REPLAY__THEN_FRESH_ORTHOGONAL_QUALIFICATION",
+    "parent_capability_promoted": false,
+    "capability_credit_delta": 0,
+    "verified_real_task_completed_delta": 0,
+    "fresh_reuse_delta": 0,
+    "frontier_dependency_removed_delta": 0,
+    "residual_gaps_localized_delta": 1,
+    "task_a_replay_forbidden": true,
+    "task_b_remains_blocked": true
+  },
+  "falsification_checks": [
+    {
+      "hypothesis": "The observed red workflow is only a carrier prestart failure and the task remained unspent.",
+      "result": "FALSIFIED",
+      "evidence": "Job 109744305866 terminal JSON reports execution_count=1 and task_executed=true; prior carrier-closure failures explicitly reported execution_count=0."
+    },
+    {
+      "hypothesis": "The failure occurred after source/tool discovery or quantitative execution.",
+      "result": "FALSIFIED",
+      "evidence": "compiled_prefix and context_paths are empty, subgoal_index is 0, independent_oracle_executed=false."
+    },
+    {
+      "hypothesis": "The failed task may be replayed to obtain a cleaner answer.",
+      "result": "FALSIFIED_BY_FROZEN_ONE_SHOT_CONTRACT",
+      "evidence": "terminal replay_allowed=false with execution_count=1."
+    }
+  ],
+  "evidence_urls": {
+    "workflow_run": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36670516407",
+    "runner_pr": "https://github.com/moxnixmdj/verification-capsule-runner/pull/49"
+  }
+}
