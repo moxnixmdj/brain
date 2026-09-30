@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "INTEGRATE_VERIFIED_CLAIM_SPEC_BINDER_AND_GENERIC_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_SOURCE_FRONTEND__QUALIFY_NON_PARENT__PRESERVE_TRUTH_AND_SUFFICIENCY_UNVERIFIED__DEFER_HTTP2_PARENT_EXECUTION",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -585,19 +585,35 @@
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
       "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    {
+      "event_id": "PARENT_CLAIM_RELATION_INTEGRATION_FRONTIER_CORRECTION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FRONTIER_CORRECTION_ONLY__HTTP2_TASK_PRESERVED_UNSPENT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_CLAIM_RELATION_INTEGRATION_FRONTIER_CORRECTION_20260930_V1.json",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "EVIDENCE_SCOPE_AND_PARENT_PATH_CORRECTION_ONLY",
+      "corrected_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "active_subcapability_target": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+    "subcapability_status": "VERIFIED_CHILDREN_ACQUIRED__PARENT_CLAIM_RELATION_INTEGRATION_GAP_ACTIVE",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "residual_gap": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
     "first_physical_spend_run_id": 36670808367,
     "last_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
@@ -615,6 +631,12 @@
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
       "limitations": "Verified only for bounded explicit GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE objectives and exact quoted-support objectives with unique lexical role binding, exact-unit-compatible operand selection, and fail-closed ambiguity. General semantic entailment, truth, causality, sufficiency, unit conversion, source independence, and parent completion remain unverified."
+    },
+    "deferred_http2_parent_task": {
+      "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+      "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+      "status": "FROZEN_UNSPENT__DEFERRED",
+      "execution_count": 0
     }
   },
   "events": [
