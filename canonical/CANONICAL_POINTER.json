@@ -196,11 +196,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE__REUSE_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
+    "next_step": "OBS_AND_ACQUIRE_MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE__REUSE_QUALIFIED_EXTRACTION_AND_RELATION_PRIMITIVES__NO_PARENT_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "critical_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -277,7 +277,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -626,31 +626,33 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "GENERIC_EXTRACTION_REQUALIFIED_AFTER_FALSIFICATION__ADVANCE_TO_CLAIM_RELATION",
-      "previous_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
-      "blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+      "status": "GENERIC_V2_CLAIM_RELATION_VERIFIED__ADVANCE_TO_CLAIM_SPEC_OPERAND_BINDING",
+      "previous_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+      "blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
-        "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json"
+        "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json"
       ],
-      "public_run_id": 36681368306,
+      "public_run_id": 36682488104,
+      "artifact_id": 11082521746,
       "parent_capability_promoted": false
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD_TARGET__POST_GENERIC_EXTRACTION_REQUALIFICATION",
+    "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD_TARGET__POST_GENERIC_V2_CLAIM_RELATION_PROMOTION",
     "last_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
-      "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR__INDEPENDENT_FRESH_LIVE_NON_ROR_CROSS_DOMAIN_PASS",
-      "route": "source.evidence.extract.objective_grounded.stdlib + open_research_source_frontend",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
-      "public_run_id": 36681368306,
-      "artifact_id": 11081458134,
-      "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
-      "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+      "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+      "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
+      "route": "evidence.claim_relation.generic_units.stdlib",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+      "public_run_id": 36682488104,
+      "job_id": 109780804595,
+      "artifact_id": 11082521746,
+      "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+      "producer_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
+      "regression_git_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Verbatim objective-grounded evidence units only; claim support/contradiction, semantic entailment, correctness, causality, quality, sufficiency and independence remain unverified."
+      "limitations": "Exact normalized verbatim support and explicit caller-referenced Decimal numeric relations only. Automatic claim-spec generation, semantic operand roles, paraphrase/entailment, factual correctness, causality, evidence quality/sufficiency, source independence and unit conversion remain unverified."
     }
   },
   "provider_rules": {
