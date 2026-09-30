@@ -3,7 +3,7 @@
 
 Verified candidate scope:
 - exact quoted-claim support requests;
-- explicit binary numeric comparisons using GT/LT/GTE/LTE/EQ/NE;
+- explicit binary numeric comparisons using GT/LT/GTE/LTE/EQ/NE;\n- explicit one-evidence-quantity versus objective-literal threshold comparisons;
 - explicit absolute-difference-at-most comparisons;
 - unique lexical binding of left/right entity phrases to distinct generic V2
   evidence units;
@@ -61,6 +61,18 @@ _RELATION_PATTERNS=[
  (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:exceeds|exceeded)\s+(.+?)(?:[?.]|$)",re.I),"GT",None),
  (re.compile(r"\bdoes\s+(.+?)\s+exceed\s+(.+?)(?:[?.]|$)",re.I),"GT",None),
 ]
+_LITERAL_THRESHOLD_PATTERNS=[
+ # Scoped measurement form, e.g. "with an observed maximum pressure exceeding 5 bar at any outlet".
+ (re.compile(r"\b(?:with|having)\s+(?:an?\s+|the\s+)?(.+?)\s+(?:exceeding|above|over)\s+("+_NUM_SURFACE+r")(?=\s+(?:at|in|for|among|across|within|outside|inside|on|during|from)\b|[?.]|$)",re.I),"GT"),
+ (re.compile(r"\b(?:with|having)\s+(?:an?\s+|the\s+)?(.+?)\s+(?:below|under)\s+("+_NUM_SURFACE+r")(?=\s+(?:at|in|for|among|across|within|outside|inside|on|during|from)\b|[?.]|$)",re.I),"LT"),
+ (re.compile(r"\b(?:with|having)\s+(?:an?\s+|the\s+)?(.+?)\s+(?:at\s+least|no\s+less\s+than)\s+("+_NUM_SURFACE+r")(?=\s+(?:at|in|for|among|across|within|outside|inside|on|during|from)\b|[?.]|$)",re.I),"GTE"),
+ (re.compile(r"\b(?:with|having)\s+(?:an?\s+|the\s+)?(.+?)\s+(?:at\s+most|no\s+more\s+than)\s+("+_NUM_SURFACE+r")(?=\s+(?:at|in|for|among|across|within|outside|inside|on|during|from)\b|[?.]|$)",re.I),"LTE"),
+ # Direct decision form with one evidence quantity and one objective literal.
+ (re.compile(r"\b(?:determine|check|verify|assess|investigate|find)\s+(?:whether\s+)?(.+?)\s+(?:exceeds|exceeded|is\s+(?:higher|greater|larger)\s+than|is\s+above)\s+("+_NUM_SURFACE+r")(?=[?.]|$)",re.I),"GT"),
+ (re.compile(r"\b(?:determine|check|verify|assess|investigate|find)\s+(?:whether\s+)?(.+?)\s+(?:is\s+(?:lower|less|smaller)\s+than|is\s+below)\s+("+_NUM_SURFACE+r")(?=[?.]|$)",re.I),"LT"),
+ (re.compile(r"\b(?:determine|check|verify|assess|investigate|find)\s+(?:whether\s+)?(.+?)\s+(?:is|was)\s+(?:at\s+least|no\s+less\s+than)\s+("+_NUM_SURFACE+r")(?=[?.]|$)",re.I),"GTE"),
+ (re.compile(r"\b(?:determine|check|verify|assess|investigate|find)\s+(?:whether\s+)?(.+?)\s+(?:is|was)\s+(?:at\s+most|no\s+more\s+than)\s+("+_NUM_SURFACE+r")(?=[?.]|$)",re.I),"LTE"),
+]
 _QUOTED=[
  re.compile(r'\b(?:verify|check|determine)\s+(?:whether\s+)?(?:the\s+)?(?:source|evidence)\s+(?:states|contains|includes|says)\s+["“]([^"”]+)["”]',re.I),
  re.compile(r'\b(?:verify|check)\s+(?:the\s+)?exact\s+(?:text|claim)\s+["“]([^"”]+)["”]',re.I),
@@ -113,6 +125,31 @@ def _parse_objective(objective):
         if len(quoted)!=1:
             return None,"OBJECTIVE_CLAIM_AMBIGUOUS"
         return {"mode":"VERBATIM_SUPPORT","claim_text":quoted[0]},None
+
+    literal_matches=[]
+    for rx,op in _LITERAL_THRESHOLD_PATTERNS:
+        m=rx.search(objective)
+        if not m:
+            continue
+        left=_clean_entity(m.group(1))
+        threshold=_canon(m.group(2)).rstrip(".,;:")
+        row=(op,left,threshold)
+        if left and threshold and row not in literal_matches:
+            literal_matches.append(row)
+    if len(literal_matches)>1:
+        return None,"OBJECTIVE_LITERAL_THRESHOLD_RELATION_AMBIGUOUS"
+    if len(literal_matches)==1:
+        op,left,threshold=literal_matches[0]
+        lt=_tokens(left)
+        if not lt:
+            return None,"OBJECTIVE_ENTITY_TOKENS_REQUIRED"
+        return {
+          "mode":"NUMERIC_LITERAL_THRESHOLD_RELATION",
+          "operator":op,
+          "left_entity":left,
+          "left_tokens":lt,
+          "threshold":threshold,
+        },None
 
     matches=[]
     for rx,op,threshold_group in _RELATION_PATTERNS:
@@ -247,6 +284,28 @@ def _choose_pair(left_binding,right_binding):
       "left_surface":a["surface"],"right_surface":b["surface"],
     },None
 
+def _choose_literal_threshold_operand(left_binding,threshold):
+    threshold_numbers=_numbers(threshold)
+    if len(threshold_numbers)!=1:
+        return None,"OBJECTIVE_LITERAL_THRESHOLD_INVALID"
+    target=threshold_numbers[0]
+    candidates=[
+        x for x in _numbers(left_binding["text"])
+        if x["unit"]==target["unit"]
+    ]
+    if not candidates:
+        return None,"NO_EXACT_UNIT_COMPATIBLE_EVIDENCE_OPERAND_FOR_LITERAL_THRESHOLD"
+    if len(candidates)!=1:
+        return None,"AMBIGUOUS_EVIDENCE_OPERAND_FOR_LITERAL_THRESHOLD"
+    chosen=candidates[0]
+    return {
+      "left":{"evidence_unit_id":left_binding["evidence_unit_id"],
+              "numeric_literal_index":chosen["numeric_literal_index"]},
+      "threshold_surface":target["surface"],
+      "unit_surface":target["unit"] or None,
+      "left_surface":chosen["surface"],
+    },None
+
 def _load_evaluator():
     path=pathlib.Path(__file__).resolve().with_name("generic_evidence_claim_relation.py")
     spec=importlib.util.spec_from_file_location("project_brain_verified_generic_claim_relation",path)
@@ -284,7 +343,7 @@ def bind(objective,extraction,evaluate_relation=True):
       "schema":SCHEMA,
       "objective":objective or None,
       "status":"UNBOUND",
-      "binding_scope":"BOUNDED_EXPLICIT_COMPARISON_OR_EXACT_QUOTED_CLAIM_WITH_UNIQUE_EVIDENCE_BINDING",
+      "binding_scope":"BOUNDED_EXPLICIT_COMPARISON_OR_OBJECTIVE_LITERAL_THRESHOLD_OR_EXACT_QUOTED_CLAIM_WITH_UNIQUE_EVIDENCE_BINDING",
       "semantic_entailment_status":"UNVERIFIED",
       "factual_correctness_status":"UNVERIFIED",
       "causality_status":"UNVERIFIED",
@@ -309,6 +368,29 @@ def bind(objective,extraction,evaluate_relation=True):
           "status":"CLAIM_SPEC_BOUND",
           "parsed_objective":parsed,
           **bound,
+          "output_verified":True,
+        }
+    elif parsed["mode"]=="NUMERIC_LITERAL_THRESHOLD_RELATION":
+        left,reason=_bind_role(units,parsed["left_tokens"])
+        if reason:
+            return {**base,"reason":"LEFT_"+reason,"parsed_objective":parsed}
+        operand,reason=_choose_literal_threshold_operand(left,parsed["threshold"])
+        if reason:
+            return {**base,"reason":reason,"parsed_objective":parsed,
+                    "left_binding":left}
+        relation_spec={
+          "mode":"NUMERIC_LITERAL_THRESHOLD_RELATION",
+          "operator":parsed["operator"],
+          "left":operand["left"],
+          "threshold":parsed["threshold"],
+        }
+        result={
+          **base,
+          "status":"CLAIM_SPEC_AND_OPERANDS_BOUND",
+          "parsed_objective":parsed,
+          "left_binding":left,
+          "literal_threshold_binding":operand,
+          "relation_spec":relation_spec,
           "output_verified":True,
         }
     else:
