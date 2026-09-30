@@ -19,7 +19,8 @@
     "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1 is now acquired",
     "model-independent evidence synthesis, grounding, and executable composition remain acquired",
     "NASA/JPL SBDB API official documentation exposes machine-readable orbital elements including semimajor axis and period",
-    "task frozen before querying the exact Eros source URL"
+    "task frozen before querying the exact Eros source URL",
+    "exact frozen JPL source preflight run 36664673653 PASS; task not executed"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -261,14 +262,12 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T03:27:00Z",
+        "checked_at_utc": "2026-09-30T03:30:20Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
-        "status": "BLOCKED_PENDING_EXACT_JPL_SOURCE_PREFLIGHT",
-        "all_required_dependencies_ready": false,
-        "failed_dependencies": [
-          "JPL_SBDB_EROS_FROZEN_URL_NOT_YET_PROBED_AFTER_TASK_FREEZE"
-        ],
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
         "execution_dependencies": [
           {
             "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
@@ -308,18 +307,20 @@
             "required": true,
             "volatility": "VOLATILE",
             "scope": "GLOBAL",
-            "status": "BLOCKED",
-            "observed_at_utc": null,
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:30:20Z",
             "evidence": [
-              "TASK_FROZEN_BEFORE_SOURCE_QUERY"
+              "DIRECT_PROBE: run 36664673653 returned HTTP 200, JPL SBDB v1.3, object 433 Eros, numeric a=1.458243716760167 au and per=643.1963890927677 d",
+              "ARTIFACT:11076086227 sha256:012318a57183c3639d22a7550707a9d63d8930f5943f04042b5beec63866d1f4"
             ],
             "evidence_classes": [
+              "DIRECT_PROBE",
               "OFFICIAL_PRIMARY"
             ],
             "evidence_scope": "GLOBAL"
           }
         ],
-        "execution_dependencies_complete": false
+        "execution_dependencies_complete": true
       }
     }
   }
