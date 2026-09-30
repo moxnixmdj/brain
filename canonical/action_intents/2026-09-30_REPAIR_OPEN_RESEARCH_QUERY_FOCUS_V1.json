@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-OPEN-RESEARCH-DECISION-CLAUSE-QUERY-FOCUS-20260930-V1",
+  "status": "PROPOSED_PENDING_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT",
+  "action_kind": "GENERIC_SOURCE_DISCOVERY_AND_RELEVANCE_REPAIR",
+  "authoritative_parent_evidence": {
+    "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+    "task_spent": true,
+    "replay_allowed": false,
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 199,
+    "workflow_run_id": 36690682680,
+    "job_id": 109806904765,
+    "artifact_id": 11085208947,
+    "artifact_digest": "sha256:b2c5e8ff9fa3059908ca350ce7a1c208b858d5e01286e3aacf4b19d9deefeb25",
+    "observed_selected_source": "https://twominenglish.com/asess-or-assess/",
+    "observed_binding_status": "UNBOUND",
+    "observed_binding_reason": "LEFT_NO_EVIDENCE_UNIT_FOR_ENTITY"
+  },
+  "root_cause": "The discovery primitive submitted the complete imperative parent objective verbatim to search backends. Generic orchestration words dominated retrieval and lexical ranking, so an English spelling page for the leading verb 'Assess' outranked sources containing the decision operands. The bounded claim binder correctly failed closed on that irrelevant evidence.",
+  "repair": [
+    "derive the search query from the first decision-bearing clause of the objective",
+    "strip only recognized leading broad-research command syntax while preserving subject entities, relation terms, quantities, and versions",
+    "exclude later orchestration sentences from search query construction",
+    "rank retrieved candidates against that same focused query instead of the full imperative objective",
+    "preserve original full objective for evidence extraction and claim binding",
+    "do not introduce source domains, accessions, task-specific literals, learned models, or semantic claims beyond deterministic lexical relevance"
+  ],
+  "candidate_blobs": {
+    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py": "e282474c25646c082c69d0cc83750bf99db98a1c",
+    "canonical/runtime/bound_capabilities/open_research_source_frontend.py": "a6fa0f32eab09791ec6a8cdabe961519d073be58",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+    "canonical/tests/test_open_web_source_candidate_discovery.py": "b72d46fc8a879ff2c19a69682ab6bebbf023f2b7",
+    "canonical/tests/test_open_research_query_focus_regression.py": "d92ff787afa66bd4317ba127305ccd1937f1be16"
+  },
+  "qualification_required": "EXACT_BYTE_NON_PARENT_GUARDED_INDEPENDENT_QUALIFICATION",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "highest_leverage_now": true,
+  "recursive_obs": {
+    "selected_surviving_route": "DECISION_CLAUSE_FOCUSED_QUERY_PLUS_MATCHED_RELEVANCE_QUERY",
+    "deleted_or_bypassed_paths": [
+      "GENOMICS_TASK_B_REPLAY",
+      "CLAIM_BINDER_WEAKENING",
+      "TASK_SPECIFIC_SOURCE_DOMAIN_OR_ACCESSION",
+      "LEARNED_SEMANTIC_RANKER",
+      "AUTHORITY_AS_UNIVERSAL_GATE",
+      "MODEL_COGNITION"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It repairs the earliest demonstrated generic cause with two bounded data-flow changes: query construction and the relevance query input. It leaves downstream extraction and claim binding fail-closed.",
+    "stop_rule": "GUARDED_INDEPENDENT_QUALIFICATION_THEN_MERGE_OR_LOCALIZE_FIRST_NEW_CAUSAL_DEFECT"
+  }
+}
