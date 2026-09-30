@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 9,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 10
+    "residual_gaps_localized": 11
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+  "next_progress_event_target": "VERIFY_GENERAL_OPEN_ENDED_CAPABILITY_ACQUISITION_ROUTE_ON_NEW_FRESH_PARENT_WORK__NO_SQLITE_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -504,6 +504,37 @@
       "progress_credit": "AUTHORITY_MIRROR_RECONCILIATION_ONLY",
       "parent_capability_promoted": false,
       "execution_count": 0
+    },
+    {
+      "event_id": "PARENT_SQLITE_OPENENDED_TASK_A_ACQUISITION_GAP_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FRESH_PARENT_REAL_TASK_FAILED__FIRST_INTEGRATED_ACQUISITION_GAP_LOCALIZED__NO_CAPABILITY_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPENENDED_TASK_A_FIRST_SPEND_ACQUISITION_GAP_20260930_V1.json",
+      "public_pr": 95,
+      "public_run_id": 36674086293,
+      "public_job_id": 109755152141,
+      "artifact_id": 11078414137,
+      "artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED",
+      "residual_gap": "MODEL_INDEPENDENT_OPEN_ENDED_CAPABILITY_ACQUISITION_CONTRACT_GENERALIZATION",
+      "excluded_causes": [
+        "CARRIER_CLOSURE",
+        "CANONICAL_MISSION_PATH",
+        "DIRECT_COMPILER_BYPASS",
+        "MODEL_PLANNER_DEPENDENCY",
+        "CONTROLLER_ACTION_CEILING"
+      ],
+      "apt_result": "NO_COMPATIBLE_APT_CLI_CONTRACT",
+      "pypi_result": "PYPI_CONTRACT_CLASS_UNSUPPORTED",
+      "same_task_replay_allowed": false,
+      "incremental_spend_usd": 0
     }
   ],
   "active_frontier_accounting": {
