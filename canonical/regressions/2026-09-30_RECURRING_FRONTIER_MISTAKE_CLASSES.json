@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CATALOG_V1",
+  "id": "2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION_CATALOG",
+  "purpose": "Known recurring mistakes must be rejected before canonical effect or capability credit.",
+  "cases": [
+    {
+      "id": "ACCIDENTAL_DUPLICATE_BLOCKER_LEASE",
+      "observed_incident": "PR254 and PR255 opened on the exact same blocker lease.",
+      "must_fail_or_resolve": "Exactly one deterministic owner survives: lowest PR number. Later duplicate fails closed. Intentional route races require matching explicit route_race_id."
+    },
+    {
+      "id": "NARROW_TOOL_PROMOTED_AS_BROAD_FRONTIER_CAPABILITY",
+      "observed_incident": "A launch-domain deterministic model was temporarily counted as the broader frontier research capability.",
+      "must_fail_or_resolve": "Broad promotion requires the frontier record's minimum acquisition evidence. Narrow tools remain supporting subcapabilities."
+    },
+    {
+      "id": "SAME_DOMAIN_PARAMETER_REUSE_COUNTED_AS_CROSS_DOMAIN_FRESH_REUSE",
+      "observed_incident": "A changed-parameter launch rerun was temporarily treated as frontier fresh reuse.",
+      "must_fail_or_resolve": "Cross-domain credit requires materially different domain evidence; parameter changes in the same domain cannot satisfy it."
+    },
+    {
+      "id": "TARGET_FRONTIER_MODEL_USED_TO_PROVE_ITS_OWN_OBSOLESCENCE",
+      "observed_incident": "A proposed Task B executed by GPT-5.6 could not prove GPT-5.6-class dependency removal.",
+      "must_fail_or_resolve": "For model-independent cognitive capability claims, target/equivalent model dependencies in producer path fail closed; target supplier cannot be the independent verifier for dependency-removal credit."
+    },
+    {
+      "id": "BENCHMARK_SUBSTITUTED_FOR_REAL_CAPABILITY",
+      "observed_incident": "WTM benchmark work was proposed as Capability Win #1 despite real-task-first policy.",
+      "must_fail_or_resolve": "Benchmark-only evidence cannot promote real capability acquisition unless subordinate to a real task and exact unresolved predicate."
+    },
+    {
+      "id": "PROXY_GOAL_REPLACES_ACTIVE_FRONTIER",
+      "observed_incident": "Real-task output was at times framed as the objective rather than evidence toward frontier capability acquisition.",
+      "must_fail_or_resolve": "Ordinary actions cannot silently change active capability target; target changes require explicit reconciliation and parent relationship evidence."
+    },
+    {
+      "id": "STALE_OR_HOLLOW_OBS_AUTHORIZES_ACTION",
+      "observed_incident": "Earlier OBS receipts were generation-bound but not exact-base-bound and allowed shallow layer objects.",
+      "must_fail_or_resolve": "Exact-base OBS V4, required structure, current route frontier, and selected-route preflight remain mandatory."
+    },
+    {
+      "id": "ACTIVITY_INFLATES_PROGRESS",
+      "observed_incident": "Governance, probes, and support work previously risked being treated as progress.",
+      "must_fail_or_resolve": "PRs, commits, checks, searches, OBS, infrastructure and benchmarks receive zero progress credit unless a permitted parent-level output counter is supported by exact evidence."
+    }
+  ],
+  "unknown_error_containment": [
+    "exact-base binding",
+    "fresh route decision leases",
+    "producer/verifier role separation",
+    "claim scope cannot exceed evidence scope",
+    "contradiction invalidates affected authority",
+    "correction is mandatory and progress-neutral"
+  ],
+  "authority": "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
+  "trusted_validator": "canonical/runtime/enforce_goal_hierarchy.py"
+}
