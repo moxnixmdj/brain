@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-GUARDED-SEISMOLOGY-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_B_REQUIRED",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_B_REQUIRED::GUARDED_FRESH_PARENT_EXECUTION",
+  "task_id": "PARENT-OPENENDED-SEISMOLOGY-TSUNAMI-REAL-TASK-B-20260930-001",
+  "task_blob_sha": "843c1da2e576a6cbddd20856115b9b4581adf75b",
+  "mission_blob_sha": "47103680f7717de324e17194ff6752585dc73217",
+  "prior_work_checked": [
+    "HTTP/2 parent Task A executed exactly once and is canonically spent/no-replay.",
+    "Corrected generic broad multi-clause research routing merged on canonical main a42d1d9ef9134f1095e44a4483dba8203f27eda9 after exact guarded independent qualification.",
+    "Deferred seismology proposal PR476 executed zero parent steps and was closed before the routing blocker was qualified.",
+    "Open competing fresh-Task-B lease search count at authorization time: 2."
+  ],
+  "evidence_presence_classification": "PARENT_CAPABILITY_UNPROVEN_AFTER_LATEST_GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Exactly one guarded physical execution of a materially different fresh seismology parent Task B; on first causal failure preserve the earliest gap and mark the task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
+  "highest_leverage_now": true,
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "One atomic-guard-admitted physical execution only. Never retry after reservation/dispatch uncertainty or after physical child start.",
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "real_outcome": "Reality-test the corrected model-independent open-ended research stack on one fresh seismology/tsunami task without leaking authority, station, dataset, numeric value, tool recipe, or answer.",
+    "surviving_necessity": "The previously observed broad-routing causal gap is now guarded-qualified and merged; parent-level transfer evidence on a materially different task is the shortest remaining proof.",
+    "selected_surviving_route": "EXACTLY_ONE_GUARDED_SEISMOLOGY_PARENT_TASK_B_EXECUTION",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_TASK_A_REPLAY",
+      "UNGUARDED_EXECUTION",
+      "MORE_SYNTHETIC_CHILD_TESTS_BEFORE_PARENT_FALSIFICATION",
+      "MODEL_COGNITION",
+      "TASK_SPECIFIC_PATCH",
+      "PREWIRED_SOURCE_OR_FORMULA"
+    ],
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
+  }
+}
