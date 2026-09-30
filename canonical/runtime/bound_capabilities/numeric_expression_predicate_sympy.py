@@ -158,18 +158,6 @@ def run(args, root):
         raise RuntimeError("SYMPY_VERSION_MISMATCH:"+str(sp.__version__))
 
     expression=str(args.get("expression") or "").strip()
-    raw_vars=args.get("variables")
-    if not isinstance(raw_vars,dict) or len(raw_vars)>MAX_VARIABLES:
-        raise RuntimeError("NUMERIC_VARIABLES_INVALID")
-    env={}
-    observed={}
-    for name,value in raw_vars.items():
-        name=str(name)
-        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,31}",name):
-            raise RuntimeError("NUMERIC_VARIABLE_NAME_INVALID")
-        env[name]=_number(value,sp)
-        observed[name]=value
-
     guard=args.get("guard",True)
     if not isinstance(guard,bool):
         raise RuntimeError("NUMERIC_GUARD_BOOLEAN_REQUIRED")
@@ -193,6 +181,18 @@ def run(args, root):
             "sympy_version":sp.__version__,
             "model_dependency_count":0,
         }
+
+    raw_vars=args.get("variables")
+    if not isinstance(raw_vars,dict) or len(raw_vars)>MAX_VARIABLES:
+        raise RuntimeError("NUMERIC_VARIABLES_INVALID")
+    env={}
+    observed={}
+    for name,value in raw_vars.items():
+        name=str(name)
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,31}",name):
+            raise RuntimeError("NUMERIC_VARIABLE_NAME_INVALID")
+        env[name]=_number(value,sp)
+        observed[name]=value
 
     tree=_parse(expression)
     result=_eval(tree.body,env,sp)
