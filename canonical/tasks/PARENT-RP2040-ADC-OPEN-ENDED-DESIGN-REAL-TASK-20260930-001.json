@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-RP2040-ADC-OPEN-ENDED-DESIGN-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "EMBEDDED_ELECTRONICS_ADC_INTERFACE_DESIGN",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "scientific_question": "Can a Raspberry Pi Pico directly measure a 12 V lead-acid battery on an analog input, and if not, what is the simplest passive interface that safely measures up to 15.0 V while drawing no more than 1.0 mA at 15.0 V?",
+  "goal_text": "Assess whether a Raspberry Pi Pico can directly measure a 12 V lead-acid battery on an analog input. If direct connection is not safe, design the simplest passive interface that can measure battery voltage up to 15.0 V while drawing no more than 1.0 mA from the battery at 15.0 V. Use authoritative public evidence for every electrical limit you rely on, choose practical standard component values, quantitatively verify every stated constraint, and report the decision, design, calculations, provenance, and assumptions.",
+  "open_endedness_contract": {
+    "source_urls_precommitted": false,
+    "source_authority_preselected": false,
+    "json_paths_precommitted": false,
+    "formulas_precommitted": false,
+    "tool_route_precommitted": false,
+    "component_values_precommitted": false,
+    "producer_must_decompose_problem": true,
+    "producer_must_discover_and_select_evidence": true,
+    "producer_must_select_tools_from_inherited_or_generically_acquired_routes": true,
+    "producer_must_quantitatively_verify_design": true
+  },
+  "required_result": {
+    "decision_on_direct_connection": true,
+    "authoritative_electrical_limit_provenance": true,
+    "passive_interface_design_if_needed": true,
+    "practical_component_values_if_needed": true,
+    "quantitative_check_at_15v": true,
+    "current_draw_check_against_1ma": true,
+    "adc_input_check_against_source_derived_limit": true,
+    "assumptions_and_uncertainty": true,
+    "provenance": true
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "required_cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_optional_model_planner": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true,
+    "no_prewired_research_plan": true
+  },
+  "independent_oracle": {
+    "method": "Independently locate current primary Raspberry Pi/RP2040 documentation after producer completion, verify the cited electrical limits, independently recompute every consequential voltage/current constraint from the producer-selected component values, and check the direct-connection decision without importing producer modules or relying only on producer-selected evidence.",
+    "producer_modules_must_not_be_imported": true,
+    "producer_selected_sources_are_not_sufficient_alone": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "frozen_before_exact_source_discovery": true
+}
