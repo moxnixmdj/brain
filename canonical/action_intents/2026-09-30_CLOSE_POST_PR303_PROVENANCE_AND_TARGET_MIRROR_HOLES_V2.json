@@ -15,11 +15,11 @@
   "prior_work_checked": [
     "current main 797d5fbea5f230a31044006755beb98ae387134b after merged PR329 provenance/target-mirror hardening",
     "merged PR303 promotion firewall and runtime provenance implementation",
-    "current main canonical/runtime/astra_runtime.py cognition stamping logic",
-    "current main canonical/runtime/enforce_goal_hierarchy.py mirror checks",
-    "current active open-ended parent frontier record and scoreboard mirrors",
-    "stale-base PR307 closed unmerged",
-    "Public parent-task carrier harness invokes runtime.run_goal directly, which bypasses PR303's execute_step-only provenance stamp"
+    "merged PR329 current-main implementation remains incomplete relative to the independently verified fail-closed candidate carried here",
+    "public carrier PR40 workflow run 36669953388 independently verified runtime blob f11fe4381a66c1d95715dbe8ac2c3a3c5220382a and guard blob 8381f1119d514e8942df534e4e26b5e415205eca",
+    "public verification artifact 11076599206 digest sha256:eb8552485127bbc038e907dc9a367c90381cfb99434fcc242f4b435d0d9faf83",
+    "current active open-ended parent frontier and stale pre-PR329 task lanes were rechecked",
+    "public parent-task carrier harness invokes runtime.run_goal directly, so the run_goal provenance boundary must be intrinsically safe"
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -114,13 +114,15 @@
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
-        "Reused the exact PR303 audit and implementation",
-        "Did not reopen broader governance design",
-        "Limited work to proven false-negative branches",
-        "Used the proven public parent harness to falsify the execute_step-only provenance boundary"
+        "reused PR303 and PR329 audits",
+        "reused exact public PR40 independent verification",
+        "did not reopen broader governance design",
+        "limited work to the three proven false-negative branches",
+        "used the public parent harness to falsify the execute_step-only provenance boundary"
       ],
       "search_stop_decision": "All three defects are directly demonstrated in current source or proven carrier usage and have minimal local repairs; broader search would delay parent Task A without improving correctness.",
-      "affected_layers_only_on_revalidation": true
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Exact runtime and guard candidate bytes were independently reverified on public run 36669953388; current main 797d5fbea5f230a31044006755beb98ae387134b was refreshed before rebind."
     },
     "routes_considered": [
       "REPAIR_EXISTING_RUNTIME_AND_VALIDATOR",
