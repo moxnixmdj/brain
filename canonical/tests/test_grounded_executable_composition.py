@@ -145,6 +145,41 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
         with self.assertRaisesRegex(composition.CompositionError,"UNRESOLVED_GROUNDED_CLAUSES"):
             composition.compose(goal,g,self.registry(),FakeCompiler,REPO_ROOT)
 
+
+    def test_unverified_external_prerequisite_fails_closed(self):
+        goal="Create alpha"
+        registry=self.registry()
+        registry["produce.alpha"]["requires"]=["external.unverified.ready"]
+        g=self.grounding()
+        g["clauses"]=g["clauses"][:1]
+        g["grounded_clause_count"]=1
+        g["candidate_capability_ids"]=["produce.alpha"]
+        g["goal"]=goal
+        import hashlib
+        g["goal_sha256"]=hashlib.sha256(goal.encode()).hexdigest()
+        with self.assertRaisesRegex(
+            composition.CompositionError,
+            "UNVERIFIED_INITIAL_FACTS_REQUIRED:external.unverified.ready",
+        ):
+            composition.compose(
+                goal,g,registry,FakeCompiler,REPO_ROOT,
+                verified_initial_facts=[],
+            )
+
+        result=composition.compose(
+            goal,g,registry,FakeCompiler,REPO_ROOT,
+            verified_initial_facts=["external.unverified.ready"],
+        )
+        ok,reason=verifier.verify(
+            goal,result,g,registry,
+            verified_initial_facts=["external.unverified.ready"],
+        )
+        self.assertTrue(ok,reason)
+        self.assertEqual(
+            result["problem"]["initial_facts"],
+            ["external.unverified.ready"],
+        )
+
     def test_independent_verifier_rejects_tampered_action(self):
         goal="Create alpha then verify alpha"
         g=self.grounding()
