@@ -3,7 +3,7 @@
   "action_id": "EXECUTE-GUARDED-GENOMICS-OPENENDED-PARENT-TASK-B-20260930-V1",
   "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "3866a84b87248fe2b80b54301370b75c00245869",
+  "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
@@ -16,6 +16,7 @@
   "runtime_blob_sha": "426ffe58e405dc4f1ba2eb4e838e03a1df771964",
   "prior_work_checked": [
     "PR478 froze the exact genomics task and mission after PR474.",
+    "PR490 corrected the task phase to Task B and rebound the mission to exact current task blob.",
     "PR479 reconciled the frontier to a materially different fresh Task B.",
     "HTTP2 Task A is spent/no-replay after guarded run 36688193204.",
     "Deferred genomics PR471 had no physical execution.",
@@ -36,7 +37,7 @@
     "exact_task_runtime_authorization_pins_required": true
   },
   "recursive_obs": {
-    "canonical_base_commit": "3866a84b87248fe2b80b54301370b75c00245869",
+    "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
     "real_outcome": "Reality-test the repaired model-independent open-ended research stack on one fresh genomics task without leaking source, values, formula, tool recipe, or answer.",
     "surviving_necessity": "PR474 repaired and qualified the HTTP2-localized generic routing gap; a fresh materially different parent execution is the shortest remaining proof.",
     "selected_surviving_route": "EXACTLY_ONE_GUARDED_GENOMICS_PARENT_TASK_B_EXECUTION",
