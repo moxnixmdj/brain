@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__GENUINE_OPEN_ENDED_TASK_A_SPENT__TERMINAL_MISSION_IDENTITY_GAP_LOCALIZED",
+  "status": "FRONTIER_BAR_DEFINED__MAUNA_SUBSTANTIVE_OBJECTIVE_SPENT__MISSION_IDENTITY_GAP_LOCALIZED__FIRST_SPEND_AUTHORITY_CORRECTED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,7 +78,7 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__GENUINE_OPEN_ENDED_TASK_A_FAILED_DURING_AUTONOMOUS_ACQUISITION_MISSION_IDENTITY_PROPAGATION",
+  "obsolescence_status": "NOT_YET_PROVEN__FIRST_MAUNA_SPEND_FAILED_DURING_AUTONOMOUS_ACQUISITION_MISSION_IDENTITY_PROPAGATION",
   "residual_gap": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
   "verified_subcapabilities": [
     {
@@ -144,22 +144,42 @@
     "incremental_spend_usd": 0
   },
   "latest_parent_task_failure": {
-    "task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
-    "domain": "ATMOSPHERIC_CLIMATE_SCIENCE_TIME_SERIES_REASONING",
-    "status": "GENUINE_OPEN_ENDED_MODEL_INDEPENDENT_TASK_A__EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__TASK_SPENT__NO_PROMOTION",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_ACQUISITION_MISSION_IDENTITY_RECONCILIATION_20260930_V1.json",
-    "public_run_id": 36670981076,
-    "job_id": 109745705157,
-    "artifact_id": 11077589879,
-    "artifact_digest": "sha256:ee2d095c5615ad7d4e355fbe60b5ba8eec805285d594e5237a06611d94993ab3",
-    "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
-    "first_causal_stage": "AUTO_CAPABILITY_ACQUISITION",
+    "substantive_objective": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013",
+    "status": "SUBSTANTIVE_OPEN_ENDED_OBJECTIVE_SPENT__FIRST_PHYSICAL_SPEND_FAILED_AT_MISSION_IDENTITY_PROPAGATION__LATER_REPLAYS_ZERO_FRESHNESS__NO_PROMOTION",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILIATION_20260930_V1.json",
+    "first_spend": {
+      "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001",
+      "task_blob_sha": "61d7334c1c866027260025d0d147d16ee9e0cb02",
+      "public_run_id": 36669918546,
+      "job_id": 109742518213,
+      "artifact_id": 11077637577,
+      "artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+      "runtime_blob_sha": "a73410e38d4c67d92188e934e0c0c3f0b2b329ee"
+    },
+    "corroborating_replays": [
+      {
+        "public_run_id": 36670516407,
+        "freshness_credit": false
+      },
+      {
+        "public_run_id": 36670981076,
+        "job_id": 109745705157,
+        "artifact_id": 11077589879,
+        "artifact_digest": "sha256:ee2d095c5615ad7d4e355fbe60b5ba8eec805285d594e5237a06611d94993ab3",
+        "freshness_credit": false
+      },
+      {
+        "public_run_id": 36671472249,
+        "freshness_credit": false
+      }
+    ],
+    "first_causal_stage": "AUTO_CAPABILITY_ACQUISITION_AFTER_COMPILE_MISS_FALLBACK",
     "first_causal_gap": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
-    "exact_cause": "APT_ORIGIN_MISSION_PATH_INVALID + PYPI_ORIGIN_MISSION_PATH_INVALID after compile miss entered acquisition fallback",
+    "exact_cause": "APT_ORIGIN_MISSION_PATH_INVALID + PYPI_ORIGIN_MISSION_PATH_INVALID because the direct run_goal producer omitted canonical _runtime_mission_path",
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
     "resolved": false,
-    "same_task_replay_allowed": false
+    "same_or_equivalent_task_replay_allowed": false
   },
   "historical_evidence_A_space_cargo": {
     "task": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
@@ -204,25 +224,25 @@
     "correction_evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json"
   },
   "open_ended_task_A": {
-    "task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
-    "status": "EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__NO_PROMOTION_CREDIT",
+    "substantive_objective_spent": true,
+    "first_spend_run_id": 36669918546,
+    "first_spend_task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001",
+    "later_task_a_label_is_same_substantive_objective": true,
+    "later_replays_have_freshness_credit": false,
     "genuinely_open_ended": true,
     "autonomous_decomposition_required": true,
     "no_predeclared_research_recipe": true,
     "model_dependency_count": 0,
-    "execution_count": 1,
     "replay_allowed": false,
     "parent_completion": false,
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_ACQUISITION_MISSION_IDENTITY_RECONCILIATION_20260930_V1.json"
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILIATION_20260930_V1.json"
   },
   "causal_refinement": {
-    "status": "LATER_ONE_SHOT_EXECUTION_REFINED_PRIOR_COMPILE_GAP",
-    "previous_evidence_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
-    "previous_run_id": 36670516407,
-    "previous_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "status": "FIRST_SPEND_PRIMARY_EVIDENCE_ALREADY_REACHES_AUTONOMOUS_ACQUISITION_MISSION_IDENTITY_GAP",
+    "previous_compile_label": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
     "refined_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
-    "refinement_evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_ACQUISITION_MISSION_IDENTITY_RECONCILIATION_20260930_V1.json",
-    "refined_run_id": 36670981076,
-    "reason": "Compilation no-match is handled by the runtime's acquisition fallback; the later execution reached and failed at the acquisition mission-identity boundary."
+    "first_spend_run_id": 36669918546,
+    "current_runtime_corroborating_replay_run_id": 36670981076,
+    "reason": "The compiler no-match enters autonomous acquisition fallback; the earliest physical spend itself then fails at supplier origin mission identity. Later runs corroborate but do not add freshness."
   }
 }
