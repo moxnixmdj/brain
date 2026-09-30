@@ -44,6 +44,7 @@ PROTECTED_GUARD_PATHS={
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json",
+    "canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json",
     "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
@@ -845,6 +846,18 @@ def main():
         fail("CURRENT_BLOCKER_OR_ROUTE_CLAIM_NOT_GATED_BY_OBS")
     if not (ROOT/operator_obs_path).is_file():
         fail("OPERATOR_OBS_DECISION_BOUNDARY_FILE_MISSING")
+
+    operator_obs_envelope_path="canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json"
+    if boot.get("operator_obs_authority_envelope_required") is not True:
+        fail("OPERATOR_OBS_AUTHORITY_ENVELOPE_NOT_REQUIRED")
+    if boot.get("operator_obs_authority_envelope_path")!=operator_obs_envelope_path:
+        fail("OPERATOR_OBS_AUTHORITY_ENVELOPE_PATH_MISMATCH")
+    if boot.get("bare_chat_has_zero_canonical_authority") is not True:
+        fail("BARE_CHAT_CANONICAL_AUTHORITY_NOT_REVOKED")
+    if boot.get("canonical_consequential_decision_requires_repository_backed_current_base_obs") is not True:
+        fail("CANONICAL_DECISION_NOT_BOUND_TO_REPOSITORY_OBS")
+    if not (ROOT/operator_obs_envelope_path).is_file():
+        fail("OPERATOR_OBS_AUTHORITY_ENVELOPE_FILE_MISSING")
 
     intents=[
         x for x in files
