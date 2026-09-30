@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-SEISMOLOGY-TSUNAMI-OPENENDED-PARENT-TASK-B-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+  "expected_parent_frontier_change": "Freeze and execute one materially different genuine open-ended seismology Task B on the repaired model-independent route; either obtain semantic completion for independent verification or localize the first new causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main c49e027828cb39926ec1249af6b432dc996db9c3",
+    "HTTP/2 Task A spent/no-replay and its broad-routing defect repaired",
+    "genomics Task B spent/no-replay and its query-focus/relevance defect repaired by PR512",
+    "no open Brain PR owns the current Task-B blocker"
+  ],
+  "evidence_presence_classification": "PARENT_TASK_B_REQUIRED_AFTER_GUARDED_GENERIC_REPAIRS",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Freeze exact task and execute it once through the live atomic guard. On failure preserve only the first new integrated causal gap and never replay. On semantic completion independently verify before any parent promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "real_outcome": "Obtain decisive fresh cross-domain parent-level evidence on the repaired model-independent open-ended research route.",
+    "selected_surviving_route": "RUN_FRESH_SEISMOLOGY_TASK_B_THROUGH_EXISTING_GUARDED_RUNTIME",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "GENOMICS_REPLAY",
+      "NEW_INFRASTRUCTURE",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_OR_FORMULA"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The current canonical blocker is one fresh materially different Task B; the inherited route is already repaired and guarded-qualified, so only a real one-shot cross-domain execution can advance or falsify the parent.",
+    "stop_rule": "ONE_GUARDED_EXECUTION__STOP_ON_FIRST_CAUSAL_GAP_OR_SEMANTIC_COMPLETION"
+  }
+}
