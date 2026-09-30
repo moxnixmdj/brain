@@ -26,7 +26,25 @@ def decomposition(objective):
     }
 
 class FakeDiscovery:
-    def discover(self,objective,limit=12,timeout=15):
+    def __init__(self,refined_available=True):
+        self.refined_available=refined_available
+        self.calls=[]
+    def discover(self,objective,limit=12,timeout=15,query_override=None):
+        self.calls.append(query_override)
+        if query_override is not None:
+            return {
+                "status":"CANDIDATES_DISCOVERED" if self.refined_available else "DISCOVERY_UNAVAILABLE",
+                "objective":objective,
+                "query":query_override,
+                "query_origin":"METADATA_REFINED_OVERRIDE",
+                "candidates":([{
+                    "rank":0,"url":"https://refined.example/live","host":"refined.example",
+                    "title":"Strong domain measurement live technical record",
+                    "snippet":"measured material response operating threshold",
+                    "source_class":"OPEN_WEB_SEARCH_CANDIDATE",
+                    "discovery_backend":"TEST_REFINED",
+                }] if self.refined_available else []),
+            }
         return {
             "status":"CANDIDATES_DISCOVERED",
             "objective":objective,
@@ -62,9 +80,9 @@ class FakeVerifier:
             "status":"RETRIEVAL_PROVENANCE_VERIFIED",
             "candidate_url":candidate["url"],
             "final_url":candidate["url"],
-            "final_host":"weak.example",
+            "final_host":candidate["url"].split("/")[2],
         }
-    def materialize_retrieval(self,candidate,bibliographic_verification,timeout=15,fetch=None):
+    def materialize(self,candidate,bibliographic_verification,timeout=15,fetch=None):
         self.materialize_calls.append(candidate["url"])
         if bibliographic_verification.get("status")!="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
             raise AssertionError("BIBLIOGRAPHIC_RECEIPT_REQUIRED")
@@ -89,13 +107,14 @@ class FakeRelevance:
         self.seen=None
     def rank(self,objective,candidates):
         self.seen=[dict(x) for x in candidates]
+        chosen=min(self.selected_index,max(0,len(candidates)-1))
         rows=[]
         for i,c in enumerate(candidates):
             rows.append({
                 "original_index":i,
                 "candidate":dict(c),
-                "lexical_relevance_score":10.0 if i==self.selected_index else 0.1,
-                "matched_terms":["measurement"] if i==self.selected_index else ["2026"],
+                "lexical_relevance_score":10.0 if i==chosen else 0.1,
+                "matched_terms":["measurement","strong"] if i==chosen else ["2026"],
             })
         rows.sort(key=lambda x:-x["lexical_relevance_score"])
         return {
@@ -103,7 +122,8 @@ class FakeRelevance:
             "verification_method":"DETERMINISTIC_BM25",
             "output_verified":True,
             "objective":objective,
-            "top_candidate_original_index":self.selected_index,
+            "query_focus":{"query":"strong domain measurement technical subject"},
+            "top_candidate_original_index":chosen,
             "top_candidate_admission":{
                 "method":"FOCUSED_QUERY_TOKEN_COVERAGE_V1",
                 "verified":True,
@@ -149,8 +169,8 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
             "scholarly_provenance_under_test",
         )
 
-    def install(self,selected_index=1,materialize_ok=True):
-        discovery=FakeDiscovery()
+    def install(self,selected_index=1,materialize_ok=True,refined_available=True):
+        discovery=FakeDiscovery(refined_available=refined_available)
         verifier=FakeVerifier(materialize_ok)
         relevance=FakeRelevance(selected_index)
         extractor=FakeExtractor()
@@ -165,11 +185,11 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
             "source_authority_binding_ror":authority,
         }
         self.front._load_sibling=lambda name:mapping[name]
-        return verifier,relevance,extractor
+        return discovery,verifier,relevance,extractor
 
     def test_bibliographic_candidate_competes_and_selected_only_materializes(self):
         objective="Assess whether a measured material response exceeds a stated operating threshold."
-        verifier,relevance,extractor=self.install(selected_index=1,materialize_ok=True)
+        discovery,verifier,relevance,extractor=self.install(selected_index=1,materialize_ok=True)
         out=self.front.run(objective,decomposition(objective))
         self.assertEqual(out["status"],"SOURCE_FRONTEND_READY")
         self.assertEqual(out["provenance_verified_candidate_count"],2)
@@ -184,18 +204,40 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
         self.assertEqual(provenance["status"],"RETRIEVAL_PROVENANCE_VERIFIED")
         self.assertEqual(provenance["final_url"],"https://publisher.example/strong")
 
-    def test_selected_bibliographic_materialization_failure_is_fail_closed(self):
+    def test_failed_materialization_uses_one_metadata_refined_live_retry(self):
         objective="Determine whether a measured coastal quantity exceeds a threshold."
-        verifier,relevance,extractor=self.install(selected_index=1,materialize_ok=False)
+        discovery,verifier,relevance,extractor=self.install(
+            selected_index=1,materialize_ok=False,refined_available=True
+        )
         out=self.front.run(objective,decomposition(objective))
-        self.assertEqual(out["status"],"SELECTED_SOURCE_MATERIALIZATION_BLOCKED")
-        self.assertEqual(out["next_required_capability"],"MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1")
+        self.assertEqual(out["status"],"SOURCE_FRONTEND_READY",out)
         self.assertEqual(verifier.materialize_calls,["https://doi.org/10.1234/strong"])
+        self.assertEqual(len(discovery.calls),2,discovery.calls)
+        self.assertIsNone(discovery.calls[0])
+        self.assertIn("Strong domain measurement study",discovery.calls[1])
+        self.assertEqual(out["selected_source_origin"],"BIBLIOGRAPHIC_METADATA_REFINED_LIVE_RETRIEVAL",out)
+        self.assertEqual(len(extractor.calls),1,out)
+        self.assertEqual(extractor.calls[0][0]["url"],"https://refined.example/live")
+
+    def test_failed_materialization_and_failed_refinement_is_fail_closed(self):
+        objective="Determine whether a measured coastal quantity exceeds a threshold."
+        discovery,verifier,relevance,extractor=self.install(
+            selected_index=1,materialize_ok=False,refined_available=False
+        )
+        out=self.front.run(objective,decomposition(objective))
+        self.assertEqual(out["status"],"SELECTED_SOURCE_MATERIALIZATION_BLOCKED",out)
+        self.assertEqual(
+            out["next_required_capability"],
+            "MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL_V1",
+            out,
+        )
+        self.assertEqual(verifier.materialize_calls,["https://doi.org/10.1234/strong"])
+        self.assertEqual(len(discovery.calls),2,discovery.calls)
         self.assertEqual(extractor.calls,[])
 
     def test_selected_live_candidate_does_not_materialize_again(self):
         objective="Compare two engineering measurements using documented evidence."
-        verifier,relevance,extractor=self.install(selected_index=0,materialize_ok=True)
+        discovery,verifier,relevance,extractor=self.install(selected_index=0,materialize_ok=True)
         out=self.front.run(objective,decomposition(objective))
         self.assertEqual(out["status"],"SOURCE_FRONTEND_READY")
         self.assertEqual(verifier.materialize_calls,[])
@@ -212,7 +254,7 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
                 200,
                 "https://publisher.example/article",
             )
-        out=self.prov.materialize_retrieval(
+        out=self.prov.materialize(
             {"url":"https://doi.org/10.1234/example","doi":"10.1234/example"},
             {
                 "status":"BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
