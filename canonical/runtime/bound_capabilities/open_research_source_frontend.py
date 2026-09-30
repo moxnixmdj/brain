@@ -45,6 +45,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     verifier=_load_sibling("source_candidate_provenance_verify")
     authority_identity=_load_sibling("source_authority_binding_ror")
     evidence_extractor=_load_sibling("relevant_source_evidence_extract")
+    generic_extractor=_load_sibling("generic_relevant_source_evidence_extract")
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
         return {
@@ -87,6 +88,14 @@ def run(objective,decomposition,limit=12,timeout=15):
             "model_dependency_count":0,
             "incremental_spend_usd":0,
         }
+
+    generic_extraction=generic_extractor.extract(
+        objective,verified,timeout=timeout,max_passages=10
+    )
+    generic_evidence_ready=bool(
+        generic_extraction.get("status")=="GENERIC_OBJECTIVE_ANCHORED_EVIDENCE_EXTRACTED"
+        and int(generic_extraction.get("evidence_record_count") or 0)>0
+    )
 
     authority_verifications=[]
     for item in verified:
@@ -154,6 +163,10 @@ def run(objective,decomposition,limit=12,timeout=15):
         "discovery":discovered,
         "provenance_verifications":verifications,
         "provenance_verified_candidate_count":len(verified),
+        "generic_evidence_extraction":generic_extraction,
+        "generic_evidence_extracted":generic_evidence_ready,
+        "generic_evidence_record_count":int(generic_extraction.get("evidence_record_count") or 0),
+        "generic_extraction_claim_scope":generic_extraction.get("claim_scope"),
         "authority_identity_verifications":authority_verifications,
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"HOST_TO_ROR_ORGANIZATION_DOMAIN_BINDING_ONLY",
@@ -173,6 +186,8 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE"
             ),
             "EVIDENCE_ACQUISITION":(
+                "GENERIC_PROVENANCE_VERIFIED_BM25_SELECTED_EVIDENCE_AVAILABLE"
+                if generic_evidence_ready else
                 "PROVENANCE_BEARING_OBJECTIVE_ANCHORED_EVIDENCE_AVAILABLE"
                 if evidence_ready else
                 "RELEVANT_SOURCE_AVAILABLE__EVIDENCE_EXTRACTION_REQUIRED"
@@ -182,6 +197,8 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "BLOCKED_ON_AUTHORITY_IDENTITY_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
             ),
             "EVIDENCE_EXTRACTION":(
+                "GENERIC_OBJECTIVE_ANCHORED_EVIDENCE_AVAILABLE__ROR_OPTIONAL"
+                if generic_evidence_ready else
                 "OBJECTIVE_ANCHORED_TYPED_CLAIM_CANDIDATES_AVAILABLE__FACTUAL_CORRECTNESS_UNVERIFIED"
                 if evidence_ready else
                 "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
@@ -190,6 +207,8 @@ def run(objective,decomposition,limit=12,timeout=15):
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
         "next_required_capability":(
+            "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+            if generic_evidence_ready else
             "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
             if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
