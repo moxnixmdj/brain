@@ -15,12 +15,16 @@
     "Supreme exposes a six-file portable engineering configuration with zero runtime dependencies.",
     "On a published full 89-task Terminal-Bench 2.1 comparison using the same locked Gemini 3.6 Flash High substrate, Supreme reported 68.5% raw completion versus Superpowers 65.2% and lower aggregate wall-clock.",
     "That study does not establish Terminal-Bench 4.0 or Opus-5.5 parity and therefore grants no ownership credit.",
-    "Supreme repository license metadata conflicts; the root LICENSE file is Apache-2.0, while README/SKILL metadata say MIT. Brain preserves the root Apache-2.0 license text and records the conflict."
+    "Supreme repository license metadata conflicts; the root LICENSE file is Apache-2.0, while README/SKILL metadata say MIT. Brain preserves the root Apache-2.0 license text and records the conflict.",
+    "Brain subsequently merged a sequential Superpowers verification protocol; that evaluation machinery is reusable and should not be reinvented.",
+    "Brain subsequently recorded one contamination-controlled Superpowers direct semantic task pass on GPT-5.6 Sol; the evidence explicitly grants zero Opus credit and leaves whole-family parity unproven."
   ],
   "evidence_refs": [
     "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json",
     "https://github.com/Utkarsh-X/Supreme",
-    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/EVALUATION_PROTOCOL_V1.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json"
   ],
   "conclusion": "Internalize Supreme as the leading Brain-owned advanced-coding configuration candidate and keep Superpowers as a fallback/comparison. Award zero Opus capability credit until direct Brain-configured verification passes.",
   "selected_route": "SUPREME_LED_BRAIN_OWNED_CODING_CONFIGURATION_THEN_VERIFY",
@@ -50,7 +54,7 @@
     "No benchmark score extrapolation across Terminal-Bench versions.",
     "No full benchmark run in this internalization step."
   ],
-  "next_action": "Run the minimum sufficient controlled verification of the Supreme-led Brain route on an approved general cognition substrate, with Superpowers retained as fallback/comparison.",
+  "next_action": "Reuse the canonical sequential matched A/B evaluation protocol with Supreme as the leading Brain-owned configured arm and Superpowers as comparison/fallback on an approved zero-incremental general cognition substrate.",
   "supersession_conditions": [
     "A stronger exposed reusable coding configuration appears before verification.",
     "Direct evaluation falsifies Supreme as the leading Brain-owned candidate."
