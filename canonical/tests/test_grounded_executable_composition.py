@@ -86,8 +86,19 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
           "grounded_clause_count":2,
           "unresolved_clause_indexes":[],
           "candidate_capability_ids":["produce.alpha","verify.alpha"],
+          "input_contract_bindability_enforced":True,
           "model_dependency_count":0,
         }
+
+    def test_semantic_only_grounding_is_not_composition_ready(self):
+        goal="Create alpha then verify alpha"
+        g=self.grounding()
+        g["input_contract_bindability_enforced"]=False
+        with self.assertRaisesRegex(
+            composition.CompositionError,
+            "GROUNDING_INPUT_CONTRACT_BINDABILITY_NOT_ENFORCED",
+        ):
+            composition.compose(goal,g,self.registry(),FakeCompiler,ROOT)
 
     def test_dependency_chain_plans_and_keeps_original_effects(self):
         goal="Create alpha then verify alpha"
