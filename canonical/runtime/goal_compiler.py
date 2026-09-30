@@ -8,9 +8,11 @@ observable instead of being guessed.
 """
 from __future__ import annotations
 
+import ast
 import hashlib
 import importlib.util
 import json
+import math
 import pathlib
 import re
 import sys
