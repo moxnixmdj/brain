@@ -1,0 +1,225 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-CHEMISTRY-AMMONIA-STOICHIOMETRY-CROSSCHECK-REAL-TASK-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND INCREMENTAL COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either supply the second clean model-independent cross-domain parent real task required by the minimum acquisition contract, or localize the first new causal gap. On PASS, adjudicate frontier dependency removal immediately.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 5262fd6e0d132ff8a2ac30f43f5b79ff3efd4142",
+    "France demography clean model-independent parent task is verified and credited once",
+    "historical space-cargo Task A is excluded from hard dependency-removal proof because its original route included ChatGPT web research",
+    "five model-independent child capabilities are acquired",
+    "chemistry domain is materially different from demography and spent astronomy/geophysics/biophysics tasks",
+    "task contract frozen before exact nitrogen/hydrogen/ammonia PubChem source preflight"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN__ONE_OF_TWO_CLEAN_PARENT_TASKS_VERIFIED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Preflight exact PubChem source reachability/schema without recording values, then execute PARENT-CHEMISTRY-AMMONIA-STOICHIOMETRY-CROSSCHECK-REAL-TASK-20260930-001 exactly once on exact current Brain runtime bytes. On semantic success independently refetch/recompute. On failure preserve only the first causal blocker and do not replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "5262fd6e0d132ff8a2ac30f43f5b79ff3efd4142",
+    "real_outcome": "Complete the remaining clean cross-domain parent proof obligation with a fresh chemistry task using only the inherited model-independent route.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain one second clean model-independent parent real-task result in a materially different scientific domain.",
+      "proxy_goals_deleted": [
+        "more child benchmarks",
+        "demography replay",
+        "astronomy replay",
+        "geophysics replay",
+        "biophysics replay",
+        "model supplier search",
+        "new framework",
+        "task-specific chemistry code"
+      ],
+      "surviving_necessity": "One second clean cross-domain parent task remains the sole canonical blocker."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "authoritative JSON knowledge fetch",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "independent verification"
+      ],
+      "external_existing_routes_checked": [
+        "NIH PubChem PUG REST machine-readable JSON",
+        "one-off Python chemistry script rejected as parent proof",
+        "frontier-model cognition rejected for dependency-removal credit"
+      ],
+      "capability_work_deleted": [
+        "no new supplier",
+        "no model route",
+        "no hand-coded producer answer",
+        "no task-specific runtime patch"
+      ],
+      "surviving_gap": "Unknown until the frozen task executes; no repair is authorized by static inspection."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Remaining parent evidence obligation, not a known child capability defect.",
+      "delete_bypass_substitute_options": [
+        "reuse complete inherited stack",
+        "reuse PubChem JSON",
+        "reject one-off script",
+        "stop on first causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
+        "HAND_CODE_ONE_OFF_CHEMISTRY_SCRIPT",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Only inherited-stack execution can satisfy the remaining parent transfer proof. One-off scripts and model cognition cannot earn the targeted dependency-removal credit.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independent verifier re-fetches all three PubChem molecular weights and recomputes the stoichiometric prediction and predicate without importing producer modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all further child work unless this task exposes a specific new gap",
+        "all spent parent task replays"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live authoritative JSON acquisition",
+        "semantic multi-source binding",
+        "typed scalar expression",
+        "bounded numeric relation",
+        "composition",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "On PASS adjudicate the parent minimum acquisition contract immediately; on FAIL localize only the first new gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical capability inventory",
+        "reused established zero-spend carrier",
+        "selected fresh chemistry task with public structured source"
+      ],
+      "search_stop_decision": "Direct frozen parent execution has higher information gain than any further framework or supplier search.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No implementation challenger can beat direct inherited-stack execution for the remaining proof obligation."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
+      "HAND_CODE_ONE_OFF_CHEMISTRY_SCRIPT",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKS",
+      "OLD_TASK_REPLAY",
+      "ONE_OFF_SCRIPT_AS_PARENT_PROOF",
+      "MODEL_COGNITION",
+      "PREEMPTIVE_REPAIR"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It attacks the sole remaining parent proof obligation using only already-acquired capabilities and a zero-key authoritative JSON source.",
+    "expected_parent_level_state_change": "Either supply the second clean model-independent cross-domain parent real task required by the minimum acquisition contract, or localize the first new causal gap. On PASS, adjudicate frontier dependency removal immediately.",
+    "stop_condition": "Preflight exact PubChem source reachability/schema without recording values; then execute once or stop on the first causal gap.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:25:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 5262fd6e0d132ff8a2ac30f43f5b79ff3efd4142",
+          "five verified model-independent child capabilities"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "NIH PubChem PUG REST JSON property service"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "no new package required"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "no alternate framework needed before direct execution"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent chemistry stoichiometry authoritative molecular-weight retrieval arithmetic verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "PubChem PUG REST molecular weight JSON"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "current Brain inherited stack versus one-off chemistry script"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
+          "resolution": "SELECTED"
+        },
+        {
+          "route": "HAND_CODE_ONE_OFF_CHEMISTRY_SCRIPT",
+          "resolution": "NON_DOMINATING"
+        }
+      ],
+      "negative_search_summary": "No challenger dominates direct inherited-stack execution for time-to-parent-proof.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": null,
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_CHEMISTRY_TASK",
+        "status": "PENDING_SOURCE_PREFLIGHT",
+        "all_required_dependencies_ready": false,
+        "failed_dependencies": [
+          "PUBCHEM_EXACT_TASK_SOURCE_SCHEMA_NOT_YET_PREFLIGHTED"
+        ],
+        "execution_dependencies_complete": false
+      }
+    }
+  }
+}
