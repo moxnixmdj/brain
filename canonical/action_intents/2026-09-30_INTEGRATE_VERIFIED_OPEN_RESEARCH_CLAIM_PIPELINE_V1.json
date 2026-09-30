@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTEGRATE-VERIFIED-OPEN-RESEARCH-CLAIM-PIPELINE-20260930-V1",
+  "status": "PROPOSED_PENDING_NON_PARENT_GUARDED_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "84b7779f66e1f37970cb8df1cbac0b8d09037a34",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_OPEN_ENDED_RESEARCH_CLAIM_PIPELINE_INTEGRATION_V1",
+  "action_kind": "PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_OPEN_ENDED_RESEARCH_CLAIM_PIPELINE_INTEGRATION_V1::PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Replace the stale post-extraction hard stop with composition of already-verified objective claim-spec/operand binding plus relation evaluation and an independent deterministic relation verifier. Do not spend the frozen HTTP/2 parent task during qualification.",
+  "evidence_presence_classification": "VERIFIED_CHILDREN_PRESENT__PARENT_RUNTIME_WIRING_STALE",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "progress_credit": "ZERO_NEW_REUSABLE_CAPABILITY_CREDIT_UNTIL_GENERIC_INTEGRATION_QUALIFIES",
+  "stop_condition": "Exact integration bytes pass guarded non-parent parent-effective fixtures across materially different bounded research objectives and fail closed on unsupported/ambiguous binding. Then recompute the frozen HTTP/2 parent prestart frontier before any parent spend.",
+  "recursive_obs": {
+    "canonical_base_commit": "84b7779f66e1f37970cb8df1cbac0b8d09037a34",
+    "real_outcome": "Allow the canonical open-ended research path to actually consume the verified claim-spec and relation capabilities instead of raising its historical blocker after evidence extraction.",
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "new claim parser",
+        "new relation engine",
+        "parent execution before wiring",
+        "task-specific HTTP/2 patch",
+        "model planner"
+      ],
+      "surviving_necessity": "Generic parent-effective wiring from SOURCE_FRONTEND_READY evidence into verified bounded claim binding and independently recomputed relation output."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "open_research_source_frontend",
+        "evidence.claim_spec.bind.explicit_comparison.stdlib",
+        "evidence.claim_relation.generic_units.stdlib"
+      ],
+      "capability_work_deleted": [
+        "no new semantic model",
+        "no new web stack",
+        "no new numeric engine",
+        "no task literals"
+      ],
+      "surviving_gap": "astra_runtime still throws CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED before invoking verified downstream capabilities."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic stale integration seam proven by direct code inspection on current parent runtime.",
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_OPEN_ENDED_RESEARCH_CLAIM_PIPELINE_INTEGRATION_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "selected_surviving_route": "COMPOSE_SOURCE_FRONTEND_TO_VERIFIED_BINDER_AND_INDEPENDENT_RELATION_RECOMPUTATION",
+      "why_selected": "All semantic/numeric primitives already exist and are guarded-qualified. The minimum repair is wiring plus independent recomputation, not a new capability family."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "synthetic_verification_necessity": "Guarded non-parent fixtures must prove source-frontend-shaped V2 evidence flows through the exact binder into independently recomputed bounded results, while unsupported/ambiguous objectives remain blocked."
+    },
+    "obs_inherited_system": {
+      "fresh_reuse_plan": "Only after guarded integration PASS may the already-frozen unspent HTTP/2 Task A proceed exactly once."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused guarded claim-spec qualification run 36686583882",
+        "reused generic V2 relation evaluator",
+        "reused source frontend"
+      ],
+      "search_stop_decision": "No external supplier search: this is an internal wiring defect with all required child capabilities already verified."
+    }
+  }
+}
