@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_FIRST_CAUSAL_GAP_RECONCILIATION_V1",
+  "evidence_id": "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_TERMINAL_RECONCILIATION_V1",
+  "status": "TERMINAL_FAIL_RECONCILED__NO_REPLAY__GENERIC_SUBCAPABILITY_LOCALIZED",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "source_pr": 286,
+  "duplicate_pr_closed": 287,
+  "deterministic_lease_owner_pr": 286,
+  "task": "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
+  "domain": "GEOPHYSICS_SEISMOLOGY_QUANTITATIVE_REASONING",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/parent-geophysics-energy-20260930-v2",
+    "run_id": 36661188188,
+    "job_id": 109716113402,
+    "head_sha": "6101738645bc1d3a78a9d9be5f83848d1f1efc4e",
+    "workflow": "Parent Geophysics Energy Real Task V2",
+    "workflow_conclusion": "success",
+    "semantic_status": "FAIL",
+    "execution_count": 1,
+    "artifact_id": 11074272541,
+    "artifact_digest": "sha256:106d28719e5c6bc0bc676b3d54a811874202b1e30985c4c0c59f0aa3560ded5b",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0
+  },
+  "exact_bytes": {
+    "runtime_git_blob": "85642a89a0d99c5e6cafa2e116ffdc24f04de32c",
+    "registry_git_blob": "b0fb5ccaf73552230dba24f914821d437b1a043d",
+    "goal_compiler_git_blob": "902008041849ee7e8686dacc2580a3b9b3393933",
+    "capability_planner_git_blob": "64ff65cb184f50d3336326f33cccfcc0a53301a8",
+    "proposal_generators_git_blob": "71f2bbfda66a65d8d75e035b9ae073671ebd56e2",
+    "grounding_git_blob": "6385b469f1287c971217dcac58af2ffebd81f9fd",
+    "composition_git_blob": "8328e12804f64cab1c0d9509966cb1d2d8fb1f82",
+    "composition_verifier_git_blob": "ab9f6fc19937d23edb24dc26a2affed96cea0a9a",
+    "task_git_blob": "6354394ce589cb399b61141dfc7b49ae25236a3b"
+  },
+  "successful_parent_behavior_before_failure": {
+    "grounded_clause_count": 6,
+    "grounded_capabilities": [
+      "knowledge.json.fetch.external",
+      "knowledge.consistency.assess",
+      "decision.synthesis.typed.stdlib"
+    ],
+    "model_planner_used": false,
+    "external_capability_acquisition_attempted": false
+  },
+  "first_causal_failure": {
+    "phase": "BOUND_CAPABILITY_GROUNDING_TO_EXECUTABLE_COMPOSITION",
+    "error": "GROUNDED_EXECUTABLE_COMPOSITION_FAILED:CompositionError:UNRESOLVED_GROUNDED_CLAUSES:4,6,7",
+    "unresolved_clauses": [
+      {
+        "index": 4,
+        "text": "Determine whether the two magnitudes differ by at most 0.2"
+      },
+      {
+        "index": 6,
+        "text": "Calculate the seismic energy in joules using E_J = 10 ** (1.5 * M + 4.8)"
+      },
+      {
+        "index": 7,
+        "text": "Decide ABOVE_OR_EQUAL_1E14_J if E_J is at least 100000000000000 joules, otherwise BELOW_1E14_J"
+      }
+    ],
+    "grounding_evidence": "canonical/astra_runtime/evidence/PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002__BOUND_CAPABILITY_GROUNDING.json",
+    "oracle_status": "NOT_RUN_DUE_TO_BRAIN_SEMANTIC_FAILURE"
+  },
+  "localized_missing_subcapability": {
+    "capability_id": "MODEL_INDEPENDENT_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION_V1",
+    "useful_behavior": "Given typed scalar values produced by prior verified actions, deterministically evaluate bounded numeric expressions and comparisons, derive conditional threshold labels, preserve variable/input provenance, and emit typed results without model cognition or arbitrary code execution.",
+    "examples_of_required_generic_operations": [
+      "absolute numeric difference and <= comparison",
+      "bounded arithmetic/exponentiation expression evaluation",
+      "numeric >= threshold predicate with deterministic label"
+    ],
+    "scope_boundary": "Generic scalar numeric expression and predicate execution only. Not geophysics-specific, not arbitrary scientific reasoning, not arbitrary Python execution, and not a task-specific formula patch.",
+    "why_first_causal_gap": "The producer reached source acquisition and surrounding composition, but the bound registry/grounder had no admissible capability candidate for the three generic quantitative clauses."
+  },
+  "existing_route_evidence_to_race_next": [
+    "EXACT_SYMBOLIC_COMPUTATION_V1 is already verified with SymPy 1.14.0 and Wolfram independent adjudication but is not currently exposed as a generic bound scalar-expression capability.",
+    "Python stdlib math/operator/ast can potentially provide a smaller safe scalar primitive if it satisfies the required verified envelope."
+  ],
+  "prohibited_followups": [
+    "NO_SAME_GEOPHYSICS_TASK_REPLAY",
+    "NO_GEOPHYSICS_LITERAL_PATCH",
+    "NO_HAND_CODED_ONE_OFF_SCIENTIFIC_SCRIPT_AS_PARENT_PROOF",
+    "NO_MODEL_PLANNER_FALLBACK",
+    "NO_NEW_AGENT_FRAMEWORK_BEFORE_OBS_ROUTE_RACE",
+    "NO_PARENT_CAPABILITY_PROMOTION_FROM_THIS_FAILURE"
+  ],
+  "scoreboard_credit": {
+    "reusable_capability": false,
+    "verified_real_task": false,
+    "fresh_reuse": false,
+    "frontier_dependency_removed": false,
+    "residual_gap_localized": true
+  },
+  "next_action": "RUN_FRESH_RECURSIVE_OBS_ON_MODEL_INDEPENDENT_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION_V1__RACE_BIND_EXISTING_EXACT_SYMBOLIC_ROUTE_VS_SMALLER_STDLIB_PRIMITIVE__NO_PARENT_TASK_REPLAY"
+}
