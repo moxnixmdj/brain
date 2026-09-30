@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_V1",
+  "status": "EXISTING_RUN_GOAL_BYPASS_FALSIFIED_BY_FRESH_NON_PARENT_DIAGNOSTICS__MISSION_ORIGIN_VALIDATED__FROZEN_PARENT_TASKS_HELD_UNSPENT",
+  "canonical_base_commit": "3ce64b1abb2e6542659617563af48e44eb33f996",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "mission_origin_qualification": {
+    "status": "PASS_INDEPENDENT_NON_PARENT_CANARY",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 79,
+    "public_run_id": 36672816106,
+    "job_id": 109751299770,
+    "artifact_id": 11078921733,
+    "artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "terminal_status": "PASS_CANONICAL_MISSION_ORIGIN_PROPAGATION",
+    "validation_scope": "MISSION_ORIGIN_ENTRYPOINT_ONLY",
+    "parent_credit": false
+  },
+  "generic_grounding_diagnostic": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 74,
+    "public_run_id": 36671302163,
+    "job_id": 109746664934,
+    "carrier_head_sha": "6274abc3a758b2295da169199c95eb9bab1cfd13",
+    "model_planner_disabled": true,
+    "parent_task": false,
+    "fresh_broad_case_count": 4,
+    "results": [
+      {
+        "case": 0,
+        "status": "UNRESOLVED",
+        "grounded_clause_count": 0,
+        "unresolved_clause_count": 2,
+        "summary": "comparative structured-record average with independent verification"
+      },
+      {
+        "case": 1,
+        "status": "UNRESOLVED",
+        "grounded_clause_count": 0,
+        "unresolved_clause_count": 2,
+        "summary": "authoritative release-source discovery and version comparison"
+      },
+      {
+        "case": 2,
+        "status": "UNRESOLVED",
+        "grounded_clause_count": 0,
+        "unresolved_clause_count": 2,
+        "summary": "median comparison across structured datasets with verification"
+      },
+      {
+        "case": 3,
+        "status": "UNSAFE_FALSE_POSITIVE",
+        "grounded_clause_count": 1,
+        "unresolved_clause_count": 1,
+        "selected_candidate": "docx.document.verify.ooxml",
+        "summary": "measurement-change quantitative research objective incorrectly grounded to DOCX verification"
+      }
+    ],
+    "conclusion": "EXISTING_PLAIN_GOAL_GROUNDING_IS_NOT_A_SAFE_OR_SUFFICIENT_BYPASS_FOR_BROAD_EPISTEMIC_RESEARCH_OBJECTIVES"
+  },
+  "runtime_control_flow_finding": {
+    "function": "_classify_plain_goal_gap",
+    "prior_behavior": "Any unresolved ordinary clause outside control/verification/composition was classified CAPABILITY_CANDIDATE.",
+    "consequence": "Broad epistemic research objectives could fall into package/tool acquisition even though the missing object is a semantic research plan, source authority choice, and data/method grounding.",
+    "repair_in_this_branch": "Classify unresolved epistemic research objectives as EPISTEMIC_RESEARCH_DECOMPOSITION and fail closed before package acquisition.",
+    "scope": "GENERIC_ROUTING_GUARD_ONLY__DOES_NOT_CLAIM_DECOMPOSITION_CAPABILITY"
+  },
+  "authoritative_blocker": "MODEL_INDEPENDENT_OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_AND_AUTHORITY_DATA_GROUNDING_MISSING",
+  "frozen_parent_tasks": [
+    {
+      "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+      "status": "FROZEN_UNSPENT__HOLD_FOR_GENERIC_REPAIR"
+    },
+    {
+      "task_id": "PARENT-THERMOPHYSICS-WATER-VISCOSITY-OPEN-RESEARCH-TASK-A-20260930-002",
+      "status": "FROZEN_UNSPENT__HOLD_FOR_GENERIC_REPAIR"
+    }
+  ],
+  "parent_execution_authorized": false,
+  "parent_promotion_authorized": false,
+  "counter_delta": 0,
+  "next_action": "VERIFY_EPISTEMIC_GOAL_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_DECOMPOSITION_IR__KEEP_ALL_FROZEN_PARENT_TASKS_UNSPENT_UNTIL_REPAIR",
+  "prohibitions": [
+    "NO_FROZEN_PARENT_TASK_EXECUTION_BEFORE_GENERIC_DECOMPOSITION_REPAIR",
+    "NO_BROAD_EPISTEMIC_OBJECTIVE_TO_PACKAGE_ACQUISITION_SHORTCUT",
+    "NO_TASK_SPECIFIC_SQLITE_OR_THERMOPHYSICS_RECIPE",
+    "NO_MODEL_COGNITION",
+    "NO_MAUNA_REPLAY"
+  ]
+}
