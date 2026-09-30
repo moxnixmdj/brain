@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
+  "status": "VERIFIED_ACQUIRED__INHERITED",
+  "real_capability": true,
+  "real_useful_behavior": "Deterministically rank a small set of source candidates by lexical relevance to a research objective using a stdlib BM25 producer, failing closed when there is no lexical objective evidence.",
+  "winning_route": "source.objective_relevance.rank.bm25",
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 143,
+    "workflow_run_id": 36678278264,
+    "durable_receipt_issue": 144,
+    "independent_oracle": "rank-bm25 0.2.2 BM25Okapi",
+    "fresh_domains": [
+      "AEROSPACE",
+      "DATABASE_SYSTEMS",
+      "CLIMATE_SCIENCE"
+    ],
+    "exact_blob_verified": true,
+    "no_overlap_fail_closed": true
+  },
+  "limitations": [
+    "SEMANTIC_ENTAILMENT",
+    "PRIMARY_SOURCE_STATUS",
+    "FACTUAL_CORRECTNESS",
+    "EVIDENCE_SUFFICIENCY"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "inheritance_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json#source.objective_relevance.rank.bm25",
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_BM25_PROMOTION_20260930_V1.json"
+}

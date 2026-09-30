@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_RECEIPT_V1",
+  "capability_id": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_CROSS_DOMAIN_QUALIFICATION_PASS",
+  "useful_behavior": "Deterministically rank a small set of source candidates by lexical relevance to a research objective using a stdlib BM25 producer, failing closed when there is no lexical objective evidence.",
+  "replacement_route": "source.objective_relevance.rank.bm25",
+  "exact_producer_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 143,
+    "workflow_run_id": 36678278264,
+    "durable_receipt_issue": 144,
+    "independent_oracle": "rank-bm25 0.2.2 BM25Okapi",
+    "fresh_domains": [
+      "AEROSPACE",
+      "DATABASE_SYSTEMS",
+      "CLIMATE_SCIENCE"
+    ],
+    "exact_blob_verified": true,
+    "no_overlap_fail_closed": true
+  },
+  "claim_scope": {
+    "verified": "LEXICAL_BM25_OBJECTIVE_RELEVANCE_RANKING",
+    "unverified": [
+      "SEMANTIC_ENTAILMENT",
+      "PRIMARY_SOURCE_STATUS",
+      "FACTUAL_CORRECTNESS",
+      "EVIDENCE_SUFFICIENCY"
+    ]
+  },
+  "parent_capability_promoted": false,
+  "parent_score_credit": 0,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
