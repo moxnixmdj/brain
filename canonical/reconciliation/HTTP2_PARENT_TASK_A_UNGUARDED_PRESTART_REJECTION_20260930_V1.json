@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_HTTP2_PARENT_TASK_A_UNGUARDED_PRESTART_REJECTION_V1",
+  "status": "UNGUARDED_CARRIER_REJECTED__NO_PHYSICAL_TASK_STEP_OBSERVED__TASK_REMAINS_UNSPENT",
+  "checked_on": "2026-09-30",
+  "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+  "source_pr": 456,
+  "workflow_run_id": 36686791971,
+  "workflow_head_sha": "97bbba173d0e6f4bd7d459cebe65881674e11efc",
+  "carrier_compliance": "FAIL__DIRECT_ASTRA_RUNTIME_EXECUTION_PATH_BYPASSED_GLOBAL_GUARD",
+  "observed_execution_surface": {
+    "run_created_at": "2026-09-30T07:58:03Z",
+    "run_updated_at": "2026-09-30T07:58:07Z",
+    "job_id": 109794404573,
+    "job_status": "completed",
+    "job_conclusion": "failure",
+    "workflow_steps_returned": 0,
+    "job_logs_available": false,
+    "artifacts_returned": 0,
+    "protected_child_start_observed": false,
+    "astra_runtime_start_observed": false,
+    "task_output_observed": false
+  },
+  "classification": {
+    "execution_count": 0,
+    "task_freshness": "UNSPENT",
+    "same_task_replay_language": "NOT_A_REPLAY_BECAUSE_NO_PHYSICAL_EXECUTION_OBSERVED",
+    "next_authorized_execution": "ONLY_THROUGH_GLOBAL_EXECUTION_GUARD_ATOMIC_ADMISSION"
+  },
+  "caution": "If later primary evidence proves the protected child actually started, this classification must be revoked and the task marked spent. Current GitHub run/job surfaces show no executed step, log, or artifact."
+}

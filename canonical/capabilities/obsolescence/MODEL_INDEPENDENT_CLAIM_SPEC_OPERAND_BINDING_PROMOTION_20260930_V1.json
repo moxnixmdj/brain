@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_RECEIPT_V1",
   "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
-  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
+  "status": "VERIFIED_ACQUIRED__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
   "useful_behavior": "Given an explicit bounded comparison or exact quoted-support research objective plus integrity-checked generic V2 evidence units, derive an auditable claim/relation specification, bind unique lexical semantic operand roles to distinct evidence units, select a unique exact-unit-compatible numeric pair, and invoke the already-verified generic V2 relation evaluator.",
   "replacement_route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
   "exact_producer_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
@@ -10,14 +10,24 @@
   "canonical_base_commit": "0ef3f48e07ea0f05857c13aa5fed58437d979504",
   "public_verification": {
     "repository": "moxnixmdj/verification-capsule-runner",
-    "pr": 166,
-    "workflow_run_id": 36685279194,
-    "job_id": 109789596373,
-    "artifact_id": 11083292341,
-    "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+    "pr": 167,
+    "workflow_run_id": 36686583882,
+    "job_id": 109793738883,
+    "artifact_id": 11083254225,
+    "artifact_digest": "sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d",
+    "runner_head_sha": "4c61fe4f48b401041ae7220febce945805ed32af",
     "exact_producer_test_and_inherited_relation_blobs_verified": true,
-    "authored_fail_closed_regressions": "PASS",
+    "authored_fail_closed_regressions": "17_OF_17_PASS",
     "independent_full_surface_cross_domain_oracle": "PASS",
+    "guarded_atomic_admission": {
+      "schema": "BRAIN_GUARDED_LAUNCH_LOCAL_RECEIPT_V1",
+      "status": "CURRENT_RUN_ADMITTED",
+      "attempt_id": "7d9e1ed58e61497a9a1ab4ab8ee779ce",
+      "run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882",
+      "child_started": true,
+      "child_returncode": 0,
+      "plan_schema": "BRAIN_GUARDED_LAUNCH_PLAN_V1"
+    },
     "verified_positive_surface": [
       "GT",
       "LT",
@@ -83,5 +93,13 @@
   "parent_task_replay": false,
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
-  "next_action": "RECOMPUTE_PARENT_FRONTIER_ON_EXACT_POST_PROMOTION_MAIN__NO_PARENT_REPLAY_UNLESS_CANONICAL_FRONTIER_REQUIRES_FRESH_TASK"
+  "next_action": "RECOMPUTE_PARENT_FRONTIER_ON_EXACT_POST_PROMOTION_MAIN__NO_PARENT_REPLAY_UNLESS_CANONICAL_FRONTIER_REQUIRES_FRESH_TASK",
+  "prior_inadmissible_verification": {
+    "workflow_run_id": 36685279194,
+    "job_id": 109789596373,
+    "artifact_id": 11083292341,
+    "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+    "authority": "DIAGNOSTIC_ONLY__SUPERSEDED_FOR_PROMOTION_BY_GUARDED_RUN_36686583882",
+    "reason": "Executed after global guard cutover without mandatory guarded wrapper or atomic admission receipt."
+  }
 }

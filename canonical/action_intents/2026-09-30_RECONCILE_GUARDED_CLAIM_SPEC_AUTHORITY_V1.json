@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-GUARDED-CLAIM-SPEC-AUTHORITY-20260930-V1",
+  "status": "COMPLETE_PENDING_MERGE",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "84b7779f66e1f37970cb8df1cbac0b8d09037a34",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "CLAIM_SPEC_OPERAND_BINDING_PROMOTION_EVIDENCE_INADMISSIBLE_UNGUARDED_AFTER_EXECUTION_GUARD_CUTOVER",
+  "action_kind": "TRUTH_FIRST_EVIDENCE_AUTHORITY_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CLAIM_SPEC_OPERAND_BINDING_PROMOTION_EVIDENCE_INADMISSIBLE_UNGUARDED_AFTER_EXECUTION_GUARD_CUTOVER::TRUTH_FIRST_EVIDENCE_AUTHORITY_RECONCILIATION",
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "expected_parent_frontier_change": "NONE__PRESERVE_EXISTING_CHILD_CREDIT__REPLACE_INVALID_AUTHORITY_WITH_GUARDED_PROOF__PRESERVE_FRESH_HTTP2_TASK",
+  "progress_credit_delta": 0,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "stop_condition": "All current canonical mirrors bind the child capability to guarded run 36686583882 and HTTP2 Task A remains unspent pending exactly one guarded execution.",
+  "evidence": [
+    "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_GUARDED_REQUALIFICATION_20260930_V1.json",
+    "canonical/reconciliation/HTTP2_PARENT_TASK_A_UNGUARDED_PRESTART_REJECTION_20260930_V1.json"
+  ]
+}
