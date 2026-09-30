@@ -13,11 +13,12 @@
   "expected_parent_frontier_change": "Either produce one admissible genuinely open-ended, materially different, model-independent parent real-task A result with independent verification, or replace the broad parent-scope blocker with the first specific causal gap in autonomous decomposition, source/tool discovery, quantitative execution, synthesis, or verification. No repair or parent promotion is authorized by this intent alone.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
-    "PR318/current main corrected the parent evidence scope: structured demography remains supporting evidence only and no admissible model-independent open-ended parent Task A exists yet",
-    "current ACTIVE_GOAL_HIERARCHY_V1 requires one genuinely open-ended model-independent parent real Task A with no prewired research plan and stop-on-first-causal-gap",
-    "the frozen climate objective from the stale predecessor is preserved without authority name/domain, source URL, dataset identifier, quantitative formula, or controller action graph",
-    "current inherited model-independent stack and zero-cost public carrier remain the execution route; model planning/local model/model artifacts remain forbidden"
+    "current main 797d5fbea5f230a31044006755beb98ae387134b",
+    "PR318 corrected parent evidence scope: structured demography is supporting-only and admissible open-ended parent Task A count is zero",
+    "PR329 merged fail-closed cognition provenance + active-target mirror guard; public runtime boundary run_goal now stamps ASTRA_RUNTIME_DERIVED_V1",
+    "public carrier independent PR329 verification run 36670188864 PASS",
+    "current Brain and public carrier execution-critical runtime blobs are byte-identical for astra_runtime.py, goal_compiler.py, registry, grounding, composition, SymPy, and jq",
+    "the frozen climate task manifest is unchanged and supplies no authority name/domain, source URL, dataset identifier, quantitative formula, or controller action graph"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -30,7 +31,7 @@
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+    "canonical_base_commit": "797d5fbea5f230a31044006755beb98ae387134b",
     "real_outcome": "Test the actual parent capability on a genuinely open-ended climate-science objective with no prewired research plan, authority, source, formula, or action graph.",
     "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "obs_goal": {
@@ -94,7 +95,7 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+        "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
         "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
         "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
         "USE_MODEL_PLANNER"
@@ -136,7 +137,7 @@
       "challenger_refresh_decision": "Current Brain base, runner closure, inherited source-discovery route, and external planner/logic framework roles were refreshed before task execution."
     },
     "routes_considered": [
-      "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+      "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
       "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
       "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
       "USE_MODEL_PLANNER"
@@ -148,13 +149,13 @@
       "MODEL_PLANNER",
       "OLD_TASK_REPLAY"
     ],
-    "selected_surviving_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+    "selected_surviving_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
     "why_selected_route_is_fastest_sufficient": "It requires zero new implementation, directly tests the exact missing parent scope, and converts uncertainty into either verified real capability evidence or one precise causal gap.",
     "expected_parent_level_state_change": "Either produce one admissible genuinely open-ended, materially different, model-independent parent real-task A result with independent verification, or replace the broad parent-scope blocker with the first specific causal gap in autonomous decomposition, source/tool discovery, quantitative execution, synthesis, or verification. No repair or parent promotion is authorized by this intent alone.",
     "stop_condition": "Execute the frozen climate Task A exactly once on exact current Brain runtime bytes with model planning disabled. On success, independently verify producer-cited primary data and calculations before any parent adjudication. On failure, preserve only the earliest causal blocker, do not replay the task, and recompute the frontier before any repair.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-30T04:38:35Z",
+      "checked_at_utc": "2026-09-30T04:45:00Z",
       "max_age_hours": 24,
       "incumbent_route": "CURRENT_MODEL_INDEPENDENT_BRAIN_STACK",
       "source_classes_checked": [
@@ -165,10 +166,10 @@
       ],
       "source_evidence": {
         "BRAIN_INHERITED": [
-          "current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
-          "current ACTIVE_GOAL_HIERARCHY_V1 open-ended Task A blocker/next-action",
-          "PR318 scope correction preserving structured demography as supporting-only evidence",
-          "current inherited source/tool discovery and quantitative execution stack"
+          "current main 797d5fbea5f230a31044006755beb98ae387134b",
+          "current ACTIVE_GOAL_HIERARCHY_V1 genuine open-ended Task A blocker/next-action",
+          "PR318 open-ended-scope correction",
+          "PR329 cognition-provenance and five-surface mirror hardening"
         ],
         "OFFICIAL_PRIMARY": [
           "Unified Planning project/PyPI documentation describes a planning framework over formal planning problems",
@@ -209,8 +210,9 @@
             "exact public carrier runtime closure is current"
           ],
           "qualification_evidence": [
-            "current canonical Brain aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
-            "historical held-out source-discovery proofs",
+            "current canonical Brain 797d5fbea5f230a31044006755beb98ae387134b",
+            "public carrier PR329 verification run 36670188864 PASS",
+            "exact seven-blob Brain/carrier runtime closure verified at 2026-09-30T04:45:00Z",
             "structured demography supporting evidence"
           ],
           "qualification_evidence_classes": [
@@ -290,7 +292,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T04:38:35Z",
+        "checked_at_utc": "2026-09-30T04:45:00Z",
         "max_age_hours": 2,
         "selected_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
         "status": "READY",
@@ -304,9 +306,10 @@
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T04:38:35Z",
+            "observed_at_utc": "2026-09-30T04:45:00Z",
             "evidence": [
-              "DIRECT_PROBE: PR301 parent-task carrier execution completed on ubuntu-24.04"
+              "DIRECT_PROBE: independent PR329 firewall verification run 36670188864 PASS on ubuntu-24.04",
+              "DIRECT_PROBE: current Brain/carrier execution-critical seven-blob closure exact"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -314,19 +317,36 @@
             "evidence_scope": "ACCOUNT_SPECIFIC"
           },
           {
-            "dependency": "BRAIN_RUNTIME_MAIN_aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "dependency": "BRAIN_RUNTIME_MAIN_797d5fbea5f230a31044006755beb98ae387134b",
             "kind": "LOCAL_RUNTIME",
             "required": true,
             "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T04:38:35Z",
+            "observed_at_utc": "2026-09-30T04:45:00Z",
             "evidence": [
-              "BRAIN_INHERITED current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e"
+              "BRAIN_INHERITED:797d5fbea5f230a31044006755beb98ae387134b",
+              "DIRECT_PROBE: carrier astra_runtime blob 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9 equals Brain main"
             ],
             "evidence_classes": [
               "BRAIN_INHERITED",
               "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "MODEL_PLANNER_DISABLED",
+            "kind": "POLICY",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:45:00Z",
+            "evidence": [
+              "Task execution constraints require model_dependency_count=0 and forbid local/frontier models; runtime provenance guard fails closed."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
             ],
             "evidence_scope": "GLOBAL"
           }
