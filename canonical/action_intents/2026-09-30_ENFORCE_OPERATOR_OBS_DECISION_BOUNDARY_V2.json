@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ENFORCE-OPERATOR-OBS-DECISION-BOUNDARY-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPERATOR_CAN_FORM_CONSEQUENTIAL_FRONTIER_DIAGNOSIS_OR_RECOMMENDATION_WITHOUT_FORMAL_CURRENT_BASE_SEVEN_LAYER_OBS",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPERATOR_CAN_FORM_CONSEQUENTIAL_FRONTIER_DIAGNOSIS_OR_RECOMMENDATION_WITHOUT_FORMAL_CURRENT_BASE_SEVEN_LAYER_OBS::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Close the operator decision-boundary loophole without changing capability credit or the current parent numeric-relation frontier: consequential diagnosis, recommendation, route selection, and execution must derive authority from current-base seven-layer OBS; memory and summaries remain non-authoritative.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414",
+    "current parent blocker PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
+    "canonical/CANONICAL_POINTER.json",
+    "stale-base PR288 closed rather than rebased or merged"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the canonical boot path, OBS law, regression catalog, operator decision-boundary contract, and trusted validator all encode the rule and the trusted drift guard passes on exact base ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414. Do not alter capability credit or repair/execute the numeric-relation gap in this governance action.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "explicit_user_authorization": "User identified underuse of OBS as a huge problem and explicitly required it to be solved perfectly now.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414",
+    "real_outcome": "Make current-base seven-layer OBS a mandatory authority boundary for consequential Brain diagnosis, recommendation, route selection, and execution, while preserving the existing search stop rule and the newly localized parent numeric-relation frontier.",
+    "required_capability": "DURABLE_OPERATOR_OBS_DECISION_BOUNDARY_ENFORCEMENT",
+    "obs_goal": {
+      "real_outcome": "Prevent an operator from turning stale memory, summaries, or informal reasoning into an authoritative current blocker or route decision.",
+      "proxy_goals_deleted": [
+        "Add more OBS ceremony",
+        "Repair the numeric relation gap inside this governance action",
+        "Build a new reasoning framework",
+        "Rely on operator memory to remember OBS"
+      ],
+      "surviving_necessity": "The canonical control plane must explicitly deny authority to consequential operator decisions that did not pass current-base OBS."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3",
+        "RECURSIVE_OBS_RECEIPT_SCHEMA_V4",
+        "CRITICAL_PATH_PRE_ACTION_GATE_V7",
+        "trusted enforce_goal_hierarchy.py",
+        "CANONICAL_POINTER boot requirements"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No external provider",
+        "No new framework",
+        "No benchmark",
+        "No parent-task replay",
+        "Reuse existing trusted drift guard"
+      ],
+      "surviving_gap": "Existing machinery gates consequential implementation but does not state strongly enough that consequential diagnosis/recommendation itself has no current authority before formal current-base OBS."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Internal governance semantic gap at the operator decision boundary.",
+      "delete_bypass_substitute_options": [
+        "Delete reliance on informal operator memory",
+        "Reuse the existing seven-layer OBS control loop",
+        "Extend the authority boundary instead of inventing another framework",
+        "Pin the operator contract into canonical boot"
+      ],
+      "surviving_causal_blocker": "CONSEQUENTIAL_OPERATOR_DECISION_CAN_PRECEDE_FORMAL_CURRENT_BASE_OBS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "EXTEND_EXISTING_OBS_AUTHORITY_TO_OPERATOR_DECISION_BOUNDARY_AND_BOOT_PATH",
+        "ADD_SEPARATE_NEW_REASONING_FRAMEWORK",
+        "RELY_ON_HUMAN_OR_MODEL_MEMORY"
+      ],
+      "losing_routes_reason": "A new framework duplicates existing OBS machinery and creates another synchronization surface; memory is nondurable. Extending existing authority, boot, regression, and trusted-guard controls closes the gap with fewer parts.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The existing trusted drift-immunity guard is the direct governance verifier. The successor PR must pass from exact current main and preserve the numeric-relation frontier unchanged."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ad hoc reminders to remember OBS",
+        "Memory-only frontier diagnosis as an accepted mode",
+        "stale-base PR288"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live canonical refresh",
+        "seven-layer OBS",
+        "exact-base binding",
+        "challenger frontier",
+        "selected-route preflight",
+        "search stop rule"
+      ],
+      "fresh_reuse_plan": "After this governance repair, return immediately to the current numeric-relation blocker and run its required OBS using the strengthened operator decision boundary; do not replay the geophysics task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing OBS V3/V4 control plane",
+        "Reused trusted validator",
+        "Reused prior stale attempt only as non-authoritative draft content after rebasing all state assumptions"
+      ],
+      "search_stop_decision": "The failure is internal and localized. External discovery cannot eliminate the need for the canonical operator authority boundary.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External challenger discovery is inapplicable to this governance-only repair. Main was refreshed after the geophysics reconciliation and the stale PR was closed."
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_OBS_AUTHORITY_TO_OPERATOR_DECISION_BOUNDARY_AND_BOOT_PATH",
+      "ADD_SEPARATE_NEW_REASONING_FRAMEWORK",
+      "RELY_ON_HUMAN_OR_MODEL_MEMORY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADD_SEPARATE_NEW_REASONING_FRAMEWORK",
+      "RELY_ON_HUMAN_OR_MODEL_MEMORY",
+      "STALE_BASE_PR288"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_OBS_AUTHORITY_TO_OPERATOR_DECISION_BOUNDARY_AND_BOOT_PATH",
+    "why_selected_route_is_fastest_sufficient": "It reuses the existing authoritative OBS and drift-guard machinery, adds no external dependency, preserves the current parent frontier, and closes the exact missing decision-authority boundary with minimal machinery.",
+    "expected_parent_level_state_change": "Close the operator decision-boundary loophole without changing capability credit or the current parent numeric-relation frontier: consequential diagnosis, recommendation, route selection, and execution must derive authority from current-base seven-layer OBS; memory and summaries remain non-authoritative.",
+    "stop_condition": "Stop after the canonical boot path, OBS law, regression catalog, operator decision-boundary contract, and trusted validator all encode the rule and the trusted drift guard passes on exact base ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414. Do not alter capability credit or repair/execute the numeric-relation gap in this governance action.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Internal governance semantic repair only; no external route can substitute for the canonical decision-authority rule."
+    }
+  }
+}
