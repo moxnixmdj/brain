@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR300-PARENT-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PR300_TYPED_SCALAR_CHILD_VERIFIED__POINTER_AND_HIERARCHY_EVENT_STATE_STALE__PARENT_NEW_REAL_TASK_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PR300_TYPED_SCALAR_CHILD_VERIFIED__POINTER_AND_HIERARCHY_EVENT_STATE_STALE__PARENT_NEW_REAL_TASK_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make pointer, hierarchy, queue, and scoreboard agree that MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 is acquired, its blocker is closed, the broad parent remains unpromoted, and the next action is one new materially different parent real task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR300 merged 144a1baadbb927645b1e183a85e4675f5cf44f1f",
+    "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1",
+    "REAL_OUTPUT_SCOREBOARD_V1 counters 5/8/2/1/9",
+    "FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1 already returns to parent new-real-task frontier",
+    "ACTIVE_GOAL_HIERARCHY_V1 blocker/next already return to parent but last event is stale",
+    "CANONICAL_POINTER current_frontier still advertises solved numeric-relation gap"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after pointer and hierarchy are coherent with already-canonical PR300/scoreboard/queue truth. Make no new capability implementation, no new benchmark, and no score change in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "144a1baadbb927645b1e183a85e4675f5cf44f1f",
+    "real_outcome": "Remove stale canonical frontier references after verified typed-scalar child acquisition so the next parent real task starts from one coherent live state.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Resume broad frontier capability acquisition from coherent post-PR300 state.",
+      "proxy_goals_deleted": [
+        "Re-prove typed scalar child",
+        "Add another governance layer",
+        "Name the next missing subcapability before a fresh parent task"
+      ],
+      "surviving_necessity": "Pointer and hierarchy event metadata are stale and contradict queue/scoreboard after PR300."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR300 merged at 144a1baadbb927645b1e183a85e4675f5cf44f1f",
+        "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+        "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+        "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable; this is canonical evidence reconciliation only."
+      ],
+      "capability_work_deleted": [
+        "No implementation",
+        "No supplier search",
+        "No verifier rerun",
+        "No benchmark"
+      ],
+      "surviving_gap": "Stale duplicated frontier metadata can resurrect a solved blocker unless reconciled."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical-state coherence defect only; capability is already verified.",
+      "delete_bypass_substitute_options": [
+        "Ignore pointer contradiction: rejected because critical-path truth checks require contradiction-free live state.",
+        "Re-run child qualification: deleted because proof already exists.",
+        "Reconcile stale pointer/hierarchy metadata: survives."
+      ],
+      "surviving_causal_blocker": "POST_PR300_CANONICAL_FRONTIER_METADATA_INCONSISTENCY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_EXISTING_CANONICAL_METADATA_ONLY"
+      ],
+      "losing_routes_reason": "Any new implementation or proof would duplicate already-verified work and delay the parent task.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic verification. Compare post-change pointer/hierarchy directly against merged PR300 evidence, queue, and scoreboard."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Old numeric-relation blocker in CANONICAL_POINTER",
+        "Old geophysics last-output event in CANONICAL_POINTER",
+        "Old numeric-relation last-output event in active hierarchy"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Verified typed scalar child state"
+      ],
+      "fresh_reuse_plan": "Immediately select and execute one new materially different parent real task after reconciliation."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR300 evidence",
+        "Reuse current queue/scoreboard",
+        "No external route search"
+      ],
+      "search_stop_decision": "All necessary truth is already canonical; further analysis cannot change the reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No route frontier applies because this RECONCILE_FRONTIER action selects no supplier or execution route."
+    },
+    "routes_considered": [
+      "RECONCILE_EXISTING_CANONICAL_METADATA_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPROVE_TYPED_SCALAR",
+      "NEW_GOVERNANCE",
+      "SPECULATIVE_NEXT_SUBCAPABILITY"
+    ],
+    "selected_surviving_route": "RECONCILE_EXISTING_CANONICAL_METADATA_ONLY",
+    "why_selected_route_is_fastest_sufficient": "Two metadata edits consume already-verified evidence and remove the only live canonical contradiction at $0 without delaying capability work.",
+    "expected_parent_level_state_change": "Make pointer, hierarchy, queue, and scoreboard agree that MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 is acquired, its blocker is closed, the broad parent remains unpromoted, and the next action is one new materially different parent real task.",
+    "stop_condition": "Stop after pointer and hierarchy are coherent with already-canonical PR300/scoreboard/queue truth. Make no new capability implementation, no new benchmark, and no score change in this reconciliation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action consuming already-verified canonical evidence; no external supplier or executable route is selected."
+    }
+  }
+}
