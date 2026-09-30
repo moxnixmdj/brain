@@ -1,0 +1,217 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REQUALIFY-CLAIM-SPEC-OPERAND-BINDING-UNDER-LIVE-GUARD-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "bab96da313ac8c9b4476e8d466f1fe1fcbb5f240",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CLAIM_SPEC_OPERAND_BINDING_PROMOTION_EVIDENCE_INADMISSIBLE_UNGUARDED_AFTER_EXECUTION_GUARD_CUTOVER",
+  "action_kind": "EVIDENCE_REQUALIFICATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CLAIM_SPEC_OPERAND_BINDING_PROMOTION_EVIDENCE_INADMISSIBLE_UNGUARDED_AFTER_EXECUTION_GUARD_CUTOVER::EVIDENCE_REQUALIFICATION",
+  "expected_parent_frontier_change": "No implementation change. Requalify exact merged claim-spec/operand-binding bytes through the live execution guard; on PASS replace invalid evidence and preserve child credit, on FAIL revoke child credit and restore the child blocker. Never execute a parent task from this action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain PR449 merged exact candidate bytes but PR449 comment marks run 36685279194 non-authoritative because it bypassed the live execution guard.",
+    "Runner PR166 comment marks its direct qualification inadmissible after guard cutover.",
+    "Brain PR453 merged mirror credit before the inadmissibility correction and is therefore not sufficient promotion authority.",
+    "No open Brain PR owns this requalification blocker lease."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Exact merged candidate/test/relation blobs execute once through execution_guard/github_actions_guarded_run_live.py with an atomic admission receipt; independent full-surface qualification passes; canonical promotion evidence is rebound to that guarded run. Otherwise revoke the premature child credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "bab96da313ac8c9b4476e8d466f1fe1fcbb5f240",
+    "real_outcome": "Recover admissible proof for the already-installed bounded claim-spec/operand-binding capability without changing its implementation or spending a parent task.",
+    "required_capability": "ADMISSIBLE_GUARDED_QUALIFICATION_OF_EXACT_MERGED_CLAIM_SPEC_OPERAND_BINDING_BYTES",
+    "obs_goal": {
+      "real_outcome": "Establish whether the installed child capability is actually promotable under the live global execution guard.",
+      "proxy_goals_deleted": [
+        "new binder implementation",
+        "new scientific task",
+        "parent replay",
+        "new benchmark design",
+        "scoreboard growth without proof"
+      ],
+      "surviving_necessity": "The only defect is execution-evidence admissibility; the implementation bytes and diagnostic test coverage already exist."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain merged binder blob 48fd058430d8d361fc75beced567c7b6d1166531",
+        "Brain merged binder test blob 467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+        "Inherited relation evaluator blob d66a7eb30774f66160b698d8082947776888293d",
+        "Runner live atomic execution guard on main b1d5ada6b827098e24d795c41c02545c12fd8fc1"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions public runner already used as the hard-zero verification carrier."
+      ],
+      "capability_work_deleted": [
+        "no code redesign",
+        "no new parser",
+        "no new source discovery",
+        "no parent execution"
+      ],
+      "surviving_gap": "Guarded one-shot requalification receipt for exact installed bytes."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence-path compliance defect introduced after guard cutover, not a demonstrated capability defect.",
+      "delete_bypass_substitute_options": [
+        "Reuse unguarded run rejected because guard law is mandatory.",
+        "Rebuild rejected because exact installed bytes can be requalified directly.",
+        "Parent validation rejected because child qualification authority must be repaired first."
+      ],
+      "surviving_causal_blocker": "GUARDED_REQUALIFICATION_RECEIPT_MISSING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REQUALIFY_EXACT_BYTES_THROUGH_LIVE_GUARD",
+        "REBUILD_BINDER",
+        "RUN_PARENT_TASK"
+      ],
+      "losing_routes_reason": "Requalification changes no implementation and directly repairs the evidence defect; rebuild and parent execution add work and risk without addressing the first causal problem.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Reuse the existing independent full-operator/adversarial qualification script, but start it only through a BRAIN_GUARDED_LAUNCH_PLAN_V1 and preserve the atomic admission receipt."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "unguarded run 36685279194 as promotion authority",
+        "runner PR166 as promotion authority"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "global execution guard",
+        "exact merged binder",
+        "generic claim relation evaluator"
+      ],
+      "fresh_reuse_plan": "If guarded qualification passes, reconcile canonical evidence and only then permit the next fresh genuinely open-ended parent Task A."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse exact PR166 qualification oracle",
+        "reuse PR449 candidate/test bytes",
+        "reuse current guard contract"
+      ],
+      "search_stop_decision": "No route search is useful: this is an evidence-recovery/requalification defect with one already-installed exact implementation and one mandatory guard path.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No external challenger refresh required for an exact-byte evidence requalification; refresh current Brain/runner heads immediately before execution."
+    },
+    "routes_considered": [
+      "REQUALIFY_EXACT_BYTES_THROUGH_LIVE_GUARD",
+      "REBUILD_BINDER",
+      "RUN_PARENT_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REBUILD",
+      "PARENT_REPLAY",
+      "NEW_MODEL",
+      "NEW_CAPABILITY_ROUTE_SEARCH"
+    ],
+    "selected_surviving_route": "REQUALIFY_EXACT_BYTES_THROUGH_LIVE_GUARD",
+    "why_selected_route_is_fastest_sufficient": "It directly repairs the only invalid premise, preserves exact implementation bytes, uses the already-live atomic guard, costs $0, and yields a binary promotion decision.",
+    "expected_parent_level_state_change": "No implementation change. Requalify exact merged claim-spec/operand-binding bytes through the live execution guard; on PASS replace invalid evidence and preserve child credit, on FAIL revoke child credit and restore the child blocker. Never execute a parent task from this action.",
+    "stop_condition": "Exact merged candidate/test/relation blobs execute once through execution_guard/github_actions_guarded_run_live.py with an atomic admission receipt; independent full-surface qualification passes; canonical promotion evidence is rebound to that guarded run. Otherwise revoke the premature child credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T07:53:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REQUALIFY_EXACT_BYTES_THROUGH_LIVE_GUARD",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "DIRECT_PROBE"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR449 exact blobs",
+          "runner live guard contract",
+          "PR166 independent qualification script"
+        ],
+        "DIRECT_PROBE": [
+          "Runner main b1d5ada6b827098e24d795c41c02545c12fd8fc1 refreshed; guard files present."
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [],
+      "negative_search_summary": "Evidence-recovery action; no plausible alternative can dominate exact-byte guarded requalification.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REQUALIFY_EXACT_BYTES_THROUGH_LIVE_GUARD",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:53:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REQUALIFY_EXACT_BYTES_THROUGH_LIVE_GUARD",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "verification-capsule-runner live guard main b1d5ada6b827098e24d795c41c02545c12fd8fc1",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:53:00Z",
+            "evidence": [
+              "live runner main refresh"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "exact merged Brain binder/test/relation blobs",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STABLE",
+            "scope": "PUBLIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:53:00Z",
+            "evidence": [
+              "PR449 merged diff and blob identities"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "PUBLIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
