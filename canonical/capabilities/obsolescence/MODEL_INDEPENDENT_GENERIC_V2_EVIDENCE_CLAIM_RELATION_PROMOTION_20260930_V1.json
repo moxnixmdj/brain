@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_RECEIPT_V1",
+  "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
+  "useful_behavior": "Given integrity-checked generic V2 objective-grounded evidence units and an explicit caller-supplied claim/relation spec, verify exact normalized verbatim support or evaluate bounded Decimal numeric relations over explicitly referenced numeric literals.",
+  "replacement_route": "evidence.claim_relation.generic_units.stdlib",
+  "exact_producer_blob": "d66a7eb30774f66160b698d8082947776888293d",
+  "exact_regression_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+  "canonical_base_commit": "94b08f40dd52606dc88dddf78266fadb6f855008",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 162,
+    "workflow_run_id": 36682488104,
+    "job_id": 109780804595,
+    "artifact_id": 11082521746,
+    "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+    "exact_producer_and_dependency_blobs_verified": true,
+    "authored_fail_closed_regressions": "PASS",
+    "fresh_live_domains": [
+      "sqlite.org",
+      "rfc-editor.org"
+    ],
+    "independent_oracle": "PASS",
+    "negative_controls": [
+      "PARAPHRASE_REJECTION",
+      "TAMPERED_GENERIC_V2_UNIT_REJECTION"
+    ]
+  },
+  "claim_scope": {
+    "verified": [
+      "EXACT_NORMALIZED_SUBSTRING_OCCURRENCE_OVER_INTEGRITY_CHECKED_GENERIC_V2_EVIDENCE_UNITS",
+      "EXPLICIT_DECIMAL_LT_LTE_GT_GTE_EQ_NE_AND_ABS_DIFF_LTE_OVER_CALLER_REFERENCED_NUMERIC_LITERALS",
+      "EXACT_UNIT_SURFACE_MATCHING_WITHOUT_CONVERSION",
+      "EVIDENCE_UNIT_HASH_ID_AND_OFFSET_INTEGRITY_ADMISSION"
+    ],
+    "unverified": [
+      "PARAPHRASE_OR_SEMANTIC_ENTAILMENT",
+      "AUTOMATIC_CLAIM_SPEC_GENERATION",
+      "AUTOMATIC_SEMANTIC_OPERAND_ROLE_BINDING",
+      "FACTUAL_CORRECTNESS",
+      "CAUSALITY",
+      "EVIDENCE_QUALITY",
+      "EVIDENCE_SUFFICIENCY",
+      "SOURCE_INDEPENDENCE",
+      "UNIT_CONVERSION",
+      "PARENT_CAPABILITY_COMPLETION"
+    ]
+  },
+  "prior_falsification": {
+    "stale_run_id": 36682016980,
+    "failure": "TERMINAL_PUNCTUATION_WAS_INCORRECTLY_INCLUDED_IN_UNIT_SURFACE",
+    "repair": "NORMALIZE_TERMINAL_PERIOD_COMMA_SEMICOLON_COLON_FROM_UNIT_SURFACE",
+    "preserved": true
+  },
+  "parent_capability_promoted": false,
+  "parent_score_credit": 0,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+}
