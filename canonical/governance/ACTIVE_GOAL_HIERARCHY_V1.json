@@ -164,19 +164,18 @@
     "max_selected_route_preflight_age_hours": 2
   },
   "last_real_output_event": {
-    "event_id": "PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_SPENT_FIRST_GAP_20260930",
+    "event_id": "PARENT_MAUNA_LOA_FIRST_SPEND_PROVENANCE_AND_MIRROR_CORRECTION_20260930",
     "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "status": "GENUINE_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__NO_PARENT_CREDIT",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
-    "source_real_task_run_id": 36670516407,
-    "artifact_id": 11077861584,
-    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
-    "first_causal_stage": "COMPILE",
+    "status": "FIRST_PHYSICAL_SPEND_IDENTIFIED__LATER_PR337_EXECUTION_REPLAY_QUARANTINED__GENERIC_GAP_PRESERVED__NO_CAPABILITY_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_PROVENANCE_AND_FRONTIER_MIRROR_CORRECTION_20260930_V1.json",
+    "first_spend_run_id": 36669918546,
+    "first_spend_artifact_id": 11077637577,
+    "first_spend_artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "later_replay_run_id": 36670516407,
+    "later_replay_artifact_id": 11077861584,
     "first_causal_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "task_freshness": "SPENT_BY_EXECUTION",
-    "replay_allowed": false,
-    "model_dependency_count": 0,
-    "incremental_spend_usd": 0,
+    "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "parent_capability_promoted": false,
     "counter_delta": 0
   },
   "last_route_falsification": {
@@ -190,18 +189,18 @@
   },
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "last_frontier_reconciliation": {
-    "status": "GENUINE_OPEN_ENDED_PARENT_TASK_A_EXECUTED_ONCE__FIRST_COMPILE_GAP_LOCALIZED__NO_PROMOTION",
+    "status": "FIRST_SPEND_PROVENANCE_CORRECTED__LATER_REPLAY_QUARANTINED__CANONICAL_MIRRORS_REALIGNED__GENERIC_COMPILE_GAP_PRESERVED",
     "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "relationship": "SAME_PARENT_TARGET__BROAD_EVIDENCE_BLOCKER_REPLACED_BY_EXACT_CAUSAL_GAP",
-    "previous_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "relationship": "SAME_PARENT_TARGET__PROVENANCE_AND_MIRROR_CORRECTION_ONLY",
     "blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_PROVENANCE_AND_FRONTIER_MIRROR_CORRECTION_20260930_V1.json"
     ],
-    "source_real_task_run_id": 36670516407,
-    "task_spent": true,
-    "replay_allowed": false,
+    "first_spend_run_id": 36669918546,
+    "later_replay_run_id": 36670516407,
+    "mauna_objective_spent": true,
+    "same_or_equivalent_task_replay_allowed": false,
     "parent_capability_promoted": false
   },
   "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
