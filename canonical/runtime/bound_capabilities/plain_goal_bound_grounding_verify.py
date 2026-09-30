@@ -51,6 +51,10 @@ def verify(goal,result,registry):
                     return False,"CANDIDATE_NONZERO_SPEND:"+cid
             except Exception:
                 return False,"CANDIDATE_SPEND_INVALID:"+cid
+            if result.get("input_contract_bindability_enforced") is True:
+                bindability=item.get("input_bindability")
+                if not isinstance(bindability,dict) or bindability.get("verified") is not True:
+                    return False,"CANDIDATE_INPUT_BINDABILITY_EVIDENCE_MISSING:"+cid
             matched=item.get("matched_distinctive_tokens")
             if not isinstance(matched,list) or not matched:
                 return False,"CANDIDATE_MATCH_EVIDENCE_MISSING:"+cid
