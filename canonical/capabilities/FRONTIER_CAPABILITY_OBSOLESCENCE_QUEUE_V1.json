@@ -71,17 +71,18 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Repair the generic open-research pipeline so every provenance-verified candidate class, including scholarly bibliographic records, can compete in relevance; if the selected candidate is bibliographic-only, live-materialize that exact selected source before evidence extraction. Preserve all authority, factual-correctness, sufficiency and model-independence gates.",
+    "objective": "Run one fresh materially different genuinely open-ended parent Task C through the repaired research pipeline with no predeclared source, values, tool recipe, or solution path; stop on the first new causal gap.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
+    "exact_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
     "evidence_paths": [
       "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
       "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json",
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_MATERIALIZATION_QUALIFICATION_20260930_V1.json"
     ],
-    "repair_status": "SEISMOLOGY_TASK_B_SPENT__THRESHOLD_ONLY_REPAIR_FALSIFIED__UPSTREAM_SOURCE_ADMISSION_ROOT_CAUSE",
-    "prohibition": "NO_SEISMOLOGY_REPLAY__NO_TASK_SPECIFIC_SOURCE_HINT__NO_MODEL_RERANKER__NO_DOI_EQUALS_AUTHORITY__NO_PARENT_PROMOTION_FROM_REPAIR_ONLY",
-    "next_action": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY",
+    "repair_status": "SOURCE_PIPELINE_REPAIR_GUARDED_QUALIFIED__FRESH_PARENT_REUSE_REQUIRED",
+    "prohibition": "NO_SEISMOLOGY_REPLAY__NO_SPENT_TASK_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__NO_MODEL_COGNITION_CREDIT__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "next_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SEISMOLOGY_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
     "latest_routing_qualification_run_id": 36689658815,
     "latest_routing_qualification_artifact_id": 11085092932,
     "latest_routing_qualification_artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
@@ -93,7 +94,10 @@
     "model_dependency_count": 0,
     "spent_seismology_task_run_id": 36693929830,
     "spent_seismology_task_artifact_id": 11086898224,
-    "spent_seismology_task_artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7"
+    "spent_seismology_task_artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7",
+    "latest_source_pipeline_qualification_run_id": 36697481130,
+    "latest_source_pipeline_qualification_artifact_id": 11088094431,
+    "latest_source_pipeline_qualification_artifact_digest": "sha256:dd66dd78c8cec765d9c968e6580adfbd6be1dfae3caf50341c0f4b70ef6617d2"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -310,7 +314,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY",
+  "next_progress_event_target": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SEISMOLOGY_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -321,22 +325,35 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "REOPENED_BY_FALSIFICATION",
-    "previous_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
-    "blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
+    "status": "SOURCE_PIPELINE_REPAIR_QUALIFIED__FRESH_PARENT_TASK_C_REQUIRED",
+    "previous_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
+    "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
-      "canonical/action_intents/2026-09-30_RECONCILE_SEISMOLOGY_SOURCE_ADMISSION_ROOT_CAUSE_V1.json"
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_MATERIALIZATION_QUALIFICATION_20260930_V1.json"
     ],
     "parent_capability_promoted": false
   },
   "last_real_output_event": {
-    "event_id": "SEISMOLOGY_TASK_B_FIRST_CAUSAL_GAP_20260930",
-    "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "status": "FRESH_TASK_B_SPENT__EVIDENCE_EXTRACTED__LITERAL_THRESHOLD_BINDING_GAP_LOCALIZED__NO_PARENT_CREDIT",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
-    "public_run_id": 36693929830,
+    "event_id": "MODEL_INDEPENDENT_SCHOLARLY_SOURCE_PIPELINE_REPAIR_QUALIFIED_20260930",
+    "capability_id": "MODEL_INDEPENDENT_PROVENANCE_VERIFIED_SCHOLARLY_CANDIDATE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+    "status": "VERIFIED_GENERIC_REPAIR__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_CROSS_DOMAIN_PASS__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_MATERIALIZATION_QUALIFICATION_20260930_V1.json",
+    "public_run_id": 36697481130,
+    "public_job_id": 109828804723,
+    "artifact_id": 11088094431,
+    "artifact_digest": "sha256:dd66dd78c8cec765d9c968e6580adfbd6be1dfae3caf50341c0f4b70ef6617d2",
+    "guard_attempt_id": "ff54ebe40e3f4145ae45ae46e8f85433",
+    "counter_effects": {
+      "reusable_capabilities_inherited": 0,
+      "verified_real_tasks_completed": 0,
+      "fresh_reuse_passes": 0,
+      "frontier_dependencies_removed": 0,
+      "residual_gaps_localized": 0
+    },
+    "progress_credit": "GENERIC_SOURCE_PIPELINE_REPAIR_ONLY__FRESH_PARENT_REUSE_REQUIRED",
     "parent_capability_promoted": false,
-    "capability_credit_delta": 0
+    "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
   }
 }
