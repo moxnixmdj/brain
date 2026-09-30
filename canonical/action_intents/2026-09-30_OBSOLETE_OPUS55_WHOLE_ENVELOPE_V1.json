@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V5",
   "action_id": "OBSOLETE-OPUS55-WHOLE-ENVELOPE-20260930-V1",
   "status": "AUTHORIZED_EXECUTION",
-  "canonical_generation": "2026-09-30-opus55-capability-ownership-v5",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "80ff84b907b7cb6fa1ad90b67072c94ba8e2bba4",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "action_kind": "WHOLE_ENVELOPE_CAPABILITY_OBSOLESCENCE",
@@ -119,8 +119,203 @@
     "why_selected_route_is_fastest_sufficient": "It converts existing evidence into permanent ownership immediately and focuses all remaining search only on exact Opus-leading residuals.",
     "expected_parent_level_state_change": "WHOLE_ENVELOPE_RECOVERED__TWO_NEW_SCOPED_CAPABILITIES_OWNED__RESIDUAL_FRONTIER_COMPRESSED",
     "route_frontier": {
-      "discovery_required": false,
-      "not_applicable_reason": "This action reconciles multiple existing suppliers and public evidence into canonical ownership state; each future unresolved supplier selection must run its own fresh challenger frontier."
-    }
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T10:37:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "WHOLE_ENVELOPE_MATRIX_PLUS_SCOPED_PROMOTION_PLUS_PARALLEL_RESIDUAL_EXISTING_ROUTE_SEARCH",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+          "canonical/capabilities/FRONTIER_CAPABILITY_TARGET_MAP_V1.json",
+          "canonical/astra/ASTRA_EXTERNAL_PARITY_CORRECTION_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://www.anthropic.com/claude-opus-5-5",
+          "https://www.anthropic.com/claude-sonnet-5-5",
+          "https://openai.com/index/gpt-6-astra/",
+          "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+          "https://prod.cursor.com/evals",
+          "https://artificialanalysis.ai/evaluations/gdpval-aa",
+          "https://artificialanalysis.ai/evaluations/aa-briefcase"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Installed Brain/ChatGPT capabilities: GitHub, Wolfram, Replit, Vercel, Figma, Remote Desktop Commander, Superpowers."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Current benchmark leader searches for HLE-with-tools, Terminal-Bench 4.0, FrontierCode, CursorBench, GDPval-AA, AA-Briefcase, OSWorld and Chartography."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "current equal-or-better alternatives for each Opus 5.5 useful capability"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "current benchmark leaders across GPT-6 Astra Claude Sonnet 5.5 open-weight and other systems"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing model plus tool compositions for coding professional work reasoning computer use research"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 latest Terminal-Bench FrontierCode CursorBench GDPval HLE OSWorld Chartography leaders"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "GPT-6_ASTRA_INCLUDED_WORK_CODEX",
+          "evidence": [
+            "Official OpenAI launch and Help Center; included Plus Work/Codex allowance.",
+            "Astra exceeds Opus 5.5 on AutomationBench and Terminal-Bench-Science point estimates."
+          ],
+          "qualification_evidence": [
+            "https://openai.com/index/gpt-6-astra/",
+            "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+            "https://www.anthropic.com/claude-opus-5-5"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Equal-or-better evidence exists for two scoped target capabilities; not universal.",
+            "CAPABILITY_STRENGTH": "Strongest currently configured zero-incremental general supplier found.",
+            "WALL_CLOCK": "Immediate through existing subscription surface.",
+            "INCREMENTAL_COST": "$0 within included allowance; paid credits/API forbidden.",
+            "RELIABILITY": "Provider/allowance dependent, explicit preflight required.",
+            "VERIFIABILITY": "Public matched benchmark evidence for promoted scopes."
+          }
+        },
+        {
+          "route": "CLAUDE_SONNET_5_5",
+          "evidence": [
+            "Exceeds Opus 5.5 on Terminal-Bench 4.0 and Chartography-with-tools, but is below Opus on FrontierCode, CursorBench, GDPval, AA-Briefcase and HLE-with-tools."
+          ],
+          "qualification_evidence": [
+            "https://www.anthropic.com/claude-sonnet-5-5"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Useful slice winner only.",
+            "CAPABILITY_STRENGTH": "Does not dominate full Opus envelope.",
+            "WALL_CLOCK": "Access route not established as zero-incremental Brain-owned surface.",
+            "INCREMENTAL_COST": "API is paid; no current hard-zero route proven.",
+            "RELIABILITY": "Provider route.",
+            "VERIFIABILITY": "Official benchmark evidence."
+          }
+        },
+        {
+          "route": "HISTORICAL_BRAIN_OWNED_PACKAGES",
+          "evidence": [
+            "Nine inherited capabilities and multiple requalified components exist in the canonical scoreboard."
+          ],
+          "qualification_evidence": [
+            "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Preserved at their proven scopes.",
+            "CAPABILITY_STRENGTH": "Mostly narrower than complete Opus families.",
+            "WALL_CLOCK": "Immediate reuse.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Durable canonical packages.",
+            "VERIFIABILITY": "Historical guarded evidence."
+          }
+        }
+      ],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "selected_route": "WHOLE_ENVELOPE_MATRIX_PLUS_SCOPED_PROMOTION_PLUS_PARALLEL_RESIDUAL_EXISTING_ROUTE_SEARCH",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "negative_search_summary": "Search found no current existing hard-zero configured route that already clears all remaining Opus 5.5 production-coding, professional-knowledge-work and HLE-with-tools bars.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T10:37:00Z",
+        "max_age_hours": 2,
+        "selected_route": "WHOLE_ENVELOPE_MATRIX_PLUS_SCOPED_PROMOTION_PLUS_PARALLEL_RESIDUAL_EXISTING_ROUTE_SEARCH",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "GITHUB_CONTROL_PLANE_moxnixmdj_brain",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T10:37:00Z",
+            "evidence": [
+              "Direct successful creation of whole-envelope canonical files on the current branch."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "CURRENT_PUBLIC_CAPABILITY_EVIDENCE_SET",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T10:37:00Z",
+            "evidence": [
+              "Official Anthropic/OpenAI benchmark and availability pages plus benchmark-owner leaderboards refreshed this turn."
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    },
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "real_outcome": "Compress the entire Opus 5.5 useful capability surface into permanent owned wins plus exact residuals, promoting every currently defensible equal-or-better existing route.",
+    "required_capability": "OPUS_5_5_WHOLE_ENVELOPE_CAPABILITY_OBSOLESCENCE_AND_OWNERSHIP_RECONCILIATION_V1",
+    "routes_considered": [
+      "GPT-6_ASTRA_INCLUDED_WORK_CODEX",
+      "HISTORICAL_BRAIN_OWNED_PACKAGES",
+      "CLAUDE_SONNET_5_5_BENCHMARK_LEADING_SLICES",
+      "CURRENT_OPEN_WEIGHT_AND_PROPRIETARY_PUBLIC_LEADERS",
+      "EXISTING_TOOL_COMPOSITIONS"
+    ],
+    "deleted_or_bypassed_paths": [
+      "DECLARE_UNIVERSAL_ASTRA_PARITY",
+      "CONTINUE_OLD_OPEN_RESEARCH_MICRO_REPAIR_AS_TERMINAL_FRONTIER",
+      "INVENT_MISSING_CAPABILITY",
+      "COUNT_INTERNAL_ASTRA_61_OF_61_AS_OPUS_PARITY",
+      "LOWER_OPUS_ACCEPTANCE_BAR"
+    ],
+    "stop_condition": "Persist every immediately defensible permanent ownership package; localize all remaining Opus-leading or incomparable families; award no whole-envelope completion until every useful family is owned at equal-or-better scope."
   }
 }
