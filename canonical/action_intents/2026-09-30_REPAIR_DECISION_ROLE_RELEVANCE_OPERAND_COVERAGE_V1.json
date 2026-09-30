@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-DECISION-ROLE-RELEVANCE-OPERAND-COVERAGE-20260930-V1",
+  "status": "PROPOSED_PENDING_GUARDED_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "81f2f813f03b5d80ac2e44080bd19d967bd06463",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "action_kind": "GENERIC_RELEVANCE_ADMISSION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT::GENERIC_RELEVANCE_ADMISSION_REPAIR",
+  "highest_leverage_now": true,
+  "authoritative_parent_run": 36698638943,
+  "authoritative_parent_artifact": 11089076913,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "repair": [
+    "reuse the verified bounded objective comparison parser to expose left and right lexical role tokens when the objective is within its explicit relation grammar",
+    "require both ordinary focused-query token coverage and bounded left/right decision-role coverage for comparative admission",
+    "rank all candidates with BM25 but select the highest-ranked candidate that passes the applicable admission contract",
+    "preserve legacy focused-query admission for objectives outside the bounded explicit comparison grammar"
+  ],
+  "fail_closed": [
+    "unresolved comparison role coverage does not become verified",
+    "wrong-property or wrong-operand candidates cannot pass from broad subject overlap alone",
+    "no source whitelist or task-specific material literal",
+    "semantic entailment, factual correctness, and evidence sufficiency remain unverified"
+  ],
+  "qualification_required": "EXACT_BYTE_NON_PARENT_INDEPENDENT_GUARDED_CROSS_DOMAIN_QUALIFICATION",
+  "next_after_qualification": "MERGE_GENERIC_REPAIR_THEN_FREEZE_NEW_MATERIALLY_DIFFERENT_PARENT_TASK__NO_MATERIALS_REPLAY",
+  "recursive_obs": {
+    "selected_surviving_route": "REUSE_VERIFIED_BOUNDED_RELATION_ROLE_PARSER_PLUS_BM25",
+    "why_selected_route_is_fastest_sufficient": "The first demonstrated failure is admission of a lexically related but decision-role-inapplicable source. Existing parsing already exposes bounded comparison roles, so no new NLP supplier or model reranker is needed.",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "SOURCE_WHITELIST",
+      "MODEL_RERANKER",
+      "NEW_NLP_DEPENDENCY",
+      "DOWNSTREAM_MATERIALIZATION_REPAIR_AS_CURRENT_BLOCKER"
+    ],
+    "stop_rule": "GUARD_QUALIFY_EXACT_GENERIC_BYTES_BEFORE_MERGE"
+  }
+}
