@@ -37,10 +37,14 @@ class OpenResearchSourceFrontendTests(unittest.TestCase):
         x=self._run("Assess whether lithium ion battery calendar aging is influenced by temperature using published experimental evidence")
         self.assertEqual(x["status"],"SOURCE_FRONTEND_READY",x)
         self.assertGreaterEqual(x["provenance_verified_candidate_count"],1,x)
-        self.assertEqual(
+        self.assertIn(
             x["next_required_capability"],
-            "MODEL_INDEPENDENT_SOURCE_AUTHORITY_PRIMARY_EVIDENCE_AND_RELEVANCE_VERIFICATION",
+            {
+                "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION",
+                "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION",
+            },
         )
+        self.assertFalse(x["authority_claims_made"])
 
     def test_mismatch_fails_closed(self):
         d=self.decomp.decompose("Assess whether A is greater than B")
