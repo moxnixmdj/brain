@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED__NO_PARENT_CREDIT",
+  "status": "FRONTIER_BAR_DEFINED__BROAD_MULTICLAUSE_RESEARCH_ROUTING_REPAIRED_GUARDED_QUALIFIED__FRESH_TASK_B_REQUIRED__NO_PARENT_CREDIT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -68,18 +68,20 @@
     "reason": "Producer prompt predeclared exact sources, JSON paths, formula and threshold, so it did not exercise autonomous decomposition or material source/tool discovery."
   },
   "evidence_B": {
-    "status": "BLOCKED_UNTIL_ADMISSIBLE_OPEN_ENDED_TASK_A",
-    "requirement": "After a genuine open-ended Task A passes, complete a materially different genuine open-ended Task B on the inherited model-independent route.",
-    "prohibited_replays": [
-      "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
-      "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
-      "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002",
-      "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004",
-      "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
-    ]
+    "status": "FROZEN_AUTHORIZED_UNSPENT__FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_B",
+    "task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
+    "domain": "SEISMOLOGY_TSUNAMI_HAZARD_QUANTITATIVE_RESEARCH",
+    "task_path": "canonical/tasks/PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002.json",
+    "mission_path": "canonical/astra_runtime/missions/PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002.json",
+    "authorization_path": "canonical/action_intents/2026-09-30_EXECUTE_GUARDED_SEISMOLOGY_TASK_B_V2.json",
+    "execution_count": 0,
+    "replay_allowed": false,
+    "automatic_shared_runtime_prestart_failure_run_id": 36693304431,
+    "prestart_failure_spent_task": false,
+    "requirement": "Execute exactly once through a fresh guarded carrier lane with unchanged frozen task, mission, and runtime bytes; stop on first new causal gap or semantic completion."
   },
-  "obsolescence_status": "NOT_YET_PROVEN__CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "obsolescence_status": "NOT_YET_PROVEN__BROAD_MULTICLAUSE_RESEARCH_ROUTING_REPAIRED_GUARDED_QUALIFIED__FRESH_TASK_B_REQUIRED",
+  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -184,7 +186,7 @@
       "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
     }
   ],
-  "next_action": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_B__NO_HTTP2_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -230,7 +232,12 @@
     "parent_task_A_pass": false,
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
-    "same_or_equivalent_task_replay_allowed": false
+    "same_or_equivalent_task_replay_allowed": false,
+    "superseded_as_active_frontier_by": "PARENT_OPENENDED_HTTP2_TASK_A_SPENT__BROAD_MULTICLAUSE_ROUTING_REPAIRED_AND_GUARDED_QUALIFIED__FRESH_TASK_B_REQUIRED",
+    "active_frontier_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json"
+    ]
   },
   "historical_evidence_A_space_cargo": {
     "task": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
@@ -379,10 +386,11 @@
     "parent_capability_promoted": false
   },
   "next_parent_validation": {
-    "status": "FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-    "requirement": "Run a new difficult consequential open-ended technical/scientific task without predeclared exact sources, formulas, JSON paths, or tool recipe. The inherited route must autonomously decompose, discover, acquire, extract, bind claims/operands, reason, synthesize, and return independently verifiable evidence.",
+    "status": "FRESH_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_TASK_B_REQUIRED__FROZEN_AUTHORIZED_UNSPENT",
+    "task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
+    "requirement": "Run the already-frozen seismology Task B exactly once through the model-independent inherited route without predeclared source, station, value, formula, tool, command, controller graph, or expected answer.",
     "replay_allowed": false,
-    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP",
-    "after_pass": "Independently verify Task A, then freeze a materially different genuine open-ended Task B using the inherited route without rediscovery."
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION",
+    "after_pass": "Independently verify the Task B result and then adjudicate the parent frontier capability without exceeding the exact evidence scope."
   }
 }
