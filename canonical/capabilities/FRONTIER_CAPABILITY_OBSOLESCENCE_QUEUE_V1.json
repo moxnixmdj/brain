@@ -71,17 +71,19 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Repair the bounded metadata-refined fallback so every provenance-verified candidate class remains eligible for deterministic relevance; if the refined winner is bibliographic-only, live-materialize that exact winner under the existing identity-bound fail-closed contract. Never replay materials Task C.",
+    "objective": "Repair generic decision-role-aware relevance admission so selected sources preserve the requested decision property and operand identity discriminators before materialization or evidence extraction.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "exact_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
     "evidence_paths": [
       "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
       "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json",
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/action_intents/2026-09-30_CORRECT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_V1.json"
     ],
-    "repair_status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
-    "prohibition": "NO_MATERIALS_TASK_C_REPLAY__NO_SEISMOLOGY_REPLAY__NO_SOURCE_WHITELIST__NO_MODEL_RERANKER__NO_UNBOUNDED_RETRY__NO_TASK_SPECIFIC_6061_OR_304_PATCH",
-    "next_action": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY",
+    "repair_status": "MATERIALS_TASK_C_SPENT__CAUSAL_INTERPRETATION_CORRECTED_TO_DECISION_ROLE_RELEVANCE",
+    "prohibition": "NO_MATERIALS_TASK_C_REPLAY__NO_TASK_LITERAL_PATCH__NO_SOURCE_WHITELIST__NO_MODEL_RERANKER__NO_PARENT_CREDIT_FROM_REPAIR_ONLY",
+    "next_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_AWARE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
     "latest_routing_qualification_run_id": 36689658815,
     "latest_routing_qualification_artifact_id": 11085092932,
     "latest_routing_qualification_artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
@@ -316,7 +318,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY",
+  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_AWARE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -327,29 +329,38 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
-    "previous_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
-    "blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
-    "spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
-    "spent_parent_run_id": 36698638943,
-    "spent_parent_replay_allowed": false,
-    "parent_capability_promoted": false,
+    "status": "MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTED__NO_COUNTER_CHANGE",
+    "previous_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
-    ]
+      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/action_intents/2026-09-30_CORRECT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_V1.json"
+    ],
+    "parent_capability_promoted": false,
+    "counter_delta": 0
   },
   "last_real_output_event": {
-    "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_20260930",
+    "event_id": "MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTED_20260930",
     "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
+    "status": "MATERIALS_TASK_C_SPENT__CAUSAL_INTERPRETATION_CORRECTED__DECISION_ROLE_RELEVANCE_ADMISSION_FALSIFIED__NO_PARENT_CREDIT",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+    "correction_path": "canonical/action_intents/2026-09-30_CORRECT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_V1.json",
     "public_run_id": 36698638943,
+    "public_job_id": 109832558595,
     "artifact_id": 11089076913,
     "artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162",
     "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
     "parent_capability_promoted": false,
     "capability_credit_delta": 0,
-    "next_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "counter_effects": {
+      "reusable_capabilities_inherited": 0,
+      "verified_real_tasks_completed": 0,
+      "fresh_reuse_passes": 0,
+      "frontier_dependencies_removed": 0,
+      "residual_gaps_localized": 0
+    },
+    "progress_credit": "NO_COUNTER_CHANGE__CAUSAL_CLASSIFICATION_CORRECTION_ONLY",
+    "next_causal_gap": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   }
