@@ -668,6 +668,77 @@ def enforce_blocker_lease(intent):
         else:
             fail(f"DUPLICATE_BLOCKER_LEASE_OPEN_PR:{peer_pr}")
 
+def _same_frontier_value(label,entries):
+    values=[]
+    for name,value in entries:
+        text=str(value or "").strip()
+        if not text:
+            fail(label+"_MISSING:"+name)
+        values.append((name,text))
+    if any(not value for _,value in values):
+        return
+    baseline=values[0][1]
+    if any(value!=baseline for _,value in values[1:]):
+        detail=";".join(name+"="+value for name,value in values)
+        fail(label+"_MISMATCH:"+detail)
+
+def enforce_frontier_surface_consistency(pointer,hierarchy,queue):
+    immediate=queue.get("immediate_frontier") or {}
+    frontier=pointer.get("current_frontier") or {}
+    selected=str(immediate.get("selected_capability") or "").strip()
+    if not selected or not selected.replace("_","").isalnum() or selected.upper()!=selected:
+        fail("FRONTIER_SELECTED_CAPABILITY_INVALID")
+        return
+
+    target_path="canonical/capabilities/frontier/"+selected+".json"
+    score_path="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+    try:
+        target=load(target_path)
+        scoreboard=load(score_path)
+    except Exception as exc:
+        fail("FRONTIER_SURFACE_READ_FAILED:"+type(exc).__name__+":"+str(exc))
+        return
+
+    accounting=scoreboard.get("active_frontier_accounting") or {}
+    _same_frontier_value("FRONTIER_CAPABILITY_TARGET",[
+        ("queue",selected),
+        ("hierarchy",hierarchy.get("active_capability_target")),
+        ("target_file",target.get("capability_id")),
+        ("scoreboard",accounting.get("parent_frontier_capability")),
+    ])
+
+    blocker_entries=[
+        ("pointer_critical",frontier.get("critical_blocker")),
+        ("pointer_gap",frontier.get("highest_leverage_capability_gap")),
+        ("hierarchy",hierarchy.get("current_parent_blocker")),
+        ("queue",immediate.get("exact_blocker")),
+        ("target_file",target.get("residual_gap")),
+    ]
+    events=scoreboard.get("progress_events")
+    latest=events[-1] if isinstance(events,list) and events and isinstance(events[-1],dict) else {}
+    if str(latest.get("residual_gap") or "").strip():
+        blocker_entries.append(("scoreboard_latest_event",latest.get("residual_gap")))
+    _same_frontier_value("FRONTIER_CAUSAL_BLOCKER",blocker_entries)
+
+    _same_frontier_value("FRONTIER_NEXT_ACTION",[
+        ("pointer",frontier.get("next_step")),
+        ("hierarchy_required",hierarchy.get("next_required_action_class")),
+        ("hierarchy_progress",hierarchy.get("next_progress_event_target")),
+        ("queue",immediate.get("next_action")),
+        ("target_file",target.get("next_action")),
+    ])
+
+    pointer_event=frontier.get("last_real_output_event") or {}
+    pointer_counters=pointer_event.get("scoreboard")
+    canonical_counters=scoreboard.get("counters_since_epoch_start")
+    if not isinstance(pointer_counters,dict):
+        fail("FRONTIER_POINTER_SCOREBOARD_SNAPSHOT_MISSING")
+    if not isinstance(canonical_counters,dict):
+        fail("FRONTIER_CANONICAL_SCOREBOARD_COUNTERS_MISSING")
+    if isinstance(pointer_counters,dict) and isinstance(canonical_counters,dict):
+        if pointer_counters!=canonical_counters:
+            fail("FRONTIER_SCOREBOARD_COUNTERS_MISMATCH")
+
 def enforce_target_continuity(intent,base,hierarchy):
     action_kind=str(intent.get("action_kind") or "")
     try:
@@ -858,6 +929,12 @@ def main():
         fail("CANONICAL_DECISION_NOT_BOUND_TO_REPOSITORY_OBS")
     if not (ROOT/operator_obs_envelope_path).is_file():
         fail("OPERATOR_OBS_AUTHORITY_ENVELOPE_FILE_MISSING")
+
+    if boot.get("canonical_frontier_surface_consistency_required") is not True:
+        fail("CANONICAL_FRONTIER_SURFACE_CONSISTENCY_NOT_REQUIRED")
+    if boot.get("runtime_cognition_provenance_required") is not True:
+        fail("RUNTIME_COGNITION_PROVENANCE_NOT_REQUIRED")
+    enforce_frontier_surface_consistency(pointer,hierarchy,queue)
 
     intents=[
         x for x in files
