@@ -19,7 +19,11 @@
     "Only RETRIEVAL_PROVENANCE_VERIFIED candidates entered relevance; both scholarly candidates were discarded before ranking.",
     "Selected Simple Wikipedia source matched only 2/16 focused terms and contained no requested tsunami amplitude quantity.",
     "Exact current open_research_source_frontend.py filter and source_candidate_provenance_verify.py DOI path inspected.",
-    "Open PR search found no competing repair owner."
+    "Open PR search found no competing repair owner.",
+    "Live challenger search 2026-09-30: Crossref public REST metadata remains free/open and already supplies the useful candidate class.",
+    "OpenAlex official API supports scholarly search but search requests are credit-priced beyond free allowance and add a new dependency.",
+    "Semantic Scholar offers relevance-ranked scholarly search but adds a new external service and does not remove the selected-source materialization seam.",
+    "Seb-f-Johansson/lit-scan (MIT, scripts/lit_scan.py blob c40eb92f714e4b57ade30e5b7c6708c7a1423d85) is a useful multi-source challenger but is a 65KB academic-search stack with economics-tuned ranking and additional APIs; it does not dominate the two-transition repair."
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED__EARLIEST_GENERIC_INFORMATION_LOSS_SEAM_EXACTLY_LOCALIZED",
   "probe_specific": false,
@@ -56,7 +60,11 @@
         "objective_evidence_unit_extract fresh exact-source extraction"
       ],
       "external_existing_routes_checked": [
-        "No external supplier is required; the needed discovery, ranking, retrieval and extraction primitives already exist."
+        "Crossref public REST metadata: https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+        "OpenAlex search API: https://help.openalex.org/api/searching/",
+        "Semantic Scholar Academic Graph API: https://api.semanticscholar.org/api-docs/",
+        "Seb-f-Johansson/lit-scan MIT repository: https://github.com/Seb-f-Johansson/lit-scan",
+        "Stanford Introduction to Information Retrieval relevance feedback/query expansion: https://nlp.stanford.edu/IR-book/pdf/09expand.pdf"
       ],
       "capability_work_deleted": [
         "no new discovery backend",
@@ -120,7 +128,7 @@
       ],
       "search_stop_decision": "The earliest information-loss predicate is exact in code and all required primitives already exist.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Current main and open repair leases refreshed immediately before branch creation."
+      "challenger_refresh_decision": "Fresh 2026-09-30 challenger frontier checked immediately before implementation. No external challenger dominates the minimal inherited composition on correctness, wall-clock, hard-$0 cost, dependency count, and verifiability."
     },
     "routes_considered": [
       "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
@@ -140,10 +148,143 @@
     "expected_parent_level_state_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION_AND_SELECTED_ONLY_LIVE_MATERIALIZATION__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
     "stop_condition": "Implement only generic provenance-class-preserving relevance admission plus selected-only live materialization. Independently guard-qualify exact bytes on fresh cross-domain fixtures. Do not replay seismology, do not add source whitelists, and do not award parent capability credit from the repair alone.",
     "route_frontier": {
-      "discovery_required": false,
-      "not_applicable_reason": "All necessary supplier primitives are already inherited and the current blocker is an exact internal composition defect.",
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T09:21:52Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py",
+          "canonical/runtime/bound_capabilities/source_candidate_provenance_verify.py",
+          "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+          "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+          "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+          "https://help.openalex.org/api/searching/",
+          "https://api.semanticscholar.org/api-docs/",
+          "https://nlp.stanford.edu/IR-book/pdf/09expand.pdf"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/Seb-f-Johansson/lit-scan @ scripts/lit_scan.py blob c40eb92f714e4b57ade30e5b7c6708c7a1423d85 / MIT",
+          "https://pypi.org/project/semanticscholar/ 0.12.0"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Broad web discovery surfaced lit-scan as a no-key multi-source academic search challenger; inspected its actual GitHub code and license before route decision."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "authority aware scholarly source discovery relevance ranking metadata query refinement materialization"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Crossref OpenAlex Semantic Scholar multi source academic search"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "open source deterministic BM25 query expansion scholarly retrieval Python no API key"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 academic search open source query expansion Crossref OpenAlex Semantic Scholar"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "SEB_F_JOHANSSON_LIT_SCAN",
+          "evidence": [
+            "https://github.com/Seb-f-Johansson/lit-scan",
+            "scripts/lit_scan.py blob c40eb92f714e4b57ade30e5b7c6708c7a1423d85"
+          ],
+          "qualification_evidence": [
+            "MIT license; standard-library implementation inspected directly; multi-source search/ranking code present."
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong academic discovery challenger, but ranking includes domain-tuned venue/field signals and does not itself prove generic selected-source live materialization.",
+            "CAPABILITY_STRENGTH": "Broader academic search than incumbent, narrower than general open-web research and adds unrelated machinery.",
+            "WALL_CLOCK": "Import/integration is slower than two local transition changes.",
+            "INCREMENTAL_COST": "$0 software; several upstream APIs add operational dependencies.",
+            "RELIABILITY": "More external endpoints and a new 65KB supplier increase failure surface.",
+            "VERIFIABILITY": "Inspectable MIT code, but larger surface to qualify than the minimal repair."
+          }
+        },
+        {
+          "route": "OPENALEX_SEARCH_BACKEND",
+          "evidence": [
+            "https://help.openalex.org/api/searching/",
+            "https://help.openalex.org/api/"
+          ],
+          "qualification_evidence": [
+            "Official OpenAlex documentation states works search covers title/abstract/fulltext and uses a credit-priced API with free starting allowance."
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Useful scholarly retrieval, but it does not repair Brain discarding already-discovered bibliographic candidates.",
+            "CAPABILITY_STRENGTH": "Strong scholarly search; not a general open-web replacement.",
+            "WALL_CLOCK": "Adds integration and qualification work.",
+            "INCREMENTAL_COST": "Not a clean hard-zero invariant because search is credit-priced beyond free allowance.",
+            "RELIABILITY": "Adds external API dependency.",
+            "VERIFIABILITY": "Officially documented and inspectable responses."
+          }
+        },
+        {
+          "route": "SEMANTIC_SCHOLAR_SEARCH_BACKEND",
+          "evidence": [
+            "https://api.semanticscholar.org/api-docs/"
+          ],
+          "qualification_evidence": [
+            "Official Academic Graph API documents relevance-ranked paper search; PyPI clients exist but add no needed semantics over direct API."
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could improve scholarly recall but does not fix the exact internal provenance-class exclusion or selected-source materialization.",
+            "CAPABILITY_STRENGTH": "Good scholarly search, not general web research.",
+            "WALL_CLOCK": "More integration work than incumbent repair.",
+            "INCREMENTAL_COST": "Basic API use may be keyless, but adds a new external service.",
+            "RELIABILITY": "New endpoint/rate-limit dependency.",
+            "VERIFIABILITY": "Official API and public client packages."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger eliminates the exact internal information-loss seam more cheaply than reusing the already-present Crossref discovery, provenance verifier, BM25 ranker and extractor.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T09:22:00Z",
+        "checked_at_utc": "2026-09-30T09:21:52Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
         "status": "READY",
@@ -151,18 +292,35 @@
         "failed_dependencies": [],
         "execution_dependencies": [
           {
-            "dependency": "BRAIN_CURRENT_RUNTIME_SOURCE",
+            "dependency": "BRAIN_CURRENT_PYTHON_RUNTIME_AND_SOURCE",
             "kind": "LOCAL_RUNTIME",
             "required": true,
             "volatility": "STATIC",
-            "scope": "GLOBAL",
+            "scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T09:22:00Z",
+            "observed_at_utc": "2026-09-30T09:21:52Z",
             "evidence": [
-              "Exact current main 1970d89246c6e33616e8e67effd1b01aaa35224f inspected."
+              "main 3e2435efb9398a062ee40a7bdbb3e3610724b330 and exact repair branch source inspected"
             ],
             "evidence_classes": [
               "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "CROSSREF_PUBLIC_REST",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:21:52Z",
+            "evidence": [
+              "Official Crossref REST/metadata documentation retrieved live on 2026-09-30; public anonymous API documented available."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
             ],
             "evidence_scope": "GLOBAL"
           },
@@ -173,9 +331,9 @@
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T09:22:00Z",
+            "observed_at_utc": "2026-09-30T09:21:52Z",
             "evidence": [
-              "Recent guarded runs on verification-capsule-runner succeeded in this account."
+              "verification-capsule-runner guarded seismology run 36693929830 physically started and produced artifact 11086898224 in this account today."
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
