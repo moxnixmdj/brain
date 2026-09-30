@@ -878,6 +878,7 @@ def main():
     pointer=load("canonical/CANONICAL_POINTER.json")
     hierarchy=load("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
     queue=load("canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json")
+    scoreboard=load("canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json")
 
     current=pointer.get("current_frontier") or {}
     immediate=queue.get("immediate_frontier") or {}
@@ -891,6 +892,11 @@ def main():
         fail("QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
     if str(immediate.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH")
+    accounting=scoreboard.get("active_frontier_accounting") or {}
+    if str(accounting.get("parent_frontier_capability") or "")!=str(hierarchy.get("active_capability_target") or ""):
+        fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
 
     boot=pointer.get("boot_requirements") or {}
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
