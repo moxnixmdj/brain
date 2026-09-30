@@ -148,6 +148,32 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
         )
         self.assertTrue(result["input_contract_bindability_enforced"])
 
+    def test_downstream_path_consumers_declare_causal_provenance(self):
+        expected={
+            "decision.synthesis.verify.stdlib":(
+                "result_path","decision.synthesis.typed","output_path"
+            ),
+            "plain_goal.bound_capability.grounding.verify.stdlib":(
+                "result_path","plain_goal.bound_capability.grounding","output_path"
+            ),
+            "knowledge.status.assert":(
+                "assessment_path","knowledge.assessment.available","output_path"
+            ),
+            "knowledge.support.materialize":(
+                "assessment_path","knowledge.assessment.available","output_path"
+            ),
+        }
+        for capability_id,(key,effect,field) in expected.items():
+            with self.subTest(capability_id=capability_id):
+                spec=self.registry[capability_id]["proposal_bindings"][key]
+                self.assertEqual(spec["type"],"effect_result")
+                self.assertEqual(spec["effect"],effect)
+                self.assertEqual(spec["field"],field)
+        self.assertEqual(
+            self.registry["knowledge.support.materialize"]["proposal_bindings"]["output_path"],
+            {"type":"auto_path","suffix":".json"},
+        )
+
     def test_state_fetch_stays_out_of_generic_grounding_without_prior_context(self):
         goal="Fetch JSON from canonical/astra_runtime/state/example.json using url key source_url."
         grounding=grounder.ground(
