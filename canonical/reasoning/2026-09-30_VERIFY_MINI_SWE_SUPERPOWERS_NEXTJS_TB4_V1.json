@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_NEXTJS_TB4_V1",
+  "status": "CURRENT",
+  "real_objective": "Obtain clean current-harness evidence for the Brain-owned advanced-coding composition after the previously frozen TB4 task became contaminated before submission.",
+  "governing_invariants": [
+    "$0 incremental spend",
+    "No opaque provider access counted as capability ownership",
+    "No solution/** or tests/** before terminal submission",
+    "Configured cognition sees only files actually available in the benchmark agent runtime",
+    "One task cannot promote the whole advanced-coding family",
+    "No underlying coding-capability invention"
+  ],
+  "material_premises": [
+    "mini-SWE-agent 2.4.6 is Brain-owned byte-exact.",
+    "Superpowers 6.4.2 is Brain-owned.",
+    "The current GPT-5.6 Sol session can serve as general cognition substrate through session-mediated mini-SWE turns.",
+    "pretrain-shard-corruption became invalid for fresh evidence before official submission because configured cognition read build-context-only gen_shards.py that is deleted from the real runtime and exposes task-specific corruption construction.",
+    "nextjs-performance has no prior Brain lease or execution record found and its instruction content was not read before this lease.",
+    "The nextjs-performance instruction and task bytes are frozen at Terminal-Bench release commit 452bf305c6daa62fc59061d22133a7cbc7c1572e."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json",
+    "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e:tasks/nextjs-performance/instruction.md@9c78498756c859c0c5cc21da74199cc9788941d5",
+    "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e:tasks/nextjs-performance/task.toml@dfdf576cdad58eff4d770d0ec464ceebd4b0c3ff"
+  ],
+  "conclusion": "Quarantine pretrain-shard-corruption with zero capability credit and execute nextjs-performance instead, preserving mini-SWE one-action semantics, Superpowers debugging/TDD/verification discipline, strict runtime-only visibility, and one untouched independent verifier submission.",
+  "selected_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+  "rejected_material_alternatives": [
+    {
+      "route": "SUBMIT_PRETRAIN_ANYWAY",
+      "reason": "Contaminated evidence cannot support capability credit."
+    },
+    {
+      "route": "PAID_MODEL_API",
+      "reason": "Violates hard-zero incremental spend."
+    },
+    {
+      "route": "SEARCH_INDEFINITELY_FOR_ANOTHER_FRAMEWORK",
+      "reason": "A Brain-owned near-bar harness and executable composition already exist; direct clean evidence has higher information value."
+    }
+  ],
+  "uncertainties": [
+    "Whether the composed route will complete nextjs-performance under the untouched verifier.",
+    "Whether one successful task would generalize; it cannot by itself establish whole-family parity."
+  ],
+  "assumptions": [
+    "The final benchmark agent runtime can be reconstructed from the frozen Docker build semantics without exposing removed build-context-only task-specific files to cognition.",
+    "The public verification-capsule-runner remains available for the one terminal verifier submission."
+  ],
+  "non_goals": [
+    "No family promotion from one task.",
+    "No repair/replay of contaminated pretrain-shard-corruption.",
+    "No benchmark-specific hidden verifier inspection before submission."
+  ],
+  "next_action": "Open the current-base guarded lease PR. After trusted lease/drift validation, read nextjs-performance instruction and only final-runtime-visible files, then execute the task with session-mediated mini-SWE + Superpowers and submit exactly once.",
+  "supersession_conditions": [
+    "Canonical main materially changes the advanced-coding frontier before instruction read.",
+    "nextjs-performance becomes contaminated or spent before execution.",
+    "A stronger already-owned route is verified first."
+  ]
+}
