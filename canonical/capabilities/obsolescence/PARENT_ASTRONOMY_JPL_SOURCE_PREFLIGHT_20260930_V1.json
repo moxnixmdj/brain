@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PARENT_ASTRONOMY_JPL_SOURCE_PREFLIGHT_V1",
   "task_id": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
-  "status": "PASS",
+  "status": "INVALIDATED_BY_TASK_BLOB_CHANGE",
   "exact_task_blob": "74b9ccf55be72a41820cbea0decc0edd41b06538",
   "carrier_repository": "moxnixmdj/verification-capsule-runner",
   "workflow_run_id": 36664673653,
@@ -27,5 +27,12 @@
     }
   },
   "task_executed": false,
-  "preflight_only": true
+  "preflight_only": true,
+  "invalidation": {
+    "reason": "Task JSON paths were corrected after this preflight from elements[6]/[7] to JPL-schema-correct elements[1]/[8].",
+    "prior_task_blob": "74b9ccf55be72a41820cbea0decc0edd41b06538",
+    "current_task_blob": "4cb0fbb4f46cf3c7302688197117cbaffe2d3943",
+    "task_execution_credit": false,
+    "superseded_by": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_JPL_SOURCE_PREFLIGHT_20260930_V2.json"
+  }
 }
