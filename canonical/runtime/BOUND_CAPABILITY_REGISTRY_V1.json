@@ -1520,6 +1520,14 @@
             "CONFLICTED"
           ]
         }
+      },
+      "proposal_bindings": {
+        "assessment_path": {
+          "type": "effect_result",
+          "effect": "knowledge.assessment.available",
+          "field": "output_path",
+          "container": "scalar"
+        }
       }
     },
     "knowledge.support.materialize": {
@@ -1580,6 +1588,18 @@
         "observed_effect": {
           "supported_materialized": true,
           "conflicted_materialized": false
+        }
+      },
+      "proposal_bindings": {
+        "assessment_path": {
+          "type": "effect_result",
+          "effect": "knowledge.assessment.available",
+          "field": "output_path",
+          "container": "scalar"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
         }
       }
     },
@@ -2743,6 +2763,14 @@
         "exact_final_head_validation_run_id": 36646452335,
         "exact_final_head_validation_artifact_id": 11068728150,
         "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
+      },
+      "proposal_bindings": {
+        "result_path": {
+          "type": "effect_result",
+          "effect": "plain_goal.bound_capability.grounding",
+          "field": "output_path",
+          "container": "scalar"
+        }
       }
     }
   },
