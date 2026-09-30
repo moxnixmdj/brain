@@ -48,9 +48,17 @@ def _canon(value):
 
 def _tokens(value):
     out=[]
-    for raw in _WORD.findall(_canon(value).lower()):
-        t=raw.strip("._+-")
-        if len(t)<2 or t in _STOP:
+    raws=_WORD.findall(_canon(value))
+    for index,raw in enumerate(raws):
+        cleaned=raw.strip("._+-")
+        t=cleaned.lower()
+        single_upper_label=(
+            len(cleaned)==1 and cleaned.isalpha() and cleaned.isupper() and index>0
+        )
+        single_digit_label=(len(cleaned)==1 and cleaned.isdigit())
+        if len(t)<2 and not (single_upper_label or single_digit_label):
+            continue
+        if t in _STOP and not single_upper_label:
             continue
         if t not in out:
             out.append(t)
@@ -122,7 +130,7 @@ def _bind_role(units,entity_tokens):
         return None,"NO_EVIDENCE_UNIT_FOR_ENTITY"
     scored.sort(key=lambda x:(-x[0],-x[1],-x[2],x[3]["evidence_unit_id"]))
     best=scored[0]
-    tied=[x for x in scored if x[:3]==best[:3]]
+    tied=[x for x in scored if x[0]==best[0] and x[1]==best[1]]
     if len(tied)!=1:
         return None,"AMBIGUOUS_EVIDENCE_UNIT_FOR_ENTITY"
     if best[1] < 0.5 and best[0] < 2:
