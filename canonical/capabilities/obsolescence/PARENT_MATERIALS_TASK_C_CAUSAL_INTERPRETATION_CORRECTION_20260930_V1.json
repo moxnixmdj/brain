@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRESH_TASK_CAUSAL_INTERPRETATION_CORRECTION_V1",
+  "status": "TASK_C_SPENT__CAUSAL_INTERPRETATION_CORRECTED__NO_NEW_PROGRESS_CREDIT",
+  "supersedes_causal_interpretation_only": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+  "task_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "run_id": 36698638943,
+    "job_id": 109832558595,
+    "artifact_id": 11089076913,
+    "artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162",
+    "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
+    "execution_count": 1,
+    "replay_allowed": false
+  },
+  "primary_artifact_reinspection": {
+    "initial_discovery_contains_ignition_302_candidate": true,
+    "initial_discovery_contains_nbs_304_thermal_conductivity_candidate": true,
+    "selected_initial_candidate": {
+      "doi": "10.1080/00102208708947033",
+      "title": "Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+      "relevance_score": 10.971146169415,
+      "matched_terms": [
+        "6061",
+        "aluminum",
+        "bulk",
+        "stainless",
+        "steel",
+        "temperature"
+      ]
+    },
+    "stronger_decision_role_candidate": {
+      "doi": "10.6028/nbs.rpt.9869",
+      "title": "Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+      "publisher": "National Bureau of Standards",
+      "relevance_score": 6.20257746199,
+      "matched_terms": [
+        "304",
+        "conductivity",
+        "stainless",
+        "steel",
+        "thermal"
+      ]
+    },
+    "relevance_admission": {
+      "method": "FOCUSED_QUERY_TOKEN_COVERAGE_V1",
+      "selected_original_index": 5,
+      "matched_term_count": 6,
+      "query_token_count": 16,
+      "required_matched_term_count": 4,
+      "verified": true
+    }
+  },
+  "corrected_first_generic_causal_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE",
+  "causal_interpretation": "Initial discovery and provenance were sufficient to surface a source covering the requested property (thermal conductivity) and exact stainless-steel operand (304). The relevance gate nevertheless selected a higher token-count source about ignition temperature and 302 stainless steel. Therefore the earliest demonstrated failure is relevance admission lacking decision-role and operand coverage. The later metadata-refined bibliographic-provenance drop is real but downstream.",
+  "downstream_gap_preserved": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
+  "counter_effects": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false
+}
