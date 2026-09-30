@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-SPACE-CARGO-DOMINANT-BOTTLENECK-REAL-TASK-20260930-004",
+  "purpose": "Execute one frozen, genuinely open-ended space-systems parent Task A exactly once through the canonical model-independent ASTRA runtime. No prewired source, authority, bottleneck class, architecture answer, numeric value, formula, tool, command, calculation recipe, or task-specific runtime patch.",
+  "goal": "For a sustained Earth-to-LEO cargo system targeting 100,000,000 metric tonnes per year, determine the dominant physical bottleneck, quantify the first hard bound that makes the bottleneck decision-relevant, and identify the architecture change that most reduces that bottleneck. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant evidence, select the physical quantities and analysis needed, choose and run a zero-cost verification method, compare plausible bottleneck classes, identify material assumptions and interpretation limits, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-space-cargo-dominant-bottleneck-open-ended-parent-task-a",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 128,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-OPENENDED-SPACE-CARGO-DOMINANT-BOTTLENECK-REAL-TASK-20260930-004.json",
+    "source_task_blob_sha": "2c44b5040b0eee31d1656a4b64230c8eb00d7d93",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
