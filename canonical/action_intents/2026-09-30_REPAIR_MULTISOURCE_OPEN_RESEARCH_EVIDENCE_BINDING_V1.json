@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-MULTISOURCE-OPEN-RESEARCH-EVIDENCE-BINDING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "d131d2550a0c8af1bbbb0227bfe1a6e561843300",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_FRONTEND_EXTRACTS_ONLY_TOP_SOURCE_AND_BINDER_REQUIRES_BOTH_OPERANDS_IN_ONE_EXTRACTION",
+  "action_kind": "GENERIC_CAUSAL_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MULTISOURCE_EVIDENCE_BINDING",
+  "parent_execution_receipt": {
+    "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+    "runner_pr": 199,
+    "workflow_run": 36690682680,
+    "workflow_job": 109806904765,
+    "artifact_id": 11085208947,
+    "physical_execution_count": 1,
+    "task_spent": true,
+    "replay_forbidden": true,
+    "semantic_completion": false,
+    "first_causal_gap": "OPEN_ENDED_RESEARCH_EVIDENCE_EXTRACTED__CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED",
+    "observed_counts": {
+      "provenance_verified_candidate_count": 7,
+      "relevance_verified_candidate_count": 1,
+      "evidence_extracted_candidate_count": 1,
+      "claim_relation_evaluated_count": 0
+    }
+  },
+  "prior_work_checked": [
+    "HTTP2 parent Task A is spent and replay-forbidden.",
+    "Genomics parent Task B was physically started exactly once by live atomic guard in runner run 36690682680 and is now spent/no-replay.",
+    "Task B reached verified discovery and evidence extraction but zero relation evaluations.",
+    "Current open_research_source_frontend ranks all retrieval-verified candidates but extracts only top_candidate_original_index.",
+    "Current objective_claim_operand_binding.bind accepts exactly one extraction, so two-source comparison operands cannot be joined."
+  ],
+  "expected_parent_frontier_change": "Allow bounded provenance-preserving evidence from multiple positively ranked verified sources to satisfy a single explicit comparison when and only when one unambiguous exact-unit-compatible operand pair exists; leave decision synthesis and factual sufficiency unclaimed.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact generic multi-source binding bytes and adversarial regressions are independently guarded-qualified. Never replay genomics Task B; next parent must be fresh and materially different.",
+  "recursive_obs": {
+    "surviving_necessity": "Comparative open research frequently requires operands from distinct authoritative records.",
+    "selected_surviving_route": "BOUNDED_POSITIVE_RANKED_MULTI_SOURCE_EXTRACTION_PLUS_UNAMBIGUOUS_EXACT_UNIT_OPERAND_BINDING",
+    "deleted_or_bypassed_paths": [
+      "GENOMICS_TASK_REPLAY",
+      "GENOMICS_SPECIFIC_ACCESSIONS",
+      "HARDCODED_NUMERIC_VALUES",
+      "MODEL_COGNITION",
+      "UNBOUNDED_WEB_FANOUT",
+      "ASSUME_TOP_SOURCE_CONTAINS_ALL_OPERANDS",
+      "DECISION_SYNTHESIS_BEFORE_RELATION_IS_BOUND"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The run already proved discovery, provenance, ranking and extraction. The first missing invariant is joining one explicit relation across separately verified relevant sources without inventing operands or values.",
+    "stop_rule": "QUALIFY_THIS_CAUSAL_REPAIR_ONLY__THEN_FREEZE_ONE_FRESH_PARENT_TASK_C"
+  }
+}
