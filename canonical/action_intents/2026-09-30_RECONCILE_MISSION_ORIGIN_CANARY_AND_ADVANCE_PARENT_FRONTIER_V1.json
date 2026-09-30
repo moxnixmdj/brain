@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MISSION-ORIGIN-CANARY-AND-ADVANCE-PARENT-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_FRONTIER_HAS_NOT_RECONCILED_FIRST_CLEAN_MISSION_ORIGIN_CANARY_PASS",
+  "action_kind": "CANONICAL_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_FRONTIER_HAS_NOT_RECONCILED_FIRST_CLEAN_MISSION_ORIGIN_CANARY_PASS::CANONICAL_RECONCILIATION",
+  "expected_parent_frontier_change": "Close the path-specific mission-origin blocker by evidence-backed reuse, demote compile miss from terminal status, preserve zero canary credit, and authorize one materially different fresh parent task through the canonical entrypoint.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 2e9fb9c50f70aa8ce1951d03c4a892fb6f2d7147",
+    "first Mauna spend run 36669918546",
+    "first clean mission-origin canary PR79 run 36672816106",
+    "canonical astra_runtime mission entrypoint",
+    "APT origin validation guard",
+    "PR370 merged state"
+  ],
+  "evidence_presence_classification": "DIRECT_FRESH_CANARY_EVIDENCE_EXISTS__PATH_SPECIFIC_BLOCKER_CLOSED__PARENT_CAPABILITY_STILL_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical mirrors agree that mission-origin propagation is verified, no second canary or runtime repair is authorized, and the next move is one materially different fresh parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2e9fb9c50f70aa8ce1951d03c4a892fb6f2d7147",
+    "real_outcome": "Advance the parent frontier after an existing-route canary closed the prior path-specific blocker.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain new admissible evidence about the parent capability, not more evidence about an already-closed mission-origin seam.",
+      "proxy_goals_deleted": [
+        "repeat canary",
+        "patch compiler because compile miss exists",
+        "treat synthetic canary contract residual as parent evidence"
+      ],
+      "surviving_necessity": "One materially different fresh open-ended parent task through canonical mission loading."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical astra_runtime.main",
+        "autonomous acquisition fallback",
+        "APT origin validation"
+      ],
+      "external_existing_routes_checked": [
+        "public carrier PR79 run 36672816106"
+      ],
+      "capability_work_deleted": [
+        "runtime mission-path repair",
+        "second canary",
+        "Mauna replay"
+      ],
+      "surviving_gap": "PARENT_OPEN_ENDED_CAPABILITY_UNPROVEN__MISSION_ORIGIN_ROUTE_VERIFIED__MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_REQUIRED"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The previous mission-origin gap was path-specific and is now closed. The surviving parent state is evidentiary: no fresh post-seam open-ended parent task has yet executed.",
+      "delete_bypass_substitute_options": [
+        "reuse canonical mission entrypoint",
+        "freeze new parent objective",
+        "fail closed on first new gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_CAPABILITY_UNPROVEN__MISSION_ORIGIN_ROUTE_VERIFIED__MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "FRESH_PARENT_TASK_THROUGH_EXISTING_ENTRYPOINT",
+        "SECOND_CANARY",
+        "PATCH_COMPILER",
+        "PATCH_RUNTIME",
+        "REPLAY_MAUNA"
+      ],
+      "losing_routes_reason": "The entrypoint is verified; second canary and mission repair are redundant; compile miss has fallback; Mauna is spent.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Complete for mission-origin seam; next evidence must be parent-level."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR371 reduced canary",
+        "compile-gap-as-terminal interpretation",
+        "stale pointer request to run Task A without canary reconciliation"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "canonical mission identity propagation"
+      ],
+      "fresh_reuse_plan": "Use the same verified entrypoint for the fresh parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused primary canary receipt",
+        "reused first-spend logs",
+        "reused current runtime code"
+      ],
+      "search_stop_decision": "The prior seam is directly closed; more canary search has zero marginal authority.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and first authoritative canary receipt were refreshed immediately before action."
+    },
+    "routes_considered": [
+      "FRESH_PARENT_TASK_THROUGH_EXISTING_ENTRYPOINT",
+      "SECOND_CANARY",
+      "PATCH_COMPILER",
+      "PATCH_RUNTIME",
+      "REPLAY_MAUNA"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SECOND_CANARY",
+      "MISSION_PATH_PATCH",
+      "MAUNA_REPLAY",
+      "SYNTHETIC_CANARY_RESIDUAL_PROMOTION"
+    ],
+    "selected_surviving_route": "FRESH_PARENT_TASK_THROUGH_EXISTING_ENTRYPOINT",
+    "why_selected_route_is_fastest_sufficient": "It is the first action capable of producing admissible parent-level evidence after the path-specific blocker was removed.",
+    "expected_parent_level_state_change": "No promotion yet; authorize one materially different fresh parent run and stop at its first causal terminal.",
+    "stop_condition": "Stop after canonical reconciliation. The parent execution belongs to a new exact-base freeze/action."
+  }
+}
