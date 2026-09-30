@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PARENT-CLIMATE-FIRST-SPEND-AUTHORITY-AND-CARRIER-ORIGIN-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PR347_REPLAY_AUTHORITY_AND_CAUSAL_ORDER_INCORRECT",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PR347_REPLAY_AUTHORITY_AND_CAUSAL_ORDER_INCORRECT::NO_MUTATION_DIAGNOSTIC",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "EXISTING_IMMUTABLE_EXECUTION_AND_SOURCE_PR_STATE_REQUIRE_AUTHORITY_RECONCILIATION",
+  "expected_parent_frontier_change": "Supersede PR347's attribution of authority to replay run 36670516407; preserve the earlier first substantive execution as zero-credit freshness consumption because source Brain PR317 had already been closed fail-closed; localize the carrier mission-origin contract as the first observed nested execution gap without authorizing runtime repair from an unauthorized task.",
+  "prior_work_checked": [
+    "Brain PR317 closed at 2026-09-30T04:40:26Z with explicit no execution/no credit authority",
+    "runner run 36669918546 started at 2026-09-30T04:40:44Z from the PR317 candidate bytes",
+    "run 36669918546 invoked runtime.execute_step with model planning disabled and crossed producer execution exactly once",
+    "run 36669918546 terminal blocker CAPABILITY_ACQUISITION_REQUIRED; targeted and federated supplier dispatch both report origin mission path invalid",
+    "run 36669918546 harness mission object contains mission_id and goal but no _runtime_mission_path",
+    "later Brain PR337 froze the same substantive Mauna Loa objective after freshness had already been consumed",
+    "runner run 36670516407 directly called compiler.compile_goal before runtime acquisition and is later replay evidence only",
+    "merged PR347 incorrectly used run 36670516407 as authoritative first Task A evidence"
+  ],
+  "generic_repair_from_single_probe": false,
+  "probe_specific": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "stop_condition": "Correct evidence authority and canonical frontier only. Do not modify Brain runtime, do not replay Mauna Loa, do not grant parent credit. Next action is a fresh non-parent carrier-contract qualification before freezing a materially different Task A.",
+  "recursive_obs": {
+    "obs_goal": {
+      "real_outcome": "Restore exact evidence authority and causal ordering so the next execution tests capability rather than carrier metadata.",
+      "proxy_goals_deleted": [
+        "patch compiler from replay",
+        "repair runtime from unauthorized task result",
+        "count replay as Task A",
+        "replay Mauna Loa"
+      ]
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "runtime.execute_step",
+        "runtime.run_goal acquisition fallback",
+        "auto APT acquisition",
+        "auto PyPI acquisition"
+      ],
+      "surviving_gap": "GENERIC_CARRIER_MISSION_ORIGIN_CONTRACT_UNQUALIFIED"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Carrier/harness path-specific until independently qualified; no runtime capability absence is proven by the invalid origin metadata.",
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__MAUNA_LOA_SUBSTANTIVE_TASK_SPENT_BY_UNAUTHORIZED_FIRST_EXECUTION__GENERIC_CARRIER_MISSION_ORIGIN_CONTRACT_UNQUALIFIED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "selected_surviving_route": "QUALIFY_GENERIC_PARENT_CARRIER_MISSION_ORIGIN_CONTRACT_ON_FRESH_NON_PARENT_FIXTURE__USE_CANONICAL_RUNTIME_ENTRY_BOUNDARY_AND_VALID_RUNTIME_MISSION_PATH__THEN_FREEZE_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "synthetic_verification_necessity": "Use a fresh non-parent fixture to prove the carrier invokes the canonical runtime boundary with a valid canonical mission path before any new parent task."
+    }
+  }
+}
