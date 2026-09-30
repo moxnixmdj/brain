@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_POST_PROMOTION_FALSIFICATION_V1",
+  "evidence_id": "GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "POST_PROMOTION_REAL_TASK_FALSIFICATION__CAPABILITY_SCOPE_REOPENED",
+  "source_pr": 267,
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/composition-fresh-reuse-decision-20260930",
+    "run_id": 36653756561,
+    "job_id": 109693472194,
+    "armed_head": "f236fdecd3ba45e9777a8d58902802d68a26c05b",
+    "conclusion": "failure",
+    "exact_route_bytes_check": "PASS"
+  },
+  "task": {
+    "domain": "TYPED_DECISION_SYNTHESIS_AND_INDEPENDENT_VERIFICATION",
+    "materially_distinct_from_prior_tasks": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "same_task_replay_allowed": false
+  },
+  "observed_failure": {
+    "terminal_error": "ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+    "failed_stage": "DOWNSTREAM_INDEPENDENT_DECISION_VERIFIER",
+    "upstream_grounding_reached": true,
+    "composition_reached": true,
+    "planner_reached": true,
+    "producer_decision_reached": true,
+    "independent_verifier_rejected": true
+  },
+  "causal_localization": {
+    "classification": "GENERIC_DOWNSTREAM_PATH_PROVENANCE_BINDING_DEFECT",
+    "chain": [
+      "decision.synthesis.typed.stdlib consumes original decision input_path and produces output_path",
+      "grounded composition records both source input_path and produced output_path in prior path context",
+      "generic downstream input_path binding scans prior paths in reverse order",
+      "the produced output_path therefore outranks the original source input_path",
+      "decision.synthesis.verify.stdlib can receive the producer result as both input_path and result_path",
+      "independent verifier recomputes input hash from the wrong file and returns verified=false"
+    ],
+    "earliest_causal_seam": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
+    "excluded_explanations": [
+      "carrier failure: exact runner executed and byte-pin step passed",
+      "model failure: model_dependency_count=0 and no model route present",
+      "grounding unavailable: execution progressed through composition into downstream verifier",
+      "planner unavailable: execution reached the selected downstream verifier",
+      "verifier unavailable: verifier executed and returned a negative semantic verdict"
+    ]
+  },
+  "existing_generic_repair_primitive": {
+    "path": "canonical/runtime/capability_proposal_generators.py",
+    "primitive": "proposal_bindings.effect_result",
+    "applicable_contract": "decision.synthesis.verify.stdlib.result_path should be bound to decision.synthesis.typed output_path",
+    "warning": "Do not repair by task-specific wording or generic recency heuristics before OBS."
+  },
+  "prior_successes_preserved": [
+    "Unified Planning Task A run 36652169397",
+    "YAML→JSON fresh reuse run 36652623916"
+  ],
+  "promotion_effect": {
+    "prior_acquisition_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
+    "prior_broad_claim_falsified": true,
+    "reusable_capability_credit_revoked": true,
+    "fresh_reuse_credit_revoked": true,
+    "prior_verified_real_task_results_preserved": true,
+    "frontier_dependency_credit_change": 0
+  }
+}
