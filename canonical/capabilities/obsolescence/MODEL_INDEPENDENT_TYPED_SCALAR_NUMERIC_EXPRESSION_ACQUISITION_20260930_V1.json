@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_EVIDENCE_V1",
+  "capability_id": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_NON_ASTRONOMY_EXECUTION_PASS",
+  "canonical_base_commit": "cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+  "source_pr": null,
+  "candidate_branch": "capability/typed-scalar-sympy-v1b-20260930",
+  "route": "EXPLICIT_RESULT_ALIASES__STRICT_PYTHON_AST_ALLOWLIST__PROGRAMMATIC_SYMPY_1_14_OBJECTS",
+  "scope": "Finite real scalar expressions over explicit prior-result aliases and numeric literals with +,-,*,/,**,unary +/-; fail closed outside the bounded grammar.",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_gap": {
+    "source_task": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+    "source_run_id": 36664896545,
+    "causal_subgoal": "Calculate the Kepler predicted orbital period in days using P_pred_days = 365.2568983 * (a_au ** 1.5)",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json",
+    "same_task_replay": false
+  },
+  "producer_supplier": {
+    "capability_id": "numeric.expression.sympy.typed",
+    "project": "sympy",
+    "version": "1.14.0",
+    "adapter_path": "canonical/runtime/bound_capabilities/numeric_expression_sympy.py",
+    "registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "dependency_closure_sha256": "72f749d3eadfaa28d62e6788e13c5ca55baf2d8f5e2347341b79aaa077876d6a",
+    "inherited_supplier_adjudication": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+  },
+  "deterministic_regression": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36666277034,
+    "job_id": 109731524267,
+    "conclusion": "success",
+    "properties": [
+      "compiler explicit aliases map to exact prior result cycles",
+      "derived expression alias can feed the already-verified jq scalar relation",
+      "duplicate aliases fail closed",
+      "unknown aliases fail closed",
+      "calls, attributes, subscripts, and string literals fail closed",
+      "division by zero fails closed",
+      "exponent magnitude beyond bound fails closed",
+      "boolean scalar variables fail closed"
+    ]
+  },
+  "fresh_cross_domain_task": {
+    "task_id": "TYPED-SCALAR-SYMPY-FRESH-GITHUB-001",
+    "domain": "SOFTWARE_REPOSITORY_LIVE_METADATA",
+    "source_task_replay": false,
+    "source_url": "https://api.github.com/repos/pallets/click",
+    "aliases": {
+      "stars": "stargazers_count",
+      "forks": "forks_count"
+    },
+    "expression": "stars * (forks ** 0.5)",
+    "downstream_relation": "ABS_DIFF_LTE(score, stars, 100000)",
+    "producer_path": [
+      "authoritative JSON fetch stars",
+      "authoritative JSON fetch forks",
+      "numeric.expression.sympy.typed",
+      "native write_json_records",
+      "json.query.jq"
+    ],
+    "independent_oracle": {
+      "method": "fresh GitHub API refetch plus independent Python math.sqrt arithmetic",
+      "producer_adapter_imported": false,
+      "producer_sympy_imported": false,
+      "verified": true
+    },
+    "model_dependency_count": 0
+  },
+  "supply_chain": {
+    "sympy_wheel": {
+      "filename": "sympy-1.14.0-py3-none-any.whl",
+      "sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5"
+    },
+    "mpmath_wheel": {
+      "filename": "mpmath-1.3.0-py3-none-any.whl",
+      "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c"
+    },
+    "closure_sha256": "72f749d3eadfaa28d62e6788e13c5ca55baf2d8f5e2347341b79aaa077876d6a",
+    "installer": "existing Brain verified PyPI wheel-closure installer"
+  },
+  "artifact": {
+    "artifact_id": 11075549084,
+    "name": "typed-scalar-sympy-fresh-qualification",
+    "digest": "sha256:8a222b5ced5eb1f0e37534185b0d689bf10c81a944398349614bdefd7abc36e0"
+  },
+  "credit_effect": {
+    "reusable_capabilities_inherited_delta": 1,
+    "verified_real_tasks_completed_delta": 1,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0,
+    "parent_capability_promoted": false
+  },
+  "parent_reconciliation": {
+    "prior_blocker": "PARENT_TYPED_SCALAR_NUMERIC_EXPRESSION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_SYMPY_ROUTE_UNBOUND",
+    "blocker_status": "CLOSED_FOR_BOUNDED_TYPED_SCALAR_EXPRESSION_SCOPE",
+    "parent_capability_status": "NOT_PROMOTED",
+    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_SPENT_TASK_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+  },
+  "anti_overclaim": [
+    "Does not obsolete general mathematical reasoning.",
+    "Does not support arbitrary functions, symbolic algebra, equation solving, matrices, calculus, or theorem proving through this bound interface.",
+    "Does not authorize arbitrary Python evaluation or string sympify.",
+    "Does not promote OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.",
+    "Does not authorize replay of astronomy or geophysics parent tasks."
+  ]
+}
