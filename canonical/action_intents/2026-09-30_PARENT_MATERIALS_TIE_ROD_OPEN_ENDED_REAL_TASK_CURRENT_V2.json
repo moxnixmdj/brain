@@ -1,0 +1,345 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001-CURRENT-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either produce the first admissible genuinely open-ended, model-independent parent real-task result with independent verification, or replace the broad parent-scope blocker with the first specific causal gap exposed by the unspent materials-engineering task. No replay and no promotion from this intent alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main f94650b3727a6e35774b465312bbedc295cded2c",
+    "canonical current blocker is PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "Mauna Loa open-ended Task A is spent and replay-forbidden with zero parent capability credit",
+    "authoritative non-parent PyPI mission-path canary run 36672910427 passed canonical mission-path propagation into autonomous acquisition with model_dependency_count=0",
+    "canary artifact 11079061211 digest sha256:35b35cb4bc346cd1555047bf66e2e46b85112a2f029eef6b9b0339ffd09f15e4",
+    "materials tie-rod task PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001 has never executed and remains frozen before source discovery",
+    "no source URL, formula, JSON path, expected answer, or controller action graph is predeclared in the frozen task"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001 exactly once through the canonical ASTRA mission entrypoint with model planning disabled. If it completes, independently refetch cited authoritative material properties and recompute all governing diameters and masses. If it fails, preserve only the first causal capability gap, never replay this task, and recompute the parent frontier before any repair.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f94650b3727a6e35774b465312bbedc295cded2c",
+    "real_outcome": "Directly test the current parent capability on one unspent genuinely open-ended materials-engineering objective after the canonical autonomous-acquisition mission-identity blocker was closed by a fresh canary.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Directly test the current parent capability on one unspent genuinely open-ended materials-engineering objective after the canonical autonomous-acquisition mission-identity blocker was closed by a fresh canary.",
+      "proxy_goals_deleted": [
+        "preselect source URLs",
+        "preselect formulas",
+        "preselect JSON paths",
+        "preselect controller actions",
+        "another narrow child benchmark",
+        "another governance patch",
+        "frontier-model cognition"
+      ],
+      "surviving_necessity": "The current frontier explicitly requires one admissible genuinely open-ended model-independent parent real task. This unspent task exercises autonomous decomposition, source selection, tool selection, quantitative engineering, provenance, and independent verification without prewiring."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current canonical ASTRA mission entrypoint and runtime on f94650b3727a6e35774b465312bbedc295cded2c",
+        "model-independent plain-goal grounding and grounded executable composition",
+        "domain-free knowledge/source discovery and autonomous zero-cost capability acquisition",
+        "typed scalar numeric expression and bounded numeric relation execution",
+        "model-independent evidence-to-decision synthesis and independent verification",
+        "fresh PyPI mission-path propagation canary run 36672910427"
+      ],
+      "external_existing_routes_checked": [
+        "hand-authored materials solver rejected because it would answer the instance while bypassing the open-ended capability under test",
+        "preselected source/formula route rejected because it removes autonomous decomposition and discovery",
+        "model planner rejected because model-backed cognition is inadmissible for parent capability credit"
+      ],
+      "capability_work_deleted": [
+        "no mission-identity repair",
+        "no supplier-specific repair before real failure",
+        "no task-specific materials compiler rule",
+        "no preselected material-property source",
+        "no formula injection",
+        "no model cognition"
+      ],
+      "surviving_gap": "Whether current Brain can autonomously decompose and complete one genuinely open-ended materials-engineering research/design task remains unproven."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent evidence gap only. The previously localized canonical mission-path propagation blocker has been closed by authoritative run 36672910427.",
+      "delete_bypass_substitute_options": [
+        "delete spent Mauna replay",
+        "reuse current canonical mission entrypoint",
+        "reuse current public zero-cost carrier",
+        "reuse unspent frozen materials task",
+        "stop on first new causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__CANONICAL_MISSION_ENTRYPOINT__UNSPENT_OPEN_ENDED_MATERIALS_TASK",
+        "HAND_CODE_MATERIALS_SOLVER",
+        "PREWIRE_SOURCES_AND_FORMULAS",
+        "USE_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "Only the current model-independent runtime on the unspent open-ended task can directly close or falsify the present parent evidence gap. Hand-coding and prewiring solve the wrong object; model planning invalidates the dependency-removal proof.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Run the frozen real task once. On success, independently refetch producer-cited authoritative properties and recompute yield/elongation constraints, governing diameters, masses, and the lightest compliant candidate without importing producer modules. On failure, preserve only the first causal trace."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "mission-identity repair work",
+        "additional child benchmarks before this parent task resolves",
+        "prewired parent-task variants"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "source discovery",
+        "knowledge acquisition",
+        "decomposition",
+        "tool selection",
+        "numeric expression",
+        "constraint comparison",
+        "provenance",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "If the task succeeds and independent verification passes, select a materially different open-ended technical/scientific task for fresh transfer evidence before any dependency-removal claim. If it fails, work only on the first causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical blocker and target",
+        "reused fresh mission-path canary evidence",
+        "reused existing public carrier",
+        "reused frozen unspent materials task"
+      ],
+      "search_stop_decision": "Stop architecture/search work and execute. The unresolved obligation is itself real open-ended task evidence; no challenger can produce that evidence faster without prewiring or inadmissible model cognition.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed current main, current blocker, public carrier readiness, canonical mission-path propagation, and task spend state immediately before freeze."
+    },
+    "routes_considered": [
+      "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__CANONICAL_MISSION_ENTRYPOINT__UNSPENT_OPEN_ENDED_MATERIALS_TASK",
+      "HAND_CODE_MATERIALS_SOLVER",
+      "PREWIRE_SOURCES_AND_FORMULAS",
+      "USE_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_MAUNA_REPLAY",
+      "MISSION_IDENTITY_REPAIR",
+      "PREWIRED_SOURCES",
+      "PREWIRED_FORMULAS",
+      "HAND_CODED_INSTANCE_SOLVER",
+      "MODEL_PLANNER"
+    ],
+    "selected_surviving_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__CANONICAL_MISSION_ENTRYPOINT__UNSPENT_OPEN_ENDED_MATERIALS_TASK",
+    "why_selected_route_is_fastest_sufficient": "It uses the current proven mission entrypoint and already-qualified zero-cost carrier, requires no implementation before evidence, and directly converts the remaining parent uncertainty into either independently verified real capability evidence or one precise causal gap.",
+    "expected_parent_level_state_change": "Either produce the first admissible genuinely open-ended, model-independent parent real-task result with independent verification, or replace the broad parent-scope blocker with the first specific causal gap exposed by the unspent materials-engineering task. No replay and no promotion from this intent alone.",
+    "stop_condition": "Execute PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001 exactly once through the canonical ASTRA mission entrypoint with model planning disabled. If it completes, independently refetch cited authoritative material properties and recompute all governing diameters and masses. If it fails, preserve only the first causal capability gap, never replay this task, and recompute the parent frontier before any repair.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T05:22:03Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__CANONICAL_MISSION_ENTRYPOINT__UNSPENT_OPEN_ENDED_MATERIALS_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current main f94650b3727a6e35774b465312bbedc295cded2c",
+          "current active target OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+          "NONPARENT_MISSION_PATH_PYPI_CANARY_RECONCILIATION_20260930_V1"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Task intentionally supplies no material-property authority; authoritative source discovery is part of the capability under test."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Current bound capability registry/runtime already contains source discovery, numeric execution, synthesis, and zero-cost acquisition surfaces; no package is preselected for the task."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Broad external discovery is intentionally delegated to the producer; community sources may be discovery sensors only and cannot qualify consequential material properties."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent open-ended materials engineering source discovery decomposition constraint optimization provenance verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "current Project Brain autonomous source tool capability acquisition route"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "canonical ASTRA mission entrypoint versus prewired engineering solver versus model planner"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current 2026 Project Brain open-ended parent runtime and carrier state"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__CANONICAL_MISSION_ENTRYPOINT__UNSPENT_OPEN_ENDED_MATERIALS_TASK",
+          "evidence": [
+            "canonical mission-path PyPI canary run 36672910427 passed",
+            "materials task is unspent and frozen before source discovery",
+            "current public runner executed the canary successfully at $0"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36672910427",
+            "BRAIN_INHERITED current main f94650b3727a6e35774b465312bbedc295cded2c",
+            "INDEPENDENT_VERIFIER canary terminal receipt artifact 11079061211"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the exact remaining parent evidence obligation without prewiring or model cognition.",
+            "CAPABILITY_STRENGTH": "Requires autonomous decomposition, evidence discovery, multi-constraint quantitative engineering, provenance, synthesis, and verification.",
+            "WALL_CLOCK": "Zero implementation before the real task; current runtime and carrier are reused.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Canonical mission identity propagation and public carrier were freshly proven.",
+            "VERIFIABILITY": "One-shot frozen task with producer-independent source re-fetch and recomputation on success; first-causal-gap preservation on failure."
+          }
+        },
+        {
+          "route": "HAND_CODE_MATERIALS_SOLVER",
+          "evidence": [
+            "Would solve the instance but bypass autonomous research/decomposition."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could yield a correct instance answer.",
+            "CAPABILITY_STRENGTH": "Does not prove the target open-ended capability.",
+            "WALL_CLOCK": "Fast to the wrong success criterion.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for one instance only.",
+            "VERIFIABILITY": "Cannot justify parent capability acquisition."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger dominates direct one-shot execution of the unspent materials task. Prewiring and hand-coding invalidate the proof object; model cognition is disallowed.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__CANONICAL_MISSION_ENTRYPOINT__UNSPENT_OPEN_ENDED_MATERIALS_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T05:22:03Z",
+        "max_age_hours": 2,
+        "selected_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__CANONICAL_MISSION_ENTRYPOINT__UNSPENT_OPEN_ENDED_MATERIALS_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:22:03Z",
+            "evidence": [
+              "DIRECT_PROBE authoritative canary run 36672910427 completed successfully on the same public carrier."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_f94650b3727a6e35774b465312bbedc295cded2c",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:22:03Z",
+            "evidence": [
+              "BRAIN_INHERITED exact current main f94650b3727a6e35774b465312bbedc295cded2c"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "CANONICAL_ASTRA_MISSION_ENTRYPOINT",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:22:03Z",
+            "evidence": [
+              "DIRECT_PROBE run 36672910427 propagated canonical mission path into autonomous PyPI acquisition with no origin-mission-path error."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_HTTPS_EGRESS_FOR_AUTHORITATIVE_SOURCE_DISCOVERY",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:22:03Z",
+            "evidence": [
+              "DIRECT_PROBE canary public runner reached PyPI supplier discovery/acquisition over HTTPS."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
