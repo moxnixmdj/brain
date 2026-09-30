@@ -758,6 +758,25 @@ def _invoke_bound_capability(args):
     result["dependency"]=dependency
     return result
 
+def _bounded_failure_result(result,max_chars=2400):
+    if not isinstance(result,dict):
+        return repr(result)[:max_chars]
+    preferred={}
+    for key in (
+        "adapter","capability_id","verified","reason","status",
+        "selected_alternative","input_path","result_path","output_path",
+        "input_sha256","output_sha256","model_dependency_count","error",
+    ):
+        if key in result:
+            preferred[key]=result.get(key)
+    if not preferred:
+        preferred=result
+    try:
+        raw=json.dumps(preferred,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+    except Exception:
+        raw=repr(preferred)
+    return raw.replace("\\n"," ")[:max_chars]
+
 def _verify_action_expectation(action,result):
     expect=action.get("expect")
     if expect is None:
@@ -780,7 +799,13 @@ def _verify_action_expectation(action,result):
     if not ok:
         observed=json.dumps(value,ensure_ascii=False,sort_keys=True) if isinstance(value,(dict,list)) else repr(value)
         observed=observed.replace("\\n"," ")[:800]
-        raise Blocker("ACTION_EXPECTATION_FAILED:"+field+":OBSERVED="+observed)
+        reason=str(result.get("reason") or result.get("error") or "").replace("\\n"," ")[:800]
+        detail=_bounded_failure_result(result)
+        message="ACTION_EXPECTATION_FAILED:"+field+":OBSERVED="+observed
+        if reason:
+            message+=":REASON="+reason
+        message+=":RESULT="+detail
+        raise Blocker(message)
 
 def _resolve_result_refs(value, trace):
     if isinstance(value,dict):
