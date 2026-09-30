@@ -4896,6 +4896,167 @@ def _ground_plain_goal_to_bound_capabilities(mission, goal):
     return path,result
 
 
+def _load_open_web_source_candidate_discovery():
+    _activate_external_http_bridge()
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"open_web_source_candidate_discovery.py"
+    spec=importlib.util.spec_from_file_location("project_brain_open_web_source_candidate_discovery",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("OPEN_WEB_SOURCE_CANDIDATE_DISCOVERY_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _load_source_candidate_provenance_verifier():
+    _activate_external_http_bridge()
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"source_candidate_provenance_verify.py"
+    spec=importlib.util.spec_from_file_location("project_brain_source_candidate_provenance_verify",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("SOURCE_CANDIDATE_PROVENANCE_VERIFIER_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _run_broad_objective_source_provenance_frontier(
+    mission, goal, grounding, grounding_path
+):
+    decomposition=grounding.get("broad_objective_decomposition")
+    if not isinstance(decomposition,dict) or decomposition.get("status")!="DECOMPOSED":
+        return None
+    roles=decomposition.get("roles")
+    if not isinstance(roles,list) or not roles or not isinstance(roles[0],dict):
+        raise Blocker("BROAD_OBJECTIVE_DECOMPOSITION_ROLES_INVALID")
+    first_role=roles[0]
+    if (
+        first_role.get("role")!="SOURCE_DISCOVERY"
+        or first_role.get("status")!="REQUIRES_GROUNDING"
+    ):
+        raise Blocker("BROAD_OBJECTIVE_SOURCE_DISCOVERY_ROLE_INVALID")
+
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    discovery_module=_load_open_web_source_candidate_discovery()
+    try:
+        discovery=discovery_module.discover(goal,limit=12,timeout=15)
+    except Exception as exc:
+        raise Blocker(
+            "BROAD_OBJECTIVE_SOURCE_DISCOVERY_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+
+    discovery_path=EVID_DIR/f"{mid}__BROAD_OBJECTIVE_SOURCE_DISCOVERY.json"
+    discovery_evidence={
+        "schema":"PROJECT_BRAIN_BROAD_OBJECTIVE_SOURCE_DISCOVERY_RUNTIME_V1",
+        "mission_id":mid,
+        "role":first_role,
+        "objective":goal,
+        "grounding_evidence_path":(
+            str(grounding_path.relative_to(ROOT))
+            if ROOT in grounding_path.parents else str(grounding_path)
+        ),
+        "discovery":discovery,
+        "external_capability_acquisition_attempted":False,
+        "model_dependency_count":0,
+        "incremental_spend_usd":0,
+        "observed_at_utc":utc(),
+    }
+    writej(discovery_path,discovery_evidence)
+    candidates=list(discovery.get("candidates") or []) if isinstance(discovery,dict) else []
+    if discovery.get("status")!="CANDIDATES_DISCOVERED" or not candidates:
+        raise Blocker(
+            "BROAD_OBJECTIVE_SOURCE_DISCOVERY_UNAVAILABLE:"
+            +json.dumps({
+                "evidence_path":str(discovery_path.relative_to(ROOT)),
+                "status":discovery.get("status") if isinstance(discovery,dict) else None,
+                "external_capability_acquisition_attempted":False,
+            },sort_keys=True)
+        )
+
+    verifier=_load_source_candidate_provenance_verifier()
+    provenance_records=[]
+    verified_count=0
+    verified_statuses={
+        "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+        "RETRIEVAL_PROVENANCE_VERIFIED",
+    }
+    for candidate in candidates[:6]:
+        try:
+            verification=verifier.verify(candidate,timeout=15)
+        except Exception as exc:
+            verification={
+                "status":"UNVERIFIED",
+                "reason":"PROVENANCE_VERIFIER_EXCEPTION",
+                "error_class":type(exc).__name__,
+                "error":str(exc)[:500],
+                "model_dependency_count":0,
+                "incremental_spend_usd":0,
+            }
+        provenance_records.append({
+            "candidate":candidate,
+            "verification":verification,
+        })
+        if isinstance(verification,dict) and verification.get("status") in verified_statuses:
+            verified_count+=1
+            if verified_count>=2:
+                break
+
+    provenance_path=EVID_DIR/f"{mid}__SOURCE_CANDIDATE_PROVENANCE.json"
+    provenance_evidence={
+        "schema":"PROJECT_BRAIN_BROAD_OBJECTIVE_SOURCE_PROVENANCE_RUNTIME_V1",
+        "mission_id":mid,
+        "objective":goal,
+        "source_discovery_evidence_path":str(discovery_path.relative_to(ROOT)),
+        "records":provenance_records,
+        "verified_provenance_count":verified_count,
+        "fact_authority_verified":False,
+        "primary_source_status_verified":False,
+        "relevance_verified":False,
+        "evidence_sufficiency_verified":False,
+        "external_capability_acquisition_attempted":False,
+        "model_dependency_count":0,
+        "incremental_spend_usd":0,
+        "observed_at_utc":utc(),
+    }
+    writej(provenance_path,provenance_evidence)
+    if verified_count<1:
+        raise Blocker(
+            "SOURCE_CANDIDATE_PROVENANCE_VERIFICATION_FAILED:"
+            +json.dumps({
+                "source_discovery_evidence_path":str(discovery_path.relative_to(ROOT)),
+                "provenance_evidence_path":str(provenance_path.relative_to(ROOT)),
+                "candidate_count":len(candidates),
+                "verified_provenance_count":0,
+                "external_capability_acquisition_attempted":False,
+            },sort_keys=True)
+        )
+
+    next_role=(roles[1].get("role") if len(roles)>1 and isinstance(roles[1],dict) else None)
+    raise Blocker(
+        "SOURCE_AUTHORITY_PRIMARY_EVIDENCE_AND_RELEVANCE_VERIFICATION_REQUIRED:"
+        +json.dumps({
+            "grounding_evidence_path":(
+                str(grounding_path.relative_to(ROOT))
+                if ROOT in grounding_path.parents else str(grounding_path)
+            ),
+            "source_discovery_evidence_path":str(discovery_path.relative_to(ROOT)),
+            "provenance_evidence_path":str(provenance_path.relative_to(ROOT)),
+            "candidate_count":len(candidates),
+            "verified_provenance_count":verified_count,
+            "current_role":"SOURCE_DISCOVERY",
+            "next_declared_role":next_role,
+            "fact_authority_verified":False,
+            "primary_source_status_verified":False,
+            "relevance_verified":False,
+            "evidence_sufficiency_verified":False,
+            "external_capability_acquisition_attempted":False,
+            "model_dependency_count":0,
+            "incremental_spend_usd":0,
+        },sort_keys=True)
+    )
+
+
 def _load_grounded_executable_composition():
     path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"grounded_executable_composition.py"
     spec=importlib.util.spec_from_file_location("project_brain_grounded_executable_composition",path)
@@ -5582,6 +5743,12 @@ def _run_goal_unstamped(step, mission):
                 composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
                 composed_result["model_dependency_count"]=0
                 return composed_result
+
+            broad_frontier=_run_broad_objective_source_provenance_frontier(
+                mission,grounding_goal,grounding,grounding_path
+            )
+            if broad_frontier is not None:
+                raise Blocker("BROAD_OBJECTIVE_SOURCE_PROVENANCE_FRONTIER_INVALID_RETURN")
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
