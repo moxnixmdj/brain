@@ -73,16 +73,17 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "selected_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. External models/services are specimens, not owned capability implementations.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
+    "exact_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
-      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
     ],
-    "next_action": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION",
+    "next_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0
   },
@@ -347,7 +348,7 @@
     "opus_5_5_or_better_required": true,
     "permanent_capability_package_required": true
   },
-  "next_progress_event_target": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION",
+  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -358,18 +359,14 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "V6_CAPABILITY_INTERNALIZATION_CORRECTION__THREE_FALSE_OWNERSHIP_PROMOTIONS_REVOKED",
-    "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "revoked_capability_credit": [
-      "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
-      "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
-      "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
+    "status": "ADVANCED_AGENTIC_CODING_REUSABLE_MECHANISM_INTERNALIZED__VERIFICATION_PENDING",
+    "blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+    "evidence_paths": [
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
     ],
-    "preserved_owned_capability": [
-      "EXACT_SYMBOLIC_COMPUTATION_V1"
-    ],
+    "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "counter_delta": -3
+    "counter_delta": 0
   },
   "last_real_output_event": {
     "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_CORRECTED_20260930",
