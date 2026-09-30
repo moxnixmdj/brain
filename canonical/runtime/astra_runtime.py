@@ -5851,7 +5851,7 @@ def run_goal(step, mission):
 
 def _collect_model_dependency_count(value, depth=0):
     if depth>24:
-        return 0
+        raise Blocker("MODEL_DEPENDENCY_PROVENANCE_DEPTH_EXCEEDED")
     count=0
     if isinstance(value,dict):
         if "model_dependency_count" in value:
@@ -5879,7 +5879,19 @@ def _stamp_cognition_provenance(result):
     if not isinstance(result,dict):
         raise Blocker("GOAL_RESULT_OBJECT_REQUIRED_FOR_COGNITION_PROVENANCE")
     out=dict(result)
+    mode=str(out.get("controller_mode") or "").strip()
+    if not mode:
+        raise Blocker("COGNITION_PROVENANCE_CONTROLLER_MODE_MISSING")
+    if mode!="MODEL_INDEPENDENT_ACTION_PLAN" and not mode.startswith("OPTIONAL_MODEL_ADVISORY"):
+        raise Blocker("COGNITION_PROVENANCE_CONTROLLER_MODE_UNKNOWN:"+mode)
     count=_collect_model_dependency_count(out)
+    planner_markers=(
+        out.get("planner_source"),
+        out.get("planner_transport"),
+        out.get("planner_model_last"),
+    )
+    if mode.startswith("OPTIONAL_MODEL_ADVISORY") or any(v not in (None,"") for v in planner_markers):
+        count=max(count,1)
     out["model_dependency_count"]=count
     out["cognition_dependency_class"]="MODEL_INDEPENDENT" if count==0 else "MODEL_ASSISTED"
     out["cognition_provenance_authority"]="ASTRA_RUNTIME_DERIVED_V1"
