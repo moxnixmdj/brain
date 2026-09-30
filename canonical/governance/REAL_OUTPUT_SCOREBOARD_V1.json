@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY",
+  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -609,15 +609,15 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": "MODEL_INDEPENDENT_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION_V1",
-    "subcapability_status": "MATERIALS_TASK_C_SPENT__REFINED_FALLBACK_PROVENANCE_CLASS_GAP_LOCALIZED__UNACQUIRED",
+    "active_subcapability_target": "MODEL_INDEPENDENT_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_V1",
+    "subcapability_status": "TASK_C_CAUSAL_CORRECTION__UNACQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
     "fresh_task_blob_sha": "592732d21f72c1344b82640f99fb50c9ea6ece78",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "residual_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE",
     "first_physical_spend_run_id": 36698638943,
     "last_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
@@ -641,7 +641,7 @@
     },
     "last_spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
     "last_spent_parent_run_id": 36698638943,
-    "next_required_action": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY"
+    "next_required_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY"
   },
   "events": [
     {
@@ -690,15 +690,34 @@
     {
       "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_20260930",
       "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
-      "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "status": "MATERIALS_TASK_C_SPENT__INITIAL_RELEVANCE_ADMITTED_OFF_PROPERTY_WRONG_ALLOY_SOURCE__NO_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json",
       "public_run_id": 36698638943,
       "artifact_id": 11089076913,
       "artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162",
       "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
       "parent_capability_promoted": false,
       "capability_credit_delta": 0,
-      "next_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE"
+      "next_causal_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE"
+    },
+    {
+      "event_id": "MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "CAUSAL_INTERPRETATION_CORRECTED__ZERO_NEW_PROGRESS_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json",
+      "public_run_id": 36698638943,
+      "artifact_id": 11089076913,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "corrected_first_causal_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE",
+      "parent_capability_promoted": false,
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0
     }
   ],
   "last_subcapability_event": {
@@ -767,22 +786,22 @@
   "last_real_output_event": {
     "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_20260930",
     "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+    "status": "MATERIALS_TASK_C_SPENT__INITIAL_RELEVANCE_ADMITTED_OFF_PROPERTY_WRONG_ALLOY_SOURCE__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json",
     "public_run_id": 36698638943,
     "artifact_id": 11089076913,
     "artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162",
     "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
     "parent_capability_promoted": false,
     "capability_credit_delta": 0,
-    "next_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE"
+    "next_causal_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE"
   },
   "last_frontier_reconciliation": {
-    "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
-    "previous_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
-    "blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "status": "MATERIALS_TASK_C_SPENT__INITIAL_RELEVANCE_ADMITTED_OFF_PROPERTY_WRONG_ALLOY_SOURCE__NO_PARENT_CREDIT",
+    "previous_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
     ],
     "spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
     "spent_parent_run_id": 36698638943,
