@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "ASTRONOMY_ORBITAL_MECHANICS_QUANTITATIVE_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "source": {
+    "authority": "NASA Jet Propulsion Laboratory Solar System Dynamics",
+    "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Eros&full-prec=true",
+    "semimajor_axis_json_path": [
+      "orbit",
+      "elements",
+      6,
+      "value"
+    ],
+    "observed_period_json_path": [
+      "orbit",
+      "elements",
+      7,
+      "value"
+    ],
+    "expected_object": "433 Eros",
+    "expected_semimajor_axis_units": "au",
+    "expected_period_units": "d"
+  },
+  "scientific_contract": {
+    "predicted_period_rule": "P_pred_days = 365.2568983 * (a_au ** 1.5)",
+    "max_abs_period_delta_days": 2,
+    "agreement_rule": "PASS if abs(P_pred_days-P_jpl_days) <= 2, otherwise FAIL",
+    "numeric_inputs_must_be_parsed_from_live_source": true
+  },
+  "goal_text": "Using the authoritative JSON source https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Eros&full-prec=true, extract JSON path orbit.elements.6.value and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_ASTRONOMY_EROS_A.json. Using the authoritative JSON source https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Eros&full-prec=true, extract JSON path orbit.elements.7.value and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_ASTRONOMY_EROS_PERIOD.json. Calculate the Kepler predicted orbital period in days using P_pred_days = 365.2568983 * (a_au ** 1.5). Determine whether the predicted and JPL periods differ by at most 2 days. Save the verified result with source provenance and model_dependency_count 0 to canonical/astra_runtime/tmp/PARENT_ASTRONOMY_EROS_KEPLER_RESULT.json.",
+  "required_output": {
+    "fields": [
+      "status",
+      "source_url",
+      "object",
+      "semimajor_axis_au",
+      "jpl_period_days",
+      "predicted_period_days",
+      "absolute_period_delta_days",
+      "agreement",
+      "provenance",
+      "model_dependency_count"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PARENT_ASTRONOMY_EROS_KEPLER_RESULT.json"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch the exact JPL SBDB URL outside the Brain producer, independently extract a and period by element name rather than array index, recompute P_pred_days using Python math, recompute absolute delta and agreement, and compare consequential fields.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false
+}
