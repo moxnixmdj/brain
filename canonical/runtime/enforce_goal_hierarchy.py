@@ -698,6 +698,18 @@ def enforce_target_continuity(intent,base,hierarchy):
     if not _nonempty_string_list(rec.get("evidence")):
         fail("FRONTIER_RECONCILIATION_EVIDENCE_MISSING")
 
+def _collect_key_values(value,key):
+    out=[]
+    if isinstance(value,dict):
+        if key in value:
+            out.append(value.get(key))
+        for item in value.values():
+            out.extend(_collect_key_values(item,key))
+    elif isinstance(value,list):
+        for item in value:
+            out.extend(_collect_key_values(item,key))
+    return out
+
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
         fail(label+"_MISSING")
@@ -787,6 +799,43 @@ def enforce_promotion_truth(intent,files,base):
 
     capability_id=str(intent.get("capability_target") or "")
     chain=_frontier_scope_chain(capability_id) if capability_id else []
+    families=set()
+    for record in chain:
+        families.update(str(x) for x in (record.get("parent_families") or []))
+    cognitive_credit=bool(families.intersection(COGNITIVE_PARENT_FAMILIES)) and any(
+        k in deltas for k in (
+            "reusable_capabilities_inherited",
+            "verified_real_tasks_completed",
+            "fresh_reuse_passes",
+            "frontier_dependencies_removed",
+        )
+    )
+    if cognitive_credit:
+        counts=[]; authorities=[]; modes=[]; planners=[]
+        for raw in evidence.get("real_task_evidence_paths") or []:
+            try:
+                doc=load(str(raw))
+            except Exception as exc:
+                fail("COGNITIVE_PROMOTION_EVIDENCE_READ_FAILED:"+str(raw)+":"+type(exc).__name__)
+                continue
+            counts.extend(_collect_key_values(doc,"model_dependency_count"))
+            authorities.extend(_collect_key_values(doc,"cognition_provenance_authority"))
+            modes.extend(_collect_key_values(doc,"controller_mode"))
+            planners.extend(_collect_key_values(doc,"planner_model_last"))
+        if not counts:
+            fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_COUNT_MISSING")
+        for raw in counts:
+            try:
+                if int(raw)!=0:
+                    fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_NONZERO")
+            except Exception:
+                fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_COUNT_INVALID")
+        if "ASTRA_RUNTIME_DERIVED_V1" not in {str(x) for x in authorities}:
+            fail("COGNITIVE_PROMOTION_RUNTIME_PROVENANCE_AUTHORITY_MISSING")
+        if any(str(x or "").startswith("OPTIONAL_MODEL_ADVISORY") for x in modes):
+            fail("COGNITIVE_PROMOTION_ADVISORY_MODEL_CONTROLLER_PRESENT")
+        if any(x not in (None,"") for x in planners):
+            fail("COGNITIVE_PROMOTION_PLANNER_MODEL_PRESENT")
     cross_domain_required=any(
         bool((record.get("minimum_acquisition_evidence") or {}).get("cross_domain_transfer_required"))
         for record in chain
