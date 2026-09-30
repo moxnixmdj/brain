@@ -2,12 +2,14 @@
 """Model-independent source front-end for broad open research objectives.
 
 This composes qualified decomposition, open-web discovery, live retrieval
-provenance, generic deterministic BM25 objective relevance, and fresh exact
-same-source evidence extraction. ROR organization identity is optional metadata,
-not an admission gate.
+provenance, generic deterministic BM25 objective relevance, fresh exact
+same-source evidence extraction, and the independently verified bounded
+objective-to-claim-spec/relation evaluator. ROR organization identity is
+optional metadata, not an admission gate.
 
-The frontend deliberately stops before claim support/contradiction, factual
-correctness, evidence sufficiency, relation evaluation, or answer synthesis.
+The frontend deliberately keeps factual correctness, evidence sufficiency,
+source independence, causal inference, and decision-quality synthesis
+unverified.
 """
 from __future__ import annotations
 
@@ -46,6 +48,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     verifier=_load_sibling("source_candidate_provenance_verify")
     relevance_ranker=_load_sibling("objective_relevance_bm25")
     evidence_extractor=_load_sibling("objective_evidence_unit_extract")
+    claim_binder=_load_sibling("objective_claim_operand_binding")
     authority_identity=_load_sibling("source_authority_binding_ror")
 
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
@@ -148,6 +151,44 @@ def run(objective,decomposition,limit=12,timeout=15):
     ]
     evidence_ready=bool(evidence_extracted)
 
+    claim_relation_evaluations=[]
+    if evidence_ready:
+        for item in evidence_extracted:
+            extraction=item.get("extraction") or {}
+            try:
+                bound=claim_binder.bind(
+                    objective,extraction,evaluate_relation=True
+                )
+            except Exception as exc:
+                bound={
+                    "status":"UNBOUND",
+                    "reason":"CLAIM_SPEC_OR_RELATION_EVALUATION_FAILED",
+                    "error_class":type(exc).__name__,
+                    "error":str(exc)[:1000],
+                    "model_dependency_count":0,
+                    "incremental_spend_usd":0,
+                }
+            claim_relation_evaluations.append({
+                "source_url":extraction.get("source_url"),
+                "extraction":extraction,
+                "binding":bound,
+            })
+
+    relation_evaluated=[
+        item for item in claim_relation_evaluations
+        if (item.get("binding") or {}).get("status") in {
+            "CLAIM_SPEC_AND_OPERANDS_BOUND","CLAIM_SPEC_BOUND"
+        }
+        and isinstance((item.get("binding") or {}).get("relation_result"),dict)
+        and ((item.get("binding") or {}).get("relation_result") or {}).get("output_verified") is True
+        and ((item.get("binding") or {}).get("relation_result") or {}).get("status") in {
+            "NUMERIC_RELATION_VERIFIED",
+            "EXACT_TEXT_SUPPORT_VERIFIED",
+            "EXACT_TEXT_SUPPORT_NOT_VERIFIED",
+        }
+    ]
+    relation_ready=bool(relation_evaluated)
+
     return {
         "schema":SCHEMA,
         "status":"SOURCE_FRONTEND_READY",
@@ -169,6 +210,9 @@ def run(objective,decomposition,limit=12,timeout=15):
         "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_OBJECTIVE_RELEVANCE_ONLY",
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
+        "claim_relation_evaluations":claim_relation_evaluations,
+        "claim_relation_evaluated_count":len(relation_evaluated),
+        "claim_relation_claim_scope":"OBJECTIVE_BOUND_BOUNDED_EXPLICIT_RELATION_OR_EXACT_QUOTED_SUPPORT_ONLY__FACTUAL_CORRECTNESS_UNVERIFIED",
         "authority_verified_candidate_count":0,
         "primary_source_verified_candidate_count":0,
         "role_progress":{
@@ -188,11 +232,22 @@ def run(objective,decomposition,limit=12,timeout=15):
                 if evidence_ready else
                 "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
             ),
-            "RELATION_EVALUATION":"NOT_STARTED",
-            "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
+            "RELATION_EVALUATION":(
+                "OBJECTIVE_BOUND_EXPLICIT_RELATION_EVALUATED__FACTUAL_CORRECTNESS_UNVERIFIED"
+                if relation_ready else
+                "CLAIM_SPEC_AND_OPERAND_BINDING_REQUIRED"
+                if evidence_ready else
+                "NOT_STARTED"
+            ),
+            "DECISION_SYNTHESIS_AND_VERIFICATION":(
+                "REQUIRED__NO_CONFIDENCE_SUFFICIENCY_OR_SOURCE_INDEPENDENCE_INFERRED"
+                if relation_ready else "NOT_STARTED"
+            ),
         },
         "next_required_capability":(
-            "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+            "MODEL_INDEPENDENT_DECISION_QUALITY_SYNTHESIS_AND_VERIFICATION_FROM_OBJECTIVE_BOUND_RELATION_V1"
+            if relation_ready else
+            "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
             if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
