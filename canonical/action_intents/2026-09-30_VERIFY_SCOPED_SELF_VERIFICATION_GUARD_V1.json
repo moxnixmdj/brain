@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "VERIFY-SCOPED-SELF-VERIFICATION-GUARD-20260930-V1",
+  "status": "AUTHORIZED_EXECUTION",
+  "canonical_generation": "2026-09-30-opus55-capability-internalization-v6",
+  "canonical_base_commit": "414c5232880033f75675b0953653a9d5991a8161",
+  "capability_target": "OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1",
+  "action_kind": "BRAIN_OWNED_CAPABILITY_VERIFICATION",
+  "blocker_lease_key": "414c5232880033f75675b0953653a9d5991a8161::OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1::BRAIN_OWNED_GUARD_NOT_YET_FRESHLY_ADVERSARIALLY_VERIFIED",
+  "expected_parent_frontier_change": "Promote only the deterministic fail-closed execution-admission/integrity/recovery component if current Brain bytes pass fresh adversarial verification.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_policy": "EXTERNAL_WINNERS_ARE_SPECIMENS__INTERNALIZE_EXISTING_MECHANISM__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "NOT_REQUIRED_FOR_THIS_DETERMINISTIC_COMPONENT",
+    "capability_externalization": false,
+    "underlying_capability_invention": false,
+    "hard_incremental_spend_usd": 0
+  },
+  "reasoning_durability": {
+    "receipt_required": true,
+    "chat_only_authority": false
+  },
+  "prior_work_checked": [
+    "execution_guard/actions_admission.py",
+    "execution_guard/github_ref_store_live.py",
+    "execution_guard/github_actions_guarded_run_live.py",
+    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
+  ],
+  "evidence_presence_classification": "BRAIN_OWNED_MECHANISM_PRESENT__FRESH_ADVERSARIAL_COMPONENT_VERIFICATION_REQUIRED",
+  "stop_condition": "No whole-family promotion. Promote only exact deterministic behaviors that pass injected duplicate, uncertainty, corruption and pin-drift tests.",
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-30-opus55-capability-internalization-v6",
+    "canonical_base_commit": "414c5232880033f75675b0953653a9d5991a8161",
+    "real_outcome": "Verify and permanently own the existing deterministic self-verification/recovery component without inventing new capability machinery.",
+    "required_capability": "FAIL_CLOSED_EXECUTION_ADMISSION_INTEGRITY_AND_UNCERTAINTY_CONTAINMENT",
+    "obs_goal": {
+      "real_outcome": "Brain itself detects and contains duplicate execution, uncertain persistence, corrupt immutable records and frozen-plan drift.",
+      "proxy_goals_deleted": [
+        "Create another verifier framework",
+        "Claim broad debugging intelligence",
+        "Use an external model as verifier"
+      ],
+      "surviving_necessity": "Fresh direct verification of current Brain-owned guard bytes."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain atomic execution guard",
+        "GitHub immutable ref store",
+        "frozen-plan pin verifier"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No new guard algorithm",
+        "No new recovery architecture"
+      ],
+      "surviving_gap": "Current bytes need fresh adversarial verification at the exact scoped behavior."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Verification gap only.",
+      "delete_bypass_substitute_options": [
+        "Direct deterministic injected-failure test"
+      ],
+      "surviving_causal_blocker": "NO_FRESH_CURRENT_BYTES_ADVERSARIAL_RECEIPT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Direct deterministic test of existing guard bytes"
+      ],
+      "losing_routes_reason": "Any new mechanism would be slower and unnecessary.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Adversarial deterministic injection is the real effect for this bounded component."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [],
+      "adjacent_capabilities_absorbed": [
+        "duplicate execution suppression",
+        "dispatch uncertainty containment",
+        "immutable record integrity",
+        "pin drift rejection"
+      ],
+      "fresh_reuse_plan": "Reuse the promoted guard component in all later consequential capability executions."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused already-proven guard code and canonical law"
+      ],
+      "search_stop_decision": "Existing Brain mechanism directly implements the target scope; external search cannot improve wall-clock.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "DIRECT_TEST_EXISTING_BRAIN_GUARD"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_GUARD_BUILD",
+      "EXTERNAL_VERIFIER_MODEL"
+    ],
+    "selected_surviving_route": "DIRECT_TEST_EXISTING_BRAIN_GUARD",
+    "why_selected_route_is_fastest_sufficient": "No capability acquisition is needed; only current-byte verification is missing.",
+    "expected_parent_level_state_change": "ONE_MORE_BRAIN_OWNED_SELF_VERIFICATION_COMPONENT_VERIFIED",
+    "stop_condition": "Scope stays deterministic and bounded; broad self-verification/debugging/recovery family remains open.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The target mechanism is already Brain-owned and no external supplier is needed."
+    }
+  }
+}
