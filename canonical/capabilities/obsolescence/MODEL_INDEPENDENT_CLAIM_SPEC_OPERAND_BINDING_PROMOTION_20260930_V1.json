@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_RECEIPT_V1",
+  "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
+  "useful_behavior": "Given an explicit bounded comparison or exact quoted-support research objective plus integrity-checked generic V2 evidence units, derive an auditable claim/relation specification, bind unique lexical semantic operand roles to distinct evidence units, select a unique exact-unit-compatible numeric pair, and invoke the already-verified generic V2 relation evaluator.",
+  "replacement_route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+  "exact_producer_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+  "exact_regression_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+  "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
+  "canonical_base_commit": "0ef3f48e07ea0f05857c13aa5fed58437d979504",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 166,
+    "workflow_run_id": 36685279194,
+    "job_id": 109789596373,
+    "artifact_id": 11083292341,
+    "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+    "exact_producer_test_and_inherited_relation_blobs_verified": true,
+    "authored_fail_closed_regressions": "PASS",
+    "independent_full_surface_cross_domain_oracle": "PASS",
+    "verified_positive_surface": [
+      "GT",
+      "LT",
+      "GTE",
+      "LTE",
+      "EQ",
+      "NE",
+      "ABS_DIFF_LTE",
+      "EXACT_QUOTED_SUPPORT",
+      "SINGLE_CHARACTER_ENTITY_DISCRIMINATORS",
+      "FALSE_PREDICATE_PROPAGATION"
+    ],
+    "negative_controls": [
+      "UNSUPPORTED_LANGUAGE",
+      "DUPLICATE_EXACT_CLAIM",
+      "MULTIPLE_COMPATIBLE_VALUES",
+      "UNIT_MISMATCH",
+      "THRESHOLD_UNIT_MISMATCH",
+      "ROLE_COLLISION",
+      "AMBIGUOUS_ROLE",
+      "TAMPERED_EVIDENCE"
+    ]
+  },
+  "claim_scope": {
+    "verified": [
+      "EXPLICIT_BOUNDED_BINARY_OBJECTIVE_TO_OPERATOR_SPEC_FOR_GT_LT_GTE_LTE_EQ_NE_ABS_DIFF_LTE",
+      "EXACT_QUOTED_SUPPORT_OBJECTIVE_TO_VERBATIM_SUPPORT_SPEC",
+      "UNIQUE_LEXICAL_LEFT_RIGHT_ROLE_BINDING_TO_DISTINCT_INTEGRITY_CHECKED_GENERIC_V2_EVIDENCE_UNITS",
+      "UNIQUE_EXACT_UNIT_COMPATIBLE_NUMERIC_OPERAND_PAIR_SELECTION",
+      "EXPLICIT_NONNEGATIVE_ABS_DIFF_THRESHOLD_WITH_EXACT_UNIT_MATCH",
+      "SINGLE_CHARACTER_UPPERCASE_OR_NUMERIC_ENTITY_DISCRIMINATORS",
+      "COMPOSITION_INTO_ALREADY_VERIFIED_GENERIC_V2_RELATION_EVALUATOR"
+    ],
+    "unverified": [
+      "GENERAL_NATURAL_LANGUAGE_UNDERSTANDING",
+      "PARAPHRASE_OR_SEMANTIC_ENTAILMENT",
+      "LATENT_SEMANTIC_ROLE_INFERENCE_OUTSIDE_BOUNDED_GRAMMAR",
+      "UNIT_CONVERSION",
+      "FACTUAL_CORRECTNESS",
+      "CAUSALITY",
+      "EVIDENCE_QUALITY",
+      "EVIDENCE_SUFFICIENCY",
+      "SOURCE_INDEPENDENCE",
+      "PARENT_CAPABILITY_COMPLETION"
+    ]
+  },
+  "repairs_during_qualification": [
+    {
+      "failure": "SINGLE_CHARACTER_ENTITY_DISCRIMINATORS_DROPPED_OR_CASE_MANGLED",
+      "repair": "PRESERVE_EXPLICIT_UPPERCASE_OR_NUMERIC_SINGLE_CHARACTER_LABEL_TOKENS_WHILE_DROPPING_LOWERCASE_ARTICLE_A"
+    },
+    {
+      "failure": "GRAMMATICAL_FOLLOWER_WAS_MISPARSED_AS_NUMERIC_UNIT_IN_YEAR_DECOY",
+      "repair": "REJECT_BOUNDED_GRAMMATICAL_NONUNIT_FOLLOWERS_IN_OPERAND_CANDIDATE_EXTRACTION"
+    },
+    {
+      "failure": "TERMINAL_SENTENCE_PUNCTUATION_LEAKED_INTO_THRESHOLD_AND_AUDIT_SURFACES",
+      "repair": "NORMALIZE_TERMINAL_PERIOD_COMMA_SEMICOLON_COLON_FROM_THRESHOLD_AND_NUMERIC_AUDIT_SURFACES"
+    }
+  ],
+  "parent_capability_promoted": false,
+  "parent_score_credit": 0,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_action": "RECOMPUTE_PARENT_FRONTIER_ON_EXACT_POST_PROMOTION_MAIN__NO_PARENT_REPLAY_UNLESS_CANONICAL_FRONTIER_REQUIRES_FRESH_TASK"
+}
