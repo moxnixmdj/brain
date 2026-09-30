@@ -30,11 +30,12 @@
       "family": "ADVANCED_AGENTIC_CODING",
       "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
       "best_existing_routes": [
-        "GPT-6 Astra + Codex + GitHub + Superpowers",
-        "Claude Sonnet 5.5 for Terminal-Bench only"
+        "Brain-owned Supreme configuration + approved general cognition substrate",
+        "Brain-owned Superpowers 6.4.2 configuration + approved general cognition substrate",
+        "Claude Sonnet 5.5 external specimen for Terminal-Bench only"
       ],
-      "evidence": "Sonnet 5.5 exceeds Opus on Terminal-Bench 4.0 (70.6 vs 66.4), but remains below Opus on FrontierCode and CursorBench. Astra is below Opus on Anthropic's Terminal-Bench and FrontierCode table.",
-      "residual": "Need one existing configured $0 route that equals/exceeds the complete advanced-coding behavior, not one benchmark slice.",
+      "evidence": "Supreme is now the leading Brain-owned exposed configuration candidate based on a published matched Terminal-Bench 2.1 study: 68.5% raw pass vs Superpowers 65.2% on the same locked Gemini 3.6 Flash High substrate, with lower aggregate wall-clock. This is candidate-selection evidence only; TB2.1 is not comparable to TB4.0 and does not establish Opus 5.5 parity.",
+      "residual": "Verify the Supreme-led Brain-owned route itself >= Opus 5.5 across the relevant advanced-coding behavior; retain Superpowers as fallback/comparison.",
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://www.anthropic.com/claude-sonnet-5-5",
@@ -42,8 +43,12 @@
       ],
       "internalization_required": false,
       "ownership_note": "Reusable software-engineering methodology is now Brain-owned at pinned MIT source. Opus-level ownership credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
-      "internalized_configuration": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
-      "next_required_action": "Run controlled comparative evaluation of the Brain-internalized Superpowers configuration on an approved general cognition substrate."
+      "internalized_configuration": [
+        "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json",
+        "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+      ],
+      "next_required_action": "Run controlled comparative evaluation of the Supreme-led Brain-owned configuration on an approved general cognition substrate; zero ownership credit until pass.",
+      "leading_internalized_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -331,7 +336,7 @@
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
     "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_optimization_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5__IN_PARALLEL_CONTINUE_INTERNALIZABLE_MECHANISM_SEARCH_FOR_OTHER_SPECIMEN_BACKED_FAMILIES",
+    "next_optimization_target": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5__SUPERPOWERS_RETAINED_AS_FALLBACK_COMPARISON",
     "brain_configured_verification_pending": [
       "ADVANCED_AGENTIC_CODING"
     ]

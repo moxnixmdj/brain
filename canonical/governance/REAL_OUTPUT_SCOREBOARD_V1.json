@@ -58,7 +58,9 @@
     "reasoning_decision_receipt_required": true,
     "model_independence_is_terminal_requirement": false,
     "models_may_be_configured_capability_components": true,
-    "independent_verification_required_for_consequential_promotion": true
+    "independent_verification_required_for_consequential_promotion": true,
+    "candidate_selection_evidence_is_not_capability_credit": true,
+    "cross_version_benchmark_extrapolation_forbidden": true
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -94,7 +96,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
