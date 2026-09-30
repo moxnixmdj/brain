@@ -28,26 +28,27 @@
   "rows": [
     {
       "family": "ADVANCED_AGENTIC_CODING",
-      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "status": "INTERNALIZATION_IN_PROGRESS",
       "best_existing_routes": [
-        "Brain-owned Supreme configuration + approved general cognition substrate",
-        "Brain-owned Superpowers 6.4.2 configuration + approved general cognition substrate",
-        "Claude Sonnet 5.5 external specimen for Terminal-Bench only"
+        "Brain-owned Supreme configuration retained as falsified-for-advancement component/evidence",
+        "Brain-owned Superpowers 6.4.2 retained as control/component",
+        "OpenAgents Coder One exposed challenger family under route-race review",
+        "Other stronger exposed/internalizable coding configurations"
       ],
-      "evidence": "Supreme leads the current Brain-owned configuration race based on matched Terminal-Bench 2.1 evidence on one locked substrate: 68.5% raw pass versus Superpowers 65.2% and baseline 61.8%, with lower aggregate wall-clock than Superpowers. Aggregate differences were not statistically significant, TB2.1 is not TB4.0, and this evidence selects a candidate but does not establish Opus 5.5 parity. Superpowers additionally has one clean Brain direct semantic task pass with zero Opus credit.",
-      "residual": "Verify the Supreme-led Brain-owned route itself >= Opus 5.5 across the relevant advanced-coding behavior on an approved zero-incremental general cognition substrate; retain Superpowers as fallback/comparison.",
+      "evidence": "Supreme source is Brain-owned, but its current configured route failed fresh Terminal-Bench 4.0 behavioral preflights and is frozen with zero Opus credit. The route race is reopened; do not repair spent benchmark tasks into promotion evidence.",
+      "residual": "Find and internalize a stronger existing exposed coding mechanism/configuration, then verify the Brain-configured route >= Opus 5.5 on current matched coding behavior.",
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://www.anthropic.com/claude-sonnet-5-5",
         "https://prod.cursor.com/evals"
       ],
-      "internalization_required": false,
-      "ownership_note": "Supreme and Superpowers operative configurations are Brain-owned. Supreme preserves the upstream root Apache-2.0 license despite conflicting MIT metadata in README/SKILL frontmatter. Opus-level ownership credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
+      "internalization_required": true,
+      "ownership_note": "Supreme/Superpowers are Brain-owned components, but no current advanced-coding configuration has earned Opus-family ownership. Current Supreme route is falsified for advancement.",
       "internalized_configuration": [
         "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json",
         "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
       ],
-      "next_required_action": "Run controlled comparative evaluation of the Supreme-led Brain-owned configuration on an approved zero-incremental general cognition substrate; retain Superpowers as control/fallback; zero ownership credit until pass.",
+      "next_required_action": "Route race: search exposed coding agents/configurations, prefer stronger existing evidence, internalize winner, then cheap fresh falsification before full scoring.",
       "leading_internalized_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
     },
     {
@@ -66,20 +67,24 @@
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
       "best_existing_routes": [
-        "GPT-6 Astra Work + document/spreadsheet/presentation toolchain",
-        "GPT-6.1 Sol Work"
+        "Brain-owned Stirrup 247f24d harness + Brain execution profile + approved zero-incremental general cognition substrate + Brain artifact tools"
       ],
-      "evidence": "Opus 5.5 currently leads GDPval-AA v2.1 at 1846 and AA-Briefcase v1.1 at 1822 in current public boards.",
-      "residual": "Find existing route >= both relevant professional-work bars or stronger direct evidence.",
+      "evidence": "Artificial Analysis uses Stirrup as the GDPval-AA agent harness. Brain imported 54/54 pinned mechanism files exactly under MIT license and saved an execution profile mapping the harness to Brain tools. This establishes mechanism ownership/configuration, not Opus-level performance.",
+      "residual": "Run contamination-controlled professional-work tasks using the Brain-owned Stirrup configuration. No capability credit until the Brain-configured route has evidence >= Opus 5.5 on a sufficiently comparable professional-work scope.",
       "sources": [
+        "https://github.com/ArtificialAnalysis/Stirrup",
         "https://artificialanalysis.ai/evaluations/gdpval-aa",
-        "https://artificialanalysis.ai/evaluations/aa-briefcase",
-        "https://www.anthropic.com/claude-opus-5-5"
+        "https://huggingface.co/datasets/openai/gdpval"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "internalization_required": false,
+      "ownership_note": "Reusable harness is Brain-owned at pinned exact source. General cognition remains a substrate. Opus ownership credit remains zero pending direct configured-route evidence.",
+      "internalized_configuration": [
+        "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+        "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json"
+      ],
+      "next_required_action": "Run Stage 1 cheap cross-artifact GDPval falsification under canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json; stop on systemic failure."
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -326,7 +331,6 @@
     ],
     "external_specimen_backed_families": [
       "COMPLEX_MULTI_TOOL_AGENCY",
-      "PROFESSIONAL_KNOWLEDGE_WORK",
       "BUSINESS_WORKFLOW_AUTOMATION",
       "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
       "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -349,9 +353,12 @@
       "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
-    "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_optimization_target": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5__SUPERPOWERS_RETAINED_AS_CONTROL_FALLBACK__IN_PARALLEL_CONTINUE_INTERNALIZABLE_MECHANISM_SEARCH_FOR_OTHER_SPECIMEN_BACKED_FAMILIES",
+    "blocker": "PARALLEL_RESIDUAL__ADVANCED_AGENTIC_CODING_NEEDS_STRONGER_EXISTING_INTERNALIZABLE_ROUTE__PROFESSIONAL_WORK_STIRRUP_ROUTE_NEEDS_DIRECT_VERIFICATION",
+    "next_optimization_target": "PARALLEL__SEARCH_AND_INTERNALIZE_STRONGER_EXISTING_CODING_CONFIGURATION__RUN_CHEAP_CONTAMINATION_CONTROLLED_STIRRUP_PROFESSIONAL_WORK_FALSIFICATION__ZERO_CREDIT_UNTIL_PASS",
     "brain_configured_verification_pending": [
+      "PROFESSIONAL_KNOWLEDGE_WORK"
+    ],
+    "internalization_route_race_active": [
       "ADVANCED_AGENTIC_CODING"
     ]
   }
