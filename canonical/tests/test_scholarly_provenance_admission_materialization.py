@@ -299,5 +299,80 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
         self.assertEqual(verifier.materialize_calls,[])
         self.assertEqual(extractor.calls,[])
 
+    def test_refined_bibliographic_candidate_survives_relevance_and_materializes_selected_only(self):
+        objective="Compare two unrelated engineering material properties from authoritative records."
+        discovery,verifier,relevance,extractor=self.install(
+            selected_index=1,materialize_ok=True,refined_available=True
+        )
+        original_discover=discovery.discover
+        def refined_discover(objective,limit=12,timeout=15,query_override=None):
+            if query_override is None:
+                return original_discover(objective,limit,timeout,query_override)
+            discovery.calls.append(query_override)
+            return {
+                "status":"CANDIDATES_DISCOVERED",
+                "objective":objective,
+                "query":query_override,
+                "query_origin":"METADATA_REFINED_OVERRIDE",
+                "candidates":[
+                    {
+                        "rank":0,"url":"https://noise.example/page","host":"noise.example",
+                        "title":"Unrelated live page","snippet":"unrelated",
+                        "source_class":"OPEN_WEB_SEARCH_CANDIDATE",
+                        "discovery_backend":"TEST_REFINED",
+                    },
+                    {
+                        "rank":1,"url":"https://doi.org/10.9999/refined","host":"doi.org",
+                        "doi":"10.9999/refined","title":"Strong domain measurement study",
+                        "source_class":"SCHOLARLY_REGISTRY_CANDIDATE",
+                        "discovery_backend":"CROSSREF",
+                    },
+                ],
+            }
+        discovery.discover=refined_discover
+
+        materialize_calls=[]
+        def staged_materialize(candidate,bibliographic_verification,timeout=15,fetch=None):
+            materialize_calls.append(candidate["url"])
+            if len(materialize_calls)==1:
+                return {
+                    "status":"UNVERIFIED",
+                    "reason":"SELECTED_SOURCE_LIVE_MATERIALIZATION_FAILED",
+                    "candidate_url":candidate["url"],
+                }
+            return {
+                "status":"RETRIEVAL_PROVENANCE_VERIFIED",
+                "verification_method":"SELECTED_BIBLIOGRAPHIC_CANDIDATE_LIVE_HTTP_MATERIALIZATION",
+                "candidate_url":candidate["url"],
+                "final_url":"https://publisher.example/refined",
+                "final_host":"publisher.example",
+                "selected_only_materialization":True,
+            }
+        verifier.materialize=staged_materialize
+
+        out=self.front.run(objective,decomposition(objective))
+        self.assertEqual(out["status"],"SOURCE_FRONTEND_READY",out)
+        self.assertEqual(
+            materialize_calls,
+            ["https://doi.org/10.1234/strong","https://doi.org/10.9999/refined"],
+        )
+        self.assertEqual(len(relevance.seen),2,relevance.seen)
+        self.assertEqual(relevance.seen[1]["doi"],"10.9999/refined")
+        self.assertEqual(
+            out["selected_source_origin"],
+            "BIBLIOGRAPHIC_METADATA_REFINED_SELECTED_LIVE_MATERIALIZATION",
+            out,
+        )
+        self.assertEqual(len(extractor.calls),1,out)
+        self.assertEqual(extractor.calls[0][0]["doi"],"10.9999/refined")
+        self.assertEqual(
+            extractor.calls[0][1]["final_url"],
+            "https://publisher.example/refined",
+        )
+        self.assertEqual(
+            out["metadata_anchored_refinement"]["provenance_verified_candidate_count"],
+            2,
+        )
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
