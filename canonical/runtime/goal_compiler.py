@@ -3523,6 +3523,96 @@ def _restricted_numeric_expression_names(expression):
     return names
 
 
+_NUMERIC_BINDING_GENERIC_TOKENS={
+    "canonical","astra","runtime","tmp","parent","knowledge","evidence","json",
+    "value","result","source","input","output","numeric","expression","data",
+}
+
+def _numeric_binding_tokens(value):
+    return [
+        token.lower()
+        for token in re.findall(r"[A-Za-z0-9]+",str(value or ""))
+        if token and token.lower() not in _NUMERIC_BINDING_GENERIC_TOKENS
+    ]
+
+def _numeric_producer_tokens(part):
+    tokens=[]
+    evidence_path=str((part or {}).get("evidence_path") or "")
+    if evidence_path:
+        tokens.extend(_numeric_binding_tokens(pathlib.Path(evidence_path).stem))
+    for item in (part or {}).get("json_path") or []:
+        tokens.extend(_numeric_binding_tokens(item))
+    # Preserve order only for diagnostics; matching itself is set-based.
+    return list(dict.fromkeys(tokens))
+
+def _numeric_binding_score(name,part):
+    name_tokens=_numeric_binding_tokens(name)
+    producer_tokens=_numeric_producer_tokens(part)
+    score=0
+    matched=[]
+    for left in name_tokens:
+        best=0
+        best_token=None
+        for right in producer_tokens:
+            if left==right:
+                candidate=6 if len(left)>1 else 3
+            elif len(left)>=3 and len(right)>=3 and (left.startswith(right) or right.startswith(left)):
+                candidate=2
+            else:
+                candidate=0
+            if candidate>best:
+                best=candidate
+                best_token=right
+        if best:
+            score+=best
+            matched.append([left,best_token])
+    return score,matched
+
+def _bind_numeric_expression_producers(names,producers):
+    if len(producers)<len(names):
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_INSUFFICIENT_PRIOR_SCALARS")
+    if len(names)==1 and len(producers)==1:
+        return [(names[0],producers[0],{"mode":"ONLY_PRIOR_SCALAR"})]
+
+    selected=[]
+    used_cycles=set()
+    for name in names:
+        scored=[]
+        for part in producers:
+            cycle=int(part["result_cycle"])
+            if cycle in used_cycles:
+                continue
+            score,matched=_numeric_binding_score(name,part)
+            scored.append((score,cycle,part,matched))
+        if not scored:
+            raise GoalCompilationFailure("NUMERIC_EXPRESSION_PRODUCER_BINDING_REQUIRED",name)
+        best_score=max(x[0] for x in scored)
+        if best_score<=0:
+            # Elimination is safe only when exactly one producer and one name
+            # remain after prior semantic bindings.
+            remaining_names=len(names)-len(selected)
+            remaining_parts=[x for x in scored if x[1] not in used_cycles]
+            if remaining_names==1 and len(remaining_parts)==1:
+                _,cycle,part,matched=remaining_parts[0]
+                selected.append((name,part,{"mode":"UNIQUE_REMAINDER","matched":matched}))
+                used_cycles.add(cycle)
+                continue
+            raise GoalCompilationFailure("NUMERIC_EXPRESSION_PRODUCER_BINDING_REQUIRED",name)
+        winners=[x for x in scored if x[0]==best_score]
+        if len(winners)!=1:
+            raise GoalCompilationFailure(
+                "NUMERIC_EXPRESSION_PRODUCER_BINDING_AMBIGUOUS",
+                name+":"+",".join(str(x[1]) for x in winners),
+            )
+        score,cycle,part,matched=winners[0]
+        selected.append((name,part,{"mode":"SEMANTIC_TOKEN_MATCH","score":score,"matched":matched}))
+        used_cycles.add(cycle)
+
+    if len(selected)!=len(names):
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_PRODUCER_BINDING_INCOMPLETE")
+    return selected
+
+
 def _compile_typed_scalar_numeric_expression(clause,compiled_parts,registry,action_cycle):
     text=str(clause or "").strip()
     m=re.match(
@@ -3548,15 +3638,13 @@ def _compile_typed_scalar_numeric_expression(clause,compiled_parts,registry,acti
         and part.get("mode") in {"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH","EXTERNAL_JSON_KNOWLEDGE_FETCH"}
         and isinstance(part.get("result_cycle"),int)
     ]
-    if len(producers)<len(names):
-        raise GoalCompilationFailure("NUMERIC_EXPRESSION_INSUFFICIENT_PRIOR_SCALARS")
-    selected=producers[:len(names)]
+    selected_bindings=_bind_numeric_expression_producers(names,producers)
     variables={
         name:{"$result":{"cycle":int(part["result_cycle"]),"field":"value"}}
-        for name,part in zip(names,selected)
+        for name,part,_evidence in selected_bindings
     }
     digest=hashlib.sha256((text+"\n"+json.dumps(
-        [(n,int(p["result_cycle"])) for n,p in zip(names,selected)],
+        [(name,int(part["result_cycle"])) for name,part,_evidence in selected_bindings],
         separators=(",",":")
     )).encode("utf-8")).hexdigest()[:12].upper()
     output_path=f"canonical/astra_runtime/tmp/NUMERIC_EXPRESSION_{digest}_RESULT.json"
@@ -3579,10 +3667,16 @@ def _compile_typed_scalar_numeric_expression(clause,compiled_parts,registry,acti
         "expression":expression,
         "variable_names":names,
         "variable_bindings":{
-          name:{"cycle":int(part["result_cycle"]),"field":"value"}
-          for name,part in zip(names,selected)
+          name:{
+            "cycle":int(part["result_cycle"]),
+            "field":"value",
+            "binding_evidence":binding_evidence,
+          }
+          for name,part,binding_evidence in selected_bindings
         },
-        "producer_result_cycles":[int(p["result_cycle"]) for p in selected],
+        "producer_result_cycles":[
+          int(part["result_cycle"]) for _name,part,_evidence in selected_bindings
+        ],
         "result_cycle":int(action_cycle),
         "result_field":"value",
         "output_path":output_path,
