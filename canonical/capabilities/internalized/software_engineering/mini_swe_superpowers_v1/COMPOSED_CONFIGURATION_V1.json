@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_INTERNALIZED_COMPOSED_CAPABILITY_CONFIGURATION_V1",
   "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
-  "status": "BRAIN_COMPOSED_CONFIGURATION__PACKAGE_QUALIFICATION_PENDING__ZERO_OPUS_CREDIT",
+  "status": "BRAIN_CONFIGURED_FRESH_TASK_FAIL__GENERIC_COMPLETION_ENFORCEMENT_REPAIRED__VERIFICATION_PENDING__ZERO_OPUS_CREDIT",
   "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
   "composition_class": "EXISTING_MECHANISM_COMPOSITION_AND_CONFIGURATION_ONLY",
   "underlying_capability_invention": false,
@@ -64,7 +64,7 @@
       "matched_reference_source_class": "ARTIFICIAL_ANALYSIS_INDEPENDENT_MINI_SWE_HARNESS",
       "promotion_rule": "NO_OPUS_CREDIT_UNTIL_BRAIN_CONFIGURED_ROUTE_HAS_COMPARABLE_EVIDENCE_GE_CORRESPONDING_OPUS55_BAR_AND_CONFIGURATION_CONTRIBUTION_IS_VERIFIED"
     },
-    "next_required_action": "RUN_FRESH_CONTAMINATION_CONTROLLED_COMPOSED_ROUTE_ON_APPROVED_ZERO_INCREMENTAL_GENERAL_COGNITION_SUBSTRATE"
+    "next_required_action": "RUN_ONE_DISTINCT_FRESH_CONTAMINATION_CONTROLLED_TASK_WITH_TERMINAL_AUTHORIZATION_V1__NO_REACT_REPLAY_FOR_PROMOTION"
   },
   "ownership_tests": {
     "BRAIN_ARTIFACT_TEST": "PASS_CONFIGURATION_EXISTS",
@@ -72,8 +72,32 @@
     "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY__EXECUTION_PENDING",
     "SPECIMEN_SEPARATION_TEST": "PASS",
     "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_AFTER_PACKAGE_VERIFICATION",
-    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "FRESH_REACT_TASK_FAIL__GENERIC_COMPLETION_GATE_REPAIRED__NEW_DISTINCT_TASK_REQUIRED",
     "OWNERSHIP_PACKAGE_TEST": "PENDING_PERFORMANCE_VERIFICATION"
   },
-  "opus_5_5_credit": 0
+  "opus_5_5_credit": 0,
+  "brain_completion_gate": {
+    "role": "INTEGRATION_GLUE_ONLY__ENFORCEMENT_OF_ALREADY_OWNED_SUPERPOWERS_VERIFICATION_DISCIPLINE",
+    "requirements": [
+      "Do not submit while a known relevant failure remains.",
+      "Every explicit acceptance criterion from the task instruction and runtime-visible authoritative specs must be mapped to fresh passing evidence before submission; any unmapped criterion blocks submission.",
+      "Do not invent validation requirements, rejection conditions, or mandatory fields that are not traceable to authoritative task/runtime-visible specification bytes.",
+      "Identity and deduplication components are not automatically validity requirements unless the authoritative specification explicitly says they are required.",
+      "Before submission run the strongest task-relevant tests available without reading benchmark-hidden verifier logic.",
+      "If the task has UI/browser acceptance criteria, execute a component/runtime behavior check covering valid success, invalid rejection, and state preservation before submission.",
+      "Inspect the final diff and confirm requested behavior, regression preservation, and scope compliance.",
+      "Only the designated central completion authority may authorize the terminal submission after the completion audit; parallel lanes may inspect, implement, and verify but may not terminate the session.",
+      "If verification cannot be completed, preserve the blocker and do not issue COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT."
+    ],
+    "public_bridge_minimum_commit": "ce540975febcd262c94a0f2b025b99180a18e18e",
+    "terminal_authorization_schema": "BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1"
+  },
+  "last_execution": {
+    "task": "Terminal-Bench 4.0 react-lead-form",
+    "status": "EXECUTED_FAIL__REWARD_0__TASK_SPENT__ZERO_CAPABILITY_CREDIT",
+    "workflow_run_id": 36777861512,
+    "artifact_id": 11126423246,
+    "artifact_digest": "sha256:4bd56130f8b5e582ff9161899e2126c61190f98db61e27e4ad3a8bd6c8db803a",
+    "evidence_path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/REACT_LEAD_FORM_PREFLIGHT_FALSIFICATION_20260930_V1.json"
+  }
 }
