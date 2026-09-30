@@ -4900,6 +4900,54 @@ def _run_open_research_source_frontend(mission, goal, decomposition):
     return path,result
 
 
+def _open_research_frontier_blocker_message(source_frontend, evidence_path):
+    status=str((source_frontend or {}).get("status") or "")
+    payload={
+      "source_frontend_status":status,
+      "evidence_path":str(evidence_path),
+      "provenance_verified_candidate_count":int(
+          (source_frontend or {}).get("provenance_verified_candidate_count") or 0
+      ),
+      "authority_identity_verified_candidate_count":int(
+          (source_frontend or {}).get("authority_identity_verified_candidate_count") or 0
+      ),
+      "relevance_verified_candidate_count":int(
+          (source_frontend or {}).get("relevance_verified_candidate_count") or 0
+      ),
+      "evidence_extracted_candidate_count":int(
+          (source_frontend or {}).get("evidence_extracted_candidate_count") or 0
+      ),
+      "next_required_capability":(source_frontend or {}).get("next_required_capability"),
+      "capability_acquisition_attempted":False,
+      "policy":"BROAD_RESEARCH_DECOMPOSITION_ROUTES_TO_RESEARCH_SOURCE_FRONTEND_BEFORE_PACKAGE_ACQUISITION",
+    }
+    if status=="SOURCE_FRONTEND_READY":
+        if payload["evidence_extracted_candidate_count"]>0:
+            return (
+                "OPEN_ENDED_RESEARCH_EVIDENCE_UNITS_READY__"
+                "RELATION_EVALUATION_REQUIRED:"
+                +json.dumps(payload,sort_keys=True)
+            )
+        if payload["relevance_verified_candidate_count"]>0:
+            return (
+                "OPEN_ENDED_RESEARCH_RELEVANT_SOURCE_READY__"
+                "EVIDENCE_EXTRACTION_REQUIRED:"
+                +json.dumps(payload,sort_keys=True)
+            )
+        if payload["authority_identity_verified_candidate_count"]>0:
+            return (
+                "OPEN_ENDED_RESEARCH_SOURCE_IDENTITY_READY__"
+                "OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
+                +json.dumps(payload,sort_keys=True)
+            )
+        return (
+            "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_READY__"
+            "AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
+            +json.dumps(payload,sort_keys=True)
+        )
+    return "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_BLOCKED:"+json.dumps(payload,sort_keys=True)
+
+
 def _ground_plain_goal_to_bound_capabilities(mission, goal):
     module=_load_plain_goal_bound_grounding()
     compiler=_load_goal_compiler()
@@ -5616,44 +5664,11 @@ def _run_goal_unstamped(step, mission):
                 source_path,source_frontend=_run_open_research_source_frontend(
                     mission,grounding_goal,broad
                 )
-                status=str(source_frontend.get("status") or "")
-                payload={
-                  "source_frontend_status":status,
-                  "evidence_path":str(source_path.relative_to(ROOT)),
-                  "provenance_verified_candidate_count":int(
-                      source_frontend.get("provenance_verified_candidate_count") or 0
-                  ),
-                  "authority_identity_verified_candidate_count":int(
-                      source_frontend.get("authority_identity_verified_candidate_count") or 0
-                  ),
-                  "relevance_verified_candidate_count":int(
-                      source_frontend.get("relevance_verified_candidate_count") or 0
-                  ),
-                  "next_required_capability":source_frontend.get("next_required_capability"),
-                  "capability_acquisition_attempted":False,
-                  "policy":"BROAD_RESEARCH_DECOMPOSITION_ROUTES_TO_RESEARCH_SOURCE_FRONTEND_BEFORE_PACKAGE_ACQUISITION",
-                }
-                if status=="SOURCE_FRONTEND_READY":
-                    if int(source_frontend.get("relevance_verified_candidate_count") or 0)>0:
-                        raise Blocker(
-                            "OPEN_ENDED_RESEARCH_RELEVANT_SOURCE_READY__"
-                            "EVIDENCE_EXTRACTION_REQUIRED:"
-                            +json.dumps(payload,sort_keys=True)
-                        ) from e
-                    if int(source_frontend.get("authority_identity_verified_candidate_count") or 0)>0:
-                        raise Blocker(
-                            "OPEN_ENDED_RESEARCH_SOURCE_IDENTITY_READY__"
-                            "OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
-                            +json.dumps(payload,sort_keys=True)
-                        ) from e
-                    raise Blocker(
-                        "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_READY__"
-                        "AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
-                        +json.dumps(payload,sort_keys=True)
-                    ) from e
                 raise Blocker(
-                    "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_BLOCKED:"
-                    +json.dumps(payload,sort_keys=True)
+                    _open_research_frontier_blocker_message(
+                        source_frontend,
+                        str(source_path.relative_to(ROOT)),
+                    )
                 ) from e
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
