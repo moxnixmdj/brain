@@ -12,7 +12,6 @@ permissions:
   contents: read
 jobs:
   qualify:
-    if: github.head_ref == 'capability/compose-mini-swe-superpowers-v1-20260930'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
