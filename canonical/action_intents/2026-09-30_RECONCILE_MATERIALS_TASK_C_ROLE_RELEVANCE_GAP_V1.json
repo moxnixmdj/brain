@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MATERIALS-TASK-C-DECISION-ROLE-RELEVANCE-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Task C was atomically guard-admitted and physically started exactly once in run 36698638943.",
+    "Task C is spent; replay is forbidden.",
+    "The selected scholarly candidate passed token-coverage admission but concerned ignition temperature and 302 stainless rather than thermal conductivity and 304 stainless.",
+    "Metadata refinement appended the falsely admitted title and did not yield an admitted live source."
+  ],
+  "evidence_presence_classification": "PRESERVED_REAL_PARENT_EVIDENCE_FALSIFIES_CURRENT_RELEVANCE_ADMISSION_ABSTRACTION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "real_outcome": "Prevent high lexical overlap from substituting for the actual decision property and operand identities.",
+    "selected_surviving_route": "REUSE_BOUNDED_OBJECTIVE_RELATION_PARSER_TO_GATE_SOURCE_RELEVANCE_BY_DECISION_ROLES",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "SOURCE_WHITELIST",
+      "6061_OR_304_TASK_LITERAL_PATCH",
+      "DOWNLOAD_ONLY_REPAIR",
+      "MODEL_RERANKER"
+    ],
+    "why_selected_route_is_fastest_sufficient": "Brain already has a bounded objective relation/operand parser. Reusing its role tokens at relevance admission removes the demonstrated false-positive class with less new machinery than adding another search supplier or semantic model.",
+    "stop_condition": "Implement only generic decision-role relevance admission, independently qualify on cross-domain non-parent fixtures, then move to a new fresh parent task without replaying materials Task C."
+  },
+  "stop_condition": "Truth-only reconciliation. No runtime change or parent credit. Then repair and independently guard-qualify the generic decision-role relevance seam."
+}
