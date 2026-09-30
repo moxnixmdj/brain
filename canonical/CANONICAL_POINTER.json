@@ -136,7 +136,11 @@
     "consequential_operator_reasoning_requires_current_obs": true,
     "memory_only_frontier_diagnosis_forbidden": true,
     "operator_exploration_before_obs_is_non_authoritative": true,
-    "operator_obs_required_before_current_blocker_or_route_claim": true
+    "operator_obs_required_before_current_blocker_or_route_claim": true,
+    "operator_obs_authority_envelope_required": true,
+    "operator_obs_authority_envelope_path": "canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json",
+    "bare_chat_has_zero_canonical_authority": true,
+    "canonical_consequential_decision_requires_repository_backed_current_base_obs": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
