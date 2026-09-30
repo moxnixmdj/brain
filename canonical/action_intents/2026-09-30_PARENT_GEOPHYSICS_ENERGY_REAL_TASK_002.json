@@ -361,5 +361,30 @@
         "execution_dependencies_complete": true
       }
     }
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Exact frozen model-independent parent execution run 36661188188 falsified end-to-end completion and localized the first causal gap to missing numeric relation/expression capability; no model planner fallback and no external capability acquisition occurred."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+      "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_TERMINAL_RECONCILIATION_V1.json"
+    ],
+    "independent_verification_evidence_paths": [],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": true,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "GPT-5.6 Sol / ChatGPT Deep Research",
+    "producer_execution_suppliers": [
+      "PROJECT_BRAIN_MODEL_INDEPENDENT_RUNTIME",
+      "PUBLIC_GITHUB_ACTIONS_UBUNTU_24_04",
+      "USGS_FDSN_EVENT_API",
+      "EMSC_SEISMICPORTAL_FDSN_EVENT_API"
+    ],
+    "independent_verifier_suppliers": []
   }
 }
