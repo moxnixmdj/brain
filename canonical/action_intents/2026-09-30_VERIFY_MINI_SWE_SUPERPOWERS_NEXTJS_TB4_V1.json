@@ -257,28 +257,6 @@
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
           ]
-        },
-        {
-          "route": "PAID_API_MODEL_ADAPTER",
-          "resolution": "DISQUALIFIED",
-          "comparison": {
-            "CORRECTNESS": "Could execute harness.",
-            "CAPABILITY_STRENGTH": "Unknown.",
-            "WALL_CLOCK": "Fast.",
-            "INCREMENTAL_COST": "Violates hard $0.",
-            "RELIABILITY": "Provider dependent.",
-            "VERIFIABILITY": "Possible but constraint-invalid."
-          },
-          "evidence": [
-            "Project hard constraint incremental_spend_usd=0",
-            "Paid model API would add incremental spend."
-          ],
-          "qualification_evidence": [
-            "BRAIN_INHERITED: terminal mission lock and PR576/PR578 theory invariants forbid paid credits/API billing."
-          ],
-          "qualification_evidence_classes": [
-            "BRAIN_INHERITED"
-          ]
         }
       ],
       "unresolved_plausible_dominators": [],
