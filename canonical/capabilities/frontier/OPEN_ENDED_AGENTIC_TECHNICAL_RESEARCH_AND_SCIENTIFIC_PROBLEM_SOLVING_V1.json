@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__FRESH_GEOPHYSICS_TASK_FAILED__NUMERIC_RELATION_GAP_LOCALIZED",
+  "status": "FRONTIER_BAR_DEFINED__ASTRONOMY_TASK_FAILED__TYPED_SCALAR_EXPRESSION_GAP_CLOSED__NEW_PARENT_TASK_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -50,20 +50,21 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "FRESH_CROSS_DOMAIN_PARENT_TASK_EXECUTED__FAIL_FIRST_CAUSAL_GAP_LOCALIZED",
-    "task": "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
-    "domain": "GEOPHYSICS_SEISMOLOGY_QUANTITATIVE_REASONING",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
-    "reconciliation_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_TERMINAL_RECONCILIATION_V1.json",
-    "admissibility_correction": "canonical/capabilities/obsolescence/PR286_GEOPHYSICS_RESIDUAL_GAP_ADMISSIBILITY_CORRECTION_20260930_V1.json",
-    "public_run_id": 36661188188,
+    "status": "FRESH_CROSS_DOMAIN_PARENT_TASK_EXECUTED__FAIL_FIRST_CAUSAL_GAP_LOCALIZED__GAP_NOW_CLOSED",
+    "task": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+    "domain": "ASTRONOMY_ORBITAL_MECHANICS_QUANTITATIVE_REASONING",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json",
+    "public_run_id": 36664896545,
+    "artifact_id": 11075578533,
+    "artifact_digest": "sha256:1602e529f3e33249e586a67475aff947be0d2b7ce97db0bd82c770a2f7bba734",
     "task_completed": false,
     "model_free_execution": true,
-    "first_causal_gap": "MODEL_INDEPENDENT_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION_V1",
+    "first_causal_gap": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+    "gap_closed_by": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
     "same_task_replay_allowed": false
   },
-  "obsolescence_status": "NOT_YET_PROVEN__NUMERIC_RELATION_SUBCAPABILITY_GAP",
-  "residual_gap": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+  "obsolescence_status": "NOT_YET_PROVEN__NEW_PARENT_REAL_TASK_REQUIRED_AFTER_TYPED_SCALAR_EXPRESSION_ACQUISITION",
+  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -87,9 +88,22 @@
       "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
       "fresh_requalification_run_id": 36659637634,
       "independent_recovery_run_id": 36660108447
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+      "status": "VERIFIED_ACQUIRED__FRESH_CROSS_DOMAIN_EXECUTION_PASS",
+      "route": "native result refs + write_json_records + json.query.jq",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_ACQUISITION_20260930_V1.json"
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+      "status": "VERIFIED_ACQUIRED__FRESH_NON_ASTRONOMY_EXECUTION_PASS",
+      "route": "restricted typed AST + pinned SymPy 1.14.0",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
+      "public_run_id": 36666659921
     }
   ],
-  "next_action": "RUN_RECURSIVE_OBS_FOR_PARENT_NUMERIC_RELATION_GAP__QUALIFY_REUSE_OF_EXISTING_DETERMINISTIC_SYMPY_ROUTE_BEFORE_BUILDING__NO_GEOPHYSICS_REPLAY",
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_ASTRONOMY_OR_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -115,18 +129,15 @@
     "incremental_spend_usd": 0
   },
   "latest_parent_task_failure": {
-    "task": "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
-    "status": "FAILED_FIRST_CAUSAL_GAP_LOCALIZED",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
-    "public_run_id": 36661188188,
-    "public_job_id": 109716113402,
-    "artifact_id": 11074272541,
-    "artifact_digest": "sha256:106d28719e5c6bc0bc676b3d54a811874202b1e30985c4c0c59f0aa3560ded5b",
-    "exact_bytes_pass": true,
-    "source_preflight_pass": true,
-    "first_causal_gap": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
-    "same_task_replay_allowed": false,
-    "model_dependency_count": 0,
-    "incremental_spend_usd": 0
+    "task": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+    "status": "FAILED_FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT__GAP_NOW_CLOSED",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json",
+    "public_run_id": 36664896545,
+    "artifact_id": 11075578533,
+    "artifact_digest": "sha256:1602e529f3e33249e586a67475aff947be0d2b7ce97db0bd82c770a2f7bba734",
+    "first_causal_gap": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+    "resolved": true,
+    "resolution_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
+    "same_task_replay_allowed": false
   }
 }
