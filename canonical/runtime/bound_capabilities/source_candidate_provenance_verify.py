@@ -111,6 +111,8 @@ def materialize(candidate,bibliographic_verification,timeout=15,fetch=None):
             **base,
             "status":"UNVERIFIED",
             "reason":"BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION_FAILED",
+            "selected_only_materialization":True,
+            "bibliographic_identity_preserved":True,
             "error_class":type(exc).__name__,
             "error":str(exc)[:500],
             "candidate_url":url,
