@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-PRIMARY-SOURCE-OBJECTIVE-RELEVANCE-VERIFICATION-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "action_kind": "GENERIC_CAPABILITY_COMPOSITION",
+  "causal_blocker": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
+  "implemented_capability": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+  "causal_change": "For provenance-verified candidates with exact active ROR organization-domain identity, independently re-fetch the live same-host document, verify organization-hosted publication provenance, and require strong exact normalized objective-anchor coverage on the live title/metadata surface before advancing.",
+  "claim_boundaries": {
+    "primary_source_scope": "EXACT_ROR_BOUND_ORGANIZATION_HOSTED_DOCUMENT_PUBLICATION_PROVENANCE_ONLY",
+    "relevance_scope": "EXACT_OBJECTIVE_ANCHOR_COVERAGE_ON_LIVE_DOCUMENT_METADATA_ONLY",
+    "factual_correctness": "UNVERIFIED",
+    "evidence_sufficiency": "UNVERIFIED",
+    "experimental_validity": "UNVERIFIED",
+    "claim_endorsement": "UNVERIFIED"
+  },
+  "fail_closed_conditions": [
+    "RETRIEVAL_PROVENANCE_NOT_VERIFIED",
+    "ROR_AUTHORITY_IDENTITY_NOT_VERIFIED",
+    "FINAL_HOST_NOT_EXACT_ROR_DOMAIN",
+    "LIVE_RETRIEVAL_REDIRECTS_OFF_VERIFIED_DOMAIN",
+    "NO_LIVE_DOCUMENT_METADATA_SURFACE",
+    "INSUFFICIENT_EXACT_OBJECTIVE_ANCHOR_COVERAGE"
+  ],
+  "next_gap_if_qualified": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_PRIMARY_RELEVANT_SOURCE",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
