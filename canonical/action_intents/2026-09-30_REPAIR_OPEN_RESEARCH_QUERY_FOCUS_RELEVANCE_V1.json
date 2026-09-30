@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-OPEN-RESEARCH-QUERY-FOCUS-AND-RELEVANCE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT",
+  "action_kind": "GENERIC_RESEARCH_ROUTING_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT::GENERIC_RESEARCH_ROUTING_REPAIR",
+  "expected_parent_frontier_change": "Replace whole-imperative search/relevance text with deterministic decision-subject focus; independently qualify cross-domain and preserve all truth/support gates. No genomics replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Genomics Task B runner PR199 / run 36690682680 is spent and replay-forbidden.",
+    "Canonical reconciliation PR507 localizes the first generic cause upstream of claim binding.",
+    "Current discovery uses the complete imperative objective verbatim as the web query.",
+    "Current BM25 relevance tokenizes the complete imperative objective and may reward research-control words."
+  ],
+  "evidence_presence_classification": "GENERIC_GAP_VERIFIED_BY_FRESH_PARENT_TASK_B",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact candidate bytes pass authored and independent guarded cross-domain qualification; then return to a materially different fresh parent Task C. Never replay genomics.",
+  "recursive_obs": {
+    "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+    "real_outcome": "Search and rank sources using the decision subject rather than orchestration language, so evidence presented downstream contains objective entities/quantities.",
+    "required_capability": "MODEL_INDEPENDENT_RESEARCH_QUERY_FOCUS_AND_RELEVANCE_V1",
+    "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "routes_ranked": [
+      "REPAIR_STDLIB_QUERY_FOCUS_PLUS_EXISTING_BM25",
+      "ADD_TASK_SPECIFIC_AUTHORITY_OR_ACCESSION",
+      "ADD_MODEL_SEMANTIC_RERANKER",
+      "WEAKEN_CLAIM_BINDER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "GENOMICS_REPLAY",
+      "TASK_SPECIFIC_SOURCE_HINTS",
+      "MODEL_RERANKER",
+      "CLAIM_BINDER_WEAKENING"
+    ],
+    "selected_surviving_route": "REPAIR_STDLIB_QUERY_FOCUS_PLUS_EXISTING_BM25",
+    "why_selected_route_is_fastest_sufficient": "The observed failure originates before provenance/evidence/binding: the full imperative objective became the search query. A deterministic focused-query transform removes orchestration noise and can be reused by discovery and BM25 with no new supplier or model.",
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "synthetic_verification_necessity": "Exact authored tests plus independent fresh cross-domain candidate-ranking cases; must reject the observed assess/asess false-positive while preserving relevant technical candidates. Semantic entailment, factual correctness and evidence sufficiency remain unverified."
+    },
+    "expected_parent_level_state_change": "GENERIC_QUERY_RELEVANCE_REPAIR_ONLY__NO_PARENT_CREDIT",
+    "stop_rule": "QUALIFY_REPAIR__THEN_FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_C"
+  }
+}
