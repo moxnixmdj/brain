@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-FILESYSTEM-RENAME-ATOMICITY-DURABILITY-REAL-TASK-20260930-004",
+  "purpose": "Execute the frozen, unspent filesystem rename atomicity/durability open-ended Parent Task B exactly once through the canonical ASTRA runtime after the guarded-qualified broad multi-clause routing repair. No prewired authority, standards citation, conclusion, tool, command, experiment recipe, or task-specific runtime patch.",
+  "goal": "Assess whether replacing an existing pathname by a same-filesystem rename is guaranteed to be atomically visible to concurrent observers, and whether that guarantee by itself implies durability across an unexpected system crash. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant interface guarantees, determine how to extract and reconcile the decision-relevant semantics, choose and run a zero-cost verification method, identify material filesystem, platform, and crash-model limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-filesystem-rename-open-ended-parent-task-b",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-OPENENDED-FILESYSTEM-RENAME-ATOMICITY-DURABILITY-REAL-TASK-20260930-004.json",
+    "source_task_blob_sha": "be303aba631f556d4e14fbe34fe2b19e9840c1b0",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
