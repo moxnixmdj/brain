@@ -374,5 +374,7 @@
         "execution_dependencies_complete": true
       }
     }
-  }
+  },
+  "supersedes_frozen_pr": 548,
+  "supersession_reason": "PR548 exact code/test bytes preserved; abbreviated pre-V4 authority closed so the deterministic blocker lease has one current owner."
 }
