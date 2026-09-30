@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-OPEN-CHEMISTRY-ETHANOL-COMBUSTION-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRY_COMBUSTION_QUANTITATIVE_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "scientific_question": "Using authoritative public evidence, determine whether complete stoichiometric combustion of 1.000 kg of anhydrous ethanol requires more than 2.000 kg of molecular oxygen.",
+  "open_ended_contract": {
+    "source_urls_preprovided": false,
+    "source_authorities_preprovided": false,
+    "reaction_equation_preprovided": false,
+    "calculation_formula_preprovided": false,
+    "tool_route_preprovided": false,
+    "producer_must_decompose_objective": true,
+    "producer_must_discover_and_evaluate_authoritative_evidence": true,
+    "producer_must_select_and_compose_needed_verified_tools": true,
+    "producer_must_make_quantitative_unit_consistent_calculation": true,
+    "producer_must_emit_provenance": true,
+    "producer_must_support_independent_verification": true
+  },
+  "goal_text": "Determine, using authoritative public evidence you discover and evaluate yourself, whether complete stoichiometric combustion of 1.000 kg of anhydrous ethanol requires more than 2.000 kg of molecular oxygen. Do not assume any source URL, source authority, reaction equation, calculation formula, or tool route supplied by this task. Produce a decision-quality result with source provenance, the derived reaction basis, quantitative calculation with units, the final predicate, and an independently checkable evidence trail.",
+  "required_result": {
+    "decision_question": "oxygen_mass_required_for_complete_combustion_of_1kg_ethanol_gt_2kg",
+    "required_evidence_classes": [
+      "producer-discovered authoritative source evidence",
+      "balanced-reaction or equivalent stoichiometric basis",
+      "quantitative unit-consistent calculation",
+      "final comparison predicate",
+      "runtime-derived cognition provenance",
+      "independent verification evidence"
+    ],
+    "claim_scope": "Only the exact stated combustion question; no broader chemistry claims are required."
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true,
+    "no_source_or_answer_preflight_before_freeze": true
+  },
+  "independent_oracle": {
+    "method": "After the producer task is frozen and executed, independently discover authoritative chemistry evidence, derive the stoichiometric oxygen requirement from fresh evidence outside the Brain producer, and compare the independently computed predicate with the producer result.",
+    "producer_modules_must_not_be_imported": true,
+    "producer_discovered_source_must_not_be_trusted_without_independent_refetch": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "frozen_before_task_specific_source_discovery": true,
+  "frozen_before_answer_computation": true
+}
