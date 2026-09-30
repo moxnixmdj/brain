@@ -59,9 +59,28 @@
       "verifier-confirmed improvement traceable to configuration-prescribed actions"
     ]
   },
-  "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_BRAIN_CONFIGURED_COMPOSED_ROUTE_ITSELF_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
-  "current_state": "COMPOSED_CONFIGURATION_READY_FOR_PACKAGE_QUALIFICATION__PRETRAIN_TASK_CONTAMINATED__NEW_RUNTIME_VISIBLE_TASK_REQUIRED",
+  "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_A_DISTINCT_FRESH_BRAIN_CONFIGURED_ROUTE_WITH_ENFORCED_COMPLETION_AUTHORITY_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
+  "current_state": "FRESH_REACT_TASK_FAIL__GENERIC_COMPLETION_ENFORCEMENT_REPAIRED__NEW_DISTINCT_TASK_REQUIRED__ZERO_OPUS_CREDIT",
   "contamination_events": [
     "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
+  ],
+  "execution_completion_policy": {
+    "requirement_traceability": "Every validity/rejection requirement must cite authoritative instruction or runtime-visible spec evidence. Inferred identity components cannot become mandatory validation fields without explicit authority.",
+    "acceptance_coverage": "Every explicit acceptance criterion must have fresh passing evidence before terminal authorization.",
+    "ui_rule": "If UI/browser behavior is part of acceptance, valid success + invalid rejection + state-preservation behavior must be executed before terminal authorization.",
+    "terminal_authority": "Public bridge commit ce540975febcd262c94a0f2b025b99180a18e18e or later must enforce BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1 with zero known relevant failures and all acceptance/verification entries PASS.",
+    "spent_task_rule": "After independent verifier exposure, the task is spent and cannot be repaired/replayed for promotion."
+  },
+  "spent_preflights": [
+    {
+      "task": "react-lead-form",
+      "benchmark": "Terminal-Bench 4.0",
+      "verdict": "EXECUTED_FAIL__REWARD_0__TASK_SPENT",
+      "workflow_run_id": 36777861512,
+      "artifact_id": 11126423246,
+      "evidence": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/REACT_LEAD_FORM_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+      "capability_credit": 0,
+      "may_replay_for_promotion": false
+    }
   ]
 }
