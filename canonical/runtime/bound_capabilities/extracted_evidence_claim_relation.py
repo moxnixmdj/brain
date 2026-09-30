@@ -9,7 +9,7 @@ Not verified: paraphrase/semantic entailment, factual correctness, evidence
 sufficiency, causality, or whether a numeric literal has the intended meaning.
 """
 from __future__ import annotations
-import json, math, pathlib, re
+import hashlib, json, pathlib, re
 from decimal import Decimal, InvalidOperation
 
 SCHEMA="PROJECT_BRAIN_EXTRACTED_EVIDENCE_CLAIM_RELATION_V1"
@@ -41,13 +41,27 @@ def _load_extraction(data):
         seen.add(ordinal)
         text=_canon(row.get("text"))
         nums=row.get("numeric_literals")
-        if not text or not isinstance(nums,list): raise ValueError("EVIDENCE_RECORD_CONTRACT_INVALID")
+        if not text or not isinstance(nums,list):
+            raise ValueError("EVIDENCE_RECORD_CONTRACT_INVALID")
+        expected_hash=hashlib.sha256(text.encode("utf-8")).hexdigest()
+        supplied_hash=str(row.get("text_sha256") or "").lower()
+        if supplied_hash!=expected_hash:
+            raise ValueError("EVIDENCE_TEXT_HASH_MISMATCH")
+        source_url=str(row.get("source_url") or "")
+        artifact_url=str(data.get("fresh_url") or "")
+        if not source_url or (artifact_url and source_url!=artifact_url):
+            raise ValueError("EVIDENCE_SOURCE_URL_MISMATCH")
+        literals=[_canon(x) for x in nums]
+        lower_text=text.casefold()
+        for literal in literals:
+            if not literal or literal.casefold() not in lower_text:
+                raise ValueError("NUMERIC_LITERAL_NOT_IN_EVIDENCE_TEXT")
         out.append({
           "ordinal":ordinal,
           "text":text,
-          "text_sha256":str(row.get("text_sha256") or ""),
-          "source_url":str(row.get("source_url") or data.get("fresh_url") or ""),
-          "numeric_literals":[str(x) for x in nums],
+          "text_sha256":supplied_hash,
+          "source_url":source_url,
+          "numeric_literals":literals,
         })
     return out
 
