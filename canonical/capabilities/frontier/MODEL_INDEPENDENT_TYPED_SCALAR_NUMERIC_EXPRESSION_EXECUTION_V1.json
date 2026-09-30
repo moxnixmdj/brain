@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_CROSS_DOMAIN_EXECUTION_PASS",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
+  "useful_behavior": "Given causally prior finite numeric scalar results with unambiguous semantic provenance and a restricted arithmetic expression, deterministically compute a finite real scalar without model cognition.",
+  "winning_route": "RESTRICTED_PYTHON_AST__SEMANTIC_PROVENANCE_BINDING__PROGRAMMATIC_SYMPY_1_14",
+  "scope": {
+    "operators": [
+      "unary +",
+      "unary -",
+      "+",
+      "-",
+      "*",
+      "/",
+      "**"
+    ],
+    "exponent_magnitude_max": 32,
+    "input_binding": "UNIQUE_SEMANTIC_PROVENANCE_TO_PRIOR_SCALAR_RESULTS",
+    "runtime_numeric_strings": "STRICT_DECIMAL_OR_SCIENTIFIC_GRAMMAR_ONLY",
+    "result": "FINITE_REAL_SCALAR",
+    "unsafe_or_ambiguous_inputs": "FAIL_CLOSED"
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
+  "verification_run_id": 36666975481,
+  "verification_artifact_id": 11076254658,
+  "verification_artifact_digest": "sha256:b4d4d5fc8559da9b0ecb44a347c27c151b534d2ca67b94c16b8c4c7c51baa88e",
+  "current_status": "ACQUIRED_VERIFIED",
+  "parent_capability_promoted": false,
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_ASTRONOMY_OR_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+}
