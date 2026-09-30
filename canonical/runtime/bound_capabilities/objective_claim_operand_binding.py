@@ -19,6 +19,7 @@ from __future__ import annotations
 import importlib.util
 import pathlib
 import re
+from decimal import Decimal, InvalidOperation
 
 SCHEMA="PROJECT_BRAIN_OBJECTIVE_CLAIM_SPEC_OPERAND_BINDING_V1"
 
@@ -353,6 +354,219 @@ def bind(objective,extraction,evaluate_relation=True):
           "EXACT_TEXT_SUPPORT_NOT_VERIFIED",
         }:
             raise ValueError("VERIFIED_RELATION_EVALUATOR_DID_NOT_VERIFY")
+    return result
+
+
+def _decimal_from_surface(surface):
+    match=_NUM.search(_canon(surface))
+    if not match:
+        raise ValueError("NUMERIC_LITERAL_PARSE_FAILED")
+    try:
+        value=Decimal(match.group(1).replace(",",""))
+    except (InvalidOperation,ValueError) as exc:
+        raise ValueError("NUMERIC_LITERAL_PARSE_FAILED") from exc
+    if not value.is_finite():
+        raise ValueError("NUMERIC_LITERAL_NONFINITE")
+    unit=_canon(match.group(2)).lower().rstrip(".,;:") if match.group(2) else ""
+    if unit in _NON_UNIT_FOLLOWERS:
+        unit=""
+    return value,unit
+
+def _evaluate_multi_source_numeric(parsed,pair):
+    left_value,left_unit=_decimal_from_surface(pair["left_surface"])
+    right_value,right_unit=_decimal_from_surface(pair["right_surface"])
+    if left_unit!=right_unit:
+        raise ValueError("NUMERIC_RELATION_UNIT_MISMATCH")
+    operator=parsed["operator"]
+    if operator=="GT":
+        predicate=left_value>right_value
+    elif operator=="LT":
+        predicate=left_value<right_value
+    elif operator=="GTE":
+        predicate=left_value>=right_value
+    elif operator=="LTE":
+        predicate=left_value<=right_value
+    elif operator=="EQ":
+        predicate=left_value==right_value
+    elif operator=="NE":
+        predicate=left_value!=right_value
+    elif operator=="ABS_DIFF_LTE":
+        threshold,threshold_unit=_decimal_from_surface(parsed.get("threshold"))
+        if threshold<0:
+            raise ValueError("NUMERIC_RELATION_THRESHOLD_NEGATIVE")
+        if threshold_unit!=left_unit:
+            raise ValueError("NUMERIC_RELATION_THRESHOLD_UNIT_MISMATCH")
+        predicate=abs(left_value-right_value)<=threshold
+    else:
+        raise ValueError("NUMERIC_RELATION_OPERATOR_INVALID")
+    return {
+      "schema":"PROJECT_BRAIN_MULTI_SOURCE_NUMERIC_RELATION_V1",
+      "status":"NUMERIC_RELATION_VERIFIED",
+      "operator":operator,
+      "predicate":bool(predicate),
+      "left_value":str(left_value),
+      "right_value":str(right_value),
+      "unit":left_unit or None,
+      "left_source_url":pair["left"].get("source_url"),
+      "right_source_url":pair["right"].get("source_url"),
+      "left_evidence_unit_id":pair["left"]["evidence_unit_id"],
+      "right_evidence_unit_id":pair["right"]["evidence_unit_id"],
+      "left_numeric_literal_index":pair["left"]["numeric_literal_index"],
+      "right_numeric_literal_index":pair["right"]["numeric_literal_index"],
+      "cross_source":pair["left"].get("source_index")!=pair["right"].get("source_index"),
+      "relation_scope":"EXPLICIT_DECIMAL_RELATION_OVER_UNAMBIGUOUS_PROVENANCE_VALIDATED_OPERANDS",
+      "factual_correctness_status":"UNVERIFIED",
+      "evidence_sufficiency_status":"UNVERIFIED",
+      "source_independence_status":"UNVERIFIED",
+      "output_verified":True,
+    }
+
+def bind_many(objective,extractions,evaluate_relation=True):
+    objective=_canon(objective)
+    base={
+      "schema":SCHEMA,
+      "objective":objective or None,
+      "status":"UNBOUND",
+      "binding_scope":"BOUNDED_EXPLICIT_COMPARISON_ACROSS_PROVENANCE_VALIDATED_EVIDENCE_EXTRACTIONS",
+      "semantic_entailment_status":"UNVERIFIED",
+      "factual_correctness_status":"UNVERIFIED",
+      "causality_status":"UNVERIFIED",
+      "evidence_sufficiency_status":"UNVERIFIED",
+      "source_independence_status":"UNVERIFIED",
+      "unit_conversion_status":"NOT_PERFORMED",
+      "model_dependency_count":0,
+      "incremental_spend_usd":0,
+    }
+    if not objective:
+        return {**base,"reason":"OBJECTIVE_REQUIRED"}
+    if not isinstance(extractions,list) or len(extractions)<2 or len(extractions)>8:
+        return {**base,"reason":"TWO_TO_EIGHT_EXTRACTIONS_REQUIRED"}
+    parsed,reason=_parse_objective(objective)
+    if reason:
+        return {**base,"reason":reason}
+    if parsed["mode"]!="NUMERIC_RELATION":
+        successful=[]
+        for index,extraction in enumerate(extractions):
+            try:
+                candidate=bind(objective,extraction,evaluate_relation=evaluate_relation)
+            except Exception:
+                continue
+            if candidate.get("status")=="CLAIM_SPEC_BOUND":
+                successful.append((index,candidate))
+        if len(successful)!=1:
+            return {
+              **base,
+              "reason":"MULTI_SOURCE_VERBATIM_BINDING_AMBIGUOUS_OR_UNRESOLVED",
+              "successful_source_count":len(successful),
+              "parsed_objective":parsed,
+            }
+        index,result=successful[0]
+        result=dict(result)
+        result["multi_source_bundle_count"]=len(extractions)
+        result["selected_source_index"]=index
+        return result
+
+    evaluator=_load_evaluator()
+    bundles=[]
+    for index,extraction in enumerate(extractions):
+        if not isinstance(extraction,dict):
+            raise ValueError("EXTRACTION_REQUIRED")
+        # Reuse the independently qualified integrity validator before any
+        # cross-source semantic-role binding.
+        evaluator._validated_units(extraction)
+        units=_validated_units(extraction)
+        bundles.append({
+          "source_index":index,
+          "source_url":_canon(extraction.get("source_url")),
+          "units":units,
+        })
+
+    left_candidates=[]
+    right_candidates=[]
+    for bundle in bundles:
+        left,left_reason=_bind_role(bundle["units"],parsed["left_tokens"])
+        if left_reason is None:
+            left_candidates.append({
+              **left,
+              "source_index":bundle["source_index"],
+              "source_url":bundle["source_url"],
+            })
+        right,right_reason=_bind_role(bundle["units"],parsed["right_tokens"])
+        if right_reason is None:
+            right_candidates.append({
+              **right,
+              "source_index":bundle["source_index"],
+              "source_url":bundle["source_url"],
+            })
+
+    if not left_candidates:
+        return {**base,"reason":"LEFT_NO_EVIDENCE_UNIT_FOR_ENTITY","parsed_objective":parsed}
+    if not right_candidates:
+        return {**base,"reason":"RIGHT_NO_EVIDENCE_UNIT_FOR_ENTITY","parsed_objective":parsed}
+
+    compatible=[]
+    for left in left_candidates:
+        for right in right_candidates:
+            if (
+                left["source_index"]==right["source_index"]
+                and left["evidence_unit_id"]==right["evidence_unit_id"]
+            ):
+                continue
+            pair,pair_reason=_choose_pair(left,right)
+            if pair_reason is not None:
+                continue
+            pair=dict(pair)
+            pair["left"]={
+              **pair["left"],
+              "source_index":left["source_index"],
+              "source_url":left["source_url"],
+            }
+            pair["right"]={
+              **pair["right"],
+              "source_index":right["source_index"],
+              "source_url":right["source_url"],
+            }
+            compatible.append((left,right,pair))
+
+    if not compatible:
+        return {
+          **base,
+          "reason":"NO_EXACT_UNIT_COMPATIBLE_MULTI_SOURCE_OPERAND_PAIR",
+          "parsed_objective":parsed,
+          "left_candidate_count":len(left_candidates),
+          "right_candidate_count":len(right_candidates),
+        }
+    if len(compatible)!=1:
+        return {
+          **base,
+          "reason":"AMBIGUOUS_MULTI_SOURCE_COMPATIBLE_OPERAND_PAIR",
+          "parsed_objective":parsed,
+          "compatible_pair_count":len(compatible),
+        }
+
+    left,right,pair=compatible[0]
+    relation_spec={
+      "mode":"NUMERIC_RELATION",
+      "operator":parsed["operator"],
+      "left":pair["left"],
+      "right":pair["right"],
+    }
+    if parsed.get("threshold") is not None:
+        relation_spec["threshold"]=parsed["threshold"]
+    result={
+      **base,
+      "status":"CLAIM_SPEC_AND_OPERANDS_BOUND",
+      "parsed_objective":parsed,
+      "left_binding":left,
+      "right_binding":right,
+      "operand_pair":pair,
+      "relation_spec":relation_spec,
+      "multi_source_bundle_count":len(extractions),
+      "cross_source":left["source_index"]!=right["source_index"],
+      "output_verified":True,
+    }
+    if evaluate_relation:
+        result["relation_result"]=_evaluate_multi_source_numeric(parsed,pair)
     return result
 
 def _safe_path(root,raw):
