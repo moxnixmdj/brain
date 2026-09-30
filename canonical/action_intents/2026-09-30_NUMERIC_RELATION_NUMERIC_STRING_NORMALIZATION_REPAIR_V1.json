@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-NUMERIC-RELATION-NUMERIC-STRING-NORMALIZATION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "NUMERIC_RELATION_REJECTS_BOUNDED_NUMERIC_JSON_STRINGS",
+  "action_kind": "GENERIC_CAUSAL_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::NUMERIC_RELATION_REJECTS_BOUNDED_NUMERIC_JSON_STRINGS::GENERIC_CAUSAL_REPAIR",
+  "expected_parent_frontier_change": "Remove the generic numeric-string type seam exposed by the spent chemistry task without awarding parent capability credit; then return to a fresh genuinely open-ended parent task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "spent PR304 one-shot run 36669136068 stopped at EXECUTE:RuntimeError:JQ_FAILED: NUMERIC_RELATION_INPUT_NOT_NUMBER",
+    "PR306 independently predicted the same seam from PubChem MolecularWeight JSON string typing and was closed unspent",
+    "typed scalar numeric expression already safely accepts bounded numeric strings using a numeric grammar",
+    "numeric relation currently accepts native JSON numbers only",
+    "PR304 and PR306 are spent/closed and must never be replayed"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__GENERIC_TYPE_SEAM_RECURRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Change only generic numeric-relation normalization plus regression evidence. Qualify on fresh non-parent numeric-string evidence. Award zero parent progress. Never replay PR304 or PR306. After qualification return to a fresh genuinely open-ended parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Make bounded numeric relations consume semantically numeric JSON scalars regardless of whether an authoritative API serializes them as JSON numbers or bounded numeric strings.",
+    "required_capability": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+    "obs_goal": {
+      "real_outcome": "Remove only the observed generic type seam so future fresh parent work can use inherited numeric relation logic.",
+      "proxy_goals_deleted": [
+        "replay PR304",
+        "run PR306",
+        "add PubChem-specific parser",
+        "new framework",
+        "new model supplier",
+        "broaden arbitrary string coercion"
+      ],
+      "surviving_necessity": "Normalize bounded numeric strings to finite numeric scalars at the relation boundary while retaining fail-closed rejection for all other values."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current jq-backed bounded numeric relation",
+        "typed scalar numeric expression safe numeric-string parser",
+        "native write_json_records result references",
+        "verified json.query.jq adapter"
+      ],
+      "external_existing_routes_checked": [
+        "jq native tonumber and test primitives already available in inherited verified adapter"
+      ],
+      "capability_work_deleted": [
+        "no new adapter",
+        "no new package",
+        "no task-specific code",
+        "no model cognition"
+      ],
+      "surviving_gap": "The jq relation filter does not normalize semantically numeric JSON strings before arithmetic."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic representation seam across authoritative JSON APIs, observed dynamically on PR304 and independently pre-detected on PR306.",
+      "delete_bypass_substitute_options": [
+        "replay rejected",
+        "task-specific source parsing rejected",
+        "reuse jq tonumber/test survives",
+        "normalize once at generic relation boundary survives"
+      ],
+      "surviving_causal_blocker": "NUMERIC_RELATION_REJECTS_BOUNDED_NUMERIC_JSON_STRINGS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "repair existing relation jq filter with bounded numeric-string normalization",
+        "change every source adapter to force numeric output",
+        "add a new numeric conversion capability"
+      ],
+      "losing_routes_reason": "Source-specific conversion duplicates policy across APIs and a new capability adds machinery. The relation boundary is the smallest generic semantic choke point.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use fresh non-parent local JSON evidence containing numeric strings and independently inspect relation output; also reject nonnumeric strings. This verifies the seam without consuming another parent task."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all PR304/PR306 replay ideas",
+        "source-specific PubChem numeric patches"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "numeric string normalization at bounded relation input"
+      ],
+      "fresh_reuse_plan": "After qualification, select a genuinely open-ended cross-domain parent task that does not prewire authority, URLs, paths, formula, or tool route."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR304 terminal artifact",
+        "reused PR306 static falsification",
+        "reused existing numeric-expression input grammar",
+        "reused jq adapter"
+      ],
+      "search_stop_decision": "Two independent observations identify one generic representation seam and an existing jq primitive repairs it; broader search would delay direct falsifiable repair.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No unresolved route dominates a minimal relation-boundary repair under correctness, wall-clock, $0 cost, and verifiability."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_RELATION_JQ_FILTER",
+      "SOURCE_SPECIFIC_NUMERIC_COERCION",
+      "NEW_NUMERIC_CONVERSION_CAPABILITY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR304_REPLAY",
+      "PR306_EXECUTION",
+      "PUBCHEM_SPECIFIC_RUNTIME_PATCH",
+      "NEW_MODEL_ROUTE",
+      "NEW_FRAMEWORK"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_RELATION_JQ_FILTER",
+    "why_selected_route_is_fastest_sufficient": "One generic choke-point change reuses already-verified jq machinery, preserves fail-closed behavior, requires no new dependency, and directly addresses both observed recurrences.",
+    "expected_parent_level_state_change": "No parent credit. Remove one generic causal seam and return to fresh open-ended parent evidence.",
+    "stop_condition": "Qualify the repaired exact bytes on fresh non-parent numeric-string evidence before merge; no parent task replay.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is an internal generic representation repair with two independent observations and an already-verified jq primitive; external supplier discovery cannot substitute for fixing the semantic boundary."
+    }
+  }
+}
