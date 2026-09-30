@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "REPAIR-OPEN-RESEARCH-DECISION-CLAUSE-QUERY-FOCUS-20260930-V1",
-  "status": "PROPOSED_PENDING_INDEPENDENT_QUALIFICATION",
+  "status": "IMPLEMENTED_PENDING_REQUALIFICATION_AFTER_GUARDED_RED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -59,5 +59,18 @@
     "why_selected_route_is_fastest_sufficient": "It repairs the earliest demonstrated generic cause with two bounded data-flow changes: query construction and the relevance query input. It leaves downstream extraction and claim binding fail-closed.",
     "stop_rule": "GUARDED_INDEPENDENT_QUALIFICATION_THEN_MERGE_OR_LOCALIZE_FIRST_NEW_CAUSAL_DEFECT"
   },
-  "qualification_note": "Candidate query-focus regex/strip escape bytes corrected before arming qualification; prior c913c202 candidate was never armed or qualified."
+  "qualification_note": "Candidate query-focus regex/strip escape bytes corrected before arming qualification; prior c913c202 candidate was never armed or qualified.",
+  "qualification_falsification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 216,
+    "workflow_run_id": 36692282239,
+    "job_id": 109812028757,
+    "artifact_id": 11086222870,
+    "conclusion": "FAIL",
+    "first_generic_defect": "DOUBLED_BACKSLASH_ESCAPES_IN_REGEX_AND_STRIP_CHARACTER_SET",
+    "correction_commit": "c20e28ed3afd8e289d4f5f9bbbd334b02231552e",
+    "corrected_runtime_blob": "a6e8ade5b78b7e34f78503710945909661cd0b9e",
+    "parent_task_execution": false,
+    "parent_task_replay": false
+  }
 }
