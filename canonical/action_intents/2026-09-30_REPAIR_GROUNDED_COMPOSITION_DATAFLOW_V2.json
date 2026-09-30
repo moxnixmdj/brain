@@ -1,0 +1,288 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-GROUNDED-COMPOSITION-DATAFLOW-V2-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "MERGED_PR255_COMPOSITION_LACKS_EXPLICIT_EFFECT_RESULT_DATAFLOW_AND_CAUSAL_COMPOSITION_ENTRY_ROUTE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::MERGED_PR255_COMPOSITION_LACKS_EXPLICIT_EFFECT_RESULT_DATAFLOW_AND_CAUSAL_COMPOSITION_ENTRY_ROUTE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Make merged PR255 composition executable on real causal chains by preserving upstream result dataflow and allowing CAUSAL_COMPOSITION to use existing-bound grounding without external discovery.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR255 exact candidate validation passed but capability remains canonically UNPROVEN.",
+    "Merged composer produces action ordering but literal downstream paths are not bound to upstream runtime results.",
+    "Merged ASTRA gate rejects CAUSAL_COMPOSITION before grounding/composition, making the bridge unreachable for the target class.",
+    "Existing capability_planner.py already supports $effect_result bindings with declared provider result_fields.",
+    "Stale post-merge branch contained candidate generic repairs only; those bytes are not treated as authority and are being reissued against current main.",
+    "Current deterministic external planner challengers remain non-dominating because each still requires a separate formulation layer."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Apply only generic effect-result dataflow injection, semantic typed-path disambiguation, CAUSAL_COMPOSITION existing-bound entry routing, independent verifier reconstruction, and one real-registry regression. Exact-byte validate; then spend one fresh real task and one materially distinct fresh reuse. No capability credit from this repair alone.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "36bb1372702badad6a0c71c4a0b09e1c80c5a7a6",
+    "real_outcome": "Turn the merged composition implementation into a causally executable model-independent route without widening architecture.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve real producer-to-consumer dataflow and make the bridge reachable for causal composition.",
+      "proxy_goals_deleted": [
+        "Rebuild the planner",
+        "Adopt PDDL/HTN",
+        "Replay serialization",
+        "Claim capability from static tests",
+        "Add task-specific action sequences"
+      ],
+      "surviving_necessity": "A planner can order actions only if downstream arguments point to actual upstream runtime results; the current causal gap class also bypasses the bridge entirely."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "capability_planner.py $effect_result resolution",
+        "grounded_executable_composition.py",
+        "grounded_executable_composition_verify.py",
+        "goal_compiler.py _bind_inputs",
+        "astra_runtime.py gap classification and grounded composition handoff"
+      ],
+      "external_existing_routes_checked": [
+        "aiplan4eu/unified-planning",
+        "openplan-labs/PythonPDDL",
+        "shop-planner/shop3"
+      ],
+      "capability_work_deleted": [
+        "No new planner",
+        "No new execution engine",
+        "No model",
+        "No external supplier",
+        "No serialization task replay"
+      ],
+      "surviving_gap": "Generic result-dataflow binding plus causal-composition admission into the existing merged bridge."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Two local integration omissions in the selected internal composition route.",
+      "delete_bypass_substitute_options": [
+        "DELETE dataflow: invalid because consumer actions can race/use nonexistent artifacts.",
+        "BYPASS with fixed paths/hand-authored actions: invalid task-specific cognition.",
+        "SUBSTITUTE an external planner: does not remove formulation/dataflow binding work.",
+        "REUSE existing planner $effect_result plus current registry result_fields: survives."
+      ],
+      "surviving_causal_blocker": "Merged PR255 does not inject provider result references and current runtime rejects CAUSAL_COMPOSITION before attempting bound composition."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_MERGED_BRIDGE_USING_EXISTING_EFFECT_RESULT_BINDINGS",
+        "SUBSTITUTE_EXTERNAL_PDDL_PLANNER",
+        "HAND_AUTHOR_TASK_DATAFLOW"
+      ],
+      "losing_routes_reason": "The native planner already implements typed effect-result bindings; the smallest sufficient fix is to derive those references from registry contracts and bound paths, then admit causal composition into the existing bridge.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Before fresh task spend, exact-byte tests must prove the old compiler cannot solve the chosen real-registry chain, grounding succeeds, composition injects $effect_result, the planner orders the dependency, verifier re-derives dataflow, and unrelated registry capabilities remain fenced."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Literal-path-only composition for producer-consumer chains",
+        "GOAL_ARCHITECTURAL_GAP rejection for CAUSAL_COMPOSITION when existing grounded capabilities can satisfy it"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "effect-result dataflow",
+        "typed output path disambiguation",
+        "causal composition admission"
+      ],
+      "fresh_reuse_plan": "After exact-byte validation, execute a fresh typed evidence-to-decision-to-independent-verification task and a materially distinct fresh reuse without rediscovery or models."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR255 selected route and merged code",
+        "Reuse planner $effect_result machinery",
+        "Reuse stale-branch code only as non-authoritative candidate text, re-applied against exact current main"
+      ],
+      "search_stop_decision": "The defects are localized to missing use of already-existing native mechanisms; external search cannot remove them with less work.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Selected internal route refreshed after merged PR255 inspection; external deterministic planners remain non-dominating."
+    },
+    "routes_considered": [
+      "REPAIR_MERGED_BRIDGE_USING_EXISTING_EFFECT_RESULT_BINDINGS",
+      "SUBSTITUTE_UNIFIED_PLANNING",
+      "SUBSTITUTE_PYTHONPDDL",
+      "SUBSTITUTE_SHOP3",
+      "HAND_AUTHOR_TASK_DATAFLOW"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_SERIALIZATION_REPLAY",
+      "MODEL_BACKED_PLANNING",
+      "HAND_AUTHORED_TASK_ACTIONS",
+      "NEW_PLANNING_FRAMEWORK"
+    ],
+    "selected_surviving_route": "REPAIR_MERGED_BRIDGE_USING_EXISTING_EFFECT_RESULT_BINDINGS",
+    "why_selected_route_is_fastest_sufficient": "The required planner feature already exists in current Brain. Only generic derivation of provider-result references and one routing gate are missing.",
+    "expected_parent_level_state_change": "Make merged PR255 composition executable on real causal chains by preserving upstream result dataflow and allowing CAUSAL_COMPOSITION to use existing-bound grounding without external discovery.",
+    "stop_condition": "Apply only generic effect-result dataflow injection, semantic typed-path disambiguation, CAUSAL_COMPOSITION existing-bound entry routing, independent verifier reconstruction, and one real-registry regression. Exact-byte validate; then spend one fresh real task and one materially distinct fresh reuse. No capability credit from this repair alone.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T00:04:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "MERGED_PR255_NATIVE_GROUNDED_CAPABILITY_GRAPH_COMPOSITION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 36bb1372702badad6a0c71c4a0b09e1c80c5a7a6",
+          "canonical/runtime/capability_planner.py",
+          "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+          "canonical/runtime/astra_runtime.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/openplan-labs/PythonPDDL",
+          "https://github.com/shop-planner/shop3"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/openplan-labs/PythonPDDL",
+          "https://github.com/shop-planner/shop3"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh deterministic planner search retained from the immediately preceding PR255 route race; no material external route change observed."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic producer consumer effect result binding grounded capability planner"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Unified Planning PythonPDDL SHOP3 deterministic composition"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "effect-result dataflow capability graph versus PDDL translation"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 deterministic planning framework current releases"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REPAIR_MERGED_BRIDGE_USING_EXISTING_EFFECT_RESULT_BINDINGS",
+          "evidence": [
+            "Current planner implements $effect_result resolution against requires/provides and result_fields.",
+            "Merged PR255 provides the grounded capability problem and independent verifier."
+          ],
+          "qualification_evidence": [
+            "DIRECT_CODE_INSPECTION current main",
+            "exact public PR255 validation run 36647904127"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Uses declared effects and provider result_fields rather than inferred action order alone.",
+            "CAPABILITY_STRENGTH": "Directly closes real causal producer-consumer composition.",
+            "WALL_CLOCK": "Small local delta; no new solver integration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Deterministic existing planner and registry contracts.",
+            "VERIFIABILITY": "Independent verifier can reconstruct exact transformed actions and bindings."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_EXTERNAL_DETERMINISTIC_PLANNER",
+          "evidence": [
+            "Unified Planning, PythonPDDL and SHOP3 remain available deterministic planning systems."
+          ],
+          "qualification_evidence": [
+            "https://github.com/aiplan4eu/unified-planning",
+            "https://github.com/openplan-labs/PythonPDDL",
+            "https://github.com/shop-planner/shop3"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Capable planners but require translating Brain action/result contracts.",
+            "CAPABILITY_STRENGTH": "Broader than current gap.",
+            "WALL_CLOCK": "Slower due adapter/formulation layer.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Established open-source systems.",
+            "VERIFIABILITY": "Strong but larger integration surface."
+          }
+        }
+      ],
+      "negative_search_summary": "No external route removes the need to bind grounded capability outputs into executable consumer inputs; native $effect_result is already the minimum mechanism.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_MERGED_BRIDGE_USING_EXISTING_EFFECT_RESULT_BINDINGS",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T00:04:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_MERGED_BRIDGE_USING_EXISTING_EFFECT_RESULT_BINDINGS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_NATIVE_GROUNDING_COMPOSITION_PLANNER_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:04:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current main 36bb1372702badad6a0c71c4a0b09e1c80c5a7a6"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
