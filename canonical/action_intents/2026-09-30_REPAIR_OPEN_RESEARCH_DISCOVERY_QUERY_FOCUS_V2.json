@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-OPEN-RESEARCH-DISCOVERY-QUERY-FOCUS-CURRENT-20260930-V2",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT",
+  "action_kind": "GENERIC_SOURCE_DISCOVERY_QUERY_FOCUS_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT::GENERIC_SOURCE_DISCOVERY_QUERY_FOCUS_REPAIR",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR507 is the authoritative guarded genomics Task-B spent/no-replay reconciliation.",
+    "Run 36690682680 selected https://twominenglish.com/asess-or-assess/ after full-objective search and BM25 ranking.",
+    "The verified objective claim/operand binder was invoked and correctly failed closed with LEFT_NO_EVIDENCE_UNIT_FOR_ENTITY.",
+    "The existing first-party relevance verifier is not a universal substitute because it requires independently bound authority identity.",
+    "No open current-base PR was found owning this exact generic repair lease."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "repair": {
+    "runtime_path": "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py",
+    "test_path": "canonical/tests/test_open_web_source_candidate_discovery.py",
+    "candidate_runtime_blob": "a3ae22718c82569fdc954f979cb347189d6edfcd",
+    "candidate_test_blob": "d93e1c3a4b689884a10c474d049bd1e4aad830a2",
+    "behavior": "For recognized broad decision prompts only, derive the query from the supplied first decision sentence and strip only the generic leading decision verb/prefix. Preserve explicit search objectives unchanged.",
+    "invented_search_terms": false,
+    "task_specific_source_hints": false,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "stop_condition": "Guard-qualify exact candidate bytes with authored regressions, independent adversarial query-boundary cases, and fresh non-parent live search evidence. Merge only if qualified; then recompute frontier. Never replay genomics Task B.",
+  "recursive_obs": {
+    "real_outcome": "Make generic open-research discovery search for the decision entities instead of the instructional wrapper.",
+    "surviving_necessity": "PR507 localizes source-query focus / semantic relevance as the next generic gap.",
+    "selected_surviving_route": "REUSE_SUPPLIED_DECISION_SENTENCE_AS_DISCOVERY_QUERY",
+    "deleted_or_bypassed_paths": [
+      "GENOMICS_REPLAY",
+      "MODEL_QUERY_REWRITING",
+      "PREWIRED_NCBI_OR_ACCESSION_HINTS",
+      "UNIVERSAL_AUTHORITY_GATE",
+      "NEW_SEARCH_PROVIDER",
+      "CLAIM_BINDER_WEAKENING"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It changes only deterministic query construction, adds no external dependency, and leaves provenance/relevance/extraction/binding gates intact.",
+    "expected_parent_level_state_change": "NONE_UNTIL_QUALIFIED__THEN_RECOMPUTE_MATERIALLY_DIFFERENT_FRESH_PARENT_REQUIREMENT",
+    "stop_rule": "NO_PARENT_REPLAY"
+  }
+}
