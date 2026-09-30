@@ -1,0 +1,26 @@
+name: Qualify Brain mini-SWE Superpowers composed package
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+    paths:
+      - canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/**
+      - canonical/action_intents/2026-09-30_COMPOSE_MINI_SWE_SUPERPOWERS_V1.json
+      - canonical/reasoning/2026-09-30_COMPOSE_MINI_SWE_SUPERPOWERS_V1.json
+      - .github/workflows/qualify-mini-swe-superpowers-package.yml
+permissions:
+  contents: read
+jobs:
+  qualify:
+    if: github.head_ref == 'capability/compose-mini-swe-superpowers-v1-20260930'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Verify exact component pins and deterministic overlay
+        run: python canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verify_package.py
