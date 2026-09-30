@@ -140,7 +140,9 @@
     "operator_obs_authority_envelope_required": true,
     "operator_obs_authority_envelope_path": "canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json",
     "bare_chat_has_zero_canonical_authority": true,
-    "canonical_consequential_decision_requires_repository_backed_current_base_obs": true
+    "canonical_consequential_decision_requires_repository_backed_current_base_obs": true,
+    "canonical_frontier_cross_surface_consistency_required": true,
+    "runtime_cognition_provenance_required_for_cognitive_credit": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -636,7 +638,9 @@
       ],
       "source_run_id": 36661188188,
       "same_task_replay_allowed": false
-    }
+    },
+    "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
