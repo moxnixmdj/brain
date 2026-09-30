@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "ACQUIRE-MODEL-INDEPENDENT-CLAIM-SUPPORT-AND-RELATION-EVALUATION-FROM-EXTRACTED-EVIDENCE-V1",
-  "status": "PROPOSED",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_CROSS_DOMAIN_PASS",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -10,7 +10,7 @@
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
   "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
-  "expected_parent_frontier_change": "Acquire a bounded typed bridge from extracted evidence to exact verbatim claim support and explicit numeric relations; no semantic paraphrase inference, no parent replay, no parent promotion.",
+  "expected_parent_frontier_change": "Acquire only exact normalized verbatim support and explicit typed numeric relations over caller-referenced extracted literals. Parent remains unproven; next causal gap is model-independent typed claim-spec generation from the open-ended objective and extracted evidence.",
   "highest_leverage_now": true,
   "evidence_presence_classification": "CAPABILITY_GAP_ACTIVE__EXTRACTION_VERIFIED__NUMERIC_AND_DECISION_CAPABILITIES_INHERITED",
   "probe_specific": false,
@@ -109,5 +109,17 @@
     },
     "selected_surviving_route": "COMPOSE_EXTRACTED_RECORDS_WITH_EXACT_VERBATIM_SUPPORT_AND_TYPED_LITERAL_RELATION_EVALUATOR",
     "why_selected_route_is_fastest_sufficient": "It adds one small stdlib adapter over already-qualified extracted evidence and directly feeds typed downstream reasoning without introducing semantic overclaim."
+  },
+  "qualification": {
+    "status": "PASS",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 154,
+    "public_run_id": 36680339068,
+    "public_job_id": 109774171806,
+    "exact_producer_git_blob": "f4ee15d0be0235fceeb12dea3c1a64fa88bef532",
+    "producer_regressions_passed": 7,
+    "independent_cross_domain_tests_passed": 4,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
   }
 }
