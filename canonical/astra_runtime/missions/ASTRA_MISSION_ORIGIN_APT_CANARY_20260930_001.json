@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-MISSION-ORIGIN-APT-CANARY-20260930-001",
+  "purpose": "Fresh non-parent zero-credit canary. Prove or falsify that invoking the canonical astra_runtime mission-file entrypoint propagates a valid origin mission path into autonomous APT capability acquisition. This is not parent Task A evidence.",
+  "goal": "Using a zero-cost Ubuntu package CLI selected autonomously, render the exact text 'MISSION_ORIGIN_CANARY_20260930' as a terminal-style speech bubble and save it to canonical/astra_runtime/tmp/MISSION_ORIGIN_CANARY_20260930.txt. Do not use a predeclared package name. The output file must be nonempty.",
+  "steps": [
+    {
+      "id": "mission-origin-acquisition-canary",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "allow_optional_model_planner": false,
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "no_frontier_model_cognition": true,
+    "parent_capability_credit": false,
+    "verified_real_task_credit": false,
+    "fresh_reuse_credit": false,
+    "frontier_dependency_removal_credit": false,
+    "non_parent_canary": true,
+    "supplier_name_predeclared": false,
+    "must_invoke_via_canonical_mission_file_entrypoint": true,
+    "forbidden_error_codes": [
+      "APT_ORIGIN_MISSION_PATH_INVALID",
+      "PYPI_ORIGIN_MISSION_PATH_INVALID"
+    ],
+    "same_canary_replay_forbidden": true,
+    "stop_on_first_causal_gap": true
+  }
+}
