@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "REPAIR-BROAD-EXPLICIT-RECIPE-FAILCLOSED-V2-20260930",
-  "status": "PROPOSED_PENDING_INDEPENDENT_QUALIFICATION",
+  "status": "GUARDED_QUALIFIED_READY_FOR_MERGE",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -28,7 +28,7 @@
   "parent_task_execution": false,
   "parent_task_replay": false,
   "qualification_required": "EXACT_BYTE_NON_PARENT_GUARDED_ADVERSARIAL_QUALIFICATION",
-  "parent_execution_policy": "DO_NOT_SPEND_A_FRESH_PARENT_ON_BYTES_FALSIFIED_BY_RUN_36689999285",
+  "parent_execution_policy": "REAUTHORIZE_ONLY_AFTER_THIS_EXACT_QUALIFIED_REPAIR_IS_MERGED",
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "recursive_obs": {
@@ -42,5 +42,15 @@
     "why_selected_route_is_fastest_sufficient": "A narrow allowlist for generic research-method phrases plus a catch-all remaining run/execute recipe detector closes the demonstrated false-negative class without weakening broad-objective admission.",
     "stop_rule": "QUALIFY_EXACT_BYTES_ADVERSARIALLY_THEN_RESUME_FRESH_PARENT_FRONTIER"
   },
-  "pr_base_rechecked": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2"
+  "pr_base_rechecked": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
+  "qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 204,
+    "workflow_run_id": 36690801491,
+    "job_id": 109807291312,
+    "artifact_id": 11085905805,
+    "artifact_sha256": "b559c8db08d773e5a64f60a19cb3c9fa0b0e782c3aadf833326ec6e89ce94d7d",
+    "result": "PASS",
+    "receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_EXPLICIT_RECIPE_FAILCLOSED_V2_QUALIFICATION_20260930_V1.json"
+  }
 }
