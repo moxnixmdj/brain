@@ -698,6 +698,18 @@ def enforce_target_continuity(intent,base,hierarchy):
     if not _nonempty_string_list(rec.get("evidence")):
         fail("FRONTIER_RECONCILIATION_EVIDENCE_MISSING")
 
+def _collect_key_values(value,key):
+    out=[]
+    if isinstance(value,dict):
+        if key in value:
+            out.append(value.get(key))
+        for item in value.values():
+            out.extend(_collect_key_values(item,key))
+    elif isinstance(value,list):
+        for item in value:
+            out.extend(_collect_key_values(item,key))
+    return out
+
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
         fail(label+"_MISSING")
@@ -787,6 +799,43 @@ def enforce_promotion_truth(intent,files,base):
 
     capability_id=str(intent.get("capability_target") or "")
     chain=_frontier_scope_chain(capability_id) if capability_id else []
+    families=set()
+    for record in chain:
+        families.update(str(x) for x in (record.get("parent_families") or []))
+    cognitive_credit=bool(families.intersection(COGNITIVE_PARENT_FAMILIES)) and any(
+        k in deltas for k in (
+            "reusable_capabilities_inherited",
+            "verified_real_tasks_completed",
+            "fresh_reuse_passes",
+            "frontier_dependencies_removed",
+        )
+    )
+    if cognitive_credit:
+        counts=[]; authorities=[]; modes=[]; planners=[]
+        for raw in evidence.get("real_task_evidence_paths") or []:
+            try:
+                doc=load(str(raw))
+            except Exception as exc:
+                fail("COGNITIVE_PROMOTION_EVIDENCE_READ_FAILED:"+str(raw)+":"+type(exc).__name__)
+                continue
+            counts.extend(_collect_key_values(doc,"model_dependency_count"))
+            authorities.extend(_collect_key_values(doc,"cognition_provenance_authority"))
+            modes.extend(_collect_key_values(doc,"controller_mode"))
+            planners.extend(_collect_key_values(doc,"planner_model_last"))
+        if not counts:
+            fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_COUNT_MISSING")
+        for raw in counts:
+            try:
+                if int(raw)!=0:
+                    fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_NONZERO")
+            except Exception:
+                fail("COGNITIVE_PROMOTION_RUNTIME_MODEL_DEPENDENCY_COUNT_INVALID")
+        if "ASTRA_RUNTIME_DERIVED_V1" not in {str(x) for x in authorities}:
+            fail("COGNITIVE_PROMOTION_RUNTIME_PROVENANCE_AUTHORITY_MISSING")
+        if any(str(x or "").startswith("OPTIONAL_MODEL_ADVISORY") for x in modes):
+            fail("COGNITIVE_PROMOTION_ADVISORY_MODEL_CONTROLLER_PRESENT")
+        if any(x not in (None,"") for x in planners):
+            fail("COGNITIVE_PROMOTION_PLANNER_MODEL_PRESENT")
     cross_domain_required=any(
         bool((record.get("minimum_acquisition_evidence") or {}).get("cross_domain_transfer_required"))
         for record in chain
@@ -829,6 +878,25 @@ def main():
     pointer=load("canonical/CANONICAL_POINTER.json")
     hierarchy=load("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
     queue=load("canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json")
+    scoreboard=load("canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json")
+
+    current=pointer.get("current_frontier") or {}
+    immediate=queue.get("immediate_frontier") or {}
+    if str(current.get("active_capability_target") or "")!=str(hierarchy.get("active_capability_target") or ""):
+        fail("POINTER_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(current.get("critical_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("POINTER_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+    if str(current.get("next_step") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("POINTER_HIERARCHY_NEXT_ACTION_MISMATCH")
+    if str(immediate.get("exact_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+    if str(immediate.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH")
+    accounting=scoreboard.get("active_frontier_accounting") or {}
+    if str(accounting.get("parent_frontier_capability") or "")!=str(hierarchy.get("active_capability_target") or ""):
+        fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
 
     boot=pointer.get("boot_requirements") or {}
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
