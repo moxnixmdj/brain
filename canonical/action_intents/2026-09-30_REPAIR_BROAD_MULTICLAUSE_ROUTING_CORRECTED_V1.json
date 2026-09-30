@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-BROAD-MULTICLAUSE-RESEARCH-ROUTING-CORRECTED-20260930-V1",
+  "status": "PROPOSED_PENDING_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+  "action_kind": "GENERIC_ROUTING_REPAIR",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "spent_parent_task": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "authoritative_parent_run": 36688193204,
+  "observed_defects": [
+    "broad-objective decomposition admitted only for exactly one unresolved clause",
+    "generic research wording 'choose and run a ... verification method' was overclassified as an explicit execution recipe"
+  ],
+  "repair": [
+    "admit broad decomposition only when records are nonempty, zero clauses are grounded, and every parsed clause is unresolved",
+    "reject concrete run/execute commands and script invocations while permitting generic research-method wording"
+  ],
+  "fail_closed_preserved": [
+    "explicit URLs remain recipes",
+    "explicit create/save/extract-json-path recipes remain recipes",
+    "concrete run/execute tool commands and script paths remain recipes",
+    "partial grounding does not activate whole-goal broad decomposition",
+    "spent HTTP2 Task A is never replayed"
+  ],
+  "qualification_required": "EXACT_BYTE_NON_PARENT_INDEPENDENT_GUARDED_QUALIFICATION",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_after_qualification": "MERGE_GENERIC_REPAIR_THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_B",
+  "recursive_obs": {
+    "selected_surviving_route": "CORRECT_TWO_GENERIC_ADMISSION_PREDICATES_ONLY",
+    "why_selected_route_is_fastest_sufficient": "The physical parent run localized the first failure to broad-routing admission. Existing decomposition and downstream research machinery are reused unchanged.",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_TASK_A_REPLAY",
+      "TASK_SPECIFIC_HTTP2_PATCH",
+      "NEW_NLP_DEPENDENCY",
+      "MODEL_COGNITION",
+      "IRRELEVANT_PACKAGE_ACQUISITION"
+    ],
+    "stop_rule": "QUALIFY_EXACT_GENERIC_BYTES_WITH_FRESH_NON_PARENT_CASES_BEFORE_MERGE"
+  }
+}
