@@ -652,30 +652,27 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "STRONGER_CODING_CONFIGURATION_INTERNALIZED__VERIFICATION_PENDING",
+      "status": "OPUS55_LONG_HORIZON_CONTINUITY_PROMOTED__CODING_BLOCKER_REMAINS",
       "blocker": "BRAIN_INTERNALIZED_SUPREME_LED_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
       "whole_envelope_complete": false,
-      "prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-      "leading_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
-      "preserved_comparison_evidence": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json"
+      "promoted_capability": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1",
+      "evidence_path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "active_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
     },
     "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
     "canonical_frontier_consistency_status": "V5_OPUS_5_5_CAPABILITY_OWNERSHIP_THEORY_ACTIVE",
     "last_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
-      "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
-      "route": "evidence.claim_relation.generic_units.stdlib",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-      "public_run_id": 36682488104,
-      "public_job_id": 109780804595,
-      "artifact_id": 11082521746,
-      "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-      "producer_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
-      "test_git_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+      "capability_id": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "route": "BRAIN_SAME_IDENTITY_CHECKPOINT_RELAUNCH_CONTINUITY",
+      "evidence_path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "public_run_id": 36762735723,
+      "public_job_id": 110049133395,
+      "artifact_id": 11119213213,
+      "artifact_digest": "sha256:b3171075fc05fdba6dfc64ccfc1b00eff15e3d564166ea23831bb05c1f988d30",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
-      "parent_capability_promoted": false,
-      "limitations": "Exact normalized substring support and explicit caller-referenced Decimal relations only; automatic claim-spec generation, semantic operand-role binding, paraphrase/entailment, factual correctness, causality, evidence quality/sufficiency/independence, and unit conversion remain unverified."
+      "claim_scope": "DURABLE_CROSS_SESSION_STATE_AND_SAME_MISSION_CHECKPOINT_RELAUNCH_CONTINUITY"
     },
     "source_admission_repair": {
       "status": "GUARD_QUALIFIED_MERGED__FRESH_PARENT_REUSE_REQUIRED_FOR_CREDIT",
@@ -690,7 +687,9 @@
     "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
     "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
     "opus_5_5_whole_envelope_complete": false,
-    "opus_5_5_newly_owned_scoped_capabilities": [],
+    "opus_5_5_newly_owned_scoped_capabilities": [
+      "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1"
+    ],
     "opus_5_5_previously_owned_scoped_capabilities": [
       "EXACT_SYMBOLIC_COMPUTATION_V1"
     ],
