@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-CLIMATE-FIRST-START-AUTHORITY-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "CANONICAL_CLIMATE_TASK_A_PROVENANCE_MISATTRIBUTES_LATER_REPLAY_AS_FIRST_AUTHORITATIVE_SPEND",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_CLIMATE_TASK_A_PROVENANCE_MISATTRIBUTES_LATER_REPLAY_AS_FIRST_AUTHORITATIVE_SPEND::RECONCILE_FRONTIER",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "expected_parent_frontier_change": "No capability credit and no runtime change. Correct freshness/provenance to the first substantive-objective START, quarantine the later same-objective execution as replay, preserve only evidence-supported diagnostic gaps, and recompute authority for the next action.",
+  "prior_work_checked": [
+    "current main dc38bf8370d692d3f18a5aff446d26933f9dd03a merged PR347 using later run 36670516407 as authoritative Task A execution",
+    "public earlier run 36669918546 started at 2026-09-30T04:40:56Z and records execution_count=1, task_executed=true, zero incremental spend",
+    "earlier task and later PR337 Task-A task have identical objective, goal_text, anti-leakage flags, required behavior, required output, one-shot/no-model constraints, and oracle contract; only task-id/freshness naming differs",
+    "PR160/PR167 precedent: an unauthorized first START is irreversibly freshness-spending, diagnostic-only, non-promotable, and unreplayable",
+    "later run 36670516407 therefore cannot be the first fresh spend and must not supply promotion authority"
+  ],
+  "stop_condition": "Stop after truth-only reconciliation is complete and guarded: task freshness points to run 36669918546, later same-objective run 36670516407 is explicitly quarantined as replay/zero-authority, capability counters and parent promotion remain unchanged, no task is rerun, and the next action is recomputed from admissible evidence.",
+  "recursive_obs": {
+    "required": true,
+    "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "obs_goal": {
+      "real_outcome": "Restore canonical truth about which execution first spent the Mauna Loa open-ended objective without changing the scientific mission.",
+      "proxy_goals_deleted": [
+        "keep PR347 metadata merely because it is already merged",
+        "treat renamed task IDs as fresh scientific objectives",
+        "replay either climate task"
+      ],
+      "surviving_necessity": "The canonical state must obey first-START freshness law before any repair or fresh parent task is authorized."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "first-START/no-replay precedent from PR160, PR166, PR167",
+        "public GitHub Actions primary job log for run 36669918546",
+        "exact public task bytes for the earlier and later Mauna Loa objective",
+        "current merged PR347 reconciliation files"
+      ],
+      "capability_work_deleted": [
+        "no runtime repair",
+        "no compiler mutation",
+        "no supplier mutation",
+        "no new task execution"
+      ],
+      "surviving_gap": "Canonical provenance currently attributes freshness and terminal authority to a later same-objective replay."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Governance/provenance inconsistency. The scientific objective is already spent; this lane only restores ordering and evidence authority.",
+      "surviving_causal_blocker": "CANONICAL_CLIMATE_TASK_A_PROVENANCE_MISATTRIBUTES_LATER_REPLAY_AS_FIRST_AUTHORITATIVE_SPEND"
+    },
+    "obs_solution": {
+      "routes_ranked": [
+        "RECONCILE_EXISTING_CANONICAL_FILES_FROM_PRIMARY_FIRST_START_EVIDENCE",
+        "LEAVE_PR347_AS_IS",
+        "RERUN_TASK"
+      ],
+      "selected_surviving_route": "RECONCILE_EXISTING_CANONICAL_FILES_FROM_PRIMARY_FIRST_START_EVIDENCE",
+      "why_selected_route_is_fastest_sufficient": "Primary logs and exact task bytes already settle chronology and task identity. Reconciliation requires no compute experiment, supplier, or replay."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "verification_plan": "Diff every canonical mirror touched by PR347, assert zero runtime/counter/promotion changes, verify first-start run/artifact identifiers against primary logs, verify later run is marked replay/zero-authority, then run repository guards before merge."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any repair justified solely by later replay authority",
+        "any claim that run 36670516407 was the first one-shot spend"
+      ],
+      "fresh_reuse_plan": "After reconciliation, recompute route frontier from the evidence boundary. If the unauthorized first START is diagnostic-only, do not promote or repair solely from it; use independent current-code/static or fresh materially different evidence as governance requires."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact public runner logs",
+        "reused exact task JSON comparison",
+        "reused established unauthorized-first-START precedent"
+      ],
+      "search_stop_decision": "Chronology, task identity, and governing precedent are directly evidenced; further benchmark execution would be harmful replay."
+    }
+  }
+}
