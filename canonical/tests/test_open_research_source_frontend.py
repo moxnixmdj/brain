@@ -59,6 +59,81 @@ class OpenResearchSourceFrontendTests(unittest.TestCase):
                 "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
             )
 
+    def test_verified_bounded_relevance_advances_only_to_extraction(self):
+        original=self.front._load_sibling
+
+        class Discovery:
+            @staticmethod
+            def discover(objective,limit=12,timeout=15):
+                return {
+                    "status":"CANDIDATES_DISCOVERED",
+                    "candidates":[{"url":"https://example.org/report","title":"candidate"}],
+                }
+
+        class Provenance:
+            @staticmethod
+            def verify(candidate,timeout=15):
+                return {
+                    "status":"RETRIEVAL_PROVENANCE_VERIFIED",
+                    "final_url":"https://example.org/report",
+                    "final_host":"example.org",
+                }
+
+        class Authority:
+            @staticmethod
+            def bind_candidate(candidate,timeout=20):
+                return {
+                    "status":"AUTHORITY_IDENTITY_VERIFIED",
+                    "matched_domain":"example.org",
+                    "organization_name":"Example Organization",
+                }
+
+        class Relevance:
+            @staticmethod
+            def verify(objective,candidate,provenance,authority_identity,timeout=20):
+                return {
+                    "status":"FIRST_PARTY_RELEVANT_SOURCE_VERIFIED",
+                    "first_party_source_status":"VERIFIED",
+                    "objective_relevance_status":"VERIFIED",
+                    "primary_source_status":"UNVERIFIED",
+                    "factual_correctness_status":"UNVERIFIED",
+                    "evidence_sufficiency_status":"UNVERIFIED",
+                    "model_dependency_count":0,
+                    "incremental_spend_usd":0,
+                }
+
+        def fake(name):
+            return {
+                "open_web_source_candidate_discovery":Discovery,
+                "source_candidate_provenance_verify":Provenance,
+                "source_authority_binding_ror":Authority,
+                "first_party_objective_relevance_verify":Relevance,
+            }[name]
+
+        try:
+            self.front._load_sibling=fake
+            goal="Assess whether floating point summation accuracy degrades under cancellation"
+            d=self.decomp.decompose(goal)
+            x=self.front.run(goal,d,limit=4,timeout=5)
+            self.assertEqual(x["relevance_verified_candidate_count"],1,x)
+            self.assertTrue(x["relevance_claims_made"],x)
+            self.assertFalse(x["authority_claims_made"],x)
+            self.assertFalse(x["primary_source_claims_made"],x)
+            self.assertFalse(x["factual_correctness_claims_made"],x)
+            self.assertFalse(x["evidence_sufficiency_claims_made"],x)
+            self.assertEqual(
+                x["next_required_capability"],
+                "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+                x,
+            )
+            self.assertEqual(
+                x["role_progress"]["EVIDENCE_ACQUISITION"],
+                "RELEVANT_SOURCE_AVAILABLE__EVIDENCE_EXTRACTION_REQUIRED",
+                x,
+            )
+        finally:
+            self.front._load_sibling=original
+
     def test_mismatch_fails_closed(self):
         d=self.decomp.decompose("Assess whether A is greater than B")
         with self.assertRaises(ValueError):
