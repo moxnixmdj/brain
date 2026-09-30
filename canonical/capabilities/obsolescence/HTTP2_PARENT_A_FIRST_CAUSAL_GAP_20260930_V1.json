@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_FIRST_CAUSAL_GAP_V1",
+  "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "status": "SPENT_BLOCKED_NO_REPLAY",
+  "physical_execution_count": 1,
+  "run_repository": "moxnixmdj/verification-capsule-runner",
+  "workflow_run_id": 36688193204,
+  "workflow_job_id": 109798852831,
+  "artifact_id": 11084357364,
+  "artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
+  "admission_attempt_id": "c8a9972496fd4f5391995fc51ed15111",
+  "child_started": true,
+  "child_returncode": 3,
+  "first_causal_gap": {
+    "blocker": "CAPABILITY_ACQUISITION_REQUIRED",
+    "grounding": {
+      "grounded_clause_count": 0,
+      "unresolved_clause_indexes": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "broad_objective_decomposition_available": false
+    },
+    "root_cause": "plain_goal_bound_grounding admits broad-objective decomposition only for exactly one unresolved clause, so a genuinely broad multi-sentence objective with every clause unresolved falls through to generic package acquisition.",
+    "misrouted_supplier_examples": [
+      "elpa-assess",
+      "gnome-initial-setup",
+      "node-block-stream"
+    ],
+    "classification": "GENERIC_BROAD_OBJECTIVE_ROUTING_ADMISSION_DEFECT"
+  },
+  "replay_allowed": false,
+  "next_action": "REPAIR_AND_INDEPENDENTLY_QUALIFY_GENERIC_MULTI_CLAUSE_BROAD_OBJECTIVE_ROUTING__THEN_USE_A_NEW_FRESH_PARENT_TASK",
+  "parent_capability_credit": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
