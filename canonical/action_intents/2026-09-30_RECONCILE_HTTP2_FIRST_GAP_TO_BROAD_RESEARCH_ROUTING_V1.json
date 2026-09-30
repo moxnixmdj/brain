@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-HTTP2-FIRST-GAP-TO-BROAD-RESEARCH-ROUTING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1::OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Move the active child frontier from stale fresh-parent-task selection to the verified HTTP/2 first causal gap: generic broad-research objective decomposition/routing. Mark the HTTP/2 task spent/no-replay, keep parent capability credit at zero, and increment only one newly localized residual gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR469 merged authoritative HTTP2 first-spend reconciliation",
+    "public runner run 36688193204 / job 109798852831 / artifact 11084357364",
+    "PR465 downstream claim pipeline integration does not repair the upstream broad-decomposition gap",
+    "live hierarchy/queue/pointer still name stale fresh-Task-A requirement"
+  ],
+  "evidence_presence_classification": "CANONICAL_MIRROR_INCONSISTENCY_AFTER_VERIFIED_PARENT_FIRST_GAP",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical pointer, hierarchy, queue, and scoreboard agree on the HTTP/2 first causal gap and child target; no runtime code changes and no parent/capability/task credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "progress_credit": "RESIDUAL_GAP_LOCALIZED_ONLY",
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "MODEL_INDEPENDENT_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1",
+    "relationship": "SUBCAPABILITY_OF",
+    "evidence": [
+      "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
+    "real_outcome": "Restore one canonical frontier after the single guarded HTTP/2 parent spend localized an upstream broad-research decomposition/routing gap.",
+    "required_capability": "MODEL_INDEPENDENT_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1",
+    "obs_goal": {
+      "real_outcome": "Make every worker act on the verified first causal gap rather than freeze another parent task.",
+      "proxy_goals_deleted": [
+        "fresh parent replay",
+        "new parent task",
+        "supplier contract repair before routing repair",
+        "runtime implementation in reconciliation"
+      ],
+      "surviving_necessity": "Authority mirrors contradict the already-merged first-gap receipt."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR469 reconciliation receipt",
+        "current hierarchy",
+        "current queue",
+        "current pointer",
+        "current scoreboard"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to truth reconciliation."
+      ],
+      "capability_work_deleted": [
+        "No runtime code",
+        "No benchmark",
+        "No provider",
+        "No replay"
+      ],
+      "surviving_gap": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical mirror drift after concurrent parent execution/reconciliation.",
+      "delete_bypass_substitute_options": [
+        "Delete stale fresh-task authority",
+        "Reuse authoritative PR469 receipt",
+        "Do not alter runtime"
+      ],
+      "surviving_causal_blocker": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_ALL_FRONTIER_MIRRORS_TO_PR469_FIRST_GAP"
+      ],
+      "losing_routes_reason": "Any implementation before reconciliation would act against contradictory canonical authority.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Exact JSON agreement across pointer, hierarchy, queue, scoreboard, and PR469 receipt is sufficient."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any new fresh-parent-task freeze based on stale state",
+        "Generic supplier-contract repair not causally upstream"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "After reconciliation, OBS and acquire only the broad-research decomposition/routing child; later spend a different fresh parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse the single admitted HTTP2 run and PR469 analysis",
+        "Reuse PR465 diff proving downstream-only change"
+      ],
+      "search_stop_decision": "The first causal gap is directly evidenced and reconciliation selects no external supplier.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to state-only reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_ALL_FRONTIER_MIRRORS_TO_PR469_FIRST_GAP",
+      "IGNORE_MIRROR_DRIFT",
+      "START_ANOTHER_PARENT_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "IGNORE_MIRROR_DRIFT",
+      "START_ANOTHER_PARENT_TASK",
+      "HTTP2_REPLAY"
+    ],
+    "selected_surviving_route": "RECONCILE_ALL_FRONTIER_MIRRORS_TO_PR469_FIRST_GAP",
+    "why_selected_route_is_fastest_sufficient": "It restores truthful authority using already-verified evidence and adds no implementation machinery.",
+    "expected_parent_level_state_change": "Move the active child frontier from stale fresh-parent-task selection to the verified HTTP/2 first causal gap: generic broad-research objective decomposition/routing. Mark the HTTP/2 task spent/no-replay, keep parent capability credit at zero, and increment only one newly localized residual gap.",
+    "stop_condition": "Canonical pointer, hierarchy, queue, and scoreboard agree on the HTTP/2 first causal gap and child target; no runtime code changes and no parent/capability/task credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER selects no external execution supplier."
+    }
+  }
+}
