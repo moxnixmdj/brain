@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-BIOPHYSICS-RAPID-GROWTH-REAL-TASK-20260930-003",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "BIOPHYSICS_GROWTH_ENERGETICS_AND_PHYSIOLOGY",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "user_question": "Can massively parallel biological cell growth make an approximately 70 kg mammalian organism become approximately 700 kg in about 60 seconds, or do matter, growth-rate, energy, heat, and transport constraints remain binding?",
+  "sources": [
+    {
+      "id": "NCBI_CELL_CYCLE",
+      "authority": "NCBI / PMC",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3262245/",
+      "required_claims": [
+        "mammalian cell cycles often close to 24 h",
+        "reported human cell-line cycle duration close to 19 h"
+      ]
+    },
+    {
+      "id": "NCBI_BODY_FLUIDS",
+      "authority": "NCBI Bookshelf / StatPearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK482447/",
+      "required_claims": [
+        "adult humans approximately 50% to 60% water by mass"
+      ]
+    },
+    {
+      "id": "NCBI_CARDIAC_OUTPUT",
+      "authority": "NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK54473/",
+      "required_claims": [
+        "cardiac output about 5 L/min at rest",
+        "healthy maximal demand about 15 to 20 L/min",
+        "world-class athletes can approach 40 L/min"
+      ]
+    },
+    {
+      "id": "PUBMED_GROWTH_COST",
+      "authority": "PubMed / Biological Reviews",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8193215/",
+      "required_claims": [
+        "consensus apparent production efficiency about 75%",
+        "dry biomass energy scale represented as 22 J/mg in the review"
+      ]
+    }
+  ],
+  "scientific_contract": {
+    "initial_mass_kg": 70,
+    "final_mass_kg": 700,
+    "target_duration_s": 60,
+    "required_calculations": [
+      "added_mass_kg = final_mass_kg - initial_mass_kg",
+      "mass_ratio = final_mass_kg / initial_mass_kg",
+      "minimum_population_doublings = log2(mass_ratio)",
+      "growth_time_h_at_19h_cycle = minimum_population_doublings * 19",
+      "growth_time_h_at_24h_cycle = minimum_population_doublings * 24",
+      "required_external_mass_rate_kg_s = added_mass_kg / target_duration_s",
+      "adult_like_added_water_scale_kg = added_mass_kg * [0.50,0.60]",
+      "adult_like_added_dry_mass_scale_kg = added_mass_kg * [0.40,0.50]",
+      "dry_biomass_energy_scale_J = added_dry_mass_scale_kg * 22000000",
+      "metabolizable_input_scale_J = dry_biomass_energy_scale_J / 0.75",
+      "production_overhead_heat_scale_J = metabolizable_input_scale_J - dry_biomass_energy_scale_J",
+      "production_overhead_heat_power_scale_W = production_overhead_heat_scale_J / target_duration_s"
+    ],
+    "interpretation_rules": [
+      "Treat body-water fraction and 22 J/mg production energetics as order-of-magnitude composition/energetics bounds, not an exact engineered-organism specification.",
+      "Do not equate cardiac output with construction-feedstock throughput; report it only as an existing mammalian internal transport scale.",
+      "Parallel cell activity may reduce serial processing bottlenecks but cannot remove conserved external matter, energy, heat rejection, or tissue-organization requirements.",
+      "Do not provide procedural genetic-engineering or wet-lab instructions."
+    ],
+    "decision_rule": "Conclude whether 60-second 10x organism-scale growth is compatible with known mammalian biology; distinguish known-biological infeasibility from absolute physical impossibility."
+  },
+  "required_output": {
+    "fields": [
+      "status",
+      "source_evidence",
+      "initial_mass_kg",
+      "final_mass_kg",
+      "added_mass_kg",
+      "mass_ratio",
+      "minimum_population_doublings",
+      "cell_cycle_reference_h",
+      "growth_time_bounds_h",
+      "required_external_mass_rate_kg_s",
+      "adult_like_added_water_scale_kg",
+      "adult_like_added_dry_mass_scale_kg",
+      "dry_biomass_energy_scale_J",
+      "metabolizable_input_scale_J",
+      "production_overhead_heat_scale_J",
+      "production_overhead_heat_power_scale_W",
+      "cardiac_output_context_L_min",
+      "parallelism_effect",
+      "conclusion",
+      "limitations",
+      "provenance",
+      "model_dependency_count"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PARENT_BIOPHYSICS_RAPID_GROWTH_RESULT_20260930.json"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_procedural_bioengineering": true,
+    "no_source_task_tuning_after_execution": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Independently refetch the same authoritative sources without importing Brain producer modules, verify the cited quantitative source claims, recompute every arithmetic quantity using independent Python math or Wolfram, and compare consequential output fields and conclusion scope.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false
+}
