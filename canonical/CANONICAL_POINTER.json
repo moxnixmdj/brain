@@ -57,12 +57,12 @@
     "truth_first_law_path": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "truth_first_regression_path": "canonical/regressions/2026-09-22_STALE_STATE_DUPLICATE_EXECUTION.json",
     "capability_realization_mission_lock_required": true,
-    "capability_realization_law_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
+    "capability_realization_law_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
     "forbid_proxy_goal_substitution": true,
     "predicates_must_be_subordinate_to_live_capability_question": true,
     "benchmarks_must_be_subordinate_to_live_capability_question": true,
     "capability_arbitrage_strategy_required": true,
-    "capability_arbitrage_strategy_path": "canonical/laws/CAPABILITY_OWNERSHIP_ARBITRAGE_STRATEGY_V5.md",
+    "capability_arbitrage_strategy_path": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
     "inherit_verified_capability_gains": true,
     "astra_closure_race_strategy_required": false,
     "astra_closure_race_strategy_path": "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md",
@@ -100,7 +100,7 @@
     "recursive_obs_law_path": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "recursive_obs_receipt_schema_path": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "capability_acquisition_engine_required": true,
-    "capability_acquisition_engine_law_path": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "capability_acquisition_engine_law_path": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
     "real_task_first": false,
     "deletion_first_route_order": [
       "DELETE",
@@ -164,7 +164,12 @@
     "opus_5_5_envelope_required": true,
     "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
     "opus_5_5_ownership_matrix_required": true,
-    "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+    "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "capability_internalization_required": true,
+    "external_model_benchmark_win_is_specimen_only": true,
+    "provider_access_is_not_capability_ownership": true,
+    "brain_owned_operative_configuration_required": true,
+    "brain_configured_route_itself_must_be_verified_ge_opus55": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -218,11 +223,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__AND_VERIFY_BROAD_CANDIDATE_FAMILIES__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
+    "next_step": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
+    "critical_blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -299,7 +304,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
+    "highest_leverage_capability_gap": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -308,7 +313,7 @@
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
     "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN",
-    "capability_realization_strategy_path": "canonical/laws/CAPABILITY_OWNERSHIP_ARBITRAGE_STRATEGY_V5.md",
+    "capability_realization_strategy_path": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
     "capability_acquisition_loop": [
       "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE",
       "MAP_ALREADY_OWNED_BRAIN_CAPABILITIES",
@@ -356,7 +361,7 @@
     "same_identity_superworker_cleanroom_reproduction_verified": false,
     "frontier_capability_parity": "DIAGNOSTIC_MINIMUM_BAR_ONLY__NOT_TERMINAL_GOAL",
     "frontier_capability_superset": "DESIRED_WHEN_FAST_CHEAP_AND_VERIFIED__NOT_TERMINAL_BY_ITSELF",
-    "frontier_capability_mission_lock_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
+    "frontier_capability_mission_lock_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
     "frontier_capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "knowledge_side_status": "EXTERNAL_JIT_ONLY__KNOWLEDGE_NOT_ACCUMULATED_AS_CAPABILITY",
     "active_research_side": "CAPABILITY_OWNERSHIP",
@@ -596,7 +601,7 @@
     "h005_surface_qualification_path": "canonical/capabilities/obsolescence/H005_UBUNTU_DIRECT_SURFACE_QUALIFICATION_20260929_V1.json",
     "active_operating_mode": "REAL_CAPABILITY_ACQUISITION_WITH_RECURSIVE_OBS",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
     "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V6.json",
     "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
     "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json",
@@ -646,11 +651,8 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "HLE_DIAMOND_REASONING_PROMOTED__RESIDUAL_FRONTIER_COMPRESSED",
-      "blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
-      "evidence_paths": [
-        "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json"
-      ],
+      "status": "V6_CAPABILITY_INTERNALIZATION_CORRECTION",
+      "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
       "whole_envelope_complete": false
     },
     "active_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -684,13 +686,14 @@
     "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
     "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
     "opus_5_5_whole_envelope_complete": false,
-    "opus_5_5_newly_owned_scoped_capabilities": [
+    "opus_5_5_newly_owned_scoped_capabilities": [],
+    "opus_5_5_previously_owned_scoped_capabilities": [
+      "EXACT_SYMBOLIC_COMPUTATION_V1"
+    ],
+    "revoked_false_ownership_capabilities": [
       "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
       "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
-    ],
-    "opus_5_5_previously_owned_scoped_capabilities": [
-      "EXACT_SYMBOLIC_COMPUTATION_V1"
     ]
   },
   "provider_rules": {
@@ -884,22 +887,19 @@
     }
   ],
   "mission_lock": {
-    "terminal_objective": "PERMANENTLY_ACQUIRE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+    "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
     "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
-    "operational_theory": "EFFECTIVE_FRONTIER_INTELLIGENCE_EQUALS_PERMANENTLY_OWNED_CAPABILITIES_PLUS_EXTERNAL_JIT_KNOWLEDGE",
-    "knowledge_side": "EXTERNAL_JIT__DO_NOT_BUILD_PERMANENT_WORLD_KNOWLEDGE_WAREHOUSE",
-    "capability_side": "FIND_ALREADY_EXISTING_REALIZATIONS__CONFIGURE_INTO_BRAIN__VERIFY_AT_OR_ABOVE_OPUS_5_5__SAVE_PERMANENTLY__INHERIT_GLOBALLY",
-    "capability_externalization": "FORBIDDEN_AS_NORMAL_OPERATING_MODEL",
-    "underlying_capability_invention": "FORBIDDEN__INTEGRATION_GLUE_ONLY",
-    "no_existing_route_result": "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE",
-    "acceptance_bar": "CONFIGURED_BRAIN_CAPABILITY_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5_USEFUL_CAPABILITY",
+    "operational_theory": "BRAIN_INTERNALIZED_CAPABILITY_CONFIGURATIONS_PLUS_EXTERNAL_JIT_KNOWLEDGE_PLUS_GENERAL_COMPUTATION_SUBSTRATE",
+    "knowledge_side": "EXTERNAL_JIT",
+    "capability_side": "EXTERNAL_WINNERS_ARE_SPECIMENS__OPERATIVE_MECHANISM_MUST_BE_BRAIN_OWNED",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__CANNOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "underlying_capability_invention": "FORBIDDEN",
+    "acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
     "hard_incremental_spend_usd": 0,
-    "authority_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
-    "acquisition_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
-    "strategy_path": "canonical/laws/CAPABILITY_OWNERSHIP_ARBITRAGE_STRATEGY_V5.md",
-    "reasoning_law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
-    "theory_receipt": "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json",
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V5.json"
+    "authority_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "acquisition_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+    "strategy_path": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
+    "model_substrate_law": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md"
   },
   "active_persistent_controllers": [
     {
