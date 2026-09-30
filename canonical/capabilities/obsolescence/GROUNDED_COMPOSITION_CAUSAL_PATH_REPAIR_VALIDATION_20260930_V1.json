@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_REPAIR_VALIDATION_V1",
+  "evidence_id": "GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_VALIDATION_20260930",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "status": "REPAIR_COMPLETE__COMPONENT_VALIDATED__CAPABILITY_CREDIT_WITHHELD",
+  "repaired_seams": [
+    "decision verifier source/result provenance made explicit via effect_result",
+    "generic provider-backed downstream path recency fallback blocked",
+    "all known provider-backed path consumers given explicit path bindings"
+  ],
+  "merged_repairs": [
+    {
+      "pr": 271,
+      "merge_commit": "ebc77c6e2309a806c6d9a39c5f3506fb777e6546",
+      "validation_run": 36654897859
+    },
+    {
+      "pr": 273,
+      "merge_commit": "d3617ad20e79834b898d9d91d52f1fc4cfeec00e",
+      "validation_run": 36655498906
+    },
+    {
+      "pr": 275,
+      "merge_commit": "e7881d00a16f673de626f380b4b1c18469a8fd59",
+      "validation_run": 36656123767,
+      "validation_job": 109700751266
+    }
+  ],
+  "graph_audit": {
+    "provider_backed_path_binding_violations_after_repair": 0,
+    "independently_recomputed": true
+  },
+  "credit_effect": {
+    "reusable_capability_credit_restored": false,
+    "fresh_reuse_credit_restored": false,
+    "verified_real_task_count_change": 0,
+    "residual_gap_count_change": 0
+  },
+  "next_required_evidence": "ONE_FRESH_MATERIALLY_DISTINCT_REAL_REQUALIFICATION_TASK__NO_PR267_REPLAY__MODEL_DEPENDENCY_COUNT_0"
+}
