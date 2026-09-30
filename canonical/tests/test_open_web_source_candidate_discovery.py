@@ -60,6 +60,16 @@ class SourceCandidateDiscoveryTests(unittest.TestCase):
         q="RFC 9110 HTTP semantics official specification"
         self.assertEqual(self.m._query(q),q)
 
+    def test_scientific_abbreviation_does_not_end_decision_clause(self):
+        q=(
+            "Assess whether E. coli growth rate exceeds B. subtilis growth rate. "
+            "Use authoritative experimental evidence."
+        )
+        self.assertEqual(
+            self.m._query(q),
+            "E. coli growth rate exceeds B. subtilis growth rate",
+        )
+
     def test_local_urls_fail_closed(self):
         self.assertIsNone(self.m._safe_url("http://localhost/x"))
         self.assertIsNone(self.m._safe_url("file:///tmp/x"))
