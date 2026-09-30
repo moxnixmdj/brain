@@ -1,0 +1,318 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either complete the second clean cross-domain parent task through genuine model-independent open-ended decomposition/source/tool selection and make the parent acquisition contract adjudicable, or localize the first new causal capability gap without replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current hardened main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "PR303 merged promotion firewall and ASTRA_RUNTIME_DERIVED_V1 cognition provenance",
+    "PR301 demography is the one currently admissible clean parent task",
+    "PR304 chemistry mass-balance task was closed before execution because its prewired URLs, JSON paths, formula and threshold did not exercise the parent open-ended capability",
+    "astronomy, geophysics and biophysics parent tasks are spent and replay-forbidden",
+    "no open PR currently owns this blocker lease"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001 with no source URLs, formulas, or controller plan. Execute exactly once on exact hardened current-base runtime with optional model cognition disabled. On completion independently verify the result and cognition provenance. On failure preserve only the first causal gap and do not replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Obtain the missing second clean cross-domain parent acquisition result on a task that genuinely requires the system itself to decompose the problem and select evidence/tools.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Test the exact defining open-ended behavior of the active parent target, not another prewired child workflow.",
+      "proxy_goals_deleted": [
+        "preselect source URLs",
+        "preselect formulas",
+        "preselect JSON paths",
+        "preselect controller actions",
+        "another narrow child benchmark",
+        "another governance patch",
+        "frontier-model cognition"
+      ],
+      "surviving_necessity": "One clean materially different parent task must exercise decomposition, source selection, tool selection, quantitative execution, provenance and verification without model cognition."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current hardened ASTRA runtime on main 0292dc91",
+        "model-independent plain-goal compilation",
+        "model-independent capability grounding and composition",
+        "authoritative source discovery/fetch capabilities",
+        "verified scalar numeric relation and typed numeric expression capabilities",
+        "runtime-derived cognition provenance"
+      ],
+      "external_existing_routes_checked": [
+        "one-off hand-coded engineering solver rejected because it would solve the instance without proving inherited open-ended parent behavior",
+        "optional frontier-model planner rejected because model dependence invalidates the targeted proof",
+        "prewired chemistry route rejected by PR304 as scope-insufficient"
+      ],
+      "capability_work_deleted": [
+        "no task-specific runtime repair before execution",
+        "no source whitelist for this task",
+        "no formula injection",
+        "no model planner",
+        "no new carrier"
+      ],
+      "surviving_gap": "Whether the inherited model-independent parent runtime can autonomously decompose and solve one genuinely open-ended cross-domain materials-engineering task is unproven."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Remaining parent acquisition proof obligation after one clean demography task; earlier replacement attempt was correctly rejected as prewired.",
+      "delete_bypass_substitute_options": [
+        "reuse hardened current runtime",
+        "reuse existing public zero-cost carrier",
+        "delete all source/formula/action prebinding",
+        "stop on first real capability gap"
+      ],
+      "surviving_causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__GENUINELY_OPEN_ENDED_MATERIALS_ENGINEERING_TASK",
+        "HAND_CODE_MATERIALS_SOLVER",
+        "OPTIONAL_MODEL_ADVISORY"
+      ],
+      "losing_routes_reason": "Hand coding proves only the instance; advisory model cognition invalidates model-independent dependency-removal evidence. The current inherited runtime is the only route that directly tests the missing parent behavior.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Verify the frozen real task directly; if it completes, independently re-fetch cited material properties and recompute constraints, diameters and masses without producer imports. Runtime cognition provenance must be ASTRA_RUNTIME_DERIVED_V1 with model_dependency_count 0."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "prewired parent-task variants",
+        "additional child benchmarking before this parent obligation resolves"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "source discovery",
+        "knowledge acquisition",
+        "decomposition",
+        "tool selection",
+        "numeric expression",
+        "constraint comparison",
+        "provenance",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "If the task passes, adjudicate the parent acquisition contract immediately. If it fails, OBS only the first causal gap and never replay this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical blocker and target",
+        "reused the already-qualified public execution carrier class",
+        "reused PR304's lesson that a prewired task cannot prove open-ended parent behavior"
+      ],
+      "search_stop_decision": "A clean open-ended parent execution is now more informative than further route search or architecture discussion.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current hardened runtime is the incumbent capability route; no alternative can satisfy the parent proof faster without either hand-coding the instance or introducing disallowed model cognition."
+    },
+    "routes_considered": [
+      "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__GENUINELY_OPEN_ENDED_MATERIALS_ENGINEERING_TASK",
+      "HAND_CODE_MATERIALS_SOLVER",
+      "OPTIONAL_MODEL_ADVISORY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_SOURCES",
+      "PREWIRED_FORMULAS",
+      "PREWIRED_CONTROLLER_ACTIONS",
+      "HAND_CODED_INSTANCE_SOLVER",
+      "OPTIONAL_MODEL_ADVISORY"
+    ],
+    "selected_surviving_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__GENUINELY_OPEN_ENDED_MATERIALS_ENGINEERING_TASK",
+    "why_selected_route_is_fastest_sufficient": "It directly tests the one missing parent proof obligation using the already-inherited hardened runtime; any narrower route cannot establish the target capability.",
+    "expected_parent_level_state_change": "Either supply the second clean cross-domain parent task needed for immediate acquisition adjudication, or produce the first new causal capability gap that changes the frontier.",
+    "stop_condition": "Execute PARENT-MATERIALS-TIE-ROD-OPEN-ENDED-REAL-TASK-20260930-001 once only after this guarded lease is current-base authoritative. No repair or replay from the same task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:34:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__GENUINELY_OPEN_ENDED_MATERIALS_ENGINEERING_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "hardened main 0292dc91d7b2354beede3e530256054330fb94d8",
+          "PR303 runtime provenance and promotion firewall",
+          "existing model-independent capability registry"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "No task source is preselected; authoritative-source selection is deliberately part of the frozen parent task."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No new package is required before the task reveals a gap."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Community material-property tables may be discovery sensors only; producer must promote consequential evidence to authoritative public sources."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent open-ended technical research decomposition source selection quantitative engineering"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "current Project Brain inherited runtime capabilities"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "inherited general runtime versus hand-coded instance solver"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current hardened Brain runtime after cognition provenance firewall"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__GENUINELY_OPEN_ENDED_MATERIALS_ENGINEERING_TASK",
+          "evidence": [
+            "current runtime contains the inherited general route and hardened cognition provenance"
+          ],
+          "qualification_evidence": [
+            "main 0292dc91d7b2354beede3e530256054330fb94d8",
+            "PR303 merged"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the defining parent behavior.",
+            "CAPABILITY_STRENGTH": "Requires autonomous decomposition, source selection, tool selection and multi-constraint quantitative engineering.",
+            "WALL_CLOCK": "No implementation before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Uses the already-qualified runtime/carrier class and fails closed on the first gap.",
+            "VERIFIABILITY": "Frozen task plus independent source re-fetch and recomputation if completed."
+          }
+        },
+        {
+          "route": "HAND_CODE_MATERIALS_SOLVER",
+          "evidence": [
+            "Could solve the instance but would prewire the missing reasoning."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially correct instance answer.",
+            "CAPABILITY_STRENGTH": "Does not prove inherited open-ended capability.",
+            "WALL_CLOCK": "Fast to an answer, slower to the actual goal because proof remains missing.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for one instance only.",
+            "VERIFIABILITY": "Cannot satisfy parent transfer contract."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger reaches the parent proof faster without either solving the wrong object or adding disallowed model cognition.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__GENUINELY_OPEN_ENDED_MATERIALS_ENGINEERING_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:34:00Z",
+        "max_age_hours": 2,
+        "selected_route": "CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME__GENUINELY_OPEN_ENDED_MATERIALS_ENGINEERING_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:24:00Z",
+            "evidence": [
+              "DIRECT_PROBE: parent demography public execution run 36667844172 completed on the established public carrier"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_0292dc91d7b2354beede3e530256054330fb94d8",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:34:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact hardened current main 0292dc91d7b2354beede3e530256054330fb94d8"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_HTTPS_EGRESS_FOR_AUTHORITATIVE_SOURCE_DISCOVERY",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:24:00Z",
+            "evidence": [
+              "DIRECT_PROBE: same public carrier successfully fetched multiple World Bank HTTPS JSON endpoints during parent demography run 36667844172"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
