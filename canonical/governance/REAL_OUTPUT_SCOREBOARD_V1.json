@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_progress_event_target": "FREEZE_FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_PARENT_TASK__EXECUTE_VIA_PUBLIC_RUNTIME_RUN_GOAL__NO_PRECOMPILE_BYPASS__STOP_ON_FIRST_REAL_CAUSAL_GAP",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -463,12 +463,28 @@
       "progress_credit": "EVIDENCE_SCOPE_CORRECTION_ONLY",
       "corrected_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "PARENT_OPEN_ENDED_TASK_A_HARNESS_SCOPE_CORRECTION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "EVIDENCE_SCOPE_CORRECTION_ONLY__TASK_SPENT__NO_CAPABILITY_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_HARNESS_SCOPE_CORRECTION_20260930_V1.json",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "EVIDENCE_SCOPE_CORRECTION_ONLY",
+      "corrected_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__PR337_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_FALLBACK",
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "NO_ADMISSIBLE_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_YET__STRUCTURED_DEMOGRAPHY_PRESERVED",
+    "subcapability_status": "OPEN_ENDED_PARENT_SCOPE_UNPROVEN__PR337_HARNESS_BYPASSED_PUBLIC_RUN_GOAL",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
