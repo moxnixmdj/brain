@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-CANDIDATE-SOURCE-REGISTRY-ATTESTATION-V1",
+  "status": "PROPOSED_IMPLEMENTATION",
+  "canonical_base_commit": "e44b6ff9ae1c336d012994f09456e70ba34899d4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "subcapability": "MODEL_INDEPENDENT_CANDIDATE_SOURCE_REGISTRY_ATTESTATION_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CANDIDATE_SOURCE_AUTHORITY_AND_PRIMARY_EVIDENCE_VERIFICATION",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "prior_work_checked": [
+    "PR379 broad-objective decomposition is merged and independently qualified.",
+    "PR397 source candidate discovery is merged and independently qualified by runner workflow 36675526707 / issue 111.",
+    "Current registry has retrieval and epistemic primitives but no candidate-source registry attestation capability.",
+    "No open PR owns candidate authority verification at current refresh."
+  ],
+  "selected_route": "STDLIB_FRESH_DOI_REGISTRY_ATTESTATION_PLUS_RESOLVER_AGREEMENT",
+  "route_reason": "Reuse candidate discovery and public DOI registries; add only independent identity/provenance attestation. Fail closed rather than infer authority from domains.",
+  "stop_condition": "Stop at registry-attested source identity. Primary-evidence classification and factual sufficiency remain explicitly unverified until separate qualification.",
+  "acceptance": [
+    "Crossref DOI candidate is revalidated against fresh exact DOI metadata and resolver landing identity.",
+    "DataCite DOI candidate is revalidated through public DOI metadata and resolver.",
+    "DOI/title/provenance mismatch fails closed.",
+    "Candidate without independent registry evidence remains UNVERIFIED.",
+    "primary_evidence_status remains NOT_VERIFIED.",
+    "model_dependency_count=0",
+    "incremental_spend_usd=0",
+    "fresh non-parent independent qualification required before registry/runtime promotion"
+  ],
+  "forbidden": [
+    "PARENT_TASK_REPLAY",
+    "TASK_SPECIFIC_SOURCE_WHITELIST",
+    "DOMAIN_TLD_EQUALS_AUTHORITY",
+    "PRIMARY_EVIDENCE_CLAIM_FROM_DOI_ALONE",
+    "PARENT_PROMOTION_FROM_CHILD_QUALIFICATION"
+  ]
+}
