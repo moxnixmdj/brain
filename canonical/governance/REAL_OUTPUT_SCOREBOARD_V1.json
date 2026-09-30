@@ -6,7 +6,7 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 6,
+    "reusable_capabilities_inherited": 7,
     "verified_real_tasks_completed": 9,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "OBS_AND_REPAIR_GENERIC_EVIDENCE_EXTRACTION_FOR_MODERN_CONTAINER_CONTENT__REQUALIFY_EXACT_BYTES__NO_PARENT_REPLAY",
+  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE__REUSE_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -543,6 +543,23 @@
       },
       "progress_credit": "VERIFIED_REUSABLE_SUBCAPABILITY_AND_NEXT_GAP_LOCALIZED",
       "parent_capability_promoted": false,
+      "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+    },
+    {
+      "event_id": "MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_REQUALIFIED_MODERN_CONTAINER_20260930",
+      "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+      "status": "REQUALIFIED_AFTER_FALSIFICATION__REUSABLE_CAPABILITY_RESTORED__NO_PARENT_CREDIT",
+      "capability_package": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+      "public_run_id": 36681368306,
+      "artifact_id": 11081458134,
+      "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+      "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+      "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "REUSABLE_CAPABILITY_INHERITED_RESTORED"
+      ],
       "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
     }
   ],
