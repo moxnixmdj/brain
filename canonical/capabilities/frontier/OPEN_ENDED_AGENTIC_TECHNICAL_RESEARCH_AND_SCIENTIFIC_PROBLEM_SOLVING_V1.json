@@ -42,7 +42,12 @@
     "real_task_B": "One materially different real technical/scientific domain completed using the inherited general route without rediscovery.",
     "cross_domain_transfer_required": true,
     "frontier_model_dependency_removed_for_both_tasks": true,
-    "same_domain_parameter_variation_does_not_count_as_frontier_fresh_reuse": true
+    "same_domain_parameter_variation_does_not_count_as_frontier_fresh_reuse": true,
+    "runtime_derived_cognition_provenance_required": true,
+    "required_cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "required_producer_model_dependency_count": 0,
+    "advisory_model_controller_modes_ineligible": true,
+    "nonempty_planner_model_ineligible": true
   },
   "evidence_A": {
     "task": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
@@ -155,5 +160,12 @@
     "artifact_id": 11076359417,
     "independent_oracle_verified": true,
     "model_dependency_count": 0
+  },
+  "promotion_firewall": {
+    "status": "RUNTIME_PROVENANCE_REQUIRED",
+    "runtime_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "model_dependency_count_required": 0,
+    "canonical_mirror_consistency_required": true,
+    "claim_scope_rule": "No frontier-capability promotion may exceed the exact scope proven by runtime-derived producer evidence and independent verification."
   }
 }
