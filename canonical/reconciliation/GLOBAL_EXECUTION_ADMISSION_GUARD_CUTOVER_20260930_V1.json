@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_EXECUTION_ADMISSION_GUARD_CUTOVER_V1",
+  "status": "OPERATIONAL_ON_RUNNER_MAIN__CANONICAL_RECEIPT_ONLY__NO_FRONTIER_CHANGE",
+  "checked_on": "2026-09-30",
+  "canonical_base_commit": "dd6549fea72d378e9b057048fd78e9fef04d44db",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "cutover_pr": 156,
+    "cutover_commit": "f2335a12a5137f683b0660ec20aba6e45dc388cc",
+    "live_status_commit": "b1d5ada6b827098e24d795c41c02545c12fd8fc1",
+    "atomic_namespace": "execution-guard/live-v1",
+    "live_contract_path": "execution_guard/LIVE_CONTRACT.md",
+    "live_status_path": "execution_guard/CUTOVER_STATUS.md",
+    "historical_manifest_path": "execution_guard/HISTORICAL_SPENT_PROBLEMS_V1.json",
+    "launcher_audit_path": "execution_guard/launcher_audit.py",
+    "guarded_runner_path": "execution_guard/github_actions_guarded_run_live.py"
+  },
+  "operational_evidence": {
+    "local_final_suite": "39/39 PASS",
+    "competing_process_race": "24 competitors -> exactly one admitted side effect",
+    "live_github_atomic_ref_qualification": "two simultaneous creates of one reservation ref -> one success, one HTTP 422 Reference already exists",
+    "pr156_guard_regression_job": "PASS__COMPILE_AND_REPOSITORY_WIDE_DIRECT_LAUNCH_BYPASS_AUDIT",
+    "post_merge_legacy_launcher_paths_absent": 8,
+    "historical_spent_problem_deny_refs_live": 6,
+    "pr335_spent_seeded": false,
+    "pr335_reason": "Canonical PR335 evidence states stale exact-base OBS and NO EXECUTION."
+  },
+  "semantics": {
+    "guarantee": "AT_MOST_ONE_SUCCESSFUL_GUARD_ADMISSION_PER_UNCHANGED_GATE_AND_STABLE_PROBLEM_IDENTITY_THROUGH_ADAPTER",
+    "stable_problem_identity": "SHA256(goal_text_v1\\0 + NFKC(goal_text).strip().lower() with whitespace collapsed)",
+    "exactly_once_external_execution_guaranteed": false,
+    "uncertain_transport_policy": "FAIL_CLOSED_NO_AUTOMATIC_RETRY",
+    "protected_child_start_condition": "GATE_PLUS_PROBLEM_PLUS_CURRENT_RUN_ACK_REFS_CONFIRMED",
+    "historical_problem_alias_replay_blocked": true
+  },
+  "limitations": [
+    "Repository-admin deletion or force-move of guard refs remains outside the adapter guarantee while repository rules are unprotected.",
+    "A future direct bypass commit can evade the adapter if repository governance itself is bypassed; the regression workflow detects but cannot cryptographically prevent such an admin-level change."
+  ],
+  "canonical_effect": {
+    "terminal_objective_changed": false,
+    "scientific_frontier_changed": false,
+    "capability_credit_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0,
+    "parent_replay_authorized": false,
+    "current_critical_blocker_preserved": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "current_next_step_preserved": "OBS_AND_ACQUIRE_MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE__REUSE_VERIFIED_EXTRACTION_AND_CLAIM_RELATION__NO_PARENT_REPLAY"
+  },
+  "future_launcher_requirement": "Any new protected parent/scientific one-shot launcher must use the runner live contract and stable goal-text problem identity before starting its protected child."
+}
