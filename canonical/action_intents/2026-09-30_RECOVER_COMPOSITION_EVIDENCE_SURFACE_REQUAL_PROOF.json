@@ -10,7 +10,7 @@
   "causal_blocker": "FRESH_TASK_SEMANTICS_PASSED_BUT_WORKFLOW_ABORTED_ON_OBSOLETE_HARNESS_ASSERTION_BEFORE_FINAL_EVIDENCE_ADJUDICATION",
   "action_kind": "RECONCILE_FRONTIER",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::FRESH_TASK_SEMANTICS_PASSED_BUT_WORKFLOW_ABORTED_ON_OBSOLETE_HARNESS_ASSERTION_BEFORE_FINAL_EVIDENCE_ADJUDICATION::RECONCILE_FRONTIER",
-  "expected_parent_frontier_change": "Recover and independently adjudicate the preserved semantic result from run 36659637634 without replaying the task; if and only if the recovered primary evidence and independent recomputation pass, restore composition capability/fresh-reuse credit once.",
+  "expected_parent_frontier_change": "Establish that the fresh post-repair composition requalification passed from preserved primary evidence and independent no-replay recomputation; mark the child capability promotion-eligible but restore no scoreboard credit and do not change the active target in this recovery action.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "PR283 exact fresh task and intent preserved on main dd7878cf466c46c73561b865b45b7a857aebd2ce",
@@ -27,17 +27,9 @@
   "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Do not rerun Brain or the source task. Independently read the preserved source job log, verify the exact semantic trace facts, recompute the typed decision from the immutable task input without importing producer/verifier modules, and classify line-31 harness failure. Promote only if all recovered predicates pass.",
+  "stop_condition": "Do not rerun Brain or the source task. Preserve the recovered PASS, keep the active target on the composition child, restore no counters in this PR, and stop with the next action equal to atomic reusable-capability credit restoration under CAPABILITY_INHERITANCE.",
   "governance_change": false,
   "weakens_existing_guard": false,
-  "frontier_reconciliation": {
-    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-    "new_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-    "relationship": "SAME_TARGET_EVIDENCE_RECOVERY_AFTER_HARNESS_ONLY_FAILURE",
-    "evidence": [
-      "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_PRIMARY_EVIDENCE_20260930_V1.json"
-    ]
-  },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "dd7878cf466c46c73561b865b45b7a857aebd2ce",
@@ -52,7 +44,7 @@
         "new capability task",
         "new repair"
       ],
-      "surviving_necessity": "Recover the missing final evidence adjudication only."
+      "surviving_necessity": "Recover and independently adjudicate the missing proof only; promotion bookkeeping remains separate."
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
@@ -112,7 +104,7 @@
         "evidence recovery from failed harness",
         "semantic result versus workflow status distinction"
       ],
-      "fresh_reuse_plan": "Use the already-spent fresh task if adjudication proves it; otherwise preserve the unresolved predicate without replay."
+      "fresh_reuse_plan": "After this proof-recovery PR merges, restore reusable-capability credit under CAPABILITY_INHERITANCE, then restore fresh-reuse credit under FRESH_REUSE, then reconcile to the parent frontier."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
@@ -120,7 +112,7 @@
         "reuse exact task input",
         "reuse line-numbered workflow"
       ],
-      "search_stop_decision": "The missing proof is fully localized; execution replay or further search is inferior.",
+      "search_stop_decision": "The missing proof has been independently recovered and passed; further execution is forbidden. This PR stops at promotion eligibility.",
       "affected_layers_only_on_revalidation": true,
       "challenger_refresh_decision": "Not applicable to proof recovery."
     },
@@ -132,9 +124,9 @@
       "RERUN_SOURCE_TASK"
     ],
     "selected_surviving_route": "RECOVER_JOB_LOG_AND_REPROVE_MISSING_ORACLE_ONLY",
-    "why_selected_route_is_fastest_sufficient": "It preserves freshness, uses existing primary evidence, and tests only the one missing adjudication predicate.",
-    "expected_parent_level_state_change": "Recover and independently adjudicate the preserved semantic result from run 36659637634 without replaying the task; if and only if the recovered primary evidence and independent recomputation pass, restore composition capability/fresh-reuse credit once.",
-    "stop_condition": "Do not rerun Brain or the source task. Independently read the preserved source job log, verify the exact semantic trace facts, recompute the typed decision from the immutable task input without importing producer/verifier modules, and classify line-31 harness failure. Promote only if all recovered predicates pass.",
+    "why_selected_route_is_fastest_sufficient": "It already produced a passing independent no-replay adjudication, so the only valid remaining work in this PR is to preserve that proof without mixing promotion or frontier transition authority.",
+    "expected_parent_level_state_change": "Establish that the fresh post-repair composition requalification passed from preserved primary evidence and independent no-replay recomputation; mark the child capability promotion-eligible but restore no scoreboard credit and do not change the active target in this recovery action.",
+    "stop_condition": "Do not rerun Brain or the source task. Preserve the recovered PASS, keep the active target on the composition child, restore no counters in this PR, and stop with the next action equal to atomic reusable-capability credit restoration under CAPABILITY_INHERITANCE.",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "RECONCILE_FRONTIER proof recovery selects no external capability route."

@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__COMPOSITION_REQUALIFIED__READY_FOR_NEW_CROSS_DOMAIN_PARENT_TASK",
+  "status": "FRONTIER_BAR_DEFINED__COMPOSITION_CHILD_REQUALIFICATION_PASS__CHILD_PROMOTION_BOOKKEEPING_PENDING",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -60,7 +60,7 @@
     "same_task_replay_allowed": false
   },
   "obsolescence_status": "NOT_YET_PROVEN__READY_FOR_NEW_CROSS_DOMAIN_PARENT_TASK",
-  "residual_gap": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+  "residual_gap": "RESTORE_REVOKED_COMPOSITION_CHILD_CREDITS_ATOMICALLY__THEN_RUN_NEW_POST_REPAIR_CROSS_DOMAIN_PARENT_REAL_TASK",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -86,7 +86,7 @@
       "independent_recovery_run_id": 36660108447
     }
   ],
-  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_action": "RESTORE_COMPOSITION_CHILD_REUSABLE_CAPABILITY_CREDIT__RESTORE_CHILD_FRESH_REUSE_CREDIT__THEN_RECONCILE_TO_PARENT_AND_RUN_NEW_CROSS_DOMAIN_END_TO_END_TASK",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -110,5 +110,12 @@
     "no_replay_recovery_run_id": 36660108447,
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
+  },
+  "blocked_by_reopened_subcapability": {
+    "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "status": "REQUALIFICATION_PASS__PROMOTION_BOOKKEEPING_PENDING",
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
+    "source_run_id": 36659637634,
+    "recovery_run_id": 36660108447
   }
 }

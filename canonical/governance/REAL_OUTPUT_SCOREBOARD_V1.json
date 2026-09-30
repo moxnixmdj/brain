@@ -6,9 +6,9 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 3,
+    "reusable_capabilities_inherited": 2,
     "verified_real_tasks_completed": 6,
-    "fresh_reuse_passes": 2,
+    "fresh_reuse_passes": 1,
     "frontier_dependencies_removed": 1,
     "residual_gaps_localized": 7
   },
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_progress_event_target": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_OR_PR277_REPLAY__INDEPENDENT_ORACLE",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -314,32 +314,12 @@
       },
       "progress_credit": "RESIDUAL_GAP_LOCALIZED",
       "residual_gap": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY"
-    },
-    {
-      "event_id": "MODEL_INDEPENDENT_GROUNDED_EXECUTABLE_COMPOSITION_REQUALIFIED_RECOVERED_20260930",
-      "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-      "status": "REQUALIFIED_AFTER_DIRECT_COMPILER_REPAIR__FRESH_MATERIALLY_DISTINCT_REUSE_PASS_RECOVERED_WITHOUT_REPLAY",
-      "capability_package": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1.json",
-      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
-      "source_requalification_run_id": 36659637634,
-      "independent_recovery_run_id": 36660108447,
-      "recovery_artifact_id": 11074221334,
-      "recovery_artifact_digest": "sha256:17fc8daf075b813fb00419887c4fdc4b8a2123dae6430744a89163b68dd7df60",
-      "model_dependency_count": 0,
-      "incremental_spend_usd": 0,
-      "parent_level_changes": [
-        "REUSABLE_CAPABILITY_RESTORED",
-        "FRESH_REUSE_CREDIT_RESTORED",
-        "RETURN_TO_PARENT_FRONTIER"
-      ],
-      "verified_real_tasks_completed_delta": 0,
-      "reason": "The fresh task semantically completed on exact current bytes; preserved job-log evidence and an independent no-replay recomputation proved the red workflow came from an obsolete post-success harness assertion."
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_ACQUIRED_VERIFIED_AFTER_RECOVERED_REQUALIFICATION",
+    "active_subcapability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "subcapability_status": "DIRECT_COMPILER_REPAIR_COMPLETE__COMPONENT_VALIDATED__FRESH_REQUALIFICATION_PENDING",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }

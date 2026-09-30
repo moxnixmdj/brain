@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "VERIFIED_ACQUIRED_AFTER_DIRECT_COMPILER_REPAIR__FRESH_REQUALIFICATION_PASS",
+  "status": "REQUALIFICATION_EVIDENCE_PASS__CAPABILITY_CREDIT_RESTORATION_PENDING",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,9 +28,9 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "VERIFIED_ACQUIRED_RESTORED",
-  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
-  "obsolescence_status": "VERIFIED_ACQUIRED__RETURN_TO_PARENT_FRONTIER",
+  "current_status": "REQUALIFICATION_PASS__PROMOTION_ELIGIBLE__SCOREBOARD_CREDIT_PENDING",
+  "next_action": "RESTORE_REUSABLE_CAPABILITY_CREDIT_ONCE_UNDER_CAPABILITY_INHERITANCE__THEN_RESTORE_FRESH_REUSE_CREDIT_ONCE_UNDER_FRESH_REUSE__THEN_RETURN_TO_PARENT_FRONTIER",
+  "obsolescence_status": "REQUALIFICATION_PASS__CREDIT_RESTORATION_PENDING",
   "winning_route": "grounded executable composition + shared proposal-binding authority + direct compound compiler causal effect-result lowering + deterministic capability graph execution",
   "capability_strength_result": "PRESERVED_PRIOR_REAL_TASKS_PLUS_ALL_KNOWN_BINDING_REPAIRS_PLUS_FRESH_EVIDENCE_SURFACE_REQUALIFICATION_AND_INDEPENDENT_NO_REPLAY_RECOVERY_PASS",
   "incremental_cost_result_usd": 0,
@@ -67,7 +67,7 @@
     "canonical/runtime/capability_planner.py",
     "canonical/runtime/astra_runtime.py"
   ],
-  "residual_gap": null,
+  "residual_gap": "PROMOTION_BOOKKEEPING_ONLY__REUSABLE_CAPABILITY_CREDIT_AND_FRESH_REUSE_CREDIT_REMAIN_REVOKED_UNTIL_ATOMIC_GUARDED_RESTORATION",
   "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
   "component_verification": {
     "status": "PASS",
@@ -126,7 +126,7 @@
     "capability_credit_restored": true
   },
   "post_direct_compiler_fresh_requalification": {
-    "status": "PASS_RECOVERED_FROM_PRESERVED_PRIMARY_EVIDENCE",
+    "status": "PASS_RECOVERED_FROM_PRESERVED_PRIMARY_EVIDENCE__PROMOTION_ELIGIBLE",
     "source_pr": 283,
     "public_run_id": 36659637634,
     "public_job_id": 109711314434,
@@ -142,6 +142,7 @@
     "recovery_artifact_digest": "sha256:17fc8daf075b813fb00419887c4fdc4b8a2123dae6430744a89163b68dd7df60",
     "execution_replayed": false,
     "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
-    "capability_credit_restored": true
+    "capability_credit_restored": false,
+    "promotion_eligible": true
   }
 }
