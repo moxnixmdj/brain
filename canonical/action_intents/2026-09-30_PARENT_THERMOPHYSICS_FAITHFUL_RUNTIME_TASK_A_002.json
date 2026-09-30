@@ -1,0 +1,383 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-THERMOPHYSICS-OPENENDED-FAITHFUL-RUNTIME-20260930-002",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either produce the first admissible fresh open-ended model-independent parent result through the actual canonical runtime entrypoint, or replace the broad direct-compiler diagnosis with the first genuine integrated-runtime causal gap after grounding, composition, source/tool discovery, and acquisition fallbacks have had authority to run. No parent promotion is automatic.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 86dae95f0b0a872df005dd35ea0110cd3914536f",
+    "PR370 restores Mauna first-spend direct-compiler diagnosis but authorizes search/reuse/bypass before repair",
+    "public runner PR79 run 36672816106 completed successfully with canonical mission origin preserved into autonomous acquisition",
+    "public runner PR81 run 36672844129 independently completed mission-origin propagation canary with status PASS_MISSION_ORIGIN_PROPAGATION_CANARY",
+    "canary failure after origin propagation was supplier-contract quality, not APT_ORIGIN_MISSION_PATH_INVALID or PYPI_ORIGIN_MISSION_PATH_INVALID",
+    "current astra_runtime.py compile-miss path already classifies ordinary broad clauses, runs bound grounding/composition, then targeted/federated acquisition",
+    "current acquired subcapabilities include grounding, grounded composition, numeric relation, typed scalar expression, evidence synthesis and verification",
+    "Unified Planning 1.3.0 and ProbLog 2.3.0 remain available zero-monetary-cost planning/logic frameworks but require formalized problem structure and do not remove the need to test the already-existing runtime fallback",
+    "Mauna Loa objective is spent and replay-forbidden"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute the frozen thermophysics task exactly once through canonical astra_runtime mission loading with model planner disabled. Do not call goal_compiler.compile_goal directly in the carrier. On failure preserve only the earliest integrated-runtime causal blocker and never replay. On producer success run the independent source/calculation oracle before any parent adjudication.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "86dae95f0b0a872df005dd35ea0110cd3914536f",
+    "real_outcome": "Test whether the already-existing canonical run_goal fallback makes the direct broad-objective compiler miss non-causal at the integrated parent level, using one fresh genuinely open-ended scientific task.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Get decisive integrated parent evidence now rather than repairing a direct compiler seam that the full runtime is designed to bypass.",
+      "proxy_goals_deleted": [
+        "repair goal_compiler before the full fallback is falsified",
+        "run another mission-origin canary",
+        "replay or rename the Mauna Loa objective",
+        "build a new planner",
+        "prewire thermophysics sources or formulas"
+      ],
+      "surviving_necessity": "A fresh open-ended task through canonical run_goal is the minimum experiment that distinguishes a harmless direct-compiler miss from a real integrated capability gap."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical astra_runtime.py mission entrypoint",
+        "run_goal / _run_goal_unstamped compile-miss fallback",
+        "plain-goal bound-capability grounding",
+        "grounded executable composition",
+        "targeted auto capability acquisition",
+        "federated capability discovery fallback",
+        "verified mission-origin propagation canary",
+        "existing acquired quantitative and synthesis capabilities"
+      ],
+      "external_existing_routes_checked": [
+        "Unified Planning 1.3.0",
+        "ProbLog 2.3.0",
+        "hand-authored domain research plan",
+        "frontier or local model planner"
+      ],
+      "capability_work_deleted": [
+        "no compiler mutation",
+        "no new planning framework",
+        "no new supplier before real failure",
+        "no repeated canary",
+        "no model cognition",
+        "no task-specific thermophysics adapter"
+      ],
+      "surviving_gap": "No fresh open-ended parent task has yet been run through the now-qualified canonical mission-origin run_goal path."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The direct compiler miss is path-specific unless the full canonical fallback also fails on a fresh parent task.",
+      "delete_bypass_substitute_options": [
+        "BYPASS direct compiler miss through existing run_goal fallback",
+        "REUSE verified grounding/composition/acquisition stack",
+        "SUBSTITUTE a formal planner only after evidence that semantic fallback is insufficient",
+        "REPAIR compiler only if fresh integrated evidence localizes it as causal"
+      ],
+      "surviving_causal_blocker": "NO_FRESH_PARENT_EVIDENCE_THROUGH_QUALIFIED_CANONICAL_RUN_GOAL_FALLBACK"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "BYPASS_DIRECT_COMPILER_GAP_VIA_EXISTING_CANONICAL_RUN_GOAL_FALLBACK__EXECUTE_FRESH_PARENT_TASK",
+        "REPAIR_DIRECT_GOAL_COMPILER_BROAD_OBJECTIVE_MATCHING",
+        "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG",
+        "BUILD_NEW_MODEL_INDEPENDENT_RESEARCH_PLANNER",
+        "USE_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "The selected route requires zero runtime implementation and directly tests inherited machinery. Compiler repair acts before proving causality; Unified Planning and ProbLog still require problem formalization; a new planner adds the most machinery; model planning violates the claimed capability.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark is needed before execution. The frozen fresh parent task itself is the direct effect test; success requires an independent source/calculation oracle, failure preserves the first integrated causal gap."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "additional mission-origin canaries",
+        "direct compiler repair justified solely by Mauna first-spend harness",
+        "stale duplicate Mauna reconciliation lanes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "plain-goal grounding",
+        "grounded executable composition",
+        "capability discovery/acquisition",
+        "typed numeric execution",
+        "evidence synthesis",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "If thermophysics succeeds, freeze one materially different open-ended Task B through the identical canonical route. If it fails, OBS only its first genuine integrated-runtime gap and never replay the task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR370 first-spend provenance",
+        "reused exact runtime control-flow inspection",
+        "reused public canary runs 36672816106 and 36672844129",
+        "reused current acquired child-capability evidence",
+        "refreshed external planning-framework availability only to challenge preemptive integration"
+      ],
+      "search_stop_decision": "Stop analysis and execute. The zero-implementation canonical fallback is verified reachable and no plausible challenger can yield more decisive parent evidence with less wall-clock time.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Route frontier refreshed on current base after PR370 and after successful mission-origin canary evidence."
+    },
+    "routes_considered": [
+      "BYPASS_DIRECT_COMPILER_GAP_VIA_EXISTING_CANONICAL_RUN_GOAL_FALLBACK__EXECUTE_FRESH_PARENT_TASK",
+      "REPAIR_DIRECT_GOAL_COMPILER_BROAD_OBJECTIVE_MATCHING",
+      "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG",
+      "BUILD_NEW_MODEL_INDEPENDENT_RESEARCH_PLANNER",
+      "USE_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADDITIONAL_MISSION_ORIGIN_CANARIES",
+      "DIRECT_COMPILER_REPAIR_BEFORE_INTEGRATED_FAILURE",
+      "PREEMPTIVE_FORMAL_PLANNER_INTEGRATION",
+      "NEW_RESEARCH_PLANNER_BEFORE_REAL_FAILURE",
+      "MODEL_PLANNER",
+      "MAUNA_LOA_REPLAY"
+    ],
+    "selected_surviving_route": "BYPASS_DIRECT_COMPILER_GAP_VIA_EXISTING_CANONICAL_RUN_GOAL_FALLBACK__EXECUTE_FRESH_PARENT_TASK",
+    "why_selected_route_is_fastest_sufficient": "It adds zero runtime machinery, reuses a fallback whose mission identity was just verified on the public carrier, and converts the current ambiguity directly into either parent success or the first real integrated blocker.",
+    "expected_parent_level_state_change": "Either produce the first admissible fresh open-ended model-independent parent result through the actual canonical runtime entrypoint, or replace the broad direct-compiler diagnosis with the first genuine integrated-runtime causal gap after grounding, composition, source/tool discovery, and acquisition fallbacks have had authority to run. No parent promotion is automatic.",
+    "stop_condition": "Execute the frozen thermophysics task exactly once through canonical astra_runtime mission loading with model planner disabled. Do not call goal_compiler.compile_goal directly in the carrier. On failure preserve only the earliest integrated-runtime causal blocker and never replay. On producer success run the independent source/calculation oracle before any parent adjudication.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T05:25:10Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REPAIR_DIRECT_GOAL_COMPILER_BROAD_OBJECTIVE_MATCHING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current main 86dae95f0b0a872df005dd35ea0110cd3914536f",
+          "astra_runtime.py existing compile-miss fallback through grounding/composition/acquisition",
+          "public mission-origin canary runs 36672816106 and 36672844129",
+          "five acquired model-independent child capabilities"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Unified Planning official/PyPI materials describe a framework for formal planning problems",
+          "ProbLog official/PyPI materials describe probabilistic logic programming rather than natural-language research-objective semantic decomposition"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI unified-planning stable 1.3.0, with active 1.3.0 dev releases in 2026",
+          "PyPI ProbLog 2.3.0 released 2026-09-09"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No discovered non-model planning package removes the need to validate the already-existing Brain semantic fallback before integration",
+          "Existing planning/logic frameworks remain downstream substrates rather than proof that a new planner should be built first"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent open ended technical research objective decomposition source selection quantitative reasoning"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Unified Planning ProbLog planning logic frameworks natural language research objective"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "reuse existing deterministic run_goal grounding composition acquisition fallback versus compiler repair"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current Unified Planning ProbLog releases"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "BYPASS_DIRECT_COMPILER_GAP_VIA_EXISTING_CANONICAL_RUN_GOAL_FALLBACK__EXECUTE_FRESH_PARENT_TASK",
+          "evidence": [
+            "current runtime already implements the fallback",
+            "mission-origin propagation independently passed on public carrier",
+            "no runtime change required"
+          ],
+          "qualification_evidence": [
+            "run 36672816106 artifact 11078921733",
+            "run 36672844129 artifact 11078517264",
+            "current Brain runtime source"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the integrated parent behavior and preserves fail-closed first-gap evidence.",
+            "CAPABILITY_STRENGTH": "Exercises decomposition, grounding, source/tool discovery, acquisition, quantitative reasoning, synthesis, and verification.",
+            "WALL_CLOCK": "Zero implementation before execution.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Canonical mission identity path has just passed two public canaries.",
+            "VERIFIABILITY": "Exact one-shot receipt plus independent oracle on success."
+          }
+        },
+        {
+          "route": "REPAIR_DIRECT_GOAL_COMPILER_BROAD_OBJECTIVE_MATCHING",
+          "evidence": [
+            "Mauna first-spend direct compiler path failed on broad clause"
+          ],
+          "qualification_evidence": [
+            "run 36669918546 first-spend artifact 11077637577",
+            "current compiler blob unchanged"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "May improve direct compilation but is not proven necessary because run_goal has a fallback.",
+            "CAPABILITY_STRENGTH": "Narrower than the integrated parent behavior.",
+            "WALL_CLOCK": "Requires implementation plus qualification before parent evidence.",
+            "INCREMENTAL_COST": "$0 monetary, nonzero integration time.",
+            "RELIABILITY": "Would introduce a new regression surface.",
+            "VERIFIABILITY": "Would still require a fresh parent task after repair."
+          }
+        },
+        {
+          "route": "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG",
+          "evidence": [
+            "current maintained planning/logic packages exist"
+          ],
+          "qualification_evidence": [
+            "PyPI unified-planning 1.3.0",
+            "PyPI problog 2.3.0"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Useful after a problem is formalized, but does not itself prove correct semantic decomposition from a novel research objective.",
+            "CAPABILITY_STRENGTH": "Downstream planning substrate, not sufficient open-ended research cognition.",
+            "WALL_CLOCK": "Adds integration before falsification of the inherited route.",
+            "INCREMENTAL_COST": "$0 monetary, higher integration cost.",
+            "RELIABILITY": "Mature packages but new Brain integration would need qualification.",
+            "VERIFIABILITY": "Straightforward only after formal problem construction."
+          }
+        },
+        {
+          "route": "USE_MODEL_PLANNER",
+          "evidence": [
+            "runtime has an optional model-planner path"
+          ],
+          "qualification_evidence": [
+            "current astra_runtime.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Potentially capable but violates the target dependency constraint.",
+            "CAPABILITY_STRENGTH": "Broad.",
+            "WALL_CLOCK": "Immediate.",
+            "INCREMENTAL_COST": "Not guaranteed $0 and invalid for target proof.",
+            "RELIABILITY": "External dependency.",
+            "VERIFIABILITY": "Would prove a model-assisted route, not the desired model-independent capability."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger dominates the zero-implementation faithful parent execution route on correctness-first wall-clock to decisive evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "BYPASS_DIRECT_COMPILER_GAP_VIA_EXISTING_CANONICAL_RUN_GOAL_FALLBACK__EXECUTE_FRESH_PARENT_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T05:25:10Z",
+        "max_age_hours": 2,
+        "selected_route": "BYPASS_DIRECT_COMPILER_GAP_VIA_EXISTING_CANONICAL_RUN_GOAL_FALLBACK__EXECUTE_FRESH_PARENT_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:21:40Z",
+            "evidence": [
+              "DIRECT_PROBE run 36672816106 completed successfully on this account carrier",
+              "INDEPENDENT_VERIFIER run 36672844129 also completed mission-origin propagation canary"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_CANONICAL_RUNTIME_MAIN_86dae95f0b0a872df005dd35ea0110cd3914536f",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:25:10Z",
+            "evidence": [
+              "BRAIN_INHERITED exact current main; task branch is based on this commit"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "CANONICAL_MISSION_ORIGIN_PROPAGATION",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:21:40Z",
+            "evidence": [
+              "DIRECT_PROBE run 36672816106 preserved canonical mission path into autonomous acquisition"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
