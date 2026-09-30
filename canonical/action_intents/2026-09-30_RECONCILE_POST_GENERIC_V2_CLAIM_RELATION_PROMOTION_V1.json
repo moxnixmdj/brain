@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-GENERIC-V2-CLAIM-RELATION-PROMOTION-20260930-V1",
+  "status": "POST_PROMOTION_AUTHORITY_RECONCILIATION_WITH_VERIFIED_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "POST_PROMOTION_CANONICAL_MIRRORS_STILL_POINT_TO_SATISFIED_CLAIM_RELATION_GAP",
+  "action_kind": "TRUTH_FIRST_AUTHORITY_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::POST_PROMOTION_CANONICAL_MIRRORS_STILL_POINT_TO_SATISFIED_CLAIM_RELATION_GAP::AUTHORITY_RECONCILIATION",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Credit the independently verified generic V2 claim/relation child once, preserve zero parent promotion, and advance all canonical mirrors to the known claim-spec/operand-binding interface seam.",
+  "evidence_presence_classification": "VERIFIED_CHILD_ALREADY_MERGED__MIRROR_AND_SCOREBOARD_PROMOTION_STATE_MISSED_BY_CONCURRENT_MERGE_RACE",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "counter_delta": {
+    "reusable_capabilities_inherited": 1,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "prior_work_checked": [
+    "main 92b4fd1bb561fbda52b3b2fb1f846e139885f9f5 contains verified registry entry and promotion receipt",
+    "promotion receipt canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+    "runner PR162 run 36682488104 job 109780804595 artifact 11082521746 digest sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+    "generic relation action_template requires explicit spec input",
+    "current open_research_source_frontend produces generic evidence units but no claim/relation spec or semantic operand binding"
+  ],
+  "stop_condition": "Stop when hierarchy, queue, scoreboard, parent target and CANONICAL_POINTER all name MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1 and scoreboard credits exactly one reusable capability with zero parent credit.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "real_outcome": "Make canonical authority match already-merged verified capability reality and expose the next concrete interface seam.",
+    "required_capability": "CANONICAL_POST_PROMOTION_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "All workers see the verified relation child as inherited and the unsatisfied spec/operand binder as the only next blocker.",
+      "proxy_goals_deleted": [
+        "rerun relation qualification",
+        "rerun parent task",
+        "rebuild relation engine",
+        "guess semantic operands"
+      ],
+      "surviving_necessity": "Concurrent merge landed producer/registry/receipt before later mirror updates."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "verified evidence.claim_relation.generic_units.stdlib registry entry",
+        "open_research_source_frontend output contract",
+        "generic relation action_template input contract"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No runtime code",
+        "No new verifier",
+        "No parent execution"
+      ],
+      "surviving_gap": "No model-independent route currently turns broad objective plus evidence units into the explicit relation spec and semantically correct operand references required by the verified relation primitive."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Authority mirror race plus structurally visible next interface mismatch.",
+      "delete_bypass_substitute_options": [
+        "Fresh parent task now is bypassed because the interface mismatch is already directly observable and would knowingly block use of the newly verified primitive.",
+        "Copy already-prepared post-promotion mirror state.",
+        "Do not infer semantic bindings in this reconciliation."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_ALREADY_PREPARED_POST_PROMOTION_MIRRORS",
+        "RUN_FRESH_PARENT_TASK_WITH_KNOWN_INTERFACE_GAP"
+      ],
+      "losing_routes_reason": "Spending a parent task before the explicit spec input can be produced knowingly repeats a deterministic interface failure.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Direct JSON equality across five authority mirrors plus registry/promotion receipt evidence is sufficient."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any work treating claim relation as still unacquired",
+        "fresh parent execution before spec binding exists"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic V2 claim exact support",
+        "explicit Decimal relation evaluation"
+      ],
+      "fresh_reuse_plan": "Acquire the minimal claim-spec/operand binder, then run a materially different genuinely open-ended parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused qualification receipt",
+        "reused prepared mirror state",
+        "reused current interface contracts"
+      ],
+      "search_stop_decision": "No search needed for the reconciliation itself.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Recompute if main moves before merge."
+    },
+    "selected_surviving_route": "REUSE_ALREADY_PREPARED_POST_PROMOTION_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "The child is already independently verified and merged; only canonical truth propagation remains.",
+    "selected_route_preflight": {
+      "checked_at_utc": "2026-09-30T07:20:00Z",
+      "max_age_hours": 2,
+      "selected_route": "REUSE_ALREADY_PREPARED_POST_PROMOTION_MIRRORS",
+      "status": "READY",
+      "all_required_dependencies_ready": true,
+      "failed_dependencies": [],
+      "execution_dependencies": [
+        {
+          "dependency": "CURRENT_MAIN_92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+          "status": "READY"
+        },
+        {
+          "dependency": "VERIFIED_RELATION_RECEIPT_AND_REGISTRY",
+          "status": "READY"
+        },
+        {
+          "dependency": "GITHUB_CANONICAL_WRITE",
+          "status": "READY"
+        }
+      ],
+      "execution_dependencies_complete": true
+    }
+  }
+}
