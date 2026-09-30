@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QUALIFY-BROAD-OBJECTIVE-SEMANTIC-COMPOSE-CANARY-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "2e9fb9c50f70aa8ce1951d03c4a892fb6f2d7147",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "FRESH_NON_PARENT_REUSE_QUALIFICATION",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 2e9fb9c50f70aa8ce1951d03c4a892fb6f2d7147",
+    "existing deterministic semantic authority quorum in canonical/runtime/semantic_authorities.py",
+    "existing multi-verified-capability proposal generator in canonical/runtime/capability_proposal_generators.py",
+    "existing verified knowledge graph entries knowledge.json.fetch.external -> knowledge.consistency.assess -> knowledge.support.materialize",
+    "stale semantic APT branches are supplier-discovery work and do not satisfy the current broad-objective decomposition blocker"
+  ],
+  "selected_surviving_route": "REUSE_EXISTING_SEMANTIC_QUORUM_PLUS_MULTI_VERIFIED_CAPABILITY_COMPOSITION",
+  "expected_parent_frontier_change": "If the fresh canary passes, delete generic semantic-engine build work and advance directly to a materially different fresh parent open-ended task through the existing semantic composition route. If it fails, preserve the first exact causal gap and repair only that minimum generic mechanism.",
+  "stop_condition": "Do not replay Mauna Loa. Do not award parent capability credit from this canary. Stop at first causal gap or one verified model-independent canary pass.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "next_action": "EXECUTE_CANONICAL_ASTRA_RUNTIME_MISSION_ASTRA_RUNTIME_BROAD_OBJECTIVE_SEMANTIC_COMPOSE_CANARY_001__THEN_FREEZE_MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_ONLY_IF_PASS"
+}
