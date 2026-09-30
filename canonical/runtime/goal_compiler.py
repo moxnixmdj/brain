@@ -237,9 +237,25 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if len(matching)==1:
                     result[key]=matching[0]
                     continue
+                if len(matching)>1 and stem:
+                    named=[
+                        raw for raw in matching
+                        if stem in pathlib.Path(raw).stem.lower()
+                    ]
+                    if len(named)==1:
+                        result[key]=named[0]
+                        continue
                 if not matching and len(future_matching)==1:
                     result[key]=future_matching[0]
                     continue
+                if not matching and len(future_matching)>1 and stem:
+                    named=[
+                        raw for raw in future_matching
+                        if stem in pathlib.Path(raw).stem.lower()
+                    ]
+                    if len(named)==1:
+                        result[key]=named[0]
+                        continue
                 if wanted is None:
                     # Generic output binding: when the clause names exactly one
                     # repository file that does not exist yet, while other named
