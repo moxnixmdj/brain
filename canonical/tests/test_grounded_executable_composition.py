@@ -2,6 +2,7 @@
 import copy
 import importlib.util
 import pathlib
+import re
 import sys
 import unittest
 
@@ -31,6 +32,18 @@ planner=load(
 class FakeCompiler:
     class GoalCompilationFailure(RuntimeError):
         pass
+    @staticmethod
+    def _placeholders(value):
+        out=set()
+        if isinstance(value,dict):
+            for v in value.values():
+                out.update(FakeCompiler._placeholders(v))
+        elif isinstance(value,list):
+            for v in value:
+                out.update(FakeCompiler._placeholders(v))
+        elif isinstance(value,str):
+            out.update(re.findall(r"\\$\\{input\\.([A-Za-z0-9_]+)\\}",value))
+        return out
     @staticmethod
     def _bind_inputs(goal,root,entry,context_paths=None,future_clauses=None):
         required=entry.get("_test_inputs") or {}
@@ -117,6 +130,58 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
         self.assertEqual(planned["planning"]["target_effects"],[
           "grounded.clause.0.satisfied","grounded.clause.1.satisfied"
         ])
+
+    def test_provider_backed_path_without_explicit_provenance_fails_closed(self):
+        goal="Create alpha then verify alpha"
+        registry=self.registry()
+        registry["verify.alpha"]["action_template"]={
+            "type":"invoke_capability",
+            "args":{"capability_id":"verify.alpha","input_path":"${input.input_path}"},
+        }
+        registry["verify.alpha"]["_test_inputs"]={"input_path":"out/a.json"}
+        g=self.grounding()
+        import hashlib
+        g["goal"]=goal
+        g["goal_sha256"]=hashlib.sha256(goal.encode()).hexdigest()
+        with self.assertRaisesRegex(
+            composition.CompositionError,
+            "CAUSAL_PATH_PROVENANCE_BINDING_REQUIRED:verify.alpha:input_path",
+        ):
+            composition.compose(goal,g,registry,FakeCompiler,REPO_ROOT)
+
+    def test_provider_backed_path_uses_explicit_effect_result(self):
+        goal="Create alpha then verify alpha"
+        registry=self.registry()
+        registry["verify.alpha"]["action_template"]={
+            "type":"invoke_capability",
+            "args":{"capability_id":"verify.alpha","input_path":"${input.input_path}"},
+        }
+        registry["verify.alpha"]["_test_inputs"]={}
+        registry["verify.alpha"]["proposal_bindings"]={
+            "input_path":{
+                "type":"effect_result",
+                "effect":"artifact.alpha.ready",
+                "field":"output_path",
+            }
+        }
+        g=self.grounding()
+        import hashlib
+        g["goal"]=goal
+        g["goal_sha256"]=hashlib.sha256(goal.encode()).hexdigest()
+        result=composition.compose(goal,g,registry,FakeCompiler,REPO_ROOT)
+        consumer=[
+            x for x in result["problem"]["capabilities"]
+            if x["source_capability_id"]=="verify.alpha"
+        ][0]
+        ref=consumer["inputs"]["input_path"]
+        self.assertEqual(ref,{
+            "$effect_result":{
+                "effect":"artifact.alpha.ready",
+                "field":"output_path",
+            }
+        })
+        ok,reason=verifier.verify(goal,result,g,registry)
+        self.assertTrue(ok,reason)
 
     def test_effect_equivalent_ambiguity_is_preserved_for_planner(self):
         goal="Create alpha then verify alpha"
