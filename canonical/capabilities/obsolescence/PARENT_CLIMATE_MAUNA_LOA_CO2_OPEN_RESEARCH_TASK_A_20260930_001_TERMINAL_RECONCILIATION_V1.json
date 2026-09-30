@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_REAL_TASK_TERMINAL_RECONCILIATION_V1",
+  "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "ATMOSPHERIC_CLIMATE_SCIENCE_TIME_SERIES_REASONING",
+  "status": "FAILED_FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT__NO_REPLAY",
+  "canonical_base_commit": "38421b41da15f82d81d0595bc4c25624398258c6",
+  "source_pr": 337,
+  "task_blob": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+  "one_shot_execution": {
+    "run_id": 36670516407,
+    "artifact_id": 11077861584,
+    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "execution_count": 1,
+    "task_executed": true,
+    "replay_allowed": false,
+    "model_dependency_count": 0,
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "independent_oracle_executed": false
+  },
+  "causal_failure": {
+    "first_causal_stage": "COMPILE",
+    "first_brain_semantic_blocker": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "failing_subgoal": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013",
+    "compiler_error": "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+    "compiled_prefix": [],
+    "localized_gap": "GENERIC_MODEL_INDEPENDENT_OPEN_ENDED_BROAD_OBJECTIVE_TO_VERIFIED_CAPABILITY_ROUTE_COMPILATION",
+    "downstream_not_reached": [
+      "AUTONOMOUS_SOURCE_AND_TOOL_DISCOVERY",
+      "AUTHORITATIVE_PRIMARY_DATA_RETRIEVAL",
+      "QUANTITATIVE_METHOD_SELECTION",
+      "QUANTITATIVE_EXECUTION",
+      "DECISION_SYNTHESIS",
+      "INDEPENDENT_ORACLE"
+    ],
+    "alternative_explanations_excluded": [
+      "MODEL_COGNITION_DEPENDENCY",
+      "TASK_REPLAY",
+      "INDEPENDENT_ORACLE_FAILURE"
+    ]
+  },
+  "route_recomputation": {
+    "status": "REQUIRED_BEFORE_ANY_REPAIR",
+    "surviving_causal_gap": "GENERIC_MODEL_INDEPENDENT_OPEN_ENDED_BROAD_OBJECTIVE_TO_VERIFIED_CAPABILITY_ROUTE_COMPILATION",
+    "authoritative_next_action": "RUN_CURRENT_BASE_RECURSIVE_OBS_ON_GENERIC_MODEL_INDEPENDENT_OPEN_ENDED_BROAD_OBJECTIVE_TO_VERIFIED_CAPABILITY_ROUTE_COMPILATION__SEARCH_REUSE_BEFORE_REPAIR__NO_CLIMATE_TASK_REPLAY",
+    "why": "The first genuine objective-only parent task reached the deterministic compiler with zero model dependency and failed on clause 0 before any source, tool, formula, or domain-specific execution. The next decision is therefore the generic broad-objective compilation frontier, not climate-specific research execution.",
+    "prohibited": [
+      "REPLAY_PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+      "CLIMATE_OR_MAUNA_LOA_SPECIFIC_COMPILER_RULE",
+      "PREWIRED_AUTHORITY_SOURCE_DATASET_OR_FORMULA",
+      "FRONTIER_OR_LOCAL_MODEL_COGNITION",
+      "PROMOTION_FROM_FAILED_TASK",
+      "FRESH_PARENT_TASK_BEFORE_CURRENT_GAP_RECOMPUTATION"
+    ]
+  },
+  "parent_capability_promoted": false,
+  "progress_credit": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 1
+  }
+}
