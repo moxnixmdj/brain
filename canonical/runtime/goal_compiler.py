@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import math
 import pathlib
 import re
 import sys
@@ -3482,6 +3483,97 @@ def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
     }
 
 
+def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,registry):
+    """Lower one bounded numeric relation onto existing native JSON + jq machinery.
+
+    Supported semantic form is intentionally generic and narrow: determine/check/
+    verify/assess whether two causally prior scalar results differ by at most a
+    literal finite numeric threshold. The compiler never binds domain names or
+    source-specific literals. Runtime jq type checks fail closed on non-numbers.
+    """
+    text=str(clause or "").strip()
+    m=re.match(
+        r"^(?:determine|check|verify|assess)\s+whether\s+(?:the\s+)?two\s+.+?\s+"
+        r"differ\s+by\s+(?:at\s+most|no\s+more\s+than|less\s+than\s+or\s+equal\s+to)\s+"
+        r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)$",
+        text,re.IGNORECASE,
+    )
+    if not m:
+        return None
+    threshold=float(m.group(1))
+    if not math.isfinite(threshold) or threshold < 0:
+        raise GoalCompilationFailure("NUMERIC_RELATION_THRESHOLD_INVALID")
+
+    jq_entry=(registry or {}).get("json.query.jq")
+    if not isinstance(jq_entry,dict) or jq_entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        raise GoalCompilationFailure("NUMERIC_RELATION_VERIFIED_JQ_REQUIRED")
+
+    producers=[
+        part for part in (compiled_parts or [])
+        if isinstance(part,dict)
+        and part.get("mode") in {"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH","EXTERNAL_JSON_KNOWLEDGE_FETCH"}
+        and isinstance(part.get("result_cycle"),int)
+    ]
+    if len(producers)!=2:
+        raise GoalCompilationFailure(
+            "NUMERIC_RELATION_REQUIRES_EXACTLY_TWO_PRIOR_SCALARS",
+            str(len(producers)),
+        )
+
+    digest=hashlib.sha256(
+        (text+"\\n"+str(producers[0]["result_cycle"])+"\\n"+str(producers[1]["result_cycle"])).encode("utf-8")
+    ).hexdigest()[:12].upper()
+    input_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_INPUT.json"
+    output_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_RESULT.json"
+    materialize={
+      "type":"write_json_records",
+      "args":{
+        "output_path":input_path,
+        "fields":["left","right","threshold"],
+        "records":[{
+          "left":{"$result":{"cycle":producers[0]["result_cycle"],"field":"value"}},
+          "right":{"$result":{"cycle":producers[1]["result_cycle"],"field":"value"}},
+          "threshold":threshold,
+        }],
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    filt=(
+      '.[0] as $r '
+      '| if (($r.left|type)!="number" or ($r.right|type)!="number" or ($r.threshold|type)!="number") '
+      'then error("NUMERIC_RELATION_INPUT_NOT_NUMBER") '
+      'else (($r.left-$r.right)|fabs) as $d '
+      '| {left:$r.left,right:$r.right,threshold:$r.threshold,'
+      'absolute_difference:$d,relation:"ABS_DIFF_LTE",predicate:($d <= $r.threshold)} end'
+    )
+    compute={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"json.query.jq",
+        "input_path":input_path,
+        "filter":filt,
+        "output_path":output_path,
+        "raw_output":False,
+        "require_nonempty":True,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "actions":[materialize,compute],
+      "output_path":output_path,
+      "evidence":{
+        "selected_capability":"json.query.jq",
+        "relation":"ABS_DIFF_LTE",
+        "threshold":threshold,
+        "input_path":input_path,
+        "output_path":output_path,
+        "producer_result_cycles":[producers[0]["result_cycle"],producers[1]["result_cycle"]],
+        "model_dependency_count":0,
+      },
+    }
+
+
 def _compile_learned_value_record(clause,compiled_parts):
     text=str(clause or "").strip()
     m=re.match(
@@ -3633,6 +3725,19 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH",
                 **knowledge_fetch["evidence"],
+            })
+            continue
+
+        numeric_relation=_compile_two_scalar_absolute_difference_relation(
+            clause,compiled_parts,registry
+        )
+        if numeric_relation is not None:
+            actions.extend(numeric_relation["actions"])
+            context_paths.append(numeric_relation["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_BOUND_NUMERIC_RELATION",
+                **numeric_relation["evidence"],
             })
             continue
 

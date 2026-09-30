@@ -1,0 +1,422 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CLOSE-PARENT-NUMERIC-RELATION-GAP-BY-JQ-REUSE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Close the first parent numeric-relation causal gap with the smallest generic route: reuse native result references plus write_json_records and the already verified bound json.query.jq capability; qualify on fresh non-geophysics numeric-relation evidence before any parent promotion or further repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 6f2c98a160bb0b954071fbcc22a0130b2bad2906",
+    "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+    "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "canonical/runtime/bound_capabilities/jq_query.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/astra_runtime.py",
+    "json.query.jq is already VERIFIED_BOUND_CAPABILITY at $0 with independent verification",
+    "controller already resolves nested $result references and has native write_json_records",
+    "SymPy 1.14.0 route remains preserved for bounded exact symbolic classes but is not bound and is unnecessary for the first numeric-relation gap",
+    "Python ast.literal_eval does not evaluate operators; NumExpr and asteval would add new supplier/dependency surfaces"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only a generic two-upstream-scalar absolute-difference threshold lowering using existing controller result references, native write_json_records, and verified bound json.query.jq; prove deterministic compiler behavior and fresh non-geophysics execution with independent recomputation; do not replay the spent geophysics task, add a new math supplier, or promote the parent capability from component evidence alone.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "6f2c98a160bb0b954071fbcc22a0130b2bad2906",
+    "real_outcome": "Make Brain generically execute a bounded numeric relation over two causally prior scalar results without model cognition, new supplier integration, task-specific literals, or replay of the geophysics task.",
+    "required_capability": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+    "obs_goal": {
+      "real_outcome": "Given two causally prior numeric scalar results and a literal threshold expressed in a plain-goal relation clause, compute absolute difference and the threshold predicate through an already verified deterministic capability.",
+      "proxy_goals_deleted": [
+        "replay the geophysics task",
+        "bind all of SymPy before proving it is necessary",
+        "build a general expression language",
+        "add a new math framework",
+        "solve the known geophysics answer by hand"
+      ],
+      "surviving_necessity": "The parent controller needs one generic reachable numeric-relation lowering because the fresh parent task failed exactly at that missing operation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "controller $result references",
+        "native write_json_records",
+        "verified bound json.query.jq",
+        "verified but unbound SymPy EXACT_SYMBOLIC_COMPUTATION_V1",
+        "current goal_compiler compound dataflow lowering"
+      ],
+      "external_existing_routes_checked": [
+        "jq 1.7 arithmetic/comparison/math functions",
+        "SymPy 1.14.0",
+        "Python ast.literal_eval",
+        "NumExpr 2.14.2",
+        "asteval 1.0.10"
+      ],
+      "capability_work_deleted": [
+        "no new numeric adapter",
+        "no new package dependency",
+        "no SymPy registry binding for this first gap",
+        "no arbitrary eval",
+        "no model route",
+        "no geophysics-specific source or magnitude literals"
+      ],
+      "surviving_gap": "The existing generic compiler does not lower a two-upstream-scalar absolute-difference threshold relation into the already verified jq capability."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic reachability/composition gap, not absence of a numeric engine.",
+      "delete_bypass_substitute_options": [
+        "delete new supplier work because jq is already bound",
+        "reuse controller result references for causality",
+        "reuse native write_json_records to materialize scalar inputs",
+        "reuse json.query.jq for arithmetic and comparison",
+        "preserve SymPy only for exact/symbolic classes that actually need it"
+      ],
+      "surviving_causal_blocker": "GOAL_COMPILER_LACKS_GENERIC_TWO_SCALAR_ABSOLUTE_DIFFERENCE_THRESHOLD_LOWERING_TO_EXISTING_BOUND_JQ"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_RESULT_REFS_PLUS_NATIVE_JSON_MATERIALIZATION_PLUS_VERIFIED_BOUND_JQ",
+        "BIND_EXISTING_SYMPY_1_14_TO_CONTROLLER",
+        "BUILD_PYTHON_STDLIB_NUMERIC_EXPRESSION_ADAPTER",
+        "ADD_NUMEXPR_2_14_2",
+        "ADD_ASTEVAL_1_0_10"
+      ],
+      "losing_routes_reason": "The selected route uses only already verified/inherited Brain machinery. SymPy is broader than necessary and creates a new binding/dependency path; Python stdlib would require new evaluator code; NumExpr and asteval add new suppliers. None can beat zero-new-supplier jq reuse on wall-clock or machinery for the first causal gap.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Compiler regression must prove generic lowering without executing the spent task; then one fresh non-geophysics real numeric-relation task must execute through jq and be independently recomputed without importing the producer adapter."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "planned SymPy binding for the first parent numeric-relation gap",
+        "new math-supplier discovery for this gap",
+        "geophysics replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "json.query.jq",
+        "controller result references",
+        "native write_json_records",
+        "compound goal compiler",
+        "independent verifier path"
+      ],
+      "fresh_reuse_plan": "After fresh non-geophysics qualification, return to the parent frontier and run a new materially different parent technical/scientific task; never replay geophysics."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current geophysics falsification evidence",
+        "reused exact-symbolic adjudication",
+        "reused current bound registry and jq adapter inspection",
+        "stopped supplier search after an already-bound verified route dominated challengers"
+      ],
+      "search_stop_decision": "Stop discovery and implement the minimal compiler lowering: an already-bound zero-spend jq route is correctness-sufficient for the bounded first gap and no unresolved plausible route can beat it enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Live repo state and external package/documentation surfaces were refreshed on 2026-09-30 before this action; any main-base or route-state change invalidates the affected layers."
+    },
+    "routes_considered": [
+      "REUSE_RESULT_REFS_PLUS_NATIVE_JSON_MATERIALIZATION_PLUS_VERIFIED_BOUND_JQ",
+      "BIND_EXISTING_SYMPY_1_14_TO_CONTROLLER",
+      "BUILD_PYTHON_STDLIB_NUMERIC_EXPRESSION_ADAPTER",
+      "ADD_NUMEXPR_2_14_2",
+      "ADD_ASTEVAL_1_0_10"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BIND_EXISTING_SYMPY_1_14_TO_CONTROLLER_FOR_FIRST_GAP",
+      "BUILD_PYTHON_STDLIB_NUMERIC_EXPRESSION_ADAPTER",
+      "ADD_NUMEXPR_2_14_2",
+      "ADD_ASTEVAL_1_0_10",
+      "REPLAY_PARENT_GEOPHYSICS_TASK"
+    ],
+    "selected_surviving_route": "REUSE_RESULT_REFS_PLUS_NATIVE_JSON_MATERIALIZATION_PLUS_VERIFIED_BOUND_JQ",
+    "why_selected_route_is_fastest_sufficient": "It adds only a generic compiler lowering and reuses three already-working pieces: causal result references, native JSON materialization, and verified jq. It adds no supplier, no adapter, no model, and no task replay while directly closing the first observed parent failure.",
+    "expected_parent_level_state_change": "Close the first parent numeric-relation causal gap with the smallest generic route: reuse native result references plus write_json_records and the already verified bound json.query.jq capability; qualify on fresh non-geophysics numeric-relation evidence before any parent promotion or further repair.",
+    "stop_condition": "Implement only a generic two-upstream-scalar absolute-difference threshold lowering using existing controller result references, native write_json_records, and verified bound json.query.jq; prove deterministic compiler behavior and fresh non-geophysics execution with independent recomputation; do not replay the spent geophysics task, add a new math supplier, or promote the parent capability from component evidence alone.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:13:19Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BIND_EXISTING_SYMPY_1_14_TO_CONTROLLER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "BOUND_CAPABILITY_REGISTRY_V1.json: json.query.jq VERIFIED_BOUND_CAPABILITY",
+          "jq_query.py already executes bounded local jq transformations",
+          "astra_runtime.py already resolves nested $result references and exposes native write_json_records",
+          "EXACT_SYMBOLIC_COMPUTATION_V1 preserved as bounded exact-symbolic fallback"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "jq 1.7 manual documents arithmetic operators, comparisons, fabs, and pow",
+          "Python 3.13 ast.literal_eval documentation limits evaluation to literal/container forms rather than operator expressions",
+          "SymPy documentation confirms numeric and relational support while sympify warns against unsanitized input"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI SymPy 1.14.0 current package record",
+          "PyPI NumExpr 2.14.2 package record",
+          "PyPI asteval 1.0.10 package record",
+          "Brain registry pins jq Ubuntu package 1.7.1-3ubuntu0.24.04.2"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "jq project documentation/community surfaces corroborate built-in math functionality",
+          "broad expression-evaluator discovery found no route that removes more machinery than already-bound jq"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "bounded deterministic two scalar absolute difference threshold relation arithmetic comparison"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "jq SymPy NumExpr asteval safe numeric expression comparison"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing bound JSON transform versus new math adapter for scalar relations"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 latest jq SymPy NumExpr asteval numeric evaluator releases"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_RESULT_REFS_PLUS_NATIVE_JSON_MATERIALIZATION_PLUS_VERIFIED_BOUND_JQ",
+          "evidence": [
+            "already bound in Brain",
+            "local jq 1.7 direct diagnostic computed absolute difference and threshold predicate",
+            "controller already resolves result refs"
+          ],
+          "qualification_evidence": [
+            "Brain independent jq verification mission ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
+            "jq 1.7 official manual"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "jq supports the bounded arithmetic/comparison operations required by this first gap; fresh independent execution is still required before capability credit.",
+            "CAPABILITY_STRENGTH": "Sufficient for bounded IEEE-754 scalar relation work, intentionally not claimed as general exact mathematics.",
+            "WALL_CLOCK": "Small compiler lowering only; no supplier integration.",
+            "INCREMENTAL_COST": "$0; supplier already present and verified.",
+            "RELIABILITY": "Existing adapter and independent registry verification already exist.",
+            "VERIFIABILITY": "Output JSON can be independently recomputed with Python or Wolfram without importing jq adapter."
+          }
+        },
+        {
+          "route": "BIND_EXISTING_SYMPY_1_14_TO_CONTROLLER",
+          "evidence": [
+            "EXACT_SYMBOLIC_COMPUTATION_V1 reached 12/12 exact suite",
+            "SymPy supports broader numeric and relational operations"
+          ],
+          "qualification_evidence": [
+            "EXACT_SYMBOLIC_COMPUTATION_V1 independent Wolfram adjudication",
+            "SymPy official documentation"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong, including exact symbolic classes, but the old suite does not itself qualify the new relation chain.",
+            "CAPABILITY_STRENGTH": "Broader than the first gap requires.",
+            "WALL_CLOCK": "Needs new registry binding/adapter path or reuse refactor before parent reachability.",
+            "INCREMENTAL_COST": "$0, but more integration machinery.",
+            "RELIABILITY": "Verified in bounded suite; new controller binding would still require qualification.",
+            "VERIFIABILITY": "Strong independent Wolfram path exists."
+          }
+        },
+        {
+          "route": "BUILD_PYTHON_STDLIB_NUMERIC_EXPRESSION_ADAPTER",
+          "evidence": [
+            "Python arithmetic is available on every runtime"
+          ],
+          "qualification_evidence": [
+            "Python official ast documentation"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can be made correct for a bounded grammar.",
+            "CAPABILITY_STRENGTH": "Would need newly written parser/evaluator code.",
+            "WALL_CLOCK": "Slower than reuse of existing jq.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "New unverified implementation surface.",
+            "VERIFIABILITY": "Straightforward but unnecessary."
+          }
+        },
+        {
+          "route": "ADD_NUMEXPR_2_14_2",
+          "evidence": [
+            "Current package offers numerical expression evaluation"
+          ],
+          "qualification_evidence": [
+            "PyPI NumExpr package record"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Plausibly sufficient for numeric expressions.",
+            "CAPABILITY_STRENGTH": "More array-oriented capability than needed.",
+            "WALL_CLOCK": "New dependency and adapter qualification.",
+            "INCREMENTAL_COST": "$0 monetary, nonzero integration cost.",
+            "RELIABILITY": "Mature package but not currently bound in Brain.",
+            "VERIFIABILITY": "Possible but adds unnecessary route surface."
+          }
+        },
+        {
+          "route": "ADD_ASTEVAL_1_0_10",
+          "evidence": [
+            "Current package provides restricted Python-expression evaluation"
+          ],
+          "qualification_evidence": [
+            "PyPI asteval package record"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Plausibly sufficient for arithmetic relation expressions.",
+            "CAPABILITY_STRENGTH": "General evaluator is broader than needed.",
+            "WALL_CLOCK": "New dependency and safety qualification.",
+            "INCREMENTAL_COST": "$0 monetary, nonzero integration cost.",
+            "RELIABILITY": "Not currently inherited or verified in Brain.",
+            "VERIFIABILITY": "Possible but unnecessary."
+          }
+        }
+      ],
+      "negative_search_summary": "The already-bound jq route dominates the discovered alternatives for this exact first gap because it requires no new supplier or adapter.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_RESULT_REFS_PLUS_NATIVE_JSON_MATERIALIZATION_PLUS_VERIFIED_BOUND_JQ",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:13:19Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_RESULT_REFS_PLUS_NATIVE_JSON_MATERIALIZATION_PLUS_VERIFIED_BOUND_JQ",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T02:50:40Z",
+            "evidence": [
+              "DIRECT_PROBE: fresh parent geophysics public execution run 36661188188 completed on the account execution path"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_6f2c98a160bb0b954071fbcc22a0130b2bad2906",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:13:19Z",
+            "evidence": [
+              "BRAIN_INHERITED: current main exact base"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BOUND_CAPABILITY_json.query.jq",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:13:19Z",
+            "evidence": [
+              "DIRECT_PROBE: inherited verification mission ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
+              "BRAIN_INHERITED: registry status VERIFIED_BOUND_CAPABILITY"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "JQ_1_7_UBUNTU_PACKAGE",
+            "kind": "PACKAGE_REGISTRY",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:13:19Z",
+            "evidence": [
+              "OFFICIAL_PRIMARY: jq 1.7 manual supports required operations",
+              "BRAIN_INHERITED: registry pins Ubuntu jq 1.7.1-3ubuntu0.24.04.2"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}

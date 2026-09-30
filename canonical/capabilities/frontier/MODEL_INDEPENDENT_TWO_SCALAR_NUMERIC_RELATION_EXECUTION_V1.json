@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_CROSS_DOMAIN_EXECUTION_PASS",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
+  "useful_behavior": "Given exactly two causally prior numeric scalar results and a literal finite nonnegative threshold, deterministically compute absolute difference and whether it is less than or equal to the threshold without model cognition.",
+  "winning_route": "NATIVE_RESULT_REFS__WRITE_JSON_RECORDS__VERIFIED_BOUND_JSON_QUERY_JQ",
+  "scope": {
+    "operation": "ABS_DIFF_LTE",
+    "upstream_scalar_count": 2,
+    "threshold": "literal finite nonnegative number",
+    "runtime_numeric_type_check": true,
+    "ambiguous_or_nonnumeric_inputs": "FAIL_CLOSED"
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_ACQUISITION_20260930_V1.json",
+  "verification_run_id": 36664102642,
+  "verification_artifact_id": 11075158049,
+  "current_status": "ACQUIRED_VERIFIED",
+  "parent_capability_promoted": false,
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+}
