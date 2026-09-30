@@ -36,6 +36,8 @@ def build():
 Do not submit while a known relevant failure remains.
 Before submission, run the strongest task-relevant tests available without reading hidden benchmark verifier logic.
 Inspect the final diff and confirm requested behavior, regression preservation, and scope compliance.
+Treat the normative task specification as authoritative. Never turn identity keys, attribution fields, examples, metadata, or inferred semantics into rejection/acceptance requirements unless the normative contract explicitly requires them or a runtime-observed necessity proves them.
+Before adding a rejection condition, trace it to an explicit normative requirement or runtime-observed necessity; otherwise keep the field optional and test the distinction prospectively.
 If verification cannot be completed, preserve the blocker and do not issue COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT.
 Only after these checks pass may you issue exactly: echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT""")
     system="\n".join(parts).rstrip()+"\n"
