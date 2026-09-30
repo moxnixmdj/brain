@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CLOSE-KNOWN-CAUSAL-PATH-CONTRACTS-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "THREE_KNOWN_PROVIDER_BACKED_PATH_CONSUMERS_LACK_EXPLICIT_PROVENANCE_AFTER_GENERIC_GUARD",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::THREE_KNOWN_PROVIDER_BACKED_PATH_CONSUMERS_LACK_EXPLICIT_PROVENANCE_AFTER_GENERIC_GUARD::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Close all currently known provider-backed path provenance omissions in the verified bound-capability graph so the generic causal-path guard has no known latent contract holes before fresh requalification.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR271 explicit decision provenance repair merged",
+    "PR273 generic provider-backed path provenance guard merged at d3617ad20e79834b898d9d91d52f1fc4cfeec00e",
+    "current registry-wide audit finds exactly three remaining provider-backed path consumers without proposal_bindings",
+    "existing effect_result and auto_path binding primitives",
+    "deferred unexecuted PR274 preserved as fresh-task design"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Add explicit path provenance metadata for exactly knowledge.status.assert, knowledge.support.materialize, and plain_goal.bound_capability.grounding.verify.stdlib; add a registry-wide invariant proving zero provider-backed path placeholders remain without explicit bindings; validate exact bytes publicly; do not execute PR274, restore capability credit, or change scoreboard in this repair PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "d3617ad20e79834b898d9d91d52f1fc4cfeec00e",
+    "real_outcome": "Eliminate every currently known silent path-provenance hole before spending another fresh composition task.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Zero verified bound capabilities with real upstream providers may retain undeclared path/path-list placeholders.",
+      "proxy_goals_deleted": [
+        "run fresh task first",
+        "patch path recency",
+        "invent literals for non-path inputs",
+        "new planner",
+        "new binding DSL"
+      ],
+      "surviving_necessity": "Close the three known metadata gaps exposed by the post-guard graph audit."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "proposal_bindings.effect_result",
+        "proposal_bindings.auto_path",
+        "PR273 generic guard",
+        "current BOUND_CAPABILITY_REGISTRY_V1 graph audit"
+      ],
+      "external_existing_routes_checked": [
+        "No external system is needed; this is registry contract completion against an already-enforced internal invariant."
+      ],
+      "capability_work_deleted": [
+        "no runtime change",
+        "no compiler change",
+        "no planner change",
+        "no model",
+        "no fresh-task spend"
+      ],
+      "surviving_gap": "Three verified consumer capabilities still lack explicit path provenance metadata."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Known registry contract omissions, now fail-closed by the generic guard.",
+      "delete_bypass_substitute_options": [
+        "Delete affected capabilities rejected because they are already verified useful capabilities.",
+        "Bypass guard rejected.",
+        "Reuse effect_result/auto_path metadata survives.",
+        "New binder rejected as unnecessary."
+      ],
+      "surviving_causal_blocker": "KNOWN_PROVIDER_BACKED_PATH_BINDINGS_UNDECLARED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "BATCH_DECLARATIVE_PROVENANCE_FOR_THREE_KNOWN_CONSUMERS",
+        "PATCH_ONE_AT_A_TIME_AFTER_FAILURE",
+        "NEW_BINDER"
+      ],
+      "losing_routes_reason": "One bounded metadata batch preempts three predictable failures with no runtime semantics change; sequential discovery wastes fresh gates.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Static graph invariant plus focused binding checks are appropriate because this action changes declarations only; real capability requalification remains reserved for a new task."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR274 execution before contract closure",
+        "future one-by-one provenance bug hunts for these three entries"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "knowledge assessment status verification",
+        "knowledge support materialization",
+        "plain-goal grounding independent verification"
+      ],
+      "fresh_reuse_plan": "After exact validation and canonical reconciliation, spend one new materially different model-independent composition task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse current graph audit",
+        "reuse existing proposal binding primitives",
+        "reuse PR273 guard semantics"
+      ],
+      "search_stop_decision": "All known latent entries are enumerated and the existing metadata primitives are sufficient; further search cannot reduce the patch.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Internal declarative repair only; no supplier change."
+    },
+    "routes_considered": [
+      "BATCH_DECLARATIVE_PROVENANCE_FOR_THREE_KNOWN_CONSUMERS",
+      "PATCH_ONE_AT_A_TIME_AFTER_FAILURE",
+      "NEW_BINDER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PATCH_ONE_AT_A_TIME_AFTER_FAILURE",
+      "NEW_BINDER",
+      "PR274_EXECUTION_BEFORE_CLOSURE"
+    ],
+    "selected_surviving_route": "BATCH_DECLARATIVE_PROVENANCE_FOR_THREE_KNOWN_CONSUMERS",
+    "why_selected_route_is_fastest_sufficient": "The graph audit is complete, all three holes use already-existing metadata semantics, and one batch plus one invariant test prevents three foreseeable fresh-task failures at negligible cost.",
+    "expected_parent_level_state_change": "Close all currently known provider-backed path provenance omissions in the verified bound-capability graph so the generic causal-path guard has no known latent contract holes before fresh requalification.",
+    "stop_condition": "Add explicit path provenance metadata for exactly knowledge.status.assert, knowledge.support.materialize, and plain_goal.bound_capability.grounding.verify.stdlib; add a registry-wide invariant proving zero provider-backed path placeholders remain without explicit bindings; validate exact bytes publicly; do not execute PR274, restore capability credit, or change scoreboard in this repair PR.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Affected-layer internal metadata repair using already-qualified binding primitives; no external supplier or execution route is being selected."
+    }
+  }
+}
