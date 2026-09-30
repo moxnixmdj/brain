@@ -60,6 +60,63 @@ class _Title(HTMLParser):
     def handle_endtag(self,tag):
         if tag.lower()=="title": self.on=False
 
+def materialize_retrieval(candidate,timeout=15):
+    """Live-materialize one already-selected candidate without changing its rank.
+
+    This deliberately bypasses DOI bibliographic lookup and dereferences the
+    selected URL itself. It is used only after relevance selection. Failure is
+    terminal for that selection; callers must not silently fall back to a
+    weaker candidate.
+    """
+    candidate=dict(candidate or {})
+    url=_safe_url(candidate.get("url"))
+    if not url:
+        return {
+            "schema":SCHEMA,"status":"UNVERIFIED","reason":"SAFE_HTTP_URL_REQUIRED",
+            "authority_status":"UNVERIFIED","primary_source_status":"UNVERIFIED",
+            "evidence_sufficiency_status":"UNVERIFIED",
+            "model_dependency_count":0,"incremental_spend_usd":0,
+        }
+    timeout=max(2,min(int(timeout),30))
+    try:
+        body,ctype,status,final=_fetch(
+            url,timeout,"text/html,application/xhtml+xml,application/pdf,*/*;q=0.5"
+        )
+        final=_safe_url(final)
+        if not final:
+            raise ValueError("UNSAFE_FINAL_URL")
+        title=None
+        if "html" in ctype.lower():
+            p=_Title(); p.feed(body.decode("utf-8","replace"))
+            title=_canon(html.unescape("".join(p.parts))) or None
+        return {
+            "schema":SCHEMA,
+            "status":"RETRIEVAL_PROVENANCE_VERIFIED",
+            "verification_method":"SELECTED_SOURCE_LIVE_HTTP_MATERIALIZATION",
+            "candidate_url":url,
+            "final_url":final,
+            "final_host":(urllib.parse.urlsplit(final).hostname or "").lower(),
+            "http_status":status,
+            "content_type":ctype,
+            "page_title":title,
+            "doi":_doi(candidate) or None,
+            "authority_status":"RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED",
+            "primary_source_status":"UNVERIFIED",
+            "evidence_sufficiency_status":"UNVERIFIED",
+            "model_dependency_count":0,
+            "incremental_spend_usd":0,
+        }
+    except Exception as exc:
+        return {
+            "schema":SCHEMA,"status":"UNVERIFIED",
+            "reason":"SELECTED_SOURCE_LIVE_MATERIALIZATION_FAILED",
+            "error_class":type(exc).__name__,"error":str(exc)[:500],
+            "candidate_url":url,"doi":_doi(candidate) or None,
+            "authority_status":"UNVERIFIED","primary_source_status":"UNVERIFIED",
+            "evidence_sufficiency_status":"UNVERIFIED",
+            "model_dependency_count":0,"incremental_spend_usd":0,
+        }
+
 def verify(candidate,timeout=15):
     candidate=dict(candidate or {})
     url=_safe_url(candidate.get("url"))
@@ -109,37 +166,12 @@ def verify(candidate,timeout=15):
                 "authority_status":"UNVERIFIED","primary_source_status":"UNVERIFIED",
                 "model_dependency_count":0,"incremental_spend_usd":0,
             }
-    try:
-        body,ctype,status,final=_fetch(url,timeout,"text/html,application/xhtml+xml,*/*;q=0.5")
-        final=_safe_url(final)
-        if not final:
-            raise ValueError("UNSAFE_FINAL_URL")
-        title=None
-        if "html" in ctype.lower():
-            p=_Title(); p.feed(body.decode("utf-8","replace"))
-            title=_canon(html.unescape("".join(p.parts))) or None
-        return {
-            "schema":SCHEMA,
-            "status":"RETRIEVAL_PROVENANCE_VERIFIED",
-            "verification_method":"LIVE_HTTP_RETRIEVAL",
-            "candidate_url":url,
-            "final_url":final,
-            "final_host":(urllib.parse.urlsplit(final).hostname or "").lower(),
-            "http_status":status,
-            "content_type":ctype,
-            "page_title":title,
-            "authority_status":"RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED",
-            "primary_source_status":"UNVERIFIED",
-            "evidence_sufficiency_status":"UNVERIFIED",
-            "model_dependency_count":0,
-            "incremental_spend_usd":0,
-        }
-    except Exception as exc:
-        return {
-            "schema":SCHEMA,"status":"UNVERIFIED",
-            "reason":"LIVE_RETRIEVAL_FAILED",
-            "error_class":type(exc).__name__,"error":str(exc)[:500],
-            "candidate_url":url,
-            "authority_status":"UNVERIFIED","primary_source_status":"UNVERIFIED",
-            "model_dependency_count":0,"incremental_spend_usd":0,
-        }
+    result=materialize_retrieval(candidate,timeout=timeout)
+    if result.get("status")!="RETRIEVAL_PROVENANCE_VERIFIED":
+        result=dict(result)
+        if result.get("reason")=="SELECTED_SOURCE_LIVE_MATERIALIZATION_FAILED":
+            result["reason"]="LIVE_RETRIEVAL_FAILED"
+        return result
+    result=dict(result)
+    result["verification_method"]="LIVE_HTTP_RETRIEVAL"
+    return result
