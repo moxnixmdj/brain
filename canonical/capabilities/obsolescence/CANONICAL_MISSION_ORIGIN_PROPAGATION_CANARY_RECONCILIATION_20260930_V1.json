@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_MISSION_ORIGIN_PROPAGATION_RECONCILIATION_V1",
+  "status": "VERIFIED_NON_PARENT_CANARY_PASS__MISSION_ORIGIN_PATH_BLOCKER_RETIRED__ZERO_CAPABILITY_CREDIT",
+  "checked_on": "2026-09-30",
+  "canonical_base_commit": "2e9fb9c50f70aa8ce1951d03c4a892fb6f2d7147",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "authoritative_canary": {
+    "authority_rule": "EARLIEST_CLEAN_SUCCESSFUL_NON_PARENT_CANARY",
+    "carrier_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 79,
+    "carrier_head_sha": "5acc38cff1bf4045e0a6ea05f36218220acabc4d",
+    "workflow_run_id": 36672816106,
+    "job_id": 109751299770,
+    "artifact_id": 11078921733,
+    "artifact_name": "mission-origin-entrypoint-canary-terminal",
+    "artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "terminal_status": "PASS_CANONICAL_MISSION_ORIGIN_PROPAGATION",
+    "validation_scope": "MISSION_ORIGIN_ENTRYPOINT_ONLY",
+    "mission_id": "MISSION-ORIGIN-ENTRYPOINT-CANARY-20260930-V1",
+    "mission_path": "canonical/astra_runtime/missions/MISSION_ORIGIN_ENTRYPOINT_CANARY_20260930_V1.json",
+    "mission_sha256": "fb4150a84306ed776bcd8fb96ed24bb1d47b70953a4375dc9cc2b9530398f464",
+    "apt_evidence_path": "canonical/astra_runtime/evidence/MISSION-ORIGIN-ENTRYPOINT-CANARY-20260930-V1__AUTO_APT_CLI_ACQUISITION.json",
+    "incremental_spend_usd": 0,
+    "parent_task": false,
+    "capability_credit": false,
+    "scoreboard_credit": false
+  },
+  "proof": {
+    "observations": [
+      "Canonical astra_runtime entrypoint loaded the mission from canonical/astra_runtime/missions and persisted that exact mission_path in runtime state.",
+      "Post-origin-validation APT acquisition evidence was emitted at the authoritative canary apt_evidence_path.",
+      "The execution continued into APT supplier probing and contract inference, so origin mission validation had already succeeded.",
+      "Terminal blockage was NO_COMPATIBLE_REQUIRED_SUPPLIER_CONTRACT / contract-inference failure, not APT_ORIGIN_MISSION_PATH_INVALID, PYPI_ORIGIN_MISSION_PATH_INVALID, or an origin-mission-missing error."
+    ],
+    "proves": [
+      "Canonical mission identity propagates through astra_runtime.main into autonomous APT acquisition on the exact current carrier/runtime lineage.",
+      "The mission-origin-path hypothesis from later Mauna replay diagnostics is not a surviving current causal blocker."
+    ],
+    "does_not_prove": [
+      "A compatible APT/PyPI supplier contract exists for arbitrary goals.",
+      "The broad open-ended parent capability is acquired.",
+      "A fresh parent Task A passes."
+    ]
+  },
+  "blocker_disposition": {
+    "retired_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "disposition": "FALSIFIED_AS_CURRENT_BLOCKER_BY_FRESH_NON_PARENT_CANARY",
+    "surviving_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "reason": "The fresh non-parent canonical-entrypoint canary reached post-origin autonomous APT acquisition with exact mission identity intact. The earlier mission-path error came only from a later replay diagnostic and has no current repair authority."
+  },
+  "duplicate_control": {
+    "same_canary_replay_allowed": false,
+    "further_mission_path_canary_required": false,
+    "later_duplicate_canaries": [
+      {
+        "public_pr": 81,
+        "workflow_run_id": 36672844129,
+        "artifact_id": 11078517264,
+        "artifact_digest": "sha256:98cc5f63a6ad3add0385c6f5b19a59f518555fa68323871d83c829c0b912acf8",
+        "disposition": "LATER_COMPATIBLE_DUPLICATE_PASS__ZERO_ADDITIONAL_AUTHORITY"
+      },
+      {
+        "public_pr": 86,
+        "workflow_run_id": 36673206189,
+        "disposition": "LATER_DUPLICATE_FAILURE__ZERO_AUTHORITY__NO_REPLAY"
+      }
+    ],
+    "brain_pr_371_disposition": "SUPERSEDED_BEFORE_REDUCED_CANARY_EXECUTION__EARLIEST_PR79_PASS_ALREADY_ADJUDICATES_SURVIVING_SEAM"
+  },
+  "accounting": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0,
+    "parent_capability_promoted": false
+  },
+  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
+}
