@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_HLE_DIAMOND_OPUS55_REASONING_OBSOLESCENCE_V1",
+  "status": "CURRENT",
+  "real_objective": "Obsolete the Opus 5.5 multidisciplinary expert reasoning capability using an existing equal-or-better permanent Brain route.",
+  "governing_invariants": [
+    "Capability credit requires configured Brain behavior equal to or better than Opus 5.5 at the exact claimed scope.",
+    "Knowledge remains external/JIT.",
+    "Capabilities are configured once, saved permanently, and reused without rediscovery.",
+    "Underlying capability invention is forbidden.",
+    "Hard incremental spend is $0.",
+    "Different benchmark variants must not be silently conflated."
+  ],
+  "material_premises": [
+    "HLE-Diamond was released by the HLE benchmark owners on 2026-09-22 after refinement of the HLE corpus.",
+    "On HLE-Diamond without tools, GPT-6 Astra scores 60.6% and Claude Opus 5.5 scores 55.0%.",
+    "On HLE-Diamond with web+code, GPT-6 Astra scores 82.9% and Claude Opus 5.5 scores 73.9%.",
+    "The same benchmark owner evaluated both models under the same stated reasoning-high methodology.",
+    "Older full-HLE-with-tools evidence uses a different setting and remains preserved as contradictory scope-specific evidence, not erased."
+  ],
+  "evidence_refs": [
+    "https://lastexam.ai/blog/hle-diamond",
+    "https://labs.scale.com/leaderboard/hle-diamond"
+  ],
+  "conclusion": "Promote GPT-6 Astra + Brain + web/code/Wolfram as the permanently configured equal-or-better route for the current HLE-Diamond multidisciplinary reasoning scope; remove this scope from the hard residual frontier while preserving the older HLE variant as non-equivalent evidence.",
+  "selected_route": "GPT_6_ASTRA_PLUS_BRAIN_JIT_KNOWLEDGE_AND_WEB_CODE_TOOLS",
+  "rejected_material_alternatives": [
+    {
+      "route": "KEEP_REASONING_UNRESOLVED_BECAUSE_OLDER_HLE_TABLE_FAVORS_OPUS",
+      "reason": "The newer benchmark-owner HLE-Diamond provides a cleaned/refined same-methodology comparison and supports a narrower current scope; old evidence remains preserved rather than vetoing a distinct benchmark."
+    },
+    {
+      "route": "DECLARE_ALL_REASONING_OBSOLETED",
+      "reason": "Evidence is scoped to HLE-Diamond and cannot establish every reasoning behavior."
+    },
+    {
+      "route": "BUILD_NEW_REASONING_ENGINE",
+      "reason": "Forbidden and unnecessary for the promoted scope."
+    }
+  ],
+  "uncertainties": [
+    "The HLE-Diamond scope is not identical to the older full HLE-with-tools variant.",
+    "Broader judgment, planning, long-horizon agency and professional-work capability remain separately evaluated families."
+  ],
+  "assumptions": [
+    "GPT-6 Astra remains available through the already-canonized included Work/Codex route subject to account allowance.",
+    "Benchmark-owner published September 2026 results are current for the named model versions."
+  ],
+  "non_goals": [
+    "Do not erase older HLE evidence.",
+    "Do not claim universal reasoning superiority.",
+    "Do not internalize task knowledge."
+  ],
+  "next_action": "Continue parallel existing-route search for advanced agentic coding and professional knowledge work while separately closing broad candidate families only with equal-or-better evidence.",
+  "supersession_conditions": [
+    "A newer benchmark-owner matched evaluation reverses the result.",
+    "GPT-6 Astra route becomes unavailable under the $0 constraint without an equal-or-better configured replacement.",
+    "The user changes the target or hard constraints."
+  ],
+  "supersedes": [
+    "The ownership matrix classification that marked MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING wholly unresolved solely from the older HLE-with-tools table."
+  ]
+}
