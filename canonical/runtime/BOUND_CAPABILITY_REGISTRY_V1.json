@@ -2856,11 +2856,20 @@
           "closure_sha256": "4ec35feca806fd8634f50c07cf5b4ae5e0f405c369d0d42e3f3bcb84cb931a07"
         }
       },
-      "status": "CANDIDATE_BOUND_CAPABILITY",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "inherited_supplier_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
         "inherited_supplier_status": "SymPy 1.14.0 exact-symbolic route independently adjudicated 12/12",
-        "new_interface_status": "PENDING_FRESH_NON_ASTRONOMY_QUALIFICATION"
+        "mission_id": "PR296-TYPED-SCALAR-EXPRESSION-QUALIFICATION-001",
+        "public_run_id": 36666659921,
+        "public_job_id": 109732664034,
+        "artifact_id": 11076347530,
+        "artifact_digest": "sha256:1bf6628bff366eb6fa3d277042798c956eec1c5fca7d7bace1237d13ce832cc0",
+        "fresh_domain": "DEMOGRAPHY_PUBLIC_STATISTICS",
+        "independent_recomputation": true,
+        "unsafe_rejection_pass": true,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
       }
     }
   },
