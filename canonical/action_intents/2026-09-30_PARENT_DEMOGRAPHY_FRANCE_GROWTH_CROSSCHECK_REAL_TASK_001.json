@@ -1,0 +1,383 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either satisfy the remaining materially-different Task B acquisition evidence with one independently verified zero-model-dependency demography task using the inherited route, or localize the first new causal gap. If Task B passes, adjudicate parent promotion separately against the predeclared minimum acquisition evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 144a1baadbb927645b1e183a85e4675f5cf44f1f",
+    "Task A HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO is verified candidate evidence",
+    "astronomy task is spent and replay forbidden; its typed scalar multiplication/exponentiation gap is now closed",
+    "geophysics task is spent and replay forbidden",
+    "biophysics task is spent and replay forbidden; rendered quantitative-claim extraction is observed once/deferred",
+    "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 acquired",
+    "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 acquired",
+    "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1 acquired",
+    "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1 acquired",
+    "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 acquired and qualified on public run 36666659921",
+    "World Bank Indicators API is an authoritative machine-readable JSON source already proven reachable by the current public carrier class",
+    "new task frozen before exact task endpoint values are inspected",
+    "exact source-schema-only preflight run 36667643456 PASS; artifact 11077475194 sha256:4197181e0c1c588cd9f0fee01d76dc2590a85bc180a9c1e9b9bf03d328caf4b7; answer not computed",
+    "Answer-blind exact-source preflight run 36668001841 PASS; artifact 11077126934 sha256:f43f6a0fe0dc9f80e6599de8c2287262b6de1f0d2ef7b6c5aed455d94fdc0626"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Preflight only exact source reachability/schema without computing the answer, then execute PARENT_DEMOGRAPHY_FRANCE_GROWTH_CROSSCHECK_REAL_TASK_20260930_001 exactly once on exact current Brain bytes. On completion independently re-fetch all three World Bank observations and recompute without producer imports. On failure preserve only the first causal blocker and do not replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "144a1baadbb927645b1e183a85e4675f5cf44f1f",
+    "real_outcome": "Test the inherited model-independent parent capability on a fresh development-demography task requiring three authoritative observations, semantic multi-source binding, compound arithmetic with exponentiation, quantitative relation, provenance, and independent verification.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Complete the single remaining materially-different parent Task B proof obligation if the inherited route is now sufficient.",
+      "proxy_goals_deleted": [
+        "another child benchmark",
+        "astronomy replay",
+        "geophysics replay",
+        "biophysics replay",
+        "new framework search",
+        "model qualification",
+        "manual one-off answer",
+        "preemptive repair"
+      ],
+      "surviving_necessity": "The parent acquisition contract requires one materially different Task B using the inherited general route without rediscovery."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "authoritative JSON knowledge fetch",
+        "verified jq relation",
+        "current deterministic controller and compiler"
+      ],
+      "external_existing_routes_checked": [
+        "World Bank Indicators API",
+        "one-off Python calculation rejected as parent proof",
+        "frontier-model cognition rejected for model-independent credit"
+      ],
+      "capability_work_deleted": [
+        "no new supplier",
+        "no model route",
+        "no hand-coded producer answer",
+        "no task-specific runtime patch",
+        "no old task replay"
+      ],
+      "surviving_gap": "Unknown until exact frozen parent task executes; static inspection does not authorize a repair."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Remaining parent-evidence obligation after recurring typed-scalar seam was closed.",
+      "delete_bypass_substitute_options": [
+        "reuse the current full inherited stack",
+        "reuse authoritative World Bank JSON",
+        "reject one-off answer as capability proof",
+        "stop on first observed causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
+        "HAND_CODE_ONE_OFF_DEMOGRAPHY_SCRIPT",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Only inherited-stack execution can satisfy Task B. A one-off script proves an instance, not transfer; frontier cognition invalidates the targeted dependency-removal evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independent verifier re-fetches all three World Bank values, recomputes CAGR percentage with Python arithmetic, recomputes absolute difference/predicate, and compares the producer relation artifact without importing producer modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "further child benchmarking until this parent task resolves",
+        "astronomy/geophysics/biophysics replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live authoritative JSON acquisition",
+        "semantic multi-source grounding",
+        "typed scalar expression",
+        "bounded numeric relation",
+        "composition",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "If this task passes, adjudicate the parent acquisition contract immediately; if it fails, OBS only the first new gap and never replay this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical inventory",
+        "reused established zero-spend public carrier",
+        "reused World Bank structured authoritative source class",
+        "froze task before exact answer probe"
+      ],
+      "search_stop_decision": "Direct Task B execution has maximal information gain now; no unresolved framework decision precedes it.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Selected route re-preflighted at 2026-09-30T04:15:21Z after answer-blind exact World Bank source check passed on public carrier; no unresolved dependency or material challenger remains."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
+      "HAND_CODE_ONE_OFF_DEMOGRAPHY_SCRIPT",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKS",
+      "HAND_CODE_ONE_OFF_ANSWER_AS_PARENT_PROOF",
+      "MODEL_COGNITION",
+      "ASTRONOMY_REPLAY",
+      "GEOPHYSICS_REPLAY",
+      "BIOPHYSICS_REPLAY"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It directly attacks the sole remaining parent proof obligation using only already-acquired capabilities and a zero-key authoritative JSON source.",
+    "expected_parent_level_state_change": "Either satisfy the remaining materially-different Task B acquisition evidence with one independently verified zero-model-dependency demography task using the inherited route, or localize the first new causal gap. If Task B passes, adjudicate parent promotion separately against the predeclared minimum acquisition evidence.",
+    "stop_condition": "Preflight only exact source reachability/schema without computing the answer, then execute PARENT_DEMOGRAPHY_FRANCE_GROWTH_CROSSCHECK_REAL_TASK_20260930_001 exactly once on exact current Brain bytes. On completion independently re-fetch all three World Bank observations and recompute without producer imports. On failure preserve only the first causal blocker and do not replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:06:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 144a1baadbb927645b1e183a85e4675f5cf44f1f",
+          "five verified model-independent child capabilities required by this task"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "World Bank Indicators API machine-readable country/indicator observations"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "current verified Brain runtime and registry; no new supplier required"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No alternative framework can beat direct execution for the remaining parent proof obligation"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent multi-source demographic quantitative research compound annual growth verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "World Bank Indicators API population and population growth JSON"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "current Brain inherited stack versus one-off script"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current World Bank Indicators API"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
+          "evidence": [
+            "current parent stack includes typed scalar expression and relation composition",
+            "task frozen before value probe"
+          ],
+          "qualification_evidence": [
+            "main 144a1baa",
+            "World Bank official API"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Direct integrated behavior test.",
+            "CAPABILITY_STRENGTH": "Fresh domain, three authoritative observations, semantic multi-source composition and nonlinear arithmetic.",
+            "WALL_CLOCK": "No implementation before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Structured zero-key official API plus established public carrier.",
+            "VERIFIABILITY": "Independent re-fetch/recompute oracle."
+          }
+        },
+        {
+          "route": "HAND_CODE_ONE_OFF_DEMOGRAPHY_SCRIPT",
+          "evidence": [
+            "Would answer the instance."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can solve one instance.",
+            "CAPABILITY_STRENGTH": "Does not establish inherited parent transfer.",
+            "WALL_CLOCK": "Fast to an answer but not to terminal capability evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for instance.",
+            "VERIFIABILITY": "Does not satisfy Task B inheritance proof."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger dominates direct inherited-stack execution for time-to-parent-proof.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:15:21Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:56:56Z",
+            "evidence": [
+              "DIRECT_PROBE: typed-scalar qualification run 36666659921 succeeded on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_144a1baadbb927645b1e183a85e4675f5cf44f1f",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:06:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: current exact main"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "WORLD_BANK_EXACT_TASK_SOURCE_SCHEMA",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:15:21Z",
+            "evidence": [
+              "DIRECT_PROBE: verification-capsule-runner run 36668001841 PASS",
+              "artifact 11077126934 digest sha256:f43f6a0fe0dc9f80e6599de8c2287262b6de1f0d2ef7b6c5aed455d94fdc0626",
+              "answer-blind exact URL + JSON path + numeric type preflight; values_recorded=false"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  },
+  "execution_result": {
+    "public_run_id": 36667844172,
+    "public_job_id": 109736256301,
+    "public_head_sha": "03f78265957d92c15887e225ff79b61952dec844",
+    "artifact_id": 11076359417,
+    "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+    "producer_status": "COMPLETED",
+    "independent_oracle_verified": true,
+    "verified_parent_task": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "execution_count": 1,
+    "same_task_replay_allowed": false
+  },
+  "post_execution_obs": {
+    "goal": "PRESERVE_VERIFIED_DEMOGRAPHY_RESULT__DO_NOT_REPLAY",
+    "capability": "COUNT_ONE_CLEAN_MODEL_INDEPENDENT_PARENT_REAL_TASK__DO_NOT_PROMOTE_PARENT_YET",
+    "blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+    "solution": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B_ON_INHERITED_ROUTE",
+    "verification": "PUBLIC_RUN_FAIL_CLOSED_TERMINAL_GATE__INDEPENDENT_REFETCH_AND_RECOMPUTE__EXACT_RUNTIME_BLOB_IDENTITY_AUDIT",
+    "inherited_system": "OLD_SPACE_CARGO_TASK_A_PRESERVED_AS_HISTORICAL_RESULT_BUT_REMOVED_FROM_FRONTIER_DEPENDENCY_REMOVAL_PROOF",
+    "obs_obs": "STOP_DEMOGRAPHY_TASK__NO_TUNING_OR_REPLAY__RETURN_TO_PARENT_REAL_TASK_FRONTIER"
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared all execution-critical Task B runtime blobs to exact Brain main; all matched.",
+      "Searched task branch for task-specific runtime paths; none existed.",
+      "Audited old Task A model dependence and rejected it for frontier dependency-removal credit."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json"
+    ],
+    "independent_verification_evidence_paths": [
+      "PUBLIC_RUN_36667844172__ARTIFACT_11076359417__sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326"
+    ],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": true,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "GPT-5.6 Sol / ChatGPT Deep Research",
+    "producer_execution_suppliers": [
+      "PROJECT_BRAIN_MODEL_INDEPENDENT_RUNTIME",
+      "WORLD_BANK_INDICATORS_API"
+    ],
+    "independent_verifier_suppliers": [
+      "PYTHON_STDLIB_URLLIB_AND_ARITHMETIC",
+      "WORLD_BANK_INDICATORS_API"
+    ]
+  }
+}

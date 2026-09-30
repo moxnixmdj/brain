@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_CAPABILITY_EVIDENCE_RECONCILIATION_V1",
+  "reconciliation_id": "PARENT-DEMOGRAPHY-CLEAN-MODEL-INDEPENDENCE-RECONCILIATION-20260930-V1",
+  "status": "DEMOGRAPHY_PARENT_TASK_VERIFIED_MODEL_FREE__RECLASSIFIED_AS_CLEAN_TASK_A__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_FRONTIER_DEPENDENCY_REMOVAL__PARENT_NOT_YET_PROMOTED",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "source_pr": 301,
+  "public_run_id": 36667844172,
+  "public_job_id": 109736256301,
+  "public_head_sha": "03f78265957d92c15887e225ff79b61952dec844",
+  "artifact_id": 11076359417,
+  "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+  "task": {
+    "task_id": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
+    "domain": "DEVELOPMENT_DEMOGRAPHY_POPULATION_GROWTH_QUANTITATIVE_REASONING",
+    "producer_status": "COMPLETED",
+    "independent_oracle_verified": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "execution_count": 1,
+    "same_task_replay_allowed": false
+  },
+  "inherited_route_audit": {
+    "current_main": "144a1baadbb927645b1e183a85e4675f5cf44f1f",
+    "all_execution_critical_runtime_blobs_identical_to_main": true,
+    "task_specific_runtime_paths": [],
+    "producer_modules_imported_by_independent_oracle": false,
+    "task_specific_runtime_patch": false,
+    "verdict": "GENUINE_INHERITED_ROUTE_CROSS_DOMAIN_EXECUTION"
+  },
+  "old_task_a_admissibility": {
+    "task": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
+    "historical_evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+    "historical_result_preserved": true,
+    "frontier_dependency_removal_credit": false,
+    "reason": "The pre-model-independence action intent explicitly lists ChatGPT web research and Python numerical analysis in the Task A route and does not establish zero frontier-model cognitive dependency. It cannot satisfy the later minimum contract field frontier_model_dependency_removed_for_both_tasks."
+  },
+  "acquisition_contract_adjudication": {
+    "difficult_model_free_real_task_A": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
+    "materially_different_model_free_task_B": null,
+    "cross_domain_transfer_complete": false,
+    "frontier_model_dependency_removed_for_both_tasks": false,
+    "parent_capability_acquired": false,
+    "surviving_gap": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+  },
+  "scoreboard_delta": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 1,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 1
+  },
+  "next_action": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B__NO_DEMOGRAPHY_ASTRONOMY_GEOPHYSICS_BIOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "progress_credit": [
+    "VERIFIED_REAL_TASK_COMPLETED",
+    "RESIDUAL_GAP_LOCALIZED"
+  ],
+  "incremental_spend_usd": 0
+}
