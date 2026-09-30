@@ -1,0 +1,322 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-OPENENDED-RESEARCH-INTENT-DECOMPOSITION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "subcapability_target": "MODEL_INDEPENDENT_OPEN_ENDED_RESEARCH_INTENT_DECOMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and independently qualify a generic model-independent open-ended research-intent decomposition capability that converts broad real objectives into typed causal research roles before supplier discovery, without SQLite-specific literals or runtime mutation; then test the composition in front of unchanged ASTRA on fresh non-parent objectives.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Authoritative SQLite first-spend reconciliation PR384/main",
+    "PR74 fresh broad-objective grounding diagnostic",
+    "Existing verified bound grounding/composition/evidence synthesis capabilities",
+    "spaCy/NLTK deterministic parser/lexical substrates",
+    "No SQLite replay"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop this acquisition after the decomposer passes fresh cross-domain real-objective decomposition and an unchanged-ASTRA composition canary proves either that role-specific decomposition causally improves supplier grounding/acquisition or localizes the next generic blocker. Do not replay SQLite or modify ASTRA core before that evidence.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9e0e37eaff5a383242766c4267e9a660924f60b0",
+    "real_outcome": "Close the generic open-ended research objective to actionable capability-role seam exposed by the authoritative SQLite first spend, without task-specific hints or blind package ranking changes.",
+    "required_capability": "MODEL_INDEPENDENT_OPEN_ENDED_RESEARCH_INTENT_DECOMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Make broad real research objectives decomposable into typed causal roles that existing verified Brain capabilities and supplier discovery can consume.",
+      "proxy_goals_deleted": [
+        "SQLite-specific fix",
+        "APT ranking tweak",
+        "contract-inference weakening",
+        "same-task replay",
+        "new general planner",
+        "model cognition"
+      ],
+      "surviving_necessity": "Acquire only the semantic research-intent decomposition primitive proven missing upstream of supplier selection."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "plain_goal.bound_capability.grounding.stdlib",
+        "grounded executable composition",
+        "knowledge.json.fetch.external",
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib",
+        "existing APT/PyPI/MCP federated capability discovery and fail-closed contract inference"
+      ],
+      "external_existing_routes_checked": [
+        "spaCy rule Matcher/Sentencizer as deterministic parsing substrate",
+        "NLTK WordNet/VerbNet lexical classes",
+        "Unified Planning / ProbLog as downstream formal planning substrates"
+      ],
+      "capability_work_deleted": [
+        "No custom full research planner",
+        "No new model",
+        "No SQLite package hint",
+        "No weakened supplier contract checks",
+        "No core ASTRA mutation before causal canary"
+      ],
+      "surviving_gap": "Current grounding/acquisition sees raw research wording as package-search tokens; role-conditioned discovery is empty and all broad clauses remain unresolved."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic: Mauna and fresh broad-child diagnostics showed unresolved broad objectives; SQLite first spend independently reached acquisition with 0/5 grounded clauses and irrelevant supplier ranking.",
+      "delete_bypass_substitute_options": [
+        "DELETE contract-repair hypothesis: binder correctly rejected junk suppliers",
+        "BYPASS core runtime mutation by composing a deterministic preprocessor first",
+        "REUSE existing bound capabilities after role decomposition",
+        "SUBSTITUTE spaCy/NLTK only if stdlib rules are insufficient",
+        "REPAIR ASTRA integration only after external composition proves causal value"
+      ],
+      "surviving_causal_blocker": "No verified generic mapping from broad research language to typed causal research roles before capability grounding/discovery."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_STDLIB_TYPED_RESEARCH_INTENT_DECOMPOSER_BEFORE_UNCHANGED_ASTRA",
+        "USE_SPACY_OR_NLTK_AS_PARSING_SUBSTRATE_WITH_SAME_TYPED_FRAME",
+        "REPAIR_SUPPLIER_RANKING_DIRECTLY",
+        "BUILD_NEW_RESEARCH_PLANNER",
+        "USE_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "A tiny deterministic typed-frame decomposer directly attacks the observed role gap with the least machinery. NLP packages still require the same mapping. Supplier ranking is downstream and currently receives the wrong semantic unit. New planners/models add unnecessary machinery or violate the proof constraint.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use fresh real broad objectives as non-parent capability qualification and an unchanged-ASTRA composition canary. SQLite is never replayed. Independent verifier checks role coverage, forbidden task-specific literals, deterministic stability, and causal difference in downstream supplier queries/candidates."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Blind lexical whole-goal supplier searches for research objectives",
+        "Preemptive ASTRA compiler/acquisition mutations"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Broad-goal clause classification",
+        "Research-role typing",
+        "Role-specific supplier query formation"
+      ],
+      "fresh_reuse_plan": "Qualify on at least four fresh materially different real objectives, then run one fifth fresh unchanged-ASTRA composition canary."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused authoritative SQLite first-spend evidence",
+        "Reused PR74 fresh broad grounding diagnostic",
+        "Reused existing external package survey",
+        "No repeat SQLite or Mauna execution"
+      ],
+      "search_stop_decision": "Stop discovery now: no existing package supplies the missing domain-independent semantic mapping without us defining that mapping, while stdlib rules are sufficient to test the causal hypothesis at lower wall-clock and complexity.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh route race completed against Brain inherited capabilities, deterministic NLP packages, formal planners, direct supplier-ranking repair, and model planning."
+    },
+    "routes_considered": [
+      "COMPOSE_STDLIB_TYPED_RESEARCH_INTENT_DECOMPOSER_BEFORE_UNCHANGED_ASTRA",
+      "USE_SPACY_OR_NLTK_AS_PARSING_SUBSTRATE_WITH_SAME_TYPED_FRAME",
+      "REPAIR_SUPPLIER_RANKING_DIRECTLY",
+      "BUILD_NEW_RESEARCH_PLANNER",
+      "USE_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SQLITE_TASK_REPLAY",
+      "TASK_SPECIFIC_SQLITE_PACKAGE_HINT",
+      "BLIND_APT_PYPI_RANKING_TWEAK",
+      "CONTRACT_INFERENCE_WEAKENING",
+      "CORE_ASTRA_MUTATION_BEFORE_CAUSAL_CANARY",
+      "MODEL_COGNITION"
+    ],
+    "selected_surviving_route": "COMPOSE_STDLIB_TYPED_RESEARCH_INTENT_DECOMPOSER_BEFORE_UNCHANGED_ASTRA",
+    "why_selected_route_is_fastest_sufficient": "It isolates the exact missing semantic role layer, requires no new dependency or core-runtime mutation, preserves fail-closed supplier contracts, and can be causally tested on fresh objectives at $0 before integration.",
+    "expected_parent_level_state_change": "Acquire and independently qualify a generic model-independent open-ended research-intent decomposition capability that converts broad real objectives into typed causal research roles before supplier discovery, without SQLite-specific literals or runtime mutation; then test the composition in front of unchanged ASTRA on fresh non-parent objectives.",
+    "stop_condition": "Stop this acquisition after the decomposer passes fresh cross-domain real-objective decomposition and an unchanged-ASTRA composition canary proves either that role-specific decomposition causally improves supplier grounding/acquisition or localizes the next generic blocker. Do not replay SQLite or modify ASTRA core before that evidence.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T05:46:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "OBS_NO_COMPATIBLE_SUPPLIER_CONTRACT__SEARCH_REUSE_EXISTING_LOCAL_RUNTIME_AND_VERIFIED_BOUND_CAPABILITIES_BEFORE_REPAIR",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "SQLite first-spend reconciliation on main 9e0e37eaff5a383242766c4267e9a660924f60b0",
+          "PR74 fresh broad grounding diagnostic",
+          "verified bound grounding/composition/evidence-synthesis capabilities"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "spaCy rule-based Matcher/Sentencizer documentation",
+          "NLTK WordNet and VerbNet documentation",
+          "Python standard-library re/json deterministic parsing primitives"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "spaCy 3.8.x current package",
+          "NLTK 3.10.x current package",
+          "existing Brain zero-cost runtime dependencies"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No discovered deterministic package provides a ready-made domain-independent research-intent ontology; available libraries provide parsing/lexical substrates rather than the missing semantic mapping."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic open ended research intent decomposition evidence experiment verification provenance"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "spaCy rule matcher NLTK WordNet VerbNet deterministic semantic intent"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "typed research role frame before capability discovery versus supplier ranking repair"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 spaCy NLTK current releases deterministic rule based NLP"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "COMPOSE_STDLIB_TYPED_RESEARCH_INTENT_DECOMPOSER_BEFORE_UNCHANGED_ASTRA",
+          "resolution": "SELECTED",
+          "qualification_evidence": [
+            "SQLite first-spend role-conditioned discovery empty",
+            "PR74 broad-goal grounding misses"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ]
+        },
+        {
+          "route": "USE_SPACY_OR_NLTK_AS_PARSING_SUBSTRATE_WITH_SAME_TYPED_FRAME",
+          "resolution": "NON_DOMINATING",
+          "qualification_evidence": [
+            "Official rule/lexical APIs exist but do not supply the domain-independent mapping"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ]
+        },
+        {
+          "route": "REPAIR_SUPPLIER_RANKING_DIRECTLY",
+          "resolution": "NON_DOMINATING",
+          "qualification_evidence": [
+            "Contract inference rejected irrelevant candidates correctly; upstream semantic units are the observed defect"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "USE_MODEL_PLANNER",
+          "resolution": "DISQUALIFIED",
+          "qualification_evidence": [
+            "Target proof requires model_dependency_count=0"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ]
+        }
+      ],
+      "negative_search_summary": "No challenger dominates a zero-dependency typed research-frame preprocessor on correctness-first wall-clock to decisive causal evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COMPOSE_STDLIB_TYPED_RESEARCH_INTENT_DECOMPOSER_BEFORE_UNCHANGED_ASTRA",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T05:46:00Z",
+        "max_age_hours": 2,
+        "selected_route": "COMPOSE_STDLIB_TYPED_RESEARCH_INTENT_DECOMPOSER_BEFORE_UNCHANGED_ASTRA",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PYTHON_STDLIB_RE_JSON",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:46:00Z",
+            "evidence": [
+              "Brain runtime already executes Python stdlib bound capabilities"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "EXISTING_BOUND_GROUNDING_COMPOSITION_DISCOVERY_STACK",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:46:00Z",
+            "evidence": [
+              "Current main verified child-capability records"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_ZERO_COST_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:39:00Z",
+            "evidence": [
+              "SQLite public carrier actually executed canonical runtime and uploaded evidence"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
