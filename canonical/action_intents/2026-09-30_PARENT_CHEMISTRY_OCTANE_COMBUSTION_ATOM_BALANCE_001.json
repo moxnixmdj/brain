@@ -1,0 +1,389 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-CHEMISTRY-OCTANE-COMBUSTION-ATOM-BALANCE-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either satisfy the remaining clean cross-domain Task B proof with one independently verified zero-model-dependency chemistry task on the inherited route and immediately adjudicate parent acquisition, or localize the first new causal gap without replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "Demography Task A is verified model-independent and independently oracled; replay forbidden",
+    "Astronomy, geophysics, and biophysics parent tasks are spent and replay-forbidden",
+    "Five required model-independent child capabilities are already acquired",
+    "PR303 promotion firewall requires runtime-derived zero-model cognition provenance before parent capability credit",
+    "PubChem PUG REST official property table supports HeavyAtomCount, defined as number of non-hydrogen atoms",
+    "Generic answer-blind JSON source preflight already exists on the established zero-spend public carrier",
+    "Static runtime inspection proves authoritative JSON fetch preserves JSON number types and the bounded relation requires JSON numbers",
+    "Task will be frozen before exact PubChem endpoint values are inspected"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze PARENT-CHEMISTRY-OCTANE-COMBUSTION-ATOM-BALANCE-20260930-001 before any exact source-value probe; run only the generic answer-blind source/type preflight. If it passes, execute the frozen task exactly once on exact Brain bytes with runtime-derived cognition provenance and independently re-fetch/recompute without producer imports. On first causal failure preserve the evidence and never replay the spent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Test the inherited model-independent parent capability on a fresh chemistry stoichiometry task requiring four authoritative PubChem observations, semantic multi-source binding, typed arithmetic, a conservation cross-check, provenance, runtime-derived zero-model cognition evidence, and independent verification.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Complete the sole remaining clean cross-domain Task B proof obligation if the inherited route is sufficient.",
+      "proxy_goals_deleted": [
+        "another child benchmark",
+        "demography replay",
+        "astronomy replay",
+        "geophysics replay",
+        "biophysics replay",
+        "new framework search",
+        "model qualification",
+        "manual one-off chemistry answer",
+        "preemptive runtime repair"
+      ],
+      "surviving_necessity": "The parent acquisition contract requires one materially different technical/scientific domain completed on the inherited general model-independent route without rediscovery."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "authoritative JSON knowledge fetch",
+        "verified jq relation",
+        "current deterministic controller and compiler",
+        "runtime cognition-dependency provenance added by PR303"
+      ],
+      "external_existing_routes_checked": [
+        "PubChem PUG REST official compound property API",
+        "generic answer-blind JSON source preflight on the public verification carrier",
+        "one-off chemistry script rejected as parent capability proof",
+        "frontier-model cognition rejected for model-independent credit"
+      ],
+      "capability_work_deleted": [
+        "no new supplier",
+        "no model route",
+        "no hand-coded producer answer",
+        "no task-specific runtime patch",
+        "no old task replay"
+      ],
+      "surviving_gap": "Unknown until exact frozen chemistry parent task execution; static inspection does not authorize a repair."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Remaining parent-evidence obligation after one clean model-free Task A; not an implementation defect until a fresh cross-domain execution demonstrates one.",
+      "delete_bypass_substitute_options": [
+        "reuse the current full inherited stack",
+        "reuse PubChem official JSON properties",
+        "reuse generic answer-blind source preflight",
+        "reject one-off answer as capability proof",
+        "stop on first observed causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_STOICHIOMETRY_TASK",
+        "HAND_CODE_ONE_OFF_STOICHIOMETRY_SCRIPT",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Only inherited-stack execution can satisfy the cross-domain transfer contract. A one-off script proves an instance, not inherited transfer; frontier cognition invalidates dependency-removal evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independent verifier re-fetches all four exact PubChem HeavyAtomCount observations, recomputes the octane value implied by the balanced combustion equation, recomputes the absolute difference and predicate, and compares every consequential producer field without importing producer modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "further child benchmarking until this parent task resolves",
+        "all prohibited parent-task replays"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live authoritative JSON acquisition",
+        "semantic multi-source grounding",
+        "typed scalar arithmetic",
+        "bounded numeric relation",
+        "composition",
+        "runtime cognition provenance",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "If the chemistry task passes, adjudicate the parent acquisition contract immediately; if it fails, OBS only the first new causal gap and never replay this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical inventory",
+        "reused established zero-spend public carrier",
+        "reused generic answer-blind source preflight",
+        "statically rejected the molecular-weight variant because PubChem molecular weights can be JSON strings while the final relation is number-strict",
+        "selected HeavyAtomCount because the official property is an integer count and the exact endpoint type will still be verified only after freeze"
+      ],
+      "search_stop_decision": "Direct chemistry Task B execution has maximal information gain now; the inherited stack, official source family, generic preflight, and zero-spend carrier already exist.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main 0292dc91d7b2354beede3e530256054330fb94d8, PR303 promotion guards, and the official PubChem PUG REST property specification were refreshed immediately before task freeze; no unresolved plausible dominator remains."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_STOICHIOMETRY_TASK",
+      "HAND_CODE_ONE_OFF_STOICHIOMETRY_SCRIPT",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKS",
+      "HAND_CODE_ONE_OFF_ANSWER_AS_PARENT_PROOF",
+      "MODEL_COGNITION",
+      "DEMOGRAPHY_REPLAY",
+      "ASTRONOMY_REPLAY",
+      "GEOPHYSICS_REPLAY",
+      "BIOPHYSICS_REPLAY",
+      "PUBCHEM_MOLECULAR_WEIGHT_VARIANT_WITH_KNOWN_STRING_TO_RELATION_TYPE_MISMATCH"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_STOICHIOMETRY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It attacks the only remaining parent proof obligation using already-acquired capabilities, an official zero-key JSON source, an existing generic answer-blind preflight, and the established $0 public carrier; no runtime implementation is needed before evidence.",
+    "expected_parent_level_state_change": "Either satisfy the remaining clean cross-domain Task B proof with one independently verified zero-model-dependency chemistry task on the inherited route and immediately adjudicate parent acquisition, or localize the first new causal gap without replay.",
+    "stop_condition": "Freeze PARENT-CHEMISTRY-OCTANE-COMBUSTION-ATOM-BALANCE-20260930-001 before any exact source-value probe; run only the generic answer-blind source/type preflight. If it passes, execute the frozen task exactly once on exact Brain bytes with runtime-derived cognition provenance and independently re-fetch/recompute without producer imports. On first causal failure preserve the evidence and never replay the spent task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:35:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_STOICHIOMETRY_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 0292dc91d7b2354beede3e530256054330fb94d8",
+          "five verified model-independent child capabilities plus PR303 runtime cognition provenance"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "PubChem PUG REST official specification lists HeavyAtomCount as a compound property and defines it as number of non-hydrogen atoms"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "current verified Brain runtime/registry; no new supplier or package required"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No material external framework challenger is required for this single remaining proof obligation"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent cross-domain chemistry stoichiometric atom conservation multi-source quantitative verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "official PubChem PUG REST HeavyAtomCount JSON"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "current Brain inherited stack versus one-off stoichiometry script"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current PubChem PUG REST compound property specification"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_STOICHIOMETRY_TASK",
+          "evidence": [
+            "current Brain stack supports authoritative JSON acquisition, typed scalar expressions, bounded relations, composition, and independent verification",
+            "generic source/type preflight already exists"
+          ],
+          "qualification_evidence": [
+            "Brain main 0292dc91d7b2354beede3e530256054330fb94d8",
+            "PubChem official PUG REST specification",
+            "verification-capsule-runner generic JSON source preflight"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Direct integrated cross-domain behavior test with independent oracle.",
+            "CAPABILITY_STRENGTH": "Fresh chemistry domain, four authoritative observations, semantic multi-source arithmetic, conservation relation, and runtime provenance.",
+            "WALL_CLOCK": "No runtime build required before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Official PubChem API plus established public carrier.",
+            "VERIFIABILITY": "Answer-blind type preflight then independent re-fetch/recompute."
+          }
+        },
+        {
+          "route": "HAND_CODE_ONE_OFF_STOICHIOMETRY_SCRIPT",
+          "evidence": [
+            "Would solve the instance."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can solve one instance.",
+            "CAPABILITY_STRENGTH": "Does not establish inherited parent transfer.",
+            "WALL_CLOCK": "Fast to an answer but not to terminal capability evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for the instance.",
+            "VERIFIABILITY": "Fails the inherited-route proof obligation."
+          }
+        }
+      ],
+      "negative_search_summary": "No material challenger dominates direct inherited-stack execution on correctness, time-to-parent-proof, cost, or admissibility.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_STOICHIOMETRY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:35:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_PUBCHEM_STOICHIOMETRY_TASK",
+        "status": "READY_PENDING_EXACT_SOURCE_TYPE_PREFLIGHT",
+        "all_required_dependencies_ready": false,
+        "failed_dependencies": [
+          "PUBCHEM_EXACT_TASK_SOURCE_TYPE_PREFLIGHT_PENDING"
+        ],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:24:39Z",
+            "evidence": [
+              "DIRECT_PROBE: clean demography parent run 36667844172 completed on the established public carrier at zero model dependency and zero incremental spend",
+              "Carrier main contains generic answer-blind JSON source preflight"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_0292dc91d7b2354beede3e530256054330fb94d8",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:35:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact current main including PR303 provenance firewall"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBCHEM_EXACT_TASK_SOURCE_JSON_TYPES",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "PENDING",
+            "observed_at_utc": "2026-09-30T04:35:00Z",
+            "evidence": [
+              "Task will be frozen before exact endpoint values/types are probed"
+            ],
+            "evidence_classes": [
+              "PRECOMMITMENT"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": false
+      }
+    }
+  },
+  "execution_result": {
+    "public_run_id": 36667844172,
+    "public_job_id": 109736256301,
+    "public_head_sha": "03f78265957d92c15887e225ff79b61952dec844",
+    "artifact_id": 11076359417,
+    "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+    "producer_status": "COMPLETED",
+    "independent_oracle_verified": true,
+    "verified_parent_task": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "execution_count": 1,
+    "same_task_replay_allowed": false
+  },
+  "post_execution_obs": {
+    "goal": "PRESERVE_VERIFIED_DEMOGRAPHY_RESULT__DO_NOT_REPLAY",
+    "capability": "COUNT_ONE_CLEAN_MODEL_INDEPENDENT_PARENT_REAL_TASK__DO_NOT_PROMOTE_PARENT_YET",
+    "blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+    "solution": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B_ON_INHERITED_ROUTE",
+    "verification": "PUBLIC_RUN_FAIL_CLOSED_TERMINAL_GATE__INDEPENDENT_REFETCH_AND_RECOMPUTE__EXACT_RUNTIME_BLOB_IDENTITY_AUDIT",
+    "inherited_system": "OLD_SPACE_CARGO_TASK_A_PRESERVED_AS_HISTORICAL_RESULT_BUT_REMOVED_FROM_FRONTIER_DEPENDENCY_REMOVAL_PROOF",
+    "obs_obs": "STOP_DEMOGRAPHY_TASK__NO_TUNING_OR_REPLAY__RETURN_TO_PARENT_REAL_TASK_FRONTIER"
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared all execution-critical Task B runtime blobs to exact Brain main; all matched.",
+      "Searched task branch for task-specific runtime paths; none existed.",
+      "Audited old Task A model dependence and rejected it for frontier dependency-removal credit."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json"
+    ],
+    "independent_verification_evidence_paths": [
+      "PUBLIC_RUN_36667844172__ARTIFACT_11076359417__sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326"
+    ],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": true,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "GPT-5.6 Sol / ChatGPT Deep Research",
+    "producer_execution_suppliers": [
+      "PROJECT_BRAIN_MODEL_INDEPENDENT_RUNTIME",
+      "WORLD_BANK_INDICATORS_API"
+    ],
+    "independent_verifier_suppliers": [
+      "PYTHON_STDLIB_URLLIB_AND_ARITHMETIC",
+      "WORLD_BANK_INDICATORS_API"
+    ]
+  }
+}
