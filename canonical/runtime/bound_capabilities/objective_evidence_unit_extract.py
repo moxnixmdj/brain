@@ -272,18 +272,17 @@ def _qualified_relevance_source(objective, candidate, provenance, relevance):
         if receipt_objective and receipt_objective != objective:
             return None, "RELEVANCE_OBJECTIVE_MISMATCH"
         rows = relevance.get("ranked_candidates")
-        top_index = relevance.get("top_candidate_original_index")
-        if not isinstance(rows, list) or top_index is None:
+        if not isinstance(rows, list):
             return None, "RELEVANCE_SELECTION_MISSING"
         selected = None
         for row in rows:
-            if isinstance(row, dict) and row.get("original_index") == top_index:
+            if not isinstance(row, dict):
+                continue
+            ranked_candidate = row.get("candidate") or {}
+            if _url_key(ranked_candidate.get("url")) == _url_key(candidate_url):
                 selected = row
                 break
         if not selected:
-            return None, "RELEVANCE_SELECTED_ROW_MISSING"
-        selected_candidate = selected.get("candidate") or {}
-        if _url_key(selected_candidate.get("url")) != _url_key(candidate_url):
             return None, "CANDIDATE_NOT_SELECTED_BY_RELEVANCE_RECEIPT"
         if float(selected.get("lexical_relevance_score") or 0.0) <= 0:
             return None, "NONPOSITIVE_RELEVANCE_SCORE"
