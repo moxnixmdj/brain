@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 9,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 10
+    "residual_gaps_localized": 11
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+  "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION__SEARCH_REUSE_AND_COMPOSE_EXISTING_VERIFIED_CAPABILITIES_BEFORE_REPAIR__NO_SQLITE_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -504,17 +504,44 @@
       "progress_credit": "AUTHORITY_MIRROR_RECONCILIATION_ONLY",
       "parent_capability_promoted": false,
       "execution_count": 0
+    },
+    {
+      "event_id": "PARENT_SQLITE_OPENENDED_FIRST_CAUSAL_GAP_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FRESH_PARENT_REAL_TASK_FAILED__FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPENENDED_TASK_A_FIRST_SPEND_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36674205874,
+      "public_job_id": 109755520636,
+      "artifact_id": 11078364401,
+      "artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED",
+      "residual_gap": "BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION_MISSING__RUNTIME_FALLS_TO_NO_COMPATIBLE_SUPPLIER_CONTRACT",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "same_task_replay_allowed": false,
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "CARRIER_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT__PARENT_NOT_YET_ACQUIRED",
+    "active_subcapability_target": "BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION_MISSING__RUNTIME_FALLS_TO_NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "subcapability_status": "FRESH_SQLITE_TASK_A_SPENT_FAIL__GENERIC_BROAD_GOAL_COMPOSITION_GAP_LOCALIZED",
     "frontier_dependency_removed": false,
-    "reconciliation_credit": 0,
+    "reconciliation_credit": 1,
     "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
-    "execution_count": 0,
-    "replay_allowed": false
+    "execution_count": 1,
+    "replay_allowed": false,
+    "authoritative_run_id": 36674205874,
+    "authoritative_artifact_id": 11078364401,
+    "authoritative_artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9",
+    "residual_gap": "BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION_MISSING__RUNTIME_FALLS_TO_NO_COMPATIBLE_SUPPLIER_CONTRACT"
   }
 }
