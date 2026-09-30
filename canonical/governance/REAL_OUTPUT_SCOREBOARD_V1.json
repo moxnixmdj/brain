@@ -6,9 +6,9 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 2,
-    "verified_real_tasks_completed": 5,
-    "fresh_reuse_passes": 1,
+    "reusable_capabilities_inherited": 3,
+    "verified_real_tasks_completed": 6,
+    "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
     "residual_gaps_localized": 5
   },
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RECONCILE_TO_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__THEN_RUN_ONE_MATERIALLY_DISTINCT_FRESH_REUSE_TASK__NO_SPENT_TASK_REPLAY",
+  "next_progress_event_target": "RUN_NEW_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NO_SPACE_CARGO_REUSE__NO_SERIALIZATION_REPLAY__MODEL_INDEPENDENT__INDEPENDENT_VERIFY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -236,7 +236,7 @@
     {
       "event_id": "MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFIED_20260930",
       "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-      "status": "REQUALIFIED_AFTER_REGRESSION_REPAIR__REUSABLE_CAPABILITY_RESTORED__NEW_REAL_TASK_VERIFIED__FRESH_REUSE_COUNTER_NOT_RESTORED_IN_THIS_ACTION",
+      "status": "REQUALIFIED_AFTER_REGRESSION_REPAIR__REUSABLE_CAPABILITY_RESTORED__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
       "capability_package": "canonical/capabilities/frontier/MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1.json",
       "repair_merge_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
       "exact_component_validation_run_id": 36651748631,
@@ -248,16 +248,45 @@
       "frontier_dependency_removed": false,
       "parent_level_changes": [
         "REUSABLE_CAPABILITY_INHERITED",
-        "VERIFIED_REAL_TASK_COMPLETED"
+        "VERIFIED_REAL_TASK_COMPLETED",
+        "FRESH_REUSE_PASS"
       ],
-      "next_causal_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__FRESH_REUSE_REQUIRED",
-      "incremental_spend_usd": 0
+      "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
+      "incremental_spend_usd": 0,
+      "fresh_reuse_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+      "fresh_reuse_run_id": 36652623916,
+      "fresh_reuse_artifact_id": 11071595189,
+      "fresh_reuse_artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a"
+    },
+    {
+      "event_id": "MODEL_INDEPENDENT_GROUNDED_EXECUTABLE_COMPOSITION_ACQUIRED_20260930",
+      "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+      "status": "VERIFIED_ACQUIRED__FRESH_REAL_AND_MATERIALLY_DISTINCT_REUSE_PASS",
+      "capability_package": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1.json",
+      "real_task_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+      "acquisition_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
+      "fresh_reuse_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+      "fresh_real_run_id": 36652169397,
+      "fresh_reuse_run_id": 36652623916,
+      "fresh_reuse_artifact_id": 11071595189,
+      "fresh_reuse_artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a",
+      "real_tasks_verified": 1,
+      "fresh_reuse_passed": true,
+      "frontier_dependency_removed": false,
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "REUSABLE_CAPABILITY_INHERITED",
+        "VERIFIED_REAL_TASK_COMPLETED",
+        "FRESH_REUSE_PASS"
+      ],
+      "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED"
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-    "subcapability_status": "REQUALIFIED_ACQUIRED_VERIFIED__RECONCILIATION_PENDING",
+    "active_subcapability_target": null,
+    "subcapability_status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_ACQUIRED_VERIFIED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
