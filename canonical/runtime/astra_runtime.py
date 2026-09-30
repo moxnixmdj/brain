@@ -4885,6 +4885,34 @@ def _load_open_research_source_frontend():
     return module
 
 
+def _load_open_research_claim_relation():
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"open_research_claim_relation.py"
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_open_research_claim_relation",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("OPEN_RESEARCH_CLAIM_RELATION_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _run_open_research_claim_relation(mission, goal, source_frontend):
+    module=_load_open_research_claim_relation()
+    try:
+        result=module.evaluate(goal,source_frontend)
+    except Exception as exc:
+        raise Blocker(
+            "OPEN_RESEARCH_CLAIM_RELATION_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__OPEN_RESEARCH_CLAIM_RELATION.json"
+    writej(path,result)
+    return path,result
+
+
 def _run_open_research_source_frontend(mission, goal, decomposition):
     module=_load_open_research_source_frontend()
     try:
@@ -5638,9 +5666,36 @@ def _run_goal_unstamped(step, mission):
                         payload["evidence_extracted_candidate_count"]=int(
                             source_frontend.get("evidence_extracted_candidate_count") or 0
                         )
+                        relation_path,relation=_run_open_research_claim_relation(
+                            mission,grounding_goal,source_frontend
+                        )
+                        payload["claim_relation_evidence_path"]=str(
+                            relation_path.relative_to(ROOT)
+                        )
+                        payload["claim_relation_status"]=relation.get("status")
+                        if relation.get("status")=="OPEN_RESEARCH_CLAIM_RELATION_VERIFIED" and relation.get("output_verified") is True:
+                            return {
+                              "adapter":"open_research_claim_relation",
+                              "status":"OPEN_RESEARCH_CLAIM_RELATION_VERIFIED",
+                              "stdout":"COMPOUND_GOAL_COMPLETE\n",
+                              "research_plan":relation.get("research_plan"),
+                              "source_provenance":relation.get("source_provenance"),
+                              "tool_provenance":relation.get("tool_provenance"),
+                              "experiment":relation.get("experiment"),
+                              "observations":relation.get("observations"),
+                              "decision":relation.get("decision"),
+                              "limitations":relation.get("limitations"),
+                              "independent_verification":relation.get("independent_verification"),
+                              "source_frontend_evidence_path":str(source_path.relative_to(ROOT)),
+                              "claim_relation_evidence_path":str(relation_path.relative_to(ROOT)),
+                              "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+                              "model_dependency_count":0,
+                              "incremental_spend_usd":0,
+                              "output_verified":True,
+                            }
                         raise Blocker(
                             "OPEN_ENDED_RESEARCH_EVIDENCE_EXTRACTED__"
-                            "CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED:"
+                            "CLAIM_RELATION_BINDING_OR_VERIFICATION_BLOCKED:"
                             +json.dumps(payload,sort_keys=True)
                         ) from e
                     if int(source_frontend.get("relevance_verified_candidate_count") or 0)>0:
