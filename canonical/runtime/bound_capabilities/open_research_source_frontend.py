@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Model-independent source front-end for broad open research objectives.
 
-This composes already-qualified decomposition, source-candidate discovery, and
-provenance verification. It deliberately stops before authority/relevance,
-evidence extraction, or answer synthesis.
+This composes already-qualified decomposition, source-candidate discovery,
+provenance verification, and the independently-qualified ROR organization
+identity binder. It deliberately stops before primary-source/relevance
+verification, evidence extraction, or answer synthesis.
 """
 from __future__ import annotations
 
@@ -40,6 +41,7 @@ def run(objective,decomposition,limit=12,timeout=15):
 
     discovery=_load_sibling("open_web_source_candidate_discovery")
     verifier=_load_sibling("source_candidate_provenance_verify")
+    authority_identity=_load_sibling("source_authority_binding_ror")
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
         return {
@@ -77,10 +79,33 @@ def run(objective,decomposition,limit=12,timeout=15):
             "decomposition":decomposition,
             "discovery":discovered,
             "provenance_verifications":verifications,
+            "authority_identity_verifications":[],
             "next_required_capability":"MODEL_INDEPENDENT_SOURCE_CANDIDATE_PROVENANCE_VERIFICATION_V1",
             "model_dependency_count":0,
             "incremental_spend_usd":0,
         }
+
+    authority_verifications=[]
+    for item in verified:
+        provenance=item["verification"]
+        if provenance.get("status")!="RETRIEVAL_PROVENANCE_VERIFIED":
+            continue
+        candidate=dict(item["candidate"])
+        if provenance.get("final_url"):
+            candidate["final_url"]=provenance.get("final_url")
+        if provenance.get("final_host"):
+            candidate["final_host"]=provenance.get("final_host")
+        bound=authority_identity.bind_candidate(candidate,timeout=timeout)
+        authority_verifications.append({
+            "candidate":item["candidate"],
+            "provenance":provenance,
+            "authority_identity":bound,
+        })
+    authority_verified=[
+        x for x in authority_verifications
+        if x["authority_identity"].get("status")=="AUTHORITY_IDENTITY_VERIFIED"
+    ]
+    identity_ready=bool(authority_verified)
 
     return {
         "schema":SCHEMA,
@@ -91,17 +116,33 @@ def run(objective,decomposition,limit=12,timeout=15):
         "discovery":discovered,
         "provenance_verifications":verifications,
         "provenance_verified_candidate_count":len(verified),
+        "authority_identity_verifications":authority_verifications,
+        "authority_identity_verified_candidate_count":len(authority_verified),
+        "authority_identity_claim_scope":"HOST_TO_ROR_ORGANIZATION_DOMAIN_BINDING_ONLY",
         "authority_verified_candidate_count":0,
         "primary_source_verified_candidate_count":0,
         "relevance_verified_candidate_count":0,
         "role_progress":{
-            "SOURCE_DISCOVERY":"CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE",
-            "EVIDENCE_ACQUISITION":"BLOCKED_ON_AUTHORITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION",
+            "SOURCE_DISCOVERY":(
+                "CANDIDATES_WITH_PROVENANCE_AND_ORGANIZATION_IDENTITY_AVAILABLE"
+                if identity_ready else
+                "CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE"
+            ),
+            "EVIDENCE_ACQUISITION":(
+                "BLOCKED_ON_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+                if identity_ready else
+                "BLOCKED_ON_AUTHORITY_IDENTITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+            ),
             "EVIDENCE_EXTRACTION":"NOT_STARTED",
             "RELATION_EVALUATION":"NOT_STARTED",
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
-        "next_required_capability":"MODEL_INDEPENDENT_SOURCE_AUTHORITY_PRIMARY_EVIDENCE_AND_RELEVANCE_VERIFICATION",
+        "next_required_capability":(
+            "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
+            if identity_ready else
+            "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+        ),
+        "authority_identity_claims_made":identity_ready,
         "authority_claims_made":False,
         "primary_source_claims_made":False,
         "relevance_claims_made":False,

@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTEGRATE-ROR-AUTHORITY-IDENTITY-INTO-OPEN-RESEARCH-FRONTEND-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_QUALIFICATION",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "action_kind": "QUALIFIED_CAPABILITY_COMPOSITION",
+  "inherited_verified_capability": "source.authority.identity.ror",
+  "causal_change": "Provenance-verified live web candidates are passed through the independently-qualified exact-domain ROR organization identity binder before ASTRA reports the next blocker.",
+  "safety_boundary": "Organization identity never becomes primary-source status, objective relevance, factual correctness, evidence sufficiency, or claim endorsement.",
+  "expected_frontier_when_identity_available": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
