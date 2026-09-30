@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-CURRENTBASE-OPEN-RESEARCH-CLAIM-PIPELINE-INTEGRATION-20260930-V2",
+  "status": "VERIFIED_READY_FOR_MERGE",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "68cfedf4534420d111ee3b665106d342d237683c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+  "action_kind": "PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "highest_leverage_now": true,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "evidence_presence_classification": "GUARDED_RED_GREEN_QUALIFICATION_COMPLETE",
+  "qualification_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_OPEN_RESEARCH_CLAIM_PIPELINE_INTEGRATION_QUALIFICATION_20260930_V1.json",
+  "expected_parent_frontier_change": "Remove only the parent-path integration blocker. Keep parent capability unpromoted and HTTP2 Task A unspent; repin its guarded carrier to the new runtime before the single execution.",
+  "stop_condition": "Merge exact qualified runtime/frontend/test blobs on current base with zero child capability credit and zero parent task execution."
+}
