@@ -1,0 +1,375 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTEGRATE-CURRENTBASE-GENERIC-CLAIM-RELATION-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Integrate independently qualified MODEL_INDEPENDENT_GENERIC_EVIDENCE_CLAIM_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1 at exact bounded scope, leave global scoreboard counters unchanged, close MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1, and advance the parent frontier to one fresh genuinely open-ended model-independent Task A rather than guessing the next subcapability.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "live main 92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "generic extraction current-byte requalification run 36681368306",
+    "stale Brain PR436 exact candidate producer d66a7eb30774f66160b698d8082947776888293d",
+    "stale Brain PR436 exact regression 590a1e50f11bc2903b56d41a00c5354ec2501c44",
+    "public verification PR161 exact-byte run 36682132201 job 109779695737 SUCCESS",
+    "deferred PR421 bounded semantics",
+    "existing two-scalar numeric relation, typed numeric expression, and decision-synthesis capabilities"
+  ],
+  "evidence_presence_classification": "EXACT_CANDIDATE_BYTES_ALREADY_INDEPENDENTLY_QUALIFIED__CURRENT_BASE_INTEGRATION_ONLY",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "scoreboard_counter_increase_requested": false,
+  "progress_credit": "VERIFIED_SUBCAPABILITY_INTEGRATION__ZERO_GLOBAL_SCORE_DELTA",
+  "stop_condition": "Stop after exact qualified producer/test bytes are integrated and registered as VERIFIED_BOUND_CAPABILITY, canonical evidence/package records bind public run 36682132201, all frontier mirrors advance to a fresh open-ended parent Task A with zero global counter delta, and exact-head trusted validation passes.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "real_outcome": "Bridge verified generic V2 evidence units to auditable exact-text support and explicit numeric relation facts without semantic overclaim, then spend a fresh parent task to reveal the next real gap.",
+    "required_capability": "MODEL_INDEPENDENT_GENERIC_EVIDENCE_CLAIM_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+    "obs_goal": {
+      "real_outcome": "Integrate only the already-qualified bounded claim/relation behavior and use it to unlock a fresh parent task.",
+      "proxy_goals_deleted": [
+        "semantic entailment",
+        "paraphrase inference",
+        "factual truth adjudication",
+        "causal inference",
+        "evidence sufficiency",
+        "parent replay",
+        "new model supplier",
+        "new bridge implementation"
+      ],
+      "surviving_necessity": "The verified generic extractor stops before typed support/relation facts; downstream decision execution needs a bounded typed bridge."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "stale PR421/PR436 bounded bridge pattern"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib Decimal exact decimal arithmetic",
+        "Python built-in exact substring search primitives",
+        "heavier semantic/NLI libraries considered as broader non-dominating routes"
+      ],
+      "capability_work_deleted": [
+        "No reimplementation of producer bytes",
+        "No new qualification capsule",
+        "No embeddings",
+        "No NLI model",
+        "No new numeric engine",
+        "No parent-task replay"
+      ],
+      "surviving_gap": "Bind the independently qualified exact producer/test bytes to current canonical registry and provenance, then expose the next gap by fresh parent execution."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Post-extraction typed evidence seam; implementation and verification already exist, only current-base integration is missing.",
+      "delete_bypass_substitute_options": [
+        "Delete semantic-entailment scope from this step.",
+        "Bypass new implementation because exact candidate bytes already passed independent qualification.",
+        "Reuse existing Decimal and exact substring semantics.",
+        "Reuse public verification run 36682132201 instead of rerunning."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXACT_QUALIFIED_D66A7_BRIDGE_ON_CURRENT_BASE",
+        "RECOMPOSE_EXISTING_NUMERIC_AND_DECISION_COMPONENTS_WITH_NEW_GLUE",
+        "MODEL_SEMANTIC_JUDGE"
+      ],
+      "losing_routes_reason": "The exact bridge already passed authored fail-closed regressions and fresh independent cross-domain qualification; recomposition adds unverified glue, while semantic-model judgment broadens scope and violates model-independence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new synthetic run. Reuse exact-byte independent public qualification run 36682132201, which verified producer/test hashes, fail-closed regressions, fresh World Bank numeric relation and PyPI exact-text support with independent Decimal/text oracles."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "stale PR436 lease",
+        "deferred PR421 as active route",
+        "duplicate claim/relation bridge implementations"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic V2 evidence extraction",
+        "exact Decimal relation evaluation",
+        "typed decision synthesis"
+      ],
+      "fresh_reuse_plan": "After integration, freeze one materially new genuinely open-ended model-independent parent Task A and execute it exactly once. Do not guess the next gap before that run."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact stale-PR candidate bytes",
+        "reused successful public verifier",
+        "reused current extraction contract",
+        "deleted duplicate implementation and verification work"
+      ],
+      "search_stop_decision": "Search stops because the incumbent exact-byte route is already independently qualified at $0 and no discovered challenger improves its bounded correctness/reliability enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Challenger frontier refreshed immediately before integration; reopen only if exact-head integration changes bytes, qualification evidence is invalidated, or the fresh parent task falsifies the bounded bridge."
+    },
+    "routes_considered": [
+      "REUSE_EXACT_QUALIFIED_D66A7_BRIDGE_ON_CURRENT_BASE",
+      "RECOMPOSE_EXISTING_NUMERIC_AND_DECISION_COMPONENTS_WITH_NEW_GLUE",
+      "MODEL_SEMANTIC_JUDGE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REIMPLEMENT_CLAIM_RELATION_BRIDGE",
+      "NEW_PUBLIC_QUALIFICATION_CAPSULE",
+      "PARENT_TASK_REPLAY",
+      "SEMANTIC_NLI_MODEL_FOR_BOUNDED_EXACT_SCOPE"
+    ],
+    "selected_surviving_route": "REUSE_EXACT_QUALIFIED_D66A7_BRIDGE_ON_CURRENT_BASE",
+    "why_selected_route_is_fastest_sufficient": "Exact producer/test bytes already passed independent fresh cross-domain verification; current-base integration is the only remaining causal work, with zero incremental spend and narrower claims than model-based alternatives.",
+    "expected_parent_level_state_change": "Integrate independently qualified MODEL_INDEPENDENT_GENERIC_EVIDENCE_CLAIM_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1 at exact bounded scope, leave global scoreboard counters unchanged, close MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1, and advance the parent frontier to one fresh genuinely open-ended model-independent Task A rather than guessing the next subcapability.",
+    "stop_condition": "Stop after exact qualified producer/test bytes are integrated and registered as VERIFIED_BOUND_CAPABILITY, canonical evidence/package records bind public run 36682132201, all frontier mirrors advance to a fresh open-ended parent Task A with zero global counter delta, and exact-head trusted validation passes.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T07:18:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_EXACT_QUALIFIED_D66A7_BRIDGE_ON_CURRENT_BASE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain PR436 producer d66a7eb30774f66160b698d8082947776888293d and test 590a1e50f11bc2903b56d41a00c5354ec2501c44",
+          "Brain PR421 prior bounded behavior",
+          "existing numeric relation / numeric expression / decision synthesis subcapabilities"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/decimal.html",
+          "Python stdlib exact substring primitives"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "moxnixmdj/verification-capsule-runner PR161 exact mirrored blobs",
+          "CPython stdlib decimal/hashlib/json/pathlib/re modules; no additional package dependency"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026-09-30 challenger search for exact claim evidence + numeric relation libraries found no material route dominating the already-qualified bounded stdlib bridge"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "exact provenance-bound claim support explicit decimal relation over evidence units"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Python library claim evidence numeric relation exact text support"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "stdlib exact substring Decimal comparison evidence unit integrity"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 Python evidence claim relation NLI package exact numeric comparison"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_EXACT_QUALIFIED_D66A7_BRIDGE_ON_CURRENT_BASE",
+          "evidence": [
+            "Brain PR436 exact producer/test bytes",
+            "public verifier PR161"
+          ],
+          "qualification_evidence": [
+            "public run 36682132201 job 109779695737 SUCCESS"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact bounded semantics independently verified",
+            "CAPABILITY_STRENGTH": "Sufficient for current exact-text/explicit-relation seam only",
+            "WALL_CLOCK": "Integration only; no new build/run",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Fail-closed integrity/unit/reference checks",
+            "VERIFIABILITY": "Exact blobs + independent fresh cross-domain oracle"
+          }
+        },
+        {
+          "route": "RECOMPOSE_EXISTING_NUMERIC_AND_DECISION_COMPONENTS_WITH_NEW_GLUE",
+          "evidence": [
+            "Existing numeric and decision capabilities"
+          ],
+          "qualification_evidence": [
+            "No independently qualified generic V2 glue currently exceeds d66a7 route"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Would require new glue proof",
+            "CAPABILITY_STRENGTH": "No stronger bounded semantics",
+            "WALL_CLOCK": "Slower",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Unproven new seam",
+            "VERIFIABILITY": "Would require new qualification"
+          }
+        },
+        {
+          "route": "MODEL_SEMANTIC_JUDGE",
+          "evidence": [
+            "Public NLI/semantic-model ecosystem discovery"
+          ],
+          "qualification_evidence": [
+            "Disqualified by current model-independent target and broader unsupported claim scope"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Broader but not exact-proof-preserving for this seam",
+            "CAPABILITY_STRENGTH": "Unneeded broader semantics",
+            "WALL_CLOCK": "Higher integration/qualification cost",
+            "INCREMENTAL_COST": "Potentially nonzero or compute-heavy",
+            "RELIABILITY": "Model-dependent",
+            "VERIFIABILITY": "Harder and circular for current goal"
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger materially improves the current bounded seam across correctness, wall-clock, $0 cost, reliability and exact independent verifiability.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_EXACT_QUALIFIED_D66A7_BRIDGE_ON_CURRENT_BASE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:18:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_EXACT_QUALIFIED_D66A7_BRIDGE_ON_CURRENT_BASE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Python stdlib runtime for decimal/hashlib/json/pathlib/re",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STABLE",
+            "scope": "PUBLIC_GENERIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:18:00Z",
+            "evidence": [
+              "Python official Decimal documentation",
+              "public verifier run 36682132201 executed exact producer successfully"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "PUBLIC_GENERIC"
+          },
+          {
+            "dependency": "Connected GitHub canonical write path",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:18:00Z",
+            "evidence": [
+              "DIRECT_PROBE: current session successfully closed stale PR436 and read current main/open-PR state"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "Independent exact-byte qualification evidence",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "STABLE",
+            "scope": "PUBLIC_GENERIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:18:00Z",
+            "evidence": [
+              "verification-capsule-runner run 36682132201 job 109779695737 SUCCESS"
+            ],
+            "evidence_classes": [
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "PUBLIC_GENERIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "paraphrase exact-support negative",
+      "unit mismatch rejection",
+      "tampered evidence text hash rejection",
+      "tampered evidence-unit ID rejection",
+      "unsupported operator rejection",
+      "bad numeric reference rejection",
+      "fresh cross-domain independent World Bank/PyPI qualification"
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [],
+    "independent_verification_evidence_paths": [],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": false,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "",
+    "producer_execution_suppliers": [
+      "Python stdlib"
+    ],
+    "independent_verifier_suppliers": [
+      "GitHub Actions public runner",
+      "independent Decimal/text oracle"
+    ]
+  }
+}
