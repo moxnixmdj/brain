@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import importlib.util
+import json
 import pathlib
+import shutil
+import subprocess
 import sys
 import unittest
 
@@ -70,6 +73,49 @@ class NumericRelationJqReuseTests(unittest.TestCase):
         self.assertEqual(compute["args"]["capability_id"],"json.query.jq")
         self.assertIn("fabs",compute["args"]["filter"])
         self.assertIn("predicate",compute["args"]["filter"])
+
+    def relation_filter(self):
+        compiled=self.compile_relation()
+        return compiled["controller_actions"][3]["args"]["filter"]
+
+    def run_relation_filter(self,left,right,threshold=0.05):
+        jq=shutil.which("jq")
+        if jq is None:
+            self.skipTest("jq executable unavailable")
+        payload=json.dumps([{"left":left,"right":right,"threshold":threshold}])
+        return subprocess.run(
+            [jq,"-c",self.relation_filter()],
+            input=payload,text=True,capture_output=True,timeout=10,
+        )
+
+    def test_runtime_filter_accepts_strict_finite_numeric_text(self):
+        proc=self.run_relation_filter("53.49",53.50,0.02)
+        self.assertEqual(proc.returncode,0,proc.stderr)
+        out=json.loads(proc.stdout)
+        self.assertAlmostEqual(out["left"],53.49)
+        self.assertAlmostEqual(out["right"],53.50)
+        self.assertTrue(out["predicate"])
+
+    def test_runtime_filter_accepts_scientific_numeric_text(self):
+        proc=self.run_relation_filter("1e2",100,0)
+        self.assertEqual(proc.returncode,0,proc.stderr)
+        out=json.loads(proc.stdout)
+        self.assertEqual(out["absolute_difference"],0)
+        self.assertTrue(out["predicate"])
+
+    def test_runtime_filter_rejects_non_numeric_boolean_and_overflow_text(self):
+        for bad in ("53 kg",True,"1e999"):
+            with self.subTest(bad=bad):
+                proc=self.run_relation_filter(bad,1,1)
+                self.assertNotEqual(proc.returncode,0)
+
+    def test_filter_exposes_fail_closed_normalization_contract(self):
+        filt=self.relation_filter()
+        self.assertIn("strictnum",filt)
+        self.assertIn("tonumber",filt)
+        self.assertIn("isinfinite",filt)
+        self.assertIn("isnan",filt)
+        self.assertIn("NUMERIC_RELATION_INPUT_NOT_NUMBER",filt)
 
     def test_domain_wording_and_scientific_notation_do_not_change_route(self):
         compiled=self.compile_relation(noun="temperatures",threshold="2e-1")
