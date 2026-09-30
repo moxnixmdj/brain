@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_CLAIM_SPEC_OPERAND_BINDING_GUARDED_REQUALIFICATION_V1",
+  "status": "PASS__PROMOTION_AUTHORITY_REPAIRED__NO_COUNTER_DELTA",
+  "checked_on": "2026-09-30",
+  "canonical_base_commit": "84b7779f66e1f37970cb8df1cbac0b8d09037a34",
+  "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "exact_bytes": {
+    "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "regression_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+    "inherited_relation_git_blob": "d66a7eb30774f66160b698d8082947776888293d"
+  },
+  "guarded_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 167,
+    "head_sha": "4c61fe4f48b401041ae7220febce945805ed32af",
+    "workflow_run_id": 36686583882,
+    "job_id": 109793738883,
+    "admission_attempt_id": "7d9e1ed58e61497a9a1ab4ab8ee779ce",
+    "admission_status": "CURRENT_RUN_ADMITTED",
+    "run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882",
+    "child_started": true,
+    "child_returncode": 0,
+    "artifact_id": 11083254225,
+    "artifact_digest": "sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d",
+    "authored_regressions": "17_OF_17_PASS",
+    "independent_qualification": "PASS",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "prior_evidence_correction": {
+    "workflow_run_id": 36685279194,
+    "disposition": "DIAGNOSTIC_ONLY__NOT_PROMOTION_AUTHORITY",
+    "reason": "Direct qualification bypassed the mandatory global execution guard after cutover."
+  },
+  "canonical_effect": {
+    "implementation_changed": false,
+    "capability_credit_delta": 0,
+    "residual_gap_delta": 0,
+    "parent_capability_promoted": false,
+    "parent_replay_authorized": false,
+    "current_child_credit_preserved": true,
+    "next_parent_validation": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003"
+  }
+}
