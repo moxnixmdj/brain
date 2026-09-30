@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-MISSION-PATH-PYPI-BENCODE-CANARY-002",
+  "purpose": "Fresh materially distinct non-parent seam canary. Reach autonomous supplier acquisition through the canonical ASTRA CLI without vocabulary that can ground to an already-bound binary codec.",
+  "goal": "Serialize canonical/astra_runtime/tmp/MISSION_PATH_PYPI_BENCODE_CANARY_INPUT.json to canonical/astra_runtime/tmp/MISSION_PATH_PYPI_BENCODE_CANARY_OUTPUT.bencode.",
+  "steps": [
+    {
+      "id": "execute-fresh-mission-path-bencode-canary",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "allow_optional_model_planner": false,
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "non_parent_canary": true,
+    "parent_capability_credit": false,
+    "same_canary_replay": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "model_controller_required": false,
+    "acceptance": "The goal must reach autonomous acquisition. APT_ORIGIN_MISSION_PATH_INVALID and PYPI_ORIGIN_MISSION_PATH_INVALID are forbidden terminal causes. Any later supplier-contract failure is sufficient to qualify the mission-path propagation seam."
+  }
+}
