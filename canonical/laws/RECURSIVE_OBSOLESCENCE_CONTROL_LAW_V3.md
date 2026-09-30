@@ -2,22 +2,21 @@
 
 Status: CANONICAL / MANDATORY / FAIL-CLOSED
 
-## V5 capability-ownership override
+## V6 capability-internalization override
 
 This control law is subordinate to:
-- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md
-- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md
-- canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md
+- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md
+- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md
+- canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md
+- canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md
 
 For the current program:
-- external/JIT applies to knowledge, not capability ownership;
-- capability search discovers already-existing realizations to configure and save permanently in Brain;
-- capability invention is forbidden;
-- any older DELETE/BYPASS/REUSE/SUBSTITUTE/COMPOSE/REPAIR/BUILD wording interprets BUILD as integration/configuration/verification glue only, never invention of the underlying useful capability;
-- every consequential OBS conclusion requires a durable reasoning decision receipt; chat-only rationale has zero authority.
-
-Supersedes:
-- canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md
+- external/JIT applies to knowledge;
+- external winning systems/models are capability specimens, not owned implementations;
+- capability search continues until an already-existing reusable mechanism/configuration can be internalized into Brain;
+- models may be general computation substrates but cannot be opaque target-capability providers for ownership credit;
+- BUILD means encoding/integration glue around an already-existing mechanism, never invention;
+- every consequential OBS conclusion requires a durable reasoning receipt.
 
 ## Purpose
 
