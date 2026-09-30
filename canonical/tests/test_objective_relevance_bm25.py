@@ -58,6 +58,60 @@ class ObjectiveRelevanceTests(unittest.TestCase):
         out=self.m.rank("sqlite backup consistency",c)
         self.assertEqual(out["top_candidate_original_index"],0,out)
 
+    def test_comparative_admission_rejects_wrong_property_or_operand(self):
+        objective=(
+          "Determine whether the room-temperature thermal conductivity of annealed Alloy 6061 "
+          "is greater than that of annealed Steel 304."
+        )
+        candidates=[
+          {
+            "title":"Thermal ignition temperature of annealed Alloy 6061 and Steel 302",
+            "snippet":"room-temperature alloy 6061 annealed stainless steel ignition temperature measurements",
+          },
+          {
+            "title":"Thermal conductivity of annealed Alloy 6061 and Steel 304",
+            "snippet":"room-temperature conductivity measurements for annealed alloy 6061 and steel 304",
+          },
+        ]
+        out=self.m.rank(objective,candidates)
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertIsNotNone(out["decision_role_spec"],out)
+        rows={x["original_index"]:x for x in out["ranked_candidates"]}
+        self.assertFalse(rows[0]["decision_role_admission"]["verified"],rows[0])
+        self.assertTrue(rows[1]["decision_role_admission"]["verified"],rows[1])
+        self.assertEqual(out["top_candidate_original_index"],1,out)
+        self.assertTrue(out["top_candidate_admission"]["verified"],out)
+
+    def test_comparative_admission_requires_both_distinct_entities_cross_domain(self):
+        objective="Determine whether France population growth is greater than Germany population growth."
+        candidates=[
+          {
+            "title":"France and Spain population growth comparison",
+            "snippet":"population growth France Spain annual demographic rates",
+          },
+          {
+            "title":"France and Germany population growth comparison",
+            "snippet":"population growth France Germany annual demographic rates",
+          },
+        ]
+        out=self.m.rank(objective,candidates)
+        rows={x["original_index"]:x for x in out["ranked_candidates"]}
+        self.assertFalse(rows[0]["decision_role_admission"]["verified"],rows[0])
+        self.assertTrue(rows[1]["decision_role_admission"]["verified"],rows[1])
+        self.assertEqual(out["top_candidate_original_index"],1,out)
+
+    def test_noncomparison_objective_preserves_legacy_coverage_contract(self):
+        out=self.m.rank(
+          "find official python csv module documentation",
+          [
+            {"title":"Python csv module","snippet":"CSV reading writing documentation"},
+            {"title":"Weather forecast","snippet":"rain"},
+          ],
+        )
+        self.assertIsNone(out["decision_role_spec"],out)
+        self.assertFalse(out["top_candidate_admission"]["decision_role_coverage"]["applicable"])
+        self.assertTrue(out["top_candidate_admission"]["verified"])
+
     def test_run_writes_narrow_claim(self):
         inp=ROOT/"canonical/astra_runtime/tmp/relevance_input.json"
         outp=ROOT/"canonical/astra_runtime/tmp/relevance_output.json"
