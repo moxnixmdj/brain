@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ENFORCE-CANONICAL-FRONTIER-MIRROR-CONSISTENCY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_POINTER_FRONTIER_MIRROR_STALE_VERSUS_HIERARCHY_AND_QUEUE",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_POINTER_FRONTIER_MIRROR_STALE_VERSUS_HIERARCHY_AND_QUEUE",
+  "expected_parent_frontier_change": "Make canonical pointer, active hierarchy, and frontier queue agree fail-closed on active capability target, causal blocker, and next required action; repair the live Task-A/Task-B mirror drift.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Live main pointer says fresh Task A required.",
+    "Live ACTIVE_GOAL_HIERARCHY_V1 and FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1 both say fresh materially different Task B required.",
+    "Boot truth already states canonical_frontier_cross_surface_consistency_required=true, but trusted validator does not compare pointer frontier mirrors."
+  ],
+  "evidence_presence_classification": "VERIFIED_GOVERNANCE_GAP_FROM_LIVE_CANONICAL_CONTRADICTION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the pointer reconciliation plus trusted validator/regression that forbids future cross-surface frontier mirror drift; then immediately execute fresh Task B.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly required Brain to assume many mistakes by default and make these mistake classes unable to silently recur.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+    "real_outcome": "Make canonical pointer, active hierarchy, and frontier queue agree fail-closed on active capability target, causal blocker, and next required action; repair the live Task-A/Task-B mirror drift.",
+    "required_capability": "FAIL_CLOSED_CANONICAL_FRONTIER_MIRROR_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "Make canonical pointer, active hierarchy, and frontier queue agree fail-closed on active capability target, causal blocker, and next required action; repair the live Task-A/Task-B mirror drift.",
+      "proxy_goals_deleted": [
+        "Manual mirror checking forever",
+        "New reconciliation service"
+      ],
+      "surviving_necessity": "Add the missing invariant to the existing trusted guard and correct current stale fields."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Existing active-target consistency check",
+        "Boot flag canonical_frontier_cross_surface_consistency_required"
+      ],
+      "external_existing_routes_checked": [
+        "No external supplier relevant to internal canonical consistency."
+      ],
+      "capability_work_deleted": [
+        "No new service",
+        "No new scheduler"
+      ],
+      "surviving_gap": "Trusted guard checks target record consistency but not pointer frontier blocker/next mirrors."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic validation omission demonstrated on live main.",
+      "delete_bypass_substitute_options": [
+        "Manual pointer fix alone leaves recurrence",
+        "Existing guard extension survives"
+      ],
+      "surviving_causal_blocker": "No machine check equates pointer.current_frontier blocker/next with hierarchy and queue."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Extend existing guard + regression + repair stale pointer",
+        "Create separate consistency daemon"
+      ],
+      "losing_routes_reason": "Existing guard already owns canonical admission; separate daemon adds race and complexity.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Regression-test exact Task-A pointer versus Task-B hierarchy mismatch and require fail-closed; matching mirrors must pass."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Manual cross-surface mirror audits"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Lease identity mirror correction in current pointer"
+      ],
+      "fresh_reuse_plan": "Next frontier action must boot from one consistent Task-B state across pointer, hierarchy, and queue."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing trusted guard"
+      ],
+      "search_stop_decision": "Live contradiction and missing comparison localize the defect completely.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Internal governance invariant; external route discovery not applicable."
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_TRUSTED_GUARD",
+      "MANUAL_FIX_ONLY",
+      "NEW_CONSISTENCY_DAEMON"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MANUAL_FIX_ONLY",
+      "NEW_CONSISTENCY_DAEMON"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_TRUSTED_GUARD",
+    "why_selected_route_is_fastest_sufficient": "One admission invariant prevents the exact stale-mirror recurrence at zero new infrastructure cost.",
+    "expected_parent_level_state_change": "Make canonical pointer, active hierarchy, and frontier queue agree fail-closed on active capability target, causal blocker, and next required action; repair the live Task-A/Task-B mirror drift.",
+    "stop_condition": "Merge only the pointer reconciliation plus trusted validator/regression that forbids future cross-surface frontier mirror drift; then immediately execute fresh Task B.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized internal governance invariant repair; external supplier search cannot improve this deterministic consistency check."
+    }
+  }
+}
