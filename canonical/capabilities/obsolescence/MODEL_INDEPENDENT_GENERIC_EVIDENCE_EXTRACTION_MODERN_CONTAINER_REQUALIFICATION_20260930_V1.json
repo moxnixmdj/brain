@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_REQUALIFICATION_V1",
+  "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+  "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR__INDEPENDENT_FRESH_LIVE_NON_ROR_CROSS_DOMAIN_PASS",
+  "canonical_base_commit": "fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+  "repaired_producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+  "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+  "modern_container_regression_git_blob": "8dc3a5d350173d57f67c8e1ac50ab243d42f2214",
+  "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 159,
+    "run_id": 36681368306,
+    "job_id": 109777319500,
+    "artifact_id": 11081458134,
+    "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+    "exact_blob_binding_pass": true,
+    "authored_regressions_pass": true,
+    "live_positive_domains": [
+      "sqlite.org",
+      "rfc-editor.org"
+    ],
+    "ror_admission_used": false,
+    "independent_refetch_hash_offset_verbatim_oracle": true,
+    "live_metadata_relevant_but_body_ungrounded_negative": "pypi.org",
+    "wrong_bm25_selection_negative": true,
+    "conclusion": "SUCCESS"
+  },
+  "claim_scope": {
+    "verified": [
+      "PROVENANCE_VERIFIED_BM25_SELECTED_FRESH_SAME_SOURCE_VISIBLE_TEXT_EXTRACTION",
+      "MODERN_CONTAINER_CONTENT_BLOCK_COVERAGE",
+      "VERBATIM_HASHED_OFFSET_BOUND_OBJECTIVE_GROUNDED_EVIDENCE_UNITS",
+      "ROR_OPTIONAL_NOT_ADMISSION_REQUIRED"
+    ],
+    "unverified": [
+      "CLAIM_SUPPORT_OR_CONTRADICTION",
+      "SEMANTIC_ENTAILMENT",
+      "FACTUAL_CORRECTNESS",
+      "CAUSALITY",
+      "EVIDENCE_QUALITY",
+      "EVIDENCE_SUFFICIENCY",
+      "SOURCE_INDEPENDENCE",
+      "PARENT_CAPABILITY_COMPLETION"
+    ]
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false,
+  "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+}
