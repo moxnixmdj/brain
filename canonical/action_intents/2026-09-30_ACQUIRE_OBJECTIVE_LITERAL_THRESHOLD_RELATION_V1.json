@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-OBJECTIVE-LITERAL-THRESHOLD-NUMERIC-RELATION-BINDING-20260930-V1",
+  "status": "PROPOSED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "8072f67289a6eea2462dd7cad2dd3991a3276734",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+  "expected_parent_frontier_change": "Acquire only bounded model-independent binding/evaluation of one uniquely grounded evidence quantity against one explicit objective numeric literal under exact unit equality. No parent promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 8072f67289a6eea2462dd7cad2dd3991a3276734",
+    "seismology Task B authoritative guarded run 36693929830 is spent/no-replay",
+    "existing claim binder/evaluator already handles evidence-vs-evidence GT/LT/GTE/LTE/EQ/NE and ABS_DIFF_LTE literal thresholds",
+    "no competing open PR owns this causal blocker"
+  ],
+  "evidence_presence_classification": "GENERIC_SUBCAPABILITY_GAP_ACTIVE",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "qualification_required": "EXACT_BYTE_GUARDED_INDEPENDENT_NON_PARENT_CROSS_DOMAIN_QUALIFICATION",
+  "stop_condition": "Do not merge or credit until exact candidate bytes pass authored regressions and a separately implemented guarded independent cross-domain oracle. Never replay seismology.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_base_commit": "8072f67289a6eea2462dd7cad2dd3991a3276734",
+    "real_outcome": "Bind an explicit objective numeric literal as one operand of a deterministic relation against one uniquely grounded extracted evidence quantity.",
+    "selected_surviving_route": "EXTEND_EXISTING_CLAIM_BINDER_AND_VERIFIED_DECIMAL_EVALUATOR_WITH_OBJECTIVE_LITERAL_OPERAND",
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "TASK_SPECIFIC_1_METER_PATCH",
+      "UNIT_CONVERSION",
+      "MODEL_SEMANTIC_INFERENCE",
+      "NEW_NUMERIC_ENGINE",
+      "NEW_SOURCE_DISCOVERY_ROUTE"
+    ],
+    "reuse": [
+      "existing objective_claim_operand_binding explicit relation grammar",
+      "existing generic_evidence_claim_relation Decimal evaluator",
+      "existing evidence-unit integrity/provenance binding",
+      "existing exact-unit fail-closed policy"
+    ],
+    "bounded_scope": [
+      "explicit objective literal only",
+      "GT/LT/GTE/LTE/EQ/NE only",
+      "one uniquely grounded evidence unit",
+      "one exact-unit-compatible numeric literal in evidence",
+      "exact unit surface equality only",
+      "ambiguity fails closed"
+    ],
+    "nonclaims": [
+      "no semantic entailment",
+      "no factual correctness",
+      "no unit conversion",
+      "no evidence sufficiency",
+      "no source independence",
+      "no parent capability completion"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It adds no supplier or reasoning engine; it reuses the already-verified binder and Decimal relation evaluator and closes exactly the first causal gap exposed by the spent Task B.",
+    "stop_rule": "GUARDED_QUALIFY_EXACT_CHILD_SCOPE_THEN_RECOMPUTE_PARENT__NO_SEISMOLOGY_REPLAY"
+  }
+}
