@@ -348,7 +348,8 @@ def _constraints(clause):
 
 def ground(
     goal,registry,max_candidates_per_clause=8,*,
-    compiler=None,proposal_binder=None,root=None,enforce_bindability=False
+    compiler=None,proposal_binder=None,root=None,enforce_bindability=False,
+    research_role_ids=None
 ):
     if not isinstance(registry,dict):
         raise GroundingError("REGISTRY_INVALID")
@@ -376,10 +377,16 @@ def ground(
             if isinstance(item,dict) and str(item.get("description") or "").strip()
         ]
         role_goal=" Then ".join(role_descriptions)
+        role_ids=[
+            str(item.get("role") or "").strip()
+            for item in (broad_candidate.get("roles") or [])
+            if isinstance(item,dict) and str(item.get("description") or "").strip()
+        ]
         role_grounding=ground(
             role_goal,registry,max_candidates_per_clause,
             compiler=compiler,proposal_binder=proposal_binder,root=root,
             enforce_bindability=enforce_bindability,
+            research_role_ids=role_ids,
         ) if role_goal else None
         clauses=decompose(canonical_goal)
         records=[]
@@ -417,6 +424,13 @@ def ground(
         }
 
     clauses=decompose(goal)
+    if research_role_ids is not None:
+        if (
+            not isinstance(research_role_ids,list)
+            or len(research_role_ids)!=len(clauses)
+            or any(not isinstance(x,str) or not x.strip() for x in research_role_ids)
+        ):
+            raise GroundingError("RESEARCH_ROLE_IDS_INVALID")
     records=[]
     all_candidates=set()
     provider_slots={}
@@ -427,6 +441,15 @@ def ground(
         for cid,entry in sorted(registry.items()):
             if not _verified_zero_spend(entry):
                 continue
+            if research_role_ids is not None:
+                required_role=str(research_role_ids[index]).strip()
+                declared_roles=[
+                    str(x).strip()
+                    for x in (entry.get("research_roles") or [])
+                    if isinstance(x,str) and str(x).strip()
+                ]
+                if required_role not in declared_roles:
+                    continue
             lexical=_lexical_method(text,cid,entry)
             semantic=_similarity_method(text,cid,entry)
             if lexical["score"]<=0 or semantic["score"]<=0:
