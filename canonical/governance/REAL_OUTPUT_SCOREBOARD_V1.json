@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 6,
     "fresh_reuse_passes": 1,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 6
+    "residual_gaps_localized": 7
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_REPLAY__INDEPENDENT_ORACLE",
+  "next_progress_event_target": "RUN_AFFECTED_LAYER_OBS_TO_UNIFY_DIRECT_COMPOUND_COMPILER_WITH_EXISTING_PROPOSAL_BINDING_AUTHORITY__NO_PR277_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -297,12 +297,29 @@
       "progress_credit": "RESIDUAL_GAP_LOCALIZED",
       "residual_gap": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
       "reason": "Fresh materially distinct in-scope decision-chain task falsified generic explicit data/effect dependency composition after promotion."
+    },
+    {
+      "event_id": "COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930",
+      "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+      "status": "FRESH_REQUALIFICATION_FAILED__NEW_GENERIC_BINDING_SEAM_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1.json",
+      "source_pr": 277,
+      "public_run_id": 36656793034,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED",
+      "residual_gap": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY"
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-    "subcapability_status": "REPAIR_COMPLETE__COMPONENT_VALIDATED__FRESH_REQUALIFICATION_PENDING",
+    "subcapability_status": "REOPENED__DIRECT_COMPOUND_COMPILER_BINDING_AUTHORITY_FALSIFIED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }

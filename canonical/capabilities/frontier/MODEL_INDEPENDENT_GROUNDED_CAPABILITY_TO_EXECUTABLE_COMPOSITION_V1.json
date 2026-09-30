@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "REPAIRED_AND_COMPONENT_VALIDATED__AWAIT_FRESH_REAL_REQUALIFICATION",
+  "status": "REOPENED_BY_FRESH_POST_REPAIR_REQUALIFICATION_FAILURE__DIRECT_COMPILER_BINDING_AUTHORITY",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,8 +28,8 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "REPAIR_COMPLETE__CREDIT_WITHHELD",
-  "next_action": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_REPLAY__INDEPENDENT_ORACLE",
+  "current_status": "REOPENED_BY_NEW_GENERIC_BINDING_FALSIFICATION",
+  "next_action": "RUN_AFFECTED_LAYER_OBS_TO_UNIFY_DIRECT_COMPOUND_COMPILER_WITH_EXISTING_PROPOSAL_BINDING_AUTHORITY__NO_PR277_REPLAY",
   "obsolescence_status": "REOPENED_PENDING_FRESH_REQUALIFICATION",
   "winning_route": null,
   "capability_strength_result": "PRIOR_REAL_TASKS_PRESERVED__POST_PROMOTION_REGRESSION_REPAIRED_AND_EXACTLY_VALIDATED__FRESH_REQUALIFICATION_UNSPENT",
@@ -60,8 +60,8 @@
     "canonical/runtime/capability_planner.py",
     "canonical/runtime/astra_runtime.py"
   ],
-  "residual_gap": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
-  "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_VALIDATION_20260930_V1.json",
+  "residual_gap": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
+  "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1.json",
   "component_verification": {
     "status": "PASS",
     "public_run_id": 36647904127,
@@ -99,5 +99,14 @@
     "pr275_validation_run_id": 36656123767,
     "provider_backed_path_binding_violations": 0,
     "capability_credit_restored": false
+  },
+  "post_repair_requalification": {
+    "status": "FAILED",
+    "source_pr": 277,
+    "public_run_id": 36656793034,
+    "public_job_id": 109702749846,
+    "exact_route_bytes": "PASS",
+    "capability_credit_restored": false,
+    "same_task_replay_allowed": false
   }
 }

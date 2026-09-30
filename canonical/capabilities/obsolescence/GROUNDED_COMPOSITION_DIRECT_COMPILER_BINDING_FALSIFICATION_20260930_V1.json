@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_POST_REPAIR_FRESH_REQUALIFICATION_FALSIFICATION_V1",
+  "evidence_id": "GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "status": "FRESH_POST_REPAIR_REQUALIFICATION_FAILED__NEW_GENERIC_BINDING_SEAM_LOCALIZED",
+  "source_pr": 277,
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "run_id": 36656793034,
+    "job_id": 109702749846,
+    "exact_route_bytes": "PASS",
+    "execution": "FAIL",
+    "terminal_error": "ACTION_EXPECTATION_FAILED:verified:OBSERVED=False"
+  },
+  "localization": {
+    "runtime_order": "run_goal invokes _compile_plain_goal before grounded-composition fallback",
+    "direct_compiler_path": "goal_compiler._compile_compound_goal -> _compile_single_goal -> _bind_inputs",
+    "causal_contract_path": "proposal_bindings.effect_result is consumed by grounded composition/proposal binder, not by direct compound compiler",
+    "observed_risk": "for verifier input_path, context_paths contains producer input_path then output_path; _context_path_for_key may select the most recent type-compatible path, causing source input to equal producer output",
+    "first_causal_seam": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
+    "duplicate_binding_authorities": true
+  },
+  "diagnostic_evidence": {
+    "non_crediting_static_run": 36657231216,
+    "result": "direct manual grounder path was not faithful and failed earlier with AMBIGUOUS_CANDIDATES_NOT_EFFECT_EQUIVALENT; no controller replay occurred",
+    "code_inspection": [
+      "goal_compiler._compile_compound_goal directly uses _compile_single_goal/_bind_inputs",
+      "goal_compiler._bind_inputs uses context-path heuristics and does not consult proposal_bindings",
+      "capability_proposal_generators._bind_planned_inputs already implements effect_result causal bindings"
+    ]
+  },
+  "credit_effect": {
+    "reusable_capability_credit_change": 0,
+    "fresh_reuse_credit_change": 0,
+    "verified_real_task_count_change": 0,
+    "frontier_dependency_change": 0,
+    "residual_gap_localized_change": 1
+  },
+  "prohibition": [
+    "NO_PR277_REPLAY",
+    "NO_TASK_WORDING_PATCH",
+    "NO_PATH_RECENCY_TUNING",
+    "NO_MODEL"
+  ]
+}
