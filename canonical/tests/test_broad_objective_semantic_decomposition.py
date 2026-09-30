@@ -46,6 +46,24 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertEqual(out["status"],"UNSUPPORTED")
         self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
 
+    def test_generic_run_verification_method_language_is_not_explicit_recipe(self):
+        objective=(
+            "Assess whether a material property differs between two operating regimes. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Autonomously discover and verify relevant sources, choose and run a zero-cost "
+            "verification method, identify material scope limitations, independently verify "
+            "the consequential result, and produce a decision-quality answer."
+        )
+        out=self.dec.decompose(objective)
+        self.assertEqual(out["status"],"DECOMPOSED",out)
+
+    def test_concrete_run_command_remains_explicit_recipe(self):
+        out=self.dec.decompose(
+            "Assess whether two measured values differ. Run python verify_values.py"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED")
+        self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
+
     def test_non_broad_action_goal_is_not_reinterpreted(self):
         out=self.dec.decompose("Create canonical/astra_runtime/tmp/x.json with one record")
         self.assertEqual(out["status"],"UNSUPPORTED")
