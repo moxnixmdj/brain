@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-SOFTWARE-SYSTEMS-SQLITE-OPEN-ENDED-REAL-TASK-A-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "SOFTWARE_SYSTEMS_DATABASE_CONSISTENCY_RESEARCH",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
+  "source_task_replay": false,
+  "objective": "Determine whether an online backup of a SQLite database can remain a transactionally coherent snapshot when writes occur concurrently during the backup. Use authoritative primary evidence and a reproducible experiment you design. State a precise consistency criterion before judging the result, collect enough evidence to support the conclusion, explain material limitations, independently verify consequential observations or calculations, and preserve source and method provenance.",
+  "goal_text": "Determine whether an online backup of a SQLite database can remain a transactionally coherent snapshot when writes occur concurrently during the backup. Use authoritative primary evidence and a reproducible experiment you design. State a precise consistency criterion before judging the result, collect enough evidence to support the conclusion, explain material limitations, independently verify consequential observations or calculations, and save a decision-quality result with source and method provenance.",
+  "anti_leakage": {
+    "authority_name_preprovided": false,
+    "authority_domain_preprovided": false,
+    "source_url_preprovided": false,
+    "dataset_or_document_identifier_preprovided": false,
+    "quantitative_formula_preprovided": false,
+    "experiment_procedure_preprovided": false,
+    "executable_tool_preprovided": false,
+    "controller_action_graph_preprovided": false,
+    "expected_answer_precommitted": false
+  },
+  "required_behavior": [
+    "decompose the objective into the research, experimental, and verification subproblems needed to answer it",
+    "identify and verify authoritative primary evidence without a supplied authority, domain, URL, or document identifier",
+    "select an appropriate executable route without a supplied tool or experiment procedure",
+    "define a defensible transactional-coherence criterion before judging the observed result",
+    "perform a reproducible experiment sufficient to test that criterion",
+    "synthesize the documentary and experimental evidence into a decision-quality conclusion",
+    "state material limitations or uncertainty",
+    "independently verify consequential observations or calculations",
+    "preserve source, method, execution, and cognition provenance"
+  ],
+  "required_output": {
+    "fields": [
+      "status",
+      "research_plan",
+      "source_provenance",
+      "method",
+      "consistency_criterion",
+      "experimental_evidence",
+      "decision",
+      "limitations",
+      "independent_verification",
+      "model_dependency_count",
+      "cognition_provenance_authority"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PARENT_SQLITE_OPEN_ENDED_TASK_A_RESULT.json"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_local_model": true,
+    "no_model_artifact": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "If the producer completes, independently inspect the producer-cited primary evidence and reproduce the producer-declared experiment or an equivalent independent experiment without importing producer modules; compare all consequential observations, the stated consistency criterion, and the final decision. If the producer fails before a result, preserve only the earliest causal blocker.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "freeze_note": "Frozen before any task-specific source discovery, answer computation, tool selection, or experiment design."
+}
