@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_CLAIM_SUPPORT_RELATION_ACQUISITION_V1",
+  "capability_id": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_CROSS_DOMAIN_PASS",
+  "route": "evidence.claim_relation.evaluate.stdlib",
+  "producer_path": "canonical/runtime/bound_capabilities/extracted_evidence_claim_relation.py",
+  "producer_git_blob": "f4ee15d0be0235fceeb12dea3c1a64fa88bef532",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 154,
+  "public_run_id": 36680339068,
+  "public_job_id": 109774171806,
+  "verified_scope": [
+    "EXACT_NORMALIZED_VERBATIM_SUBSTRING_SUPPORT",
+    "EXPLICIT_TYPED_NUMERIC_RELATIONS_OVER_CALLER_REFERENCED_EXTRACTED_LITERALS",
+    "EXACT_UNIT_MATCHING",
+    "FAIL_CLOSED_INVALID_REFERENCES_AND_UNIT_MISMATCH"
+  ],
+  "nonclaims": [
+    "PARAPHRASE_OR_SEMANTIC_ENTAILMENT",
+    "FACTUAL_CORRECTNESS",
+    "EVIDENCE_SUFFICIENCY",
+    "CAUSALITY",
+    "SEMANTIC_ROLE_OF_NUMERIC_LITERAL",
+    "PARENT_CAPABILITY_PROMOTION"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false,
+  "next_causal_gap": "MODEL_INDEPENDENT_TYPED_CLAIM_SPEC_GENERATION_FROM_OPEN_ENDED_OBJECTIVE_AND_EXTRACTED_EVIDENCE_V1"
+}
