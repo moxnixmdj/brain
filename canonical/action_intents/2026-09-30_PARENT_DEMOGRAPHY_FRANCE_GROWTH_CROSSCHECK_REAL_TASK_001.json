@@ -327,5 +327,57 @@
         "execution_dependencies_complete": true
       }
     }
+  },
+  "execution_result": {
+    "public_run_id": 36667844172,
+    "public_job_id": 109736256301,
+    "public_head_sha": "03f78265957d92c15887e225ff79b61952dec844",
+    "artifact_id": 11076359417,
+    "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+    "producer_status": "COMPLETED",
+    "independent_oracle_verified": true,
+    "verified_parent_task": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "execution_count": 1,
+    "same_task_replay_allowed": false
+  },
+  "post_execution_obs": {
+    "goal": "PRESERVE_VERIFIED_DEMOGRAPHY_RESULT__DO_NOT_REPLAY",
+    "capability": "COUNT_ONE_CLEAN_MODEL_INDEPENDENT_PARENT_REAL_TASK__DO_NOT_PROMOTE_PARENT_YET",
+    "blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+    "solution": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B_ON_INHERITED_ROUTE",
+    "verification": "PUBLIC_RUN_FAIL_CLOSED_TERMINAL_GATE__INDEPENDENT_REFETCH_AND_RECOMPUTE__EXACT_RUNTIME_BLOB_IDENTITY_AUDIT",
+    "inherited_system": "OLD_SPACE_CARGO_TASK_A_PRESERVED_AS_HISTORICAL_RESULT_BUT_REMOVED_FROM_FRONTIER_DEPENDENCY_REMOVAL_PROOF",
+    "obs_obs": "STOP_DEMOGRAPHY_TASK__NO_TUNING_OR_REPLAY__RETURN_TO_PARENT_REAL_TASK_FRONTIER"
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared all execution-critical Task B runtime blobs to exact Brain main; all matched.",
+      "Searched task branch for task-specific runtime paths; none existed.",
+      "Audited old Task A model dependence and rejected it for frontier dependency-removal credit."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json"
+    ],
+    "independent_verification_evidence_paths": [
+      "PUBLIC_RUN_36667844172__ARTIFACT_11076359417__sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326"
+    ],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": true,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "GPT-5.6 Sol / ChatGPT Deep Research",
+    "producer_execution_suppliers": [
+      "PROJECT_BRAIN_MODEL_INDEPENDENT_RUNTIME",
+      "WORLD_BANK_INDICATORS_API"
+    ],
+    "independent_verifier_suppliers": [
+      "PYTHON_STDLIB_URLLIB_AND_ARITHMETIC",
+      "WORLD_BANK_INDICATORS_API"
+    ]
   }
 }

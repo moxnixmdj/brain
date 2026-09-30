@@ -7,10 +7,10 @@
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
     "reusable_capabilities_inherited": 5,
-    "verified_real_tasks_completed": 8,
+    "verified_real_tasks_completed": 9,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 9
+    "residual_gaps_localized": 10
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_ASTRONOMY_OR_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B__NO_DEMOGRAPHY_ASTRONOMY_GEOPHYSICS_BIOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -428,12 +428,31 @@
       "frontier_dependency_removed": false,
       "parent_capability_promoted": false,
       "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED"
+    },
+    {
+      "event_id": "PARENT_DEMOGRAPHY_MODEL_FREE_REAL_TASK_VERIFIED_AND_TASK_A_ADMISSIBILITY_CORRECTED_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "VERIFIED_MODEL_FREE_PARENT_REAL_TASK__CLEAN_TASK_A__PARENT_NOT_YET_ACQUIRED",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36667844172,
+      "public_job_id": 109736256301,
+      "artifact_id": 11076359417,
+      "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "VERIFIED_REAL_TASK_COMPLETED",
+        "RESIDUAL_GAP_LOCALIZED"
+      ],
+      "residual_gap": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+      "prior_space_cargo_task_a_frontier_dependency_credit_revoked": true,
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "TYPED_SCALAR_NUMERIC_EXPRESSION_SUBCAPABILITY_ACQUIRED__NEW_PARENT_REAL_TASK_REQUIRED",
+    "subcapability_status": "ONE_CLEAN_MODEL_INDEPENDENT_PARENT_REAL_TASK_VERIFIED__SECOND_CROSS_DOMAIN_TASK_REQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
