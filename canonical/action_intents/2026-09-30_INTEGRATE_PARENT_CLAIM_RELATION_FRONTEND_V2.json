@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTEGRATE-VERIFIED-CLAIM-RELATION-INTO-OPEN-RESEARCH-PARENT-20260930-V2",
+  "status": "PROPOSED_CURRENT_BASE",
+  "canonical_base_commit": "a85b21811c62560ab6657b061c902f632d9d367c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+  "action_kind": "PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Make the guarded-verified claim-spec/operand binder and verified generic relation evaluator execute after generic evidence extraction in the canonical parent path. Keep factual correctness, sufficiency, independence, and parent completion unverified. Preserve HTTP/2 Task A as frozen and unspent.",
+  "prior_work_checked": [
+    "current main a85b21811c62560ab6657b061c902f632d9d367c",
+    "guarded atomic claim-spec qualification run 36686583882 job 109793738883 artifact 11083254225 digest sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d",
+    "claim-spec binder blob 48fd058430d8d361fc75beced567c7b6d1166531",
+    "generic relation evaluator blob d66a7eb30774f66160b698d8082947776888293d",
+    "open_research_source_frontend blob 46fe82d74a35d9318a134fb95e1d5cecfc2dd485 does not invoke binder",
+    "astra_runtime blob e60345e3814deacc5b79ffd7fcf713febfee0425 still raises old claim/relation-required blocker",
+    "HTTP/2 carrier prestart was rejected by global execution guard; task remains physically unspent"
+  ],
+  "evidence_presence_classification": "GUARDED_VERIFIED_CHILD_EXISTS__PARENT_PATH_NOT_INTEGRATED",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact-base integration and guarded independent non-parent qualification. HTTP/2 Task A execution remains unauthorized until this passes.",
+  "recursive_obs": {
+    "canonical_base_commit": "a85b21811c62560ab6657b061c902f632d9d367c",
+    "real_outcome": "Connect guarded-verified extraction/binding/relation children in the actual parent route before spending a fresh parent task.",
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "fresh parent execution before integration",
+        "new parser",
+        "new relation engine",
+        "model cognition",
+        "invented confidence",
+        "invented truth/sufficiency"
+      ],
+      "surviving_necessity": "Canonical parent runtime must call existing verified children."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+        "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+      ],
+      "capability_work_deleted": [
+        "no new cognitive primitive",
+        "no new supplier",
+        "no model",
+        "no parent spend"
+      ],
+      "surviving_gap": "Parent-path composition edge only."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific integration defect.",
+      "delete_bypass_substitute_options": [
+        "DELETE premature HTTP/2 execution",
+        "REUSE guarded-verified binder",
+        "REUSE verified relation evaluator",
+        "COMPOSE in source frontend",
+        "Do not invoke typed decision synthesis with fabricated confidence/independence"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "selected_surviving_route": "COMPOSE_EXISTING_VERIFIED_CHILDREN_IN_PARENT_SOURCE_FRONTEND",
+      "implementation_still_necessary": true,
+      "why_selected_route_is_fastest_sufficient": "Two small runtime edits plus one integration regression close the known seam without changing any child semantics."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Guarded non-parent exact-byte qualification must prove explicit comparisons reach verified relation evaluation, unsupported objective fails closed, and truth/sufficiency remain unclaimed."
+    }
+  }
+}
