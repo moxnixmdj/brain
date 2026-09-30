@@ -212,12 +212,19 @@ def extract(objective,candidate,provenance,authority_identity,relevance,timeout=
     if not (
         relevance.get("status")=="FIRST_PARTY_RELEVANT_SOURCE_VERIFIED"
         and relevance.get("objective_relevance_status")=="VERIFIED"
+        and relevance.get("verification_method")=="EXACT_ROR_DOMAIN_PLUS_FRESH_PAGE_OBJECTIVE_TERM_COVERAGE"
     ):
-        return {**base,"reason":"VERIFIED_OBJECTIVE_RELEVANCE_REQUIRED"}
+        return {**base,"reason":"QUALIFIED_OBJECTIVE_RELEVANCE_RECEIPT_REQUIRED"}
 
     bound=_norm_host(authority_identity.get("matched_domain"))
+    relevance_bound=_norm_host(relevance.get("bound_domain"))
     source_url=_safe_url(relevance.get("fresh_url") or provenance.get("final_url") or candidate.get("url"))
     source_host=_norm_host(source_url)
+    if not bound or relevance_bound!=bound:
+        return {
+          **base,"reason":"RELEVANCE_RECEIPT_BOUND_DOMAIN_MISMATCH",
+          "authority_bound_domain":bound,"relevance_bound_domain":relevance_bound,
+        }
     if not bound or not source_url or source_host!=bound:
         return {
           **base,"reason":"RELEVANT_SOURCE_NOT_EXACT_BOUND_DOMAIN",
@@ -249,6 +256,26 @@ def extract(objective,candidate,provenance,authority_identity,relevance,timeout=
         }
 
     visible="\n".join(text for _,text in blocks)
+    visible_tokens=set(_tokens(visible))
+    page_matches=[t for t in anchors if t in visible_tokens]
+    page_coverage=(len(page_matches)/len(anchors)) if anchors else 0.0
+    required_page_matches=max(2,(len(anchors)+1)//2)
+    if len(page_matches)<required_page_matches or page_coverage<0.5:
+        return {
+          **base,
+          "reason":"FRESH_PAGE_OBJECTIVE_RELEVANCE_DRIFT",
+          "objective_tokens":anchors,
+          "fresh_page_matched_objective_tokens":page_matches,
+          "fresh_page_objective_token_coverage":round(page_coverage,6),
+          "required_page_match_count":required_page_matches,
+          "source_url":final_safe,
+          "http_status":http_status,
+          "content_type":ctype,
+          "page_raw_sha256":_sha(raw),
+          "visible_text_sha256":_sha(visible),
+          "visible_block_count":len(blocks),
+        }
+
     rows=[]
     cursor=0
     for block_index,(tag,text) in enumerate(blocks):
@@ -307,6 +334,9 @@ def extract(objective,candidate,provenance,authority_identity,relevance,timeout=
       "visible_text_length":len(visible),
       "visible_block_count":len(blocks),
       "objective_tokens":anchors,
+      "fresh_page_matched_objective_tokens":page_matches,
+      "fresh_page_objective_token_coverage":round(page_coverage,6),
+      "required_page_match_count":required_page_matches,
       "evidence_unit_count":len(rows),
       "evidence_units":rows,
       "scope_note":"Evidence units are verbatim normalized visible-text blocks grounded only by deterministic objective-token overlap. Support/contradiction, entailment, correctness, sufficiency, quality, and independence remain unverified.",
