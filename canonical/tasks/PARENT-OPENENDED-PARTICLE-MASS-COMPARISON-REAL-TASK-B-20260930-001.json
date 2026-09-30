@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TECHNICAL_REAL_TASK_V1",
+  "task_id": "PARENT-OPENENDED-PARTICLE-MASS-COMPARISON-REAL-TASK-B-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "PARTICLE_PHYSICS_FUNDAMENTAL_PARTICLE_MASS_COMPARISON",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_B",
+  "source_task_replay": false,
+  "objective": "Assess whether the neutron mass is greater than the proton mass. Use authoritative primary technical evidence and a real executable check, decide what evidence and method are sufficient, identify material definition, unit, uncertainty, or interpretation limitations, independently verify the consequential result, and preserve source, method, execution, and cognition provenance.",
+  "goal_text": "Assess whether the neutron mass is greater than the proton mass. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant evidence, determine how to extract and interpret the required masses, choose and run a zero-cost verification method, identify material definition, unit, uncertainty, or interpretation limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "anti_leakage": {
+    "authority_name_preprovided": false,
+    "authority_domain_preprovided": false,
+    "source_url_preprovided": false,
+    "dataset_or_document_identifier_preprovided": false,
+    "experiment_procedure_preprovided": false,
+    "executable_tool_or_command_preprovided": false,
+    "quantitative_formula_preprovided": false,
+    "controller_action_graph_preprovided": false,
+    "expected_answer_precommitted": false
+  },
+  "required_behavior": [
+    "autonomously decompose the scientific objective",
+    "discover and verify authoritative primary technical evidence without a supplied authority, domain, URL, document identifier, or citation",
+    "extract the decision-relevant neutron and proton masses without predeclared field locations or numeric values",
+    "select and run a real zero-cost executable verification route without a supplied tool, command, or calculation recipe",
+    "synthesize documentary and executable evidence into a scoped scientific conclusion",
+    "state material definition, unit, uncertainty, or interpretation limitations",
+    "independently verify the consequential result",
+    "preserve source, method, execution, and cognition provenance"
+  ],
+  "required_output": {
+    "fields": [
+      "status",
+      "research_plan",
+      "source_provenance",
+      "tool_provenance",
+      "experiment",
+      "observations",
+      "decision",
+      "limitations",
+      "independent_verification",
+      "model_dependency_count",
+      "cognition_dependency_class",
+      "cognition_provenance_authority"
+    ]
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "required_cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_local_model": true,
+    "no_model_artifact": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "If the producer completes semantically, independently inspect the producer-cited primary technical evidence, independently reproduce the essential mass comparison without importing producer modules, and compare the consequential observations, conclusion, uncertainty handling, and stated limitations. If the producer fails before a result, preserve only the earliest causal blocker and do not replay the task.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "freeze_note": "Objective and acceptance scope frozen before producer-side source discovery, tool selection, evidence interpretation, calculation design, or answer research."
+}
