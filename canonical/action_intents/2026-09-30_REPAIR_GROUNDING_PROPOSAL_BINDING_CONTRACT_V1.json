@@ -10,7 +10,7 @@
   "causal_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::REAL_CAPABILITY_ACQUISITION",
-  "expected_parent_frontier_change": "Repair the reopened model-independent grounding capability so semantic candidates are ranked/admitted with executable binding-contract awareness and downstream composition consumes existing proposal_bindings, including deterministic literal/auto-path/goal-URL and provider-effect fan-in bindings.",
+  "expected_parent_frontier_change": "Repair the reopened model-independent grounding capability so a clause is resolved only when at least one semantically justified candidate is actually instantiable by Brain's existing proposal-binding/input-binding contract.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "Fresh real-task falsification run 36649042160",
@@ -25,16 +25,16 @@
   "orthogonal_recurrence_count": 1,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Change only generic grounding binding-affordance and proposal_bindings consumption plus independent regressions. Do not replay Requests Task A, do not promote capability, do not change scoreboard, and stop after exact-byte component verification is ready for a new fresh real task.",
+  "stop_condition": "Reuse capability_proposal_generators._bind_planned_inputs plus goal_compiler._bind_inputs during grounding admission; add URL and non-URL adversarial regressions; validate exact bytes; do not replay Requests Task A, promote capability, or change scoreboard before a new fresh real task.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "a965ec72336dfdcb92f5a17c28b608f3b017a341",
-    "real_outcome": "Close the exact input-contract compatibility seam exposed by fresh real-task failure without task-specific literals or new planning machinery.",
+    "real_outcome": "Close the generic semantic-match-without-executable-bindability seam using Brain's existing proposal-binding interpreter, without task-specific literals or new planning machinery.",
     "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
     "obs_goal": {
-      "real_outcome": "A grounded clause is executable enough for composition: literal affordances influence candidate selection and declared proposal_bindings are consumed generically.",
+      "real_outcome": "A grounded clause is considered resolved only after at least one semantically supported candidate successfully binds every action-template input from clause literals, declared defaults/auto paths, or prior grounded effects.",
       "proxy_goals_deleted": [
         "Requests URL special case",
         "new planner",
@@ -61,7 +61,7 @@
         "No task-specific URL logic",
         "No model"
       ],
-      "surviving_gap": "PR255 grounding/composition ignores existing proposal_bindings metadata."
+      "surviving_gap": "Grounding itself did not invoke the already-existing generic proposal/input binder before declaring a semantic candidate resolved."
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "Generic integration omission.",
@@ -70,7 +70,7 @@
         "Bypass with guessed literals rejected",
         "Reuse proposal_bindings survives"
       ],
-      "surviving_causal_blocker": "Semantic ranking and action rendering do not consume declared proposal_bindings."
+      "surviving_causal_blocker": "Semantic ranking could mark a clause resolved before candidate action-template inputs were actually bindable."
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -83,11 +83,12 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+        "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
+        "URL_AFFORDANCE_HEURISTIC_ONLY",
         "EXTEND_JSONSCHEMA_DEFAULT_FILLING",
         "SUBSTITUTE_UNIFIED_PLANNING_PARAMETERIZATION"
       ],
-      "losing_routes_reason": "External schema/planning systems still need Brain-specific goal/provider binding metadata; Brain already has the exact contract and binder.",
+      "losing_routes_reason": "URL affordance fixes only one observed subclass. External schema/planning layers still need Brain-specific binding semantics. The existing proposal binder already handles goal_url, literal, auto_path, effect_result, and compiler-bound inputs generically.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
@@ -129,10 +130,10 @@
       "NEW_BINDING_DSL",
       "EXTERNAL_PLANNER"
     ],
-    "selected_surviving_route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
-    "why_selected_route_is_fastest_sufficient": "The registry and capability_proposal_generators already encode goal_url, literal, auto_path, effect_result and fan-in semantics; wiring them into the selected route removes the observed seam with the fewest new semantics.",
-    "expected_parent_level_state_change": "Repair the reopened model-independent grounding capability so semantic candidates are ranked/admitted with executable binding-contract awareness and downstream composition consumes existing proposal_bindings, including deterministic literal/auto-path/goal-URL and provider-effect fan-in bindings.",
-    "stop_condition": "Change only generic grounding binding-affordance and proposal_bindings consumption plus independent regressions. Do not replay Requests Task A, do not promote capability, do not change scoreboard, and stop after exact-byte component verification is ready for a new fresh real task.",
+    "selected_surviving_route": "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
+    "why_selected_route_is_fastest_sufficient": "It invokes the already-existing generic binding interpreter before grounding status is assigned, closes both URL and non-URL unbindable-candidate cases, adds no dependency, and preserves the downstream composition/verifier contract.",
+    "expected_parent_level_state_change": "Repair the reopened model-independent grounding capability so a clause is resolved only when at least one semantically justified candidate is actually instantiable by Brain's existing proposal-binding/input-binding contract.",
+    "stop_condition": "Reuse capability_proposal_generators._bind_planned_inputs plus goal_compiler._bind_inputs during grounding admission; add URL and non-URL adversarial regressions; validate exact bytes; do not replay Requests Task A, promote capability, or change scoreboard before a new fresh real task.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T00:20:00Z",
@@ -182,7 +183,7 @@
       ],
       "challenger_routes": [
         {
-          "route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+          "route": "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
           "evidence": [
             "native proposal_bindings already covers goal_url literal auto_path effect_result",
             "existing fan-in implementation handles repeated goal URLs"
@@ -196,12 +197,33 @@
           ],
           "resolution": "SELECTED",
           "comparison": {
-            "CORRECTNESS": "Uses declared capability contracts rather than guesses.",
-            "CAPABILITY_STRENGTH": "Covers exact observed input classes and provider fan-in.",
+            "CORRECTNESS": "Actual binding success is required before a semantic candidate may make a clause resolved; no heuristic proxy.",
+            "CAPABILITY_STRENGTH": "Covers compiler-bound inputs plus declared goal_url, literal, auto_path, effect_result and prior-effect fan-in.",
             "WALL_CLOCK": "Small integration patch.",
             "INCREMENTAL_COST": "$0",
             "RELIABILITY": "Already exercised elsewhere in Brain.",
             "VERIFIABILITY": "Deterministic contract can be reconstructed."
+          }
+        },
+        {
+          "route": "URL_AFFORDANCE_HEURISTIC_ONLY",
+          "evidence": [
+            "Earlier PR261 head used literal URL consumption as a proxy for executable bindability."
+          ],
+          "qualification_evidence": [
+            "direct static audit of prior PR261 head 3380d1e52d0d7712ba2af7202cd6e72e34387238"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Insufficient: non-URL candidates can still be semantically matched but input-unbindable.",
+            "CAPABILITY_STRENGTH": "Covers only the observed URL subclass.",
+            "WALL_CLOCK": "Smallest patch but leaves the generic capability false.",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Deterministic but incomplete.",
+            "VERIFIABILITY": "A non-URL adversarial fixture falsifies the general claim."
           }
         },
         {
@@ -258,7 +280,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+      "selected_route": "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -268,7 +290,7 @@
       "selected_route_preflight": {
         "checked_at_utc": "2026-09-30T00:20:00Z",
         "max_age_hours": 2,
-        "selected_route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+        "selected_route": "REUSE_EXISTING_PROPOSAL_BINDER_AS_GROUNDING_ADMISSION_ORACLE",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
