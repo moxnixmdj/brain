@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-OBJECTIVE-LITERAL-THRESHOLD-NUMERIC-RELATION-BINDING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "8072f67289a6eea2462dd7cad2dd3991a3276734",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+  "action_kind": "GENERIC_CLAIM_BINDING_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+  "expected_parent_frontier_change": "Acquire and independently guard-qualify a generic evidence-quantity versus explicit objective-literal numeric threshold relation bridge. No seismology replay and no parent capability credit from the child repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Canonical Brain main 8072f67289a6eea2462dd7cad2dd3991a3276734",
+    "Seismology Task B is permanently spent in guarded run 36693929830 and replay-forbidden",
+    "PR520 truthfully localizes the first causal gap to objective-literal numeric threshold relation binding",
+    "Existing objective_claim_operand_binding supports evidence-vs-evidence GT/LT/GTE/LTE/EQ/NE and ABS_DIFF literal thresholds but not one evidence quantity versus an objective-supplied literal threshold",
+    "Existing generic_evidence_claim_relation evaluator is already verified and must be extended only with a bounded literal-threshold relation form if needed"
+  ],
+  "evidence_presence_classification": "GENERIC_GAP_VERIFIED_BY_FRESH_PARENT_TASK_B",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact candidate bytes pass authored adversarial tests and independent guarded fresh cross-domain qualification. Do not replay seismology. Then freeze a materially different fresh parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_base_commit": "8072f67289a6eea2462dd7cad2dd3991a3276734",
+    "real_outcome": "Bind one uniquely grounded numeric observation from verified generic evidence against an explicit numeric threshold stated in the objective and deterministically evaluate the requested relation.",
+    "required_capability": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_V1",
+    "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "routes_ranked": [
+      "EXTEND_EXISTING_BOUNDED_CLAIM_BINDER_AND_VERIFIED_RELATION_EVALUATOR",
+      "COMPOSE_EXISTING_GENERIC_RELATION_WITH_A_NEW_THRESHOLD_ADAPTER",
+      "ADD_TASK_SPECIFIC_THRESHOLD_PATCH",
+      "ADD_MODEL_SEMANTIC_REASONER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "TASK_SPECIFIC_NUMERIC_LITERAL",
+      "TASK_SPECIFIC_SOURCE_OR_STATION",
+      "MODEL_REASONER",
+      "WEAKEN_EVIDENCE_INTEGRITY_OR_AMBIGUITY_GATES"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_BOUNDED_CLAIM_BINDER_AND_VERIFIED_RELATION_EVALUATOR",
+    "why_selected_route_is_fastest_sufficient": "The missing structure is generic and narrow: one evidence-derived numeric operand compared with a literal numeric threshold already explicit in the objective. Reusing the existing verified evidence integrity, lexical role binding, Decimal parsing, unit checking, and relation evaluator removes the blocker with the smallest trusted-surface change.",
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "synthetic_verification_necessity": "Authored adversarial tests must cover multiple operators/domains/units, objective wrappers, ambiguous evidence quantities, unit mismatch, task-specific-overfit rejection, evidence-vs-evidence regression preservation, and tampered evidence. Independent guarded qualification must use fresh non-seismology cases."
+    },
+    "expected_parent_level_state_change": "GENERIC_LITERAL_THRESHOLD_BINDING_REPAIR_ONLY__NO_PARENT_CREDIT",
+    "stop_rule": "QUALIFY_REPAIR__THEN_FRESH_MATERIALLY_DIFFERENT_PARENT_TASK__NO_SEISMOLOGY_REPLAY"
+  }
+}
