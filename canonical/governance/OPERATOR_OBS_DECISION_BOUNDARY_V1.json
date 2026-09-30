@@ -36,7 +36,7 @@
     "OBS_INHERITED_SYSTEM_AFTER_WIN",
     "OBS_THE_OBS_AND_SEARCH_PROCESS"
   ],
-  "authority_rule": "Exploration before OBS is allowed, but no consequential blocker claim, route recommendation, or execution decision is authoritative until the current-base OBS pass succeeds.",
+  "authority_rule": "Exploration before OBS is allowed, but no consequential blocker claim, route recommendation, execution decision, or theory interpretation is authoritative until current-base OBS succeeds and a durable reasoning decision receipt preserves the governing invariants, evidence, conclusion, rejected alternatives, uncertainty, and supersession conditions.",
   "mutation_rule": "No frontier-sensitive mutation may bypass the canonical action-intent plus trusted drift-guard path.",
   "invalidation_rule": "Any material canonical, task, capability, route, dependency, verifier, or external-surface change invalidates the affected OBS layers immediately.",
   "memory_rule": "Memory and summaries may seed retrieval only; they cannot establish current frontier truth.",
@@ -48,5 +48,21 @@
   "canonical_authority_requires_repository_backed_current_base_obs": true,
   "bare_conversational_output_has_canonical_authority": false,
   "platform_pre_response_hard_gate_available": false,
-  "truth_boundary": "HARD_ENFORCEMENT_APPLIES_TO_CANONICAL_BRAIN_AUTHORITY_AND_GUARDED_MUTATIONS__NOT_TO_RAW_CHAT_MESSAGE_EMISSION"
+  "truth_boundary": "HARD_ENFORCEMENT_APPLIES_TO_CANONICAL_BRAIN_AUTHORITY_AND_GUARDED_MUTATIONS__NOT_TO_RAW_CHAT_MESSAGE_EMISSION",
+  "authority": [
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md"
+  ],
+  "required_pre_authority_steps": [
+    "LOAD_CURRENT_V5_THEORY_INVARIANTS",
+    "PERSIST_DURABLE_REASONING_DECISION_RECEIPT"
+  ],
+  "reasoning_durability": {
+    "required": true,
+    "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "chat_only_authority": false,
+    "current_theory_receipt": "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
+  }
 }
