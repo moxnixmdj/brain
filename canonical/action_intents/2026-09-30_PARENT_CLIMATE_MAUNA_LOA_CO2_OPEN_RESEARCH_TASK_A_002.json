@@ -158,7 +158,7 @@
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T04:38:35Z",
       "max_age_hours": 24,
-      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_BRAIN_STACK",
+      "incumbent_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
@@ -204,7 +204,7 @@
       ],
       "challenger_routes": [
         {
-          "route": "CURRENT_MODEL_INDEPENDENT_BRAIN_STACK",
+          "route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
           "evidence": [
             "all required downstream child capabilities are already inherited",
             "domain-free source discovery already exists",
@@ -216,7 +216,6 @@
             "structured demography supporting evidence"
           ],
           "qualification_evidence_classes": [
-            "BRAIN_INHERITED",
             "DIRECT_PROBE",
             "INDEPENDENT_VERIFIER"
           ],
@@ -258,10 +257,10 @@
             "runtime contains an optional model-planner path"
           ],
           "qualification_evidence": [
-            "current astra_runtime.py"
+            "DIRECT_PROBE: current astra_runtime.py"
           ],
           "qualification_evidence_classes": [
-            "BRAIN_INHERITED"
+            "DIRECT_PROBE"
           ],
           "resolution": "REJECTED_BY_CONTRACT",
           "comparison": {
