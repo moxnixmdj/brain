@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILIATION_V1",
+  "status": "FIRST_PHYSICAL_SPEND_CORRECTED__MISSION_ORIGIN_GAP_PRESERVED__LATER_REPLAYS_QUARANTINED__COUNTER_CREDIT_ONCE",
+  "checked_on": "2026-09-30",
+  "bound_base_commit": "da64d00b971d5fb4e465af09f8ebb3242831f7bb",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "substantive_objective": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013, using authoritative primary data and decision-quality quantitative reasoning.",
+  "first_irreversible_spend": {
+    "authority": "EARLIEST_PRODUCER_EXECUTION_OF_SUBSTANTIVE_OBJECTIVE",
+    "carrier_repository": "moxnixmdj/verification-capsule-runner",
+    "brain_pr": 317,
+    "brain_base": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001",
+    "task_blob_sha": "61d7334c1c866027260025d0d147d16ee9e0cb02",
+    "workflow_run_id": 36669918546,
+    "job_id": 109742518213,
+    "artifact_id": 11077637577,
+    "artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "runtime_blob_sha": "a73410e38d4c67d92188e934e0c0c3f0b2b329ee",
+    "goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "task_executed": true,
+    "execution_count": 1,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "model_planner_disabled": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "replay_allowed": false
+  },
+  "first_terminal_gap": {
+    "blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "runtime_error_class": "CAPABILITY_ACQUISITION_REQUIRED",
+    "observed_supplier_failures": [
+      "AutoAcquisitionFailure:APT_ORIGIN_MISSION_PATH_INVALID:",
+      "AutoPyPIAcquisitionFailure:PYPI_ORIGIN_MISSION_PATH_INVALID:"
+    ],
+    "causal_trace": [
+      "The broad research clause did not match a verified bound capability, so the runtime entered autonomous acquisition fallback.",
+      "The direct run_goal producer supplied mission_id and goal but no _runtime_mission_path.",
+      "APT and PyPI suppliers independently failed closed because origin_mission_path was empty instead of a real direct child of canonical/astra_runtime/missions.",
+      "Therefore the terminal surviving blocker is mission identity propagation into autonomous acquisition, not the earlier compile miss by itself."
+    ]
+  },
+  "later_replays": [
+    {
+      "workflow_run_id": 36670516407,
+      "task_label": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+      "artifact_id": 11077861584,
+      "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+      "disposition": "CORROBORATING_REPLAY__ZERO_FRESHNESS__ZERO_CAPABILITY_CREDIT"
+    },
+    {
+      "workflow_run_id": 36670981076,
+      "job_id": 109745705157,
+      "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+      "artifact_id": 11077589879,
+      "artifact_digest": "sha256:ee2d095c5615ad7d4e355fbe60b5ba8eec805285d594e5237a06611d94993ab3",
+      "runtime_blob_sha": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+      "disposition": "CORROBORATING_REPLAY__CURRENT_RUNTIME_SAME_DEFECT__ZERO_FRESHNESS__ZERO_CAPABILITY_CREDIT"
+    },
+    {
+      "workflow_run_id": 36671472249,
+      "disposition": "LATER_SAME_OBJECTIVE_READBACK__ZERO_FRESHNESS__ZERO_CAPABILITY_CREDIT"
+    }
+  ],
+  "current_runtime_route": {
+    "current_runtime_blob_sha": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "existing_entrypoint_behavior": "astra_runtime.main canonicalizes a mission path and injects _runtime_mission_path before goal execution.",
+    "selected_route": "REUSE_EXISTING_CANONICAL_ASTRA_MISSION_ENTRYPOINT",
+    "runtime_repair_required_before_canary": false,
+    "next_action": "REUSE_CANONICAL_ASTRA_MISSION_ENTRYPOINT_TO_PROPAGATE_RUNTIME_MISSION_IDENTITY__VALIDATE_WITH_FRESH_NON_PARENT_CANARY__THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A",
+    "qualification": "One fresh non-parent acquisition canary must enter through a mission file directly under canonical/astra_runtime/missions and prove the origin-path errors are absent before any materially different parent Task A is frozen."
+  },
+  "accounting": {
+    "prior_scoreboard_had_mauna_event": false,
+    "counter_effects": {
+      "reusable_capabilities_inherited": 0,
+      "verified_real_tasks_completed": 0,
+      "fresh_reuse_passes": 0,
+      "frontier_dependencies_removed": 0,
+      "residual_gaps_localized": 1
+    },
+    "reason": "The first physical spend produced one new causal localization that was absent from the canonical scoreboard. Later replays add zero."
+  },
+  "prohibitions": [
+    "NO_MAUNA_LOA_SUBSTANTIVE_OBJECTIVE_REPLAY",
+    "NO_METADATA_RENAME_TO_RESTORE_FRESHNESS",
+    "NO_PARENT_PROMOTION_FROM_FAILED_MAUNA_RUNS",
+    "NO_TASK_SPECIFIC_CLIMATE_PATCH",
+    "NO_RUNTIME_REPAIR_BEFORE_REUSE_OF_EXISTING_CANONICAL_MISSION_ENTRYPOINT_IS_TESTED",
+    "NO_SECOND_CREDIT_FOR_CORROBORATING_REPLAYS"
+  ]
+}
