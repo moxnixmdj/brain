@@ -3049,7 +3049,7 @@
       }
     },
     "source.evidence.extract.objective_grounded.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
+      "status": "QUALIFICATION_REOPENED__KNOWN_MODERN_CONTAINER_COVERAGE_GAP",
       "incremental_spend_usd": 0,
       "cost": 1,
       "requires": [
@@ -3149,7 +3149,12 @@
         "authority_identity_required": false,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json"
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+        "current_authority": "REVOKED_PENDING_REQUALIFICATION",
+        "falsification_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+        "falsification_commit": "e984e3196305f9a92750947d692bbae2bef9707b",
+        "prior_public_run_id": 36680967490,
+        "requalification_required": true
       }
     }
   },
