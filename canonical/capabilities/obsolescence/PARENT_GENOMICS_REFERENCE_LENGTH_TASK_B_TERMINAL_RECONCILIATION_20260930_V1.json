@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_B_TERMINAL_RECONCILIATION_V1",
+  "status": "SPENT_ONCE__FAIL_FIRST_CAUSAL_GAP_LOCALIZED__NO_REPLAY__NO_PARENT_CREDIT",
+  "checked_on": "2026-09-30",
+  "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "physical_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 199,
+    "workflow_run_id": 36690682680,
+    "job_id": 109806904765,
+    "artifact_id": 11085208947,
+    "artifact_digest": "sha256:b2c5e8ff9fa3059908ca350ce7a1c208b858d5e01286e3aacf4b19d9deefeb25",
+    "guard_attempt_id": "631e7e83760d4debba1111c2aae2f295",
+    "problem_sha256": "56fc9a18e1fb2243e18111acf0d011d6eff0cecf18273be2162226127085945f",
+    "task_executed": true,
+    "execution_count": 1,
+    "replay_allowed": false,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "exact_bytes": {
+    "task_blob": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
+    "mission_blob": "03e718a9c779c26d26e7af140f2f65549c1a7f6e",
+    "runtime_blob": "426ffe58e405dc4f1ba2eb4e838e03a1df771964",
+    "broad_objective_decompose_blob": "1efaec4ba51ecb5c40072b3190853f4de89d8f77",
+    "open_research_source_frontend_blob": "1ec11496aa84f261fc2c7e8e689ba687581d8b3c",
+    "plain_goal_bound_grounding_blob": "46e8e7466479ea298c34e5fa682d49c374510ce9"
+  },
+  "authorization_reconciliation": {
+    "explicit_execution_authorization_pr": 497,
+    "explicit_execution_authorization_merge_commit": "781d672f01533b71f6c46d729eec1d74aa6e20d8",
+    "authorization_existed_before_physical_run": true,
+    "execution_authorization_canonical_base": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
+    "guard_plan_authorization_pin_defect": "GUARD_PLAN_PINNED_EARLIER_FREEZE_INTENT_INSTEAD_OF_PR497_EXPLICIT_EXECUTION_INTENT",
+    "evidentiary_effect": "PHYSICAL_SPEND_AND_RUNTIME_CAUSAL_DIAGNOSTIC_PRESERVED__NO_SUCCESS_OR_PARENT_PROMOTION_CREDIT",
+    "required_future_correction": "Future guarded parent execution must pin the exact explicit execution authorization receipt."
+  },
+  "observed_terminal": {
+    "runtime_status": "BLOCKED",
+    "exit_code": 3,
+    "blocker": "OPEN_ENDED_RESEARCH_EVIDENCE_EXTRACTED__CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED",
+    "source_frontend_status": "SOURCE_FRONTEND_READY",
+    "provenance_verified_candidate_count": 7,
+    "relevance_verified_candidate_count": 1,
+    "evidence_extracted_candidate_count": 1,
+    "claim_relation_evaluated_count": 0
+  },
+  "first_causal_gap": {
+    "classification": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS__INSTRUCTION_WRAPPER_DOMINATES_DECISION_ENTITIES",
+    "direct_observation": [
+      "The discovery query was the complete instruction-heavy objective, beginning with 'Assess'.",
+      "Bing RSS returned dictionary/thesaurus pages about the word assess; all live-retrieval-verified open-web candidates were about assess.",
+      "BM25 selected twominenglish.com/asess-or-assess as the top candidate from those live web results.",
+      "The generic extractor preserved six auditable but irrelevant evidence units from that spelling page.",
+      "The verified objective claim/operand binder correctly failed closed with LEFT_NO_EVIDENCE_UNIT_FOR_ENTITY instead of inventing genomics operands."
+    ],
+    "selected_irrelevant_source": "https://twominenglish.com/asess-or-assess/",
+    "binder_failure": "LEFT_NO_EVIDENCE_UNIT_FOR_ENTITY",
+    "narrower_than_reported_runtime_next_capability": true,
+    "why": "Claim binding is already verified and was invoked; it failed because upstream discovery/relevance supplied non-genomics evidence."
+  },
+  "authority": {
+    "parent_capability_promoted": false,
+    "capability_credit_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "residual_gaps_localized_delta": 1
+  },
+  "next_action": "REPAIR_GENERIC_BROAD_RESEARCH_DISCOVERY_QUERY_FOCUS__QUALIFY_WITH_FRESH_NON_PARENT_CROSS_DOMAIN_AND_LIVE_SEARCH_CASES__NO_GENOMICS_REPLAY"
+}
