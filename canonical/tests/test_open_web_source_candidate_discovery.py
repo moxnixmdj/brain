@@ -38,8 +38,26 @@ class SourceCandidateDiscoveryTests(unittest.TestCase):
         self.assertEqual(len(p.items),1)
         self.assertEqual(self.m._unwrap_ddg(p.items[0][0]),"https://example.org/spec")
 
-    def test_query_is_objective_not_invented_recipe(self):
+    def test_query_focuses_decision_clause_without_inventing_recipe(self):
         q="Assess whether a standards document changed between two editions"
+        self.assertEqual(
+            self.m._query(q),
+            "a standards document changed between two editions",
+        )
+
+    def test_query_drops_orchestration_sentences(self):
+        q=(
+            "Assess whether River Alpha discharge is greater than River Beta discharge. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Autonomously discover and verify the relevant records."
+        )
+        self.assertEqual(
+            self.m._query(q),
+            "River Alpha discharge is greater than River Beta discharge",
+        )
+
+    def test_concise_subject_query_is_unchanged(self):
+        q="RFC 9110 HTTP semantics official specification"
         self.assertEqual(self.m._query(q),q)
 
     def test_local_urls_fail_closed(self):
