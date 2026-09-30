@@ -39,7 +39,15 @@
     "frontier_capability_credit_requires_documented_frontier_reference": true,
     "same_domain_parameter_variation_is_not_frontier_fresh_reuse": true,
     "narrow_domain_tool_is_not_frontier_capability": true,
-    "recursive_obs_schema_v4_structural_live_frontier_and_preflight_validation_required": true
+    "recursive_obs_schema_v4_structural_live_frontier_and_preflight_validation_required": true,
+    "deterministic_duplicate_blocker_lease_owner_required": true,
+    "active_capability_target_change_requires_explicit_reconciliation": true,
+    "scoreboard_increase_requires_promotion_evidence": true,
+    "promotion_claim_scope_must_equal_evidence_scope": true,
+    "adversarial_falsification_before_promotion_required": true,
+    "circular_frontier_proof_forbidden": true,
+    "child_cognitive_capabilities_inherit_parent_model_independence": true,
+    "target_frontier_supplier_cannot_verify_its_own_dependency_removal": true
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -96,12 +104,14 @@
     ],
     "exact_base_commit_binding_required": true,
     "placeholder_receipts_allowed": false,
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V6.json",
     "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
     "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
     "live_challenger_frontier_required": true,
-    "selected_route_execution_preflight_required": true
+    "selected_route_execution_preflight_required": true,
+    "mistake_immunity_law": "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
+    "recurring_mistake_regression_catalog": "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json"
   },
   "progress_events": [
     {
