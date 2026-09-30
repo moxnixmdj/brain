@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPENENDED-PARENT-TASK-A-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_SEISMOLOGY_KAMCHATKA_TSUNAMI_TASK_A::FRESH_PARENT_GATE_FREEZE",
+  "task_id": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-A-20260930-001",
+  "task_blob_sha": "97618bb3fbe081a85a64cadfa5fb186f0d6e79df",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended scientific parent task after the qualified broad-routing repair; execute exactly once and either obtain admissible Task A completion evidence or localize the first new integrated causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main a42d1d9ef9134f1095e44a4483dba8203f27eda9 includes independently guarded-qualified PR474 broad-routing repair.",
+    "HTTP/2 Task A is spent and replay-forbidden by PR469.",
+    "Current frontier explicitly requires a new genuinely open-ended Task A.",
+    "Recent Brain PR search found no competing post-PR474 fresh parent Task A lease."
+  ],
+  "evidence_presence_classification": "CHILD_STACK_VERIFIED__POST_ROUTING_REPAIR_FRESH_PARENT_VALIDATION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of this frozen task. On semantic completion require independent verification before any parent promotion. On failure preserve only the earliest new integrated causal gap and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "The repaired inherited model-independent route now needs a new parent-level reality test; more synthetic routing tests cannot establish the parent capability.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_SEISMOLOGY_PARENT_TASK",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "PREDECLARED_AUTHORITY_OR_STATION",
+      "PREDECLARED_NUMERIC_VALUE_OR_FORMULA",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "NEW_INFRASTRUCTURE_BEFORE_PARENT_FALSIFICATION"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The seismology objective is materially different from the spent HTTP/2 software/network task and directly exercises autonomous decomposition, authoritative-source discovery, evidence selection, quantitative threshold reasoning, executable verification, synthesis, uncertainty handling, and provenance without leaking a research recipe.",
+    "expected_parent_level_state_change": "Either obtain the first admissible genuine open-ended parent Task A pass after the routing repair or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
