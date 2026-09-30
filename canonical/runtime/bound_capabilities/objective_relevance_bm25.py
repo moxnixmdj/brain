@@ -180,7 +180,8 @@ def rank(objective,candidates,limit=None):
     return {
         **base,
         "status":"LEXICAL_RELEVANCE_RANKED",
-        "verification_method":"DETERMINISTIC_BM25_PLUS_BOUNDED_DECISION_ROLE_ADMISSION",
+        "verification_method":"DETERMINISTIC_BM25",
+        "admission_method":"FOCUSED_QUERY_TOKEN_COVERAGE_PLUS_BOUNDED_DECISION_ROLE_V1",
         "query_tokens":q,
         "query_focus":focus,
         "candidate_count":len(candidates),
