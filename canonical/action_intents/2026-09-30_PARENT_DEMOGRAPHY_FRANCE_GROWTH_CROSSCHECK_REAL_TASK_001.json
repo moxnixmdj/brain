@@ -25,7 +25,8 @@
     "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 acquired and qualified on public run 36666659921",
     "World Bank Indicators API is an authoritative machine-readable JSON source already proven reachable by the current public carrier class",
     "new task frozen before exact task endpoint values are inspected",
-    "exact source-schema-only preflight run 36667643456 PASS; artifact 11077475194 sha256:4197181e0c1c588cd9f0fee01d76dc2590a85bc180a9c1e9b9bf03d328caf4b7; answer not computed"
+    "exact source-schema-only preflight run 36667643456 PASS; artifact 11077475194 sha256:4197181e0c1c588cd9f0fee01d76dc2590a85bc180a9c1e9b9bf03d328caf4b7; answer not computed",
+    "Answer-blind exact-source preflight run 36668001841 PASS; artifact 11077126934 sha256:f43f6a0fe0dc9f80e6599de8c2287262b6de1f0d2ef7b6c5aed455d94fdc0626"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -137,7 +138,7 @@
       ],
       "search_stop_decision": "Direct Task B execution has maximal information gain now; no unresolved framework decision precedes it.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Current main 144a1baa and current parent proof contract refreshed immediately before task freeze."
+      "challenger_refresh_decision": "Selected route re-preflighted at 2026-09-30T04:15:21Z after answer-blind exact World Bank source check passed on public carrier; no unresolved dependency or material challenger remains."
     },
     "routes_considered": [
       "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
@@ -265,7 +266,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T04:10:50Z",
+        "checked_at_utc": "2026-09-30T04:15:21Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
         "status": "READY",
@@ -311,14 +312,14 @@
             "volatility": "VOLATILE",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T04:10:46Z",
+            "observed_at_utc": "2026-09-30T04:15:21Z",
             "evidence": [
-              "DIRECT_PROBE: source-schema-only preflight run 36667643456 passed all three exact frozen World Bank endpoints without computing the task answer",
-              "ARTIFACT:11077475194 sha256:4197181e0c1c588cd9f0fee01d76dc2590a85bc180a9c1e9b9bf03d328caf4b7"
+              "DIRECT_PROBE: verification-capsule-runner run 36668001841 PASS",
+              "artifact 11077126934 digest sha256:f43f6a0fe0dc9f80e6599de8c2287262b6de1f0d2ef7b6c5aed455d94fdc0626",
+              "answer-blind exact URL + JSON path + numeric type preflight; values_recorded=false"
             ],
             "evidence_classes": [
-              "DIRECT_PROBE",
-              "OFFICIAL_PRIMARY"
+              "DIRECT_PROBE"
             ],
             "evidence_scope": "GLOBAL"
           }
