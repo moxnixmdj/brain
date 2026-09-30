@@ -5848,6 +5848,43 @@ def run_goal(step, mission):
       "final_summary":summary
     }
 
+
+def _collect_model_dependency_count(value, depth=0):
+    if depth>24:
+        return 0
+    count=0
+    if isinstance(value,dict):
+        if "model_dependency_count" in value:
+            raw=value.get("model_dependency_count")
+            try:
+                parsed=int(raw)
+            except Exception as exc:
+                raise Blocker("MODEL_DEPENDENCY_COUNT_INVALID") from exc
+            if parsed<0:
+                raise Blocker("MODEL_DEPENDENCY_COUNT_INVALID")
+            count=max(count,parsed)
+        mode=str(value.get("controller_mode") or "")
+        if mode.startswith("OPTIONAL_MODEL_ADVISORY"):
+            count=max(count,1)
+        if value.get("planner_model_last") not in (None,""):
+            count=max(count,1)
+        for item in value.values():
+            count=max(count,_collect_model_dependency_count(item,depth+1))
+    elif isinstance(value,list):
+        for item in value:
+            count=max(count,_collect_model_dependency_count(item,depth+1))
+    return count
+
+def _stamp_cognition_provenance(result):
+    if not isinstance(result,dict):
+        raise Blocker("GOAL_RESULT_OBJECT_REQUIRED_FOR_COGNITION_PROVENANCE")
+    out=dict(result)
+    count=_collect_model_dependency_count(out)
+    out["model_dependency_count"]=count
+    out["cognition_dependency_class"]="MODEL_INDEPENDENT" if count==0 else "MODEL_ASSISTED"
+    out["cognition_provenance_authority"]="ASTRA_RUNTIME_DERIVED_V1"
+    return out
+
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     if adapter=="shell":
@@ -5855,7 +5892,7 @@ def execute_step(step, prior_results=None, mission=None):
     if adapter=="http":
         return run_http(step)
     if adapter=="goal":
-        return run_goal(step, mission or {})
+        return _stamp_cognition_provenance(run_goal(step, mission or {}))
     raise Blocker("MISSING_ADAPTER:"+adapter)
 
 def verify(step,result):
