@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_REAL_TASK_V1",
+  "task_id": "PARENT-OPEN-ENDED-CHEMISTRY-CAFFEINE-CONSISTENCY-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_QUANTITATIVE_DATA_CONSISTENCY_RESEARCH",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
+  "source_task_replay": false,
+  "producer_prompt": "Using authoritative current public evidence, determine whether caffeine's reported molecular formula and reported molecular weight are quantitatively self-consistent to within 0.05%. Discover and justify the knowledge sources and tools you need, perform the quantitative analysis, independently verify the consequential numerical conclusion, preserve provenance, and produce a reproducible decision-quality result. Use zero model cognition and zero incremental spend.",
+  "acceptance_contract": {
+    "objective_only_prompt": true,
+    "producer_source_urls_predeclared": false,
+    "producer_json_paths_predeclared": false,
+    "producer_tool_ids_predeclared": false,
+    "producer_research_decomposition_predeclared": false,
+    "producer_calculation_recipe_predeclared": false,
+    "autonomous_decomposition_required": true,
+    "autonomous_material_source_or_tool_discovery_required": true,
+    "authoritative_evidence_required": true,
+    "quantitative_reasoning_required": true,
+    "consequential_claim_independent_verification_required": true,
+    "provenance_required": true,
+    "reusable_method_required": true,
+    "tolerance_relative_percent": 0.05,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "execution_constraints": {
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "no_source_or_tool_injection_after_start": true,
+    "no_hidden_research_plan_in_producer_inputs": true
+  },
+  "verifier_boundary": {
+    "producer_must_not_receive_verifier_source_choices": true,
+    "producer_modules_must_not_be_imported_by_independent_oracle": true,
+    "verifier_may_use_independently_selected_authoritative_sources_after_terminal_producer_state": true
+  },
+  "expected_answer_precommitted": false,
+  "freeze_note": "Objective and acceptance contract frozen before any task-specific source selection, URL probe, tool selection, formula lookup, or answer computation."
+}
