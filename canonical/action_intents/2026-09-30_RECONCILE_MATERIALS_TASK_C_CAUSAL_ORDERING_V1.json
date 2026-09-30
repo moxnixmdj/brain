@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MATERIALS-TASK-C-CAUSAL-ORDERING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE",
+  "expected_parent_frontier_change": "CORRECT_TASK_C_FIRST_CAUSAL_GAP_TO_INITIAL_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__ZERO_NEW_SCOREBOARD_CREDIT__NO_REPLAY",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 71fbeb1e21683a165066c23b211781eee8fab61b",
+    "authoritative guarded materials Task C run 36698638943 artifact 11089076913",
+    "original Task C reconciliation canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+    "closed downstream repair PR537 and frozen downstream candidate PR539",
+    "open PR and branch searches found no current causal-correction owner"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__PRIMARY_EXECUTION_ARTIFACT_REINSPECTED__EARLIER_CAUSAL_INTERPRETATION_FALSIFIED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonicalize only the corrected first causal gap and preserve downstream refined-provenance repair as non-frontier work. Do not replay Task C and do not award new progress credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+    "real_outcome": "Make canonical Brain reflect the earliest demonstrated failure in Task C: initial relevance admitted a source that did not cover the requested decision property and exact comparison operands.",
+    "required_capability": "MODEL_INDEPENDENT_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_V1",
+    "obs_goal": {
+      "real_outcome": "Correct causal ordering without new execution so the next repair attacks the first demonstrated blocker.",
+      "proxy_goals_deleted": [
+        "repair metadata-refined fallback first",
+        "replay materials Task C",
+        "add task-specific materials rules",
+        "run another parent task before correcting state"
+      ],
+      "surviving_necessity": "The authoritative artifact directly falsifies the current canonical causal interpretation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "objective_relevance_bm25",
+        "research query focus",
+        "claim-spec/operand binding",
+        "scholarly provenance admission",
+        "metadata-refined fallback"
+      ],
+      "external_existing_routes_checked": [
+        "not required for truth-only causal reconciliation"
+      ],
+      "capability_work_deleted": [
+        "no new runtime code",
+        "no new source discovery",
+        "no new benchmark",
+        "no parent execution"
+      ],
+      "surviving_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic relevance-admission defect: token-count coverage can admit a source missing the decision property and an exact operand while ranking it above a source that covers them.",
+      "delete_bypass_substitute_options": [
+        "correct canonical causal ordering first",
+        "reuse existing objective/claim structure in the subsequent repair",
+        "defer downstream refined-provenance repair until upstream relevance is fixed"
+      ],
+      "surviving_causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_LACKS_DECISION_ROLE_AND_OPERAND_COVERAGE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_PRIMARY_ARTIFACT_CAUSAL_ORDERING_ONLY"
+      ],
+      "losing_routes_reason": "Any implementation before canonical correction would optimize a downstream seam and violate correctness-first ordering.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None. The immutable guarded Task C artifact contains both initial candidates, their relevance scores/matched terms, selected index, and selected materialization receipt."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR537 frontier authority",
+        "PR539 frontier authority",
+        "current metadata-refined blocker pointer"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "bibliographic provenance admission",
+        "deterministic BM25 relevance",
+        "claim-spec and operand binding"
+      ],
+      "fresh_reuse_plan": "After the corrected relevance/operand-coverage repair is independently guard-qualified, freeze a materially different fresh parent task. Never replay Task C."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused guarded Task C artifact 11089076913",
+        "reused existing candidate/provenance/relevance records"
+      ],
+      "search_stop_decision": "The primary artifact proves the causal ordering; further discovery cannot change which pipeline stage failed first.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to truth-only reconciliation; no executable route is being selected."
+    },
+    "routes_considered": [
+      "RECONCILE_PRIMARY_ARTIFACT_CAUSAL_ORDERING_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_C_REPLAY",
+      "DOWNSTREAM_REFINED_FALLBACK_REPAIR_AS_FIRST_BLOCKER",
+      "TASK_SPECIFIC_MATERIALS_PATCH"
+    ],
+    "selected_surviving_route": "RECONCILE_PRIMARY_ARTIFACT_CAUSAL_ORDERING_ONLY",
+    "why_selected_route_is_fastest_sufficient": "It changes no runtime, spends $0, uses the immutable guarded artifact, and restores correct frontier ordering immediately.",
+    "expected_parent_level_state_change": "CORRECT_TASK_C_FIRST_CAUSAL_GAP_TO_INITIAL_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__ZERO_NEW_SCOREBOARD_CREDIT__NO_REPLAY",
+    "stop_condition": "Canonicalize only the corrected first causal gap and preserve downstream refined-provenance repair as non-frontier work. Do not replay Task C and do not award new progress credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER truth-only action uses existing immutable primary execution evidence and selects no external executable route."
+    }
+  }
+}
