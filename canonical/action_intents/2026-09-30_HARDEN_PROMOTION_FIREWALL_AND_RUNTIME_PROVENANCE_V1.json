@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-PROMOTION-FIREWALL-AND-RUNTIME-PROVENANCE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_FRONTIER_SURFACES_CAN_DRIFT_AND_RUNTIME_COGNITION_PROVENANCE_IS_NOT_UNIFORMLY_EMITTED",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::CANONICAL_FRONTIER_SURFACES_CAN_DRIFT_AND_RUNTIME_COGNITION_PROVENANCE_IS_NOT_UNIFORMLY_EMITTED::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Prevent future canonical frontier drift and model-assisted evidence laundering by enforcing exact cross-surface frontier consistency and runtime-derived cognition provenance, without changing capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1 already forbids circular proof and stale authority",
+    "trusted validator already checks queue/hierarchy target, planned model dependencies, and promotion supplier separation",
+    "runtime already records controller_mode/planner fields but not uniform cognition provenance",
+    "PR301 exposed and corrected prior stale canonical surface state before merge"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal pointer, trusted-validator, runtime-provenance, and regression updates; award zero progress credit; then return immediately to the second clean cross-domain parent real task.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly required Brain to assume many mistakes by default, prevent these and other mistake classes from gaining authority, and update everything necessary while pursuing the terminal goal as fast as possible.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "5262fd6e0d132ff8a2ac30f43f5b79ff3efd4142",
+    "real_outcome": "Make known and adjacent mistake classes fail closed at the authority boundary without delaying the active frontier-capability mission.",
+    "required_capability": "FAIL_CLOSED_CANONICAL_CONSISTENCY_AND_RUNTIME_COGNITION_PROVENANCE",
+    "obs_goal": {
+      "real_outcome": "Prevent stale frontier surfaces or model-contaminated executions from acquiring canonical authority or capability credit.",
+      "proxy_goals_deleted": [
+        "another governance architecture",
+        "new scheduler",
+        "new benchmark",
+        "new cognition supplier"
+      ],
+      "surviving_necessity": "Add only missing machine checks to the existing mistake-immunity stack."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1",
+        "trusted enforce_goal_hierarchy.py promotion truth",
+        "model-independent cognition preflight guard",
+        "RECURSIVE_OBS_RECEIPT_SCHEMA_V4",
+        "existing runtime controller_mode/planner provenance"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: defect is internal authority/provenance enforcement."
+      ],
+      "capability_work_deleted": [
+        "No new law version",
+        "No new workflow",
+        "No new provider",
+        "No new execution carrier"
+      ],
+      "surviving_gap": "Current trusted guard does not enforce exact pointer/hierarchy/queue/target/scoreboard frontier agreement, and runtime goal results do not uniformly stamp cognition provenance."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic internal truth-boundary defects observed in live state and runtime result contracts.",
+      "delete_bypass_substitute_options": [
+        "Rely on human care rejected",
+        "Add another policy-only document rejected",
+        "Repair existing validator and runtime survives"
+      ],
+      "surviving_causal_blocker": "Machine authority lacks cross-surface consistency enforcement and uniform runtime-derived cognition provenance."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Repair existing validator/runtime and synchronize pointer",
+        "Create new promotion service",
+        "Manual review only"
+      ],
+      "losing_routes_reason": "Existing trusted surfaces already contain the right policy; a new service adds machinery and manual review does not make failures fail closed.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new benchmark. Verify exact-head validator semantics with positive canonical state plus negative in-memory consistency/provenance cases; inspect runtime return contracts directly."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Manual cross-checking of pointer versus hierarchy before every report",
+        "Inference of model independence from planner fields when runtime can stamp it directly"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Canonical frontier consistency",
+        "Runtime cognition provenance",
+        "Promotion contamination rejection"
+      ],
+      "fresh_reuse_plan": "The next parent real-task PR must pass with synchronized frontier surfaces and zero-model provenance in its task evidence."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing mistake-immunity law and promotion gate",
+        "Did not version another governance law",
+        "Limited repair to two observed machine-enforcement gaps"
+      ],
+      "search_stop_decision": "The current laws already cover the conceptual failure classes; only these two implementation gaps remain, so further governance search loses to real execution.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_VALIDATOR_AND_RUNTIME",
+      "NEW_PROMOTION_SERVICE",
+      "MANUAL_REVIEW_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_PROMOTION_SERVICE",
+      "MANUAL_REVIEW_ONLY",
+      "NEW_GOVERNANCE_LAW_VERSION"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_VALIDATOR_AND_RUNTIME",
+    "why_selected_route_is_fastest_sufficient": "It converts already-canonical truth rules into machine checks with the fewest moving parts and leaves the active capability mission untouched.",
+    "expected_parent_level_state_change": "Prevent future canonical frontier drift and model-assisted evidence laundering by enforcing exact cross-surface frontier consistency and runtime-derived cognition provenance, without changing capability credit.",
+    "stop_condition": "Merge only the minimal pointer, trusted-validator, runtime-provenance, and regression updates; award zero progress credit; then return immediately to the second clean cross-domain parent real task.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized internal governance repair. No external capability route can substitute for enforcing consistency/provenance inside the trusted repository boundary."
+    }
+  }
+}
