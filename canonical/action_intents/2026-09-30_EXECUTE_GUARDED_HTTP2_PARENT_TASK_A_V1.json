@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "EXECUTE-GUARDED-HTTP2-OPENENDED-PARENT-TASK-A-20260930-V1",
-  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "status": "EXECUTED_ONCE__FIRST_CAUSAL_GAP_PRESERVED__NO_REPLAY",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "a85b21811c62560ab6657b061c902f632d9d367c",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "causal_blocker": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
   "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED::GUARDED_FRESH_PARENT_EXECUTION",
   "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
@@ -18,14 +18,14 @@
     "PR457 repaired claim-spec evidence authority using guarded run 36686583882.",
     "Open-PR search on current main found no competing HTTP2 execution."
   ],
-  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "evidence_presence_classification": "PARENT_EXECUTED_ONCE__FIRST_CAUSAL_GAP_VERIFIED",
   "expected_parent_frontier_change": "Exactly one guarded physical execution of the frozen HTTP2 Task A; on first causal failure preserve the gap and mark task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
-  "highest_leverage_now": true,
+  "highest_leverage_now": false,
   "parent_task_execution": true,
   "parent_task_replay": false,
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
-  "stop_condition": "One atomic-guard-admitted execution only. Never retry automatically after reservation/dispatch uncertainty or after physical child start.",
+  "stop_condition": "SATISFIED: exactly one guarded physical child start occurred. This task is spent and must never be replayed.",
   "guard_requirement": {
     "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
     "wrapper": "execution_guard/github_actions_guarded_run_live.py",
@@ -36,7 +36,7 @@
     "canonical_base_commit": "a85b21811c62560ab6657b061c902f632d9d367c",
     "real_outcome": "Reality-test the inherited model-independent open-ended research stack on one fresh network-protocol task without leaking source, values, formula, tool recipe, or answer.",
     "surviving_necessity": "All currently localized child seams through bounded claim-spec/operand binding are now guarded-qualified; parent-level end-to-end evidence is the shortest remaining proof.",
-    "selected_surviving_route": "EXACTLY_ONE_GUARDED_HTTP2_PARENT_TASK_A_EXECUTION",
+    "selected_surviving_route": "GENERIC_OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_AND_ROUTING_REPAIR",
     "deleted_or_bypassed_paths": [
       "PARENT_REPLAY",
       "DIRECT_UNGUARDED_WORKFLOW",
@@ -45,6 +45,29 @@
       "TASK_SPECIFIC_PATCH"
     ],
     "why_selected_route_is_fastest_sufficient": "The task is already frozen, unspent, materially different, and directly exercises autonomous decomposition, source discovery, evidence extraction, claim binding, executable verification, synthesis, and provenance.",
-    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
-  }
+    "stop_rule": "HTTP2_TASK_A_SPENT__NO_REPLAY",
+    "observed_parent_outcome": "FIRST_CAUSAL_GAP",
+    "first_causal_gap": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+    "parent_execution_count": 1,
+    "replay_allowed": false,
+    "evidence_receipt": "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+  },
+  "execution_receipt": "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+  "execution": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 170,
+    "workflow_run_id": 36688193204,
+    "job_id": 109798852831,
+    "admitted_attempt_id": "c8a9972496fd4f5391995fc51ed15111",
+    "child_started": true,
+    "child_returncode": 3,
+    "execution_count": 1,
+    "artifact_id": 11084357364,
+    "artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
+    "later_attempts_denied": [
+      36688247475,
+      36688355548
+    ]
+  },
+  "next_required_action": "Repair and independently qualify generic open-ended research broad-objective decomposition/routing on current canonical bytes, then freeze a materially different fresh parent Task B."
 }

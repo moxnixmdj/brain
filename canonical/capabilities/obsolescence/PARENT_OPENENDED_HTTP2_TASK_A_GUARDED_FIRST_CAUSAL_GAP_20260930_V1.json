@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_EXECUTION_RECEIPT_V1",
+  "status": "FAIL_FIRST_CAUSAL_GAP",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+  "frozen_problem_sha256": "2152e9eacc967ecc0a83cd88d09770bc810463274f4b78e17cf04ab4d112c2b8",
+  "executed_runtime_base": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+  "execution": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 170,
+    "workflow_run_id": 36688193204,
+    "job_id": 109798852831,
+    "head_sha": "4fc9138e1574f1d9fb90e71a8c518bcf85a59c19",
+    "attempt_id": "c8a9972496fd4f5391995fc51ed15111",
+    "admission_status": "CURRENT_RUN_ADMITTED",
+    "child_started": true,
+    "child_returncode": 3,
+    "execution_count": 1,
+    "artifact_id": 11084357364,
+    "artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619"
+  },
+  "replay": {
+    "replay_allowed": false,
+    "subsequent_run_36688247475": "DENIED_ALREADY_RESERVED_OR_CREATE_NOT_CONFIRMED",
+    "subsequent_run_36688355548": "DENIED_ALREADY_RESERVED_OR_CREATE_NOT_CONFIRMED",
+    "policy": "HTTP2_TASK_A_IS_SPENT_AFTER_THE_SINGLE_PHYSICAL_CHILD_START"
+  },
+  "first_causal_gap": {
+    "code": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+    "observed_goal_gap_class": "CAPABILITY_CANDIDATE",
+    "grounded_clause_count": 0,
+    "unresolved_clause_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "broad_objective_decomposition": null,
+    "terminal_blocker": "CAPABILITY_ACQUISITION_REQUIRED",
+    "downstream_error": "NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "causal_interpretation": "The fresh parent did not enter the existing open-research source/evidence stack. Plain-goal grounding failed to bind the research objective and did not emit a broad-objective decomposition, so ASTRA fell through to generic package acquisition and searched irrelevant supplier candidates. The earliest repair target is generic research-goal decomposition/routing, not a task-specific HTTP2 answer or supplier package."
+  },
+  "evidence": {
+    "admission_receipt": "guarded-http2-parent-a-admission.json",
+    "state": "canonical/astra_runtime/state/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json",
+    "blocker": "canonical/astra_runtime/evidence/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003__BLOCKER.json",
+    "grounding": "canonical/astra_runtime/evidence/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003__BOUND_CAPABILITY_GROUNDING.json",
+    "gap_classification": "canonical/astra_runtime/evidence/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003__GOAL_GAP_CLASSIFICATION.json",
+    "capability_discovery": "canonical/astra_runtime/evidence/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
+  },
+  "parent_capability_credit_authorized": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_required_action": "Repair and independently qualify generic open-ended research broad-objective decomposition/routing on current canonical bytes; then use a new materially different fresh parent Task B. Never replay this HTTP2 task."
+}
