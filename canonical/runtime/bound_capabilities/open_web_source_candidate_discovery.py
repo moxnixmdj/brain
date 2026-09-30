@@ -22,12 +22,28 @@ UA = "ProjectBrain-SourceDiscovery/1.0 (+zero-cost model-independent research)"
 def _canon(text):
     return " ".join(str(text or "").strip().split())
 
+_BROAD_DECISION_PREFIX = re.compile(
+    r"^(?:assess|determine|evaluate|investigate|estimate|quantify|compare|analy[sz]e)\\b(?:\\s+whether\\b)?\\s*",
+    re.IGNORECASE,
+)
+
 def _query(objective):
     q = _canon(objective)
     if not q:
         raise ValueError("OBJECTIVE_REQUIRED")
     if len(q) > 1200:
         raise ValueError("OBJECTIVE_TOO_LONG")
+
+    # Broad research prompts commonly append method/provenance instructions
+    # after the actual decision sentence. Searching the whole wrapper can let
+    # generic verbs such as "assess" dominate entity-bearing terms. Preserve
+    # ordinary explicit search objectives unchanged; only focus recognized
+    # broad decision prompts, and derive the query solely from supplied text.
+    if _BROAD_DECISION_PREFIX.search(q):
+        first = re.split(r"(?<=[.!?])\\s+", q, maxsplit=1)[0].strip()
+        focused = _BROAD_DECISION_PREFIX.sub("", first).strip(" .")
+        if focused and len(focused) >= 8:
+            return focused
     return q
 
 def _safe_url(raw):
