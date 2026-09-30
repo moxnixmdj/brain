@@ -39,6 +39,24 @@ def _render(value,inputs):
         return out
     return value
 
+def _input_placeholders(value):
+    found=set()
+    def walk(x):
+        if isinstance(x,dict):
+            for v in x.values():
+                walk(v)
+            return
+        if isinstance(x,list):
+            for v in x:
+                walk(v)
+            return
+        if isinstance(x,str):
+            found.update(
+                re.findall(r"\$\{input\.([A-Za-z0-9_]+)\}",x)
+            )
+    walk(value)
+    return found
+
 def _common_effects(entries):
     sets=[set(str(x) for x in (entry.get("provides") or [])) for entry in entries]
     if not sets:
@@ -162,7 +180,7 @@ def compose(goal,grounding,registry,compiler,root,verified_initial_facts=None):
                         )
 
             path_placeholders=sorted(
-                str(x) for x in compiler._placeholders(entry.get("action_template") or {})
+                str(x) for x in _input_placeholders(entry.get("action_template") or {})
                 if str(x).endswith("_path") or str(x).endswith("_paths")
             )
             if provider_map and path_placeholders and not entry.get("proposal_bindings"):
