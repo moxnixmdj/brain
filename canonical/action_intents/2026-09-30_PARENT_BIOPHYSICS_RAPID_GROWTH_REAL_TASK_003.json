@@ -1,0 +1,353 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-BIOPHYSICS-RAPID-GROWTH-REAL-TASK-20260930-003",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either add one independently verified, model-free parent real-task result in biophysics using the current inherited Brain stack, or replace the broad parent blocker with the first specific causal capability gap exposed by that real task. No preemptive child repair or parent promotion is authorized.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 43476b77a1314988183e3daed5f3f0d603f79877",
+    "PR293 acquired bounded two-scalar numeric relation and returned frontier to the parent capability",
+    "spent geophysics task replay forbidden",
+    "current parent evidence and child capability records reviewed",
+    "current bound registry reviewed including browser capture and model-free stack",
+    "authoritative NCBI/PMC/PubMed source set directly probed before task freeze"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute PARENT-BIOPHYSICS-RAPID-GROWTH-REAL-TASK-20260930-003 exactly once from its frozen task bytes. If the end-to-end task passes, preserve producer and independent-oracle evidence and adjudicate parent scope separately. If it fails, preserve only the first causal blocker, recompute the frontier, and do not replay or tune the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "43476b77a1314988183e3daed5f3f0d603f79877",
+    "real_outcome": "Execute the user's real rapid organism-scale growth feasibility question end-to-end without model cognition: retrieve authoritative biology/physiology evidence, extract decision-relevant quantitative claims, compute conservative matter/growth/energy/heat bounds, distinguish ordinary biological infeasibility from absolute physical impossibility, preserve provenance, and independently verify the result or stop at the first causal capability gap.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Produce decision-quality model-free scientific analysis of the user's rapid-growth hypothesis, or localize the first generic capability preventing it.",
+      "proxy_goals_deleted": [
+        "another numeric benchmark",
+        "geophysics replay",
+        "model supplier race",
+        "preemptive HTML extraction repair",
+        "one-off hand-coded answer",
+        "procedural bioengineering design"
+      ],
+      "surviving_necessity": "A materially different parent-level real task is now the highest-information route after numeric-relation acquisition."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "web.browser.rendered.capture.chromedriver",
+        "knowledge.json.fetch.external",
+        "current deterministic planner/controller and bound capability registry"
+      ],
+      "external_existing_routes_checked": [
+        "NCBI/PMC cell-cycle evidence",
+        "NCBI Bookshelf body-fluid evidence",
+        "NCBI Bookshelf cardiac-output evidence",
+        "PubMed growth-cost evidence",
+        "direct one-off Python/Wolfram analysis",
+        "frontier-model research route"
+      ],
+      "capability_work_deleted": [
+        "No new model supplier",
+        "No new research framework",
+        "No preemptive text-extraction adapter",
+        "No new math supplier",
+        "No hand-authored final scientific result"
+      ],
+      "surviving_gap": "Unknown until the frozen parent task executes; static inspection does not prove whether current browser/text/grounding composition is sufficient."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Broad parent capability proof gap after the prior numeric-relation subcapability was acquired.",
+      "delete_bypass_substitute_options": [
+        "Delete more child benchmarks",
+        "Reuse the complete current model-independent Brain stack",
+        "Reject one-off Python/Wolfram answer as insufficient parent-capability evidence",
+        "Reject frontier-model cognition as circular proof",
+        "Do not repair unstructured-source interpretation before a real task proves it is the first causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_BIOPHYSICS_TASK",
+        "HAND_CODE_ONE_OFF_BIOPHYSICS_ANALYSIS",
+        "ADD_NEW_TEXT_RESEARCH_FRAMEWORK",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "A one-off analysis could answer the question but would not test the target capability. New frameworks are premature without a falsified seam. Frontier-model cognition cannot earn frontier-independence credit. Reusing the current Brain stack maximizes information gain per wall-clock.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. On semantic completion, an independent oracle must re-fetch the same authoritative sources, verify the extracted quantitative claims, recompute all consequential arithmetic without importing producer modules, and check conclusion scope."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all child-layer work unless this parent task falsifies a specific child",
+        "model supplier search for this task",
+        "preemptive custom text-research integration"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "authoritative web retrieval",
+        "rendered text capture",
+        "semantic grounding",
+        "executable composition",
+        "numeric relation",
+        "typed synthesis",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "This frozen biophysics task is the new materially different parent task. On success adjudicate broad parent evidence; on failure localize only the first generic causal seam and never replay this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical parent state",
+        "reused acquired numeric relation evidence",
+        "reused current bound registry",
+        "used authoritative source probes only to freeze task dependencies",
+        "stopped architecture search once real execution dominated static speculation"
+      ],
+      "search_stop_decision": "The current Brain stack, current $0 public carrier, four authoritative sources, and frozen scientific contract are ready. Parent execution has higher information gain than further static inspection or tool search.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main, carrier evidence, authoritative source surfaces, and route alternatives were refreshed immediately before freezing this exact-base task."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_BIOPHYSICS_TASK",
+      "HAND_CODE_ONE_OFF_BIOPHYSICS_ANALYSIS",
+      "ADD_NEW_TEXT_RESEARCH_FRAMEWORK",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKS",
+      "GEOPHYSICS_REPLAY",
+      "ONE_OFF_BIOPHYSICS_SCRIPT_AS_CAPABILITY_PROOF",
+      "NEW_RESEARCH_FRAMEWORK",
+      "FRONTIER_MODEL_COGNITION"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_BIOPHYSICS_TASK",
+    "why_selected_route_is_fastest_sufficient": "It reuses every currently acquired model-independent primitive on a materially different real user task, with current authoritative sources and a direct independent oracle, while adding zero implementation before evidence shows what is actually missing.",
+    "expected_parent_level_state_change": "Either add one independently verified, model-free parent real-task result in biophysics using the current inherited Brain stack, or replace the broad parent blocker with the first specific causal capability gap exposed by that real task. No preemptive child repair or parent promotion is authorized.",
+    "stop_condition": "Execute PARENT-BIOPHYSICS-RAPID-GROWTH-REAL-TASK-20260930-003 exactly once from its frozen task bytes. If the end-to-end task passes, preserve producer and independent-oracle evidence and adjudicate parent scope separately. If it fails, preserve only the first causal blocker, recompute the frontier, and do not replay or tune the task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:30:44Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_BRAIN_PARENT_STACK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 43476b77a1314988183e3daed5f3f0d603f79877",
+          "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1 acquired on PR293",
+          "current verified grounding/composition/evidence-decision stack",
+          "web.browser.rendered.capture.chromedriver VERIFIED_BOUND_CAPABILITY"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "NCBI PMC https://pmc.ncbi.nlm.nih.gov/articles/PMC3262245/",
+          "NCBI Bookshelf https://www.ncbi.nlm.nih.gov/books/NBK482447/",
+          "NCBI Bookshelf https://www.ncbi.nlm.nih.gov/books/NBK54473/",
+          "PubMed https://pubmed.ncbi.nlm.nih.gov/8193215/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Project Brain verified bound capability registry on current main",
+          "current jq numeric relation route from PR293",
+          "Chromedriver browser capture already verified in Brain"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh web search 2026-09-30 found the selected NCBI/PMC/PubMed authoritative pages reachable and carrying the needed claim classes; no alternate framework can test the current inherited parent route more directly than execution."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent biophysics authoritative source synthesis quantitative growth energy transport scientific verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "NCBI PMC PubMed cell cycle body water cardiac output biomass growth energetics"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "current Brain inherited browser grounding composition numeric synthesis versus one-off scientific script"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current NCBI PMC PubMed authoritative source availability"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_BIOPHYSICS_TASK",
+          "evidence": [
+            "Current Brain has acquired model-free evidence synthesis, grounding, composition, and numeric relation primitives.",
+            "Fresh source probes returned all four authoritative source pages."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED main 43476b77a1314988183e3daed5f3f0d603f79877",
+            "DIRECT_PROBE web retrieval at 2026-09-30T03:30Z",
+            "DIRECT_PROBE recent public GitHub Actions numeric-relation run 36664102642"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the integrated target behavior and stops at the first causal gap.",
+            "CAPABILITY_STRENGTH": "Exercises authoritative unstructured research, quantitative scientific reasoning, assumption qualification, and synthesis.",
+            "WALL_CLOCK": "No implementation before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Current inherited stack and carrier have recent verified executions.",
+            "VERIFIABILITY": "Frozen sources and calculations support independent source refetch and arithmetic recomputation."
+          }
+        },
+        {
+          "route": "HAND_CODE_ONE_OFF_BIOPHYSICS_ANALYSIS",
+          "evidence": [
+            "A direct Python/Wolfram plus manual-source analysis can answer the instance."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can answer the instance.",
+            "CAPABILITY_STRENGTH": "Does not test autonomous inherited research capability.",
+            "WALL_CLOCK": "Faster to one answer but slower to terminal frontier-capability proof.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for the instance.",
+            "VERIFIABILITY": "High for the instance but weak as capability-transfer evidence."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger dominates current inherited Brain on time-to-valid parent-capability evidence. One-off analysis answers the instance but cannot prove the targeted reusable frontier behavior.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_BIOPHYSICS_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:30:44Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_BIOPHYSICS_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:30:44Z",
+            "evidence": [
+              "DIRECT_PROBE: recent public verification run 36664102642 completed successfully on current capability-acquisition path"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_MODEL_INDEPENDENT_PARENT_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:30:44Z",
+            "evidence": [
+              "BRAIN_INHERITED: current main 43476b77a1314988183e3daed5f3f0d603f79877"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "NCBI_PMC_PUBMED_SOURCE_SET",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:30:44Z",
+            "evidence": [
+              "DIRECT_PROBE: all four frozen authoritative URLs retrieved successfully immediately before task freeze",
+              "OFFICIAL_PRIMARY: NCBI/PMC/PubMed source pages"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "FROZEN_PARENT_BIOPHYSICS_TASK_SPEC",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:30:44Z",
+            "evidence": [
+              "BRAIN_INHERITED: canonical/tasks/PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_003.json frozen on exact branch before execution"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
