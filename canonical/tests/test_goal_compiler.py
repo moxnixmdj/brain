@@ -203,6 +203,95 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertIn("auto.apt.zint",proc.stdout)
         self.assertIn("| id |",proc.stdout)
 
+    def test_direct_compound_compiler_uses_effect_result_binding_authority(self):
+        registry={
+          "decision.producer":{
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "incremental_spend_usd":0,
+            "cost":1,
+            "requires":["structured.decision_evidence.available"],
+            "provides":["decision.synthesis.typed"],
+            "keywords":["decision","evidence","synthesize"],
+            "action_template":{
+              "type":"invoke_capability",
+              "args":{
+                "capability_id":"decision.producer",
+                "input_path":"${input.input_path}",
+                "output_path":"${input.output_path}",
+              },
+              "expect":{"type":"field_equals","field":"output_verified","value":True},
+            },
+            "result_fields":["input_path","output_path","output_verified"],
+          },
+          "decision.verifier":{
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "incremental_spend_usd":0,
+            "cost":1,
+            "requires":["decision.synthesis.typed"],
+            "provides":["decision.synthesis.verified"],
+            "keywords":["decision","verify","independent"],
+            "action_template":{
+              "type":"invoke_capability",
+              "args":{
+                "capability_id":"decision.verifier",
+                "input_path":"${input.input_path}",
+                "result_path":"${input.result_path}",
+              },
+              "expect":{"type":"field_equals","field":"verified","value":True},
+            },
+            "proposal_bindings":{
+              "input_path":{
+                "type":"effect_result",
+                "effect":"decision.synthesis.typed",
+                "field":"input_path",
+                "container":"scalar",
+              },
+              "result_path":{
+                "type":"effect_result",
+                "effect":"decision.synthesis.typed",
+                "field":"output_path",
+                "container":"scalar",
+              },
+            },
+            "result_fields":["verified","reason"],
+          },
+        }
+        source="canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        output="canonical/astra_runtime/tmp/DIRECT_BINDING_SYNTHETIC.json"
+        goal=(
+            "Using decision evidence at "+source+", synthesize the decision to "+output+". "
+            "Then independently verify the decision result at "+output+"."
+        )
+        out=compiler.compile_goal(goal,registry,ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        self.assertEqual(
+            [x["selected_capability"] for x in out["compiled_parts"]],
+            ["decision.producer","decision.verifier"],
+        )
+        actions=[x for x in out["controller_actions"] if x["type"]!="finish"]
+        self.assertEqual(actions[0]["args"]["input_path"],source)
+        self.assertEqual(actions[0]["args"]["output_path"],output)
+        self.assertEqual(
+            actions[1]["args"]["input_path"],
+            {"$result":{"cycle":0,"field":"input_path"}},
+        )
+        self.assertEqual(
+            actions[1]["args"]["result_path"],
+            {"$result":{"cycle":0,"field":"output_path"}},
+        )
+        self.assertNotEqual(
+            actions[1]["args"]["input_path"],
+            actions[1]["args"]["result_path"],
+        )
+        self.assertEqual(
+            out["compiled_parts"][1]["inputs"]["input_path"],
+            {"$result":{"cycle":0,"field":"input_path"}},
+        )
+        self.assertEqual(
+            out["compiled_parts"][1]["inputs"]["result_path"],
+            {"$result":{"cycle":0,"field":"output_path"}},
+        )
+
     def test_replay_prefers_typed_context_over_stale_later_output(self):
         entry=self.registry()["document.convert.markdown_pdf.pandoc_weasyprint"]
         tmp_root=CANONICAL/"astra_runtime"/"tmp"

@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "UNIFY-DIRECT-COMPOUND-COMPILER-PROPOSAL-BINDING-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Remove the duplicate heuristic binding authority for causal compound goals by making the direct compiler reuse existing proposal_bindings.effect_result semantics and the existing capability-planner effect-to-runtime-result lowering.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR277 spent fresh failure run 36656793034",
+    "PR279 truthful reconciliation merged at f750e63fbf7d367adfd87f652154c0d37e02a856",
+    "PR278 lossless failure evidence merged",
+    "goal_compiler._compile_compound_goal generic fallback",
+    "goal_compiler._bind_inputs context-path recency",
+    "capability_proposal_generators._bind_planned_inputs existing effect_result binder",
+    "capability_planner._resolve_effect_bindings existing effect-to-$result lowering"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Change only the direct generic compound-capability path so entries declaring effect_result bindings use the existing proposal binder and existing planner lowering; preserve typed exact-placeholder values; add compile-only synthetic regressions proving source/result fields lower to distinct prior-action result references and heuristic recency is not consulted. Validate exact bytes publicly. No PR277 replay and no capability credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f750e63fbf7d367adfd87f652154c0d37e02a856",
+    "real_outcome": "Make causal input binding have one semantic authority across grounded composition and direct compound compilation.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Direct compound compilation must honor declared effect-result provenance instead of rebinding causal inputs by path recency.",
+      "proxy_goals_deleted": [
+        "tune path order",
+        "patch PR277 goal wording",
+        "add verifier-specific compiler code",
+        "replay PR277",
+        "new planner"
+      ],
+      "surviving_necessity": "Reuse the already-canonical proposal binder and planner lowering on the direct compiler front door."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "capability_proposal_generators._bind_planned_inputs",
+        "capability_planner._resolve_effect_bindings",
+        "goal_compiler._compile_compound_goal",
+        "goal_compiler._render_template"
+      ],
+      "external_existing_routes_checked": [
+        "No external dependency is needed; the two required primitives already exist inside Brain."
+      ],
+      "capability_work_deleted": [
+        "no new binding DSL",
+        "no new planner",
+        "no model",
+        "no path heuristic"
+      ],
+      "surviving_gap": "Direct compound compilation does not invoke the existing causal binding primitives."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic duplicated-authority integration defect.",
+      "delete_bypass_substitute_options": [
+        "Delete heuristic authority for entries with effect_result bindings: survives.",
+        "Tune recency: rejected as non-causal.",
+        "Build third binder: rejected.",
+        "Force PR277 wording around the bug: rejected."
+      ],
+      "surviving_causal_blocker": "DIRECT_COMPOUND_COMPILER_DOES_NOT_REUSE_CAUSAL_BINDER"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_PROPOSAL_BINDER_PLUS_EXISTING_PLANNER_LOWERING_IN_DIRECT_COMPILER",
+        "PATCH_RECENCY",
+        "BUILD_NEW_BINDER"
+      ],
+      "losing_routes_reason": "The native binder and lowering already encode the needed semantics; any new heuristic or binder is redundant and less verifiable.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Compile-only regression must show a producer's input_path and output_path become distinct runtime $result references in the downstream verifier action, with no controller execution or spent-task replay."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "direct causal path binding by context-path recency",
+        "verifier-specific path patches"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "typed exact-placeholder rendering",
+        "shared effect-result lowering"
+      ],
+      "fresh_reuse_plan": "After exact repair validation, spend a new materially different task, never PR277."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse PR277 code localization",
+        "reuse existing binder",
+        "reuse existing planner lowering"
+      ],
+      "search_stop_decision": "Both missing semantic primitives already exist in Brain; further discovery cannot beat composing them.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Affected-layer internal route dominates; no supplier change."
+    },
+    "routes_considered": [
+      "REUSE_PROPOSAL_BINDER_PLUS_EXISTING_PLANNER_LOWERING_IN_DIRECT_COMPILER",
+      "PATCH_RECENCY",
+      "BUILD_NEW_BINDER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PATCH_RECENCY",
+      "BUILD_NEW_BINDER",
+      "PR277_REPLAY"
+    ],
+    "selected_surviving_route": "REUSE_PROPOSAL_BINDER_PLUS_EXISTING_PLANNER_LOWERING_IN_DIRECT_COMPILER",
+    "why_selected_route_is_fastest_sufficient": "It removes the duplicate semantic authority with existing code, requires no new supplier or abstraction, and can be proven compile-only.",
+    "expected_parent_level_state_change": "Remove the duplicate heuristic binding authority for causal compound goals by making the direct compiler reuse existing proposal_bindings.effect_result semantics and the existing capability-planner effect-to-runtime-result lowering.",
+    "stop_condition": "Change only the direct generic compound-capability path so entries declaring effect_result bindings use the existing proposal binder and existing planner lowering; preserve typed exact-placeholder values; add compile-only synthetic regressions proving source/result fields lower to distinct prior-action result references and heuristic recency is not consulted. Validate exact bytes publicly. No PR277 replay and no capability credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Affected-layer repair reuses already-verified internal binder and planner-lowering primitives; no external route is selected."
+    }
+  }
+}

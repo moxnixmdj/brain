@@ -9,6 +9,7 @@ observable instead of being guessed.
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import pathlib
 import re
@@ -20,6 +21,36 @@ class GoalCompilationFailure(RuntimeError):
         self.code=code
         self.detail=detail
         super().__init__(code if detail is None else f"{code}:{detail}")
+
+
+def _load_sibling_runtime_module(filename,module_name):
+    path=pathlib.Path(__file__).resolve().with_name(filename)
+    spec=importlib.util.spec_from_file_location(module_name,path)
+    if spec is None or spec.loader is None:
+        raise GoalCompilationFailure("RUNTIME_HELPER_LOAD_FAILED",filename)
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[module_name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _uses_effect_result_bindings(entry):
+    bindings=(entry or {}).get("proposal_bindings") or {}
+    return isinstance(bindings,dict) and any(
+        isinstance(spec,dict) and spec.get("type")=="effect_result"
+        for spec in bindings.values()
+    )
+
+
+def _planner_capability(planner,cid,entry,action=None):
+    return planner.Capability(
+        str(cid),
+        frozenset(str(x) for x in (entry.get("requires") or [])),
+        frozenset(str(x) for x in (entry.get("provides") or [])),
+        float(entry.get("cost",1)),
+        action or {},
+        frozenset(str(x) for x in (entry.get("result_fields") or [])),
+    )
 
 
 STOPWORDS={
@@ -395,6 +426,12 @@ def _render_template(value, inputs):
     if isinstance(value,list):
         return [_render_template(v,inputs) for v in value]
     if isinstance(value,str):
+        exact=re.fullmatch(r"\$\{input\.([A-Za-z0-9_]+)\}",value)
+        if exact:
+            key=exact.group(1)
+            if key not in inputs:
+                raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
+            return json.loads(json.dumps(inputs[key]))
         out=value
         for key,val in inputs.items():
             out=out.replace("${input."+str(key)+"}",str(val))
@@ -572,7 +609,10 @@ def _compile_verified_browser_interaction(goal, registry, root):
     }
 
 
-def _compile_single_goal(goal, registry, root, context_paths=None, future_clauses=None):
+def _compile_single_goal(
+    goal, registry, root, context_paths=None, future_clauses=None,
+    proposal_binder=None, effect_providers=None
+):
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -583,8 +623,25 @@ def _compile_single_goal(goal, registry, root, context_paths=None, future_clause
         if score<=0:
             continue
         try:
-            inputs=_bind_inputs(goal,root,entry,context_paths=context_paths,future_clauses=future_clauses)
-        except GoalCompilationFailure:
+            if _uses_effect_result_bindings(entry):
+                if proposal_binder is None:
+                    continue
+                instance_id=(
+                    "direct-"+hashlib.sha256(
+                        (str(cid)+"\n"+str(goal)).encode("utf-8")
+                    ).hexdigest()[:16]
+                )
+                inputs,_=proposal_binder._bind_planned_inputs(
+                    goal,root,sys.modules[__name__],instance_id,cid,entry,
+                    effect_providers or {}
+                )
+            else:
+                inputs=_bind_inputs(
+                    goal,root,entry,
+                    context_paths=context_paths,
+                    future_clauses=future_clauses
+                )
+        except Exception:
             continue
         ranked.append((score,specificity,cid,entry,inputs,evidence))
     ranked.sort(key=lambda x:(-x[0],-x[1],x[2]))
@@ -3521,6 +3578,16 @@ def _compile_compound_goal(goal, clauses, registry, root):
     compiled_parts=[]
     context_paths=[]
     consumed_indices=set()
+    proposal_binder=_load_sibling_runtime_module(
+        "capability_proposal_generators.py",
+        "project_brain_direct_compiler_proposal_binder",
+    )
+    planner=_load_sibling_runtime_module(
+        "capability_planner.py",
+        "project_brain_direct_compiler_capability_planner",
+    )
+    effect_providers={}
+    runtime_effect_providers={}
     for index,clause in enumerate(clauses):
         if index in consumed_indices:
             continue
@@ -4173,7 +4240,9 @@ def _compile_compound_goal(goal, clauses, registry, root):
             part=_compile_single_goal(
                 clause,registry,root,
                 context_paths=context_paths,
-                future_clauses=clauses[index+1:]
+                future_clauses=clauses[index+1:],
+                proposal_binder=proposal_binder,
+                effect_providers=effect_providers,
             )
         except GoalCompilationFailure as exc:
             raise GoalCompilationFailure(
@@ -4201,21 +4270,39 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     "GOAL_VERIFICATION_CAPABILITY_REQUIRED",
                     json.dumps({"index":index,"subgoal":clause,"rejected_capability":cid},sort_keys=True)
                 )
-        action=_render_template(entry["action_template"],part["inputs"])
+        runtime_inputs=part["inputs"]
+        if _uses_effect_result_bindings(entry):
+            consumer=_planner_capability(planner,cid,entry)
+            try:
+                runtime_inputs=planner._resolve_effect_bindings(
+                    part["inputs"],consumer,runtime_effect_providers
+                )
+            except Exception as exc:
+                raise GoalCompilationFailure(
+                    "GOAL_CAUSAL_BINDING_LOWERING_FAILED",
+                    str(cid)+":"+type(exc).__name__+":"+str(exc),
+                ) from exc
+        action=_render_template(entry["action_template"],runtime_inputs)
         actions.append(action)
-        for key,value in part["inputs"].items():
+        for key,value in runtime_inputs.items():
             if (
                 isinstance(key,str) and key.endswith("_path")
                 and isinstance(value,str) and pathlib.Path(value).suffix
                 and value not in context_paths
             ):
                 context_paths.append(value)
+        producer_cap=_planner_capability(planner,cid,entry,action)
+        producer_cycle=len(actions)-1
+        for effect in entry.get("provides") or []:
+            effect=str(effect)
+            effect_providers[effect]=(cid,entry)
+            runtime_effect_providers[effect]=(producer_cycle,producer_cap)
         compiled_parts.append({
             "index":index,
             "subgoal":clause,
             "mode":"VERIFIED_CAPABILITY",
             "selected_capability":cid,
-            "inputs":part["inputs"],
+            "inputs":runtime_inputs,
             "target_effects":part["target_effects"],
             "score":part["score"],
         })
