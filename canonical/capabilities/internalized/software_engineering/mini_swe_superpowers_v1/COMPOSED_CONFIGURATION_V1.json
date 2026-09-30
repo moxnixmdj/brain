@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_INTERNALIZED_COMPOSED_CAPABILITY_CONFIGURATION_V1",
   "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
-  "status": "BRAIN_CONFIGURED_FRESH_TASK_FAIL__RUNTIME_ORACLE_ENFORCEMENT_REPAIRED__VERIFICATION_PENDING__ZERO_OPUS_CREDIT",
+  "status": "BRAIN_CONFIGURED_FRESH_TASK_FAIL__ARTIFACT_DEPENDENCY_CLOSURE_REPAIRED__VERIFICATION_PENDING__ZERO_OPUS_CREDIT",
   "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
   "composition_class": "EXISTING_MECHANISM_COMPOSITION_AND_CONFIGURATION_ONLY",
   "underlying_capability_invention": false,
@@ -43,6 +43,9 @@
         "For any criterion whose truth depends on a concrete runtime engine, protocol implementation, browser, database, compiler, kernel, or other execution substrate, run that class of runtime oracle or an independently justified behaviorally equivalent oracle before submission.",
         "For browser, UI, or web-security behavior, actual browser-backed execution is mandatory before submission; BROWSER_AVAILABLE=NONE is a blocker, never passing evidence.",
         "For adversarial/security work, test parser/runtime round trips and interaction or batching effects where the real verifier can compose multiple sanitized artifacts.",
+        "ARTIFACT DEPENDENCY CLOSURE: every runtime file, package, corpus, executable, service, environment variable, or external resource used by the candidate must be either a submitted artifact, explicitly declared dependency with a proven install path, or guaranteed by the task runtime contract.",
+        "CLEAN-ROOM ARTIFACT REPLAY: before scarce verifier submission, execute the submitted artifact in a clean environment that contains only the declared artifact/dependency closure plus task-guaranteed runtime; undeclared development-container conveniences must be absent.",
+        "FAIL-CLOSED PORTABILITY: if the candidate depends on a development-only system path or ambient package not proven inside the submission closure, submission is forbidden.",
         "Before submission run the strongest task-relevant tests available without reading benchmark-hidden verifier logic.",
         "Inspect the final diff and confirm requested behavior, regression preservation, and scope compliance.",
         "Only the designated central completion authority may authorize terminal submission after the completion audit; parallel lanes may inspect, implement, and verify but may not terminate the session.",
@@ -72,7 +75,7 @@
       "matched_reference_source_class": "ARTIFICIAL_ANALYSIS_INDEPENDENT_MINI_SWE_HARNESS",
       "promotion_rule": "NO_OPUS_CREDIT_UNTIL_BRAIN_CONFIGURED_ROUTE_HAS_COMPARABLE_EVIDENCE_GE_CORRESPONDING_OPUS55_BAR_AND_CONFIGURATION_CONTRIBUTION_IS_VERIFIED"
     },
-    "next_required_action": "SELECT_DISTINCT_FRESH_TASK__REQUIRE_RUNTIME_ORACLE_COVERAGE_BEFORE_ONE_SHOT_INDEPENDENT_VERIFIER__NO_HTML_JS_FILTER_REPLAY"
+    "next_required_action": "SELECT_DISTINCT_FRESH_TASK__REQUIRE_RUNTIME_ORACLE_AND_CLEAN_ROOM_ARTIFACT_CLOSURE__NO_INTERLEAVED_VIGENERE_REPLAY"
   },
   "ownership_tests": {
     "BRAIN_ARTIFACT_TEST": "PASS_CONFIGURATION_EXISTS",
@@ -80,16 +83,16 @@
     "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY__EXECUTION_PENDING",
     "SPECIMEN_SEPARATION_TEST": "PASS",
     "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_AFTER_PACKAGE_VERIFICATION",
-    "BRAIN_CONFIGURED_VERIFICATION_TEST": "FRESH_HTML_JS_FILTER_TASK_FAIL__RUNTIME_ORACLE_GATE_REPAIRED__NEW_DISTINCT_TASK_REQUIRED",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "FRESH_INTERLEAVED_VIGENERE_TASK_FAIL__DEPENDENCY_CLOSURE_GATE_REPAIRED__NEW_DISTINCT_TASK_REQUIRED",
     "OWNERSHIP_PACKAGE_TEST": "PENDING_PERFORMANCE_VERIFICATION"
   },
   "opus_5_5_credit": 0,
   "last_execution": {
-    "task": "Terminal-Bench 4.0 html-js-filter",
+    "task": "Terminal-Bench 4.0 interleaved-vigenere",
     "status": "EXECUTED_FAIL__REWARD_0__TASK_SPENT__ZERO_CAPABILITY_CREDIT",
-    "public_runner_pr": 258,
-    "session_id": "html-js-filter-20260930-v1",
-    "evidence_branch": "bridge-observations/html-js-filter-20260930-v1",
-    "evidence_path": "canonical/capabilities/opus55/HTML_JS_FILTER_TB4_VERIFICATION_FAILURE_20260930_V1.json"
+    "public_runner_pr": 261,
+    "session_id": "interleaved-vigenere-auth-20260930-v1",
+    "evidence_branch": "bridge-observations/interleaved-vigenere-auth-20260930-v1",
+    "evidence_path": "canonical/capabilities/opus55/INTERLEAVED_VIGENERE_TB4_VERIFICATION_FAILURE_20260930_V1.json"
   }
 }
