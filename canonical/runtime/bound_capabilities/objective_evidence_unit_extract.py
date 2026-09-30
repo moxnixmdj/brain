@@ -215,9 +215,10 @@ def _extract_blocks(raw, content_type):
     if "html" in str(content_type or "").lower() or "<html" in decoded[:2000].lower():
         try:
             parser.feed(decoded)
+            parser.close()
         except Exception:
             pass
-        rows = parser.blocks
+        rows = parser.parts
     else:
         rows = [("text", part) for part in re.split(r"\n\s*\n", decoded)]
     out = []
