@@ -206,15 +206,48 @@
     ],
     "mauna_objective_spent": true,
     "same_or_equivalent_task_replay_allowed": false,
-    "parent_capability_promoted": false
+    "parent_capability_promoted": false,
+    "mission_origin_canary": {
+      "status": "PASS__MISSION_PATH_HYPOTHESIS_RETIRED",
+      "evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_ORIGIN_PROPAGATION_CANARY_RECONCILIATION_20260930_V1.json",
+      "canary_run_id": 36672816106,
+      "retired_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH"
+    }
   },
   "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
   "carrier_path_authority_correction": {
-    "status": "PR347_COMPILE_GAP_REVOKED__FRESH_TASK_REQUIRED_AFTER_CARRIER_PATH_VALIDATION",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
-    "spent_climate_task_replay_allowed": false,
-    "pr49_run_id": 36670516407,
-    "quarantined_path_diagnostic_run_id": 36670619213,
-    "next_preflight": "PUBLIC_RUN_GOAL_PLUS_VALID_RUNTIME_MISSION_PATH"
+    "status": "CANONICAL_MISSION_ORIGIN_PROPAGATION_VERIFIED__MISSION_PATH_BLOCKER_RETIRED",
+    "evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_ORIGIN_PROPAGATION_CANARY_RECONCILIATION_20260930_V1.json",
+    "authoritative_canary_pr": 79,
+    "authoritative_canary_run_id": 36672816106,
+    "authoritative_canary_job_id": 109751299770,
+    "authoritative_canary_artifact_id": 11078921733,
+    "authoritative_canary_artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "validation_scope": "MISSION_ORIGIN_ENTRYPOINT_ONLY",
+    "observation": "CANONICAL_ASTRA_RUNTIME_ENTRYPOINT_PROPAGATES_EXACT_MISSION_PATH_INTO_POST_ORIGIN_APT_AUTO_ACQUISITION",
+    "retired_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "surviving_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "further_mission_path_canary_required": false,
+    "parent_capability_promoted": false,
+    "counter_delta": 0,
+    "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+    "spent_climate_task_replay_allowed": false
+  },
+  "mission_origin_canary_reconciliation": {
+    "status": "CANONICAL_MISSION_ORIGIN_PROPAGATION_VERIFIED__MISSION_PATH_BLOCKER_RETIRED",
+    "evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_ORIGIN_PROPAGATION_CANARY_RECONCILIATION_20260930_V1.json",
+    "authoritative_canary_pr": 79,
+    "authoritative_canary_run_id": 36672816106,
+    "authoritative_canary_job_id": 109751299770,
+    "authoritative_canary_artifact_id": 11078921733,
+    "authoritative_canary_artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "validation_scope": "MISSION_ORIGIN_ENTRYPOINT_ONLY",
+    "observation": "CANONICAL_ASTRA_RUNTIME_ENTRYPOINT_PROPAGATES_EXACT_MISSION_PATH_INTO_POST_ORIGIN_APT_AUTO_ACQUISITION",
+    "retired_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "surviving_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "further_mission_path_canary_required": false,
+    "parent_capability_promoted": false,
+    "counter_delta": 0,
+    "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
   }
 }
