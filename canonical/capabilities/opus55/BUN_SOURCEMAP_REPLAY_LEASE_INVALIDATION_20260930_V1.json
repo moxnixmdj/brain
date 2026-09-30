@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_LEASE_INVALIDATION_V1",
+  "status": "INVALIDATED_BEFORE_INSTRUCTION_EXPOSURE__TASK_ALREADY_SPENT__ZERO_CAPABILITY_CREDIT",
+  "invalid_lease": "canonical/action_intents/2026-09-30_LEASE_BUN_SOURCEMAP_LEAK_TB4_V1.json",
+  "task": "bun-sourcemap-leak",
+  "discovered_against_base": "2b08ef782a17f76ea5861552f56204cd4bca252b",
+  "prior_spent_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+  "prior_status": "EXECUTED_FAIL__CURRENT_CONFIGURED_ROUTE_FALSIFIED_FOR_ADVANCEMENT__TASK_SPENT__ZERO_CAPABILITY_CREDIT",
+  "prior_verifier_exposure": true,
+  "prior_replay_eligible_for_capability_credit": false,
+  "new_instruction_read_after_invalid_lease": false,
+  "new_official_submission_started": false,
+  "capability_credit_delta": 0,
+  "causal_mistake": "The new lease declared freshness without checking canonical historical spent-task evidence across prior route families.",
+  "systemic_rule": "Before authorizing a fresh benchmark task, exact-search canonical history for the task identifier and fail closed if any prior receipt marks it spent, verifier-exposed, contaminated, or replay-ineligible.",
+  "replacement_task": "wal-recovery-ordering",
+  "replacement_freshness_evidence": "Repository-wide exact canonical-history check returned no occurrence at the bound base before lease creation."
+}
