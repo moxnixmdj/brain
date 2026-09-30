@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "ACQUIRE-GENERIC-EVIDENCE-EXTRACTION-COVERAGE-20260930-V1",
-  "status": "CANDIDATE_PENDING_INDEPENDENT_EXACT_BYTE_QUALIFICATION",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_NON_ROR_CROSS_DOMAIN_PASS",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "9a6b96575636b4a975a67c90a95d41aa9d31840c",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -262,5 +262,39 @@
         "execution_dependencies_complete": true
       }
     }
-  }
+  },
+  "qualification": {
+    "status": "PASS",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 158,
+    "public_workflow_run_id": 36680967490,
+    "public_job_id": 109776102956,
+    "exact_brain_base_commit": "9a6b96575636b4a975a67c90a95d41aa9d31840c",
+    "exact_blobs": {
+      "producer": "6598ba92307c55fe6e645b4ecba070d2259818e2",
+      "parent_frontend": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+      "objective_relevance_bm25": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+      "provenance_verifier": "1dc26e68d18010b66211d1d83f7b2024c8ad1fcf",
+      "authored_extractor_tests": "81bd70c3b30ac8a83a2f781dd130858e2a5ba7de",
+      "authored_bm25_route_tests": "c6dd4e33646758484572472ce24f8d7cc9bf1886",
+      "parent_integration_test": "69445a30d93f3459be53e5f38e31149d311b6df2"
+    },
+    "exact_runner_blob_match": true,
+    "authored_extractor_regressions": "PASS",
+    "authored_generic_bm25_regressions": "PASS",
+    "parent_effective_non_ror_integration": "PASS",
+    "independent_fresh_live_generic_qualification": "PASS",
+    "live_domains": [
+      "sqlite.org",
+      "docs.python.org"
+    ],
+    "authority_identity_input_used": false,
+    "independent_refetch_visible_text_reconstruction": true,
+    "offsets_hashes_unit_ids_verified": true,
+    "non_selected_candidate_network_fail_closed": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+  "progress_credit": "VERIFIED_REUSABLE_GENERIC_SUBCAPABILITY_AND_NEXT_GAP_LOCALIZED"
 }
