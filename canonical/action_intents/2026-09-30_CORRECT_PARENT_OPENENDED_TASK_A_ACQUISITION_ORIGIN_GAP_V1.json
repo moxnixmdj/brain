@@ -1,0 +1,236 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-PARENT-OPENENDED-TASK-A-ACQUISITION-ORIGIN-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Correct the primary receipt and causal localization: the physical Mauna Loa objective was first spent in run 36669918546; the outer surviving blocker is MODEL_INDEPENDENT_RUNTIME_MISSION_ORIGIN_BRIDGE_FOR_AUTO_CAPABILITY_ACQUISITION_MISSING__APT_PYPI_ORIGIN_MISSION_PATH_INVALID. Hardened replay 36670628769 independently reproduces the same defect but earns zero authority/credit. Synchronize pointer, hierarchy, queue, scoreboard and parent target. No runtime repair in this action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "exact current main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "authoritative earliest producer run 36669918546, job 109742518213, artifact 11077637577, sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "authoritative terminal: execution_count=1, task_executed=true, model planner disabled, $0, FAIL_FIRST_CAUSAL_GAP",
+    "authoritative outer blocker: CAPABILITY_ACQUISITION_REQUIRED / NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "supplier failures: APT_ORIGIN_MISSION_PATH_INVALID and PYPI_ORIGIN_MISSION_PATH_INVALID",
+    "hardened current-runtime reproduction run 36670628769, job 109744656402, artifact 11078270105, sha256:b7bccdcdae0634f72cc5e86a08f1fac1d0accd9ab699fb2a5596e35e30a1fe74",
+    "runtime code inspection: direct run_goal mission dict lacks _runtime_mission_path while APT/PyPI/npm/source suppliers require a real file directly under canonical/astra_runtime/missions",
+    "same physical objective replay forbidden; no parent promotion credit"
+  ],
+  "evidence_presence_classification": "EXISTING_PRIMARY_TERMINAL_EVIDENCE_PLUS_HARDENED_REPRODUCTION_REQUIRES_AUTHORITY_AND_CAUSAL_CORRECTION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Make all canonical frontier mirrors agree on the acquisition-origin bridge gap and the authoritative earliest spend. Award only one residual-gap localization. Do not repair runtime or replay the parent task in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Correct split canonical state to the earliest physical spend and the actual outer causal blocker before any runtime repair.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Replace the mislocalized compile-only blocker with the first surviving acquisition-contract defect supported by primary logs and current-runtime reproduction.",
+      "proxy_goals_deleted": [
+        "replay Mauna Loa",
+        "count hardened replay as fresh authority",
+        "repair discovery ranking before the origin contract",
+        "promote parent capability from a failed task"
+      ],
+      "surviving_necessity": "One atomic zero-execution canonical correction."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current run_goal plain-goal acquisition path",
+        "auto_capability_acquisition supplier router",
+        "APT supplier",
+        "PyPI supplier",
+        "npm supplier",
+        "content-addressed Python-source supplier"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions run 36669918546",
+        "GitHub Actions run 36670628769"
+      ],
+      "capability_work_deleted": [
+        "no parent replay",
+        "no model cognition",
+        "no task-specific research recipe",
+        "no ranking retune before origin bridge"
+      ],
+      "surviving_gap": "MODEL_INDEPENDENT_RUNTIME_MISSION_ORIGIN_BRIDGE_FOR_AUTO_CAPABILITY_ACQUISITION_MISSING__APT_PYPI_ORIGIN_MISSION_PATH_INVALID"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic runtime integration seam: direct run_goal receives a mission dict without _runtime_mission_path, while autonomous suppliers fail closed unless origin_mission_path resolves to a real direct child of canonical/astra_runtime/missions.",
+      "delete_bypass_substitute_options": [
+        "reuse the immutable earliest receipt",
+        "reuse hardened reproduction",
+        "delete duplicate carrier arms",
+        "defer package-ranking changes until origin provenance is valid"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_RUNTIME_MISSION_ORIGIN_BRIDGE_FOR_AUTO_CAPABILITY_ACQUISITION_MISSING__APT_PYPI_ORIGIN_MISSION_PATH_INVALID"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ATOMIC_CANONICAL_AUTHORITY_AND_GAP_CORRECTION",
+        "REPAIR_GENERIC_RUNTIME_MISSION_ORIGIN_BRIDGE",
+        "REPLAY_PARENT_TASK",
+        "RETUNE_DISCOVERY_RANKING"
+      ],
+      "losing_routes_reason": "Runtime repair must follow truthful canonical localization; replay is forbidden; ranking is downstream of the supplier-origin contract failure.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None for reconciliation. Primary job logs expose the exact failure; hardened current-runtime replay independently reproduces it."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "compile-gap-only frontier interpretation",
+        "PR348 stale reconciliation",
+        "carrier PR54 and PR55 duplicate arms",
+        "any same-objective replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime provenance firewall",
+        "supplier origin provenance guards",
+        "one-shot evidence preservation"
+      ],
+      "fresh_reuse_plan": "After reconciliation, repair the generic origin bridge and qualify it on a fresh non-parent acquisition case before freezing a materially different parent Task A."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused primary terminal logs",
+        "reused hardened reproduction",
+        "reused code-level supplier guard inspection"
+      ],
+      "search_stop_decision": "The causal integration mismatch is directly observed twice and located in code; further broad search cannot beat a generic local bridge repair.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main dc38bf8370d692d3f18a5aff446d26933f9dd03a, earliest receipt 36669918546, hardened receipt 36670628769, and current supplier guards were re-read immediately before this action."
+    },
+    "routes_considered": [
+      "ATOMIC_CANONICAL_AUTHORITY_AND_GAP_CORRECTION",
+      "REPAIR_GENERIC_RUNTIME_MISSION_ORIGIN_BRIDGE",
+      "REPLAY_PARENT_TASK",
+      "RETUNE_DISCOVERY_RANKING"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PARENT_TASK_REPLAY",
+      "DUPLICATE_CARRIER_ARMS",
+      "COMPILE_ONLY_MISLOCALIZATION",
+      "PREMATURE_DISCOVERY_RANKING_REPAIR"
+    ],
+    "selected_surviving_route": "ATOMIC_CANONICAL_AUTHORITY_AND_GAP_CORRECTION",
+    "why_selected_route_is_fastest_sufficient": "It repairs the truth boundary with zero execution and makes the next code change target the observed generic seam rather than a proxy.",
+    "expected_parent_level_state_change": "Residual blocker becomes MODEL_INDEPENDENT_RUNTIME_MISSION_ORIGIN_BRIDGE_FOR_AUTO_CAPABILITY_ACQUISITION_MISSING__APT_PYPI_ORIGIN_MISSION_PATH_INVALID; next action becomes REPAIR_GENERIC_RUNTIME_MISSION_ORIGIN_BRIDGE_FOR_AUTO_CAPABILITY_ACQUISITION__QUALIFY_WITH_FRESH_NON_PARENT_ACQUISITION_CASE__THEN_FREEZE_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_A; parent remains unacquired.",
+    "stop_condition": "Stop after all five canonical mirrors and the terminal evidence agree. Runtime repair belongs to a fresh exact-base lease.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:58:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ATOMIC_CANONICAL_AUTHORITY_AND_GAP_CORRECTION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+          "current astra_runtime.py and autonomous supplier modules"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions run 36669918546 / artifact 11077637577",
+          "GitHub Actions run 36670628769 / artifact 11078270105"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [
+        {
+          "route": "ATOMIC_CANONICAL_AUTHORITY_AND_GAP_CORRECTION",
+          "evidence": [
+            "earliest immutable terminal JSON",
+            "hardened same-defect reproduction",
+            "direct code inspection of mission-path guard mismatch"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE:36669918546",
+            "DIRECT_PROBE:36670628769",
+            "BRAIN_INHERITED: supplier mission-origin guards"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Matches outer terminal blocker and chronology.",
+            "CAPABILITY_STRENGTH": "No claim beyond observed seam.",
+            "WALL_CLOCK": "Immediate.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Two executions reproduce same generic defect.",
+            "VERIFIABILITY": "Primary logs plus code."
+          }
+        }
+      ],
+      "negative_search_summary": "No alternative can dominate zero-execution truth reconciliation before repair.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ATOMIC_CANONICAL_AUTHORITY_AND_GAP_CORRECTION",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_RUNTIME_REPAIR"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:58:00Z",
+        "max_age_hours": 2,
+        "selected_route": "ATOMIC_CANONICAL_AUTHORITY_AND_GAP_CORRECTION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PRIMARY_AND_HARDENED_TERMINAL_RECEIPTS",
+            "kind": "EVIDENCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:57:00Z",
+            "evidence": [
+              "run 36669918546",
+              "run 36670628769"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
