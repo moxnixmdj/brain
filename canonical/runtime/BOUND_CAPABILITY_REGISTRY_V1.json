@@ -3047,6 +3047,76 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "evidence.extract.verified_relevant_source.stdlib": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "evidence.extract.verified_relevant_source.stdlib",
+          "relevance_receipt_path": "${input.relevance_receipt_path}",
+          "objective": "${input.objective}",
+          "output_path": "${input.output_path}",
+          "limit": "${input.limit}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "verified_relevant_source_evidence_extract",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "extract",
+        "extraction",
+        "relevant",
+        "source",
+        "passage",
+        "quote",
+        "verbatim",
+        "objective",
+        "research",
+        "claim",
+        "supporting",
+        "text"
+      ],
+      "limitations": [
+        "Requires an upstream FIRST_PARTY_RELEVANT_SOURCE_VERIFIED receipt and re-fetches the exact verified URL.",
+        "Emits only verbatim visible-text passages with bounded lexical support for the exact same objective.",
+        "Does not establish semantic entailment, primary-source status, factual correctness, evidence sufficiency, or claim endorsement.",
+        "Exact-domain continuity, objective-token binding, passage count, and source size are bounded and fail closed."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "evidence.passages.verbatim.lexically_relevant"
+      ],
+      "requires": [
+        "source.first_party_objective_relevance.verified"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "html.parser",
+          "ipaddress",
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/verified_relevant_source_evidence_extract.py"
+      },
+      "status": "CANDIDATE_BOUND_CAPABILITY",
+      "verification": {
+        "inherited_upstream_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json",
+        "new_interface_status": "PENDING_FRESH_CROSS_DOMAIN_LIVE_QUALIFICATION"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
