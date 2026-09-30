@@ -5493,7 +5493,8 @@ def run_goal(step, mission):
             gap_path,gap_evidence=_write_goal_gap_classification(
                 mission,acquisition_goal,gap_class,error_text
             )
-            if gap_class!="CAPABILITY_CANDIDATE":
+            composition_eligible=gap_class in {"CAPABILITY_CANDIDATE","CAUSAL_COMPOSITION"}
+            if not composition_eligible:
                 raise Blocker(
                     "GOAL_ARCHITECTURAL_GAP:"+json.dumps({
                       "gap_class":gap_class,
@@ -5540,6 +5541,19 @@ def run_goal(step, mission):
                 composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
                 composed_result["model_dependency_count"]=0
                 return composed_result
+
+            if gap_class!="CAPABILITY_CANDIDATE":
+                raise Blocker(
+                    "GOAL_ARCHITECTURAL_GAP:"+json.dumps({
+                      "gap_class":gap_class,
+                      "subgoal":acquisition_goal,
+                      "evidence_path":str(gap_path.relative_to(ROOT)),
+                      "grounding_evidence_path":(str(grounding_path.relative_to(ROOT)) if ROOT in grounding_path.parents else str(grounding_path)),
+                      "grounded_clause_count":grounded_count,
+                      "capability_acquisition_attempted":False,
+                      "policy":"CAUSAL_COMPOSITION_MAY_USE_EXISTING_BOUND_GROUNDING_BUT_NEVER_EXTERNAL_DISCOVERY",
+                    },sort_keys=True)
+                ) from e
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
