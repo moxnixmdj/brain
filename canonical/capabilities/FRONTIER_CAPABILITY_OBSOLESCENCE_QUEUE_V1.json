@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Execute the already-frozen fresh SQLite open-ended parent Task A exactly once through the qualified canonical ASTRA CLI carrier; preserve only the first integrated causal gap on failure and never replay the task.",
+    "objective": "Acquire the minimum generic model-independent route that maps a broad open-ended research goal onto existing verified bound capabilities before supplier acquisition; the frozen SQLite parent task is spent and must not be replayed.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "FRESH_OPEN_ENDED_PARENT_TASK_A_REQUIRED_AFTER_CARRIER_MISSION_ORIGIN_VALIDATION",
-    "evidence_path": "canonical/capabilities/obsolescence/CARRIER_MISSION_ORIGIN_CANARY_RECONCILIATION_20260930_V1.json",
-    "repair_status": "CANONICAL_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT__NO_PARENT_EXECUTION_YET",
-    "prohibition": "NO_MAUNA_REPLAY_OR_RENAME_AS_FRESH__NO_SQLITE_REPLAY_AFTER_EXECUTION_START__NO_PARENT_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_RESEARCH_RECIPE__NO_DIRECT_GOAL_COMPILER_HARNESS",
-    "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+    "exact_blocker": "BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION_MISSING__RUNTIME_FALLS_TO_NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPENENDED_TASK_A_FIRST_SPEND_RECONCILIATION_20260930_V1.json",
+    "repair_status": "FRESH_SQLITE_TASK_A_SPENT_FAIL__FIRST_INTEGRATED_CAUSAL_GAP_LOCALIZED__NO_PARENT_CAPABILITY_CREDIT",
+    "prohibition": "NO_SQLITE_REPLAY_OR_RENAME_AS_FRESH__NO_PARENT_PROMOTION_FROM_FAILED_RUN__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_SQLITE_RECIPE__NO_REPAIR_BEYOND_LOCALIZED_GENERIC_GAP_WITHOUT_FRESH_QUALIFICATION",
+    "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION__SEARCH_REUSE_AND_COMPOSE_EXISTING_VERIFIED_CAPABILITIES_BEFORE_REPAIR__NO_SQLITE_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -116,11 +116,18 @@
       "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
       "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
       "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
-      "status": "FROZEN_UNSPENT",
-      "execution_count": 0,
+      "status": "SPENT_FAIL_FIRST_CAUSAL_GAP",
+      "execution_count": 1,
       "replay_allowed": false,
-      "required_entrypoint": "canonical/runtime/astra_runtime.py <canonical mission path>"
-    }
+      "required_entrypoint": "canonical/runtime/astra_runtime.py <canonical mission path>",
+      "authoritative_run_id": 36674205874,
+      "authoritative_artifact_id": 11078364401,
+      "authoritative_artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9",
+      "first_causal_gap": "BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION_MISSING__RUNTIME_FALLS_TO_NO_COMPATIBLE_SUPPLIER_CONTRACT"
+    },
+    "latest_parent_openended_run_id": 36674205874,
+    "latest_parent_openended_artifact_id": 11078364401,
+    "latest_parent_openended_artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -337,5 +344,5 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY"
+  "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION__SEARCH_REUSE_AND_COMPOSE_EXISTING_VERIFIED_CAPABILITIES_BEFORE_REPAIR__NO_SQLITE_REPLAY"
 }
