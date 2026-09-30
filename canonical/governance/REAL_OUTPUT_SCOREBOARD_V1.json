@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_progress_event_target": "SYNC_EXISTING_CANONICAL_PYTHON_CODEC_PROBE_INTO_PUBLIC_CARRIER__RUN_ONE_FRESH_NON_PARENT_PYPI_CODEC_ACQUISITION_CANARY__THEN_FREEZE_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_PARENT_TASK_A",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -463,12 +463,30 @@
       "progress_credit": "EVIDENCE_SCOPE_CORRECTION_ONLY",
       "corrected_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "PARENT_OPEN_ENDED_MISSION_ORIGIN_QUALIFICATION_RECONCILIATION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "MISSION_ORIGIN_PROPAGATION_PROVEN__CARRIER_PYPI_HELPER_CLOSURE_GAP_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_MISSION_ORIGIN_QUALIFICATION_RECONCILIATION_20260930_V1.json",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "EVIDENCE_SCOPE_CORRECTION_ONLY",
+      "falsified_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+      "residual_gap": "PUBLIC_CARRIER_RUNTIME_CLOSURE_MISSING_CANONICAL_PYTHON_CODEC_PROBE_FOR_PYPI_AUTO_ACQUISITION",
+      "parent_capability_promoted": false,
+      "same_parent_task_replay_allowed": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "NO_ADMISSIBLE_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_YET__STRUCTURED_DEMOGRAPHY_PRESERVED",
+    "active_subcapability_target": "PUBLIC_CARRIER_RUNTIME_CLOSURE_MISSING_CANONICAL_PYTHON_CODEC_PROBE_FOR_PYPI_AUTO_ACQUISITION",
+    "subcapability_status": "MISSION_ORIGIN_PROPAGATION_PROVEN__CARRIER_PYPI_HELPER_CLOSURE_GAP_LOCALIZED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
