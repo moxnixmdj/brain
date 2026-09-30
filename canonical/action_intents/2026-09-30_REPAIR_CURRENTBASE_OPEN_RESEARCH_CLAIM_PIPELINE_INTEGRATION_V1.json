@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-CURRENTBASE-OPEN-RESEARCH-CLAIM-PIPELINE-INTEGRATION-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+  "action_kind": "PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1::PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "evidence_presence_classification": "GUARDED_RED_FAILURE_PROVES_MISSING_COMPOSITION_EDGE",
+  "highest_leverage_now": true,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "expected_parent_frontier_change": "Make verified extraction -> objective claim-spec/operand binding -> verified relation evaluation reachable in the canonical open-research parent path. Stop after relation evaluation and require decision synthesis/verification. Preserve truth, sufficiency, independence, causality and parent completion as unverified.",
+  "prior_work_checked": [
+    "guarded claim-spec qualification runner run 36686583882",
+    "guarded TDD red runner PR169 run 36687982814 artifact 11084297726",
+    "red failure: missing claim_relation_evaluated_count and missing OPEN_ENDED_RESEARCH_RELATION_EVALUATED marker",
+    "HTTP2 Task A remains unspent"
+  ],
+  "stop_condition": "Guarded independent green qualification must pass exact candidate bytes before merge; HTTP2 parent task remains unspent during repair.",
+  "recursive_obs": {
+    "selected_surviving_route": "COMPOSE_ALREADY_VERIFIED_BINDER_IN_FRONTEND_AND_ADVANCE_RUNTIME_STOP_MARKER",
+    "deleted_or_bypassed_paths": [
+      "NEW_PARSER",
+      "NEW_RELATION_ENGINE",
+      "MODEL_COGNITION",
+      "PARENT_EXECUTION_BEFORE_GREEN",
+      "TRUTH_OR_SUFFICIENCY_INFERENCE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The red diagnostic proved the only missing behavior is the parent-path composition edge; all child semantics are already guarded-qualified.",
+    "verification": "Guarded non-parent green integration tests over explicit comparison and unsupported objective, plus exact candidate blob binding."
+  }
+}
