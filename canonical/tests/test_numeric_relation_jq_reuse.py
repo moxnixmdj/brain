@@ -70,6 +70,9 @@ class NumericRelationJqReuseTests(unittest.TestCase):
         self.assertEqual(compute["args"]["capability_id"],"json.query.jq")
         self.assertIn("fabs",compute["args"]["filter"])
         self.assertIn("predicate",compute["args"]["filter"])
+        self.assertIn("tonumber",compute["args"]["filter"])
+        self.assertIn("NUMERIC_RELATION_INPUT_NOT_NUMBER",compute["args"]["filter"])
+        self.assertIn("type==\\\"number\\\"",compute["args"]["filter"])
 
     def test_domain_wording_and_scientific_notation_do_not_change_route(self):
         compiled=self.compile_relation(noun="temperatures",threshold="2e-1")
