@@ -27,16 +27,17 @@
   "repair": [
     "derive the search query from the first decision-bearing clause of the objective",
     "strip only recognized leading broad-research command syntax while preserving subject entities, relation terms, quantities, and versions",
+    "treat sentence punctuation as an orchestration boundary only when followed by recognized control prose so scientific abbreviations remain intact",
     "exclude later orchestration sentences from search query construction",
     "rank retrieved candidates against that same focused query instead of the full imperative objective",
     "preserve original full objective for evidence extraction and claim binding",
     "do not introduce source domains, accessions, task-specific literals, learned models, or semantic claims beyond deterministic lexical relevance"
   ],
   "candidate_blobs": {
-    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py": "e282474c25646c082c69d0cc83750bf99db98a1c",
+    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py": "c913c20203b638caff050e7461a4b0023852ee10",
     "canonical/runtime/bound_capabilities/open_research_source_frontend.py": "a6fa0f32eab09791ec6a8cdabe961519d073be58",
     "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
-    "canonical/tests/test_open_web_source_candidate_discovery.py": "b72d46fc8a879ff2c19a69682ab6bebbf023f2b7",
+    "canonical/tests/test_open_web_source_candidate_discovery.py": "cdde67e65f5c7fcf3793c5e10973fb409b8c4f66",
     "canonical/tests/test_open_research_query_focus_regression.py": "d92ff787afa66bd4317ba127305ccd1937f1be16"
   },
   "qualification_required": "EXACT_BYTE_NON_PARENT_GUARDED_INDEPENDENT_QUALIFICATION",
