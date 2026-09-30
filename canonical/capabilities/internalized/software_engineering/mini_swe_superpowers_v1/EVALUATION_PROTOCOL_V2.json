@@ -60,7 +60,7 @@
     ]
   },
   "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_A_DISTINCT_FRESH_BRAIN_CONFIGURED_ROUTE_WITH_RUNTIME_ORACLE_COVERAGE_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
-  "current_state": "HTML_JS_FILTER_FRESH_TASK_FAIL__RUNTIME_ORACLE_GATE_REPAIRED__NEW_DISTINCT_TASK_REQUIRED__ZERO_OPUS_CREDIT",
+  "current_state": "INTERLEAVED_VIGENERE_FRESH_TASK_FAIL__DEPENDENCY_CLOSURE_GATE_REPAIRED__NEW_DISTINCT_TASK_REQUIRED__ZERO_OPUS_CREDIT",
   "contamination_events": [
     "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
   ],
@@ -71,7 +71,10 @@
     "browser_rule": "Browser/UI/web-security acceptance requires actual browser-backed execution; absence of a browser is a blocker and cannot be recorded as PASS.",
     "security_interaction_rule": "Adversarial/security preflight must include parser/runtime round trips plus composition, batching, or interaction effects when artifacts can be combined by the consumer.",
     "terminal_authority": "Use BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1 with zero known relevant failures and all acceptance/verification entries PASS.",
-    "spent_task_rule": "After independent verifier exposure, the task is spent and cannot be repaired/replayed for promotion."
+    "spent_task_rule": "After independent verifier exposure, the task is spent and cannot be repaired/replayed for promotion.",
+    "artifact_dependency_closure": "Every runtime dependency must be submitted, explicitly declared with a proven install path, or guaranteed by the task contract.",
+    "clean_room_artifact_replay": "Before terminal authorization, execute the final submitted artifacts in a minimal clean environment containing only declared closure plus task-guaranteed runtime.",
+    "development_runtime_rule": "Ambient files/packages/services present only in the development container cannot count as evidence of artifact portability."
   },
   "spent_preflights": [
     {
@@ -81,6 +84,16 @@
       "runner_pr": 258,
       "session_id": "html-js-filter-20260930-v1",
       "evidence": "canonical/capabilities/opus55/HTML_JS_FILTER_TB4_VERIFICATION_FAILURE_20260930_V1.json",
+      "capability_credit": 0,
+      "may_replay_for_promotion": false
+    },
+    {
+      "task": "interleaved-vigenere",
+      "benchmark": "Terminal-Bench 4.0",
+      "verdict": "EXECUTED_FAIL__REWARD_0__TASK_SPENT",
+      "runner_pr": 261,
+      "session_id": "interleaved-vigenere-auth-20260930-v1",
+      "evidence": "canonical/capabilities/opus55/INTERLEAVED_VIGENERE_TB4_VERIFICATION_FAILURE_20260930_V1.json",
       "capability_credit": 0,
       "may_replay_for_promotion": false
     }
