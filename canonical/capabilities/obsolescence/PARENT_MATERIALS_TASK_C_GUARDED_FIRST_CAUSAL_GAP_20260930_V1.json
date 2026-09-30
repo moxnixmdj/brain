@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRESH_TASK_CAUSAL_GAP_RECONCILIATION_V1",
+  "status": "FRESH_TASK_C_SPENT__FIRST_GENERIC_CAUSAL_GAP_LOCALIZED__NO_PARENT_CREDIT",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
+  "domain": "MATERIALS_ENGINEERING_THERMOPHYSICAL_PROPERTY_COMPARATIVE_RESEARCH",
+  "task_blob_sha": "592732d21f72c1344b82640f99fb50c9ea6ece78",
+  "mission_blob_sha": "320dcbd3515883a9dc7036b7193497fffa2a564d",
+  "authorization_blob_sha": "735d0cd5f794940ec717158c9cab619199074d45",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 223,
+    "run_id": 36698638943,
+    "job_id": 109832558595,
+    "artifact_id": 11089076913,
+    "artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162",
+    "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
+    "guard_status": "CURRENT_RUN_ADMITTED",
+    "child_started": true,
+    "child_returncode": 3,
+    "execution_count": 1,
+    "replay_allowed": false
+  },
+  "observed_pipeline_state": {
+    "source_frontend_status": "SELECTED_SOURCE_MATERIALIZATION_BLOCKED",
+    "provenance_verified_candidate_count": 12,
+    "claim_relation_evaluated_count": 0,
+    "selected_initial_candidate": {
+      "url": "https://doi.org/10.1080/00102208708947033",
+      "title": "Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+      "live_materialization_status": "UNVERIFIED",
+      "live_materialization_error": "HTTP_403_FORBIDDEN"
+    },
+    "metadata_refined_query_executed": true,
+    "metadata_refined_candidate_count": 12,
+    "metadata_refined_relevant_bibliographic_candidate_observed": {
+      "url": "https://doi.org/10.6028/nbs.rpt.9869",
+      "title": "Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+      "publisher": "National Bureau of Standards",
+      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+    },
+    "metadata_refined_live_retrieval_candidates_after_filter": 1,
+    "metadata_refined_only_live_candidate": {
+      "url": "https://maltaexpat.com/tools/rent-prices/",
+      "relevance_score": 0.0,
+      "matched_terms": []
+    },
+    "metadata_refined_relevance_status": "RELEVANCE_UNRESOLVED",
+    "metadata_refined_selected": false
+  },
+  "first_generic_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "causal_interpretation": "The initial source path correctly preserves BIBLIOGRAPHIC_PROVENANCE_VERIFIED candidates through relevance after PR529. After direct materialization of the selected bibliographic candidate failed, the one allowed metadata-refined fallback reintroduced the old information-loss seam by retaining only RETRIEVAL_PROVENANCE_VERIFIED candidates before refined relevance. A directly relevant National Bureau of Standards bibliographic record was therefore excluded while an unrelated live web result remained.",
+  "generic_repair_requirement": "The bounded metadata-refined fallback must preserve every provenance-verified candidate class through deterministic relevance, then live-materialize only the refined selected bibliographic winner under the same identity-bound fail-closed contract. It must remain bounded to the existing single refinement attempt and must not replay Task C.",
+  "explicitly_not_claimed": [
+    "parent open-ended research capability completion",
+    "factual correctness of the materials comparison",
+    "evidence sufficiency",
+    "primary-source status",
+    "source independence"
+  ],
+  "counter_effects": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 1
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY"
+}
