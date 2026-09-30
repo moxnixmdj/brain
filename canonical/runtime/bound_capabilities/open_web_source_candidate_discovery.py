@@ -23,13 +23,13 @@ def _canon(text):
     return " ".join(str(text or "").strip().split())
 
 _BROAD_QUERY_PREFIX = re.compile(
-    r"^(?:determine|assess|evaluate|investigate|estimate|quantify|analy[sz]e)\\s+(?:whether\\s+)?",
+    r"^(?:determine|assess|evaluate|investigate|estimate|quantify|analy[sz]e)\s+(?:whether\s+)?",
     re.IGNORECASE,
 )
-_COMPARE_QUERY_PREFIX = re.compile(r"^compare\\s+", re.IGNORECASE)
+_COMPARE_QUERY_PREFIX = re.compile(r"^compare\s+", re.IGNORECASE)
 _ORCHESTRATION_BOUNDARY = re.compile(
-    r"[.!?]\\s+(?=(?:use|autonomously|independently|choose|run|identify|"
-    r"produce|preserve|verify|determine\\s+how|state|report)\\b)",
+    r"[.!?]\s+(?=(?:use|autonomously|independently|choose|run|identify|"
+    r"produce|preserve|verify|determine\s+how|state|report)\b)",
     re.IGNORECASE,
 )
 
@@ -47,9 +47,9 @@ def _query(objective):
     first = _ORCHESTRATION_BOUNDARY.split(q, maxsplit=1)[0].strip()
     focused = _BROAD_QUERY_PREFIX.sub("", first, count=1)
     focused = _COMPARE_QUERY_PREFIX.sub("", focused, count=1)
-    focused = focused.strip(" \\t\\r\\n.,;:")
+    focused = focused.strip(" \t\r\n.,;:")
     if len(re.findall(r"[A-Za-z0-9]+", focused)) < 2:
-        focused = first.strip(" \\t\\r\\n.,;:")
+        focused = first.strip(" \t\r\n.,;:")
     if not focused:
         raise ValueError("OBJECTIVE_QUERY_EMPTY")
     return focused
