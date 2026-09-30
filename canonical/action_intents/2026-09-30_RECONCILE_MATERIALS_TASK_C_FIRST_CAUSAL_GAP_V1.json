@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MATERIALS-TASK-C-FIRST-CAUSAL-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MATERIALS_TASK_C_TERMINAL_EVIDENCE_NOT_YET_CANONICALLY_RECONCILED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MATERIALS_TASK_C_TERMINAL_EVIDENCE_NOT_YET_CANONICALLY_RECONCILED",
+  "expected_parent_frontier_change": "Mark materials Task C spent/no-replay, credit exactly one residual gap, grant zero parent capability credit, and move the frontier to MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL_V1.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain PR533 merged authorization at 5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83",
+    "verification-capsule-runner PR223 physical run 36698638943",
+    "prestart exact Brain snapshot pins passed",
+    "atomic guard step completed successfully",
+    "Task C child started once and stopped at first causal blocker",
+    "terminal artifact 11089076913 preserved with sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162",
+    "no same-task replay is allowed"
+  ],
+  "evidence_presence_classification": "PRESERVED_REAL_TASK_EVIDENCE_LOCALIZES_FIRST_CAUSAL_GAP",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "stop_condition": "Merge truth-only reconciliation only. Do not modify runtime in this action. Do not replay materials Task C. Next action must OBS the generic selected-source materialization/retrieval gap before any repair.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83",
+    "real_outcome": "Make the authoritative Brain frontier match the immutable one-shot materials Task C result.",
+    "required_capability": "MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve the first causal gap from the spent fresh parent task without replay or downstream speculation.",
+      "proxy_goals_deleted": [
+        "retry Task C",
+        "patch materials-specific sources",
+        "claim parent capability success",
+        "repair downstream arithmetic before evidence exists"
+      ],
+      "surviving_necessity": "Truth-only frontier reconciliation from immutable terminal evidence."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic source-front-end live materialization/retrieval seam exposed by a fresh materials task.",
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_IMMUTABLE_TASK_C_EVIDENCE_ONLY"
+      ],
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None for this reconciliation; run logs and artifact are the immutable source."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "fresh Task C required blocker",
+        "any Task C replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "guarded exact-once execution",
+        "source discovery",
+        "provenance verification"
+      ],
+      "fresh_reuse_plan": "After a separately authorized generic repair and independent qualification, use a new materially different parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused authoritative run/job/artifact and exact observed blocker"
+      ],
+      "search_stop_decision": "No search is needed to reconcile an already executed immutable task result.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to truth-only reconciliation."
+    },
+    "selected_surviving_route": "RECONCILE_IMMUTABLE_TASK_C_EVIDENCE_ONLY",
+    "why_selected_route_is_fastest_sufficient": "The task is already spent and the first causal blocker is explicit in the terminal producer trace; any rerun or broader search would violate truth-first/no-duplicate execution.",
+    "expected_parent_level_state_change": "One residual gap localized; zero parent capability credit; Task C marked spent/no-replay.",
+    "stop_condition": "No runtime modification or Task C replay in this action.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Truth-only reconciliation of immutable spent-task evidence; no supplier or execution route is selected."
+    }
+  }
+}
