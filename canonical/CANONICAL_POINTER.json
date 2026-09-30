@@ -196,11 +196,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+    "next_step": "REUSE_CANONICAL_ASTRA_MISSION_ENTRYPOINT_TO_PROPAGATE_RUNTIME_MISSION_IDENTITY__VALIDATE_WITH_FRESH_NON_PARENT_CANARY__THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "critical_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -277,7 +277,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "highest_leverage_capability_gap": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -588,17 +588,40 @@
     "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
-      "event_id": "PARENT_DEMOGRAPHY_STRUCTURED_MODEL_FREE_REAL_TASK_SCOPE_CORRECTED_20260930",
+      "event_id": "PARENT_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILED_20260930",
       "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "status": "VERIFIED_STRUCTURED_MODEL_FREE_REAL_TASK__NOT_OPEN_ENDED_PARENT_PROMOTION_EVIDENCE",
-      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
-      "source_real_task_run_id": 36667844172,
+      "status": "FIRST_PHYSICAL_SPEND_AUTHORITY_CORRECTED__MISSION_ORIGIN_GAP_LOCALIZED__LATER_REPLAYS_ZERO_FRESHNESS__NO_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILIATION_20260930_V1.json",
+      "source_real_task_run_id": 36669918546,
+      "public_job_id": 109742518213,
+      "artifact_id": 11077637577,
+      "artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+      "first_causal_stage": "AUTO_CAPABILITY_ACQUISITION_AFTER_COMPILE_MISS_FALLBACK",
+      "first_causal_gap": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+      "exact_cause": "APT_ORIGIN_MISSION_PATH_INVALID + PYPI_ORIGIN_MISSION_PATH_INVALID because direct run_goal caller supplied no canonical _runtime_mission_path",
+      "later_replay_run_ids": [
+        36670516407,
+        36670981076,
+        36671472249
+      ],
+      "replay_allowed": false,
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED_ONCE",
+      "parent_capability_promoted": false,
       "scoreboard": {
         "reusable_capabilities_inherited": 5,
         "verified_real_tasks_completed": 9,
         "fresh_reuse_passes": 2,
         "frontier_dependencies_removed": 1,
-        "residual_gaps_localized": 10
+        "residual_gaps_localized": 11
       }
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
@@ -626,17 +649,28 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "OPEN_ENDED_PARENT_EVIDENCE_SCOPE_CORRECTED__STRUCTURED_DEMOGRAPHY_PRESERVED_SUPPORTING_ONLY",
-      "reason": "The parent useful behavior requires autonomous decomposition and material knowledge/tool discovery. Demography predeclared exact sources, JSON paths, formula and threshold, so its verified execution is supporting evidence but cannot authorize the open-ended parent claim.",
-      "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+      "status": "FIRST_SPEND_PROVENANCE_CORRECTED__MISSION_ORIGIN_GAP_PRESERVED__LATER_REPLAYS_QUARANTINED__NO_PROMOTION",
+      "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "relationship": "SAME_PARENT_TARGET__PROVENANCE_AND_CROSS_SURFACE_TRUTH_CORRECTION",
+      "blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json"
+        "canonical/capabilities/obsolescence/PARENT_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILIATION_20260930_V1.json"
       ],
-      "same_task_replay_allowed": false
+      "first_spend_run_id": 36669918546,
+      "first_spend_job_id": 109742518213,
+      "later_replay_run_ids": [
+        36670516407,
+        36670981076,
+        36671472249
+      ],
+      "substantive_objective_spent": true,
+      "same_or_equivalent_task_replay_allowed": false,
+      "parent_capability_promoted": false,
+      "next_action": "REUSE_CANONICAL_ASTRA_MISSION_ENTRYPOINT_TO_PROPAGATE_RUNTIME_MISSION_IDENTITY__VALIDATE_WITH_FRESH_NON_PARENT_CANARY__THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A"
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD"
+    "canonical_frontier_consistency_status": "MIRRORS_SYNCHRONIZED_TO_FIRST_SPEND_MISSION_ORIGIN_TRUTH"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
