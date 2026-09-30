@@ -3,7 +3,7 @@
   "action_id": "EXECUTE-GUARDED-GENOMICS-OPENENDED-PARENT-TASK-B-20260930-V1",
   "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "2ec11e42e7fc7a58461a1da0c356342bcac4ecf1",
+  "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
@@ -11,14 +11,13 @@
   "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_GENOMICS_REFERENCE_LENGTH_TASK_B_POST_PR474::GUARDED_FRESH_PARENT_EXECUTION",
   "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
-  "task_blob_sha": "b6e1bca41700f5695eaacbd6eb0490ee23839837",
-  "mission_blob_sha": "71cb346316e5305ebb5fc1f139530451c306d14b",
+  "task_blob_sha": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
+  "mission_blob_sha": "03e718a9c779c26d26e7af140f2f65549c1a7f6e",
   "prior_work_checked": [
-    "PR474 merged exact guarded-qualified broad multi-clause research routing repair at a42d1d9ef9134f1095e44a4483dba8203f27eda9.",
-    "PR478 froze the materially different genomics Task B on repaired main and merged at 2ec11e42e7fc7a58461a1da0c356342bcac4ecf1.",
-    "Deferred PR471 produced no physical execution and no parent capability credit.",
+    "Current canonical main b8a0102421e68f4137a4c5fe72d27ed96fb448b2 includes PR474 guarded-qualified broad-routing repair and PR490 corrected genomics Task B phase/promotion accounting.",
+    "Corrected frozen Task B blob is 5f1a8fea0d29c2a60dcc7a038ecd557829e602e7 and corrected mission blob is 03e718a9c779c26d26e7af140f2f65549c1a7f6e.",
     "HTTP2 parent run 36688193204 is spent and must never be replayed.",
-    "No public runner genomics execution branch existed at authorization time."
+    "No physical genomics parent execution has been observed; execution remains unspent."
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "expected_parent_frontier_change": "Exactly one live-atomic-guard-admitted physical execution of frozen genomics Task B; on first causal failure preserve the earliest integrated gap and mark the task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
@@ -46,6 +45,7 @@
       "PREWIRED_SOURCE_OR_ACCESSION",
       "PREWIRED_NUMERIC_VALUES_OR_TOOL"
     ],
-    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY",
+    "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2"
   }
 }
