@@ -249,6 +249,64 @@ class ModelIndependenceTests(unittest.TestCase):
                     {"mission_id":"TEST-MODEL-INDEPENDENCE-NO-PLAN","goal":"No implicit model fallback is allowed."}
                 )
 
+    def test_epistemic_research_goal_is_not_package_capability_candidate(self):
+        goals=[
+            (
+                "Determine whether a documented measurement changed between two "
+                "periods using authoritative primary data, quantify the result, "
+                "and independently verify the calculation."
+            ),
+            (
+                "Assess whether a technical claim holds using authoritative "
+                "reference evidence, choose and justify a method, and preserve "
+                "source provenance."
+            ),
+        ]
+        for goal in goals:
+            with self.subTest(goal=goal):
+                self.assertEqual(
+                    runtime._classify_plain_goal_gap(goal),
+                    "EPISTEMIC_RESEARCH_DECOMPOSITION",
+                )
+        self.assertEqual(
+            runtime._classify_plain_goal_gap(
+                "Convert an existing report to PDF with the available converter."
+            ),
+            "CAPABILITY_CANDIDATE",
+        )
+
+    def test_epistemic_research_gap_blocks_before_external_acquisition(self):
+        goal=(
+            "Determine whether a measured property changed between two periods "
+            "using authoritative primary data, choose and justify a quantitative "
+            "method, and independently verify the result."
+        )
+        mission={"mission_id":"TEST-EPISTEMIC-GAP-ROUTING","goal":goal}
+        compile_failure=runtime.Blocker(
+            "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+        )
+        with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_failure), \
+             mock.patch.object(runtime,"writej"), \
+             mock.patch.object(
+                 runtime,
+                 "_load_auto_capability_acquisition",
+                 side_effect=AssertionError("package acquisition must not be reached"),
+             ), \
+             mock.patch.object(
+                 runtime,
+                 "_load_capability_discovery",
+                 side_effect=AssertionError("package discovery must not be reached"),
+             ):
+            with self.assertRaisesRegex(
+                runtime.Blocker,
+                "GOAL_ARCHITECTURAL_GAP",
+            ) as ctx:
+                runtime.run_goal({},mission)
+        self.assertIn(
+            '"gap_class": "EPISTEMIC_RESEARCH_DECOMPOSITION"',
+            str(ctx.exception),
+        )
+
     def test_model_planner_is_explicit_opt_in_only(self):
         planned = '{"actions":[{"type":"finish","args":{"summary":"OPTIONAL_MODEL_ROUTE_USED"},"why":"explicit opt-in"}]}'
         with mock.patch.object(runtime, "_planner_post", return_value={"text": planned, "model": "stub", "duration_s": 0, "errors": []}):
