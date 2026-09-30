@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_TASK_A_COMPILE_GAP_RECONCILIATION_V1",
+  "reconciliation_id": "MAUNA-LOA-OPEN-ENDED-TASK-A-COMPILE-GAP-RECONCILIATION-20260930-V1",
+  "status": "SPENT_TASK_FIRST_CAUSAL_GAP_RECONCILED__NO_REPAIR_AUTHORIZED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "source_task": {
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "source_pr": 337,
+    "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "duplicate_lane_pr": 342,
+    "duplicate_lane_executed": false,
+    "same_task_replay_allowed": false
+  },
+  "primary_terminal_receipt": {
+    "source": "PUBLIC_GITHUB_ACTIONS_CARRIER",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "runner_pr": 49,
+    "public_run_id": 36670516407,
+    "artifact_id": 11077861584,
+    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "execution_count": 1,
+    "task_executed": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "first_causal_stage": "COMPILE",
+    "terminal_error": "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+    "terminal_cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "failed_scope": "FIRST_BROAD_RESEARCH_OBJECTIVE_CLAUSE",
+    "source_tool_discovery_executed": false,
+    "independent_oracle_executed": false,
+    "parent_task_completed": false,
+    "replay_allowed": false
+  },
+  "evidence_authority": {
+    "primary": [
+      "PR337 terminal comment 5904283607",
+      "PR342 reconciliation comment 5904274384",
+      "PR342 reconciliation comment 5904277970",
+      "PR342 final spent-task reconciliation comment 5904288940"
+    ],
+    "stale_or_transitional_metadata_not_used_as_terminal_authority": [
+      "search-index or issue-body run references that conflict with the repeated final terminal receipt",
+      "PR342 transitional comment 5904284111 describing a later in-flight carrier state"
+    ],
+    "selection_rule": "Use the repeated exact one-shot terminal receipt tied to the canonical PR337 task blob; do not infer execution truth from stale search indexing or duplicate-lane metadata."
+  },
+  "frontier_reconciliation": {
+    "previous_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "previous_blocker_status": "SUPERSEDED_BY_SPENT_GENUINE_OPEN_ENDED_TASK_A_TERMINAL_RECEIPT",
+    "localized_blocker": "BROAD_OBJECTIVE_COMPILE_NO_VERIFIED_CAPABILITY_MATCH",
+    "localized_blocker_scope": "The first broad open-ended research-objective clause reached deterministic goal compilation but no verified bound capability matched it.",
+    "deeper_root_cause_status": "UNADJUDICATED",
+    "deeper_root_cause_candidates": [
+      "AUTONOMOUS_DECOMPOSITION",
+      "GOAL_GROUNDING",
+      "RESEARCH_PLANNING",
+      "CAPABILITY_BINDING",
+      "MULTI_CAPABILITY_COMPOSITION"
+    ],
+    "anti_overclaim": "The terminal receipt does not distinguish among the deeper mechanisms. No one of them is promoted to canonical root cause by this reconciliation.",
+    "parent_capability_promoted": false,
+    "parent_capability_revoked": false,
+    "capability_credit_delta": 0,
+    "scoreboard_credit_delta": 0,
+    "residual_gap_localized_delta": 1
+  },
+  "preserved_inherited_capabilities": [
+    "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+    "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+    "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1"
+  ],
+  "prohibitions": [
+    "NO_MAUNA_LOA_TASK_REPLAY",
+    "NO_DUPLICATE_TASK_ID_REPACKAGING",
+    "NO_CLIMATE_SPECIFIC_COMPILER_LITERAL",
+    "NO_TASK_SPECIFIC_RUNTIME_PATCH",
+    "NO_PARENT_PROMOTION_FROM_THIS_FAILURE",
+    "NO_GENERAL_PLANNER_BUILD_BEFORE_CURRENT_BASE_OBS",
+    "NO_RUNTIME_MUTATION_IN_THIS_RECONCILIATION"
+  ],
+  "current_code_evidence": {
+    "goal_compiler_blob_observed_on_failed_path": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "failure_symbol": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "mutation_in_this_reconciliation": false
+  },
+  "next_required_action": {
+    "action_class": "RUN_CURRENT_BASE_RECURSIVE_OBS_ON_LOCALIZED_GENERIC_COMPILE_SEAM",
+    "blocker": "BROAD_OBJECTIVE_COMPILE_NO_VERIFIED_CAPABILITY_MATCH",
+    "route_order": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "requirements": [
+      "refresh exact current main before action",
+      "inspect the exact current goal compiler and bound capability registry",
+      "determine whether the broad clause can be decomposed or grounded using already inherited generic capabilities",
+      "search existing deterministic planning/decomposition routes only if the inherited stack cannot compose the behavior",
+      "authorize at most the narrowest generic repair supported by evidence",
+      "validate any eventual repair on a fresh materially different open-ended task, never the spent Mauna Loa task"
+    ],
+    "repair_authorized_now": false,
+    "replay_authorized": false
+  },
+  "progress_credit": {
+    "class": "RESIDUAL_GAP_LOCALIZED",
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 1,
+    "reason": "A genuine open-ended model-independent Task A was spent exactly once and exposed a specific compile-stage reachability gap before source/tool discovery. This is diagnostic progress only, not capability acquisition."
+  }
+}
