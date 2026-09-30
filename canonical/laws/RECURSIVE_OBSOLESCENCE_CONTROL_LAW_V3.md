@@ -17,9 +17,25 @@ A previously selected route has **no durable authority** merely because it was o
 
 ## Core invariant
 
-**NO CONSEQUENTIAL IMPLEMENTATION OR EXPENSIVE CONTINUATION UNTIL A CURRENT OBS PASS PROVES THAT THE SELECTED ROUTE SURVIVES A FRESH CHALLENGER FRONTIER.**
+**NO CONSEQUENTIAL DIAGNOSIS, CURRENT-BLOCKER CLAIM, RECOMMENDATION, ROUTE SELECTION, IMPLEMENTATION, OR EXPENSIVE CONTINUATION MAY RECEIVE CURRENT AUTHORITY UNTIL A CURRENT OBS PASS PROVES THAT THE SELECTED ROUTE SURVIVES A FRESH CHALLENGER FRONTIER.**
 
 The burden of proof is on keeping the incumbent route, not on discovering a reason to switch.
+
+## Operator decision boundary
+
+OBS applies before the operator turns analysis into an authoritative Project Brain conclusion, not merely before code or infrastructure changes.
+
+Before claiming the current blocker, recommending or selecting a route, starting consequential work, spending a scarce gate, or changing capability credit, the operator MUST:
+
+- refresh the live canonical pointer, active goal hierarchy, frontier queue, scoreboard, and relevant task/evidence state;
+- treat conversation memory, summaries, and prior assistant conclusions as retrieval hints only, never current authority;
+- complete the seven OBS layers against the current canonical base;
+- refresh the challenger frontier and selected-route preflight when required;
+- withhold decision authority if any required OBS predicate is stale, missing, hollow, or contradicted.
+
+Exploration and hypothesis generation may occur before OBS, but those outputs are provisional and MUST NOT be presented as the current blocker, selected route, or authorized next action.
+
+The machine-readable operator contract is `canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json`.
 
 ## Seven recursive OBS layers
 
