@@ -60,7 +60,7 @@ class _Title(HTMLParser):
     def handle_endtag(self,tag):
         if tag.lower()=="title": self.on=False
 
-def materialize_retrieval(candidate,bibliographic_verification,timeout=15):
+def materialize(candidate,bibliographic_verification,timeout=15,fetch=None):
     candidate=dict(candidate or {})
     verification=dict(bibliographic_verification or {})
     base={
@@ -78,8 +78,9 @@ def materialize_retrieval(candidate,bibliographic_verification,timeout=15):
     if not url or url!=verified_url:
         return {**base,"status":"UNVERIFIED","reason":"BIBLIOGRAPHIC_CANDIDATE_IDENTITY_MISMATCH"}
     timeout=max(2,min(int(timeout),30))
+    fetch=fetch or _fetch
     try:
-        body,ctype,status,final=_fetch(url,timeout,"text/html,application/xhtml+xml,text/plain,*/*;q=0.4")
+        body,ctype,status,final=fetch(url,timeout,"text/html,application/xhtml+xml,text/plain,*/*;q=0.4")
         final=_safe_url(final)
         if not final:
             raise ValueError("UNSAFE_FINAL_URL")
@@ -90,7 +91,9 @@ def materialize_retrieval(candidate,bibliographic_verification,timeout=15):
         return {
             **base,
             "status":"RETRIEVAL_PROVENANCE_VERIFIED",
-            "verification_method":"BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION",
+            "verification_method":"SELECTED_BIBLIOGRAPHIC_CANDIDATE_LIVE_HTTP_MATERIALIZATION",
+            "selected_only_materialization":True,
+            "bibliographic_identity_preserved":True,
             "candidate_url":url,
             "final_url":final,
             "final_host":(urllib.parse.urlsplit(final).hostname or "").lower(),
@@ -114,6 +117,8 @@ def materialize_retrieval(candidate,bibliographic_verification,timeout=15):
             "doi":verification.get("doi"),
             "record_title":verification.get("record_title"),
             "bibliographic_provenance_status":"VERIFIED",
+            "selected_only_materialization":True,
+            "bibliographic_identity_preserved":True,
         }
 
 def verify(candidate,timeout=15):
