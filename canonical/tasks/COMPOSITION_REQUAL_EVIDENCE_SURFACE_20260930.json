@@ -1,0 +1,195 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
+  "decision_id": "COMPOSITION-REQUAL-EVIDENCE-SURFACE-20260930",
+  "question": "Which evidence execution surface should Project Brain treat as admissible for consequential capability validation right now?",
+  "alternatives": [
+    {
+      "id": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "label": "Public GitHub Actions run with exact-byte checks, executed regression/oracle steps, and preserved run/job evidence"
+    },
+    {
+      "id": "PRIVATE_ZERO_STEP_SYMBOLIC_CHECK",
+      "label": "Private Brain symbolic workflow result that terminates without executing any steps"
+    },
+    {
+      "id": "CHAT_SUMMARY_ONLY",
+      "label": "Chat or memory summary without an independently executed validation receipt"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "PUBLIC_ZERO_SPEND",
+      "alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Validation surface must have zero incremental spend.",
+      "provenance": [
+        {
+          "source": "Public validation receipt",
+          "ref": "run 36658401010 executed on existing GitHub Actions hard-zero route"
+        }
+      ]
+    },
+    {
+      "id": "PUBLIC_EXECUTES_CHECKS",
+      "alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Validation surface must execute concrete checks rather than emit a badge with no semantic steps.",
+      "provenance": [
+        {
+          "source": "GitHub Actions run 36658401010",
+          "ref": "job 109707559771 completed exact-byte, direct causal binding, and full goal-compiler regression steps"
+        }
+      ]
+    },
+    {
+      "id": "PUBLIC_EXACT_BYTES",
+      "alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Validation surface must bind evidence to exact candidate/runtime bytes.",
+      "provenance": [
+        {
+          "source": "GitHub Actions run 36658401010",
+          "ref": "Verify exact candidate and shared binder stack PASS"
+        }
+      ]
+    },
+    {
+      "id": "PRIVATE_EXECUTES_CHECKS",
+      "alternative": "PRIVATE_ZERO_STEP_SYMBOLIC_CHECK",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Validation surface must execute semantic checks.",
+      "provenance": [
+        {
+          "source": "Brain private workflow run 36659255327",
+          "ref": "job completed failure with steps=null"
+        }
+      ]
+    },
+    {
+      "id": "PRIVATE_EXACT_EVIDENCE",
+      "alternative": "PRIVATE_ZERO_STEP_SYMBOLIC_CHECK",
+      "state": "UNKNOWN",
+      "required": true,
+      "description": "A zero-step result cannot independently establish the candidate semantics.",
+      "provenance": [
+        {
+          "source": "Brain private workflow run 36659255327",
+          "ref": "no executed step evidence"
+        }
+      ]
+    },
+    {
+      "id": "CHAT_EXECUTES_CHECKS",
+      "alternative": "CHAT_SUMMARY_ONLY",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Capability validation must come from independently executed evidence, not conversational state.",
+      "provenance": [
+        {
+          "source": "Project Brain canonical architecture",
+          "ref": "summary and memory are non-authoritative"
+        }
+      ]
+    },
+    {
+      "id": "CHAT_EXACT_BYTES",
+      "alternative": "CHAT_SUMMARY_ONLY",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Validation must bind to exact executable bytes.",
+      "provenance": [
+        {
+          "source": "Project Brain truth-first policy",
+          "ref": "preserved exact provenance required for consequential claims"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E_PUBLIC_RUN",
+      "alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "EXECUTED_PUBLIC_RECEIPT",
+      "claim": "Public run 36658401010 completed every semantic validation step successfully.",
+      "provenance": [
+        {
+          "source": "moxnixmdj/verification-capsule-runner",
+          "ref": "run 36658401010 / job 109707559771"
+        }
+      ]
+    },
+    {
+      "id": "E_PUBLIC_EXACT",
+      "alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "EXACT_BYTE_GATE",
+      "claim": "The same run verified the exact candidate and shared binder stack before executing regressions.",
+      "provenance": [
+        {
+          "source": "moxnixmdj/verification-capsule-runner",
+          "ref": "run 36658401010 step 4"
+        }
+      ]
+    },
+    {
+      "id": "E_PUBLIC_REPEAT",
+      "alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+      "relation": "SUPPORTS",
+      "confidence": 0.95,
+      "strength": 1,
+      "independence_group": "ORTHOGONAL_PUBLIC_RUN_HISTORY",
+      "claim": "Earlier public validation run 36654897859 also executed exact-byte and causal-provenance checks successfully.",
+      "provenance": [
+        {
+          "source": "moxnixmdj/verification-capsule-runner",
+          "ref": "run 36654897859"
+        }
+      ]
+    },
+    {
+      "id": "E_PRIVATE_ZERO",
+      "alternative": "PRIVATE_ZERO_STEP_SYMBOLIC_CHECK",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "ZERO_STEP_PRIVATE_JOB",
+      "claim": "The current private symbolic check can terminate without any executed steps, so its red/green status is not semantic evidence.",
+      "provenance": [
+        {
+          "source": "moxnixmdj/brain",
+          "ref": "run 36659255327 steps=null"
+        }
+      ]
+    },
+    {
+      "id": "E_CHAT_NONAUTH",
+      "alternative": "CHAT_SUMMARY_ONLY",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "CANONICAL_AUTHORITY_POLICY",
+      "claim": "Project Brain explicitly treats summaries and memory as non-authoritative for consequential state.",
+      "provenance": [
+        {
+          "source": "canonical/CANONICAL_POINTER.json",
+          "ref": "boot_requirements.summary_and_memory_non_authoritative=true"
+        }
+      ]
+    }
+  ],
+  "policy": {
+    "minimum_support_ratio": 0.75,
+    "maximum_conflict_ratio": 0.25,
+    "minimum_independent_support_groups": 2,
+    "minimum_net_margin": 0.2
+  }
+}
