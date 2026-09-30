@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-  "action_id": "GROUNDING-FRESH-REAL-UNIFIED-PLANNING-20260930",
+  "action_id": "INHERIT-REQUALIFIED-PLAIN-GOAL-GROUNDING-20260930",
   "status": "PROPOSED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -8,40 +8,44 @@
   "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
   "probe_id": null,
   "causal_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
-  "action_kind": "REAL_TASK_EXECUTION",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::REAL_TASK_EXECUTION",
-  "expected_parent_frontier_change": "Produce fresh real-task evidence on a non-Requests live knowledge task showing that the repaired model-independent grounding route admits only input-bindable candidates, requires explicit verified network availability, composes without models, executes successfully, and is independently re-fetched and checked before any capability re-promotion.",
+  "action_kind": "CAPABILITY_INHERITANCE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::CAPABILITY_INHERITANCE",
+  "expected_parent_frontier_change": "Restore MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 at its exact narrow scope after the generic bindability/prerequisite repair passes exact component validation and a fresh independently verified Unified Planning real task; count exactly one new verified real task; do not restore fresh-reuse or frontier-dependency credit in this action.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "spent Requests falsification task excluded",
     "PR261 merged repair",
     "public exact-blob run 36651748631 PASS",
     "old CPython task already spent and excluded",
-    "Unified Planning live repo identity direct probe"
+    "Unified Planning live repo identity direct probe",
+    "fresh Unified Planning run 36652169397 PASS",
+    "artifact 11070249875 digest sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1",
+    "independent refetch step PASS",
+    "current promotion law requires exact-scope package/evidence and adversarial falsification"
   ],
-  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "evidence_presence_classification": "CAPABILITY_PROVEN",
   "probe_specific": false,
   "generic_repair_from_single_probe": false,
   "orthogonal_recurrence_count": 1,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Stop after one fresh Unified Planning identity-consistency task executes exactly once on the qualified public GitHub Actions carrier, exact runtime blobs are pinned, producer output is independently re-fetched and verified, and evidence is reconciled; do not replay the task, change target, or increase scoreboard without separate promotion evidence.",
+  "stop_condition": "Stop after canonicalizing the exact requalification evidence, restoring only the grounding capability package and one verified-real-task counter, validating promotion evidence against the exact PR head, and merging; do not switch frontier target or award fresh-reuse/frontier-dependency credit in this action.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
-    "real_outcome": "Verify the repaired model-independent plain-goal grounding capability on a fresh real live-knowledge task using a different project from the spent Requests falsification.",
+    "real_outcome": "Restore the previously reopened grounding capability only after the generic repair survives exact component validation and a fresh real post-repair task with independent verification.",
     "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
     "obs_goal": {
-      "real_outcome": "Obtain direct fresh evidence that the repaired grounding route works end-to-end on a real task and does not assume unverified prerequisites.",
+      "real_outcome": "Restore MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 at its exact narrow scope after the generic bindability/prerequisite repair passes exact component validation and a fresh independently verified Unified Planning real task; count exactly one new verified real task; do not restore fresh-reuse or frontier-dependency credit in this action.",
       "proxy_goals_deleted": [
         "replay Requests",
         "synthetic benchmark",
         "new carrier",
         "new planner"
       ],
-      "surviving_necessity": "Execute one fresh real task through the repaired route and independently verify its real effect."
+      "surviving_necessity": "Inherit only the exact repaired grounding scope and one new verified task; keep all broader credits unchanged."
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
@@ -58,16 +62,16 @@
         "no new binding logic",
         "no heldout Sprite"
       ],
-      "surviving_gap": "Component regressions pass, but fresh real-task execution after the repair is not yet recorded."
+      "surviving_gap": "The fresh real task is now complete and independently verified; remaining work is evidence-bounded inheritance, then frontier reconciliation."
     },
     "obs_blocker": {
-      "intrinsic_or_path_specific": "Proof gap after a generic repair, not a new capability implementation gap.",
+      "intrinsic_or_path_specific": "The former input-contract/prerequisite-authority blocker is closed by exact repair plus fresh real evidence.",
       "delete_bypass_substitute_options": [
         "Delete replay of spent Requests task",
         "Reuse existing public runner",
         "Reuse existing GitHub API independent refetch oracle"
       ],
-      "surviving_causal_blocker": "Need fresh real-task evidence before the reopened capability can regain authority."
+      "surviving_causal_blocker": "No implementation blocker remains for this narrow capability; only exact-scope inheritance remains."
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -80,37 +84,40 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
-        "PRIVATE_GITHUB_ACTIONS_RETRY",
-        "HELDOUT003_SPRITE_REUSE"
+        "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
+        "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
+        "REOPEN_IMPLEMENTATION"
       ],
-      "losing_routes_reason": "Private Actions is currently zero-step failing; heldout003 Sprite is a contaminated task-specific surface; the already-live public runner is exact-byte verified, $0, and supports independent network refetch.",
-      "implementation_still_necessary": true
+      "losing_routes_reason": "Another task or implementation change adds wall-clock without addressing any surviving falsified predicate; exact repair, adversarial regressions, and fresh real execution already cover the reopened scope.",
+      "implementation_still_necessary": false
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "No synthetic gate. Producer fetches the two live GitHub API identities and the verifier independently re-fetches both identities and reconstructs the expected consistency result."
+      "synthetic_verification_necessity": "No new synthetic verification. Use exact component run 36651748631 plus fresh real run 36652169397 with independent live refetch."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
         "private-runner retry loop",
-        "heldout Sprite fallback"
+        "heldout Sprite fallback",
+        "Further grounding repair work absent a new falsification",
+        "Another requalification task before restoring the narrow capability"
       ],
       "adjacent_capabilities_absorbed": [
         "exact runtime byte pinning",
         "explicit verified_initial_facts prerequisite authority",
         "independent live refetch"
       ],
-      "fresh_reuse_plan": "If this fresh task passes and the narrow capability is re-promoted, only a materially distinct later task may count as fresh reuse."
+      "fresh_reuse_plan": "Do not award fresh-reuse credit in this action. Reconcile to the downstream composition gap and require a distinct fresh task there."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
         "Reused PR261 challenger race",
         "Reused already-qualified public runner",
-        "Reused current GitHub API probe"
+        "Reused current GitHub API probe",
+        "Deleted redundant second requalification run because current exact evidence is sufficient for narrow restoration"
       ],
-      "search_stop_decision": "The incumbent repaired route has exact component validation, a live $0 carrier, and a reachable direct real-task target; no plausible challenger can improve wall-clock enough to justify delay.",
+      "search_stop_decision": "Exact component validation plus a fresh independently verified real task close the only reopened grounding scope. Additional search or testing cannot improve the inheritance decision enough to justify delay.",
       "affected_layers_only_on_revalidation": true,
       "challenger_refresh_decision": "Fresh post-repair route check completed from current main, current public runner success, and current GitHub API reachability."
     },
@@ -125,15 +132,15 @@
       "HELDOUT003_SPRITE_REUSE",
       "NEW_PLANNER_OR_MODEL"
     ],
-    "selected_surviving_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
-    "why_selected_route_is_fastest_sufficient": "It reuses the exact repaired runtime, an already-live public $0 carrier, and a current direct GitHub API oracle; it adds no infrastructure, model, or new capability logic.",
-    "expected_parent_level_state_change": "Produce fresh real-task evidence on a non-Requests live knowledge task showing that the repaired model-independent grounding route admits only input-bindable candidates, requires explicit verified network availability, composes without models, executes successfully, and is independently re-fetched and checked before any capability re-promotion.",
-    "stop_condition": "Stop after one fresh Unified Planning identity-consistency task executes exactly once on the qualified public GitHub Actions carrier, exact runtime blobs are pinned, producer output is independently re-fetched and verified, and evidence is reconciled; do not replay the task, change target, or increase scoreboard without separate promotion evidence.",
+    "selected_surviving_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
+    "why_selected_route_is_fastest_sufficient": "The repaired route has exact-byte regression validation and a fresh direct real-task pass with independent refetch; inheritance needs no further implementation or execution.",
+    "expected_parent_level_state_change": "Restore MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 at its exact narrow scope after the generic bindability/prerequisite repair passes exact component validation and a fresh independently verified Unified Planning real task; count exactly one new verified real task; do not restore fresh-reuse or frontier-dependency credit in this action.",
+    "stop_condition": "Stop after canonicalizing the exact requalification evidence, restoring only the grounding capability package and one verified-real-task counter, validating promotion evidence against the exact PR head, and merging; do not switch frontier target or award fresh-reuse/frontier-dependency credit in this action.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T00:46:00Z",
       "max_age_hours": 24,
-      "incumbent_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+      "incumbent_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
@@ -174,74 +181,51 @@
       ],
       "challenger_routes": [
         {
-          "route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+          "route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
           "evidence": [
-            "exact repaired runtime merged",
-            "public run 36651748631 success",
-            "current GitHub API direct probe success"
+            "PR261 merge 08338df0cc989b092567f10ffd1dca6a7f37be65",
+            "run 36651748631 exact component PASS",
+            "run 36652169397 fresh real task PASS"
           ],
           "qualification_evidence": [
-            "run 36651748631",
-            "current GitHub API response for repo 343455633"
+            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
           ],
           "qualification_evidence_classes": [
-            "DIRECT_PROBE",
             "INDEPENDENT_VERIFIER"
           ],
           "resolution": "SELECTED",
           "comparison": {
-            "CORRECTNESS": "Exercises the exact repaired route and independently reconstructs the real result.",
-            "CAPABILITY_STRENGTH": "Covers semantic grounding, URL binding, prerequisite authority, composition, live execution, and verification.",
-            "WALL_CLOCK": "No new infrastructure or supplier integration.",
-            "INCREMENTAL_COST": "$0 public standard runner.",
-            "RELIABILITY": "Same public runner just completed exact-blob verification successfully.",
-            "VERIFIABILITY": "Independent live refetch provides direct oracle."
+            "CORRECTNESS": "Matches exact reopened scope and preserves weaker claims outside it.",
+            "CAPABILITY_STRENGTH": "Restores only deterministic plain-goal grounding with bindability/prerequisite authority.",
+            "WALL_CLOCK": "Immediate evidence reconciliation; no extra execution.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact component and fresh real execution both passed.",
+            "VERIFIABILITY": "Sealed artifact and independent live refetch."
           }
         },
         {
-          "route": "PRIVATE_GITHUB_ACTIONS_RETRY",
+          "route": "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
           "evidence": [
-            "three recent private PR261 workflow jobs returned steps=null"
+            "No surviving unverified grounding predicate remains after run 36652169397."
           ],
           "qualification_evidence": [
-            "runs 36651176896, 36651179713, 36651179802"
+            "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
           ],
           "qualification_evidence_classes": [
-            "DIRECT_PROBE"
+            "BRAIN_INHERITED"
           ],
           "resolution": "DISQUALIFIED",
           "comparison": {
-            "CORRECTNESS": "No execution occurred.",
-            "CAPABILITY_STRENGTH": "Would be adequate if runnable.",
-            "WALL_CLOCK": "Already failed before step start.",
-            "INCREMENTAL_COST": "$0 but unavailable.",
-            "RELIABILITY": "Current surface unavailable.",
-            "VERIFIABILITY": "No executed evidence."
-          }
-        },
-        {
-          "route": "HELDOUT003_SPRITE_REUSE",
-          "evidence": [
-            "existing sprite is task-specific brain-heldout003-one-shot"
-          ],
-          "qualification_evidence": [
-            "current Sprites list"
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "comparison": {
-            "CORRECTNESS": "Would contaminate an unrelated heldout/task-specific surface.",
-            "CAPABILITY_STRENGTH": "General command execution possible.",
-            "WALL_CLOCK": "Potentially fast but evidence-invalidating.",
-            "INCREMENTAL_COST": "No new allocation proposed, but cost authority unnecessary to resolve.",
-            "RELIABILITY": "Cold existing surface.",
-            "VERIFIABILITY": "Contamination risk dominates."
+            "CORRECTNESS": "Would add evidence but not close a new predicate.",
+            "CAPABILITY_STRENGTH": "No additional scope justified.",
+            "WALL_CLOCK": "Slower.",
+            "INCREMENTAL_COST": "$0 but unnecessary.",
+            "RELIABILITY": "Redundant.",
+            "VERIFIABILITY": "No material gain."
           }
         }
       ],
-      "negative_search_summary": "No challenger dominates the already-live public runner plus direct GitHub API oracle.",
+      "negative_search_summary": "No plausible route can dominate direct inheritance from already-complete exact-scope evidence.",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -251,7 +235,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+      "selected_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -261,40 +245,26 @@
       "selected_route_preflight": {
         "checked_at_utc": "2026-09-30T00:46:00Z",
         "max_age_hours": 2,
-        "selected_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+        "selected_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
         "execution_dependencies": [
           {
-            "dependency": "VERIFICATION_CAPSULE_RUNNER_PUBLIC_GITHUB_ACTIONS",
-            "kind": "CARRIER",
+            "dependency": "CANONICAL_REQUALIFICATION_EVIDENCE_PRESENT",
+            "kind": "DATA_SOURCE",
             "required": true,
-            "volatility": "VOLATILE",
-            "scope": "ACCOUNT_SPECIFIC",
-            "status": "READY",
-            "observed_at_utc": "2026-09-30T00:44:10Z",
-            "evidence": [
-              "public run 36651748631 completed SUCCESS with all steps executed"
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "ACCOUNT_SPECIFIC"
-          },
-          {
-            "dependency": "GITHUB_REST_API_UNIFIED_PLANNING_IDENTITIES",
-            "kind": "REMOTE_SERVICE",
-            "required": true,
-            "volatility": "VOLATILE",
+            "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T00:46:00Z",
+            "observed_at_utc": "2026-09-30T00:50:00Z",
             "evidence": [
-              "direct GitHub REST response: aiplan4eu/unified-planning id=343455633 archived=false"
+              "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+              "public run 36652169397 SUCCESS",
+              "artifact digest sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1"
             ],
             "evidence_classes": [
-              "DIRECT_PROBE"
+              "INDEPENDENT_VERIFIER"
             ],
             "evidence_scope": "GLOBAL"
           },
@@ -305,9 +275,10 @@
             "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T00:44:10Z",
+            "observed_at_utc": "2026-09-30T00:50:00Z",
             "evidence": [
-              "merge 08338df0cc989b092567f10ffd1dca6a7f37be65; exact blob run 36651748631 PASS"
+              "merge 08338df0cc989b092567f10ffd1dca6a7f37be65",
+              "exact component validation run 36651748631 PASS"
             ],
             "evidence_classes": [
               "BRAIN_INHERITED",
@@ -319,5 +290,34 @@
         "execution_dependencies_complete": true
       }
     }
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json",
+      "PR261 regression: input-bindable capability with unverified external prerequisite must fail UNVERIFIED_INITIAL_FACTS_REQUIRED",
+      "Fresh Unified Planning task asserts prior false match http.json.fetch_from_state is absent"
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
+    ],
+    "independent_verification_evidence_paths": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
+    ],
+    "capability_package_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1.json",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": false,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "",
+    "producer_execution_suppliers": [
+      "Project Brain deterministic runtime",
+      "GitHub REST API"
+    ],
+    "independent_verifier_suppliers": [
+      "Independent Python urllib GitHub REST refetch"
+    ]
   }
 }
