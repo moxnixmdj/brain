@@ -286,6 +286,29 @@ class BibliographicLiveRefinementTests(unittest.TestCase):
         self.assertEqual(len(seen["extract"]),1,out)
         self.assertEqual(seen["extract"][0]["candidate"]["url"],live["url"])
 
+    def test_weak_subject_coverage_is_ranked_but_not_admitted(self):
+        objective=(
+            "Assess whether the 2026 Atlantic hurricane season produced a storm with "
+            "maximum sustained winds exceeding 150 miles per hour at landfall outside "
+            "the United States. Use authoritative technical evidence and preserve provenance."
+        )
+        candidates=[
+            {
+                "url":"https://generic.example/2026",
+                "title":"Events in 2026",
+                "snippet":"United States and international events during 2026.",
+            }
+        ]
+        out=self.rank.rank(objective,candidates)
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertTrue(out["output_verified"],out)
+        self.assertFalse(out["top_candidate_lexical_admission_verified"],out)
+        self.assertLess(
+            out["top_candidate_matched_query_term_count"],
+            out["minimum_matched_query_terms_for_admission"],
+            out,
+        )
+
     def test_verify_live_bypasses_doi_bibliographic_short_circuit(self):
         candidate={"url":"https://doi.org/10.1000/test","doi":"10.1000/test"}
         old=self.prov._fetch
