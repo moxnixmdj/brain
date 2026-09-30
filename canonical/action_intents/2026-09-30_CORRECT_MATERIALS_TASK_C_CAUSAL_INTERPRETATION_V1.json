@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-MATERIALS-TASK-C-FIRST-CAUSAL-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "action_kind": "CORRECT_FRONTIER_CAUSAL_INTERPRETATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Authoritative Task C artifact 11089076913 inspected directly.",
+    "Initial relevance selected ignition-temperature/302-steel DOI despite thermal-conductivity/304-steel objective.",
+    "NBS thermal-conductivity DOI 10.6028/nbs.rpt.9869 is present in initial discovery and absent from metadata-refined discovery.",
+    "PR536 canonical evidence incorrectly placed that NBS record in metadata-refined discovery.",
+    "PR537 and PR539 closed before qualification as downstream."
+  ],
+  "evidence_presence_classification": "PRESERVED_REAL_PARENT_EVIDENCE_FALSIFIES_CURRENT_CANONICAL_CAUSAL_INTERPRETATION",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "real_outcome": "Repair the earliest demonstrated information-quality boundary rather than a downstream retry implementation.",
+    "selected_surviving_route": "REUSE_BOUNDED_OBJECTIVE_RELATION_PARSER_FOR_DECISION_ROLE_AWARE_RELEVANCE_ADMISSION",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "METADATA_REFINED_PROVENANCE_REPAIR_AS_CURRENT_FRONTIER",
+      "TASK_SPECIFIC_6061_304_PATCH",
+      "SOURCE_WHITELIST",
+      "MODEL_RERANKER"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The repository already has a bounded explicit-comparison parser with left/right role tokens. Reusing it at relevance admission directly blocks the demonstrated false-positive class without new search infrastructure.",
+    "stop_rule": "CORRECT_CANONICAL_TRUTH_ONLY__THEN_IMPLEMENT_AND_GUARD_QUALIFY_GENERIC_ROLE_AWARE_RELEVANCE__NO_PARENT_REPLAY"
+  },
+  "stop_condition": "No runtime change or counter inflation. Correct canonical truth, then repair and independently qualify the generic role-aware relevance boundary."
+}
