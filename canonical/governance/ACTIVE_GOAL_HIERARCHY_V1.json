@@ -3,11 +3,11 @@
   "status": "CANONICAL_FAIL_CLOSED",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
-  "active_capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "active_probe": null,
-  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__REAL_TASK_SELECTION_AND_RECURSIVE_OBS_REQUIRED",
-  "current_parent_blocker": "COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT",
-  "next_required_action_class": "SELECT_MATERIALLY_DISTINCT_REAL_TASK__RUN_EXACT_BASE_OBS__REUSE_EXISTING_MODEL_INDEPENDENT_GROUNDED_COMPOSITION_ROUTE_WITHOUT_REDISCOVERY__VERIFY_REAL_EFFECT__THEN_ADJUDICATE_COMPOSITION_CAPABILITY",
+  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__NEW_PARENT_REAL_TASK_REQUIRED",
+  "current_parent_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+  "next_required_action_class": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -164,12 +164,15 @@
     "max_selected_route_preflight_age_hours": 2
   },
   "last_real_output_event": {
-    "event_id": "GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930",
-    "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-    "real_task_verified": false,
-    "capability_reopened": true,
-    "downstream_composition_correctly_failed_closed": true,
-    "evidence_path": "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json"
+    "event_id": "MODEL_INDEPENDENT_GROUNDED_EXECUTABLE_COMPOSITION_ACQUIRED_20260930",
+    "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "real_task_verified": true,
+    "fresh_reuse_verified": true,
+    "model_dependency_count": 0,
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
+    "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+    "fresh_real_run_id": 36652169397,
+    "fresh_reuse_run_id": 36652623916
   },
   "last_route_falsification": {
     "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
@@ -182,10 +185,18 @@
   },
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "last_frontier_reconciliation": {
-    "status": "GROUNDING_REQUALIFIED__COMPOSITION_REAL_TASK_A_VERIFIED__FRESH_REUSE_SELECTED",
-    "reason": "Grounding was requalified after regression repair. Unified Planning run 36652169397 then directly exercised model-independent grounded composition end-to-end, so only materially distinct fresh reuse remains before composition acquisition.",
-    "acquired_subcapability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-    "next_subcapability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_COMPOSITION_TASK_A_UNIFIED_PLANNING_20260930_V1.json"
+    "status": "GROUNDING_AND_EXECUTABLE_COMPOSITION_ACQUIRED__PARENT_REAL_TASK_SELECTED",
+    "reason": "Unified Planning Task A and materially distinct YAML-to-JSON fresh reuse satisfy the executable-composition acquisition bar with independent verification, zero model dependency, and zero incremental spend.",
+    "acquired_subcapabilities": [
+      "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1"
+    ],
+    "next_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "blocker": "NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END_REQUIRED",
+    "evidence_paths": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_COMPOSITION_TASK_A_UNIFIED_PLANNING_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json"
+    ]
   }
 }
