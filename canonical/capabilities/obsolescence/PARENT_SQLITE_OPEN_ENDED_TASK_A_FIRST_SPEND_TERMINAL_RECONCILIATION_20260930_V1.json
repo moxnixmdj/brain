@@ -22,8 +22,8 @@
     "artifact_id": 11078414137,
     "artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
     "artifact_size_bytes": 40842,
-    "first_physical_producer_execution": true,
-    "later_same_task_runs_have_authority": false
+    "later_same_task_runs_have_authority": false,
+    "first_physical_execution_of_this_sqlite_task": true
   },
   "execution": {
     "canonical_cli": "python canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json",
@@ -79,5 +79,40 @@
       "BLIND_DISCOVERY_RETUNING",
       "GENERIC_REPAIR_WITHOUT_REUSE_SEARCH"
     ]
+  },
+  "concurrent_execution_race": {
+    "status": "QUARANTINED__ZERO_CAPABILITY_SCOREBOARD_AND_RUNTIME_REPAIR_AUTHORITY",
+    "rule": "Only the canonically selected SQLite first-spend carrier PR95/run36674086293 defines the parent causal gap. Later same-task SQLite executions are replays. Thermophysics executions were not the selected parent spend and cannot define this frontier; because they physically executed, those exact thermophysics task instances are no longer fresh.",
+    "sqlite_duplicate_replays": [
+      {
+        "public_pr": 97,
+        "public_run_id": 36674110900,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY"
+      },
+      {
+        "public_pr": 97,
+        "public_run_id": 36674110980,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY"
+      }
+    ],
+    "thermophysics_unauthorized_spends": [
+      {
+        "public_pr": 96,
+        "public_run_id": 36674076805,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY__TASK_INSTANCE_SPENT"
+      },
+      {
+        "public_pr": 98,
+        "public_run_id": 36674084229,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY__TASK_INSTANCE_SPENT"
+      },
+      {
+        "public_pr": 99,
+        "public_run_id": 36674109140,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY__TASK_INSTANCE_SPENT"
+      }
+    ],
+    "thermophysics_task_id": "PARENT-THERMOPHYSICS-WATER-VISCOSITY-OPEN-RESEARCH-TASK-A-20260930-002",
+    "thermophysics_task_freshness_after_race": "SPENT_BY_UNAUTHORIZED_PHYSICAL_EXECUTION__MUST_NOT_BE_REUSED_AS_FRESH_PARENT_EVIDENCE"
   }
 }
