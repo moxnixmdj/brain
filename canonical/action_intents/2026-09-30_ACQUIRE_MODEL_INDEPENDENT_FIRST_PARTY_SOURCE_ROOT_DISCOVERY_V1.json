@@ -1,0 +1,269 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-FIRST-PARTY-SOURCE-ROOT-DISCOVERY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_RESEARCH_GROUNDING_AND_AUTHORITATIVE_SOURCE_DISCOVERY_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__AUTHORITATIVE_SOURCE_DISCOVERY_MISSING",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_BROAD_OBJECTIVE_RESEARCH_GROUNDING_AND_AUTHORITATIVE_SOURCE_DISCOVERY_V1::AUTHORITATIVE_SOURCE_DISCOVERY_MISSING::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and qualify a generic zero-model first-party source-root discovery primitive. This does not by itself complete broad research grounding or promote the parent capability.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "latest verified main e5b111b8eea2767013e84e93385704005d1beb34",
+    "qualified broad-objective semantic decomposition child",
+    "existing browser capture and provenance-bearing knowledge fetch require a URL and therefore cannot discover a source root",
+    "SQLite/Mauna parent tasks are spent and replay-forbidden",
+    "Wikidata wbsearchentities + P856 official website metadata provides a no-key, zero-cost entity-to-first-party-root route",
+    "DuckDuckGo/search-engine scraping rejected as less authoritative and less reliable",
+    "hard-coded official-domain maps rejected as task-specific and non-general"
+  ],
+  "evidence_presence_classification": "CAPABILITY_GAP_VERIFIED__GENERIC_SOURCE_ROOT_DISCOVERY_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when the generic adapter is qualified on fresh non-SQLite/non-Mauna entities by an independent implementation, preserves exact Wikidata provenance, adds no model dependency, invents no URLs, and fails closed on malformed/network responses.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e5b111b8eea2767013e84e93385704005d1beb34",
+    "real_outcome": "Provide reusable first-party source-root discovery to open-ended research grounding without model cognition or task-specific domain maps.",
+    "required_capability": "MODEL_INDEPENDENT_FIRST_PARTY_SOURCE_ROOT_DISCOVERY_V1",
+    "obs_goal": {
+      "real_outcome": "Resolve research subjects/entities to provenance-bearing first-party website roots.",
+      "proxy_goals_deleted": [
+        "package discovery retuning",
+        "SQLite-specific source hint",
+        "search-engine scraping as authority",
+        "general web reasoning"
+      ],
+      "surviving_necessity": "Existing evidence acquisition requires a URL; open-ended research lacks a generic way to obtain even a first-party root URL."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "web.browser.rendered.capture.chromedriver",
+        "knowledge.json.fetch.external",
+        "plain-goal grounding",
+        "broad-objective semantic decomposition"
+      ],
+      "external_existing_routes_checked": [
+        "Wikidata MediaWiki API wbsearchentities + wbgetentities P856",
+        "DuckDuckGo HTML results",
+        "hard-coded official-domain maps"
+      ],
+      "capability_work_deleted": [
+        "No search-engine HTML parser",
+        "No paid search API",
+        "No model search",
+        "No task/domain whitelist",
+        "No claim extraction"
+      ],
+      "surviving_gap": "No verified bound route converts a research subject into first-party source-root candidates."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic URL-discovery seam between broad research-role decomposition and existing URL-consuming evidence capabilities.",
+      "delete_bypass_substitute_options": [
+        "Package catalogs rejected: they discover software packages, not research sources.",
+        "Browser capture rejected as discovery substitute: it needs a URL first.",
+        "Wikidata official-site metadata survives as minimal first-party-root route."
+      ],
+      "surviving_causal_blocker": "AUTHORITATIVE_SOURCE_ROOT_DISCOVERY_MISSING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "WIKIDATA_ENTITY_SEARCH_PLUS_P856_OFFICIAL_SITE",
+        "SEARCH_ENGINE_RESULTS_PLUS_HEURISTIC_AUTHORITY_FILTER",
+        "HARD_CODED_DOMAIN_MAP",
+        "MODEL_WEB_SEARCH"
+      ],
+      "losing_routes_reason": "Wikidata yields explicit official-site metadata with structured provenance and no key. Search-engine ranking is not authority evidence; hard-coded maps overfit; model search violates the target.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Fresh cross-domain queries are independently re-resolved against the Wikidata APIs without importing the producer module; every producer URL must exactly appear in P856 for the selected entity."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "package discovery as research-source discovery",
+        "task-specific URL prewiring"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "browser capture",
+        "knowledge fetch",
+        "broad-objective decomposition"
+      ],
+      "fresh_reuse_plan": "After qualification, integrate only through proven grounding/binding semantics, then test a fresh parent objective; never replay SQLite/Mauna."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused qualified decomposer evidence",
+        "reused current bound URL-consuming capabilities",
+        "reused current parent spend corrections"
+      ],
+      "search_stop_decision": "Structured P856 official-site metadata is sufficient to qualify the narrow source-root capability; broader page-level discovery is a later seam if a fresh task proves it necessary.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current authoritative state and source-discovery alternatives were refreshed before branch creation; no open owner was present."
+    },
+    "routes_considered": [
+      "WIKIDATA_ENTITY_SEARCH_PLUS_P856_OFFICIAL_SITE",
+      "SEARCH_ENGINE_RESULTS_PLUS_HEURISTIC_AUTHORITY_FILTER",
+      "HARD_CODED_DOMAIN_MAP",
+      "MODEL_WEB_SEARCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PACKAGE_DISCOVERY_AS_RESEARCH_SEARCH",
+      "SQLITE_SOURCE_HINT",
+      "SEARCH_ENGINE_AUTHORITY_HEURISTIC",
+      "MODEL_SEARCH"
+    ],
+    "selected_surviving_route": "WIKIDATA_ENTITY_SEARCH_PLUS_P856_OFFICIAL_SITE",
+    "why_selected_route_is_fastest_sufficient": "One stdlib HTTPS adapter can resolve generic entities into explicit official-site metadata with provenance, $0 spend, no secrets, and an independent exact oracle.",
+    "expected_parent_level_state_change": "Acquire and qualify a generic zero-model first-party source-root discovery primitive. This does not by itself complete broad research grounding or promote the parent capability.",
+    "stop_condition": "Stop when the generic adapter is qualified on fresh non-SQLite/non-Mauna entities by an independent implementation, preserves exact Wikidata provenance, adds no model dependency, invents no URLs, and fails closed on malformed/network responses.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T05:50:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "NO_BOUND_FIRST_PARTY_SOURCE_ROOT_DISCOVERY",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "existing browser/knowledge capabilities are URL consumers, not URL discovery"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Wikidata MediaWiki API structured entity search and P856 official website property"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No extra package required; Python urllib/json only"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Search-engine scraping considered but rejected as weaker authority evidence"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent first-party official source root discovery"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Wikidata entity search official website P856 API"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "structured entity metadata versus search-engine scraping"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current Wikidata MediaWiki API"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "WIKIDATA_ENTITY_SEARCH_PLUS_P856_OFFICIAL_SITE",
+          "evidence": [
+            "Structured entity metadata explicitly names official website URLs."
+          ],
+          "qualification_evidence": [
+            "Fresh independent API queries on three unrelated entities"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact P856 provenance; no invented URL.",
+            "CAPABILITY_STRENGTH": "Narrow first-party root discovery.",
+            "WALL_CLOCK": "Small stdlib adapter.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Structured HTTPS API.",
+            "VERIFIABILITY": "Independent API recomputation."
+          }
+        }
+      ],
+      "negative_search_summary": "No lower-friction route provides explicit first-party source metadata without a model, paid key, or task-specific map.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "WIKIDATA_ENTITY_SEARCH_PLUS_P856_OFFICIAL_SITE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T05:50:00Z",
+        "max_age_hours": 2,
+        "selected_route": "WIKIDATA_ENTITY_SEARCH_PLUS_P856_OFFICIAL_SITE",
+        "status": "READY_TO_QUALIFY_ON_PUBLIC_CARRIER",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PYTHON_STDLIB_urllib_json",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:50:00Z",
+            "evidence": [
+              "Inherited Python runtime"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "WIKIDATA_API",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "TO_BE_FRESHLY_PROBED_BY_QUALIFICATION",
+            "observed_at_utc": "2026-09-30T05:50:00Z",
+            "evidence": [
+              "Official structured API route selected"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
