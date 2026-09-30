@@ -1,0 +1,190 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-SCHOLARLY-PROVENANCE-ADMISSION-AND-SELECTED-SOURCE-MATERIALIZATION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3e2435efb9398a062ee40a7bdbb3e3610724b330",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "action_kind": "GENERIC_SOURCE_PIPELINE_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "expected_parent_frontier_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION_AND_SELECTED_ONLY_LIVE_MATERIALIZATION__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 3e2435efb9398a062ee40a7bdbb3e3610724b330 / merged PR526 current-base reconciliation.",
+    "Guarded seismology run 36693929830 / artifact 11086898224: 12 discovered candidates, 8 live-retrieval verified, 2 Crossref bibliographic-provenance verified.",
+    "Only RETRIEVAL_PROVENANCE_VERIFIED candidates entered relevance; both scholarly candidates were discarded before ranking.",
+    "Selected Simple Wikipedia source matched only 2/16 focused terms and contained no requested tsunami amplitude quantity.",
+    "Exact current open_research_source_frontend.py filter and source_candidate_provenance_verify.py DOI path inspected.",
+    "Open PR search found no competing repair owner."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__EARLIEST_GENERIC_INFORMATION_LOSS_SEAM_EXACTLY_LOCALIZED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only generic provenance-class-preserving relevance admission plus selected-only live materialization. Independently guard-qualify exact bytes on fresh cross-domain fixtures. Do not replay seismology, do not add source whitelists, and do not award parent capability credit from the repair alone.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3e2435efb9398a062ee40a7bdbb3e3610724b330",
+    "real_outcome": "Prevent provenance-verified scholarly candidates from being discarded before relevance and ensure only the selected bibliographic candidate is live-materialized before evidence extraction.",
+    "required_capability": "MODEL_INDEPENDENT_PROVENANCE_VERIFIED_SCHOLARLY_CANDIDATE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve the strongest discovered evidence route through the source frontend without weakening factual-authority or evidence-sufficiency claims.",
+      "proxy_goals_deleted": [
+        "seismology replay",
+        "literal-threshold-only patch",
+        "source whitelist",
+        "new search engine",
+        "model reranker"
+      ],
+      "surviving_necessity": "Repair the exact upstream information-loss predicate proven by artifact 11086898224."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "open_web_source_candidate_discovery Crossref backend",
+        "source_candidate_provenance_verify DOI bibliographic verification",
+        "objective_relevance_bm25",
+        "objective_evidence_unit_extract fresh exact-source extraction"
+      ],
+      "external_existing_routes_checked": [
+        "No external supplier is required; the needed discovery, ranking, retrieval and extraction primitives already exist."
+      ],
+      "capability_work_deleted": [
+        "no new discovery backend",
+        "no model reranker",
+        "no source-specific authority map",
+        "no new extraction engine"
+      ],
+      "surviving_gap": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED is excluded from relevance, and selected bibliographic candidates lack a live-retrieval provenance transition before extraction."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic composition/admission defect in the internal source pipeline.",
+      "delete_bypass_substitute_options": [
+        "Admit every provenance-verified class to relevance.",
+        "Live-materialize only the relevance-selected bibliographic candidate.",
+        "Fail closed if selected materialization cannot be confirmed.",
+        "Do not silently fall back to a weaker source."
+      ],
+      "surviving_causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+        "ADD_NEW_SCHOLARLY_DOWNLOADER",
+        "SOURCE_WHITELIST",
+        "MODEL_RERANKER"
+      ],
+      "losing_routes_reason": "The first route reuses existing verified primitives and changes only two generic admission transitions; alternatives add unnecessary machinery or violate model-independent/open-ended constraints.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use fresh non-parent cross-domain fixtures to prove bibliographic candidates can outrank weak live pages, selected-only materialization occurs, materialization failure is fail-closed, and ordinary retrieval candidates remain unchanged."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "objective-literal threshold binding as current parent blocker"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Crossref discovery",
+        "bibliographic provenance",
+        "BM25 relevance",
+        "fresh exact-source extraction"
+      ],
+      "fresh_reuse_plan": "After independent qualification, freeze a new materially different parent task. Never replay seismology."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused immutable seismology artifact",
+        "reused PR523 correction",
+        "reused exact current source pipeline code"
+      ],
+      "search_stop_decision": "The earliest information-loss predicate is exact in code and all required primitives already exist.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and open repair leases refreshed immediately before branch creation."
+    },
+    "routes_considered": [
+      "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+      "ADD_NEW_SCHOLARLY_DOWNLOADER",
+      "SOURCE_WHITELIST",
+      "MODEL_RERANKER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "THRESHOLD_ONLY_PATCH",
+      "NEW_SEARCH_ENGINE",
+      "SOURCE_WHITELIST",
+      "MODEL_RERANKER"
+    ],
+    "selected_surviving_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+    "why_selected_route_is_fastest_sufficient": "Two generic transitions reuse current verified components, preserve fail-closed semantics, cost $0, and directly eliminate the demonstrated upstream information loss.",
+    "expected_parent_level_state_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION_AND_SELECTED_ONLY_LIVE_MATERIALIZATION__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
+    "stop_condition": "Implement only generic provenance-class-preserving relevance admission plus selected-only live materialization. Independently guard-qualify exact bytes on fresh cross-domain fixtures. Do not replay seismology, do not add source whitelists, and do not award parent capability credit from the repair alone.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "All necessary supplier primitives are already inherited and the current blocker is an exact internal composition defect.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T09:22:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_CURRENT_RUNTIME_SOURCE",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:22:00Z",
+            "evidence": [
+              "Exact current main 3e2435efb9398a062ee40a7bdbb3e3610724b330 inspected; runtime bytes unchanged by reconciliation-only PR526."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_QUALIFICATION_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:22:00Z",
+            "evidence": [
+              "Recent guarded runs on verification-capsule-runner succeeded in this account."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
