@@ -269,7 +269,7 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
         self.assertEqual(out["status"],"RETRIEVAL_PROVENANCE_VERIFIED")
         self.assertEqual(
             out["verification_method"],
-            "BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION",
+            "SELECTED_BIBLIOGRAPHIC_CANDIDATE_LIVE_HTTP_MATERIALIZATION",
         )
         self.assertEqual(out["bibliographic_provenance_status"],"VERIFIED")
         self.assertTrue(out["selected_only_materialization"])
@@ -281,7 +281,7 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
 
     def test_relevance_admission_failure_stops_before_source_selection(self):
         objective="Assess whether a broad technical subject has a specific measured outcome."
-        verifier,relevance,extractor=self.install(selected_index=0,materialize_ok=True)
+        discovery,verifier,relevance,extractor=self.install(selected_index=0,materialize_ok=True)
         original_rank=relevance.rank
         def weak_rank(objective,candidates):
             out=original_rank(objective,candidates)
