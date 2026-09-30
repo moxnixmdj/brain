@@ -883,6 +883,18 @@
         "SCOPED_BRAIN_OWNED_COMPONENT_ADDED"
       ],
       "claim_scope": "MECHANICAL_TWO_WORKER_DELEGATION_OWNERSHIP_CONCURRENCY_FANIN"
+    },
+    {
+      "event_id": "OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_OWNED_20260930",
+      "capability_id": "OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "capability_package": "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json",
+      "verification": "canonical/capabilities/opus55/OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_FRESH_VERIFICATION_V1.json",
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "SCOPED_BRAIN_OWNED_COMPONENT_ADDED"
+      ],
+      "claim_scope": "FAIL_CLOSED_EXECUTION_VERIFICATION_AND_RECOVERY"
     }
   ],
   "last_real_output_event": {
