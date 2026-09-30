@@ -116,6 +116,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     relevance_ready=(
         relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
         and relevance.get("output_verified") is True
+        and relevance.get("top_candidate_lexical_admission_verified") is True
         and relevance.get("top_candidate_original_index") is not None
     )
 
@@ -186,6 +187,7 @@ def run(objective,decomposition,limit=12,timeout=15):
                 if (
                     refined_relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
                     and refined_relevance.get("output_verified") is True
+                    and refined_relevance.get("top_candidate_lexical_admission_verified") is True
                     and refined_relevance.get("top_candidate_original_index") is not None
                 ):
                     refined_index=int(
@@ -336,14 +338,16 @@ def run(objective,decomposition,limit=12,timeout=15):
             "EVIDENCE_ACQUISITION":(
                 "GENERIC_PROVENANCE_BEARING_OBJECTIVE_GROUNDED_EVIDENCE_AVAILABLE"
                 if evidence_ready else
-                "RELEVANCE_SELECTED_SOURCE_AVAILABLE__GENERIC_EVIDENCE_EXTRACTION_REQUIRED"
-                if relevance_ready else
-                "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
+                "RELEVANCE_SELECTED_LIVE_SOURCE_AVAILABLE__GENERIC_EVIDENCE_EXTRACTION_REQUIRED"
+                if selected_live_item is not None else
+                "BIBLIOGRAPHIC_RELEVANCE_SELECTED__LIVE_RETRIEVAL_REFINEMENT_REQUIRED"
+                if relevance_ready and selected_item is not None else
+                "BLOCKED_ON_OBJECTIVE_RELEVANCE_ADMISSION"
             ),
             "EVIDENCE_EXTRACTION":(
                 "OBJECTIVE_GROUNDED_AUDITABLE_EVIDENCE_UNITS_AVAILABLE__FACTUAL_CORRECTNESS_UNVERIFIED"
                 if evidence_ready else
-                "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
+                "REQUIRES_GROUNDING" if selected_live_item is not None else "NOT_STARTED"
             ),
             "RELATION_EVALUATION":(
                 "OBJECTIVE_BOUND_EXPLICIT_RELATION_EVALUATED__FACTUAL_CORRECTNESS_UNVERIFIED"
