@@ -563,27 +563,28 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
-    "subcapability_status": "OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_VERIFIED__CLAIM_SUPPORT_RELATION_GAP_ACTIVE",
+    "active_subcapability_target": null,
+    "subcapability_status": "CLAIM_SUPPORT_AND_TYPED_NUMERIC_RELATION_ACQUIRED__NEW_MATERIALLY_DIFFERENT_OPEN_ENDED_PARENT_TASK_REQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_MATERIALLY_DIFFERENT_REAL_TASK_REQUIRED_AFTER_CLAIM_RELATION_ACQUISITION",
     "first_physical_spend_run_id": 36670808367,
     "last_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
-      "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
-      "route": "first_party_objective_relevance_verify",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json",
-      "public_run_id": 36678675368,
-      "producer_git_blob": "6ff13c32704c0b3283c42a51f718e875110a13ca",
+      "capability_id": "MODEL_INDEPENDENT_EXTRACTED_EVIDENCE_VERBATIM_SUPPORT_AND_NUMERIC_RELATION_V1",
+      "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_CROSS_DOMAIN_PASS",
+      "route": "evidence.claim_relation.evaluate.stdlib",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EXTRACTED_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+      "public_run_id": 36680322787,
+      "artifact_id": 11081621591,
+      "artifact_digest": "sha256:7388e9e89c9272c1031d5d532a34e1f3c4841144d4a3e02a1359562a406c3249",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "First-party exact-ROR-domain hosting plus strict bounded lexical objective relevance only. Semantic entailment, primary-source status, factual correctness, evidence sufficiency, and claim endorsement remain unverified."
+      "limitations": "Exact normalized verbatim support and explicit typed numeric relations only; paraphrase/semantic entailment, factual correctness, evidence sufficiency, causality and semantic role remain unverified."
     }
   },
   "events": [
