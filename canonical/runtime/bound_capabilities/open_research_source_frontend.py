@@ -128,27 +128,40 @@ def run(objective,decomposition,limit=12,timeout=15):
         if 0<=index<len(provenance_verified):
             selected_item=provenance_verified[index]
 
-    if selected_live_item is not None:
-        candidate=dict(selected_live_item["candidate"])
-        provenance=selected_live_item["verification"]
-        if provenance.get("status")=="RETRIEVAL_PROVENANCE_VERIFIED":
-            selected_live_item={"candidate":candidate,"verification":provenance}
-        elif provenance.get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
-            direct=verifier.verify_live(candidate,timeout=timeout)
+    if selected_item is not None:
+        selected_candidate=dict(selected_item["candidate"])
+        selected_provenance=selected_item["verification"]
+        if selected_provenance.get("status")=="RETRIEVAL_PROVENANCE_VERIFIED":
+            selected_live_item={
+                "candidate":selected_candidate,
+                "verification":selected_provenance,
+            }
+        elif selected_provenance.get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+            direct=verifier.verify_live(selected_candidate,timeout=timeout)
             if direct.get("status")=="RETRIEVAL_PROVENANCE_VERIFIED":
-                selected_live_item={"candidate":candidate,"verification":direct}
+                selected_live_item={
+                    "candidate":selected_candidate,
+                    "verification":direct,
+                }
                 retrieval_refinement={
                     "status":"BIBLIOGRAPHIC_CANDIDATE_DIRECT_LIVE_RETRIEVAL_VERIFIED",
-                    "anchor_title":_canon(provenance.get("record_title") or candidate.get("title")),
-                    "selected_candidate":candidate,
-                    "bibliographic_provenance":provenance,
+                    "anchor_title":_canon(
+                        selected_provenance.get("record_title")
+                        or selected_candidate.get("title")
+                    ),
+                    "selected_bibliographic_candidate":selected_candidate,
+                    "bibliographic_provenance":selected_provenance,
                     "live_provenance":direct,
                 }
             else:
-                anchor=_canon(provenance.get("record_title") or candidate.get("title"))
-                refined=discovery.discover(anchor,limit=limit,timeout=timeout) if anchor else {
-                    "status":"DISCOVERY_UNAVAILABLE","candidates":[]
-                }
+                anchor=_canon(
+                    selected_provenance.get("record_title")
+                    or selected_candidate.get("title")
+                )
+                refined=(
+                    discovery.discover(anchor,limit=limit,timeout=timeout)
+                    if anchor else {"status":"DISCOVERY_UNAVAILABLE","candidates":[]}
+                )
                 refined_verifications=[]
                 for refined_candidate in refined.get("candidates") or []:
                     live=verifier.verify_live(refined_candidate,timeout=timeout)
@@ -160,19 +173,24 @@ def run(objective,decomposition,limit=12,timeout=15):
                     x for x in refined_verifications
                     if x["verification"].get("status")=="RETRIEVAL_PROVENANCE_VERIFIED"
                 ]
-                refined_relevance=relevance_ranker.rank(
-                    objective,[x["candidate"] for x in live_refined]
-                ) if live_refined else {
-                    "status":"RELEVANCE_UNRESOLVED",
-                    "reason":"NO_LIVE_RETRIEVAL_REFINEMENT_CANDIDATES",
-                    "ranked_candidates":[],
-                }
+                refined_relevance=(
+                    relevance_ranker.rank(
+                        objective,[x["candidate"] for x in live_refined]
+                    )
+                    if live_refined else {
+                        "status":"RELEVANCE_UNRESOLVED",
+                        "reason":"NO_LIVE_RETRIEVAL_REFINEMENT_CANDIDATES",
+                        "ranked_candidates":[],
+                    }
+                )
                 if (
                     refined_relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
                     and refined_relevance.get("output_verified") is True
                     and refined_relevance.get("top_candidate_original_index") is not None
                 ):
-                    refined_index=int(refined_relevance["top_candidate_original_index"])
+                    refined_index=int(
+                        refined_relevance["top_candidate_original_index"]
+                    )
                     if 0<=refined_index<len(live_refined):
                         selected_live_item=live_refined[refined_index]
                         evidence_relevance=refined_relevance
@@ -183,8 +201,8 @@ def run(objective,decomposition,limit=12,timeout=15):
                         else "BIBLIOGRAPHIC_METADATA_ANCHORED_LIVE_RETRIEVAL_UNRESOLVED"
                     ),
                     "anchor_title":anchor,
-                    "selected_bibliographic_candidate":candidate,
-                    "bibliographic_provenance":provenance,
+                    "selected_bibliographic_candidate":selected_candidate,
+                    "bibliographic_provenance":selected_provenance,
                     "direct_live_provenance":direct,
                     "refined_discovery":refined,
                     "refined_provenance_verifications":refined_verifications,
@@ -193,22 +211,18 @@ def run(objective,decomposition,limit=12,timeout=15):
 
     authority_verifications=[]
     evidence_extractions=[]
-    selected_item=None
-    if relevance_ready:
-        index=int(relevance["top_candidate_original_index"])
-        if 0<=index<len(retrieval_verified):
-            selected_item=retrieval_verified[index]
-
-    if selected_item is not None:
-        candidate=dict(selected_item["candidate"])
-        provenance=selected_item["verification"]
+    if selected_live_item is not None:
+        candidate=dict(selected_live_item["candidate"])
+        provenance=selected_live_item["verification"]
         enriched=dict(candidate)
         if provenance.get("final_url"):
             enriched["final_url"]=provenance["final_url"]
         if provenance.get("final_host"):
             enriched["final_host"]=provenance["final_host"]
         try:
-            optional_authority=authority_identity.bind_candidate(enriched,timeout=timeout)
+            optional_authority=authority_identity.bind_candidate(
+                enriched,timeout=timeout
+            )
         except Exception as exc:
             optional_authority={
                 "status":"UNVERIFIED",
