@@ -2871,6 +2871,80 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "research.source_candidates.discover.open_web": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "provides": [
+        "research.source.candidates.available"
+      ],
+      "requires": [],
+      "keywords": [
+        "research",
+        "source",
+        "sources",
+        "candidate",
+        "candidates",
+        "discovery",
+        "authoritative",
+        "primary",
+        "web",
+        "scholarly",
+        "evidence",
+        "provenance"
+      ],
+      "proposal_bindings": {
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        }
+      },
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "research.source_candidates.discover.open_web",
+          "goal": "${input.goal}",
+          "output_path": "${input.output_path}",
+          "limit": 12,
+          "timeout": 15
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "result_fields": [
+        "output_path",
+        "candidate_count",
+        "candidates",
+        "query",
+        "query_sha256",
+        "retrieval_provenance",
+        "backend_errors",
+        "authority_verification",
+        "primary_source_verification",
+        "evidence_sufficiency_verification",
+        "model_dependency_count",
+        "incremental_spend_usd",
+        "output_verified"
+      ],
+      "adapter_module": "open_web_source_candidate_discovery",
+      "entrypoint": "run",
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "html",
+          "json",
+          "re",
+          "urllib.parse",
+          "urllib.request",
+          "html.parser",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py"
+      },
+      "incremental_spend_usd": 0
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
