@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-OPENENDED-TASK-A-HARNESS-BYPASS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_ENDED_PARENT_EVIDENCE_SCOPE_OVERCLAIM__ONE_SHOT_HARNESS_BYPASSED_PUBLIC_RUN_GOAL",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_ENDED_PARENT_EVIDENCE_SCOPE_OVERCLAIM__ONE_SHOT_HARNESS_BYPASSED_PUBLIC_RUN_GOAL::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Revoke the overclaimed full-runtime compile-gap diagnosis from the Mauna Loa one-shot harness because it bypassed public runtime.run_goal(); preserve the task as spent, restore the parent blocker to unproven open-ended scope, and require the next fresh task to exercise the actual model-independent runtime entrypoint and its grounding/composition/acquisition fallback.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "PR337 frozen Mauna Loa task",
+    "runner PR49 exact harness source",
+    "current astra_runtime.py _run_goal_unstamped fallback path",
+    "current _classify_plain_goal_gap returns CAPABILITY_CANDIDATE for ordinary broad objective clauses",
+    "Mauna Loa task remains spent and replay-forbidden"
+  ],
+  "evidence_presence_classification": "EVIDENCE_SCOPE_OVERCLAIM_VERIFIED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Correct canonical scope only. Do not replay Mauna Loa and do not mutate runtime. Next, freeze a materially different fresh open-ended task whose harness calls public runtime.run_goal() directly with model planning disabled.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "REOPENED_BY_FALSIFICATION",
+    "evidence": [
+      "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_HARNESS_SCOPE_CORRECTION_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore truthful parent frontier authority after proving the Mauna Loa one-shot harness bypassed the actual public model-independent runtime entrypoint.",
+    "required_capability": "TRUTHFUL_PARENT_EVIDENCE_SCOPE_AND_FAITHFUL_OPEN_ENDED_EXECUTION_HARNESS",
+    "obs_goal": {
+      "real_outcome": "Prevent a direct-compiler harness failure from being mistaken for a full parent-runtime failure.",
+      "proxy_goals_deleted": [
+        "repair compiler immediately",
+        "replay Mauna Loa",
+        "build planner",
+        "count harness bypass as parent capability falsification"
+      ],
+      "surviving_necessity": "Parent capability must be tested through the actual public runtime path before assigning a causal gap to that runtime."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "runtime.run_goal",
+        "_run_goal_unstamped fallback",
+        "plain-goal grounding",
+        "grounded executable composition",
+        "auto capability acquisition"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no runtime repair",
+        "no new supplier",
+        "no replay",
+        "no model route"
+      ],
+      "surviving_gap": "No faithful genuinely open-ended parent task has yet exercised public runtime.run_goal end-to-end."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Measurement/harness path mismatch.",
+      "delete_bypass_substitute_options": [
+        "delete overclaimed diagnosis",
+        "reuse actual runtime entrypoint",
+        "preserve spent-task evidence only at direct-compiler scope"
+      ],
+      "surviving_causal_blocker": "OPEN_ENDED_PARENT_TASK_HARNESS_BYPASSED_PUBLIC_RUNTIME_ENTRYPOINT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CORRECT_SCOPE_AND_RUN_NEXT_FRESH_TASK_THROUGH_PUBLIC_RUN_GOAL",
+        "PATCH_DIRECT_COMPILER",
+        "REPLAY_MAUNA_LOA",
+        "BUILD_NEW_PLANNER"
+      ],
+      "losing_routes_reason": "Only the first route tests the inherited runtime before adding machinery; all others act on an unproven causal diagnosis or violate freshness.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Source inspection is sufficient for reconciliation. The next fresh task is the required real-effect verification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR348 compile-gap repair authority",
+        "any compiler repair justified only by Mauna Loa harness failure"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "run_goal fallback",
+        "grounding",
+        "composition",
+        "acquisition"
+      ],
+      "fresh_reuse_plan": "Fresh materially different open-ended task through public runtime.run_goal, model planner disabled, stop first causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact runner harness diff",
+        "reused current runtime control flow",
+        "no external discovery needed for an internal path mismatch"
+      ],
+      "search_stop_decision": "The harness bypass is directly proven by source and fully changes the causal interpretation; further route search cannot improve this reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External challenger search is inapplicable to evidence-scope correction; runtime path is internal and directly observable."
+    },
+    "routes_considered": [
+      "CORRECT_SCOPE_AND_RUN_NEXT_FRESH_TASK_THROUGH_PUBLIC_RUN_GOAL",
+      "PATCH_DIRECT_COMPILER",
+      "REPLAY_MAUNA_LOA",
+      "BUILD_NEW_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PATCH_DIRECT_COMPILER_FROM_UNFAITHFUL_HARNESS",
+      "REPLAY_MAUNA_LOA",
+      "PREEMPTIVE_NEW_PLANNER"
+    ],
+    "selected_surviving_route": "CORRECT_SCOPE_AND_RUN_NEXT_FRESH_TASK_THROUGH_PUBLIC_RUN_GOAL",
+    "why_selected_route_is_fastest_sufficient": "It requires no runtime implementation and immediately tests the already-acquired fallback stack that the previous harness skipped.",
+    "expected_parent_level_state_change": "Revoke the overclaimed full-runtime compile-gap diagnosis from the Mauna Loa one-shot harness because it bypassed public runtime.run_goal(); preserve the task as spent, restore the parent blocker to unproven open-ended scope, and require the next fresh task to exercise the actual model-independent runtime entrypoint and its grounding/composition/acquisition fallback.",
+    "stop_condition": "Correct canonical scope only. Do not replay Mauna Loa and do not mutate runtime. Next, freeze a materially different fresh open-ended task whose harness calls public runtime.run_goal() directly with model planning disabled.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Internal evidence-path correction; no external implementation route is required."
+    }
+  }
+}
