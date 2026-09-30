@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 9,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 10
+    "residual_gaps_localized": 11
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_progress_event_target": "REUSE_CANONICAL_ASTRA_MISSION_ENTRYPOINT_TO_PROPAGATE_RUNTIME_MISSION_IDENTITY__VALIDATE_WITH_FRESH_NON_PARENT_CANARY__THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -463,12 +463,42 @@
       "progress_credit": "EVIDENCE_SCOPE_CORRECTION_ONLY",
       "corrected_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "PARENT_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILED_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FIRST_PHYSICAL_SPEND_AUTHORITY_CORRECTED__MISSION_ORIGIN_GAP_LOCALIZED__LATER_REPLAYS_ZERO_FRESHNESS__NO_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_FIRST_SPEND_MISSION_ORIGIN_TRUTH_RECONCILIATION_20260930_V1.json",
+      "source_real_task_run_id": 36669918546,
+      "public_job_id": 109742518213,
+      "artifact_id": 11077637577,
+      "artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+      "first_causal_stage": "AUTO_CAPABILITY_ACQUISITION_AFTER_COMPILE_MISS_FALLBACK",
+      "first_causal_gap": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+      "exact_cause": "APT_ORIGIN_MISSION_PATH_INVALID + PYPI_ORIGIN_MISSION_PATH_INVALID because direct run_goal caller supplied no canonical _runtime_mission_path",
+      "later_replay_run_ids": [
+        36670516407,
+        36670981076,
+        36671472249
+      ],
+      "replay_allowed": false,
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED_ONCE",
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "NO_ADMISSIBLE_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_YET__STRUCTURED_DEMOGRAPHY_PRESERVED",
+    "subcapability_status": "MAUNA_SUBSTANTIVE_OBJECTIVE_SPENT__MISSION_ORIGIN_GAP_LOCALIZED__FRESH_NON_PARENT_ENTRYPOINT_CANARY_REQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
