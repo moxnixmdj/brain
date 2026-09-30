@@ -1,0 +1,317 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-RELEVANT-SOURCE-EVIDENCE-EXTRACTION-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and independently qualify a narrow model-independent route from provenance-verified, independently relevance-admitted source to bounded verbatim objective-grounded evidence units; preserve authority identity as optional metadata and advance only to evidence relation evaluation.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main post-PR415 frontier reconciliation",
+    "qualified open research source frontend",
+    "qualified objective relevance ranker and admission",
+    "closed PR416 extraction candidate and closure comment",
+    "verified browser visible-text capture route",
+    "older task-specific JIT semantic extraction receipts",
+    "rendered quantitative claim extraction frontier record observed once only"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN__USEFUL_CANDIDATE_MECHANICS_RECOVERED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after a current-base extractor that does not require authority identity passes regression tests, independent fresh cross-domain public qualification proves every emitted unit is verbatim-normalized text from a fresh same-source retrieval with objective-token binding and provenance hashes, the narrow capability is inherited with zero parent credit, and the parent frontier is immediately recomputed without replaying spent tasks.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "8c4d76e62cee474fc97844d59c12aa907b7ba44f",
+    "real_outcome": "Turn an already provenance-verified and independently relevance-admitted source into bounded, provenance-linked evidence units without model cognition or semantic overclaim.",
+    "required_capability": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "obs_goal": {
+      "real_outcome": "Expose decision-relevant source text as typed evidence units so relation evaluation can operate on evidence rather than an opaque URL.",
+      "proxy_goals_deleted": [
+        "semantic entailment",
+        "fact correctness",
+        "evidence sufficiency",
+        "primary-source classification",
+        "new browser stack",
+        "model-based extraction"
+      ],
+      "surviving_necessity": "The parent route currently stops after relevance because no generic typed evidence units are emitted."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "first_party_objective_relevance_verify fresh retrieval and visible-text parsing",
+        "open_research_source_frontend",
+        "web.browser.rendered.capture.chromedriver",
+        "source.objective_relevance.rank.bm25",
+        "PR416 visible-block/hash/offset candidate mechanics"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib html.parser",
+        "Python stdlib hashlib",
+        "general HTML-to-text libraries and model extractors considered but unnecessary for narrow verbatim extraction"
+      ],
+      "capability_work_deleted": [
+        "No model",
+        "No embeddings",
+        "No new browser",
+        "No vector database",
+        "No authority-identity requirement in the extractor",
+        "No task-specific selector"
+      ],
+      "surviving_gap": "No current verified capability emits bounded verbatim objective-grounded evidence units from an already relevance-admitted source."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic research evidence handoff seam.",
+      "delete_bypass_substitute_options": [
+        "Delete extraction rejected because relation evaluation needs source text",
+        "Reuse full-page browser capture is too broad and leaves evidence units untyped",
+        "Reuse PR416 mechanics after deleting universal ROR requirement survives",
+        "Model/NLP extraction rejected by model-independence and complexity"
+      ],
+      "surviving_causal_blocker": "Need a fail-closed conversion from verified relevant source receipt to bounded source-faithful evidence units."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECOVER_PR416_VISIBLE_BLOCK_HASH_OFFSET_MECHANICS_WITHOUT_ROR_GATE",
+        "EXTEND_RELEVANCE_VERIFIER_TO_RETURN_WHOLE_VISIBLE_TEXT",
+        "BROWSER_RENDER_AND_POSTPROCESS",
+        "MODEL_OR_EXTERNAL_NLP_EXTRACTOR"
+      ],
+      "losing_routes_reason": "Recovering the candidate mechanics is the smallest generic change, independently testable, preserves source fidelity, and avoids coupling extraction to ROR identity or another browser/model dependency.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Unit regressions must prove authority identity is not required, unverified provenance/relevance fails before fetch, same-source drift fails closed, redirects fail closed, offsets/hashes bind emitted units to fresh text, and no relation/correctness/sufficiency claims are made. Public fresh cross-domain qualification independently refetches the same pages and confirms exact normalized unit membership."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "closed PR416 ROR-gated extraction route",
+        "whole-page-text handoff proposals",
+        "model-based evidence extraction for this lexical/verbatim role"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "fresh same-source drift check",
+        "bounded visible-text segmentation",
+        "objective lexical binding",
+        "source hash and offset provenance"
+      ],
+      "fresh_reuse_plan": "After narrow qualification, reuse the extractor on a materially different fresh public source domain before any parent capability credit; then execute a fresh unspent parent research task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR416 parser/block/hash mechanics",
+        "Reused current relevance receipt as trust input",
+        "Deleted ROR identity as extractor prerequisite"
+      ],
+      "search_stop_decision": "Current Brain already contains the fetch/parsing/ranking ingredients and the only useful candidate implementation; adding libraries or models cannot reduce the remaining implementation or verification work enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and carrier were refreshed after PR416 closure; refresh again before qualification or if main materially moves."
+    },
+    "routes_considered": [
+      "RECOVER_PR416_VISIBLE_BLOCK_HASH_OFFSET_MECHANICS_WITHOUT_ROR_GATE",
+      "EXTEND_RELEVANCE_VERIFIER_TO_RETURN_WHOLE_VISIBLE_TEXT",
+      "BROWSER_RENDER_AND_POSTPROCESS",
+      "MODEL_OR_EXTERNAL_NLP_EXTRACTOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ROR_AS_EXTRACTION_ADMISSION_GATE",
+      "MODEL_OR_EXTERNAL_NLP_EXTRACTOR",
+      "NEW_BROWSER_STACK",
+      "SEMANTIC_ENTAILMENT_IN_THIS_STEP"
+    ],
+    "selected_surviving_route": "RECOVER_PR416_VISIBLE_BLOCK_HASH_OFFSET_MECHANICS_WITHOUT_ROR_GATE",
+    "why_selected_route_is_fastest_sufficient": "It reuses already-audited candidate mechanics and current source/relevance receipts, requires only Python stdlib, preserves exact source text and provenance, and removes the only known design defect instead of inventing new machinery.",
+    "expected_parent_level_state_change": "Acquire and independently qualify a narrow model-independent route from provenance-verified, independently relevance-admitted source to bounded verbatim objective-grounded evidence units; preserve authority identity as optional metadata and advance only to evidence relation evaluation.",
+    "stop_condition": "Stop after a current-base extractor that does not require authority identity passes regression tests, independent fresh cross-domain public qualification proves every emitted unit is verbatim-normalized text from a fresh same-source retrieval with objective-token binding and provenance hashes, the narrow capability is inherited with zero parent credit, and the parent frontier is immediately recomputed without replaying spent tasks.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T06:38:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CLOSED_PR416_ROR_GATED_VISIBLE_BLOCK_EXTRACTOR",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "closed PR416 candidate mechanics and closure audit",
+          "current first_party_objective_relevance_verify",
+          "current open_research_source_frontend",
+          "MODEL_INDEPENDENT_RENDERED_EVIDENCE_QUANTITATIVE_CLAIM_EXTRACTION_V1 observed-once record"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python html.parser documentation",
+          "Python hashlib documentation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python standard library html.parser/hashlib require no external package"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "route sweep found HTML text extraction libraries but no needed capability beyond current stdlib scope"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent extract verbatim evidence excerpts from verified relevant HTML source"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Python html parser evidence text extraction objective relevance"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "bounded visible text blocks hashes offsets provenance extraction"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 HTML evidence extraction library model independent source provenance"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "RECOVER_PR416_VISIBLE_BLOCK_HASH_OFFSET_MECHANICS_WITHOUT_ROR_GATE",
+          "evidence": [
+            "PR416 contains generic block parser, fresh refetch, objective-token binding, hashes and offsets; closure identified exactly the ROR-gate defect."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: PR416 code audit and current main relevance qualification runs"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Fail-closed source fidelity and explicit narrow nonclaims; remove known ROR prerequisite defect.",
+            "CAPABILITY_STRENGTH": "Bounded verbatim evidence units suitable for later relation evaluation.",
+            "WALL_CLOCK": "Smallest recovered delta.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Python stdlib plus current verified source chain.",
+            "VERIFIABILITY": "Independent refetch can prove exact text membership and hashes."
+          }
+        },
+        {
+          "route": "BROWSER_RENDER_AND_POSTPROCESS",
+          "evidence": [
+            "Verified web.browser.rendered.capture.chromedriver exists."
+          ],
+          "qualification_evidence": [
+            "BRAIN inherited verified browser capability"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can expose rendered text but adds browser state and a second acquisition path.",
+            "CAPABILITY_STRENGTH": "Useful for JS-heavy pages, unnecessary for current generic HTML seam.",
+            "WALL_CLOCK": "Slower due browser launch/install closure.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Verified but heavier.",
+            "VERIFIABILITY": "High, but source chain complexity is larger."
+          }
+        }
+      ],
+      "negative_search_summary": "No simpler route deletes the need to emit source-faithful bounded evidence. External NLP/model extraction adds semantics we neither need nor may claim.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RECOVER_PR416_VISIBLE_BLOCK_HASH_OFFSET_MECHANICS_WITHOUT_ROR_GATE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T06:38:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RECOVER_PR416_VISIBLE_BLOCK_HASH_OFFSET_MECHANICS_WITHOUT_ROR_GATE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PYTHON_STDLIB_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:38:00Z",
+            "evidence": [
+              "current Brain runtime and public qualification use Python 3.x successfully"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_HARD_ZERO_VERIFICATION_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:34:17Z",
+            "evidence": [
+              "verification-capsule-runner run 36678914367 completed successfully"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "CURRENT_RELEVANCE_RECEIPT_CONTRACT",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:38:00Z",
+            "evidence": [
+              "first_party_objective_relevance_verify blob 6ff13c32704c0b3283c42a51f718e875110a13ca independently qualified"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
