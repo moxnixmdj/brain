@@ -3,7 +3,7 @@
   "action_id": "INTERNALIZE-SUPREME-ADVANCED-CODING-20260930-V1",
   "status": "AUTHORIZED_EXECUTION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "08b70901f883e97eeb2bc28fa89bd02b5fb93881",
+  "canonical_base_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
   "capability_target": "ADVANCED_AGENTIC_CODING",
   "action_kind": "CAPABILITY_INTERNALIZATION",
   "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ADVANCED_AGENTIC_CODING::STRONGER_EXPOSED_CONFIGURATION_FOUND_BEFORE_VERIFICATION",
@@ -30,7 +30,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "08b70901f883e97eeb2bc28fa89bd02b5fb93881",
+    "canonical_base_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
     "real_outcome": "Internalize the strongest currently identified exposed advanced-coding configuration before spending compute on Opus-level verification.",
     "required_capability": "PORTABLE_AGENTIC_SOFTWARE_ENGINEERING_METHODOLOGY",
     "obs_goal": {
@@ -123,5 +123,13 @@
     "why_selected_route_is_fastest_sufficient": "Supreme is exposed, dependency-free, already evaluated across the complete older benchmark against Superpowers on the same substrate, and can be copied into Brain immediately at zero incremental spend.",
     "expected_parent_level_state_change": "Replace the frozen Superpowers-only advanced-coding verification route with a Brain-owned candidate portfolio led by Supreme, while preserving zero Opus-5.5 ownership credit until the Brain-configured route itself verifies at or above the target.",
     "stop_condition": "Copy the pinned configuration and root license exactly, record provenance and license ambiguity, make Supreme the leading verification candidate, and award no Opus ownership credit until direct Brain-route evaluation."
+  },
+  "prior_state_reconciliation": {
+    "superseding_main_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
+    "material_change": "SUPERPOWERS_VERIFICATION_PROTOCOL_MERGED_AS_PR556",
+    "effect_on_route": "STRENGTHENS_NEED_FOR_CHALLENGER_RACE__SUPREME_INTERNALIZATION_REMAINS_SELECTED__SUPERPOWERS_RETAINED_AS_CONTROL",
+    "stale_assumptions_deleted": [
+      "SUPERPOWERS_VERIFICATION_NOT_YET_CANONICAL"
+    ]
   }
 }
