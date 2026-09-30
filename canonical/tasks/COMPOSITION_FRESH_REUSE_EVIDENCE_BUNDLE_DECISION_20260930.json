@@ -1,0 +1,167 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
+  "decision_id": "COMPOSITION-FRESH-REUSE-EVIDENCE-BUNDLE-20260930",
+  "question": "Which already-available packaging route should Project Brain use for a repository-local evidence bundle when the route must have zero incremental spend, produce one portable artifact, and support deterministic independent manifest-member verification?",
+  "alternatives": [
+    {
+      "id": "TAR_GZ_MANIFEST",
+      "label": "Create tar.gz from manifest and independently verify members with GNU tar"
+    },
+    {
+      "id": "RAW_DIRECTORY",
+      "label": "Keep evidence as an unpackaged repository directory"
+    },
+    {
+      "id": "ZIP_UNVERIFIED",
+      "label": "Create a zip bundle without an already-bound independent verifier"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "COST_TAR",
+      "alternative": "TAR_GZ_MANIFEST",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Route must have zero incremental spend.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "archive.tar_gz.create_from_manifest incremental_spend_usd=0"
+        }
+      ]
+    },
+    {
+      "id": "PORTABLE_TAR",
+      "alternative": "TAR_GZ_MANIFEST",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Route must produce one portable artifact.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "archive.tar_gz.create_from_manifest provides archive.tar_gz.create_from_manifest"
+        }
+      ]
+    },
+    {
+      "id": "VERIFY_TAR",
+      "alternative": "TAR_GZ_MANIFEST",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Route must have deterministic independent manifest-member verification.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "archive.verify.tar_gz.gnu producer_independent=true"
+        }
+      ]
+    },
+    {
+      "id": "PORTABLE_RAW",
+      "alternative": "RAW_DIRECTORY",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Route must produce one portable artifact rather than an unpackaged directory.",
+      "provenance": [
+        {
+          "source": "Task requirement",
+          "ref": "single portable artifact required"
+        }
+      ]
+    },
+    {
+      "id": "VERIFY_RAW",
+      "alternative": "RAW_DIRECTORY",
+      "state": "UNKNOWN",
+      "required": true,
+      "description": "Route must have one already-bound independent manifest-member verifier for the packaged artifact.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "no raw-directory packaging verifier selected for this task"
+        }
+      ]
+    },
+    {
+      "id": "VERIFY_ZIP",
+      "alternative": "ZIP_UNVERIFIED",
+      "state": "UNKNOWN",
+      "required": true,
+      "description": "Route must have an already-bound independent verifier for the exact packaged artifact.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "no verified zip producer+independent-verifier chain selected in current registry"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E_TAR_CREATE",
+      "alternative": "TAR_GZ_MANIFEST",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "producer_registry",
+      "claim": "archive.tar_gz.create_from_manifest is a verified bound zero-cost capability.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "archive.tar_gz.create_from_manifest"
+        }
+      ]
+    },
+    {
+      "id": "E_TAR_VERIFY",
+      "alternative": "TAR_GZ_MANIFEST",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "independent_verifier_registry",
+      "claim": "archive.verify.tar_gz.gnu independently verifies archive members against the manifest using GNU tar and SHA-256.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "archive.verify.tar_gz.gnu"
+        }
+      ]
+    },
+    {
+      "id": "E_RAW_NO_PACKAGE",
+      "alternative": "RAW_DIRECTORY",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "task_contract",
+      "claim": "An unpackaged directory does not satisfy the one-portable-artifact requirement.",
+      "provenance": [
+        {
+          "source": "Task requirement",
+          "ref": "one portable artifact"
+        }
+      ]
+    },
+    {
+      "id": "E_ZIP_NO_BOUND_VERIFY",
+      "alternative": "ZIP_UNVERIFIED",
+      "relation": "CONTRADICTS",
+      "confidence": 0.9,
+      "strength": 1,
+      "independence_group": "registry_gap",
+      "claim": "The selected current bound registry does not provide an already-qualified zip producer plus independent verifier chain for this decision.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "current verified capability inventory"
+        }
+      ]
+    }
+  ],
+  "policy": {
+    "minimum_support_ratio": 0.6,
+    "maximum_conflict_ratio": 0.5,
+    "minimum_independent_support_groups": 2,
+    "minimum_net_margin": 0.1
+  }
+}
