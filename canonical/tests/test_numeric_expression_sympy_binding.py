@@ -42,7 +42,7 @@ class TypedScalarExpressionCompilerTests(unittest.TestCase):
         goal=(
           prefix+
           "Calculate the derived scalar using predicted = 3.5 * (predictor_x ** 1.5). "
-          "Determine whether the predicted and observed scalars differ by at most 2."
+          "Determine whether the two scalars differ by at most 2."
         )
         return compiler.compile_goal(goal,self.registry(),ROOT)
 
