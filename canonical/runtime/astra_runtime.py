@@ -4849,9 +4849,17 @@ def _load_plain_goal_bound_grounding():
 
 def _ground_plain_goal_to_bound_capabilities(mission, goal):
     module=_load_plain_goal_bound_grounding()
-    registry=_load_bound_capability_registry()
+    compiler=_load_goal_compiler()
+    proposal_binder=_load_runtime_helper("capability_proposal_generators")
+    registry=compiler._platform_admissible_registry(_load_bound_capability_registry())
     try:
-        result=module.ground(goal,registry)
+        result=module.ground(
+            goal,registry,
+            compiler=compiler,
+            proposal_binder=proposal_binder,
+            root=ROOT,
+            enforce_bindability=True,
+        )
     except Exception as exc:
         raise Blocker(
             "PLAIN_GOAL_BOUND_GROUNDING_FAILED:"
@@ -4883,19 +4891,27 @@ def _load_grounded_executable_composition_verifier():
     spec.loader.exec_module(module)
     return module
 
-def _compose_grounding_to_capability_problem(mission, goal, grounding):
+def _compose_grounding_to_capability_problem(
+    mission, goal, grounding, verified_initial_facts=None
+):
     producer=_load_grounded_executable_composition()
     verifier=_load_grounded_executable_composition_verifier()
     compiler=_load_goal_compiler()
     registry=compiler._platform_admissible_registry(_load_bound_capability_registry())
     try:
-        composition=producer.compose(goal,grounding,registry,compiler,ROOT)
+        composition=producer.compose(
+            goal,grounding,registry,compiler,ROOT,
+            verified_initial_facts=verified_initial_facts,
+        )
     except Exception as exc:
         raise Blocker(
             "GROUNDED_EXECUTABLE_COMPOSITION_FAILED:"
             +type(exc).__name__+":"+str(exc)
         ) from exc
-    ok,reason=verifier.verify(goal,composition,grounding,registry)
+    ok,reason=verifier.verify(
+        goal,composition,grounding,registry,
+        verified_initial_facts=verified_initial_facts,
+    )
     if not ok:
         raise Blocker("GROUNDED_EXECUTABLE_COMPOSITION_VERIFY_FAILED:"+str(reason))
     mid=str(mission.get("mission_id") or "UNKNOWN")
@@ -5510,7 +5526,8 @@ def run_goal(step, mission):
             if grounded_count>0:
                 try:
                     composition_path,composition=_compose_grounding_to_capability_problem(
-                        mission,grounding_goal,grounding
+                        mission,grounding_goal,grounding,
+                        verified_initial_facts=step.get("verified_initial_facts") or [],
                     )
                 except Blocker as composition_error:
                     raise Blocker(
