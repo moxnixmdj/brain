@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_CONTAMINATION_RECEIPT_V1",
+  "status": "RUNTIME_EXPOSED_BEFORE_VALID_FULL_GUARD__OFFICIAL_VERIFIER_NOT_SPENT_BY_THIS_PATH__ZERO_CAPABILITY_CREDIT",
+  "recorded_utc": "2026-09-30T21:37:30Z",
+  "benchmark": "Terminal-Bench 4.0",
+  "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "task": "payments-pipeline-fix",
+  "invalid_sequence": {
+    "canonical_lightweight_lease_commit": "59be3d54ad14f251cd41d17b48653d7d169688f4",
+    "trusted_local_guard_on_lightweight_lease": "DRIFT_GUARD_FAIL",
+    "missing_guard_requirements": [
+      "BLOCKER_LEASE_KEY_MISSING_OR_MISMATCH",
+      "RECURSIVE_OBS_RECEIPT_MISSING",
+      "PARENT_LEVEL_STATE_CHANGE_MISSING",
+      "ACTION_NOT_ASSERTED_HIGHEST_LEVERAGE",
+      "STOP_CONDITION_MISSING",
+      "PROBE_REQUIRED_FOR_THIS_ACTION_KIND",
+      "CANONICAL_GENERATION_MISMATCH"
+    ],
+    "later_full_action_head": "d2fce41423f3922024bbe0cb2bee2035a849fb68",
+    "later_full_action_guard": "DRIFT_GUARD_PASS",
+    "why_not_retroactive": "Runner runtime inspection had already begun before the full guarded action was canonical."
+  },
+  "runner_evidence": {
+    "closed_prs": [
+      252,
+      254
+    ],
+    "runtime_progress": [
+      "PR252: runtime file surface, runtime implementation, live surfaces, offset-metadata support inspected",
+      "PR254: runtime files, runtime source, startup state inspected"
+    ],
+    "terminal_submission_observed": false,
+    "official_verifier_credit": 0
+  },
+  "interpretation": {
+    "task_admissible_for_promotion_from_these_sessions": false,
+    "verifier_should_not_be_spent_for_promotion": true,
+    "capability_credit_delta": 0
+  },
+  "permanent_repair": "A task session may not launch until the exact full PROJECT_BRAIN_ACTION_INTENT_V1 is canonical on current main and has a trusted DRIFT_GUARD_PASS; a lightweight freshness lease alone is not execution authority."
+}
