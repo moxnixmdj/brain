@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
+  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -609,15 +609,15 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "SEISMOLOGY_SPENT__SOURCE_ADMISSION_CAUSAL_GAP_CORRECTED__REPAIR_REQUIRED",
+    "active_subcapability_target": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_V1",
+    "subcapability_status": "SEISMOLOGY_TASK_B_SPENT__OBJECTIVE_LITERAL_THRESHOLD_BINDING_GAP_LOCALIZED__UNACQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
     "fresh_task_blob_sha": "39ed2897a377914876afb97e2bb0d5cb9f3036a8",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+    "residual_gap": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
     "first_physical_spend_run_id": 36693929830,
     "last_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
@@ -640,7 +640,8 @@
       "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
     },
     "last_spent_parent_task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
-    "last_spent_parent_run_id": 36693929830
+    "last_spent_parent_run_id": 36693929830,
+    "next_required_action": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY"
   },
   "events": [
     {
@@ -750,11 +751,23 @@
     }
   ],
   "last_real_output_event": {
-    "event_id": "SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTED_20260930",
-    "status": "NO_COUNTER_CHANGE__CAUSAL_CLASSIFICATION_CORRECTION_ONLY",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json",
+    "event_id": "SEISMOLOGY_TASK_B_FIRST_CAUSAL_GAP_20260930",
+    "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "status": "FRESH_TASK_B_SPENT__UPSTREAM_SOURCE_ADMISSION_ROOT_CAUSE_REOPENED__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
     "public_run_id": 36693929830,
     "parent_capability_promoted": false,
-    "capability_credit_delta": 0
+    "capability_credit_delta": 0,
+    "next_causal_gap": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT"
+  },
+  "last_frontier_reconciliation": {
+    "status": "REOPENED_BY_FALSIFICATION",
+    "previous_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+    "blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
+    "evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/action_intents/2026-09-30_RECONCILE_SEISMOLOGY_SOURCE_ADMISSION_ROOT_CAUSE_V1.json"
+    ],
+    "parent_capability_promoted": false
   }
 }

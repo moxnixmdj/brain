@@ -202,11 +202,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
+    "next_step": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+    "critical_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -283,7 +283,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+    "highest_leverage_capability_gap": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -645,16 +645,18 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "SEISMOLOGY_CAUSAL_INTERPRETATION_CORRECTED",
-      "previous_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
-      "blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+      "status": "SEISMOLOGY_TASK_B_SPENT__THRESHOLD_PROXY_BLOCKER_FALSIFIED__SOURCE_ADMISSION_ROOT_CAUSE_REOPENED",
+      "blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
+      "spent_parent_task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
+      "spent_parent_run_id": 36693929830,
+      "parent_capability_promoted": false,
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
-      ],
-      "parent_capability_promoted": false
+        "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+        "canonical/action_intents/2026-09-30_RECONCILE_SEISMOLOGY_SOURCE_ADMISSION_ROOT_CAUSE_V1.json"
+      ]
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD_TARGET__POST_CLAIM_RELATION_PROMOTION",
+    "canonical_frontier_consistency_status": "REOPENED_BY_FALSIFICATION__SEISMOLOGY_SOURCE_ADMISSION_ROOT_CAUSE",
     "last_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
       "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",

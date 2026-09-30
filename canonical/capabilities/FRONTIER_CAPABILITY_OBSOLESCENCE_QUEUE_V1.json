@@ -71,15 +71,17 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Repair generic open-research source admission so low subject-coverage live pages cannot be treated as decision-relevant and bibliographically verified high-subject metadata can refine live retrieval. Qualify without replaying seismology.",
+    "objective": "Repair the generic open-research pipeline so every provenance-verified candidate class, including scholarly bibliographic records, can compete in relevance; if the selected candidate is bibliographic-only, live-materialize that exact selected source before evidence extraction. Preserve all authority, factual-correctness, sufficiency and model-independence gates.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+    "exact_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json",
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
     ],
-    "repair_status": "SEISMOLOGY_TERMINAL_ARTIFACT_REVIEW_CORRECTED_FIRST_GAP_TO_SOURCE_ADMISSION",
-    "prohibition": "NO_SEISMOLOGY_REPLAY__NO_TASK_SPECIFIC_SOURCE_WHITELIST__NO_LITERAL_THRESHOLD_PATCH_BEFORE_SOURCE_ADMISSION__NO_PARENT_CREDIT",
-    "next_action": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
+    "repair_status": "SEISMOLOGY_TASK_B_SPENT__THRESHOLD_ONLY_REPAIR_FALSIFIED__UPSTREAM_SOURCE_ADMISSION_ROOT_CAUSE",
+    "prohibition": "NO_SEISMOLOGY_REPLAY__NO_TASK_SPECIFIC_SOURCE_HINT__NO_MODEL_RERANKER__NO_DOI_EQUALS_AUTHORITY__NO_PARENT_PROMOTION_FROM_REPAIR_ONLY",
+    "next_action": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY",
     "latest_routing_qualification_run_id": 36689658815,
     "latest_routing_qualification_artifact_id": 11085092932,
     "latest_routing_qualification_artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
@@ -308,7 +310,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
+  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION__NO_SEISMOLOGY_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -319,11 +321,12 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "SEISMOLOGY_CAUSAL_INTERPRETATION_CORRECTED",
+    "status": "REOPENED_BY_FALSIFICATION",
     "previous_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
-    "blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+    "blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/action_intents/2026-09-30_RECONCILE_SEISMOLOGY_SOURCE_ADMISSION_ROOT_CAUSE_V1.json"
     ],
     "parent_capability_promoted": false
   },
