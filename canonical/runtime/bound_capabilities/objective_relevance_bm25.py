@@ -56,49 +56,90 @@ def _decision_role_spec(objective):
     parsed,reason=module._parse_objective(objective)
     if reason or not isinstance(parsed,dict) or parsed.get("mode")!="NUMERIC_RELATION":
         return None
-    left=list(dict.fromkeys(str(x) for x in (parsed.get("left_tokens") or []) if str(x)))
-    right=list(dict.fromkeys(str(x) for x in (parsed.get("right_tokens") or []) if str(x)))
-    if not left or not right:
+    left_entity=_canon(parsed.get("left_entity"))
+    right_entity=_canon(parsed.get("right_entity"))
+    if not left_entity or not right_entity:
         return None
-    shared=sorted(set(left)&set(right))
-    left_distinct=sorted(set(left)-set(shared))
-    right_distinct=sorted(set(right)-set(shared))
+
+    # Comparisons of the form "<property> of <left> ... than that of <right>"
+    # carry the property only on the left surface. Propagate that property as
+    # decision context for both source roles rather than pretending one source
+    # must name both operands.
+    property_tokens=[]
+    left_operand_tokens=[]
+    right_operand_tokens=[]
+    that_of=re.match(r"^that\s+of\s+(.+)$",right_entity,re.I)
+    left_of=re.match(r"^(.+?)\s+of\s+(.+)$",left_entity,re.I)
+    if that_of and left_of:
+        property_tokens=list(dict.fromkeys(_tokens(left_of.group(1))))
+        left_operand_tokens=list(dict.fromkeys(_tokens(left_of.group(2))))
+        right_operand_tokens=list(dict.fromkeys(_tokens(that_of.group(1))))
+        role_shape="PROPERTY_OF_LEFT_VS_THAT_OF_RIGHT"
+    else:
+        left_tokens=list(dict.fromkeys(_tokens(left_entity)))
+        right_tokens=list(dict.fromkeys(_tokens(right_entity)))
+        if not left_tokens or not right_tokens:
+            return None
+        shared=sorted(set(left_tokens)&set(right_tokens))
+        property_tokens=shared
+        left_operand_tokens=sorted(set(left_tokens)-set(shared))
+        right_operand_tokens=sorted(set(right_tokens)-set(shared))
+        role_shape="SHARED_PROPERTY_PLUS_DISTINCT_OPERANDS" if shared else "DISTINCT_OPERANDS_ONLY"
+
+    if not left_operand_tokens or not right_operand_tokens:
+        return None
     return {
-        "method":"VERIFIED_BOUNDED_RELATION_GRAMMAR_ROLE_EXTRACTION_V1",
+        "method":"VERIFIED_BOUNDED_RELATION_GRAMMAR_ROLE_EXTRACTION_V2",
         "operator":parsed.get("operator"),
-        "left_entity":parsed.get("left_entity"),
-        "right_entity":parsed.get("right_entity"),
-        "left_tokens":left,
-        "right_tokens":right,
-        "shared_tokens":shared,
-        "left_distinct_tokens":left_distinct,
-        "right_distinct_tokens":right_distinct,
+        "left_entity":left_entity,
+        "right_entity":right_entity,
+        "role_shape":role_shape,
+        "property_tokens":property_tokens,
+        "left_operand_tokens":left_operand_tokens,
+        "right_operand_tokens":right_operand_tokens,
     }
 
 def _role_token_set(candidate_text):
     out=set(_tokens(candidate_text))
-    # Preserve explicit short labels used by the already-verified relation
-    # parser, e.g. Planet A vs Planet B or sample 1 vs sample 2.
     for raw in re.findall(r"\b[A-Za-z0-9]\b",str(candidate_text or "")):
         if raw.isdigit() or raw.isupper():
             out.add("label:"+raw.lower())
     return out
 
-def _role_group_admission(required_tokens,candidate_terms,label):
+def _identifier_tokens(tokens):
+    return [
+        str(x) for x in (tokens or [])
+        if str(x).startswith("label:") or any(ch.isdigit() for ch in str(x))
+    ]
+
+def _role_group_admission(required_tokens,candidate_terms,label,kind):
     required=list(dict.fromkeys(str(x) for x in (required_tokens or []) if str(x)))
     matched=sorted(set(required)&set(candidate_terms or []))
-    # Distinct operand roles are intentionally stricter than broad BM25:
-    # when a role exists, at least half of it must be anchored, with one token
-    # sufficient only for a one-token role.
-    need=0 if not required else max(1,math.ceil(len(required)*0.5))
+    identifiers=_identifier_tokens(required)
+    matched_identifiers=sorted(set(identifiers)&set(candidate_terms or []))
+    if not required:
+        need=0
+        verified=True
+    elif kind=="PROPERTY":
+        need=max(1,math.ceil(len(required)*0.5))
+        verified=len(matched)>=need
+    elif identifiers:
+        need=len(identifiers)
+        verified=len(matched_identifiers)==len(identifiers)
+    else:
+        need=max(1,math.ceil(len(required)/3.0))
+        verified=len(matched)>=need
     return {
         "role":label,
+        "kind":kind,
         "required_tokens":required,
+        "identifier_tokens":identifiers,
         "matched_tokens":matched,
+        "matched_identifier_tokens":matched_identifiers,
         "required_matched_token_count":need,
         "matched_token_count":len(matched),
         "coverage":round((len(matched)/len(required)) if required else 1.0,6),
-        "verified":bool(len(matched)>=need),
+        "verified":bool(verified),
     }
 
 def _decision_role_admission(role_spec,candidate_text):
@@ -107,25 +148,34 @@ def _decision_role_admission(role_spec,candidate_text):
             "applicable":False,
             "verified":True,
             "method":"NOT_APPLICABLE_OUTSIDE_BOUNDED_EXPLICIT_RELATION_GRAMMAR",
+            "operand_roles_covered":0,
         }
     terms=_role_token_set(candidate_text)
-    shared=_role_group_admission(role_spec.get("shared_tokens"),terms,"SHARED_DECISION_CONTEXT")
-    left=_role_group_admission(role_spec.get("left_distinct_tokens"),terms,"LEFT_OPERAND_DISTINCTIVE")
-    right=_role_group_admission(role_spec.get("right_distinct_tokens"),terms,"RIGHT_OPERAND_DISTINCTIVE")
-    # If the parser finds no shared vocabulary, the two distinctive roles still
-    # have to be covered. If shared vocabulary exists, at least half of it must
-    # also be present so unrelated entities cannot satisfy the comparison.
-    verified=bool(shared["verified"] and left["verified"] and right["verified"])
+    prop=_role_group_admission(
+        role_spec.get("property_tokens"),terms,"DECISION_PROPERTY","PROPERTY"
+    )
+    left=_role_group_admission(
+        role_spec.get("left_operand_tokens"),terms,"LEFT_OPERAND","OPERAND"
+    )
+    right=_role_group_admission(
+        role_spec.get("right_operand_tokens"),terms,"RIGHT_OPERAND","OPERAND"
+    )
+    operand_roles_covered=int(left["verified"])+int(right["verified"])
+    minimum_roles=1 if role_spec.get("property_tokens") else 2
+    verified=bool(prop["verified"] and operand_roles_covered>=minimum_roles)
     return {
         "applicable":True,
         "verified":verified,
-        "method":"BOUNDED_RELATION_DECISION_ROLE_LEXICAL_COVERAGE_V1",
+        "method":"BOUNDED_RELATION_PROPERTY_PLUS_OPERAND_COVERAGE_V2",
         "operator":role_spec.get("operator"),
+        "role_shape":role_spec.get("role_shape"),
         "left_entity":role_spec.get("left_entity"),
         "right_entity":role_spec.get("right_entity"),
-        "shared_context":shared,
+        "property":prop,
         "left_operand":left,
         "right_operand":right,
+        "operand_roles_covered":operand_roles_covered,
+        "minimum_operand_roles_required":minimum_roles,
     }
 
 def _candidate_text(candidate):
@@ -242,6 +292,13 @@ def rank(objective,candidates,limit=None):
             and role_admission.get("verified") is True
         )
     admitted=[row for row in positive if row.get("admission_verified") is True]
+    # Prefer candidates covering more decision operands, then preserve the
+    # existing deterministic BM25/original-index order inside that tier.
+    admitted.sort(key=lambda row:(
+        -int((row.get("decision_role_admission") or {}).get("operand_roles_covered",0)),
+        -float(row.get("lexical_relevance_score") or 0.0),
+        int(row.get("original_index") or 0),
+    ))
     top=admitted[0] if admitted else positive[0]
     admission=dict(top.get("lexical_admission") or _top_candidate_admission(
         q,top.get("matched_terms") or []
