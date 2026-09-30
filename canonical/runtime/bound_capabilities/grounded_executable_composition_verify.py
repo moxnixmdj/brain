@@ -28,6 +28,16 @@ def _render(value,inputs):
         return out
     return value
 
+
+def _replace_exact(value,old,new):
+    if isinstance(value,dict):
+        return {k:_replace_exact(v,old,new) for k,v in value.items()}
+    if isinstance(value,list):
+        return [_replace_exact(v,old,new) for v in value]
+    if value==old:
+        return copy.deepcopy(new)
+    return value
+
 def verify(goal,composition,grounding,registry):
     canonical=" ".join(str(goal or "").strip().split())
     if composition.get("schema")!=SCHEMA:
@@ -55,6 +65,7 @@ def verify(goal,composition,grounding,registry):
     if not isinstance(caps,list) or not caps:
         return False,"CAPABILITIES_INVALID"
     cap_by_id={}
+    expected_actions={}
     all_provides=set()
     all_requires=set()
     for cap in caps:
@@ -81,8 +92,7 @@ def verify(goal,composition,grounding,registry):
             expected_action=_render(entry.get("action_template"),inputs)
         except Exception:
             return False,"ACTION_RENDER_INVALID:"+instance_id
-        if cap.get("action")!=expected_action or cap.get("action_sha256")!=_sha(expected_action):
-            return False,"ACTION_MISMATCH:"+instance_id
+        expected_actions[instance_id]=expected_action
         if list(cap.get("requires") or [])!=[str(x) for x in (entry.get("requires") or [])]:
             return False,"REQUIRES_MISMATCH:"+instance_id
         original=[str(x) for x in (entry.get("provides") or [])]
@@ -97,6 +107,43 @@ def verify(goal,composition,grounding,registry):
         cap_by_id[instance_id]=cap
         all_requires.update(cap["requires"])
         all_provides.update(cap["provides"])
+
+    providers={}
+    for cap in caps:
+        for effect in cap.get("provides") or []:
+            if str(effect).startswith("grounded.clause."):
+                continue
+            providers.setdefault(str(effect),[]).append(cap)
+    for cap in caps:
+        instance_id=str(cap.get("id") or "")
+        expected=expected_actions[instance_id]
+        expected_bindings=[]
+        for effect in cap.get("requires") or []:
+            candidates=[x for x in providers.get(str(effect),[]) if x is not cap]
+            if len(candidates)!=1:
+                continue
+            provider=candidates[0]
+            provider_inputs=provider.get("inputs") or {}
+            for field in provider.get("result_fields") or []:
+                if field not in provider_inputs:
+                    continue
+                source_value=provider_inputs[field]
+                if not isinstance(source_value,(str,int,float,bool)):
+                    continue
+                marker={"$effect_result":{"effect":str(effect),"field":str(field)}}
+                replaced=_replace_exact(expected,source_value,marker)
+                if replaced!=expected:
+                    expected=replaced
+                    expected_bindings.append({
+                      "effect":str(effect),
+                      "provider_instance_id":provider.get("id"),
+                      "provider_result_field":str(field),
+                      "matched_literal":source_value,
+                    })
+        if cap.get("action")!=expected or cap.get("action_sha256")!=_sha(expected):
+            return False,"ACTION_MISMATCH:"+instance_id
+        if list(cap.get("effect_result_bindings") or [])!=expected_bindings:
+            return False,"EFFECT_RESULT_BINDINGS_MISMATCH:"+instance_id
 
     expected_targets=[]
     for index,(record,gclause) in enumerate(zip(clauses,grounding_clauses)):
