@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-OPEN-ENDED-PARENT-SCOPE-AND-SPENT-PR304-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_A_REQUIRED__PR301_BOUNDED_PREWIRED_TASK_INSUFFICIENT_FOR_PARENT_SCOPE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_A_REQUIRED__PR301_BOUNDED_PREWIRED_TASK_INSUFFICIENT_FOR_PARENT_SCOPE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Correct the parent evidence scope: preserve PR301 as a verified bounded model-independent real task but revoke its parent open-ended acquisition credit; preserve spent PR304 terminal failure without replay; reset open-ended parent-task evidence to zero and require one genuinely open-ended model-independent Task A before any parent promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "canonical target useful_behavior requires autonomous decomposition, source/tool discovery, quantitative reasoning, falsification, synthesis and independent verification",
+    "PR301 France task pre-specified exact World Bank URLs, JSON paths and compound-growth expression; its result remains valid only at bounded retrieval/computation scope",
+    "PR304 exact one-shot runner execution 36669136068 / job 109740159666 / artifact 11077363706 executed once and failed at JQ NUMERIC_RELATION_INPUT_NOT_NUMBER",
+    "PR304 is permanently spent; its closed PR metadata later became inconsistent with the preserved execution receipt",
+    "PR303 promotion firewall is merged on current main and forbids claim scope beyond runtime-derived evidence"
+  ],
+  "evidence_presence_classification": "SUPERSEDED_BY_STRONGER_SCOPE_AUDIT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Commit only the evidence-scope correction and synchronized frontier mirrors. Do not repair the PR304 numeric-string seam and do not execute another parent task in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Make the parent frontier truthful before the next scarce execution: bounded scripted tasks must not stand in for the target's defining open-ended research behavior, and the spent PR304 execution must remain preserved exactly once.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Restore exact evidence scope so the next execution tests the actual open-ended parent capability rather than another prewired proxy.",
+      "proxy_goals_deleted": [
+        "make PR304 pass",
+        "repair numeric string coercion now",
+        "count two scripted tasks as open-ended research",
+        "replay any spent parent task"
+      ],
+      "surviving_necessity": "The parent target's useful_behavior itself requires autonomous decomposition and discovery; current evidence does not exercise those behaviors."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR301 bounded model-independent retrieval + typed numeric expression + numeric relation + independent oracle",
+        "five inherited verified model-independent subcapabilities on current parent target",
+        "PR303 runtime-provenance and claim-scope promotion firewall"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to this evidence-scope reconciliation; no external capability route is being selected or executed."
+      ],
+      "capability_work_deleted": [
+        "No PR304 repair",
+        "No PubChem replay",
+        "No new supplier",
+        "No new framework",
+        "No parent promotion from bounded scripted tasks"
+      ],
+      "surviving_gap": "A genuinely open-ended model-independent parent task must begin from an objective without a prewired source/tool/formula execution plan and demonstrate autonomous decomposition/discovery/composition with runtime-derived zero-model provenance."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent-evidence scope mismatch. PR301 is valid task evidence but narrower than the declared parent useful behavior; PR304 is additionally spent and failed.",
+      "delete_bypass_substitute_options": [
+        "Delete overbroad parent credit while preserving the valid narrower PR301 result",
+        "Bypass the PR304 numeric-string repair because it is not causal to proving open-ended research",
+        "Next test the parent capability directly with a genuinely open-ended objective"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_A_REQUIRED__PR301_BOUNDED_PREWIRED_TASK_INSUFFICIENT_FOR_PARENT_SCOPE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REVOKE_OVERBROAD_PARENT_CREDIT_AND_PRESERVE_PRIMARY_EVIDENCE",
+        "REPAIR_PR304_NUMERIC_STRING_BOUNDARY",
+        "RUN_ANOTHER_PREWIRED_PARENT_TASK"
+      ],
+      "losing_routes_reason": "Both losing routes optimize a scripted proxy. The scope correction is required by the target definition and PR303 claim-scope firewall before any further parent execution can be authoritative.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution is needed. The target definition, PR301 task specification, PR304 terminal receipt and merged PR303 claim-scope rule are sufficient primary evidence for this reconciliation."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR304 numeric-string repair as current parent priority",
+        "any queued prewired Task B intended to close the parent frontier"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "PR301 remains evidence for bounded authoritative JSON retrieval, typed arithmetic, relation computation and independent verification"
+      ],
+      "fresh_reuse_plan": "After reconciliation, freeze one objective-only genuinely open-ended Task A; execute once with zero model cognition and stop at the first causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current target definition",
+        "reused exact PR301 task/evidence",
+        "reused exact PR304 one-shot terminal receipt",
+        "reused merged PR303 promotion firewall"
+      ],
+      "search_stop_decision": "External search cannot alter whether existing evidence exercises the target's declared open-ended behavior. The mismatch is decidable from current canonical definitions and primary execution evidence.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No executable route is selected in this reconciliation. A fresh challenger frontier is required later before the new open-ended Task A executes."
+    },
+    "routes_considered": [
+      "REVOKE_OVERBROAD_PARENT_CREDIT_AND_PRESERVE_PRIMARY_EVIDENCE",
+      "REPAIR_PR304_NUMERIC_STRING_BOUNDARY",
+      "RUN_ANOTHER_PREWIRED_PARENT_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR304_REPLAY",
+      "PR304_NUMERIC_STRING_REPAIR_AS_PARENT_PRIORITY",
+      "PREWIRED_TASK_AS_OPEN_ENDED_PARENT_PROOF"
+    ],
+    "selected_surviving_route": "REVOKE_OVERBROAD_PARENT_CREDIT_AND_PRESERVE_PRIMARY_EVIDENCE",
+    "why_selected_route_is_fastest_sufficient": "It is the minimum zero-spend state correction that prevents another invalid scarce execution and redirects the next run to the actual parent behavior.",
+    "expected_parent_level_state_change": "Correct the parent evidence scope: preserve PR301 as a verified bounded model-independent real task but revoke its parent open-ended acquisition credit; preserve spent PR304 terminal failure without replay; reset open-ended parent-task evidence to zero and require one genuinely open-ended model-independent Task A before any parent promotion.",
+    "stop_condition": "Commit only the evidence-scope correction and synchronized frontier mirrors. Do not repair the PR304 numeric-string seam and do not execute another parent task in this reconciliation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action only reconciles claim scope and preserves already-produced primary evidence. It selects no external execution, repair, supplier, tool or infrastructure route."
+    }
+  }
+}
