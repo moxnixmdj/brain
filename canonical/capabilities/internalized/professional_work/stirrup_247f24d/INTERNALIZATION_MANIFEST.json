@@ -1,7 +1,12 @@
 {
+  "brain_integration_artifacts": [
+    "BRAIN_EXECUTION_PROFILE_V1.json",
+    "EVALUATION_PROTOCOL_V1.json"
+  ],
   "capability_candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
   "capability_credit": 0,
-  "file_count": 45,
+  "exact_upstream_file_count": 54,
+  "exact_upstream_mismatch_count": 0,
   "files": [
     {
       "bytes": 1097,
@@ -12,6 +17,11 @@
       "bytes": 2911,
       "path": "pyproject.toml",
       "sha256": "28c44a594f9b9bcb350a9cbcafc79f39baa1e4b0680195ae1ffa18679bff2d55"
+    },
+    {
+      "bytes": 11276,
+      "path": "UPSTREAM_README.md",
+      "sha256": "b639056fdcc24b9e39d80fde9bca692ec7619a6b655abc300a9e3a7574c71f2c"
     },
     {
       "bytes": 2826,
@@ -224,9 +234,49 @@
       "sha256": "e8aead1dc9343923cf2eeff307b255cad6ef8d81ac10fc86759ae4e99e1dae94"
     },
     {
-      "bytes": 11276,
-      "path": "UPSTREAM_README.md",
-      "sha256": "b639056fdcc24b9e39d80fde9bca692ec7619a6b655abc300a9e3a7574c71f2c"
+      "bytes": 10127,
+      "path": "skills/data_analysis/reference/aggregations.md",
+      "sha256": "6f98db5c85d6207dadf5573a60a28ed9764fc283002b8d7aaa770ccf0455fbd9"
+    },
+    {
+      "bytes": 8381,
+      "path": "skills/data_analysis/reference/loading.md",
+      "sha256": "e81f4317f6582dff4c0e51b27e6b9a03deeb69cbfecb4961d29071eb7e17e4e8"
+    },
+    {
+      "bytes": 13290,
+      "path": "skills/data_analysis/reference/statistics.md",
+      "sha256": "d7827e6886458cf4e872cab4559f39a5bc3ec73e1470dabf34a4ff130b7feeef"
+    },
+    {
+      "bytes": 12000,
+      "path": "skills/data_analysis/reference/time_series.md",
+      "sha256": "93171752dc7ba8d598361de378caf5246cad687adab710a682412d32dd67d4a0"
+    },
+    {
+      "bytes": 9103,
+      "path": "skills/data_analysis/reference/transformations.md",
+      "sha256": "086461a1089fab4eeaa17dc7335a735545e427a932777eb3207caed4b2176725"
+    },
+    {
+      "bytes": 14057,
+      "path": "skills/data_analysis/reference/visualization.md",
+      "sha256": "cf0b07e28636acb7b5a514d7b4834a8940526c095336236ace21a921a7e5a510"
+    },
+    {
+      "bytes": 7830,
+      "path": "skills/data_analysis/scripts/explore_data.py",
+      "sha256": "570d757e9975460023e0034012942a54e26a0dbdd3ecf4c70b1ddeb508e1f3fb"
+    },
+    {
+      "bytes": 8126,
+      "path": "skills/data_analysis/scripts/summary_stats.py",
+      "sha256": "5792afdbb0c3ae32553522bfeae66833b05fcfaf6663db4ac228e4dc871200b7"
+    },
+    {
+      "bytes": 4542,
+      "path": "skills/data_analysis/SKILL.md",
+      "sha256": "4726707a9caad4f97063bbe6ccc87563227c1266e39faec34c5a33f5afcdc040"
     }
   ],
   "general_cognition_substrate_policy": "MAY_BE_EXTERNAL__NO_OPAQUE_PROFESSIONAL_WORK_CAPABILITY_CREDIT",
@@ -239,12 +289,13 @@
     "web_tools",
     "MCP_support",
     "skills_system",
+    "data_analysis_skill",
     "context_summarization",
     "multimodal_input",
     "provider_abstraction"
   ],
-  "schema": "PROJECT_BRAIN_INTERNALIZATION_MANIFEST_V1",
-  "status": "BRAIN_OWNED_SOURCE_INTERNALIZED__VERIFICATION_PENDING",
+  "schema": "PROJECT_BRAIN_INTERNALIZATION_MANIFEST_V2",
+  "status": "BRAIN_OWNED_SOURCE_AND_UPSTREAM_SKILL_INTERNALIZED__VERIFICATION_PENDING",
   "upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
   "upstream_license": "MIT",
   "upstream_repository": "https://github.com/ArtificialAnalysis/Stirrup",

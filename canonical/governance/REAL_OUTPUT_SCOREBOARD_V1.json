@@ -922,6 +922,18 @@
         "EXTERNAL_SPECIMEN_TO_BRAIN_INTERNALIZED_MECHANISM"
       ],
       "capability_credit": 0
+    },
+    {
+      "event_id": "OPUS55_PROFESSIONAL_WORK_STIRRUP_MECHANISM_AUGMENTED_20260930",
+      "capability_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "capability_package": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+      "evaluation_protocol": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json",
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "UPSTREAM_DATA_ANALYSIS_SKILL_AND_EXECUTION_EVALUATION_PROFILE_ADDED"
+      ],
+      "capability_credit": 0
     }
   ],
   "last_real_output_event": {
