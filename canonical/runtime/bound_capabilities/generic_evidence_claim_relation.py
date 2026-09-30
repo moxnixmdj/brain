@@ -97,7 +97,7 @@ def _numbers(unit):
     for index,m in enumerate(_NUMERIC.finditer(unit["text"])):
         raw=m.group(0).strip()
         number=m.group(1).replace(",","")
-        unit_text=_canon(m.group(2)).lower()
+        unit_text=_canon(m.group(2)).lower().rstrip(".,;:")
         try:
             value=Decimal(number)
         except InvalidOperation as exc:
@@ -147,7 +147,7 @@ def _threshold(units,spec,expected_unit):
         if not m:
             raise ValueError("NUMERIC_RELATION_THRESHOLD_INVALID")
         value=Decimal(m.group(1).replace(",",""))
-        unit=_canon(m.group(2)).lower()
+        unit=_canon(m.group(2)).lower().rstrip(".,;:")
         provenance=None
     else:
         raise ValueError("NUMERIC_RELATION_THRESHOLD_REQUIRED")
