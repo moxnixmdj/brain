@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_PERMANENT_CAPABILITY_PACKAGE_V1",
+  "capability_id": "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
+  "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+  "useful_scope": "Agentic scientific-research execution represented by Terminal-Bench-Science 0.1 plus Brain's independent verification layer.",
+  "opus_5_5_bar": {
+    "benchmark": "Terminal-Bench-Science 0.1",
+    "score": 58.7,
+    "unit": "percent",
+    "source": "https://www.anthropic.com/claude-opus-5-5"
+  },
+  "existing_realization": {
+    "supplier": "GPT-6 Astra",
+    "score": 64.6,
+    "unit": "percent",
+    "source": "https://openai.com/index/gpt-6-astra/"
+  },
+  "permanent_brain_configuration": {
+    "execution_surface": [
+      "ChatGPT Work",
+      "Codex"
+    ],
+    "model": "GPT-6 Astra",
+    "allowed_support": [
+      "web search",
+      "code execution",
+      "Wolfram",
+      "files",
+      "GitHub",
+      "installed connected tools"
+    ],
+    "knowledge_policy": "Retrieve scientific/factual knowledge JIT; do not save knowledge as capability.",
+    "verification": "Use independent computation/source checks for consequential claims; preserve evidence and decision receipts.",
+    "incremental_spend": "Use included Plus Work/Codex allowance only. Paid API or purchased credits are forbidden under current hard-zero rule.",
+    "access_preflight": "Confirm Astra is available in included Work/Codex allowance before execution; failure invalidates route readiness but not the stored capability definition."
+  },
+  "ownership_test": {
+    "capability_discovery_repeated_per_task": false,
+    "invocation_contract_saved": true,
+    "dependencies_saved": true,
+    "verifier_saved": true,
+    "recovery_behavior_saved": true
+  },
+  "claim_limits": "This promotion covers the benchmarked/scoped agentic scientific research capability. It does not by itself prove all multidisciplinary reasoning or all research capabilities.",
+  "evidence_sources": [
+    "https://www.anthropic.com/claude-opus-5-5",
+    "https://openai.com/index/gpt-6-astra/",
+    "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+  ],
+  "acquired_utc": "2026-09-30"
+}
