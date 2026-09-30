@@ -11,36 +11,36 @@
       "id": "NCBI_CELL_CYCLE",
       "authority": "NCBI / PMC",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3262245/",
-      "required_claims": [
-        "mammalian cell cycles often close to 24 h",
-        "reported human cell-line cycle duration close to 19 h"
+      "required_claim_categories": [
+        "typical mammalian cell-cycle timing",
+        "a reported human-cell-line cycle timing"
       ]
     },
     {
       "id": "NCBI_BODY_FLUIDS",
       "authority": "NCBI Bookshelf / StatPearls",
       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482447/",
-      "required_claims": [
-        "adult humans approximately 50% to 60% water by mass"
+      "required_claim_categories": [
+        "adult human body-water mass-fraction range"
       ]
     },
     {
       "id": "NCBI_CARDIAC_OUTPUT",
       "authority": "NCBI Bookshelf",
       "url": "https://www.ncbi.nlm.nih.gov/books/NBK54473/",
-      "required_claims": [
-        "cardiac output about 5 L/min at rest",
-        "healthy maximal demand about 15 to 20 L/min",
-        "world-class athletes can approach 40 L/min"
+      "required_claim_categories": [
+        "resting cardiac-output scale",
+        "healthy maximal-demand cardiac-output scale",
+        "exceptional-athlete maximal cardiac-output scale"
       ]
     },
     {
       "id": "PUBMED_GROWTH_COST",
       "authority": "PubMed / Biological Reviews",
       "url": "https://pubmed.ncbi.nlm.nih.gov/8193215/",
-      "required_claims": [
-        "consensus apparent production efficiency about 75%",
-        "dry biomass energy scale represented as 22 J/mg in the review"
+      "required_claim_categories": [
+        "consensus apparent biomass-production efficiency",
+        "dry-biomass energy scale used in the review"
       ]
     }
   ],
@@ -111,5 +111,10 @@
     "producer_modules_must_not_be_imported": true,
     "source_task_must_not_be_replayed": true
   },
-  "expected_answer_precommitted": false
+  "expected_answer_precommitted": false,
+  "anti_leakage": {
+    "source_claim_values_in_task_manifest": false,
+    "source_claim_values_must_be_discovered_from_sources": true,
+    "independent_oracle_expected_values_hidden_from_producer": true
+  }
 }
