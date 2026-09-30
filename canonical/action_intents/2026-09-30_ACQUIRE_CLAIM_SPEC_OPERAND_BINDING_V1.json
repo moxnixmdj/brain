@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-CLAIM-SPEC-OPERAND-BINDING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "002e56d023b409f95eb6299158859997c7a33489",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Acquire only bounded explicit numeric-comparison claim-spec generation across GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE plus exact quoted-claim binding, with unique lexical operand binding from objective plus integrity-checked generic V2 evidence; then invoke the already-verified claim/relation primitive. No truth or parent promotion.",
+  "evidence_presence_classification": "VERIFIED_RELATION_EXECUTOR_EXISTS__SEMANTIC_OPERAND_ROLES_UNBOUND",
+  "orthogonal_recurrence_count": 1,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact-base implementation, fail-closed ambiguity tests across the full bounded downstream operator surface and exact quoted claims, fresh cross-domain qualification with an independent role/relation oracle, and promotion of only that bounded binding scope.",
+  "recursive_obs": {
+    "canonical_base_commit": "002e56d023b409f95eb6299158859997c7a33489",
+    "real_outcome": "Turn explicit comparative research objectives plus verified generic evidence units into an auditable relation spec consumable by the already-verified relation evaluator.",
+    "obs_goal": {
+      "real_outcome": "Derive explicit operator and bind left/right semantic operand roles without model cognition.",
+      "proxy_goals_deleted": [
+        "general natural-language understanding",
+        "paraphrase entailment",
+        "truth adjudication",
+        "causality",
+        "unit conversion",
+        "parent replay"
+      ],
+      "surviving_necessity": "For explicit comparison objectives, map objective entity roles to unique provenance-bound numeric evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+        "dormant typed quantity candidate extraction independently qualified on runner PR157"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib re/token scoring is sufficient for bounded explicit-comparison grammar"
+      ],
+      "capability_work_deleted": [
+        "No model cognition",
+        "No embeddings",
+        "No new supplier",
+        "No unit conversion",
+        "No general semantic parser"
+      ],
+      "surviving_gap": "Explicit relation intent and left/right entity roles are not bound to unique V2 evidence-unit numeric literals."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic semantic role binding seam between verified evidence extraction and verified explicit relation evaluation.",
+      "delete_bypass_substitute_options": [
+        "Bypass rejected because relation evaluator requires explicit references",
+        "Reuse dormant typed quantity extraction as evidence that literal typing is easy but semantic role remains unbound",
+        "Compose objective grammar + evidence lexical anchors + existing relation evaluator"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+        "GENERAL_RULE_BASED_NLP",
+        "MODEL_SEMANTIC_JUDGE"
+      ],
+      "losing_routes_reason": "The bounded grammar directly covers explicit comparisons, is independently auditable, and fails closed outside scope. General NLP adds unnecessary ambiguity; model judgment violates the target.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Positive GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE comparisons, reversed roles, literal threshold/unit handling, exact quoted claims, ambiguity rejection, multiple-number rejection, unit mismatch, unsupported objective, tampered V2 evidence; then fresh cross-domain generic V2 cases with an independent parser/oracle."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any duplicate binder for the same blocker",
+        "Fresh parent execution before binder qualification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic V2 extraction",
+        "explicit relation evaluator"
+      ],
+      "fresh_reuse_plan": "After promotion recompute parent frontier and only then freeze a fresh genuinely open-ended parent task if no earlier seam remains."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused merged PR439 receipt",
+        "reused current V2 extraction contract",
+        "reused dormant typed-quantity evidence"
+      ],
+      "search_stop_decision": "No external supplier can dominate a strict bounded grammar for explicit comparison binding at zero dependency and full auditability.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen if fresh qualification exposes a generic ambiguity class."
+    },
+    "selected_surviving_route": "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+    "why_selected_route_is_fastest_sufficient": "It covers the entire already-verified explicit relation operator surface plus exact quoted support, adds only the missing semantic-role/spec mapping, reuses verified upstream extraction and downstream evaluation, and fails closed everywhere else."
+  },
+  "prior_work_checked": [
+    "global execution admission guard receipt merged at 002e56d023b409f95eb6299158859997c7a33489",
+    "scientific frontier unchanged after guard cutover"
+  ]
+}
