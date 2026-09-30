@@ -277,6 +277,16 @@ def _admit_bindable_candidates(
     for ordinal,item in enumerate(ranked):
         cid=str(item.get("capability_id") or "")
         entry=registry.get(cid) or {}
+        # Grounding feeds grounded_executable_composition, whose contract
+        # requires a dict action_template. Reject impossible candidates here
+        # rather than allowing lexical overlap to masquerade as executable
+        # grounding and fail one stage later.
+        if not isinstance(entry.get("action_template"),dict):
+            rejected.append({
+                "capability_id":cid,
+                "error":"COMPOSITION_ACTION_TEMPLATE_MISSING",
+            })
+            continue
         instance_id="grounding.%d.%d.%s" % (
             index,ordinal,re.sub(r"[^A-Za-z0-9_.-]+","_",cid)
         )
