@@ -1,0 +1,258 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RUN-FRESH-GENUINELY-OPEN-ENDED-SEISMOLOGY-PARENT-TASK-A-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "action_kind": "REAL_PARENT_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED::REAL_PARENT_TASK_EXECUTION",
+  "expected_parent_frontier_change": "EITHER_VERIFY_ONE_FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A_OR_LOCALIZE_THE_FIRST_NEW_INTEGRATED_CAUSAL_GAP__NO_AUTOMATIC_PARENT_PROMOTION",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 691b08b7f51adca1ed980df384153b71ef38e046",
+    "claim-spec and operand-binding capability already acquired on guarded run 36686583882",
+    "spent/replay-forbidden lanes checked: astronomy, demography, chemistry, climate/Mauna Loa, SQLite, thermophysics",
+    "open PR search found no competing lease for a fresh genuinely open-ended parent Task A"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "proposed_fresh_task": {
+    "task_id": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-A-20260930-001",
+    "domain": "SEISMOLOGY_TSUNAMI_HAZARD_QUANTITATIVE_RESEARCH",
+    "goal_text": "Determine whether the 2025 Kamchatka earthquake generated a tsunami with an observed maximum amplitude exceeding 1 meter at any officially monitored station outside Russia. Use authoritative primary or reference data, choose and justify a defensible quantitative method, quantify the strongest observed evidence, identify material limitations or uncertainty, independently verify consequential calculations, and save a decision-quality result with source and method provenance.",
+    "deliberately_not_predeclared": [
+      "authority or source URL",
+      "dataset or station identifier",
+      "formula or calculation recipe",
+      "tool or package",
+      "controller action graph",
+      "expected answer"
+    ]
+  },
+  "stop_condition": "After the lease PR exists and trusted drift/lease checks do not invalidate it, freeze this exact task and execute it once through the live guarded runner with model planner disabled. On failure preserve only the first new integrated causal gap and never replay. On semantic success require independent verification before any parent promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
+    "real_outcome": "Obtain fresh real evidence of whether Brain can complete a genuinely open-ended cross-domain technical research task without model cognition or prewired research instructions.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Directly test the parent capability now that the previously localized model-independent subcapability gaps have been acquired.",
+      "proxy_goals_deleted": [
+        "more synthetic subcapability tests",
+        "replay of any spent parent task",
+        "new infrastructure",
+        "worker scaling",
+        "frontier-model parity benchmarking"
+      ],
+      "surviving_necessity": "One new materially different genuinely open-ended parent Task A is the current canonical requirement."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical ASTRA run_goal path",
+        "verified generic source discovery and authority binding",
+        "generic evidence extraction",
+        "claim relation evaluation",
+        "claim-spec and operand binding",
+        "typed numeric execution",
+        "execution guard live-v1"
+      ],
+      "external_existing_routes_checked": [
+        "optional model planner rejected for model-independent credit",
+        "manual source/formula prewiring rejected because it would destroy open-endedness"
+      ],
+      "capability_work_deleted": [
+        "no new planner",
+        "no compiler repair",
+        "no new execution infrastructure",
+        "no source-specific adapter before evidence of necessity"
+      ],
+      "surviving_gap": "Fresh parent-level integrated evidence is absent after the latest acquired claim-spec/operand-binding capability."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Validation gap, not yet evidence of a missing implementation.",
+      "delete_bypass_substitute_options": [
+        "DELETE synthetic probes",
+        "REUSE inherited runtime and acquired capabilities",
+        "BYPASS new machinery by running the real task directly",
+        "SUBSTITUTE only after a first real integrated failure"
+      ],
+      "surviving_causal_blocker": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RUN_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+        "BUILD_MORE_SUBCAPABILITY_TESTS",
+        "USE_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "The selected route is the only one that directly answers the current parent-capability question without adding machinery or violating model independence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None before execution. The real task is the test; any success must be independently rechecked before promotion."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "additional synthetic claim-binding probes if the parent task passes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "source discovery",
+        "source authority binding",
+        "evidence extraction",
+        "claim specification",
+        "operand binding",
+        "numeric relation evaluation"
+      ],
+      "fresh_reuse_plan": "If Task A passes, immediately freeze a materially different Task B for fresh reuse and cross-domain transfer before parent promotion."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse current canonical claim-binding promotion",
+        "reuse live execution guard qualification",
+        "reuse spent-task registry"
+      ],
+      "search_stop_decision": "No further architecture search can answer the parent question faster than running the required fresh task.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current base and open leases refreshed immediately before branch creation."
+    },
+    "routes_considered": [
+      "RUN_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+      "BUILD_MORE_SUBCAPABILITY_TESTS",
+      "USE_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_SPENT_PARENT_TASK",
+      "NEW_INFRASTRUCTURE",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_OR_FORMULA"
+    ],
+    "selected_surviving_route": "RUN_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+    "why_selected_route_is_fastest_sufficient": "It requires no new capability machinery, directly exercises the integrated parent behavior, costs $0, and yields either a verified real result or the first genuine residual blocker.",
+    "expected_parent_level_state_change": "EITHER_VERIFY_ONE_FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A_OR_LOCALIZE_THE_FIRST_NEW_INTEGRATED_CAUSAL_GAP__NO_AUTOMATIC_PARENT_PROMOTION",
+    "stop_condition": "After the lease PR exists and trusted drift/lease checks do not invalidate it, freeze this exact task and execute it once through the live guarded runner with model planner disabled. On failure preserve only the first new integrated causal gap and never replay. On semantic success require independent verification before any parent promotion.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T07:45:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RUN_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "DIRECT_PROBE"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main 691b08b7f51adca1ed980df384153b71ef38e046 current frontier requires fresh genuinely open-ended Task A"
+        ],
+        "DIRECT_PROBE": [
+          "runner global execution guard is live and canonically reconciled"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [
+        {
+          "route": "BUILD_MORE_SUBCAPABILITY_TESTS",
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Does not answer the parent question.",
+            "CAPABILITY_STRENGTH": "Narrower.",
+            "WALL_CLOCK": "Slower to decisive parent evidence.",
+            "INCREMENTAL_COST": "$0 but extra work.",
+            "RELIABILITY": "High but proxy-only.",
+            "VERIFIABILITY": "Easy but insufficient."
+          }
+        },
+        {
+          "route": "USE_MODEL_PLANNER",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Could solve the task but would not prove the target.",
+            "CAPABILITY_STRENGTH": "Broad.",
+            "WALL_CLOCK": "Fast.",
+            "INCREMENTAL_COST": "Not guaranteed $0.",
+            "RELIABILITY": "External dependency.",
+            "VERIFIABILITY": "Would prove model-assisted behavior only."
+          }
+        }
+      ],
+      "negative_search_summary": "No route can answer the current parent-capability question faster than the required real task without changing the question.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RUN_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:45:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RUN_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:36:00Z",
+            "evidence": [
+              "runner main live guard and recent successful guarded run 36686583882"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_CANONICAL_MAIN_691b08b7f51adca1ed980df384153b71ef38e046",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:45:00Z",
+            "evidence": [
+              "BRAIN_INHERITED exact branch base"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
