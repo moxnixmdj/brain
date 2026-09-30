@@ -45,6 +45,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     verifier=_load_sibling("source_candidate_provenance_verify")
     authority_identity=_load_sibling("source_authority_binding_ror")
     evidence_extractor=_load_sibling("relevant_source_evidence_extract")
+    typed_quantity=_load_sibling("extracted_evidence_typed_quantity")
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
         return {
@@ -144,6 +145,18 @@ def run(objective,decomposition,limit=12,timeout=15):
     ]
     relevance_ready=bool(relevance_verified)
     evidence_ready=bool(evidence_extracted)
+    typed_quantity_results=[]
+    for item in evidence_extracted:
+        typed=typed_quantity.extract(item["extraction"])
+        typed_quantity_results.append({
+            "candidate":item["candidate"],
+            "typed_quantities":typed,
+        })
+    typed_quantity_count=sum(
+        int((x.get("typed_quantities") or {}).get("typed_quantity_candidate_count") or 0)
+        for x in typed_quantity_results
+    )
+    typed_quantity_ready=typed_quantity_count>0
 
     return {
         "schema":SCHEMA,
@@ -160,6 +173,8 @@ def run(objective,decomposition,limit=12,timeout=15):
         "objective_relevance_verifications":objective_relevance_verifications,
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
+        "typed_quantity_results":typed_quantity_results,
+        "typed_quantity_candidate_count":typed_quantity_count,
         "relevance_verified_candidate_count":len(relevance_verified),
         "relevance_claim_scope":"FIRST_PARTY_EXACT_ROR_DOMAIN_PLUS_STRICT_BOUNDED_LEXICAL_OBJECTIVE_COVERAGE_ONLY",
         "authority_verified_candidate_count":0,
@@ -186,11 +201,19 @@ def run(objective,decomposition,limit=12,timeout=15):
                 if evidence_ready else
                 "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
             ),
-            "RELATION_EVALUATION":"NOT_STARTED",
+            "RELATION_EVALUATION":(
+                "TYPED_QUANTITIES_AVAILABLE__OPERAND_BINDING_REQUIRED"
+                if typed_quantity_ready else
+                "NO_TYPED_QUANTITIES__TEXTUAL_CLAIM_SUPPORT_REQUIRED"
+                if evidence_ready else
+                "NOT_STARTED"
+            ),
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
         "next_required_capability":(
-            "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+            "MODEL_INDEPENDENT_RELATION_OPERAND_BINDING_FROM_TYPED_EVIDENCE_V1"
+            if typed_quantity_ready else
+            "MODEL_INDEPENDENT_TEXTUAL_CLAIM_SUPPORT_FROM_EXTRACTED_EVIDENCE_V1"
             if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
