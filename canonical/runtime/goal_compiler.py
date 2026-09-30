@@ -4213,7 +4213,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
         entry=registry[cid]
         if _contains_effect_result_binding(entry.get("proposal_bindings")):
             raise GoalCompilationFailure(
-                "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+                "GOAL_EFFECT_AWARE_COMPOSITION_REQUIRED",
                 json.dumps({
                     "index":index,
                     "subgoal":clause,
