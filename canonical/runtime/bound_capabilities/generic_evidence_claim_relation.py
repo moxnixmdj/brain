@@ -49,14 +49,25 @@ def _validated_units(extraction):
         raise ValueError("EXTRACTION_SCHEMA_INVALID")
     if extraction.get("status")!="OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED" or extraction.get("output_verified") is not True:
         raise ValueError("VERIFIED_GENERIC_EXTRACTION_REQUIRED")
+
+    multi_source=extraction.get("multi_source") is True
     page_sha=str(extraction.get("page_raw_sha256") or "")
     visible_sha=str(extraction.get("visible_text_sha256") or "")
-    if not re.fullmatch(r"[0-9a-f]{64}",page_sha) or not re.fullmatch(r"[0-9a-f]{64}",visible_sha):
-        raise ValueError("EXTRACTION_PAGE_HASH_INVALID")
+    if not multi_source:
+        if not re.fullmatch(r"[0-9a-f]{64}",page_sha) or not re.fullmatch(r"[0-9a-f]{64}",visible_sha):
+            raise ValueError("EXTRACTION_PAGE_HASH_INVALID")
+
     rows=extraction.get("evidence_units")
     if not isinstance(rows,list) or not rows:
         raise ValueError("EVIDENCE_UNITS_REQUIRED")
+
+    declared_sources=extraction.get("source_urls") if multi_source else None
+    if multi_source:
+        if not isinstance(declared_sources,list) or len(set(str(x) for x in declared_sources if x))<2:
+            raise ValueError("MULTI_SOURCE_DECLARATION_INVALID")
+
     out={}
+    observed_sources=set()
     for row in rows:
         if not isinstance(row,dict):
             raise ValueError("EVIDENCE_UNIT_INVALID")
@@ -67,29 +78,39 @@ def _validated_units(extraction):
         row_visible=str(row.get("visible_text_sha256") or "")
         start=row.get("visible_text_start")
         end=row.get("visible_text_end")
+        source_url=str(row.get("source_url") or extraction.get("source_url") or "")
         if not re.fullmatch(r"[0-9a-f]{64}",uid):
             raise ValueError("EVIDENCE_UNIT_ID_INVALID")
         if uid in out:
             raise ValueError("EVIDENCE_UNIT_ID_DUPLICATE")
         if not text or _sha(text)!=text_sha:
             raise ValueError("EVIDENCE_UNIT_TEXT_HASH_MISMATCH")
-        if row_page!=page_sha or row_visible!=visible_sha:
+        if not re.fullmatch(r"[0-9a-f]{64}",row_page) or not re.fullmatch(r"[0-9a-f]{64}",row_visible):
+            raise ValueError("EVIDENCE_UNIT_PAGE_HASH_INVALID")
+        if not multi_source and (row_page!=page_sha or row_visible!=visible_sha):
             raise ValueError("EVIDENCE_UNIT_PAGE_BINDING_MISMATCH")
         if not isinstance(start,int) or not isinstance(end,int) or start<0 or end<=start or end-start!=len(text):
             raise ValueError("EVIDENCE_UNIT_OFFSET_INVALID")
-        expected_uid=_sha(f"{page_sha}:{start}:{end}:{text_sha}")
+        expected_uid=_sha(f"{row_page}:{start}:{end}:{text_sha}")
         if uid!=expected_uid:
             raise ValueError("EVIDENCE_UNIT_ID_BINDING_MISMATCH")
+        if multi_source:
+            if not source_url or source_url not in set(str(x) for x in declared_sources):
+                raise ValueError("MULTI_SOURCE_UNIT_SOURCE_UNDECLARED")
+            observed_sources.add(source_url)
         out[uid]={
             "evidence_unit_id":uid,
             "text":text,
             "text_sha256":text_sha,
-            "source_url":str(row.get("source_url") or extraction.get("source_url") or ""),
-            "page_raw_sha256":page_sha,
-            "visible_text_sha256":visible_sha,
+            "source_url":source_url,
+            "page_raw_sha256":row_page,
+            "visible_text_sha256":row_visible,
             "visible_text_start":start,
             "visible_text_end":end,
         }
+
+    if multi_source and len(observed_sources)<2:
+        raise ValueError("MULTI_SOURCE_EVIDENCE_REQUIRES_DISTINCT_SOURCES")
     return out
 
 def _numbers(unit):
