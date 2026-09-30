@@ -160,6 +160,51 @@ class BroadObjectiveSourceProvenanceRuntimeTests(unittest.TestCase):
             payload=json.loads(str(cm.exception).split(":",1)[1])
             self.assertFalse(payload["external_capability_acquisition_attempted"])
 
+    def test_live_non_parent_composition_reaches_authority_boundary(self):
+        decomposer_path=ROOT/"canonical/runtime/bound_capabilities/broad_objective_decompose.py"
+        spec=importlib.util.spec_from_file_location("live_broad_decomposer",decomposer_path)
+        decomposer=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(decomposer)
+        objectives=[
+            "Assess whether lithium ion battery calendar aging accelerates at higher storage temperature",
+            "Determine whether HTTP caching validation rules changed across recent specification revisions",
+        ]
+        failures=[]
+        for index,goal in enumerate(objectives):
+            decomposition=decomposer.decompose(goal)
+            self.assertEqual(decomposition["status"],"DECOMPOSED",decomposition)
+            grounding={"broad_objective_decomposition":decomposition}
+            with tempfile.TemporaryDirectory() as td:
+                evidence_dir=pathlib.Path(td)
+                grounding_path=evidence_dir/"grounding.json"
+                grounding_path.write_text("{}\n",encoding="utf-8")
+                with mock.patch.object(self.m,"EVID_DIR",evidence_dir):
+                    try:
+                        self.m._run_broad_objective_source_provenance_frontier(
+                            {"mission_id":f"TEST-LIVE-BROAD-SOURCE-{index}"},
+                            goal,
+                            grounding,
+                            grounding_path,
+                        )
+                    except self.m.Blocker as exc:
+                        message=str(exc)
+                    else:
+                        self.fail("broad source-provenance frontier returned instead of failing closed")
+                if message.startswith(
+                    "SOURCE_AUTHORITY_PRIMARY_EVIDENCE_AND_RELEVANCE_VERIFICATION_REQUIRED:"
+                ):
+                    payload=json.loads(message.split(":",1)[1])
+                    self.assertGreaterEqual(payload["candidate_count"],1)
+                    self.assertGreaterEqual(payload["verified_provenance_count"],1)
+                    self.assertFalse(payload["fact_authority_verified"])
+                    self.assertFalse(payload["primary_source_status_verified"])
+                    self.assertFalse(payload["external_capability_acquisition_attempted"])
+                    self.assertEqual(payload["model_dependency_count"],0)
+                    self.assertEqual(payload["incremental_spend_usd"],0)
+                    return
+                failures.append(message)
+        self.fail("no live objective reached the qualified authority boundary: "+repr(failures))
+
     def test_non_broad_grounding_does_not_claim_route(self):
         self.assertIsNone(
             self.m._run_broad_objective_source_provenance_frontier(
