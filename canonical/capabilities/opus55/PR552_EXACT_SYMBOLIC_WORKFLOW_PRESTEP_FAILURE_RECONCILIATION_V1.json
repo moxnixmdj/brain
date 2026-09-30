@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_NON_CAUSAL_WORKFLOW_FAILURE_RECONCILIATION_V1",
+  "event_id": "PR552_EXACT_SYMBOLIC_WORKFLOW_PRESTEP_FAILURE_20260930",
+  "status": "NON_CAUSAL_RUNNER_OR_CARRIER_FAILURE__SYMBOLIC_CAPABILITY_PRESERVED",
+  "pr": 552,
+  "branch_head_before_receipt": "a10f62289496dc81a80857f41fa63efbaf6e8d80",
+  "workflow_run_id": 36705410136,
+  "failed_jobs": [
+    {
+      "job_id": 109854365181,
+      "status": "completed",
+      "conclusion": "failure",
+      "steps_exposed": 0
+    },
+    {
+      "job_id": 109854829557,
+      "status": "completed",
+      "conclusion": "failure",
+      "steps_exposed": 0,
+      "rerun": true
+    }
+  ],
+  "causal_checks": {
+    "exact_symbolic_files_changed_between_base_and_head": false,
+    "changed_file_scan": "compare 80ff84b907b7cb6fa1ad90b67072c94ba8e2bba4...a10f62289496dc81a80857f41fa63efbaf6e8d80 contained no exact-symbolic runner/suite/workflow file",
+    "local_sympy_reproduction": {
+      "python_version": "3.13.5",
+      "sympy_version": "1.14.0",
+      "result": "12_OF_12_EXPECTED_EXACT_VALUES_REPRODUCED"
+    },
+    "independent_wolfram_reproduction": {
+      "verifier": "Wolfram Language kernel via connected Wolfram MCP",
+      "result": "12_OF_12_FROZEN_EXPECTED_EXACT_VALUES_REPRODUCED",
+      "outputs": {
+        "T01": "4160493823016049382260/1517",
+        "T02": "(-1+x)(1+x)(1+x^2)(1+x^4)",
+        "T03": "495",
+        "T04": "{-Sqrt[2],Sqrt[2]}",
+        "T05": "{1,2,3}",
+        "T06": "x^x(1+Log[x])",
+        "T07": "5 Pi/16",
+        "T08": "1/266716800000",
+        "T09": "90548514656103281165404177077484163874504589675413336841320",
+        "T10": "1",
+        "T11": "{{x->26/19,y->27/19}}",
+        "T12": "1/22680"
+      }
+    }
+  },
+  "conclusion": "The PR552 workflow failure did not expose a changed symbolic implementation, a failed symbolic assertion, or any executed workflow step. Direct local SymPy and independent Wolfram checks reproduce all frozen exact results. Treat the workflow red state as non-causal runner/carrier failure and preserve EXACT_SYMBOLIC_COMPUTATION_V1 ownership.",
+  "capability_credit_delta": 0,
+  "replay_policy": "No further rerun required for this PR; repeated pre-step carrier failure adds no capability evidence.",
+  "evidence_preserved": true
+}
