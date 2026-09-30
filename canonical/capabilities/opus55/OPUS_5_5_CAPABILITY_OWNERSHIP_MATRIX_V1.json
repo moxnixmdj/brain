@@ -226,13 +226,18 @@
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
       "best_existing_routes": [
-        "Brain fail-closed evidence/verification laws + independent verifiers + Git recovery + capability receipts"
+        "Brain-owned atomic execution guard + immutable ref store + frozen-plan pin verifier"
       ],
       "evidence": "Historical Brain contains multiple verified self-correction/recovery mechanisms, but they have not been compared at whole-family Opus 5.5 strength.",
       "sources": [
-        "https://www.anthropic.com/claude-opus-5-5"
+        "canonical/capabilities/opus55/OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_FRESH_VERIFICATION_V1.json"
       ],
-      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven."
+      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven.",
+      "ownership_note": "Brain owns and freshly verified the deterministic fail-closed execution verification/recovery component: duplicate suppression, uncertainty containment, immutable-record integrity and frozen pin/path drift rejection. General semantic self-critique, root-cause debugging and arbitrary recovery remain open.",
+      "internalized_configuration": [
+        "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json"
+      ],
+      "next_required_action": "Acquire/verify the remaining cognitive self-critique, root-cause debugging and arbitrary recovery mechanisms; reuse the owned deterministic guard globally."
     },
     {
       "family": "ARTIFACT_CREATION",
