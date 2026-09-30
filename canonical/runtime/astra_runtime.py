@@ -5634,6 +5634,18 @@ def _run_goal_unstamped(step, mission):
                   "policy":"BROAD_RESEARCH_DECOMPOSITION_ROUTES_TO_RESEARCH_SOURCE_FRONTEND_BEFORE_PACKAGE_ACQUISITION",
                 }
                 if status=="SOURCE_FRONTEND_READY":
+                    if bool(source_frontend.get("generic_evidence_extracted")):
+                        payload["generic_evidence_record_count"]=int(
+                            source_frontend.get("generic_evidence_record_count") or 0
+                        )
+                        payload["generic_extraction_claim_scope"]=source_frontend.get(
+                            "generic_extraction_claim_scope"
+                        )
+                        raise Blocker(
+                            "OPEN_ENDED_RESEARCH_GENERIC_EVIDENCE_EXTRACTED__"
+                            "CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED:"
+                            +json.dumps(payload,sort_keys=True)
+                        ) from e
                     if int(source_frontend.get("evidence_extracted_candidate_count") or 0)>0:
                         payload["evidence_extracted_candidate_count"]=int(
                             source_frontend.get("evidence_extracted_candidate_count") or 0
