@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-BLOCKER-LEASE-IDENTITY-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BLOCKER_LEASE_IDENTITY_INCLUDES_ACTION_KIND_ALLOWING_DUPLICATE_OWNERS_FOR_SAME_CAUSAL_BLOCKER",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BLOCKER_LEASE_IDENTITY_INCLUDES_ACTION_KIND_ALLOWING_DUPLICATE_OWNERS_FOR_SAME_CAUSAL_BLOCKER::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make accidental duplicate ownership impossible for the same generation + capability + causal blocker regardless of action label, while preserving explicit same-ID intentional route races.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR510 and PR512 share the exact capability target and causal blocker but use different action_kind labels.",
+    "canonical/runtime/enforce_goal_hierarchy.py currently includes action_kind in blocker_lease_key().",
+    "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1 intends one owner per accidental identical blocker lease."
+  ],
+  "evidence_presence_classification": "VERIFIED_GOVERNANCE_GAP_FROM_LIVE_DUPLICATE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal validator, law, regression, template, and regression-test changes that make blocker identity independent of action_kind; then resume the surviving open-research repair PR512.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly required Brain to assume many mistakes by default and make these mistake classes unable to silently recur.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+    "real_outcome": "Make accidental duplicate ownership impossible for the same generation + capability + causal blocker regardless of action label, while preserving explicit same-ID intentional route races.",
+    "required_capability": "DETERMINISTIC_SINGLE_OWNER_CAUSAL_BLOCKER_LEASING",
+    "obs_goal": {
+      "real_outcome": "Make accidental duplicate ownership impossible for the same generation + capability + causal blocker regardless of action label, while preserving explicit same-ID intentional route races.",
+      "proxy_goals_deleted": [
+        "Add another governance layer",
+        "Rewrite the scheduler"
+      ],
+      "surviving_necessity": "Correct the identity function used by the existing fail-closed lease guard."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Existing deterministic lowest-PR ownership guard",
+        "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1"
+      ],
+      "external_existing_routes_checked": [
+        "No external supplier is needed for an internal identity-function defect."
+      ],
+      "capability_work_deleted": [
+        "No new lease service",
+        "No new workflow"
+      ],
+      "surviving_gap": "The identity tuple incorrectly includes action_kind, so semantically identical blockers can evade dedupe by relabeling the action."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic trusted-guard identity defect demonstrated by live PR510/PR512.",
+      "delete_bypass_substitute_options": [
+        "Close one duplicate now but recurrence remains",
+        "Explicit route race only when intentional",
+        "Repair identity tuple survives"
+      ],
+      "surviving_causal_blocker": "blocker_lease_key() includes a non-causal action label."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Repair blocker identity to generation+capability+causal_blocker",
+        "Create a separate dedupe service"
+      ],
+      "losing_routes_reason": "The existing guard already owns this responsibility; a new service adds machinery and latency.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Regression-test two intents with identical generation/capability/blocker but different action_kind; they must collide unless both declare the same explicit route_race_id."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Action-kind-dependent blocker identity"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Deterministic lowest-PR ownership across action-label drift"
+      ],
+      "fresh_reuse_plan": "PR512 remains sole owner of its blocker after PR510 closure; future same-blocker relabels must fail closed."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing lease guard and law"
+      ],
+      "search_stop_decision": "The live duplicate and exact identity function fully localize the defect; further architecture search cannot beat a four-line identity repair.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Internal governance repair; external supplier frontier is not applicable."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_LEASE_IDENTITY",
+      "NEW_DEDUPE_SERVICE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_DEDUPE_SERVICE"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_LEASE_IDENTITY",
+    "why_selected_route_is_fastest_sufficient": "It fixes the demonstrated bypass at the authoritative enforcement point with no new infrastructure.",
+    "expected_parent_level_state_change": "Make accidental duplicate ownership impossible for the same generation + capability + causal blocker regardless of action label, while preserving explicit same-ID intentional route races.",
+    "stop_condition": "Merge only the minimal validator, law, regression, template, and regression-test changes that make blocker identity independent of action_kind; then resume the surviving open-research repair PR512.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized governance guard repair on an internal deterministic identity defect; external route discovery cannot improve correctness or wall-clock."
+    }
+  }
+}
