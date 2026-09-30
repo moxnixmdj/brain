@@ -1,0 +1,281 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-SOFTWARE-SYSTEMS-SQLITE-CONCURRENT-BACKUP-OPEN-ENDED-REAL-TASK-A-20260930-002",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either establish the first admissible genuinely open-ended model-independent parent Task A on a fresh software-systems objective, or localize exactly the first new generic causal gap without replay or task-specific repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical main 797d5fbea5f230a31044006755beb98ae387134b after PR329 fail-closed provenance and target-mirror repair",
+    "PR318 corrected parent evidence scope: structured demography remains supporting evidence but does not count as open-ended parent proof",
+    "current canonical blocker requires genuine objective-only open-ended Task A",
+    "all stale pre-PR329 Task-A leases were closed unexecuted",
+    "public zero-spend GitHub Actions carrier has recent direct execution receipts",
+    "current runtime stamps every public run_goal result with ASTRA_RUNTIME_DERIVED_V1 provenance"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN__NO_ADMISSIBLE_OPEN_ENDED_PARENT_TASK_YET",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After trusted exact-base admission, execute the frozen objective-only SQLite Task A exactly once with model planning disabled and runtime-derived cognition provenance. On semantic success run producer-independent verification before any parent credit; on failure preserve only the first causal blocker, award zero parent credit, and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "797d5fbea5f230a31044006755beb98ae387134b",
+    "real_outcome": "Produce the first admissible evidence about the actual open-ended parent capability by executing one objective-only software-systems research task through the inherited model-independent route, or expose its earliest real missing capability.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Test autonomous decomposition, source/tool discovery, experiment design, evidence acquisition, synthesis, falsification, and verification rather than another prewired worksheet.",
+      "proxy_goals_deleted": [
+        "another structured arithmetic task",
+        "task-specific SQLite solver",
+        "preselected documentation URL",
+        "prewritten experiment procedure",
+        "frontier-model-assisted answer",
+        "child benchmark work before a real parent failure"
+      ],
+      "surviving_necessity": "Exactly one genuinely open-ended Task A is the current canonical evidence obligation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "model-independent plain-goal grounding",
+        "grounded executable composition",
+        "bound capability discovery/acquisition fallback",
+        "authoritative-source discovery primitives",
+        "browser and HTTP evidence acquisition",
+        "runtime-derived cognition provenance",
+        "independent verification discipline"
+      ],
+      "external_existing_routes_checked": [
+        "recent public GitHub Actions execution receipts establish the zero-spend carrier; task-specific sources and tools are deliberately not selected before freeze"
+      ],
+      "capability_work_deleted": [
+        "no new model supplier",
+        "no task-specific solver",
+        "no prewired source URL",
+        "no prewired tool sequence",
+        "no prewritten experiment",
+        "no repair before the first real causal failure"
+      ],
+      "surviving_gap": "Unknown until the frozen objective-only task executes; pre-solving that gap would invalidate the open-ended test."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent evidence-scope blocker: no admissible task has yet exercised the defining open-ended behavior.",
+      "delete_bypass_substitute_options": [
+        "delete prewired task recipes",
+        "reuse current inherited model-independent runtime",
+        "reuse proven public zero-spend carrier",
+        "defer all repairs until a real first causal gap is observed"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_INHERITED_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_TASK_A",
+        "TASK_SPECIFIC_SQLITE_IMPLEMENTATION",
+        "PREWIRE_SOURCE_AND_EXPERIMENT",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Task-specific or prewired routes cannot prove open-ended inherited behavior, and model cognition makes dependency-removal evidence circular. Exact inherited-route execution is the smallest admissible experiment.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark substitutes for Task A. Producer success must be followed by a separately implemented evidence/source/experiment check; failure stops at the earliest causal gap."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all speculative child repairs before Task A",
+        "all stale Task-A branches",
+        "all spent parent-task replays"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime provenance firewall",
+        "canonical frontier mirror lock",
+        "model-independent grounding/composition",
+        "authoritative evidence primitives",
+        "verification discipline"
+      ],
+      "fresh_reuse_plan": "PASS becomes first admissible open-ended Task-A evidence and advances to a materially different Task B; FAIL localizes one generic gap, repairs only that gap, then uses a new fresh Task A."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical blocker and exact main",
+        "reused recent carrier readiness",
+        "reused inherited capability inventory",
+        "did not research the SQLite answer/source/tool/procedure before task freeze"
+      ],
+      "search_stop_decision": "The unresolved uncertainty is the inherited route's genuine open-ended behavior itself. More pre-task discovery would contaminate the test rather than improve it.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and carrier were refreshed immediately before branch creation; task-specific research remains inside the one-shot execution by design."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_INHERITED_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_TASK_A",
+      "TASK_SPECIFIC_SQLITE_IMPLEMENTATION",
+      "PREWIRE_SOURCE_AND_EXPERIMENT",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_SPECIFIC_SQLITE_IMPLEMENTATION",
+      "PREWIRED_RESEARCH_RECIPE",
+      "FRONTIER_MODEL_COGNITION",
+      "SPENT_TASK_REPLAY",
+      "PREEMPTIVE_CHILD_REPAIR"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_INHERITED_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_TASK_A",
+    "why_selected_route_is_fastest_sufficient": "It uses only already-built $0 machinery and directly tests the missing parent behavior. One guarded execution either creates admissible evidence or returns the earliest general causal gap.",
+    "expected_parent_level_state_change": "Either establish the first admissible genuinely open-ended model-independent parent Task A on a fresh software-systems objective, or localize exactly the first new generic causal gap without replay or task-specific repair.",
+    "stop_condition": "After trusted exact-base admission, execute the frozen objective-only SQLite Task A exactly once with model planning disabled and runtime-derived cognition provenance. On semantic success run producer-independent verification before any parent credit; on failure preserve only the first causal blocker, award zero parent credit, and never replay the task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:44:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_INHERITED_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_TASK_A",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical main 797d5fbea5f230a31044006755beb98ae387134b",
+          "current parent frontier explicitly requires one genuine open-ended Task A",
+          "merged PR329 closes the provenance/target-mirror authority holes"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions execution receipts establish the selected carrier; task-specific SQLite authorities are intentionally not preselected before freeze"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "current Brain bound-capability registry and runtime already expose the inherited execution stack; no new package supplier is authorized before Task A"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "no external framework can substitute for testing the inherited route itself; task-specific discovery belongs inside the frozen producer task"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent open ended technical research autonomous decomposition source tool discovery experiment synthesis verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "existing Project Brain inherited route zero cost public execution carrier"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "objective only parent task versus task specific or prewired solver"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current Brain provenance hardened runtime and public carrier readiness 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_INHERITED_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_TASK_A",
+          "evidence": [
+            "current canonical parent blocker explicitly requires genuine open-ended Task A",
+            "current runtime and carrier are already built and recently exercised"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: public carrier run 36669953388 completed on the same zero-spend execution surface",
+            "DIRECT_PROBE: prior parent execution runs demonstrate outbound-network and artifact-return capability"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the canonical capability definition and preserves fail-closed one-shot semantics.",
+            "CAPABILITY_STRENGTH": "Exercises autonomous decomposition, evidence/tool selection, experiment design, synthesis and verification rather than a prewired subchain.",
+            "WALL_CLOCK": "No new framework, model, supplier integration, or task-specific code precedes the evidence-producing run.",
+            "INCREMENTAL_COST": "$0 incremental spend on the already-proven public carrier.",
+            "RELIABILITY": "Exact current main contains the merged provenance firewall; execution stops on the first causal gap.",
+            "VERIFIABILITY": "Frozen objective, exact bytes, runtime provenance, terminal artifact, and producer-independent post-success verification make the outcome falsifiable."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger produces admissible parent evidence faster: prewired/task-specific routes test proxies and model cognition invalidates the target dependency claim.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_INHERITED_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_TASK_A",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:44:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_INHERITED_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_TASK_A",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_STANDARD_RUNNER_FOR_VERIFICATION_CAPSULE",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:44:00Z",
+            "evidence": [
+              "DIRECT_PROBE: public verification carrier run 36669953388 completed successfully on the current execution class"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_797d5fbea5f230a31044006755beb98ae387134b",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:44:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact current canonical main with PR329 provenance hardening"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
