@@ -18,6 +18,8 @@ Absence of a detected error is not proof of correctness.
 
 Accidental duplicate blocker leases MUST have exactly one deterministic owner.
 
+Blocker lease identity is exactly **canonical generation + active capability target + causal blocker**. `action_kind`, route wording, implementation label, branch name, and PR title are NOT part of blocker identity and MUST NOT permit duplicate ownership.
+
 - The lowest open PR number holding a valid identical lease is the owner.
 - Any later accidental duplicate MUST fail closed.
 - The owner MUST NOT fail merely because a later duplicate exists.
