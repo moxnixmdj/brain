@@ -190,15 +190,19 @@
   },
   "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "last_frontier_reconciliation": {
-    "status": "CODING_CAPABILITY_CONFIGURATION_INTERNALIZED__NO_OWNERSHIP_CREDIT_YET",
-    "blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+    "status": "STRONGER_CODING_CONFIGURATION_INTERNALIZED__VERIFICATION_PENDING",
+    "blocker": "BRAIN_INTERNALIZED_SUPREME_LED_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
     "evidence_paths": [
-      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
-    ]
+      "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json",
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json"
+    ],
+    "prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "leading_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
   },
-  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__SUPERPOWERS_FALLBACK__ZERO_CREDIT_UNTIL_PASS",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -271,7 +275,7 @@
     "guard_attempt_id": "7d9e1ed58e61497a9a1ab4ab8ee779ce",
     "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
   },
-  "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
   "capability_acquisition_first": true,
   "theory_invariants": {
     "knowledge": "EXTERNAL_JIT",
