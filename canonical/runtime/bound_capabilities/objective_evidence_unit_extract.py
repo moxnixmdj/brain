@@ -118,49 +118,74 @@ def _tokens(text):
     return out
 
 class _Blocks(HTMLParser):
+    """Capture visible text as boundary-flushed runs, not nested frame copies.
+
+    Text is always collected unless it is inside an explicitly suppressed UI/
+    non-content subtree. Common semantic containers act only as flush boundaries;
+    they are not prerequisites for visibility. This means custom elements and
+    inline-only layouts remain extractable without weakening objective matching.
+    """
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.suppress = 0
-        self.stack = []
+        self.boundary_stack = []
         self.blocks = []
+        self.parts = []
+        self.current_tag = "text"
+
+    def _flush(self, tag=None):
+        text = _canon(" ".join(self.parts))
+        self.parts = []
+        if text:
+            self.blocks.append((tag or self.current_tag or "text", text))
 
     def handle_starttag(self, tag, attrs):
         low = tag.lower()
         if low in _SUPPRESS:
+            if not self.suppress:
+                self._flush()
             self.suppress += 1
+            return
         if self.suppress:
             return
         if low in _BLOCK_TAGS:
-            self.stack.append([low, []])
+            self._flush()
+            self.boundary_stack.append(low)
+            self.current_tag = low
+        elif low in {"br", "hr"}:
+            self._flush()
 
     def handle_endtag(self, tag):
         low = tag.lower()
         if low in _SUPPRESS:
             if self.suppress:
                 self.suppress -= 1
+            if not self.suppress:
+                self.current_tag = self.boundary_stack[-1] if self.boundary_stack else "text"
             return
-        if self.suppress or low not in _BLOCK_TAGS or not self.stack:
+        if self.suppress:
             return
-        idx = None
-        for i in range(len(self.stack) - 1, -1, -1):
-            if self.stack[i][0] == low:
-                idx = i
-                break
-        if idx is None:
-            return
-        tag_name, parts = self.stack.pop(idx)
-        text = _canon(" ".join(parts))
-        if text:
-            self.blocks.append((tag_name, text))
+        if low in _BLOCK_TAGS:
+            self._flush(low)
+            idx = None
+            for i in range(len(self.boundary_stack) - 1, -1, -1):
+                if self.boundary_stack[i] == low:
+                    idx = i
+                    break
+            if idx is not None:
+                del self.boundary_stack[idx]
+            self.current_tag = self.boundary_stack[-1] if self.boundary_stack else "text"
 
     def handle_data(self, data):
-        if self.suppress or not self.stack:
+        if self.suppress:
             return
         text = _canon(data)
-        if not text:
-            return
-        for frame in self.stack:
-            frame[1].append(text)
+        if text:
+            self.parts.append(text)
+
+    def close(self):
+        super().close()
+        self._flush()
 
 def _split_long(text, max_chars=900):
     text = _canon(text)
