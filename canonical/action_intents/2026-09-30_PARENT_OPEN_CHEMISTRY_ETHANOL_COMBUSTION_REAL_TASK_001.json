@@ -1,0 +1,288 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-OPEN-CHEMISTRY-ETHANOL-COMBUSTION-REAL-TASK-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "REAL_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::REAL_TASK_EXECUTION",
+  "expected_parent_frontier_change": "Either complete the second materially different open-ended model-independent parent real task and make the parent dependency-removal claim eligible for immediate independent adjudication, or localize exactly the first new generic causal gap with no task replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8 after merged PR303 promotion-firewall/runtime-provenance hardening",
+    "canonical evidence A is the verified model-independent France demography parent task; one materially different model-independent parent task B remains",
+    "astronomy, geophysics, biophysics, and demography replays are forbidden",
+    "PR304 chemistry task was over-specified with source URLs, JSON paths, formula and threshold and therefore does not establish the defining open-ended decomposition/source/tool-selection behavior; its runner execution 36669136068 is spent and must not be replayed",
+    "current runtime contains deterministic plain-goal grounding, grounded executable composition, capability discovery/acquisition fallback, authoritative-source discovery primitives, typed numeric expression, bounded numeric relation, browser capture and independent-verification primitives",
+    "no task-specific source URL, source authority, reaction equation, answer, or tool route has been researched or frozen into this task"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze this unprewired chemistry objective, execute it exactly once on exact current Brain bytes through the proven public $0 carrier with model planning disabled, preserve runtime-derived cognition provenance, and on success independently discover/refetch/recompute before any parent promotion; on failure preserve only the first causal gap and never replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Prove or falsify the inherited general model-independent research route on a materially different chemistry objective where the producer must discover sources, derive the technical route, calculate, and support independent verification rather than receiving the research plan.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Close the sole remaining second-parent-task proof obligation at the actual open-ended capability boundary, not via a prewired worksheet.",
+      "proxy_goals_deleted": [
+        "more child benchmarks",
+        "task-specific chemistry scripting",
+        "preselecting PubChem or any other source",
+        "old task replay",
+        "model planner qualification",
+        "passing an easy prewired scalar gate"
+      ],
+      "surviving_necessity": "Exactly one materially different open-ended model-independent parent real task B remains the canonical blocker."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "plain_goal.bound_capability.grounding.stdlib",
+        "grounded executable composition",
+        "capability discovery/acquisition fallback",
+        "runtime discover_authoritative_web_source/assert_authoritative_source_discovery primitives",
+        "knowledge.json.fetch.external",
+        "web.browser.rendered.capture.chromedriver",
+        "math.numeric_expression.sympy",
+        "json.query.jq bounded numeric relation route",
+        "runtime-derived cognition provenance merged by PR303"
+      ],
+      "external_existing_routes_checked": [
+        "public GitHub Actions carrier already directly proved callable with outbound network and $0 incremental spend",
+        "task-specific scientific suppliers intentionally not selected before freeze because source discovery is part of the parent capability under test"
+      ],
+      "capability_work_deleted": [
+        "no new framework",
+        "no new supplier integration",
+        "no task-specific producer code",
+        "no source URL baked into the task",
+        "no reaction equation or formula baked into the task",
+        "no model cognition"
+      ],
+      "surviving_gap": "Unknown until exact one-shot execution. The task is deliberately frozen before task-specific discovery so the first failing generic capability seam, if any, is observable."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent proof obligation, with prior shortcut falsified as insufficiently open-ended.",
+      "delete_bypass_substitute_options": [
+        "delete prewired source/formula task design",
+        "reuse current inherited model-independent runtime",
+        "reuse proven public carrier",
+        "defer all repairs until a real first causal gap is observed"
+      ],
+      "surviving_causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME_ON_UNPREWIRED_OPEN_ENDED_CHEMISTRY_TASK",
+        "PREWIRE_AUTHORITATIVE_SOURCE_AND_FORMULA_THEN_RUN",
+        "BUILD_TASK_SPECIFIC_CHEMISTRY_SOLVER",
+        "USE_FRONTIER_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "Prewiring would not test the parent behavior; a task-specific solver would not prove general inherited transfer; model cognition invalidates the dependency-removal target. Exact inherited-route execution is the only route that can directly close the current proof obligation.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Producer success must be followed by an independent post-freeze chemistry oracle that separately discovers authoritative evidence, refetches it, derives stoichiometry, recomputes the oxygen mass and predicate, and does not import producer modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all additional parent-task designs until this one terminates",
+        "all PR304 replays",
+        "all speculative source-type repairs before this task exposes a current causal gap"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "plain-goal grounding",
+        "capability composition",
+        "source discovery primitives",
+        "live external evidence acquisition",
+        "typed arithmetic",
+        "bounded comparison",
+        "runtime provenance",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "This task itself is the required materially distinct fresh parent reuse. PASS goes directly to independent parent adjudication; FAIL yields exactly one generic residual gap and the spent task is never replayed."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused canonical frontier at 0292dc91d7b2354beede3e530256054330fb94d8",
+        "reused public carrier readiness from runs 36667844172 and 36669136068",
+        "reused current bound-capability inventory",
+        "did not research the task answer or choose a scientific source before freeze"
+      ],
+      "search_stop_decision": "No alternative producer route can satisfy the inherited-route proof faster than executing the inherited route itself; task-specific source search before freeze would weaken, not strengthen, the proof.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and carrier were refreshed immediately before branch creation; scientific-source discovery is intentionally inside the one-shot task and post-freeze independent oracle."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME_ON_UNPREWIRED_OPEN_ENDED_CHEMISTRY_TASK",
+      "PREWIRE_AUTHORITATIVE_SOURCE_AND_FORMULA_THEN_RUN",
+      "BUILD_TASK_SPECIFIC_CHEMISTRY_SOLVER",
+      "USE_FRONTIER_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_WORKSHEET_TASK",
+      "TASK_SPECIFIC_PRODUCER",
+      "MODEL_COGNITION",
+      "OLD_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME_ON_UNPREWIRED_OPEN_ENDED_CHEMISTRY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It is the only route that directly tests the remaining parent claim on current verified zero-spend machinery, adds no implementation before evidence, and maximizes information gain per one-shot execution.",
+    "expected_parent_level_state_change": "Either complete the second materially different open-ended model-independent parent real task and make the parent dependency-removal claim eligible for immediate independent adjudication, or localize exactly the first new generic causal gap with no task replay.",
+    "stop_condition": "Freeze this unprewired chemistry objective, execute it exactly once on exact current Brain bytes through the proven public $0 carrier with model planning disabled, preserve runtime-derived cognition provenance, and on success independently discover/refetch/recompute before any parent promotion; on failure preserve only the first causal gap and never replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:34:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME_ON_UNPREWIRED_OPEN_ENDED_CHEMISTRY_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 0292dc91d7b2354beede3e530256054330fb94d8",
+          "BOUND_CAPABILITY_REGISTRY_V1 plus current goal compiler/runtime inspected on exact main"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions public runner direct execution receipts are the carrier authority for this route; task-specific scientific authority is deliberately not preselected before freeze"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "current Brain bound registry already contains verified browser, JSON fetch, jq, SymPy, grounding and composition routes; no package acquisition is justified before execution"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No external framework can substitute for demonstrating inherited-route reuse; task-specific web discovery is reserved for producer execution and independent post-freeze verification"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent open-ended scientific research source discovery tool selection quantitative reasoning independent verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "existing Project Brain bound source discovery grounding composition quantitative verification capabilities"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "inherited runtime execution versus prewired task-specific scientific solver"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current Brain main runtime provenance firewall and public zero-spend carrier readiness 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME_ON_UNPREWIRED_OPEN_ENDED_CHEMISTRY_TASK",
+          "evidence": [
+            "exact current Brain main 0292dc91d7b2354beede3e530256054330fb94d8 exposes the inherited capability stack",
+            "public carrier completed recent exact one-shot jobs with outbound network",
+            "task-specific route and source are intentionally absent from the frozen objective"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: parent demography run 36667844172 completed on the public carrier",
+            "DIRECT_PROBE: chemistry runner job 109740159666 executed on the same public carrier minutes before this freeze",
+            "CODE_OR_PACKAGE_REGISTRY: exact current bound-capability registry inspected on main"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the parent capability definition instead of a proxy worksheet.",
+            "CAPABILITY_STRENGTH": "Requires decomposition, source discovery/evaluation, tool composition, quantitative chemistry reasoning, provenance and independent checkability.",
+            "WALL_CLOCK": "No implementation or supplier integration precedes the evidence-producing run.",
+            "INCREMENTAL_COST": "$0 incremental spend on the already-proven public carrier.",
+            "RELIABILITY": "Uses current merged runtime and a recently exercised execution carrier; unknown scientific-source behavior is intentionally part of the task.",
+            "VERIFIABILITY": "Frozen objective and one-shot semantics plus post-freeze independent source discovery/recomputation make success or first-gap failure falsifiable."
+          }
+        }
+      ],
+      "negative_search_summary": "A different framework, prewired source route, task-specific solver, or model planner cannot produce admissible inherited-route Task B evidence faster; no unresolved plausible dominator remains.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME_ON_UNPREWIRED_OPEN_ENDED_CHEMISTRY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:34:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_PARENT_RUNTIME_ON_UNPREWIRED_OPEN_ENDED_CHEMISTRY_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:30:37Z",
+            "evidence": [
+              "DIRECT_PROBE: runner job 109740159666 executed and uploaded terminal evidence on the public carrier"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_0292dc91d7b2354beede3e530256054330fb94d8",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:34:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact current main fetched and inspected"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
