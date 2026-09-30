@@ -5518,9 +5518,60 @@ def run_goal(step, mission):
         error_text=str(e)
         acquisition_goal=goal
         unresolved_marker="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:"
+        effect_aware_marker="GOAL_COMPILATION_FAILED:GOAL_EFFECT_AWARE_COMPOSITION_REQUIRED:"
         is_no_match="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in error_text
         is_unresolved_subgoal=unresolved_marker in error_text
+        is_effect_aware_required=effect_aware_marker in error_text
         optional_planner=bool(step.get("allow_optional_model_planner",False))
+        if is_effect_aware_required and not optional_planner:
+            grounding_goal=goal
+            grounding_path,grounding=_ground_plain_goal_to_bound_capabilities(
+                mission,grounding_goal
+            )
+            grounded_count=int(grounding.get("grounded_clause_count") or 0)
+            if grounded_count<=0:
+                raise Blocker(
+                    "EFFECT_AWARE_COMPOSITION_REQUIRED_BUT_GROUNDING_EMPTY"
+                ) from e
+            try:
+                composition_path,composition=_compose_grounding_to_capability_problem(
+                    mission,grounding_goal,grounding,
+                    verified_initial_facts=step.get("verified_initial_facts") or [],
+                )
+            except Blocker as composition_error:
+                raise Blocker(
+                    "EFFECT_AWARE_COMPOSITION_ROUTING_BLOCKED:"+json.dumps({
+                      "grounding_evidence_path":(
+                        str(grounding_path.relative_to(ROOT))
+                        if ROOT in grounding_path.parents else str(grounding_path)
+                      ),
+                      "candidate_capability_ids":grounding.get("candidate_capability_ids") or [],
+                      "unresolved_clause_indexes":grounding.get("unresolved_clause_indexes") or [],
+                      "grounded_clause_count":grounded_count,
+                      "composition_error":str(composition_error),
+                      "external_capability_acquisition_attempted":False,
+                      "policy":"EXPLICIT_CAUSAL_BINDING_USES_EXISTING_GROUNDED_COMPOSITION_AUTHORITY",
+                    },sort_keys=True)
+                ) from composition_error
+            derived=dict(step)
+            derived["capability_problem"]=composition["problem"]
+            composed_result=_run_capability_planned_goal(
+                derived,mission,grounding_goal
+            )
+            if composed_result is None:
+                raise Blocker(
+                    "EFFECT_AWARE_COMPOSITION_EXECUTION_MISSING"
+                )
+            composed_result["grounding_evidence_path"]=str(
+                grounding_path.relative_to(ROOT)
+            )
+            composed_result["composition_evidence_path"]=str(
+                composition_path.relative_to(ROOT)
+            )
+            composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
+            composed_result["model_dependency_count"]=0
+            composed_result["routing_mode"]="EXPLICIT_EFFECT_RESULT_BINDING"
+            return composed_result
         if is_unresolved_subgoal and not optional_planner:
             raw=error_text.split(unresolved_marker,1)[1]
             try:
