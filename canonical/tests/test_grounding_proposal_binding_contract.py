@@ -20,6 +20,7 @@ grounder=load("proposal_binding_grounder",CANONICAL/"runtime"/"bound_capabilitie
 composer=load("proposal_binding_composer",CANONICAL/"runtime"/"bound_capabilities"/"grounded_executable_composition.py")
 verifier=load("proposal_binding_verifier",CANONICAL/"runtime"/"bound_capabilities"/"grounded_executable_composition_verify.py")
 planner=load("proposal_binding_planner",CANONICAL/"runtime"/"capability_planner.py")
+proposal_binder=load("proposal_binding_generator",CANONICAL/"runtime"/"capability_proposal_generators.py")
 
 class GroundingProposalBindingContractTests(unittest.TestCase):
     @classmethod
@@ -33,7 +34,11 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
             "Fetch JSON from https://example.invalid/beta.json. "
             "Assess knowledge consistency."
         )
-        grounding=grounder.ground(goal,self.registry)
+        grounding=grounder.ground(
+            goal,self.registry,
+            compiler=compiler,proposal_binder=proposal_binder,root=REPO_ROOT,
+            enforce_bindability=True,
+        )
         self.assertEqual(grounding["unresolved_clause_indexes"],[],grounding)
         self.assertEqual(len(grounding["clauses"]),3,grounding)
 
@@ -96,9 +101,53 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
             self.assertEqual(inner["field"],"output_path")
             self.assertIsInstance(inner["action_index"],int)
 
+    def test_non_url_semantic_candidate_must_also_bind(self):
+        registry={
+            "analysis.good":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "incremental_spend_usd":0,
+                "provides":["analysis.dataset"],
+                "requires":[],
+                "keywords":["analyze","dataset"],
+                "action_template":{"type":"analysis","args":{"mode":"${input.mode}"}},
+                "proposal_bindings":{"mode":{"type":"literal","value":"safe"}},
+                "result_fields":["status"],
+            },
+            "analysis.bad":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "incremental_spend_usd":0,
+                "provides":["analysis.dataset"],
+                "requires":[],
+                "keywords":["analyze","dataset"],
+                "action_template":{"type":"analysis","args":{"source_path":"${input.source_path}"}},
+                "result_fields":["status"],
+            },
+        }
+        result=grounder.ground(
+            "Analyze the dataset.",
+            registry,
+            compiler=compiler,proposal_binder=proposal_binder,root=REPO_ROOT,
+            enforce_bindability=True,
+        )
+        clause=result["clauses"][0]
+        self.assertEqual(clause["status"],"GROUNDED",clause)
+        self.assertEqual(
+            [x["capability_id"] for x in clause["candidates"]],
+            ["analysis.good"],
+        )
+        self.assertEqual(
+            [x["capability_id"] for x in clause["rejected_unbindable_candidates"]],
+            ["analysis.bad"],
+        )
+        self.assertTrue(result["input_contract_bindability_enforced"])
+
     def test_plain_state_fetch_remains_valid_when_goal_supplies_state_path(self):
         goal="Fetch JSON from canonical/astra_runtime/state/example.json using url key source_url."
-        grounding=grounder.ground(goal,self.registry)
+        grounding=grounder.ground(
+            goal,self.registry,
+            compiler=compiler,proposal_binder=proposal_binder,root=REPO_ROOT,
+            enforce_bindability=True,
+        )
         ids=[
             x["capability_id"]
             for clause in grounding["clauses"]
