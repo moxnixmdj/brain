@@ -6,6 +6,7 @@ import sys
 import unittest
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
+REPO_ROOT=ROOT.parent
 
 def load(name,path):
     spec=importlib.util.spec_from_file_location(name,path)
@@ -98,7 +99,7 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
             composition.CompositionError,
             "GROUNDING_INPUT_CONTRACT_BINDABILITY_NOT_ENFORCED",
         ):
-            composition.compose(goal,g,self.registry(),FakeCompiler,ROOT)
+            composition.compose(goal,g,self.registry(),FakeCompiler,REPO_ROOT)
 
     def test_dependency_chain_plans_and_keeps_original_effects(self):
         goal="Create alpha then verify alpha"
@@ -106,7 +107,7 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
         g["goal"]=goal
         import hashlib
         g["goal_sha256"]=hashlib.sha256(goal.encode()).hexdigest()
-        result=composition.compose(goal,g,self.registry(),FakeCompiler,ROOT)
+        result=composition.compose(goal,g,self.registry(),FakeCompiler,REPO_ROOT)
         ok,reason=verifier.verify(goal,result,g,self.registry())
         self.assertTrue(ok,reason)
         self.assertTrue(result["problem"]["restrict_inherited_bound_capabilities"])
@@ -122,7 +123,7 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
         g=self.grounding(ambiguous=True)
         import hashlib
         g["goal"]=goal; g["goal_sha256"]=hashlib.sha256(goal.encode()).hexdigest()
-        result=composition.compose(goal,g,self.registry(),FakeCompiler,ROOT)
+        result=composition.compose(goal,g,self.registry(),FakeCompiler,REPO_ROOT)
         self.assertEqual(len(result["clauses"][0]["candidate_instance_ids"]),2)
         self.assertIn("artifact.alpha.ready",result["clauses"][0]["common_candidate_effects"])
         planned=planner.plan_actions(result["problem"])
@@ -133,7 +134,7 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
         goal="Create alpha then verify alpha"
         g=self.grounding(ambiguous=True,non_equivalent=True)
         with self.assertRaisesRegex(composition.CompositionError,"AMBIGUOUS_CANDIDATES_NOT_EFFECT_EQUIVALENT"):
-            composition.compose(goal,g,self.registry(),FakeCompiler,ROOT)
+            composition.compose(goal,g,self.registry(),FakeCompiler,REPO_ROOT)
 
     def test_unresolved_clause_fails_closed(self):
         goal="Create alpha"
@@ -142,14 +143,14 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
         g["clauses"][0]["candidates"]=[]
         g["unresolved_clause_indexes"]=[0]
         with self.assertRaisesRegex(composition.CompositionError,"UNRESOLVED_GROUNDED_CLAUSES"):
-            composition.compose(goal,g,self.registry(),FakeCompiler,ROOT)
+            composition.compose(goal,g,self.registry(),FakeCompiler,REPO_ROOT)
 
     def test_independent_verifier_rejects_tampered_action(self):
         goal="Create alpha then verify alpha"
         g=self.grounding()
         import hashlib
         g["goal"]=goal; g["goal_sha256"]=hashlib.sha256(goal.encode()).hexdigest()
-        result=composition.compose(goal,g,self.registry(),FakeCompiler,ROOT)
+        result=composition.compose(goal,g,self.registry(),FakeCompiler,REPO_ROOT)
         bad=copy.deepcopy(result)
         bad["problem"]["capabilities"][0]["action"]["args"]["capability_id"]="unrelated.beta"
         ok,reason=verifier.verify(goal,bad,g,self.registry())
