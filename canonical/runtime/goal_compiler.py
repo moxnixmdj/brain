@@ -3664,8 +3664,8 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
         "output_path":input_path,
         "fields":["left","right","threshold"],
         "records":[{
-          "left":{"$result":{"cycle":producers[0]["result_cycle"],"field":"value"}},
-          "right":{"$result":{"cycle":producers[1]["result_cycle"],"field":"value"}},
+          "left":{"$result":{"cycle":producer_specs[0]["cycle"],"field":producer_specs[0]["field"]}},
+          "right":{"$result":{"cycle":producer_specs[1]["cycle"],"field":producer_specs[1]["field"]}},
           "threshold":threshold,
         }],
       },
