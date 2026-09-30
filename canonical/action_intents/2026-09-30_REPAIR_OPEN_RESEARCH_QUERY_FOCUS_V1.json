@@ -34,7 +34,7 @@
     "do not introduce source domains, accessions, task-specific literals, learned models, or semantic claims beyond deterministic lexical relevance"
   ],
   "candidate_blobs": {
-    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py": "c913c20203b638caff050e7461a4b0023852ee10",
+    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py": "a6e8ade5b78b7e34f78503710945909661cd0b9e",
     "canonical/runtime/bound_capabilities/open_research_source_frontend.py": "a6fa0f32eab09791ec6a8cdabe961519d073be58",
     "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
     "canonical/tests/test_open_web_source_candidate_discovery.py": "cdde67e65f5c7fcf3793c5e10973fb409b8c4f66",
@@ -58,5 +58,6 @@
     ],
     "why_selected_route_is_fastest_sufficient": "It repairs the earliest demonstrated generic cause with two bounded data-flow changes: query construction and the relevance query input. It leaves downstream extraction and claim binding fail-closed.",
     "stop_rule": "GUARDED_INDEPENDENT_QUALIFICATION_THEN_MERGE_OR_LOCALIZE_FIRST_NEW_CAUSAL_DEFECT"
-  }
+  },
+  "qualification_note": "Candidate query-focus regex/strip escape bytes corrected before arming qualification; prior c913c202 candidate was never armed or qualified."
 }
