@@ -24,7 +24,8 @@
     "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1 acquired",
     "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 acquired and qualified on public run 36666659921",
     "World Bank Indicators API is an authoritative machine-readable JSON source already proven reachable by the current public carrier class",
-    "new task frozen before exact task endpoint values are inspected"
+    "new task frozen before exact task endpoint values are inspected",
+    "exact source-schema-only preflight run 36667643456 PASS; artifact 11077475194 sha256:4197181e0c1c588cd9f0fee01d76dc2590a85bc180a9c1e9b9bf03d328caf4b7; answer not computed"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -264,14 +265,12 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T04:06:00Z",
+        "checked_at_utc": "2026-09-30T04:10:50Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_WORLD_BANK_DEMOGRAPHY_TASK",
-        "status": "READY_PENDING_EXACT_SOURCE_SCHEMA_PREFLIGHT",
-        "all_required_dependencies_ready": false,
-        "failed_dependencies": [
-          "WORLD_BANK_EXACT_TASK_SOURCE_SCHEMA_PREFLIGHT_PENDING"
-        ],
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
         "execution_dependencies": [
           {
             "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
@@ -311,18 +310,20 @@
             "required": true,
             "volatility": "VOLATILE",
             "scope": "GLOBAL",
-            "status": "PENDING",
-            "observed_at_utc": "2026-09-30T04:06:00Z",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:10:46Z",
             "evidence": [
-              "Task frozen before exact endpoint schema probe"
+              "DIRECT_PROBE: source-schema-only preflight run 36667643456 passed all three exact frozen World Bank endpoints without computing the task answer",
+              "ARTIFACT:11077475194 sha256:4197181e0c1c588cd9f0fee01d76dc2590a85bc180a9c1e9b9bf03d328caf4b7"
             ],
             "evidence_classes": [
-              "PRECOMMITMENT"
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
             ],
             "evidence_scope": "GLOBAL"
           }
         ],
-        "execution_dependencies_complete": false
+        "execution_dependencies_complete": true
       }
     }
   }
