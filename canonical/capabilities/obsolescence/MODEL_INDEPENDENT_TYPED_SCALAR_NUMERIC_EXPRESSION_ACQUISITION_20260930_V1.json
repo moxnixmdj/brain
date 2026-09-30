@@ -1,0 +1,147 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_EVIDENCE_V1",
+  "capability_id": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_CROSS_DOMAIN_EXECUTION_PASS",
+  "canonical_base_commit": "7e4fceab972c4e2c0364ae4b7db934bc319ce2c0",
+  "source_pr": 298,
+  "qualified_candidate": {
+    "tested_brain_head_sha": "c4f811516d0fcb99d509ea5ae960ba33ade1d2f2",
+    "promoted_branch_restored_to_exact_tested_semantic_blobs": true,
+    "blobs": {
+      "canonical/runtime/goal_compiler.py": "f1c72b7a1d2aebf146d2702a49e425605fa17217",
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json": "23f7b79fca15593eb563bdcdba17c8b972f006db",
+      "canonical/runtime/bound_capabilities/numeric_expression_sympy.py": "443e3386f11156e55635556b6e8f8ad7d7733592",
+      "canonical/tests/test_numeric_expression_sympy_binding.py": "50beabfde103f8f3e75dc0139ab75ac88cd9c08d"
+    }
+  },
+  "route": "RESTRICTED_PYTHON_AST__SEMANTIC_PROVENANCE_BINDING__PROGRAMMATIC_SYMPY_1_14",
+  "scope": {
+    "inputs": "Causally prior finite numeric scalars uniquely bound by semantic provenance",
+    "grammar": [
+      "numeric literals",
+      "named scalar inputs",
+      "unary +",
+      "unary -",
+      "binary +",
+      "binary -",
+      "binary *",
+      "binary /",
+      "binary **"
+    ],
+    "exponent_magnitude_max": 32,
+    "result": "finite real scalar",
+    "failure_policy": "FAIL_CLOSED_ON_UNSAFE_SYNTAX__AMBIGUOUS_BINDING__UNBOUND_INPUT__NONNUMERIC_INPUT__NONFINITE_VALUE"
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "producer_supplier": {
+    "capability_id": "math.numeric_expression.sympy",
+    "supplier": "SymPy 1.14.0",
+    "dependency_closure": [
+      "sympy==1.14.0",
+      "mpmath==1.3.0"
+    ],
+    "dependency_closure_sha256": "4ec35feca806fd8634f50c07cf5b4ae5e0f405c369d0d42e3f3bcb84cb931a07",
+    "inherited_supplier_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+    "interface_security": "Python AST parsed and translated node-by-node to programmatic SymPy objects; arbitrary eval/exec/calls/attributes/subscripts/string sympify rejected."
+  },
+  "prestart_nonexecution": {
+    "workflow_run_id": 36666794300,
+    "status": "PRESTART_REGRESSION_FAIL__FRESH_TASK_NOT_EXECUTED",
+    "qualification_step": "SKIPPED",
+    "fresh_qualification_execution_count_after_run": 0,
+    "cause": "Regression accidentally requested unsupported relation wording outside acquisition scope.",
+    "disposition": "Regression narrowed to already-verified relation grammar before fresh qualification."
+  },
+  "deterministic_regression": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36666975481,
+    "job_id": 109733611864,
+    "conclusion": "success",
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "properties": [
+      "semantic producer binding is invariant to source order",
+      "multiple variables bind to distinct causally prior sources by semantic provenance",
+      "ambiguous producer binding fails closed",
+      "unsafe calls fail closed",
+      "attributes fail closed",
+      "exponent bound fails closed",
+      "expression output composes into the already-verified numeric relation grammar"
+    ]
+  },
+  "fresh_cross_domain_task": {
+    "task_id": "FRESH-TYPED-SCALAR-EXPRESSION-WORLD-BANK-BRAZIL-20260930-V1",
+    "domain": "DEMOGRAPHY_PUBLIC_STATISTICS",
+    "source_task_replay": false,
+    "source_urls": [
+      "https://api.worldbank.org/v2/country/BRA/indicator/SP.POP.TOTL?format=json&date=2023",
+      "https://api.worldbank.org/v2/country/BRA/indicator/SP.POP.TOTL?format=json&date=2020"
+    ],
+    "expression": "(population_2023 / population_2020) ** (1 / 3)",
+    "producer_result": {
+      "population_2023": 211140729,
+      "population_2020": 208660842,
+      "value": 1.003946000016421,
+      "model_dependency_count": 0
+    },
+    "provenance_bindings": {
+      "population_2023": {
+        "cycle": 0,
+        "field": "value",
+        "mode": "SEMANTIC_TOKEN_MATCH",
+        "score": 12
+      },
+      "population_2020": {
+        "cycle": 1,
+        "field": "value",
+        "mode": "SEMANTIC_TOKEN_MATCH",
+        "score": 12
+      }
+    },
+    "independent_python_oracle": {
+      "method": "Fresh direct World Bank refetch plus independent Python arithmetic; producer adapter not imported",
+      "population_2023": 211140729,
+      "population_2020": 208660842,
+      "value": 1.003946000016421,
+      "matched": true
+    },
+    "independent_wolfram_crosscheck": {
+      "expression": "N[(211140729/208660842)^(1/3),30]",
+      "value": "1.0039460000164210855970589406846353639425819807852527661364",
+      "matched_producer_to_reported_precision": true
+    },
+    "failures": [],
+    "controller_cycles": 4,
+    "compiler_clause_coverage_verified": true
+  },
+  "artifact": {
+    "workflow_run_id": 36666975481,
+    "job_id": 109733611864,
+    "artifact_id": 11076254658,
+    "name": "pr298-typed-scalar-expression-report",
+    "digest": "sha256:b4d4d5fc8559da9b0ecb44a347c27c151b534d2ca67b94c16b8c4c7c51baa88e"
+  },
+  "credit_effect": {
+    "reusable_capabilities_inherited_delta": 1,
+    "verified_real_tasks_completed_delta": 1,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0,
+    "parent_capability_promoted": false
+  },
+  "parent_reconciliation": {
+    "prior_blocker": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+    "blocker_status": "CLOSED_FOR_VERIFIED_RESTRICTED_TYPED_SCALAR_EXPRESSION_SCOPE",
+    "deferred_other_gap": "MODEL_INDEPENDENT_RENDERED_EVIDENCE_QUANTITATIVE_CLAIM_EXTRACTION_V1 remains OBSERVED_ONCE_DEFERRED_PENDING_ORTHOGONAL_RECURRENCE",
+    "parent_capability_status": "NOT_PROMOTED",
+    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_ASTRONOMY_OR_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+  },
+  "anti_overclaim": [
+    "Does not prove arbitrary mathematical reasoning.",
+    "Does not accept arbitrary Python syntax or arbitrary SymPy strings.",
+    "Does not prove comparisons, conditionals, matrices, calculus, units, or symbolic algebra through this interface.",
+    "Does not promote OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.",
+    "Does not authorize replay of spent astronomy, geophysics, or biophysics parent tasks."
+  ]
+}
