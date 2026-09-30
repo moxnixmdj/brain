@@ -122,15 +122,17 @@
       "challenger_refresh_decision": "Fresh post-repair route check completed from current main, current public runner success, and current GitHub API reachability."
     },
     "routes_considered": [
-      "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
-      "PRIVATE_GITHUB_ACTIONS_RETRY",
-      "HELDOUT003_SPRITE_REUSE"
+      "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
+      "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
+      "REOPEN_IMPLEMENTATION"
     ],
     "deleted_or_bypassed_paths": [
       "REQUESTS_TASK_REPLAY",
       "PRIVATE_ACTIONS_ZERO_STEP_RETRY",
       "HELDOUT003_SPRITE_REUSE",
-      "NEW_PLANNER_OR_MODEL"
+      "NEW_PLANNER_OR_MODEL",
+      "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
+      "REOPEN_IMPLEMENTATION"
     ],
     "selected_surviving_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
     "why_selected_route_is_fastest_sufficient": "The repaired route has exact-byte regression validation and a fresh direct real-task pass with independent refetch; inheritance needs no further implementation or execution.",
@@ -209,10 +211,10 @@
             "No surviving unverified grounding predicate remains after run 36652169397."
           ],
           "qualification_evidence": [
-            "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
+            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
           ],
           "qualification_evidence_classes": [
-            "BRAIN_INHERITED"
+            "INDEPENDENT_VERIFIER"
           ],
           "resolution": "DISQUALIFIED",
           "comparison": {
