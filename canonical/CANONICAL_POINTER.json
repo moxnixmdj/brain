@@ -635,7 +635,17 @@
         "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_BM25_PROMOTION_20260930_V1.json"
       ],
       "same_task_replay_allowed": false,
-      "parent_score_credit": 0
+      "parent_score_credit": 0,
+      "previous_reconciliation": {
+        "status": "OPEN_ENDED_PARENT_EVIDENCE_SCOPE_CORRECTED__STRUCTURED_DEMOGRAPHY_PRESERVED_SUPPORTING_ONLY",
+        "reason": "The parent useful behavior requires autonomous decomposition and material knowledge/tool discovery. Demography predeclared exact sources, JSON paths, formula and threshold, so its verified execution is supporting evidence but cannot authorize the open-ended parent claim.",
+        "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+        "blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+        "evidence_paths": [
+          "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json"
+        ],
+        "same_task_replay_allowed": false
+      }
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD_TARGET",
