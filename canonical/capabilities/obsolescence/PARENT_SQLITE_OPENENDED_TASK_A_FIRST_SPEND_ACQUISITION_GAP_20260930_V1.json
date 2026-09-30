@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SQLITE_OPEN_ENDED_TASK_A_FIRST_SPEND_RECONCILIATION_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "FRESH_PARENT_TASK_SPENT_ONCE__FIRST_INTEGRATED_ACQUISITION_GAP_LOCALIZED__NO_PARENT_CAPABILITY_CREDIT",
+  "canonical_base": "9504aa5cb4508971b6df6a862d01d740f340a45a",
+  "task": {
+    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+    "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
+    "genuinely_open_ended": true,
+    "source_task_replay": false,
+    "execution_count": 1,
+    "replay_allowed": false
+  },
+  "producer_execution": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 95,
+    "head_sha": "a85afc288b477152a99305c78b75e3bdd5b94a8b",
+    "public_run_id": 36674086293,
+    "job_id": 109755152141,
+    "artifact_id": 11078414137,
+    "artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56",
+    "canonical_cli": true,
+    "mission_path": "canonical/astra_runtime/missions/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json",
+    "runtime_exit_code": 3,
+    "runtime_status": "BLOCKED",
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "closure_precheck_passed": true
+  },
+  "first_causal_gap": {
+    "phase": "OPEN_ENDED_CAPABILITY_ACQUISITION",
+    "blocker": "CAPABILITY_ACQUISITION_REQUIRED",
+    "exact_error_class": "NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "apt": {
+      "status": "NO_COMPATIBLE_APT_CLI_CONTRACT",
+      "representative_rejections": [
+        "CLI_HELP_CONTRACT_TEXT_REQUIRED",
+        "CLI_OUTPUT_FORMAT_UNVERIFIABLE",
+        "PROBE_TIMEOUT"
+      ],
+      "observation": "Federated discovery reached zero-cost, zero-secret candidates, but the generic APT CLI contract inference/probing layer could not produce an admissible executable contract."
+    },
+    "pypi": {
+      "status": "PYPI_CONTRACT_CLASS_UNSUPPORTED",
+      "observation": "The generic PyPI acquisition route did not support the contract class required by the broad open-ended objective."
+    },
+    "excluded_alternative_causes": [
+      "carrier closure failure",
+      "missing canonical mission path",
+      "direct goal-compiler harness bypass",
+      "model planner dependency",
+      "controller action ceiling"
+    ],
+    "residual_gap": "MODEL_INDEPENDENT_OPEN_ENDED_CAPABILITY_ACQUISITION_CONTRACT_GENERALIZATION"
+  },
+  "independent_verification": {
+    "producer_semantically_completed": false,
+    "independent_oracle_executed": false,
+    "reason": "The producer failed before a consequential task result. Per the frozen oracle contract, preserve the earliest causal blocker and do not replay the task."
+  },
+  "accounting": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 1,
+    "parent_capability_promoted": false,
+    "scoreboard_credit": "RESIDUAL_GAP_LOCALIZED_ONLY"
+  },
+  "recursive_obs": {
+    "action_class": "GOVERNANCE_RECONCILIATION_AND_EVIDENCE_PRESERVATION",
+    "exact_base_commit": "9504aa5cb4508971b6df6a862d01d740f340a45a",
+    "discovery_required": false,
+    "exemption_reason": "This action preserves already-observed immutable execution evidence and corrects canonical mirrors. It selects no implementation route and spends no new gate.",
+    "deletion_first_result": "DELETE_ALL_SQLITE_SAME_TASK_REPLAYS",
+    "next_consequential_action_requires_fresh_obs": true
+  },
+  "next_action": "RUN_RECURSIVE_OBS_ON_PARENT_ACQUISITION_GAP__DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE_REPAIR_BUILD__SELECT_FASTEST_GENERAL_ROUTE__NO_SQLITE_REPLAY"
+}
