@@ -110,13 +110,20 @@ def rank(objective,candidates,limit=None):
 
     docs=[_tokens(_candidate_text(c)) for c in candidates]
     scored=_bm25_scores(q,docs)
+    unique_q=list(dict.fromkeys(q))
     rows=[]
     for index,(candidate,(score,parts)) in enumerate(zip(candidates,scored)):
+        matched=sorted(parts)
         rows.append({
             "original_index":index,
             "candidate":candidate,
             "lexical_relevance_score":round(float(score),12),
-            "matched_terms":sorted(parts),
+            "matched_terms":matched,
+            "matched_query_term_count":len(matched),
+            "query_term_count":len(unique_q),
+            "query_term_coverage_fraction":(
+                round(len(matched)/len(unique_q),12) if unique_q else 0.0
+            ),
             "term_contributions":{k:round(float(v),12) for k,v in sorted(parts.items())},
         })
     rows.sort(key=lambda x:(-x["lexical_relevance_score"],x["original_index"]))
@@ -129,6 +136,14 @@ def rank(objective,candidates,limit=None):
             "query_tokens":q,
             "ranked_candidates":rows,
         }
+    top=positive[0]
+    required_matches=(
+        1 if len(unique_q)<=1
+        else min(4,max(2,(len(unique_q)+3)//4))
+    )
+    admission_verified=(
+        int(top.get("matched_query_term_count") or 0)>=required_matches
+    )
     if limit is not None:
         rows=rows[:max(1,min(int(limit),len(rows)))]
     return {
@@ -140,7 +155,12 @@ def rank(objective,candidates,limit=None):
         "candidate_count":len(candidates),
         "positive_relevance_count":len(positive),
         "ranked_candidates":rows,
-        "top_candidate_original_index":positive[0]["original_index"],
+        "top_candidate_original_index":top["original_index"],
+        "top_candidate_lexical_admission_verified":admission_verified,
+        "top_candidate_matched_query_term_count":top["matched_query_term_count"],
+        "minimum_matched_query_terms_for_admission":required_matches,
+        "top_candidate_query_term_coverage_fraction":top["query_term_coverage_fraction"],
+        "lexical_admission_policy":"QUERY_SIZE_SCALED_SUBJECT_COVERAGE__MIN_1_OR_2__MAX_4_TERMS",
         "output_verified":True,
     }
 
