@@ -104,7 +104,7 @@ def rank(objective,candidates,limit=None):
     focus=_focus(objective)
     if not focus:
         return {**base,"status":"RELEVANCE_UNRESOLVED","reason":"RESEARCH_QUERY_FOCUS_UNRESOLVED","ranked_candidates":[]}
-    q=[str(x) for x in (focus.get("tokens") or []) if str(x)]
+    q=_tokens(focus.get("query"))
     if not q:
         return {**base,"status":"RELEVANCE_UNRESOLVED","reason":"NO_DISCRIMINATIVE_OBJECTIVE_TOKENS","ranked_candidates":[]}
 
