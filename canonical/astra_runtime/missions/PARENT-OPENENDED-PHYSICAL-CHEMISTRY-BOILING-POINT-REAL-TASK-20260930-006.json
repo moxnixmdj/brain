@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-PHYSICAL-CHEMISTRY-BOILING-POINT-REAL-TASK-20260930-006",
+  "purpose": "Execute the frozen fresh physical-chemistry open-ended parent Task C exactly once through the canonical model-independent ASTRA runtime after guarded-qualified generic research query-focus/relevance repair. No prewired source, identifier, numeric values, tool, command, calculation recipe, answer, or task-specific runtime patch.",
+  "goal": "Assess whether the normal boiling point of ethanol is more than 10 kelvin higher than the normal boiling point of methanol. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant primary records, determine how to extract and interpret the two normal boiling points, choose and run a zero-cost verification method, identify material definition, reference-condition, purity, or measurement limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-physical-chemistry-boiling-point-open-ended-parent-task-c",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-OPENENDED-PHYSICAL-CHEMISTRY-BOILING-POINT-REAL-TASK-20260930-006.json",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true,
+    "source_task_blob_sha": "95db286c282bc0f37b93488a2c2a369dee6a1a50"
+  }
+}
