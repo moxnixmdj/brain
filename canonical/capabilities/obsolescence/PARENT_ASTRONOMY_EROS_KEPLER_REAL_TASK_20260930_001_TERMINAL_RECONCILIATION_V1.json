@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_REAL_TASK_TERMINAL_RECONCILIATION_V1",
+  "task_id": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "ASTRONOMY_ORBITAL_MECHANICS_QUANTITATIVE_REASONING",
+  "status": "FAILED_FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT__NO_REPLAY",
+  "canonical_base_commit": "43476b77a1314988183e3daed5f3f0d603f79877",
+  "source_pr": 294,
+  "source_preflight": {
+    "first_run_id": 36664672051,
+    "first_result": "FAILED_STALE_ARRAY_INDEX_ASSUMPTION",
+    "schema_correction_run_id": 36664734289,
+    "corrected_schema": {
+      "semimajor_axis_index": 1,
+      "semimajor_axis_name": "a",
+      "semimajor_axis_units": "au",
+      "orbital_period_index": 8,
+      "orbital_period_name": "per",
+      "orbital_period_units": "d"
+    },
+    "answer_computed_during_preflight": false
+  },
+  "one_shot_execution": {
+    "run_id": 36664896545,
+    "job_id": 109727357700,
+    "artifact_id": 11075578533,
+    "artifact_digest": "sha256:1602e529f3e33249e586a67475aff947be0d2b7ce97db0bd82c770a2f7bba734",
+    "execution_count": 1,
+    "replay_allowed": false,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "causal_failure": {
+    "first_brain_semantic_blocker": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "failing_subgoal": "Calculate the Kepler predicted orbital period in days using P_pred_days = 365.2568983 * (a_au ** 1.5)",
+    "localized_gap": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+    "compiled_prefix_verified": [
+      "AUTHORITATIVE_JSON_KNOWLEDGE_FETCH semimajor axis",
+      "AUTHORITATIVE_JSON_KNOWLEDGE_FETCH observed period"
+    ],
+    "secondary_carrier_issue": "Public capsule omitted canonical plain_goal_bound_grounding.py, encountered only after direct compiler had already failed on the Kepler expression; this is not the parent causal blocker and does not authorize task replay."
+  },
+  "route_recomputation": {
+    "status": "ORIGINAL_SYMPY_SELECTION_SUPERSEDED_BEFORE_CANONICAL_MERGE__CURRENT_BASE_OBS_REQUIRED",
+    "original_candidate": "BIND_EXISTING_VERIFIED_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+    "newly_identified_dominator_candidate": "REUSE_ALREADY_BOUND_VERIFIED_JQ_VIA_RESTRICTED_TYPED_SCALAR_NUMERIC_AST",
+    "why_reopened": [
+      "json.query.jq is already VERIFIED_BOUND_CAPABILITY in Brain and already executes on the current controller surface.",
+      "jq supports numeric multiplication and pow(), the exact operation family exposed by the astronomy first causal gap.",
+      "A jq lowering can reuse existing result-reference and JSON-materialization machinery, deleting a new SymPy registry/adapter/dependency path.",
+      "The original terminal reconciliation did not evaluate jq as a challenger for the expression gap, so its SymPy route selection lacked a complete live challenger frontier."
+    ],
+    "authoritative_next_action": "MERGE_TERMINAL_TASK_EVIDENCE_ONLY__THEN_RUN_CURRENT_BASE_RECURSIVE_OBS_ON_MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION__DO_NOT_REPLAY_ASTRONOMY",
+    "prohibited": [
+      "REPLAY_ASTRONOMY_TASK",
+      "ASTRONOMY_SPECIFIC_FORMULA_PATCH",
+      "MODEL_API_OR_LOCAL_MODEL_COGNITION",
+      "ARBITRARY_STRING_SYMPIFY_OR_EVAL",
+      "PROMOTE_ANY_EXPRESSION_ROUTE_BEFORE_FRESH_NON_ASTRONOMY_QUALIFICATION"
+    ]
+  },
+  "parent_capability_promoted": false,
+  "progress_credit": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 1
+  }
+}

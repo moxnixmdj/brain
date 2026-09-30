@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_ASTRONOMY_JPL_SOURCE_PREFLIGHT_V2",
+  "task_id": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+  "status": "PASS",
+  "exact_task_blob": "4cb0fbb4f46cf3c7302688197117cbaffe2d3943",
+  "exact_task_sha256": "f4858972380b57781b1f0c1e10f479c1b0b3272e11d2318ab6d7aa44c9d9bc79",
+  "carrier_repository": "moxnixmdj/verification-capsule-runner",
+  "workflow_run_id": 36664983224,
+  "job_id": 109727613879,
+  "artifact_id": 11075747915,
+  "artifact_digest": "sha256:218b5081ebc0c6af7fc9c2a04e5d504f82800e797b62e4f6a4ac55f83faeae61",
+  "observed_at_utc": "2026-09-30T03:34:20Z",
+  "configured_paths_verified": true,
+  "source": {
+    "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Eros&full-prec=true",
+    "http_status": 200,
+    "signature_source": "NASA/JPL Small-Body Database (SBDB) API",
+    "signature_version": "1.3",
+    "object": "433 Eros",
+    "semimajor_axis_path": [
+      "orbit",
+      "elements",
+      1,
+      "value"
+    ],
+    "semimajor_axis_value": 1.458243716760167,
+    "semimajor_axis_units": "au",
+    "period_path": [
+      "orbit",
+      "elements",
+      8,
+      "value"
+    ],
+    "period_value": 643.1963890927677,
+    "period_units": "d"
+  },
+  "task_executed": false,
+  "preflight_only": true,
+  "prior_preflight_invalidated": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_JPL_SOURCE_PREFLIGHT_20260930_V1.json"
+}

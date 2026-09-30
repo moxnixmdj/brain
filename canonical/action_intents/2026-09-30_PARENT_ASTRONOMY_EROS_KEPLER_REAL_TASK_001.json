@@ -1,0 +1,331 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either add one independently verified materially different parent real-task result with zero model dependency, or replace the broad parent blocker with the first specific causal gap exposed by the frozen astronomy task. No repair or parent promotion is authorized by this intent alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 43476b77a1314988183e3daed5f3f0d603f79877",
+    "spent geophysics task replay remains forbidden",
+    "fresh demographics numeric-relation qualification was component evidence, not a parent promotion",
+    "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1 is now acquired",
+    "model-independent evidence synthesis, grounding, and executable composition remain acquired",
+    "NASA/JPL SBDB API official documentation exposes machine-readable orbital elements including semimajor axis and period",
+    "task frozen before querying the exact Eros source URL",
+    "exact frozen JPL source preflight run 36664673653 PASS; task not executed",
+    "public JPL schema preflight run 36664734289 PASS on exact frozen URL",
+    "schema-only preflight located semimajor axis at orbit.elements[1] name=a units=au and orbital period at orbit.elements[8] name=per units=d; no task result was computed",
+    "preflight run 36664673653 invalidated because its task blob 74b9ccf... was superseded before execution",
+    "corrected exact-task preflight run 36664983224 PASS on task blob 4cb0fbb4...; configured elements[1] -> a and elements[8] -> per verified; task still unexecuted"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Preflight the exact frozen JPL source on the zero-spend public carrier, then execute PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001 exactly once. On semantic success, independently re-fetch and recompute without producer imports. On failure, preserve only the first causal blocker and recompute the frontier before any repair or replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "43476b77a1314988183e3daed5f3f0d603f79877",
+    "real_outcome": "Test the current model-independent Brain parent capability on a fresh orbital-mechanics task that requires authoritative retrieval, nonlinear quantitative computation, comparison, provenance, and independent verification.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Execute a new materially different parent real task rather than another child benchmark or repair.",
+      "proxy_goals_deleted": [
+        "more numeric-relation unit tests",
+        "geophysics replay",
+        "demography replay",
+        "framework search",
+        "model qualification",
+        "manual one-off answer"
+      ],
+      "surviving_necessity": "A fresh parent task is the shortest path to either broad capability evidence or the next real causal gap."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "knowledge JSON fetch",
+        "verified bound jq",
+        "current deterministic controller and goal compiler"
+      ],
+      "external_existing_routes_checked": [
+        "NASA/JPL SBDB machine-readable API",
+        "one-off Python orbital calculation",
+        "SymPy deterministic math",
+        "frontier-model cognition"
+      ],
+      "capability_work_deleted": [
+        "no preemptive formula adapter",
+        "no new supplier",
+        "no model route",
+        "no hand-coded parent answer",
+        "no old-task replay"
+      ],
+      "surviving_gap": "Unknown until the frozen parent task executes; no failure is inferred from static inspection."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Broad parent-evidence gap after the prior numeric seam was closed.",
+      "delete_bypass_substitute_options": [
+        "reuse current full stack",
+        "reuse existing JPL API",
+        "reject one-off answer as parent proof",
+        "reject preemptive math repair",
+        "stop at first observed causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
+        "HAND_CODE_ONE_OFF_ORBIT_SCRIPT",
+        "PREEMPTIVELY_ADD_GENERAL_NUMERIC_FORMULA_ENGINE",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Only direct execution of the inherited stack answers the parent capability question. A one-off script answers one instance, a formula-engine repair assumes a blocker before evidence, and model cognition cannot earn the targeted model-independent credit.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "On completion, independently re-fetch JPL data and recompute by element name with Python math; on failure, terminal trace is sufficient to localize only the earliest causal gap."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "further child benchmarking until this task resolves",
+        "geophysics replay",
+        "demography replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live authoritative JSON acquisition",
+        "grounding",
+        "composition",
+        "jq numeric relation",
+        "decision synthesis",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "If this task passes, adjudicate parent scope separately. If it fails, OBS only the first new causal gap and never replay this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical capability inventory",
+        "reused established public carrier",
+        "selected an orthogonal astronomy task from an official machine-readable API",
+        "froze task before exact source probe"
+      ],
+      "search_stop_decision": "Direct parent execution now has higher information gain than more route research; JPL SBDB is an official machine-readable source and no new framework is required to test the current stack.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and JPL official API documentation were refreshed before task freeze; exact endpoint readiness remains a pre-execution condition."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
+      "HAND_CODE_ONE_OFF_ORBIT_SCRIPT",
+      "PREEMPTIVELY_ADD_GENERAL_NUMERIC_FORMULA_ENGINE",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKS",
+      "HAND_CODE_ONE_OFF_ORBIT_SCRIPT_AS_PARENT_PROOF",
+      "PREEMPTIVE_FORMULA_ENGINE_REPAIR",
+      "MODEL_COGNITION",
+      "OLD_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
+    "why_selected_route_is_fastest_sufficient": "It consumes the current verified stack directly on a materially different scientific task and yields decisive evidence with no implementation unless execution proves a missing primitive.",
+    "expected_parent_level_state_change": "Either add one independently verified materially different parent real-task result with zero model dependency, or replace the broad parent blocker with the first specific causal gap exposed by the frozen astronomy task. No repair or parent promotion is authorized by this intent alone.",
+    "stop_condition": "Preflight the exact frozen JPL source on the zero-spend public carrier, then execute PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001 exactly once. On semantic success, independently re-fetch and recompute without producer imports. On failure, preserve only the first causal blocker and recompute the frontier before any repair or replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:27:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_PARENT_STACK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 43476b77a1314988183e3daed5f3f0d603f79877",
+          "verified model-independent child stack",
+          "new bounded jq numeric relation capability"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "NASA/JPL SBDB API official documentation: machine-readable orbital elements include semimajor axis and orbital period"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "current verified Brain runtime and bound-capability registry; no additional package required to attempt the parent task"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No alternate framework is required to answer the parent capability question; direct execution dominates framework acquisition."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent scientific retrieval nonlinear orbital calculation quantitative verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "NASA JPL SBDB machine readable orbital elements API"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "current Brain stack versus one-off orbital script versus preemptive formula engine"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current NASA JPL SBDB API documentation"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
+          "evidence": [
+            "current parent stack is verified at child layers",
+            "fresh astronomy task frozen before live query"
+          ],
+          "qualification_evidence": [
+            "main 43476b77a1314988183e3daed5f3f0d603f79877",
+            "NASA/JPL SBDB official documentation"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests integrated behavior.",
+            "CAPABILITY_STRENGTH": "Exercises a new domain and nonlinear quantitative reasoning.",
+            "WALL_CLOCK": "No repair before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Uses official JPL JSON plus established public carrier.",
+            "VERIFIABILITY": "Frozen formula and independent re-fetch/recompute oracle."
+          }
+        },
+        {
+          "route": "HAND_CODE_ONE_OFF_ORBIT_SCRIPT",
+          "evidence": [
+            "Could solve the instance directly."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can answer one instance.",
+            "CAPABILITY_STRENGTH": "Does not test inherited parent capability.",
+            "WALL_CLOCK": "Fast to one answer but slower to terminal capability evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for the instance.",
+            "VERIFIABILITY": "High for the answer, weak for transferable capability."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger beats direct reuse of the current model-independent stack for time-to-decisive parent-capability evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:34:20Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FRESH_JPL_ORBITAL_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:22:46Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36664102642 completed successfully on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_43476b77a1314988183e3daed5f3f0d603f79877",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:27:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: current main exact base"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "JPL_SBDB_EROS_FROZEN_URL",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:34:20Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36664983224 validated exact task blob 4cb0fbb4f46cf3c7302688197117cbaffe2d3943 and its configured paths orbit.elements[1].value -> a=1.458243716760167 au and orbit.elements[8].value -> per=643.1963890927677 d",
+              "ARTIFACT:11075747915 sha256:218b5081ebc0c6af7fc9c2a04e5d504f82800e797b62e4f6a4ac55f83faeae61"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
