@@ -363,5 +363,35 @@
         "execution_dependencies_complete": true
       }
     }
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Exact candidate bytes passed compiler regression and adversarial rejection tests.",
+      "Fresh public qualification run 36666277034 passed independent recomputation.",
+      "Earlier run 36666210403 exposed only a verifier-field mismatch; candidate bytes were unchanged before the passing rerun."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json"
+    ],
+    "independent_verification_evidence_paths": [
+      "verification-capsule-runner run 36666277034 artifact 11075549084"
+    ],
+    "capability_package_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1.json",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": true,
+    "cross_domain_distinct": true,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "",
+    "producer_execution_suppliers": [
+      "SymPy 1.14.0",
+      "mpmath 1.3.0",
+      "GitHub API"
+    ],
+    "independent_verifier_suppliers": [
+      "Python 3.12 stdlib math",
+      "independent GitHub API refetch"
+    ]
   }
 }
