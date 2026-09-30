@@ -3,7 +3,7 @@
   "action_id": "VERIFY-MINI-SWE-SUPERPOWERS-TB4-REACT-LEAD-FORM-20260930-V1",
   "status": "PROPOSED_CURRENT_BASE__COMPOSED_PACKAGE_CANONICAL__PUBLIC_SESSION_BRIDGE_READY__TASK_UNREAD",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "ce67eb200cb6ab7644fb432be46006ed8941fd32",
+  "canonical_base_commit": "f7ac78d3b6158a4169039961d6d8d1fa9e9a35d7",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
@@ -86,7 +86,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "ce67eb200cb6ab7644fb432be46006ed8941fd32",
+    "canonical_base_commit": "f7ac78d3b6158a4169039961d6d8d1fa9e9a35d7",
     "real_outcome": "Get fresh uncontaminated independently verified evidence on the canonical mini-SWE + Superpowers route using the new public runtime-only session bridge, after two prior candidate tasks were invalidated before execution.",
     "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "obs_goal": {
@@ -440,5 +440,13 @@
         ]
       }
     }
+  },
+  "trusted_current_base_validation_request": {
+    "requested_against_main_sha": "f7ac78d3b6158a4169039961d6d8d1fa9e9a35d7",
+    "purpose": "Run trusted drift/lease guard against the exact current canonical action before benchmark instruction exposure or expensive execution.",
+    "changes_capability_claim": false,
+    "changes_route": false,
+    "changes_benchmark_task": false,
+    "incremental_spend_usd": 0
   }
 }
