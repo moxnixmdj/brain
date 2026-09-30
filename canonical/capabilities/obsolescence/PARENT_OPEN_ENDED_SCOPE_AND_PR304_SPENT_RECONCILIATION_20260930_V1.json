@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_CAPABILITY_EVIDENCE_SCOPE_RECONCILIATION_V1",
+  "reconciliation_id": "PARENT-OPEN-ENDED-SCOPE-AND-PR304-SPENT-RECONCILIATION-20260930-V1",
+  "status": "PARENT_SCOPE_CORRECTED__PR301_BOUNDED_EVIDENCE_PRESERVED__PR304_SPENT_FAIL_PRESERVED__OPEN_ENDED_TASK_A_REQUIRED",
+  "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+  "source_pr": 310,
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "scope_basis": {
+    "useful_behavior": "Given a consequential open-ended technical or scientific objective in a domain that may not be pre-mapped, autonomously decompose the problem, discover and evaluate relevant existing knowledge and tools, perform quantitative reasoning and computation, revise the plan when evidence falsifies assumptions, synthesize evidence across sources, independently verify consequential claims, and deliver a decision-quality real-world result with provenance and a reusable operating method.",
+    "frontier_bar": "A narrow deterministic domain calculator is insufficient.",
+    "promotion_firewall": "No frontier-capability promotion may exceed the exact scope proven by runtime-derived producer evidence and independent verification."
+  },
+  "bounded_evidence_preserved": {
+    "task_id": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
+    "public_run_id": 36667844172,
+    "public_job_id": 109736256301,
+    "artifact_id": 11076359417,
+    "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+    "model_dependency_count": 0,
+    "independent_oracle_verified": true,
+    "classification": "VERIFIED_BOUNDED_MODEL_INDEPENDENT_INTEGRATED_TASK__NOT_OPEN_ENDED_PARENT_ACQUISITION_CREDIT",
+    "reason": "The task pre-specified authoritative URLs, JSON paths, quantitative formula, threshold, and execution shape, so it did not exercise the parent capability's defining autonomous decomposition/source/tool-discovery front half."
+  },
+  "spent_pr304": {
+    "task_id": "PARENT-CHEMISTRY-AMMONIUM-CHLORIDE-MASS-BALANCE-REAL-TASK-20260930-001",
+    "brain_pr": 304,
+    "public_runner_pr": 31,
+    "public_run_id": 36669136068,
+    "public_job_id": 109740159666,
+    "artifact_id": 11077363706,
+    "artifact_digest": "sha256:b8463686e9555d941962c203d15e1c8af7fdb1c510a4617325c4e5d77c43c0a1",
+    "task_blob": "d423431ec9770283e62dfa590fe3f45c623f3f53",
+    "execution_count": 1,
+    "status": "FAIL_FIRST_CAUSAL_GAP__TASK_SPENT__NO_REPLAY",
+    "first_causal_blocker": "EXECUTE:RuntimeError:JQ_FAILED:NUMERIC_RELATION_INPUT_NOT_NUMBER",
+    "independent_oracle_executed": false,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "parent_task_completed": false,
+    "same_task_replay_allowed": false,
+    "parent_open_ended_scope_credit": false,
+    "note": "The compiled route reached typed expression plus numeric relation execution, then failed because the inherited relation boundary received a non-number. This failure is preserved, but repairing it is not the current parent priority because the frozen task itself was prewired and scope-insufficient for open-ended parent proof."
+  },
+  "adjudication": {
+    "open_ended_model_independent_parent_tasks_verified": 0,
+    "bounded_model_independent_integrated_tasks_verified": 1,
+    "parent_capability_acquired": false,
+    "frontier_dependency_removed": false,
+    "surviving_gap": "PARENT_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_A_REQUIRED__PR301_BOUNDED_PREWIRED_TASK_INSUFFICIENT_FOR_PARENT_SCOPE",
+    "next_action": "RUN_ONE_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__OBJECTIVE_ONLY__MODEL_FREE__STOP_ON_FIRST_CAUSAL_GAP",
+    "next_task_contract": "Objective-only genuinely open-ended technical/scientific task. No preprovided authority, domain, source URL, dataset identifier, extraction path, formula, or controller action graph. Runtime-derived model_dependency_count=0 required. Execute exactly once; on failure preserve only the first causal gap; on completion independently verify primary evidence and consequential calculations."
+  },
+  "scoreboard_delta": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "progress_credit": [],
+  "incremental_spend_usd": 0
+}
