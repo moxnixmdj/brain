@@ -57,7 +57,7 @@
     {
       "id": "CANONICAL_FRONTIER_SURFACES_DIVERGE",
       "observed_incident": "Canonical pointer temporarily retained an older blocker/next-step while other canonical frontier surfaces had advanced.",
-      "must_fail_or_resolve": "Every frontier-sensitive PR must leave pointer, hierarchy, queue, and active scoreboard frontier mirrors in exact agreement."
+      "must_fail_or_resolve": "Every frontier-sensitive PR must leave pointer, hierarchy, queue, active target-capability record, and active scoreboard frontier mirrors in exact agreement; drift in any one must fail closed."
     },
     {
       "id": "MODEL_INDEPENDENCE_INFERRED_INSTEAD_OF_RUNTIME_DERIVED",
