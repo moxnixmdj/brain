@@ -1,0 +1,159 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SYNC-V6-OBS-ORDER-AND-LEASE-SEMANTICS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "probe_id": null,
+  "causal_blocker": "V6_CAPABILITY_INTERNALIZATION_ORDER_AND_LEASE_SEMANTICS_CONTRADICT_TRUSTED_GUARD",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::V6_CAPABILITY_INTERNALIZATION_ORDER_AND_LEASE_SEMANTICS_CONTRADICT_TRUSTED_GUARD",
+  "expected_parent_frontier_change": "Synchronize the trusted OBS control plane with current V6 capability-internalization semantics: DELETE→BYPASS→REUSE→SUBSTITUTE→COMPOSE→CONFIGURE→INTEGRATE and blocker-lease identity excluding action_kind, without changing capability credit or the active advanced-coding frontier.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/CANONICAL_POINTER.json requires CONFIGURE/INTEGRATE acquisition tail",
+    "canonical/runtime/enforce_goal_hierarchy.py still requires REPAIR/BUILD",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json still requires REPAIR/BUILD",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json and GOAL_HIERARCHY_ACTION_GATE_V6.json still require REPAIR/BUILD",
+    "GOAL_HIERARCHY_ACTION_GATE_V6 blocker lease still lists action_kind while trusted validator excludes it",
+    "Current main ddd3abd6a0445edba749eef2f1ba6010a9ce3d32 includes orthogonal Stirrup professional-work augmentation and leaves active coding frontier unchanged."
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the control-plane synchronization after exact-head trusted validation: validator, recursive OBS law/schema, active gates, live references, and permanent regression must agree; capability counters and active coding target remain unchanged; then immediately resume the Brain-owned mini-SWE+Superpowers composed route.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly ordered Brain and all necessary controls to be updated perfectly, to assume many mistakes by default, and to make the goal real using the cleverest fastest route.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ddd3abd6a0445edba749eef2f1ba6010a9ce3d32",
+    "real_outcome": "Remove contradictory control semantics that currently make honest V6 capability-internalization action receipts impossible to validate consistently.",
+    "required_capability": "FAIL_CLOSED_V6_CONTROL_PLANE_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "One internally consistent trusted control plane that authorizes only current V6 capability-internalization actions.",
+      "proxy_goals_deleted": [
+        "New scheduler",
+        "New workflow",
+        "New governance framework",
+        "Capability benchmark activity"
+      ],
+      "surviving_necessity": "Synchronize only the contradictory OBS order and lease semantics already exposed by live current state."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current trusted validator",
+        "V6 mission pointer",
+        "V4 OBS receipt schema",
+        "V6/V7 active gates",
+        "V3 recursive OBS law"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No capability implementation",
+        "No new execution carrier",
+        "No benchmark spend"
+      ],
+      "surviving_gap": "Trusted control surfaces encode mutually incompatible route-order and lease-identity contracts."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic governance consistency defect blocking honest guarded execution.",
+      "delete_bypass_substitute_options": [
+        "Bypass guard rejected",
+        "Lie in receipt rejected",
+        "Patch only validator rejected because gates/schema remain contradictory",
+        "Synchronize all active control surfaces survives"
+      ],
+      "surviving_causal_blocker": "V6_CAPABILITY_INTERNALIZATION_ORDER_AND_LEASE_SEMANTICS_CONTRADICT_TRUSTED_GUARD"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Synchronize existing validator+schema+gates+pointer references in place through versioned artifacts"
+      ],
+      "losing_routes_reason": "Any partial patch preserves contradictory authority; any new framework adds machinery.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Verify exact cross-surface equality plus trusted base-validator semantics; no capability benchmark."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "V4 receipt schema",
+        "V7 critical gate",
+        "V6 goal gate",
+        "V3 recursive OBS law as active authority"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "current lease-dedupe semantics",
+        "V6 no-underlying-invention acquisition semantics"
+      ],
+      "fresh_reuse_plan": "The next composed advanced-coding action must author a current receipt using CONFIGURE/INTEGRATE and pass the updated trusted validator."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused live pointer and validator contradiction evidence",
+        "Scoped to two exact contract mismatches"
+      ],
+      "search_stop_decision": "The contradictions are direct local facts; external discovery cannot improve the repair route.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External route discovery is not applicable to this control-plane synchronization."
+    },
+    "routes_considered": [
+      "SYNC_EXISTING_CONTROL_SURFACES",
+      "BYPASS_GUARD",
+      "PATCH_VALIDATOR_ONLY",
+      "BUILD_NEW_GOVERNANCE_LAYER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BYPASS_GUARD",
+      "PATCH_VALIDATOR_ONLY",
+      "BUILD_NEW_GOVERNANCE_LAYER"
+    ],
+    "selected_surviving_route": "SYNC_EXISTING_CONTROL_SURFACES",
+    "why_selected_route_is_fastest_sufficient": "It changes only the existing contradictory contracts, preserves fail-closed enforcement, and restores immediate execution authority for current V6 capability work.",
+    "expected_parent_level_state_change": "Synchronize the trusted OBS control plane with current V6 capability-internalization semantics: DELETE→BYPASS→REUSE→SUBSTITUTE→COMPOSE→CONFIGURE→INTEGRATE and blocker-lease identity excluding action_kind, without changing capability credit or the active advanced-coding frontier.",
+    "stop_condition": "Merge only the control-plane synchronization after exact-head trusted validation: validator, recursive OBS law/schema, active gates, live references, and permanent regression must agree; capability counters and active coding target remain unchanged; then immediately resume the Brain-owned mini-SWE+Superpowers composed route.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Governance synchronization only; no external capability route is being selected."
+    }
+  },
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__NO_OPAQUE_TARGET_CAPABILITY_CREDIT",
+    "underlying_capability_invention": "FORBIDDEN",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_SYNC_V6_OBS_ORDER_AND_LEASE_SEMANTICS_V1.json"
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "NOT_APPLICABLE_GOVERNANCE",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS",
+    "GENERAL_SUBSTRATE_TEST": "NOT_APPLICABLE_GOVERNANCE",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "NOT_APPLICABLE_GOVERNANCE",
+    "OWNERSHIP_PACKAGE_TEST": "NOT_APPLICABLE_GOVERNANCE"
+  }
+}
