@@ -3,7 +3,7 @@
   "evidence_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "REOPENED_BY_POST_PROMOTION_REGRESSION",
+  "status": "REVOKED_BY_REGRESSION__REPAIR_VALIDATED__AWAIT_FRESH_REQUALIFICATION",
   "route": "DETERMINISTIC_GROUNDED_EXECUTABLE_COMPOSITION_PLUS_CAPABILITY_GRAPH_PLANNER",
   "component_verification": {
     "run_id": 36647904127,
@@ -34,7 +34,7 @@
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "frontier_dependency_removed": false,
-  "verdict": "PRIOR_PASS_REVOKED_AT_BROAD_SCOPE__NARROW_SUCCESS_EVIDENCE_PRESERVED",
+  "verdict": "PRIOR_ACQUISITION_CREDIT_REMAINS_REVOKED__REPAIR_PASS_DOES_NOT_RESTORE_CREDIT",
   "post_promotion_falsification": {
     "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
     "source_pr": 267,
@@ -44,5 +44,15 @@
     "prior_successes_preserved": true,
     "reusable_capability_credit_revoked": true,
     "fresh_reuse_credit_revoked": true
+  },
+  "repair_validation": {
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_VALIDATION_20260930_V1.json",
+    "status": "PASS",
+    "exact_public_validation_runs": [
+      36654897859,
+      36655498906,
+      36656123767
+    ],
+    "provider_backed_path_binding_violations": 0
   }
 }
