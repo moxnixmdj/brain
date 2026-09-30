@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-SEISMOLOGY-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_B_REQUIRED_AFTER_BROAD_ROUTING_REPAIR",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_SEISMOLOGY_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended seismology parent task with no supplied authority, source URL, catalog identifier, event identifier, numeric values, formula, tool recipe, or answer; execute exactly once and stop on the first new causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "HTTP/2 parent Task A is spent and replay-forbidden after guarded run 36688193204.",
+    "Brain PR474 merged exact guarded-qualified broad multi-clause routing repair on current main.",
+    "SQLite, climate, numerical stability, HTTP/2, and prior structured tasks are excluded from freshness.",
+    "Seismology event-comparison domain is materially different from the spent HTTP/2 network-protocol parent."
+  ],
+  "evidence_presence_classification": "GENERIC_ROUTING_REPAIR_MERGED__FRESH_PARENT_VALIDATION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen task. On semantic completion, independently verify before any parent promotion. On failure, preserve only the earliest causal blocker and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "The repaired inherited model-independent route must now prove genuine open-ended parent behavior on a materially different scientific domain.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_SEISMOLOGY_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_TASK_A_REPLAY",
+      "TASK_SPECIFIC_SEISMOLOGY_PATCH",
+      "PREDECLARED_AUTHORITY_OR_SOURCE",
+      "PREDECLARED_NUMERIC_VALUES",
+      "MODEL_PLANNER",
+      "PREWIRED_TOOL_OR_CALCULATION_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The task exercises autonomous decomposition, authoritative-source discovery, evidence extraction, numeric claim binding, executable comparison, scoped interpretation, and provenance in a scientific domain unrelated to the spent protocol task.",
+    "expected_parent_level_state_change": "Either obtain admissible genuine open-ended parent evidence or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
