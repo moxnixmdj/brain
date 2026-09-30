@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-SEISMOLOGY-SOURCE-ADMISSION-ROOT-CAUSE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_THRESHOLD_BINDING_BLOCKER_FALSIFIED_BY_PRESERVED_TASK_B_EVIDENCE__UPSTREAM_SCHOLARLY_PROVENANCE_ADMISSION_DEFECT_DOMINATES",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_THRESHOLD_BINDING_BLOCKER_FALSIFIED_BY_PRESERVED_TASK_B_EVIDENCE__UPSTREAM_SCHOLARLY_PROVENANCE_ADMISSION_DEFECT_DOMINATES",
+  "expected_parent_frontier_change": "Reopen the parent blocker from objective-literal threshold parsing to the upstream generic scholarly-provenance admission/materialization defect proven by the spent seismology Task B evidence; preserve zero parent credit and no replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Guarded seismology Task B run 36693929830 was atomically admitted and physically executed exactly once; replay is forbidden.",
+    "Artifact 11086898224 preserves the exact source-front-end evidence and child blocker.",
+    "Discovery produced 12 candidates: 8 live-retrieval verified web candidates and 2 bibliographic-provenance-verified Crossref candidates, with 2 unverified.",
+    "Objective relevance received only the 8 RETRIEVAL_PROVENANCE_VERIFIED candidates; both BIBLIOGRAPHIC_PROVENANCE_VERIFIED scholarly candidates were excluded before ranking.",
+    "The selected source was simple.wikipedia.org/wiki/2025 with BM25 score 1.578329880818.",
+    "Deterministic offline replay of the unchanged BM25 scoring over the full provenance-verified pool ranks the 2025 Kamchatka SWOT scholarly candidate first at about 9.84 and the 1997 Kamchatka paper second at about 9.80.",
+    "All 10 extracted units from the selected Wikipedia source contain zero meter/metre quantity and no observed tsunami amplitude/height measurement; therefore threshold parsing alone cannot complete the parent task from preserved evidence."
+  ],
+  "evidence_presence_classification": "PRESERVED_REAL_TASK_EVIDENCE_FALSIFIES_CURRENT_PROXY_BLOCKER",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the truth-only blocker reopening. Do not alter runtime or score capability credit. Then repair scholarly-provenance admission plus selected-source live materialization generically, qualify exact bytes independently, and move to a new parent task without replaying seismology.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "8072f67289a6eea2462dd7cad2dd3991a3276734",
+    "real_outcome": "Point the parent frontier at the earliest repair that can actually make future open-ended research select evidence capable of answering the objective.",
+    "required_capability": "MODEL_INDEPENDENT_PROVENANCE_VERIFIED_SCHOLARLY_CANDIDATE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+    "obs_goal": {
+      "real_outcome": "Remove the upstream source-selection defect instead of polishing a downstream parser that cannot recover missing evidence.",
+      "proxy_goals_deleted": [
+        "repair only the phrase 'exceeding 1 meter'",
+        "replay seismology",
+        "task-specific NOAA/JMA source hints",
+        "model reranking"
+      ],
+      "surviving_necessity": "Reopen to the generic scholarly-candidate admission/materialization seam proven by preserved Task B evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "open_web_source_candidate_discovery Crossref backend",
+        "source_candidate_provenance_verify bibliographic DOI verification",
+        "objective_relevance_bm25",
+        "objective_evidence_unit_extract"
+      ],
+      "external_existing_routes_checked": [
+        "No external supplier replaces the need to preserve already-discovered provenance-verified candidates across the internal research pipeline."
+      ],
+      "capability_work_deleted": [
+        "no new search engine",
+        "no model reranker",
+        "no source whitelist",
+        "no Task B replay"
+      ],
+      "surviving_gap": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED candidates are discarded before relevance; the selected weak web source contains no decision quantity."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic internal provenance-class admission defect exposed by a real parent task.",
+      "delete_bypass_substitute_options": [
+        "Keep literal-threshold blocker: falsified because preserved evidence has no amplitude quantity.",
+        "Add seismology-specific authoritative source: rejected as task leakage.",
+        "Admit all provenance-verified candidate classes to relevance and live-materialize only the selected bibliographic candidate: survives."
+      ],
+      "surviving_causal_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REOPEN_TO_SCHOLARLY_PROVENANCE_ADMISSION_AND_MATERIALIZATION",
+        "REPAIR_LITERAL_THRESHOLD_ONLY",
+        "TASK_SPECIFIC_SOURCE_HINT",
+        "MODEL_RERANKER"
+      ],
+      "losing_routes_reason": "Threshold-only repair cannot create an amplitude value absent from the evidence; task hints violate open-endedness; model reranking violates model-independent credit.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "This reconciliation uses preserved real-task evidence and an unchanged deterministic BM25 counterfactual; the subsequent implementation must be independently qualified on cross-domain candidate classes without replaying seismology."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED as current parent blocker"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Crossref discovery",
+        "bibliographic provenance verification",
+        "BM25 relevance",
+        "live evidence extraction"
+      ],
+      "fresh_reuse_plan": "After the generic repair is qualified, freeze a new materially different parent task; never replay seismology."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused immutable guard receipt, preserved Task B artifact, current BM25 implementation, and exact provenance statuses."
+      ],
+      "search_stop_decision": "The current blocker is directly falsified by preserved evidence and the upstream exclusion predicate is exact in code; further search cannot make threshold parsing sufficient.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No execution route is selected by this truth-only reconciliation."
+    },
+    "routes_considered": [
+      "REOPEN_TO_SCHOLARLY_PROVENANCE_ADMISSION_AND_MATERIALIZATION",
+      "REPAIR_LITERAL_THRESHOLD_ONLY",
+      "TASK_SPECIFIC_SOURCE_HINT",
+      "MODEL_RERANKER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "THRESHOLD_ONLY_PROXY_REPAIR",
+      "TASK_SPECIFIC_SOURCE_HINT",
+      "MODEL_RERANKER"
+    ],
+    "selected_surviving_route": "REOPEN_TO_SCHOLARLY_PROVENANCE_ADMISSION_AND_MATERIALIZATION",
+    "why_selected_route_is_fastest_sufficient": "It repairs the earliest demonstrated information-loss seam. The discarded scholarly candidates already score far above the selected Wikipedia page under the existing ranker, while the preserved selected evidence contains no amplitude quantity for any threshold parser to compare.",
+    "expected_parent_level_state_change": "Reopen the parent blocker from objective-literal threshold parsing to the upstream generic scholarly-provenance admission/materialization defect proven by the spent seismology Task B evidence; preserve zero parent credit and no replay.",
+    "stop_condition": "Merge only the truth-only blocker reopening. Do not alter runtime or score capability credit. Then repair scholarly-provenance admission plus selected-source live materialization generically, qualify exact bytes independently, and move to a new parent task without replaying seismology.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER truth-only action based on immutable already-spent parent evidence; no supplier or execution route is being selected."
+    }
+  },
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "REOPENED_BY_FALSIFICATION",
+    "evidence": [
+      "verification-capsule-runner run 36693929830 / artifact 11086898224",
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+      "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
+    ]
+  }
+}
