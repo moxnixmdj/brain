@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_INTERNALIZED_COMPOSED_CAPABILITY_CONFIGURATION_V1",
   "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
-  "status": "BRAIN_COMPOSED_CONFIGURATION__VERIFICATION_PENDING__ZERO_OPUS_CREDIT",
-  "canonical_base_commit": "b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
+  "status": "BRAIN_COMPOSED_CONFIGURATION__PACKAGE_QUALIFICATION_PENDING__ZERO_OPUS_CREDIT",
+  "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
   "composition_class": "EXISTING_MECHANISM_COMPOSITION_AND_CONFIGURATION_ONLY",
   "underlying_capability_invention": false,
   "components": {
@@ -53,7 +53,8 @@
     ],
     "no_external_capability_rediscovery_required": true,
     "generated_overlay_is_ephemeral": true,
-    "durable_inputs_are_brain_owned": true
+    "durable_inputs_are_brain_owned": true,
+    "authorized_by": "Brain PR576"
   },
   "evaluation": {
     "terminal_bench_4": {
