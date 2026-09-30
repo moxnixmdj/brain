@@ -74,7 +74,8 @@
       "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
       "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
       "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002",
-      "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004"
+      "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004",
+      "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
   "obsolescence_status": "NOT_YET_PROVEN__OPEN_ENDED_PARENT_SCOPE_HAS_NO_ADMISSIBLE_MODEL_INDEPENDENT_REAL_TASK_A",
@@ -181,5 +182,16 @@
       "status": "VALID_STRUCTURED_SUPPORTING_EVIDENCE__NO_OPEN_ENDED_PROMOTION_CREDIT",
       "correction_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json"
     }
+  },
+  "latest_inadmissible_open_ended_parent_attempt": {
+    "task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "status": "SPENT_FOR_FRESHNESS__PARENT_DIAGNOSTIC_INADMISSIBLE__NO_REPLAY",
+    "direct_compiler_run_id": 36670516407,
+    "full_runtime_duplicate_diagnostic_run_id": 36670619213,
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_HARNESS_VALIDITY_CORRECTION_20260930_V1.json",
+    "parent_capability_credit": 0,
+    "parent_capability_failure_credit": 0,
+    "replay_allowed": false,
+    "reason": "The first harness bypassed canonical run_goal orchestration; the later diagnostic reached run_goal but omitted _runtime_mission_path, so neither receipt establishes the intrinsic parent frontier."
   }
 }
