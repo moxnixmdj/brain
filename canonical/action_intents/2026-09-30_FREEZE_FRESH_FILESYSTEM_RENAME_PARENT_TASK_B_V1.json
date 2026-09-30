@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-FILESYSTEM-RENAME-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_B_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_FILESYSTEM_RENAME_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended operating-system/filesystem parent task with no supplied authority, source, standards citation, conclusion, tool recipe, experiment recipe, or answer; execute exactly once and stop on the first new causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current base a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "HTTP/2 Parent Task A is spent/no-replay and its generic broad-routing defects were repaired and guarded-qualified by merged PR #474.",
+    "Prior parent domains include SQLite, climate, demography, astronomy, geophysics, thermophysics, numerical computing, and HTTP/2 network protocols.",
+    "Operating-system filesystem rename atomicity versus crash durability is materially different from those spent/frozen parent domains."
+  ],
+  "evidence_presence_classification": "BROAD_ROUTING_REPAIR_PROMOTED__FRESH_PARENT_B_VALIDATION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen task. On semantic completion, independently verify before any parent promotion. On failure, preserve only the earliest integrated causal gap and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "After the guarded-qualified routing repair, the inherited model-independent route must be reality-tested on one fresh materially different open-ended parent objective.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_OPERATING_SYSTEM_FILESYSTEM_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_TASK_A_REPLAY",
+      "PREDECLARED_AUTHORITY_OR_SOURCE",
+      "PREDECLARED_CONCLUSION",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "PREWIRED_TOOL_OR_EXPERIMENT_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The objective is materially different, forces autonomous source discovery, semantic distinction between visibility and durability, real executable verification, scoped limitations, and independent verification while reusing the now-promoted generic research stack.",
+    "expected_parent_level_state_change": "Either obtain admissible fresh Parent Task B end-to-end evidence or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
