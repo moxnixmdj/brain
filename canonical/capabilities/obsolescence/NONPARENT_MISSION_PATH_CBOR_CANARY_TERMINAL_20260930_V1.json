@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_NONPARENT_CANARY_RECONCILIATION_V1",
+  "status": "SPENT__CONFOUNDED_BEFORE_EXTERNAL_ACQUISITION__NO_PARENT_CREDIT",
+  "checked_on": "2026-09-30",
+  "mission_id": "ASTRA-RUNTIME-MISSION-PATH-PYPI-CANARY-CBOR-001",
+  "brain_canary_commit": "f94650b3727a6e35774b465312bbedc295cded2c",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 85,
+    "head_sha": "c397449bae61061a6fafc12ac0d66f98fa8a88c5",
+    "run_id": 36672999124,
+    "job_id": 109751865996,
+    "artifact_id": 11078149916,
+    "artifact_digest": "sha256:7d42c2125ab13e6590a62984cf5b28e6aa127a08e683bab7d4214c619f9aa40f"
+  },
+  "execution": {
+    "execution_count": 1,
+    "replay_allowed": false,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "runtime_blob": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "runtime_returncode": 3
+  },
+  "observations": {
+    "canonical_cli_loaded_mission_path": true,
+    "observed_mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_MISSION_PATH_PYPI_CANARY_CBOR_001.json",
+    "goal_gap_class": "CAPABILITY_CANDIDATE",
+    "capability_acquisition_allowed_by_gap_classifier": true,
+    "external_capability_acquisition_attempted": false,
+    "forbidden_origin_path_errors_observed": [],
+    "existing_bound_candidate": "auto.npm.dfinity-cbor",
+    "terminal_blocker": "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_BLOCKED",
+    "composition_error": "GROUNDED_EXECUTABLE_COMPOSITION_FAILED:CompositionError:UNRESOLVED_GROUNDED_CLAUSES:0,3,4"
+  },
+  "adjudication": {
+    "mission_path_propagation_proven_through_supplier_boundary": false,
+    "mission_path_propagation_falsified": false,
+    "reason": "The runtime loaded and persisted the canonical mission path, but policy stopped at existing bound grounding before auto.dispatch. The canary therefore cannot adjudicate supplier-side origin mission propagation.",
+    "parent_capability_credit_delta": 0,
+    "runtime_repair_authorized": false
+  },
+  "next_action": "RUN_ONE_MATERIALLY_DISTINCT_NONPARENT_SINGLE_CLAUSE_CANARY_WITH_ZERO_EXISTING_BOUND_GROUNDING_AND_AUTONOMOUS_PYPI_FALLBACK__NO_REPLAY_OF_CBOR_CANARY"
+}
