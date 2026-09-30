@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-CHEMISTRY-SUCROSE-MOLAR-MASS-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRIC_MOLAR_MASS_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "sources": {
+    "glucose": {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/glucose/property/MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "units": "g/mol"
+    },
+    "fructose": {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/fructose/property/MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "units": "g/mol"
+    },
+    "water": {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "units": "g/mol"
+    },
+    "sucrose": {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/sucrose/property/MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "units": "g/mol"
+    }
+  },
+  "scientific_contract": {
+    "chemistry_basis": "Sucrose condensation mass balance: glucose + fructose - water.",
+    "derived_rule": "predicted_sucrose_mw = glucose_mw + fructose_mw - water_mw",
+    "comparison_threshold_g_mol": 0.1,
+    "relation_rule": "Evaluate whether abs(predicted_sucrose_mw - official_sucrose_mw) <= 0.1 g/mol.",
+    "numeric_inputs_must_be_parsed_from_live_sources": true
+  },
+  "goal_text": "Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/glucose/property/MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_GLUCOSE_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/fructose/property/MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_FRUCTOSE_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_WATER_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/sucrose/property/MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_SUCROSE_MW.json. Calculate the predicted sucrose molecular weight using predicted_sucrose_mw = glucose_mw + fructose_mw - water_mw. Determine whether the predicted and official sucrose molecular weight scalars differ by at most 0.1.",
+  "required_result": {
+    "producer_result": "The final bounded numeric relation artifact emitted by the compiled controller plan.",
+    "required_fields": [
+      "left",
+      "right",
+      "threshold",
+      "absolute_difference",
+      "relation",
+      "predicate"
+    ],
+    "threshold": 0.1
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch all four exact PubChem PUG REST URLs outside the Brain producer, independently parse MolecularWeight, recompute glucose + fructose - water, recompute absolute difference and <=0.1 predicate, and compare every consequential relation field.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "freeze_note": "Task scientific contract, URLs, JSON paths, formula, and threshold frozen before exact source-value probe."
+}
