@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRONTIER_SCOPE_CORRECTION_V1",
+  "status": "GUARDED_INTEGRATION_FALSIFICATION_PROVEN__HTTP2_SCIENTIFIC_EXECUTION_NOT_STARTED",
+  "canonical_base_commit": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+  "corrected_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+  "corrected_next_action": "INTEGRATE_VERIFIED_CLAIM_SPEC_BINDER_AND_GENERIC_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_SOURCE_FRONTEND__GUARDED_NON_PARENT_QUALIFICATION__RECONCILE_HTTP2_GUARD_RESERVATION__THEN_EXECUTE_FROZEN_HTTP2_ONCE",
+  "evidence": {
+    "integration_red": {
+      "run_id": 36687982814,
+      "job_id": 109798159677,
+      "artifact_id": 11084297726,
+      "digest": "sha256:11ebd443ab46027e26a92f294e928e8c458ac14e920d74168732f7e9b8c74e92"
+    },
+    "http2_prestart": {
+      "run_id": 36688247475,
+      "job_id": 109799026696,
+      "artifact_id": 11085060845,
+      "digest": "sha256:658425564ecf9ae08a799b9c96d4c18d6e5c9ec29c84c4e8070813e0a18f061a",
+      "admission_error": "ALREADY_RESERVED_OR_CREATE_NOT_CONFIRMED",
+      "astra_started": false,
+      "scientific_execution_count": 0
+    }
+  },
+  "frozen_parent_task": {
+    "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+    "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+    "domain": "NETWORK_PROTOCOLS_HTTP2_FLOW_CONTROL_LIMITS",
+    "freshness": "UNSPENT",
+    "scientific_execution_count": 0,
+    "execution_status": "DEFERRED_PENDING_INTEGRATION_QUALIFICATION_AND_GUARD_RESERVATION_RECONCILIATION",
+    "replay_allowed": false
+  },
+  "counter_effects": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "parent_capability_promoted": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
