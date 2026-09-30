@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Acquire the minimum model-independent route that derives an explicit bounded claim/relation specification and binds semantic operand roles from the research objective plus integrity-checked generic evidence units, then invoke the already-verified exact support/relation primitive; do not infer truth, causality, sufficiency, or replay spent parent tasks.",
+    "objective": "Freeze and execute one new genuinely open-ended consequential technical/scientific Task A on the inherited model-independent route. The task must not predeclare exact sources, JSON paths, formulas, tool recipes, or answers. Stop on the first new causal gap. If it passes end-to-end, independently verify it before freezing a materially different genuine open-ended Task B.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-    "repair_status": "CLAIM_RELATION_SUBCAPABILITY_ACQUIRED__CLAIM_SPEC_OPERAND_BINDING_GAP_ACTIVE",
-    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION_AS_ORACLE__NO_EXTRACTED_TEXT_EQUALS_TRUTH__NO_SEMANTIC_ROLE_SELF_CERTIFICATION__NO_PARENT_SCORE_CREDIT_FOR_SUBCAPABILITY_ONLY",
-    "next_action": "OBS_AND_ACQUIRE_MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE__REUSE_VERIFIED_EXTRACTION_AND_CLAIM_RELATION__NO_PARENT_REPLAY",
+    "exact_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+    "repair_status": "CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "prohibition": "NO_PARENT_REPLAY__NO_PREDECLARED_EXACT_SOURCE_OR_FORMULA_RECIPE__NO_MODEL_COGNITION_IN_CREDITED_ROUTE__NO_PARENT_PROMOTION_FROM_CHILD_EVIDENCE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "next_action": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -90,7 +90,8 @@
       "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
       "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
       "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
-      "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1"
+      "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+      "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
     ],
     "latest_fresh_real_run_id": 36652169397,
     "latest_fresh_reuse_run_id": 36652623916,
@@ -129,27 +130,31 @@
       "first_physical_spend_run_id": 36670808367
     },
     "latest_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
-      "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
-      "route": "evidence.claim_relation.generic_units.stdlib",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-      "public_run_id": 36682488104,
-      "public_job_id": 109780804595,
-      "artifact_id": 11082521746,
-      "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-      "producer_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
-      "test_git_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+      "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+      "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
+      "route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+      "public_run_id": 36685279194,
+      "public_job_id": 109789596373,
+      "artifact_id": 11083292341,
+      "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+      "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+      "test_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+      "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Exact normalized substring support and explicit caller-referenced Decimal relations only; automatic claim-spec generation, semantic operand-role binding, paraphrase/entailment, factual correctness, causality, evidence quality/sufficiency/independence, and unit conversion remain unverified."
+      "limitations": "Verified only for bounded explicit GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE objectives and exact quoted-support objectives with unique lexical role binding, exact-unit-compatible operand selection, and fail-closed ambiguity. General semantic entailment, truth, causality, sufficiency, unit conversion, source independence, and parent completion remain unverified."
     },
     "latest_generic_extraction_requalification_run_id": 36681368306,
     "latest_generic_extraction_requalification_artifact_id": 11081458134,
     "latest_generic_extraction_requalification_artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
     "latest_claim_relation_qualification_run_id": 36682488104,
     "latest_claim_relation_qualification_artifact_id": 11082521746,
-    "latest_claim_relation_qualification_artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd"
+    "latest_claim_relation_qualification_artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+    "latest_claim_spec_operand_binding_qualification_run_id": 36685279194,
+    "latest_claim_spec_operand_binding_qualification_artifact_id": 11083292341,
+    "latest_claim_spec_operand_binding_qualification_artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -366,7 +371,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "OBS_AND_REPAIR_GENERIC_EVIDENCE_EXTRACTION_FOR_MODERN_CONTAINER_CONTENT__REQUALIFY_EXACT_BYTES__NO_PARENT_REPLAY",
+  "next_progress_event_target": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",

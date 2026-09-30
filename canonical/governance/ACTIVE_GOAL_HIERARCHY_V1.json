@@ -5,9 +5,9 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "active_probe": null,
-  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__GENERIC_EXTRACTION_REQUALIFIED__CLAIM_RELATION_GAP_ACTIVE",
-  "current_parent_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
-  "next_required_action_class": "OBS_AND_ACQUIRE_MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE__REUSE_VERIFIED_EXTRACTION_AND_CLAIM_RELATION__NO_PARENT_REPLAY",
+  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "current_parent_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "next_required_action_class": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -198,19 +198,20 @@
   },
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "last_frontier_reconciliation": {
-    "status": "CLAIM_RELATION_SUBCAPABILITY_ACQUIRED__ADVANCE_TO_CLAIM_SPEC_OPERAND_BINDING",
-    "previous_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
-    "blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "status": "CLAIM_SPEC_OPERAND_BINDING_SUBCAPABILITY_ACQUIRED__RETURN_TO_FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
+    "previous_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json"
     ],
-    "public_run_id": 36682488104,
-    "public_job_id": 109780804595,
-    "artifact_id": 11082521746,
-    "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-    "parent_capability_promoted": false
+    "public_run_id": 36685279194,
+    "public_job_id": 109789596373,
+    "artifact_id": 11083292341,
+    "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+    "parent_capability_promoted": false,
+    "parent_task_replay_allowed": false
   },
-  "next_progress_event_target": "OBS_AND_ACQUIRE_MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE__REUSE_VERIFIED_EXTRACTION_AND_CLAIM_RELATION__NO_PARENT_REPLAY",
+  "next_progress_event_target": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -264,19 +265,20 @@
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPEN_ENDED_TASK_A_FIRST_SPEND_TERMINAL_RECONCILIATION_20260930_V1.json"
   },
   "last_verified_subcapability": {
-    "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
-    "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
-    "route": "evidence.claim_relation.generic_units.stdlib",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-    "public_run_id": 36682488104,
-    "public_job_id": 109780804595,
-    "artifact_id": 11082521746,
-    "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-    "producer_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
-    "test_git_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+    "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
+    "route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+    "public_run_id": 36685279194,
+    "public_job_id": 109789596373,
+    "artifact_id": 11083292341,
+    "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+    "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "test_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+    "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
     "parent_capability_promoted": false,
-    "limitations": "Exact normalized substring support and explicit caller-referenced Decimal relations only; automatic claim-spec generation, semantic operand-role binding, paraphrase/entailment, factual correctness, causality, evidence quality/sufficiency/independence, and unit conversion remain unverified."
+    "limitations": "Verified only for bounded explicit GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE objectives and exact quoted-support objectives with unique lexical role binding, exact-unit-compatible operand selection, and fail-closed ambiguity. General semantic entailment, truth, causality, sufficiency, unit conversion, source independence, and parent completion remain unverified."
   }
 }

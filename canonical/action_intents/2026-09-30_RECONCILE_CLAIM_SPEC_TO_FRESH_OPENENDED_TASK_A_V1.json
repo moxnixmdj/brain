@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-CLAIM-SPEC-TO-FRESH-OPENENDED-TASK-A-20260930-V1",
+  "status": "ZERO_PARENT_CREDIT__VERIFIED_CHILD_PROMOTION_RECONCILIATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "48b29b53344d4c28e0ec8303064b02c4a1bd248d",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "CANONICAL_MIRRORS_STILL_NAME_CLOSED_CLAIM_SPEC_OPERAND_BINDING_GAP_AFTER_PR449",
+  "action_kind": "TRUTH_FIRST_AUTHORITY_MIRROR_RECONCILIATION",
+  "expected_parent_frontier_change": "Credit exactly one verified reusable child capability, preserve zero parent promotion, and return the parent frontier to one fresh genuinely open-ended Task A.",
+  "progress_credit": {
+    "reusable_capabilities_inherited": 1,
+    "parent_capability_promoted": false,
+    "residual_gaps_localized": 1
+  },
+  "evidence_presence_classification": "VERIFIED_CHILD_PROMOTED_ON_MAIN__PARENT_VALIDATION_REQUIREMENT_NOW_DOMINANT",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_task_replay": false,
+  "stop_condition": "All canonical frontier surfaces agree that claim-spec operand binding is acquired and the next required action is one new genuinely open-ended Task A; counters move exactly +1 reusable capability and +1 residual requirement with zero parent credit.",
+  "recursive_obs": {
+    "canonical_base_commit": "48b29b53344d4c28e0ec8303064b02c4a1bd248d",
+    "real_outcome": "Make canonical authority reflect the verified claim-spec child and expose the minimum remaining parent-level proof obligation.",
+    "obs_goal": {
+      "surviving_necessity": "No admissible genuine open-ended Task A has passed. Child capability acquisition cannot substitute for parent-level end-to-end evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "all verified child capabilities through claim-spec operand binding"
+      ],
+      "capability_work_deleted": [
+        "no more adapter work without a fresh parent falsification",
+        "no parent replay",
+        "no model cognition"
+      ],
+      "surviving_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent-level evidence obligation after the previously active child seam was independently closed.",
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "selected_surviving_route": "FREEZE_ONE_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A_AND_STOP_ON_FIRST_CAUSAL_GAP",
+      "why_selected": "Every currently localized child seam in the inherited route is closed; further child construction without parent reality-testing would be speculative."
+    },
+    "obs_verification": {
+      "existing_oracle_considered": true,
+      "verification": "Exact agreement of pointer, hierarchy, queue, scoreboard and parent target against the merged child promotion receipt."
+    },
+    "obs_inherited_system": {
+      "fresh_reuse_plan": "Task A must use the inherited model-independent route without a predeclared source/formula/tool recipe. On pass, independently verify before Task B."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse PR449 merge",
+        "reuse runner PR166 qualification",
+        "reuse current exact main"
+      ],
+      "search_stop_decision": "Stop child-capability search. Parent reality-testing is now the shortest admissible route."
+    }
+  }
+}
