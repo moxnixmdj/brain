@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Complete the parent minimum acquisition contract with exactly one second clean model-independent real task in a materially different technical/scientific domain using the inherited route; then adjudicate frontier dependency removal.",
+    "objective": "Obtain admissible evidence for the actual open-ended parent behavior: execute one fresh real model-independent task whose prompt does not prewire sources, paths, tools or formulas, forcing autonomous decomposition, discovery, selection, quantitative reasoning and verification.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json",
-    "repair_status": "DEMOGRAPHY_PARENT_TASK_PASS__OLD_SPACE_CARGO_TASK_A_EXCLUDED_BY_HARD_MODEL_INDEPENDENCE_AUDIT__ONE_CLEAN_CROSS_DOMAIN_TASK_REMAINS",
-    "prohibition": "NO_DEMOGRAPHY_REPLAY__NO_ASTRONOMY_REPLAY__NO_GEOPHYSICS_REPLAY__NO_BIOPHYSICS_REPLAY__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__NO_TASK_SPECIFIC_PATCH__NO_PARENT_PROMOTION_UNTIL_SECOND_CLEAN_TASK",
-    "next_action": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B__NO_DEMOGRAPHY_ASTRONOMY_GEOPHYSICS_BIOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "exact_blocker": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
+    "repair_status": "PARENT_SCOPE_CORRECTED__PREWIRED_DEMOGRAPHY_AND_CHEMISTRY_TASKS_PRESERVED_AS_NARROW_EVIDENCE_ONLY",
+    "prohibition": "NO_PREWIRED_SOURCE_URLS__NO_PREWIRED_JSON_PATHS__NO_PREWIRED_TOOLS_OR_CAPABILITY_IDS__NO_PREWIRED_FORMULA__NO_SPENT_TASK_REPLAY__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_PATCH__NO_PARENT_PROMOTION_BEYOND_EXACT_OPEN_ENDED_EVIDENCE",
+    "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK__NO_PREWIRED_SOURCES_URLS_PATHS_TOOLS_OR_FORMULAS__STOP_ON_FIRST_CAUSAL_GAP",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -101,8 +101,11 @@
     "latest_typed_scalar_expression_qualification_run_id": 36666659921,
     "latest_typed_scalar_expression_qualification_artifact_id": 11076347530,
     "latest_typed_scalar_expression_qualification_artifact_digest": "sha256:1bf6628bff366eb6fa3d277042798c956eec1c5fca7d7bace1237d13ce832cc0",
-    "clean_model_independent_parent_tasks_verified": 1,
-    "clean_model_independent_parent_tasks_required": 2
+    "clean_model_independent_parent_tasks_verified": 0,
+    "clean_model_independent_parent_tasks_required": 2,
+    "prewired_model_independent_integration_tasks_verified": 1,
+    "genuinely_open_ended_parent_tasks_verified": 0,
+    "genuinely_open_ended_parent_tasks_required": 2
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
