@@ -337,5 +337,14 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY"
+  "next_progress_event_target": "OBS_NO_COMPATIBLE_SUPPLIER_CONTRACT__SEARCH_REUSE_EXISTING_LOCAL_RUNTIME_AND_VERIFIED_BOUND_CAPABILITIES_BEFORE_REPAIR__QUALIFY_MINIMUM_GENERIC_DISCOVERY_OR_CONTRACT_ROUTE__NO_SQLITE_REPLAY",
+  "sqlite_parent_first_spend": {
+    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "status": "SPENT__BLOCKED__NO_REPLAY",
+    "public_run_id": 36674086293,
+    "artifact_id": 11078414137,
+    "blocker": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPEN_ENDED_TASK_A_FIRST_SPEND_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "parent_capability_credit": false
+  }
 }
