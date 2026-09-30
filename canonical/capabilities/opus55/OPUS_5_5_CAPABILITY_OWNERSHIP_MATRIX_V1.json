@@ -81,17 +81,17 @@
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
-      "status": "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
-        "GPT-6 Astra + web + code + Wolfram",
-        "DeepSeek V4.1 Flash open-weight candidate"
+        "GPT-6 Astra + Brain + web/code/Wolfram"
       ],
-      "evidence": "Current HLE-with-tools public evidence still has Opus 5.5 at 67.7; Astra is 57.2 and the strongest searched non-Opus row remains below the target.",
-      "residual": "No searched existing route currently clears 67.7 on the same public setting.",
+      "evidence": "HLE-Diamond: GPT-6 Astra 60.6 vs Opus 5.5 55.0 without tools, and 82.9 vs 73.9 with web+code under the same benchmark-owner evaluation.",
+      "residual": "Older HLE-with-tools variant remains preserved as a distinct non-equivalent benchmark; no blanket universal-reasoning claim.",
       "sources": [
-        "https://www.anthropic.com/claude-opus-5-5",
-        "https://benchlm.ai/benchmarks/hlewithtools"
-      ]
+        "https://lastexam.ai/blog/hle-diamond",
+        "https://labs.scale.com/leaderboard/hle-diamond"
+      ],
+      "ownership_package": "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json"
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -265,12 +265,11 @@
   ],
   "summary": {
     "full_opus_5_5_envelope_obsoleted": false,
-    "newly_promotable_verified_owned_scoped_capabilities": 2,
+    "newly_promotable_verified_owned_scoped_capabilities": 3,
     "previously_verified_owned_scoped_capabilities": 1,
     "whole_families_with_unresolved_equal_or_better_route": [
       "ADVANCED_AGENTIC_CODING",
-      "PROFESSIONAL_KNOWLEDGE_WORK",
-      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      "PROFESSIONAL_KNOWLEDGE_WORK"
     ],
     "major_configured_candidates_pending_comparative_verification": [
       "COMPLEX_MULTI_TOOL_AGENCY",
@@ -284,6 +283,6 @@
       "COMMUNICATION_AND_SYNTHESIS",
       "UNKNOWN_DOMAIN_ADAPTATION"
     ],
-    "next_optimization_target": "SEARCH_EXISTING_ROUTES_FOR_THE_THREE_CURRENT_OPUS_LEADING_BARS_IN_PARALLEL__PRODUCTION_CODING__PROFESSIONAL_KNOWLEDGE_WORK__HLE_WITH_TOOLS__DO_NOT_BUILD_CAPABILITY"
+    "next_optimization_target": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__AND_VERIFY_BROAD_CANDIDATE_FAMILIES__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION"
   }
 }

@@ -76,15 +76,15 @@
     "parent_frontier_capability": null,
     "objective": "Obsolete every remaining useful Opus 5.5 capability by finding existing equal-or-better routes, configuring winners into Brain, verifying them at exact scope, and saving them permanently.",
     "selection_metric": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
+    "exact_blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
     "evidence_paths": [
       "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
       "canonical/reasoning/2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1.json"
     ],
-    "repair_status": "WHOLE_ENVELOPE_RECOVERED__TWO_NEW_SCOPED_OPUS55_OR_BETTER_PACKAGES_PROMOTED__EXACT_SYMBOLIC_ALREADY_OWNED",
+    "repair_status": "WHOLE_ENVELOPE_RECOVERED__THREE_NEW_SCOPED_OPUS55_OR_BETTER_PACKAGES_PROMOTED__EXACT_SYMBOLIC_ALREADY_OWNED",
     "prohibition": "NO_JIT_CAPABILITY_EXTERNALIZATION__NO_UNDERLYING_CAPABILITY_INVENTION__NO_CAPABILITY_CREDIT_BELOW_OPUS_5_5__NO_INTERNAL_SUITE_PARITY_INFERENCE__KNOWLEDGE_JIT_ONLY",
-    "next_action": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_PRODUCTION_CODING__PROFESSIONAL_KNOWLEDGE_WORK__HLE_WITH_TOOLS__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
+    "next_action": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__AND_VERIFY_BROAD_CANDIDATE_FAMILIES__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0
@@ -124,6 +124,17 @@
       "winning_result": "41.4",
       "incremental_spend_usd": 0,
       "claim_scope": "BENCHMARKED_BUSINESS_WORKFLOW_AUTOMATION"
+    },
+    {
+      "capability_id": "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1",
+      "parent_family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+      "adjudication_path": "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json",
+      "frontier_bar": "HLE-Diamond Opus 5.5 = 55.0 no-tools / 73.9 web+code",
+      "winning_route": "GPT-6 Astra + Brain + web/code/Wolfram",
+      "winning_result": "60.6 no-tools / 82.9 web+code",
+      "incremental_spend_usd": 0,
+      "claim_scope": "HLE_DIAMOND_CURRENT_REFINED_MULTIDISCIPLINARY_REASONING"
     }
   ],
   "task_semantic_conjunctive_role_v1": {
@@ -333,7 +344,7 @@
     "opus_5_5_or_better_required": true,
     "permanent_capability_package_required": true
   },
-  "next_progress_event_target": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_PRODUCTION_CODING__PROFESSIONAL_KNOWLEDGE_WORK__HLE_WITH_TOOLS__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
+  "next_progress_event_target": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__AND_VERIFY_BROAD_CANDIDATE_FAMILIES__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -344,22 +355,18 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "OPUS_5_5_WHOLE_ENVELOPE_FIRST_OBSOLESCENCE_PASS_COMPLETE",
-    "blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
+    "status": "HLE_DIAMOND_REASONING_PROMOTED__RESIDUAL_FRONTIER_COMPRESSED",
+    "blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
     "evidence_paths": [
-      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "canonical/reasoning/2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1.json"
+      "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json",
+      "canonical/reasoning/2026-09-30_HLE_DIAMOND_OPUS55_REASONING_OBSOLESCENCE_V1.json"
     ],
     "newly_owned_scoped_capabilities": [
-      "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
-      "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1"
-    ],
-    "previously_owned_scoped_capabilities": [
-      "EXACT_SYMBOLIC_COMPUTATION_V1"
+      "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "counter_delta": 2
+    "counter_delta": 1
   },
   "last_real_output_event": {
     "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_CORRECTED_20260930",
