@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ATOMIC-PROMOTION-CURRENT-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "VERIFIED_PROMOTION_FRONTIER_NONATOMICITY_IS_LIVE_ON_CURRENT_MAIN",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::VERIFIED_PROMOTION_FRONTIER_NONATOMICITY_IS_LIVE_ON_CURRENT_MAIN::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Restore one canonical current frontier and make verified narrow-capability promotion atomically advance pointer, hierarchy, queue, scoreboard active subcapability, and target residual gap to the receipt's next_causal_gap, preventing stale satisfied blockers from authorizing duplicate work.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Current main adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+    "Hierarchy/queue/scoreboard point to MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "CANONICAL_POINTER still points to satisfied evidence-extraction blocker",
+    "PR417 contains preserved generic promotion-atomicity invariant but stale exact-base OBS",
+    "PR420 attempted already-acquired evidence extraction and was closed as obsolete"
+  ],
+  "evidence_presence_classification": "GENERIC_CONTROL_DEFECT_PROVEN_ON_LIVE_MAIN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the current-base pointer reconciliation plus the promotion-atomicity fail-closed invariant and regression, with zero scoreboard credit; then immediately resume acquisition of MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly required making these mistakes and other mistakes impossible/fail-closed and ordered Brain to pursue the real frontier-capability goal by the cleverest, fastest route.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+    "real_outcome": "Restore one canonical current frontier and make verified narrow-capability promotion atomically advance pointer, hierarchy, queue, scoreboard active subcapability, and target residual gap to the receipt's next_causal_gap, preventing stale satisfied blockers from authorizing duplicate work.",
+    "required_capability": "ATOMIC_VERIFIED_PROMOTION_TO_NEXT_CAUSAL_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "Restore one canonical current frontier and make verified narrow-capability promotion atomically advance pointer, hierarchy, queue, scoreboard active subcapability, and target residual gap to the receipt's next_causal_gap, preventing stale satisfied blockers from authorizing duplicate work.",
+      "proxy_goals_deleted": [
+        "manual reminders",
+        "another scheduler",
+        "re-running already acquired evidence extraction",
+        "merging stale PR417"
+      ],
+      "surviving_necessity": "One exact-current-base invariant plus reconciliation of the currently stale pointer."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1",
+        "cross-surface consistency guard",
+        "promotion truth guard",
+        "PR417 preserved generic atomicity design"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: internal canonical truth transition only."
+      ],
+      "capability_work_deleted": [
+        "No new service",
+        "No fuzzy capability matching",
+        "No new scheduler",
+        "No evidence-extraction implementation"
+      ],
+      "surviving_gap": "Current main proves the defect: hierarchy/queue/scoreboard advanced to claim-support evaluation while CANONICAL_POINTER still points to already-satisfied evidence extraction."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic control-plane race exposed again on live main.",
+      "delete_bypass_substitute_options": [
+        "Delete stale duplicate implementation PR420",
+        "Close stale-base PR417",
+        "Reuse PR417 exact invariant on current base",
+        "Reject manual reconciliation-only solution"
+      ],
+      "surviving_causal_blocker": "Verified promotion can be canonicalized without forcing all frontier mirrors to advance to next_causal_gap in the same authoritative state."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Repair existing trusted drift guard with exact next_causal_gap atomicity and reconcile current pointer",
+        "Manual pointer-only reconciliation",
+        "New reconciliation service"
+      ],
+      "losing_routes_reason": "Pointer-only repair would recur; a new service adds machinery. The trusted guard already has all state and promotion evidence needed.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Validate exact current head has all five frontier mirrors equal; verify a changed VERIFIED_* receipt with next_causal_gap fails if hierarchy/scoreboard/target do not advance. No benchmark."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR417 stale-base governance branch",
+        "manual post-promotion reconciliation as correctness dependency",
+        "duplicate implementation against satisfied blocker"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "cross-surface consistency",
+        "promotion truth",
+        "duplicate lease prevention"
+      ],
+      "fresh_reuse_plan": "Every future verified narrow promotion carrying next_causal_gap is checked automatically by the same trusted guard."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR417's generic invariant",
+        "Used live main mismatch as direct proof",
+        "Skipped external supplier research because this is internal governance"
+      ],
+      "search_stop_decision": "The defect and smallest sufficient repair are directly evidenced on current main; further governance research cannot beat reusing the existing trusted guard.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Re-evaluate only if current main changes before merge or a simpler exact invariant appears in the trusted guard."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_TRUSTED_GUARD_AND_RECONCILE_POINTER",
+      "POINTER_ONLY_RECONCILIATION",
+      "NEW_RECONCILIATION_SERVICE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MERGE_STALE_PR417",
+      "KEEP_OBSOLETE_PR420_OPEN",
+      "POINTER_ONLY_REPAIR",
+      "NEW_RECONCILIATION_SERVICE"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_TRUSTED_GUARD_AND_RECONCILE_POINTER",
+    "why_selected_route_is_fastest_sufficient": "It reuses the already-designed exact invariant, repairs the current inconsistency, adds no infrastructure, and prevents the same stale-frontier mistake from authorizing future duplicate work.",
+    "expected_parent_level_state_change": "Restore one canonical current frontier and make verified narrow-capability promotion atomically advance pointer, hierarchy, queue, scoreboard active subcapability, and target residual gap to the receipt's next_causal_gap, preventing stale satisfied blockers from authorizing duplicate work.",
+    "stop_condition": "Merge only the current-base pointer reconciliation plus the promotion-atomicity fail-closed invariant and regression, with zero scoreboard credit; then immediately resume acquisition of MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized internal governance guard repair; no external execution supplier is selected."
+    }
+  }
+}
