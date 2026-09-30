@@ -45,6 +45,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     verifier=_load_sibling("source_candidate_provenance_verify")
     authority_identity=_load_sibling("source_authority_binding_ror")
     relevance_verifier=_load_sibling("first_party_objective_relevance_verify")
+    evidence_extractor=_load_sibling("objective_evidence_unit_extract")
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
         return {
@@ -132,6 +133,30 @@ def run(objective,decomposition,limit=12,timeout=15):
     ]
     relevance_ready=bool(relevance_verified)
 
+    evidence_extractions=[]
+    for item in relevance_verified:
+        extracted=evidence_extractor.extract(
+            objective,
+            item["candidate"],
+            item["provenance"],
+            item["relevance"],
+            timeout=timeout,
+        )
+        evidence_extractions.append({
+            "candidate":item["candidate"],
+            "provenance":item["provenance"],
+            "authority_identity":item.get("authority_identity"),
+            "relevance":item["relevance"],
+            "extraction":extracted,
+        })
+    evidence_extracted=[
+        item for item in evidence_extractions
+        if item["extraction"].get("status")=="OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED"
+        and item["extraction"].get("evidence_extraction_status")=="VERIFIED"
+        and int(item["extraction"].get("evidence_unit_count") or 0)>0
+    ]
+    evidence_ready=bool(evidence_extracted)
+
     return {
         "schema":SCHEMA,
         "status":"SOURCE_FRONTEND_READY",
@@ -147,6 +172,9 @@ def run(objective,decomposition,limit=12,timeout=15):
         "objective_relevance_verifications":objective_relevance_verifications,
         "relevance_verified_candidate_count":len(relevance_verified),
         "relevance_claim_scope":"FIRST_PARTY_EXACT_ROR_DOMAIN_PLUS_STRICT_BOUNDED_LEXICAL_OBJECTIVE_COVERAGE_ONLY",
+        "evidence_extractions":evidence_extractions,
+        "evidence_extracted_candidate_count":len(evidence_extracted),
+        "evidence_extraction_claim_scope":"VERBATIM_NORMALIZED_VISIBLE_TEXT_UNITS_WITH_OBJECTIVE_LEXICAL_BINDING_AND_FRESH_SAME_SOURCE_PROVENANCE_ONLY",
         "authority_verified_candidate_count":0,
         "primary_source_verified_candidate_count":0,
         "role_progress":{
@@ -158,6 +186,8 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE"
             ),
             "EVIDENCE_ACQUISITION":(
+                "VERIFIED_RELEVANT_EVIDENCE_UNITS_AVAILABLE"
+                if evidence_ready else
                 "RELEVANT_SOURCE_AVAILABLE__EVIDENCE_EXTRACTION_REQUIRED"
                 if relevance_ready else
                 "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
@@ -165,12 +195,18 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "BLOCKED_ON_AUTHORITY_IDENTITY_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
             ),
             "EVIDENCE_EXTRACTION":(
+                "OBJECTIVE_GROUNDED_VERBATIM_UNITS_VERIFIED"
+                if evidence_ready else
                 "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
             ),
-            "RELATION_EVALUATION":"NOT_STARTED",
+            "RELATION_EVALUATION":(
+                "REQUIRES_GROUNDING" if evidence_ready else "NOT_STARTED"
+            ),
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
         "next_required_capability":(
+            "MODEL_INDEPENDENT_EVIDENCE_RELATION_EVALUATION_FROM_VERIFIED_UNITS"
+            if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
             "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
@@ -183,6 +219,7 @@ def run(objective,decomposition,limit=12,timeout=15):
         "primary_source_status_role":"OPTIONAL_METADATA_NOT_UNIVERSAL_RESEARCH_ADMISSION_GATE",
         "primary_source_claims_made":False,
         "relevance_claims_made":relevance_ready,
+        "evidence_extraction_claims_made":evidence_ready,
         "factual_correctness_claims_made":False,
         "evidence_sufficiency_claims_made":False,
         "model_dependency_count":0,
