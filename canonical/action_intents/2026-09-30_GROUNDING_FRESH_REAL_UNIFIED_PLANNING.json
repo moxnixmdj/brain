@@ -281,6 +281,26 @@
               "BRAIN_INHERITED"
             ],
             "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BRAIN_PR261_MERGED_MODEL_INDEPENDENT_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:56:00Z",
+            "evidence": [
+              "merge 08338df0cc989b092567f10ffd1dca6a7f37be65",
+              "exact component validation run 36651748631 PASS",
+              "fresh real run 36652169397 PASS",
+              "fresh reuse run 36652623916 PASS"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "GLOBAL"
           }
         ],
         "execution_dependencies_complete": true
