@@ -39,6 +39,33 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
             self.assertEqual(out["task_specific_literals_added"],[])
             self.assertEqual(out["model_dependency_count"],0)
 
+    def test_multiclause_generic_verification_language_routes_broad(self):
+        objective=(
+            "Assess whether metric Alpha is greater than metric Beta. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Autonomously discover and verify the relevant specification, determine how to "
+            "extract and interpret the required limits, choose and run a zero-cost verification "
+            "method, identify material interpretation limitations, independently verify the "
+            "consequential result, and produce a decision-quality answer with provenance."
+        )
+        direct=self.dec.decompose(objective)
+        self.assertEqual(direct["status"],"DECOMPOSED",direct)
+        out=self.grounding.ground(objective,{})
+        self.assertGreater(len(out["clauses"]),1,out)
+        self.assertEqual(out["grounded_clause_count"],0,out)
+        self.assertEqual(
+            out["unresolved_clause_indexes"],list(range(len(out["clauses"]))),out
+        )
+        self.assertTrue(out["broad_objective_decomposition_available"],out)
+        self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+
+    def test_concrete_run_command_is_still_rejected(self):
+        out=self.dec.decompose(
+            "Assess whether metric Alpha is greater than metric Beta. Run python verify.py"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED")
+        self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
+
     def test_explicit_recipe_is_not_reinterpreted(self):
         out=self.dec.decompose(
             "Determine whether values differ using https://example.com/data and extract JSON path value"
