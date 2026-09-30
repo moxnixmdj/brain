@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR512-TASK-C-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "CANONICAL_FRONTIER_SURFACES_STALE_AFTER_TASK_B_SPEND_AND_PR512_QUALIFICATION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_FRONTIER_SURFACES_STALE_AFTER_TASK_B_SPEND_AND_PR512_QUALIFICATION",
+  "expected_parent_frontier_change": "Truth-only reconciliation from spent Task B + guarded-qualified generic repair to fresh materially different Task C required; no parent capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR507 canonically reconciled genomics Task B as spent/no-replay and localized source-query/relevance.",
+    "PR512 merged exact bytes independently guarded-qualified in run 36692443468.",
+    "Current main preserves all four qualified PR512 blobs exactly.",
+    "PR513 lease-identity repair is present on current main.",
+    "Hierarchy, queue, target, pointer and scoreboard still carry pre-Task-B next-action text."
+  ],
+  "evidence_presence_classification": "PROOF_PRESENT__CANONICAL_MIRRORS_STALE",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "SAME_PARENT_CAPABILITY__ADVANCE_TO_FRESH_TASK_C_AFTER_VERIFIED_GENERIC_REPAIR",
+    "evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_OPENENDED_GENOMICS_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "canonical/action_intents/2026-09-30_REPAIR_OPEN_RESEARCH_QUERY_FOCUS_RELEVANCE_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+    "real_outcome": "Restore cross-surface frontier truth so the next guarded spend cannot replay Task B or act on stale Task-A/Task-B instructions.",
+    "required_capability": "CANONICAL_FRONTIER_CROSS_SURFACE_RECONCILIATION",
+    "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "routes_ranked": [
+      "RECONCILE_EXISTING_CANONICAL_SURFACES",
+      "CREATE_NEW_PARALLEL_FRONTIER_STATE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_PARALLEL_FRONTIER_STATE",
+      "TASK_B_REPLAY",
+      "ADDITIONAL_QUERY_REPAIR"
+    ],
+    "selected_surviving_route": "RECONCILE_EXISTING_CANONICAL_SURFACES",
+    "why_selected_route_is_fastest_sufficient": "All causal evidence already exists; only canonical mirrors are stale.",
+    "expected_parent_level_state_change": "FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED__NO_PARENT_CREDIT",
+    "stop_rule": "MERGE_TRUTH_ONLY_RECONCILIATION__THEN_FREEZE_FRESH_TASK_C"
+  }
+}
