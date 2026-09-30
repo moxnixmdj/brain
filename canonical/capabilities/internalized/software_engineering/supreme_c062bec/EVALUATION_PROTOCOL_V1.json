@@ -48,7 +48,7 @@
     "release": "v4.0.0",
     "task_toml_git_blob": "30effc9474322047e155854eea2fa7850329ad5a",
     "expert_time_estimate_hours": 0.75,
-    "purpose": "Validate uncontaminated task/environment binding, Supreme configuration adherence, artifact production, and separate independent verifier execution before expensive scoring.",
+    "purpose": "Fresh second preflight after the first execution instance failed. Validate that the now-fail-closed Supreme execution contract is actually obeyed before external submission, then use the independent verifier as zero-credit evidence.",
     "task_characteristics": {
       "category": "Software",
       "subcategory": "Algorithms",
@@ -60,7 +60,7 @@
         "/app/routing_result_1.json"
       ]
     },
-    "selection_reason": "Replaces html-js-filter because that task has documented Python agent/verifier runtime-interface mismatch evidence. Current repo/code search surfaced no task-specific defect for photonic-waveguide-routing, and its 0.75h expert estimate preserves the cheap-preflight role.",
+    "selection_reason": "Fresh CPU-only Software/Algorithms task with 0.75h expert estimate, selected after html-js-filter became spent. The zero-cost public carrier is already proven; this task tests corrected configuration adherence, not carrier availability.",
     "cognition_may_read": [
       "instruction.md",
       "task.toml",
@@ -71,7 +71,10 @@
       "tests/**"
     ],
     "capability_credit": 0,
-    "failure_meaning": "EXECUTION_OR_CONFIGURATION_PIPELINE_FALSIFIED__DO_NOT_INTERPRET_AS_FULL_BENCHMARK_SCORE"
+    "failure_meaning": "EXECUTION_OR_CONFIGURATION_PIPELINE_FALSIFIED__DO_NOT_INTERPRET_AS_FULL_BENCHMARK_SCORE",
+    "submission_requires_execution_contract_receipt": true,
+    "carrier": "moxnixmdj/verification-capsule-runner public GitHub Actions",
+    "carrier_status": "PROVEN_BY_PRIOR_PREFLIGHT"
   },
   "stage_order": [
     {
@@ -114,5 +117,20 @@
     "benchmark_solution_or_verifier_logic_must_not_be_read_by_configured_cognition_before_submission": true
   },
   "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_BRAIN_SUPREME_CONFIGURED_ROUTE_MEETS_OR_EXCEEDS_THE_CLAIMED_OPUS_5_5_BARS_AND_CONFIGURATION_CONTRIBUTION_IS_DEMONSTRATED",
-  "current_state": "READY_FOR_ZERO_CREDIT_EXECUTION_PREFLIGHT__CLEAN_TASK_SELECTED__CARRIER_REQUIRED"
+  "current_state": "PREFLIGHT_1_BEHAVIOR_FAIL__CARRIER_PROVEN__FAIL_CLOSED_ADHERENCE_CONTRACT_ADDED__FRESH_PREFLIGHT_2_SELECTED",
+  "configuration_adherence_contract": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/SUPREME_EXECUTION_CONTRACT_V1.json",
+  "spent_preflights": [
+    {
+      "task": "html-js-filter",
+      "benchmark": "Terminal-Bench 4.0",
+      "verdict": "EXECUTED_FAIL__CANDIDATE_BEHAVIOR_FALSIFIED",
+      "public_run_id": 36763187254,
+      "public_job_id": 110050666733,
+      "artifact_id": 11119623150,
+      "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/HTML_JS_FILTER_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+      "carrier_result": "PASS",
+      "capability_credit": 0,
+      "may_replay_for_promotion": false
+    }
+  ]
 }
