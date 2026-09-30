@@ -75,7 +75,9 @@
       "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
       "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002",
       "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004",
-      "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
+      "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+      "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+      "PARENT-THERMOPHYSICS-WATER-VISCOSITY-OPEN-RESEARCH-TASK-A-20260930-002"
     ]
   },
   "obsolescence_status": "NOT_YET_PROVEN__FRESH_OPEN_ENDED_TASK_A_FAILED_AT_AUTONOMOUS_CAPABILITY_ACQUISITION",
@@ -278,5 +280,40 @@
     "artifact_id": 11078414137,
     "first_causal_gap": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT",
     "parent_capability_credit": false
+  },
+  "concurrent_execution_race_quarantine": {
+    "status": "QUARANTINED__ZERO_CAPABILITY_SCOREBOARD_AND_RUNTIME_REPAIR_AUTHORITY",
+    "rule": "Only the canonically selected SQLite first-spend carrier PR95/run36674086293 defines the parent causal gap. Later same-task SQLite executions are replays. Thermophysics executions were not the selected parent spend and cannot define this frontier; because they physically executed, those exact thermophysics task instances are no longer fresh.",
+    "sqlite_duplicate_replays": [
+      {
+        "public_pr": 97,
+        "public_run_id": 36674110900,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY"
+      },
+      {
+        "public_pr": 97,
+        "public_run_id": 36674110980,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY"
+      }
+    ],
+    "thermophysics_unauthorized_spends": [
+      {
+        "public_pr": 96,
+        "public_run_id": 36674076805,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY__TASK_INSTANCE_SPENT"
+      },
+      {
+        "public_pr": 98,
+        "public_run_id": 36674084229,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY__TASK_INSTANCE_SPENT"
+      },
+      {
+        "public_pr": 99,
+        "public_run_id": 36674109140,
+        "status": "COMPLETED_FAILURE__ZERO_AUTHORITY__TASK_INSTANCE_SPENT"
+      }
+    ],
+    "thermophysics_task_id": "PARENT-THERMOPHYSICS-WATER-VISCOSITY-OPEN-RESEARCH-TASK-A-20260930-002",
+    "thermophysics_task_freshness_after_race": "SPENT_BY_UNAUTHORIZED_PHYSICAL_EXECUTION__MUST_NOT_BE_REUSED_AS_FRESH_PARENT_EVIDENCE"
   }
 }
