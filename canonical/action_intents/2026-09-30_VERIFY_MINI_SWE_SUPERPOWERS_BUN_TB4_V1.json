@@ -203,8 +203,8 @@
     ],
     "selected_surviving_route": "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_BUN_TB4__PUBLIC_INDEPENDENT_VERIFIER",
     "why_selected_route_is_fastest_sufficient": "It reuses the exact Brain-owned composition, carries the clean React failure repair as durable configuration, uses the already-leased untouched Bun task, the current GPT-5.6 Sol session, and the public independent verifier at $0 incremental spend.",
-    "expected_parent_level_state_change": "Obtain one fresh distinct independently verified current Terminal-Bench 4.0 result for the strengthened Brain-owned composition, or preserve the exact first causal failure with zero false ownership credit.",
-    "stop_condition": "After trusted current-base lease validation, read the frozen bun-sourcemap-leak instruction and only files/command outputs actually present in the built agent runtime; execute one action per step, preserve hidden verifier/task solution boundaries until terminal submission, submit exactly once, and award zero whole-family ownership credit from this single task.",
+    "expected_parent_level_state_change": "Obtain one fresh distinct independently verified Terminal-Bench 4.0 result for the strengthened Brain-owned mini-SWE-agent 2.4.6 + Superpowers composition on GPT-5.6 Sol, or preserve the exact first causal failure with zero false ownership credit.",
+    "stop_condition": "After trusted current-base lease validation, read the frozen bun-sourcemap-leak instruction and only files/command outputs actually present in the built agent runtime; execute mini-SWE one-action-per-step semantics through this GPT-5.6 Sol session with the strengthened Brain-owned Superpowers configuration via the public session bridge; preserve solution/**, tests/**, build-only source, and task-specific online hints unread until terminal submission; submit exactly once to the untouched independent verifier; award zero whole-family ownership credit from this single task.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T21:31:00Z",
@@ -257,7 +257,7 @@
       "challenger_routes": [
         {
           "route": "UNCHANGED_PRE_REACT_FAILURE_CONFIGURATION",
-          "resolution": "SUPERSEDED",
+          "resolution": "NON_DOMINATING",
           "comparison": {
             "CORRECTNESS": "Clean React verifier exposed over-strict invented validation.",
             "CAPABILITY_STRENGTH": "Weaker because it lacked explicit normative-contract-only validation.",
@@ -298,7 +298,7 @@
         "checked_at_utc": "2026-09-30T21:31:00Z",
         "max_age_hours": 2,
         "selected_route": "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_BUN_TB4__PUBLIC_INDEPENDENT_VERIFIER",
-        "status": "READY_PENDING_TRUSTED_CURRENT_BASE_VALIDATION",
+        "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
         "execution_dependencies_complete": true,
