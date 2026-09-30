@@ -246,7 +246,17 @@
             "INCREMENTAL_COST": "$0.",
             "RELIABILITY": "Invalid.",
             "VERIFIABILITY": "Contamination receipt proves disqualification."
-          }
+          },
+          "evidence": [
+            "canonical/capabilities/opus55/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json",
+            "Configured cognition read build-context-only gen_shards.py before any official submission."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: no official verifier was run and the exposed file is deleted from the final benchmark runtime by the frozen Dockerfile."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
         },
         {
           "route": "PAID_API_MODEL_ADAPTER",
@@ -258,7 +268,17 @@
             "INCREMENTAL_COST": "Violates hard $0.",
             "RELIABILITY": "Provider dependent.",
             "VERIFIABILITY": "Possible but constraint-invalid."
-          }
+          },
+          "evidence": [
+            "Project hard constraint incremental_spend_usd=0",
+            "Paid model API would add incremental spend."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED: terminal mission lock and PR576/PR578 theory invariants forbid paid credits/API billing."
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ]
         }
       ],
       "unresolved_plausible_dominators": [],
