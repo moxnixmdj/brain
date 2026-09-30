@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR304-SPENT-SCOPE-INSUFFICIENT-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Preserve PR304 as spent/non-crediting evidence, reject prewired research plans as sufficient parent proof, and replace the active blocker with PARENT_GENUINELY_OPEN_ENDED_CROSS_DOMAIN_MODEL_INDEPENDENT_REAL_TASK_B_REQUIRED__PREWIRED_RESEARCH_PLAN_INADMISSIBLE.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "PR304 terminal one-shot run 36669136068 / artifact 11077363706",
+    "PR304 first causal blocker EXECUTE:RuntimeError:JQ_FAILED: NUMERIC_RELATION_INPUT_NOT_NUMBER",
+    "parent capability useful_behavior requires autonomous decomposition, source/tool discovery and selection",
+    "PR304 supplied authority, exact URLs, JSON paths, formula and threshold, so it cannot establish that behavior"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile PR304 with zero progress credit and no replay; do not repair the subordinate PubChem type seam yet; then freeze one genuinely open-ended cross-domain parent Task B from the new canonical base with only the objective and acceptance semantics predeclared.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Restore canonical truth after PR304 executed once but proved only a prewired retrieval/computation path and failed before independent verification.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Define the exact remaining parent proof obligation without granting credit to scope-insufficient execution.",
+      "proxy_goals_deleted": [
+        "repair PubChem string parsing first",
+        "replay PR304",
+        "count one-shot execution as parent proof",
+        "open another prewired benchmark"
+      ],
+      "surviving_necessity": "One genuinely open-ended cross-domain model-independent parent task must require the inherited system itself to decompose, discover/select evidence and tools, compute, synthesize and verify."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current parent capability record and five inherited model-independent subcapabilities",
+        "PR304 producer terminal receipt",
+        "PR301 clean Task A evidence",
+        "promotion firewall merged in PR303"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: this action reconciles already-observed execution evidence and capability scope."
+      ],
+      "capability_work_deleted": [
+        "no type-seam repair",
+        "no new supplier",
+        "no model route",
+        "no task replay"
+      ],
+      "surviving_gap": "PARENT_GENUINELY_OPEN_ENDED_CROSS_DOMAIN_MODEL_INDEPENDENT_REAL_TASK_B_REQUIRED__PREWIRED_RESEARCH_PLAN_INADMISSIBLE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PR304 exposed a subordinate numeric-string type seam, but its prewired task shape cannot adjudicate the defining open-ended parent behavior.",
+      "delete_bypass_substitute_options": [
+        "delete parent credit for PR304",
+        "preserve the failure as non-crediting causal evidence",
+        "substitute a fresh objective-only task before any subordinate repair unless the fresh task independently requires it"
+      ],
+      "surviving_causal_blocker": "PARENT_GENUINELY_OPEN_ENDED_CROSS_DOMAIN_MODEL_INDEPENDENT_REAL_TASK_B_REQUIRED__PREWIRED_RESEARCH_PLAN_INADMISSIBLE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_SCOPE_AND_RUN_GENUINELY_OPEN_ENDED_FRESH_TASK",
+        "REPAIR_PR304_TYPE_SEAM_THEN_RUN_ANOTHER_PREWIRED_TASK",
+        "COUNT_PR304_AS_PARENT_EVIDENCE"
+      ],
+      "losing_routes_reason": "Type repair first optimizes a subordinate seam before proving it limits the actual parent behavior; counting PR304 would exceed its evidence scope.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No benchmark. Verify exact canonical mirrors, zero scoreboard counter increase, PR304 spent/no-replay provenance, and parent-record scope wording."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "prewired chemistry Task B replacement",
+        "PR304 replay",
+        "premature numeric-string repair"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "scope-correct parent evidence accounting",
+        "spent-task provenance",
+        "objective-only task requirement"
+      ],
+      "fresh_reuse_plan": "Freeze and execute a fresh objective-only cross-domain parent Task B after this reconciliation merges."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR304 terminal receipt",
+        "reused parent capability definition",
+        "reused PR303 promotion firewall"
+      ],
+      "search_stop_decision": "The contradiction is internal and directly evidenced; more external search cannot change whether PR304 was prewired.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_SCOPE_AND_RUN_GENUINELY_OPEN_ENDED_FRESH_TASK",
+      "REPAIR_PR304_TYPE_SEAM_THEN_RUN_ANOTHER_PREWIRED_TASK",
+      "COUNT_PR304_AS_PARENT_EVIDENCE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR304_REPLAY",
+      "PREMATURE_TYPE_SEAM_REPAIR",
+      "PREWIRED_TASK_AS_PARENT_PROOF"
+    ],
+    "selected_surviving_route": "RECONCILE_SCOPE_AND_RUN_GENUINELY_OPEN_ENDED_FRESH_TASK",
+    "why_selected_route_is_fastest_sufficient": "It removes an invalid proof path immediately and sends the next execution directly at the defining parent behavior, maximizing information gain.",
+    "expected_parent_level_state_change": "No capability credit; active blocker becomes PARENT_GENUINELY_OPEN_ENDED_CROSS_DOMAIN_MODEL_INDEPENDENT_REAL_TASK_B_REQUIRED__PREWIRED_RESEARCH_PLAN_INADMISSIBLE and next action becomes RUN_GENUINELY_OPEN_ENDED_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B__OBJECTIVE_ONLY__DISCOVER_SOURCES_TOOLS_AND_METHOD__STOP_ON_FIRST_CAUSAL_GAP.",
+    "stop_condition": "Merge the non-crediting reconciliation, then create the fresh objective-only task from that exact main.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Evidence reconciliation only; no external route selection is being authorized."
+    }
+  }
+}
