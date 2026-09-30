@@ -1,0 +1,218 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-BROAD-RESEARCH-DECOMPOSITION-ROUTING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+  "action_kind": "GENERIC_RUNTIME_ROUTING_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED::GENERIC_RUNTIME_ROUTING_REPAIR",
+  "expected_parent_frontier_change": "Acquire and independently qualify generic broad-research decomposition/routing so fresh open-ended objectives enter the inherited research frontend before package acquisition. No HTTP2 replay and no parent promotion from repair evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 691b08b7f51adca1ed980df384153b71ef38e046",
+    "PR469 exact guarded HTTP2 first-causal-gap receipt",
+    "plain_goal_bound_grounding.py broad decomposition hook",
+    "broad_objective_decompose.py generic role graph",
+    "astra_runtime.py open-research frontend precedence hook",
+    "open PR search returned no owner for this exact blocker"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "On current exact base, model-independent tests prove (1) multi-clause all-unresolved broad objectives expose generic decomposition, (2) generic method-choice language is not misclassified as a prewired recipe, (3) explicit URL/path/command recipes remain rejected, and (4) ASTRA routes an HTTP2-shaped fresh objective to the research frontend before any APT/PyPI acquisition. Independent guarded qualification required before inheritance.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
+    "real_outcome": "Restore the already-built generic open-research route for broad multi-clause objectives instead of sending them to irrelevant package acquisition.",
+    "required_capability": "MODEL_INDEPENDENT_GENERIC_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1",
+    "obs_goal": {
+      "real_outcome": "All-unresolved broad research objectives route through decomposition and open-research source frontend before supplier/package acquisition.",
+      "proxy_goals_deleted": [
+        "HTTP2 answer",
+        "HTTP2 replay",
+        "new source-discovery engine",
+        "new claim binder",
+        "new language model",
+        "package-ranking retune"
+      ],
+      "surviving_necessity": "Two false gates prevent the existing verified route from activating: single-clause-only decomposition activation and overbroad generic run/execute recipe rejection."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "broad_objective_decompose.py",
+        "plain_goal_bound_grounding.py",
+        "open_research_source_frontend.py",
+        "astra_runtime.py BROAD_RESEARCH_DECOMPOSITION_ROUTES_TO_RESEARCH_SOURCE_FRONTEND_BEFORE_PACKAGE_ACQUISITION"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no new subsystem",
+        "no external dependency",
+        "no package acquisition",
+        "no parent replay"
+      ],
+      "surviving_gap": "Repair the two generic activation predicates and qualify routing precedence."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic integration defect exposed by a fresh parent task; not HTTP2-specific.",
+      "delete_bypass_substitute_options": [
+        "Package acquisition path is causally wrong for epistemic research objectives.",
+        "Task-specific HTTP2 routing is forbidden.",
+        "Existing open-research frontend already supplies the required generic downstream route."
+      ],
+      "surviving_causal_blocker": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_TWO_GENERIC_ACTIVATION_PREDICATES_AND_REUSE_EXISTING_FRONTEND",
+        "ADD_NEW_RESEARCH_ROUTER",
+        "RETUNE_PACKAGE_DISCOVERY",
+        "MODEL_BASED_INTENT_CLASSIFIER"
+      ],
+      "losing_routes_reason": "The existing deterministic decomposer and runtime precedence hook are already present. A new router duplicates machinery; package retuning attacks the wrong layer; model classification violates the credited model-independent path.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use cross-domain multi-clause research objectives plus a runtime precedence mock that fails if external acquisition is touched. Never replay the spent HTTP2 task."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "generic package acquisition for recognized broad research objectives"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "broad objective role decomposition",
+        "open-web source frontend",
+        "generic evidence extraction",
+        "bounded claim binding"
+      ],
+      "fresh_reuse_plan": "After guarded independent qualification, freeze a materially different fresh open-ended parent Task B; never replay HTTP2."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse PR469 causal evidence",
+        "reuse existing source frontend and routing hook"
+      ],
+      "search_stop_decision": "The exact two local false gates are identified and the downstream route already exists; external route search cannot improve a two-predicate repair enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No external dependency required; revalidate exact current-base local route only."
+    },
+    "routes_considered": [
+      "REPAIR_TWO_GENERIC_ACTIVATION_PREDICATES_AND_REUSE_EXISTING_FRONTEND",
+      "ADD_NEW_RESEARCH_ROUTER",
+      "RETUNE_PACKAGE_DISCOVERY",
+      "MODEL_BASED_INTENT_CLASSIFIER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "PACKAGE_DISCOVERY_RETUNE",
+      "NEW_ROUTER",
+      "MODEL_CLASSIFIER"
+    ],
+    "selected_surviving_route": "REPAIR_TWO_GENERIC_ACTIVATION_PREDICATES_AND_REUSE_EXISTING_FRONTEND",
+    "why_selected_route_is_fastest_sufficient": "Two generic predicate changes reactivate an existing qualified pipeline and can be falsified with deterministic regressions on current bytes.",
+    "expected_parent_level_state_change": "Generic routing child acquired only; parent capability remains unpromoted pending materially different fresh parent validation.",
+    "stop_condition": "Independent guarded qualification passes on exact repair bytes with package acquisition provably unreachable for recognized broad-research objectives.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T08:24:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REPAIR_TWO_GENERIC_ACTIVATION_PREDICATES_AND_REUSE_EXISTING_FRONTEND",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "DIRECT_PROBE"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR469 guarded HTTP2 first-causal-gap receipt",
+          "plain_goal_bound_grounding.py line-level decomposition gate",
+          "broad_objective_decompose.py recipe detector",
+          "astra_runtime.py broad research frontend precedence"
+        ],
+        "DIRECT_PROBE": [
+          "HTTP2 guarded artifact shows grounded_clause_count=0, five unresolved clauses, broad_objective_decomposition=null, then CAPABILITY_ACQUISITION_REQUIRED."
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [],
+      "negative_search_summary": "No unresolved plausible dominator: the defect is local and the intended downstream capability already exists.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_TWO_GENERIC_ACTIVATION_PREDICATES_AND_REUSE_EXISTING_FRONTEND",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_REPAIR_FAILURE",
+        "BEFORE_PARENT_VALIDATION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T08:24:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_TWO_GENERIC_ACTIVATION_PREDICATES_AND_REUSE_EXISTING_FRONTEND",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Brain GitHub write/PR surface",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T08:24:00Z",
+            "evidence": [
+              "exact-base branch creation"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "Python stdlib unittest/mock/importlib",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STABLE",
+            "scope": "PUBLIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T08:24:00Z",
+            "evidence": [
+              "existing canonical regression suite"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "PUBLIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
