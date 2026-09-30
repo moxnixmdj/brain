@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SYNC-PARENT-OPENENDED-COMPILE-GAP-CANONICAL-MIRRORS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Synchronize pointer, queue, and scoreboard to the already-canonical hierarchy/target residual and next action on exact main dc38bf8370d692d3f18a5aff446d26933f9dd03a. Preserve all counters, runtime bytes, no-replay state, and parent non-promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "ACTIVE_GOAL_HIERARCHY_V1 and active target already localize the admissible PR337 Task A failure to BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "CANONICAL_POINTER, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1, and REAL_OUTPUT_SCOREBOARD_V1 still mirror the superseded broad Task-A-needed blocker",
+    "enforce_goal_hierarchy.py requires pointer critical_blocker/next_step, queue exact_blocker/next_action, scoreboard next_progress_event_target, hierarchy, and target to agree",
+    "authoritative run 36670516407 / artifact 11077861584 is spent and replay-forbidden; no capability or task-completion credit is added"
+  ],
+  "evidence_presence_classification": "CANONICAL_CROSS_SURFACE_MIRROR_INCONSISTENCY_VERIFIED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Synchronize only the stale canonical mirrors to the current hierarchy/target authority, preserve counters and runtime, then stop for route-frontier recomputation. No runtime repair or task execution.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore canonical cross-surface consistency without changing the already-adjudicated causal frontier.",
+    "required_capability": "CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "Make every canonical frontier mirror name the same current blocker and next action.",
+      "proxy_goals_deleted": [
+        "change the causal diagnosis",
+        "repair runtime",
+        "replay Task A",
+        "award capability or task-completion credit"
+      ],
+      "surviving_necessity": "Pointer, queue, scoreboard, hierarchy, and active target must agree before consequential repair planning."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical hierarchy",
+        "active frontier target",
+        "pointer",
+        "queue",
+        "scoreboard",
+        "enforce_goal_hierarchy.py cross-surface guard"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no runtime mutation",
+        "no carrier mutation",
+        "no external execution",
+        "no new capability implementation"
+      ],
+      "surviving_gap": "CANONICAL_POINTER_QUEUE_SCOREBOARD_STALE_AFTER_PARTIAL_FRONTIER_RECONCILIATION"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "State-mirror inconsistency only; hierarchy and target are already authoritative and consistent.",
+      "delete_bypass_substitute_options": [
+        "reuse current hierarchy and target as source of truth",
+        "update only stale mirrors",
+        "preserve all counters and evidence"
+      ],
+      "surviving_causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "SYNC_STALE_CANONICAL_MIRRORS_TO_CURRENT_HIERARCHY_TARGET",
+        "REWRITE_CAUSAL_RECONCILIATION",
+        "REPAIR_RUNTIME"
+      ],
+      "losing_routes_reason": "Rewriting the causal result is unnecessary and runtime repair is forbidden until route-frontier recomputation. Mirror synchronization is the minimum sufficient correction.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use the existing cross-surface consistency checks in enforce_goal_hierarchy.py; no external benchmark is needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "stale mirror values that still request another Task A",
+        "contaminated PR349 stale-PR317 authority path"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "existing canonical hierarchy/target reconciliation",
+        "existing mirror consistency guard"
+      ],
+      "fresh_reuse_plan": "After mirror consistency passes, recompute the route frontier for the localized generic compiler gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused merged dc38bf8 causal reconciliation",
+        "reused enforce_goal_hierarchy cross-surface equality predicates"
+      ],
+      "search_stop_decision": "No external route search belongs inside a pure mirror consistency correction.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Exact current main dc38bf8370d692d3f18a5aff446d26933f9dd03a was refreshed immediately before mutation."
+    },
+    "routes_considered": [
+      "SYNC_STALE_CANONICAL_MIRRORS_TO_CURRENT_HIERARCHY_TARGET",
+      "REWRITE_CAUSAL_RECONCILIATION",
+      "REPAIR_RUNTIME"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_REPLAY",
+      "RUNTIME_REPAIR",
+      "CAUSAL_REWRITE",
+      "COUNTER_INFLATION"
+    ],
+    "selected_surviving_route": "SYNC_STALE_CANONICAL_MIRRORS_TO_CURRENT_HIERARCHY_TARGET",
+    "why_selected_route_is_fastest_sufficient": "Three stale mirrors can be aligned mechanically to already-canonical hierarchy/target values with zero execution, zero spend, and no claim expansion.",
+    "expected_parent_level_state_change": "Cross-surface canonical consistency restored; causal blocker and parent credit unchanged.",
+    "stop_condition": "Stop after mirror guard passes; next action remains route-frontier recomputation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Truth-preserving canonical mirror synchronization only; no implementation route is being selected."
+    }
+  }
+}
