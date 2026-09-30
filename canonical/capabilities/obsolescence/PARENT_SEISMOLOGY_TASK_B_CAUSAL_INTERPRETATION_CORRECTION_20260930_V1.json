@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_CAUSAL_INTERPRETATION_CORRECTION_V1",
+  "status": "CORRECTED_FROM_TERMINAL_ARTIFACT_CONTENT",
+  "supersedes_causal_interpretation_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+  "authoritative_run_id": 36693929830,
+  "job_id": 109817291758,
+  "artifact_id": 11086898224,
+  "artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7",
+  "unchanged_truth": {
+    "task_spent": true,
+    "replay_allowed": false,
+    "parent_capability_promoted": false,
+    "source_frontend_status": "SOURCE_FRONTEND_READY",
+    "provenance_verified_candidate_count": 8,
+    "relevance_verified_candidate_count": 1,
+    "evidence_extracted_candidate_count": 1,
+    "claim_relation_evaluated_count": 0
+  },
+  "incorrect_prior_inference": "The first gap was objective-literal numeric threshold binding after decision-relevant evidence extraction.",
+  "artifact_observations": {
+    "focused_query_tokens": [
+      "2025",
+      "kamchatka",
+      "earthquake",
+      "generated",
+      "tsunami",
+      "observed",
+      "maximum",
+      "amplitude",
+      "exceeding",
+      "meter",
+      "any",
+      "officially",
+      "monitored",
+      "station",
+      "outside",
+      "russia"
+    ],
+    "selected_source": {
+      "url": "https://simple.wikipedia.org/wiki/2025",
+      "title": "2025 - Simple English Wikipedia, the free encyclopedia",
+      "matched_terms": [
+        "2025",
+        "russia"
+      ],
+      "matched_term_count": 2,
+      "focused_query_token_count": 16
+    },
+    "extracted_evidence_character": "Generic 2025 event-page blocks; the best blocks mention the Kamchatka earthquake/tsunami but do not provide the requested officially monitored station amplitude threshold evidence.",
+    "binder_result": {
+      "status": "UNBOUND",
+      "reason": "OBJECTIVE_RELATION_AMBIGUOUS_OR_UNSUPPORTED"
+    },
+    "excluded_relevant_metadata_candidate": {
+      "url": "https://doi.org/10.22541/essoar.177032873.37227439/v1",
+      "title": "The slip distribution of the 2025 Kamchatka earthquake estimated from dispersive tsunami images observed by SWOT satellite",
+      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+      "exclusion_reason": "OPEN_RESEARCH_SOURCE_FRONTEND_RELEVANCE_POOL_ACCEPTS_ONLY_RETRIEVAL_PROVENANCE_VERIFIED"
+    }
+  },
+  "corrected_first_causal_stage": "SOURCE_DISCOVERY_RELEVANCE_ADMISSION",
+  "corrected_first_causal_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "causal_reasoning": [
+    "A relation binder cannot correctly bind the requested measurement when the admitted source does not contain that measurement.",
+    "The frontend treated any positive BM25 match as relevance-ready, allowing 2/16 focused tokens to admit a generic year page.",
+    "The frontend discarded bibliographically verified candidates before relevance ranking, losing stronger subject metadata that could refine live retrieval.",
+    "Therefore the binder failure is downstream and cannot define the first causal gap."
+  ],
+  "next_required_action": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
