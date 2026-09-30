@@ -30,6 +30,68 @@ def _load_sibling(name):
 def _canon(value):
     return " ".join(str(value or "").strip().split())
 
+def _verification_status(item):
+    return str(((item or {}).get("verification") or {}).get("status") or "")
+
+def _provenance_verified(item):
+    return _verification_status(item) in {
+        "RETRIEVAL_PROVENANCE_VERIFIED",
+        "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+    }
+
+def _ranking_candidate(item):
+    candidate=dict((item or {}).get("candidate") or {})
+    verification=dict((item or {}).get("verification") or {})
+    record_title=_canon(verification.get("record_title"))
+    if record_title:
+        candidate["record_title"]=record_title
+    return candidate
+
+def _rank_verified_pool(objective,items,relevance_ranker):
+    items=[x for x in items if _provenance_verified(x)]
+    if not items:
+        return {
+          "status":"RELEVANCE_UNRESOLVED",
+          "reason":"PROVENANCE_VERIFIED_CANDIDATES_REQUIRED",
+          "ranked_candidates":[],
+          "output_verified":False,
+        },None
+    candidates=[_ranking_candidate(x) for x in items]
+    relevance=relevance_ranker.rank(objective,candidates)
+    ready=(
+        relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
+        and relevance.get("output_verified") is True
+        and relevance.get("top_candidate_original_index") is not None
+        and ((relevance.get("top_candidate_admission") or {}).get("verified") is True)
+    )
+    if not ready:
+        return relevance,None
+    index=int(relevance["top_candidate_original_index"])
+    if not (0<=index<len(items)):
+        return relevance,None
+    selected=dict(items[index])
+    selected["ranking_candidate"]=candidates[index]
+    return relevance,selected
+
+def _metadata_refined_query(relevance,selected):
+    verification=dict((selected or {}).get("verification") or {})
+    candidate=dict((selected or {}).get("candidate") or {})
+    focus=_canon(((relevance.get("query_focus") or {}).get("query")))
+    title=_canon(verification.get("record_title") or candidate.get("record_title") or candidate.get("title"))
+    if not focus or not title:
+        return None
+    # Preserve the frozen subject query and append only provenance-verified
+    # bibliographic title metadata. No source/domain/value is invented here.
+    query=_canon(focus+" "+title)
+    return query[:1200].rsplit(" ",1)[0] if len(query)>1200 else query
+
+def _verify_discovery(discovered,verifier,timeout):
+    out=[]
+    for candidate in discovered.get("candidates") or []:
+        verification=verifier.verify(candidate,timeout=timeout)
+        out.append({"candidate":candidate,"verification":verification})
+    return out
+
 def run(objective,decomposition,limit=12,timeout=15):
     objective=_canon(objective)
     if not objective:
@@ -65,19 +127,18 @@ def run(objective,decomposition,limit=12,timeout=15):
             "incremental_spend_usd":0,
         }
 
-    verifications=[]
-    for candidate in discovered.get("candidates") or []:
-        verification=verifier.verify(candidate,timeout=timeout)
-        verifications.append({"candidate":candidate,"verification":verification})
-
+    verifications=_verify_discovery(discovered,verifier,timeout)
+    provenance_verified=[x for x in verifications if _provenance_verified(x)]
     retrieval_verified=[
-        x for x in verifications
-        if x["verification"].get("status")=="RETRIEVAL_PROVENANCE_VERIFIED"
+        x for x in verifications if _verification_status(x)=="RETRIEVAL_PROVENANCE_VERIFIED"
     ]
-    if not retrieval_verified:
+    bibliographic_verified=[
+        x for x in verifications if _verification_status(x)=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+    ]
+    if not provenance_verified:
         return {
             "schema":SCHEMA,
-            "status":"SOURCE_RETRIEVAL_PROVENANCE_BLOCKED",
+            "status":"SOURCE_PROVENANCE_BLOCKED",
             "objective":objective,
             "decomposition":decomposition,
             "discovery":discovered,
@@ -85,30 +146,80 @@ def run(objective,decomposition,limit=12,timeout=15):
             "authority_identity_verifications":[],
             "objective_relevance_verifications":[],
             "evidence_extractions":[],
-            "next_required_capability":"MODEL_INDEPENDENT_LIVE_RETRIEVAL_PROVENANCE_FOR_DISCOVERED_WEB_SOURCE",
+            "next_required_capability":"MODEL_INDEPENDENT_PROVENANCE_VERIFICATION_FOR_DISCOVERED_SOURCE",
             "model_dependency_count":0,
             "incremental_spend_usd":0,
         }
 
-    candidates=[x["candidate"] for x in retrieval_verified]
-    relevance=relevance_ranker.rank(objective,candidates)
-    relevance_ready=(
-        relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
-        and relevance.get("output_verified") is True
-        and relevance.get("top_candidate_original_index") is not None
+    initial_relevance,selected=_rank_verified_pool(
+        objective,provenance_verified,relevance_ranker
     )
+    relevance=initial_relevance
+    selected_item=None
+    selected_source_origin=None
+    bibliographic_materialization=None
+    refinement=None
 
+    if selected is not None:
+        selected_status=_verification_status(selected)
+        if selected_status=="RETRIEVAL_PROVENANCE_VERIFIED":
+            selected_item=selected
+            selected_source_origin="INITIAL_LIVE_RETRIEVAL"
+        elif selected_status=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+            materialized=verifier.materialize_retrieval(
+                selected.get("candidate") or {},
+                selected.get("verification") or {},
+                timeout=timeout,
+            )
+            bibliographic_materialization={
+                "candidate":selected.get("candidate"),
+                "bibliographic_verification":selected.get("verification"),
+                "materialization":materialized,
+            }
+            if materialized.get("status")=="RETRIEVAL_PROVENANCE_VERIFIED":
+                selected_item={
+                    "candidate":selected.get("candidate"),
+                    "verification":materialized,
+                    "ranking_candidate":selected.get("ranking_candidate"),
+                }
+                selected_source_origin="BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION"
+            else:
+                refined_query=_metadata_refined_query(initial_relevance,selected)
+                if refined_query:
+                    refined_discovery=discovery.discover(
+                        objective,limit=limit,timeout=timeout,
+                        query_override=refined_query,
+                    )
+                    refined_verifications=(
+                        _verify_discovery(refined_discovery,verifier,timeout)
+                        if refined_discovery.get("status")=="CANDIDATES_DISCOVERED"
+                        else []
+                    )
+                    refined_retrieval=[
+                        x for x in refined_verifications
+                        if _verification_status(x)=="RETRIEVAL_PROVENANCE_VERIFIED"
+                    ]
+                    refined_relevance,refined_selected=_rank_verified_pool(
+                        objective,refined_retrieval,relevance_ranker
+                    )
+                    refinement={
+                        "query":refined_query,
+                        "discovery":refined_discovery,
+                        "provenance_verifications":refined_verifications,
+                        "relevance":refined_relevance,
+                    }
+                    if refined_selected is not None:
+                        selected_item=refined_selected
+                        selected_source_origin="BIBLIOGRAPHIC_METADATA_REFINED_LIVE_RETRIEVAL"
+                        relevance=refined_relevance
+
+    relevance_ready=selected_item is not None
     authority_verifications=[]
     evidence_extractions=[]
-    selected_item=None
-    if relevance_ready:
-        index=int(relevance["top_candidate_original_index"])
-        if 0<=index<len(retrieval_verified):
-            selected_item=retrieval_verified[index]
 
     if selected_item is not None:
         candidate=dict(selected_item["candidate"])
-        provenance=selected_item["verification"]
+        provenance=dict(selected_item["verification"])
         enriched=dict(candidate)
         if provenance.get("final_url"):
             enriched["final_url"]=provenance["final_url"]
@@ -135,6 +246,7 @@ def run(objective,decomposition,limit=12,timeout=15):
             "candidate":candidate,
             "provenance":provenance,
             "relevance":relevance,
+            "selected_source_origin":selected_source_origin,
             "authority_identity_metadata":optional_authority,
             "authority_identity_used_for_admission":False,
             "extraction":extracted,
@@ -156,9 +268,7 @@ def run(objective,decomposition,limit=12,timeout=15):
         for item in evidence_extracted:
             extraction=item.get("extraction") or {}
             try:
-                bound=claim_binder.bind(
-                    objective,extraction,evaluate_relation=True
-                )
+                bound=claim_binder.bind(objective,extraction,evaluate_relation=True)
             except Exception as exc:
                 bound={
                     "status":"UNBOUND",
@@ -197,7 +307,12 @@ def run(objective,decomposition,limit=12,timeout=15):
         "decomposition":decomposition,
         "discovery":discovered,
         "provenance_verifications":verifications,
-        "provenance_verified_candidate_count":len(retrieval_verified),
+        "provenance_verified_candidate_count":len(provenance_verified),
+        "retrieval_provenance_verified_candidate_count":len(retrieval_verified),
+        "bibliographic_provenance_verified_candidate_count":len(bibliographic_verified),
+        "bibliographic_materialization":bibliographic_materialization,
+        "metadata_anchored_refinement":refinement,
+        "selected_source_origin":selected_source_origin,
         "authority_identity_verifications":authority_verifications,
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"OPTIONAL_HOST_TO_ROR_ORGANIZATION_METADATA_ONLY__NOT_ADMISSION_GATE",
@@ -207,7 +322,7 @@ def run(objective,decomposition,limit=12,timeout=15):
             "candidate":selected_item["candidate"] if selected_item else None,
         }],
         "relevance_verified_candidate_count":1 if relevance_ready else 0,
-        "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_OBJECTIVE_RELEVANCE_ONLY",
+        "relevance_claim_scope":"DETERMINISTIC_BM25_PLUS_FOCUSED_QUERY_TOKEN_COVERAGE_ADMISSION_ONLY",
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
         "claim_relation_evaluations":claim_relation_evaluations,
@@ -217,15 +332,15 @@ def run(objective,decomposition,limit=12,timeout=15):
         "primary_source_verified_candidate_count":0,
         "role_progress":{
             "SOURCE_DISCOVERY":(
-                "OBJECTIVE_RELEVANCE_SELECTED_PROVENANCE_VERIFIED_SOURCE_AVAILABLE"
-                if relevance_ready else "CANDIDATES_WITH_LIVE_RETRIEVAL_PROVENANCE_AVAILABLE"
+                "OBJECTIVE_RELEVANCE_SELECTED_LIVE_MATERIALIZED_SOURCE_AVAILABLE"
+                if relevance_ready else "PROVENANCE_VERIFIED_CANDIDATES_AVAILABLE__NO_ADMISSIBLE_SUBJECT_COVERAGE"
             ),
             "EVIDENCE_ACQUISITION":(
                 "GENERIC_PROVENANCE_BEARING_OBJECTIVE_GROUNDED_EVIDENCE_AVAILABLE"
                 if evidence_ready else
-                "RELEVANCE_SELECTED_SOURCE_AVAILABLE__GENERIC_EVIDENCE_EXTRACTION_REQUIRED"
+                "RELEVANCE_SELECTED_LIVE_SOURCE_AVAILABLE__GENERIC_EVIDENCE_EXTRACTION_REQUIRED"
                 if relevance_ready else
-                "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
+                "BLOCKED_ON_OBJECTIVE_RELEVANCE_ADMISSION"
             ),
             "EVIDENCE_EXTRACTION":(
                 "OBJECTIVE_GROUNDED_AUDITABLE_EVIDENCE_UNITS_AVAILABLE__FACTUAL_CORRECTNESS_UNVERIFIED"
@@ -251,7 +366,7 @@ def run(objective,decomposition,limit=12,timeout=15):
             if evidence_ready else
             "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
             if relevance_ready else
-            "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
+            "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_AND_LIVE_SOURCE_ADMISSION_V1"
         ),
         "authority_identity_claims_made":bool(authority_verified),
         "authority_claims_made":False,
