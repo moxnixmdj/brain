@@ -27,6 +27,13 @@ with tempfile.TemporaryDirectory() as td:
     subprocess.run([sys.executable,str(BUILDER),"--output",str(out)],check=True)
     text=out.read_text(encoding="utf-8")
     assert text.startswith("agent:\n  system_template: |\n")
-    assert "BRAIN FAIL-CLOSED COMPLETION CONTRACT V3" in text\n    assert "REQUIREMENT TRACEABILITY GATE" in text\n    assert "ACCEPTANCE COVERAGE GATE" in text\n    assert "RUNTIME ORACLE GATE" in text\n    assert "BROWSER_AVAILABLE=NONE IS A BLOCKER" in text\n    assert "SINGLE TERMINAL AUTHORITY" in text\n    assert "BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1" in text\n    for name in m["components"]["methodology"]["skill_pins"]:
+    assert "BRAIN FAIL-CLOSED COMPLETION CONTRACT V3" in text
+    assert "REQUIREMENT TRACEABILITY GATE" in text
+    assert "ACCEPTANCE COVERAGE GATE" in text
+    assert "RUNTIME ORACLE GATE" in text
+    assert "BROWSER_AVAILABLE=NONE IS A BLOCKER" in text
+    assert "SINGLE TERMINAL AUTHORITY" in text
+    assert "BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1" in text
+    for name in m["components"]["methodology"]["skill_pins"]:
         assert f"SUPERPOWERS SKILL: {name}" in text
 print("BRAIN_MINI_SWE_SUPERPOWERS_COMPOSED_PACKAGE_PASS")
