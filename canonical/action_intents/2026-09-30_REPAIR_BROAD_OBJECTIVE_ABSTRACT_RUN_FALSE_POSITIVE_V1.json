@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-BROAD-OBJECTIVE-ABSTRACT-RUN-FALSE-POSITIVE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "73f8331cddf556af0daece3aa32998ac992981d0",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "BROAD_OBJECTIVE_DECOMPOSITION_FALSELY_REJECTS_ABSTRACT_EXECUTION_LANGUAGE",
+  "action_kind": "GENERIC_CAUSAL_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OBJECTIVE_ABSTRACT_EXECUTION_LANGUAGE",
+  "prior_work_checked": [
+    "Guarded HTTP2 parent run 36688193204 physically started exactly once and stopped at the first causal gap.",
+    "Runner PR170 records grounded_clause_count=0 and broad_objective_decomposition=null before generic capability acquisition.",
+    "Current broad_objective_decompose.py rejects every objective containing bare 'run ' or 'execute ' as an explicit recipe.",
+    "The frozen objective used abstract language 'choose and run a zero-cost verification method' without supplying a tool, command, formula, URL, or procedure.",
+    "Existing canonical tests distinguish broad objectives from concrete URL/path recipes but do not cover abstract execution-language false positives."
+  ],
+  "evidence_presence_classification": "FRESH_PARENT_CAUSAL_GAP_OBSERVED",
+  "expected_parent_frontier_change": "Make broad decomposition reject concrete supplied execution recipes while accepting abstract requirements to select/run/execute an unspecified verification method, then independently guard-qualify the exact bytes before another fresh parent task.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after the generic classifier repair and regression tests are independently guard-qualified. Do not replay the spent HTTP2 task.",
+  "recursive_obs": {
+    "surviving_necessity": "Broad open-ended objectives need deterministic role decomposition when no bound clause matches.",
+    "selected_surviving_route": "NARROW_CONCRETE_RECIPE_CLASSIFIER",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_TASK_REPLAY",
+      "TASK_SPECIFIC_HTTP2_LITERAL",
+      "MODEL_CLASSIFIER",
+      "DISABLING_EXPLICIT_RECIPE_GUARD",
+      "NEW_PARENT_EXECUTION_BEFORE_REPAIR_QUALIFICATION"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The first causal failure is a single over-broad lexical gate. Narrowing that gate preserves fail-closed concrete-recipe rejection without adding cognition or task-specific knowledge.",
+    "stop_rule": "QUALIFY_EXACT_GENERIC_REPAIR_THEN_FREEZE_A_FRESH_PARENT_TASK"
+  }
+}
