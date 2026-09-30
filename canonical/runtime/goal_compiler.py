@@ -3693,7 +3693,8 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
     Supported semantic form is intentionally generic and narrow: determine/check/
     verify/assess whether two causally prior scalar results differ by at most a
     literal finite numeric threshold. The compiler never binds domain names or
-    source-specific literals. Runtime jq type checks fail closed on non-numbers.
+    source-specific literals. Runtime jq normalizes only bounded numeric strings
+    or native numbers and fails closed on every other scalar/container type.
     """
     text=str(clause or "").strip()
     m=re.match(
@@ -3769,12 +3770,19 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
       "expect":{"type":"field_equals","field":"verified","value":True},
     }
     filt=(
+      'def scalar_number: '
+      'if type=="number" then . '
+      'elif type=="string" and (length <= 96) '
+      'and test("^[+-]?(?:[0-9]+(?:\\\\.[0-9]*)?|\\\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$") '
+      'then tonumber '
+      'else error("NUMERIC_RELATION_INPUT_NOT_NUMBER") end; '
       '.[0] as $r '
-      '| if (($r.left|type)!="number" or ($r.right|type)!="number" or ($r.threshold|type)!="number") '
-      'then error("NUMERIC_RELATION_INPUT_NOT_NUMBER") '
-      'else (($r.left-$r.right)|fabs) as $d '
-      '| {left:$r.left,right:$r.right,threshold:$r.threshold,'
-      'absolute_difference:$d,relation:"ABS_DIFF_LTE",predicate:($d <= $r.threshold)} end'
+      '| ($r.left|scalar_number) as $left '
+      '| ($r.right|scalar_number) as $right '
+      '| ($r.threshold|scalar_number) as $threshold '
+      '| (($left-$right)|fabs) as $d '
+      '| {left:$left,right:$right,threshold:$threshold,'
+      'absolute_difference:$d,relation:"ABS_DIFF_LTE",predicate:($d <= $threshold)}'
     )
     compute={
       "type":"invoke_capability",
