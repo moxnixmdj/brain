@@ -71,19 +71,20 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Return immediately to the parent open-ended technical/scientific capability and run a new materially different consequential real task; stop on the first new causal gap and apply current-base recursive OBS before any repair.",
+    "objective": "Return immediately to the parent open-ended technical/scientific capability and run a new materially different consequential real task using inherited grounding, composition, numeric relation, and typed scalar numeric-expression children; stop at the first new causal gap.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_ACQUISITION_20260930_V1.json",
-    "repair_status": "FIRST_PARENT_NUMERIC_RELATION_GAP_CLOSED_BY_VERIFIED_EXISTING_JQ_REUSE__PARENT_NOT_PROMOTED",
-    "prohibition": "NO_GEOPHYSICS_REPLAY__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__NO_TASK_SPECIFIC_PATCH__NO_PARENT_PROMOTION_FROM_COMPONENT_EVIDENCE",
-    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "exact_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED_AFTER_TYPED_NUMERIC_EXPRESSION_ACQUISITION",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
+    "repair_status": "TYPED_SCALAR_NUMERIC_EXPRESSION_SUBCAPABILITY_ACQUIRED_VERIFIED__PARENT_NOT_PROMOTED",
+    "prohibition": "NO_ASTRONOMY_REPLAY__NO_GEOPHYSICS_REPLAY__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__NO_TASK_SPECIFIC_PATCH__NO_PARENT_PROMOTION_FROM_COMPONENT_EVIDENCE",
+    "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_SPENT_TASK_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
       "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
       "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-      "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1"
+      "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+      "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1"
     ],
     "latest_fresh_real_run_id": 36652169397,
     "latest_fresh_reuse_run_id": 36652623916,
@@ -96,7 +97,10 @@
     "latest_parent_real_task_artifact_digest": "sha256:106d28719e5c6bc0bc676b3d54a811874202b1e30985c4c0c59f0aa3560ded5b",
     "latest_numeric_relation_qualification_run_id": 36664102642,
     "latest_numeric_relation_qualification_artifact_id": 11075158049,
-    "latest_numeric_relation_qualification_artifact_digest": "sha256:b47bbe491db198bcbd4c09b7a9e8cfeac95062989300eca8f8784c117a1222d1"
+    "latest_numeric_relation_qualification_artifact_digest": "sha256:b47bbe491db198bcbd4c09b7a9e8cfeac95062989300eca8f8784c117a1222d1",
+    "latest_typed_numeric_expression_qualification_run_id": 36666277034,
+    "latest_typed_numeric_expression_qualification_artifact_id": 11075549084,
+    "latest_typed_numeric_expression_qualification_artifact_digest": "sha256:8a222b5ced5eb1f0e37534185b0d689bf10c81a944398349614bdefd7abc36e0"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
