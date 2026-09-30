@@ -2,8 +2,14 @@
   "schema": "PROJECT_BRAIN_RECURSIVE_OBS_RECEIPT_V4",
   "status": "SCHEMA_TEMPLATE__NOT_PROGRESS_ARTIFACT",
   "supersedes": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
-  "authority": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+  "authority": [
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
+    "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md"
+  ],
   "required_fields": [
+    "reasoning_durability",
+    "theory_invariants",
     "canonical_generation_or_commit",
     "canonical_base_commit",
     "real_outcome",
@@ -240,5 +246,31 @@
     ],
     "evidence_scope": "GLOBAL_OR_ACCOUNT_SPECIFIC_OR_LOCAL_OR_REGION_SPECIFIC",
     "account_or_region_specific_evidence_scope_rule": "MUST_EQUAL_DEPENDENCY_SCOPE"
-  }
+  },
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_policy": "FIND_EXISTING__CONFIGURE__VERIFY__SAVE_PERMANENTLY",
+    "capability_externalization": "FORBIDDEN_AS_NORMAL_OPERATION",
+    "underlying_capability_invention": "FORBIDDEN",
+    "opus_acceptance_bar": "GREATER_THAN_OR_EQUAL_TO_OPUS_5_5"
+  },
+  "reasoning_durability": {
+    "receipt_required": true,
+    "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "required_fields": [
+      "real_objective",
+      "governing_invariants",
+      "material_premises",
+      "evidence_refs",
+      "conclusion",
+      "selected_route",
+      "rejected_material_alternatives",
+      "uncertainties",
+      "next_action",
+      "supersession_conditions",
+      "supersedes"
+    ]
+  },
+  "build_interpretation": "INTEGRATION_CONFIGURATION_PACKAGING_ROUTING_VERIFICATION_RECOVERY_GLUE_ONLY__NOT_UNDERLYING_CAPABILITY_INVENTION"
 }
