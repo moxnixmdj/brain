@@ -18,9 +18,6 @@ permissions:
   actions: write
 
 concurrency:
-  # Different portfolio missions must be able to run concurrently. A commit SHA
-  # identifies one exact mission-triggering push while still deduplicating
-  # accidental duplicate delivery of that same push.
   group: astra-shared-runtime-${{ github.sha }}
   cancel-in-progress: false
 
@@ -31,9 +28,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Execute the exact triggering revision. Checking out moving `main`
-          # caused a real 2026-09-24 race where diff-tree could no longer see
-          # the mission change after later commits advanced the branch.
           ref: ${{ github.sha }}
           fetch-depth: 2
 
@@ -59,94 +53,9 @@ jobs:
             esac
             git ls-files --error-unmatch "$MISSION" >/dev/null
           else
-            # Merge commits need an explicit first-parent diff. Without -m,
-            # git diff-tree emits no per-parent paths for a merge commit, which
-            # caused fresh parent missions merged to main to fail before ASTRA
-            # ever started.
             mapfile -t MISSIONS < <(
               git diff-tree --no-commit-id --name-only -r -m --first-parent "$GITHUB_SHA" |
-              grep '^canonical/astra_runtime/missions/.*\.json
-            if [ "${#MISSIONS[@]}" -ne 1 ]; then
-              printf 'Expected exactly one changed mission, got %s\n' "${#MISSIONS[@]}" >&2
-              printf '%s\n' "${MISSIONS[@]:-}" >&2
-              exit 40
-            fi
-            MISSION="${MISSIONS[0]}"
-          fi
-          echo "path=$MISSION" >> "$GITHUB_OUTPUT"
-          echo "ASTRA_RUNTIME_MISSION_PATH=$MISSION"
-          python - "$MISSION" <<'PY'
-          import json, pathlib, sys
-          p = pathlib.Path(sys.argv[1])
-          x = json.loads(p.read_text(encoding="utf-8"))
-          if x.get("schema") != "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1":
-              raise SystemExit("invalid mission schema")
-          print("ASTRA_RUNTIME_MISSION_ID=" + x["mission_id"])
-          PY
-
-      - name: Execute shared runtime mission
-        shell: bash
-        run: |
-          set -euo pipefail
-          python canonical/runtime/astra_runtime.py "${{ steps.mission.outputs.path }}"
-
-      - name: Persist runtime state, evidence, and continuation missions
-        if: always()
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          git config user.name "Project Brain ASTRA Runtime"
-          git config user.email "project-brain-astra-runtime@users.noreply.github.com"
-          git add -A canonical/astra_runtime
-
-          # Registry mutation is allowed only for missions that explicitly
-          # declare it. Runtime/source code remains unstaged and immutable.
-          MISSION="${{ steps.mission.outputs.path }}"
-          if python - "$MISSION" <<'PY'
-          import json,sys
-          x=json.load(open(sys.argv[1],encoding="utf-8"))
-          raise SystemExit(0 if (x.get("constraints") or {}).get("allow_registry_mutation") is True else 1)
-          PY
-          then
-            git add canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json
-          fi
-
-          # Runtime-generated mission files are continuation edges. Capture
-          # them before committing, then explicitly dispatch them after the
-          # durable push. A push made with GITHUB_TOKEN does not wake another
-          # push-triggered Actions run.
-          mapfile -t CONTINUATIONS < <(
-            git diff --cached --name-only |
-            grep '^canonical/astra_runtime/missions/.*\.json$' |
-            grep -vxF "$MISSION" || true
-          )
-
-          if ! git diff --cached --quiet; then
-            git commit -m "Record ASTRA shared runtime mission execution"
-            PUSHED=0
-            for attempt in 1 2 3 4 5; do
-              git fetch origin main
-              git rebase origin/main
-              if git push origin HEAD:main; then
-                PUSHED=1
-                break
-              fi
-              sleep $((attempt * 2))
-            done
-            if [ "$PUSHED" -ne 1 ]; then
-              echo "Failed to persist ASTRA runtime evidence after 5 push attempts" >&2
-              exit 52
-            fi
-          fi
-
-          for NEXT in "${CONTINUATIONS[@]:-}"; do
-            [ -n "$NEXT" ] || continue
-            echo "Dispatching ASTRA continuation: $NEXT"
-            gh workflow run astra-shared-runtime.yml --ref main -f mission_path="$NEXT"
-          done
-
+              grep '^canonical/astra_runtime/missions/.*\.json$' || true
             )
             if [ "${#MISSIONS[@]}" -ne 1 ]; then
               printf 'Expected exactly one changed mission, got %s\n' "${#MISSIONS[@]}" >&2
@@ -183,8 +92,6 @@ jobs:
           git config user.email "project-brain-astra-runtime@users.noreply.github.com"
           git add -A canonical/astra_runtime
 
-          # Registry mutation is allowed only for missions that explicitly
-          # declare it. Runtime/source code remains unstaged and immutable.
           MISSION="${{ steps.mission.outputs.path }}"
           if python - "$MISSION" <<'PY'
           import json,sys
@@ -195,10 +102,6 @@ jobs:
             git add canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json
           fi
 
-          # Runtime-generated mission files are continuation edges. Capture
-          # them before committing, then explicitly dispatch them after the
-          # durable push. A push made with GITHUB_TOKEN does not wake another
-          # push-triggered Actions run.
           mapfile -t CONTINUATIONS < <(
             git diff --cached --name-only |
             grep '^canonical/astra_runtime/missions/.*\.json$' |

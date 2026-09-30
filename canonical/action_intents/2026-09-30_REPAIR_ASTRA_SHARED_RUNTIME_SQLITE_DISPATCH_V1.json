@@ -1,0 +1,246 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-ASTRA-SHARED-RUNTIME-AND-DISPATCH-FROZEN-SQLITE-TASK-A-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "FROZEN_SQLITE_PARENT_TASK_A_CANNOT_START__ASTRA_SHARED_RUNTIME_WORKFLOW_SYNTAX_CORRUPTED",
+  "action_kind": "SUPPORT_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FROZEN_SQLITE_PARENT_TASK_A_CANNOT_START__ASTRA_SHARED_RUNTIME_WORKFLOW_SYNTAX_CORRUPTED::SUPPORT_REPAIR",
+  "expected_parent_frontier_change": "Restore the already-authorized canonical ASTRA carrier and execute the exact frozen SQLite parent mission once; no capability credit from the repair itself.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 9504aa5cb4508971b6df6a862d01d740f340a45a",
+    "SQLite task authority reconciliation reports FROZEN_UNSPENT execution_count=0",
+    "failed run 36673924806 completed in seconds with no ASTRA state/evidence",
+    "current astra-shared-runtime.yml contains an unterminated grep/process substitution and duplicated workflow tail",
+    "no open PR owns this carrier defect"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after corrected carrier launches the exact frozen SQLite mission bytes through canonical/runtime/astra_runtime.py once and durable runtime state/evidence identifies PASS or the first causal gap.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9504aa5cb4508971b6df6a862d01d740f340a45a",
+    "real_outcome": "Execute the already-frozen unspent SQLite parent Task A exactly once through the canonical ASTRA CLI carrier.",
+    "required_capability": "EXISTING_CANONICAL_ASTRA_SHARED_RUNTIME_CARRIER",
+    "obs_goal": {
+      "real_outcome": "Execute the already-frozen unspent SQLite parent Task A exactly once through the canonical ASTRA CLI carrier.",
+      "proxy_goals_deleted": [
+        "new parent task",
+        "new capability code",
+        "task rewrite",
+        "same broken workflow rerun"
+      ],
+      "surviving_necessity": "The selected real task cannot start while the shared workflow parser/resolver is malformed."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "astra-shared-runtime.yml",
+        "canonical/runtime/astra_runtime.py CLI",
+        "carrier mission-origin canary PASS run 36672975512"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub connector has rerun actions but no workflow_dispatch mutation"
+      ],
+      "capability_work_deleted": [
+        "no runtime change",
+        "no task change",
+        "no new research capability"
+      ],
+      "surviving_gap": "Carrier workflow source is malformed and must be restored before the frozen mission can execute."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Carrier-only prestart defect; canonical authority still records SQLite FROZEN_UNSPENT execution_count=0.",
+      "delete_bypass_substitute_options": [
+        "Rerunning failed run rejected because it uses the malformed triggering revision",
+        "Editing frozen mission rejected because it changes exact task bytes",
+        "New task rejected because an adequate frozen task already exists",
+        "Temporary push-triggered dispatcher survives because connected GitHub lacks workflow_dispatch"
+      ],
+      "surviving_causal_blocker": "ASTRA_SHARED_RUNTIME_WORKFLOW_MALFORMED_PRESTART"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_SHARED_WORKFLOW_PLUS_TEMPORARY_EXACT_MISSION_DISPATCHER",
+        "MANUAL_WORKFLOW_DISPATCH",
+        "EDIT_FROZEN_MISSION_TO_RETRIGGER",
+        "RERUN_OLD_FAILED_WORKFLOW"
+      ],
+      "losing_routes_reason": "No connected workflow-dispatch mutation exists; editing the frozen mission changes its identity; rerunning the old run uses malformed workflow bytes.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark is sufficient; success is direct durable ASTRA state/evidence for the exact frozen mission."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "temporary SQLite dispatcher after execution"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "canonical mission resolver",
+        "canonical ASTRA CLI"
+      ],
+      "fresh_reuse_plan": "After task terminal evidence, recompute the parent frontier and remove carrier-only work."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused canary PASS",
+        "reused frozen task authority",
+        "inspected current workflow source directly"
+      ],
+      "search_stop_decision": "The malformed workflow is directly visible and no alternate connected dispatch action exists; more search cannot improve the route.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main, workflow source, open PRs, and available GitHub actions refreshed immediately before repair."
+    },
+    "routes_considered": [
+      "REPAIR_SHARED_WORKFLOW_PLUS_TEMPORARY_EXACT_MISSION_DISPATCHER",
+      "MANUAL_WORKFLOW_DISPATCH",
+      "EDIT_FROZEN_MISSION_TO_RETRIGGER",
+      "RERUN_OLD_FAILED_WORKFLOW"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_TASK",
+      "TASK_EDIT",
+      "OLD_RUN_RERUN",
+      "CAPABILITY_RUNTIME_CHANGE"
+    ],
+    "selected_surviving_route": "REPAIR_SHARED_WORKFLOW_PLUS_TEMPORARY_EXACT_MISSION_DISPATCHER",
+    "why_selected_route_is_fastest_sufficient": "It preserves exact frozen task bytes, reuses the already-qualified canonical ASTRA CLI, requires only carrier YAML repair, and automatically launches the selected real task when merged.",
+    "expected_parent_level_state_change": "Restore the already-authorized canonical ASTRA carrier and execute the exact frozen SQLite parent mission once; no capability credit from the repair itself.",
+    "stop_condition": "Stop after corrected carrier launches the exact frozen SQLite mission bytes through canonical/runtime/astra_runtime.py once and durable runtime state/evidence identifies PASS or the first causal gap.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T05:37:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CANONICAL_ASTRA_SHARED_RUNTIME",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current malformed workflow and carrier canary PASS"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions push/workflow_dispatch semantics already encoded in repository workflow"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No package dependency is involved"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Not relevant after direct source-level carrier defect localization"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "execute existing frozen canonical mission through current ASTRA carrier"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "connected GitHub workflow dispatch action"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "push triggered one-shot exact mission dispatcher versus editing mission"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current repository workflow and available connector actions"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REPAIR_SHARED_WORKFLOW_PLUS_TEMPORARY_EXACT_MISSION_DISPATCHER",
+          "evidence": [
+            "Current workflow source is syntactically corrupted; task remains execution_count=0."
+          ],
+          "qualification_evidence": [
+            "carrier canary PASS run 36672975512",
+            "SQLite authority reconciliation on main"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves exact task bytes and canonical CLI.",
+            "CAPABILITY_STRENGTH": "Executes selected parent task.",
+            "WALL_CLOCK": "One merge triggers execution.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Minimal carrier-only change.",
+            "VERIFIABILITY": "Durable ASTRA state/evidence."
+          }
+        }
+      ],
+      "negative_search_summary": "No connected action can dispatch an existing workflow; all alternatives either mutate frozen task identity or reuse malformed bytes.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_SHARED_WORKFLOW_PLUS_TEMPORARY_EXACT_MISSION_DISPATCHER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T05:37:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_SHARED_WORKFLOW_PLUS_TEMPORARY_EXACT_MISSION_DISPATCHER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "GITHUB_ACTIONS_moxnixmdj_brain",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:33:10Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36673924806 was accepted and scheduled; failure is workflow source prestart defect, not account availability"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}

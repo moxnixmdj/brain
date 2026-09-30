@@ -1,0 +1,91 @@
+name: Execute Frozen SQLite Parent Task A Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/sqlite-parent-task-a-one-shot.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sqlite-parent-task-a-one-shot-20260930
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen unspent authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          TASK="canonical/tasks/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json"
+          MISSION="canonical/astra_runtime/missions/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json"
+          MID="PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001"
+          test "$(git hash-object "$TASK")" = "5d09c9eebcb09612525836e7926bdf297f4bad32"
+          test -f "$MISSION"
+          python - "$MISSION" <<'PY'
+          import json,sys
+          x=json.load(open(sys.argv[1],encoding="utf-8"))
+          assert x["mission_id"]=="PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001"
+          assert (x.get("constraints") or {}).get("exactly_one_execution") is True
+          assert (x.get("constraints") or {}).get("no_same_task_replay") is True
+          assert (x.get("constraints") or {}).get("source_task_blob_sha")=="5d09c9eebcb09612525836e7926bdf297f4bad32"
+          PY
+          test ! -e "canonical/astra_runtime/state/$MID.json"
+          test ! -e "canonical/astra_runtime/evidence/$MID__RECEIPT.json"
+          test ! -e "canonical/astra_runtime/evidence/$MID__BLOCKER.json"
+
+      - name: Execute exact frozen mission through canonical ASTRA CLI
+        id: run
+        shell: bash
+        run: |
+          set +e
+          python canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json
+          RC=$?
+          echo "rc=$RC" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Persist exact terminal state before adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Project Brain ASTRA Runtime"
+          git config user.email "project-brain-astra-runtime@users.noreply.github.com"
+          git add -A canonical/astra_runtime
+          if git diff --cached --quiet; then
+            echo "ASTRA produced no durable state/evidence" >&2
+            exit 53
+          fi
+          git commit -m "Record frozen SQLite parent task execution"
+          PUSHED=0
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              PUSHED=1
+              break
+            fi
+            sleep $((attempt * 2))
+          done
+          test "$PUSHED" -eq 1
+
+      - name: Preserve terminal exit status
+        shell: bash
+        run: |
+          RC="${{ steps.run.outputs.rc }}"
+          echo "ASTRA_TERMINAL_RC=$RC"
+          exit "$RC"
