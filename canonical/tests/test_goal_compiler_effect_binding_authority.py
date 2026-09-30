@@ -75,7 +75,7 @@ class EffectBindingAuthorityTest(unittest.TestCase):
                     registry,
                     ROOT,
                 )
-        self.assertEqual(ctx.exception.code,"GOAL_COMPILATION_SUBGOAL_UNRESOLVED")
+        self.assertEqual(ctx.exception.code,"GOAL_EFFECT_AWARE_COMPOSITION_REQUIRED")
         self.assertIn("EXPLICIT_EFFECT_RESULT_BINDING_REQUIRES_GROUNDED_COMPOSITION",ctx.exception.detail)
         self.assertIn("ONE_CAUSAL_BINDING_AUTHORITY",ctx.exception.detail)
 
