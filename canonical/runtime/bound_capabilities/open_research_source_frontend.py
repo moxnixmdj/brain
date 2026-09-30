@@ -70,14 +70,17 @@ def run(objective,decomposition,limit=12,timeout=15):
         verification=verifier.verify(candidate,timeout=timeout)
         verifications.append({"candidate":candidate,"verification":verification})
 
-    retrieval_verified=[
+    provenance_verified=[
         x for x in verifications
-        if x["verification"].get("status")=="RETRIEVAL_PROVENANCE_VERIFIED"
+        if x["verification"].get("status") in {
+            "RETRIEVAL_PROVENANCE_VERIFIED",
+            "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+        }
     ]
-    if not retrieval_verified:
+    if not provenance_verified:
         return {
             "schema":SCHEMA,
-            "status":"SOURCE_RETRIEVAL_PROVENANCE_BLOCKED",
+            "status":"SOURCE_PROVENANCE_BLOCKED",
             "objective":objective,
             "decomposition":decomposition,
             "discovery":discovered,
@@ -85,12 +88,20 @@ def run(objective,decomposition,limit=12,timeout=15):
             "authority_identity_verifications":[],
             "objective_relevance_verifications":[],
             "evidence_extractions":[],
-            "next_required_capability":"MODEL_INDEPENDENT_LIVE_RETRIEVAL_PROVENANCE_FOR_DISCOVERED_WEB_SOURCE",
+            "next_required_capability":"MODEL_INDEPENDENT_PROVENANCE_VERIFICATION_FOR_DISCOVERED_SOURCE",
             "model_dependency_count":0,
             "incremental_spend_usd":0,
         }
 
-    candidates=[x["candidate"] for x in retrieval_verified]
+    candidates=[]
+    for item in provenance_verified:
+        candidate=dict(item["candidate"])
+        verification=item["verification"]
+        if verification.get("record_title"):
+            candidate["record_title"]=verification["record_title"]
+        if verification.get("publisher") and not candidate.get("publisher"):
+            candidate["publisher"]=verification["publisher"]
+        candidates.append(candidate)
     relevance=relevance_ranker.rank(objective,candidates)
     relevance_ready=(
         relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
@@ -103,12 +114,37 @@ def run(objective,decomposition,limit=12,timeout=15):
     selected_item=None
     if relevance_ready:
         index=int(relevance["top_candidate_original_index"])
-        if 0<=index<len(retrieval_verified):
-            selected_item=retrieval_verified[index]
+        if 0<=index<len(provenance_verified):
+            selected_item=provenance_verified[index]
 
+    selected_materialization=None
     if selected_item is not None:
         candidate=dict(selected_item["candidate"])
         provenance=selected_item["verification"]
+        if provenance.get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+            selected_materialization=verifier.materialize(candidate,timeout=timeout)
+            if selected_materialization.get("status")!="RETRIEVAL_PROVENANCE_VERIFIED":
+                return {
+                    "schema":SCHEMA,
+                    "status":"SELECTED_SOURCE_MATERIALIZATION_BLOCKED",
+                    "objective":objective,
+                    "decomposition":decomposition,
+                    "discovery":discovered,
+                    "provenance_verifications":verifications,
+                    "provenance_verified_candidate_count":len(provenance_verified),
+                    "objective_relevance_verifications":[{
+                        "relevance":relevance,
+                        "candidate":candidate,
+                    }],
+                    "selected_source_materialization":selected_materialization,
+                    "authority_identity_verifications":[],
+                    "evidence_extractions":[],
+                    "claim_relation_evaluations":[],
+                    "next_required_capability":"MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+                    "model_dependency_count":0,
+                    "incremental_spend_usd":0,
+                }
+            provenance=selected_materialization
         enriched=dict(candidate)
         if provenance.get("final_url"):
             enriched["final_url"]=provenance["final_url"]
@@ -197,7 +233,16 @@ def run(objective,decomposition,limit=12,timeout=15):
         "decomposition":decomposition,
         "discovery":discovered,
         "provenance_verifications":verifications,
-        "provenance_verified_candidate_count":len(retrieval_verified),
+        "provenance_verified_candidate_count":len(provenance_verified),
+        "retrieval_provenance_verified_candidate_count":sum(
+            1 for x in verifications
+            if x["verification"].get("status")=="RETRIEVAL_PROVENANCE_VERIFIED"
+        ),
+        "bibliographic_provenance_verified_candidate_count":sum(
+            1 for x in verifications
+            if x["verification"].get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+        ),
+        "selected_source_materialization":selected_materialization,
         "authority_identity_verifications":authority_verifications,
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"OPTIONAL_HOST_TO_ROR_ORGANIZATION_METADATA_ONLY__NOT_ADMISSION_GATE",
