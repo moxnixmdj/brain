@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SQLITE_OPENENDED_FIRST_SPEND_RECONCILIATION_V1",
+  "status": "FRESH_PARENT_TASK_SPENT_FAIL__FIRST_CAUSAL_GAP_LOCALIZED__NO_PARENT_CAPABILITY_CREDIT",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+  "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+  "canonical_authority_before_execution": {
+    "sqlite_freeze_merge_pr": 377,
+    "sqlite_authority_merged_at_utc": "2026-09-30T05:30:06Z",
+    "mirror_alignment_pr": 380,
+    "stale_thermophysics_runs_have_authority": false
+  },
+  "authoritative_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 101,
+    "workflow_run_id": 36674205874,
+    "job_id": 109755520636,
+    "artifact_id": 11078364401,
+    "artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9",
+    "runner_head_sha": "fb241f1e5c1efc39a455b36e3f1a76df9322fdb3",
+    "execution_count": 1,
+    "task_executed": true,
+    "runtime_returncode": 3,
+    "runtime_status": "BLOCKED",
+    "model_planner_disabled": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "independent_oracle_executed": false,
+    "parent_task_completed": false,
+    "same_task_replay_allowed": false
+  },
+  "first_causal_gap": {
+    "canonical_gap": "BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION_MISSING__RUNTIME_FALLS_TO_NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "runtime_root": "Blocker:CAPABILITY_ACQUISITION_REQUIRED",
+    "acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "apt_branch": "NO_COMPATIBLE_APT_CLI_CONTRACT / NO_LOW_FRICTION_APT_CLI_CANDIDATE",
+    "pypi_branch": "AutoPyPIAcquisitionFailure:PYPI_CONTRACT_CLASS_UNSUPPORTED",
+    "evidence_path": "canonical/astra_runtime/evidence/PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json",
+    "observed_behavior": "The canonical goal adapter could not complete the broad research objective through verified bound capabilities and fell through to supplier acquisition; discovery produced package candidates but no compatible verified supplier contract."
+  },
+  "authority_effects": {
+    "parent_capability_promoted": false,
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 1,
+    "sqlite_task_freshness": "SPENT",
+    "repair_authority": "ONLY_THE_LOCALIZED_GENERIC_GAP__NO_TASK_SPECIFIC_SQLITE_RECIPE",
+    "replay_authority": false
+  },
+  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_GOAL_TO_VERIFIED_BOUND_CAPABILITY_COMPOSITION__SEARCH_REUSE_AND_COMPOSE_EXISTING_VERIFIED_CAPABILITIES_BEFORE_REPAIR__NO_SQLITE_REPLAY"
+}
