@@ -1,0 +1,368 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-OBJECTIVE-GROUNDED-EVIDENCE-UNIT-EXTRACTION-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and independently qualify the narrow model-independent bridge from an already provenance-verified and independently relevance-admitted source to auditable verbatim evidence units; preserve relation, entailment, correctness, sufficiency, quality, independence, and parent completion as later gates.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Current main 8c4d76e62cee474fc97844d59c12aa907b7ba44f and post-relevance reconciliation",
+    "PR416 preserved visible-block/hash/offset candidate extraction mechanics and was closed unmerged after OBS found exact-base and universal-ROR defects",
+    "canonical deferred biophysics rendered-evidence claim-extraction gap",
+    "qualified source frontend and first-party objective relevance admission on main",
+    "existing evidence_decision_synthesis and independent verifier downstream",
+    "fresh challenger race: Python html.parser, Trafilatura 2.2.0, readability-lxml 0.9, jusText"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN__PRESERVED_CANDIDATE_MECHANICS_EXIST",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the exact extractor bytes pass adversarial unit tests and independent fresh cross-domain public qualification proving same-source re-fetch, verbatim normalized evidence-unit fidelity, deterministic provenance hashes/offsets, fail-closed irrelevant-source behavior, zero model dependency, and zero incremental spend; then inherit only the narrow extraction capability with no parent promotion and no spent-parent replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "8c4d76e62cee474fc97844d59c12aa907b7ba44f",
+    "real_outcome": "Turn an already provenance-verified, independently objective-relevance-admitted source into auditable source-backed evidence units that downstream relation evaluation and decision synthesis can consume without model cognition.",
+    "required_capability": "MODEL_INDEPENDENT_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+    "obs_goal": {
+      "real_outcome": "Close the exact relevance-to-evidence bridge without re-solving discovery, authority, relevance, relation evaluation, or decision synthesis.",
+      "proxy_goals_deleted": [
+        "Rebuild source discovery",
+        "Require ROR or any authority binder universally",
+        "Classify support versus contradiction during extraction",
+        "Judge factual correctness or evidence sufficiency",
+        "Replay any spent parent task",
+        "Adopt a general NLP framework"
+      ],
+      "surviving_necessity": "ASTRA now reaches OPEN_ENDED_RESEARCH_RELEVANT_SOURCE_READY__EVIDENCE_EXTRACTION_REQUIRED and cannot proceed to typed evidence without a verified extraction bridge."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR416 preserved stdlib visible-block/hash/offset extractor candidate",
+        "qualified first_party_objective_relevance_verify and BM25 relevance ranking",
+        "qualified retrieval provenance",
+        "existing evidence_decision_synthesis and evidence_decision_verify",
+        "Python stdlib html.parser/html/urllib"
+      ],
+      "external_existing_routes_checked": [
+        "Trafilatura 2.2.0 main-text extraction",
+        "readability-lxml 0.9 main-body extraction",
+        "jusText boilerplate removal",
+        "Python stdlib HTMLParser"
+      ],
+      "capability_work_deleted": [
+        "No new crawler",
+        "No model or embedding service",
+        "No universal ROR/authority prerequisite",
+        "No support/contradiction classifier",
+        "No factual-correctness judge",
+        "No evidence-sufficiency judge",
+        "No database or vector store"
+      ],
+      "surviving_gap": "Given a live provenance-verified source already independently admitted as objective-relevant, freshly re-fetch that same source and deterministically emit bounded visible-text units carrying exact source URL, page/visible/unit hashes, normalized text, structural block tag, offsets, and objective lexical anchors."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic open-research evidence extraction seam; independently recurred after the earlier biophysics rendered-claim extraction gap and the current post-relevance frontier transition.",
+      "delete_bypass_substitute_options": [
+        "DELETE extraction rejected because downstream relation evaluation needs source-backed evidence units",
+        "BYPASS with whole-page text rejected because downstream consumers need bounded auditable units",
+        "SUBSTITUTE Trafilatura/readability/jusText rejected as incomplete because they extract main text but do not provide Project Brain same-source provenance binding, objective grounding, hashes, offsets, and explicit nonclaims",
+        "REUSE PR416 visible-block mechanics and remove the universal ROR prerequisite survives"
+      ],
+      "surviving_causal_blocker": "No verified generic capability currently converts an admitted relevant source into bounded auditable evidence units."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR preserved PR416 stdlib extractor: provenance + relevance only, fresh same-source refetch, bounded block extraction, hashes/offsets, independent verifier",
+        "Trafilatura 2.2.0 main-text extraction plus new Project Brain provenance/objective unit wrapper",
+        "readability-lxml 0.9 body extraction plus new Project Brain provenance/objective unit wrapper",
+        "jusText boilerplate extraction plus new Project Brain provenance/objective unit wrapper",
+        "model-based semantic evidence extraction"
+      ],
+      "losing_routes_reason": "External extractors improve boilerplate removal but still require the missing Brain-specific provenance/objective/audit layer and add dependencies. The preserved stdlib mechanics already implement the needed structural extraction surface with zero runtime dependency. Model-based extraction violates model independence.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use adversarial local fixtures plus fresh cross-domain live sources. Independently re-fetch each source, reconstruct visible text without importing the producer, prove every emitted normalized unit occurs in the independently reconstructed fresh source and hashes/offsets match the producer evidence surface, and verify unrelated/redirect/provenance/relevance failures fail closed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR416 universal-ROR extraction route",
+        "any plan to use whole-page text as typed evidence",
+        "any model-backed evidence-extraction route for this narrow lexical unit role"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "visible HTML/text block extraction",
+        "same-source fresh retrieval binding",
+        "objective-token evidence-unit selection",
+        "auditable unit provenance hashes and offsets"
+      ],
+      "fresh_reuse_plan": "After qualification, reuse the same exact extractor on a materially distinct fresh source class/domain without parent-task replay before any reusable-capability credit or upward frontier claim."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR416 candidate code instead of rewriting extraction mechanics",
+        "Reused existing relevance admission rather than recomputing relevance",
+        "Rejected universal authority/primary-source gate after current-main deletion-first correction",
+        "Rejected external packages that do not delete the missing provenance/objective binding layer"
+      ],
+      "search_stop_decision": "Fresh route race covered the inherited stdlib route and the major current zero-cost HTML main-text extraction packages. None removes the Brain-specific same-source provenance/objective/audit layer; the preserved stdlib repair is the smallest sufficient route.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh the route frontier on any material qualification failure, new main-base change before promotion, or discovery of an extractor that supplies same-source provenance-bound objective units directly."
+    },
+    "routes_considered": [
+      "REPAIR_PR416_STDLIB_PROVENANCE_RELEVANCE_EVIDENCE_UNIT_EXTRACTOR",
+      "TRAFILATURA_PLUS_PROJECT_BRAIN_WRAPPER",
+      "READABILITY_LXML_PLUS_PROJECT_BRAIN_WRAPPER",
+      "JUSTEXT_PLUS_PROJECT_BRAIN_WRAPPER",
+      "MODEL_SEMANTIC_EXTRACTOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "UNIVERSAL_ROR_AUTHORITY_PREREQUISITE",
+      "UNIVERSAL_PRIMARY_SOURCE_GATE",
+      "MODEL_SEMANTIC_EXTRACTOR",
+      "NEW_CRAWLER",
+      "VECTOR_DATABASE",
+      "SUPPORT_CONTRADICTION_CLASSIFICATION_INSIDE_EXTRACTION"
+    ],
+    "selected_surviving_route": "REPAIR_PR416_STDLIB_PROVENANCE_RELEVANCE_EVIDENCE_UNIT_EXTRACTOR",
+    "why_selected_route_is_fastest_sufficient": "The candidate mechanics already exist, Python stdlib parsing is available on every selected execution surface, and removing the bad authority prerequisite yields the exact missing bridge with no package installation or new infrastructure. External packages still require the same missing provenance/objective wrapper.",
+    "expected_parent_level_state_change": "Acquire and independently qualify the narrow model-independent bridge from an already provenance-verified and independently relevance-admitted source to auditable verbatim evidence units; preserve relation, entailment, correctness, sufficiency, quality, independence, and parent completion as later gates.",
+    "stop_condition": "Stop after the exact extractor bytes pass adversarial unit tests and independent fresh cross-domain public qualification proving same-source re-fetch, verbatim normalized evidence-unit fidelity, deterministic provenance hashes/offsets, fail-closed irrelevant-source behavior, zero model dependency, and zero incremental spend; then inherit only the narrow extraction capability with no parent promotion and no spent-parent replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T06:40:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "PR416_STDLIB_EXTRACTOR_CANDIDATE_CLOSED_FOR_GOVERNANCE_AND_UNIVERSAL_ROR_DEFECT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR416 preserved objective_evidence_unit_extract.py candidate mechanics",
+          "main 8c4d76e post-relevance frontier reconciliation",
+          "deferred biophysics rendered-evidence extraction gap",
+          "existing relevance/provenance and evidence-decision capabilities"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python 3.14 html.parser documentation: HTMLParser deterministic structured HTML processing",
+          "Python html module documentation: HTML5 entity unescape support"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI trafilatura 2.2.0 released 2026-07-31",
+          "PyPI readability-lxml 0.9 released 2026-08-27",
+          "PyPI jusText current project"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-30 comparison of stdlib HTMLParser versus Trafilatura/readability/jusText for auditable objective-grounded evidence extraction"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent objective grounded evidence passage extraction provenance hash offsets HTML"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Trafilatura readability-lxml jusText HTML main text extraction Python"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "stdlib HTMLParser visible block extraction sentence passage BM25 objective relevance"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 latest Python HTML main text extraction trafilatura readability release"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REPAIR_PR416_STDLIB_PROVENANCE_RELEVANCE_EVIDENCE_UNIT_EXTRACTOR",
+          "evidence": [
+            "PR416 contains bounded visible block extraction with source/page/unit hashes and offsets",
+            "Python stdlib HTMLParser supplies dependency-free structural parsing"
+          ],
+          "qualification_evidence": [
+            "Python official html.parser/html documentation",
+            "PR416 preserved candidate code and tests"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Can preserve exact same-source retrieval, deterministic visible units, hashes, offsets, and explicit nonclaims with no hidden semantic inference.",
+            "CAPABILITY_STRENGTH": "Exactly covers the current relevance-to-evidence bridge; deliberately does not claim relation/correctness/sufficiency.",
+            "WALL_CLOCK": "Small repair of existing candidate mechanics; no dependency integration.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Python stdlib only; no package or remote inference dependency.",
+            "VERIFIABILITY": "High: independent same-source re-fetch can prove emitted units are present and hashes/offsets are coherent."
+          }
+        },
+        {
+          "route": "TRAFILATURA_PLUS_PROJECT_BRAIN_WRAPPER",
+          "evidence": [
+            "Trafilatura 2.2.0 extracts main text, metadata, and structured elements from web documents."
+          ],
+          "qualification_evidence": [
+            "PyPI trafilatura 2.2.0 project metadata and release files"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong main-text extraction but does not by itself provide Brain same-source evidence-unit provenance contract.",
+            "CAPABILITY_STRENGTH": "More sophisticated boilerplate removal than needed; missing objective/audit semantics.",
+            "WALL_CLOCK": "Adds package integration and still needs wrapper.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Production-stable package but extra dependency surface.",
+            "VERIFIABILITY": "High for extraction, but Brain-specific unit binding still requires independent verification."
+          }
+        },
+        {
+          "route": "READABILITY_LXML_PLUS_PROJECT_BRAIN_WRAPPER",
+          "evidence": [
+            "readability-lxml 0.9 extracts and cleans main body text/title from HTML."
+          ],
+          "qualification_evidence": [
+            "PyPI readability-lxml 0.9 project metadata"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Useful article-body extraction but not a provenance-bound evidence-unit contract.",
+            "CAPABILITY_STRENGTH": "Body extraction only; wrapper remains necessary.",
+            "WALL_CLOCK": "Dependency integration plus wrapper is slower than repairing existing stdlib candidate.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Mature but adds lxml/cssselect dependency surface.",
+            "VERIFIABILITY": "Extracted body can be checked, but unit provenance remains custom work."
+          }
+        },
+        {
+          "route": "JUSTEXT_PLUS_PROJECT_BRAIN_WRAPPER",
+          "evidence": [
+            "jusText removes boilerplate while preserving sentence-like text."
+          ],
+          "qualification_evidence": [
+            "PyPI jusText project metadata"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Boilerplate extraction is useful but still lacks Brain provenance/objective binding.",
+            "CAPABILITY_STRENGTH": "Narrower than Trafilatura and still requires wrapper.",
+            "WALL_CLOCK": "Adds lxml/package integration and wrapper.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Established package, but dependency surface is unnecessary for current contract.",
+            "VERIFIABILITY": "Possible, but no advantage over stdlib for the required auditable-unit claim."
+          }
+        }
+      ],
+      "negative_search_summary": "No current zero-cost package found that directly supplies Project Brain's required same-source provenance-bound, objective-grounded, hashed evidence-unit contract. Main-text extractors can be future challengers if stdlib qualification fails on real documents.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_PR416_STDLIB_PROVENANCE_RELEVANCE_EVIDENCE_UNIT_EXTRACTOR",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T06:40:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_PR416_STDLIB_PROVENANCE_RELEVANCE_EVIDENCE_UNIT_EXTRACTOR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PYTHON_STDLIB_3_X",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:40:00Z",
+            "evidence": [
+              "Current Brain and public verification runtime already execute Python stdlib extraction/relevance code."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VERIFICATION_CAPSULE_RUNNER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:31:00Z",
+            "evidence": [
+              "Public verification-capsule-runner workflow 36678598183 completed successfully on a standard hosted runner during the current route race."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PUBLIC_HTTPS_FRESH_SOURCE_ENDPOINTS",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:30:00Z",
+            "evidence": [
+              "Public workflow 36677951769 independently fetched live Python and W3C technical pages during current-session qualification."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
