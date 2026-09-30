@@ -190,17 +190,16 @@
   },
   "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "last_frontier_reconciliation": {
-    "status": "STRONGER_CODING_CONFIGURATION_INTERNALIZED__VERIFICATION_PENDING",
+    "status": "OPUS55_LONG_HORIZON_CONTINUITY_PROMOTED__CODING_BLOCKER_REMAINS",
     "blocker": "BRAIN_INTERNALIZED_SUPREME_LED_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
+    "promoted_subcapability": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1",
     "evidence_paths": [
-      "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json",
-      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
-      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json"
+      "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json"
     ],
-    "prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "leading_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
+    "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
   },
   "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__SUPERPOWERS_FALLBACK__ZERO_CREDIT_UNTIL_PASS",
   "carrier_path_authority_correction": {

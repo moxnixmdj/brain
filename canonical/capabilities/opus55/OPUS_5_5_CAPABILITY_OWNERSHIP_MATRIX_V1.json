@@ -187,17 +187,23 @@
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
-        "Brain canonical Git state + reasoning receipts + ChatGPT Work/Codex persistent project state"
+        "Brain same-identity supervisor + canonical Git/checkpoint state + reasoning receipts"
       ],
-      "evidence": "Brain already persists state across sessions and Astra supports long-context/agent work; comparative Opus-level long-horizon reliability remains unverified.",
+      "evidence": "Current exact Brain supervisor bytes passed a fresh zero-cost forced-process-boundary verification with exact agent/task/mission binding, unchanged prior-work reuse, exactly-once post-resume execution, independent ledger/hash adjudication, and terminal completion. Historical genuine later-chat continuation and independent Wolfram clean-room/provider-loss recovery corroborate the same capability.",
       "sources": [
-        "https://www.anthropic.com/claude-opus-5-5",
-        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+        "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+        "canonical/same_identity_worker/evidence/SAME_IDENTITY_SUPERVISOR_V1__VERIFICATION.json",
+        "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+        "canonical/qualification/SUPERWORKER_INTEGRATED_2_CLEANROOM_WOLFRAM_ADJUDICATION_V1.json",
+        "https://www.anthropic.com/claude/opus",
+        "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "internalization_required": false,
+      "ownership_note": "Brain owns the deterministic continuity mechanism and reached the objective persistence ceiling for the scoped family behavior. Claim excludes autonomous wake and arbitrary semantic-memory quality.",
+      "internalized_configuration": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "next_required_action": "Use the owned continuity route by default for cross-session work; treat autonomous wake and semantic-memory quality as separate capabilities."
     },
     {
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
@@ -307,7 +313,8 @@
   "summary": {
     "full_opus_5_5_envelope_obsoleted": false,
     "verified_owned_equal_or_better_capabilities": [
-      "EXACT_SYMBOLIC_COMPUTATION"
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
     ],
     "external_specimen_backed_families": [
       "COMPLEX_MULTI_TOOL_AGENCY",
@@ -319,7 +326,6 @@
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
       "SUBAGENT_DELEGATION_AND_COORDINATION",
       "ARTIFACT_CREATION",
       "COMMUNICATION_AND_SYNTHESIS",

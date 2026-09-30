@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "PROMOTE-OPUS55-LONG-HORIZON-CONTINUITY-20260930-V1",
+  "real_objective": "Permanently own an Opus-5.5-equal-or-better useful long-horizon memory/continuity capability without externalizing the capability or spending incrementally.",
+  "governing_invariants": [
+    "Capability ownership requires Brain-owned operative configuration.",
+    "External model behavior is specimen evidence only.",
+    "Underlying capability invention is forbidden when an existing adequate mechanism is already owned.",
+    "Claim scope may not exceed evidence scope.",
+    "Correctness first; hard zero incremental spend."
+  ],
+  "material_premises": [
+    "The canonical Opus envelope defines this family as using memory across sessions, preserving project state and resuming long-running work coherently.",
+    "No numeric Opus memory benchmark is present in the canonical envelope.",
+    "Brain already owns same-identity checkpoint/relaunch state machinery.",
+    "Historical evidence includes genuine later-chat continuation and independent clean-room/provider-loss recovery.",
+    "Fresh current-byte public verification passed a forced process boundary with exact state/identity/mission preservation and exactly-once post-resume execution."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "canonical/runtime/same_identity_supervisor.py",
+    "canonical/same_identity_worker/evidence/SAME_IDENTITY_SUPERVISOR_V1__VERIFICATION.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+    "canonical/qualification/SUPERWORKER_INTEGRATED_2_CLEANROOM_WOLFRAM_ADJUDICATION_V1.json",
+    "verification-capsule-runner run 36762735723 artifact 11119213213 digest sha256:b3171075fc05fdba6dfc64ccfc1b00eff15e3d564166ea23831bb05c1f988d30",
+    "https://www.anthropic.com/claude/opus",
+    "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
+  ],
+  "conclusion": "Promote the scoped LONG_HORIZON_MEMORY_AND_CONTINUITY family behavior as Brain-owned equal-or-better for the tested persistence/continuity conditions. Do not claim autonomous wake, arbitrary semantic-memory quality, or general cognitive superiority.",
+  "selected_route": "REUSE_CURRENT_BRAIN_CONTINUITY_MECHANISM_AND_FRESHLY_VERIFY",
+  "rejected_material_alternatives": [
+    "Build a new memory system: unnecessary duplication.",
+    "Use an external model or hosted memory system: would externalize the capability.",
+    "Wait for coding benchmark credits: unrelated blocker."
+  ],
+  "uncertainties": [
+    "No public numeric Opus 5.5 memory benchmark is available in the canonical envelope.",
+    "Semantic quality of remembered content across arbitrary tasks is not measured by this promotion."
+  ],
+  "assumptions": [
+    "Binary exact-state continuity is an appropriate behavioral ceiling for the persistence portion of the envelope."
+  ],
+  "non_goals": [
+    "Autonomous wake without a trigger",
+    "Unlimited semantic memory",
+    "General reasoning/cognition",
+    "Provider-independent autonomous scheduling"
+  ],
+  "next_action": "Recompute the Opus ownership matrix; keep Supreme-led coding verification parked behind zero-cost substrate access and continue search/internalization for another unblocked family.",
+  "supersession_conditions": [
+    "A public Opus 5.5 memory benchmark introduces materially broader required behavior than the canonical envelope.",
+    "Fresh falsification shows current Brain checkpoint/relaunch violates exact continuity.",
+    "The canonical Opus envelope changes."
+  ],
+  "supersedes": []
+}
