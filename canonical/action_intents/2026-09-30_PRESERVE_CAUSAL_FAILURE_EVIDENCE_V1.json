@@ -1,0 +1,248 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PRESERVE-CAUSAL-FAILURE-EVIDENCE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "FRESH_REQUALIFICATION_FAILED_WITH_LOSSY_VERIFIER_RESULT__FIRST_CAUSAL_SEAM_NOT_RECOVERABLE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::FRESH_REQUALIFICATION_FAILED_WITH_LOSSY_VERIFIER_RESULT__FIRST_CAUSAL_SEAM_NOT_RECOVERABLE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Make consequential capability failures lossless enough to identify the earliest causal seam before repair, then localize PR277's verifier=false failure without replaying the spent task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR267 falsification record",
+    "PR271/273/275 repairs",
+    "PR276 repair-complete reconciliation",
+    "PR277 exact one-shot failure run 36656793034",
+    "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1",
+    "current astra_runtime expectation checker"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after runtime failure reporting preserves bounded structured result/reason under regression test and one bounded diagnostic can distinguish direct producer/verifier correctness from composition/runtime binding; no semantic capability repair and no PR277 replay in this action.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "97b96ed07673baf1270dc468bea76c7dae507f67",
+    "real_outcome": "Prevent blind repairs by preserving the structured causal result of failed bound-capability expectations, then isolate the first causal seam behind PR277's verifier=false result without replaying the spent task.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Recover the exact failure cause with the minimum change needed to make future failures self-localizing.",
+      "proxy_goals_deleted": [
+        "replay PR277",
+        "another requalification task",
+        "broad composition rewrite",
+        "new mistake-immunity law",
+        "new planner/provider"
+      ],
+      "surviving_necessity": "Lossless failure evidence is required before any responsible repair of the reopened composition subcapability."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1",
+        "current astra_runtime expectation checker",
+        "existing independent decision producer/verifier",
+        "public verification carrier"
+      ],
+      "external_existing_routes_checked": [
+        "No external supplier can replace the need to preserve the current route's own failure reason before repair."
+      ],
+      "capability_work_deleted": [
+        "No new governance layer",
+        "No new verifier",
+        "No new carrier",
+        "No replay"
+      ],
+      "surviving_gap": "Current runtime raises only field + observed value and drops returned verifier.reason; failed workflow skips useful causal artifacts."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic failure-observability defect exposed by a fresh real requalification failure.",
+      "delete_bypass_substitute_options": [
+        "Replay rejected as forbidden and information-poor",
+        "Semantic repair rejected because cause is not localized",
+        "Patch existing failure reporting + bounded diagnostic survives"
+      ],
+      "surviving_causal_blocker": "FRESH_REQUALIFICATION_FAILED_WITH_LOSSY_VERIFIER_RESULT__FIRST_CAUSAL_SEAM_NOT_RECOVERABLE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_EXISTING_RUNTIME_FAILURE_REPORTING_AND_RUN_BOUNDED_CAUSAL_DIAGNOSTIC",
+        "BLIND_SEMANTIC_REPAIR",
+        "REPLAY_SPENT_TASK",
+        "BUILD_NEW_DIAGNOSTIC_FRAMEWORK"
+      ],
+      "losing_routes_reason": "Replay is forbidden; semantic repair would guess; a new framework adds machinery. One small runtime observability repair plus bounded diagnostic yields the missing causal bit fastest.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use a focused regression proving expectation failures retain `reason` and bounded structured result, then a bounded direct producer/verifier + planned-binding diagnostic. No benchmark or fresh capability gate."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Blind repairs after verifier=false",
+        "Repeated log archaeology for lost capability failure reasons"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Generic causal failure preservation for all bound capability expectations"
+      ],
+      "fresh_reuse_plan": "The same runtime behavior automatically applies to every future bound-capability expectation failure; no separate fresh task needed for this support primitive."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse current mistake-immunity law",
+        "Reuse existing producer/verifier and carrier",
+        "Reuse exact PR277 failure evidence"
+      ],
+      "search_stop_decision": "The first causal uncertainty is precisely identified and no external search can resolve a result field the runtime discarded; patching observability is cheaper than more search.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "PR277 materially failed, so route selection was refreshed now. No plausible route dominates preserving the missing causal result before repair."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_RUNTIME_FAILURE_REPORTING_AND_RUN_BOUNDED_CAUSAL_DIAGNOSTIC",
+      "BLIND_SEMANTIC_REPAIR",
+      "REPLAY_SPENT_TASK",
+      "BUILD_NEW_DIAGNOSTIC_FRAMEWORK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BLIND_SEMANTIC_REPAIR",
+      "REPLAY_SPENT_TASK",
+      "BUILD_NEW_DIAGNOSTIC_FRAMEWORK"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_RUNTIME_FAILURE_REPORTING_AND_RUN_BOUNDED_CAUSAL_DIAGNOSTIC",
+    "why_selected_route_is_fastest_sufficient": "It changes one generic failure-reporting seam, preserves future diagnostic information, and lets one bounded diagnostic select the correct repair class without consuming another fresh task.",
+    "expected_parent_level_state_change": "Make consequential capability failures lossless enough to identify the earliest causal seam before repair, then localize PR277's verifier=false failure without replaying the spent task.",
+    "stop_condition": "Stop after runtime failure reporting preserves bounded structured result/reason under regression test and one bounded diagnostic can distinguish direct producer/verifier correctness from composition/runtime binding; no semantic capability repair and no PR277 replay in this action.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T01:52:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_COMPOSITION_STACK_POST_PR276_WITH_LOSSY_FAILURE_REPORTING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR277 public run 36656793034 exact-byte PASS then verifier=false with reason lost",
+          "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1",
+          "current astra_runtime.py _verify_action_expectation"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Private GitHub main and GitHub Actions run 36656793034 are authoritative for this internal runtime failure."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No external package is required; the failing producer/verifier/runtime code is already bound and version-pinned in Brain."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "External community search is non-causal for a discarded local verifier result; no challenger can recover information not preserved by the runtime."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "preserve structured verifier failure reason causal diagnostic bound capability expectation"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Project Brain astra runtime verifier result preservation"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "fail closed expectation error bounded structured result diagnostic receipt"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current main post PR277 composition verifier false failure 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REPAIR_EXISTING_RUNTIME_FAILURE_REPORTING_AND_RUN_BOUNDED_CAUSAL_DIAGNOSTIC",
+          "evidence": [
+            "PR277 terminal run shows missing reason is the immediate information blocker"
+          ],
+          "qualification_evidence": [
+            "GitHub Actions job 109702749846 log"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves the actual verifier result before choosing a repair.",
+            "CAPABILITY_STRENGTH": "Generic across bound capability expectation failures.",
+            "WALL_CLOCK": "One small runtime patch and bounded diagnostic.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Uses existing runtime and exact failed run.",
+            "VERIFIABILITY": "Focused regression plus direct diagnostic output."
+          }
+        }
+      ],
+      "negative_search_summary": "No external challenger can reconstruct a verifier reason discarded by the current local runtime; replaying the task is forbidden and would still use the same lossy seam.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_EXISTING_RUNTIME_FAILURE_REPORTING_AND_RUN_BOUNDED_CAUSAL_DIAGNOSTIC",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T01:52:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_EXISTING_RUNTIME_FAILURE_REPORTING_AND_RUN_BOUNDED_CAUSAL_DIAGNOSTIC",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PRIVATE_GITHUB_REPO_RUNTIME_EDIT_SURFACE",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:52:00Z",
+            "evidence": [
+              "Current main runtime and tests fetched successfully at exact base 97b96ed07673baf1270dc468bea76c7dae507f67"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
