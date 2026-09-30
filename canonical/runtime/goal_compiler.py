@@ -3539,9 +3539,6 @@ def _numeric_binding_tokens(value):
 
 def _numeric_producer_tokens(part):
     tokens=[]
-    result_name=str((part or {}).get("result_name") or "")
-    if result_name:
-        tokens.extend(_numeric_binding_tokens(result_name))
     evidence_path=str((part or {}).get("evidence_path") or "")
     if evidence_path:
         tokens.extend(_numeric_binding_tokens(pathlib.Path(evidence_path).stem))
@@ -3690,80 +3687,26 @@ def _compile_typed_scalar_numeric_expression(clause,compiled_parts,registry,acti
     }
 
 
-def _bind_numeric_relation_operands(names,producers):
-    if len(names)!=2 or len(producers)!=2:
-        raise GoalCompilationFailure("NUMERIC_RELATION_OPERAND_BINDING_SHAPE_INVALID")
-    assignments=[]
-    for order in ((0,1),(1,0)):
-        details=[]
-        total=0
-        valid=True
-        for name_index,producer_index in enumerate(order):
-            name=names[name_index]
-            part=producers[producer_index]
-            score,matched=_numeric_binding_score(name,part)
-            if score<=0:
-                valid=False
-                break
-            total+=score
-            details.append({
-                "name":name,
-                "cycle":int(part["result_cycle"]),
-                "score":score,
-                "matched":matched,
-            })
-        if valid:
-            assignments.append((total,order,details))
-    if not assignments:
-        raise GoalCompilationFailure(
-            "NUMERIC_RELATION_OPERAND_BINDING_REQUIRED",
-            ",".join(names),
-        )
-    best_score=max(item[0] for item in assignments)
-    winners=[item for item in assignments if item[0]==best_score]
-    if len(winners)!=1:
-        raise GoalCompilationFailure(
-            "NUMERIC_RELATION_OPERAND_BINDING_AMBIGUOUS",
-            ",".join(names),
-        )
-    _score,_order,details=winners[0]
-    return details
-
-
 def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,registry):
     """Lower one bounded numeric relation onto existing native JSON + jq machinery.
 
-    Supports either the legacy anonymous "two ... differ" form or two explicitly
-    named scalar operands. Named operands must resolve uniquely to the causal
-    scalar producers; the compiler never accepts unrelated names merely because
-    exactly two numeric values happen to exist.
+    Supported semantic form is intentionally generic and narrow: determine/check/
+    verify/assess whether two causally prior scalar results differ by at most a
+    literal finite numeric threshold. The compiler never binds domain names or
+    source-specific literals. Runtime jq type checks fail closed on non-numbers.
     """
     text=str(clause or "").strip()
     m=re.match(
-        r"^(?:determine|check|verify|assess)\s+whether\s+(.+?)\s+"
+        r"^(?:determine|check|verify|assess)\s+whether\s+(?:the\s+)?two\s+.+?\s+"
         r"differ\s+by\s+(?:at\s+most|no\s+more\s+than|less\s+than\s+or\s+equal\s+to)\s+"
         r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)$",
         text,re.IGNORECASE,
     )
     if not m:
         return None
-    subject=m.group(1).strip()
-    threshold=float(m.group(2))
+    threshold=float(m.group(1))
     if not math.isfinite(threshold) or threshold < 0:
         raise GoalCompilationFailure("NUMERIC_RELATION_THRESHOLD_INVALID")
-
-    named_operands=None
-    if not re.match(r"^(?:the\s+)?two\b",subject,re.IGNORECASE):
-        normalized=re.sub(
-            r"\s+(?:scalars?|values?)$","",subject,flags=re.IGNORECASE
-        ).strip()
-        pieces=re.split(r"\s+and\s+",normalized,maxsplit=1,flags=re.IGNORECASE)
-        if len(pieces)!=2 or not all(x.strip() for x in pieces):
-            return None
-        named_operands=[
-            re.sub(r"^(?:the\s+)?","",x.strip(),flags=re.IGNORECASE)
-            for x in pieces
-        ]
 
     jq_entry=(registry or {}).get("json.query.jq")
     if not isinstance(jq_entry,dict) or jq_entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -3782,7 +3725,6 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
         and isinstance(part.get("result_cycle"),int)
     ]
     producer_specs=[]
-    producer_parts=[]
     if expression_producers:
         derived=expression_producers[-1]
         used=set(int(x) for x in (derived.get("producer_result_cycles") or []))
@@ -3792,7 +3734,6 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
                 "NUMERIC_RELATION_DERIVED_REQUIRES_ONE_UNUSED_PRIOR_SCALAR",
                 str(len(unused)),
             )
-        producer_parts=[derived,unused[0]]
         producer_specs=[
             {"cycle":int(derived["result_cycle"]),"field":str(derived.get("result_field") or "value")},
             {"cycle":int(unused[0]["result_cycle"]),"field":"value"},
@@ -3803,20 +3744,13 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
                 "NUMERIC_RELATION_REQUIRES_EXACTLY_TWO_PRIOR_SCALARS",
                 str(len(source_producers)),
             )
-        producer_parts=[source_producers[0],source_producers[1]]
         producer_specs=[
             {"cycle":int(source_producers[0]["result_cycle"]),"field":"value"},
             {"cycle":int(source_producers[1]["result_cycle"]),"field":"value"},
         ]
 
-    operand_bindings=None
-    if named_operands is not None:
-        operand_bindings=_bind_numeric_relation_operands(
-            named_operands,producer_parts
-        )
-
     digest=hashlib.sha256(
-        (text+"\n"+str(producer_specs[0]["cycle"])+"\n"+str(producer_specs[1]["cycle"])).encode("utf-8")
+        (text+"\\n"+str(producer_specs[0]["cycle"])+"\\n"+str(producer_specs[1]["cycle"])).encode("utf-8")
     ).hexdigest()[:12].upper()
     input_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_INPUT.json"
     output_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_RESULT.json"
@@ -3864,10 +3798,10 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
         "input_path":input_path,
         "output_path":output_path,
         "producer_result_cycles":[producer_specs[0]["cycle"],producer_specs[1]["cycle"]],
-        "operand_bindings":operand_bindings,
         "model_dependency_count":0,
       },
     }
+
 
 def _compile_learned_value_record(clause,compiled_parts):
     text=str(clause or "").strip()
