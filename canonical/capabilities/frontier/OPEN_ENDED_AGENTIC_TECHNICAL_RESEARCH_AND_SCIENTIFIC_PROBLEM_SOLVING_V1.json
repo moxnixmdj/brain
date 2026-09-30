@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_ACQUIRED__FRESH_PARENT_TASK_LOCALIZED_GROUNDING_GAP",
+  "status": "FRONTIER_BAR_DEFINED__CORE_MODEL_INDEPENDENT_SUBCAPABILITIES_ACQUIRED__NEW_PARENT_TASK_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -59,8 +59,8 @@
     "first_causal_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
     "same_task_replay_allowed": false
   },
-  "obsolescence_status": "NOT_YET_PROVEN__FIRST_CAUSAL_GAP_LOCALIZED",
-  "residual_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "obsolescence_status": "NOT_YET_PROVEN__READY_FOR_NEW_CROSS_DOMAIN_PARENT_TASK",
+  "residual_gap": "NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -68,7 +68,28 @@
       "route": "decision.synthesis.typed.stdlib + decision.synthesis.verify.stdlib",
       "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json",
       "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6"
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "status": "VERIFIED_ACQUIRED_AFTER_REGRESSION_REPAIR__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
+      "route": "plain-goal grounding with executable bindability and explicit prerequisite authority",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+      "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json"
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+      "status": "VERIFIED_ACQUIRED__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
+      "route": "grounded executable composition + deterministic capability graph planner",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
+      "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json"
     }
   ],
-  "next_action": "ACQUIRE_MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1_ON_FRESH_REAL_TASK__NO_SERIALIZATION_REPLAY__THEN_RETRY_PARENT_ONLY_ON_DIFFERENT_FRESH_TASK"
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+  "post_repair_validation": {
+    "grounding_and_composition_fresh_real_run_id": 36652169397,
+    "materially_distinct_fresh_reuse_run_id": 36652623916,
+    "both_independently_verified": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  }
 }
