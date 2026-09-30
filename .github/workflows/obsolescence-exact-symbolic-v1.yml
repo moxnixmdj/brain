@@ -23,6 +23,10 @@ jobs:
           python-version: '3.13'
       - name: Install frozen capability supplier
         run: python -m pip install --disable-pip-version-check 'sympy==1.14.0'
+      - name: Run promotion-firewall and cognition-provenance regressions
+        run: |
+          python canonical/tests/test_astra_runtime_model_independence.py
+          python canonical/tests/test_fail_closed_mistake_immunity_guard.py
       - name: Execute frozen exact-symbolic suite
         run: |
           /usr/bin/time -f 'CAPABILITY_ROUTE_PROCESS_WALL_S=%e' \
