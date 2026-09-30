@@ -84,6 +84,19 @@ def _bm25_scores(query_tokens, docs, k1=1.5, b=0.75):
         out.append((score,contributions))
     return out
 
+def _top_candidate_admission(query_tokens,matched_terms):
+    qn=len(list(query_tokens or []))
+    mn=len(list(matched_terms or []))
+    required=1 if qn<=3 else max(2,(qn+3)//4)
+    return {
+        "method":"FOCUSED_QUERY_TOKEN_COVERAGE_V1",
+        "query_token_count":qn,
+        "matched_term_count":mn,
+        "required_matched_term_count":required,
+        "matched_term_coverage":round((mn/qn) if qn else 0.0,6),
+        "verified":bool(qn and mn>=required),
+    }
+
 def rank(objective,candidates,limit=None):
     objective=_canon(objective)
     base={
@@ -129,6 +142,8 @@ def rank(objective,candidates,limit=None):
             "query_tokens":q,
             "ranked_candidates":rows,
         }
+    top=positive[0]
+    admission=_top_candidate_admission(q,top.get("matched_terms") or [])
     if limit is not None:
         rows=rows[:max(1,min(int(limit),len(rows)))]
     return {
@@ -140,7 +155,9 @@ def rank(objective,candidates,limit=None):
         "candidate_count":len(candidates),
         "positive_relevance_count":len(positive),
         "ranked_candidates":rows,
-        "top_candidate_original_index":positive[0]["original_index"],
+        "top_candidate_original_index":top["original_index"],
+        "top_candidate_admission":admission,
+        "admission_claim_scope":"BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY",
         "output_verified":True,
     }
 

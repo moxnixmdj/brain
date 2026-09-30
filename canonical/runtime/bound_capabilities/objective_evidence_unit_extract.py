@@ -289,6 +289,11 @@ def _qualified_relevance_source(objective, candidate, provenance, relevance):
             return None, "NONPOSITIVE_RELEVANCE_SCORE"
         if not list(selected.get("matched_terms") or []):
             return None, "RELEVANCE_MATCH_TERMS_REQUIRED"
+        admission=relevance.get("top_candidate_admission") or {}
+        if admission.get("verified") is not True:
+            return None, "RELEVANCE_SUBJECT_COVERAGE_ADMISSION_REQUIRED"
+        if int(admission.get("matched_term_count") or 0) != len(list(selected.get("matched_terms") or [])):
+            return None, "RELEVANCE_ADMISSION_MATCH_COUNT_MISMATCH"
         return provenance_final, None
 
     return None, "VERIFIED_OBJECTIVE_RELEVANCE_REQUIRED"

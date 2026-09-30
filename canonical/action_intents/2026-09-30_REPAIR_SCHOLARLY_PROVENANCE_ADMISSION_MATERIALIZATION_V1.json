@@ -1,0 +1,347 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-SCHOLARLY-PROVENANCE-ADMISSION-AND-SELECTED-SOURCE-MATERIALIZATION-20260930-V1",
+  "status": "PROPOSED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3e2435efb9398a062ee40a7bdbb3e3610724b330",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "action_kind": "GENERIC_SOURCE_PIPELINE_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "expected_parent_frontier_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION__SUBJECT_COVERAGE_GATE__SELECTED_LIVE_MATERIALIZATION__ONE_METADATA_REFINED_RETRIEVAL_FALLBACK__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 3e2435efb9398a062ee40a7bdbb3e3610724b330 / merged PR526 current-base reconciliation.",
+    "Guarded seismology run 36693929830 / artifact 11086898224: 12 discovered candidates, 8 live-retrieval verified, 2 Crossref bibliographic-provenance verified.",
+    "Only RETRIEVAL_PROVENANCE_VERIFIED candidates entered relevance; both scholarly candidates were discarded before ranking.",
+    "Selected Simple Wikipedia source matched only 2/16 focused terms and contained no requested tsunami amplitude quantity.",
+    "Exact current open_research_source_frontend.py filter and source_candidate_provenance_verify.py DOI path inspected.",
+    "Open PR search found no competing repair owner.",
+    "Fresh challenger frontier checked on 2026-09-30: Crossref incumbent metadata route, OpenAlex search, Semantic Scholar search, and Seb-f-Johansson/lit-scan MIT implementation.",
+    "lit-scan scripts/lit_scan.py blob c40eb92f714e4b57ade30e5b7c6708c7a1423d85 inspected: useful multi-source academic search but larger, partly economics-tuned, and does not eliminate selected-source materialization.",
+    "No challenger dominates the two-transition inherited composition on correctness, wall-clock, hard-$0 cost, reliability, and verifiability."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__EARLIEST_GENERIC_INFORMATION_LOSS_SEAM_EXACTLY_LOCALIZED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Run exact authored regressions and a guarded independent non-parent cross-domain qualification of subject-coverage admission, provenance-class-preserving relevance, selected-only materialization, one metadata-anchored retry, downstream extraction enforcement, and fail-closed uncertainty. Do not replay seismology; no parent credit from repair alone.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3e2435efb9398a062ee40a7bdbb3e3610724b330",
+    "real_outcome": "Prevent provenance-verified scholarly candidates from being discarded before relevance and ensure only the selected bibliographic candidate is live-materialized before evidence extraction.",
+    "required_capability": "MODEL_INDEPENDENT_PROVENANCE_VERIFIED_SCHOLARLY_CANDIDATE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve the strongest discovered evidence route through the source frontend without weakening factual-authority or evidence-sufficiency claims.",
+      "proxy_goals_deleted": [
+        "seismology replay",
+        "literal-threshold-only patch",
+        "source whitelist",
+        "new search engine",
+        "model reranker"
+      ],
+      "surviving_necessity": "Repair the exact upstream information-loss predicate proven by artifact 11086898224."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "open_web_source_candidate_discovery Crossref backend",
+        "source_candidate_provenance_verify DOI bibliographic verification",
+        "objective_relevance_bm25",
+        "objective_evidence_unit_extract fresh exact-source extraction"
+      ],
+      "external_existing_routes_checked": [
+        "Crossref public REST metadata: https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+        "OpenAlex search API: https://help.openalex.org/api/searching/",
+        "Semantic Scholar Academic Graph API: https://api.semanticscholar.org/api-docs/",
+        "Seb-f-Johansson/lit-scan MIT: https://github.com/Seb-f-Johansson/lit-scan",
+        "Stanford IR relevance feedback/query expansion: https://nlp.stanford.edu/IR-book/pdf/09expand.pdf"
+      ],
+      "capability_work_deleted": [
+        "no new discovery backend",
+        "no model reranker",
+        "no source-specific authority map",
+        "no new extraction engine"
+      ],
+      "surviving_gap": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED is excluded from relevance, and selected bibliographic candidates lack a live-retrieval provenance transition before extraction."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic composition/admission defect in the internal source pipeline.",
+      "delete_bypass_substitute_options": [
+        "Admit every provenance-verified class to relevance.",
+        "Live-materialize only the relevance-selected bibliographic candidate.",
+        "Fail closed if selected materialization cannot be confirmed.",
+        "Do not silently fall back to a weaker source."
+      ],
+      "surviving_causal_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_DISCOVERY_PROVENANCE_BM25_AND_EXTRACTION__ADD_SUBJECT_COVERAGE_ADMISSION__PRESERVE_BIBLIOGRAPHIC_CANDIDATES__MATERIALIZE_SELECTED_ONLY__ONE_METADATA_REFINED_RETRIEVAL_RETRY",
+        "PRESERVE_BIBLIOGRAPHIC_AND_MATERIALIZE_SELECTED_ONLY_WITHOUT_REFINEMENT",
+        "ADD_NEW_SCHOLARLY_DOWNLOADER",
+        "SOURCE_WHITELIST",
+        "MODEL_RERANKER"
+      ],
+      "losing_routes_reason": "The first route reuses existing verified primitives and changes only two generic admission transitions; alternatives add unnecessary machinery or violate model-independent/open-ended constraints.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Fresh non-parent cross-domain exact-byte qualification must independently verify: low-coverage positive BM25 is not admitted; bibliographic candidates compete in relevance; only the selected bibliographic candidate is materialized; direct materialization success preserves retrieval provenance; failure triggers exactly one metadata-anchored query retry; failed retry fails closed; extraction rejects weak admission receipts."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "objective-literal threshold binding as current parent blocker"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Crossref discovery",
+        "bibliographic provenance",
+        "BM25 relevance",
+        "fresh exact-source extraction"
+      ],
+      "fresh_reuse_plan": "After independent qualification, freeze a new materially different parent task. Never replay seismology."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused immutable seismology artifact",
+        "reused PR523 correction",
+        "reused exact current source pipeline code"
+      ],
+      "search_stop_decision": "The earliest information-loss predicate is exact in code and all required primitives already exist.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh challenger frontier completed before implementation. No external challenger plausibly dominates the minimal inherited composition."
+    },
+    "routes_considered": [
+      "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+      "ADD_NEW_SCHOLARLY_DOWNLOADER",
+      "SOURCE_WHITELIST",
+      "MODEL_RERANKER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "THRESHOLD_ONLY_PATCH",
+      "NEW_SEARCH_ENGINE",
+      "SOURCE_WHITELIST",
+      "MODEL_RERANKER",
+      "UNBOUNDED_QUERY_RETRY"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_DISCOVERY_PROVENANCE_BM25_AND_EXTRACTION__ADD_SUBJECT_COVERAGE_ADMISSION__PRESERVE_BIBLIOGRAPHIC_CANDIDATES__MATERIALIZE_SELECTED_ONLY__ONE_METADATA_REFINED_RETRIEVAL_RETRY",
+    "why_selected_route_is_fastest_sufficient": "It repairs the demonstrated information-loss seam using existing components, rejects low-subject-coverage live pages without an absolute BM25 score threshold, materializes only the selected bibliographic source, and makes at most one provenance-anchored retrieval retry if direct materialization fails.",
+    "expected_parent_level_state_change": "QUALIFY_GENERIC_PROVENANCE_CLASS_PRESERVING_RELEVANCE_ADMISSION_AND_SELECTED_ONLY_LIVE_MATERIALIZATION__NO_PARENT_CREDIT_UNTIL_FRESH_PARENT_REUSE",
+    "stop_condition": "Implement only generic provenance-class-preserving relevance admission plus selected-only live materialization. Independently guard-qualify exact bytes on fresh cross-domain fixtures. Do not replay seismology, do not add source whitelists, and do not award parent capability credit from the repair alone.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T09:21:52Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py",
+          "canonical/runtime/bound_capabilities/source_candidate_provenance_verify.py",
+          "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+          "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+          "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+          "https://help.openalex.org/api/searching/",
+          "https://api.semanticscholar.org/api-docs/",
+          "https://nlp.stanford.edu/IR-book/pdf/09expand.pdf"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/Seb-f-Johansson/lit-scan @ scripts/lit_scan.py blob c40eb92f714e4b57ade30e5b7c6708c7a1423d85 / MIT",
+          "https://pypi.org/project/semanticscholar/ 0.12.0"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Broad discovery surfaced lit-scan as a multi-source no-key academic search challenger; actual code/license were inspected before route selection."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "authority aware scholarly source discovery relevance ranking metadata query refinement materialization"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Crossref OpenAlex Semantic Scholar multi source academic search"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "open source deterministic BM25 query expansion scholarly retrieval Python no API key"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 academic search open source query expansion Crossref OpenAlex Semantic Scholar"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "SEB_F_JOHANSSON_LIT_SCAN",
+          "evidence": [
+            "https://github.com/Seb-f-Johansson/lit-scan",
+            "scripts/lit_scan.py blob c40eb92f714e4b57ade30e5b7c6708c7a1423d85"
+          ],
+          "qualification_evidence": [
+            "MIT license and standard-library implementation inspected directly."
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong scholarly discovery challenger, but domain-tuned ranking does not prove generic open-web admission/materialization.",
+            "CAPABILITY_STRENGTH": "Broader academic retrieval but narrower than general open-web research.",
+            "WALL_CLOCK": "Import/integration exceeds two local transition changes.",
+            "INCREMENTAL_COST": "Software is $0, but several upstream APIs add dependencies.",
+            "RELIABILITY": "More endpoints and a larger supplier surface.",
+            "VERIFIABILITY": "Inspectable, but much larger qualification surface."
+          }
+        },
+        {
+          "route": "OPENALEX_SEARCH_BACKEND",
+          "evidence": [
+            "https://help.openalex.org/api/searching/"
+          ],
+          "qualification_evidence": [
+            "Official OpenAlex search documentation."
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Does not repair Brain discarding already-discovered bibliographic candidates.",
+            "CAPABILITY_STRENGTH": "Strong scholarly search, not a general open-web replacement.",
+            "WALL_CLOCK": "Adds integration and qualification work.",
+            "INCREMENTAL_COST": "Credit-priced beyond free allowance, so weaker hard-$0 invariant.",
+            "RELIABILITY": "Adds external API dependency.",
+            "VERIFIABILITY": "Officially documented."
+          }
+        },
+        {
+          "route": "SEMANTIC_SCHOLAR_SEARCH_BACKEND",
+          "evidence": [
+            "https://api.semanticscholar.org/api-docs/"
+          ],
+          "qualification_evidence": [
+            "Official Academic Graph API documentation."
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "May improve recall but does not fix the exact provenance-class exclusion/materialization seam.",
+            "CAPABILITY_STRENGTH": "Useful scholarly search, not general web research.",
+            "WALL_CLOCK": "More integration work than incumbent repair.",
+            "INCREMENTAL_COST": "Adds a new service dependency.",
+            "RELIABILITY": "Adds endpoint/rate-limit surface.",
+            "VERIFIABILITY": "Official API is inspectable."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger eliminates the exact internal information-loss seam more cheaply than reusing the existing Crossref discovery, provenance verifier, BM25 ranker, and extractor.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T09:21:52Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_PROVENANCE_VERIFIER_FETCH_AS_SELECTED_ONLY_MATERIALIZATION_PLUS_PRESERVE_BIBLIOGRAPHIC_CANDIDATES_THROUGH_RELEVANCE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_CURRENT_PYTHON_RUNTIME_AND_SOURCE",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:21:52Z",
+            "evidence": [
+              "Current-base exact repair source inspected on main 3e2435efb9398a062ee40a7bdbb3e3610724b330."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "CROSSREF_PUBLIC_REST",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:21:52Z",
+            "evidence": [
+              "Official Crossref REST documentation retrieved live; current Brain discovery already observed successful Crossref candidates in seismology run 36693929830."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_QUALIFICATION_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:21:52Z",
+            "evidence": [
+              "verification-capsule-runner guarded run 36693929830 physically started and produced artifact 11086898224 today."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
