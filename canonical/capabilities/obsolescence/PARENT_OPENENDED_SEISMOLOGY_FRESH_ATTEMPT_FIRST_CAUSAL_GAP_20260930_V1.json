@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FIRST_CAUSAL_GAP_RECONCILIATION_V1",
+  "status": "RECONCILED_FROM_GUARDED_PRIMARY_EVIDENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
+  "canonical_phase_note": "LEGACY_TASK_B_LABEL__CONTENT_IS_THE_NEXT_FRESH_PARENT_ATTEMPT_AFTER_SPENT_GENOMICS_TASK_B",
+  "freshness_identity": {
+    "problem_sha256": "da4255372467966069be73876737d9d58d3f77ca9deccceef9c047276c7e3629",
+    "task_sha256": "c6df7e2977951e9379464bd6ca107df15113a0c8e68c3a35686bde6ddfb54975"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 217,
+    "run_id": 36693929830,
+    "job_id": 109817291758,
+    "artifact_id": 11086898224,
+    "artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7",
+    "guard_attempt_id": "cb371cfc21a24dd8b43599a938068533"
+  },
+  "child_started": true,
+  "child_returncode": 3,
+  "replay_allowed": false,
+  "parent_capability_promoted": false,
+  "observed_frontend": {
+    "status": "SOURCE_FRONTEND_READY",
+    "provenance_verified_candidate_count": 8,
+    "relevance_verified_candidate_count": 1,
+    "evidence_extracted_candidate_count": 1,
+    "claim_relation_evaluated_count": 0
+  },
+  "observed_selected_source": {
+    "url": "https://simple.wikipedia.org/wiki/2025",
+    "matched_query_terms": [
+      "2025",
+      "russia"
+    ],
+    "focused_query_token_count": 16
+  },
+  "observed_bibliographic_candidate": {
+    "url": "https://doi.org/10.22541/essoar.177032873.37227439/v1",
+    "title": "The slip distribution of the 2025 Kamchatka earthquake estimated from dispersive tsunami images observed by SWOT satellite",
+    "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+    "excluded_from_relevance_pool_because_frontend_only_admits_RETRIEVAL_PROVENANCE_VERIFIED": true
+  },
+  "binder_observation": {
+    "status": "UNBOUND",
+    "reason": "OBJECTIVE_RELATION_AMBIGUOUS_OR_UNSUPPORTED",
+    "interpretation": "DOWNSTREAM_SYMPTOM_AFTER_LOW_COVERAGE_IRRELEVANT_SOURCE_ADMISSION__NOT_FIRST_CAUSAL_GAP"
+  },
+  "first_causal_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
+  "causal_basis": [
+    "The query-focus repair materially worked: focused query contained the decision subject rather than orchestration prose.",
+    "Discovery returned a bibliographically relevant Kamchatka/tsunami candidate, but open_research_source_frontend excluded bibliographic provenance from relevance ranking.",
+    "The live-retrieval-only relevance pool then admitted a candidate matching only 2 of 16 focused tokens.",
+    "Evidence extraction therefore succeeded mechanically on a page that lacked the decision measurement, making claim binding fail downstream."
+  ],
+  "next_required_action": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
