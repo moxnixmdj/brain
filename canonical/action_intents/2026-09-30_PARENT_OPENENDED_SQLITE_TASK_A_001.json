@@ -13,13 +13,12 @@
   "expected_parent_frontier_change": "Either complete the first admissible genuinely open-ended zero-model-dependency parent real Task A with autonomous decomposition and material source/tool discovery, or localize exactly the first causal gap without replay.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "main 797d5fbea5f230a31044006755beb98ae387134b after PR318 open-ended-scope correction",
-    "PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1 reclassifies structured demography as supporting evidence only",
+    "current main 797d5fbea5f230a31044006755beb98ae387134b after PR329 closed cognition-provenance/run_goal/target-mirror fail-open seams",
+    "PR318 open-ended-scope correction keeps structured demography as supporting-only evidence",
     "current target requires genuine open-ended Task A before Task B",
-    "PR308 PR317 PR319 PR321 PR322 carry the superseded old Task-B blocker and therefore cannot own the current lease",
+    "all older corrected-blocker Task A leases are closed/superseded",
     "existing public verification-capsule-runner has a successful same-account standard-runner direct probe run 36668380406",
-    "no current open PR was found with the corrected blocker lease before branch creation",
-    "PR329 merged on current main and hardens runtime cognition provenance/active-target mirror enforcement without changing capability credit or the Task-A blocker."
+    "no task-specific source, URL, tool, procedure, formula, or expected answer is frozen into the producer task"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -133,7 +132,7 @@
       ],
       "search_stop_decision": "A current adequate execution route exists and no alternate route can produce admissible parent evidence faster than running the inherited route itself; more task-specific search before freeze would weaken the test.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Current main 797d5fbea5f230a31044006755beb98ae387134b and public carrier readiness were refreshed after PR329. Refresh affected layers again if main, carrier availability, or the parent contract changes before arming."
+      "challenger_refresh_decision": "Current main 797d5fbea5f230a31044006755beb98ae387134b and public carrier were refreshed before arming; refresh affected layers if main, carrier availability, or the parent contract changes before execution."
     },
     "routes_considered": [
       "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
