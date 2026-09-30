@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_SQLITE_PARENT_EXECUTION_AUTHORITY_MIRROR_RECONCILIATION_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "AUTHORITY_MIRRORS_ALIGNED__NO_RUNTIME_MUTATION__NO_PARENT_EXECUTION__NO_PROGRESS_CREDIT",
+  "reason": "Target and hierarchy already authorize the frozen SQLite parent task after canonical mission-origin validation, while queue and scoreboard still carried the superseded pre-canary broad-compiler route. This receipt aligns authority only.",
+  "source_authority": {
+    "carrier_canary_run_id": 36672975512,
+    "carrier_canary_artifact_id": 11078323111,
+    "carrier_canary_result": "PASS_CARRIER_MISSION_ORIGIN",
+    "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+    "fresh_task_status": "FROZEN_UNSPENT"
+  },
+  "invariants": {
+    "runtime_mutated": false,
+    "task_executed": false,
+    "execution_count": 0,
+    "parent_capability_promoted": false,
+    "scoreboard_counter_delta": 0,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "same_task_replay_allowed": false
+  },
+  "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY"
+}
