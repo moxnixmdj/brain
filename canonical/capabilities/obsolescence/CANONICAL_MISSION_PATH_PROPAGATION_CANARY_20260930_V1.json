@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_MISSION_PATH_PROPAGATION_CANARY_RECONCILIATION_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "PASS__EXISTING_CANONICAL_ASTRA_MISSION_ENTRYPOINT_PROPAGATES_MISSION_IDENTITY_INTO_AUTONOMOUS_ACQUISITION__NO_PARENT_CREDIT",
+  "source": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/canonical-mission-path-propagation-canary-20260930-v1",
+    "mission_install_commit": "4ebc49d70e8ee51a7f578e375adda6d1e8d30d04",
+    "execution_workflow_commit": "0d57063631cca7dc287c4b361bcd89146ce2408b",
+    "workflow_run_id": 36673079101,
+    "job_id": 109752105558,
+    "artifact_id": 11078367773,
+    "artifact_digest": "sha256:d2eb1bb1da0f1803474fbe883b11b64fca6dee53e408acadebccaa9144dc6791",
+    "artifact_size_bytes": 31083
+  },
+  "mission": {
+    "mission_id": "MISSION-PATH-PROPAGATION-CANARY-20260930-V1",
+    "mission_path": "canonical/astra_runtime/missions/MISSION_PATH_PROPAGATION_CANARY_20260930_V1.json",
+    "mission_sha256": "3ed56ca9ae55fedcf0a5849bc3a9d976741c22064a29be316dfafb91cb37f878",
+    "purpose": "Fresh non-parent canary proving the existing canonical astra_runtime CLI mission entrypoint supplies runtime mission identity to autonomous capability acquisition.",
+    "synthetic_canary_only": true,
+    "parent_capability_credit": false
+  },
+  "execution": {
+    "canonical_cli": "python3 canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/MISSION_PATH_PROPAGATION_CANARY_20260930_V1.json",
+    "model_planner_disabled": true,
+    "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+    "runtime_status": "COMPLETE",
+    "steps_completed": 1,
+    "state_sha256": "eeb643343728ad5318547b9ef28e3301eca3070561c8d1fab17c7758e8dfb90e",
+    "incremental_spend_usd": 0
+  },
+  "acceptance": {
+    "canonical_cli_returned_complete_receipt": true,
+    "apt_origin_mission_path_invalid_absent": true,
+    "pypi_origin_mission_path_invalid_absent": true,
+    "output_exists_and_nonempty": true,
+    "output_path": "canonical/astra_runtime/tmp/MISSION_PATH_CANARY.png",
+    "output_format": "PNG",
+    "output_dimensions": "1016x116",
+    "output_bytes": 576,
+    "output_sha256": "af02fe283f04a8da3b191524908a3245dcc21ab7362c93ca7965de524f4dafe6"
+  },
+  "causal_conclusion": {
+    "previous_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "disposition": "CLOSED_BY_FRESH_NON_PARENT_CANARY",
+    "selected_route": "REUSE_EXISTING_CANONICAL_ASTRA_MISSION_ENTRYPOINT",
+    "runtime_repair_required": false,
+    "climate_task_a_replay_authorized": false,
+    "parent_capability_promoted": false,
+    "capability_credit_delta": 0
+  },
+  "next_frontier": {
+    "blocker": "FRESH_MATERIALLY_DIFFERENT_GENUINE_OPEN_ENDED_TASK_A_REQUIRED",
+    "action": "FREEZE_AND_EXECUTE_MATERIALLY_DIFFERENT_FRESH_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A__CANONICAL_ASTRA_MISSION_ENTRYPOINT__NO_PREWIRED_RESEARCH_PLAN__STOP_ON_FIRST_CAUSAL_GAP",
+    "reason": "The mission-identity transport seam is now proven on a fresh orthogonal canary. The spent climate Task A remains permanently ineligible for replay; only a materially different fresh genuine open-ended parent task can produce new parent evidence."
+  }
+}
