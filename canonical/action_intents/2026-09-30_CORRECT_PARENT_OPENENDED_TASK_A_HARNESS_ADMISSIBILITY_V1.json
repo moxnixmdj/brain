@@ -1,0 +1,230 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-PARENT-OPENENDED-TASK-A-HARNESS-ADMISSIBILITY-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Withdraw the compiler-gap attribution because the first-spend carrier called goal_compiler.compile_goal directly and exited before the inherited public run_goal fallback chain. Preserve the task as spent/no-replay, quarantine the later replay, and replace the blocker with PARENT_OPEN_ENDED_FIRST_CAUSAL_GAP_UNPROVEN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_CONTROLLER.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "first spend: runner run 36670516407 job 109744305866 artifact 11077861584 sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "first-spend harness run_pr328_openended_climate_task_a_once.py blob 1a2858e8117f402fcf7e5cdfcb321fd4fab942c9",
+    "harness calls compiler.compile_goal(goal, registry, ROOT) directly and declares terminal failure on that exception",
+    "harness calls runtime._run_model_independent_goal only after direct compilation succeeds",
+    "harness never calls runtime.run_goal, so verified proposal/planned/direct/plain-goal grounding/composition/acquisition fallback authority was bypassed",
+    "runtime blob 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9 contains the public run_goal fallback chain that the first-spend harness skipped",
+    "later run 36670619213 executed after task freshness was already spent and is inadmissible as parent causal evidence"
+  ],
+  "evidence_presence_classification": "EXISTING_IMMUTABLE_TERMINAL_EVIDENCE_REQUIRES_HARNESS_ADMISSIBILITY_CORRECTION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Correct only evidence scope and blocker authority. Do not replay the spent climate task, do not patch runtime from either contaminated trace, and do not promote the parent. Next admissible progress is a fresh materially different Task A whose carrier calls the public run_goal boundary exactly once.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore causal validity: distinguish a carrier-imposed direct compiler short-circuit from a failure of the inherited public parent controller.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve the spent task receipt while withdrawing an unsupported parent-runtime blocker attribution.",
+      "proxy_goals_deleted": [
+        "repair goal compiler from carrier-short-circuit evidence",
+        "use later same-task replay as parent evidence",
+        "replay the climate task",
+        "promote parent"
+      ],
+      "surviving_necessity": "A fresh materially different open-ended Task A must exercise the public run_goal boundary, not a carrier-authored subset of the controller."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current parent runtime",
+        "current goal compiler",
+        "public GitHub Actions carrier",
+        "immutable uploaded terminal artifact"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions job log and artifact receipt for run 36670516407"
+      ],
+      "capability_work_deleted": [
+        "no runtime mutation",
+        "no compiler mutation",
+        "no supplier mutation",
+        "no same-task replay"
+      ],
+      "surviving_gap": "PARENT_OPEN_ENDED_FIRST_CAUSAL_GAP_UNPROVEN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_CONTROLLER"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The observed compile exception was intrinsic to the carrier-selected direct compile_goal path, not yet shown to be intrinsic to the public run_goal parent path because the carrier bypassed that path.",
+      "delete_bypass_substitute_options": [
+        "delete replay",
+        "reuse immutable receipt",
+        "defer repair until the new residual is canonical"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_FIRST_CAUSAL_GAP_UNPROVEN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_CONTROLLER"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CORRECT_HARNESS_ADMISSIBILITY_AND_FREEZE_FRESH_PUBLIC_RUN_GOAL_TASK",
+        "PATCH_COMPILER_FROM_FIRST_SPEND",
+        "PATCH_ORIGIN_MISSION_FROM_LATER_REPLAY",
+        "REPLAY_CLIMATE_TASK"
+      ],
+      "losing_routes_reason": "Compiler repair targets a carrier-short-circuit trace; origin-mission repair derives from an inadmissible replay; replay cannot restore freshness.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None for the correction. Static harness bytes plus immutable run receipt establish the bypass. The next real verification must be a fresh one-shot task through public run_goal."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "active compiler-gap attribution",
+        "any runtime repair from run 36670516407",
+        "any runtime repair or parent credit from replay run 36670619213"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime-derived cognition provenance",
+        "one-shot execution discipline",
+        "first-causal-gap preservation"
+      ],
+      "fresh_reuse_plan": "Freeze a materially different task and require a minimal carrier that invokes runtime.run_goal once with model planning disabled; no direct compile_goal or private-controller call."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused canonical Task A freeze",
+        "reused public runner receipt",
+        "reused current parent scope contract"
+      ],
+      "search_stop_decision": "No additional task-answer research is relevant to reconciling a compile-stage failure; the immutable receipt already identifies the causal boundary.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main ca16a72e8e83f5274b04265fe02eb7729451da93 and the run 36670516407 terminal receipt were checked immediately before this action."
+    },
+    "routes_considered": [
+      "CORRECT_HARNESS_ADMISSIBILITY_AND_FREEZE_FRESH_PUBLIC_RUN_GOAL_TASK",
+      "PATCH_COMPILER_FROM_FIRST_SPEND",
+      "PATCH_ORIGIN_MISSION_FROM_LATER_REPLAY",
+      "REPLAY_CLIMATE_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "DIRECT_COMPILER_GAP_AS_PARENT_AUTHORITY",
+      "REPLAY_DERIVED_ORIGIN_MISSION_REPAIR",
+      "SAME_TASK_REPLAY",
+      "PREMATURE_PARENT_PROMOTION"
+    ],
+    "selected_surviving_route": "CORRECT_HARNESS_ADMISSIBILITY_AND_FREEZE_FRESH_PUBLIC_RUN_GOAL_TASK",
+    "why_selected_route_is_fastest_sufficient": "It requires zero capability mutation, restores causal validity immediately, and obtains the true parent gap on the next fresh one-shot execution.",
+    "expected_parent_level_state_change": "Replace BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH with PARENT_OPEN_ENDED_FIRST_CAUSAL_GAP_UNPROVEN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_CONTROLLER; keep task spent and capability credit zero.",
+    "stop_condition": "Correct only evidence scope and blocker authority. Do not replay the spent climate task, do not patch runtime from either contaminated trace, and do not promote the parent. Next admissible progress is a fresh materially different Task A whose carrier calls the public run_goal boundary exactly once.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:58:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CORRECT_HARNESS_ADMISSIBILITY_AND_FREEZE_FRESH_PUBLIC_RUN_GOAL_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "DIRECT_PROBE"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+          "astra_runtime.py blob 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9"
+        ],
+        "DIRECT_PROBE": [
+          "run 36670516407 immutable terminal receipt",
+          "first-spend harness blob 1a2858e8117f402fcf7e5cdfcb321fd4fab942c9",
+          "later run 36670619213 quarantined as post-spend replay"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [
+        {
+          "route": "CORRECT_HARNESS_ADMISSIBILITY_AND_FREEZE_FRESH_PUBLIC_RUN_GOAL_TASK",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Tests the actual public parent boundary next.",
+            "CAPABILITY_STRENGTH": "Preserves all inherited fallbacks.",
+            "WALL_CLOCK": "No repair before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "One-shot fresh task.",
+            "VERIFIABILITY": "Carrier can be statically audited for one public run_goal call."
+          }
+        },
+        {
+          "route": "PATCH_COMPILER_FROM_FIRST_SPEND",
+          "resolution": "DISQUALIFIED_BY_CAUSAL_SCOPE",
+          "comparison": {
+            "CORRECTNESS": "Would repair a path selected by the harness rather than the full public controller.",
+            "CAPABILITY_STRENGTH": "Unknown.",
+            "WALL_CLOCK": "Adds unnecessary mutation.",
+            "INCREMENTAL_COST": "$0 but nonzero proof cost.",
+            "RELIABILITY": "Risks overfitting.",
+            "VERIFIABILITY": "Cannot recover spent-task freshness."
+          }
+        }
+      ],
+      "negative_search_summary": "Existing public run_goal already contains fallback grounding/composition/acquisition logic that the first-spend harness bypassed, so no runtime repair is justified before a fresh boundary-correct execution.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "CORRECT_HARNESS_ADMISSIBILITY_AND_FREEZE_FRESH_PUBLIC_RUN_GOAL_TASK",
+      "refresh_triggers": [
+        "BEFORE_FRESH_TASK_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:58:00Z",
+        "max_age_hours": 2,
+        "selected_route": "CORRECT_HARNESS_ADMISSIBILITY_AND_FREEZE_FRESH_PUBLIC_RUN_GOAL_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "IMMUTABLE_FIRST_SPEND_HARNESS_AND_RECEIPT",
+            "kind": "EVIDENCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:58:00Z",
+            "evidence": [
+              "run 36670516407",
+              "harness blob 1a2858e8117f402fcf7e5cdfcb321fd4fab942c9"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
