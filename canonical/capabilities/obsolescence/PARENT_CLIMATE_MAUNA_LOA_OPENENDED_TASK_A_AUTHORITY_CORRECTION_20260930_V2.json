@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_AUTHORITY_CORRECTION_V2",
+  "status": "PR347_AUTHORITY_SUPERSEDED__FIRST_SUBSTANTIVE_EXECUTION_UNAUTHORIZED_ZERO_CREDIT__FRESHNESS_CONSUMED",
+  "checked_on": "2026-09-30",
+  "supersedes_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "substantive_objective": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013, using authoritative primary data and an independently verified quantitative comparison.",
+  "first_substantive_execution": {
+    "source_brain_pr": 317,
+    "source_brain_base": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "source_brain_task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001",
+    "source_task_blob": "61d7334c1c866027260025d0d147d16ee9e0cb02",
+    "source_pr_closed_at_utc": "2026-09-30T04:40:26Z",
+    "source_pr_close_authority": "STALE_BASE_OLD_BLOCKER__NO_EXECUTION_OR_CREDIT",
+    "runner_run_id": 36669918546,
+    "runner_run_started_at_utc": "2026-09-30T04:40:44Z",
+    "runner_job_id": 109742518213,
+    "execution_count": 1,
+    "model_planner_disabled": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "authorized_for_parent_credit": false,
+    "freshness_consumed": true,
+    "terminal": "FAIL_FIRST_CAUSAL_GAP",
+    "first_causal_blocker": "CAPABILITY_ACQUISITION_REQUIRED",
+    "acquisition_detail": {
+      "targeted_acquisition_error": "APT_ORIGIN_MISSION_PATH_INVALID",
+      "federated_dispatch_errors": [
+        "APT_ORIGIN_MISSION_PATH_INVALID",
+        "PYPI_ORIGIN_MISSION_PATH_INVALID"
+      ],
+      "harness_boundary": "runtime.execute_step",
+      "harness_mission_fields_present": [
+        "mission_id",
+        "goal"
+      ],
+      "runtime_mission_path_present": false,
+      "implication": "The first observed acquisition failure is confounded by invalid carrier mission provenance. This does not prove the Brain runtime lacks a generic open-ended research capability."
+    }
+  },
+  "later_same_objective_executions": {
+    "brain_pr337_task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "runner_run_36670516407": {
+      "status": "QUARANTINED_REPLAY_ZERO_CREDIT",
+      "reason": "Same substantive objective had already executed; harness also precompiled via compiler.compile_goal before runtime acquisition.",
+      "observed_compile_gap": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    }
+  },
+  "canonical_conclusions": [
+    "No Mauna Loa execution is admissible as fresh parent Task A promotion evidence.",
+    "The substantive Mauna Loa objective is permanently spent and must not be replayed or rephrased as fresh evidence.",
+    "PR347's use of run 36670516407 as authoritative first execution is superseded.",
+    "No Brain runtime or compiler repair is authorized from the unauthorized first execution or later replay.",
+    "Before a fresh parent task, independently qualify the generic carrier contract: canonical runtime entry boundary plus valid _runtime_mission_path/origin semantics.",
+    "After carrier qualification, freeze a materially different genuinely open-ended Task A."
+  ],
+  "corrected_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__MAUNA_LOA_SUBSTANTIVE_TASK_SPENT_BY_UNAUTHORIZED_FIRST_EXECUTION__GENERIC_CARRIER_MISSION_ORIGIN_CONTRACT_UNQUALIFIED",
+  "next_action": "QUALIFY_GENERIC_PARENT_CARRIER_MISSION_ORIGIN_CONTRACT_ON_FRESH_NON_PARENT_FIXTURE__USE_CANONICAL_RUNTIME_ENTRY_BOUNDARY_AND_VALID_RUNTIME_MISSION_PATH__THEN_FREEZE_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A",
+  "capability_credit_delta": 0,
+  "parent_capability_promoted": false
+}
