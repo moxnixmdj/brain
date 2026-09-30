@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "FIRST_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_COMPLETE__RESIDUALS_EXPLICIT",
+  "status": "V6_INTERNALIZATION_CORRECTION_ACTIVE__OPAQUE_MODEL_ROUTES_RECLASSIFIED_AS_SPECIMENS",
   "evaluated_utc": "2026-09-30",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -17,15 +17,18 @@
     }
   },
   "status_semantics": {
-    "VERIFIED_OWNED_EQUAL_OR_BETTER": "A durable configured Brain route exists and evidence at the claimed scope equals/exceeds Opus 5.5.",
-    "OWNED_COMPONENT_NOT_FULL_FAMILY": "Reusable Brain capability exists but does not establish the whole Opus family.",
-    "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING": "Existing components are configured as a candidate, but equal-or-better evidence for the full claimed scope is missing.",
-    "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND": "Current search did not find a verified existing route meeting the Opus bar under hard constraints. Do not invent."
+    "VERIFIED_OWNED_EQUAL_OR_BETTER": "Brain owns the operative capability configuration and the Brain-configured route itself verifies >= Opus 5.5.",
+    "OWNED_COMPONENT_NOT_FULL_FAMILY": "A reusable Brain-owned mechanism is proven at a narrower scope than the full target family.",
+    "EXTERNAL_CAPABILITY_SPECIMEN_FOUND": "An external system demonstrates the target behavior, but the operative mechanism remains external/opaque and is not Brain-owned.",
+    "REUSABLE_MECHANISM_IDENTIFIED": "An already-existing reusable skill/procedure/workflow/algorithm/scaffold has been identified for internalization.",
+    "INTERNALIZATION_IN_PROGRESS": "The reusable mechanism is being encoded/configured into Brain-owned artifacts.",
+    "BRAIN_CONFIGURED_VERIFICATION_PENDING": "Brain owns the operative configuration, but >= Opus 5.5 verification is pending.",
+    "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE": "No realizable existing reusable mechanism has been found under hard constraints."
   },
   "rows": [
     {
       "family": "ADVANCED_AGENTIC_CODING",
-      "status": "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra + Codex + GitHub + Superpowers",
         "Claude Sonnet 5.5 for Terminal-Bench only"
@@ -36,11 +39,13 @@
         "https://www.anthropic.com/claude-opus-5-5",
         "https://www.anthropic.com/claude-sonnet-5-5",
         "https://prod.cursor.com/evals"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work + Brain persistent state + installed plugins/tools + reasoning receipts"
       ],
@@ -48,11 +53,13 @@
       "sources": [
         "https://openai.com/index/gpt-6-astra/",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
-      "status": "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work + document/spreadsheet/presentation toolchain",
         "GPT-6.1 Sol Work"
@@ -63,12 +70,13 @@
         "https://artificialanalysis.ai/evaluations/gdpval-aa",
         "https://artificialanalysis.ai/evaluations/aa-briefcase",
         "https://www.anthropic.com/claude-opus-5-5"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
-      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
-      "ownership_package": "canonical/capabilities/opus55/OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1.json",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work + installed connectors/plugins"
       ],
@@ -77,11 +85,13 @@
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
-      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra + Brain + web/code/Wolfram"
       ],
@@ -91,12 +101,12 @@
         "https://lastexam.ai/blog/hle-diamond",
         "https://labs.scale.com/leaderboard/hle-diamond"
       ],
-      "ownership_package": "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json"
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
-      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
-      "ownership_package": "canonical/capabilities/opus55/OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1.json",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work/Codex + web/code/Wolfram"
       ],
@@ -105,11 +115,13 @@
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work + image/file analysis",
         "Claude Sonnet 5.5 is above Opus on Chartography-with-tools but no verified $0 Brain access route is currently configured"
@@ -119,11 +131,13 @@
         "https://www.anthropic.com/claude-sonnet-5-5",
         "https://benchlm.ai/benchmarks/chartographywithtools",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "COMPUTER_AND_BROWSER_USE",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work computer use + Remote Desktop Commander + browser tools"
       ],
@@ -132,11 +146,13 @@
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "FINANCIAL_ANALYSIS",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work + Wolfram + spreadsheet/document tooling + JIT authoritative filings"
       ],
@@ -144,11 +160,13 @@
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra + Brain fail-closed gates + reasoning receipts"
       ],
@@ -156,11 +174,13 @@
       "sources": [
         "https://openai.com/index/gpt-6-astra/",
         "https://www.anthropic.com/claude-opus-5-5"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "Brain canonical Git state + reasoning receipts + ChatGPT Work/Codex persistent project state"
       ],
@@ -168,11 +188,13 @@
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "Brain orchestration + GPT-6 Astra Work + specialist tools/agents"
       ],
@@ -180,7 +202,9 @@
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -191,11 +215,12 @@
       "evidence": "Historical Brain contains multiple verified self-correction/recovery mechanisms, but they have not been compared at whole-family Opus 5.5 strength.",
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5"
-      ]
+      ],
+      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven."
     },
     {
       "family": "ARTIFACT_CREATION",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra Work + document/spreadsheet/presentation tools + Figma"
       ],
@@ -205,11 +230,13 @@
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
         "https://artificialanalysis.ai/evaluations/gdpval-aa",
         "https://artificialanalysis.ai/evaluations/aa-briefcase"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra or GPT-5.6 Sol + Brain style/instruction policies + evidence-to-decision synthesis package"
       ],
@@ -217,7 +244,9 @@
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://openai.com/index/gpt-6-astra/"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
@@ -228,18 +257,21 @@
       "evidence": "Substantial historical verified components exist, but prior parent-level open-ended tool-learning promotion remained incomplete.",
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
-      ]
+      ],
+      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven."
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
-      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "best_existing_routes": [
         "GPT-6 Astra + JIT web knowledge + tool discovery + Brain persistence"
       ],
       "evidence": "Astra is extremely strong on novel-environment evaluations, but no direct Opus 5.5 matched target is available.",
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
-      ]
+      ],
+      "internalization_required": true,
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
     },
     {
       "family": "MULTI_CAPABILITY_COMPOSITION",
@@ -250,7 +282,8 @@
       "evidence": "Historical Brain has verified grounding, composition and decision-synthesis components; whole Opus-level general composition remains unverified.",
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
-      ]
+      ],
+      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven."
     },
     {
       "family": "EXACT_SYMBOLIC_COMPUTATION",
@@ -260,19 +293,22 @@
         "SymPy 1.14.0 + Wolfram independent verification"
       ],
       "evidence": "Already canonically obsolete-verified in Brain.",
-      "sources": []
+      "sources": [],
+      "ownership_basis": "Brain-owned SymPy execution configuration plus independent Wolfram verification; target behavior is not hidden solely inside an opaque frontier model."
     }
   ],
   "summary": {
     "full_opus_5_5_envelope_obsoleted": false,
-    "newly_promotable_verified_owned_scoped_capabilities": 3,
-    "previously_verified_owned_scoped_capabilities": 1,
-    "whole_families_with_unresolved_equal_or_better_route": [
-      "ADVANCED_AGENTIC_CODING",
-      "PROFESSIONAL_KNOWLEDGE_WORK"
+    "verified_owned_equal_or_better_capabilities": [
+      "EXACT_SYMBOLIC_COMPUTATION"
     ],
-    "major_configured_candidates_pending_comparative_verification": [
+    "external_specimen_backed_families": [
+      "ADVANCED_AGENTIC_CODING",
       "COMPLEX_MULTI_TOOL_AGENCY",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
       "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
@@ -283,6 +319,17 @@
       "COMMUNICATION_AND_SYNTHESIS",
       "UNKNOWN_DOMAIN_ADAPTATION"
     ],
-    "next_optimization_target": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__AND_VERIFY_BROAD_CANDIDATE_FAMILIES__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION"
+    "owned_components_not_full_family": [
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "MULTI_CAPABILITY_COMPOSITION"
+    ],
+    "revoked_false_ownership_packages": [
+      "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
+      "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
+      "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
+    ],
+    "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
+    "next_optimization_target": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION"
   }
 }

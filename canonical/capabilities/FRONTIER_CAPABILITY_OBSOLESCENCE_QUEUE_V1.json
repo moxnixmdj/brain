@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
-  "status": "ACTIVE__V5_OPUS_5_5_CAPABILITY_OWNERSHIP_QUEUE",
-  "phase": "WHOLE_OPUS_5_5_ENVELOPE_RECOVERED__SCOPED_OWNERSHIP_PROMOTED__RESIDUAL_SEARCH_ACTIVE",
+  "status": "ACTIVE__V6_OPUS_5_5_CAPABILITY_INTERNALIZATION_QUEUE",
+  "phase": "V6_CAPABILITY_INTERNALIZATION__EXTERNAL_SPECIMENS_FOUND__OWNERSHIP_REQUIRES_BRAIN_OPERATIVE_CONFIGURATION",
   "p_real": 1,
   "theory": {
     "effective_frontier_intelligence": "PERMANENTLY_OWNED_CAPABILITIES_PLUS_EXTERNAL_JIT_KNOWLEDGE",
@@ -63,29 +63,26 @@
   ],
   "allowed_statuses": [
     "UNMAPPED",
-    "OPUS_BAR_UNCERTAIN",
-    "EXISTING_REALIZATION_SEARCH",
-    "CONFIGURATION_IN_PROGRESS",
-    "VERIFICATION_IN_PROGRESS",
+    "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+    "REUSABLE_MECHANISM_IDENTIFIED",
+    "INTERNALIZATION_IN_PROGRESS",
+    "BRAIN_CONFIGURED_VERIFICATION_PENDING",
     "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "OWNED_COMPONENT_NOT_FULL_FAMILY",
     "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE",
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
     "selected_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "parent_frontier_capability": null,
-    "objective": "Obsolete every remaining useful Opus 5.5 capability by finding existing equal-or-better routes, configuring winners into Brain, verifying them at exact scope, and saving them permanently.",
-    "selection_metric": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
+    "objective": "Internalize existing equal-or-better capability mechanisms into Brain. External models/services are specimens, not owned capability implementations.",
+    "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
     "evidence_paths": [
-      "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
-      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "canonical/reasoning/2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1.json"
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
     ],
-    "repair_status": "WHOLE_ENVELOPE_RECOVERED__THREE_NEW_SCOPED_OPUS55_OR_BETTER_PACKAGES_PROMOTED__EXACT_SYMBOLIC_ALREADY_OWNED",
-    "prohibition": "NO_JIT_CAPABILITY_EXTERNALIZATION__NO_UNDERLYING_CAPABILITY_INVENTION__NO_CAPABILITY_CREDIT_BELOW_OPUS_5_5__NO_INTERNAL_SUITE_PARITY_INFERENCE__KNOWLEDGE_JIT_ONLY",
-    "next_action": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__AND_VERIFY_BROAD_CANDIDATE_FAMILIES__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
-    "parent_capability_promoted": false,
+    "next_action": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0
   },
@@ -106,35 +103,41 @@
     {
       "capability_id": "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
       "parent_family": "AGENTIC_SCIENTIFIC_RESEARCH",
-      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+      "status": "OWNERSHIP_REVOKED__EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "adjudication_path": "canonical/capabilities/opus55/OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1.json",
       "frontier_bar": "Terminal-Bench-Science 0.1 Opus 5.5 = 58.7",
       "winning_route": "GPT-6 Astra via included ChatGPT Work/Codex allowance",
       "winning_result": "64.6",
       "incremental_spend_usd": 0,
-      "claim_scope": "BENCHMARKED_AGENTIC_SCIENTIFIC_RESEARCH"
+      "claim_scope": "BENCHMARKED_AGENTIC_SCIENTIFIC_RESEARCH",
+      "capability_credit": 0,
+      "revocation_reason": "Opaque external model behavior was incorrectly counted as Brain-owned capability."
     },
     {
       "capability_id": "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
       "parent_family": "BUSINESS_WORKFLOW_AUTOMATION",
-      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+      "status": "OWNERSHIP_REVOKED__EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "adjudication_path": "canonical/capabilities/opus55/OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1.json",
       "frontier_bar": "AutomationBench Opus 5.5 = 40.0",
       "winning_route": "GPT-6 Astra via included ChatGPT Work allowance",
       "winning_result": "41.4",
       "incremental_spend_usd": 0,
-      "claim_scope": "BENCHMARKED_BUSINESS_WORKFLOW_AUTOMATION"
+      "claim_scope": "BENCHMARKED_BUSINESS_WORKFLOW_AUTOMATION",
+      "capability_credit": 0,
+      "revocation_reason": "Opaque external model behavior was incorrectly counted as Brain-owned capability."
     },
     {
       "capability_id": "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1",
       "parent_family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
-      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+      "status": "OWNERSHIP_REVOKED__EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
       "adjudication_path": "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json",
       "frontier_bar": "HLE-Diamond Opus 5.5 = 55.0 no-tools / 73.9 web+code",
       "winning_route": "GPT-6 Astra + Brain + web/code/Wolfram",
       "winning_result": "60.6 no-tools / 82.9 web+code",
       "incremental_spend_usd": 0,
-      "claim_scope": "HLE_DIAMOND_CURRENT_REFINED_MULTIDISCIPLINARY_REASONING"
+      "claim_scope": "HLE_DIAMOND_CURRENT_REFINED_MULTIDISCIPLINARY_REASONING",
+      "capability_credit": 0,
+      "revocation_reason": "Opaque external model behavior was incorrectly counted as Brain-owned capability."
     }
   ],
   "task_semantic_conjunctive_role_v1": {
@@ -313,8 +316,8 @@
     "progress_metric": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
     "maximum_support_actions_before_frontier_recompute": 2,
     "pre_freeze_realizability_required": true,
-    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
-    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OWNERSHIP_ARBITRAGE_STRATEGY_V5.md",
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
     "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "recursive_obs_required": true,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
@@ -331,7 +334,7 @@
       "INTEGRATE"
     ],
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V5.json",
+    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V6.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_external_route_frontier_age_hours": 24,
@@ -344,7 +347,7 @@
     "opus_5_5_or_better_required": true,
     "permanent_capability_package_required": true
   },
-  "next_progress_event_target": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__AND_VERIFY_BROAD_CANDIDATE_FAMILIES__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
+  "next_progress_event_target": "FOR_EACH_OPUS_5_5_CAPABILITY__USE_EXTERNAL_WINNERS_ONLY_AS_SPECIMENS__FIND_ALREADY_EXISTING_REUSABLE_SKILL_PROCEDURE_WORKFLOW_ALGORITHM_OR_AGENT_SCAFFOLD__INTERNALIZE_INTO_BRAIN__VERIFY_BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5__SAVE_PERMANENTLY__NO_CAPABILITY_INVENTION",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -355,18 +358,18 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "HLE_DIAMOND_REASONING_PROMOTED__RESIDUAL_FRONTIER_COMPRESSED",
-    "blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
-    "evidence_paths": [
-      "canonical/capabilities/opus55/OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1.json",
-      "canonical/reasoning/2026-09-30_HLE_DIAMOND_OPUS55_REASONING_OBSOLESCENCE_V1.json"
-    ],
-    "newly_owned_scoped_capabilities": [
+    "status": "V6_CAPABILITY_INTERNALIZATION_CORRECTION__THREE_FALSE_OWNERSHIP_PROMOTIONS_REVOKED",
+    "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
+    "revoked_capability_credit": [
+      "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
+      "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
-    "parent_capability_promoted": false,
+    "preserved_owned_capability": [
+      "EXACT_SYMBOLIC_COMPUTATION_V1"
+    ],
     "whole_envelope_complete": false,
-    "counter_delta": 1
+    "counter_delta": -3
   },
   "last_real_output_event": {
     "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_CORRECTED_20260930",

@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PERMANENT_CAPABILITY_PACKAGE_V1",
   "capability_id": "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1",
-  "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__CURRENT_REFINED_BENCHMARK_SCOPE",
+  "status": "OWNERSHIP_REVOKED__EXTERNAL_CAPABILITY_SPECIMEN_FOUND__INTERNALIZATION_REQUIRED",
   "useful_scope": "Expert multidisciplinary reasoning and expert-knowledge problem solving represented by HLE-Diamond, both closed-book and with web+code tools.",
   "target_reference": {
     "model": "Claude Opus 5.5",
@@ -17,25 +17,6 @@
     "no_tools_score_percent": 60.6,
     "web_code_score_percent": 82.9,
     "source": "https://lastexam.ai/blog/hle-diamond"
-  },
-  "permanent_brain_configuration": {
-    "primary_cognition": "GPT-6 Astra",
-    "execution_surface": [
-      "ChatGPT Work",
-      "Codex"
-    ],
-    "tools_when_required": [
-      "web search",
-      "code execution",
-      "Wolfram",
-      "files",
-      "installed connected tools"
-    ],
-    "knowledge_policy": "External/JIT. Retrieve current/domain knowledge at task time; do not store it as the capability.",
-    "reasoning_policy": "Use Astra as configured cognition; preserve task objective, tool plan, verification evidence, and decision receipt in Brain.",
-    "verification_policy": "For consequential answers, independently verify exact computation and material factual claims when feasible; fail closed on unresolved contradictions.",
-    "cost_policy": "Use included Plus Work/Codex allowance only. Do not buy credits or invoke paid API under the current hard-zero incremental-spend constraint.",
-    "access_preflight": "Before execution, verify GPT-6 Astra and required tool surfaces are currently available in the included account allowance."
   },
   "ownership_test": {
     "discovery_repeated_per_task": false,
@@ -59,5 +40,39 @@
     "https://openai.com/index/gpt-6-astra/",
     "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
   ],
-  "acquired_utc": "2026-09-30"
+  "acquired_utc": "2026-09-30",
+  "ownership_revocation": {
+    "date": "2026-09-30",
+    "reason": "The operative target capability was still located inside GPT-6 Astra's opaque hidden cognition. Saving a provider/model route is external capability access, not Brain ownership.",
+    "governing_law": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "retained_value": "Benchmark evidence proves an equal-or-better capability specimen exists and is useful for discovering/extracting an already-existing reusable capability configuration.",
+    "capability_credit": 0,
+    "next_state": "REUSABLE_MECHANISM_IDENTIFICATION_AND_BRAIN_INTERNALIZATION_REQUIRED"
+  },
+  "specimen_role": {
+    "external_system": "GPT-6 Astra",
+    "evidence_only": true,
+    "may_define_owned_implementation": false,
+    "may_guide_mechanism_search": true
+  },
+  "superseded_external_route": {
+    "primary_cognition": "GPT-6 Astra",
+    "execution_surface": [
+      "ChatGPT Work",
+      "Codex"
+    ],
+    "tools_when_required": [
+      "web search",
+      "code execution",
+      "Wolfram",
+      "files",
+      "installed connected tools"
+    ],
+    "knowledge_policy": "External/JIT. Retrieve current/domain knowledge at task time; do not store it as the capability.",
+    "reasoning_policy": "Use Astra as configured cognition; preserve task objective, tool plan, verification evidence, and decision receipt in Brain.",
+    "verification_policy": "For consequential answers, independently verify exact computation and material factual claims when feasible; fail closed on unresolved contradictions.",
+    "cost_policy": "Use included Plus Work/Codex allowance only. Do not buy credits or invoke paid API under the current hard-zero incremental-spend constraint.",
+    "access_preflight": "Before execution, verify GPT-6 Astra and required tool surfaces are currently available in the included account allowance."
+  },
+  "ownership_test_result": "FAIL__NO_BRAIN_OWNED_OPERATIVE_CAPABILITY_CONFIGURATION_DISTINCT_FROM_EXTERNAL_MODEL"
 }

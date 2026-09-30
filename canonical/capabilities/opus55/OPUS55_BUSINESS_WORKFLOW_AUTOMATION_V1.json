@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PERMANENT_CAPABILITY_PACKAGE_V1",
   "capability_id": "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
-  "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+  "status": "OWNERSHIP_REVOKED__EXTERNAL_CAPABILITY_SPECIMEN_FOUND__INTERNALIZATION_REQUIRED",
   "useful_scope": "Multi-application business workflow automation represented by AutomationBench, with durable Brain routing and verification.",
   "opus_5_5_bar": {
     "benchmark": "AutomationBench",
@@ -15,7 +15,35 @@
     "unit": "percent",
     "source": "https://openai.com/index/gpt-6-astra/"
   },
-  "permanent_brain_configuration": {
+  "ownership_test": {
+    "capability_discovery_repeated_per_task": false,
+    "invocation_contract_saved": true,
+    "dependencies_saved": true,
+    "verifier_saved": true,
+    "recovery_behavior_saved": true
+  },
+  "claim_limits": "This promotion covers the scoped business-workflow automation capability evidenced by AutomationBench, not every professional knowledge-work task.",
+  "evidence_sources": [
+    "https://www.anthropic.com/claude-opus-5-5",
+    "https://openai.com/index/gpt-6-astra/",
+    "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+  ],
+  "acquired_utc": "2026-09-30",
+  "ownership_revocation": {
+    "date": "2026-09-30",
+    "reason": "The operative target capability was still located inside GPT-6 Astra's opaque hidden cognition. Saving a provider/model route is external capability access, not Brain ownership.",
+    "governing_law": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "retained_value": "Benchmark evidence proves an equal-or-better capability specimen exists and is useful for discovering/extracting an already-existing reusable capability configuration.",
+    "capability_credit": 0,
+    "next_state": "REUSABLE_MECHANISM_IDENTIFICATION_AND_BRAIN_INTERNALIZATION_REQUIRED"
+  },
+  "specimen_role": {
+    "external_system": "GPT-6 Astra",
+    "evidence_only": true,
+    "may_define_owned_implementation": false,
+    "may_guide_mechanism_search": true
+  },
+  "superseded_external_route": {
     "execution_surface": [
       "ChatGPT Work"
     ],
@@ -32,18 +60,5 @@
     "incremental_spend": "Use included Plus Work/Codex allowance and already-connected tools only. Do not purchase credits or invoke paid API under current hard-zero rule.",
     "access_preflight": "Confirm Astra and required app/tool access before execution."
   },
-  "ownership_test": {
-    "capability_discovery_repeated_per_task": false,
-    "invocation_contract_saved": true,
-    "dependencies_saved": true,
-    "verifier_saved": true,
-    "recovery_behavior_saved": true
-  },
-  "claim_limits": "This promotion covers the scoped business-workflow automation capability evidenced by AutomationBench, not every professional knowledge-work task.",
-  "evidence_sources": [
-    "https://www.anthropic.com/claude-opus-5-5",
-    "https://openai.com/index/gpt-6-astra/",
-    "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
-  ],
-  "acquired_utc": "2026-09-30"
+  "ownership_test_result": "FAIL__NO_BRAIN_OWNED_OPERATIVE_CAPABILITY_CONFIGURATION_DISTINCT_FROM_EXTERNAL_MODEL"
 }

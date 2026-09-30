@@ -4,7 +4,8 @@
   "supersedes": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
-    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
     "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md"
   ],
   "required_fields": [
@@ -250,10 +251,11 @@
   "theory_invariants": {
     "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "knowledge_policy": "EXTERNAL_JIT",
-    "capability_policy": "FIND_EXISTING__CONFIGURE__VERIFY__SAVE_PERMANENTLY",
-    "capability_externalization": "FORBIDDEN_AS_NORMAL_OPERATION",
+    "external_winner_role": "SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__NO_OPAQUE_TARGET_CAPABILITY_CREDIT",
     "underlying_capability_invention": "FORBIDDEN",
-    "opus_acceptance_bar": "GREATER_THAN_OR_EQUAL_TO_OPUS_5_5"
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5"
   },
   "reasoning_durability": {
     "receipt_required": true,
@@ -272,5 +274,17 @@
       "supersedes"
     ]
   },
-  "build_interpretation": "INTEGRATION_CONFIGURATION_PACKAGING_ROUTING_VERIFICATION_RECOVERY_GLUE_ONLY__NOT_UNDERLYING_CAPABILITY_INVENTION"
+  "build_interpretation": "ENCODE_INTEGRATE_PACKAGE_ROUTE_VERIFY_RECOVER_ALREADY_EXISTING_REUSABLE_CAPABILITY_MECHANISM_ONLY__NOT_UNDERLYING_CAPABILITY_INVENTION",
+  "ownership_tests": {
+    "required_for_capability_promotion": true,
+    "required": [
+      "BRAIN_ARTIFACT_TEST",
+      "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+      "GENERAL_SUBSTRATE_TEST",
+      "SPECIMEN_SEPARATION_TEST",
+      "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+      "BRAIN_CONFIGURED_VERIFICATION_TEST",
+      "OWNERSHIP_PACKAGE_TEST"
+    ]
+  }
 }
