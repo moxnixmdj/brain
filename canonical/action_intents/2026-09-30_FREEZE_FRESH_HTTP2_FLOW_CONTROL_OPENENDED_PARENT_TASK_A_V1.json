@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-HTTP2-FLOW-CONTROL-OPENENDED-PARENT-TASK-A-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "bab96da313ac8c9b4476e8d466f1fe1fcbb5f240",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_HTTP2_FLOW_CONTROL_TASK_A::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended network-protocol parent task with no supplied authority, source, standards citation, values, formula, tool recipe, or answer; execute exactly once and stop on the first new causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current base bab96da313ac8c9b4476e8d466f1fe1fcbb5f240",
+    "claim-spec/operand-binding child promoted by PR #449 and reconciled by PR #453",
+    "SQLite, climate, demography, astronomy, geophysics, biophysics, thermophysics, numerical-computing and prior structured tasks excluded from freshness",
+    "HTTP/2 network-protocol domain not used by the current admissible open-ended parent proof"
+  ],
+  "evidence_presence_classification": "CHILD_STACK_VERIFIED__FRESH_PARENT_VALIDATION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen task. On semantic completion, independently verify before any parent promotion. On failure, preserve only the earliest integrated causal gap and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "The full inherited model-independent route must now prove genuine open-ended parent behavior after claim-spec/operand-binding acquisition.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_NETWORK_PROTOCOL_PARENT_TASK",
+    "deleted_or_bypassed_paths": [
+      "SQLITE_REPLAY",
+      "NUMERICAL_STABILITY_REPLAY",
+      "PREDECLARED_STANDARDS_CITATION",
+      "PREDECLARED_NUMERIC_VALUES",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "PREWIRED_TOOL_OR_CALCULATION_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The HTTP/2 objective is materially different from spent parent domains, requires autonomous authoritative-source discovery, extraction of two protocol limits, a deterministic comparison, executable verification and scoped interpretation, while fitting the newly verified bounded claim/relation stack without leaking the answer.",
+    "expected_parent_level_state_change": "Either obtain the first admissible genuine open-ended parent Task A pass or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
