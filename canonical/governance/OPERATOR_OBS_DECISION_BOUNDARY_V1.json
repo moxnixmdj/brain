@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_OPERATOR_OBS_DECISION_BOUNDARY_V1",
+  "status": "MANDATORY_FAIL_CLOSED",
+  "purpose": "Prevent consequential Project Brain diagnoses, recommendations, route selections, and executions from acquiring authority before current-base recursive OBS.",
+  "applies_before": [
+    "CLAIMING_THE_CURRENT_CAUSAL_BLOCKER",
+    "RECOMMENDING_OR_SELECTING_A_ROUTE",
+    "STARTING_CONSEQUENTIAL_IMPLEMENTATION_OR_REPAIR",
+    "STARTING_INFRASTRUCTURE_WORK",
+    "SPENDING_A_SCARCE_VALIDATION_GATE",
+    "PROMOTING_OR_REVOKING_CAPABILITY_CREDIT"
+  ],
+  "non_authoritative_inputs": [
+    "conversation_memory",
+    "summaries",
+    "prior_assistant_conclusions",
+    "stale_route_frontiers",
+    "stale_preflights"
+  ],
+  "mandatory_entry_sequence": [
+    "REFRESH_LIVE_CANONICAL_POINTER",
+    "REFRESH_ACTIVE_GOAL_HIERARCHY",
+    "REFRESH_FRONTIER_QUEUE_AND_REAL_OUTPUT_SCOREBOARD",
+    "READ_CURRENT_RECURSIVE_OBS_LAW_AND_RELEVANT_TASK_STATE",
+    "RUN_SEVEN_OBS_LAYERS_IN_ORDER",
+    "REFRESH_LIVE_CHALLENGER_FRONTIER_WHEN_EXTERNALLY_SATISFIABLE",
+    "REFRESH_SELECTED_ROUTE_EXECUTION_PREFLIGHT_BEFORE_EXECUTION",
+    "ONLY_THEN_GRANT_CURRENT_DECISION_AUTHORITY"
+  ],
+  "seven_layers": [
+    "OBS_GOAL",
+    "OBS_REQUIRED_CAPABILITY",
+    "OBS_BLOCKER",
+    "OBS_PROPOSED_SOLUTION",
+    "OBS_VERIFICATION",
+    "OBS_INHERITED_SYSTEM_AFTER_WIN",
+    "OBS_THE_OBS_AND_SEARCH_PROCESS"
+  ],
+  "authority_rule": "Exploration before OBS is allowed, but no consequential blocker claim, route recommendation, or execution decision is authoritative until the current-base OBS pass succeeds.",
+  "mutation_rule": "No frontier-sensitive mutation may bypass the canonical action-intent plus trusted drift-guard path.",
+  "invalidation_rule": "Any material canonical, task, capability, route, dependency, verifier, or external-surface change invalidates the affected OBS layers immediately.",
+  "memory_rule": "Memory and summaries may seed retrieval only; they cannot establish current frontier truth.",
+  "stop_rule": "Stop OBS and execute once a correctness-sufficient route survives a fresh challenger frontier, no unresolved plausible dominator remains, required execution dependencies are ready, and further search is unlikely to change the decision.",
+  "anti_ceremony_rule": "OBS activity receives zero progress credit and must not delay a route that already satisfies the stop rule.",
+  "failure_action": "WITHHOLD_DECISION_AUTHORITY__REFRESH_LIVE_STATE__RERUN_AFFECTED_OBS_LAYERS__THEN_SELECT_OR_EXECUTE",
+  "protected_by": "canonical/runtime/enforce_goal_hierarchy.py"
+}

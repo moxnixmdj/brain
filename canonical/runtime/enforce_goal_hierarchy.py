@@ -43,6 +43,7 @@ PROTECTED_GUARD_PATHS={
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
+    "canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json",
     "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
@@ -827,6 +828,23 @@ def main():
     pointer=load("canonical/CANONICAL_POINTER.json")
     hierarchy=load("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
     queue=load("canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json")
+
+    boot=pointer.get("boot_requirements") or {}
+    operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
+    if boot.get("operator_obs_decision_boundary_required") is not True:
+        fail("OPERATOR_OBS_DECISION_BOUNDARY_NOT_REQUIRED")
+    if boot.get("operator_obs_decision_boundary_path")!=operator_obs_path:
+        fail("OPERATOR_OBS_DECISION_BOUNDARY_PATH_MISMATCH")
+    if boot.get("consequential_operator_reasoning_requires_current_obs") is not True:
+        fail("CONSEQUENTIAL_OPERATOR_REASONING_NOT_GATED_BY_CURRENT_OBS")
+    if boot.get("memory_only_frontier_diagnosis_forbidden") is not True:
+        fail("MEMORY_ONLY_FRONTIER_DIAGNOSIS_NOT_FORBIDDEN")
+    if boot.get("operator_exploration_before_obs_is_non_authoritative") is not True:
+        fail("PRE_OBS_EXPLORATION_AUTHORITY_NOT_REVOKED")
+    if boot.get("operator_obs_required_before_current_blocker_or_route_claim") is not True:
+        fail("CURRENT_BLOCKER_OR_ROUTE_CLAIM_NOT_GATED_BY_OBS")
+    if not (ROOT/operator_obs_path).is_file():
+        fail("OPERATOR_OBS_DECISION_BOUNDARY_FILE_MISSING")
 
     intents=[
         x for x in files
