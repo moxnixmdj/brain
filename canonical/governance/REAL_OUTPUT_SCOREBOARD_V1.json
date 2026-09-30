@@ -6,11 +6,11 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 7,
+    "reusable_capabilities_inherited": 6,
     "verified_real_tasks_completed": 9,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 12
+    "residual_gaps_localized": 11
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -569,7 +569,9 @@
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Generic evidence extraction only; relation/support/correctness/sufficiency remain unverified."
+      "limitations": "Generic evidence extraction only; relation/support/correctness/sufficiency remain unverified.",
+      "package_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1.json",
+      "scoreboard_credit_in_this_pr": 0
     }
   },
   "events": [
@@ -625,15 +627,16 @@
       "public_run_id": 36680967490,
       "public_job_id": 109776102956,
       "counter_effects": {
-        "reusable_capabilities_inherited": 1,
+        "reusable_capabilities_inherited": 0,
         "verified_real_tasks_completed": 0,
         "fresh_reuse_passes": 0,
         "frontier_dependencies_removed": 0,
-        "residual_gaps_localized": 1
+        "residual_gaps_localized": 0
       },
-      "progress_credit": "VERIFIED_REUSABLE_GENERIC_SUBCAPABILITY_AND_NEXT_GAP_LOCALIZED",
+      "progress_credit": "VERIFIED_SUBCAPABILITY_PACKAGE_RECORDED__ZERO_GLOBAL_SCORE_CREDIT",
       "parent_capability_promoted": false,
-      "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+      "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+      "capability_package": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1.json"
     }
   ]
 }
