@@ -1520,6 +1520,13 @@
             "CONFLICTED"
           ]
         }
+      },
+      "proposal_bindings": {
+        "assessment_path": {
+          "type": "effect_result",
+          "effect": "knowledge.assessment.available",
+          "field": "output_path"
+        }
       }
     },
     "knowledge.support.materialize": {
@@ -1580,6 +1587,17 @@
         "observed_effect": {
           "supported_materialized": true,
           "conflicted_materialized": false
+        }
+      },
+      "proposal_bindings": {
+        "assessment_path": {
+          "type": "effect_result",
+          "effect": "knowledge.assessment.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
         }
       }
     },
@@ -2571,6 +2589,13 @@
         "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
         "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+      },
+      "proposal_bindings": {
+        "result_path": {
+          "type": "effect_result",
+          "effect": "decision.synthesis.typed",
+          "field": "output_path"
+        }
       }
     },
     "plain_goal.bound_capability.grounding.stdlib": {
@@ -2728,6 +2753,13 @@
         "exact_final_head_validation_run_id": 36646452335,
         "exact_final_head_validation_artifact_id": 11068728150,
         "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
+      },
+      "proposal_bindings": {
+        "result_path": {
+          "type": "effect_result",
+          "effect": "plain_goal.bound_capability.grounding",
+          "field": "output_path"
+        }
       }
     }
   },
