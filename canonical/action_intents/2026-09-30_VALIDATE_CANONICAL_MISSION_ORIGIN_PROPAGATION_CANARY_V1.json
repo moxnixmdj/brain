@@ -1,0 +1,349 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "VALIDATE-CANONICAL-MISSION-ORIGIN-PROPAGATION-CANARY-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH::FRESH_REUSE",
+  "expected_parent_frontier_change": "Prove or falsify, with one fresh non-parent canary and zero parent credit, that the existing canonical astra_runtime mission-file entrypoint propagates a valid runtime mission identity into autonomous capability acquisition; only after a pass may a materially different fresh open-ended parent Task A be frozen.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Main da64d00b971d5fb4e465af09f8ebb3242831f7bb merged PR362 and selects REUSE_EXISTING_CANONICAL_ASTRA_MISSION_ENTRYPOINT.",
+    "PARENT_OPEN_ENDED_TASK_A_ACQUISITION_MISSION_IDENTITY_RECONCILIATION_20260930_V1 localizes the terminal gap to APT_ORIGIN_MISSION_PATH_INVALID + PYPI_ORIGIN_MISSION_PATH_INVALID from a direct run_goal carrier that omitted _runtime_mission_path.",
+    "canonical/runtime/astra_runtime.py blob 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9 already canonicalizes a real mission file and injects _runtime_mission_path before goal execution.",
+    "Public verification-capsule-runner PR74 head 6274abc3a758b2295da169199c95eb9bab1cfd13 contains exact matching critical runtime blobs; run 36671302163 completed successfully on ubuntu-24.04.",
+    "Open PR363/PR366 action intents use a different stale compile-gap NO_MUTATION_DIAGNOSTIC lease and do not own this mission-origin FRESH_REUSE lease.",
+    "The spent Mauna Loa Task A is forbidden to replay and is not used by this canary."
+  ],
+  "evidence_presence_classification": "PATH_VALIDITY_UNPROVEN__CAPABILITY_RUNTIME_ALREADY_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Run exactly one fresh non-parent canonical-entrypoint canary. Pass only if autonomous acquisition is reached through a real canonical mission file without APT_ORIGIN_MISSION_PATH_INVALID or PYPI_ORIGIN_MISSION_PATH_INVALID. Award zero capability, fresh-reuse, verified-real-task, or frontier-dependency credit. On any other first failure, preserve it and recompute; do not patch runtime against the canary before reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "da64d00b971d5fb4e465af09f8ebb3242831f7bb",
+    "real_outcome": "Remove or preserve the current parent blocker by directly testing the already-existing canonical mission-file entrypoint at the exact autonomous-acquisition seam, without spending another parent task.",
+    "required_capability": "CANONICAL_ASTRA_MISSION_IDENTITY_PROPAGATION_TO_AUTONOMOUS_ACQUISITION",
+    "obs_goal": {
+      "real_outcome": "Obtain decisive zero-credit evidence that a real mission file causes astra_runtime.main to supply a valid origin mission path to autonomous acquisition.",
+      "proxy_goals_deleted": [
+        "Replay the spent Mauna Loa Task A",
+        "Patch astra_runtime before testing its existing canonical entrypoint",
+        "Patch APT or PyPI mission validation",
+        "Create a new runtime or model",
+        "Claim parent capability progress from a canary"
+      ],
+      "surviving_necessity": "The selected reuse route has not yet been exercised through the canonical CLI boundary on a fresh non-parent acquisition canary."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/astra_runtime.py@6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+        "canonical/runtime/auto_capability_acquisition.py@fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+        "canonical/runtime/auto_apt_cli_acquisition.py@0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+        "canonical/runtime/auto_pypi_library_acquisition.py@6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
+        "public verification-capsule-runner exact runtime mirror at PR74 head 6274abc3a758b2295da169199c95eb9bab1cfd13"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions standard public ubuntu-24.04 runner",
+        "Railway historical carrier path",
+        "Direct run_goal carrier"
+      ],
+      "capability_work_deleted": [
+        "No runtime repair",
+        "No supplier-specific patch",
+        "No new infrastructure",
+        "No model cognition",
+        "No parent task execution"
+      ],
+      "surviving_gap": "Canonical mission identity propagation remains unverified on a real acquisition invocation."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC. The spent parent carrier bypassed astra_runtime.main and passed an in-memory mission lacking _runtime_mission_path; both acquisition suppliers then failed closed at origin mission validation.",
+      "delete_bypass_substitute_options": [
+        "DELETE runtime repair: selected because existing astra_runtime.main already injects the missing path.",
+        "BYPASS spent parent replay: selected; use a fresh non-parent canary.",
+        "REUSE canonical mission-file entrypoint: selected.",
+        "SUBSTITUTE Railway: rejected as unnecessary because a fresh public GitHub Actions carrier is ready at $0.",
+        "REPAIR supplier validation: rejected before reuse route is falsified."
+      ],
+      "surviving_causal_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CANONICAL_ASTRA_RUNTIME_MAIN_VIA_PUBLIC_GITHUB_ACTIONS_CANARY",
+        "DIRECT_RUN_GOAL_WITH_MANUALLY_INJECTED_PATH",
+        "PATCH_RUNTIME_OR_ACQUISITION",
+        "RAILWAY_CANARY",
+        "REPLAY_SPENT_PARENT_TASK"
+      ],
+      "losing_routes_reason": "The canonical CLI already implements the missing propagation and the public carrier is currently live, exact-byte matched, and $0. Every alternative adds mutation, infrastructure, or invalid replay without improving the decisive path-validity evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A fresh non-parent canary is required because the claim is about the real runtime path. The workflow must invoke python canonical/runtime/astra_runtime.py <real mission file>, prove exact critical blobs, and fail if either origin-mission-path-invalid code appears."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any proposed runtime mission-path repair if the canary passes",
+        "Any direct-run_goal parent carrier",
+        "Any same-task Mauna replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime mission path canonicalization",
+        "mission hashing",
+        "runtime-derived cognition provenance",
+        "autonomous supplier routing"
+      ],
+      "fresh_reuse_plan": "If the canary passes, reconcile the path blocker as removed and freeze one materially different fresh open-ended Task A through the same canonical mission-file entrypoint. If it fails elsewhere, preserve the first new residual and recompute without canary-specific repair."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR362 causal reconciliation",
+        "Reuse exact runtime blob identities",
+        "Reuse current public carrier readiness run 36671302163",
+        "Reuse official GitHub public-runner billing and ubuntu-24.04 documentation"
+      ],
+      "search_stop_decision": "The existing CLI is a zero-change causal fix for the exact missing field, and a current exact-byte public carrier is ready. Further architecture search cannot dominate a one-shot reuse validation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed 2026-09-30T05:18:46Z against current Brain main, current public carrier run, GitHub Actions official runner/billing docs, and current actions/checkout surface."
+    },
+    "routes_considered": [
+      "REUSE_CANONICAL_ASTRA_RUNTIME_MAIN_VIA_PUBLIC_GITHUB_ACTIONS_CANARY",
+      "DIRECT_RUN_GOAL_WITH_MANUALLY_INJECTED_PATH",
+      "PATCH_RUNTIME_OR_ACQUISITION",
+      "RAILWAY_CANARY",
+      "REPLAY_SPENT_PARENT_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_PARENT_REPLAY",
+      "DIRECT_RUN_GOAL_CARRIER",
+      "PREEMPTIVE_RUNTIME_REPAIR",
+      "PREEMPTIVE_SUPPLIER_REPAIR",
+      "NEW_PAID_OR_BILLABLE_INFRASTRUCTURE"
+    ],
+    "selected_surviving_route": "REUSE_CANONICAL_ASTRA_RUNTIME_MAIN_VIA_PUBLIC_GITHUB_ACTIONS_CANARY",
+    "why_selected_route_is_fastest_sufficient": "It exercises the exact current runtime bytes through the exact entrypoint that already injects _runtime_mission_path, on a currently proven public ubuntu-24.04 carrier whose standard runner usage is free. It requires no runtime change and spends no parent freshness.",
+    "expected_parent_level_state_change": "Prove or falsify, with one fresh non-parent canary and zero parent credit, that the existing canonical astra_runtime mission-file entrypoint propagates a valid runtime mission identity into autonomous capability acquisition; only after a pass may a materially different fresh open-ended parent Task A be frozen.",
+    "stop_condition": "Run exactly one fresh non-parent canonical-entrypoint canary. Pass only if autonomous acquisition is reached through a real canonical mission file without APT_ORIGIN_MISSION_PATH_INVALID or PYPI_ORIGIN_MISSION_PATH_INVALID. Award zero capability, fresh-reuse, verified-real-task, or frontier-dependency credit. On any other first failure, preserve it and recompute; do not patch runtime against the canary before reconciliation.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T05:18:46Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_CANONICAL_ASTRA_RUNTIME_MAIN_VIA_PUBLIC_GITHUB_ACTIONS_CANARY",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main da64d00b971d5fb4e465af09f8ebb3242831f7bb",
+          "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_ACQUISITION_MISSION_IDENTITY_RECONCILIATION_20260930_V1.json",
+          "exact runtime blob comparison against verification-capsule-runner PR74"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.github.com/en/billing/concepts/product-billing/github-actions",
+          "https://docs.github.com/en/actions/reference/runners/github-hosted-runners"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/marketplace/actions/checkout",
+          "actions/checkout v4 current supported surface"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026-09-30 route search for no-cost Linux CI alternatives; no route can remove more work than reusing the already-live exact-byte public carrier."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "zero-cost exact-byte Linux carrier canonical mission file runtime acquisition provenance"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GitHub Actions public repository standard runner free ubuntu-24.04"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing CLI mission-file entrypoint versus direct function invocation provenance"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 GitHub Actions ubuntu-24.04 public runner current availability checkout"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CANONICAL_ASTRA_RUNTIME_MAIN_VIA_PUBLIC_GITHUB_ACTIONS_CANARY",
+          "evidence": [
+            "astra_runtime.main injects _runtime_mission_path before execute_step",
+            "verification-capsule-runner PR74 exact critical blob match",
+            "public carrier run 36671302163 success"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: verification-capsule-runner run 36671302163",
+            "OFFICIAL_PRIMARY: GitHub public standard runner documentation"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exercises the exact missing mission-identity boundary through the canonical entrypoint.",
+            "CAPABILITY_STRENGTH": "Tests the real autonomous-acquisition path without claiming parent capability.",
+            "WALL_CLOCK": "Single short public workflow; no runtime implementation.",
+            "INCREMENTAL_COST": "$0 on a public standard GitHub-hosted runner.",
+            "RELIABILITY": "Current public carrier and exact critical blobs already passed preflight.",
+            "VERIFIABILITY": "Workflow logs, exact blob assertions, and preserved acquisition/blocker evidence."
+          }
+        },
+        {
+          "route": "PATCH_RUNTIME_OR_ACQUISITION",
+          "evidence": [
+            "Current runtime already contains mission-path injection; no defect at this selected seam has been observed through the canonical entrypoint."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED: astra_runtime.py blob 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Premature mutation could mask whether the existing route already works.",
+            "CAPABILITY_STRENGTH": "Adds no capability before reuse falsification.",
+            "WALL_CLOCK": "Slower than reuse.",
+            "INCREMENTAL_COST": "$0 but unnecessary work.",
+            "RELIABILITY": "Introduces new regression surface.",
+            "VERIFIABILITY": "Less causal because multiple variables would change."
+          }
+        },
+        {
+          "route": "DIRECT_RUN_GOAL_WITH_MANUALLY_INJECTED_PATH",
+          "evidence": [
+            "The spent parent carrier's direct run_goal path is exactly what bypassed canonical mission loading."
+          ],
+          "qualification_evidence": [
+            "PARENT_OPEN_ENDED_TASK_A_ACQUISITION_MISSION_IDENTITY_RECONCILIATION_20260930_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Would test a hand-constructed substitute rather than the selected canonical route.",
+            "CAPABILITY_STRENGTH": "No additional capability.",
+            "WALL_CLOCK": "Similar runtime but invalid causal surface.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Repeats the known path-authority mistake.",
+            "VERIFIABILITY": "Cannot prove the CLI path."
+          }
+        }
+      ],
+      "negative_search_summary": "No plausible challenger dominates reuse of the already-implemented canonical mission loader on the already-live exact-byte $0 public carrier.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CANONICAL_ASTRA_RUNTIME_MAIN_VIA_PUBLIC_GITHUB_ACTIONS_CANARY",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T05:18:46Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CANONICAL_ASTRA_RUNTIME_MAIN_VIA_PUBLIC_GITHUB_ACTIONS_CANARY",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_UBUNTU_24_04_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:18:46Z",
+            "evidence": [
+              "DIRECT_PROBE: verification-capsule-runner run 36671302163 completed success on current PR74 head"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "EXACT_CURRENT_BRAIN_RUNTIME_BLOBS_ON_CARRIER",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:18:46Z",
+            "evidence": [
+              "astra_runtime.py 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+              "auto_capability_acquisition.py fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+              "auto_apt_cli_acquisition.py 0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+              "auto_pypi_library_acquisition.py 6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
+              "capability_discovery.py b9e7423ab24bf2da98869b02d782e791a779892a",
+              "goal_compiler.py 4b61fe911471854ec15c7900816f61e9e55f602e"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_STANDARD_RUNNER_ZERO_INCREMENTAL_COST",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T05:18:46Z",
+            "evidence": [
+              "GitHub Actions billing docs: standard GitHub-hosted runners are free for public repositories",
+              "GitHub runner docs list ubuntu-24.04 for public repositories"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
