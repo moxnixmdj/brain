@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_NONPARENT_MISSION_PATH_CANARY_RECONCILIATION_V1",
+  "status": "PASS__MISSION_IDENTITY_BLOCKER_CLOSED__NO_PARENT_CAPABILITY_CREDIT",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "source": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 80,
+    "branch": "canary/mission-path-pypi-avro-20260930-v1",
+    "authoritative_run_id": 36672910427,
+    "authoritative_job_id": 109751598530,
+    "head_sha": "4727435f645ca1bfb69248232a2516f119fd60e7",
+    "artifact_id": 11079061211,
+    "artifact_digest": "sha256:35b35cb4bc346cd1555047bf66e2e46b85112a2f029eef6b9b0339ffd09f15e4"
+  },
+  "exact_result": {
+    "canary_status": "PASS_CANONICAL_CLI_PROPAGATES_MISSION_PATH_TO_AUTO_ACQUISITION",
+    "mission_path_propagated": true,
+    "origin_mission_path_invalid_absent": true,
+    "auto_acquisition_reached": true,
+    "pypi_route_observed": true,
+    "supplier_class": "pypi_python_library",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "parent_capability_credit_authorized": false
+  },
+  "causal_conclusion": {
+    "closed_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "conclusion": "The canonical ASTRA CLI mission entrypoint preserved a non-empty canonical mission path into autonomous supplier acquisition. The prior Mauna Task A terminal mission-identity failure is not a current runtime blocker.",
+    "non_blocking_capsule_issue": "The public Avro canary capsule lacked canonical/runtime/python_codec_probe.py, so Avro supplier contract acquisition itself did not complete. This does not falsify mission-path propagation and must not be conflated with the closed origin-identity blocker."
+  },
+  "duplicate_incident": {
+    "status": "QUARANTINED_ZERO_AUTHORITY",
+    "reason": "A near-concurrent synchronize event produced an older execution before the explicit trigger. Only the exact current-head run 36672910427 is authoritative for reconciliation.",
+    "older_run_id": 36672829963,
+    "byte_equivalence_note": "Compared old head bc55cfb52064854926b29da5cfb1a10f2fa31d25 to current head 4727435f645ca1bfb69248232a2516f119fd60e7; the only delta is the non-execution ARM marker."
+  },
+  "next_action": "FREEZE_AND_EXECUTE_ONE_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK__NO_PREWIRED_SOURCES_FORMULAS_OR_ACTION_GRAPH__STOP_ON_FIRST_CAUSAL_GAP",
+  "same_spent_parent_task_replay_allowed": false,
+  "capability_credit_delta": 0
+}
