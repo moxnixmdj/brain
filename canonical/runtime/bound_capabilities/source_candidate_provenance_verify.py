@@ -60,61 +60,60 @@ class _Title(HTMLParser):
     def handle_endtag(self,tag):
         if tag.lower()=="title": self.on=False
 
-def materialize(candidate,timeout=15,fetch=None):
-    """Live-materialize exactly one already-selected candidate.
-
-    This is a provenance transition only. For DOI/bibliographic candidates it
-    follows the selected candidate URL to a live retrievable source. It never
-    claims factual authority, primary-source status, relevance, or sufficiency.
-    """
+def materialize_retrieval(candidate,bibliographic_verification,timeout=15):
     candidate=dict(candidate or {})
+    verification=dict(bibliographic_verification or {})
+    base={
+        "schema":SCHEMA,
+        "authority_status":"UNVERIFIED",
+        "primary_source_status":"UNVERIFIED",
+        "evidence_sufficiency_status":"UNVERIFIED",
+        "model_dependency_count":0,
+        "incremental_spend_usd":0,
+    }
+    if verification.get("status")!="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+        return {**base,"status":"UNVERIFIED","reason":"BIBLIOGRAPHIC_PROVENANCE_REQUIRED"}
     url=_safe_url(candidate.get("url"))
-    if not url:
-        return {
-            "schema":SCHEMA,"status":"UNVERIFIED","reason":"SAFE_HTTP_URL_REQUIRED",
-            "authority_status":"UNVERIFIED","primary_source_status":"UNVERIFIED",
-            "model_dependency_count":0,"incremental_spend_usd":0,
-        }
+    verified_url=_safe_url(verification.get("candidate_url"))
+    if not url or url!=verified_url:
+        return {**base,"status":"UNVERIFIED","reason":"BIBLIOGRAPHIC_CANDIDATE_IDENTITY_MISMATCH"}
     timeout=max(2,min(int(timeout),30))
-    fetch=fetch or _fetch
     try:
-        body,ctype,status,final=fetch(
-            url,timeout,"text/html,application/xhtml+xml,text/plain,*/*;q=0.3"
-        )
+        body,ctype,status,final=_fetch(url,timeout,"text/html,application/xhtml+xml,text/plain,*/*;q=0.4")
         final=_safe_url(final)
         if not final:
             raise ValueError("UNSAFE_FINAL_URL")
         title=None
-        if "html" in str(ctype or "").lower():
-            p=_Title(); p.feed(bytes(body).decode("utf-8","replace"))
+        if "html" in ctype.lower():
+            p=_Title(); p.feed(body.decode("utf-8","replace"))
             title=_canon(html.unescape("".join(p.parts))) or None
         return {
-            "schema":SCHEMA,
+            **base,
             "status":"RETRIEVAL_PROVENANCE_VERIFIED",
-            "verification_method":"SELECTED_CANDIDATE_LIVE_HTTP_MATERIALIZATION",
+            "verification_method":"BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION",
             "candidate_url":url,
             "final_url":final,
             "final_host":(urllib.parse.urlsplit(final).hostname or "").lower(),
-            "http_status":int(status),
-            "content_type":str(ctype or ""),
+            "http_status":status,
+            "content_type":ctype,
             "page_title":title,
-            "selected_only_materialization":True,
-            "bibliographic_identity_preserved":bool(_doi(candidate)),
+            "doi":verification.get("doi"),
+            "record_title":verification.get("record_title"),
+            "bibliographic_provenance_status":"VERIFIED",
+            "bibliographic_verification_method":verification.get("verification_method"),
             "authority_status":"RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED",
-            "primary_source_status":"UNVERIFIED",
-            "evidence_sufficiency_status":"UNVERIFIED",
-            "model_dependency_count":0,
-            "incremental_spend_usd":0,
         }
     except Exception as exc:
         return {
-            "schema":SCHEMA,"status":"UNVERIFIED",
-            "reason":"SELECTED_SOURCE_LIVE_MATERIALIZATION_FAILED",
-            "error_class":type(exc).__name__,"error":str(exc)[:500],
+            **base,
+            "status":"UNVERIFIED",
+            "reason":"BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION_FAILED",
+            "error_class":type(exc).__name__,
+            "error":str(exc)[:500],
             "candidate_url":url,
-            "selected_only_materialization":True,
-            "authority_status":"UNVERIFIED","primary_source_status":"UNVERIFIED",
-            "model_dependency_count":0,"incremental_spend_usd":0,
+            "doi":verification.get("doi"),
+            "record_title":verification.get("record_title"),
+            "bibliographic_provenance_status":"VERIFIED",
         }
 
 def verify(candidate,timeout=15):
