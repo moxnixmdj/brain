@@ -1,0 +1,146 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "VERIFY-INTERNALIZED-SUPREME-GE-OPUS55-20260930-V1",
+  "status": "AUTHORIZED_EXECUTION_PREFLIGHT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "4cdac1830804aab373f462c294d984c011a49897",
+  "terminal_objective": "PERMANENTLY_ACQUIRE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
+  "action_kind": "BRAIN_CONFIGURED_CAPABILITY_STRENGTH_VERIFICATION",
+  "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ADVANCED_AGENTIC_CODING::VERIFY_INTERNALIZED_SUPREME_GE_OPUS55",
+  "expected_parent_frontier_change": "Either prove the Brain-owned Supreme-led advanced-coding route meets/exceeds the claimed Opus 5.5 bar with configuration contribution, or falsify it quickly and return to the existing-mechanism route race with zero false credit.",
+  "theory_invariants": {
+    "capability_configuration": "BRAIN_OWNED",
+    "substrate_role": "GENERAL_COGNITION_ONLY",
+    "opacity_loophole": "FORBIDDEN",
+    "cross_version_benchmark_extrapolation": "FORBIDDEN",
+    "candidate_selection_evidence_is_capability_credit": false,
+    "incremental_spend_usd": 0,
+    "knowledge": "EXTERNAL_JIT"
+  },
+  "exact_configuration_root": "canonical/capabilities/internalized/software_engineering/supreme_c062bec",
+  "evaluation_protocol": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/EVALUATION_PROTOCOL_V1.json",
+  "ownership_tests": {
+    "brain_artifact_test": "PASS",
+    "no_hidden_capability_provider_test": "PASS_FOR_CONFIGURATION_EXISTENCE",
+    "general_substrate_test": "PASS_ARCHITECTURALLY",
+    "specimen_separation_test": "PASS",
+    "reexecution_without_rediscovery_test": "PASS",
+    "brain_configured_verification_test": "IN_PROGRESS",
+    "ownership_package_test": "PENDING_FINAL_VERIFICATION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_VERIFY_INTERNALIZED_SUPREME_GE_OPUS55_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4cdac1830804aab373f462c294d984c011a49897",
+    "real_outcome": "Verify or quickly falsify the Brain-owned Supreme-led coding route against the actual Opus 5.5 advanced-coding bar.",
+    "required_capability": "ADVANCED_AGENTIC_CODING_GE_OPUS_5_5",
+    "obs_goal": {
+      "real_outcome": "Permanent Brain ownership of advanced coding only if the Brain-configured route itself is >= Opus 5.5.",
+      "proxy_goals_deleted": [
+        "More configuration copying",
+        "Counting Supreme TB2.1 as Opus parity",
+        "Counting one direct task as family ownership",
+        "Running later benchmarks before Terminal-Bench survival"
+      ],
+      "surviving_necessity": "Supreme is internalized and leading candidate; performance remains the only live ownership gap."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain-owned Supreme pinned configuration",
+        "Brain-owned Superpowers 6.4.2 fallback/comparison",
+        "Canonical Superpowers sequential matched A/B protocol",
+        "Fresh Superpowers session-window-debug semantic pass with zero Opus credit"
+      ],
+      "external_existing_routes_checked": [
+        "Terminal-Bench 4.0 current official release and public harness",
+        "Opus 5.5 published advanced-coding bars",
+        "Current public Terminal-Bench leaderboard",
+        "Supreme full-suite TB2.1 matched study for candidate selection only"
+      ],
+      "capability_work_deleted": [
+        "No new coding methodology",
+        "No duplicate evaluation protocol design",
+        "No paid API route"
+      ],
+      "surviving_gap": "Brain-owned Supreme configured route has no direct current-harness Opus-level verification."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic verification gap, not a missing configuration or infrastructure gap.",
+      "delete_bypass_substitute_options": [
+        "Reuse official Terminal-Bench 4.0 release",
+        "Reuse canonical sequential disqualification-first protocol",
+        "Run a zero-credit uncontaminated execution preflight before full scoring",
+        "Stop immediately on decisive below-bar evidence"
+      ],
+      "surviving_causal_blocker": "SUPREME_LED_BRAIN_ROUTE_PERFORMANCE_AT_OPUS_5_5_BAR_UNVERIFIED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "ZERO_CREDIT_EXECUTION_PREFLIGHT__THEN_TERMINAL_BENCH_4__THEN_ONLY_SURVIVING_BARS",
+        "FULL_MULTI_BENCHMARK_SUITE_IMMEDIATELY",
+        "MORE_MECHANISM_SEARCH_BEFORE_ANY_DIRECT_TEST"
+      ],
+      "losing_routes_reason": "Immediate full-suite evaluation wastes compute if the pipeline or candidate fails cheaply; more search is lower value now that an internalized leading candidate exists.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use official independent benchmark verifiers. Configured cognition may not inspect solution or task-specific verifier logic before submission."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "SUPERPOWERS_ONLY_VERIFICATION_AS_PRIMARY",
+        "DUPLICATE_SUPREME_EVAL_HARNESS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Superpowers protocol design",
+        "public Harbor verifier",
+        "Supreme configuration"
+      ],
+      "fresh_reuse_plan": "If Supreme passes, preserve exact evaluation evidence and then run only the remaining Opus coding bars needed for the claimed scope."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing protocol design",
+        "Reused current official benchmark release",
+        "Reused candidate-selection evidence instead of rerunning TB2.1"
+      ],
+      "search_stop_decision": "The route is execution-ready and current. Additional candidate search cannot beat the value of a cheap direct falsification preflight enough to justify delay.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "ZERO_CREDIT_EXECUTION_PREFLIGHT__THEN_TERMINAL_BENCH_4__THEN_ONLY_SURVIVING_BARS",
+      "FULL_MULTI_BENCHMARK_SUITE_IMMEDIATELY",
+      "MORE_MECHANISM_SEARCH_BEFORE_ANY_DIRECT_TEST"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CROSS_VERSION_SCORE_EXTRAPOLATION",
+      "ONE_TASK_PROMOTION",
+      "PAID_EVALUATION",
+      "FULL_SUITE_BEFORE_PIPELINE_PREFLIGHT"
+    ],
+    "selected_surviving_route": "ZERO_CREDIT_EXECUTION_PREFLIGHT__THEN_TERMINAL_BENCH_4__THEN_ONLY_SURVIVING_BARS",
+    "why_selected_route_is_fastest_sufficient": "It can expose execution/configuration failure with one fresh independent-verifier task while preserving the exact route needed for full current-harness scoring if the preflight passes.",
+    "expected_parent_level_state_change": "Either prove the Brain-owned Supreme-led advanced-coding route meets/exceeds the claimed Opus 5.5 bar with configuration contribution, or falsify it quickly and return to the existing-mechanism route race with zero false credit.",
+    "stop_condition": "Preflight earns zero capability credit. On preflight failure, classify and correct only execution/configuration defects before any score run. On preflight pass, proceed to Terminal-Bench 4.0 and stop the full-family route immediately on decisive below-66.4 evidence.",
+    "route_frontier": {
+      "refreshed_utc_date": "2026-09-30",
+      "terminal_bench_release": "v4.0.0",
+      "stronger_public_brain_ownable_tb4_route_already_at_opus_bar_found": false,
+      "current_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
+    }
+  }
+}
