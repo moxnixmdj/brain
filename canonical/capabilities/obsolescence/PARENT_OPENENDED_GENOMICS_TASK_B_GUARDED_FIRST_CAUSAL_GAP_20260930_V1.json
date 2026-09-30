@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_EXECUTION_FIRST_CAUSAL_GAP_RECEIPT_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+  "task_blob_sha1": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
+  "mission_blob_sha1": "03e718a9c779c26d26e7af140f2f65549c1a7f6e",
+  "authorized_by_brain_pr": 497,
+  "authorization_merge_commit": "781d672f01533b71f6c46d729eec1d74aa6e20d8",
+  "parent_credit_awarded": false,
+  "task_spent": true,
+  "replay_allowed": false,
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 199,
+    "workflow_run_id": 36690682680,
+    "job_id": 109806904765,
+    "runner_head_sha": "c7bb8e46610e39876e4b20b259d8ec21d2f03fa0",
+    "guard_attempt_id": "631e7e83760d4debba1111c2aae2f295",
+    "admission_status": "CURRENT_RUN_ADMITTED",
+    "child_started": true,
+    "child_returncode": 3,
+    "artifact_id": 11085208947,
+    "artifact_digest": "sha256:b2c5e8ff9fa3059908ca350ce7a1c208b858d5e01286e3aacf4b19d9deefeb25"
+  },
+  "terminal_blocker": {
+    "runtime_code": "OPEN_ENDED_RESEARCH_EVIDENCE_EXTRACTED__CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED",
+    "runtime_next_required_capability": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "source_frontend_status": "SOURCE_FRONTEND_READY",
+    "provenance_verified_candidate_count": 7,
+    "authority_identity_verified_candidate_count": 0,
+    "relevance_verified_candidate_count": 1,
+    "evidence_extracted_candidate_count": 1,
+    "claim_relation_evaluated_count": 0
+  },
+  "causal_localization": {
+    "generic_root": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT",
+    "evidence": [
+      "The open-web discovery query was the complete imperative objective verbatim.",
+      "Bing candidates were dominated by dictionary/spelling pages for the leading verb 'Assess'.",
+      "The selected relevance-admitted source was https://twominenglish.com/asess-or-assess/.",
+      "Evidence extraction succeeded mechanically on that irrelevant page.",
+      "The objective claim binder then failed closed with LEFT_NO_EVIDENCE_UNIT_FOR_ENTITY.",
+      "Therefore weakening or task-specializing the claim binder is not justified; source query/relevance must be repaired upstream."
+    ],
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "next_required_action": "Independently qualify a generic source-query focus / semantic relevance repair on current canonical bytes, then use a materially different fresh parent Task C. Never replay this genomics task."
+}
