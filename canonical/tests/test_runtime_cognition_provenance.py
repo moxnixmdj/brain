@@ -33,7 +33,43 @@ class CognitionProvenanceTests(unittest.TestCase):
 
     def test_invalid_negative_dependency_count_fails_closed(self):
         with self.assertRaises(astra_runtime.Blocker):
-            astra_runtime._stamp_cognition_provenance({"model_dependency_count":-1})
+            astra_runtime._stamp_cognition_provenance({
+                "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+                "model_dependency_count":-1,
+            })
+
+    def test_missing_controller_mode_fails_closed(self):
+        with self.assertRaises(astra_runtime.Blocker):
+            astra_runtime._stamp_cognition_provenance({"final_summary":"ambiguous"})
+
+    def test_unknown_controller_mode_fails_closed(self):
+        with self.assertRaises(astra_runtime.Blocker):
+            astra_runtime._stamp_cognition_provenance({
+                "controller_mode":"UNCLASSIFIED_CONTROLLER",
+                "final_summary":"ambiguous",
+            })
+
+    def test_model_independent_mode_with_planner_marker_is_contaminated(self):
+        result=astra_runtime._stamp_cognition_provenance({
+            "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+            "planner_source":"unexpected-planner",
+            "planner_transport":None,
+            "planner_model_last":None,
+        })
+        self.assertGreaterEqual(result["model_dependency_count"],1)
+        self.assertEqual(result["cognition_dependency_class"],"MODEL_ASSISTED")
+
+    def test_provenance_depth_overflow_fails_closed(self):
+        nested={}
+        cursor=nested
+        for _ in range(26):
+            cursor["child"]={}
+            cursor=cursor["child"]
+        with self.assertRaises(astra_runtime.Blocker):
+            astra_runtime._stamp_cognition_provenance({
+                "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+                "trace":nested,
+            })
 
 
 if __name__=="__main__":
