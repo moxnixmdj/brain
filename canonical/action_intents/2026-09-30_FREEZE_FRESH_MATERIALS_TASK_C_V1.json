@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-MATERIALS-THERMAL-OPENENDED-PARENT-TASK-C-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "af72b4783877de2b53af3bb62f48da8e2fc80313",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended materials-engineering Task C on the guarded-qualified inherited route; no execution authority in this freeze.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main af72b4783877de2b53af3bb62f48da8e2fc80313",
+    "seismology Task B spent/no-replay",
+    "scholarly source-admission/materialization repair independently guarded-qualified in run 36697424705 and merged by PR529",
+    "no open Brain PR owns the current Task-C blocker"
+  ],
+  "evidence_presence_classification": "FRESH_PARENT_TASK_C_REQUIRED_AFTER_GUARDED_GENERIC_REPAIR",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "stop_condition": "Freeze exact task and mission only. Separate current-base authorization is required before one live atomic-guard execution.",
+  "recursive_obs": {
+    "real_outcome": "Obtain decisive fresh cross-domain parent evidence on the inherited repaired model-independent open-ended research route.",
+    "selected_surviving_route": "FREEZE_FRESH_MATERIALS_ENGINEERING_TASK_C_THEN_SEPARATELY_AUTHORIZE_ONE_GUARDED_EXECUTION",
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "GENOMICS_REPLAY",
+      "HTTP2_REPLAY",
+      "NEW_INFRASTRUCTURE",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_VALUE_FORMULA_OR_TOOL"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The active blocker is fresh Task C; the generic source-admission seam is qualified and merged, so only new cross-domain parent evidence can advance the capability frontier.",
+    "stop_rule": "FREEZE_ONLY__NO_EXECUTION_IN_THIS_ACTION"
+  }
+}
