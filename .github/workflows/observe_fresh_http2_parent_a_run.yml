@@ -1,9 +1,9 @@
 name: Observe Fresh HTTP2 Parent A Run
 
 on:
-  pull_request:
-    branches: [main]
-    types: [synchronize]
+  push:
+    branches:
+      - execute/fresh-http2-parent-a-once-20260930-v1
 
 permissions:
   contents: read
@@ -13,14 +13,13 @@ permissions:
 
 jobs:
   observe:
-    if: github.head_ref == 'execute/fresh-http2-parent-a-once-20260930-v1'
     runs-on: ubuntu-24.04
     steps:
       - name: Read prior one-shot run without replay
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_ID: "36686791971"
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER: "456"
         run: |
           set -euo pipefail
           mkdir -p observer
