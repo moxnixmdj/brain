@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_POST_PROMOTION_FALSIFICATION_V1",
+  "correction_id": "GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1",
+  "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+  "status": "QUALIFICATION_REOPENED__GENERIC_CAPABILITY_CREDIT_REVOKED__PRIOR_RUN_PRESERVED",
+  "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+  "prior_promotion_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+  "prior_public_run_id": 36680967490,
+  "falsification_commit": "e984e3196305f9a92750947d692bbae2bef9707b",
+  "deterministic_regression": "test_modern_div_main_content_is_visible_evidence",
+  "defect": "The current visible-block parser only emits a fixed set of textual block tags and can omit decision-relevant visible text nested in modern main/div/section-style containers when no supported textual block encloses it.",
+  "authority_effect": {
+    "generic_verified_status_revoked": true,
+    "reusable_capability_counter_delta": -1,
+    "parent_capability_promoted": false,
+    "narrow_ror_child_preserved": true,
+    "active_parent_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "next_action": "OBS_AND_REPAIR_GENERIC_EVIDENCE_EXTRACTION_FOR_MODERN_CONTAINER_CONTENT__REQUALIFY_EXACT_BYTES__NO_PARENT_REPLAY"
+  },
+  "historical_evidence_preserved": {
+    "prior_run_valid_for_exact_old_bytes": true,
+    "prior_run_invalid_as_proof_of_generic_container_coverage": true
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
