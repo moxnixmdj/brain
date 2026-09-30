@@ -53,6 +53,16 @@
       "id": "CHAT_CLAIM_MISTAKEN_FOR_CANONICAL_OBS_AUTHORITY",
       "observed_incident": "A repository-level OBS guard was described as if it could technically prevent every premature conversational ChatGPT statement.",
       "must_fail_or_resolve": "Bare chat output has zero canonical Brain authority. Hard guarantees apply only to guarded canonical artifacts, mutations, and executions. Consequential Brain reporting must distinguish verified canonical state from provisional analysis."
+    },
+    {
+      "id": "CANONICAL_FRONTIER_SURFACES_DIVERGE",
+      "observed_incident": "Canonical pointer temporarily retained an older blocker/next-step while other canonical frontier surfaces had advanced.",
+      "must_fail_or_resolve": "Every frontier-sensitive PR must leave pointer, hierarchy, queue, and active scoreboard frontier mirrors in exact agreement."
+    },
+    {
+      "id": "MODEL_INDEPENDENCE_INFERRED_INSTEAD_OF_RUNTIME_DERIVED",
+      "observed_incident": "Goal runtime did not uniformly stamp cognition dependency provenance on every result path.",
+      "must_fail_or_resolve": "Runtime must derive cognition provenance. Cognitive capability credit requires task evidence with runtime-derived zero model dependency; advisory-model execution is ineligible."
     }
   ],
   "unknown_error_containment": [
