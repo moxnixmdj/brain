@@ -52,8 +52,15 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
             ][0]
             self.assertTrue(selected["binding_affordance"]["url_consumable"])
 
-        result=composer.compose(goal,grounding,self.registry,compiler,REPO_ROOT)
-        ok,reason=verifier.verify(goal,result,grounding,self.registry)
+        verified_initial_facts=["network.http.available"]
+        result=composer.compose(
+            goal,grounding,self.registry,compiler,REPO_ROOT,
+            verified_initial_facts=verified_initial_facts,
+        )
+        ok,reason=verifier.verify(
+            goal,result,grounding,self.registry,
+            verified_initial_facts=verified_initial_facts,
+        )
         self.assertTrue(ok,reason)
         self.assertEqual(result["model_dependency_count"],0)
 
