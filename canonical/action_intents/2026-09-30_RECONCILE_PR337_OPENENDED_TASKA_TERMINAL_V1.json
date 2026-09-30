@@ -1,0 +1,160 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR337-OPENENDED-TASKA-TERMINAL-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "RESIDUAL_GAP_LOCALIZED__OPEN_ENDED_TASK_A_SPENT__NO_CAPABILITY_PROMOTION",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "Brain PR337 frozen open-ended Task A",
+    "runner PR49 authoritative one-shot execution",
+    "runner run 36670516407 job 109744305866 terminal log",
+    "prior prestart failures distinguished by execution_count=0"
+  ],
+  "evidence_presence_classification": "PRIMARY_PUBLIC_TERMINAL_RECEIPT_PRESENT__CANONICAL_RECONCILIATION_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "STOP_AFTER_PRIMARY_TERMINAL_RECEIPT_IS_CANONICALLY_RECONCILED_AND_CROSS_SURFACE_BLOCKER_MIRRORS_AGREE__DO_NOT_REPAIR_OR_REPLAY_IN_THIS_ACTION",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "real_outcome": "Preserve the one-shot open-ended Task A terminal truth and move the parent frontier to its earliest observed causal gap without replay or capability overclaim.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Canonical state reflects the spent Task A and exact compile-stage blocker.",
+      "proxy_goals_deleted": [
+        "MAKE_WORKFLOW_GREEN",
+        "REPLAY_TASK_A",
+        "SOLVE_CLIMATE_TASK_INSIDE_RECONCILIATION"
+      ],
+      "surviving_necessity": "Reconcile the primary producer terminal because canonical main still says Task A is unrun."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical runtime goal compiler and verified capability registry were the executing route",
+        "existing plain-goal grounding remains preserved within its proven narrow scope"
+      ],
+      "external_existing_routes_checked": [
+        "NOT_REQUIRED_FOR_EVIDENCE_ONLY_RECONCILIATION"
+      ],
+      "capability_work_deleted": [
+        "NO_TASK_SPECIFIC_CLIMATE_PATCH",
+        "NO_NEW_TASK_A",
+        "NO_REPLAY",
+        "NO_CAPABILITY_PROMOTION"
+      ],
+      "surviving_gap": "OPEN_ENDED_PARENT_TASK_A_COMPILE_GAP__BROAD_OBJECTIVE_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "OBSERVED_ON_GENERIC_COMPILE_PATH_BEFORE_ANY_DOMAIN_SOURCE_OR_TOOL_ACTION__CLAIM_LIMITED_TO_FIRST_CAUSAL_GAP",
+      "delete_bypass_substitute_options": [
+        "Delete replay",
+        "Bypass task-specific repair",
+        "Preserve exact failure and acquire a generic route next"
+      ],
+      "surviving_causal_blocker": "OPEN_ENDED_PARENT_TASK_A_COMPILE_GAP__BROAD_OBJECTIVE_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "1 RECONCILE_PRIMARY_TERMINAL_RECEIPT",
+        "2 IGNORE_RESULT_AND_OPEN_NEW_TASK",
+        "3 REPLAY_SPENT_TASK",
+        "4 TASK_SPECIFIC_RUNTIME_PATCH"
+      ],
+      "losing_routes_reason": "Primary receipt already decides the current state. Alternatives either discard evidence, violate one-shot freshness, or contaminate a generic parent capability with task-specific literals.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic execution is needed. The public GitHub Actions terminal log is direct producer evidence and the artifact digest pins the receipt."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any canonical statement that no admissible open-ended Task A has executed",
+        "Any carrier lane that would replay PR337 Task A"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "After a generic broad-objective decomposition/grounding route is acquired, qualify it on a fresh orthogonal objective. Never reuse the spent climate Task A."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Cached PR49 terminal identifiers and artifact digest",
+        "Deleted duplicate carrier interpretations once execution_count=1 was verified"
+      ],
+      "search_stop_decision": "Search stops for this reconciliation because exact producer log, execution count, first causal error, and artifact digest are directly available; more route research cannot change the historical terminal state.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Route-frontier discovery is not applicable to evidence preservation. It becomes mandatory again before the subsequent capability acquisition/repair action."
+    },
+    "routes_considered": [
+      "RECONCILE_PRIMARY_TERMINAL_RECEIPT",
+      "IGNORE_AND_OPEN_NEW_TASK",
+      "REPLAY_SPENT_TASK",
+      "TASK_SPECIFIC_PATCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_SPENT_TASK",
+      "IGNORE_TERMINAL_EVIDENCE",
+      "TASK_SPECIFIC_CLIMATE_PATCH"
+    ],
+    "selected_surviving_route": "RECONCILE_PRIMARY_TERMINAL_RECEIPT",
+    "why_selected_route_is_fastest_sufficient": "It is the only route that is both truth-preserving and execution-free: direct terminal evidence already exists, costs $0 to preserve, and exactly determines the next blocker.",
+    "expected_parent_level_state_change": "RESIDUAL_GAP_LOCALIZED__OPEN_ENDED_TASK_A_SPENT__NO_CAPABILITY_PROMOTION",
+    "stop_condition": "STOP_AFTER_PRIMARY_TERMINAL_RECEIPT_IS_CANONICALLY_RECONCILED_AND_CROSS_SURFACE_BLOCKER_MIRRORS_AGREE__DO_NOT_REPAIR_OR_REPLAY_IN_THIS_ACTION",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "EVIDENCE_PRESERVATION_AND_FRONTIER_RECONCILIATION_ONLY__NO_EXECUTABLE_ROUTE_SELECTED_OR_RUN"
+    }
+  },
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "RESIDUAL_OF",
+    "evidence": [
+      "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_BROAD_OBJECTIVE_COMPILE_GAP_RECONCILIATION_20260930_V1.json"
+    ]
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared authoritative execution_count=1 terminal with prior carrier prestart execution_count=0 receipts.",
+      "Checked compiled_prefix=[], context_paths=[], subgoal_index=0 to rule out later-stage discovery/calculation failure.",
+      "Preserved parent capability as NOT PROVEN and prohibited Task A replay."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_BROAD_OBJECTIVE_COMPILE_GAP_RECONCILIATION_20260930_V1.json"
+    ],
+    "independent_verification_evidence_paths": [],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": false,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "",
+    "producer_execution_suppliers": [],
+    "independent_verifier_suppliers": []
+  }
+}
