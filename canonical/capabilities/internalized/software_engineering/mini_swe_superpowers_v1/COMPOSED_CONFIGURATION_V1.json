@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_INTERNALIZED_COMPOSED_CAPABILITY_CONFIGURATION_V1",
+  "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
+  "status": "BRAIN_COMPOSED_CONFIGURATION__PACKAGE_QUALIFICATION_PENDING__ZERO_OPUS_CREDIT",
+  "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
+  "composition_class": "EXISTING_MECHANISM_COMPOSITION_AND_CONFIGURATION_ONLY",
+  "underlying_capability_invention": false,
+  "components": {
+    "harness": {
+      "id": "mini-SWE-agent 2.4.6",
+      "root": "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6",
+      "manifest_blob": "fce0426cd85cd0af99f9c1f182a662f343c6d091",
+      "base_config_path": "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/config/mini.yaml",
+      "base_config_blob": "8b72f71f8092ae805ec43221dbeaeefc2340cd3e"
+    },
+    "methodology": {
+      "id": "Superpowers 6.4.2",
+      "root": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2",
+      "manifest_blob": "50dac051ae0d78fab74213b13e70f414499b6db7",
+      "evaluation_protocol_blob": "aa5a9cb3de1c202df1d6e93f1acd9db64c3d697b",
+      "skill_pins": {
+        "using-superpowers": "069d578445805a28b8dacbf70cdf045e1673def0",
+        "brainstorming": "e3f17885f8d5f87d7a92f0469141662b476e1288",
+        "writing-plans": "4cf0275d88d67aa4ef09f4bbca9970ed6ff74a00",
+        "using-git-worktrees": "1381dacb3516b94382dd6ec736ede21ee8ede2b3",
+        "test-driven-development": "46838cc9e893c06259e3bdad0fc2425b36242f15",
+        "systematic-debugging": "095d194ac041502905f15b01d22d294fb94db8b2",
+        "subagent-driven-development": "f7bbf6a01b519807ec00baf5e98522bed33f8834",
+        "dispatching-parallel-agents": "3fa091b348bbe0a18eaa0e17e9092c97f7005cbe",
+        "requesting-code-review": "6d995da5c7d8d6c5a3cc63ddb701427f88ec2021",
+        "receiving-code-review": "950da7b74bf6dbed6b8726d12ddadd65a9f5fda7",
+        "verification-before-completion": "7d45333cc4a49c57a80df6c1fe2fa777a207afbc",
+        "executing-plans": "49077ad961268a840d7dcb5d8c5d06c46fc276ae",
+        "finishing-a-development-branch": "fa8aecaf8813f1b19d19996f7957d1b0121f2d9c"
+      }
+    },
+    "brain_completion_gate": {
+      "role": "INTEGRATION_GLUE_ONLY",
+      "requirements": [
+        "Do not submit while a known relevant failure remains.",
+        "Before submission run the strongest task-relevant tests available without reading benchmark-hidden verifier logic.",
+        "Inspect the final diff and confirm requested behavior, regression preservation, and scope compliance.",
+        "If verification cannot be completed, preserve the blocker and do not issue COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT."
+      ]
+    }
+  },
+  "execution": {
+    "overlay_builder": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/build_overlay.py",
+    "base_config": "mini.yaml",
+    "recursive_merge_order": [
+      "mini.yaml",
+      "generated Brain Superpowers overlay"
+    ],
+    "no_external_capability_rediscovery_required": true,
+    "generated_overlay_is_ephemeral": true,
+    "durable_inputs_are_brain_owned": true,
+    "authorized_by": "Brain PR576"
+  },
+  "evaluation": {
+    "terminal_bench_4": {
+      "strict_outer_opus55_bar_percent": 66.4,
+      "strict_outer_bar_source_class": "ANTHROPIC_VENDOR_REPORTED_XHIGH_SYSTEM_RESULT",
+      "matched_independent_mini_swe_opus55_reference_percent": 59.6,
+      "matched_reference_source_class": "ARTIFICIAL_ANALYSIS_INDEPENDENT_MINI_SWE_HARNESS",
+      "promotion_rule": "NO_OPUS_CREDIT_UNTIL_BRAIN_CONFIGURED_ROUTE_HAS_COMPARABLE_EVIDENCE_GE_CORRESPONDING_OPUS55_BAR_AND_CONFIGURATION_CONTRIBUTION_IS_VERIFIED"
+    },
+    "next_required_action": "RUN_FRESH_CONTAMINATION_CONTROLLED_COMPOSED_ROUTE_ON_APPROVED_ZERO_INCREMENTAL_GENERAL_COGNITION_SUBSTRATE"
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS_CONFIGURATION_EXISTS",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_FOR_COMPOSITION",
+    "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY__EXECUTION_PENDING",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_AFTER_PACKAGE_VERIFICATION",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_PERFORMANCE_VERIFICATION"
+  },
+  "opus_5_5_credit": 0
+}
