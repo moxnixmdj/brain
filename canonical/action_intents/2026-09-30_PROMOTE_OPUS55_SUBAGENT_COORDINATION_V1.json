@@ -1,0 +1,152 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "PROMOTE-OPUS55-SUBAGENT-DELEGATION-COORDINATION-20260930-V1",
+  "status": "EXECUTED_PASS__SCOPED_COMPONENT_PROMOTED__WHOLE_FAMILY_REMAINS_OPEN",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3baed7faefcf86d559e8e673d115372e3db2f9a7",
+  "capability_target": "SUBAGENT_DELEGATION_AND_COORDINATION",
+  "action_kind": "CAPABILITY_INTERNALIZATION_AND_VERIFICATION",
+  "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::SUBAGENT_DELEGATION_AND_COORDINATION::EXISTING_BRAIN_FANOUT_AND_MULTIWORKER_MECHANISMS_NOT_YET_JOINTLY_VERIFIED_AS_DELEGATION_COORDINATION",
+  "expected_parent_frontier_change": "If the current Brain-owned task/lease, multi-worker, fan-out/fan-in, and independent-verification mechanisms pass one fresh integrated delegation capsule, promote only the scoped subagent delegation-and-coordination behavior; otherwise preserve zero credit and localize the first failed seam.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "brain_artifact_test": "PASS_EXISTING_SUPERVISOR_FANOUT_FANIN_AND_INTERNALIZED_PARALLEL_AGENT_CONFIGURATION",
+    "no_hidden_capability_provider_test": "PASS__DELEGATION_COORDINATION_MECHANISM_IS_BRAIN_CODE_STATE_AND_CONFIGURATION",
+    "general_substrate_test": "PASS__FRESH_MECHANICAL_DELEGATION_CAPSULE_REQUIRES_NO_EXTERNAL_COGNITION_SUBSTRATE",
+    "specimen_separation_test": "PASS__OPUS_DESCRIPTION_ONLY_DEFINES_TARGET_BEHAVIOR",
+    "reexecution_without_rediscovery_test": "PASS_HISTORICALLY__FRESH_INTEGRATED_REVERIFY_PENDING",
+    "brain_configured_verification_test": "PASS_SCOPED_MECHANICAL_COORDINATION",
+    "ownership_package_test": "PASS_SCOPED"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_PROMOTE_OPUS55_SUBAGENT_COORDINATION_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3baed7faefcf86d559e8e673d115372e3db2f9a7",
+    "real_outcome": "Permanently own the useful behavior of delegating independent bounded work to multiple workers, coordinating their outputs, preventing duplicate ownership, and independently checking delegated results.",
+    "required_capability": "MULTI_WORKER_DELEGATION__DISTINCT_TASK_OWNERSHIP__PARALLEL_EXECUTION__FANIN__INDEPENDENT_RESULT_CHECK",
+    "obs_goal": {
+      "real_outcome": "Close the Opus subagent delegation-and-coordination family by reusing Brain mechanisms already proven separately and verifying their composition once.",
+      "proxy_goals_deleted": [
+        "Build a new multi-agent framework",
+        "Scale worker population",
+        "Use an opaque model's subagent system as ownership evidence",
+        "Treat mere concurrency as delegation"
+      ],
+      "surviving_necessity": "Freshly verify the delegation-to-coordination seam on current Brain primitives."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/same_identity_supervisor.py",
+        "canonical/scaling/TWO_WORKER_SCALING_MEASUREMENT_V1.json",
+        "canonical/scaling/TWO_WORKER_SCALING_WOLFRAM_ADJUDICATION_V1.json",
+        "canonical/astra_runtime/state/ASTRA-RUNTIME-MULTI-ACTION-FANOUT-002.json",
+        "canonical/astra_runtime/missions/ASTRA_RUNTIME_AUTO_FANIN_CAPABILITY_PROPOSAL_001.json",
+        "canonical/tests/test_auto_fanin_capability_proposal.py",
+        "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/skills/dispatching-parallel-agents/SKILL.md"
+      ],
+      "external_existing_routes_checked": [
+        "Opus 5.5 useful target: coordinate subagents on long-running work"
+      ],
+      "capability_work_deleted": [
+        "No new queue",
+        "No new scheduler",
+        "No new worker runtime",
+        "No model API",
+        "No new fan-in engine"
+      ],
+      "surviving_gap": "No single fresh current-byte proof joins parent decomposition/delegation, distinct workers, no duplicate ownership, fan-in, and independent verification."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Proof seam only; constituent mechanisms are already Brain-owned and historically verified.",
+      "delete_bypass_substitute_options": [
+        "Promote from concurrency alone: rejected as under-scoped.",
+        "Promote from fan-out alone: rejected because workers are not distinct delegated identities.",
+        "Build a new coordinator: rejected because composition of existing mechanisms is sufficient.",
+        "Fresh integrated verification: survives."
+      ],
+      "surviving_causal_blocker": "FRESH_INTEGRATED_DELEGATION_COORDINATION_VERIFICATION_MISSING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "COMPOSE_EXISTING_TASK_LEASE_MULTIWORKER_FANIN_AND_VERIFICATION_PRIMITIVES_IN_ONE_TEST",
+        "IMPORT_EXTERNAL_MULTI_AGENT_FRAMEWORK",
+        "BUILD_NEW_COORDINATOR"
+      ],
+      "losing_routes_reason": "Existing Brain primitives already cover every constituent behavior, so new frameworks add machinery without removing any proof requirement.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A fresh public capsule will create two distinct immutable delegated tasks and two worker identities, execute them concurrently through current supervisor semantics using deterministic executors, independently fan in their receipts/results, reject missing/duplicate worker outputs, and recompute task/mission bindings without importing the coordinator."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Future search for generic subagent orchestration frameworks for this scoped behavior",
+        "Opaque model subagent routing as a required capability provider"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "blocker/task leases",
+        "dedupe",
+        "parallel execution",
+        "fan-out",
+        "fan-in",
+        "independent delegated-work verification"
+      ],
+      "fresh_reuse_plan": "After promotion, route independent bounded work through Brain-owned delegation/lease/fan-in mechanisms before relying on opaque model-native subagent coordination."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused two-worker Wolfram adjudication",
+        "Reused verified fan-out/fan-in runtime evidence",
+        "Reused current same-identity supervisor"
+      ],
+      "search_stop_decision": "The complete constituent mechanism set already exists in Brain. One integrated proof can decide the family faster than any additional supplier search.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "COMPOSE_EXISTING_TASK_LEASE_MULTIWORKER_FANIN_AND_VERIFICATION_PRIMITIVES_IN_ONE_TEST",
+      "IMPORT_EXTERNAL_MULTI_AGENT_FRAMEWORK",
+      "BUILD_NEW_COORDINATOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_MULTI_AGENT_FRAMEWORK",
+      "OPAQUE_MODEL_SUBAGENTS_AS_OWNERSHIP",
+      "WORKER_SCALE_EXPANSION"
+    ],
+    "selected_surviving_route": "COMPOSE_EXISTING_TASK_LEASE_MULTIWORKER_FANIN_AND_VERIFICATION_PRIMITIVES_IN_ONE_TEST",
+    "why_selected_route_is_fastest_sufficient": "Every constituent behavior already has Brain-owned implementation or verified evidence. The only unresolved predicate is their integrated delegation/coordination seam, which can be decided in one zero-cost public run.",
+    "expected_parent_level_state_change": "If the current Brain-owned task/lease, multi-worker, fan-out/fan-in, and independent-verification mechanisms pass one fresh integrated delegation capsule, promote only the scoped subagent delegation-and-coordination behavior; otherwise preserve zero credit and localize the first failed seam.",
+    "stop_condition": "Stop after one fresh integrated delegation capsule and one independent fan-in adjudication. Promote only if two distinct delegated tasks are bound to distinct worker identities, execute successfully, no duplicate ownership/output exists, parent fan-in contains exactly both results, independent checks pass, and incremental spend remains $0."
+  },
+  "execution_result": {
+    "status": "PASS",
+    "verification": "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json",
+    "package": "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json",
+    "reasoning": "canonical/reasoning/2026-09-30_OPUS55_SCOPED_SUBAGENT_COORDINATION_PROMOTION_V1.json",
+    "capability_credit": "SCOPED_COMPONENT_ONLY",
+    "whole_family_promoted": false,
+    "incremental_spend_usd": 0
+  }
+}
