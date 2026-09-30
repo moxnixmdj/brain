@@ -1,0 +1,302 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "COMPOSITION-FRESH-REUSE-EVIDENCE-BUNDLE-DECISION-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::COMPOSITION_FIRST_REAL_TASK_PASS__MATERIALLY_DISTINCT_FRESH_REUSE_UNSPENT::FRESH_REUSE",
+  "expected_parent_frontier_change": "Complete one materially distinct fresh reuse of the existing model-independent grounded composition route on a typed decision-synthesis→independent-verification chain; if the direct oracle passes, composition acquisition becomes eligible for adjudication without any model or rediscovery.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR265 merged composition Task A reconciliation at 7c1817f454fc89ec80214cd208b09dc1cbcd3bec",
+    "Unified Planning composition Real Task A run 36652169397 PASS",
+    "grounded_executable_composition.py and independent verifier already inherited",
+    "capability_planner.py zero-dependency minimum-cost planner already inherited",
+    "decision.synthesis.typed.stdlib and decision.synthesis.verify.stdlib are verified bound capabilities with explicit causal effect chain",
+    "No open competing PR lease"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute exactly one fresh decision-synthesis composition task through the unchanged inherited route; independently verify the synthesized decision; preserve evidence; do not repair, replay, switch route, or award capability credit inside this execution PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "7c1817f454fc89ec80214cd208b09dc1cbcd3bec",
+    "real_outcome": "Prove the inherited model-independent grounded composition route transfers from live knowledge consistency to a materially different causal decision-synthesis chain without rediscovery.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "One materially distinct fresh reuse with explicit data dependency and independent oracle.",
+      "proxy_goals_deleted": [
+        "another GitHub identity task",
+        "new planner search",
+        "new model/provider",
+        "synthetic planner benchmark",
+        "same-task replay"
+      ],
+      "surviving_necessity": "Fresh reuse is the only remaining acquisition predicate after Task A."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "grounded_executable_composition.py",
+        "grounded_executable_composition_verify.py",
+        "capability_planner.py",
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib"
+      ],
+      "external_existing_routes_checked": [
+        "No external substitute can satisfy the fresh-reuse predicate better because the predicate explicitly requires reuse of the inherited route without rediscovery."
+      ],
+      "capability_work_deleted": [
+        "no new composition code",
+        "no model",
+        "no provider",
+        "no planner",
+        "no new verifier"
+      ],
+      "surviving_gap": "The inherited route has one real task but lacks materially distinct fresh reuse."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence gap only; implementation is already verified and Task A passed.",
+      "delete_bypass_substitute_options": [
+        "Delete fresh reuse: invalid because it is the remaining acquisition predicate.",
+        "Substitute a new planner: invalid because that would not prove reuse.",
+        "Reuse existing decision synthesis→verifier chain: survives and is materially distinct."
+      ],
+      "surviving_causal_blocker": "MATERIALLY_DISTINCT_FRESH_REUSE_WITHOUT_REDISCOVERY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_GROUNDED_COMPOSITION_ON_TYPED_DECISION_CHAIN"
+      ],
+      "losing_routes_reason": "Every alternative either fails to test reuse or adds unnecessary implementation/search latency.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. The producer decision is independently recomputed by decision.synthesis.verify.stdlib, and the composition structure is independently verified by grounded_executable_composition_verify.py."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "additional composition implementation work absent fresh falsification",
+        "new planner/provider search before incumbent falsification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "typed decision synthesis",
+        "producer-independent decision verification"
+      ],
+      "fresh_reuse_plan": "This action is the fresh reuse. On PASS, adjudicate exact composition capability acquisition and delete further composition testing unless falsified."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse PR265 frontier reconciliation",
+        "reuse Task A route qualification",
+        "reuse existing decision-chain bound capabilities"
+      ],
+      "search_stop_decision": "Further search cannot improve the action because switching route would invalidate the fresh-reuse predicate being tested.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and current public-carrier state checked immediately before branch creation; no challenger may dominate a test whose requirement is incumbent reuse."
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_GROUNDED_COMPOSITION_ON_TYPED_DECISION_CHAIN",
+      "SWITCH_PLANNER",
+      "RUN_ANOTHER_KNOWLEDGE_FETCH_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SWITCH_PLANNER",
+      "RUN_ANOTHER_KNOWLEDGE_FETCH_TASK"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_GROUNDED_COMPOSITION_ON_TYPED_DECISION_CHAIN",
+    "why_selected_route_is_fastest_sufficient": "It is the exact inherited route whose transfer is the unresolved predicate, requires no new implementation or supplier, runs at $0, and has two independent verification layers.",
+    "expected_parent_level_state_change": "Complete one materially distinct fresh reuse of the existing model-independent grounded composition route on a typed decision-synthesis→independent-verification chain; if the direct oracle passes, composition acquisition becomes eligible for adjudication without any model or rediscovery.",
+    "stop_condition": "Execute exactly one fresh decision-synthesis composition task through the unchanged inherited route; independently verify the synthesized decision; preserve evidence; do not repair, replay, switch route, or award capability credit inside this execution PR.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T01:01:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_EXISTING_GROUNDED_COMPOSITION_ON_TYPED_DECISION_CHAIN",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR265 merge 7c1817f454fc89ec80214cd208b09dc1cbcd3bec",
+          "Unified Planning composition Task A run 36652169397 PASS",
+          "canonical runtime and bound registry on current main"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Current task uses only Python stdlib-backed inherited capabilities; no external supplier selection is required for the reused execution path."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json contains both verified decision-chain capabilities and their exact action contracts."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No broad-web challenger can dominate incumbent reuse for this predicate; switching route would cease to be fresh reuse."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent grounded causal capability composition fresh reuse decision synthesis verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "existing Project Brain inherited deterministic composition route"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "typed evidence decision synthesis independent verifier causal effect chain"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current main inherited composition route after PR265 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_EXISTING_GROUNDED_COMPOSITION_ON_TYPED_DECISION_CHAIN",
+          "evidence": [
+            "Task A PASS",
+            "component verification PASS",
+            "decision-chain producer/verifier already independently verified"
+          ],
+          "qualification_evidence": [
+            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_COMPOSITION_TASK_A_UNIFIED_PLANNING_20260930_V1.json",
+            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the unresolved fresh-reuse predicate with existing verified components.",
+            "CAPABILITY_STRENGTH": "Exercises causal multi-capability dataflow in a new decision domain.",
+            "WALL_CLOCK": "No rediscovery or implementation; immediate execution.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "All components and the public carrier have current successful evidence.",
+            "VERIFIABILITY": "Composition structure plus decision result both have independent verifiers."
+          }
+        },
+        {
+          "route": "SWITCH_TO_NEW_COMPOSITION_PLANNER",
+          "evidence": [
+            "No incumbent falsification exists."
+          ],
+          "qualification_evidence": [
+            "PR265 states no new planner before existing route is falsified."
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Would not test reuse of the acquired route.",
+            "CAPABILITY_STRENGTH": "Unknown and unnecessary.",
+            "WALL_CLOCK": "Slower due new qualification.",
+            "INCREMENTAL_COST": "Could be $0 but adds unnecessary work.",
+            "RELIABILITY": "Unqualified.",
+            "VERIFIABILITY": "Does not answer the current acquisition predicate."
+          }
+        }
+      ],
+      "negative_search_summary": "No alternative can dominate incumbent reuse because route identity is part of the remaining predicate.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_EXISTING_GROUNDED_COMPOSITION_ON_TYPED_DECISION_CHAIN",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T01:01:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_EXISTING_GROUNDED_COMPOSITION_ON_TYPED_DECISION_CHAIN",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:59:00Z",
+            "evidence": [
+              "DIRECT_PROBE: public composition Task A run 36652169397 completed successfully on this account's public verification repository"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "CURRENT_BRAIN_GROUNDED_COMPOSITION_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:01:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: PR265 main 7c1817f454fc89ec80214cd208b09dc1cbcd3bec"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "FRESH_TYPED_DECISION_INPUT",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:01:00Z",
+            "evidence": [
+              "canonical/tasks/COMPOSITION_FRESH_REUSE_EVIDENCE_BUNDLE_DECISION_20260930.json committed on guarded branch"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
