@@ -244,19 +244,22 @@
     },
     {
       "family": "ARTIFACT_CREATION",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
       "best_existing_routes": [
-        "GPT-6 Astra Work + document/spreadsheet/presentation tools + Figma"
+        "Brain-owned MIT-0 AWS sample agent skills for XLSX/PPTX",
+        "Further permissive mechanisms required for DOCX/PDF/advanced visual/professional artifact scope"
       ],
       "evidence": "Astra and Work support documents/spreadsheets/presentations; GDPval-AA/AA-Briefcase still favor Opus 5.5 overall professional work.",
       "sources": [
-        "https://openai.com/index/gpt-6-astra/",
-        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
-        "https://artificialanalysis.ai/evaluations/gdpval-aa",
-        "https://artificialanalysis.ai/evaluations/aa-briefcase"
+        "canonical/capabilities/opus55/OPUS55_ARTIFACT_XLSX_PPTX_INTERNALIZATION_VERIFICATION_V1.json",
+        "canonical/capabilities/opus55/OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_MECHANISM_V1.json"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "XLSX and PPTX read/write mechanisms are permanently Brain-owned and passed 11/11 current-copy round-trip checks. Whole-family Opus credit remains open for DOCX/PDF, advanced Office features, visual/design quality, complex editing preservation, and professional judgment.",
+      "internalized_configuration": [
+        "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07"
+      ],
+      "next_required_action": "Internalize/verify strongest permissively licensed DOCX/PDF/advanced artifact mechanisms, then run direct Brain-vs-Opus professional artifact quality evaluation."
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
@@ -337,7 +340,6 @@
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "ARTIFACT_CREATION",
       "COMMUNICATION_AND_SYNTHESIS",
       "UNKNOWN_DOMAIN_ADAPTATION"
     ],
@@ -345,7 +347,8 @@
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "MULTI_CAPABILITY_COMPOSITION",
-      "SUBAGENT_DELEGATION_AND_COORDINATION"
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "ARTIFACT_CREATION"
     ],
     "revoked_false_ownership_packages": [
       "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
