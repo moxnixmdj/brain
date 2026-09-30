@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-METADATA-REFINED-PROVENANCE-CLASS-PRESERVATION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "action_kind": "GENERIC_ROUTING_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE::GENERIC_ROUTING_REPAIR",
+  "expected_parent_frontier_change": "Close only the metadata-refined provenance-class information-loss seam; no parent replay or promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 71fbeb1e21683a165066c23b211781eee8fab61b",
+    "materials Task C guarded run 36698638943 and reconciliation receipt",
+    "scholarly source admission repair PR529 merged and qualified",
+    "no open PR owns the current metadata-refined provenance blocker"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "stop_condition": "Guard-qualify exact generic repair bytes with non-parent tests; do not replay materials Task C.",
+  "recursive_obs": {
+    "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+    "real_outcome": "Preserve every provenance-verified candidate class through metadata-refined relevance and materialize only the refined selected bibliographic winner.",
+    "selected_surviving_route": "REUSE_INITIAL_PROVENANCE_CLASS_PRESERVING_RANKING_SEMANTICS_IN_REFINED_FALLBACK",
+    "why_selected_route_is_fastest_sufficient": "The initial path already implements the correct generic behavior; the failure is one duplicated fallback filter that regressed to retrieval-only semantics.",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "TASK_SPECIFIC_SOURCE_WHITELIST",
+      "NEW_SEARCH_ENGINE",
+      "MODEL_RERANKER",
+      "UNBOUNDED_RETRY"
+    ],
+    "stop_rule": "EXACT_BYTE_NON_PARENT_GUARDED_QUALIFICATION_BEFORE_MERGE"
+  }
+}
