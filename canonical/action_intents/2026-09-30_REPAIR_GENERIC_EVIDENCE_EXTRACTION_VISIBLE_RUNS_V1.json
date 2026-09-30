@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-GENERIC-EVIDENCE-EXTRACTION-VISIBLE-RUNS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE::REAL_CAPABILITY_ACQUISITION_REPAIR",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Repair generic extraction so visible objective-grounded content is not lost when page semantics are expressed through modern/custom containers; then independently requalify exact producer/frontend bytes before restoring any generic capability credit.",
+  "evidence_presence_classification": "POST_PROMOTION_FALSIFICATION__GENERIC_CREDIT_REVOKED__NARROW_ROR_CHILD_PRESERVED",
+  "prior_work_checked": [
+    "falsification MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1",
+    "old qualified producer blob 6598ba92307c55fe6e645b4ecba070d2259818e2",
+    "merged unqualified modern-container producer fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "live exact-byte PyPI failure on public run 36681286201",
+    "successful generic qualification on SQLite/Python documentation run 36680967490"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact repaired bytes pass authored regressions plus independent live non-ROR PyPI/SQLite-or-equivalent cross-domain qualification with same-source/hash/offset/verbatim checks; only then restore generic extraction credit and return to relation frontier.",
+  "recursive_obs": {
+    "canonical_base_commit": "fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+    "real_outcome": "Make generic visible-text extraction invariant to common HTML container choices without weakening relevance/provenance admission.",
+    "required_capability": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+    "obs_goal": {
+      "real_outcome": "Capture objective-grounded visible content whether represented by classic textual tags, modern semantic containers, or custom/inline descendants.",
+      "proxy_goals_deleted": [
+        "restore known-bad old qualified blob",
+        "lower objective-token admission threshold",
+        "add a third-party extraction package",
+        "replay parent tasks",
+        "advance to claim relations before repair"
+      ],
+      "surviving_necessity": "Deterministic visible-text segmentation independent of a fixed textual-tag whitelist."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current stdlib HTMLParser extractor",
+        "independent same-source refetch oracle",
+        "qualified provenance and BM25 relevance routes",
+        "narrow exact-ROR extractor"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib HTMLParser remains sufficient; no package needed"
+      ],
+      "capability_work_deleted": [
+        "No model cognition",
+        "No package install",
+        "No weaker relevance threshold",
+        "No semantic inference"
+      ],
+      "surviving_gap": "The parser only materializes text when a whitelisted block frame exists; visible content can therefore disappear or become unusably coarse on modern/custom layouts."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic HTML structural coverage defect proven by deterministic regression and live PyPI exact-byte verification.",
+      "delete_bypass_substitute_options": [
+        "Restoring old blob rejected: known generic coverage defect",
+        "Lowering token threshold rejected: weakens evidence admission",
+        "Third-party main-text extraction rejected: unnecessary dependency and still needs Brain provenance contract",
+        "Replace block-stack capture with boundary-flushed visible-text runs survives"
+      ],
+      "surviving_causal_blocker": "Visible text must be captured independently of whether it is nested in a recognized block element."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_STDLIB_PARSER_TO_BOUNDARY_FLUSHED_VISIBLE_TEXT_RUNS",
+        "THIRD_PARTY_MAIN_TEXT_EXTRACTOR_PLUS_WRAPPER",
+        "LOWER_OBJECTIVE_MATCH_THRESHOLD"
+      ],
+      "losing_routes_reason": "Visible-run parsing changes only structural segmentation, preserves all upstream admission and downstream audit semantics, adds no dependency, and directly addresses the falsification. Other routes either add machinery or weaken correctness.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Add classic paragraph, nested div/section/main, custom-container, inline-only, suppressed navigation and duplication regressions. Requalify exact bytes on live PyPI plus a materially different technical source and independently reconstruct visible text/hashes/offsets."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR431 old-byte restoration",
+        "relation work while extraction frontier active"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "same-source provenance",
+        "BM25 relevance",
+        "hash/offset evidence-unit audit"
+      ],
+      "fresh_reuse_plan": "After exact-byte live pass, restore only generic extraction child credit, then return to claim relation frontier without parent replay."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused falsification artifact",
+        "Reused failed PyPI live run as direct regression evidence",
+        "Reused current parser and verification harness"
+      ],
+      "search_stop_decision": "The causal defect is internal structural segmentation and the stdlib repair is directly testable; no supplier search can dominate.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen route race only if visible-run repair still fails materially distinct live pages."
+    },
+    "selected_surviving_route": "REPAIR_STDLIB_PARSER_TO_BOUNDARY_FLUSHED_VISIBLE_TEXT_RUNS",
+    "why_selected_route_is_fastest_sufficient": "It preserves every verified contract except the broken structural segmentation rule, adds no dependency, and can reuse the existing independent live qualification capsule."
+  }
+}
