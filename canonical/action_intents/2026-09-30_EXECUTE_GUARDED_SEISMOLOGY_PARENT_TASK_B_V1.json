@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-GUARDED-SEISMOLOGY-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED::GUARDED_FRESH_PARENT_EXECUTION",
+  "task_id": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-001",
+  "task_blob_sha": "a3bd37a25ffb3780b1f3552d0994bd634bfcdec7",
+  "mission_blob_sha": "195fb7edc296e54c9b093b2caea1c8221f7b8d6a",
+  "prior_work_checked": [
+    "Brain PR469 reconciled the sole HTTP2 parent execution as spent/no-replay.",
+    "Brain PR474 merged exact guarded-qualified generic multi-clause broad-research routing repair.",
+    "Runner PR189 run 36689721937 passed 9/9 authored regressions plus an independent oracle on the exact PR474 bytes.",
+    "Open PR search found no competing fresh parent Task B lease before this freeze."
+  ],
+  "evidence_presence_classification": "PARENT_TASK_B_UNSPENT_READY_FOR_ONE_GUARDED_EXECUTION",
+  "expected_parent_frontier_change": "Exactly one guarded physical execution of the frozen seismology Task B; preserve the first causal gap on failure or producer evidence for independent verification on semantic completion.",
+  "highest_leverage_now": true,
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "One atomic-guard-admitted execution only. Never retry automatically after reservation/dispatch uncertainty or after physical child start.",
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "real_outcome": "Reality-test the repaired model-independent open-ended research stack on one materially different seismology task without leaking source, values, method recipe, tool, or answer.",
+    "surviving_necessity": "The previously proven first parent causal gap is repaired and guarded-qualified; the shortest remaining evidence is a new materially different parent execution.",
+    "selected_surviving_route": "EXACTLY_ONE_GUARDED_FRESH_SEISMOLOGY_PARENT_TASK_B_EXECUTION",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_PARENT_REPLAY",
+      "MORE_SYNTHETIC_PROXY_TESTS",
+      "MODEL_COGNITION",
+      "TASK_SPECIFIC_PATCH",
+      "PREWIRED_SOURCE_OR_FORMULA"
+    ],
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
+  }
+}
