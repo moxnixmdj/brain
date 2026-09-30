@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "REPAIR-BROAD-MULTICLAUSE-RESEARCH-ROUTING-CORRECTED-20260930-V1",
-  "status": "GUARDED_QUALIFIED_READY_FOR_MERGE",
+  "status": "QUALIFIED_INDEPENDENTLY__READY_FOR_CANONICAL_MERGE",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "691b08b7f51adca1ed980df384153b71ef38e046",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -31,7 +31,7 @@
   "qualification_required": "EXACT_BYTE_NON_PARENT_INDEPENDENT_GUARDED_QUALIFICATION",
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
-  "next_after_qualification": "MERGE_NOW_THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_B",
+  "next_after_qualification": "MERGE_QUALIFIED_GENERIC_REPAIR_THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_B",
   "recursive_obs": {
     "selected_surviving_route": "CORRECT_TWO_GENERIC_ADMISSION_PREDICATES_ONLY",
     "why_selected_route_is_fastest_sufficient": "The physical parent run localized the first failure to broad-routing admission. Existing decomposition and downstream research machinery are reused unchanged.",
@@ -45,13 +45,23 @@
     "stop_rule": "QUALIFY_EXACT_GENERIC_BYTES_WITH_FRESH_NON_PARENT_CASES_BEFORE_MERGE"
   },
   "qualification": {
-    "repository": "moxnixmdj/verification-capsule-runner",
-    "pull_request": 186,
+    "status": "PASS",
+    "receipt": "canonical/capabilities/obsolescence/BROAD_MULTICLAUSE_ROUTING_CORRECTED_QUALIFICATION_20260930_V1.json",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "runner_pull_request": 186,
     "workflow_run_id": 36689658815,
     "job_id": 109803582621,
     "artifact_id": 11085092932,
-    "artifact_sha256": "617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
-    "result": "PASS",
-    "receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json"
+    "artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
+    "exact_candidate_blobs": {
+      "broad_objective_decompose": "1efaec4ba51ecb5c40072b3190853f4de89d8f77",
+      "plain_goal_bound_grounding": "46e8e7466479ea298c34e5fa682d49c374510ce9",
+      "authored_regression": "2df7c6ec85083458a69675f6ff86eca9c00ea278",
+      "astra_runtime": "426ffe58e405dc4f1ba2eb4e838e03a1df771964"
+    },
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "parent_task_execution": false,
+    "parent_task_replay": false
   }
 }
