@@ -13,7 +13,7 @@
   "expected_parent_frontier_change": "Close three post-PR303 fail-open seams on current main: ambiguous cognition cannot certify as model-independent, direct run_goal callers cannot bypass runtime-derived provenance, and the active frontier target record cannot drift from canonical mirrors; award no capability credit.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e after merged PR318 open-ended-scope correction",
+    "current main 797d5fbea5f230a31044006755beb98ae387134b after merged PR329 provenance/target-mirror hardening",
     "merged PR303 promotion firewall and runtime provenance implementation",
     "current main canonical/runtime/astra_runtime.py cognition stamping logic",
     "current main canonical/runtime/enforce_goal_hierarchy.py mirror checks",
@@ -34,7 +34,7 @@
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+    "canonical_base_commit": "797d5fbea5f230a31044006755beb98ae387134b",
     "real_outcome": "Prevent false zero-model cognition certification, direct goal-entrypoint provenance bypass, and active target-record drift from surviving the trusted authority boundary.",
     "required_capability": "FAIL_CLOSED_RUNTIME_COGNITION_CLASSIFICATION_AND_FIVE_SURFACE_FRONTIER_MIRROR",
     "obs_goal": {
