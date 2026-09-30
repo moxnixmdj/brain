@@ -485,6 +485,27 @@
       },
       "progress_credit": "EVIDENCE_PROVENANCE_AND_MIRROR_CORRECTION_ONLY",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "CANONICAL_MISSION_ORIGIN_PROPAGATION_CANARY_RECONCILIATION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "DIAGNOSTIC_SEAM_FALSIFIED__MISSION_PATH_BLOCKER_RETIRED__NO_PROGRESS_COUNTER_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_ORIGIN_PROPAGATION_CANARY_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36672816106,
+      "job_id": 109751299770,
+      "artifact_id": 11078921733,
+      "artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+      "retired_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+      "surviving_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "DIAGNOSTIC_CORRECTION_ONLY",
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
@@ -492,6 +513,23 @@
     "active_subcapability_target": null,
     "subcapability_status": "GENERIC_BROAD_OBJECTIVE_COMPILE_GAP_UNRESOLVED__MAUNA_OBJECTIVE_SPENT__TWO_LATER_REPLAYS_QUARANTINED__NO_ADMISSIBLE_FRESH_PARENT_PASS",
     "frontier_dependency_removed": false,
-    "reconciliation_credit": 0
+    "reconciliation_credit": 0,
+    "mission_origin_canary": {
+      "status": "CANONICAL_MISSION_ORIGIN_PROPAGATION_VERIFIED__MISSION_PATH_BLOCKER_RETIRED",
+      "evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_ORIGIN_PROPAGATION_CANARY_RECONCILIATION_20260930_V1.json",
+      "authoritative_canary_pr": 79,
+      "authoritative_canary_run_id": 36672816106,
+      "authoritative_canary_job_id": 109751299770,
+      "authoritative_canary_artifact_id": 11078921733,
+      "authoritative_canary_artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+      "validation_scope": "MISSION_ORIGIN_ENTRYPOINT_ONLY",
+      "observation": "CANONICAL_ASTRA_RUNTIME_ENTRYPOINT_PROPAGATES_EXACT_MISSION_PATH_INTO_POST_ORIGIN_APT_AUTO_ACQUISITION",
+      "retired_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+      "surviving_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+      "further_mission_path_canary_required": false,
+      "parent_capability_promoted": false,
+      "counter_delta": 0,
+      "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
+    }
   }
 }
