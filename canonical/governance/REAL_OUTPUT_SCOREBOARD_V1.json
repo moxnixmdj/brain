@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+  "next_progress_event_target": "SYNC_EXISTING_CANONICAL_PYTHON_CODEC_PROBE_INTO_PUBLIC_CARRIER__RUN_ONE_FRESH_NON_PARENT_PYPI_CODEC_ACQUISITION_CANARY__THEN_FREEZE_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_PARENT_TASK_A",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -465,17 +465,10 @@
       "parent_capability_promoted": false
     },
     {
-      "event_id": "PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930",
+      "event_id": "PARENT_OPEN_ENDED_MISSION_ORIGIN_QUALIFICATION_RECONCILIATION_20260930",
       "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "status": "EVIDENCE_PROVENANCE_AND_MIRROR_CORRECTION_ONLY__NO_CAPABILITY_CREDIT",
-      "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930_V1.json",
-      "first_spend_run_id": 36669918546,
-      "first_spend_artifact_id": 11077637577,
-      "later_replay_run_ids": [
-        36670516407,
-        36670981076
-      ],
-      "corrected_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+      "status": "MISSION_ORIGIN_PROPAGATION_PROVEN__CARRIER_PYPI_HELPER_CLOSURE_GAP_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_MISSION_ORIGIN_QUALIFICATION_RECONCILIATION_20260930_V1.json",
       "counter_effects": {
         "reusable_capabilities_inherited": 0,
         "verified_real_tasks_completed": 0,
@@ -483,14 +476,17 @@
         "frontier_dependencies_removed": 0,
         "residual_gaps_localized": 0
       },
-      "progress_credit": "EVIDENCE_PROVENANCE_AND_MIRROR_CORRECTION_ONLY",
-      "parent_capability_promoted": false
+      "progress_credit": "EVIDENCE_SCOPE_CORRECTION_ONLY",
+      "falsified_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+      "residual_gap": "PUBLIC_CARRIER_RUNTIME_CLOSURE_MISSING_CANONICAL_PYTHON_CODEC_PROBE_FOR_PYPI_AUTO_ACQUISITION",
+      "parent_capability_promoted": false,
+      "same_parent_task_replay_allowed": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "GENERIC_BROAD_OBJECTIVE_COMPILE_GAP_UNRESOLVED__MAUNA_OBJECTIVE_SPENT__TWO_LATER_REPLAYS_QUARANTINED__NO_ADMISSIBLE_FRESH_PARENT_PASS",
+    "active_subcapability_target": "PUBLIC_CARRIER_RUNTIME_CLOSURE_MISSING_CANONICAL_PYTHON_CODEC_PROBE_FOR_PYPI_AUTO_ACQUISITION",
+    "subcapability_status": "MISSION_ORIGIN_PROPAGATION_PROVEN__CARRIER_PYPI_HELPER_CLOSURE_GAP_LOCALIZED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
