@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-BROAD-EXPLICIT-RECIPE-FAILCLOSED-V2-20260930",
+  "status": "PROPOSED_PENDING_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3866a84b87248fe2b80b54301370b75c00245869",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "BROAD_EXPLICIT_RECIPE_CLASSIFIER_FAILS_CLOSED_INCOMPLETELY_FOR_ABSOLUTE_PATHS_AND_UNKNOWN_CLI_COMMANDS",
+  "action_kind": "GENERIC_ROUTING_SAFETY_REPAIR",
+  "authoritative_falsification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 193,
+    "workflow_run_id": 36689999285,
+    "workflow_job_id": 109804684560,
+    "artifact_id": 11084369483,
+    "exact_failure": "EXPLICIT_RECIPE_3_WAS_ADMITTED",
+    "falsified_input": "Assess whether two values differ. Run /usr/bin/python verify_values.py"
+  },
+  "observed_defect": "Merged PR474 correctly permits generic method-selection language but only rejects enumerated tools or extension-bearing scripts, so absolute executable paths and unknown CLI commands can be misclassified as broad research objectives.",
+  "repair": [
+    "remove narrowly whitelisted generic run-method phrases before recipe detection",
+    "then fail closed on every remaining run/execute token followed by a nonempty operand",
+    "preserve existing URL/create/save/extract-json recipe rejection",
+    "add absolute-path, unknown-CLI, known-command, script, URL, and generic-method regressions"
+  ],
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "qualification_required": "EXACT_BYTE_NON_PARENT_GUARDED_ADVERSARIAL_QUALIFICATION",
+  "parent_execution_policy": "DO_NOT_SPEND_A_FRESH_PARENT_ON_BYTES_FALSIFIED_BY_RUN_36689999285",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "selected_surviving_route": "ONE_GENERIC_RECIPE_BOUNDARY_REPAIR",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_PARENT_REPLAY",
+      "TASK_SPECIFIC_RECIPE_LIST_EXPANSION",
+      "UNBOUNDED_TOOL_NAME_ENUMERATION",
+      "MODEL_COGNITION"
+    ],
+    "why_selected_route_is_fastest_sufficient": "A narrow allowlist for generic research-method phrases plus a catch-all remaining run/execute recipe detector closes the demonstrated false-negative class without weakening broad-objective admission.",
+    "stop_rule": "QUALIFY_EXACT_BYTES_ADVERSARIALLY_THEN_RESUME_FRESH_PARENT_FRONTIER"
+  }
+}
