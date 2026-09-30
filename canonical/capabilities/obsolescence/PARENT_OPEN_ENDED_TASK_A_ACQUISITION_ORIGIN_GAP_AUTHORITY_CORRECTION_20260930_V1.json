@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_TASK_A_AUTHORITY_CORRECTION_V1",
+  "status": "PRIMARY_SPEND_AUTHORITY_CORRECTED__GENERIC_ACQUISITION_ORIGIN_GAP_LOCALIZED__NO_REPLAY",
+  "reconciliation_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "physical_objective": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013 using authoritative primary data, justified quantitative reasoning, uncertainty/limitations, independent calculation verification, and provenance.",
+  "authoritative_first_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request_context": "PR317 carrier lane",
+    "run_id": 36669918546,
+    "job_id": 109742518213,
+    "artifact_id": 11077637577,
+    "artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001",
+    "task_blob": "61d7334c1c866027260025d0d147d16ee9e0cb02",
+    "brain_base": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "execution_count": 1,
+    "task_executed": true,
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "status": "FAIL_FIRST_CAUSAL_GAP"
+  },
+  "hardened_current_runtime_reproduction": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 53,
+    "run_id": 36670628769,
+    "job_id": 109744656402,
+    "artifact_id": 11078270105,
+    "artifact_digest": "sha256:b7bccdcdae0634f72cc5e86a08f1fac1d0accd9ab699fb2a5596e35e30a1fe74",
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "task_blob": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "brain_base": "797d5fbea5f230a31044006755beb98ae387134b",
+    "brain_head": "aa1f60088b645439ff1eb15284dee828cb6b0671",
+    "execution_count": 1,
+    "task_executed": true,
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "status": "FAIL_FIRST_CAUSAL_GAP",
+    "authority": "REPLAY_EVIDENCE_ONLY__ZERO_FRESHNESS_OR_PROMOTION_CREDIT"
+  },
+  "corrected_causal_localization": {
+    "outer_blocker": "CAPABILITY_ACQUISITION_REQUIRED",
+    "supplier_router_error": "NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "observed_supplier_errors": [
+      "APT_ORIGIN_MISSION_PATH_INVALID",
+      "PYPI_ORIGIN_MISSION_PATH_INVALID"
+    ],
+    "localized_blocker": "MODEL_INDEPENDENT_RUNTIME_MISSION_ORIGIN_BRIDGE_FOR_AUTO_CAPABILITY_ACQUISITION_MISSING__APT_PYPI_ORIGIN_MISSION_PATH_INVALID",
+    "code_cause": "Direct run_goal(step, mission_dict) reaches auto capability acquisition with mission._runtime_mission_path absent/empty; APT, PyPI, npm, and source suppliers require origin_mission_path to resolve to an existing direct child of canonical/astra_runtime/missions.",
+    "downstream_observation": "Federated fallback also ranked semantically irrelevant packages, but ranking is downstream and is not authorized for repair until the origin contract is valid."
+  },
+  "supersedes_interpretation": {
+    "prior_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "reason": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH triggered the existing autonomous acquisition path; the run then progressed into acquisition and the outer terminal failure was the generic supplier-origin contract mismatch. The compiler miss is therefore an antecedent trigger, not the surviving first repair target."
+  },
+  "replay_policy": {
+    "same_physical_objective_replay_allowed": false,
+    "duplicate_hardened_execution_credit": 0,
+    "closed_duplicate_carrier_prs": [
+      53,
+      54,
+      55
+    ]
+  },
+  "credit": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 1,
+    "parent_capability_credit": false
+  },
+  "next_required_action": "REPAIR_GENERIC_RUNTIME_MISSION_ORIGIN_BRIDGE_FOR_AUTO_CAPABILITY_ACQUISITION__QUALIFY_WITH_FRESH_NON_PARENT_ACQUISITION_CASE__THEN_FREEZE_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_A"
+}
