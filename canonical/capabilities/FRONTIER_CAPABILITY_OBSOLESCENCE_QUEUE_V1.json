@@ -1,28 +1,31 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
-  "status": "CANONICAL_OBSOLESCENCE_QUEUE",
-  "phase": "POST_KNOWLEDGE_OBSOLESCENCE__CAPABILITY_OBSOLESCENCE",
+  "status": "ACTIVE__V5_OPUS_5_5_CAPABILITY_OWNERSHIP_QUEUE",
+  "phase": "RECOVER_MAP_AND_PERMANENTLY_OWN_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE",
   "p_real": 1,
   "theory": {
-    "operational_decomposition": "FRONTIER_INTELLIGENCE = KNOWLEDGE + CAPABILITIES",
-    "knowledge_side": "ARCHITECTURALLY_SOLVED_FOR_CURRENT_PROGRAM_UNLESS_FALSIFIED",
-    "knowledge_solution": "OBTAIN_MAXIMUM_RELEVANT_KNOWLEDGE_JIT_FROM_EXTERNAL_VERIFIABLE_SOURCES_INSTEAD_OF_REPLICATING_A_GIANT_PERMANENT_PARAMETER_STORE",
-    "active_side": "CAPABILITIES",
-    "capability_question": "FOR_EACH_FRONTIER_CAPABILITY_FIND_THE_FASTEST_AND_CHEAPEST_REALIZABLE_ROUTE_TO_EQUAL_OR_BETTER_USEFUL_CAPABILITY",
-    "obsolete_definition": "FRONTIER_IMPLEMENTATION_NO_LONGER_NECESSARY_BECAUSE_A_VERIFIED_ROUTE_PROVIDES_EQUAL_OR_BETTER_USEFUL_CAPABILITY_UNDER_REQUIRED_CONDITIONS"
+    "effective_frontier_intelligence": "PERMANENTLY_OWNED_CAPABILITIES_PLUS_EXTERNAL_JIT_KNOWLEDGE",
+    "knowledge": "EXTERNAL_JIT__NOT_PERMANENTLY_ACCUMULATED_AS_CAPABILITY_INVENTORY",
+    "capabilities": "FIND_ALREADY_EXISTING_REALIZATIONS__CONFIGURE__VERIFY__SAVE_PERMANENTLY__NO_REDISCOVERY",
+    "opus_acceptance_bar": "EQUAL_OR_BETTER",
+    "capability_externalization": false,
+    "underlying_capability_invention": false,
+    "no_existing_route": "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE"
   },
   "optimization": {
     "priority": [
       "CORRECTNESS_AND_REAL_CAPABILITY_STRENGTH",
+      "CAPABILITY_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+      "PERMANENT_BRAIN_OWNERSHIP",
       "MINIMUM_WALL_CLOCK_TIME",
       "MINIMUM_INCREMENTAL_COST",
       "MINIMUM_COMPUTE_AND_COMPLEXITY"
     ],
     "hard_incremental_spend_usd": 0,
-    "preferred_outcome": "CAPABILITY_GREATER_THAN_OR_EQUAL_TO_FRONTIER",
-    "parity_role": "MINIMUM_ACCEPTANCE_BAR_NOT_TERMINAL_GOAL"
+    "preferred_outcome": "PERMANENTLY_OWNED_CAPABILITY_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "parity_role": "MINIMUM_ACCEPTANCE_BAR"
   },
-  "queue_semantics": "CAPABILITIES_TO_OBSOLETE__NOT_CAPABILITIES_TO_COPY_OR_ACCUMULATE",
+  "queue_semantics": "OPUS_5_5_USEFUL_CAPABILITIES_TO_FIND_AS_EXISTING_REALIZATIONS__CONFIGURE_INTO_BRAIN__VERIFY__SAVE_PERMANENTLY__NOT_JIT_EXTERNALIZE",
   "capability_families_seed": [
     "GOAL_DECOMPOSITION_AND_PLANNING",
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -60,46 +63,28 @@
   ],
   "allowed_statuses": [
     "UNMAPPED",
-    "FRONTIER_BAR_UNCERTAIN",
-    "ROUTE_DISCOVERY",
-    "ROUTE_RACE",
-    "CANDIDATE_MATCH",
-    "OBSOLETE_VERIFIED",
-    "RESIDUAL_GAP_VERIFIED",
+    "OPUS_BAR_UNCERTAIN",
+    "EXISTING_REALIZATION_SEARCH",
+    "CONFIGURATION_IN_PROGRESS",
+    "VERIFICATION_IN_PROGRESS",
+    "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE",
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "selected_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "parent_frontier_capability": null,
-    "objective": "Repair deterministic source relevance so admission preserves the explicit decision structure: an admitted source must anchor the requested property or quantity and the applicable comparison operand strongly enough that broad overlapping subject tokens cannot substitute a different property or entity. Reuse bounded objective-relation parsing where possible; fail closed on unresolved role coverage.",
-    "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+    "objective": "Recover the defensible useful Opus 5.5 capability envelope, map what Brain already permanently owns, then find existing equal-or-better realizations for gaps, configure them into Brain, verify them, and save them permanently. Knowledge remains external/JIT.",
+    "selection_metric": "VERIFIED_PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json",
-      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
+      "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
     ],
-    "repair_status": "MATERIALS_TASK_C_SPENT__FIRST_GAP_CORRECTED_TO_INITIAL_RELEVANCE_DECISION_ROLE_COVERAGE__NO_PARENT_CREDIT",
-    "prohibition": "NO_MATERIALS_TASK_C_REPLAY__NO_SOURCE_WHITELIST__NO_MODEL_RERANKER__NO_TASK_SPECIFIC_MATERIAL_LITERALS__NO_DOWNSTREAM_MATERIALIZATION_REPAIR_AS_CURRENT_BLOCKER",
-    "next_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
-    "latest_routing_qualification_run_id": 36689658815,
-    "latest_routing_qualification_artifact_id": 11085092932,
-    "latest_routing_qualification_artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
-    "spent_http2_task_run_id": 36688193204,
-    "spent_http2_task_artifact_id": 11084357364,
-    "spent_http2_task_artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
+    "repair_status": "LOCAL_OPEN_RESEARCH_MICRO_REPAIR_FRONTIER_DEFERRED_BY_TOP_LEVEL_THEORY_CORRECTION",
+    "prohibition": "NO_JIT_CAPABILITY_EXTERNALIZATION__NO_UNDERLYING_CAPABILITY_INVENTION__NO_CAPABILITY_CREDIT_BELOW_OPUS_5_5__NO_PER_TASK_CAPABILITY_REDISCOVERY__KNOWLEDGE_JIT_ONLY",
+    "next_action": "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE__MAP_ALREADY_OWNED_CAPABILITIES__SEARCH_EXISTING_EQUAL_OR_BETTER_REALIZATIONS__CONFIGURE_VERIFY_AND_SAVE_WINNERS__KNOWLEDGE_JIT_ONLY__NO_CAPABILITY_INVENTION",
     "parent_capability_promoted": false,
-    "incremental_spend_usd": 0,
-    "model_dependency_count": 0,
-    "spent_seismology_task_run_id": 36693929830,
-    "spent_seismology_task_artifact_id": 11086898224,
-    "spent_seismology_task_artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7",
-    "source_admission_qualification_run_id": 36697424705,
-    "source_admission_qualification_artifact_id": 11088004744,
-    "source_admission_qualification_artifact_digest": "sha256:a6e2bc40e382d1c57824c346246123f9c171c18581c014373a59bad7b3981e85",
-    "spent_materials_task_run_id": 36698638943,
-    "spent_materials_task_artifact_id": 11089076913,
-    "spent_materials_task_artifact_digest": "sha256:d737b2cb659b9125691167ee19e305c2c2ef0ec7f483c9b04a6046a484d2f162"
+    "incremental_spend_usd": 0
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -288,12 +273,12 @@
     "blocker": "UBUNTU_DIRECT_SURFACE_LACKS_DISTINCT_CONTENTS_ALL_TARGET"
   },
   "execution_governance": {
-    "real_task_first": true,
+    "real_task_first": false,
     "progress_metric": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
     "maximum_support_actions_before_frontier_recompute": 2,
     "pre_freeze_realizability_required": true,
-    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
-    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OWNERSHIP_ARBITRAGE_STRATEGY_V5.md",
     "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "recursive_obs_required": true,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
@@ -306,17 +291,24 @@
       "REUSE",
       "SUBSTITUTE",
       "COMPOSE",
-      "REPAIR",
-      "BUILD"
+      "CONFIGURE",
+      "INTEGRATE"
     ],
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V5.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_external_route_frontier_age_hours": 24,
-    "max_selected_route_preflight_age_hours": 2
+    "max_selected_route_preflight_age_hours": 2,
+    "capability_acquisition_first": true,
+    "reasoning_durability_law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "build_interpretation": "INTEGRATION_GLUE_ONLY__NO_UNDERLYING_CAPABILITY_INVENTION",
+    "capability_externalization_forbidden": true,
+    "knowledge_external_jit": true,
+    "opus_5_5_or_better_required": true,
+    "permanent_capability_package_required": true
   },
-  "next_progress_event_target": "REPAIR_AND_GUARD_QUALIFY_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE__NO_MATERIALS_TASK_C_REPLAY",
+  "next_progress_event_target": "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE__MAP_ALREADY_OWNED_CAPABILITIES__SEARCH_EXISTING_EQUAL_OR_BETTER_REALIZATIONS__CONFIGURE_VERIFY_AND_SAVE_WINNERS__KNOWLEDGE_JIT_ONLY__NO_CAPABILITY_INVENTION",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -327,16 +319,14 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "MATERIALS_TASK_C_SPENT__FIRST_GAP_CORRECTED_TO_INITIAL_RELEVANCE_DECISION_ROLE_COVERAGE__NO_PARENT_CREDIT",
-    "previous_interpretation": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
-    "blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
-    "spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
-    "spent_parent_run_id": 36698638943,
-    "spent_parent_replay_allowed": false,
-    "parent_capability_promoted": false,
+    "status": "V5_THEORY_RESET_TO_OPUS_5_5_PERMANENT_CAPABILITY_OWNERSHIP",
+    "previous_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+    "blocker": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
-    ]
+      "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
+    ],
+    "parent_capability_promoted": false,
+    "counter_delta": 0
   },
   "last_real_output_event": {
     "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_CORRECTED_20260930",

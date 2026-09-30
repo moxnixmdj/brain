@@ -2,6 +2,20 @@
 
 Status: CANONICAL / MANDATORY / FAIL-CLOSED
 
+## V5 capability-ownership override
+
+This control law is subordinate to:
+- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md
+- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md
+- canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md
+
+For the current program:
+- external/JIT applies to knowledge, not capability ownership;
+- capability search discovers already-existing realizations to configure and save permanently in Brain;
+- capability invention is forbidden;
+- any older DELETE/BYPASS/REUSE/SUBSTITUTE/COMPOSE/REPAIR/BUILD wording interprets BUILD as integration/configuration/verification glue only, never invention of the underlying useful capability;
+- every consequential OBS conclusion requires a durable reasoning decision receipt; chat-only rationale has zero authority.
+
 Supersedes:
 - canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md
 

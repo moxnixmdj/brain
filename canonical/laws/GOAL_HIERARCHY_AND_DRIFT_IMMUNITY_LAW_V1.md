@@ -2,6 +2,19 @@
 
 Status: CANONICAL / MANDATORY / FAIL-CLOSED
 
+## V5 terminal-goal override
+
+Current authoritative terminal objective:
+
+**Permanently acquire, configure, verify, and own all useful Opus 5.5 capabilities at equal-or-better useful performance, while knowledge remains external/JIT.**
+
+Authority:
+- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md
+- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md
+- canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md
+
+Capabilities are not JIT knowledge. Underlying capability invention is forbidden. Any older terminal-objective wording below is historical and subordinate to this override.
+
 Purpose: make local task success, probe completion, infrastructure activity, and attractive subproblems structurally unable to replace Project Brain's terminal objective.
 
 ## 1. Immutable hierarchy
@@ -21,7 +34,7 @@ The terminal objective may change only through an explicit user-authorized canon
 
 ## 2. Current terminal objective
 
-Systematically obsolete useful frontier-model capabilities by finding verified equal-or-better capability routes with minimum wall-clock time and incremental cost.
+Permanently acquire, configure, verify, and own useful Opus 5.5 capabilities at equal-or-better useful performance; knowledge remains external/JIT.
 
 A probe is never the goal.
 A package, benchmark, tool, model, workflow, branch, PR, artifact, or test is never the goal.
