@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__NO_ADMISSIBLE_OPEN_ENDED_MODEL_FREE_PARENT_TASK_YET",
+  "status": "FRONTIER_BAR_DEFINED__GENUINE_OPEN_ENDED_TASK_A_SPENT_FAIL_FIRST_CAUSAL_GAP",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -54,31 +54,39 @@
     "complete_research_plan_predeclared_to_producer_disallowed": true
   },
   "evidence_A": {
-    "task": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
-    "domain": "DEVELOPMENT_DEMOGRAPHY_POPULATION_GROWTH_QUANTITATIVE_REASONING",
-    "status": "VERIFIED_MODEL_INDEPENDENT_STRUCTURED_REAL_TASK__NOT_ADMISSIBLE_FOR_OPEN_ENDED_PARENT_SCOPE",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json",
-    "public_run_id": 36667844172,
-    "artifact_id": 11076359417,
-    "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
+    "task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "domain": "ATMOSPHERIC_CLIMATE_SCIENCE_TIME_SERIES_REASONING",
+    "status": "ADMISSIBLE_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TASK_A_ATTEMPT__SPENT_FAIL_FIRST_CAUSAL_GAP__NO_PROMOTION_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_BROAD_OBJECTIVE_COMPILE_GAP_RECONCILIATION_20260930_V1.json",
+    "public_run_id": 36670516407,
+    "public_job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
     "model_dependency_count": 0,
-    "verified_real_task_result_preserved": true,
+    "execution_count": 1,
+    "task_executed": true,
+    "parent_task_completed": false,
+    "autonomous_open_ended_anti_leakage_gate_passed": true,
+    "first_causal_stage": "COMPILE",
+    "first_causal_gap": "OPEN_ENDED_PARENT_TASK_A_COMPILE_GAP__BROAD_OBJECTIVE_NO_VERIFIED_CAPABILITY_MATCH",
+    "underlying_error": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
     "admissible_for_open_ended_parent_promotion": false,
-    "scope_correction_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
-    "reason": "Producer prompt predeclared exact sources, JSON paths, formula and threshold, so it did not exercise autonomous decomposition or material source/tool discovery."
+    "same_task_replay_allowed": false,
+    "reason": "The task was genuinely open-ended and model-independent, but it failed on the first broad objective clause before source/tool discovery, computation, or oracle verification. This localizes a parent residual gap but does not satisfy end-to-end Task A."
   },
   "evidence_B": {
-    "status": "BLOCKED_UNTIL_ADMISSIBLE_OPEN_ENDED_TASK_A",
-    "requirement": "After a genuine open-ended Task A passes, complete a materially different genuine open-ended Task B on the inherited model-independent route.",
+    "status": "BLOCKED_UNTIL_TASK_A_BROAD_OBJECTIVE_COMPILE_GAP_IS_CLOSED_AND_A_FRESH_OPEN_ENDED_TASK_A_PASSES",
+    "requirement": "After a generic broad-objective decomposition/grounding route is acquired and a fresh genuinely open-ended Task A completes end-to-end, complete a materially different genuine open-ended Task B on the inherited model-independent route.",
     "prohibited_replays": [
       "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
       "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
       "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002",
-      "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004"
+      "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004",
+      "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__OPEN_ENDED_PARENT_SCOPE_HAS_NO_ADMISSIBLE_MODEL_INDEPENDENT_REAL_TASK_A",
-  "residual_gap": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "obsolescence_status": "NOT_YET_PROVEN__OPEN_ENDED_TASK_A_SPENT_AT_BROAD_OBJECTIVE_COMPILE_GAP",
+  "residual_gap": "OPEN_ENDED_PARENT_TASK_A_COMPILE_GAP__BROAD_OBJECTIVE_NO_VERIFIED_CAPABILITY_MATCH",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -117,7 +125,7 @@
       "public_run_id": 36666659921
     }
   ],
-  "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+  "next_action": "ACQUIRE_GENERIC_MODEL_INDEPENDENT_BROAD_OBJECTIVE_DECOMPOSITION_AND_CAPABILITY_GROUNDING_ROUTE__SEARCH_REUSE_BEFORE_REPAIR__NO_TASK_A_REPLAY__THEN_FRESH_ORTHOGONAL_QUALIFICATION",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -143,15 +151,18 @@
     "incremental_spend_usd": 0
   },
   "latest_parent_task_failure": {
-    "task": "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
-    "status": "FAILED_FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT__GAP_NOW_CLOSED",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json",
-    "public_run_id": 36664896545,
-    "artifact_id": 11075578533,
-    "artifact_digest": "sha256:1602e529f3e33249e586a67475aff947be0d2b7ce97db0bd82c770a2f7bba734",
-    "first_causal_gap": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
-    "resolved": true,
-    "resolution_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
+    "task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "status": "FAILED_FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT__GAP_OPEN",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_BROAD_OBJECTIVE_COMPILE_GAP_RECONCILIATION_20260930_V1.json",
+    "public_run_id": 36670516407,
+    "public_job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "first_causal_stage": "COMPILE",
+    "first_causal_gap": "OPEN_ENDED_PARENT_TASK_A_COMPILE_GAP__BROAD_OBJECTIVE_NO_VERIFIED_CAPABILITY_MATCH",
+    "underlying_error": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "resolved": false,
+    "model_dependency_count": 0,
     "same_task_replay_allowed": false
   },
   "historical_evidence_A_space_cargo": {
