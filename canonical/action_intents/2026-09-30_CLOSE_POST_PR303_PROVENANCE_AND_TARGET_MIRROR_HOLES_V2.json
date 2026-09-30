@@ -120,7 +120,8 @@
         "Used the proven public parent harness to falsify the execute_step-only provenance boundary"
       ],
       "search_stop_decision": "All three defects are directly demonstrated in current source or proven carrier usage and have minimal local repairs; broader search would delay parent Task A without improving correctness.",
-      "affected_layers_only_on_revalidation": true
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Exact corrected main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e was refreshed before this local trusted-boundary repair; no external execution route is selected, so only the affected internal governance/runtime layers require revalidation."
     },
     "routes_considered": [
       "REPAIR_EXISTING_RUNTIME_AND_VALIDATOR",
