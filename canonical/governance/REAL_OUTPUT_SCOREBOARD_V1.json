@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__SUPERPOWERS_FALLBACK__ZERO_CREDIT_UNTIL_PASS",
+  "next_progress_event_target": "PARALLEL__SEARCH_AND_INTERNALIZE_STRONGER_EXISTING_CODING_CONFIGURATION__RUN_CHEAP_CONTAMINATION_CONTROLLED_STIRRUP_PROFESSIONAL_WORK_FALSIFICATION__ZERO_CREDIT_UNTIL_PASS",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -625,14 +625,15 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
-    "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
-    "subcapability_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
+    "active_subcapability_target": "PARALLEL__ADVANCED_AGENTIC_CODING_ROUTE_RACE__PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP",
+    "subcapability_status": "CODING_ROUTE_RACE_ACTIVE__PROFESSIONAL_WORK_BRAIN_CONFIGURED_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "residual_gap": "BRAIN_INTERNALIZED_SUPREME_LED_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
-    "next_required_action": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__SUPERPOWERS_FALLBACK__ZERO_CREDIT_UNTIL_PASS",
-    "internalization_manifest": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json",
-    "comparison_configuration": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+    "residual_gap": "PARALLEL_RESIDUAL__ADVANCED_AGENTIC_CODING_NEEDS_STRONGER_EXISTING_INTERNALIZABLE_ROUTE__PROFESSIONAL_WORK_STIRRUP_ROUTE_NEEDS_DIRECT_VERIFICATION",
+    "next_required_action": "PARALLEL__SEARCH_AND_INTERNALIZE_STRONGER_EXISTING_CODING_CONFIGURATION__RUN_CHEAP_CONTAMINATION_CONTROLLED_STIRRUP_PROFESSIONAL_WORK_FALSIFICATION__ZERO_CREDIT_UNTIL_PASS",
+    "professional_work_internalization_manifest": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+    "professional_work_execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "coding_falsification": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json"
   },
   "events": [
     {
@@ -709,10 +710,10 @@
     }
   ],
   "last_subcapability_event": {
-    "event_id": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_OWNED_20260930",
-    "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__FRESH_FORCED_PROCESS_BOUNDARY_PASS",
-    "evidence_path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
-    "counter_delta": 1
+    "event_id": "STIRRUP_PROFESSIONAL_WORK_INTERNALIZED_20260930",
+    "status": "MECHANISM_OWNED__ZERO_OPUS_CREDIT__VERIFICATION_PENDING",
+    "evidence_path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+    "counter_delta": 0
   },
   "capability_events": [
     {
@@ -895,6 +896,17 @@
         "SCOPED_BRAIN_OWNED_COMPONENT_ADDED"
       ],
       "claim_scope": "FAIL_CLOSED_EXECUTION_VERIFICATION_AND_RECOVERY"
+    },
+    {
+      "event_id": "STIRRUP_PROFESSIONAL_WORK_INTERNALIZED_20260930",
+      "capability_id": "PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_V1",
+      "status": "INTERNALIZATION_COMPLETE__VERIFICATION_PENDING",
+      "capability_package": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+      "execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+      "exact_imported_files": 54,
+      "mismatches": 0,
+      "incremental_spend_usd": 0,
+      "opus_5_5_credit_delta": 0
     }
   ],
   "last_real_output_event": {
