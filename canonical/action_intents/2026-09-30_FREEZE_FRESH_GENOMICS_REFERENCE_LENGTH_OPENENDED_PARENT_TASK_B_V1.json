@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-GENOMICS-REFERENCE-LENGTH-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "FROZEN_PENDING_CANONICAL_MERGE",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_GENOMICS_REFERENCE_LENGTH_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended genomics parent Task B on the qualified repaired runtime; after canonical merge authorize one guarded physical execution and stop on the first new causal gap.",
+  "prior_work_checked": [
+    "canonical routing repair PR474 merged and independently guarded-qualified by runner run 36689658815",
+    "HTTP2 parent Task A run 36688193204 is spent and replay-forbidden",
+    "closed stale genomics proposal PR471 was never canonically frozen or physically executed",
+    "new Task B identity PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-B-20260930-006 has no Brain or runner match"
+  ],
+  "evidence_presence_classification": "CHILD_STACK_VERIFIED__FRESH_PARENT_B_VALIDATION_REQUIRED",
+  "proposed_fresh_task": {
+    "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-B-20260930-006",
+    "domain": "GENOMICS_REFERENCE_SEQUENCE_LENGTH_COMPARISON",
+    "goal_text": "Assess whether the complete reference genome sequence length of Escherichia coli K-12 MG1655 is greater than the human mitochondrial reference genome sequence length. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant primary records, determine how to extract and interpret the two sequence lengths, choose and run a zero-cost verification method, identify material reference-version or sequence-scope limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+    "deliberately_not_predeclared": [
+      "authority or source URL",
+      "database or accession identifier",
+      "numeric sequence lengths",
+      "field location",
+      "formula or calculation recipe",
+      "tool or package",
+      "controller action graph",
+      "expected answer"
+    ]
+  },
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Merge the freeze, then execute this exact Task B at most once through the live atomic guard with model planner disabled. On semantic failure preserve only the first causal gap and never replay. On semantic success independently verify before any parent promotion.",
+  "recursive_obs": {
+    "selected_surviving_route": "FRESH_OPEN_ENDED_GENOMICS_PARENT_TASK_B_ON_QUALIFIED_REPAIRED_RUNTIME",
+    "why_selected_route_is_fastest_sufficient": "The generic repair is already qualified; another synthetic child test cannot prove the parent. This task is cross-domain, has a simple decisive relation, and requires autonomous authoritative-record discovery and extraction without prewiring.",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "STALE_PR471_REUSE_AS_AUTHORITY",
+      "NEW_CHILD_REPAIR_WITHOUT_PARENT_FAILURE",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_OR_ACCESSION",
+      "TASK_SPECIFIC_RUNTIME_PATCH"
+    ],
+    "stop_rule": "FREEZE_CURRENT_BASE__MERGE__GUARD_EXECUTE_ONCE__PRESERVE_FIRST_CAUSAL_GAP_OR_INDEPENDENTLY_VERIFY_SUCCESS"
+  }
+}
