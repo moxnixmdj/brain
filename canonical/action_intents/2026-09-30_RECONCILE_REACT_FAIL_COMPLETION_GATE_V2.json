@@ -1,0 +1,279 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-REACT-FAIL-COMPLETION-GATE-V2-20260930",
+  "status": "PROPOSED_CURRENT_BASE__REACT_TERMINAL_FAILURE_RECONCILIATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "636401fb41dd542e5da24ff56e69f60923289763",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "probe_id": null,
+  "causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "expected_parent_frontier_change": "PRESERVE_REACT_FAIL_ZERO_CREDIT__ENFORCE_ALREADY_OWNED_REQUIREMENT_TRACEABILITY_ACCEPTANCE_COVERAGE_AND_SINGLE_TERMINAL_AUTHORITY__THEN_USE_DISTINCT_FRESH_TASK",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "React lead-form public run 36777861512 terminal reward 0",
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/REACT_LEAD_FORM_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+    "canonical mini-SWE + Superpowers composed package",
+    "Superpowers verification-before-completion skill already owned",
+    "public bridge terminal gate V2 merged at ce540975febcd262c94a0f2b025b99180a18e18e"
+  ],
+  "evidence_presence_classification": "FRESH_TERMINAL_FAILURE_PRESENT__GENERIC_ENFORCEMENT_GAP_IN_ALREADY_OWNED_VERIFICATION_DISCIPLINE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "stop_condition": "Preserve React reward-0 as spent evidence; install only generic enforcement of already-owned verification discipline and terminal authority; run exact package verifier and trusted current-base guard; do not replay React for promotion; next execution must use a distinct fresh task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "CURRENT_GPT_5_6_SOL_SESSION_AS_GENERAL_COGNITION_ONLY__NO_OPAQUE_TARGET_CAPABILITY_CREDIT",
+    "capability_invention": "FORBIDDEN__THIS_ACTION_ENFORCES_ALREADY_OWNED_VERIFICATION_DISCIPLINE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_ARCHITECTURALLY",
+    "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_FOR_CONFIGURATION",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "FAIL_REACT_TASK__REPAIRING_ENFORCEMENT_ONLY",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_DISTINCT_FRESH_VERIFICATION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_RECONCILE_REACT_FAIL_COMPLETION_GATE_V2.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "636401fb41dd542e5da24ff56e69f60923289763",
+    "real_outcome": "Convert the React fresh-task failure into durable falsification evidence and enforce verification rules Brain already owned, without task-specific replay or new coding methodology.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Prevent unsupported validity rules and premature multi-lane terminal submission from recurring on the next distinct task.",
+      "proxy_goals_deleted": [
+        "Fix React then replay it",
+        "Hide reward 0 behind local passing tests",
+        "Invent a new coding methodology",
+        "Search a new provider before correcting the execution seam"
+      ],
+      "surviving_necessity": "Durable generic completion enforcement plus distinct fresh verification."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "mini-SWE-agent 2.4.6",
+        "Superpowers 6.4.2 verification-before-completion",
+        "Brain composed package",
+        "public session bridge"
+      ],
+      "external_existing_routes_checked": [
+        "Untouched Terminal-Bench verifier result reward 0 is the independent oracle for this execution."
+      ],
+      "capability_work_deleted": [
+        "No task-specific React fix in owned capability",
+        "No gclid-specific rule in overlay",
+        "No replay",
+        "No paid API"
+      ],
+      "surviving_gap": "Already-owned verification discipline was advisory at the terminal boundary and did not force explicit acceptance-criterion coverage."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Integration/enforcement gap, not a missing underlying coding method.",
+      "delete_bypass_substitute_options": [
+        "Delete same-task replay",
+        "Reuse owned Superpowers verification rules",
+        "Compile rules into requirement-trace/coverage gate",
+        "Use single terminal authorization in public bridge"
+      ],
+      "surviving_causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "ENFORCE_EXISTING_SUPERPOWERS_VERIFICATION_DISCIPLINE_WITH_TERMINAL_AUTHORIZATION_V1",
+        "REPLAY_REACT_AFTER_FIX",
+        "SEARCH_NEW_AGENT_FRAMEWORK"
+      ],
+      "losing_routes_reason": "React replay is contaminated/spent for promotion; a new framework does not fix the proven completion-enforcement seam.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run exact composed-package verifier against the updated overlay and trusted current-base drift/lease guard. No benchmark task is consumed by this integration repair."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Advisory-only terminal completion semantics",
+        "Any fresh-task plan that permits terminal submission without central authorization"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Superpowers verification-before-completion",
+        "Brain fail-closed gates",
+        "public bridge BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1"
+      ],
+      "fresh_reuse_plan": "Select a distinct untouched task after this package repair; require criterion-to-evidence completion receipt before terminal submission."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse exact React terminal evidence",
+        "Reuse exact existing capability pins",
+        "Reuse merged public bridge repair"
+      ],
+      "search_stop_decision": "The causal failure is known and the needed enforcement mechanism already exists in owned verification discipline; more supplier search cannot beat this repair before another spend.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh route frontier only after the next distinct task or material route failure."
+    },
+    "routes_considered": [
+      "ENFORCE_EXISTING_SUPERPOWERS_VERIFICATION_DISCIPLINE_WITH_TERMINAL_AUTHORIZATION_V1",
+      "REPLAY_REACT_AFTER_FIX",
+      "SEARCH_NEW_AGENT_FRAMEWORK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_REACT_AFTER_FIX",
+      "TASK_SPECIFIC_GCLID_PATCH_AS_CAPABILITY",
+      "NEW_PROVIDER_SEARCH_BEFORE_ENFORCEMENT"
+    ],
+    "selected_surviving_route": "ENFORCE_EXISTING_SUPERPOWERS_VERIFICATION_DISCIPLINE_WITH_TERMINAL_AUTHORIZATION_V1",
+    "why_selected_route_is_fastest_sufficient": "The missing behavior was already specified by Brain-owned Superpowers verification discipline; making it enforceable in the overlay and public bridge is smaller, faster, and more general than changing the underlying coding methodology.",
+    "expected_parent_level_state_change": "PRESERVE_REACT_FAIL_ZERO_CREDIT__ENFORCE_ALREADY_OWNED_REQUIREMENT_TRACEABILITY_ACCEPTANCE_COVERAGE_AND_SINGLE_TERMINAL_AUTHORITY__THEN_USE_DISTINCT_FRESH_TASK",
+    "stop_condition": "Merge only if exact package verification and current-base drift/lease guard pass. Preserve zero credit. Next task must be distinct from React.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T21:30:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ENFORCE_EXISTING_SUPERPOWERS_VERIFICATION_DISCIPLINE_WITH_TERMINAL_AUTHORIZATION_V1",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Superpowers verification-before-completion skill",
+          "mini-SWE + Superpowers composed package",
+          "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/REACT_LEAD_FORM_PREFLIGHT_FALSIFICATION_20260930_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Terminal-Bench react-lead-form untouched verifier result from run 36777861512"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "public session bridge V2 ce540975febcd262c94a0f2b025b99180a18e18e"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No external discovery needed for a proven internal enforcement seam; class retained for V6 route-frontier completeness."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "verification before completion requirement traceability acceptance coverage software engineering"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "mini-SWE-agent Superpowers completion verification"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "single owner terminal authorization fail closed agent workflow"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 coding agent verification completion gates"
+        }
+      ],
+      "challenger_routes": [],
+      "negative_search_summary": "No external route dominates enforcing the verification discipline already owned by the selected configuration before another fresh-task spend.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ENFORCE_EXISTING_SUPERPOWERS_VERIFICATION_DISCIPLINE_WITH_TERMINAL_AUTHORIZATION_V1",
+      "refresh_triggers": [
+        "AFTER_DISTINCT_FRESH_TASK",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T21:30:00Z",
+        "max_age_hours": 2,
+        "selected_route": "ENFORCE_EXISTING_SUPERPOWERS_VERIFICATION_DISCIPLINE_WITH_TERMINAL_AUTHORIZATION_V1",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_BRIDGE_TERMINAL_GATE_V2",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "ce540975febcd262c94a0f2b025b99180a18e18e"
+            ],
+            "evidence_classes": [
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "REACT_TERMINAL_FAILURE_EVIDENCE",
+            "kind": "EVIDENCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "workflow run 36777861512",
+              "artifact 11126423246"
+            ],
+            "evidence_classes": [
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "AUTHORIZED_LOCAL_PACKAGE_VERIFIER",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T21:30:00Z",
+            "evidence": [
+              "Mo remains authorized for exact package and trusted guard execution"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
