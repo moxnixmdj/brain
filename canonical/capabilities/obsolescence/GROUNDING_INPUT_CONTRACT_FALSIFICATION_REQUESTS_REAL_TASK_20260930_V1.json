@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FALSIFICATION_EVIDENCE_V1",
+  "evidence_id": "GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930",
+  "status": "ADMISSIBLE_REAL_TASK_FAILURE__UPSTREAM_GROUNDING_SCOPE_FALSIFIED",
+  "observed_at_utc": "2026-09-30T00:11:04Z",
+  "capability_falsified": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "attempted_downstream_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "real_task": {
+    "domain": "LIVE_KNOWLEDGE_CONSISTENCY",
+    "goal": "Fetch JSON from two authoritative GitHub API identities for psf/requests and assess consistency.",
+    "external_urls": [
+      "https://api.github.com/repos/psf/requests",
+      "https://api.github.com/repositories/1362490"
+    ],
+    "fresh_vs_prior_grounding_tasks": true
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/pr255-grounded-composition-real-task-a-requests-20260930",
+    "head_sha": "082bf085f6dd55e70dbf2a5612ceec259a3e9f27",
+    "workflow": "PR255 Grounded Composition Real Task A - Requests API Consistency",
+    "run_id": 36649042160,
+    "job_id": 109678656560,
+    "conclusion": "failure",
+    "exact_surviving_pr255_bytes_verified_before_task": true
+  },
+  "exact_failure": {
+    "first_unresolved_subgoal": "Fetch JSON from https://api.github.com/repos/psf/requests",
+    "grounding_claimed_unresolved_clause_indexes": [],
+    "grounding_claimed_grounded_clause_count": 3,
+    "grounding_candidate_capability_ids": [
+      "http.json.fetch_from_state",
+      "knowledge.consistency.assess"
+    ],
+    "composition_failure": "NO_BINDABLE_CANDIDATE_FOR_CLAUSE:0",
+    "terminal_blocker": "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_BLOCKED",
+    "external_capability_acquisition_attempted": false
+  },
+  "causal_analysis": {
+    "composition_behavior": "CORRECT_FAIL_CLOSED__REFUSED_TO_INVENT_MISSING_INPUTS",
+    "grounding_behavior": "FALSIFIED_AT_INPUT_CONTRACT_COMPATIBILITY__SEMANTIC_MATCH_WAS_NOT_EXECUTABLY_BINDABLE",
+    "specific_defect": "A clause may be marked grounded even when every selected candidate requires inputs that cannot be derived from the clause, known initial facts, or prior planned effects.",
+    "appropriate_existing_capability_missed": "knowledge.json.fetch.external",
+    "why_not_downstream_repair": "Composition cannot safely manufacture source_json_path/url_key for a literal external URL without turning a grounding error into hidden task-specific guessing."
+  },
+  "scope_effect": {
+    "previous_grounding_status": "ACQUIRED_VERIFIED__REAL_TASK_AND_CROSS_DOMAIN_FRESH_REUSE_PASS",
+    "new_status_required": "REOPENED_BY_REGRESSION",
+    "prior_successes_preserved": true,
+    "broad_claim_reduced": true,
+    "downstream_composition_status": "IMPLEMENTATION_COMPONENT_VERIFIED__REAL_TASK_ACQUISITION_UNPROVEN"
+  },
+  "replay_policy": "DO_NOT_REPLAY_THIS_TASK_TO_TUNE__FIX_GENERIC_INPUT_CONTRACT_COMPATIBILITY_THEN_USE_NEW_FRESH_TASK",
+  "incremental_spend_usd": 0
+}
