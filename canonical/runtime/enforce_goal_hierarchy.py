@@ -710,6 +710,21 @@ def _collect_key_values(value,key):
             out.extend(_collect_key_values(item,key))
     return out
 
+def enforce_active_target_record_consistency(hierarchy,target):
+    target_id=str(hierarchy.get("active_capability_target") or "").strip()
+    if not target_id:
+        fail("ACTIVE_FRONTIER_TARGET_ID_MISSING")
+        return
+    if not isinstance(target,dict) or not target:
+        fail("ACTIVE_FRONTIER_TARGET_RECORD_INVALID")
+        return
+    if str(target.get("capability_id") or "")!=target_id:
+        fail("TARGET_RECORD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(target.get("residual_gap") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("TARGET_RECORD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+    if str(target.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH")
+
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
         fail(label+"_MISSING")
@@ -912,12 +927,7 @@ def main():
             fail("ACTIVE_FRONTIER_TARGET_RECORD_INVALID:"+type(exc).__name__)
             target={}
     if target:
-        if str(target.get("capability_id") or "")!=target_id:
-            fail("TARGET_RECORD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
-        if str(target.get("residual_gap") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
-            fail("TARGET_RECORD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
-        if str(target.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-            fail("TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH")
+        enforce_active_target_record_consistency(hierarchy,target)
 
     boot=pointer.get("boot_requirements") or {}
     if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
