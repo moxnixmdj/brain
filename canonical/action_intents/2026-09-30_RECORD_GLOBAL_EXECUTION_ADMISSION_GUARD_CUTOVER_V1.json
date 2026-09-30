@@ -1,0 +1,165 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECORD-GLOBAL-EXECUTION-ADMISSION-GUARD-CUTOVER-20260930-V1",
+  "status": "IMPLEMENTED_EXTERNALLY__CANONICAL_RECEIPT_PENDING",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "action_kind": "GOVERNANCE_EXECUTION_SAFETY_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::GLOBAL_EXECUTION_ADMISSION_GUARD::RECORD_CUTOVER_RECEIPT",
+  "expected_parent_frontier_change": "NONE__RECORD_OPERATIONAL_EXECUTION_SAFETY_FACT_ONLY",
+  "highest_leverage_now": false,
+  "prior_work_checked": [
+    "Brain main dd6549fea72d378e9b057048fd78e9fef04d44db",
+    "runner PR156 merged as f2335a12a5137f683b0660ec20aba6e45dc388cc",
+    "runner live status corrected on main as b1d5ada6b827098e24d795c41c02545c12fd8fc1",
+    "six historical spent-problem deny refs live",
+    "eight obsolete direct parent/scientific one-shot workflows absent post-merge",
+    "PR156 execution-guard regression job passed"
+  ],
+  "evidence_presence_classification": "EXTERNAL_OPERATIONAL_FACT_VERIFIED__CANONICAL_RECEIPT_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge the exact receipt without changing the current scientific frontier, counters, or parent replay authority.",
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "dd6549fea72d378e9b057048fd78e9fef04d44db",
+    "real_outcome": "Durably record the already-live no-duplicate execution boundary without perturbing the active capability frontier.",
+    "required_capability": "TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1_OPERATIONAL_ENFORCEMENT",
+    "obs_goal": {
+      "real_outcome": "Make the verified runner cutover discoverable and authoritative in Brain.",
+      "proxy_goals_deleted": [
+        "new scientific task",
+        "parent replay",
+        "capability promotion",
+        "new execution experiment"
+      ],
+      "surviving_necessity": "One canonical receipt bound to exact live runner evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical duplicate-execution law",
+        "runner atomic Git-ref guard",
+        "runner launcher audit",
+        "historical spent-problem deny refs"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub atomic create-ref behavior already live-qualified"
+      ],
+      "capability_work_deleted": [
+        "no new lock service",
+        "no protected coordination branch dependency",
+        "no new scientific execution"
+      ],
+      "surviving_gap": "CANONICAL_RECEIPT_ONLY"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Governance visibility gap only.",
+      "delete_bypass_substitute_options": [
+        "reuse existing runner evidence and exact commit SHAs"
+      ],
+      "surviving_causal_blocker": "CANONICAL_RECEIPT_MISSING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECORD_EXISTING_VERIFIED_CUTOVER_RECEIPT",
+        "REIMPLEMENT_GUARD_IN_BRAIN",
+        "RUN_NEW_PROBE"
+      ],
+      "losing_routes_reason": "Reimplementation or new execution adds risk and no information; the operational effect already exists and is verified.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None; bind exact GitHub commits, merged PR, regression result, and live refs."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any assumption that a protected coordination branch is required for current-run admission"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "stable problem identity",
+        "atomic create-ref admission",
+        "direct-launch bypass audit"
+      ],
+      "fresh_reuse_plan": "Next protected scientific launcher must use the live runner guard contract."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse verified local 39/39 suite",
+        "reuse live atomic-ref qualification",
+        "reuse merged PR evidence"
+      ],
+      "search_stop_decision": "No further route discovery needed for a receipt-only canonicalization.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current runner and Brain main refreshed immediately before receipt branch."
+    },
+    "routes_considered": [
+      "RECORD_EXISTING_VERIFIED_CUTOVER_RECEIPT",
+      "REIMPLEMENT_GUARD_IN_BRAIN",
+      "RUN_NEW_PROBE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "NEW_SCIENTIFIC_EXECUTION",
+      "PARENT_REPLAY",
+      "SECOND_LOCK_SERVICE",
+      "PROTECTED_COORDINATION_BRANCH_DEPENDENCY"
+    ],
+    "selected_surviving_route": "RECORD_EXISTING_VERIFIED_CUTOVER_RECEIPT",
+    "why_selected_route_is_fastest_sufficient": "It records the real effect with zero execution, zero spend, and no frontier perturbation.",
+    "expected_parent_level_state_change": "NONE",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T07:26:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RECORD_EXISTING_VERIFIED_CUTOVER_RECEIPT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "DIRECT_PROBE"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main dd6549fea72d378e9b057048fd78e9fef04d44db and duplicate-execution law"
+        ],
+        "DIRECT_PROBE": [
+          "runner cutover f2335a12a5137f683b0660ec20aba6e45dc388cc",
+          "live status b1d5ada6b827098e24d795c41c02545c12fd8fc1",
+          "PR156 guard regression PASS"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [],
+      "negative_search_summary": "No alternative can improve a receipt-only reconciliation without adding work or execution risk.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RECORD_EXISTING_VERIFIED_CUTOVER_RECEIPT",
+      "refresh_triggers": [
+        "IF_RUNNER_MAIN_CHANGES_GUARD_SEMANTICS",
+        "IF_GUARD_REF_NAMESPACE_CHANGES",
+        "IF_REPOSITORY_PROTECTION_CHANGES"
+      ]
+    }
+  }
+}
