@@ -63,6 +63,11 @@
       "id": "MODEL_INDEPENDENCE_INFERRED_INSTEAD_OF_RUNTIME_DERIVED",
       "observed_incident": "Goal runtime did not uniformly stamp cognition dependency provenance on every result path.",
       "must_fail_or_resolve": "Runtime must derive cognition provenance. Cognitive capability credit requires task evidence with runtime-derived zero model dependency; advisory-model execution is ineligible."
+    },
+    {
+      "id": "VERIFIED_PROMOTION_LEAVES_STALE_FRONTIER",
+      "observed_incident": "Objective-anchored evidence extraction was independently qualified and promoted while CANONICAL_POINTER temporarily remained on the already-satisfied extraction blocker even after hierarchy, queue, and scoreboard had advanced.",
+      "must_fail_or_resolve": "Any verified narrow acquisition receipt with nonempty next_causal_gap must atomically advance hierarchy, scoreboard active subcapability, active frontier target residual gap, and the already-required pointer/queue mirrors before ordinary implementation can proceed."
     }
   ],
   "unknown_error_containment": [
