@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_TASK_A_CAUSAL_RECONCILIATION_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "TASK_A_SPENT_ONCE__DEEPER_TERMINAL_GAP_LOCALIZED__NO_PROMOTION_CREDIT",
+  "source": {
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 66,
+    "public_run_id": 36670981076,
+    "job_id": 109745705157,
+    "artifact_id": 11077589879,
+    "artifact_digest": "sha256:ee2d095c5615ad7d4e355fbe60b5ba8eec805285d594e5237a06611d94993ab3",
+    "carrier_head_sha": "7ba218bf0cc5eb1d8ca7a6bf0283df2a594bfd1e",
+    "brain_base_at_execution": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "runtime_blob": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9"
+  },
+  "admission": {
+    "parent_runtime_closure_run_id": 36670980981,
+    "parent_runtime_closure": "PASS",
+    "provenance_and_target_mirror_run_id": 36670981079,
+    "provenance_and_target_mirror": "PASS",
+    "numeric_relation_regression_run_id": 36670981058,
+    "numeric_relation_regression": "PASS",
+    "prestart_hash_bug_repair": "Carrier-only correction of Git blob framing from literal backslash-zero bytes to the required NUL separator; prior PR47 stopped before producer execution with execution_count=0."
+  },
+  "producer": {
+    "task_executed": true,
+    "execution_count": 1,
+    "parent_task_completed": false,
+    "model_planner_disabled": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "independent_oracle_executed": false,
+    "replay_allowed": false
+  },
+  "prior_diagnosis": {
+    "blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "disposition": "REFINED__NON_TERMINAL_TRIGGER_IN_THIS_RUNTIME_PATH",
+    "reason": "The runtime catches the compilation miss and enters its autonomous capability-discovery/acquisition fallback. The later one-shot execution continued through that branch, so the compilation miss is not the terminal causal blocker."
+  },
+  "terminal_gap": {
+    "blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "runtime_terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "runtime_error_class": "CAPABILITY_ACQUISITION_REQUIRED",
+    "observed_supplier_failures": [
+      "AutoAcquisitionFailure:APT_ORIGIN_MISSION_PATH_INVALID:",
+      "AutoPyPIAcquisitionFailure:PYPI_ORIGIN_MISSION_PATH_INVALID:"
+    ],
+    "trace": [
+      "The producer harness invoked public runtime.run_goal(step, mission) with a mission object containing mission_id and goal but no _runtime_mission_path.",
+      "astra_runtime autonomous acquisition calls auto.dispatch(..., str(mission.get('_runtime_mission_path') or ''), ...).",
+      "APT and PyPI acquisition independently require origin_mission_path to resolve to a direct file under canonical/astra_runtime/missions before they may create replay/promotion evidence.",
+      "The empty path therefore fails closed before supplier contract acquisition can proceed."
+    ],
+    "classification": "ENTRYPOINT_AND_MISSION_IDENTITY_PROPAGATION",
+    "not_supported_as_cause": [
+      "supplier recall failure",
+      "package score threshold failure",
+      "model cognition dependency",
+      "incremental spend",
+      "task-specific quantitative logic"
+    ]
+  },
+  "route_recomputation": {
+    "deletion_first": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "selected_route": "REUSE_EXISTING_CANONICAL_ASTRA_MISSION_ENTRYPOINT",
+    "reason": "astra_runtime.main already canonicalizes a mission path, hashes the mission, stores it in runtime state, and injects _runtime_mission_path before goal execution. Reusing that existing path is strictly smaller than changing acquisition semantics or adding task-specific logic.",
+    "runtime_repair_required_before_canary": false,
+    "next_action": "REUSE_CANONICAL_ASTRA_MISSION_ENTRYPOINT_TO_PROPAGATE_RUNTIME_MISSION_IDENTITY__VALIDATE_WITH_FRESH_NON_PARENT_CANARY__THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A"
+  },
+  "governance": {
+    "same_task_replay_forbidden": true,
+    "renamed_same_objective_replay_forbidden": true,
+    "parent_promotion_authorized": false,
+    "capability_credit_delta": 0
+  }
+}
