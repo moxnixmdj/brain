@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRONTIER_SCOPE_CORRECTION_V1",
+  "status": "PARENT_PATH_INTEGRATION_GAP_PROVEN__HTTP2_TASK_FROZEN_UNSPENT_AND_DEFERRED",
+  "canonical_base_commit": "a85b21811c62560ab6657b061c902f632d9d367c",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "observed_mismatch": {
+    "canonical_claim": "FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "runtime_fact": [
+      "open_research_source_frontend does not invoke objective_claim_operand_binding",
+      "source frontend reports RELATION_EVALUATION=NOT_STARTED after evidence extraction",
+      "astra_runtime raises OPEN_ENDED_RESEARCH_EVIDENCE_EXTRACTED__CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED"
+    ],
+    "guarded_verified_child": {
+      "capability": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+      "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+      "qualification_authority": "GLOBAL_EXECUTION_GUARD_ATOMIC_ADMISSION_V1",
+      "run_id": 36686583882,
+      "job_id": 109793738883,
+      "artifact_id": 11083254225,
+      "artifact_digest": "sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d"
+    }
+  },
+  "corrected_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+  "corrected_next_action": "INTEGRATE_VERIFIED_CLAIM_SPEC_BINDER_AND_GENERIC_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_SOURCE_FRONTEND__QUALIFY_NON_PARENT__PRESERVE_TRUTH_AND_SUFFICIENCY_UNVERIFIED__DEFER_HTTP2_PARENT_EXECUTION",
+  "frozen_parent_task": {
+    "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+    "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+    "domain": "NETWORK_PROTOCOLS_HTTP2_FLOW_CONTROL_LIMITS",
+    "physical_execution_count": 0,
+    "freshness": "UNSPENT",
+    "execution_status": "DEFERRED_PENDING_PARENT_PATH_INTEGRATION_QUALIFICATION",
+    "replay_allowed": false
+  },
+  "counter_effects": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "parent_capability_promoted": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
