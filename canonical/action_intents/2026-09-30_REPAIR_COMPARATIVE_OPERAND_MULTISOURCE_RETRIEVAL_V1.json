@@ -1,0 +1,285 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-COMPARATIVE-OPERAND-MULTISOURCE-RETRIEVAL-20260930-V1",
+  "status": "PROPOSED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "COMPARATIVE_OBJECTIVE_COLLAPSED_TO_SINGLE_SOURCE_SELECTION__PER_OPERAND_EVIDENCE_ACQUISITION_REQUIRED",
+  "action_kind": "GENERIC_SOURCE_PIPELINE_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::COMPARATIVE_OBJECTIVE_COLLAPSED_TO_SINGLE_SOURCE_SELECTION__PER_OPERAND_EVIDENCE_ACQUISITION_REQUIRED",
+  "expected_parent_frontier_change": "QUALIFY_MODEL_INDEPENDENT_COMPARATIVE_OPERAND_AWARE_MULTI_SOURCE_RETRIEVAL_AND_MERGED_EVIDENCE_BINDING__NO_PARENT_CREDIT_UNTIL_NEW_PARENT_TASK",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Materials parent Task C run 36698638943 spent/no-replay; artifact 11089076913.",
+    "Artifact shows 12 provenance-verified candidates but global single-source relevance selected an ignition paper and direct DOI materialization failed 403.",
+    "Metadata-anchored retry inherited the wrong selected title and failed; the same refined candidate set contained an NBS 304 thermal-conductivity report that global single-source selection did not preserve as an operand-specific source.",
+    "Existing objective_claim_operand_binding explicit relation grammar, open-web discovery, provenance verification, BM25 relevance, selected-source materialization, evidence extraction, and deterministic relation evaluator inspected.",
+    "No existing multi-source or per-operand research route found in Brain.",
+    "No competing open Brain PR owns this blocker."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__EARLIEST_GENERIC_COMPARATIVE_SOURCE_ROUTING_GAP_LOCALIZED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Qualify exact authored regressions plus one independent fresh non-parent comparative fixture proving distinct operand queries, distinct verified sources, merged evidence units, relation binding, and fail-closed behavior when either operand lacks admissible evidence. Never replay materials Task C; no parent credit from repair alone.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83",
+    "real_outcome": "Prevent explicit comparative research objectives from losing valid evidence because the source frontend forces both operands through one globally selected source.",
+    "required_capability": "MODEL_INDEPENDENT_COMPARATIVE_OPERAND_AWARE_MULTI_SOURCE_RETRIEVAL_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire independently provenance-verified and relevant evidence for each decision operand, then evaluate the original comparison from merged auditable evidence.",
+      "proxy_goals_deleted": [
+        "materials replay",
+        "source whitelist",
+        "hard-coded aluminum or steel queries",
+        "model reranker",
+        "new search provider"
+      ],
+      "surviving_necessity": "Repair the generic single-source assumption exposed by the fresh parent task."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "objective_claim_operand_binding explicit relation parser",
+        "open_web_source_candidate_discovery",
+        "source_candidate_provenance_verify",
+        "objective_relevance_bm25",
+        "objective_evidence_unit_extract",
+        "generic_evidence_claim_relation"
+      ],
+      "external_existing_routes_checked": [
+        "Crossref REST metadata",
+        "OpenAlex search API",
+        "Semantic Scholar Academic Graph API",
+        "existing Brain scholarly admission/materialization repair"
+      ],
+      "capability_work_deleted": [
+        "no new search backend",
+        "no new relation evaluator",
+        "no source-specific ontology",
+        "no model"
+      ],
+      "surviving_gap": "The source frontend chooses one source for the full comparison and evaluates each extraction independently; it cannot acquire one source per operand and merge evidence before relation binding."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic orchestration defect for explicit comparative objectives.",
+      "delete_bypass_substitute_options": [
+        "Reuse existing explicit relation parser to derive operand evidence queries.",
+        "Reuse existing discovery/provenance/relevance/materialization/extraction stack per operand.",
+        "Merge only verified extraction units and reuse existing relation binder.",
+        "Fail closed when either operand cannot be independently grounded."
+      ],
+      "surviving_causal_blocker": "COMPARATIVE_OBJECTIVE_COLLAPSED_TO_SINGLE_SOURCE_SELECTION__PER_OPERAND_EVIDENCE_ACQUISITION_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_EXISTING_RELATION_PARSE_PLUS_EXISTING_SOURCE_PIPELINE_PER_OPERAND_AND_MERGE_VERIFIED_EVIDENCE",
+        "STRENGTHEN_SINGLE_SOURCE_BM25_ONLY",
+        "ADD_NEW_MULTI_SOURCE_SEARCH_PROVIDER",
+        "MODEL_RERANKER"
+      ],
+      "losing_routes_reason": "Single-source ranking cannot guarantee evidence for both operands; new providers and models add machinery without deleting the internal orchestration defect.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use adversarial fixtures where no single candidate supports both operands; require two distinct query routes, two provenance/relevance admissions, merged evidence with preserved source URLs, successful original relation binding, and fail-closed behavior if one operand source is absent."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "single-source comparative metadata-refinement as sufficient parent route"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "relation parsing",
+        "source discovery",
+        "provenance",
+        "relevance",
+        "materialization",
+        "evidence extraction",
+        "relation evaluation"
+      ],
+      "fresh_reuse_plan": "After independent qualification, freeze a new materially different parent Task D. Never replay spent materials Task C."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact Task-C artifact",
+        "reused existing source stack",
+        "reused explicit relation grammar"
+      ],
+      "search_stop_decision": "The first generic information-loss seam is exact and every primitive needed except multi-source orchestration already exists.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No external search provider removes the need to route comparative operands independently through already-qualified internal source primitives."
+    },
+    "routes_considered": [
+      "COMPOSE_EXISTING_RELATION_PARSE_PLUS_EXISTING_SOURCE_PIPELINE_PER_OPERAND_AND_MERGE_VERIFIED_EVIDENCE",
+      "STRENGTHEN_SINGLE_SOURCE_BM25_ONLY",
+      "ADD_NEW_MULTI_SOURCE_SEARCH_PROVIDER",
+      "MODEL_RERANKER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_REPLAY",
+      "SOURCE_WHITELIST",
+      "SINGLE_SOURCE_ONLY_REPAIR",
+      "NEW_SEARCH_PROVIDER",
+      "MODEL_RERANKER"
+    ],
+    "selected_surviving_route": "COMPOSE_EXISTING_RELATION_PARSE_PLUS_EXISTING_SOURCE_PIPELINE_PER_OPERAND_AND_MERGE_VERIFIED_EVIDENCE",
+    "why_selected_route_is_fastest_sufficient": "It changes only comparative orchestration and reuses all verified discovery, provenance, relevance, materialization, extraction, and relation primitives already in Brain.",
+    "expected_parent_level_state_change": "QUALIFY_MODEL_INDEPENDENT_COMPARATIVE_OPERAND_AWARE_MULTI_SOURCE_RETRIEVAL_AND_MERGED_EVIDENCE_BINDING__NO_PARENT_CREDIT_UNTIL_NEW_PARENT_TASK",
+    "stop_condition": "Implement and independently qualify generic per-operand comparative retrieval only. Do not replay materials Task C and do not award parent capability credit.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T09:52:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "COMPOSE_EXISTING_RELATION_PARSE_PLUS_EXISTING_SOURCE_PIPELINE_PER_OPERAND_AND_MERGE_VERIFIED_EVIDENCE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+          "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+          "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py",
+          "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+          "materials Task C artifact 11089076913"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+          "https://help.openalex.org/api/searching/",
+          "https://api.semanticscholar.org/api-docs/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Existing Brain source pipeline exact current-base code; no external implementation dominates the internal orchestration-only repair."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Prior same-day challenger frontier for scholarly source retrieval remains within lease; new failure localizes an internal multi-source orchestration defect rather than supplier absence."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "comparative research per operand source retrieval evidence merge deterministic"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Crossref OpenAlex Semantic Scholar comparative evidence retrieval"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "multi source evidence merge explicit relation operands deterministic Python"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 model independent comparative research evidence retrieval"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "NEW_MULTI_SOURCE_SEARCH_PROVIDER",
+          "evidence": [
+            "Crossref/OpenAlex/Semantic Scholar can broaden recall but do not repair Brain's one-selected-source orchestration."
+          ],
+          "qualification_evidence": [
+            "Current Task-C artifact already contains relevant evidence families inside existing discovery output."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Supplier breadth does not guarantee separate evidence per operand.",
+            "CAPABILITY_STRENGTH": "Potential recall gain only.",
+            "WALL_CLOCK": "More integration than composing existing primitives.",
+            "INCREMENTAL_COST": "Adds dependencies and possible rate limits.",
+            "RELIABILITY": "Larger external surface.",
+            "VERIFIABILITY": "Internal composition is smaller and directly testable."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger deletes the internal need to route explicit comparative operands independently through evidence acquisition.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COMPOSE_EXISTING_RELATION_PARSE_PLUS_EXISTING_SOURCE_PIPELINE_PER_OPERAND_AND_MERGE_VERIFIED_EVIDENCE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T09:52:00Z",
+        "max_age_hours": 2,
+        "selected_route": "COMPOSE_EXISTING_RELATION_PARSE_PLUS_EXISTING_SOURCE_PIPELINE_PER_OPERAND_AND_MERGE_VERIFIED_EVIDENCE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_CURRENT_SOURCE_PIPELINE",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:52:00Z",
+            "evidence": [
+              "Current main 5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83 inspected; required modules present."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_QUALIFICATION_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:50:36Z",
+            "evidence": [
+              "Materials guarded run 36698638943 physically started and produced terminal artifact 11089076913."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
