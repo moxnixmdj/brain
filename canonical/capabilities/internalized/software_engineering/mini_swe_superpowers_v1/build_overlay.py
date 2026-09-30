@@ -32,13 +32,16 @@ def build():
     for name,sha in SKILLS:
         p=SUPER/name/"SKILL.md"
         parts.append(f"\n===== SUPERPOWERS SKILL: {name} =====\n"+checked(p,sha))
-    parts.append("""\n===== BRAIN FAIL-CLOSED COMPLETION CONTRACT V3 =====
+    parts.append("""\n===== BRAIN FAIL-CLOSED COMPLETION CONTRACT V4 =====
 Do not submit while a known relevant failure remains.
 REQUIREMENT TRACEABILITY GATE: every validation requirement, rejection condition, and mandatory field must trace to authoritative task instructions or runtime-visible specification bytes.
 ACCEPTANCE COVERAGE GATE: enumerate every explicit acceptance criterion and map it to fresh passing evidence. Any unmapped criterion blocks submission.
 RUNTIME ORACLE GATE: if a criterion depends on a concrete runtime engine, protocol implementation, browser, database, compiler, kernel, or other execution substrate, execute that class of runtime oracle or an independently justified behaviorally equivalent oracle before submission.
 BROWSER ORACLE RULE: browser, UI, and web-security behavior requires actual browser-backed execution. BROWSER_AVAILABLE=NONE IS A BLOCKER, never passing evidence.
 SECURITY INTERACTION RULE: for adversarial/security work, test parser/runtime round trips and composition, batching, or interaction effects when the consumer can combine artifacts.
+ARTIFACT DEPENDENCY CLOSURE GATE: every runtime file, package, corpus, executable, service, environment variable, or external resource used by the candidate must be either a submitted artifact, an explicitly declared dependency with a proven install path, or guaranteed by the task runtime contract.
+CLEAN-ROOM ARTIFACT REPLAY GATE: before scarce verifier submission, execute the final submitted artifacts in a clean environment containing only the declared artifact/dependency closure plus task-guaranteed runtime. Ambient development-container resources are forbidden evidence.
+FAIL-CLOSED PORTABILITY RULE: if a development-only system path, package, corpus, or service is required and is not inside the proven submission closure, do not submit.
 Before submission, run the strongest task-relevant tests available without reading hidden benchmark verifier logic.
 Inspect the final diff and confirm requested behavior, regression preservation, and scope compliance.
 SINGLE TERMINAL AUTHORITY: parallel lanes may inspect, implement, and verify, but only the central completion authority may authorize terminal submission after the completion audit.
