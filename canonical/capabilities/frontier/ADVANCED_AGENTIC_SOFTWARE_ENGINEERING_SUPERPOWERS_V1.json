@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
+  "real_capability": true,
+  "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "parent_families": [
+    "ADVANCED_AGENTIC_CODING"
+  ],
+  "useful_behavior": "Autonomously solve difficult repository-scale software-engineering tasks with disciplined design, planning, TDD, root-cause debugging, review, verification, parallelization when useful, and controlled integration.",
+  "frontier_reference": {
+    "target_supplier": "Claude Opus 5.5",
+    "target_bars": [
+      {
+        "evaluation": "Terminal-Bench 4.0",
+        "score_percent": 66.4
+      },
+      {
+        "evaluation": "FrontierCode v1.1 Main",
+        "score_percent": 54.4
+      },
+      {
+        "evaluation": "CursorBench 4.0 or matched direct behavioral equivalent",
+        "score_percent": 57.8
+      }
+    ],
+    "source_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+  },
+  "current_brain_route": {
+    "configuration": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "evaluation_protocol": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/EVALUATION_PROTOCOL_V1.json",
+    "status": "DIRECT_SEMANTIC_VERIFICATION_PASS__WHOLE_OPUS_5_5_BAR_UNPROVEN",
+    "current_opus_5_5_credit": 0
+  },
+  "prior_route_falsification": {
+    "candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
+    "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+    "disposition": "FALSIFIED_FOR_ADVANCEMENT__DO_NOT_REPAIR_SPENT_TASKS"
+  },
+  "residual_gap": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "next_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+  "promotion_rule": "NO_OWNERSHIP_CREDIT_UNTIL_THE_BRAIN_CONFIGURED_SUPERPOWERS_ROUTE_MEETS_OR_EXCEEDS_THE_OPUS_5_5_BAR_ON_THE_CLAIMED_SCOPE_WITH_INDEPENDENT_VERIFICATION_AND_CONFIGURATION_ATTRIBUTION.",
+  "incremental_spend_usd": 0
+}
