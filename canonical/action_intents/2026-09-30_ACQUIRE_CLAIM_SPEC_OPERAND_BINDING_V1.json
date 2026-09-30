@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "ACQUIRE-CLAIM-SPEC-OPERAND-BINDING-20260930-V1",
-  "status": "PROPOSED",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FRESH_CROSS_DOMAIN_PASS",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "0ef3f48e07ea0f05857c13aa5fed58437d979504",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -11,7 +11,7 @@
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
   "highest_leverage_now": true,
-  "expected_parent_frontier_change": "Acquire only bounded explicit numeric-comparison claim-spec generation across GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE plus exact quoted-claim binding, with unique lexical operand binding from objective plus integrity-checked generic V2 evidence; then invoke the already-verified claim/relation primitive. No truth or parent promotion.",
+  "expected_parent_frontier_change": "Acquire the bounded claim-spec/operand binder only. Parent remains unproven because open_research_source_frontend and astra_runtime do not yet invoke this verified child after generic evidence extraction. Advance exactly to parent-effective integration; keep factual correctness, source independence, evidence sufficiency, and truth unverified.",
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "orthogonal_recurrence_count": 0,
   "probe_specific": false,
@@ -344,5 +344,32 @@
   ],
   "probe_id": null,
   "precommitted_acceptance_gate_exception": false,
-  "probe_specific_literals": []
+  "probe_specific_literals": [],
+  "qualification": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 165,
+    "public_run_id": 36685349465,
+    "public_job_id": 109789819554,
+    "conclusion": "SUCCESS",
+    "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "regression_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+    "downstream_relation_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
+    "independent_scope": [
+      "GT",
+      "LT",
+      "GTE",
+      "LTE",
+      "EQ",
+      "NE",
+      "ABS_DIFF_LTE",
+      "EXACT_QUOTED_VERBATIM_SUPPORT",
+      "SINGLE_CHARACTER_ENTITY_DISCRIMINATORS",
+      "FULL_COVERAGE_ROLE_AMBIGUITY_FAIL_CLOSED",
+      "MULTIPLE_COMPATIBLE_VALUES_FAIL_CLOSED",
+      "THRESHOLD_UNIT_MISMATCH_FAIL_CLOSED",
+      "UNSUPPORTED_LANGUAGE_FAIL_CLOSED"
+    ],
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  }
 }
