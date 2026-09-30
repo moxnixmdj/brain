@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-PNG-STRUCTURE-LENGTHS-REAL-TASK-20260930-004",
+  "purpose": "Execute the frozen, fresh PNG binary-structure open-ended parent Task B exactly once through the canonical ASTRA runtime after the qualified broad-research routing repair. No prewired source, standards citation, numeric values, tool, command, calculation recipe, answer, or task-specific runtime patch.",
+  "goal": "Assess whether the PNG file signature is longer in bytes than the CRC field of a PNG chunk. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant format specification, determine how to extract and interpret the two structural lengths, choose and run a zero-cost verification method, identify material format-version or interpretation limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-png-structure-open-ended-parent-task-b",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-OPENENDED-PNG-STRUCTURE-LENGTHS-REAL-TASK-20260930-004.json",
+    "source_task_blob_sha": "dfbe1c917df0a31a6b41461f14f4260f96138579",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
