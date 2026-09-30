@@ -184,11 +184,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_REPLAY__INDEPENDENT_ORACLE",
+    "next_step": "RUN_AFFECTED_LAYER_OBS_TO_UNIFY_DIRECT_COMPOUND_COMPILER_WITH_EXISTING_PROPOSAL_BINDING_AUTHORITY__NO_PR277_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
+    "critical_blocker": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -265,7 +265,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__FRESH_REQUALIFICATION_ONLY",
+    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__DUPLICATE_BINDING_AUTHORITY",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -576,22 +576,22 @@
     "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
-      "event_id": "GROUNDED_COMPOSITION_PATH_PROVENANCE_REGRESSION_20260930",
+      "event_id": "COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930",
       "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-      "status": "REOPENED_BY_POST_PROMOTION_REGRESSION__PRIOR_BROAD_CREDIT_REVOKED",
-      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
-      "public_run_id": 36653756561,
+      "status": "FRESH_POST_REPAIR_REQUALIFICATION_FAILED__GENERIC_BINDING_SEAM_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1.json",
+      "public_run_id": 36656793034,
       "scoreboard": {
         "reusable_capabilities_inherited": 2,
         "verified_real_tasks_completed": 6,
         "fresh_reuse_passes": 1,
         "frontier_dependencies_removed": 1,
-        "residual_gaps_localized": 6
+        "residual_gaps_localized": 7
       }
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "GROUNDING_ACQUIRED__COMPOSITION_REPAIRED_AND_COMPONENT_VALIDATED__FRESH_REQUALIFICATION_PENDING__PARENT_BLOCKED",
+    "frontier_decomposition_status": "GROUNDING_ACQUIRED__COMPOSITION_REOPENED__DIRECT_COMPILER_BINDING_AUTHORITY_FALSIFIED__PARENT_BLOCKED",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
     "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "grounding_requalification": {
@@ -600,11 +600,9 @@
       "fresh_reuse_run_id": 36652623916
     },
     "grounded_composition_acquisition": {
-      "status": "REVOKED_BY_REGRESSION__REPAIR_VALIDATED__FRESH_REQUALIFICATION_PENDING",
-      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_VALIDATION_20260930_V1.json",
-      "previous_fresh_real_run_id": 36652169397,
-      "previous_fresh_reuse_run_id": 36652623916,
-      "post_promotion_falsification_run_id": 36653756561,
+      "status": "REVOKED__FRESH_POST_REPAIR_REQUALIFICATION_FAILED",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1.json",
+      "post_repair_failure_run_id": 36656793034,
       "capability_credit_restored": false
     },
     "last_frontier_reconciliation": {
