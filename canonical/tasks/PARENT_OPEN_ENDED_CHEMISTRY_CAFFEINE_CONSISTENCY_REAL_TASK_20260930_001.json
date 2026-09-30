@@ -5,7 +5,7 @@
   "domain": "CHEMISTRY_QUANTITATIVE_DATA_CONSISTENCY_RESEARCH",
   "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
   "source_task_replay": false,
-  "producer_prompt": "Using authoritative current public evidence, determine whether caffeine's reported molecular formula and reported molecular weight are quantitatively self-consistent to within 0.05%. Discover and justify the knowledge sources and tools you need, perform the quantitative analysis, independently verify the consequential numerical conclusion, preserve provenance, and produce a reproducible decision-quality result. Use zero model cognition and zero incremental spend.",
+  "producer_prompt": "Using authoritative current public evidence, determine whether caffeine's reported molecular formula and reported molecular weight are quantitatively self-consistent to within 0.05%. Discover and justify the knowledge sources and tools you need, perform the quantitative analysis, independently verify the consequential numerical conclusion, preserve provenance, and produce a reproducible decision-quality result. Save the final result to canonical/astra_runtime/tmp/PARENT_OPEN_ENDED_CAFFEINE_RESULT.json. Use zero model cognition and zero incremental spend.",
   "acceptance_contract": {
     "objective_only_prompt": true,
     "producer_source_urls_predeclared": false,
@@ -38,5 +38,21 @@
     "verifier_may_use_independently_selected_authoritative_sources_after_terminal_producer_state": true
   },
   "expected_answer_precommitted": false,
-  "freeze_note": "Objective and acceptance contract frozen before any task-specific source selection, URL probe, tool selection, formula lookup, or answer computation."
+  "freeze_note": "Objective and acceptance contract frozen before any task-specific source selection, URL probe, tool selection, formula lookup, or answer computation.",
+  "required_output": {
+    "output_path": "canonical/astra_runtime/tmp/PARENT_OPEN_ENDED_CAFFEINE_RESULT.json",
+    "required_fields": [
+      "status",
+      "conclusion",
+      "discovered_sources",
+      "selected_tools",
+      "decomposition",
+      "quantitative_analysis",
+      "independent_verification",
+      "provenance",
+      "reusable_method",
+      "model_dependency_count"
+    ],
+    "note": "Output contract only. It does not prescribe sources, tools, decomposition, or calculation method."
+  }
 }
