@@ -57,5 +57,13 @@
     "ownership_package_test": "PENDING_FINAL_VERIFICATION_EVIDENCE"
   },
   "opus_5_5_credit": 0,
-  "next_required_action": "Run comparative coding evaluation on an approved general cognition substrate. The configured Brain route itself must meet/exceed the Opus 5.5 coding bar before ownership promotion."
+  "next_required_action": "Run comparative coding evaluation on an approved general cognition substrate. The configured Brain route itself must meet/exceed the Opus 5.5 coding bar before ownership promotion.",
+  "verification_progress": {
+    "status": "DIRECT_SEMANTIC_VERIFICATION_PASS__WHOLE_OPUS_5_5_BAR_UNPROVEN",
+    "evidence": [
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json"
+    ],
+    "capability_credit_delta": 0,
+    "next_required_action": "MULTI_TASK_SAME_SUBSTRATE_COMPARATIVE_VERIFICATION_WITH_MATCHED_OPUS_5_5_BAR"
+  }
 }
