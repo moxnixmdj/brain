@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-CHEMISTRY-ETHANOL-COMBUSTION-MASS-BALANCE-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRY_QUANTITATIVE_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "sources": [
+    {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ethanol/property/MolecularFormula,MolecularWeight/JSON",
+      "molecular_formula_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularFormula"
+      ],
+      "molecular_weight_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "expected_formula": "C2H6O"
+    },
+    {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxygen/property/MolecularFormula,MolecularWeight/JSON",
+      "molecular_formula_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularFormula"
+      ],
+      "molecular_weight_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "expected_formula": "O2"
+    },
+    {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/carbon%20dioxide/property/MolecularFormula,MolecularWeight/JSON",
+      "molecular_formula_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularFormula"
+      ],
+      "molecular_weight_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "expected_formula": "CO2"
+    },
+    {
+      "authority": "NIH/NLM PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularFormula,MolecularWeight/JSON",
+      "molecular_formula_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularFormula"
+      ],
+      "molecular_weight_json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "expected_formula": "H2O"
+    }
+  ],
+  "scientific_contract": {
+    "balanced_reaction": "C2H6O + 3 O2 -> 2 CO2 + 3 H2O",
+    "reactant_mass_rule": "reactant_mass = ethanol_mw + 3 * oxygen_mw",
+    "product_mass_rule": "product_mass = 2 * carbon_dioxide_mw + 3 * water_mw",
+    "max_abs_mass_delta_g_per_stoich": 0.1,
+    "agreement_rule": "PASS if abs(reactant_mass-product_mass) <= 0.1, otherwise FAIL",
+    "numeric_inputs_must_be_parsed_from_live_sources": true
+  },
+  "goal_text": "Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ethanol/property/MolecularFormula,MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_ETHANOL_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxygen/property/MolecularFormula,MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_OXYGEN_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/carbon%20dioxide/property/MolecularFormula,MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_CARBON_DIOXIDE_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularFormula,MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_WATER_MW.json. Calculate the stoichiometric reactant molar mass using reactant_mass = ethanol_mw + 3 * oxygen_mw. Calculate the stoichiometric product molar mass using product_mass = 2 * carbon_dioxide_mw + 3 * water_mw. Determine whether the reactant and product molar masses differ by at most 0.1. Save the verified result with source provenance and model_dependency_count 0 to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_ETHANOL_COMBUSTION_RESULT.json.",
+  "required_output": {
+    "fields": [
+      "status",
+      "source_urls",
+      "ethanol_mw",
+      "oxygen_mw",
+      "carbon_dioxide_mw",
+      "water_mw",
+      "reactant_mass",
+      "product_mass",
+      "absolute_mass_delta",
+      "agreement",
+      "provenance",
+      "model_dependency_count"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PARENT_CHEMISTRY_ETHANOL_COMBUSTION_RESULT.json"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch all four exact PubChem URLs outside the Brain producer, independently verify molecular formulas, extract MolecularWeight values, recompute both stoichiometric masses and their absolute delta in Python, and compare consequential fields.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false
+}
