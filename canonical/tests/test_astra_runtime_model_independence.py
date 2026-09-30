@@ -27,6 +27,9 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertEqual(result["returncode"], 0)
         self.assertEqual(result["controller_mode"], "MODEL_INDEPENDENT_ACTION_PLAN")
         self.assertIsNone(result["planner_model_last"])
+        self.assertEqual(result.get("model_dependency_count"), 0)
+        self.assertEqual((result.get("cognition_provenance") or {}).get("dependency_class"), "MODEL_INDEPENDENT")
+        self.assertEqual((result.get("cognition_provenance") or {}).get("model_dependencies"), [])
         self.assertIn("MODEL_INDEPENDENT_GOAL_COMPLETE", result["stdout"])
 
     def test_registry_inheritance_preserves_declared_result_fields(self):
@@ -258,6 +261,9 @@ class ModelIndependenceTests(unittest.TestCase):
             )
         self.assertEqual(result["controller_mode"], "OPTIONAL_MODEL_ADVISORY")
         self.assertEqual(result["planner_model_last"], "stub")
+        self.assertEqual(result.get("model_dependency_count"), 1)
+        self.assertEqual((result.get("cognition_provenance") or {}).get("dependency_class"), "MODEL_ASSISTED")
+        self.assertEqual((result.get("cognition_provenance") or {}).get("model_dependencies"), ["stub"])
         self.assertIn("OPTIONAL_MODEL_ROUTE_USED", result["stdout"])
 
     def test_model_observation_envelope_preserves_full_sequence_and_valid_json(self):
