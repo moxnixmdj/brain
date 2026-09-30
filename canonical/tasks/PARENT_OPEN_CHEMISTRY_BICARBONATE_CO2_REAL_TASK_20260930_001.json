@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-OPEN-CHEMISTRY-BICARBONATE-CO2-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRY_GAS_QUANTITATIVE_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "user_question": "At 25 °C and 1 atm, can 50 g of sodium bicarbonate, with acetic acid available in excess, generate at least 10 L of carbon dioxide? Determine the answer from authoritative sources and provide a reproducible quantitative justification.",
+  "open_ended_contract": {
+    "prewired_sources": false,
+    "prewired_urls": false,
+    "prewired_json_paths": false,
+    "prewired_formula": false,
+    "prewired_tool_chain": false,
+    "source_selection_must_be_performed_by_system": true,
+    "decomposition_must_be_performed_by_system": true,
+    "tool_selection_must_be_performed_by_system": true,
+    "quantitative_reasoning_required": true,
+    "authoritative_source_requirement": "Use authoritative primary, governmental, standards, or high-quality scientific reference sources sufficient to support all consequential constants and chemistry claims.",
+    "reproducibility_requirement": "Preserve source provenance and all consequential intermediate quantities so an independent verifier can reconstruct the answer."
+  },
+  "required_output": {
+    "fields": [
+      "status",
+      "selected_sources",
+      "source_selection_rationale",
+      "problem_decomposition",
+      "selected_tools",
+      "chemical_reaction_basis",
+      "limiting_reagent_reasoning",
+      "consequential_source_values",
+      "calculation_chain",
+      "co2_volume_L",
+      "threshold_L",
+      "predicate",
+      "conclusion",
+      "limitations",
+      "provenance",
+      "model_dependency_count"
+    ]
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "no_source_or_formula_injection_after_freeze": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Independently inspect the producer-selected authoritative sources, verify every consequential chemistry claim and numeric value, independently recompute the limiting-reagent and gas-volume result without importing producer modules, and compare the final predicate and conclusion scope.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "anti_leakage": {
+    "source_providers_in_task_manifest": false,
+    "source_urls_in_task_manifest": false,
+    "source_values_in_task_manifest": false,
+    "formula_in_task_manifest": false,
+    "tool_chain_in_task_manifest": false,
+    "answer_in_task_manifest": false
+  },
+  "freeze_note": "Scientific question, conditions, acceptance threshold, open-endedness requirements, execution constraints, and verification contract frozen before source/provider/tool discovery."
+}
