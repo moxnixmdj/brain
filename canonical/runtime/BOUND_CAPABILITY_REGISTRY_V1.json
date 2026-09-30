@@ -3047,6 +3047,110 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "source.evidence.extract.objective_grounded.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "source.candidate.provenance.verified",
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "provides": [
+        "source.evidence.objective_grounded_units",
+        "source.evidence.verbatim_provenance_bound"
+      ],
+      "result_fields": [
+        "status",
+        "evidence_extraction_status",
+        "source_url",
+        "page_raw_sha256",
+        "visible_text_sha256",
+        "evidence_unit_count",
+        "evidence_units",
+        "claim_relation_status",
+        "factual_correctness_status",
+        "evidence_sufficiency_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "keywords": [
+        "source",
+        "evidence",
+        "extract",
+        "objective",
+        "grounded",
+        "verbatim",
+        "provenance",
+        "bm25",
+        "relevance",
+        "hash",
+        "offset",
+        "research"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}",
+          "timeout": 20,
+          "max_units": 10
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "objective_evidence_unit_extract",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Requires a live-retrieval provenance receipt and independently-qualified objective-relevance receipt bound to the same candidate.",
+        "Fresh retrieval must resolve to the exact admitted source URL; source identity drift fails closed.",
+        "ROR/organization identity is optional metadata and is not an admission prerequisite.",
+        "Proves verbatim objective-grounded evidence units only; support, entailment, factual correctness, causality, quality, sufficiency, and independence remain unverified."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "html",
+          "ipaddress",
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request",
+          "html.parser"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_PUBLIC_NON_ROR_CROSS_DOMAIN_QUALIFICATION_PASS",
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_pr": 158,
+        "public_run_id": 36680967490,
+        "public_job_id": 109776102956,
+        "producer_git_blob": "6598ba92307c55fe6e645b4ecba070d2259818e2",
+        "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+        "exact_runner_blob_match": true,
+        "live_domains": [
+          "sqlite.org",
+          "docs.python.org"
+        ],
+        "independent_refetch_oracle": true,
+        "authority_identity_required": false,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

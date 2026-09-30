@@ -1,0 +1,300 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-GENERIC-EVIDENCE-EXTRACTION-COVERAGE-20260930-V1",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_NON_ROR_CROSS_DOMAIN_PASS",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "9a6b96575636b4a975a67c90a95d41aa9d31840c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Close the generic non-ROR evidence-extraction coverage gap by composing qualified live retrieval provenance + qualified BM25 objective relevance + fresh exact same-source deterministic visible-text extraction. Preserve ROR identity only as optional metadata and preserve support/correctness/sufficiency as later gates.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "scope correction merged at 9a6b96575636b4a975a67c90a95d41aa9d31840c",
+    "qualified source_candidate_provenance_verify",
+    "qualified objective_relevance_bm25 producer 95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+    "qualified exact-ROR-bound relevant_source_evidence_extract child",
+    "closed PR #416 universal-ROR defect audit",
+    "closed stale PR #420 generic candidate mechanics",
+    "public runner PR #153 independent refetch passage oracle"
+  ],
+  "evidence_presence_classification": "GENERIC_CAPABILITY_UNPROVEN__NARROW_ROR_CHILD_VERIFIED__CANDIDATE_MECHANICS_EXIST",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exact producer and parent-effective frontend bytes pass authored fail-closed regressions plus independent fresh live multi-domain qualification using non-ROR admission, exact same-source refetch, verbatim containment, hash/offset checks, and negative controls; then promote only generic extraction and advance to relation evaluation without parent replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_gap_if_qualified": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9a6b96575636b4a975a67c90a95d41aa9d31840c",
+    "real_outcome": "Give the open-ended research runtime a generic model-independent route from provenance-verified discovered web candidates to auditable evidence units without requiring organization registry coverage.",
+    "required_capability": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "obs_goal": {
+      "real_outcome": "Extract bounded auditable objective-grounded evidence units from useful web sources selected by the already-qualified generic relevance ranker.",
+      "proxy_goals_deleted": [
+        "re-prove exact-ROR first-party extraction",
+        "classify primary-source status",
+        "solve claim support during extraction",
+        "solve factual correctness during extraction",
+        "replay spent parent tasks",
+        "replace the qualified BM25 ranker"
+      ],
+      "surviving_necessity": "A generic source selected by qualified relevance must be convertible into exact-source evidence units before relation evaluation can be meaningfully generic."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "source_candidate_provenance_verify.py",
+        "objective_relevance_bm25.py",
+        "relevant_source_evidence_extract.py narrow ROR child",
+        "open_research_source_frontend.py",
+        "stale objective_evidence_unit_extract.py candidate",
+        "Python stdlib HTMLParser/hashlib/urllib"
+      ],
+      "external_existing_routes_checked": [
+        "Trafilatura-style main-text extraction",
+        "readability-style body extraction",
+        "jusText-style boilerplate removal"
+      ],
+      "capability_work_deleted": [
+        "No new crawler",
+        "No vector database",
+        "No model relevance judge",
+        "No ROR requirement",
+        "No primary-source classifier",
+        "No support/correctness classifier",
+        "No paid API"
+      ],
+      "surviving_gap": "Bind the qualified BM25 selection receipt to a provenance-verified candidate, freshly refetch that exact provenance URL, fail closed on identity drift, and emit bounded visible-text units with hashes/offsets and objective anchors."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic evidence-acquisition seam. The prior narrow ROR route proved extraction mechanics but did not satisfy the parent source-class scope.",
+      "delete_bypass_substitute_options": [
+        "Delete extraction rejected because downstream relation evaluation requires concrete source text.",
+        "Use discovery snippets rejected because they can be stale/incomplete and are not source bytes.",
+        "Reuse narrow ROR extractor universally rejected by the merged scope correction.",
+        "Use model extraction rejected because model independence and direct provenance are stronger and cheaper.",
+        "Compose qualified provenance + BM25 + fresh same-source stdlib extraction survives."
+      ],
+      "surviving_causal_blocker": "No independently qualified non-ROR generic evidence extraction route is integrated into the open research frontend."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Reuse generic candidate producer: provenance + qualified BM25 receipt + fresh exact same-source stdlib extraction",
+        "Wrap third-party main-text extractor with Brain provenance/relevance contract",
+        "Keep exact-ROR route as universal gate",
+        "Model/LLM extraction"
+      ],
+      "losing_routes_reason": "The stdlib route already contains the Brain-specific provenance/relevance/audit contract, adds no dependency, and can be independently checked by refetching the source. Third-party extractors still need the same contract wrapper; ROR is too narrow; model extraction is unnecessary.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run exact authored regressions, then use fresh live non-ROR-gated pages from materially different domains. Independently refetch without importing the producer and prove every emitted evidence unit is present in the independently reconstructed page; verify wrong candidate, wrong relevance receipt, redirect drift, irrelevant fresh page, and navigation-only anchors fail closed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "universal authority_identity filtering before evidence extraction",
+        "generic parent dependence on exact-ROR relevance admission"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "qualified BM25 candidate selection",
+        "fresh page identity binding",
+        "visible text block extraction",
+        "hash/offset evidence provenance"
+      ],
+      "fresh_reuse_plan": "Qualify the same exact bytes on at least two materially distinct live domains with no ROR admission input and an independent refetch oracle."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused current-base scope correction",
+        "Reused qualified generic BM25",
+        "Reused candidate extraction mechanics from stale branch without inheriting stale authority",
+        "Reused independent refetch oracle pattern from runner PR #153"
+      ],
+      "search_stop_decision": "The selected route composes already-qualified generic primitives and adds only deterministic stdlib extraction. Alternative extractors do not delete the Brain-specific provenance/relevance binding work and therefore cannot dominate enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh if qualification fails materially or before parent promotion."
+    },
+    "routes_considered": [
+      "PROVENANCE_PLUS_QUALIFIED_BM25_PLUS_FRESH_EXACT_SOURCE_STDLIB_EXTRACTION",
+      "THIRD_PARTY_MAIN_TEXT_EXTRACTOR_PLUS_BRAIN_WRAPPER",
+      "UNIVERSAL_ROR_EXTRACTION",
+      "MODEL_EVIDENCE_EXTRACTOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "UNIVERSAL_ROR_GATE",
+      "DISCOVERY_SNIPPET_AS_EVIDENCE_BODY",
+      "MODEL_EVIDENCE_EXTRACTOR",
+      "PRIMARY_SOURCE_CLASSIFIER"
+    ],
+    "selected_surviving_route": "PROVENANCE_PLUS_QUALIFIED_BM25_PLUS_FRESH_EXACT_SOURCE_STDLIB_EXTRACTION",
+    "why_selected_route_is_fastest_sufficient": "It reuses two independently qualified generic primitives, needs only stdlib parsing/hashing for the missing transformation, has zero incremental spend, and exposes a simple independent verbatim-refetch oracle.",
+    "expected_parent_level_state_change": "Close generic evidence extraction only if exact bytes qualify; then advance the parent blocker to claim support/relation evaluation while preserving correctness/sufficiency as unverified.",
+    "stop_condition": "Exact producer and integration bytes independently qualify on fresh non-ROR-gated domains; negative controls fail closed; no parent task replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T06:53:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "NONE__GENERIC_NON_ROR_EXTRACTION_UNPROVEN",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "PUBLIC_INDEPENDENT_RUNNER",
+        "EXTERNAL_EXTRACTION_PACKAGES"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "qualified provenance verifier",
+          "qualified BM25 ranker",
+          "narrow ROR extraction receipt",
+          "scope correction merged at current base"
+        ],
+        "PUBLIC_INDEPENDENT_RUNNER": [
+          "runner PR #153 establishes independent refetch/verbatim-membership oracle pattern"
+        ],
+        "EXTERNAL_EXTRACTION_PACKAGES": [
+          "main-text extraction packages remain possible challengers but still require Brain-specific receipt binding"
+        ]
+      },
+      "challenger_routes": [
+        {
+          "route": "PROVENANCE_PLUS_QUALIFIED_BM25_PLUS_FRESH_EXACT_SOURCE_STDLIB_EXTRACTION",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Fail-closed qualified receipt/source identity binding and fresh-source drift guard",
+            "CAPABILITY_STRENGTH": "Generic across provenance-verified web sources with lexical relevance evidence",
+            "WALL_CLOCK": "Minimal reuse of candidate bytes",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "No new dependency",
+            "VERIFIABILITY": "Independent refetch + verbatim/hash checks"
+          }
+        },
+        {
+          "route": "THIRD_PARTY_MAIN_TEXT_EXTRACTOR_PLUS_BRAIN_WRAPPER",
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Useful boilerplate removal but still requires custom receipt/source binding",
+            "CAPABILITY_STRENGTH": "Potentially better article extraction but not required for minimum bridge",
+            "WALL_CLOCK": "Dependency integration plus wrapper",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Additional dependency surface",
+            "VERIFIABILITY": "High but no present advantage for required claim"
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger removes the need for the Brain-specific provenance + qualified relevance + exact-source audit contract; the stdlib candidate is the smallest sufficient surviving route.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "PROVENANCE_PLUS_QUALIFIED_BM25_PLUS_FRESH_EXACT_SOURCE_STDLIB_EXTRACTION",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_PARENT_PROMOTION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T06:53:00Z",
+        "max_age_hours": 2,
+        "selected_route": "PROVENANCE_PLUS_QUALIFIED_BM25_PLUS_FRESH_EXACT_SOURCE_STDLIB_EXTRACTION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "QUALIFIED_PROVENANCE_AND_BM25_PRIMITIVES",
+            "kind": "BRAIN_INHERITED",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:53:00Z",
+            "evidence": [
+              "source_candidate_provenance_verify on current main",
+              "objective_relevance_bm25 exact qualified producer blob 95d2b6bac6f6ffb5db97526407fcd22cbcc6c790"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VERIFICATION_CAPSULE_RUNNER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:53:00Z",
+            "evidence": [
+              "runner workflow 36679523741 completed success in current session"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  },
+  "qualification": {
+    "status": "PASS",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 158,
+    "public_workflow_run_id": 36680967490,
+    "public_job_id": 109776102956,
+    "exact_brain_base_commit": "9a6b96575636b4a975a67c90a95d41aa9d31840c",
+    "exact_blobs": {
+      "producer": "6598ba92307c55fe6e645b4ecba070d2259818e2",
+      "parent_frontend": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+      "objective_relevance_bm25": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+      "provenance_verifier": "1dc26e68d18010b66211d1d83f7b2024c8ad1fcf",
+      "authored_extractor_tests": "81bd70c3b30ac8a83a2f781dd130858e2a5ba7de",
+      "authored_bm25_route_tests": "c6dd4e33646758484572472ce24f8d7cc9bf1886",
+      "parent_integration_test": "69445a30d93f3459be53e5f38e31149d311b6df2"
+    },
+    "exact_runner_blob_match": true,
+    "authored_extractor_regressions": "PASS",
+    "authored_generic_bm25_regressions": "PASS",
+    "parent_effective_non_ror_integration": "PASS",
+    "independent_fresh_live_generic_qualification": "PASS",
+    "live_domains": [
+      "sqlite.org",
+      "docs.python.org"
+    ],
+    "authority_identity_input_used": false,
+    "independent_refetch_visible_text_reconstruction": true,
+    "offsets_hashes_unit_ids_verified": true,
+    "non_selected_candidate_network_fail_closed": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+  "progress_credit": "VERIFIED_REUSABLE_GENERIC_SUBCAPABILITY_AND_NEXT_GAP_LOCALIZED"
+}
