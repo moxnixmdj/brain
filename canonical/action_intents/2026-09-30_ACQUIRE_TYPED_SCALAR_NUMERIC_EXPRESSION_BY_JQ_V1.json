@@ -1,0 +1,357 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-TYPED-SCALAR-NUMERIC-EXPRESSION-BY-JQ-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire a reusable model-independent typed scalar numeric-expression child using the already-bound verified jq route, qualify it on fresh non-astronomy real evidence, then return immediately to a new materially different parent real task. Do not replay astronomy and do not promote the parent from child evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+    "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json",
+    "astronomy one-shot run 36664896545 is spent and replay forbidden",
+    "first causal gap is typed scalar multiplication/exponentiation",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json: json.query.jq already VERIFIED_BOUND_CAPABILITY",
+    "canonical/runtime/bound_capabilities/jq_query.py already executes bounded repository-local jq transforms",
+    "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1 already proved result-reference + native JSON materialization + jq composition",
+    "closed PR292 proposed SymPy but did not evaluate already-bound jq as challenger",
+    "jq official manual documents numeric multiplication/division and pow() on IEEE754 doubles",
+    "SymPy remains preserved for exact/symbolic classes and is not deleted globally"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only a restricted typed scalar expression grammar over finite numeric constants and causally prior scalar results, lower it to already-bound json.query.jq, fail closed on ambiguous variable binding or unsafe syntax, qualify on fresh non-astronomy real data with independent recomputation, then return to a new parent task. No astronomy replay, no SymPy binding for this bounded gap, no arbitrary eval/sympify, no parent promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+    "real_outcome": "Close the astronomy-exposed generic typed scalar numeric-expression gap with the smallest already-inherited deterministic route, preserving causal provenance and model independence.",
+    "required_capability": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+    "obs_goal": {
+      "real_outcome": "Execute bounded scalar formulas with +, -, *, /, unary signs, and exponentiation over causally prior live numeric results, with unsafe or ambiguous expressions rejected.",
+      "proxy_goals_deleted": [
+        "replay astronomy",
+        "make the Eros formula pass specifically",
+        "bind all of SymPy",
+        "build a general programming language",
+        "use a model planner"
+      ],
+      "surviving_necessity": "A fresh parent task failed exactly because the current stack could fetch the inputs but could not execute the typed scalar formula."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "json.query.jq VERIFIED_BOUND_CAPABILITY",
+        "controller $result references",
+        "native write_json_records",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "EXACT_SYMBOLIC_COMPUTATION_V1 / SymPy 1.14.0",
+        "current deterministic goal compiler"
+      ],
+      "external_existing_routes_checked": [
+        "jq numeric arithmetic and pow",
+        "SymPy 1.14 programmatic numeric expressions",
+        "Python stdlib ast/operator restricted evaluator"
+      ],
+      "capability_work_deleted": [
+        "no new supplier",
+        "no new package dependency",
+        "no SymPy registry/adapter binding for this bounded floating-scalar gap",
+        "no arbitrary string evaluation",
+        "no astronomy-specific literals or formula",
+        "no model cognition"
+      ],
+      "surviving_gap": "The compiler lacks a generic restricted numeric-expression lowering and fail-closed variable-to-prior-result binding."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic compiler/dataflow reachability gap; arithmetic engine already exists.",
+      "delete_bypass_substitute_options": [
+        "delete astronomy replay",
+        "delete new supplier acquisition",
+        "reuse jq",
+        "reuse prior scalar result references and JSON materialization",
+        "parse syntax only with Python ast and lower allowed nodes to jq",
+        "fail closed when semantic input binding is ambiguous"
+      ],
+      "surviving_causal_blocker": "GOAL_COMPILER_LACKS_RESTRICTED_TYPED_SCALAR_NUMERIC_EXPRESSION_LOWERING_TO_ALREADY_BOUND_JQ"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RESTRICTED_TYPED_AST_TO_ALREADY_BOUND_VERIFIED_JQ",
+        "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_AST",
+        "BUILD_PYTHON_STDLIB_AST_EVALUATOR",
+        "ADD_THIRD_PARTY_SAFE_EVAL"
+      ],
+      "losing_routes_reason": "jq already exists on the verified controller surface and directly provides the needed floating arithmetic and pow operations. SymPy adds a new binding/package closure for capability not required by this gap; stdlib evaluator creates a new arithmetic implementation; third-party safe-eval adds a supplier. The jq route adds only syntax lowering and causal binding.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use compiler rejection regressions plus a fresh non-astronomy World Bank compound-growth calculation executed through the candidate Brain route; independently re-fetch and recompute with Python math, then independently cross-check the consequential numeric result with Wolfram before promotion."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR292 SymPy binding plan for this bounded gap",
+        "new numeric supplier discovery",
+        "astronomy replay",
+        "task-specific orbital formula code"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "causal result references",
+        "native JSON materialization",
+        "bound jq numeric engine",
+        "typed numeric artifact emission"
+      ],
+      "fresh_reuse_plan": "After child qualification, return to a new materially different parent scientific/technical task immediately. The spent astronomy task remains terminal evidence only."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused astronomy first-causal-gap evidence",
+        "reused PR293 jq qualification",
+        "reused current registry and adapter inspection",
+        "challenged and rejected stale PR292 SymPy-first selection"
+      ],
+      "search_stop_decision": "Stop route search and implement jq lowering. An already-bound independently verified zero-spend supplier directly supports the required operations, and no unresolved challenger removes more machinery or shortens time-to-verified-child enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current Brain base, current jq documentation, and current carrier readiness were refreshed before implementation; material base/dependency changes invalidate affected OBS layers."
+    },
+    "routes_considered": [
+      "RESTRICTED_TYPED_AST_TO_ALREADY_BOUND_VERIFIED_JQ",
+      "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_AST",
+      "BUILD_PYTHON_STDLIB_AST_EVALUATOR",
+      "ADD_THIRD_PARTY_SAFE_EVAL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ASTRONOMY_REPLAY",
+      "ASTRONOMY_SPECIFIC_PATCH",
+      "BIND_SYMPY_FOR_THIS_BOUNDED_GAP",
+      "NEW_SAFE_EVAL_SUPPLIER",
+      "MODEL_COGNITION"
+    ],
+    "selected_surviving_route": "RESTRICTED_TYPED_AST_TO_ALREADY_BOUND_VERIFIED_JQ",
+    "why_selected_route_is_fastest_sufficient": "It reuses the existing verified jq supplier, current controller invocation path, result references, and JSON materialization; only a restricted syntax/dataflow lowering must be added. No new dependency or evaluator implementation is required.",
+    "expected_parent_level_state_change": "Acquire a reusable model-independent typed scalar numeric-expression child using the already-bound verified jq route, qualify it on fresh non-astronomy real evidence, then return immediately to a new materially different parent real task. Do not replay astronomy and do not promote the parent from child evidence.",
+    "stop_condition": "Implement only a restricted typed scalar expression grammar over finite numeric constants and causally prior scalar results, lower it to already-bound json.query.jq, fail closed on ambiguous variable binding or unsafe syntax, qualify on fresh non-astronomy real data with independent recomputation, then return to a new parent task. No astronomy replay, no SymPy binding for this bounded gap, no arbitrary eval/sympify, no parent promotion.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:44:16Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BIND_EXISTING_VERIFIED_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "json.query.jq is already VERIFIED_BOUND_CAPABILITY at $0",
+          "PR293 fresh run 36664102642 verified jq numeric relation execution and independent Python recomputation",
+          "astronomy terminal run 36664896545 localized scalar formula execution as first gap",
+          "EXACT_SYMBOLIC_COMPUTATION_V1 preserves SymPy for broader exact symbolic classes"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://jqlang.org/manual/v1.7/ documents numeric *, / and pow plus IEEE754 double precision",
+          "https://docs.sympy.org/latest/modules/core.html documents SymPy numeric expression construction and warns unsanitized string sympify uses eval"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Brain registry pins Ubuntu jq 1.7.1-3ubuntu0.24.04.2",
+          "SymPy 1.14.0 remains available but is not currently bound to the controller"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No newly discovered evaluator route eliminates more machinery than reuse of the already-bound jq surface."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "typed scalar arithmetic multiplication division exponentiation live causal inputs no model"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "jq pow arithmetic versus SymPy restricted AST versus Python operator evaluator"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "restricted AST lower to existing jq versus new math adapter"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current jq numeric math functions and SymPy 1.14"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "RESTRICTED_TYPED_AST_TO_ALREADY_BOUND_VERIFIED_JQ",
+          "evidence": [
+            "already bound and independently verified in Brain",
+            "official jq numeric arithmetic/pow support",
+            "existing PR293 result-reference JSON-materialization pattern"
+          ],
+          "qualification_evidence": [
+            "run 36664102642",
+            "jq official manual"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Restricted AST admits only numeric constants/names and selected arithmetic nodes; jq performs numeric operations and unsafe syntax never reaches the supplier.",
+            "CAPABILITY_STRENGTH": "Directly covers the observed bounded floating-scalar formula family.",
+            "WALL_CLOCK": "No supplier or package integration; compiler lowering only.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Reuses already verified adapter and pinned package.",
+            "VERIFIABILITY": "Fresh real calculation can be independently recomputed by Python and Wolfram."
+          }
+        },
+        {
+          "route": "BIND_EXISTING_SYMPY_1_14_VIA_RESTRICTED_TYPED_AST",
+          "evidence": [
+            "existing exact symbolic 12/12 adjudication",
+            "programmatic SymPy supports required operations"
+          ],
+          "qualification_evidence": [
+            "EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION",
+            "SymPy official docs"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "INDEPENDENT_VERIFIER",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong and broader than required.",
+            "CAPABILITY_STRENGTH": "Adds exact/symbolic capability not needed by this first gap.",
+            "WALL_CLOCK": "Requires a new controller binding and package closure path.",
+            "INCREMENTAL_COST": "$0 monetary, greater integration cost.",
+            "RELIABILITY": "Supplier verified, new binding still needs qualification.",
+            "VERIFIABILITY": "Strong but no advantage sufficient to justify extra machinery."
+          }
+        },
+        {
+          "route": "BUILD_PYTHON_STDLIB_AST_EVALUATOR",
+          "evidence": [
+            "Python ast/operator can implement the bounded grammar"
+          ],
+          "qualification_evidence": [
+            "Python standard library"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can be correct after new verification.",
+            "CAPABILITY_STRENGTH": "Sufficient bounded envelope.",
+            "WALL_CLOCK": "Creates a new arithmetic evaluator rather than reusing jq.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "New implementation surface.",
+            "VERIFIABILITY": "Straightforward but unnecessary."
+          }
+        }
+      ],
+      "negative_search_summary": "The current jq route dominates for the observed bounded floating-scalar gap because it is already bound, verified, zero-spend, and directly supports the required operations.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RESTRICTED_TYPED_AST_TO_ALREADY_BOUND_VERIFIED_JQ",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:44:16Z",
+        "max_age_hours": 2,
+        "selected_route": "RESTRICTED_TYPED_AST_TO_ALREADY_BOUND_VERIFIED_JQ",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:44:16Z",
+            "evidence": [
+              "BRAIN_INHERITED: current main exact base after astronomy terminal reconciliation"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BOUND_CAPABILITY_json.query.jq",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:44:16Z",
+            "evidence": [
+              "BRAIN_INHERITED registry status VERIFIED_BOUND_CAPABILITY",
+              "DIRECT_PROBE run 36664102642"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:37:49Z",
+            "evidence": [
+              "DIRECT_PROBE: carrier accepted and merged exact-runtime closure PR8; prior jq verification run 36664102642 succeeded on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
