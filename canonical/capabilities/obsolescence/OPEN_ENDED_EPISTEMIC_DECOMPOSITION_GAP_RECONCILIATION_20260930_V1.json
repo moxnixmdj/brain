@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_V1",
+  "status": "FRESH_SQLITE_PARENT_SPENT_ONCE_AND_FAILED__CROSS_DOMAIN_PACKAGE_ACQUISITION_MISROUTE_CONFIRMED__GENERIC_ROUTING_GUARD_IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION",
+  "canonical_base_commit": "9504aa5cb4508971b6df6a862d01d740f340a45a",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "authoritative_parent_execution": {
+    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 101,
+    "public_run_id": 36674205874,
+    "job_id": 109755520636,
+    "artifact_id": 11078364401,
+    "artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9",
+    "execution_count": 1,
+    "task_executed": true,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "runtime_returncode": 3,
+    "runtime_status": "BLOCKED",
+    "observed_integrated_blocker": "CAPABILITY_ACQUISITION_REQUIRED__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "observed_behavior": "Broad SQLite research objective fell through failed direct compilation/grounding into APT/PyPI supplier discovery; candidates included bacula SQLite packages and unrelated package utilities rather than a semantic research plan.",
+    "replay_allowed": false,
+    "parent_completed": false,
+    "parent_promotion_authorized": false,
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0
+  },
+  "independent_non_parent_grounding_diagnostic": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 74,
+    "public_run_id": 36671302163,
+    "job_id": 109746664934,
+    "carrier_head_sha": "6274abc3a758b2295da169199c95eb9bab1cfd13",
+    "model_planner_disabled": true,
+    "parent_task": false,
+    "fresh_broad_case_count": 4,
+    "safe_full_grounding_passes": 0,
+    "unresolved_cases": 3,
+    "unsafe_false_positive_cases": 1,
+    "unsafe_false_positive_selected_candidate": "docx.document.verify.ooxml",
+    "conclusion": "Existing plain-goal grounding is neither sufficient nor safe as the broad-objective semantic bridge."
+  },
+  "mission_origin_qualification": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 79,
+    "public_run_id": 36672816106,
+    "job_id": 109751299770,
+    "artifact_id": 11078921733,
+    "artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "status": "PASS_CANONICAL_MISSION_ORIGIN_PROPAGATION",
+    "implication": "Mission identity is not the surviving parent blocker."
+  },
+  "cross_domain_corroboration_non_authoritative_for_parent_credit": {
+    "task_id": "PARENT-THERMOPHYSICS-WATER-VISCOSITY-OPEN-RESEARCH-TASK-A-20260930-002",
+    "authority_status": "STALE_PARENT_AUTHORITY__DIAGNOSTIC_ONLY",
+    "public_pr": 93,
+    "public_run_id": 36673898798,
+    "job_id": 109754583184,
+    "artifact_id": 11078528968,
+    "artifact_digest": "sha256:3b00a0b92159e5aa9bf2ec1cc04eb112ee39bf4fcf954870f656fead98b965af",
+    "execution_count": 1,
+    "task_executed": true,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "observed_integrated_blocker": "CAPABILITY_ACQUISITION_REQUIRED__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "observed_behavior": "Thermophysics research objective independently fell into unrelated APT/PyPI package candidates.",
+    "parent_credit": false,
+    "runtime_repair_authority": "CORROBORATION_ONLY"
+  },
+  "causal_refinement": {
+    "terminal_observation": "CAPABILITY_ACQUISITION_REQUIRED__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "upstream_root_cause": "OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_MISSING__BROAD_RESEARCH_GOALS_MISROUTED_TO_PACKAGE_ACQUISITION",
+    "basis": [
+      "fresh parent SQLite run proves full canonical run_goal reaches package acquisition and fails there",
+      "fresh non-parent broad-objective diagnostics show existing grounding cannot safely ground broad epistemic research objectives",
+      "runtime classifier labels every remaining ordinary unresolved clause CAPABILITY_CANDIDATE, authorizing package acquisition for semantic research questions",
+      "orthogonal thermophysics execution independently shows the same acquisition misroute"
+    ],
+    "conclusion": "Supplier-contract failure is downstream. The minimum generic repair is to stop treating unresolved epistemic research objectives as package capabilities, then implement a model-independent decomposition/authority-data-grounding IR before any new parent benchmark is spent."
+  },
+  "repair_in_branch": {
+    "runtime_file": "canonical/runtime/astra_runtime.py",
+    "change": "_classify_plain_goal_gap returns EPISTEMIC_RESEARCH_DECOMPOSITION for unresolved epistemic research objectives after verified direct compilation has failed.",
+    "safety_effect": "run_goal raises GOAL_ARCHITECTURAL_GAP before APT/PyPI acquisition for this class.",
+    "scope": "FAIL_CLOSED_ROUTING_GUARD_ONLY",
+    "does_not_claim": "OPEN_ENDED_RESEARCH_DECOMPOSITION_CAPABILITY"
+  },
+  "frozen_task_disposition": {
+    "sqlite": "SPENT_ONCE__FAILED__REPLAY_FORBIDDEN",
+    "thermophysics": "SPENT_ONCE_UNDER_STALE_AUTHORITY__ZERO_PARENT_CREDIT__REPLAY_FORBIDDEN",
+    "next_parent_task": "DO_NOT_FREEZE_OR_EXECUTE_UNTIL_GENERIC_DECOMPOSITION_ROUTE_IS_QUALIFIED_ON_FRESH_NON_PARENT_CASES"
+  },
+  "authoritative_blocker": "OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_MISSING__BROAD_RESEARCH_GOALS_MISROUTED_TO_PACKAGE_ACQUISITION",
+  "parent_promotion_authorized": false,
+  "counters_delta": {
+    "verified_real_tasks_completed": 0,
+    "frontier_dependencies_removed": 0,
+    "reusable_capabilities_inherited": 0
+  },
+  "next_action": "VERIFY_EPISTEMIC_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_EPISTEMIC_DECOMPOSITION_IR_AND_AUTHORITY_DATA_DISCOVERY__FREEZE_NEW_PARENT_TASK_ONLY_AFTER_QUALIFICATION",
+  "prohibitions": [
+    "NO_SQLITE_REPLAY",
+    "NO_THERMOPHYSICS_REPLAY",
+    "NO_MAUNA_REPLAY",
+    "NO_NEW_PARENT_TASK_BEFORE_GENERIC_DECOMPOSITION_QUALIFICATION",
+    "NO_BROAD_EPISTEMIC_OBJECTIVE_TO_PACKAGE_ACQUISITION_SHORTCUT",
+    "NO_TASK_SPECIFIC_RESEARCH_RECIPE",
+    "NO_MODEL_COGNITION"
+  ]
+}
