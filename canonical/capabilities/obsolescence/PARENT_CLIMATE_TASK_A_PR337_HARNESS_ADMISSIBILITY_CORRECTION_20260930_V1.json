@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_HARNESS_ADMISSIBILITY_CORRECTION_V1",
+  "status": "CORRECTED__PR337_TASK_SPENT__HARNESS_BYPASSED_PUBLIC_RUN_GOAL__NO_CAUSAL_LOCALIZATION_CREDIT",
+  "checked_on": "2026-09-30",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+  "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+  "task_freshness": "SPENT_BY_EXECUTION_ATTEMPT__NO_REPLAY",
+  "producer_execution": {
+    "carrier_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36670516407,
+    "job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "harness_blob_sha": "1a2858e8117f402fcf7e5cdfcb321fd4fab942c9",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "audited_harness_control_flow": [
+    "loads goal_compiler.py and astra_runtime.py",
+    "calls compiler.compile_goal(goal, registry, ROOT) before any public runtime call",
+    "on compile exception emits FAIL_FIRST_CAUSAL_GAP and exits",
+    "only after compile success would inject compiled controller_actions into runtime._run_model_independent_goal",
+    "never calls astra_runtime.run_goal"
+  ],
+  "existing_public_runtime_control_flow_not_exercised": [
+    "_run_goal_unstamped",
+    "_classify_plain_goal_gap",
+    "_ground_plain_goal_to_bound_capabilities",
+    "_compose_grounding_to_capability_problem",
+    "targeted auto capability acquisition",
+    "federated capability discovery fallback"
+  ],
+  "observed_truth": {
+    "helper_compiler_failure": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "observation_valid": true,
+    "first_causal_gap_of_full_brain_route_proven": false,
+    "parent_capability_proven": false,
+    "parent_capability_falsified": false,
+    "capability_credit_delta": 0
+  },
+  "corrected_parent_state": {
+    "blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+    "admissible_open_ended_model_independent_parent_tasks_verified": 0
+  },
+  "execution_contract_for_next_fresh_task": [
+    "call astra_runtime.run_goal as the only producer entrypoint",
+    "do not call goal_compiler.compile_goal in the carrier",
+    "do not inject controller_actions or capability_problem",
+    "allow_optional_model_planner must be false",
+    "ASTRA_DISABLE_MODEL_PLANNER must equal 1",
+    "require runtime-derived cognition provenance and model_dependency_count=0",
+    "stop on the first blocker returned by the full public runtime path",
+    "never replay the spent Mauna Loa task"
+  ],
+  "reason": "A helper-stage failure cannot define the system's causal frontier when the system's public entrypoint contains additional pre-existing model-independent recovery stages that the harness bypassed."
+}
