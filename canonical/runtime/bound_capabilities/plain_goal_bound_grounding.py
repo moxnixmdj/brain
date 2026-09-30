@@ -194,12 +194,13 @@ def _constraints(clause):
     return flags
 
 
-def ground(goal,registry,max_candidates_per_clause=8):
+def ground(goal,registry,max_candidates_per_clause=8,bind_candidate=None):
     if not isinstance(registry,dict):
         raise GroundingError("REGISTRY_INVALID")
     clauses=decompose(goal)
     records=[]
     all_candidates=set()
+    prior_paths=[]
     for index,clause in enumerate(clauses):
         text=clause["text"]
         ranked=[]
@@ -224,6 +225,32 @@ def ground(goal,registry,max_candidates_per_clause=8):
                 "requires":[str(x) for x in entry.get("requires") or []],
             })
         ranked.sort(key=lambda x:(-x["combined_score"],x["capability_id"]))
+        rejected_unbindable=[]
+        if bind_candidate is not None and ranked:
+            bindable=[]
+            future_clauses=[str(x.get("text") or "") for x in clauses[index+1:]]
+            for item in ranked:
+                cid=item["capability_id"]
+                entry=registry.get(cid) or {}
+                try:
+                    inputs=bind_candidate(
+                        text,cid,entry,
+                        context_paths=list(prior_paths),
+                        future_clauses=future_clauses,
+                    )
+                except Exception as exc:
+                    rejected_unbindable.append({
+                        "capability_id":cid,
+                        "error":type(exc).__name__+":"+str(exc),
+                    })
+                    continue
+                item=dict(item)
+                item["input_bindability"]={
+                    "verified":True,
+                    "bound_input_keys":sorted(str(x) for x in (inputs or {}).keys()),
+                }
+                bindable.append(item)
+            ranked=bindable
         if ranked:
             best=ranked[0]["combined_score"]
             # Preserve plausible alternatives rather than forcing a winner.
@@ -249,7 +276,12 @@ def ground(goal,registry,max_candidates_per_clause=8):
             "candidates":kept,
             "constraints":_constraints(text),
             "output_contract":_output_contract(text),
+            "rejected_unbindable_candidates":rejected_unbindable,
         })
+        prior_paths.extend(
+            str(x) for x in (_output_contract(text).get("paths") or [])
+            if str(x) not in prior_paths
+        )
     grounded=[x for x in records if x["status"]!="UNRESOLVED"]
     unresolved=[x["index"] for x in records if x["status"]=="UNRESOLVED"]
     canonical_goal=" ".join(str(goal or "").strip().split())
@@ -263,6 +295,7 @@ def ground(goal,registry,max_candidates_per_clause=8):
         "candidate_capability_ids":sorted(all_candidates),
         "external_discovery_allowed_for_unresolved_only":True,
         "whole_goal_external_discovery_forbidden_if_any_bound_grounding":bool(grounded),
+        "input_contract_bindability_enforced":bind_candidate is not None,
         "model_dependency_count":0,
     }
 
