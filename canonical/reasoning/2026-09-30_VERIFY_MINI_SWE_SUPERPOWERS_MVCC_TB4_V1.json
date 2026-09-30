@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_MVCC_TB4_V1",
+  "status": "CURRENT",
+  "real_objective": "Obtain fresh distinct independent evidence for the strengthened Brain-owned mini-SWE + Superpowers coding composition without repeating freshness or execution-order defects.",
+  "governing_invariants": [
+    "$0 incremental spend",
+    "Cross-repository exact-name freshness before action creation",
+    "Full guarded action canonical before instruction/session launch",
+    "No opaque provider access counted as ownership",
+    "Only runtime-visible task bytes after authorization",
+    "No solution/tests/non-allowlisted solution-bearing metadata before submission",
+    "No same-task replay after verifier exposure",
+    "One task cannot promote the whole family"
+  ],
+  "material_premises": [
+    "React and Bun both produced clean independent verifier failures; their general repairs are now encoded durably.",
+    "Payments runtime began before a full guarded action became canonical and is quarantined for promotion.",
+    "html-js-filter was falsely leased fresh despite prior runner PR237 execution and is superseded.",
+    "Exact-name searches for mvcc-lsm-compaction returned zero Brain PRs and zero runner PRs immediately before this action.",
+    "Only allowlisted MVCC task metadata was screened; instruction/tests/solution remain unread."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/REACT_LEAD_FORM_TB4_VERIFICATION_FAILURE_20260930_V1.json",
+    "canonical/capabilities/opus55/BUN_SOURCEMAP_LEAK_TB4_VERIFICATION_FAILURE_20260930_V1.json",
+    "canonical/capabilities/opus55/PAYMENTS_PIPELINE_PRE_GUARD_RUNTIME_EXPOSURE_20260930_V1.json",
+    "canonical/reasoning/2026-09-30_SUPERSEDE_FALSE_FRESH_HTML_JS_FILTER_LEASE_V1.json",
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+    "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e:tasks/mvcc-lsm-compaction/instruction.md@9ca80a07e0f908b26d65dab65403d04e0482f53b"
+  ],
+  "conclusion": "Make the full MVCC action canonical only after trusted DRIFT_GUARD_PASS on the exact current base. Then expose the frozen instruction, launch exactly one runtime-only session, and submit once to the untouched independent verifier.",
+  "selected_route": "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_MVCC_TB4__PUBLIC_INDEPENDENT_VERIFIER",
+  "rejected_material_alternatives": [
+    {
+      "route": "HTML_JS_FILTER",
+      "reason": "Already spent in runner PR237 before the false-fresh canonical lease."
+    },
+    {
+      "route": "PAYMENTS_PIPELINE_FIX",
+      "reason": "Runtime exposure began before valid full guarded execution authority became canonical."
+    },
+    {
+      "route": "VF2_SPEEDUP_NETWORKX",
+      "reason": "Fresh viable backup, but optimization-sensitive and less direct than bounded MVCC debugging for the current repaired route."
+    },
+    {
+      "route": "KV_LIVE_SURGERY",
+      "reason": "Fresh viable backup, but live ptrace/network surgery adds avoidable environment risk before the bounded MVCC probe."
+    },
+    {
+      "route": "PAID_MODEL_API",
+      "reason": "Violates hard-zero incremental spend."
+    }
+  ],
+  "uncertainties": [
+    "Whether the strengthened route will complete mvcc-lsm-compaction under the untouched verifier.",
+    "One MVCC result cannot establish whole-family parity."
+  ],
+  "assumptions": [
+    "The public bridge remains runtime-isolated.",
+    "Public GitHub Actions remains $0 incremental."
+  ],
+  "non_goals": [
+    "No family promotion from one task.",
+    "No spent/contaminated task replay.",
+    "No verifier inspection before terminal submission."
+  ],
+  "next_action": "Trusted guard the exact MVCC branch against current main; if it passes and main remains unchanged, merge it before reading the instruction.",
+  "supersession_conditions": [
+    "Canonical main materially changes before instruction read.",
+    "Cross-repository exact-name history for MVCC ceases to be fresh before session launch.",
+    "Bridge isolation preflight fails."
+  ]
+}
