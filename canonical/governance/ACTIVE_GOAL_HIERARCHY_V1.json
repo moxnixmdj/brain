@@ -5,9 +5,9 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "active_probe": null,
-  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__SQLITE_TASK_A_SPENT__GENERIC_BROAD_OBJECTIVE_GAP_ACTIVE",
-  "current_parent_blocker": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
-  "next_required_action_class": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_ROUTE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_ROR_AUTHORITY__NO_PARENT_REPLAY",
+  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__SQLITE_TASK_A_SPENT__EVIDENCE_EXTRACTION_GAP_ACTIVE",
+  "current_parent_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "next_required_action_class": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_RELEVANCE_ADMISSION__NO_PARENT_REPLAY",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -185,23 +185,33 @@
   },
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "last_frontier_reconciliation": {
-    "status": "SQLITE_FIRST_PHYSICAL_SPEND_RESTORED__MISSION_ORIGIN_DEFECT_LATER_REPAIRED__GENERIC_BROAD_OBJECTIVE_GAP_ACTIVE",
-    "previous_mirror_error": "SQLITE_TASK_A_WAS_INCORRECTLY_MARKED_FROZEN_UNSPENT_AFTER_EARLIER_PHYSICAL_EXECUTION",
+    "status": "OBJECTIVE_RELEVANCE_ADMISSION_QUALIFIED__EVIDENCE_EXTRACTION_GAP_ACTIVE",
+    "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/SQLITE_PARENT_FIRST_PHYSICAL_SPEND_CORRECTION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json"
     ],
-    "first_spend_run_id": 36670808367,
-    "first_spend_artifact_id": 11077757767,
-    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
-    "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
-    "task_status": "SPENT",
-    "execution_count": 1,
     "same_task_replay_allowed": false,
-    "surviving_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "parent_capability_promoted": false,
-    "counter_delta": 0
+    "parent_score_credit": 0,
+    "previous_reconciliation": {
+      "status": "SQLITE_FIRST_PHYSICAL_SPEND_RESTORED__MISSION_ORIGIN_DEFECT_LATER_REPAIRED__GENERIC_BROAD_OBJECTIVE_GAP_ACTIVE",
+      "previous_mirror_error": "SQLITE_TASK_A_WAS_INCORRECTLY_MARKED_FROZEN_UNSPENT_AFTER_EARLIER_PHYSICAL_EXECUTION",
+      "evidence_paths": [
+        "canonical/capabilities/obsolescence/SQLITE_PARENT_FIRST_PHYSICAL_SPEND_CORRECTION_20260930_V1.json"
+      ],
+      "first_spend_run_id": 36670808367,
+      "first_spend_artifact_id": 11077757767,
+      "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+      "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+      "task_status": "SPENT",
+      "execution_count": 1,
+      "same_task_replay_allowed": false,
+      "surviving_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+      "parent_capability_promoted": false,
+      "counter_delta": 0
+    }
   },
-  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_ROUTE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_ROR_AUTHORITY__NO_PARENT_REPLAY",
+  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_RELEVANCE_ADMISSION__NO_PARENT_REPLAY",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -255,14 +265,15 @@
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPEN_ENDED_TASK_A_FIRST_SPEND_TERMINAL_RECONCILIATION_20260930_V1.json"
   },
   "last_verified_subcapability": {
-    "capability_id": "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1",
+    "capability_id": "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
     "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
-    "route": "source.authority.identity.ror",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
-    "public_run_id": 36676947006,
-    "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+    "route": "first_party_objective_relevance_verify",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json",
+    "public_run_id": 36678675368,
+    "producer_git_blob": "6ff13c32704c0b3283c42a51f718e875110a13ca",
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
-    "parent_capability_promoted": false
+    "parent_capability_promoted": false,
+    "limitations": "First-party exact-ROR-domain hosting plus strict bounded lexical objective relevance only. Semantic entailment, primary-source status, factual correctness, evidence sufficiency, and claim endorsement remain unverified."
   }
 }

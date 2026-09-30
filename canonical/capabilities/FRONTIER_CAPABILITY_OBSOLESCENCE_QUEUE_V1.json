@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Acquire the minimum model-independent route that can verify primary-source status and objective relevance after broad source discovery, retrieval provenance, and narrow ROR-backed source-organization identity are already qualified; do not replay spent parent tasks.",
+    "objective": "Acquire the minimum model-independent route that extracts decision-relevant evidence from an already provenance-verified, ROR-bound, independently relevance-admitted source; preserve factual correctness and evidence sufficiency as separate later gates and do not replay spent parent tasks.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
-    "evidence_path": "canonical/capabilities/obsolescence/SQLITE_PARENT_FIRST_PHYSICAL_SPEND_CORRECTION_20260930_V1.json",
-    "repair_status": "OPEN_RESEARCH_SOURCE_FRONTEND_QUALIFIED__ROR_AUTHORITY_IDENTITY_VERIFIED__PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_UNPROVEN",
-    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_SOURCE_WHITELIST__NO_AUTHORITY_EQUALS_PRIMARY_SOURCE_OR_RELEVANCE__NO_SCOREBOARD_CREDIT_FOR_NARROW_SUBCAPABILITY_ONLY",
-    "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_ROUTE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_ROR_AUTHORITY__NO_PARENT_REPLAY",
+    "exact_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json",
+    "repair_status": "SOURCE_FRONTEND_AND_ROR_IDENTITY_VERIFIED__LEXICAL_RANKING_AND_STRICT_FIRST_PARTY_RELEVANCE_ADMISSION_QUALIFIED__EVIDENCE_EXTRACTION_UNPROVEN",
+    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_SOURCE_WHITELIST__NO_RELEVANCE_EQUALS_FACTUAL_CORRECTNESS_OR_EVIDENCE_SUFFICIENCY__NO_SCOREBOARD_CREDIT_FOR_NARROW_SUBCAPABILITY_ONLY",
+    "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_RELEVANCE_ADMISSION__NO_PARENT_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -85,7 +85,9 @@
       "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
       "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
       "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
-      "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1"
+      "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1",
+      "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
+      "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
     ],
     "latest_fresh_real_run_id": 36652169397,
     "latest_fresh_reuse_run_id": 36652623916,
@@ -124,15 +126,16 @@
       "first_physical_spend_run_id": 36670808367
     },
     "latest_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1",
+      "capability_id": "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
       "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
-      "route": "source.authority.identity.ror",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
-      "public_run_id": 36676947006,
-      "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+      "route": "first_party_objective_relevance_verify",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json",
+      "public_run_id": 36678675368,
+      "producer_git_blob": "6ff13c32704c0b3283c42a51f718e875110a13ca",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
-      "parent_capability_promoted": false
+      "parent_capability_promoted": false,
+      "limitations": "First-party exact-ROR-domain hosting plus strict bounded lexical objective relevance only. Semantic entailment, primary-source status, factual correctness, evidence sufficiency, and claim endorsement remain unverified."
     }
   },
   "promotion_claim": false,
@@ -350,7 +353,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "ACQUIRE_AND_QUALIFY_GENERIC_MODEL_INDEPENDENT_OPEN_ENDED_RESEARCH_GROUNDING_ROUTE__DECOMPOSITION_PLUS_AUTHORITATIVE_SOURCE_DISCOVERY__NO_PARENT_REPLAY",
+  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_RELEVANCE_ADMISSION__NO_PARENT_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
