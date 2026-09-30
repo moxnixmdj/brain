@@ -50,6 +50,18 @@ def _candidate_text(candidate):
     # one simple BM25 corpus and no learned parameters.
     return " ".join(x for x in (title,title,record_title,snippet) if x)
 
+
+def _decision_role_admission(objective,candidate):
+    path=pathlib.Path(__file__).resolve().with_name("decision_role_relevance_admission.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_decision_role_relevance_admission",path
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError("DECISION_ROLE_RELEVANCE_ADMISSION_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.evaluate(objective,_candidate_text(candidate))
+
 def _bm25_scores(query_tokens, docs, k1=1.5, b=0.75):
     n=len(docs)
     if n==0:
@@ -125,12 +137,26 @@ def rank(objective,candidates,limit=None):
     scored=_bm25_scores(q,docs)
     rows=[]
     for index,(candidate,(score,parts)) in enumerate(zip(candidates,scored)):
+        subject_admission=_top_candidate_admission(q,sorted(parts))
+        role_admission=_decision_role_admission(objective,candidate)
+        combined_verified=bool(
+            subject_admission.get("verified") is True
+            and role_admission.get("verified") is True
+        )
+        combined_admission={
+            **subject_admission,
+            "method":"FOCUSED_QUERY_TOKEN_COVERAGE_PLUS_BOUNDED_DECISION_ROLE_V1",
+            "subject_coverage":subject_admission,
+            "decision_role":role_admission,
+            "verified":combined_verified,
+        }
         rows.append({
             "original_index":index,
             "candidate":candidate,
             "lexical_relevance_score":round(float(score),12),
             "matched_terms":sorted(parts),
             "term_contributions":{k:round(float(v),12) for k,v in sorted(parts.items())},
+            "candidate_admission":combined_admission,
         })
     rows.sort(key=lambda x:(-x["lexical_relevance_score"],x["original_index"]))
     positive=[x for x in rows if x["lexical_relevance_score"]>0]
@@ -142,22 +168,30 @@ def rank(objective,candidates,limit=None):
             "query_tokens":q,
             "ranked_candidates":rows,
         }
-    top=positive[0]
-    admission=_top_candidate_admission(q,top.get("matched_terms") or [])
+    raw_top=positive[0]
+    admitted=[
+        x for x in positive
+        if (x.get("candidate_admission") or {}).get("verified") is True
+    ]
+    top=admitted[0] if admitted else raw_top
+    admission=top.get("candidate_admission") or {}
     if limit is not None:
         rows=rows[:max(1,min(int(limit),len(rows)))]
     return {
         **base,
         "status":"LEXICAL_RELEVANCE_RANKED",
         "verification_method":"DETERMINISTIC_BM25",
+        "admission_method":"FOCUSED_QUERY_TOKEN_COVERAGE_PLUS_BOUNDED_DECISION_ROLE_V1",
         "query_tokens":q,
         "query_focus":focus,
         "candidate_count":len(candidates),
         "positive_relevance_count":len(positive),
+        "role_admitted_positive_count":len(admitted),
         "ranked_candidates":rows,
+        "raw_top_candidate_original_index":raw_top["original_index"],
         "top_candidate_original_index":top["original_index"],
         "top_candidate_admission":admission,
-        "admission_claim_scope":"BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY",
+        "admission_claim_scope":"BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_PLUS_EXPLICIT_COMPARISON_DECISION_ROLE_LEXICAL_ADMISSION_ONLY",
         "output_verified":True,
     }
 
