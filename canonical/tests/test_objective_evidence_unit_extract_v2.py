@@ -76,6 +76,23 @@ class ObjectiveEvidenceUnitExtractV2Tests(unittest.TestCase):
             self.assertGreaterEqual(len(unit["matched_objective_tokens"]),2)
             self.assertLess(unit["visible_text_start"],unit["visible_text_end"])
 
+    def test_modern_div_main_content_is_visible_evidence(self):
+        raw=(
+            b"<html><body><header>site navigation</header><main>"
+            b"<div><section>SymPy is a Python library for symbolic mathematics "
+            b"and computer algebra.</section></div></main><footer>links</footer></body></html>"
+        )
+        x=self.m.extract(
+            "SymPy Python symbolic mathematics library",
+            {"url":"https://example.org/report"},
+            provenance(),
+            relevance(),
+            fetch=lambda url,timeout:(raw,"https://example.org/report","text/html",200),
+        )
+        self.assertEqual(x["status"],"OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED",x)
+        self.assertGreaterEqual(x["evidence_unit_count"],1,x)
+        self.assertTrue(any("symbolic mathematics" in u["text"] for u in x["evidence_units"]),x)
+
     def test_relevance_is_mandatory_and_checked_before_fetch(self):
         calls={"fetch":0}
         def fetch(*args):
