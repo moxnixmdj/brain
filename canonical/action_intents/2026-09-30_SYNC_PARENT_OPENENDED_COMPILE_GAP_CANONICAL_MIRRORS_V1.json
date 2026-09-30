@@ -29,7 +29,7 @@
   "governance_change": false,
   "weakens_existing_guard": false,
   "recursive_obs": {
-    "canonical_generation_or_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "real_outcome": "Restore canonical cross-surface consistency without changing the already-adjudicated causal frontier.",
     "required_capability": "CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY",
     "obs_goal": {
@@ -125,11 +125,12 @@
     ],
     "selected_surviving_route": "SYNC_STALE_CANONICAL_MIRRORS_TO_CURRENT_HIERARCHY_TARGET",
     "why_selected_route_is_fastest_sufficient": "Three stale mirrors can be aligned mechanically to already-canonical hierarchy/target values with zero execution, zero spend, and no claim expansion.",
-    "expected_parent_level_state_change": "Cross-surface canonical consistency restored; causal blocker and parent credit unchanged.",
-    "stop_condition": "Stop after mirror guard passes; next action remains route-frontier recomputation.",
+    "expected_parent_level_state_change": "Synchronize pointer, queue, and scoreboard to the already-canonical hierarchy/target residual and next action on exact main dc38bf8370d692d3f18a5aff446d26933f9dd03a. Preserve all counters, runtime bytes, no-replay state, and parent non-promotion.",
+    "stop_condition": "Synchronize only the stale canonical mirrors to the current hierarchy/target authority, preserve counters and runtime, then stop for route-frontier recomputation. No runtime repair or task execution.",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "Truth-preserving canonical mirror synchronization only; no implementation route is being selected."
-    }
+    },
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a"
   }
 }
