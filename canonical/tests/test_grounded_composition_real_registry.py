@@ -41,8 +41,8 @@ class RealRegistryCompositionTests(unittest.TestCase):
             goal=(
               "Synthesize a typed decision from explicit evidence support contradiction constraint "
               "uncertainty provenance trace in "+evidence_rel+" and save "+result_rel+". "
-              "Then independently verify audit trace for decision synthesis result "+result_rel+
-              " against evidence "+evidence_rel+"."
+              "Then using both live results independently verify audit trace for decision synthesis result "
+              +result_rel+" against evidence "+evidence_rel+"."
             )
             registry=json.loads((ROOT/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text())["capabilities"]
             registry=compiler._platform_admissible_registry(registry)
