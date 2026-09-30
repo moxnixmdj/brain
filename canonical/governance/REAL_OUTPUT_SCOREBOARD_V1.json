@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+  "next_progress_event_target": "VERIFY_EPISTEMIC_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_EPISTEMIC_DECOMPOSITION_IR_AND_AUTHORITY_DATA_DISCOVERY__FREEZE_NEW_PARENT_TASK_ONLY_AFTER_QUALIFICATION",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -504,17 +504,33 @@
       "progress_credit": "AUTHORITY_MIRROR_RECONCILIATION_ONLY",
       "parent_capability_promoted": false,
       "execution_count": 0
+    },
+    {
+      "event_id": "PARENT_SQLITE_OPEN_ENDED_TASK_A_FIRST_EXECUTION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FAIL_FIRST_CAUSAL_GAP__NO_PARENT_CREDIT__GENERIC_ROOT_CAUSE_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36674205874,
+      "artifact_id": 11078364401,
+      "artifact_digest": "sha256:491818b6aeddbdcfd1d403721569055ef6d8ffe8cf0fa636683b3e836c1d50d9",
+      "counter_effects": {
+        "verified_real_tasks_completed": 0,
+        "frontier_dependencies_removed": 0,
+        "reusable_capabilities_inherited": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "CAUSAL_LOCALIZATION_ONLY",
+      "parent_capability_promoted": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "CARRIER_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT__PARENT_NOT_YET_ACQUIRED",
+    "active_subcapability_target": "MODEL_INDEPENDENT_OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_AND_AUTHORITY_DATA_GROUNDING",
+    "subcapability_status": "MISSING__ROUTING_GUARD_IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
-    "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
-    "execution_count": 0,
-    "replay_allowed": false
+    "sqlite_parent_run_id": 36674205874,
+    "sqlite_execution_count": 1,
+    "sqlite_replay_allowed": false
   }
 }
