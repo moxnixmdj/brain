@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CARRIER_MISSION_ORIGIN_CANARY_RECONCILIATION_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "PASS__CANONICAL_CLI_MISSION_ORIGIN_PROPAGATION_VALIDATED__NO_PARENT_CAPABILITY_CREDIT",
+  "source": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 84,
+    "public_run_id": 36672975512,
+    "job_id": 109751792960,
+    "artifact_id": 11078323111,
+    "artifact_digest": "sha256:e77d95545d53e0e188e5bfbb4c8404e86f66ef3d602b224eba0ca48af619dfcc",
+    "carrier_head_sha": "2ebbd0d221a69397e986b8df4535243e52783da8",
+    "mission_id": "CARRIER-MISSION-ORIGIN-CANARY-20260930-001",
+    "mission_sha256": "50d428b8ec24c7ebe538cbefe74bc6862fe157738de0393ce3dd247f2a75f2d5"
+  },
+  "canary_scope": {
+    "parent_task": false,
+    "heldout_gate": false,
+    "source_task_replay": false,
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0
+  },
+  "observations": {
+    "path_bound": true,
+    "expected_mission_path": "canonical/astra_runtime/missions/CARRIER_MISSION_ORIGIN_CANARY_20260930_001.json",
+    "observed_mission_path": "canonical/astra_runtime/missions/CARRIER_MISSION_ORIGIN_CANARY_20260930_001.json",
+    "autonomous_acquisition_reached": true,
+    "origin_errors": [],
+    "runtime_returncode": 3,
+    "runtime_status": "BLOCKED",
+    "later_non_parent_blocker": "CAPABILITY_ACQUISITION_REQUIRED__NO_COMPATIBLE_SUPPLIER_CONTRACT"
+  },
+  "conclusion": {
+    "resolved_preflight": "CARRIER_MUST_INVOKE_CANONICAL_ASTRA_CLI_WITH_REAL_MISSION_PATH",
+    "old_origin_blocker_resolved": true,
+    "runtime_repair_required_before_fresh_parent_task": false,
+    "supplier_contract_observation_authority": "CANARY_DIAGNOSTIC_ONLY__DO_NOT_REPAIR_OR_PROMOTE_FROM_NON_PARENT_CANARY",
+    "parent_promotion_authorized": false
+  },
+  "fresh_parent_freeze": {
+    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+    "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
+    "freshness": "FROZEN_UNSPENT",
+    "execution_count": 0,
+    "marker_present_on_public_main": false,
+    "materially_different_from_spent_climate_task": true,
+    "task_path": "canonical/tasks/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json"
+  },
+  "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY"
+}
