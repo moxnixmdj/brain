@@ -92,5 +92,53 @@ class MistakeImmunityGuardTests(unittest.TestCase):
         guard.enforce_model_independent_cognition(intent,obs)
         self.assertEqual(guard.FAIL,[])
 
+
+    def test_silent_active_target_change_fails_closed(self):
+        old=guard.load_at_ref
+        try:
+            guard.load_at_ref=lambda ref,path:{"active_capability_target":"PARENT"}
+            intent={"action_kind":"REAL_CAPABILITY_ACQUISITION"}
+            hierarchy={"active_capability_target":"PROXY"}
+            guard.enforce_target_continuity(intent,"base",hierarchy)
+            self.assertTrue(any(x.startswith("ACTIVE_CAPABILITY_TARGET_CHANGE_REQUIRES_EXPLICIT_RECONCILIATION") for x in guard.FAIL),guard.FAIL)
+        finally:
+            guard.load_at_ref=old
+
+    def test_scoreboard_increase_without_promotion_evidence_fails_closed(self):
+        old_ref=guard.load_at_ref
+        old_load=guard.load
+        try:
+            guard.load_at_ref=lambda ref,path:{
+                "counters_since_epoch_start":{
+                    "reusable_capabilities_inherited":0,
+                    "verified_real_tasks_completed":0,
+                    "fresh_reuse_passes":0,
+                    "frontier_dependencies_removed":0,
+                    "residual_gaps_localized":0,
+                }
+            }
+            guard.load=lambda path:{
+                "counters_since_epoch_start":{
+                    "reusable_capabilities_inherited":1,
+                    "verified_real_tasks_completed":0,
+                    "fresh_reuse_passes":0,
+                    "frontier_dependencies_removed":0,
+                    "residual_gaps_localized":0,
+                }
+            }
+            intent={
+                "action_kind":"CAPABILITY_INHERITANCE",
+                "capability_target":"MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+            }
+            guard.enforce_promotion_truth(
+                intent,
+                ["canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"],
+                "base",
+            )
+            self.assertIn("PROMOTION_EVIDENCE_REQUIRED_FOR_SCOREBOARD_INCREASE",guard.FAIL)
+        finally:
+            guard.load_at_ref=old_ref
+            guard.load=old_load
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
