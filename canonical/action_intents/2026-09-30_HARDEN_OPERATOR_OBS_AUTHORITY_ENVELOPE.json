@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-OPERATOR-OBS-AUTHORITY-ENVELOPE-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CHAT_OUTPUT_CANNOT_BE_PLATFORM_HARD_GATED_BY_REPOSITORY_OBS_VALIDATOR__RISK_OF_CONFUSING_CONVERSATIONAL_CLAIM_WITH_CANONICAL_AUTHORITY",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CHAT_OUTPUT_CANNOT_BE_PLATFORM_HARD_GATED_BY_REPOSITORY_OBS_VALIDATOR__RISK_OF_CONFUSING_CONVERSATIONAL_CLAIM_WITH_CANONICAL_AUTHORITY::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Preserve the current numeric-relation frontier while making the enforcement envelope explicit: repository mutations and canonical authority are hard-gated; conversational output alone has zero canonical authority unless backed by a current-base OBS artifact.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main 9f955556a8f5376d697a5b73403acbf7a132350b",
+    "merged PR290 operator OBS decision boundary",
+    "canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    ".github/workflows/drift-immunity-guard.yml",
+    "frontier-sensitive mutations already require action intents and exact-base trusted validation",
+    "there is no repository-controlled hook that can prevent the ChatGPT product from emitting a sentence before a GitHub validator runs"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when canonical authority explicitly excludes bare conversational output, the hard-enforcement and non-enforceable surfaces are machine-readable, the boot pointer requires the authority envelope, and the trusted validator protects that requirement. Do not alter the active capability frontier or numeric-relation task.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "explicit_user_authorization": "User challenged whether the OBS fix was truly complete after explicitly requiring the huge OBS-underuse problem to be solved perfectly.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9f955556a8f5376d697a5b73403acbf7a132350b",
+    "real_outcome": "Eliminate ambiguity about what OBS enforcement can actually guarantee: canonical Brain authority must be hard-gated by current-base OBS, while ungated conversational text must be explicitly incapable of changing or defining canonical state.",
+    "required_capability": "OPERATOR_OBS_AUTHORITY_ENVELOPE_WITH_HARD_CANONICAL_BOUNDARY",
+    "obs_goal": {
+      "real_outcome": "Prevent a future operator or user from mistaking an ungated conversational statement for an authoritative Brain blocker, route, or state transition.",
+      "proxy_goals_deleted": [
+        "Pretend the repository can control the ChatGPT pre-response loop",
+        "Claim platform-level enforcement that does not exist",
+        "Add a second reasoning framework"
+      ],
+      "surviving_necessity": "Define and machine-pin the strongest truthful enforcement boundary available from the Brain control plane."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR290 operator OBS decision boundary",
+        "frontier-sensitive action-intent requirement",
+        "trusted drift guard",
+        "exact-base OBS V4"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No attempt to modify ChatGPT platform internals",
+        "No new external service",
+        "No duplicate OBS framework"
+      ],
+      "surviving_gap": "Conversational output itself cannot be technically intercepted by the GitHub repository; therefore canonical authority must explicitly require a repository-backed current-base OBS artifact."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Platform/control-plane boundary, not a missing Brain algorithm.",
+      "delete_bypass_substitute_options": [
+        "Delete the false claim of universal hard enforcement",
+        "Confine hard authority to repository-backed artifacts",
+        "Treat chat as advisory until backed by current-base OBS",
+        "Continue to hard-gate all consequential mutations through trusted validation"
+      ],
+      "surviving_causal_blocker": "NO_REPOSITORY_CONTROLLED_PRE_RESPONSE_HOOK_FOR_CHATGPT_OUTPUT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "MAKE_BARE_CHAT_NON_AUTHORITATIVE_AND_REQUIRE_REPOSITORY_BACKED_CURRENT_BASE_OBS_FOR_CANONICAL_DECISIONS",
+        "CLAIM_CHAT_IS_HARD_GATED",
+        "BUILD_EXTERNAL_CHAT_PROXY"
+      ],
+      "losing_routes_reason": "Claiming hard chat gating is false. A new external proxy adds infrastructure and still cannot govern all ChatGPT surfaces. Restricting canonical authority to validated artifacts is immediate, truthful, and already compatible with the trusted guard.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Verify that main boot requirements, operator contract, and trusted validator all require the authority-envelope artifact while the active frontier remains unchanged."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any statement that OBS is platform-hard-enforced on every chat response",
+        "Any use of bare chat text as canonical frontier authority"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "PR290 decision boundary",
+        "action-intent gating",
+        "exact-base OBS",
+        "trusted drift guard"
+      ],
+      "fresh_reuse_plan": "Use current-base OBS before subsequent consequential Brain diagnosis; only repository-backed OBS artifacts may authorize canonical mutations or state changes."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR290 analysis",
+        "Reused trusted guard architecture",
+        "Localized remaining gap to platform/control-plane boundary"
+      ],
+      "search_stop_decision": "The limitation is architectural and directly observable from the control surfaces: GitHub can gate repository actions but does not control ChatGPT message emission. Further external search cannot change that boundary inside this session.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External route discovery is inapplicable to this governance-only truth-boundary correction."
+    },
+    "routes_considered": [
+      "MAKE_BARE_CHAT_NON_AUTHORITATIVE_AND_REQUIRE_REPOSITORY_BACKED_CURRENT_BASE_OBS_FOR_CANONICAL_DECISIONS",
+      "CLAIM_CHAT_IS_HARD_GATED",
+      "BUILD_EXTERNAL_CHAT_PROXY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CLAIM_CHAT_IS_HARD_GATED",
+      "BUILD_EXTERNAL_CHAT_PROXY"
+    ],
+    "selected_surviving_route": "MAKE_BARE_CHAT_NON_AUTHORITATIVE_AND_REQUIRE_REPOSITORY_BACKED_CURRENT_BASE_OBS_FOR_CANONICAL_DECISIONS",
+    "why_selected_route_is_fastest_sufficient": "It exactly matches the enforceable boundary, requires no new infrastructure, preserves all current guards, and prevents conversational mistakes from becoming canonical Brain actions.",
+    "expected_parent_level_state_change": "Preserve the current numeric-relation frontier while making the enforcement envelope explicit: repository mutations and canonical authority are hard-gated; conversational output alone has zero canonical authority unless backed by a current-base OBS artifact.",
+    "stop_condition": "Stop when canonical authority explicitly excludes bare conversational output, the hard-enforcement and non-enforceable surfaces are machine-readable, the boot pointer requires the authority envelope, and the trusted validator protects that requirement. Do not alter the active capability frontier or numeric-relation task.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is an internal governance truth-boundary correction with no external execution route."
+    }
+  }
+}
