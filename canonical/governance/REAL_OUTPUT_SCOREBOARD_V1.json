@@ -565,26 +565,29 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
-    "subcapability_status": "GENERIC_EXTRACTION_QUALIFICATION_REOPENED__MODERN_CONTAINER_GAP_ACTIVE",
+    "active_subcapability_target": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "subcapability_status": "GENERIC_EXTRACTION_REQUALIFIED_AFTER_FALSIFICATION__CLAIM_SUPPORT_RELATION_GAP_ACTIVE",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "residual_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
     "first_physical_spend_run_id": 36670808367,
     "last_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
-      "status": "VERIFIED_ACQUIRED__NARROW_EXACT_ROR_BOUND_SCOPE_ONLY",
-      "route": "relevant_source_evidence_extract",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
-      "public_run_id": 36679523741,
+      "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+      "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR__INDEPENDENT_FRESH_LIVE_NON_ROR_CROSS_DOMAIN_PASS",
+      "route": "source.evidence.extract.objective_grounded.stdlib + open_research_source_frontend",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+      "public_run_id": 36681368306,
+      "artifact_id": 11081458134,
+      "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+      "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Exact-ROR-bound first-party relevance-admitted extraction only. Generic modern-container extraction remains unverified."
+      "limitations": "Verbatim objective-grounded evidence units only; claim support/contradiction, semantic entailment, correctness, causality, quality, sufficiency and independence remain unverified."
     }
   },
   "events": [
