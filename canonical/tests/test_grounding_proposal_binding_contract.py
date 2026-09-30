@@ -99,7 +99,7 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
             self.assertEqual(set(ref),{"$result"})
             inner=ref["$result"]
             self.assertEqual(inner["field"],"output_path")
-            self.assertIsInstance(inner["action_index"],int)
+            self.assertIsInstance(inner["cycle"],int)
 
     def test_non_url_semantic_candidate_must_also_bind(self):
         registry={
