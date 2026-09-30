@@ -252,11 +252,11 @@
   "opus_5_5_credit": 0,
   "ownership_tests": {
     "brain_artifact_test": "PASS",
-    "brain_configured_verification_test": "PENDING",
+    "brain_configured_verification_test": "PENDING_BEHAVIORAL_EVIDENCE",
     "exact_source_integrity_test": "PASS",
     "general_substrate_separation": "PASS_ARCHITECTURALLY",
     "license_preserved": "PASS",
-    "ownership_package_test": "PENDING_FINAL_VERIFICATION",
+    "ownership_package_test": "PENDING_VERIFICATION_AND_REGRESSION_EVIDENCE",
     "reexecution_without_rediscovery_test": "PASS_FOR_MECHANISM_BYTES"
   },
   "schema": "PROJECT_BRAIN_INTERNALIZED_CAPABILITY_CONFIGURATION_V1",
@@ -266,5 +266,7 @@
     "repository": "ArtificialAnalysis/Stirrup",
     "upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee"
   },
-  "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING"
+  "status": "INTERNALIZATION_COMPLETE__BRAIN_EXECUTION_PROFILE_DEFINED__VERIFICATION_PENDING",
+  "execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "evaluation_protocol": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
 }
