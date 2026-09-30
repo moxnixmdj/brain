@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_INTERNALIZED_CAPABILITY_EXECUTION_PROFILE_V1",
+  "capability_candidate_id": "PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_V1",
+  "status": "BRAIN_OPERATIVE_CONFIGURATION_DEFINED__VERIFICATION_PENDING",
+  "brain_owned_mechanism_root": "canonical/capabilities/internalized/professional_work/stirrup_247f24d",
+  "source_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+  "target_family": "PROFESSIONAL_KNOWLEDGE_WORK",
+  "substrate": {
+    "role": "GENERAL_COGNITION_SUBSTRATE_ONLY",
+    "approved_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "hidden_target_capability_credit": false,
+    "requirement": "The substrate executes this saved Brain-owned harness/profile. Promotion evidence must compare the configured route, not standalone model performance."
+  },
+  "operative_mechanisms": [
+    {
+      "source": "src/core/agent.py",
+      "role": "MODEL_DIRECTED_AGENT_LOOP_WITH_TOOL_EXECUTION_AND_CONTEXT_MANAGEMENT"
+    },
+    {
+      "source": "src/core/models.py",
+      "role": "TYPED_MESSAGES_TOOLS_RESULTS_AND_MULTIMODAL_BLOCKS"
+    },
+    {
+      "source": "src/core/cache.py",
+      "role": "CONTEXT_STATE_AND_CACHE_SUPPORT"
+    },
+    {
+      "source": "src/prompts/base_system_prompt.txt",
+      "role": "BASE_AGENT_OPERATING_INSTRUCTION"
+    },
+    {
+      "source": "src/prompts/message_summarizer.txt",
+      "role": "LONG_TASK_CONTEXT_COMPACTION_WITH_PROGRESS_NEXT_STEPS_AND_FILE_STATE"
+    },
+    {
+      "source": "src/tools/code_backends/*",
+      "role": "CODE_AND_FILE_WORK_EXECUTION"
+    },
+    {
+      "source": "src/tools/web.py",
+      "role": "JIT_WEB_KNOWLEDGE_RETRIEVAL"
+    },
+    {
+      "source": "src/tools/mcp.py",
+      "role": "EXTERNAL_TOOL_CONNECTION"
+    },
+    {
+      "source": "src/skills/*",
+      "role": "MODULAR_SKILL_LOADING"
+    },
+    {
+      "source": "skills/data_analysis/*",
+      "role": "BUNDLED_DATA_ANALYSIS_PROCEDURE_AND_SCRIPTS"
+    },
+    {
+      "source": "src/tools/finish.py",
+      "role": "EXPLICIT_COMPLETION_AND_OUTPUT_HANDOFF"
+    },
+    {
+      "source": "Agent.to_tool / sub-agent machinery",
+      "role": "BOUNDED_DELEGATION_WHERE_USEFUL"
+    }
+  ],
+  "chatgpt_brain_adapter": {
+    "class": "INTEGRATION_GLUE_ONLY",
+    "loop": [
+      "INGEST_TASK_AND_REFERENCE_FILES",
+      "IDENTIFY_REQUIRED_DELIVERABLES_AND_ACCEPTANCE_CRITERIA",
+      "LOAD_ONLY_RELEVANT_BRAIN_OWNED_SKILLS_AND_TOOLS",
+      "LET_GENERAL_COGNITION_SUBSTRATE_CHOOSE_NEXT_ACTION_WITHIN_TASK_SCOPE",
+      "EXECUTE_TOOL_ACTION",
+      "INGEST_TOOL_RESULT_AND_UPDATE_DURABLE_TASK_STATE",
+      "WHEN_CONTEXT_PRESSURE_RISES_COMPACT_USING_STIRRUP_SUMMARIZATION_CONTRACT",
+      "CONTINUE_UNTIL_DELIVERABLES_EXIST_AND_ACCEPTANCE_CRITERIA_ARE_CHECKED",
+      "RUN_INDEPENDENT_OR_FORMAT_SPECIFIC_VERIFICATION",
+      "FINISH_WITH_EXACT_OUTPUT_FILES_AND_EVIDENCE_RECEIPT"
+    ],
+    "tool_mapping": {
+      "code_execution": "CURRENT_AVAILABLE_CODE_EXECUTION_OR_CONNECTED_EXECUTION_SURFACE",
+      "web": "WEB_SEARCH_FOR_JIT_KNOWLEDGE",
+      "files": "FILES_LIBRARY_AND_ARTIFACT_TOOLS",
+      "documents": "DOCUMENT_DOCX_PDF_TOOLS_WHEN_TASK_REQUIRES",
+      "spreadsheets": "SPREADSHEET_TOOLS_WHEN_TASK_REQUIRES",
+      "presentations": "PRESENTATION_TOOLS_WHEN_TASK_REQUIRES",
+      "mcp": "CONNECTED_PLUGINS_OR_CONNECTORS",
+      "delegation": "BRAIN_OWNED_SCOPED_SUBAGENT_COORDINATION_WHEN_CAUSALLY_USEFUL"
+    },
+    "knowledge_policy": "EXTERNAL_JIT",
+    "artifact_policy": "DELIVERABLE_FILES_AND_COMPACT_STATE_ARE_DURABLE__WORLD_KNOWLEDGE_IS_NOT",
+    "completion_policy": "NO_FINISH_UNTIL_REQUIRED_FILES_EXIST_AND_TASK_CRITERIA_HAVE_DIRECT_EVIDENCE"
+  },
+  "invocation_contract": {
+    "input": "Professional task prompt plus permitted reference files",
+    "output": "Requested professional work product files plus compact evidence/verification receipt",
+    "max_turn_policy": "BOUNDED_BY_TASK_AND_AVAILABLE_SUBSTRATE__STIRRUP_REFERENCE_PROTOCOL_USES_AGENT_LOOP_WITH_CONTEXT_COMPACTION",
+    "state": "Persist deliverable paths, acceptance criteria, material decisions, open gaps, and tool results needed to continue",
+    "failure": "Fail closed on missing required deliverable, unreadable artifact, unresolved required calculation, or known acceptance gap"
+  },
+  "ownership_tests": {
+    "brain_artifact_test": "PASS",
+    "no_hidden_capability_provider_test": "PASS_ARCHITECTURALLY__PERFORMANCE_PENDING",
+    "general_substrate_test": "PASS_ARCHITECTURALLY",
+    "specimen_separation_test": "PASS",
+    "reexecution_without_rediscovery_test": "PASS_FOR_SAVED_CONFIGURATION",
+    "brain_configured_verification_test": "PENDING",
+    "ownership_package_test": "PENDING_FINAL_VERIFICATION"
+  },
+  "opus_5_5_credit": 0
+}
