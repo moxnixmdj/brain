@@ -50,13 +50,16 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "FRESH_PARENT_TASK_EXECUTED__FAIL_FIRST_CAUSAL_GAP_LOCALIZED",
-    "task": "FRESH_PARENT_SERIALIZATION_DECISION_20260930_001",
-    "evidence_path": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_DECISION_TERMINAL_RECONCILIATION_20260930_V1.json",
-    "public_run_id": 36644374149,
+    "status": "FRESH_CROSS_DOMAIN_PARENT_TASK_EXECUTED__FAIL_FIRST_CAUSAL_GAP_LOCALIZED",
+    "task": "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
+    "domain": "GEOPHYSICS_SEISMOLOGY_QUANTITATIVE_REASONING",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+    "reconciliation_path": "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_TERMINAL_RECONCILIATION_V1.json",
+    "admissibility_correction": "canonical/capabilities/obsolescence/PR286_GEOPHYSICS_RESIDUAL_GAP_ADMISSIBILITY_CORRECTION_20260930_V1.json",
+    "public_run_id": 36661188188,
     "task_completed": false,
     "model_free_execution": true,
-    "first_causal_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "first_causal_gap": "MODEL_INDEPENDENT_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION_V1",
     "same_task_replay_allowed": false
   },
   "obsolescence_status": "NOT_YET_PROVEN__NUMERIC_RELATION_SUBCAPABILITY_GAP",
