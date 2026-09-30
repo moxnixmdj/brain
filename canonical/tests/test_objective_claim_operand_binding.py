@@ -197,5 +197,93 @@ class BinderTests(unittest.TestCase):
               data,evaluate_relation=True
             )
 
+    def test_objective_literal_threshold_scoped_measurement_gt(self):
+        data=fixture(
+          "Observed maximum pressure was 6.2 bar.",
+          "Reference outlet identifier was 7."
+        )
+        out=self.relation(
+          "Determine whether the reactor produced gas with an observed maximum pressure exceeding 5 bar at any monitored outlet. Use authoritative evidence.",
+          data
+        )
+        self.assertEqual(out["status"],"CLAIM_SPEC_AND_OPERANDS_BOUND",out)
+        self.assertEqual(out["relation_spec"]["mode"],"NUMERIC_LITERAL_THRESHOLD_RELATION",out)
+        self.assertEqual(out["relation_spec"]["operator"],"GT",out)
+        self.assertEqual(out["literal_threshold_binding"]["threshold_surface"],"5 bar",out)
+        self.assertTrue(out["relation_result"]["predicate"],out)
+        self.assertEqual(out["relation_result"]["threshold"]["provenance"],"OBJECTIVE_LITERAL",out)
+
+    def test_objective_literal_threshold_direct_lte(self):
+        data=fixture(
+          "Peak chamber pressure was 4.2 bar.",
+          "Administrative record number was 2026."
+        )
+        out=self.relation(
+          "Determine whether peak chamber pressure is at most 5 bar.",
+          data
+        )
+        self.assertEqual(out["relation_spec"]["operator"],"LTE",out)
+        self.assertTrue(out["relation_result"]["predicate"],out)
+
+    def test_objective_literal_threshold_negative_value(self):
+        data=fixture(
+          "Minimum test temperature was -7 C.",
+          "Administrative record number was 3."
+        )
+        out=self.relation(
+          "Determine whether minimum test temperature is lower than -5 C.",
+          data
+        )
+        self.assertEqual(out["relation_spec"]["operator"],"LT",out)
+        self.assertTrue(out["relation_result"]["predicate"],out)
+
+    def test_objective_literal_threshold_unit_mismatch_fails_closed(self):
+        data=fixture(
+          "Peak chamber pressure was 4.2 kPa.",
+          "Administrative record number was 2026."
+        )
+        out=self.m.bind(
+          "Determine whether peak chamber pressure is at most 5 bar.",
+          data,evaluate_relation=False
+        )
+        self.assertEqual(
+          out["reason"],
+          "NO_EXACT_UNIT_COMPATIBLE_EVIDENCE_OPERAND_FOR_LITERAL_THRESHOLD",
+          out
+        )
+
+    def test_objective_literal_threshold_multiple_same_unit_numbers_fail_closed(self):
+        data=fixture(
+          "Peak chamber pressure was 4 bar before calibration and 6 bar after calibration.",
+          "Administrative record number was 2026."
+        )
+        out=self.m.bind(
+          "Determine whether peak chamber pressure exceeds 5 bar.",
+          data,evaluate_relation=False
+        )
+        self.assertEqual(
+          out["reason"],
+          "AMBIGUOUS_EVIDENCE_OPERAND_FOR_LITERAL_THRESHOLD",
+          out
+        )
+
+    def test_objective_literal_threshold_requires_explicit_supported_grammar(self):
+        data=fixture(
+          "Peak chamber pressure was 6 bar.",
+          "Administrative record number was 2026."
+        )
+        out=self.m.bind(
+          "Investigate peak chamber pressure near approximately 5 bar.",
+          data,evaluate_relation=False
+        )
+        self.assertEqual(out["status"],"UNBOUND",out)
+        self.assertEqual(out["reason"],"OBJECTIVE_RELATION_AMBIGUOUS_OR_UNSUPPORTED",out)
+
+    def test_literal_threshold_repair_contains_no_parent_task_literals(self):
+        source=P.read_text(encoding="utf-8").lower()
+        self.assertNotIn("kamchatka",source)
+        self.assertNotIn("tsunami",source)
+        self.assertNotIn("russia",source)
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
