@@ -1,0 +1,210 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RUN-FRESH-SEISMOLOGY-PARENT-TASK-C-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_C_REQUIRED",
+  "action_kind": "FRESH_PARENT_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_C_REQUIRED",
+  "expected_parent_frontier_change": "EITHER_COMPLETE_ONE_FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_PARENT_TASK_C_OR_LOCALIZE_THE_FIRST_NEW_INTEGRATED_CAUSAL_GAP__NO_AUTOMATIC_PARENT_PROMOTION",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main c49e027828cb39926ec1249af6b432dc996db9c3 refreshed immediately before branch creation.",
+    "HTTP/2 parent Task A is spent/no-replay after guarded run 36688193204.",
+    "Genomics parent Task B is spent/no-replay after guarded run 36690682680.",
+    "PR474 broad multi-clause routing repair is guarded-qualified and merged.",
+    "PR512 query-focus/relevance repair is guarded-qualified and merged.",
+    "Open-PR search found no current competing fresh parent Task C lease."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN_AFTER_TWO_SPENT_PARENT_FALSIFICATIONS_AND_VERIFIED_GENERIC_REPAIRS",
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "proposed_fresh_task": {
+    "task_id": "PARENT-SEISMOLOGY-TSUNAMI-AMPLITUDE-OPEN-RESEARCH-TASK-C-20260930-001",
+    "domain": "SEISMOLOGY_TSUNAMI_HAZARD",
+    "goal_text": "Determine whether the 2025 Kamchatka earthquake generated a tsunami with an observed maximum amplitude exceeding 1 meter at any officially monitored station outside Russia. Use authoritative primary or reference data, choose and justify a defensible quantitative method, quantify the strongest observed evidence, identify material limitations or uncertainty, independently verify consequential calculations, and produce a decision-quality answer with source and method provenance.",
+    "anti_leakage": {
+      "authority_name_preprovided": false,
+      "authority_domain_preprovided": false,
+      "source_url_preprovided": false,
+      "dataset_or_station_identifier_preprovided": false,
+      "formula_or_calculation_recipe_preprovided": false,
+      "executable_tool_or_command_preprovided": false,
+      "controller_action_graph_preprovided": false,
+      "expected_answer_precommitted": false
+    }
+  },
+  "stop_condition": "After this lease PR passes trusted current-base drift/dedupe checks, freeze this exact Task C and execute it once through the live atomic guard with model planner disabled. Stop on semantic completion or the first new causal gap. Never replay this task. Require independent verification before any parent capability promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+    "real_outcome": "Reality-test the now-repaired model-independent open-ended research stack on one materially different scientific domain without prewired research instructions or model cognition.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain decisive parent-level evidence after the broad-routing and source-query/relevance repairs.",
+      "proxy_goals_deleted": [
+        "replay HTTP/2",
+        "replay genomics",
+        "another synthetic query-focus benchmark",
+        "new infrastructure",
+        "worker scaling",
+        "frontier-model parity test"
+      ],
+      "surviving_necessity": "A materially different fresh parent Task C is explicitly required by the merged PR512 stop rule."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical ASTRA run_goal path",
+        "broad multi-clause open-research decomposition",
+        "deterministic research query focus",
+        "open-web candidate discovery",
+        "BM25 objective relevance",
+        "source provenance/authority verification",
+        "generic evidence extraction",
+        "claim-spec and operand binding",
+        "generic claim-relation evaluation",
+        "live atomic execution guard"
+      ],
+      "external_existing_routes_checked": [
+        "model planner disqualified for model-independent credit",
+        "task-specific source hints disqualified because they destroy the open-ended test"
+      ],
+      "capability_work_deleted": [
+        "no new planner",
+        "no new query repair",
+        "no source-specific adapter",
+        "no new execution infrastructure before real failure"
+      ],
+      "surviving_gap": "No fresh parent-level evidence exists after the latest two generic repairs."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent validation gap. No implementation defect should be assumed until Task C produces one.",
+      "delete_bypass_substitute_options": [
+        "DELETE synthetic probes",
+        "REUSE the repaired canonical stack",
+        "BYPASS new machinery by running the real task",
+        "SUBSTITUTE or repair only after a fresh first causal gap"
+      ],
+      "surviving_causal_blocker": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_C_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RUN_FRESH_SEISMOLOGY_PARENT_TASK_C_THROUGH_EXISTING_GUARDED_RUNTIME",
+        "BUILD_MORE_SYNTHETIC_TESTS",
+        "USE_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "Only the selected route directly tests the current parent capability without adding machinery, leaking task structure, or violating model independence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None before Task C. Producer success must be independently checked from the producer-cited evidence; failure preserves only the earliest causal blocker."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "further query-focus synthetic work unless Task C falsifies the repair"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "broad research routing",
+        "query focus",
+        "source relevance",
+        "evidence extraction",
+        "claim binding",
+        "relation evaluation"
+      ],
+      "fresh_reuse_plan": "If Task C completes and independently verifies, freeze a materially different Task D for fresh reuse/cross-domain transfer before any broad parent promotion."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused HTTP/2 and genomics first-spend evidence",
+        "reused PR474 and PR512 guarded qualifications",
+        "reused current global execution guard"
+      ],
+      "search_stop_decision": "The merged stop rule explicitly requires the real Task C; more architecture analysis cannot answer the parent question faster.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main, open PRs, guard state, and latest qualification run refreshed immediately before this action."
+    },
+    "routes_considered": [
+      "RUN_FRESH_SEISMOLOGY_PARENT_TASK_C_THROUGH_EXISTING_GUARDED_RUNTIME",
+      "BUILD_MORE_SYNTHETIC_TESTS",
+      "USE_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "GENOMICS_REPLAY",
+      "NEW_INFRASTRUCTURE",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_FORMULA_OR_STATION"
+    ],
+    "selected_surviving_route": "RUN_FRESH_SEISMOLOGY_PARENT_TASK_C_THROUGH_EXISTING_GUARDED_RUNTIME",
+    "why_selected_route_is_fastest_sufficient": "It uses already-qualified infrastructure and generic capabilities, costs $0, exercises a new domain, and yields either real completion or the next causal gap in one execution.",
+    "expected_parent_level_state_change": "EITHER_COMPLETE_ONE_FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_PARENT_TASK_C_OR_LOCALIZE_THE_FIRST_NEW_INTEGRATED_CAUSAL_GAP__NO_AUTOMATIC_PARENT_PROMOTION",
+    "stop_condition": "After this lease PR passes trusted current-base drift/dedupe checks, freeze this exact Task C and execute it once through the live atomic guard with model planner disabled. Stop on semantic completion or the first new causal gap. Never replay this task. Require independent verification before any parent capability promotion.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action is a direct parent-capability validation using the already-selected and guarded canonical execution route; external supplier search cannot replace the required real parent evidence.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T08:55:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RUN_FRESH_SEISMOLOGY_PARENT_TASK_C_THROUGH_EXISTING_GUARDED_RUNTIME",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T08:54:00Z",
+            "evidence": [
+              "DIRECT_PROBE guarded qualification run 36692443468 completed successfully on the exact account carrier immediately before this action."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_CANONICAL_MAIN_c49e027828cb39926ec1249af6b432dc996db9c3",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T08:55:00Z",
+            "evidence": [
+              "BRAIN_INHERITED exact branch base and latest merged PR512 runtime."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
