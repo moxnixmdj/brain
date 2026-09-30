@@ -140,7 +140,9 @@
     "operator_obs_authority_envelope_required": true,
     "operator_obs_authority_envelope_path": "canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json",
     "bare_chat_has_zero_canonical_authority": true,
-    "canonical_consequential_decision_requires_repository_backed_current_base_obs": true
+    "canonical_consequential_decision_requires_repository_backed_current_base_obs": true,
+    "canonical_frontier_surface_consistency_required": true,
+    "runtime_cognition_provenance_required": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
