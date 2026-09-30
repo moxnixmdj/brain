@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-  "status": "ACQUIRED_VERIFIED__REAL_TASK_AND_CROSS_DOMAIN_FRESH_REUSE_PASS",
+  "status": "REOPENED_BY_REGRESSION__INPUT_CONTRACT_COMPATIBILITY_FALSIFIED",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given a plain consequential goal, deterministically map the goal's required operations, entities, constraints, and output contract onto semantically compatible capabilities already present in Brain's bound capability registry before invoking external supplier discovery; preserve ambiguity and fail closed when no binding is justified.",
@@ -29,11 +29,11 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "ACQUIRED_VERIFIED",
-  "next_action": "RECOMPUTE_PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_FRONTIER__OBS_INHERITED_SYSTEM__SELECT_NEXT_SMALLEST_MODEL_INDEPENDENT_COMPOSITION_GAP",
-  "obsolescence_status": "OBSOLETE_VERIFIED",
-  "winning_route": "DETERMINISTIC_CLAUSE_GROUNDING_TO_EXISTING_VERIFIED_BOUND_REGISTRY_WITH_INDEPENDENT_STRUCTURAL_VERIFIER",
-  "capability_strength_result": "REAL_TASK_A_SOFTWARE_TEST_AUDIT_PASS__FRESH_REUSE_B_VISUAL_QR_ARTIFACT_PASS",
+  "current_status": "REOPENED_BY_REGRESSION",
+  "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_GENERIC_GROUNDING_INPUT_CONTRACT_COMPATIBILITY__REUSE_EXISTING_REGISTRY_ACTION_TEMPLATES_AND_BINDER_FIRST__NO_REQUESTS_TASK_REPLAY",
+  "obsolescence_status": "REOPENED_BY_REGRESSION",
+  "winning_route": null,
+  "capability_strength_result": "PRIOR_SINGLE_CAPABILITY_TASKS_PASS__FRESH_MULTI_STEP_LITERAL_URL_TASK_FALSIFIES_INPUT_CONTRACT_COMPLETENESS",
   "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
   "independent_verification": {
@@ -69,6 +69,11 @@
     "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py",
     "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
   ],
-  "residual_gap": "BOUND_CAPABILITY_GROUNDING_NOW_WORKS_AND_PRECEDES_EXTERNAL_DISCOVERY__PARENT_OPEN_ENDED_CAPABILITY_MUST_RECOMPUTE_FROM_COMPOSITION_REQUIRED_TERMINAL_STATE",
-  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json"
+  "residual_gap": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+  "regression_evidence_path": "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json",
+  "regression_run_id": 36649042160,
+  "regression_scope": "SEMANTIC_CANDIDATE_SELECTED_WITHOUT_EXECUTABLE_INPUT_BINDABILITY",
+  "prior_successes_preserved": true,
+  "prior_promotion_credit_currently_valid": false
 }
