@@ -18,7 +18,8 @@
     "current_real_task_or_explicit_support_justification",
     "current_recursive_obs_receipt",
     "current_live_challenger_frontier",
-    "current_selected_route_execution_preflight"
+    "current_selected_route_execution_preflight",
+    "operator_obs_decision_boundary"
   ],
   "checks": [
     {
@@ -39,6 +40,11 @@
     {
       "id": "REAL_TASK_FIRST",
       "question": "Is the default action a real consequential task rather than a synthetic proxy?",
+      "required": true
+    },
+    {
+      "id": "OBS_DECISION_AUTHORITY_BOUNDARY",
+      "question": "Before any consequential current-blocker claim, recommendation, route selection, or execution decision, did the operator refresh live canonical state and complete current-base seven-layer OBS rather than relying on memory, summaries, or prior conclusions?",
       "required": true
     },
     {
@@ -255,7 +261,8 @@
     "ACTION_HAS_NO_CURRENT_CANONICAL_NECESSITY_PROOF",
     "INFRASTRUCTURE_WORK_WHILE_EXISTING_ROUTE_CAN_EXECUTE_REAL_MISSION",
     "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC",
-    "COGNITIVE_CAPABILITY_EXECUTION_PATH_CONTAINS_MODEL_COGNITION"
+    "COGNITIVE_CAPABILITY_EXECUTION_PATH_CONTAINS_MODEL_COGNITION",
+    "CONSEQUENTIAL_OPERATOR_DECISION_WITHOUT_CURRENT_BASE_OBS"
   ],
   "on_abort": "REFRESH_LIVE_CANONICAL_STATE__INVALIDATE_AFFECTED_OBS_LAYERS__DELETE_OR_SWITCH_ROUTE__UPDATE_REAL_OUTPUT_SCOREBOARD__EXECUTE_SHORTEST_SURVIVING_PATH"
 }
