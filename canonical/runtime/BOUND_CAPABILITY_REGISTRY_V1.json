@@ -2774,7 +2774,7 @@
       }
     },
     "numeric.expression.sympy.typed": {
-      "status": "VERIFIED_BOUND_CAPABILITY_CANDIDATE",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "incremental_spend_usd": 0,
       "cost": 1,
       "platforms": [
@@ -2859,9 +2859,30 @@
         "Result must be a finite real scalar."
       ],
       "verification": {
-        "status": "PENDING_FRESH_NON_ASTRONOMY_QUALIFICATION",
+        "independently_verified": true,
+        "qualification_run_id": 36666277034,
+        "qualification_job_id": 109731524267,
+        "qualification_artifact_id": 11075549084,
+        "qualification_artifact_digest": "sha256:8a222b5ced5eb1f0e37534185b0d689bf10c81a944398349614bdefd7abc36e0",
+        "domain": "SOFTWARE_REPOSITORY_LIVE_METADATA",
         "inherited_supplier_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
-        "astronomy_gap_evidence": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json"
+        "parent_gap_evidence": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json",
+        "exact_dependency_closure_sha256": "72f749d3eadfaa28d62e6788e13c5ca55baf2d8f5e2347341b79aaa077876d6a",
+        "positive_properties": [
+          "explicit scalar aliases bind to prior result cycles",
+          "multiplication and fractional exponentiation execute through SymPy 1.14.0",
+          "derived scalar is consumable by existing alias-aware jq numeric relation",
+          "independent Python refetch/recomputation matches producer"
+        ],
+        "negative_properties": [
+          "function calls rejected",
+          "attributes rejected",
+          "subscripts rejected",
+          "division by zero rejected",
+          "out-of-bounds exponents rejected",
+          "unknown aliases rejected",
+          "boolean variables rejected"
+        ]
       }
     }
   },
