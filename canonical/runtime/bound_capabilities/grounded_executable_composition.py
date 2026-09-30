@@ -86,6 +86,8 @@ def compose(goal,grounding,registry,compiler,root):
         raise CompositionError("GROUNDING_INVALID")
     if not isinstance(registry,dict):
         raise CompositionError("REGISTRY_INVALID")
+    if grounding.get("input_contract_bindability_enforced") is not True:
+        raise CompositionError("GROUNDING_INPUT_CONTRACT_BINDABILITY_NOT_ENFORCED")
     clauses=grounding.get("clauses")
     if not isinstance(clauses,list) or not clauses:
         raise CompositionError("GROUNDING_CLAUSES_INVALID")
