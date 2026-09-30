@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-METEOROLOGY-NASA-POWER-DAILY-MEAN-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "METEOROLOGY_CLIMATE_DATA_QUANTITATIVE_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "scientific_question": "For Phoenix, Arizona on 2025-07-01, is the midpoint of NASA POWER daily maximum and minimum 2 m air temperatures within 3 degrees Celsius of NASA POWER's daily mean 2 m air temperature?",
+  "sources": [
+    {
+      "id": "NASA_POWER_T2M_MAX",
+      "authority": "NASA POWER",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX&community=RE&longitude=-112.0740&latitude=33.4484&start=20250701&end=20250701&format=JSON",
+      "json_path": [
+        "properties",
+        "parameter",
+        "T2M_MAX",
+        "20250701"
+      ],
+      "units": "C"
+    },
+    {
+      "id": "NASA_POWER_T2M_MIN",
+      "authority": "NASA POWER",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MIN&community=RE&longitude=-112.0740&latitude=33.4484&start=20250701&end=20250701&format=JSON",
+      "json_path": [
+        "properties",
+        "parameter",
+        "T2M_MIN",
+        "20250701"
+      ],
+      "units": "C"
+    },
+    {
+      "id": "NASA_POWER_T2M_MEAN",
+      "authority": "NASA POWER",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M&community=RE&longitude=-112.0740&latitude=33.4484&start=20250701&end=20250701&format=JSON",
+      "json_path": [
+        "properties",
+        "parameter",
+        "T2M",
+        "20250701"
+      ],
+      "units": "C"
+    }
+  ],
+  "scientific_contract": {
+    "midpoint_rule": "midpoint_c = (tmax_c + tmin_c) / 2",
+    "max_abs_midpoint_vs_mean_delta_c": 3,
+    "decision_rule": "WITHIN_3C if abs(midpoint_c-tmean_c) <= 3, otherwise OUTSIDE_3C",
+    "rationale": "Tests a common daily-temperature midpoint approximation against the authoritative daily mean on a fixed historical day without assuming the answer."
+  },
+  "goal_text": "Using the authoritative JSON source https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX&community=RE&longitude=-112.0740&latitude=33.4484&start=20250701&end=20250701&format=JSON, extract JSON path properties.parameter.T2M_MAX.20250701 and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_METEOROLOGY_TMAX.json. Using the authoritative JSON source https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MIN&community=RE&longitude=-112.0740&latitude=33.4484&start=20250701&end=20250701&format=JSON, extract JSON path properties.parameter.T2M_MIN.20250701 and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_METEOROLOGY_TMIN.json. Using the authoritative JSON source https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M&community=RE&longitude=-112.0740&latitude=33.4484&start=20250701&end=20250701&format=JSON, extract JSON path properties.parameter.T2M.20250701 and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_METEOROLOGY_TMEAN.json. Calculate the daily midpoint temperature using midpoint = (tmax + tmin) / 2. Determine whether the two temperatures differ by at most 3.",
+  "required_output": {
+    "fields": [
+      "status",
+      "tmax_c",
+      "tmin_c",
+      "tmean_c",
+      "midpoint_c",
+      "absolute_midpoint_vs_mean_delta_c",
+      "within_3c",
+      "decision",
+      "source_urls",
+      "provenance",
+      "model_dependency_count"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PARENT_METEOROLOGY_NASA_POWER_RESULT_20260930.json"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch the three exact NASA POWER URLs outside the Brain producer, independently extract the fixed-date values, recompute midpoint, absolute delta and the frozen 3 C decision, then compare every consequential producer value.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "frozen_before_source_preflight": true
+}
