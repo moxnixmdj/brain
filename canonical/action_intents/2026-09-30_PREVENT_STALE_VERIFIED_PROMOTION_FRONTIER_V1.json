@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PREVENT-STALE-VERIFIED-PROMOTION-FRONTIER-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "VERIFIED_PROMOTION_CAN_LEAVE_CANONICAL_FRONTIER_STALE_AND_SPAWN_REDUNDANT_IMPLEMENTATION",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::VERIFIED_PROMOTION_CAN_LEAVE_CANONICAL_FRONTIER_STALE_AND_SPAWN_REDUNDANT_IMPLEMENTATION::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make verified narrow-capability promotion and canonical next-gap advancement atomic, so stale satisfied frontiers fail closed before ordinary implementation; preserve the current evidence-extraction frontier and all scoreboard counters.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR411 deleted universal primary-source gate",
+    "PR413 integrated objective-relevance admission",
+    "verified relevance promotion receipt declares next_causal_gap evidence extraction",
+    "canonical reconciliation later advanced to evidence extraction",
+    "stale PR409 and PR412 were closed unmerged"
+  ],
+  "evidence_presence_classification": "GENERIC_CONTROL_DEFECT_PROVEN_BY_LIVE_RECONCILIATION_LAG",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the promotion-atomicity guard, law V2, regression, and boot requirement with zero scoreboard credit; then stop governance work and resume model-independent evidence-extraction acquisition.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly required making these recurring mistakes and other unverified mistakes fail closed, and ordered Brain to update everything necessary toward the real frontier-capability objective.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "8c4d76e62cee474fc97844d59c12aa907b7ba44f",
+    "real_outcome": "Make verified narrow-capability promotion and canonical next-gap advancement atomic, so stale satisfied frontiers fail closed before ordinary implementation; preserve the current evidence-extraction frontier and all scoreboard counters.",
+    "required_capability": "ATOMIC_VERIFIED_PROMOTION_TO_NEXT_CAUSAL_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "Make verified narrow-capability promotion and canonical next-gap advancement atomic, so stale satisfied frontiers fail closed before ordinary implementation; preserve the current evidence-extraction frontier and all scoreboard counters.",
+      "proxy_goals_deleted": [
+        "another relevance implementation",
+        "another general scheduler rewrite",
+        "manual reminder to reconcile"
+      ],
+      "surviving_necessity": "One generic fail-closed invariant preventing verified promotions from coexisting with a stale blocker."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1",
+        "canonical cross-surface consistency guard",
+        "promotion truth guard",
+        "duplicate blocker lease guard"
+      ],
+      "external_existing_routes_checked": [
+        "No external supplier is needed for an internal truth-transition invariant."
+      ],
+      "capability_work_deleted": [
+        "No new scheduler",
+        "No registry-wide fuzzy capability inference",
+        "No runtime research implementation"
+      ],
+      "surviving_gap": "Existing guards require cross-surface agreement but do not require a verified promotion receipt's next_causal_gap to become the active frontier atomically."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic control-plane race: qualification can finish before canonical frontier advancement.",
+      "delete_bypass_substitute_options": [
+        "Delete follow-up implementation against superseded blocker",
+        "Use promotion receipt next_causal_gap as exact non-fuzzy authority",
+        "Reject manual reminder-only solution"
+      ],
+      "surviving_causal_blocker": "No machine invariant binds verified acquisition receipt next_causal_gap to active canonical blocker in the same authoritative state."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Extend existing trusted drift guard with verified-promotion atomicity",
+        "Add fuzzy registry-to-frontier capability inference",
+        "Build a new reconciliation service"
+      ],
+      "losing_routes_reason": "The trusted guard already loads canonical mirrors and promotion evidence; extending it is smaller, exact, faster, and less error-prone than fuzzy inference or new infrastructure.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Directly validate current reconciled head passes; construct stale next_causal_gap mismatch in regression semantics and require fail-closed behavior. No new benchmark."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "manual post-promotion reconciliation reminders",
+        "duplicate stale implementation branches after verified promotion"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "cross-surface frontier consistency",
+        "promotion truth"
+      ],
+      "fresh_reuse_plan": "Every future verified narrow promotion receipt carrying next_causal_gap is automatically checked by the same guard."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing drift guard and promotion receipt semantics",
+        "Avoided registry name matching",
+        "Preserved current evidence-extraction frontier"
+      ],
+      "search_stop_decision": "The exact recurring failure is explained by promotion/reconciliation non-atomicity; the smallest sufficient fix is one invariant in the existing trusted guard.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_TRUSTED_GUARD_WITH_PROMOTION_ATOMICITY",
+      "FUZZY_REGISTRY_TO_FRONTIER_MATCHING",
+      "NEW_RECONCILIATION_SERVICE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "FUZZY_REGISTRY_TO_FRONTIER_MATCHING",
+      "NEW_RECONCILIATION_SERVICE",
+      "MANUAL_REMINDER_ONLY"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_TRUSTED_GUARD_WITH_PROMOTION_ATOMICITY",
+    "why_selected_route_is_fastest_sufficient": "It uses exact next_causal_gap evidence already emitted by verified promotion receipts, reuses the trusted fail-closed guard, adds no execution infrastructure, and prevents ordinary work on superseded blockers.",
+    "expected_parent_level_state_change": "Make verified narrow-capability promotion and canonical next-gap advancement atomic, so stale satisfied frontiers fail closed before ordinary implementation; preserve the current evidence-extraction frontier and all scoreboard counters.",
+    "stop_condition": "Merge only the promotion-atomicity guard, law V2, regression, and boot requirement with zero scoreboard credit; then stop governance work and resume model-independent evidence-extraction acquisition.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized governance guard change; no external execution supplier is selected and the selected route is the already-trusted canonical drift guard."
+    }
+  }
+}

@@ -31,7 +31,7 @@
     "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
-    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
+    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V2.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -123,7 +123,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2,
     "fail_closed_mistake_immunity_required": true,
-    "fail_closed_mistake_immunity_law_path": "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
+    "fail_closed_mistake_immunity_law_path": "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V2.md",
     "recurring_mistake_regression_catalog_path": "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
     "deterministic_duplicate_lease_owner_required": true,
     "active_capability_target_change_requires_explicit_reconciliation": true,
@@ -142,7 +142,8 @@
     "bare_chat_has_zero_canonical_authority": true,
     "canonical_consequential_decision_requires_repository_backed_current_base_obs": true,
     "canonical_frontier_cross_surface_consistency_required": true,
-    "runtime_cognition_provenance_required_for_cognitive_credit": true
+    "runtime_cognition_provenance_required_for_cognitive_credit": true,
+    "verified_promotion_frontier_atomicity_required": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
