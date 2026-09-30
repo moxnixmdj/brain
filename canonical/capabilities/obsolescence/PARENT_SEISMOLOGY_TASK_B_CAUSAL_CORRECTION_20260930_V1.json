@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_CAUSAL_CORRECTION_V1",
+  "status": "PRIMARY_ARTIFACT_CAUSAL_CORRECTION__NO_CAPABILITY_CREDIT",
+  "canonical_base_commit": "8072f67289a6eea2462dd7cad2dd3991a3276734",
+  "supersedes": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+  "task_id": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
+  "authoritative_run_id": 36693929830,
+  "job_id": 109817291758,
+  "artifact_id": 11086898224,
+  "artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7",
+  "execution_count": 1,
+  "replay_allowed": false,
+  "guard_status": "ADMITTED_EXACTLY_ONCE",
+  "observed": {
+    "discovery_query": "2025 kamchatka earthquake generated tsunami observed maximum amplitude exceeding meter any officially monitored station outside russia",
+    "discovered_candidate_count": 12,
+    "provenance_verified_retrieval_count": 8,
+    "bibliographic_provenance_candidates": [
+      {
+        "rank": 10,
+        "backend": "CROSSREF",
+        "status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+        "title": "The slip distribution of the 2025 Kamchatka earthquake estimated from dispersive tsunami images observed by SWOT satellite",
+        "url": "https://doi.org/10.22541/essoar.177032873.37227439/v1"
+      },
+      {
+        "rank": 11,
+        "backend": "CROSSREF",
+        "status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+        "title": "1997 Kronotsky earthquake and tsunami and their predecessors, Kamchatka, Russia",
+        "url": "https://doi.org/10.5194/nhess-2017-172"
+      }
+    ],
+    "selected_source": {
+      "backend": "BING_RSS",
+      "url": "https://simple.wikipedia.org/wiki/2025",
+      "title": "2025 - Simple English Wikipedia, the free encyclopedia",
+      "reason_selected": "Only RETRIEVAL_PROVENANCE_VERIFIED candidates were admitted to BM25 relevance; the relevant bibliographic candidate was excluded before ranking."
+    },
+    "selected_source_relevance_score": 1.578329880818,
+    "selected_source_matched_terms": [
+      "2025",
+      "russia"
+    ],
+    "evidence_extracted_candidate_count": 1,
+    "extracted_source_contains_required_amplitude_operand": false,
+    "binding_status": "UNBOUND",
+    "binding_reason": "OBJECTIVE_RELATION_AMBIGUOUS_OR_UNSUPPORTED",
+    "claim_relation_evaluated_count": 0
+  },
+  "falsified_interpretation": "The first causal gap is not yet proven to be objective-literal 1-meter threshold binding because the selected evidence source does not contain the required observed tsunami amplitude operand.",
+  "first_causal_stage": "SOURCE_CANDIDATE_PROVENANCE_CLASS_ADMISSION_BEFORE_RELEVANCE_AND_EVIDENCE_EXTRACTION",
+  "first_causal_gap": "OPEN_RESEARCH_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_EXCLUDED_FROM_RELEVANCE_AND_LIVE_EVIDENCE_ROUTE",
+  "generic_root": "The source frontend admits only RETRIEVAL_PROVENANCE_VERIFIED candidates to relevance ranking, excluding BIBLIOGRAPHIC_PROVENANCE_VERIFIED scholarly candidates. This caused a relevant Crossref candidate to be dropped before ranking and an irrelevant but retrievable general-year page to be extracted.",
+  "required_repair": "Admit verified bibliographic candidates to relevance selection without pretending bibliographic metadata is fetched evidence. If a bibliographic candidate wins, convert it through live retrieval provenance before evidence extraction. Keep extraction and claim binding fail-closed.",
+  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_BIBLIOGRAPHIC_PROVENANCE_ADMISSION_TO_RELEVANCE_THEN_LIVE_RETRIEVAL__NO_SEISMOLOGY_REPLAY",
+  "parent_capability_promoted": false,
+  "capability_credit_delta": 0,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
