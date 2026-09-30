@@ -1,0 +1,221 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RESTORE-QUALIFIED-GENERIC-EVIDENCE-EXTRACTION-BYTES-20260930-V1",
+  "status": "TRUTH_ONLY_POST_MERGE_RECONCILIATION__ZERO_NEW_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "POST_MERGE_RUNTIME_BLOB_DIFFERS_FROM_EXACT_PROMOTION_RECEIPT__CANONICAL_POINTER_MIRROR_STALE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::POST_MERGE_EXACT_BLOB_AND_POINTER_COHERENCE::RECONCILE_FRONTIER",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR #426 at a2b528830e59e6ff69d01b1670b99a05125edc2c",
+    "promotion receipt MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1",
+    "public qualification run 36680967490",
+    "exact qualified producer git blob 6598ba92307c55fe6e645b4ecba070d2259818e2",
+    "exact qualified authored test git blob 81bd70c3b30ac8a83a2f781dd130858e2a5ba7de",
+    "current merged producer git blob fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "PyPI SymPy live fetch returned a client challenge page under non-browser retrieval",
+    "queue, target, registry and promotion receipt already advance only to claim relation evaluation"
+  ],
+  "evidence_presence_classification": "CAPABILITY_VALIDLY_QUALIFIED__MERGED_RUNTIME_DRIFTED_FROM_QUALIFIED_BLOB__POINTER_MIRROR_STALE",
+  "expected_parent_frontier_change": "Restore exact independently qualified generic evidence-extraction bytes and make CANONICAL_POINTER mirror the already-authorized generic extraction promotion and claim-relation blocker. Grant zero new capability credit and preserve all unverified truth/support/sufficiency claims.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "parent_capability_promoted": false,
+  "progress_credit": "TRUTH_ONLY_RECONCILIATION__ZERO_NEW_CAPABILITY_CREDIT",
+  "stop_condition": "Stop when current main-derived candidate runtime and authored test match the exact independently qualified blobs, CANONICAL_POINTER agrees with queue/target/registry/promotion receipt, no other frontier state changes, no new capability credit is granted, and next blocker remains claim support/relation evaluation.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+    "real_outcome": "Restore causal identity between promoted capability evidence and executable canonical bytes before any downstream claim-relation work.",
+    "required_capability": "TRUTH_FIRST_POST_MERGE_EXACT_BLOB_AND_MIRROR_RECONCILIATION_V1",
+    "obs_goal": {
+      "real_outcome": "Make canonical executable bytes and mirrors exactly match the already-qualified generic evidence-extraction promotion.",
+      "proxy_goals_deleted": [
+        "improve the extractor",
+        "support PyPI client-challenge pages",
+        "re-run the parent task",
+        "add new capability credit",
+        "advance beyond claim relation evaluation"
+      ],
+      "surviving_necessity": "A promoted capability cannot remain authoritative when current executable bytes differ from the exact blob named by its promotion receipt."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "promotion receipt exact_blobs",
+        "BOUND_CAPABILITY_REGISTRY verification metadata",
+        "FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE latest_verified_subcapability",
+        "OPEN_ENDED parent target blocker",
+        "CANONICAL_POINTER mirrors"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No new parser behavior",
+        "No new verifier",
+        "No new carrier",
+        "No model cognition",
+        "No fresh parent task"
+      ],
+      "surviving_gap": "Merged runtime/test drift and stale pointer mirror only."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Post-merge evidence-to-bytes coherence defect caused by later unqualified PyPI-driven parser changes being included in the merge.",
+      "delete_bypass_substitute_options": [
+        "Keep unqualified runtime rejected because promotion receipt names different exact bytes.",
+        "Requalify PyPI-driven runtime rejected because PyPI served a client-challenge page and the change was not needed for the already-proven capability.",
+        "Restore exact qualified bytes survives.",
+        "Delete valid generic extraction credit rejected because run 36680967490 independently qualified it in scope."
+      ],
+      "surviving_causal_blocker": "POST_MERGE_EXACT_BLOB_AND_POINTER_COHERENCE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RESTORE_EXACT_QUALIFIED_BYTES_AND_POINTER_MIRROR",
+        "REQUALIFY_UNQUALIFIED_PYPI_DRIVEN_RUNTIME",
+        "REVOKE_VALID_GENERIC_EXTRACTION_PROMOTION",
+        "IGNORE_BLOB_MISMATCH"
+      ],
+      "losing_routes_reason": "Exact restoration is the smallest correctness-preserving operation: it reuses existing independent qualification and removes unsupported runtime drift without changing capability scope.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Git blob identity against promotion receipt plus deterministic mirror comparison are sufficient; no new real-task execution is needed for a truth-only restoration to previously qualified bytes."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PyPI-client-challenge-driven semantic parser expansion as promotion authority",
+        "stale CANONICAL_POINTER extraction-gap mirror"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "Not applicable to zero-credit truth reconciliation. Resume claim relation acquisition only after exact-byte coherence is restored."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused promotion receipt as exact-byte oracle",
+        "Reused public run 36680967490",
+        "Reused queue/target/registry current state",
+        "Rejected client-challenge page as extractor capability oracle"
+      ],
+      "search_stop_decision": "The contradiction is fully determined by canonical hashes and promotion metadata; further external search cannot improve the truth-only correction.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No external challenger refresh is required for exact-byte and mirror reconciliation; refresh on the next capability acquisition action."
+    },
+    "routes_considered": [
+      "RESTORE_EXACT_QUALIFIED_BYTES_AND_POINTER_MIRROR",
+      "REQUALIFY_UNQUALIFIED_PYPI_DRIVEN_RUNTIME",
+      "REVOKE_VALID_GENERIC_EXTRACTION_PROMOTION",
+      "IGNORE_BLOB_MISMATCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PYPI_CLIENT_CHALLENGE_AS_GENERIC_EXTRACTION_ORACLE",
+      "UNQUALIFIED_RUNTIME_AS_PROMOTED_BYTES",
+      "NEW_CAPABILITY_CREDIT",
+      "PARENT_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "RESTORE_EXACT_QUALIFIED_BYTES_AND_POINTER_MIRROR",
+    "why_selected_route_is_fastest_sufficient": "The exact qualified producer/test blobs and independent live cross-domain receipt already exist. Restoring those bytes plus one stale mirror is faster and stronger than new experimentation.",
+    "expected_parent_level_state_change": "Restore exact independently qualified generic evidence-extraction bytes and make CANONICAL_POINTER mirror the already-authorized generic extraction promotion and claim-relation blocker. Grant zero new capability credit and preserve all unverified truth/support/sufficiency claims.",
+    "stop_condition": "Exact runtime/test blobs equal the promotion receipt hashes; pointer latest_verified_subcapability and last reconciliation equal the queue/promotion state; claim-relation remains the blocker; zero new capability credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T07:01:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "MERGED_UNQUALIFIED_RUNTIME_WITH_VALID_OLDER_PROMOTION_RECEIPT",
+      "source_classes_checked": [
+        "BRAIN_CANONICAL_RECEIPT",
+        "BRAIN_RUNTIME",
+        "BRAIN_GOVERNANCE",
+        "INDEPENDENT_PUBLIC_VERIFIER"
+      ],
+      "source_evidence": {
+        "BRAIN_CANONICAL_RECEIPT": [
+          "MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1 names producer blob 6598ba92307c55fe6e645b4ecba070d2259818e2"
+        ],
+        "BRAIN_RUNTIME": [
+          "main merged producer blob fc45fb583f6aeac91f7c88f918644c38fbc70e34 differs from promotion receipt"
+        ],
+        "BRAIN_GOVERNANCE": [
+          "queue and parent target advance to claim relation evaluation while CANONICAL_POINTER latest_verified_subcapability remains stale"
+        ],
+        "INDEPENDENT_PUBLIC_VERIFIER": [
+          "run 36680967490 passed sqlite.org + docs.python.org on exact qualified producer/frontend bytes"
+        ]
+      },
+      "challenger_routes": [
+        {
+          "route": "RESTORE_EXACT_QUALIFIED_BYTES_AND_POINTER_MIRROR",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact match to independently qualified promotion evidence",
+            "CAPABILITY_STRENGTH": "Preserves all and only already-verified generic extraction behavior",
+            "WALL_CLOCK": "Minimal file restoration and mirror update",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "No new behavior or dependency",
+            "VERIFIABILITY": "Exact git blob equality and canonical mirror equality"
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger can beat exact restoration for a post-merge truth-state mismatch because no new capability behavior is needed.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RESTORE_EXACT_QUALIFIED_BYTES_AND_POINTER_MIRROR",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_MAIN_CHANGE",
+        "BEFORE_NEXT_CAPABILITY_ACQUISITION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:01:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RESTORE_EXACT_QUALIFIED_BYTES_AND_POINTER_MIRROR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "GITHUB_CANONICAL_WRITE_PATH",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:01:00Z",
+            "evidence": [
+              "Current-base branch creation from a2b528830e59e6ff69d01b1670b99a05125edc2c succeeded."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
