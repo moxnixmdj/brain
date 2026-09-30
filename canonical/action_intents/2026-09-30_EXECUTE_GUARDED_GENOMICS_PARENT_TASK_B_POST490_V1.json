@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-GUARDED-GENOMICS-OPENENDED-PARENT-TASK-B-POST490-20260930-V1",
+  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_B_REQUIRED_AFTER_PR474_ROUTING_REPAIR",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPENENDED_GENOMICS_REFERENCE_LENGTH_TASK_B_POST490::GUARDED_FRESH_PARENT_EXECUTION",
+  "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+  "task_blob_sha": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
+  "mission_blob_sha": "03e718a9c779c26d26e7af140f2f65549c1a7f6e",
+  "runtime_blob_sha": "426ffe58e405dc4f1ba2eb4e838e03a1df771964",
+  "prior_work_checked": [
+    "PR478 froze the genomics objective after PR474.",
+    "PR490 corrected only parent-phase bookkeeping to Task B and rebound the mission to the corrected task blob.",
+    "HTTP2 Task A is spent/no-replay after guarded run 36688193204.",
+    "No physical execution of this genomics task has occurred.",
+    "No source, accession, value, formula, tool, command, or answer is introduced by this authorization."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "expected_parent_frontier_change": "Exactly one guarded physical execution of the corrected frozen genomics Task B; preserve the first causal failure or semantic completion for independent verification, with no replay.",
+  "highest_leverage_now": true,
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "One atomic-guard-admitted execution only. Never retry automatically after reservation/dispatch uncertainty or physical child start.",
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
+    "surviving_necessity": "The repaired generic open-research route requires one fresh materially different parent execution.",
+    "selected_surviving_route": "EXACTLY_ONE_GUARDED_GENOMICS_PARENT_TASK_B_EXECUTION",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "STALE_PRE_PR490_AUTHORIZATIONS",
+      "DIRECT_UNGUARDED_WORKFLOW",
+      "MODEL_COGNITION",
+      "TASK_SPECIFIC_PATCH"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The corrected task is frozen and unspent; direct guarded execution is now the shortest decisive test.",
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
+  }
+}
