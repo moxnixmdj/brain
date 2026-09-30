@@ -33,8 +33,7 @@ def _parse_surface(surface):
         return None
     unit=_canon(m.group("unit"))
     if unit:
-        unit=unit.replace(" ","")
-        if not SAFE_UNIT.fullmatch(unit):
+        if " " in unit or not SAFE_UNIT.fullmatch(unit):
             return None
     else:
         unit=None
