@@ -93,6 +93,61 @@ class ObjectiveEvidenceUnitExtractV2Tests(unittest.TestCase):
         self.assertGreaterEqual(x["evidence_unit_count"],1,x)
         self.assertTrue(any("symbolic mathematics" in u["text"] for u in x["evidence_units"]),x)
 
+    def test_nested_modern_containers_do_not_duplicate_visible_text(self):
+        raw=(
+            b"<html><body><main><div><section>"
+            b"SymPy is a Python library for symbolic mathematics and computer algebra."
+            b"</section></div></main></body></html>"
+        )
+        x=self.m.extract(
+            "SymPy Python symbolic mathematics library",
+            {"url":"https://example.org/report"},
+            provenance(),
+            relevance(),
+            fetch=lambda url,timeout:(raw,"https://example.org/report","text/html",200),
+        )
+        self.assertEqual(x["status"],"OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED",x)
+        matching=[u for u in x["evidence_units"] if "symbolic mathematics" in u["text"]]
+        self.assertEqual(len(matching),1,x)
+        self.assertEqual(x["visible_block_count"],1,x)
+        self.assertNotIn(
+            "SymPy is a Python library for symbolic mathematics and computer algebra.\n"
+            "SymPy is a Python library for symbolic mathematics and computer algebra.",
+            "\n".join(u["text"] for u in x["evidence_units"]),
+        )
+
+    def test_custom_container_and_inline_descendants_are_captured(self):
+        raw=(
+            b"<html><body><research-card><span>SQLite WAL checkpoint behavior "
+            b"copies write ahead logging frames back to the database.</span>"
+            b"</research-card></body></html>"
+        )
+        x=self.m.extract(
+            "Assess SQLite WAL write ahead logging checkpoint behavior",
+            {"url":"https://example.org/report"},
+            provenance(),
+            relevance(),
+            fetch=lambda url,timeout:(raw,"https://example.org/report","text/html",200),
+        )
+        self.assertEqual(x["status"],"OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED",x)
+        self.assertTrue(any("checkpoint behavior" in u["text"] for u in x["evidence_units"]),x)
+
+    def test_inline_only_body_content_is_captured_once(self):
+        raw=(
+            b"<html><body><span>Python hashlib sha256 secure hash digest algorithms "
+            b"are available through the standard library.</span></body></html>"
+        )
+        x=self.m.extract(
+            "Assess Python hashlib sha256 secure hash digest algorithms",
+            {"url":"https://example.org/report"},
+            provenance(),
+            relevance(),
+            fetch=lambda url,timeout:(raw,"https://example.org/report","text/html",200),
+        )
+        self.assertEqual(x["status"],"OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED",x)
+        self.assertEqual(x["visible_block_count"],1,x)
+        self.assertEqual(len(x["evidence_units"]),1,x)
+
     def test_relevance_is_mandatory_and_checked_before_fetch(self):
         calls={"fetch":0}
         def fetch(*args):
