@@ -2956,6 +2956,95 @@
         "incremental_spend_usd": 0,
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json"
       }
+    },
+    "source.objective_relevance.rank.bm25": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "source.candidates.available"
+      ],
+      "provides": [
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "result_fields": [
+        "status",
+        "relevance_claim_scope",
+        "top_candidate_original_index",
+        "ranked_candidates",
+        "semantic_entailment_status",
+        "primary_source_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "keywords": [
+        "source",
+        "objective",
+        "relevance",
+        "rank",
+        "bm25",
+        "evidence",
+        "candidate",
+        "lexical",
+        "research"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "source.objective_relevance.rank.bm25",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "objective_relevance_bm25",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Ranks lexical relevance only; does not prove semantic entailment.",
+        "Does not establish primary-source status, authority, factual correctness, or evidence sufficiency.",
+        "Fails closed when the objective has no discriminative tokens or candidates contain no overlapping lexical evidence.",
+        "Designed for small candidate sets emitted by the qualified open research source frontend."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "math",
+          "pathlib",
+          "re"
+        ],
+        "algorithm": "BM25 Robertson/Sparck Jones positive-IDF variant",
+        "parameters": {
+          "k1": 1.5,
+          "b": 0.75,
+          "title_weight_approximation": 2
+        }
+      },
+      "verification": {
+        "status": "VERIFIED_INDEPENDENT_PUBLIC_QUALIFICATION",
+        "public_run_id": 36678278264,
+        "public_job_id": 109767943730,
+        "receipt_issue": 144,
+        "exact_producer_git_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+        "independent_oracle": "rank-bm25 0.2.2",
+        "fresh_domains": [
+          "aerospace",
+          "database",
+          "climate"
+        ],
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
