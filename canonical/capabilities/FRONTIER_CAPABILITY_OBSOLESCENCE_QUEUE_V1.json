@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Acquire the missing model-independent broad-objective semantic decomposition/grounding route by reusing and composing inherited source-discovery, execution, quantitative, synthesis, and verification capabilities; do not replay the spent Mauna Loa objective.",
+    "objective": "Run one materially different fresh open-ended model-independent parent objective through the verified canonical astra_runtime mission entrypoint, with no prewired research recipe; stop on the first causal gap.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930_V1.json",
-    "repair_status": "EARLIEST_MAUNA_SPEND_IDENTIFIED__TWO_LATER_REPLAYS_QUARANTINED__CURRENT_COMPILER_BYTES_MATCH_FIRST_FAILURE__GENERIC_GAP_UNRESOLVED",
-    "prohibition": "NO_MAUNA_REPLAY_OR_RENAME_AS_FRESH__NO_PARENT_PROMOTION_FROM_FAILED_OR_REPLAYED_RUNS__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_RESEARCH_RECIPE__NO_RUNTIME_REPAIR_FROM_REPLAY_DIAGNOSTICS",
-    "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+    "exact_blocker": "PARENT_OPEN_ENDED_CAPABILITY_UNPROVEN__MISSION_ORIGIN_ROUTE_VERIFIED__MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_REQUIRED",
+    "evidence_path": "canonical/capabilities/obsolescence/MISSION_ORIGIN_ENTRYPOINT_CANARY_RECONCILIATION_20260930_V1.json",
+    "repair_status": "MISSION_ORIGIN_ROUTE_VERIFIED_BY_FIRST_CLEAN_CANARY__NO_RUNTIME_REPAIR_REQUIRED__FRESH_PARENT_TASK_REQUIRED",
+    "prohibition": "NO_MAUNA_REPLAY__NO_SECOND_MISSION_ORIGIN_CANARY__NO_COMPILE_PATCH_BEFORE_FRESH_PARENT_EVIDENCE__NO_SYNTHETIC_CANARY_RESIDUAL_PROMOTION",
+    "next_action": "FREEZE_AND_RUN_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_B__THROUGH_CANONICAL_ASTRA_MISSION_ENTRYPOINT__NO_PREWIRED_RESEARCH_PLAN__STOP_ON_FIRST_CAUSAL_GAP",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -111,7 +111,11 @@
       36670981076
     ],
     "open_ended_task_freshness_status": "SPENT_BY_RUN_36669918546__LATER_SAME_OBJECTIVE_RUNS_ARE_REPLAYS__NO_ADMISSIBLE_FRESH_PARENT_PASS",
-    "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e"
+    "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "mission_origin_canary_run_id": 36672816106,
+    "mission_origin_canary_artifact_id": 11078921733,
+    "mission_origin_canary_artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "mission_origin_route_verified": true
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
