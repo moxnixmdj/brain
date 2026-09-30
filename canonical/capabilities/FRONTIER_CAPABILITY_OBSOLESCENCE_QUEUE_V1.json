@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Acquire the minimum model-independent route that evaluates claim support and the requested relation from provenance-bound objective-anchored extracted evidence, reusing existing numeric and decision capabilities where applicable; do not replay spent parent tasks.",
+    "objective": "Close generic evidence-extraction coverage after preserving the independently verified exact-ROR-bound extraction child; qualify a provenance-verified + BM25-selected + fresh same-source route with ROR optional metadata before advancing to claim relation evaluation.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
-    "repair_status": "SOURCE_FRONTEND_RELEVANCE_AND_OBJECTIVE_ANCHORED_EVIDENCE_EXTRACTION_VERIFIED__CLAIM_SUPPORT_AND_RELATION_EVALUATION_UNPROVEN",
-    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_EXTRACTED_TEXT_EQUALS_TRUTH__NO_RELEVANCE_EQUALS_SUPPORT__NO_SCOREBOARD_PARENT_CREDIT_FOR_NARROW_SUBCAPABILITY",
-    "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE__REUSE_EXTRACTED_PASSAGES_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
+    "exact_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_SCOPE_CORRECTION_20260930_V1.json",
+    "repair_status": "NARROW_EXACT_ROR_BOUND_EVIDENCE_EXTRACTION_VERIFIED__GENERIC_NON_ROR_EXTRACTION_COVERAGE_UNPROVEN",
+    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_ROR_AS_UNIVERSAL_EXTRACTION_GATE__NO_NARROW_CHILD_EQUALS_GENERIC_PARENT_CLOSURE__NO_RELATION_FRONTIER_BEFORE_GENERIC_EXTRACTION_QUALIFIES",
+    "next_action": "OBS_AND_ACQUIRE_GENERIC_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_PROVENANCE_VERIFIED_BM25_RELEVANCE_SELECTED_SOURCE__ROR_OPTIONAL_METADATA__NO_PARENT_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -134,7 +134,8 @@
       "public_run_id": 36679523741,
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
-      "parent_capability_promoted": false
+      "parent_capability_promoted": false,
+      "limitations": "Verified only for provenance-verified exact-ROR-bound first-party relevance-admitted sources. Generic non-ROR evidence extraction remains unverified; correctness/support/sufficiency remain unverified."
     }
   },
   "promotion_claim": false,
@@ -352,7 +353,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE__REUSE_EXTRACTED_PASSAGES_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
+  "next_progress_event_target": "OBS_AND_ACQUIRE_GENERIC_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_PROVENANCE_VERIFIED_BM25_RELEVANCE_SELECTED_SOURCE__ROR_OPTIONAL_METADATA__NO_PARENT_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
