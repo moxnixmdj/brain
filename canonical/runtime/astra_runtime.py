@@ -4872,6 +4872,34 @@ def _load_plain_goal_bound_grounding():
     spec.loader.exec_module(module)
     return module
 
+def _load_open_research_source_frontend():
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"open_research_source_frontend.py"
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_open_research_source_frontend",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("OPEN_RESEARCH_SOURCE_FRONTEND_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _run_open_research_source_frontend(mission, goal, decomposition):
+    module=_load_open_research_source_frontend()
+    try:
+        result=module.run(goal,decomposition,limit=12,timeout=20)
+    except Exception as exc:
+        raise Blocker(
+            "OPEN_RESEARCH_SOURCE_FRONTEND_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__OPEN_RESEARCH_SOURCE_FRONTEND.json"
+    writej(path,result)
+    return path,result
+
+
 def _ground_plain_goal_to_bound_capabilities(mission, goal):
     module=_load_plain_goal_bound_grounding()
     compiler=_load_goal_compiler()
@@ -5582,6 +5610,33 @@ def _run_goal_unstamped(step, mission):
                 composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
                 composed_result["model_dependency_count"]=0
                 return composed_result
+
+            broad=grounding.get("broad_objective_decomposition")
+            if isinstance(broad,dict) and broad.get("status")=="DECOMPOSED":
+                source_path,source_frontend=_run_open_research_source_frontend(
+                    mission,grounding_goal,broad
+                )
+                status=str(source_frontend.get("status") or "")
+                payload={
+                  "source_frontend_status":status,
+                  "evidence_path":str(source_path.relative_to(ROOT)),
+                  "provenance_verified_candidate_count":int(
+                      source_frontend.get("provenance_verified_candidate_count") or 0
+                  ),
+                  "next_required_capability":source_frontend.get("next_required_capability"),
+                  "capability_acquisition_attempted":False,
+                  "policy":"BROAD_RESEARCH_DECOMPOSITION_ROUTES_TO_RESEARCH_SOURCE_FRONTEND_BEFORE_PACKAGE_ACQUISITION",
+                }
+                if status=="SOURCE_FRONTEND_READY":
+                    raise Blocker(
+                        "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_READY__"
+                        "AUTHORITY_PRIMARY_SOURCE_RELEVANCE_VERIFICATION_REQUIRED:"
+                        +json.dumps(payload,sort_keys=True)
+                    ) from e
+                raise Blocker(
+                    "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_BLOCKED:"
+                    +json.dumps(payload,sort_keys=True)
+                ) from e
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
