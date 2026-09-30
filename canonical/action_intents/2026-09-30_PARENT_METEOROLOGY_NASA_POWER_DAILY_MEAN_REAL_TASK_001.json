@@ -1,0 +1,300 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-METEOROLOGY-NASA-POWER-DAILY-MEAN-REAL-TASK-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either complete one fresh materially different model-independent parent scientific task with independent verification and proceed to parent acquisition adjudication, or localize the first new causal gap. No repair or promotion is authorized by this intent alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 144a1baadbb927645b1e183a85e4675f5cf44f1f",
+    "Task A HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO remains verified candidate evidence A",
+    "spent geophysics and astronomy parent tasks are not replayed",
+    "spent biophysics task and its rendered-claim extraction gap remain deferred single-occurrence evidence",
+    "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 is now verified and inherited",
+    "NASA POWER official API documentation exposes free globally available daily meteorological JSON data",
+    "NASA POWER official parameter documentation lists T2M, T2M_MAX and T2M_MIN daily temperature parameters",
+    "task contract frozen before probing the exact three 2025-07-01 Phoenix URLs"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Preflight the exact frozen NASA POWER sources on the public zero-spend carrier, then execute this task exactly once. On semantic success independently refetch/recompute and adjudicate parent scope separately. On failure preserve only the first causal blocker and do not replay or tune the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "144a1baadbb927645b1e183a85e4675f5cf44f1f",
+    "real_outcome": "Execute a new model-independent meteorology/climate quantitative task end-to-end using authoritative NASA POWER data, inherited typed arithmetic and numeric relation capability, provenance, and independent verification.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Produce a verified decision on the fixed NASA POWER daily-temperature midpoint approximation task or expose the first generic parent capability gap.",
+      "proxy_goals_deleted": [
+        "more child benchmarks",
+        "astronomy replay",
+        "geophysics replay",
+        "biophysics replay",
+        "new math supplier",
+        "model cognition",
+        "new agent framework"
+      ],
+      "surviving_necessity": "A fresh parent-level cross-domain scientific task is the shortest remaining proof obligation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "knowledge.json.fetch.external",
+        "json.query.jq",
+        "current deterministic goal compiler/controller"
+      ],
+      "external_existing_routes_checked": [
+        "NASA POWER REST JSON API",
+        "one-off Python answer",
+        "frontier-model research route"
+      ],
+      "capability_work_deleted": [
+        "no preemptive repair",
+        "no task-specific formula code",
+        "no new supplier",
+        "no model route"
+      ],
+      "surviving_gap": "Unknown until exact frozen parent execution; static inspection is not promoted to a failure claim."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Broad parent acquisition proof gap after the recurring typed-scalar seam was closed.",
+      "delete_bypass_substitute_options": [
+        "reuse full inherited stack",
+        "reuse NASA POWER official JSON",
+        "reject one-off answer as parent proof",
+        "reject model cognition as circular proof"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FROZEN_NASA_POWER_METEOROLOGY_TASK",
+        "HAND_CODE_ONE_OFF_METEOROLOGY_SCRIPT",
+        "BUILD_NEW_RESEARCH_FRAMEWORK",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Direct use of the current inherited stack yields decisive parent evidence with no implementation. One-off scripts answer only the instance; frameworks add work before evidence; model cognition cannot earn independence credit.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic capability benchmark. On semantic completion, independently refetch all three frozen NASA POWER URLs and recompute the midpoint, delta and decision without importing producer modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all child work unless this parent task falsifies a specific child",
+        "duplicate parent-task leases"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live authoritative JSON acquisition",
+        "typed scalar arithmetic",
+        "numeric relation",
+        "provenance",
+        "deterministic composition"
+      ],
+      "fresh_reuse_plan": "This task is a new parent evidence attempt. On success adjudicate the parent contract; on failure localize only the first generic gap and never replay this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical inventory",
+        "reused verified child capabilities",
+        "selected an official machine-readable scientific API to avoid the known deferred rendered-prose seam"
+      ],
+      "search_stop_decision": "NASA POWER official API plus the acquired child stack are sufficient to freeze a decisive parent task. Exact source readiness is the only remaining pre-execution predicate.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and NASA POWER official API/parameter documentation refreshed immediately before task freeze."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FROZEN_NASA_POWER_METEOROLOGY_TASK",
+      "HAND_CODE_ONE_OFF_METEOROLOGY_SCRIPT",
+      "BUILD_NEW_RESEARCH_FRAMEWORK",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKS",
+      "OLD_TASK_REPLAY",
+      "ONE_OFF_SCRIPT_AS_PARENT_PROOF",
+      "NEW_AGENT_FRAMEWORK",
+      "MODEL_COGNITION"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FROZEN_NASA_POWER_METEOROLOGY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It directly exercises the current verified parent stack on a materially different scientific domain using an official JSON source and a frozen independent oracle, with no new implementation or supplier.",
+    "expected_parent_level_state_change": "Either verified fresh cross-domain Task B evidence or the first new causal gap.",
+    "stop_condition": "Preflight exact frozen URLs; execute exactly once if READY; independently verify on success; never replay this task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:07:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_PARENT_STACK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 144a1baadbb927645b1e183a85e4675f5cf44f1f",
+          "five verified acquired subcapabilities including typed scalar numeric expressions"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://power.larc.nasa.gov/docs/tutorials/service-data-request/api/ documents free globally available single-point meteorological API access",
+          "https://power.larc.nasa.gov/docs/tutorials/parameters/ documents T2M grouped daily temperature parameters including T2M_MAX and T2M_MIN"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "current Brain bound registry and runtime; no new package required"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No external framework is needed to test the inherited route; direct execution dominates."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent live meteorology JSON quantitative arithmetic comparison independent verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "NASA POWER daily point API T2M T2M_MAX T2M_MIN JSON"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "current Brain inherited stack versus one-off climate script"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "NASA POWER current API documentation 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FROZEN_NASA_POWER_METEOROLOGY_TASK",
+          "evidence": [
+            "current parent child stack verified",
+            "NASA POWER official machine-readable API documented",
+            "task frozen before exact URL probe"
+          ],
+          "qualification_evidence": [
+            "main 144a1baadbb927645b1e183a85e4675f5cf44f1f",
+            "NASA POWER official API and parameter docs"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Direct integrated parent test with independent oracle.",
+            "CAPABILITY_STRENGTH": "Exercises live scientific retrieval, multi-input arithmetic, decision relation and provenance.",
+            "WALL_CLOCK": "No implementation before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Official historical NASA POWER API data on established public carrier.",
+            "VERIFIABILITY": "Frozen URLs/paths/formula/tolerance plus independent refetch/recompute."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger beats direct use of the current inherited stack for time-to-decisive parent evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FROZEN_NASA_POWER_METEOROLOGY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:07:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FROZEN_NASA_POWER_METEOROLOGY_TASK",
+        "status": "PENDING_EXACT_SOURCE_PREFLIGHT",
+        "all_required_dependencies_ready": false,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_144a1baadbb927645b1e183a85e4675f5cf44f1f",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:07:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current main"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:05:56Z",
+            "evidence": [
+              "DIRECT_PROBE typed-scalar qualification run 36667323362 completed successfully on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "NASA_POWER_THREE_FROZEN_URLS",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "PENDING_PREFLIGHT",
+            "observed_at_utc": null,
+            "evidence": [
+              "OFFICIAL_PRIMARY NASA POWER API documentation only; exact URLs intentionally unprobed before task freeze"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": false
+      }
+    }
+  }
+}
