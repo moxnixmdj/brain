@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "COMPOSE-OPEN-RESEARCH-CLAIM-RELATION-INTEGRATION-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "68cfedf4534420d111ee3b665106d342d237683c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_SOURCE_FRONTEND_EXTRACTS_VERIFIED_EVIDENCE_BUT_DOES_NOT_COMPOSE_THE_ALREADY_VERIFIED_OBJECTIVE_CLAIM_OPERAND_BINDER_AND_RELATION_EVALUATOR",
+  "action_kind": "GENERIC_INTEGRATION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_SOURCE_FRONTEND_EXTRACTS_VERIFIED_EVIDENCE_BUT_DOES_NOT_COMPOSE_THE_ALREADY_VERIFIED_OBJECTIVE_CLAIM_OPERAND_BINDER_AND_RELATION_EVALUATOR::GENERIC_INTEGRATION_REPAIR",
+  "prior_work_checked": [
+    "Brain PR439 promoted generic V2 evidence claim/relation evaluation.",
+    "Brain PR449 installed bounded objective claim-spec and operand binding; PR457 requalified the exact installed bytes through the atomic execution guard.",
+    "verification-capsule-runner PR169 run 36687982814 atomically admitted a non-parent red diagnostic and failed because claim_relation_evaluated_count and the ASTRA relation-evaluated stop marker were absent.",
+    "Brain PR462 merged the inert guarded parent carrier without executing the frozen task.",
+    "Brain PR464 current-base guarded parent trigger failed before any workflow step; no physical parent execution is credited.",
+    "Brain PR463 was closed as stale-base implementation evidence only."
+  ],
+  "evidence_presence_classification": "INTEGRATION_GAP_PROVEN",
+  "expected_parent_frontier_change": "Compose the already-qualified claim binder/relation evaluator into the generic open-research frontend, expose its verified result to ASTRA, stop at decision synthesis, and independently qualify the composed path before any parent-task execution.",
+  "highest_leverage_now": true,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "stop_condition": "Do not execute the frozen HTTP/2 parent task in this repair. Stop after the seam is implemented and independently guarded-qualified; parent freshness remains unspent.",
+  "recursive_obs": {
+    "canonical_base_commit": "68cfedf4534420d111ee3b665106d342d237683c",
+    "real_outcome": "The exact current stack reaches verified generic evidence extraction, while a guarded red integration test proves the already-promoted claim binder/relation evaluator is not composed into the parent-effective frontend.",
+    "surviving_necessity": "Compose existing verified child seams before acquiring any new capability or spending the frozen parent task.",
+    "selected_surviving_route": "COMPOSE_EXISTING_VERIFIED_BINDER_AND_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_FRONTEND__SURFACE_EXACT_RELATION_EVALUATED_STOP_MARKER",
+    "deleted_or_bypassed_paths": [
+      "NEW_SOURCE_DISCOVERY_REPAIR",
+      "NEW_EVIDENCE_EXTRACTION_REPAIR",
+      "NEW_CLAIM_BINDER",
+      "NEW_RELATION_EVALUATOR",
+      "PARENT_TASK_REPLAY",
+      "MODEL_COGNITION",
+      "TASK_SPECIFIC_HTTP2_PATCH",
+      "VAL_TOWN",
+      "USER_LAPTOP"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The guarded red test localizes the failure to composition over already-qualified bytes. This bounded seam repair is the minimum falsifiable change.",
+    "stop_rule": "NON_PARENT_INTEGRATION_ONLY__INDEPENDENT_GUARDED_QUALIFICATION_REQUIRED__NO_HTTP2_PARENT_EXECUTION"
+  }
+}
