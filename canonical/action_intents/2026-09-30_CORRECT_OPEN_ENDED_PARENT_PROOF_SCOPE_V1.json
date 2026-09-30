@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-OPEN-ENDED-PARENT-PROOF-SCOPE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE::EVIDENCE_PRESERVATION",
+  "expected_parent_frontier_change": "Revoke parent-scope admissibility from prewired recipe tasks while preserving their narrower integration evidence; require genuinely open-ended model-independent parent evidence before any dependency-removal promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main 5262fd6e0d132ff8a2ac30f43f5b79ff3efd4142",
+    "canonical target useful_behavior requires autonomous decomposition, knowledge/tool discovery, quantitative reasoning, revision, synthesis and independent verification in domains that may not be pre-mapped",
+    "demography Task A hard-codes three source URLs, three JSON paths, exact output files, exact CAGR formula and exact comparison threshold",
+    "PR304 chemistry task similarly prewired authority, URLs, paths, formula and threshold and therefore cannot repair the parent-scope evidence deficit",
+    "narrow task execution evidence remains valid as integration evidence; only parent open-ended capability credit is corrected"
+  ],
+  "evidence_presence_classification": "PARENT_SCOPE_EVIDENCE_MISCLASSIFIED__NARROW_INTEGRATION_RESULT_PRESERVED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Synchronize all canonical frontier mirrors to the corrected parent scope, award zero new progress credit, do not replay spent/prewired tasks, then freeze and execute one genuinely open-ended model-independent real task with no source/tool/formula prewiring.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "5262fd6e0d132ff8a2ac30f43f5b79ff3efd4142",
+    "real_outcome": "Make the parent proof measure the capability actually named and defined, instead of a narrower deterministic recipe-following capability.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Require evidence that exercises autonomous decomposition, discovery, tool selection, quantitative reasoning and verification on a real task not pre-mapped into executable clauses.",
+      "proxy_goals_deleted": [
+        "counting recipe execution as open-ended research",
+        "repairing PubChem numeric-string coercion before parent scope is valid",
+        "replaying demography/chemistry tasks"
+      ],
+      "surviving_necessity": "A parent-scope real task must leave the research plan materially unspecified so the runtime has to construct it."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical target useful_behavior and frontier_bar",
+        "demography Task A exact task blob and terminal evidence",
+        "PR304 exact chemistry task structure",
+        "current model-independent grounding/composition/expression/relation subcapabilities"
+      ],
+      "external_existing_routes_checked": [
+        "Not required for an internal evidence-admissibility correction; the contradiction is fully determined by canonical task and capability definitions."
+      ],
+      "capability_work_deleted": [
+        "no numeric-string repair before recurrence",
+        "no new supplier search",
+        "no new model route",
+        "no task replay"
+      ],
+      "surviving_gap": "No admissible parent-scope execution yet demonstrates autonomous decomposition, source discovery/evaluation and tool selection from a genuinely open-ended objective."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence-contract mismatch at the parent capability boundary, not a task-specific execution bug.",
+      "delete_bypass_substitute_options": [
+        "Delete parent credit from prewired tasks while preserving narrow integration evidence",
+        "Bypass PubChem type repair until it recurs in an admissible open-ended task",
+        "Substitute a genuinely open-ended fresh parent task"
+      ],
+      "surviving_causal_blocker": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CORRECT_SCOPE_AND_RUN_GENUINELY_OPEN_ENDED_TASK",
+        "KEEP_PREWIRED_TASK_CREDIT",
+        "REPAIR_TASK_SPECIFIC_TYPE_SEAM_FIRST"
+      ],
+      "losing_routes_reason": "Keeping credit contradicts the capability definition; repairing the chemistry seam optimizes a scope-inadmissible proof. Scope correction followed by a genuine parent task is the shortest path to truthful decisive evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No benchmark needed. The admissibility decision follows directly from comparing the canonical capability definition with the frozen task specification; the next fresh open-ended real task is the direct effect test."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "second prewired Task B campaign",
+        "chemistry-string normalization as current parent priority"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "prewired demography execution remains valid narrow integration evidence",
+        "verified deterministic subcapabilities remain inherited"
+      ],
+      "fresh_reuse_plan": "After merge, freeze one genuinely open-ended materials-engineering decision prompt with no source URLs, paths, tools or formula, execute once, and stop on the first causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact canonical capability definition",
+        "reused exact demography task blob",
+        "reused spent PR304 evidence"
+      ],
+      "search_stop_decision": "The contradiction is internal and exact; external search cannot make a prewired recipe exercise autonomous discovery.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and all open PRs were refreshed immediately before this correction; no existing PR owns this scope-admissibility blocker."
+    },
+    "routes_considered": [
+      "CORRECT_SCOPE_AND_RUN_GENUINELY_OPEN_ENDED_TASK",
+      "KEEP_PREWIRED_TASK_CREDIT",
+      "REPAIR_TASK_SPECIFIC_TYPE_SEAM_FIRST"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_TASK_AS_PARENT_PROOF",
+      "PR304_REPLAY",
+      "CURRENT_PARENT_PRIORITY_ON_PUBCHEM_TYPE_COERCION"
+    ],
+    "selected_surviving_route": "CORRECT_SCOPE_AND_RUN_GENUINELY_OPEN_ENDED_TASK",
+    "why_selected_route_is_fastest_sufficient": "It repairs the truth boundary with no new capability build and immediately spends the next execution on the behavior that defines the target.",
+    "expected_parent_level_state_change": "Revoke parent-scope admissibility from prewired recipe tasks while preserving their narrower integration evidence; require genuinely open-ended model-independent parent evidence before any dependency-removal promotion.",
+    "stop_condition": "Synchronize all canonical frontier mirrors to the corrected parent scope, award zero new progress credit, do not replay spent/prewired tasks, then freeze and execute one genuinely open-ended model-independent real task with no source/tool/formula prewiring.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Internal evidence-scope reconciliation. No external supplier can change whether a frozen task prewired the decomposition, sources, paths, tools and calculation."
+    }
+  }
+}
