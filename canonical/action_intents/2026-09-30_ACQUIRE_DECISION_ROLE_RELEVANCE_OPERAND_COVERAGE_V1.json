@@ -1,0 +1,378 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-DECISION-ROLE-RELEVANCE-OPERAND-COVERAGE-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "expected_parent_frontier_change": "QUALIFY_MODEL_INDEPENDENT_DECISION_ROLE_AWARE_RELEVANCE_ADMISSION__NO_PARENT_CREDIT_UNTIL_FRESH_REUSE",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 81f2f813f03b5d80ac2e44080bd19d967bd06463 and merged Task C causal correction PR541.",
+    "Authoritative guarded Materials Task C run 36698638943 / artifact 11089076913; task spent and replay-forbidden.",
+    "Frozen Brain PR548 exact candidate 9ffe718550a08021ea14c73a22894737be6592cb; code bytes preserved exactly in this successor.",
+    "Inherited objective_claim_operand_binding.py blob 48fd058430d8d361fc75beced567c7b6d1166531 already provides bounded explicit comparison parsing.",
+    "Current incumbent relevance is deterministic BM25 plus aggregate focused-query token coverage.",
+    "Open-PR search performed before successor creation; PR548 is frozen code capsule but fails trusted governance validation and no guarded qualification PR exists for exact 9ffe718 bytes."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__FIRST_CAUSAL_GAP_DIRECTLY_OBSERVED_IN_SPENT_GUARDED_PARENT_TASK",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "candidate_blobs": {
+    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "4a0d49386c3c1410a09d847fddd9772545ba0095",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "0abb5225fe9fba2443f2df46b2e41bd1c7dd7436",
+    "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "canonical/tests/test_decision_role_relevance_admission.py": "2deabf08cad9476afd3467edcf7db5224927488b",
+    "canonical/runtime/bound_capabilities/research_query_focus.py": "5403e1dc05716fcfc4f9a91b4534f55dc547eb7f"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "81f2f813f03b5d80ac2e44080bd19d967bd06463",
+    "real_outcome": "Prevent aggregate lexical overlap from selecting a source that changes the requested decision property or operand identity, while retaining deterministic zero-model source relevance.",
+    "required_capability": "MODEL_INDEPENDENT_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_V1",
+    "obs_goal": {
+      "real_outcome": "Close the earliest demonstrated Materials Task C causal gap with a reusable model-independent relevance admission rule, then return to fresh parent validation.",
+      "proxy_goals_deleted": [
+        "replay Materials Task C",
+        "improve BM25 score quality for its own sake",
+        "repair downstream metadata refinement before the upstream selection defect",
+        "add a source whitelist or materials-specific literals",
+        "introduce a model reranker"
+      ],
+      "surviving_necessity": "The guarded Task C artifact proves aggregate lexical coverage can authorize a wrong-property/wrong-operand source even when a decision-relevant source is already available."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "objective_relevance_bm25.py deterministic BM25 ranking",
+        "research_query_focus.py deterministic decision-subject query focus",
+        "objective_claim_operand_binding.py independently qualified bounded explicit-comparison parser",
+        "Task C initial discovery/provenance evidence containing both the rejected NBS 304 thermal-conductivity record and selected ignition/302 record"
+      ],
+      "external_existing_routes_checked": [
+        "scikit-learn 1.9.1 TF-IDF/cosine similarity",
+        "RapidFuzz 3.14.6 token-set/string similarity",
+        "rank-bm25 0.2.2 BM25 implementations"
+      ],
+      "capability_work_deleted": [
+        "no new semantic embedding stack",
+        "no search-engine replacement",
+        "no task-specific property/alloy rules",
+        "no model dependency",
+        "no parent replay"
+      ],
+      "surviving_gap": "Existing lexical rank/admission lacks explicit decision-property and operand identity constraints for bounded comparison objectives."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic admission defect in the current relevance path, not a materials-specific discovery failure: the candidate set already contained a better decision-role source before selection.",
+      "delete_bypass_substitute_options": [
+        "DELETE library-swapping work that preserves the same aggregate lexical semantics",
+        "BYPASS new NLP by REUSE of the already-qualified bounded comparison parser",
+        "SUBSTITUTE a generic external lexical scorer only if it supplies missing role semantics; current challengers do not",
+        "COMPOSE parser role anchors with incumbent BM25 admission",
+        "REPAIR only the bounded admission predicate"
+      ],
+      "surviving_causal_blocker": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
+        "SCIKIT_LEARN_TFIDF_COSINE_RERANK",
+        "RAPIDFUZZ_TOKEN_SIMILARITY_RERANK",
+        "RANK_BM25_PACKAGE_SWAP",
+        "MODEL_RERANKER"
+      ],
+      "losing_routes_reason": "External lexical scorers change similarity mathematics but do not impose the missing decision-property/operand contract. A model reranker violates the target dependency constraint. Reusing the verified parser adds the missing semantics with the smallest code and dependency surface.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A non-parent exact-byte qualification is required because the spent Materials Task C cannot be replayed. Qualification must include fresh cross-domain adversaries, wrong-property/wrong-operand decoys, single-operand evidence, protocol identifiers, and legacy noncomparison behavior."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "frozen PR548 as merge authority after successor qualification",
+        "downstream metadata-refined provenance repair as current frontier blocker",
+        "any lexical-library swap proposed solely to address this causal gap"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "bounded objective relation parsing",
+        "research query focus",
+        "BM25 lexical ranking",
+        "stable provenance-preserving candidate representation"
+      ],
+      "fresh_reuse_plan": "After exact-byte guarded qualification and merge, freeze one new materially different genuinely open-ended parent task on the inherited route; never replay Materials Task C."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused immutable Task C artifact and merged causal correction",
+        "reused verified objective relation parser",
+        "reused frozen PR548 candidate bytes",
+        "refreshed only plausible lexical challenger families"
+      ],
+      "search_stop_decision": "The selected inherited composition fixes the demonstrated semantic contract with no new dependency. All discovered alternatives remain lexical scorers and cannot dominate on correctness or wall-clock.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Public challenger surface refreshed immediately before successor creation; no plausible zero-model external route supplies explicit decision-role admission with lower integration cost."
+    },
+    "routes_considered": [
+      "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
+      "SCIKIT_LEARN_TFIDF_COSINE_RERANK",
+      "RAPIDFUZZ_TOKEN_SIMILARITY_RERANK",
+      "RANK_BM25_PACKAGE_SWAP",
+      "MODEL_RERANKER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "SOURCE_WHITELIST",
+      "TASK_SPECIFIC_MATERIAL_LITERALS",
+      "NEW_SEARCH_ENGINE",
+      "MODEL_RERANKER",
+      "DOWNSTREAM_METADATA_REFINEMENT_AS_FIRST_BLOCKER"
+    ],
+    "selected_surviving_route": "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
+    "why_selected_route_is_fastest_sufficient": "It reuses already-qualified parsing and incumbent ranking, adds only the missing bounded admission predicate, needs no package or model, and can be independently qualified without consuming another parent task.",
+    "expected_parent_level_state_change": "QUALIFY_MODEL_INDEPENDENT_DECISION_ROLE_AWARE_RELEVANCE_ADMISSION__NO_PARENT_CREDIT_UNTIL_FRESH_REUSE",
+    "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T10:10:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main 81f2f813f03b5d80ac2e44080bd19d967bd06463",
+          "objective_claim_operand_binding.py blob 48fd058430d8d361fc75beced567c7b6d1166531",
+          "Task C causal correction receipt and artifact 11089076913"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html",
+          "https://scikit-learn.org/stable/modules/metrics.html",
+          "https://rapidfuzz.github.io/RapidFuzz/Usage/fuzz.html"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/project/rank-bm25/0.2.2/",
+          "RapidFuzz 3.14.6 current package/documentation surface"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Broad route search found no deterministic zero-model package that adds explicit decision-property and operand-role admission without first formalizing those roles; generic similarity packages remain downstream scorers."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic source relevance decision property operand role coverage lexical ranking"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "TF-IDF cosine RapidFuzz BM25 document relevance ranking packages"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "explicit comparison role constraints plus lexical document ranking deterministic"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current lexical similarity ranking libraries RapidFuzz scikit-learn"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
+          "evidence": [
+            "Task C artifact shows aggregate BM25 token admission selected wrong property/operand despite a relevant candidate being present."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE guarded Task C run 36698638943 artifact 11089076913",
+            "independently qualified inherited relation parser blob 48fd058430d8d361fc75beced567c7b6d1166531"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly represents the missing bounded property/operand contract and fails closed outside supported grammar.",
+            "CAPABILITY_STRENGTH": "Adds decision-role admission while preserving incumbent BM25 ranking and noncomparison behavior.",
+            "WALL_CLOCK": "Small composition of existing verified code; no package integration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Deterministic stdlib path with narrow bounded grammar.",
+            "VERIFIABILITY": "Exact bytes can be tested under the live guard with independent cross-domain fixtures."
+          }
+        },
+        {
+          "route": "SCIKIT_LEARN_TFIDF_COSINE_RERANK",
+          "evidence": [
+            "scikit-learn 1.9.1 documents TF-IDF feature vectors and cosine similarity for document similarity."
+          ],
+          "qualification_evidence": [
+            "https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html",
+            "https://scikit-learn.org/stable/modules/metrics.html"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Generic vector similarity does not encode required decision roles.",
+            "CAPABILITY_STRENGTH": "Strong generic similarity only.",
+            "WALL_CLOCK": "Requires new dependency/integration then still needs role constraints.",
+            "INCREMENTAL_COST": "$0 monetary but extra integration.",
+            "RELIABILITY": "Mature library.",
+            "VERIFIABILITY": "Easy to benchmark but insufficient for causal defect."
+          }
+        },
+        {
+          "route": "RAPIDFUZZ_TOKEN_SIMILARITY_RERANK",
+          "evidence": [
+            "RapidFuzz token_set_ratio compares unique/common words and returns generic string similarity."
+          ],
+          "qualification_evidence": [
+            "https://rapidfuzz.github.io/RapidFuzz/Usage/fuzz.html"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Token similarity can still reward wrong-property overlap.",
+            "CAPABILITY_STRENGTH": "Generic string similarity.",
+            "WALL_CLOCK": "Package integration plus missing role logic remains.",
+            "INCREMENTAL_COST": "$0 monetary.",
+            "RELIABILITY": "Maintained package.",
+            "VERIFIABILITY": "Deterministic but does not prove role preservation."
+          }
+        },
+        {
+          "route": "RANK_BM25_PACKAGE_SWAP",
+          "evidence": [
+            "rank-bm25 provides BM25 variants over tokenized corpora."
+          ],
+          "qualification_evidence": [
+            "https://pypi.org/project/rank-bm25/0.2.2/"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Same class of lexical ranking; no role admission.",
+            "CAPABILITY_STRENGTH": "Multiple BM25 variants.",
+            "WALL_CLOCK": "Unnecessary swap.",
+            "INCREMENTAL_COST": "$0 monetary.",
+            "RELIABILITY": "Small established package; last release 2022.",
+            "VERIFIABILITY": "Straightforward but causally insufficient."
+          }
+        },
+        {
+          "route": "MODEL_RERANKER",
+          "evidence": [
+            "Potentially broad semantic ranking route."
+          ],
+          "qualification_evidence": [
+            "Target law forbids model dependence for credited cognition."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "May rank well but cannot prove model-independent target.",
+            "CAPABILITY_STRENGTH": "Broad.",
+            "WALL_CLOCK": "Potentially fast per request.",
+            "INCREMENTAL_COST": "Not guaranteed $0.",
+            "RELIABILITY": "External/model dependency.",
+            "VERIFIABILITY": "Would prove a different capability route."
+          }
+        }
+      ],
+      "negative_search_summary": "No current external lexical scorer dominates the inherited parser+BM25 composition because every external challenger still lacks explicit property/operand-role semantics and would require the same missing formalization layer.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T10:10:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_EXACT_SUCCESSOR_PYTHON_RUNTIME_AND_CANDIDATE_BYTES",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T10:10:00Z",
+            "evidence": [
+              "Exact PR548 candidate blobs copied byte-for-byte onto current-base successor branch; Python 3 stdlib implementation with inherited exact parser/query-focus blobs."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T10:10:00Z",
+            "evidence": [
+              "DIRECT_PROBE: guarded Materials Task C run 36698638943 and recent guarded qualification runs executed successfully on this account carrier."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
