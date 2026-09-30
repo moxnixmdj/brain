@@ -157,7 +157,7 @@
     ],
     "selected_surviving_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
     "why_selected_route_is_fastest_sufficient": "It uses the exact Brain-owned current benchmark harness, the already-included GPT-5.6 Sol cognition, the existing independent public verifier, and an already-frozen unread task. The only integration is replacing an HTTP model callback with this session's model turn while preserving one-action mini-SWE semantics.",
-    "expected_parent_level_state_change": "Produce the first independent execution evidence for the Brain-owned mini-SWE+Superpowers composed route. Single-task outcome changes route confidence only; capability ownership credit remains zero.",
+    "expected_parent_level_state_change": "Spend one previously frozen, still-unread Terminal-Bench 4.0 task to directly verify or falsify the Brain-owned mini-SWE-agent 2.4.6 + Superpowers composed route on the current included GPT-5.6 Sol cognition substrate, with independent public verification and zero ownership credit from a single task.",
     "stop_condition": "Freeze exact task bytes before cognition; execute the mini-SWE control-loop semantics through the current ChatGPT session with one shell action per step; apply Brain-owned Superpowers verification/debugging discipline; do not read solution/** or tests/** before terminal submission; submit once to the untouched independent verifier; award zero Opus ownership credit from this single task.",
     "route_frontier": {
       "discovery_required": true,
