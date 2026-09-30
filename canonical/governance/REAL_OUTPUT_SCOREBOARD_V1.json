@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 7,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 8
+    "residual_gaps_localized": 9
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "RUN_RECURSIVE_OBS_FOR_TYPED_SCALAR_NUMERIC_EXPRESSION_GAP__BIND_EXISTING_VERIFIED_SYMPY_1_14__NO_ASTRONOMY_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -385,8 +385,8 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "NUMERIC_RELATION_SUBCAPABILITY_ACQUIRED__NEW_PARENT_REAL_TASK_REQUIRED",
+    "active_subcapability_target": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+    "subcapability_status": "PARENT_ASTRONOMY_FAILED__TYPED_SCALAR_NUMERIC_EXPRESSION_GAP_LOCALIZED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
