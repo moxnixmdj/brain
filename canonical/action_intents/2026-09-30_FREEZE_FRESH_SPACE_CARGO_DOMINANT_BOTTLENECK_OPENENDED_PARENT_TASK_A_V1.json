@@ -196,12 +196,10 @@
             "public guarded runner"
           ],
           "qualification_evidence": [
-            "run 36686951789 SUCCESS",
-            "canonical child promotion receipts"
+            "verification-capsule-runner Execution Guard Regression run 36686951789 SUCCESS"
           ],
           "qualification_evidence_classes": [
-            "DIRECT_PROBE",
-            "BRAIN_INHERITED"
+            "DIRECT_PROBE"
           ],
           "resolution": "SELECTED",
           "comparison": {
@@ -232,27 +230,6 @@
             "INCREMENTAL_COST": "Unknown/nonzero risk.",
             "RELIABILITY": "External model/provider dependence.",
             "VERIFIABILITY": "Possible, but supplier is the class being obsoleted."
-          }
-        },
-        {
-          "route": "CUSTOM_SPACE_CARGO_SOLVER",
-          "evidence": [
-            "No existing need proven by current parent frontier."
-          ],
-          "qualification_evidence": [
-            "Current canonical next action requires parent execution first."
-          ],
-          "qualification_evidence_classes": [
-            "BRAIN_INHERITED"
-          ],
-          "resolution": "NON_DOMINATING",
-          "comparison": {
-            "CORRECTNESS": "Could answer a narrower task but would not prove parent research capability.",
-            "CAPABILITY_STRENGTH": "Task-specific only.",
-            "WALL_CLOCK": "Higher build time.",
-            "INCREMENTAL_COST": "0 USD monetary but higher machinery.",
-            "RELIABILITY": "Unqualified new code.",
-            "VERIFIABILITY": "Good locally but wrong capability target."
           }
         }
       ],
