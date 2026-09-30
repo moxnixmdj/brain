@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TECHNICAL_REAL_TASK_V1",
+  "task_id": "PARENT-OPENENDED-FILESYSTEM-RENAME-ATOMICITY-DURABILITY-REAL-TASK-20260930-004",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "OPERATING_SYSTEM_FILESYSTEM_RENAME_ATOMICITY_AND_DURABILITY",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_B",
+  "source_task_replay": false,
+  "objective": "Assess whether same-filesystem replacement by rename is guaranteed to be atomically visible to concurrent observers and whether that guarantee alone implies crash durability. Use authoritative primary technical evidence and a real executable check, decide what evidence and method are sufficient, identify material filesystem, platform, and crash-model limitations, independently verify the consequential result, and preserve source, method, execution, and cognition provenance.",
+  "goal_text": "Assess whether replacing an existing pathname by a same-filesystem rename is guaranteed to be atomically visible to concurrent observers, and whether that guarantee by itself implies durability across an unexpected system crash. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant interface guarantees, determine how to extract and reconcile the decision-relevant semantics, choose and run a zero-cost verification method, identify material filesystem, platform, and crash-model limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "anti_leakage": {
+    "authority_name_preprovided": false,
+    "authority_domain_preprovided": false,
+    "source_url_preprovided": false,
+    "dataset_or_document_identifier_preprovided": false,
+    "experiment_procedure_preprovided": false,
+    "executable_tool_or_command_preprovided": false,
+    "quantitative_formula_preprovided": false,
+    "controller_action_graph_preprovided": false,
+    "expected_answer_precommitted": false
+  },
+  "required_behavior": [
+    "autonomously decompose the technical objective",
+    "discover and verify authoritative primary technical evidence without a supplied authority, domain, URL, document identifier, or standards citation",
+    "extract and reconcile the decision-relevant atomic-visibility and crash-durability guarantees without predeclared field locations or conclusions",
+    "select and run a real zero-cost executable verification route without a supplied tool, command, or experiment recipe",
+    "synthesize documentary and executable evidence into a scoped technical conclusion",
+    "state material filesystem, platform, concurrency, persistence, and crash-model limitations",
+    "independently verify the consequential result",
+    "preserve source, method, execution, and cognition provenance"
+  ],
+  "required_output": {
+    "fields": [
+      "status",
+      "research_plan",
+      "source_provenance",
+      "tool_provenance",
+      "experiment",
+      "observations",
+      "decision",
+      "limitations",
+      "independent_verification",
+      "model_dependency_count",
+      "cognition_dependency_class",
+      "cognition_provenance_authority"
+    ]
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "required_cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_local_model": true,
+    "no_model_artifact": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "If the producer completes semantically, independently inspect the producer-cited primary interface and platform evidence, independently reproduce the essential concurrency observation without importing producer modules, and compare the consequential guarantees, conclusion, and stated limitations. If the producer fails before a result, preserve only the earliest causal blocker and do not replay the task.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "freeze_note": "Objective and acceptance scope frozen before producer-side source discovery, tool selection, evidence interpretation, experiment design, or answer research."
+}
