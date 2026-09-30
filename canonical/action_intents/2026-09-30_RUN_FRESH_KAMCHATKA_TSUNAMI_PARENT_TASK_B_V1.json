@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RUN-FRESH-GUARDED-KAMCHATKA-TSUNAMI-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED_FRESH_POST_REPAIR_PARENT_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "POST_ROUTING_REPAIR_FRESH_PARENT_END_TO_END_EVIDENCE_REQUIRED",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::POST_ROUTING_REPAIR_FRESH_PARENT_TASK_B::GUARDED_FRESH_PARENT_EXECUTION",
+  "task_id": "PARENT-OPENENDED-KAMCHATKA-TSUNAMI-AMPLITUDE-REAL-TASK-20260930-004",
+  "task_blob_sha": "9397247097ec1d6539352efbde74c677ef7196f6",
+  "prior_work_checked": [
+    "Sole HTTP/2 parent Task A was spent once in guarded run 36688193204 and is replay-forbidden.",
+    "Brain PR474 guarded-qualified the exact two-part broad-routing repair and is merged into canonical main.",
+    "Canonical main at freeze is a42d1d9ef9134f1095e44a4483dba8203f27eda9.",
+    "Open Brain and runner PR search found no active Kamchatka/seismology/tsunami parent execution lease."
+  ],
+  "evidence_presence_classification": "FRESH_POST_REPAIR_PARENT_EVIDENCE_ABSENT",
+  "expected_parent_frontier_change": "Either complete one fresh materially different open-ended scientific parent task end-to-end or localize the first new integrated causal gap after the broad-routing repair; never replay this task.",
+  "highest_leverage_now": true,
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "surviving_necessity": "The broad-routing causal gap is now guarded-qualified and canonical; only a new real parent execution can show whether the integrated route completes or expose the next causal gap.",
+    "selected_surviving_route": "RUN_ONE_FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "MORE_SYNTHETIC_ROUTING_TESTS",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_OR_STATION",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "NEW_EXECUTION_INFRASTRUCTURE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It directly tests the repaired integrated capability with no new machinery and yields either semantic completion or the next actionable causal gap.",
+    "stop_rule": "ONE_PHYSICAL_CHILD_START_MAXIMUM__ON_FAILURE_PRESERVE_FIRST_CAUSAL_GAP__ON_SUCCESS_REQUIRE_INDEPENDENT_ORACLE_BEFORE_PARENT_CREDIT"
+  },
+  "stop_condition": "After exactly one guarded physical start, stop this task permanently. Preserve semantic success for independent verification or the earliest causal failure for generic repair."
+}
