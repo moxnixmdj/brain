@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_INTERNALIZED_CODING_EVALUATION_PROTOCOL_V1",
+  "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "configuration_manifest": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+  "configuration_load_order": [
+    "skills/using-superpowers/SKILL.md",
+    "skills/brainstorming/SKILL.md",
+    "skills/writing-plans/SKILL.md",
+    "skills/using-git-worktrees/SKILL.md",
+    "skills/test-driven-development/SKILL.md",
+    "skills/systematic-debugging/SKILL.md",
+    "skills/subagent-driven-development/SKILL.md",
+    "skills/dispatching-parallel-agents/SKILL.md",
+    "skills/requesting-code-review/SKILL.md",
+    "skills/receiving-code-review/SKILL.md",
+    "skills/verification-before-completion/SKILL.md",
+    "skills/executing-plans/SKILL.md",
+    "skills/finishing-a-development-branch/SKILL.md"
+  ],
+  "substrate_policy": {
+    "preferred": "GPT_6_ASTRA_IN_CHATGPT_CODEX_OR_WORK",
+    "zero_incremental_only": true,
+    "stop_before_credit_purchase": true,
+    "external_api_billing_forbidden": true,
+    "substrate_is_not_owned_capability": true
+  },
+  "conditions": {
+    "configured": {
+      "label": "BRAIN_SUPERPOWERS",
+      "instruction": "Load and obey the exact Brain-owned Superpowers skill configuration before and throughout the task. Preserve its planning, TDD, debugging, review, verification, parallelization, and branch-finish discipline."
+    },
+    "baseline": {
+      "label": "SUBSTRATE_ONLY",
+      "instruction": "Use the same substrate, tools, environment, effort and task without loading or referencing the Brain-owned Superpowers configuration."
+    }
+  },
+  "control_variables": [
+    "same substrate/model",
+    "same reasoning/effort setting",
+    "same task bytes",
+    "same repository/environment snapshot",
+    "same tool permissions",
+    "same wall-clock/task timeout",
+    "same verifier",
+    "no cross-condition memory leakage"
+  ],
+  "stage_order": [
+    {
+      "stage": 1,
+      "benchmark": "Terminal-Bench 4.0",
+      "target_bar": 66.4,
+      "comparator": "Claude Opus 5.5",
+      "decision": "FAIL_FULL_FAMILY_ROUTE_IMMEDIATELY_IF_CONFIGURED_SCORE_IS_DECISIVELY_BELOW_66_4"
+    },
+    {
+      "stage": 2,
+      "benchmark": "FrontierCode v1.1 Main",
+      "target_bar": 54.4,
+      "comparator": "Claude Opus 5.5",
+      "prerequisite": "STAGE_1_PASS"
+    },
+    {
+      "stage": 3,
+      "benchmark": "CursorBench 4.0 or matched direct behavioral equivalent if official harness is unavailable",
+      "target_bar": 57.8,
+      "comparator": "Claude Opus 5.5",
+      "prerequisite": "STAGE_1_AND_STAGE_2_PASS"
+    }
+  ],
+  "attribution_gate": {
+    "configured_must_materially_differ_from_baseline": true,
+    "no_minimum_delta_predeclared": "The evidence must show task-relevant behavioral contribution; do not manufacture a numeric delta threshold without calibration.",
+    "acceptable_signals": [
+      "higher verified task completion",
+      "fewer unrecovered failures",
+      "better root-cause/debugging success",
+      "better regression preservation",
+      "successful long-horizon completion where baseline fails",
+      "verifier-confirmed improvement traceable to configuration-prescribed actions"
+    ]
+  },
+  "independent_verification": {
+    "required": true,
+    "verifier_must_not_be_the_configured_route_itself": true,
+    "inspect": [
+      "task success/failure",
+      "test suite",
+      "regressions",
+      "requested behavior",
+      "diff quality",
+      "scope compliance",
+      "configuration adherence",
+      "baseline comparability"
+    ]
+  },
+  "evidence_output_path": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/VERIFICATION_EVIDENCE_V1.json",
+  "ownership_output_path": "canonical/capabilities/opus55/ADVANCED_AGENTIC_CODING_SUPERPOWERS_OWNERSHIP_V1.json",
+  "current_state": "READY_FOR_APPROVED_SUBSTRATE_EXECUTION"
+}
