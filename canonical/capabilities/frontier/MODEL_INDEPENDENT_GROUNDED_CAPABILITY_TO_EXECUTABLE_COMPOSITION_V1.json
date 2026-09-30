@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "REAL_TASK_A_VERIFIED__FRESH_REUSE_UNSPENT",
+  "status": "ACQUIRED_VERIFIED__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,29 +28,40 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "REAL_TASK_A_VERIFIED__FRESH_REUSE_UNSPENT",
-  "next_action": "RUN_ONE_MATERIALLY_DISTINCT_FRESH_REAL_TASK_THROUGH_EXISTING_MODEL_INDEPENDENT_GROUNDED_COMPOSITION_ROUTE__NO_REDISCOVERY__NO_SPENT_TASK_REPLAY",
-  "obsolescence_status": "NOT_YET_PROVEN",
-  "winning_route": null,
-  "capability_strength_result": "COMPONENT_VERIFICATION_PASS__UNIFIED_PLANNING_REAL_TASK_A_PASS__FRESH_REUSE_UNSPENT",
+  "current_status": "ACQUIRED_VERIFIED",
+  "next_action": "PARENT_FRONTIER_RECOMPUTE__RUN_NEW_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK",
+  "obsolescence_status": "ACQUIRED_VERIFIED",
+  "winning_route": "DETERMINISTIC_GROUNDED_EXECUTABLE_COMPOSITION_PLUS_CAPABILITY_GRAPH_PLANNER",
+  "capability_strength_result": "UNIFIED_PLANNING_REAL_TASK_A_PASS__YAML_JSON_MATERIALLY_DISTINCT_FRESH_REUSE_PASS",
   "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
   "independent_verification": {
-    "status": "PASS_REAL_TASK_A",
-    "public_run_id": 36652169397,
-    "job_id": 109688570787,
-    "method": "independent live GitHub API refetch and consistency reconstruction",
-    "producer_independent": true,
-    "artifact_id": 11070249875,
-    "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1"
+    "status": "PASS",
+    "component_verification_run_id": 36647904127,
+    "fresh_real_task": {
+      "run_id": 36652169397,
+      "job_id": 109688570787,
+      "artifact_id": 11070249875,
+      "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1",
+      "producer_independent": true
+    },
+    "fresh_reuse": {
+      "run_id": 36652623916,
+      "job_id": 109689985771,
+      "artifact_id": 11071595189,
+      "artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a",
+      "materially_distinct": true,
+      "producer_independent": true
+    }
   },
   "inheritance_path": [
     "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
     "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
-    "canonical/runtime/capability_planner.py"
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/astra_runtime.py"
   ],
-  "residual_gap": "MATERIALLY_DISTINCT_FRESH_REUSE_WITHOUT_REDISCOVERY",
-  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_COMPOSITION_TASK_A_UNIFIED_PLANNING_20260930_V1.json",
+  "residual_gap": null,
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
   "component_verification": {
     "status": "PASS",
     "public_run_id": 36647904127,
@@ -61,5 +72,11 @@
     "result": "PASS",
     "cause": null,
     "composition_behavior": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH_EXECUTED_AND_INDEPENDENTLY_VERIFIED"
+  },
+  "fresh_reuse": {
+    "run_id": 36652623916,
+    "result": "PASS",
+    "materially_distinct": true,
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json"
   }
 }
