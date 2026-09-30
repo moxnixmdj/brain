@@ -1,0 +1,74 @@
+name: Execute Fresh HTTP2 Parent A Once
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  execute-once:
+    if: github.head_ref == 'execute/fresh-http2-parent-a-once-20260930-v1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Fail-closed prestart
+        run: |
+          set -euo pipefail
+          mkdir -p _terminal
+          TASK=canonical/tasks/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json
+          MISSION=canonical/astra_runtime/missions/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json
+          test -f "$TASK"
+          test -f "$MISSION"
+          test "$(git hash-object "$TASK")" = "539cadd30e7e8ac548638157b7f36a1814b97dcd"
+          grep -Fq '"exactly_one_execution": true' "$TASK"
+          grep -Fq '"no_same_task_replay": true' "$MISSION"
+          grep -Fq '"model_planner_disabled": true' "$MISSION"
+          grep -Fq '"evidence.claim_spec.bind.explicit_comparison.stdlib"' canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json
+          grep -Fq 'broad_objective_decomposition_available' canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py
+          grep -Fq '_run_open_research_source_frontend' canonical/runtime/astra_runtime.py
+          python -m py_compile             canonical/runtime/astra_runtime.py             canonical/runtime/bound_capabilities/broad_objective_decompose.py             canonical/runtime/bound_capabilities/open_research_source_frontend.py             canonical/runtime/bound_capabilities/objective_claim_operand_binding.py             canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py
+          python canonical/tests/test_objective_claim_operand_binding.py | tee _terminal/claim_binding_tests.log
+          printf '%s\n' 'PARENT_PRESTART_QUALIFIED' | tee _terminal/prestart_report.txt
+      - name: Execute frozen parent exactly once
+        id: producer
+        run: |
+          set +e
+          python canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json 2>&1 | tee _terminal/producer.log
+          code=${PIPESTATUS[0]}
+          printf 'exit_code=%s\n' "$code" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$code" > _terminal/producer_exit_code.txt
+          exit 0
+      - name: Preserve terminal evidence
+        if: always()
+        run: |
+          set -euo pipefail
+          mkdir -p _terminal/snapshot
+          cp canonical/tasks/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json _terminal/snapshot/task.json
+          cp canonical/astra_runtime/missions/PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003.json _terminal/snapshot/mission.json
+          if [ -d canonical/astra_runtime/evidence ]; then cp -R canonical/astra_runtime/evidence _terminal/snapshot/evidence; fi
+          if [ -d canonical/astra_runtime/state ]; then cp -R canonical/astra_runtime/state _terminal/snapshot/state; fi
+          grep -E -m10 'PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1|Blocker:|CAPABILITY_ACQUISITION_REQUIRED|OPEN_ENDED_RESEARCH_|COMPOUND_GOAL_COMPLETE' _terminal/producer.log > _terminal/first_signals.txt || true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fresh-http2-parent-a-terminal
+          path: _terminal/
+          if-no-files-found: error
+      - name: Enforce terminal status
+        if: always()
+        run: |
+          set -euo pipefail
+          code="${{ steps.producer.outputs.exit_code }}"
+          test -n "$code"
+          test "$code" = "0"
+          grep -Fq 'COMPOUND_GOAL_COMPLETE' _terminal/producer.log
+          echo PARENT_PRODUCER_SEMANTIC_COMPLETE
