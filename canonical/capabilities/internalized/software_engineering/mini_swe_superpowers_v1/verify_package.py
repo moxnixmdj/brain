@@ -27,7 +27,7 @@ with tempfile.TemporaryDirectory() as td:
     subprocess.run([sys.executable,str(BUILDER),"--output",str(out)],check=True)
     text=out.read_text(encoding="utf-8")
     assert text.startswith("agent:\n  system_template: |\n")
-    assert "BRAIN FAIL-CLOSED COMPLETION CONTRACT V4" in text
+    assert "BRAIN FAIL-CLOSED COMPLETION CONTRACT V5" in text
     assert "REQUIREMENT TRACEABILITY GATE" in text
     assert "ACCEPTANCE COVERAGE GATE" in text
     assert "RUNTIME ORACLE GATE" in text
@@ -35,6 +35,9 @@ with tempfile.TemporaryDirectory() as td:
     assert "ARTIFACT DEPENDENCY CLOSURE GATE" in text
     assert "CLEAN-ROOM ARTIFACT REPLAY GATE" in text
     assert "FAIL-CLOSED PORTABILITY RULE" in text
+    assert "CONSTRAINT ROLE SEPARATION GATE" in text
+    assert "BOUNDARY SATURATION ORACLE" in text
+    assert "ACTUAL-STATE COUPLING RULE" in text
     assert "SINGLE TERMINAL AUTHORITY" in text
     assert "BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1" in text
     for name in m["components"]["methodology"]["skill_pins"]:
