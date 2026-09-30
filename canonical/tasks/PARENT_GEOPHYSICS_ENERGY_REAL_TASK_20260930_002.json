@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "GEOPHYSICS_SEISMOLOGY_QUANTITATIVE_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "fixed_window_utc": {
+    "start": "2026-09-28T00:00:00Z",
+    "end": "2026-09-29T00:00:00Z"
+  },
+  "sources": [
+    {
+      "id": "USGS",
+      "authority": "U.S. Geological Survey",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-09-28T00:00:00&endtime=2026-09-29T00:00:00&orderby=magnitude&limit=1",
+      "magnitude_json_path": [
+        "features",
+        0,
+        "properties",
+        "mag"
+      ]
+    },
+    {
+      "id": "EMSC",
+      "authority": "European-Mediterranean Seismological Centre / SeismicPortal",
+      "url": "https://www.seismicportal.eu/fdsnws/event/1/query?format=json&starttime=2026-09-28T00:00:00&endtime=2026-09-29T00:00:00&orderby=magnitude&limit=1",
+      "magnitude_json_path": [
+        "features",
+        0,
+        "properties",
+        "mag"
+      ]
+    }
+  ],
+  "scientific_contract": {
+    "source_agreement_max_abs_magnitude_delta": 0.2,
+    "source_conflict_rule": "If abs(M_USGS-M_EMSC) > 0.2, stop and report SOURCE_CONFLICT; do not compute a reconciled energy.",
+    "reconciled_magnitude_rule": "If sources agree, M=(M_USGS+M_EMSC)/2.",
+    "energy_formula": "E_J = 10 ** (1.5 * M + 4.8)",
+    "energy_units": "joules",
+    "decision_threshold_joules": 100000000000000,
+    "decision_rule": "ABOVE_OR_EQUAL_1E14_J if E_J >= 1e14, otherwise BELOW_1E14_J."
+  },
+  "required_output": {
+    "fields": [
+      "status",
+      "window_start_utc",
+      "window_end_utc",
+      "usgs_source_url",
+      "emsc_source_url",
+      "usgs_magnitude",
+      "emsc_magnitude",
+      "absolute_magnitude_delta",
+      "source_agreement",
+      "reconciled_magnitude",
+      "energy_joules",
+      "decision",
+      "provenance",
+      "model_dependency_count"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PARENT_GEOPHYSICS_ENERGY_RESULT_20260930.json"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_hand_authored_event_id": true,
+    "no_source_task_tuning_after_execution": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch both exact source URLs outside Brain, extract the two magnitudes independently, apply the frozen 0.2 agreement rule, recompute M and E_J with independent Python math, and compare every consequential output field.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false
+}
