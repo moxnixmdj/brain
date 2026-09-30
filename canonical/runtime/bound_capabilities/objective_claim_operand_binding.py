@@ -28,7 +28,7 @@ _STOP={
  "find","in","is","it","of","on","or","than","that","the","this","to","was",
  "were","whether","which","with","assess","investigate","verify",
 }
-_WORD=re.compile(r"[a-z0-9][a-z0-9._+-]*")
+_WORD=re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]*")
 _NUM=re.compile(
     r"(?<![A-Za-z0-9_.])"
     r"([-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?)"
