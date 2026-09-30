@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__BROAD_MULTICLAUSE_RESEARCH_ROUTING_REPAIRED_GUARDED_QUALIFIED__FRESH_TASK_B_REQUIRED__NO_PARENT_CREDIT",
+  "status": "FRONTIER_BAR_DEFINED__SEISMOLOGY_TASK_B_SPENT__OBJECTIVE_LITERAL_THRESHOLD_BINDING_REQUIRED__NO_PARENT_CREDIT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -68,20 +68,26 @@
     "reason": "Producer prompt predeclared exact sources, JSON paths, formula and threshold, so it did not exercise autonomous decomposition or material source/tool discovery."
   },
   "evidence_B": {
-    "status": "FROZEN_AUTHORIZED_UNSPENT__FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_B",
+    "status": "SPENT__FIRST_CAUSAL_GAP_LOCALIZED__NO_PARENT_CREDIT",
     "task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
     "domain": "SEISMOLOGY_TSUNAMI_HAZARD_QUANTITATIVE_RESEARCH",
     "task_path": "canonical/tasks/PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002.json",
     "mission_path": "canonical/astra_runtime/missions/PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002.json",
     "authorization_path": "canonical/action_intents/2026-09-30_EXECUTE_GUARDED_SEISMOLOGY_TASK_B_V2.json",
-    "execution_count": 0,
+    "execution_count": 1,
     "replay_allowed": false,
     "automatic_shared_runtime_prestart_failure_run_id": 36693304431,
     "prestart_failure_spent_task": false,
-    "requirement": "Execute exactly once through a fresh guarded carrier lane with unchanged frozen task, mission, and runtime bytes; stop on first new causal gap or semantic completion."
+    "requirement": "Repair and independently qualify the generic objective-literal threshold relation seam, then choose a new materially different fresh parent task; never replay this seismology task.",
+    "public_run_id": 36693929830,
+    "job_id": 109817291758,
+    "artifact_id": 11086898224,
+    "artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7",
+    "first_causal_gap": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
   },
-  "obsolescence_status": "NOT_YET_PROVEN__BROAD_MULTICLAUSE_RESEARCH_ROUTING_REPAIRED_GUARDED_QUALIFIED__FRESH_TASK_B_REQUIRED",
-  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+  "obsolescence_status": "NOT_YET_PROVEN__SEISMOLOGY_TASK_B_SPENT__OBJECTIVE_LITERAL_THRESHOLD_BINDING_REQUIRED",
+  "residual_gap": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -186,7 +192,7 @@
       "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
     }
   ],
-  "next_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_B__NO_HTTP2_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_action": "ACQUIRE_AND_GUARD_QUALIFY_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING__NO_SEISMOLOGY_REPLAY",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -373,24 +379,23 @@
     "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
   },
   "last_frontier_reconciliation": {
-    "status": "CLAIM_RELATION_SUBCAPABILITY_ACQUIRED__ADVANCE_TO_CLAIM_SPEC_OPERAND_BINDING",
-    "previous_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
-    "blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "status": "SEISMOLOGY_TASK_B_SPENT__OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+    "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "previous_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+    "blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
     ],
-    "public_run_id": 36682488104,
-    "public_job_id": 109780804595,
-    "artifact_id": 11082521746,
-    "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+    "spent_parent_task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
+    "spent_parent_run_id": 36693929830,
+    "spent_parent_replay_allowed": false,
     "parent_capability_promoted": false
   },
   "next_parent_validation": {
-    "status": "FRESH_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_TASK_B_REQUIRED__FROZEN_AUTHORIZED_UNSPENT",
-    "task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
-    "requirement": "Run the already-frozen seismology Task B exactly once through the model-independent inherited route without predeclared source, station, value, formula, tool, command, controller graph, or expected answer.",
+    "status": "BLOCKED_ON_GENERIC_OBJECTIVE_LITERAL_THRESHOLD_BINDING_REPAIR",
+    "requirement": "Acquire and guard-qualify generic evidence-quantity versus explicit objective-literal numeric relation binding before any further parent task.",
     "replay_allowed": false,
-    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION",
-    "after_pass": "Independently verify the Task B result and then adjudicate the parent frontier capability without exceeding the exact evidence scope."
+    "stop_rule": "NO_SEISMOLOGY_REPLAY__REPAIR_GENERIC_SEAM_ONLY",
+    "after_pass": "Freeze a new materially different open-ended parent task on the inherited repaired route."
   }
 }
