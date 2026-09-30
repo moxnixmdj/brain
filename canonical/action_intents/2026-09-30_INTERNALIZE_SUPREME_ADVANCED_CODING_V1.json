@@ -45,7 +45,9 @@
     "obs_capability": {
       "existing_inherited_routes_checked": [
         "Brain-internalized Superpowers 6.4.2",
-        "Historical Brain coding components"
+        "Historical Brain coding components",
+        "Canonical Superpowers EVALUATION_PROTOCOL_V1 sequential disqualification-first matched A/B design",
+        "Fresh Superpowers session-window-debug direct semantic verification: task PASS, zero Opus credit, whole-family bar unproven"
       ],
       "external_existing_routes_checked": [
         "Utkarsh-X/Supreme pinned revision c062bec2971c25c332c00954f57eb19a41053d61",
@@ -89,7 +91,8 @@
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
-        "SUPERPOWERS_ONLY_FROZEN_VERIFICATION_ROUTE"
+        "SUPERPOWERS_AS_EXCLUSIVE_FROZEN_CANDIDATE",
+        "DUPLICATE_EVALUATION_PROTOCOL_DESIGN"
       ],
       "adjacent_capabilities_absorbed": [
         "evidence-first engineering",
@@ -99,14 +102,15 @@
         "risk-scaled verification",
         "persistent task state"
       ],
-      "fresh_reuse_plan": "Evaluate the Supreme-led Brain route on an approved general cognition substrate; retain Superpowers as controlled comparison."
+      "fresh_reuse_plan": "Reuse the canonical sequential A/B evaluation protocol structure for a Supreme-led configured arm, retaining Superpowers as comparison/fallback."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
         "Reused published full-suite A/B evidence instead of rerunning Terminal-Bench 2.1",
-        "Reused exposed six-file configuration instead of reconstructing behavior"
+        "Reused exposed six-file configuration instead of reconstructing behavior",
+        "Reused newly merged Superpowers verification protocol rather than designing a new Supreme-specific harness."
       ],
-      "search_stop_decision": "No current public Terminal-Bench 4.0 configuration found already above Opus 5.5; Supreme is the strongest exposed directly compared coding methodology found, so internalize before further evaluation.",
+      "search_stop_decision": "Fresh Superpowers direct evidence still explicitly grants zero Opus credit and leaves the whole-family bar unproven. No public Terminal-Bench 4.0 configuration found already above Opus 5.5; Supreme remains the strongest exposed matched candidate found. Internalize now, then reuse the canonical sequential A/B protocol.",
       "affected_layers_only_on_revalidation": true
     },
     "routes_considered": [
@@ -127,10 +131,14 @@
   "prior_state_reconciliation": {
     "superseding_main_commit": "cd3b82ff8866e040d4f6aaf167fa8cdfcaaadcca",
     "material_changes": [
-      "PR556_SUPERPOWERS_VERIFICATION_PROTOCOL_CANONICAL",
-      "SUPERPOWERS_SESSION_WINDOW_DEBUG_DIRECT_SEMANTIC_PASS_RECORDED_WITH_ZERO_OPUS_CREDIT"
+      "SUPERPOWERS_VERIFICATION_PROTOCOL_MERGED_AS_PR556",
+      "SUPERPOWERS_DIRECT_SEMANTIC_VERIFICATION_RECORDED_WITH_ZERO_OPUS_CREDIT"
     ],
-    "effect_on_route": "SUPREME_REMAINS_LEADING_EXPOSED_CHALLENGER__SUPERPOWERS_DIRECT_PASS_RETAINED_AS_CONTROL_EVIDENCE__NO_PREMATURE_PROMOTION",
+    "evidence_checked": [
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/EVALUATION_PROTOCOL_V1.json",
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json"
+    ],
+    "effect_on_route": "SUPREME_INTERNALIZATION_REMAINS_SELECTED__SUPERPOWERS_DIRECT_SEMANTIC_TASK_PASSED_BUT_WHOLE_OPUS_5_5_BAR_REMAINS_EXPLICITLY_UNPROVEN__REUSE_EXISTING_SEQUENTIAL_AB_PROTOCOL_FOR_SUPREME_LED_EVALUATION",
     "stale_assumptions_deleted": [
       "SUPERPOWERS_VERIFICATION_PROTOCOL_NOT_YET_CANONICAL",
       "SUPERPOWERS_HAS_NO_DIRECT_TASK_EVIDENCE"
