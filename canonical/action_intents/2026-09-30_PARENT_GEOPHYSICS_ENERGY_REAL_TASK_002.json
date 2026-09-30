@@ -1,0 +1,365 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either add one independently verified cross-domain parent real-task result without frontier-model cognition, or replace the broad parent blocker with the first specific causal capability gap exposed by the real task. No child repair or parent promotion is authorized by this intent alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current parent frontier restored on main f31d020bb39765d9484a7f4874c315617518dbb2",
+    "space-cargo Task A remains candidate evidence only and is not reused",
+    "spent serialization parent task replay forbidden",
+    "model-independent evidence synthesis, grounding, and executable composition are all currently acquired and verified after no-replay requalification",
+    "fresh task rules frozen before source query in canonical/tasks/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002.json",
+    "public source preflight run 36660813340 PASS on exact frozen USGS and EMSC URLs",
+    "USGS FDSN Event API official documentation supports GeoJSON and orderby=magnitude",
+    "EMSC SeismicPortal FDSN Event API official documentation supports JSON and orderby=magnitude",
+    "goal compiler and bound capability registry inspected; no preemptive task-specific scientific-math integration is being added"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002 exactly once on its frozen 2026-09-28 UTC window and frozen scientific contract. If the end-to-end task passes, preserve producer and independent-oracle evidence and adjudicate parent scope separately. If it fails, preserve the first causal blocker and recompute the frontier before any repair or replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f31d020bb39765d9484a7f4874c315617518dbb2",
+    "real_outcome": "Execute the frozen geophysics parent task end-to-end with no model: obtain strongest-event magnitudes from the exact frozen USGS and EMSC URLs, apply the frozen 0.2 agreement rule, compute E_J=10**(1.5*M+4.8), make the frozen 1e14 J threshold decision, preserve provenance, and independently verify the result or stop at the first causal capability gap.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Execute the frozen geophysics parent task end-to-end with no model: obtain strongest-event magnitudes from the exact frozen USGS and EMSC URLs, apply the frozen 0.2 agreement rule, compute E_J=10**(1.5*M+4.8), make the frozen 1e14 J threshold decision, preserve provenance, and independently verify the result or stop at the first causal capability gap.",
+      "proxy_goals_deleted": [
+        "another grounding benchmark",
+        "another composition benchmark",
+        "model qualification",
+        "carrier research",
+        "serialization replay",
+        "space-cargo parameter reuse"
+      ],
+      "surviving_necessity": "A materially different parent-level real task is the only remaining high-information route to broad capability evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "knowledge.json.fetch.external and knowledge.consistency.assess",
+        "current deterministic capability planner/model-independent controller",
+        "current goal compiler scientific computation reachability checked without adding a repair"
+      ],
+      "external_existing_routes_checked": [
+        "USGS FDSN Event API",
+        "EMSC SeismicPortal FDSN Event API",
+        "Python/SymPy deterministic numerical computation as an available external implementation form",
+        "direct hand-coded Python scientific script",
+        "frontier model route"
+      ],
+      "capability_work_deleted": [
+        "No preemptive math integration",
+        "No new research framework",
+        "No new carrier",
+        "No model route",
+        "No task-specific event-ID patch"
+      ],
+      "surviving_gap": "Unknown until the frozen parent task executes; static inspection is not promoted to a failure claim."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Broad parent capability proof gap; child grounding/composition blockers are closed.",
+      "delete_bypass_substitute_options": [
+        "Delete more child benchmarks",
+        "Reuse the full acquired model-independent stack",
+        "Reuse existing SymPy route if generic planning/discovery can reach it",
+        "Reject hand-coded task script as insufficient parent-capability evidence",
+        "Reject frontier-model cognition as disallowed for credited model-independent capability"
+      ],
+      "surviving_causal_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_LIVE_SEISMOLOGY_TASK",
+        "HAND_CODE_ONE_OFF_GEOPHYSICS_SCRIPT",
+        "ADD_NEW_SCIENTIFIC_AGENT_FRAMEWORK",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "A one-off script could solve the question but would not test the parent capability. New frameworks add integration time before a failure proves they are necessary. Model cognition cannot earn the targeted credit. Reusing the current acquired stack maximizes parent-level information per wall-clock.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The source task uses two independent official FDSN services and a frozen quantitative formula. On semantic completion, the oracle must independently re-fetch both frozen URLs and recompute source agreement, reconciled magnitude, energy, and threshold decision without importing the Brain producer."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all child-layer benchmarking unless this parent task falsifies a child",
+        "Qwen/Ministral/Murakumo cognition routes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live JSON evidence acquisition",
+        "multi-source consistency",
+        "deterministic capability grounding",
+        "executable composition",
+        "deterministic planning",
+        "typed decision synthesis",
+        "independent verification"
+      ],
+      "fresh_reuse_plan": "This frozen geophysics task is the new cross-domain parent task. On success, adjudicate against the broad parent bar; on failure, localize only the first generic causal seam and never replay this task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused the preserved unexecuted geophysics task architecture from PR269",
+        "froze a new unqueried 2026-09-28 UTC window before probing sources",
+        "reused official FDSN endpoints and current public carrier",
+        "deleted model/provider search and preemptive scientific-math integration"
+      ],
+      "search_stop_decision": "The frozen task, sources, current acquired child stack, and $0 carrier are ready. Actual parent execution now has higher information gain than further static inspection or framework search.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Task rules were frozen before source query. Public run 36660813340 then directly confirmed both exact frozen source URLs are reachable and structurally valid on the execution carrier."
+    },
+    "routes_considered": [
+      "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_LIVE_SEISMOLOGY_TASK",
+      "HAND_CODE_ONE_OFF_GEOPHYSICS_SCRIPT",
+      "ADD_NEW_SCIENTIFIC_AGENT_FRAMEWORK",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_CHILD_BENCHMARKS",
+      "ONE_OFF_SCIENTIFIC_SCRIPT_AS_CAPABILITY_PROOF",
+      "NEW_AGENT_FRAMEWORK",
+      "MODEL_COGNITION"
+    ],
+    "selected_surviving_route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_LIVE_SEISMOLOGY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It reuses the fully requalified current Brain stack on a new frozen scientific task, with exact source readiness already proven on the public carrier, while avoiding any one-off solution that would answer the task without testing the parent capability.",
+    "expected_parent_level_state_change": "Either add one independently verified cross-domain parent real-task result without frontier-model cognition, or replace the broad parent blocker with the first specific causal capability gap exposed by the real task. No child repair or parent promotion is authorized by this intent alone.",
+    "stop_condition": "Execute PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002 exactly once on its frozen 2026-09-28 UTC window and frozen scientific contract. If the end-to-end task passes, preserve producer and independent-oracle evidence and adjudicate parent scope separately. If it fails, preserve the first causal blocker and recompute the frontier before any repair or replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T02:39:10Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_REQUALIFIED_MODEL_INDEPENDENT_BRAIN_PARENT_STACK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main f31d020bb39765d9484a7f4874c315617518dbb2",
+          "composition requalification source run 36659637634 + no-replay adjudication run 36660108447",
+          "canonical/tasks/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002.json frozen before source preflight"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "USGS FDSN Event API documentation: GeoJSON query + orderby=magnitude",
+          "EMSC SeismicPortal FDSN Event API documentation: JSON query + orderby=magnitude",
+          "DIRECT_PROBE public run 36660813340: both exact frozen URLs returned HTTP JSON with magnitude field"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Project Brain current verified bound capability registry and deterministic controller",
+          "Python deterministic arithmetic is available on the execution substrate; task-specific math integration is intentionally not pre-added"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-30 official-web route check found the documented FDSN services still current; no alternate framework can test the inherited Brain parent route more directly than execution"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent live geophysics multi-source corroboration quantitative scientific computation independent verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "USGS EMSC FDSN earthquake JSON zero-cost scientific data"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "current Brain inherited stack versus one-off scientific script for parent capability proof"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 USGS EMSC FDSN event service current availability"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_SEISMOLOGY_TASK",
+          "evidence": [
+            "All required child cognition/composition capabilities are currently requalified",
+            "Frozen task committed before source query",
+            "Public source preflight 36660813340 PASS"
+          ],
+          "qualification_evidence": [
+            "main f31d020bb39765d9484a7f4874c315617518dbb2",
+            "public run 36660813340",
+            "official USGS/EMSC FDSN documentation"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the integrated parent capability with independent official sources and a frozen quantitative oracle.",
+            "CAPABILITY_STRENGTH": "Exercises source acquisition, scientific corroboration, quantitative reasoning, decision formation, and verification.",
+            "WALL_CLOCK": "No new implementation before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Carrier and both exact source URLs just passed direct preflight.",
+            "VERIFIABILITY": "Frozen URLs, formula, tolerance, threshold, and independent recomputation oracle."
+          }
+        },
+        {
+          "route": "HAND_CODE_ONE_OFF_GEOPHYSICS_SCRIPT",
+          "evidence": [
+            "A direct script could solve the instance."
+          ],
+          "qualification_evidence": [
+            "DIRECT_ANALYSIS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can answer the instance.",
+            "CAPABILITY_STRENGTH": "Does not test the inherited parent reasoning route.",
+            "WALL_CLOCK": "Faster to one answer but slower to the terminal capability objective.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for this instance.",
+            "VERIFIABILITY": "High for the instance, weak for parent capability transfer."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger dominates the current inherited Brain stack on time-to-valid-parent-capability evidence. One-off scripts solve the instance but cannot earn the targeted parent capability evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_SEISMOLOGY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T02:39:10Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_BRAIN_STACK_ON_FROZEN_SEISMOLOGY_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T02:39:02Z",
+            "evidence": [
+              "DIRECT_PROBE: source preflight run 36660813340 completed successfully on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_MODEL_INDEPENDENT_PARENT_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T02:39:10Z",
+            "evidence": [
+              "BRAIN_INHERITED: current main f31d020bb39765d9484a7f4874c315617518dbb2"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "USGS_FDSN_EVENT_API_FROZEN_URL",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T02:39:02Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36660813340 returned HTTP JSON with nonempty features and numeric magnitude"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "EMSC_SEISMICPORTAL_FDSN_EVENT_API_FROZEN_URL",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T02:39:02Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36660813340 returned HTTP JSON with nonempty features and numeric magnitude"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "FROZEN_PARENT_GEOPHYSICS_TASK_SPEC",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T02:39:10Z",
+            "evidence": [
+              "BRAIN_INHERITED: canonical/tasks/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002.json committed before source preflight"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
