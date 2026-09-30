@@ -1,0 +1,303 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-OPEN-ENDED-REAL-TASK-A-POST-PR318-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either produce the first admissible genuinely open-ended model-independent parent real Task A with autonomous decomposition and material source/tool discovery plus independent verification, or replace the broad parent blocker with the first specific causal gap. No parent promotion is authorized by this intent alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "exact current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e (merged PR318)",
+    "canonical ACTIVE_GOAL_HIERARCHY_V1 and frontier target after PR318",
+    "PR318 scope correction: structured demography remains supporting evidence but is not admissible open-ended parent evidence",
+    "open PR scan: PR319/PR321 still carry the superseded Task-B blocker and therefore do not own the post-PR318 blocker lease",
+    "five already-verified model-independent child capabilities and runtime cognition provenance firewall"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN__NO_ADMISSIBLE_OPEN_ENDED_PARENT_TASK_A",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Admit this intent on exact post-PR318 main first; only then freeze one objective-only Task A with no prewired research plan, execute it exactly once with runtime-derived ASTRA_RUNTIME_DERIVED_V1 cognition provenance and model_dependency_count=0, independently verify any success, and on failure preserve only the first causal gap with no replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+    "real_outcome": "Obtain the first valid end-to-end proof that the current model-independent Brain can solve a genuinely open-ended technical/scientific objective without receiving a predeclared research recipe, or expose the first real missing general capability.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Test the defining open-ended parent behavior directly on a real objective.",
+      "proxy_goals_deleted": [
+        "second structured worksheet",
+        "old parent-task replay",
+        "task-specific solver",
+        "frontier-model-assisted answer",
+        "new framework search before a real parent failure"
+      ],
+      "surviving_necessity": "One admissible genuinely open-ended model-independent Task A is now the exact canonical blocker."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "ASTRA_RUNTIME_DERIVED_V1 cognition provenance"
+      ],
+      "external_existing_routes_checked": [
+        "current public zero-cost GitHub Actions execution carrier",
+        "public authoritative technical/scientific primary sources discoverable at execution time",
+        "standard Linux/Python executable verification surface"
+      ],
+      "capability_work_deleted": [
+        "no task-specific runtime change",
+        "no new model supplier",
+        "no prewired source/URL/tool sequence",
+        "no repair before first causal failure"
+      ],
+      "surviving_gap": "No admissible open-ended parent execution has yet tested autonomous decomposition plus material source/tool discovery on the current inherited route."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent-level evidence obligation, not a pre-localized child defect.",
+      "delete_bypass_substitute_options": [
+        "reuse the current inherited model-independent stack",
+        "reuse the current public carrier",
+        "delete scripted research recipes",
+        "reject model cognition for dependency-removal credit",
+        "stop at the first causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A_ON_CURRENT_GENERAL_ROUTE",
+        "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+        "BUILD_TASK_SPECIFIC_SOLVER",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "Structured tasks no longer prove the parent scope; task-specific code cannot prove the inherited general route; frontier-model cognition invalidates dependency-removal evidence. Direct execution of the inherited route is the shortest decisive experiment.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark can close this blocker. Freeze one objective-only real task only after lease admission; require one exact producer execution, runtime-derived zero-model provenance, and a separately implemented independent verification of consequential claims."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all stale Task-B leases written before PR318",
+        "all additional child benchmarking unless Task A exposes a specific child gap",
+        "all prewired structured tasks as parent-promotion evidence"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "model-independent grounding",
+        "tool/capability binding and composition",
+        "quantitative execution",
+        "evidence synthesis",
+        "independent verification",
+        "runtime cognition provenance"
+      ],
+      "fresh_reuse_plan": "If Task A independently passes, freeze a materially different open-ended Task B on the inherited route; if Task A fails, acquire only the first generic causal gap before any new fresh parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR318 evidence-scope correction",
+        "reused current verified child-capability inventory",
+        "reused recent public carrier qualification",
+        "searched current open PRs for the exact new blocker and found no valid owner"
+      ],
+      "search_stop_decision": "The remaining uncertainty is empirical parent transfer, not route availability. Another framework search would delay the one experiment that can either satisfy the blocker or expose its first causal gap.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Exact main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e and the recent public carrier are current; refresh only if main, carrier, or selected execution surface materially changes before the one-shot run."
+    },
+    "routes_considered": [
+      "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A_ON_CURRENT_GENERAL_ROUTE",
+      "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+      "BUILD_TASK_SPECIFIC_SOLVER",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_RESEARCH_RECIPE",
+      "STRUCTURED_WORKSHEET_AS_PARENT_PROOF",
+      "TASK_SPECIFIC_SOLVER_AS_PARENT_PROOF",
+      "FRONTIER_MODEL_COGNITION",
+      "OLD_TASK_REPLAY",
+      "PREEMPTIVE_CHILD_REPAIR"
+    ],
+    "selected_surviving_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A_ON_CURRENT_GENERAL_ROUTE",
+    "why_selected_route_is_fastest_sufficient": "It uses the already-verified inherited stack and current $0 carrier, directly tests the exact missing parent behavior, and returns either valid Task-A evidence or the first actionable causal gap with one guarded execution.",
+    "expected_parent_level_state_change": "Either produce the first admissible genuinely open-ended model-independent parent real Task A with autonomous decomposition and material source/tool discovery plus independent verification, or replace the broad parent blocker with the first specific causal gap. No parent promotion is authorized by this intent alone.",
+    "stop_condition": "Admit this intent on exact post-PR318 main first; only then freeze one objective-only Task A with no prewired research plan, execute it exactly once with runtime-derived ASTRA_RUNTIME_DERIVED_V1 cognition provenance and model_dependency_count=0, independently verify any success, and on failure preserve only the first causal gap with no replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:39:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A_ON_CURRENT_GENERAL_ROUTE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+          "PR318 canonical open-ended parent scope correction",
+          "five verified model-independent subcapabilities plus runtime cognition provenance"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Public primary technical/scientific documentation and data sources remain available for autonomous discovery by the producer; none are prewired into the future task."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Current standard Linux/Python execution surface and existing Brain capability registry require no new package or paid dependency for the parent experiment."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Discovery-only sensors reveal no alternate framework that can prove model-independent parent behavior faster than executing the already-built general route."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "genuinely open-ended model-independent technical research autonomous decomposition source discovery tool selection verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "zero-cost public technical research execution authoritative primary sources reproducible verification"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing inherited general research route versus task-specific scripted solver"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current public GitHub Actions Linux Python technical documentation September 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A_ON_CURRENT_GENERAL_ROUTE",
+          "evidence": [
+            "current Brain main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "recent successful zero-cost public parent execution carrier"
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED: current post-PR318 runtime and verified child-capability inventory",
+            "DIRECT_PROBE: verification-capsule-runner public carrier run 36668380406 completed successfully on the same account execution class"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the exact parent contract with runtime-derived zero-model provenance and independent verification.",
+            "CAPABILITY_STRENGTH": "Exercises autonomous decomposition, source/tool discovery, quantitative execution, synthesis, and verification rather than a scripted subproblem.",
+            "WALL_CLOCK": "No implementation is required before the decisive run.",
+            "INCREMENTAL_COST": "$0 incremental spend.",
+            "RELIABILITY": "Uses the already-qualified public carrier and fail-closed one-shot semantics.",
+            "VERIFIABILITY": "Exact commit/task bytes, producer provenance, terminal artifact, and separate verifier can be preserved."
+          }
+        },
+        {
+          "route": "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+          "evidence": [
+            "PR318 established that structured demography is valid supporting evidence but insufficient for open-ended parent promotion."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED: PR318 scope correction"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can validate an instance but not the defining open-ended parent behavior.",
+            "CAPABILITY_STRENGTH": "Insufficient scope.",
+            "WALL_CLOCK": "Fast but produces invalid parent evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for the wrong proof obligation.",
+            "VERIFIABILITY": "Verifiable instance result, not verifiable parent-scope acquisition."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger can close or falsify the post-PR318 parent blocker faster than one guarded execution of the current inherited model-independent route on a genuinely open-ended objective.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A_ON_CURRENT_GENERAL_ROUTE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:39:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A_ON_CURRENT_GENERAL_ROUTE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VERIFICATION_CAPSULE_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:24:00Z",
+            "evidence": [
+              "DIRECT_PROBE: verification-capsule-runner run 36668380406 completed successfully on the authorized public carrier class"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:38:36Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e after merged PR318"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
