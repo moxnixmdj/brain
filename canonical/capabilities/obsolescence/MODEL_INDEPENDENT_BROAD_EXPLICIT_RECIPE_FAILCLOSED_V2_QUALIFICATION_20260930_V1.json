@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_REPAIR_QUALIFICATION_V1",
+  "status": "PASS_GUARDED_INDEPENDENT_EXACT_BYTE_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "repaired_blocker": "BROAD_EXPLICIT_RECIPE_CLASSIFIER_FAILS_CLOSED_INCOMPLETELY_FOR_ABSOLUTE_PATHS_AND_UNKNOWN_CLI_COMMANDS",
+  "brain_pr": 496,
+  "brain_candidate_head": "d472da3082c8a26d16b91aad0997cb369ee5180e",
+  "brain_base": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
+  "exact_candidate_blobs": {
+    "canonical/runtime/bound_capabilities/broad_objective_decompose.py": "3ded762075ed222228a14877af631f1e2e6d9e4c",
+    "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py": "46e8e7466479ea298c34e5fa682d49c374510ce9",
+    "canonical/tests/test_broad_objective_semantic_decomposition.py": "4717bd5ebf4b4e6521abf331e93e9675c1b8a785"
+  },
+  "authoritative_red": {
+    "workflow_run_id": 36689999285,
+    "exact_failure": "EXPLICIT_RECIPE_3_WAS_ADMITTED",
+    "falsified_input": "Assess whether two values differ. Run /usr/bin/python verify_values.py"
+  },
+  "independent_qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 204,
+    "workflow_run_id": 36690801491,
+    "job_id": 109807291312,
+    "head_sha": "f8c9025c5fb1091db0c85e6c2ed712759ab8454d",
+    "conclusion": "success",
+    "authored_test_count": 13,
+    "authored_tests": "PASS",
+    "independent_oracle": "PR496_EXACT_ADVERSARIAL_QUALIFICATION_PASS",
+    "artifact_id": 11085905805,
+    "artifact_sha256": "b559c8db08d773e5a64f60a19cb3c9fa0b0e782c3aadf833326ec6e89ce94d7d"
+  },
+  "verified_properties": [
+    "absolute executable paths fail closed as explicit recipes",
+    "unknown CLI commands fail closed as explicit recipes",
+    "known commands and script invocations fail closed",
+    "URLs and save/create recipe forms remain rejected",
+    "concrete tools attached to generic method language fail closed",
+    "abstract verification/validation method language remains admissible",
+    "frozen genomics Task B wording remains admissible without execution"
+  ],
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "frozen_genomics_task_execution": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_required_action": "MERGE_REPAIR_THEN_REAUTHORIZE_GENOMICS_TASK_B_ON_EXACT_REPAIRED_RUNTIME"
+}
