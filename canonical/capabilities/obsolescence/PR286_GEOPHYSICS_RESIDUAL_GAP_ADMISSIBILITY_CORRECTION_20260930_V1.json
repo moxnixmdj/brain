@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROMOTION_ADMISSIBILITY_CORRECTION_V1",
+  "correction_id": "PR286-GEOPHYSICS-RESIDUAL-GAP-ADMISSIBILITY-20260930",
+  "status": "CANONICAL_EVIDENCE_PRESERVATION__NO_COUNTER_CHANGE",
+  "source_merge_commit": "ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414",
+  "source_pr": 286,
+  "claim_scope": {
+    "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "claim": "One fresh cross-domain model-independent parent task localized one generic residual capability gap.",
+    "allowed_credit": [
+      "RESIDUAL_GAP_LOCALIZED"
+    ],
+    "forbidden_credit": [
+      "REUSABLE_CAPABILITY_INHERITED",
+      "VERIFIED_REAL_TASK_COMPLETED",
+      "FRESH_REUSE_PASS",
+      "FRONTIER_DEPENDENCY_REMOVED",
+      "PARENT_CAPABILITY_PROMOTED"
+    ]
+  },
+  "falsification_evidence": {
+    "execution_repository": "moxnixmdj/verification-capsule-runner",
+    "run_id": 36661188188,
+    "job_id": 109716113402,
+    "exact_head_sha": "6101738645bc1d3a78a9d9be5f83848d1f1efc4e",
+    "artifact_id": 11074272541,
+    "artifact_digest": "sha256:106d28719e5c6bc0bc676b3d54a811874202b1e30985c4c0c59f0aa3560ded5b",
+    "semantic_status": "FAIL",
+    "model_dependency_count": 0,
+    "execution_count": 1,
+    "same_task_replay_allowed": false,
+    "first_causal_gap": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+    "exact_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json",
+      "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_TERMINAL_RECONCILIATION_V1.json"
+    ]
+  },
+  "adversarial_falsification": [
+    "The task was frozen before source preflight.",
+    "The execution used exact pinned Brain/task bytes.",
+    "Model planner use was forbidden and model_dependency_count remained 0.",
+    "The task failed before output, so no task-completion or frontier-capability credit is admissible.",
+    "Independent oracle was correctly not run after producer semantic failure.",
+    "The earliest generic failure was preserved rather than patched or replayed."
+  ],
+  "admissibility_verdict": "RESIDUAL_GAP_LOCALIZATION_SUPPORTED__ALL_BROADER_PROMOTION_CLAIMS_FORBIDDEN",
+  "scoreboard_counter_change_in_this_correction": false,
+  "next_action": "RUN_RECURSIVE_OBS_FOR_PARENT_NUMERIC_RELATION_GAP__QUALIFY_REUSE_OF_EXISTING_DETERMINISTIC_SYMPY_ROUTE_BEFORE_BUILDING__NO_GEOPHYSICS_REPLAY"
+}
