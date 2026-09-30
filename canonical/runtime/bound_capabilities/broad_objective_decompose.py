@@ -17,16 +17,16 @@ _BROAD_PREFIX=re.compile(
     re.IGNORECASE,
 )
 _EXPLICIT_ACTION=re.compile(
-    r"(?:\\busing\\s+https?://|\\bhttps?://|"
-    r"\\bsave\\s+.+?\\.(?:json|csv|md|txt)|"
-    r"\\bextract\\s+json\\s+path|"
-    r"\\bcreate\\s+.+?\\.(?:json|csv|md|txt)|"
-    r"\\b(?:run|execute)\\s+(?:"
-    r"python(?:\\d+(?:\\.\\d+)*)?|pytest|bash|sh|curl|wget|jq|node|npm|npx|"
+    r"(?:\busing\s+https?://|\bhttps?://|"
+    r"\bsave\s+.+?\.(?:json|csv|md|txt)|"
+    r"\bextract\s+json\s+path|"
+    r"\bcreate\s+.+?\.(?:json|csv|md|txt)|"
+    r"\b(?:run|execute)\s+(?:"
+    r"python(?:\d+(?:\.\d+)*)?|pytest|bash|sh|curl|wget|jq|node|npm|npx|"
     r"git|make|cmake|docker|podman|java|javac|go|cargo|rustc|powershell|pwsh|cmd"
-    r")(?:\\s|$)|"
-    r"\\b(?:run|execute)\\s+(?:\\./)?[A-Za-z0-9_./-]+\\.(?:py|sh|ps1|bat|cmd|exe|js|ts)(?:\\s|$)|"
-    r"\\bopen\\s+https?://)",
+    r")(?:\s|$)|"
+    r"\b(?:run|execute)\s+(?:\./)?[A-Za-z0-9_./-]+\.(?:py|sh|ps1|bat|cmd|exe|js|ts)(?:\s|$)|"
+    r"\bopen\s+https?://)",
     re.IGNORECASE,
 )
 
