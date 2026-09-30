@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__GENERIC_EVIDENCE_EXTRACTION_REQUALIFIED__CLAIM_RELATION_GAP_ACTIVE__NO_PARENT_CREDIT",
+  "status": "FRONTIER_BAR_DEFINED__CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED__NO_PARENT_CREDIT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__CLAIM_SPEC_OPERAND_BINDING_GAP",
-  "residual_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "obsolescence_status": "NOT_YET_PROVEN__CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -162,9 +162,26 @@
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
       "limitations": "Verified only for provenance-verified exact-ROR-bound first-party relevance-admitted sources. Generic non-ROR evidence extraction, factual correctness, support, sufficiency, and relation evaluation remain unverified."
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+      "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
+      "route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+      "public_run_id": 36685279194,
+      "public_job_id": 109789596373,
+      "artifact_id": 11083292341,
+      "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+      "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+      "test_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+      "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_capability_promoted": false,
+      "limitations": "Verified only for bounded explicit GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE objectives and exact quoted-support objectives with unique lexical role binding, exact-unit-compatible operand selection, and fail-closed ambiguity. General semantic entailment, truth, causality, sufficiency, unit conversion, source independence, and parent completion remain unverified."
     }
   ],
-  "next_action": "OBS_AND_ACQUIRE_MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE__REUSE_VERIFIED_EXTRACTION_AND_CLAIM_RELATION__NO_PARENT_REPLAY",
+  "next_action": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -326,20 +343,21 @@
     "parent_capability_credit": false
   },
   "last_verified_subcapability": {
-    "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
-    "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
-    "route": "evidence.claim_relation.generic_units.stdlib",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-    "public_run_id": 36682488104,
-    "public_job_id": 109780804595,
-    "artifact_id": 11082521746,
-    "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-    "producer_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
-    "test_git_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+    "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
+    "route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+    "public_run_id": 36685279194,
+    "public_job_id": 109789596373,
+    "artifact_id": 11083292341,
+    "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+    "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "test_git_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+    "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
     "parent_capability_promoted": false,
-    "limitations": "Exact normalized substring support and explicit caller-referenced Decimal relations only; automatic claim-spec generation, semantic operand-role binding, paraphrase/entailment, factual correctness, causality, evidence quality/sufficiency/independence, and unit conversion remain unverified."
+    "limitations": "Verified only for bounded explicit GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE objectives and exact quoted-support objectives with unique lexical role binding, exact-unit-compatible operand selection, and fail-closed ambiguity. General semantic entailment, truth, causality, sufficiency, unit conversion, source independence, and parent completion remain unverified."
   },
   "last_frontier_reconciliation": {
     "status": "CLAIM_RELATION_SUBCAPABILITY_ACQUIRED__ADVANCE_TO_CLAIM_SPEC_OPERAND_BINDING",
@@ -353,5 +371,12 @@
     "artifact_id": 11082521746,
     "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
     "parent_capability_promoted": false
+  },
+  "next_parent_validation": {
+    "status": "FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "requirement": "Run a new difficult consequential open-ended technical/scientific task without predeclared exact sources, formulas, JSON paths, or tool recipe. The inherited route must autonomously decompose, discover, acquire, extract, bind claims/operands, reason, synthesize, and return independently verifiable evidence.",
+    "replay_allowed": false,
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "after_pass": "Independently verify Task A, then freeze a materially different genuine open-ended Task B using the inherited route without rediscovery."
   }
 }
