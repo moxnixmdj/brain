@@ -1,0 +1,299 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-CLAIM-SPEC-OPERAND-BINDING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "0ef3f48e07ea0f05857c13aa5fed58437d979504",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and independently qualify one bounded model-independent claim-spec/semantic-operand binding child capability; no parent promotion until fresh end-to-end composition.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 0ef3f48e07ea0f05857c13aa5fed58437d979504",
+    "canonical runtime objective_evidence_unit_extract.py blob fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "canonical runtime generic_evidence_claim_relation.py blob d66a7eb30774f66160b698d8082947776888293d",
+    "claim relation tests blob 590a1e50f11bc2903b56d41a00c5354ec2501c44",
+    "open PR search for exact blocker returned none"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when a bounded deterministic binder derives explicit supported relation specs from objective plus integrity-checked V2 evidence units on two cross-domain fresh generic fixtures, rejects ambiguity/adversarial role swaps, is independently recomputed, and is inherited without parent promotion or spent-parent replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0ef3f48e07ea0f05857c13aa5fed58437d979504",
+    "real_outcome": "Turn a bounded natural-language comparison objective and verified generic evidence units into an auditable explicit claim/relation spec with semantically bound operand roles, without model cognition.",
+    "required_capability": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "obs_goal": {
+      "real_outcome": "Produce explicit relation specs that the already-verified claim/relation evaluator can execute, while failing closed on semantic ambiguity.",
+      "proxy_goals_deleted": [
+        "parent replay",
+        "new model",
+        "semantic entailment",
+        "factual truth inference",
+        "source discovery rebuild",
+        "generic parser framework"
+      ],
+      "surviving_necessity": "The verified V2 extractor and exact relation evaluator are disconnected because operand roles and bounded relation intent are not derived from the objective."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "objective_evidence_unit_extract.py",
+        "generic_evidence_claim_relation.py",
+        "goal_compiler.py",
+        "typed numeric relation execution",
+        "typed decision synthesis"
+      ],
+      "external_existing_routes_checked": [
+        "Python re/Decimal stdlib",
+        "pyparsing 3.3.3",
+        "Lark",
+        "spaCy rule-based Matcher"
+      ],
+      "capability_work_deleted": [
+        "no extraction rebuild",
+        "no relation evaluator rebuild",
+        "no statistical NLP",
+        "no model API",
+        "no general grammar dependency"
+      ],
+      "surviving_gap": "A bounded deterministic objective grammar plus evidence-label/number binding layer."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Narrow semantic binding seam between verified extraction and verified explicit relation evaluation.",
+      "delete_bypass_substitute_options": [
+        "Bypass impossible because downstream evaluator requires explicit operand refs.",
+        "Caller-authored specs rejected because open-ended parent must derive them.",
+        "Statistical/model semantic parsing rejected from credited cognition path."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_STDLIB_BOUNDED_OBJECTIVE_GRAMMAR_WITH_V2_EVIDENCE_BINDING",
+        "PYParsing_OR_LARK_GRAMMAR_DEPENDENCY",
+        "SPACY_RULE_MATCHER",
+        "STATISTICAL_OR_MODEL_SEMANTIC_PARSER"
+      ],
+      "losing_routes_reason": "Parser libraries add dependency/complexity but do not supply domain semantics; spaCy rules do not remove the need to define semantic patterns; statistical/model parsing violates the model-independent cognition constraint. A small stdlib grammar directly composes existing verified units and evaluator.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use two cross-domain objective/evidence fixtures plus adversarial ambiguity and role-swap negatives, then independently recompute the emitted relation from the referenced evidence literals."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "manual caller-authored claim/relation spec on bounded comparison objectives"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic V2 evidence extraction",
+        "exact claim/relation evaluation",
+        "typed numeric decision synthesis"
+      ],
+      "fresh_reuse_plan": "After component qualification, run one materially fresh non-spent end-to-end parent task through the composed path; do not replay Mauna, SQLite, astronomy, chemistry, demography, or thermophysics."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse merged V2 extraction and relation qualifications",
+        "reuse current exact blocker reconciliation"
+      ],
+      "search_stop_decision": "Adequate zero-cost stdlib composition exists and external grammar engines do not remove the semantic-rule requirement; further search cannot beat it enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Route frontier refreshed immediately before PR creation on 2026-09-30; refresh only after material implementation failure or base drift."
+    },
+    "routes_considered": [
+      "COMPOSE_STDLIB_BOUNDED_OBJECTIVE_GRAMMAR_WITH_V2_EVIDENCE_BINDING",
+      "PYParsing_OR_LARK_GRAMMAR_DEPENDENCY",
+      "SPACY_RULE_MATCHER",
+      "STATISTICAL_OR_MODEL_SEMANTIC_PARSER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PARENT_REPLAY",
+      "MODEL_COGNITION",
+      "EXTRACTION_REBUILD",
+      "RELATION_EVALUATOR_REBUILD"
+    ],
+    "selected_surviving_route": "COMPOSE_STDLIB_BOUNDED_OBJECTIVE_GRAMMAR_WITH_V2_EVIDENCE_BINDING",
+    "why_selected_route_is_fastest_sufficient": "It reuses both verified sides of the seam, adds no dependency or spend, is deterministic and independently auditable, and can fail closed outside its bounded grammar.",
+    "expected_parent_level_state_change": "Acquire and independently qualify one bounded model-independent claim-spec/semantic-operand binding child capability; no parent promotion until fresh end-to-end composition.",
+    "stop_condition": "Stop when a bounded deterministic binder derives explicit supported relation specs from objective plus integrity-checked V2 evidence units on two cross-domain fresh generic fixtures, rejects ambiguity/adversarial role swaps, is independently recomputed, and is inherited without parent promotion or spent-parent replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T07:45:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "COMPOSE_STDLIB_BOUNDED_OBJECTIVE_GRAMMAR_WITH_V2_EVIDENCE_BINDING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py",
+          "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/re.html",
+          "https://docs.python.org/3/library/decimal.html",
+          "https://spacy.io/usage/rule-based-matching/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/project/pyparsing/",
+          "https://pypi.org/project/lark/"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Route search found no community route that removes the need for an explicit semantic grammar while satisfying zero-model cognition."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "rule based semantic parsing natural language numeric comparison operand binding"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "pyparsing Lark spaCy rule matcher deterministic parsing"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python regex Decimal bounded comparison grammar evidence numeric literals"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "latest pyparsing rule parser Python 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "PYParsing_OR_LARK_GRAMMAR_DEPENDENCY",
+          "evidence": [
+            "PyPI pyparsing 3.3.3",
+            "PyPI Lark 1.2.x"
+          ],
+          "qualification_evidence": [
+            "Both are grammar engines; neither supplies objective-specific semantic role inference without authored rules."
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can encode grammar but same semantic rules still required.",
+            "CAPABILITY_STRENGTH": "No advantage for the bounded comparison grammar.",
+            "WALL_CLOCK": "Slower due dependency/integration.",
+            "INCREMENTAL_COST": "$0 but extra package surface.",
+            "RELIABILITY": "Mature but adds dependency.",
+            "VERIFIABILITY": "Good, but stdlib route is smaller."
+          }
+        },
+        {
+          "route": "SPACY_RULE_MATCHER",
+          "evidence": [
+            "spaCy official rule-based Matcher documentation"
+          ],
+          "qualification_evidence": [
+            "Rule matcher operates on token patterns; dependency semantics require parser/model if used."
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Rule path possible but still needs authored patterns.",
+            "CAPABILITY_STRENGTH": "Token rules do not exceed bounded stdlib grammar for this seam.",
+            "WALL_CLOCK": "Slower integration.",
+            "INCREMENTAL_COST": "$0 monetary, higher compute/dependency.",
+            "RELIABILITY": "Mature.",
+            "VERIFIABILITY": "Auditable but larger surface."
+          }
+        }
+      ],
+      "negative_search_summary": "No material challenger removes the semantic-rule burden while beating the stdlib composition on correctness, wall-clock, zero-cost, and auditability.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COMPOSE_STDLIB_BOUNDED_OBJECTIVE_GRAMMAR_WITH_V2_EVIDENCE_BINDING",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:45:00Z",
+        "max_age_hours": 2,
+        "selected_route": "COMPOSE_STDLIB_BOUNDED_OBJECTIVE_GRAMMAR_WITH_V2_EVIDENCE_BINDING",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.13 stdlib re/unicodedata/hashlib/json",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STABLE",
+            "scope": "PUBLIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:45:00Z",
+            "evidence": [
+              "Existing canonical Python 3.13 qualification surfaces and stdlib-only producer dependencies"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "PUBLIC"
+          },
+          {
+            "dependency": "GitHub Brain repository write/PR surface",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:45:00Z",
+            "evidence": [
+              "Branch create succeeded on exact main immediately before this intent"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
