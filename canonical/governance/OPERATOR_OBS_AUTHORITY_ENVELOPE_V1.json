@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_OPERATOR_OBS_AUTHORITY_ENVELOPE_V1",
+  "status": "MANDATORY_TRUTH_BOUNDARY",
+  "hard_enforced_surfaces": [
+    "frontier-sensitive repository mutations",
+    "canonical state changes",
+    "capability promotion or revocation recorded in canonical state",
+    "guarded execution initiated through Brain action intents"
+  ],
+  "hard_enforcement_mechanisms": [
+    "frontier-sensitive action intent required",
+    "exact-base recursive OBS receipt required",
+    "trusted base validator in pull_request_target",
+    "blocker lease and target continuity checks",
+    "promotion evidence checks"
+  ],
+  "not_platform_hard_enforced": [
+    "the ChatGPT product emitting conversational text before repository validation",
+    "a human reading an ungated assistant sentence as advice"
+  ],
+  "canonical_authority_rule": "Bare conversational output has zero canonical authority. A consequential blocker, selected route, next action, promotion, revocation, or state transition is authoritative for Project Brain only when backed by a current-base repository artifact that satisfies the applicable OBS and trusted-guard requirements.",
+  "reporting_rule": "When discussing Project Brain consequential state, the operator must distinguish VERIFIED_CANONICAL from PROVISIONAL_ANALYSIS. If current-base OBS has not been completed, the statement must not be presented as authoritative current state.",
+  "mutation_rule": "No conversational statement alone may authorize a frontier-sensitive mutation. The mutation must independently satisfy the repository guard.",
+  "limitation": "The Brain repository cannot install a pre-response hook into the ChatGPT platform from inside this repository. Therefore the truthful safety boundary is canonical-authority gating, not guaranteed suppression of every premature sentence.",
+  "failure_mode": "If an ungated chat statement conflicts with live canonical state or lacks current-base OBS, canonical state wins and the statement is void for Brain authority.",
+  "strongest_available_mitigation": "Require live canonical refresh plus current-base OBS before consequential Brain reporting, and ensure only validated repository artifacts can drive canonical action.",
+  "protected_by": "canonical/runtime/enforce_goal_hierarchy.py"
+}

@@ -43,5 +43,10 @@
   "stop_rule": "Stop OBS and execute once a correctness-sufficient route survives a fresh challenger frontier, no unresolved plausible dominator remains, required execution dependencies are ready, and further search is unlikely to change the decision.",
   "anti_ceremony_rule": "OBS activity receives zero progress credit and must not delay a route that already satisfies the stop rule.",
   "failure_action": "WITHHOLD_DECISION_AUTHORITY__REFRESH_LIVE_STATE__RERUN_AFFECTED_OBS_LAYERS__THEN_SELECT_OR_EXECUTE",
-  "protected_by": "canonical/runtime/enforce_goal_hierarchy.py"
+  "protected_by": "canonical/runtime/enforce_goal_hierarchy.py",
+  "authority_envelope_path": "canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json",
+  "canonical_authority_requires_repository_backed_current_base_obs": true,
+  "bare_conversational_output_has_canonical_authority": false,
+  "platform_pre_response_hard_gate_available": false,
+  "truth_boundary": "HARD_ENFORCEMENT_APPLIES_TO_CANONICAL_BRAIN_AUTHORITY_AND_GUARDED_MUTATIONS__NOT_TO_RAW_CHAT_MESSAGE_EMISSION"
 }

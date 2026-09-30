@@ -48,6 +48,11 @@
       "id": "OPERATOR_CONSEQUENTIAL_DECISION_WITHOUT_CURRENT_OBS",
       "observed_incident": "An operator produced a consequential current-frontier diagnosis using OBS-like reasoning without first completing a formal current-base seven-layer OBS pass.",
       "must_fail_or_resolve": "Before claiming the current blocker, recommending/selecting a route, or executing consequential work, refresh live canonical state and complete current-base seven-layer OBS. Memory, summaries, and prior conclusions may seed retrieval only and cannot establish current authority."
+    },
+    {
+      "id": "CHAT_CLAIM_MISTAKEN_FOR_CANONICAL_OBS_AUTHORITY",
+      "observed_incident": "A repository-level OBS guard was described as if it could technically prevent every premature conversational ChatGPT statement.",
+      "must_fail_or_resolve": "Bare chat output has zero canonical Brain authority. Hard guarantees apply only to guarded canonical artifacts, mutations, and executions. Consequential Brain reporting must distinguish verified canonical state from provisional analysis."
     }
   ],
   "unknown_error_containment": [
