@@ -106,8 +106,6 @@ def run(objective,decomposition,limit=12,timeout=15):
     relevance_ready=(
         relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
         and relevance.get("output_verified") is True
-        and isinstance(relevance.get("top_candidate_admission"),dict)
-        and relevance["top_candidate_admission"].get("verified") is True
         and relevance.get("top_candidate_original_index") is not None
     )
 
