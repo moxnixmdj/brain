@@ -41,7 +41,7 @@ class OpenResearchSourceFrontendTests(unittest.TestCase):
             x["next_required_capability"],
             {
                 "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
-                "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION",
+                "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION",
             },
         )
         self.assertFalse(x["authority_claims_made"])
