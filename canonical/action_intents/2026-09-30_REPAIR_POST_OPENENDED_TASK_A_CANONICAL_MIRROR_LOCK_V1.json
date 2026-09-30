@@ -1,0 +1,222 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-POST-OPENENDED-TASK-A-CANONICAL-MIRROR-LOCK-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Restore cross-surface canonical truth after the spent Task A reconciliation by mirroring the already-authoritative hierarchy/target blocker, next action, terminal receipt, and no-replay status into pointer, queue, and scoreboard. Zero runtime mutation and zero capability/scoreboard counter credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "public runner run 36670516407 and artifact 11077861584",
+    "canonical/runtime/enforce_goal_hierarchy.py cross-surface mirror invariants"
+  ],
+  "evidence_presence_classification": "EXISTING_CANONICAL_RECONCILIATION__MIRROR_DRIFT_ONLY",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when pointer, queue, scoreboard, hierarchy, and active target agree exactly on the spent Task A compile gap and next action. Do not modify runtime, execute a task, change counters, or claim capability credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore one canonical frontier state so the next legal action attacks the real compiler gap rather than the obsolete pre-execution blocker.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Make current canonical frontier truth internally consistent before any repair or new task.",
+      "proxy_goals_deleted": [
+        "rerun spent Task A",
+        "repair compiler before mirror truth",
+        "inflate progress counters"
+      ],
+      "surviving_necessity": "Mirror the already-authoritative Task A terminal reconciliation across stale canonical surfaces."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "ACTIVE_GOAL_HIERARCHY_V1",
+        "active frontier target record",
+        "CANONICAL_POINTER",
+        "FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
+        "REAL_OUTPUT_SCOREBOARD_V1"
+      ],
+      "external_existing_routes_checked": [
+        "public runner terminal receipt run 36670516407"
+      ],
+      "capability_work_deleted": [
+        "no runtime repair",
+        "no carrier work",
+        "no task execution"
+      ],
+      "surviving_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific canonical metadata drift after a valid terminal reconciliation; not a capability-runtime failure.",
+      "delete_bypass_substitute_options": [
+        "reuse authoritative hierarchy and target",
+        "mirror only stale surfaces",
+        "do not duplicate terminal execution"
+      ],
+      "surviving_causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_AUTHORITATIVE_HIERARCHY_AND_TARGET_TO_REPAIR_MIRRORS",
+        "RERUN_TASK",
+        "REWRITE_RUNTIME"
+      ],
+      "losing_routes_reason": "Task replay is forbidden and runtime mutation cannot fix stale metadata. Reusing existing authoritative reconciliation is sufficient and cheapest.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run the existing fail-closed cross-surface mirror guard on the repaired branch; no new task oracle is relevant."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any lane still using PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+        "any PR337 replay arm"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "existing cross-surface drift guard",
+        "one-shot no-replay discipline"
+      ],
+      "fresh_reuse_plan": "Not applicable to metadata reconciliation; fresh task comes only after generic compiler-gap repair."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused immutable terminal reconciliation",
+        "reused current hierarchy/target"
+      ],
+      "search_stop_decision": "No supplier search can improve a deterministic in-repository mirror synchronization; the authoritative values are already canonical.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Exact canonical base dc38bf8370d692d3f18a5aff446d26933f9dd03a read immediately before repair."
+    },
+    "routes_considered": [
+      "REUSE_AUTHORITATIVE_HIERARCHY_AND_TARGET_TO_REPAIR_MIRRORS",
+      "RERUN_TASK",
+      "REWRITE_RUNTIME"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_REPLAY",
+      "RUNTIME_MUTATION",
+      "COUNTER_INFLATION"
+    ],
+    "selected_surviving_route": "REUSE_AUTHORITATIVE_HIERARCHY_AND_TARGET_TO_REPAIR_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "It changes only stale canonical mirrors, uses already-verified terminal evidence, costs $0, and restores the guard invariant without touching behavior.",
+    "expected_parent_level_state_change": "Restore cross-surface canonical truth after the spent Task A reconciliation by mirroring the already-authoritative hierarchy/target blocker, next action, terminal receipt, and no-replay status into pointer, queue, and scoreboard. Zero runtime mutation and zero capability/scoreboard counter credit.",
+    "stop_condition": "Stop when pointer, queue, scoreboard, hierarchy, and active target agree exactly on the spent Task A compile gap and next action. Do not modify runtime, execute a task, change counters, or claim capability credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:56:30Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_AUTHORITATIVE_HIERARCHY_AND_TARGET_TO_REPAIR_MIRRORS",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
+          "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+          "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions run 36670516407",
+          "artifact 11077861584"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [],
+        "BROAD_WEB_OR_COMMUNITY": []
+      },
+      "query_families": [],
+      "challenger_routes": [
+        {
+          "route": "REUSE_AUTHORITATIVE_HIERARCHY_AND_TARGET_TO_REPAIR_MIRRORS",
+          "evidence": [
+            "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: run 36670516407",
+            "BRAIN_INHERITED: hierarchy and active target"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Copies already-authoritative current values.",
+            "CAPABILITY_STRENGTH": "No capability claim.",
+            "WALL_CLOCK": "Immediate.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Deterministic metadata sync.",
+            "VERIFIABILITY": "Existing drift guard checks equality."
+          }
+        }
+      ],
+      "negative_search_summary": "No external route is relevant to deterministic canonical mirror drift.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_AUTHORITATIVE_HIERARCHY_AND_TARGET_TO_REPAIR_MIRRORS",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:56:30Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_AUTHORITATIVE_HIERARCHY_AND_TARGET_TO_REPAIR_MIRRORS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CANONICAL_MAIN_AND_IMMUTABLE_TERMINAL_RECEIPT",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:56:30Z",
+            "evidence": [
+              "Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+              "GitHub Actions run 36670516407"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
