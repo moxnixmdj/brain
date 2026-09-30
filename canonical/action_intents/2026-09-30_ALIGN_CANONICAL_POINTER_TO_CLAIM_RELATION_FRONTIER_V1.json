@@ -1,0 +1,191 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ALIGN-CANONICAL-POINTER-TO-CLAIM-RELATION-FRONTIER-20260930-V1",
+  "status": "ZERO_CREDIT_AUTHORITY_MIRROR_RECONCILIATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "bafd9931b58a5662527ca48522ef5ced69e35e5d",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "CANONICAL_POINTER_STALE_AFTER_GENERIC_EXTRACTION_REQUALIFICATION",
+  "action_kind": "TRUTH_FIRST_AUTHORITY_MIRROR_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_POINTER_STALE_AFTER_GENERIC_EXTRACTION_REQUALIFICATION::AUTHORITY_RECONCILIATION",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "No capability change. Make CANONICAL_POINTER mirror the already-current hierarchy, queue, target, and scoreboard: generic extraction is verified and the active blocker is claim support/relation evaluation.",
+  "evidence_presence_classification": "CANONICAL_MIRROR_INCONSISTENCY_DIRECTLY_OBSERVED",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "progress_credit": "ZERO_CAPABILITY_CREDIT",
+  "stop_condition": "Pointer critical_blocker, highest_leverage_capability_gap, next_step, last_frontier_reconciliation, and last_verified_subcapability exactly agree with current queue/hierarchy; no capability counters change.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "bafd9931b58a5662527ca48522ef5ced69e35e5d",
+    "real_outcome": "Prevent worker misrouting by restoring one canonical frontier across all authority mirrors.",
+    "required_capability": "CANONICAL_FRONTIER_MIRROR_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "Point every new worker at claim support/relation evaluation, the already-authorized blocker.",
+      "proxy_goals_deleted": [
+        "rerun extraction qualification",
+        "change runtime",
+        "award capability credit",
+        "replay parent task",
+        "start a different frontier"
+      ],
+      "surviving_necessity": "CANONICAL_POINTER is stale while queue/hierarchy/target/scoreboard have advanced."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current CANONICAL_POINTER",
+        "current ACTIVE_GOAL_HIERARCHY",
+        "current FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE",
+        "current REAL_OUTPUT_SCOREBOARD",
+        "current parent target"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No new capability",
+        "No runtime code",
+        "No verification rerun required for pointer repair"
+      ],
+      "surviving_gap": "Pointer fields still name generic extraction despite verified requalification and mirror advancement."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Authority mirror drift only.",
+      "delete_bypass_substitute_options": [
+        "Delete duplicate execution",
+        "Reuse current authoritative mirror values",
+        "Update only stale pointer fields"
+      ],
+      "surviving_causal_blocker": "CANONICAL_POINTER_STALE_AFTER_GENERIC_EXTRACTION_REQUALIFICATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COPY_CURRENT_HIERARCHY_QUEUE_AUTHORITY_INTO_POINTER",
+        "RECOMPUTE_FRONTIER_FROM_SCRATCH",
+        "IGNORE_POINTER_DRIFT"
+      ],
+      "losing_routes_reason": "Existing mirrors already agree; recomputation adds no evidence and ignoring drift can misroute workers.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Exact JSON equality checks against current hierarchy/queue values are sufficient."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any extraction-repair work launched only because of stale pointer"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "After merge, relation-evaluation acquisition uses the corrected exact base."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR #434 requalification",
+        "Reused PR #435 scoreboard mirror correction",
+        "Reused stronger public corroborating run 36682139052"
+      ],
+      "search_stop_decision": "All non-pointer mirrors agree and no open pointer-repair PR exists.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh if main moves before merge."
+    },
+    "routes_considered": [
+      "COPY_CURRENT_HIERARCHY_QUEUE_AUTHORITY_INTO_POINTER",
+      "RECOMPUTE_FRONTIER_FROM_SCRATCH",
+      "IGNORE_POINTER_DRIFT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "EXTRACTION_REPAIR_REEXECUTION",
+      "PARENT_REPLAY",
+      "CAPABILITY_RECREDIT"
+    ],
+    "selected_surviving_route": "COPY_CURRENT_HIERARCHY_QUEUE_AUTHORITY_INTO_POINTER",
+    "why_selected_route_is_fastest_sufficient": "It changes only stale authority fields to values already independently represented in the current hierarchy/queue/target/scoreboard.",
+    "expected_parent_level_state_change": "None beyond canonical mirror consistency.",
+    "stop_condition": "Pointer equals current claim-relation frontier with zero score/capability delta.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T07:13:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_AUTHORITY_MIRROR_REUSE",
+      "source_classes_checked": [
+        "BRAIN_CANONICAL"
+      ],
+      "source_evidence": {
+        "BRAIN_CANONICAL": [
+          "PR #434 extraction requalification",
+          "PR #435 scoreboard mirror correction",
+          "current hierarchy/queue/target agreement"
+        ]
+      },
+      "challenger_routes": [
+        {
+          "route": "COPY_CURRENT_HIERARCHY_QUEUE_AUTHORITY_INTO_POINTER",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact mirror equality",
+            "CAPABILITY_STRENGTH": "No capability claim",
+            "WALL_CLOCK": "Minimal",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Deterministic JSON update",
+            "VERIFIABILITY": "Direct equality"
+          }
+        }
+      ],
+      "negative_search_summary": "No open competing pointer repair lane found.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COPY_CURRENT_HIERARCHY_QUEUE_AUTHORITY_INTO_POINTER",
+      "refresh_triggers": [
+        "MAIN_HEAD_CHANGE_BEFORE_MERGE"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:13:00Z",
+        "max_age_hours": 2,
+        "selected_route": "COPY_CURRENT_HIERARCHY_QUEUE_AUTHORITY_INTO_POINTER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "GITHUB_CANONICAL_WRITE",
+            "kind": "CONTROL_PLANE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:13:00Z",
+            "evidence": [
+              "branch created from exact current main"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
