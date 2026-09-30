@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_HARNESS_VALIDITY_CORRECTION_V1",
+  "status": "CANONICAL_EVIDENCE_SCOPE_CORRECTION__ZERO_CAPABILITY_CREDIT",
+  "checked_on": "2026-09-30",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "correction_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "finding": "The climate Task A receipts do not establish a Brain broad-objective compiler/grounding capability failure because the authoritative first receipt bypassed canonical run_goal orchestration, while later full-runtime duplicate receipts were contaminated by a carrier omission of _runtime_mission_path.",
+  "receipts": {
+    "direct_compiler_receipt": {
+      "runner_pr": 49,
+      "workflow_run_id": 36670516407,
+      "job_id": 109744305866,
+      "artifact_id": 11077861584,
+      "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+      "task_executed": true,
+      "observed": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+      "harness_path": "goal_compiler.compile_goal -> _run_model_independent_goal",
+      "parent_diagnostic_admissible": false,
+      "reason": "Bypassed run_goal/_run_goal_unstamped, which contains deterministic gap classification, bound grounding/composition, and capability discovery/acquisition fallback."
+    },
+    "full_runtime_duplicate_diagnostic": {
+      "runner_pr": 52,
+      "workflow_run_id": 36670619213,
+      "job_id": 109744628405,
+      "artifact_id": 11078240623,
+      "artifact_digest": "sha256:0b15ad2a6e6d960a5ccd9379fc5f147a158af96ca9d6222f3970e42ad6124ecc",
+      "task_executed": true,
+      "observed": "CAPABILITY_ACQUISITION_REQUIRED / NO_COMPATIBLE_SUPPLIER_CONTRACT with APT_ORIGIN_MISSION_PATH_INVALID and PYPI_ORIGIN_MISSION_PATH_INVALID",
+      "parent_credit_authorized": false,
+      "diagnostic_use_only": true,
+      "reason": "It reached canonical run_goal fallback, proving the compile miss is not terminal, but the hand-built mission dict omitted _runtime_mission_path required by acquisition suppliers."
+    }
+  },
+  "runtime_fact": {
+    "runtime_blob": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "canonical_behavior": "_run_goal_unstamped catches plain-goal compilation no-match/unresolved-subgoal, classifies the gap, attempts bound grounding/composition, then targeted/federated zero-model capability acquisition before failing closed.",
+    "implication": "A direct compile_goal failure cannot be promoted as the parent runtime first causal gap."
+  },
+  "climate_task_freshness": {
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "task_blob": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "status": "SPENT_FOR_FRESHNESS__NO_REPLAY",
+    "parent_capability_credit": 0,
+    "parent_capability_failure_credit": 0
+  },
+  "current_main_world_bank_mission_scope": {
+    "path": "canonical/astra_runtime/missions/PARENT_OPEN_ENDED_CO2_AUTHORITY_REAL_TASK_20260930_001.json",
+    "admissible_as_genuine_parent_task_a": false,
+    "reason": "The goal predeclares the authority name 'World Bank' while its purpose/constraints claim authority discovery is not predeclared; do not spend it as parent Task A."
+  },
+  "restored_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "next_required_action": "FREEZE_FRESH_GENUINELY_OPEN_ENDED_TASK_A_ON_EXACT_CURRENT_BASE__EXECUTE_ONLY_THROUGH_CANONICAL_ASTRA_RUNTIME_MISSION_ENTRYPOINT__NO_DIRECT_COMPILER_OR_HAND_BUILT_MISSION_DICT__STOP_ON_FIRST_CAUSAL_GAP",
+  "required_carrier_contract": [
+    "exact current Brain runtime/task/mission bytes",
+    "invoke canonical astra_runtime mission entrypoint or equivalent path-preserving execute_step/run_goal path",
+    "mission _runtime_mission_path must be populated by canonical loader",
+    "ASTRA_DISABLE_MODEL_PLANNER=1",
+    "$0 incremental spend",
+    "no task-specific source/tool/formula/experiment plan",
+    "one execution only",
+    "independent verification only after producer semantic success"
+  ],
+  "progress_credit_delta": 0
+}
