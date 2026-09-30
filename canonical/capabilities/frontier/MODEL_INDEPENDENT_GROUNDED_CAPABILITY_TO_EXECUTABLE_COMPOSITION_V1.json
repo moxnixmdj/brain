@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "ACTIVE_ACQUISITION_TARGET__UNPROVEN__LOCALIZED_FROM_POST_GROUNDING_RUNTIME",
+  "status": "COMPONENT_VERIFIED__REAL_TASK_ACQUISITION_BLOCKED_BY_UPSTREAM_GROUNDING_REGRESSION",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,7 +28,7 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "UNPROVEN",
+  "current_status": "UNPROVEN_REAL_TASK__DOWNSTREAM_BLOCKED",
   "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION__SEARCH_EXISTING_BRAIN_PLANNER_AND_DETERMINISTIC_COMPOSITION_ROUTES_FIRST__NO_SPENT_PARENT_REPLAY",
   "obsolescence_status": "NOT_YET_PROVEN",
   "winning_route": null,
@@ -37,6 +37,17 @@
   "model_dependency_count": 0,
   "independent_verification": null,
   "inheritance_path": [],
-  "residual_gap": "NO_VERIFIED_GENERIC_MODEL_INDEPENDENT_ROUTE_FROM_GROUNDED_BOUND_CAPABILITIES_TO_EXECUTABLE_MULTI_STEP_PLAN",
-  "evidence_path": null
+  "residual_gap": "WAIT_FOR_REPAIRED_VERIFIED_GROUNDING_INPUT_BEFORE_NEW_FRESH_REAL_TASK",
+  "evidence_path": null,
+  "component_verification": {
+    "status": "PASS",
+    "public_run_id": 36647904127,
+    "exact_pr255_head": "1d958cc3ea8f18c42a3bf190c6d4cfeda2556487"
+  },
+  "real_task_attempt": {
+    "run_id": 36649042160,
+    "result": "BLOCKED_BEFORE_BINDABLE_COMPOSITION",
+    "cause": "UPSTREAM_GROUNDING_INPUT_CONTRACT_COMPATIBILITY_FALSIFIED",
+    "composition_behavior": "CORRECT_FAIL_CLOSED"
+  }
 }
