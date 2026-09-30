@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__COMPOSITION_SUBCAPABILITY_REOPENED_BY_POST_PROMOTION_REGRESSION",
+  "status": "FRONTIER_BAR_DEFINED__COMPOSITION_REQUALIFIED__READY_FOR_NEW_CROSS_DOMAIN_PARENT_TASK",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -60,7 +60,7 @@
     "same_task_replay_allowed": false
   },
   "obsolescence_status": "NOT_YET_PROVEN__READY_FOR_NEW_CROSS_DOMAIN_PARENT_TASK",
-  "residual_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
+  "residual_gap": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -78,13 +78,15 @@
     },
     {
       "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-      "status": "VERIFIED_ACQUIRED__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
-      "route": "grounded executable composition + deterministic capability graph planner",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json",
-      "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json"
+      "status": "VERIFIED_ACQUIRED_AFTER_DIRECT_COMPILER_REPAIR__FRESH_REQUALIFICATION_PASS",
+      "route": "grounded executable composition + shared proposal binding authority + direct compound compiler causal effect-result lowering + deterministic capability graph execution",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_FRESH_REQUALIFICATION_20260930_V1.json",
+      "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+      "fresh_requalification_run_id": 36659312279,
+      "independent_verifier_run_id": 36659436525
     }
   ],
-  "next_action": "RUN_AFFECTED_LAYER_OBS_FOR_GENERIC_DOWNSTREAM_PATH_PROVENANCE__REUSE_PROPOSAL_BINDINGS_EFFECT_RESULT_FIRST__NO_PR267_REPLAY__THEN_FRESH_DIFFERENT_REQUALIFICATION_TASK",
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -92,9 +94,21 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "blocked_by_reopened_subcapability": {
+  "resolved_reopened_subcapability": {
     "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
     "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
-    "public_run_id": 36653756561
+    "public_run_id": 36653756561,
+    "resolved": true,
+    "resolution_evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_FRESH_REQUALIFICATION_20260930_V1.json",
+    "fresh_requalification_run_id": 36659312279,
+    "independent_verifier_run_id": 36659436525
+  },
+  "composition_requalification": {
+    "status": "PASS__CREDIT_RESTORED",
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_FRESH_REQUALIFICATION_20260930_V1.json",
+    "fresh_run_id": 36659312279,
+    "no_replay_verifier_run_id": 36659436525,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
   }
 }
