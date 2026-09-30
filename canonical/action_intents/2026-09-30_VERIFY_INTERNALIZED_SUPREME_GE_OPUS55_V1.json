@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
   "action_id": "VERIFY-INTERNALIZED-SUPREME-GE-OPUS55-20260930-V1",
-  "status": "AUTHORIZED_EXECUTION_PREFLIGHT__PHOTONIC_CONTAMINATED_SPENT__FRESH_BUN_SOURCEMAP_LEAK_SELECTED",
+  "status": "EXECUTED_FAIL__CURRENT_SUPREME_ROUTE_FALSIFIED_FOR_ADVANCEMENT__RETURN_TO_ROUTE_RACE",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "3baed7faefcf86d559e8e673d115372e3db2f9a7",
   "terminal_objective": "PERMANENTLY_ACQUIRE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
   "action_kind": "BRAIN_CONFIGURED_CAPABILITY_STRENGTH_VERIFICATION",
   "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ADVANCED_AGENTIC_CODING::VERIFY_INTERNALIZED_SUPREME_GE_OPUS55",
-  "expected_parent_frontier_change": "Zero Opus credit. Preserve html-js-filter behavioral failure and photonic-waveguide-routing contamination as spent evidence, then run one fresh contamination-controlled bun-sourcemap-leak TB4 preflight under the fail-closed Supreme execution contract.",
+  "expected_parent_frontier_change": "Zero Opus credit. Preserve two behavioral failures and one contamination burn, stop the Supreme task-repair loop, and return advanced coding to the existing-route race.",
   "theory_invariants": {
     "capability_configuration": "BRAIN_OWNED",
     "substrate_role": "GENERAL_COGNITION_ONLY",
@@ -71,7 +71,7 @@
         "No same-task repaired replay for promotion",
         "No new carrier search because public zero-cost carrier is proven"
       ],
-      "surviving_gap": "Supreme configuration adherence still needs one fresh uncontaminated task after html-js-filter failed behaviorally and photonic-waveguide-routing became contaminated before execution."
+      "surviving_gap": "The current Supreme-configured route failed a second uncontaminated behavioral preflight after adherence glue; route-level advancement is falsified and the route race must reopen."
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "Integration/adherence blocker exposed by the first execution instance, not an infrastructure blocker and not yet evidence that the whole Supreme configuration is below Opus 5.5.",
@@ -81,7 +81,7 @@
         "Compile existing Supreme verification discipline into mandatory submission gates",
         "Use a different fresh low-cost TB4 task after the generic adherence repair"
       ],
-      "surviving_causal_blocker": "SUPREME_CONFIGURATION_ADHERENCE_NOT_FAIL_CLOSED__FRESH_UNCONTAMINATED_PREFLIGHT_REQUIRED"
+      "surviving_causal_blocker": "CURRENT_SUPREME_CONFIGURED_ROUTE_NOT_SUFFICIENTLY_GENERAL_TO_ADVANCE__STRONGER_EXISTING_INTERNALIZABLE_CODING_ROUTE_REQUIRED"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -94,11 +94,9 @@
         "INTEGRATE"
       ],
       "routes_ranked": [
-        "ENFORCE_OWNED_SUPREME_EXECUTION_CONTRACT__THEN_FRESH_BUN_SOURCEMAP_LEAK_PREFLIGHT",
-        "REPLAY_SPENT_HTML_TASK",
-        "USE_CONTAMINATED_PHOTONIC_TASK",
-        "SEARCH_NEW_CARRIER",
-        "RUN_FULL_TB4_WITHOUT_ADHERENCE_REPAIR"
+        "RETURN_TO_EXISTING_ROUTE_RACE__KEEP_SUPERPOWERS_CONTROL",
+        "CONTINUE_SUPREME_TASK_SPECIFIC_REPAIR_LOOP",
+        "RUN_FULL_TB4_ANYWAY"
       ],
       "losing_routes_reason": "The public carrier is proven. Replaying the spent task would contaminate evidence. Full scoring before enforcing Supreme's own verification discipline would repeat the exact process failure.",
       "implementation_still_necessary": true
@@ -146,10 +144,10 @@
       "ONE_TASK_PROMOTION",
       "USE_CONTAMINATED_PHOTONIC_TASK"
     ],
-    "selected_surviving_route": "ENFORCE_OWNED_SUPREME_EXECUTION_CONTRACT__THEN_FRESH_BUN_SOURCEMAP_LEAK_PREFLIGHT",
-    "why_selected_route_is_fastest_sufficient": "The first run already proved the carrier and exposed a generic adherence failure. Enforcing Supreme's existing completion discipline is small integration glue; a different 0.75h CPU-only task is the cheapest clean evidence that the repair works.",
+    "selected_surviving_route": "RETURN_TO_EXISTING_ROUTE_RACE__KEEP_SUPERPOWERS_CONTROL",
+    "why_selected_route_is_fastest_sufficient": "The pre-registered fresh task failed after the generic adherence repair. More task-specific Supreme repairs risk benchmark overfitting and violate the stop condition; a route race now has higher expected information and ownership gain per wall-clock.",
     "expected_parent_level_state_change": "Zero Opus credit. Preserve the failed first Supreme execution as falsification evidence, eliminate false carrier/runtime diagnoses, make Supreme verification discipline fail closed, then run one different fresh TB4 preflight before any full-score attempt.",
-    "stop_condition": "No capability credit. Run exactly one fresh bun-sourcemap-leak preflight after self-tests. If behavior fails, falsify the current configured route and return to route race; if it passes, advance to current-harness scoring.",
+    "stop_condition": "STOP_SUPREME_PREFLIGHT_LOOP_NOW__NO_FULL_SCORING__NO_SAME_TASK_REPLAY__RETURN_TO_ROUTE_RACE",
     "route_frontier": {
       "refreshed_utc_date": "2026-09-30",
       "terminal_bench_release": "v4.0.0",
@@ -184,5 +182,15 @@
     "subcategory": "Systems",
     "contamination_state": "CLEAN__OFFICIAL_TASK_BYTES_AND_ENVIRONMENT_ONLY",
     "candidate_carrier_branch": "moxnixmdj/verification-capsule-runner:verify/supreme-tb4-bun-sourcemap-leak-20260930-v1"
+  },
+  "execution_result": {
+    "status": "FAIL",
+    "fresh_task": "bun-sourcemap-leak",
+    "supreme_self_tests": "PASS",
+    "independent_verifier": "FAIL__REWARD_0__25_PASS__9_FAIL__2_ERROR",
+    "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+    "task_spent": true,
+    "capability_credit": 0,
+    "route_may_advance_to_full_scoring": false
   }
 }
