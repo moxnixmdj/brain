@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-COMPOSITION-DIRECT-COMPILER-REPAIR-COMPLETE-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_STATE_STILL_DESCRIBES_DIRECT_COMPILER_BINDING_REPAIR_AS_PENDING_AFTER_PR281_EXACT_PUBLIC_VALIDATION_PASS",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::CANONICAL_STATE_STILL_DESCRIBES_DIRECT_COMPILER_BINDING_REPAIR_AS_PENDING_AFTER_PR281_EXACT_PUBLIC_VALIDATION_PASS::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Mark the direct compound-compiler causal-binding repair complete and component-validated while keeping composition capability and fresh-reuse credit revoked; make one fresh materially distinct real composition task the sole next action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR277 fresh requalification falsification run 36656793034",
+    "PR279 truthful reconciliation",
+    "PR281 merged direct compiler/proposal-binding unification at current main 3c6ef5185a646ff0d0f1b970fc8017dff5966a72",
+    "PR281 public exact validation run 36658401010/job 109707559771 PASS",
+    "direct causal binding regression PASS",
+    "full goal compiler regression file PASS",
+    "current runtime audit shows effect_result direct compile path uses capability_proposal_generators._bind_planned_inputs and planner effect lowering"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile state only; counters and capability credit remain unchanged. Then execute exactly one fresh materially distinct model-independent real composition task with an independent oracle. No further repair or audit unless that fresh task produces a new falsification.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "new_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "relationship": "SAME_TARGET_DIRECT_COMPILER_REPAIR_COMPLETE_AWAIT_FRESH_REQUALIFICATION",
+    "evidence": [
+      "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_REPAIR_VALIDATION_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3c6ef5185a646ff0d0f1b970fc8017dff5966a72",
+    "real_outcome": "Delete stale repair bookkeeping so real fresh evidence is once again the only missing composition predicate.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Canonical state says direct compiler repair complete, credit withheld, one new fresh task required.",
+      "proxy_goals_deleted": [
+        "more repair work",
+        "more static audits without new failure",
+        "restore credit from regression tests",
+        "replay PR277"
+      ],
+      "surviving_necessity": "Fresh real evidence is the only remaining predicate."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR281 exact merged bytes",
+        "public validation 36658401010",
+        "goal_compiler direct effect_result path",
+        "capability_proposal_generators",
+        "capability_planner"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to reconciliation."
+      ],
+      "capability_work_deleted": [
+        "no code",
+        "no provider",
+        "no model",
+        "no benchmark",
+        "no new test"
+      ],
+      "surviving_gap": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT_AFTER_DIRECT_COMPILER_REPAIR"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical bookkeeping lag only.",
+      "delete_bypass_substitute_options": [
+        "Delete stale repair blocker and replace it with fresh-requalification-only state."
+      ],
+      "surviving_causal_blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_TO_FRESH_REQUALIFICATION_ONLY"
+      ],
+      "losing_routes_reason": "The exact causal seam is repaired and independently validated; any additional support work without new falsification is slower than the real-task gate.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new verification needed for reconciliation; exact public validation already executed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all further composition support work absent new falsification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "direct compound compiler effect-result binding",
+        "shared proposal-binding authority",
+        "causal planner effect lowering"
+      ],
+      "fresh_reuse_plan": "Spend exactly one new materially distinct real task; never replay PR277."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse PR281 exact public validation",
+        "reuse direct runtime audit"
+      ],
+      "search_stop_decision": "Repair frontier is exhausted. Fresh execution now dominates further search or audit.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to state-only reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_TO_FRESH_REQUALIFICATION_ONLY",
+      "CONTINUE_SUPPORT_WORK_WITHOUT_NEW_FAILURE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CONTINUE_SUPPORT_WORK_WITHOUT_NEW_FAILURE",
+      "PR277_REPLAY"
+    ],
+    "selected_surviving_route": "RECONCILE_TO_FRESH_REQUALIFICATION_ONLY",
+    "why_selected_route_is_fastest_sufficient": "All known binding seams are repaired and exact public validation passes. Only new real evidence can change capability truth now.",
+    "expected_parent_level_state_change": "Mark the direct compound-compiler causal-binding repair complete and component-validated while keeping composition capability and fresh-reuse credit revoked; make one fresh materially distinct real composition task the sole next action.",
+    "stop_condition": "Reconcile state only; counters and capability credit remain unchanged. Then execute exactly one fresh materially distinct model-independent real composition task with an independent oracle. No further repair or audit unless that fresh task produces a new falsification.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER does not select an execution supplier."
+    }
+  }
+}
