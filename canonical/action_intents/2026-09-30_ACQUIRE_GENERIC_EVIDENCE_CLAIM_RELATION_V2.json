@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-GENERIC-EVIDENCE-CLAIM-RELATION-20260930-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire a bounded bridge over generic objective-grounded evidence units for exact normalized verbatim support and explicit typed numeric relations; preserve semantic operand binding, paraphrase entailment, factual correctness, causality and sufficiency as separate later gates.",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "PR421_EVALUATOR_ALREADY_INDEPENDENTLY_QUALIFIED_ON_OLD_EXTRACTION_SCHEMA__GENERIC_INPUT_BINDING_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact current-base adapter and registry binding pass fail-closed regressions plus independent fresh cross-domain qualification on generic evidence-unit artifacts; promote only exact verbatim support and explicit relation scope, then recompute the parent frontier.",
+  "recursive_obs": {
+    "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+    "real_outcome": "Turn generic provenance-bound objective-grounded evidence units into auditable exact text-support and explicit numeric-relation facts without model cognition.",
+    "required_capability": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "obs_goal": {
+      "real_outcome": "Provide the narrow evidence-to-relation bridge required by the live parent frontier.",
+      "proxy_goals_deleted": [
+        "semantic paraphrase inference",
+        "factual truth adjudication",
+        "evidence sufficiency adjudication",
+        "causal inference",
+        "automatic unit conversion",
+        "parent replay"
+      ],
+      "surviving_necessity": "Exact support and explicit numeric relations over already-auditable evidence units."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "closed PR421 independently qualified exact-text and Decimal relation evaluator",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "runner PR157 independently qualified typed-quantity candidate parsing on the older extraction schema"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib decimal/re/hashlib/json"
+      ],
+      "capability_work_deleted": [
+        "No new model supplier",
+        "No semantic NLP stack",
+        "No unit conversion library",
+        "No new crawler/parser",
+        "No task-specific literals"
+      ],
+      "surviving_gap": "Bind the proven PR421 relation semantics to current generic evidence_unit records and derive only lexical numeric candidates from their verbatim text."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic evidence-to-typed-relation seam; old PR421 was qualified but consumed the superseded OBJECTIVE_ANCHORED_EVIDENCE_EXTRACTED schema.",
+      "delete_bypass_substitute_options": [
+        "Reuse PR421 evaluator semantics and fail-closed tests",
+        "Reuse generic evidence-unit provenance hashes",
+        "Reuse stdlib numeric parsing",
+        "Reject semantic operand-role guessing"
+      ],
+      "surviving_causal_blocker": "No verified current-base capability consumes PROJECT_BRAIN_OBJECTIVE_EVIDENCE_UNIT_EXTRACTION_V2 and returns bounded claim support/relation facts."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ADAPT_INDEPENDENTLY_QUALIFIED_PR421_TO_GENERIC_EVIDENCE_UNITS_WITH_STDLIB_NUMERIC_CANDIDATE_BINDING",
+        "COMPOSE_EXISTING_JQ_RELATION_WITH_NEW_QUANTITY_EXTRACTOR_AND_EXTRA_CONTROLLER_WIRING",
+        "NEW_SEMANTIC_CLAIM_EVALUATOR"
+      ],
+      "losing_routes_reason": "PR421 already passed independent cross-domain relation oracles, so adapting its input binding has the least remaining wall-clock. A separate jq composition would require more controller wiring for the same bounded semantics. Semantic evaluation is broader and unsupported.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use fresh generic evidence-unit fixtures from unrelated domains plus independent Decimal recomputation and independent numeric-surface parsing. Reject altered hashes, wrong source URLs, paraphrases, invalid references, unit mismatch, nonfinite values and unverified extraction."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "closed PR421 old-schema candidate",
+        "any duplicate current-schema claim-relation implementation"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic evidence-unit extraction",
+        "typed scalar/numeric relation semantics",
+        "typed decision synthesis"
+      ],
+      "fresh_reuse_plan": "After qualification and narrow promotion, recompute the parent frontier. If semantic operand binding remains, acquire only that bridge before freezing a fresh open-ended parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR421 code/evidence",
+        "Reused runner PR157 typed quantity evidence",
+        "Reused current generic extractor contract"
+      ],
+      "search_stop_decision": "No new supplier is needed; all surviving operations are bounded stdlib transforms over already-verified artifacts.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen route race only on material qualification failure or current-base change."
+    },
+    "selected_surviving_route": "ADAPT_INDEPENDENTLY_QUALIFIED_PR421_TO_GENERIC_EVIDENCE_UNITS_WITH_STDLIB_NUMERIC_CANDIDATE_BINDING",
+    "why_selected_route_is_fastest_sufficient": "It preserves already-qualified relation semantics and changes only the provenance-aware input contract required by the newly acquired generic evidence extractor.",
+    "selected_route_preflight": {
+      "status": "READY",
+      "all_required_dependencies_ready": true,
+      "execution_dependencies": [
+        {
+          "dependency": "CURRENT_MAIN_a2b528830e59e6ff69d01b1670b99a05125edc2c",
+          "status": "READY"
+        },
+        {
+          "dependency": "PR421_INDEPENDENT_QUALIFICATION_RUN_36680339068",
+          "status": "READY"
+        },
+        {
+          "dependency": "GENERIC_EVIDENCE_EXTRACTION_PROMOTION",
+          "status": "READY"
+        },
+        {
+          "dependency": "PYTHON_STDLIB_DECIMAL_RE_HASHLIB",
+          "status": "READY"
+        }
+      ]
+    }
+  }
+}
