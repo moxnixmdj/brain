@@ -1,0 +1,298 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-OPENENDED-PYTHON-TOMLLIB-TASK-B-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either complete the second clean parent proof with a genuinely open-ended zero-model-dependency technical research task that must choose its own source and tool path, or localize the first causal gap without replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main 0292dc91d7b2354beede3e530256054330fb94d8 after promotion-firewall/runtime-provenance hardening",
+    "one clean cross-domain demography parent task is already verified",
+    "PR304 was scope-insufficient for parent proof because it prewired authority, URLs, JSON paths, and arithmetic",
+    "PR304 execution is spent and receives zero parent-proof authority",
+    "chemistry successor branches are stale-base and retain prewired research plans",
+    "no open Brain PR currently owns this blocker lease"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Commit only the open-ended task contract after this intent receives current-base guard authority; execute it exactly once with ASTRA_DISABLE_MODEL_PLANNER=1 on exact frozen bytes; independently verify any semantic success; otherwise preserve only the first causal gap and do not replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Test the actual parent capability rather than another pre-solved research script: the system must decompose a fresh technical question, select authoritative evidence and executable verification routes, produce the answer, and expose runtime-derived cognition provenance.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain the second clean parent-level transfer proof on a materially different technical domain, with source/tool selection left to the Brain.",
+      "proxy_goals_deleted": [
+        "prewired source benchmark",
+        "prewired JSON-path benchmark",
+        "prewired formula benchmark",
+        "old-task replay",
+        "new governance",
+        "model qualification",
+        "manual answer"
+      ],
+      "surviving_necessity": "One genuinely open-ended cross-domain task remains the shortest valid path to parent adjudication."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "model-independent grounding",
+        "grounded composition",
+        "evidence-to-decision synthesis",
+        "verified bound CLI/source capabilities",
+        "runtime cognition provenance"
+      ],
+      "external_existing_routes_checked": [
+        "authoritative upstream technical documentation is publicly available",
+        "direct executable verification is available on the existing public Linux carrier"
+      ],
+      "capability_work_deleted": [
+        "no new supplier",
+        "no new model",
+        "no task-specific runtime patch",
+        "no hand-authored research plan",
+        "no replay"
+      ],
+      "surviving_gap": "Unknown until the genuinely open-ended parent task executes; any first failure is evidence for the next smallest generic acquisition."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The remaining blocker is an evidence obligation for the parent capability, not a known child implementation defect.",
+      "delete_bypass_substitute_options": [
+        "delete scripted benchmark structure",
+        "reuse current Brain stack",
+        "reuse existing public carrier",
+        "require runtime-derived zero-model provenance",
+        "stop on first causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK",
+        "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+        "USE_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "A prewired structured task does not exercise the parent capability; model cognition invalidates dependency-removal evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. A public carrier runs the frozen task once; a separate verifier checks authoritative documentation and a direct executable fact without importing producer modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "prewired chemistry Task B branches as parent-proof candidates",
+        "additional child benchmarking before a real parent failure"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "source discovery",
+        "tool selection",
+        "technical documentation grounding",
+        "direct executable verification",
+        "evidence synthesis"
+      ],
+      "fresh_reuse_plan": "If the open-ended technical task passes independently with runtime model_dependency_count=0, adjudicate the parent contract immediately; if it fails, acquire only the first generic causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused current canonical frontier",
+        "reused existing carrier",
+        "reused prior lesson that scripted tasks are scope-insufficient",
+        "avoided probing task-specific answer/source before freeze"
+      ],
+      "search_stop_decision": "Current public authoritative technical documentation and executable verification routes exist; more pre-task solution search would leak the research path and reduce proof value.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK",
+      "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+      "USE_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_SOURCE_OR_URL",
+      "PREWIRED_JSON_PATH",
+      "PREWIRED_TOOL_CHAIN",
+      "PREWIRED_FORMULA",
+      "MODEL_COGNITION",
+      "OLD_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK",
+    "why_selected_route_is_fastest_sufficient": "It directly tests the missing parent behavior on the already-deployed stack and carrier. Any failure immediately identifies the next real generic gap instead of burning time on another proxy.",
+    "expected_parent_level_state_change": "Either complete the second clean parent proof with a genuinely open-ended zero-model-dependency technical research task that must choose its own source and tool path, or localize the first causal gap without replay.",
+    "stop_condition": "Commit only the open-ended task contract after this intent receives current-base guard authority; execute it exactly once with ASTRA_DISABLE_MODEL_PLANNER=1 on exact frozen bytes; independently verify any semantic success; otherwise preserve only the first causal gap and do not replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:34:19Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main 0292dc91d7b2354beede3e530256054330fb94d8 and the acquired model-independent child stack"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Current upstream language documentation exposes authoritative standard-library behavior without paid access."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "The existing public Linux carrier provides a standard Python runtime and no new package is required for the direct executable check."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No external framework or model route is required to answer the task; source/tool selection itself is intentionally left inside the parent execution."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "open-ended model-independent technical research source discovery executable verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "authoritative upstream language documentation public access"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing Brain source discovery and bound execution versus scripted benchmark"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current upstream standard-library documentation"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK",
+          "evidence": [
+            "current parent contract requires a second clean cross-domain task",
+            "existing Brain runtime and public carrier are executable now"
+          ],
+          "qualification_evidence": [
+            "Brain main 0292dc91d7b2354beede3e530256054330fb94d8",
+            "recent successful public zero-cost parent carrier execution"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Tests the defining open-ended parent behavior.",
+            "CAPABILITY_STRENGTH": "Requires decomposition, source discovery, tool choice, execution and synthesis.",
+            "WALL_CLOCK": "Immediate on existing stack.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Fail-closed one-shot with independent oracle.",
+            "VERIFIABILITY": "Runtime provenance plus separate direct verification."
+          }
+        },
+        {
+          "route": "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+          "evidence": [
+            "Prior chemistry attempts show this can exercise child capabilities."
+          ],
+          "qualification_evidence": [
+            "PR304 scope-insufficiency reconciliation"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can verify an instance but not the parent definition.",
+            "CAPABILITY_STRENGTH": "Too narrow.",
+            "WALL_CLOCK": "Fast but yields invalid parent evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "High for a proxy.",
+            "VERIFIABILITY": "Does not verify source/tool-selection autonomy."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger dominates a genuinely open-ended current-stack execution for valid parent-level information gain.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:34:19Z",
+        "max_age_hours": 2,
+        "selected_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:34:19Z",
+            "evidence": [
+              "DIRECT_PROBE: recent public parent carrier runs executed on the authorized repository"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_0292DC91",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:34:19Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact current main after PR303"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
