@@ -6,9 +6,9 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 2,
+    "reusable_capabilities_inherited": 1,
     "verified_real_tasks_completed": 4,
-    "fresh_reuse_passes": 2,
+    "fresh_reuse_passes": 1,
     "frontier_dependencies_removed": 1,
     "residual_gaps_localized": 5
   },
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "ACQUIRE_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1_ON_FRESH_REAL_TASK__THEN_FRESH_REUSE_ON_DISTINCT_REAL_TASK",
+  "next_progress_event_target": "REPAIR_AND_REVERIFY_MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1_INPUT_CONTRACT_COMPATIBILITY_ON_A_NEW_FRESH_REAL_TASK__NO_REQUESTS_TASK_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -216,6 +216,22 @@
         "VERIFIED_REAL_TASK_COMPLETED",
         "FRESH_REUSE_PASS"
       ]
+    },
+    {
+      "event_id": "GROUNDING_INPUT_CONTRACT_REGRESSION_20260930",
+      "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "status": "PRIOR_PROMOTION_REOPENED__CURRENT_CAPABILITY_AND_FRESH_REUSE_CREDIT_REVOKED__PRIOR_REAL_TASK_RESULTS_PRESERVED",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json",
+      "public_run_id": 36649042160,
+      "counter_effects": {
+        "reusable_capabilities_inherited": -1,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": -1,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": false,
+      "reason": "Fresh real multi-step task falsified input-contract completeness of the claimed grounding capability scope."
     }
   ],
   "active_frontier_accounting": {
