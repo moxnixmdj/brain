@@ -1,0 +1,434 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "VERIFY-MINI-SWE-SUPERPOWERS-TB4-MVCC-LSM-COMPACTION-20260930-V1",
+  "status": "PROPOSED_CURRENT_BASE__CROSS_REPO_FRESHNESS_VERIFIED__STRENGTHENED_COMPOSED_PACKAGE__MVCC_TASK_UNREAD",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "1f65db6e34c31ae272d672f0903d7b712f944dd5",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "probe_id": null,
+  "causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "expected_parent_frontier_change": "Obtain one fresh distinct independently verified Terminal-Bench 4.0 result for the strengthened Brain-owned mini-SWE-agent 2.4.6 + Superpowers composition on GPT-5.6 Sol, or preserve the exact first causal failure with zero false ownership credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main 1f65db6e34c31ae272d672f0903d7b712f944dd5",
+    "Clean react-lead-form independent verifier failure preserved and abstracted; task spent.",
+    "Clean bun-sourcemap-leak independent verifier failure preserved and abstracted; task spent.",
+    "payments-pipeline-fix quarantined after runtime exposure preceded valid full guarded execution authority; no promotion verifier should be spent on that path.",
+    "html-js-filter false-fresh lease superseded after exact runner history found prior PR237 execution.",
+    "Exact-name searches for mvcc-lsm-compaction returned zero PR history in both moxnixmdj/brain and moxnixmdj/verification-capsule-runner immediately before action creation.",
+    "mvcc-lsm-compaction instruction/tests/solution remain unread by configured cognition; only allowlisted task metadata was screened."
+  ],
+  "evidence_presence_classification": "BRAIN_OWNED_ROUTE_PRESENT__DISTINCT_FAILURES_ABSTRACTED__CROSS_REPO_FRESHNESS_ENFORCED__STRENGTHENED_CONFIGURATION__FRESH_MVCC_EVIDENCE_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "fresh_task": {
+    "benchmark": "Terminal-Bench 4.0",
+    "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "task": "mvcc-lsm-compaction",
+    "instruction_git_blob": "9ca80a07e0f908b26d65dab65403d04e0482f53b",
+    "task_toml_git_blob": "62fd30170a2b448379b5e18e12a7a13e2ac57a90",
+    "environment_tree_git_sha": "616227fe75ea646f90cb0bbefdec4086e214aa4e",
+    "instruction_read_by_configured_cognition_before_lease": false,
+    "solution_tree_read_by_configured_cognition": false,
+    "tests_tree_read_by_configured_cognition": false,
+    "metadata_allowlist_exposure": {
+      "category": "Software",
+      "subcategory": "Databases",
+      "tags": [
+        "storage-engine",
+        "rocksdb",
+        "mvcc",
+        "lsm",
+        "compaction",
+        "debugging"
+      ],
+      "expert_time_estimate_hours": 4,
+      "verifier_mode": "separate",
+      "verifier_timeout_sec": 900,
+      "resources": {
+        "cpus": 2,
+        "memory_mb": 4096
+      }
+    },
+    "cross_repository_freshness_proof": {
+      "brain_exact_task_pr_hits": 0,
+      "runner_exact_task_pr_hits": 0,
+      "checked_before_action_creation": true
+    }
+  },
+  "contamination_contract": {
+    "cognition_may_read": [
+      "frozen instruction.md only after this full action is canonical and its exact head passes trusted DRIFT_GUARD_PASS",
+      "runtime-visible source/config/data files",
+      "explicit allowlisted task metadata required to bind runtime/verifier"
+    ],
+    "cognition_must_not_read": [
+      "solution/**",
+      "tests/** before terminal submission",
+      "task-specific online solutions, analyses, hints, or verifier logic",
+      "non-allowlisted metadata fields that may contain solution or verification explanations",
+      "build-context-only source removed from final runtime"
+    ],
+    "violation_effect": "FAIL_CLOSED__TASK_CONTAMINATED__NO_PROMOTION_SUBMISSION"
+  },
+  "stop_condition": "After the exact full action is canonical on current main and trusted current-base validation passes, read the frozen mvcc-lsm-compaction instruction and only files/command outputs actually present in the built agent runtime; execute mini-SWE one-action-per-step semantics through this GPT-5.6 Sol session with the strengthened Brain-owned Superpowers configuration via the public session bridge; preserve solution/**, tests/**, build-only source, non-allowlisted solution-bearing metadata, and task-specific online hints unread until terminal submission; submit exactly once to the untouched independent verifier; award zero whole-family ownership credit from this single task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "CURRENT_GPT_5_6_SOL_SESSION_AS_GENERAL_COGNITION_ONLY__NO_OPAQUE_TARGET_CAPABILITY_CREDIT",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS_CANONICAL_COMPOSED_PACKAGE_STRENGTHENED",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_ARCHITECTURALLY__PERFORMANCE_PENDING",
+    "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_CANONICAL_COMPOSED_PACKAGE",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING_THIS_ACTION",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_FINAL_MULTI_TASK_VERIFICATION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_MVCC_TB4_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "1f65db6e34c31ae272d672f0903d7b712f944dd5",
+    "real_outcome": "Get fresh distinct uncontaminated independently verified evidence on the strengthened canonical coding route using untouched mvcc-lsm-compaction after clean React/Bun failures and freshness/execution-order repairs.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Directly exercise the strengthened mini-SWE-agent 2.4.6 + Superpowers route on untouched Terminal-Bench mvcc-lsm-compaction through the isolated public runtime bridge.",
+      "proxy_goals_deleted": [
+        "Replay React",
+        "Replay Bun",
+        "Use quarantined Payments",
+        "Use spent html-js-filter",
+        "Claim family parity from one task",
+        "Bypass full canonical guard"
+      ],
+      "surviving_necessity": "One distinct untouched current-harness task with cross-repository freshness proof, full canonical action, trusted guard pass, runtime-only execution, and one untouched independent verifier."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Canonical mini-SWE + Superpowers composed package",
+        "Brain-owned mini-SWE-agent 2.4.6",
+        "Brain-owned Superpowers 6.4.2",
+        "Brain fail-closed completion gates",
+        "Public session runtime bridge"
+      ],
+      "external_existing_routes_checked": [
+        "Current matched TB4 mini-SWE evidence remains a route-selection specimen; direct distinct-task execution has higher information value than supplier search."
+      ],
+      "capability_work_deleted": [
+        "No paid API",
+        "No new benchmark framework",
+        "No spent-task replay",
+        "No local Docker/WSL detour",
+        "No task-specific hidden-test repair"
+      ],
+      "surviving_gap": "The strengthened Brain-owned route and repaired freshness/execution-order process are present; fresh distinct MVCC qualification evidence is missing."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Qualification evidence gap after two clean task failures plus process-level freshness/order defects; the general repairs are now explicit before this distinct task.",
+      "delete_bypass_substitute_options": [
+        "DELETE spent React replay",
+        "DELETE quarantined Next.js promotion use",
+        "REUSE canonical route",
+        "REUSE public bridge",
+        "SUBSTITUTE untouched Payments task",
+        "REUSE independent verifier"
+      ],
+      "surviving_causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_MVCC_TB4__PUBLIC_INDEPENDENT_VERIFIER",
+        "VF2_SPEEDUP_NETWORKX_FRESH_DISTINCT_TASK",
+        "KV_LIVE_SURGERY_FRESH_DISTINCT_TASK",
+        "SEARCH_NEW_CODING_ROUTE_NOW"
+      ],
+      "losing_routes_reason": "MVCC is fresh in both repositories, low-resource, bounded, and directly exercises debugging/generalization. VF2 and KV remain fresh backups. New-route search delays direct evidence; spent/contaminated tasks are inadmissible.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use runtime-visible task checks during development and the untouched separate Terminal-Bench verifier exactly once after terminal submission. One task remains zero whole-family credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ungarded lightweight Payments lease as sufficient execution authority",
+        "Spent React task replay",
+        "Any task-specific Next.js diagnostic salvage"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "mini-SWE control loop",
+        "Superpowers systematic debugging",
+        "TDD",
+        "verification-before-completion",
+        "normative-contract-only validation",
+        "causal performance verification",
+        "Brain contamination guard"
+      ],
+      "fresh_reuse_plan": "If MVCC passes, preserve zero family credit and advance to additional distinct matched tasks. If it fails, spend the task, preserve first causal failure, abstract only general transferable repair, and recompute without replay."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse canonical package",
+        "Reuse public bridge",
+        "Reuse prior route search",
+        "Reuse frozen Payments metadata",
+        "Reuse clean React failure receipt"
+      ],
+      "search_stop_decision": "A strengthened owned route and untouched distinct task are ready; direct evidence dominates further route discovery.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh after the Payments result or any material main/frontier change."
+    },
+    "routes_considered": [
+      "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_MVCC_TB4__PUBLIC_INDEPENDENT_VERIFIER",
+      "VF2_SPEEDUP_NETWORKX_FRESH_DISTINCT_TASK",
+      "KV_LIVE_SURGERY_FRESH_DISTINCT_TASK",
+      "SEARCH_NEW_CODING_ROUTE_NOW",
+      "SPENT_OR_CONTAMINATED_TASK_REPLAY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_REACT_REPLAY",
+      "SPENT_BUN_REPLAY",
+      "QUARANTINED_PAYMENTS_PROMOTION",
+      "SPENT_HTML_JS_FILTER",
+      "CONTAMINATED_HEAT_PUMP",
+      "PAID_API_MODEL_ADAPTER",
+      "LOCAL_DOCKER_OR_WSL_ENABLEMENT"
+    ],
+    "selected_surviving_route": "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_MVCC_TB4__PUBLIC_INDEPENDENT_VERIFIER",
+    "why_selected_route_is_fastest_sufficient": "It reuses the Brain-owned route, integrates clean React/Bun general repairs, uses a cross-repository-fresh bounded Software/Databases task, and requires no new provider, benchmark framework, local container infrastructure, or incremental spend.",
+    "expected_parent_level_state_change": "Obtain one fresh distinct independently verified Terminal-Bench 4.0 result for the strengthened Brain-owned mini-SWE-agent 2.4.6 + Superpowers composition on GPT-5.6 Sol, or preserve the exact first causal failure with zero false ownership credit.",
+    "stop_condition": "After the exact full action is canonical on current main and trusted current-base validation passes, read the frozen mvcc-lsm-compaction instruction and only files/command outputs actually present in the built agent runtime; execute mini-SWE one-action-per-step semantics through this GPT-5.6 Sol session with the strengthened Brain-owned Superpowers configuration via the public session bridge; preserve solution/**, tests/**, build-only source, non-allowlisted solution-bearing metadata, and task-specific online hints unread until terminal submission; submit exactly once to the untouched independent verifier; award zero whole-family ownership credit from this single task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T21:39:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_MVCC_TB4__PUBLIC_INDEPENDENT_VERIFIER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+          "canonical/capabilities/opus55/REACT_LEAD_FORM_TB4_VERIFICATION_FAILURE_20260930_V1.json",
+          "canonical/capabilities/opus55/BUN_SOURCEMAP_LEAK_TB4_VERIFICATION_FAILURE_20260930_V1.json",
+          "canonical/capabilities/opus55/PAYMENTS_PIPELINE_PRE_GUARD_RUNTIME_EXPOSURE_20260930_V1.json",
+          "canonical/reasoning/2026-09-30_SUPERSEDE_FALSE_FRESH_HTML_JS_FILTER_LEASE_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "harbor-framework/terminal-bench release 452bf305c6daa62fc59061d22133a7cbc7c1572e",
+          "SWE-agent/mini-swe-agent pinned Brain copy",
+          "Superpowers pinned Brain copy"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "mvcc-lsm-compaction instruction blob 9ca80a07e0f908b26d65dab65403d04e0482f53b",
+          "mvcc-lsm-compaction task.toml blob 62fd30170a2b448379b5e18e12a7a13e2ac57a90",
+          "mvcc-lsm-compaction environment tree 616227fe75ea646f90cb0bbefdec4086e214aa4e",
+          "public session bridge b2d7cd5f86057f77cda246b5358f286ef9f7dc15"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No stronger zero-incremental owned route was established after the clean React failure; prospective repaired-route evidence is the fastest discriminator."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "advanced agentic coding debugging verification current 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "mini-SWE-agent Superpowers coding agent harness current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "open source model agnostic software engineering agent harness verification discipline"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 Terminal-Bench 4 coding agent latest"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "VF2_SPEEDUP_NETWORKX_FRESH_DISTINCT_TASK",
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Fresh candidate but primarily optimization-focused; not needed before a bounded correctness/debugging probe.",
+            "CAPABILITY_STRENGTH": "Useful future orthogonal evidence, but less direct for current causal debugging repairs.",
+            "WALL_CLOCK": "Comparable expert estimate, but optimization verification is more performance-sensitive.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Fresh exact-name history in both repositories at screening time.",
+            "VERIFIABILITY": "Separate verifier and bounded artifact surface from allowlisted metadata."
+          },
+          "evidence": [
+            "Exact-name Brain PR search: 0 hits",
+            "Exact-name runner PR search: 0 hits"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: exact-name cross-repository freshness searches returned zero hits before task selection."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "KV_LIVE_SURGERY_FRESH_DISTINCT_TASK",
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Fresh candidate but live ptrace/network surgery adds environmental complexity unrelated to the current minimum proof.",
+            "CAPABILITY_STRENGTH": "Strong systems stressor for later orthogonal evidence.",
+            "WALL_CLOCK": "Higher execution/environment risk than bounded MVCC source repair.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Fresh exact-name history in both repositories at screening time.",
+            "VERIFIABILITY": "Separate verifier and low resource requirement."
+          },
+          "evidence": [
+            "Exact-name Brain PR search: 0 hits",
+            "Exact-name runner PR search: 0 hits"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: exact-name cross-repository freshness searches returned zero hits before task selection."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "selected_route": "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_MVCC_TB4__PUBLIC_INDEPENDENT_VERIFIER",
+      "negative_search_summary": "No already-owned zero-incremental route dominates direct execution of the strengthened configuration on cross-repository-fresh mvcc-lsm-compaction. VF2 and KV remain fresh fallback tasks.",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T21:39:00Z",
+        "max_age_hours": 2,
+        "selected_route": "STRENGTHENED_BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS__FRESH_MVCC_TB4__PUBLIC_INDEPENDENT_VERIFIER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies_complete": true,
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_CANONICAL_MINI_SWE_SUPERPOWERS_COMPOSED_PACKAGE_STRENGTHENED",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical composed configuration plus internalized mini-SWE-agent 2.4.6 and Superpowers 6.4.2"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "CURRENT_CHATGPT_GPT_5_6_SOL_INCLUDED_SESSION",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T21:39:00Z",
+            "evidence": [
+              "DIRECT_PROBE: current conversation is GPT-5.6 Sol"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PUBLIC_SESSION_MINI_SWE_RUNTIME_BRIDGE",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T21:39:00Z",
+            "evidence": [
+              "verification-capsule-runner bridge b2d7cd5f86057f77cda246b5358f286ef9f7dc15 completed prior runtime and verifier sessions"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "TERMINAL_BENCH_4_MVCC_LSM_FROZEN_BYTES",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "release 452bf305c6daa62fc59061d22133a7cbc7c1572e",
+              "instruction blob 9ca80a07e0f908b26d65dab65403d04e0482f53b",
+              "task.toml blob 62fd30170a2b448379b5e18e12a7a13e2ac57a90",
+              "environment tree 616227fe75ea646f90cb0bbefdec4086e214aa4e",
+              "exact-name Brain+runner history both zero before action creation"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY",
+              "CODE_OR_PACKAGE_REGISTRY",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ]
+      }
+    }
+  },
+  "trusted_current_base_validation_request": {
+    "requested_against_main_sha": "1f65db6e34c31ae272d672f0903d7b712f944dd5",
+    "purpose": "Run trusted drift/lease guard against the exact full cross-repository-fresh MVCC action before any instruction exposure or session launch.",
+    "changes_capability_claim": false,
+    "changes_route": true,
+    "changes_benchmark_task": true,
+    "incremental_spend_usd": 0
+  }
+}
