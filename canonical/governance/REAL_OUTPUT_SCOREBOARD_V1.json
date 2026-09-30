@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 9,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 15
+    "residual_gaps_localized": 16
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "ACQUIRE_AND_INDEPENDENTLY_QUALIFY_MODEL_INDEPENDENT_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1__NO_HTTP2_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -585,20 +585,43 @@
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
       "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    {
+      "event_id": "PARENT_HTTP2_OPEN_ENDED_TASK_A_FIRST_SPEND_BROAD_RESEARCH_ROUTING_GAP_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "child_capability_target": "MODEL_INDEPENDENT_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1",
+      "status": "FRESH_PARENT_TASK_A_FAILED__FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+      "public_run_id": 36688193204,
+      "artifact_id": 11084357364,
+      "artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 1
+      },
+      "progress_credit": "RESIDUAL_GAP_LOCALIZED",
+      "residual_gap": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_capability_promoted": false,
+      "same_task_replay_allowed": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": null,
-    "subcapability_status": "CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+    "active_subcapability_target": "MODEL_INDEPENDENT_BROAD_RESEARCH_OBJECTIVE_DECOMPOSITION_AND_ROUTING_V1",
+    "subcapability_status": "UNPROVEN__DIRECTLY_LOCALIZED_BY_FRESH_HTTP2_PARENT_FIRST_SPEND",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "fresh_task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-    "first_physical_spend_run_id": 36670808367,
+    "residual_gap": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+    "first_physical_spend_run_id": 36688193204,
     "last_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
       "status": "VERIFIED_ACQUIRED__GUARDED_ATOMIC_ADMISSION__INDEPENDENT_PUBLIC_FULL_BOUNDED_SURFACE_PASS",
