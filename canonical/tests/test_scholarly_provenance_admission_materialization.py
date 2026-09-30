@@ -64,7 +64,7 @@ class FakeVerifier:
             "final_url":candidate["url"],
             "final_host":"weak.example",
         }
-    def materialize(self,candidate,bibliographic_verification,timeout=15):
+    def materialize_retrieval(self,candidate,bibliographic_verification,timeout=15,fetch=None):
         self.materialize_calls.append(candidate["url"])
         if bibliographic_verification.get("status")!="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
             raise AssertionError("BIBLIOGRAPHIC_RECEIPT_REQUIRED")
@@ -212,7 +212,7 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
                 200,
                 "https://publisher.example/article",
             )
-        out=self.prov.materialize(
+        out=self.prov.materialize_retrieval(
             {"url":"https://doi.org/10.1234/example","doi":"10.1234/example"},
             {
                 "status":"BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
@@ -227,7 +227,7 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
         self.assertEqual(out["status"],"RETRIEVAL_PROVENANCE_VERIFIED")
         self.assertEqual(
             out["verification_method"],
-            "SELECTED_BIBLIOGRAPHIC_CANDIDATE_LIVE_HTTP_MATERIALIZATION",
+            "BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION",
         )
         self.assertEqual(out["bibliographic_provenance_status"],"VERIFIED")
         self.assertTrue(out["selected_only_materialization"])
