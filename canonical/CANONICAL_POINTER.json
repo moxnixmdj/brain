@@ -130,7 +130,13 @@
     "scoreboard_increase_requires_promotion_evidence": true,
     "circular_frontier_proof_forbidden": true,
     "claim_scope_must_not_exceed_evidence_scope": true,
-    "adversarial_falsification_before_promotion_required": true
+    "adversarial_falsification_before_promotion_required": true,
+    "operator_obs_decision_boundary_required": true,
+    "operator_obs_decision_boundary_path": "canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json",
+    "consequential_operator_reasoning_requires_current_obs": true,
+    "memory_only_frontier_diagnosis_forbidden": true,
+    "operator_exploration_before_obs_is_non_authoritative": true,
+    "operator_obs_required_before_current_blocker_or_route_claim": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
