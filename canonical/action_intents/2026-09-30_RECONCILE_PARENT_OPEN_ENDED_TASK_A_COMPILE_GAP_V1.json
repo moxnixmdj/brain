@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PARENT-OPEN-ENDED-TASK-A-COMPILE-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_FRONTIER_STALE_AFTER_AUTHORITATIVE_OPEN_ENDED_TASK_A_COMPILE_FAILURE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_FRONTIER_STALE_AFTER_AUTHORITATIVE_OPEN_ENDED_TASK_A_COMPILE_FAILURE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Atomically replace the already-spent Task-A obligation with the authoritative localized blocker MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING; increment only residual_gaps_localized by one; preserve zero parent capability credit and forbid climate-task replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "exact current main ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "merged Brain PR337 freeze on hardened PR329 runtime",
+    "authoritative public runner PR49 run 36670516407 job 109744305866 artifact 11077861584",
+    "artifact digest sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "terminal receipt execution_count=1 model_dependency_count=0 incremental_spend_usd=0",
+    "first causal stage COMPILE with GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH on clause zero",
+    "source/tool discovery, quantitative analysis and independent oracle did not execute",
+    "later duplicate executions are quarantined and cannot supersede the earliest authoritative receipt",
+    "same climate task replay is forbidden"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__FIRST_CAUSAL_GAP_VERIFIED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "All five canonical frontier mirrors name MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING and ACQUIRE_MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING__FRESH_CHILD_QUALIFICATION__NO_PARENT_TASK_REPLAY; scoreboard increments only residual_gaps_localized; no capability/task-completion credit; no climate replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "real_outcome": "Make canonical authority reflect the earliest valid open-ended Task A terminal receipt before any repair or new task spend.",
+    "required_capability": "TRUTHFUL_PARENT_FRONTIER_RECONCILIATION_FROM_ONE_SHOT_TERMINAL_EVIDENCE",
+    "obs_goal": {
+      "real_outcome": "Replace the stale run-Task-A frontier with the exact first causal compile blocker already observed.",
+      "proxy_goals_deleted": [
+        "replay climate Task A",
+        "credit later duplicate executions",
+        "repair downstream source acquisition before compile is fixed",
+        "promote the parent"
+      ],
+      "surviving_necessity": "Canonical authority must stop at the earliest valid first causal gap."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical pointer",
+        "active goal hierarchy",
+        "frontier queue",
+        "real output scoreboard",
+        "active parent target",
+        "PR49 terminal artifact"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no runtime change in reconciliation",
+        "no new task",
+        "no model planner",
+        "no benchmark replay"
+      ],
+      "surviving_gap": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic broad-objective compilation/grounding failure observed before any domain-specific source or quantitative work.",
+      "delete_bypass_substitute_options": [
+        "reconcile canonical state first",
+        "repair generic compile-to-discovery seam later",
+        "never replay spent climate task"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ATOMIC_FIVE_SURFACE_RECONCILIATION",
+        "PARTIAL_METADATA_PATCH",
+        "IGNORE_TERMINAL_RECEIPT"
+      ],
+      "losing_routes_reason": "Partial or ignored reconciliation leaves stale authority and can cause replay or downstream overreach.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Machine-check all five mirror fields and exact counter delta before merge; no producer execution."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A on the spent climate task",
+        "any authority assigned to later duplicate executions"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "one-shot terminal evidence preservation",
+        "runtime cognition provenance",
+        "five-surface frontier mirror enforcement"
+      ],
+      "fresh_reuse_plan": "After reconciliation, acquire the missing broad-objective grounding capability on a fresh child qualification, then use a new parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact PR49 receipt",
+        "reused PR344 evidence hold",
+        "reused current five-surface snapshot"
+      ],
+      "search_stop_decision": "The earliest valid receipt directly identifies the compile-stage blocker; later stages are not causally authorized.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to evidence reconciliation."
+    },
+    "routes_considered": [
+      "ATOMIC_FIVE_SURFACE_RECONCILIATION",
+      "PARTIAL_METADATA_PATCH",
+      "IGNORE_TERMINAL_RECEIPT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PARTIAL_METADATA_PATCH",
+      "IGNORE_TERMINAL_RECEIPT",
+      "CLIMATE_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "ATOMIC_FIVE_SURFACE_RECONCILIATION",
+    "why_selected_route_is_fastest_sufficient": "It changes only authoritative state, preserves the verified first gap, and unlocks the correct generic repair without extra task spend.",
+    "expected_parent_level_state_change": "Parent remains unproven; residual gap becomes MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING; next action becomes ACQUIRE_MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING__FRESH_CHILD_QUALIFICATION__NO_PARENT_TASK_REPLAY.",
+    "stop_condition": "Five mirrors agree on MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING/ACQUIRE_MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING__FRESH_CHILD_QUALIFICATION__NO_PARENT_TASK_REPLAY; residual_gaps_localized +1 only; no replay.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Internal evidence reconciliation; no external implementation route selected."
+    }
+  }
+}
