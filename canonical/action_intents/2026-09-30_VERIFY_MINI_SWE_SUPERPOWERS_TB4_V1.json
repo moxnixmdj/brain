@@ -1,0 +1,321 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "VERIFY-MINI-SWE-SUPERPOWERS-TB4-PRETRAIN-SHARD-CORRUPTION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "probe_id": null,
+  "causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "expected_parent_frontier_change": "Spend one previously frozen, still-unread Terminal-Bench 4.0 task to directly verify or falsify the Brain-owned mini-SWE-agent 2.4.6 + Superpowers composed route on the current included GPT-5.6 Sol cognition substrate, with independent public verification and zero ownership credit from a single task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+    "PR570 exact mini-SWE-agent 2.4.6 internalization",
+    "PR571 stale Superpowers-only lease closed before instruction read; pretrain-shard-corruption remains unspent",
+    "PR574 V6 OBS/lease synchronization merged"
+  ],
+  "evidence_presence_classification": "BRAIN_OWNED_MINI_SWE_AND_SUPERPOWERS_PRESENT__SUPREME_FALSIFIED__FRESH_COMPOSED_ROUTE_EVIDENCE_MISSING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze exact task bytes before cognition; execute the mini-SWE control-loop semantics through the current ChatGPT session with one shell action per step; apply Brain-owned Superpowers verification/debugging discipline; do not read solution/** or tests/** before terminal submission; submit once to the untouched independent verifier; award zero Opus ownership credit from this single task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "CURRENT_GPT_5_6_SOL_SESSION_AS_GENERAL_COGNITION_ONLY__NO_OPAQUE_TARGET_CAPABILITY_CREDIT",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_ARCHITECTURALLY__PERFORMANCE_PENDING",
+    "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_FOR_CONFIGURATION",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING_THIS_ACTION",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_FINAL_MULTI_TASK_VERIFICATION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_TB4_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
+    "real_outcome": "Obtain the cheapest uncontaminated independent evidence on the strongest currently Brain-owned advanced-coding challenger, without inventing a new coding methodology or buying model API access.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Directly exercise the Brain-owned mini-SWE harness plus Superpowers discipline on one fresh current Terminal-Bench task.",
+      "proxy_goals_deleted": [
+        "Build a generic ChatGPT API bridge",
+        "Repair Supreme",
+        "Replay spent tasks",
+        "Claim whole-family parity from one task",
+        "Search for more routes before testing the strongest owned near-bar route"
+      ],
+      "surviving_necessity": "One fresh composed-route execution with independent verification."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain-owned mini-SWE-agent 2.4.6",
+        "Brain-owned Superpowers 6.4.2",
+        "Brain fail-closed completion/evidence gates",
+        "public verification-capsule-runner"
+      ],
+      "external_existing_routes_checked": [
+        "Current AA Terminal-Bench 4.0 matched harness evidence: Astra 59.09 vs Opus 5.5 59.60 using mini-SWE-agent 2.4.6"
+      ],
+      "capability_work_deleted": [
+        "No new coding methodology",
+        "No paid API",
+        "No new benchmark harness",
+        "No opaque model routing counted as ownership"
+      ],
+      "surviving_gap": "The composed Brain-owned route has not yet been directly executed and independently verified."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Execution-binding gap: mini-SWE expects a model query callback, while the included ChatGPT cognition is available only through the live conversation.",
+      "delete_bypass_substitute_options": [
+        "Delete programmatic-endpoint requirement",
+        "Reuse current ChatGPT session as the model-query transport",
+        "Reuse public independent verifier",
+        "Reject paid API and new provider search"
+      ],
+      "surviving_causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+        "PAID_API_MODEL_ADAPTER",
+        "NEW_FREE_PROVIDER_SEARCH",
+        "SUPERPOWERS_ONLY"
+      ],
+      "losing_routes_reason": "Paid API violates hard zero; new provider search delays a route already executable by session-mediated model turns; Superpowers-only was superseded by the stronger owned mini-SWE composition.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use the untouched Terminal-Bench verifier only after a single contamination-controlled submission; local/public self-tests are supplementary and cannot promote the family."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Stale Superpowers-only preflight lease",
+        "Programmatic endpoint as a prerequisite for cognition"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "mini-SWE linear control loop",
+        "Superpowers TDD/debugging/verification discipline",
+        "Brain contamination and fail-closed gates"
+      ],
+      "fresh_reuse_plan": "If the fresh task fails, mark the execution instance/task spent and return to route composition; if it passes, preserve zero-credit evidence and advance only to distinct matched tasks."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused frozen unread pretrain-shard-corruption task",
+        "Reused exact Brain-owned harness/configurations",
+        "Reused proven public verifier carrier"
+      ],
+      "search_stop_decision": "The owned mini-SWE route is within 0.51 percentage points of Opus 5.5 on the same current public harness and is the strongest exposed owned challenger; direct execution now dominates further search.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh after this execution result or any material route failure."
+    },
+    "routes_considered": [
+      "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+      "PAID_API_MODEL_ADAPTER",
+      "NEW_FREE_PROVIDER_SEARCH",
+      "SUPERPOWERS_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PAID_API_MODEL_ADAPTER",
+      "NEW_PROVIDER_SEARCH_BEFORE_DIRECT_TEST",
+      "SUPREME_REPAIR_LOOP",
+      "SPENT_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+    "why_selected_route_is_fastest_sufficient": "It uses the exact Brain-owned current benchmark harness, the already-included GPT-5.6 Sol cognition, the existing independent public verifier, and an already-frozen unread task. The only integration is replacing an HTTP model callback with this session's model turn while preserving one-action mini-SWE semantics.",
+    "expected_parent_level_state_change": "Spend one previously frozen, still-unread Terminal-Bench 4.0 task to directly verify or falsify the Brain-owned mini-SWE-agent 2.4.6 + Superpowers composed route on the current included GPT-5.6 Sol cognition substrate, with independent public verification and zero ownership credit from a single task.",
+    "stop_condition": "Freeze exact task bytes before cognition; execute the mini-SWE control-loop semantics through the current ChatGPT session with one shell action per step; apply Brain-owned Superpowers verification/debugging discipline; do not read solution/** or tests/** before terminal submission; submit once to the untouched independent verifier; award zero Opus ownership credit from this single task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T20:52:15Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "negative_search_summary": "No stronger already-owned exposed route with a faster zero-incremental execution path is known after Supreme falsification and mini-SWE internalization.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T20:52:15Z",
+        "max_age_hours": 2,
+        "selected_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_CHATGPT_GPT_5_6_SOL_INCLUDED_SESSION",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "evidence": [
+              "DIRECT_PROBE: current conversation is actively executing as GPT-5.6 Sol"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "observed_at_utc": "2026-09-30T20:52:15Z"
+          },
+          {
+            "dependency": "BRAIN_OWNED_MINI_SWE_AGENT_2_4_6",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "BRAIN_OWNED_SUPERPOWERS_6_4_2",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VERIFICATION_CAPSULE_RUNNER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "evidence": [
+              "Recent independent Terminal-Bench verifier runs completed on moxnixmdj/verification-capsule-runner"
+            ],
+            "evidence_classes": [
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "observed_at_utc": "2026-09-30T20:52:15Z"
+          },
+          {
+            "dependency": "TERMINAL_BENCH_4_PRETRAIN_SHARD_CORRUPTION_FROZEN_BYTES",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "release commit 452bf305c6daa62fc59061d22133a7cbc7c1572e",
+              "instruction blob 82c66df8e3e8b7dd5d1bb0dfea8c5913378f9c7f",
+              "task.toml blob b7686411660b07651eb055e2b990f3a0b781f5c3"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      },
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
+          "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+          "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "SWE-agent/mini-swe-agent commit 04d809ceab9df28f9adaed044884180159172930",
+          "harbor-framework/terminal-bench release commit 452bf305c6daa62fc59061d22133a7cbc7c1572e",
+          "obra/superpowers 6.4.2 pinned Brain copy"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Brain PR570 exact mini-SWE-agent 2.4.6 vendoring",
+          "Terminal-Bench pretrain-shard-corruption instruction blob 82c66df8e3e8b7dd5d1bb0dfea8c5913378f9c7f"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Previously preserved 2026 coding-agent framework comparisons in PR571 route frontier; discovery sensor only, not qualification authority."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "advanced agentic coding debugging verification TDD current 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "mini-SWE-agent Superpowers coding agent harness current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "open source model agnostic software engineering agent harness prompts control loop"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 Terminal-Bench 4 mini-SWE-agent latest coding harness"
+        }
+      ],
+      "challenger_routes": []
+    }
+  }
+}
