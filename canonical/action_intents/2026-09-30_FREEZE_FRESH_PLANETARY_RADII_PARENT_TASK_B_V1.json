@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-PLANETARY-RADII-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED_FREEZE_ONLY",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_B_REQUIRED_AFTER_QUALIFIED_BROAD_RESEARCH_ROUTING_REPAIR",
+  "action_kind": "FREEZE_FRESH_PARENT_TASK",
+  "task_id": "PARENT-OPENENDED-PLANETARY-RADII-REAL-TASK-20260930-004",
+  "domain": "PLANETARY_SCIENCE_NOMINAL_RADII",
+  "prior_work_checked": [
+    "HTTP/2 Task A is spent exactly once and replay-forbidden.",
+    "PR469 canonically reconciled its first causal gap.",
+    "PR474 exact generic broad-routing repair is independently guarded-qualified and merged.",
+    "No competing planetary-radii parent task found in current Brain pull-request history."
+  ],
+  "expected_parent_frontier_change": "Freeze one materially different parent Task B without executing it. A separate exact-base guarded lease must be created before any physical execution.",
+  "highest_leverage_now": true,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Freeze only. Do not research, execute, or pre-answer the planetary task in this PR.",
+  "recursive_obs": {
+    "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "real_outcome": "The HTTP/2 first causal gap is closed by merged independently-qualified generic routing repair.",
+    "surviving_necessity": "A materially different fresh parent falsification is now the shortest route to the next real capability boundary.",
+    "selected_surviving_route": "FREEZE_FRESH_PLANETARY_METROLOGY_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_TASK_A_REPLAY",
+      "TASK_SPECIFIC_HTTP2_PATCH",
+      "PREMATURE_DOWNSTREAM_REPAIR",
+      "MODEL_COGNITION",
+      "PREDECLARED_SOURCE_OR_TOOL"
+    ],
+    "why_selected_route_is_fastest_sufficient": "A cross-domain planetary comparison exercises autonomous research routing, source discovery, evidence extraction, quantitative relation handling, executable verification, synthesis, provenance, and independent verification while remaining small and zero-cost.",
+    "stop_rule": "FREEZE_ONLY__SEPARATE_GUARDED_EXECUTION_REQUIRED"
+  }
+}
