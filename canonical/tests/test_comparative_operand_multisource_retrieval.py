@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import importlib.util
+import hashlib
 import pathlib
 import sys
 import unittest
@@ -74,19 +75,32 @@ class Relevance:
 
 class Extractor:
     @staticmethod
-    def extract(objective,candidate,provenance,relevance,timeout=15,max_units=10,fetch=None):
+    def _row(text,source_url,seed):
+        page_sha=hashlib.sha256((seed+":page").encode()).hexdigest()
+        visible_sha=hashlib.sha256((seed+":visible").encode()).hexdigest()
+        text_sha=hashlib.sha256(text.encode()).hexdigest()
+        start=0
+        end=len(text)
+        uid=hashlib.sha256(f"{page_sha}:{start}:{end}:{text_sha}".encode()).hexdigest()
+        return {
+            "evidence_unit_id":uid,
+            "source_url":source_url,
+            "page_raw_sha256":page_sha,
+            "visible_text_sha256":visible_sha,
+            "text_sha256":text_sha,
+            "visible_text_start":start,
+            "visible_text_end":end,
+            "text":text,
+        },page_sha,visible_sha
+
+    @classmethod
+    def extract(cls,objective,candidate,provenance,relevance,timeout=15,max_units=10,fetch=None):
         if "6061" in objective:
-            row={
-                "evidence_unit_id":"a"*64,
-                "source_url":candidate["url"],
-                "text":"Room-temperature thermal conductivity of annealed 6061 aluminum is 167 W/mK.",
-            }
+            text="Room-temperature thermal conductivity of annealed 6061 aluminum is 167 W/mK."
+            row,page_sha,visible_sha=cls._row(text,candidate["url"],"left")
         elif "304" in objective:
-            row={
-                "evidence_unit_id":"b"*64,
-                "source_url":candidate["url"],
-                "text":"Room-temperature thermal conductivity of annealed 304 stainless steel is 16.2 W/mK under comparable bulk-material conditions.",
-            }
+            text="Room-temperature thermal conductivity of annealed 304 stainless steel is 16.2 W/mK under comparable bulk-material conditions."
+            row,page_sha,visible_sha=cls._row(text,candidate["url"],"right")
         else:
             raise AssertionError("OPERAND_QUERY_REQUIRED")
         return {
@@ -95,6 +109,8 @@ class Extractor:
             "output_verified":True,
             "evidence_unit_count":1,
             "source_url":candidate["url"],
+            "page_raw_sha256":page_sha,
+            "visible_text_sha256":visible_sha,
             "evidence_units":[row],
         }
 
