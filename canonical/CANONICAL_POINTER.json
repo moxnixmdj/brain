@@ -202,11 +202,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY",
+    "next_step": "REPAIR_AND_GUARD_QUALIFY_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_ADMISSION__NO_MATERIALS_TASK_C_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "critical_blocker": "OPEN_RESEARCH_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_ADMISSION_INSUFFICIENT",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -283,7 +283,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "highest_leverage_capability_gap": "OPEN_RESEARCH_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_ADMISSION_INSUFFICIENT",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -596,7 +596,7 @@
     "last_real_output_event": {
       "event_id": "MATERIALS_TASK_C_FIRST_CAUSAL_GAP_20260930",
       "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
+      "status": "MATERIALS_TASK_C_SPENT__INITIAL_RELEVANCE_ROLE_COVERAGE_FAILURE_LOCALIZED__NO_PARENT_CREDIT",
       "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
       "public_run_id": 36698638943,
       "artifact_id": 11089076913,
@@ -604,13 +604,13 @@
       "guard_attempt_id": "ab0a9965672d43b59944ba20d27e1208",
       "parent_capability_promoted": false,
       "capability_credit_delta": 0,
-      "next_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+      "next_causal_gap": "OPEN_RESEARCH_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_ADMISSION_INSUFFICIENT",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
+    "frontier_decomposition_status": "MATERIALS_TASK_C_SPENT__INITIAL_RELEVANCE_ROLE_COVERAGE_FAILURE_LOCALIZED__NO_PARENT_CREDIT",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
     "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "grounding_requalification": {
@@ -633,19 +633,20 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
+      "status": "MATERIALS_TASK_C_SPENT__INITIAL_RELEVANCE_ROLE_COVERAGE_FAILURE_LOCALIZED__NO_PARENT_CREDIT",
       "previous_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
-      "blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+      "blocker": "OPEN_RESEARCH_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_ADMISSION_INSUFFICIENT",
       "spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
       "spent_parent_run_id": 36698638943,
       "spent_parent_replay_allowed": false,
       "parent_capability_promoted": false,
       "evidence_paths": [
         "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
-      ]
+      ],
+      "counter_delta": 0
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "canonical_frontier_consistency_status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
+    "canonical_frontier_consistency_status": "MATERIALS_TASK_C_SPENT__INITIAL_RELEVANCE_ROLE_COVERAGE_FAILURE_LOCALIZED__NO_PARENT_CREDIT",
     "last_verified_subcapability": {
       "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
       "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
