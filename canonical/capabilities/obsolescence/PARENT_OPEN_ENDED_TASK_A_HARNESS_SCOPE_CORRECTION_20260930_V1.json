@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_PATH_VALIDITY_CORRECTION_V1",
+  "status": "EVIDENCE_RECONCILED__NO_CAPABILITY_CREDIT",
+  "checked_on": "2026-09-30",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "source_task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+  "task_spent": true,
+  "same_task_replay_allowed": false,
+  "authoritative_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 49,
+    "run_id": 36670516407,
+    "job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "harness_file": "run_pr328_openended_climate_task_a_once.py"
+  },
+  "exact_harness_finding": {
+    "direct_compile_call": "compiler.compile_goal(goal, registry, ROOT)",
+    "compile_exception_is_terminal": true,
+    "public_runtime_run_goal_called": false,
+    "private_runtime_helper_only_after_successful_compile": "runtime._run_model_independent_goal(step, mission, goal)"
+  },
+  "exact_runtime_finding": {
+    "runtime_blob": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "public_boundary": "run_goal(step, mission)",
+    "boundary_delegates_to": "_run_goal_unstamped(step, mission)",
+    "compile_miss_fallbacks": [
+      "gap classification",
+      "bound-capability grounding",
+      "grounded executable composition",
+      "targeted zero-model capability acquisition",
+      "federated capability discovery fallback"
+    ],
+    "canonical_cli_injects_runtime_mission_path": true
+  },
+  "adjudication": {
+    "pr49_terminal_receipt_valid_for_task_spend": true,
+    "pr49_terminal_receipt_valid_for_parent_runtime_gap": false,
+    "parent_capability_credit_delta": 0,
+    "runtime_repair_authorized": false,
+    "corrected_blocker": "PARENT_OPEN_ENDED_PUBLIC_RUNTIME_PATH_UNPROVEN__AUTHORITATIVE_TASK_A_HARNESS_BYPASSED_RUN_GOAL"
+  },
+  "next_action": "QUALIFY_CANONICAL_PUBLIC_RUNTIME_RUN_GOAL_AND_CLI_BOUNDARY_WITH_FRESH_NON_PARENT_DIAGNOSTIC__MISSION_PATH_PROVENANCE_REQUIRED__NO_PARENT_CREDIT__THEN_FREEZE_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_A"
+}
