@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import pathlib
 import re
 import urllib.parse
 import urllib.request
@@ -230,3 +231,29 @@ if __name__ == "__main__":
     result = discover(" ".join(sys.argv[1:]))
     print(json.dumps(result, indent=2, sort_keys=True))
     raise SystemExit(0 if result["status"] == "CANDIDATES_DISCOVERED" else 2)
+
+
+def run(args,root):
+    """Bound-capability adapter for generic source-candidate discovery."""
+    args=dict(args or {})
+    objective=str(args.get("goal") or args.get("objective") or "").strip()
+    result=discover(
+        objective,
+        limit=int(args.get("limit") or 12),
+        timeout=int(args.get("timeout") or 15),
+    )
+    output_path=str(args.get("output_path") or "").strip()
+    if output_path:
+        root=pathlib.Path(root).resolve()
+        path=(root/output_path).resolve()
+        if path==root or root not in path.parents:
+            raise ValueError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        result["output_path"]=str(path.relative_to(root)).replace("\\","/")
+    result["output_verified"]=bool(
+        result.get("status")=="CANDIDATES_DISCOVERED"
+        and int(result.get("candidate_count") or 0)>0
+        and (not output_path or bool(result.get("output_path")))
+    )
+    return result
