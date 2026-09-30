@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_FIRST_SPEND_PROVENANCE_AND_FRONTIER_MIRROR_CORRECTION_V1",
+  "status": "FIRST_PHYSICAL_SPEND_IDENTIFIED__LATER_REPLAY_QUARANTINED__GENERIC_COMPILE_GAP_PRESERVED__MIRRORS_REALIGNED__NO_CAPABILITY_CREDIT",
+  "checked_on": "2026-09-30",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "correction_of": [
+    "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "merged PR347"
+  ],
+  "substantive_task_identity": {
+    "conclusion": "PR317_AND_PR337_ENCODE_THE_SAME_SUBSTANTIVE_MAUNA_LOA_OBJECTIVE",
+    "comparison_basis": [
+      "objective text identical",
+      "goal_text identical",
+      "required_behavior identical",
+      "required_output schema and output path identical",
+      "execution constraints identical",
+      "independent oracle semantics identical"
+    ],
+    "metadata_only_differences": [
+      "PR337 task_id adds TASK-A label",
+      "PR337 freshness_class adds TASK_A label"
+    ],
+    "first_task": {
+      "brain_pr": 317,
+      "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-20260930-001",
+      "task_blob_sha": "61d7334c1c866027260025d0d147d16ee9e0cb02",
+      "brain_base": "0292dc91d7b2354beede3e530256054330fb94d8"
+    },
+    "later_renamed_task": {
+      "brain_pr": 337,
+      "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+      "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+      "brain_base": "797d5fbea5f230a31044006755beb98ae387134b"
+    }
+  },
+  "first_irreversible_spend": {
+    "authority": "EARLIEST_PRODUCER_EXECUTION_OF_SUBSTANTIVE_OBJECTIVE",
+    "carrier_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36669918546,
+    "job_id": 109742518213,
+    "artifact_id": 11077637577,
+    "artifact_name": "pr317-open-ended-climate-terminal",
+    "artifact_zip_sha256": "72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "execution_count": 1,
+    "task_executed": true,
+    "model_planner_disabled": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "first_causal_stage": "COMPILE",
+    "first_causal_blocker": "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+    "cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "unresolved_subgoal_index": 0,
+    "candidate_capability_ids": [],
+    "grounded_clause_count": 0,
+    "replay_allowed": false
+  },
+  "later_replay": {
+    "authority": "REAL_EXECUTION_EVIDENCE_BUT_NOT_FRESH_TASK_EVIDENCE",
+    "reason": "The substantive objective had already crossed producer execution in workflow 36669918546. Renaming task metadata cannot restore freshness.",
+    "carrier_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36670516407,
+    "job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_zip_sha256": "8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "execution_count": 1,
+    "task_executed": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "terminal_status": "FAIL_FIRST_CAUSAL_GAP",
+    "cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "freshness_credit": false,
+    "capability_credit": false,
+    "scoreboard_credit": false
+  },
+  "current_runtime_causal_continuity": {
+    "checked_brain_base": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "first_spend_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "exact_blob_match": true,
+    "implication": "The first-spend compiler failure mechanism is still present on current main; no replay is needed to establish that the current broad-objective compiler cannot map the first research clause to a verified capability."
+  },
+  "causal_attribution": {
+    "preserved_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "observed_boundary": "BROAD_NATURAL_LANGUAGE_RESEARCH_OBJECTIVE_TO_EXECUTABLE_VERIFIED_CAPABILITY_PLAN",
+    "existing_downstream_routes_reused_not_missing": [
+      "domain-free authority/source identity and discovery actions",
+      "verified browser capture",
+      "authoritative knowledge fetch and assessment",
+      "typed scalar numeric expression execution",
+      "two-scalar numeric relation execution",
+      "decision synthesis and independent verification"
+    ],
+    "missing_generic_front_half": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_VERIFIED_CAPABILITY_DECOMPOSITION",
+    "auto_acquisition_misclassification": "The failed clause was treated as a missing package/tool supplier problem, producing irrelevant APT/PyPI candidates instead of semantic research decomposition.",
+    "task_specific_patch_authorized": false,
+    "runtime_repair_authorized": false
+  },
+  "evidence_scope": {
+    "admissible_fresh_open_ended_parent_task_pass": false,
+    "admissible_parent_promotion": false,
+    "residual_gap_localization": "SUPPORTED_BY_FIRST_SPEND_PLUS_IDENTICAL_CURRENT_COMPILER_BYTES_AND_CORROBORATING_LATER_REPLAY",
+    "first_spend_old_base_limits": "The PR317 execution is not promoted as a current-base fresh parent Task A pass. It establishes irreversible freshness consumption and a real compiler-gap observation.",
+    "later_replay_limits": "The PR337 execution cannot restore freshness or exactly-once status. It only corroborates the same compiler gap on the hardened route."
+  },
+  "canonical_state_correction": {
+    "blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+    "queue_mirror_was_stale_after_pr347": true,
+    "scoreboard_mirror_was_stale_after_pr347": true,
+    "counters_delta": {
+      "reusable_capabilities_inherited": 0,
+      "verified_real_tasks_completed": 0,
+      "fresh_reuse_passes": 0,
+      "frontier_dependencies_removed": 0,
+      "residual_gaps_localized": 0
+    }
+  },
+  "prohibitions": [
+    "NO_MAUNA_LOA_OBJECTIVE_REPLAY_OR_METADATA_RENAME_AS_FRESH_EVIDENCE",
+    "NO_EXACTLY_ONCE_CLAIM_USING_RUN_36670516407",
+    "NO_PARENT_PROMOTION_FROM_EITHER_FAILED_MAUNA_RUN",
+    "NO_TASK_SPECIFIC_CLIMATE_COMPILER_RULE",
+    "NO_PACKAGE_SUPPLIER_SEARCH_AS_SUBSTITUTE_FOR_BROAD_OBJECTIVE_SEMANTIC_DECOMPOSITION",
+    "NO_RUNTIME_REPAIR_BEFORE_CURRENT_BASE_ROUTE_FRONTIER_RECOMPUTATION"
+  ]
+}
