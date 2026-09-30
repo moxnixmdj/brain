@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED__NO_PARENT_CREDIT",
+  "status": "FRONTIER_BAR_DEFINED__CLAIM_SPEC_BINDER_GUARDED_VERIFIED__PARENT_CLAIM_RELATION_INTEGRATION_REQUIRED__NO_PARENT_CREDIT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "obsolescence_status": "NOT_YET_PROVEN__PARENT_CLAIM_RELATION_INTEGRATION_REQUIRED",
+  "residual_gap": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -184,7 +184,7 @@
       "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
     }
   ],
-  "next_action": "FREEZE_AND_RUN_NEW_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__NO_PREDECLARED_SOURCE_OR_FORMULA_RECIPE__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_action": "INTEGRATE_VERIFIED_CLAIM_SPEC_BINDER_AND_GENERIC_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_SOURCE_FRONTEND__QUALIFY_NON_PARENT__PRESERVE_TRUTH_AND_SUFFICIENCY_UNVERIFIED__DEFER_HTTP2_PARENT_EXECUTION",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -379,10 +379,17 @@
     "parent_capability_promoted": false
   },
   "next_parent_validation": {
-    "status": "FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-    "requirement": "Run a new difficult consequential open-ended technical/scientific task without predeclared exact sources, formulas, JSON paths, or tool recipe. The inherited route must autonomously decompose, discover, acquire, extract, bind claims/operands, reason, synthesize, and return independently verifiable evidence.",
+    "status": "DEFERRED_PENDING_GUARDED_PARENT_CLAIM_RELATION_INTEGRATION_QUALIFICATION",
+    "requirement": "Guarded-qualify canonical open-research composition of generic evidence extraction -> verified claim-spec/operand binding -> verified relation evaluation while truth, sufficiency and independence remain unverified. Only then may the frozen HTTP/2 Task A execute once.",
     "replay_allowed": false,
-    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP",
-    "after_pass": "Independently verify Task A, then freeze a materially different genuine open-ended Task B using the inherited route without rediscovery."
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP"
+  },
+  "deferred_http2_parent_task": {
+    "task": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+    "domain": "NETWORK_PROTOCOLS_HTTP2_FLOW_CONTROL_LIMITS",
+    "task_blob_sha": "539cadd30e7e8ac548638157b7f36a1814b97dcd",
+    "status": "FROZEN_UNSPENT__EXECUTION_DEFERRED_PENDING_GUARDED_PARENT_PATH_INTEGRATION_QUALIFICATION",
+    "execution_count": 0,
+    "replay_allowed": false
   }
 }
