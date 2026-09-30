@@ -17,9 +17,11 @@ _BROAD_PREFIX=re.compile(
     re.IGNORECASE,
 )
 _EXPLICIT_ACTION=re.compile(
-    r"\b(?:using\s+https?://|https?://|save\s+.+?\.(?:json|csv|md|txt)|"
-    r"extract\s+json\s+path|create\s+.+?\.(?:json|csv|md|txt)|"
-    r"run\s+|execute\s+|open\s+https?://)\b",
+    r"\\b(?:using\\s+https?://|https?://|save\\s+.+?\\.(?:json|csv|md|txt)|"
+    r"extract\\s+json\\s+path|create\\s+.+?\\.(?:json|csv|md|txt)|open\\s+https?://|"
+    r"(?:run|execute)\\s+(?:(?:python(?:3)?|bash|sh|node|curl|wget|git|npm|npx|pip(?:3)?|"
+    r"pytest|make|cmake|go|cargo|java|javac|dotnet|pwsh|powershell|sqlite3|jq|yq)\\b|"
+    r"(?:\\.{0,2}/|[A-Za-z0-9_./-]+\\.(?:py|sh|js|mjs|cjs|exe|bat|ps1)\\b)))",
     re.IGNORECASE,
 )
 
