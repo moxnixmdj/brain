@@ -8,6 +8,7 @@ observable instead of being guessed.
 """
 from __future__ import annotations
 
+import ast
 import hashlib
 import importlib.util
 import json
@@ -3447,18 +3448,27 @@ def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
     text=str(clause or "").strip()
     m=re.match(
         r"^using\s+the\s+authoritative\s+json\s+source\s+(https?://[^\s,]+),\s*"
-        r"extract\s+json\s+path\s+([^\s]+)\s+and\s+save\s+the\s+knowledge\s+evidence\s+to\s+"
-        r"([^\s]+\.json)$",
+        r"extract\s+json\s+path\s+([^\s]+)(?:\s+as\s+([A-Za-z_][A-Za-z0-9_]*))?\s+"
+        r"and\s+save\s+the\s+knowledge\s+evidence\s+to\s+([^\s]+\.json)$",
         text,re.IGNORECASE
     )
     if not m:
         return None
     url=m.group(1).rstrip(".,;:!?")
     raw_path=m.group(2).strip(" .,:;")
-    output_path=m.group(3).strip(" .,:;")
+    result_alias=m.group(3)
+    output_path=m.group(4).strip(" .,:;")
     path_spec=_parse_json_path_spec(raw_path)
     if path_spec is None:
         return None
+    evidence={
+      "source_url":url,
+      "json_path":path_spec,
+      "evidence_path":output_path,
+      "result_cycle":int(action_cycle),
+    }
+    if result_alias:
+        evidence["result_alias"]=result_alias
     return {
       "action":{
         "type":"fetch_json_knowledge",
@@ -3474,33 +3484,147 @@ def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
       },
       "output_path":output_path,
       "result_cycle":int(action_cycle),
-      "evidence":{
-        "source_url":url,
-        "json_path":path_spec,
-        "evidence_path":output_path,
-        "result_cycle":int(action_cycle),
-      }
+      "evidence":evidence,
     }
 
 
-def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,registry):
-    """Lower one bounded numeric relation onto existing native JSON + jq machinery.
+def _numeric_expression_names(expression):
+    try:
+        tree=ast.parse(str(expression),mode="eval")
+    except SyntaxError as exc:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_PARSE_FAILED") from exc
+    allowed_bin=(ast.Add,ast.Sub,ast.Mult,ast.Div,ast.Pow)
+    allowed_unary=(ast.UAdd,ast.USub)
+    count=0
+    names=set()
+    for node in ast.walk(tree):
+        count+=1
+        if count>64:
+            raise GoalCompilationFailure("NUMERIC_EXPRESSION_TOO_COMPLEX")
+        if isinstance(node,(ast.Expression,ast.Load)):
+            continue
+        if isinstance(node,ast.BinOp):
+            if not isinstance(node.op,allowed_bin):
+                raise GoalCompilationFailure("NUMERIC_EXPRESSION_OPERATOR_REJECTED")
+            continue
+        if isinstance(node,allowed_bin):
+            continue
+        if isinstance(node,ast.UnaryOp):
+            if not isinstance(node.op,allowed_unary):
+                raise GoalCompilationFailure("NUMERIC_EXPRESSION_OPERATOR_REJECTED")
+            continue
+        if isinstance(node,allowed_unary):
+            continue
+        if isinstance(node,ast.Name):
+            names.add(node.id)
+            continue
+        if isinstance(node,ast.Constant):
+            if isinstance(node.value,bool) or not isinstance(node.value,(int,float)):
+                raise GoalCompilationFailure("NUMERIC_EXPRESSION_LITERAL_REJECTED")
+            continue
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_SYNTAX_REJECTED",type(node).__name__)
+    return sorted(names)
 
-    Supported semantic form is intentionally generic and narrow: determine/check/
-    verify/assess whether two causally prior scalar results differ by at most a
-    literal finite numeric threshold. The compiler never binds domain names or
-    source-specific literals. Runtime jq type checks fail closed on non-numbers.
-    """
+
+def _result_alias_map(compiled_parts):
+    aliases={}
+    for part in compiled_parts or []:
+        if not isinstance(part,dict):
+            continue
+        alias=part.get("result_alias")
+        cycle=part.get("result_cycle")
+        if not isinstance(alias,str) or not alias or not isinstance(cycle,int):
+            continue
+        if alias in aliases:
+            raise GoalCompilationFailure("RESULT_ALIAS_DUPLICATE",alias)
+        aliases[alias]=part
+    return aliases
+
+
+def _compile_typed_scalar_numeric_expression(clause,compiled_parts,registry,action_cycle):
     text=str(clause or "").strip()
-    m=re.match(
-        r"^(?:determine|check|verify|assess)\s+whether\s+(?:the\s+)?two\s+.+?\s+"
-        r"differ\s+by\s+(?:at\s+most|no\s+more\s+than|less\s+than\s+or\s+equal\s+to)\s+"
-        r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)$",
-        text,re.IGNORECASE,
-    )
+    patterns=[
+      r"^(?:calculate|compute|evaluate)\s+.+?\s+using\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$",
+      r"^(?:calculate|compute|evaluate)\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$",
+    ]
+    m=None
+    for pattern in patterns:
+        m=re.match(pattern,text,re.IGNORECASE)
+        if m:
+            break
     if not m:
         return None
-    threshold=float(m.group(1))
+    result_alias=m.group(1)
+    expression=m.group(2).strip().rstrip(".")
+    if len(expression)>1000:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_TEXT_INVALID")
+
+    entry=(registry or {}).get("numeric.expression.sympy.typed")
+    if not isinstance(entry,dict) or entry.get("status") not in {
+        "VERIFIED_BOUND_CAPABILITY","VERIFIED_BOUND_CAPABILITY_CANDIDATE"
+    }:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_VERIFIED_SYMPY_REQUIRED")
+
+    names=_numeric_expression_names(expression)
+    aliases=_result_alias_map(compiled_parts)
+    missing=[name for name in names if name not in aliases]
+    if missing:
+        raise GoalCompilationFailure("NUMERIC_EXPRESSION_ALIAS_UNBOUND",",".join(missing))
+    variables={
+      name:{"$result":{"cycle":int(aliases[name]["result_cycle"]),"field":"value"}}
+      for name in names
+    }
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"numeric.expression.sympy.typed",
+        "expression":expression,
+        "variables":variables,
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "action":action,
+      "result_cycle":int(action_cycle),
+      "result_alias":result_alias,
+      "evidence":{
+        "selected_capability":"numeric.expression.sympy.typed",
+        "expression":expression,
+        "variable_aliases":names,
+        "variable_result_cycles":{name:int(aliases[name]["result_cycle"]) for name in names},
+        "result_alias":result_alias,
+        "result_cycle":int(action_cycle),
+        "model_dependency_count":0,
+      },
+    }
+
+def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,registry):
+    """Lower bounded scalar absolute-difference comparison onto verified jq.
+
+    Explicit alias form is preferred. Legacy "the two ..." form remains
+    supported only when exactly two prior authoritative fetch scalars exist.
+    """
+    text=str(clause or "").strip()
+    alias_match=re.match(
+        r"^(?:determine|check|verify|assess)\s+whether\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\s+and\s+([A-Za-z_][A-Za-z0-9_]*)\s+"
+        r"differ\s+by\s+(?:at\s+most|no\s+more\s+than|less\s+than\s+or\s+equal\s+to)\s+"
+        r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)(?:\s+[A-Za-z][A-Za-z0-9_/-]*)?$",
+        text,re.IGNORECASE,
+    )
+    legacy_match=None
+    if not alias_match:
+        legacy_match=re.match(
+            r"^(?:determine|check|verify|assess)\s+whether\s+(?:the\s+)?two\s+.+?\s+"
+            r"differ\s+by\s+(?:at\s+most|no\s+more\s+than|less\s+than\s+or\s+equal\s+to)\s+"
+            r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)$",
+            text,re.IGNORECASE,
+        )
+    if not alias_match and not legacy_match:
+        return None
+
+    raw_threshold=alias_match.group(3) if alias_match else legacy_match.group(1)
+    threshold=float(raw_threshold)
     if not math.isfinite(threshold) or threshold < 0:
         raise GoalCompilationFailure("NUMERIC_RELATION_THRESHOLD_INVALID")
 
@@ -3508,20 +3632,30 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
     if not isinstance(jq_entry,dict) or jq_entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
         raise GoalCompilationFailure("NUMERIC_RELATION_VERIFIED_JQ_REQUIRED")
 
-    producers=[
-        part for part in (compiled_parts or [])
-        if isinstance(part,dict)
-        and part.get("mode") in {"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH","EXTERNAL_JSON_KNOWLEDGE_FETCH"}
-        and isinstance(part.get("result_cycle"),int)
-    ]
-    if len(producers)!=2:
-        raise GoalCompilationFailure(
-            "NUMERIC_RELATION_REQUIRES_EXACTLY_TWO_PRIOR_SCALARS",
-            str(len(producers)),
-        )
+    if alias_match:
+        left_alias,right_alias=alias_match.group(1),alias_match.group(2)
+        aliases=_result_alias_map(compiled_parts)
+        missing=[x for x in (left_alias,right_alias) if x not in aliases]
+        if missing:
+            raise GoalCompilationFailure("NUMERIC_RELATION_ALIAS_UNBOUND",",".join(missing))
+        producers=[aliases[left_alias],aliases[right_alias]]
+        producer_aliases=[left_alias,right_alias]
+    else:
+        producers=[
+            part for part in (compiled_parts or [])
+            if isinstance(part,dict)
+            and part.get("mode") in {"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH","EXTERNAL_JSON_KNOWLEDGE_FETCH"}
+            and isinstance(part.get("result_cycle"),int)
+        ]
+        if len(producers)!=2:
+            raise GoalCompilationFailure(
+                "NUMERIC_RELATION_REQUIRES_EXACTLY_TWO_PRIOR_SCALARS",
+                str(len(producers)),
+            )
+        producer_aliases=[]
 
     digest=hashlib.sha256(
-        (text+"\\n"+str(producers[0]["result_cycle"])+"\\n"+str(producers[1]["result_cycle"])).encode("utf-8")
+        (text+"\n"+str(producers[0]["result_cycle"])+"\n"+str(producers[1]["result_cycle"])).encode("utf-8")
     ).hexdigest()[:12].upper()
     input_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_INPUT.json"
     output_path=f"canonical/astra_runtime/tmp/NUMERIC_RELATION_{digest}_RESULT.json"
@@ -3559,20 +3693,18 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
       },
       "expect":{"type":"field_equals","field":"output_verified","value":True},
     }
-    return {
-      "actions":[materialize,compute],
+    evidence={
+      "selected_capability":"json.query.jq",
+      "relation":"ABS_DIFF_LTE",
+      "threshold":threshold,
+      "input_path":input_path,
       "output_path":output_path,
-      "evidence":{
-        "selected_capability":"json.query.jq",
-        "relation":"ABS_DIFF_LTE",
-        "threshold":threshold,
-        "input_path":input_path,
-        "output_path":output_path,
-        "producer_result_cycles":[producers[0]["result_cycle"],producers[1]["result_cycle"]],
-        "model_dependency_count":0,
-      },
+      "producer_result_cycles":[producers[0]["result_cycle"],producers[1]["result_cycle"]],
+      "model_dependency_count":0,
     }
-
+    if producer_aliases:
+        evidence["producer_aliases"]=producer_aliases
+    return {"actions":[materialize,compute],"output_path":output_path,"evidence":evidence}
 
 def _compile_learned_value_record(clause,compiled_parts):
     text=str(clause or "").strip()
@@ -3725,6 +3857,18 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH",
                 **knowledge_fetch["evidence"],
+            })
+            continue
+
+        numeric_expression=_compile_typed_scalar_numeric_expression(
+            clause,compiled_parts,registry,len(actions)
+        )
+        if numeric_expression is not None:
+            actions.append(numeric_expression["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_BOUND_TYPED_NUMERIC_EXPRESSION",
+                **numeric_expression["evidence"],
             })
             continue
 
