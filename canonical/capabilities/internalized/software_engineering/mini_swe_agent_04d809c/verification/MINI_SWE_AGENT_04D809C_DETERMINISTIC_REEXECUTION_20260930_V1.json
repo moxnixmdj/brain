@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_MINI_SWE_AGENT_REEXECUTION_EVIDENCE_V1",
+  "evidence_id": "MINI_SWE_AGENT_04D809C_DETERMINISTIC_REEXECUTION_20260930_V1",
+  "status": "PASS__OWNERSHIP_MECHANISM_REEXECUTION_ONLY__ZERO_OPUS_CREDIT",
+  "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_AGENT_V1",
+  "upstream_commit": "04d809ceab9df28f9adaed044884180159172930",
+  "brain_internalization_root": "canonical/capabilities/internalized/software_engineering/mini_swe_agent_04d809c",
+  "exact_blob_identity": {
+    "expected_count": 14,
+    "matched_count": 14,
+    "mismatches": 0
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/mini-swe-04d809c-deterministic-reexecution-20260930",
+    "head_sha": "357b160301493d2f9c15954223c25d04d8f9201d",
+    "workflow_run_id": 36768596454,
+    "job_id": 110068933538,
+    "artifact_id": 11121788192,
+    "artifact_digest": "sha256:4f8be9e6cc4a3fb29aa818e40ceed4e3a6faf4d68eb7610848e4a4ee0d0e68d1",
+    "conclusion": "success"
+  },
+  "observed_behavior": {
+    "deterministic_substrate": "FAKE_GENERAL_COGNITION_SUBSTRATE_WITH_ZERO_TARGET_CAPABILITY",
+    "model_calls": 2,
+    "first_action": "CREATE_AND_READ_PROOF_ARTIFACT",
+    "second_action": "EXPLICIT_COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT",
+    "artifact_text": "brain-mini-swe-proof\\n",
+    "exit_status": "Submitted",
+    "submission": "verified-mini-swe-loop",
+    "trajectory_format": "mini-swe-agent-1.1",
+    "trajectory_serialized": true
+  },
+  "interpretation": {
+    "brain_artifact_reexecutable": true,
+    "mechanism_owned_enough_for_fresh_behavioral_falsification": true,
+    "advanced_coding_strength_proven": false,
+    "opus_5_5_credit_delta": 0,
+    "benchmark_freshness_spent": false
+  },
+  "incremental_spend_usd": 0
+}

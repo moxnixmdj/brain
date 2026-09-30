@@ -17,12 +17,12 @@
     "incremental_spend_usd": 0
   },
   "ownership_tests": {
-    "brain_artifact_test": "PENDING_COPY",
+    "brain_artifact_test": "PASS",
     "no_hidden_capability_provider_test": "PASS_ARCHITECTURALLY",
     "general_substrate_test": "PASS_ARCHITECTURALLY",
     "specimen_separation_test": "PASS",
-    "reexecution_without_rediscovery_test": "PENDING_COPY",
-    "brain_configured_verification_test": "PENDING",
+    "reexecution_without_rediscovery_test": "PASS__FRESH_PUBLIC_PROCESS_REEXECUTION",
+    "brain_configured_verification_test": "PENDING_FRESH_CURRENT_BAR",
     "ownership_package_test": "PENDING_FINAL_VERIFICATION"
   },
   "reasoning_durability": {

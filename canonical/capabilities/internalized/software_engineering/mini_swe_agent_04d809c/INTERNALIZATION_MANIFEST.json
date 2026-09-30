@@ -92,9 +92,22 @@
     "no_hidden_capability_provider_test": "PASS_FOR_HARNESS_EXISTENCE__PERFORMANCE_NOT_YET_PROVEN",
     "general_substrate_test": "PASS_ARCHITECTURALLY",
     "specimen_separation_test": "PASS",
-    "reexecution_without_rediscovery_test": "PASS_FOR_PINNED_OPERATIVE_SOURCE_AND_CONFIG__BRAIN_SUBSTRATE_ADAPTER_REQUIRED_AT_EXECUTION",
+    "reexecution_without_rediscovery_test": "PASS__FRESH_PUBLIC_PROCESS_REEXECUTION_ON_EXACT_14_BLOB_IDENTITY_SET",
     "brain_configured_verification_test": "PENDING",
-    "ownership_package_test": "PENDING_FINAL_VERIFICATION"
+    "ownership_package_test": "PENDING_FINAL_VERIFICATION",
+    "reexecution_evidence": {
+      "public_repository": "moxnixmdj/verification-capsule-runner",
+      "branch": "verify/mini-swe-04d809c-deterministic-reexecution-20260930",
+      "workflow_run_id": 36768596454,
+      "artifact_id": 11121788192,
+      "artifact_digest": "sha256:4f8be9e6cc4a3fb29aa818e40ceed4e3a6faf4d68eb7610848e4a4ee0d0e68d1",
+      "exact_blob_identity_match_count": 14,
+      "deterministic_model_calls": 2,
+      "observed_exit_status": "Submitted",
+      "observed_submission": "verified-mini-swe-loop",
+      "capability_credit": 0,
+      "incremental_spend_usd": 0
+    }
   },
   "opus_5_5_credit": 0,
   "next_required_action": "Use the pinned Brain-owned mini-swe-agent harness semantics on an approved general cognition substrate for one fresh uncontaminated current Terminal-Bench 4 preflight; if it passes, proceed to matched multi-task comparison against the Opus 5.5 bar."
