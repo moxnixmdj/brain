@@ -41,5 +41,6 @@
     ],
     "why_selected_route_is_fastest_sufficient": "A narrow allowlist for generic research-method phrases plus a catch-all remaining run/execute recipe detector closes the demonstrated false-negative class without weakening broad-objective admission.",
     "stop_rule": "QUALIFY_EXACT_BYTES_ADVERSARIALLY_THEN_RESUME_FRESH_PARENT_FRONTIER"
-  }
+  },
+  "pr_base_rechecked": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2"
 }
