@@ -119,6 +119,54 @@ class PlainGoalBoundGroundingTests(unittest.TestCase):
         self.assertIn("decision.synthesis.typed.stdlib",first)
         self.assertIn("decision.synthesis.verify.stdlib",second)
 
+
+    def test_bindability_filter_rejects_semantic_candidate_with_unbindable_contract(self):
+        registry={
+            "http.json.fetch_from_state":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "incremental_spend_usd":0,
+                "provides":["http.json.fetch_from_state"],
+                "requires":["structured.json.available"],
+                "keywords":["fetch","http","https","json","url"],
+                "action_template":{"type":"invoke_capability","args":{
+                    "source_json_path":"${input.source_json_path}",
+                    "url_key":"${input.url_key}",
+                    "output_path":"${input.output_path}",
+                }},
+            },
+            "knowledge.json.fetch.external":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "incremental_spend_usd":0,
+                "provides":["knowledge.observation.available"],
+                "requires":["network.http.available"],
+                "keywords":["fetch","json","external","url","knowledge"],
+                "action_template":{"type":"fetch_json_knowledge","args":{
+                    "url":"${input.url}",
+                    "output_path":"${input.output_path}",
+                }},
+            },
+        }
+        def bind_candidate(clause,cid,entry,context_paths=None,future_clauses=None):
+            if cid=="http.json.fetch_from_state":
+                raise RuntimeError("GOAL_INPUT_BINDING_REQUIRED:source_json_path")
+            self.assertIn("https://api.github.com/repos/python/cpython",clause)
+            return {"url":"https://api.github.com/repos/python/cpython","output_path":"tmp/cpython.json"}
+        result=grounding.ground(
+            "Fetch JSON from https://api.github.com/repos/python/cpython.",
+            registry,
+            bind_candidate=bind_candidate,
+        )
+        clause=result["clauses"][0]
+        ids=[x["capability_id"] for x in clause["candidates"]]
+        self.assertEqual(ids,["knowledge.json.fetch.external"])
+        self.assertTrue(result["input_contract_bindability_enforced"])
+        self.assertEqual(
+            clause["rejected_unbindable_candidates"][0]["capability_id"],
+            "http.json.fetch_from_state",
+        )
+        self.assertTrue(clause["candidates"][0]["input_bindability"]["verified"])
+
+
     def test_independent_verifier_accepts_valid_and_rejects_tamper(self):
         registry=self.registry()
         goal="Choose a binary serialization route for these records."
