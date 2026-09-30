@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_PACKAGE_V1",
+  "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+  "status": "VERIFIED_REACQUIRED_AFTER_REPAIR",
+  "route": "source.evidence.extract.objective_grounded.stdlib + open_research_source_frontend",
+  "provides": [
+    "source.evidence.objective_grounded_units",
+    "source.evidence.verbatim_provenance_bound"
+  ],
+  "requires": [
+    "source.candidate.provenance.verified",
+    "source.objective_relevance.lexical_ranked"
+  ],
+  "useful_behavior": "Given a provenance-verified web candidate selected by the independently qualified BM25 relevance route, freshly refetch the exact admitted source and emit bounded objective-grounded verbatim evidence units with page/text hashes, offsets, unit IDs, and lexical anchors, including modern main/article/section/div content. ROR identity is optional metadata.",
+  "limitations": [
+    "Does not prove claim support or contradiction.",
+    "Does not prove semantic entailment, factual correctness, causality, quality, sufficiency, or source independence.",
+    "Fresh source identity drift fails closed."
+  ],
+  "verification": {
+    "status": "INDEPENDENT_PUBLIC_REQUALIFICATION_PASS",
+    "public_run_id": 36681655780,
+    "public_job_id": 109778209177,
+    "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+    "requalification_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_REQUALIFICATION_20260930_V1.json"
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false
+}
