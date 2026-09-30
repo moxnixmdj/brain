@@ -18,6 +18,20 @@ class SourceCandidateDiscoveryTests(unittest.TestCase):
     def setUpClass(cls):
         cls.m=load()
 
+
+    def test_bing_rss_parser(self):
+        xml=b"""<?xml version="1.0"?><rss><channel><item><title>Example Standard</title><link>https://example.org/spec</link><description>Official example result</description></item></channel></rss>"""
+        old=self.m._fetch
+        self.m._fetch=lambda url,timeout:(xml,"application/rss+xml",200)
+        try:
+            out,trace=self.m._bing_rss("example standard",5,10)
+        finally:
+            self.m._fetch=old
+        self.assertEqual(trace["backend"],"BING_RSS")
+        self.assertEqual(trace["candidate_count"],1)
+        self.assertEqual(out[0]["url"],"https://example.org/spec")
+        self.assertEqual(out[0]["authority_status"],"UNVERIFIED")
+
     def test_ddg_parser_and_redirect_unwrap(self):
         p=self.m._DDGParser()
         p.feed("""<a class="result__a" href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fexample.org%2Fspec">Example Spec</a>""")
@@ -47,6 +61,7 @@ class SourceCandidateDiscoveryTests(unittest.TestCase):
             self.assertEqual(out["model_dependency_count"],0)
             self.assertEqual(out["incremental_spend_usd"],0)
             self.assertEqual(out["authority_verification"],"NOT_PERFORMED")
+            self.assertTrue(any(c["discovery_backend"] in {"BING_RSS","DUCKDUCKGO_HTML"} for c in out["candidates"]),out)
             for c in out["candidates"]:
                 self.assertEqual(c["authority_status"],"UNVERIFIED")
                 self.assertTrue(c["url"].startswith(("http://","https://")))
