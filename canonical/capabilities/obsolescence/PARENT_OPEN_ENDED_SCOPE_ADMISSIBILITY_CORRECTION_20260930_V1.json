@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCOPE_ADMISSIBILITY_CORRECTION_V1",
+  "status": "CANONICAL_SCOPE_CORRECTION__ZERO_NEW_CAPABILITY_CREDIT",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "base_commit": "5262fd6e0d132ff8a2ac30f43f5b79ff3efd4142",
+  "finding": "The credited demography execution is valid model-independent deterministic integration evidence but is insufficient as parent open-ended research evidence because its frozen task pre-specifies the research plan.",
+  "capability_definition_requirements": [
+    "objective may be in a domain that is not pre-mapped",
+    "autonomously decompose the problem",
+    "discover and evaluate relevant existing knowledge and tools",
+    "perform quantitative reasoning and computation",
+    "revise the plan when evidence falsifies assumptions",
+    "synthesize evidence across sources",
+    "independently verify consequential claims"
+  ],
+  "demography_task_precommitted_structure": {
+    "task_id": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
+    "exact_source_urls": 3,
+    "exact_json_paths": 3,
+    "exact_output_paths": 3,
+    "exact_formula_precommitted": true,
+    "exact_relation_threshold_precommitted": true,
+    "source_and_tool_discovery_exercised": false,
+    "autonomous_research_decomposition_exercised": false
+  },
+  "chemistry_task_304_scope_note": "PR304 likewise prewired authority, URLs, JSON paths, formula and threshold; its one-shot failure remains preserved but cannot satisfy the parent open-ended proof regardless of the numeric-string seam.",
+  "preserved_truth": [
+    "demography producer executed model-independently and its independent oracle passed",
+    "narrow deterministic grounding/composition/expression/relation integration evidence remains valid",
+    "no spent task is replayed",
+    "no child capability is revoked solely by this parent-scope correction"
+  ],
+  "revoked_or_withheld_claims": [
+    "demography task as admissible real_task_A for the open-ended parent acquisition contract",
+    "one-clean-parent-task-completed status for the open-ended parent target",
+    "priority of a second prewired cross-domain task as sufficient for parent promotion"
+  ],
+  "corrected_blocker": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE",
+  "corrected_next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK__NO_PREWIRED_SOURCES_URLS_PATHS_TOOLS_OR_FORMULAS__STOP_ON_FIRST_CAUSAL_GAP",
+  "required_next_task_properties": {
+    "real": true,
+    "materially_different_domain": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "prompt_must_not_specify_source_urls": true,
+    "prompt_must_not_specify_json_paths": true,
+    "prompt_must_not_specify_tools_or_capability_ids": true,
+    "prompt_must_not_specify_calculation_formula": true,
+    "must_require_autonomous_decomposition": true,
+    "must_require_source_discovery_and_evaluation": true,
+    "must_require_tool_selection": true,
+    "must_require_quantitative_reasoning": true,
+    "must_require_independent_verification": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "progress_credit_delta": 0
+}
