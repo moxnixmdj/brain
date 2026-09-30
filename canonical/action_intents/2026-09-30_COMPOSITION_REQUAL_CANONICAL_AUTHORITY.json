@@ -1,0 +1,285 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "COMPOSITION-REQUAL-CANONICAL-AUTHORITY-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "POST_REPAIR_COMPOSITION_REQUALIFICATION_REQUIRED_ON_FRESH_MATERIALLY_DISTINCT_REAL_TASK",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::POST_REPAIR_COMPOSITION_REQUALIFICATION_REQUIRED_ON_FRESH_MATERIALLY_DISTINCT_REAL_TASK::FRESH_REUSE",
+  "expected_parent_frontier_change": "Requalify the repaired model-independent grounded composition route on a fresh real canonical-authority decision through explicit decision-synthesis→independent-verifier provenance; restore composition acquisition credit only if exact one-shot public execution and independent oracle pass.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR270 reopened composition after post-promotion falsification",
+    "PR271 explicit producer/verifier path provenance repair",
+    "PR273 generic provider-backed path provenance fail-closed guard merged at d3617ad20e79834b898d9d91d52f1fc4cfeec00e",
+    "PR273 corrected public validation run 36655482945 PASS",
+    "Spent PR267 packaging decision is forbidden from replay",
+    "No open competing PR lease"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute exactly one fresh materially distinct canonical-authority decision through unchanged repaired composition bytes; independently verify selected alternative and causal path provenance; on pass reconcile composition only, on failure preserve first causal gap. No replay/tuning/model/provider substitution inside this action.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "d3617ad20e79834b898d9d91d52f1fc4cfeec00e",
+    "real_outcome": "Prove the repaired composition route transfers to a fresh consequential decision with explicit source/result provenance and no model dependency.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Fresh real requalification after generic causal-path repair.",
+      "proxy_goals_deleted": [
+        "PR267 replay",
+        "another component benchmark",
+        "new planner search",
+        "new model/provider",
+        "task-specific path workaround"
+      ],
+      "surviving_necessity": "The capability was truthfully reopened and can only be restored by fresh post-repair real-task evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib",
+        "grounded_executable_composition.py",
+        "capability_planner.py",
+        "PR271/PR273 validated repairs"
+      ],
+      "external_existing_routes_checked": [
+        "External substitutes are irrelevant because the acquisition predicate is reuse of the repaired inherited route."
+      ],
+      "capability_work_deleted": [
+        "No new runtime",
+        "No new binder",
+        "No model",
+        "No provider",
+        "No new verifier"
+      ],
+      "surviving_gap": "Post-repair fresh real-task proof is unspent."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence gap after a verified generic repair.",
+      "delete_bypass_substitute_options": [
+        "Delete requalification rejected because broad capability credit was revoked",
+        "Substitute route rejected because it would not requalify inherited composition",
+        "Reuse repaired decision chain survives"
+      ],
+      "surviving_causal_blocker": "FRESH_POST_REPAIR_REAL_TASK_UNSPENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_REPAIRED_COMPOSITION_ON_FRESH_CANONICAL_AUTHORITY_DECISION"
+      ],
+      "losing_routes_reason": "All alternatives either replay spent evidence, change the route under test, or add unnecessary machinery.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Run the actual decision chain and independently recompute the typed-decision result without importing producer/verifier modules."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Further composition repair absent new falsification",
+        "Additional child benchmarking after successful requalification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "explicit effect-result path provenance",
+        "provider-backed path fail-closed guard",
+        "typed decision independent verification"
+      ],
+      "fresh_reuse_plan": "This is the required fresh post-repair reuse. If it passes, reconcile composition and return immediately to the parent scientific task frontier."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse validated PR271/PR273 bytes",
+        "Reuse existing decision chain",
+        "Reuse public carrier"
+      ],
+      "search_stop_decision": "Further search cannot improve a test whose purpose is reuse of the exact repaired incumbent route.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and carrier were refreshed after PR273 merge; switching route would invalidate the requalification predicate."
+    },
+    "routes_considered": [
+      "REUSE_REPAIRED_COMPOSITION_ON_FRESH_CANONICAL_AUTHORITY_DECISION",
+      "REPLAY_PR267",
+      "SWITCH_PLANNER",
+      "RUN_COMPONENT_TESTS_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_PR267",
+      "SWITCH_PLANNER",
+      "RUN_COMPONENT_TESTS_ONLY"
+    ],
+    "selected_surviving_route": "REUSE_REPAIRED_COMPOSITION_ON_FRESH_CANONICAL_AUTHORITY_DECISION",
+    "why_selected_route_is_fastest_sufficient": "The exact repaired route is already independently validated, the decision chain has explicit causal provenance, the new task is materially distinct from prior carrier/Click/packaging decisions, and one public one-shot can directly requalify or falsify the capability.",
+    "expected_parent_level_state_change": "Requalify the repaired model-independent grounded composition route on a fresh real canonical-authority decision through explicit decision-synthesis→independent-verifier provenance; restore composition acquisition credit only if exact one-shot public execution and independent oracle pass.",
+    "stop_condition": "Execute exactly one fresh materially distinct canonical-authority decision through unchanged repaired composition bytes; independently verify selected alternative and causal path provenance; on pass reconcile composition only, on failure preserve first causal gap. No replay/tuning/model/provider substitution inside this action.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T01:32:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REPAIRED_MODEL_INDEPENDENT_GROUNDED_COMPOSITION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR271 merge ebc77c6e2309a806c6d9a39c5f3506fb777e6546",
+          "PR273 merge d3617ad20e79834b898d9d91d52f1fc4cfeec00e",
+          "PR273 validation run 36655482945"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Canonical Brain laws and current private GitHub main are the primary authority for this internal requalification task."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "BOUND_CAPABILITY_REGISTRY_V1 exact verified decision producer/verifier contracts."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No external challenger is relevant to an incumbent fresh-reuse predicate; external route substitution would cease to test the repaired capability."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent causal composition decision synthesis verification fresh reuse"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Project Brain repaired grounded composition incumbent"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "explicit effect result producer source and output paths downstream verifier"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current main post PR273 composition repair 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_REPAIRED_MODEL_INDEPENDENT_COMPOSITION",
+          "evidence": [
+            "PR271 and PR273 exact public validations passed"
+          ],
+          "qualification_evidence": [
+            "public run 36654897859",
+            "public run 36655482945"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the repaired causal provenance invariant on a fresh real task.",
+            "CAPABILITY_STRENGTH": "Exercises deterministic grounding/composition/planning plus producer-independent decision verification.",
+            "WALL_CLOCK": "No discovery or implementation required.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact repaired bytes already passed component validation.",
+            "VERIFIABILITY": "One-shot public execution plus independent recomputation."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger can dominate a test whose unresolved predicate is reuse of this exact repaired route.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_REPAIRED_COMPOSITION_ON_FRESH_CANONICAL_AUTHORITY_DECISION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T01:32:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_REPAIRED_COMPOSITION_ON_FRESH_CANONICAL_AUTHORITY_DECISION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_REPAIRED_BRAIN_COMPOSITION_STACK",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:32:00Z",
+            "evidence": [
+              "BRAIN_INHERITED main d3617ad20e79834b898d9d91d52f1fc4cfeec00e",
+              "DIRECT_PROBE PR273 validation 36655482945 PASS"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:31:05Z",
+            "evidence": [
+              "DIRECT_PROBE run 36655482945 completed successfully on this account"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "FRESH_CANONICAL_AUTHORITY_TYPED_DECISION_INPUT",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:32:00Z",
+            "evidence": [
+              "canonical/tasks/COMPOSITION_REQUAL_CANONICAL_AUTHORITY_20260930.json committed on exact-base branch"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
