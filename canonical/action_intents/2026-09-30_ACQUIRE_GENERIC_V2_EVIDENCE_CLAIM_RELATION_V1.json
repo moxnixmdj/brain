@@ -1,0 +1,301 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-GENERIC-V2-EVIDENCE-CLAIM-RELATION-20260930-V1",
+  "status": "QUALIFIED_CANDIDATE__AWAITING_CANONICAL_PROMOTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "94b08f40dd52606dc88dddf78266fadb6f855008",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Install the exact independently-qualified candidate for exact normalized text support and explicit Decimal relations over integrity-checked generic V2 evidence-unit IDs. Do not promote the parent or broader semantic claims in this PR.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 94b08f40dd52606dc88dddf78266fadb6f855008",
+    "generic extraction requalification run 36681368306",
+    "generic extractor blob fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "deferred PR421 bounded exact-support/numeric-relation behavior",
+    "public PR162 exact-byte qualification run 36682488104",
+    "artifact 11082521746 digest sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd"
+  ],
+  "evidence_presence_classification": "CAPABILITY_IMPLEMENTATION_AND_PUBLIC_QUALIFICATION_PRESENT__CANONICAL_PROMOTION_PENDING",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Exact adapter/test bytes have passed fail-closed regressions and independent live end-to-end qualification using actual generic V2 extraction outputs from SQLite and RFC 9110. Merge only these qualified candidate bytes and registry declaration; canonical capability promotion remains a separate exact-main reconciliation step.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "94b08f40dd52606dc88dddf78266fadb6f855008",
+    "real_outcome": "Bridge verified generic V2 evidence units to auditable exact-text support and explicit numeric relation facts without semantic overclaim.",
+    "required_capability": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "obs_goal": {
+      "real_outcome": "Verify exact normalized substring occurrence and explicit Decimal relations over caller-referenced numeric literals from integrity-checked evidence units.",
+      "proxy_goals_deleted": [
+        "semantic entailment",
+        "paraphrase matching",
+        "factual correctness",
+        "evidence sufficiency",
+        "new decision synthesizer",
+        "parent replay"
+      ],
+      "surviving_necessity": "Typed decision synthesis needs a bounded bridge from extracted evidence to explicit support/relation facts."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "deferred PR421 bounded behavior"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib Decimal, regex, hashlib and JSON are sufficient for the bounded semantics."
+      ],
+      "capability_work_deleted": [
+        "No model cognition",
+        "No embeddings",
+        "No paraphrase matcher",
+        "No new supplier",
+        "No decision-engine rewrite"
+      ],
+      "surviving_gap": "Canonical installation and promotion of the already-qualified generic V2 claim/relation bridge."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic post-extraction evidence typing seam.",
+      "delete_bypass_substitute_options": [
+        "Direct decision synthesis rejected because evidence is not yet typed.",
+        "Relevance-equals-support rejected.",
+        "Bounded exact support and explicit numeric relation bridge survives."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+        "MATERIALIZE_LITERALS_THROUGH_CONTROLLER_NUMERIC_PATH",
+        "MODEL_SEMANTIC_JUDGE"
+      ],
+      "losing_routes_reason": "The bounded bridge is smaller and already independently qualified end-to-end; controller rematerialization adds glue, and model judgment is circular.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Authored fail-closed tests plus live SQLite and RFC 9110 V2 extraction and an independent Decimal oracle have already qualified the exact candidate bytes."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "deferred PR421 as active route",
+        "duplicate claim-judge implementations"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic evidence extraction",
+        "typed numeric computation",
+        "typed decision synthesis"
+      ],
+      "fresh_reuse_plan": "After candidate merge, promote the exact package on the resulting main and recompute the parent frontier without replaying spent parent tasks."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused deferred bounded behavior",
+        "reused current V2 extraction contract",
+        "reused public qualification run 36682488104"
+      ],
+      "search_stop_decision": "No external supplier can improve exact substring occurrence and explicit Decimal relation evaluation enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen only on material qualification failure, dependency hash change, or base change."
+    },
+    "routes_considered": [
+      "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+      "MATERIALIZE_LITERALS_THROUGH_CONTROLLER_NUMERIC_PATH",
+      "MODEL_SEMANTIC_JUDGE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PARAPHRASE_OR_ENTAILMENT_INFERENCE",
+      "MODEL_COGNITION",
+      "PARENT_REPLAY",
+      "DUPLICATE_RELATION_ENGINE"
+    ],
+    "selected_surviving_route": "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+    "why_selected_route_is_fastest_sufficient": "It reuses already-qualified bounded behavior, changes only the evidence reference contract to generic V2 integrity-checked unit IDs, and has passed live end-to-end verification on two domains.",
+    "expected_parent_level_state_change": "Install the exact independently-qualified candidate for exact normalized text support and explicit Decimal relations over integrity-checked generic V2 evidence-unit IDs. Do not promote the parent or broader semantic claims in this PR.",
+    "stop_condition": "Exact adapter/test bytes have passed fail-closed regressions and independent live end-to-end qualification using actual generic V2 extraction outputs from SQLite and RFC 9110. Merge only these qualified candidate bytes and registry declaration; canonical capability promotion remains a separate exact-main reconciliation step.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T07:13:44Z",
+      "max_age_hours": 24,
+      "incumbent_route": "NO_GENERIC_V2_CLAIM_RELATION_BRIDGE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current generic V2 extractor and prior bounded PR421 behavior",
+          "existing numeric relation and decision synthesis capabilities"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python stdlib Decimal/hashlib/json/re contracts",
+          "live SQLite and RFC 9110 source pages used in qualification"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No third-party package is required; candidate is stdlib-only."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No broader semantic supplier is needed for exact substring and explicit arithmetic relation semantics."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "exact evidence substring support explicit decimal numeric relation integrity checked units"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Python stdlib Decimal regex hashlib evidence relation evaluator"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "deterministic evidence unit ID exact support numeric comparison without LLM"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current model independent claim relation evidence bridge"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+          "evidence": [
+            "public run 36682488104 and authored fail-closed tests"
+          ],
+          "qualification_evidence": [
+            "INDEPENDENT_VERIFIER: public PR162 run 36682488104"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact support and explicit arithmetic only; broader semantics stay unverified.",
+            "CAPABILITY_STRENGTH": "Provides the minimum typed bridge needed downstream.",
+            "WALL_CLOCK": "Already implemented and qualified.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Stdlib-only and fail-closed on tamper/unit mismatch/bad references.",
+            "VERIFIABILITY": "Exact blob locks, live two-domain V2 extraction, independent Decimal oracle, tamper control."
+          }
+        }
+      ],
+      "negative_search_summary": "No unresolved challenger dominates an already-qualified stdlib-only bridge for these deliberately narrow semantics.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_CANONICAL_PROMOTION",
+        "AFTER_DEPENDENCY_HASH_CHANGE"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:13:44Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VERIFICATION_CAPSULE_RUNNER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:13:44Z",
+            "evidence": [
+              "run 36682488104 completed successfully on a hosted Ubuntu runner"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "CURRENT_GENERIC_V2_EXTRACTION_STACK",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:13:44Z",
+            "evidence": [
+              "extractor fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+              "BM25 95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+              "provenance 1dc26e68d18010b66211d1d83f7b2024c8ad1fcf"
+            ],
+            "evidence_classes": [
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  },
+  "qualification": {
+    "status": "PASS",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 162,
+    "public_workflow_run_id": 36682488104,
+    "public_job_id": 109780804595,
+    "artifact_id": 11082521746,
+    "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+    "exact_blobs": {
+      "adapter": "d66a7eb30774f66160b698d8082947776888293d",
+      "tests": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+      "extractor": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+      "bm25": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+      "provenance": "1dc26e68d18010b66211d1d83f7b2024c8ad1fcf"
+    },
+    "authored_tests": "PASS_10_OF_10",
+    "live_domains": [
+      "sqlite.org",
+      "rfc-editor.org"
+    ],
+    "exact_support": "PASS",
+    "numeric_relation": "PASS_TRUE_AND_FALSE_ORACLE_OUTCOMES",
+    "real_v2_tamper_fail_closed": "PASS",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  }
+}
