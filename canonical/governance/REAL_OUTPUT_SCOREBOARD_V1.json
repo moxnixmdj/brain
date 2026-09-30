@@ -6,8 +6,8 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 3,
-    "verified_real_tasks_completed": 6,
+    "reusable_capabilities_inherited": 4,
+    "verified_real_tasks_completed": 7,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 1,
     "residual_gaps_localized": 8
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_RECURSIVE_OBS_FOR_PARENT_NUMERIC_RELATION_GAP__QUALIFY_REUSE_OF_EXISTING_DETERMINISTIC_SYMPY_ROUTE_BEFORE_BUILDING__NO_GEOPHYSICS_REPLAY",
+  "next_progress_event_target": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -356,12 +356,37 @@
       "claim_scope_exact": true,
       "parent_capability_promoted": false,
       "same_task_replay_allowed": false
+    },
+    {
+      "event_id": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_ACQUIRED_20260930",
+      "capability_id": "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+      "status": "VERIFIED_ACQUIRED__FRESH_CROSS_DOMAIN_EXECUTION_PASS",
+      "capability_package": "canonical/capabilities/frontier/MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1.json",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_ACQUISITION_20260930_V1.json",
+      "public_run_id": 36664102642,
+      "public_job_id": 109724968059,
+      "artifact_id": 11075158049,
+      "artifact_digest": "sha256:b47bbe491db198bcbd4c09b7a9e8cfeac95062989300eca8f8784c117a1222d1",
+      "real_task_domain": "DEMOGRAPHY_PUBLIC_STATISTICS",
+      "replacement_route": "native result refs + write_json_records + json.query.jq",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "REUSABLE_CAPABILITY_INHERITED",
+        "VERIFIED_REAL_TASK_COMPLETED",
+        "PRIOR_PARENT_NUMERIC_RELATION_BLOCKER_CLOSED",
+        "RETURN_TO_PARENT_FRONTIER"
+      ],
+      "fresh_reuse_passed": false,
+      "frontier_dependency_removed": false,
+      "parent_capability_promoted": false,
+      "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED"
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "PARENT_FRESH_GEOPHYSICS_TASK_FAILED__NUMERIC_RELATION_GAP_LOCALIZED",
+    "subcapability_status": "NUMERIC_RELATION_SUBCAPABILITY_ACQUIRED__NEW_PARENT_REAL_TASK_REQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
