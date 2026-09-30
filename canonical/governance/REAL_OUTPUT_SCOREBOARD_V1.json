@@ -6,8 +6,8 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 1,
-    "verified_real_tasks_completed": 4,
+    "reusable_capabilities_inherited": 2,
+    "verified_real_tasks_completed": 5,
     "fresh_reuse_passes": 1,
     "frontier_dependencies_removed": 1,
     "residual_gaps_localized": 5
@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "REPAIR_AND_REVERIFY_MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1_INPUT_CONTRACT_COMPATIBILITY_ON_A_NEW_FRESH_REAL_TASK__NO_REQUESTS_TASK_REPLAY",
+  "next_progress_event_target": "RECONCILE_TO_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__THEN_RUN_ONE_MATERIALLY_DISTINCT_FRESH_REUSE_TASK__NO_SPENT_TASK_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -232,12 +232,32 @@
       },
       "progress_credit": false,
       "reason": "Fresh real multi-step task falsified input-contract completeness of the claimed grounding capability scope."
+    },
+    {
+      "event_id": "MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFIED_20260930",
+      "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "status": "REQUALIFIED_AFTER_REGRESSION_REPAIR__REUSABLE_CAPABILITY_RESTORED__NEW_REAL_TASK_VERIFIED__FRESH_REUSE_COUNTER_NOT_RESTORED_IN_THIS_ACTION",
+      "capability_package": "canonical/capabilities/frontier/MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1.json",
+      "repair_merge_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
+      "exact_component_validation_run_id": 36651748631,
+      "real_task_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+      "fresh_real_run_id": 36652169397,
+      "artifact_id": 11070249875,
+      "artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1",
+      "model_dependency_count": 0,
+      "frontier_dependency_removed": false,
+      "parent_level_changes": [
+        "REUSABLE_CAPABILITY_INHERITED",
+        "VERIFIED_REAL_TASK_COMPLETED"
+      ],
+      "next_causal_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__FRESH_REUSE_REQUIRED",
+      "incremental_spend_usd": 0
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
-    "subcapability_status": "UNPROVEN",
+    "active_subcapability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "subcapability_status": "REQUALIFIED_ACQUIRED_VERIFIED__RECONCILIATION_PENDING",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
