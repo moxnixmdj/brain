@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__GENUINE_OPEN_ENDED_TASK_A_SPENT__TERMINAL_MISSION_IDENTITY_GAP_LOCALIZED",
+  "status": "FRONTIER_BAR_DEFINED__MISSION_IDENTITY_PROPAGATION_CANARY_PASS__FRESH_OPEN_ENDED_TASK_A_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__GENUINE_OPEN_ENDED_TASK_A_FAILED_DURING_AUTONOMOUS_ACQUISITION_MISSION_IDENTITY_PROPAGATION",
-  "residual_gap": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+  "obsolescence_status": "NOT_YET_PROVEN__CANONICAL_MISSION_IDENTITY_PROPAGATION_VALIDATED__FRESH_OPEN_ENDED_TASK_A_REQUIRED",
+  "residual_gap": "FRESH_MATERIALLY_DIFFERENT_GENUINE_OPEN_ENDED_TASK_A_REQUIRED",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -118,7 +118,7 @@
       "public_run_id": 36666659921
     }
   ],
-  "next_action": "REUSE_CANONICAL_ASTRA_MISSION_ENTRYPOINT_TO_PROPAGATE_RUNTIME_MISSION_IDENTITY__VALIDATE_WITH_FRESH_NON_PARENT_CANARY__THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A",
+  "next_action": "FREEZE_AND_EXECUTE_MATERIALLY_DIFFERENT_FRESH_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_A__CANONICAL_ASTRA_MISSION_ENTRYPOINT__NO_PREWIRED_RESEARCH_PLAN__STOP_ON_FIRST_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -158,8 +158,13 @@
     "exact_cause": "APT_ORIGIN_MISSION_PATH_INVALID + PYPI_ORIGIN_MISSION_PATH_INVALID after compile miss entered acquisition fallback",
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
-    "resolved": false,
-    "same_task_replay_allowed": false
+    "resolved": true,
+    "same_task_replay_allowed": false,
+    "resolution_scope": "ENTRYPOINT_AND_MISSION_IDENTITY_PROPAGATION_ONLY__PARENT_TASK_REMAINS_SPENT_AND_FAILED",
+    "resolution_evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_PATH_PROPAGATION_CANARY_20260930_V1.json",
+    "resolution_run_id": 36673079101,
+    "resolution_artifact_id": 11078367773,
+    "resolution_artifact_digest": "sha256:d2eb1bb1da0f1803474fbe883b11b64fca6dee53e408acadebccaa9144dc6791"
   },
   "historical_evidence_A_space_cargo": {
     "task": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
@@ -190,7 +195,7 @@
     }
   },
   "carrier_path_authority_correction": {
-    "status": "PR347_COMPILE_GAP_REVOKED__NONCANONICAL_HARNESS_BYPASS",
+    "status": "CANONICAL_CLI_MISSION_PATH_PROPAGATION_VALIDATED__FRESH_TASK_REQUIRED",
     "climate_task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
     "task_freshness": "SPENT__NO_REPLAY",
     "parent_task_A_credit": false,
@@ -200,7 +205,7 @@
     "diagnostic_authority": "QUARANTINED_DUPLICATE__PATH_BEHAVIOR_ONLY__ZERO_CAPABILITY_CREDIT",
     "diagnostic_observation": "CANONICAL_RUN_GOAL_CONTINUES_PAST_DIRECT_COMPILE_MISS_TO_CAPABILITY_ACQUISITION",
     "diagnostic_next_seam": "VALID_RUNTIME_MISSION_PATH_REQUIRED_BY_APT_AND_PYPI_AUTO_ACQUISITION",
-    "required_before_fresh_task": "CARRIER_MUST_INVOKE_PUBLIC_RUN_GOAL_WITH_A_REAL_MISSION_FILE_AND_VALID__runtime_mission_path",
+    "required_before_fresh_task": "SATISFIED_BY_NON_PARENT_CANARY_RUN_36673079101",
     "correction_evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json"
   },
   "open_ended_task_A": {
@@ -223,6 +228,21 @@
     "refined_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
     "refinement_evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_TASK_A_ACQUISITION_MISSION_IDENTITY_RECONCILIATION_20260930_V1.json",
     "refined_run_id": 36670981076,
-    "reason": "Compilation no-match is handled by the runtime's acquisition fallback; the later execution reached and failed at the acquisition mission-identity boundary."
+    "reason": "Compilation no-match is handled by the runtime's acquisition fallback; the later execution reached and failed at the acquisition mission-identity boundary.",
+    "resolved_by_non_parent_canary": true,
+    "resolution_evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_PATH_PROPAGATION_CANARY_20260930_V1.json",
+    "resolution_run_id": 36673079101
+  },
+  "mission_path_propagation_canary": {
+    "status": "PASS__NO_PARENT_CAPABILITY_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/CANONICAL_MISSION_PATH_PROPAGATION_CANARY_20260930_V1.json",
+    "public_run_id": 36673079101,
+    "job_id": 109752105558,
+    "artifact_id": 11078367773,
+    "artifact_digest": "sha256:d2eb1bb1da0f1803474fbe883b11b64fca6dee53e408acadebccaa9144dc6791",
+    "mission_id": "MISSION-PATH-PROPAGATION-CANARY-20260930-V1",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "parent_capability_promoted": false
   }
 }
