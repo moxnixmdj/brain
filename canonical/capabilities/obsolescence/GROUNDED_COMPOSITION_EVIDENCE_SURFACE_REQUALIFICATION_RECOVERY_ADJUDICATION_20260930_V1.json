@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_EVIDENCE_SURFACE_RECOVERY_ADJUDICATION_V1",
+  "status": "PASS",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "source_pr": 283,
+  "source_run_id": 36659637634,
+  "source_job_id": 109711314434,
+  "source_head_sha": "f2f906e35a1d56ee37beb44544d5a81a982e9de3",
+  "source_task_path": "canonical/tasks/COMPOSITION_REQUAL_EVIDENCE_SURFACE_20260930.json",
+  "source_task_git_blob": "70db3e3ba900df9479ed330b611a0f0bfa7c8647",
+  "source_workflow_conclusion": "failure",
+  "source_semantic_execution": "PASS",
+  "source_exact_route_bytes": "PASS",
+  "source_controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+  "source_planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+  "source_planner_model_last": null,
+  "source_producer_status": "DECIDED",
+  "source_selected_alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+  "source_verifier_verified": true,
+  "source_verifier_producer_independent": true,
+  "source_model_dependency_count": 0,
+  "source_causal_input_ref": {
+    "$result": {
+      "cycle": 0,
+      "field": "input_path"
+    }
+  },
+  "source_causal_result_ref": {
+    "$result": {
+      "cycle": 0,
+      "field": "output_path"
+    }
+  },
+  "source_causal_refs_distinct": true,
+  "first_failed_harness_assertion": "obsolete top-level composition_mode expectation after authoritative route changed to DETERMINISTIC_COMPOUND_ACTION_PLAN",
+  "harness_failure_is_capability_semantic_failure": false,
+  "recovery": {
+    "run_id": 36660108447,
+    "job_id": 109712770342,
+    "head_sha": "b69bddb3c82d64ea20edd12e416544e442c725a7",
+    "execution_replayed": false,
+    "producer_or_verifier_modules_imported": false,
+    "immutable_source_job_log_verified": true,
+    "independent_semantic_recompute": true,
+    "independent_selected_alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+    "result": "PASS",
+    "artifact_id": 11074221334,
+    "artifact_digest": "sha256:17fc8daf075b813fb00419887c4fdc4b8a2123dae6430744a89163b68dd7df60"
+  },
+  "promotion_predicate": "FRESH_MATERIALLY_DISTINCT_COMPOSITION_REQUALIFICATION_PASS",
+  "capability_credit_restored": true,
+  "parent_capability_credit": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "residual_gap": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP"
+}

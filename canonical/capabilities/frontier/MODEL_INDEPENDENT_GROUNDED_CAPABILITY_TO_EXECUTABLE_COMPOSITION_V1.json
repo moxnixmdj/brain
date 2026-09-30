@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-  "status": "DIRECT_COMPILER_REPAIR_COMPLETE_AND_VALIDATED__AWAIT_FRESH_REAL_REQUALIFICATION",
+  "status": "VERIFIED_ACQUIRED_AFTER_DIRECT_COMPILER_REPAIR__FRESH_REQUALIFICATION_PASS",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
@@ -28,11 +28,11 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "REPAIR_COMPLETE__CREDIT_WITHHELD",
-  "next_action": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_OR_PR277_REPLAY__INDEPENDENT_ORACLE",
-  "obsolescence_status": "REOPENED_PENDING_FRESH_REQUALIFICATION",
-  "winning_route": null,
-  "capability_strength_result": "PRIOR_REAL_TASKS_PRESERVED__PATH_PROVENANCE_AND_DIRECT_COMPILER_BINDING_SEAMS_REPAIRED_AND_EXACTLY_VALIDATED__FRESH_REQUALIFICATION_UNSPENT",
+  "current_status": "VERIFIED_ACQUIRED_RESTORED",
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+  "obsolescence_status": "VERIFIED_ACQUIRED__RETURN_TO_PARENT_FRONTIER",
+  "winning_route": "grounded executable composition + shared proposal-binding authority + direct compound compiler causal effect-result lowering + deterministic capability graph execution",
+  "capability_strength_result": "PRESERVED_PRIOR_REAL_TASKS_PLUS_ALL_KNOWN_BINDING_REPAIRS_PLUS_FRESH_EVIDENCE_SURFACE_REQUALIFICATION_AND_INDEPENDENT_NO_REPLAY_RECOVERY_PASS",
   "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
   "independent_verification": {
@@ -52,6 +52,13 @@
       "artifact_digest": "sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a",
       "materially_distinct": true,
       "producer_independent": true
+    },
+    "post_direct_compiler_fresh_requalification": {
+      "source_execution_run_id": 36659637634,
+      "no_replay_recovery_run_id": 36660108447,
+      "producer_independent": true,
+      "recovery_artifact_id": 11074221334,
+      "recovery_artifact_digest": "sha256:17fc8daf075b813fb00419887c4fdc4b8a2123dae6430744a89163b68dd7df60"
     }
   },
   "inheritance_path": [
@@ -60,8 +67,8 @@
     "canonical/runtime/capability_planner.py",
     "canonical/runtime/astra_runtime.py"
   ],
-  "residual_gap": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
-  "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_REPAIR_VALIDATION_20260930_V1.json",
+  "residual_gap": null,
+  "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
   "component_verification": {
     "status": "PASS",
     "public_run_id": 36647904127,
@@ -116,6 +123,25 @@
     "pr281_validation_job_id": 109707559771,
     "direct_causal_binding_regression": "PASS",
     "full_goal_compiler_regression_file": "PASS",
-    "capability_credit_restored": false
+    "capability_credit_restored": true
+  },
+  "post_direct_compiler_fresh_requalification": {
+    "status": "PASS_RECOVERED_FROM_PRESERVED_PRIMARY_EVIDENCE",
+    "source_pr": 283,
+    "public_run_id": 36659637634,
+    "public_job_id": 109711314434,
+    "source_workflow_conclusion": "FAILURE_FROM_OBSOLETE_POST_SUCCESS_HARNESS_ASSERTION",
+    "capability_execution_failure": false,
+    "selected_alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+    "direct_compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+    "causal_refs_distinct": true,
+    "model_dependency_count": 0,
+    "recovery_run_id": 36660108447,
+    "recovery_job_id": 109712770342,
+    "recovery_artifact_id": 11074221334,
+    "recovery_artifact_digest": "sha256:17fc8daf075b813fb00419887c4fdc4b8a2123dae6430744a89163b68dd7df60",
+    "execution_replayed": false,
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
+    "capability_credit_restored": true
   }
 }

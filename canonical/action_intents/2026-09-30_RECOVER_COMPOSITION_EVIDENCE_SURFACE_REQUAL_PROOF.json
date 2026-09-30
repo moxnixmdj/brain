@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECOVER-COMPOSITION-EVIDENCE-SURFACE-REQUAL-PROOF-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "FRESH_TASK_SEMANTICS_PASSED_BUT_WORKFLOW_ABORTED_ON_OBSOLETE_HARNESS_ASSERTION_BEFORE_FINAL_EVIDENCE_ADJUDICATION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::FRESH_TASK_SEMANTICS_PASSED_BUT_WORKFLOW_ABORTED_ON_OBSOLETE_HARNESS_ASSERTION_BEFORE_FINAL_EVIDENCE_ADJUDICATION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Recover and independently adjudicate the preserved semantic result from run 36659637634 without replaying the task; if and only if the recovered primary evidence and independent recomputation pass, restore composition capability/fresh-reuse credit once.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR283 exact fresh task and intent preserved on main dd7878cf466c46c73561b865b45b7a857aebd2ce",
+    "source run 36659637634 exact route bytes PASS",
+    "source job 109711314434 trace shows producer DECIDED correct alternative",
+    "source job trace shows producer-independent verifier verified=true",
+    "source job direct compiler inputs preserve cycle0 input_path/output_path causality",
+    "source workflow first failed assertion is exact Python line 31 checking obsolete composition_mode",
+    "source task must not be replayed"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Do not rerun Brain or the source task. Independently read the preserved source job log, verify the exact semantic trace facts, recompute the typed decision from the immutable task input without importing producer/verifier modules, and classify line-31 harness failure. Promote only if all recovered predicates pass.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "new_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "relationship": "SAME_TARGET_EVIDENCE_RECOVERY_AFTER_HARNESS_ONLY_FAILURE",
+    "evidence": [
+      "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_PRIMARY_EVIDENCE_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "dd7878cf466c46c73561b865b45b7a857aebd2ce",
+    "real_outcome": "Resolve capability truth from already-spent primary evidence without rerunning a semantically successful task.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Determine whether run 36659637634 satisfies the fresh requalification bar despite a stale post-success harness assertion.",
+      "proxy_goals_deleted": [
+        "rerun PR283",
+        "edit task wording",
+        "force green workflow conclusion",
+        "new capability task",
+        "new repair"
+      ],
+      "surviving_necessity": "Recover the missing final evidence adjudication only."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "source public job log",
+        "typed task input",
+        "producer-independent verifier trace",
+        "recovery ladder in truth-first law"
+      ],
+      "external_existing_routes_checked": [
+        "No external capability route is needed; this is proof recovery."
+      ],
+      "capability_work_deleted": [
+        "no Brain runtime execution",
+        "no model",
+        "no provider substitution",
+        "no code repair"
+      ],
+      "surviving_gap": "Independent final adjudication of preserved primary evidence."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence-harness mismatch after successful semantic task execution.",
+      "delete_bypass_substitute_options": [
+        "Delete obsolete harness-status requirement",
+        "Recover primary evidence",
+        "Reprove only missing final oracle predicate"
+      ],
+      "surviving_causal_blocker": "MISSING_FINAL_ADJUDICATION_ONLY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECOVER_JOB_LOG_AND_REPROVE_MISSING_ORACLE_ONLY",
+        "RERUN_SOURCE_TASK"
+      ],
+      "losing_routes_reason": "Rerunning would violate one-shot freshness and adds no semantic information; preserved primary evidence already contains the completed task and independent verifier result.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Adjudication must independently recompute the typed decision and verify exact log facts. It must not invoke Brain runtime."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "source-task replay",
+        "new composition task before adjudication"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "evidence recovery from failed harness",
+        "semantic result versus workflow status distinction"
+      ],
+      "fresh_reuse_plan": "Use the already-spent fresh task if adjudication proves it; otherwise preserve the unresolved predicate without replay."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse exact job log",
+        "reuse exact task input",
+        "reuse line-numbered workflow"
+      ],
+      "search_stop_decision": "The missing proof is fully localized; execution replay or further search is inferior.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to proof recovery."
+    },
+    "routes_considered": [
+      "RECOVER_JOB_LOG_AND_REPROVE_MISSING_ORACLE_ONLY",
+      "RERUN_SOURCE_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RERUN_SOURCE_TASK"
+    ],
+    "selected_surviving_route": "RECOVER_JOB_LOG_AND_REPROVE_MISSING_ORACLE_ONLY",
+    "why_selected_route_is_fastest_sufficient": "It preserves freshness, uses existing primary evidence, and tests only the one missing adjudication predicate.",
+    "expected_parent_level_state_change": "Recover and independently adjudicate the preserved semantic result from run 36659637634 without replaying the task; if and only if the recovered primary evidence and independent recomputation pass, restore composition capability/fresh-reuse credit once.",
+    "stop_condition": "Do not rerun Brain or the source task. Independently read the preserved source job log, verify the exact semantic trace facts, recompute the typed decision from the immutable task input without importing producer/verifier modules, and classify line-31 harness failure. Promote only if all recovered predicates pass.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER proof recovery selects no external capability route."
+    }
+  }
+}
