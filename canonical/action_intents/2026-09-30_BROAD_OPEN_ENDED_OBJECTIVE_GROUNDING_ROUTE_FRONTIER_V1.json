@@ -1,0 +1,294 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECOMPUTE-BROAD-OPENENDED-OBJECTIVE-GROUNDING-ROUTE-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Reclassify the observed compile no-match as a path-specific direct-compiler carrier stop, select the already-verified astra_runtime.run_goal generic grounding/composition/acquisition path as the minimum surviving route, preserve the spent climate task as no-replay, and advance to a materially different fresh open-ended task on that public runtime entrypoint. No runtime repair or parent promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main exact base dc38bf8370d692d3f18a5aff446d26933f9dd03a after merged PR347",
+    "canonical spent Task A terminal reconciliation identifies unresolved subgoal index 0 and forbids replay",
+    "authoritative carrier run script run_pr328_openended_climate_task_a_once.py calls goal_compiler.compile_goal directly before runtime execution",
+    "canonical astra_runtime.py catches compile no-match/subgoal-unresolved in the normal run_goal path and then invokes plain-goal bound grounding, grounded executable composition, and bounded capability acquisition",
+    "plain_goal.bound_capability.grounding.stdlib is already VERIFIED_BOUND_CAPABILITY and the parent frontier records fresh real and materially distinct reuse passes",
+    "grounded executable composition is already requalified with fresh reuse evidence"
+  ],
+  "evidence_presence_classification": "EXISTING_VERIFIED_INHERITED_ROUTE_BYPASSED_BY_TEST_CARRIER_ENTRYPOINT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after canonical route-frontier reconciliation. Do not replay the spent Mauna Loa task and do not edit runtime. Next lawful execution is to freeze one materially different genuine open-ended Task A on exact new main and execute it exactly once through astra_runtime.run_goal with model planning disabled; preserve its first causal gap.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Reach genuine model-independent open-ended research execution by deleting path-specific precompile stops and reusing the strongest already-verified generic runtime route before any new repair.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Make the next fresh open-ended parent task reach the generic model-independent grounding/composition/acquisition machinery rather than terminate at direct compiler lexical matching.",
+      "proxy_goals_deleted": [
+        "repair goal_compiler merely to make the spent climate wording compile",
+        "replay the Mauna Loa task",
+        "add task-specific climate/source/method literals"
+      ],
+      "surviving_necessity": "Use the existing generic runtime public entrypoint and spend freshness only on a materially different open-ended task."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/astra_runtime.py normal run_goal compile-failure fallback",
+        "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+        "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+        "canonical/runtime/capability_proposal_generators.py",
+        "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+        "verified parent subcapabilities recorded in OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "public verification-capsule-runner authoritative Task A carrier script",
+        "public runner successor script using runtime.run_goal without direct compiler precompile"
+      ],
+      "capability_work_deleted": [
+        "new broad-objective compiler implementation",
+        "task-specific research decomposer",
+        "new grounding engine",
+        "new composition engine",
+        "model/local-model planner dependency"
+      ],
+      "surviving_gap": "FRESH_OPEN_ENDED_REAL_TASK_REQUIRED_TO_TEST_EXISTING_RUN_GOAL_ROUTE_END_TO_END"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC. The spent carrier called goal_compiler.compile_goal directly and made compiler success a hard precondition. The canonical normal run_goal path already catches that class of compile failure and proceeds to verified grounding/composition/acquisition.",
+      "delete_bypass_substitute_options": [
+        "DELETE same-task replay",
+        "BYPASS direct goal_compiler precompile in future parent carriers",
+        "REUSE astra_runtime.run_goal",
+        "REUSE verified plain-goal grounding and grounded executable composition",
+        "REPAIR only if a fresh materially different task proves a remaining generic gap"
+      ],
+      "surviving_causal_blocker": "FRESH_OPEN_ENDED_REAL_TASK_REQUIRED_TO_TEST_EXISTING_RUN_GOAL_ROUTE_END_TO_END"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "BYPASS_DIRECT_COMPILER_PRECOMPILE__REUSE_ASTRA_RUNTIME_RUN_GOAL_GENERIC_GROUNDING",
+        "GENERIC_GOAL_COMPILER_TO_GROUNDER_DELEGATION_REPAIR",
+        "TASK_SPECIFIC_OPEN_ENDED_RESEARCH_COMPILER_RULE",
+        "MODEL_OR_LOCAL_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "A generic compiler delegation duplicates behavior already present in run_goal and adds mutation risk. Task-specific rules violate the parent scope and anti-leakage contract. Model routes violate model_dependency_count=0. The bypass/reuse route changes no runtime bytes and reaches more existing verified machinery.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No same-task execution is allowed. Static route closure is sufficient for this no-mutation selection; the next materially different fresh open-ended parent task is the direct end-to-end validation."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any compiler repair justified only by the spent Mauna Loa carrier's direct precompile failure",
+        "any same-task carrier replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+        "model-independent bounded capability acquisition in astra_runtime.run_goal"
+      ],
+      "fresh_reuse_plan": "Freeze a materially different genuine open-ended Task A only after this route selection is canonical, then execute exactly once through astra_runtime.run_goal with ASTRA_DISABLE_MODEL_PLANNER=1 and preserve the first causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR347 exact compile-gap reconciliation",
+        "reused verified grounding/composition qualification",
+        "reused public carrier source instead of replaying the task"
+      ],
+      "search_stop_decision": "The incumbent already contains the required generic fallback and verified grounding/composition. No external supplier can dominate a zero-runtime-change route for an internal entrypoint bypass; additional supplier search would not reduce the causal path.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Exact current main and the authoritative public carrier/runtime sources were re-read immediately after PR347 merged."
+    },
+    "routes_considered": [
+      "BYPASS_DIRECT_COMPILER_PRECOMPILE__REUSE_ASTRA_RUNTIME_RUN_GOAL_GENERIC_GROUNDING",
+      "GENERIC_GOAL_COMPILER_TO_GROUNDER_DELEGATION_REPAIR",
+      "TASK_SPECIFIC_OPEN_ENDED_RESEARCH_COMPILER_RULE",
+      "MODEL_OR_LOCAL_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_TASK_REPLAY",
+      "DIRECT_COMPILER_AS_HARD_PARENT_ENTRYPOINT",
+      "TASK_SPECIFIC_COMPILER_PATCH",
+      "MODEL_DEPENDENT_PLANNING"
+    ],
+    "selected_surviving_route": "BYPASS_DIRECT_COMPILER_PRECOMPILE__REUSE_ASTRA_RUNTIME_RUN_GOAL_GENERIC_GROUNDING",
+    "why_selected_route_is_fastest_sufficient": "It uses already-canonical verified code, requires zero runtime mutation and zero incremental spend, preserves fail-closed behavior, and deletes the exact path-specific stop that prevented the spent task from reaching existing grounding/composition/acquisition.",
+    "expected_parent_level_state_change": "Reclassify the observed compile no-match as a path-specific direct-compiler carrier stop, select the already-verified astra_runtime.run_goal generic grounding/composition/acquisition path as the minimum surviving route, preserve the spent climate task as no-replay, and advance to a materially different fresh open-ended task on that public runtime entrypoint. No runtime repair or parent promotion.",
+    "stop_condition": "Stop after canonical route-frontier reconciliation. Do not replay the spent Mauna Loa task and do not edit runtime. Next lawful execution is to freeze one materially different genuine open-ended Task A on exact new main and execute it exactly once through astra_runtime.run_goal with model planning disabled; preserve its first causal gap.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:58:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "DIRECT_GOAL_COMPILER_PRECOMPILE_THEN_CONTROLLER_EXECUTION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/astra_runtime.py run_goal compile-failure fallback to grounding/composition/acquisition",
+          "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py verified generic grounding",
+          "canonical/runtime/bound_capabilities/grounded_executable_composition.py verified generic composition",
+          "canonical frontier verified-subcapability receipts"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "public verification-capsule-runner run_pr328_openended_climate_task_a_once.py direct compiler precompile",
+          "public verification-capsule-runner run_pr337_parent_climate_open_taska_once.py runtime.run_goal entrypoint"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [
+        {
+          "route": "BYPASS_DIRECT_COMPILER_PRECOMPILE__REUSE_ASTRA_RUNTIME_RUN_GOAL_GENERIC_GROUNDING",
+          "evidence": [
+            "normal run_goal catches compiler no-match/subgoal-unresolved then invokes bound grounding and composition before acquisition"
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED: plain-goal grounding and grounded-composition capabilities are already fresh-reuse qualified",
+            "OFFICIAL_PRIMARY: authoritative spent carrier source proves direct compiler precompile caused the observed early stop"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves canonical fail-closed fallback ordering and does not invent task semantics.",
+            "CAPABILITY_STRENGTH": "Reaches grounding, composition, and bounded acquisition already absent from the spent carrier path.",
+            "WALL_CLOCK": "No implementation required before a fresh task.",
+            "INCREMENTAL_COST": "$0 runtime change and $0 required execution spend.",
+            "RELIABILITY": "Uses already-verified canonical runtime components.",
+            "VERIFIABILITY": "Source-level route is explicit; next fresh task provides direct end-to-end adjudication."
+          }
+        },
+        {
+          "route": "GENERIC_GOAL_COMPILER_TO_GROUNDER_DELEGATION_REPAIR",
+          "evidence": [
+            "possible internal refactor"
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED: run_goal already performs the delegation after compile failure"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could preserve semantics but duplicates an existing fallback.",
+            "CAPABILITY_STRENGTH": "No stronger than the selected existing route.",
+            "WALL_CLOCK": "Requires code, tests, carrier sync, and requalification.",
+            "INCREMENTAL_COST": "Monetary $0 but higher compute/context/time.",
+            "RELIABILITY": "Adds regression surface.",
+            "VERIFIABILITY": "Requires new repair evidence."
+          }
+        },
+        {
+          "route": "TASK_SPECIFIC_OPEN_ENDED_RESEARCH_COMPILER_RULE",
+          "evidence": [
+            "would make one wording compile"
+          ],
+          "qualification_evidence": [
+            "canonical Task A anti-leakage and no-task-specific-runtime-patch rules"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Would contaminate the benchmark and overfit a spent task.",
+            "CAPABILITY_STRENGTH": "Does not establish general open-ended capability.",
+            "WALL_CLOCK": "Unnecessary implementation.",
+            "INCREMENTAL_COST": "Unnecessary.",
+            "RELIABILITY": "Brittle lexical special case.",
+            "VERIFIABILITY": "Freshness invalid for same task."
+          }
+        }
+      ],
+      "negative_search_summary": "No external supplier search is material because the causal choice is between two entrypoints over the same already-verified canonical runtime. The zero-mutation run_goal route strictly dominates adding a new supplier or duplicate grounding implementation.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "BYPASS_DIRECT_COMPILER_PRECOMPILE__REUSE_ASTRA_RUNTIME_RUN_GOAL_GENERIC_GROUNDING",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_SCARCE_GATE_SPEND",
+        "BEFORE_RUNTIME_REPAIR"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:58:00Z",
+        "max_age_hours": 2,
+        "selected_route": "BYPASS_DIRECT_COMPILER_PRECOMPILE__REUSE_ASTRA_RUNTIME_RUN_GOAL_GENERIC_GROUNDING",
+        "status": "READY_FOR_FRESH_TASK_FREEZE__NO_TASK_EXECUTION_AUTHORIZED_BY_THIS_ACTION",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CANONICAL_ASTRA_RUNTIME_RUN_GOAL_AND_VERIFIED_GROUNDING_COMPOSITION_CLOSURE",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:58:00Z",
+            "evidence": [
+              "main exact base dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+              "verified subcapability receipts referenced by parent frontier",
+              "current runtime source route inspected"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_FRESH_TASK_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY_FOR_FREEZE_ONLY__EXECUTION_MUST_REPREFLIGHT_AFTER_TASK_BRANCH",
+            "observed_at_utc": "2026-09-30T04:58:00Z",
+            "evidence": [
+              "public verification-capsule-runner is reachable and recent workflow runs completed on Ubuntu 24.04",
+              "fresh task execution is not authorized until exact task/runtime closure is frozen on the post-reconciliation base"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
