@@ -1,0 +1,180 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
+  "decision_id": "COMPOSITION-REQUAL-CANONICAL-AUTHORITY-20260930",
+  "question": "Which source must Project Brain treat as authoritative current state for exact-base planning and capability promotion decisions?",
+  "alternatives": [
+    {
+      "id": "PRIVATE_GITHUB_MAIN",
+      "label": "Private GitHub repository moxnixmdj/brain main branch at an exact commit"
+    },
+    {
+      "id": "DRIVE_EVIDENCE_MIRROR",
+      "label": "Google Drive evidence mirror"
+    },
+    {
+      "id": "CHAT_MEMORY_SUMMARY",
+      "label": "Chat or memory summary"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "GITHUB_CANONICAL",
+      "alternative": "PRIVATE_GITHUB_MAIN",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Source must be the declared canonical Brain authority.",
+      "provenance": [
+        {
+          "source": "Project Brain canonical architecture",
+          "ref": "private GitHub repo moxnixmdj/brain is canonical authority"
+        }
+      ]
+    },
+    {
+      "id": "GITHUB_EXACT_BASE",
+      "alternative": "PRIVATE_GITHUB_MAIN",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Source must support exact immutable commit binding for fail-closed actions.",
+      "provenance": [
+        {
+          "source": "Recursive OBS contract",
+          "ref": "canonical_base_commit exact 40-hex binding"
+        }
+      ]
+    },
+    {
+      "id": "GITHUB_MACHINE_READABLE",
+      "alternative": "PRIVATE_GITHUB_MAIN",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Source must expose current canonical files to machine checks.",
+      "provenance": [
+        {
+          "source": "Live Brain runtime",
+          "ref": "GitHub contents and commit APIs used by trusted guard"
+        }
+      ]
+    },
+    {
+      "id": "DRIVE_NOT_CANONICAL",
+      "alternative": "DRIVE_EVIDENCE_MIRROR",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Source must be the declared canonical authority rather than an evidence mirror.",
+      "provenance": [
+        {
+          "source": "Project Brain architecture",
+          "ref": "Drive is evidence mirror, GitHub is canonical"
+        }
+      ]
+    },
+    {
+      "id": "DRIVE_EXACT_BASE",
+      "alternative": "DRIVE_EVIDENCE_MIRROR",
+      "state": "UNKNOWN",
+      "required": true,
+      "description": "Source must provide the exact canonical commit identity used for base binding.",
+      "provenance": [
+        {
+          "source": "Project Brain architecture",
+          "ref": "Drive evidence mirror is not the authoritative Git commit surface"
+        }
+      ]
+    },
+    {
+      "id": "MEMORY_NOT_CANONICAL",
+      "alternative": "CHAT_MEMORY_SUMMARY",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Summaries and memory must not override live canonical state.",
+      "provenance": [
+        {
+          "source": "Critical-path gate",
+          "ref": "summary_and_memory_non_authoritative"
+        }
+      ]
+    },
+    {
+      "id": "MEMORY_EXACT_BASE",
+      "alternative": "CHAT_MEMORY_SUMMARY",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Source must support exact immutable base commit identity.",
+      "provenance": [
+        {
+          "source": "Critical-path gate",
+          "ref": "live canonical refresh and exact-base binding required"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E_GH_AUTH",
+      "alternative": "PRIVATE_GITHUB_MAIN",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "canonical_authority",
+      "claim": "The private GitHub repository is the canonical Brain authority.",
+      "provenance": [
+        {
+          "source": "Project Brain architecture",
+          "ref": "moxnixmdj/brain"
+        }
+      ]
+    },
+    {
+      "id": "E_GH_GUARD",
+      "alternative": "PRIVATE_GITHUB_MAIN",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "trusted_guard",
+      "claim": "Trusted action validation binds changes to exact Git commits and reads canonical files from the repository.",
+      "provenance": [
+        {
+          "source": "canonical/runtime/enforce_goal_hierarchy.py",
+          "ref": "exact-base binding and live canonical state"
+        }
+      ]
+    },
+    {
+      "id": "E_DRIVE_MIRROR",
+      "alternative": "DRIVE_EVIDENCE_MIRROR",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "authority_role",
+      "claim": "Drive is an evidence mirror rather than canonical authority.",
+      "provenance": [
+        {
+          "source": "Project Brain architecture",
+          "ref": "canonical GitHub plus Drive evidence mirror"
+        }
+      ]
+    },
+    {
+      "id": "E_MEMORY_NONAUTH",
+      "alternative": "CHAT_MEMORY_SUMMARY",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "anti_stale_state",
+      "claim": "Memory and summaries are non-authoritative and must yield to live canonical state.",
+      "provenance": [
+        {
+          "source": "Brain boot requirements",
+          "ref": "summary_and_memory_non_authoritative=true"
+        }
+      ]
+    }
+  ],
+  "policy": {
+    "minimum_support_ratio": 0.6,
+    "maximum_conflict_ratio": 0.5,
+    "minimum_independent_support_groups": 2,
+    "minimum_net_margin": 0.1
+  }
+}
