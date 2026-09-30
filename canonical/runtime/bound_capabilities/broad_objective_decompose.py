@@ -19,7 +19,9 @@ _BROAD_PREFIX=re.compile(
 _EXPLICIT_ACTION=re.compile(
     r"\b(?:using\s+https?://|https?://|save\s+.+?\.(?:json|csv|md|txt)|"
     r"extract\s+json\s+path|create\s+.+?\.(?:json|csv|md|txt)|"
-    r"run\s+|execute\s+|open\s+https?://)\b",
+    r"open\s+https?://|(?:run|execute)\s+(?:`|python(?:3)?\b|bash\b|sh\b|"
+    r"curl\b|wget\b|jq\b|git\b|node\b|npm\b|npx\b|pip(?:3)?\b|"
+    r"apt(?:-get)?\b|docker\b|sqlite3\b))",
     re.IGNORECASE,
 )
 
