@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-PR304-SPENT-EXECUTION-RECEIPT-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PR304_CANONICAL_EXECUTION_STATE_FALSE_UNSPENT__PUBLIC_ONE_SHOT_RECEIPT_PROVES_SPENT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PR304_CANONICAL_EXECUTION_STATE_FALSE_UNSPENT__PUBLIC_ONE_SHOT_RECEIPT_PROVES_SPENT::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Correct only PR304 execution-state metadata: preserve its exactly-once failed public execution as spent/no-replay evidence while retaining zero open-ended parent-promotion credit. Do not change the active parent blocker, next action, counters, runtime, or capability claims.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current exact hardened main 797d5fbea5f230a31044006755beb98ae387134b",
+    "merged PR318 scope correction and canonical evidence record",
+    "Brain PR304 corrected metadata marks the task SPENT FAIL / SCOPE-INSUFFICIENT / NO REPLAY",
+    "public runner run 36669136068 job 109740159666 executed the frozen PR304 producer exactly once",
+    "artifact 11077363706 digest sha256:b8463686e9555d941962c203d15e1c8af7fdb1c510a4617325c4e5d77c43c0a1 preserves the terminal receipt",
+    "terminal receipt records execution_count=1, task_executed=true, FAIL_FIRST_CAUSAL_GAP, model_dependency_count=0, parent_task_completed=false, independent_oracle_executed=false",
+    "merged PR329 fail-closed cognition provenance and target-mirror hardening"
+  ],
+  "evidence_presence_classification": "PRIMARY_RECEIPT_CONTRADICTS_CANONICAL_METADATA",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Replace only the false PR304 unspent metadata with the exact one-shot spent receipt and explicit no-replay state. Award zero capability/scoreboard credit and perform no execution.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "797d5fbea5f230a31044006755beb98ae387134b",
+    "real_outcome": "Make canonical execution state agree with the primary public one-shot receipt before any next parent task is admitted.",
+    "required_capability": "PRIMARY_EXECUTION_RECEIPT_TRUTHFUL_RECONCILIATION",
+    "obs_goal": {
+      "real_outcome": "Remove the false possibility that spent PR304 could ever be treated as unspent or replayable.",
+      "proxy_goals_deleted": [
+        "repair PR304",
+        "replay PR304",
+        "award capability credit",
+        "change the current parent frontier"
+      ],
+      "surviving_necessity": "Canonical evidence must record exactly-one execution and no-replay because the primary runner receipt proves the task was spent."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR304 Brain metadata",
+        "public runner run 36669136068",
+        "artifact 11077363706",
+        "merged PR318 correction record",
+        "merged PR329 provenance firewall"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no runtime change",
+        "no new carrier",
+        "no new task",
+        "no benchmark",
+        "no replay"
+      ],
+      "surviving_gap": "One canonical evidence field falsely says PR304 was unspent."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence bookkeeping contradiction, not a runtime capability defect.",
+      "delete_bypass_substitute_options": [
+        "replace false unspent label with exact primary receipt",
+        "preserve scope-insufficient judgment",
+        "preserve no-replay"
+      ],
+      "surviving_causal_blocker": "PR304_CANONICAL_EXECUTION_STATE_FALSE_UNSPENT__PUBLIC_ONE_SHOT_RECEIPT_PROVES_SPENT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CORRECT_CANONICAL_METADATA_FROM_PRIMARY_RECEIPT",
+        "IGNORE_CONTRADICTION",
+        "REEXECUTE_PR304"
+      ],
+      "losing_routes_reason": "Ignoring the contradiction leaves a replay hazard; reexecution would violate the one-shot contract. Metadata correction is sufficient.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution is permitted or needed. The public workflow/job/artifact receipt is the primary oracle for whether PR304 executed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any queue or agent interpretation that PR304 remains unspent",
+        "any PR304 replay plan"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "one-shot receipt provenance",
+        "spent-task no-replay accounting"
+      ],
+      "fresh_reuse_plan": "After this correction, return to the current genuinely open-ended Task A frontier on a fresh exact base."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact runner receipt",
+        "reused PR304 corrected PR metadata",
+        "reused PR318 scope adjudication"
+      ],
+      "search_stop_decision": "Execution count is directly decided by the primary runner receipt; further search cannot improve the fact.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to evidence-only reconciliation."
+    },
+    "routes_considered": [
+      "CORRECT_CANONICAL_METADATA_FROM_PRIMARY_RECEIPT",
+      "IGNORE_CONTRADICTION",
+      "REEXECUTE_PR304"
+    ],
+    "deleted_or_bypassed_paths": [
+      "IGNORE_CONTRADICTION",
+      "REEXECUTE_PR304",
+      "PR304_REPAIR_AS_CURRENT_FRONTIER"
+    ],
+    "selected_surviving_route": "CORRECT_CANONICAL_METADATA_FROM_PRIMARY_RECEIPT",
+    "why_selected_route_is_fastest_sufficient": "It repairs the exact false fact using primary evidence with no execution, no runtime change, no cost, and no frontier drift.",
+    "expected_parent_level_state_change": "No parent capability state change. PR304 is explicitly spent/no-replay; the open-ended Task A blocker remains unchanged.",
+    "stop_condition": "Commit only the spent receipt correction and then return to the current parent Task A.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Primary execution receipt reconciliation only; no external implementation route is selected."
+    }
+  }
+}
