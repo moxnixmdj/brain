@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-MISSION-PATH-PYPI-CANARY-CBOR-001",
+  "purpose": "Fresh non-parent canary for the current frontier blocker. Prove that the canonical ASTRA mission entrypoint propagates a real origin mission path into autonomous PyPI acquisition before any fresh parent task is frozen.",
+  "goal": "Create canonical/astra_runtime/tmp/MISSION_PATH_PYPI_CANARY_SOURCE.json containing exactly three records with fields id and text: 1 alpha, 2 beta, 3 gamma. Using a Python library from PyPI discovered by the Brain, encode those exact records as CBOR and save canonical/astra_runtime/tmp/MISSION_PATH_PYPI_CANARY.cbor. Independently decode the CBOR artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/MISSION_PATH_PYPI_CANARY_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "execute-fresh-non-parent-mission-path-canary",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "parent_capability_credit": false,
+    "non_parent_canary": true,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "model_controller_required": false,
+    "external_python_library_acquisition_allowed": true,
+    "required_supplier_class": "pypi_python_library",
+    "acceptance": "Origin mission path must be canonical and non-empty; APT_ORIGIN_MISSION_PATH_INVALID and PYPI_ORIGIN_MISSION_PATH_INVALID are forbidden terminal causes."
+  }
+}
