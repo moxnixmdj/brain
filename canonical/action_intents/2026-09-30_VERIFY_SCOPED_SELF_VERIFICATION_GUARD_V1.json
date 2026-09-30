@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
   "action_id": "VERIFY-SCOPED-SELF-VERIFICATION-GUARD-20260930-V1",
-  "status": "AUTHORIZED_EXECUTION",
+  "status": "EXECUTED_PASS__SCOPED_COMPONENT_PROMOTED",
   "canonical_generation": "2026-09-30-opus55-capability-internalization-v6",
   "canonical_base_commit": "414c5232880033f75675b0953653a9d5991a8161",
   "capability_target": "OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1",
@@ -117,5 +117,13 @@
       "discovery_required": false,
       "not_applicable_reason": "The target mechanism is already Brain-owned and no external supplier is needed."
     }
+  },
+  "execution_result": {
+    "status": "PASS__13_OF_13",
+    "verification": "canonical/capabilities/opus55/OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_FRESH_VERIFICATION_V1.json",
+    "package": "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json",
+    "reasoning": "canonical/reasoning/2026-09-30_SCOPED_SELF_VERIFICATION_RECOVERY_PROMOTION_V1.json",
+    "whole_family_promoted": false,
+    "incremental_spend_usd": 0
   }
 }
