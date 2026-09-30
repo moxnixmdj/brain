@@ -184,6 +184,76 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
             ["external.unverified.ready"],
         )
 
+    def test_registry_has_no_known_provider_backed_path_without_explicit_binding(self):
+        raw=__import__("json").loads(
+            (ROOT/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text(encoding="utf-8")
+        )
+        registry=real_compiler._platform_admissible_registry(raw["capabilities"])
+        providers={}
+        for cid,entry in registry.items():
+            for effect in entry.get("provides") or []:
+                providers.setdefault(str(effect),[]).append(cid)
+
+        violations=[]
+        for cid,entry in registry.items():
+            upstream=[
+                provider
+                for required in (entry.get("requires") or [])
+                for provider in providers.get(str(required),[])
+                if provider!=cid
+            ]
+            if not upstream:
+                continue
+            placeholders={
+                str(x)
+                for x in real_compiler._placeholders(entry.get("action_template") or {})
+                if str(x).endswith("_path") or str(x).endswith("_paths")
+            }
+            if not placeholders:
+                continue
+            declared=set((entry.get("proposal_bindings") or {}).keys())
+            missing=sorted(placeholders-declared)
+            if missing:
+                violations.append({
+                    "capability_id":cid,
+                    "upstream":sorted(set(upstream)),
+                    "missing_path_bindings":missing,
+                })
+        self.assertEqual(violations,[],violations)
+
+        registry_raw=raw["capabilities"]
+        self.assertEqual(
+            registry_raw["knowledge.status.assert"]["proposal_bindings"]["assessment_path"],
+            {
+                "type":"effect_result",
+                "effect":"knowledge.assessment.available",
+                "field":"output_path",
+                "container":"scalar",
+            },
+        )
+        self.assertEqual(
+            registry_raw["knowledge.support.materialize"]["proposal_bindings"]["assessment_path"],
+            {
+                "type":"effect_result",
+                "effect":"knowledge.assessment.available",
+                "field":"output_path",
+                "container":"scalar",
+            },
+        )
+        self.assertEqual(
+            registry_raw["knowledge.support.materialize"]["proposal_bindings"]["output_path"],
+            {"type":"auto_path","suffix":".json"},
+        )
+        self.assertEqual(
+            registry_raw["plain_goal.bound_capability.grounding.verify.stdlib"]["proposal_bindings"]["result_path"],
+            {
+                "type":"effect_result",
+                "effect":"plain_goal.bound_capability.grounding",
+                "field":"output_path",
+                "container":"scalar",
+            },
+        )
+
     def test_provider_backed_path_without_declared_provenance_fails_closed(self):
         registry={
           "source.alpha":{
