@@ -3,7 +3,7 @@
   "evidence_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "ACQUIRED_VERIFIED__FRESH_REAL_AND_DISTINCT_REUSE_PASS",
+  "status": "REOPENED_BY_POST_PROMOTION_REGRESSION",
   "route": "DETERMINISTIC_GROUNDED_EXECUTABLE_COMPOSITION_PLUS_CAPABILITY_GRAPH_PLANNER",
   "component_verification": {
     "run_id": 36647904127,
@@ -34,5 +34,15 @@
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "frontier_dependency_removed": false,
-  "verdict": "PASS_EXACT_SCOPE"
+  "verdict": "PRIOR_PASS_REVOKED_AT_BROAD_SCOPE__NARROW_SUCCESS_EVIDENCE_PRESERVED",
+  "post_promotion_falsification": {
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
+    "source_pr": 267,
+    "public_run_id": 36653756561,
+    "job_id": 109693472194,
+    "broad_claim_falsified": true,
+    "prior_successes_preserved": true,
+    "reusable_capability_credit_revoked": true,
+    "fresh_reuse_credit_revoked": true
+  }
 }
