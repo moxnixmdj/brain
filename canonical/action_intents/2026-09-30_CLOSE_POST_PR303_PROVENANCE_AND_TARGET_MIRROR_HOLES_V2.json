@@ -7,10 +7,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "PROGRAM_OPERATING_STRATEGY",
   "probe_id": null,
-  "causal_blocker": "POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO_AND_ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED",
+  "causal_blocker": "POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO__DIRECT_RUN_GOAL_CAN_BYPASS_STAMP__ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED",
   "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO_AND_ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
-  "expected_parent_frontier_change": "Close the two post-PR303 fail-open seams so ambiguous cognition cannot be certified model-independent and the active frontier target record cannot drift from pointer, hierarchy, queue, and scoreboard; award no capability credit.",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO__DIRECT_RUN_GOAL_CAN_BYPASS_STAMP__ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Close three post-PR303 fail-open seams on current main: ambiguous cognition cannot certify as model-independent, direct run_goal callers cannot bypass runtime-derived provenance, and the active frontier target record cannot drift from canonical mirrors; award no capability credit.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e after merged PR318 open-ended-scope correction",
@@ -18,7 +18,8 @@
     "current main canonical/runtime/astra_runtime.py cognition stamping logic",
     "current main canonical/runtime/enforce_goal_hierarchy.py mirror checks",
     "current active open-ended parent frontier record and scoreboard mirrors",
-    "stale-base PR307 closed unmerged"
+    "stale-base PR307 closed unmerged",
+    "Public parent-task carrier harness invokes runtime.run_goal directly, which bypasses PR303's execute_step-only provenance stamp"
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -26,7 +27,7 @@
   "orthogonal_recurrence_count": 2,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to the other canonical frontier mirrors; negative regressions prove both holes closed; zero progress credit; immediately return to the current genuinely open-ended model-independent parent Task A.",
+  "stop_condition": "Missing/unknown controller provenance fails closed; every public run_goal return is runtime-stamped; target capability record target/blocker/next-action is mirror-locked; regressions prove all three holes closed; zero progress credit; immediately return to genuine open-ended model-independent parent Task A.",
   "governance_change": true,
   "user_authorized_governance_change": true,
   "user_authorization_summary": "User instructed the Brain to go real now and previously required recurring and adjacent mistake classes to be made fail-closed while pursuing the terminal objective.",
@@ -34,17 +35,17 @@
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
-    "real_outcome": "Prevent false zero-model cognition certification and active target-record drift from surviving the trusted authority boundary.",
+    "real_outcome": "Prevent false zero-model cognition certification, direct goal-entrypoint provenance bypass, and active target-record drift from surviving the trusted authority boundary.",
     "required_capability": "FAIL_CLOSED_RUNTIME_COGNITION_CLASSIFICATION_AND_FIVE_SURFACE_FRONTIER_MIRROR",
     "obs_goal": {
-      "real_outcome": "Make the merged PR303 firewall actually enforce its declared zero-model and all-surface consistency contract.",
+      "real_outcome": "Make merged PR303 enforce its declared provenance/consistency contract on every public goal-runtime caller.",
       "proxy_goals_deleted": [
         "new governance architecture",
         "new workflow",
         "new provider",
         "new benchmark"
       ],
-      "surviving_necessity": "Repair only the two exact post-merge false-negative paths found by adversarial review."
+      "surviving_necessity": "Repair only the three exact post-merge false-negative paths found by adversarial review."
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
@@ -52,10 +53,11 @@
         "PR303 promotion truth checks",
         "PR303 pointer/hierarchy/queue/scoreboard mirror checks",
         "Existing frontier target record",
-        "Existing runtime provenance unit tests"
+        "Existing runtime provenance unit tests",
+        "Public carrier parent harness direct runtime.run_goal invocation path"
       ],
       "external_existing_routes_checked": [
-        "Not applicable: both defects are internal trusted-boundary logic defects."
+        "Not applicable: all three defects are internal trusted-boundary logic defects."
       ],
       "capability_work_deleted": [
         "No new law",
@@ -63,7 +65,7 @@
         "No new carrier",
         "No capability runtime expansion"
       ],
-      "surviving_gap": "Runtime infers zero model dependency from absence of model markers, and mirror enforcement omits the active target record."
+      "surviving_gap": "Runtime infers zero model dependency from ambiguous markers, direct run_goal callers bypass the execute_step-only stamp, and mirror enforcement omits the active target record."
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "Generic fail-open authority defects on the current canonical promotion path.",
@@ -72,7 +74,7 @@
         "Manual review rejected",
         "Repair existing runtime and validator survives"
       ],
-      "surviving_causal_blocker": "POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO_AND_ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED"
+      "surviving_causal_blocker": "POST_PR303_PROMOTION_FIREWALL_FALSE_NEGATIVE__UNKNOWN_GOAL_PROVENANCE_CAN_STAMP_ZERO__DIRECT_RUN_GOAL_CAN_BYPASS_STAMP__ACTIVE_TARGET_RECORD_NOT_MIRROR_ENFORCED"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -85,24 +87,26 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "Repair existing runtime classification and validator mirror checks",
+        "Repair existing runtime classification, public run_goal boundary, and validator mirror checks",
         "Add a second promotion service",
         "Rely on review discipline"
       ],
-      "losing_routes_reason": "The existing machinery already owns both boundaries; parallel machinery adds state and manual discipline cannot fail closed.",
+      "losing_routes_reason": "The existing machinery already owns all three boundaries; parallel machinery adds state and caller discipline cannot fail closed.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Add negative unit regressions for missing/unknown controller provenance and target-record divergence, plus run the trusted PR guard on exact head."
+      "synthetic_verification_necessity": "Add negative unit regressions for missing/unknown controller provenance, direct run_goal bypass, and target-record divergence, then run exact-head validation."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
+        "Any requirement that external harnesses remember to call execute_step rather than run_goal to obtain cognition provenance",
         "Any inference that missing planner markers alone proves model independence",
         "Any manual target-record cross-check before promotion"
       ],
       "adjacent_capabilities_absorbed": [
+        "Public goal-runtime provenance boundary",
         "Fail-closed cognition provenance",
         "Five-surface canonical frontier consistency"
       ],
@@ -112,9 +116,10 @@
       "analysis_steps_deleted_or_cached": [
         "Reused the exact PR303 audit and implementation",
         "Did not reopen broader governance design",
-        "Limited work to proven false-negative branches"
+        "Limited work to proven false-negative branches",
+        "Used the proven public parent harness to falsify the execute_step-only provenance boundary"
       ],
-      "search_stop_decision": "Both defects are directly demonstrated in current source and have one minimal repair each; broader search would delay real execution without improving the repair.",
+      "search_stop_decision": "All three defects are directly demonstrated in current source or proven carrier usage and have minimal local repairs; broader search would delay parent Task A without improving correctness.",
       "affected_layers_only_on_revalidation": true
     },
     "routes_considered": [
@@ -128,9 +133,9 @@
       "NEW_LAW_VERSION"
     ],
     "selected_surviving_route": "REPAIR_EXISTING_RUNTIME_AND_VALIDATOR",
-    "why_selected_route_is_fastest_sufficient": "Two local fail-closed checks plus regressions close the proven holes with no new moving parts.",
-    "expected_parent_level_state_change": "Close the two post-PR303 fail-open seams on current main without changing capability credit, then return immediately to the genuine open-ended parent Task A.",
-    "stop_condition": "Unknown or missing goal controller provenance fails closed; target capability record target/blocker/next-action is machine-bound to the other canonical frontier mirrors; negative regressions prove both holes closed; zero progress credit; immediately return to the current genuinely open-ended model-independent parent Task A.",
+    "why_selected_route_is_fastest_sufficient": "Three local fail-closed checks plus regressions close the proven holes with no new moving parts.",
+    "expected_parent_level_state_change": "Close three post-PR303 fail-open seams on current main: ambiguous cognition cannot certify as model-independent, direct run_goal callers cannot bypass runtime-derived provenance, and the active frontier target record cannot drift from canonical mirrors; award no capability credit.",
+    "stop_condition": "Missing/unknown controller provenance fails closed; every public run_goal return is runtime-stamped; target capability record target/blocker/next-action is mirror-locked; regressions prove all three holes closed; zero progress credit; immediately return to genuine open-ended model-independent parent Task A.",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "User-authorized internal governance repair on already-identified trusted-boundary defects; external route discovery cannot substitute for correcting the authoritative code."
