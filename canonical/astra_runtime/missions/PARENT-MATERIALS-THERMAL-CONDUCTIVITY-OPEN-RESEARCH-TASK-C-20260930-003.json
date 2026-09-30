@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
+  "purpose": "Execute one fresh materially different materials-engineering Task C exactly once through the canonical ASTRA runtime after guarded qualification of scholarly-source admission/materialization. No prewired source, handbook, numeric property value, tool, command, formula, answer, or task-specific runtime patch.",
+  "goal": "Determine whether the room-temperature thermal conductivity of annealed 6061 aluminum is greater than that of annealed 304 stainless steel under comparable bulk-material conditions. Use authoritative primary or reference technical evidence and a real executable check. Autonomously discover and verify the relevant records, determine how to extract and interpret comparable thermal-conductivity values, choose and run a zero-cost verification method, identify material temper, composition, temperature, specimen, and measurement-scope limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-fresh-materials-thermal-parent-task-c",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003.json",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
