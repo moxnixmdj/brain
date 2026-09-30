@@ -1,0 +1,323 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "GROUNDING-FRESH-REAL-UNIFIED-PLANNING-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "probe_id": null,
+  "causal_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
+  "action_kind": "REAL_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::REAL_TASK_EXECUTION",
+  "expected_parent_frontier_change": "Produce fresh real-task evidence on a non-Requests live knowledge task showing that the repaired model-independent grounding route admits only input-bindable candidates, requires explicit verified network availability, composes without models, executes successfully, and is independently re-fetched and checked before any capability re-promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "spent Requests falsification task excluded",
+    "PR261 merged repair",
+    "public exact-blob run 36651748631 PASS",
+    "old CPython task already spent and excluded",
+    "Unified Planning live repo identity direct probe"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after one fresh Unified Planning identity-consistency task executes exactly once on the qualified public GitHub Actions carrier, exact runtime blobs are pinned, producer output is independently re-fetched and verified, and evidence is reconciled; do not replay the task, change target, or increase scoreboard without separate promotion evidence.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
+    "real_outcome": "Verify the repaired model-independent plain-goal grounding capability on a fresh real live-knowledge task using a different project from the spent Requests falsification.",
+    "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain direct fresh evidence that the repaired grounding route works end-to-end on a real task and does not assume unverified prerequisites.",
+      "proxy_goals_deleted": [
+        "replay Requests",
+        "synthetic benchmark",
+        "new carrier",
+        "new planner"
+      ],
+      "surviving_necessity": "Execute one fresh real task through the repaired route and independently verify its real effect."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "merged PR261 exact repair",
+        "public exact-blob verification run 36651748631",
+        "existing verification-capsule-runner public carrier"
+      ],
+      "external_existing_routes_checked": [
+        "live GitHub API for aiplan4eu/unified-planning owner/name identity and numeric repository identity"
+      ],
+      "capability_work_deleted": [
+        "no new runtime",
+        "no model supplier",
+        "no new binding logic",
+        "no heldout Sprite"
+      ],
+      "surviving_gap": "Component regressions pass, but fresh real-task execution after the repair is not yet recorded."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Proof gap after a generic repair, not a new capability implementation gap.",
+      "delete_bypass_substitute_options": [
+        "Delete replay of spent Requests task",
+        "Reuse existing public runner",
+        "Reuse existing GitHub API independent refetch oracle"
+      ],
+      "surviving_causal_blocker": "Need fresh real-task evidence before the reopened capability can regain authority."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+        "PRIVATE_GITHUB_ACTIONS_RETRY",
+        "HELDOUT003_SPRITE_REUSE"
+      ],
+      "losing_routes_reason": "Private Actions is currently zero-step failing; heldout003 Sprite is a contaminated task-specific surface; the already-live public runner is exact-byte verified, $0, and supports independent network refetch.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic gate. Producer fetches the two live GitHub API identities and the verifier independently re-fetches both identities and reconstructs the expected consistency result."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "private-runner retry loop",
+        "heldout Sprite fallback"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "exact runtime byte pinning",
+        "explicit verified_initial_facts prerequisite authority",
+        "independent live refetch"
+      ],
+      "fresh_reuse_plan": "If this fresh task passes and the narrow capability is re-promoted, only a materially distinct later task may count as fresh reuse."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR261 challenger race",
+        "Reused already-qualified public runner",
+        "Reused current GitHub API probe"
+      ],
+      "search_stop_decision": "The incumbent repaired route has exact component validation, a live $0 carrier, and a reachable direct real-task target; no plausible challenger can improve wall-clock enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh post-repair route check completed from current main, current public runner success, and current GitHub API reachability."
+    },
+    "routes_considered": [
+      "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+      "PRIVATE_GITHUB_ACTIONS_RETRY",
+      "HELDOUT003_SPRITE_REUSE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REQUESTS_TASK_REPLAY",
+      "PRIVATE_ACTIONS_ZERO_STEP_RETRY",
+      "HELDOUT003_SPRITE_REUSE",
+      "NEW_PLANNER_OR_MODEL"
+    ],
+    "selected_surviving_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+    "why_selected_route_is_fastest_sufficient": "It reuses the exact repaired runtime, an already-live public $0 carrier, and a current direct GitHub API oracle; it adds no infrastructure, model, or new capability logic.",
+    "expected_parent_level_state_change": "Produce fresh real-task evidence on a non-Requests live knowledge task showing that the repaired model-independent grounding route admits only input-bindable candidates, requires explicit verified network availability, composes without models, executes successfully, and is independently re-fetched and checked before any capability re-promotion.",
+    "stop_condition": "Stop after one fresh Unified Planning identity-consistency task executes exactly once on the qualified public GitHub Actions carrier, exact runtime blobs are pinned, producer output is independently re-fetched and verified, and evidence is reconciled; do not replay the task, change target, or increase scoreboard without separate promotion evidence.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T00:46:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR261 merged at 08338df0cc989b092567f10ffd1dca6a7f37be65; exact-blob verification run 36651748631 PASS"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub REST API current direct response for aiplan4eu/unified-planning repo id 343455633"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "verification-capsule-runner branch/workflow patterns already execute exact Brain runtime capsules"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No broader discovery needed after current direct carrier/API probes and prior live challenger race; public/community sources would not improve exact execution readiness."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "fresh real model-independent URL grounding explicit prerequisite independent verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "existing zero cost execution carrier direct HTTP GitHub API"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "exact runtime capsule live API independent refetch"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current GitHub Actions carrier and GitHub API readiness 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+          "evidence": [
+            "exact repaired runtime merged",
+            "public run 36651748631 success",
+            "current GitHub API direct probe success"
+          ],
+          "qualification_evidence": [
+            "run 36651748631",
+            "current GitHub API response for repo 343455633"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exercises the exact repaired route and independently reconstructs the real result.",
+            "CAPABILITY_STRENGTH": "Covers semantic grounding, URL binding, prerequisite authority, composition, live execution, and verification.",
+            "WALL_CLOCK": "No new infrastructure or supplier integration.",
+            "INCREMENTAL_COST": "$0 public standard runner.",
+            "RELIABILITY": "Same public runner just completed exact-blob verification successfully.",
+            "VERIFIABILITY": "Independent live refetch provides direct oracle."
+          }
+        },
+        {
+          "route": "PRIVATE_GITHUB_ACTIONS_RETRY",
+          "evidence": [
+            "three recent private PR261 workflow jobs returned steps=null"
+          ],
+          "qualification_evidence": [
+            "runs 36651176896, 36651179713, 36651179802"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "No execution occurred.",
+            "CAPABILITY_STRENGTH": "Would be adequate if runnable.",
+            "WALL_CLOCK": "Already failed before step start.",
+            "INCREMENTAL_COST": "$0 but unavailable.",
+            "RELIABILITY": "Current surface unavailable.",
+            "VERIFIABILITY": "No executed evidence."
+          }
+        },
+        {
+          "route": "HELDOUT003_SPRITE_REUSE",
+          "evidence": [
+            "existing sprite is task-specific brain-heldout003-one-shot"
+          ],
+          "qualification_evidence": [
+            "current Sprites list"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Would contaminate an unrelated heldout/task-specific surface.",
+            "CAPABILITY_STRENGTH": "General command execution possible.",
+            "WALL_CLOCK": "Potentially fast but evidence-invalidating.",
+            "INCREMENTAL_COST": "No new allocation proposed, but cost authority unnecessary to resolve.",
+            "RELIABILITY": "Cold existing surface.",
+            "VERIFIABILITY": "Contamination risk dominates."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger dominates the already-live public runner plus direct GitHub API oracle.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T00:46:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIRED_BOUND_GROUNDING_ON_PUBLIC_GITHUB_ACTIONS_WITH_INDEPENDENT_GITHUB_API_REFETCH",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "VERIFICATION_CAPSULE_RUNNER_PUBLIC_GITHUB_ACTIONS",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:44:10Z",
+            "evidence": [
+              "public run 36651748631 completed SUCCESS with all steps executed"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "GITHUB_REST_API_UNIFIED_PLANNING_IDENTITIES",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:46:00Z",
+            "evidence": [
+              "direct GitHub REST response: aiplan4eu/unified-planning id=343455633 archived=false"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BRAIN_PR261_MERGED_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:44:10Z",
+            "evidence": [
+              "merge 08338df0cc989b092567f10ffd1dca6a7f37be65; exact blob run 36651748631 PASS"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
