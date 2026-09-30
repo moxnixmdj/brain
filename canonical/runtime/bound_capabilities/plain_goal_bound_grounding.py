@@ -466,7 +466,8 @@ def ground(
     unresolved=[x["index"] for x in records if x["status"]=="UNRESOLVED"]
     canonical_goal=" ".join(str(goal or "").strip().split())
     broad=None
-    if len(records)==1 and not grounded and unresolved==[0]:
+    all_unresolved=bool(records) and not grounded and unresolved==list(range(len(records)))
+    if all_unresolved:
         module=_load_broad_objective_decomposer()
         if module is not None:
             candidate=module.decompose(canonical_goal)
