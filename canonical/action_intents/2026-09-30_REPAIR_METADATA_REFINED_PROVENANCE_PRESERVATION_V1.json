@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-METADATA-REFINED-PROVENANCE-CLASS-PRESERVATION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire only the generic bounded refined-fallback provenance preservation seam; no parent credit until independent qualification and fresh parent reuse.",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "stop_condition": "Implement the minimum generic preservation/materialization delta and freeze exact bytes for independent non-parent guarded qualification. Never replay materials Task C.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+    "real_outcome": "Preserve all already-verified provenance classes through the one bounded metadata-refined relevance pass and live-materialize only a selected bibliographic winner.",
+    "required_capability": "MODEL_INDEPENDENT_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION_V1",
+    "obs_goal": {
+      "real_outcome": "Remove the exact information-loss seam exposed by Task C without broadening the search budget or weakening verification.",
+      "proxy_goals_deleted": [
+        "Task C replay",
+        "materials-specific source hints",
+        "more search engines",
+        "model reranking",
+        "unbounded retries"
+      ],
+      "surviving_necessity": "The refined path must use the same provenance-class admission semantics as the initial path."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "initial-path provenance_verified admission",
+        "selected bibliographic materialize()",
+        "deterministic BM25 relevance",
+        "single metadata-refined discovery attempt"
+      ],
+      "external_existing_routes_checked": [
+        "No external route is needed; the required semantics already exist in the same frontend initial path."
+      ],
+      "capability_work_deleted": [
+        "new framework",
+        "new source supplier",
+        "new model",
+        "new retry loop"
+      ],
+      "surviving_gap": "The refined fallback hard-filters to RETRIEVAL_PROVENANCE_VERIFIED and cannot materialize a selected refined BIBLIOGRAPHIC_PROVENANCE_VERIFIED winner."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic internal information-loss bug in the bounded metadata-refined fallback.",
+      "delete_bypass_substitute_options": [
+        "Reuse the initial path's two-class provenance predicate",
+        "Reuse existing verifier.materialize for selected refined bibliographic winner"
+      ],
+      "surviving_causal_blocker": "REFINED_FALLBACK_PROVENANCE_CLASS_FILTER_AND_SELECTED_BIBLIOGRAPHIC_MATERIALIZATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_INITIAL_PROVENANCE_ADMISSION_AND_EXISTING_SELECTED_MATERIALIZER",
+        "ADD_SECOND_CUSTOM_RETRIEVAL_PATH",
+        "MODEL_RERANKER"
+      ],
+      "losing_routes_reason": "The existing initial-path predicate and materializer already implement the needed generic semantics; anything larger adds code and proof burden.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Non-parent cross-domain regression must prove refined bibliographic candidates remain eligible, only the selected bibliographic winner is materialized, and failure remains bounded/fail-closed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "refined_retrieval RETRIEVAL-only filter"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "bibliographic provenance verification",
+        "BM25 relevance",
+        "selected-only materialization"
+      ],
+      "fresh_reuse_plan": "After independent guarded qualification, merge repair, reconcile zero parent credit, then freeze a new materially different parent Task D."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Task C terminal artifact root cause already canonical in PR536"
+      ],
+      "search_stop_decision": "The exact local seam and reusable implementation are known; further route search has lower information value than the minimum patch.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No plausible external route dominates a two-predicate reuse patch for this internal information-loss seam."
+    },
+    "selected_surviving_route": "REUSE_INITIAL_PROVENANCE_ADMISSION_AND_EXISTING_SELECTED_MATERIALIZER",
+    "why_selected_route_is_fastest_sufficient": "It changes only the faulty refined branch, reuses already-qualified mechanisms, preserves the one-refinement bound, and admits no task-specific knowledge.",
+    "expected_parent_level_state_change": "Zero parent credit now; on qualification, one reusable child capability may be inherited and the parent advances only to fresh Task D.",
+    "stop_condition": "No Task C replay. No parent promotion from this repair.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The repair is an internal reuse of already-qualified Brain mechanisms, with no supplier choice or external route dependency."
+    }
+  }
+}
