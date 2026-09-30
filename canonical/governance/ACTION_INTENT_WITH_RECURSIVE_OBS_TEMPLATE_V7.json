@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V7",
+  "status": "TEMPLATE__MANDATORY_FOR_CONSEQUENTIAL_ACTIONS",
+  "authority": [
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+    "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md"
+  ],
+  "required_theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false
+  },
+  "mandatory_ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "required_reasoning_durability": {
+    "receipt_required": true,
+    "fields": [
+      "real_objective",
+      "governing_invariants",
+      "material_premises",
+      "evidence_refs",
+      "conclusion",
+      "selected_route",
+      "rejected_material_alternatives",
+      "uncertainties",
+      "assumptions",
+      "non_goals",
+      "next_action",
+      "supersession_conditions",
+      "supersedes"
+    ],
+    "chat_only_authority": false
+  },
+  "action_fields": [
+    "action_id",
+    "status",
+    "canonical_generation",
+    "canonical_base_commit",
+    "capability_target",
+    "action_kind",
+    "blocker_lease_key",
+    "expected_parent_frontier_change",
+    "theory_invariants",
+    "ownership_tests",
+    "reasoning_durability",
+    "recursive_obs"
+  ],
+  "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V6.json",
+  "required_deletion_first_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+  ],
+  "blocker_lease_identity_fields": [
+    "canonical_generation",
+    "capability_target",
+    "causal_blocker"
+  ],
+  "blocker_lease_serialization": "canonical_generation::capability_target::causal_blocker"
+}

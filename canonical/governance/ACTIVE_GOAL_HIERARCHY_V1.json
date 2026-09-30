@@ -145,19 +145,19 @@
   "real_task_first": false,
   "recursive_obs": {
     "required": true,
-    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
+    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V5.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
       "REUSE",
       "SUBSTITUTE",
       "COMPOSE",
-      "REPAIR",
-      "BUILD"
+      "CONFIGURE",
+      "INTEGRATE"
     ],
     "exact_base_commit_binding_required": true,
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V6.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V7.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_route_frontier_age_hours": 24,

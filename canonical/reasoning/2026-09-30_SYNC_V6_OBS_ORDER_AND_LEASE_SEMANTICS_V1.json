@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "receipt_id": "SYNC-V6-OBS-ORDER-AND-LEASE-SEMANTICS-20260930-V1",
+  "status": "CURRENT_DECISION_RECEIPT",
+  "canonical_base_commit": "ddd3abd6a0445edba749eef2f1ba6010a9ce3d32",
+  "real_objective": "Restore a single truthful fail-closed control contract for V6 capability internalization so real frontier-capability work can execute immediately.",
+  "governing_invariants": [
+    "Capabilities must be permanently Brain-owned and verified >= Opus 5.5.",
+    "Underlying capability invention is forbidden; only configuration/integration glue is allowed.",
+    "Blocker lease identity is causal work identity and excludes action_kind.",
+    "Governance activity receives zero capability credit."
+  ],
+  "material_premises": [
+    "Pointer boot requirements already require DELETE,BYPASS,REUSE,SUBSTITUTE,COMPOSE,CONFIGURE,INTEGRATE.",
+    "Trusted validator, Receipt V4 and active gates still require the obsolete REPAIR,BUILD tail.",
+    "Goal Gate V6 still includes action_kind in lease identity while trusted validator excludes it.",
+    "Current main also contains orthogonal Stirrup professional-work internalization; this synchronization preserves it unchanged."
+  ],
+  "evidence_refs": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V6.json"
+  ],
+  "conclusion": "Synchronize the existing control plane to current V6 semantics before any further consequential capability execution.",
+  "selected_route": "SYNC_EXISTING_CONTROL_SURFACES",
+  "rejected_material_alternatives": [
+    "Bypass guard",
+    "Lie in future receipts to satisfy obsolete order",
+    "Patch validator only and leave schema/gates contradictory",
+    "Build a new governance layer"
+  ],
+  "uncertainties": [
+    "Hosted GitHub guard may again fail before executing steps; exact trusted-validator semantic replay remains required if so."
+  ],
+  "assumptions": [
+    "Current V6 mission pointer is the highest-authority acquisition-order statement."
+  ],
+  "non_goals": [
+    "No change to advanced-coding candidate credit",
+    "No capability promotion",
+    "No benchmark execution"
+  ],
+  "next_action": "After merge, issue a fresh current-base OBS receipt for the mini-SWE-agent + Superpowers + fail-closed composed coding route and spend the frozen uncontaminated Terminal-Bench preflight.",
+  "supersession_conditions": [
+    "A later mission-lock version explicitly changes acquisition order or lease identity semantics."
+  ],
+  "supersedes": null
+}
