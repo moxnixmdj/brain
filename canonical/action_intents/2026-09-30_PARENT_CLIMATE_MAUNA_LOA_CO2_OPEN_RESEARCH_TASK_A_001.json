@@ -95,7 +95,7 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+        "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
         "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
         "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
         "USE_MODEL_PLANNER"
@@ -137,7 +137,7 @@
       "challenger_refresh_decision": "Current Brain base, runner closure, inherited source-discovery route, and external planner/logic framework roles were refreshed before task execution."
     },
     "routes_considered": [
-      "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+      "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
       "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
       "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
       "USE_MODEL_PLANNER"
@@ -149,7 +149,7 @@
       "MODEL_PLANNER",
       "OLD_TASK_REPLAY"
     ],
-    "selected_surviving_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+    "selected_surviving_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
     "why_selected_route_is_fastest_sufficient": "It requires zero new implementation, directly tests the exact missing parent scope, and converts uncertainty into either verified real capability evidence or one precise causal gap.",
     "expected_parent_level_state_change": "Either produce one admissible genuinely open-ended, materially different, model-independent parent real-task A result with independent verification, or replace the broad parent-scope blocker with the first specific causal gap in autonomous decomposition, source/tool discovery, quantitative execution, synthesis, or verification. No repair or parent promotion is authorized by this intent alone.",
     "stop_condition": "Execute the frozen climate Task A exactly once on exact current Brain runtime bytes with model planning disabled. On success, independently verify producer-cited primary data and calculations before any parent adjudication. On failure, preserve only the earliest causal blocker, do not replay the task, and recompute the frontier before any repair.",
@@ -157,7 +157,7 @@
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T04:43:30Z",
       "max_age_hours": 24,
-      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_BRAIN_STACK",
+      "incumbent_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK_A",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
