@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_MISSION_ORIGIN_ENTRYPOINT_CANARY_RECONCILIATION_V1",
+  "status": "FIRST_CLEAN_CANARY_PASS__MISSION_ORIGIN_SEAM_CLOSED_BY_REUSE__ZERO_PARENT_CREDIT__ADVANCE_TO_FRESH_PARENT_TASK",
+  "checked_on": "2026-09-30",
+  "bound_base_commit": "2e9fb9c50f70aa8ce1951d03c4a892fb6f2d7147",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "predecessor_truth": {
+    "first_mauna_spend_run_id": 36669918546,
+    "first_mauna_spend_job_id": 109742518213,
+    "mauna_substantive_objective_spent": true,
+    "same_or_equivalent_mauna_replay_allowed": false,
+    "first_spend_observed_terminal_path": "compile miss -> autonomous acquisition fallback -> APT/PyPI origin mission path invalid"
+  },
+  "canary": {
+    "authority": "EARLIEST_CLEAN_SUCCESSFUL_MISSION_ORIGIN_ENTRYPOINT_CANARY",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 79,
+    "carrier_head_sha": "5acc38cff1bf4045e0a6ea05f36218220acabc4d",
+    "carrier_base_sha": "9d89db132108fde5882831a01b311f7abc7e5de4",
+    "brain_main_bound_by_harness": "da64d00b971d5fb4e465af09f8ebb3242831f7bb",
+    "workflow_run_id": 36672816106,
+    "job_id": 109751299770,
+    "artifact_id": 11078921733,
+    "artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "mission_id": "MISSION-ORIGIN-ENTRYPOINT-CANARY-20260930-V1",
+    "mission_path": "canonical/astra_runtime/missions/MISSION_ORIGIN_ENTRYPOINT_CANARY_20260930_V1.json",
+    "mission_blob_sha": "ee2cbd0955488e7057add7d5a3216d3f4974dfc2",
+    "runtime_blob_sha": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "auto_capability_acquisition_blob_sha": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "auto_apt_cli_acquisition_blob_sha": "0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+    "goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "status": "PASS_CANONICAL_MISSION_ORIGIN_PROPAGATION",
+    "validation_scope": "MISSION_ORIGIN_ENTRYPOINT_ONLY",
+    "execution_count": 1,
+    "origin_path_proven_by_post_validation_apt_evidence": true,
+    "origin_errors": [],
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0,
+    "parent_capability_credit_delta": 0
+  },
+  "proof": [
+    "The harness invoked python canonical/runtime/astra_runtime.py with a real direct-child mission file.",
+    "The canonical runtime persisted mission identity and propagated the canonical mission path into autonomous acquisition.",
+    "The APT acquisition diagnostic was emitted; that diagnostic is created only after auto_apt_cli_acquisition accepts and hashes the origin mission path.",
+    "No APT_ORIGIN_MISSION_PATH_INVALID, APT_ORIGIN_MISSION_MISSING, PYPI_ORIGIN_MISSION_PATH_INVALID, or PYPI_ORIGIN_MISSION_MISSING marker was observed.",
+    "Therefore the prior mission-origin blocker is closed by reuse of the existing canonical entrypoint, with no runtime repair."
+  ],
+  "downstream_canary_residual": {
+    "observed": "NO_COMPATIBLE_APT_CLI_CONTRACT / contract-inference rejection after origin validation",
+    "parent_frontier_authority": "NONE",
+    "reason": "The canary was explicitly validation-scope-only and used an artificial APT QR generation objective. Its later supplier/contract residual is not evidence for the open-ended parent capability."
+  },
+  "compile_miss_reclassification": {
+    "pr370_live_label": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "disposition": "NOT_A_TERMINAL_BLOCKER_BY_ITSELF",
+    "reason": "On the current runtime path a compile no-match is caught and routes into autonomous capability acquisition. The first Mauna spend demonstrated that fallback transition, and the canary now verifies the mission identity required by the fallback."
+  },
+  "route_recomputation": {
+    "deletion_first": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "deleted_routes": [
+      "REPLAY_MAUNA_OBJECTIVE",
+      "SECOND_MISSION_ORIGIN_CANARY",
+      "PATCH_RUNTIME_MISSION_IDENTITY",
+      "PATCH_GOAL_COMPILER_BEFORE_FRESH_PARENT_EVIDENCE",
+      "PROMOTE_CANARY_DOWNSTREAM_CONTRACT_FAILURE_TO_PARENT_BLOCKER"
+    ],
+    "selected_route": "FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_PARENT_TASK_THROUGH_CANONICAL_MISSION_ENTRYPOINT",
+    "next_action": "FREEZE_AND_RUN_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_B__THROUGH_CANONICAL_ASTRA_MISSION_ENTRYPOINT__NO_PREWIRED_RESEARCH_PLAN__STOP_ON_FIRST_CAUSAL_GAP",
+    "stop_policy": "Execute exactly once and stop on the first real causal gap; do not repair or replay the same task before reconciliation."
+  },
+  "accounting": {
+    "canary_scoreboard_credit": 0,
+    "parent_capability_credit": 0,
+    "counter_delta": 0,
+    "reason": "The canary contract precommitted validation-only, zero-credit semantics."
+  }
+}
