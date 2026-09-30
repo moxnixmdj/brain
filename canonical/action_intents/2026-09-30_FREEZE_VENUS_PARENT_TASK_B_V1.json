@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-VENUS-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_B_REQUIRED_AFTER_QUALIFIED_ROUTING_REPAIR",
+  "action_kind": "FRESH_PARENT_TASK_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_B_REQUIRED::FREEZE",
+  "task_id": "PARENT-OPENENDED-VENUS-ROTATION-ORBIT-PERIOD-REAL-TASK-20260930-004",
+  "task_blob_sha": "53d6ab63b2dfc258da98dad34233fe6f5585b491",
+  "evidence_presence_classification": "PARENT_TASK_B_FROZEN_UNSPENT",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "anti_leakage_verified": true,
+  "expected_parent_frontier_change": "Freeze a materially different planetary-science parent Task B on exact post-PR474 main without prewiring source, values, method, tool, formula, or answer.",
+  "stop_condition": "TASK_B_FROZEN_UNSPENT__NEXT_AUTHORIZE_ONE_GUARDED_EXECUTION"
+}
