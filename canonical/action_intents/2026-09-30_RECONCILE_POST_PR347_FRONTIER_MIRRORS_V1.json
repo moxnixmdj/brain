@@ -1,0 +1,146 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR347-FRONTIER-MIRRORS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Repair post-PR347 cross-surface drift so pointer, queue, scoreboard, hierarchy, and active target all encode the already-proven Mauna Loa Task-A compile gap; add exactly one residual-gap-localization counter event; authorize no runtime repair, task replay, or parent promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "merged PR347 terminal reconciliation",
+    "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "all five canonical frontier mirrors compared on exact current base",
+    "public Task-A run 36670516407 / artifact 11077861584"
+  ],
+  "evidence_presence_classification": "CANONICAL_CROSS_SURFACE_DRIFT_AFTER_PARTIAL_RECONCILIATION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop once all five canonical frontier surfaces agree on the spent Task-A compile gap and trusted validation passes; do not execute or repair the capability in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore one truthful canonical frontier after PR347 partially updated the hierarchy/target but left pointer, queue, and scoreboard stale.",
+    "required_capability": "CANONICAL_CROSS_SURFACE_FRONTIER_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "Make every authoritative frontier surface encode the same spent-task first causal gap.",
+      "proxy_goals_deleted": [
+        "replay Mauna Loa",
+        "repair runtime",
+        "promote parent capability",
+        "reinterpret later duplicate carrier runs"
+      ],
+      "surviving_necessity": "Cross-surface truth repair is required before any new capability action is legal."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR347 merged hierarchy rewrite",
+        "PR347 active target rewrite",
+        "trusted cross-surface guard"
+      ],
+      "external_existing_routes_checked": [
+        "public run 36670516407 terminal artifact"
+      ],
+      "capability_work_deleted": [
+        "no runtime mutation",
+        "no new task",
+        "no external search",
+        "no carrier action"
+      ],
+      "surviving_gap": "Pointer, queue, and scoreboard still encode the superseded pre-execution Task-A blocker."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific partial canonical reconciliation after PR347 merge.",
+      "delete_bypass_substitute_options": [
+        "reuse merged hierarchy/target truth",
+        "rewrite only stale mirrors",
+        "avoid any task/runtime action"
+      ],
+      "surviving_causal_blocker": "POST_PR347_CANONICAL_FRONTIER_MIRROR_DRIFT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_ONLY_STALE_CANONICAL_MIRRORS",
+        "REVERT_PR347",
+        "REPLAY_TASK",
+        "PATCH_RUNTIME"
+      ],
+      "losing_routes_reason": "Revert would discard valid primary evidence; replay is forbidden; runtime repair is downstream and not yet authorized.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Trusted drift guard plus exact five-surface equality is sufficient; no task execution is needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any action based on the stale pre-execution blocker",
+        "any Mauna Loa replay lane"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "PR347 authoritative receipt reconciliation",
+        "active target first-causal-gap localization"
+      ],
+      "fresh_reuse_plan": "After mirror repair, run fresh current-base recursive OBS on the localized broad-objective compile seam."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR347 evidence",
+        "reused exact public receipt",
+        "reused active target/hierarchy values"
+      ],
+      "search_stop_decision": "No route discovery is relevant to a bookkeeping mirror repair; exact current-base surfaces directly identify the drift.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External route frontier is explicitly deferred until the next capability action."
+    },
+    "routes_considered": [
+      "REPAIR_ONLY_STALE_CANONICAL_MIRRORS",
+      "REVERT_PR347",
+      "REPLAY_TASK",
+      "PATCH_RUNTIME"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REVERT_VALID_EVIDENCE",
+      "REPLAY_SPENT_TASK",
+      "PREMATURE_RUNTIME_REPAIR"
+    ],
+    "selected_surviving_route": "REPAIR_ONLY_STALE_CANONICAL_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "Three data-only mirror rewrites restore guard consistency with no execution, runtime mutation, or spend.",
+    "expected_parent_level_state_change": "Repair post-PR347 cross-surface drift so pointer, queue, scoreboard, hierarchy, and active target all encode the already-proven Mauna Loa Task-A compile gap; add exactly one residual-gap-localization counter event; authorize no runtime repair, task replay, or parent promotion.",
+    "stop_condition": "Stop once all five canonical frontier surfaces agree on the spent Task-A compile gap and trusted validation passes; do not execute or repair the capability in this reconciliation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER is an evidence/mirror consistency action; external implementation-route discovery belongs to the subsequent capability acquisition OBS."
+    }
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared pointer, hierarchy, queue, scoreboard, and active target on exact base dc38bf8370d692d3f18a5aff446d26933f9dd03a; hierarchy and target agree on the new compile gap while the other three remain stale.",
+      "Checked the residual-gap credit against primary Task-A receipt: the run failed at COMPILE before source/tool discovery, so exactly localization credit is justified and no capability/promotion credit is."
+    ],
+    "cheap_falsification_not_available_reason": ""
+  }
+}
