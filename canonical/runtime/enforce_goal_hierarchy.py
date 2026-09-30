@@ -710,6 +710,21 @@ def _collect_key_values(value,key):
             out.extend(_collect_key_values(item,key))
     return out
 
+def enforce_active_target_record_consistency(hierarchy,target):
+    target_id=str(hierarchy.get("active_capability_target") or "").strip()
+    if not target_id:
+        fail("ACTIVE_FRONTIER_TARGET_ID_MISSING")
+        return
+    if not isinstance(target,dict) or not target:
+        fail("ACTIVE_FRONTIER_TARGET_RECORD_INVALID")
+        return
+    if str(target.get("capability_id") or "")!=target_id:
+        fail("TARGET_RECORD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(target.get("residual_gap") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("TARGET_RECORD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+    if str(target.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH")
+
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
         fail(label+"_MISSING")
@@ -863,6 +878,19 @@ def enforce_promotion_truth(intent,files,base):
         if not verifiers:
             fail("PROMOTION_INDEPENDENT_VERIFIER_SUPPLIERS_MISSING")
 
+def active_target_mirror_errors(hierarchy,target):
+    errors=[]
+    expected_target=str(hierarchy.get("active_capability_target") or "")
+    expected_blocker=str(hierarchy.get("current_parent_blocker") or "")
+    expected_next=str(hierarchy.get("next_required_action_class") or "")
+    if str(target.get("capability_id") or "")!=expected_target:
+        errors.append("FRONTIER_TARGET_CAPABILITY_ID_MISMATCH")
+    if str(target.get("residual_gap") or "")!=expected_blocker:
+        errors.append("FRONTIER_TARGET_RESIDUAL_GAP_MISMATCH")
+    if str(target.get("next_action") or "")!=expected_next:
+        errors.append("FRONTIER_TARGET_NEXT_ACTION_MISMATCH")
+    return errors
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -897,8 +925,28 @@ def main():
         fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
     if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
+    if str(hierarchy.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH")
+
+    target_id=str(hierarchy.get("active_capability_target") or "").strip()
+    target_path="canonical/capabilities/frontier/"+target_id+".json" if target_id else ""
+    if not target_path or not (ROOT/target_path).is_file():
+        fail("ACTIVE_FRONTIER_TARGET_RECORD_MISSING")
+        target={}
+    else:
+        try:
+            target=load(target_path)
+        except Exception as exc:
+            fail("ACTIVE_FRONTIER_TARGET_RECORD_INVALID:"+type(exc).__name__)
+            target={}
+    if target:
+        enforce_active_target_record_consistency(hierarchy,target)
 
     boot=pointer.get("boot_requirements") or {}
+    if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
+        fail("CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY_NOT_REQUIRED")
+    if boot.get("runtime_cognition_provenance_required_for_cognitive_credit") is not True:
+        fail("RUNTIME_COGNITION_PROVENANCE_NOT_REQUIRED_FOR_COGNITIVE_CREDIT")
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
     if boot.get("operator_obs_decision_boundary_required") is not True:
         fail("OPERATOR_OBS_DECISION_BOUNDARY_NOT_REQUIRED")
