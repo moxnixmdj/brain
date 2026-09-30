@@ -106,6 +106,8 @@ def run(objective,decomposition,limit=12,timeout=15):
     relevance_ready=(
         relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
         and relevance.get("output_verified") is True
+        and isinstance(relevance.get("top_candidate_admission"),dict)
+        and relevance["top_candidate_admission"].get("verified") is True
         and relevance.get("top_candidate_original_index") is not None
     )
 
@@ -122,7 +124,9 @@ def run(objective,decomposition,limit=12,timeout=15):
         candidate=dict(selected_item["candidate"])
         provenance=selected_item["verification"]
         if provenance.get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
-            selected_materialization=verifier.materialize(candidate,timeout=timeout)
+            selected_materialization=verifier.materialize_retrieval(
+                candidate,provenance,timeout=timeout
+            )
             if selected_materialization.get("status")!="RETRIEVAL_PROVENANCE_VERIFIED":
                 return {
                     "schema":SCHEMA,
