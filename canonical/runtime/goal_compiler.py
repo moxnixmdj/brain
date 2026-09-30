@@ -3516,6 +3516,21 @@ def _compile_knowledge_revalidation(clause,compiled_parts,future_clauses=None):
     }
 
 
+def _contains_effect_result_binding(value):
+    if isinstance(value,dict):
+        if set(value.keys())=={"$effect_result"}:
+            spec=value.get("$effect_result")
+            return (
+                isinstance(spec,dict)
+                and bool(str(spec.get("effect") or "").strip())
+                and bool(str(spec.get("field") or "").strip())
+            )
+        return any(_contains_effect_result_binding(v) for v in value.values())
+    if isinstance(value,list):
+        return any(_contains_effect_result_binding(v) for v in value)
+    return False
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -4190,6 +4205,19 @@ def _compile_compound_goal(goal, clauses, registry, root):
             ) from exc
         cid=part["selected_capability"]
         entry=registry[cid]
+        if _contains_effect_result_binding(entry.get("proposal_bindings")):
+            raise GoalCompilationFailure(
+                "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+                json.dumps({
+                    "index":index,
+                    "subgoal":clause,
+                    "cause":"EXPLICIT_EFFECT_RESULT_BINDING_REQUIRES_GROUNDED_COMPOSITION",
+                    "selected_capability":cid,
+                    "policy":"ONE_CAUSAL_BINDING_AUTHORITY__NO_LEGACY_PATH_RECENCY_FOR_EFFECT_RESULT_CONSUMERS",
+                    "compiled_prefix":compiled_parts,
+                    "context_paths":context_paths,
+                },sort_keys=True)
+            )
         if re.match(r"^(?:finally\s+)?(?:independently\s+)?(?:verify|check|assert|decode|reopen|reread)\b",lower):
             semantic=" ".join(
                 [str(x) for x in entry.get("provides",[])]
