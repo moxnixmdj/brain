@@ -71,16 +71,15 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Freeze and execute one materially different genuinely open-ended parent Task B through the guarded-qualified repaired route. Do not reuse HTTP/2, SQLite, climate, thermophysics, numerical-stability, or other spent objectives. No source, values, formula, tool recipe, or answer may be predeclared. Stop at the first new causal gap; independently verify any semantic completion before parent promotion.",
+    "objective": "Repair the generic open-research source admission boundary exposed by the spent fresh seismology parent attempt: do not admit low subject-coverage live pages merely because they are retrievable, and do not discard bibliographically relevant provenance before it can refine the live retrieval search. Qualify only on non-parent cases; never replay seismology.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+    "exact_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/PARENT_OPENENDED_HTTP2_TASK_A_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_BROAD_MULTICLAUSE_RESEARCH_ROUTING_QUALIFICATION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_OPENENDED_SEISMOLOGY_FRESH_ATTEMPT_FIRST_CAUSAL_GAP_20260930_V1.json"
     ],
-    "repair_status": "HTTP2_FIRST_CAUSAL_GAP_REPAIRED__GUARDED_INDEPENDENT_EXACT_BYTE_PASS__FRESH_TASK_B_REQUIRED",
-    "prohibition": "NO_HTTP2_REPLAY__NO_SPENT_TASK_REPLAY__NO_PREDECLARED_SOURCE_VALUES_OR_RECIPE__NO_MODEL_COGNITION__NO_PARENT_PROMOTION_FROM_CHILD_REPAIR_ONLY",
-    "next_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_B__NO_HTTP2_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "repair_status": "FRESH_SEISMOLOGY_PARENT_ATTEMPT_SPENT__QUERY_FOCUS_WORKED__SOURCE_ADMISSION_REFINEMENT_REQUIRED",
+    "prohibition": "NO_SEISMOLOGY_REPLAY__NO_BINDER_PATCH_BEFORE_SOURCE_ADMISSION_CAUSE__NO_LOW_COVERAGE_SOURCE_ADMISSION__NO_PARENT_CREDIT",
+    "next_action": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
     "latest_routing_qualification_run_id": 36689658815,
     "latest_routing_qualification_artifact_id": 11085092932,
     "latest_routing_qualification_artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5",
@@ -89,7 +88,10 @@
     "spent_http2_task_artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
     "parent_capability_promoted": false,
     "incremental_spend_usd": 0,
-    "model_dependency_count": 0
+    "model_dependency_count": 0,
+    "spent_seismology_run_id": 36693929830,
+    "spent_seismology_artifact_id": 11086898224,
+    "spent_seismology_artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -306,7 +308,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_B__NO_HTTP2_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
@@ -317,17 +319,13 @@
     "parent_capability_credit": false
   },
   "last_frontier_reconciliation": {
-    "status": "CLAIM_RELATION_SUBCAPABILITY_ACQUIRED__ADVANCE_TO_CLAIM_SPEC_OPERAND_BINDING",
-    "previous_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
-    "blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "status": "FRESH_SEISMOLOGY_PARENT_ATTEMPT_SPENT__FIRST_SOURCE_ADMISSION_GAP_LOCALIZED",
+    "blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_OPENENDED_SEISMOLOGY_FRESH_ATTEMPT_FIRST_CAUSAL_GAP_20260930_V1.json"
     ],
-    "public_run_id": 36682488104,
-    "public_job_id": 109780804595,
-    "artifact_id": 11082521746,
-    "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-    "parent_capability_promoted": false
+    "parent_capability_promoted": false,
+    "replay_allowed": false
   },
   "last_real_output_event": {
     "event_id": "MODEL_INDEPENDENT_GENERIC_V2_CLAIM_RELATION_ACQUIRED_20260930",
