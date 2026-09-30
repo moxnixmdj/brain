@@ -5495,7 +5495,7 @@ def _pack_observations_for_model(observations,max_chars=12000):
         raise Blocker("MODEL_OBSERVATION_ENVELOPE_OVERFLOW")
     return encoded
 
-def run_goal(step, mission):
+def _run_goal_unstamped(step, mission):
     goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
     goal=str(goal or "").strip()
@@ -5905,6 +5905,12 @@ def _stamp_cognition_provenance(result):
     out["cognition_provenance_authority"]="ASTRA_RUNTIME_DERIVED_V1"
     return out
 
+
+def run_goal(step, mission):
+    """Public goal-runtime boundary: every caller receives runtime-derived cognition provenance."""
+    return _stamp_cognition_provenance(_run_goal_unstamped(step, mission))
+
+
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     if adapter=="shell":
@@ -5912,7 +5918,7 @@ def execute_step(step, prior_results=None, mission=None):
     if adapter=="http":
         return run_http(step)
     if adapter=="goal":
-        return _stamp_cognition_provenance(run_goal(step, mission or {}))
+        return run_goal(step, mission or {})
     raise Blocker("MISSING_ADAPTER:"+adapter)
 
 def verify(step,result):
