@@ -5,7 +5,7 @@
   "goal": "Assess whether the complete reference genome sequence length of Escherichia coli K-12 MG1655 is greater than the human mitochondrial reference genome sequence length. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant primary records, determine how to extract and interpret the two sequence lengths, choose and run a zero-cost verification method, identify material reference-version or sequence-scope limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
   "steps": [
     {
-      "id": "execute-frozen-genomics-reference-length-open-ended-parent-task-a",
+      "id": "execute-frozen-genomics-reference-length-open-ended-parent-task-b",
       "adapter": "goal",
       "goal_ref": "goal",
       "max_controller_actions": 96,
@@ -24,6 +24,6 @@
     "source_task_path": "canonical/tasks/PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005.json",
     "stop_on_first_causal_gap": true,
     "no_same_task_replay": true,
-    "source_task_blob_sha": "b6e1bca41700f5695eaacbd6eb0490ee23839837"
+    "source_task_blob_sha": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7"
   }
 }

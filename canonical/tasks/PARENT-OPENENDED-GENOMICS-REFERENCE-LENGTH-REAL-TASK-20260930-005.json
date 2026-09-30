@@ -3,7 +3,7 @@
   "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "domain": "GENOMICS_REFERENCE_SEQUENCE_LENGTH_COMPARISON",
-  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_B",
   "source_task_replay": false,
   "objective": "Assess whether the complete reference genome sequence length of Escherichia coli K-12 MG1655 is greater than the human mitochondrial reference genome sequence length. Use authoritative primary technical evidence and a real executable check, decide what evidence and method are sufficient, identify material reference-version or sequence-scope limitations, independently verify the consequential result, and preserve source, method, execution, and cognition provenance.",
   "goal_text": "Assess whether the complete reference genome sequence length of Escherichia coli K-12 MG1655 is greater than the human mitochondrial reference genome sequence length. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant primary records, determine how to extract and interpret the two sequence lengths, choose and run a zero-cost verification method, identify material reference-version or sequence-scope limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
