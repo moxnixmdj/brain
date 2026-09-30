@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_GROUNDED_COMPOSITION_CAUSAL_PATH_REPAIR_V1",
+  "evidence_id": "GROUNDED-COMPOSITION-EXPLICIT-CAUSAL-PATH-PROVENANCE-REPAIR-20260930",
+  "status": "GENERIC_REPAIR_VERIFIED__FRESH_REQUALIFICATION_UNSPENT",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "source_falsification": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
+  "causal_blocker_repaired": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
+  "repair_route": "REUSE_EXISTING_PROPOSAL_BINDINGS_EFFECT_RESULT_PLUS_FAIL_CLOSED_PROVIDER_BACKED_PATH_GUARD",
+  "exact_private_repair_head": "ea4e5f7791e13f6b41b608e47dd6e82dc3aa7a27",
+  "changes": {
+    "composer": "Provider-backed downstream path placeholders may not use implicit prior_paths recency fallback when proposal_bindings are absent; composition fails closed.",
+    "independent_verifier": "Independently rejects composed graphs that retain provider-backed path placeholders without explicit proposal binding metadata.",
+    "registry": [
+      "decision.synthesis.verify.stdlib.result_path <- decision.synthesis.typed.output_path",
+      "plain_goal.bound_capability.grounding.verify.stdlib.result_path <- plain_goal.bound_capability.grounding.output_path",
+      "knowledge.status.assert.assessment_path <- knowledge.assessment.available.output_path",
+      "knowledge.support.materialize.assessment_path <- knowledge.assessment.available.output_path",
+      "knowledge.support.materialize.output_path <- deterministic auto_path"
+    ],
+    "scope_control": "Registry-wide audit found additional ambiguous path-bearing prerequisite capabilities; they were not mechanically rewritten. The new guard makes them fail closed in provider-backed composition until causality is explicitly declared."
+  },
+  "verification": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_head": "6b6a17ec8b9afc0a93bfc1fa61cdf55bd846ba5a",
+    "workflow_run_id": 36655545678,
+    "workflow_job_id": 109698982478,
+    "conclusion": "SUCCESS",
+    "test_modules": [
+      "canonical.tests.test_grounded_executable_composition",
+      "canonical.tests.test_grounding_proposal_binding_contract"
+    ],
+    "negative_regression": "Provider-backed path input without explicit provenance fails closed.",
+    "positive_regression": "Explicit effect_result producer output binds to downstream consumer and independently verifies.",
+    "registry_regression": "Known causal path consumers retain exact explicit bindings."
+  },
+  "prior_failed_validation": {
+    "run_id": 36655429795,
+    "cause": "SYNTHETIC_TEST_HARNESS_PLACEHOLDER_REGEX_OVERESCAPED",
+    "runtime_repair_changed_after_failure": false,
+    "test_harness_only_change": true
+  },
+  "promotion_credit": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "requalification_required": true,
+  "requalification_rule": "Must use a fresh materially different real task, not PR267 replay, and directly verify correct causal path provenance plus real task effect before restoring composition capability/fresh-reuse credit.",
+  "incremental_spend_usd": 0
+}

@@ -184,11 +184,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_AFFECTED_LAYER_OBS_FOR_GENERIC_DOWNSTREAM_PATH_PROVENANCE__REUSE_PROPOSAL_BINDINGS_EFFECT_RESULT_FIRST__NO_PR267_REPLAY__THEN_FRESH_DIFFERENT_REQUALIFICATION_TASK",
+    "next_step": "SELECT_FRESH_MATERIALLY_DIFFERENT_COMPOSITION_REQUALIFICATION_TASK__RUN_EXACT_BASE_OBS__NO_PR267_REPLAY__EXECUTE_MODEL_INDEPENDENT_ROUTE__VERIFY_CAUSAL_PATH_PROVENANCE_AND_REAL_EFFECT__ONLY_THEN_ADJUDICATE_REQUALIFICATION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
+    "critical_blocker": "GENERIC_CAUSAL_PATH_PROVENANCE_REPAIR_VERIFIED__FRESH_DIFFERENT_REQUALIFICATION_UNSPENT",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -265,7 +265,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__DOWNSTREAM_PATH_PROVENANCE_REOPENED",
+    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__GENERIC_PROVENANCE_REPAIR_VERIFIED__FRESH_REQUALIFICATION_UNSPENT",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -617,6 +617,12 @@
         36652169397,
         36652623916
       ]
+    },
+    "last_repair_event": {
+      "event_id": "GROUNDED_COMPOSITION_EXPLICIT_CAUSAL_PATH_REPAIR_20260930",
+      "status": "REPAIR_VERIFIED__NO_PROGRESS_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EXPLICIT_CAUSAL_PATH_PROVENANCE_REPAIR_20260930_V1.json",
+      "public_run_id": 36655545678
     }
   },
   "provider_rules": {
