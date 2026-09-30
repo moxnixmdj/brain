@@ -22,13 +22,32 @@ UA = "ProjectBrain-SourceDiscovery/1.0 (+zero-cost model-independent research)"
 def _canon(text):
     return " ".join(str(text or "").strip().split())
 
+_BROAD_QUERY_PREFIX = re.compile(
+    r"^(?:determine|assess|evaluate|investigate|estimate|quantify|analy[sz]e)\\s+(?:whether\\s+)?",
+    re.IGNORECASE,
+)
+_COMPARE_QUERY_PREFIX = re.compile(r"^compare\\s+", re.IGNORECASE)
+
 def _query(objective):
     q = _canon(objective)
     if not q:
         raise ValueError("OBJECTIVE_REQUIRED")
     if len(q) > 1200:
         raise ValueError("OBJECTIVE_TOO_LONG")
-    return q
+
+    # Search engines should see the decision-bearing proposition, not the
+    # orchestration prose around it.  Using the full imperative objective makes
+    # generic control words such as "assess", "verify", and "quality" dominate
+    # retrieval and can select pages about those words instead of the subject.
+    first = re.split(r"(?<=[.!?])\\s+", q, maxsplit=1)[0].strip()
+    focused = _BROAD_QUERY_PREFIX.sub("", first, count=1)
+    focused = _COMPARE_QUERY_PREFIX.sub("", focused, count=1)
+    focused = focused.strip(" \\t\\r\\n.,;:")
+    if len(re.findall(r"[A-Za-z0-9]+", focused)) < 2:
+        focused = first.strip(" \\t\\r\\n.,;:")
+    if not focused:
+        raise ValueError("OBJECTIVE_QUERY_EMPTY")
+    return focused
 
 def _safe_url(raw):
     try:
@@ -247,8 +266,9 @@ def discover(objective, limit=12, timeout=15):
     return {
         "schema": SCHEMA,
         "status": status,
-        "objective": query,
+        "objective": _canon(objective),
         "query": query,
+        "query_strategy": "DECISION_CLAUSE_FOCUSED__ORCHESTRATION_PROSE_EXCLUDED",
         "query_sha256": hashlib.sha256(query.encode("utf-8")).hexdigest(),
         "candidates": unique,
         "candidate_count": len(unique),
