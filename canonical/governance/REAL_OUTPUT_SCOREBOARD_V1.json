@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_ROUTE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_ROR_AUTHORITY__NO_PARENT_REPLAY",
+  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_RELEVANCE_ADMISSION__NO_PARENT_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -531,16 +531,28 @@
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "active_subcapability_target": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
-    "subcapability_status": "SOURCE_FRONTEND_AND_ROR_AUTHORITY_IDENTITY_VERIFIED__PRIMARY_SOURCE_AND_RELEVANCE_GAP_ACTIVE",
+    "active_subcapability_target": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "subcapability_status": "STRICT_FIRST_PARTY_BOUNDED_LEXICAL_RELEVANCE_VERIFIED__EVIDENCE_EXTRACTION_GAP_ACTIVE",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
-    "first_physical_spend_run_id": 36670808367
+    "residual_gap": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "first_physical_spend_run_id": 36670808367,
+    "last_verified_subcapability": {
+      "capability_id": "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+      "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
+      "route": "first_party_objective_relevance_verify",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json",
+      "public_run_id": 36678675368,
+      "producer_git_blob": "6ff13c32704c0b3283c42a51f718e875110a13ca",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_capability_promoted": false,
+      "limitations": "First-party exact-ROR-domain hosting plus strict bounded lexical objective relevance only. Semantic entailment, primary-source status, factual correctness, evidence sufficiency, and claim endorsement remain unverified."
+    }
   },
   "events": [
     {
