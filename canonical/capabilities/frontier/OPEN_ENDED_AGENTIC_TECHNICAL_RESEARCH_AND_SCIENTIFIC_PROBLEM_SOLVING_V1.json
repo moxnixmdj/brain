@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__FRESH_OPEN_ENDED_TASK_A_FAILED_AT_AUTONOMOUS_CAPABILITY_ACQUISITION",
-  "residual_gap": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+  "obsolescence_status": "NOT_YET_PROVEN__SOURCE_FRONTEND_AND_ROR_AUTHORITY_IDENTITY_ACQUIRED__PRIMARY_SOURCE_AND_RELEVANCE_GAP_ACTIVE",
+  "residual_gap": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -116,9 +116,21 @@
       "route": "restricted typed AST + pinned SymPy 1.14.0",
       "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
       "public_run_id": 36666659921
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1",
+      "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
+      "route": "source.authority.bind.ror",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
+      "public_run_id": 36676947006,
+      "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_capability_promoted": false,
+      "limitations": "Exact active ROR domain-to-organization identity only. Primary-source status, objective relevance, factual correctness, evidence sufficiency, and claim endorsement remain unverified."
     }
   ],
-  "next_action": "OBS_NO_COMPATIBLE_SUPPLIER_CONTRACT__SEARCH_REUSE_EXISTING_LOCAL_RUNTIME_AND_VERIFIED_BOUND_CAPABILITIES_BEFORE_REPAIR__QUALIFY_MINIMUM_GENERIC_DISCOVERY_OR_CONTRACT_ROUTE__NO_SQLITE_REPLAY",
+  "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_ROUTE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_ROR_AUTHORITY__NO_PARENT_REPLAY",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
