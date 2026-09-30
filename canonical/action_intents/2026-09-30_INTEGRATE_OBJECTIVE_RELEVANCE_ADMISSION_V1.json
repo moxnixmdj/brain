@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "INTEGRATE-STRICT-FIRST-PARTY-OBJECTIVE-RELEVANCE-ADMISSION-20260930-V1",
-  "status": "IMPLEMENTED_PENDING_INDEPENDENT_QUALIFICATION",
+  "status": "VERIFIED_ACQUIRED__INDEPENDENT_LIVE_CROSS_DOMAIN_QUALIFICATION_PASS",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "causal_blocker": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
@@ -29,5 +29,23 @@
   "parent_task_execution": false,
   "parent_task_replay": false,
   "model_dependency_count": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "qualification": {
+    "status": "PASS",
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "runner_pr": 149,
+    "workflow_run_id": 36678675368,
+    "job_id": 109769142615,
+    "durable_receipt_issue": 151,
+    "exact_producer_blob": "6ff13c32704c0b3283c42a51f718e875110a13ca",
+    "authored_fail_closed_regressions": "PASS",
+    "fresh_live_positive_domains": [
+      "nist.gov",
+      "who.int"
+    ],
+    "unrelated_live_negative_control": "PASS",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json"
 }
