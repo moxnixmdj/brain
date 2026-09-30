@@ -213,7 +213,7 @@ def _numbers(text):
             unit=""
         rows.append({
           "numeric_literal_index":index,
-          "surface":m.group(0).strip(),
+          "surface":m.group(0).strip().rstrip(".,;:"),
           "number_surface":m.group(1),
           "unit":unit,
           "char_start":m.start(),
