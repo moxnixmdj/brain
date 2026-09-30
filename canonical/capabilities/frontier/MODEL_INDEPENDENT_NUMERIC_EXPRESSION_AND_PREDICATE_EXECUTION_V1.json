@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_NUMERIC_EXPRESSION_AND_PREDICATE_EXECUTION_V1",
+  "status": "CANDIDATE__ROUTE_QUALIFICATION_PENDING",
+  "real_capability": true,
+  "parent_families": [
+    "TECHNICAL_SCIENTIFIC_REASONING",
+    "MULTI_CAPABILITY_COMPOSITION"
+  ],
+  "useful_behavior": "Given typed scalar numeric values produced by prior verified actions, deterministically evaluate a bounded arithmetic expression and/or numeric predicate, optionally map a boolean predicate to caller-supplied labels, preserve exact input/result provenance, and emit a typed result without model cognition or arbitrary code execution.",
+  "scope": {
+    "input_values": "finite int/float scalar JSON numbers only",
+    "allowed_operations": [
+      "addition",
+      "subtraction",
+      "multiplication",
+      "division",
+      "modulo",
+      "bounded exponentiation",
+      "unary_plus",
+      "unary_minus",
+      "numeric comparisons",
+      "abs",
+      "min",
+      "max"
+    ],
+    "explicit_exclusions": [
+      "arbitrary Python eval/exec",
+      "attribute access",
+      "imports",
+      "statements",
+      "comprehensions",
+      "filesystem/network access",
+      "unbounded exponentiation",
+      "strings as data operands",
+      "model cognition"
+    ],
+    "intended_first_parent_gap": "numeric comparison / arithmetic mean / bounded formula / numeric threshold chain"
+  },
+  "acquisition_bar": {
+    "frozen_generic_suite_required": true,
+    "independent_supplier_verification_required": true,
+    "security_negative_cases_required": true,
+    "exact_or_tolerance_correctness_required": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "bound_controller_integration_required_before_credit": true,
+    "fresh_real_reuse_required_before_parent_replay_or_new_parent_task": true
+  },
+  "candidate_routes": [
+    "simpleeval 1.0.8 restricted AST evaluator",
+    "existing SymPy 1.14.0 deterministic route behind a new safe input wrapper",
+    "asteval 1.0.10 restricted interpreter",
+    "new stdlib ast/operator evaluator"
+  ],
+  "status_note": "No capability credit from route qualification alone."
+}
