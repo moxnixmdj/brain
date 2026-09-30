@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B__NO_DEMOGRAPHY_ASTRONOMY_GEOPHYSICS_BIOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_progress_event_target": "RUN_ONE_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__OBJECTIVE_ONLY__MODEL_FREE__STOP_ON_FIRST_CAUSAL_GAP",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -447,12 +447,34 @@
       "residual_gap": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
       "prior_space_cargo_task_a_frontier_dependency_credit_revoked": true,
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "PARENT_OPEN_ENDED_SCOPE_CORRECTION_AND_PR304_SPENT_PRESERVATION_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "EVIDENCE_SCOPE_CORRECTED__NO_SCOREBOARD_INCREASE",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_AND_PR304_SPENT_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36669136068,
+      "public_job_id": 109740159666,
+      "artifact_id": 11077363706,
+      "artifact_digest": "sha256:b8463686e9555d941962c203d15e1c8af7fdb1c510a4617325c4e5d77c43c0a1",
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "NONE__TRUTH_CORRECTION_ONLY",
+      "residual_gap": "PARENT_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_A_REQUIRED__PR301_BOUNDED_PREWIRED_TASK_INSUFFICIENT_FOR_PARENT_SCOPE",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "same_task_replay_allowed": false
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "ONE_CLEAN_MODEL_INDEPENDENT_PARENT_REAL_TASK_VERIFIED__SECOND_CROSS_DOMAIN_TASK_REQUIRED",
+    "subcapability_status": "PARENT_SCOPE_CORRECTED__ZERO_OPEN_ENDED_PARENT_TASKS_VERIFIED__OBJECTIVE_ONLY_TASK_A_REQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
