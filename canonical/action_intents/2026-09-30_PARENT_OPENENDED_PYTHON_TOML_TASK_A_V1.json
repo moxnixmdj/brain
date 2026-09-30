@@ -1,0 +1,303 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-OPENENDED-PYTHON-TOML-TASK-A-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either produce the first admissible genuinely open-ended model-independent parent Task A with independent verification, or localize exactly the first causal gap without replay or proxy credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e after PR318 open-ended evidence-scope correction",
+    "canonical hierarchy, queue, target record and pointer agree that zero admissible open-ended model-independent parent tasks exist and Task A is the sole current frontier action",
+    "France demography remains verified structured supporting evidence but is inadmissible for open-ended parent promotion because its research plan was predeclared",
+    "PR304 chemistry executed once, is permanently spent, failed at a numeric-relation representation seam, and is scope-insufficient for parent proof",
+    "PR308/317/319 were authored against superseded blocker/base semantics and cannot own the current Task A lease",
+    "existing public verification-capsule-runner remains the authorized $0 remote Linux carrier; no user-laptop execution is required"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After trusted current-base lease admission, freeze only an objective-level technical task with no authority, URL, dataset identifier, formula, JSON path, or action graph; execute exact bytes once with model planning disabled on the $0 public carrier; independently verify any success; on failure preserve only the first causal gap and never replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+    "real_outcome": "Test the defining open-ended parent behavior itself: from an objective-only technical question, autonomously decompose, discover authoritative knowledge and usable tools, execute a check, synthesize a decision-quality answer, and expose runtime-derived zero-model cognition provenance.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain the first admissible open-ended model-independent parent Task A or the first real blocker to that behavior.",
+      "proxy_goals_deleted": [
+        "another prewired source benchmark",
+        "another arithmetic benchmark",
+        "old-task replay",
+        "preemptive numeric-relation repair",
+        "model qualification",
+        "manual one-off answer"
+      ],
+      "surviving_necessity": "The corrected parent contract requires one genuine objective-only open-ended Task A before Task B or parent adjudication."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "model-independent plain-goal grounding",
+        "grounded executable composition",
+        "evidence-to-decision synthesis",
+        "tool/source discovery machinery",
+        "bound execution and runtime cognition provenance"
+      ],
+      "external_existing_routes_checked": [
+        "public authoritative technical documentation exists for the selected domain class",
+        "the existing public Linux carrier can execute direct technical checks without paid services"
+      ],
+      "capability_work_deleted": [
+        "no new supplier",
+        "no new model",
+        "no prewired research recipe",
+        "no task-specific runtime patch",
+        "no spent-task replay"
+      ],
+      "surviving_gap": "Unknown until an objective-only task executes. Static speculation is not authority for a repair."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent evidence-scope obligation after prior structured tasks were correctly reclassified as supporting-only.",
+      "delete_bypass_substitute_options": [
+        "delete predeclared research-plan structure",
+        "reuse current Brain stack",
+        "reuse current $0 carrier",
+        "require runtime-derived zero-model provenance",
+        "stop on first causal gap"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK_A",
+        "REPAIR_NUMERIC_RELATION_BEFORE_PARENT_EVIDENCE",
+        "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+        "USE_FRONTIER_MODEL_COGNITION"
+      ],
+      "losing_routes_reason": "The current canonical blocker is missing open-ended parent evidence. Repairing a child seam before it blocks the genuine task is speculative; a scripted task cannot prove the target scope; frontier-model cognition invalidates dependency-removal evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Execute one frozen objective-only real task once, then verify any claimed result independently using primary evidence plus a producer-independent executable check."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "stale Task-B leases from pre-PR318 scope",
+        "preemptive child repair as the active frontier",
+        "additional structured benchmarks"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "autonomous decomposition",
+        "source discovery and evaluation",
+        "tool selection",
+        "technical verification",
+        "evidence synthesis",
+        "runtime provenance"
+      ],
+      "fresh_reuse_plan": "If Task A passes, immediately freeze a materially different objective-only Task B using the inherited route; if Task A fails, acquire only its first generic causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR318 scope correction",
+        "reused current canonical frontier mirrors",
+        "reused existing $0 carrier",
+        "reused lesson that prewired task success cannot prove open-ended autonomy"
+      ],
+      "search_stop_decision": "A direct objective-only execution now has greater parent-level information gain than more architecture discussion or speculative repair.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Canonical main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e and the public carrier were refreshed immediately before this lease; no current-base PR was found with the corrected Task-A blocker lease."
+    },
+    "routes_considered": [
+      "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK_A",
+      "REPAIR_NUMERIC_RELATION_BEFORE_PARENT_EVIDENCE",
+      "RUN_ANOTHER_PREWIRED_STRUCTURED_TASK",
+      "USE_FRONTIER_MODEL_COGNITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PREWIRED_SOURCE_OR_URL",
+      "PREWIRED_DATASET_OR_JSON_PATH",
+      "PREWIRED_FORMULA",
+      "PREWIRED_TOOL_CHAIN",
+      "MODEL_COGNITION",
+      "OLD_TASK_REPLAY",
+      "SPECULATIVE_CHILD_REPAIR"
+    ],
+    "selected_surviving_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK_A",
+    "why_selected_route_is_fastest_sufficient": "It directly exercises the exact missing parent behavior on existing runtime and carrier bytes, costs $0, and converts either success or the first failure into admissible next-state evidence.",
+    "expected_parent_level_state_change": "Either produce the first admissible genuinely open-ended model-independent parent Task A with independent verification, or localize exactly the first causal gap without replay or proxy credit.",
+    "stop_condition": "After trusted current-base lease admission, freeze only an objective-level technical task with no authority, URL, dataset identifier, formula, JSON path, or action graph; execute exact bytes once with model planning disabled on the $0 public carrier; independently verify any success; on failure preserve only the first causal gap and never replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:41:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK_A",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e; acquired model-independent grounding, composition, synthesis, numeric and provenance capabilities"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Public upstream technical documentation is available without credentials; the task itself will not predeclare which authority/source to use."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Existing Ubuntu/Python execution surface is already present on the authorized public carrier; no new package is required to start the task."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No external framework dominates direct execution for the corrected parent evidence obligation; community sources are not needed as proof authority."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "objective-only model-independent technical research autonomous source and tool discovery executable verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "public authoritative technical documentation zero credential direct executable verification"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "existing Brain open-ended decomposition discovery composition versus scripted benchmark"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current public technical documentation and Ubuntu Python execution surface"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK_A",
+          "evidence": [
+            "PR318 requires genuine open-ended Task A",
+            "current Brain stack and public carrier are already available"
+          ],
+          "qualification_evidence": [
+            "Brain main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "recent successful public verification-capsule-runner executions"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the corrected parent definition.",
+            "CAPABILITY_STRENGTH": "Requires autonomous decomposition plus material source/tool discovery and execution.",
+            "WALL_CLOCK": "No implementation precondition before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "One-shot fail-closed execution with independent verification.",
+            "VERIFIABILITY": "Runtime provenance plus producer-independent oracle."
+          }
+        },
+        {
+          "route": "REPAIR_NUMERIC_RELATION_BEFORE_PARENT_EVIDENCE",
+          "evidence": [
+            "PR304 exposed a generic numeric-text seam, but PR304 was scope-insufficient and current canonical frontier does not identify that seam as the parent blocker."
+          ],
+          "qualification_evidence": [
+            "PR304 terminal failure and PR318 scope correction"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Real generic seam, but not yet proven necessary for the corrected Task A.",
+            "CAPABILITY_STRENGTH": "Improves a child relation boundary only.",
+            "WALL_CLOCK": "Adds work before the decisive parent test.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Repair can be preserved for later qualification.",
+            "VERIFIABILITY": "Does not itself establish open-ended parent behavior."
+          }
+        }
+      ],
+      "negative_search_summary": "No current challenger beats direct genuine Task-A execution for correctness-first time-to-parent evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK_A",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:41:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_TECHNICAL_TASK_A",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:41:00Z",
+            "evidence": [
+              "DIRECT_PROBE: public verification-capsule-runner accepted and executed recent zero-spend parent capsules on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:41:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact canonical main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
