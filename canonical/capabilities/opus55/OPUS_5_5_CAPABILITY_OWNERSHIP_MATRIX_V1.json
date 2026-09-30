@@ -207,17 +207,20 @@
     },
     {
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
       "best_existing_routes": [
-        "Brain orchestration + GPT-6 Astra Work + specialist tools/agents"
+        "Brain-owned same-identity task/lease + two-worker concurrency + fan-in + independent verification"
       ],
-      "evidence": "Durable orchestration machinery exists, but no direct equal-or-better Opus 5.5 delegation evaluation is preserved.",
+      "evidence": "Fresh two-process local verification passed distinct worker/task identity, real overlap, cross-claim rejection, exactly-once execution, exact two-result fan-in, independent task/mission hash recomputation, and $0 spend.",
       "sources": [
-        "https://www.anthropic.com/claude-opus-5-5",
-        "https://openai.com/index/gpt-6-astra/"
+        "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json"
       ],
-      "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "internalization_required": false,
+      "ownership_note": "Scoped mechanical delegation/coordination is Brain-owned and reusable. Whole-family Opus credit remains open for cognitive delegation quality, adaptive worker selection, >2-worker behavior, and autonomous wake.",
+      "internalized_configuration": [
+        "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
+      ],
+      "next_required_action": "Reuse this owned coordination mechanism; separately acquire/verify residual cognitive delegation quality and broader-scale behavior."
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -326,7 +329,6 @@
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "ARTIFACT_CREATION",
       "COMMUNICATION_AND_SYNTHESIS",
       "UNKNOWN_DOMAIN_ADAPTATION"
@@ -334,7 +336,8 @@
     "owned_components_not_full_family": [
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "MULTI_CAPABILITY_COMPOSITION"
+      "MULTI_CAPABILITY_COMPOSITION",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
     ],
     "revoked_false_ownership_packages": [
       "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
