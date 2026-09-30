@@ -830,6 +830,19 @@ def main():
     hierarchy=load("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
     queue=load("canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json")
 
+    current=pointer.get("current_frontier") or {}
+    immediate=queue.get("immediate_frontier") or {}
+    if str(current.get("active_capability_target") or "")!=str(hierarchy.get("active_capability_target") or ""):
+        fail("POINTER_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(current.get("critical_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("POINTER_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+    if str(current.get("next_step") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("POINTER_HIERARCHY_NEXT_ACTION_MISMATCH")
+    if str(immediate.get("exact_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+    if str(immediate.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH")
+
     boot=pointer.get("boot_requirements") or {}
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
     if boot.get("operator_obs_decision_boundary_required") is not True:
