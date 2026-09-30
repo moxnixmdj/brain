@@ -69,8 +69,7 @@
     "lease_key_fields": [
       "canonical_generation",
       "capability_target",
-      "causal_blocker",
-      "action_kind"
+      "causal_blocker"
     ]
   },
   "last_reconciled_profile": {
