@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, hashlib, pathlib
+import argparse, pathlib, subprocess
 
 ROOT=pathlib.Path(__file__).resolve().parents[5]
 BASE=ROOT/"canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/config/mini.yaml"
@@ -9,8 +9,9 @@ EXPECTED_BASE="8b72f71f8092ae805ec43221dbeaeefc2340cd3e"
 SKILLS=[["using-superpowers","069d578445805a28b8dacbf70cdf045e1673def0"],["brainstorming","e3f17885f8d5f87d7a92f0469141662b476e1288"],["writing-plans","4cf0275d88d67aa4ef09f4bbca9970ed6ff74a00"],["using-git-worktrees","1381dacb3516b94382dd6ec736ede21ee8ede2b3"],["test-driven-development","46838cc9e893c06259e3bdad0fc2425b36242f15"],["systematic-debugging","095d194ac041502905f15b01d22d294fb94db8b2"],["subagent-driven-development","f7bbf6a01b519807ec00baf5e98522bed33f8834"],["dispatching-parallel-agents","3fa091b348bbe0a18eaa0e17e9092c97f7005cbe"],["requesting-code-review","6d995da5c7d8d6c5a3cc63ddb701427f88ec2021"],["receiving-code-review","950da7b74bf6dbed6b8726d12ddadd65a9f5fda7"],["verification-before-completion","7d45333cc4a49c57a80df6c1fe2fa777a207afbc"],["executing-plans","49077ad961268a840d7dcb5d8c5d06c46fc276ae"],["finishing-a-development-branch","fa8aecaf8813f1b19d19996f7957d1b0121f2d9c"]]
 
 def blob_sha(path):
-    raw=path.read_bytes()
-    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+    p=path.resolve()
+    cp=subprocess.run(["git","hash-object",str(p)],cwd=ROOT,text=True,capture_output=True,check=True)
+    return cp.stdout.strip()
 
 def checked(path, expected):
     actual=blob_sha(path)
