@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_PACKAGE_V1",
+  "capability_id": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "status": "VERIFIED_ACQUIRED",
+  "route": "evidence.claim_relation.evaluate.stdlib",
+  "provides": [
+    "evidence.claim.verbatim_support",
+    "evidence.numeric_relation.typed"
+  ],
+  "requires": [
+    "evidence.objective_anchored.extracted",
+    "caller_supplied_typed_claim_spec"
+  ],
+  "limitations": [
+    "Verbatim support means exact normalized substring support only; paraphrases and semantic entailment are not inferred.",
+    "Numeric relations operate only on explicitly referenced numeric_literals emitted by a verified extracted-evidence artifact.",
+    "Numeric units must match exactly; no unit conversion is performed.",
+    "Does not establish factual correctness, evidence sufficiency, causality, or that a referenced literal has the intended semantic role."
+  ],
+  "verification": {
+    "status": "INDEPENDENT_PUBLIC_CROSS_DOMAIN_QUALIFICATION_PASS",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 154,
+    "public_run_id": 36680339068,
+    "public_job_id": 109774171806,
+    "exact_producer_git_blob": "f4ee15d0be0235fceeb12dea3c1a64fa88bef532",
+    "fresh_domains": [
+      "CLIMATE",
+      "ASTRONOMY",
+      "MATERIALS",
+      "SOFTWARE_SYSTEMS"
+    ],
+    "producer_regressions_passed": 7,
+    "independent_cross_domain_tests_passed": 4,
+    "unit_mismatch_fails_closed": true,
+    "paraphrase_not_promoted": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false
+}
