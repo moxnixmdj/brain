@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_V1",
+  "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+  "status": "VERIFIED_REUSABLE_SUBCAPABILITY__NO_PARENT_FRONTIER_PROMOTION__NO_GLOBAL_INHERITANCE_COUNTER_CREDIT_IN_THIS_PR",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_useful_behavior": "Given a provenance-verified ordinary web candidate and an independently qualified deterministic BM25 objective-relevance receipt selecting that candidate, freshly refetch the exact source, fail closed on identity drift, and emit bounded verbatim visible-text evidence units with hashes, offsets, IDs, and objective anchors.",
+  "route": {
+    "producer": "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py",
+    "integration": "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+    "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 158,
+    "workflow_run_id": 36680967490,
+    "job_id": 109776102956,
+    "conclusion": "SUCCESS",
+    "exact_producer_git_blob": "6598ba92307c55fe6e645b4ecba070d2259818e2",
+    "exact_integration_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+    "fresh_live_domains": [
+      "sqlite.org",
+      "docs.python.org"
+    ],
+    "independent_refetch_visible_text_reconstruction": "PASS",
+    "visible_text_hash_match": "PASS",
+    "evidence_unit_offset_membership": "PASS",
+    "evidence_unit_sha256": "PASS",
+    "evidence_unit_id_recomputation": "PASS",
+    "non_selected_candidate_rejected_before_network": "PASS",
+    "parent_effective_non_ror_integration": "PASS"
+  },
+  "provenance": [
+    "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json"
+  ],
+  "limitations": [
+    "Does not determine support versus contradiction.",
+    "Does not establish semantic entailment.",
+    "Does not establish factual correctness or causality.",
+    "Does not establish evidence quality or sufficiency.",
+    "Does not establish source independence.",
+    "Does not by itself complete or promote the parent frontier capability."
+  ],
+  "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "claim_scope_exact": true
+}
