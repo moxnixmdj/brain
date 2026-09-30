@@ -148,6 +148,15 @@
       "verification_path": "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json",
       "incremental_spend_usd": 0,
       "residual": "COGNITIVE_DELEGATION_QUALITY__ADAPTIVE_WORKER_SELECTION__GREATER_THAN_TWO_SCALE__AUTONOMOUS_WAKE"
+    },
+    {
+      "capability_id": "OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1",
+      "parent_family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "adjudication_path": "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json",
+      "verification_path": "canonical/capabilities/opus55/OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_FRESH_VERIFICATION_V1.json",
+      "incremental_spend_usd": 0,
+      "residual": "SEMANTIC_SELF_CRITIQUE__ROOT_CAUSE_DEBUGGING__ARBITRARY_RECOVERY"
     }
   ],
   "task_semantic_conjunctive_role_v1": {
