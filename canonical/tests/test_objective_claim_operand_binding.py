@@ -132,6 +132,8 @@ class BinderTests(unittest.TestCase):
         self.assertEqual(out["status"],"CLAIM_SPEC_AND_OPERANDS_BOUND",out)
         self.assertEqual(out["relation_spec"]["operator"],"GT",out)
         self.assertTrue(out["relation_result"]["predicate"],out)
+        self.assertIn("database",out["parsed_objective"]["left_tokens"])
+        self.assertIn("database",out["parsed_objective"]["right_tokens"])
         self.assertIn("a",out["parsed_objective"]["left_tokens"])
         self.assertIn("b",out["parsed_objective"]["right_tokens"])
 
