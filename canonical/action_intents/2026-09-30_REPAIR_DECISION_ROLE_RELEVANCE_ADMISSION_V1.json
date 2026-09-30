@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "REPAIR-DECISION-ROLE-RELEVANCE-ADMISSION-20260930-V1",
-  "status": "PROPOSED",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "81f2f813f03b5d80ac2e44080bd19d967bd06463",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -67,5 +67,19 @@
     ],
     "stop_rule": "EXACT_BYTE_INDEPENDENT_GUARDED_NON_PARENT_QUALIFICATION_BEFORE_MERGE__NO_MATERIALS_TASK_C_REPLAY"
   },
-  "stop_condition": "Implement only generic decision-role relevance admission; independently guard-qualify exact bytes; no parent replay or capability credit from repair alone."
+  "stop_condition": "Implement only generic decision-role relevance admission; independently guard-qualify exact bytes; no parent replay or capability credit from repair alone.",
+  "candidate_blobs": {
+    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "4a0d49386c3c1410a09d847fddd9772545ba0095",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "0abb5225fe9fba2443f2df46b2e41bd1c7dd7436",
+    "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "canonical/tests/test_decision_role_relevance_admission.py": "2deabf08cad9476afd3467edcf7db5224927488b",
+    "canonical/runtime/bound_capabilities/research_query_focus.py": "5403e1dc05716fcfc4f9a91b4534f55dc547eb7f"
+  },
+  "implementation_summary": {
+    "new_capability": "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py",
+    "changed_capability": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+    "inherited_parser": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+    "authored_test": "canonical/tests/test_decision_role_relevance_admission.py",
+    "behavior": "Rank by incumbent BM25, but for bounded explicit comparisons select the highest positive candidate that also passes legacy subject coverage plus deterministic decision-property/operand-role admission. Unsupported objective shapes preserve incumbent behavior."
+  }
 }
