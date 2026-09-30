@@ -878,6 +878,50 @@ def enforce_promotion_truth(intent,files,base):
         if not verifiers:
             fail("PROMOTION_INDEPENDENT_VERIFIER_SUPPLIERS_MISSING")
 
+def _verified_receipt_next_gap(path):
+    try:
+        doc=load(path)
+    except Exception:
+        return None
+    status=str(doc.get("status") or "")
+    gap=str(doc.get("next_causal_gap") or "").strip()
+    if not status.startswith("VERIFIED_") or not gap:
+        return None
+    if doc.get("parent_capability_promoted") is True:
+        return None
+    return gap
+
+def enforce_verified_promotion_frontier_atomicity(files,hierarchy,scoreboard,target):
+    checks=[]
+    last=hierarchy.get("last_verified_subcapability")
+    if isinstance(last,dict):
+        path=str(last.get("evidence_path") or "").strip()
+        if path:
+            checks.append(("LAST_VERIFIED_SUBCAPABILITY",path))
+    accounting=scoreboard.get("active_frontier_accounting") or {}
+    last_score=accounting.get("last_verified_subcapability")
+    if isinstance(last_score,dict):
+        path=str(last_score.get("evidence_path") or "").strip()
+        if path:
+            checks.append(("SCOREBOARD_LAST_VERIFIED_SUBCAPABILITY",path))
+    for path in files:
+        if path.startswith("canonical/capabilities/obsolescence/") and path.endswith(".json"):
+            checks.append(("CHANGED_PROMOTION_RECEIPT",path))
+    seen=set()
+    for source,path in checks:
+        if path in seen or not (ROOT/path).is_file():
+            continue
+        seen.add(path)
+        gap=_verified_receipt_next_gap(path)
+        if not gap:
+            continue
+        if str(hierarchy.get("current_parent_blocker") or "")!=gap:
+            fail("VERIFIED_PROMOTION_FRONTIER_NOT_ADVANCED:"+source+":"+path)
+        if str(accounting.get("active_subcapability_target") or "")!=gap:
+            fail("VERIFIED_PROMOTION_SCOREBOARD_SUBCAPABILITY_NOT_ADVANCED:"+source+":"+path)
+        if str(target.get("residual_gap") or "")!=gap:
+            fail("VERIFIED_PROMOTION_TARGET_RESIDUAL_NOT_ADVANCED:"+source+":"+path)
+
 def active_target_mirror_errors(hierarchy,target):
     errors=[]
     expected_target=str(hierarchy.get("active_capability_target") or "")
@@ -941,12 +985,15 @@ def main():
             target={}
     if target:
         enforce_active_target_record_consistency(hierarchy,target)
+        enforce_verified_promotion_frontier_atomicity(files,hierarchy,scoreboard,target)
 
     boot=pointer.get("boot_requirements") or {}
     if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
         fail("CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY_NOT_REQUIRED")
     if boot.get("runtime_cognition_provenance_required_for_cognitive_credit") is not True:
         fail("RUNTIME_COGNITION_PROVENANCE_NOT_REQUIRED_FOR_COGNITIVE_CREDIT")
+    if boot.get("verified_promotion_frontier_atomicity_required") is not True:
+        fail("VERIFIED_PROMOTION_FRONTIER_ATOMICITY_NOT_REQUIRED")
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
     if boot.get("operator_obs_decision_boundary_required") is not True:
         fail("OPERATOR_OBS_DECISION_BOUNDARY_NOT_REQUIRED")
