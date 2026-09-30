@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-PARENT-OPENENDED-HARNESS-VALIDITY-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_PARENT_BLOCKER_MISCLASSIFIED_FROM_HARNESS_BYPASS",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_PARENT_BLOCKER_MISCLASSIFIED_FROM_HARNESS_BYPASS::EVIDENCE_PRESERVATION",
+  "expected_parent_frontier_change": "Remove the unsupported compiler-gap diagnosis, preserve climate task as spent/no-replay with zero parent credit, restore the missing-admissible-Task-A blocker, and require the next fresh task to run through the canonical mission entrypoint.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "pre-misclassification main ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "runtime blob 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9 public run_goal/_run_goal_unstamped fallback",
+    "runner PR49 run 36670516407 direct-compiler harness",
+    "runner PR52 run 36670619213 canonical run_goal diagnostic with missing _runtime_mission_path",
+    "runner main inert SQLite carrier remains unarmed; no valid fresh parent Task A result exists"
+  ],
+  "evidence_presence_classification": "MISCLASSIFIED_PARENT_DIAGNOSTIC__RECEIPTS_PRESERVED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Restore canonical parent mirrors to the pre-misclassification blocker, preserve all receipts and no-replay state, then freeze a fresh Task A on the resulting exact base and execute only through the canonical mission entrypoint.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Make the parent frontier reflect Brain behavior rather than a narrower test harness.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Correct the evidence boundary and immediately restore a valid path to fresh parent evidence.",
+      "proxy_goals_deleted": [
+        "repair compiler from bypassed harness",
+        "replay climate task",
+        "credit duplicate execution",
+        "spend internally inconsistent World Bank mission"
+      ],
+      "surviving_necessity": "A fresh genuinely open-ended Task A must exercise the full canonical runtime path."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "public run_goal fallback",
+        "bound grounding/composition",
+        "targeted/federated auto capability acquisition",
+        "canonical mission loader"
+      ],
+      "external_existing_routes_checked": [
+        "runner PR49 and PR52 immutable logs/artifacts"
+      ],
+      "capability_work_deleted": [
+        "no Brain runtime repair justified yet",
+        "no supplier repair justified from missing carrier mission path",
+        "no model route"
+      ],
+      "surviving_gap": "No admissible full-runtime fresh open-ended parent Task A result."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific harness defects contaminated diagnosis; not evidence of the intrinsic parent capability.",
+      "delete_bypass_substitute_options": [
+        "delete bad diagnosis",
+        "preserve receipts",
+        "substitute canonical mission entrypoint",
+        "freeze fresh task"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CORRECT_EVIDENCE_SCOPE_AND_USE_CANONICAL_ENTRYPOINT",
+        "PATCH_COMPILER",
+        "PATCH_SUPPLIERS",
+        "REPLAY_CLIMATE"
+      ],
+      "losing_routes_reason": "Compiler and supplier failures were produced by harness bypass/omission; replay is forbidden. Evidence correction plus a canonical-entrypoint fresh task is the shortest truthful route.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. The next fresh parent task is the direct behavioral test after carrier-path correction."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "compile-gap repair frontier from dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+        "World Bank mission as genuine parent Task A",
+        "climate replay lanes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime fallback remains inherited",
+        "carrier exact-byte closure remains inherited",
+        "cognition provenance firewall remains inherited"
+      ],
+      "fresh_reuse_plan": "Refreeze the unspent objective-only SQLite task on the corrected exact base with a mission-file wrapper and invoke astra_runtime.py on that mission exactly once."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact PR49 harness",
+        "reused exact PR52 harness/terminal",
+        "reused current runtime source"
+      ],
+      "search_stop_decision": "The mismatch is exact and internal. Further supplier search before a valid full-runtime task would optimize a carrier artifact.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and both immutable runner receipts were refreshed immediately before this correction."
+    },
+    "routes_considered": [
+      "CORRECT_EVIDENCE_SCOPE_AND_USE_CANONICAL_ENTRYPOINT",
+      "PATCH_COMPILER",
+      "PATCH_SUPPLIERS",
+      "REPLAY_CLIMATE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "DIRECT_COMPILER_HARNESS_AS_PARENT_PROOF",
+      "MISSING_MISSION_PATH_AS_BRAIN_FAILURE",
+      "CLIMATE_REPLAY",
+      "WORLD_BANK_PREDECLARED_AUTHORITY_TASK_AS_PARENT_PROOF"
+    ],
+    "selected_surviving_route": "CORRECT_EVIDENCE_SCOPE_AND_USE_CANONICAL_ENTRYPOINT",
+    "why_selected_route_is_fastest_sufficient": "It requires no capability implementation, removes two false blockers, and converts the next single execution into valid parent evidence.",
+    "expected_parent_level_state_change": "Restore parent blocker to missing admissible Task A and constrain the next execution path to the canonical mission entrypoint.",
+    "stop_condition": "After correction merge, freeze a fresh genuinely open-ended Task A on exact new main and execute once through canonical astra_runtime mission loading.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Evidence-path correction determined from exact runtime and carrier source plus immutable receipts."
+    }
+  }
+}
