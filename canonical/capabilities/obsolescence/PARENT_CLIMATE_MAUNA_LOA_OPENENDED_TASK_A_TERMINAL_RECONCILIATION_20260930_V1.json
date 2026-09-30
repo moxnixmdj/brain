@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_TERMINAL_RECONCILIATION_V1",
-  "status": "EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__TASK_SPENT__REPLAY_FORBIDDEN__PARENT_NOT_PROMOTED",
+  "status": "EXECUTED_ONCE__TASK_SPENT__HARNESS_ADMISSIBILITY_CORRECTED__REPLAY_FORBIDDEN__PARENT_NOT_PROMOTED",
   "checked_on": "2026-09-30",
   "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
@@ -43,16 +43,19 @@
     "compiled_prefix": []
   },
   "classification": {
-    "evidence_scope": "ADMISSIBLE_REAL_OPEN_ENDED_MODEL_INDEPENDENT_EXECUTION_FAILURE",
-    "producer_reached_current_runtime": true,
+    "evidence_scope": "SPENT_REAL_TASK__INADMISSIBLE_FOR_FULL_RUNTIME_PARENT_CAUSAL_LOCALIZATION",
+    "producer_reached_current_runtime": false,
+    "producer_reached_public_run_goal": false,
+    "harness_directly_called_goal_compiler": true,
+    "harness_exited_on_compile_failure_before_public_runtime_fallbacks": true,
     "failure_before_source_discovery": true,
     "failure_before_tool_execution": true,
     "failure_before_quantitative_analysis": true,
     "parent_capability_proven": false,
     "parent_capability_falsified": false,
-    "exact_missing_capability": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING",
-    "exact_residual": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "implication": "The inherited model-independent stack does not currently compile the first broad natural-language research objective clause into any verified capability. The previous broad evidence-absence blocker is therefore replaced by this concrete compiler/grounding gap."
+    "exact_missing_capability": null,
+    "exact_residual": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "implication": "The helper compiler rejected the first broad clause, but the carrier did not invoke astra_runtime.run_goal. Therefore existing runtime fallback stages for gap classification, bound-capability grounding/composition, targeted acquisition, and federated discovery were not exercised. The compile observation is real but cannot localize the Brain's first causal gap."
   },
   "replay_budget": {
     "executions_observed": 1,
@@ -67,9 +70,9 @@
     "The run consumed zero incremental monetary spend."
   ],
   "canonical_state_transition": {
-    "previous_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
-    "new_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "task_A_status": "SPENT_FAIL_FIRST_CAUSAL_GAP",
+    "previous_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "new_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "task_A_status": "SPENT_HARNESS_INADMISSIBLE_FOR_FULL_RUNTIME_ROUTE",
     "capability_credit_delta": 0,
     "promotion_authorized": false
   },
@@ -79,7 +82,9 @@
     "NO_PARENT_PROMOTION_FROM_THIS_FAILED_RUN",
     "NO_TASK_SPECIFIC_COMPILER_RULE",
     "NO_MODEL_PLANNER_OR_LOCAL_MODEL_TO_MASK_THE_GAP",
-    "NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION"
+    "NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION",
+    "NO_DIRECT_COMPILE_GOAL_OR_PRIVATE_EXECUTOR_AS_PARENT_PRODUCER_PATH",
+    "NO_COMPILER_REPAIR_FROM_PR337_HARNESS_OBSERVATION_ALONE"
   ],
-  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
+  "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP"
 }
