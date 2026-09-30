@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-  "status": "REOPENED_BY_REGRESSION__INPUT_CONTRACT_COMPATIBILITY_FALSIFIED",
+  "status": "ACQUIRED_VERIFIED_AFTER_REGRESSION_REPAIR__FRESH_REAL_REQUALIFICATION_PASS",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given a plain consequential goal, deterministically map the goal's required operations, entities, constraints, and output contract onto semantically compatible capabilities already present in Brain's bound capability registry before invoking external supplier discovery; preserve ambiguity and fail closed when no binding is justified.",
@@ -29,11 +29,11 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "REOPENED_BY_REGRESSION",
-  "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_GENERIC_GROUNDING_INPUT_CONTRACT_COMPATIBILITY__REUSE_EXISTING_REGISTRY_ACTION_TEMPLATES_AND_BINDER_FIRST__NO_REQUESTS_TASK_REPLAY",
-  "obsolescence_status": "REOPENED_BY_REGRESSION",
-  "winning_route": null,
-  "capability_strength_result": "PRIOR_SINGLE_CAPABILITY_TASKS_PASS__FRESH_MULTI_STEP_LITERAL_URL_TASK_FALSIFIES_INPUT_CONTRACT_COMPLETENESS",
+  "current_status": "ACQUIRED_VERIFIED",
+  "next_action": "RECONCILE_FRONTIER_TO_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__FRESH_REAL_TASK_A_ALREADY_PASSED__FRESH_REUSE_STILL_REQUIRED",
+  "obsolescence_status": "ACQUIRED_VERIFIED",
+  "winning_route": "DETERMINISTIC_BOUND_GROUNDING_WITH_EXECUTABLE_INPUT_BINDABILITY_AND_EXPLICIT_VERIFIED_INITIAL_FACTS",
+  "capability_strength_result": "PRIOR_BROAD_REAL_TASKS_PRESERVED__REQUESTS_REGRESSION_REPAIRED__FRESH_UNIFIED_PLANNING_REAL_TASK_PASS",
   "incremental_cost_result_usd": 0,
   "model_dependency_count": 0,
   "independent_verification": {
@@ -62,6 +62,13 @@
       "verifier_blob": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
       "artifact_id": 11068728150,
       "artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
+    },
+    "requalification": {
+      "run_id": 36652169397,
+      "job_id": 109688570787,
+      "conclusion": "success",
+      "method": "independent live GitHub API refetch and identity/assessment reconstruction",
+      "model_dependency_count": 0
     }
   },
   "inheritance_path": [
@@ -69,11 +76,19 @@
     "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py",
     "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
   ],
-  "residual_gap": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
+  "residual_gap": null,
   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
   "regression_evidence_path": "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json",
   "regression_run_id": 36649042160,
   "regression_scope": "SEMANTIC_CANDIDATE_SELECTED_WITHOUT_EXECUTABLE_INPUT_BINDABILITY",
   "prior_successes_preserved": true,
-  "prior_promotion_credit_currently_valid": false
+  "prior_promotion_credit_currently_valid": true,
+  "requalification_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+  "requalification_run_id": 36652169397,
+  "requalification_artifact_id": 11070249875,
+  "requalification_artifact_digest": "sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1",
+  "repaired_scope": [
+    "INPUT_CONTRACT_BINDABILITY_REQUIRED_FOR_SEMANTIC_GROUNDING",
+    "UNPROVIDED_PREREQUISITES_REQUIRE_EXPLICIT_VERIFIED_INITIAL_FACTS"
+  ]
 }
