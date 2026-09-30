@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "VERIFY-SUPERPOWERS-CODING-DEEPSWE-SMOKE-20260930-V1",
+  "status": "AUTHORIZED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "action_kind": "BRAIN_CONFIGURED_CAPABILITY_VERIFICATION",
+  "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ADVANCED_AGENTIC_CODING::DEEPSWE_SMOKE_VERIFICATION",
+  "expected_parent_frontier_change": "Gain direct objective evidence about whether the Brain-owned coding methodology improves the same Astra substrate; no Opus ownership promotion from smoke alone.",
+  "theory_invariants": {
+    "external_winner_role": "SPECIMEN_ONLY",
+    "capability_policy": "BRAIN_OWNED_CONFIGURATION__VERIFY_BRAIN_ROUTE",
+    "general_computation_substrate": "GPT_6_ASTRA",
+    "capability_invention": "FORBIDDEN",
+    "opus_acceptance_bar": "NO_PROMOTION_UNTIL_SUFFICIENT_EXTERNAL_OBJECTIVE_EVIDENCE",
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "brain_artifact_test": "PASS",
+    "no_hidden_capability_provider_test": "EVALUATE_WITH_BASELINE_CONTROL",
+    "general_substrate_test": "BASELINE_AND_CONFIGURED_USE_SAME_MODEL",
+    "specimen_separation_test": "PASS",
+    "reexecution_without_rediscovery_test": "PASS",
+    "brain_configured_verification_test": "STARTING_SMOKE",
+    "ownership_package_test": "PENDING"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_SUPERPOWERS_AUTONOMOUS_EXECUTION_PROFILE_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
+    "real_outcome": "Test the causal contribution of Brain's internalized engineering methodology.",
+    "required_capability": "OBJECTIVE_DETERMINISTIC_CODING_TASK_EXECUTION",
+    "obs_goal": {
+      "real_outcome": "Compare the same cognition substrate with and without Brain-owned engineering configuration.",
+      "proxy_goals_deleted": [
+        "Provider benchmark win",
+        "Opaque model routing"
+      ],
+      "surviving_necessity": "Brain-configured coding route lacks direct verification."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Internalized Superpowers skill stack",
+        "Autonomous execution profile"
+      ],
+      "external_existing_routes_checked": [
+        "DeepSWE deterministic task/verifier"
+      ],
+      "capability_work_deleted": [
+        "No new coding capability invention"
+      ],
+      "surviving_gap": "Configured route not tested."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Verification evidence gap.",
+      "delete_bypass_substitute_options": [
+        "Use deterministic public DeepSWE task"
+      ],
+      "surviving_causal_blocker": "NO_DIRECT_BRAIN_CONFIGURED_ROUTE_RESULT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "REUSE",
+        "CONFIGURE",
+        "VERIFY"
+      ],
+      "routes_ranked": [
+        "DEEPSWE_BASELINE_VS_CONFIGURED"
+      ],
+      "losing_routes_reason": "Synthetic tasks lack external benchmark reference.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use published deterministic DeepSWE verifier, not a new synthetic oracle."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [],
+      "adjacent_capabilities_absorbed": [
+        "TDD",
+        "debugging",
+        "review",
+        "verification"
+      ],
+      "fresh_reuse_plan": "Same profile reused across further sampled tasks if smoke passes."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused public pinned DeepSWE task metadata"
+      ],
+      "search_stop_decision": "One deterministic smoke is sufficient before spending more included model allowance.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "DEEPSWE_TERMENV_BASELINE_VS_CONFIGURED_SAME_ASTRA_SUBSTRATE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "OPAQUE_PROVIDER_BENCHMARK_AS_OWNERSHIP"
+    ],
+    "selected_surviving_route": "DEEPSWE_TERMENV_BASELINE_VS_CONFIGURED_SAME_ASTRA_SUBSTRATE",
+    "why_selected_route_is_fastest_sufficient": "Public pinned task, deterministic verifier, no paid grader, and same-model A/B control.",
+    "expected_parent_level_state_change": "SMOKE_EVIDENCE_ONLY__NO_OWNERSHIP_PROMOTION",
+    "stop_condition": "Capture baseline/configured patches and verifier results; no ownership promotion from one task.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Verification route is already fixed by the public deterministic benchmark."
+    }
+  }
+}
