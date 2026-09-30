@@ -157,6 +157,15 @@
       "verification_path": "canonical/capabilities/opus55/OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_FRESH_VERIFICATION_V1.json",
       "incremental_spend_usd": 0,
       "residual": "SEMANTIC_SELF_CRITIQUE__ROOT_CAUSE_DEBUGGING__ARBITRARY_RECOVERY"
+    },
+    {
+      "capability_id": "OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_MECHANISM_V1",
+      "parent_family": "ARTIFACT_CREATION",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "adjudication_path": "canonical/capabilities/opus55/OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_MECHANISM_V1.json",
+      "verification_path": "canonical/capabilities/opus55/OPUS55_ARTIFACT_XLSX_PPTX_INTERNALIZATION_VERIFICATION_V1.json",
+      "incremental_spend_usd": 0,
+      "residual": "DOCX__PDF__ADVANCED_OFFICE_FEATURES__VISUAL_DESIGN_QUALITY__COMPLEX_EDIT_PRESERVATION__PROFESSIONAL_JUDGMENT"
     }
   ],
   "task_semantic_conjunctive_role_v1": {

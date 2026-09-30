@@ -897,6 +897,19 @@
         "SCOPED_BRAIN_OWNED_COMPONENT_ADDED"
       ],
       "claim_scope": "FAIL_CLOSED_EXECUTION_VERIFICATION_AND_RECOVERY"
+    },
+    {
+      "event_id": "OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_COMPONENT_OWNED_20260930",
+      "capability_id": "OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_MECHANISM_V1",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "capability_package": "canonical/capabilities/opus55/OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_MECHANISM_V1.json",
+      "verification": "canonical/capabilities/opus55/OPUS55_ARTIFACT_XLSX_PPTX_INTERNALIZATION_VERIFICATION_V1.json",
+      "internalized_configuration": "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07",
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "SCOPED_BRAIN_OWNED_COMPONENT_ADDED"
+      ],
+      "claim_scope": "XLSX_PPTX_READ_WRITE_TABLES_FORMATTING_SLIDES_NOTES_ROUNDTRIP"
     }
   ],
   "last_real_output_event": {

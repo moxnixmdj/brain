@@ -1,0 +1,27 @@
+{
+  "brain_owned_mechanism": "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07",
+  "capability_id": "OPUS55_SCOPED_XLSX_PPTX_ARTIFACT_MECHANISM_V1",
+  "incremental_spend_usd": 0,
+  "ownership_tests": {
+    "brain_artifact_test": "PASS",
+    "current_brain_copy_verification_test": "PASS_11_OF_11",
+    "no_hidden_capability_provider_test": "PASS",
+    "permissive_license_test": "PASS_MIT_0",
+    "reexecution_without_rediscovery_test": "PASS",
+    "whole_opus_family_test": "NOT_CLAIMED"
+  },
+  "parent_family": "ARTIFACT_CREATION",
+  "residual_scope": [
+    "DOCX_RUNTIME_DEPENDENCY_AND_VERIFICATION",
+    "PDF_CREATION_EDITING",
+    "COMPLEX_EXISTING_FILE_EDIT_PRESERVATION",
+    "VISUAL_LAYOUT_AND_DESIGN_QUALITY",
+    "CHARTS_IMAGES_AND_ADVANCED_OFFICE_FEATURES",
+    "PROFESSIONAL_JUDGMENT_AND_CONTENT_QUALITY",
+    "WHOLE_OPUS_5_5_ARTIFACT_CREATION_PARITY"
+  ],
+  "schema": "PROJECT_BRAIN_PERMANENT_CAPABILITY_PACKAGE_V1",
+  "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+  "useful_scope": "Deterministic read/write artifact operations for XLSX and PPTX: Markdown/table conversion, multiple Excel sheets, header formatting, PowerPoint slides, bullets, tables, speaker notes, and round-trip content extraction.",
+  "verification": "canonical/capabilities/opus55/OPUS55_ARTIFACT_XLSX_PPTX_INTERNALIZATION_VERIFICATION_V1.json"
+}
