@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-ROR-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_FRONTIER_MIRRORS_STALE_AFTER_VERIFIED_ROR_SOURCE_AUTHORITY_PROMOTION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_FRONTIER_MIRRORS_STALE_AFTER_VERIFIED_ROR_SOURCE_AUTHORITY_PROMOTION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile canonical frontier mirrors to current main after independent promotion of source.authority.identity.ror: preserve zero parent capability/scoreboard credit and advance the active blocker to model-independent primary-source and objective-relevance verification.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main commit 82fd216b1e066813f206066751475d5eac323a61 promotes independently qualified ROR authority identity",
+    "promotion record names next_gap MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION",
+    "pointer/hierarchy/queue/scoreboard/target still expose older blockers"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PRESENT_CANONICAL_MIRRORS_STALE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after pointer, hierarchy, queue, scoreboard, and active frontier target agree exactly on the post-ROR blocker and next action; no runtime change, no parent replay, no capability promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "SAME_PARENT_TARGET__POST_SUBCAPABILITY_BLOCKER_RECOMPUTE",
+    "evidence": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "82fd216b1e066813f206066751475d5eac323a61",
+    "real_outcome": "Restore one authoritative current frontier after the ROR authority subcapability was independently verified.",
+    "required_capability": "CANONICAL_FRONTIER_RECONCILIATION",
+    "obs_goal": {
+      "real_outcome": "Make all live frontier mirrors express the same proven blocker and next action.",
+      "proxy_goals_deleted": [
+        "new runtime work",
+        "new qualification",
+        "parent replay"
+      ],
+      "surviving_necessity": "Reconciliation is required because stale mirrors cannot authorize safe next execution."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current main canonical promotion record",
+        "existing frontier mirror files"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No new capability implementation"
+      ],
+      "surviving_gap": "Canonical mirrors lag the verified ROR promotion."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific canonical-state inconsistency.",
+      "delete_bypass_substitute_options": [
+        "Do not ignore stale mirrors",
+        "Do not infer next frontier from chat",
+        "Update only authoritative mirrors"
+      ],
+      "surviving_causal_blocker": "Cross-surface frontier inconsistency."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Mechanical mirror reconciliation from canonical evidence"
+      ],
+      "losing_routes_reason": "Any broader change would add work without improving truth.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Directly compare all five mirror fields after the change; no synthetic benchmark."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "old broad grounding blocker wording",
+        "old no-compatible-supplier wording"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "verified ROR source authority identity"
+      ],
+      "fresh_reuse_plan": "Not applicable; this action only reconciles canonical state."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse promotion receipt and current main state"
+      ],
+      "search_stop_decision": "No route discovery is needed for a pure reconciliation action.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to pure reconciliation."
+    },
+    "routes_considered": [
+      "MECHANICAL_CANONICAL_RECONCILIATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RUNTIME_CHANGE",
+      "PARENT_REPLAY",
+      "NEW_QUALIFICATION"
+    ],
+    "selected_surviving_route": "MECHANICAL_CANONICAL_RECONCILIATION",
+    "why_selected_route_is_fastest_sufficient": "It fixes the only current defect, stale authority surfaces, without touching executable capability code.",
+    "expected_parent_level_state_change": "Reconcile canonical frontier mirrors to current main after independent promotion of source.authority.identity.ror: preserve zero parent capability/scoreboard credit and advance the active blocker to model-independent primary-source and objective-relevance verification.",
+    "stop_condition": "Stop after pointer, hierarchy, queue, scoreboard, and active frontier target agree exactly on the post-ROR blocker and next action; no runtime change, no parent replay, no capability promotion.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action uses existing canonical evidence; no externalizable route selection occurs."
+    }
+  }
+}
