@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-BIOPHYSICS-RAPID-GROWTH-REAL-TASK-20260930-004",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "BIOPHYSICS_GROWTH_ENERGETICS_AND_PHYSIOLOGY",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "user_question": "Can massively parallel biological cell growth make an approximately 70 kg mammalian organism become approximately 700 kg in about 60 seconds, or do matter, growth-rate, energy, heat, and transport constraints remain binding?",
+  "sources": [
+    {
+      "id": "NCBI_CELL_CYCLE",
+      "authority": "NCBI / PMC",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3262245/",
+      "required_claim_categories": [
+        "typical mammalian cell-cycle timing",
+        "a reported human-cell-line cycle timing"
+      ]
+    },
+    {
+      "id": "NCBI_BODY_FLUIDS",
+      "authority": "NCBI Bookshelf / StatPearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK482447/",
+      "required_claim_categories": [
+        "adult human body-water mass-fraction range"
+      ]
+    },
+    {
+      "id": "NCBI_CARDIAC_OUTPUT",
+      "authority": "NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK54473/",
+      "required_claim_categories": [
+        "resting cardiac-output scale",
+        "healthy maximal-demand cardiac-output scale",
+        "exceptional-athlete maximal cardiac-output scale"
+      ]
+    }
+  ],
+  "scientific_contract": {
+    "initial_mass_kg": 70,
+    "final_mass_kg": 700,
+    "target_duration_s": 60,
+    "required_calculations": [
+      "added_mass_kg = final_mass_kg - initial_mass_kg",
+      "mass_ratio = final_mass_kg / initial_mass_kg",
+      "minimum_population_doublings = log2(mass_ratio)",
+      "growth_time_h_at_discovered_fast_cycle = minimum_population_doublings * discovered_fast_cycle_h",
+      "growth_time_h_at_discovered_typical_cycle = minimum_population_doublings * discovered_typical_cycle_h",
+      "required_external_mass_rate_kg_s = added_mass_kg / target_duration_s",
+      "adult_like_added_water_scale_kg = added_mass_kg * discovered_adult_water_fraction_range",
+      "adult_like_added_nonwater_scale_kg = added_mass_kg * (1 - discovered_adult_water_fraction_range)"
+    ],
+    "interpretation_rules": [
+      "Treat adult body-water fraction as an order-of-magnitude composition scale, not an exact engineered-organism specification.",
+      "Do not equate cardiac output with construction-feedstock throughput; report it only as an existing mammalian internal transport scale.",
+      "Parallel cell activity may reduce serial processing bottlenecks but cannot remove conserved external matter, cell-cycle population-doubling requirements, transport, or tissue-organization requirements.",
+      "Do not provide procedural genetic-engineering or wet-lab instructions."
+    ],
+    "decision_rule": "Conclude whether 60-second 10x organism-scale growth is compatible with known mammalian biology; distinguish known-biological infeasibility from absolute physical impossibility."
+  },
+  "required_output": {
+    "fields": [
+      "status",
+      "source_evidence",
+      "initial_mass_kg",
+      "final_mass_kg",
+      "added_mass_kg",
+      "mass_ratio",
+      "minimum_population_doublings",
+      "cell_cycle_reference_h",
+      "growth_time_bounds_h",
+      "required_external_mass_rate_kg_s",
+      "adult_like_added_water_scale_kg",
+      "adult_like_added_nonwater_scale_kg",
+      "cardiac_output_context_L_min",
+      "parallelism_effect",
+      "conclusion",
+      "limitations",
+      "provenance",
+      "model_dependency_count"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PARENT_BIOPHYSICS_RAPID_GROWTH_RESULT_20260930_V2.json"
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_procedural_bioengineering": true,
+    "no_source_task_tuning_after_execution": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Independently refetch the same authoritative sources without importing Brain producer modules, verify the cited quantitative source claims, recompute every arithmetic quantity using independent Python math or Wolfram, and compare consequential output fields and conclusion scope.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "anti_leakage": {
+    "source_claim_values_in_task_manifest": false,
+    "source_claim_values_must_be_discovered_from_sources": true,
+    "independent_oracle_expected_values_hidden_from_producer": true
+  },
+  "predecessor_preflight_rejection": {
+    "task_id": "PARENT-BIOPHYSICS-RAPID-GROWTH-REAL-TASK-20260930-003",
+    "public_run_id": 36665429136,
+    "producer_execution_count": 0,
+    "reason": "FOURTH_SOURCE_PUBMED_HTML_BODY_TOO_SMALL_ON_PUBLIC_CARRIER_PREFLIGHT",
+    "disposition": "SOURCE_DELETED_AS_NONESSENTIAL_BY_OBS"
+  }
+}
