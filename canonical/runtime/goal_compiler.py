@@ -3769,12 +3769,17 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
       "expect":{"type":"field_equals","field":"verified","value":True},
     }
     filt=(
+      'def astra_number: '
+      'if type=="number" then . '
+      'elif type=="string" then (try tonumber catch error("NUMERIC_RELATION_INPUT_NOT_NUMBER")) '
+      'else error("NUMERIC_RELATION_INPUT_NOT_NUMBER") end; '
       '.[0] as $r '
-      '| if (($r.left|type)!="number" or ($r.right|type)!="number" or ($r.threshold|type)!="number") '
-      'then error("NUMERIC_RELATION_INPUT_NOT_NUMBER") '
-      'else (($r.left-$r.right)|fabs) as $d '
-      '| {left:$r.left,right:$r.right,threshold:$r.threshold,'
-      'absolute_difference:$d,relation:"ABS_DIFF_LTE",predicate:($d <= $r.threshold)} end'
+      '| ($r.left|astra_number) as $left '
+      '| ($r.right|astra_number) as $right '
+      '| ($r.threshold|astra_number) as $threshold '
+      '| (($left-$right)|fabs) as $d '
+      '| {left:$left,right:$right,threshold:$threshold,'
+      'absolute_difference:$d,relation:"ABS_DIFF_LTE",predicate:($d <= $threshold)}'
     )
     compute={
       "type":"invoke_capability",
