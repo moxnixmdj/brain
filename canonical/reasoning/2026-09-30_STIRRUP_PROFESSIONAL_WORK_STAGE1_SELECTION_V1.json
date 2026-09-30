@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_STIRRUP_PROFESSIONAL_WORK_STAGE1_SELECTION_V1",
+  "status": "PRECOMMITTED_BEFORE_PROMPT_READ",
+  "real_objective": "Cheaply falsify the Brain-owned Stirrup professional-work configuration across multiple artifact classes before any broad GDPval run.",
+  "governing_invariants": [
+    "Prompts/reference files may be read only after task IDs are frozen.",
+    "Gold deliverables, task-specific rubrics/judge feedback, and model submissions are forbidden before outputs freeze.",
+    "Failed graded tasks are spent for fresh promotion evidence.",
+    "Capability credit remains zero in stage 1.",
+    "Knowledge remains external/JIT.",
+    "Hard incremental spend is $0."
+  ],
+  "selection_rule": "For each predeclared artifact class XLSX, PPTX, TEXT_CONFIG, among GDPval public tasks not previously prompt-exposed in this conversation, with <=3 reference files and 1-2 deliverable files, choose the lexicographically smallest SHA256(task_id).",
+  "contaminated_exclusions": [
+    "83d10b06-26d1-4636-a32c-23f92c57f30b",
+    "b57efde3-26d6-4742-bbff-2b63c43b4baa",
+    "8a7b6fca-60cc-4ae3-b649-971753cbf8b9",
+    "1752cb53-5983-46b6-92ee-58ac85a11283"
+  ],
+  "selected_tasks": [
+    {
+      "artifact_class": "XLSX",
+      "task_id": "a079d38f-c529-436a-beca-3e291f9e62a3",
+      "task_id_sha256": "0c68227c66ae624714e25a4e3b7e4ce7297bd1a0018eba6b074bf784f4316698",
+      "sector": "Information",
+      "occupation": "Producers and Directors",
+      "reference_file_count": 2,
+      "deliverable_file_count": 1,
+      "extensions": [
+        ".xlsx"
+      ]
+    },
+    {
+      "artifact_class": "PPTX",
+      "task_id": "be830ca0-b352-4658-a5bd-57139d6780ba",
+      "task_id_sha256": "0eb630d6f2f9306b15c4698a3b07f1d6f6f00d95687212b18b551138eba43f94",
+      "sector": "Manufacturing",
+      "occupation": "Industrial Engineers",
+      "reference_file_count": 1,
+      "deliverable_file_count": 1,
+      "extensions": [
+        ".pptx"
+      ]
+    },
+    {
+      "artifact_class": "TEXT_CONFIG",
+      "task_id": "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f",
+      "task_id_sha256": "aca4f5bc45cd1fc8a29b5e888ec2e74854877e714108efcf2aa88b6146eb076a",
+      "sector": "Professional, Scientific, and Technical Services",
+      "occupation": "Software Developers",
+      "reference_file_count": 0,
+      "deliverable_file_count": 2,
+      "extensions": [
+        ".txt",
+        ".yaml"
+      ]
+    }
+  ],
+  "material_premises": [
+    "OpenAI GDPval public split contains 220 tasks.",
+    "Artificial Analysis uses the public GDPval tasks with Stirrup for GDPval-AA.",
+    "The Brain-owned Stirrup evaluation protocol requires cheap cross-artifact falsification before broad matched comparison."
+  ],
+  "conclusion": "Freeze the three selected task IDs now. Only after this receipt is durable may cognition read their prompts and permitted reference files.",
+  "selected_route": "THREE_TASK_CROSS_ARTIFACT_STAGE1",
+  "rejected_material_alternatives": [
+    {
+      "route": "READ_PROMPTS_THEN_PICK_EASY_TASKS",
+      "reason": "Selection contamination and cherry-picking."
+    },
+    {
+      "route": "RUN_ALL_220_TASKS",
+      "reason": "Wasteful before cheap systemic falsification."
+    },
+    {
+      "route": "USE_DOCX_OR_PDF_FIRST",
+      "reason": "Those artifact mechanisms are not yet verified Brain-owned components; stage 1 should isolate the Stirrup route rather than knowingly mix unresolved artifact ownership."
+    }
+  ],
+  "uncertainties": [
+    "Stage-1 success is not Opus parity and yields zero capability credit."
+  ],
+  "assumptions": [
+    "Metadata-only preselection does not expose task solution content to cognition."
+  ],
+  "non_goals": [
+    "No broad GDPval score.",
+    "No Opus parity claim.",
+    "No gold deliverable inspection before output freeze."
+  ],
+  "next_action": "Read only the selected task prompts/reference files, execute through the saved Stirrup profile using Brain-owned tools, freeze outputs, then grade/inspect.",
+  "supersession_conditions": [
+    "A selected task proves inaccessible or violates hard safety/legal constraints before prompt read; replacement must use the same predeclared hash rule and be recorded before reading its prompt."
+  ],
+  "supersedes": []
+}
