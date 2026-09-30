@@ -580,11 +580,14 @@ def enforce_recursive_obs(intent,files,base):
 
 
 def blocker_lease_key(intent):
+    # Lease identity is the causal work unit, not the label chosen for the action.
+    # Including action_kind let the same blocker acquire multiple accidental owners
+    # simply by renaming the route. Intentional route races are handled explicitly
+    # below with intentional_route_race + shared route_race_id.
     parts=[
         str(intent.get("canonical_generation") or ""),
         str(intent.get("capability_target") or ""),
         str(intent.get("causal_blocker") or ""),
-        str(intent.get("action_kind") or ""),
     ]
     return "::".join(parts)
 

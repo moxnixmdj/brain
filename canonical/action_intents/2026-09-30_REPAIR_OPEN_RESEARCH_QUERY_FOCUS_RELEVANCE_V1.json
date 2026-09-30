@@ -3,13 +3,13 @@
   "action_id": "REPAIR-OPEN-RESEARCH-QUERY-FOCUS-AND-RELEVANCE-20260930-V1",
   "status": "VERIFIED_PENDING_MERGE",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+  "canonical_base_commit": "fa653c50621fb1686ba4cba576b631c1da37b6a3",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "causal_blocker": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT",
   "action_kind": "GENERIC_RESEARCH_ROUTING_REPAIR",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT::GENERIC_RESEARCH_ROUTING_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT",
   "expected_parent_frontier_change": "Replace whole-imperative search/relevance text with deterministic decision-subject focus; independently qualify cross-domain and preserve all truth/support gates. No genomics replay.",
   "highest_leverage_now": true,
   "prior_work_checked": [
@@ -25,7 +25,7 @@
   "incremental_spend_usd": 0,
   "stop_condition": "Stop after exact candidate bytes pass authored and independent guarded cross-domain qualification; then return to a materially different fresh parent Task C. Never replay genomics.",
   "recursive_obs": {
-    "canonical_base_commit": "0d795dad885e706e6eb1cfd4d20cd2b2edd5cf12",
+    "canonical_base_commit": "fa653c50621fb1686ba4cba576b631c1da37b6a3",
     "real_outcome": "Search and rank sources using the decision subject rather than orchestration language, so evidence presented downstream contains objective entities/quantities.",
     "required_capability": "MODEL_INDEPENDENT_RESEARCH_QUERY_FOCUS_AND_RELEVANCE_V1",
     "deletion_first_order_applied": [
