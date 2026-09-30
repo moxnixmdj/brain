@@ -21,7 +21,7 @@
     "closed stale PR #420 generic candidate"
   ],
   "evidence_presence_classification": "CAPABILITY_PRESENT_NARROWER_THAN_PARENT_MIRROR_CLAIM",
-  "expected_parent_frontier_change": "Preserve the verified exact-ROR-bound extraction child and its reusable-capability credit, but revoke the unsupported implication that generic evidence extraction is closed. Restore the parent blocker to generic evidence extraction until a provenance + qualified BM25 + fresh same-source non-ROR route is independently qualified.",
+  "expected_parent_frontier_change": "Restore generic evidence extraction as the active blocker while preserving the independently verified exact-ROR-bound extraction child and its existing reusable-capability credit.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "model_dependency_count": 0,
@@ -30,7 +30,7 @@
   "parent_task_replay": false,
   "parent_capability_promoted": false,
   "progress_credit": "EVIDENCE_SCOPE_CORRECTION_ONLY",
-  "stop_condition": "Stop after all parent frontier mirrors agree that the existing extraction receipt is exact-ROR-bound, generic evidence extraction remains active, no reusable child credit is deleted, no new capability credit is granted, and no spent parent task is replayed.",
+  "stop_condition": "All parent mirrors agree on generic extraction as active blocker, narrow extraction limitations are explicit, correction grants zero capability credit, and next action is generic non-ROR acquisition.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
@@ -129,87 +129,11 @@
     ],
     "selected_surviving_route": "CORRECT_PARENT_MIRRORS_PRESERVE_NARROW_CHILD",
     "why_selected_route_is_fastest_sufficient": "The evidence needed to falsify the broad frontier claim is already canonical: the promotion receipt explicitly requires an exact-ROR-bound source and the integrated frontend filters through ROR before extraction. Reconciliation requires no new experiment.",
-    "expected_parent_level_state_change": "Restore generic evidence extraction as the active blocker while preserving the independently verified ROR-bound extraction child and its existing reusable-capability credit.",
+    "expected_parent_level_state_change": "Restore generic evidence extraction as the active blocker while preserving the independently verified exact-ROR-bound extraction child and its existing reusable-capability credit.",
     "stop_condition": "All parent mirrors agree on generic extraction as active blocker, narrow extraction limitations are explicit, correction grants zero capability credit, and next action is generic non-ROR acquisition.",
     "route_frontier": {
       "discovery_required": false,
-      "checked_at_utc": "2026-09-30T06:49:00Z",
-      "max_age_hours": 24,
-      "incumbent_route": "NARROW_EXACT_ROR_BOUND_EXTRACTION_VERIFIED__GENERIC_PARENT_CLOSURE_OVERSTATED",
-      "source_classes_checked": [
-        "BRAIN_CANONICAL_RECEIPT",
-        "BRAIN_RUNTIME",
-        "BRAIN_GOVERNANCE"
-      ],
-      "source_evidence": {
-        "BRAIN_CANONICAL_RECEIPT": [
-          "MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1 useful_behavior explicitly requires exact-ROR-bound source"
-        ],
-        "BRAIN_RUNTIME": [
-          "open_research_source_frontend filters to authority_verified before extraction",
-          "relevant_source_evidence_extract requires authority_identity through first_party_objective_relevance_verify"
-        ],
-        "BRAIN_GOVERNANCE": [
-          "claim_scope_must_not_exceed_evidence_scope=true",
-          "active_capability_target_change_requires_explicit_reconciliation=true"
-        ]
-      },
-      "challenger_routes": [
-        {
-          "route": "CORRECT_PARENT_MIRRORS_PRESERVE_NARROW_CHILD",
-          "resolution": "SELECTED",
-          "comparison": {
-            "CORRECTNESS": "Directly matches existing qualification scope",
-            "CAPABILITY_STRENGTH": "Preserves all actually verified behavior",
-            "WALL_CLOCK": "Minimal",
-            "INCREMENTAL_COST": "0 USD",
-            "RELIABILITY": "No runtime mutation required",
-            "VERIFIABILITY": "Direct canonical receipt/code comparison"
-          }
-        }
-      ],
-      "negative_search_summary": "No evidence exists on current main that the promoted extractor operates without exact ROR-bound authority identity.",
-      "comparison_dimensions": [
-        "CORRECTNESS",
-        "CAPABILITY_STRENGTH",
-        "WALL_CLOCK",
-        "INCREMENTAL_COST",
-        "RELIABILITY",
-        "VERIFIABILITY"
-      ],
-      "unresolved_plausible_dominators": [],
-      "selected_route": "CORRECT_PARENT_MIRRORS_PRESERVE_NARROW_CHILD",
-      "refresh_triggers": [
-        "AFTER_MATERIAL_MAIN_CHANGE",
-        "BEFORE_GENERIC_EXTRACTION_PROMOTION"
-      ],
-      "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T06:49:00Z",
-        "max_age_hours": 2,
-        "selected_route": "CORRECT_PARENT_MIRRORS_PRESERVE_NARROW_CHILD",
-        "status": "READY",
-        "all_required_dependencies_ready": true,
-        "failed_dependencies": [],
-        "execution_dependencies": [
-          {
-            "dependency": "CANONICAL_GITHUB_WRITE_PATH",
-            "kind": "CONTROL_PLANE",
-            "required": true,
-            "volatility": "VOLATILE",
-            "scope": "ACCOUNT_SPECIFIC",
-            "status": "READY",
-            "observed_at_utc": "2026-09-30T06:49:00Z",
-            "evidence": [
-              "current branch created from exact main base and repository write succeeded"
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "ACCOUNT_SPECIFIC"
-          }
-        ],
-        "execution_dependencies_complete": true
-      }
+      "not_applicable_reason": "Truth-first frontier reconciliation only. No external execution supplier is selected; this action corrects canonical claim scope from already-existing receipt and runtime evidence."
     }
   }
 }
