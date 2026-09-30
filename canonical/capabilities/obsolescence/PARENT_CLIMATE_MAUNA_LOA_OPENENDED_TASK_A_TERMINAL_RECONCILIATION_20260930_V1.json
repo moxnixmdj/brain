@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_TERMINAL_RECONCILIATION_V1",
-  "status": "EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__TASK_SPENT__REPLAY_FORBIDDEN__PARENT_NOT_PROMOTED",
+  "status": "EXECUTED_ONCE__SPENT__HARNESS_CONFOUNDED__REPLAY_FORBIDDEN__PARENT_NOT_PROMOTED__NO_RUNTIME_CAUSAL_CREDIT",
   "checked_on": "2026-09-30",
   "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
@@ -43,16 +43,18 @@
     "compiled_prefix": []
   },
   "classification": {
-    "evidence_scope": "ADMISSIBLE_REAL_OPEN_ENDED_MODEL_INDEPENDENT_EXECUTION_FAILURE",
-    "producer_reached_current_runtime": true,
+    "evidence_scope": "REAL_OPEN_ENDED_OBJECTIVE_SPENT_ON_INVALID_RUNTIME_ENTRYPOINT_HARNESS__NOT_ADMISSIBLE_FOR_RUNTIME_CAUSAL_LOCALIZATION",
+    "producer_reached_current_runtime": false,
+    "public_runtime_entrypoint_exercised": false,
+    "failure_before_runtime_entrypoint": true,
     "failure_before_source_discovery": true,
     "failure_before_tool_execution": true,
     "failure_before_quantitative_analysis": true,
     "parent_capability_proven": false,
     "parent_capability_falsified": false,
-    "exact_missing_capability": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING",
-    "exact_residual": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "implication": "The inherited model-independent stack does not currently compile the first broad natural-language research objective clause into any verified capability. The previous broad evidence-absence blocker is therefore replaced by this concrete compiler/grounding gap."
+    "exact_missing_capability": "NONE_PROVEN_BY_THIS_RUN",
+    "exact_residual": "PARENT_OPEN_ENDED_TASK_A_HARNESS_BYPASS__DIRECT_COMPILER_PREFLIGHT_SKIPPED_PUBLIC_RUN_GOAL",
+    "implication": "The objective is permanently spent, but PR347's compiler/grounding residual is unsupported. Runner PR49 precompiled directly and exited before public runtime.run_goal could exercise the intended open-ended fallback. The next valid causal test must first use a generically qualified runtime-entrypoint harness on a materially different fresh task."
   },
   "replay_budget": {
     "executions_observed": 1,
@@ -61,25 +63,42 @@
     "reason": "The task and first causal outcome have been observed. Replaying it cannot provide fresh parent evidence."
   },
   "preserved_truth": [
-    "The task was genuinely open-ended and answer-blind: no authority, domain, source URL, dataset identifier, quantitative formula, or controller action graph was prewired.",
-    "The producer ran with ASTRA_DISABLE_MODEL_PLANNER=1 and model_dependency_count=0.",
-    "The failure occurred at the first broad objective clause before any task-specific answer research or quantitative method selection.",
+    "The task objective was genuinely open-ended and answer-blind: no authority, domain, source URL, dataset identifier, quantitative formula, or controller action graph was prewired.",
+    "The harness ran once with ASTRA_DISABLE_MODEL_PLANNER=1 and reported model_dependency_count=0.",
+    "The Mauna Loa objective is permanently spent and must not be replayed or rephrased as fresh evidence.",
+    "The observed direct compiler preflight failed before source discovery, tool execution, or quantitative analysis.",
+    "Exact runner PR49 source proves the harness never invoked public runtime.run_goal, so the failure does not establish a missing Brain runtime grounding capability.",
     "The run consumed zero incremental monetary spend."
   ],
   "canonical_state_transition": {
-    "previous_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
-    "new_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "task_A_status": "SPENT_FAIL_FIRST_CAUSAL_GAP",
+    "previous_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "new_parent_blocker": "PARENT_OPEN_ENDED_TASK_A_HARNESS_BYPASS__DIRECT_COMPILER_PREFLIGHT_SKIPPED_PUBLIC_RUN_GOAL",
+    "task_A_status": "SPENT_HARNESS_CONFOUNDED_NO_RUNTIME_CAUSAL_CREDIT",
     "capability_credit_delta": 0,
+    "residual_gap_credit_delta": 0,
     "promotion_authorized": false
   },
   "prohibitions": [
     "NO_REPLAY_OF_PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001",
     "NO_EQUIVALENT_REPHRASED_SAME_TASK_AS_FRESH_EVIDENCE",
-    "NO_PARENT_PROMOTION_FROM_THIS_FAILED_RUN",
-    "NO_TASK_SPECIFIC_COMPILER_RULE",
-    "NO_MODEL_PLANNER_OR_LOCAL_MODEL_TO_MASK_THE_GAP",
-    "NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION"
+    "NO_PARENT_PROMOTION_FROM_THIS_RUN",
+    "NO_RUNTIME_OR_GOAL_COMPILER_REPAIR_DERIVED_FROM_THIS_CONFOUNDED_RUN",
+    "NO_RESIDUAL_GAP_SCOREBOARD_CREDIT_FROM_THIS_CONFOUNDED_RUN",
+    "NO_FRESH_PARENT_TASK_BEFORE_GENERIC_PUBLIC_RUN_GOAL_HARNESS_QUALIFICATION"
   ],
-  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
+  "next_action": "REPAIR_AND_QUALIFY_PARENT_OPEN_ENDED_ONE_SHOT_HARNESS__PUBLIC_RUNTIME_RUN_GOAL_ONLY__NO_DIRECT_COMPILER_PREFLIGHT__THEN_FREEZE_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_A",
+  "corrects_merged_pr": 347,
+  "runner_harness_causality": {
+    "carrier_pr": 49,
+    "script_path": "run_pr328_openended_climate_task_a_once.py",
+    "exact_control_flow": [
+      "load goal_compiler.py and astra_runtime.py",
+      "call compiler.compile_goal(goal, registry, ROOT) before any runtime entrypoint",
+      "on compile exception emit first_causal_stage=COMPILE and exit",
+      "only after direct compile success call private runtime._run_model_independent_goal(...) and manual _stamp_cognition_provenance(...)"
+    ],
+    "public_runtime_run_goal_called": false,
+    "intended_open_ended_runtime_fallback_exercised": false,
+    "consequence": "The run cannot localize a Brain runtime/grounding capability gap because the harness terminated before the hardened public run_goal path that owns fallback grounding/composition/discovery behavior."
+  }
 }
