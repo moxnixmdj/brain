@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_TECHNICAL_REAL_TASK_V1",
+  "task_id": "PARENT-OPENENDED-SQLITE-TASK-A-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "SOFTWARE_SYSTEMS_SQLITE_ONLINE_BACKUP_CONSISTENCY",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
+  "source_task_replay": false,
+  "frozen_on_brain_base": "797d5fbea5f230a31044006755beb98ae387134b",
+  "open_ended_contract": {
+    "objective": "Determine whether Python's built-in sqlite3 online backup mechanism can produce a usable transactionally consistent backup of a WAL-mode database while a separate writer continues committing changes, and derive a minimal safe operating method.",
+    "producer_must_choose_decomposition": true,
+    "producer_must_choose_sources": true,
+    "producer_must_choose_tools": true,
+    "producer_must_choose_experiment": true,
+    "prewired_source_authorities": [],
+    "prewired_urls": [],
+    "prewired_json_paths": [],
+    "prewired_formulae": [],
+    "prewired_tool_sequence": [],
+    "prewired_experiment_procedure": [],
+    "prewired_expected_answer": null
+  },
+  "goal_text": "Determine whether Python's built-in sqlite3 online backup mechanism can produce a usable, transactionally consistent backup of a WAL-mode database while a separate writer continues committing changes. Do not assume the answer, source, supporting tool, procedure, or experiment in advance. Autonomously decompose the problem; discover and evaluate authoritative evidence; choose and use appropriate tools; perform a reproducible real experiment; quantify the consequential observations; revise the plan if evidence contradicts assumptions; independently cross-check the consequential conclusion; and return a decision-quality result with provenance, limitations, and a minimal safe operating method.",
+  "required_result": {
+    "must_include": [
+      "explicit decision answering the objective",
+      "authoritative evidence provenance selected by the producer",
+      "reproducible experiment description and observed results",
+      "quantitative or machine-checkable evidence for backup usability and consistency",
+      "limitations and boundary conditions",
+      "minimal safe operating method",
+      "independent cross-check of the consequential conclusion"
+    ],
+    "source_and_tool_selection_must_not_be_precommitted": true,
+    "claim_scope_must_not_exceed_observed_evidence": true
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "inherited_general_route_only": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Only after producer terminal success, independently inspect and refetch the producer's cited authoritative evidence and rerun a separately implemented WAL/concurrent-writer backup consistency experiment without importing producer modules. Verify that the backup is usable, database integrity checks succeed, committed transaction batches are internally coherent, and the producer's consequential conclusion does not exceed the independently observed evidence.",
+    "producer_modules_must_not_be_imported": true,
+    "producer_discovered_sources_must_be_independently_refetched": true,
+    "source_task_must_not_be_replayed": true,
+    "execute_only_after_producer_terminal_success": true
+  },
+  "expected_answer_precommitted": false,
+  "frozen_before_task_specific_source_discovery": true,
+  "frozen_before_experiment_design": true,
+  "frozen_before_answer_computation": true
+}
