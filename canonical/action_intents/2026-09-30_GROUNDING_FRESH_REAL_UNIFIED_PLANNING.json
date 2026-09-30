@@ -10,7 +10,7 @@
   "causal_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
   "action_kind": "CAPABILITY_INHERITANCE",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::CAPABILITY_INHERITANCE",
-  "expected_parent_frontier_change": "Restore MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 at its exact narrow scope after the generic bindability/prerequisite repair passes exact component validation and a fresh independently verified Unified Planning real task; count exactly one new verified real task; do not restore fresh-reuse or frontier-dependency credit in this action.",
+  "expected_parent_frontier_change": "Restore repaired grounding, inherit the now-verified grounded executable composition capability from fresh real plus materially distinct reuse evidence, restore exactly one fresh-reuse counter, count the YAML reuse as one additional verified real task, and recompute the active frontier to a new materially different parent technical/scientific task without awarding parent capability credit.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "spent Requests falsification task excluded",
@@ -21,7 +21,10 @@
     "fresh Unified Planning run 36652169397 PASS",
     "artifact 11070249875 digest sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1",
     "independent refetch step PASS",
-    "current promotion law requires exact-scope package/evidence and adversarial falsification"
+    "current promotion law requires exact-scope package/evidence and adversarial falsification",
+    "materially distinct YAML-to-JSON fresh reuse run 36652623916 PASS",
+    "YAML fresh reuse artifact 11071595189 digest sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a",
+    "grounded executable composition acquisition bar satisfied by Unified Planning fresh real + YAML distinct fresh reuse"
   ],
   "evidence_presence_classification": "CAPABILITY_PROVEN",
   "probe_specific": false,
@@ -29,23 +32,23 @@
   "orthogonal_recurrence_count": 1,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Stop after canonicalizing the exact requalification evidence, restoring only the grounding capability package and one verified-real-task counter, validating promotion evidence against the exact PR head, and merging; do not switch frontier target or award fresh-reuse/frontier-dependency credit in this action.",
+  "stop_condition": "Stop after exact-scope grounding restoration, composition inheritance, distinct fresh-reuse accounting, and parent frontier recomputation are canonicalized. Do not award parent capability credit. Next execution must be a new parent-level technical/scientific task, not another child benchmark.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
     "canonical_base_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
-    "real_outcome": "Restore the previously reopened grounding capability only after the generic repair survives exact component validation and a fresh real post-repair task with independent verification.",
+    "real_outcome": "Restore repaired grounding, inherit the now-verified grounded executable composition capability from fresh real plus materially distinct reuse evidence, restore exactly one fresh-reuse counter, count the YAML reuse as one additional verified real task, and recompute the active frontier to a new materially different parent technical/scientific task without awarding parent capability credit.",
     "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
     "obs_goal": {
-      "real_outcome": "Restore MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 at its exact narrow scope after the generic bindability/prerequisite repair passes exact component validation and a fresh independently verified Unified Planning real task; count exactly one new verified real task; do not restore fresh-reuse or frontier-dependency credit in this action.",
+      "real_outcome": "Restore repaired grounding, inherit the now-verified grounded executable composition capability from fresh real plus materially distinct reuse evidence, restore exactly one fresh-reuse counter, count the YAML reuse as one additional verified real task, and recompute the active frontier to a new materially different parent technical/scientific task without awarding parent capability credit.",
       "proxy_goals_deleted": [
         "replay Requests",
         "synthetic benchmark",
         "new carrier",
         "new planner"
       ],
-      "surviving_necessity": "Inherit only the exact repaired grounding scope and one new verified task; keep all broader credits unchanged."
+      "surviving_necessity": "Inherit the exact two now-proven child capabilities and recompute directly to the parent real-task gap; no further child testing survives."
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
@@ -62,7 +65,7 @@
         "no new binding logic",
         "no heldout Sprite"
       ],
-      "surviving_gap": "The fresh real task is now complete and independently verified; remaining work is evidence-bounded inheritance, then frontier reconciliation."
+      "surviving_gap": "No grounding or grounded-composition acquisition gap remains. The surviving gap is one new materially different parent-level technical/scientific task."
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "The former input-contract/prerequisite-authority blocker is closed by exact repair plus fresh real evidence.",
@@ -71,7 +74,7 @@
         "Reuse existing public runner",
         "Reuse existing GitHub API independent refetch oracle"
       ],
-      "surviving_causal_blocker": "No implementation blocker remains for this narrow capability; only exact-scope inheritance remains."
+      "surviving_causal_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -84,11 +87,11 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
-        "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
+        "INHERIT_GROUNDING_AND_COMPOSITION_FROM_EXISTING_FRESH_REAL_PLUS_DISTINCT_REUSE_EVIDENCE_AND_RECOMPUTE_PARENT",
+        "RUN_MORE_CHILD_TASKS",
         "REOPEN_IMPLEMENTATION"
       ],
-      "losing_routes_reason": "Another task or implementation change adds wall-clock without addressing any surviving falsified predicate; exact repair, adversarial regressions, and fresh real execution already cover the reopened scope.",
+      "losing_routes_reason": "The YAML run supplies the previously missing materially distinct reuse and independently verifies the same model-independent grounding/composition route in a different domain. More child testing cannot change the next capability decision.",
       "implementation_still_necessary": false
     },
     "obs_verification": {
@@ -101,14 +104,17 @@
         "private-runner retry loop",
         "heldout Sprite fallback",
         "Further grounding repair work absent a new falsification",
-        "Another requalification task before restoring the narrow capability"
+        "Another requalification task before restoring the narrow capability",
+        "Further grounding benchmarks absent new falsification",
+        "Further composition benchmarks absent new falsification"
       ],
       "adjacent_capabilities_absorbed": [
         "exact runtime byte pinning",
         "explicit verified_initial_facts prerequisite authority",
-        "independent live refetch"
+        "independent live refetch",
+        "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1"
       ],
-      "fresh_reuse_plan": "Do not award fresh-reuse credit in this action. Reconcile to the downstream composition gap and require a distinct fresh task there."
+      "fresh_reuse_plan": "Fresh reuse is complete via YAML-to-JSON run 36652623916. Recompute to the parent and require a new technical/scientific task."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
@@ -117,13 +123,13 @@
         "Reused current GitHub API probe",
         "Deleted redundant second requalification run because current exact evidence is sufficient for narrow restoration"
       ],
-      "search_stop_decision": "Exact component validation plus a fresh independently verified real task close the only reopened grounding scope. Additional search or testing cannot improve the inheritance decision enough to justify delay.",
+      "search_stop_decision": "Grounding and executable composition each satisfy fresh real, materially distinct fresh reuse, independent verification, zero-model, and zero-spend requirements. Search/testing stops at this child layer; the parent real task now has strictly higher information gain.",
       "affected_layers_only_on_revalidation": true,
       "challenger_refresh_decision": "Fresh post-repair route check completed from current main, current public runner success, and current GitHub API reachability."
     },
     "routes_considered": [
-      "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
-      "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
+      "INHERIT_GROUNDING_AND_COMPOSITION_AND_RECOMPUTE_PARENT",
+      "RUN_MORE_CHILD_TASKS",
       "REOPEN_IMPLEMENTATION"
     ],
     "deleted_or_bypassed_paths": [
@@ -132,17 +138,18 @@
       "HELDOUT003_SPRITE_REUSE",
       "NEW_PLANNER_OR_MODEL",
       "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
-      "REOPEN_IMPLEMENTATION"
+      "REOPEN_IMPLEMENTATION",
+      "MORE_CHILD_BENCHMARKING"
     ],
-    "selected_surviving_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
-    "why_selected_route_is_fastest_sufficient": "The repaired route has exact-byte regression validation and a fresh direct real-task pass with independent refetch; inheritance needs no further implementation or execution.",
-    "expected_parent_level_state_change": "Restore MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1 at its exact narrow scope after the generic bindability/prerequisite repair passes exact component validation and a fresh independently verified Unified Planning real task; count exactly one new verified real task; do not restore fresh-reuse or frontier-dependency credit in this action.",
-    "stop_condition": "Stop after canonicalizing the exact requalification evidence, restoring only the grounding capability package and one verified-real-task counter, validating promotion evidence against the exact PR head, and merging; do not switch frontier target or award fresh-reuse/frontier-dependency credit in this action.",
+    "selected_surviving_route": "INHERIT_GROUNDING_AND_COMPOSITION_AND_RECOMPUTE_PARENT",
+    "why_selected_route_is_fastest_sufficient": "All child acquisition predicates are now directly evidenced. Canonical inheritance plus parent recomputation is faster and stronger than any additional child execution.",
+    "expected_parent_level_state_change": "Restore repaired grounding, inherit the now-verified grounded executable composition capability from fresh real plus materially distinct reuse evidence, restore exactly one fresh-reuse counter, count the YAML reuse as one additional verified real task, and recompute the active frontier to a new materially different parent technical/scientific task without awarding parent capability credit.",
+    "stop_condition": "Stop after exact-scope grounding restoration, composition inheritance, distinct fresh-reuse accounting, and parent frontier recomputation are canonicalized. Do not award parent capability credit. Next execution must be a new parent-level technical/scientific task, not another child benchmark.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T00:46:00Z",
       "max_age_hours": 24,
-      "incumbent_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
+      "incumbent_route": "INHERIT_GROUNDING_AND_COMPOSITION_AND_RECOMPUTE_PARENT",
       "source_classes_checked": [
         "BRAIN_INHERITED",
         "OFFICIAL_PRIMARY",
@@ -151,7 +158,9 @@
       ],
       "source_evidence": {
         "BRAIN_INHERITED": [
-          "PR261 merged at 08338df0cc989b092567f10ffd1dca6a7f37be65; exact-blob verification run 36651748631 PASS"
+          "PR261 merged at 08338df0cc989b092567f10ffd1dca6a7f37be65; exact-blob verification run 36651748631 PASS",
+          "run 36652623916 materially distinct YAML-to-JSON fresh reuse PASS",
+          "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json"
         ],
         "OFFICIAL_PRIMARY": [
           "GitHub REST API current direct response for aiplan4eu/unified-planning repo id 343455633"
@@ -183,51 +192,53 @@
       ],
       "challenger_routes": [
         {
-          "route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
+          "route": "INHERIT_GROUNDING_AND_COMPOSITION_AND_RECOMPUTE_PARENT",
           "evidence": [
-            "PR261 merge 08338df0cc989b092567f10ffd1dca6a7f37be65",
-            "run 36651748631 exact component PASS",
-            "run 36652169397 fresh real task PASS"
+            "run 36652169397 fresh real PASS",
+            "run 36652623916 materially distinct fresh reuse PASS"
           ],
           "qualification_evidence": [
-            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
+            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json"
           ],
           "qualification_evidence_classes": [
-            "INDEPENDENT_VERIFIER"
+            "INDEPENDENT_VERIFIER",
+            "BRAIN_INHERITED"
           ],
           "resolution": "SELECTED",
           "comparison": {
-            "CORRECTNESS": "Matches exact reopened scope and preserves weaker claims outside it.",
-            "CAPABILITY_STRENGTH": "Restores only deterministic plain-goal grounding with bindability/prerequisite authority.",
-            "WALL_CLOCK": "Immediate evidence reconciliation; no extra execution.",
+            "CORRECTNESS": "All declared acquisition predicates for grounding and executable composition are directly satisfied without parent overclaim.",
+            "CAPABILITY_STRENGTH": "Two domains exercise live multi-source fan-in and local typed transformation through the same model-independent grounding/composition stack.",
+            "WALL_CLOCK": "Immediate inheritance and recomputation; no new child execution.",
             "INCREMENTAL_COST": "$0.",
-            "RELIABILITY": "Exact component and fresh real execution both passed.",
-            "VERIFIABILITY": "Sealed artifact and independent live refetch."
+            "RELIABILITY": "Exact merged runtime plus two successful independently verified post-repair tasks.",
+            "VERIFIABILITY": "Sealed public artifacts and independent verification steps."
           }
         },
         {
-          "route": "RUN_ANOTHER_GROUNDING_TASK_BEFORE_INHERITANCE",
+          "route": "RUN_MORE_CHILD_TASKS",
           "evidence": [
-            "No surviving unverified grounding predicate remains after run 36652169397."
+            "No unsatisfied child acquisition predicate remains."
           ],
           "qualification_evidence": [
-            "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
+            "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
           ],
           "qualification_evidence_classes": [
-            "INDEPENDENT_VERIFIER"
+            "BRAIN_INHERITED"
           ],
           "resolution": "DISQUALIFIED",
           "comparison": {
-            "CORRECTNESS": "Would add evidence but not close a new predicate.",
-            "CAPABILITY_STRENGTH": "No additional scope justified.",
-            "WALL_CLOCK": "Slower.",
+            "CORRECTNESS": "Adds samples but closes no unresolved predicate.",
+            "CAPABILITY_STRENGTH": "No additional child scope justified.",
+            "WALL_CLOCK": "Slower than parent execution.",
             "INCREMENTAL_COST": "$0 but unnecessary.",
             "RELIABILITY": "Redundant.",
-            "VERIFIABILITY": "No material gain."
+            "VERIFIABILITY": "No material decision gain."
           }
         }
       ],
-      "negative_search_summary": "No plausible route can dominate direct inheritance from already-complete exact-scope evidence.",
+      "negative_search_summary": "No plausible child-layer challenger can improve the capability decision after both required post-repair tasks passed. The unresolved work has moved to the parent capability.",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -237,7 +248,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
+      "selected_route": "INHERIT_GROUNDING_AND_COMPOSITION_AND_RECOMPUTE_PARENT",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -247,44 +258,27 @@
       "selected_route_preflight": {
         "checked_at_utc": "2026-09-30T00:46:00Z",
         "max_age_hours": 2,
-        "selected_route": "INHERIT_EXACT_REPAIRED_SCOPE_FROM_EXISTING_EVIDENCE",
+        "selected_route": "INHERIT_GROUNDING_AND_COMPOSITION_AND_RECOMPUTE_PARENT",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
         "execution_dependencies": [
           {
-            "dependency": "CANONICAL_REQUALIFICATION_EVIDENCE_PRESENT",
+            "dependency": "CANONICAL_GROUNDING_REQUALIFICATION_AND_COMPOSITION_ACQUISITION_EVIDENCE",
             "kind": "DATA_SOURCE",
             "required": true,
             "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T00:50:00Z",
+            "observed_at_utc": "2026-09-30T00:56:00Z",
             "evidence": [
-              "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
-              "public run 36652169397 SUCCESS",
-              "artifact digest sha256:5112a20e0b95ca3a81029aad35f618eca7c5bb83d4c86860d3137fbdca31ccb1"
+              "run 36652169397 SUCCESS",
+              "run 36652623916 SUCCESS",
+              "artifact sha256:5b8270ffd346a2e5c7fdec093826db44f635f77e9bd106a7af50513549ab4b5a"
             ],
             "evidence_classes": [
-              "INDEPENDENT_VERIFIER"
-            ],
-            "evidence_scope": "GLOBAL"
-          },
-          {
-            "dependency": "BRAIN_PR261_MERGED_RUNTIME",
-            "kind": "LOCAL_RUNTIME",
-            "required": true,
-            "volatility": "STATIC",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "observed_at_utc": "2026-09-30T00:50:00Z",
-            "evidence": [
-              "merge 08338df0cc989b092567f10ffd1dca6a7f37be65",
-              "exact component validation run 36651748631 PASS"
-            ],
-            "evidence_classes": [
-              "BRAIN_INHERITED",
-              "INDEPENDENT_VERIFIER"
+              "INDEPENDENT_VERIFIER",
+              "BRAIN_INHERITED"
             ],
             "evidence_scope": "GLOBAL"
           }
@@ -303,15 +297,18 @@
     "cheap_falsification_not_available_reason": "",
     "real_task_evidence_paths": [
       "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930_V1.json"
     ],
     "independent_verification_evidence_paths": [
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json"
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json"
     ],
     "capability_package_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1.json",
-    "fresh_reuse_evidence_path": "",
-    "fresh_reuse_distinct_task": false,
-    "cross_domain_distinct": false,
+    "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GROUNDING_COMPOSITION_FRESH_REUSE_YAML_20260930_V1.json",
+    "fresh_reuse_distinct_task": true,
+    "cross_domain_distinct": true,
     "frontier_dependency_removed": false,
     "target_frontier_supplier": "",
     "producer_execution_suppliers": [
