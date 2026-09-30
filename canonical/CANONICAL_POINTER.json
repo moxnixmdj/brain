@@ -202,11 +202,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_B__NO_HTTP2_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "next_step": "REPAIR_OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_ANCHORED_QUERY_REFINEMENT__NON_PARENT_QUALIFY__NO_SEISMOLOGY_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+    "critical_blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -283,7 +283,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+    "highest_leverage_capability_gap": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -645,16 +645,12 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "CLAIM_SPEC_OPERAND_BINDING_ACQUIRED__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-      "previous_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
-      "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+      "status": "SEISMOLOGY_CAUSAL_INTERPRETATION_CORRECTED",
+      "previous_blocker": "MODEL_INDEPENDENT_OBJECTIVE_LITERAL_THRESHOLD_NUMERIC_RELATION_BINDING_REQUIRED",
+      "blocker": "OPEN_RESEARCH_RELEVANCE_ADMISSION_AND_METADATA_TO_RETRIEVAL_QUERY_REFINEMENT_INSUFFICIENT",
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json"
+        "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json"
       ],
-      "public_run_id": 36686583882,
-      "public_job_id": 109793738883,
-      "artifact_id": 11083254225,
-      "artifact_digest": "sha256:a2e8dbe8378e5807b6ca6eb8e03595e3d8595e2f7c39b980d4fcaa65b4d6500d",
       "parent_capability_promoted": false
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
