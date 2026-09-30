@@ -539,6 +539,16 @@
     "fresh_task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
     "execution_count": 1,
     "replay_allowed": false,
-    "residual_gap": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT"
+    "residual_gap": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "duplicate_sqlite_runs_quarantined": [
+      36674110900,
+      36674110980
+    ],
+    "thermophysics_runs_quarantined": [
+      36674076805,
+      36674084229,
+      36674109140
+    ],
+    "thermophysics_task_instance_freshness": "SPENT__ZERO_FRONTIER_AUTHORITY"
   }
 }
