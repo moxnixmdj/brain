@@ -1,0 +1,147 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR347-CROSS-SURFACE-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make pointer, queue, and scoreboard exactly reflect the already-canonical post-Task-A compiler gap without changing runtime capability, replaying the spent task, or granting parent capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "merged PR347 canonicalized the exact Task A compiler gap in hierarchy and parent target",
+    "pointer, queue, and scoreboard remained on the pre-execution Task-A frontier",
+    "authoritative producer run 36670516407 executed exactly once with model_dependency_count=0 and $0 incremental spend",
+    "same Mauna Loa task replay is forbidden"
+  ],
+  "evidence_presence_classification": "EXISTING_CANONICAL_EVIDENCE__CROSS_SURFACE_MIRROR_RECONCILIATION_ONLY",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when all canonical frontier mirrors agree on the localized broad-objective compiler gap and route-recomputation next action; do not mutate runtime or execute any task in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "Compared post-PR347 hierarchy and parent-target residual/next-action fields against pointer, queue, and scoreboard.",
+      "Confirmed this patch changes no capability runtime and grants only the receipt-authorized residual_gaps_localized delta."
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore one truthful canonical frontier after PR347 by aligning all stale mirrors to the immutable one-shot Task A first causal gap.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Make the Brain's pointer, queue, scoreboard, hierarchy, and parent target describe the same current blocker before any repair begins.",
+      "proxy_goals_deleted": [
+        "rerun Task A",
+        "repair runtime while mirrors disagree",
+        "grant parent capability credit",
+        "treat stale pre-Task-A mirror fields as authority"
+      ],
+      "surviving_necessity": "Cross-surface reconciliation is required before any frontier-sensitive repair can pass the trusted guard."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "post-PR347 hierarchy",
+        "post-PR347 parent target",
+        "current pointer",
+        "current queue",
+        "current scoreboard",
+        "Task A terminal reconciliation receipt"
+      ],
+      "external_existing_routes_checked": [
+        "authoritative public runner receipt already canonicalized by PR347"
+      ],
+      "capability_work_deleted": [
+        "no runtime mutation",
+        "no new compiler implementation",
+        "no task execution",
+        "no source discovery"
+      ],
+      "surviving_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Repository state drift after PR347: hierarchy and target moved to the compile gap while pointer, queue, and scoreboard still advertised the spent Task-A action.",
+      "delete_bypass_substitute_options": [
+        "delete duplicate execution paths",
+        "reuse PR347 evidence",
+        "update only stale mirrors",
+        "defer runtime repair until consistency is restored"
+      ],
+      "surviving_causal_blocker": "CROSS_SURFACE_FRONTIER_MIRRORS_STALE_AFTER_PR347"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_ONLY_STALE_MIRRORS",
+        "REVERT_PR347",
+        "START_RUNTIME_REPAIR_ON_INCONSISTENT_STATE"
+      ],
+      "losing_routes_reason": "Reverting truthful evidence would regress state; runtime repair on inconsistent mirrors would fail closed and risk duplicate work.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Trusted cross-surface drift guard is the existing oracle; no synthetic task execution is needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all instructions to rerun the spent Mauna Loa Task A",
+        "stale pre-PR347 frontier text in pointer/queue/scoreboard"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "immutable Task A execution receipt",
+        "PR347 localized parent blocker",
+        "no-replay policy"
+      ],
+      "fresh_reuse_plan": "After consistency passes, recompute the route frontier for the compiler gap and acquire only the minimum generic front-door capability."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR347 exact causal localization",
+        "reused Task A immutable receipt",
+        "reused current guard mirror invariants"
+      ],
+      "search_stop_decision": "Stop reconciliation analysis because the inconsistency is exact, mechanical, and fully determined by already-canonical PR347 fields.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_ONLY_STALE_MIRRORS",
+      "REVERT_PR347",
+      "START_RUNTIME_REPAIR_ON_INCONSISTENT_STATE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_REPLAY",
+      "PARENT_PROMOTION",
+      "RUNTIME_MUTATION",
+      "PR347_REVERSION"
+    ],
+    "selected_surviving_route": "RECONCILE_ONLY_STALE_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "It changes only the three stale mirrors, consumes no execution budget, costs $0, and restores the prerequisite invariant for every later repair.",
+    "expected_parent_level_state_change": "Make pointer, queue, and scoreboard exactly reflect the already-canonical post-Task-A compiler gap without changing runtime capability, replaying the spent task, or granting parent capability credit.",
+    "stop_condition": "Stop when all canonical frontier mirrors agree on the localized broad-objective compiler gap and route-recomputation next action; do not mutate runtime or execute any task in this reconciliation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is a deterministic repository-state reconciliation using already-canonical evidence; external route discovery cannot improve or alter the required mirror values."
+    }
+  }
+}
