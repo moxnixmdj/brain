@@ -12,7 +12,7 @@ def blob_sha(path):
     cp=subprocess.run(["git","hash-object",str(p)],cwd=ROOT,text=True,capture_output=True,check=True)
     return cp.stdout.strip()
 
-m=json.loads(MANIFEST.read_text())
+m=json.loads(MANIFEST.read_text(encoding="utf-8"))
 assert m["underlying_capability_invention"] is False
 assert m["opus_5_5_credit"]==0
 assert m["components"]["harness"]["base_config_blob"]==blob_sha(ROOT/m["components"]["harness"]["base_config_path"])
@@ -25,7 +25,7 @@ for name,sha in m["components"]["methodology"]["skill_pins"].items():
 with tempfile.TemporaryDirectory() as td:
     out=pathlib.Path(td)/"overlay.yaml"
     subprocess.run([sys.executable,str(BUILDER),"--output",str(out)],check=True)
-    text=out.read_text()
+    text=out.read_text(encoding="utf-8")
     assert text.startswith("agent:\n  system_template: |\n")
     assert "BRAIN FAIL-CLOSED COMPLETION CONTRACT" in text
     for name in m["components"]["methodology"]["skill_pins"]:
