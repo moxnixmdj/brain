@@ -194,11 +194,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B__NO_DEMOGRAPHY_ASTRONOMY_GEOPHYSICS_BIOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+    "next_step": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK__NO_PREWIRED_SOURCES_URLS_PATHS_TOOLS_OR_FORMULAS__STOP_ON_FIRST_CAUSAL_GAP",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+    "critical_blocker": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -275,7 +275,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+    "highest_leverage_capability_gap": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -604,7 +604,7 @@
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "PARENT_GEOPHYSICS_FRESH_TASK_FAILED__LIVE_EVIDENCE_FETCH_WORKS__FIRST_NUMERIC_RELATION_SUBGOAL_UNREACHABLE",
+    "frontier_decomposition_status": "PARENT_SCOPE_AUDIT_REVOKED_PREWIRED_TASK_PARENT_CREDIT__GENUINELY_OPEN_ENDED_TASK_REQUIRED",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
     "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "grounding_requalification": {
@@ -627,16 +627,16 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "PARENT_FRESH_GEOPHYSICS_TASK_FALSIFIED_AT_NUMERIC_RELATION_REACHABILITY",
-      "reason": "Both frozen live scientific source fetches compiled and source preflight passed, but the first quantitative subgoal had no verified bound capability match. An independently verified exact-symbolic SymPy route exists elsewhere in Brain but is not inherited into the bound controller surface.",
+      "status": "PARENT_SCOPE_ADMISSIBILITY_CORRECTED__PREWIRED_TASKS_NARROW_ONLY",
+      "reason": "The target definition requires autonomous decomposition/discovery/tool selection, while the credited demography task pre-specified sources, paths, formula and threshold.",
       "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "blocker": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
+      "blocker": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE",
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1.json"
+        "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json"
       ],
-      "source_run_id": 36661188188,
       "same_task_replay_allowed": false
-    }
+    },
+    "parent_scope_correction_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
