@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_RECONCILIATION_V1",
+  "status": "RECONCILED_FROM_PRIMARY_EVIDENCE",
+  "bound_main_before_reconciliation": "c49e027828cb39926ec1249af6b432dc996db9c3",
+  "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "previous_blocker": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS_AND_SEMANTIC_RELEVANCE_INSUFFICIENT",
+  "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+  "next_required_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SPENT_TASK_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "parent_task_b": {
+    "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+    "run_id": 36690682680,
+    "artifact_id": 11085208947,
+    "artifact_digest": "sha256:b2c5e8ff9fa3059908ca350ce7a1c208b858d5e01286e3aacf4b19d9deefeb25",
+    "status": "SPENT__FAILED_AT_SOURCE_QUERY_RELEVANCE__NO_REPLAY__NO_PARENT_CREDIT",
+    "replay_allowed": false
+  },
+  "repair": {
+    "brain_pr": 512,
+    "merge_commit": "c49e027828cb39926ec1249af6b432dc996db9c3",
+    "qualification_run_id": 36692443468,
+    "qualification_job_id": 109812538168,
+    "qualification_artifact_id": 11086137561,
+    "qualification_artifact_digest": "sha256:3558722612079d1a69a13a2d8265cf6ef26de3e6502f0254919bf34c339cb1e6",
+    "exact_qualified_blobs": {
+      "research_query_focus": "5403e1dc05716fcfc4f9a91b4534f55dc547eb7f",
+      "open_web_source_candidate_discovery": "045369d8cba5680c60b57e834d09d12a54d94380",
+      "objective_relevance_bm25": "a25a34d879413a9853f1d1ffd8ef5e4f6bdd2245",
+      "authored_tests": "e4738e192faba93d2804e02080af27a3ab93570b"
+    },
+    "conclusion": "SUCCESS",
+    "parent_task_execution": false,
+    "parent_task_replay": false
+  },
+  "evidence_paths": [
+    "canonical/capabilities/obsolescence/PARENT_OPENENDED_GENOMICS_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json",
+    "canonical/action_intents/2026-09-30_REPAIR_OPEN_RESEARCH_QUERY_FOCUS_RELEVANCE_V1.json"
+  ],
+  "parent_capability_promoted": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
