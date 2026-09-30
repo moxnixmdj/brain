@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-GENOMICS-REFERENCE-LENGTH-OPENENDED-PARENT-TASK-POST474-20260930-V1",
+  "status": "PROPOSED_FRESH_PARENT_FREEZE",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED_AFTER_BROAD_ROUTING_REPAIR",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_GENOMICS_REFERENCE_LENGTH_POST474_TASK_A::FRESH_PARENT_GATE_FREEZE",
+  "evidence_presence_classification": "CHILD_STACK_AND_BROAD_ROUTING_VERIFIED__FRESH_PARENT_VALIDATION_REQUIRED",
+  "proposed_fresh_task": {
+    "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-006",
+    "domain": "GENOMICS_REFERENCE_SEQUENCE_LENGTH_COMPARISON",
+    "task_path": "canonical/tasks/PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-006.json",
+    "mission_path": "canonical/astra_runtime/missions/PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-006.json"
+  },
+  "inherited_repair_authority": {
+    "brain_pr": 474,
+    "broad_decomposer_blob": "1efaec4ba51ecb5c40072b3190853f4de89d8f77",
+    "grounding_blob": "46e8e7466479ea298c34e5fa682d49c374510ce9",
+    "guarded_qualification_run": 36689658815,
+    "qualification_artifact": 11085092932,
+    "qualification_artifact_digest": "sha256:617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5"
+  },
+  "spent_task_exclusions": [
+    "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+    "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
+  ],
+  "stop_condition": "Freeze exact task and mission on current canonical main. After merge, create an exact-byte execution authorization and execute once through the live global guard on the public runner. On failure preserve only the first new integrated causal gap and never replay. On semantic success independently verify without replay before any parent capability promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "selected_surviving_route": "FRESH_OPEN_ENDED_GENOMICS_PARENT_TASK_THROUGH_EXISTING_GUARDED_RUNTIME",
+    "why_selected_route_is_fastest_sufficient": "The repaired broad-routing path is canonically qualified; another synthetic repair test would not answer the parent capability question. A fresh genomics objective directly exercises autonomous source discovery, evidence extraction, claim/operand binding, executable verification, limitations, and synthesis.",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "SQLITE_REPLAY",
+      "MORE_SYNTHETIC_ROUTING_PROBES",
+      "NEW_INFRASTRUCTURE",
+      "MODEL_PLANNER",
+      "PREWIRED_SOURCE_OR_FORMULA",
+      "TASK_SPECIFIC_PATCH"
+    ],
+    "stop_rule": "ONE_PHYSICAL_EXECUTION__STOP_ON_FIRST_NEW_CAUSAL_GAP__INDEPENDENT_VERIFY_ONLY_ON_SEMANTIC_SUCCESS"
+  }
+}
