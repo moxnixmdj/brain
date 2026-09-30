@@ -59,9 +59,30 @@
       "verifier-confirmed improvement traceable to configuration-prescribed actions"
     ]
   },
-  "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_BRAIN_CONFIGURED_COMPOSED_ROUTE_ITSELF_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
-  "current_state": "COMPOSED_CONFIGURATION_READY_FOR_PACKAGE_QUALIFICATION__PRETRAIN_TASK_CONTAMINATED__NEW_RUNTIME_VISIBLE_TASK_REQUIRED",
+  "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_A_DISTINCT_FRESH_BRAIN_CONFIGURED_ROUTE_WITH_RUNTIME_ORACLE_COVERAGE_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
+  "current_state": "HTML_JS_FILTER_FRESH_TASK_FAIL__RUNTIME_ORACLE_GATE_REPAIRED__NEW_DISTINCT_TASK_REQUIRED__ZERO_OPUS_CREDIT",
   "contamination_events": [
     "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
+  ],
+  "execution_completion_policy": {
+    "requirement_traceability": "Every validity/rejection requirement must cite authoritative instruction or runtime-visible specification evidence.",
+    "acceptance_coverage": "Every explicit acceptance criterion must have fresh passing evidence before terminal authorization.",
+    "runtime_oracle": "If correctness depends on a concrete runtime engine or protocol implementation, exercise that class of runtime before submission or fail closed.",
+    "browser_rule": "Browser/UI/web-security acceptance requires actual browser-backed execution; absence of a browser is a blocker and cannot be recorded as PASS.",
+    "security_interaction_rule": "Adversarial/security preflight must include parser/runtime round trips plus composition, batching, or interaction effects when artifacts can be combined by the consumer.",
+    "terminal_authority": "Use BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1 with zero known relevant failures and all acceptance/verification entries PASS.",
+    "spent_task_rule": "After independent verifier exposure, the task is spent and cannot be repaired/replayed for promotion."
+  },
+  "spent_preflights": [
+    {
+      "task": "html-js-filter",
+      "benchmark": "Terminal-Bench 4.0",
+      "verdict": "EXECUTED_FAIL__REWARD_0__TASK_SPENT",
+      "runner_pr": 258,
+      "session_id": "html-js-filter-20260930-v1",
+      "evidence": "canonical/capabilities/opus55/HTML_JS_FILTER_TB4_VERIFICATION_FAILURE_20260930_V1.json",
+      "capability_credit": 0,
+      "may_replay_for_promotion": false
+    }
   ]
 }

@@ -32,12 +32,19 @@ def build():
     for name,sha in SKILLS:
         p=SUPER/name/"SKILL.md"
         parts.append(f"\n===== SUPERPOWERS SKILL: {name} =====\n"+checked(p,sha))
-    parts.append("""\n===== BRAIN FAIL-CLOSED COMPLETION CONTRACT =====
+    parts.append("""\n===== BRAIN FAIL-CLOSED COMPLETION CONTRACT V3 =====
 Do not submit while a known relevant failure remains.
+REQUIREMENT TRACEABILITY GATE: every validation requirement, rejection condition, and mandatory field must trace to authoritative task instructions or runtime-visible specification bytes.
+ACCEPTANCE COVERAGE GATE: enumerate every explicit acceptance criterion and map it to fresh passing evidence. Any unmapped criterion blocks submission.
+RUNTIME ORACLE GATE: if a criterion depends on a concrete runtime engine, protocol implementation, browser, database, compiler, kernel, or other execution substrate, execute that class of runtime oracle or an independently justified behaviorally equivalent oracle before submission.
+BROWSER ORACLE RULE: browser, UI, and web-security behavior requires actual browser-backed execution. BROWSER_AVAILABLE=NONE IS A BLOCKER, never passing evidence.
+SECURITY INTERACTION RULE: for adversarial/security work, test parser/runtime round trips and composition, batching, or interaction effects when the consumer can combine artifacts.
 Before submission, run the strongest task-relevant tests available without reading hidden benchmark verifier logic.
 Inspect the final diff and confirm requested behavior, regression preservation, and scope compliance.
+SINGLE TERMINAL AUTHORITY: parallel lanes may inspect, implement, and verify, but only the central completion authority may authorize terminal submission after the completion audit.
+The public session bridge must enforce BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1 with zero known relevant failures and all acceptance/verification entries PASS.
 If verification cannot be completed, preserve the blocker and do not issue COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT.
-Only after these checks pass may you issue exactly: echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT""")
+Only after these checks and terminal authorization pass may the central authority issue exactly: echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT""")
     system="\n".join(parts).rstrip()+"\n"
     return "agent:\n  system_template: |\n"+indent_block(system,4)+"\n"
 
