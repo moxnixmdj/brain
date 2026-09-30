@@ -1,0 +1,270 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "UNIFY-EFFECT-AWARE-CAUSAL-BINDING-AUTHORITY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Eliminate duplicate causal-binding authority: direct compound compilation must fail closed on downstream capabilities with explicit effect-result proposal bindings, forcing the existing effect-aware grounded-composition route; validate against the spent PR277 case as regression only, with no capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR267 post-promotion falsification",
+    "PR271/273/275/276 repair lineage",
+    "spent PR277 run 36656793034",
+    "causal diagnostic run 36657495658",
+    "current canonical direct-compiler binding falsification record"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after a generic compiler guard prevents legacy path-recency binding for explicit effect-result consumers, focused tests pass, and the spent PR277 case routes through grounded composition and verifies as a repair regression only. Do not restore capability credit or run fresh requalification in this PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f750e63fbf7d367adfd87f652154c0d37e02a856",
+    "real_outcome": "Make explicit causal effect-result provenance impossible to bypass through legacy compound path-recency binding.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Remove the direct compiler's duplicate binding authority so causal provenance has one authoritative implementation.",
+      "proxy_goals_deleted": [
+        "PR277 replay for credit",
+        "task wording patch",
+        "input_path special case",
+        "duplicate effect-binding implementation in direct compiler"
+      ],
+      "surviving_necessity": "A generic routing guard is required because the fresh requalification proved legacy compilation can bypass correct proposal bindings."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "existing proposal_bindings.effect_result authority",
+        "grounded executable composition producer/verifier",
+        "goal compiler compound path",
+        "PR277 causal diagnostic and canonical falsification record"
+      ],
+      "external_existing_routes_checked": [
+        "No external supplier is relevant; the defect is conflicting internal binding authorities."
+      ],
+      "capability_work_deleted": [
+        "No new binder",
+        "No new planner",
+        "No new provider",
+        "No path-name heuristic"
+      ],
+      "surviving_gap": "Direct compound compiler still accepts capabilities whose downstream inputs declare effect-aware provenance and binds them heuristically from context_paths."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic architecture conflict between direct compound compiler and existing effect-aware proposal binding authority.",
+      "delete_bypass_substitute_options": [
+        "Delete legacy authority for explicit causal consumers",
+        "Duplicate proposal binding into direct compiler",
+        "Tune context path recency",
+        "Patch PR277 wording"
+      ],
+      "surviving_causal_blocker": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "DEFER_EXPLICIT_EFFECT_RESULT_BINDINGS_TO_EXISTING_EFFECT_AWARE_GROUNDED_COMPOSITION",
+        "IMPLEMENT_PROPOSAL_BINDING_TWICE_IN_DIRECT_COMPILER",
+        "TUNE_PATH_RECENCY_HEURISTIC",
+        "TASK_SPECIFIC_PATCH"
+      ],
+      "losing_routes_reason": "Duplicating binding logic creates two authorities; path heuristics caused the defect; task patches hide it. Deferring to the already verified effect-aware composition path removes machinery and the whole mistake class.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Focused compiler regression plus spent PR277 input as non-credit regression: direct compiler must defer, grounded composition must execute, independent verifier must return true. A new fresh task is reserved for later requalification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "legacy heuristic causal binding for proposal-bound consumers",
+        "future path-recency fixes for this class"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "single authoritative effect-result provenance path across grounding/composition/planning"
+      ],
+      "fresh_reuse_plan": "After repair validation, use a materially fresh decision domain for actual composition requalification; never reuse PR277 for credit."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse diagnostic run 36657495658",
+        "Reuse current canonical falsification record",
+        "Reuse existing proposal-binding implementation"
+      ],
+      "search_stop_decision": "The exact conflict and superior existing authority are identified; further discovery cannot beat deleting duplicate authority.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Affected layers refreshed after PR277 material failure and canonical reconciliation at exact current base."
+    },
+    "routes_considered": [
+      "DEFER_EXPLICIT_EFFECT_RESULT_BINDINGS_TO_EXISTING_EFFECT_AWARE_GROUNDED_COMPOSITION",
+      "IMPLEMENT_PROPOSAL_BINDING_TWICE_IN_DIRECT_COMPILER",
+      "TUNE_PATH_RECENCY_HEURISTIC",
+      "TASK_SPECIFIC_PATCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "IMPLEMENT_PROPOSAL_BINDING_TWICE_IN_DIRECT_COMPILER",
+      "TUNE_PATH_RECENCY_HEURISTIC",
+      "TASK_SPECIFIC_PATCH"
+    ],
+    "selected_surviving_route": "DEFER_EXPLICIT_EFFECT_RESULT_BINDINGS_TO_EXISTING_EFFECT_AWARE_GROUNDED_COMPOSITION",
+    "why_selected_route_is_fastest_sufficient": "It reuses the already-built effect-aware binding authority and deletes the conflicting heuristic authority with a small generic guard, minimizing code, wall-clock, and future divergence.",
+    "expected_parent_level_state_change": "Eliminate duplicate causal-binding authority: direct compound compilation must fail closed on downstream capabilities with explicit effect-result proposal bindings, forcing the existing effect-aware grounded-composition route; validate against the spent PR277 case as regression only, with no capability credit.",
+    "stop_condition": "Stop after a generic compiler guard prevents legacy path-recency binding for explicit effect-result consumers, focused tests pass, and the spent PR277 case routes through grounded composition and verifies as a repair regression only. Do not restore capability credit or run fresh requalification in this PR.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T02:03:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "DIRECT_COMPOUND_COMPILER_CONTEXT_PATH_RECENCY_FOR_DOWNSTREAM_PATHS",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical falsification: GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1",
+          "existing capability_proposal_generators effect_result binding",
+          "grounded_executable_composition effect-aware consumer inputs"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Private GitHub main at f750e63fbf7d367adfd87f652154c0d37e02a856 is authoritative for internal runtime semantics."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No package/library can remove an internal duplicate binding authority; no external dependency required."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "External discovery is non-causal for this internal semantic conflict; no material challenger found."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "single causal provenance binding authority effect result downstream capability inputs"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Project Brain goal compiler proposal bindings grounded composition"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "fail closed direct compiler when explicit effect-result binding exists"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current main direct compiler binding falsification 2026-09-30"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "DEFER_EXPLICIT_EFFECT_RESULT_BINDINGS_TO_EXISTING_EFFECT_AWARE_GROUNDED_COMPOSITION",
+          "evidence": [
+            "PR277 diagnostic proved direct compound compiler bypassed effect-aware composition"
+          ],
+          "qualification_evidence": [
+            "public diagnostic run 36657495658",
+            "canonical falsification record"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "One causal binding authority; explicit provenance cannot be overwritten by recency.",
+            "CAPABILITY_STRENGTH": "Generic for every proposal-bound downstream capability.",
+            "WALL_CLOCK": "Small guard reuses existing implementation.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Deletes duplicate semantics instead of synchronizing two implementations.",
+            "VERIFIABILITY": "Focused compiler + end-to-end regression."
+          }
+        },
+        {
+          "route": "IMPLEMENT_PROPOSAL_BINDING_TWICE_IN_DIRECT_COMPILER",
+          "evidence": [
+            "Technically possible"
+          ],
+          "qualification_evidence": [
+            "Current source shows direct compiler lacks effect graph"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can drift from existing binder.",
+            "CAPABILITY_STRENGTH": "Potentially equivalent but duplicate.",
+            "WALL_CLOCK": "More implementation and testing.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Lower due two authorities.",
+            "VERIFIABILITY": "Higher test surface."
+          }
+        }
+      ],
+      "negative_search_summary": "No plausible route beats reusing the existing effect-aware binder while deleting legacy authority.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "DEFER_EXPLICIT_EFFECT_RESULT_BINDINGS_TO_EXISTING_EFFECT_AWARE_GROUNDED_COMPOSITION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T02:03:00Z",
+        "max_age_hours": 2,
+        "selected_route": "DEFER_EXPLICIT_EFFECT_RESULT_BINDINGS_TO_EXISTING_EFFECT_AWARE_GROUNDED_COMPOSITION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PRIVATE_GITHUB_GOAL_COMPILER_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T02:03:00Z",
+            "evidence": [
+              "goal_compiler.py and effect-aware composition code fetched from exact base f750e63fbf7d367adfd87f652154c0d37e02a856"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
