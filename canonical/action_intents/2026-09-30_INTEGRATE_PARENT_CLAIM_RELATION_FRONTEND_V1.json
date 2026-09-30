@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTEGRATE-VERIFIED-CLAIM-RELATION-INTO-OPEN-RESEARCH-PARENT-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_base_commit": "84b7779f66e1f37970cb8df1cbac0b8d09037a34",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+  "action_kind": "PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Make the already-verified claim-spec/operand binder and generic relation evaluator actually execute after generic evidence extraction in the canonical open-research parent path. Do not claim factual truth, sufficiency, independence, or parent completion. Preserve the frozen HTTP/2 Task A as unspent until this integration is independently qualified.",
+  "prior_work_checked": [
+    "current main 84b7779f66e1f37970cb8df1cbac0b8d09037a34",
+    "claim-spec binder producer blob 48fd058430d8d361fc75beced567c7b6d1166531",
+    "claim-spec qualification run 36685279194 artifact 11083292341 digest sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+    "generic claim/relation producer blob d66a7eb30774f66160b698d8082947776888293d",
+    "open_research_source_frontend blob 46fe82d74a35d9318a134fb95e1d5cecfc2dd485 does not load or invoke objective_claim_operand_binding",
+    "astra_runtime blob e60345e3814deacc5b79ffd7fcf713febfee0425 still stops at OPEN_ENDED_RESEARCH_EVIDENCE_EXTRACTED__CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED",
+    "fresh HTTP/2 Task A task blob 539cadd30e7e8ac548638157b7f36a1814b97dcd is frozen but no public execution lane exists"
+  ],
+  "evidence_presence_classification": "VERIFIED_CHILD_EXISTS__PARENT_PATH_NOT_INTEGRATED",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact-base parent-effective integration and independent non-parent qualification. Do not execute HTTP/2 Task A in this repair.",
+  "recursive_obs": {
+    "canonical_base_commit": "84b7779f66e1f37970cb8df1cbac0b8d09037a34",
+    "real_outcome": "Connect the already-verified extraction, objective binding, and relation evaluation children in the actual parent runtime path.",
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "run fresh parent task before route exists",
+        "build another claim parser",
+        "rebuild relation evaluator",
+        "invent confidence or truth labels",
+        "add model cognition",
+        "replay any spent parent task"
+      ],
+      "surviving_necessity": "Parent runtime must invoke already-verified claim-spec and relation children after evidence extraction."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+        "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+      ],
+      "capability_work_deleted": [
+        "No new parser",
+        "No new supplier",
+        "No new relation engine",
+        "No decision-confidence fabrication",
+        "No parent task spend"
+      ],
+      "surviving_gap": "Verified child capabilities are not composed in open_research_source_frontend/astra_runtime."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Pure parent-path integration seam.",
+      "delete_bypass_substitute_options": [
+        "DELETE premature fresh-parent execution",
+        "REUSE verified binder and relation evaluator",
+        "COMPOSE directly in source frontend",
+        "Do not substitute typed decision synthesis because required confidence/independence semantics are not yet justified"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "selected_surviving_route": "COMPOSE_VERIFIED_BINDER_AND_RELATION_EVALUATOR_IN_OPEN_RESEARCH_FRONTEND",
+      "implementation_still_necessary": true,
+      "why_selected_route_is_fastest_sufficient": "It changes only the missing composition edge and reuses exact independently-qualified children."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use non-parent deterministic source-frontend fixtures to prove extracted evidence reaches objective-bound relation evaluation, unsupported objective fails closed, and factual correctness/sufficiency remain unverified."
+    }
+  }
+}
