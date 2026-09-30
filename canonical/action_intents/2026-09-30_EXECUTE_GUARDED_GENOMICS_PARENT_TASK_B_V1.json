@@ -3,7 +3,7 @@
   "action_id": "EXECUTE-GUARDED-GENOMICS-REFERENCE-LENGTH-OPENENDED-PARENT-TASK-B-20260930-V1",
   "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "2ec11e42e7fc7a58461a1da0c356342bcac4ecf1",
+  "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
@@ -11,12 +11,12 @@
   "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_GENOMICS_REFERENCE_LENGTH_TASK_B_POST_PR474::GUARDED_FRESH_PARENT_EXECUTION",
   "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
-  "task_blob_sha": "b6e1bca41700f5695eaacbd6eb0490ee23839837",
+  "task_blob_sha": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
   "prior_work_checked": [
-    "Brain main 2ec11e42e7fc7a58461a1da0c356342bcac4ecf1 contains merged guarded-qualified PR474 broad multi-clause routing repair.",
-    "PR478 froze the exact genomics Task B and mission on current canonical main without physical execution.",
-    "HTTP/2 Task A was physically spent once in runner run 36688193204 and is replay-forbidden.",
-    "Open Brain and public-runner PR search found no competing genomics execution lease or carrier at authorization time."
+    "Brain main b8a0102421e68f4137a4c5fe72d27ed96fb448b2 contains merged guarded-qualified PR474 broad-routing repair and merged PR490 Task-B bookkeeping correction.",
+    "PR478 froze the genomics objective without physical execution; PR490 corrected only phase bookkeeping and rebound the mission to exact current task blob 5f1a8fea0d29c2a60dcc7a038ecd557829e602e7.",
+    "HTTP/2 Task A was physically spent once in runner run 36688193204 and remains replay-forbidden.",
+    "Competing fresh-parent proposals were closed; no public-runner genomics execution carrier was found before this lease."
   ],
   "evidence_presence_classification": "FRESH_PARENT_TASK_B_FROZEN_UNSPENT",
   "expected_parent_frontier_change": "Exactly one atomic-guard-admitted physical execution of frozen genomics Task B; on first causal failure preserve the gap and mark task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
@@ -33,7 +33,7 @@
     "exact_task_runtime_authorization_pins_required": true
   },
   "recursive_obs": {
-    "canonical_base_commit": "2ec11e42e7fc7a58461a1da0c356342bcac4ecf1",
+    "canonical_base_commit": "b8a0102421e68f4137a4c5fe72d27ed96fb448b2",
     "real_outcome": "Reality-test the guarded-qualified model-independent open-ended research stack on a fresh genomics reference-record comparison without leaking source, accessions, values, tool recipe, or answer.",
     "surviving_necessity": "PR474 closed the previous parent first causal gap; the shortest remaining proof is one materially different fresh parent Task B.",
     "selected_surviving_route": "EXACTLY_ONE_GUARDED_GENOMICS_PARENT_TASK_B_EXECUTION",
@@ -47,5 +47,6 @@
     ],
     "why_selected_route_is_fastest_sufficient": "The frozen genomics task directly exercises autonomous broad routing, source discovery, provenance, evidence extraction, operand binding, deterministic relation evaluation, synthesis and verification on a new domain.",
     "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
-  }
+  },
+  "mission_blob_sha": "03e718a9c779c26d26e7af140f2f65549c1a7f6e"
 }
