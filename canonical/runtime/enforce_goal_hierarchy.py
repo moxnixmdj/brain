@@ -666,8 +666,6 @@ def enforce_blocker_lease(intent):
 
 def enforce_target_continuity(intent,base,hierarchy):
     action_kind=str(intent.get("action_kind") or "")
-    if action_kind in GOVERNANCE_ACTIONS or action_kind=="RECONCILE_FRONTIER":
-        return
     try:
         prior=load_at_ref(base,"canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
     except Exception as exc:
@@ -675,8 +673,26 @@ def enforce_target_continuity(intent,base,hierarchy):
         return
     before=str(prior.get("active_capability_target") or "")
     after=str(hierarchy.get("active_capability_target") or "")
-    if before!=after:
+    if before==after:
+        return
+    if action_kind in GOVERNANCE_ACTIONS:
+        return
+    if action_kind!="RECONCILE_FRONTIER":
         fail("ACTIVE_CAPABILITY_TARGET_CHANGE_REQUIRES_EXPLICIT_RECONCILIATION:"+before+"->"+after)
+        return
+    rec=intent.get("frontier_reconciliation")
+    if not isinstance(rec,dict):
+        fail("FRONTIER_RECONCILIATION_EVIDENCE_REQUIRED")
+        return
+    if str(rec.get("previous_target") or "")!=before:
+        fail("FRONTIER_RECONCILIATION_PREVIOUS_TARGET_MISMATCH")
+    if str(rec.get("new_target") or "")!=after:
+        fail("FRONTIER_RECONCILIATION_NEW_TARGET_MISMATCH")
+    relationship=str(rec.get("relationship") or "")
+    if relationship not in {"SUBCAPABILITY_OF","RESIDUAL_OF","NEXT_FRONTIER_AFTER_VERIFIED_CLOSURE","REOPENED_BY_FALSIFICATION"}:
+        fail("FRONTIER_RECONCILIATION_RELATIONSHIP_INVALID")
+    if not _nonempty_string_list(rec.get("evidence")):
+        fail("FRONTIER_RECONCILIATION_EVIDENCE_MISSING")
 
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
@@ -729,6 +745,11 @@ def enforce_promotion_truth(intent,files,base):
         return
     if evidence.get("claim_scope_exact") is not True:
         fail("PROMOTION_CLAIM_SCOPE_NOT_EXACT")
+    falsification=evidence.get("falsification_attempts")
+    no_cheap=str(evidence.get("cheap_falsification_not_available_reason") or "").strip()
+    if not isinstance(falsification,list) or not falsification:
+        if not no_cheap:
+            fail("PROMOTION_ADVERSARIAL_FALSIFICATION_REQUIRED")
 
     action_kind=str(intent.get("action_kind") or "")
     allowed={
