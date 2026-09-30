@@ -265,7 +265,10 @@ def _qualified_relevance_source(objective, candidate, provenance, relevance):
 
     if (
         status == "LEXICAL_RELEVANCE_RANKED"
-        and relevance.get("verification_method") == "DETERMINISTIC_BM25"
+        and relevance.get("verification_method") in {
+            "DETERMINISTIC_BM25",
+            "DETERMINISTIC_BM25_WITH_QUERY_COMPLEXITY_SCALED_TERM_COVERAGE_ADMISSION",
+        }
         and relevance.get("output_verified") is True
     ):
         receipt_objective = _canon(relevance.get("objective"))
@@ -289,6 +292,12 @@ def _qualified_relevance_source(objective, candidate, provenance, relevance):
             return None, "NONPOSITIVE_RELEVANCE_SCORE"
         if not list(selected.get("matched_terms") or []):
             return None, "RELEVANCE_MATCH_TERMS_REQUIRED"
+        if (
+            relevance.get("verification_method")
+            == "DETERMINISTIC_BM25_WITH_QUERY_COMPLEXITY_SCALED_TERM_COVERAGE_ADMISSION"
+            and selected.get("lexical_admission_status")!="ADMITTED"
+        ):
+            return None, "RELEVANCE_QUERY_TERM_COVERAGE_ADMISSION_REQUIRED"
         return provenance_final, None
 
     return None, "VERIFIED_OBJECTIVE_RELEVANCE_REQUIRED"
