@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REOPEN-GROUNDING-INPUT-CONTRACT-COMPATIBILITY-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "probe_id": null,
+  "causal_blocker": "FRESH_REAL_TASK_FALSIFIED_GROUNDING_INPUT_CONTRACT_COMPATIBILITY",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::FRESH_REAL_TASK_FALSIFIED_GROUNDING_INPUT_CONTRACT_COMPATIBILITY::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reopen the previously acquired plain-goal grounding capability at the exact falsified scope: a grounded candidate must be semantically compatible and executably input-bindable from clause literals, initial facts, or prior effects before a clause may be considered resolved.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1",
+    "PR255 exact component validation run 36647904127",
+    "Requests real Task A failure run 36649042160 and job 109678656560"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile canonical frontier only: preserve prior grounding successes, revoke broad acquired status at the falsified input-contract scope, mark composition implementation as component-verified but real-task-unproven, and select the smallest generic grounding input-bindability repair frontier. No implementation in this PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "new_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "relationship": "REOPENED_BY_FALSIFICATION",
+    "evidence": [
+      "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a9816671c2792f22d4aed6d58a4785ac5101936e",
+    "real_outcome": "Make canonical frontier truth reflect the fresh real-task falsification instead of preserving a contradicted capability promotion.",
+    "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "obs_goal": {
+      "real_outcome": "Reconcile the exact falsified grounding scope.",
+      "proxy_goals_deleted": [
+        "repair composition",
+        "replay failed task",
+        "retain prior promotion by inertia"
+      ],
+      "surviving_necessity": "Reopen grounding at input-contract compatibility."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Prior grounding real Task A and cross-domain reuse evidence",
+        "PR255 exact composition component validation",
+        "fresh Requests API Task A failure run 36649042160"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable for reconciliation."
+      ],
+      "capability_work_deleted": [
+        "No implementation in reconciliation",
+        "No new benchmark",
+        "No task replay"
+      ],
+      "surviving_gap": "Grounding can return semantic candidates that cannot bind required action inputs."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic interface defect between semantic grounding and executable composition.",
+      "delete_bypass_substitute_options": [
+        "Repair composition rejected because it correctly failed closed",
+        "Task-specific literal injection rejected",
+        "Reopen grounding scope survives"
+      ],
+      "surviving_causal_blocker": "Grounding resolution lacks executable input-contract compatibility."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Reconcile and reopen grounding input-contract scope",
+        "Patch composition to guess inputs",
+        "Replay task"
+      ],
+      "losing_routes_reason": "Guessing inputs would launder an upstream grounding error; replay would contaminate fresh evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Public real-task log directly identifies the causal seam; no synthetic verification needed for reconciliation."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Treating composition real-task proof as next frontier before grounding compatibility repair",
+        "Broad grounding acquired status at input-contract scope"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Prior grounding successes retained as bounded evidence"
+      ],
+      "fresh_reuse_plan": "After generic repair, use a new fresh real task, not the Requests API task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse exact public run logs",
+        "No new search before reconciliation"
+      ],
+      "search_stop_decision": "The failure is deterministic and localizes the earliest causal seam; further search cannot change reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External route discovery does not determine whether contradicted canonical state must be corrected."
+    },
+    "routes_considered": [
+      "REOPEN_GROUNDING_INPUT_CONTRACT_SCOPE",
+      "PATCH_COMPOSITION_TO_GUESS",
+      "REPLAY_FAILED_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PATCH_COMPOSITION_TO_GUESS",
+      "REPLAY_FAILED_TASK"
+    ],
+    "selected_surviving_route": "REOPEN_GROUNDING_INPUT_CONTRACT_SCOPE",
+    "why_selected_route_is_fastest_sufficient": "It corrects the earliest falsified capability boundary without unnecessary implementation or replay.",
+    "expected_parent_level_state_change": "Reopen the previously acquired plain-goal grounding capability at the exact falsified scope: a grounded candidate must be semantically compatible and executably input-bindable from clause literals, initial facts, or prior effects before a clause may be considered resolved.",
+    "stop_condition": "Reconcile canonical frontier only: preserve prior grounding successes, revoke broad acquired status at the falsified input-contract scope, mark composition implementation as component-verified but real-task-unproven, and select the smallest generic grounding input-bindability repair frontier. No implementation in this PR.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Frontier reconciliation from direct real-task falsification; external supplier search is not required to correct canonical truth."
+    }
+  }
+}
