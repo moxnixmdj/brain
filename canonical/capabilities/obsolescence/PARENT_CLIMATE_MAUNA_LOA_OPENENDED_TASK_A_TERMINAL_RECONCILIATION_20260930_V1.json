@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_TERMINAL_RECONCILIATION_V1",
-  "status": "EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__TASK_SPENT__REPLAY_FORBIDDEN__PARENT_NOT_PROMOTED",
+  "status": "EXECUTED_ONCE__TASK_SPENT__PARENT_CAUSAL_GAP_ATTRIBUTION_SUPERSEDED_BY_HARNESS_ADMISSIBILITY_CORRECTION",
   "checked_on": "2026-09-30",
   "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
@@ -43,16 +43,16 @@
     "compiled_prefix": []
   },
   "classification": {
-    "evidence_scope": "ADMISSIBLE_REAL_OPEN_ENDED_MODEL_INDEPENDENT_EXECUTION_FAILURE",
+    "evidence_scope": "VALID_TASK_SPEND_RECEIPT__INVALID_AS_FULL_PUBLIC_PARENT_FIRST_CAUSAL_GAP",
     "producer_reached_current_runtime": true,
     "failure_before_source_discovery": true,
     "failure_before_tool_execution": true,
     "failure_before_quantitative_analysis": true,
     "parent_capability_proven": false,
     "parent_capability_falsified": false,
-    "exact_missing_capability": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING",
-    "exact_residual": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "implication": "The inherited model-independent stack does not currently compile the first broad natural-language research objective clause into any verified capability. The previous broad evidence-absence blocker is therefore replaced by this concrete compiler/grounding gap."
+    "exact_missing_capability": null,
+    "exact_residual": "PARENT_OPEN_ENDED_FIRST_CAUSAL_GAP_UNPROVEN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_CONTROLLER",
+    "implication": "The first-spend carrier short-circuited through goal_compiler.compile_goal and never invoked the inherited public run_goal controller, so its compile exception cannot define the parent controller's first causal gap."
   },
   "replay_budget": {
     "executions_observed": 1,
@@ -68,8 +68,8 @@
   ],
   "canonical_state_transition": {
     "previous_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
-    "new_parent_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "task_A_status": "SPENT_FAIL_FIRST_CAUSAL_GAP",
+    "new_parent_blocker": "PARENT_OPEN_ENDED_FIRST_CAUSAL_GAP_UNPROVEN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_CONTROLLER",
+    "task_A_status": "SPENT_BY_EXECUTION__HARNESS_CAUSAL_ATTRIBUTION_WITHDRAWN",
     "capability_credit_delta": 0,
     "promotion_authorized": false
   },
@@ -79,7 +79,14 @@
     "NO_PARENT_PROMOTION_FROM_THIS_FAILED_RUN",
     "NO_TASK_SPECIFIC_COMPILER_RULE",
     "NO_MODEL_PLANNER_OR_LOCAL_MODEL_TO_MASK_THE_GAP",
-    "NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION"
+    "NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION",
+    "NO_RUNTIME_REPAIR_FROM_DIRECT_COMPILER_SHORT_CIRCUIT",
+    "NO_PARENT_CAUSAL_CREDIT_FROM_POST_SPEND_REPLAY"
   ],
-  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
+  "next_action": "FREEZE_FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_A_WITH_HARNESS_REQUIRED_TO_CALL_PUBLIC_RUN_GOAL_EXACTLY_ONCE__NO_PRECOMPILE_SHORT_CIRCUIT__STOP_ON_FIRST_RUNTIME_CAUSAL_GAP",
+  "superseded_parent_gap_claim": {
+    "prior_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "correction_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_HARNESS_ADMISSIBILITY_CORRECTION_20260930_V1.json",
+    "reason": "First-spend harness did not call public run_goal and bypassed inherited fallback routes."
+  }
 }
