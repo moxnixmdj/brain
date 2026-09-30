@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__CARRIER_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT",
+  "status": "FRONTIER_BAR_DEFINED__MISSION_ORIGIN_VALIDATED__GENERIC_GROUNDING_BYPASS_FALSIFIED__FRESH_PARENT_TASKS_HELD_UNSPENT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__NO_ADMISSIBLE_FRESH_OPEN_ENDED_PARENT_PASS__CARRIER_PRECHECK_VALIDATED",
-  "residual_gap": "FRESH_OPEN_ENDED_PARENT_TASK_A_UNEXECUTED_AFTER_CARRIER_VALIDATION",
+  "obsolescence_status": "NOT_YET_PROVEN__NO_ADMISSIBLE_FRESH_OPEN_ENDED_PARENT_PASS__GENERIC_EPISTEMIC_DECOMPOSITION_GAP_UNRESOLVED",
+  "residual_gap": "MODEL_INDEPENDENT_OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_AND_AUTHORITY_DATA_GROUNDING_MISSING",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -118,7 +118,7 @@
       "public_run_id": 36666659921
     }
   ],
-  "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+  "next_action": "VERIFY_EPISTEMIC_GOAL_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_DECOMPOSITION_IR__KEEP_ALL_FROZEN_PARENT_TASKS_UNSPENT_UNTIL_REPAIR",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -283,5 +283,15 @@
     "replay_allowed": false,
     "no_predeclared_research_recipe": true,
     "task_path": "canonical/tasks/PARENT_OPENENDED_SQLITE_BACKUP_CONSISTENCY_REAL_TASK_20260930_001.json"
+  },
+  "epistemic_decomposition_gap": {
+    "status": "GENERIC_GROUNDING_BYPASS_FALSIFIED__ROUTING_GUARD_IMPLEMENTED_PENDING_VERIFICATION__DECOMPOSITION_IR_NOT_YET_IMPLEMENTED",
+    "evidence_path": "canonical/capabilities/obsolescence/OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_20260930_V1.json",
+    "mission_origin_run_id": 36672816106,
+    "grounding_diagnostic_run_id": 36671302163,
+    "fresh_broad_cases": 4,
+    "safe_full_grounding_passes": 0,
+    "unsafe_false_positive_cases": 1,
+    "frozen_parent_execution_authorized": false
   }
 }
