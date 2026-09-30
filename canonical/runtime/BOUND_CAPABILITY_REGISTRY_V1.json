@@ -2772,6 +2772,97 @@
           "container": "scalar"
         }
       }
+    },
+    "numeric.expression.sympy.typed": {
+      "status": "VERIFIED_BOUND_CAPABILITY_CANDIDATE",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "platforms": [
+        "linux"
+      ],
+      "keywords": [
+        "numeric",
+        "scalar",
+        "expression",
+        "arithmetic",
+        "multiply",
+        "divide",
+        "power",
+        "exponent",
+        "calculate",
+        "compute"
+      ],
+      "requires": [],
+      "provides": [
+        "numeric.scalar.expression.evaluate",
+        "numeric.scalar.derived"
+      ],
+      "source": {
+        "type": "pypi",
+        "project": "sympy",
+        "version": "1.14.0",
+        "metadata_url": "https://pypi.org/pypi/sympy/1.14.0/json",
+        "wheel_filename": "sympy-1.14.0-py3-none-any.whl",
+        "wheel_sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+        "dependency_closure": {
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "root_project": "sympy",
+          "root_version": "1.14.0",
+          "root_filename": "sympy-1.14.0-py3-none-any.whl",
+          "wheel_count": 2,
+          "resolver": "EXACT_PREVERIFIED_CLOSURE",
+          "source_only_artifacts_allowed": false,
+          "network_required_for_install": false,
+          "wheels": [
+            {
+              "project": "sympy",
+              "version": "1.14.0",
+              "filename": "sympy-1.14.0-py3-none-any.whl",
+              "metadata_url": "https://pypi.org/pypi/sympy/1.14.0/json",
+              "url": "https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl",
+              "sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+              "bytes": 6299353
+            },
+            {
+              "project": "mpmath",
+              "version": "1.3.0",
+              "filename": "mpmath-1.3.0-py3-none-any.whl",
+              "metadata_url": "https://pypi.org/pypi/mpmath/1.3.0/json",
+              "url": "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl",
+              "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+              "bytes": 536198
+            }
+          ],
+          "closure_sha256": "72f749d3eadfaa28d62e6788e13c5ca55baf2d8f5e2347341b79aaa077876d6a"
+        },
+        "license": "BSD-3-Clause"
+      },
+      "adapter_module": "numeric_expression_sympy",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "numeric.expression.sympy.typed",
+          "expression": "${input.expression}",
+          "variables": "${input.variables}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "limitations": [
+        "Strict Python AST grammar: numeric literals, named scalar variables, +, -, *, /, **, unary +/-.",
+        "No calls, attributes, subscripts, strings, containers, comparisons, arbitrary eval, or string sympify.",
+        "Expression length <=1000 characters, AST <=64 nodes, variables <=16, absolute exponent <=100.",
+        "Result must be a finite real scalar."
+      ],
+      "verification": {
+        "status": "PENDING_FRESH_NON_ASTRONOMY_QUALIFICATION",
+        "inherited_supplier_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+        "astronomy_gap_evidence": "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
