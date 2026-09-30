@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-OPEN-RESEARCH-DISCOVERY-QUERY-FOCUS-AFTER-GENOMICS-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "d131d2550a0c8af1bbbb0227bfe1a6e561843300",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS__INSTRUCTION_WRAPPER_DOMINATES_DECISION_ENTITIES",
+  "action_kind": "GENERIC_SOURCE_DISCOVERY_QUERY_FOCUS_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_SOURCE_DISCOVERY_QUERY_FOCUS__INSTRUCTION_WRAPPER_DOMINATES_DECISION_ENTITIES::GENERIC_SOURCE_DISCOVERY_QUERY_FOCUS_REPAIR",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "guarded genomics physical run 36690682680 and artifact 11085208947",
+    "verified claim-spec/operand-binding capability is already inherited and was invoked by the source frontend",
+    "first-party objective relevance verifier is not a universal substitute because it requires independently bound authority identity",
+    "existing open-web discovery currently queries the entire objective verbatim"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "repair": {
+    "target_path": "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py",
+    "rule": "For recognized broad decision prompts only, derive the search query from the supplied first decision sentence and strip only the generic leading decision prefix; preserve explicit search objectives unchanged.",
+    "invented_terms": false,
+    "source_specific_literals": false,
+    "genomics_specific_literals_in_runtime": false
+  },
+  "stop_condition": "Guard-qualify exact repair bytes with authored regressions plus fresh non-parent live discovery cases. If qualified, merge and recompute the parent frontier without replaying genomics Task B.",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "real_outcome": "Prevent instruction-wrapper vocabulary from dominating generic research-source discovery while preserving fail-closed source verification downstream.",
+    "surviving_necessity": "One generic query-focus repair is authorized by the fresh genomics parent failure.",
+    "selected_surviving_route": "REUSE_SUPPLIED_DECISION_SENTENCE_AS_DISCOVERY_QUERY",
+    "deleted_or_bypassed_paths": [
+      "GENOMICS_TASK_REPLAY",
+      "TASK_SPECIFIC_SOURCE_HINTS",
+      "PREDECLARED_NCBI_ACCESSIONS",
+      "MODEL_QUERY_REWRITING",
+      "UNIVERSAL_ROR_AUTHORITY_GATE",
+      "NEW_SEARCH_PROVIDER"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It changes only deterministic query construction, uses no invented knowledge, and directly removes the observed cause before existing provenance/relevance/extraction/binding gates.",
+    "expected_parent_level_state_change": "NONE_UNTIL_INDEPENDENT_QUALIFICATION__THEN_RECOMPUTE_FRESH_PARENT_FRONTIER",
+    "stop_rule": "NO_PARENT_REPLAY"
+  }
+}
