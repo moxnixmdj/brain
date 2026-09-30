@@ -3109,24 +3109,12 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
-        "status": "INDEPENDENT_PUBLIC_CROSS_DOMAIN_QUALIFICATION_PASS",
-        "public_repository": "moxnixmdj/verification-capsule-runner",
-        "public_pr": 154,
-        "public_run_id": 36680339068,
-        "public_job_id": 109774171806,
-        "exact_producer_git_blob": "f4ee15d0be0235fceeb12dea3c1a64fa88bef532",
-        "fresh_domains": [
-          "CLIMATE",
-          "ASTRONOMY",
-          "MATERIALS",
-          "SOFTWARE_SYSTEMS"
-        ],
-        "producer_regressions_passed": 7,
-        "independent_cross_domain_tests_passed": 4,
-        "unit_mismatch_fails_closed": true,
-        "paraphrase_not_promoted": true,
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0
+        "acquisition_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EXTRACTED_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+        "public_run_id": 36680322787,
+        "artifact_id": 11081621591,
+        "artifact_digest": "sha256:7388e9e89c9272c1031d5d532a34e1f3c4841144d4a3e02a1359562a406c3249",
+        "exact_producer_blob": "f4ee15d0be0235fceeb12dea3c1a64fa88bef532",
+        "independent_cross_domain_pass": true
       }
     }
   },
