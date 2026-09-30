@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__GENUINE_OPEN_ENDED_TASK_A_EXECUTED__FIRST_COMPILE_GAP_LOCALIZED",
+  "status": "FRONTIER_BAR_DEFINED__NO_ADMISSIBLE_OPEN_ENDED_MODEL_FREE_PARENT_TASK_YET",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__GENUINE_OPEN_ENDED_TASK_A_FAILED_AT_FIRST_COMPILE_GAP",
-  "residual_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "obsolescence_status": "NOT_YET_PROVEN__PR337_TASK_SPENT_BUT_HARNESS_BYPASSED_PUBLIC_RUNTIME_ROUTE",
+  "residual_gap": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -118,7 +118,7 @@
       "public_run_id": 36666659921
     }
   ],
-  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+  "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -146,17 +146,17 @@
   "latest_parent_task_failure": {
     "task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
     "domain": "ATMOSPHERIC_CLIMATE_SCIENCE_TIME_SERIES_REASONING",
-    "status": "GENUINE_OPEN_ENDED_MODEL_INDEPENDENT_TASK_A__FAILED_FIRST_CAUSAL_GAP__TASK_SPENT__GAP_UNRESOLVED",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "status": "SPENT__HARNESS_INADMISSIBLE_FOR_FULL_RUNTIME_PARENT_CAUSAL_LOCALIZATION__NO_PROMOTION_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_TASK_A_PR337_HARNESS_ADMISSIBILITY_CORRECTION_20260930_V1.json",
     "public_run_id": 36670516407,
     "job_id": 109744305866,
     "artifact_id": 11077861584,
     "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
     "task_blob_sha": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
-    "first_causal_stage": "COMPILE",
-    "first_causal_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "exact_cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "unresolved_subgoal_index": 0,
+    "observed_harness_stage": "DIRECT_GOAL_COMPILER_CALL",
+    "observed_helper_failure": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "full_public_run_goal_route_exercised": false,
+    "causal_localization_credit": false,
     "model_dependency_count": 0,
     "incremental_spend_usd": 0,
     "resolved": false,
@@ -192,7 +192,7 @@
   },
   "open_ended_task_A": {
     "task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
-    "status": "EXECUTED_ONCE__FAIL_FIRST_CAUSAL_GAP__NO_PROMOTION_CREDIT",
+    "status": "EXECUTED_ONCE__HARNESS_INADMISSIBLE_FOR_PARENT_ROUTE_CAUSAL_LOCALIZATION__NO_PROMOTION_CREDIT",
     "genuinely_open_ended": true,
     "autonomous_decomposition_required": true,
     "no_predeclared_research_recipe": true,
@@ -200,6 +200,8 @@
     "execution_count": 1,
     "replay_allowed": false,
     "parent_completion": false,
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json"
+    "admissible_parent_scope_execution": false,
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_TASK_A_PR337_HARNESS_ADMISSIBILITY_CORRECTION_20260930_V1.json",
+    "reason": "The carrier invoked goal_compiler.compile_goal directly and exited on compiler failure before astra_runtime.run_goal could execute its existing grounding/composition/acquisition fallbacks."
   }
 }
