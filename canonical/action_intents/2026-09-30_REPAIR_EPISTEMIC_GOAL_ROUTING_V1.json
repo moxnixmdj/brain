@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-EPISTEMIC-GOAL-ROUTING-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "9504aa5cb4508971b6df6a862d01d740f340a45a",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_ENDED_EPISTEMIC_OBJECTIVE_DECOMPOSITION_MISSING__BROAD_RESEARCH_GOALS_MISROUTED_TO_PACKAGE_ACQUISITION",
+  "action_kind": "GENERIC_RUNTIME_REPAIR",
+  "expected_parent_frontier_change": "Prevent further broad epistemic objectives from being misrouted into package acquisition and expose the missing generic decomposition/authority-data-grounding capability without claiming it solved.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR370 first-spend provenance correction",
+    "public runner PR79 run 36672816106 mission-origin PASS",
+    "public runner PR74 run 36671302163 generic grounding falsification on four fresh broad objectives",
+    "authoritative SQLite parent run 36674205874 artifact 11078364401",
+    "stale-authority thermophysics corroboration run 36673898798 artifact 11078528968"
+  ],
+  "selected_surviving_route": "FAIL_CLOSED_EPISTEMIC_ROUTING_GUARD__THEN_GENERIC_DECOMPOSITION_IR_AND_AUTHORITY_DATA_DISCOVERY",
+  "stop_condition": "No new parent benchmark until the generic model-independent decomposition/authority-data-grounding route is implemented and independently qualified on fresh non-parent cases.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_path": "canonical/capabilities/obsolescence/OPEN_ENDED_EPISTEMIC_DECOMPOSITION_GAP_RECONCILIATION_20260930_V1.json",
+  "next_action": "VERIFY_EPISTEMIC_ROUTING_GUARD_ON_FRESH_NON_PARENT_CASES__THEN_IMPLEMENT_GENERIC_EPISTEMIC_DECOMPOSITION_IR_AND_AUTHORITY_DATA_DISCOVERY__FREEZE_NEW_PARENT_TASK_ONLY_AFTER_QUALIFICATION"
+}
