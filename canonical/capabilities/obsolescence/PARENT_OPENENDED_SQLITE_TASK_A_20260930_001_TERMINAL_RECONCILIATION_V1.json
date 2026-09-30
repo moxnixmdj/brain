@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPENENDED_SQLITE_TASK_A_TERMINAL_RECONCILIATION_V1",
+  "status": "FAIL_FIRST_CAUSAL_GAP_LOCALIZED__TASK_SPENT__NO_CAPABILITY_CREDIT",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-SOFTWARE-SYSTEMS-SQLITE-OPEN-ENDED-REAL-TASK-A-20260930-001",
+  "brain_pr": 335,
+  "brain_base": "797d5fbea5f230a31044006755beb98ae387134b",
+  "brain_head_executed": "1356175bf3b5f127c9b92c6b8804b0ba3f8ff376",
+  "task_blob": "6eca05e51c2fb8a88e7642a19d0bf76b20de8ffe",
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 48,
+    "workflow_run_id": 36670493476,
+    "artifact_id": 11078260421,
+    "artifact_name": "pr335-parent-openended-sqlite-taska-terminal",
+    "artifact_digest": "sha256:e4ed848412de6658c9fe8f548747c35abdd9a99021b809bdd9987168ce4648f2",
+    "prestart_closure_run_id": 36670493495,
+    "prestart_closure_pass": true,
+    "runtime_provenance_regression_run_id": 36670493518,
+    "runtime_provenance_regression_pass": true
+  },
+  "execution": {
+    "execution_count": 1,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "model_dependency_credit": 0,
+    "task_executed": true,
+    "parent_task_completed": false,
+    "independent_oracle_executed": false,
+    "same_task_replay_allowed": false
+  },
+  "first_causal_gap": {
+    "class": "GENERIC_RUNTIME_MISSION_ORIGIN_PATH_ENVELOPE_MISSING_FOR_AUTO_ACQUISITION",
+    "observed_blocker": "CAPABILITY_ACQUISITION_REQUIRED",
+    "targeted_supplier_failure": "APT_ORIGIN_MISSION_PATH_INVALID",
+    "federated_supplier_failures": [
+      "APT_ORIGIN_MISSION_PATH_INVALID",
+      "PYPI_ORIGIN_MISSION_PATH_INVALID"
+    ],
+    "evidence_path_emitted_by_runtime": "canonical/astra_runtime/evidence/PARENT-SOFTWARE-SYSTEMS-SQLITE-OPEN-ENDED-REAL-TASK-A-20260930-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json",
+    "causal_interpretation": "The inherited model-independent runtime reached autonomous capability discovery/acquisition, but the one-shot execution envelope supplied an in-memory mission without a valid _runtime_mission_path. Supplier acquisition therefore failed before a task-specific research route could be acquired. This is not evidence that SQLite research itself is unsolved."
+  },
+  "proof_discipline": {
+    "task_freshness_spent": true,
+    "replay_forbidden": true,
+    "task_specific_repair_forbidden": true,
+    "sqlite_specific_source_tool_or_experiment_patch_forbidden": true,
+    "promotion_credit": false
+  },
+  "next_action": "CLOSE_GENERIC_RUNTIME_MISSION_ORIGIN_PATH_EXECUTION_ENVELOPE_ON_CARRIER__THEN_FREEZE_AND_EXECUTE_ONE_FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A__NO_REPLAY__STOP_ON_FIRST_CAUSAL_GAP"
+}
