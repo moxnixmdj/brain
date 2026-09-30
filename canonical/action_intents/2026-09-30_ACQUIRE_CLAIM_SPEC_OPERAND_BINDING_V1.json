@@ -1,0 +1,348 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-CLAIM-SPEC-OPERAND-BINDING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "0ef3f48e07ea0f05857c13aa5fed58437d979504",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Acquire only bounded explicit numeric-comparison claim-spec generation across GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE plus exact quoted-claim binding, with unique lexical operand binding from objective plus integrity-checked generic V2 evidence; then invoke the already-verified claim/relation primitive. No truth or parent promotion.",
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "orthogonal_recurrence_count": 0,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Stop after exact-base implementation, fail-closed ambiguity tests across the full bounded downstream operator surface and exact quoted claims, fresh cross-domain qualification with an independent role/relation oracle, and promotion of only that bounded binding scope.",
+  "recursive_obs": {
+    "canonical_base_commit": "0ef3f48e07ea0f05857c13aa5fed58437d979504",
+    "real_outcome": "Turn explicit comparative research objectives plus verified generic evidence units into an auditable relation spec consumable by the already-verified relation evaluator.",
+    "obs_goal": {
+      "real_outcome": "Derive explicit operator and bind left/right semantic operand roles without model cognition.",
+      "proxy_goals_deleted": [
+        "general natural-language understanding",
+        "paraphrase entailment",
+        "truth adjudication",
+        "causality",
+        "unit conversion",
+        "parent replay"
+      ],
+      "surviving_necessity": "For explicit comparison objectives, map objective entity roles to unique provenance-bound numeric evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+        "dormant typed quantity candidate extraction independently qualified on runner PR157"
+      ],
+      "external_existing_routes_checked": [
+        "Python official re documentation: https://docs.python.org/3/library/re.html",
+        "spaCy official rule-based matching documentation: https://spacy.io/usage/rule-based-matching/",
+        "Lark official documentation: https://lark-parser.readthedocs.io/",
+        "Lark PyPI registry: https://pypi.org/project/lark/"
+      ],
+      "capability_work_deleted": [
+        "No model cognition",
+        "No embeddings",
+        "No new supplier",
+        "No unit conversion",
+        "No general semantic parser"
+      ],
+      "surviving_gap": "Explicit relation intent and left/right entity roles are not bound to unique V2 evidence-unit numeric literals."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic semantic role binding seam between verified evidence extraction and verified explicit relation evaluation.",
+      "delete_bypass_substitute_options": [
+        "Bypass rejected because relation evaluator requires explicit references",
+        "Reuse dormant typed quantity extraction as evidence that literal typing is easy but semantic role remains unbound",
+        "Compose objective grammar + evidence lexical anchors + existing relation evaluator"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+        "SPACY_RULE_BASED_MATCHER",
+        "LARK_EBNF_GRAMMAR",
+        "MODEL_SEMANTIC_JUDGE"
+      ],
+      "losing_routes_reason": "The Python-stdlib composition covers the exact bounded operator/quoted-claim surface with no added dependency. spaCy adds tokenization/package surface without closing a missing predicate. Lark is a broader general grammar engine than this bounded need. Model judgment would violate model-independent cognitive credit.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Positive GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE comparisons, reversed roles, literal threshold/unit handling, exact quoted claims, ambiguity rejection, multiple-number rejection, unit mismatch, unsupported objective, tampered V2 evidence; then fresh cross-domain generic V2 cases with an independent parser/oracle."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any duplicate binder for the same blocker",
+        "Fresh parent execution before binder qualification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic V2 extraction",
+        "explicit relation evaluator"
+      ],
+      "fresh_reuse_plan": "After promotion recompute parent frontier and only then freeze a fresh genuinely open-ended parent task if no earlier seam remains."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused merged PR439 receipt",
+        "reused current V2 extraction contract",
+        "reused dormant typed-quantity evidence"
+      ],
+      "search_stop_decision": "No external supplier can dominate a strict bounded grammar for explicit comparison binding at zero dependency and full auditability.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed against live Brain main 0ef3f48e, inherited capability records, official Python/spaCy/Lark sources, code/package registries, broad challenger queries, and the live guarded public-runner surface. No unresolved plausible dominator remains."
+    },
+    "selected_surviving_route": "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+    "why_selected_route_is_fastest_sufficient": "It covers the entire already-verified explicit relation operator surface plus exact quoted support, adds only the missing semantic-role/spec mapping, reuses verified upstream extraction and downstream evaluation, and fails closed everywhere else.",
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "required_capability": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+    "routes_considered": [
+      "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+      "SPACY_RULE_BASED_MATCHER",
+      "LARK_EBNF_GRAMMAR",
+      "MODEL_SEMANTIC_JUDGE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "GENERAL_NATURAL_LANGUAGE_UNDERSTANDING",
+      "GENERAL_RULE_BASED_NLP",
+      "MODEL_SEMANTIC_JUDGE",
+      "NEW_MODEL_SUPPLIER",
+      "UNIT_CONVERSION",
+      "PARENT_REPLAY"
+    ],
+    "expected_parent_level_state_change": "Acquire only bounded explicit numeric-comparison claim-spec generation across GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE plus exact quoted-claim binding, with unique lexical operand binding from objective plus integrity-checked generic V2 evidence; then invoke the already-verified claim/relation primitive. No truth or parent promotion.",
+    "stop_condition": "Stop after exact-base implementation, fail-closed ambiguity tests across the full bounded downstream operator surface and exact quoted claims, fresh cross-domain qualification with an independent role/relation oracle, and promotion of only that bounded binding scope.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T07:42:40Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+          "PR447 code blob 48fd058430d8d361fc75beced567c7b6d1166531; tests blob 467a9f4f9b835ca8f65fd19b9335770e7b0ef31b; registry blob 45355ef289653e8a33141b11cd75d5a263e8b68f"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/re.html",
+          "https://spacy.io/usage/rule-based-matching/",
+          "https://lark-parser.readthedocs.io/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/explosion/spaCy",
+          "https://github.com/lark-parser/lark",
+          "https://pypi.org/project/lark/"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026-09-30 challenger query: rule based explicit comparison relation parsing exact quoted claim unique operand binding no model",
+          "2026-09-30 challenger query: Python relation extraction parser regex vs rule matcher latest"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "rule based explicit comparative relation parsing exact quoted claim unique operand binding no model"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "spaCy Matcher rule based matching no statistical model"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python regex vs grammar parser explicit binary comparison extraction"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Python rule based NLP parser latest 2026 no model"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+          "evidence": [
+            "PR447 current code blob 48fd058430d8d361fc75beced567c7b6d1166531",
+            "https://docs.python.org/3/library/re.html"
+          ],
+          "qualification_evidence": [
+            "Python official re documentation"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Finite explicit grammar and exact quoted-claim path are deterministic and fail closed on ambiguity; fresh independent qualification still required.",
+            "CAPABILITY_STRENGTH": "Sufficient for the exact current blocker and existing verified relation-operator surface.",
+            "WALL_CLOCK": "Lowest integration time because it reuses Python stdlib plus already-verified Brain extraction/relation interfaces.",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "No network or model dependency in credited cognition path.",
+            "VERIFIABILITY": "Small explicit grammar and exact evidence references permit adversarial independent qualification."
+          }
+        },
+        {
+          "route": "SPACY_RULE_BASED_MATCHER",
+          "evidence": [
+            "https://spacy.io/usage/rule-based-matching/",
+            "https://github.com/explosion/spaCy"
+          ],
+          "qualification_evidence": [
+            "spaCy official rule-based matching documentation"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "No demonstrated correctness advantage for this finite grammar.",
+            "CAPABILITY_STRENGTH": "Richer token-pattern machinery than required.",
+            "WALL_CLOCK": "Additional package/tokenization integration and qualification work.",
+            "INCREMENTAL_COST": "0 USD monetary; higher dependency cost.",
+            "RELIABILITY": "Mature but expands version/tokenization surface.",
+            "VERIFIABILITY": "Good, but larger proof surface than stdlib."
+          }
+        },
+        {
+          "route": "LARK_EBNF_GRAMMAR",
+          "evidence": [
+            "https://lark-parser.readthedocs.io/",
+            "https://github.com/lark-parser/lark",
+            "https://pypi.org/project/lark/"
+          ],
+          "qualification_evidence": [
+            "Lark official documentation",
+            "Lark PyPI registry"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "General CFG parsing adds no required property for this bounded objective language.",
+            "CAPABILITY_STRENGTH": "Far broader than necessary.",
+            "WALL_CLOCK": "Higher integration and qualification cost.",
+            "INCREMENTAL_COST": "0 USD monetary; extra package surface.",
+            "RELIABILITY": "Mature parser, but another dependency and grammar engine.",
+            "VERIFIABILITY": "High but unnecessarily broad trusted surface."
+          }
+        }
+      ],
+      "negative_search_summary": "No zero-cost non-model challenger closes the exact bounded claim-spec/operand-binding gap with fewer dependencies, lower wall-clock, or a smaller auditable proof surface than the current Python stdlib composition.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:42:40Z",
+        "max_age_hours": 2,
+        "selected_route": "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "verification-capsule-runner public GitHub Actions runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:25:16Z",
+            "evidence": [
+              "runner PR156 exact-head Execution Guard Regression run 36683562451 SUCCESS",
+              "runner live cutover commit f2335a12a5137f683b0660ec20aba6e45dc388cc"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "Python runtime with stdlib re/pathlib/importlib.util",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:25:16Z",
+            "evidence": [
+              "runner PR156 Execution Guard Regression run 36683562451 executed Python guard/audit code successfully"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PR447 exact candidate and regression bytes",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:42:40Z",
+            "evidence": [
+              "code blob 48fd058430d8d361fc75beced567c7b6d1166531",
+              "tests blob 467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+              "registry blob 45355ef289653e8a33141b11cd75d5a263e8b68f"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  },
+  "prior_work_checked": [
+    "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+    "current generic V2 evidence extraction contract and verified relation evaluator",
+    "PR447 current candidate code blob 48fd058430d8d361fc75beced567c7b6d1166531",
+    "PR447 regression blob 467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+    "runner PR156 live global execution guard and public-runner regression",
+    "fresh challenger search across Python stdlib re, spaCy rule matcher, and Lark grammar parser"
+  ],
+  "probe_id": null,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": []
+}
