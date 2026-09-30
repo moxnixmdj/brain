@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SQLITE-FIRST-PHYSICAL-SPEND-AUTHORITY-CORRECTION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_base_commit": "3a6a0a392b5619af0aa97fe505c6ea74965ecef3",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "action_kind": "EVIDENCE_PROVENANCE_AND_AUTHORITY_CORRECTION",
+  "causal_blocker": "FALSE_FIRST_SPEND_CHRONOLOGY_AND_REPLAY_DERIVED_RUNTIME_REPAIR_AUTHORITY",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "earliest SQLite public run 36670808367 / job 109745195120 / artifact 11077757767",
+    "exact frozen task blob 5d09c9eebcb09612525836e7926bdf297f4bad32",
+    "early harness run_openended_sqlite_taska_once.py directly called runtime.run_goal(step, mission)",
+    "later canonical-entrypoint SQLite replay 36674086293 / artifact 11078414137",
+    "fresh non-parent mission-origin pass 36672816106 / artifact 11078921733",
+    "merged Brain PR384 false sole-first-spend attribution",
+    "open/closed Brain PR386 later false first-spend attribution"
+  ],
+  "selected_surviving_route": "CORRECT_PROVENANCE__QUARANTINE_REPLAY_DIAGNOSTICS__RECOMPUTE_FRONTIER__THEN_USE_ONE_MATERIALLY_DIFFERENT_FRESH_PARENT_TASK",
+  "expected_parent_frontier_change": "Remove replay-only supplier-contract diagnosis from authoritative parent causality, preserve SQLite as spent/no-pass, and return the frontier to admissible fresh evidence acquisition without any same-task replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "stop_condition": "Do not mutate runtime, do not replay SQLite or thermophysics, do not award capability or scoreboard credit. Stop this action after canonical precedence is recorded; exact active-mirror byte reconciliation follows only from current bytes.",
+  "evidence_path": "canonical/capabilities/obsolescence/SQLITE_FIRST_PHYSICAL_SPEND_AUTHORITY_CORRECTION_20260930_V1.json",
+  "next_action": "RECOMPUTE_CURRENT_ROUTE_FRONTIER_FROM_CORRECTED_CHRONOLOGY__SEARCH_REUSE_BEFORE_REPAIR__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_PARENT_TASK_THROUGH_CANONICAL_ASTRA_MISSION_ENTRYPOINT__NEVER_REPLAY_SQLITE_OR_THERMOPHYSICS"
+}
