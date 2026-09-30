@@ -90,6 +90,32 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
         self.assertEqual(out["model_dependency_count"],0)
 
+    def test_actual_spent_http2_parent_goal_reaches_broad_decomposition(self):
+        objective=(
+            "Assess whether the maximum permitted HTTP/2 initial stream flow-control window is greater "
+            "than the protocol's default initial stream flow-control window. Use authoritative primary "
+            "technical evidence and a real executable check. Autonomously discover and verify the relevant "
+            "specification, determine how to extract and interpret the required limits, choose and run a "
+            "zero-cost verification method, identify material protocol-scope or interpretation limitations, "
+            "independently verify the consequential result, and produce a decision-quality answer with provenance."
+        )
+        direct=self.dec.decompose(objective)
+        self.assertEqual(direct["status"],"DECOMPOSED",direct)
+        out=self.grounding.ground(objective,{})
+        self.assertGreater(len(out["clauses"]),1)
+        self.assertEqual(out["grounded_clause_count"],0)
+        self.assertEqual(len(out["unresolved_clause_indexes"]),len(out["clauses"]))
+        self.assertTrue(out["broad_objective_decomposition_available"],out)
+        self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+        self.assertEqual(out["model_dependency_count"],0)
+
+    def test_concrete_run_recipe_still_fails_closed(self):
+        out=self.dec.decompose(
+            "Determine whether values differ and run python verify_values.py"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED")
+        self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
+
     def test_grounding_keeps_unsupported_goal_unresolved_without_decomposition(self):
         out=self.grounding.ground("Create output.json with one record",{})
         self.assertEqual(out["grounded_clause_count"],0)
