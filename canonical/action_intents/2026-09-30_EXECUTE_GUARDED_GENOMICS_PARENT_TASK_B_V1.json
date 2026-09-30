@@ -14,10 +14,13 @@
   "task_blob_sha": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
   "mission_blob_sha": "03e718a9c779c26d26e7af140f2f65549c1a7f6e",
   "prior_work_checked": [
-    "Current canonical main b8a0102421e68f4137a4c5fe72d27ed96fb448b2 includes PR474 guarded-qualified broad-routing repair and PR490 corrected genomics Task B phase/promotion accounting.",
-    "Corrected frozen Task B blob is 5f1a8fea0d29c2a60dcc7a038ecd557829e602e7 and corrected mission blob is 03e718a9c779c26d26e7af140f2f65549c1a7f6e.",
+    "PR474 merged exact guarded-qualified broad multi-clause research routing repair at a42d1d9ef9134f1095e44a4483dba8203f27eda9.",
+    "PR478 froze the materially different genomics Task B and merged at 2ec11e42e7fc7a58461a1da0c356342bcac4ecf1.",
+    "PR490 corrected the frozen Task B phase labels and mission binding on current main at b8a0102421e68f4137a4c5fe72d27ed96fb448b2.",
+    "Current Task B blob is 5f1a8fea0d29c2a60dcc7a038ecd557829e602e7 and current mission blob is 03e718a9c779c26d26e7af140f2f65549c1a7f6e.",
+    "Deferred PR471 produced no physical execution and no parent capability credit.",
     "HTTP2 parent run 36688193204 is spent and must never be replayed.",
-    "No physical genomics parent execution has been observed; execution remains unspent."
+    "No public runner genomics execution branch existed at authorization refresh time."
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "expected_parent_frontier_change": "Exactly one live-atomic-guard-admitted physical execution of frozen genomics Task B; on first causal failure preserve the earliest integrated gap and mark the task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
