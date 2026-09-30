@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-ELECTROCHEM-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_B_REQUIRED_AFTER_ROUTING_REPAIR",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_ELECTROCHEMICAL_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended electrochemical-materials parent task after guarded qualification of the generic broad-routing repair; execute exactly once and stop on the first new causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "Brain PR #474 merged guarded-qualified broad multi-clause research routing repair",
+    "runner guarded qualification run 36689658815 passed exact candidate blobs with child return code 0",
+    "HTTP2 Task A spent in guarded run 36688193204 and replay forbidden",
+    "astronomy, climate, demography, geophysics, thermophysics, numerical-computing, SQLite, network-protocol, and prior parent domains excluded from freshness"
+  ],
+  "evidence_presence_classification": "GENERIC_ROUTING_REPAIR_VERIFIED__FRESH_PARENT_TASK_B_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen Task B. On semantic completion, independently verify before parent promotion. On failure, preserve only the earliest integrated causal gap and never replay this task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "real_outcome": "Test the repaired generic open-ended research stack on a materially different electrochemical-materials objective without supplied source, values, stoichiometric formula, calculation recipe, tool, or answer.",
+    "surviving_necessity": "The first guarded parent run falsified upstream broad-objective admission; PR474 repaired and independently qualified that seam. A new fresh parent run is now the shortest path to either parent-level proof or the next causal gap.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_ELECTROCHEMICAL_MATERIALS_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_TASK_A_REPLAY",
+      "PREDECLARED_SOURCE_OR_PAPER",
+      "PREDECLARED_STOICHIOMETRIC_FORMULA",
+      "PREDECLARED_NUMERIC_CAPACITIES",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "PREWIRED_TOOL_OR_CALCULATION_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "It is cross-domain relative to the spent network-protocol task and exercises autonomous research decomposition, primary-source discovery, quantitative evidence extraction or derivation, executable verification, ambiguity handling, synthesis, provenance, and independent verification through the repaired generic stack.",
+    "expected_parent_level_state_change": "Either obtain an admissible open-ended parent Task B semantic completion for independent verification or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one guarded physical execution; no same-task replay."
+  }
+}
