@@ -83,7 +83,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+  "next_progress_event_target": "FREEZE_AND_RUN_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_B__THROUGH_CANONICAL_ASTRA_MISSION_ENTRYPOINT__NO_PREWIRED_RESEARCH_PLAN__STOP_ON_FIRST_CAUSAL_GAP",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -485,12 +485,36 @@
       },
       "progress_credit": "EVIDENCE_PROVENANCE_AND_MIRROR_CORRECTION_ONLY",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "MISSION_ORIGIN_ENTRYPOINT_CANARY_PASS_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "FRESH_NON_PARENT_CANARY_PASS__EXISTING_CANONICAL_MISSION_ENTRYPOINT_PROPAGATES_VALID_ORIGIN_INTO_AUTONOMOUS_ACQUISITION__ZERO_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/MISSION_ORIGIN_ENTRYPOINT_CANARY_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36672816106,
+      "public_job_id": 109751299770,
+      "artifact_id": 11078921733,
+      "artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+      "validation_scope": "MISSION_ORIGIN_ENTRYPOINT_ONLY",
+      "mission_origin_propagation_verified": true,
+      "parent_task": false,
+      "parent_capability_promoted": false,
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 0,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "VALIDATION_ONLY__ZERO_SCOREBOARD_DELTA"
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "active_subcapability_target": null,
-    "subcapability_status": "GENERIC_BROAD_OBJECTIVE_COMPILE_GAP_UNRESOLVED__MAUNA_OBJECTIVE_SPENT__TWO_LATER_REPLAYS_QUARANTINED__NO_ADMISSIBLE_FRESH_PARENT_PASS",
+    "subcapability_status": "MISSION_ORIGIN_ROUTE_VERIFIED__CANARY_ZERO_CREDIT__MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_REQUIRED",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0
   }
