@@ -107,6 +107,8 @@ def run(objective,decomposition,limit=12,timeout=15):
         relevance.get("status")=="LEXICAL_RELEVANCE_RANKED"
         and relevance.get("output_verified") is True
         and relevance.get("top_candidate_original_index") is not None
+        and isinstance(relevance.get("top_candidate_admission"),dict)
+        and relevance["top_candidate_admission"].get("verified") is True
     )
 
     authority_verifications=[]
@@ -254,7 +256,7 @@ def run(objective,decomposition,limit=12,timeout=15):
             "candidate":selected_item["candidate"] if selected_item else None,
         }],
         "relevance_verified_candidate_count":1 if relevance_ready else 0,
-        "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_LEXICAL_OBJECTIVE_RELEVANCE_ONLY",
+        "relevance_claim_scope":"QUALIFIED_DETERMINISTIC_BM25_PLUS_FOCUSED_QUERY_TOKEN_COVERAGE_ADMISSION_ONLY",
         "evidence_extractions":evidence_extractions,
         "evidence_extracted_candidate_count":len(evidence_extracted),
         "claim_relation_evaluations":claim_relation_evaluations,
