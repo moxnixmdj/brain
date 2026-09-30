@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTEGRATE-STRICT-FIRST-PARTY-OBJECTIVE-RELEVANCE-ADMISSION-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+  "action_kind": "GENERIC_RUNTIME_CAPABILITY_COMPOSITION",
+  "implemented_capability": "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+  "causal_change": "For retrieval-provenance candidates already bound to an exact active ROR organization domain, freshly retrieve the same-domain page and admit objective relevance only when at least half of discriminative objective tokens match, with a minimum two matches and title-or-URL evidence or two long discriminative matches. ASTRA then advances only to evidence extraction.",
+  "claim_scope": "FIRST_PARTY_EXACT_ROR_DOMAIN_PLUS_STRICT_BOUNDED_LEXICAL_OBJECTIVE_COVERAGE_ONLY",
+  "explicit_nonclaims": [
+    "SEMANTIC_ENTAILMENT",
+    "PRIMARY_SOURCE_STATUS",
+    "FACTUAL_CORRECTNESS",
+    "EVIDENCE_SUFFICIENCY",
+    "CLAIM_ENDORSEMENT",
+    "PARENT_CAPABILITY_COMPLETION"
+  ],
+  "fail_closed_conditions": [
+    "LIVE_RETRIEVAL_PROVENANCE_MISSING",
+    "QUALIFIED_ROR_IDENTITY_MISSING",
+    "PROVENANCE_HOST_NOT_EXACT_BOUND_DOMAIN",
+    "FRESH_FETCH_FAILURE",
+    "FRESH_REDIRECT_OUTSIDE_BOUND_DOMAIN",
+    "INSUFFICIENT_OBJECTIVE_TOKEN_COVERAGE"
+  ],
+  "next_gap_if_qualified": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}

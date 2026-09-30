@@ -3,9 +3,10 @@
 
 This composes already-qualified decomposition, source-candidate discovery,
 provenance verification, and the independently-qualified ROR organization
-identity binder. Primary-source status is preserved as optional source-role
-metadata rather than a universal admission gate. The frontend deliberately
-stops before objective-relevance verification, evidence extraction, or answer synthesis.
+identity binder, then applies a strict first-party bounded lexical objective-
+relevance admission check. Primary-source status remains optional metadata.
+The frontend deliberately stops before evidence extraction, factual correctness,
+evidence sufficiency, or answer synthesis.
 """
 from __future__ import annotations
 
@@ -43,6 +44,7 @@ def run(objective,decomposition,limit=12,timeout=15):
     discovery=_load_sibling("open_web_source_candidate_discovery")
     verifier=_load_sibling("source_candidate_provenance_verify")
     authority_identity=_load_sibling("source_authority_binding_ror")
+    relevance_verifier=_load_sibling("first_party_objective_relevance_verify")
     discovered=discovery.discover(objective,limit=limit,timeout=timeout)
     if discovered.get("status")!="CANDIDATES_DISCOVERED":
         return {
@@ -108,6 +110,28 @@ def run(objective,decomposition,limit=12,timeout=15):
     ]
     identity_ready=bool(authority_verified)
 
+    objective_relevance_verifications=[]
+    for item in authority_verified:
+        checked=relevance_verifier.verify(
+            objective,
+            item["candidate"],
+            item["provenance"],
+            item["authority_identity"],
+            timeout=timeout,
+        )
+        objective_relevance_verifications.append({
+            "candidate":item["candidate"],
+            "provenance":item["provenance"],
+            "authority_identity":item["authority_identity"],
+            "relevance":checked,
+        })
+    relevance_verified=[
+        x for x in objective_relevance_verifications
+        if x["relevance"].get("objective_relevance_status")=="VERIFIED"
+        and x["relevance"].get("status")=="FIRST_PARTY_RELEVANT_SOURCE_VERIFIED"
+    ]
+    relevance_ready=bool(relevance_verified)
+
     return {
         "schema":SCHEMA,
         "status":"SOURCE_FRONTEND_READY",
@@ -120,25 +144,35 @@ def run(objective,decomposition,limit=12,timeout=15):
         "authority_identity_verifications":authority_verifications,
         "authority_identity_verified_candidate_count":len(authority_verified),
         "authority_identity_claim_scope":"HOST_TO_ROR_ORGANIZATION_DOMAIN_BINDING_ONLY",
+        "objective_relevance_verifications":objective_relevance_verifications,
+        "relevance_verified_candidate_count":len(relevance_verified),
+        "relevance_claim_scope":"FIRST_PARTY_EXACT_ROR_DOMAIN_PLUS_STRICT_BOUNDED_LEXICAL_OBJECTIVE_COVERAGE_ONLY",
         "authority_verified_candidate_count":0,
         "primary_source_verified_candidate_count":0,
-        "relevance_verified_candidate_count":0,
         "role_progress":{
             "SOURCE_DISCOVERY":(
+                "FIRST_PARTY_OBJECTIVE_RELEVANT_SOURCE_AVAILABLE"
+                if relevance_ready else
                 "CANDIDATES_WITH_PROVENANCE_AND_ORGANIZATION_IDENTITY_AVAILABLE"
                 if identity_ready else
                 "CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE"
             ),
             "EVIDENCE_ACQUISITION":(
+                "RELEVANT_SOURCE_AVAILABLE__EVIDENCE_EXTRACTION_REQUIRED"
+                if relevance_ready else
                 "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
                 if identity_ready else
                 "BLOCKED_ON_AUTHORITY_IDENTITY_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
             ),
-            "EVIDENCE_EXTRACTION":"NOT_STARTED",
+            "EVIDENCE_EXTRACTION":(
+                "REQUIRES_GROUNDING" if relevance_ready else "NOT_STARTED"
+            ),
             "RELATION_EVALUATION":"NOT_STARTED",
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
         "next_required_capability":(
+            "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE"
+            if relevance_ready else
             "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
             if identity_ready else
             "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION"
@@ -148,7 +182,8 @@ def run(objective,decomposition,limit=12,timeout=15):
         "primary_source_gate_required":False,
         "primary_source_status_role":"OPTIONAL_METADATA_NOT_UNIVERSAL_RESEARCH_ADMISSION_GATE",
         "primary_source_claims_made":False,
-        "relevance_claims_made":False,
+        "relevance_claims_made":relevance_ready,
+        "factual_correctness_claims_made":False,
         "evidence_sufficiency_claims_made":False,
         "model_dependency_count":0,
         "incremental_spend_usd":0,

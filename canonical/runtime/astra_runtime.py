@@ -5626,11 +5626,20 @@ def _run_goal_unstamped(step, mission):
                   "authority_identity_verified_candidate_count":int(
                       source_frontend.get("authority_identity_verified_candidate_count") or 0
                   ),
+                  "relevance_verified_candidate_count":int(
+                      source_frontend.get("relevance_verified_candidate_count") or 0
+                  ),
                   "next_required_capability":source_frontend.get("next_required_capability"),
                   "capability_acquisition_attempted":False,
                   "policy":"BROAD_RESEARCH_DECOMPOSITION_ROUTES_TO_RESEARCH_SOURCE_FRONTEND_BEFORE_PACKAGE_ACQUISITION",
                 }
                 if status=="SOURCE_FRONTEND_READY":
+                    if int(source_frontend.get("relevance_verified_candidate_count") or 0)>0:
+                        raise Blocker(
+                            "OPEN_ENDED_RESEARCH_RELEVANT_SOURCE_READY__"
+                            "EVIDENCE_EXTRACTION_REQUIRED:"
+                            +json.dumps(payload,sort_keys=True)
+                        ) from e
                     if int(source_frontend.get("authority_identity_verified_candidate_count") or 0)>0:
                         raise Blocker(
                             "OPEN_ENDED_RESEARCH_SOURCE_IDENTITY_READY__"
