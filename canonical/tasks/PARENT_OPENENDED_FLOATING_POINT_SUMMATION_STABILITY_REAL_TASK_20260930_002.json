@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TECHNICAL_REAL_TASK_V1",
+  "task_id": "PARENT-OPENENDED-FLOATING-POINT-SUMMATION-STABILITY-REAL-TASK-20260930-002",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "NUMERICAL_COMPUTING_FLOATING_POINT_STABILITY",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
+  "source_task_replay": false,
+  "objective": "Determine whether ordinary sequential summation in 64-bit binary floating-point arithmetic can yield materially less accurate results than a numerically stable summation strategy for workloads combining severe cancellation and large dynamic range. Use authoritative primary technical evidence and a real executable experiment, decide what evidence and method are sufficient, identify material limitations, independently verify the consequential result, and preserve source, method, and execution provenance.",
+  "goal_text": "Determine whether ordinary sequential summation in 64-bit binary floating-point arithmetic can yield materially less accurate results than a numerically stable summation strategy for workloads combining severe cancellation and large dynamic range. Use authoritative primary technical evidence and a real executable experiment. Choose and justify the research method, discover and verify the necessary source and tool route, test the claim, identify material limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "anti_leakage": {
+    "authority_name_preprovided": false,
+    "authority_domain_preprovided": false,
+    "source_url_preprovided": false,
+    "dataset_or_document_identifier_preprovided": false,
+    "experiment_procedure_preprovided": false,
+    "executable_tool_or_command_preprovided": false,
+    "quantitative_formula_preprovided": false,
+    "controller_action_graph_preprovided": false,
+    "expected_answer_precommitted": false
+  },
+  "required_behavior": [
+    "autonomously decompose the technical objective",
+    "discover and verify authoritative primary technical evidence without a supplied authority, domain, URL, or document identifier",
+    "select an executable verification route without a supplied tool, command, algorithm implementation, or experiment procedure",
+    "design and run a real experiment sufficient to test the claimed floating-point summation behavior",
+    "synthesize documentary and experimental evidence into a scoped technical conclusion",
+    "state material limitations or uncertainty",
+    "independently verify the consequential result",
+    "preserve source, method, execution, and cognition provenance"
+  ],
+  "required_output": {
+    "fields": [
+      "status",
+      "research_plan",
+      "source_provenance",
+      "tool_provenance",
+      "experiment",
+      "observations",
+      "decision",
+      "limitations",
+      "independent_verification",
+      "model_dependency_count",
+      "cognition_dependency_class",
+      "cognition_provenance_authority"
+    ]
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "required_cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_local_model": true,
+    "no_model_artifact": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "If the producer completes semantically, independently inspect the producer-cited primary source(s), independently reproduce the essential floating-point summation experiment without importing producer modules, and compare the consequential observations, conclusion, and stated limitations. If the producer fails before a result, preserve only the earliest causal blocker and do not replay the task.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "freeze_note": "Objective and acceptance scope frozen before producer-side source discovery, tool selection, experiment design, or answer research."
+}
