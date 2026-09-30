@@ -1,0 +1,320 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "GROUNDED-EXECUTABLE-COMPOSITION-REAL-TASK-A-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "MERGED_GROUNDED_EXECUTABLE_COMPOSITION_HAS_EXACT_COMPONENT_PROOF_BUT_NO_FRESH_REAL_TASK_EXECUTION",
+  "action_kind": "REAL_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::MERGED_GROUNDED_EXECUTABLE_COMPOSITION_HAS_EXACT_COMPONENT_PROOF_BUT_NO_FRESH_REAL_TASK_EXECUTION::REAL_TASK_EXECUTION",
+  "expected_parent_frontier_change": "Execute one fresh consequential multi-step real task through the merged model-independent grounding→composition→planner→executor route, independently verify the real effect, and produce admissible Task-A evidence without capability promotion yet.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR255 merged exact implementation at 36bb1372702badad6a0c71c4a0b09e1c80c5a7a6",
+    "Public exact-byte validation run 36647904127 PASS on PR255 producer/verifier/runtime bytes",
+    "Existing real-task branch verify/grounded-composition-real-task-a-cpython-api-20260930 used losing PR254 implementation and is inadmissible for PR255",
+    "No public branch found containing a fresh real task for the surviving PR255 implementation"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after one fresh real task either passes with independent verification or fails at the first causal seam; do not repair or rerun the same task in this action. Capability promotion remains forbidden until a distinct fresh reuse also passes.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a9816671c2792f22d4aed6d58a4785ac5101936e",
+    "real_outcome": "Produce one fresh verified real-task execution through the merged model-independent grounded executable composition route.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Produce one fresh verified real-task execution through the merged model-independent grounded executable composition route.",
+      "proxy_goals_deleted": [
+        "another component benchmark",
+        "replaying the spent serialization parent task",
+        "using the failed PR254 real-task run as PR255 evidence",
+        "new implementation work before real execution"
+      ],
+      "surviving_necessity": "Run one fresh real multi-step task on exact merged #255 bytes."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Merged PR255 composition producer/verifier/runtime",
+        "Public exact-byte validation run 36647904127",
+        "Existing bound capability registry and model-independent planner/executor"
+      ],
+      "external_existing_routes_checked": [
+        "aiplan4eu/unified-planning",
+        "openplan-labs/PythonPDDL",
+        "shop-planner/shop3"
+      ],
+      "capability_work_deleted": [
+        "No new composition implementation",
+        "No new planner",
+        "No model",
+        "No synthetic benchmark"
+      ],
+      "surviving_gap": "Fresh real-task execution evidence on the surviving implementation is absent."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence gap only; implementation exists and exact-byte component verification already passes.",
+      "delete_bypass_substitute_options": [
+        "Reuse exact validation as component proof",
+        "Reject PR254 task failure as wrong implementation",
+        "Execute one new real task on merged PR255 route"
+      ],
+      "surviving_causal_blocker": "No admissible fresh real-task execution evidence for merged route."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Reuse merged PR255 + existing public runner and execute one fresh real task",
+        "Create another component verifier",
+        "Modify implementation before real execution"
+      ],
+      "losing_routes_reason": "Component proof already exists and implementation changes would be unsupported before observing a real failure.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use task-native independent verification of the produced effect; no benchmark."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any planned extra component validation if real task passes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Plain-goal bound grounding",
+        "Grounded executable composition",
+        "Capability graph planning",
+        "Model-independent execution"
+      ],
+      "fresh_reuse_plan": "After Task A passes, run one materially distinct real Task B without rediscovery or implementation change."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR255 live challenger search",
+        "Reuse PR255 selected-route preflight",
+        "Reuse exact-byte public validation"
+      ],
+      "search_stop_decision": "The implementation route is already selected, merged, and exact-byte verified; only fresh real-task evidence can change the next decision.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "PR255 route frontier checked 2026-09-29T23:50:00Z remains within 24h and no route-changing failure occurred; exact-base state refreshed."
+    },
+    "routes_considered": [
+      "EXECUTE_MERGED_PR255_ON_FRESH_REAL_TASK",
+      "MORE_COMPONENT_VALIDATION",
+      "IMPLEMENTATION_REPAIR_BEFORE_REAL_FAILURE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MORE_COMPONENT_VALIDATION",
+      "IMPLEMENTATION_REPAIR_BEFORE_REAL_FAILURE",
+      "PR254_REAL_TASK_AS_PR255_EVIDENCE"
+    ],
+    "selected_surviving_route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+    "why_selected_route_is_fastest_sufficient": "Exact merged bytes already pass independent public component verification; one fresh real task is the minimum missing evidence.",
+    "expected_parent_level_state_change": "Execute one fresh consequential multi-step real task through the merged model-independent grounding→composition→planner→executor route, independently verify the real effect, and produce admissible Task-A evidence without capability promotion yet.",
+    "stop_condition": "Stop after one fresh real task either passes with independent verification or fails at the first causal seam; do not repair or rerun the same task in this action. Capability promotion remains forbidden until a distinct fresh reuse also passes.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T23:50:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BRAIN_GROUNDING_PLUS_NATIVE_CAPABILITY_GRAPH_PLANNER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/capability_planner.py",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+          "canonical/runtime/astra_runtime.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/openplan-labs/PythonPDDL",
+          "https://github.com/shop-planner/shop3"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/openplan-labs/PythonPDDL",
+          "https://github.com/shop-planner/shop3"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh web/GitHub search on 2026-09-29 for deterministic classical/HTN/PDDL composition planners."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic grounded capability composition explicit preconditions effects executable actions no model"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Unified Planning PythonPDDL SHOP3 deterministic planner"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "capability graph planner versus PDDL HTN grounded action composition"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current open source deterministic planning frameworks Python PDDL HTN"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+          "evidence": [
+            "Current Brain registry already declares requires/provides/cost/action/result_fields.",
+            "Existing planner already emits executable minimum-cost action sequences."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED current main 3198f1b18fe441ab86cb9c2b4141517e1d5bf6bb",
+            "DIRECT_CODE_INSPECTION capability_planner.py and astra_runtime.py"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Reuses fail-closed verified registry contracts and existing planner semantics.",
+            "CAPABILITY_STRENGTH": "Directly represents the observed composition problem including dependencies, alternatives, costs, and executable actions.",
+            "WALL_CLOCK": "Only a thin bridge is missing; no new solver or representation layer.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "All downstream planner/executor components already exist in Brain and are deterministic.",
+            "VERIFIABILITY": "Bridge output and final plan can be independently structurally verified."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_PYTHONPDDL",
+          "evidence": [
+            "Current public project provides dependency-free pure-Python PDDL parser, grounder and planners."
+          ],
+          "qualification_evidence": [
+            "https://github.com/openplan-labs/PythonPDDL"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Capable classical planning framework.",
+            "CAPABILITY_STRENGTH": "Broad PDDL feature set, beyond the current seam.",
+            "WALL_CLOCK": "Requires translating Brain registry capabilities and bindings into PDDL before planning.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Current open-source project.",
+            "VERIFIABILITY": "Strong planner outputs, but adds a new formulation adapter that must itself be verified."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_UNIFIED_PLANNING",
+          "evidence": [
+            "Current project actively develops grounding/planning infrastructure."
+          ],
+          "qualification_evidence": [
+            "https://github.com/aiplan4eu/unified-planning"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Mature planning framework with multiple engines.",
+            "CAPABILITY_STRENGTH": "Much broader than needed.",
+            "WALL_CLOCK": "Adds dependency and problem translation before solving the same graph search Brain already owns.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Active maintained ecosystem.",
+            "VERIFIABILITY": "High, but integration surface is larger."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_SHOP3",
+          "evidence": [
+            "Current SHOP3 release provides deterministic HTN planning."
+          ],
+          "qualification_evidence": [
+            "https://github.com/shop-planner/shop3"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Established HTN planner.",
+            "CAPABILITY_STRENGTH": "Supports richer hierarchical formulations than needed.",
+            "WALL_CLOCK": "Requires authored HTN/PDDL domain translation not present in grounding output.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Active release line.",
+            "VERIFIABILITY": "Planner is auditable, but new translation layer remains."
+          }
+        }
+      ],
+      "negative_search_summary": "No external deterministic planner removes the grounding-to-formulation work. Brain's existing graph planner already consumes the same semantics natively.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T23:50:00Z",
+        "max_age_hours": 2,
+        "selected_route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_GROUNDING_BINDER_GRAPH_PLANNER_EXECUTOR",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:50:00Z",
+            "evidence": [
+              "BRAIN_INHERITED exact main a9816671c2792f22d4aed6d58a4785ac5101936e"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
