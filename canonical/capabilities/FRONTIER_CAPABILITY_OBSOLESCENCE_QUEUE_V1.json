@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Acquire the minimum model-independent route that evaluates claim support and the requested relation from generic provenance-bound objective-grounded extracted evidence, reusing existing numeric and decision capabilities where applicable; do not replay spent parent tasks.",
+    "objective": "Repair generic evidence extraction so visible objective-grounded content in modern container-based pages cannot be omitted; then independently requalify exact producer/frontend bytes before returning to claim support and relation evaluation.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
-    "repair_status": "GENERIC_NON_ROR_PROVENANCE_PLUS_BM25_PLUS_FRESH_SAME_SOURCE_EVIDENCE_EXTRACTION_VERIFIED__CLAIM_SUPPORT_RELATION_GAP_ACTIVE",
-    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_EXTRACTED_TEXT_EQUALS_TRUTH__NO_RELEVANCE_EQUALS_SUPPORT__NO_ROR_AS_UNIVERSAL_GATE__NO_PARENT_SCORE_CREDIT_FOR_SUBCAPABILITY_ONLY",
-    "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE__REUSE_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
+    "exact_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+    "repair_status": "GENERIC_EVIDENCE_EXTRACTION_QUALIFICATION_REOPENED__MODERN_CONTAINER_COVERAGE_GAP_ACTIVE",
+    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_GENERIC_EXTRACTION_CREDIT_UNTIL_REQUALIFIED__NO_RELATION_FRONTIER_WHILE_EARLIER_EXTRACTION_GAP_ACTIVE",
+    "next_action": "OBS_AND_REPAIR_GENERIC_EVIDENCE_EXTRACTION_FOR_MODERN_CONTAINER_CONTENT__REQUALIFY_EXACT_BYTES__NO_PARENT_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -88,8 +88,7 @@
       "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1",
       "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
       "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
-      "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
-      "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1"
+      "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1"
     ],
     "latest_fresh_real_run_id": 36652169397,
     "latest_fresh_reuse_run_id": 36652623916,
@@ -128,17 +127,15 @@
       "first_physical_spend_run_id": 36670808367
     },
     "latest_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
-      "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_NON_ROR_CROSS_DOMAIN_PASS",
-      "route": "objective_evidence_unit_extract + open_research_source_frontend",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
-      "public_run_id": 36680967490,
-      "producer_git_blob": "6598ba92307c55fe6e645b4ecba070d2259818e2",
-      "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+      "capability_id": "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
+      "status": "VERIFIED_ACQUIRED__NARROW_EXACT_ROR_BOUND_SCOPE_ONLY",
+      "route": "relevant_source_evidence_extract",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+      "public_run_id": 36679523741,
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Objective-grounded verbatim evidence units only. Claim support/contradiction, entailment, correctness, causality, quality, sufficiency, independence, and parent completion remain unverified."
+      "limitations": "Exact-ROR-bound first-party relevance-admitted extraction only. Generic modern-container extraction remains unverified."
     }
   },
   "promotion_claim": false,
@@ -356,7 +353,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
   },
-  "next_progress_event_target": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE__REUSE_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
+  "next_progress_event_target": "OBS_AND_REPAIR_GENERIC_EVIDENCE_EXTRACTION_FOR_MODERN_CONTAINER_CONTENT__REQUALIFY_EXACT_BYTES__NO_PARENT_REPLAY",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
