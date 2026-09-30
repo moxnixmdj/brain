@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
   "action_id": "PROMOTE-OPUS55-LONG-HORIZON-CONTINUITY-20260930-V1",
-  "status": "AUTHORIZED_EXECUTION",
+  "status": "COMPLETE_VERIFIED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "4cdac1830804aab373f462c294d984c011a49897",
   "capability_target": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -22,11 +22,11 @@
   "ownership_tests": {
     "brain_artifact_test": "PASS_EXISTING_CANONICAL_SUPERVISOR_CHECKPOINT_AND_GIT_STATE",
     "no_hidden_capability_provider_test": "PASS__CONTINUITY_MECHANISM_IS_DETERMINISTIC_BRAIN_CODE_AND_STATE",
-    "general_substrate_test": "NOT_REQUIRED_FOR_FRESH_MECHANICAL_CONTINUITY_CAPSULE",
+    "general_substrate_test": "PASS__NO_EXTERNAL_COGNITION_SUBSTRATE_IN_CONTINUITY_CAPABILITY_PATH",
     "specimen_separation_test": "PASS__ANTHROPIC_DESCRIPTION_USED_ONLY_TO_DEFINE_TARGET_BEHAVIOR",
-    "reexecution_without_rediscovery_test": "PASS_HISTORICALLY__FRESH_REVERIFY_PENDING",
-    "brain_configured_verification_test": "PENDING_FRESH_PUBLIC_CAPSULE",
-    "ownership_package_test": "PENDING_PROMOTION_PACKAGE"
+    "reexecution_without_rediscovery_test": "PASS__FRESH_CURRENT_BYTE_REEXECUTION",
+    "brain_configured_verification_test": "PASS__PUBLIC_RUN_36762735723",
+    "ownership_package_test": "PASS__CANONICAL_PACKAGE_CREATED"
   },
   "reasoning_durability": {
     "receipt": "canonical/reasoning/2026-09-30_PROMOTE_OPUS55_LONG_HORIZON_CONTINUITY_V1.json"
@@ -139,5 +139,13 @@
     "why_selected_route_is_fastest_sufficient": "The mechanism already exists, is Brain-owned, has prior real and independent clean-room evidence, requires no cognition substrate or paid service, and can be freshly verified at the behavioral ceiling with two deterministic process invocations plus an independent state check.",
     "expected_parent_level_state_change": "If current Brain continuity bytes pass a fresh forced-process-boundary verification and existing independent receipts remain coherent, promote only the scoped long-horizon memory/continuity behavior defined in the Opus 5.5 envelope; otherwise preserve zero credit and localize the first failed continuity invariant.",
     "stop_condition": "Stop after one fresh current-byte process-boundary capsule and one independent ledger verification. Promote only if all continuity invariants pass and $0 incremental spend is preserved; do not expand the claim to autonomous wake, arbitrary semantic memory quality, or general cognition."
+  },
+  "verification_result": {
+    "public_run_id": 36762735723,
+    "public_job_id": 110049133395,
+    "artifact_id": 11119213213,
+    "artifact_digest": "sha256:b3171075fc05fdba6dfc64ccfc1b00eff15e3d564166ea23831bb05c1f988d30",
+    "conclusion": "SUCCESS",
+    "incremental_spend_usd": 0
   }
 }
