@@ -12,6 +12,7 @@
     "provider_access_is_ownership": false
   },
   "material_premises": [
+    "Merged PR576 now authorizes exactly one fresh Terminal-Bench execution of the mini-SWE + Superpowers route and leaves the task unread/unspent.",
     "Current main explicitly leaves advanced coding as the highest-leverage unresolved ownership gap.",
     "mini-SWE-agent 2.4.6 and Superpowers 6.4.2 are already fully internalized with exact pins.",
     "The mini-SWE CLI supports recursive configuration merge without forking its control loop.",
@@ -27,8 +28,8 @@
     "Brain PR #570 mini-SWE 2.4.6 internalization",
     "Brain PR #574 V6 OBS synchronization"
   ],
-  "conclusion": "Compose the exact owned mini-SWE harness with exact owned Superpowers skill bytes through deterministic overlay glue, retain the strict 66.4 outer reference without mislabeling the 59.6 matched independent reference, give zero capability credit now, and require fresh independent execution next.",
-  "selected_route": "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
+  "conclusion": "Install one exact-pinned deterministic composed package for the route already authorized by PR576. This avoids reconstructing capability configuration from chat, earns zero Opus credit, and must be package-qualified before the fresh task is spent.",
+  "selected_route": "INSTALL_DETERMINISTIC_OVERLAY_PACKAGE_FOR_PR576_ROUTE",
   "rejected_material_alternatives": [
     {
       "route": "Continue Supreme",
@@ -62,8 +63,9 @@
     "Task-specific coding repair",
     "New execution infrastructure"
   ],
-  "next_action": "Exact package qualification, then one fresh contamination-controlled composed-route execution on an approved zero-incremental general cognition substrate.",
+  "next_action": "Run exact package verifier and merge if current-base guards pass; then execute the already-authorized PR576 frozen task exactly once.",
   "supersession_conditions": [
+    "PR576 task is spent or invalidated before package merge.",
     "Canonical main changes materially before merge.",
     "Any pinned component blob changes.",
     "A stronger Brain-ownable route is independently qualified before this composition is validated.",
