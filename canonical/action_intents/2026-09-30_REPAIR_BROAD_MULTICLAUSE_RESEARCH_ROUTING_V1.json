@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-BROAD-MULTICLAUSE-RESEARCH-ROUTING-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "73f8331cddf556af0daece3aa32998ac992981d0",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "BROAD_MULTI_CLAUSE_OBJECTIVES_SUPPRESS_VERIFIED_BROAD_RESEARCH_DECOMPOSITION_AND_FALL_THROUGH_TO_IRRELEVANT_PACKAGE_ACQUISITION",
+  "action_kind": "GENERIC_ROUTING_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_MULTI_CLAUSE_OBJECTIVES_SUPPRESS_VERIFIED_BROAD_RESEARCH_DECOMPOSITION_AND_FALL_THROUGH_TO_IRRELEVANT_PACKAGE_ACQUISITION::GENERIC_ROUTING_REPAIR",
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "spent_parent_task": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "authoritative_parent_run": 36688193204,
+  "authoritative_parent_artifact_id": 11084357364,
+  "authoritative_parent_artifact_digest": "sha256:adc7caf3308bab613cedea2a99f87030798e17adf95bdd6491a6552ab6b00619",
+  "observed_parent_blocker": "CAPABILITY_ACQUISITION_REQUIRED after broad_objective_decomposition_available=false on five fully unresolved clauses",
+  "prior_work_checked": [
+    "Brain PR #465 integrated the already-qualified claim binder/relation evaluator but does not change broad decomposition admission.",
+    "Brain PRs #461 and #464 had zero workflow job steps and were closed after the authoritative public-runner spend.",
+    "Brain PR #463 was closed stale because its claimed seam was downstream of the actual physical parent blocker."
+  ],
+  "exact_repair": "Permit broad-objective decomposition whenever there is at least one parsed clause, zero grounded clauses, and every parsed clause is unresolved; preserve the broad decomposer's own fail-closed recipe/prefix checks.",
+  "expected_parent_frontier_change": "Convert the observed upstream routing failure into a reusable generic routing capability; do not replay the spent HTTP2 parent.",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_base_commit": "73f8331cddf556af0daece3aa32998ac992981d0",
+    "real_outcome": "Make genuinely broad multi-sentence research objectives enter the already-qualified generic research-role path instead of irrelevant package acquisition.",
+    "surviving_necessity": "The first physical parent run proved a generic admission predicate is false for multi-clause all-unresolved objectives.",
+    "selected_surviving_route": "ONE_PREDICATE_GENERALIZATION_PLUS_EXACT_REGRESSION_AND_INDEPENDENT_QUALIFICATION",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_PARENT_REPLAY",
+      "NEW_PACKAGE_DISCOVERY",
+      "TASK_SPECIFIC_HTTP2_PATCH",
+      "MODEL_COGNITION",
+      "NEW_SOURCE_FRONTEND"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The preserved evidence localizes the failure to a single fail-closed predicate; the broad decomposer already supports the objective and needs only to be admitted when all parsed clauses are unresolved.",
+    "stop_rule": "NO_PARENT_REPLAY__QUALIFY_GENERIC_ROUTING_ON_PRESERVED_INPUT__THEN_FREEZE_A_NEW_PARENT_TASK"
+  }
+}
