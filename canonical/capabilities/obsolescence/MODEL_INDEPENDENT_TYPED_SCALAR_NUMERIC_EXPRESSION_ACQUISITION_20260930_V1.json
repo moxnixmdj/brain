@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_EVIDENCE_V1",
+  "capability_id": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+  "status": "VERIFIED_ACQUIRED",
+  "source_pr": 296,
+  "causal_gap": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+  "recurrence_evidence": [
+    "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002 exposed a generic numeric-expression/predicate gap",
+    "PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001 independently exposed typed scalar multiplication+exponentiation as its first causal gap"
+  ],
+  "route": {
+    "producer": "SymPy",
+    "version": "1.14.0",
+    "binding": "restricted Python AST translated node-by-node to programmatic SymPy objects",
+    "arbitrary_eval": false,
+    "arbitrary_string_sympify": false,
+    "dependency_closure_sha256": "4ec35feca806fd8634f50c07cf5b4ae5e0f405c369d0d42e3f3bcb84cb931a07"
+  },
+  "exact_verified_candidate_blobs": {
+    "goal_compiler": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "adapter": "443e3386f11156e55635556b6e8f8ad7d7733592",
+    "registry_candidate": "23f7b79fca15593eb563bdcdba17c8b972f006db",
+    "regression_test": "9d0b043d6a02958ddd3887d8dbdcffcbfd6250b0"
+  },
+  "fresh_qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/typed-scalar-expression-sympy-20260930-v1",
+    "head_sha": "9690bc7cf0f5da5120ca7a22b49268ded90e4987",
+    "workflow_run_id": 36666659921,
+    "job_id": 109732664034,
+    "conclusion": "SUCCESS",
+    "artifact_id": 11076347530,
+    "artifact_digest": "sha256:1bf6628bff366eb6fa3d277042798c956eec1c5fca7d7bace1237d13ce832cc0",
+    "fresh_domain": "DEMOGRAPHY_PUBLIC_STATISTICS",
+    "authoritative_source": "https://api.worldbank.org/v2/country/FRA/indicator/SP.POP.TOTL?format=json&date=2023",
+    "source_value": 68372286,
+    "expression": "population * (1.01 ** 2)",
+    "producer_value": 69746568.9486,
+    "independent_python_value": 69746568.9486,
+    "positive_pass": true,
+    "numeric_string_pass": true,
+    "unsafe_rejection_pass": true,
+    "rejected_unsafe_cases": [
+      "__import__('os').system('id')",
+      "x.real",
+      "x[0]",
+      "x ** 100",
+      "(lambda: 1)()"
+    ],
+    "compiler_regression_suite_passed": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "execution_accounting": {
+    "fresh_external_qualification_execution_count": 1,
+    "credited_run_id": 36666659921,
+    "prequalification_compile_gate_runs": [
+      {
+        "run_id": 36666241858,
+        "external_case_executed": false,
+        "credit": false
+      },
+      {
+        "run_id": 36666347514,
+        "external_case_executed": false,
+        "credit": false
+      },
+      {
+        "run_id": 36666426111,
+        "external_case_executed": false,
+        "credit": false
+      },
+      {
+        "run_id": 36666535778,
+        "external_case_executed": false,
+        "credit": false
+      }
+    ]
+  },
+  "inherited_supplier_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+  "independent_verification": {
+    "verifier": "Python arithmetic recomputation in verifier process",
+    "producer_adapter_imported_by_oracle": false,
+    "result_agreement": true
+  },
+  "parent_capability_promoted": false,
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_ASTRONOMY_OR_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+  "status": "ACQUIRED_VERIFIED__FRESH_NON_ASTRONOMY_EXECUTION_PASS",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
+  "useful_behavior": "Given bounded typed scalar inputs and a restricted arithmetic expression, deterministically evaluate numeric literals, named prior scalars, unary +/- and binary + - * / ** without model cognition or arbitrary code execution.",
+  "winning_route": "PINNED_SYMPY_1_14_0__RESTRICTED_PYTHON_AST__PROGRAMMATIC_SYMPY_OBJECTS",
+  "scope": {
+    "operations": [
+      "ADD",
+      "SUBTRACT",
+      "MULTIPLY",
+      "DIVIDE",
+      "POWER",
+      "UNARY_PLUS",
+      "UNARY_MINUS"
+    ],
+    "numeric_json_strings": "STRICT_DECIMAL_OR_SCIENTIFIC_LEXEMES_ONLY",
+    "exponent_abs_max": 32,
+    "max_ast_nodes": 64,
+    "max_depth": 16,
+    "rejected": [
+      "CALL",
+      "ATTRIBUTE",
+      "SUBSCRIPT",
+      "CONTAINERS",
+      "LAMBDA",
+      "ARBITRARY_EVAL",
+      "ARBITRARY_STRING_SYMPIFY"
+    ]
+  },
+  "supplier": "SymPy 1.14.0",
+  "dependency_closure_sha256": "4ec35feca806fd8634f50c07cf5b4ae5e0f405c369d0d42e3f3bcb84cb931a07",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_ACQUISITION_20260930_V1.json",
+  "verification_run_id": 36666659921,
+  "verification_artifact_id": 11076347530,
+  "verification_artifact_digest": "sha256:1bf6628bff366eb6fa3d277042798c956eec1c5fca7d7bace1237d13ce832cc0",
+  "current_status": "ACQUIRED_VERIFIED",
+  "parent_capability_promoted": false,
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_REAL_TASK__NO_ASTRONOMY_OR_GEOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+}
