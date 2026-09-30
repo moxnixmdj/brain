@@ -3,7 +3,7 @@
   "action_id": "FREEZE-FRESH-GENOMICS-REFERENCE-LENGTH-OPENENDED-PARENT-TASK-B-POST-PR474-20260930-V2",
   "status": "AUTHORIZED_TO_FREEZE__EXECUTION_REQUIRES_LIVE_ATOMIC_GUARD",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "canonical_base_commit": "3866a84b87248fe2b80b54301370b75c00245869",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
@@ -13,7 +13,7 @@
   "expected_parent_frontier_change": "Freeze one materially different genuinely open-ended genomics parent Task B after PR474; execute exactly once only through the live atomic guard and stop at the first causal gap.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "current base a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "current base 3866a84b87248fe2b80b54301370b75c00245869 after PR479 frontier reconciliation",
     "PR474 merged guarded-qualified generic multi-clause broad-research routing repair",
     "PR474 exact guarded qualification run 36689721937 PASS",
     "spent HTTP2 parent run 36688193204 must never be replayed",
