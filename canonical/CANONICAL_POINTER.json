@@ -142,7 +142,13 @@
     "bare_chat_has_zero_canonical_authority": true,
     "canonical_consequential_decision_requires_repository_backed_current_base_obs": true,
     "canonical_frontier_cross_surface_consistency_required": true,
-    "runtime_cognition_provenance_required_for_cognitive_credit": true
+    "runtime_cognition_provenance_required_for_cognitive_credit": true,
+    "blocker_lease_identity_fields": [
+      "canonical_generation",
+      "capability_target",
+      "causal_blocker"
+    ],
+    "blocker_lease_action_kind_part_of_identity": false
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",

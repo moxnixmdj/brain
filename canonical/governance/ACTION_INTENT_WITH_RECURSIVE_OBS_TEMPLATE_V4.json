@@ -21,7 +21,7 @@
     "Ordinary actions may not change the active capability target. RECONCILE_FRONTIER target changes require frontier_reconciliation with previous/new target, relationship, and evidence.",
     "Any scoreboard increase requires promotion_evidence. Frontier-dependency-removal claims must prove the target supplier absent from the producer path and absent as the independent verifier.",
     "If the frontier capability requires cross-domain transfer, fresh-reuse/dependency-removal credit requires cross_domain_distinct=true.",
-    "Accidental identical blocker leases use deterministic lowest-PR ownership; do not create a second route unless it is an explicit route race with a shared route_race_id."
+    "Accidental identical causal blockers use identity canonical_generation + capability_target + causal_blocker only; action_kind cannot create a second owner. Lowest open PR wins unless every participant declares the same explicit route_race_id and intentional_route_race=true."
   ],
   "action_intent": {
     "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
@@ -34,7 +34,7 @@
     "probe_id": null,
     "causal_blocker": "__REQUIRED_CAUSAL_BLOCKER_OR_DIRECT_ROUTE__",
     "action_kind": "__REQUIRED_ACTION_KIND__",
-    "blocker_lease_key": "__REQUIRED_GENERATION::CAPABILITY::BLOCKER::ACTION_KIND__",
+    "blocker_lease_key": "__REQUIRED_GENERATION::CAPABILITY::CAUSAL_BLOCKER__",
     "expected_parent_frontier_change": "__REQUIRED_PARENT_LEVEL_CHANGE__",
     "highest_leverage_now": true,
     "prior_work_checked": [
