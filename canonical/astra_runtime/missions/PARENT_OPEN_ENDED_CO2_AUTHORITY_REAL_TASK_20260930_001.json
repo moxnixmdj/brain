@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPEN-ENDED-CO2-AUTHORITY-REAL-TASK-20260930-001",
+  "purpose": "Spend exactly one genuine open-ended model-independent parent Task A on a fresh technical/scientific objective. The producer receives the objective and acceptance constraints only; source/domain/tool sequence are not predeclared.",
+  "goal": "Find the authoritative World Bank source for indicator EN.ATM.CO2E.PC without being given an authority domain or source URL; verify the official authority site and require the discovered source to be semantically relevant to EN.ATM.CO2E.PC.",
+  "steps": [
+    {
+      "id": "open-ended-parent-task-a",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "allow_optional_model_planner": false,
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "no_frontier_model_cognition": true,
+    "hand_authored_controller_actions_forbidden": true,
+    "plain_goal_compilation_required": true,
+    "autonomous_decomposition_required": true,
+    "autonomous_material_source_or_tool_discovery_required": true,
+    "authority_domain_predeclared": false,
+    "source_url_predeclared": false,
+    "complete_research_plan_predeclared_to_producer": false,
+    "independent_verification_required": true,
+    "exactly_one_execution": true,
+    "same_task_replay_forbidden": true,
+    "stop_on_first_causal_gap": true,
+    "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "prior_task_replays_forbidden": [
+      "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
+      "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
+      "PARENT-GEOPHYSICS-ENERGY-REAL-TASK-20260930-002",
+      "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004"
+    ]
+  }
+}
