@@ -9,8 +9,8 @@
   "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "probe_id": null,
   "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
-  "action_kind": "FRESH_PARENT_GATE_FREEZE",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_SPACE_CARGO_DOMINANT_BOTTLENECK_TASK_A::FRESH_PARENT_GATE_FREEZE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED::REAL_CAPABILITY_ACQUISITION",
   "expected_parent_frontier_change": "Freeze one genuinely open-ended consequential space-systems parent Task A with no supplied source, authority, bottleneck class, formula, tool recipe, architecture answer, or expected answer; then execute exactly once and either obtain the first admissible parent pass or localize the next causal gap.",
   "highest_leverage_now": true,
   "prior_work_checked": [
