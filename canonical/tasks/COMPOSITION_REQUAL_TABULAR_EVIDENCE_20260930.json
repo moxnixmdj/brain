@@ -1,0 +1,193 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
+  "decision_id": "COMPOSITION-REQUAL-TABULAR-EVIDENCE-20260930",
+  "question": "Which already-verified repository-local representation should Project Brain use for a structured evidence table when the task requires zero incremental spend, relational querying, and deterministic independent verification against the original JSON records?",
+  "alternatives": [
+    {
+      "id": "SQLITE_VERIFIED",
+      "label": "Create a SQLite table from JSON records and independently verify it with the sqlite3 CLI"
+    },
+    {
+      "id": "XLSX_VERIFIED",
+      "label": "Create an XLSX table from JSON records and independently verify it with openpyxl"
+    },
+    {
+      "id": "RAW_JSON_ONLY",
+      "label": "Keep the source JSON records without a relational table"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "SQLITE_ZERO",
+      "alternative": "SQLITE_VERIFIED",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Route must have zero incremental spend.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "sqlite.table.create_from_json_records incremental_spend_usd=0"
+        }
+      ]
+    },
+    {
+      "id": "SQLITE_RELATIONAL",
+      "alternative": "SQLITE_VERIFIED",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Representation must support relational querying.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "sqlite.table.create_from_json_records produces a SQLite database table"
+        }
+      ]
+    },
+    {
+      "id": "SQLITE_VERIFY",
+      "alternative": "SQLITE_VERIFIED",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Representation must have an already-bound producer-independent verifier against the source JSON.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "sqlite.table.verify_against_json_records uses sqlite3 independently of Python sqlite3 producer"
+        }
+      ]
+    },
+    {
+      "id": "XLSX_ZERO",
+      "alternative": "XLSX_VERIFIED",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Route must have zero incremental spend.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "xlsx.table.create_from_json_records incremental_spend_usd=0"
+        }
+      ]
+    },
+    {
+      "id": "XLSX_RELATIONAL",
+      "alternative": "XLSX_VERIFIED",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Representation must provide a relational database query surface rather than only a worksheet.",
+      "provenance": [
+        {
+          "source": "Task requirement",
+          "ref": "relational querying is mandatory"
+        }
+      ]
+    },
+    {
+      "id": "XLSX_VERIFY",
+      "alternative": "XLSX_VERIFIED",
+      "state": "SATISFIED",
+      "required": true,
+      "description": "Representation must have an already-bound producer-independent verifier against the source JSON.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "xlsx.table.verify_against_json_records uses openpyxl independently of XlsxWriter producer"
+        }
+      ]
+    },
+    {
+      "id": "JSON_RELATIONAL",
+      "alternative": "RAW_JSON_ONLY",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "Keeping raw JSON alone does not satisfy the required relational query surface.",
+      "provenance": [
+        {
+          "source": "Task requirement",
+          "ref": "relational querying is mandatory"
+        }
+      ]
+    },
+    {
+      "id": "JSON_INDEPENDENT_TABLE_VERIFY",
+      "alternative": "RAW_JSON_ONLY",
+      "state": "VIOLATED",
+      "required": true,
+      "description": "The route must produce and independently verify a tabular representation against the source records.",
+      "provenance": [
+        {
+          "source": "Task requirement",
+          "ref": "verified table representation required"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E_SQLITE_CREATE",
+      "alternative": "SQLITE_VERIFIED",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "sqlite_producer",
+      "claim": "A verified zero-cost bound capability creates a SQLite table from JSON records.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "sqlite.table.create_from_json_records"
+        }
+      ]
+    },
+    {
+      "id": "E_SQLITE_VERIFY",
+      "alternative": "SQLITE_VERIFIED",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "sqlite_independent_verifier",
+      "claim": "A separate sqlite3 CLI capability independently verifies the SQLite table against the JSON records.",
+      "provenance": [
+        {
+          "source": "Project Brain bound capability registry",
+          "ref": "sqlite.table.verify_against_json_records"
+        }
+      ]
+    },
+    {
+      "id": "E_XLSX_NO_RELATIONAL",
+      "alternative": "XLSX_VERIFIED",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "task_relational_contract",
+      "claim": "A workbook does not provide the required relational database query surface for this task.",
+      "provenance": [
+        {
+          "source": "Task requirement",
+          "ref": "relational querying required"
+        }
+      ]
+    },
+    {
+      "id": "E_JSON_NO_TABLE",
+      "alternative": "RAW_JSON_ONLY",
+      "relation": "CONTRADICTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "task_table_contract",
+      "claim": "Raw JSON alone does not create the required independently verified tabular representation.",
+      "provenance": [
+        {
+          "source": "Task requirement",
+          "ref": "verified table representation required"
+        }
+      ]
+    }
+  ],
+  "policy": {
+    "minimum_support_ratio": 0.6,
+    "maximum_conflict_ratio": 0.5,
+    "minimum_independent_support_groups": 2,
+    "minimum_net_margin": 0.1
+  }
+}
