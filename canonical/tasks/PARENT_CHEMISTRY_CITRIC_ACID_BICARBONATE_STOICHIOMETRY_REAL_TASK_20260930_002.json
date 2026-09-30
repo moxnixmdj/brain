@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-CHEMISTRY-CITRIC-ACID-BICARBONATE-STOICHIOMETRY-REAL-TASK-20260930-002",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRY_TECHNICAL_RESEARCH",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "goal_text": "Determine the theoretical mass of sodium bicarbonate required to completely neutralize 1.000 kg of anhydrous citric acid at stoichiometric completion, using authoritative public technical evidence, and report a quantitatively supported conclusion with the source provenance, governing chemical reasoning, and material assumptions needed to justify it.",
+  "required_result": {
+    "scientific_question": "Theoretical sodium-bicarbonate mass required for complete stoichiometric neutralization of 1.000 kg anhydrous citric acid.",
+    "required_outputs": [
+      "supported numeric sodium bicarbonate mass in kg",
+      "balanced stoichiometric basis",
+      "authoritative evidence provenance for consequential chemical properties",
+      "material assumptions and unit handling",
+      "independently verifiable derivation"
+    ]
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "no_task_specific_source_or_tool_plan": true,
+    "producer_must_select_research_route_from_plain_objective": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "After producer termination, independently choose authoritative public chemistry evidence, verify the relevant formulas/molar masses, independently balance the neutralization stoichiometry, recompute the theoretical mass from scratch without importing producer modules, and compare every consequential numeric and chemical claim.",
+    "producer_modules_must_not_be_imported": true,
+    "producer_research_plan_must_not_be_reused_as_oracle_authority": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false
+}
