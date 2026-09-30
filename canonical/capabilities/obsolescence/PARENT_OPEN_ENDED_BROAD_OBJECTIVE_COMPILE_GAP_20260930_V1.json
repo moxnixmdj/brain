@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_TASK_A_TERMINAL_RECONCILIATION_V1",
+  "status": "AUTHORITATIVE_TASK_A_SPENT_FAIL__FIRST_CAUSAL_GAP_LOCALIZED__NO_REPLAY",
+  "reconciliation_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+  "execution_authority": {
+    "canonical_freeze_merge_commit": "38421b41da15f82d81d0595bc4c25624398258c6",
+    "source_pr": 337,
+    "frozen_task_path": "canonical/tasks/PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001.json",
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "task_git_blob": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "runtime_git_blob": "6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "compiler_git_blob": "4b61fe911471854ec15c7900816f61e9e55f602e",
+    "anti_leakage_contract_passed": true,
+    "model_planner_disabled": true
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 49,
+    "workflow_run_id": 36670516407,
+    "job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_zip_sha256": "8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "execution_count": 1,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "terminal_result": {
+    "status": "FAIL_FIRST_CAUSAL_GAP",
+    "first_causal_stage": "COMPILE",
+    "cause": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "unresolved_subgoal": "Determine whether atmospheric CO2 at Mauna Loa increased faster during 2014-2023 than during 2004-2013",
+    "compiled_prefix": [],
+    "context_paths": [],
+    "source_or_tool_discovery_executed": false,
+    "quantitative_analysis_executed": false,
+    "independent_oracle_executed": false,
+    "parent_task_completed": false,
+    "parent_capability_promoted": false
+  },
+  "causal_localization": {
+    "previous_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "localized_blocker": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING",
+    "interpretation": "The current deterministic compiler cannot transform the first broad natural-language research objective into any verified bound-capability action sequence. The failure occurs before source discovery, tool choice, quantitative work, synthesis, or verification, so those later stages are not causally implicated by this task.",
+    "next_required_action_class": "ACQUIRE_MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING__FRESH_CHILD_QUALIFICATION__NO_PARENT_TASK_REPLAY"
+  },
+  "replay_policy": {
+    "same_task_replay_allowed": false,
+    "reason": "The canonical Task A was executed exactly once and reached a semantic first causal gap.",
+    "duplicate_task_pr_342_closed": true
+  },
+  "credit": {
+    "reusable_capabilities_inherited_delta": 0,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 0,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 1,
+    "parent_capability_credit": false
+  },
+  "required_canonical_followup": "Atomically update pointer, hierarchy, queue, scoreboard, and parent target mirrors to the localized blocker and next action after exact current contents can be read; do not merge a partial mirror update."
+}
