@@ -5638,8 +5638,8 @@ def _run_goal_unstamped(step, mission):
                 }
                 if status=="SOURCE_FRONTEND_READY":
                     if int(source_frontend.get("claim_relation_evaluated_count") or 0)>0:
-                        payload["evidence_extracted_candidate_count"]=int(
-                            source_frontend.get("evidence_extracted_candidate_count") or 0
+                        payload["claim_relation_evaluated_count"]=int(
+                            source_frontend.get("claim_relation_evaluated_count") or 0
                         )
                         raise Blocker(
                             "OPEN_ENDED_RESEARCH_RELATION_EVALUATED__"
@@ -5652,7 +5652,7 @@ def _run_goal_unstamped(step, mission):
                         )
                         raise Blocker(
                             "OPEN_ENDED_RESEARCH_EVIDENCE_EXTRACTED__"
-                            "CLAIM_SPEC_AND_OPERAND_BINDING_REQUIRED:"
+                            "CLAIM_SUPPORT_AND_RELATION_EVALUATION_REQUIRED:"
                             +json.dumps(payload,sort_keys=True)
                         ) from e
                     if int(source_frontend.get("relevance_verified_candidate_count") or 0)>0:
