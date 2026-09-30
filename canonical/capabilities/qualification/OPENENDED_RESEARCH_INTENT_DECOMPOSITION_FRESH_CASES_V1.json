@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_FRESH_CAPABILITY_QUALIFICATION_SET_V1",
+  "qualification_id": "OPENENDED-RESEARCH-INTENT-DECOMPOSITION-FRESH-CROSSDOMAIN-001",
+  "frozen_after_implementation_without_post_freeze_code_changes": true,
+  "producer_module": "canonical/runtime/research_intent_decomposer.py",
+  "capability_id": "MODEL_INDEPENDENT_OPEN_ENDED_RESEARCH_INTENT_DECOMPOSITION_V1",
+  "model_dependency_count_required": 0,
+  "forbidden": [
+    "TASK_SPECIFIC_SUPPLIER_HINT",
+    "PRESELECTED_URL",
+    "PRESELECTED_TOOL",
+    "EXPECTED_ANSWER",
+    "MODEL_COGNITION"
+  ],
+  "cases": [
+    {
+      "id": "ZSTD-ROUNDTRIP-001",
+      "domain": "SOFTWARE_COMPRESSION_CORRECTNESS",
+      "goal": "Determine whether a zstd compression and decompression roundtrip preserves arbitrary binary bytes exactly. Use authoritative primary evidence and a real executable experiment, choose the method and tool route, identify limitations, independently verify the result, and preserve provenance.",
+      "required_roles": [
+        "QUESTION_RESOLUTION",
+        "PRIMARY_EVIDENCE_DISCOVERY",
+        "METHOD_SELECTION",
+        "TOOL_DISCOVERY",
+        "EXECUTABLE_EXPERIMENT",
+        "LIMITATION_ANALYSIS",
+        "INDEPENDENT_VERIFICATION",
+        "SYNTHESIS_AND_PROVENANCE"
+      ]
+    },
+    {
+      "id": "NUMERICAL-OSCILLATOR-001",
+      "domain": "NUMERICAL_ANALYSIS_DYNAMICAL_SYSTEMS",
+      "goal": "Evaluate whether a fixed-step numerical integration method materially drifts in total energy on a simple harmonic oscillator over many periods. Choose a sufficient quantitative method, run an executable comparison, characterize uncertainty and limitations, independently cross-check the consequential result, and produce a decision-quality conclusion with provenance.",
+      "required_roles": [
+        "QUESTION_RESOLUTION",
+        "PRIMARY_EVIDENCE_DISCOVERY",
+        "METHOD_SELECTION",
+        "EXECUTABLE_EXPERIMENT",
+        "QUANTITATIVE_ANALYSIS",
+        "LIMITATION_ANALYSIS",
+        "INDEPENDENT_VERIFICATION",
+        "SYNTHESIS_AND_PROVENANCE"
+      ]
+    },
+    {
+      "id": "PACKAGE-RELEASE-PROVENANCE-001",
+      "domain": "SOFTWARE_SUPPLY_CHAIN_PROVENANCE",
+      "goal": "Establish the current stable release identity of a named open-source package from authoritative primary release evidence, verify source and version provenance independently, identify material ambiguity or limitations, and produce a scoped answer with provenance.",
+      "required_roles": [
+        "QUESTION_RESOLUTION",
+        "PRIMARY_EVIDENCE_DISCOVERY",
+        "INDEPENDENT_VERIFICATION",
+        "LIMITATION_ANALYSIS",
+        "SYNTHESIS_AND_PROVENANCE"
+      ]
+    },
+    {
+      "id": "DATASET-MEDIAN-CROSSCHECK-001",
+      "domain": "DATA_ANALYSIS_STATISTICAL_CROSSCHECK",
+      "goal": "Determine whether the median of a supplied numeric dataset changes materially after removing one extreme outlier. Choose and justify the quantitative method, perform the calculation, independently verify the result with a distinct route, state limitations, and produce a decision-quality answer with provenance.",
+      "required_roles": [
+        "QUESTION_RESOLUTION",
+        "PRIMARY_EVIDENCE_DISCOVERY",
+        "METHOD_SELECTION",
+        "QUANTITATIVE_ANALYSIS",
+        "LIMITATION_ANALYSIS",
+        "INDEPENDENT_VERIFICATION",
+        "SYNTHESIS_AND_PROVENANCE"
+      ]
+    },
+    {
+      "id": "ARCHIVE-PERMISSIONS-COMPOSITION-CANARY-001",
+      "domain": "SOFTWARE_ARCHIVE_FILESYSTEM_SEMANTICS",
+      "goal": "Determine whether a standard archive-and-extract workflow preserves executable permission bits for regular files. Discover the least-friction executable tool route, run a real experiment, identify limitations, independently verify the consequential observation, and preserve provenance.",
+      "required_roles": [
+        "QUESTION_RESOLUTION",
+        "PRIMARY_EVIDENCE_DISCOVERY",
+        "TOOL_DISCOVERY",
+        "EXECUTABLE_EXPERIMENT",
+        "LIMITATION_ANALYSIS",
+        "INDEPENDENT_VERIFICATION",
+        "SYNTHESIS_AND_PROVENANCE"
+      ],
+      "composition_canary": true
+    }
+  ],
+  "acceptance": {
+    "all_cases_deterministic_across_two_invocations": true,
+    "all_required_roles_present": true,
+    "producer_model_dependency_count": 0,
+    "cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+    "supplier_selected_by_decomposer": false,
+    "task_specific_recipe_embedded": false,
+    "subject_terms_nonempty": true,
+    "role_queries_must_exclude_generic_question_operators": [
+      "determine",
+      "whether"
+    ],
+    "independent_verifier_must_not_import_producer_module": true,
+    "composition_canary_requirement": "Role-specific tool/experiment discovery query must remove whole-goal question operators and yield at least one subject-relevant candidate from unchanged existing discovery, or localize the next generic blocker without modifying ASTRA."
+  }
+}
