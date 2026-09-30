@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_V1",
+  "status": "PR347_CAUSAL_CLAIM_REVOKED__CLIMATE_TASK_SPENT__NO_ADMISSIBLE_PARENT_TASK_A_YET",
+  "checked_on": "2026-09-30",
+  "exact_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "correction_of_merge_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "corrected_claim": {
+    "revoked_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "restored_parent_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "reason": "The PR49 producer harness called goal_compiler.compile_goal() directly and treated its exception as terminal, then would have called _run_model_independent_goal(). It bypassed astra_runtime.run_goal()/_run_goal_unstamped(), whose current exact runtime catches this compiler miss and continues through gap classification, bound grounding/composition, and zero-model capability acquisition. Therefore PR49 does not prove that the direct compile miss is the canonical runtime's first causal gap."
+  },
+  "frozen_climate_task": {
+    "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+    "task_blob": "6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "status": "SPENT_BY_PRODUCER_ENTRY__NO_REPLAY",
+    "parent_task_A_credit": false,
+    "same_task_replay_allowed": false
+  },
+  "pr49": {
+    "run_id": 36670516407,
+    "job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "execution_count": 1,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "authority": "TASK_SPEND_AND_HARNESS_BEHAVIOR_ONLY__NOT_CANONICAL_PATH_CAUSAL_LOCALIZATION"
+  },
+  "quarantined_canonical_path_diagnostic": {
+    "carrier_pr": 52,
+    "run_id": 36670619213,
+    "job_id": 109744628405,
+    "artifact_id": 11078240623,
+    "artifact_digest": "sha256:0b15ad2a6e6d960a5ccd9379fc5f147a158af96ca9d6222f3970e42ad6124ecc",
+    "authority": "ZERO_CAPABILITY_CREDIT__PATH_VALIDITY_DIAGNOSTIC_ONLY",
+    "observation": "The public run_goal path progressed beyond the direct compiler miss into CAPABILITY_ACQUISITION_REQUIRED.",
+    "first_carrier_induced_seam": "APT_ORIGIN_MISSION_PATH_INVALID_AND_PYPI_ORIGIN_MISSION_PATH_INVALID",
+    "interpretation": "The runner omitted the mission's canonical origin path. This is a carrier execution-envelope defect, not evidence that broad-objective grounding is the terminal capability gap."
+  },
+  "required_carrier_preflight": {
+    "no_task_execution": true,
+    "public_entrypoint": "canonical.runtime.astra_runtime.run_goal",
+    "mission_origin_requirement": "Load a real mission JSON file and set mission._runtime_mission_path to that file before producer entry.",
+    "task_specific_sources_tools_or_experiment_plan_forbidden": true,
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0
+  },
+  "next_action": "VALIDATE_THE_GENERIC_CANONICAL_PARENT_CARRIER_ENTRYPOINT_AND_MISSION_ORIGIN_BINDING_WITHOUT_SPENDING_A_PARENT_TASK__THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_GENUINELY_OPEN_ENDED_TASK_A_AND_EXECUTE_EXACTLY_ONCE",
+  "capability_credit_delta": 0,
+  "scoreboard_credit_delta": 0
+}
