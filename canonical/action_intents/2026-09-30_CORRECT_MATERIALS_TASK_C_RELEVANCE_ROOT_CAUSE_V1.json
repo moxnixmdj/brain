@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-MATERIALS-TASK-C-RELEVANCE-ROOT-CAUSE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "TASK_C_CANONICAL_CAUSAL_INTERPRETATION_IS_DOWNSTREAM_OF_INITIAL_RELEVANCE_SELECTION_FAILURE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::TASK_C_CANONICAL_CAUSAL_INTERPRETATION_IS_DOWNSTREAM_OF_INITIAL_RELEVANCE_SELECTION_FAILURE",
+  "expected_parent_frontier_change": "Reclassify the already-counted Task C residual gap to the earlier initial-relevance decision-property and operand-role coverage failure; counter delta zero, parent credit zero, Task C remains spent/no-replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Task C immutable run 36698638943 and artifact 11089076913",
+    "primary source_frontend artifact inspected directly",
+    "selected initial DOI 10.1080/00102208708947033 is ignition temperature / 302 stainless, not thermal conductivity / 304 stainless",
+    "initial candidate DOI 10.6028/nbs.rpt.9869 is NBS thermal conductivity / AISI 304 stainless",
+    "selected source admission passed with 6 of 16 focused tokens and did not require thermal, conductivity, 304, or annealed",
+    "downstream refined-provenance repair PR537 was independently qualified but closed and must not be merged before the upstream relevance seam is fixed"
+  ],
+  "evidence_presence_classification": "PRIMARY_IMMUTABLE_PARENT_ARTIFACT_FALSIFIES_CURRENT_CAUSAL_INTERPRETATION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "stop_condition": "Truth-only causal correction. Do not change runtime. Do not increment counters. Do not replay Task C. Do not merge downstream PR537.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "real_outcome": "Make canonical causality match the earliest demonstrated failure in the spent Task C execution.",
+    "required_capability": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_V1",
+    "selected_surviving_route": "RECLASSIFY_EXISTING_TASK_C_RESIDUAL_GAP_TO_INITIAL_RELEVANCE_ROLE_COVERAGE_FAILURE",
+    "why_selected_route_is_fastest_sufficient": "The immutable artifact contains the initial candidate set, exact selected source, matched terms, score, and admission receipt; no replay or new probe is needed.",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "DOWNSTREAM_METADATA_REFINED_REPAIR_AS_CURRENT_BLOCKER",
+      "CROSSREF_FULLTEXT_REPAIR_AS_CURRENT_BLOCKER",
+      "NEW_RESIDUAL_GAP_CREDIT"
+    ],
+    "expected_parent_level_state_change": "Same one Task C residual gap, corrected causal identity; zero parent capability credit.",
+    "stop_condition": "Reconcile truth only; runtime repair is a separate action."
+  }
+}
