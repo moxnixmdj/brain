@@ -1,0 +1,290 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "GROUNDING-REPAIR-FRESH-REAL-TASK-CLICK-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "probe_id": null,
+  "causal_blocker": "PR261_GENERIC_BINDABILITY_AND_VERIFIED_INITIAL_FACTS_REPAIR_MERGED__FRESH_REAL_TASK_UNSPENT",
+  "action_kind": "REAL_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::PR261_GENERIC_BINDABILITY_AND_VERIFIED_INITIAL_FACTS_REPAIR_MERGED__FRESH_REAL_TASK_UNSPENT::REAL_TASK_EXECUTION",
+  "expected_parent_frontier_change": "Execute one fresh non-Requests real task through the merged model-independent grounding→composition→planner→executor route and independently verify the real effect; either restore admissible post-repair task evidence or localize the first new causal failure.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR261 merged exact repaired grounding/composition route into main 08338df0cc989b092567f10ffd1dca6a7f37be65.",
+    "Public exact-byte validation run 36651709460 PASS including generic URL/non-URL bindability, verified_initial_facts, and prior regressions.",
+    "Spent Requests real task run 36649042160 is permanently excluded from replay.",
+    "Public runner pattern from the spent Requests task is reusable without its payload.",
+    "GitHub owner/name endpoint for pallets/click directly observed live with repository id 19103692."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute exactly one fresh Click repository identity-consistency task. Stop on pass or first causal failure. Do not repair, rerun, promote, or change scoreboard in this action.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
+    "real_outcome": "Produce fresh real-task evidence that the repaired model-independent grounding/composition route can bind literal URLs, honor verified prerequisites, execute two authoritative fetches, fan their outputs into an assessor, and complete without model cognition.",
+    "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "obs_goal": {
+      "real_outcome": "Run the repaired route on a new real repository identity-consistency task and independently verify the observed effect.",
+      "proxy_goals_deleted": [
+        "more component tests",
+        "Requests replay",
+        "another parser/planner search",
+        "model-backed fallback",
+        "scoreboard promotion before real output"
+      ],
+      "surviving_necessity": "A fresh real task is the minimum missing evidence after exact-byte component validation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "merged PR261 grounding",
+        "grounded executable composition",
+        "capability_proposal_generators proposal bindings",
+        "capability graph planner",
+        "model-independent executor",
+        "public verification carrier"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub REST owner/name repository endpoint",
+        "GitHub REST numeric repository endpoint"
+      ],
+      "capability_work_deleted": [
+        "no new implementation",
+        "no new model",
+        "no new provider",
+        "no new verifier framework"
+      ],
+      "surviving_gap": "No fresh real-task execution exists after the PR261 repair."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Evidence gap only; exact component bytes are validated.",
+      "delete_bypass_substitute_options": [
+        "Delete additional support work and execute real task now",
+        "Reuse public runner carrier",
+        "Avoid new implementation until real failure exists"
+      ],
+      "surviving_causal_blocker": "Fresh post-repair real-task evidence is absent."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_MERGED_PR261_ON_FRESH_CLICK_GITHUB_IDENTITY_TASK",
+        "MORE_COMPONENT_VALIDATION",
+        "NEW_TASK_SPECIFIC_IMPLEMENTATION"
+      ],
+      "losing_routes_reason": "Component verification already passed; only direct real execution can change the capability state.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Independently re-fetch both GitHub repository identity endpoints and require matching id/full_name/default_branch plus a SUPPORTED Brain assessment with two fresh distinct source identities."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Further PR261 component validation if this real task passes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "literal URL grounding",
+        "proposal binding",
+        "fan-in effect references",
+        "verified prerequisite authority",
+        "model-independent execution"
+      ],
+      "fresh_reuse_plan": "If this task passes, run one materially different fresh reuse before restoring broad reusable grounding credit."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR261 challenger search",
+        "Reuse exact-byte validation",
+        "Reuse spent-task carrier shape without payload",
+        "Stop external architecture search"
+      ],
+      "search_stop_decision": "The repaired route is merged and exactly validated; further search cannot beat direct real execution for information gain per wall-clock.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Affected route layer refreshed by PR261 exact validation and no new material route failure has occurred."
+    },
+    "routes_considered": [
+      "REUSE_MERGED_PR261_ON_FRESH_CLICK_GITHUB_IDENTITY_TASK",
+      "MORE_COMPONENT_VALIDATION",
+      "NEW_IMPLEMENTATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REQUESTS_REPLAY",
+      "MORE_COMPONENT_VALIDATION",
+      "MODEL_REASONER",
+      "NEW_PLANNER",
+      "NEW_BINDER"
+    ],
+    "selected_surviving_route": "REUSE_MERGED_PR261_ON_FRESH_CLICK_GITHUB_IDENTITY_TASK",
+    "why_selected_route_is_fastest_sufficient": "It uses merged exact-validated Brain-owned cognition, the already-live public runner, no model, no new code, and a direct independent real-world oracle.",
+    "expected_parent_level_state_change": "Execute one fresh non-Requests real task through the merged model-independent grounding→composition→planner→executor route and independently verify the real effect; either restore admissible post-repair task evidence or localize the first new causal failure.",
+    "stop_condition": "Execute exactly one fresh Click repository identity-consistency task. Stop on pass or first causal failure. Do not repair, rerun, promote, or change scoreboard in this action.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T00:45:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "MERGED_PR261_MODEL_INDEPENDENT_GROUNDING_COMPOSITION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR261 merged head d3ea1eb1934f9413ebd56d2b38d00c34e7877d6a",
+          "public exact-byte validation run 36651709460"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.github.com/en/rest/repos/repos#get-a-repository",
+          "https://api.github.com/repos/pallets/click"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/pallets/click",
+          "moxnixmdj/verification-capsule-runner"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No new route search required beyond PR261 frontier; fresh task target selected from a distinct real repository and authoritative API identity routes."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent literal URL grounding fan in real repository identity verification"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GitHub REST repository owner name numeric id endpoints"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "reuse merged proposal binding grounding capability graph executor"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current GitHub REST repository endpoint availability 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_MERGED_PR261_ON_FRESH_CLICK_GITHUB_IDENTITY_TASK",
+          "evidence": [
+            "PR261 exact-byte validation passes",
+            "pallets/click owner/name endpoint live"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36651709460",
+            "DIRECT_PROBE GitHub API pallets/click id 19103692"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exercises the exact repaired contracts and independent real-world oracle.",
+            "CAPABILITY_STRENGTH": "Covers literal URLs, two independent fetches, fan-in assessment, verified initial fact, planner, executor.",
+            "WALL_CLOCK": "Immediate on existing public runner.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact route and carrier already validated.",
+            "VERIFIABILITY": "Independent API re-fetch and artifact inspection."
+          }
+        }
+      ],
+      "negative_search_summary": "No plausible challenger improves time-to-real-proof after the repaired native route already passed exact component validation.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_MERGED_PR261_ON_FRESH_CLICK_GITHUB_IDENTITY_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T00:45:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_MERGED_PR261_ON_FRESH_CLICK_GITHUB_IDENTITY_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:43:44Z",
+            "evidence": [
+              "DIRECT_PROBE public run 36651709460 completed SUCCESS on exact repaired bytes"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "MERGED_PR261_MODEL_INDEPENDENT_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:44:22Z",
+            "evidence": [
+              "BRAIN_INHERITED main 08338df0cc989b092567f10ffd1dca6a7f37be65"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "GITHUB_PUBLIC_REPOSITORY_JSON",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:45:00Z",
+            "evidence": [
+              "DIRECT_PROBE https://api.github.com/repos/pallets/click returned id 19103692, full_name pallets/click, default_branch main"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
