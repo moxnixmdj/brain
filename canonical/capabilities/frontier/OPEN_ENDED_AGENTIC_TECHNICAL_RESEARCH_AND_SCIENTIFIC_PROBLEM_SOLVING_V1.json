@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__ONE_CLEAN_MODEL_FREE_PARENT_REAL_TASK_VERIFIED__SECOND_CROSS_DOMAIN_MODEL_FREE_TASK_REQUIRED",
+  "status": "FRONTIER_BAR_DEFINED__PREWIRED_TASK_PARENT_CREDIT_REVOKED__GENUINELY_OPEN_ENDED_EVIDENCE_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -42,21 +42,26 @@
     "real_task_B": "One materially different real technical/scientific domain completed using the inherited general route without rediscovery.",
     "cross_domain_transfer_required": true,
     "frontier_model_dependency_removed_for_both_tasks": true,
-    "same_domain_parameter_variation_does_not_count_as_frontier_fresh_reuse": true
+    "same_domain_parameter_variation_does_not_count_as_frontier_fresh_reuse": true,
+    "task_prompt_must_not_prewire_source_urls_json_paths_tools_or_calculation_formula": true,
+    "autonomous_decomposition_discovery_tool_selection_required": true,
+    "parent_scope_credit_requires_behavioral_coverage_of_useful_behavior": true
   },
   "evidence_A": {
     "task": "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
     "domain": "DEVELOPMENT_DEMOGRAPHY_POPULATION_GROWTH_QUANTITATIVE_REASONING",
-    "status": "VERIFIED_MODEL_INDEPENDENT_REAL_TASK_A__INHERITED_ROUTE__INDEPENDENT_ORACLE_PASS",
+    "status": "VERIFIED_MODEL_INDEPENDENT_NARROW_INTEGRATION_TASK__NOT_ADMISSIBLE_AS_OPEN_ENDED_PARENT_TASK_A",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json",
     "public_run_id": 36667844172,
     "artifact_id": 11076359417,
     "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
-    "model_dependency_count": 0
+    "model_dependency_count": 0,
+    "parent_scope_admissible": false,
+    "scope_correction_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json"
   },
   "evidence_B": {
-    "status": "REQUIRED__UNSPENT",
-    "requirement": "One materially different technical/scientific domain completed on the inherited general model-independent route without rediscovery.",
+    "status": "BLOCKED_UNTIL_ADMISSIBLE_GENUINELY_OPEN_ENDED_TASK_A_EXISTS",
+    "requirement": "After one genuinely open-ended Task A passes, run a materially different genuinely open-ended technical/scientific Task B using the inherited route.",
     "prohibited_replays": [
       "PARENT-DEMOGRAPHY-FRANCE-GROWTH-CROSSCHECK-REAL-TASK-20260930-001",
       "PARENT-ASTRONOMY-EROS-KEPLER-REAL-TASK-20260930-001",
@@ -64,8 +69,8 @@
       "PARENT_BIOPHYSICS_RAPID_GROWTH_REAL_TASK_20260930_004"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__OLD_TASK_A_MODEL_DEPENDENCE_INVALIDATES_TWO_TASK_DEPENDENCY_REMOVAL_CONTRACT",
-  "residual_gap": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL",
+  "obsolescence_status": "NOT_YET_PROVEN__NO_ADMISSIBLE_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK",
+  "residual_gap": "PARENT_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_REQUIRED__PREWIRED_TASKS_INADMISSIBLE_FOR_PARENT_SCOPE",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -104,7 +109,7 @@
       "public_run_id": 36666659921
     }
   ],
-  "next_action": "RUN_ONE_NEW_CROSS_DOMAIN_MODEL_INDEPENDENT_PARENT_REAL_TASK_B__NO_DEMOGRAPHY_ASTRONOMY_GEOPHYSICS_BIOPHYSICS_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK__NO_PREWIRED_SOURCES_URLS_PATHS_TOOLS_OR_FORMULAS__STOP_ON_FIRST_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -154,6 +159,13 @@
     "public_run_id": 36667844172,
     "artifact_id": 11076359417,
     "independent_oracle_verified": true,
-    "model_dependency_count": 0
+    "model_dependency_count": 0,
+    "parent_scope_admissible": false,
+    "scope_class": "NARROW_PREWIRED_INTEGRATION_EVIDENCE"
+  },
+  "parent_scope_correction": {
+    "status": "APPLIED",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
+    "progress_credit_delta": 0
   }
 }
