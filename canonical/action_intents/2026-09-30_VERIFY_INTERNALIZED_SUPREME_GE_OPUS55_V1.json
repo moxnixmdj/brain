@@ -1,0 +1,196 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "VERIFY-INTERNALIZED-SUPREME-GE-OPUS55-20260930-V1",
+  "status": "EXECUTED_FAIL__CURRENT_SUPREME_ROUTE_FALSIFIED_FOR_ADVANCEMENT__RETURN_TO_ROUTE_RACE",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3baed7faefcf86d559e8e673d115372e3db2f9a7",
+  "terminal_objective": "PERMANENTLY_ACQUIRE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
+  "action_kind": "BRAIN_CONFIGURED_CAPABILITY_STRENGTH_VERIFICATION",
+  "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ADVANCED_AGENTIC_CODING::VERIFY_INTERNALIZED_SUPREME_GE_OPUS55",
+  "expected_parent_frontier_change": "Zero Opus credit. Preserve two behavioral failures and one contamination burn, stop the Supreme task-repair loop, and return advanced coding to the existing-route race.",
+  "theory_invariants": {
+    "capability_configuration": "BRAIN_OWNED",
+    "substrate_role": "GENERAL_COGNITION_ONLY",
+    "opacity_loophole": "FORBIDDEN",
+    "cross_version_benchmark_extrapolation": "FORBIDDEN",
+    "candidate_selection_evidence_is_capability_credit": false,
+    "incremental_spend_usd": 0,
+    "knowledge": "EXTERNAL_JIT"
+  },
+  "exact_configuration_root": "canonical/capabilities/internalized/software_engineering/supreme_c062bec",
+  "evaluation_protocol": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/EVALUATION_PROTOCOL_V1.json",
+  "ownership_tests": {
+    "brain_artifact_test": "PASS",
+    "no_hidden_capability_provider_test": "PASS_FOR_CONFIGURATION_EXISTENCE",
+    "general_substrate_test": "PASS_ARCHITECTURALLY",
+    "specimen_separation_test": "PASS",
+    "reexecution_without_rediscovery_test": "PASS",
+    "brain_configured_verification_test": "IN_PROGRESS",
+    "ownership_package_test": "PENDING_FINAL_VERIFICATION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_VERIFY_INTERNALIZED_SUPREME_GE_OPUS55_V1.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3baed7faefcf86d559e8e673d115372e3db2f9a7",
+    "real_outcome": "Correctly preserve two spent tasks, then test Supreme adherence on a third fresh TB4 task without task-specific hints, solution bytes, or verifier logic.",
+    "required_capability": "ADVANCED_AGENTIC_CODING_GE_OPUS_5_5",
+    "obs_goal": {
+      "real_outcome": "Reach an evidence-eligible Supreme execution path that cannot bypass configuration-required verification, while preserving zero capability credit until Opus-level bars pass.",
+      "proxy_goals_deleted": [
+        "Replay html-js-filter after reading its verifier",
+        "Blame the proven public carrier",
+        "Treat the first task failure as whole-family Supreme falsification",
+        "Continue to full TB4 before configuration adherence is fail closed",
+        "Use photonic-waveguide-routing after task-specific public analysis was exposed"
+      ],
+      "surviving_necessity": "The first configured execution instance failed behaviorally; its task is spent. Supreme remains a candidate, but only after its owned verification discipline is enforced as integration glue and a fresh task passes."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain-owned Supreme pinned configuration",
+        "Brain-owned Superpowers 6.4.2 fallback/comparison",
+        "Canonical Superpowers sequential matched A/B protocol",
+        "Superpowers session-window-debug direct semantic pass with zero Opus credit",
+        "Supreme html-js-filter public preflight run 36763187254: carrier PASS, candidate reward 0",
+        "Supreme execution contract derived from owned Supreme operating protocol"
+      ],
+      "external_existing_routes_checked": [
+        "Terminal-Bench 4.0 current official release and public harness",
+        "Opus 5.5 published advanced-coding bars",
+        "Current public Terminal-Bench leaderboard",
+        "Supreme full-suite TB2.1 matched study for candidate selection only",
+        "Terminal-Bench 4 photonic-waveguide-routing task metadata at v4.0.0"
+      ],
+      "capability_work_deleted": [
+        "No new coding methodology",
+        "No duplicate evaluation harness",
+        "No paid API route",
+        "No same-task repaired replay for promotion",
+        "No new carrier search because public zero-cost carrier is proven"
+      ],
+      "surviving_gap": "The current Supreme-configured route failed a second uncontaminated behavioral preflight after adherence glue; route-level advancement is falsified and the route race must reopen."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Integration/adherence blocker exposed by the first execution instance, not an infrastructure blocker and not yet evidence that the whole Supreme configuration is below Opus 5.5.",
+      "delete_bypass_substitute_options": [
+        "Delete same-task replay as promotion evidence",
+        "Reuse proven public carrier",
+        "Compile existing Supreme verification discipline into mandatory submission gates",
+        "Use a different fresh low-cost TB4 task after the generic adherence repair"
+      ],
+      "surviving_causal_blocker": "CURRENT_SUPREME_CONFIGURED_ROUTE_NOT_SUFFICIENTLY_GENERAL_TO_ADVANCE__STRONGER_EXISTING_INTERNALIZABLE_CODING_ROUTE_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "RETURN_TO_EXISTING_ROUTE_RACE__KEEP_SUPERPOWERS_CONTROL",
+        "CONTINUE_SUPREME_TASK_SPECIFIC_REPAIR_LOOP",
+        "RUN_FULL_TB4_ANYWAY"
+      ],
+      "losing_routes_reason": "The public carrier is proven. Replaying the spent task would contaminate evidence. Full scoring before enforcing Supreme's own verification discipline would repeat the exact process failure.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Require a complete Supreme execution-contract receipt using non-verifier self-tests before submission, then use the official independent TB4 verifier. The spent html-js-filter verifier may inform generic diagnosis only, not fresh evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "CARRIER_REQUIRED_BLOCKER",
+        "HTML_JS_FILTER_RUNTIME_MISMATCH_DIAGNOSIS",
+        "TEXT_ONLY_SUPREME_ADHERENCE_WITHOUT_SUBMISSION_GATE",
+        "SAME_TASK_REPAIR_AND_REPLAY"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Superpowers sequential evaluation protocol",
+        "Proven public GitHub Actions verifier carrier",
+        "Supreme verification-before-completion discipline compiled into fail-closed integration glue"
+      ],
+      "fresh_reuse_plan": "Use photonic-waveguide-routing as a different fresh TB4 task. Configured cognition may inspect instruction/task/environment only; tests/solution remain unread before submission."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Carrier qualification deleted because run 36763187254 proved the carrier",
+        "Same-task replay deleted because task is spent after verifier read",
+        "New methodology design deleted; existing Supreme discipline compiled as glue",
+        "Full benchmark deferred until fresh preflight demonstrates adherence"
+      ],
+      "search_stop_decision": "The first failure localized the next causal step: enforce already-owned Supreme verification discipline, then use the already-selected fresh CPU-only 0.75h TB4 task on the proven carrier. More search cannot beat this path enough to justify delay.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "ENFORCE_OWNED_SUPREME_EXECUTION_CONTRACT__THEN_FRESH_PHOTONIC_PREFLIGHT",
+      "REPLAY_SPENT_HTML_TASK",
+      "SEARCH_NEW_CARRIER",
+      "RUN_FULL_TB4_WITHOUT_ADHERENCE_REPAIR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_SPENT_HTML_TASK",
+      "CARRIER_RESEARCH",
+      "FALSE_RUNTIME_MISMATCH_DIAGNOSIS",
+      "FULL_SUITE_BEFORE_ADHERENCE_REPAIR",
+      "ONE_TASK_PROMOTION",
+      "USE_CONTAMINATED_PHOTONIC_TASK"
+    ],
+    "selected_surviving_route": "RETURN_TO_EXISTING_ROUTE_RACE__KEEP_SUPERPOWERS_CONTROL",
+    "why_selected_route_is_fastest_sufficient": "The pre-registered fresh task failed after the generic adherence repair. More task-specific Supreme repairs risk benchmark overfitting and violate the stop condition; a route race now has higher expected information and ownership gain per wall-clock.",
+    "expected_parent_level_state_change": "Zero Opus credit. Preserve the failed first Supreme execution as falsification evidence, eliminate false carrier/runtime diagnoses, make Supreme verification discipline fail closed, then run one different fresh TB4 preflight before any full-score attempt.",
+    "stop_condition": "STOP_SUPREME_PREFLIGHT_LOOP_NOW__NO_FULL_SCORING__NO_SAME_TASK_REPLAY__RETURN_TO_ROUTE_RACE",
+    "route_frontier": {
+      "refreshed_utc_date": "2026-09-30",
+      "terminal_bench_release": "v4.0.0",
+      "stronger_public_brain_ownable_tb4_route_already_at_opus_bar_found": false,
+      "current_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1"
+    }
+  },
+  "prior_state_reconciliation": {
+    "superseding_main_commit": "3baed7faefcf86d559e8e673d115372e3db2f9a7",
+    "material_change": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_PROMOTED_ON_MAIN",
+    "effect_on_route": "ORTHOGONAL_CAPABILITY_PROGRESS__CODING_REMAINS_ACTIVE_CANONICAL_BLOCKER",
+    "current_coding_frontier_confirmed": true
+  },
+  "contamination_events": [
+    {
+      "task": "photonic-waveguide-routing",
+      "status": "SPENT_BEFORE_EXECUTION__TASK_SPECIFIC_PUBLIC_HINTS_EXPOSED_DURING_BROAD_REPOSITORY_SEARCH",
+      "configured_cognition_read_solution": false,
+      "configured_cognition_read_verifier_logic": false,
+      "may_count_for_promotion": false,
+      "reason": "Task instruction forbids online task-specific hints; broad search returned task-specific external analysis, so the task is invalidated fail-closed."
+    }
+  ],
+  "fresh_preflight": {
+    "benchmark": "Terminal-Bench 4.0",
+    "task": "bun-sourcemap-leak",
+    "release": "v4.0.0",
+    "task_toml_git_blob": "7cf088f15bfff9549ca65374260955a8fe4e3514",
+    "instruction_git_blob": "9257aed8943fea81020ff1576a87b8fc4a499bdd",
+    "expert_time_estimate_hours": 1.5,
+    "category": "Software",
+    "subcategory": "Systems",
+    "contamination_state": "CLEAN__OFFICIAL_TASK_BYTES_AND_ENVIRONMENT_ONLY",
+    "candidate_carrier_branch": "moxnixmdj/verification-capsule-runner:verify/supreme-tb4-bun-sourcemap-leak-20260930-v1"
+  },
+  "execution_result": {
+    "status": "FAIL",
+    "fresh_task": "bun-sourcemap-leak",
+    "supreme_self_tests": "PASS",
+    "independent_verifier": "FAIL__REWARD_0__25_PASS__9_FAIL__2_ERROR",
+    "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+    "task_spent": true,
+    "capability_credit": 0,
+    "route_may_advance_to_full_scoring": false
+  }
+}
