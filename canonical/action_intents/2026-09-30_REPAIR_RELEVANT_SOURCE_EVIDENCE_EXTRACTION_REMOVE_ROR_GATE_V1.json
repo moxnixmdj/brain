@@ -1,0 +1,304 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-RELEVANT-SOURCE-EVIDENCE-EXTRACTION-REMOVE-UNIVERSAL-ROR-GATE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "EXTRACTION_COVERAGE_DEFECT__UNIVERSAL_ROR_AUTHORITY_GATE_NARROWS_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION",
+  "action_kind": "CAPABILITY_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::EXTRACTION_COVERAGE_DEFECT__UNIVERSAL_ROR_AUTHORITY_GATE::CAPABILITY_REPAIR",
+  "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+  "expected_parent_frontier_change": "Preserve the acquired extraction contract and current claim-relation frontier while broadening extraction admission from ROR-bound sources to any live retrieval-provenance source that passes strict fresh same-host objective relevance. Zero parent score credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR418 extraction producer and public qualification run 36679523741",
+    "closed PR416 falsification identifying universal ROR extraction gate",
+    "stale generic PR420 and stale PR422",
+    "open PR421 relation evaluator consuming existing extraction schema",
+    "Python stdlib HTMLParser route",
+    "Beautiful Soup 4.15.0, Trafilatura 2.2.0, readability-lxml 0.9 challengers"
+  ],
+  "evidence_presence_classification": "VERIFIED_NARROW_CAPABILITY_WITH_COVERAGE_DEFECT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when exact repaired producer bytes preserve the existing extraction schema/record contract, independently pass fresh live cross-domain qualification including a non-ROR-gated source path, fail closed on host drift and irrelevant pages, and the relation evaluator remains contract-compatible.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+    "real_outcome": "Preserve qualified objective-anchored evidence extraction while deleting ROR organization identity as a universal admission prerequisite.",
+    "required_capability": "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve qualified objective-anchored evidence extraction while deleting ROR organization identity as a universal admission prerequisite.",
+      "proxy_goals_deleted": [
+        "re-acquire extraction under a new incompatible schema",
+        "require organization authority merely to extract text",
+        "change parent score",
+        "replay spent parent task"
+      ],
+      "surviving_necessity": "Relation evaluation requires the existing extraction artifact contract, but open-ended source extraction must not be limited to ROR-recognized organizations."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "merged relevant_source_evidence_extract from PR418",
+        "qualified first_party_objective_relevance_verify",
+        "source_candidate_provenance_verify",
+        "closed PR416/PR420/PR422 generic extraction candidates",
+        "open PR421 extracted_evidence_claim_relation consumer"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib html.parser.HTMLParser",
+        "Beautiful Soup 4.15.0",
+        "Trafilatura 2.2.0",
+        "readability-lxml 0.9"
+      ],
+      "capability_work_deleted": [
+        "No replacement extraction schema",
+        "No second relevance fetch",
+        "No ROR requirement",
+        "No model cognition",
+        "No semantic support inference in extraction"
+      ],
+      "surviving_gap": "Current qualified extractor couples extractability to first_party_objective_relevance_verify and therefore to exact ROR organization identity."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific. Extraction intrinsically needs retrieval provenance plus relevance of fresh bytes, not organization authority.",
+      "delete_bypass_substitute_options": [
+        "Delete ROR prerequisite while retaining strict fresh source relevance.",
+        "Reuse same single fresh fetch for relevance and extraction.",
+        "Preserve existing schema/status/evidence_records/numeric_literals consumed by PR421.",
+        "Reject third-party parser dependency because stdlib is sufficient for the verified scope."
+      ],
+      "surviving_causal_blocker": "Fresh same-provenance-host objective relevance must be verified directly inside the extractor before emitting existing-contract evidence records."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_EXISTING_EXTRACTOR__SINGLE_FRESH_PROVENANCE_HOST_FETCH__STRICT_RELEVANCE__PRESERVE_CONTRACT",
+        "KEEP_ROR_BOUND_INCUMBENT",
+        "NEW_GENERIC_EXTRACTION_SCHEMA",
+        "TRAFILATURA_OR_READABILITY_MAIN_CONTENT_EXTRACTION"
+      ],
+      "losing_routes_reason": "The repair preserves downstream compatibility and single-fetch latency while deleting only the unnecessary ROR gate. Keeping the incumbent retains the defect; a new schema breaks PR421; third-party extractors add dependency and transformation surface without strengthening the narrow claim.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Exact-byte public qualification must run authored adversarial regressions plus fresh live sources on materially distinct domains, independently re-fetch and confirm emitted passage membership/hashes, and verify PR421's extraction loader accepts the repaired artifact contract."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Universal authority gating in open_research_source_frontend",
+        "ROR-bound useful_behavior wording in the extraction promotion receipt after repaired qualification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "strict bounded lexical fresh-page relevance",
+        "single-fetch page-byte reuse",
+        "existing evidence record and numeric literal contract"
+      ],
+      "fresh_reuse_plan": "Run exact repaired producer on NIST and SQLite official documentation, with SQLite serving as a distinct path that does not depend on ROR admission; independently refetch both and verify passage membership and hashes."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR418 qualification infrastructure and record contract",
+        "Reuse current PR421 consumer contract",
+        "Reuse current public hard-zero carrier"
+      ],
+      "search_stop_decision": "Current incumbent, generic repair candidates, stdlib, and leading zero-cost HTML extraction packages cover the plausible routes. Contract-preserving stdlib repair dominates for correctness, wall-clock, cost, and verifiability.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current base changed at PR418, so OBS was refreshed on adb12d9f. Reopen only after another material extraction-contract/base change or qualification failure."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_EXTRACTOR__SINGLE_FRESH_PROVENANCE_HOST_FETCH__STRICT_RELEVANCE__PRESERVE_CONTRACT",
+      "KEEP_ROR_BOUND_INCUMBENT",
+      "NEW_GENERIC_EXTRACTION_SCHEMA",
+      "BEAUTIFULSOUP",
+      "TRAFILATURA",
+      "READABILITY_LXML"
+    ],
+    "deleted_or_bypassed_paths": [
+      "UNIVERSAL_ROR_AUTHORITY_GATE",
+      "NEW_INCOMPATIBLE_EXTRACTION_SCHEMA",
+      "MODEL_RELEVANCE_JUDGE",
+      "ADDITIONAL_REQUIRED_PARSER_DEPENDENCY"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_EXTRACTOR__SINGLE_FRESH_PROVENANCE_HOST_FETCH__STRICT_RELEVANCE__PRESERVE_CONTRACT",
+    "why_selected_route_is_fastest_sufficient": "It changes the minimum causal surface: one existing producer plus frontend gating, preserves the qualified artifact contract and PR421 compatibility, keeps one fresh fetch, requires no package install, and remains independently auditable at $0.",
+    "expected_parent_level_state_change": "Preserve the acquired extraction contract and current claim-relation frontier while broadening extraction admission from ROR-bound sources to any live retrieval-provenance source that passes strict fresh same-host objective relevance. Zero parent score credit.",
+    "stop_condition": "Stop when exact repaired producer bytes preserve the existing extraction schema/record contract, independently pass fresh live cross-domain qualification including a non-ROR-gated source path, fail closed on host drift and irrelevant pages, and the relation evaluator remains contract-compatible.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T06:51:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ROR_BOUND_SINGLE_FETCH_RELEVANCE_AND_EXTRACTION_FROM_PR418",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR418 merge adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+          "PR416 closure falsification of universal ROR extraction gate",
+          "PR421 exact extraction consumer contract"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/html.parser.html",
+          "https://www.sqlite.org/backup.html",
+          "https://www.nist.gov/pqc"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/project/beautifulsoup4/ 4.15.0",
+          "https://pypi.org/project/trafilatura/ 2.2.0",
+          "https://pypi.org/project/readability-lxml/ 0.9"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "verification-capsule-runner PR153 and run 36679523741 as current challenger/execution sensor"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "provenance bound visible text evidence extraction strict objective relevance single fetch hashes numeric literals"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Beautiful Soup Trafilatura readability-lxml HTML content extraction"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python HTMLParser same host retrieval objective relevant passages hashes"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 latest Beautiful Soup Trafilatura readability-lxml"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "CONTRACT_PRESERVING_STDLIB_REPAIR",
+          "evidence": [
+            "Current extraction contract is already independently qualified on PR153.",
+            "Python HTMLParser supplies sufficient deterministic parsing primitives.",
+            "SQLite and NIST provide live materially distinct official pages for direct qualification."
+          ],
+          "qualification_evidence": [
+            "PR153 public run 36679523741 for incumbent execution substrate",
+            "Python official html.parser documentation"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED_PENDING_EXACT_REPAIRED_BYTE_QUALIFICATION",
+          "comparison": {
+            "CORRECTNESS": "Deletes a non-necessary authority assumption while retaining strict same-source relevance and existing nonclaims.",
+            "CAPABILITY_STRENGTH": "Strictly broadens source coverage without changing downstream extraction semantics.",
+            "WALL_CLOCK": "One fresh fetch, stdlib only, existing record contract.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "No new package or service dependency.",
+            "VERIFIABILITY": "High; exact bytes, source host, passage membership, text hash, and downstream contract can be independently checked."
+          }
+        },
+        {
+          "route": "KEEP_ROR_BOUND_INCUMBENT",
+          "evidence": [
+            "PR418 public run 36679523741 passed NIST/WHO within the ROR-bound path."
+          ],
+          "qualification_evidence": [
+            "canonical extraction promotion receipt on current main"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING__UNNECESSARY_COVERAGE_RESTRICTION",
+          "comparison": {
+            "CORRECTNESS": "Correct only within narrower source population.",
+            "CAPABILITY_STRENGTH": "Weaker because ROR availability is unrelated to extractability.",
+            "WALL_CLOCK": "Fast single fetch.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Adds ROR lookup/coverage dependency upstream.",
+            "VERIFIABILITY": "Qualified but only for ROR-bound route."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger improves the narrow extraction claim enough to justify keeping the ROR gate, breaking the existing artifact contract, or adding parser dependencies.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_EXISTING_EXTRACTOR__SINGLE_FRESH_PROVENANCE_HOST_FETCH__STRICT_RELEVANCE__PRESERVE_CONTRACT",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T06:51:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_EXISTING_EXTRACTOR__SINGLE_FRESH_PROVENANCE_HOST_FETCH__STRICT_RELEVANCE__PRESERVE_CONTRACT",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_UBUNTU_HARD_ZERO_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:44:00Z",
+            "evidence": [
+              "verification-capsule-runner workflow run 36679523741 succeeded on PR153 with fresh live NIST/WHO access"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PYTHON_STDLIB_HTMLPARSER_URLLIB_HASHLIB_RE_DECIMAL_JSON",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:51:00Z",
+            "evidence": [
+              "public runner Python 3.13 from successful run 36679523741; required modules are stdlib"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
