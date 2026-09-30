@@ -196,7 +196,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_ONE_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__OBJECTIVE_ONLY__NO_SOURCE_METHOD_ACTION_GRAPH_PREWIRE__STOP_ON_FIRST_CAUSAL_GAP",
+    "next_step": "RUN_ONE_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__OBJECTIVE_ONLY__MODEL_FREE__STOP_ON_FIRST_CAUSAL_GAP",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
@@ -588,25 +588,18 @@
     "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
-      "event_id": "PARENT_DEMOGRAPHY_MODEL_FREE_REAL_TASK_VERIFIED_20260930",
+      "event_id": "PARENT_CHEMISTRY_PR304_SPENT_FAIL_20260930",
       "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "status": "VERIFIED_BOUNDED_MODEL_FREE_REAL_TASK__PRESERVED_WITHOUT_OPEN_ENDED_PARENT_CREDIT",
-      "evidence_path": "canonical/capabilities/obsolescence/PARENT_DEMOGRAPHY_CLEAN_MODEL_INDEPENDENCE_RECONCILIATION_20260930_V1.json",
-      "public_run_id": 36667844172,
-      "public_job_id": 109736256301,
-      "artifact_id": 11076359417,
-      "artifact_digest": "sha256:48cf6ffa11abef1cee2443d5ca69b4a4f6cf5608c31af883b5b987d533ed6326",
-      "scoreboard": {
-        "reusable_capabilities_inherited": 5,
-        "verified_real_tasks_completed": 9,
-        "fresh_reuse_passes": 2,
-        "frontier_dependencies_removed": 1,
-        "residual_gaps_localized": 10
-      }
+      "status": "SPENT_PREWIRED_TASK_FAIL__NO_OPEN_ENDED_PARENT_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_AND_PR304_SPENT_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36669136068,
+      "public_job_id": 109740159666,
+      "artifact_id": 11077363706,
+      "artifact_digest": "sha256:b8463686e9555d941962c203d15e1c8af7fdb1c510a4617325c4e5d77c43c0a1"
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "PARENT_OPEN_ENDED_SCOPE_RECONCILED__ZERO_GENUINELY_OPEN_ENDED_PARENT_TASKS_VERIFIED",
+    "frontier_decomposition_status": "OPEN_ENDED_PARENT_SCOPE_CORRECTED__PR301_BOUNDED_EVIDENCE_ONLY__PR304_SPENT__OBJECTIVE_ONLY_TASK_A_REQUIRED",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
     "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "grounding_requalification": {
@@ -629,21 +622,32 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "OPEN_ENDED_PARENT_SCOPE_CORRECTED__PREWIRED_TASKS_EXCLUDED_FROM_PARENT_ACQUISITION_CREDIT",
-      "reason": "PR301 is valid bounded model-independent retrieval/computation evidence but its exact sources, paths, formula and threshold were supplied. PR304 was also prewired and is spent after one terminal execution failure. Neither demonstrates the target's defining autonomous decomposition/source/tool-discovery behavior.",
-      "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "OPEN_ENDED_PARENT_SCOPE_CORRECTED__BOUNDED_PR301_PRESERVED__PR304_SPENT",
+      "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "relationship": "SAME_PARENT_TARGET__CLAIM_SCOPE_CORRECTION",
       "blocker": "PARENT_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_A_REQUIRED__PR301_BOUNDED_PREWIRED_TASK_INSUFFICIENT_FOR_PARENT_SCOPE",
       "evidence_paths": [
-        "canonical/action_intents/2026-09-30_RECONCILE_OPEN_ENDED_PARENT_SCOPE_AND_SPENT_PR304_V1.json"
+        "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_AND_PR304_SPENT_RECONCILIATION_20260930_V1.json"
       ],
-      "source_run_ids": [
-        36667844172,
-        36669136068
-      ],
-      "same_task_replay_allowed": false
+      "parent_capability_promoted": false
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD"
+    "canonical_frontier_consistency_status": "MIRROR_LOCKED_TO_HIERARCHY_QUEUE_SCOREBOARD",
+    "open_ended_parent_evidence": {
+      "verified_tasks": 0,
+      "bounded_integrated_tasks_preserved": 1,
+      "next_gate": "GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_REAL_TASK_A"
+    },
+    "pr304_spent_execution": {
+      "public_run_id": 36669136068,
+      "public_job_id": 109740159666,
+      "artifact_id": 11077363706,
+      "artifact_digest": "sha256:b8463686e9555d941962c203d15e1c8af7fdb1c510a4617325c4e5d77c43c0a1",
+      "execution_count": 1,
+      "first_causal_blocker": "EXECUTE:RuntimeError:JQ_FAILED:NUMERIC_RELATION_INPUT_NOT_NUMBER",
+      "replay_allowed": false
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
