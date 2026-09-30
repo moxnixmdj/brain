@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "VERIFY-SUPERPOWERS-CODING-DIRECT-SEMANTICS-20260930-V1",
+  "status": "EXECUTED_EVIDENCE_PENDING_CANONICAL_MERGE",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "action_kind": "CAPABILITY_VERIFICATION",
+  "incremental_spend_usd": 0,
+  "real_outcome": "Increase direct evidence that the Brain-owned coding methodology produces correct debugging/repair behavior without externalizing the coding capability.",
+  "selected_route": "CURRENT_INCLUDED_GPT_5_6_SOL_AS_GENERAL_SUBSTRATE__USER_LOCAL_EXECUTOR__FRESH_PUBLIC_TASK__NO_SOLUTION_OR_VERIFIER_ACCESS",
+  "deleted_routes": [
+    "BILLABLE_MANAGED_AGENT_RUNNER",
+    "OPAQUE_EXTERNAL_CODING_PROVIDER_AS_OWNERSHIP",
+    "CONTAMINATED_BENCHMARK_CANDIDATE",
+    "CLAIM_FULL_OPUS_PARITY_FROM_ONE_TASK"
+  ],
+  "preflight": {
+    "brain_internalized_configuration_present": true,
+    "hard_zero_incremental_spend": true,
+    "clean_task_required": true,
+    "official_benchmark_claim_without_official_verifier_forbidden": true
+  },
+  "result": {
+    "direct_semantic_evidence": "PASS",
+    "whole_opus_5_5_family": "UNPROVEN",
+    "capability_credit_delta": 0,
+    "evidence_path": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json"
+  },
+  "next_step": "MULTI_TASK_SAME_SUBSTRATE_COMPARATIVE_VERIFICATION_WITH_MATCHED_OPUS_5_5_BAR"
+}
