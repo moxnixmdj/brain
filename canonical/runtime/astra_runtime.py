@@ -4199,6 +4199,25 @@ def _write_controller_checkpoint(path,data,trace,status="IN_PROGRESS"):
     return data
 
 
+def _stamp_goal_cognition_provenance(result,model_dependent):
+    if not isinstance(result,dict):
+        raise Blocker("GOAL_RESULT_NOT_OBJECT")
+    dependent=bool(model_dependent)
+    dependency_count=1 if dependent else 0
+    result["model_dependency_count"]=dependency_count
+    result["cognition_provenance"]={
+      "schema":"PROJECT_BRAIN_COGNITION_PROVENANCE_V1",
+      "cognition_source":"MODEL_ASSISTED" if dependent else "MODEL_INDEPENDENT_RUNTIME",
+      "model_dependent":dependent,
+      "model_dependency_count":dependency_count,
+      "controller_mode":result.get("controller_mode"),
+      "planner_source":result.get("planner_source"),
+      "planner_transport":result.get("planner_transport"),
+      "planner_model":result.get("planner_model_last"),
+    }
+    return result
+
+
 def _run_model_independent_goal(step, mission, goal):
     actions=_controller_actions(step, mission)
     if actions is None:
@@ -4245,7 +4264,7 @@ def _run_model_independent_goal(step, mission, goal):
             if not summary.strip():
                 raise Blocker("MODEL_INDEPENDENT_CONTROLLER_EMPTY_FINISH")
             checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace,status="COMPLETE")
-            return {
+            return _stamp_goal_cognition_provenance({
               "adapter":"goal","returncode":0,
               "stdout":summary,
               "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
@@ -4263,7 +4282,7 @@ def _run_model_independent_goal(step, mission, goal):
                 "rewind_count":int(checkpoint.get("rewind_count") or 0),
                 "last_rewound_from_action_index":checkpoint.get("last_rewound_from_action_index"),
               }
-            }
+            }, False)
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
 
 def _capability_problem(step, mission):
@@ -5787,7 +5806,7 @@ def run_goal(step, mission):
         if typ=="finish":
             summary=result.get("summary","")
             if not summary.strip(): raise Blocker("PLANNER_EMPTY_FINISH")
-            return {
+            return _stamp_goal_cognition_provenance({
               "adapter":"goal","returncode":0,
               "stdout":summary,
               "controller_mode":"OPTIONAL_MODEL_ADVISORY",
@@ -5796,7 +5815,7 @@ def run_goal(step, mission):
               "planner_model_last":planned.get("model"),
               "cycles":cycle+1,"trace":trace,
               "final_summary":summary
-            }
+            }, True)
         observations.append({"action":action,"result":result})
 
     # The ordinary evidence/action budget is exhausted. Do not silently turn
@@ -5835,7 +5854,7 @@ def run_goal(step, mission):
       "plan":final_action,
       "result":final_result
     })
-    return {
+    return _stamp_goal_cognition_provenance({
       "adapter":"goal","returncode":0,
       "stdout":summary,
       "controller_mode":"OPTIONAL_MODEL_ADVISORY_FORCED_FINALIZATION",
@@ -5846,7 +5865,7 @@ def run_goal(step, mission):
       "forced_finalization":True,
       "trace":trace,
       "final_summary":summary
-    }
+    }, True)
 
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
