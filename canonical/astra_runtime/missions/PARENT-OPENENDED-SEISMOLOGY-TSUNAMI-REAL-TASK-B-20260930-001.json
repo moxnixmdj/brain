@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-SEISMOLOGY-TSUNAMI-REAL-TASK-B-20260930-001",
+  "purpose": "Execute the frozen, unspent seismology/tsunami open-ended parent Task B exactly once through the repaired canonical ASTRA runtime. No prewired source, station identifier, numeric values, tool, command, calculation recipe, answer, or task-specific runtime patch.",
+  "goal": "Determine whether the 2025 Kamchatka earthquake generated a tsunami with an observed maximum amplitude exceeding 1 meter at any officially monitored station outside Russia. Use authoritative primary or reference data and a real executable check. Autonomously discover and verify the relevant sources, determine how to extract and interpret the required observations, choose and run a zero-cost verification method, identify material measurement-scope or interpretation limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-seismology-tsunami-open-ended-parent-task-b",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-OPENENDED-SEISMOLOGY-TSUNAMI-REAL-TASK-B-20260930-001.json",
+    "source_task_blob_sha": "3ca4d92ec62105f654c32a79e50f0883f2960709",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
