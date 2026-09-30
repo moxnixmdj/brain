@@ -64,7 +64,7 @@ class FakeVerifier:
             "final_url":candidate["url"],
             "final_host":"weak.example",
         }
-    def materialize_retrieval(self,candidate,bibliographic_verification,timeout=15):
+    def materialize(self,candidate,bibliographic_verification,timeout=15):
         self.materialize_calls.append(candidate["url"])
         if bibliographic_verification.get("status")!="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
             raise AssertionError("BIBLIOGRAPHIC_RECEIPT_REQUIRED")
@@ -212,25 +212,26 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
                 200,
                 "https://publisher.example/article",
             )
-        old=self.prov._fetch
-        self.prov._fetch=fake_fetch
-        try:
-            out=self.prov.materialize_retrieval(
-                {"url":"https://doi.org/10.1234/example","doi":"10.1234/example"},
-                {
-                    "status":"BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
-                    "candidate_url":"https://doi.org/10.1234/example",
-                    "doi":"10.1234/example",
-                    "record_title":"Example article",
-                    "verification_method":"CROSSREF_DOI_RECORD",
-                },
-                timeout=9,
-            )
-        finally:
-            self.prov._fetch=old
+        out=self.prov.materialize(
+            {"url":"https://doi.org/10.1234/example","doi":"10.1234/example"},
+            {
+                "status":"BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+                "candidate_url":"https://doi.org/10.1234/example",
+                "doi":"10.1234/example",
+                "record_title":"Example article",
+                "verification_method":"CROSSREF_DOI_RECORD",
+            },
+            timeout=9,
+            fetch=fake_fetch,
+        )
         self.assertEqual(out["status"],"RETRIEVAL_PROVENANCE_VERIFIED")
-        self.assertEqual(out["verification_method"],"BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION")
+        self.assertEqual(
+            out["verification_method"],
+            "SELECTED_BIBLIOGRAPHIC_CANDIDATE_LIVE_HTTP_MATERIALIZATION",
+        )
         self.assertEqual(out["bibliographic_provenance_status"],"VERIFIED")
+        self.assertTrue(out["selected_only_materialization"])
+        self.assertTrue(out["bibliographic_identity_preserved"])
         self.assertEqual(out["authority_status"],"RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED")
         self.assertEqual(out["primary_source_status"],"UNVERIFIED")
         self.assertEqual(out["final_url"],"https://publisher.example/article")
