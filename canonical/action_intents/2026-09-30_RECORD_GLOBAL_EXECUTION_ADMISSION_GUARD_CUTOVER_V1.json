@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "RECORD-GLOBAL-EXECUTION-ADMISSION-GUARD-CUTOVER-20260930-V1",
-  "status": "IMPLEMENTED_EXTERNALLY__CANONICAL_RECEIPT_PENDING",
+  "status": "COMPLETE__CANONICAL_RECEIPT_RECORDED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -20,13 +20,13 @@
     "eight obsolete direct parent/scientific one-shot workflows absent post-merge",
     "PR156 execution-guard regression job passed"
   ],
-  "evidence_presence_classification": "EXTERNAL_OPERATIONAL_FACT_VERIFIED__CANONICAL_RECEIPT_MISSING",
+  "evidence_presence_classification": "EXTERNAL_OPERATIONAL_FACT_VERIFIED__CANONICAL_RECEIPT_PRESENT",
   "probe_specific": false,
   "generic_repair_from_single_probe": false,
   "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Merge the exact receipt without changing the current scientific frontier, counters, or parent replay authority.",
+  "stop_condition": "SATISFIED__CANONICAL_RECEIPT_RECORDED__NO_SCIENTIFIC_FRONTIER_CHANGE",
   "governance_change": true,
   "weakens_existing_guard": false,
   "recursive_obs": {
@@ -161,5 +161,13 @@
         "IF_REPOSITORY_PROTECTION_CHANGES"
       ]
     }
+  },
+  "completion_receipt": {
+    "path": "canonical/reconciliation/GLOBAL_EXECUTION_ADMISSION_GUARD_CUTOVER_20260930_V1.json",
+    "blob_sha": "b0ba0b16bc28eb236e66283c8e401959a035d691",
+    "verified_runner_main": "b1d5ada6b827098e24d795c41c02545c12fd8fc1",
+    "verified_runner_cutover_commit": "f2335a12a5137f683b0660ec20aba6e45dc388cc",
+    "historical_spent_problem_deny_refs_verified_live": 6,
+    "verified_on": "2026-09-30"
   }
 }
