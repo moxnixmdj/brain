@@ -224,10 +224,21 @@ def _crossref(query, limit, timeout):
         "candidate_count": len(out),
     }
 
-def discover(objective, limit=12, timeout=15):
+def discover(objective, limit=12, timeout=15, query_override=None):
     original_objective=_canon(objective)
+    if not original_objective:
+        raise ValueError("OBJECTIVE_REQUIRED")
     focus=_query_focus(original_objective)
-    query=_canon(focus.get("query"))
+    if query_override is None:
+        query=_canon(focus.get("query"))
+        query_source="OBJECTIVE_FOCUS"
+    else:
+        query=_canon(query_override)
+        if not query:
+            raise ValueError("QUERY_OVERRIDE_REQUIRED")
+        if len(query)>4000:
+            raise ValueError("QUERY_OVERRIDE_TOO_LONG")
+        query_source="VERIFIED_METADATA_ANCHORED_REFINEMENT"
     limit = max(1, min(int(limit), 40))
     timeout = max(2, min(int(timeout), 30))
     candidates = []
@@ -265,6 +276,7 @@ def discover(objective, limit=12, timeout=15):
         "status": status,
         "objective": original_objective,
         "query": query,
+        "query_source":query_source,
         "query_focus": focus,
         "query_sha256": hashlib.sha256(query.encode("utf-8")).hexdigest(),
         "candidates": unique,
