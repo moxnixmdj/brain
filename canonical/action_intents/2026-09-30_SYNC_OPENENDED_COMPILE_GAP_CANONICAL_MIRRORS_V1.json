@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SYNC-OPENENDED-COMPILE-GAP-CANONICAL-MIRRORS-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "CANONICAL_MIRROR_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::CANONICAL_MIRROR_RECONCILIATION",
+  "expected_parent_frontier_change": "No capability change. Make CANONICAL_POINTER, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE, and REAL_OUTPUT_SCOREBOARD agree with merged PR347/current hierarchy+target on the exact localized compile gap and next action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "merged PR347 authoritative Task A reconciliation",
+    "public runner PR49 / run 36670516407 / artifact 11077861584",
+    "ACTIVE_GOAL_HIERARCHY_V1 and parent target already carry the localized compile gap",
+    "CANONICAL_POINTER, queue, and scoreboard still carry the superseded broad Task-A-needed blocker",
+    "PR349 closed for wrong execution authority"
+  ],
+  "evidence_presence_classification": "EXISTING_CANONICAL_EVIDENCE__MIRROR_INCONSISTENCY_ONLY",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "capability_credit_delta": 0,
+  "execution_constraints": {
+    "incremental_spend_usd": 0,
+    "user_laptop_forbidden": true,
+    "runtime_mutation_forbidden": true,
+    "task_execution_forbidden": true,
+    "same_task_replay_forbidden": true
+  },
+  "stop_condition": "Stop after the three stale live mirrors match the merged PR347 blocker and next action. Do not modify runtime, execute a parent task, increment capability credit, or start repair from this reconciliation."
+}
