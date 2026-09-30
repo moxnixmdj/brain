@@ -1,0 +1,297 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-GROUNDING-PROPOSAL-BINDING-CONTRACT-V1-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "probe_id": null,
+  "causal_blocker": "GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::GROUNDING_SEMANTIC_CANDIDATES_CAN_BE_INPUT_CONTRACT_UNBINDABLE_WHILE_CLAUSE_IS_MARKED_RESOLVED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Repair the reopened model-independent grounding capability so semantic candidates are ranked/admitted with executable binding-contract awareness and downstream composition consumes existing proposal_bindings, including deterministic literal/auto-path/goal-URL and provider-effect fan-in bindings.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Fresh real-task falsification run 36649042160",
+    "Registry proposal_bindings metadata",
+    "capability_proposal_generators generic binding/fan-in",
+    "closed stale PR259",
+    "jsonschema and Unified Planning challengers"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Change only generic grounding binding-affordance and proposal_bindings consumption plus independent regressions. Do not replay Requests Task A, do not promote capability, do not change scoreboard, and stop after exact-byte component verification is ready for a new fresh real task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a965ec72336dfdcb92f5a17c28b608f3b017a341",
+    "real_outcome": "Close the exact input-contract compatibility seam exposed by fresh real-task failure without task-specific literals or new planning machinery.",
+    "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "obs_goal": {
+      "real_outcome": "A grounded clause is executable enough for composition: literal affordances influence candidate selection and declared proposal_bindings are consumed generically.",
+      "proxy_goals_deleted": [
+        "Requests URL special case",
+        "new planner",
+        "model-based argument filling",
+        "replay failed task"
+      ],
+      "surviving_necessity": "Integrate the already-existing proposal_bindings contract into grounding/composition."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "BOUND_CAPABILITY_REGISTRY_V1 proposal_bindings",
+        "capability_proposal_generators._bind_planned_inputs",
+        "goal_compiler._bind_inputs",
+        "grounded_executable_composition PR255",
+        "fresh falsification run 36649042160"
+      ],
+      "external_existing_routes_checked": [
+        "python-jsonschema defaults documentation",
+        "Unified Planning explicit action-parameter model"
+      ],
+      "capability_work_deleted": [
+        "No new binding DSL",
+        "No external planner",
+        "No task-specific URL logic",
+        "No model"
+      ],
+      "surviving_gap": "PR255 grounding/composition ignores existing proposal_bindings metadata."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic integration omission.",
+      "delete_bypass_substitute_options": [
+        "Delete binding contract rejected because execution needs concrete inputs",
+        "Bypass with guessed literals rejected",
+        "Reuse proposal_bindings survives"
+      ],
+      "surviving_causal_blocker": "Semantic ranking and action rendering do not consume declared proposal_bindings."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+        "EXTEND_JSONSCHEMA_DEFAULT_FILLING",
+        "SUBSTITUTE_UNIFIED_PLANNING_PARAMETERIZATION"
+      ],
+      "losing_routes_reason": "External schema/planning systems still need Brain-specific goal/provider binding metadata; Brain already has the exact contract and binder.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Component regressions must reproduce the failed URL clause with a different fresh fixture and independently verify no unbindable semantic candidate is promoted. Real task remains fresh and unspent after repair."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ad hoc compiler-only binding in grounded composer when proposal_bindings exists",
+        "Semantic-only URL candidate promotion"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "goal_url binding",
+        "literal defaults",
+        "auto_path derivation",
+        "effect_result fan-in"
+      ],
+      "fresh_reuse_plan": "After component verification, run a new real task not using psf/requests, then materially distinct fresh reuse."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing proposal_bindings implementation",
+        "Reused fresh falsification evidence",
+        "Stopped external search when existing native route dominated"
+      ],
+      "search_stop_decision": "Brain already contains a verified generic binder contract covering every missing input class observed; external challengers add layers rather than remove the seam.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh route check completed after falsification; native proposal_bindings dominates on correctness, wall-clock, zero spend, and integration size."
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+      "EXTEND_JSONSCHEMA_DEFAULT_FILLING",
+      "SUBSTITUTE_UNIFIED_PLANNING_PARAMETERIZATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REQUESTS_LITERAL_PATCH",
+      "MODEL_ARGUMENT_FILLER",
+      "NEW_BINDING_DSL",
+      "EXTERNAL_PLANNER"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+    "why_selected_route_is_fastest_sufficient": "The registry and capability_proposal_generators already encode goal_url, literal, auto_path, effect_result and fan-in semantics; wiring them into the selected route removes the observed seam with the fewest new semantics.",
+    "expected_parent_level_state_change": "Repair the reopened model-independent grounding capability so semantic candidates are ranked/admitted with executable binding-contract awareness and downstream composition consumes existing proposal_bindings, including deterministic literal/auto-path/goal-URL and provider-effect fan-in bindings.",
+    "stop_condition": "Change only generic grounding binding-affordance and proposal_bindings consumption plus independent regressions. Do not replay Requests Task A, do not promote capability, do not change scoreboard, and stop after exact-byte component verification is ready for a new fresh real task.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T00:20:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "PR255_SEMANTIC_GROUNDING_PLUS_COMPILER_BINDING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "BOUND_CAPABILITY_REGISTRY_V1 proposal_bindings",
+          "capability_proposal_generators.py _bind_planned_inputs and fan-in",
+          "run 36649042160 falsification"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://python-jsonschema.readthedocs.io/en/v4.25.0/faq/",
+          "https://unified-planning.readthedocs.io/en/latest/notebooks/01-basic-example.html"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/python-jsonschema/jsonschema",
+          "https://github.com/aiplan4eu/unified-planning"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh web search 2026-09-30 for deterministic schema/default/action parameter binding; no route removes Brain-specific binding-contract integration."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic goal argument binding defaults provider result fan-in"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "python jsonschema defaults unified planning action parameters"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "registry-declared binding metadata versus external planning schema"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current jsonschema unified planning docs 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+          "evidence": [
+            "native proposal_bindings already covers goal_url literal auto_path effect_result",
+            "existing fan-in implementation handles repeated goal URLs"
+          ],
+          "qualification_evidence": [
+            "current main direct code inspection"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Uses declared capability contracts rather than guesses.",
+            "CAPABILITY_STRENGTH": "Covers exact observed input classes and provider fan-in.",
+            "WALL_CLOCK": "Small integration patch.",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Already exercised elsewhere in Brain.",
+            "VERIFIABILITY": "Deterministic contract can be reconstructed."
+          }
+        },
+        {
+          "route": "EXTEND_JSONSCHEMA_DEFAULT_FILLING",
+          "evidence": [
+            "jsonschema documentation states default does not automatically mutate instances without an extension"
+          ],
+          "qualification_evidence": [
+            "https://python-jsonschema.readthedocs.io/en/v4.25.0/faq/"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could apply defaults but does not solve goal URLs/provider results.",
+            "CAPABILITY_STRENGTH": "Partial.",
+            "WALL_CLOCK": "Adds schema layer.",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Established validation library.",
+            "VERIFIABILITY": "Good but incomplete."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_UNIFIED_PLANNING_PARAMETERIZATION",
+          "evidence": [
+            "Unified Planning supports explicit action parameters/preconditions/effects"
+          ],
+          "qualification_evidence": [
+            "https://unified-planning.readthedocs.io/en/latest/notebooks/01-basic-example.html"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong planning formalism.",
+            "CAPABILITY_STRENGTH": "Broader than seam.",
+            "WALL_CLOCK": "Requires translation of Brain contracts.",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Established.",
+            "VERIFIABILITY": "Good but larger surface."
+          }
+        }
+      ],
+      "negative_search_summary": "No external route removes Brain-specific literal/provider binding more directly than the already-present proposal_bindings contract.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T00:20:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_EXISTING_PROPOSAL_BINDINGS_IN_GROUNDING_AND_COMPOSITION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BOUND_CAPABILITY_REGISTRY_PROPOSAL_BINDINGS_AND_CAPABILITY_PROPOSAL_GENERATORS",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T00:20:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current main a965ec72336dfdcb92f5a17c28b608f3b017a341"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
