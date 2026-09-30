@@ -32,6 +32,7 @@ UA = "ProjectBrain-EvidenceUnitExtraction/2.0"
 _BLOCK_TAGS = {
     "h1","h2","h3","h4","h5","h6",
     "p","li","dt","dd","blockquote","td","th","pre",
+    "main","article","section","div",
 }
 _SUPPRESS = {"script","style","noscript","svg","nav","footer","header","form"}
 _STOP = {
