@@ -3,7 +3,7 @@
   "action_id": "INTERNALIZE-SUPREME-ADVANCED-CODING-20260930-V1",
   "status": "AUTHORIZED_EXECUTION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
+  "canonical_base_commit": "cd3b82ff8866e040d4f6aaf167fa8cdfcaaadcca",
   "capability_target": "ADVANCED_AGENTIC_CODING",
   "action_kind": "CAPABILITY_INTERNALIZATION",
   "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::ADVANCED_AGENTIC_CODING::STRONGER_EXPOSED_CONFIGURATION_FOUND_BEFORE_VERIFICATION",
@@ -30,7 +30,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
+    "canonical_base_commit": "cd3b82ff8866e040d4f6aaf167fa8cdfcaaadcca",
     "real_outcome": "Internalize the strongest currently identified exposed advanced-coding configuration before spending compute on Opus-level verification.",
     "required_capability": "PORTABLE_AGENTIC_SOFTWARE_ENGINEERING_METHODOLOGY",
     "obs_goal": {
@@ -125,11 +125,15 @@
     "stop_condition": "Copy the pinned configuration and root license exactly, record provenance and license ambiguity, make Supreme the leading verification candidate, and award no Opus ownership credit until direct Brain-route evaluation."
   },
   "prior_state_reconciliation": {
-    "superseding_main_commit": "9a2354d778a6aa0ace0a628786d20cb4b183e103",
-    "material_change": "SUPERPOWERS_VERIFICATION_PROTOCOL_MERGED_AS_PR556",
-    "effect_on_route": "STRENGTHENS_NEED_FOR_CHALLENGER_RACE__SUPREME_INTERNALIZATION_REMAINS_SELECTED__SUPERPOWERS_RETAINED_AS_CONTROL",
+    "superseding_main_commit": "cd3b82ff8866e040d4f6aaf167fa8cdfcaaadcca",
+    "material_changes": [
+      "PR556_SUPERPOWERS_VERIFICATION_PROTOCOL_CANONICAL",
+      "SUPERPOWERS_SESSION_WINDOW_DEBUG_DIRECT_SEMANTIC_PASS_RECORDED_WITH_ZERO_OPUS_CREDIT"
+    ],
+    "effect_on_route": "SUPREME_REMAINS_LEADING_EXPOSED_CHALLENGER__SUPERPOWERS_DIRECT_PASS_RETAINED_AS_CONTROL_EVIDENCE__NO_PREMATURE_PROMOTION",
     "stale_assumptions_deleted": [
-      "SUPERPOWERS_VERIFICATION_NOT_YET_CANONICAL"
+      "SUPERPOWERS_VERIFICATION_PROTOCOL_NOT_YET_CANONICAL",
+      "SUPERPOWERS_HAS_NO_DIRECT_TASK_EVIDENCE"
     ]
   }
 }
