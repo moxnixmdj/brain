@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__SUPERPOWERS_FALLBACK__ZERO_CREDIT_UNTIL_PASS",
+  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -624,15 +624,17 @@
     }
   ],
   "active_frontier_accounting": {
-    "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
-    "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
+    "parent_frontier_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "subcapability_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "residual_gap": "BRAIN_INTERNALIZED_SUPREME_LED_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
-    "next_required_action": "VERIFY_BRAIN_INTERNALIZED_SUPREME_LED_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__SUPERPOWERS_FALLBACK__ZERO_CREDIT_UNTIL_PASS",
-    "internalization_manifest": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/INTERNALIZATION_MANIFEST.json",
-    "comparison_configuration": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+    "residual_gap": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+    "next_required_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+    "internalization_manifest": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "falsified_prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
+    "falsification_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
+    "envelope_parent_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1"
   },
   "events": [
     {
