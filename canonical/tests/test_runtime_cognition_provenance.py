@@ -31,9 +31,32 @@ class CognitionProvenanceTests(unittest.TestCase):
         self.assertEqual(result["model_dependency_count"],2)
         self.assertEqual(result["cognition_dependency_class"],"MODEL_ASSISTED")
 
+    def test_missing_controller_mode_fails_closed(self):
+        with self.assertRaisesRegex(astra_runtime.Blocker,"COGNITION_PROVENANCE_CONTROLLER_MODE_MISSING"):
+            astra_runtime._stamp_cognition_provenance({"final_summary":"ok"})
+
+    def test_unknown_controller_mode_fails_closed(self):
+        with self.assertRaisesRegex(astra_runtime.Blocker,"COGNITION_PROVENANCE_CONTROLLER_MODE_UNKNOWN"):
+            astra_runtime._stamp_cognition_provenance({
+                "controller_mode":"UNTRUSTED_UNKNOWN_MODE",
+                "final_summary":"ok",
+            })
+
+    def test_planner_source_marks_model_dependency(self):
+        result=astra_runtime._stamp_cognition_provenance({
+            "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+            "planner_source":"external-planner",
+            "final_summary":"ok",
+        })
+        self.assertGreaterEqual(result["model_dependency_count"],1)
+        self.assertEqual(result["cognition_dependency_class"],"MODEL_ASSISTED")
+
     def test_invalid_negative_dependency_count_fails_closed(self):
-        with self.assertRaises(astra_runtime.Blocker):
-            astra_runtime._stamp_cognition_provenance({"model_dependency_count":-1})
+        with self.assertRaisesRegex(astra_runtime.Blocker,"MODEL_DEPENDENCY_COUNT_INVALID"):
+            astra_runtime._stamp_cognition_provenance({
+                "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+                "model_dependency_count":-1,
+            })
 
 
 if __name__=="__main__":
