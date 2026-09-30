@@ -65,5 +65,39 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertIsNone(out["broad_objective_decomposition"])
 
 
+    def test_multi_clause_generic_research_method_language_still_decomposes(self):
+        objective=(
+            "Assess whether the maximum rated operating temperature is greater than "
+            "the default recommended operating temperature. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Autonomously discover and verify the relevant documentation, choose and run "
+            "a zero-cost verification method, identify material limitations, independently "
+            "verify the consequential result, and produce a decision-quality answer with provenance."
+        )
+        direct=self.dec.decompose(objective)
+        self.assertEqual(direct["status"],"DECOMPOSED",direct)
+        out=self.grounding.ground(objective,{})
+        self.assertEqual(out["grounded_clause_count"],0,out)
+        self.assertGreater(len(out["unresolved_clause_indexes"]),1,out)
+        self.assertEqual(
+            out["unresolved_clause_indexes"],
+            list(range(len(out["clauses"]))),
+            out,
+        )
+        self.assertTrue(out["broad_objective_decomposition_available"],out)
+        self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+
+    def test_actual_command_recipe_remains_rejected(self):
+        out=self.dec.decompose(
+            "Assess whether two values differ and run python verify_values.py to check them"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED",out)
+        self.assertEqual(
+            out["reason"],
+            "OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE",
+            out,
+        )
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
