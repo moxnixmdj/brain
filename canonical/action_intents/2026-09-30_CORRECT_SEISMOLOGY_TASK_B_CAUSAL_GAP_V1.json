@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-SEISMOLOGY-TASK-B-FIRST-CAUSAL-GAP-20260930-V1",
+  "status": "TRUTH_ONLY_RECONCILIATION",
+  "canonical_base_commit": "8072f67289a6eea2462dd7cad2dd3991a3276734",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_EXCLUDED_FROM_RELEVANCE_AND_LIVE_EVIDENCE_ROUTE",
+  "action_kind": "PRIMARY_EVIDENCE_CAUSAL_CORRECTION",
+  "authoritative_evidence": {
+    "run_id": 36693929830,
+    "job_id": 109817291758,
+    "artifact_id": 11086898224,
+    "artifact_digest": "sha256:ad634cdf65b76e93bc9852e749b37b861b4be453e30e65b649595d0cade986d7"
+  },
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "capability_credit_delta": 0,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "selected_surviving_route": "CORRECT_FRONTIER_TO_EARLIEST_PRIMARY_EVIDENCE_DEFECT",
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "TASK_SPECIFIC_1_METER_PATCH",
+      "CLAIM_BINDER_WEAKENING",
+      "SOURCE_WHITELIST_PATCH"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The primary artifact shows the relation binder never received evidence containing the required amplitude operand; correcting the upstream provenance-class admission defect prevents work on a downstream unproven threshold seam.",
+    "stop_rule": "RECONCILE_ONLY__THEN_REPAIR_GENERIC_PROVENANCE_ADMISSION_SEAM"
+  }
+}
