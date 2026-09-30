@@ -13,12 +13,12 @@
   "expected_parent_frontier_change": "Either complete the first admissible genuinely open-ended zero-model-dependency parent real Task A with autonomous decomposition and material source/tool discovery, or localize exactly the first causal gap without replay.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "current main 797d5fbea5f230a31044006755beb98ae387134b after PR329 closed cognition-provenance/run_goal/target-mirror fail-open seams",
-    "PR318 open-ended-scope correction keeps structured demography as supporting-only evidence",
-    "current target requires genuine open-ended Task A before Task B",
-    "all older corrected-blocker Task A leases are closed/superseded",
-    "existing public verification-capsule-runner has a successful same-account standard-runner direct probe run 36668380406",
-    "no task-specific source, URL, tool, procedure, formula, or expected answer is frozen into the producer task"
+    "exact current main 797d5fbea5f230a31044006755beb98ae387134b after merged PR329 provenance and target-mirror firewall repair",
+    "PR329 changed cognition-provenance and mirror enforcement but preserved the active parent blocker and next action",
+    "PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1 reclassifies structured demography as supporting evidence only",
+    "current target still requires genuine open-ended Task A before Task B",
+    "current open-PR scan found no other valid lease owner for this exact corrected blocker; PR334 is a different stale repair lane",
+    "existing public verification-capsule-runner has a successful same-account standard-runner direct probe run 36668380406"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -132,7 +132,7 @@
       ],
       "search_stop_decision": "A current adequate execution route exists and no alternate route can produce admissible parent evidence faster than running the inherited route itself; more task-specific search before freeze would weaken the test.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Current main 797d5fbea5f230a31044006755beb98ae387134b and public carrier were refreshed before arming; refresh affected layers if main, carrier availability, or the parent contract changes before execution."
+      "challenger_refresh_decision": "Canonical main advanced to 797d5fbea5f230a31044006755beb98ae387134b via PR329. The merged change hardens runtime cognition provenance and frontier mirror enforcement without changing this parent blocker or required Task-A scope. The current hierarchy and target were re-read on exact 797d5fbea5f230a31044006755beb98ae387134b before re-arming this intent."
     },
     "routes_considered": [
       "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
@@ -153,7 +153,7 @@
     "stop_condition": "After trusted current-base lease validation, freeze one objective-only SQLite systems task with no prewired source, URL, experiment procedure, calculation, or tool sequence; execute exact bytes once with model planning disabled; on semantic success independently verify, otherwise preserve only the first causal gap and do not replay.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-30T04:40:20Z",
+      "checked_at_utc": "2026-09-30T04:44:00Z",
       "max_age_hours": 24,
       "incumbent_route": "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
       "source_classes_checked": [
@@ -166,6 +166,7 @@
         "BRAIN_INHERITED": [
           "brain main 797d5fbea5f230a31044006755beb98ae387134b",
           "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
+          "merged PR329 runtime cognition-provenance and target-mirror firewall",
           "existing acquired model-independent child stack"
         ],
         "OFFICIAL_PRIMARY": [
@@ -208,7 +209,7 @@
             "current Brain has inherited grounding/composition/source/tool/provenance machinery"
           ],
           "qualification_evidence": [
-            "BRAIN_INHERITED: main 797d5fbea5f230a31044006755beb98ae387134b",
+            "BRAIN_INHERITED: exact current main 797d5fbea5f230a31044006755beb98ae387134b",
             "DIRECT_PROBE: verification-capsule-runner run 36668380406 completed SUCCESS",
             "OFFICIAL_PRIMARY: GitHub public standard-runner and CPython sqlite3 documentation"
           ],
@@ -267,7 +268,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T04:40:20Z",
+        "checked_at_utc": "2026-09-30T04:44:00Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
         "status": "READY",
@@ -297,9 +298,9 @@
             "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T04:40:20Z",
+            "observed_at_utc": "2026-09-30T04:43:03Z",
             "evidence": [
-              "BRAIN_INHERITED: exact current main 797d5fbea5f230a31044006755beb98ae387134b refreshed immediately before intent commit"
+              "BRAIN_INHERITED: exact current main 797d5fbea5f230a31044006755beb98ae387134b after merged PR329; active parent blocker and next action revalidated unchanged"
             ],
             "evidence_classes": [
               "BRAIN_INHERITED"
