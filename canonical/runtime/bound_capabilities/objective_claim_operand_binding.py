@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Bounded objective-to-claim-spec and numeric operand binding.
+"""Bounded objective-to-claim-spec and semantic operand binding.
 
 Verified candidate scope:
-- explicit binary comparative objectives only;
-- deterministic relation grammar (GT/LT and common lexical variants);
+- exact quoted-claim support requests;
+- explicit binary numeric comparisons using GT/LT/GTE/LTE/EQ/NE;
+- explicit absolute-difference-at-most comparisons;
 - unique lexical binding of left/right entity phrases to distinct generic V2
   evidence units;
-- unique compatible numeric-literal pair with exact unit surface agreement;
-- composition into the already-verified generic evidence claim/relation
-  evaluator.
+- unique exact-unit-compatible numeric-literal binding;
+- composition into the already-verified generic V2 claim/relation evaluator.
 
 This module does not infer paraphrases, factual truth, causality, unit
 conversion, evidence sufficiency, or latent semantic roles outside the bounded
-explicit-comparison grammar.
+explicit grammar. Ambiguity fails closed.
 """
 from __future__ import annotations
 
@@ -23,24 +23,44 @@ import re
 SCHEMA="PROJECT_BRAIN_OBJECTIVE_CLAIM_SPEC_OPERAND_BINDING_V1"
 
 _STOP={
- "a","an","and","are","as","at","be","by","compare","determine","does","for",
- "from","higher","greater","larger","lower","less","below","exceed","exceeds",
- "find","in","is","it","of","on","or","than","that","the","this","to","was",
- "were","whether","which","with","assess","investigate","verify",
+ "a","an","and","are","as","at","be","by","check","compare","determine","does",
+ "for","from","higher","greater","larger","lower","less","smaller","below",
+ "exceed","exceeds","exceeded","equal","equals","same","different","differs",
+ "differ","difference","least","most","more","no","find","in","is","it","of",
+ "on","or","than","that","the","this","to","was","were","whether","which",
+ "with","assess","investigate","verify","source","evidence","states","contains",
+ "includes","says","exact","text","claim",
 }
 _WORD=re.compile(r"[a-z0-9][a-z0-9._+-]*")
+_NUM_SURFACE=(
+ r"[-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)"
+ r"(?:\.\d+)?(?:[eE][-+]?\d+)?"
+ r"(?:\s*[%A-Za-zµμ°][A-Za-z0-9µμ°/%^·*._-]{0,31})?"
+)
 _NUM=re.compile(
-    r"(?<![A-Za-z0-9_.])"
-    r"([-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?)"
-    r"(?:\s*([%A-Za-zµμ°][A-Za-z0-9µμ°/%^·*._-]{0,31}))?"
+ r"(?<![A-Za-z0-9_.])"
+ r"([-+]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+|\.\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?)"
+ r"(?:\s*([%A-Za-zµμ°][A-Za-z0-9µμ°/%^·*._-]{0,31}))?"
 )
 
-_PATTERNS=[
- (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:higher|greater|larger)\s+than\s+(.+?)(?:[?.]|$)",re.I),"GT"),
- (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:lower|less)\s+than\s+(.+?)(?:[?.]|$)",re.I),"LT"),
- (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+below\s+(.+?)(?:[?.]|$)",re.I),"LT"),
- (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:exceeds|exceeded)\s+(.+?)(?:[?.]|$)",re.I),"GT"),
- (re.compile(r"\bdoes\s+(.+?)\s+exceed\s+(.+?)(?:[?.]|$)",re.I),"GT"),
+# Order matters: more specific forms precede more general comparison forms.
+_RELATION_PATTERNS=[
+ (re.compile(r"\b(?:determine|check|verify|assess|investigate|find)?\s*(?:whether\s+)?(.+?)\s+and\s+(.+?)\s+differ\s+by\s+(?:at\s+most|no\s+more\s+than)\s+("+_NUM_SURFACE+r")(?:[?.]|$)",re.I),"ABS_DIFF_LTE",3),
+ (re.compile(r"\b(?:determine|check|verify|assess|investigate|find)?\s*(?:whether\s+)?(?:the\s+)?difference\s+between\s+(.+?)\s+and\s+(.+?)\s+(?:is|was)\s+(?:at\s+most|no\s+more\s+than)\s+("+_NUM_SURFACE+r")(?:[?.]|$)",re.I),"ABS_DIFF_LTE",3),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:at\s+least|no\s+less\s+than)\s+(.+?)(?:[?.]|$)",re.I),"GTE",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:at\s+most|no\s+more\s+than)\s+(.+?)(?:[?.]|$)",re.I),"LTE",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:not\s+equal\s+to|different\s+from)\s+(.+?)(?:[?.]|$)",re.I),"NE",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+differs\s+from\s+(.+?)(?:[?.]|$)",re.I),"NE",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:equal\s+to|the\s+same\s+as)\s+(.+?)(?:[?.]|$)",re.I),"EQ",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:higher|greater|larger)\s+than\s+(.+?)(?:[?.]|$)",re.I),"GT",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+(?:lower|less|smaller)\s+than\s+(.+?)(?:[?.]|$)",re.I),"LT",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:is|was|are|were)\s+below\s+(.+?)(?:[?.]|$)",re.I),"LT",None),
+ (re.compile(r"\b(?:whether\s+)?(.+?)\s+(?:exceeds|exceeded)\s+(.+?)(?:[?.]|$)",re.I),"GT",None),
+ (re.compile(r"\bdoes\s+(.+?)\s+exceed\s+(.+?)(?:[?.]|$)",re.I),"GT",None),
+]
+_QUOTED=[
+ re.compile(r'\b(?:verify|check|determine)\s+(?:whether\s+)?(?:the\s+)?(?:source|evidence)\s+(?:states|contains|includes|says)\s+["“]([^"”]+)["”]',re.I),
+ re.compile(r'\b(?:verify|check)\s+(?:the\s+)?exact\s+(?:text|claim)\s+["“]([^"”]+)["”]',re.I),
 ]
 
 def _canon(value):
@@ -58,33 +78,55 @@ def _tokens(value):
 
 def _clean_entity(value):
     text=_canon(value)
-    text=re.sub(r"^(?:determine|assess|investigate|verify|find)\s+(?:whether\s+)?","",text,flags=re.I)
+    text=re.sub(
+      r"^(?:determine|check|assess|investigate|verify|find)\s+(?:whether\s+)?",
+      "",text,flags=re.I,
+    )
     return text.strip(" ,:;-")
 
 def _parse_objective(objective):
     objective=_canon(objective)
+    quoted=[]
+    for rx in _QUOTED:
+        m=rx.search(objective)
+        if m:
+            claim=_canon(m.group(1))
+            if claim and claim not in quoted:
+                quoted.append(claim)
+    if quoted:
+        if len(quoted)!=1:
+            return None,"OBJECTIVE_CLAIM_AMBIGUOUS"
+        return {"mode":"VERBATIM_SUPPORT","claim_text":quoted[0]},None
+
     matches=[]
-    for rx,op in _PATTERNS:
+    for rx,op,threshold_group in _RELATION_PATTERNS:
         m=rx.search(objective)
         if not m:
             continue
         left=_clean_entity(m.group(1)); right=_clean_entity(m.group(2))
-        if left and right:
-            matches.append((op,left,right))
-    unique=[]
-    for row in matches:
-        if row not in unique:
-            unique.append(row)
-    if len(unique)!=1:
+        threshold=_canon(m.group(threshold_group)) if threshold_group else None
+        row=(op,left,right,threshold)
+        if left and right and row not in matches:
+            matches.append(row)
+    if len(matches)!=1:
         return None,"OBJECTIVE_RELATION_AMBIGUOUS_OR_UNSUPPORTED"
-    op,left,right=unique[0]
+    op,left,right,threshold=matches[0]
     lt,rt=_tokens(left),_tokens(right)
     if not lt or not rt:
         return None,"OBJECTIVE_ENTITY_TOKENS_REQUIRED"
     if set(lt)==set(rt):
         return None,"OBJECTIVE_ENTITY_ROLES_NOT_DISTINCT"
-    return {"operator":op,"left_entity":left,"right_entity":right,
-            "left_tokens":lt,"right_tokens":rt},None
+    out={
+      "mode":"NUMERIC_RELATION",
+      "operator":op,
+      "left_entity":left,
+      "right_entity":right,
+      "left_tokens":lt,
+      "right_tokens":rt,
+    }
+    if threshold is not None:
+        out["threshold"]=threshold
+    return out,None
 
 def _validated_units(extraction):
     if not isinstance(extraction,dict):
@@ -96,8 +138,7 @@ def _validated_units(extraction):
     rows=extraction.get("evidence_units")
     if not isinstance(rows,list) or not rows:
         raise ValueError("EVIDENCE_UNITS_REQUIRED")
-    out=[]
-    seen=set()
+    out=[]; seen=set()
     for row in rows:
         if not isinstance(row,dict):
             raise ValueError("EVIDENCE_UNIT_INVALID")
@@ -117,6 +158,9 @@ def _bind_role(units,entity_tokens):
         if not overlap:
             continue
         coverage=len(overlap)/len(target)
+        # Same scoring shape as Brain's prior scalar semantic binder:
+        # exact token evidence dominates; shorter evidence units break weak
+        # lexical ties only after overlap and coverage.
         scored.append((len(overlap),coverage,-len(row["tokens"]),row,sorted(overlap)))
     if not scored:
         return None,"NO_EVIDENCE_UNIT_FOR_ENTITY"
@@ -143,6 +187,8 @@ def _numbers(text):
           "surface":m.group(0).strip(),
           "number_surface":m.group(1),
           "unit":unit,
+          "char_start":m.start(),
+          "char_end":m.end(),
         })
     return rows
 
@@ -157,6 +203,7 @@ def _choose_pair(left_binding,right_binding):
                 pairs.append((a,b))
     if not pairs:
         return None,"NO_EXACT_UNIT_COMPATIBLE_OPERAND_PAIR"
+    # Prefer an explicit shared unit surface over unitless decoys such as years.
     nonempty=[p for p in pairs if p[0]["unit"]]
     pool=nonempty if nonempty else pairs
     if len(pool)!=1:
@@ -180,13 +227,35 @@ def _load_evaluator():
     spec.loader.exec_module(module)
     return module
 
+def _bind_verbatim(parsed,units):
+    claim=_canon(parsed.get("claim_text"))
+    needle=claim.casefold()
+    matches=[u for u in units if needle in u["text"].casefold()]
+    if not matches:
+        return None,"EXACT_QUOTED_CLAIM_NOT_FOUND"
+    if len(matches)!=1:
+        return None,"EXACT_QUOTED_CLAIM_EVIDENCE_AMBIGUOUS"
+    spec={
+      "mode":"VERBATIM_SUPPORT",
+      "claim_text":claim,
+      "evidence_unit_id":matches[0]["evidence_unit_id"],
+    }
+    return {
+      "relation_spec":spec,
+      "claim_binding":{
+        "evidence_unit_id":matches[0]["evidence_unit_id"],
+        "claim_text":claim,
+        "binding_method":"EXACT_NORMALIZED_SUBSTRING",
+      },
+    },None
+
 def bind(objective,extraction,evaluate_relation=True):
     objective=_canon(objective)
     base={
       "schema":SCHEMA,
       "objective":objective or None,
       "status":"UNBOUND",
-      "binding_scope":"BOUNDED_EXPLICIT_BINARY_COMPARISON_WITH_UNIQUE_LEXICAL_ROLE_BINDING",
+      "binding_scope":"BOUNDED_EXPLICIT_COMPARISON_OR_EXACT_QUOTED_CLAIM_WITH_UNIQUE_EVIDENCE_BINDING",
       "semantic_entailment_status":"UNVERIFIED",
       "factual_correctness_status":"UNVERIFIED",
       "causality_status":"UNVERIFIED",
@@ -201,38 +270,59 @@ def bind(objective,extraction,evaluate_relation=True):
     if reason:
         return {**base,"reason":reason}
     units=_validated_units(extraction)
-    left,reason=_bind_role(units,parsed["left_tokens"])
-    if reason:
-        return {**base,"reason":"LEFT_"+reason,"parsed_objective":parsed}
-    right,reason=_bind_role(units,parsed["right_tokens"])
-    if reason:
-        return {**base,"reason":"RIGHT_"+reason,"parsed_objective":parsed}
-    if left["evidence_unit_id"]==right["evidence_unit_id"]:
-        return {**base,"reason":"LEFT_RIGHT_ROLE_COLLISION","parsed_objective":parsed}
-    pair,reason=_choose_pair(left,right)
-    if reason:
-        return {**base,"reason":reason,"parsed_objective":parsed,
-                "left_binding":left,"right_binding":right}
-    relation_spec={
-      "mode":"NUMERIC_RELATION",
-      "operator":parsed["operator"],
-      "left":pair["left"],
-      "right":pair["right"],
-    }
-    result={
-      **base,
-      "status":"CLAIM_SPEC_AND_OPERANDS_BOUND",
-      "parsed_objective":parsed,
-      "left_binding":left,
-      "right_binding":right,
-      "operand_pair":pair,
-      "relation_spec":relation_spec,
-      "output_verified":True,
-    }
+
+    if parsed["mode"]=="VERBATIM_SUPPORT":
+        bound,reason=_bind_verbatim(parsed,units)
+        if reason:
+            return {**base,"reason":reason,"parsed_objective":parsed}
+        result={
+          **base,
+          "status":"CLAIM_SPEC_BOUND",
+          "parsed_objective":parsed,
+          **bound,
+          "output_verified":True,
+        }
+    else:
+        left,reason=_bind_role(units,parsed["left_tokens"])
+        if reason:
+            return {**base,"reason":"LEFT_"+reason,"parsed_objective":parsed}
+        right,reason=_bind_role(units,parsed["right_tokens"])
+        if reason:
+            return {**base,"reason":"RIGHT_"+reason,"parsed_objective":parsed}
+        if left["evidence_unit_id"]==right["evidence_unit_id"]:
+            return {**base,"reason":"LEFT_RIGHT_ROLE_COLLISION","parsed_objective":parsed}
+        pair,reason=_choose_pair(left,right)
+        if reason:
+            return {**base,"reason":reason,"parsed_objective":parsed,
+                    "left_binding":left,"right_binding":right}
+        relation_spec={
+          "mode":"NUMERIC_RELATION",
+          "operator":parsed["operator"],
+          "left":pair["left"],
+          "right":pair["right"],
+        }
+        if parsed.get("threshold") is not None:
+            relation_spec["threshold"]=parsed["threshold"]
+        result={
+          **base,
+          "status":"CLAIM_SPEC_AND_OPERANDS_BOUND",
+          "parsed_objective":parsed,
+          "left_binding":left,
+          "right_binding":right,
+          "operand_pair":pair,
+          "relation_spec":relation_spec,
+          "output_verified":True,
+        }
+
     if evaluate_relation:
         evaluator=_load_evaluator()
-        result["relation_result"]=evaluator.evaluate(extraction,relation_spec)
-        if result["relation_result"].get("status")!="NUMERIC_RELATION_VERIFIED":
+        result["relation_result"]=evaluator.evaluate(extraction,result["relation_spec"])
+        status=str(result["relation_result"].get("status") or "")
+        if status not in {
+          "NUMERIC_RELATION_VERIFIED",
+          "EXACT_TEXT_SUPPORT_VERIFIED",
+          "EXACT_TEXT_SUPPORT_NOT_VERIFIED",
+        }:
             raise ValueError("VERIFIED_RELATION_EVALUATOR_DID_NOT_VERIFY")
     return result
 
