@@ -234,10 +234,10 @@
             "PR318 scope correction and prior structured-task history"
           ],
           "qualification_evidence": [
-            "BRAIN_INHERITED: PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1"
+            "INDEPENDENT_VERIFIER: PR318 scope adjudication preserved the structured demography result but revoked open-ended parent admissibility because the research recipe was predeclared."
           ],
           "qualification_evidence_classes": [
-            "BRAIN_INHERITED"
+            "INDEPENDENT_VERIFIER"
           ],
           "resolution": "NON_DOMINATING",
           "comparison": {
