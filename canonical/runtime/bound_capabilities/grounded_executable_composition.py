@@ -161,6 +161,16 @@ def compose(goal,grounding,registry,compiler,root,verified_initial_facts=None):
                             slot["provider_id"],slot["provider_entry"]
                         )
 
+            path_placeholders=sorted(
+                str(x) for x in compiler._placeholders(entry.get("action_template") or {})
+                if str(x).endswith("_path") or str(x).endswith("_paths")
+            )
+            if provider_map and path_placeholders and not entry.get("proposal_bindings"):
+                raise CompositionError(
+                    "CAUSAL_PATH_PROVENANCE_BINDING_REQUIRED:"
+                    +cid+":"+",".join(path_placeholders)
+                )
+
             try:
                 if entry.get("proposal_bindings"):
                     inputs,binding_evidence=proposal_binder._bind_planned_inputs(
