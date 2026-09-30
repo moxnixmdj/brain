@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Execute the already-frozen fresh SQLite open-ended parent Task A exactly once through the qualified canonical ASTRA CLI carrier; preserve only the first integrated causal gap on failure and never replay the task.",
+    "objective": "Resolve the generic open-ended autonomous capability-acquisition failure exposed by the spent SQLite parent task, beginning with OBS reuse of already-present local runtime and verified bound capabilities before any discovery/contract repair.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "FRESH_OPEN_ENDED_PARENT_TASK_A_REQUIRED_AFTER_CARRIER_MISSION_ORIGIN_VALIDATION",
-    "evidence_path": "canonical/capabilities/obsolescence/CARRIER_MISSION_ORIGIN_CANARY_RECONCILIATION_20260930_V1.json",
-    "repair_status": "CANONICAL_MISSION_ORIGIN_VALIDATED__FRESH_SQLITE_TASK_A_FROZEN_UNSPENT__NO_PARENT_EXECUTION_YET",
-    "prohibition": "NO_MAUNA_REPLAY_OR_RENAME_AS_FRESH__NO_SQLITE_REPLAY_AFTER_EXECUTION_START__NO_PARENT_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_RESEARCH_RECIPE__NO_DIRECT_GOAL_COMPILER_HARNESS",
-    "next_action": "EXECUTE_FROZEN_SQLITE_OPEN_ENDED_TASK_A_EXACTLY_ONCE_THROUGH_CANONICAL_ASTRA_CLI_CARRIER__STOP_ON_FIRST_CAUSAL_GAP__NO_SAME_TASK_REPLAY",
+    "exact_blocker": "OPEN_ENDED_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_COMPATIBLE_SUPPLIER_CONTRACT",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPEN_ENDED_TASK_A_FIRST_SPEND_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "repair_status": "SQLITE_PARENT_TASK_A_SPENT__FIRST_INTEGRATED_ACQUISITION_GAP_LOCALIZED__NO_PARENT_CREDIT__DUPLICATE_RACE_QUARANTINED",
+    "prohibition": "NO_SQLITE_REPLAY__NO_THERMOPHYSICS_REUSE_AS_FRESH__NO_TASK_SPECIFIC_SQLITE_PACKAGE_HINT__NO_SOURCE_OR_TOOL_PREWIRING_FROM_FAILED_TASK__NO_BLIND_DISCOVERY_RETUNING__NO_GENERIC_REPAIR_WITHOUT_REUSE_SEARCH__NO_PARENT_PROMOTION_FROM_FAILED_OR_DUPLICATE_RUNS",
+    "next_action": "OBS_NO_COMPATIBLE_SUPPLIER_CONTRACT__SEARCH_REUSE_EXISTING_LOCAL_RUNTIME_AND_VERIFIED_BOUND_CAPABILITIES_BEFORE_REPAIR__QUALIFY_MINIMUM_GENERIC_DISCOVERY_OR_CONTRACT_ROUTE__NO_SQLITE_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -116,11 +116,15 @@
       "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
       "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
       "domain": "SOFTWARE_SYSTEMS_DATABASE_CONCURRENCY_AND_BACKUP_CORRECTNESS",
-      "status": "FROZEN_UNSPENT",
-      "execution_count": 0,
+      "status": "SPENT__FAILED_AT_AUTONOMOUS_CAPABILITY_ACQUISITION__NO_REPLAY",
+      "execution_count": 1,
       "replay_allowed": false,
-      "required_entrypoint": "canonical/runtime/astra_runtime.py <canonical mission path>"
-    }
+      "first_spend_run_id": 36674086293,
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_SQLITE_OPEN_ENDED_TASK_A_FIRST_SPEND_TERMINAL_RECONCILIATION_20260930_V1.json"
+    },
+    "latest_parent_open_ended_first_spend_run_id": 36674086293,
+    "latest_parent_open_ended_first_spend_artifact_id": 11078414137,
+    "latest_parent_open_ended_first_spend_artifact_digest": "sha256:bf3b9d5e3708f72aa3bfed8ff23b144512b78d298024b0ecccdcf5d22aa15b56"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
