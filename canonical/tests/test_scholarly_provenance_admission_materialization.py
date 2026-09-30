@@ -64,8 +64,10 @@ class FakeVerifier:
             "final_url":candidate["url"],
             "final_host":"weak.example",
         }
-    def materialize(self,candidate,timeout=15):
+    def materialize_retrieval(self,candidate,bibliographic_verification,timeout=15):
         self.materialize_calls.append(candidate["url"])
+        if bibliographic_verification.get("status")!="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
+            raise AssertionError("BIBLIOGRAPHIC_RECEIPT_REQUIRED")
         if not self.materialize_ok:
             return {
                 "status":"UNVERIFIED",
@@ -102,6 +104,10 @@ class FakeRelevance:
             "output_verified":True,
             "objective":objective,
             "top_candidate_original_index":self.selected_index,
+            "top_candidate_admission":{
+                "method":"FOCUSED_QUERY_TOKEN_COVERAGE_V1",
+                "verified":True,
+            },
             "ranked_candidates":rows,
         }
 
@@ -206,18 +212,49 @@ class ScholarlyAdmissionMaterializationTests(unittest.TestCase):
                 200,
                 "https://publisher.example/article",
             )
-        out=self.prov.materialize(
-            {"url":"https://doi.org/10.1234/example","doi":"10.1234/example"},
-            timeout=9,
-            fetch=fake_fetch,
-        )
+        old=self.prov._fetch
+        self.prov._fetch=fake_fetch
+        try:
+            out=self.prov.materialize_retrieval(
+                {"url":"https://doi.org/10.1234/example","doi":"10.1234/example"},
+                {
+                    "status":"BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+                    "candidate_url":"https://doi.org/10.1234/example",
+                    "doi":"10.1234/example",
+                    "record_title":"Example article",
+                    "verification_method":"CROSSREF_DOI_RECORD",
+                },
+                timeout=9,
+            )
+        finally:
+            self.prov._fetch=old
         self.assertEqual(out["status"],"RETRIEVAL_PROVENANCE_VERIFIED")
-        self.assertEqual(out["verification_method"],"SELECTED_CANDIDATE_LIVE_HTTP_MATERIALIZATION")
-        self.assertTrue(out["bibliographic_identity_preserved"])
+        self.assertEqual(out["verification_method"],"BIBLIOGRAPHIC_SELECTED_LIVE_MATERIALIZATION")
+        self.assertEqual(out["bibliographic_provenance_status"],"VERIFIED")
         self.assertEqual(out["authority_status"],"RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED")
         self.assertEqual(out["primary_source_status"],"UNVERIFIED")
         self.assertEqual(out["final_url"],"https://publisher.example/article")
         self.assertEqual(seen["url"],"https://doi.org/10.1234/example")
+
+    def test_relevance_admission_failure_stops_before_source_selection(self):
+        objective="Assess whether a broad technical subject has a specific measured outcome."
+        verifier,relevance,extractor=self.install(selected_index=0,materialize_ok=True)
+        original_rank=relevance.rank
+        def weak_rank(objective,candidates):
+            out=original_rank(objective,candidates)
+            out["top_candidate_admission"]={
+                "method":"FOCUSED_QUERY_TOKEN_COVERAGE_V1",
+                "verified":False,
+                "matched_term_count":1,
+                "required_matched_term_count":2,
+            }
+            return out
+        relevance.rank=weak_rank
+        out=self.front.run(objective,decomposition(objective))
+        self.assertEqual(out["status"],"SOURCE_FRONTEND_READY",out)
+        self.assertEqual(out["relevance_verified_candidate_count"],0,out)
+        self.assertEqual(verifier.materialize_calls,[])
+        self.assertEqual(extractor.calls,[])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
