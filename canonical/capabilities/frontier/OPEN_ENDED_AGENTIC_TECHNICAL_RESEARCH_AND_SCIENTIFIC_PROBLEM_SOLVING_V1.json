@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__SOURCE_ADMISSION_REPAIR_GUARD_QUALIFIED_MERGED__FRESH_TASK_C_REQUIRED__NO_PARENT_CREDIT",
+  "status": "FRONTIER_BAR_DEFINED__MATERIALS_TASK_C_SPENT__METADATA_REFINED_PROVENANCE_CLASS_GAP_LOCALIZED__NO_PARENT_CREDIT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -86,8 +86,8 @@
     "first_causal_gap": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_SEISMOLOGY_TASK_B_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
   },
-  "obsolescence_status": "NOT_YET_PROVEN__SEISMOLOGY_TASK_B_SPENT__SOURCE_ADMISSION_ROOT_CAUSE_REOPENED",
-  "residual_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+  "obsolescence_status": "NOT_YET_PROVEN__MATERIALS_TASK_C_SPENT__METADATA_REFINED_PROVENANCE_CLASS_GAP_LOCALIZED",
+  "residual_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -192,7 +192,7 @@
       "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
     }
   ],
-  "next_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SEISMOLOGY_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP",
+  "next_action": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -379,25 +379,23 @@
     "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
   },
   "last_frontier_reconciliation": {
-    "status": "SOURCE_ADMISSION_REPAIR_GUARD_QUALIFIED_AND_MERGED__FRESH_TASK_C_REQUIRED",
-    "previous_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
-    "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+    "status": "MATERIALS_TASK_C_SPENT__METADATA_REFINED_FALLBACK_REINTRODUCED_BIBLIOGRAPHIC_PROVENANCE_EXCLUSION__NO_PARENT_CREDIT",
+    "previous_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+    "blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
     ],
-    "parent_capability_promoted": false,
-    "counter_delta": 0,
-    "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "spent_parent_task": "PARENT-SEISMOLOGY-KAMCHATKA-TSUNAMI-OPEN-RESEARCH-TASK-B-20260930-002",
-    "spent_parent_run_id": 36693929830,
-    "spent_parent_replay_allowed": false
+    "spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
+    "spent_parent_run_id": 36698638943,
+    "spent_parent_replay_allowed": false,
+    "parent_capability_promoted": false
   },
   "next_parent_validation": {
-    "status": "READY_FOR_FRESH_MATERIALLY_DIFFERENT_TASK_C",
-    "requirement": "Freeze and execute one new genuinely open-ended parent task using the inherited qualified route; no predeclared source, values, formula, command or solution recipe.",
+    "status": "BLOCKED_ON_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION_REPAIR",
+    "requirement": "Repair and independently guard-qualify the one metadata-refined fallback so it preserves all provenance-verified candidate classes through relevance and selected-only materialization. Do not replay materials Task C.",
     "replay_allowed": false,
-    "stop_rule": "NO_SEISMOLOGY_REPLAY__STOP_ON_FIRST_NEW_CAUSAL_GAP",
-    "after_pass": "If the parent completes and independent verification passes, promote only the proven parent scope; otherwise localize the first new generic gap."
+    "stop_rule": "NO_MATERIALS_TASK_C_REPLAY__REPAIR_GENERIC_REFINED_FALLBACK_ONLY",
+    "after_pass": "Freeze one new materially different parent task on the inherited repaired route."
   },
   "last_qualified_repair": {
     "capability_id": "MODEL_INDEPENDENT_SCHOLARLY_PROVENANCE_ADMISSION_SELECTED_SOURCE_MATERIALIZATION_AND_BOUNDED_METADATA_REFINEMENT_V1",
@@ -407,5 +405,14 @@
     "qualification_run_id": 36697424705,
     "artifact_id": 11088004744,
     "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json"
+  },
+  "evidence_C": {
+    "status": "SPENT__BLOCKED__NO_REPLAY",
+    "task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
+    "domain": "MATERIALS_ENGINEERING_THERMOPHYSICAL_PROPERTY_COMPARATIVE_RESEARCH",
+    "run_id": 36698638943,
+    "artifact_id": 11089076913,
+    "first_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
   }
 }

@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MATERIALS-TASK-C-METADATA-REFINED-PROVENANCE-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "5bccb9484a34d43f7f9bb24d7f9cd9ac996e8e83",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "expected_parent_frontier_change": "Mark materials Task C spent/no-replay, localize the refined-fallback provenance-class information-loss seam, award zero parent credit, and authorize only one generic non-parent repair/qualification next.",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "FRESH_PARENT_TASK_C_SPENT__PRIMARY_TERMINAL_ARTIFACT_INSPECTED__FIRST_GENERIC_GAP_EXACTLY_LOCALIZED",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "real_outcome": "Preserve provenance-verified scholarly candidates through the one metadata-refined fallback exactly as the initial path already does.",
+    "selected_surviving_route": "REPAIR_REFINED_FALLBACK_TO_REUSE_PROVENANCE_CLASS_PRESERVING_RELEVANCE_AND_SELECTED_ONLY_MATERIALIZATION",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "NEW_SEARCH_ENGINE",
+      "MODEL_RERANKER",
+      "SOURCE_WHITELIST",
+      "UNBOUNDED_RETRY",
+      "TASK_SPECIFIC_6061_OR_304_PATCH"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The terminal artifact shows the relevant bibliographic record is already discovered and verified; only the refined fallback drops it before relevance.",
+    "stop_rule": "RECONCILE_TRUTH_ONLY__THEN_REPAIR_AND_INDEPENDENTLY_GUARD_QUALIFY_EXACT_BYTES__NO_PARENT_REPLAY"
+  }
+}
