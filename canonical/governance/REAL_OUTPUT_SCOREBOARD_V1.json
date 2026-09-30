@@ -630,7 +630,7 @@
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "fresh_task_id": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
-    "fresh_task_blob_sha": "39ed2897a377914876afb97e2bb0d5cb9f3036a8",
+    "fresh_task_blob_sha": "592732d21f72c1344b82640f99fb50c9ea6ece78",
     "execution_count": 1,
     "replay_allowed": false,
     "residual_gap": "MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL_V1",
@@ -657,7 +657,7 @@
     },
     "last_spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
     "last_spent_parent_run_id": 36698638943,
-    "next_required_action": "FREEZE_AND_RUN_NEW_MATERIALLY_DIFFERENT_GENUINELY_OPEN_ENDED_PARENT_TASK_C__NO_SEISMOLOGY_REPLAY__NO_PREDECLARED_SOURCE_OR_VALUES__STOP_ON_FIRST_NEW_CAUSAL_GAP"
+    "next_required_action": "RECONCILE_AND_REPAIR_GENERIC_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL__NO_MATERIALS_TASK_C_REPLAY"
   },
   "events": [
     {
@@ -778,13 +778,18 @@
     "residual_gap_credit_delta": 1
   },
   "last_frontier_reconciliation": {
-    "status": "SOURCE_ADMISSION_REPAIR_GUARD_QUALIFIED_AND_MERGED__FRESH_TASK_C_REQUIRED",
-    "previous_blocker": "OPEN_RESEARCH_SCHOLARLY_PROVENANCE_ADMISSION_AND_SELECTED_SOURCE_LIVE_MATERIALIZATION_INSUFFICIENT",
-    "blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+    "status": "MATERIALS_TASK_C_SPENT__SELECTED_SOURCE_MATERIALIZATION_BLOCKED",
+    "previous_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_C_REQUIRED",
+    "blocker": "MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL_V1",
     "evidence_paths": [
-      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json"
+      "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json"
     ],
+    "spent_parent_task": "PARENT-MATERIALS-THERMAL-CONDUCTIVITY-OPEN-RESEARCH-TASK-C-20260930-003",
+    "spent_parent_run_id": 36698638943,
+    "spent_parent_replay_allowed": false,
     "parent_capability_promoted": false,
-    "counter_delta": 0
+    "counter_delta": {
+      "residual_gaps_localized": 1
+    }
   }
 }
