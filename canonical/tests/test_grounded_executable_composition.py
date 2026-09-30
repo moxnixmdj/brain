@@ -27,6 +27,10 @@ planner=load(
     "project_brain_capability_planner_composition_test",
     ROOT/"runtime"/"capability_planner.py",
 )
+real_compiler=load(
+    "project_brain_goal_compiler_composition_provenance_test",
+    ROOT/"runtime"/"goal_compiler.py",
+)
 
 class FakeCompiler:
     class GoalCompilationFailure(RuntimeError):
@@ -178,6 +182,93 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
         self.assertEqual(
             result["problem"]["initial_facts"],
             ["external.unverified.ready"],
+        )
+
+    def test_decision_verifier_paths_use_explicit_upstream_provenance(self):
+        raw=__import__("json").loads(
+            (ROOT/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text(encoding="utf-8")
+        )
+        registry=real_compiler._platform_admissible_registry(raw["capabilities"])
+        source_path="canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        output_path="canonical/astra_runtime/tmp/TEST_DECISION_PROVENANCE_OUTPUT.json"
+        goal=(
+            "Using typed decision evidence at "+source_path+
+            ", synthesize the decision to "+output_path+
+            ". Then independently verify the decision result."
+        )
+        grounding={
+          "schema":"PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+          "goal":goal,
+          "goal_sha256":__import__("hashlib").sha256(goal.encode()).hexdigest(),
+          "clauses":[
+            {
+              "index":0,
+              "text":"Using typed decision evidence at "+source_path+", synthesize the decision to "+output_path+".",
+              "status":"GROUNDED",
+              "candidates":[{"capability_id":"decision.synthesis.typed.stdlib","matched_distinctive_tokens":["decision","synthesis"]}],
+              "output_contract":{"paths":[output_path]},
+            },
+            {
+              "index":1,
+              "text":"Then independently verify the decision result.",
+              "status":"GROUNDED",
+              "candidates":[{"capability_id":"decision.synthesis.verify.stdlib","matched_distinctive_tokens":["decision","verify"]}],
+              "output_contract":{"paths":[]},
+            },
+          ],
+          "grounded_clause_count":2,
+          "unresolved_clause_indexes":[],
+          "candidate_capability_ids":[
+            "decision.synthesis.typed.stdlib",
+            "decision.synthesis.verify.stdlib",
+          ],
+          "input_contract_bindability_enforced":True,
+          "model_dependency_count":0,
+        }
+        result=composition.compose(
+            goal,grounding,registry,real_compiler,REPO_ROOT,
+            verified_initial_facts=["structured.decision_evidence.available"],
+        )
+        ok,reason=verifier.verify(
+            goal,result,grounding,registry,
+            verified_initial_facts=["structured.decision_evidence.available"],
+        )
+        self.assertTrue(ok,reason)
+
+        consumer=[
+            x for x in result["problem"]["capabilities"]
+            if x["source_capability_id"]=="decision.synthesis.verify.stdlib"
+        ][0]
+        source_ref=consumer["inputs"]["input_path"]
+        result_ref=consumer["inputs"]["result_path"]
+        self.assertEqual(source_ref,{
+            "$effect_result":{
+                "effect":"decision.synthesis.typed",
+                "field":"input_path",
+            }
+        })
+        self.assertEqual(result_ref,{
+            "$effect_result":{
+                "effect":"decision.synthesis.typed",
+                "field":"output_path",
+            }
+        })
+        self.assertNotEqual(
+            source_ref["$effect_result"]["field"],
+            result_ref["$effect_result"]["field"],
+        )
+
+        planned=planner.plan_actions(result["problem"])
+        actions=[x for x in planned["actions"] if x.get("type")!="finish"]
+        verify_action=[
+            x for x in actions
+            if x.get("args",{}).get("capability_id")=="decision.synthesis.verify.stdlib"
+        ][0]
+        self.assertEqual(verify_action["args"]["input_path"]["$result"]["field"],"input_path")
+        self.assertEqual(verify_action["args"]["result_path"]["$result"]["field"],"output_path")
+        self.assertEqual(
+            verify_action["args"]["input_path"]["$result"]["cycle"],
+            verify_action["args"]["result_path"]["$result"]["cycle"],
         )
 
     def test_independent_verifier_rejects_tampered_action(self):
