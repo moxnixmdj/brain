@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_PATH_INTEGRATION_QUALIFICATION_V1",
+  "status": "VERIFIED_PARENT_PATH_INTEGRATION__GUARDED_RED_GREEN_NON_PARENT_PASS",
+  "checked_on": "2026-09-30",
+  "canonical_base_commit": "68cfedf4534420d111ee3b665106d342d237683c",
+  "qualified_candidate": {
+    "runtime_git_blob": "426ffe58e405dc4f1ba2eb4e838e03a1df771964",
+    "frontend_git_blob": "1ec11496aa84f261fc2c7e8e689ba687581d8b3c",
+    "regression_git_blob": "7e519760ec5fdfcee6ded8ca99e955e07ccbd08f",
+    "inherited_claim_binder_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+    "inherited_relation_git_blob": "d66a7eb30774f66160b698d8082947776888293d"
+  },
+  "tdd_red": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 169,
+    "run_id": 36687982814,
+    "job_id": 109798159677,
+    "artifact_id": 11084297726,
+    "artifact_digest": "sha256:11ebd443ab46027e26a92f294e928e8c458ac14e920d74168732f7e9b8c74e92",
+    "observed_failure": [
+      "claim_relation_evaluated_count absent after evidence extraction",
+      "OPEN_ENDED_RESEARCH_RELATION_EVALUATED marker absent from runtime"
+    ],
+    "guarded": true
+  },
+  "guarded_green": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 171,
+    "run_id": 36688375265,
+    "job_id": 109799440088,
+    "artifact_id": 11084672894,
+    "artifact_digest": "sha256:7454cac3419892fe6958330d8c6c1ba16dd323adcd48d0c3f6b05c45c2c4a7bb",
+    "authored_regressions": "3_OF_3_PASS",
+    "independent_oracle": "PASS",
+    "execution_guard_regression_same_head": "PASS",
+    "exact_blob_pins": true
+  },
+  "rebind": {
+    "qualified_brain_base": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+    "current_base": "68cfedf4534420d111ee3b665106d342d237683c",
+    "intervening_main_change": "INERT_GUARDED_HTTP2_CARRIER_ONLY",
+    "pre_repair_runtime_blob_on_current_base": "e60345e3814deacc5b79ffd7fcf713febfee0425",
+    "pre_repair_frontend_blob_on_current_base": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+    "candidate_bytes_unchanged": true
+  },
+  "verified_effects": [
+    "generic extracted evidence reaches objective claim-spec and operand binding",
+    "verified relation result is surfaced by open research frontend",
+    "runtime recognizes relation-evaluated state and stops at decision synthesis/verification",
+    "unsupported objective fails closed at claim-spec binding gap",
+    "factual correctness and evidence sufficiency remain unverified"
+  ],
+  "capability_credit_delta": 0,
+  "parent_capability_promoted": false,
+  "parent_task_execution": false,
+  "frozen_http2_task_status": "UNSPENT__CARRIER_MUST_BE_REPINNED_TO_POST_REPAIR_RUNTIME_BEFORE_EXECUTION"
+}
