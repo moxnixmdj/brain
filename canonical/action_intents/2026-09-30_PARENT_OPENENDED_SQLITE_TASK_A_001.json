@@ -13,12 +13,13 @@
   "expected_parent_frontier_change": "Either complete the first admissible genuinely open-ended zero-model-dependency parent real Task A with autonomous decomposition and material source/tool discovery, or localize exactly the first causal gap without replay.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e after PR318 open-ended-scope correction",
+    "main 797d5fbea5f230a31044006755beb98ae387134b after PR318 open-ended-scope correction",
     "PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1 reclassifies structured demography as supporting evidence only",
     "current target requires genuine open-ended Task A before Task B",
     "PR308 PR317 PR319 PR321 PR322 carry the superseded old Task-B blocker and therefore cannot own the current lease",
     "existing public verification-capsule-runner has a successful same-account standard-runner direct probe run 36668380406",
-    "no current open PR was found with the corrected blocker lease before branch creation"
+    "no current open PR was found with the corrected blocker lease before branch creation",
+    "PR329 merged on current main and hardens runtime cognition provenance/active-target mirror enforcement without changing capability credit or the Task-A blocker."
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -31,7 +32,7 @@
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+    "canonical_base_commit": "797d5fbea5f230a31044006755beb98ae387134b",
     "real_outcome": "Obtain the first admissible proof of the actual open-ended parent behavior, or expose the first generic missing capability, using a real software-systems objective whose research plan is not supplied to the producer.",
     "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "obs_goal": {
@@ -132,7 +133,7 @@
       ],
       "search_stop_decision": "A current adequate execution route exists and no alternate route can produce admissible parent evidence faster than running the inherited route itself; more task-specific search before freeze would weaken the test.",
       "affected_layers_only_on_revalidation": true,
-      "challenger_refresh_decision": "Current main and public carrier were refreshed immediately before this intent. Refresh affected layers if main, carrier availability, or the parent contract changes before arming."
+      "challenger_refresh_decision": "Current main 797d5fbea5f230a31044006755beb98ae387134b and public carrier readiness were refreshed after PR329. Refresh affected layers again if main, carrier availability, or the parent contract changes before arming."
     },
     "routes_considered": [
       "REUSE_CURRENT_MODEL_INDEPENDENT_GENERAL_ROUTE_ON_OBJECTIVE_ONLY_SQLITE_SYSTEMS_TASK",
@@ -164,7 +165,7 @@
       ],
       "source_evidence": {
         "BRAIN_INHERITED": [
-          "brain main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+          "brain main 797d5fbea5f230a31044006755beb98ae387134b",
           "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
           "existing acquired model-independent child stack"
         ],
@@ -208,7 +209,7 @@
             "current Brain has inherited grounding/composition/source/tool/provenance machinery"
           ],
           "qualification_evidence": [
-            "BRAIN_INHERITED: main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "BRAIN_INHERITED: main 797d5fbea5f230a31044006755beb98ae387134b",
             "DIRECT_PROBE: verification-capsule-runner run 36668380406 completed SUCCESS",
             "OFFICIAL_PRIMARY: GitHub public standard-runner and CPython sqlite3 documentation"
           ],
@@ -291,7 +292,7 @@
             "evidence_scope": "ACCOUNT_SPECIFIC"
           },
           {
-            "dependency": "CURRENT_BRAIN_MODEL_INDEPENDENT_RUNTIME_aa8f55bd",
+            "dependency": "CURRENT_BRAIN_MODEL_INDEPENDENT_RUNTIME_797d5fbe",
             "kind": "LOCAL_RUNTIME",
             "required": true,
             "volatility": "STATIC",
@@ -299,7 +300,7 @@
             "status": "READY",
             "observed_at_utc": "2026-09-30T04:40:20Z",
             "evidence": [
-              "BRAIN_INHERITED: exact current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e refreshed immediately before intent commit"
+              "BRAIN_INHERITED: exact current main 797d5fbea5f230a31044006755beb98ae387134b refreshed immediately before intent commit"
             ],
             "evidence_classes": [
               "BRAIN_INHERITED"
