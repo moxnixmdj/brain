@@ -9,8 +9,8 @@ def load(name,path):
     mod=importlib.util.module_from_spec(spec); sys.modules[name]=mod; spec.loader.exec_module(mod); return mod
 
 aa=load("actions_admission",GUARD/"actions_admission.py")
-gr=load("github_actions_guarded_run_live",GUARD/"github_actions_guarded_run_live.py")
 storemod=load("github_ref_store_live",GUARD/"github_ref_store_live.py")
+gr=load("github_actions_guarded_run_live",GUARD/"github_actions_guarded_run_live.py")
 
 class MemStore:
     def __init__(self, fail_key=None, false_key=None):
