@@ -184,11 +184,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_OR_PR277_REPLAY__INDEPENDENT_ORACLE",
+    "next_step": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
+    "critical_blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -265,7 +265,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1__FRESH_REQUALIFICATION_ONLY_AFTER_DIRECT_COMPILER_REPAIR",
+    "highest_leverage_capability_gap": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1__NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK_REQUIRED",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -576,22 +576,35 @@
     "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
-      "event_id": "COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930",
+      "event_id": "MODEL_INDEPENDENT_GROUNDED_EXECUTABLE_COMPOSITION_REQUALIFIED_RECOVERED_20260930",
       "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-      "status": "FRESH_POST_REPAIR_REQUALIFICATION_FAILED__GENERIC_BINDING_SEAM_LOCALIZED",
-      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1.json",
-      "public_run_id": 36656793034,
+      "status": "REQUALIFIED_AFTER_DIRECT_COMPILER_REPAIR__FRESH_MATERIALLY_DISTINCT_REUSE_PASS_RECOVERED_WITHOUT_REPLAY",
+      "capability_package": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1.json",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
+      "source_requalification_run_id": 36659637634,
+      "independent_recovery_run_id": 36660108447,
+      "recovery_artifact_id": 11074221334,
+      "recovery_artifact_digest": "sha256:17fc8daf075b813fb00419887c4fdc4b8a2123dae6430744a89163b68dd7df60",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_level_changes": [
+        "REUSABLE_CAPABILITY_RESTORED",
+        "FRESH_REUSE_CREDIT_RESTORED",
+        "RETURN_TO_PARENT_FRONTIER"
+      ],
+      "verified_real_tasks_completed_delta": 0,
+      "reason": "The fresh task semantically completed on exact current bytes; preserved job-log evidence and an independent no-replay recomputation proved the red workflow came from an obsolete post-success harness assertion.",
       "scoreboard": {
-        "reusable_capabilities_inherited": 2,
+        "reusable_capabilities_inherited": 3,
         "verified_real_tasks_completed": 6,
-        "fresh_reuse_passes": 1,
+        "fresh_reuse_passes": 2,
         "frontier_dependencies_removed": 1,
         "residual_gaps_localized": 7
       }
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "GROUNDING_ACQUIRED__COMPOSITION_ALL_KNOWN_BINDING_SEAMS_REPAIRED_AND_VALIDATED__FRESH_REQUALIFICATION_PENDING__PARENT_BLOCKED",
+    "frontier_decomposition_status": "GROUNDING_ACQUIRED__COMPOSITION_REQUALIFIED_AFTER_REPAIR__PARENT_REAL_TASK_REQUIRED",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
     "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "grounding_requalification": {
@@ -600,22 +613,23 @@
       "fresh_reuse_run_id": 36652623916
     },
     "grounded_composition_acquisition": {
-      "status": "REVOKED_BY_REGRESSION__DIRECT_COMPILER_REPAIR_VALIDATED__FRESH_REQUALIFICATION_PENDING",
-      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_REPAIR_VALIDATION_20260930_V1.json",
-      "previous_fresh_real_run_id": 36652169397,
-      "previous_fresh_reuse_run_id": 36652623916,
-      "post_promotion_falsification_run_id": 36653756561,
-      "post_repair_requalification_failure_run_id": 36656793034,
-      "capability_credit_restored": false
+      "status": "VERIFIED_ACQUIRED_AFTER_DIRECT_COMPILER_REPAIR__FRESH_REQUALIFICATION_PASS_RECOVERED_WITHOUT_REPLAY",
+      "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
+      "source_requalification_run_id": 36659637634,
+      "independent_recovery_run_id": 36660108447,
+      "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "COMPOSITION_DIRECT_COMPILER_REPAIR_COMPLETE__FRESH_REQUALIFICATION_PENDING",
-      "reason": "PR281 unified direct compound-goal effect_result binding with the shared proposal-binding authority and planner lowering. Exact public validation passed direct causal regression plus the full goal-compiler regression file. No capability credit restored from repair tests.",
-      "active_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
-      "blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
+      "status": "COMPOSITION_REQUALIFIED_FROM_PRESERVED_PRIMARY_EVIDENCE__RETURNED_TO_PARENT_FRONTIER",
+      "reason": "Fresh post-repair task semantically completed on exact bytes; no-replay recovery independently verified source log, causal bindings, producer-independent verifier result, and recomputed the typed decision.",
+      "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+      "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "blocker": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_REPAIR_VALIDATION_20260930_V1.json"
-      ]
+        "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json"
+      ],
+      "source_run_id": 36659637634,
+      "recovery_run_id": 36660108447
     }
   },
   "provider_rules": {
