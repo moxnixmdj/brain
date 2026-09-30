@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-UNICODE-SCALAR-BOUNDS-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED_AFTER_ROUTING_REPAIR",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_UNICODE_SCALAR_BOUNDS_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended Unicode technical-research parent task after guarded-qualified broad-routing repair; execute exactly once and stop at the first new causal gap or semantic completion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current canonical base a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "Brain PR474 merged guarded-qualified broad multi-clause routing correction",
+    "HTTP/2 Task A is spent and replay-forbidden",
+    "repository search found no prior Unicode scalar-value or Basic Multilingual Plane parent task",
+    "no competing open fresh-parent lease was present before freeze"
+  ],
+  "evidence_presence_classification": "ROUTING_REPAIR_QUALIFIED__FRESH_PARENT_TASK_B_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen task. On semantic completion, independently verify before any parent promotion. On failure, preserve only the earliest integrated causal gap and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "The guarded-qualified repaired model-independent route must now prove progress on one fresh materially different parent objective.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_UNICODE_SCALAR_BOUNDS_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "TASK_SPECIFIC_PATCH",
+      "PREDECLARED_UNICODE_SOURCE",
+      "PREDECLARED_CODEPOINT_VALUES",
+      "PREWIRED_TOOL_OR_COMMAND",
+      "MODEL_PLANNER"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The task requires autonomous normative-source discovery, terminology interpretation, extraction of two bounds, a deterministic comparison, an executable check, limitations, and provenance while remaining materially different from the spent network-protocol task.",
+    "expected_parent_level_state_change": "Either obtain parent-level semantic completion evidence or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
