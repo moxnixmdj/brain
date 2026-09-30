@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_TASK_FRESHNESS_RECONCILIATION_V1",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "SQLITE_AND_THERMOPHYSICS_PHYSICAL_SPENDS_RECONCILED__ZERO_PARENT_CREDIT__NO_REPLAY",
+  "governing_rule": "An exact substantive task loses freshness at first physical producer execution, even when that lane is stale, quarantined, or receives zero capability/repair authority.",
+  "sqlite": {
+    "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
+    "task_blob_sha": "5d09c9eebcb09612525836e7926bdf297f4bad32",
+    "first_observed_physical_spend": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pr": 61,
+      "run_id": 36670808367,
+      "job_id": 109745195120,
+      "artifact_id": 11077757767,
+      "artifact_digest": "sha256:dd095506132364f189c232dbf21cdd4b59d599ea8b3001b994552f25f738335c",
+      "task_executed": true,
+      "execution_count": 1,
+      "status": "FAIL_FIRST_CAUSAL_GAP",
+      "parent_task_completed": false,
+      "independent_oracle_executed": false,
+      "model_planner_disabled": true,
+      "incremental_spend_usd": 0
+    },
+    "observed_gap": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH followed by autonomous acquisition failure with mission-origin supplier errors",
+    "freshness_status": "SPENT",
+    "capability_credit": false,
+    "runtime_repair_authority": false,
+    "replay_allowed": false
+  },
+  "thermophysics": {
+    "task_id": "PARENT-THERMOPHYSICS-WATER-VISCOSITY-OPEN-RESEARCH-TASK-A-20260930-002",
+    "first_observed_physical_spend": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pr": 93,
+      "run_id": 36673898798,
+      "job_id": 109754583184,
+      "artifact_id": 11078528968,
+      "artifact_digest": "sha256:3b00a0b92159e5aa9bf2ec1cc04eb112ee39bf4fcf954870f656fead98b965af",
+      "task_executed": true,
+      "execution_count": 1,
+      "status": "FAIL_FIRST_CAUSAL_GAP",
+      "parent_task_completed": false,
+      "independent_oracle_executed": false,
+      "model_planner_disabled": true,
+      "incremental_spend_usd": 0,
+      "terminal_observed_at_utc": "2026-09-30T05:35:22.451568+00:00"
+    },
+    "observed_gap": "CAPABILITY_ACQUISITION_REQUIRED: supplier route could not synthesize a compatible general research/source-discovery contract; APT candidates failed CLI contract inference and PyPI codec class was inapplicable.",
+    "authority_at_execution": "STALE_PARENT_AUTHORITY__ZERO_PARENT_CAPABILITY_REPAIR_PROMOTION_OR_SCOREBOARD_CREDIT",
+    "freshness_status": "SPENT",
+    "capability_credit": false,
+    "runtime_repair_authority": false,
+    "replay_allowed": false
+  },
+  "diagnostic_recurrence": {
+    "status": "GENERIC_GAP_VISIBLE_BUT_NOT_PARENT_REPAIR_AUTHORITY",
+    "repeated_pattern": "OPEN_ENDED_PLAIN_GOAL_CANNOT_AUTONOMOUSLY_DISCOVER_AND_BIND_AN_AUTHORITATIVE_RESEARCH_SOURCE_TOOL_ROUTE",
+    "registry_observation": "Existing verified registry can fetch known URLs, transform structured data, calculate, synthesize, and verify, but lacks a verified goal-to-authoritative-source discovery capability.",
+    "prohibition": "Do not repair by task-specific source URLs, source names, water/SQLite literals, or broadening codec/CLI supplier classes beyond their verified semantics."
+  },
+  "next_action": "QUALIFY_A_GENERIC_MODEL_INDEPENDENT_PLAIN_GOAL_TO_AUTHORITATIVE_SOURCE_AND_TOOL_DISCOVERY_ROUTE_ON_NON_PARENT_FRESH_FIXTURES__THEN_FREEZE_A_NEW_MATERIALLY_DIFFERENT_PARENT_TASK"
+}
