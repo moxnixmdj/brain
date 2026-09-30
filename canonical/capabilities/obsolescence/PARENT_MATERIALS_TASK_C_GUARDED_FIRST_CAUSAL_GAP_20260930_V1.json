@@ -30,7 +30,26 @@
       "title": "Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
       "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
       "live_materialization_status": "UNVERIFIED",
-      "live_materialization_error": "HTTP_403_FORBIDDEN"
+      "live_materialization_error": "HTTP_403_FORBIDDEN",
+      "relevance_score": 10.971146169415,
+      "matched_terms": [
+        "6061",
+        "aluminum",
+        "bulk",
+        "stainless",
+        "steel",
+        "temperature"
+      ],
+      "matched_term_count": 6,
+      "query_token_count": 16,
+      "required_matched_term_count": 4,
+      "decision_property_terms_missing": [
+        "thermal",
+        "conductivity"
+      ],
+      "operand_role_mismatch": [
+        "302_STAINLESS_SELECTED_WHILE_OBJECTIVE_REQUIRES_304_STAINLESS"
+      ]
     },
     "metadata_refined_query_executed": true,
     "metadata_refined_candidate_count": 12,
@@ -38,20 +57,53 @@
       "url": "https://doi.org/10.6028/nbs.rpt.9869",
       "title": "Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
       "publisher": "National Bureau of Standards",
-      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED"
+      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+      "relevance_score": 6.20257746199,
+      "matched_terms": [
+        "304",
+        "conductivity",
+        "stainless",
+        "steel",
+        "thermal"
+      ],
+      "initial_discovery": true,
+      "correction": "THIS_RECORD_WAS_ALREADY_PRESENT_IN_INITIAL_DISCOVERY; IT_IS_NOT EVIDENCE THAT REFINED_RETRIEVAL WAS THE FIRST CAUSAL GAP"
     },
     "metadata_refined_live_retrieval_candidates_after_filter": 1,
     "metadata_refined_only_live_candidate": {
       "url": "https://maltaexpat.com/tools/rent-prices/",
-      "relevance_score": 0.0,
+      "relevance_score": 0,
       "matched_terms": []
     },
     "metadata_refined_relevance_status": "RELEVANCE_UNRESOLVED",
-    "metadata_refined_selected": false
+    "metadata_refined_selected": false,
+    "relevant_initial_bibliographic_candidate": {
+      "url": "https://doi.org/10.6028/nbs.rpt.9869",
+      "title": "Thermal conductivity and electrical resistivity of a sample of AISI type 304 stainless steel",
+      "publisher": "National Bureau of Standards",
+      "provenance_status": "BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+      "relevance_score": 6.20257746199,
+      "matched_terms": [
+        "304",
+        "conductivity",
+        "stainless",
+        "steel",
+        "thermal"
+      ],
+      "initial_discovery": true
+    },
+    "initial_relevance_admission": {
+      "method": "FOCUSED_QUERY_TOKEN_COVERAGE_V1",
+      "selected_matched_term_count": 6,
+      "query_token_count": 16,
+      "required_matched_term_count": 4,
+      "verified": true,
+      "causal_problem": "ADMISSION_ALLOWED_A_SOURCE_MISSING_THE_DECISION_PROPERTY_AND_EXACT_SECOND_OPERAND_ROLE"
+    }
   },
-  "first_generic_causal_gap": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
-  "causal_interpretation": "The initial source path correctly preserves BIBLIOGRAPHIC_PROVENANCE_VERIFIED candidates through relevance after PR529. After direct materialization of the selected bibliographic candidate failed, the one allowed metadata-refined fallback reintroduced the old information-loss seam by retaining only RETRIEVAL_PROVENANCE_VERIFIED candidates before refined relevance. A directly relevant National Bureau of Standards bibliographic record was therefore excluded while an unrelated live web result remained.",
-  "generic_repair_requirement": "The bounded metadata-refined fallback must preserve every provenance-verified candidate class through deterministic relevance, then live-materialize only the refined selected bibliographic winner under the same identity-bound fail-closed contract. It must remain bounded to the existing single refinement attempt and must not replay Task C.",
+  "first_generic_causal_gap": "OPEN_RESEARCH_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_ADMISSION_INSUFFICIENT",
+  "causal_interpretation": "The earliest demonstrated failure occurs in initial deterministic relevance admission, before source materialization. The selected source is an ignition-temperature paper covering 6061 aluminum and 302 stainless steel; it passed the generic 4-of-16 focused-token coverage gate with 6 matches while missing the decision property terms thermal/conductivity and the required 304 stainless-steel operand. The directly relevant NBS 304 thermal-conductivity report DOI 10.6028/nbs.rpt.9869 was already present in the initial provenance-verified candidate set but ranked below the off-property source. Later DOI materialization failure and metadata-refined provenance-class loss are real downstream defects, not the first Task C causal gap.",
+  "generic_repair_requirement": "The relevance admission layer must deterministically require coverage of the objective's decision-defining property/relation and the relevant operand roles, not merely enough aggregate focused tokens. The repair must be generic, model-independent, cross-domain qualified, and fail closed on ambiguous role coverage. Task C must not be replayed.",
   "explicitly_not_claimed": [
     "parent open-ended research capability completion",
     "factual correctness of the materials comparison",
@@ -68,5 +120,21 @@
   },
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
-  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_METADATA_REFINED_PROVENANCE_CLASS_PRESERVATION__NO_MATERIALS_TASK_C_REPLAY"
+  "next_required_action": "REPAIR_AND_GUARD_QUALIFY_DECISION_PROPERTY_AND_OPERAND_ROLE_COVERAGE_ADMISSION__NO_MATERIALS_TASK_C_REPLAY",
+  "downstream_known_defects": [
+    {
+      "defect": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+      "status": "REAL_BUT_DOWNSTREAM_NOT_CURRENT_FIRST_CAUSAL_GAP",
+      "independent_candidate_qualification": {
+        "brain_pr": 537,
+        "brain_candidate_head": "2c4f2d9bc02d07dcd61d7fc6d01f38c679941813",
+        "runner_pr": 227,
+        "run_id": 36699834083,
+        "job_id": 109836411976,
+        "artifact_id": 11089543143,
+        "artifact_digest": "sha256:c10ec0bf299f90dc743f0751c123792f7a63901936ad6aa2d6f487ec3f6a4ff4",
+        "status": "PASS_BUT_NOT_AUTHORIZED_FOR_CURRENT_FRONTIER_MERGE"
+      }
+    }
+  ]
 }
