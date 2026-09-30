@@ -1,0 +1,314 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-GROUNDED-COMPOSITION-CAUSAL-PATH-GUARD-V2-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::DOWNSTREAM_CAPABILITY_INPUT_PROVENANCE_IS_IMPLICIT_IN_PATH_RECENCY_INSTEAD_OF_DECLARED_EFFECT_RESULT_BINDING::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Add a generic fail-closed composition invariant so provider-backed downstream path placeholders cannot fall through to implicit prior_paths recency when causal provenance metadata is absent; keep requalification credit unspent.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR270 composition post-promotion falsification reconciliation",
+    "PR271 explicit decision producer/verifier provenance repair merged at ebc77c6e2309a806c6d9a39c5f3506fb777e6546",
+    "PR271 exact public component validation run 36654897859 PASS",
+    "closed stale PR272 registry-wide audit and proposed fail-closed provider-backed path guard",
+    "Existing proposal_bindings.effect_result implementation"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Add only the generic provider-backed path provenance guard plus focused negative regression, validate exact bytes independently, then stop support work and run one fresh materially different requalification task. No PR267 replay and no capability/scoreboard restoration in this repair.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ebc77c6e2309a806c6d9a39c5f3506fb777e6546",
+    "real_outcome": "Prevent recurrence of the exact path-provenance failure class after PR271 fixed the observed decision chain.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Fail closed before any provider-backed downstream path input can be filled by path recency without explicit provenance metadata.",
+      "proxy_goals_deleted": [
+        "Replay PR267",
+        "Patch task wording",
+        "Tune path recency ordering",
+        "Add another governance law",
+        "Replace the whole planner"
+      ],
+      "surviving_necessity": "Repair the generic provenance seam exposed by the fresh real-task falsification."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR271 explicit effect_result metadata for decision producer/verifier chain",
+        "grounded_executable_composition provider_map",
+        "goal_compiler._placeholders",
+        "proposal_bindings.effect_result",
+        "PR272 registry-wide audit of prerequisite-bearing path consumers"
+      ],
+      "external_existing_routes_checked": [
+        "Apache Airflow explicit upstream/downstream task dependencies and XCom data passing",
+        "Prefect explicit task-result dependencies",
+        "Dagster asset/data dependency orchestration"
+      ],
+      "capability_work_deleted": [
+        "No new planner",
+        "No new binder abstraction unless existing effect_result proves insufficient",
+        "No model supplier",
+        "No task-specific path patch"
+      ],
+      "surviving_gap": "Other provider-backed capabilities can still fall through to generic path recency if they have path placeholders and no proposal_bindings."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic composition metadata/dataflow defect proven by a materially distinct post-promotion task; not carrier, model, planner, or verifier failure.",
+      "delete_bypass_substitute_options": [
+        "Delete recency fallback for causally provider-backed path inputs",
+        "Reuse existing effect_result metadata for known downstream consumers",
+        "Fail closed when provider-backed path provenance is undeclared",
+        "Do not substitute a new orchestrator because the existing graph/planner already reaches the correct causal seam"
+      ],
+      "surviving_causal_blocker": "COMPOSER_ALLOWS_PROVIDER_BACKED_PATH_PLACEHOLDERS_WITHOUT_EXPLICIT_PROVENANCE_METADATA"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ADD_FAIL_CLOSED_PROVIDER_BACKED_PATH_GUARD_TO_EXISTING_COMPOSER",
+        "AUDIT_AND_PATCH_ALL_REGISTRY_ENTRIES_IMMEDIATELY",
+        "CHANGE_PATH_RECENCY_HEURISTIC",
+        "NEW_TYPED_BINDER"
+      ],
+      "losing_routes_reason": "Bulk metadata rewriting risks inventing provenance for unrelated capabilities; recency remains non-causal; a new binder duplicates existing effect_result. One generic rejection invariant prevents silent recurrence and lets future chains declare provenance deliberately.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Add a negative regression where a downstream provider-backed capability has an unbound path placeholder and no proposal_bindings; composition must fail with CAUSAL_PATH_PROVENANCE_BINDING_REQUIRED. Existing explicitly bound decision chain regression must remain green."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Implicit prior_paths recency selection for downstream provider-backed path inputs",
+        "Any future task-specific workaround for PR267's file ordering"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Explicit producer-result to consumer-input provenance",
+        "Fail-closed detection of missing path provenance metadata"
+      ],
+      "fresh_reuse_plan": "After exact guard validation, run one new materially different real composition task; do not replay PR267."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR272 static registry audit",
+        "Reuse PR271 validated explicit decision provenance repair",
+        "Reuse existing composer/provider_map and compiler placeholder detection"
+      ],
+      "search_stop_decision": "The latent recurrence path is directly visible in current composer control flow and the smallest fail-closed invariant is already localized; further route search cannot justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Route frontier refreshed 2026-09-30T01:20:56Z after the post-promotion falsification; no plausible challenger dominates reuse of the already-integrated effect_result primitive."
+    },
+    "routes_considered": [
+      "ADD_FAIL_CLOSED_PROVIDER_BACKED_PATH_GUARD_TO_EXISTING_COMPOSER",
+      "AUDIT_AND_PATCH_ALL_REGISTRY_ENTRIES_IMMEDIATELY",
+      "CHANGE_PATH_RECENCY_HEURISTIC",
+      "NEW_TYPED_BINDER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR267_REPLAY",
+      "BULK_SPECULATIVE_REGISTRY_REWRITE",
+      "PATH_RECENCY_RETUNING",
+      "NEW_BINDER"
+    ],
+    "selected_surviving_route": "ADD_FAIL_CLOSED_PROVIDER_BACKED_PATH_GUARD_TO_EXISTING_COMPOSER",
+    "why_selected_route_is_fastest_sufficient": "PR271 fixes the observed chain; the ten-line composer guard closes the latent class without guessing missing metadata or changing planner/compiler semantics.",
+    "expected_parent_level_state_change": "Add a generic fail-closed composition invariant so provider-backed downstream path placeholders cannot fall through to implicit prior_paths recency when causal provenance metadata is absent; keep requalification credit unspent.",
+    "stop_condition": "Add only the generic provider-backed path provenance guard plus focused negative regression, validate exact bytes independently, then stop support work and run one fresh materially different requalification task. No PR267 replay and no capability/scoreboard restoration in this repair.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T01:26:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "PR271_EXPLICIT_DECISION_PROVENANCE_WITH_GENERIC_RECENCY_FALLBACK_STILL_PRESENT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
+          "canonical/runtime/capability_proposal_generators.py::_bind_planned_inputs(effect_result)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html",
+          "https://www.prefect.io/blog/no-flow-is-an-island"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Apache Airflow / Prefect / Dagster are existing external orchestration packages; none is already integrated into Brain's grounded capability registry for this exact seam."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://dagster.io/blog/how-to-make-the-architectural-case-for-dagster"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "explicit causal data dependency binding producer result consumer input deterministic workflow"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Airflow Prefect Dagster explicit data dependencies workflow orchestration"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "effect result reference typed dataflow dependency binding DAG"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 workflow orchestration explicit data dependencies provenance"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "PATCH_PATH_RECENCY_HEURISTIC",
+          "evidence": [
+            "PR267 falsification shows recency itself caused the wrong binding."
+          ],
+          "qualification_evidence": [
+            "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "WORSE: preserves implicit provenance",
+            "CAPABILITY_STRENGTH": "NO_GAIN",
+            "WALL_CLOCK": "Small patch but recurrent-risk high",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "LOWER",
+            "VERIFIABILITY": "LOWER"
+          }
+        },
+        {
+          "route": "BUILD_NEW_TYPED_BINDER",
+          "evidence": [
+            "Existing capability_proposal_generators.py already supports effect_result with declared provider result fields."
+          ],
+          "qualification_evidence": [
+            "canonical/runtime/capability_proposal_generators.py"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "No demonstrated advantage",
+            "CAPABILITY_STRENGTH": "Duplicates existing primitive",
+            "WALL_CLOCK": "SLOWER",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "More new code",
+            "VERIFIABILITY": "More surface"
+          }
+        },
+        {
+          "route": "REPLACE_WITH_EXTERNAL_WORKFLOW_ENGINE",
+          "evidence": [
+            "Airflow/Prefect/Dagster support explicit dependencies, confirming the design principle but requiring external integration/rewrite."
+          ],
+          "qualification_evidence": [
+            "https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html",
+            "https://www.prefect.io/blog/no-flow-is-an-island"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially strong but unnecessary replacement",
+            "CAPABILITY_STRENGTH": "Broader than needed",
+            "WALL_CLOCK": "MUCH_SLOWER",
+            "INCREMENTAL_COST": "$0 software but integration cost",
+            "RELIABILITY": "Unknown in Brain path",
+            "VERIFIABILITY": "Requires new integration proof"
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger beats reuse of Brain's already-present effect_result primitive on correctness, wall-clock, reliability, and minimal change for the exact causal defect.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ADD_FAIL_CLOSED_PROVIDER_BACKED_PATH_GUARD_TO_EXISTING_COMPOSER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T01:26:00Z",
+        "max_age_hours": 2,
+        "selected_route": "ADD_FAIL_CLOSED_PROVIDER_BACKED_PATH_GUARD_TO_EXISTING_COMPOSER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_COMPOSER_AND_PR271_PROVENANCE_REPAIR",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:26:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current main ebc77c6e2309a806c6d9a39c5f3506fb777e6546",
+              "DIRECT_PROBE PR271 public validation run 36654897859 PASS"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_VALIDATION_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T01:23:45Z",
+            "evidence": [
+              "DIRECT_PROBE public run 36654897859 completed all validation steps successfully"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}

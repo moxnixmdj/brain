@@ -184,6 +184,72 @@ class GroundedExecutableCompositionTests(unittest.TestCase):
             ["external.unverified.ready"],
         )
 
+    def test_provider_backed_path_without_declared_provenance_fails_closed(self):
+        registry={
+          "source.alpha":{
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "incremental_spend_usd":0,
+            "requires":[],
+            "provides":["artifact.alpha.ready"],
+            "cost":1,
+            "action_template":{
+              "type":"invoke_capability",
+              "args":{"capability_id":"source.alpha"}
+            },
+            "result_fields":["output_path"],
+          },
+          "consume.alpha":{
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "incremental_spend_usd":0,
+            "requires":["artifact.alpha.ready"],
+            "provides":["artifact.alpha.checked"],
+            "cost":1,
+            "action_template":{
+              "type":"invoke_capability",
+              "args":{
+                "capability_id":"consume.alpha",
+                "input_path":"${input.input_path}"
+              }
+            },
+            "result_fields":["verified"],
+          },
+        }
+        goal="Create alpha then consume it."
+        grounding={
+          "schema":"PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+          "goal":goal,
+          "goal_sha256":__import__("hashlib").sha256(goal.encode()).hexdigest(),
+          "clauses":[
+            {
+              "index":0,
+              "text":"Create alpha.",
+              "status":"GROUNDED",
+              "candidates":[{"capability_id":"source.alpha","matched_distinctive_tokens":["alpha"]}],
+              "output_contract":{"paths":["out/alpha.json"]},
+            },
+            {
+              "index":1,
+              "text":"Consume alpha.",
+              "status":"GROUNDED",
+              "candidates":[{"capability_id":"consume.alpha","matched_distinctive_tokens":["alpha"]}],
+              "output_contract":{"paths":[]},
+            },
+          ],
+          "grounded_clause_count":2,
+          "unresolved_clause_indexes":[],
+          "candidate_capability_ids":["source.alpha","consume.alpha"],
+          "input_contract_bindability_enforced":True,
+          "model_dependency_count":0,
+        }
+        with self.assertRaisesRegex(
+            composition.CompositionError,
+            r"CAUSAL_PATH_PROVENANCE_BINDING_REQUIRED:consume\.alpha:input_path",
+        ):
+            composition.compose(
+                goal,grounding,registry,real_compiler,REPO_ROOT,
+                verified_initial_facts=[],
+            )
+
     def test_decision_verifier_paths_use_explicit_upstream_provenance(self):
         raw=__import__("json").loads(
             (ROOT/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text(encoding="utf-8")
