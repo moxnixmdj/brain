@@ -20,7 +20,8 @@
     "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 is now verified and inherited",
     "NASA POWER official API documentation exposes free globally available daily meteorological JSON data",
     "NASA POWER official parameter documentation lists T2M, T2M_MAX and T2M_MIN daily temperature parameters",
-    "task contract frozen before probing the exact three 2025-07-01 Phoenix URLs"
+    "task contract frozen before probing the exact three 2025-07-01 Phoenix URLs",
+    "Exact frozen NASA POWER source preflight run 36667791311 PASS; artifact 11076439036 sha256:6f48579b452e8de772a5a87e795c8640daa8fbf766f0223f95248c3bec3de255; answer not computed"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -237,11 +238,11 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T04:07:00Z",
+        "checked_at_utc": "2026-09-30T04:12:45Z",
         "max_age_hours": 2,
         "selected_route": "REUSE_CURRENT_MODEL_INDEPENDENT_STACK_ON_FROZEN_NASA_POWER_METEOROLOGY_TASK",
-        "status": "PENDING_EXACT_SOURCE_PREFLIGHT",
-        "all_required_dependencies_ready": false,
+        "status": "READY",
+        "all_required_dependencies_ready": true,
         "failed_dependencies": [],
         "execution_dependencies": [
           {
@@ -282,18 +283,21 @@
             "required": true,
             "volatility": "VOLATILE",
             "scope": "GLOBAL",
-            "status": "PENDING_PREFLIGHT",
-            "observed_at_utc": null,
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:12:45Z",
             "evidence": [
-              "OFFICIAL_PRIMARY NASA POWER API documentation only; exact URLs intentionally unprobed before task freeze"
+              "DIRECT_PROBE: source preflight run 36667791311 PASS on exact frozen task blob 8fbe0b739a796733d20368cc629247379d133765",
+              "ARTIFACT:11076439036 sha256:6f48579b452e8de772a5a87e795c8640daa8fbf766f0223f95248c3bec3de255",
+              "Preflight verified three configured JSON paths are numeric and explicitly did not evaluate the scientific relation"
             ],
             "evidence_classes": [
+              "DIRECT_PROBE",
               "OFFICIAL_PRIMARY"
             ],
             "evidence_scope": "GLOBAL"
           }
         ],
-        "execution_dependencies_complete": false
+        "execution_dependencies_complete": true
       }
     }
   }
