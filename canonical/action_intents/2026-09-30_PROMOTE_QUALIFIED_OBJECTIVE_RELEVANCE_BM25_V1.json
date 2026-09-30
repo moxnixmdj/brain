@@ -1,0 +1,268 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-QUALIFIED-MODEL-INDEPENDENT-OBJECTIVE-RELEVANCE-BM25-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "QUALIFIED_MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_NOT_INHERITED",
+  "action_kind": "QUALIFIED_CAPABILITY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::QUALIFIED_MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_NOT_INHERITED::QUALIFIED_CAPABILITY_PROMOTION",
+  "expected_parent_frontier_change": "Inherit the independently-qualified exact lexical objective-relevance ranker into canonical Brain state at narrow scope, delete stale competing lanes, and recompute the parent research frontier without replaying a spent parent task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR411 merged deletion-first correction: primary-source status is not a universal research admission gate",
+    "preserved Brain PR410 producer blob 95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+    "public verification-capsule-runner PR143",
+    "public workflow 36678278264 PASS: exact producer blob independently matched rank-bm25 0.2.2 across fresh aerospace/database/climate candidate sets and failed closed on no-overlap",
+    "current main has no source.objective_relevance.rank.bm25 registry entry"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PRESENT_EXTERNAL_VERIFIED_NOT_CANONICAL",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exact qualified producer bytes and regressions are inherited, the registry marks only the narrow lexical relevance capability VERIFIED with preserved public qualification provenance, a durable promotion receipt is added, stale/dominated lanes are closed, and the parent frontier is recomputed without parent replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "aae66413845006afa22bfcd77639d634f54a0371",
+    "real_outcome": "Inherit already-qualified model-independent objective relevance ranking into canonical Brain state without rerunning the proof or broadening its claim.",
+    "required_capability": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
+    "obs_goal": {
+      "real_outcome": "Make the independently verified lexical relevance selector actually available to the open-research route.",
+      "proxy_goals_deleted": [
+        "rerun BM25 qualification",
+        "rebuild the ranker",
+        "solve primary-source classification",
+        "semantic entailment",
+        "parent task replay"
+      ],
+      "surviving_necessity": "Canonical inheritance of the verified capability is required before the research route can use it."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "qualified source frontend",
+        "qualified ROR authority binder",
+        "preserved exact BM25 producer blob 95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+        "public PASS workflow 36678278264"
+      ],
+      "external_existing_routes_checked": [
+        "rank-bm25 0.2.2 independent verifier already used successfully"
+      ],
+      "capability_work_deleted": [
+        "No new algorithm",
+        "No requalification",
+        "No model",
+        "No vector database",
+        "No primary-source coimplementation"
+      ],
+      "surviving_gap": "Verified bytes and evidence are not yet inherited into canonical Brain state."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific canonical inheritance gap after successful independent qualification.",
+      "delete_bypass_substitute_options": [
+        "Do not rerun the proof because exact evidence already exists",
+        "Do not merge stale PR410 branch",
+        "Recover exact preserved bytes and qualification evidence into current-base promotion lane"
+      ],
+      "surviving_causal_blocker": "Canonical registry and runtime do not yet expose the verified relevance ranker."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Recover exact verified producer bytes and promotion metadata on current main",
+        "Rerun qualification",
+        "Reimplement BM25",
+        "Merge stale PR410"
+      ],
+      "losing_routes_reason": "Evidence recovery is faster and safer than rerun or reinvention; stale PR410 violates current-base discipline.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new experiment. Verify exact git blob identity against public qualification receipt and mechanically validate the registry claim scope/provenance."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "stale PR410 acquisition lane",
+        "PR409 first-party lexical filtering as generic relevance solution",
+        "PR412 PubMed-specific primary/relevance lane as current universal blocker"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "lexical source relevance ranking",
+        "deterministic evidence candidate ordering"
+      ],
+      "fresh_reuse_plan": "Use the inherited ranker in the next fresh parent research route; do not award parent capability credit from this child alone."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse qualification run 36678278264",
+        "Reuse exact producer blob",
+        "Reuse current source-frontend candidate schema"
+      ],
+      "search_stop_decision": "The selected route is already independently qualified; further search cannot improve the inheritance step enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No route failure occurred; current qualification and challenger evidence are minutes old."
+    },
+    "routes_considered": [
+      "RECOVER_AND_INHERIT_EXACT_QUALIFIED_BM25",
+      "RERUN_QUALIFICATION",
+      "REIMPLEMENT",
+      "MERGE_STALE_BRANCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RERUN_QUALIFICATION",
+      "REIMPLEMENT",
+      "MERGE_STALE_BRANCH",
+      "PRIMARY_SOURCE_COIMPLEMENTATION"
+    ],
+    "selected_surviving_route": "RECOVER_AND_INHERIT_EXACT_QUALIFIED_BM25",
+    "why_selected_route_is_fastest_sufficient": "The exact producer blob already passed an independent public cross-domain oracle, so copying those bytes plus verified provenance reaches canonical capability availability with no new expensive execution.",
+    "expected_parent_level_state_change": "Inherit the independently-qualified exact lexical objective-relevance ranker into canonical Brain state at narrow scope, delete stale competing lanes, and recompute the parent research frontier without replaying a spent parent task.",
+    "stop_condition": "Stop after exact qualified producer bytes and regressions are inherited, the registry marks only the narrow lexical relevance capability VERIFIED with preserved public qualification provenance, a durable promotion receipt is added, stale/dominated lanes are closed, and the parent frontier is recomputed without parent replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T06:23:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RECOVER_AND_INHERIT_EXACT_QUALIFIED_BM25",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "qualified open_research_source_frontend candidate schema"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "scikit-learn TF-IDF/cosine documentation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI rank-bm25 0.2.2",
+          "PyPI bm25s 0.3.11"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "BM25/TF-IDF deterministic IR route comparison"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic query document objective relevance ranking BM25 TF-IDF"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "bm25s rank_bm25 scikit learn TF-IDF cosine"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "small Python BM25 scorer candidate title snippet relevance"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "bm25s 2026 latest release"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "RECOVER_AND_INHERIT_EXACT_QUALIFIED_BM25",
+          "evidence": [
+            "Brain preserved producer blob 95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+            "verification-capsule-runner workflow 36678278264 PASS"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: workflow 36678278264",
+            "INDEPENDENT_VERIFIER: rank-bm25 0.2.2 agreement on fresh cross-domain cases"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact bytes already independently qualified at narrow lexical scope.",
+            "CAPABILITY_STRENGTH": "Ranks lexical objective relevance; explicitly no semantic entailment or truth claim.",
+            "WALL_CLOCK": "Immediate evidence recovery, no rerun.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Stdlib producer, deterministic tie handling and fail-closed no-overlap behavior.",
+            "VERIFIABILITY": "Exact git blob and public independent verifier receipt."
+          }
+        }
+      ],
+      "negative_search_summary": "No current route can improve the already-completed qualification step; the only remaining work is canonical inheritance.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RECOVER_AND_INHERIT_EXACT_QUALIFIED_BM25",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_PARENT_PROMOTION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T06:27:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RECOVER_AND_INHERIT_EXACT_QUALIFIED_BM25",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PRESERVED_EXACT_PRODUCER_BLOB_95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+            "kind": "EVIDENCE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:27:00Z",
+            "evidence": [
+              "Brain commit 9da7da264557f00a41f27e1df131375d0bbde271"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_QUALIFICATION_RECEIPT_RUN_36678278264",
+            "kind": "INDEPENDENT_VERIFICATION",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:27:17Z",
+            "evidence": [
+              "verification-capsule-runner workflow 36678278264 conclusion success"
+            ],
+            "evidence_classes": [
+              "INDEPENDENT_VERIFIER",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
