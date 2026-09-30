@@ -148,19 +148,45 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
         )
         self.assertTrue(result["input_contract_bindability_enforced"])
 
-    def test_plain_state_fetch_remains_valid_when_goal_supplies_state_path(self):
+    def test_state_fetch_stays_out_of_generic_grounding_without_prior_context(self):
         goal="Fetch JSON from canonical/astra_runtime/state/example.json using url key source_url."
         grounding=grounder.ground(
             goal,self.registry,
             compiler=compiler,proposal_binder=proposal_binder,root=REPO_ROOT,
             enforce_bindability=True,
         )
-        ids=[
-            x["capability_id"]
-            for clause in grounding["clauses"]
-            for x in clause["candidates"]
-        ]
-        self.assertIn("http.json.fetch_from_state",ids,grounding)
+        self.assertEqual(grounding["grounded_clause_count"],0,grounding)
+        clause=grounding["clauses"][0]
+        rejected={
+            x["capability_id"]:x["error"]
+            for x in clause["rejected_unbindable_candidates"]
+        }
+        self.assertIn("http.json.fetch_from_state",rejected)
+        self.assertIn("source_json_path",rejected["http.json.fetch_from_state"])
+
+    def test_state_fetch_dedicated_compiler_path_remains_supported(self):
+        subgoal=(
+            "Fetch that project's authoritative live PyPI metadata "
+            "from the metadata URL recorded in the registry"
+        )
+        out=compiler._compile_context_url_json_fetch(
+            subgoal,
+            [
+                "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+                "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_TEST.json",
+            ],
+            self.registry,
+            REPO_ROOT,
+        )
+        self.assertIsNotNone(out)
+        action=out["action"]
+        self.assertEqual(action["args"]["capability_id"],"http.json.fetch_from_state")
+        self.assertEqual(
+            action["args"]["source_json_path"],
+            "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_TEST.json",
+        )
+        self.assertEqual(action["args"]["url_key"],"metadata_url")
+
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
