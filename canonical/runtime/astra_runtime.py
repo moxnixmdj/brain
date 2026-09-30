@@ -5266,8 +5266,33 @@ def _classify_plain_goal_gap(text):
         )
     ):
         return "CAUSAL_COMPOSITION"
-    return "CAPABILITY_CANDIDATE"
 
+    # An unresolved epistemic/research objective is not itself a missing
+    # executable package capability.  Treating "determine whether ... using
+    # authoritative data" as a supplier-acquisition query loses the planning
+    # problem and can bind irrelevant tools.  This classifier runs only after
+    # verified direct compilation has already failed, so fail closed into the
+    # semantic-decomposition lane instead of external package acquisition.
+    research_lead=bool(re.match(
+        r"^(?:determine|assess|evaluate|investigate|establish|test|study)\b",
+        lower,
+    ))
+    research_evidence=bool(re.search(
+        r"\b(?:whether|evidence|authoritative|primary|reference|source|sources|"
+        r"data|dataset|measurement|measurements|claim|hypothesis|uncertaint\w*|"
+        r"provenance|quantif\w*|method|experiment)\b",
+        lower,
+    ))
+    explicit_research_contract=bool(
+        re.search(r"\b(?:authoritative|primary|reference)\b",lower)
+        and re.search(r"\b(?:source|sources|data|evidence)\b",lower)
+    ) or bool(
+        re.search(r"\bchoose\s+and\s+justify\b",lower)
+        and re.search(r"\bindependently\s+verify\b",lower)
+    )
+    if (research_lead and research_evidence) or explicit_research_contract:
+        return "EPISTEMIC_RESEARCH_DECOMPOSITION"
+    return "CAPABILITY_CANDIDATE"
 
 def _write_goal_gap_classification(mission, subgoal, gap_class, compile_error):
     mid=str(mission.get("mission_id") or "UNKNOWN")
