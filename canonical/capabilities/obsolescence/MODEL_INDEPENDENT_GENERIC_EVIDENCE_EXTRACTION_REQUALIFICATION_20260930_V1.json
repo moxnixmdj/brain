@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_REQUALIFICATION_RECEIPT_V1",
+  "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+  "status": "VERIFIED_REACQUIRED_AFTER_MODERN_CONTAINER_REPAIR__INDEPENDENT_PUBLIC_PASS",
+  "canonical_base_commit": "fc6f91e411d44851a6578fd7edc3207ad89f39e6",
+  "prior_falsification_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+  "prior_promotion_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+  "repair": {
+    "description": "Extend deterministic visible block extraction to modern main/article/section/div content while preserving suppression, same-source provenance binding, BM25 admission, hashes, offsets, and fail-closed semantics.",
+    "repair_commit_on_promoted_branch": "3ecc783b905cc865106ea03f9ba17e0018d22b3e",
+    "repaired_producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485"
+  },
+  "public_requalification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 160,
+    "workflow_run_id": 36681655780,
+    "job_id": 109778209177,
+    "conclusion": "SUCCESS",
+    "exact_blobs": {
+      "producer": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+      "parent_frontend": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+      "objective_relevance_bm25": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+      "provenance_verifier": "1dc26e68d18010b66211d1d83f7b2024c8ad1fcf"
+    },
+    "authored_regressions": {
+      "objective_evidence_unit_extract": "9/9 PASS",
+      "generic_bm25_route": "2/2 PASS",
+      "parent_effective_frontend": "1/1 PASS",
+      "modern_div_main_content_regression": "PASS"
+    },
+    "independent_live_oracle": {
+      "tests": "4/4 PASS",
+      "domains": [
+        "rfc-editor.org",
+        "sqlite.org"
+      ],
+      "exact_blob_pin": "PASS",
+      "independent_refetch": "PASS",
+      "independent_visible_block_reconstruction": "PASS",
+      "page_raw_sha256_match": "PASS",
+      "visible_text_sha256_match": "PASS",
+      "evidence_text_sha256_match": "PASS",
+      "visible_text_offset_membership": "PASS",
+      "evidence_unit_id_recomputation": "PASS",
+      "candidate_mismatch_fails_before_fetch": "PASS"
+    }
+  },
+  "claim_scope": {
+    "verified": "GENERIC_NON_ROR_PROVENANCE_BOUND_BM25_SELECTED_FRESH_SAME_SOURCE_OBJECTIVE_GROUNDED_VERBATIM_EVIDENCE_UNITS_INCLUDING_MODERN_CONTAINER_CONTENT",
+    "unverified": [
+      "CLAIM_SUPPORT_OR_CONTRADICTION",
+      "SEMANTIC_ENTAILMENT",
+      "FACTUAL_CORRECTNESS",
+      "CAUSAL_DIRECTION",
+      "EVIDENCE_QUALITY",
+      "EVIDENCE_SUFFICIENCY",
+      "SOURCE_INDEPENDENCE",
+      "PARENT_CAPABILITY_COMPLETION"
+    ]
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_capability_promoted": false,
+  "reusable_capability_credit_restored": true,
+  "next_causal_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+}
