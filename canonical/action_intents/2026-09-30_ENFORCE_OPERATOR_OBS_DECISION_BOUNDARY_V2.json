@@ -13,7 +13,7 @@
   "expected_parent_frontier_change": "Close the operator decision-boundary loophole without changing capability credit or the current parent numeric-relation frontier: consequential diagnosis, recommendation, route selection, and execution must derive authority from current-base seven-layer OBS; memory and summaries remain non-authoritative.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "current main ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414",
+    "current main 9f955556a8f5376d697a5b73403acbf7a132350b after PR289 evidence-admissibility reconciliation",
     "current parent blocker PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
@@ -36,7 +36,7 @@
   "weakens_existing_guard": false,
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414",
+    "canonical_base_commit": "9f955556a8f5376d697a5b73403acbf7a132350b",
     "real_outcome": "Make current-base seven-layer OBS a mandatory authority boundary for consequential Brain diagnosis, recommendation, route selection, and execution, while preserving the existing search stop rule and the newly localized parent numeric-relation frontier.",
     "required_capability": "DURABLE_OPERATOR_OBS_DECISION_BOUNDARY_ENFORCEMENT",
     "obs_goal": {
