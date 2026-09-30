@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_GROUNDED_COMPOSITION_FRESH_REQUALIFICATION_V1",
+  "status": "VERIFIED_REQUALIFIED_AFTER_DIRECT_COMPILER_REPAIR",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "parent_capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "canonical_base_before_reconciliation": "ecec260cd0fd64dd820d0b86ec6f3162880f448e",
+  "direct_compiler_repair_merge_commit": "3c6ef5185a646ff0d0f1b970fc8017dff5966a72",
+  "direct_compiler_repair_validation_run_id": 36658401010,
+  "fresh_requalification": {
+    "task": "ARTIFACT_INTEGRITY_VERIFICATION_STRATEGY_DECISION",
+    "materially_distinct_from_pr277": true,
+    "prior_task_replayed": false,
+    "run_id": 36659312279,
+    "job_id": 109710324356,
+    "head_sha": "c5c611a9c4d142b6e0f1c20a40efc8583ba1bcae",
+    "exact_current_brain_byte_gate": "PASS",
+    "direct_compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+    "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+    "planner_model_last": null,
+    "producer": {
+      "capability_id": "decision.synthesis.typed.stdlib",
+      "status": "DECIDED",
+      "selected_alternative": "LOCAL_SHA256_REHASH",
+      "model_dependency_count": 0
+    },
+    "verifier": {
+      "capability_id": "decision.synthesis.verify.stdlib",
+      "verified": true,
+      "selected_alternative": "LOCAL_SHA256_REHASH",
+      "producer_independent": true,
+      "model_dependency_count": 0
+    },
+    "causal_binding": {
+      "input_path_ref": {
+        "$result": {
+          "cycle": 0,
+          "field": "input_path"
+        }
+      },
+      "result_path_ref": {
+        "$result": {
+          "cycle": 0,
+          "field": "output_path"
+        }
+      },
+      "refs_distinct": true
+    },
+    "workflow_conclusion": "FAILURE",
+    "workflow_failure_class": "POST_EXECUTION_HARNESS_FALSE_NEGATIVE",
+    "workflow_failure_detail": "The task and independent decision verifier completed successfully. The harness then asserted a nonexistent top-level model_dependency_count field even though planner_model_last was null and both executed capability results reported model_dependency_count=0.",
+    "capability_execution_failure": false
+  },
+  "independent_no_replay_adjudication": {
+    "run_id": 36659436525,
+    "job_id": 109710704725,
+    "head_sha": "32582a808af1f200c31ff0cb5a7e8fedb6e5a5fc",
+    "execution_replayed": false,
+    "immutable_prior_job_log_fetched": true,
+    "independent_semantic_recompute": true,
+    "selected_alternative": "LOCAL_SHA256_REHASH",
+    "result": "PASS",
+    "artifact_id": 11073407709,
+    "artifact_digest": "sha256:b70a033d0d1cf7b6e61dd4b83aad20ee61e3621b2d9d6bb6f5790e7240e343e7"
+  },
+  "preserved_prior_evidence": {
+    "fresh_real_run_id": 36652169397,
+    "materially_distinct_fresh_reuse_run_id": 36652623916,
+    "prior_post_promotion_falsification_run_id": 36653756561,
+    "prior_failed_requalification_run_id": 36656793034
+  },
+  "promotion_scope": {
+    "restore_capability_credit": true,
+    "restore_fresh_reuse_credit": true,
+    "parent_capability_credit": false,
+    "verified_real_task_counter_increment": 0,
+    "reason": "This run requalifies a previously acquired child capability after repair; prior real-task evidence remains preserved. Parent end-to-end capability is still unproven."
+  },
+  "restored_route": "grounded executable composition + shared proposal binding authority + direct compound compiler causal effect-result lowering + deterministic capability graph execution",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "residual_gap": "PARENT_CAPABILITY_STILL_LACKS_A_NEW_POST_REPAIR_CROSS_DOMAIN_END_TO_END_REAL_TASK",
+  "next_action": "RUN_NEW_MATERIALLY_DIFFERENT_PARENT_TECHNICAL_SCIENTIFIC_TASK_END_TO_END__NOT_SPACE_CARGO__NOT_SERIALIZATION__MODEL_INDEPENDENT__INDEPENDENT_VERIFY__STOP_ON_FIRST_CAUSAL_GAP",
+  "progress_credit": {
+    "reusable_capabilities_inherited_delta": 1,
+    "verified_real_tasks_completed_delta": 0,
+    "fresh_reuse_passes_delta": 1,
+    "frontier_dependencies_removed_delta": 0,
+    "residual_gaps_localized_delta": 0
+  }
+}
