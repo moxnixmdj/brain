@@ -84,6 +84,7 @@ def _roles(parsed):
     if special:
         prop,left_operand,right_operand=special
         property_tokens=_words(prop)
+        property_core_tokens=property_tokens[-2:] if len(property_tokens)>1 else property_tokens
         left_tokens=_words(left_operand)
         right_tokens=_words(right_operand)
         mode="THAT_OF_SHARED_PROPERTY"
@@ -92,6 +93,7 @@ def _roles(parsed):
         right_tokens=_words(right)
         shared=[x for x in left_tokens if x in set(right_tokens)]
         property_tokens=shared
+        property_core_tokens=property_tokens[-2:] if len(property_tokens)>1 else property_tokens
         shared_set=set(shared)
         left_tokens=[x for x in left_tokens if x not in shared_set] or left_tokens
         right_tokens=[x for x in right_tokens if x not in shared_set] or right_tokens
@@ -100,6 +102,7 @@ def _roles(parsed):
     return {
         "role_mode":mode,
         "property_tokens":property_tokens,
+        "property_core_tokens":property_core_tokens,
         "left_operand_tokens":left_tokens,
         "right_operand_tokens":right_tokens,
         "left_hard_ids":_hard_ids(left_tokens),
@@ -137,7 +140,7 @@ def _operand_match(candidate_tokens,roles):
     }
 
 def _property_match(candidate_tokens,roles):
-    requested=list(dict.fromkeys(roles["property_tokens"]))
+    requested=list(dict.fromkeys(roles.get("property_core_tokens") or roles["property_tokens"]))
     if not requested:
         return {
             "method":"NO_BOUNDED_SHARED_PROPERTY",
@@ -146,7 +149,7 @@ def _property_match(candidate_tokens,roles):
             "matched_property_tokens":[],
             "verified":True,
         }
-    required=1 if len(requested)==1 else 2
+    required=len(requested)
     c=set(candidate_tokens)
     matched=[x for x in requested if x in c]
     return {
