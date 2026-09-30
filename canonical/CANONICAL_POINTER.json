@@ -196,11 +196,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+    "next_step": "ACQUIRE_MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING__FRESH_CHILD_QUALIFICATION__NO_PARENT_TASK_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "critical_blocker": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -277,7 +277,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -588,22 +588,31 @@
     "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
-      "event_id": "PARENT_DEMOGRAPHY_STRUCTURED_MODEL_FREE_REAL_TASK_SCOPE_CORRECTED_20260930",
+      "event_id": "PARENT_OPEN_ENDED_TASK_A_COMPILE_GAP_LOCALIZED_20260930",
       "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "status": "VERIFIED_STRUCTURED_MODEL_FREE_REAL_TASK__NOT_OPEN_ENDED_PARENT_PROMOTION_EVIDENCE",
-      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
-      "source_real_task_run_id": 36667844172,
+      "status": "OPEN_ENDED_TASK_A_SPENT_FAIL__FIRST_CAUSAL_COMPILE_GAP_LOCALIZED",
+      "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_BROAD_OBJECTIVE_COMPILE_GAP_20260930_V1.json",
+      "source_real_task_run_id": 36670516407,
+      "source_real_task_job_id": 109744305866,
+      "artifact_id": 11077861584,
+      "artifact_digest": "sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "task_executed": true,
+      "execution_count": 1,
+      "parent_task_completed": false,
+      "same_task_replay_allowed": false,
       "scoreboard": {
         "reusable_capabilities_inherited": 5,
         "verified_real_tasks_completed": 9,
         "fresh_reuse_passes": 2,
         "frontier_dependencies_removed": 1,
-        "residual_gaps_localized": 10
+        "residual_gaps_localized": 11
       }
     },
     "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "frontier_decomposition_status": "PARENT_GEOPHYSICS_FRESH_TASK_FAILED__LIVE_EVIDENCE_FETCH_WORKS__FIRST_NUMERIC_RELATION_SUBGOAL_UNREACHABLE",
+    "frontier_decomposition_status": "PARENT_OPEN_ENDED_TASK_A_SPENT__COMPILE_FIRST_CAUSAL_GAP_LOCALIZED__BROAD_OBJECTIVE_GROUNDING_MISSING",
     "mistake_immunity_status": "FAIL_CLOSED__KNOWN_RECURRING_CLASSES_MACHINE_GUARDED__UNKNOWN_ERRORS_CONTAINED_BY_PROOF_BEFORE_AUTHORITY",
     "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
     "grounding_requalification": {
@@ -626,13 +635,14 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "OPEN_ENDED_PARENT_EVIDENCE_SCOPE_CORRECTED__STRUCTURED_DEMOGRAPHY_PRESERVED_SUPPORTING_ONLY",
-      "reason": "The parent useful behavior requires autonomous decomposition and material knowledge/tool discovery. Demography predeclared exact sources, JSON paths, formula and threshold, so its verified execution is supporting evidence but cannot authorize the open-ended parent claim.",
+      "status": "AUTHORITATIVE_OPEN_ENDED_TASK_A_SPENT_FAIL__COMPILE_GAP_LOCALIZED",
+      "reason": "Earliest valid one-shot PR49 receipt failed at broad-objective compilation before source/tool discovery. Later duplicate executions are quarantined and non-authoritative.",
       "active_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-      "blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+      "blocker": "MODEL_INDEPENDENT_BROAD_OBJECTIVE_TO_RESEARCH_PLAN_AND_BOUND_CAPABILITY_GROUNDING_MISSING",
       "evidence_paths": [
-        "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json"
+        "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_BROAD_OBJECTIVE_COMPILE_GAP_20260930_V1.json"
       ],
+      "authoritative_run_id": 36670516407,
       "same_task_replay_allowed": false
     },
     "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
