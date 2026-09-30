@@ -351,7 +351,11 @@
       },
       "progress_credit": "RESIDUAL_GAP_LOCALIZED",
       "residual_gap": "PARENT_NUMERIC_RELATION_SUBGOAL_HAS_NO_VERIFIED_BOUND_CAPABILITY_MATCH__EXISTING_EXACT_SYMBOLIC_ROUTE_NOT_BOUND_TO_CONTROLLER",
-      "reason": "The exact frozen task reached both source-acquisition clauses but the earliest quantitative relation clause had no verified bound capability match."
+      "reason": "The exact frozen task reached both source-acquisition clauses but the earliest quantitative relation clause had no verified bound capability match.",
+      "promotion_admissibility_correction": "canonical/capabilities/obsolescence/PR286_GEOPHYSICS_RESIDUAL_GAP_ADMISSIBILITY_CORRECTION_20260930_V1.json",
+      "claim_scope_exact": true,
+      "parent_capability_promoted": false,
+      "same_task_replay_allowed": false
     }
   ],
   "active_frontier_accounting": {
