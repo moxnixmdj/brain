@@ -11,7 +11,7 @@
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
   "highest_leverage_now": true,
-  "expected_parent_frontier_change": "Acquire only bounded explicit-comparison claim-spec generation and unique lexical operand binding from objective plus integrity-checked generic V2 evidence; then invoke the already-verified claim/relation primitive. No truth or parent promotion.",
+  "expected_parent_frontier_change": "Acquire only bounded explicit numeric-comparison claim-spec generation across GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE plus exact quoted-claim binding, with unique lexical operand binding from objective plus integrity-checked generic V2 evidence; then invoke the already-verified claim/relation primitive. No truth or parent promotion.",
   "evidence_presence_classification": "VERIFIED_RELATION_EXECUTOR_EXISTS__SEMANTIC_OPERAND_ROLES_UNBOUND",
   "orthogonal_recurrence_count": 1,
   "probe_specific": false,
@@ -22,7 +22,7 @@
   "parent_task_replay": false,
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
-  "stop_condition": "Stop after exact-base implementation, fail-closed ambiguity tests, fresh cross-domain qualification with independent role/relation oracle, and promotion of only bounded explicit-comparison binding scope.",
+  "stop_condition": "Stop after exact-base implementation, fail-closed ambiguity tests across the full bounded downstream operator surface and exact quoted claims, fresh cross-domain qualification with an independent role/relation oracle, and promotion of only that bounded binding scope.",
   "recursive_obs": {
     "canonical_base_commit": "dd6549fea72d378e9b057048fd78e9fef04d44db",
     "real_outcome": "Turn explicit comparative research objectives plus verified generic evidence units into an auditable relation spec consumable by the already-verified relation evaluator.",
@@ -76,7 +76,7 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "BOUNDED_EXPLICIT_COMPARISON_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+        "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
         "GENERAL_RULE_BASED_NLP",
         "MODEL_SEMANTIC_JUDGE"
       ],
@@ -86,7 +86,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Positive GT/LT comparisons, reversed roles, ambiguity rejection, multiple-number rejection, unit mismatch, unsupported objective, tampered V2 evidence; then fresh cross-domain live V2 evidence cases with an independent parser/oracle."
+      "synthetic_verification_necessity": "Positive GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE comparisons, reversed roles, literal threshold/unit handling, exact quoted claims, ambiguity rejection, multiple-number rejection, unit mismatch, unsupported objective, tampered V2 evidence; then fresh cross-domain generic V2 cases with an independent parser/oracle."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
@@ -109,7 +109,7 @@
       "affected_layers_only_on_revalidation": true,
       "challenger_refresh_decision": "Reopen if fresh qualification exposes a generic ambiguity class."
     },
-    "selected_surviving_route": "BOUNDED_EXPLICIT_COMPARISON_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
-    "why_selected_route_is_fastest_sufficient": "It adds only the missing semantic-role mapping, reuses both verified upstream extraction and downstream relation execution, and fails closed everywhere else."
+    "selected_surviving_route": "BOUNDED_EXPLICIT_COMPARISON_AND_EXACT_QUOTED_CLAIM_GRAMMAR_PLUS_UNIQUE_LEXICAL_OPERAND_BINDING",
+    "why_selected_route_is_fastest_sufficient": "It covers the entire already-verified explicit relation operator surface plus exact quoted support, adds only the missing semantic-role/spec mapping, reuses verified upstream extraction and downstream evaluation, and fails closed everywhere else."
   }
 }
