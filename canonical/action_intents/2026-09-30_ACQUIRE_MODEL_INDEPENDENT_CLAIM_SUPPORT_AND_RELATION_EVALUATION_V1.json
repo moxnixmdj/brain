@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-CLAIM-SUPPORT-AND-RELATION-EVALUATION-FROM-EXTRACTED-EVIDENCE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+  "expected_parent_frontier_change": "Acquire a bounded typed bridge from extracted evidence to exact verbatim claim support and explicit numeric relations; no semantic paraphrase inference, no parent replay, no parent promotion.",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "CAPABILITY_GAP_ACTIVE__EXTRACTION_VERIFIED__NUMERIC_AND_DECISION_CAPABILITIES_INHERITED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "stop_condition": "Stop after deterministic fail-closed implementation, independent fresh cross-domain qualification, and promotion of only exact verbatim support plus typed numeric relation scope.",
+  "recursive_obs": {
+    "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+    "real_outcome": "Turn provenance-bound extracted evidence into auditable typed support/relation facts without model cognition.",
+    "obs_goal": {
+      "real_outcome": "Verify exact-source support for verbatim claims and compute explicit numeric relations over extracted literals.",
+      "proxy_goals_deleted": [
+        "general semantic entailment",
+        "paraphrase understanding",
+        "truth from relevance",
+        "evidence sufficiency",
+        "new decision engine",
+        "parent replay"
+      ],
+      "surviving_necessity": "A narrow typed admission seam between extracted evidence and existing numeric/decision layers."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib re/decimal/json for exact literal parsing and relation evaluation"
+      ],
+      "capability_work_deleted": [
+        "No model cognition",
+        "No semantic paraphrase matcher",
+        "No new supplier",
+        "No task-specific source literals",
+        "No truth/sufficiency inference"
+      ],
+      "surviving_gap": "No verified capability currently admits exact text support or typed numeric relations directly from extracted evidence records."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic evidence-to-typed-relation seam after verified source extraction.",
+      "delete_bypass_substitute_options": [
+        "Reuse extracted verbatim passages and numeric_literals fields directly",
+        "Reuse strict typed relation semantics rather than natural-language inference",
+        "Reject knowledge.consistency.assess because it expects already-structured JSON observations and would overstate prose semantics"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_EXTRACTED_RECORDS_WITH_EXACT_VERBATIM_SUPPORT_AND_TYPED_LITERAL_RELATION_EVALUATOR",
+        "FORCE_PROSE_INTO_KNOWLEDGE_CONSISTENCY_ASSESS",
+        "MODEL_BASED_SEMANTIC_CLAIM_EVALUATION"
+      ],
+      "losing_routes_reason": "Exact support and explicit numeric relation evaluation are fully auditable and reuse current evidence structure. Knowledge-consistency would require inventing structured semantics first; model evaluation is circular and broader than needed.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run positive exact-support, unsupported paraphrase rejection, same/different-unit numeric relations, malformed literal rejection, and fresh cross-domain live extracted-evidence cases. Independent verifier must rederive support/relation without producer imports."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any duplicate claim-support implementation",
+        "Any parent replay"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "relevant_source_evidence_extract",
+        "math.numeric_expression.sympy",
+        "decision.synthesis.typed.stdlib"
+      ],
+      "fresh_reuse_plan": "After promotion, freeze a materially different fresh open-ended parent task and stop on first new causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused current canonical blocker",
+        "Reused exact extraction output contract",
+        "Reused numeric and decision capability inventory"
+      ],
+      "search_stop_decision": "No external supplier is needed for exact substring support or bounded numeric relations.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen only after material base change or qualification failure."
+    },
+    "selected_surviving_route": "COMPOSE_EXTRACTED_RECORDS_WITH_EXACT_VERBATIM_SUPPORT_AND_TYPED_LITERAL_RELATION_EVALUATOR",
+    "why_selected_route_is_fastest_sufficient": "It adds one small stdlib adapter over already-qualified extracted evidence and directly feeds typed downstream reasoning without introducing semantic overclaim."
+  }
+}
