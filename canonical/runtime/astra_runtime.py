@@ -5851,7 +5851,7 @@ def run_goal(step, mission):
 
 def _collect_model_dependency_count(value, depth=0):
     if depth>24:
-        return 0
+        raise Blocker("COGNITION_PROVENANCE_MAX_DEPTH_EXCEEDED")
     count=0
     if isinstance(value,dict):
         if "model_dependency_count" in value:

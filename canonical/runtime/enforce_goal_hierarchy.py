@@ -895,10 +895,16 @@ def main():
     accounting=scoreboard.get("active_frontier_accounting") or {}
     if str(accounting.get("parent_frontier_capability") or "")!=str(hierarchy.get("active_capability_target") or ""):
         fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(accounting.get("current_parent_blocker") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("SCOREBOARD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
     if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
 
     boot=pointer.get("boot_requirements") or {}
+    if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
+        fail("CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY_NOT_REQUIRED")
+    if boot.get("runtime_cognition_provenance_required_for_cognitive_credit") is not True:
+        fail("RUNTIME_COGNITION_PROVENANCE_NOT_REQUIRED_FOR_COGNITIVE_CREDIT")
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
     if boot.get("operator_obs_decision_boundary_required") is not True:
         fail("OPERATOR_OBS_DECISION_BOUNDARY_NOT_REQUIRED")

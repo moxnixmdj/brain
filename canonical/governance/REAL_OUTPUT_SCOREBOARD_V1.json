@@ -454,6 +454,7 @@
     "active_subcapability_target": null,
     "subcapability_status": "ONE_CLEAN_MODEL_INDEPENDENT_PARENT_REAL_TASK_VERIFIED__SECOND_CROSS_DOMAIN_TASK_REQUIRED",
     "frontier_dependency_removed": false,
-    "reconciliation_credit": 0
+    "reconciliation_credit": 0,
+    "current_parent_blocker": "PARENT_MODEL_INDEPENDENT_CROSS_DOMAIN_REAL_TASK_B_REQUIRED__OLD_SPACE_CARGO_TASK_A_INADMISSIBLE_FOR_DEPENDENCY_REMOVAL"
   }
 }
