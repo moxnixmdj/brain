@@ -3216,18 +3216,26 @@
         ],
         "adapter_path": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py"
       },
-      "status": "CANDIDATE_BOUND_CAPABILITY",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
-        "inherited_upstream_evidence": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
-        "prior_narrow_schema_behavioral_evidence": "runner run 36680322787",
-        "new_interface_status": "QUALIFIED_CANDIDATE_PENDING_CANONICAL_PROMOTION",
-        "status": "INDEPENDENT_PUBLIC_FRESH_CROSS_DOMAIN_QUALIFICATION_PASS",
+        "status": "INDEPENDENT_LIVE_GENERIC_V2_END_TO_END_PASS",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
         "public_repository": "moxnixmdj/verification-capsule-runner",
-        "public_pr": 161,
-        "public_run_id": 36682132201,
+        "public_pr": 162,
+        "public_run_id": 36682488104,
+        "public_job_id": 109780804595,
+        "artifact_id": 11082521746,
+        "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
         "producer_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
         "test_git_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
-        "exact_blob_match": true
+        "live_domains": [
+          "sqlite.org",
+          "rfc-editor.org"
+        ],
+        "exact_blob_binding_pass": true,
+        "independent_oracle": true,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
       }
     }
   },
