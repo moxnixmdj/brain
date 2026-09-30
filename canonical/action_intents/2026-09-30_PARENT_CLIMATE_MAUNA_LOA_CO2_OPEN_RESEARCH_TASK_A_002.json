@@ -262,7 +262,7 @@
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
           ],
-          "resolution": "REJECTED_BY_CONTRACT",
+          "resolution": "DISQUALIFIED",
           "comparison": {
             "CORRECTNESS": "Potentially capable.",
             "CAPABILITY_STRENGTH": "Broad.",
