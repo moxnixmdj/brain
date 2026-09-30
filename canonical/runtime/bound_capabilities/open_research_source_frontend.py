@@ -3,8 +3,9 @@
 
 This composes already-qualified decomposition, source-candidate discovery,
 provenance verification, and the independently-qualified ROR organization
-identity binder. It deliberately stops before primary-source/relevance
-verification, evidence extraction, or answer synthesis.
+identity binder. Primary-source status is preserved as optional source-role
+metadata rather than a universal admission gate. The frontend deliberately
+stops before objective-relevance verification, evidence extraction, or answer synthesis.
 """
 from __future__ import annotations
 
@@ -129,21 +130,23 @@ def run(objective,decomposition,limit=12,timeout=15):
                 "CANDIDATES_WITH_PROVENANCE_IDENTITY_AVAILABLE"
             ),
             "EVIDENCE_ACQUISITION":(
-                "BLOCKED_ON_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+                "BLOCKED_ON_OBJECTIVE_RELEVANCE_VERIFICATION"
                 if identity_ready else
-                "BLOCKED_ON_AUTHORITY_IDENTITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+                "BLOCKED_ON_AUTHORITY_IDENTITY_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
             ),
             "EVIDENCE_EXTRACTION":"NOT_STARTED",
             "RELATION_EVALUATION":"NOT_STARTED",
             "DECISION_SYNTHESIS_AND_VERIFICATION":"NOT_STARTED",
         },
         "next_required_capability":(
-            "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
+            "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
             if identity_ready else
-            "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_PRIMARY_SOURCE_AND_RELEVANCE_VERIFICATION"
+            "MODEL_INDEPENDENT_SOURCE_AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION"
         ),
         "authority_identity_claims_made":identity_ready,
         "authority_claims_made":False,
+        "primary_source_gate_required":False,
+        "primary_source_status_role":"OPTIONAL_METADATA_NOT_UNIVERSAL_RESEARCH_ADMISSION_GATE",
         "primary_source_claims_made":False,
         "relevance_claims_made":False,
         "evidence_sufficiency_claims_made":False,

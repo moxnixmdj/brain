@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "DELETE-UNIVERSAL-PRIMARY-SOURCE-GATE-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_QUALIFICATION",
+  "canonical_base_commit": "7753d889e833e9d281e02c0ceab1b935d044a36d",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
+  "action_kind": "DELETE_UNNECESSARY_UNIVERSAL_GATE",
+  "real_outcome": "Remove primary-source status as a universal admission requirement while preserving it as optional source-role metadata; leave objective relevance as the sole semantic admission blocker after provenance and source-organization identity.",
+  "recursive_obs": {
+    "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "deleted_requirement": "EVERY_ADMISSIBLE_RESEARCH_SOURCE_MUST_PROVE_PRIMARY_SOURCE_STATUS",
+    "why_deleted": "The parent capability needs decision-quality evidence, not a universal source genre. Official standards, authoritative datasets, APIs, and rigorous secondary syntheses may be valid evidence even when 'primary source' is inapplicable or false.",
+    "surviving_necessity": "OBJECTIVE_RELEVANCE_MUST_STILL_BE_VERIFIED",
+    "selected_route": "DELETE_PRIMARY_SOURCE_AS_UNIVERSAL_GATE__PRESERVE_OPTIONAL_METADATA__TARGET_RELEVANCE_ONLY",
+    "implementation_still_necessary": true
+  },
+  "nonclaims": [
+    "PRIMARY_SOURCE_STATUS_VERIFIED",
+    "OBJECTIVE_RELEVANCE_VERIFIED",
+    "EVIDENCE_SUFFICIENCY_VERIFIED",
+    "PARENT_CAPABILITY_PROMOTED"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_gap_if_qualified": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1"
+}
