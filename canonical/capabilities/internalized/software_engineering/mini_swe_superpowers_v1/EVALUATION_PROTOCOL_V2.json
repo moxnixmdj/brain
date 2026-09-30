@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_INTERNALIZED_CODING_EVALUATION_PROTOCOL_V2",
+  "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
+  "configuration_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+  "build_overlay": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/build_overlay.py",
+  "package_verifier": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verify_package.py",
+  "substrate_policy": {
+    "zero_incremental_only": true,
+    "stop_before_credit_purchase": true,
+    "external_api_billing_forbidden": true,
+    "substrate_is_not_owned_capability": true
+  },
+  "contamination_policy": {
+    "configured_cognition_may_read": [
+      "task instruction supplied to the agent",
+      "task metadata explicitly supplied to the agent",
+      "files and command outputs actually present in the built runtime workspace after task environment startup"
+    ],
+    "configured_cognition_must_not_read_before_submission": [
+      "solution/**",
+      "tests/** or hidden verifier logic not present in the runtime workspace",
+      "build-only benchmark source or Docker build context removed before runtime",
+      "task-specific online analyses or hints",
+      "repository environment/** source merely because it was used to build the runtime"
+    ],
+    "runtime_visibility_rule": "AGENT_KNOWLEDGE_BOUNDARY_EQUALS_WHAT_THE_REAL_TASK_RUNTIME_EXPOSES__BUILD_SOURCE_IS_NOT_AGENT_VISIBLE_UNLESS_IT_SURVIVES_IN_RUNTIME",
+    "task_spent_after_hidden_verifier_exposure": true,
+    "task_invalidated_after_task_specific_build_source_exposure": true
+  },
+  "stage_order": [
+    {
+      "stage": 1,
+      "benchmark": "Terminal-Bench 4.0",
+      "strict_outer_target_percent": 66.4,
+      "matched_independent_reference_percent": 59.6,
+      "decision": "NO_PROMOTION_BELOW_CORRESPONDING_OPUS55_BAR"
+    },
+    {
+      "stage": 2,
+      "benchmark": "FrontierCode v1.1 Main",
+      "target_percent": 54.4,
+      "prerequisite": "STAGE_1_PASS"
+    },
+    {
+      "stage": 3,
+      "benchmark": "CursorBench 4.0 or matched direct behavioral equivalent",
+      "target_percent": 57.8,
+      "prerequisite": "STAGE_1_AND_STAGE_2_PASS"
+    }
+  ],
+  "attribution_gate": {
+    "configured_must_materially_differ_from_substrate_only": true,
+    "acceptable_signals": [
+      "higher verified task completion",
+      "fewer unrecovered failures",
+      "better root-cause debugging",
+      "better regression preservation",
+      "successful long-horizon completion where baseline fails",
+      "verifier-confirmed improvement traceable to configuration-prescribed actions"
+    ]
+  },
+  "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_BRAIN_CONFIGURED_COMPOSED_ROUTE_ITSELF_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
+  "current_state": "COMPOSED_CONFIGURATION_READY_FOR_PACKAGE_QUALIFICATION__PRETRAIN_TASK_CONTAMINATED__NEW_RUNTIME_VISIBLE_TASK_REQUIRED",
+  "contamination_events": [
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
+  ]
+}
