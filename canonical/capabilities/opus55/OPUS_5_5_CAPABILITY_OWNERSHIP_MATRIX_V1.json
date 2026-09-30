@@ -1,0 +1,289 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
+  "status": "FIRST_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_COMPLETE__RESIDUALS_EXPLICIT",
+  "evaluated_utc": "2026-09-30",
+  "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "hard_constraints": {
+    "incremental_spend_usd": 0,
+    "knowledge_external_jit": true,
+    "underlying_capability_invention": false
+  },
+  "supplier_access": {
+    "gpt_6_astra": {
+      "route": "ChatGPT Work or Codex -> GPT-6 Astra",
+      "plan_level_evidence": "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+      "incremental_spend_rule": "USE_INCLUDED_PLUS_ALLOWANCE_ONLY__DO_NOT_BUY_CREDITS_OR_USE_PAID_API",
+      "preflight": "VERIFY_INCLUDED_ALLOWANCE_AND_MODEL_SURFACE_BEFORE_USE"
+    }
+  },
+  "status_semantics": {
+    "VERIFIED_OWNED_EQUAL_OR_BETTER": "A durable configured Brain route exists and evidence at the claimed scope equals/exceeds Opus 5.5.",
+    "OWNED_COMPONENT_NOT_FULL_FAMILY": "Reusable Brain capability exists but does not establish the whole Opus family.",
+    "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING": "Existing components are configured as a candidate, but equal-or-better evidence for the full claimed scope is missing.",
+    "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND": "Current search did not find a verified existing route meeting the Opus bar under hard constraints. Do not invent."
+  },
+  "rows": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "status": "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND",
+      "best_existing_routes": [
+        "GPT-6 Astra + Codex + GitHub + Superpowers",
+        "Claude Sonnet 5.5 for Terminal-Bench only"
+      ],
+      "evidence": "Sonnet 5.5 exceeds Opus on Terminal-Bench 4.0 (70.6 vs 66.4), but remains below Opus on FrontierCode and CursorBench. Astra is below Opus on Anthropic's Terminal-Bench and FrontierCode table.",
+      "residual": "Need one existing configured $0 route that equals/exceeds the complete advanced-coding behavior, not one benchmark slice.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://www.anthropic.com/claude-sonnet-5-5",
+        "https://prod.cursor.com/evals"
+      ]
+    },
+    {
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra Work + Brain persistent state + installed plugins/tools + reasoning receipts"
+      ],
+      "evidence": "Astra is designed for complex end-to-end multi-step work and Work provides agentic execution, but no direct whole-family Opus 5.5 comparison establishes parity.",
+      "sources": [
+        "https://openai.com/index/gpt-6-astra/",
+        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+      ]
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "status": "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND",
+      "best_existing_routes": [
+        "GPT-6 Astra Work + document/spreadsheet/presentation toolchain",
+        "GPT-6.1 Sol Work"
+      ],
+      "evidence": "Opus 5.5 currently leads GDPval-AA v2.1 at 1846 and AA-Briefcase v1.1 at 1822 in current public boards.",
+      "residual": "Find existing route >= both relevant professional-work bars or stronger direct evidence.",
+      "sources": [
+        "https://artificialanalysis.ai/evaluations/gdpval-aa",
+        "https://artificialanalysis.ai/evaluations/aa-briefcase",
+        "https://www.anthropic.com/claude-opus-5-5"
+      ]
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_package": "canonical/capabilities/opus55/OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1.json",
+      "best_existing_routes": [
+        "GPT-6 Astra Work + installed connectors/plugins"
+      ],
+      "evidence": "AutomationBench: GPT-6 Astra 41.4 vs Opus 5.5 40.0 on Anthropic's published comparison.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://openai.com/index/gpt-6-astra/",
+        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+      ]
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "status": "UNRESOLVED_EXISTING_EQUAL_OR_BETTER_ROUTE_NOT_FOUND",
+      "best_existing_routes": [
+        "GPT-6 Astra + web + code + Wolfram",
+        "DeepSeek V4.1 Flash open-weight candidate"
+      ],
+      "evidence": "Current HLE-with-tools public evidence still has Opus 5.5 at 67.7; Astra is 57.2 and the strongest searched non-Opus row remains below the target.",
+      "residual": "No searched existing route currently clears 67.7 on the same public setting.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://benchlm.ai/benchmarks/hlewithtools"
+      ]
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_package": "canonical/capabilities/opus55/OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1.json",
+      "best_existing_routes": [
+        "GPT-6 Astra Work/Codex + web/code/Wolfram"
+      ],
+      "evidence": "Terminal-Bench-Science 0.1: GPT-6 Astra 64.6 vs Opus 5.5 58.7.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://openai.com/index/gpt-6-astra/",
+        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+      ]
+    },
+    {
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra Work + image/file analysis",
+        "Claude Sonnet 5.5 is above Opus on Chartography-with-tools but no verified $0 Brain access route is currently configured"
+      ],
+      "evidence": "Sonnet 5.5 has published Chartography-with-tools 90.2 vs Opus 89.0; current Brain-owned zero-incremental route is not yet verified at that bar.",
+      "sources": [
+        "https://www.anthropic.com/claude-sonnet-5-5",
+        "https://benchlm.ai/benchmarks/chartographywithtools",
+        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+      ]
+    },
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra Work computer use + Remote Desktop Commander + browser tools"
+      ],
+      "evidence": "OpenAI describes Astra as state-of-the-art in computer/browser use, but current published OSWorld figures are not directly comparable with Anthropic's Opus 5.5 81.8 partial result.",
+      "residual": "Need comparable evidence or direct same-harness evaluation.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://openai.com/index/gpt-6-astra/"
+      ]
+    },
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra Work + Wolfram + spreadsheet/document tooling + JIT authoritative filings"
+      ],
+      "evidence": "Existing route is strong and configured conceptually, but no direct Opus-5.5-or-better comparative evidence was found for the full financial-analysis scope.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://openai.com/index/gpt-6-astra/"
+      ]
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra + Brain fail-closed gates + reasoning receipts"
+      ],
+      "evidence": "OpenAI reports strong intent/scope behavior for Astra, but no direct Opus 5.5 matched comparison closes the whole family.",
+      "sources": [
+        "https://openai.com/index/gpt-6-astra/",
+        "https://www.anthropic.com/claude-opus-5-5"
+      ]
+    },
+    {
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "Brain canonical Git state + reasoning receipts + ChatGPT Work/Codex persistent project state"
+      ],
+      "evidence": "Brain already persists state across sessions and Astra supports long-context/agent work; comparative Opus-level long-horizon reliability remains unverified.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+      ]
+    },
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "Brain orchestration + GPT-6 Astra Work + specialist tools/agents"
+      ],
+      "evidence": "Durable orchestration machinery exists, but no direct equal-or-better Opus 5.5 delegation evaluation is preserved.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://openai.com/index/gpt-6-astra/"
+      ]
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "best_existing_routes": [
+        "Brain fail-closed evidence/verification laws + independent verifiers + Git recovery + capability receipts"
+      ],
+      "evidence": "Historical Brain contains multiple verified self-correction/recovery mechanisms, but they have not been compared at whole-family Opus 5.5 strength.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5"
+      ]
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra Work + document/spreadsheet/presentation tools + Figma"
+      ],
+      "evidence": "Astra and Work support documents/spreadsheets/presentations; GDPval-AA/AA-Briefcase still favor Opus 5.5 overall professional work.",
+      "sources": [
+        "https://openai.com/index/gpt-6-astra/",
+        "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+        "https://artificialanalysis.ai/evaluations/gdpval-aa",
+        "https://artificialanalysis.ai/evaluations/aa-briefcase"
+      ]
+    },
+    {
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra or GPT-5.6 Sol + Brain style/instruction policies + evidence-to-decision synthesis package"
+      ],
+      "evidence": "Brain owns bounded synthesis components, but no broad Opus 5.5 communication parity evaluation exists.",
+      "sources": [
+        "https://www.anthropic.com/claude-opus-5-5",
+        "https://openai.com/index/gpt-6-astra/"
+      ]
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "best_existing_routes": [
+        "Brain tool-discovery machinery + ChatGPT plugin directory + GPT-6 Astra tool search"
+      ],
+      "evidence": "Substantial historical verified components exist, but prior parent-level open-ended tool-learning promotion remained incomplete.",
+      "sources": [
+        "https://openai.com/index/gpt-6-astra/"
+      ]
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "status": "CONFIGURED_CANDIDATE__COMPARATIVE_VERIFICATION_PENDING",
+      "best_existing_routes": [
+        "GPT-6 Astra + JIT web knowledge + tool discovery + Brain persistence"
+      ],
+      "evidence": "Astra is extremely strong on novel-environment evaluations, but no direct Opus 5.5 matched target is available.",
+      "sources": [
+        "https://openai.com/index/gpt-6-astra/"
+      ]
+    },
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "best_existing_routes": [
+        "Brain persistent control plane + GPT-6 Astra + installed tools + deterministic verification"
+      ],
+      "evidence": "Historical Brain has verified grounding, composition and decision-synthesis components; whole Opus-level general composition remains unverified.",
+      "sources": [
+        "https://openai.com/index/gpt-6-astra/"
+      ]
+    },
+    {
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_package": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+      "best_existing_routes": [
+        "SymPy 1.14.0 + Wolfram independent verification"
+      ],
+      "evidence": "Already canonically obsolete-verified in Brain.",
+      "sources": []
+    }
+  ],
+  "summary": {
+    "full_opus_5_5_envelope_obsoleted": false,
+    "newly_promotable_verified_owned_scoped_capabilities": 2,
+    "previously_verified_owned_scoped_capabilities": 1,
+    "whole_families_with_unresolved_equal_or_better_route": [
+      "ADVANCED_AGENTIC_CODING",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+    ],
+    "major_configured_candidates_pending_comparative_verification": [
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "ARTIFACT_CREATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "UNKNOWN_DOMAIN_ADAPTATION"
+    ],
+    "next_optimization_target": "SEARCH_EXISTING_ROUTES_FOR_THE_THREE_CURRENT_OPUS_LEADING_BARS_IN_PARALLEL__PRODUCTION_CODING__PROFESSIONAL_KNOWLEDGE_WORK__HLE_WITH_TOOLS__DO_NOT_BUILD_CAPABILITY"
+  }
+}

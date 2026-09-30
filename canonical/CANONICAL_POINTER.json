@@ -160,7 +160,11 @@
     "current_theory_receipt_path": "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json",
     "capability_map_is_permanent_ownership_queue": true,
     "capability_acquisition_first": true,
-    "build_interpretation": "INTEGRATION_GLUE_ONLY__UNDERLYING_CAPABILITY_INVENTION_FORBIDDEN"
+    "build_interpretation": "INTEGRATION_GLUE_ONLY__UNDERLYING_CAPABILITY_INVENTION_FORBIDDEN",
+    "opus_5_5_envelope_required": true,
+    "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "opus_5_5_ownership_matrix_required": true,
+    "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -214,11 +218,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RECOVER_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE__MAP_ALREADY_OWNED_CAPABILITIES__SEARCH_EXISTING_EQUAL_OR_BETTER_REALIZATIONS__CONFIGURE_VERIFY_AND_SAVE_WINNERS__KNOWLEDGE_JIT_ONLY__NO_CAPABILITY_INVENTION",
+    "next_step": "PARALLEL_SEARCH_EXISTING_EQUAL_OR_BETTER_ROUTES_FOR_PRODUCTION_CODING__PROFESSIONAL_KNOWLEDGE_WORK__HLE_WITH_TOOLS__CONFIGURE_AND_PROMOTE_ANY_WINNER_IMMEDIATELY__NO_CAPABILITY_INVENTION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
+    "critical_blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -295,7 +299,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
+    "highest_leverage_capability_gap": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -642,13 +646,13 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "USER_THEORY_CORRECTION__V5_CAPABILITY_OWNERSHIP_ACTIVE",
-      "blocker": "OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_NOT_YET_MAPPED_CONFIGURED_VERIFIED_AND_OWNED",
+      "status": "OPUS_5_5_WHOLE_ENVELOPE_FIRST_OBSOLESCENCE_PASS_COMPLETE",
+      "blocker": "OPUS_5_5_RESIDUAL_CAPABILITY_BARS__ADVANCED_AGENTIC_CODING__PROFESSIONAL_KNOWLEDGE_WORK__MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING__PLUS_COMPARATIVE_VERIFICATION_FOR_BROAD_CANDIDATE_FAMILIES",
       "evidence_paths": [
-        "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
+        "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+        "canonical/reasoning/2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1.json"
       ],
-      "previous_local_frontier": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
-      "previous_local_frontier_disposition": "DEFERRED_SUBORDINATE__NO_TERMINAL_AUTHORITY"
+      "whole_envelope_complete": false
     },
     "active_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "canonical_frontier_consistency_status": "V5_OPUS_5_5_CAPABILITY_OWNERSHIP_THEORY_ACTIVE",
@@ -677,7 +681,17 @@
       "qualification_artifact_digest": "sha256:a6e2bc40e382d1c57824c346246123f9c171c18581c014373a59bad7b3981e85",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0
-    }
+    },
+    "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "opus_5_5_whole_envelope_complete": false,
+    "opus_5_5_newly_owned_scoped_capabilities": [
+      "OPUS55_AGENTIC_SCIENTIFIC_RESEARCH_V1",
+      "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1"
+    ],
+    "opus_5_5_previously_owned_scoped_capabilities": [
+      "EXACT_SYMBOLIC_COMPUTATION_V1"
+    ]
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",

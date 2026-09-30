@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_OPUS55_WHOLE_ENVELOPE_OBSOLESCENCE_PASS_V1",
+  "status": "CURRENT",
+  "real_objective": "Actually obsolete every useful Opus 5.5 capability by finding existing equal-or-better realizations, configuring them into Brain, verifying them, and saving them permanently.",
+  "governing_invariants": [
+    "Knowledge is external/JIT.",
+    "Capabilities are acquired once, configured, saved and inherited.",
+    "Capability credit requires equal-or-better than Opus 5.5 at the claimed scope.",
+    "No underlying capability invention.",
+    "Hard $0 incremental spend.",
+    "Do not infer whole-family parity from one narrow benchmark."
+  ],
+  "material_premises": [
+    "Official Anthropic evidence identifies Opus 5.5's major useful capability families and benchmark bars.",
+    "GPT-6 Astra is included in ChatGPT Plus Work/Codex allowance and can therefore be an existing zero-incremental-spend supplier.",
+    "Astra exceeds Opus 5.5 on published AutomationBench and Terminal-Bench-Science 0.1 point estimates.",
+    "Current public evidence still has Opus 5.5 leading important production-coding, professional-knowledge-work and HLE-with-tools bars.",
+    "Several Brain historical subcapabilities remain reusable components but are too narrow to establish whole-family Opus 5.5 parity."
+  ],
+  "evidence_refs": [
+    "https://www.anthropic.com/claude-opus-5-5",
+    "https://www.anthropic.com/claude/opus",
+    "https://www.anthropic.com/claude-sonnet-5-5",
+    "https://openai.com/index/gpt-6-astra/",
+    "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+    "https://prod.cursor.com/evals",
+    "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "https://artificialanalysis.ai/evaluations/aa-briefcase"
+  ],
+  "conclusion": "Promote only the two newly evidenced scoped capabilities to permanent ownership now, preserve exact symbolic computation as previously owned, configure candidate routes for other families, and make the three current Opus-leading bars the immediate parallel search frontier. Do not claim full envelope obsolescence yet.",
+  "selected_route": "WHOLE_ENVELOPE_MATRIX_PLUS_SCOPED_PROMOTION_PLUS_PARALLEL_RESIDUAL_EXISTING_ROUTE_SEARCH",
+  "rejected_material_alternatives": [
+    {
+      "route": "DECLARE_GPT6_ASTRA_UNIVERSAL_REPLACEMENT",
+      "reason": "Contradicted by current coding, professional-work and HLE-with-tools evidence."
+    },
+    {
+      "route": "CONTINUE_OLD_OPEN_RESEARCH_MICRO_REPAIR_CHAIN",
+      "reason": "Does not maximize Opus capability ownership per wall-clock."
+    },
+    {
+      "route": "INVENT_MISSING_CAPABILITIES",
+      "reason": "Forbidden by V5 theory."
+    },
+    {
+      "route": "COUNT_HISTORICAL_61_OF_61_ASTRA_INTERNAL_SUITE_AS_FRONTIER_PARITY",
+      "reason": "External parity was canonically revoked; internal predicates are not Opus evidence."
+    }
+  ],
+  "uncertainties": [
+    "Some benchmark settings are vendor-reported and not fully harmonized.",
+    "Computer-use OSWorld figures are not directly comparable across current vendor harnesses.",
+    "Some configured candidate families may already exceed Opus in real use despite lacking matched public evidence."
+  ],
+  "assumptions": [
+    "Current Plus plan included Astra allowance remains available subject to plan limits and rollout.",
+    "Public benchmark sources describe current September 2026 model versions."
+  ],
+  "non_goals": [
+    "Do not save world knowledge as capability.",
+    "Do not rebuild cognition from deterministic micro-primitives.",
+    "Do not buy credits or paid API usage."
+  ],
+  "next_action": "Search existing realizations for production coding, professional knowledge work, and HLE-with-tools in parallel; configure any winner immediately and then re-evaluate candidate families with direct matched evidence.",
+  "supersession_conditions": [
+    "New benchmark/release evidence",
+    "A configured existing route is directly verified above an unresolved Opus bar",
+    "User changes hard constraints or target."
+  ],
+  "supersedes": [
+    "Any claim that the whole Opus 5.5 capability envelope is already obsolete.",
+    "Any local micro-repair frontier that outranks the whole-envelope residual search."
+  ]
+}
