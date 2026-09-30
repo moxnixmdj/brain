@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PERMANENT_CAPABILITY_PACKAGE_V1",
+  "capability_id": "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
+  "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__SCOPED",
+  "useful_scope": "Multi-application business workflow automation represented by AutomationBench, with durable Brain routing and verification.",
+  "opus_5_5_bar": {
+    "benchmark": "AutomationBench",
+    "score": 40,
+    "unit": "percent",
+    "source": "https://www.anthropic.com/claude-opus-5-5"
+  },
+  "existing_realization": {
+    "supplier": "GPT-6 Astra",
+    "score": 41.4,
+    "unit": "percent",
+    "source": "https://openai.com/index/gpt-6-astra/"
+  },
+  "permanent_brain_configuration": {
+    "execution_surface": [
+      "ChatGPT Work"
+    ],
+    "model": "GPT-6 Astra",
+    "allowed_support": [
+      "installed ChatGPT plugins/connectors",
+      "browser/computer-use tools",
+      "files",
+      "GitHub",
+      "documents/spreadsheets/presentations"
+    ],
+    "knowledge_policy": "Retrieve workflow-specific knowledge and current records JIT.",
+    "verification": "Verify consequential writes and outputs with independent state checks where available; preserve evidence/decision receipts.",
+    "incremental_spend": "Use included Plus Work/Codex allowance and already-connected tools only. Do not purchase credits or invoke paid API under current hard-zero rule.",
+    "access_preflight": "Confirm Astra and required app/tool access before execution."
+  },
+  "ownership_test": {
+    "capability_discovery_repeated_per_task": false,
+    "invocation_contract_saved": true,
+    "dependencies_saved": true,
+    "verifier_saved": true,
+    "recovery_behavior_saved": true
+  },
+  "claim_limits": "This promotion covers the scoped business-workflow automation capability evidenced by AutomationBench, not every professional knowledge-work task.",
+  "evidence_sources": [
+    "https://www.anthropic.com/claude-opus-5-5",
+    "https://openai.com/index/gpt-6-astra/",
+    "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+  ],
+  "acquired_utc": "2026-09-30"
+}
