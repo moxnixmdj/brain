@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Run one genuinely open-ended model-independent technical/scientific objective with no prewired research plan; require autonomous decomposition plus material source/tool discovery, then stop on the first real causal gap.",
+    "objective": "Acquire the missing model-independent broad-objective semantic decomposition/grounding route by reusing and composing inherited source-discovery, execution, quantitative, synthesis, and verification capabilities; do not replay the spent Mauna Loa objective.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_SCOPE_ADMISSIBILITY_CORRECTION_20260930_V1.json",
-    "repair_status": "STRUCTURED_DEMOGRAPHY_VALID_SUPPORTING_EVIDENCE__OPEN_ENDED_PARENT_PROMOTION_ADMISSIBILITY_REVOKED",
-    "prohibition": "NO_PROMOTION_FROM_PREWIRED_TASKS__NO_SPENT_TASK_REPLAY__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_RESEARCH_RECIPE",
-    "next_action": "RUN_GENUINELY_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_REAL_TASK_A__NO_PREWIRED_RESEARCH_PLAN__AUTONOMOUS_DECOMPOSITION_AND_SOURCE_TOOL_DISCOVERY_REQUIRED__STOP_ON_FIRST_CAUSAL_GAP",
+    "exact_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_PROVENANCE_AND_FRONTIER_MIRROR_CORRECTION_20260930_V1.json",
+    "repair_status": "FIRST_MAUNA_SPEND_IDENTIFIED__LATER_PR337_REPLAY_QUARANTINED__CURRENT_COMPILER_BYTES_MATCH_FIRST_FAILURE__GENERIC_GAP_UNRESOLVED",
+    "prohibition": "NO_MAUNA_REPLAY_OR_RENAME_AS_FRESH__NO_PARENT_PROMOTION_FROM_FAILED_RUNS__NO_MODEL_COGNITION__NO_TASK_SPECIFIC_RESEARCH_RECIPE__NO_RUNTIME_REPAIR_BEFORE_ROUTE_FRONTIER_RECOMPUTATION",
+    "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -102,7 +102,13 @@
     "latest_typed_scalar_expression_qualification_artifact_id": 11076347530,
     "latest_typed_scalar_expression_qualification_artifact_digest": "sha256:1bf6628bff366eb6fa3d277042798c956eec1c5fca7d7bace1237d13ce832cc0",
     "admissible_open_ended_model_independent_parent_tasks_verified": 0,
-    "structured_model_independent_parent_tasks_verified": 1
+    "structured_model_independent_parent_tasks_verified": 1,
+    "open_ended_task_first_spend_run_id": 36669918546,
+    "open_ended_task_first_spend_artifact_id": 11077637577,
+    "open_ended_task_first_spend_artifact_digest": "sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "open_ended_task_later_replay_run_id": 36670516407,
+    "open_ended_task_freshness_status": "SPENT_BY_RUN_36669918546__LATER_RUN_36670516407_IS_REPLAY__NO_ADMISSIBLE_FRESH_PARENT_PASS",
+    "current_goal_compiler_blob_sha": "4b61fe911471854ec15c7900816f61e9e55f602e"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -318,5 +324,6 @@
     "selected_route_execution_preflight_required": true,
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2
-  }
+  },
+  "next_progress_event_target": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
 }
