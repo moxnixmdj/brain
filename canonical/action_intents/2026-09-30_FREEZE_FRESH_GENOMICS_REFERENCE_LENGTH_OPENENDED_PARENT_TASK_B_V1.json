@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-GENOMICS-REFERENCE-LENGTH-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_GENOMICS_REFERENCE_LENGTH_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended genomics parent task on post-PR474 main with no supplied authority, source, accession, values, formula, tool recipe, or answer; execute exactly once and stop on the first new causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical main a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+    "PR474 merged after guarded run 36689721937 closed the broad multi-clause routing and generic run-method parser defects",
+    "spent HTTP2 parent task run 36688193204 must never be replayed",
+    "stale pre-PR474 genomics branch was not merged or executed and is not reused as execution authority",
+    "genomics reference-sequence comparison is materially different from the spent HTTP2 network-protocol task"
+  ],
+  "evidence_presence_classification": "CHILD_STACK_REPAIRED_AND_GUARDED_QUALIFIED__FRESH_PARENT_TASK_B_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen task. On semantic completion, independently verify before any parent promotion. On failure, preserve only the earliest integrated causal blocker and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "The repaired and guarded-qualified model-independent open-research route must now prove genuine parent behavior on a materially different fresh domain.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_GENOMICS_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "STALE_PRE_PR474_GENOMICS_BRANCH",
+      "PREDECLARED_PRIMARY_DATABASE",
+      "PREDECLARED_ACCESSION_OR_RECORD_ID",
+      "PREDECLARED_NUMERIC_VALUES",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "PREWIRED_TOOL_OR_CALCULATION_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The genomics objective is materially different from the spent network-protocol task and directly exercises autonomous primary-record discovery, generic evidence extraction, operand binding, deterministic comparison, executable verification, limitation handling, and provenance without prewiring any source or answer.",
+    "expected_parent_level_state_change": "Either obtain an admissible genuine open-ended parent completion or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
