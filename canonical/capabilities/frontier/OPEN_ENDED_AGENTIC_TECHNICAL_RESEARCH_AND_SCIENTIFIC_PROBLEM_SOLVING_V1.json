@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__SQLITE_TASK_A_SPENT__FIRST_INTEGRATED_ACQUISITION_GAP_LOCALIZED__NO_PARENT_CREDIT",
+  "status": "FRONTIER_BAR_DEFINED__RELEVANCE_ADMISSION_ACQUIRED__EVIDENCE_EXTRACTION_GAP_ACTIVE__NO_PARENT_CREDIT",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__SOURCE_FRONTEND_AND_ROR_AUTHORITY_IDENTITY_ACQUIRED__PRIMARY_SOURCE_AND_RELEVANCE_GAP_ACTIVE",
-  "residual_gap": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
+  "obsolescence_status": "NOT_YET_PROVEN__SOURCE_FRONTEND_ROR_IDENTITY_LEXICAL_RANKING_AND_STRICT_FIRST_PARTY_RELEVANCE_ADMISSION_ACQUIRED__EVIDENCE_EXTRACTION_GAP_ACTIVE",
+  "residual_gap": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -128,9 +128,32 @@
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
       "limitations": "Exact active ROR domain-to-organization identity only. Primary-source status, objective relevance, factual correctness, evidence sufficiency, and claim endorsement remain unverified."
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
+      "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
+      "route": "source.objective_relevance.rank.bm25",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_BM25_PROMOTION_20260930_V1.json",
+      "public_run_id": 36678278264,
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_capability_promoted": false,
+      "limitations": "Lexical BM25 candidate ranking only; not semantic entailment, factual correctness, or evidence sufficiency."
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+      "status": "VERIFIED_ACQUIRED__NARROW_SUBCAPABILITY_ONLY",
+      "route": "first_party_objective_relevance_verify",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_FIRST_PARTY_OBJECTIVE_RELEVANCE_PROMOTION_20260930_V1.json",
+      "public_run_id": 36678675368,
+      "producer_git_blob": "6ff13c32704c0b3283c42a51f718e875110a13ca",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "parent_capability_promoted": false,
+      "limitations": "First-party exact-ROR-domain hosting plus strict bounded lexical objective relevance only. Semantic entailment, primary-source status, factual correctness, evidence sufficiency, and claim endorsement remain unverified."
     }
   ],
-  "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_ROUTE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_ROR_AUTHORITY__NO_PARENT_REPLAY",
+  "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_RELEVANCE_ADMISSION__NO_PARENT_REPLAY",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
