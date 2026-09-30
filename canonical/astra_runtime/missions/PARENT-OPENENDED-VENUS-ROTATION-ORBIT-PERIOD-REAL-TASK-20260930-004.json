@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-VENUS-ROTATION-ORBIT-PERIOD-REAL-TASK-20260930-004",
+  "purpose": "Execute the frozen, unspent Venus planetary-science open-ended parent Task B exactly once through the canonical ASTRA runtime after the generic broad-research routing repair. No prewired source, authority, values, tool, command, formula, answer, or task-specific runtime patch.",
+  "goal": "Assess whether the magnitude of Venus's sidereal rotation period is longer than its orbital period. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant planetary data source, determine how to extract and interpret the two periods, choose and run a zero-cost verification method, identify material sign-convention, reference-frame, or period-definition limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-venus-open-ended-parent-task-b",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT-OPENENDED-VENUS-ROTATION-ORBIT-PERIOD-REAL-TASK-20260930-004.json",
+    "source_task_blob_sha": "53d6ab63b2dfc258da98dad34233fe6f5585b491",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
