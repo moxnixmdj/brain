@@ -63,6 +63,16 @@
       "id": "MODEL_INDEPENDENCE_INFERRED_INSTEAD_OF_RUNTIME_DERIVED",
       "observed_incident": "Goal runtime did not uniformly stamp cognition dependency provenance on every result path.",
       "must_fail_or_resolve": "Runtime must derive cognition provenance. Cognitive capability credit requires task evidence with runtime-derived zero model dependency; advisory-model execution is ineligible."
+    },
+    {
+      "id": "IDENTITY_OR_ATTRIBUTION_FIELD_INFERRED_AS_UNIVERSALLY_REQUIRED",
+      "observed_incident": "In the clean react-lead-form execution, gclid was promoted from a google_ads identity/attribution participant into a universal validation requirement even though the authoritative contract did not make it universally mandatory.",
+      "must_fail_or_resolve": "Requirement roles must remain explicit. Identity, grouping, attribution, deduplication, and optional metadata fields cannot become mandatory unless the authoritative task contract explicitly says so."
+    },
+    {
+      "id": "TERMINAL_SUBMISSION_WITH_UNRUN_TOP_LEVEL_HAPPY_PATH_CONCERN",
+      "observed_incident": "After the final validation change in react-lead-form, lower-level tests and adversarial ledger probes passed, but the actual valid React form success path was not rerun; a relevant browser-path concern was identified immediately before a concurrent terminal submission.",
+      "must_fail_or_resolve": "After the final behavior-changing edit, execute the task's top-level primary success path using only explicitly required inputs and defaults. Any known relevant unrun falsification concern blocks terminal submission."
     }
   ],
   "unknown_error_containment": [
