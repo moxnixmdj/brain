@@ -81,13 +81,20 @@ def _intersection_result_fields(admitted):
         out &= values
     return sorted(out)
 
-def compose(goal,grounding,registry,compiler,root):
+def compose(goal,grounding,registry,compiler,root,verified_initial_facts=None):
     if not isinstance(grounding,dict) or grounding.get("schema")!="PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1":
         raise CompositionError("GROUNDING_INVALID")
     if not isinstance(registry,dict):
         raise CompositionError("REGISTRY_INVALID")
     if grounding.get("input_contract_bindability_enforced") is not True:
         raise CompositionError("GROUNDING_INPUT_CONTRACT_BINDABILITY_NOT_ENFORCED")
+    verified_initial_facts=[] if verified_initial_facts is None else verified_initial_facts
+    if (
+        not isinstance(verified_initial_facts,list)
+        or any(not isinstance(x,str) or not x.strip() for x in verified_initial_facts)
+    ):
+        raise CompositionError("VERIFIED_INITIAL_FACTS_INVALID")
+    verified_initial_set=set(str(x).strip() for x in verified_initial_facts)
     clauses=grounding.get("clauses")
     if not isinstance(clauses,list) or not clauses:
         raise CompositionError("GROUNDING_CLAUSES_INVALID")
@@ -265,7 +272,21 @@ def compose(goal,grounding,registry,compiler,root):
         )
 
     target_effects=[_clause_target(i) for i in range(len(clauses))]
-    initial_facts=sorted(effect for effect in all_requires if effect not in all_provides)
+    required_external_initials=sorted(
+        effect for effect in all_requires if effect not in all_provides
+    )
+    unverified_initials=sorted(
+        effect for effect in required_external_initials
+        if effect not in verified_initial_set
+    )
+    if unverified_initials:
+        raise CompositionError(
+            "UNVERIFIED_INITIAL_FACTS_REQUIRED:"+",".join(unverified_initials)
+        )
+    initial_facts=sorted(
+        effect for effect in required_external_initials
+        if effect in verified_initial_set
+    )
     problem={
         "schema":"PROJECT_BRAIN_GROUNDED_CAPABILITY_PROBLEM_V1",
         "initial_facts":initial_facts,
@@ -288,5 +309,7 @@ def compose(goal,grounding,registry,compiler,root):
         "derived_capability_count":len(derived),
         "target_effects":target_effects,
         "initial_facts":initial_facts,
+        "verified_initial_facts":sorted(verified_initial_set),
+        "required_external_initials":required_external_initials,
         "composition_ready":True,
     }
