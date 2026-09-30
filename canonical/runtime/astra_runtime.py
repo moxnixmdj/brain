@@ -5495,7 +5495,7 @@ def _pack_observations_for_model(observations,max_chars=12000):
         raise Blocker("MODEL_OBSERVATION_ENVELOPE_OVERFLOW")
     return encoded
 
-def run_goal(step, mission):
+def _run_goal_unstamped(step, mission):
     goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
     goal=str(goal or "").strip()
@@ -5851,7 +5851,7 @@ def run_goal(step, mission):
 
 def _collect_model_dependency_count(value, depth=0):
     if depth>24:
-        return 0
+        raise Blocker("MODEL_DEPENDENCY_PROVENANCE_DEPTH_EXCEEDED")
     count=0
     if isinstance(value,dict):
         if "model_dependency_count" in value:
@@ -5863,11 +5863,19 @@ def _collect_model_dependency_count(value, depth=0):
             if parsed<0:
                 raise Blocker("MODEL_DEPENDENCY_COUNT_INVALID")
             count=max(count,parsed)
-        mode=str(value.get("controller_mode") or "")
-        if mode.startswith("OPTIONAL_MODEL_ADVISORY"):
-            count=max(count,1)
-        if value.get("planner_model_last") not in (None,""):
-            count=max(count,1)
+        if "controller_mode" in value:
+            mode=str(value.get("controller_mode") or "").strip()
+            if not mode:
+                raise Blocker("COGNITION_PROVENANCE_CONTROLLER_MODE_MISSING")
+            if mode=="MODEL_INDEPENDENT_ACTION_PLAN":
+                pass
+            elif mode.startswith("OPTIONAL_MODEL_ADVISORY"):
+                count=max(count,1)
+            else:
+                raise Blocker("COGNITION_PROVENANCE_CONTROLLER_MODE_UNKNOWN:"+mode)
+        for planner_key in ("planner_source","planner_transport","planner_model_last"):
+            if value.get(planner_key) not in (None,""):
+                count=max(count,1)
         for item in value.values():
             count=max(count,_collect_model_dependency_count(item,depth+1))
     elif isinstance(value,list):
@@ -5879,11 +5887,29 @@ def _stamp_cognition_provenance(result):
     if not isinstance(result,dict):
         raise Blocker("GOAL_RESULT_OBJECT_REQUIRED_FOR_COGNITION_PROVENANCE")
     out=dict(result)
+    mode=str(out.get("controller_mode") or "").strip()
+    if not mode:
+        raise Blocker("COGNITION_PROVENANCE_CONTROLLER_MODE_MISSING")
+    if mode!="MODEL_INDEPENDENT_ACTION_PLAN" and not mode.startswith("OPTIONAL_MODEL_ADVISORY"):
+        raise Blocker("COGNITION_PROVENANCE_CONTROLLER_MODE_UNKNOWN:"+mode)
     count=_collect_model_dependency_count(out)
+    planner_markers=(
+        out.get("planner_source"),
+        out.get("planner_transport"),
+        out.get("planner_model_last"),
+    )
+    if mode.startswith("OPTIONAL_MODEL_ADVISORY") or any(v not in (None,"") for v in planner_markers):
+        count=max(count,1)
     out["model_dependency_count"]=count
     out["cognition_dependency_class"]="MODEL_INDEPENDENT" if count==0 else "MODEL_ASSISTED"
     out["cognition_provenance_authority"]="ASTRA_RUNTIME_DERIVED_V1"
     return out
+
+
+def run_goal(step, mission):
+    """Public goal-runtime boundary: every caller receives runtime-derived cognition provenance."""
+    return _stamp_cognition_provenance(_run_goal_unstamped(step, mission))
+
 
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
@@ -5892,7 +5918,7 @@ def execute_step(step, prior_results=None, mission=None):
     if adapter=="http":
         return run_http(step)
     if adapter=="goal":
-        return _stamp_cognition_provenance(run_goal(step, mission or {}))
+        return run_goal(step, mission or {})
     raise Blocker("MISSING_ADAPTER:"+adapter)
 
 def verify(step,result):
