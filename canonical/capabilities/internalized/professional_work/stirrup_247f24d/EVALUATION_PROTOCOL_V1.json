@@ -1,0 +1,55 @@
+{
+  "candidate": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "contamination_policy": {
+    "failed_task": "SPENT_FOR_FRESH_PROMOTION_EVIDENCE_AFTER_GRADING",
+    "human_gold_deliverables_before_submission": "FORBIDDEN",
+    "model_submissions_for_selected_task_before_submission": "FORBIDDEN",
+    "public_task_prompts_and_reference_files": "ALLOWED",
+    "task_specific_solution_or_judge_feedback_before_submission": "FORBIDDEN"
+  },
+  "hard_constraints": {
+    "external_opaque_capability_credit": false,
+    "incremental_spend_usd": 0,
+    "knowledge_external_jit": true,
+    "paid_api": false
+  },
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_WORK_EVALUATION_PROTOCOL_V1",
+  "stages": [
+    {
+      "capability_credit": 0,
+      "name": "MECHANISM_AND_ADAPTER_PREFLIGHT",
+      "requirement": "Exact pinned Stirrup source, execution profile, and required Brain artifact tools available.",
+      "stage": 0
+    },
+    {
+      "capability_credit": 0,
+      "decision": "Systemic harness/integration failure returns to route race/integration correction; never repair a graded task and count replay as fresh.",
+      "execute": "Brain-owned Stirrup profile on approved zero-incremental cognition substrate.",
+      "name": "CHEAP_CROSS_ARTIFACT_FALSIFICATION",
+      "selection": "Deterministically select a small public-GDPval subset from task IDs before reading prompts, spanning at least three requested artifact classes when feasible.",
+      "stage": 1,
+      "verify": "Task-permitted format checks plus available public automated grader or blind comparison only after outputs freeze."
+    },
+    {
+      "capability_credit": "ONLY_IF_COMPARABILITY_AND_STATISTICAL_EVIDENCE_SUPPORT_CLAIM",
+      "name": "MATCHED_PROFESSIONAL_WORK_COMPARISON",
+      "prerequisite": "STAGE_1_NO_SYSTEMIC_FAILURE",
+      "requirement": "Broad uncontaminated task sample and scoring comparable enough to the Opus 5.5 target.",
+      "stage": 2,
+      "target": "BRAIN_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5"
+    }
+  ],
+  "stop_rules": [
+    "DO_NOT_RUN_FULL_220_TASK_SET_BEFORE_CHEAP_FALSIFICATION",
+    "DO_NOT_USE_PUBLIC_HUMAN_GOLD_DELIVERABLES_AS_GENERATION_HINTS",
+    "DO_NOT_CONVERT_STIRRUP_USAGE_BY_ARTIFICIAL_ANALYSIS_INTO_PARITY_CREDIT",
+    "DO_NOT_BUY_E2B_OR_API_CREDITS",
+    "DO_NOT_REPAIR_AND_REPLAY_SPENT_GRADED_TASK_FOR_PROMOTION"
+  ],
+  "target": "CLAUDE_OPUS_5_5_PROFESSIONAL_KNOWLEDGE_WORK",
+  "target_reference": {
+    "benchmark": "GDPval-AA v2.1",
+    "note": "Whole-benchmark point estimate, not a per-task deterministic threshold.",
+    "opus_5_5_elo": 1846
+  }
+}

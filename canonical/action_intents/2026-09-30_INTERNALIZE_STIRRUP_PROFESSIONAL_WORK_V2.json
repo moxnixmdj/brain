@@ -1,0 +1,135 @@
+{
+  "action_id": "INTERNALIZE-STIRRUP-PROFESSIONAL-WORK-20260930-V2",
+  "action_kind": "EXISTING_MECHANISM_INTERNALIZATION",
+  "blocker_lease_key": "4e09a1402ebaa176e71b2ac80c79bba9ada367dc::OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1::AUGMENT_INTERNALIZED_STIRRUP_WITH_UPSTREAM_SKILL_AND_VERIFICATION_PROFILE",
+  "canonical_base_commit": "4e09a1402ebaa176e71b2ac80c79bba9ada367dc",
+  "canonical_generation": "2026-09-30-opus55-capability-internalization-v6",
+  "capability_target": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "execution_result": {
+    "capability_credit": 0,
+    "compileall_pass": true,
+    "exact_upstream_file_count": 54,
+    "mismatches": 0,
+    "upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee"
+  },
+  "expected_parent_frontier_change": "Augment already-internalized Stirrup with exact upstream data-analysis skill plus Brain execution/evaluation profiles; keep zero Opus credit until behavioral pass.",
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS__54_EXACT_UPSTREAM_FILES",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING",
+    "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY__BEHAVIORAL_VERIFICATION_PENDING",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_FOR_HARNESS_MECHANISM",
+    "OWNERSHIP_PACKAGE_TEST": "PASS_FOR_MECHANISM__PARITY_PENDING",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS",
+    "SPECIMEN_SEPARATION_TEST": "PASS"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_STIRRUP_PROFESSIONAL_WORK_INTERNALIZATION_V2.json"
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "4e09a1402ebaa176e71b2ac80c79bba9ada367dc",
+    "canonical_generation_or_commit": "2026-09-30-opus55-capability-internalization-v6",
+    "deleted_or_bypassed_paths": [
+      "EXTERNAL_MODEL_AS_OWNERSHIP",
+      "BUILD_NEW"
+    ],
+    "expected_parent_level_state_change": "PROFESSIONAL_WORK_REMAINS_BRAIN_CONFIGURED_VERIFICATION_PENDING__MECHANISM_PACKAGE_COMPLETED",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "Stage-1 cheap falsification"
+      ],
+      "intrinsic_or_path_specific": "Ownership gap removed; verification gap remains.",
+      "surviving_causal_blocker": "BRAIN_CONFIGURED_PROFESSIONAL_WORK_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "No new agent loop"
+      ],
+      "existing_inherited_routes_checked": [
+        "Brain artifact components",
+        "continuity",
+        "verification"
+      ],
+      "external_existing_routes_checked": [
+        "ArtificialAnalysis/Stirrup"
+      ],
+      "surviving_gap": "Behavioral parity verification."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Rent frontier model",
+        "Build new office agent"
+      ],
+      "real_outcome": "Brain-owned professional-work configuration ready for verification.",
+      "surviving_necessity": "Verify internalized route."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "agent loop",
+        "skills",
+        "data analysis",
+        "artifact components"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "External-model-as-ownership"
+      ],
+      "fresh_reuse_plan": "Stage-1 cross-artifact test."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "Reused upstream and existing artifact components"
+      ],
+      "search_stop_decision": "Benchmark-owner harness is internalized."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "implementation_still_necessary": false,
+      "losing_routes_reason": "Reference fails ownership; build unnecessary.",
+      "routes_ranked": [
+        "Pinned Stirrup",
+        "External reference",
+        "New framework"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Staged contamination-safe public GDPval testing."
+    },
+    "real_outcome": "Complete the already-merged Brain-owned Stirrup mechanism with its exact upstream data-analysis skill and a contamination-safe execution/evaluation contract.",
+    "required_capability": "PROFESSIONAL_WORK_AGENT_LOOP__FILE_IO__TOOL_LIFECYCLE__CONTEXT_MANAGEMENT__SKILLS__DATA_ANALYSIS__MULTIMODAL_IO",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Mechanism already selected and internalized."
+    },
+    "routes_considered": [
+      "VENDOR_PINNED_STIRRUP",
+      "EXTERNAL_REFERENCE",
+      "BUILD_NEW"
+    ],
+    "selected_surviving_route": "VENDOR_PINNED_STIRRUP",
+    "stop_condition": "Zero Opus credit until direct pass.",
+    "why_selected_route_is_fastest_sufficient": "Direct exposed benchmark harness, MIT, exact-pinned."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "status": "INTERNALIZATION_COMPLETE__BRAIN_CONFIGURED_VERIFICATION_PENDING",
+  "theory_invariants": {
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "capability_policy": "FIND_SPECIMEN__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "external_winner_role": "CAPABILITY_SPECIMEN_ONLY_UNTIL_INTERNALIZED",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "hard_incremental_spend_usd": 0,
+    "knowledge_policy": "EXTERNAL_JIT",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1"
+  }
+}

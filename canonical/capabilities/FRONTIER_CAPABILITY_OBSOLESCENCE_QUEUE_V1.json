@@ -420,9 +420,11 @@
       "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
       "internalization_manifest": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
       "configuration": "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
-      "verification": "canonical/capabilities/opus55/OPUS55_STIRRUP_INTERNALIZATION_VERIFICATION_V1.json",
+      "verification": "canonical/capabilities/opus55/OPUS55_STIRRUP_INTERNALIZATION_VERIFICATION_V2.json",
       "capability_credit": 0,
-      "residual": "BRAIN_CONFIGURED_PROFESSIONAL_WORK_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5"
+      "residual": "STAGE_1_CROSS_ARTIFACT_FALSIFICATION_THEN_MATCHED_OPUS_COMPARISON",
+      "execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+      "evaluation_protocol": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
     }
   ]
 }

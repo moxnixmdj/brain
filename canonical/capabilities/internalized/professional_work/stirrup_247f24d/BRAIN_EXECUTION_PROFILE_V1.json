@@ -1,0 +1,94 @@
+{
+  "brain_owned_mechanism_root": "canonical/capabilities/internalized/professional_work/stirrup_247f24d",
+  "capability_candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "chatgpt_brain_adapter": {
+    "artifact_policy": "DELIVERABLE_FILES_AND_COMPACT_STATE_DURABLE__WORLD_KNOWLEDGE_NOT",
+    "class": "INTEGRATION_GLUE_ONLY",
+    "completion_policy": "NO_FINISH_UNTIL_REQUIRED_FILES_EXIST_AND_TASK_CRITERIA_HAVE_DIRECT_EVIDENCE",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "loop": [
+      "INGEST_TASK_AND_REFERENCE_FILES",
+      "IDENTIFY_REQUIRED_DELIVERABLES_AND_ACCEPTANCE_CRITERIA",
+      "LOAD_ONLY_RELEVANT_BRAIN_OWNED_SKILLS_AND_TOOLS",
+      "LET_GENERAL_COGNITION_SUBSTRATE_CHOOSE_NEXT_ACTION_WITHIN_TASK_SCOPE",
+      "EXECUTE_TOOL_ACTION",
+      "INGEST_TOOL_RESULT_AND_UPDATE_DURABLE_TASK_STATE",
+      "WHEN_CONTEXT_PRESSURE_RISES_COMPACT_USING_STIRRUP_SUMMARIZATION_CONTRACT",
+      "CONTINUE_UNTIL_DELIVERABLES_EXIST_AND_ACCEPTANCE_CRITERIA_ARE_CHECKED",
+      "RUN_INDEPENDENT_OR_FORMAT_SPECIFIC_VERIFICATION",
+      "FINISH_WITH_EXACT_OUTPUT_FILES_AND_EVIDENCE_RECEIPT"
+    ]
+  },
+  "invocation_contract": {
+    "failure": "Fail closed on missing deliverable, unreadable artifact, unresolved required calculation, or known acceptance gap",
+    "input": "Professional task prompt plus permitted reference files",
+    "output": "Requested professional work product files plus compact evidence/verification receipt",
+    "state": "Persist deliverable paths, acceptance criteria, material decisions, open gaps, and continuation-critical tool results"
+  },
+  "operative_mechanisms": [
+    {
+      "role": "MODEL_DIRECTED_AGENT_LOOP_WITH_TOOL_EXECUTION_AND_CONTEXT_MANAGEMENT",
+      "source": "src/stirrup/core/agent.py"
+    },
+    {
+      "role": "TYPED_MESSAGES_TOOLS_RESULTS_AND_MULTIMODAL_BLOCKS",
+      "source": "src/stirrup/core/models.py"
+    },
+    {
+      "role": "CONTEXT_STATE_AND_CACHE_SUPPORT",
+      "source": "src/stirrup/core/cache.py"
+    },
+    {
+      "role": "BASE_AGENT_OPERATING_INSTRUCTION",
+      "source": "src/stirrup/prompts/base_system_prompt.txt"
+    },
+    {
+      "role": "LONG_TASK_CONTEXT_COMPACTION",
+      "source": "src/stirrup/prompts/message_summarizer.txt"
+    },
+    {
+      "role": "CODE_AND_FILE_WORK_EXECUTION",
+      "source": "src/stirrup/tools/code_backends/*"
+    },
+    {
+      "role": "JIT_WEB_KNOWLEDGE_RETRIEVAL",
+      "source": "src/stirrup/tools/web.py"
+    },
+    {
+      "role": "EXTERNAL_TOOL_CONNECTION",
+      "source": "src/stirrup/tools/mcp.py"
+    },
+    {
+      "role": "MODULAR_SKILL_LOADING",
+      "source": "src/stirrup/skills/*"
+    },
+    {
+      "role": "PINNED_DATA_ANALYSIS_PROCEDURE_AND_SCRIPTS",
+      "source": "skills/data_analysis/*"
+    },
+    {
+      "role": "EXPLICIT_COMPLETION_AND_OUTPUT_HANDOFF",
+      "source": "src/stirrup/tools/finish.py"
+    }
+  ],
+  "opus_5_5_credit": 0,
+  "ownership_tests": {
+    "brain_artifact_test": "PASS",
+    "brain_configured_verification_test": "PENDING",
+    "general_substrate_test": "PASS_ARCHITECTURALLY",
+    "no_hidden_capability_provider_test": "PASS_ARCHITECTURALLY__PERFORMANCE_PENDING",
+    "ownership_package_test": "PENDING_FINAL_VERIFICATION",
+    "reexecution_without_rediscovery_test": "PASS_FOR_SAVED_CONFIGURATION",
+    "specimen_separation_test": "PASS"
+  },
+  "schema": "PROJECT_BRAIN_INTERNALIZED_CAPABILITY_EXECUTION_PROFILE_V1",
+  "source_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+  "status": "BRAIN_OPERATIVE_CONFIGURATION_DEFINED__VERIFICATION_PENDING",
+  "substrate": {
+    "approved_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "hidden_target_capability_credit": false,
+    "requirement": "Substrate executes the saved Brain-owned harness/profile; standalone model performance gets no ownership credit.",
+    "role": "GENERAL_COGNITION_SUBSTRATE_ONLY"
+  },
+  "target_family": "PROFESSIONAL_KNOWLEDGE_WORK"
+}
