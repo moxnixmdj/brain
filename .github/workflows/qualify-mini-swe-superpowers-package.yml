@@ -22,4 +22,19 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify exact component pins and deterministic overlay
-        run: python canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verify_package.py
+        run: |
+          set +e
+          python canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verify_package.py > qualification.log 2>&1
+          rc=$?
+          cat qualification.log
+          printf '%s\n' "$rc" > qualification.exit_code
+          exit "$rc"
+      - name: Upload qualification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: mini-swe-superpowers-qualification
+          path: |
+            qualification.log
+            qualification.exit_code
+          if-no-files-found: error
