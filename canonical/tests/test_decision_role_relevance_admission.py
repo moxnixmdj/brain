@@ -114,6 +114,39 @@ class DecisionRoleAdmissionTests(unittest.TestCase):
         self.assertTrue(out["top_candidate_admission"]["verified"],out)
         self.assertGreaterEqual(out["role_admitted_positive_count"],1,out)
 
+    def test_numeric_threshold_comparison_preserves_incumbent_relevance(self):
+        objective="Determine whether observed wave amplitude exceeds 1 meter."
+        role=self.roles.evaluate(
+            objective,
+            "Observed wave amplitude measurements from the monitoring record",
+        )
+        self.assertFalse(role["applicable"],role)
+        self.assertTrue(role["verified"],role)
+        self.assertEqual(
+            role["reason"],
+            "NUMERIC_THRESHOLD_COMPARISON_PRESERVES_INCUMBENT_RELEVANCE",
+            role,
+        )
+
+        candidates=[
+            {
+                "url":"https://example.org/wave",
+                "title":"Observed wave amplitude measurements",
+                "snippet":"maximum wave amplitude monitoring record",
+            },
+            {
+                "url":"https://example.org/weather",
+                "title":"Weather bulletin",
+                "snippet":"temperature and wind",
+            },
+        ]
+        out=self.rank.rank(objective,candidates)
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        self.assertEqual(out["top_candidate_original_index"],0,out)
+        decision=out["top_candidate_admission"]["decision_role"]
+        self.assertFalse(decision["applicable"],out)
+        self.assertTrue(decision["verified"],out)
+
     def test_broad_objective_ranker_remains_legacy_compatible(self):
         objective="Find authoritative documentation about thermal management for electronic enclosures."
         candidates=[
