@@ -332,6 +332,20 @@ def _constraints(clause):
     return flags
 
 
+def _candidate_constraint_rejection(constraints,cid,entry):
+    constraints=set(str(x) for x in (constraints or []))
+    if "INDEPENDENT_VERIFICATION" in constraints:
+        semantic=" ".join(
+            [str(x) for x in (entry.get("provides") or [])]
+            +[str(x) for x in (entry.get("keywords") or [])]
+            +[str(cid)]
+        ).lower()
+        verification_tokens=("verify","verification","verified","audit","check","assert","validate")
+        if not any(token in semantic for token in verification_tokens):
+            return "INDEPENDENT_VERIFICATION_ROLE_REQUIRED"
+    return None
+
+
 def ground(
     goal,registry,max_candidates_per_clause=8,*,
     compiler=None,proposal_binder=None,root=None,enforce_bindability=False
@@ -349,9 +363,20 @@ def ground(
     prior_paths=[]
     for index,clause in enumerate(clauses):
         text=clause["text"]
+        constraints=_constraints(text)
         ranked=[]
+        rejected_constraints=[]
         for cid,entry in sorted(registry.items()):
             if not _verified_zero_spend(entry):
+                continue
+            constraint_rejection=_candidate_constraint_rejection(
+                constraints,cid,entry
+            )
+            if constraint_rejection is not None:
+                rejected_constraints.append({
+                    "capability_id":str(cid),
+                    "reason":constraint_rejection,
+                })
                 continue
             lexical=_lexical_method(text,cid,entry)
             semantic=_similarity_method(text,cid,entry)
@@ -439,8 +464,9 @@ def ground(
             "text":text,
             "status":status,
             "candidates":kept,
-            "constraints":_constraints(text),
+            "constraints":constraints,
             "output_contract":output_contract,
+            "rejected_constraint_candidates":rejected_constraints,
             "rejected_unbindable_candidates":rejected_unbindable,
         })
         prior_paths.extend(
