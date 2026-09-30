@@ -54,7 +54,7 @@ def main():
     with tempfile.TemporaryDirectory() as td:
         root=pathlib.Path(td); p=root/"candidate.txt"; p.write_text("alpha",encoding="utf-8")
         raw=p.read_bytes()
-        blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\0"+raw).hexdigest()
+        blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\x00"+raw).hexdigest()
         sha=hashlib.sha256(raw).hexdigest()
         pins=[{"path":"candidate.txt","git_blob_sha1":blob,"sha256":sha}]
         checks["frozen_pin_accepts_exact_bytes"]=gr.verify_pins(root,pins)==["candidate.txt"]
