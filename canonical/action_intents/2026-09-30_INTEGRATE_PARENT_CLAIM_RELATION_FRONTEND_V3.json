@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTEGRATE-VERIFIED-CLAIM-RELATION-INTO-OPEN-RESEARCH-PARENT-20260930-V3",
+  "status": "PROPOSED_CURRENT_BASE",
+  "canonical_base_commit": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+  "action_kind": "PARENT_EFFECTIVE_INTEGRATION_REPAIR",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "Close the known parent-path composition defect without spending HTTP/2. Guarded-qualify extraction -> objective claim/operand binding -> relation evaluation; then reconcile the prestart guard reservation before the already-frozen HTTP/2 task is allowed one physical execution.",
+  "prior_work_checked": [
+    "current main f0f87c981d77b552caa21844e6bcc7b83116f339",
+    "guarded claim-spec child qualification run 36686583882 job 109793738883 artifact 11083254225",
+    "guarded red parent-integration diagnostic run 36687982814 job 109798159677 artifact 11084297726 digest sha256:11ebd443ab46027e26a92f294e928e8c458ac14e920d74168732f7e9b8c74e92",
+    "guarded HTTP/2 execution attempt run 36688247475 job 109799026696 artifact 11085060845 digest sha256:658425564ecf9ae08a799b9c96d4c18d6e5c9ec29c84c4e8070813e0a18f061a",
+    "HTTP/2 guard failed inside admission with ALREADY_RESERVED_OR_CREATE_NOT_CONFIRMED before ASTRA started; scientific execution_count=0",
+    "open_research_source_frontend still does not invoke objective_claim_operand_binding",
+    "astra_runtime still raises old claim/relation-required blocker after evidence extraction"
+  ],
+  "evidence_presence_classification": "GUARDED_RED_INTEGRATION_FALSIFICATION__PARENT_TASK_UNSPENT",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Guarded-qualify exact integration bytes. Do not execute HTTP/2 until integration passes and the stale/prestart reservation state is explicitly reconciled.",
+  "recursive_obs": {
+    "canonical_base_commit": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+    "real_outcome": "Make guarded-verified children parent-effective before consuming a fresh parent task.",
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "retry HTTP/2 now",
+        "build another parser",
+        "new relation engine",
+        "model cognition",
+        "invent truth/confidence/sufficiency"
+      ],
+      "surviving_necessity": "Actual parent runtime composition."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "generic V2 evidence extraction",
+        "guarded-verified objective claim-spec/operand binding",
+        "verified generic relation evaluation"
+      ],
+      "capability_work_deleted": [
+        "no new cognitive primitive",
+        "no parent task spend",
+        "no decision-confidence fabrication"
+      ],
+      "surviving_gap": "Two missing runtime calls / frontier transition."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific integration defect independently falsified by guarded red diagnostic.",
+      "delete_bypass_substitute_options": [
+        "DELETE premature parent execution",
+        "REUSE existing verified children",
+        "COMPOSE in open_research_source_frontend",
+        "PRESERVE truth/sufficiency/independence as unverified"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "selected_surviving_route": "COMPOSE_VERIFIED_CHILDREN_IN_PARENT_PATH_THEN_GUARDED_QUALIFY",
+      "implementation_still_necessary": true,
+      "why_selected_route_is_fastest_sufficient": "The guarded red diagnostic already proves the precise missing edge; the repair is a tiny composition delta."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Reuse guarded red diagnostic lane as green exact-byte integration qualification. Require explicit comparison pass, unsupported-language fail closed, and no truth/sufficiency overclaim."
+    }
+  }
+}
