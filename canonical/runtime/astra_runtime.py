@@ -4862,6 +4862,46 @@ def _load_goal_compiler():
     spec.loader.exec_module(module)
     return module
 
+def _load_broad_objective_source_role_binding():
+    base=pathlib.Path(__file__).resolve().with_name("bound_capabilities")
+    modules={}
+    for key,filename in (
+        ("binding","broad_objective_source_role_binding.py"),
+        ("discovery","open_web_source_candidate_discovery.py"),
+        ("provenance","source_candidate_provenance_verify.py"),
+    ):
+        path=base/filename
+        spec=importlib.util.spec_from_file_location("project_brain_"+key,path)
+        if spec is None or spec.loader is None:
+            raise Blocker("BROAD_OBJECTIVE_SOURCE_ROLE_MODULE_LOAD_FAILED:"+filename)
+        module=importlib.util.module_from_spec(spec)
+        sys.modules[spec.name]=module
+        spec.loader.exec_module(module)
+        modules[key]=module
+    return modules
+
+
+def _run_broad_objective_source_role(mission,goal,grounding):
+    broad=(grounding or {}).get("broad_objective_decomposition")
+    if not isinstance(broad,dict) or broad.get("status")!="DECOMPOSED":
+        return None,None
+    modules=_load_broad_objective_source_role_binding()
+    try:
+        result=modules["binding"].run(
+            goal,broad,modules["discovery"],modules["provenance"],
+            limit=8,timeout=15,
+        )
+    except Exception as exc:
+        raise Blocker(
+            "BROAD_OBJECTIVE_SOURCE_ROLE_BINDING_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__BROAD_OBJECTIVE_SOURCE_ROLE_BINDING.json"
+    writej(path,result)
+    return path,result
+
+
 def _load_plain_goal_bound_grounding():
     path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"plain_goal_bound_grounding.py"
     spec=importlib.util.spec_from_file_location("project_brain_plain_goal_bound_grounding",path)
@@ -5582,6 +5622,38 @@ def _run_goal_unstamped(step, mission):
                 composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
                 composed_result["model_dependency_count"]=0
                 return composed_result
+
+            broad_path,broad_result=_run_broad_objective_source_role(
+                mission,grounding_goal,grounding
+            )
+            if broad_result is not None:
+                broad_rel=(
+                    str(broad_path.relative_to(ROOT))
+                    if broad_path is not None and ROOT in broad_path.parents
+                    else str(broad_path)
+                )
+                if broad_result.get("status")=="SOURCE_PROVENANCE_READY":
+                    raise Blocker(
+                        "BROAD_OBJECTIVE_SOURCE_PROVENANCE_READY__"
+                        "AUTHORITY_PRIMARY_RELEVANCE_VERIFICATION_REQUIRED:"
+                        +json.dumps({
+                          "evidence_path":broad_rel,
+                          "candidate_count":broad_result.get("candidate_count"),
+                          "provenance_verified_count":broad_result.get("provenance_verified_count"),
+                          "next_required_capability":broad_result.get("next_required_capability"),
+                          "external_package_acquisition_attempted":False,
+                          "policy":"CONSUME_QUALIFIED_BROAD_OBJECTIVE_SOURCE_ROUTE_BEFORE_PACKAGE_SUPPLIER_DISCOVERY",
+                        },sort_keys=True)
+                    )
+                raise Blocker(
+                    "BROAD_OBJECTIVE_SOURCE_PROVENANCE_UNAVAILABLE:"
+                    +json.dumps({
+                      "evidence_path":broad_rel,
+                      "candidate_count":broad_result.get("candidate_count"),
+                      "provenance_verified_count":broad_result.get("provenance_verified_count"),
+                      "external_package_acquisition_attempted":False,
+                    },sort_keys=True)
+                )
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
