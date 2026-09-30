@@ -5634,12 +5634,12 @@ def _run_goal_unstamped(step, mission):
                     if int(source_frontend.get("authority_identity_verified_candidate_count") or 0)>0:
                         raise Blocker(
                             "OPEN_ENDED_RESEARCH_SOURCE_IDENTITY_READY__"
-                            "PRIMARY_SOURCE_RELEVANCE_VERIFICATION_REQUIRED:"
+                            "OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
                             +json.dumps(payload,sort_keys=True)
                         ) from e
                     raise Blocker(
                         "OPEN_ENDED_RESEARCH_SOURCE_FRONTEND_READY__"
-                        "AUTHORITY_IDENTITY_PRIMARY_SOURCE_RELEVANCE_VERIFICATION_REQUIRED:"
+                        "AUTHORITY_IDENTITY_OR_OBJECTIVE_RELEVANCE_VERIFICATION_REQUIRED:"
                         +json.dumps(payload,sort_keys=True)
                     ) from e
                 raise Blocker(
