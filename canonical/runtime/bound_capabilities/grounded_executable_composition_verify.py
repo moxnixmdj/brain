@@ -97,7 +97,7 @@ def _validate_declared_bindings(clause_text,instance_id,entry,inputs):
             return False,"PROPOSAL_BINDING_TYPE_UNKNOWN:"+instance_id+":"+str(key)
     return True,"VERIFIED"
 
-def verify(goal,composition,grounding,registry):
+def verify(goal,composition,grounding,registry,verified_initial_facts=None):
     canonical=" ".join(str(goal or "").strip().split())
     if composition.get("schema")!=SCHEMA:
         return False,"SCHEMA_INVALID"
@@ -109,6 +109,13 @@ def verify(goal,composition,grounding,registry):
         return False,"MODEL_DEPENDENCY_NONZERO"
     if composition.get("composition_ready") is not True:
         return False,"COMPOSITION_NOT_READY"
+    verified_initial_facts=[] if verified_initial_facts is None else verified_initial_facts
+    if (
+        not isinstance(verified_initial_facts,list)
+        or any(not isinstance(x,str) or not x.strip() for x in verified_initial_facts)
+    ):
+        return False,"VERIFIED_INITIAL_FACTS_INVALID"
+    verified_initial_set=set(str(x).strip() for x in verified_initial_facts)
 
     clauses=composition.get("clauses")
     problem=composition.get("problem")
@@ -281,9 +288,25 @@ def verify(goal,composition,grounding,registry):
 
     if list(problem.get("target_effects") or [])!=expected_targets:
         return False,"TARGET_SET_MISMATCH"
-    expected_initial=sorted(effect for effect in all_requires if effect not in all_provides)
+    required_external_initials=sorted(
+        effect for effect in all_requires if effect not in all_provides
+    )
+    unverified_initials=sorted(
+        effect for effect in required_external_initials
+        if effect not in verified_initial_set
+    )
+    if unverified_initials:
+        return False,"UNVERIFIED_INITIAL_FACTS_REQUIRED:"+",".join(unverified_initials)
+    expected_initial=sorted(
+        effect for effect in required_external_initials
+        if effect in verified_initial_set
+    )
     if sorted(problem.get("initial_facts") or [])!=expected_initial:
         return False,"INITIAL_FACTS_MISMATCH"
+    if sorted(composition.get("verified_initial_facts") or [])!=sorted(verified_initial_set):
+        return False,"VERIFIED_INITIAL_FACTS_EVIDENCE_MISMATCH"
+    if sorted(composition.get("required_external_initials") or [])!=required_external_initials:
+        return False,"REQUIRED_EXTERNAL_INITIALS_MISMATCH"
     if composition.get("derived_capability_count")!=len(caps):
         return False,"DERIVED_COUNT_MISMATCH"
     return True,"VERIFIED"
