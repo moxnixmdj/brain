@@ -38,9 +38,35 @@ class SourceCandidateDiscoveryTests(unittest.TestCase):
         self.assertEqual(len(p.items),1)
         self.assertEqual(self.m._unwrap_ddg(p.items[0][0]),"https://example.org/spec")
 
-    def test_query_is_objective_not_invented_recipe(self):
-        q="Assess whether a standards document changed between two editions"
+    def test_query_focuses_broad_decision_clause_without_inventing_terms(self):
+        q=(
+            "Assess whether a standards document changed between two editions. "
+            "Use authoritative primary evidence, choose a verification method, "
+            "and preserve provenance."
+        )
+        out=self.m._query(q)
+        self.assertEqual(out,"a standards document changed between two editions")
+        self.assertNotIn("authoritative",out.lower())
+        self.assertNotIn("verification method",out.lower())
+
+    def test_explicit_search_objective_is_preserved(self):
+        q="RFC 9110 HTTP semantics official specification"
         self.assertEqual(self.m._query(q),q)
+
+    def test_genomics_regression_query_retains_decision_entities_not_wrapper(self):
+        q=(
+            "Assess whether the complete reference genome sequence length of "
+            "Escherichia coli K-12 MG1655 is greater than the human mitochondrial "
+            "reference genome sequence length. Use authoritative primary technical "
+            "evidence and a real executable check. Autonomously discover and verify "
+            "the relevant primary records, determine how to extract and interpret "
+            "the two sequence lengths, choose and run a zero-cost verification method."
+        )
+        out=self.m._query(q)
+        self.assertIn("Escherichia coli K-12 MG1655",out)
+        self.assertIn("human mitochondrial reference genome sequence length",out)
+        self.assertNotIn("Assess whether",out)
+        self.assertNotIn("zero-cost verification method",out)
 
     def test_local_urls_fail_closed(self):
         self.assertIsNone(self.m._safe_url("http://localhost/x"))
