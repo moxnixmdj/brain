@@ -46,6 +46,24 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertEqual(out["status"],"UNSUPPORTED")
         self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
 
+    def test_generic_run_verification_method_language_is_not_explicit_recipe(self):
+        objective=(
+            "Assess whether a material property differs between two operating regimes. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Autonomously discover and verify relevant sources, choose and run a zero-cost "
+            "verification method, identify material scope limitations, independently verify "
+            "the consequential result, and produce a decision-quality answer."
+        )
+        out=self.dec.decompose(objective)
+        self.assertEqual(out["status"],"DECOMPOSED",out)
+
+    def test_concrete_run_command_remains_explicit_recipe(self):
+        out=self.dec.decompose(
+            "Assess whether two measured values differ. Run python verify_values.py"
+        )
+        self.assertEqual(out["status"],"UNSUPPORTED")
+        self.assertEqual(out["reason"],"OBJECTIVE_ALREADY_CONTAINS_EXPLICIT_EXECUTION_RECIPE")
+
     def test_non_broad_action_goal_is_not_reinterpreted(self):
         out=self.dec.decompose("Create canonical/astra_runtime/tmp/x.json with one record")
         self.assertEqual(out["status"],"UNSUPPORTED")
@@ -57,6 +75,45 @@ class BroadObjectiveDecompositionTests(unittest.TestCase):
         self.assertEqual(out["unresolved_clause_indexes"],[0])
         self.assertTrue(out["broad_objective_decomposition_available"])
         self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+
+    def test_grounding_exposes_decomposition_when_all_multiclause_parts_are_unresolved(self):
+        objective=(
+            "Assess whether a material property differs between two operating regimes. "
+            "Use authoritative primary technical evidence and a real executable check. "
+            "Identify material scope limitations and independently verify the consequential result."
+        )
+        out=self.grounding.ground(objective,{})
+        self.assertGreater(len(out["clauses"]),1)
+        self.assertEqual(out["grounded_clause_count"],0)
+        self.assertEqual(
+            out["unresolved_clause_indexes"],
+            list(range(len(out["clauses"]))),
+        )
+        self.assertTrue(out["broad_objective_decomposition_available"])
+        self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+        self.assertEqual(out["model_dependency_count"],0)
+
+    def test_spent_http2_input_now_reaches_broad_decomposition_without_reexecution(self):
+        objective=(
+            "Assess whether the maximum permitted HTTP/2 initial stream flow-control window is greater "
+            "than the protocol's default initial stream flow-control window. Use authoritative primary "
+            "technical evidence and a real executable check. Autonomously discover and verify the relevant "
+            "specification, determine how to extract and interpret the required limits, choose and run a "
+            "zero-cost verification method, identify material protocol-scope or interpretation limitations, "
+            "independently verify the consequential result, and produce a decision-quality answer with provenance."
+        )
+        direct=self.dec.decompose(objective)
+        self.assertEqual(direct["status"],"DECOMPOSED",direct)
+        out=self.grounding.ground(objective,{})
+        self.assertGreater(len(out["clauses"]),1)
+        self.assertEqual(out["grounded_clause_count"],0)
+        self.assertEqual(
+            out["unresolved_clause_indexes"],
+            list(range(len(out["clauses"]))),
+        )
+        self.assertTrue(out["broad_objective_decomposition_available"],out)
+        self.assertEqual(out["broad_objective_decomposition"]["status"],"DECOMPOSED")
+        self.assertEqual(out["model_dependency_count"],0)
 
     def test_grounding_keeps_unsupported_goal_unresolved_without_decomposition(self):
         out=self.grounding.ground("Create output.json with one record",{})

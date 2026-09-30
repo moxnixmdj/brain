@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_REPAIR_QUALIFICATION_V1",
+  "status": "PASS_GUARDED_INDEPENDENT_EXACT_BYTE_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "repaired_blocker": "OPEN_ENDED_RESEARCH_BROAD_OBJECTIVE_DECOMPOSITION_NOT_ACTIVATED",
+  "brain_pr": 474,
+  "brain_candidate_head_before_receipt": "2b2ad1272c28229b3a26fc48f3515138313fd774",
+  "canonical_base": "691b08b7f51adca1ed980df384153b71ef38e046",
+  "exact_candidate_blobs": {
+    "canonical/runtime/bound_capabilities/broad_objective_decompose.py": "1efaec4ba51ecb5c40072b3190853f4de89d8f77",
+    "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py": "46e8e7466479ea298c34e5fa682d49c374510ce9",
+    "canonical/tests/test_broad_objective_semantic_decomposition.py": "2df7c6ec85083458a69675f6ff86eca9c00ea278"
+  },
+  "independent_qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 186,
+    "workflow_run_id": 36689658815,
+    "job_id": 109803582621,
+    "head_sha": "b5a6441640d8336ae9ca891c200ddbae3c9ee7fb",
+    "conclusion": "success",
+    "authored_test_count": 9,
+    "authored_tests": "PASS",
+    "independent_oracle": "PR474_EXACT_GUARDED_INDEPENDENT_QUALIFICATION_PASS",
+    "artifact_id": 11085092932,
+    "artifact_sha256": "617a80f4be4dbdbb47327e61396003a7ccea7196e59ee8cf9c9890aa1bde60d5"
+  },
+  "verified_properties": [
+    "all-unresolved multi-clause broad research objectives activate broad-objective decomposition",
+    "generic choose-and-run-method language remains admissible",
+    "concrete command/script/URL recipes fail closed",
+    "partial grounding suppresses whole-goal broad decomposition",
+    "research frontend ordering precedes package acquisition",
+    "zero model dependency on credited qualification path"
+  ],
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "spent_parent_task": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "parent_capability_credit": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_required_action": "MERGE_GENERIC_REPAIR_THEN_FREEZE_A_MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_B"
+}
