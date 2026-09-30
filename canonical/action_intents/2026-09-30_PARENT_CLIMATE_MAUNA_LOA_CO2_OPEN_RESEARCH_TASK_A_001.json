@@ -259,9 +259,9 @@
             "current astra_runtime.py"
           ],
           "qualification_evidence_classes": [
-            "BRAIN_INHERITED"
+            "DIRECT_PROBE"
           ],
-          "resolution": "REJECTED_BY_CONTRACT",
+          "resolution": "DISQUALIFIED",
           "comparison": {
             "CORRECTNESS": "Potentially capable.",
             "CAPABILITY_STRENGTH": "Broad.",
@@ -327,22 +327,6 @@
             "evidence_classes": [
               "BRAIN_INHERITED",
               "DIRECT_PROBE"
-            ],
-            "evidence_scope": "GLOBAL"
-          },
-          {
-            "dependency": "MODEL_PLANNER_DISABLED",
-            "kind": "POLICY",
-            "required": true,
-            "volatility": "STATIC",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "observed_at_utc": "2026-09-30T04:38:35Z",
-            "evidence": [
-              "Execution capsule will set ASTRA_DISABLE_MODEL_PLANNER=1; task forbids model/local-model/model-artifact routes."
-            ],
-            "evidence_classes": [
-              "BRAIN_INHERITED"
             ],
             "evidence_scope": "GLOBAL"
           }
