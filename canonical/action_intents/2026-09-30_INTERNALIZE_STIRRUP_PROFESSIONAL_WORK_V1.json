@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
   "action_id": "INTERNALIZE-STIRRUP-PROFESSIONAL-WORK-20260930-V1",
   "status": "AUTHORIZED_INTERNALIZATION__ZERO_OPUS_CREDIT__VERIFICATION_PENDING",
-  "canonical_base_commit": "fff8be77b376b2d82a67309f4de0b8ebb6afe413",
+  "canonical_base_commit": "5481ae7d3de8325ed7b67e5b43a703229adf8d82",
   "capability_target": "PROFESSIONAL_KNOWLEDGE_WORK",
   "action_kind": "CAPABILITY_INTERNALIZATION_AND_SUBSTRATE_INTEGRATION",
   "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::PROFESSIONAL_KNOWLEDGE_WORK::EXTERNAL_SPECIMEN_TO_INTERNALIZED_HARNESS",
@@ -86,5 +86,12 @@
     },
     "stop_condition": "Merge exact internalization with zero Opus credit. Do not promote professional-work family until Brain+Stirrup itself has comparable evidence >= Opus 5.5."
   },
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "prior_state_reconciliation": {
+    "superseding_main_commit": "5481ae7d3de8325ed7b67e5b43a703229adf8d82",
+    "material_changes": [
+      "SCOPED_FAIL_CLOSED_SELF_VERIFICATION_AND_RECOVERY_PROMOTED_ON_MAIN"
+    ],
+    "effect_on_route": "ORTHOGONAL_CAPABILITY_PROGRESS__STIRRUP_INTERNALIZATION_REMAINS_VALID__CONTROL_SURFACES_MUST_PRESERVE_NEW_OWNED_COMPONENT"
+  }
 }
