@@ -140,7 +140,7 @@ def run(objective,decomposition,limit=12,timeout=15):
         candidate=dict(selected_item["candidate"])
         provenance=selected_item["verification"]
         if provenance.get("status")=="BIBLIOGRAPHIC_PROVENANCE_VERIFIED":
-            selected_materialization=verifier.materialize_retrieval(
+            selected_materialization=verifier.materialize(
                 candidate,provenance,timeout=timeout
             )
             if selected_materialization.get("status")=="RETRIEVAL_PROVENANCE_VERIFIED":
