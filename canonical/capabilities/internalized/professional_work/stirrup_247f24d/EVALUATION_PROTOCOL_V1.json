@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_WORK_EVALUATION_PROTOCOL_V1",
+  "candidate": "PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_V1",
+  "target": "CLAUDE_OPUS_5_5_PROFESSIONAL_KNOWLEDGE_WORK",
+  "target_reference": {
+    "benchmark": "GDPval-AA v2.1",
+    "opus_5_5_elo": 1846,
+    "note": "Current public point estimate is a whole-benchmark reference, not a per-task deterministic threshold."
+  },
+  "contamination_policy": {
+    "public_task_prompts_and_reference_files": "ALLOWED",
+    "human_gold_deliverables_before_submission": "FORBIDDEN",
+    "model_submissions_for_selected_task_before_submission": "FORBIDDEN",
+    "task_specific_solution_or_judge_feedback_before_submission": "FORBIDDEN",
+    "failed_task": "SPENT_FOR_FRESH_PROMOTION_EVIDENCE_AFTER_GRADING"
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "name": "MECHANISM_AND_ADAPTER_PREFLIGHT",
+      "requirement": "Exact pinned Stirrup source, execution profile, and required Brain artifact tools available.",
+      "capability_credit": 0
+    },
+    {
+      "stage": 1,
+      "name": "CHEAP_CROSS_ARTIFACT_FALSIFICATION",
+      "selection": "Deterministically select a small public-GDPval subset from task IDs before reading prompts, spanning at least three different requested artifact classes when feasible.",
+      "execute": "Brain-owned Stirrup execution profile on approved zero-incremental cognition substrate.",
+      "verify": "Use task-permitted format checks plus available public automated grader or blind comparison only after outputs are frozen.",
+      "decision": "Any systemic harness/integration failure returns to route race or integration correction. Do not repair a graded task and count replay as fresh evidence.",
+      "capability_credit": 0
+    },
+    {
+      "stage": 2,
+      "name": "MATCHED_PROFESSIONAL_WORK_COMPARISON",
+      "prerequisite": "STAGE_1_NO_SYSTEMIC_FAILURE",
+      "requirement": "Use a sufficiently broad uncontaminated task sample and scoring protocol comparable enough to the Opus 5.5 target to support an equal-or-better claim.",
+      "target": "BRAIN_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+      "capability_credit": "ONLY_IF_COMPARABILITY_AND_STATISTICAL_EVIDENCE_SUPPORT_CLAIM"
+    }
+  ],
+  "hard_constraints": {
+    "incremental_spend_usd": 0,
+    "paid_api": false,
+    "external_opaque_capability_credit": false,
+    "knowledge_external_jit": true
+  },
+  "stop_rules": [
+    "DO_NOT_RUN_FULL_220_TASK_SET_BEFORE_CHEAP_FALSIFICATION",
+    "DO_NOT_USE_PUBLIC_HUMAN_GOLD_DELIVERABLES_AS_GENERATION_HINTS",
+    "DO_NOT_CONVERT_STIRRUP_USAGE_BY_ARTIFICIAL_ANALYSIS_INTO_PARITY_CREDIT",
+    "DO_NOT_BUY_E2B_OR_API_CREDITS",
+    "DO_NOT_REPAIR_AND_REPLAY_SPENT_GRADED_TASK_FOR_PROMOTION"
+  ]
+}
