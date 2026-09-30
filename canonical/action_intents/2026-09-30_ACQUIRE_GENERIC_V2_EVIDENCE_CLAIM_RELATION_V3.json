@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-GENERIC-V2-EVIDENCE-CLAIM-RELATION-20260930-V3",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "94b08f40dd52606dc88dddf78266fadb6f855008",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Promote exact already-qualified generic V2 claim-support/relation bytes, atomically advance every frontier mirror including CANONICAL_POINTER, then require one new materially different genuinely open-ended parent task. No parent credit from child evidence.",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "EXACT_BYTES_ALREADY_INDEPENDENTLY_QUALIFIED__CURRENT_BASE_ATOMIC_BIND_ONLY",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "prior_work_checked": [
+    "current main 94b08f40dd52606dc88dddf78266fadb6f855008",
+    "producer d66a7eb30774f66160b698d8082947776888293d",
+    "tests 590a1e50f11bc2903b56d41a00c5354ec2501c44",
+    "public run 36682488104 success",
+    "artifact 11082521746 sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+    "main delta since qualification is canonical mirror reconciliation only"
+  ],
+  "stop_condition": "Promote only exact substring support and explicit numeric relations, update registry/hierarchy/queue/scoreboard/target/pointer atomically, and return to one new genuinely open-ended parent task.",
+  "recursive_obs": {
+    "canonical_base_commit": "94b08f40dd52606dc88dddf78266fadb6f855008",
+    "real_outcome": "Bind an already independently verified bounded evidence-to-relation capability to current canonical authority with no duplicate execution.",
+    "obs_goal": {
+      "real_outcome": "Promote exact qualified bytes and atomically advance all frontier mirrors.",
+      "proxy_goals_deleted": [
+        "rerun identical qualification",
+        "rebuild adapter",
+        "parent replay",
+        "semantic claim judge"
+      ],
+      "surviving_necessity": "Current-base authority binding only."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "generic extraction requalified",
+        "exact producer/test blobs",
+        "public run 36682488104",
+        "typed decision synthesis"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No runtime redesign",
+        "No new supplier",
+        "No execution rerun"
+      ],
+      "surviving_gap": "Canonical promotion and mirror atomicity only."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Prior qualified branches became stale from zero-credit mirror commits.",
+      "delete_bypass_substitute_options": [
+        "Reuse exact qualification and update all mirrors in one PR."
+      ],
+      "surviving_causal_blocker": "CURRENT_BASE_ATOMIC_PROMOTION_NOT_RECORDED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXACT_QUALIFIED_BYTES_AND_ATOMIC_MIRROR_UPDATE",
+        "RERUN",
+        "REBUILD"
+      ],
+      "losing_routes_reason": "Rerun/rebuild adds no evidence; atomic mirror update removes the recurring stale-pointer failure class.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Already satisfied by run 36682488104 using live generic V2 SQLite and RFC evidence, exact support, independent Decimal oracle, paraphrase rejection, tamper rejection, and exact byte binding."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "stale PR436",
+        "stale PR438",
+        "duplicate relation acquisition"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic V2 extraction",
+        "typed decision synthesis"
+      ],
+      "fresh_reuse_plan": "Immediately freeze and run one materially different genuinely open-ended parent task after merge."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused public qualification",
+        "reused exact bounded contract"
+      ],
+      "search_stop_decision": "No unresolved challenger justifies delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen only after material route failure."
+    },
+    "selected_surviving_route": "REUSE_EXACT_QUALIFIED_BYTES_AND_ATOMIC_MIRROR_UPDATE",
+    "why_selected_route_is_fastest_sufficient": "It requires no new execution and eliminates the mirror-chasing stale-base loop."
+  }
+}
