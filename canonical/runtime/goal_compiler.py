@@ -3525,6 +3525,12 @@ def _contains_effect_result_binding(value):
                 and bool(str(spec.get("effect") or "").strip())
                 and bool(str(spec.get("field") or "").strip())
             )
+        if (
+            str(value.get("type") or "").strip()=="effect_result"
+            and bool(str(value.get("effect") or "").strip())
+            and bool(str(value.get("field") or "").strip())
+        ):
+            return True
         return any(_contains_effect_result_binding(v) for v in value.values())
     if isinstance(value,list):
         return any(_contains_effect_result_binding(v) for v in value)
