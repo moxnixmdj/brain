@@ -69,20 +69,25 @@
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
-      "status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
       "best_existing_routes": [
-        "GPT-6 Astra Work + document/spreadsheet/presentation toolchain",
-        "GPT-6.1 Sol Work"
+        "Brain-vendored Stirrup 247f24d professional-work agent harness + approved general cognition substrate",
+        "Artifact-format-specific Brain-owned skills/tools to be internalized as needed"
       ],
       "evidence": "Opus 5.5 currently leads GDPval-AA v2.1 at 1846 and AA-Briefcase v1.1 at 1822 in current public boards.",
       "residual": "Find existing route >= both relevant professional-work bars or stronger direct evidence.",
       "sources": [
-        "https://artificialanalysis.ai/evaluations/gdpval-aa",
-        "https://artificialanalysis.ai/evaluations/aa-briefcase",
-        "https://www.anthropic.com/claude-opus-5-5"
+        "canonical/capabilities/opus55/OPUS55_STIRRUP_INTERNALIZATION_VERIFICATION_V1.json",
+        "https://github.com/ArtificialAnalysis/Stirrup",
+        "https://artificialanalysis.ai/evaluations/gdpval-aa"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "Stirrup, the exposed agent harness used by GDPval-AA, is now vendored into Brain at pinned commit 247f24d with byte-identical source verification and MIT license preserved. This internalizes the professional-work agent-loop/tool/file/context mechanism. Opus-level capability credit remains zero until the Brain-configured route itself verifies >= Opus 5.5; artifact-format-specific mechanisms remain separately accountable.",
+      "internalized_configuration": [
+        "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
+        "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json"
+      ],
+      "next_required_action": "Run contamination-safe fresh professional-work tasks through the Brain-vendored Stirrup configuration on an approved zero-incremental general cognition substrate; internalize any required artifact-specific mechanisms; zero Opus credit until pass."
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -332,7 +337,6 @@
     ],
     "external_specimen_backed_families": [
       "COMPLEX_MULTI_TOOL_AGENCY",
-      "PROFESSIONAL_KNOWLEDGE_WORK",
       "BUSINESS_WORKFLOW_AUTOMATION",
       "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
       "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -358,7 +362,8 @@
     "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
     "next_optimization_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
     "brain_configured_verification_pending": [
-      "ADVANCED_AGENTIC_CODING"
+      "ADVANCED_AGENTIC_CODING",
+      "PROFESSIONAL_KNOWLEDGE_WORK"
     ]
   }
 }

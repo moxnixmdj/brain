@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_STIRRUP_PROFESSIONAL_WORK_INTERNALIZATION_V1",
+  "status": "CURRENT",
+  "real_objective": "Internalize an existing professional-work agent mechanism into Brain so the capability can be verified as Brain-owned rather than externalized to a model or service.",
+  "governing_invariants": [
+    "External winners are specimens only.",
+    "Capability mechanism must be represented in Brain-owned artifacts.",
+    "General cognition substrate may be external but receives no professional-work capability credit.",
+    "Knowledge remains external/JIT.",
+    "Underlying capability invention is forbidden.",
+    "Opus parity credit remains zero until Brain-configured route passes."
+  ],
+  "material_premises": [
+    "Artificial Analysis identifies Stirrup as the agent harness used for GDPval-AA professional work.",
+    "Stirrup is MIT-licensed and exposes the agent loop, tool lifecycle, file I/O, code/web/MCP tools, skills, multimodal support and context management.",
+    "Brain now contains a pinned vendored copy of Stirrup commit 247f24d56b2108235880ed2a2baea5d35b5a67ee.",
+    "45 upstream runtime/metadata files were compared byte-for-byte and match; the vendored package compiles."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+    "canonical/capabilities/opus55/OPUS55_STIRRUP_INTERNALIZATION_VERIFICATION_V1.json",
+    "https://github.com/ArtificialAnalysis/Stirrup",
+    "https://artificialanalysis.ai/evaluations/gdpval-aa"
+  ],
+  "conclusion": "Professional knowledge work now has a Brain-owned exposed agent-harness mechanism candidate. Move the family from external-specimen-only to Brain-configured verification pending. Award zero Opus credit until direct professional-work verification.",
+  "selected_route": "BRAIN_VENDORED_STIRRUP_247F24D",
+  "rejected_material_alternatives": [
+    {
+      "route": "USE_OPUS_OR_ASTRA_AS_EXTERNAL_PROFESSIONAL_WORK_PROVIDER",
+      "reason": "Would externalize the capability."
+    },
+    {
+      "route": "BUILD_NEW_PROFESSIONAL_WORK_AGENT",
+      "reason": "Existing benchmark harness is exposed and reusable; invention/build is slower and unnecessary."
+    },
+    {
+      "route": "REFERENCE_STIRRUP_PACKAGE_WITHOUT_VENDoring",
+      "reason": "Would preserve rediscovery/network dependency instead of durable Brain ownership."
+    }
+  ],
+  "uncertainties": [
+    "Stirrup alone may not explain all of Opus 5.5 professional-work strength.",
+    "Artifact-format-specific skills and tools may need separate internalization before full-family parity."
+  ],
+  "assumptions": [
+    "GDPval-AA's published harness identity remains representative of the professional-work execution loop.",
+    "Pinned source can run on an approved zero-incremental general cognition substrate."
+  ],
+  "non_goals": [
+    "No current claim of GDPval parity.",
+    "No external model capability credit.",
+    "No permanent knowledge warehouse."
+  ],
+  "next_action": "Run a fresh professional-work task portfolio through the Brain-vendored Stirrup configuration using a general cognition substrate, internalizing any exposed artifact-skill mechanisms required, and compare the Brain route to the Opus 5.5 bar.",
+  "supersession_conditions": [
+    "Fresh evidence shows the vendored mechanism is insufficient and another exposed mechanism dominates.",
+    "A newer compatible Stirrup release materially improves the target behavior and is deliberately re-internalized."
+  ],
+  "supersedes": [
+    "Treating PROFESSIONAL_KNOWLEDGE_WORK as external-capability-specimen-only with no Brain-owned agent harness."
+  ]
+}

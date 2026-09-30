@@ -1,0 +1,252 @@
+{
+  "capability_candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "capability_credit": 0,
+  "file_count": 45,
+  "files": [
+    {
+      "bytes": 1097,
+      "path": "LICENSE",
+      "sha256": "2a50b370b55fd141316875d0331e345d7c6ee37efc80f81a8b5efdfd9455f59c"
+    },
+    {
+      "bytes": 2911,
+      "path": "pyproject.toml",
+      "sha256": "28c44a594f9b9bcb350a9cbcafc79f39baa1e4b0680195ae1ffa18679bff2d55"
+    },
+    {
+      "bytes": 2826,
+      "path": "src/stirrup/__init__.py",
+      "sha256": "ccf8a5a84810cb09f77b0d2a2dbd0f4b484afc09c4a66bc8bc575911687b9676"
+    },
+    {
+      "bytes": 641,
+      "path": "src/stirrup/clients/__init__.py",
+      "sha256": "cab1669e0591c78c0e88b5bcb11562b8c52132fe2e358ff45669cec8fad74354"
+    },
+    {
+      "bytes": 9011,
+      "path": "src/stirrup/clients/chat_completions_client.py",
+      "sha256": "ec3767eea8c2f838d5553513e3db717836b061ac599fbabcebb30c7fadc31b3a"
+    },
+    {
+      "bytes": 8323,
+      "path": "src/stirrup/clients/litellm_client.py",
+      "sha256": "d27bc6bbab190f08ef497bdc95d7a02b44e71d9222fc2c3c1251e96203cc7ff2"
+    },
+    {
+      "bytes": 32711,
+      "path": "src/stirrup/clients/open_responses_client.py",
+      "sha256": "0b974916e4a41f165f8c7fae74396750f97c2769a4d70d449be03e2607cf7161"
+    },
+    {
+      "bytes": 10241,
+      "path": "src/stirrup/clients/utils.py",
+      "sha256": "fdc18ebbaeac2f048dcd7bd4270389495f2a853b4dbeeae46ee80ca6746dd4db"
+    },
+    {
+      "bytes": 1245,
+      "path": "src/stirrup/constants.py",
+      "sha256": "e90cafd16e7a477e11fe447fdfd571707bc73604856a93b28440802e546d68f7"
+    },
+    {
+      "bytes": 40,
+      "path": "src/stirrup/core/__init__.py",
+      "sha256": "1ba53e94615118e9e574bda58d67e49295ae22c64b68e213594b1399ee7cd285"
+    },
+    {
+      "bytes": 88016,
+      "path": "src/stirrup/core/agent.py",
+      "sha256": "e96cc1513181b3d15d5d9e6a923eceec7ee70e6e5a4c0247b97fa8196e39381f"
+    },
+    {
+      "bytes": 18609,
+      "path": "src/stirrup/core/cache.py",
+      "sha256": "b7ce4957fae0502275a67835456e4dce748e4b7037b8de72e06f7e821c2c143e"
+    },
+    {
+      "bytes": 1174,
+      "path": "src/stirrup/core/exceptions.py",
+      "sha256": "5b92601f6e2b943d91cb4f9b5d00abfef4638f8c0f6dedb106560605df6ae8ff"
+    },
+    {
+      "bytes": 44207,
+      "path": "src/stirrup/core/models.py",
+      "sha256": "72d3ff61f9a3459f894351e42b8add39d61b1323b156144f9d0cb9d256083812"
+    },
+    {
+      "bytes": 0,
+      "path": "src/stirrup/integrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1153,
+      "path": "src/stirrup/integrations/slack/__init__.py",
+      "sha256": "0a61eb7cce476bf48b75668d301d92a624dc153f601bb4722d3cd25088b5ebb3"
+    },
+    {
+      "bytes": 864,
+      "path": "src/stirrup/integrations/slack/__main__.py",
+      "sha256": "23e8333a8c3016378d0921624be6d6648a003b86792046b9f2dffb7af77b75d6"
+    },
+    {
+      "bytes": 238,
+      "path": "src/stirrup/integrations/slack/Dockerfile",
+      "sha256": "3132c77e2770de85292745d8227011458a1666d6300fc10ab738a96d09178def"
+    },
+    {
+      "bytes": 5923,
+      "path": "src/stirrup/integrations/slack/README.md",
+      "sha256": "bbc8283db032965b0710fc1b586e624c355dc2f6cd61030a85214007bc9dce79"
+    },
+    {
+      "bytes": 22071,
+      "path": "src/stirrup/integrations/slack/slack.py",
+      "sha256": "fabdf510ac75f23d8c92bfc7cac6e492e0cdb4f4c26146c922a11fbac7e34b5c"
+    },
+    {
+      "bytes": 966,
+      "path": "src/stirrup/prompts/__init__.py",
+      "sha256": "432f10fe9d5a7701d707d2420aa4ae7a7be0c7c3c1fda9d76781101ba3000be9"
+    },
+    {
+      "bytes": 273,
+      "path": "src/stirrup/prompts/base_system_prompt.txt",
+      "sha256": "89dc579a2e7b7bab4c3ba4d3f285b92cf0d06acd5e6e11cefc2a0f279cacdfb0"
+    },
+    {
+      "bytes": 1200,
+      "path": "src/stirrup/prompts/message_summarizer.txt",
+      "sha256": "5488d3a27d6fb1155969538f6564549d4064cf3886b34cb4564b7f8043315d55"
+    },
+    {
+      "bytes": 382,
+      "path": "src/stirrup/prompts/message_summarizer_bridge.txt",
+      "sha256": "e21ac0c59e3b32709dea555ec1d8fb4bec3dff8b291f7a1becc58cf3ca294fee"
+    },
+    {
+      "bytes": 167,
+      "path": "src/stirrup/prompts/message_summarizer_text_only.txt",
+      "sha256": "286f2b613fefba4861e43a1b74b3ff526746948344ff7e7a29a1683f4ebe8332"
+    },
+    {
+      "bytes": 0,
+      "path": "src/stirrup/py.typed",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 724,
+      "path": "src/stirrup/skills/__init__.py",
+      "sha256": "4a27267f5891c1facf6370643b2023f351c99cd9586d885b1825a6e99a52c1f6"
+    },
+    {
+      "bytes": 4427,
+      "path": "src/stirrup/skills/skills.py",
+      "sha256": "ddad2ddda7da42e26ee60c78ddc51e80de330474d13d5b396d5aec9b101c3623"
+    },
+    {
+      "bytes": 3332,
+      "path": "src/stirrup/tools/__init__.py",
+      "sha256": "136fe04c6bc313bf762f8b816c0cfe78e1dafc07543ad75aa4bdc0307c041660"
+    },
+    {
+      "bytes": 21770,
+      "path": "src/stirrup/tools/browser_use.py",
+      "sha256": "07dc0056fdea24671966d8fac62b34ad6b5d576d2155102ad22d820a253a2771"
+    },
+    {
+      "bytes": 1288,
+      "path": "src/stirrup/tools/calculator.py",
+      "sha256": "81e9acdbf59b610c5696be2d33b23616c79937ce3d05d2220a4b1cf2ff5341a5"
+    },
+    {
+      "bytes": 1073,
+      "path": "src/stirrup/tools/code_backends/__init__.py",
+      "sha256": "6fe9a67fc96ae574e7d18581a573ba98d8a170e6d207e3a33935efc7aebfa88f"
+    },
+    {
+      "bytes": 40176,
+      "path": "src/stirrup/tools/code_backends/base.py",
+      "sha256": "d18c0e93a20fd02dbd38322807f6e07df8fd02b4afa9db34b2412b557d5e8d91"
+    },
+    {
+      "bytes": 43648,
+      "path": "src/stirrup/tools/code_backends/docker.py",
+      "sha256": "d6db69d78f4290fcb49a9c9aafe70f4883afa40f834725008af683bdc3010bf7"
+    },
+    {
+      "bytes": 22843,
+      "path": "src/stirrup/tools/code_backends/e2b.py",
+      "sha256": "a124cbd4ab3c6201b0443ca149b399da46357b423fc21a215b803bf164c1bb63"
+    },
+    {
+      "bytes": 22775,
+      "path": "src/stirrup/tools/code_backends/local.py",
+      "sha256": "ceae0b8725c7f338b6df01b22aff03f182510b9dd8c4fdf85ad539fec939d5ab"
+    },
+    {
+      "bytes": 1868,
+      "path": "src/stirrup/tools/finish.py",
+      "sha256": "98685d8a548371a14333e549b54671372a50b54fdd30ef84ec6e030e8660b497"
+    },
+    {
+      "bytes": 20447,
+      "path": "src/stirrup/tools/mcp.py",
+      "sha256": "c369625cb16edf27c97e5d597f32fada8949acfeb22ded4280e461c96ff908d4"
+    },
+    {
+      "bytes": 4698,
+      "path": "src/stirrup/tools/user_input.py",
+      "sha256": "46e835c8838cc459f2f3d2709160b45f645c688278fb64ed578886dd65f3ebb3"
+    },
+    {
+      "bytes": 3267,
+      "path": "src/stirrup/tools/view_image.py",
+      "sha256": "646693426fd9ca5689f04ea2922f3a575a7913f7052e1eae9970f489ebec02a1"
+    },
+    {
+      "bytes": 21410,
+      "path": "src/stirrup/tools/web.py",
+      "sha256": "aa3176e98acbf3d430a42819ab2d81d89a1bce910798b12b250a516a5d924309"
+    },
+    {
+      "bytes": 240,
+      "path": "src/stirrup/utils/__init__.py",
+      "sha256": "e730317178ec2726e38d327c9465118cbf829e8e288f68b782336e95f52a1be2"
+    },
+    {
+      "bytes": 40745,
+      "path": "src/stirrup/utils/logging.py",
+      "sha256": "9ce3890e38ebd77edd24749a6893c2d9a7bbbba154419ef3769cd461db09d98d"
+    },
+    {
+      "bytes": 490,
+      "path": "src/stirrup/utils/text.py",
+      "sha256": "e8aead1dc9343923cf2eeff307b255cad6ef8d81ac10fc86759ae4e99e1dae94"
+    },
+    {
+      "bytes": 11276,
+      "path": "UPSTREAM_README.md",
+      "sha256": "b639056fdcc24b9e39d80fde9bca692ec7619a6b655abc300a9e3a7574c71f2c"
+    }
+  ],
+  "general_cognition_substrate_policy": "MAY_BE_EXTERNAL__NO_OPAQUE_PROFESSIONAL_WORK_CAPABILITY_CREDIT",
+  "knowledge_policy": "EXTERNAL_JIT",
+  "operative_mechanisms": [
+    "agent_loop",
+    "tool_lifecycle",
+    "file_input_output",
+    "code_execution",
+    "web_tools",
+    "MCP_support",
+    "skills_system",
+    "context_summarization",
+    "multimodal_input",
+    "provider_abstraction"
+  ],
+  "schema": "PROJECT_BRAIN_INTERNALIZATION_MANIFEST_V1",
+  "status": "BRAIN_OWNED_SOURCE_INTERNALIZED__VERIFICATION_PENDING",
+  "upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+  "upstream_license": "MIT",
+  "upstream_repository": "https://github.com/ArtificialAnalysis/Stirrup",
+  "vendored_root": "canonical/capabilities/internalized/professional_work/stirrup_247f24d"
+}

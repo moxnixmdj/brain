@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_WORK_CONFIGURATION_V1",
+  "capability_candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+  "mechanism_root": "canonical/capabilities/internalized/professional_work/stirrup_247f24d",
+  "upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+  "operative_mechanisms": [
+    "agent loop with bounded turns",
+    "tool lifecycle management",
+    "input-file staging and output-file collection",
+    "code execution",
+    "web fetch/search",
+    "MCP tool support",
+    "skills loading",
+    "automatic context summarization and overflow recovery",
+    "multimodal file/image handling",
+    "provider-agnostic cognition client"
+  ],
+  "default_professional_work_profile": {
+    "max_turns": 250,
+    "context_management": "STIRRUP_AUTOMATIC_SUMMARIZATION",
+    "file_inputs": "TASK_REFERENCE_FILES",
+    "file_outputs": "TASK_DELIVERABLE_DIRECTORY",
+    "tool_policy": [
+      "BRAIN_APPROVED_CODE_EXECUTION",
+      "BRAIN_APPROVED_WEB_FETCH_SEARCH",
+      "BRAIN_APPROVED_MCP_TOOLS",
+      "BRAIN_APPROVED_ARTIFACT_TOOLS_WHEN_INTERNALIZED_OR_GENERAL_RUNTIME"
+    ],
+    "knowledge_policy": "EXTERNAL_JIT",
+    "general_cognition_substrate": "APPROVED_ZERO_INCREMENTAL_GENERAL_COGNITION_SUBSTRATE",
+    "completion_policy": "DELIVERABLE_FILES_MUST_EXIST_BEFORE_FINISH",
+    "verification_policy": "INDEPENDENT_DELIVERABLE_VALIDATION_AND_BLIND_OR_RUBRIC_SCORING_WHERE_AVAILABLE"
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS__VENDORED_SOURCE",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_FOR_AGENT_HARNESS_MECHANISM__SOURCE_EXPOSED",
+    "GENERAL_SUBSTRATE_TEST": "PENDING_BEHAVIORAL_VERIFICATION",
+    "SPECIMEN_SEPARATION_TEST": "PASS__MODEL_LEADERBOARD_RESULTS_NOT_CREDITED",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS__PINNED_SOURCE_AND_CONFIGURATION",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING",
+    "OWNERSHIP_PACKAGE_TEST": "PASS_FOR_MECHANISM__PARITY_PENDING"
+  },
+  "hard_constraints": {
+    "incremental_spend_usd": 0
+  },
+  "capability_credit": 0
+}
