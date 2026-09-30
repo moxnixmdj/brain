@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_ENDED_TASK_A_HARNESS_SCOPE_CORRECTION_V1",
+  "status": "HARNESS_BYPASS_PROVEN__PARENT_RUNTIME_GAP_UNADJUDICATED__TASK_REMAINS_SPENT",
+  "source_task": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+  "source_brain_pr": 337,
+  "source_runner_pr": 49,
+  "source_run_id": 36670516407,
+  "task_replay_allowed": false,
+  "exact_observation": {
+    "harness_entrypoint": "compiler.compile_goal(goal, registry, ROOT)",
+    "harness_failure_behavior": "abort immediately on compiler exception",
+    "public_runtime_entrypoint_exercised": false,
+    "public_runtime_entrypoint": "runtime.run_goal(step, mission)",
+    "bypassed_runtime_fallbacks": [
+      "_classify_plain_goal_gap",
+      "_ground_plain_goal_to_bound_capabilities",
+      "_compose_grounding_to_capability_problem",
+      "targeted_auto_capability_acquisition",
+      "federated_capability_discovery_fallback"
+    ]
+  },
+  "current_runtime_evidence": {
+    "classifier_result_for_mauna_loa_first_clause": "CAPABILITY_CANDIDATE",
+    "implication": "If public runtime.run_goal() had been exercised, current control flow would have entered model-independent grounding/composition/acquisition fallback after direct compilation failed, subject to later fail-closed blockers."
+  },
+  "admissible_conclusion": "The run proves only that direct goal_compiler.compile_goal() cannot compile the broad clause. It does not prove that the full model-independent Brain runtime lacks broad-objective grounding or research planning.",
+  "canonical_effect": {
+    "revoke_full_parent_compile_gap_authority": true,
+    "preserve_spent_task": true,
+    "preserve_no_replay": true,
+    "parent_capability_promoted": false,
+    "replacement_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__PR337_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_FALLBACK",
+    "next_action": "FREEZE_FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_PARENT_TASK__EXECUTE_VIA_PUBLIC_RUNTIME_RUN_GOAL__NO_PRECOMPILE_BYPASS__STOP_ON_FIRST_REAL_CAUSAL_GAP"
+  }
+}
