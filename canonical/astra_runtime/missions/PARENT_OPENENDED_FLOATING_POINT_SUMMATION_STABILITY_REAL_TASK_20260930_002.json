@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "PARENT-OPENENDED-FLOATING-POINT-SUMMATION-STABILITY-REAL-TASK-20260930-002",
+  "purpose": "Execute the frozen, unspent numerical-stability open-ended parent Task A exactly once through the canonical ASTRA runtime after broad-objective semantic decomposition qualification. No prewired source, tool, algorithm implementation, experiment procedure, or task-specific runtime patch.",
+  "goal": "Determine whether ordinary sequential summation in 64-bit binary floating-point arithmetic can yield materially less accurate results than a numerically stable summation strategy for workloads combining severe cancellation and large dynamic range. Use authoritative primary technical evidence and a real executable experiment. Choose and justify the research method, discover and verify the necessary source and tool route, test the claim, identify material limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "steps": [
+    {
+      "id": "execute-frozen-floating-point-stability-open-ended-parent-task-a",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 96,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "model_planner_disabled": true,
+    "fresh_parent_task": true,
+    "exactly_one_execution": true,
+    "source_task_path": "canonical/tasks/PARENT_OPENENDED_FLOATING_POINT_SUMMATION_STABILITY_REAL_TASK_20260930_002.json",
+    "source_task_blob_sha": "f07448644ca7f88fdfa438144f2b971596cab06f",
+    "stop_on_first_causal_gap": true,
+    "no_same_task_replay": true
+  }
+}
