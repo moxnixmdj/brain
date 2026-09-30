@@ -3,9 +3,11 @@
   "status": "MANDATORY_FAIL_CLOSED",
   "supersedes": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
   "authority": [
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
-    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md"
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md"
   ],
   "required_inputs": [
     "live_canonical_pointer",
@@ -19,9 +21,46 @@
     "current_recursive_obs_receipt",
     "current_live_challenger_frontier",
     "current_selected_route_execution_preflight",
-    "operator_obs_decision_boundary"
+    "operator_obs_decision_boundary",
+    "current_theory_invariants",
+    "current_reasoning_decision_receipt"
   ],
   "checks": [
+    {
+      "id": "OPUS55_TERMINAL_TARGET",
+      "question": "Is the action subordinate to permanently owning useful capabilities equal to or better than Opus 5.5?",
+      "required": true
+    },
+    {
+      "id": "KNOWLEDGE_CAPABILITY_ASYMMETRY",
+      "question": "Is knowledge external/JIT while capabilities are being durably configured and saved into Brain rather than externalized/JIT?",
+      "required": true
+    },
+    {
+      "id": "EXISTING_CAPABILITY_REALIZATION",
+      "question": "Is the target capability being acquired from an already-existing realization rather than invented from first principles?",
+      "required": true
+    },
+    {
+      "id": "CAPABILITY_OWNERSHIP_PACKAGE",
+      "question": "Will success leave a durable Brain capability package that future work can invoke without capability rediscovery?",
+      "required": true
+    },
+    {
+      "id": "OPUS55_ACCEPTANCE_BAR",
+      "question": "Does the configured final Brain capability have evidence to meet or exceed the corresponding Opus 5.5 useful capability before capability credit?",
+      "required": true
+    },
+    {
+      "id": "NO_CAPABILITY_INVENTION",
+      "question": "Is any new code limited to integration/configuration/packaging/routing/verification/recovery glue rather than creation of the underlying useful capability?",
+      "required": true
+    },
+    {
+      "id": "REASONING_DURABILITY",
+      "question": "Is there a current durable reasoning decision receipt preserving the objective, invariants, evidence, conclusion, rejected alternatives, uncertainty, and supersession conditions?",
+      "required": true
+    },
     {
       "id": "PRIMARY_STATE_REFRESH",
       "question": "Was live highest-authority state refreshed immediately before planning/execution?",
@@ -35,11 +74,6 @@
     {
       "id": "MISSION_LOCK",
       "question": "Is the terminal objective and current causal frontier explicit?",
-      "required": true
-    },
-    {
-      "id": "REAL_TASK_FIRST",
-      "question": "Is the default action a real consequential task rather than a synthetic proxy?",
       "required": true
     },
     {
@@ -125,11 +159,6 @@
     {
       "id": "ADVERSARIAL_CHALLENGER",
       "question": "Was the incumbent explicitly challenged and are all plausible dominating alternatives resolved before expensive continuation?",
-      "required": true
-    },
-    {
-      "id": "MODEL_INDEPENDENT_COGNITION",
-      "question": "For a cognitive capability target, does the complete selected-route execution dependency inventory contain no MODEL_API, LOCAL_MODEL, or MODEL_ARTIFACT at all, so the credited cognition is produced by Brain rather than any model?",
       "required": true
     },
     {
@@ -221,7 +250,9 @@
     "live_challenger_frontier_required": true,
     "max_external_route_frontier_age_hours": 24,
     "selected_route_execution_preflight_required": true,
-    "max_selected_route_preflight_age_hours": 2
+    "max_selected_route_preflight_age_hours": 2,
+    "build_interpretation": "INTEGRATION_GLUE_ONLY__UNDERLYING_CAPABILITY_INVENTION_FORBIDDEN",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V5.json"
   },
   "evidence_presence_classes": [
     "CAPABILITY_UNPROVEN",
@@ -240,6 +271,12 @@
     "RERUN_FULL_EXPERIMENT_LAST_RESORT"
   ],
   "automatic_abort_conditions": [
+    "CONSEQUENTIAL_OPERATOR_DECISION_WITHOUT_DURABLE_REASONING_RECEIPT",
+    "CAPABILITY_CREDIT_WITHOUT_DURABLE_OWNERSHIP_PACKAGE",
+    "CAPABILITY_CREDIT_WITHOUT_OPUS_5_5_OR_BETTER_EVIDENCE",
+    "UNDERLYING_CAPABILITY_INVENTION_SELECTED",
+    "KNOWLEDGE_INTERNALIZATION_PROJECT_SELECTED",
+    "CAPABILITY_EXTERNALIZED_OR_REDISCOVERED_JIT",
     "RECURSIVE_OBS_BASE_COMMIT_STALE",
     "RECURSIVE_OBS_SCHEMA_V4_INVALID_STALE_HOLLOW_UNDERDIVERSE_OR_UNREADY",
     "SELECTED_ROUTE_PREFLIGHT_EXPIRED",
@@ -261,7 +298,6 @@
     "ACTION_HAS_NO_CURRENT_CANONICAL_NECESSITY_PROOF",
     "INFRASTRUCTURE_WORK_WHILE_EXISTING_ROUTE_CAN_EXECUTE_REAL_MISSION",
     "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC",
-    "COGNITIVE_CAPABILITY_EXECUTION_PATH_CONTAINS_MODEL_COGNITION",
     "CONSEQUENTIAL_OPERATOR_DECISION_WITHOUT_CURRENT_BASE_OBS"
   ],
   "on_abort": "REFRESH_LIVE_CANONICAL_STATE__INVALIDATE_AFFECTED_OBS_LAYERS__DELETE_OR_SWITCH_ROUTE__UPDATE_REAL_OUTPUT_SCOREBOARD__EXECUTE_SHORTEST_SURVIVING_PATH"
