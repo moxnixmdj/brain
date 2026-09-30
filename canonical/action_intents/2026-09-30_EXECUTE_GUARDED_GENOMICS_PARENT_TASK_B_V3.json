@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-GUARDED-GENOMICS-REFERENCE-LENGTH-OPENENDED-PARENT-TASK-B-20260930-V3",
+  "status": "AUTHORIZED_PENDING_GUARDED_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "d131d2550a0c8af1bbbb0227bfe1a6e561843300",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_PARENT_TASK_B_REQUIRED_AFTER_PR496_RECIPE_BOUNDARY_REPAIR",
+  "action_kind": "GUARDED_FRESH_PARENT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_GENOMICS_REFERENCE_LENGTH_TASK_B_POST_PR496::GUARDED_FRESH_PARENT_EXECUTION",
+  "task_id": "PARENT-OPENENDED-GENOMICS-REFERENCE-LENGTH-REAL-TASK-20260930-005",
+  "pins": {
+    "task_blob_sha": "5f1a8fea0d29c2a60dcc7a038ecd557829e602e7",
+    "mission_blob_sha": "03e718a9c779c26d26e7af140f2f65549c1a7f6e",
+    "astra_runtime_blob_sha": "426ffe58e405dc4f1ba2eb4e838e03a1df771964",
+    "broad_objective_decompose_blob_sha": "3ded762075ed222228a14877af631f1e2e6d9e4c",
+    "plain_goal_bound_grounding_blob_sha": "46e8e7466479ea298c34e5fa682d49c374510ce9"
+  },
+  "prior_work_checked": [
+    "PR478 froze the materially different genomics Task B without execution.",
+    "PR490 corrected Task-B bookkeeping only; objective remained unchanged.",
+    "PR496 repaired and guarded-qualified the explicit-recipe fail-closed residual after adversarial red run 36689999285.",
+    "PR496 independent guarded qualification run 36690801491 passed with 13 authored tests plus independent adversarial oracle.",
+    "HTTP/2 parent Task A remains spent exactly once and replay-forbidden.",
+    "Genomics Task B has not had a physical child start."
+  ],
+  "evidence_presence_classification": "FRESH_PARENT_TASK_B_FROZEN_UNSPENT__RUNTIME_REPAIRED_AND_QUALIFIED",
+  "expected_parent_frontier_change": "Exactly one atomic-guard-admitted physical execution of the frozen genomics Task B on the repaired exact runtime. On first causal failure preserve the gap and mark the task spent; on semantic completion preserve producer evidence for independent verification before any parent credit.",
+  "highest_leverage_now": true,
+  "parent_task_execution": true,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "One atomic-guard-admitted physical child start only. Never retry after child start; stop on first causal gap or semantic completion.",
+  "guard_requirement": {
+    "contract": "BRAIN_GUARDED_LAUNCH_PLAN_V1",
+    "wrapper": "execution_guard/github_actions_guarded_run_live.py",
+    "stable_problem_identity_required": true,
+    "exact_task_runtime_authorization_pins_required": true
+  },
+  "recursive_obs": {
+    "real_outcome": "Reality-test the repaired model-independent open-ended research stack on the frozen fresh genomics Task B without leaking source, accession, values, tool recipe, or answer.",
+    "surviving_necessity": "The routing and recipe-boundary seams are now guarded-qualified; a single fresh parent execution is the shortest remaining proof.",
+    "selected_surviving_route": "EXACTLY_ONE_GUARDED_GENOMICS_PARENT_TASK_B_EXECUTION_POST_PR496",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "GENOMICS_TASK_B_DUPLICATE_EXECUTION",
+      "TASK_SPECIFIC_GENOMICS_PATCH",
+      "MODEL_COGNITION",
+      "PREWIRED_SOURCE_OR_ACCESSION",
+      "PREWIRED_TOOL_OR_CALCULATION_ROUTE"
+    ],
+    "stop_rule": "STOP_ON_FIRST_NEW_CAUSAL_GAP_OR_SEMANTIC_COMPLETION__NO_SAME_TASK_REPLAY"
+  }
+}
