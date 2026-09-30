@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "INTERNALIZE-STIRRUP-PROFESSIONAL-WORK-20260930-V1",
+  "status": "AUTHORIZED_INTERNALIZATION__ZERO_OPUS_CREDIT__VERIFICATION_PENDING",
+  "canonical_base_commit": "fff8be77b376b2d82a67309f4de0b8ebb6afe413",
+  "capability_target": "PROFESSIONAL_KNOWLEDGE_WORK",
+  "action_kind": "CAPABILITY_INTERNALIZATION_AND_SUBSTRATE_INTEGRATION",
+  "blocker_lease_key": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::PROFESSIONAL_KNOWLEDGE_WORK::EXTERNAL_SPECIMEN_TO_INTERNALIZED_HARNESS",
+  "expected_parent_frontier_change": "Convert professional work from opaque external-specimen-only state to Brain-owned reusable harness/configuration with verification pending; award zero Opus credit.",
+  "theory_invariants": {
+    "knowledge": "EXTERNAL_JIT",
+    "external_model_or_service": "SPECIMEN_OR_GENERAL_SUBSTRATE_ONLY",
+    "capability": "EXISTING_REUSABLE_MECHANISM_MUST_BECOME_BRAIN_OWNED",
+    "invention": "FORBIDDEN__INTEGRATION_GLUE_ONLY",
+    "acceptance": "BRAIN_CONFIGURED_ROUTE_GE_OPUS_5_5",
+    "incremental_spend_usd": 0
+  },
+  "selected_existing_mechanism": {
+    "repository": "ArtificialAnalysis/Stirrup",
+    "upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+    "license": "MIT",
+    "why": "Open exposed agent harness used by Artificial Analysis for GDPval-AA; contains agent loop, context management, tools, files/documents, skills, multimodal and sub-agent support."
+  },
+  "ownership_tests": {
+    "brain_artifact_test": "PASS_54_OF_54_EXACT_IMPORTED_FILES",
+    "no_hidden_capability_provider_test": "PASS_FOR_MECHANISM_OWNERSHIP__PERFORMANCE_PENDING",
+    "general_substrate_test": "PASS_ARCHITECTURALLY",
+    "specimen_separation_test": "PASS",
+    "reexecution_without_rediscovery_test": "PASS_FOR_MECHANISM",
+    "brain_configured_verification_test": "PENDING",
+    "ownership_package_test": "PENDING"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_INTERNALIZE_STIRRUP_PROFESSIONAL_WORK_V1.json"
+  },
+  "recursive_obs": {
+    "real_outcome": "Make the existing reusable professional-work agent harness Brain-owned, then verify Brain's configured execution rather than an external model.",
+    "required_capability": "PROFESSIONAL_KNOWLEDGE_WORK_HARNESS_AND_ARTIFACT_EXECUTION",
+    "obs_goal": {
+      "real_outcome": "Move the professional-work family from opaque specimen access to owned reusable mechanism as fast as possible.",
+      "proxy_goals_deleted": [
+        "Find another opaque model with a slightly higher GDPval score",
+        "Buy Claude/AA/E2B access",
+        "Invent a new office-work agent framework"
+      ],
+      "surviving_necessity": "Internalize an exposed harness actually used for professional-work evaluation and bind it to Brain's existing tool/artifact surfaces."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain document/spreadsheet/presentation/file tools",
+        "Brain scoped delegation/continuity/verification components"
+      ],
+      "external_existing_routes_checked": [
+        "ArtificialAnalysis/Stirrup pinned source",
+        "GDPval-AA protocol"
+      ],
+      "capability_work_deleted": [
+        "No new general agent framework",
+        "No paid sandbox",
+        "No opaque-model ownership route"
+      ],
+      "surviving_gap": "Brain-owned Stirrup mechanism still needs execution integration and direct professional-work verification."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Ownership/configuration gap, not evidence that professional work capability is impossible.",
+      "delete_bypass_substitute_options": [
+        "Vendor exact Stirrup mechanism",
+        "Map to current Brain tools/substrate",
+        "Cheap falsification before broad scoring"
+      ],
+      "surviving_causal_blocker": "BRAIN_CONFIGURED_STIRRUP_PROFESSIONAL_WORK_ROUTE_NOT_YET_VERIFIED_GE_OPUS_5_5"
+    },
+    "obs_solution": {
+      "routes_ranked": [
+        "INTERNALIZE_PINNED_STIRRUP_AND_VERIFY",
+        "KEEP_EXTERNAL_MODEL_AS_CAPABILITY_PROVIDER",
+        "BUILD_NEW_PROFESSIONAL_WORK_FRAMEWORK"
+      ],
+      "selected": "INTERNALIZE_PINNED_STIRRUP_AND_VERIFY",
+      "losing_routes_reason": "External model access is not ownership; building a new framework is forbidden and slower."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "protocol": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json",
+      "synthetic_verification_necessity": "Use public GDPval tasks only as contamination-controlled behavioral evidence; exact source integrity establishes internalization but not capability strength."
+    },
+    "stop_condition": "Merge exact internalization with zero Opus credit. Do not promote professional-work family until Brain+Stirrup itself has comparable evidence >= Opus 5.5."
+  },
+  "incremental_spend_usd": 0
+}
