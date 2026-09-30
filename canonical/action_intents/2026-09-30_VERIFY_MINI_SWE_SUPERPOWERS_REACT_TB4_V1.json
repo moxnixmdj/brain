@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "VERIFY-MINI-SWE-SUPERPOWERS-TB4-REACT-LEAD-FORM-20260930-V1",
-  "status": "PROPOSED_CURRENT_BASE__COMPOSED_PACKAGE_CANONICAL__PUBLIC_SESSION_BRIDGE_READY__TASK_UNREAD",
+  "status": "EXECUTED_FAIL__TASK_SPENT__ZERO_CAPABILITY_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "f7ac78d3b6158a4169039961d6d8d1fa9e9a35d7",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
@@ -78,8 +78,8 @@
     "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY",
     "SPECIMEN_SEPARATION_TEST": "PASS",
     "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_CANONICAL_COMPOSED_PACKAGE",
-    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING_THIS_ACTION",
-    "OWNERSHIP_PACKAGE_TEST": "PENDING_FINAL_MULTI_TASK_VERIFICATION"
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "FAIL_ON_REACT_LEAD_FORM__REMAINS_UNVERIFIED",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_DISTINCT_MULTI_TASK_VERIFICATION"
   },
   "reasoning_durability": {
     "receipt": "canonical/reasoning/2026-09-30_VERIFY_MINI_SWE_SUPERPOWERS_REACT_TB4_V1.json"
@@ -448,5 +448,15 @@
     "changes_route": false,
     "changes_benchmark_task": false,
     "incremental_spend_usd": 0
+  },
+  "outcome": {
+    "session_id": "react-lead-form-20260930-v1",
+    "independent_verifier_reward": 0,
+    "independent_tests_passed": 9,
+    "independent_tests_failed": 2,
+    "evidence_path": "canonical/capabilities/opus55/REACT_LEAD_FORM_SUPERPOWERS_FALSIFICATION_20260930_V1.json",
+    "configured_route_verified_ge_opus55": false,
+    "same_task_replay_for_promotion": false,
+    "next_action": "ONE_GENERIC_COMPLETION_GATE_REPAIR_THEN_DISTINCT_FRESH_TASK"
   }
 }
