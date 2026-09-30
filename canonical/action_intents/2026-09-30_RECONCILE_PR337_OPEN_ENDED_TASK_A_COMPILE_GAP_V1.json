@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR337-OPENENDED-TASK-A-COMPILE-GAP-20260930-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "EVIDENCE_RECONCILIATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::EVIDENCE_RECONCILIATION",
+  "expected_parent_frontier_change": "Replace the stale no-open-ended-task blocker with the exact first causal gap observed in the single spent PR337 Task-A execution; award no capability credit and authorize no replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Brain PR337 merged the frozen objective-only Mauna Loa Task A.",
+    "Carrier PR46 run 36670287426 stopped before execution with execution_count=0.",
+    "Carrier PR47 run 36670464767 stopped before execution with execution_count=0.",
+    "Carrier PR50 run 36670531005 stopped before execution with execution_count=0.",
+    "Carrier PR49 run 36670516407 is the unique execution with execution_count=1 and replay_allowed=false.",
+    "Run 36670516407 failed at COMPILE before source/tool discovery: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH on the first broad research subgoal.",
+    "Brain PR342 replay lane was closed fail-closed."
+  ],
+  "evidence_presence_classification": "REAL_TASK_FAILURE_OBSERVED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile only the primary receipt and exact causal gap. Do not replay the task, patch climate-specific literals, promote the parent, or implement a repair in this action.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "real_outcome": "Make canonical state agree with the already-spent real open-ended Task A and its first causal failure.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve the one-shot truth and localize the first generic missing capability without inflating scope.",
+      "proxy_goals_deleted": [
+        "rerun Task A",
+        "treat a red workflow as generic infrastructure failure",
+        "award parent credit",
+        "repair before reconciliation"
+      ],
+      "surviving_necessity": "The canonical frontier must stop claiming no admissible open-ended Task A exists because one was executed exactly once."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current model-independent runtime",
+        "current goal compiler",
+        "current verified bound capability registry"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "no repair in reconciliation",
+        "no task-specific climate compiler rule",
+        "no model planner"
+      ],
+      "surviving_gap": "The first broad research subgoal cannot be compiled to any verified bound capability."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic compile-front-half gap observed before source/tool discovery.",
+      "delete_bypass_substitute_options": [
+        "delete replay",
+        "preserve exact run receipt",
+        "defer repair until frontier is reconciled"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_COMPILATION_GAP__NO_VERIFIED_MATCH_FOR_BROAD_RESEARCH_SUBGOAL"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_PRIMARY_ONE_SHOT_RECEIPT",
+        "REPLAY_TASK",
+        "TASK_SPECIFIC_CLIMATE_PATCH"
+      ],
+      "losing_routes_reason": "Replay violates the spent-task contract. A climate-specific patch would destroy generality and outrun the observed evidence.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None for this reconciliation. The public carrier terminal report is the primary execution receipt."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "all Mauna Loa replay lanes",
+        "the stale no-admissible-open-ended-Task-A blocker"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "After reconciliation, OBS the localized generic compile gap and acquire only the minimum general capability needed; then test on a fresh materially different task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused exact public run receipt",
+        "reused PR337 frozen-task provenance",
+        "reused zero-execution closure receipts"
+      ],
+      "search_stop_decision": "Stop reconciliation search because a unique primary execution receipt exists.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "No repair challenger is selected by this reconciliation action."
+    },
+    "routes_considered": [
+      "RECONCILE_PRIMARY_ONE_SHOT_RECEIPT",
+      "REPLAY_TASK",
+      "TASK_SPECIFIC_CLIMATE_PATCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_REPLAY",
+      "CLIMATE_SPECIFIC_PATCH",
+      "PARENT_PROMOTION"
+    ],
+    "selected_surviving_route": "RECONCILE_PRIMARY_ONE_SHOT_RECEIPT",
+    "why_selected_route_is_fastest_sufficient": "It converts an already-observed real failure into the exact canonical causal gap with zero new execution and zero spend.",
+    "expected_parent_level_state_change": "Old scope blocker superseded by the concrete broad-objective compilation gap; zero capability credit.",
+    "stop_condition": "End after evidence reconciliation and frontier relocalization; repair requires a fresh exact-base OBS."
+  }
+}
