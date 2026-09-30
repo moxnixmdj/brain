@@ -19,7 +19,16 @@ _BROAD_PREFIX=re.compile(
 _EXPLICIT_ACTION=re.compile(
     r"\b(?:using\s+https?://|https?://|save\s+.+?\.(?:json|csv|md|txt)|"
     r"extract\s+json\s+path|create\s+.+?\.(?:json|csv|md|txt)|"
-    r"run\s+|execute\s+|open\s+https?://)\b",
+    r"open\s+https?://)\b",
+    re.IGNORECASE,
+)
+_CONCRETE_EXECUTION_RECIPE=re.compile(
+    r"\b(?:run|execute)\s+(?:(?:the|a|an)\s+)?(?:"
+    r"(?:python3?|bash|sh|zsh|pwsh|powershell|curl|wget|git|pytest|node|npm|npx|make|cmake|docker|podman)\b|"
+    r"(?:\./|\.\./|/)[^\s]+|"
+    r"[A-Za-z0-9_.-]+\.(?:py|sh|ps1|bat|cmd|exe)\b|"
+    r"(?:command|script)\s+[A-Za-z0-9_./\\-]+"
+    r")",
     re.IGNORECASE,
 )
 
@@ -98,7 +107,7 @@ def decompose(objective):
             "roles":[],
             "model_dependency_count":0,
         }
-    if _EXPLICIT_ACTION.search(text):
+    if _EXPLICIT_ACTION.search(text) or _CONCRETE_EXECUTION_RECIPE.search(text):
         return {
             "schema":SCHEMA,
             "status":"UNSUPPORTED",
