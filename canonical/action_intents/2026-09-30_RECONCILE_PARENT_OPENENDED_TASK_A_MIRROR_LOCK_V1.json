@@ -1,0 +1,196 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PARENT-OPENENDED-TASK-A-MIRROR-LOCK-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH::NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Restore pointer, queue, and scoreboard mirror consistency with the already-merged PR347 hierarchy/target reconciliation. No runtime change, task execution, replay, or capability promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "merged PR347 exact-base Task A reconciliation",
+    "canonical hierarchy current_parent_blocker already equals the compile gap",
+    "parent target latest_parent_task_failure already binds run 36670516407 / artifact 11077861584",
+    "pointer, queue, and scoreboard were observed stale on the same current main"
+  ],
+  "evidence_presence_classification": "EXISTING_CANONICAL_RECONCILIATION_REQUIRES_CROSS_SURFACE_MIRROR_COMPLETION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after pointer, queue, and scoreboard match hierarchy/target on the spent Task A compile gap. Do not modify runtime or execute any parent task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+    "real_outcome": "Restore cross-surface canonical consistency so the next lawful work targets the observed broad-objective grounding gap rather than rerunning Task A.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Make all canonical frontier mirrors name the already-proven compile gap and route-recompute next action.",
+      "proxy_goals_deleted": [
+        "replay Task A",
+        "repair runtime before route recomputation",
+        "grant parent promotion"
+      ],
+      "surviving_necessity": "Cross-surface mirror reconciliation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "merged PR347 hierarchy",
+        "parent target record",
+        "canonical pointer",
+        "frontier queue",
+        "real-output scoreboard"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions run 36670516407 immutable receipt"
+      ],
+      "capability_work_deleted": [
+        "no runtime patch",
+        "no task replay",
+        "no new synthetic probe"
+      ],
+      "surviving_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific canonical mirror drift after PR347 merged only hierarchy/target reconciliation.",
+      "delete_bypass_substitute_options": [
+        "reuse merged PR347 evidence",
+        "update only stale mirrors",
+        "avoid new execution"
+      ],
+      "surviving_causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_PR347_AND_COMPLETE_STALE_MIRRORS",
+        "RERUN_TASK",
+        "PATCH_RUNTIME_NOW"
+      ],
+      "losing_routes_reason": "Rerun violates freshness; runtime repair is premature before route recomputation; existing evidence fully determines the mirror state.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run the existing drift-immunity guard against this branch; no parent execution is required."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "stale pointer Task-A-run instruction",
+        "stale queue Task-A-run instruction",
+        "stale scoreboard missing-open-ended-task state"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "cross-surface mirror lock",
+        "spent-task no-replay discipline"
+      ],
+      "fresh_reuse_plan": "After merge, recompute the route frontier for the exact broad-objective grounding gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR347 evidence",
+        "reused immutable producer receipt",
+        "reused current hierarchy and target"
+      ],
+      "search_stop_decision": "Mirror drift is fully localized; additional external search cannot improve this state-only reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main dc38bf8370d692d3f18a5aff446d26933f9dd03a re-read immediately before branch creation."
+    },
+    "routes_considered": [
+      "REUSE_PR347_AND_COMPLETE_STALE_MIRRORS",
+      "RERUN_TASK",
+      "PATCH_RUNTIME_NOW"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_REPLAY",
+      "DUPLICATE_TASK_A",
+      "PREMATURE_RUNTIME_REPAIR"
+    ],
+    "selected_surviving_route": "REUSE_PR347_AND_COMPLETE_STALE_MIRRORS",
+    "why_selected_route_is_fastest_sufficient": "Only three stale canonical mirrors need deterministic state reconciliation; no new execution is necessary.",
+    "expected_parent_level_state_change": "No capability claim change; restore canonical pointer/queue/scoreboard to the already-merged spent-task compile-gap state.",
+    "stop_condition": "Stop once mirror consistency passes the existing guard.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:56:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REUSE_PR347_AND_COMPLETE_STALE_MIRRORS",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+          "merged PR347 hierarchy/target reconciliation"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions run 36670516407 job 109744305866",
+          "artifact 11077861584 digest sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [],
+      "negative_search_summary": "No external route can dominate deterministic mirror completion for already-canonical evidence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_PR347_AND_COMPLETE_STALE_MIRRORS",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_STATE_CHANGE",
+        "BEFORE_RUNTIME_REPAIR"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:56:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_PR347_AND_COMPLETE_STALE_MIRRORS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "MERGED_PR347_CANONICAL_RECONCILIATION",
+            "kind": "CANONICAL_STATE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:56:00Z",
+            "evidence": [
+              "main dc38bf8370d692d3f18a5aff446d26933f9dd03a",
+              "hierarchy blocker + target latest_parent_task_failure"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
