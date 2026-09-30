@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-PNG-STRUCTURE-OPENENDED-PARENT-TASK-B-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a42d1d9ef9134f1095e44a4483dba8203f27eda9",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "FRESH_POST_ROUTING_REPAIR_PARENT_VALIDATION_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_PNG_STRUCTURE_TASK_B::FRESH_PARENT_GATE_FREEZE",
+  "task_id": "PARENT-OPENENDED-PNG-STRUCTURE-LENGTHS-REAL-TASK-20260930-004",
+  "task_blob_sha": "dfbe1c917df0a31a6b41461f14f4260f96138579",
+  "expected_parent_frontier_change": "Freeze one materially different genuine open-ended image-format parent task after the guarded broad-routing repair, then execute it exactly once and stop on the first new causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical base a42d1d9ef9134f1095e44a4483dba8203f27eda9 includes the guarded-qualified PR474 routing repair",
+    "the prior HTTP/2 parent task is spent and replay-forbidden",
+    "premature seismology/genomics candidates were closed before execution",
+    "no PNG signature-versus-chunk-CRC parent task or implementation exists in canonical Brain history"
+  ],
+  "evidence_presence_classification": "ROUTING_REPAIR_GUARDED_QUALIFIED__FRESH_PARENT_B_VALIDATION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the first physical execution of the frozen task. On semantic completion, independently verify before any parent promotion. On failure, preserve only the earliest integrated causal gap and never replay the task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "surviving_necessity": "The repaired inherited model-independent route must now prove that a genuinely fresh broad objective reaches the research frontend and subsequent verified seams without the previous routing failure.",
+    "selected_surviving_route": "FRESH_OPEN_ENDED_IMAGE_FORMAT_PARENT_TASK_B",
+    "deleted_or_bypassed_paths": [
+      "HTTP2_REPLAY",
+      "PREMATURE_SEISMOLOGY_OR_GENOMICS_REUSE",
+      "PREDECLARED_STANDARDS_CITATION",
+      "PREDECLARED_NUMERIC_VALUES",
+      "TASK_SPECIFIC_RUNTIME_PATCH",
+      "MODEL_PLANNER",
+      "PREWIRED_TOOL_OR_CALCULATION_ROUTE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The PNG objective is materially different from the spent network-protocol task, requires autonomous specification discovery, extraction of two structural lengths, deterministic comparison, executable verification and scoped interpretation, and directly exercises the newly repaired broad-research path.",
+    "expected_parent_level_state_change": "Either obtain the first admissible post-repair genuine open-ended parent pass or localize the next narrower causal gap without replay.",
+    "stop_condition": "Exactly one execution; no same-task replay."
+  }
+}
