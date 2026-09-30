@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-MAUNA-FIRST-SPEND-CURRENT-MAIN-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "f94650b3727a6e35774b465312bbedc295cded2c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Restore earliest Mauna freshness spend, quarantine both later same-objective replays, align all current mirrors, award zero capability credit, and leave route-frontier recomputation as the sole next action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main f94650b3727a6e35774b465312bbedc295cded2c",
+    "open PR366 first-spend correction",
+    "public run 36669918546 artifact digest sha256:72ad33967c0ef4ddde616d2c71f58c2d66f1572870d426fb971c331531bb0953",
+    "public run 36670981076 artifact digest sha256:ee2d095c5615ad7d4e355fbe60b5ba8eec805285d594e5237a06611d94993ab3",
+    "PR317 and PR337 task payloads compared field-by-field",
+    "current goal_compiler.py blob 4b61fe911471854ec15c7900816f61e9e55f602e",
+    "current astra_runtime.py blob 6cb668bcc5a00665ea541fc5b6adf494f37ad1c9",
+    "concurrent non-parent mission-path canary commit f94650b3727a6e35774b465312bbedc295cded2c preserved unchanged"
+  ],
+  "selected_surviving_route": "CORRECT_FIRST_SPEND_AND_ALIGN_CURRENT_MAIN_MIRRORS",
+  "stop_condition": "No runtime mutation, no Mauna replay, no counter increase, no parent promotion. Stop after canonical provenance/mirror correction with route-frontier recomputation selected.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930_V1.json",
+  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR"
+}
