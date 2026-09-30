@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "ACQUIRE-DECISION-ROLE-RELEVANCE-OPERAND-COVERAGE-20260930-V1",
-  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION__PRESTART_SYNTAX_CORRECTED",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_REQUALIFICATION__ADMITTED_THRESHOLD_REGRESSION_CORRECTED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -19,7 +19,8 @@
     "Inherited objective_claim_operand_binding.py blob 48fd058430d8d361fc75beced567c7b6d1166531 already provides bounded explicit comparison parsing.",
     "Current incumbent relevance is deterministic BM25 plus aggregate focused-query token coverage.",
     "Open-PR search performed before successor creation; PR548 is frozen code capsule but fails trusted governance validation and no guarded qualification PR exists for exact 9ffe718 bytes.",
-    "Guarded qualification PR235 run 36702509398 stopped before admission on a literal backslash-n SyntaxError; no semantic candidate verdict was spent."
+    "Guarded qualification PR235 run 36702509398 stopped before admission on a literal backslash-n SyntaxError; no semantic candidate verdict was spent.",
+    "Guarded candidate run 36703021647 atomically admitted and falsified the prior exact candidate on numeric-threshold compatibility; repair is restricted to the demonstrated over-escaped threshold detector."
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED__FIRST_CAUSAL_GAP_DIRECTLY_OBSERVED_IN_SPENT_GUARDED_PARENT_TASK",
   "probe_specific": false,
@@ -27,13 +28,13 @@
   "orthogonal_recurrence_count": 2,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass, including numeric-threshold compatibility; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
+  "stop_condition": "A new exact-byte guarded qualification gate must pass authored regressions and independent cross-domain oracle, including numeric-threshold compatibility. Prior admitted gate is spent. Never replay Materials Task C; repair alone receives no parent capability credit.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "candidate_blobs": {
-    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "f0b9095ed2439645ebc9d9ec2f66fb8ec1de3669",
+    "canonical/runtime/bound_capabilities/decision_role_relevance_admission.py": "dbaf728d40569746da985e623af152ed55be42bf",
     "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "0abb5225fe9fba2443f2df46b2e41bd1c7dd7436",
     "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": "48fd058430d8d361fc75beced567c7b6d1166531",
     "canonical/tests/test_decision_role_relevance_admission.py": "dcfd4bf6da7a7ef01d1f21dff541d9b79b3c8f26",
@@ -113,7 +114,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "A non-parent exact-byte qualification is required because the spent Materials Task C cannot be replayed. Qualification must include fresh cross-domain adversaries, wrong-property/wrong-operand decoys, correct single-operand evidence, protocol identifiers, numeric-threshold compatibility, and legacy noncomparison behavior."
+      "synthetic_verification_necessity": "Prior exact candidate was atomically admitted and falsified by numeric-threshold compatibility. A new immutable candidate requires a fresh guarded qualification gate; no parent task replay."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
@@ -134,7 +135,8 @@
         "reused immutable Task C artifact and merged causal correction",
         "reused verified objective relation parser",
         "reused frozen PR548 candidate bytes",
-        "refreshed only plausible lexical challenger families"
+        "refreshed only plausible lexical challenger families",
+        "byte-audited all new regex definitions after the admitted threshold failure; only _NUMERIC_START carried double-backslash regex escapes"
       ],
       "search_stop_decision": "The selected inherited composition fixes the demonstrated semantic contract with no new dependency. All discovered alternatives remain lexical scorers and cannot dominate on correctness or wall-clock.",
       "affected_layers_only_on_revalidation": true,
@@ -156,9 +158,9 @@
       "DOWNSTREAM_METADATA_REFINEMENT_AS_FIRST_BLOCKER"
     ],
     "selected_surviving_route": "REUSE_VERIFIED_BOUNDED_RELATION_PARSER_PLUS_BM25_PROPERTY_AND_OPERAND_ADMISSION",
-    "why_selected_route_is_fastest_sufficient": "It reuses already-qualified parsing and incumbent ranking, adds only the missing bounded admission predicate, needs no package or model, and can be independently qualified without consuming another parent task.",
+    "why_selected_route_is_fastest_sufficient": "The admitted failure localizes to one over-escaped threshold detector; correcting that detector preserves all previously passing candidate semantics and is smaller than replacing the role gate.",
     "expected_parent_level_state_change": "QUALIFY_MODEL_INDEPENDENT_DECISION_ROLE_AWARE_RELEVANCE_ADMISSION__NO_PARENT_CREDIT_UNTIL_FRESH_REUSE",
-    "stop_condition": "Exact-byte non-parent guarded cross-domain qualification must pass, including numeric-threshold compatibility; preserve unsupported/noncomparison incumbent behavior; never replay Materials Task C; repair alone receives no parent capability credit.",
+    "stop_condition": "A new exact-byte guarded qualification gate must pass authored regressions and independent cross-domain oracle, including numeric-threshold compatibility. Prior admitted gate is spent. Never replay Materials Task C; repair alone receives no parent capability credit.",
     "route_frontier": {
       "discovery_required": true,
       "checked_at_utc": "2026-09-30T10:10:00Z",
@@ -398,5 +400,20 @@
     "guard_admission_spent": false,
     "semantic_candidate_verdict": "NONE__PRESTART_ONLY",
     "correction_scope": "ONE_LITERAL_BACKSLASH_N_TO_NEWLINE__NO_LOGIC_CHANGE"
+  },
+  "qualification_falsification": {
+    "public_pr": 235,
+    "public_run_id": 36703021647,
+    "public_job_id": 109846639942,
+    "artifact_id": 11091125747,
+    "artifact_digest": "sha256:5d2b86aea1bcd7308220da967d34a51d7dd2d997e681ad8f059c0e54f598560e",
+    "phase": "GUARDED_ATOMIC_QUALIFICATION",
+    "guard_admission_spent": true,
+    "first_failed_regression": "NUMERIC_THRESHOLD_COMPARISON_PRESERVES_INCUMBENT_RELEVANCE",
+    "observed_cause": "_NUMERIC_START used double-backslash regex escapes, so '1 meter' was not recognized as a numeric threshold and was incorrectly role-gated.",
+    "semantic_verdict": "FALSIFIED_EXACT_PRIOR_CANDIDATE",
+    "repair_scope": "NORMALIZE_ONLY_THE_NUMERIC_START_REGEX_ESCAPES_TO_STANDARD_PYTHON_RAW_REGEX",
+    "materials_task_c_replay": false,
+    "parent_credit_delta": 0
   }
 }
