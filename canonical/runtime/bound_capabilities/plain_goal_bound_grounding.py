@@ -10,8 +10,11 @@ from __future__ import annotations
 
 import difflib
 import hashlib
+import importlib.util
 import json
+import pathlib
 import re
+import sys
 
 SCHEMA="PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1"
 
@@ -202,6 +205,107 @@ def _binding_affordance(clause,entry):
         "proposal_bindings_cover_all_inputs":bool(placeholders and placeholders.issubset(set(declared))),
     }
 
+def _load_runtime_module(root,filename,module_name):
+    path=pathlib.Path(root).resolve()/"canonical"/"runtime"/filename
+    if not path.is_file():
+        raise GroundingError("BINDING_RUNTIME_MODULE_MISSING:"+filename)
+    spec=importlib.util.spec_from_file_location(module_name,path)
+    if spec is None or spec.loader is None:
+        raise GroundingError("BINDING_RUNTIME_MODULE_LOAD_FAILED:"+filename)
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[module_name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _provider_slot_alias(effect,index):
+    return str(effect)+".grounded_clause_%d" % int(index)
+
+
+def _intersection_result_fields(entries):
+    sets=[
+        set(str(x) for x in (entry.get("result_fields") or []))
+        for entry in entries
+    ]
+    if not sets:
+        return []
+    out=set(sets[0])
+    for values in sets[1:]:
+        out &= values
+    return sorted(out)
+
+
+def _bindability_context(entry,provider_slots):
+    requires=[str(x) for x in (entry.get("requires") or [])]
+    requires_as=[]
+    provider_map={}
+    for effect in requires:
+        slots=list(provider_slots.get(effect) or [])
+        if len(slots)==1:
+            slot=slots[0]
+            provider_map[effect]=(slot["provider_id"],slot["provider_entry"])
+        elif len(slots)>1:
+            for slot in slots:
+                requires_as.append({"effect":effect,"as":slot["alias"]})
+                provider_map[slot["alias"]]=(
+                    slot["provider_id"],slot["provider_entry"]
+                )
+    return provider_map,requires_as
+
+
+def _admit_bindable_candidates(
+    text,index,ranked,registry,compiler,proposal_binder,root,
+    provider_slots,prior_paths,future_clauses
+):
+    admitted=[]
+    rejected=[]
+    bound_inputs={}
+    for ordinal,item in enumerate(ranked):
+        cid=str(item.get("capability_id") or "")
+        entry=registry.get(cid) or {}
+        instance_id="grounding.%d.%d.%s" % (
+            index,ordinal,re.sub(r"[^A-Za-z0-9_.-]+","_",cid)
+        )
+        provider_map,requires_as=_bindability_context(entry,provider_slots)
+        try:
+            if entry.get("proposal_bindings"):
+                inputs,evidence=proposal_binder._bind_planned_inputs(
+                    text,
+                    pathlib.Path(root).resolve(),
+                    compiler,
+                    instance_id,
+                    cid,
+                    entry,
+                    provider_map,
+                    goal_value_index=None,
+                    require_aliases=requires_as,
+                )
+            else:
+                inputs=compiler._bind_inputs(
+                    text,
+                    pathlib.Path(root).resolve(),
+                    entry,
+                    context_paths=list(prior_paths),
+                    future_clauses=list(future_clauses),
+                )
+                evidence={}
+        except Exception as exc:
+            rejected.append({
+                "capability_id":cid,
+                "error":type(exc).__name__+":"+str(exc),
+            })
+            continue
+        item=dict(item)
+        item["input_bindability"]={
+            "verified":True,
+            "bound_input_keys":sorted(str(x) for x in (inputs or {}).keys()),
+            "proposal_binding_keys":sorted(str(x) for x in (evidence or {}).keys()),
+        }
+        admitted.append(item)
+        bound_inputs[cid]=inputs
+    return admitted,rejected,bound_inputs
+
+
 def _output_contract(clause):
     paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",clause)
     return {
@@ -228,12 +332,21 @@ def _constraints(clause):
     return flags
 
 
-def ground(goal,registry,max_candidates_per_clause=8):
+def ground(
+    goal,registry,max_candidates_per_clause=8,*,
+    compiler=None,proposal_binder=None,root=None,enforce_bindability=False
+):
     if not isinstance(registry,dict):
         raise GroundingError("REGISTRY_INVALID")
+    if enforce_bindability and (
+        compiler is None or proposal_binder is None or root is None
+    ):
+        raise GroundingError("INPUT_BINDABILITY_RUNTIME_REQUIRED")
     clauses=decompose(goal)
     records=[]
     all_candidates=set()
+    provider_slots={}
+    prior_paths=[]
     for index,clause in enumerate(clauses):
         text=clause["text"]
         ranked=[]
@@ -259,30 +372,66 @@ def ground(goal,registry,max_candidates_per_clause=8):
                 "requires":[str(x) for x in entry.get("requires") or []],
                 "binding_affordance":affordance,
             })
-        # A literal URL is strong executable input evidence. If any semantically
-        # supported candidate explicitly consumes a goal URL, candidates that
-        # cannot consume a URL are not executable alternatives for this clause.
-        if re.search(r"https?://[^\s)\]}>]+",text):
-            url_ready=[x for x in ranked if (x.get("binding_affordance") or {}).get("url_consumable")]
-            if url_ready:
-                ranked=url_ready
+
+        rejected_unbindable=[]
+        bound_inputs={}
+        if enforce_bindability and ranked:
+            ranked,rejected_unbindable,bound_inputs=_admit_bindable_candidates(
+                text,index,ranked,registry,compiler,proposal_binder,root,
+                provider_slots,prior_paths,
+                [str(x.get("text") or "") for x in clauses[index+1:]],
+            )
+
         ranked.sort(key=lambda x:(-x["combined_score"],x["capability_id"]))
         if ranked:
             best=ranked[0]["combined_score"]
-            # Preserve plausible alternatives rather than forcing a winner.
             kept=[
                 x for x in ranked
                 if x["combined_score"]>=max(4.0,best*0.55)
             ][:max(1,min(int(max_candidates_per_clause),32))]
         else:
             kept=[]
+
         for item in kept:
             all_candidates.add(item["capability_id"])
+
+        if enforce_bindability and kept:
+            kept_entries=[registry[str(x["capability_id"])] for x in kept]
+            if len(kept_entries)==1:
+                slot_effects=[
+                    str(x) for x in (kept_entries[0].get("provides") or [])
+                ]
+            else:
+                effect_sets=[
+                    set(str(x) for x in (entry.get("provides") or []))
+                    for entry in kept_entries
+                ]
+                common=set(effect_sets[0]) if effect_sets else set()
+                for values in effect_sets[1:]:
+                    common &= values
+                slot_effects=sorted(common)
+            common_fields=_intersection_result_fields(kept_entries)
+            for effect in slot_effects:
+                provider_slots.setdefault(effect,[]).append({
+                    "alias":_provider_slot_alias(effect,index),
+                    "provider_id":"grounding.clause.%d.provider" % index,
+                    "provider_entry":{"result_fields":common_fields},
+                })
+            for item in kept:
+                cid=str(item["capability_id"])
+                for key,value in (bound_inputs.get(cid) or {}).items():
+                    if (
+                        isinstance(key,str) and key.endswith("_path")
+                        and isinstance(value,str) and value not in prior_paths
+                    ):
+                        prior_paths.append(value)
+
         status=(
             "UNRESOLVED" if not kept
             else "GROUNDED" if len(kept)==1
             else "AMBIGUOUS_BOUNDED"
         )
+        output_contract=_output_contract(text)
         records.append({
             "index":index,
             "start":clause.get("start"),
@@ -291,8 +440,14 @@ def ground(goal,registry,max_candidates_per_clause=8):
             "status":status,
             "candidates":kept,
             "constraints":_constraints(text),
-            "output_contract":_output_contract(text),
+            "output_contract":output_contract,
+            "rejected_unbindable_candidates":rejected_unbindable,
         })
+        prior_paths.extend(
+            str(x) for x in (output_contract.get("paths") or [])
+            if str(x) not in prior_paths
+        )
+
     grounded=[x for x in records if x["status"]!="UNRESOLVED"]
     unresolved=[x["index"] for x in records if x["status"]=="UNRESOLVED"]
     canonical_goal=" ".join(str(goal or "").strip().split())
@@ -306,20 +461,34 @@ def ground(goal,registry,max_candidates_per_clause=8):
         "candidate_capability_ids":sorted(all_candidates),
         "external_discovery_allowed_for_unresolved_only":True,
         "whole_goal_external_discovery_forbidden_if_any_bound_grounding":bool(grounded),
+        "input_contract_bindability_enforced":bool(enforce_bindability),
         "model_dependency_count":0,
     }
 
 
 def run(args,root):
-    import pathlib
     root=pathlib.Path(root).resolve()
     registry_path=(root/"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").resolve()
     if not registry_path.is_file():
         raise GroundingError("REGISTRY_MISSING")
     raw=json.loads(registry_path.read_text(encoding="utf-8"))
     registry=raw.get("capabilities") if isinstance(raw,dict) else None
+    compiler=_load_runtime_module(
+        root,"goal_compiler.py","project_brain_grounding_goal_compiler"
+    )
+    proposal_binder=_load_runtime_module(
+        root,"capability_proposal_generators.py",
+        "project_brain_grounding_proposal_binder"
+    )
+    registry=compiler._platform_admissible_registry(registry)
     goal=str(args.get("goal") or "").strip()
-    result=ground(goal,registry)
+    result=ground(
+        goal,registry,
+        compiler=compiler,
+        proposal_binder=proposal_binder,
+        root=root,
+        enforce_bindability=True,
+    )
     output_path=args.get("output_path")
     if output_path:
         path=(root/str(output_path)).resolve()
