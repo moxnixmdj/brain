@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Acquire the minimum model-independent route that derives an explicit bounded claim/relation specification and binds semantic operand roles from the research objective plus integrity-checked generic evidence units, then invoke the already-verified exact support/relation primitive; do not infer truth, causality, sufficiency, or replay spent parent tasks.",
+    "objective": "Integrate the now-verified bounded claim-spec/operand binder and verified generic claim/relation evaluator into the open-research source frontend and canonical runtime so a broad explicit comparison objective can advance from extracted evidence to an auditable relation result without caller-authored claim_spec or model cognition.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-    "repair_status": "CLAIM_RELATION_SUBCAPABILITY_ACQUIRED__CLAIM_SPEC_OPERAND_BINDING_GAP_ACTIVE",
-    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION_AS_ORACLE__NO_EXTRACTED_TEXT_EQUALS_TRUTH__NO_SEMANTIC_ROLE_SELF_CERTIFICATION__NO_PARENT_SCORE_CREDIT_FOR_SUBCAPABILITY_ONLY",
-    "next_action": "OBS_AND_ACQUIRE_MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE__REUSE_VERIFIED_EXTRACTION_AND_CLAIM_RELATION__NO_PARENT_REPLAY",
+    "exact_blocker": "MODEL_INDEPENDENT_PARENT_RESEARCH_FRONTEND_CLAIM_SPEC_RELATION_INTEGRATION_V1",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+    "repair_status": "CLAIM_SPEC_OPERAND_BINDING_VERIFIED__PARENT_FRONTEND_INTEGRATION_GAP_ACTIVE",
+    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_RELATION_RESULT_EQUALS_FACTUAL_TRUTH__NO_CONFIDENCE_INVENTION__NO_EVIDENCE_SUFFICIENCY_OR_SOURCE_INDEPENDENCE_OVERCLAIM",
+    "next_action": "INTEGRATE_VERIFIED_CLAIM_SPEC_BINDER_AND_GENERIC_RELATION_EVALUATOR_INTO_OPEN_RESEARCH_SOURCE_FRONTEND__PRESERVE_FACTUAL_CORRECTNESS_AND_SUFFICIENCY_AS_UNVERIFIED__QUALIFY_NON_PARENT__NO_PARENT_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -90,7 +90,8 @@
       "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
       "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
       "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
-      "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1"
+      "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
+      "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
     ],
     "latest_fresh_real_run_id": 36652169397,
     "latest_fresh_reuse_run_id": 36652623916,
@@ -129,20 +130,17 @@
       "first_physical_spend_run_id": 36670808367
     },
     "latest_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1",
-      "status": "VERIFIED_ACQUIRED__INDEPENDENT_FRESH_LIVE_GENERIC_V2_CROSS_DOMAIN_PASS",
-      "route": "evidence.claim_relation.generic_units.stdlib",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-      "public_run_id": 36682488104,
-      "public_job_id": 109780804595,
-      "artifact_id": 11082521746,
-      "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-      "producer_git_blob": "d66a7eb30774f66160b698d8082947776888293d",
-      "test_git_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+      "capability_id": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1",
+      "status": "VERIFIED_ACQUIRED__INDEPENDENT_PUBLIC_FRESH_CROSS_DOMAIN_PASS",
+      "route": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+      "public_run_id": 36685349465,
+      "public_job_id": 109789819554,
+      "producer_git_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Exact normalized substring support and explicit caller-referenced Decimal relations only; automatic claim-spec generation, semantic operand-role binding, paraphrase/entailment, factual correctness, causality, evidence quality/sufficiency/independence, and unit conversion remain unverified."
+      "limitations": "Bounded explicit comparison and exact quoted-claim binding only; parent runtime integration, truth, sufficiency, independence, and decision-quality synthesis remain unverified."
     },
     "latest_generic_extraction_requalification_run_id": 36681368306,
     "latest_generic_extraction_requalification_artifact_id": 11081458134,
