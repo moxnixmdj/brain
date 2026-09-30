@@ -3697,7 +3697,8 @@ def _compile_two_scalar_absolute_difference_relation(clause,compiled_parts,regis
     """
     text=str(clause or "").strip()
     m=re.match(
-        r"^(?:determine|check|verify|assess)\s+whether\s+(?:the\s+)?two\s+.+?\s+"
+        r"^(?:determine|check|verify|assess)\s+whether\s+(?:the\s+)?"
+        r"(?:(?:two\s+.+?)|(?:.+?\s+and\s+.+?))\s+"
         r"differ\s+by\s+(?:at\s+most|no\s+more\s+than|less\s+than\s+or\s+equal\s+to)\s+"
         r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)$",
         text,re.IGNORECASE,
