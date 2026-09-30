@@ -356,6 +356,66 @@ def ground(
         compiler is None or proposal_binder is None or root is None
     ):
         raise GroundingError("INPUT_BINDABILITY_RUNTIME_REQUIRED")
+
+    canonical_goal=" ".join(str(goal or "").strip().split())
+    broad_module=_load_broad_objective_decomposer()
+    broad_candidate=None
+    if broad_module is not None:
+        candidate=broad_module.decompose(canonical_goal)
+        if isinstance(candidate,dict) and candidate.get("status")=="DECOMPOSED":
+            broad_candidate=candidate
+
+    # Broad research objectives are scope-bearing parents. They must be
+    # decomposed before lexical capability matching, otherwise a narrow child
+    # such as source discovery can falsely satisfy the whole objective merely
+    # because words like "authoritative" or "provenance" overlap.
+    if broad_candidate is not None:
+        role_descriptions=[
+            str(item.get("description") or "").strip()
+            for item in (broad_candidate.get("roles") or [])
+            if isinstance(item,dict) and str(item.get("description") or "").strip()
+        ]
+        role_goal=" Then ".join(role_descriptions)
+        role_grounding=ground(
+            role_goal,registry,max_candidates_per_clause,
+            compiler=compiler,proposal_binder=proposal_binder,root=root,
+            enforce_bindability=enforce_bindability,
+        ) if role_goal else None
+        clauses=decompose(canonical_goal)
+        records=[]
+        for index,clause in enumerate(clauses):
+            text=clause["text"]
+            records.append({
+                "index":index,
+                "start":clause.get("start"),
+                "end":clause.get("end"),
+                "text":text,
+                "status":"UNRESOLVED",
+                "candidates":[],
+                "constraints":_constraints(text),
+                "output_contract":_output_contract(text),
+                "rejected_unbindable_candidates":[],
+            })
+        return {
+            "schema":SCHEMA,
+            "goal":canonical_goal,
+            "goal_sha256":hashlib.sha256(canonical_goal.encode("utf-8")).hexdigest(),
+            "clauses":records,
+            "grounded_clause_count":0,
+            "unresolved_clause_indexes":[x["index"] for x in records],
+            "candidate_capability_ids":[],
+            "broad_objective_decomposition":broad_candidate,
+            "broad_objective_decomposition_available":True,
+            "broad_objective_role_goal":role_goal,
+            "broad_objective_role_grounding":role_grounding,
+            "broad_objective_role_grounding_available":bool(role_grounding),
+            "external_discovery_allowed_for_unresolved_only":False,
+            "whole_goal_external_discovery_forbidden_if_any_bound_grounding":True,
+            "broad_objective_narrow_child_whole_goal_match_forbidden":True,
+            "input_contract_bindability_enforced":bool(enforce_bindability),
+            "model_dependency_count":0,
+        }
+
     clauses=decompose(goal)
     records=[]
     all_candidates=set()
@@ -468,24 +528,6 @@ def ground(
     broad=None
     broad_role_goal=None
     broad_role_grounding=None
-    if len(records)==1 and not grounded and unresolved==[0]:
-        module=_load_broad_objective_decomposer()
-        if module is not None:
-            candidate=module.decompose(canonical_goal)
-            if isinstance(candidate,dict) and candidate.get("status")=="DECOMPOSED":
-                broad=candidate
-                role_descriptions=[
-                    str(x.get("description") or "").strip()
-                    for x in (candidate.get("roles") or [])
-                    if isinstance(x,dict) and str(x.get("description") or "").strip()
-                ]
-                if role_descriptions:
-                    broad_role_goal=" Then ".join(role_descriptions)
-                    broad_role_grounding=ground(
-                        broad_role_goal,registry,max_candidates_per_clause,
-                        compiler=compiler,proposal_binder=proposal_binder,root=root,
-                        enforce_bindability=enforce_bindability,
-                    )
     return {
         "schema":SCHEMA,
         "goal":canonical_goal,
