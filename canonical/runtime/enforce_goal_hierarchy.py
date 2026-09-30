@@ -878,6 +878,19 @@ def enforce_promotion_truth(intent,files,base):
         if not verifiers:
             fail("PROMOTION_INDEPENDENT_VERIFIER_SUPPLIERS_MISSING")
 
+def active_target_mirror_errors(hierarchy,target):
+    errors=[]
+    expected_target=str(hierarchy.get("active_capability_target") or "")
+    expected_blocker=str(hierarchy.get("current_parent_blocker") or "")
+    expected_next=str(hierarchy.get("next_required_action_class") or "")
+    if str(target.get("capability_id") or "")!=expected_target:
+        errors.append("FRONTIER_TARGET_CAPABILITY_ID_MISMATCH")
+    if str(target.get("residual_gap") or "")!=expected_blocker:
+        errors.append("FRONTIER_TARGET_RESIDUAL_GAP_MISMATCH")
+    if str(target.get("next_action") or "")!=expected_next:
+        errors.append("FRONTIER_TARGET_NEXT_ACTION_MISMATCH")
+    return errors
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
