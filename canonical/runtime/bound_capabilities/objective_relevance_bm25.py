@@ -8,6 +8,7 @@ status, authority, or evidence sufficiency.
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 import math
 import pathlib
@@ -26,6 +27,19 @@ def _canon(value):
 
 def _tokens(value):
     return [x for x in WORD_RE.findall(_canon(value).lower()) if len(x)>1 and x not in GENERIC]
+
+
+def _focus(objective):
+    path=pathlib.Path(__file__).resolve().with_name("research_query_focus.py")
+    spec=importlib.util.spec_from_file_location("project_brain_research_query_focus_relevance",path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("RESEARCH_QUERY_FOCUS_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    result=module.focus(objective)
+    if result.get("status")!="FOCUSED":
+        return None
+    return result
 
 def _candidate_text(candidate):
     c=dict(candidate or {})
@@ -87,7 +101,10 @@ def rank(objective,candidates,limit=None):
         return {**base,"status":"RELEVANCE_UNRESOLVED","reason":"OBJECTIVE_REQUIRED","ranked_candidates":[]}
     if not isinstance(candidates,list) or not candidates:
         return {**base,"status":"RELEVANCE_UNRESOLVED","reason":"CANDIDATES_REQUIRED","ranked_candidates":[]}
-    q=_tokens(objective)
+    focus=_focus(objective)
+    if not focus:
+        return {**base,"status":"RELEVANCE_UNRESOLVED","reason":"RESEARCH_QUERY_FOCUS_UNRESOLVED","ranked_candidates":[]}
+    q=_tokens(focus.get("query"))
     if not q:
         return {**base,"status":"RELEVANCE_UNRESOLVED","reason":"NO_DISCRIMINATIVE_OBJECTIVE_TOKENS","ranked_candidates":[]}
 
@@ -119,6 +136,7 @@ def rank(objective,candidates,limit=None):
         "status":"LEXICAL_RELEVANCE_RANKED",
         "verification_method":"DETERMINISTIC_BM25",
         "query_tokens":q,
+        "query_focus":focus,
         "candidate_count":len(candidates),
         "positive_relevance_count":len(positive),
         "ranked_candidates":rows,
