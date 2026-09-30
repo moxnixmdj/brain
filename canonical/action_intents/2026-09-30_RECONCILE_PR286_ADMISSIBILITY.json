@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR286-ADMISSIBILITY-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PR286_RESIDUAL_GAP_EVENT_MISSING_EXPLICIT_ADMISSIBILITY_ATTACHMENT_AND_FRONTIER_EVIDENCE_B_STALE",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PR286_RESIDUAL_GAP_EVENT_MISSING_EXPLICIT_ADMISSIBILITY_ATTACHMENT_AND_FRONTIER_EVIDENCE_B_STALE::EVIDENCE_PRESERVATION",
+  "expected_parent_frontier_change": "No frontier-state change; canonical evidence wiring becomes internally consistent and audit-complete while the numeric-expression blocker remains authoritative.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR286 at ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414",
+    "public run 36661188188 / job 109716113402",
+    "artifact 11074272541 digest sha256:106d28719e5c6bc0bc676b3d54a811874202b1e30985c4c0c59f0aa3560ded5b",
+    "PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1",
+    "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_TERMINAL_RECONCILIATION_V1"
+  ],
+  "evidence_presence_classification": "EVIDENCE_PRESENT_CANONICAL_WIRING_INCOMPLETE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the existing geophysics residual-gap event points to exact falsification/admissibility evidence and the parent frontier Evidence B points to the geophysics task; do not change counters and do not alter the localized scientific blocker.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ecc8d89b60dbdb996cfe2d8645856cdfb1c6e414",
+    "real_outcome": "Repair the provenance/admissibility surface of the already-merged PR286 residual-gap event without changing any progress counter, task result, frontier target, or execution evidence.",
+    "required_capability": "CANONICAL_EVIDENCE_ADMISSIBILITY_AND_PROVENANCE",
+    "obs_goal": {
+      "real_outcome": "Repair the provenance/admissibility surface of the already-merged PR286 residual-gap event without changing any progress counter, task result, frontier target, or execution evidence.",
+      "proxy_goals_deleted": [
+        "rerun geophysics",
+        "roll back a supported residual-gap fact",
+        "new capability work inside reconciliation"
+      ],
+      "surviving_necessity": "Attach exact falsification evidence to the existing residual-gap event and replace the stale Evidence-B pointer."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PARENT_GEOPHYSICS_NUMERIC_RELATION_GAP_20260930_V1",
+        "PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_TERMINAL_RECONCILIATION_V1",
+        "REAL_OUTPUT_SCOREBOARD_V1 existing residual-gap event"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: this action preserves already-produced canonical evidence and performs no external capability selection."
+      ],
+      "capability_work_deleted": [
+        "No task replay",
+        "No solver change",
+        "No model route",
+        "No new verifier"
+      ],
+      "surviving_gap": "Merged scoreboard event lacks an explicit canonical promotion/admissibility evidence pointer, and frontier Evidence B is stale."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical evidence wiring defect caused by a merge race after the underlying one-shot evidence was already produced.",
+      "delete_bypass_substitute_options": [
+        "Ignore defect rejected because claim provenance must be explicit.",
+        "Replay task rejected because evidence already exists and replay is forbidden.",
+        "Evidence-preservation correction survives."
+      ],
+      "surviving_causal_blocker": "Missing explicit admissibility attachment and stale Evidence-B pointer."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Reuse exact run/reconciliation evidence and attach one correction receipt",
+        "Replay geophysics",
+        "Roll back supported residual-gap observation"
+      ],
+      "losing_routes_reason": "Replay wastes a spent task and violates freeze; rollback would discard a directly observed generic gap; one evidence-preservation receipt is sufficient.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic verifier. Verify exact referenced paths, unchanged counters, unchanged parent target, and exact source run/artifact identifiers."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Unmerged post-PR286 branch-only correction commits"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Canonical promotion/admissibility provenance"
+      ],
+      "fresh_reuse_plan": "Not applicable to evidence preservation; next live action remains numeric-expression child OBS."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing one-shot and reconciliation evidence",
+        "No new public research",
+        "No task replay"
+      ],
+      "search_stop_decision": "The defect is fully localized to two canonical references; additional search cannot change the correction.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External route discovery is inapplicable because this action executes no capability route and preserves immutable evidence only."
+    },
+    "routes_considered": [
+      "EVIDENCE_PRESERVATION_ATTACHMENT",
+      "REPLAY_GEOPHYSICS",
+      "ROLLBACK_SUPPORTED_GAP"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_GEOPHYSICS",
+      "ROLLBACK_SUPPORTED_GAP"
+    ],
+    "selected_surviving_route": "EVIDENCE_PRESERVATION_ATTACHMENT",
+    "why_selected_route_is_fastest_sufficient": "It corrects claim admissibility using already-existing exact evidence with no execution, no counter mutation, no supplier dependency, and no risk of consuming a spent task.",
+    "expected_parent_level_state_change": "No frontier-state change; canonical evidence wiring becomes internally consistent and audit-complete while the numeric-expression blocker remains authoritative.",
+    "stop_condition": "Stop after the existing geophysics residual-gap event points to exact falsification/admissibility evidence and the parent frontier Evidence B points to the geophysics task; do not change counters and do not alter the localized scientific blocker.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": null,
+      "max_age_hours": null,
+      "incumbent_route": null,
+      "source_classes_checked": [],
+      "source_evidence": {},
+      "query_families": [],
+      "challenger_routes": [],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [],
+      "selected_route": "EVIDENCE_PRESERVATION_ATTACHMENT",
+      "refresh_triggers": [],
+      "negative_search_summary": "",
+      "not_applicable_reason": "EVIDENCE_PRESERVATION action only: no external supplier, tool, model, carrier, or capability route is being selected or executed.",
+      "selected_route_preflight": null
+    }
+  }
+}
