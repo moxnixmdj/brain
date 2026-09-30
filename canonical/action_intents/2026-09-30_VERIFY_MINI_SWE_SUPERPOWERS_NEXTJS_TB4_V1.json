@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "VERIFY-MINI-SWE-SUPERPOWERS-TB4-NEXTJS-PERFORMANCE-20260930-V1",
-  "status": "PROPOSED",
+  "status": "PROPOSED_CURRENT_BASE__COMPOSED_PACKAGE_CANONICAL__TASK_UNREAD",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
+  "canonical_base_commit": "d4c51207d8c3d4079f3f2d2d57c22cf9e044b8b5",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
@@ -14,7 +14,7 @@
   "expected_parent_frontier_change": "Obtain one fresh independently verified current Terminal-Bench 4.0 result for the Brain-owned mini-SWE-agent 2.4.6 + Superpowers composition on GPT-5.6 Sol, or preserve the exact first causal failure with zero false ownership credit.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "Brain main 9c74044a73ae73493862f6f49a2355346e525df2",
+    "Brain main d4c51207d8c3d4079f3f2d2d57c22cf9e044b8b5 with canonical mini-SWE + Superpowers composed package",
     "PR570 exact mini-SWE-agent 2.4.6 internalization",
     "PR576 merged session-mediated mini-SWE + Superpowers execution route",
     "Supreme route falsified for advancement on fresh TB4 evidence",
@@ -67,11 +67,11 @@
     "incremental_spend_usd": 0
   },
   "ownership_tests": {
-    "BRAIN_ARTIFACT_TEST": "PASS",
+    "BRAIN_ARTIFACT_TEST": "PASS_CANONICAL_COMPOSED_PACKAGE",
     "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_ARCHITECTURALLY__PERFORMANCE_PENDING",
     "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY",
     "SPECIMEN_SEPARATION_TEST": "PASS",
-    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_FOR_CONFIGURATION",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_CANONICAL_COMPOSED_PACKAGE",
     "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING_THIS_ACTION",
     "OWNERSHIP_PACKAGE_TEST": "PENDING_FINAL_MULTI_TASK_VERIFICATION"
   },
@@ -80,7 +80,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
+    "canonical_base_commit": "d4c51207d8c3d4079f3f2d2d57c22cf9e044b8b5",
     "real_outcome": "Get fresh, uncontaminated, independently verified evidence on the strongest currently executable Brain-owned advanced-coding composition without paid model access or benchmark leakage.",
     "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "obs_goal": {
@@ -96,6 +96,7 @@
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
+        "Canonical composed package canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
         "Brain-owned mini-SWE-agent 2.4.6",
         "Brain-owned Superpowers 6.4.2",
         "Brain fail-closed evidence/completion gates",
@@ -110,7 +111,7 @@
         "No new benchmark framework",
         "No contaminated-task salvage"
       ],
-      "surviving_gap": "No fresh uncontaminated independent current-task result exists yet for the mini-SWE + Superpowers composition on the current included cognition substrate."
+      "surviving_gap": "The durable composed route is canonical and package-qualified; only fresh uncontaminated real-task evidence is missing."
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "Evidence gap after the prior frozen task became contaminated before submission; the underlying Brain-owned route remains untested on a clean current task.",
@@ -152,6 +153,7 @@
         "PR576 task choice pretrain-shard-corruption only; preserve its session-mediated transport route"
       ],
       "adjacent_capabilities_absorbed": [
+        "canonical mini-SWE + Superpowers composed package",
         "mini-SWE linear control loop",
         "Superpowers systematic debugging",
         "Superpowers TDD",
@@ -162,6 +164,7 @@
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
+        "Reuse canonical composed package from merged PR577",
         "Reused exact mini-SWE and Superpowers packages",
         "Reused public verifier carrier",
         "Reused prior current-route search",
@@ -189,7 +192,7 @@
     "stop_condition": "After trusted current-base lease validation, read the frozen nextjs-performance instruction and only runtime-visible task files; execute mini-SWE one-action-per-step semantics through this GPT-5.6 Sol session with Brain-owned Superpowers debugging/TDD/verification discipline; preserve solution/** and tests/** unread until terminal submission; submit exactly once to the untouched independent verifier; award zero whole-family ownership credit from this single task.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-30T20:40:00Z",
+      "checked_at_utc": "2026-09-30T21:05:00Z",
       "max_age_hours": 24,
       "incumbent_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
       "source_classes_checked": [
@@ -200,6 +203,7 @@
       ],
       "source_evidence": {
         "BRAIN_INHERITED": [
+          "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
           "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
           "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
           "canonical/capabilities/opus55/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
@@ -277,7 +281,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T20:40:00Z",
+        "checked_at_utc": "2026-09-30T21:05:00Z",
         "max_age_hours": 2,
         "selected_route": "BRAIN_MINI_SWE_AGENT_2_4_6_PLUS_SUPERPOWERS_ON_CURRENT_GPT_5_6_SOL_SESSION_TRANSPORT__PUBLIC_GITHUB_ACTIONS_INDEPENDENT_VERIFIER",
         "status": "READY",
@@ -286,13 +290,29 @@
         "execution_dependencies_complete": true,
         "execution_dependencies": [
           {
+            "dependency": "BRAIN_CANONICAL_MINI_SWE_SUPERPOWERS_COMPOSED_PACKAGE_D4C51207",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "Merged PR577; exact package verifier passed on authorized local runtime before merge at head 38b43369d047693175e04d4c28f2c3433222fecc."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
             "dependency": "CURRENT_CHATGPT_GPT_5_6_SOL_INCLUDED_SESSION",
             "kind": "REMOTE_SERVICE",
             "required": true,
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T20:40:00Z",
+            "observed_at_utc": "2026-09-30T21:05:00Z",
             "evidence": [
               "DIRECT_PROBE: current conversation is actively executing as GPT-5.6 Sol"
             ],
@@ -338,7 +358,7 @@
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-30T20:40:00Z",
+            "observed_at_utc": "2026-09-30T21:05:00Z",
             "evidence": [
               "Recent independent Terminal-Bench verifier runs completed on moxnixmdj/verification-capsule-runner"
             ],
