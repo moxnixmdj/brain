@@ -1,0 +1,361 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-TYPED-SCALAR-NUMERIC-EXPRESSION-V3",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and bind the reusable typed scalar arithmetic/exponentiation child under the active parent frontier, using the shortest currently staged verified route; qualify on fresh non-astronomy evidence, then return immediately to a new parent real task. No astronomy/geophysics replay and no parent promotion from child evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 7e4fceab972c4e2c0364ae4b7db934bc319ce2c0",
+    "PR294 astronomy one-shot is spent and localized multiplication+exponentiation as first causal gap",
+    "PR297 preserved a separate single-occurrence rendered-claim-extraction gap and explicitly left typed-scalar repair as the higher-priority recurrent frontier",
+    "prior geophysics task independently exposed bounded numeric-expression/predicate absence before PR293 closed only ABS_DIFF_LTE",
+    "PR296 implementation reviewed and reused verbatim for runtime/adapter/tests on the new current base",
+    "current main goal_compiler.py and BOUND_CAPABILITY_REGISTRY_V1.json were byte-identical to PR296 base before transplant",
+    "json.query.jq remains already VERIFIED_BOUND_CAPABILITY and was explicitly challenged against the staged SymPy route",
+    "SymPy 1.14.0 exact-symbolic producer previously reached 12/12 with independent Wolfram adjudication",
+    "SymPy 1.14.0 dependency preflight run 36662597415 passed on public zero-spend carrier"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__ORTHOGONAL_RECURRENCE_2",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Bind only a restricted typed scalar arithmetic/exponentiation child using programmatic SymPy construction from a fail-closed AST; prove generic compiler/dataflow behavior, fresh non-astronomy execution, independent recomputation, and unsafe-syntax rejection. Do not replay astronomy or geophysics and do not promote the parent from child evidence.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "7e4fceab972c4e2c0364ae4b7db934bc319ce2c0",
+    "real_outcome": "Acquire and bind a reusable model-independent typed scalar arithmetic/exponentiation capability on current main, closing the recurring multiplication/exponentiation seam exposed by fresh astronomy after the earlier geophysics numeric-expression failure.",
+    "required_capability": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire and bind a reusable model-independent typed scalar arithmetic/exponentiation capability on current main, closing the recurring multiplication/exponentiation seam exposed by fresh astronomy after the earlier geophysics numeric-expression failure.",
+      "proxy_goals_deleted": [
+        "Replay astronomy",
+        "Replay geophysics",
+        "Build a new math supplier",
+        "Use model cognition",
+        "Patch the Kepler formula"
+      ],
+      "surviving_necessity": "The parent has now failed in two orthogonal scientific domains at generic scalar numeric composition; multiplication and exponentiation remain unbound."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "json.query.jq / already VERIFIED_BOUND_CAPABILITY",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1 / jq reuse pattern",
+        "EXACT_SYMBOLIC_COMPUTATION_V1 / SymPy 1.14.0",
+        "current bound capability registry",
+        "current proposal binder and grounded composition path"
+      ],
+      "external_existing_routes_checked": [
+        "jq 1.7 arithmetic and pow()",
+        "Python stdlib AST/operator",
+        "asteval/restricted evaluator libraries",
+        "current PyPI SymPy/mpmath artifacts"
+      ],
+      "capability_work_deleted": [
+        "No astronomy/geophysics replay",
+        "No task-specific formula patch",
+        "No new supplier discovery",
+        "No model cognition",
+        "No arbitrary string eval or sympify"
+      ],
+      "surviving_gap": "The staged typed-expression route still needs provenance-safe variable binding and fresh cross-domain qualification; arithmetic execution itself is implemented."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic recurring controller capability gap, not astronomy-specific.",
+      "delete_bypass_substitute_options": [
+        "Replay deleted: spent task cannot be replayed.",
+        "One-off script deleted: would solve an instance but not acquire the reusable child.",
+        "Model fallback forbidden: circular frontier proof.",
+        "Reuse existing SymPy route survives."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "FINISH_STAGED_RESTRICTED_SYMPY_ROUTE_WITH_PROVENANCE_SAFE_BINDING_AND_FRESH_QUALIFICATION",
+        "REBUILD_EXPRESSION_ROUTE_ON_ALREADY_BOUND_JQ",
+        "BUILD_RESTRICTED_PYTHON_STDLIB_AST_EVALUATOR",
+        "ADD_THIRD_PARTY_SAFE_EVAL_LIBRARY"
+      ],
+      "losing_routes_reason": "From the current live state, the restricted SymPy route is already implemented and its exact dependency closure was preflighted. The jq challenger removes a package dependency in steady state, but reaching an equivalent composable typed scalar now requires rebuilding the expression lowering plus typed scalar result extraction and the same provenance-safe binding. That cannot beat repairing the staged route on remaining wall-clock. SymPy therefore survives for this acquisition cycle; jq remains a valid future simplification candidate, not a reason to restart.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use a fresh generic non-geophysics child suite plus independent Wolfram checks. Negative unsafe-expression cases must fail closed. The spent geophysics task is not a verifier and is not replayed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any duplicate jq expression implementation started before PR296 qualification",
+        "Astronomy/geophysics replay",
+        "Task-specific formula code",
+        "New evaluator supplier discovery"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Bounded scalar arithmetic/exponentiation",
+        "numeric relation predicates",
+        "threshold-to-label decisions"
+      ],
+      "fresh_reuse_plan": "After fresh non-astronomy child qualification, return to a new materially different parent task; never replay astronomy or geophysics."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused PR296 current implementation instead of rebuilding it",
+        "Reused exact-symbolic adjudication",
+        "Reused PR293 jq qualification rather than re-benchmarking jq",
+        "Compared staged SymPy against already-bound jq from the current wall-clock state",
+        "PR297 was evidence-only and did not alter runtime/compiler/registry bytes; only affected OBS state was refreshed"
+      ],
+      "search_stop_decision": "Stop route search and reuse the already-written PR296 implementation on current main. PR297 added deferred evidence but did not change the typed-scalar runtime race. Rebuilding the equivalent expression route on jq now would repeat compiler/dataflow work and delay fresh qualification without a correctness or capability-strength gain.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current base refreshed after PR297 at 2026-09-30T03:55:00Z. PR297 explicitly preserves typed-scalar acquisition as the higher-priority recurrent frontier; current main runtime compiler/registry inputs were byte-identical to the PR296 base before transplant. jq remains the explicit challenger but is non-dominating on remaining wall-clock."
+    },
+    "routes_considered": [
+      "FINISH_STAGED_RESTRICTED_SYMPY_ROUTE_WITH_PROVENANCE_SAFE_BINDING_AND_FRESH_QUALIFICATION",
+      "REBUILD_EXPRESSION_ROUTE_ON_ALREADY_BOUND_JQ",
+      "BUILD_RESTRICTED_PYTHON_STDLIB_AST_EVALUATOR",
+      "ADD_THIRD_PARTY_SAFE_EVAL_LIBRARY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ASTRONOMY_REPLAY",
+      "GEOPHYSICS_REPLAY",
+      "TASK_SPECIFIC_KEPLER_FORMULA_PATCH",
+      "MODEL_COGNITION",
+      "NEW_NUMERIC_SUPPLIER",
+      "DUPLICATE_JQ_REBUILD_FOR_CURRENT_ACQUISITION"
+    ],
+    "selected_surviving_route": "FINISH_STAGED_RESTRICTED_SYMPY_ROUTE_WITH_PROVENANCE_SAFE_BINDING_AND_FRESH_QUALIFICATION",
+    "why_selected_route_is_fastest_sufficient": "The restricted SymPy implementation already exists on the exact current base, returns a typed scalar directly into the controller, and its pinned dependency closure has passed the public carrier. Only provenance-safe input binding and fresh independent qualification remain. Rebuilding on jq would repeat compiler work and add a typed-output extraction seam, so it is slower from the current state.",
+    "expected_parent_level_state_change": "Acquire and bind the reusable typed scalar arithmetic/exponentiation child under the active parent frontier, using the shortest currently staged verified route; qualify on fresh non-astronomy evidence, then return immediately to a new parent real task. No astronomy/geophysics replay and no parent promotion from child evidence.",
+    "stop_condition": "Bind only a restricted typed scalar arithmetic/exponentiation child using programmatic SymPy construction from a fail-closed AST; prove generic compiler/dataflow behavior, fresh non-astronomy execution, independent recomputation, and unsafe-syntax rejection. Do not replay astronomy or geophysics and do not promote the parent from child evidence.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:55:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_BASE_REUSE_OF_STAGED_RESTRICTED_SYMPY_PR296",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current main 7e4fceab972c4e2c0364ae4b7db934bc319ce2c0",
+          "PR294 terminal reconciliation: recurring typed-scalar multiplication/exponentiation gap",
+          "PR297: rendered-claim extraction observed once and deferred; typed-scalar PR296 remains higher priority",
+          "PR293 jq relation child verified on public run 36664102642",
+          "EXACT_SYMBOLIC_COMPUTATION_V1: SymPy 1.14.0 independently adjudicated"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.sympy.org/latest/modules/core.html: SymPy core programmatic expression construction",
+          "https://docs.sympy.org/latest/modules/core.html: sympify string evaluation warning means unsanitized string sympify is forbidden",
+          "https://docs.python.org/3.12/library/ast.html: Python AST can parse syntax but literal_eval does not evaluate arithmetic operators",
+          "jq 1.7 manual: numeric multiplication/division and pow are available on the already-bound jq surface"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/sympy/1.14.0/json: exact wheel sympy-1.14.0-py3-none-any.whl sha256 e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+          "https://pypi.org/pypi/mpmath/1.3.0/json: exact dependency wheel sha256 a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+          "DIRECT_PROBE public run 36662597415: exact sympy==1.14.0 installed on ubuntu-24.04 and programmatic Abs/Pow/Le/Ge primitives passed without string sympify"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "lmfit/asteval: restricted evaluator is broader than the needed scalar envelope and would add a new supplier",
+          "community safe-eval implementations exist but are unverified relative to Brain's already-adjudicated SymPy route"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "safe deterministic scalar numeric expression comparison exponentiation threshold execution without model cognition"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SymPy 1.14 Python AST asteval safe arithmetic evaluator current"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "programmatic SymPy objects versus restricted Python AST versus safe evaluator library"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "current SymPy 1.14 PyPI package availability 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "FINISH_STAGED_RESTRICTED_SYMPY_ROUTE_WITH_PROVENANCE_SAFE_BINDING_AND_FRESH_QUALIFICATION",
+          "evidence": [
+            "PR296 already contains restricted AST compiler, adapter, registry binding, and rejection tests",
+            "SymPy dependency preflight run 36662597415 passed",
+            "EXACT_SYMBOLIC_COMPUTATION_V1 has independent Wolfram adjudication"
+          ],
+          "qualification_evidence": [
+            "PR296 exact current-base implementation",
+            "run 36662597415",
+            "EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Restricted AST plus programmatic SymPy; remaining positional binding flaw is explicitly repaired before qualification.",
+            "CAPABILITY_STRENGTH": "Covers required scalar +,-,*,/,** and returns a typed scalar for downstream composition.",
+            "WALL_CLOCK": "Lowest remaining work because implementation and dependency preflight already exist.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Pinned SymPy/mpmath closure and prior exact-symbolic evidence.",
+            "VERIFIABILITY": "Fresh non-astronomy run plus independent Python/Wolfram recomputation."
+          }
+        },
+        {
+          "route": "REBUILD_EXPRESSION_ROUTE_ON_ALREADY_BOUND_JQ",
+          "evidence": [
+            "jq already bound and verified",
+            "jq provides multiplication/division/pow",
+            "PR293 proved jq controller reuse"
+          ],
+          "qualification_evidence": [
+            "run 36664102642",
+            "jq official manual"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING_FROM_CURRENT_STATE",
+          "comparison": {
+            "CORRECTNESS": "Can satisfy the bounded floating-scalar envelope with restricted AST lowering.",
+            "CAPABILITY_STRENGTH": "Sufficient for the observed gap, but no stronger for the immediate parent need.",
+            "WALL_CLOCK": "Requires a fresh expression lowering and typed-result extraction path that do not yet exist, while PR296 implementation is already staged.",
+            "INCREMENTAL_COST": "$0 and fewer steady-state dependencies.",
+            "RELIABILITY": "Existing jq adapter is verified, but the new expression/dataflow layer would still need the same fresh qualification.",
+            "VERIFIABILITY": "Straightforward; no current verification advantage over completing PR296."
+          }
+        },
+        {
+          "route": "BUILD_RESTRICTED_PYTHON_STDLIB_AST_EVALUATOR",
+          "evidence": [
+            "Python stdlib can implement bounded arithmetic"
+          ],
+          "qualification_evidence": [
+            "Python official ast documentation"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Requires a newly implemented evaluator.",
+            "CAPABILITY_STRENGTH": "Sufficient but no stronger.",
+            "WALL_CLOCK": "More implementation/proof remaining than PR296.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "New evaluator surface.",
+            "VERIFIABILITY": "Possible but unnecessary."
+          }
+        }
+      ],
+      "negative_search_summary": "jq is a legitimate smaller steady-state route and was previously omitted. After explicit comparison, it does not dominate remaining wall-clock because PR296's restricted SymPy route is already staged and directly composable. No unresolved challenger beats completing PR296 now.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "FINISH_STAGED_RESTRICTED_SYMPY_ROUTE_WITH_PROVENANCE_SAFE_BINDING_AND_FRESH_QUALIFICATION",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:55:00Z",
+        "max_age_hours": 2,
+        "selected_route": "FINISH_STAGED_RESTRICTED_SYMPY_ROUTE_WITH_PROVENANCE_SAFE_BINDING_AND_FRESH_QUALIFICATION",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:33:06Z",
+            "evidence": [
+              "DIRECT_PROBE: astronomy one-shot run 36664896545 executed on ubuntu-24.04 and uploaded artifact 11075578533"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "SYMPY_1_14_0_AND_MPMATH_1_3_0_PINNED_WHEELS",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:02:44Z",
+            "evidence": [
+              "BRAIN_INHERITED: exact symbolic adjudication is 12/12",
+              "DIRECT_PROBE: public SymPy dependency preflight run 36662597415 passed"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:41:00Z",
+            "evidence": [
+              "BRAIN_INHERITED: current exact main"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
