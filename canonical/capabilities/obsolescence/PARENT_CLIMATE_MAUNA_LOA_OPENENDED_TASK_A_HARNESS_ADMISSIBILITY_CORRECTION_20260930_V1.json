@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_ENDED_PARENT_TASK_A_HARNESS_ADMISSIBILITY_CORRECTION_V1",
+  "status": "TASK_SPENT__FIRST_CAUSAL_GAP_ATTRIBUTION_WITHDRAWN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_PARENT_CONTROLLER",
+  "checked_on": "2026-09-30",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "task_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001",
+  "task_freshness": {
+    "status": "SPENT_BY_FIRST_EXECUTION",
+    "same_task_replay_allowed": false,
+    "first_spend_run_id": 36670516407
+  },
+  "first_spend": {
+    "run_id": 36670516407,
+    "job_id": 109744305866,
+    "artifact_id": 11077861584,
+    "artifact_zip_sha256": "8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "harness_path": "run_pr328_openended_climate_task_a_once.py",
+    "harness_git_blob": "1a2858e8117f402fcf7e5cdfcb321fd4fab942c9",
+    "model_planner_disabled": true,
+    "incremental_spend_usd": 0
+  },
+  "harness_audit": {
+    "public_run_goal_called": false,
+    "direct_goal_compiler_called": true,
+    "direct_private_controller_called_conditionally": true,
+    "sequence": [
+      "load goal_compiler.py and astra_runtime.py",
+      "call compiler.compile_goal(goal, registry, ROOT) directly",
+      "on compile exception emit FAIL_FIRST_CAUSAL_GAP and terminate",
+      "only after successful direct compilation call runtime._run_model_independent_goal(...)"
+    ],
+    "bypassed_inherited_public_controller_behaviors": [
+      "verified capability proposal route",
+      "capability-planned goal route",
+      "direct model-independent goal route selected by public controller",
+      "plain-goal compile failure classification",
+      "bound-capability grounding",
+      "grounded executable composition",
+      "targeted auto capability acquisition",
+      "federated capability discovery/acquisition"
+    ],
+    "conclusion": "The observed GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH is a valid result of the carrier-selected direct compiler path, but not an admissible attribution of the first causal gap of the inherited public parent controller."
+  },
+  "prior_reconciliation_correction": {
+    "path": "canonical/capabilities/obsolescence/PARENT_CLIMATE_MAUNA_LOA_OPENENDED_TASK_A_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "prior_claim": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "resolution": "SUPERSEDED_AS_PARENT_CAUSAL_GAP_AUTHORITY",
+    "preserved_facts": [
+      "task executed once",
+      "task is spent",
+      "model planner disabled",
+      "zero incremental spend",
+      "no parent completion",
+      "no parent promotion"
+    ]
+  },
+  "later_replay": {
+    "run_id": 36670619213,
+    "job_id": 109744628405,
+    "artifact_id": 11078240623,
+    "artifact_zip_sha256": "0b15ad2a6e6d960a5ccd9379fc5f147a158af96ca9d6222f3970e42ad6124ecc",
+    "classification": "INADMISSIBLE_SAME_TASK_REPLAY__NO_PARENT_CAUSAL_OR_CAPABILITY_CREDIT",
+    "diagnostic_observation": "The public run_goal path progressed beyond direct compilation into acquisition before failing on missing origin mission path, demonstrating that the first-spend direct-compiler terminal point was not the complete inherited public-controller path.",
+    "may_define_active_parent_blocker": false
+  },
+  "canonical_state_transition": {
+    "previous_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "new_blocker": "PARENT_OPEN_ENDED_FIRST_CAUSAL_GAP_UNPROVEN__FIRST_SPEND_HARNESS_BYPASSED_PUBLIC_RUN_GOAL_CONTROLLER",
+    "capability_credit_delta": 0,
+    "runtime_repair_authorized": false,
+    "parent_promotion_authorized": false
+  },
+  "next_action": "FREEZE_FRESH_MATERIALLY_DIFFERENT_OPEN_ENDED_TASK_A_WITH_HARNESS_REQUIRED_TO_CALL_PUBLIC_RUN_GOAL_EXACTLY_ONCE__NO_PRECOMPILE_SHORT_CIRCUIT__STOP_ON_FIRST_RUNTIME_CAUSAL_GAP",
+  "carrier_acceptance_for_next_task": {
+    "must_call": "astra_runtime.run_goal",
+    "call_count": 1,
+    "forbidden_shortcuts": [
+      "goal_compiler.compile_goal direct terminal authority",
+      "astra_runtime._run_model_independent_goal direct parent authority",
+      "prewired controller_actions",
+      "task-specific source/formula/action graph"
+    ],
+    "model_planner_disabled": true,
+    "same_task_replay_forbidden": true
+  }
+}
