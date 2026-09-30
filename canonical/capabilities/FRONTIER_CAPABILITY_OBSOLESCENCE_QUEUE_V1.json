@@ -139,6 +139,15 @@
       "claim_scope": "HLE_DIAMOND_CURRENT_REFINED_MULTIDISCIPLINARY_REASONING",
       "capability_credit": 0,
       "revocation_reason": "Opaque external model behavior was incorrectly counted as Brain-owned capability."
+    },
+    {
+      "capability_id": "OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1",
+      "parent_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "adjudication_path": "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json",
+      "verification_path": "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json",
+      "incremental_spend_usd": 0,
+      "residual": "COGNITIVE_DELEGATION_QUALITY__ADAPTIVE_WORKER_SELECTION__GREATER_THAN_TWO_SCALE__AUTONOMOUS_WAKE"
     }
   ],
   "task_semantic_conjunctive_role_v1": {
