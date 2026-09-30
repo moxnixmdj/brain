@@ -13,7 +13,7 @@
   "expected_parent_frontier_change": "Close three post-PR303 fail-open seams on current main: ambiguous cognition cannot certify as model-independent, direct run_goal callers cannot bypass runtime-derived provenance, and the active frontier target record cannot drift from canonical mirrors; award no capability credit.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "current main 797d5fbea5f230a31044006755beb98ae387134b after merged PR329 provenance/target-mirror hardening",
+    "current main 797d5fbea5f230a31044006755beb98ae387134b after merged PR329 provenance/target-mirror current-base consolidation",
     "merged PR303 promotion firewall and runtime provenance implementation",
     "merged PR329 current-main implementation remains incomplete relative to the independently verified fail-closed candidate carried here",
     "public carrier PR40 workflow run 36669953388 independently verified runtime blob f11fe4381a66c1d95715dbe8ac2c3a3c5220382a and guard blob 8381f1119d514e8942df534e4e26b5e415205eca",
@@ -118,7 +118,8 @@
         "reused exact public PR40 independent verification",
         "did not reopen broader governance design",
         "limited work to the three proven false-negative branches",
-        "used the public parent harness to falsify the execute_step-only provenance boundary"
+        "used the public parent harness to falsify the execute_step-only provenance boundary",
+        "Rebound this receipt to exact post-PR329 main 797d5fbea5f230a31044006755beb98ae387134b without changing independently verified runtime or guard blobs"
       ],
       "search_stop_decision": "All three defects are directly demonstrated in current source or proven carrier usage and have minimal local repairs; broader search would delay parent Task A without improving correctness.",
       "affected_layers_only_on_revalidation": true,
