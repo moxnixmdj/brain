@@ -1,0 +1,247 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PARENT-OPENENDED-CLIMATE-TASK-A-FIRST-CAUSAL-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "NO_MUTATION_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::NO_MUTATION_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Canonically reconcile the exactly-once open-ended Task A terminal failure, mark that task permanently spent, and replace the broad parent-evidence blocker with the exact first causal compiler gap GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH. No runtime repair is authorized by this action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical Brain main ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "merged PR337 froze task blob 6f0e889e23cfba6c511b3a54cb86acba48bc9d3a",
+    "public runner run 36670516407 executed the frozen task exactly once with ASTRA_DISABLE_MODEL_PLANNER=1",
+    "terminal artifact 11077861584 digest sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98",
+    "terminal status FAIL_FIRST_CAUSAL_GAP at COMPILE with GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH on subgoal index 0",
+    "model_dependency_count=0, incremental_spend_usd=0, replay_allowed=false"
+  ],
+  "evidence_presence_classification": "EXISTING_IMMUTABLE_TERMINAL_EVIDENCE_REQUIRES_RECONCILIATION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Record the immutable terminal receipt and exact first causal gap; mark Task A spent/no-replay; update canonical parent residual and next action to route recomputation. Do not modify capability runtime, execute another parent task, or authorize parent promotion in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "ca16a72e8e83f5274b04265fe02eb7729451da93",
+    "real_outcome": "Convert the first genuine open-ended model-independent parent execution into an exact causal frontier without contaminating the spent task.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve the real execution result and move the frontier from a broad evidence absence to the exact compiler failure.",
+      "proxy_goals_deleted": [
+        "replay the spent climate task",
+        "open another equivalent Task A",
+        "patch the compiler before canonical reconciliation",
+        "promote the parent from a failed run"
+      ],
+      "surviving_necessity": "Canonical reconciliation of the immutable one-shot terminal evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current parent runtime",
+        "current goal compiler",
+        "public GitHub Actions carrier",
+        "immutable uploaded terminal artifact"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Actions job log and artifact receipt for run 36670516407"
+      ],
+      "capability_work_deleted": [
+        "no runtime change",
+        "no carrier change",
+        "no model route",
+        "no task replay"
+      ],
+      "surviving_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The producer reached the real current model-independent compiler and failed before execution because the first broad objective clause had no verified capability match.",
+      "delete_bypass_substitute_options": [
+        "delete replay",
+        "reuse immutable receipt",
+        "defer repair until the new residual is canonical"
+      ],
+      "surviving_causal_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_IMMUTABLE_TERMINAL_RECEIPT",
+        "REPLAY_SPENT_TASK",
+        "REPAIR_RUNTIME_BEFORE_RECONCILIATION"
+      ],
+      "losing_routes_reason": "Replay is forbidden and destroys freshness; repair before reconciliation would mutate the frontier before the causal evidence is made canonical.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None. The authoritative public runner terminal JSON and uploaded artifact are the direct execution receipt."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "duplicate Mauna Loa Task A PR342",
+        "any same-task replay lane",
+        "any parent promotion from this failed run"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "runtime-derived cognition provenance",
+        "one-shot execution discipline",
+        "first-causal-gap preservation"
+      ],
+      "fresh_reuse_plan": "After reconciliation, recompute the route frontier for the exact compiler gap before any repair."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused canonical Task A freeze",
+        "reused public runner receipt",
+        "reused current parent scope contract"
+      ],
+      "search_stop_decision": "No additional task-answer research is relevant to reconciling a compile-stage failure; the immutable receipt already identifies the causal boundary.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main ca16a72e8e83f5274b04265fe02eb7729451da93 and the run 36670516407 terminal receipt were checked immediately before this action."
+    },
+    "routes_considered": [
+      "RECONCILE_IMMUTABLE_TERMINAL_RECEIPT",
+      "REPLAY_SPENT_TASK",
+      "REPAIR_RUNTIME_BEFORE_RECONCILIATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_REPLAY",
+      "DUPLICATE_TASK_A",
+      "PREMATURE_RUNTIME_REPAIR",
+      "PREMATURE_PARENT_PROMOTION"
+    ],
+    "selected_surviving_route": "RECONCILE_IMMUTABLE_TERMINAL_RECEIPT",
+    "why_selected_route_is_fastest_sufficient": "It converts already-produced direct evidence into the exact canonical residual with no new execution, spend, or capability mutation.",
+    "expected_parent_level_state_change": "Replace the broad missing-open-ended-task blocker with the exact compile-stage grounding gap while preserving the task as spent.",
+    "stop_condition": "Stop after canonical reconciliation and frontier rewrite; next action is route recomputation only.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T04:52:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "RECONCILE_IMMUTABLE_TERMINAL_RECEIPT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Brain main ca16a72e8e83f5274b04265fe02eb7729451da93",
+          "merged PR337 frozen task contract"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Actions run 36670516407 job log",
+          "GitHub artifact 11077861584 digest sha256:8be2f4a10d8fc17e343857b4662626f512c1fe4931883de2f036a4477dc6dd98"
+        ]
+      },
+      "query_families": [],
+      "challenger_routes": [
+        {
+          "route": "RECONCILE_IMMUTABLE_TERMINAL_RECEIPT",
+          "evidence": [
+            "exact terminal JSON emitted by one-shot runner",
+            "task blob and execution_count bound in receipt"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: run 36670516407",
+            "BRAIN_INHERITED: task blob 6f0e889e23cfba6c511b3a54cb86acba48bc9d3a"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves exact observed failure without inventing behavior.",
+            "CAPABILITY_STRENGTH": "No claim beyond the observed first causal gap.",
+            "WALL_CLOCK": "Immediate.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Immutable public receipt plus artifact digest.",
+            "VERIFIABILITY": "Direct log and artifact."
+          }
+        },
+        {
+          "route": "REPLAY_SPENT_TASK",
+          "evidence": [
+            "execution_count=1",
+            "replay_allowed=false"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: terminal receipt"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Invalid freshness.",
+            "CAPABILITY_STRENGTH": "Adds no admissible evidence.",
+            "WALL_CLOCK": "Worse than zero-execution reconciliation.",
+            "INCREMENTAL_COST": "Unnecessary.",
+            "RELIABILITY": "Would contaminate the evidence protocol.",
+            "VERIFIABILITY": "Cannot restore freshness."
+          }
+        }
+      ],
+      "negative_search_summary": "No route can dominate zero-execution canonical reconciliation for an already-observed terminal failure.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RECONCILE_IMMUTABLE_TERMINAL_RECEIPT",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:52:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RECONCILE_IMMUTABLE_TERMINAL_RECEIPT",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "IMMUTABLE_TERMINAL_RECEIPT_RUN_36670516407",
+            "kind": "EVIDENCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:51:00Z",
+            "evidence": [
+              "GitHub Actions job log",
+              "artifact 11077861584 digest"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
