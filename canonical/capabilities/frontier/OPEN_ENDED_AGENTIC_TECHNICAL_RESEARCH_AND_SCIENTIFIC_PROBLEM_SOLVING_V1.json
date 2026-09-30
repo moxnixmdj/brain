@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__MAUNA_OBJECTIVE_SPENT__TWO_LATER_REPLAYS_QUARANTINED__GENERIC_COMPILE_GAP_CONFIRMED",
+  "status": "FRONTIER_BAR_DEFINED__MAUNA_SPENT__MISSION_ORIGIN_ROUTE_VERIFIED__FRESH_POST_SEAM_PARENT_TASK_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -78,8 +78,8 @@
       "PARENT-CLIMATE-MAUNA-LOA-CO2-ACCELERATION-OPEN-RESEARCH-TASK-A-20260930-001"
     ]
   },
-  "obsolescence_status": "NOT_YET_PROVEN__NO_ADMISSIBLE_FRESH_OPEN_ENDED_PARENT_PASS__GENERIC_BROAD_OBJECTIVE_COMPILE_GAP_UNRESOLVED",
-  "residual_gap": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+  "obsolescence_status": "NOT_YET_PROVEN__PATH_SPECIFIC_MISSION_ORIGIN_GAP_CLOSED__NO_FRESH_POST_SEAM_PARENT_COMPLETION_YET",
+  "residual_gap": "PARENT_OPEN_ENDED_CAPABILITY_UNPROVEN__MISSION_ORIGIN_ROUTE_VERIFIED__MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_REQUIRED",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -118,7 +118,7 @@
       "public_run_id": 36666659921
     }
   ],
-  "next_action": "RECOMPUTE_ROUTE_FRONTIER_FOR_BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__SEARCH_REUSE_BEFORE_REPAIR__THEN_ACQUIRE_ONLY_THE_MINIMUM_GENERIC_CAPABILITY_NEEDED__FREEZE_A_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_TASK_AFTER_REPAIR",
+  "next_action": "FREEZE_AND_RUN_MATERIALLY_DIFFERENT_FRESH_OPEN_ENDED_MODEL_INDEPENDENT_PARENT_TASK_B__THROUGH_CANONICAL_ASTRA_MISSION_ENTRYPOINT__NO_PREWIRED_RESEARCH_PLAN__STOP_ON_FIRST_CAUSAL_GAP",
   "post_repair_validation": {
     "grounding_and_composition_fresh_real_run_id": 36652169397,
     "materially_distinct_fresh_reuse_run_id": 36652623916,
@@ -243,20 +243,23 @@
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930_V1.json"
   },
   "causal_refinement": {
-    "status": "LATER_REPLAY_DIAGNOSTICS_QUARANTINED__DO_NOT_OVERRIDE_FIRST_FRESH_CAUSAL_BOUNDARY",
-    "authoritative_first_spend_run_id": 36669918546,
-    "authoritative_blocker": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
-    "non_authoritative_replay_diagnostics": [
-      {
-        "run_id": 36670516407,
-        "observation": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
-      },
-      {
-        "run_id": 36670981076,
-        "observation": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH"
-      }
-    ],
-    "rule": "Later executions of the same substantive objective have zero freshness, capability, scoreboard, and runtime-repair authority; they are retained only as non-crediting diagnostics.",
-    "evidence_path": "canonical/capabilities/obsolescence/PARENT_MAUNA_LOA_FIRST_SPEND_CURRENT_MAIN_CORRECTION_20260930_V1.json"
+    "status": "MISSION_ORIGIN_BLOCKER_CLOSED_BY_EXISTING_ENTRYPOINT_REUSE__COMPILE_MISS_RECLASSIFIED_NON_TERMINAL",
+    "first_mauna_spend_run_id": 36669918546,
+    "previous_compile_label": "BROAD_OPEN_ENDED_OBJECTIVE_TO_VERIFIED_CAPABILITY_GROUNDING__GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+    "previous_terminal_blocker": "OPEN_ENDED_AUTO_CAPABILITY_ACQUISITION_MISSING_CANONICAL_RUNTIME_MISSION_PATH",
+    "closure_evidence_path": "canonical/capabilities/obsolescence/MISSION_ORIGIN_ENTRYPOINT_CANARY_RECONCILIATION_20260930_V1.json",
+    "closure_run_id": 36672816106,
+    "surviving_parent_state": "PARENT_OPEN_ENDED_CAPABILITY_UNPROVEN__MISSION_ORIGIN_ROUTE_VERIFIED__MATERIALLY_DIFFERENT_FRESH_PARENT_TASK_REQUIRED",
+    "reason": "Current runtime catches compile no-match and enters autonomous acquisition. The first clean canonical-entrypoint canary proved the required mission origin reaches APT acquisition. A materially different fresh parent task is now required to expose any next intrinsic gap."
+  },
+  "mission_origin_entrypoint_validation": {
+    "status": "VERIFIED_BY_FRESH_NON_PARENT_CANARY__NO_PARENT_CREDIT",
+    "evidence_path": "canonical/capabilities/obsolescence/MISSION_ORIGIN_ENTRYPOINT_CANARY_RECONCILIATION_20260930_V1.json",
+    "public_run_id": 36672816106,
+    "public_job_id": 109751299770,
+    "artifact_id": 11078921733,
+    "artifact_digest": "sha256:cc5ea169496b86d98393a044e44ea88a2d60cccba7848b15c2c49f7ea61617a1",
+    "origin_path_errors_observed": [],
+    "downstream_canary_residual_has_parent_authority": false
   }
 }
