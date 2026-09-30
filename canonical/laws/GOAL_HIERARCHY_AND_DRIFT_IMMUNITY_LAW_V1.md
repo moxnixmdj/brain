@@ -2,18 +2,19 @@
 
 Status: CANONICAL / MANDATORY / FAIL-CLOSED
 
-## V5 terminal-goal override
+## V6 terminal-goal override
 
 Current authoritative terminal objective:
 
-**Permanently acquire, configure, verify, and own all useful Opus 5.5 capabilities at equal-or-better useful performance, while knowledge remains external/JIT.**
+**Permanently internalize, configure, verify, and own all useful Opus 5.5 capabilities at equal-or-better useful performance, while knowledge remains external/JIT.**
 
 Authority:
-- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md
-- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md
+- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md
+- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md
+- canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md
 - canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md
 
-Capabilities are not JIT knowledge. Underlying capability invention is forbidden. Any older terminal-objective wording below is historical and subordinate to this override.
+External model/service benchmark wins are capability specimens, not Brain ownership. Ownership requires a Brain-owned operative capability configuration and verification of the Brain-configured route itself.
 
 Purpose: make local task success, probe completion, infrastructure activity, and attractive subproblems structurally unable to replace Project Brain's terminal objective.
 
