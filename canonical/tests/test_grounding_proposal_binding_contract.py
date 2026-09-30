@@ -5,7 +5,8 @@ import pathlib
 import sys
 import unittest
 
-ROOT=pathlib.Path(__file__).resolve().parents[1]
+CANONICAL=pathlib.Path(__file__).resolve().parents[1]
+REPO_ROOT=CANONICAL.parent
 
 def load(name,path):
     spec=importlib.util.spec_from_file_location(name,path)
@@ -14,16 +15,16 @@ def load(name,path):
     spec.loader.exec_module(module)
     return module
 
-compiler=load("proposal_binding_goal_compiler",ROOT/"runtime"/"goal_compiler.py")
-grounder=load("proposal_binding_grounder",ROOT/"runtime"/"bound_capabilities"/"plain_goal_bound_grounding.py")
-composer=load("proposal_binding_composer",ROOT/"runtime"/"bound_capabilities"/"grounded_executable_composition.py")
-verifier=load("proposal_binding_verifier",ROOT/"runtime"/"bound_capabilities"/"grounded_executable_composition_verify.py")
-planner=load("proposal_binding_planner",ROOT/"runtime"/"capability_planner.py")
+compiler=load("proposal_binding_goal_compiler",CANONICAL/"runtime"/"goal_compiler.py")
+grounder=load("proposal_binding_grounder",CANONICAL/"runtime"/"bound_capabilities"/"plain_goal_bound_grounding.py")
+composer=load("proposal_binding_composer",CANONICAL/"runtime"/"bound_capabilities"/"grounded_executable_composition.py")
+verifier=load("proposal_binding_verifier",CANONICAL/"runtime"/"bound_capabilities"/"grounded_executable_composition_verify.py")
+planner=load("proposal_binding_planner",CANONICAL/"runtime"/"capability_planner.py")
 
 class GroundingProposalBindingContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        raw=json.loads((ROOT/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text(encoding="utf-8"))
+        raw=json.loads((CANONICAL/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text(encoding="utf-8"))
         cls.registry=compiler._platform_admissible_registry(raw["capabilities"])
 
     def test_two_literal_urls_bind_fetches_and_fanin_consumer(self):
@@ -46,7 +47,7 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
             ][0]
             self.assertTrue(selected["binding_affordance"]["url_consumable"])
 
-        result=composer.compose(goal,grounding,self.registry,compiler,ROOT)
+        result=composer.compose(goal,grounding,self.registry,compiler,REPO_ROOT)
         ok,reason=verifier.verify(goal,result,grounding,self.registry)
         self.assertTrue(ok,reason)
         self.assertEqual(result["model_dependency_count"],0)
