@@ -140,5 +140,104 @@ class MistakeImmunityGuardTests(unittest.TestCase):
             guard.load_at_ref=old_ref
             guard.load=old_load
 
+    def test_frontier_surface_consistency_detects_drift(self):
+        pointer={
+            "current_frontier":{
+                "critical_blocker":"BLOCK",
+                "highest_leverage_capability_gap":"BLOCK",
+                "next_step":"NEXT",
+                "last_real_output_event":{
+                    "scoreboard":{
+                        "reusable_capabilities_inherited":1,
+                        "verified_real_tasks_completed":2,
+                        "fresh_reuse_passes":3,
+                        "frontier_dependencies_removed":4,
+                        "residual_gaps_localized":5,
+                    }
+                },
+            }
+        }
+        hierarchy={
+            "active_capability_target":"CAP",
+            "current_parent_blocker":"BLOCK",
+            "next_required_action_class":"DRIFTED",
+            "next_progress_event_target":"NEXT",
+        }
+        queue={"immediate_frontier":{
+            "selected_capability":"CAP",
+            "exact_blocker":"BLOCK",
+            "next_action":"NEXT",
+        }}
+        target={"capability_id":"CAP","residual_gap":"BLOCK","next_action":"NEXT"}
+        scoreboard={
+            "counters_since_epoch_start":{
+                "reusable_capabilities_inherited":1,
+                "verified_real_tasks_completed":2,
+                "fresh_reuse_passes":3,
+                "frontier_dependencies_removed":4,
+                "residual_gaps_localized":5,
+            },
+            "active_frontier_accounting":{"parent_frontier_capability":"CAP"},
+            "progress_events":[{"residual_gap":"BLOCK"}],
+        }
+        old=guard.load
+        try:
+            def fake_load(path):
+                path=str(path)
+                if path=="canonical/capabilities/frontier/CAP.json":
+                    return target
+                if path=="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json":
+                    return scoreboard
+                raise AssertionError(path)
+            guard.load=fake_load
+            guard.enforce_frontier_surface_consistency(pointer,hierarchy,queue)
+            self.assertTrue(
+                any(x.startswith("FRONTIER_NEXT_ACTION_MISMATCH:") for x in guard.FAIL),
+                guard.FAIL,
+            )
+        finally:
+            guard.load=old
+
+    def test_frontier_surface_consistency_accepts_exact_state(self):
+        counters={
+            "reusable_capabilities_inherited":1,
+            "verified_real_tasks_completed":2,
+            "fresh_reuse_passes":3,
+            "frontier_dependencies_removed":4,
+            "residual_gaps_localized":5,
+        }
+        pointer={"current_frontier":{
+            "critical_blocker":"BLOCK",
+            "highest_leverage_capability_gap":"BLOCK",
+            "next_step":"NEXT",
+            "last_real_output_event":{"scoreboard":dict(counters)},
+        }}
+        hierarchy={
+            "active_capability_target":"CAP",
+            "current_parent_blocker":"BLOCK",
+            "next_required_action_class":"NEXT",
+            "next_progress_event_target":"NEXT",
+        }
+        queue={"immediate_frontier":{
+            "selected_capability":"CAP",
+            "exact_blocker":"BLOCK",
+            "next_action":"NEXT",
+        }}
+        old=guard.load
+        try:
+            guard.load=lambda path: (
+                {"capability_id":"CAP","residual_gap":"BLOCK","next_action":"NEXT"}
+                if str(path)=="canonical/capabilities/frontier/CAP.json"
+                else {
+                    "counters_since_epoch_start":dict(counters),
+                    "active_frontier_accounting":{"parent_frontier_capability":"CAP"},
+                    "progress_events":[{"residual_gap":"BLOCK"}],
+                }
+            )
+            guard.enforce_frontier_surface_consistency(pointer,hierarchy,queue)
+            self.assertEqual(guard.FAIL,[])
+        finally:
+            guard.load=old
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
