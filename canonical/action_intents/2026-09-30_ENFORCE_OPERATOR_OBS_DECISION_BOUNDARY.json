@@ -1,0 +1,145 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ENFORCE-OPERATOR-OBS-DECISION-BOUNDARY-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPERATOR_CAN_FORM_CONSEQUENTIAL_FRONTIER_DIAGNOSIS_OR_RECOMMENDATION_WITHOUT_FORMAL_CURRENT_BASE_SEVEN_LAYER_OBS",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPERATOR_CAN_FORM_CONSEQUENTIAL_FRONTIER_DIAGNOSIS_OR_RECOMMENDATION_WITHOUT_FORMAL_CURRENT_BASE_SEVEN_LAYER_OBS::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Close the operator decision-boundary loophole without changing capability credit or the active parent frontier: consequential diagnosis, recommendation, route selection, and execution must derive authority from current-base seven-layer OBS; memory and summaries remain non-authoritative.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
+    "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
+    "canonical/CANONICAL_POINTER.json",
+    "PR286 current parent task remains the active capability route and must not be replaced by this governance repair"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the canonical boot path, OBS law, regression catalog, operator decision-boundary contract, and trusted validator all encode the rule and the trusted drift guard passes. Do not alter parent capability credit, task contents, or execute/replay PR286.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "explicit_user_authorization": "User identified underuse of OBS as a huge problem and explicitly required it to be solved perfectly now.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f31d020bb39765d9484a7f4874c315617518dbb2",
+    "real_outcome": "Make current-base seven-layer OBS a mandatory authority boundary for consequential Brain diagnosis, recommendation, route selection, and execution, while preserving the OBS stop rule and the existing parent capability mission.",
+    "required_capability": "DURABLE_OPERATOR_OBS_DECISION_BOUNDARY_ENFORCEMENT",
+    "obs_goal": {
+      "real_outcome": "Prevent an operator from turning stale memory, summaries, or informal reasoning into an authoritative current blocker or route decision.",
+      "proxy_goals_deleted": [
+        "Add more OBS ceremony",
+        "Rerun the parent task",
+        "Build a new agent framework",
+        "Rely on operator memory to remember OBS"
+      ],
+      "surviving_necessity": "The canonical control plane must explicitly deny authority to consequential operator decisions that did not pass current-base OBS."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3",
+        "RECURSIVE_OBS_RECEIPT_SCHEMA_V4",
+        "CRITICAL_PATH_PRE_ACTION_GATE_V7",
+        "trusted enforce_goal_hierarchy.py",
+        "CANONICAL_POINTER boot requirements"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No new orchestration framework",
+        "No new external provider",
+        "No new benchmark",
+        "No parent-task execution",
+        "Reuse existing trusted drift guard"
+      ],
+      "surviving_gap": "Existing machinery strongly gates implementation PRs but the law's core authority boundary is phrased around implementation/continuation, leaving consequential diagnosis and recommendation insufficiently explicit."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Internal governance semantic gap at the operator decision boundary.",
+      "delete_bypass_substitute_options": [
+        "Delete reliance on informal operator memory",
+        "Reuse existing seven-layer OBS and exact-base machinery",
+        "Extend authority boundary to diagnosis/recommendation instead of inventing another reasoning framework",
+        "Machine-pin the operator contract in canonical boot requirements"
+      ],
+      "surviving_causal_blocker": "CONSEQUENTIAL_OPERATOR_DECISION_CAN_PRECEDE_FORMAL_CURRENT_BASE_OBS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "EXTEND_EXISTING_OBS_AUTHORITY_TO_OPERATOR_DECISION_BOUNDARY_AND_BOOT_PATH",
+        "ADD_SEPARATE_NEW_REASONING_FRAMEWORK",
+        "RELY_ON_HUMAN_OR_MODEL_MEMORY"
+      ],
+      "losing_routes_reason": "A new framework duplicates the existing OBS machinery; memory is nondurable. Extending the existing law, boot contract, regression catalog, and trusted guard closes the gap with the fewest new parts.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use the existing trusted drift-immunity guard as the direct governance verifier: the governance PR must pass on exact base and the active parent target/task must remain unchanged."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ad hoc reminders to remember OBS before frontier advice",
+        "Memory-only frontier diagnosis as an accepted operating mode"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "live canonical refresh",
+        "seven-layer OBS",
+        "exact-base binding",
+        "challenger frontier",
+        "selected-route preflight",
+        "search stop rule"
+      ],
+      "fresh_reuse_plan": "Immediately apply the strengthened decision boundary to the still-unexecuted PR286 parent task: refresh its OBS only if governance merge changes its base, then execute the shortest surviving route."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing OBS V3/V4 control system",
+        "Reused existing trusted validator",
+        "Repo search localized the missing semantic boundary without external discovery"
+      ],
+      "search_stop_decision": "The failure is internal and fully localized. External discovery cannot dominate a minimal repair to the already-authoritative OBS control plane.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External challenger discovery is inapplicable to this governance-only semantic repair; the current parent capability route is explicitly preserved."
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_OBS_AUTHORITY_TO_OPERATOR_DECISION_BOUNDARY_AND_BOOT_PATH",
+      "ADD_SEPARATE_NEW_REASONING_FRAMEWORK",
+      "RELY_ON_HUMAN_OR_MODEL_MEMORY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADD_SEPARATE_NEW_REASONING_FRAMEWORK",
+      "RELY_ON_HUMAN_OR_MODEL_MEMORY"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_OBS_AUTHORITY_TO_OPERATOR_DECISION_BOUNDARY_AND_BOOT_PATH",
+    "why_selected_route_is_fastest_sufficient": "It changes only the existing authoritative control plane, adds no external dependency, preserves the parent task, and makes the missing decision boundary explicit and durable.",
+    "expected_parent_level_state_change": "Close the operator decision-boundary loophole without changing capability credit or the active parent frontier: consequential diagnosis, recommendation, route selection, and execution must derive authority from current-base seven-layer OBS; memory and summaries remain non-authoritative.",
+    "stop_condition": "Stop after the canonical boot path, OBS law, regression catalog, operator decision-boundary contract, and trusted validator all encode the rule and the trusted drift guard passes. Do not alter parent capability credit, task contents, or execute/replay PR286.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is an internal governance semantic repair of the already-selected canonical OBS control plane. No external service, library, provider, or implementation route can replace the need for the canonical operator authority rule."
+    }
+  }
+}
