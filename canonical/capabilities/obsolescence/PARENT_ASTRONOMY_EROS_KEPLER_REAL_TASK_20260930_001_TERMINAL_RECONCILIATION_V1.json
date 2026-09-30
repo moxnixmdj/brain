@@ -41,20 +41,23 @@
     "secondary_carrier_issue": "Public capsule omitted canonical plain_goal_bound_grounding.py, encountered only after direct compiler had already failed on the Kepler expression; this is not the parent causal blocker and does not authorize task replay."
   },
   "route_recomputation": {
-    "selected_next_route": "BIND_EXISTING_VERIFIED_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
-    "evidence": [
-      "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json proves SymPy 1.14.0 at 12/12 with independent Wolfram verification.",
-      "canonical/obsolescence/run_exact_symbolic_v1.py already demonstrates the inherited supplier.",
-      "Closed PR292 precommitted the same generic typed numeric-expression route but contained only intent, not implementation."
+    "status": "ORIGINAL_SYMPY_SELECTION_SUPERSEDED_BEFORE_CANONICAL_MERGE__CURRENT_BASE_OBS_REQUIRED",
+    "original_candidate": "BIND_EXISTING_VERIFIED_SYMPY_1_14_VIA_RESTRICTED_TYPED_NUMERIC_AST",
+    "newly_identified_dominator_candidate": "REUSE_ALREADY_BOUND_VERIFIED_JQ_VIA_RESTRICTED_TYPED_SCALAR_NUMERIC_AST",
+    "why_reopened": [
+      "json.query.jq is already VERIFIED_BOUND_CAPABILITY in Brain and already executes on the current controller surface.",
+      "jq supports numeric multiplication and pow(), the exact operation family exposed by the astronomy first causal gap.",
+      "A jq lowering can reuse existing result-reference and JSON-materialization machinery, deleting a new SymPy registry/adapter/dependency path.",
+      "The original terminal reconciliation did not evaluate jq as a challenger for the expression gap, so its SymPy route selection lacked a complete live challenger frontier."
     ],
+    "authoritative_next_action": "MERGE_TERMINAL_TASK_EVIDENCE_ONLY__THEN_RUN_CURRENT_BASE_RECURSIVE_OBS_ON_MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_WITH_MULTIPLICATION_AND_EXPONENTIATION__DO_NOT_REPLAY_ASTRONOMY",
     "prohibited": [
       "REPLAY_ASTRONOMY_TASK",
       "ASTRONOMY_SPECIFIC_FORMULA_PATCH",
       "MODEL_API_OR_LOCAL_MODEL_COGNITION",
       "ARBITRARY_STRING_SYMPIFY_OR_EVAL",
-      "NEW_NUMERIC_SUPPLIER_BEFORE_REUSING_VERIFIED_SYMPY"
-    ],
-    "verification_requirement": "Qualify the generic child on fresh non-astronomy examples and independent verification; only then return to a new materially different parent real task."
+      "PROMOTE_ANY_EXPRESSION_ROUTE_BEFORE_FRESH_NON_ASTRONOMY_QUALIFICATION"
+    ]
   },
   "parent_capability_promoted": false,
   "progress_credit": {
