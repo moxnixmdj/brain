@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-SEISMOLOGY-FIRST-CAUSAL-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "89e91fc0bca9f099a728e7b6c19c1cefd97102ce",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "CANONICAL_FRONTIER_STALE_AFTER_SPENT_SEISMOLOGY_FRESH_PARENT_ATTEMPT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "highest_leverage_now": true,
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_FRONTIER_STALE_AFTER_SPENT_SEISMOLOGY_FRESH_PARENT_ATTEMPT",
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "selected_surviving_route": "RECONCILE_FROM_GUARDED_TERMINAL_EVIDENCE",
+    "deleted_or_bypassed_paths": [
+      "SEISMOLOGY_REPLAY",
+      "BINDER_PATCH_BEFORE_SOURCE_ADMISSION_CAUSE",
+      "NEW_PARENT_BEFORE_REPAIR"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The one-shot parent already localized a narrower upstream source-admission defect. Canonical truth must move to that gap before repair.",
+    "stop_rule": "MERGE_TRUTH_ONLY_RECONCILIATION__THEN_REPAIR_GENERIC_SOURCE_ADMISSION"
+  }
+}
