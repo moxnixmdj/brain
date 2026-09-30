@@ -73,16 +73,28 @@ class GroundingProposalBindingContractTests(unittest.TestCase):
         self.assertTrue(out0.startswith("canonical/astra_runtime/tmp/auto_proposal/"),out0)
         self.assertTrue(out1.startswith("canonical/astra_runtime/tmp/auto_proposal/"),out1)
 
-        refs=actions[2]["args"]["evidence_paths"]
-        self.assertEqual(len(refs),2,refs)
+        consumer=[
+            x for x in result["problem"]["capabilities"]
+            if x["source_capability_id"]=="knowledge.consistency.assess"
+        ][0]
+        graph_refs=consumer["inputs"]["evidence_paths"]
+        self.assertEqual(len(graph_refs),2,graph_refs)
         aliases=[]
-        for ref in refs:
+        for ref in graph_refs:
             self.assertEqual(set(ref),{"$effect_result"})
             inner=ref["$effect_result"]
             self.assertEqual(inner["field"],"output_path")
             aliases.append(inner["effect"])
         self.assertEqual(len(set(aliases)),2,aliases)
         self.assertTrue(all(x.startswith("knowledge.observation.available.grounded_clause_") for x in aliases),aliases)
+
+        runtime_refs=actions[2]["args"]["evidence_paths"]
+        self.assertEqual(len(runtime_refs),2,runtime_refs)
+        for ref in runtime_refs:
+            self.assertEqual(set(ref),{"$result"})
+            inner=ref["$result"]
+            self.assertEqual(inner["field"],"output_path")
+            self.assertIsInstance(inner["action_index"],int)
 
     def test_plain_state_fetch_remains_valid_when_goal_supplies_state_path(self):
         goal="Fetch JSON from canonical/astra_runtime/state/example.json using url key source_url."
