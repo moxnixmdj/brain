@@ -97,6 +97,69 @@ class BinderTests(unittest.TestCase):
         self.assertEqual(out["relation_spec"]["operator"],"GT",out)
         self.assertTrue(out["relation_result"]["predicate"],out)
 
+    def test_gt_against_explicit_objective_literal(self):
+        out=self.relation(
+          "Determine whether France population growth exceeds 0.2 percent."
+        )
+        self.assertEqual(out["status"],"CLAIM_SPEC_AND_LITERAL_OPERAND_BOUND",out)
+        self.assertEqual(out["relation_spec"]["operator"],"GT",out)
+        self.assertEqual(out["relation_spec"]["right_literal"],"0.2 percent",out)
+        self.assertTrue(out["relation_result"]["predicate"],out)
+        self.assertEqual(
+          out["relation_result"]["right"]["provenance_class"],
+          "OBJECTIVE_TEXT_EXPLICIT_LITERAL",
+          out,
+        )
+        self.assertEqual(
+          out["relation_result"]["relation_scope"],
+          "EXPLICIT_DECIMAL_RELATION_OVER_EVIDENCE_AND_OBJECTIVE_LITERAL",
+          out,
+        )
+
+    def test_lt_against_signed_objective_literal(self):
+        out=self.relation(
+          "Determine whether Germany population growth is lower than 0.0 percent."
+        )
+        self.assertEqual(out["status"],"CLAIM_SPEC_AND_LITERAL_OPERAND_BOUND",out)
+        self.assertEqual(out["relation_spec"]["operator"],"LT",out)
+        self.assertTrue(out["relation_result"]["predicate"],out)
+
+    def test_objective_literal_unit_mismatch_fails_closed(self):
+        out=self.m.bind(
+          "Determine whether France population growth exceeds 0.2 points.",
+          fixture(),
+          evaluate_relation=False,
+        )
+        self.assertEqual(out["reason"],"NO_EXACT_UNIT_COMPATIBLE_LITERAL_OPERAND",out)
+
+    def test_multiple_same_unit_evidence_numbers_fail_literal_binding(self):
+        data=fixture(
+          left_text="France population growth was 0.35 percent and revised to 0.40 percent."
+        )
+        out=self.m.bind(
+          "Determine whether France population growth exceeds 0.2 percent.",
+          data,
+          evaluate_relation=False,
+        )
+        self.assertEqual(out["reason"],"AMBIGUOUS_LITERAL_COMPATIBLE_OPERAND",out)
+
+    def test_seismology_shaped_objective_binds_generically_without_replay(self):
+        data=fixture(
+          left_text="Station Alpha observed maximum amplitude was 1.30 meter.",
+          right_text="Administrative note recorded event year 2025."
+        )
+        objective=(
+          "Determine whether an earthquake generated a tsunami with an observed maximum "
+          "amplitude exceeding 1 meter at any officially monitored station outside the event country. "
+          "Use authoritative evidence and independently verify the result."
+        )
+        out=self.m.bind(objective,data)
+        self.assertEqual(out["status"],"CLAIM_SPEC_AND_LITERAL_OPERAND_BOUND",out)
+        self.assertEqual(out["parsed_objective"]["left_entity"],"observed maximum amplitude",out)
+        self.assertEqual(out["relation_spec"]["right_literal"],"1 meter",out)
+        self.assertEqual(out["operand_pair"]["left_surface"],"1.30 meter",out)
+        self.assertTrue(out["relation_result"]["predicate"],out)
+
     def test_abs_diff_lte_literal_threshold(self):
         out=self.relation(
           "Determine whether France population growth and Germany population growth differ by at most 0.5 percent."
