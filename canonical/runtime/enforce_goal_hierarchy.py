@@ -897,8 +897,33 @@ def main():
         fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
     if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
+    if str(hierarchy.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH")
+
+    target_id=str(hierarchy.get("active_capability_target") or "").strip()
+    target_path="canonical/capabilities/frontier/"+target_id+".json" if target_id else ""
+    if not target_path or not (ROOT/target_path).is_file():
+        fail("ACTIVE_FRONTIER_TARGET_RECORD_MISSING")
+        target={}
+    else:
+        try:
+            target=load(target_path)
+        except Exception as exc:
+            fail("ACTIVE_FRONTIER_TARGET_RECORD_INVALID:"+type(exc).__name__)
+            target={}
+    if target:
+        if str(target.get("capability_id") or "")!=target_id:
+            fail("TARGET_RECORD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+        if str(target.get("residual_gap") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+            fail("TARGET_RECORD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
+        if str(target.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+            fail("TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH")
 
     boot=pointer.get("boot_requirements") or {}
+    if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
+        fail("CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY_NOT_REQUIRED")
+    if boot.get("runtime_cognition_provenance_required_for_cognitive_credit") is not True:
+        fail("RUNTIME_COGNITION_PROVENANCE_NOT_REQUIRED_FOR_COGNITIVE_CREDIT")
     operator_obs_path="canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json"
     if boot.get("operator_obs_decision_boundary_required") is not True:
         fail("OPERATOR_OBS_DECISION_BOUNDARY_NOT_REQUIRED")
