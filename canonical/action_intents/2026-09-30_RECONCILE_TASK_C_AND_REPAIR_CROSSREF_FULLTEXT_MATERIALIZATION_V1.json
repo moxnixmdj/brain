@@ -1,0 +1,328 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-TASK-C-AND-REPAIR-CROSSREF-FULLTEXT-MATERIALIZATION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_MATERIALS_TASK_C_SPENT__SELECTED_SCHOLARLY_SOURCE_MATERIALIZATION_BLOCKED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_MATERIALS_TASK_C_SPENT__SELECTED_SCHOLARLY_SOURCE_MATERIALIZATION_BLOCKED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Reconcile spent materials Task C as a new localized residual gap and stage one generic model-independent DOI materialization repair that preserves Crossref-deposited full-text links; no parent or subcapability credit until independent exact-byte qualification.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "authoritative Task C run 36698638943 / artifact 11089076913",
+    "current Brain source frontend and provenance verifier",
+    "PR529 source-admission qualification",
+    "Crossref official full-text link documentation",
+    "OpenAlex/PyAlex challenger routes"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__FRESH_PARENT_TASK_C_LOCALIZED_GENERIC_GAP",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the spent Task C receipt, canonical frontier correction, generic Crossref-link materialization candidate, and regression tests are committed on one guarded PR. Do not replay Task C and do not award capability credit before independent qualification.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+    "real_outcome": "Advance the real parent research capability by reconciling spent Task C and repairing exactly the first generic source-materialization seam it exposed.",
+    "required_capability": "MODEL_INDEPENDENT_SELECTED_SOURCE_LIVE_MATERIALIZATION_OR_METADATA_REFINED_RETRIEVAL_V1",
+    "obs_goal": {
+      "real_outcome": "Turn a provenance-verified selected scholarly DOI record into live identity-bound evidence without model cognition.",
+      "proxy_goals_deleted": [
+        "replay materials Task C",
+        "create another benchmark",
+        "add OpenAlex/PyAlex before needed",
+        "repair unrelated research stages"
+      ],
+      "surviving_necessity": "Preserve Crossref full-text links and try them before heuristic rediscovery."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "source_candidate_provenance_verify.materialize direct DOI landing",
+        "open_research_source_frontend metadata-anchored refined rediscovery",
+        "Crossref DOI identity verification already in runtime"
+      ],
+      "external_existing_routes_checked": [
+        "Crossref deposited full-text link metadata",
+        "OpenAlex OA-location lookup",
+        "PyAlex client"
+      ],
+      "capability_work_deleted": [
+        "new planner",
+        "new search backend",
+        "new package dependency",
+        "Task C replay"
+      ],
+      "surviving_gap": "Current Crossref verifier discards deposited full-text link metadata, forcing brittle DOI landing or heuristic rediscovery."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific source materialization seam exposed by fresh Task C; parent reasoning route reached this seam with model_dependency_count 0.",
+      "delete_bypass_substitute_options": [
+        "Delete Task C replay",
+        "Bypass DOI landing failure using already-returned Crossref full-text links",
+        "Defer OpenAlex until Crossref-native route is insufficient"
+      ],
+      "surviving_causal_blocker": "Selected bibliographic DOI cannot become retrieval-provenance-verified live evidence when DOI landing fails and Crossref links are discarded."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Reuse Crossref verification response and preserve/try deposited full-text links",
+        "Add OpenAlex OA-location resolver",
+        "Add PyAlex dependency",
+        "Build new scholarly resolver"
+      ],
+      "losing_routes_reason": "All alternatives add calls/dependencies before using authoritative URLs already present in the current Crossref response.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Stage deterministic regression tests now; capability credit remains zero until exact candidate bytes are independently qualified on the external runner. Do not replay Task C."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "metadata-refined rediscovery when a deposited Crossref full-text link succeeds",
+        "OpenAlex integration unless later required"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "DOI identity-preserving content-location selection"
+      ],
+      "fresh_reuse_plan": "After independent generic qualification, freeze a new materially different parent Task D rather than replaying Task C."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused authoritative Task C logs",
+        "reused existing Crossref DOI verification",
+        "stopped supplier search once native Crossref route dominated"
+      ],
+      "search_stop_decision": "Crossref-native link preservation is correctness-sufficient, cheaper, simpler, and directly addresses the observed gap; remaining OA resolvers cannot beat it enough to justify delay.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "CROSSREF_DEPOSITED_FULLTEXT_LINKS_BEFORE_QUERY_REFINEMENT",
+      "OPENALEX_OA_LOCATION_RESOLUTION",
+      "PYALEX_LIBRARY_INTEGRATION",
+      "NEW_SCHOLARLY_RESOLVER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_C_REPLAY",
+      "NEW_PLANNER",
+      "NEW_SEARCH_BACKEND",
+      "PYALEX_FIRST"
+    ],
+    "selected_surviving_route": "CROSSREF_DEPOSITED_FULLTEXT_LINKS_BEFORE_QUERY_REFINEMENT",
+    "why_selected_route_is_fastest_sufficient": "The runtime already pays for and trusts the Crossref DOI record; retaining its deposited link URLs adds no provider, package, model, or discovery round and directly bypasses the observed DOI-landing failure.",
+    "expected_parent_level_state_change": "Reconcile spent materials Task C as a new localized residual gap and stage one generic model-independent DOI materialization repair that preserves Crossref-deposited full-text links; no parent or subcapability credit until independent exact-byte qualification.",
+    "stop_condition": "Stop after the spent Task C receipt, canonical frontier correction, generic Crossref-link materialization candidate, and regression tests are committed on one guarded PR. Do not replay Task C and do not award capability credit before independent qualification.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T09:48:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "DIRECT_DOI_LANDING_THEN_METADATA_REFINED_QUERY",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/source_candidate_provenance_verify.py @ blob 8f6f80403dc48268ecbf244ae633ea2928204148",
+          "canonical/runtime/bound_capabilities/open_research_source_frontend.py @ blob 830fd35c816140cb6ddb2d3dac9f0886e595d993",
+          "Task C authoritative run 36698638943: SELECTED_SOURCE_MATERIALIZATION_BLOCKED"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Crossref official full-text access docs: https://www.crossref.org/documentation/retrieve-metadata/rest-api/text-and-data-mining",
+          "Crossref REST API docs: https://www.crossref.org/documentation/retrieve-metadata/rest-api/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI pyalex checked: https://pypi.org/project/pyalex/ ; adds dependency and OpenAlex API-key/credit surface",
+          "GitHub PyAlex implementation checked as optional client route; stdlib direct API remains simpler"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "OpenAlex documentation and PyAlex GitHub surfaced as alternative OA-location route",
+          "Unpaywall current API documentation surfaced OpenAlex as successor for search"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "DOI bibliographic candidate live full text materialization identity preserving open access resolver"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Crossref REST API full text link DOI official documentation"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "OpenAlex DOI best OA location API Python client PyAlex"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 Unpaywall OpenAlex API changes search endpoint retirement"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "CROSSREF_DEPOSITED_FULLTEXT_LINKS_BEFORE_QUERY_REFINEMENT",
+          "evidence": [
+            "Crossref record already queried for DOI identity; official docs expose deposited link[] full-text URLs"
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY Crossref full-text docs",
+            "DIRECT_PROBE current Brain Task C failure proves incumbent gap"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves DOI/Crossref bibliographic identity and tries publisher-deposited content links only",
+            "CAPABILITY_STRENGTH": "Directly repairs selected-source live materialization without changing discovery/ranking",
+            "WALL_CLOCK": "One existing API response plus bounded URL attempts; no second discovery round required when link succeeds",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Uses publisher-deposited Crossref metadata before heuristic query fallback",
+            "VERIFIABILITY": "Deterministic URL list and identity-preserving provenance fields are unit-testable and independently qualifiable"
+          }
+        },
+        {
+          "route": "OPENALEX_OA_LOCATION_RESOLUTION",
+          "evidence": [
+            "OpenAlex exposes OA locations and DOI work lookup"
+          ],
+          "qualification_evidence": [
+            "OFFICIAL/registry documentation checked",
+            "PyPI pyalex current package"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially strong OA locator",
+            "CAPABILITY_STRENGTH": "Useful fallback but not necessary before Crossref-native links",
+            "WALL_CLOCK": "Adds another remote API round trip and integration",
+            "INCREMENTAL_COST": "$0 monetary but API key/credit and dependency surface",
+            "RELIABILITY": "Additional external dependency",
+            "VERIFIABILITY": "Good, but more machinery than selected route"
+          }
+        },
+        {
+          "route": "PYALEX_LIBRARY_INTEGRATION",
+          "evidence": [
+            "PyPI package exists and wraps OpenAlex"
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY PyPI/GitHub evidence"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Thin client to OpenAlex",
+            "CAPABILITY_STRENGTH": "No capability advantage over direct stdlib HTTP for this seam",
+            "WALL_CLOCK": "Package acquisition/integration slower",
+            "INCREMENTAL_COST": "$0",
+            "RELIABILITY": "Adds package/version failure surface",
+            "VERIFIABILITY": "Package can be pinned but is unnecessary"
+          }
+        }
+      ],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "selected_route": "CROSSREF_DEPOSITED_FULLTEXT_LINKS_BEFORE_QUERY_REFINEMENT",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "negative_search_summary": "No simpler existing Brain route preserves Crossref full-text link metadata; external OA resolver routes add dependencies and do not dominate the native Crossref repair.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T09:48:00Z",
+        "max_age_hours": 2,
+        "selected_route": "CROSSREF_DEPOSITED_FULLTEXT_LINKS_BEFORE_QUERY_REFINEMENT",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies_complete": true,
+        "execution_dependencies": [
+          {
+            "dependency": "GitHub connected repository mutation for moxnixmdj/brain",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:48:00Z",
+            "evidence": [
+              "DIRECT_PROBE successful authenticated fetches of current private Brain main in this execution"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "canonical/runtime/bound_capabilities/source_candidate_provenance_verify.py",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:48:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current blob 8f6f80403dc48268ecbf244ae633ea2928204148"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "Crossref REST full-text link metadata contract",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T09:48:00Z",
+            "evidence": [
+              "OFFICIAL_PRIMARY Crossref documentation confirms link field for full-text URLs"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ]
+      }
+    }
+  }
+}
