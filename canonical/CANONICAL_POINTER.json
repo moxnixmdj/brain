@@ -31,7 +31,7 @@
     "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
-    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
+    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V2.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -123,7 +123,7 @@
     "max_external_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2,
     "fail_closed_mistake_immunity_required": true,
-    "fail_closed_mistake_immunity_law_path": "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
+    "fail_closed_mistake_immunity_law_path": "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V2.md",
     "recurring_mistake_regression_catalog_path": "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
     "deterministic_duplicate_lease_owner_required": true,
     "active_capability_target_change_requires_explicit_reconciliation": true,
@@ -142,7 +142,8 @@
     "bare_chat_has_zero_canonical_authority": true,
     "canonical_consequential_decision_requires_repository_backed_current_base_obs": true,
     "canonical_frontier_cross_surface_consistency_required": true,
-    "runtime_cognition_provenance_required_for_cognitive_credit": true
+    "runtime_cognition_provenance_required_for_cognitive_credit": true,
+    "verified_promotion_frontier_atomicity_required": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -196,11 +197,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE__REUSE_QUALIFIED_SOURCE_FRONTEND_AND_RELEVANCE_ADMISSION__NO_PARENT_REPLAY",
+    "next_step": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE__REUSE_EXTRACTED_PASSAGES_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "critical_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -277,7 +278,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "highest_leverage_capability_gap": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
