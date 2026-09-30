@@ -1,0 +1,213 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-CLAIM-RELATION-WIN-TO-CLAIM-SPEC-BINDING-20260930-V1",
+  "status": "ZERO_PARENT_CREDIT_FRONTIER_RECONCILIATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "STALE_FRONTIER_MIRRORS_STILL_NAME_ALREADY_ACQUIRED_CLAIM_RELATION_CHILD",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CLAIM_RELATION_PROMOTION_MIRROR_RECONCILIATION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Record the verified claim/relation child exactly once and advance every active frontier mirror from MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1 to MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1; parent capability remains unpromoted.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR #439 at 92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "canonical promotion receipt MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1",
+    "public PR162 run 36682488104 job 109780804595 artifact 11082521746",
+    "exact producer blob d66a7eb30774f66160b698d8082947776888293d",
+    "exact regression blob 590a1e50f11bc2903b56d41a00c5354ec2501c44",
+    "current pointer, queue, hierarchy, target, and scoreboard still name the solved blocker"
+  ],
+  "evidence_presence_classification": "VERIFIED_CHILD_ACQUIRED__ACTIVE_MIRRORS_STALE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when every active mirror names MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1, the verified child is recorded exactly once, reusable child credit increases by one, residual-gap localization increases by one, parent credit stays zero, and no historical event is rewritten.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "parent_capability_promoted": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "RESIDUAL_OF",
+    "evidence": [
+      "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "92b4fd1bb561fbda52b3b2fb1f846e139885f9f5",
+    "real_outcome": "Make active control state reflect the already verified child acquisition so execution moves to the true surviving semantic binding seam.",
+    "required_capability": "TRUTH_FIRST_FRONTIER_RECONCILIATION_V1",
+    "obs_goal": {
+      "real_outcome": "Delete stale work against the solved claim/relation blocker.",
+      "proxy_goals_deleted": [
+        "retest claim relation",
+        "replay parent task",
+        "promote parent",
+        "infer semantic roles during reconciliation"
+      ],
+      "surviving_necessity": "All active mirrors must agree on the next unresolved blocker before new acquisition work."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR439 merge",
+        "promotion receipt",
+        "registry verified status",
+        "public run 36682488104"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "No runtime implementation",
+        "No verifier",
+        "No supplier",
+        "No model",
+        "No parent task"
+      ],
+      "surviving_gap": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Control-state lag after a verified child acquisition.",
+      "delete_bypass_substitute_options": [
+        "Leave stale mirrors rejected",
+        "Reconcile exact current state survives"
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_ACTIVE_MIRRORS_TO_PROMOTION_RECEIPT"
+      ],
+      "losing_routes_reason": "No capability implementation is needed to expose an already-declared next gap.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Deterministically compare all active mirror fields and scoreboard counters against the merged promotion receipt."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "work targeting MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_EXACT_SUPPORT_AND_EXPLICIT_NUMERIC_RELATION_V1"
+      ],
+      "fresh_reuse_plan": "Open one current-base acquisition lane for claim-spec/operand binding after reconciliation."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR439 next_causal_gap as authoritative frontier result"
+      ],
+      "search_stop_decision": "No search needed for a mirror-only reconciliation whose next gap is explicit in the merged promotion receipt.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh during the subsequent acquisition lane, not this reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_ACTIVE_MIRRORS_TO_PROMOTION_RECEIPT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CLAIM_RELATION_REIMPLEMENTATION",
+      "PARENT_REPLAY",
+      "PARENT_PROMOTION"
+    ],
+    "selected_surviving_route": "RECONCILE_ACTIVE_MIRRORS_TO_PROMOTION_RECEIPT",
+    "why_selected_route_is_fastest_sufficient": "The verified child and next causal gap are already canonical; only active mirrors lag.",
+    "expected_parent_level_state_change": "Record the verified claim/relation child exactly once and advance every active frontier mirror from MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1 to MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1; parent capability remains unpromoted.",
+    "stop_condition": "Every active mirror names MODEL_INDEPENDENT_CLAIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AND_GENERIC_EVIDENCE_V1; child acquisition is counted once; parent credit remains zero.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": "2026-09-30T07:18:38Z",
+      "max_age_hours": 24,
+      "incumbent_route": "STALE_MIRRORS_ON_SOLVED_BLOCKER",
+      "source_classes_checked": [
+        "BRAIN_CANONICAL_RECEIPT",
+        "BRAIN_RUNTIME",
+        "BRAIN_GOVERNANCE"
+      ],
+      "source_evidence": {
+        "BRAIN_CANONICAL_RECEIPT": [
+          "MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1"
+        ],
+        "BRAIN_RUNTIME": [
+          "evidence.claim_relation.generic_units.stdlib is VERIFIED_BOUND_CAPABILITY"
+        ],
+        "BRAIN_GOVERNANCE": [
+          "PR439 expected_parent_frontier_change and next_causal_gap"
+        ]
+      },
+      "challenger_routes": [
+        {
+          "route": "RECONCILE_ACTIVE_MIRRORS_TO_PROMOTION_RECEIPT",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Matches merged promotion truth",
+            "CAPABILITY_STRENGTH": "Preserves exact verified scope",
+            "WALL_CLOCK": "Minimal",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Deterministic JSON reconciliation",
+            "VERIFIABILITY": "Direct field/counter comparison"
+          }
+        }
+      ],
+      "negative_search_summary": "External discovery is inapplicable to mirror reconciliation.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RECONCILE_ACTIVE_MIRRORS_TO_PROMOTION_RECEIPT",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_MAIN_CHANGE"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T07:18:38Z",
+        "max_age_hours": 2,
+        "selected_route": "RECONCILE_ACTIVE_MIRRORS_TO_PROMOTION_RECEIPT",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CANONICAL_GITHUB_WRITE_PATH",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:18:38Z",
+            "evidence": [
+              "current-base branch creation succeeded"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
