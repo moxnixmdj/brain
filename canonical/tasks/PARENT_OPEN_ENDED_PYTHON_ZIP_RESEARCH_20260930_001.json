@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_OPEN_ENDED_REAL_TASK_V1",
+  "task_id": "PARENT-OPEN-ENDED-PYTHON-ZIP-RESEARCH-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "SOFTWARE_RUNTIME_TECHNICAL_RESEARCH",
+  "freshness_class": "FRESH_GENUINELY_OPEN_ENDED_PARENT_TASK_A",
+  "objective": "Determine the earliest CPython minor release whose standard-library zipfile module can write ZIP entries using Zstandard compression, and determine the compatibility caveat for compression method identifiers when reading or writing such archives. Produce a decision-quality machine-readable result with authoritative provenance.",
+  "constraints": [
+    "Zero incremental cash spend.",
+    "No model cognition.",
+    "Discover and select all material sources and tools from the objective at runtime.",
+    "No predeclared source URLs, document paths, API symbols, formulas, answer, or research/tool sequence.",
+    "Use current authoritative public evidence for consequential factual claims.",
+    "Stop on the first unsupported causal step."
+  ],
+  "acceptance_criteria": [
+    "State the earliest CPython minor release satisfying the objective.",
+    "State the material public standard-library API symbol or symbols.",
+    "State the material compression-method identifier compatibility caveat.",
+    "At least one material authoritative source or tool is discovered or selected by runtime.",
+    "Provide independently retrievable provenance for decisive evidence.",
+    "Independently verify consequential claims without importing producer modules.",
+    "Runtime-derived cognition provenance authority is ASTRA_RUNTIME_DERIVED_V1 and producer model_dependency_count is 0."
+  ],
+  "producer_prompt_policy": {
+    "objective_constraints_acceptance_only": true,
+    "predeclared_research_plan": false,
+    "predeclared_source_urls": false,
+    "predeclared_api_symbols": false,
+    "predeclared_tool_sequence": false,
+    "predeclared_answer": false
+  },
+  "execution_constraints": {
+    "exactly_one_execution": true,
+    "same_task_replay_allowed": false,
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "stop_on_first_causal_gap": true
+  },
+  "expected_answer_precommitted": false
+}
