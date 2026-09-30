@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-DIRECT-COMPOUND-COMPILER-BINDING-FALSIFICATION-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Replace stale fresh-requalification-pending state with the newly localized direct-compiler duplicate-binding seam; keep all revoked capability credits unchanged and increment only localized residual-gap evidence.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR277 one-shot run 36656793034 exact bytes PASS then verifier=false",
+    "PR271/273/275 repaired grounded-composition path only",
+    "PR278 lossless failure evidence repair merged at 1e76678412652c09350fa644c35e373714435f6c",
+    "goal_compiler._compile_compound_goal and _bind_inputs direct code inspection",
+    "capability_proposal_generators._bind_planned_inputs existing effect_result authority"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile canonical truth only: record the spent failed fresh task and localized duplicate-binding authority seam; keep capability/fresh-reuse credit revoked; do not repair or replay in this PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "frontier_reconciliation": {
+    "previous_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "new_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "relationship": "SAME_TARGET_NEW_POST_REPAIR_FALSIFICATION",
+    "evidence": [
+      "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1.json"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "1e76678412652c09350fa644c35e373714435f6c",
+    "real_outcome": "Restore canonical truth after the fresh post-repair requalification exposed a duplicate heuristic binding authority in the direct compiler path.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Record the new causal blocker and forbid more fresh-task spending until binding authority is unified.",
+      "proxy_goals_deleted": [
+        "rerun PR277",
+        "patch task wording",
+        "pretend repair remains complete",
+        "restore any credit"
+      ],
+      "surviving_necessity": "Canonical state must reflect the new in-scope falsification."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR277 failure",
+        "PR278 observability repair",
+        "goal_compiler direct compiler",
+        "proposal binder effect_result"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to reconciliation."
+      ],
+      "capability_work_deleted": [
+        "no semantic code change",
+        "no replay",
+        "no provider",
+        "no model"
+      ],
+      "surviving_gap": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic architecture duplication: two input-binding authorities with different provenance semantics.",
+      "delete_bypass_substitute_options": [
+        "Delete stale fresh-requalification state; preserve exact blocker for subsequent OBS."
+      ],
+      "surviving_causal_blocker": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_TO_DUPLICATE_BINDING_AUTHORITY_BLOCKER"
+      ],
+      "losing_routes_reason": "Any repair before reconciliation mutates against stale canonical truth.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution required; source run and direct code localization are the evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "fresh task execution until binder authority is unified",
+        "path-recency-specific fixes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "lossless verifier failure reporting"
+      ],
+      "fresh_reuse_plan": "After generic binder unification passes focused validation, use a different fresh task. Never replay PR277."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse PR277 run",
+        "reuse PR278 evidence preservation",
+        "reuse direct code inspection"
+      ],
+      "search_stop_decision": "The duplicate binding authorities are directly identified in current Brain code; external search cannot improve the reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Not applicable to reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_TO_DUPLICATE_BINDING_AUTHORITY_BLOCKER",
+      "REPLAY_PR277",
+      "PATCH_RECENCY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_PR277",
+      "PATCH_RECENCY"
+    ],
+    "selected_surviving_route": "RECONCILE_TO_DUPLICATE_BINDING_AUTHORITY_BLOCKER",
+    "why_selected_route_is_fastest_sufficient": "It restores truth immediately and leaves exactly one generic semantic repair to perform.",
+    "expected_parent_level_state_change": "Replace stale fresh-requalification-pending state with the newly localized direct-compiler duplicate-binding seam; keep all revoked capability credits unchanged and increment only localized residual-gap evidence.",
+    "stop_condition": "Reconcile canonical truth only: record the spent failed fresh task and localized duplicate-binding authority seam; keep capability/fresh-reuse credit revoked; do not repair or replay in this PR.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER selects no external route."
+    }
+  }
+}
