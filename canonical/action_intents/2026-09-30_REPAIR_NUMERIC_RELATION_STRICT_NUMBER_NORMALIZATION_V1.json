@@ -1,0 +1,331 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-NUMERIC-RELATION-STRICT-NUMBER-NORMALIZATION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_TASK_B_NUMERIC_RELATION_REJECTS_VALID_NUMERIC_JSON_STRINGS",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_TASK_B_NUMERIC_RELATION_REJECTS_VALID_NUMERIC_JSON_STRINGS::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Remove only the generic numeric consumer type seam proven by spent PR304 so a fresh genuinely open-ended cross-domain parent Task B can test the parent capability; award no parent or scoreboard credit from this repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 0292dc91d7b2354beede3e530256054330fb94d8",
+    "spent Brain PR304 / runner run 36669136068 localized first causal blocker EXECUTE:RuntimeError:JQ_FAILED: NUMERIC_RELATION_INPUT_NOT_NUMBER",
+    "Brain PR306 independently observed answer-blind PubChem MolecularWeight JSON shape as string and closed unspent",
+    "PR293 already acquired and verified the bounded two-scalar numeric relation through existing bound jq",
+    "current goal_compiler.py preserves source values and rejects non-number jq operands at the numeric consumer boundary",
+    "public carrier direct probe run 36669702271 completed successfully on current runner head"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Qualify only strict generic numeric normalization on exact candidate bytes with positive number/numeric-string cases and negative nonnumeric/type cases; never replay PR304 or PR306; if exact-byte qualification passes, merge the repair with zero capability credit and immediately return to one fresh genuinely open-ended cross-domain parent Task B.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "0292dc91d7b2354beede3e530256054330fb94d8",
+    "real_outcome": "Accept finite JSON numbers and strictly parseable numeric JSON strings only when a downstream operation is explicitly numeric, while preserving fail-closed rejection of every other type.",
+    "required_capability": "GENERIC_STRICT_NUMERIC_VALUE_NORMALIZATION_AT_BOUND_NUMERIC_CONSUMER",
+    "obs_goal": {
+      "real_outcome": "Remove the exact generic type seam blocking valid authoritative numeric scalars without weakening source provenance or relation semantics.",
+      "proxy_goals_deleted": [
+        "replay PR304",
+        "design another chemistry task before repairing the observed seam",
+        "new numeric framework",
+        "source-specific coercion"
+      ],
+      "surviving_necessity": "The inherited relation engine must consume authoritative APIs that encode numeric scalars either as JSON numbers or numeric strings."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "verified bound json.query.jq relation route from PR293",
+        "current authoritative JSON fetch preserving source-native types",
+        "typed scalar SymPy route",
+        "native write_json_records materialization"
+      ],
+      "external_existing_routes_checked": [
+        "jq tonumber documented numeric-string conversion semantics",
+        "Ubuntu jq 1.7.1 package already used by the verified public carrier",
+        "Python-side coercion considered but would add a second implementation surface"
+      ],
+      "capability_work_deleted": [
+        "no new supplier",
+        "no new adapter",
+        "no source-specific literal",
+        "no change to authoritative fetch evidence typing",
+        "no model route"
+      ],
+      "surviving_gap": "The numeric relation jq filter accepts only JSON number type and therefore rejects valid numeric strings before arithmetic."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic consumer-boundary type normalization defect observed on a fresh parent task; not chemistry-specific.",
+      "delete_bypass_substitute_options": [
+        "delete new supplier work because jq already has strict numeric conversion",
+        "reject source-side mutation because provenance should preserve source-native type",
+        "reject Python/SymPy relation replacement because the existing jq path is already verified and smaller"
+      ],
+      "surviving_causal_blocker": "NUMERIC_RELATION_INPUT_NOT_NUMBER_ON_STRICTLY_PARSEABLE_NUMERIC_JSON_STRING"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_VERIFIED_JQ_TONUMBER_AT_NUMERIC_CONSUMER_BOUNDARY",
+        "NORMALIZE_DURING_AUTHORITATIVE_SOURCE_FETCH",
+        "REPLACE_RELATION_WITH_PYTHON_OR_SYMPY_COERCION"
+      ],
+      "losing_routes_reason": "Source-side conversion mutates evidence representation; a new Python/SymPy relation route adds machinery. Existing bound jq can strictly normalize only at the numeric boundary and retain the same fail-closed error.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Do not replay any spent parent task. Exact candidate bytes must instead be exercised on generic positive JSON number/numeric-string cases and adversarial nonnumeric string, boolean, null, array, and object cases through jq."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "any task-specific PubChem coercion patch",
+        "any new numeric supplier search for this seam"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "verified bound json.query.jq",
+        "numeric relation compiler lowering",
+        "native causal result materialization"
+      ],
+      "fresh_reuse_plan": "After exact-byte generic qualification, run one newly frozen open-ended cross-domain parent task with no prewired authority, URLs, JSON paths, formula, or threshold."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR304 terminal failure receipt",
+        "reused PR306 answer-blind type observation",
+        "reused PR293 jq qualification"
+      ],
+      "search_stop_decision": "Stop after jq strict normalization: it is already inherited, directly addresses the observed type seam, adds no supplier, and no discovered route can remove more machinery.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main, current public carrier, jq official conversion semantics, and Ubuntu package surface were refreshed on 2026-09-30 before authoring this repair."
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_VERIFIED_JQ_TONUMBER_AT_NUMERIC_CONSUMER_BOUNDARY",
+      "NORMALIZE_DURING_AUTHORITATIVE_SOURCE_FETCH",
+      "REPLACE_RELATION_WITH_PYTHON_OR_SYMPY_COERCION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TASK_SPECIFIC_PUBCHEM_COERCION",
+      "NEW_NUMERIC_SUPPLIER",
+      "SOURCE_EVIDENCE_TYPE_MUTATION",
+      "PARENT_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_VERIFIED_JQ_TONUMBER_AT_NUMERIC_CONSUMER_BOUNDARY",
+    "why_selected_route_is_fastest_sufficient": "It changes only the explicit numeric consumer, reuses the already verified jq supplier, preserves source-native evidence, keeps nonnumeric values fail-closed, costs $0, and can be independently exercised immediately on the live public carrier.",
+    "expected_parent_level_state_change": "Remove only the generic numeric consumer type seam proven by spent PR304 so a fresh genuinely open-ended cross-domain parent Task B can test the parent capability; award no parent or scoreboard credit from this repair.",
+    "stop_condition": "Qualify only strict generic numeric normalization on exact candidate bytes with positive number/numeric-string cases and negative nonnumeric/type cases; never replay PR304 or PR306; if exact-byte qualification passes, merge the repair with zero capability credit and immediately return to one fresh genuinely open-ended cross-domain parent Task B.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:35:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "EXISTING_VERIFIED_BOUND_JQ_NUMERIC_RELATION_WITH_NUMBER_ONLY_INPUT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR293 verified json.query.jq numeric relation route",
+          "current goal_compiler.py exact main blob 4b61fe911471854ec15c7900816f61e9e55f602e",
+          "PR304 terminal first-causal-gap receipt"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "jq manual: tonumber converts correctly formatted strings to numbers, leaves numbers unchanged, and errors on other input"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Ubuntu noble-updates jq 1.7.1-3ubuntu0.24.04.2 package record"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "jq community issue history corroborates tonumber as the standard numeric-string conversion path; used only as discovery evidence"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "strict JSON numeric string normalization before bounded arithmetic fail closed"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "jq tonumber numeric string number conversion error semantics"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "consumer boundary coercion versus source evidence mutation versus new numeric adapter"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Ubuntu 24.04 current jq 1.7.1 package numeric conversion"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_EXISTING_VERIFIED_JQ_TONUMBER_AT_NUMERIC_CONSUMER_BOUNDARY",
+          "evidence": [
+            "current bound jq route",
+            "PR304 type failure",
+            "PR306 source shape observation"
+          ],
+          "qualification_evidence": [
+            "jq official manual tonumber semantics",
+            "public carrier run 36669702271 succeeded on current runner head"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Strictly accepts numbers and parseable numeric strings and retains explicit error for all other types.",
+            "CAPABILITY_STRENGTH": "Exactly covers numeric scalar representation variance without claiming general coercion.",
+            "WALL_CLOCK": "Single filter repair in an already bound route.",
+            "INCREMENTAL_COST": "$0; no new supplier or service.",
+            "RELIABILITY": "jq route already has verified Brain qualification and a current successful carrier probe.",
+            "VERIFIABILITY": "Generic input matrix can be checked independently without any spent parent-task replay."
+          }
+        },
+        {
+          "route": "NORMALIZE_DURING_AUTHORITATIVE_SOURCE_FETCH",
+          "evidence": [
+            "fetch layer currently preserves native source JSON typing"
+          ],
+          "qualification_evidence": [
+            "current Brain fetch implementation"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could make arithmetic work but would blur source-native evidence representation.",
+            "CAPABILITY_STRENGTH": "Broader mutation than required.",
+            "WALL_CLOCK": "Requires changing a more general evidence boundary.",
+            "INCREMENTAL_COST": "$0 monetary but higher integration risk.",
+            "RELIABILITY": "Would touch every authoritative numeric fetch instead of one numeric consumer.",
+            "VERIFIABILITY": "More downstream surfaces would need revalidation."
+          }
+        },
+        {
+          "route": "REPLACE_RELATION_WITH_PYTHON_OR_SYMPY_COERCION",
+          "evidence": [
+            "typed scalar SymPy route exists and Python conversion is available"
+          ],
+          "qualification_evidence": [
+            "existing Brain SymPy acquisition evidence"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can be made correct but duplicates an already working numeric relation supplier.",
+            "CAPABILITY_STRENGTH": "Broader than this representation seam requires.",
+            "WALL_CLOCK": "Adds or changes adapter/binding logic.",
+            "INCREMENTAL_COST": "$0 monetary but nonzero machinery.",
+            "RELIABILITY": "Introduces a second relation implementation path.",
+            "VERIFIABILITY": "Would require broader qualification than the one-line jq normalization seam."
+          }
+        }
+      ],
+      "negative_search_summary": "No challenger removes more machinery or preserves source evidence more cleanly than strict conversion inside the already verified jq numeric consumer.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_EXISTING_VERIFIED_JQ_TONUMBER_AT_NUMERIC_CONSUMER_BOUNDARY",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:35:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_EXISTING_VERIFIED_JQ_TONUMBER_AT_NUMERIC_CONSUMER_BOUNDARY",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_0292dc91d7b2354beede3e530256054330fb94d8",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:35:00Z",
+            "evidence": [
+              "current main and goal_compiler blob fetched directly from canonical GitHub"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "JQ_1_7_1_EXISTING_BOUND_SUPPLIER",
+            "kind": "PACKAGE_REGISTRY",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:35:00Z",
+            "evidence": [
+              "existing verified bound json.query.jq registry evidence",
+              "Ubuntu noble-updates jq 1.7.1 package record"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj_verification_capsule_runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:35:00Z",
+            "evidence": [
+              "DIRECT_PROBE workflow run 36669702271 completed success on current runner head 6ebe407890846cbb3f1b57adbbf2f724ff01aa0f"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
