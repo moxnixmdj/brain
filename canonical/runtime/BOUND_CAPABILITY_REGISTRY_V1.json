@@ -2871,6 +2871,91 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "source.authority.identity.ror": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "source.candidate.provenance.verified"
+      ],
+      "provides": [
+        "source.authority.host_organization_identity"
+      ],
+      "result_fields": [
+        "status",
+        "verified_candidate_count",
+        "verified_candidates",
+        "authority_claim_scope",
+        "primary_source_verification",
+        "relevance_verification",
+        "evidence_sufficiency_verification",
+        "output_path",
+        "output_verified"
+      ],
+      "keywords": [
+        "source",
+        "authority",
+        "identity",
+        "organization",
+        "ror",
+        "domain",
+        "host",
+        "research",
+        "funding",
+        "provenance"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "source.authority.identity.ror",
+          "discovery_path": "${input.discovery_path}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_candidates": 12
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "source_authority_binding_ror",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "VERIFIED means only exact candidate-domain to one active ROR organization identity binding.",
+        "No parent-domain inference and no fuzzy identity matching.",
+        "Unsupported, unavailable, or ambiguous domains fail closed.",
+        "Does not establish primary-source status, objective relevance, factual correctness, evidence sufficiency, or claim endorsement."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/source_authority_binding_ror.py",
+        "external_registry": "ROR v2 API"
+      },
+      "verification": {
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_pr": 132,
+        "public_run_id": 36676947006,
+        "public_head_sha": "25d2bbe6703f745d23b45dab87fd0952aa648324",
+        "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

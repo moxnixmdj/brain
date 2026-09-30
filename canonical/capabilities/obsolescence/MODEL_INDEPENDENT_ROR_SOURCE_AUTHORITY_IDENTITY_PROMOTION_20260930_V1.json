@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PROMOTION_V1",
+  "capability_id": "source.authority.identity.ror",
+  "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "exact_producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+  "public_qualification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 132,
+    "head_sha": "25d2bbe6703f745d23b45dab87fd0952aa648324",
+    "workflow_run_id": 36676947006,
+    "conclusion": "success"
+  },
+  "proven_effect": "A candidate host/domain is bound to exactly one active ROR organization record only when that exact normalized domain is explicitly present in the ROR record.",
+  "nonclaims": [
+    "primary-source status",
+    "objective relevance",
+    "factual correctness",
+    "evidence sufficiency",
+    "claim endorsement"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "next_gap": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION"
+}
