@@ -1,0 +1,273 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-BIOPHYSICS-RENDERED-CLAIM-EXTRACTION-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_BIOPHYSICS_RENDERED_SOURCE_QUANTITATIVE_CLAIM_EXTRACTION_HAS_NO_VERIFIED_BOUND_CAPABILITY",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_BIOPHYSICS_RENDERED_SOURCE_QUANTITATIVE_CLAIM_EXTRACTION_HAS_NO_VERIFIED_BOUND_CAPABILITY::EVIDENCE_PRESERVATION",
+  "expected_parent_frontier_change": "Preserve the spent biophysics parent-task evidence and register model-independent rendered-evidence quantitative claim extraction as a real but single-occurrence deferred subcapability gap; do not supersede the currently stronger orthogonally recurrent typed-scalar-expression repair in PR296.",
+  "highest_leverage_now": false,
+  "prior_work_checked": [
+    "main cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+    "public task run 36665681972",
+    "artifact 11076227702",
+    "open PR296 typed-scalar recurring-gap action intent",
+    "verified browser capability registry"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__SINGLE_OCCURRENCE_DEFERRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Record exact one-shot evidence, prohibit replay and irrelevant package-discovery repair, mark the rendered-evidence claim-extraction gap OBSERVED_ONCE_DEFERRED_PENDING_ORTHOGONAL_RECURRENCE, and leave current PR296 authority unchanged.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd1cdeb554451d9458c82a56ef4c424f79d6a791",
+    "real_outcome": "Canonically preserve what the spent model-free biophysics task actually proved: verified browser grounding succeeded, then quantitative claim extraction from rendered unstructured prose lacked a verified bound capability.",
+    "required_capability": "MODEL_INDEPENDENT_RENDERED_EVIDENCE_QUANTITATIVE_CLAIM_EXTRACTION_V1",
+    "obs_goal": {
+      "real_outcome": "Preserve exact first-causal-gap evidence without converting one occurrence into an immediate repair campaign.",
+      "proxy_goals_deleted": [
+        "replay biophysics task",
+        "repair APT/PyPI discovery",
+        "build text research stack immediately",
+        "replace current PR296 typed-scalar repair",
+        "claim broad parent failure beyond evidence"
+      ],
+      "surviving_necessity": "The real cross-domain failure must remain canonical so recurrence can authorize the correct generic acquisition later."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "web.browser.rendered.capture.chromedriver VERIFIED_BOUND_CAPABILITY",
+        "plain-goal compiler and grounding evidence from run 36665681972",
+        "current open PR296 recurring typed-scalar-expression repair"
+      ],
+      "external_existing_routes_checked": [
+        "No new supplier search is necessary for evidence preservation; supplier discovery is deferred until this gap becomes active and current-base OBS is rerun."
+      ],
+      "capability_work_deleted": [
+        "No browser repair",
+        "No APT/PyPI repair",
+        "No extraction implementation",
+        "No task replay"
+      ],
+      "surviving_gap": "Given already-rendered visible source text, deterministically identify requested quantitative claims and preserve supporting source text/URL without model cognition."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic research cognition seam observed once in biophysics; compiled browser prefix proves access/rendering is not the missing capability.",
+      "delete_bypass_substitute_options": [
+        "Delete irrelevant external package-discovery repair",
+        "Bypass immediate implementation because stronger recurrent PR296 gap already owns current highest-leverage acquisition",
+        "Preserve evidence and wait for orthogonal recurrence"
+      ],
+      "surviving_causal_blocker": "PARENT_BIOPHYSICS_RENDERED_SOURCE_QUANTITATIVE_CLAIM_EXTRACTION_HAS_NO_VERIFIED_BOUND_CAPABILITY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "PRESERVE_EVIDENCE_ONLY_AND_DEFER_REPAIR",
+        "IMMEDIATE_REPAIR_RENDERED_CLAIM_EXTRACTION",
+        "REPAIR_EXTERNAL_PACKAGE_DISCOVERY"
+      ],
+      "losing_routes_reason": "Immediate repair is under-supported by one occurrence while PR296 addresses a twice-recurring generic numeric gap; package discovery is downstream fallback noise, not the causal blocker.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new verifier or benchmark. Authority comes from exact run logs plus artifact 11076227702: compiler prefix selected browser capture for clause 0 and failed exactly at clause 1 claim extraction."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any planned package-discovery repair caused by this run",
+        "Any browser-capability repair caused by this run"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Browser capture remains verified and sufficient for acquisition of rendered source evidence"
+      ],
+      "fresh_reuse_plan": "If a materially different fresh parent task independently exposes the same rendered-prose claim-extraction gap, rerun current-base OBS and race existing extraction/search/retrieval routes before implementation."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Downloaded and inspected exact terminal artifact once",
+        "Separated compiled prefix from fallback discovery noise",
+        "Compared recurrence strength against current PR296"
+      ],
+      "search_stop_decision": "Stop now: the purpose is evidence reconciliation, not supplier acquisition. Exact causal localization is sufficient and further search cannot change the defer-vs-repair decision.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current main and open PR296 were refreshed immediately before reconciliation; PR296 has orthogonal recurrence_count=2 while this claim-extraction gap has recurrence_count=1."
+    },
+    "routes_considered": [
+      "PRESERVE_EVIDENCE_ONLY_AND_DEFER_REPAIR",
+      "IMMEDIATE_REPAIR_RENDERED_CLAIM_EXTRACTION",
+      "REPAIR_EXTERNAL_PACKAGE_DISCOVERY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BIOPHYSICS_REPLAY",
+      "BROWSER_REPAIR",
+      "APT_PYPI_DISCOVERY_REPAIR",
+      "IMMEDIATE_SINGLE_OCCURRENCE_EXTRACTION_REPAIR"
+    ],
+    "selected_surviving_route": "PRESERVE_EVIDENCE_ONLY_AND_DEFER_REPAIR",
+    "why_selected_route_is_fastest_sufficient": "It prevents loss or misclassification of real evidence while spending zero implementation time on a single-occurrence gap and preserving the higher-evidence recurring repair already underway.",
+    "expected_parent_level_state_change": "Preserve the spent biophysics parent-task evidence and register model-independent rendered-evidence quantitative claim extraction as a real but single-occurrence deferred subcapability gap; do not supersede the currently stronger orthogonally recurrent typed-scalar-expression repair in PR296.",
+    "stop_condition": "Record exact one-shot evidence, prohibit replay and irrelevant package-discovery repair, mark the rendered-evidence claim-extraction gap OBSERVED_ONCE_DEFERRED_PENDING_ORTHOGONAL_RECURRENCE, and leave current PR296 authority unchanged.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T03:49:23Z",
+      "max_age_hours": 24,
+      "incumbent_route": "PRESERVE_EVIDENCE_ONLY_AND_DEFER_REPAIR",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "DIRECT_EXECUTION_EVIDENCE",
+        "CURRENT_OPEN_ROUTE"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "web.browser.rendered.capture.chromedriver is VERIFIED_BOUND_CAPABILITY on current main",
+          "FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1 forbids stretching evidence"
+        ],
+        "DIRECT_EXECUTION_EVIDENCE": [
+          "public run 36665681972 job 109729732147",
+          "artifact 11076227702 digest sha256:e1d5f1b73fe0a77c84a7f2abd5eb973187570da2bb153fd80561d25956c36802",
+          "GOAL_GAP_CLASSIFICATION compiled clause 0 through web.browser.rendered.capture.chromedriver and failed at clause 1 quantitative claim extraction"
+        ],
+        "CURRENT_OPEN_ROUTE": [
+          "PR296 owns MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1 with orthogonal_recurrence_count=2"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAUSAL_LOCALIZATION",
+          "query": "browser capture compiled prefix versus rendered prose quantitative claim extraction"
+        },
+        {
+          "intent": "PRIORITY",
+          "query": "single occurrence rendered claim extraction versus two-domain typed scalar recurrence"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "PRESERVE_EVIDENCE_ONLY_AND_DEFER_REPAIR",
+          "evidence": [
+            "exact first-gap artifact",
+            "current higher-recurrence PR296"
+          ],
+          "qualification_evidence": [
+            "DIRECT_EXECUTION_EVIDENCE",
+            "BRAIN_INHERITED"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Matches exact evidence scope.",
+            "CAPABILITY_STRENGTH": "Preserves gap without overclaim.",
+            "WALL_CLOCK": "Near-zero.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "No new runtime path.",
+            "VERIFIABILITY": "Exact artifact and logs."
+          }
+        },
+        {
+          "route": "IMMEDIATE_REPAIR_RENDERED_CLAIM_EXTRACTION",
+          "evidence": [
+            "one biophysics occurrence"
+          ],
+          "qualification_evidence": [
+            "run 36665681972"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could target real gap but risks single-task overfit.",
+            "CAPABILITY_STRENGTH": "Potentially important.",
+            "WALL_CLOCK": "Consumes repair cycle while stronger recurrent gap is active.",
+            "INCREMENTAL_COST": "$0 monetary, nonzero integration cost.",
+            "RELIABILITY": "Unqualified route.",
+            "VERIFIABILITY": "Would require fresh cross-domain qualification."
+          }
+        }
+      ],
+      "negative_search_summary": "No evidence justifies immediate repair over preservation while a twice-recurring generic child gap is already being acquired.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "PRESERVE_EVIDENCE_ONLY_AND_DEFER_REPAIR",
+      "refresh_triggers": [
+        "IF_ORTHOGONAL_RECURRENCE_OCCURS",
+        "AFTER_PR296_TERMINATES",
+        "IF_ACTIVE_PARENT_FRONTIER_CHANGES"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T03:49:23Z",
+        "max_age_hours": 2,
+        "selected_route": "PRESERVE_EVIDENCE_ONLY_AND_DEFER_REPAIR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "EXACT_TERMINAL_ARTIFACT_11076227702",
+            "kind": "EVIDENCE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:49:23Z",
+            "evidence": [
+              "Downloaded and inspected exact artifact; gap classification and grounding records present"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "CURRENT_PR296_PRIORITY_STATE",
+            "kind": "CANONICAL_STATE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T03:49:23Z",
+            "evidence": [
+              "PR296 open on exact current main with orthogonal recurrence_count=2"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
