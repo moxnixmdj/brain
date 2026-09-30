@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
 
 SCHEMA="PROJECT_BRAIN_GROUNDED_EXECUTABLE_COMPOSITION_V1"
 
@@ -27,6 +28,74 @@ def _render(value,inputs):
             raise RuntimeError("UNBOUND_TEMPLATE_INPUT")
         return out
     return value
+
+def _goal_urls(text):
+    return [
+        x.rstrip(".,;:!?")
+        for x in re.findall(r"https?://[^\s)\]}>]+",str(text or ""))
+    ]
+
+def _auto_output_path(goal,instance_id,key,suffix):
+    suffix=str(suffix or "").strip().lower()
+    if not re.fullmatch(r"\.[a-z0-9]{1,12}",suffix):
+        raise RuntimeError("AUTO_PATH_SUFFIX_INVALID")
+    digest=hashlib.sha256(str(goal).encode("utf-8")).hexdigest()[:16]
+    slug=re.sub(r"[^a-z0-9]+","-",str(instance_id).lower()).strip("-")[:72]
+    input_slug=re.sub(r"[^a-z0-9]+","-",str(key).lower()).strip("-")[:32]
+    return (
+        "canonical/astra_runtime/tmp/auto_proposal/"
+        +digest+"_"+slug+"_"+input_slug+suffix
+    )
+
+def _effect_refs(value):
+    out=[]
+    if isinstance(value,dict):
+        if set(value)=={"$effect_result"} and isinstance(value.get("$effect_result"),dict):
+            ref=value["$effect_result"]
+            out.append((str(ref.get("effect") or ""),str(ref.get("field") or "")))
+        else:
+            for v in value.values():
+                out.extend(_effect_refs(v))
+    elif isinstance(value,list):
+        for v in value:
+            out.extend(_effect_refs(v))
+    return out
+
+def _validate_declared_bindings(clause_text,instance_id,entry,inputs):
+    declared=entry.get("proposal_bindings") or {}
+    if not declared:
+        return True,"VERIFIED"
+    if not isinstance(declared,dict):
+        return False,"PROPOSAL_BINDINGS_INVALID:"+instance_id
+    urls=_goal_urls(clause_text)
+    for key,spec in declared.items():
+        if key not in inputs or not isinstance(spec,dict):
+            return False,"PROPOSAL_BINDING_INPUT_MISSING:"+instance_id+":"+str(key)
+        typ=str(spec.get("type") or "")
+        value=inputs[key]
+        if typ=="literal":
+            if "value" not in spec or value!=spec.get("value"):
+                return False,"PROPOSAL_LITERAL_MISMATCH:"+instance_id+":"+str(key)
+        elif typ=="goal_url":
+            if len(urls)!=1 or value!=urls[0]:
+                return False,"PROPOSAL_GOAL_URL_MISMATCH:"+instance_id+":"+str(key)
+        elif typ=="auto_path":
+            try:
+                expected=_auto_output_path(clause_text,instance_id,key,spec.get("suffix"))
+            except Exception:
+                return False,"PROPOSAL_AUTO_PATH_INVALID:"+instance_id+":"+str(key)
+            if value!=expected:
+                return False,"PROPOSAL_AUTO_PATH_MISMATCH:"+instance_id+":"+str(key)
+        elif typ=="effect_result":
+            refs=_effect_refs(value)
+            if not refs:
+                return False,"PROPOSAL_EFFECT_RESULT_MISSING:"+instance_id+":"+str(key)
+            field=str(spec.get("field") or "")
+            if any(ref_field!=field for _effect,ref_field in refs):
+                return False,"PROPOSAL_EFFECT_RESULT_FIELD_MISMATCH:"+instance_id+":"+str(key)
+        else:
+            return False,"PROPOSAL_BINDING_TYPE_UNKNOWN:"+instance_id+":"+str(key)
+    return True,"VERIFIED"
 
 def verify(goal,composition,grounding,registry):
     canonical=" ".join(str(goal or "").strip().split())
@@ -83,13 +152,60 @@ def verify(goal,composition,grounding,registry):
             return False,"ACTION_RENDER_INVALID:"+instance_id
         if cap.get("action")!=expected_action or cap.get("action_sha256")!=_sha(expected_action):
             return False,"ACTION_MISMATCH:"+instance_id
-        if list(cap.get("requires") or [])!=[str(x) for x in (entry.get("requires") or [])]:
+        original_requires=[str(x) for x in (entry.get("requires") or [])]
+        original_provides=[str(x) for x in (entry.get("provides") or [])]
+        if list(cap.get("source_requires") or [])!=original_requires:
+            return False,"SOURCE_REQUIRES_MISMATCH:"+instance_id
+        if list(cap.get("source_provides") or [])!=original_provides:
+            return False,"SOURCE_PROVIDES_MISMATCH:"+instance_id
+
+        requires_as=cap.get("requires_as") or []
+        if not isinstance(requires_as,list):
+            return False,"REQUIRES_AS_INVALID:"+instance_id
+        req_aliases={}
+        for item in requires_as:
+            if not isinstance(item,dict) or set(item)!={"effect","as"}:
+                return False,"REQUIRES_AS_INVALID:"+instance_id
+            effect=str(item.get("effect") or "")
+            alias=str(item.get("as") or "")
+            if effect not in original_requires or not alias:
+                return False,"REQUIRES_AS_INVALID:"+instance_id
+            req_aliases.setdefault(effect,[]).append(alias)
+        expected_requires=[]
+        for effect in original_requires:
+            aliases=req_aliases.get(effect) or []
+            expected_requires.extend(aliases if aliases else [effect])
+        if list(cap.get("requires") or [])!=expected_requires:
             return False,"REQUIRES_MISMATCH:"+instance_id
-        original=[str(x) for x in (entry.get("provides") or [])]
+
+        provides_as=cap.get("provides_as") or []
+        if not isinstance(provides_as,list):
+            return False,"PROVIDES_AS_INVALID:"+instance_id
+        aliases=[]
+        for item in provides_as:
+            if not isinstance(item,dict) or set(item)!={"effect","as"}:
+                return False,"PROVIDES_AS_INVALID:"+instance_id
+            effect=str(item.get("effect") or "")
+            alias=str(item.get("as") or "")
+            if effect not in original_provides or not alias:
+                return False,"PROVIDES_AS_INVALID:"+instance_id
+            aliases.append(alias)
         target="grounded.clause.%d.satisfied" % int(cap.get("clause_index"))
-        expected_provides=list(dict.fromkeys(original+[target]))
+        expected_provides=list(dict.fromkeys(original_provides+[target]+aliases))
         if list(cap.get("provides") or [])!=expected_provides:
             return False,"PROVIDES_MISMATCH:"+instance_id
+
+        clause_index=int(cap.get("clause_index"))
+        if clause_index<0 or clause_index>=len(grounding_clauses):
+            return False,"CLAUSE_INDEX_INVALID:"+instance_id
+        ok,reason=_validate_declared_bindings(
+            str((grounding_clauses[clause_index] or {}).get("text") or ""),
+            instance_id,
+            entry,
+            inputs,
+        )
+        if not ok:
+            return False,reason
         if float(cap.get("cost",0))!=float(entry.get("cost",1)):
             return False,"COST_MISMATCH:"+instance_id
         if list(cap.get("result_fields") or [])!=[str(x) for x in (entry.get("result_fields") or [])]:
@@ -97,6 +213,29 @@ def verify(goal,composition,grounding,registry):
         cap_by_id[instance_id]=cap
         all_requires.update(cap["requires"])
         all_provides.update(cap["provides"])
+
+    effect_providers={}
+    for provider in caps:
+        for effect in provider.get("provides") or []:
+            effect_providers.setdefault(str(effect),[]).append(provider)
+    for consumer in caps:
+        consumer_id=str(consumer.get("id") or "")
+        for effect,field in _effect_refs(consumer.get("inputs") or {}):
+            if not effect or not field:
+                return False,"EFFECT_RESULT_REF_INVALID:"+consumer_id
+            if effect not in set(str(x) for x in (consumer.get("requires") or [])):
+                return False,"EFFECT_RESULT_NOT_REQUIRED:"+consumer_id+":"+effect
+            providers=[
+                x for x in effect_providers.get(effect,[])
+                if str(x.get("id") or "")!=consumer_id
+            ]
+            if not providers:
+                return False,"EFFECT_RESULT_PROVIDER_MISSING:"+consumer_id+":"+effect
+            provider_clauses={int(x.get("clause_index")) for x in providers}
+            if len(provider_clauses)>1:
+                return False,"EFFECT_RESULT_PROVIDER_AMBIGUOUS_ACROSS_CLAUSES:"+consumer_id+":"+effect
+            if any(field not in set(str(y) for y in (x.get("result_fields") or [])) for x in providers):
+                return False,"EFFECT_RESULT_FIELD_UNDECLARED:"+consumer_id+":"+field
 
     expected_targets=[]
     for index,(record,gclause) in enumerate(zip(clauses,grounding_clauses)):
@@ -130,8 +269,15 @@ def verify(goal,composition,grounding,registry):
                 return False,"AMBIGUITY_NOT_EFFECT_EQUIVALENT:%d" % index
             if sorted(record.get("common_candidate_effects") or [])!=sorted(common):
                 return False,"COMMON_EFFECTS_MISMATCH:%d" % index
+            if sorted(record.get("provider_slot_effects") or [])!=sorted(common):
+                return False,"PROVIDER_SLOT_EFFECTS_MISMATCH:%d" % index
             if record.get("ambiguity_preserved") is not True or len(instance_ids)<2:
                 return False,"AMBIGUITY_NOT_PRESERVED:%d" % index
+        else:
+            source_entry=registry[sources[0]]
+            expected_slots=[str(x) for x in (source_entry.get("provides") or [])]
+            if list(record.get("provider_slot_effects") or [])!=expected_slots:
+                return False,"PROVIDER_SLOT_EFFECTS_MISMATCH:%d" % index
 
     if list(problem.get("target_effects") or [])!=expected_targets:
         return False,"TARGET_SET_MISMATCH"
