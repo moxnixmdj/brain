@@ -1,0 +1,300 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-PROVENANCE-RELEVANT-EVIDENCE-EXTRACTION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and independently qualify narrow provenance-bound objective-relevant visible-text evidence extraction, advancing only to relation evaluation with zero parent promotion credit and no spent parent replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current canonical frontier after PR415",
+    "closed Brain PR416 and its exact-base/ROR-gate falsification comment",
+    "public carrier PR153 single-fetch extraction challenger",
+    "qualified retrieval provenance and strict relevance primitives",
+    "Beautiful Soup 4.15.0, Trafilatura 2.2.0, readability-lxml 0.9, Python stdlib HTMLParser"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exact producer bytes independently pass fresh cross-domain public qualification for provenance-bound fresh-page relevance plus hashed visible-text extraction, fail-closed adversarial cases pass, ASTRA advances only to relation evaluation, and canonical parent/score credit remains zero without replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "8c4d76e62cee474fc97844d59c12aa907b7ba44f",
+    "real_outcome": "Extract auditably provenance-bound objective-relevant visible-text evidence units from a live retrieval-provenance source without requiring ROR authority or model cognition.",
+    "required_capability": "MODEL_INDEPENDENT_PROVENANCE_RELEVANT_EVIDENCE_UNIT_EXTRACTION_V1",
+    "obs_goal": {
+      "real_outcome": "Extract auditably provenance-bound objective-relevant visible-text evidence units from a live retrieval-provenance source without requiring ROR authority or model cognition.",
+      "proxy_goals_deleted": [
+        "make ROR authority a universal evidence gate",
+        "prove support or contradiction during extraction",
+        "prove factual correctness during extraction",
+        "prove evidence sufficiency during extraction",
+        "replay a spent parent task"
+      ],
+      "surviving_necessity": "A relevance-admitted research path still needs concrete source text units with reproducible provenance before relation evaluation can operate."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "source_candidate_provenance_verify",
+        "first_party_objective_relevance_verify",
+        "objective_relevance_bm25",
+        "closed PR416 visible-block/hash/offset candidate",
+        "public carrier PR153 single-fetch sentence extractor"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib html.parser.HTMLParser",
+        "Beautiful Soup 4.15.0",
+        "Trafilatura 2.2.0",
+        "readability-lxml 0.9"
+      ],
+      "capability_work_deleted": [
+        "No model/embedding relevance judge",
+        "No universal ROR requirement",
+        "No content-extraction package installation",
+        "No claim relation or correctness inference"
+      ],
+      "surviving_gap": "No independently qualified generic extraction primitive currently turns retrieval-provenance source bytes into hashed objective-grounded visible-text units while preserving relation/correctness/sufficiency as separate gates."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic research evidence-grounding seam; authority identity is path-specific and not intrinsically required for extraction.",
+      "delete_bypass_substitute_options": [
+        "Delete extraction rejected because downstream relation evaluation needs auditable source text.",
+        "Bypass via search snippets rejected because snippets are not fresh source-page evidence.",
+        "Reuse PR416 code only partially: visible-block/hash/offset machinery survives, universal ROR prerequisite is deleted.",
+        "Single-fetch PR153 challenger is faster but couples extraction to the ROR-bound relevance implementation and admits one-token units.",
+        "Third-party content extractors are capable but add dependencies and heuristic transformations unnecessary for narrow verbatim grounding."
+      ],
+      "surviving_causal_blocker": "Need fresh same-provenance retrieval, strict page-level objective relevance, and bounded hash/offset-backed visible-text unit extraction."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "PYTHON_STDLIB_PROVENANCE_FETCH_PLUS_STRICT_PAGE_RELEVANCE_PLUS_VISIBLE_BLOCK_HASH_OFFSETS",
+        "PR153_SINGLE_FETCH_ROR_RELEVANCE_PLUS_SENTENCE_EXTRACTION",
+        "BEAUTIFULSOUP_VISIBLE_BLOCK_EXTRACTION",
+        "TRAFILATURA_MAIN_CONTENT_EXTRACTION",
+        "READABILITY_LXML_MAIN_CONTENT_EXTRACTION"
+      ],
+      "losing_routes_reason": "The stdlib route has no new runtime dependency, preserves auditable normalized blocks and source hashes directly, and can qualify cross-domain at $0. PR153 retains a hidden ROR path and looser one-token units. Beautiful Soup, Trafilatura, and readability add dependency/preflight cost or heuristic content transformations without strengthening the narrow extraction claim.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independently re-fetch fresh public pages on multiple domains, verify exact producer blob, recompute hashes/normalized visible text, require each emitted unit to appear in independently parsed source text, and run redirect/relevance/noise negative controls."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "closed PR416 universal-ROR extraction lane",
+        "any future extraction gate equating authority identity with extractability"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "fresh-page bounded lexical relevance check for extraction admission",
+        "normalized visible-block extraction",
+        "page/unit hash provenance and offsets"
+      ],
+      "fresh_reuse_plan": "Qualify identical producer bytes on at least two materially different live domains, including at least one route that does not depend on ROR identity for admission."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reuse current source discovery/provenance schema",
+        "reuse discriminative objective-token policy from qualified relevance work",
+        "reuse public GitHub Actions carrier already live-qualified this hour"
+      ],
+      "search_stop_decision": "Stdlib parsing, Beautiful Soup, Trafilatura, readability-lxml, and the existing PR153 challenger cover the plausible zero-cost extraction routes; none dominates stdlib for this narrow provenance-preserving claim.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Route frontier checked on 2026-09-30 and selected carrier preflight is backed by same-account successful live public qualification run 36678675368; refresh only after material failure or before parent promotion."
+    },
+    "routes_considered": [
+      "PYTHON_STDLIB_PROVENANCE_FETCH_PLUS_STRICT_PAGE_RELEVANCE_PLUS_VISIBLE_BLOCK_HASH_OFFSETS",
+      "PR153_SINGLE_FETCH_ROR_RELEVANCE_PLUS_SENTENCE_EXTRACTION",
+      "BEAUTIFULSOUP_VISIBLE_BLOCK_EXTRACTION",
+      "TRAFILATURA_MAIN_CONTENT_EXTRACTION",
+      "READABILITY_LXML_MAIN_CONTENT_EXTRACTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "UNIVERSAL_ROR_AUTHORITY_GATE_FOR_EXTRACTION",
+      "MODEL_BASED_EXTRACTION",
+      "SEARCH_SNIPPET_AS_EVIDENCE",
+      "THIRD_PARTY_CONTENT_EXTRACTOR_AS_REQUIRED_RUNTIME_DEPENDENCY"
+    ],
+    "selected_surviving_route": "PYTHON_STDLIB_PROVENANCE_FETCH_PLUS_STRICT_PAGE_RELEVANCE_PLUS_VISIBLE_BLOCK_HASH_OFFSETS",
+    "why_selected_route_is_fastest_sufficient": "It directly satisfies provenance, fresh relevance, bounded verbatim normalization, hash/offset auditability, fail-closed behavior, zero incremental spend, and model independence using already-present Python stdlib, while deleting an unnecessary authority gate and avoiding package installation.",
+    "expected_parent_level_state_change": "Acquire and independently qualify narrow provenance-bound objective-relevant visible-text evidence extraction, advancing only to relation evaluation with zero parent promotion credit and no spent parent replay.",
+    "stop_condition": "Stop after exact producer bytes independently pass fresh cross-domain public qualification for provenance-bound fresh-page relevance plus hashed visible-text extraction, fail-closed adversarial cases pass, ASTRA advances only to relation evaluation, and canonical parent/score credit remains zero without replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T06:42:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "NONE__CURRENT_CANONICAL_EXTRACTION_GAP_ACTIVE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical runtime provenance/relevance code on main",
+          "Brain PR416 closure: universal ROR extraction gate rejected",
+          "verification-capsule-runner PR153 extraction challenger"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/html.parser.html"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/project/beautifulsoup4/ 4.15.0",
+          "https://pypi.org/project/trafilatura/ 2.2.0",
+          "https://pypi.org/project/readability-lxml/ 0.9"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "public verification-capsule-runner PR153 as discovery/challenger sensor only"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic provenance bound visible text evidence extraction HTML objective relevance hashes offsets"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Beautiful Soup Trafilatura readability-lxml HTML text extraction"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python stdlib HTMLParser extract visible block text source hashes offsets"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 latest Beautiful Soup Trafilatura readability-lxml releases"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "PYTHON_STDLIB_PROVENANCE_FETCH_PLUS_STRICT_PAGE_RELEVANCE_PLUS_VISIBLE_BLOCK_HASH_OFFSETS",
+          "evidence": [
+            "Python 3.14 html.parser official documentation exposes HTMLParser callbacks for tags and data.",
+            "Existing Brain candidate code already demonstrates stdlib visible-block hashing/offset extraction."
+          ],
+          "qualification_evidence": [
+            "Python official html.parser documentation",
+            "same-account public runner live cross-domain qualification infrastructure run 36678675368"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Direct normalized visible-text extraction with explicit fail-closed source/relevance checks and deterministic hashes.",
+            "CAPABILITY_STRENGTH": "Sufficient for auditable evidence-unit grounding; deliberately not semantic relation evaluation.",
+            "WALL_CLOCK": "Minimal; no install or external parser startup.",
+            "INCREMENTAL_COST": "0 USD.",
+            "RELIABILITY": "Python stdlib only; fewer moving dependencies.",
+            "VERIFIABILITY": "High; emitted units/hashes can be independently recomputed from fresh pages."
+          }
+        },
+        {
+          "route": "TRAFILATURA_OR_READABILITY_MAIN_CONTENT_EXTRACTION",
+          "evidence": [
+            "Trafilatura 2.2.0 and readability-lxml 0.9 are current maintained text extraction packages."
+          ],
+          "qualification_evidence": [
+            "PyPI release metadata for trafilatura 2.2.0 and readability-lxml 0.9"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially better main-content isolation but introduces heuristic transformations beyond the narrow verbatim block claim.",
+            "CAPABILITY_STRENGTH": "Broader content extraction than required.",
+            "WALL_CLOCK": "Package install/import overhead and dependency preflight.",
+            "INCREMENTAL_COST": "0 USD but higher operational cost.",
+            "RELIABILITY": "Mature packages but additional dependency surface.",
+            "VERIFIABILITY": "Lower for exact normalized-unit provenance because content-selection heuristics add transformation."
+          }
+        }
+      ],
+      "negative_search_summary": "No current zero-cost route found that strengthens the narrow provenance-preserving evidence-unit claim enough to justify new dependencies or a universal authority gate.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "PYTHON_STDLIB_PROVENANCE_FETCH_PLUS_STRICT_PAGE_RELEVANCE_PLUS_VISIBLE_BLOCK_HASH_OFFSETS",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T06:42:00Z",
+        "max_age_hours": 2,
+        "selected_route": "PYTHON_STDLIB_PROVENANCE_FETCH_PLUS_STRICT_PAGE_RELEVANCE_PLUS_VISIBLE_BLOCK_HASH_OFFSETS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_UBUNTU_HARD_ZERO_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:31:00Z",
+            "evidence": [
+              "public verification run 36678675368 succeeded with exact-byte and live NIST/WHO network tests"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PYTHON_STDLIB_HTMLPARSER_URLLIB_HASHLIB",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:42:00Z",
+            "evidence": [
+              "Python 3.13 public runner from run 36678675368; html.parser/urllib/hashlib are stdlib"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
