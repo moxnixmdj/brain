@@ -90,5 +90,62 @@
   "repaired_scope": [
     "INPUT_CONTRACT_BINDABILITY_REQUIRED_FOR_SEMANTIC_GROUNDING",
     "UNPROVIDED_PREREQUISITES_REQUIRE_EXPLICIT_VERIFIED_INITIAL_FACTS"
-  ]
+  ],
+  "invocation_contract": {
+    "input": {
+      "goal": "plain consequential goal text",
+      "bound_registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "verified_initial_facts": "explicit list of facts independently established before composition"
+    },
+    "producer": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+    "verifier": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py",
+    "downstream_composer": "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+    "required_guarantees": [
+      "each resolved clause has at least one semantically justified input-bindable candidate",
+      "ambiguity remains explicit",
+      "unresolved clauses fail closed",
+      "externally required prerequisites are never manufactured as initial facts",
+      "no model dependency in credited cognition path"
+    ]
+  },
+  "deterministic_implementation": {
+    "repair_merge_commit": "08338df0cc989b092567f10ffd1dca6a7f37be65",
+    "producer_blob": "6385b469f1287c971217dcac58af2ffebd81f9fd",
+    "runtime_blob": "e23789745c053868d026f66f8c1258c0444b6552",
+    "composer_blob": "c19466687fd2d17e45dc6ba263b42301bed432d1",
+    "composer_verifier_blob": "ab9f6fc19937d23edb24dc26a2affed96cea0a9a"
+  },
+  "prerequisites": [
+    "bound capability registry is present and verified",
+    "every required external initial fact is explicitly supplied in verified_initial_facts",
+    "literal/action inputs are derivable from clause literals, proposal bindings, initial facts, or prior effects"
+  ],
+  "known_failure_modes": [
+    "no semantically justified candidate for a clause",
+    "candidate semantics match but action-template inputs cannot be bound",
+    "required external prerequisite is absent from verified_initial_facts",
+    "bounded ambiguity remains unresolved",
+    "registry/action template drift"
+  ],
+  "provenance": {
+    "original_acquisition": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+    "falsification": "canonical/capabilities/obsolescence/GROUNDING_INPUT_CONTRACT_FALSIFICATION_REQUESTS_REAL_TASK_20260930_V1.json",
+    "repair_pr": 261,
+    "exact_component_validation_run_id": 36651748631,
+    "requalification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_GROUNDING_REQUALIFICATION_UNIFIED_PLANNING_20260930_V1.json",
+    "requalification_run_id": 36652169397
+  },
+  "verification_method": {
+    "producer_independent": true,
+    "component": "independent structural verifier reconstructs grounding/composition contracts",
+    "real_effect": "independent live GitHub API refetch reconstructs expected repository identity consistency",
+    "exact_component_run_id": 36651748631,
+    "fresh_real_run_id": 36652169397
+  },
+  "performance": {
+    "incremental_spend_usd": 0,
+    "observed_public_requalification_run_wall_s_including_runner_setup": 13,
+    "note": "GitHub run timestamps 00:49:30Z to 00:49:43Z include checkout/setup/upload; capability-only latency was not separately isolated."
+  },
+  "fresh_reuse_evidence_status": "PRIOR_MATERIALLY_DISTINCT_QR_REUSE_PRESERVED_AS_HISTORICAL_EVIDENCE__AGGREGATE_FRESH_REUSE_COUNTER_NOT_RESTORED_IN_THIS_ACTION"
 }
