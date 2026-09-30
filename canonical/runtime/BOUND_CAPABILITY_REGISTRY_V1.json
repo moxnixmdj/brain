@@ -2944,7 +2944,10 @@
         ],
         "adapter_path": "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py"
       },
-      "incremental_spend_usd": 0
+      "incremental_spend_usd": 0,
+      "research_roles": [
+        "SOURCE_DISCOVERY"
+      ]
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
