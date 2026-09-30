@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "decision_id": "2026-09-30_SCOPED_SELF_VERIFICATION_RECOVERY_PROMOTION_V1",
+  "status": "CURRENT",
+  "real_objective": "Permanently own the existing fail-closed execution self-verification/recovery component without externalizing capability or inventing new cognition.",
+  "governing_invariants": [
+    "Promotion scope may not exceed direct evidence.",
+    "External models are not capability ownership.",
+    "Underlying capability invention is forbidden.",
+    "Knowledge remains external/JIT.",
+    "Hard incremental spend is $0."
+  ],
+  "material_premises": [
+    "Brain already owned the atomic admission guard, immutable ref store and frozen-pin verifier.",
+    "Fresh exact-current-byte adversarial verification passed all 13 checks.",
+    "Two verifier-harness defects were corrected without modifying the capability mechanism."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/OPUS55_SCOPED_SELF_VERIFICATION_RECOVERY_FRESH_VERIFICATION_V1.json"
+  ],
+  "conclusion": "Promote only the deterministic fail-closed execution verification/recovery component as Brain-owned. Keep general self-critique, debugging and arbitrary recovery open.",
+  "selected_route": "REUSE_EXISTING_BRAIN_ATOMIC_GUARD_AND_VERIFY_CURRENT_BYTES",
+  "rejected_material_alternatives": [
+    {
+      "route": "BUILD_NEW_SELF_VERIFICATION_SYSTEM",
+      "reason": "Existing Brain mechanism already implements the proven scope."
+    },
+    {
+      "route": "PROMOTE_WHOLE_FAMILY",
+      "reason": "Evidence does not establish semantic self-critique, general debugging or arbitrary recovery."
+    }
+  ],
+  "uncertainties": [
+    "No direct evidence yet for the remaining cognitive portions of the family."
+  ],
+  "assumptions": [
+    "The Opus family is decomposable into deterministic and cognitive subcomponents."
+  ],
+  "non_goals": [
+    "No whole-family promotion.",
+    "No external verifier model dependency."
+  ],
+  "next_action": "Reuse this owned component globally and acquire/verify the remaining cognitive self-critique/debugging/recovery mechanisms separately.",
+  "supersession_conditions": [
+    "Current guard bytes regress or stronger fresh evidence expands the scope."
+  ],
+  "supersedes": [
+    "Treating this deterministic component as merely unverified historical infrastructure."
+  ]
+}
