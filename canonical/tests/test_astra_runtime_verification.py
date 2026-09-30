@@ -111,5 +111,48 @@ class RuntimeVerificationTests(unittest.TestCase):
             with self.assertRaisesRegex(runtime.Blocker,"SUPERVISOR_BINDING_INCOMPLETE"):
                 runtime._supervisor_binding_from_env()
 
+    def test_model_independent_goal_stamps_zero_model_dependency(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            state=root/"state"
+            with mock.patch.object(runtime,"ROOT",root):
+                with mock.patch.object(runtime,"STATE_DIR",state):
+                    result=runtime.run_goal(
+                        {"controller_actions":[
+                            {"type":"finish","args":{"summary":"done"}}
+                        ]},
+                        {"goal":"test goal","mission_id":"COGNITION-PROVENANCE-TEST"},
+                    )
+        self.assertEqual(result["model_dependency_count"],0)
+        self.assertFalse(result["cognition_provenance"]["model_dependent"])
+        self.assertEqual(
+            result["cognition_provenance"]["cognition_source"],
+            "MODEL_INDEPENDENT_RUNTIME",
+        )
+
+    def test_optional_model_goal_stamps_model_dependency(self):
+        planner={
+            "text":'{"actions":[{"type":"finish","args":{"summary":"done"},"why":"done"}]}',
+            "model":"test-model",
+            "transport":"TEST_TRANSPORT",
+        }
+        with mock.patch.object(
+            runtime,"_compile_plain_goal",
+            side_effect=runtime.Blocker("FORCE_OPTIONAL_PLANNER"),
+        ):
+            with mock.patch.object(runtime,"_planner_post",return_value=planner):
+                result=runtime.run_goal(
+                    {"allow_optional_model_planner":True,"max_cycles":1},
+                    {"goal":"test goal"},
+                )
+        self.assertEqual(result["model_dependency_count"],1)
+        self.assertTrue(result["cognition_provenance"]["model_dependent"])
+        self.assertEqual(
+            result["cognition_provenance"]["cognition_source"],
+            "MODEL_ASSISTED",
+        )
+        self.assertEqual(result["cognition_provenance"]["planner_model"],"test-model")
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
