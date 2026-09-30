@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-METADATA-REFINED-PROVENANCE-CLASS-PRESERVATION-20260930-V1",
+  "status": "IMPLEMENTED_PENDING_GUARDED_INDEPENDENT_QUALIFICATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "action_kind": "GENERIC_SOURCE_PIPELINE_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPEN_RESEARCH_METADATA_REFINED_RETRIEVAL_DROPS_BIBLIOGRAPHIC_PROVENANCE_CANDIDATES_BEFORE_RELEVANCE",
+  "highest_leverage_now": true,
+  "evidence_presence_classification": "FRESH_PARENT_TASK_C_SPENT__PRIMARY_TERMINAL_ARTIFACT_INSPECTED__FIRST_GENERIC_GAP_EXACTLY_LOCALIZED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "candidate_blobs": {
+    "canonical/runtime/bound_capabilities/open_research_source_frontend.py": "5dec34c6cc8026ebdc5b914adbe982eb5939d77f",
+    "canonical/runtime/bound_capabilities/source_candidate_provenance_verify.py": "8f6f80403dc48268ecbf244ae633ea2928204148",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "31d3703b38dcec3215b77d1038e2521b1a89ea95",
+    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py": "81f73bca882d35603e5be43e8c40dd57e73ffce0",
+    "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py": "227877b9f7c80c8e810a1042a0bad5c0ed94577d",
+    "canonical/tests/test_metadata_refined_provenance_class_preservation.py": "4209219ab975426d6acf81747aebf9a1bae2fec2",
+    "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_GUARDED_FIRST_CAUSAL_GAP_20260930_V1.json": "0c98fbd1ff2d5f808885b655c2154e4f54fadf1c"
+  },
+  "prior_work_checked": [
+    "Brain main 71fbeb1e21683a165066c23b211781eee8fab61b",
+    "materials Task C spent/no-replay in guarded run 36698638943",
+    "terminal artifact 11089076913 proves refined discovery found a relevant bibliographic record but refined fallback excluded bibliographic provenance before relevance",
+    "PR529 already qualified the same provenance-class-preserving contract on the initial source path",
+    "existing identity-bound selected bibliographic materializer is reused unchanged",
+    "no open Brain PR owned this repair blocker at implementation start"
+  ],
+  "repair_contract": {
+    "refined_relevance_admission": "RETRIEVAL_PROVENANCE_VERIFIED_OR_BIBLIOGRAPHIC_PROVENANCE_VERIFIED",
+    "bibliographic_metadata_enrichment": "RECORD_TITLE_AND_PUBLISHER_BEFORE_DETERMINISTIC_RELEVANCE",
+    "refined_selected_materialization": "ONLY_REFINED_RELEVANCE_SELECTED_BIBLIOGRAPHIC_CANDIDATE",
+    "refinement_budget": 1,
+    "second_refinement_allowed": false,
+    "materialization_success_requirement": "RETRIEVAL_PROVENANCE_VERIFIED_BEFORE_EVIDENCE_EXTRACTION",
+    "failure_mode": "FAIL_CLOSED_WITHOUT_SILENT_WEAKER_SOURCE_FALLBACK",
+    "authority_upgrade": false,
+    "primary_source_upgrade": false,
+    "factual_correctness_upgrade": false,
+    "evidence_sufficiency_upgrade": false
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "71fbeb1e21683a165066c23b211781eee8fab61b",
+    "real_outcome": "Make the single bounded metadata-refined fallback preserve the same provenance classes as the already-qualified initial path.",
+    "selected_surviving_route": "REUSE_INITIAL_PATH_PROVENANCE_ADMISSION_AND_SELECTED_ONLY_MATERIALIZATION_CONTRACT_INSIDE_EXISTING_SINGLE_REFINEMENT",
+    "deleted_or_bypassed_paths": [
+      "MATERIALS_TASK_C_REPLAY",
+      "NEW_SEARCH_ENGINE",
+      "MODEL_RERANKER",
+      "SOURCE_WHITELIST",
+      "UNBOUNDED_RETRY",
+      "TASK_SPECIFIC_MATERIAL_LITERALS",
+      "NEW_MATERIALIZATION_PRIMITIVE"
+    ],
+    "why_selected_route_is_fastest_sufficient": "The missing capability already exists and is qualified on the initial path. The refined branch merely failed to reuse it.",
+    "verification_requirement": "Independent non-parent cross-domain qualification must prove refined bibliographic candidates compete in relevance, only the refined selected scholarly winner materializes, a failed refined materialization terminates without another discovery retry, and refined live-source behavior remains unchanged.",
+    "stop_rule": "FREEZE_EXACT_CANDIDATE__QUALIFY_ONCE__MERGE_ONLY_ON_GREEN__NO_PARENT_REPLAY"
+  },
+  "stop_condition": "Freeze the exact candidate SHA and independently guard-qualify it on non-parent cross-domain fixtures. Merge only on green. Never replay materials Task C."
+}
