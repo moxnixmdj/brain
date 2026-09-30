@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V7",
   "action_id": "COMPOSE-MINI-SWE-SUPERPOWERS-20260930-V1",
-  "status": "PROPOSED_ZERO_CREDIT_CONFIGURATION_INTEGRATION",
+  "status": "PROPOSED_CURRENT_BASE_ZERO_CREDIT_CONFIGURATION_INTEGRATION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
+  "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-  "causal_blocker": "OWNED_MINI_SWE_AND_SUPERPOWERS_NOT_YET_COMPOSED_INTO_ONE_EXECUTABLE_BRAIN_CONFIGURATION",
+  "causal_blocker": "AUTHORIZED_MINI_SWE_SUPERPOWERS_FRESH_EXECUTION_LACKS_ONE_DURABLE_COMPOSED_CONFIGURATION_PACKAGE",
   "action_kind": "BRAIN_OWNED_EXISTING_MECHANISM_COMPOSITION_AND_CONFIGURATION",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::OWNED_MINI_SWE_AND_SUPERPOWERS_NOT_YET_COMPOSED_INTO_ONE_EXECUTABLE_BRAIN_CONFIGURATION",
-  "expected_parent_frontier_change": "ONE_BRAIN_OWNED_COMPOSED_ADVANCED_CODING_CONFIGURATION_EXISTS_AND_IS_READY_FOR_FRESH_VERIFICATION__ZERO_OPUS_CREDIT",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::AUTHORIZED_MINI_SWE_SUPERPOWERS_FRESH_EXECUTION_LACKS_ONE_DURABLE_COMPOSED_CONFIGURATION_PACKAGE",
+  "expected_parent_frontier_change": "INSTALL_ONE_DURABLE_EXACTLY_PINNED_COMPOSED_CONFIGURATION_FOR_THE_ALREADY_AUTHORIZED_PR576_FRESH_EXECUTION__ZERO_OPUS_CREDIT",
   "theory_invariants": {
     "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "knowledge_policy": "EXTERNAL_JIT",
@@ -48,18 +48,18 @@
       "provider_access_is_ownership": false
     },
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
-    "real_outcome": "Create one executable, durable Brain-owned advanced-coding configuration that combines the already-internalized near-bar mini-SWE harness with the already-internalized Superpowers verification/debugging discipline, without inventing a new coding method.",
-    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_GE_OPUS_5_5",
+    "canonical_base_commit": "9c74044a73ae73493862f6f49a2355346e525df2",
+    "real_outcome": "Materialize the exact route already authorized by merged PR576 as one durable, re-executable Brain-owned package before the fresh Terminal-Bench task is spent.",
+    "required_capability": "DURABLE_BRAIN_OWNED_MINI_SWE_SUPERPOWERS_COMPOSED_CONFIGURATION",
     "obs_goal": {
-      "real_outcome": "Move the coding frontier from two disconnected owned mechanisms to one reproducible configured route ready for fresh matched verification.",
+      "real_outcome": "Make PR576's authorized mini-SWE + Superpowers route a single exact-pinned Brain artifact that can be invoked without reconstructing configuration from chat.",
       "proxy_goals_deleted": [
-        "Invent a new coding agent",
-        "Continue Supreme task-specific repair loop",
-        "Internalize another large harness before testing current assets",
-        "Run a benchmark before the configuration exists"
+        "New route search",
+        "New coding methodology",
+        "Benchmark execution before package integrity",
+        "Duplicate execution lease"
       ],
-      "surviving_necessity": "A durable composed configuration is required before Brain can fairly test whether its owned route contributes enough to reach the Opus 5.5 coding bar."
+      "surviving_necessity": "PR576 authorizes the execution route, but durable one-package composition is still absent on current main."
     },
     "obs_capability": {
       "existing_inherited_routes_checked": [
@@ -83,15 +83,15 @@
       "surviving_gap": "The already-owned mini-SWE harness and Superpowers methodology are not yet packaged as one deterministic executable Brain configuration."
     },
     "obs_blocker": {
-      "intrinsic_or_path_specific": "Integration/configuration gap, not a missing underlying coding capability mechanism.",
+      "intrinsic_or_path_specific": "Configuration packaging gap only; the underlying harness, methodology, execution lease, task and verifier already exist.",
       "delete_bypass_substitute_options": [
-        "Delete new-method design",
-        "Bypass re-internalization of existing pins",
-        "Reuse exact mini-SWE harness",
-        "Reuse exact Superpowers skills",
-        "Compose before any new supplier search"
+        "Delete new supplier search",
+        "Bypass harness fork",
+        "Reuse exact mini-SWE",
+        "Reuse exact Superpowers",
+        "Compose via native recursive config overlay"
       ],
-      "surviving_causal_blocker": "OWNED_MINI_SWE_AND_SUPERPOWERS_NOT_YET_COMPOSED_INTO_ONE_EXECUTABLE_BRAIN_CONFIGURATION"
+      "surviving_causal_blocker": "AUTHORIZED_MINI_SWE_SUPERPOWERS_FRESH_EXECUTION_LACKS_ONE_DURABLE_COMPOSED_CONFIGURATION_PACKAGE"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -104,271 +104,55 @@
         "INTEGRATE"
       ],
       "routes_ranked": [
-        "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
-        "SUPERPOWERS_ONLY",
-        "INTERNALIZE_OPENHANDS_FIRST",
-        "CONTINUE_SUPREME_REPAIR_LOOP"
+        "INSTALL_DETERMINISTIC_OVERLAY_PACKAGE_FOR_PR576_ROUTE",
+        "EXECUTE_PR576_WITH_CHAT_ONLY_RECONSTRUCTION",
+        "FORK_MINI_SWE_AGENT"
       ],
-      "losing_routes_reason": "The selected route reuses both owned mechanisms, adds only deterministic configuration glue, and is the shortest path to a falsifiable fresh evaluation.",
+      "losing_routes_reason": "Chat-only reconstruction is not durable ownership; forking mini-SWE changes more code than the native recursive-config seam requires.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "First verify exact package pinning and deterministic overlay materialization; then the next action must use a fresh contamination-controlled coding task with an independent verifier. Package verification itself earns zero Opus credit."
+      "synthetic_verification_necessity": "Run the package verifier only. It checks exact component blob pins and deterministic overlay materialization without consuming the frozen benchmark task."
     },
     "obs_inherited_system": {
       "downstream_work_to_delete_or_supersede": [
-        "Superpowers-only as exclusive candidate",
-        "Supreme task-specific repair continuation",
-        "duplicate coding harness internalization before composed-route falsification"
+        "Any manual reconstruction of Superpowers text for PR576 execution"
       ],
       "adjacent_capabilities_absorbed": [
-        "mini-SWE control loop",
-        "Superpowers planning/TDD/debugging/review/verification discipline",
-        "Brain fail-closed completion policy"
+        "mini-SWE 2.4.6 control loop",
+        "Superpowers 6.4.2 skill corpus",
+        "Brain fail-closed completion gate"
       ],
-      "fresh_reuse_plan": "After package qualification, run one fresh contamination-controlled composed-route task on an approved zero-incremental general cognition substrate; on pass proceed to staged matched evaluation, on fail preserve first causal gap and reopen route race."
+      "fresh_reuse_plan": "After package qualification and merge, execute the already-authorized PR576 frozen task exactly once. This package PR earns zero capability credit."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
-        "Reuse canonical Supreme falsification",
-        "Reuse exact internalization manifests",
-        "Reuse existing Superpowers evaluation bar",
-        "Reuse current release checks"
+        "Reuse PR576 current route selection and fresh-task lease",
+        "Reuse PR574 V6 control-plane validation",
+        "Reuse current release/challenger checks already completed before package creation"
       ],
-      "search_stop_decision": "Current route is adequate to answer the next material question; further harness discovery cannot beat composing already-owned assets enough to justify delay.",
+      "search_stop_decision": "No new route decision is being made; this action only durably packages the already-selected route. Further supplier search cannot affect package necessity.",
       "affected_layers_only_on_revalidation": true
     },
     "routes_considered": [
-      "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
-      "BRAIN_OWNED_SUPERPOWERS_ONLY",
-      "BRAIN_OWNED_SUPREME_C062BEC",
-      "INTERNALIZE_OPENHANDS_1_24_0_BEFORE_TESTING_CURRENT_COMPOSITION",
-      "USE_EXTERNAL_CLAUDE_AS_CAPABILITY"
+      "INSTALL_DETERMINISTIC_OVERLAY_PACKAGE_FOR_PR576_ROUTE",
+      "CHAT_ONLY_RECONSTRUCTION",
+      "FORK_MINI_SWE_AGENT"
     ],
     "deleted_or_bypassed_paths": [
-      "NEW_CODING_METHOD",
-      "SUPREME_TASK_REPAIR_LOOP",
-      "NEW_HARNESS_INTERNALIZATION_BEFORE_CURRENT_ROUTE_TEST",
-      "OPAQUE_PROVIDER_OWNERSHIP"
+      "NEW_ROUTE_SEARCH",
+      "CHAT_ONLY_CAPABILITY_RECONSTRUCTION",
+      "MINI_SWE_FORK"
     ],
-    "selected_surviving_route": "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
-    "why_selected_route_is_fastest_sufficient": "Both mechanisms are already durably owned and pinned. The mini-SWE CLI natively supports recursive configuration, so a deterministic overlay is sufficient to compose them without modifying either mechanism.",
-    "expected_parent_level_state_change": "ONE_BRAIN_OWNED_COMPOSED_ADVANCED_CODING_CONFIGURATION_EXISTS_AND_IS_PACKAGE_QUALIFIABLE__ZERO_OPUS_CREDIT_UNTIL_FRESH_VERIFIED_EXECUTION",
-    "stop_condition": "STOP_AFTER_COMPOSED_PACKAGE_IS_DURABLE_AND_EXACTLY_QUALIFIED__DO_NOT_CLAIM_OPUS_OWNERSHIP__NEXT_ACTION_IS_FRESH_CONTAMINATION_CONTROLLED_EXECUTION",
+    "selected_surviving_route": "INSTALL_DETERMINISTIC_OVERLAY_PACKAGE_FOR_PR576_ROUTE",
+    "why_selected_route_is_fastest_sufficient": "PR576 already selected the route. mini-SWE natively supports recursive configuration, so an exact-pinned overlay package is the smallest durable integration.",
+    "expected_parent_level_state_change": "INSTALL_ONE_DURABLE_EXACTLY_PINNED_COMPOSED_CONFIGURATION_FOR_THE_ALREADY_AUTHORIZED_PR576_FRESH_EXECUTION__ZERO_OPUS_CREDIT",
+    "stop_condition": "STOP_AFTER_EXACT_PACKAGE_QUALIFICATION_AND_MERGE__ZERO_OPUS_CREDIT__THEN_EXECUTE_PR576_TASK_ONCE",
     "route_frontier": {
-      "discovery_required": true,
-      "checked_at_utc": "2026-09-30T20:49:00Z",
-      "max_age_hours": 24,
-      "incumbent_route": "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
-      "source_classes_checked": [
-        "BRAIN_INHERITED",
-        "OFFICIAL_PRIMARY",
-        "CODE_OR_PACKAGE_REGISTRY",
-        "BROAD_WEB_OR_COMMUNITY"
-      ],
-      "source_evidence": {
-        "BRAIN_INHERITED": [
-          "Canonical main b9494a243e8ef9e42440f3c0e9765008cbb8cf78 selects Brain-owned mini-SWE+Superpowers composition after V6 OBS synchronization.",
-          "mini-SWE-agent 2.4.6 is fully vendored with exact upstream blob identity and records matched GPT-6 Astra 59.09% vs Opus 5.5 59.60%.",
-          "Superpowers 6.4.2 is fully internalized; Supreme route was falsified for advancement on fresh uncontaminated TB4 evidence."
-        ],
-        "OFFICIAL_PRIMARY": [
-          "Anthropic Opus 5.5 published Terminal-Bench 4.0 xhigh system result: 66.4%; FrontierCode 54.4%; CursorBench 57.8%.",
-          "obra/superpowers official GitHub releases reports v6.4.2 as latest on 2026-09-25.",
-          "SWE-agent/mini-swe-agent official GitHub releases reports v2.4.6 as latest."
-        ],
-        "CODE_OR_PACKAGE_REGISTRY": [
-          "OpenHands current official GitHub release 1.24.0 dated 2026-09-25.",
-          "No newly released mini-SWE or Superpowers version supersedes the exact Brain-owned pins."
-        ],
-        "BROAD_WEB_OR_COMMUNITY": [
-          "Recent public harness-design discussion continues to identify mini-SWE-agent as a strong simple benchmark harness and emphasizes that harness effects matter.",
-          "No community signal alone is used to qualify or disqualify a route."
-        ]
-      },
-      "query_families": [
-        {
-          "intent": "CAPABILITY_VECTOR",
-          "query": "current Opus 5.5 Terminal-Bench 4.0 and matched independent mini-SWE result"
-        },
-        {
-          "intent": "SUPPLIER_OR_PRODUCT",
-          "query": "latest mini-SWE-agent and Superpowers releases"
-        },
-        {
-          "intent": "IMPLEMENTATION_FORM",
-          "query": "current open-source coding-agent harness alternatives including OpenHands/SWE-agent"
-        },
-        {
-          "intent": "RECENCY_OR_NEW_RELEASE",
-          "query": "September 2026 coding-agent harness releases and leaderboard changes"
-        }
-      ],
-      "challenger_routes": [
-        {
-          "route": "BRAIN_OWNED_SUPERPOWERS_ONLY",
-          "evidence": [
-            "Already internalized; direct semantic verification passed; whole Opus 5.5 coding bar remains unproven."
-          ],
-          "qualification_evidence": [
-            "Canonical Superpowers manifest and evaluation protocol on current main."
-          ],
-          "qualification_evidence_classes": [
-            "BRAIN_INHERITED"
-          ],
-          "resolution": "NON_DOMINATING",
-          "comparison": {
-            "CORRECTNESS": "Valid methodology component but lacks the near-bar harness scaffold already owned by Brain.",
-            "CAPABILITY_STRENGTH": "Narrower than composition because composition strictly reuses it plus mini-SWE.",
-            "WALL_CLOCK": "Composition is one deterministic overlay step.",
-            "INCREMENTAL_COST": "Both $0 configuration work.",
-            "RELIABILITY": "Composition retains Superpowers verification discipline.",
-            "VERIFIABILITY": "Composition has clearer matched harness evidence."
-          }
-        },
-        {
-          "route": "BRAIN_OWNED_SUPREME_C062BEC",
-          "evidence": [
-            "Fresh uncontaminated bun-sourcemap-leak preflight produced reward 0 after self-test pass."
-          ],
-          "qualification_evidence": [
-            "Canonical Supreme falsification evidence preserved on main."
-          ],
-          "qualification_evidence_classes": [
-            "INDEPENDENT_VERIFIER",
-            "BRAIN_INHERITED"
-          ],
-          "resolution": "DISQUALIFIED",
-          "comparison": {
-            "CORRECTNESS": "Falsified for route advancement.",
-            "CAPABILITY_STRENGTH": "Did not clear preflight.",
-            "WALL_CLOCK": "Continuing would be a task-specific repair loop.",
-            "INCREMENTAL_COST": "Potentially $0 but causally dominated.",
-            "RELIABILITY": "Two behavioral failures and one contamination burn preserved.",
-            "VERIFIABILITY": "Independent verifier already produced falsification."
-          }
-        },
-        {
-          "route": "INTERNALIZE_OPENHANDS_1_24_0_BEFORE_TESTING_CURRENT_COMPOSITION",
-          "evidence": [
-            "OpenHands 1.24.0 is current and capable, but no matched current evidence was found that it dominates the already-owned near-bar mini-SWE harness for this specific Opus-bar question."
-          ],
-          "qualification_evidence": [
-            "Official OpenHands release metadata."
-          ],
-          "qualification_evidence_classes": [
-            "OFFICIAL_PRIMARY",
-            "CODE_OR_PACKAGE_REGISTRY"
-          ],
-          "resolution": "NON_DOMINATING",
-          "comparison": {
-            "CORRECTNESS": "Plausible challenger, not proven stronger for the target matched evaluation.",
-            "CAPABILITY_STRENGTH": "Broad platform; superiority over current route unproven.",
-            "WALL_CLOCK": "Substantially larger internalization/integration surface before any answer.",
-            "INCREMENTAL_COST": "Code is open-source, but integration cost is larger.",
-            "RELIABILITY": "Mature but adds more moving parts.",
-            "VERIFIABILITY": "Current route can be verified immediately after composition."
-          }
-        },
-        {
-          "route": "USE_CLAUDE_SONNET_5_5_OR_OPUS_5_5_AS_THE_CODING_CAPABILITY",
-          "evidence": [
-            "External models show strong Terminal-Bench results including Sonnet 5.5 70.6 and Opus 5.5 66.4 vendor-reported."
-          ],
-          "qualification_evidence": [
-            "Anthropic published benchmark table."
-          ],
-          "qualification_evidence_classes": [
-            "OFFICIAL_PRIMARY"
-          ],
-          "resolution": "DISQUALIFIED",
-          "comparison": {
-            "CORRECTNESS": "Would demonstrate provider capability, not Brain ownership.",
-            "CAPABILITY_STRENGTH": "Strong specimen only.",
-            "WALL_CLOCK": "Fast but changes the question.",
-            "INCREMENTAL_COST": "Not guaranteed $0 incremental.",
-            "RELIABILITY": "External provider dependency.",
-            "VERIFIABILITY": "Cannot satisfy no-opaque-capability-provider ownership test."
-          }
-        }
-      ],
-      "unresolved_plausible_dominators": [],
-      "comparison_dimensions": [
-        "CORRECTNESS",
-        "CAPABILITY_STRENGTH",
-        "WALL_CLOCK",
-        "INCREMENTAL_COST",
-        "RELIABILITY",
-        "VERIFIABILITY"
-      ],
-      "selected_route": "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
-      "refresh_triggers": [
-        "BEFORE_EXPENSIVE_EXECUTION",
-        "AFTER_MATERIAL_ROUTE_FAILURE",
-        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
-        "BEFORE_SCARCE_GATE_SPEND"
-      ],
-      "negative_search_summary": "No currently evidenced Brain-ownable alternative dominates composing the already-owned near-bar mini-SWE harness with the already-owned Superpowers verification/debugging discipline before a fresh matched evaluation.",
-      "selected_route_preflight": {
-        "checked_at_utc": "2026-09-30T20:49:00Z",
-        "max_age_hours": 2,
-        "selected_route": "COMPOSE_EXISTING_BRAIN_OWNED_MINI_SWE_2_4_6_WITH_SUPERPOWERS_6_4_2_AND_FAIL_CLOSED_COMPLETION_GLUE",
-        "status": "READY",
-        "all_required_dependencies_ready": true,
-        "failed_dependencies": [],
-        "execution_dependencies": [
-          {
-            "dependency": "BRAIN_CANONICAL_MAIN_b9494a243e8ef9e42440f3c0e9765008cbb8cf78",
-            "kind": "CODE_ARTIFACT",
-            "required": true,
-            "volatility": "STATIC",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "evidence": [
-              "Exact current canonical main refreshed immediately before branch creation."
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE",
-              "BRAIN_INHERITED"
-            ],
-            "evidence_scope": "GLOBAL"
-          },
-          {
-            "dependency": "BRAIN_OWNED_MINI_SWE_AGENT_2_4_6",
-            "kind": "CODE_ARTIFACT",
-            "required": true,
-            "volatility": "STATIC",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "evidence": [
-              "76 vendored files; exact upstream identity preserved; base mini.yaml blob pinned."
-            ],
-            "evidence_classes": [
-              "BRAIN_INHERITED"
-            ],
-            "evidence_scope": "GLOBAL"
-          },
-          {
-            "dependency": "BRAIN_OWNED_SUPERPOWERS_6_4_2",
-            "kind": "CODE_ARTIFACT",
-            "required": true,
-            "volatility": "STATIC",
-            "scope": "GLOBAL",
-            "status": "READY",
-            "evidence": [
-              "13 operative skills and manifests pinned on current main; v6.4.2 remains latest official release."
-            ],
-            "evidence_classes": [
-              "BRAIN_INHERITED",
-              "OFFICIAL_PRIMARY"
-            ],
-            "evidence_scope": "GLOBAL"
-          }
-        ],
-        "execution_dependencies_complete": true
-      }
+      "discovery_required": false,
+      "not_applicable_reason": "Current action does not select an external capability route; merged PR576 already owns the current route decision. This PR only packages that exact selected route durably."
     }
   },
   "capability_credit": 0,
