@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "ACQUIRE-CLAIM-SPEC-OPERAND-BINDING-20260930-V2-CURRENTBASE",
-  "status": "PROPOSED_CURRENT_BASE_SUCCESSOR",
+  "status": "REVISED_AFTER_INDEPENDENT_FALSIFICATION__REQUALIFICATION_REQUIRED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "002e56d023b409f95eb6299158859997c7a33489",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -119,5 +119,20 @@
     "current registry and verified generic claim-relation producer unchanged from PR444 base",
     "global execution admission guard cutover commit 002e56d023b409f95eb6299158859997c7a33489 preserved",
     "no parent task execution authorized by this child qualification"
-  ]
+  ],
+  "independent_falsification": {
+    "public_runner_pr": 165,
+    "run_id": 36684436086,
+    "job_id": 109786923135,
+    "defects": [
+      "FULL_COVERAGE_ROLE_TIE_WAS_DISAMBIGUATED_BY_EVIDENCE_UNIT_BREVITY",
+      "UPPERCASE_SINGLE_LETTER_ENTITY_LABELS_WERE_DROPPED_AND_COULD_COLLAPSE_ROLES"
+    ],
+    "repair_scope": [
+      "ROLE_TIES_COMPARE_ONLY_SEMANTIC_OVERLAP_AND_COVERAGE_BEFORE_FAIL_CLOSED",
+      "UPPERCASE_NONINITIAL_SINGLE_CHARACTER_ENTITY_LABELS_RETAINED_AS_ANCHORS"
+    ],
+    "parent_task_replay": false,
+    "capability_credit": 0
+  }
 }
