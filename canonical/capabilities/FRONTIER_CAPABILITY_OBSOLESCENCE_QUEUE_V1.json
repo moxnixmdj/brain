@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
     "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "objective": "Unify direct compound-goal binding with the existing causal proposal-binding authority so effect_result provenance cannot be bypassed by path-recency heuristics.",
+    "objective": "Requalify the fully repaired model-independent grounded executable composition route on one fresh materially distinct real task with an independent oracle.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "DIRECT_COMPOUND_COMPILER_BYPASSES_PROPOSAL_BINDINGS_EFFECT_RESULT_AND_REBINDS_CAUSAL_INPUTS_BY_PATH_RECENCY",
-    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_FALSIFICATION_20260930_V1.json",
-    "repair_status": "REOPENED_BY_FRESH_POST_REPAIR_REQUALIFICATION_FAILURE",
-    "prohibition": "NO_PR277_REPLAY__NO_PATH_RECENCY_TUNING__NO_TASK_WORDING_PATCH__NO_MODEL__REUSE_EXISTING_PROPOSAL_BINDING_AUTHORITY",
-    "next_action": "RUN_AFFECTED_LAYER_OBS_TO_UNIFY_DIRECT_COMPOUND_COMPILER_WITH_EXISTING_PROPOSAL_BINDING_AUTHORITY__NO_PR277_REPLAY",
+    "exact_blocker": "FRESH_REAL_REQUALIFICATION_EVIDENCE_UNSPENT",
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DIRECT_COMPILER_BINDING_REPAIR_VALIDATION_20260930_V1.json",
+    "repair_status": "ALL_KNOWN_BINDING_SEAMS_REPAIRED__EXACT_PUBLIC_VALIDATION_PASS__CREDIT_WITHHELD",
+    "prohibition": "NO_PR267_REPLAY__NO_PR277_REPLAY__NO_MORE_REPAIR_OR_AUDIT_WITHOUT_NEW_FALSIFICATION__NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT__ONE_FRESH_TASK_ONLY",
+    "next_action": "RUN_ONE_FRESH_MATERIALLY_DISTINCT_MODEL_INDEPENDENT_COMPOSITION_REQUALIFICATION_TASK__NO_PR267_OR_PR277_REPLAY__INDEPENDENT_ORACLE",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -89,7 +89,8 @@
     "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "latest_post_promotion_falsification_run_id": 36653756561,
     "known_provider_backed_path_binding_violations": 0,
-    "latest_post_repair_requalification_run_id": 36656793034
+    "latest_post_repair_requalification_run_id": 36656793034,
+    "latest_direct_compiler_repair_validation_run_id": 36658401010
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
