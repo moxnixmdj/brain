@@ -1,0 +1,339 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FREEZE-FRESH-SPACE-CARGO-DOMINANT-BOTTLENECK-OPENENDED-PARENT-TASK-A-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED",
+  "action_kind": "FRESH_PARENT_GATE_FREEZE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_SPACE_CARGO_DOMINANT_BOTTLENECK_TASK_A::FRESH_PARENT_GATE_FREEZE",
+  "expected_parent_frontier_change": "Freeze one genuinely open-ended consequential space-systems parent Task A with no supplied source, authority, bottleneck class, formula, tool recipe, architecture answer, or expected answer; then execute exactly once and either obtain the first admissible parent pass or localize the next causal gap.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "live canonical main f0f87c981d77b552caa21844e6bcc7b83116f339",
+    "latest claim-spec/operand-binding child promotion and guarded public qualification",
+    "spent SQLite/HTTP2/climate/numerical parent tasks excluded from freshness",
+    "user's active high-throughput space-cargo program provides a real consequential task"
+  ],
+  "evidence_presence_classification": "CHILD_STACK_VERIFIED__FRESH_PARENT_VALIDATION_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after freeze admission. Physical execution requires a separate exact-base guarded execution intent and exactly one atomic launch; no same-task replay.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f0f87c981d77b552caa21844e6bcc7b83116f339",
+    "real_outcome": "Freeze an admissible genuinely open-ended real parent task that directly advances the user's 100M-tonnes/year Earth-to-LEO cargo program while testing the full inherited model-independent research stack.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Reality-test the full parent capability on a real useful space-systems question rather than another child benchmark.",
+      "proxy_goals_deleted": [
+        "new child benchmark",
+        "another cognition component without parent falsification",
+        "replay of spent HTTP2/SQLite/climate/numerical tasks",
+        "task-specific runtime patch"
+      ],
+      "surviving_necessity": "One fresh parent Task A is canonically required before further child acquisition."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "12 acquired model-independent child capabilities listed in live frontier queue",
+        "canonical ASTRA goal runtime",
+        "global execution guard",
+        "public verification runner"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub public standard runners",
+        "Robin multi-agent scientific discovery system",
+        "current frontier-model agent products discovered in broad web search"
+      ],
+      "capability_work_deleted": [
+        "No new runtime",
+        "No new source-specific extractor",
+        "No model planner",
+        "No local model",
+        "No custom space-cargo solver before parent execution"
+      ],
+      "surviving_gap": "Parent-level open-ended end-to-end behavior remains unverified despite the acquired child stack."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic evidence gap at parent capability level; no fresh admissible open-ended Task A has passed after the latest child promotion.",
+      "delete_bypass_substitute_options": [
+        "Delete further child work until parent falsifies it",
+        "Bypass benchmark construction and use real user mission",
+        "Substitute a new real space-systems parent task for spent tasks",
+        "Keep current model-independent stack as incumbent"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_GENUINELY_OPEN_ENDED_TASK_A_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "FRESH_REAL_SPACE_SYSTEMS_PARENT_TASK_ON_INHERITED_STACK",
+        "MODEL_BASED_SCIENTIFIC_AGENT",
+        "NEW_CHILD_REPAIR_WITHOUT_PARENT_FALSIFICATION",
+        "CUSTOM_SPACE_CARGO_SOLVER"
+      ],
+      "losing_routes_reason": "Model-based scientific agents violate credited model-independence; child repair is premature without a fresh parent failure; a custom cargo solver would leak task structure and expand machinery before the general route is tested.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Freeze only now. If producer completes, independently inspect producer-cited primary sources and recompute the decisive bound without importing producer modules; if it fails, preserve only the first causal blocker and do not replay."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any queued child repair not justified by the fresh parent result",
+        "Any task-specific cargo reasoning path supplied before execution"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Inherited source discovery",
+        "objective relevance",
+        "evidence extraction",
+        "claim binding",
+        "numeric relation execution",
+        "evidence-to-decision synthesis"
+      ],
+      "fresh_reuse_plan": "If Task A passes, freeze a materially different genuine open-ended Task B only after independent verification."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused current canonical parent-task contract",
+        "Reused current guarded public-runner route",
+        "Reused current child capability stack rather than re-evaluating each implementation"
+      ],
+      "search_stop_decision": "No zero-cost non-model challenger found that can replace the existing integrated stack faster than simply testing it on the canonically required fresh parent task; further search would delay the decisive evidence.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "FRESH_REAL_SPACE_SYSTEMS_PARENT_TASK_ON_INHERITED_STACK",
+      "ROBIN_OR_OTHER_MODEL_BASED_SCIENTIFIC_AGENT",
+      "NEW_CHILD_REPAIR_WITHOUT_PARENT_FALSIFICATION",
+      "CUSTOM_SPACE_CARGO_SOLVER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_PARENT_REPLAY",
+      "MODEL_COGNITION",
+      "NEW_CHILD_REPAIR_WITHOUT_PARENT_FALSIFICATION",
+      "CUSTOM_SPACE_CARGO_SOLVER_BEFORE_PARENT_TEST"
+    ],
+    "selected_surviving_route": "FRESH_REAL_SPACE_SYSTEMS_PARENT_TASK_ON_INHERITED_STACK",
+    "why_selected_route_is_fastest_sufficient": "The parent task is the exact canonical next proof, uses already-qualified zero-cost machinery, directly benefits the user's real project, and can expose the next missing primitive in one execution without adding infrastructure.",
+    "expected_parent_level_state_change": "Freeze one genuinely open-ended consequential space-systems parent Task A with no supplied source, authority, bottleneck class, formula, tool recipe, architecture answer, or expected answer; then execute exactly once and either obtain the first admissible parent pass or localize the next causal gap.",
+    "stop_condition": "Stop after freeze admission. Physical execution requires a separate exact-base guarded execution intent and exactly one atomic launch; no same-task replay.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T08:05:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "FRESH_REAL_SPACE_SYSTEMS_PARENT_TASK_ON_INHERITED_STACK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "live main f0f87c981d77b552caa21844e6bcc7b83116f339",
+          "12 acquired model-independent child capabilities in FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
+          "verification-capsule-runner Execution Guard Regression run 36686951789 SUCCESS"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub Docs: standard GitHub-hosted runners for public repositories are free and unlimited"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "GitHub repository search for deterministic/no-LLM autonomous scientific research returned no material dominating implementation"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026-09-30 capability-vector search for zero-cost autonomous scientific research",
+          "2026-09-30 supplier/product search for autonomous scientific discovery agents",
+          "2026-09-30 implementation-form search for deterministic/no-LLM research agents",
+          "2026-09-30 recency search for new autonomous research systems"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "zero cost autonomous research agent open source deterministic source discovery scientific reasoning"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "autonomous scientific discovery agent open source"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "scientific research agent no model deterministic"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "new release autonomous research agent open source 2026"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "FRESH_REAL_SPACE_SYSTEMS_PARENT_TASK_ON_INHERITED_STACK",
+          "evidence": [
+            "live Brain child stack",
+            "public guarded runner"
+          ],
+          "qualification_evidence": [
+            "run 36686951789 SUCCESS",
+            "canonical child promotion receipts"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly tests the exact target capability under current no-model cognition rules.",
+            "CAPABILITY_STRENGTH": "Exercises the integrated parent stack rather than a child seam.",
+            "WALL_CLOCK": "One fresh run is shorter than building or integrating another supplier.",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Existing guarded runner and model-independent stack are already qualified.",
+            "VERIFIABILITY": "Fail-closed first-gap semantics plus independent recomputation if complete."
+          }
+        },
+        {
+          "route": "MODEL_BASED_SCIENTIFIC_AGENT",
+          "evidence": [
+            "Nature 2026 multi-agent scientific discovery system; broad web current agent products"
+          ],
+          "qualification_evidence": [
+            "Nature peer-reviewed publication"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Potentially strong but does not satisfy model-independent credited route.",
+            "CAPABILITY_STRENGTH": "High scientific-agent breadth.",
+            "WALL_CLOCK": "Would require integration and still fail the independence criterion.",
+            "INCREMENTAL_COST": "Unknown/nonzero risk.",
+            "RELIABILITY": "External model/provider dependence.",
+            "VERIFIABILITY": "Possible, but supplier is the class being obsoleted."
+          }
+        },
+        {
+          "route": "CUSTOM_SPACE_CARGO_SOLVER",
+          "evidence": [
+            "No existing need proven by current parent frontier."
+          ],
+          "qualification_evidence": [
+            "Current canonical next action requires parent execution first."
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Could answer a narrower task but would not prove parent research capability.",
+            "CAPABILITY_STRENGTH": "Task-specific only.",
+            "WALL_CLOCK": "Higher build time.",
+            "INCREMENTAL_COST": "0 USD monetary but higher machinery.",
+            "RELIABILITY": "Unqualified new code.",
+            "VERIFIABILITY": "Good locally but wrong capability target."
+          }
+        }
+      ],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "selected_route": "FRESH_REAL_SPACE_SYSTEMS_PARENT_TASK_ON_INHERITED_STACK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "negative_search_summary": "No current zero-cost non-model external route was found that dominates the already-integrated Brain stack for the exact parent-capability proof. Current scientific-agent challengers are model-based and therefore cannot receive credited model-independent capability authority.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T08:05:00Z",
+        "max_age_hours": 2,
+        "selected_route": "FRESH_REAL_SPACE_SYSTEMS_PARENT_TASK_ON_INHERITED_STACK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "verification-capsule-runner public GitHub Actions carrier",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:59:40Z",
+            "evidence": [
+              "Execution Guard Regression run 36686951789 SUCCESS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "canonical ASTRA runtime and acquired child capability code on brain main",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T08:05:00Z",
+            "evidence": [
+              "brain main f0f87c981d77b552caa21844e6bcc7b83116f339",
+              "latest child promotion run 36686583882 PASS"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "Python runtime on public runner",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T07:59:40Z",
+            "evidence": [
+              "Execution Guard Regression run 36686951789 executed Python successfully"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
