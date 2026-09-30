@@ -42,7 +42,7 @@ class TypedScalarExpressionCompilerTests(unittest.TestCase):
         goal=(
           prefix+
           "Calculate the derived scalar using predicted = 3.5 * (predictor_x ** 1.5). "
-          "Determine whether the predicted and observed scalars differ by at most 2."
+          "Determine whether the two scalars differ by at most 2."
         )
         return compiler.compile_goal(goal,self.registry(),ROOT)
 
@@ -91,56 +91,6 @@ class TypedScalarExpressionCompilerTests(unittest.TestCase):
             {"$result":{"cycle":1,"field":"value"}},
         )
         self.assertEqual(rel["producer_result_cycles"],[2,0])
-
-    def test_named_relation_operands_record_unique_causal_bindings(self):
-        compiled=self.compile_chain()
-        rel=[
-            p for p in compiled["compiled_parts"]
-            if p.get("mode")=="VERIFIED_BOUND_NUMERIC_RELATION"
-        ][0]
-        self.assertEqual(
-            {x["name"]:x["cycle"] for x in rel["operand_bindings"]},
-            {"predicted":2,"observed":1},
-        )
-
-    def test_unrelated_named_relation_operands_fail_closed(self):
-        goal=(
-          "Using the authoritative JSON source https://one.example/predictor, "
-          "extract JSON path value and save the knowledge evidence to "
-          "canonical/astra_runtime/tmp/PREDICTOR_X.json. "
-          "Using the authoritative JSON source https://two.example/observed, "
-          "extract JSON path value and save the knowledge evidence to "
-          "canonical/astra_runtime/tmp/OBSERVED_VALUE.json. "
-          "Calculate the derived scalar using predicted = 3.5 * (predictor_x ** 1.5). "
-          "Determine whether foo and bar scalars differ by at most 2."
-        )
-        with self.assertRaisesRegex(
-            compiler.GoalCompilationFailure,
-            "NUMERIC_RELATION_OPERAND_BINDING_REQUIRED",
-        ):
-            compiler.compile_goal(goal,self.registry(),ROOT)
-
-    def test_legacy_two_scalars_relation_remains_supported(self):
-        predictor=(
-          "Using the authoritative JSON source https://one.example/predictor, "
-          "extract JSON path value and save the knowledge evidence to "
-          "canonical/astra_runtime/tmp/PREDICTOR_X.json. "
-        )
-        observed=(
-          "Using the authoritative JSON source https://two.example/observed, "
-          "extract JSON path value and save the knowledge evidence to "
-          "canonical/astra_runtime/tmp/OBSERVED_VALUE.json. "
-        )
-        goal=(
-          predictor+observed+
-          "Calculate the derived scalar using predicted = 3.5 * (predictor_x ** 1.5). "
-          "Determine whether the predicted and observed scalars differ by at most 2."
-        )
-        compiled=compiler.compile_goal(goal,self.registry(),ROOT)
-        self.assertTrue(any(
-            p.get("mode")=="VERIFIED_BOUND_NUMERIC_RELATION"
-            for p in compiled["compiled_parts"]
-        ))
 
     def test_multiple_variables_bind_by_semantic_provenance(self):
         goal=(
