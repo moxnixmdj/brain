@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_SCIENTIFIC_REAL_TASK_V1",
+  "task_id": "PARENT-CHEMISTRY-AMMONIUM-CHLORIDE-MASS-BALANCE-REAL-TASK-20260930-001",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "domain": "CHEMISTRY_STOICHIOMETRIC_MASS_BALANCE_QUANTITATIVE_REASONING",
+  "freshness_class": "FRESH_MATERIALLY_DIFFERENT_PARENT_TASK",
+  "source_task_replay": false,
+  "scientific_question": "Does the molecular-weight mass balance for NH3 + HCl -> NH4Cl agree with PubChem's official ammonium chloride molecular weight within 0.05 g/mol?",
+  "sources": {
+    "ammonia": {
+      "authority": "NIH PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ammonia/property/MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "units": "g/mol"
+    },
+    "hydrogen_chloride": {
+      "authority": "NIH PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydrogen%20chloride/property/MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "units": "g/mol"
+    },
+    "ammonium_chloride": {
+      "authority": "NIH PubChem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ammonium%20chloride/property/MolecularWeight/JSON",
+      "json_path": [
+        "PropertyTable",
+        "Properties",
+        0,
+        "MolecularWeight"
+      ],
+      "units": "g/mol"
+    }
+  },
+  "scientific_contract": {
+    "reaction": "NH3 + HCl -> NH4Cl",
+    "derived_rule": "predicted_product_mw = ammonia_mw + hydrogen_chloride_mw",
+    "comparison_threshold_g_mol": 0.05,
+    "relation_rule": "Evaluate whether abs(predicted_product_mw - official_ammonium_chloride_mw) <= 0.05",
+    "numeric_inputs_must_be_parsed_from_live_sources": true
+  },
+  "goal_text": "Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ammonia/property/MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_AMMONIA_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydrogen%20chloride/property/MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_HYDROGEN_CHLORIDE_MW.json. Using the authoritative JSON source https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ammonium%20chloride/property/MolecularWeight/JSON, extract JSON path PropertyTable.Properties.0.MolecularWeight and save the knowledge evidence to canonical/astra_runtime/tmp/PARENT_CHEMISTRY_AMMONIUM_CHLORIDE_MW.json. Calculate the predicted ammonium chloride molecular weight using predicted_product_mw = ammonia_mw + hydrogen_chloride_mw. Determine whether the predicted and official molecular weight scalars differ by at most 0.05.",
+  "required_result": {
+    "producer_result": "The final bounded numeric relation artifact emitted by the compiled controller plan.",
+    "required_fields": [
+      "left",
+      "right",
+      "threshold",
+      "absolute_difference",
+      "relation",
+      "predicate"
+    ],
+    "threshold": 0.05
+  },
+  "execution_constraints": {
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "no_frontier_model_cognition": true,
+    "no_task_specific_runtime_patch": true,
+    "exactly_one_execution": true,
+    "stop_on_first_causal_gap": true
+  },
+  "independent_oracle": {
+    "method": "Re-fetch all three exact PubChem URLs outside the Brain producer, independently parse MolecularWeight, compute ammonia + hydrogen chloride molecular weight, recompute absolute difference and <=0.05 predicate, and compare every consequential relation field.",
+    "producer_modules_must_not_be_imported": true,
+    "source_task_must_not_be_replayed": true
+  },
+  "expected_answer_precommitted": false,
+  "frozen_before_source_preflight": true
+}
