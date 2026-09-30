@@ -1,0 +1,184 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PARENT-ASTRONOMY-TO-TYPED-NUMERIC-EXPRESSION-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Replace the completed new-parent-task requirement with the first causal gap observed by the spent astronomy task: model-independent typed scalar numeric expression execution with multiplication/exponentiation; preserve no-replay and grant no parent capability credit.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main 43476b77a1314988183e3daed5f3f0d603f79877",
+    "PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001 frozen before source query",
+    "JPL schema-only source preflight run 36664734289 PASS after stale-index correction",
+    "one-shot parent run 36664896545 / job 109727357700 / artifact 11075578533",
+    "direct compiler compiled both authoritative scalar fetches then failed at Kepler multiplication/exponentiation clause",
+    "secondary public-mirror missing plain_goal_bound_grounding.py occurred only after semantic compiler failure and is not the causal parent blocker",
+    "EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION: SymPy 1.14.0 12/12 with independent Wolfram verification"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED__FIRST_CAUSAL_GAP_LOCALIZED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Preserve the astronomy task as spent, increment only residual_gaps_localized, update hierarchy/queue/pointer to the typed scalar numeric-expression gap, and stop. Do not replay astronomy, implement the child inside this reconciliation, or promote the parent capability.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "43476b77a1314988183e3daed5f3f0d603f79877",
+    "real_outcome": "Convert the spent astronomy one-shot into exact canonical failure evidence and select its first generic causal gap as the next frontier without replay or overclaim.",
+    "required_capability": "CANONICAL_PARENT_FAILURE_RECONCILIATION",
+    "obs_goal": {
+      "real_outcome": "Convert the spent astronomy one-shot into exact canonical failure evidence and select its first generic causal gap as the next frontier without replay or overclaim.",
+      "proxy_goals_deleted": [
+        "replay astronomy",
+        "credit a failed task as completed",
+        "repair the public mirror before localizing the already-observed semantic failure",
+        "implement SymPy inside the reconciliation"
+      ],
+      "surviving_necessity": "Reconcile the observed parent failure into the active frontier so subsequent child acquisition is causally authorized."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "astronomy frozen task",
+        "JPL preflight receipts",
+        "public one-shot report",
+        "current hierarchy/queue/pointer/scoreboard"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: immutable produced evidence is being reconciled; no execution supplier is selected."
+      ],
+      "capability_work_deleted": [
+        "No task replay",
+        "No child implementation",
+        "No model route",
+        "No capability credit"
+      ],
+      "surviving_gap": "Canonical frontier still says a new parent task is required although that task has now been spent and localized a typed numeric-expression gap."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical state lag after a fail-closed one-shot real task.",
+      "delete_bypass_substitute_options": [
+        "Ignore lag rejected because it would allow duplicate parent execution.",
+        "Replay rejected because task is spent.",
+        "Evidence reconciliation survives."
+      ],
+      "surviving_causal_blocker": "ACTIVE_FRONTIER_HAS_NOT_INGESTED_SPENT_ASTRONOMY_FAILURE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_EXISTING_ONE_SHOT_EVIDENCE",
+        "REPLAY_ASTRONOMY",
+        "START_UNRELATED_PARENT_TASK"
+      ],
+      "losing_routes_reason": "The one-shot already produced decisive causal evidence. Replay is forbidden and unrelated execution would skip the localized generic gap.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic task. Verify exact run/job/artifact identifiers, unchanged completed-task and capability counters, residual_gaps_localized +1 only, same parent target, and no-replay state."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__NEW_DIFFERENT_REAL_TASK_REQUIRED",
+        "any astronomy replay plan"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "fail-closed parent-task evidence localization"
+      ],
+      "fresh_reuse_plan": "After the numeric-expression child is independently acquired, return to a new materially different parent task. Astronomy remains spent."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse exact public run and artifact",
+        "Reuse preflight schema receipt",
+        "Do not rerun the task",
+        "Do not re-search suppliers during evidence reconciliation"
+      ],
+      "search_stop_decision": "The first causal semantic failure is explicit in the one-shot report; more search cannot alter the reconciliation fact.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External challenger discovery is inapplicable to immutable failure-evidence reconciliation."
+    },
+    "routes_considered": [
+      "RECONCILE_EXISTING_ONE_SHOT_EVIDENCE",
+      "REPLAY_ASTRONOMY",
+      "START_UNRELATED_PARENT_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPLAY_ASTRONOMY",
+      "START_UNRELATED_PARENT_TASK_BEFORE_GAP_RECONCILIATION"
+    ],
+    "selected_surviving_route": "RECONCILE_EXISTING_ONE_SHOT_EVIDENCE",
+    "why_selected_route_is_fastest_sufficient": "It changes no runtime, spends no additional task, and converts already-produced exact evidence directly into the next causal frontier.",
+    "expected_parent_level_state_change": "Replace the completed new-parent-task requirement with the first causal gap observed by the spent astronomy task: model-independent typed scalar numeric expression execution with multiplication/exponentiation; preserve no-replay and grant no parent capability credit.",
+    "stop_condition": "Preserve the astronomy task as spent, increment only residual_gaps_localized, update hierarchy/queue/pointer to the typed scalar numeric-expression gap, and stop. Do not replay astronomy, implement the child inside this reconciliation, or promote the parent capability.",
+    "route_frontier": {
+      "discovery_required": false,
+      "checked_at_utc": null,
+      "max_age_hours": null,
+      "incumbent_route": null,
+      "source_classes_checked": [],
+      "source_evidence": {},
+      "query_families": [],
+      "challenger_routes": [],
+      "unresolved_plausible_dominators": [],
+      "comparison_dimensions": [],
+      "selected_route": "RECONCILE_EXISTING_ONE_SHOT_EVIDENCE",
+      "refresh_triggers": [],
+      "negative_search_summary": "",
+      "not_applicable_reason": "RECONCILE_FRONTIER action over immutable already-produced evidence; no external capability route is executed.",
+      "selected_route_preflight": null
+    }
+  },
+  "frontier_reconciliation": {
+    "previous_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "new_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "relationship": "RESIDUAL_OF",
+    "evidence": [
+      "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json"
+    ]
+  },
+  "promotion_evidence": {
+    "claim_scope_exact": true,
+    "falsification_attempts": [
+      "One-shot task executed exactly once and fail-closed final gate rejected promotion; independent oracle did not execute because producer blocked before output."
+    ],
+    "cheap_falsification_not_available_reason": "",
+    "real_task_evidence_paths": [
+      "canonical/capabilities/obsolescence/PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_TERMINAL_RECONCILIATION_V1.json"
+    ],
+    "independent_verification_evidence_paths": [
+      "PUBLIC_RUN_36664896545_FAIL_CLOSED_ARTIFACT_11075578533"
+    ],
+    "capability_package_path": "",
+    "fresh_reuse_evidence_path": "",
+    "fresh_reuse_distinct_task": false,
+    "cross_domain_distinct": true,
+    "frontier_dependency_removed": false,
+    "target_frontier_supplier": "",
+    "producer_execution_suppliers": [
+      "PROJECT_BRAIN_MODEL_INDEPENDENT_RUNTIME",
+      "NASA_JPL_SBDB"
+    ],
+    "independent_verifier_suppliers": [
+      "FAIL_CLOSED_ORACLE_NOT_EXECUTED_BECAUSE_PRODUCER_BLOCKED"
+    ]
+  }
+}
