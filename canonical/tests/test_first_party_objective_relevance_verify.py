@@ -48,7 +48,7 @@ class Tests(unittest.TestCase):
     def test_partial_keyword_overlap_fails_closed(self):
         def fetch(url,timeout):
             return (
-              b"<html><title>Floating point overview</title><body>Floating point arithmetic reference without summation accuracy or cancellation analysis.</body></html>",
+              b"<html><title>Floating point overview</title><body>Floating point arithmetic reference and notation.</body></html>",
               "https://example.org/report","text/html",200
             )
         out=self.m.verify(
