@@ -1,0 +1,355 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PARENT-CLIMATE-MAUNA-LOA-CO2-OPEN-RESEARCH-TASK-A-20260930-002",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Either produce the first admissible genuinely open-ended, model-independent parent real Task A with autonomous decomposition and material source/tool discovery plus independent verification, or replace the broad scope blocker with the first specific causal gap. No parent promotion is authorized by this intent alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e after merged PR318 evidence-scope correction",
+    "PR318 revokes prewired structured tasks as admissible proof of the open-ended parent while preserving their supporting evidence",
+    "current parent minimum evidence requires genuine objective-only Task A with autonomous decomposition and material source/tool discovery",
+    "the frozen Mauna Loa climate objective supplies no authority/domain/source URL/dataset identifier/formula/action graph and has never been executed",
+    "current model-independent runtime and public $0 carrier remain the shortest direct falsification route"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute the frozen climate Task A exactly once on exact current Brain runtime bytes with model planning disabled. On producer success, independently verify producer-cited primary data and consequential calculations before Task-A adjudication. On failure, preserve only the earliest causal blocker, never replay the task, and recompute the frontier.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+    "real_outcome": "Directly test the first admissible genuinely open-ended parent Task A on the corrected current canonical scope.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire real evidence about the parent useful behavior, not merely another fixed-source calculator pass.",
+      "proxy_goals_deleted": [
+        "count a second pre-specified calculator task as broad open-ended research proof",
+        "run the frozen chemistry task merely to satisfy a two-task counter",
+        "build a planner before the current inherited stack is falsified",
+        "promote the parent from child capability counts"
+      ],
+      "surviving_necessity": "A genuinely open-ended real task is the shortest direct test of the parent behavior and will expose the first missing capability if the inherited stack is insufficient."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "deterministic compound goal compiler",
+        "plain-goal bound-capability grounding",
+        "grounded executable composition",
+        "domain-free authority identity/source discovery",
+        "bound browser capture",
+        "knowledge fetch/assessment/materialization",
+        "typed scalar numeric expression execution",
+        "bounded numeric relation execution",
+        "decision synthesis and independent verification",
+        "capability discovery/acquisition fallback"
+      ],
+      "external_existing_routes_checked": [
+        "Unified Planning 1.3.x classical planning framework",
+        "ProbLog 2.3.0 probabilistic logic programming",
+        "one-off hand-authored climate research script",
+        "frontier/nonfrontier model planner"
+      ],
+      "capability_work_deleted": [
+        "no new planner before real failure",
+        "no new search engine",
+        "no preselected NOAA/Scripps source",
+        "no preselected trend formula",
+        "no task-specific compiler rule",
+        "no model cognition"
+      ],
+      "surviving_gap": "Unknown until the genuinely open-ended task executes. Static evidence suggests the likely seam is broad-objective-to-research-plan/source/tool selection, but that is not granted authority before the real task."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Parent evidence/scope blocker: existing clean task evidence is model-independent but prewired and therefore does not directly exercise the defining open-ended research front half.",
+      "delete_bypass_substitute_options": [
+        "delete another prewired Task B as final proof",
+        "reuse current domain-free source-discovery and existing execution stack",
+        "bypass classical planner integration because semantic formalization is the unresolved part",
+        "reject model planner because producer must remain model-independent",
+        "execute the broad task before any repair"
+      ],
+      "surviving_causal_blocker": "PARENT_OPEN_ENDED_SCOPE_UNPROVEN__NO_ADMISSIBLE_MODEL_INDEPENDENT_OPEN_ENDED_REAL_TASK_A"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+        "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
+        "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
+        "USE_MODEL_PLANNER"
+      ],
+      "losing_routes_reason": "Direct execution gives decisive parent evidence or the first causal gap with zero implementation. Unified Planning and ProbLog operate on already-formalized problems and do not remove the broad natural-language semantic planning seam. A hand-authored plan destroys the capability test. Model planning violates the parent independence contract.",
+      "implementation_still_necessary": false,
+      "expected_parent_level_state_change": "Either produce the first admissible genuinely open-ended, model-independent parent real Task A with autonomous decomposition and material source/tool discovery plus independent verification, or replace the broad scope blocker with the first specific causal gap. No parent promotion is authorized by this intent alone."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. If producer completes, independently refetch producer-cited primary sources and recompute its declared quantitative method in a producer-independent Python verifier; if producer fails, preserve the first causal trace."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "frozen prewired chemistry task as immediate parent-proof route",
+        "second prewired calculator task as sufficient parent promotion evidence",
+        "premature general planner implementation"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "domain-free authority/source discovery",
+        "plain-goal grounding",
+        "executable composition",
+        "typed numerical computation",
+        "bounded relation evaluation",
+        "evidence synthesis and verification"
+      ],
+      "fresh_reuse_plan": "If Task A passes and is independently verified, run one materially different genuinely open-ended Task B using the inherited general route without task-specific rediscovery. If Task A fails, OBS only the first causal gap."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused PR301 model-independence audit",
+        "reused historical target-capability reality reconciliation",
+        "reused historical World Bank and PSF domain-free source-discovery proofs",
+        "reused current exact runner closure",
+        "checked current classical-planning/ProbLog challengers only to determine whether they remove semantic formalization"
+      ],
+      "search_stop_decision": "Stop route search and execute. The current inherited stack is already the only route that can answer whether the missing open-ended behavior exists without first implementing it; all remaining challengers either require a formalized problem, hand-author the answer path, or violate model independence.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Current Brain base, runner closure, inherited source-discovery route, and external planner/logic framework roles were refreshed before task execution."
+    },
+    "routes_considered": [
+      "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+      "INTEGRATE_UNIFIED_PLANNING_OR_PROBLOG_BEFORE_REAL_FAILURE",
+      "HAND_AUTHOR_CLIMATE_RESEARCH_PLAN",
+      "USE_MODEL_PLANNER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SECOND_PREWIRED_CALCULATOR_AS_PARENT_PROOF",
+      "PREEMPTIVE_GENERAL_PLANNER_BUILD",
+      "HAND_AUTHORED_CLIMATE_ACTION_GRAPH",
+      "MODEL_PLANNER",
+      "OLD_TASK_REPLAY"
+    ],
+    "selected_surviving_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+    "why_selected_route_is_fastest_sufficient": "It requires zero new implementation, directly tests the exact missing parent scope, and converts uncertainty into either verified real capability evidence or one precise causal gap.",
+    "expected_parent_level_state_change": "Either produce the first admissible genuinely open-ended, model-independent parent real Task A with autonomous decomposition and material source/tool discovery plus independent verification, or replace the broad scope blocker with the first specific causal gap. No parent promotion is authorized by this intent alone.",
+    "stop_condition": "Execute the frozen climate Task A exactly once on exact current Brain runtime bytes with model planning disabled. On producer success, independently verify producer-cited primary data and consequential calculations before Task-A adjudication. On failure, preserve only the earliest causal blocker, never replay the task, and recompute the frontier.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T04:30:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CURRENT_MODEL_INDEPENDENT_BRAIN_STACK",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "current main aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+          "current goal_compiler DETERMINISTIC_DOMAIN_FREE_AUTHORITY_SOURCE_PLAN",
+          "held-out World Bank and PSF authority/source discovery missions",
+          "TARGET_CAPABILITY_RECONCILIATION_V1 historical component gaps"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Unified Planning project/PyPI documentation describes a planning framework over formal planning problems",
+          "ProbLog project/PyPI documentation describes probabilistic logic programming"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "unified-planning 1.3.0 stable PyPI release; current 1.3.0 dev line available in 2026",
+          "ProbLog 2.3.0 PyPI release dated 2026-09-09"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No discovered non-model framework eliminates natural-language objective semantic formalization strongly enough to justify delaying direct real-task execution."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent open-ended technical research objective decomposition source tool selection"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Unified Planning ProbLog classical symbolic planning natural language objective"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "reuse existing domain-free authority discovery versus formal planner versus model planner"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 Unified Planning ProbLog current releases"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "CURRENT_MODEL_INDEPENDENT_BRAIN_STACK",
+          "evidence": [
+            "all required downstream child capabilities are already inherited",
+            "domain-free source discovery already exists",
+            "exact public carrier runtime closure is current"
+          ],
+          "qualification_evidence": [
+            "current canonical Brain",
+            "historical held-out source-discovery proofs",
+            "PR301 clean model-free integrated task"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Only direct real execution can prove whether the parent behavior currently exists.",
+            "CAPABILITY_STRENGTH": "Exercises broad objective interpretation, research planning, source/tool selection, quantitative work, synthesis, and verification.",
+            "WALL_CLOCK": "Zero implementation before evidence.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Fail-closed current runtime with exact-byte public carrier.",
+            "VERIFIABILITY": "First causal trace on failure; independent source/calculation oracle on success."
+          }
+        },
+        {
+          "route": "UNIFIED_PLANNING_OR_PROBLOG",
+          "evidence": [
+            "current maintained zero-cost planning/logic frameworks exist"
+          ],
+          "qualification_evidence": [
+            "official package registries"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can solve formalized planning/logic problems but does not itself derive the correct formalization from a novel research objective.",
+            "CAPABILITY_STRENGTH": "Useful downstream planning substrate, not sufficient parent behavior.",
+            "WALL_CLOCK": "Adds integration before proving it is causal.",
+            "INCREMENTAL_COST": "$0 monetary, nonzero integration/proof cost.",
+            "RELIABILITY": "Mature frameworks.",
+            "VERIFIABILITY": "Straightforward after a formal problem exists."
+          }
+        },
+        {
+          "route": "USE_MODEL_PLANNER",
+          "evidence": [
+            "runtime contains an optional model-planner path"
+          ],
+          "qualification_evidence": [
+            "current astra_runtime.py"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "REJECTED_BY_CONTRACT",
+          "comparison": {
+            "CORRECTNESS": "Potentially capable.",
+            "CAPABILITY_STRENGTH": "Broad.",
+            "WALL_CLOCK": "Immediate but invalid for the claimed model-independent capability.",
+            "INCREMENTAL_COST": "Not relevant; producer dependency violates proof contract.",
+            "RELIABILITY": "Not admissible.",
+            "VERIFIABILITY": "Circular for frontier-dependency removal."
+          }
+        }
+      ],
+      "negative_search_summary": "No current challenger justifies delaying direct real-task execution. Existing formal planners do not remove semantic formalization; model cognition is inadmissible.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T04:41:00Z",
+        "max_age_hours": 2,
+        "selected_route": "RUN_CURRENT_MODEL_INDEPENDENT_BRAIN_UNCHANGED_ON_FROZEN_OPEN_ENDED_CLIMATE_TASK",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:41:00Z",
+            "evidence": [
+              "DIRECT_PROBE: PR301 parent-task carrier execution completed on ubuntu-24.04"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "BRAIN_RUNTIME_MAIN_aa8f55bd9ead298ec0380bd9dbf45bc8d7c41a8e",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:41:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current main exact base; execution-critical runtime blobs match public runner main"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "MODEL_PLANNER_DISABLED",
+            "kind": "POLICY",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T04:41:00Z",
+            "evidence": [
+              "Execution capsule will set ASTRA_DISABLE_MODEL_PLANNER=1; task forbids model/local-model/model-artifact routes."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
