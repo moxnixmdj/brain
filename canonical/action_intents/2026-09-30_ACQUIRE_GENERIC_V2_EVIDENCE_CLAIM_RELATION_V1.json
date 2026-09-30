@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-GENERIC-V2-EVIDENCE-CLAIM-RELATION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "248cfb9c7e9cc9687efcddd11aa70a6923cad64e",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire only exact-text support and explicit numeric relations over integrity-checked generic V2 evidence units; preserve paraphrase, truth, sufficiency, causality, quality and independence as unverified; no parent replay or promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main 248cfb9c7e9cc9687efcddd11aa70a6923cad64e",
+    "generic extraction modern-container requalification run 36681368306",
+    "generic extractor producer blob fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+    "deferred PR421 bounded exact-support/numeric-relation behavior on obsolete narrow schema",
+    "verified numeric expression and decision synthesis capabilities"
+  ],
+  "evidence_presence_classification": "CAPABILITY_GAP_ACTIVE__GENERIC_V2_EXTRACTION_VERIFIED__PRIOR_BOUNDED_BEHAVIOR_REUSE_AVAILABLE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "parent_task_execution": false,
+  "parent_task_replay": false,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "stop_condition": "Exact adapter/test bytes must pass fail-closed regressions plus independent live end-to-end qualification using actual generic V2 extraction outputs from multiple domains. Promote only bounded exact support and explicit numeric relation semantics.",
+  "recursive_obs": {
+    "canonical_base_commit": "248cfb9c7e9cc9687efcddd11aa70a6923cad64e",
+    "real_outcome": "Bridge verified generic evidence units to auditable typed support/relation facts without semantic overclaim.",
+    "obs_goal": {
+      "real_outcome": "Verify exact normalized claim occurrence and evaluate explicit Decimal relations over caller-referenced literals.",
+      "proxy_goals_deleted": [
+        "semantic entailment",
+        "paraphrase matching",
+        "factual correctness",
+        "evidence sufficiency",
+        "new decision synthesizer",
+        "parent replay"
+      ],
+      "surviving_necessity": "Decision synthesis requires typed evidence; generic extraction currently stops before support/relation facts."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+        "MODEL_INDEPENDENT_TWO_SCALAR_NUMERIC_RELATION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_TYPED_SCALAR_NUMERIC_EXPRESSION_EXECUTION_V1",
+        "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+        "deferred PR421 behavior and public run 36680322787"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib decimal/re/hashlib for exact bounded admission and relation evaluation"
+      ],
+      "capability_work_deleted": [
+        "No model cognition",
+        "No embeddings",
+        "No paraphrase matcher",
+        "No new supplier",
+        "No decision-engine rewrite"
+      ],
+      "surviving_gap": "Bind exact support/relation semantics to generic V2 integrity-checked evidence-unit IDs."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic post-extraction evidence admission seam.",
+      "delete_bypass_substitute_options": [
+        "Direct decision synthesis rejected because input is not yet typed.",
+        "Relevance-equals-support rejected.",
+        "Prior bounded bridge semantics reused, but schema binding must move to V2 unit IDs."
+      ],
+      "surviving_causal_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+        "MATERIALIZE_LITERALS_THROUGH_CONTROLLER_NUMERIC_PATH",
+        "MODEL_SEMANTIC_JUDGE"
+      ],
+      "losing_routes_reason": "The bounded bridge is smaller and already behaviorally qualified; controller re-materialization adds glue without stronger immediate semantics; model judgment is circular.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run authored integrity/support/relation regressions, then produce real V2 evidence units live from SQLite and RFC Editor and independently rederive exact support plus Decimal relations without importing the bridge."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "deferred PR421 as active route",
+        "duplicate claim-judge implementations"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "generic evidence extraction",
+        "typed numeric computation",
+        "typed decision synthesis"
+      ],
+      "fresh_reuse_plan": "After promotion recompute parent frontier. If no earlier seam survives, freeze a materially different genuinely open-ended parent task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused deferred bounded behavior",
+        "reused current V2 extraction contract",
+        "reused exact current frontier"
+      ],
+      "search_stop_decision": "No external supplier can improve exact substring occurrence and explicit Decimal relation evaluation enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reopen only on material qualification failure or base change."
+    },
+    "selected_surviving_route": "REUSE_BOUNDED_EXACT_SUPPORT_AND_NUMERIC_RELATION_PATTERN_ON_V2_UNITS",
+    "why_selected_route_is_fastest_sufficient": "It changes only evidence references from the obsolete narrow schema to verified generic V2 unit IDs and keeps all broader semantic claims explicitly out of scope."
+  }
+}
