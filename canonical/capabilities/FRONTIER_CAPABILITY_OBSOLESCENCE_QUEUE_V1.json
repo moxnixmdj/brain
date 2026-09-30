@@ -71,13 +71,13 @@
   "immediate_frontier": {
     "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
     "parent_frontier_capability": null,
-    "objective": "Repair generic evidence extraction so visible objective-grounded content in modern container-based pages cannot be omitted; then independently requalify exact producer/frontend bytes before returning to claim support and relation evaluation.",
+    "objective": "Acquire the minimum model-independent route that evaluates exact claim support and explicit requested relations from generic provenance-bound objective-grounded evidence units, reusing existing numeric and decision capabilities where applicable; do not replay spent parent tasks.",
     "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
-    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
-    "repair_status": "GENERIC_EVIDENCE_EXTRACTION_QUALIFICATION_REOPENED__MODERN_CONTAINER_COVERAGE_GAP_ACTIVE",
-    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_GENERIC_EXTRACTION_CREDIT_UNTIL_REQUALIFIED__NO_RELATION_FRONTIER_WHILE_EARLIER_EXTRACTION_GAP_ACTIVE",
-    "next_action": "OBS_AND_REPAIR_GENERIC_EVIDENCE_EXTRACTION_FOR_MODERN_CONTAINER_CONTENT__REQUALIFY_EXACT_BYTES__NO_PARENT_REPLAY",
+    "exact_blocker": "MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+    "repair_status": "GENERIC_EVIDENCE_EXTRACTION_REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR__CLAIM_SUPPORT_RELATION_GAP_ACTIVE",
+    "prohibition": "NO_PARENT_REPLAY__NO_MODEL_COGNITION__NO_EXTRACTED_TEXT_EQUALS_TRUTH__NO_RELEVANCE_EQUALS_SUPPORT__NO_PARENT_SCORE_CREDIT_FOR_SUBCAPABILITY_ONLY",
+    "next_action": "OBS_AND_ACQUIRE_MINIMUM_MODEL_INDEPENDENT_CLAIM_SUPPORT_AND_RELATION_EVALUATION_FROM_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE__REUSE_NUMERIC_AND_DECISION_CAPABILITIES__NO_PARENT_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "acquired_subcapabilities": [
       "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -88,7 +88,8 @@
       "MODEL_INDEPENDENT_SOURCE_AUTHORITY_BINDING_ROR_V1",
       "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
       "MODEL_INDEPENDENT_FIRST_PARTY_BOUNDED_LEXICAL_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
-      "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1"
+      "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
+      "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1"
     ],
     "latest_fresh_real_run_id": 36652169397,
     "latest_fresh_reuse_run_id": 36652623916,
@@ -127,16 +128,22 @@
       "first_physical_spend_run_id": 36670808367
     },
     "latest_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
-      "status": "VERIFIED_ACQUIRED__NARROW_EXACT_ROR_BOUND_SCOPE_ONLY",
-      "route": "relevant_source_evidence_extract",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
-      "public_run_id": 36679523741,
+      "capability_id": "MODEL_INDEPENDENT_GENERIC_OBJECTIVE_GROUNDED_EVIDENCE_UNIT_EXTRACTION_V1",
+      "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR__INDEPENDENT_FRESH_LIVE_NON_ROR_CROSS_DOMAIN_PASS",
+      "route": "source.evidence.extract.objective_grounded.stdlib + open_research_source_frontend",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+      "public_run_id": 36681368306,
+      "artifact_id": 11081458134,
+      "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+      "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
       "model_dependency_count": 0,
       "incremental_spend_usd": 0,
       "parent_capability_promoted": false,
-      "limitations": "Exact-ROR-bound first-party relevance-admitted extraction only. Generic modern-container extraction remains unverified."
-    }
+      "limitations": "Verbatim objective-grounded evidence units only; claim support/contradiction, semantic entailment, correctness, causality, quality, sufficiency and independence remain unverified."
+    },
+    "latest_generic_extraction_requalification_run_id": 36681368306,
+    "latest_generic_extraction_requalification_artifact_id": 11081458134,
+    "latest_generic_extraction_requalification_artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [

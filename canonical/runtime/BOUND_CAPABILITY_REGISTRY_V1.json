@@ -3049,7 +3049,7 @@
       }
     },
     "source.evidence.extract.objective_grounded.stdlib": {
-      "status": "QUALIFICATION_REOPENED__KNOWN_MODERN_CONTAINER_COVERAGE_GAP",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "incremental_spend_usd": 0,
       "cost": 1,
       "requires": [
@@ -3133,28 +3133,28 @@
         "adapter_path": "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py"
       },
       "verification": {
-        "status": "INDEPENDENT_PUBLIC_NON_ROR_CROSS_DOMAIN_QUALIFICATION_PASS",
+        "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR",
+        "current_authority": "VERIFIED",
         "public_repository": "moxnixmdj/verification-capsule-runner",
-        "public_pr": 158,
-        "public_run_id": 36680967490,
-        "public_job_id": 109776102956,
-        "producer_git_blob": "6598ba92307c55fe6e645b4ecba070d2259818e2",
+        "public_pr": 159,
+        "public_run_id": 36681368306,
+        "public_job_id": 109777319500,
+        "artifact_id": 11081458134,
+        "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+        "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
         "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+        "modern_container_regression_git_blob": "8dc3a5d350173d57f67c8e1ac50ab243d42f2214",
         "exact_runner_blob_match": true,
         "live_domains": [
           "sqlite.org",
-          "docs.python.org"
+          "rfc-editor.org"
         ],
+        "ror_admission_required": false,
         "independent_refetch_oracle": true,
-        "authority_identity_required": false,
+        "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
         "model_dependency_count": 0,
-        "incremental_spend_usd": 0,
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
-        "current_authority": "REVOKED_PENDING_REQUALIFICATION",
-        "falsification_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
-        "falsification_commit": "e984e3196305f9a92750947d692bbae2bef9707b",
-        "prior_public_run_id": 36680967490,
-        "requalification_required": true
+        "incremental_spend_usd": 0
       }
     }
   },
