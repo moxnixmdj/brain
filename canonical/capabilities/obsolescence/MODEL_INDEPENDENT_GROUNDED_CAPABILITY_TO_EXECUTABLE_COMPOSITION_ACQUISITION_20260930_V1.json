@@ -3,7 +3,7 @@
   "evidence_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_ACQUISITION_20260930",
   "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "REVOKED_BY_REGRESSION__DIRECT_COMPILER_REPAIR_VALIDATED__AWAIT_FRESH_REQUALIFICATION",
+  "status": "VERIFIED_ACQUIRED_AFTER_DIRECT_COMPILER_REPAIR__FRESH_REQUALIFICATION_PASS_RECOVERED_WITHOUT_REPLAY",
   "route": "DETERMINISTIC_GROUNDED_EXECUTABLE_COMPOSITION_PLUS_CAPABILITY_GRAPH_PLANNER",
   "component_verification": {
     "run_id": 36647904127,
@@ -34,7 +34,7 @@
   "model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "frontier_dependency_removed": false,
-  "verdict": "PRIOR_ACQUISITION_CREDIT_REMAINS_REVOKED__ALL_KNOWN_BINDING_REPAIRS_PASS__FRESH_REAL_REQUALIFICATION_REQUIRED",
+  "verdict": "VERIFIED_ACQUIRED_RESTORED__FRESH_MATERIALLY_DISTINCT_POST_REPAIR_REQUALIFICATION_PASS",
   "post_promotion_falsification": {
     "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_DOWNSTREAM_PATH_PROVENANCE_FALSIFICATION_20260930_V1.json",
     "source_pr": 267,
@@ -68,5 +68,25 @@
     "direct_causal_binding_regression": "PASS",
     "full_goal_compiler_regression_file": "PASS",
     "capability_credit_restored": false
+  },
+  "post_direct_compiler_fresh_requalification": {
+    "status": "PASS_RECOVERED_FROM_PRESERVED_PRIMARY_EVIDENCE",
+    "evidence_path": "canonical/capabilities/obsolescence/GROUNDED_COMPOSITION_EVIDENCE_SURFACE_REQUALIFICATION_RECOVERY_ADJUDICATION_20260930_V1.json",
+    "source_pr": 283,
+    "source_run_id": 36659637634,
+    "source_job_id": 109711314434,
+    "source_workflow_conclusion": "FAILURE_FROM_OBSOLETE_POST_SUCCESS_HARNESS_ASSERTION",
+    "semantic_execution": "PASS",
+    "source_exact_route_bytes": "PASS",
+    "selected_alternative": "PUBLIC_GITHUB_ACTIONS_EXECUTABLE_VALIDATION",
+    "producer_independent_verifier": true,
+    "causal_refs_distinct": true,
+    "model_dependency_count": 0,
+    "recovery_run_id": 36660108447,
+    "recovery_job_id": 109712770342,
+    "recovery_artifact_id": 11074221334,
+    "recovery_artifact_digest": "sha256:17fc8daf075b813fb00419887c4fdc4b8a2123dae6430744a89163b68dd7df60",
+    "execution_replayed": false,
+    "capability_credit_restored": true
   }
 }
