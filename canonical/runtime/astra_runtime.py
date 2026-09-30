@@ -4896,6 +4896,14 @@ def _ground_plain_goal_to_bound_capabilities(mission, goal):
     return path,result
 
 
+def _runtime_evidence_path_ref(path):
+    p=pathlib.Path(path)
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
+
 def _load_open_web_source_candidate_discovery():
     _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"open_web_source_candidate_discovery.py"
@@ -4952,10 +4960,7 @@ def _run_broad_objective_source_provenance_frontier(
         "mission_id":mid,
         "role":first_role,
         "objective":goal,
-        "grounding_evidence_path":(
-            str(grounding_path.relative_to(ROOT))
-            if ROOT in grounding_path.parents else str(grounding_path)
-        ),
+        "grounding_evidence_path":_runtime_evidence_path_ref(grounding_path),
         "discovery":discovery,
         "external_capability_acquisition_attempted":False,
         "model_dependency_count":0,
@@ -4968,7 +4973,7 @@ def _run_broad_objective_source_provenance_frontier(
         raise Blocker(
             "BROAD_OBJECTIVE_SOURCE_DISCOVERY_UNAVAILABLE:"
             +json.dumps({
-                "evidence_path":str(discovery_path.relative_to(ROOT)),
+                "evidence_path":_runtime_evidence_path_ref(discovery_path),
                 "status":discovery.get("status") if isinstance(discovery,dict) else None,
                 "external_capability_acquisition_attempted":False,
             },sort_keys=True)
@@ -5007,7 +5012,7 @@ def _run_broad_objective_source_provenance_frontier(
         "schema":"PROJECT_BRAIN_BROAD_OBJECTIVE_SOURCE_PROVENANCE_RUNTIME_V1",
         "mission_id":mid,
         "objective":goal,
-        "source_discovery_evidence_path":str(discovery_path.relative_to(ROOT)),
+        "source_discovery_evidence_path":_runtime_evidence_path_ref(discovery_path),
         "records":provenance_records,
         "verified_provenance_count":verified_count,
         "fact_authority_verified":False,
@@ -5024,8 +5029,8 @@ def _run_broad_objective_source_provenance_frontier(
         raise Blocker(
             "SOURCE_CANDIDATE_PROVENANCE_VERIFICATION_FAILED:"
             +json.dumps({
-                "source_discovery_evidence_path":str(discovery_path.relative_to(ROOT)),
-                "provenance_evidence_path":str(provenance_path.relative_to(ROOT)),
+                "source_discovery_evidence_path":_runtime_evidence_path_ref(discovery_path),
+                "provenance_evidence_path":_runtime_evidence_path_ref(provenance_path),
                 "candidate_count":len(candidates),
                 "verified_provenance_count":0,
                 "external_capability_acquisition_attempted":False,
@@ -5040,8 +5045,8 @@ def _run_broad_objective_source_provenance_frontier(
                 str(grounding_path.relative_to(ROOT))
                 if ROOT in grounding_path.parents else str(grounding_path)
             ),
-            "source_discovery_evidence_path":str(discovery_path.relative_to(ROOT)),
-            "provenance_evidence_path":str(provenance_path.relative_to(ROOT)),
+            "source_discovery_evidence_path":_runtime_evidence_path_ref(discovery_path),
+            "provenance_evidence_path":_runtime_evidence_path_ref(provenance_path),
             "candidate_count":len(candidates),
             "verified_provenance_count":verified_count,
             "current_role":"SOURCE_DISCOVERY",
