@@ -30,7 +30,7 @@ class MistakeImmunityGuardTests(unittest.TestCase):
             "capability_target":"cap",
             "causal_blocker":"block",
             "action_kind":"REAL_CAPABILITY_ACQUISITION",
-            "blocker_lease_key":"g::cap::block::REAL_CAPABILITY_ACQUISITION",
+            "blocker_lease_key":"g::cap::block",
         }
 
     def test_lowest_pr_is_deterministic_duplicate_lease_owner(self):
@@ -48,6 +48,19 @@ class MistakeImmunityGuardTests(unittest.TestCase):
     def test_later_duplicate_fails_closed(self):
         current=self.intent()
         peer=self.intent()
+        old=guard._open_pr_intents
+        try:
+            guard._open_pr_intents=lambda:[{"pr":256,"intent":peer}]
+            os.environ["CURRENT_PR_NUMBER"]="257"
+            guard.enforce_blocker_lease(current)
+            self.assertIn("DUPLICATE_BLOCKER_LEASE_OWNER_EXISTS:256",guard.FAIL)
+        finally:
+            guard._open_pr_intents=old
+
+    def test_same_blocker_different_action_label_still_collides(self):
+        current=self.intent()
+        peer=self.intent()
+        peer["action_kind"]="GENERIC_RESEARCH_ROUTING_REPAIR"
         old=guard._open_pr_intents
         try:
             guard._open_pr_intents=lambda:[{"pr":256,"intent":peer}]
