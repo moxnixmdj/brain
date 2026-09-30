@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RESTORE-EXACT-QUALIFIED-GENERIC-EVIDENCE-EXTRACTOR-20260930-V1",
+  "status": "TRUTH_FIRST_EXACT_BYTE_RESTORATION",
+  "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "causal_blocker": "MERGED_GENERIC_EXTRACTION_PRODUCER_BLOB_DOES_NOT_MATCH_QUALIFICATION_RECEIPT",
+  "action_kind": "EVIDENCE_INTEGRITY_REPAIR",
+  "highest_leverage_now": true,
+  "progress_credit": "ZERO_NEW_CAPABILITY_CREDIT__RESTORE_ALREADY_VERIFIED_BYTES",
+  "expected_parent_frontier_change": "None beyond restoring the exact producer bytes already independently qualified and already referenced by the canonical promotion receipt.",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_task_replay": false,
+  "parent_capability_promoted": false,
+  "recursive_obs": {
+    "canonical_base_commit": "a2b528830e59e6ff69d01b1670b99a05125edc2c",
+    "real_outcome": "Make merged runtime bytes equal the independently qualified bytes named by the promotion receipt.",
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Requalify an optional modern-container enhancement",
+        "Redesign the extractor",
+        "Spend another parent task",
+        "Change capability scope"
+      ],
+      "surviving_necessity": "Exact qualification-byte integrity."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "public runner run 36680967490 successful exact producer 6598ba92307c55fe6e645b4ecba070d2259818e2",
+        "canonical promotion receipt MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+        "merged main producer fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+        "failed exact-current-byte requalification run 36681447914"
+      ],
+      "surviving_gap": "Merged producer does not equal qualified producer."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "selected_surviving_route": "RESTORE_EXACT_ALREADY_QUALIFIED_PRODUCER_AND_TEST_BYTES",
+      "why_selected_route_is_fastest_sufficient": "The optional modern container-tag change failed independent live reconstruction. Restoring the previously qualified bytes immediately re-establishes receipt/runtime identity without new capability work."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new execution required if restored Git blob equals the exact independently-qualified blob and the promotion receipt already references it."
+    }
+  }
+}
