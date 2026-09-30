@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V6",
+  "action_id": "VERIFY-STIRRUP-PROFESSIONAL-WORK-STAGE1-20260930-V1",
+  "status": "TASKS_FROZEN__PROMPTS_UNREAD__EXECUTION_AUTHORIZED",
+  "canonical_generation": "2026-09-30-opus55-capability-internalization-v6",
+  "canonical_base_commit": "ddd3abd6a0445edba749eef2f1ba6010a9ce3d32",
+  "capability_target": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "action_kind": "BRAIN_CONFIGURED_CAPABILITY_FALSIFICATION",
+  "blocker_lease_key": "ddd3abd6a0445edba749eef2f1ba6010a9ce3d32::OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1::STAGE1_CROSS_ARTIFACT_FALSIFICATION",
+  "expected_parent_frontier_change": "Either falsify the current Stirrup configuration cheaply or establish stage-1 non-systemic behavior across three frozen artifact classes; zero Opus credit.",
+  "theory_invariants": {
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_policy": "BRAIN_OWNED_MECHANISM_MUST_BE_EXECUTED_AND_VERIFIED",
+    "external_model_capability_credit": false,
+    "underlying_capability_invention": false,
+    "hard_incremental_spend_usd": 0,
+    "opus_credit_in_stage1": 0
+  },
+  "evaluation_protocol": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json",
+  "execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-09-30_STIRRUP_PROFESSIONAL_WORK_STAGE1_SELECTION_V1.json"
+  },
+  "selected_task_ids": [
+    "a079d38f-c529-436a-beca-3e291f9e62a3",
+    "be830ca0-b352-4658-a5bd-57139d6780ba",
+    "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f"
+  ],
+  "contamination_state": "PROMPTS_UNREAD__RUBRICS_UNREAD__GOLD_DELIVERABLES_UNREAD",
+  "stop_condition": "Stop immediately on systemic harness/configuration failure. Otherwise freeze all three outputs before any task-specific rubric, gold deliverable, judge feedback, or model submission is inspected. Zero Opus capability credit regardless of stage-1 result.",
+  "incremental_spend_usd": 0
+}
