@@ -161,5 +161,48 @@ class MistakeImmunityGuardTests(unittest.TestCase):
         self.assertEqual(accounting.get("current_parent_blocker"),hierarchy.get("current_parent_blocker"))
         self.assertEqual(scoreboard.get("next_progress_event_target"),hierarchy.get("next_required_action_class"))
 
+    def test_canonical_frontier_consistency_checker_rejects_stale_reconciliation(self):
+        self.assertTrue(hasattr(guard, "enforce_canonical_frontier_consistency"))
+        checker=getattr(guard, "enforce_canonical_frontier_consistency", None)
+        if checker is None:
+            return
+        pointer={"current_frontier":{
+            "parent_frontier_capability":"CAP",
+            "critical_blocker":"NEW_BLOCKER",
+            "next_step":"NEXT_ACTION",
+            "last_frontier_reconciliation":{"blocker":"OLD_BLOCKER"},
+        }}
+        hierarchy={
+            "active_capability_target":"CAP",
+            "parent_frontier_capability":"CAP",
+            "current_parent_blocker":"NEW_BLOCKER",
+            "next_required_action_class":"NEXT_ACTION",
+            "next_progress_event_target":"NEXT_ACTION",
+            "last_frontier_reconciliation":{"blocker":"NEW_BLOCKER"},
+        }
+        queue={"immediate_frontier":{
+            "selected_capability":"CAP",
+            "exact_blocker":"NEW_BLOCKER",
+            "next_action":"NEXT_ACTION",
+        }}
+        scoreboard={
+            "next_progress_event_target":"NEXT_ACTION",
+            "active_frontier_accounting":{"parent_frontier_capability":"CAP"},
+        }
+        checker(pointer,hierarchy,queue,scoreboard)
+        self.assertIn("POINTER_FRONTIER_RECONCILIATION_BLOCKER_STALE",guard.FAIL)
+
+    def test_repository_frontier_surfaces_are_machine_consistent(self):
+        self.assertTrue(hasattr(guard, "enforce_canonical_frontier_consistency"))
+        checker=getattr(guard, "enforce_canonical_frontier_consistency", None)
+        if checker is None:
+            return
+        pointer=guard.load("canonical/CANONICAL_POINTER.json")
+        hierarchy=guard.load("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
+        queue=guard.load("canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json")
+        scoreboard=guard.load("canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json")
+        checker(pointer,hierarchy,queue,scoreboard)
+        self.assertEqual(guard.FAIL,[])
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
