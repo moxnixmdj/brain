@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_SCOPE_CORRECTION_V1",
+  "correction_id": "RELEVANT_SOURCE_EVIDENCE_EXTRACTION_SCOPE_CORRECTION_20260930_V1",
+  "canonical_base_commit": "adb12d9fc81ab9e2c9653266a7b7d08afe642cf7",
+  "status": "VERIFIED_FROM_CANONICAL_RECEIPT_AND_RUNTIME__ZERO_CAPABILITY_CREDIT",
+  "corrected_capability_id": "MODEL_INDEPENDENT_OBJECTIVE_ANCHORED_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_V1",
+  "preserved_verified_scope": "Given a provenance-verified, exact-ROR-bound, first-party relevance-admitted source, reuse the relevance verifier's fresh page bytes and extract bounded objective-anchored textual claim candidates and numeric literals.",
+  "unsupported_parent_inference": "GENERIC_NON_ROR_EVIDENCE_EXTRACTION_CLOSED",
+  "direct_evidence": [
+    "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_RELEVANT_SOURCE_EVIDENCE_EXTRACTION_PROMOTION_20260930_V1.json",
+    "canonical/runtime/bound_capabilities/relevant_source_evidence_extract.py",
+    "canonical/runtime/bound_capabilities/open_research_source_frontend.py"
+  ],
+  "runtime_scope_facts": [
+    "open_research_source_frontend filters provenance-verified candidates through source_authority_binding_ror before extraction",
+    "relevant_source_evidence_extract requires authority_identity and delegates relevance admission to first_party_objective_relevance_verify",
+    "public qualification 36679523741 exercised NIST and WHO through that exact-ROR-bound path"
+  ],
+  "correction_effect": {
+    "preserve_reusable_child_credit": true,
+    "preserve_public_run_id": 36679523741,
+    "parent_capability_promoted": false,
+    "parent_score_credit_delta": 0,
+    "reusable_capability_counter_delta": 0,
+    "active_parent_blocker": "MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_VERIFIED_RELEVANT_SOURCE",
+    "next_action": "OBS_AND_ACQUIRE_GENERIC_MODEL_INDEPENDENT_EVIDENCE_EXTRACTION_FROM_PROVENANCE_VERIFIED_BM25_RELEVANCE_SELECTED_SOURCE__ROR_OPTIONAL_METADATA__NO_PARENT_REPLAY"
+  },
+  "explicit_nonclaims": [
+    "GENERIC_NON_ROR_EVIDENCE_EXTRACTION_VERIFIED",
+    "CLAIM_SUPPORT_VERIFIED",
+    "RELATION_EVALUATION_VERIFIED",
+    "PARENT_CAPABILITY_COMPLETION"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
