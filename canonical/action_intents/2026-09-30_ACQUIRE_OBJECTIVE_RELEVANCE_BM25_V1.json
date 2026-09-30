@@ -1,0 +1,297 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-OBJECTIVE-RELEVANCE-BM25-V1",
+  "status": "VERIFIED_ACQUIRED__INTEGRATION_PENDING_CURRENT_PR",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_VERIFICATION_V1::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Close lexical objective-relevance selection as the source-front-end blocker and expose the next genuine parent seam: evidence acquisition from relevance-selected provenance-bearing source candidates. No parent capability promotion from this child alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "qualified source frontend",
+    "qualified ROR authority binder",
+    "Brain search found no relevance verifier",
+    "external BM25/TF-IDF route race",
+    "PR411 merged deletion-first correction: primary-source status is no longer a universal research admission gate"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exact producer bytes are independently qualified on fresh cross-domain candidate sets against an independent BM25 implementation, failure/degeneracy cases fail closed, the capability is inherited at narrow scope with zero parent promotion credit, and no spent parent task is replayed.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "aae66413845006afa22bfcd77639d634f54a0371",
+    "real_outcome": "Give the open-ended research route a model-independent way to rank discovered source candidates by objective relevance without claiming truth, primary-source status, or evidence sufficiency.",
+    "required_capability": "MODEL_INDEPENDENT_OBJECTIVE_RELEVANCE_RANKING_V1",
+    "obs_goal": {
+      "real_outcome": "Rank candidate evidence surfaces by lexical relevance to the current objective so later evidence acquisition does not choose sources blindly.",
+      "proxy_goals_deleted": [
+        "solve primary-source verification simultaneously",
+        "semantic embedding service",
+        "LLM relevance judge",
+        "new retrieval infrastructure",
+        "reintroduce universal primary-source gate"
+      ],
+      "surviving_necessity": "A deterministic relevance selector is required before evidence extraction can choose among multiple provenance/authority-bearing candidates."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "qualified open research source frontend",
+        "candidate titles/snippets and provenance metadata",
+        "Python stdlib"
+      ],
+      "external_existing_routes_checked": [
+        "BM25 information retrieval algorithm",
+        "rank-bm25 0.2.2",
+        "bm25s 0.3.11",
+        "scikit-learn TF-IDF/cosine"
+      ],
+      "capability_work_deleted": [
+        "No model embeddings",
+        "No vector database",
+        "No paid API",
+        "No custom search service"
+      ],
+      "surviving_gap": "No verified model-independent candidate relevance ranking exists in Brain."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic evidence-selection seam.",
+      "delete_bypass_substitute_options": [
+        "Delete relevance ranking rejected because source frontend may return many candidates",
+        "Search-rank-only rejected because backend rank is not objective-grounded evidence",
+        "TF-IDF viable but BM25 better handles short query vs variable document length",
+        "Reuse BM25 formula with independent package verification survives"
+      ],
+      "surviving_causal_blocker": "Need deterministic query-to-candidate ranking with explicit fail-closed behavior for no lexical evidence."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Stdlib BM25 producer + independent rank-bm25 0.2.2 verifier",
+        "scikit-learn TF-IDF/cosine",
+        "search backend rank",
+        "LLM relevance judge"
+      ],
+      "losing_routes_reason": "Stdlib BM25 avoids a runtime dependency while using an established IR method; bm25s supplies independent verification. TF-IDF is viable but adds dependency or duplicated vector machinery; search rank is not sufficiently objective-specific; LLM judge violates model independence.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use fresh cross-domain candidate sets where the separate rank-bm25 0.2.2 BM25Okapi implementation independently selects the same top relevant item/ranking direction; also test empty/stopword-only/no-overlap cases and deterministic tie handling."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "blind use of discovery backend rank",
+        "any model-based relevance judge for this lexical role"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "lexical source relevance ranking",
+        "deterministic evidence candidate ordering"
+      ],
+      "fresh_reuse_plan": "Qualify the same scorer on at least two materially different research objectives/candidate sets with no task-specific literals in producer code."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing source frontend output schema",
+        "Rejected primary-source coimplementation",
+        "Avoided package dependency in producer"
+      ],
+      "search_stop_decision": "BM25, TF-IDF, and backend rank cover the plausible zero-cost deterministic routes. Stdlib BM25 dominates on implementation size, dependency count, wall-clock, and independent verifiability.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refresh only if BM25 qualification fails materially or before any parent promotion."
+    },
+    "routes_considered": [
+      "STDLIB_BM25_WITH_RANK_BM25_INDEPENDENT_VERIFIER",
+      "SCIKIT_TFIDF_COSINE",
+      "DISCOVERY_BACKEND_RANK",
+      "MODEL_RELEVANCE_JUDGE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MODEL_RELEVANCE_JUDGE",
+      "VECTOR_DATABASE",
+      "PAID_EMBEDDING_API",
+      "DISCOVERY_BACKEND_RANK_AS_RELEVANCE_PROOF"
+    ],
+    "selected_surviving_route": "STDLIB_BM25_WITH_RANK_BM25_INDEPENDENT_VERIFIER",
+    "why_selected_route_is_fastest_sufficient": "It uses an established deterministic IR algorithm with no producer runtime dependency, consumes fields already emitted by the qualified source frontend, and is independently checked by a separate BM25 implementation with a minimal stable API at zero incremental spend.",
+    "expected_parent_level_state_change": "Acquire and independently qualify a narrow model-independent lexical objective-relevance ranking primitive over discovered source candidates; primary-source status is optional metadata rather than a universal gate, and no parent promotion follows from this child alone.",
+    "stop_condition": "Stop after exact producer bytes are independently qualified on fresh cross-domain candidate sets against an independent BM25 implementation, failure/degeneracy cases fail closed, the capability is inherited at narrow scope with zero parent promotion credit, and no spent parent task is replayed.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-30T06:23:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "NONE__OBJECTIVE_RELEVANCE_UNPROVEN",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "qualified open_research_source_frontend candidate schema"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "scikit-learn TF-IDF/cosine documentation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI rank-bm25 0.2.2",
+          "PyPI bm25s 0.3.11"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "BM25/TF-IDF deterministic IR route comparison"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic query document objective relevance ranking BM25 TF-IDF"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "bm25s rank_bm25 scikit learn TF-IDF cosine"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "small Python BM25 scorer candidate title snippet relevance"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "bm25s 2026 latest release"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "STDLIB_BM25_WITH_RANK_BM25_INDEPENDENT_VERIFIER",
+          "evidence": [
+            "BM25 is established lexical ranking; rank-bm25 0.2.2 exposes independent BM25Okapi scoring with simple tokenized-corpus API"
+          ],
+          "qualification_evidence": [
+            "PyPI rank-bm25 0.2.2 project metadata and documented BM25Okapi usage"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Deterministic lexical relevance, independently comparable",
+            "CAPABILITY_STRENGTH": "Broad lexical ranking; not semantic entailment",
+            "WALL_CLOCK": "Minimal",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "No producer runtime dependency",
+            "VERIFIABILITY": "High"
+          }
+        },
+        {
+          "route": "SCIKIT_TFIDF_COSINE",
+          "evidence": [
+            "scikit-learn documents TF-IDF and cosine for document similarity"
+          ],
+          "qualification_evidence": [
+            "scikit-learn official docs"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Good lexical similarity",
+            "CAPABILITY_STRENGTH": "Broad lexical similarity",
+            "WALL_CLOCK": "Dependency heavier",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Mature",
+            "VERIFIABILITY": "High"
+          }
+        }
+      ],
+      "negative_search_summary": "No zero-cost deterministic route found that provides genuine semantic entailment without model dependence. Narrow lexical objective relevance is therefore the admissible current scope.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "STDLIB_BM25_WITH_RANK_BM25_INDEPENDENT_VERIFIER",
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_PARENT_PROMOTION"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-30T06:23:00Z",
+        "max_age_hours": 2,
+        "selected_route": "STDLIB_BM25_WITH_RANK_BM25_INDEPENDENT_VERIFIER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PYTHON_STDLIB",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:23:00Z",
+            "evidence": [
+              "existing qualified Brain Python public runner"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_UBUNTU_HARD_ZERO_CARRIER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-30T06:23:00Z",
+            "evidence": [
+              "recent source authority qualifications succeeded"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  },
+  "qualification": {
+    "status": "PASS",
+    "public_run_id": 36678278264,
+    "public_job_id": 109767943730,
+    "receipt_issue": 144,
+    "exact_producer_git_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+    "producer_regressions_passed": 7,
+    "independent_cross_domain_tests_passed": 3,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  }
+}
