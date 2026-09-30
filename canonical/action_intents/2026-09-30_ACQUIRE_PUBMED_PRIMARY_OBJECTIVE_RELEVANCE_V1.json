@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-PUBMED-PRIMARY-OBJECTIVE-TOPIC-RELEVANCE-20260930-V1",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_QUALIFICATION",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "parent_subcapability_target": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION_V1",
+  "causal_blocker": "MODEL_INDEPENDENT_PRIMARY_SOURCE_AND_OBJECTIVE_RELEVANCE_VERIFICATION__ROR_SOURCE_AUTHORITY_IDENTITY_VERIFIED",
+  "route": "NCBI_PUBMED_MESH_PUBLICATION_TYPE_PLUS_DETERMINISTIC_OBJECTIVE_TOPIC_ANCHOR_COVERAGE",
+  "exact_claim_scope": [
+    "NLM direct empirical publication-type classification for PubMed-indexed DOI records",
+    "objective-topic anchor coverage in title/abstract/MeSH/keywords"
+  ],
+  "explicit_nonclaims": [
+    "general semantic relevance",
+    "claim support or contradiction",
+    "causal relation",
+    "effect direction",
+    "factual correctness",
+    "evidence sufficiency",
+    "non-PubMed coverage"
+  ],
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "parent_task_execution": false,
+  "parent_task_replay": false
+}
