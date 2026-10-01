@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1",
+  "date": "2026-10-02",
+  "status": "PARTIAL_EXISTING_EVIDENCE_CLOSURE__ENGINE_VERIFIED__UPSTREAM_ENGINE_AND_LANGUAGE_DATA_PINNED__CURRENT_INSTALLED_LANGUAGE_DATA_HASH_PENDING",
+  "parent_residual": "M1A_OCR_IMAGE_TO_TEXT",
+  "existing_brain_route": {
+    "capability": "pdf.extract.ocr.tesseract",
+    "adapter": "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",
+    "registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "verification_receipt": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json",
+    "verification_state": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-OCR-001.json",
+    "observed_image_level_operation": "tesseract <png> stdout -l eng --psm {6,7,11,3}",
+    "observed_effect": "VISIBLE_TEXT_EXTRACTED_FROM_RASTERIZED_IMAGE_ONLY_PDF",
+    "new_reality_units_reused": 0
+  },
+  "verified_runtime_engine": {
+    "origin": "Ubuntu",
+    "package": "tesseract-ocr",
+    "version": "5.3.4-1build5",
+    "archive_sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77"
+  },
+  "upstream_engine": {
+    "repository": "tesseract-ocr/tesseract",
+    "revision": "db20f322d03664d1e878e2fbf6e904f5da755594",
+    "license": "Apache-2.0",
+    "license_blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+  },
+  "upstream_language_data_candidates": [
+    {
+      "repository": "tesseract-ocr/tessdata_fast",
+      "revision": "87416418657359cb625c412a48b6e1d6d41c29bd",
+      "license": "Apache-2.0",
+      "license_blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "english_traineddata_git_blob_sha": "bbef4675053b5b468cdb477053e28b1c698ba08e"
+    },
+    {
+      "repository": "tesseract-ocr/tessdata_best",
+      "revision": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+      "license": "Apache-2.0",
+      "license_blob_sha": "d9a10c0d8e868ebf8da0b3dc95bb0be634c34bfe",
+      "english_traineddata_git_blob_sha": "176dc3220de7db34d3b3aecbfa42043a6038348b"
+    }
+  ],
+  "direct_image_route": {
+    "adapter": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+    "tests": "canonical/tests/test_image_ocr_tesseract.py",
+    "deductive_verifier": "canonical/verification/verify_image_ocr_tesseract_reuse.py",
+    "workflow": ".github/workflows/verify-image-ocr-tesseract-reuse.yml",
+    "status": "VERIFICATION_PENDING",
+    "semantic_authority": false
+  },
+  "current_surface_probe": {
+    "workflow": ".github/workflows/discover-tesseract-ocr-surface.yml",
+    "purpose": "RECORD_TESSERACT_OCR_ENG_PACKAGE_VERSION_ENGINE_VERSION_AND_INSTALLED_ENG_TRAINEDDATA_SHA256",
+    "status": "RECEIPT_PENDING"
+  },
+  "remaining_dependency_hole": [
+    "CURRENT_INSTALLED_TESSERACT_OCR_ENG_PACKAGE_VERSION_NOT_YET_BOUND_IN_CANONICAL_RECEIPT",
+    "CURRENT_INSTALLED_ENG_TRAINEDDATA_SHA256_NOT_YET_BOUND_TO_UPSTREAM_PIN_OR_EXPLICITLY_ACCOUNTED_AS_DISTRO_DERIVATIVE",
+    "DIRECT_IMAGE_ADAPTER_DEDUCTIVE_REUSE_WORKFLOW_RECEIPT_PENDING"
+  ],
+  "no_overclaim": "EXISTING_PDF_OCR_PROVES_THE_CORE_IMAGE_OCR_OPERATION_WORKS_ON_THE_VERIFIED_UBUNTU_ROUTE__THIS_RECORD_DOES_NOT_YET_CLAIM_FULL_CURRENT_M1A_OCR_DEPENDENCY_CLOSURE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
