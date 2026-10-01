@@ -22,5 +22,17 @@
   "classification_rule": "OFFICIAL_REPOSITORY_LOCATION_DOES_NOT_IMPLY_SAFE_PREQUALIFICATION_CONTENT__PATH_CLASS_MUST_BE_ALLOWLISTED_BEFORE_READ",
   "contamination_rule": "ANY_FORBIDDEN_READ_IMMEDIATELY_INVALIDATES_CLEAN_QUALIFICATION_ELIGIBILITY_FOR_THAT_TASK__NO_TASK_EXECUTION_FOR_CREDIT__NO_REPLAY",
   "root_incident": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_CONTAMINATED_20261001_V1.json",
-  "task_execution_after_contamination_for_credit": false
+  "task_execution_after_contamination_for_credit": false,
+  "post_exposure_access_rule": {
+    "status": "FAIL_CLOSED",
+    "task_specific_repository_search": "FORBIDDEN_AFTER_STAGE_B_EXPOSURE",
+    "allowed_retrieval": "EXACT_FETCH_ONLY_FOR_PREDECLARED_ALLOWLISTED_PATHS",
+    "rationale": "Repository-wide task-specific search can surface forbidden README/solution/tests snippets even when the intended target is allowlisted.",
+    "contamination_if_violated": true,
+    "no_replay_for_credit": true,
+    "evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_SOURCE_BOUNDARY_CONTAMINATED_20261001_V1.json"
+  },
+  "forbidden": [
+    "TASK_SPECIFIC_REPOSITORY_SEARCH_AFTER_STAGE_B_EXPOSURE"
+  ]
 }
