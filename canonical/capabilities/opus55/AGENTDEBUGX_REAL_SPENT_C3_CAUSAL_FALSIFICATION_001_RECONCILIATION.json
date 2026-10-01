@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_AGENTDEBUGX_REAL_SPENT_C3_CAUSAL_FALSIFICATION_V1",
+  "result_id": "AGENTDEBUGX_REAL_SPENT_C3_CAUSAL_001",
+  "status": "C7_GENERAL_ROOT_LOCALIZATION_FALSIFIED__C6_NARROW_FAILURE_DETECTION_SURVIVES__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "candidate": {
+    "repo": "AgentDebugX/AgentDebugX",
+    "package": "agentdebugx",
+    "version": "0.5.2",
+    "license": "MIT",
+    "mode": "DiagnosePipeline.local_default"
+  },
+  "execution": {
+    "repo": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36822800506,
+    "result_commit": "db484980f402d9122ee57fbd96f462c73e39b520"
+  },
+  "metrics": {
+    "cases": 6,
+    "root_localization_accuracy": 0,
+    "wrong_root_cases": [
+      "baseline_sort_priorities",
+      "baseline_path_filename",
+      "baseline_json_lookup",
+      "ettin_average_latency",
+      "ettin_largest_sample",
+      "ettin_path_filename"
+    ]
+  },
+  "causal_observation": "The zero-LLM local-default pipeline detects downstream verifier/tool failures but failed to attribute any of six real spent routing failures to the upstream route-selection decision at step 2.",
+  "adjudication": [
+    "REJECT_AGENTDEBUGX_LOCAL_DEFAULT_AS_GENERAL_C7_ROOT_CAUSE_LOCALIZATION_ROUTE",
+    "DO_NOT_VENDOR_OR_PROMOTE_AGENTDEBUGX_AS_C7",
+    "RETAIN_ONLY_NARROW_C6_EXPLICIT_FAILURE_DETECTION_CANDIDATE_FROM_SEPARATE_REAL_SPENT_PASS",
+    "C7_RETURNS_TO_GENERATOR_PLUS_EXECUTABLE_FALSIFICATION_AND_EXISTING_CAUSAL_DIAGNOSIS_SEARCH",
+    "NO_TRAINING_WHILE_EXISTING_PERMISSIVE_C7_ROUTE_SPACE_REMAINS_UNSCREENED"
+  ],
+  "next_required_action": "SCREEN_EXISTING_CAUSAL_TRAJECTORY_DIAGNOSIS_CANDIDATES_ON_THE_SAME_SPENT_C3_TRACES__PREFER_MICROSOFT_AGENTRX_IF_LICENSE_AND_INTERFACE_FIT__NO_FRESH_EVIDENCE_OR_TRAINING_UNTIL_SPENT_GATE_PASS",
+  "capability_credit_delta": 0
+}
