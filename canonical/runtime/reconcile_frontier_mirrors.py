@@ -238,9 +238,17 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
             print(f"WROTE {len([d for d in docs if d.dirty])} file(s)")
         else:
             print("DRIFT_PRESENT (no files written; re-run without --check to reconcile)")
-            return 1
-    else:
+    elif not reports:
         print("MIRRORS_CONSISTENT no drift found")
+    # A report is drift this run did NOT repair: identity drift needs
+    # RECONCILE_FRONTIER, hierarchy progress-event drift needs the explicit
+    # opt-in, control-path drift needs --fix-control-paths. Exiting 0 on an
+    # unrepaired report is fail-open: test_live_repository_is_reconciled would
+    # stay green while enforce_goal_hierarchy.py fails the same tree, which is
+    # exactly the lying-green-check this tool exists to prevent.
+    if reports or (changes and not write):
+        print("UNREPAIRED_DRIFT_PRESENT (fail closed; see REPORTS above)")
+        return 1
     return 0
 
 

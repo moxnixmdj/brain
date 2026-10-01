@@ -121,12 +121,31 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
     # --- detection and repair ----------------------------------------------
     def test_live_repository_is_reconciled(self):
         # Standing regression: mirror rot must fail a test, not only the guard.
+        # This covers the mirror fields, pointer control-path currency AND the
+        # hierarchy's own next_progress_event_target, because a run that reports
+        # unrepaired drift now fails closed instead of exiting 0.
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             code = reconcile(ROOT, write=False, fix_control_paths=False,
                              align_hierarchy_progress_event=False)
         self.assertEqual(code, 0, out.getvalue())
         self.assertIn("MIRRORS_CONSISTENT", out.getvalue())
+
+    def test_report_only_drift_fails_the_check(self):
+        # Regression: the verdict was once driven only by pending mirror changes,
+        # so a report -- hierarchy progress-event drift, identity drift, stale
+        # control paths -- printed and then exited 0. That is fail-open: the
+        # standing oracle above stayed green while enforce_goal_hierarchy.py
+        # failed the same tree with HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH.
+        hierarchy = self.read(HIERARCHY)
+        hierarchy["next_progress_event_target"] = "SOME_STALE_EVENT_NAME"
+        self.write(HIERARCHY, hierarchy)
+        code, out = self.run_tool(write=False, fix_control_paths=False,
+                                  align_hierarchy_progress_event=False)
+        self.assertIn("HIERARCHY_PROGRESS_EVENT_DRIFT", out)
+        self.assertIn("UNREPAIRED_DRIFT_PRESENT", out)
+        self.assertNotIn("MIRRORS_CONSISTENT", out)
+        self.assertEqual(code, 1, "a report is unrepaired drift and must fail closed")
 
     def test_seeded_drift_is_detected_without_writing(self):
         self.seed_stale_mirrors()
@@ -189,6 +208,7 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         code, out = self.run_tool(write=True, fix_control_paths=False,
                                   align_hierarchy_progress_event=False)
         self.assertIn("HIERARCHY_PROGRESS_EVENT_DRIFT", out)
+        self.assertEqual(code, 1, "unrepaired drift must fail closed")
         self.assertEqual(
             self.read(HIERARCHY)["next_progress_event_target"], "SOME_OTHER_EVENT_NAME",
             "the authoritative file must not be edited without the explicit opt-in",
@@ -216,6 +236,7 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
                                   align_hierarchy_progress_event=False)
         self.assertIn("IDENTITY_DRIFT", out)
         self.assertIn("RECONCILE_FRONTIER", out)
+        self.assertEqual(code, 1, "a frontier redefinition is never a silent success")
         self.assertEqual(
             self.read(record_rel)["capability_id"], "SOME_OTHER_CAPABILITY_V1",
             "changing the active target is a frontier redefinition, not a mirror repair",
@@ -233,6 +254,7 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         code, out = self.run_tool(write=False, fix_control_paths=False,
                                   align_hierarchy_progress_event=False)
         self.assertIn("CONTROL_PATH_NOT_CURRENT", out)
+        self.assertEqual(code, 1, "stale control paths must fail closed until advanced")
         self.assertEqual(
             self.read(POINTER)["boot_requirements"]["goal_hierarchy_action_gate_path"], stale,
             "reporting must not write",
