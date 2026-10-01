@@ -38,22 +38,33 @@ def write_json(path, value):
 
 
 def commit_obs(rel, value, message):
+    """Write an observation and push it to the observation branch.
+
+    The push is forced: the observation branch is a scratch mirror of the
+    latest bridge attempt, and a previous attempt's commits would otherwise
+    make every later push a non-fast-forward rejection.
+    """
     p = OBS / rel
     write_json(p, value)
     git("add", rel, cwd=OBS)
     cp = git("diff", "--cached", "--quiet", cwd=OBS, check=False)
     if cp.returncode:
         git("commit", "-m", message, cwd=OBS)
-        git("push", "origin", f"HEAD:refs/heads/{CFG['observation_branch']}", cwd=OBS)
+        git("push", "--force", "origin",
+            f"HEAD:refs/heads/{CFG['observation_branch']}", cwd=OBS)
 
 
 def init_obs():
     if OBS.exists():
         shutil.rmtree(OBS)
+    git("worktree", "remove", "--force", str(OBS), check=False)
+    git("worktree", "prune", check=False)
+    git("branch", "-D", "harbor-observation-work", check=False)
     git("worktree", "add", "-b", "harbor-observation-work", str(OBS), "HEAD")
     git("config", "user.email", "brain-harbor-bridge@users.noreply.github.com", cwd=OBS)
     git("config", "user.name", "Brain Harbor Bridge", cwd=OBS)
-    git("push", "origin", f"HEAD:refs/heads/{CFG['observation_branch']}", cwd=OBS)
+    git("push", "--force", "origin",
+        f"HEAD:refs/heads/{CFG['observation_branch']}", cwd=OBS)
 
 
 def ensure_harbor():
@@ -105,7 +116,16 @@ def main():
     if "--session-config" in args:
         CFG_REL = args[args.index("--session-config") + 1]
         CFG = json.loads((ROOT / CFG_REL).read_text())
-    init_obs()
+    try:
+        init_obs()
+    except Exception as exc:
+        # Last-resort reporting path: publish the failure through a throwaway
+        # clone so a broken worktree cannot silence the run.
+        EVIDENCE.mkdir(parents=True, exist_ok=True)
+        write_json(EVIDENCE / "bridge_error.json",
+                   {"status": "INIT_OBS_FAILED",
+                    "error": f"{type(exc).__name__}: {exc}"})
+        raise
     commit_obs(f"{CFG['command_prefix']}/status.json", {
         "status": "STARTING_HARBOR", "session_id": CFG["session_id"],
         "task": CFG["task"], "terminal_bench_ref": CFG["terminal_bench_ref"]
