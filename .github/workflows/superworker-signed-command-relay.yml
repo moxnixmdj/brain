@@ -37,11 +37,14 @@ jobs:
           import pathlib
           import re
           import subprocess
+          import sys
           import urllib.error
           import urllib.parse
           import urllib.request
 
           root = pathlib.Path('.')
+          sys.path.insert(0, str((root / 'canonical' / 'runtime').resolve()))
+          import continuous_obs_runtime as continuous_obs
           before = os.environ.get('BEFORE', '')
           after = os.environ['AFTER']
           zero = '0' * 40
@@ -87,6 +90,15 @@ jobs:
               sig = str(wrapper.get('signature',''))
               if not isinstance(task, dict) or task.get('agentId') != 'SUPERWORKER-PERMANENT-1':
                   raise SystemExit(f'WRONG_AGENT:{rel}')
+              obs_admission = continuous_obs.validate_context(
+                  task.get('continuous_obs'),
+                  root=root.resolve(),
+              )
+              if not obs_admission.get('pass'):
+                  raise SystemExit(
+                      f'CONTINUOUS_OBS_BLOCKED:{rel}:'
+                      + '|'.join(obs_admission.get('errors') or ['UNKNOWN'])
+                  )
               if not re.fullmatch(r'[A-Za-z0-9_-]{80,100}', sig):
                   raise SystemExit(f'BAD_SIGNATURE_ENCODING:{rel}')
 
@@ -129,6 +141,7 @@ jobs:
                   'github_run_id':os.environ.get('GITHUB_RUN_ID'),
                   'github_sha':after,
                   'delivered_at_utc':dt.datetime.now(dt.timezone.utc).isoformat(),
+                  'continuous_obs_admission':obs_admission,
               }
               (receipts / f'{stem}.receipt.json').write_text(
                   json.dumps(receipt, indent=2, sort_keys=True) + '\n', encoding='utf-8')
