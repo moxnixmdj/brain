@@ -35,6 +35,26 @@
   ],
   "checks": [
     {
+      "id": "EXACT_ACTIVE_CARRIER_BINDING",
+      "question": "For irreversible execution, does the canonical authority reducer bind the exact active carrier identity/evidence rather than only carrier_open state?",
+      "required": true
+    },
+    {
+      "id": "SECOND_CARRIER_REJECTED",
+      "question": "Does authority validation fail closed if a second carrier opens before the active carrier is closed?",
+      "required": true
+    },
+    {
+      "id": "POST_TRANSITION_AUTHORITY_REVALIDATION",
+      "question": "Was live canonical execution authority revalidated after the last material state transition and immediately before the irreversible task command?",
+      "required": true
+    },
+    {
+      "id": "CANONICAL_AUTHORITY_REDUCER_MANDATORY",
+      "question": "Is this execution path using the canonical execution_authority_reducer and not a custom/static authorization shortcut?",
+      "required": true
+    },
+    {
       "id": "QUALIFICATION_STAGE_EXPLICIT",
       "question": "If qualification-related, declare STAGE_A_PRE_EXPOSURE, STAGE_B_POST_EXPOSURE_PRE_EXECUTION, or STAGE_C_EXECUTION and forbid later-stage information in earlier stages.",
       "required": true
@@ -479,5 +499,10 @@
     "applies_to": "UNTOUCHED_QUALIFICATION_SPEND_OR_OPUS_LEVEL_PROMOTION",
     "fail_closed": true,
     "stage_protocol": "STAGE_A_PRE_EXPOSURE__STAGE_B_POST_EXPOSURE_PRE_EXECUTION__STAGE_C_ONE_SHOT_EXECUTION"
+  },
+  "exact_carrier_authority": {
+    "reducer": "canonical/runtime/execution_authority_reducer.py",
+    "verification": "canonical/verification/EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_20261002_V1.json",
+    "fail_closed": true
   }
 }
