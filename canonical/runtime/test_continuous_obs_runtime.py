@@ -29,6 +29,8 @@ def make_context(root, now):
       "status":"CURRENT","canonical_generation":"g1",
       "dependency_inventory_complete":True,
       "material_world_state_dependencies_complete":True,
+      "information_boundary_complete":True,
+      "information_policy":{"mode":"OPEN_DISCOVERY","allowed_exact_sources":[],"allowed_external_tool_kinds":[]},
       "unknown_material_dependencies":[],
       "stale_authority_absent":True,
       "valid_proof_action_priority":True,
@@ -65,6 +67,25 @@ class ContinuousObsRuntimeTests(unittest.TestCase):
         c=make_context(self.root,self.now)
         c["unknown_material_dependencies"]=["mystery"]
         self.assertFalse(validate_context(c,root=self.root,now=self.now)["pass"])
+    def test_exact_fetch_only_blocks_discovery(self):
+        c=make_context(self.root,self.now)
+        c["information_policy"]={
+            "mode":"EXACT_FETCH_ONLY",
+            "allowed_exact_sources":["https://example.test/frozen"],
+            "allowed_external_tool_kinds":[],
+        }
+        from canonical.runtime.continuous_obs_runtime import authorize_information_action
+        blocked=authorize_information_action(
+            c,{"kind":"DISCOVERY_SEARCH","source":"query","tool_kind":"web_search"},
+            root=self.root,now=self.now,
+        )
+        self.assertFalse(blocked["pass"])
+        allowed=authorize_information_action(
+            c,{"kind":"EXACT_FETCH","source":"https://example.test/frozen","tool_kind":"http_get"},
+            root=self.root,now=self.now,
+        )
+        self.assertTrue(allowed["pass"])
+
     def test_incomplete_world_inventory_fails(self):
         c=make_context(self.root,self.now)
         c["material_world_state_dependencies_complete"]=False
