@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_PROMOTE_CAUSE_CANDIDATE_NARROW_001",
+  "status": "PROPOSED_NARROW_COMPONENT_PROMOTION__ZERO_FAMILY_CREDIT",
+  "real_objective": "Promote only the Brain-owned explicit-causal-DAG cause-candidate transform from pending to verified narrow component after fresh structural transfer.",
+  "governing_invariants": [
+    "Scope remains explicit causal DAG plus explicit role/intervenability metadata.",
+    "No claim of causal-edge discovery, metadata inference, residual ranking, or general root-cause intelligence.",
+    "No family or Opus-level capability credit.",
+    "Rank-9 clean execution remains untouched."
+  ],
+  "material_premises": [
+    "Brain runtime artifact blob a35f17a3c4c4cab557f886e0825d74621cd081df is donor-independent and already guard-merged.",
+    "Fresh differential run 36836549851 completed successfully and persisted at runner commit 8be20cf2b07712e02ec9616cdafd65396889aa61.",
+    "Across 1000 previously unseen random DAGs there were zero mismatches versus the pinned donor, exact set equivalence 1.0, and 1055 candidates on both implementations.",
+    "The donor is not required by the Brain runtime implementation."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/ATOMIC_CAUSE_CANDIDATE_GENERATION_001_RECONCILIATION.json",
+    "canonical/runtime/causal_candidate_generator.py",
+    "moxnixmdj/verification-capsule-runner@8be20cf2b07712e02ec9616cdafd65396889aa61"
+  ],
+  "conclusion": "Promote the narrow explicit-causal-DAG transform to VERIFIED_BRAIN_OWNED_NARROW_COMPONENT while keeping broader causal discovery unresolved and family credit unchanged.",
+  "selected_route": "PROMOTE_ONLY_VERIFIED_NARROW_EXPLICIT_CAUSAL_DAG_COMPONENT",
+  "rejected_material_alternatives": [
+    "Promote general root-cause capability.",
+    "Claim family ownership.",
+    "Retain fresh-transfer-pending status after the 1000-case differential pass."
+  ],
+  "uncertainties": [
+    "Terminal cross-domain utility beyond the explicit graph contract is not established.",
+    "Causal-edge discovery and implicit intervenability remain unresolved."
+  ],
+  "assumptions": [
+    "The pinned donor semantics remain the accepted oracle for this narrow structural contract."
+  ],
+  "non_goals": [
+    "No rank-9 mutation.",
+    "No training.",
+    "No full C7 promotion."
+  ],
+  "next_action": "Measure candidate-set fanout to determine whether residual cause ranking can be deleted in this explicit-graph scope; otherwise keep it only where multiple falsification candidates make exhaustive replay expensive.",
+  "supersession_conditions": [
+    "Fresh real trace evidence violates the explicit-graph contract.",
+    "A narrower equivalent owned mechanism is verified."
+  ],
+  "supersedes": null
+}
