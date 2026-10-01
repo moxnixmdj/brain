@@ -786,7 +786,7 @@
     "rank22_active_execution": {
       "task": "freecad-spring-clip",
       "rank": 22,
-      "runner_pr": 427,
+      "runner_pr": 425,
       "lease": "canonical/governance/LEASE_FREECAD_SPRING_CLIP_TB4_STAGE_C_20261001_V2.json",
       "derived_authority": "canonical/governance/FREECAD_SPRING_CLIP_RANK22_DERIVED_AUTHORITY_V1.json",
       "state": "CAN_EXECUTE_TRUE__EXECUTION_COUNT_0"
