@@ -152,12 +152,12 @@
     },
     {
       "id": "RUNTIME_API_CONTRACT_MISMATCH",
-      "defense": "Before Stage-C, every external runtime API symbol/behavior assumed by the planned builder route must have an exact-surface PASS receipt; unverified symbols fail closed.",
+      "defense": "Before Stage-C, every external runtime API assumption used by the planned builder route must have an exact-surface PASS receipt; unknown assumptions fail closed.",
       "required_evidence": "RUNTIME_API_CONTRACT_PREFLIGHT_PLUS_RANK22_BUILDER_FAILURE_IMMUNITY_VERIFICATION"
     },
     {
       "id": "PROCESS_EXIT_ZERO_WITH_SEMANTIC_SCRIPT_FAILURE",
-      "defense": "Fresh builder execution requires a declared success sentinel before spend. Runtime observation is semantically successful only when exit code is zero, the sentinel is observed, and no fatal stderr pattern is present; semantic failure blocks terminal verification.",
+      "defense": "Fresh builder execution requires a declared success sentinel before spend. Success requires exit zero, sentinel observed, and no fatal stderr; semantic failure blocks terminal verification.",
       "required_evidence": "BUILDER_SEMANTIC_SUCCESS_REGRESSION_PLUS_EXACT_RUNTIME_BEHAVIOR_CANARY"
     }
   ],
