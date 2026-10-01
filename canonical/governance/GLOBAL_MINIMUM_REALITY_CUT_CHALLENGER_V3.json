@@ -1,0 +1,172 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3",
+  "date": "2026-10-02",
+  "status": "CHALLENGER__REQUIRES_INDEPENDENT_EXACT_SOLVER_VERIFICATION",
+  "graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+  "proof_protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+  "cost_semantics": "Cost is count of independently scored qualification surfaces. A multi-distinction observation may cover multiple distinctions only when the same frozen task portfolio and same scored run directly exercises all listed distinctions. Fixed public benchmark conjunctions cost their number of distinct benchmark surfaces.",
+  "distinctions": [
+    "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+    "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
+    "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+    "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+    "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+    "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+    "P_ADVANCED_AGENTIC_CODING",
+    "P_COMPLEX_MULTI_TOOL_AGENCY",
+    "P_PROFESSIONAL_KNOWLEDGE_WORK",
+    "P_BUSINESS_WORKFLOW_AUTOMATION",
+    "P_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "P_AGENTIC_SCIENTIFIC_RESEARCH",
+    "P_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "P_COMPUTER_AND_BROWSER_USE",
+    "P_FINANCIAL_ANALYSIS",
+    "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "P_SUBAGENT_DELEGATION_AND_COORDINATION",
+    "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "P_ARTIFACT_CREATION",
+    "P_COMMUNICATION_AND_SYNTHESIS",
+    "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "P_UNKNOWN_DOMAIN_ADAPTATION",
+    "P_MULTI_CAPABILITY_COMPOSITION"
+  ],
+  "already_resolved": [],
+  "observations": [
+    {
+      "id": "Q_SEMANTIC_ACCEPTANCE_SPENT_PORTFOLIO",
+      "covers": [
+        "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE"
+      ],
+      "cost": 0,
+      "rationale": "Uses already-spent/nonpromotion task evidence only; no untouched qualification information is consumed."
+    },
+    {
+      "id": "Q_STRUCTURED_GEOMETRY_SPENT_PORTFOLIO",
+      "covers": [
+        "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION"
+      ],
+      "cost": 0,
+      "rationale": "Mechanism falsification can begin on already-spent CAD and quarantined rank23 source-contract evidence; final family parity remains separate."
+    },
+    {
+      "id": "Q_PROFESSIONAL_ARTIFACT_SYNTHESIS_MATCHED_PORTFOLIO",
+      "covers": [
+        "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+        "P_ARTIFACT_CREATION",
+        "P_COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "cost": 1,
+      "rationale": "One frozen professional-deliverable portfolio scores native preservation, artifact quality, evidence grounding and audience synthesis from the same outputs."
+    },
+    {
+      "id": "Q_INTERACTIVE_AGENCY_DELEGATION_TOOL_COMPOSITION_PORTFOLIO",
+      "covers": [
+        "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+        "P_COMPLEX_MULTI_TOOL_AGENCY",
+        "P_SUBAGENT_DELEGATION_AND_COORDINATION",
+        "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "P_MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "cost": 1,
+      "rationale": "Same hidden-tool multi-worker interactive tasks exercise grounding, route discovery, delegation, state handoff and composition; each submetric remains separately reported."
+    },
+    {
+      "id": "Q_RESEARCH_UNKNOWN_DOMAIN_MATCHED_PORTFOLIO",
+      "covers": [
+        "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+        "P_UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "cost": 1,
+      "rationale": "Same frozen unseen-domain research tasks directly exercise ontology/tool acquisition and iterative evidence control."
+    },
+    {
+      "id": "Q_FAILURE_LOCALIZATION_RECOVERY_MATCHED_PORTFOLIO",
+      "covers": [
+        "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+        "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ],
+      "cost": 1,
+      "rationale": "Same injected-failure trajectories support causal localization, intervention/rescue and recovery scoring."
+    },
+    {
+      "id": "Q_CODING_FIXED_BARS",
+      "covers": [
+        "P_ADVANCED_AGENTIC_CODING"
+      ],
+      "cost": 3,
+      "rationale": "Terminal-Bench 4.0, FrontierCode v1.1 Main and CursorBench 4.0 are three distinct required surfaces."
+    },
+    {
+      "id": "Q_PROFESSIONAL_FIXED_BARS",
+      "covers": [
+        "P_PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "cost": 2,
+      "rationale": "GDPval-AA v2.1 and AA-Briefcase v1.1 are distinct required surfaces."
+    },
+    {
+      "id": "Q_AUTOMATIONBENCH",
+      "covers": [
+        "P_BUSINESS_WORKFLOW_AUTOMATION"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_HLE_TOOLS",
+      "covers": [
+        "P_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_TERMINAL_BENCH_SCIENCE",
+      "covers": [
+        "P_AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_CHARTOGRAPHY_PLUS_DENSE_DOC_SCOPE",
+      "covers": [
+        "P_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_OSWORLD_MATCHED",
+      "covers": [
+        "P_COMPUTER_AND_BROWSER_USE"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_FINANCE_INDEX_PLUS_SCOPE_AUDIT",
+      "covers": [
+        "P_FINANCIAL_ANALYSIS"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_INSTRUCTION_LIVEBENCH_PLUS_SCOPE",
+      "covers": [
+        "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "cost": 1
+    }
+  ],
+  "constraints": [
+    "No observation may receive coverage credit for a family whose proof protocol is not directly scored by that observation.",
+    "Bundling files or benchmark invocations does not reduce cost unless the same underlying scored portfolio jointly supplies the information.",
+    "Zero-cost observations mean no new untouched information, not zero wall-clock.",
+    "Rank23 task execution and hidden verifier are absent."
+  ],
+  "expected_exact_minimum": {
+    "observation_count": 15,
+    "total_cost": 15,
+    "zero_new_information_members": [
+      "Q_SEMANTIC_ACCEPTANCE_SPENT_PORTFOLIO",
+      "Q_STRUCTURED_GEOMETRY_SPENT_PORTFOLIO"
+    ]
+  },
+  "next_if_verified": "EXECUTE_ZERO_NEW_INFORMATION_CUT_MEMBERS_FIRST_IN_PARALLEL__RECOMPUTE_AFTER_EACH_RESULT__THEN_ADMIT_ONLY_STILL_NECESSARY_POSITIVE_COST_MEMBERS"
+}
