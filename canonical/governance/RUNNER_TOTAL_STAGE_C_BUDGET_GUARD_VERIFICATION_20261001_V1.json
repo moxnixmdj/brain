@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION_V1",
+  "date": "2026-10-01",
+  "status": "INDEPENDENT_PASS__MERGED__RANK19_PREEXPOSURE_ELIGIBLE",
+  "root_bug": "PER_ACTION_REVALIDATION_ENFORCED_SCOPE_AND_BURST_ID_BUT_NOT_TOTAL_CANONICAL_EXECUTION_COUNT_ALLOWED_OR_TERMINAL_VERIFIER_COUNT_ALLOWED",
+  "causal_evidence": "canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+  "repair": {
+    "runner_repo": "moxnixmdj/verification-capsule-runner",
+    "pr": 358,
+    "merge_commit": "bd586c994a601871bc868272e07bdd2a5dd01e54",
+    "files": [
+      "session_bridge/acceptance_contract.py",
+      "session_bridge/controller_fast.py",
+      "verification/test_acceptance_contract.py",
+      "test_stage_lease_upgrade.py"
+    ],
+    "behavior": [
+      "STAGE_C_LEASE_REQUIRES_EXPLICIT_NONNEGATIVE_EXECUTION_AND_TERMINAL_BUDGETS",
+      "EVERY_ACCEPTED_BUILDER_BURST_CONSUMES_ONE_EXECUTION_UNIT_BEFORE_ANY_TASK_COMMAND_RUNS",
+      "BUILDER_BURST_REJECTED_WHEN_EXECUTION_COUNT_USED_GTE_EXECUTION_COUNT_ALLOWED",
+      "TERMINAL_VERIFIER_UNIT_CONSUMED_BEFORE_HIDDEN_VERIFIER_INVOCATION",
+      "TERMINAL_SUBMISSION_REJECTED_WHEN_TERMINAL_COUNT_USED_GTE_TERMINAL_VERIFIER_COUNT_ALLOWED",
+      "MISSING_OR_ZERO_BUDGET_FAILS_CLOSED"
+    ]
+  },
+  "independent_verification": [
+    {
+      "workflow": "Verify independent acceptance gate",
+      "run_id": 36921835282,
+      "job_id": 110569513683,
+      "conclusion": "success",
+      "includes": [
+        "TOTAL_EXECUTION_BUDGET_SECOND_BURST_NEGATIVE_CANARY",
+        "TOTAL_TERMINAL_BUDGET_SECOND_VERIFIER_NEGATIVE_CANARY",
+        "MISSING_ZERO_BUDGET_FAIL_CLOSED"
+      ]
+    },
+    {
+      "workflow": "Stage lease promotion regression",
+      "run_id": 36921835030,
+      "job_id": 110569512818,
+      "conclusion": "success"
+    },
+    {
+      "workflow": "Execution Guard Regression",
+      "run_id": 36921835135,
+      "job_id": 110569513626,
+      "conclusion": "success"
+    }
+  ],
+  "rank18_replay_allowed": false,
+  "rank19_instruction_read": false,
+  "rank19_task_execution_authorized": false,
+  "next": "RANK19_STAGE_A_PREEXPOSURE_ONLY__DO_NOT_READ_INSTRUCTION",
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
