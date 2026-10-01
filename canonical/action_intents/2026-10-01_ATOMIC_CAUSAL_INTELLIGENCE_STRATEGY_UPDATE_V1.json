@@ -137,7 +137,7 @@
     ],
     "selected_surviving_route": "ATOMIC_CAUSAL_DECOMPOSITION__SUBTRACT_SOLVED_FUNCTIONS__RANK_BY_CROSS_DOMAIN_LEVERAGE",
     "why_selected_route_is_fastest_sufficient": "It reuses existing evidence, removes duplicated family-level work, preserves current execution, and directs acquisition only at causally necessary residuals.",
-    "expected_parent_level_state_change": "INTERNAL_IMPLEMENTATION_REPRESENTATION_CHANGES_TO_ATOMIC_CAUSAL_TRANSFORMS__19_FAMILIES_REMAIN_ACCEPTANCE_SURFACES__NO_OWNERSHIP_STATUS_CHANGE",
+    "expected_parent_level_state_change": "19_FAMILIES_BECOME_EVALUATION_SURFACES_ONLY__ATOMIC_CAUSAL_TRANSFORMS_BECOME_PRIMARY_INTERNAL_WORK_UNITS__RANK9_CODING_EXECUTION_PRESERVED",
     "stop_condition": "ATOMIC_CAUSAL_STRATEGY_IS_BOUND_TO_CURRENT_CONTROL_SURFACES__RANK9_CLEAN_EXECUTION_REMAINS_UNCHANGED__NO_CAPABILITY_CREDIT_ADDED__TRUSTED_DRIFT_GUARD_PASSES_ON_EXACT_BASE",
     "route_frontier": {
       "discovery_required": false,
