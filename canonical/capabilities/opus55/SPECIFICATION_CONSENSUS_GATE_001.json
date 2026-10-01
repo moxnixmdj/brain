@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_SPECIFICATION_CONSENSUS_GATE_VERIFICATION_V1",
+  "date": "2026-10-01",
+  "status": "INDEPENDENT_VERIFICATION_PASS__BRAIN_OWNED_NARROW_COMPONENT__ZERO_FAMILY_CREDIT",
+  "artifact": "canonical/runtime/specification_consensus_gate.py",
+  "brain_blob_sha": "cc757e7772d5a048a3cc96ba0455bd2bdeddbb82",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 317,
+    "head_sha": "168706cb24119270a05a8aedc16468bea713f9a3",
+    "workflow_run_id": 36909004095,
+    "job_id": 110526679108,
+    "runner_blob_sha": "cc757e7772d5a048a3cc96ba0455bd2bdeddbb82",
+    "exact_source_match": true,
+    "conclusion": "success"
+  },
+  "owned_scope": [
+    "EXHAUSTIVE_SOURCE_SENTENCE_ACCOUNTING_ACROSS_DECLARED_EXTRACTORS",
+    "EXACT_SOURCE_QUOTE_ANCHOR_VALIDATION",
+    "CROSS_EXTRACTOR_REQUIREMENT_CLASS_AGREEMENT",
+    "CROSS_EXTRACTOR_NORMALIZED_BEHAVIORAL_SIGNATURE_AGREEMENT",
+    "FAIL_CLOSED_UNKNOWN_ON_MISSING_COVERAGE_OR_DISAGREEMENT"
+  ],
+  "not_owned": [
+    "NATURAL_LANGUAGE_SEMANTIC_EXTRACTION_ITSELF",
+    "PROOF_THAT_MATCHING_EXTRACTORS_ARE_SEMANTICALLY_CORRECT",
+    "PROOF_OF_EXTRACTOR_STATISTICAL_INDEPENDENCE",
+    "DOMAIN_GOLD_VALUE_SYNTHESIS",
+    "WHOLE_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+  ],
+  "substrate_rule": "Semantic extractors remain untrusted replaceable cognition substrates; this component owns only the deterministic consensus/source-trace protocol.",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
