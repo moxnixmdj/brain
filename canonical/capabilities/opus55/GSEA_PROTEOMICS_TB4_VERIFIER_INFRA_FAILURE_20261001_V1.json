@@ -3,7 +3,7 @@
   "record_id": "TB4-GSEA-PROTEOMICS-RANK4-INFRA-FAILURE-20261001-V1",
   "status": "UNVERIFIED_INFRASTRUCTURE_FAILURE_BEFORE_TEST_SCRIPT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "b7c4efa4d35ba3709f37f3109daac87849a1c945",
+  "canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
   "task": {
     "benchmark": "Terminal-Bench 4.0",
     "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
@@ -11,7 +11,7 @@
     "sample_rank": 4,
     "task_id": "gsea-proteomics",
     "lease_action_base_commit": "c6c74e0b5a8b1a21f32f6c878eb97ee10bf1608e",
-    "disposition_record_base_commit": "b7c4efa4d35ba3709f37f3109daac87849a1c945"
+    "disposition_record_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c"
   },
   "attempt": {
     "runner_repository": "moxnixmdj/verification-capsule-runner",
@@ -161,7 +161,7 @@
     "jevOS_runtime_rebind_artifact_digest": "sha256:c7cdb28a335b8f4f82b8d73c8ec959dd288c08d72705355ebf8c8d5eca14fc95",
     "jevOS_runtime_rebind_exact_decision_equivalence_on_frozen_v2": true,
     "decision_kernel_runtime_fingerprint_enforced_in_adapter": false,
-    "current_canonical_base_commit": "b7c4efa4d35ba3709f37f3109daac87849a1c945",
+    "current_canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
     "current_base_kernel_gate_result_record": "canonical/capabilities/opus55/COGNITIVE_DECISION_KERNEL_GATE_VERIFY_001_RESULT.json",
     "current_base_kernel_gate_result_record_reviewed": false,
     "fresh_software_adjudication_task": "canonical/tasks/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001.json",
@@ -193,8 +193,16 @@
     "current_main_rank5_contamination_record_reviewed": false,
     "current_main_rank5_user_instruction": "SKIP_WITHOUT_REORDERING__NO_EXPLICIT_REVERSAL",
     "current_base_pointer_queue_hierarchy_next_action_mismatch": true,
-    "current_base_exact_head_guard_status": "BLOCKED_PENDING_AUTHORIZED_NEXT_ACTION_MIRROR_RECONCILIATION",
+    "current_base_exact_head_guard_status": "FAILED_ON_PRIOR_BASE__CURRENT_BASE_RECHECK_PENDING",
     "current_base_campaign_status": "ACTIVE__C3_DETERMINISTIC_CONTROL_RETAINED__ETTIN_ZERO_TERMINAL_DELTA_FALSIFIED__ZERO_CAPABILITY_CREDIT",
-    "current_base_new_pass_score_or_credit_inferred": false
+    "current_base_new_pass_score_or_credit_inferred": false,
+    "current_main_target_record_status": "BRAIN_CONFIGURED_FRESH_TASK_VERIFIED_PASS__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_CAPABILITY_CREDIT",
+    "current_main_target_underlying_evidence_reviewed": false,
+    "current_main_target_pass_or_score_independently_claimed": false,
+    "current_base_pointer_queue_target_next_action_mismatch": true,
+    "current_base_rank6_lease_path": "canonical/action_intents/2026-10-01_LEASE_GLYCAN_MS2_ELUCIDATION_TB4_V1.json",
+    "current_base_rank6_lease_content_reviewed": false,
+    "rank6_task_instructions_or_result_read": false,
+    "rank6_execution_or_pass_claim_in_this_reconciliation": false
   }
 }

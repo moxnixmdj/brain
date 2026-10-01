@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
   "receipt_id": "RECONCILE-ACTIVE-PROGRAM-AND-GSEA-INFRA-FAILURE-20261001-V1",
   "status": "CURRENT_BASE_DECISION_RECEIPT",
-  "canonical_base_commit": "b7c4efa4d35ba3709f37f3109daac87849a1c945",
+  "canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "real_objective": "Permanently own all useful Opus 5.5-or-better capabilities with external/JIT knowledge; the active coding lane still needs a comparable fresh-task Stage-1 score of at least 66.4 percent.",
   "governing_invariants": [
@@ -39,7 +39,9 @@
     "Boundary incident 2: a scoped scan intended to locate the exact next-action fields printed unrelated nested next-action excerpts from other task-specific route records. This was an unintended boundary breach; no associated task files were opened and the text was not used. Inspection stopped immediately after identifying the mismatch.",
     "Current main b7c4efa4d35ba3709f37f3109daac87849a1c945 has a rank-6 high-throughput next-step and a rank-6 lease-action path, while retaining the same Stage-1 target/blocker and C3 zero-credit campaign status. The current pointer/queue/hierarchy next-action strings differ, and no task-specific action or result was read. The standing user boundary remains in force; this receipt makes no rank-6 execution/lease/result claim.",
     "Metadata-only current-base paths also include canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json, canonical/action_intents/2026-10-01_LEASE_BATCHED_EVAL_PARITY_TB4_V1.json, and canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json; the new action/result contents were not opened. The historical user instruction to skip rank 5 without reordering remains binding absent explicit reversal.",
-    "After rebase to current base, the branch pointer program mirrors the hierarchy but pointer/queue/hierarchy next-action equality remains unresolved; exact-head guard validation is pending."
+    "After rebase to current base, the branch pointer program mirrors the hierarchy but pointer/queue/hierarchy next-action equality remains unresolved; exact-head guard validation is pending.",
+    "Current base 60c26db3f44069e38264a284f6edbf8f2203298c changes the hierarchy next-action class to rank 6. Pointer/queue/target next-action strings remain nonidentical. The current target summary status records a Brain-configured fresh-task pass, benchmark score pending, and zero capability credit; the underlying task/evidence was not opened, so this receipt makes no independent pass or score claim.",
+    "The exact-head guard on prior base b7c4efa4d35ba3709f37f3109daac87849a1c945/head 6350ca8 failed with pointer, queue, and target-record next-action mismatches. No task-specific contents were read or route fields changed."
   ],
   "evidence_refs": [
     "canonical/CANONICAL_POINTER.json",
@@ -75,7 +77,7 @@
     "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json",
     "canonical/runtime/cognitive_tool_router.py"
   ],
-  "conclusion": "The historical rank-4 GSEA attempt earned no pass or capability credit; no further outcome is inferred from the newer unread record. This branch aligns the pointer program mirror to the active hierarchy and preserves the Stage-1 blocker. Current base reports C3 zero-credit campaign status and a rank-6 high-throughput next-step with a lease-action path, but the action/task/result contents are unread. The standing user task-material boundary remains; the prior rank-5 skip instruction has not been reversed. Pointer/queue/hierarchy next-action strings remain inconsistent, so the trusted guard is not yet clear. The local kernel patch remains synthetic-only and unintegrated.",
+  "conclusion": "The historical rank-4 GSEA attempt earned no pass or capability credit; no new outcome is inferred from the newer unread record. This branch aligns the pointer program mirror with the active hierarchy and preserves the Stage-1 blocker. Current main now points toward a rank-6 high-throughput step and its target summary records a Brain-configured fresh-task pass with benchmark score pending and zero capability credit, but underlying task evidence remains unread and unverified by this reconciliation. The standing user boundary bars task-specific processing absent explicit permission. Pointer/queue/target next-action strings remain inconsistent and the exact guard failed on the prior base. The local kernel patch remains synthetic-only and unintegrated.",
   "selected_route": "RECONCILE_POINTER_AND_GSEA_DISPOSITION__HOLD_COGNITIVE_ROUTE_PENDING_AUTHORIZED_REVIEW__NO_CREDIT",
   "rejected_material_alternatives": [
     "Revert the hierarchy to the previous narrow program label, undoing the explicit all-family activation.",
@@ -113,7 +115,7 @@
     "No change to the terminal objective, active capability target, Stage-1 score threshold, or sample order.",
     "No new pointwise JEV request or cognitive-basis follow-up experiment is run by this reconciliation; the already-recorded Jevos baseline remains zero-credit until heldout transfer and terminal-task evidence are established."
   ],
-  "next_action": "Request explicit user permission before opening the current rank-6 lease/task/result materials or changing the next-action mirrors. The rank-5 skip instruction remains binding. Do not push/merge PR #606 while current pointer/queue/hierarchy next-action mirrors disagree and the trusted exact-head guard is blocked. After the user resolves the route/permission, rebind to then-current main, align only authorized current-base fields, run the exact-head guard and synthetic tests, and wait for fresh checks.",
+  "next_action": "Request explicit permission before opening the current rank-6 lease/task/result materials or underlying evidence summarized by the target record. Do not push/merge PR #606 while pointer/queue/target next-action mirrors disagree and the trusted exact-head guard is blocked. After the user resolves the route/permission, rebind to then-current main, reconcile only authorized control-plane fields, run the exact-head guard and synthetic tests, and wait for fresh checks.",
   "supersession_conditions": [
     "A newer canonical main commit changes the pointer, active program, active capability target, Stage-1 blocker, or task sample order.",
     "Independent retrieval or adjudication of the rank-4 artifact establishes additional terminal-verifier facts.",
