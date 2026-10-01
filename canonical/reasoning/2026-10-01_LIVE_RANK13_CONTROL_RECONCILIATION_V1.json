@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_LIVE_RANK13_CONTROL_RECONCILIATION_V1",
+  "status": "CURRENT_BASE_RECONCILIATION__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Restore one truthful canonical next-action state matching the genuinely live rank-13 fin-saccr-rwa execution, without changing coding evidence, benchmark order, or capability credit.",
+  "governing_invariants": [
+    "Terminal objective unchanged.",
+    "Current coding target remains ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1.",
+    "Rank 13 fin-saccr-rwa is the current live fresh execution.",
+    "Workflow liveness is not task success.",
+    "No verifier or solution content is read by this reconciliation.",
+    "Canonical next-action mirrors must agree.",
+    "Incremental spend remains zero."
+  ],
+  "material_premises": [
+    "Runner workflow 36901863722 is in progress with persistent fast-burst controller active.",
+    "Main contains rank-13 lease commit f91684889a6aff9e606759ec17ccce7b3d10c35d.",
+    "Hierarchy still points to resolving rank-10 CAD geometry.",
+    "Pointer, queue, scoreboard and target still point to launching rank 10.",
+    "Stale duplicate PR 624 was closed before this action."
+  ],
+  "evidence_refs": [
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "canonical/capabilities/frontier/ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1.json",
+    "canonical/governance/LEASE_FIN_SACCR_RWA_TB4_20261001_V1.json"
+  ],
+  "conclusion": "Reconcile every canonical next-action mirror to the live rank-13 execution and make no other capability claim.",
+  "selected_route": "EXACT_CURRENT_BASE_RANK13_CONTROL_RECONCILIATION",
+  "rejected_material_alternatives": [
+    "Leave contradictory rank-10 mirrors in place.",
+    "Restart or duplicate rank 13.",
+    "Infer task success from workflow liveness."
+  ],
+  "uncertainties": [
+    "Rank-13 task verdict remains unknown until one-shot verifier completes."
+  ],
+  "assumptions": [
+    "Base commit is 3b8554a4311adbeeae698e941739ba16439e0494."
+  ],
+  "non_goals": [
+    "No capability promotion.",
+    "No benchmark replay.",
+    "No task-specific research."
+  ],
+  "next_action": "After guard validation, merge mirror reconciliation and continue the already-live rank-13 execution.",
+  "supersession_conditions": [
+    "Rank-13 execution reaches a terminal adjudicated result before merge.",
+    "Main changes the active coding frontier before merge."
+  ],
+  "supersedes": null
+}
