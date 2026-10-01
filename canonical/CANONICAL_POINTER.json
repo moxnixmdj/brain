@@ -232,7 +232,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "EXECUTE_BATCHED_EVAL_PARITY_RANK_5_ON_HIGH_THROUGHPUT_EXECUTION_V2__ONE_SHOT_INDEPENDENT_VERIFIER__NO_TASK_SPECIFIC_PUBLIC_SEARCH",
+    "next_step": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
@@ -741,16 +741,24 @@
     },
     "execution_kernel": "canonical/execution/HIGH_THROUGHPUT_EXECUTION_V2.json",
     "active_stage1_task": {
-      "rank": 5,
-      "task": "batched-eval-parity",
-      "runner_pr": 288,
-      "state": "RUNNER_READY__INSTRUCTION_UNREAD"
+      "rank": 6,
+      "task": "glycan-ms2-elucidation",
+      "runner_pr": 289,
+      "workflow_run_id": 36822123561,
+      "state": "RUNNER_LAUNCHED__BUILDING_RUNTIME__INSTRUCTION_UNREAD"
     },
     "latest_clean_stage1_result": {
       "task": "gsea-proteomics",
       "result": "VERIFIED_FAILURE",
       "reward": 0,
       "evidence_path": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json"
+    },
+    "latest_stage1_contamination": {
+      "rank": 5,
+      "task": "batched-eval-parity",
+      "evidence_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json",
+      "promotion_credit": 0,
+      "hidden_verifier_run": false
     }
   },
   "provider_rules": {
