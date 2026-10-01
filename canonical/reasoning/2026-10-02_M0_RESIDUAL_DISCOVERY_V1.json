@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_M0_RESIDUAL_DISCOVERY_V1",
+  "date": "2026-10-02",
+  "status": "DISCOVERY_COMPLETE_FOR_CURRENT_FRONTIER__NO_WHOLE_RESIDUAL_CREDIT",
+  "residuals": {
+    "M0A": {
+      "brain_routes": [
+        "canonical/runtime/bound_capabilities/broad_objective_decompose.py",
+        "canonical/runtime/source_contract_compiler.py"
+      ],
+      "conclusion": "BOUNDED_DECOMPOSITION_AND_CONSENSUS_GATES_EXIST__ARBITRARY_SOURCE_SEMANTIC_GENERATION_NOT_OWNED",
+      "next": "DECOMPOSE_BY_FROZEN_SOURCE_SURFACE_AND_REUSE_DETERMINISTIC_PARSERS"
+    },
+    "M0B": {
+      "brain_routes": [
+        "canonical/runtime/requirement_acceptance_compiler.py",
+        "canonical/runtime/independent_acceptance_model.py"
+      ],
+      "verification": "canonical/verification/REQUIREMENT_ACCEPTANCE_COMPILER_VERIFICATION_20261002_V1.json",
+      "conclusion": "NORMALIZED_REQUIREMENT_TO_ACCEPTANCE_CONSEQUENCE_COMPILER_VERIFIED",
+      "remaining": "FROZEN_ENVELOPE_REQUIREMENT_TYPE_COVERAGE_NOT_YET_PROVEN",
+      "next": "TYPE_ALL_FROZEN_ENVELOPE_REQUIREMENTS_AND_FAIL_CLOSED_ON_UNSUPPORTED_TYPES"
+    }
+  },
+  "new_reality_spend": 0,
+  "capability_credit_delta": 0
+}
