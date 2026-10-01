@@ -1,0 +1,35 @@
+name: Shared Cognitive Basis Jev Probe V1
+
+on:
+  push:
+    branches:
+      - probe/shared-cognitive-basis-jev-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Oracle mechanics self-test
+        run: |
+          python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
+            --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
+            --oracle-self-test \
+            --out /tmp/oracle.json
+      - name: Live zero-cost Simple-JEV probe
+        run: |
+          python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
+            --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
+            --endpoint https://simple-jev-demo-api.featherless.ai \
+            --model auto \
+            --out cognitive_basis_probe_result_v1.json
+      - name: Upload diagnostic evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cognitive-basis-probe-v1
+          path: cognitive_basis_probe_result_v1.json
