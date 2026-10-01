@@ -783,7 +783,12 @@
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "terminal_closure_reducer": "canonical/runtime/terminal_closure_reducer.py",
     "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
-    "rank22_active_execution": null
+    "rank22_active_execution": null,
+    "reasoning_authority": {
+      "evidence_saturation_activation": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json",
+      "evidence_saturation_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+      "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json"
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -971,7 +976,8 @@
     "new_fresh_evidence_requires_minimum_reality_cut": true,
     "reacquire_existing_terminal_information_without_invalidation": false,
     "current_rank22_non_regression": "INVALIDATED_BY_SPENT_BUILDER_FAILURE__NO_LONGER_APPLIES",
-    "minimum_reality_cut_now_fully_active": true
+    "minimum_reality_cut_now_fully_active": true,
+    "evidence_saturation_activation_receipt": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
