@@ -1,22 +1,24 @@
 {
   "schema": "PROJECT_BRAIN_UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1",
   "date": "2026-10-02",
-  "status": "CANONICAL_PREDECLARED_PROTOCOL__ZERO_CAPABILITY_CREDIT_UNTIL_EXECUTED",
+  "status": "CANONICAL_PREDECLARED_MATCHED_PARITY_AND_SCOPE_AUDIT_PROTOCOL__ZERO_CAPABILITY_CREDIT_UNTIL_EXECUTED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target": {
     "exact_comparator": "Claude Opus 5.5",
-    "rule": "BRAIN_CONFIGURED_ROUTE_MUST_BE_EQUAL_OR_BETTER_ON_THE_FROZEN_FAMILY_BEHAVIORAL_ENVELOPE",
+    "rule": "BRAIN_CONFIGURED_ROUTE_MUST_BE_EQUAL_OR_BETTER_ON_THE_COMPLETE_FROZEN_FAMILY_BEHAVIORAL_ENVELOPE__PUBLIC_BARS_MAY_SUPPLY_PARTIAL_SCOPE_EVIDENCE_ONLY",
     "proxy_comparator_allowed": false,
     "paid_comparator_acquisition_allowed": false,
     "unavailable_zero_incremental_comparator_disposition": "BLOCKED__DO_NOT_SUBSTITUTE_ANOTHER_MODEL"
   },
   "applicability": {
-    "only_when_no_public_or_absolute_terminal_bar_exists": true,
+    "only_when_no_public_or_absolute_terminal_bar_exists": false,
     "proof_mode": "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND",
     "family_behavior_source": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
     "leaf_source": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "all_leaf_contracts_must_be_semantically_closed_before_challenge_selection": true,
-    "zero_open_specification_holes_required": true
+    "zero_open_specification_holes_required": true,
+    "rule": "APPLY_AS_TERMINAL_MATCHED_PROTOCOL_WHEN_NO_COMPLETE_PUBLIC_OR_ABSOLUTE_BAR_EXISTS__OR_AS_MANDATORY_SCOPE_AUDIT_FOR_ANY_FAMILY_LEAVES_NOT_FULLY_EXERCISED_BY_A_PUBLIC_BAR",
+    "public_bar_behavior": "A_PUBLIC_BAR_MAY_CLOSE_ONLY_THE_BEHAVIORAL_SCOPE_IT_DIRECTLY_EXERCISES__UNEXERCISED_FAMILY_LEAVES_REMAIN_BOUND_TO_THIS_MATCHED_PROTOCOL"
   },
   "freeze_order": [
     "FREEZE_FAMILY_USEFUL_BEHAVIOR_AND_BEHAVIORAL_LEAF_IDS",
