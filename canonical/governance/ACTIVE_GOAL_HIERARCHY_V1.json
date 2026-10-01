@@ -282,7 +282,7 @@
   },
   "reasoning_authority": {
     "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
-    "theory_receipt": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_INTELLIGENCE_DECOMPOSITION_STRATEGY_V1.json"
+    "theory_receipt": "canonical/reasoning/2026-10-01_TERMINAL_SUCCESS_PREMORTEM_AND_FAILURE_IMMUNITY_V1.json"
   },
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -461,5 +461,12 @@
     "path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "current_verdict": "NOT_SATISFIED__RANK15_REMAINS_FROZEN"
+  },
+  "terminal_closure": {
+    "manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "reducer": "canonical/runtime/terminal_closure_reducer.py",
+    "reducer_verification": "canonical/verification/TERMINAL_CLOSURE_REDUCER_VERIFICATION_20261001_V1.json",
+    "current_verdict": "NOT_ACHIEVED",
+    "override_allowed": false
   }
 }
