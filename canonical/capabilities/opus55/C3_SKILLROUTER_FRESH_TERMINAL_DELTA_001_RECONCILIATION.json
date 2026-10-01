@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_C3_SKILLROUTER_FRESH_TERMINAL_DELTA_001_RECONCILIATION_V1",
+  "status": "FRESH_GATE_PASS__INTERNALIZATION_EVALUATION_AUTHORIZED__NOT_GLOBAL_DEFAULT__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "candidate": {
+    "model": "pipizhao/SkillRouter-Reranker-0.6B",
+    "revision": "78986e1142d12857cfd85b8005e62902cd42d858",
+    "license": "Apache-2.0"
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36823745101,
+    "result_commit": "05f389cb98ccfb50944ffa09546bdfb68a871142",
+    "frozen_cases_commit": "28ab0f0a62e7ad23294945403639d9b6e42736df"
+  },
+  "metrics": {
+    "episodes": 15,
+    "baseline_terminal_success_rate": 0.8,
+    "skillrouter_terminal_success_rate": 1,
+    "terminal_success_delta": 0.2,
+    "baseline_semantic_success_rate": 0.75,
+    "skillrouter_semantic_success_rate": 1,
+    "semantic_success_delta": 0.25,
+    "deterministic_filter_success_rate": 1,
+    "skillrouter_mean_routing_latency_ms": 2535.918673133339,
+    "baseline_mean_routing_latency_ms": 0.026296199996522773
+  },
+  "predeclared_gate": "PASS",
+  "adjudication": [
+    "SKILLROUTER_SURVIVES_FRESH_C3_TERMINAL_DELTA",
+    "DO_NOT_INSTALL_AS_ALWAYS_ON_GLOBAL_ROUTER_BECAUSE_LATENCY_IS_TOO_HIGH",
+    "EVALUATE_CHEAP_CONFIDENCE_GATE_TO_CALL_SKILLROUTER_ONLY_ON_AMBIGUOUS_MULTI_ROUTE_CASES",
+    "NO_C3_CAPABILITY_CREDIT_YET__COMPOSED_ROUTE_MUST_SHOW_TERMINAL_GAIN_WITH_ACCEPTABLE_WALL_CLOCK"
+  ],
+  "next_required_action": "DERIVE_AND_FREEZE_A_DETERMINISTIC_LEXICAL_MARGIN_ESCALATION_GATE_FROM_SPENT/FRESH_RESULTS__THEN_TEST_COMPOSED_CHEAP_FIRST_SKILLROUTER_FALLBACK_ON_HELDOUT_C3_CASES",
+  "capability_credit_delta": 0
+}
