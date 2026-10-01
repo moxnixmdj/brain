@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_SACCR_CREDIT_KERNEL_V1",
+  "date": "2026-10-01",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_STRUCTURED_METHOD_COMPONENT__DONOR_RUNTIME_DELETED__ZERO_FAMILY_CREDIT",
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "artifact": "canonical/runtime/saccr_credit_kernel.py",
+  "artifact_blob_sha": "4a9536a391e21ec9895c1abdf45a673c0451ba3a",
+  "donor": {
+    "repository": "ankitjha67/baselkit",
+    "revision": "52293ef9dfd9d260a0e954460945a7356843d18d",
+    "license": "Apache-2.0",
+    "runtime_required": false
+  },
+  "owned_calculation_graph": [
+    "S_E_TO_SUPERVISORY_DURATION",
+    "NOTIONAL_X_SUPERVISORY_DURATION_TO_ADJUSTED_NOTIONAL",
+    "DIRECTION_TO_SUPERVISORY_DELTA_LINEAR_CREDIT",
+    "MATURITY_OR_MPOR_TO_MATURITY_FACTOR",
+    "D_ADJ_X_DELTA_X_MF_TO_EFFECTIVE_NOTIONAL",
+    "RATING_OR_INDEX_TO_SUPERVISORY_FACTOR_AND_CORRELATION",
+    "ENTITY_EFFECTIVE_NOTIONALS_TO_CREDIT_ADDON"
+  ],
+  "independent_verification": {
+    "runner_pr": 381,
+    "workflow_run_id": 36928395156,
+    "merged_runner_commit": "50f6f07d1aac0c8e0643e8552c288a0f76d6f9c0",
+    "randomized_trade_intermediate_cases": 2000,
+    "randomized_portfolio_aggregation_cases": 400,
+    "published_supervisory_duration_canaries": 3,
+    "rank13_missing_factor_canary": true,
+    "conclusion": "success"
+  },
+  "explicit_intermediate_trace": true,
+  "not_claimed": [
+    "OPTIONS_OR_CDO_TRANCHE_DELTAS",
+    "WHOLE_SA_CCR_NETTING_SET_RC_PFE",
+    "ARBITRARY_REGULATORY_METHOD_RULE_RETRIEVAL",
+    "WHOLE_FINANCIAL_ANALYSIS_FAMILY",
+    "OPUS_5_5_PARITY"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
