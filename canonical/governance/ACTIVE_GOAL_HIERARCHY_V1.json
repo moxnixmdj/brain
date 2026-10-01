@@ -303,8 +303,17 @@
     "path": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
     "unfinished_families_at_activation": 17,
     "shared_residual_lanes": 5,
-    "current_atomic_execution_preserved": "mp-checkpoint-consolidation",
+    "current_atomic_execution_preserved": "gsea-proteomics",
     "parallel_discovery_and_internalization_allowed": true,
     "promotion_requires_independent_family_specific_evidence": true
+  },
+  "cognitive_basis_compression_campaign": {
+    "status": "ACTIVE__PARALLEL__ZERO_CAPABILITY_CREDIT",
+    "path": "canonical/governance/COGNITIVE_BASIS_COMPRESSION_CAMPAIGN_V1.json",
+    "basis_path": "canonical/capabilities/opus55/MINIMAL_COGNITIVE_BASIS_V1.json",
+    "hypothesis": "THE_17_UNFINISHED_FAMILIES_SHARE_A_SMALLER_SET_OF_REUSABLE_LEARNED_DECISION_FUNCTIONS",
+    "primary_interface": "POINTWISE_STATE_PLUS_QUESTION_PLUS_ONE_CANDIDATE_TO_CALIBRATED_SCORE",
+    "training_policy": "REUSE_AND_PROBE_BEFORE_DISTILLATION",
+    "promotion": "TERMINAL_TASK_GAIN_PLUS_ABLATION_RESCUE_PLUS_DONOR_DELETION_REQUIRED"
   }
 }
