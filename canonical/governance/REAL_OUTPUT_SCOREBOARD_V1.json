@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK23_STAGE_A_PREEXPOSURE_VERDICT",
+  "next_progress_event_target": "GLOBAL_MINIMUM_REALITY_CUT_VERDICT",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1000,17 +1000,14 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK23_STAGE_A_INDEPENDENT_PASS__STAGE_B_EXPOSURE_PRIMARY",
-    "blocker": "RANK23_STAGE_B_OFFICIAL_INSTRUCTION_EXPOSURE_AND_LOSSLESS_SOURCE_CONTRACT_COMPILATION",
+    "status": "GLOBAL_TERMINAL_PROOF_CUT_PRIMARY__RANK23_SOURCE_READ_RECONCILED_AS_NONPROMOTION_EVIDENCE",
+    "blocker": "GLOBAL_TERMINAL_PROOF_CUT_NOT_YET_COMPUTED_ACROSS_ALL_17_OPEN_FAMILIES",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_STAGE_A_ADMISSION_V1.json",
-    "next_clean_rank": 23,
-    "next_clean_task": "layout-config-recreation2",
-    "next_clean_task_authorized": false,
-    "stage_b_instruction_exposure_authorized": true
+    "evidence_path": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
+    "next_clean_task_authorized": false
   },
-  "next_required_action": "EXPOSE_RANK23_OFFICIAL_INSTRUCTION_EXACTLY_ONCE__FREEZE_RAW_SOURCE__LOSSLESSLY_COMPILE_SOURCE_TO_STAGE_B_BEHAVIORAL_CONTRACT__NO_TASK_EXECUTION__NO_DISCOVERY_SEARCH",
+  "next_required_action": "SATURATE_ALL_OPEN_TERMINAL_OBLIGATIONS__GLOBAL_DEDUCTIVE_CLOSURE__COMPRESS_SHARED_RESIDUALS__COMPUTE_EXACT_GLOBAL_MINIMUM_REALITY_CUT__NO_NEW_UNTOUCHED_SOURCE_READ_OR_EXECUTION_UNTIL_ADMITTED",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1171,11 +1168,23 @@
     "deductive_closure_is_preferred": true,
     "minimum_reality_cut_required_for_future_fresh_spend": true,
     "rank22_grandfather_status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE",
-    "current_frontier_application": "EXTRACT_GENERIC_FREECAD_FAILURE_IMMUNITY_FROM_EXISTING_RANK22_RECEIPT__NO_NEW_UNTOUCHED_SPEND_UNTIL_MINIMUM_REALITY_CUT_ADMISSION"
+    "current_frontier_application": "EXTRACT_GENERIC_FREECAD_FAILURE_IMMUNITY_FROM_EXISTING_RANK22_RECEIPT__NO_NEW_UNTOUCHED_SPEND_UNTIL_MINIMUM_REALITY_CUT_ADMISSION",
+    "global_terminal_proof_tree_law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "global_terminal_proof_cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "scheduling_scope": "ALL_17_OPEN_FAMILIES_SIMULTANEOUSLY",
+    "family_or_benchmark_rank_progression_authority": false,
+    "untouched_source_read_requires_cut_membership": true,
+    "rank23_source_role": "SPENT_NONPROMOTION_EVIDENCE_ONLY",
+    "no_automatic_rank24_progression": true
   },
   "rank22_failure_immunity": {
     "status": "VERIFIED_AND_MERGED",
     "evidence": "canonical/governance/RANK22_BUILDER_FAILURE_IMMUNITY_VERIFICATION_20261002_V1.json",
     "runner_merge_commit": "36dcfbd279790ce95c01bf96163266290cfb9929"
+  },
+  "rank23_stage_b": {
+    "status": "SOURCE_READ_AFTER_GLOBAL_CUT_REVOCATION__NO_EXECUTION__CLEAN_PROMOTION_INELIGIBLE",
+    "evidence": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
+    "task_execution_authorized": false
   }
 }
