@@ -3,7 +3,7 @@
   "record_id": "TB4-GSEA-PROTEOMICS-RANK4-INFRA-FAILURE-20261001-V1",
   "status": "UNVERIFIED_INFRASTRUCTURE_FAILURE_BEFORE_TEST_SCRIPT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346",
+  "canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
   "task": {
     "benchmark": "Terminal-Bench 4.0",
     "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
@@ -11,7 +11,7 @@
     "sample_rank": 4,
     "task_id": "gsea-proteomics",
     "lease_action_base_commit": "c6c74e0b5a8b1a21f32f6c878eb97ee10bf1608e",
-    "disposition_record_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346"
+    "disposition_record_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c"
   },
   "attempt": {
     "runner_repository": "moxnixmdj/verification-capsule-runner",
@@ -84,10 +84,10 @@
     "frozen_sample_reordered": false,
     "rank_6_instruction_read": false
   },
-  "next_action": "This disposition remains historical no-pass/no-credit for the earlier rank-4 /app failure. Keep the current hierarchy mirrors exact; do not inspect task-specific results or infer a new rank-4 result from the newer file path.",
+  "next_action": "After canonical reconciliation, do not inspect or execute the current rank-6 task unless the user explicitly authorizes task-specific reading; preserve the rank-5 skip/no-reorder instruction. The current pointer/queue/hierarchy next-action mismatch must be reconciled under trusted guard before any task action. Keep rank-4 failure at no pass/no credit and make no new pass/score/credit claim.",
   "current_canonical_context": {
     "all_family_campaign_preserved_atomic_execution": "gsea-proteomics",
-    "cognitive_basis_campaign": "ACTIVE__C3_FRESH_AUTHORIZED__AGENTDEBUGX_C7_FALSIFIED__C6_NARROW_SURVIVES__ZERO_CAPABILITY_CREDIT",
+    "cognitive_basis_campaign": "ACTIVE__C3_DETERMINISTIC_CONTROL_RETAINED__ETTIN_ZERO_TERMINAL_DELTA_FALSIFIED__ZERO_CAPABILITY_CREDIT",
     "pointwise_evaluation_set": "FIXED_ON_MAIN__12_UNIQUE_CASES_LOAD_LOCALLY",
     "pointwise_probe_result": "canonical/capabilities/opus55/COGNITIVE_BASIS_JEVOS_BASELINE_002_RESULT.json",
     "pointwise_probe_workflow_run_id": 36817492953,
@@ -161,7 +161,7 @@
     "jevOS_runtime_rebind_artifact_digest": "sha256:c7cdb28a335b8f4f82b8d73c8ec959dd288c08d72705355ebf8c8d5eca14fc95",
     "jevOS_runtime_rebind_exact_decision_equivalence_on_frozen_v2": true,
     "decision_kernel_runtime_fingerprint_enforced_in_adapter": false,
-    "current_canonical_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346",
+    "current_canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
     "current_base_kernel_gate_result_record": "canonical/capabilities/opus55/COGNITIVE_DECISION_KERNEL_GATE_VERIFY_001_RESULT.json",
     "current_base_kernel_gate_result_record_reviewed": false,
     "fresh_software_adjudication_task": "canonical/tasks/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001.json",
@@ -173,7 +173,7 @@
     "current_base_fresh_task_result": "canonical/capabilities/opus55/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001_RESULT.json",
     "current_base_fresh_task_result_reviewed": false,
     "no_route_outcome_or_capability_credit_inferred_from_unreviewed_records": true,
-    "current_main_pointer_next_step": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+    "current_main_pointer_next_step": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
     "current_main_rank5_lease_path": "canonical/action_intents/2026-10-01_LEASE_BATCHED_EVAL_PARITY_TB4_V1.json",
     "current_main_rank5_lease_content_reviewed": false,
     "rank5_task_execution_or_result_claim_in_this_reconciliation": false,
@@ -184,7 +184,7 @@
     "current_main_task_and_result_payloads_reviewed": false,
     "current_main_new_pass_score_or_credit_inferred": false,
     "prior_verified_pass_snapshot_base": "6d440fb1052adb50b2926de5af21df5fe00af46c",
-    "current_base_scoreboard_review_status": "SUMMARY_FIELDS_ONLY__NO_TASK_ROWS_OR_RESULT_PAYLOADS",
+    "current_base_scoreboard_review_status": "NOT_REVIEWED_IN_THIS_RECONCILIATION",
     "current_main_rank6_lease_path": "canonical/action_intents/2026-10-01_LEASE_GLYCAN_MS2_ELUCIDATION_TB4_V1.json",
     "current_main_rank6_lease_content_reviewed": false,
     "rank6_user_permission_status": "NOT_GRANTED_FOR_TASK_INSTRUCTIONS_OR_EXECUTION",
@@ -193,7 +193,7 @@
     "current_main_rank5_contamination_record_reviewed": false,
     "current_main_rank5_user_instruction": "SKIP_WITHOUT_REORDERING__NO_EXPLICIT_REVERSAL",
     "current_base_pointer_queue_hierarchy_next_action_mismatch": true,
-    "current_base_exact_head_guard_status": "PENDING_AFTER_HIERARCHY_MIRROR_RECONCILIATION",
+    "current_base_exact_head_guard_status": "FAILED_ON_PRIOR_BASE__CURRENT_BASE_RECHECK_PENDING",
     "current_base_campaign_status": "ACTIVE__C3_DETERMINISTIC_CONTROL_RETAINED__ETTIN_ZERO_TERMINAL_DELTA_FALSIFIED__ZERO_CAPABILITY_CREDIT",
     "current_base_new_pass_score_or_credit_inferred": false,
     "current_main_target_record_status": "BRAIN_CONFIGURED_FRESH_TASK_VERIFIED_PASS__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_CAPABILITY_CREDIT",
@@ -203,12 +203,6 @@
     "current_base_rank6_lease_path": "canonical/action_intents/2026-10-01_LEASE_GLYCAN_MS2_ELUCIDATION_TB4_V1.json",
     "current_base_rank6_lease_content_reviewed": false,
     "rank6_task_instructions_or_result_read": false,
-    "rank6_execution_or_pass_claim_in_this_reconciliation": false,
-    "current_main_hierarchy_next_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
-    "current_main_queue_next_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
-    "current_main_target_next_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
-    "current_main_scoreboard_next_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
-    "current_main_mirror_reconciliation": "BRANCH_PATCH_COPIES_HIERARCHY_ACTION_CLASS_EXACTLY__TASK_NOT_EXECUTED",
-    "next_action": "AFTER_MIRROR_GUARD_PASS__RETURN_TO_CURRENT_RANK6_ONE_SHOT_WITH_NO_TASK_TOML_FETCH__PRESERVE_ZERO_CREDIT_UNTIL_STAGE1_SCORE"
+    "rank6_execution_or_pass_claim_in_this_reconciliation": false
   }
 }

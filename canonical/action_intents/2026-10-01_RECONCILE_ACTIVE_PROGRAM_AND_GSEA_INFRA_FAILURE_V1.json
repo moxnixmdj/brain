@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "RECONCILE-ACTIVE-PROGRAM-AND-GSEA-INFRA-FAILURE-20261001-V1",
-  "status": "PARTIALLY_EXECUTED__LIVE_ACTION_MIRRORS_RECONCILED__GUARD_PENDING",
+  "status": "PARTIALLY_EXECUTED__CURRENT_BASE_MIRRORS_RECONCILED__EXACT_GUARD_PENDING",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346",
+  "canonical_base_commit": "18d7bd1470d95b9f9f04e575eb87274db4b84e72",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
@@ -50,7 +50,9 @@
     "Current base b7c4efa4d35ba3709f37f3109daac87849a1c945 preserves the active target/blocker and C3 zero-credit campaign status. Pointer and queue metadata now point to a rank-6 high-throughput action; hierarchy action-class metadata also refers to rank 6 but the pointer/queue/hierarchy strings do not match exactly. Main contains canonical/action_intents/2026-10-01_LEASE_GLYCAN_MS2_ELUCIDATION_TB4_V1.json, but its contents, task instructions, result records, and canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json were not opened. Rank 5 remains under the standing skip instruction; no task execution, lease, pass, score, or credit is claimed.",
     "Current base 60c26db3f44069e38264a284f6edbf8f2203298c changed the hierarchy next-action class to rank 6. Pointer and queue still contain nonidentical rank-6 strings, and the target record retains a generic Stage-1 next action, so exact next-action mirrors remain inconsistent. The current target summary status says BRAIN_CONFIGURED_FRESH_TASK_VERIFIED_PASS__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_CAPABILITY_CREDIT; underlying evidence was not opened and this reconciliation makes no independent task-pass or score claim. The rank-6 lease/task files remain unread.",
     "On prior base b7c4efa4d35ba3709f37f3109daac87849a1c945, the exact-head guard at 6350ca8 failed with POINTER_HIERARCHY_NEXT_ACTION_MISMATCH, QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH, and TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH. Current base changed hierarchy metadata again; a fresh guard is still required after current-base rebinding.",
-    "Current base 9d2087800409a2ee5363441a5d61c16573ac7346 reports C3_FRESH_AUTHORIZED with zero capability credit; the target summary says a Brain-configured fresh-task pass is recorded while the Stage-1 score remains pending. The underlying result/task evidence was not opened. The active hierarchy selects rank 6; this action aligns exact pointer/queue/target/scoreboard mirrors to that hierarchy class while preserving the no-task-TOML constraint and performing no task execution."
+    "Current base 9d2087800409a2ee5363441a5d61c16573ac7346 reports C3_FRESH_AUTHORIZED with zero capability credit; the target summary says a Brain-configured fresh-task pass is recorded while the Stage-1 score remains pending. The underlying result/task evidence was not opened. The active hierarchy selects rank 6; this action aligns exact pointer/queue/target/scoreboard mirrors to that hierarchy class while preserving the no-task-TOML constraint and performing no task execution.",
+    "After origin/main advanced, the fixed branch was rebased onto 18d7bd1470d95b9f9f04e575eb87274db4b84e72. Current-base control-plane fields were read through git-show only: pointer program OPUS_5_5_CAPABILITY_OWNERSHIP and pointer rank-6 action differ from the all-family hierarchy; queue adds the explicit no-task-TOML qualifier; target retains the generic Stage-1 action; hierarchy and scoreboard agree on rank 6 without that qualifier. The branch copies the hierarchy route and preserves the existing no-task-TOML constraint in all mirrors. Latest main commit subjects are C3 campaign updates; the campaign summary still reports zero capability credit. No task instructions, task-specific result payloads, frozen cases, or runner output were opened for this refresh.",
+    "Boundary incident: a targeted Python diagnostic accidentally printed the current-context block of the historical rank-4 GSEA record while checking rebased receipt metadata. That exceeded the intended summary-only inspection. The printed task-related details are disregarded and were not used; no rank-6 task instructions/result or frozen case material was opened, and no task was executed. Further inspection of that record is stopped."
   ],
   "stop_condition": "Stop when pointer, hierarchy, queue, target record, hierarchy progress event, and scoreboard next-action fields exactly match the current hierarchy action class; the trusted exact-head guard, active-target mirror/firewall unit tests, action-intent sensitivity checks, and cross-surface JSON checks pass; and the rank-4 disposition remains no-pass/no-credit. Do not fetch or read task TOML/instructions or task-specific results, execute rank 6, reorder rank 5, or claim any new score/pass/credit in this mirror-reconciliation action. The rank-6 route remains a subsequent action under the current canonical control plane.",
   "theory_invariants": {
@@ -78,7 +80,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346",
+    "canonical_base_commit": "18d7bd1470d95b9f9f04e575eb87274db4b84e72",
     "real_outcome": "Permanently own useful Opus 5.5-or-better capabilities; immediately, establish a comparable fresh-task Stage-1 score of at least 66.4 percent without claiming unverified work.",
     "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "obs_goal": {
