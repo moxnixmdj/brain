@@ -159,7 +159,7 @@
     "opus_5_5_or_better_acceptance_bar_required": true,
     "reasoning_decision_receipt_required": true,
     "reasoning_decision_receipt_law_path": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
-    "current_theory_receipt_path": "canonical/reasoning/2026-10-01_WHITE_BOX_CAPABILITY_HARVEST_STRATEGY_V1.json",
+    "current_theory_receipt_path": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_INTELLIGENCE_DECOMPOSITION_STRATEGY_V1.json",
     "capability_map_is_permanent_ownership_queue": true,
     "capability_acquisition_first": true,
     "build_interpretation": "INTEGRATION_GLUE_ONLY__UNDERLYING_CAPABILITY_INVENTION_FORBIDDEN",
@@ -178,7 +178,11 @@
     "white_box_capability_capsule_schema_path": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "neural_parameter_retention_requires_residual_capability_necessity": true,
     "harvested_capability_promotion_requires_donor_deletion": true,
-    "untouched_qualification_task_contamination_forbidden": true
+    "untouched_qualification_task_contamination_forbidden": true,
+    "atomic_causal_intelligence_map_required": true,
+    "atomic_causal_intelligence_map_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "capability_family_labels_are_evaluation_surfaces_not_internal_modules": true,
+    "atomic_leaf_causal_contract_required": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -232,7 +236,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+    "next_step": "CONTINUE_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
@@ -759,7 +763,8 @@
       "evidence_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json",
       "promotion_credit": 0,
       "hidden_verifier_run": false
-    }
+    },
+    "atomic_causal_intelligence_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",

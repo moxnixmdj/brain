@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+  "next_progress_event_target": "CONTINUE_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -676,11 +676,11 @@
   "active_frontier_accounting": {
     "parent_frontier_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "subcapability_status": "BRAIN_CONFIGURED_STAGE1_BREADTH_ACTIVE__ONE_PASS_ONE_CLEAN_FAILURE__FOUR_CONTAMINATED_OR_INADMISSIBLE__ZERO_CAPABILITY_CREDIT",
+    "subcapability_status": "BRAIN_CONFIGURED_STAGE1_BREADTH_ACTIVE__ONE_PASS_ONE_CLEAN_FAILURE__SIX_CONTAMINATED_OR_INADMISSIBLE__ONE_SURFACE_SKIP_UNSPENT__RANK9_LIVE__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "residual_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-    "next_required_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+    "next_required_action": "CONTINUE_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
     "internalization_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
     "falsified_prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
     "falsification_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
@@ -1011,15 +1011,17 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK6_TRANSPORT_INADMISSIBLE__NO_TASK_CAPABILITY_VERDICT__RANK7_PRESTART_SURFACE_QUALIFICATION_NEXT__STAGE1_BREADTH_BLOCKER_REMAINS",
+    "status": "RANK8_CONTAMINATED__RANK7_SKIPPED_UNSPENT__RANK9_LIVE__STAGE1_BREADTH_BLOCKER_REMAINS",
     "blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
     "capability_credit_delta": 0,
     "whole_envelope_complete": false,
     "latest_real_output_evidence": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json",
-    "latest_transport_inadmissible_evidence": "canonical/capabilities/opus55/GLYCAN_MS2_ELUCIDATION_TB4_TRANSPORT_INADMISSIBLE_20261001_V1.json",
-    "current_task": "jax-speedrun-gpu",
-    "current_rank": 7,
-    "current_state": "PRESTART_EXECUTION_SURFACE_QUALIFICATION_REQUIRED__INSTRUCTION_UNREAD"
+    "latest_contamination_evidence": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json",
+    "latest_surface_skip_evidence": "canonical/capabilities/opus55/JAX_SPEEDRUN_GPU_TB4_SURFACE_INCOMPATIBLE_20261001_V1.json",
+    "current_task": "atrx-vep-crispr",
+    "current_rank": 9,
+    "current_state": "LIVE_PATCHED_FAST_BURST__INSTRUCTION_BOUNDARY_PRESERVED"
   },
-  "next_required_action": "QUALIFY_JAX_SPEEDRUN_GPU_RANK_7_EXECUTION_SURFACE_BEFORE_INSTRUCTION_READ__IF_COMPATIBLE_LEASE_AND_RUN_ONCE__IF_INCOMPATIBLE_SKIP_UNSPENT"
+  "next_required_action": "CONTINUE_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
+  "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
 }

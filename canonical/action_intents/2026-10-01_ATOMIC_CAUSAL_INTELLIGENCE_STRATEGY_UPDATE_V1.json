@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ATOMIC-CAUSAL-INTELLIGENCE-STRATEGY-UPDATE-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "1de0ea9ad1e2e8250d4d15b18211f335bcf483de",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "19_FAMILIES_BECOME_EVALUATION_SURFACES_ONLY__ATOMIC_CAUSAL_TRANSFORMS_BECOME_PRIMARY_INTERNAL_WORK_UNITS__RANK9_CODING_EXECUTION_PRESERVED",
+  "highest_leverage_now": true,
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": true,
+  "evidence_presence_classification": "LIVE_OWNERSHIP_MATRIX_AND_CURRENT_CAMPAIGNS_PRESENT__STRATEGIC_REPRESENTATION_RECONCILIATION",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_INTELLIGENCE_DECOMPOSITION_STRATEGY_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "1de0ea9ad1e2e8250d4d15b18211f335bcf483de",
+    "real_outcome": "Make the atomic causal intelligence map the primary internal implementation representation while preserving the live rank-9 clean coding evidence path and all current ownership gates.",
+    "required_capability": "Current-base strategic reconciliation of capability decomposition, reasoning authority, OBS authority, and evaluation-vs-implementation semantics.",
+    "obs_goal": {
+      "real_outcome": "Reduce wall-clock to verified full ownership by eliminating family-label implementation duplication and vague decomposition.",
+      "proxy_goals_deleted": [
+        "IMPLEMENT_17_FAMILY_LABELS_AS_SEPARATE_MODULES",
+        "TAXONOMY_COMPLETION_AS_PROGRESS"
+      ],
+      "surviving_necessity": "Preserve family labels for evaluation while implementing only causally necessary reusable mechanisms."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "CURRENT_OWNERSHIP_MATRIX",
+        "COGNITIVE_BASIS_CAMPAIGN",
+        "WHITE_BOX_HARVESTING_LAW",
+        "ALL_FAMILY_CAMPAIGN"
+      ],
+      "external_existing_routes_checked": [
+        "NOT_APPLICABLE_TO_STRATEGY_RECONCILIATION"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_MODEL_TRAINING",
+        "NO_NEW_EXECUTION_INFRASTRUCTURE",
+        "NO_ACTIVE_TASK_REPLAY"
+      ],
+      "surviving_gap": "Current internal representation is still partly organized around vague family and primitive labels rather than atomic causal mechanisms."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_STRATEGIC_REPRESENTATION_GAP",
+      "delete_bypass_substitute_options": [
+        "KEEP_FAMILY_LABELS_ONLY_AS_TEST_SURFACES",
+        "REUSE_EXISTING_CAUSAL_EVIDENCE",
+        "SUBTRACT_SOLVED_DETERMINISTIC_AND_JIT_FUNCTIONS"
+      ],
+      "surviving_causal_blocker": "Useful behavior is not yet fully reduced to minimum causally sufficient Brain-owned mechanisms."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "ATOMIC_CAUSAL_DECOMPOSITION",
+        "FAMILY_BY_FAMILY_IMPLEMENTATION_REJECTED",
+        "FIXED_C1_C10_ONTOLOGY_REJECTED"
+      ],
+      "losing_routes_reason": "They duplicate mechanisms, preserve vague labels, or assume ontology before causal evidence.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Repository consistency plus future fresh terminal cross-domain effect; strategy update itself receives zero capability credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "FAMILY_LABELS_AS_INTERNAL_MODULE_BOUNDARIES",
+        "C1_C10_AS_FINAL_ONTOLOGY"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "CURRENT_C3_C6_C7_EVIDENCE_RETAINED_AS_COMPONENT_EVIDENCE",
+        "CURRENT_WHITE_BOX_HARVEST_RULES",
+        "CURRENT_OWNERSHIP_GATES"
+      ],
+      "fresh_reuse_plan": "Decompose from spent/verified trajectories and open mechanisms while preserving active rank-9 task isolation."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_RESEARCH_REDO_OF_ALREADY_FALSIFIED_GENERIC_SMALL_JUDGE",
+        "NO_ACTIVE_TASK_CONTENT_INSPECTION"
+      ],
+      "search_stop_decision": "Current evidence is sufficient to adopt the representation correction; further taxonomy search cannot justify delaying the change.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "ATOMIC_CAUSAL_DECOMPOSITION",
+      "FAMILY_BY_FAMILY_IMPLEMENTATION",
+      "FIXED_PRIMITIVE_ONTOLOGY",
+      "WHOLE_DONOR_ACQUISITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "FAMILY_BY_FAMILY_IMPLEMENTATION",
+      "FIXED_PRIMITIVE_ONTOLOGY_AS_AUTHORITY",
+      "WHOLE_DONOR_ACQUISITION_WHEN_SMALLER_RESIDUAL_SUFFICES"
+    ],
+    "selected_surviving_route": "ATOMIC_CAUSAL_DECOMPOSITION__SUBTRACT_SOLVED_FUNCTIONS__RANK_BY_CROSS_DOMAIN_LEVERAGE",
+    "why_selected_route_is_fastest_sufficient": "It reuses existing evidence, removes duplicated family-level work, preserves current execution, and directs acquisition only at causally necessary residuals.",
+    "expected_parent_level_state_change": "19_FAMILIES_BECOME_EVALUATION_SURFACES_ONLY__ATOMIC_CAUSAL_TRANSFORMS_BECOME_PRIMARY_INTERNAL_WORK_UNITS__RANK9_CODING_EXECUTION_PRESERVED",
+    "stop_condition": "ATOMIC_CAUSAL_STRATEGY_IS_BOUND_TO_CURRENT_CONTROL_SURFACES__RANK9_CLEAN_EXECUTION_REMAINS_UNCHANGED__NO_CAPABILITY_CREDIT_ADDED__TRUSTED_DRIFT_GUARD_PASSES_ON_EXACT_BASE",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This action reconciles strategy and canonical representation; it does not select an external capability supplier."
+    }
+  },
+  "stop_condition": "ATOMIC_CAUSAL_STRATEGY_IS_BOUND_TO_CURRENT_CONTROL_SURFACES__RANK9_CLEAN_EXECUTION_REMAINS_UNCHANGED__NO_CAPABILITY_CREDIT_ADDED__TRUSTED_DRIFT_GUARD_PASSES_ON_EXACT_BASE"
+}

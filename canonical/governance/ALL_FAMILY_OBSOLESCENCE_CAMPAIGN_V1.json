@@ -15,7 +15,9 @@
     "incremental_spend_usd": 0,
     "primary_terminal_priority": true,
     "priority_invariant": "ACTIONABLE_LIVE_PRIMARY_FRESH_TERMINAL_EVIDENCE_PREEMPTS_SIDE_PROBE_CHURN__PARALLEL_DISCOVERY_ONLY_ON_INDEPENDENT_SPARE_CAPACITY",
-    "current_lane_A_state": "RANK7_JAX_SPEEDRUN_GPU_PRESTART_SURFACE_QUALIFICATION__INSTRUCTION_UNREAD"
+    "current_lane_A_state": "RANK9_ATRX_VEP_CRISPR_LIVE_PATCHED_FAST_BURST__CLEAN_BOUNDARY_PRESERVED",
+    "atomic_causal_decomposition_parallel": true,
+    "atomic_decomposition_sources": "SPENT_OR_VERIFIED_TRAJECTORIES_AND_NONCONTAMINATING_DONOR_EVIDENCE_ONLY"
   },
   "lanes": [
     {
@@ -23,7 +25,7 @@
       "families": [
         "ADVANCED_AGENTIC_CODING"
       ],
-      "next": "qualify rank-7 execution surface; if compatible run once cleanly, if incompatible skip unspent and continue frozen order"
+      "next": "continue rank-9 atrx-vep-crispr clean execution; use family label only as an evaluation surface, not as an implementation decomposition"
     },
     {
       "id": "B",
@@ -97,5 +99,18 @@
       "lane": "E"
     }
   ],
-  "rule": "Candidate discovery gives zero capability credit. Promote only after Brain-owned execution passes clean independent evaluation."
+  "rule": "Candidate discovery gives zero capability credit. Promote only after Brain-owned execution passes clean independent evaluation.",
+  "internal_representation": {
+    "status": "ATOMIC_CAUSAL_INTELLIGENCE_MAP_IS_PRIMARY",
+    "path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "family_taxonomy_role": "EVALUATION_COVERAGE_AND_FINAL_ACCEPTANCE_ONLY",
+    "implementation_rule": "DO_NOT_IMPLEMENT_FAMILY_LABELS_AS_PRESUMED_SEPARATE_MODULES",
+    "decomposition_rule": "RECURSIVELY_SPLIT_UNTIL_EACH_LEAF_HAS_EXPLICIT_IO_STATE_CAUSAL_FUNCTION_IMPLEMENTATION_DEPENDENCIES_ABLATION_RESCUE_MINIMALITY_OWNERSHIP_AND_EVIDENCE"
+  },
+  "family_lanes_are_evaluation_surfaces_only": true,
+  "cross_family_priority_metric": "TERMINAL_BEHAVIORS_IMPROVED_X_EFFECT_SIZE_X_GENERALIZATION_DIVIDED_BY_SIZE_LATENCY_COMPLEXITY_AND_DEPENDENCY",
+  "primary_progress_metrics": [
+    "UNEXPLAINED_USEFUL_BEHAVIOR",
+    "DONOR_DEPENDENT_USEFUL_BEHAVIOR"
+  ]
 }
