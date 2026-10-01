@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2_RECONCILIATION",
+  "date": "2026-10-02",
+  "status": "CANONICAL_RECONCILIATION__FOUR_ZERO_REALITY_COMPONENTS_VERIFIED__PARENT_RESIDUALS_STILL_OPEN__ZERO_FAMILY_CREDIT",
+  "updated_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+  "update_commit": "33c74f6b2eb6f17e6b28823609f2c5bc6400be4b",
+  "components": [
+    {
+      "id": "M0A_EXPLICIT_COMPOUND_REQUIREMENT_DECOMPOSER",
+      "artifact": "canonical/runtime/explicit_compound_requirement_decomposer.py",
+      "blob_sha": "06da82ccd7cf5ba37b78d1d664b5638caa4e1956",
+      "workflow_run_id": 36942070623,
+      "conclusion": "success",
+      "owned_scope": "EXPLICIT_BULLET_LISTS_AND_FLAT_SINGLE_MODAL_AND_COORDINATION",
+      "exclusions": [
+        "CONTEXT_DEPENDENT_SEMANTICS",
+        "IMPLICIT_REQUIREMENTS",
+        "LONG_RANGE_CROSS_SENTENCE_SEMANTICS",
+        "OPEN_ENDED_SEMANTIC_GENERATION"
+      ]
+    },
+    {
+      "id": "M1A_DRAWING_VIEW_REGION_SEGMENTATION",
+      "artifact": "canonical/runtime/drawing_view_regions.py",
+      "blob_sha": "6a5be47a04b0b62e270d3de6d60270ba5d011851",
+      "workflow_run_id": 36942081745,
+      "conclusion": "success",
+      "owned_scope": "SPATIALLY_SEPARATED_CLEAN_HIGH_CONTRAST_VIEW_REGION_SEGMENTATION",
+      "exclusions": [
+        "VIEW_IDENTITY",
+        "GENERAL_REGISTRATION",
+        "ROBUST_NONCLEAN_DRAWINGS"
+      ]
+    },
+    {
+      "id": "M1A_ORTHOGRAPHIC_VIEW_IDENTITY",
+      "artifact": "canonical/runtime/orthographic_view_identity.py",
+      "blob_sha": "e09a05201f29fe34cef8f44aaefc931c48dfbf1a",
+      "repair_commit": "7a85b85e323e6205f9a7b4d68089c1d3d6c085fc",
+      "failed_predecessor_run_id": 36942265995,
+      "verification_run_id": 36942366419,
+      "conclusion": "success",
+      "owned_scope": "THREE_SPATIALLY_SEPARATED_AXIS_ALIGNED_VIEWS_WITH_EXPLICIT_FIRST_OR_THIRD_ANGLE_CONVENTION",
+      "exclusions": [
+        "UNKNOWN_CONVENTION",
+        "NONAXIS_LAYOUTS",
+        "GENERAL_VIEW_REGISTRATION"
+      ]
+    },
+    {
+      "id": "M1A_CALLOUT_GEOMETRY_ASSOCIATION",
+      "artifact": "canonical/runtime/callout_geometry_association.py",
+      "blob_sha": "6971ca86ffba0185c419ae893800312994efeacd",
+      "workflow_run_id": 36942293933,
+      "conclusion": "success",
+      "owned_scope": "BOUNDED_DETERMINISTIC_CALLOUT_TO_GEOMETRY_ASSOCIATION",
+      "exclusions": [
+        "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+        "GD_AND_T_BROAD_NOTATION",
+        "GENERAL_OCR"
+      ]
+    }
+  ],
+  "observed_failure_compilation": {
+    "source_run_id": 36942265995,
+    "source_failure": "ORTHOGRAPHIC_VIEW_IDENTITY_RETURNED_FAIL_closed_FOR_VALID_FIRST_AND_THIRD_ANGLE_SYNTHETIC_LAYOUTS",
+    "causal_bug": "RELATIVE_HORIZONTAL_VERTICAL_CLOSENESS_ALLOWED_MULTIPLE_FALSE_ELBOW_CANDIDATES",
+    "repair": "RANK_CANDIDATES_BY_ACTUAL_AXIS_ALIGNMENT_RESIDUAL__REQUIRE_UNIQUE_BEST_ELBOW__FAIL_CLOSED_ON_NONAXIS_LAYOUT",
+    "verified_repair_run_id": 36942366419
+  },
+  "residual_truth": {
+    "M0A": {
+      "status": "OPEN",
+      "remaining": [
+        "MULTI_CLASS_OR_CONTEXT_DEPENDENT_SEMANTICS",
+        "IMPLICIT_REQUIREMENTS",
+        "LONG_RANGE_CROSS_SENTENCE_SEMANTICS",
+        "ARBITRARY_SOURCE_SEMANTIC_GENERATION_OUTSIDE_DECIDABLE_SUBSETS"
+      ]
+    },
+    "M1A": {
+      "status": "OPEN",
+      "remaining": [
+        "OCR_IMAGE_TO_TEXT_WITH_PINNED_MODEL_DATA_AND_DEPENDENCY_ACCOUNTING",
+        "VIEW_REGISTRATION_OUTSIDE_DECLARED_AXIS_ALIGNED_LAYOUTS",
+        "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+        "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
+        "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
+      ]
+    },
+    "M1B": {
+      "status": "OPEN_WITH_COMPLETE_ACTION_BUNDLE_DECLARED_IN_RESIDUAL_UNIVERSE"
+    }
+  },
+  "exact_cut_ready": false,
+  "blocking_obligations": [
+    "M0A",
+    "M1A"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
