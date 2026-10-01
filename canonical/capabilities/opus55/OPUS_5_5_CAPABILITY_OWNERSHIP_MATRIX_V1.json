@@ -549,6 +549,12 @@
     "brain_configured_verification_pending": [
       "ADVANCED_AGENTIC_CODING",
       "PROFESSIONAL_KNOWLEDGE_WORK"
+    ],
+    "primary_internal_work_representation": "ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1",
+    "family_labels_are_evaluation_surfaces_only": true,
+    "primary_progress_metrics": [
+      "UNEXPLAINED_USEFUL_BEHAVIOR",
+      "DONOR_DEPENDENT_USEFUL_BEHAVIOR"
     ]
   },
   "white_box_harvest_policy": {
@@ -563,5 +569,11 @@
     "activation_date": "2026-10-01",
     "unfinished_families_at_activation": 17,
     "shared_residual_lanes": 5
+  },
+  "internal_interpretation": {
+    "family_rows": "EVALUATION_SURFACES_AND_ACCEPTANCE_ACCOUNTING_ONLY",
+    "implementation_ontology": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "rule": "DO_NOT_INFER_ONE_INTERNAL_MODULE_PER_FAMILY",
+    "ownership_accounting_unchanged": true
   }
 }
