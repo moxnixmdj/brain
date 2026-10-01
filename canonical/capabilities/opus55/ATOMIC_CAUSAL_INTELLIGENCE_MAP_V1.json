@@ -100,15 +100,17 @@
   },
   "completion_condition": "EVERY_REQUIRED_BEHAVIOR_CONTRACTED__UNEXPLAINED_REQUIRED_BEHAVIOR_ZERO__DONOR_DEPENDENT_REQUIRED_BEHAVIOR_ZERO__COMPOSITION_GAPS_ZERO__ALL_19_EVALUATION_SURFACES_MEET_OR_EXCEED_OPUS_5_5_WITH_BRAIN_OWNED_ROUTE",
   "current_execution_boundary": {
-    "primary_clean_evidence_lane": "FROZEN_AFTER_RANK14_INSTRUCTION_EXPOSURE__RANK15_WDM_DESIGN_UNREAD_AND_NOT_AUTHORIZED",
-    "rule": "NO_NEW_CLEAN_TASK_SPEND_UNTIL_BEHAVIORAL_SEMANTIC_PURGE_AND_INDEPENDENT_ACCEPTANCE_MODEL_ROUTE_CHANGE_IS_VALIDATED_ON_SPENT_HELDOUT_FAILURES",
+    "primary_clean_evidence_lane": "FROZEN_AFTER_RANK19_EXECUTION_SURFACE_FAILURE",
+    "rule": "NO_NEW_CLEAN_STAGE_C_SPEND_UNTIL_EXACT_TASK_CONTAINER_EXECUTION_SURFACE_PROFILE_AND_PACKAGE_POLICY_PARITY_ARE_VERIFIED",
     "decomposition_sources": "ALREADY_SPENT_TRAJECTORIES__VERIFIED_OWNED_MECHANISMS__OPEN_DONOR_MECHANISMS__NONCONTAMINATING_GENERAL_EVIDENCE",
-    "latest_ineligible_or_unspent_exposure": {
-      "task": "formal-crypto",
-      "rank": 14,
-      "status": "INSTRUCTION_EXPOSED__UNSPENT__ZERO_VERDICT",
-      "evidence_path": "canonical/capabilities/opus55/FORMAL_CRYPTO_TB4_INSTRUCTION_EXPOSED_UNSPENT_20261001_V1.json"
-    }
+    "latest_spent_execution_surface_failure": {
+      "task": "satb-audio-transcription",
+      "rank": 19,
+      "status": "SPENT_EXECUTION_SURFACE_FAILURE__NO_COGNITION_VERDICT__NO_REPLAY",
+      "root_cause": "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_001",
+      "evidence_path": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json"
+    },
+    "current_generic_repair_candidate": "verification-capsule-runner#367"
   },
   "capability_credit_delta": 0,
   "evidence_bound_seed_001": {
