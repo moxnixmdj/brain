@@ -1,0 +1,327 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_TERMINAL_PROOF_PROTOCOLS_V1",
+  "date": "2026-10-02",
+  "status": "PROTOCOLS_DEFINED_FOR_ALL_19_FAMILIES__ZERO_NEW_CAPABILITY_CREDIT__QUALIFICATION_RESULTS_STILL_REQUIRED",
+  "objective": "Give every terminal family proof obligation an admissible, predeclared proof protocol so the global minimum-reality cut can be computed without inventing success criteria after seeing results.",
+  "universal_rules": {
+    "same_scope": "Brain and Opus 5.5 must be evaluated on the same frozen task population/harness/tool authority unless an absolute/theoretical ceiling is the proof mode.",
+    "ownership": "Only the Brain-owned configured route counts for Brain. Opaque external target-capability providers are specimen evidence only.",
+    "knowledge": "Both routes may use the same allowed JIT knowledge/tools where the family contract permits them.",
+    "contamination": "Development evidence, protocol-design evidence, qualification evidence and final confirmation evidence must be partitioned before qualification.",
+    "statistics": "For sampled binary/rubric outcomes, estimator, confidence interval, stopping rule and multiplicity control are frozen before results. Brain must meet the declared Opus bar or matched noninferiority/equal-or-better rule with the protocol's conservative acceptance statistic.",
+    "unknown": "Missing result, incomparable harness, unresolved scorer disagreement, dirty evidence, or unknown dependency is FAIL_CLOSED_NOT_PROVEN.",
+    "no_proxy_substitution": "A benchmark can prove only the behavioral scope it actually exercises. Additional leaves remain separate obligations."
+  },
+  "protocols": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "proof_mode": "PUBLIC_FIXED_BARS_CONJUNCTION",
+      "acceptance": [
+        "Terminal-Bench 4.0 >= 66.4%",
+        "FrontierCode v1.1 Main >= 54.4%",
+        "CursorBench 4.0 >= 57.8%"
+      ],
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "proof_mode": "MATCHED_DIRECT_NONINFERIORITY",
+      "task_dimensions": [
+        "multi-step planning with at least three distinct tool/action types",
+        "state change after actions requiring replanning",
+        "long-horizon state retention",
+        "tool failure/recovery",
+        "subtask dependency and fan-in",
+        "minimal-oversight completion"
+      ],
+      "primary_metrics": [
+        "terminal_task_success",
+        "invalid_action_rate",
+        "unrecovered_failure_rate",
+        "duplicate_or_conflicting_work_rate"
+      ],
+      "acceptance": "On a frozen representative portfolio exercising every dimension, Brain conservative success bound >= Opus 5.5 matched bound, with no material regression on safety/scope/invalid-action invariants.",
+      "supporting_public_evidence": "Anthropic describes Opus 5.5 as strong on agentic coding/knowledge work; no single public scalar is accepted here as whole-family authority.",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "proof_mode": "PUBLIC_FIXED_BARS_CONJUNCTION",
+      "acceptance": [
+        "GDPval-AA v2.1 >= 1846 Elo",
+        "AA-Briefcase v1.1 >= 1822 Elo"
+      ],
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "proof_mode": "PUBLIC_FIXED_BAR",
+      "acceptance": [
+        "AutomationBench >= 40.0%"
+      ],
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "proof_mode": "PUBLIC_FIXED_BAR",
+      "acceptance": [
+        "Humanity's Last Exam with tools >= 67.7%"
+      ],
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "proof_mode": "PUBLIC_FIXED_BAR",
+      "acceptance": [
+        "Terminal-Bench-Science 0.1 >= 58.7%"
+      ],
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "proof_mode": "PUBLIC_FIXED_BAR_PLUS_SCOPE_AUDIT",
+      "acceptance": [
+        "Chartography with tools >= 89.0%",
+        "dense-document non-chart leaves require matched direct scope audit if not exercised by Chartography"
+      ],
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "proof_mode": "MATCHED_OSWORLD_PROTOCOL",
+      "acceptance": [
+        "OSWorld 2.1 partial >= 81.8% only on the same harness/setup; otherwise direct matched Brain-vs-Opus noninferiority on frozen OSWorld-compatible portfolio"
+      ],
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "proof_mode": "PUBLIC_COMPOSITE_BAR_PLUS_MATCHED_SCOPE_AUDIT",
+      "public_reference": {
+        "benchmark": "Artificial Analysis Finance & Accounting Index",
+        "opus_5_5": 61,
+        "source": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+        "role": "Broad finance/accounting composite across business knowledge, agentic knowledge work, reasoning, tool use, long-context and non-hallucination."
+      },
+      "acceptance": [
+        "Finance & Accounting Index >= 61 on comparable published harness/configuration",
+        "structured quantitative-method and compliance-sensitive leaves not represented in the index must pass matched direct scope audit"
+      ],
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "proof_mode": "PUBLIC_BAR_PLUS_FAIL_CLOSED_SCOPE_AUDIT",
+      "public_reference": {
+        "benchmark": "LiveBench 2026-06-25 Instruction Following",
+        "opus_5_5": 65.7,
+        "source": "https://livebench.ai/",
+        "role": "Objective refreshed instruction-following bar."
+      },
+      "task_dimensions": [
+        "multi-constraint instruction compliance",
+        "authorization/scope boundaries",
+        "routine ambiguity",
+        "requirement change",
+        "explicit abstention/fail-closed cases"
+      ],
+      "acceptance": [
+        "LiveBench Instruction Following >= 65.7%",
+        "matched scope-boundary portfolio Brain conservative success bound >= Opus matched bound with zero critical authority violations in the frozen portfolio"
+      ],
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "proof_mode": "ABSOLUTE_SCOPED_CEILING",
+      "acceptance": "Already verified owned equal-or-better for the canonical scoped family behavior; autonomous wake and arbitrary semantic-memory quality remain separate non-inherited claims.",
+      "authority": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "status": "PASS"
+    },
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "proof_mode": "MATCHED_DIRECT_NONINFERIORITY_WITH_MECHANICAL_CEILINGS",
+      "supporting_public_reference": {
+        "benchmark": "Vals ProgramBench",
+        "opus_5_5": 18.5,
+        "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+        "limitation": "ProgramBench is supporting task-solving evidence, not by itself a direct proof of delegation quality."
+      },
+      "task_dimensions": [
+        "task partition quality",
+        "adaptive worker selection",
+        "dependency-respecting fan-out/fan-in",
+        ">2 worker coordination",
+        "duplicate/conflicting work suppression",
+        "failure reassignment"
+      ],
+      "primary_metrics": [
+        "terminal_success",
+        "critical_path_wall_clock",
+        "duplicate_work_rate",
+        "dependency_violation_rate",
+        "lost_evidence_rate"
+      ],
+      "acceptance": "Brain matched portfolio terminal success conservative bound >= Opus matched bound; deterministic coordination invariants must reach zero critical violations; claimed speedup must not trade away correctness.",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "proof_mode": "MATCHED_CAUSAL_INTERVENTION_PROTOCOL",
+      "task_dimensions": [
+        "semantic self-check",
+        "counterexample discovery",
+        "earliest causal failure localization",
+        "repair selection",
+        "recovery after injected failure"
+      ],
+      "primary_metrics": [
+        "failure_detection_rate",
+        "true_root_cause_topk",
+        "repair_rescue_rate",
+        "false_block_rate",
+        "terminal_recovery_rate"
+      ],
+      "acceptance": "On a frozen failure portfolio with independently established fault interventions, Brain conservative terminal-recovery and causal-localization bounds >= Opus matched bounds; deterministic fail-closed invariants must have zero critical misses.",
+      "causal_requirement": "A nominated repair counts only when intervention/rescue shows it repairs the causal failure rather than a downstream symptom.",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "proof_mode": "ABSOLUTE_MECHANICAL_GATES_PLUS_MATCHED_QUALITY",
+      "supporting_public_reference": {
+        "benchmark": "AA-Briefcase v1.1",
+        "opus_5_5": 1822,
+        "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+        "role": "Agentic knowledge work producing professional deliverables with analytical/presentation/rubric scoring."
+      },
+      "absolute_gates": [
+        "native file parses/reopens",
+        "required edits present",
+        "unrequested structure/content preserved",
+        "round-trip validity",
+        "no broken relationships/media",
+        "requested output paths/formats correct"
+      ],
+      "quality_dimensions": [
+        "presentation quality",
+        "layout/readability",
+        "analysis/content quality",
+        "instruction/rubric compliance"
+      ],
+      "acceptance": "All mechanical gates pass at ceiling on the scoped format corpus and Brain matched deliverable-quality score is noninferior to Opus on the same frozen portfolio; AA-Briefcase >=1822 may serve as supporting broad deliverable evidence when harness access is comparable.",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "proof_mode": "MATCHED_GROUNDED_SYNTHESIS_NONINFERIORITY",
+      "supporting_public_reference": {
+        "benchmark": "LiveBench 2026-06-25 Language",
+        "opus_5_5": 86.3,
+        "source": "https://livebench.ai/",
+        "limitation": "Language score is supporting evidence only; it does not alone prove grounded synthesis."
+      },
+      "task_dimensions": [
+        "claim-to-source fidelity",
+        "required evidence coverage",
+        "uncertainty/disagreement preservation",
+        "audience adaptation",
+        "format/style constraints",
+        "compression without decision-relevant loss"
+      ],
+      "primary_metrics": [
+        "unsupported_material_claim_rate",
+        "required_claim_coverage",
+        "constraint_pass_rate",
+        "decision_relevant_omission_rate",
+        "independent_quality_score"
+      ],
+      "acceptance": "Zero unsupported material claims in objective-source cases plus Brain conservative matched quality/coverage bound >= Opus matched bound on frozen synthesis portfolio.",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+      "task_dimensions": [
+        "unknown tool discovery",
+        "schema/authority filtering",
+        "route selection under incomplete evidence",
+        "safe probe choice",
+        "capability-state update",
+        "later-task transfer without rediscovery"
+      ],
+      "primary_metrics": [
+        "terminal_success",
+        "valid_route_top1",
+        "failed_probe_count",
+        "unnecessary_probe_count",
+        "transfer_reuse_rate"
+      ],
+      "acceptance": "On frozen tool ecosystems with hidden capability variants, Brain conservative terminal-success/valid-route bounds >= Opus matched bounds, with demonstrated second-task transfer from first-task evidence and no unsupported capability-state promotion.",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "proof_mode": "PUBLIC_BAR_PLUS_MATCHED_UNSEEN_DOMAIN_TRANSFER",
+      "public_reference": {
+        "benchmark": "Vals MysteryMechanism",
+        "opus_5_5": 49.55,
+        "uncertainty": "±3.36",
+        "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5"
+      },
+      "task_dimensions": [
+        "unfamiliar ontology acquisition",
+        "novel mechanism inference",
+        "new tool discovery",
+        "cross-domain transfer",
+        "calibrated unknown/abstention"
+      ],
+      "acceptance": [
+        "MysteryMechanism >= 49.55% on comparable Vals setup",
+        "matched frozen unseen-domain portfolio Brain conservative terminal-success bound >= Opus matched bound without prior domain-specific internalized knowledge"
+      ],
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "proof_mode": "MATCHED_INTERACTION_AND_COMPOSITION_PROTOCOL",
+      "task_dimensions": [
+        "research+tool use+artifact creation",
+        "browser/computer action+memory+recovery",
+        "coding+debugging+tool discovery",
+        "delegation+evidence synthesis+artifact production",
+        "cross-capability state handoff and rollback"
+      ],
+      "primary_metrics": [
+        "terminal_success",
+        "cross_component_state_loss",
+        "interaction_failure_rate",
+        "recovery_rate",
+        "evidence_provenance_completeness"
+      ],
+      "acceptance": "Every isolated component used in the claim has its own scoped proof; on the frozen mixed-capability portfolio Brain conservative terminal-success bound >= Opus matched bound and no critical composition invariant fails.",
+      "status": "DEFINED_RESULT_OPEN"
+    },
+    {
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "proof_mode": "THEORETICAL_CEILING",
+      "acceptance": "100% exact correctness on frozen bounded task class OBS-EXACT-SYMBOLIC-001.",
+      "authority": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+      "status": "PASS"
+    }
+  ],
+  "protocol_closure": {
+    "family_count": 19,
+    "undefined_protocol_count": 0,
+    "proof_results_closed_count": 2,
+    "protocol_definition_is_not_capability_credit": true
+  },
+  "next": "RECOMPUTE_GLOBAL_MINIMUM_REALITY_CUT_WITH_ALL_23_DISTINCTIONS_NOW_COVERABLE_BY_DECLARED_OBSERVATION_PROTOCOLS__THEN_EXECUTE_ONLY_EXACT_CUT_MEMBERS"
+}
