@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RANK15-STAGE-A-CLOSURE-20261001-V1",
+  "status": "EXECUTING_NONCONTAMINATING_PREEXPOSURE_PROOF",
+  "canonical_generation": "2026-10-01-live",
+  "canonical_base_commit": "6fe707957d813937cc949d284118a0d01d183e6b",
+  "capability_target": "ADVANCED_AGENTIC_CODING",
+  "action_kind": "PREQUALIFICATION_STAGE_A_PROOF",
+  "blocker_lease_key": "2026-10-01-live::ADVANCED_AGENTIC_CODING::RANK15_STAGE_A_ADMISSION",
+  "expected_parent_frontier_change": "RANK15_STAGE_A_UNKNOWN_TO_PASS_OR_EXACT_FAILED_PREDICATE",
+  "theory_invariants": [
+    "NO_TASK_INSTRUCTION_READ",
+    "NO_TASK_SPECIFIC_SEARCH",
+    "ZERO_CAPABILITY_CREDIT",
+    "STAGE_A_PASS_DOES_NOT_AUTHORIZE_EXECUTION"
+  ],
+  "behavioral_contract": {
+    "behavior_id": "RANK15_STAGE_A_PREEXPOSURE_ADMISSION_001",
+    "inputs": "frozen target metadata plus generic/pre-exposure evidence only",
+    "environment_state": "rank15 remains instruction-unread and unexecuted",
+    "allowed_information": "task name/rank/hash/benchmark metadata and generic mechanisms only",
+    "required_output_or_action": "deterministic PASS or exact failed Stage-A predicate list",
+    "success_condition": "all eight canonical Stage-A requirements pass",
+    "failure_condition": "any required predicate unknown or false",
+    "terminal_consequence": "prevents spending clean rank15 evidence on known preflight failures",
+    "verification_route": "independent runner executes exact reducer against pinned Brain branch",
+    "dependency_boundary": "no task-specific instruction/solution/verifier/hints",
+    "scope": "rank15 Stage-A pre-exposure admission"
+  },
+  "qualification_stage": "STAGE_A_PRE_EXPOSURE",
+  "terminal_proof_control": {
+    "proof_obligation": "RANK15_STAGE_A_ADMISSION",
+    "hole_type": "?P",
+    "expected_certificate_or_receipt": "RANK15_STAGE_A_ADMISSION_VERDICT",
+    "validator": "canonical/runtime/prequalification_stage_a_reducer.py plus independent runner",
+    "maximum_cheap_test_cost": "ZERO_INCREMENTAL_SPEND",
+    "prerequisites": [
+      "existing Stage-A evidence"
+    ],
+    "contamination_risk": "NONE_IF_TASK_SPECIFIC_INFORMATION_REMAINS_UNREAD",
+    "reversibility": "FULL",
+    "falsification_condition": "ANY_STAGE_A_PREDICATE_FALSE_OR_UNKNOWN",
+    "critical_path_relation": "DIRECT_BLOCKER_TO_STAGE_B"
+  }
+}
