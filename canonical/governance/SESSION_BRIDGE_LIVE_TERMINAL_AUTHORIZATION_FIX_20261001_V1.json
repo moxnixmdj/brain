@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_SESSION_BRIDGE_LIVE_TERMINAL_AUTHORIZATION_FIX_V1",
+  "date": "2026-10-01",
+  "status": "INDEPENDENT_REGRESSION_PASS__MERGED__CONTROL_PLANE_STALE_AUTHORIZATION_CLASS_CLOSED",
+  "source_incident": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_FAILURE_20261001_V1.json",
+  "root_cause": "session bridge fetched commands dynamically from control branch but read terminal_authorization.json only from initial checkout",
+  "repair": {
+    "runner_repo": "moxnixmdj/verification-capsule-runner",
+    "pr": 411,
+    "merge_commit": "fbe1e3095f3e78221be80dab7507f7bab971e7d6",
+    "behavior": "terminal_authorization.json is fetched through the same live control-branch primitive as step commands"
+  },
+  "independent_verification": {
+    "workflow_run_id": 36932298497,
+    "job_id": 110604347032,
+    "conclusion": "success",
+    "regression": "LIVE_TERMINAL_AUTHORIZATION_FETCH_REGRESSION_PASS"
+  },
+  "scope_limitations": [
+    "DOES_NOT_AUTHORIZE_ANY_TERMINAL_SUBMISSION_BY_ITSELF",
+    "AUTHORIZATION_CONTENT_STILL_MUST_PASS_EXISTING_SCHEMA_SESSION_ACCEPTANCE_AND_VERIFICATION_EVIDENCE_CHECKS"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
