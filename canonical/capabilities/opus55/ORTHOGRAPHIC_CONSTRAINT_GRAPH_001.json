@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ORTHOGRAPHIC_CONSTRAINT_GRAPH_V1",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_COMPONENT__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
+  "artifact": "canonical/runtime/orthographic_constraint_graph.py",
+  "tests": "canonical/tests/test_orthographic_constraint_graph.py",
+  "verification": {
+    "workflow": ".github/workflows/verify-orthographic-constraint-graph.yml",
+    "workflow_run_id": 36941187072,
+    "conclusion": "success"
+  },
+  "verified_scope": [
+    "NORMALIZED_THREE_VIEW_MASKS_TO_TYPED_RAY_CONSTRAINTS",
+    "EXPLICIT_AXIS_DIMENSIONS_TO_PHYSICAL_CELL_SCALE",
+    "CONFLICTING_DIMENSIONS_FAIL_CLOSED",
+    "SUPPORTED_EXPLICIT_FEATURE_CALLOUTS_TO_TYPED_FEATURE_NODES",
+    "UNSUPPORTED_FEATURE_KINDS_FAIL_CLOSED"
+  ],
+  "remaining": [
+    "RAW_DRAWING_IMAGE_TO_NORMALIZED_MASKS",
+    "OCR_AND_SYMBOL_TO_EXPLICIT_FEATURE_CALLOUTS",
+    "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+    "VIEW_REGISTRATION_FROM_UNNORMALIZED_DRAWINGS"
+  ],
+  "donor_runtime_required": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
