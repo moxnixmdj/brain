@@ -38,14 +38,16 @@
   },
   "freeze": {
     "schema": "PROJECT_BRAIN_FROZEN_PROOF_ACTION_UNIVERSE_V1",
-    "status": "FROZEN",
+    "status": "INVALIDATED",
     "evidence_saturation_complete": true,
     "discovery_frontier_frozen": true,
     "candidate_universe_complete_relative_to_freeze": true,
-    "invalidated_by_new_candidate": false,
+    "invalidated_by_new_candidate": true,
     "obligation_graph_sha256": "43e16199325e95099ebc194ffebf33f0aecb38df5c118700ed2029974e4ddfb7",
     "candidate_universe_sha256": "6af52c1fe722d9bb28036efbd139e70e4ef4799690cfa800217c0de2944e4777",
     "cost_model_sha256": "b5f4b50b4e5244cbc7bb91e2d73bd80c40e638c50da0649a5a84a429fe34114b",
-    "evidence_saturation_receipt_sha256": "409701f85f4af29b0436713903c2128a8dbac7a160c8257c344fb210ac060d1e"
-  }
+    "evidence_saturation_receipt_sha256": "409701f85f4af29b0436713903c2128a8dbac7a160c8257c344fb210ac060d1e",
+    "invalidation_reason": "POST_FREEZE_VERIFIED_M0A_AND_M1A_COMPONENTS_AND_M1_REATOMIZATION_CHANGED_THE_ACTION_AND_OBLIGATION_UNIVERSE__FROZEN_INPUT_ALSO_HAS_ZERO_ACTION_COVERAGE_FOR_M0A_AND_M1A"
+  },
+  "status": "INVALIDATED__DO_NOT_USE_FOR_EXACT_CUT"
 }
