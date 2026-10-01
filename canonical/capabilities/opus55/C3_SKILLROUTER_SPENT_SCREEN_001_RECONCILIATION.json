@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_C3_SKILLROUTER_SPENT_SCREEN_RECONCILIATION_V1",
+  "result_id": "C3_SKILLROUTER_SPENT_SCREEN_001",
+  "status": "SPENT_SCREEN_PASS__FRESH_EVIDENCE_CONDITIONALLY_AUTHORIZED__LATENCY_OPTIMIZATION_REQUIRED__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "candidate": {
+    "model": "pipizhao/SkillRouter-Reranker-0.6B",
+    "revision": "78986e1142d12857cfd85b8005e62902cd42d858",
+    "license": "Apache-2.0",
+    "role": "C3_PRIMITIVE_SPECIFIC_SKILL_RERANKER"
+  },
+  "execution": {
+    "repo": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36822140568,
+    "launch_commit": "6e21f71bcbfbbad347a56802dce2026a08c411cf",
+    "persisted_receipt_commit": "512d9bfb8393ebe1c8dc678de65a74db886746ea",
+    "result_blob": "63f4989fb5dc17e2db2e1b70a5f35b7a3634a66e",
+    "spent_episode_blob": "439a13dfd5824117e3d50a7a5673056cbc745dfd"
+  },
+  "metrics": {
+    "episodes": 20,
+    "lexical_terminal_success_rate": 0.85,
+    "skillrouter_terminal_success_rate": 0.95,
+    "terminal_success_delta": 0.1,
+    "lexical_semantic_success_rate": 0.8235294117647058,
+    "skillrouter_semantic_success_rate": 0.9411764705882353,
+    "semantic_success_delta": 0.11764705882352944,
+    "deterministic_filter_safety_pass": true,
+    "lexical_mean_routing_latency_ms": 0.016329150000871095,
+    "skillrouter_mean_routing_latency_ms": 2436.3967482000007,
+    "skillrouter_failures": [
+      "largest_sample"
+    ]
+  },
+  "adjudication": [
+    "CANDIDATE_BEATS_CHEAP_BASELINE_ON_SPENT_EXECUTABLE_EPISODES",
+    "FRESH_EVIDENCE_IS_SCIENTIFICALLY_AUTHORIZED_BY_PREDECLARED_SUCCESS_GATE",
+    "CURRENT_SEQUENTIAL_CPU_IMPLEMENTATION_IS_TOO_SLOW_TO_JUSTIFY_FRESH_SPEND_WITHOUT_FIRST_TESTING_OBVIOUS_BATCHING_OPTIMIZATION",
+    "NO_CAPABILITY_PROMOTION_FROM_SPENT_EVIDENCE"
+  ],
+  "next_required_action": "BATCH_CANDIDATE_SCORING_ON_THE_SAME_SPENT_EPISODES__REQUIRE_SAME_OR_BETTER_TERMINAL_SUCCESS_WITH_MATERIAL_LATENCY_REDUCTION_BEFORE_SPENDING_NEW_FRESH_EVIDENCE",
+  "capability_credit_delta": 0
+}
