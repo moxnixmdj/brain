@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "INDEPENDENTLY_VERIFY_AND_MERGE_EXACT_TASK_CONTAINER_PACKAGE_POLICY_PROBE__THEN_RECHECK_RANK20_FRESHNESS",
+  "next_progress_event_target": "RANK20_ONE_SHOT_STAGE_C_EXECUTION_PLUS_TERMINAL_VERDICT",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1012,7 +1012,7 @@
     "next_clean_task": "vba-userform-port",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "RUNNER_PR368_MUST_PASS_INDEPENDENT_TESTS__MERGE_IF_PASS__RECORD_EXECUTION_SURFACE_REPAIR_EVIDENCE__NO_RANK19_REPLAY__KEEP_RANK20_UNREAD",
+  "next_required_action": "OPEN_STAGE_C_CARRIER__BIND_EXACT_READY_SURFACE_PROFILE__ONE_BUILDER_COMMAND__OUTPUT_FREEZE__ONE_TERMINAL_VERIFIER__NO_REPLAY",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1126,5 +1126,12 @@
     "status": "INDEPENDENT_VERIFICATION_PENDING",
     "next_clean_rank": 20,
     "next_clean_task": "vba-userform-port"
+  },
+  "rank20_vba_userform_port": {
+    "status": "STAGE_B_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_LEASED__ZERO_CREDIT_PENDING_TERMINAL_VERDICT",
+    "stage_b_verification": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_STAGE_B_VERIFICATION_V1.json",
+    "lease": "canonical/governance/LEASE_VBA_USERFORM_PORT_TB4_STAGE_C_20261001_V1.json",
+    "execution_count_used": 0,
+    "terminal_verifier_count_used": 0
   }
 }
