@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSED_CAUSAL_STACK_RE2_OB_TRANSFER_V1",
+  "date": "2026-10-01",
+  "status": "PASS__BRAIN_OWNED_CPDAG_PLUS_RESIDUAL_RANKER__BROADER_REAL_TELEMETRY_TRANSFER__ZERO_FAMILY_CREDIT",
+  "dataset": {
+    "repo": "phamquiluan/RCAEval",
+    "revision": "259ea4167160256a74ad30004aa3d96a998c846e",
+    "suite": "RE2-OB"
+  },
+  "route": [
+    "canonical/runtime/pc_stable_cpdag.py",
+    "canonical/runtime/causal_residual_ranker.py"
+  ],
+  "external_graph_supplier": false,
+  "precommit": {
+    "cases": 6,
+    "fault_types": [
+      "cpu",
+      "delay",
+      "disk",
+      "loss",
+      "mem",
+      "socket"
+    ],
+    "alpha": 0.05,
+    "max_k": 1,
+    "min_root_service_top5_fraction": 0.5,
+    "min_root_service_top10_fraction": 0.75,
+    "root_cause_aware_feature_selection": false,
+    "retuning_after_exposure": false
+  },
+  "result": {
+    "root_service_top5_fraction": 1,
+    "root_service_top10_fraction": 1,
+    "best_root_service_ranks": [
+      1,
+      5,
+      1,
+      1,
+      1,
+      1
+    ],
+    "pass": true
+  },
+  "repair_history": {
+    "first_attempt": "HARNESS_IMPORT_PATH_FAILURE__ZERO_TELEMETRY_READ",
+    "second_attempt": "REAL_SINGULAR_CORRELATION_SUBMATRIX_FAILURE_AFTER_FIRST_CASE",
+    "repaired_by": "canonical/capabilities/opus55/PC_STABLE_SINGULAR_SAFE_001.json",
+    "final_attempt": "UNCHANGED_PRECOMMITTED_TEST_PASS"
+  },
+  "verification": {
+    "runner_pr": 371,
+    "workflow_run_id": 36927643151,
+    "job_id": 110588811051,
+    "merged_runner_commit": "45ae52122437fc12287199570f08273b178dfaa2"
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
