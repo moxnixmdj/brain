@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_STAGE_A_PREQUALIFICATION_CANDIDATE_V1",
+  "date": "2026-10-01",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
+  "purpose": "REMOVE_PER_TASK_STAGE_A_REDUCER_REIMPLEMENTATION",
+  "artifact": "canonical/runtime/prequalification_stage_a_reducer.py",
+  "preserves": [
+    "RANK15_WDM_DESIGN_STAGE_A_BEHAVIOR"
+  ],
+  "extends_to": [
+    "RANK16_SESSION_WINDOW_DEBUG_FROM_EXPLICIT_LEDGER"
+  ],
+  "authority": "STAGE_A_ONLY__NEVER_TASK_EXECUTION",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
