@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_C3_ETTIN_VS_SKILLROUTER_SAME_FROZEN_CASES_001_RECONCILIATION_V1",
+  "status": "NO_DOMINANCE__CASCADE_EVALUATION_REQUIRED__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36824331770,
+    "result_commit": "845f1cb099aab67d5f05a922d337f0869e011418",
+    "frozen_cases_commit": "28ab0f0a62e7ad23294945403639d9b6e42736df"
+  },
+  "skillrouter": {
+    "terminal_success_rate": 1,
+    "semantic_success_rate": 1,
+    "mean_routing_latency_ms": 2535.918673133339
+  },
+  "ettin": {
+    "terminal_success_rate": 0.9333333333333333,
+    "semantic_success_rate": 0.9166666666666666,
+    "mean_routing_latency_ms": 146.80881746666424,
+    "failures": [
+      "fresh_order_queue"
+    ]
+  },
+  "ettin_speedup_vs_skillrouter": 17.273612831253597,
+  "adjudication": [
+    "SKILLROUTER_HAS_HIGHER_ACCURACY_ON_THIS_FROZEN_SET",
+    "ETTIN_IS_OVER_17X_FASTER_ON_THIS_FROZEN_SET",
+    "NEITHER_ROUTE_DOMINATES",
+    "EVALUATE_ETTIN_PRIMARY_PLUS_SKILLROUTER_UNCERTAINTY_FALLBACK",
+    "DO_NOT_DERIVE_AND_VALIDATE_THE_FALLBACK_THRESHOLD_ON_THE_SAME_SET"
+  ],
+  "next_required_action": "RUN_ETTIN_ON_PRIOR_20_CASE_SKILLROUTER_SPENT_SET_AND_PERSIST_PER_ROUTE_SCORES__DERIVE_CASCADE_GATE_ON_ONE_DATASET__VALIDATE_ON_THE_OTHER__NO_NEW_FRESH_EVIDENCE",
+  "capability_credit_delta": 0
+}
