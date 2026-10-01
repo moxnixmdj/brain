@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RANK19-EXECUTION-SURFACE-PARITY-RECONCILIATION-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "df78821233ff6069cbcd23c1dd42ed2a2a836bfc",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "RECONCILE_CANONICAL_CONTROL_SURFACES_TO_RANK19_SPENT_EXECUTION_SURFACE_FAILURE__ZERO_COGNITION_VERDICT__NO_REPLAY__FREEZE_NEXT_CLEAN_SPEND_BEHIND_EXACT_SURFACE_PARITY_FIX",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "RANK19_SPENT_EXECUTION_SURFACE_FAILURE__ZERO_COGNITION_VERDICT",
+  "stop_condition": "POINTER_HIERARCHY_SCOREBOARD_QUEUE_AND_ATOMIC_BOUNDARY_AGREE_ON_RANK19_SPENT_ZERO_VERDICT_AND_NEXT_CLEAN_SPEND_FROZEN_BEHIND_EXACT_EXECUTION_SURFACE_PROFILE_FIX__NO_CAPABILITY_CREDIT_ADDED__TRUSTED_DRIFT_GUARD_PASSES",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_RANK19_EXECUTION_SURFACE_PARITY_RECONCILIATION_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "df78821233ff6069cbcd23c1dd42ed2a2a836bfc",
+    "real_outcome": "Make current Brain authority reflect rank-19 spent execution-surface failure and prevent further clean-task spend until exact package-policy parity is visible before execution.",
+    "required_capability": "Current-base control-plane reconciliation and execution-surface parity gating.",
+    "obs_goal": {
+      "real_outcome": "Preserve clean evidence and reduce wall-clock by preventing generic environment failures from consuming fresh tasks.",
+      "proxy_goals_deleted": [
+        "TASK_ACTIVITY_AS_PROGRESS",
+        "RANK_REPLAY"
+      ],
+      "surviving_necessity": "Reconcile authority and gate fresh spend on exact execution-surface facts."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RANK19_RECONCILIATION",
+        "ATOMIC_CAUSAL_MAP",
+        "RUNNER_BUDGET_GUARD"
+      ],
+      "external_existing_routes_checked": [
+        "RUNNER_PR_367_EXACT_SURFACE_PROFILE"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_TASK_EXECUTION",
+        "NO_REPLAY"
+      ],
+      "surviving_gap": "Stage-B feasibility can still differ materially from the actual task container package-management policy."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_EXECUTION_SURFACE_PARITY_GAP",
+      "delete_bypass_substitute_options": [
+        "PROFILE_EXACT_TASK_CONTAINER_PRE_INSTRUCTION",
+        "REQUIRE_PARITY_BEFORE_STAGE_C"
+      ],
+      "surviving_causal_blocker": "Fresh task execution can be spent on package-policy mismatch that was not visible in Stage-B."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1_RECONCILE_STALE_MIRRORS",
+        "2_BIND_EXACT_SURFACE_PARITY_GATE",
+        "3_ADVANCE_NEXT_CLEAN_TASK_AFTER_VERIFIED_FIX"
+      ],
+      "losing_routes_reason": "Replaying or advancing before parity proof wastes scarce clean evidence.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Trusted drift guard plus independent runner verification of exact-surface profile; no benchmark execution needed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "RANK10_POINTER",
+        "RANK17_SCOREBOARD_NEXT_ACTION",
+        "ACTIVE_RANK19_STAGE_C_LEASE"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "ONE_SHOT_BUDGET_GUARD",
+        "ATOMIC_CAUSAL_STRATEGY"
+      ],
+      "fresh_reuse_plan": "Use exact task-container profile before any future Stage-C command."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REANALYSIS_OF_RANK19_TASK_AUDIO",
+        "NO_RANK19_REPLAY"
+      ],
+      "search_stop_decision": "Root cause is directly observed and generic repair candidate exists.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_AND_GATE_EXACT_SURFACE_PARITY",
+      "REPLAY_RANK19",
+      "ADVANCE_WITHOUT_FIX"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RANK19_REPLAY",
+      "STALE_RANK10_NEXT_ACTION",
+      "FRESH_TASK_SPEND_BEFORE_PARITY"
+    ],
+    "selected_surviving_route": "CONTROL_SURFACE_RECONCILIATION__EXACT_EXECUTION_SURFACE_PARITY_GATE__NO_TASK_REPLAY",
+    "why_selected_route_is_fastest_sufficient": "It fixes the observed generic cause once and protects all subsequent tasks without consuming another benchmark.",
+    "expected_parent_level_state_change": "RECONCILE_CANONICAL_CONTROL_SURFACES_TO_RANK19_SPENT_EXECUTION_SURFACE_FAILURE__ZERO_COGNITION_VERDICT__NO_REPLAY__FREEZE_NEXT_CLEAN_SPEND_BEHIND_EXACT_SURFACE_PARITY_FIX",
+    "stop_condition": "POINTER_HIERARCHY_SCOREBOARD_QUEUE_AND_ATOMIC_BOUNDARY_AGREE_ON_RANK19_SPENT_ZERO_VERDICT_AND_NEXT_CLEAN_SPEND_FROZEN_BEHIND_EXACT_EXECUTION_SURFACE_PROFILE_FIX__NO_CAPABILITY_CREDIT_ADDED__TRUSTED_DRIFT_GUARD_PASSES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Generic execution-surface repair already identified; this action reconciles current authority."
+    }
+  }
+}
