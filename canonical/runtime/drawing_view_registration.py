@@ -118,3 +118,93 @@ def register_global_axis_deskew(
         "terminal_authority": False,
         "scope": "SINGLE_GLOBAL_ROTATION_DESKEW_FOR_ORTHOGONAL_LINE_DOMINATED_DRAWINGS_WITHIN_DECLARED_ANGLE_BOUND",
     }
+
+
+def _as_ordered_quad(points: Any) -> np.ndarray[Any, Any]:
+    """Validate caller-supplied TL,TR,BR,BL planar quadrilateral."""
+    quad = np.asarray(points, dtype=np.float32)
+    if quad.shape != (4, 2) or not np.isfinite(quad).all():
+        raise ValueError("source_quad must be finite 4x2 coordinates ordered TL,TR,BR,BL")
+    contour = quad.reshape(-1, 1, 2)
+    if not cv2.isContourConvex(contour):
+        raise ValueError("source_quad must be convex and non-self-intersecting")
+    if abs(float(cv2.contourArea(contour))) < 4.0:
+        raise ValueError("source_quad area is too small")
+    return quad
+
+
+def register_planar_perspective_from_quad(
+    image: np.ndarray[Any, Any],
+    source_quad: Any,
+    *,
+    output_size: tuple[int, int] | None = None,
+) -> dict[str, Any]:
+    """Rectify bounded planar perspective distortion from an explicit sheet quad.
+
+    The quadrilateral must be supplied in TL,TR,BR,BL order by an upstream
+    detector or trusted geometric source. This function deliberately does not
+    infer arbitrary local warps, semantic view identity, or free-form layouts.
+    """
+    if not isinstance(image, np.ndarray) or image.ndim not in (2, 3):
+        raise ValueError("image must be a 2D or 3D numpy array")
+    quad = _as_ordered_quad(source_quad)
+
+    tl, tr, br, bl = quad
+    width_top = float(np.linalg.norm(tr - tl))
+    width_bottom = float(np.linalg.norm(br - bl))
+    height_left = float(np.linalg.norm(bl - tl))
+    height_right = float(np.linalg.norm(br - tr))
+
+    if output_size is None:
+        out_w = int(round(max(width_top, width_bottom)))
+        out_h = int(round(max(height_left, height_right)))
+    else:
+        out_w, out_h = (int(output_size[0]), int(output_size[1]))
+    if out_w < 2 or out_h < 2:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "error": "DEGENERATE_OUTPUT_SIZE",
+            "terminal_authority": False,
+        }
+
+    dst = np.asarray(
+        [[0.0, 0.0], [out_w - 1.0, 0.0], [out_w - 1.0, out_h - 1.0], [0.0, out_h - 1.0]],
+        dtype=np.float32,
+    )
+    matrix = cv2.getPerspectiveTransform(quad, dst)
+    if not np.isfinite(matrix).all():
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "error": "NONFINITE_HOMOGRAPHY",
+            "terminal_authority": False,
+        }
+
+    det = float(np.linalg.det(matrix))
+    if abs(det) < 1e-10:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED",
+            "error": "DEGENERATE_HOMOGRAPHY",
+            "terminal_authority": False,
+        }
+
+    border = 255 if image.ndim == 2 else (255, 255, 255)
+    registered = cv2.warpPerspective(
+        image,
+        matrix,
+        (out_w, out_h),
+        flags=cv2.INTER_LINEAR,
+        borderMode=cv2.BORDER_CONSTANT,
+        borderValue=border,
+    )
+    return {
+        "schema": SCHEMA,
+        "status": "REGISTERED",
+        "homography": matrix,
+        "source_quad": quad,
+        "registered_image": registered,
+        "terminal_authority": False,
+        "scope": "PLANAR_PROJECTIVE_PERSPECTIVE_RECTIFICATION_FROM_EXPLICIT_CONVEX_TL_TR_BR_BL_QUADRILATERAL",
+    }
