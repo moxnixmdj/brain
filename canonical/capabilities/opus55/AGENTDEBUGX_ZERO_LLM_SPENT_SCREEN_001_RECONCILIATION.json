@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_AGENTDEBUGX_ZERO_LLM_REUSE_SCREEN_RECONCILIATION_V1",
+  "result_id": "AGENTDEBUGX_ZERO_LLM_SPENT_SCREEN_001",
+  "status": "MECHANISM_SCREEN_PASS__REAL_SPENT_BRAIN_TRAJECTORY_TEST_REQUIRED__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "candidate": {
+    "repo": "AgentDebugX/AgentDebugX",
+    "package": "agentdebugx",
+    "version": "0.5.2",
+    "license": "MIT",
+    "mode": "DiagnosePipeline.local_default",
+    "role": [
+      "C6_ANOMALY_AND_FAILURE_DETECTION",
+      "C7_ROOT_CAUSE_LOCALIZATION",
+      "C10_RECOVERY_CONTROL_INPUT"
+    ]
+  },
+  "execution": {
+    "repo": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36822303110,
+    "launch_commit": "61fff3a8ba953c66b220c28118300ac05728ed41",
+    "persisted_receipt_commit": "1e6027e79494009e9d2e9f3f99caa420cc3a242d",
+    "result_blob": "80879c37da6de2f80d32abd02b68904048bcc85b"
+  },
+  "metrics": {
+    "cases": 8,
+    "root_step_accuracy": 1,
+    "primary_mode_accuracy": 1,
+    "attribution_consistency": 1,
+    "wrong_root_cases": [],
+    "wrong_mode_cases": []
+  },
+  "scope": [
+    "SPENT_HAND_AUTHORED_MECHANISM_CASES_ONLY",
+    "ZERO_LLM_PATH_ONLY",
+    "NO_RECOVERY_EXECUTION_CREDIT",
+    "NO_REAL_BRAIN_TRAJECTORY_GENERALIZATION_CREDIT"
+  ],
+  "adjudication": [
+    "THE_EXISTING_ZERO_LLM_DETECT_AND_ATTRIBUTE_PATH_IS_COMPATIBLE_WITH_BRAIN_STYLE_FAILURE_SIGNALS",
+    "DO_NOT_IMPORT_THE_PACKAGE_AS_A_CAPABILITY_YET",
+    "NEXT_TEST_MUST_USE_RECORDED_SPENT_BRAIN_TRAJECTORIES_OR_EVENT_LOGS_WITHOUT_ADDING_HINTS_AFTER_THE_FACT"
+  ],
+  "next_required_action": "ADAPT_ALREADY_SPENT_BRAIN_EXECUTION_TRACES_INTO_THE_PORTABLE_TRAJECTORY_SCHEMA__RUN_ZERO_LLM_DETECT_AND_ATTRIBUTE__COMPARE_ROOT_LOCALIZATION_TO_EXISTING_CANONICAL_CAUSAL_RECEIPTS",
+  "capability_credit_delta": 0
+}
