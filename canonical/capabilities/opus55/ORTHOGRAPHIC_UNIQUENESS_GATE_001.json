@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ORTHOGRAPHIC_UNIQUENESS_GATE_V1",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_COMPONENT__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M1B_CONSTRAINT_GRAPH_TO_HIDDEN_TOPOLOGY_AND_CONTINUOUS_GEOMETRY",
+  "artifact": "canonical/runtime/orthographic_uniqueness_gate.py",
+  "depends_on": "canonical/runtime/orthographic_visual_hull.py",
+  "tests": "canonical/tests/test_orthographic_uniqueness_gate.py",
+  "verification": {
+    "workflow": ".github/workflows/verify-orthographic-uniqueness-gate.yml",
+    "workflow_run_id": 36941028153,
+    "conclusion": "success"
+  },
+  "theorem": [
+    "VISUAL_HULL_IS_THE_SET_OF_ALL_VOXELS_POSSIBLE_UNDER_THREE_BINARY_ORTHOGRAPHIC_PROJECTIONS",
+    "A_POSSIBLE_VOXEL_IS_FORCED_IF_IT_IS_THE_SOLE_SUPPORT_OF_ANY_REQUIRED_PROJECTION_PIXEL",
+    "IF_ALL_POSSIBLE_VOXELS_ARE_FORCED_THE_DISCRETE_OCCUPANCY_IS_UNIQUE",
+    "IF_ANY_POSSIBLE_VOXEL_IS_NOT_FORCED_REMOVING_ONE_SUCH_VOXEL_IS_A_CONSTRUCTIVE_SECOND_SOLUTION_WITNESS"
+  ],
+  "verified_scope": [
+    "NORMALIZED_TOP_FRONT_RIGHT_BINARY_SILHOUETTES",
+    "INCONSISTENT_VIEW_DETECTION",
+    "EXACT_DISCRETE_OCCUPANCY_UNIQUENESS_DECISION",
+    "CONSTRUCTIVE_NONUNIQUENESS_WITNESS",
+    "FAIL_CLOSED_UNIQUE_SOLUTION_API"
+  ],
+  "key_breakthrough": "HIDDEN_GEOMETRY_NEED_NOT_ALWAYS_BE_GUESSED__FOR_THE_DISCRETE_ORTHOGRAPHIC_SUBSET_BRAIN_CAN_PROVE_WHEN_THE_VIEWS_DETERMINE_A_UNIQUE_SOLID_AND_PROVE_AMBIGUITY_OTHERWISE",
+  "remaining": [
+    "RAW_DRAWING_TO_NORMALIZED_SILHOUETTES_AND_FEATURE_CONSTRAINTS",
+    "CONTINUOUS_CURVES_AND_SURFACES",
+    "SUBVOXEL_DIMENSION_AND_TOLERANCE_SEMANTICS",
+    "HIDDEN_FEATURES_NOT_DETERMINED_BY_VISIBLE_PROJECTIONS"
+  ],
+  "donor_runtime_required": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
