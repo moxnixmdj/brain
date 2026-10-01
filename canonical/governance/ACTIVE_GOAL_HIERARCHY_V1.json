@@ -5,9 +5,9 @@
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
-  "probe_state": "RANK16_STAGE_A_PASS__STAGE_B_INSTRUCTION_EXPOSURE_AUTHORIZED__TASK_EXECUTION_FORBIDDEN",
-  "current_parent_blocker": "RANK16_TASK_SPECIFIC_STAGE_B_CONTRACT_AND_FALSIFICATION_NOT_YET_COMPLETE",
-  "next_required_action_class": "READ_OFFICIAL_RANK16_INSTRUCTION_ONCE__COMPILE_COMPLETE_NORMALIZED_REQUIREMENT_GRAPH__BUILD_INDEPENDENT_ACCEPTANCE_PLAN__RUN_REQUIREMENT_AND_VERIFIER_MUTATION__PROVE_TASK_SPECIFIC_FEASIBILITY_AND_TOOL_RESOURCE_PREFLIGHT__EXECUTE_NOTHING_UNTIL_STAGE_B_PASS",
+  "probe_state": "RANK15_SPENT_NO_REPLAY__RANK16_INELIGIBLE_PRIOR_EXPOSURE__RANK17_STAGE_A_INDEPENDENT_VERIFICATION_REQUIRED",
+  "current_parent_blocker": "GENERIC_STAGE_A_EXPOSURE_SEARCH_COMPLETENESS_PATCH_NOT_YET_INDEPENDENTLY_VERIFIED_FOR_RANK17",
+  "next_required_action_class": "INDEPENDENTLY_VERIFY_STAGE_A_EXPOSURE_COMPLETENESS_PATCH_AND_RANK17_LEDGER__NO_RANK17_INSTRUCTION_EXPOSURE_BEFORE_PASS",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -198,7 +198,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "READ_OFFICIAL_RANK16_INSTRUCTION_ONCE__COMPILE_COMPLETE_NORMALIZED_REQUIREMENT_GRAPH__BUILD_INDEPENDENT_ACCEPTANCE_PLAN__RUN_REQUIREMENT_AND_VERIFIER_MUTATION__PROVE_TASK_SPECIFIC_FEASIBILITY_AND_TOOL_RESOURCE_PREFLIGHT__EXECUTE_NOTHING_UNTIL_STAGE_B_PASS",
+  "next_progress_event_target": "INDEPENDENTLY_VERIFY_STAGE_A_EXPOSURE_COMPLETENESS_PATCH_AND_RANK17_LEDGER__NO_RANK17_INSTRUCTION_EXPOSURE_BEFORE_PASS",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -343,15 +343,7 @@
     "status": "CONTAMINATED__INELIGIBLE__DO_NOT_REPLAY",
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
-  "active_stage1_execution": {
-    "task": "wdm-design",
-    "rank": 15,
-    "state": "SPENT_BY_POST_REVOCATION_TASK_SPECIFIC_EXECUTION__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
-    "evidence_path": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_POST_REVOCATION_EXECUTION_RECONCILIATION_V1.json",
-    "runner_pr": 325,
-    "terminal_verifier_executed": false,
-    "replay_allowed": false
-  },
+  "active_stage1_execution": null,
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
     "stale_state_falsified": "RANK6_FRESH_TASK_RUNNER_READY__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
@@ -442,12 +434,10 @@
     "capability_credit_delta": 0
   },
   "stage1_next_clean_task": {
-    "task": "session-window-debug",
-    "rank": 16,
-    "state": "STAGE_A_PASS__STAGE_B_INSTRUCTION_EXPOSURE_AUTHORIZED__TASK_EXECUTION_FORBIDDEN",
-    "authorization_gate": "STAGE_B_TASK_SPECIFIC_CONTRACT_AND_FALSIFICATION_PASS_BEFORE_ANY_TASK_COMMAND",
-    "contamination_ledger": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_CONTAMINATION_LEDGER_V1.json",
-    "stage_a_evidence": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_STAGE_A_ADMISSION_V1.json"
+    "task": "data-anonymization",
+    "rank": 17,
+    "state": "FROZEN_UNREAD__ELIGIBILITY_SEARCH_CLEAN__STAGE_A_VERIFICATION_PENDING",
+    "authorization_gate": "GENERIC_STAGE_A_V3_INDEPENDENT_PASS"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -515,11 +505,12 @@
       "valid": true,
       "candidate_task_executed": false
     },
-    "task_execution_authorized": true,
+    "task_execution_authorized": false,
     "same_task_replay_allowed": false,
     "solution_read": false,
     "tests_read": false,
-    "hidden_verifier_read": false
+    "hidden_verifier_read": false,
+    "post_spend_authority": "NONE"
   },
   "rank15_stage_c": {
     "status": "SPENT_BY_POST_REVOCATION_TASK_SPECIFIC_EXECUTION__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
@@ -541,6 +532,20 @@
     "status": "INDEPENDENT_PASS",
     "evidence": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_STAGE_A_ADMISSION_V1.json",
     "runner_workflow_run_id": 36915296872,
+    "task_execution_authorized": false
+  },
+  "rank16_disposition": {
+    "task": "session-window-debug",
+    "rank": 16,
+    "status": "INELIGIBLE__PRIOR_EXPOSURE_PR558__CURRENT_INSTRUCTION_EXPOSED_PR333__NO_BUILDER_EXECUTION",
+    "ledger": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_CONTAMINATION_LEDGER_V1.json",
+    "runner_pr": 333
+  },
+  "rank17_preexposure": {
+    "task": "data-anonymization",
+    "rank": 17,
+    "status": "NAME_SEARCH_CLEAN__INSTRUCTION_UNREAD__STAGE_A_PENDING",
+    "ledger": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_CONTAMINATION_LEDGER_V1.json",
     "task_execution_authorized": false
   }
 }
