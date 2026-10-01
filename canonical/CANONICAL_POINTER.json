@@ -232,7 +232,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+    "next_step": "QUALIFY_JAX_SPEEDRUN_GPU_RANK_7_EXECUTION_SURFACE_BEFORE_INSTRUCTION_READ__IF_COMPATIBLE_LEASE_AND_RUN_ONCE__IF_INCOMPATIBLE_SKIP_UNSPENT",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
