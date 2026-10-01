@@ -3,6 +3,8 @@ import importlib.util
 import pathlib
 import sys
 import unittest
+import hashlib
+import json
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 PATH=ROOT/"runtime"/"executor_broker.py"
@@ -13,14 +15,57 @@ spec.loader.exec_module(broker)
 
 
 class ExecutorBrokerTests(unittest.TestCase):
+    def _sha(self, path):
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def _obs(self):
+        repo_root=ROOT.parent
+        pointer=json.loads((repo_root/"canonical"/"CANONICAL_POINTER.json").read_text(encoding="utf-8"))
+        state_paths=(
+            "canonical/CANONICAL_POINTER.json",
+            "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+            "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+        )
+        return {
+            "schema":"PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+            "status":"CURRENT",
+            "canonical_generation":pointer["canonical_generation"],
+            "dependency_inventory_complete":True,
+            "material_world_state_dependencies_complete":True,
+            "unknown_material_dependencies":[],
+            "stale_authority_absent":True,
+            "valid_proof_action_priority":True,
+            "obs_layers_current":{k:True for k in ("goal","capability","blocker","solution","verification","inherited_system","obs_process")},
+            "canonical_state_dependencies":[
+                {"path":p,"sha256":self._sha(repo_root/p)}
+                for p in state_paths
+            ],
+            "dependencies":[{
+                "dependency_id":"executor_attestation_set",
+                "class":"EXECUTION_AUTHORITY",
+                "material":True,
+                "volatility":"STATIC",
+                "scope":"GLOBAL",
+                "status":"READY",
+                "evidence":["test fixture"],
+            }],
+        }
+
     def capsule(self,platform="linux"):
         return {
+            "continuous_obs":self._obs(),
             "executor_policy":{
                 "required_platform":platform,
                 "gpu_allowed":False,
                 "heavy_compute_allowed":False,
             }
         }
+
+    def test_missing_obs_fails_closed(self):
+        capsule=self.capsule("linux")
+        capsule.pop("continuous_obs")
+        with self.assertRaisesRegex(broker.ExecutorUnavailable,"CONTINUOUS_OBS_BLOCKED"):
+            broker.select_executor(capsule,[])
 
     def test_provider_is_not_authority(self):
         executors=[
