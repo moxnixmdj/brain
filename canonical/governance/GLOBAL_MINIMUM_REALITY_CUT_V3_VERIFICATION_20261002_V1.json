@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_MINIMUM_REALITY_CUT_V3_VERIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_EXACT_PASS__DOMINATED_BY_NEWER_THREE_BUNDLE_PROTOCOL_FOR_NEXT_RECOMPUTE",
+  "input_path": "canonical/governance/GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3.json",
+  "input_blob_sha": "c0ceaba4919201119faa94d92abc6b8efacc86d0",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 440,
+    "merge_commit": "99bc6afdf98172c91854abf1a348706a182ef4d2",
+    "workflow_run_id": 36939139298,
+    "conclusion": "success"
+  },
+  "exact_result": {
+    "distinction_count": 23,
+    "selected_observation_count": 15,
+    "total_cost": 16,
+    "zero_new_information_members": [
+      "Q_SEMANTIC_ACCEPTANCE_SPENT_PORTFOLIO",
+      "Q_STRUCTURED_GEOMETRY_SPENT_PORTFOLIO"
+    ],
+    "rank23_execution_selected": false
+  },
+  "supersession_reason": "canonical/governance/GLOBAL_TERMINAL_PROOF_PROTOCOLS_V1.json defines stronger cross-family bundles that cover multiple formerly separate V3 distinctions with one genuine matched portfolio.",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
