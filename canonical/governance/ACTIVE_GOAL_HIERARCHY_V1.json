@@ -5,9 +5,9 @@
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
-  "probe_state": "RANK17_STAGE_B_INDEPENDENT_PASS__STAGE_C_V4_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
-  "current_parent_blocker": "RANK17_STAGE_C_V4_ONE_SHOT_DATA_ANONYMIZATION_EXECUTION_AND_TERMINAL_VERIFICATION",
-  "next_required_action_class": "BIND_STAGE_C_V4_LEASE_AND_EXACT_FROZEN_ACCEPTANCE_TO_RUNNER_PR352__EXECUTE_ONE_BUILDER_BURST__FREEZE_OUTPUT__RUN_ONE_INDEPENDENT_TERMINAL_VERIFIER__NO_REPLAY",
+  "probe_state": "RANK17_SOURCE_BOUNDARY_CONTAMINATED_SPENT__RANK18_STAGE_B_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_AUTHORIZED",
+  "current_parent_blocker": "RANK18_STAGE_C_ONE_SHOT_FREECAD_IMPELLER_EXECUTION_AND_TERMINAL_VERIFICATION",
+  "next_required_action_class": "REVALIDATE_RANK18_STAGE_C_LEASE_ON_RUNNER_PR354__EXECUTE_EXACTLY_ONE_BUILDER_BURST_BOUND_TO_FROZEN_ACCEPTANCE__FREEZE_OUTPUT__RUN_ONE_TERMINAL_VERIFIER__NO_REPLAY",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -198,7 +198,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "BIND_STAGE_C_V4_LEASE_AND_EXACT_FROZEN_ACCEPTANCE_TO_RUNNER_PR352__EXECUTE_ONE_BUILDER_BURST__FREEZE_OUTPUT__RUN_ONE_INDEPENDENT_TERMINAL_VERIFIER__NO_REPLAY",
+  "next_progress_event_target": "REVALIDATE_RANK18_STAGE_C_LEASE_ON_RUNNER_PR354__EXECUTE_EXACTLY_ONE_BUILDER_BURST_BOUND_TO_FROZEN_ACCEPTANCE__FREEZE_OUTPUT__RUN_ONE_TERMINAL_VERIFIER__NO_REPLAY",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -344,15 +344,13 @@
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
   "active_stage1_execution": {
-    "task": "data-anonymization",
-    "rank": 17,
-    "state": "STAGE_C_V3_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
-    "lease_path": "canonical/governance/LEASE_DATA_ANONYMIZATION_TB4_STAGE_C_V3_20261001_V1.json",
-    "stage_b_evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_B_VERIFICATION_V1.json",
-    "runner_pr": 349,
-    "session_id": "data-anonymization-stagec-20261001-v3",
-    "prior_carrier_pr": 346,
-    "prior_carrier_builder_bursts_executed": 0,
+    "task": "freecad-impeller",
+    "rank": 18,
+    "state": "STAGE_C_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
+    "lease_path": "canonical/governance/LEASE_FREECAD_IMPELLER_TB4_STAGE_C_20261001_V1.json",
+    "stage_b_evidence": "canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_STAGE_B_VERIFICATION_V1.json",
+    "runner_pr": 354,
+    "session_id": "freecad-impeller-20261001-stagec-v1",
     "replay_allowed": false
   },
   "execution_liveness_correction_20261001": {
@@ -445,11 +443,11 @@
     "capability_credit_delta": 0
   },
   "stage1_next_clean_task": {
-    "task": "data-anonymization",
-    "rank": 17,
-    "state": "STAGE_C_V4_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
+    "task": "freecad-impeller",
+    "rank": 18,
+    "state": "STAGE_C_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
     "authorization_gate": "SATISFIED__ONE_EXECUTION_PLUS_ONE_TERMINAL_VERIFIER_ONLY",
-    "lease_path": "canonical/governance/LEASE_DATA_ANONYMIZATION_TB4_STAGE_C_V4_20261001_V1.json"
+    "lease_path": "canonical/governance/LEASE_FREECAD_IMPELLER_TB4_STAGE_C_20261001_V1.json"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -469,7 +467,7 @@
     "status": "MANDATORY_BEFORE_RANK16_STAGE_C",
     "path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-    "current_verdict": "RANK17_STAGE_A_AND_STAGE_B_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_AUTHORIZED"
+    "current_verdict": "RANK17_SPENT_SOURCE_BOUNDARY_CONTAMINATION__RANK18_STAGE_B_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_AUTHORIZED"
   },
   "terminal_closure": {
     "manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
@@ -559,22 +557,32 @@
     "task_execution_authorized": false
   },
   "rank17_stage_b": {
-    "status": "INDEPENDENT_PASS__STAGE_C_V4_ONE_SHOT_AUTHORIZED",
+    "status": "HISTORICAL_INDEPENDENT_STAGE_B_PASS__TASK_LATER_SOURCE_BOUNDARY_CONTAMINATED_AND_SPENT",
     "evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_B_VERIFICATION_V1.json",
     "runner_pr": 342,
-    "workflow_run_id": 36917383163,
-    "task_execution_authorized": true
+    "task_execution_authorized": false
   },
   "rank17_stage_c_v4": {
-    "status": "AUTHORIZED__NOT_YET_EXECUTED",
+    "status": "REVOKED_BY_ABSORBING_RANK17_SPEND__ZERO_CREDIT__NO_REPLAY",
     "runner_pr": 352,
     "session_id": "data-anonymization-stagec-20261001-v4",
-    "canonical_acceptance_contract_sha256": "1b98cda7a95d8fa365cf4585ecb1d146f6133cfca62085e1a88f53a94bd8b2dd",
-    "prior_v3_runner_pr": 349,
-    "prior_v3_builder_bursts_executed": 0,
-    "prior_v3_terminal_verifier_runs": 0,
-    "prior_v3_disposition": "CLOSED_PREEXECUTION_ACCEPTANCE_HASH_MISMATCH",
-    "replay_allowed": false,
-    "acceptance_semantic_equivalence": "EXACT_PAYLOAD_MATCH_TO_INDEPENDENTLY_VERIFIED_V2_AFTER_SESSION_ID_NORMALIZATION"
+    "authoritative_spend_receipt": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_SOURCE_BOUNDARY_CONTAMINATED_20261001_V1.json",
+    "authoritative_spend_commit": "76205584b0cf095caa20f2d4862d27766f8b39e2",
+    "replay_allowed": false
+  },
+  "rank18_stage_b": {
+    "status": "INDEPENDENT_PASS__STAGE_C_ONE_SHOT_AUTHORIZED",
+    "evidence": "canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_STAGE_B_VERIFICATION_V1.json",
+    "runner_pr": 351,
+    "workflow_run_id": 36919785503,
+    "task_execution_authorized": true
+  },
+  "rank18_stage_c": {
+    "status": "AUTHORIZED__NOT_YET_EXECUTED",
+    "runner_pr": 354,
+    "session_id": "freecad-impeller-20261001-stagec-v1",
+    "lease_path": "canonical/governance/LEASE_FREECAD_IMPELLER_TB4_STAGE_C_20261001_V1.json",
+    "frozen_acceptance_contract_sha256": "9cc6bfb128a121b09ae2765d21f7614b695a395734df60a7898ba126545883f2",
+    "replay_allowed": false
   }
 }
