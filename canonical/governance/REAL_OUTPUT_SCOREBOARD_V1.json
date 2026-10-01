@@ -1166,6 +1166,7 @@
     "existing_evidence_reuse_is_preferred": true,
     "deductive_closure_is_preferred": true,
     "minimum_reality_cut_required_for_future_fresh_spend": true,
-    "current_rank22_not_delayed": true
+    "rank22_grandfather_status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE",
+    "current_frontier_application": "EXTRACT_GENERIC_FREECAD_FAILURE_IMMUNITY_FROM_EXISTING_RANK22_RECEIPT__NO_NEW_UNTOUCHED_SPEND_UNTIL_MINIMUM_REALITY_CUT_ADMISSION"
   }
 }
