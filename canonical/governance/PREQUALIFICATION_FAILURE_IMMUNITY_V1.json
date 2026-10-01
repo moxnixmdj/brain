@@ -134,6 +134,11 @@
       "id": "POST_EXPOSURE_DISCOVERY_SEARCH_COLLISION",
       "defense": "After Stage-B task identity/instruction exposure, perform zero discovery search of any kind, including apparently generic web/repository queries. Only exact predeclared allowlisted task fetches and pre-exposure-frozen generic-reference URLs may be retrieved. Any unbounded-result query contaminates the task because ranking can surface task-specific or verifier-derived content.",
       "required_evidence": "POST_EXPOSURE_ZERO_DISCOVERY_SEARCH_RECEIPT_PLUS_SOURCE_BOUNDARY_PREFLIGHT"
+    },
+    {
+      "id": "LOSSY_SOURCE_TO_REQUIREMENT_COMPILATION",
+      "defense": "Atomize every authoritative textual source losslessly; every atom requires an explicit disposition. Normative/high-risk atoms cannot be silently informational. Operative atoms must map bidirectionally to requirements. Ambiguity creates a blocking specification hole rather than a guessed interpretation.",
+      "required_evidence": "LOSSLESS_SOURCE_CONTRACT_COMPILATION_RECEIPT__ZERO_UNACCOUNTED_ATOMS__ZERO_OPEN_SPECIFICATION_HOLES"
     }
   ],
   "fresh_qualification_admission_rule": "STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_READS_MUST_OBEY_TB4_SOURCE_ALLOWLIST__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
@@ -170,7 +175,11 @@
         "TASK_SPECIFIC_EXECUTION_SURFACE_PARITY_CERTIFICATE",
         "TASK_SPECIFIC_TOOL_AUTHORITY_AND_RESOURCE_PREFLIGHT",
         "TASK_SPECIFIC_SOURCE_BOUNDARY_PREFLIGHT",
-        "POST_EXPOSURE_ZERO_DISCOVERY_SEARCH_RECEIPT"
+        "POST_EXPOSURE_ZERO_DISCOVERY_SEARCH_RECEIPT",
+        "LOSSLESS_SOURCE_CONTRACT_COMPILATION_RECEIPT",
+        "ZERO_UNACCOUNTED_AUTHORITATIVE_SOURCE_ATOMS",
+        "ZERO_OPEN_SPECIFICATION_HOLES",
+        "BIDIRECTIONAL_SOURCE_REQUIREMENT_TRACEABILITY"
       ],
       "failure_disposition": "INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE"
     },
@@ -215,6 +224,14 @@
       "verification": "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json",
       "runner_merge_commit": "a902df6b5e8393cf8aff563f5394dc40a0b314d0",
       "rule": "STAGE_C_LEASE_UPGRADE_REQUIRES_BRAIN_SOURCE_BOUNDARY_PREFLIGHT_V1_PASS"
+    },
+    "source_contract_completeness_compiler": {
+      "status": "INDEPENDENT_PASS__EXACT_BLOB_VERIFIED",
+      "verification": "canonical/governance/CORE_HARDENING_VERIFICATION_20261001_V1.json",
+      "kernel": "canonical/runtime/source_contract_compiler.py",
+      "git_blob_sha": "8f68e0e8aba6585626b414e3cb49c20d0470ea0c",
+      "rule": "STAGE_B_CANNOT_PASS_WITH_UNACCOUNTED_SOURCE_ATOMS__OPEN_SPECIFICATION_HOLES__OR_NON_BIDIRECTIONAL_TRACEABILITY"
     }
-  }
+  },
+  "core_hardening_verification": "canonical/governance/CORE_HARDENING_VERIFICATION_20261001_V1.json"
 }
