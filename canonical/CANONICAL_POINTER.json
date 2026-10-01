@@ -232,7 +232,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
+    "next_step": "EXECUTE_BATCHED_EVAL_PARITY_RANK_5_ON_HIGH_THROUGHPUT_EXECUTION_V2__ONE_SHOT_INDEPENDENT_VERIFIER__NO_TASK_SPECIFIC_PUBLIC_SEARCH",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
@@ -738,6 +738,19 @@
       "determinism_runs": 10,
       "workflow_run_id": 36803852769,
       "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
+    },
+    "execution_kernel": "canonical/execution/HIGH_THROUGHPUT_EXECUTION_V2.json",
+    "active_stage1_task": {
+      "rank": 5,
+      "task": "batched-eval-parity",
+      "runner_pr": 288,
+      "state": "RUNNER_READY__INSTRUCTION_UNREAD"
+    },
+    "latest_clean_stage1_result": {
+      "task": "gsea-proteomics",
+      "result": "VERIFIED_FAILURE",
+      "reward": 0,
+      "evidence_path": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json"
     }
   },
   "provider_rules": {
