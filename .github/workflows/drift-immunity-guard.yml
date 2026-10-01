@@ -13,6 +13,9 @@ on:
       - 'canonical/runtime/test_continuous_obs_runtime.py'
       - 'canonical/runtime/astra_runtime.py'
       - 'canonical/runtime/same_identity_supervisor.py'
+      - 'canonical/tests/test_executor_broker.py'
+      - 'canonical/runtime/EXECUTOR_POLICY_V1.json'
+      - 'canonical/runtime/executor_broker.py'
       - '.github/workflows/superworker-signed-command-relay.yml'
       - '.github/workflows/drift-immunity-guard.yml'
   workflow_dispatch:
@@ -33,9 +36,12 @@ jobs:
           python3 -m py_compile \
             canonical/runtime/continuous_obs_runtime.py \
             canonical/runtime/astra_runtime.py \
-            canonical/runtime/same_identity_supervisor.py
+            canonical/runtime/same_identity_supervisor.py \
+            canonical/runtime/executor_broker.py
       - name: Verify continuous OBS fail-closed behavior
-        run: python3 -m unittest -v canonical.runtime.test_continuous_obs_runtime
+        run: |
+          python3 -m unittest -v canonical.runtime.test_continuous_obs_runtime
+          python3 -m unittest -v canonical.tests.test_executor_broker
 
   guard:
     if: github.event_name != 'push' || github.ref != 'refs/heads/main'
