@@ -233,3 +233,129 @@ def requirement_mutation_score(requirements: list[dict[str, Any]]) -> dict[str, 
         "survived_ids": sorted(survived),
         "pass": total > 0 and not survived,
     }
+
+
+def validate_requirement_output_reachability(
+    requirements: list[dict[str, Any]],
+    *,
+    calculation_nodes: list[dict[str, Any]],
+    calculation_edges: list[dict[str, Any]],
+    outputs: list[str],
+    exclusions: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Fail closed unless every non-excluded requirement reaches a final output."""
+    req_ids = {str(r.get("id", "")).strip() for r in requirements if str(r.get("id", "")).strip()}
+    node_ids = [str(n.get("id", "")).strip() for n in calculation_nodes]
+    nonempty_nodes = [x for x in node_ids if x]
+    known_nodes = set(nonempty_nodes)
+    output_ids = {str(x) for x in outputs}
+    diagnostics: list[Diagnostic] = []
+
+    if len(nonempty_nodes) != len(calculation_nodes):
+        diagnostics.append(Diagnostic("calculation-node-without-id", None, "one or more calculation nodes lack stable ids"))
+    if len(set(nonempty_nodes)) != len(nonempty_nodes):
+        diagnostics.append(Diagnostic("duplicate-calculation-node-id", None, "calculation node ids must be unique"))
+
+    for out in sorted(output_ids - known_nodes):
+        diagnostics.append(Diagnostic("unknown-output-node", None, f"output {out} is not a calculation node"))
+
+    adjacency: dict[str, list[str]] = {n: [] for n in known_nodes}
+    for edge in calculation_edges:
+        src = str(edge.get("from", ""))
+        dst = str(edge.get("to", ""))
+        if src not in known_nodes or dst not in known_nodes:
+            diagnostics.append(Diagnostic("dangling-calculation-edge", None, f"{src}->{dst}"))
+            continue
+        adjacency[src].append(dst)
+
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(node: str) -> bool:
+        if node in visiting:
+            return True
+        if node in visited:
+            return False
+        visiting.add(node)
+        cyclic = any(visit(nxt) for nxt in adjacency.get(node, ()))
+        visiting.remove(node)
+        visited.add(node)
+        return cyclic
+
+    if any(visit(n) for n in sorted(known_nodes)):
+        diagnostics.append(Diagnostic("calculation-cycle", None, "calculation graph contains a cycle"))
+
+    exclusion_map = {
+        str(x.get("requirement_id", "")): str(x.get("justification", "")).strip()
+        for x in (exclusions or [])
+    }
+    for rid, justification in sorted(exclusion_map.items()):
+        if rid not in req_ids:
+            diagnostics.append(Diagnostic("exclusion-for-unknown-requirement", rid or None, rid))
+        elif not justification:
+            diagnostics.append(Diagnostic("empty-exclusion-justification", rid, rid))
+
+    bindings: dict[str, list[str]] = {}
+    for node in calculation_nodes:
+        rid = str(node.get("requirement_id", "")).strip()
+        nid = str(node.get("id", "")).strip()
+        if rid:
+            bindings.setdefault(rid, []).append(nid)
+            if rid not in req_ids:
+                diagnostics.append(Diagnostic("node-bound-to-unknown-requirement", rid, nid))
+
+    def reaches_output(start: str) -> bool:
+        stack = [start]
+        seen: set[str] = set()
+        while stack:
+            node = stack.pop()
+            if node in seen:
+                continue
+            seen.add(node)
+            if node in output_ids:
+                return True
+            stack.extend(adjacency.get(node, ()))
+        return False
+
+    uncovered: list[str] = []
+    for rid in sorted(req_ids):
+        if exclusion_map.get(rid):
+            continue
+        starts = [n for n in bindings.get(rid, []) if n in known_nodes]
+        if not starts:
+            uncovered.append(f"{rid}:NO_CALCULATION_NODE")
+        elif not any(reaches_output(n) for n in starts):
+            uncovered.append(f"{rid}:NO_OUTPUT_PATH")
+
+    return {
+        "schema": "BRAIN_REQUIREMENT_OUTPUT_REACHABILITY_V1",
+        "pass": not diagnostics and not uncovered,
+        "uncovered": uncovered,
+        "diagnostics": [asdict(d) for d in diagnostics],
+    }
+
+
+def compile_structured_method_contract(
+    requirements: list[dict[str, Any]],
+    *,
+    expected_required_ids: list[str] | None = None,
+    calculation_nodes: list[dict[str, Any]],
+    calculation_edges: list[dict[str, Any]],
+    outputs: list[str],
+    exclusions: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Compose normalized requirement validation with requirement-to-output reachability."""
+    base = compile_requirement_contract(requirements, expected_required_ids=expected_required_ids)
+    reachability = validate_requirement_output_reachability(
+        requirements,
+        calculation_nodes=calculation_nodes,
+        calculation_edges=calculation_edges,
+        outputs=outputs,
+        exclusions=exclusions,
+    )
+    return {
+        "schema": "BRAIN_STRUCTURED_METHOD_CONTRACT_V1",
+        "pass": bool(base["pass"] and reachability["pass"]),
+        "requirement_contract": base,
+        "output_reachability": reachability,
+    }
