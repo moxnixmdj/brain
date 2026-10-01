@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+    "next_action": "CONTINUE_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -116,16 +116,20 @@
         "live-database-cutover",
         "mp-checkpoint-consolidation",
         "hof-topology-interpenetration",
-        "batched-eval-parity"
+        "batched-eval-parity",
+        "glycan-ms2-elucidation",
+        "intrastat-meldung"
       ],
       "current_task": {
-        "rank": 6,
-        "task": "glycan-ms2-elucidation",
-        "state": "RUNNER_READY__INSTRUCTION_UNREAD",
-        "runner_pr": 289,
-        "workflow_run_id": 36822123561
+        "rank": 9,
+        "task": "atrx-vep-crispr",
+        "state": "LIVE_PATCHED_FAST_BURST__INSTRUCTION_BOUNDARY_PRESERVED",
+        "workflow_run_id": 36831169681
       },
-      "comparable_score_established": false
+      "comparable_score_established": false,
+      "surface_skipped_unspent": [
+        "jax-speedrun-gpu"
+      ]
     },
     "latest_clean_failure": {
       "task": "gsea-proteomics",
@@ -141,12 +145,13 @@
       ]
     },
     "latest_contamination": {
-      "task": "batched-eval-parity",
-      "rank": 5,
-      "cause": "TASK_TOML_SOLUTION_EXPOSURE",
+      "task": "intrastat-meldung",
+      "rank": 8,
+      "cause": "ACCIDENTAL_TASK_SPECIFIC_SOLUTION_EXPOSURE",
       "hidden_verifier_run": false,
-      "evidence_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json"
-    }
+      "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
+    },
+    "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
