@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_PYRCA_HT_DONOR_MINIMIZATION_V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Remove the external PyRCA runtime from the screened residual cause-ranking mechanism by validating a minimal Brain-owned NumPy implementation against the pinned donor on fresh hidden-intervention trials.",
+  "governing_invariants": [
+    "Rank-9 remains the primary clean execution lane and must not be touched.",
+    "The PyRCA HT screen proved only a narrow explicit-numeric-DAG ranking function.",
+    "Only the ranking slice may be minimized; causal edge discovery and intervenability inference remain separate.",
+    "No ownership credit from donor agreement alone.",
+    "Fresh real-trace transfer remains required after donor minimization."
+  ],
+  "material_premises": [
+    "PyRCA HT achieved 1.0 top-1 accuracy on 120 multi-survivor hidden-intervention trials.",
+    "Its ranking core is per-node linear regression, normal residual standardization, abnormal residual scoring, and ranking by maximum absolute standardized residual.",
+    "A NumPy-only candidate implementing that core is prepared in the verifier repository.",
+    "The differential uses a fresh seed and 400 trials."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/ATOMIC_RESIDUAL_CAUSE_RANKING_PYRCA_HT_001_RECONCILIATION.json",
+    "https://github.com/salesforce/PyRCA/blob/411310d589fac5cb8e7bdce67d33eadb091a1083/pyrca/analyzers/ht.py"
+  ],
+  "conclusion": "Run one fresh donor-equivalence differential. If the NumPy-only slice preserves rankings, it becomes a Brain-owned candidate pending real-transfer verification; otherwise kill or revise the minimization.",
+  "selected_route": "FRESH_DIFFERENTIAL_OF_NUMPY_ONLY_HT_RANKING_SLICE_VS_PINNED_PYRCA_HT",
+  "rejected_material_alternatives": [
+    "Keep the whole PyRCA runtime.",
+    "Train a new ranker.",
+    "Claim ownership from the external screen.",
+    "Touch rank-9 task content."
+  ],
+  "uncertainties": [
+    "Floating-point implementation details may alter lower-ranked ties.",
+    "Fresh real traces may still falsify the minimized mechanism."
+  ],
+  "assumptions": [
+    "Top-1 and near-exact full-order equivalence are sufficient to establish behavioral equivalence of the ranking slice on the screened contract."
+  ],
+  "non_goals": [
+    "No general RCA claim.",
+    "No causal-edge discovery.",
+    "No family promotion.",
+    "No active-task replay."
+  ],
+  "next_action": "After trusted guard approval, launch the prepared 400-trial fresh differential in the independent verifier repository.",
+  "supersession_conditions": [
+    "Rank-9 requires operator attention.",
+    "The prepared verifier candidate changes materially before launch."
+  ],
+  "supersedes": null
+}
