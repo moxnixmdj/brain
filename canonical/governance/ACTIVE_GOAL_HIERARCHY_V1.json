@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTIVE_GOAL_HIERARCHY_V1",
   "status": "CANONICAL_FAIL_CLOSED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
   "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__FRESH_WAL_REAL_TASK_VERIFIED_PASS__STAGE1_BREADTH_EVALUATION_ACTIVE",
@@ -151,6 +151,7 @@
       "BYPASS",
       "REUSE",
       "SUBSTITUTE",
+      "WHITE_BOX_HARVEST",
       "COMPOSE",
       "CONFIGURE",
       "INTEGRATE"
@@ -280,7 +281,7 @@
     "guard_attempt_id": "7d9e1ed58e61497a9a1ab4ab8ee779ce",
     "guarded_run_ref": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36686583882"
   },
-  "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
+  "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "capability_acquisition_first": true,
   "theory_invariants": {
     "knowledge": "EXTERNAL_JIT",
@@ -295,5 +296,15 @@
     "theory_receipt": "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
   },
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
-  "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+  "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+  "all_family_obsolescence_campaign": {
+    "status": "ACTIVE__SHARED_RESIDUAL_LANES__ZERO_CREDIT_FROM_DISCOVERY",
+    "directive": "OBSOLETE_EVERYTHING",
+    "path": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
+    "unfinished_families_at_activation": 17,
+    "shared_residual_lanes": 5,
+    "current_atomic_execution_preserved": "mp-checkpoint-consolidation",
+    "parallel_discovery_and_internalization_allowed": true,
+    "promotion_requires_independent_family_specific_evidence": true
+  }
 }
