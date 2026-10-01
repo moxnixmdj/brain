@@ -9,16 +9,19 @@
     "unfinished": 17
   },
   "execution": {
-    "preserve_current_coding_run": true,
+    "preserve_current_coding_run": false,
     "parallelize_shared_residual_discovery": true,
     "capability_credit_requires_independent_verification": true,
     "incremental_spend_usd": 0,
     "primary_terminal_priority": true,
     "priority_invariant": "ACTIONABLE_LIVE_PRIMARY_FRESH_TERMINAL_EVIDENCE_PREEMPTS_SIDE_PROBE_CHURN__PARALLEL_DISCOVERY_ONLY_ON_INDEPENDENT_SPARE_CAPACITY",
-    "current_lane_A_state": "RANK10_CAD_MODEL_LIVE__READY_REACHED__CANDIDATE_V4_SINGLE_SOLID__R16_GEOMETRY_UNRESOLVED__PRE_VERIFICATION",
+    "current_lane_A_state": "RANK23_SOURCE_READ_RECONCILED_AS_SPENT_NONPROMOTION_EVIDENCE__NO_EXECUTION__GLOBAL_CUT_PRIMARY",
     "atomic_causal_decomposition_parallel": true,
     "atomic_decomposition_sources": "SPENT_OR_VERIFIED_TRAJECTORIES_AND_NONCONTAMINATING_DONOR_EVIDENCE_ONLY",
-    "semantic_purge_gate": "ACTIVE__RANK15_FROZEN__REQUIREMENT_GRAPH_PLUS_INDEPENDENT_ACCEPTANCE_PLUS_MUTATION_AND_FAILURE_IMMUNITY_VALIDATION_REQUIRED_BEFORE_FRESH_SPEND"
+    "semantic_purge_gate": "ACTIVE__RANK15_FROZEN__REQUIREMENT_GRAPH_PLUS_INDEPENDENT_ACCEPTANCE_PLUS_MUTATION_AND_FAILURE_IMMUNITY_VALIDATION_REQUIRED_BEFORE_FRESH_SPEND",
+    "global_terminal_proof_cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "family_lane_order_is_scheduling_authority": false,
+    "benchmark_rank_order_is_scheduling_authority": false
   },
   "lanes": [
     {
@@ -26,7 +29,8 @@
       "families": [
         "ADVANCED_AGENTIC_CODING"
       ],
-      "next": "resolve the known R16 geometry gap on clean rank-10 cad-model, completion-audit the artifact, then spend the one-shot verifier only if no known acceptance gap remains"
+      "next": "resolve the known R16 geometry gap on clean rank-10 cad-model, completion-audit the artifact, then spend the one-shot verifier only if no known acceptance gap remains",
+      "scheduling_authority": false
     },
     {
       "id": "B",
@@ -37,7 +41,8 @@
         "COMMUNICATION_AND_SYNTHESIS",
         "ARTIFACT_CREATION"
       ],
-      "next": "reuse and internalize strongest open professional document mechanisms"
+      "next": "reuse and internalize strongest open professional document mechanisms",
+      "scheduling_authority": false
     },
     {
       "id": "C",
@@ -49,7 +54,8 @@
         "MULTI_CAPABILITY_COMPOSITION",
         "SUBAGENT_DELEGATION_AND_COORDINATION"
       ],
-      "next": "reuse and internalize strongest open agent/browser control mechanisms"
+      "next": "reuse and internalize strongest open agent/browser control mechanisms",
+      "scheduling_authority": false
     },
     {
       "id": "D",
@@ -58,7 +64,8 @@
         "AGENTIC_SCIENTIFIC_RESEARCH",
         "UNKNOWN_DOMAIN_ADAPTATION"
       ],
-      "next": "reuse open research frameworks and isolate only missing learned behavior"
+      "next": "reuse open research frameworks and isolate only missing learned behavior",
+      "scheduling_authority": false
     },
     {
       "id": "E",
@@ -66,7 +73,8 @@
         "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
         "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
       ],
-      "next": "reuse failure-diagnosis, reflection and scope-control mechanisms"
+      "next": "reuse failure-diagnosis, reflection and scope-control mechanisms",
+      "scheduling_authority": false
     }
   ],
   "discovered_candidates": [
@@ -100,7 +108,7 @@
       "lane": "E"
     }
   ],
-  "rule": "Candidate discovery gives zero capability credit. Promote only after Brain-owned execution passes clean independent evaluation.",
+  "rule": "Candidate discovery gives zero capability credit. Global terminal proof cut selects work; family lanes and benchmark ranks are evaluation/accounting surfaces only. Promote only after Brain-owned execution passes clean independent evaluation.",
   "internal_representation": {
     "status": "ATOMIC_CAUSAL_INTELLIGENCE_MAP_IS_PRIMARY",
     "path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
@@ -123,5 +131,12 @@
   },
   "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
   "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-  "existing_requirement_graph_candidate": "canonical/capabilities/opus55/AGENT_SPEC_REQUIREMENT_GRAPH_CANDIDATE_V1.json"
+  "existing_requirement_graph_candidate": "canonical/capabilities/opus55/AGENT_SPEC_REQUIREMENT_GRAPH_CANDIDATE_V1.json",
+  "global_terminal_proof_cut": {
+    "status": "PRIMARY_SCHEDULER",
+    "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "rule": "SELECT_ACTIONS_BY_GLOBAL_TERMINAL_PROOF_CLOSURE_PER_NEW_INFORMATION__NOT_BY_LANE_OR_RANK_ORDER",
+    "open_families_at_activation": 17
+  }
 }
