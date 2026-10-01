@@ -172,3 +172,5 @@ class VisualHullTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+# candidate verifier trigger is branch-scoped; test content unchanged
