@@ -1,0 +1,316 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
+  "date": "2026-10-01",
+  "status": "FAIL_CLOSED__TERMINAL_GOAL_NOT_YET_ACHIEVED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+  "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+  "expected_family_count": 19,
+  "actual_family_count": 19,
+  "verified_closed_family_count": 2,
+  "open_family_count": 17,
+  "families": [
+    {
+      "id": "ADVANCED_AGENTIC_CODING",
+      "closure_state": "OPEN",
+      "ownership_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "target_behavior": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
+      "acceptance_basis": [
+        {
+          "benchmark": "Terminal-Bench 4.0",
+          "opus_5_5": 66.4,
+          "unit": "percent"
+        },
+        {
+          "benchmark": "FrontierCode v1.1 Main",
+          "opus_5_5": 54.4,
+          "unit": "percent"
+        },
+        {
+          "benchmark": "CursorBench 4.0",
+          "opus_5_5": 57.8,
+          "unit": "percent"
+        }
+      ],
+      "proof_bundle": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+      "unresolved": [
+        "Establish current-V5 Terminal-Bench 4.0 breadth and a comparable stage-1 score >=66.4% using additional distinct fresh tasks; then complete FrontierCode v1.1 Main >=54.4% and CursorBench 4.0 or matched direct equivalent >=57.8%. No WAL replay."
+      ]
+    },
+    {
+      "id": "COMPLEX_MULTI_TOOL_AGENCY",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Plan and execute complex multi-tool work, coordinate subagents, maintain state and drive long-running work with minimal oversight.",
+      "acceptance_basis": null,
+      "proof_bundle": "Astra is designed for complex end-to-end multi-step work and Work provides agentic execution, but no direct whole-family Opus 5.5 comparison establishes parity.",
+      "unresolved": [
+        "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass."
+      ]
+    },
+    {
+      "id": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "closure_state": "OPEN",
+      "ownership_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "target_behavior": "Produce high-quality professional work products and complete multi-hour/multi-stage office tasks.",
+      "acceptance_basis": [
+        {
+          "benchmark": "GDPval-AA v2.1",
+          "opus_5_5": 1846,
+          "unit": "Elo"
+        },
+        {
+          "benchmark": "AA-Briefcase v1.1",
+          "opus_5_5": 1822,
+          "unit": "Elo"
+        }
+      ],
+      "proof_bundle": [
+        "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
+        "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+        "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+        "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
+      ],
+      "unresolved": [
+        "Find existing route >= both relevant professional-work bars or stronger direct evidence."
+      ]
+    },
+    {
+      "id": "BUSINESS_WORKFLOW_AUTOMATION",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Execute real multi-application business workflows accurately end-to-end.",
+      "acceptance_basis": [
+        {
+          "benchmark": "AutomationBench",
+          "opus_5_5": 40,
+          "unit": "percent"
+        }
+      ],
+      "proof_bundle": "AutomationBench: GPT-6 Astra 41.4 vs Opus 5.5 40.0 on Anthropic's published comparison.",
+      "unresolved": [
+        "Reuse browser/tool execution mechanisms only where they transfer to multi-app workflows; verify on clean automation tasks."
+      ]
+    },
+    {
+      "id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Solve difficult expert-level questions across domains with search/code/tools.",
+      "acceptance_basis": [
+        {
+          "benchmark": "Humanity's Last Exam with tools",
+          "opus_5_5": 67.7,
+          "unit": "percent"
+        }
+      ],
+      "proof_bundle": "HLE-Diamond: GPT-6 Astra 60.6 vs Opus 5.5 55.0 without tools, and 82.9 vs 73.9 with web+code under the same benchmark-owner evaluation.",
+      "unresolved": [
+        "Older HLE-with-tools variant remains preserved as a distinct non-equivalent benchmark; no blanket universal-reasoning claim."
+      ]
+    },
+    {
+      "id": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
+      "acceptance_basis": [
+        {
+          "benchmark": "Terminal-Bench-Science 0.1",
+          "opus_5_5": 58.7,
+          "unit": "percent"
+        }
+      ],
+      "proof_bundle": "Terminal-Bench-Science 0.1: GPT-6 Astra 64.6 vs Opus 5.5 58.7.",
+      "unresolved": [
+        "Reuse the open research framework first; causally isolate learned long-horizon research residual from the open weights only if framework reuse is insufficient."
+      ]
+    },
+    {
+      "id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Read and reason over dense documents, charts, screenshots, diagrams and complex real-world imagery.",
+      "acceptance_basis": [
+        {
+          "benchmark": "Chartography with tools",
+          "opus_5_5": 89,
+          "unit": "percent"
+        }
+      ],
+      "proof_bundle": "Sonnet 5.5 has published Chartography-with-tools 90.2 vs Opus 89.0; current Brain-owned zero-incremental route is not yet verified at that bar.",
+      "unresolved": [
+        "Separate deterministic document parsing/rendering from learned visual understanding; internalize deterministic scope first, then localize any remaining learned residual."
+      ]
+    },
+    {
+      "id": "COMPUTER_AND_BROWSER_USE",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Complete multi-step workflows across browsers and arbitrary applications with planning, visual grounding and judgment.",
+      "acceptance_basis": [
+        {
+          "benchmark": "OSWorld 2.1 partial",
+          "opus_5_5": 81.8,
+          "unit": "percent",
+          "comparison_warning": "Published Astra OSWorld result uses a different evaluation setup; do not compare directly."
+        }
+      ],
+      "proof_bundle": "OpenAI describes Astra as state-of-the-art in computer/browser use, but current published OSWorld figures are not directly comparable with Anthropic's Opus 5.5 81.8 partial result.",
+      "unresolved": [
+        "Need comparable evidence or direct same-harness evaluation."
+      ]
+    },
+    {
+      "id": "FINANCIAL_ANALYSIS",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Read filings/models/charts, maintain deal/reporting context, reason precisely and handle compliance-sensitive nuance.",
+      "acceptance_basis": null,
+      "proof_bundle": "Existing route is strong and configured conceptually, but no direct Opus-5.5-or-better comparative evidence was found for the full financial-analysis scope.",
+      "unresolved": [
+        "COMPLETE_BEHAVIORAL_LEAF_CLOSURE_AND_OPUS_LEVEL_PROOF"
+      ]
+    },
+    {
+      "id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Follow complex instructions, stay within authorization/scope, resolve routine ambiguity and adapt when requirements change.",
+      "acceptance_basis": null,
+      "proof_bundle": "OpenAI reports strong intent/scope behavior for Astra, but no direct Opus 5.5 matched comparison closes the whole family.",
+      "unresolved": [
+        "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior."
+      ]
+    },
+    {
+      "id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "closure_state": "PASS",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "target_behavior": "Use memory across sessions, preserve project state and resume long-running work coherently.",
+      "acceptance_basis": null,
+      "proof_bundle": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "unresolved": []
+    },
+    {
+      "id": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "target_behavior": "Delegate to multiple workers/subagents, coordinate results and check delegated work.",
+      "acceptance_basis": null,
+      "proof_bundle": [
+        "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
+      ],
+      "unresolved": [
+        "Reuse this owned coordination mechanism; separately acquire/verify residual cognitive delegation quality and broader-scale behavior."
+      ]
+    },
+    {
+      "id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "target_behavior": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal.",
+      "acceptance_basis": null,
+      "proof_bundle": [
+        "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json"
+      ],
+      "unresolved": [
+        "Acquire/verify the remaining cognitive self-critique, root-cause debugging and arbitrary recovery mechanisms; reuse the owned deterministic guard globally."
+      ]
+    },
+    {
+      "id": "ARTIFACT_CREATION",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "target_behavior": "Create professional spreadsheets, slides, documents, reports, code and other immediately usable artifacts.",
+      "acceptance_basis": null,
+      "proof_bundle": [
+        "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07"
+      ],
+      "unresolved": [
+        "Internalize/verify strongest permissively licensed DOCX/PDF/advanced artifact mechanisms, then run direct Brain-vs-Opus professional artifact quality evaluation."
+      ]
+    },
+    {
+      "id": "COMMUNICATION_AND_SYNTHESIS",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Communicate clearly, prioritize what matters, follow writing rules and synthesize complex work over long sessions.",
+      "acceptance_basis": null,
+      "proof_bundle": "Brain owns bounded synthesis components, but no broad Opus 5.5 communication parity evaluation exists.",
+      "unresolved": [
+        "COMPLETE_BEHAVIORAL_LEAF_CLOSURE_AND_OPUS_LEVEL_PROOF"
+      ]
+    },
+    {
+      "id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "target_behavior": "Find, select, learn and correctly use tools/software/APIs/solvers required for unfamiliar work.",
+      "acceptance_basis": null,
+      "proof_bundle": "Substantial historical verified components exist, but prior parent-level open-ended tool-learning promotion remained incomplete.",
+      "unresolved": [
+        "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay."
+      ]
+    },
+    {
+      "id": "UNKNOWN_DOMAIN_ADAPTATION",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "target_behavior": "Enter unfamiliar domains, learn ontology/tools and become effective without prior human teaching.",
+      "acceptance_basis": null,
+      "proof_bundle": "Astra is extremely strong on novel-environment evaluations, but no direct Opus 5.5 matched target is available.",
+      "unresolved": [
+        "Use fresh unseen-domain tasks to distinguish generic research-loop transfer from learned donor behavior; zero credit until donor-independent."
+      ]
+    },
+    {
+      "id": "MULTI_CAPABILITY_COMPOSITION",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "target_behavior": "Compose reasoning, research, tools, code, memory, actions and verification into one causal execution system.",
+      "acceptance_basis": null,
+      "proof_bundle": "Historical Brain has verified grounding, composition and decision-synthesis components; whole Opus-level general composition remains unverified.",
+      "unresolved": [
+        "Test whether shared orchestration primitives transfer across browser, research and artifact tasks before treating them as a common composition mechanism."
+      ]
+    },
+    {
+      "id": "EXACT_SYMBOLIC_COMPUTATION",
+      "closure_state": "PASS",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "target_behavior": "For the bounded verified operation classes in OBS-EXACT-SYMBOLIC-001, compute objective symbolic results exactly and deterministically without relying on frontier-model internal reasoning.",
+      "acceptance_basis": {
+        "definition": "100% exact correctness on frozen bounded task class OBS-EXACT-SYMBOLIC-001",
+        "basis": "THEORETICAL_CEILING"
+      },
+      "proof_bundle": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+      "unresolved": []
+    }
+  ],
+  "terminal_predicates": {
+    "exact_target_family_count_19": true,
+    "every_required_behavior_contracted": false,
+    "every_required_behavior_has_admissible_proof": false,
+    "donor_dependent_required_behaviors_zero": false,
+    "unexplained_required_behaviors_zero": false,
+    "unresolved_verifier_mutations_zero": false,
+    "unresolved_composition_failures_zero": false,
+    "contaminated_evidence_used_for_promotion_zero": true,
+    "resource_or_authority_violations_zero": true,
+    "all_frozen_opus_acceptance_predicates_pass": false,
+    "final_donor_deletion_cleanroom_pass": false,
+    "proof_bundle_frozen": false
+  },
+  "counters": {
+    "uncontracted_required_behaviors": null,
+    "unproved_required_behaviors": null,
+    "donor_dependent_required_behaviors": null,
+    "unresolved_verifier_mutations": null,
+    "unresolved_composition_failures": null,
+    "contaminated_promotion_evidence": 0,
+    "resource_or_authority_violations": 0
+  },
+  "verdict_rule": "ACHIEVED_ONLY_IF_REDUCER_RETURNS_TRUE__UNKNOWN_OR_NULL_IS_FAILURE",
+  "reducer": "canonical/runtime/terminal_closure_reducer.py"
+}
