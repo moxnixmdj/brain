@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "CONTINUE_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
+    "next_action": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -121,10 +121,9 @@
         "intrastat-meldung"
       ],
       "current_task": {
-        "rank": 9,
-        "task": "atrx-vep-crispr",
-        "state": "LIVE_PATCHED_FAST_BURST__INSTRUCTION_BOUNDARY_PRESERVED",
-        "workflow_run_id": 36831169681
+        "rank": 10,
+        "task": "cad-model",
+        "state": "LEASED_FRESH_TASK__INSTRUCTION_UNREAD"
       },
       "comparable_score_established": false,
       "surface_skipped_unspent": [
@@ -151,7 +150,13 @@
       "hidden_verifier_run": false,
       "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
     },
-    "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
+    "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "latest_policy_inadmissible": {
+      "task": "atrx-vep-crispr",
+      "rank": 9,
+      "status": "POLICY_INADMISSIBLE__SPENT__ZERO_CAPABILITY_VERDICT__DO_NOT_REPLAY",
+      "evidence_path": "canonical/capabilities/opus55/ATRX_VEP_CRISPR_TB4_POLICY_INADMISSIBLE_20261001_V1.json"
+    }
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
