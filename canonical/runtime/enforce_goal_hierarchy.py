@@ -29,6 +29,10 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
@@ -40,10 +44,15 @@ PROTECTED_GUARD_PATHS={
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V9.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V5.json",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
+    "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
@@ -68,7 +77,12 @@ ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|REAL_TASK_ACTIONS|{
     "ORTHOGONAL_PROBE_SELECTION",
     "EVIDENCE_PRESERVATION",
 }
-OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","SUBSTITUTE","COMPOSE","CONFIGURE","INTEGRATE")
+OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","SUBSTITUTE","WHITE_BOX_HARVEST","COMPOSE","CONFIGURE","INTEGRATE")
+WHITE_BOX_HARVEST_REQUIRED_FIELDS=(
+    "residual_capability_contract","donor_admissibility","license_and_provenance",
+    "causal_evidence","heldout_contamination_control","donor_deletion_plan",
+    "full_dependency_accounting","capability_capsule_schema_path",
+)
 ROUTE_FRONTIER_MAX_AGE_HOURS=24
 ROUTE_FRONTIER_SOURCE_CLASSES={"BRAIN_INHERITED","OFFICIAL_PRIMARY","CODE_OR_PACKAGE_REGISTRY","BROAD_WEB_OR_COMMUNITY"}
 ROUTE_FRONTIER_QUERY_INTENTS={"CAPABILITY_VECTOR","SUPPLIER_OR_PRODUCT","IMPLEMENTATION_FORM","RECENCY_OR_NEW_RELEASE"}
@@ -567,6 +581,24 @@ def enforce_recursive_obs(intent,files,base):
     if not isinstance(solution.get("implementation_still_necessary"),bool):
         fail("RECURSIVE_OBS_IMPLEMENTATION_NECESSITY_NOT_BOOLEAN")
 
+    selected_route=str(obs.get("selected_surviving_route") or "")
+    if "WHITE_BOX_HARVEST" in selected_route.upper():
+        harvest=obs.get("white_box_harvest")
+        if not isinstance(harvest,dict):
+            fail("WHITE_BOX_HARVEST_EVIDENCE_MISSING")
+        else:
+            absent=[key for key in WHITE_BOX_HARVEST_REQUIRED_FIELDS if key not in harvest]
+            if absent:
+                fail("WHITE_BOX_HARVEST_EVIDENCE_INCOMPLETE:"+",".join(absent))
+            if harvest.get("heldout_contamination_control") is not True:
+                fail("WHITE_BOX_HARVEST_HELDOUT_CONTAMINATION_CONTROL_NOT_ASSERTED")
+            if harvest.get("donor_deletion_plan") is not True:
+                fail("WHITE_BOX_HARVEST_DONOR_DELETION_PLAN_NOT_ASSERTED")
+            if harvest.get("full_dependency_accounting") is not True:
+                fail("WHITE_BOX_HARVEST_FULL_DEPENDENCY_ACCOUNTING_NOT_ASSERTED")
+            if harvest.get("capability_capsule_schema_path")!="canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json":
+                fail("WHITE_BOX_HARVEST_CAPSULE_SCHEMA_MISMATCH")
+
     verification=obs.get("obs_verification") if isinstance(obs.get("obs_verification"),dict) else {}
     if verification.get("direct_real_effect_verification_considered") is not True:
         fail("RECURSIVE_OBS_DIRECT_VERIFICATION_NOT_CONSIDERED")
@@ -950,6 +982,47 @@ def main():
         enforce_active_target_record_consistency(hierarchy,target)
 
     boot=pointer.get("boot_requirements") or {}
+    if tuple(boot.get("deletion_first_route_order") or ())!=OBS_DELETION_ORDER:
+        fail("POINTER_WHITE_BOX_ROUTE_ORDER_MISMATCH")
+    expected_control_paths={
+        "pre_action_gate_path":"canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V9.json",
+        "goal_hierarchy_action_gate_path":"canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json",
+        "recursive_obs_receipt_schema_path":"canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
+        "recursive_obs_action_intent_template_path":"canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
+        "capability_acquisition_engine_law_path":"canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+        "capability_arbitrage_strategy_path":"canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
+        "frontier_capability_obsolescence_mission_lock_path":"canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+        "white_box_capability_harvesting_law_path":"canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+        "white_box_capability_capsule_schema_path":"canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
+    }
+    for key,expected in expected_control_paths.items():
+        if boot.get(key)!=expected:
+            fail("POINTER_CONTROL_PATH_MISMATCH:"+key)
+        if not (ROOT/expected).is_file():
+            fail("POINTER_CONTROL_PATH_FILE_MISSING:"+key)
+    if boot.get("white_box_capability_harvesting_required") is not True:
+        fail("WHITE_BOX_CAPABILITY_HARVESTING_NOT_REQUIRED")
+    if boot.get("harvested_capability_promotion_requires_donor_deletion") is not True:
+        fail("HARVESTED_CAPABILITY_DONOR_DELETION_NOT_REQUIRED")
+    if boot.get("untouched_qualification_task_contamination_forbidden") is not True:
+        fail("UNTOUCHED_QUALIFICATION_CONTAMINATION_NOT_FORBIDDEN")
+    if tuple(queue.get("acquisition_route_order") or ())!=OBS_DELETION_ORDER:
+        fail("QUEUE_WHITE_BOX_ROUTE_ORDER_MISMATCH")
+
+    try:
+        active_obs_schema=load("canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json")
+        active_action_template=load("canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json")
+        active_goal_gate=load("canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json")
+    except Exception as exc:
+        fail("WHITE_BOX_CONTROL_SURFACE_LOAD_FAILED:"+type(exc).__name__)
+        active_obs_schema=active_action_template=active_goal_gate={}
+    if tuple(active_obs_schema.get("deletion_first_order") or ())!=OBS_DELETION_ORDER:
+        fail("OBS_SCHEMA_WHITE_BOX_ROUTE_ORDER_MISMATCH")
+    if tuple(active_action_template.get("required_deletion_first_order") or ())!=OBS_DELETION_ORDER:
+        fail("ACTION_TEMPLATE_WHITE_BOX_ROUTE_ORDER_MISMATCH")
+    if tuple((active_goal_gate.get("recursive_obs") or {}).get("deletion_first_order") or ())!=OBS_DELETION_ORDER:
+        fail("GOAL_GATE_WHITE_BOX_ROUTE_ORDER_MISMATCH")
+
     if boot.get("canonical_frontier_cross_surface_consistency_required") is not True:
         fail("CANONICAL_FRONTIER_CROSS_SURFACE_CONSISTENCY_NOT_REQUIRED")
     if boot.get("runtime_cognition_provenance_required_for_cognitive_credit") is not True:

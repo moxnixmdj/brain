@@ -1,16 +1,18 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
-  "status": "ACTIVE__V6_OPUS_5_5_CAPABILITY_INTERNALIZATION_QUEUE",
-  "phase": "V6_CAPABILITY_INTERNALIZATION__EXTERNAL_SPECIMENS_FOUND__OWNERSHIP_REQUIRES_BRAIN_OPERATIVE_CONFIGURATION",
+  "status": "ACTIVE__V7_OPUS_5_5_CAPABILITY_INTERNALIZATION_WITH_WHITE_BOX_HARVEST",
+  "phase": "V7_CAPABILITY_INTERNALIZATION__WHITE_BOX_HARVEST_AVAILABLE__OWNERSHIP_REQUIRES_DONOR_INDEPENDENT_BRAIN_ROUTE",
   "p_real": 1,
   "theory": {
     "effective_frontier_intelligence": "PERMANENTLY_OWNED_CAPABILITIES_PLUS_EXTERNAL_JIT_KNOWLEDGE",
     "knowledge": "EXTERNAL_JIT__NOT_PERMANENTLY_ACCUMULATED_AS_CAPABILITY_INVENTORY",
-    "capabilities": "FIND_ALREADY_EXISTING_REALIZATIONS__CONFIGURE__VERIFY__SAVE_PERMANENTLY__NO_REDISCOVERY",
+    "capabilities": "DELETE_SOLVED_SCOPE__FIND_ALREADY_EXISTING_REALIZATIONS__WHITE_BOX_HARVEST_RESIDUAL_WHEN_NEEDED__CONFIGURE__VERIFY__SAVE_PERMANENTLY__NO_REDISCOVERY",
     "opus_acceptance_bar": "EQUAL_OR_BETTER",
     "capability_externalization": false,
     "underlying_capability_invention": false,
-    "no_existing_route": "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE"
+    "no_existing_route": "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE",
+    "white_box_donors": "TEMPORARY_CAUSAL_SOURCES__ZERO_OWNERSHIP_CREDIT_UNTIL_DONOR_INDEPENDENT_CAPSULE_PASS",
+    "parameter_obsolescence": "DO_NOT_RETAIN_NEURAL_SCOPE_ALREADY_REPLACED_BY_JIT_KNOWLEDGE_DETERMINISTIC_SOFTWARE_OR_OWNED_CAPABILITIES"
   },
   "optimization": {
     "priority": [
@@ -25,7 +27,7 @@
     "preferred_outcome": "PERMANENTLY_OWNED_CAPABILITY_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
     "parity_role": "MINIMUM_ACCEPTANCE_BAR"
   },
-  "queue_semantics": "OPUS_5_5_USEFUL_CAPABILITIES_TO_FIND_AS_EXISTING_REALIZATIONS__CONFIGURE_INTO_BRAIN__VERIFY__SAVE_PERMANENTLY__NOT_JIT_EXTERNALIZE",
+  "queue_semantics": "OPUS_5_5_USEFUL_CAPABILITIES_TO_ACQUIRE_FROM_EXISTING_REALIZATIONS__PREFER_DELETE_REUSE_SUBSTITUTE__WHITE_BOX_HARVEST_ONLY_RESIDUAL_LEARNED_GAPS__VERIFY__SAVE_PERMANENTLY",
   "capability_families_seed": [
     "GOAL_DECOMPOSITION_AND_PLANNING",
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -59,12 +61,19 @@
     "independent_verification",
     "obsolescence_status",
     "residual_gap",
-    "inheritance_path"
+    "inheritance_path",
+    "residual_capability_contract",
+    "white_box_donor_candidates",
+    "harvested_capsule_path",
+    "donor_deletion_evidence",
+    "full_dependency_footprint"
   ],
   "allowed_statuses": [
     "UNMAPPED",
     "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
     "REUSABLE_MECHANISM_IDENTIFIED",
+    "HARVESTED_CAPABILITY_CANDIDATE",
+    "WHITE_BOX_DONOR_IDENTIFIED",
     "INTERNALIZATION_IN_PROGRESS",
     "BRAIN_CONFIGURED_VERIFICATION_PENDING",
     "VERIFIED_OWNED_EQUAL_OR_BETTER",
@@ -75,17 +84,20 @@
   "immediate_frontier": {
     "selected_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "parent_frontier_capability": null,
-    "objective": "Internalize existing equal-or-better capability mechanisms into Brain. External models/services are specimens, not owned capability implementations.",
+    "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
     "exact_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
     "evidence_paths": [
-      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
       "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
     ],
     "next_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
     "whole_envelope_complete": false,
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_FOR_CURRENT_UNTOUCHED_WAL_QUALIFICATION",
+    "white_box_harvest_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "wal_recovery_ordering_contamination_policy": "KEEP_UNREAD_UNTUNED_UNSELECTED_AGAINST_UNTIL_FINAL_QUALIFICATION"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -344,25 +356,26 @@
     "progress_metric": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
     "maximum_support_actions_before_frontier_recompute": 2,
     "pre_freeze_realizability_required": true,
-    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
-    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
     "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "recursive_obs_required": true,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V5.json",
-    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V7.json",
-    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json",
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
+    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json",
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V9.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
       "REUSE",
       "SUBSTITUTE",
+      "WHITE_BOX_HARVEST",
       "COMPOSE",
       "CONFIGURE",
       "INTEGRATE"
     ],
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V7.json",
+    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_external_route_frontier_age_hours": 24,
@@ -373,7 +386,10 @@
     "capability_externalization_forbidden": true,
     "knowledge_external_jit": true,
     "opus_5_5_or_better_required": true,
-    "permanent_capability_package_required": true
+    "permanent_capability_package_required": true,
+    "white_box_capability_harvesting_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "white_box_capability_capsule_schema": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
+    "whole_model_adoption_default_forbidden": true
   },
   "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
   "sqlite_parent_first_spend": {
@@ -426,5 +442,15 @@
       "execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
       "evaluation_protocol": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
     }
+  ],
+  "acquisition_route_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
   ]
 }

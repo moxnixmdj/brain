@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "V6_INTERNALIZATION_CORRECTION_ACTIVE__OPAQUE_MODEL_ROUTES_RECLASSIFIED_AS_SPECIMENS",
+  "status": "V7_INTERNALIZATION_WITH_WHITE_BOX_HARVEST_ACTIVE__OPAQUE_MODEL_ROUTES_REMAIN_SPECIMENS",
   "evaluated_utc": "2026-09-30",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -23,7 +23,9 @@
     "REUSABLE_MECHANISM_IDENTIFIED": "An already-existing reusable skill/procedure/workflow/algorithm/scaffold has been identified for internalization.",
     "INTERNALIZATION_IN_PROGRESS": "The reusable mechanism is being encoded/configured into Brain-owned artifacts.",
     "BRAIN_CONFIGURED_VERIFICATION_PENDING": "Brain owns the operative configuration, but >= Opus 5.5 verification is pending.",
-    "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE": "No realizable existing reusable mechanism has been found under hard constraints."
+    "UNRESOLVED_THEORY_FALSIFICATION_CANDIDATE": "No realizable existing reusable mechanism has been found under hard constraints.",
+    "WHITE_BOX_DONOR_IDENTIFIED": "A legally/technically inspectable donor contains the target behavior, but no causally sufficient donor-independent Brain capsule has yet been promoted.",
+    "HARVESTED_CAPABILITY_CANDIDATE": "A donor-derived Brain-owned candidate exists but still requires causal, held-out, dependency-accounting, donor-deletion, and Opus-bar verification."
   },
   "rows": [
     {
@@ -32,10 +34,11 @@
       "best_existing_routes": [
         "Brain-owned Superpowers 6.4.2 configuration + approved general cognition substrate",
         "Search stronger exposed internalizable coding mechanisms if Superpowers falsifies",
-        "Brain-owned Supreme configuration retained only as falsified evidence, not active route"
+        "Brain-owned Supreme configuration retained only as falsified evidence, not active route",
+        "White-box capability harvesting from a legally usable donor after fresh OBS selection or material incumbent failure; preserve untouched final qualification tasks"
       ],
       "evidence": "Supreme was falsified for advancement by fresh Terminal-Bench 4.0 preflights, including bun-sourcemap-leak independent verifier reward 0 after its self-test passed. The queue therefore falls back to the already-internalized Superpowers 6.4.2 configuration, which has one clean direct semantic debugging/repair pass but no whole Opus 5.5 bar yet.",
-      "residual": "Verify the Brain-owned Superpowers route itself >= Opus 5.5 across the relevant advanced-coding behavior on an approved zero-incremental general cognition substrate; if decisively below bar, return immediately to the existing-mechanism route race.",
+      "residual": "Verify the Brain-owned Superpowers route itself >= Opus 5.5 across the relevant advanced-coding behavior. White-box harvesting is now a legal challenger/fallback for residual learned gaps, but the current untouched wal-recovery-ordering task remains reserved for final qualification.",
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://www.anthropic.com/claude-sonnet-5-5",
@@ -367,5 +370,11 @@
       "ADVANCED_AGENTIC_CODING",
       "PROFESSIONAL_KNOWLEDGE_WORK"
     ]
+  },
+  "white_box_harvest_policy": {
+    "law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "capsule_schema": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
+    "rule": "HARVEST_ONLY_RESIDUAL_LEARNED_BEHAVIOR_AFTER_DELETE_REUSE_SUBSTITUTE__DONOR_PERFORMANCE_ZERO_OWNERSHIP_CREDIT",
+    "promotion": "CAUSAL_ABLATION_RESCUE__SPECIFICITY__HELDOUT__DONOR_DELETION__FULL_DEPENDENCY_ACCOUNTING__EXACT_BRAIN_ROUTE_GE_OPUS55"
   }
 }

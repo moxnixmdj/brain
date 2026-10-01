@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_WHITE_BOX_CAPABILITY_CAPSULE_V1",
+  "status": "SCHEMA_TEMPLATE__MANDATORY_FOR_HARVESTED_CAPABILITY_PROMOTION",
+  "authority": [
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md"
+  ],
+  "required_fields": [
+    "capability_id",
+    "residual_capability_contract",
+    "frontier_bar",
+    "donor",
+    "license_and_provenance",
+    "extraction_class",
+    "brain_owned_operative_artifacts",
+    "unavoidable_runtime_dependencies",
+    "full_dependency_footprint",
+    "causal_evidence",
+    "heldout_generalization_evidence",
+    "specificity_and_interference_controls",
+    "donor_deletion_evidence",
+    "minimization_evidence",
+    "invocation_contract",
+    "resource_requirements",
+    "verifier",
+    "recovery_and_fallback",
+    "hashes",
+    "promotion_status"
+  ],
+  "donor": {
+    "required": [
+      "identity",
+      "version_or_commit",
+      "weight_or_artifact_hashes",
+      "inspectability_basis",
+      "temporary_role"
+    ],
+    "temporary_role_must_equal": "CAUSAL_SOURCE_NOT_PROMOTED_RUNTIME_TARGET_CAPABILITY_PROVIDER"
+  },
+  "license_and_provenance": {
+    "required": [
+      "source",
+      "license",
+      "derivative_use_assessment",
+      "redistribution_assessment",
+      "provenance_chain"
+    ],
+    "fail_closed_on_unclear_rights": true
+  },
+  "allowed_extraction_classes": [
+    "CHECKPOINT_OR_TASK_VECTOR_DELTA",
+    "SPARSE_WEIGHT_DELTA",
+    "LOW_RANK_ADAPTER",
+    "MOE_EXPERT_OR_MODULE_SUBSET",
+    "LAYER_HEAD_OR_CIRCUIT_SUBSET",
+    "DISTILLED_RESIDUAL_MODEL_OR_MODULE",
+    "EXPLICIT_ALGORITHM_OR_PROCEDURE",
+    "COMPOSITION"
+  ],
+  "causal_evidence": {
+    "required": [
+      "donor_positive_control",
+      "ablation",
+      "rescue",
+      "specificity"
+    ],
+    "ablation_and_rescue_matched_conditions_required": true,
+    "correlation_only_insufficient": true
+  },
+  "heldout_generalization_evidence": {
+    "final_examples_used_for_selection_or_tuning_forbidden": true,
+    "contamination_statement_required": true
+  },
+  "donor_deletion_evidence": {
+    "required": true,
+    "rule": "PROMOTED_TARGET_CAPABILITY_MUST_REMAIN_AVAILABLE_WITH_DONOR_REMOVED_AS_TARGET_CAPABILITY_PROVIDER"
+  },
+  "full_dependency_footprint": {
+    "hidden_base_model_or_service_dependency_forbidden": true,
+    "count_all_unavoidable_learned_and_runtime_dependencies": true
+  },
+  "minimization_evidence": {
+    "required": true,
+    "deletion_dimensions": [
+      "experts",
+      "ranks",
+      "layers",
+      "heads",
+      "precision",
+      "prompt_scaffolding",
+      "context_requirements",
+      "auxiliary_learned_modules"
+    ],
+    "stop_rule": "MINIMUM_DURABLE_RESOURCE_COST_SUBJECT_TO_CAPABILITY_GE_REQUIRED_BAR"
+  },
+  "promotion_status_values": [
+    "CANDIDATE",
+    "CAUSALLY_VALIDATED",
+    "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+    "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "REJECTED_OR_REOPENED"
+  ],
+  "no_progress_from_schema_or_capsule_creation_alone": true
+}
