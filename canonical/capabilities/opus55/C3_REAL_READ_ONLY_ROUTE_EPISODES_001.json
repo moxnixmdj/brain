@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_C3_REAL_READ_ONLY_ROUTE_EPISODES_V1",
+  "result_id": "C3_REAL_READ_ONLY_ROUTE_EPISODES_001",
+  "status": "END_TO_END_SMOKE_PASS__3_OF_3__NOT_INDEPENDENT_DISTRIBUTION_PROOF__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "route_architecture": "DETERMINISTIC_ADMISSIBILITY_FILTER_THEN_ETTIN_WHEN_MULTIPLE_ADMISSIBLE_ROUTES_REMAIN",
+  "routing_evidence": "canonical/capabilities/opus55/C3_FILTERED_ETTIN_FRESH_TRANSFER_001_RECONCILIATION.json",
+  "episodes": [
+    {
+      "id": "private_brain_file",
+      "selected_route": "github_fetch",
+      "terminal_action": "FETCH_PRIVATE_REPOSITORY_FILE",
+      "result": "SUCCESS",
+      "evidence": {
+        "repository": "moxnixmdj/brain",
+        "path": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "blob": "ec46a327454a478e486630249dadc71a2fd26f03",
+        "parseable_json": true,
+        "bytes": 18371
+      }
+    },
+    {
+      "id": "library_attachment",
+      "selected_route": "files",
+      "terminal_action": "SEMANTIC_SEARCH_CONVERSATION_AND_LIBRARY",
+      "result": "SUCCESS",
+      "evidence": {
+        "top_result_name": "ChatGPT-Identify Limiting Factors-20261001-0739.md",
+        "top_result_library_file_id": "libfile_078bdfd9db448191b2bc554040ea5a7d",
+        "top_result_score": 0.9995878846652484,
+        "matched_execution_truth_rule": true
+      }
+    },
+    {
+      "id": "fresh_ai_news",
+      "selected_route": "web",
+      "terminal_action": "CURRENT_PUBLIC_WEB_SEARCH",
+      "result": "SUCCESS",
+      "evidence": {
+        "same_day_relevant_reporting_found": true,
+        "example_source": "Reuters",
+        "example_title": "Google announces Gemini 4 flagship AI model after months of delays",
+        "source_date": "2026-10-01"
+      }
+    }
+  ],
+  "metrics": {
+    "episodes": 3,
+    "terminal_completions": 3,
+    "terminal_completion_rate": 1,
+    "wrong_route_observed": 0
+  },
+  "limitations": [
+    "ROUTING_EPISODES_WERE_DRAWN_FROM_THE_ALREADY_SCORED_FRESH_TRANSFER_SET",
+    "THIS_IS_END_TO_END_EXECUTION_SMOKE_NOT_HELDOUT_GENERALIZATION",
+    "NO_MATCHED_BASELINE_TERMINAL_SUCCESS_COMPARISON",
+    "NO_C3_OR_FAMILY_PROMOTION"
+  ],
+  "next_required_action": "FREEZE_AN_INDEPENDENT_REAL_ROUTE_EPISODE_SET_BEFORE_SCORING__COMPARE_CURRENT_BRAIN_ROUTE_BASELINE_VS_COMPOSED_C3_ROUTE__REQUIRE_ZERO_AUTHORITY_VIOLATIONS_AND_POSITIVE_TERMINAL_SUCCESS_OR_LATENCY_DELTA",
+  "capability_credit_delta": 0
+}
