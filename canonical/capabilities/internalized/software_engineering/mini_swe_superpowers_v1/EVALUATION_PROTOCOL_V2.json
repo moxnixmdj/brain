@@ -60,9 +60,10 @@
     ]
   },
   "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_A_DISTINCT_FRESH_BRAIN_CONFIGURED_ROUTE_WITH_RUNTIME_ORACLE_COVERAGE_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
-  "current_state": "WAL_RECOVERY_ORDERING_FRESH_TASK_VERIFIED_PASS__REWARD_1__STAGE1_COMPARABLE_SCORE_NOT_YET_ESTABLISHED__ZERO_OPUS_CREDIT",
+  "current_state": "WAL_RECOVERY_ORDERING_ONLY_ADMISSIBLE_FRESH_PASS__MP_CHECKPOINT_CONTAMINATED_MECHANICAL_PASS_EXCLUDED__STAGE1_SCORE_NOT_YET_ESTABLISHED__ZERO_OPUS_CREDIT",
   "contamination_events": [
-    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json",
+    "canonical/capabilities/opus55/MP_CHECKPOINT_CONSOLIDATION_TB4_CONTAMINATION_20261001_V1.json"
   ],
   "execution_completion_policy": {
     "requirement_traceability": "Every validity/rejection requirement must cite authoritative instruction or runtime-visible specification evidence.",
@@ -121,9 +122,21 @@
       "capability_credit": 0,
       "verified_real_task_credit": 1,
       "may_replay_for_promotion": false
+    },
+    {
+      "task": "mp-checkpoint-consolidation",
+      "benchmark": "Terminal-Bench 4.0",
+      "verdict": "MECHANICAL_VERIFIER_PASS__REWARD_1__4_OF_4_HIDDEN_TESTS__CONTAMINATED_PROJECT_LEVEL__NO_STAGE1_CREDIT__TASK_SPENT",
+      "runner_pr": 279,
+      "session_id": "mp-checkpoint-consolidation-final-20261001-v1",
+      "evidence": "canonical/capabilities/opus55/MP_CHECKPOINT_CONSOLIDATION_TB4_CONTAMINATION_20261001_V1.json",
+      "capability_credit": 0,
+      "verified_real_task_credit": 0,
+      "stage1_score_credit": 0,
+      "may_replay_for_promotion": false
     }
   ],
-  "next_required_action": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
+  "next_required_action": "EXECUTE_NEXT_ELIGIBLE_UNTOUCHED_FROZEN_TB4_TASK_RANK_3_HOF_TOPOLOGY_INTERPENETRATION_UNDER_UNCHANGED_V5_ROUTE__ZERO_CREDIT_UNTIL_INDEPENDENT_VERIFICATION",
   "stage_1_progress": {
     "current_v5_verified_fresh_passes": 1,
     "verified_tasks": [
@@ -132,6 +145,10 @@
     "benchmark_comparable_score_established": false,
     "strict_outer_target_percent": 66.4,
     "matched_independent_reference_percent": 59.6,
-    "rule": "DO_NOT_INFER_BENCHMARK_PERCENTAGE_FROM_ONE_TASK__CONTINUE_DISTINCT_FRESH_TASKS"
+    "rule": "DO_NOT_INFER_BENCHMARK_PERCENTAGE_FROM_ONE_TASK__CONTINUE_DISTINCT_FRESH_TASKS",
+    "contaminated_exclusions": [
+      "live-database-cutover",
+      "mp-checkpoint-consolidation"
+    ]
   }
 }
