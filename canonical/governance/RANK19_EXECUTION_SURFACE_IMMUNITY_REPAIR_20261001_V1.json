@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_RANK19_EXECUTION_SURFACE_IMMUNITY_REPAIR_V1",
+  "date": "2026-10-01",
+  "status": "CANDIDATE_REPAIR__VERIFICATION_REQUIRED__ZERO_CAPABILITY_CREDIT",
+  "source_failure": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+  "root_cause": "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_001",
+  "repair": [
+    "REQUIRE_EXACT_OR_PROVEN_EQUIVALENT_TASK_SURFACE_FOR_PACKAGE_RUNTIME_FEASIBILITY",
+    "REQUIRE_PYTHON_PROVENANCE_MATCH",
+    "REQUIRE_ENVIRONMENT_MANAGEMENT_POLICY_MATCH",
+    "REQUIRE_PACKAGE_INSTALL_POLICY_MATCH",
+    "EXPLICITLY_PROBE_PEP668_EXTERNALLY_MANAGED_ENVIRONMENT",
+    "DISALLOW_SETUP_PYTHON_AS_PROOF_OF_DEBIAN_MANAGED_PYTHON_PARITY"
+  ],
+  "next_clean_task": {
+    "rank": 20,
+    "task": "vba-userform-port",
+    "prior_exposure_hits": {
+      "brain": 0,
+      "runner": 0
+    },
+    "instruction_unread": true
+  },
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
