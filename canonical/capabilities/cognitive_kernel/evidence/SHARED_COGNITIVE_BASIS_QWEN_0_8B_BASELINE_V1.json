@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_COGNITIVE_BASIS_PROBE_RESULT_V1",
+  "result_id": "SHARED_COGNITIVE_BASIS_QWEN_0_8B_SIMPLE_JEV_BASELINE_20261001_V1",
+  "status": "ZERO_CREDIT_DIAGNOSTIC__BASELINE_COMPLETE",
+  "capability_credit_delta": 0,
+  "purpose": "Test whether one unchanged Jev-style bounded-decision interface carries useful cross-domain signal before any training or family-level harvesting.",
+  "execution": {
+    "workflow_run_id": 36813716841,
+    "workflow_job_id": 110214117419,
+    "artifact_id": 11139934609,
+    "brain_branch": "probe/shared-cognitive-basis-jev-v1",
+    "workflow_commit": "10e011dc3f23c5788e35ffcd833659dee5da59d0",
+    "simple_jev_repo": "featherless-ai/simple-jev",
+    "simple_jev_license": "Apache-2.0",
+    "simple_jev_revision_posthoc_resolved": "146d3a65cc6e52926bf136e2e29cd2d9d7108e39",
+    "model": "Qwen/Qwen3.5-0.8B",
+    "device": "cpu",
+    "dtype": "float32",
+    "classifier_prompt_policy": "baseline",
+    "incremental_spend_usd": 0
+  },
+  "dataset": {
+    "path": "canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json",
+    "n": 10,
+    "kind": "SYNTHETIC_SANITY_CASES__NOT_HELDOUT_FAMILY_QUALIFICATION"
+  },
+  "aggregate": {
+    "accuracy": 0.7,
+    "mean_nll": 0.44445537330155716
+  },
+  "primitive_results": {
+    "next_action_selection": {"n": 2, "accuracy": 1.0, "mean_nll": 0.2236518133010027},
+    "root_cause_ranking": {"n": 1, "accuracy": 1.0, "mean_nll": 0.0013494652067781421},
+    "scope_judgment": {"n": 1, "accuracy": 1.0, "mean_nll": 0.010346225773781508},
+    "stop_continue": {"n": 1, "accuracy": 1.0, "mean_nll": 0.2892476410854134},
+    "tool_selection": {"n": 2, "accuracy": 1.0, "mean_nll": 0.05284127615555286},
+    "verification_judgment": {"n": 1, "accuracy": 0.0, "mean_nll": 0.8768142752866078},
+    "evidence_sufficiency": {"n": 1, "accuracy": 0.0, "mean_nll": 1.2910624073435033},
+    "escalation_judgment": {"n": 1, "accuracy": 0.0, "mean_nll": 1.4227475394063769}
+  },
+  "material_failures": [
+    {
+      "case": "coding-01",
+      "primitive": "verification_judgment",
+      "expected": "target_test",
+      "predicted": "done",
+      "winning_confidence": 0.5298382043838501
+    },
+    {
+      "case": "research-01",
+      "primitive": "evidence_sufficiency",
+      "expected": "verify_more",
+      "predicted": "sufficient",
+      "winning_confidence": 0.6573569774627686
+    },
+    {
+      "case": "agency-01",
+      "primitive": "escalation_judgment",
+      "expected": "regenerate",
+      "predicted": "retry",
+      "winning_confidence": 0.7206887602806091
+    }
+  ],
+  "interpretation": {
+    "supported": "A small generic local model behind one Jev-style interface exhibits useful cross-domain bounded-decision signal.",
+    "not_supported": [
+      "Opus 5.5 parity",
+      "Brain ownership of any unfinished capability family",
+      "causal sufficiency of a shared cognition kernel",
+      "adequacy of a generic 0.8B model for judgment-sensitive primitives"
+    ],
+    "next_falsifier": "Run the exact unchanged cases and scoring through a specialized permissive typed-decision checkpoint. Improvement on the three failed judgment primitives supports substrate specialization; no improvement weakens the current Jev-style route."
+  },
+  "promotion_gate": "NO_PROMOTION__WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1_REMAINS_UNSATISFIED"
+}

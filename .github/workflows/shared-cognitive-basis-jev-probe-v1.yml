@@ -4,20 +4,18 @@ on:
   push:
     branches:
       - probe/shared-cognitive-basis-jev-v1
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  probe:
+  probe-laya:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+
       - name: Oracle mechanics self-test
         run: |
           python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
@@ -25,23 +23,26 @@ jobs:
             --oracle-self-test \
             --out /tmp/oracle.json
 
-      - name: Install local Simple-JEV
+      - name: Install pinned local Simple-JEV with Laya backend
         run: |
-          git clone --depth 1 https://github.com/featherless-ai/simple-jev.git /tmp/simple-jev
-          python -m pip install -e /tmp/simple-jev/hf-server
+          git clone https://github.com/featherless-ai/simple-jev.git /tmp/simple-jev
+          git -C /tmp/simple-jev checkout 146d3a65cc6e52926bf136e2e29cd2d9d7108e39
+          git -C /tmp/simple-jev rev-parse HEAD
+          python -m pip install -e '/tmp/simple-jev/hf-server[laya]'
 
-      - name: Start local decision server
+      - name: Start pinned Laya Typed-Decisions server
+        env:
+          USE_TF: "0"
         run: |
           nohup simple-jev \
-            --model Qwen/Qwen3.5-0.8B \
+            --backend laya \
+            --model convaiinnovations/laya \
+            --subfolder typed-decisions \
+            --revision 458d7563c5cab85ff9f7f6e06cf2dd166fb697e2 \
             --device cpu \
-            --dtype float32 \
-            --classifier-prompt-policy baseline \
-            --max-model-len 2048 \
-            --max-batch-size 4 \
-            --max-batch-tokens 2048 \
-            > /tmp/simple-jev.log 2>&1 &
-          echo $! > /tmp/simple-jev.pid
+            --max-model-len 1024 \
+            > /tmp/simple-jev-laya.log 2>&1 &
+          echo $! > /tmp/simple-jev-laya.pid
           for i in $(seq 1 180); do
             if curl --fail --silent http://127.0.0.1:8000/health >/tmp/health.json; then
               cat /tmp/health.json
@@ -49,28 +50,28 @@ jobs:
             fi
             sleep 2
           done
-          cat /tmp/simple-jev.log
+          cat /tmp/simple-jev-laya.log
           exit 1
 
-      - name: Live local shared-decision probe
+      - name: Run unchanged shared-decision cases on Laya
         run: |
           python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
             --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
             --endpoint http://127.0.0.1:8000 \
-            --model Qwen/Qwen3.5-0.8B \
+            --model convaiinnovations/laya \
             --delay 0 \
-            --out cognitive_basis_probe_result_v1.json
+            --out cognitive_basis_probe_laya_result_v1.json
 
       - name: Preserve server log
         if: always()
-        run: cp /tmp/simple-jev.log simple_jev_server_v1.log 2>/dev/null || true
+        run: cp /tmp/simple-jev-laya.log simple_jev_laya_server_v1.log 2>/dev/null || true
 
       - name: Upload diagnostic evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cognitive-basis-probe-v1
+          name: cognitive-basis-probe-laya-v1
           path: |
-            cognitive_basis_probe_result_v1.json
-            simple_jev_server_v1.log
+            cognitive_basis_probe_laya_result_v1.json
+            simple_jev_laya_server_v1.log
           if-no-files-found: ignore
