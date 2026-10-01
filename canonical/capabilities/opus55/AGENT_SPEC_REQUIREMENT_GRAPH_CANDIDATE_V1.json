@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_REUSABLE_MECHANISM_CANDIDATE_V1",
+  "date": "2026-10-01",
+  "candidate_id": "AGENT_SPEC_REQUIREMENT_GRAPH_AND_TEST_OBLIGATION_001",
+  "status": "DISCOVERED_EXISTING_PERMISSIVE_CANDIDATE__NOT_INTERNALIZED__ZERO_CAPABILITY_CREDIT",
+  "repository": "ZhangHanDong/agent-spec",
+  "pinned_revision": "2483398da89bd392186849bb865aae969667ac0a",
+  "license": "MIT",
+  "role": [
+    "STRUCTURED_REQUIREMENT_IR",
+    "REQUIREMENT_DEPENDENCY_DAG_VALIDATION",
+    "WORK_UNIT_LOWERING",
+    "SPEC_DERIVED_CODE_INDEPENDENT_TEST_OBLIGATIONS",
+    "REQUIREMENT_TO_EVIDENCE_TRACEABILITY"
+  ],
+  "maps_to_behavior": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "useful_overlap": "Existing intent-compiler machinery can provide deterministic requirement graph, dependency, work-unit, test-obligation and traceability substrate instead of inventing equivalent infrastructure.",
+  "explicit_limitations": [
+    "DOES_NOT_PROVE_ARBITRARY_NATURAL_LANGUAGE_SPECIFICATION_IS_COMPLETE",
+    "DOES_NOT_PROVE_THE_CONTRACT_IS_THE_RIGHT_CONTRACT",
+    "DOES_NOT_SUPPLY_DOMAIN_GOLD_VALUES",
+    "HUMAN_REVIEW_ASSUMPTIONS_MUST_NOT_BECOME_REQUIRED_FOR_AUTONOMOUS_BRAIN_ROUTE"
+  ],
+  "required_before_internalization": [
+    "PIN_MINIMUM_NEEDED_FILES_OR_MECHANISM_SLICE",
+    "VERIFY_LICENSE_AND_PROVENANCE",
+    "COMPARE_WITH_EXISTING_BRAIN_REQUIREMENT_GRAPH_CAPABILITIES",
+    "INDEPENDENTLY_TEST_ON_SPENT_CROSS_DOMAIN_REQUIREMENT_CASES",
+    "DELETE_REDUNDANT_IMPORTED_SCOPE"
+  ],
+  "capability_credit_delta": 0
+}
