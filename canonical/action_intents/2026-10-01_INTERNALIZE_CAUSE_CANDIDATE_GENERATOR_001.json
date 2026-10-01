@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INTERNALIZE-CAUSE-CANDIDATE-GENERATOR-001-20261001",
+  "status": "PROPOSED__NARROW_COMPONENT__ZERO_FAMILY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "277aa9d235ab234869a50e6d03e1f9df0d5495f1",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "ADD_BRAIN_OWNED_DEPENDENCY_FREE_CAUSE_CANDIDATE_GENERATOR_FOR_EXPLICIT_CAUSAL_GRAPHS__KEEP_GENERAL_CAUSAL_DISCOVERY_AND_RESIDUAL_RANKING_OPEN__PRESERVE_RANK9__ZERO_FAMILY_CREDIT",
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "INDEPENDENT_SPARE_CAPACITY_ONLY__LIVE_RANK9_PRIMARY_EXECUTION_REMAINS_PREEMPTIVE",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": false,
+  "evidence_presence_classification": "DONOR_SCREEN_PASS__DONOR_DELETION_EQUIVALENCE_PASS__DEPENDENCY_FREE_SOURCE_READY",
+  "stop_condition": "BRAIN_RUNTIME_CONTAINS_THE_EXACT_VERIFIED_DEPENDENCY_FREE_CAUSE_CANDIDATE_GENERATOR__ATOMIC_MAP_RECORDS_ONLY_NARROW_OWNED_COMPONENT_SCOPE__RANK9_UNTOUCHED__TRUSTED_GUARD_PASSES",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_INTERNALIZE_CAUSE_CANDIDATE_GENERATOR_001.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "277aa9d235ab234869a50e6d03e1f9df0d5495f1",
+    "real_outcome": "Make the verified narrow cause-candidate generation mechanism Brain-owned with no donor runtime dependency.",
+    "required_capability": "Deterministically enumerate intervenable decision ancestors of a known failure event in an explicit causal DAG.",
+    "obs_goal": {
+      "real_outcome": "Reduce donor-dependent and unexplained root-cause behavior at the smallest proven causal unit.",
+      "proxy_goals_deleted": [
+        "IMPORT_WHOLE_PYRAPIDE",
+        "GENERAL_ROOT_CAUSE_PROMOTION"
+      ],
+      "surviving_necessity": "Internalize only the screened deterministic slice."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PyRapide backward_slice/root causal graph queries",
+        "Brain-owned dependency-free candidate verified in runner"
+      ],
+      "external_existing_routes_checked": [
+        "PyRapide",
+        "Trajectory_Causal_Attribution",
+        "AgentRx",
+        "ARISE",
+        "Causa"
+      ],
+      "capability_work_deleted": [
+        "NO_MODEL_TRAINING",
+        "NO_WHOLE_FRAMEWORK_IMPORT"
+      ],
+      "surviving_gap": "Brain repository does not yet contain the verified dependency-free implementation."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_INTERNALIZATION_GAP",
+      "delete_bypass_substitute_options": [
+        "COPY_EXACT_VERIFIED_DEPENDENCY_FREE_SOURCE",
+        "DO_NOT_RETAIN_DONOR_RUNTIME"
+      ],
+      "surviving_causal_blocker": "Narrow mechanism is verified outside Brain but not yet a Brain artifact."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "INTERNALIZE_EXACT_VERIFIED_SOURCE",
+        "KEEP_PYRAPIDE_RUNTIME_REJECTED",
+        "TRAIN_NEW_GENERATOR_REJECTED"
+      ],
+      "losing_routes_reason": "The verified dependency-free source reproduces the donor, so larger dependencies or learning add no demonstrated value.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Runner donor-deletion screen provides exact equivalence on six spent traces plus structural fail-closed checks; fresh transfer remains a later scope-expansion gate."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "CAUSE_CANDIDATE_GENERATION_AS_ENTIRELY_UNRESOLVED_FOR_EXPLICIT_CAUSAL_GRAPHS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "ATOMIC_CAUSAL_FALSIFICATION_001"
+      ],
+      "fresh_reuse_plan": "Use the Brain-owned narrow generator where explicit causal structure exists; leave causal-edge discovery and residual ranking separate."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_DONOR_SCREEN",
+        "NO_WHOLE_FRAMEWORK_IMPORT"
+      ],
+      "search_stop_decision": "Verified donor deletion makes further search unable to beat this narrow deterministic route enough to justify delay.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "INTERNALIZE_VERIFIED_DEPENDENCY_FREE_SOURCE",
+      "KEEP_EXTERNAL_DONOR",
+      "TRAIN_NEW_GENERATOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PYRAPIDE_RUNTIME_DEPENDENCY",
+      "NEW_TRAINING_FOR_DETERMINISTIC_SUBPROBLEM"
+    ],
+    "selected_surviving_route": "INTERNALIZE_VERIFIED_DONOR_INDEPENDENT_CAUSAL_ANCESTOR_DECISION_FILTER",
+    "why_selected_route_is_fastest_sufficient": "It is already independently verified, dependency-free, tiny, fail-closed, and exactly equivalent to the screened donor on all spent cases.",
+    "expected_parent_level_state_change": "ADD_BRAIN_OWNED_DEPENDENCY_FREE_CAUSE_CANDIDATE_GENERATOR_FOR_EXPLICIT_CAUSAL_GRAPHS__KEEP_GENERAL_CAUSAL_DISCOVERY_AND_RESIDUAL_RANKING_OPEN__PRESERVE_RANK9__ZERO_FAMILY_CREDIT",
+    "stop_condition": "BRAIN_RUNTIME_CONTAINS_THE_EXACT_VERIFIED_DEPENDENCY_FREE_CAUSE_CANDIDATE_GENERATOR__ATOMIC_MAP_RECORDS_ONLY_NARROW_OWNED_COMPONENT_SCOPE__RANK9_UNTOUCHED__TRUSTED_GUARD_PASSES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The route race is already closed by completed donor screen plus donor-deletion equivalence; this action only internalizes the verified winner."
+    }
+  }
+}
