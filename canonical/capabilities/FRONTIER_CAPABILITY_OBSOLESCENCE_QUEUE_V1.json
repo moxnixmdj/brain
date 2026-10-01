@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "RANK22_STAGE_C_DERIVED_AUTHORITY_PASS__ONE_BUILDER_BURST_NOT_YET_CONSUMED",
+    "exact_blocker": "GENERIC_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE_NOT_YET_HARDENED",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "RUN_RANK22_STAGE_C_BUILDER_ONCE__FREEZE_OUTPUT__APPEND_EXECUTION_CONSUMED__SELF_VERIFY__THEN_DERIVE_CAN_VERIFY",
+    "next_action": "HARDEN_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE__VERIFY_FAIL_CLOSED__THEN_RECOMPUTE_NEXT_UNTOUCHED_SAMPLE",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -123,7 +123,7 @@
       "current_task": {
         "rank": 22,
         "task": "freecad-spring-clip",
-        "state": "DERIVED_CAN_EXECUTE_TRUE__STAGE_C_ONE_SHOT_ACTIVE__EXECUTION_COUNT_0"
+        "state": "SPENT_BUILDER_RUNTIME_FAILURE__EXECUTION_1_OF_1__VERIFIER_0__NO_REPLAY"
       },
       "comparable_score_established": false,
       "surface_skipped_unspent": [
@@ -156,6 +156,20 @@
       "rank": 9,
       "status": "POLICY_INADMISSIBLE__SPENT__ZERO_CAPABILITY_VERDICT__DO_NOT_REPLAY",
       "evidence_path": "canonical/capabilities/opus55/ATRX_VEP_CRISPR_TB4_POLICY_INADMISSIBLE_20261001_V1.json"
+    },
+    "latest_spent_builder_failure": {
+      "task": "freecad-spring-clip",
+      "rank": 22,
+      "status": "SPENT_BUILDER_RUNTIME_FAILURE__VECTOR_API_CASE_MISMATCH__ZERO_CREDIT__NO_REPLAY",
+      "evidence_path": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+      "localized_generic_gaps": [
+        "FREECAD_API_CONTRACT_PREFLIGHT",
+        "BUILDER_SEMANTIC_SUCCESS_ORACLE"
+      ]
+    },
+    "information_minimization": {
+      "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+      "rule": "NO_NEXT_UNTOUCHED_SAMPLE_UNTIL_CURRENT_GENERIC_FAILURE_IMMUNITY_IS_HARDENED_FROM_EXISTING_EVIDENCE_AND_FUTURE_SPEND_PASSES_MINIMUM_REALITY_CUT"
     }
   },
   "promotion_claim": false,
