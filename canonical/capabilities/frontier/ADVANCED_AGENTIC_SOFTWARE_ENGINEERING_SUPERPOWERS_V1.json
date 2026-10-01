@@ -37,8 +37,8 @@
     "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
     "disposition": "FALSIFIED_FOR_ADVANCEMENT__DO_NOT_REPAIR_SPENT_TASKS"
   },
-  "residual_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-  "next_action": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
+  "residual_gap": "RANK20_STAGE_B_POST_EXPOSURE_PRE_EXECUTION_CONTRACT_NOT_YET_ESTABLISHED",
+  "next_action": "EXPOSE_RANK20_OFFICIAL_INSTRUCTION_ONCE_UNDER_STAGE_B_ONLY__NO_TASK_EXECUTION__COMPILE_BEHAVIORAL_CONTRACT_REQUIREMENT_GRAPH_INDEPENDENT_ACCEPTANCE_AND_EXACT_SURFACE_PARITY",
   "promotion_rule": "NO_OWNERSHIP_CREDIT_UNTIL_STAGE1_TERMINAL_BENCH_COMPARABLE_SCORE_MEETS_OR_EXCEEDS_66_4_PERCENT_AND_STAGES_2_AND_3_OR_VALIDATED_DIRECT_EQUIVALENTS_PASS_WITH_CONFIGURATION_ATTRIBUTION.",
   "incremental_spend_usd": 0,
   "verified_fresh_task_evidence": [
@@ -53,13 +53,11 @@
     }
   ],
   "current_execution": {
-    "rank": 9,
-    "task": "atrx-vep-crispr",
-    "workflow_run_id": 36831169681,
-    "state": "LIVE_PATCHED_FAST_BURST__INSTRUCTION_BOUNDARY_PRESERVED",
-    "prior_rank8": "CONTAMINATED__INELIGIBLE__DO_NOT_REPLAY",
-    "prior_rank7": "SKIPPED_UNSPENT__SURFACE_INCOMPATIBLE",
-    "prior_rank6": "TRANSPORT_INADMISSIBLE__NO_COGNITION_VERDICT"
+    "rank": 20,
+    "task": "vba-userform-port",
+    "state": "STAGE_A_PASS__STAGE_B_EXPOSURE_ONLY__TASK_EXECUTION_FORBIDDEN",
+    "stage_a_evidence": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_STAGE_A_ADMISSION_V1.json",
+    "independent_workflow_run_id": 36926686092
   },
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
 }
