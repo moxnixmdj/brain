@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK22_STAGE_A_PASS_OR_FAIL_CLOSED",
+  "next_progress_event_target": "RANK22_TERMINAL_VERDICT",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -998,16 +998,16 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK21_CONTAMINATED_POST_STAGE_B__NO_REPLAY",
-    "blocker": "RANK22_STAGE_A_PREEXPOSURE_ADMISSION_NOT_YET_ESTABLISHED",
+    "status": "RANK22_ALL_PREEXECUTION_GATES_PASS__FRESH_STAGE_C_DERIVED_AUTHORITY_LEASE_REQUIRED",
+    "blocker": "RANK22_PREEXECUTION_GATES_ALL_PASS__FRESH_STAGE_C_LEASE_WITH_DERIVED_AUTHORITY_NOT_YET_REISSUED",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
+    "evidence_path": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_SOURCE_CONTRACT_COMPILATION_VERIFICATION_V1.json",
     "next_clean_rank": 22,
     "next_clean_task": "freecad-spring-clip",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "DERIVE_RANK22_FROM_FROZEN_MANIFEST__RUN_COMPLETE_STAGE_A_PREEXPOSURE_SEARCH__DO_NOT_READ_INSTRUCTION",
+  "next_required_action": "REISSUE_RANK22_STAGE_C_FROM_CURRENT_GATES__BIND_DERIVED_AUTHORITY_EVENT_CHAIN__THEN_ONE_BUILDER_BURST__FREEZE_OUTPUT__ONE_TERMINAL_VERIFIER",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1100,7 +1100,7 @@
   "next_clean_task": {
     "rank": 22,
     "task": "freecad-spring-clip",
-    "state": "STAGE_A_PREEXPOSURE_REQUIRED__INSTRUCTION_UNREAD"
+    "state": "PREEXECUTION_GATES_PASS__FRESH_STAGE_C_LEASE_REQUIRED"
   },
   "rank19_stage_c": {
     "status": "SPENT_EXECUTION_SURFACE_FAILURE__NO_TASK_AUDIO_ANALYSIS__NO_OUTPUT__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
