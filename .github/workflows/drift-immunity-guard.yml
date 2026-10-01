@@ -16,6 +16,15 @@ on:
       - 'canonical/tests/test_executor_broker.py'
       - 'canonical/runtime/EXECUTOR_POLICY_V1.json'
       - 'canonical/runtime/executor_broker.py'
+      - 'canonical/runtime/current_state_obs_reducer.py'
+      - 'canonical/CANONICAL_POINTER.json'
+      - 'canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json'
+      - 'canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json'
+      - 'canonical/governance/LEASE_*.json'
+      - 'canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json'
+      - 'canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json'
+      - 'canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json'
+      - 'canonical/capabilities/frontier/*.json'
       - '.github/workflows/superworker-signed-command-relay.yml'
       - '.github/workflows/drift-immunity-guard.yml'
   workflow_dispatch:
@@ -38,10 +47,12 @@ jobs:
             canonical/runtime/astra_runtime.py \
             canonical/runtime/same_identity_supervisor.py \
             canonical/runtime/executor_broker.py
+            canonical/runtime/current_state_obs_reducer.py
       - name: Verify continuous OBS fail-closed behavior
         run: |
           python3 -m unittest -v canonical.runtime.test_continuous_obs_runtime
           python3 -m unittest -v canonical.tests.test_executor_broker
+          python3 canonical/runtime/current_state_obs_reducer.py
 
   guard:
     if: github.event_name != 'push' || github.ref != 'refs/heads/main'
