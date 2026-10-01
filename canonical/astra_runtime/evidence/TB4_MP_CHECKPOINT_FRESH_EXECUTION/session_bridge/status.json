@@ -1,10 +1,5 @@
 {
-  "control_branch": "arena/01a0f44a-brain",
-  "control_branch_fetch": {
-    "detail": "ok",
-    "ok": true
-  },
   "next_step": 7,
   "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
-  "status": "READY_FOR_COMMAND"
+  "status": "SESSION_TIMEOUT"
 }
