@@ -13,14 +13,14 @@
     "trusted base validator in pull_request_target",
     "blocker lease and target continuity checks",
     "promotion evidence checks",
-    "V6 capability-internalization invariants in action intents and gates",
+    "V7 capability-internalization invariants in action intents and gates",
     "durable reasoning decision receipt required for consequential authority"
   ],
   "not_platform_hard_enforced": [
     "the ChatGPT product emitting conversational text before repository validation",
     "a human reading an ungated assistant sentence as advice"
   ],
-  "canonical_authority_rule": "Bare conversational output has zero canonical authority. A consequential blocker, selected route, next action, promotion, revocation, theory interpretation, or state transition is authoritative for Project Brain only when backed by a current-base repository artifact satisfying V6 capability-internalization invariants, current OBS, durable reasoning receipt, and trusted-guard requirements.",
+  "canonical_authority_rule": "Bare conversational output has zero canonical authority. A consequential blocker, selected route, next action, promotion, revocation, theory interpretation, or state transition is authoritative for Project Brain only when backed by a current-base repository artifact satisfying V7 capability-internalization invariants, current OBS, durable reasoning receipt, and trusted-guard requirements.",
   "reporting_rule": "When discussing Project Brain consequential state, the operator must distinguish VERIFIED_CANONICAL from PROVISIONAL_ANALYSIS. If current-base OBS has not been completed, the statement must not be presented as authoritative current state.",
   "mutation_rule": "No conversational statement alone may authorize a frontier-sensitive mutation. The mutation must independently satisfy the repository guard.",
   "limitation": "The Brain repository cannot install a pre-response hook into the ChatGPT platform from inside this repository. Therefore the truthful safety boundary is canonical-authority gating, not guaranteed suppression of every premature sentence.",
@@ -28,5 +28,6 @@
   "strongest_available_mitigation": "Require live canonical refresh plus current-base OBS before consequential Brain reporting, and ensure only validated repository artifacts can drive canonical action.",
   "protected_by": "canonical/runtime/enforce_goal_hierarchy.py",
   "reasoning_durability_law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
-  "current_theory_receipt": "canonical/reasoning/2026-09-30_OPAQUE_MODEL_CAPABILITY_OWNERSHIP_CORRECTION_V1.json"
+  "current_theory_receipt": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_INTELLIGENCE_DECOMPOSITION_STRATEGY_V1.json",
+  "atomic_causal_intelligence_map": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
 }
