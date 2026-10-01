@@ -84,8 +84,16 @@
     "rank": 22,
     "qualification_stage": "STAGE_C_EXECUTION",
     "rule": "DO_NOT_DELAY_IF_CURRENT_DERIVED_CAN_EXECUTE_TRUE_AND_NO_MATERIAL_AUTHORITY_INVALIDATION",
-    "new_policy_applies_after": "CURRENT_ONE_SHOT_CONSUMED_OR_AUTHORITY_INVALIDATED"
+    "new_policy_applies_after": "NOW__RANK22_EXECUTION_CONSUMED",
+    "status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE"
   },
   "progress_credit": "ZERO_UNTIL_EXISTING_TERMINAL_PROOF_RULES_CLOSE_CAPABILITY",
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "current_frontier_application": {
+    "blocker": "GENERIC_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE_NOT_YET_HARDENED",
+    "existing_evidence_seed": [
+      "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json"
+    ],
+    "required_first_move": "SATURATE_EXISTING_FREECAD_API_AND_BUILDER_SEMANTIC_SUCCESS_EVIDENCE__DEDUCTIVE_CLOSURE__ONLY_THEN_DECIDE_IF_ANY_REALITY_QUERY_REMAINS"
+  }
 }
