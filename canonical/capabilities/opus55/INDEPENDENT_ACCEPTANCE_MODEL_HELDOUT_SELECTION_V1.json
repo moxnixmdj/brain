@@ -1,0 +1,12 @@
+{
+  "schema": "PROJECT_BRAIN_INDEPENDENT_ACCEPTANCE_HELDOUT_SELECTION_V1",
+  "date": "2026-10-01",
+  "candidate_commit": "267f2e37f0d6951cfd6e56328ddc3178d162abff",
+  "candidate": "canonical/runtime/independent_acceptance_model.py",
+  "selection_rule": "From task-level spent/reward-0 failure commit titles discovered only after candidate freeze, exclude candidate-design tasks cad-model, ontology-kg-querying, fin-saccr-rwa and exclude carrier/prestart-only failures; sort distinct task names lexicographically; choose first.",
+  "selected_first_heldout": "cargo-flight-dispatch",
+  "details_read_before_selection": false,
+  "candidate_modification_after_selection_forbidden": true,
+  "promotion_effect": "ZERO_CAPABILITY_CREDIT_UNLESS_HELDOUT_RESULT_IS_CONSISTENT_WITH_PRECOMMITTED_BEHAVIOR_AND_INDEPENDENT_RUNNER_VERIFICATION",
+  "incremental_spend_usd": 0
+}
