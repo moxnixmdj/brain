@@ -3,7 +3,10 @@ import unittest
 import cv2
 import numpy as np
 
-from canonical.runtime.drawing_view_registration import register_global_axis_deskew
+from canonical.runtime.drawing_view_registration import (
+    register_global_axis_deskew,
+    register_planar_perspective_from_quad,
+)
 
 
 def base_three_view():
@@ -48,6 +51,57 @@ class DrawingViewRegistrationTests(unittest.TestCase):
         out = register_global_axis_deskew(img)
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertEqual(out["error"], "NO_USABLE_LINES")
+
+
+    def test_explicit_planar_perspective_is_rectified(self):
+        base = np.full((180, 260), 255, dtype=np.uint8)
+        cv2.rectangle(base, (25, 25), (235, 155), 0, 3)
+        cv2.line(base, (40, 90), (220, 90), 0, 2)
+        cv2.line(base, (130, 40), (130, 140), 0, 2)
+
+        src = np.asarray(
+            [[0.0, 0.0], [259.0, 0.0], [259.0, 179.0], [0.0, 179.0]],
+            dtype=np.float32,
+        )
+        warped_quad = np.asarray(
+            [[35.0, 20.0], [238.0, 6.0], [255.0, 168.0], [12.0, 176.0]],
+            dtype=np.float32,
+        )
+        h = cv2.getPerspectiveTransform(src, warped_quad)
+        warped = cv2.warpPerspective(base, h, (280, 200), borderValue=255)
+
+        out = register_planar_perspective_from_quad(
+            warped,
+            warped_quad,
+            output_size=(260, 180),
+        )
+        self.assertEqual(out["status"], "REGISTERED")
+        recovered = out["registered_image"]
+        self.assertEqual(recovered.shape, base.shape)
+
+        # Compare the thresholded structural ink mask rather than requiring
+        # pixel identity after two bilinear projective resamplings.
+        base_ink = base < 180
+        recovered_ink = recovered < 180
+        intersection = np.logical_and(base_ink, recovered_ink).sum()
+        union = np.logical_or(base_ink, recovered_ink).sum()
+        self.assertGreater(intersection / union, 0.70)
+
+    def test_nonconvex_quad_is_rejected(self):
+        img = base_three_view()
+        with self.assertRaises(ValueError):
+            register_planar_perspective_from_quad(
+                img,
+                [[0, 0], [100, 0], [0, 100], [100, 100]],
+            )
+
+    def test_tiny_quad_is_rejected(self):
+        img = base_three_view()
+        with self.assertRaises(ValueError):
+            register_planar_perspective_from_quad(
+                img,
+                [[0, 0], [1, 0], [1, 1], [0, 1]],
+            )
 
 
 if __name__ == "__main__":
