@@ -42,6 +42,7 @@
   },
   "execution_ladder": [
     "COMPILED_REFLEX_OR_TRIGGER",
+    "GLOBAL_TERMINAL_PROOF_CUT_REFRESH",
     "EXISTING_EVIDENCE_SATURATION",
     "DEDUCTIVE_CLOSURE",
     "COUNTERFACTUAL_TERMINAL_COMPILATION",
@@ -100,9 +101,11 @@
     ]
   },
   "scheduling": {
-    "objective": "MINIMIZE_PREDICTED_COMPLETION_TIME_OF_THE_LONGEST_UNAVOIDABLE_TERMINAL_PROOF_CHAIN",
+    "objective": "MINIMIZE_LONGEST_UNAVOIDABLE_TERMINAL_INFORMATION_CHAIN_ACROSS_ALL_OPEN_FAMILIES__THEN_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK",
     "local_activity_not_objective": true,
-    "shortest_proof_and_critical_path_recomputed_incrementally": true
+    "shortest_proof_and_critical_path_recomputed_incrementally": true,
+    "family_local_or_benchmark_rank_serialization_forbidden": true,
+    "global_terminal_proof_cut_required": true
   },
   "model_role": {
     "allowed": "PROPOSAL_SEARCH_ACCELERATION",
@@ -160,5 +163,15 @@
     "fail_closed_on_unknown": true,
     "activation_state": "FULLY_ACTIVE_FOR_ALL_SUBSEQUENT_FRESH_EVIDENCE_SPEND",
     "current_existing_evidence_priority": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json"
+  },
+  "global_terminal_proof_cut": {
+    "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "scope": "ALL_OPEN_TERMINAL_PROOF_OBLIGATIONS",
+    "family_taxonomy_role": "EVALUATION_ONLY",
+    "benchmark_rank_role": "CANDIDATE_OBSERVATION_ONLY",
+    "instruction_exposure_is_reality_query": true,
+    "exact_global_cut_before_new_exposure": true,
+    "parallelize_independent_cut_members": true
   }
 }
