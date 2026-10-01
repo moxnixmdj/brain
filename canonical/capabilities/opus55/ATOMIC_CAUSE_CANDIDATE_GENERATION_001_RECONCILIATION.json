@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ATOMIC_CAUSE_CANDIDATE_INTERNALIZATION_V1",
+  "result_id": "ATOMIC_CAUSE_CANDIDATE_GENERATION_001",
+  "status": "BRAIN_OWNED_NARROW_COMPONENT_CANDIDATE__EXACT_VERIFIED_SOURCE_INSTALLED__FRESH_TRANSFER_PENDING__ZERO_FAMILY_CREDIT",
+  "date": "2026-10-01",
+  "atomic_transform": "CAUSE_CANDIDATE_GENERATION",
+  "scope": "EXPLICIT_CAUSAL_DAG_WITH_EVENT_ROLE_AND_INTERVENABILITY_METADATA",
+  "donor": {
+    "repo": "ShaneDolphin/pyrapide",
+    "revision": "d1dc66efbefe3442e247ac896416bf00c25d3ca1",
+    "license": "MIT",
+    "screened_mechanism": "BACKWARD_CAUSAL_SLICE_PLUS_INTERVENABLE_DECISION_FILTER",
+    "runtime_required_after_internalization": false
+  },
+  "brain_artifact": {
+    "path": "canonical/runtime/causal_candidate_generator.py",
+    "git_blob_sha": "a35f17a3c4c4cab557f886e0825d74621cd081df",
+    "external_runtime_dependencies": [],
+    "model_dependencies": []
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36835709145,
+    "persisted_result_commit": "3abf57d58c94897da563b18ef15ad75a76240b27",
+    "verified_source_git_blob_sha": "a35f17a3c4c4cab557f886e0825d74621cd081df",
+    "exact_brain_vs_verified_source_blob_match": true,
+    "spent_cases": 6,
+    "donor_equivalence_fraction": 1,
+    "true_cause_recall": 1,
+    "unique_expected_candidate_fraction": 1,
+    "fail_closed_checks": {
+      "unknown_parent": true,
+      "causal_cycle": true,
+      "unknown_target": true
+    }
+  },
+  "ownership_adjudication": [
+    "BRAIN_ARTIFACT_PRESENT",
+    "DONOR_RUNTIME_DELETED",
+    "NO_OPAQUE_MODEL_DEPENDENCY",
+    "EXACT_VERIFIED_SOURCE_INSTALLED",
+    "NARROW_COMPONENT_SCOPE_ONLY",
+    "FRESH_UNSEEN_TRANSFER_STILL_REQUIRED_BEFORE_BROADER_GENERALITY_CLAIM",
+    "NO_OPUS_FAMILY_CREDIT"
+  ],
+  "unresolved": [
+    "CAUSAL_EDGE_DISCOVERY_WHEN_TRACE_DOES_NOT_EXPLICITLY_ENCODE_CAUSALITY",
+    "INTERVENABILITY_METADATA_INFERENCE_WHEN_NOT_EXPLICIT",
+    "RESIDUAL_CAUSE_RANKING_WHEN_MULTIPLE_CANDIDATES_SURVIVE",
+    "FRESH_CROSS_DOMAIN_TRANSFER"
+  ],
+  "capability_credit_delta": 0
+}
