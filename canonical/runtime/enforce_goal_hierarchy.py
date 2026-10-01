@@ -29,6 +29,10 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
@@ -40,10 +44,15 @@ PROTECTED_GUARD_PATHS={
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V9.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V5.json",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
+    "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
@@ -68,7 +77,12 @@ ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|REAL_TASK_ACTIONS|{
     "ORTHOGONAL_PROBE_SELECTION",
     "EVIDENCE_PRESERVATION",
 }
-OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","SUBSTITUTE","COMPOSE","CONFIGURE","INTEGRATE")
+OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","SUBSTITUTE","WHITE_BOX_HARVEST","COMPOSE","CONFIGURE","INTEGRATE")
+WHITE_BOX_HARVEST_REQUIRED_FIELDS=(
+    "residual_capability_contract","donor_admissibility","license_and_provenance",
+    "causal_evidence","heldout_contamination_control","donor_deletion_plan",
+    "full_dependency_accounting","capability_capsule_schema_path",
+)
 ROUTE_FRONTIER_MAX_AGE_HOURS=24
 ROUTE_FRONTIER_SOURCE_CLASSES={"BRAIN_INHERITED","OFFICIAL_PRIMARY","CODE_OR_PACKAGE_REGISTRY","BROAD_WEB_OR_COMMUNITY"}
 ROUTE_FRONTIER_QUERY_INTENTS={"CAPABILITY_VECTOR","SUPPLIER_OR_PRODUCT","IMPLEMENTATION_FORM","RECENCY_OR_NEW_RELEASE"}
@@ -566,6 +580,24 @@ def enforce_recursive_obs(intent,files,base):
         fail("RECURSIVE_OBS_RANKED_ROUTES_MISSING")
     if not isinstance(solution.get("implementation_still_necessary"),bool):
         fail("RECURSIVE_OBS_IMPLEMENTATION_NECESSITY_NOT_BOOLEAN")
+
+    selected_route=str(obs.get("selected_surviving_route") or "")
+    if "WHITE_BOX_HARVEST" in selected_route.upper():
+        harvest=obs.get("white_box_harvest")
+        if not isinstance(harvest,dict):
+            fail("WHITE_BOX_HARVEST_EVIDENCE_MISSING")
+        else:
+            absent=[key for key in WHITE_BOX_HARVEST_REQUIRED_FIELDS if key not in harvest]
+            if absent:
+                fail("WHITE_BOX_HARVEST_EVIDENCE_INCOMPLETE:"+",".join(absent))
+            if harvest.get("heldout_contamination_control") is not True:
+                fail("WHITE_BOX_HARVEST_HELDOUT_CONTAMINATION_CONTROL_NOT_ASSERTED")
+            if harvest.get("donor_deletion_plan") is not True:
+                fail("WHITE_BOX_HARVEST_DONOR_DELETION_PLAN_NOT_ASSERTED")
+            if harvest.get("full_dependency_accounting") is not True:
+                fail("WHITE_BOX_HARVEST_FULL_DEPENDENCY_ACCOUNTING_NOT_ASSERTED")
+            if harvest.get("capability_capsule_schema_path")!="canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json":
+                fail("WHITE_BOX_HARVEST_CAPSULE_SCHEMA_MISMATCH")
 
     verification=obs.get("obs_verification") if isinstance(obs.get("obs_verification"),dict) else {}
     if verification.get("direct_real_effect_verification_considered") is not True:
