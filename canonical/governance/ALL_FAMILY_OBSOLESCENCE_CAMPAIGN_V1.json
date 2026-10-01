@@ -25,7 +25,7 @@
       "families": [
         "ADVANCED_AGENTIC_CODING"
       ],
-      "next": "qualify rank-7 execution surface; if compatible run once cleanly, if incompatible skip unspent and continue frozen order"
+      "next": "continue rank-9 atrx-vep-crispr clean execution; use family label only as an evaluation surface, not as an implementation decomposition"
     },
     {
       "id": "B",
