@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_UNADMITTED_UNTOUCHED_INFORMATION_EXPOSURE_RACE_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_FAIL_CLOSED_REGRESSION",
+  "source_incident": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
+  "failure_class": "UNADMITTED_UNTOUCHED_INFORMATION_EXPOSURE_RACE",
+  "invariant": "NO_UNTOUCHED_TASK_SELECTION_OR_INSTRUCTION_EXPOSURE_WITHOUT_CURRENT_GLOBAL_MINIMUM_REALITY_CUT_MEMBERSHIP",
+  "negative_canaries": [
+    {
+      "name": "STAGE_A_PASS_WITHOUT_GLOBAL_CUT_CANNOT_AUTHORIZE_STAGE_B",
+      "input": {
+        "stage_a_pass": true,
+        "global_cut_membership": false,
+        "instruction_read": false
+      },
+      "expected": "STAGE_B_EXPOSURE_FORBIDDEN"
+    },
+    {
+      "name": "UNADMITTED_INSTRUCTION_READ_QUARANTINES_SAMPLE",
+      "input": {
+        "stage_a_pass": true,
+        "global_cut_membership": false,
+        "instruction_read": true
+      },
+      "expected": "QUALIFICATION_INELIGIBLE__TASK_EXECUTION_FORBIDDEN__ZERO_CREDIT"
+    },
+    {
+      "name": "FAMILY_LOCAL_RANK_ORDER_CANNOT_OVERRIDE_GLOBAL_CUT",
+      "input": {
+        "local_next_rank_available": true,
+        "global_cut_computed": false
+      },
+      "expected": "LOCAL_ADVANCE_FORBIDDEN__COMPUTE_GLOBAL_CUT"
+    }
+  ],
+  "enforcement_surfaces": [
+    "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+    "canonical/runtime/current_state_obs_reducer.py",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/CANONICAL_POINTER.json"
+  ],
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
