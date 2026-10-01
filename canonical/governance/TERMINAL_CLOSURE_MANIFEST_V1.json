@@ -312,5 +312,16 @@
     "resource_or_authority_violations": 0
   },
   "verdict_rule": "ACHIEVED_ONLY_IF_REDUCER_RETURNS_TRUE__UNKNOWN_OR_NULL_IS_FAILURE",
-  "reducer": "canonical/runtime/terminal_closure_reducer.py"
+  "reducer": "canonical/runtime/terminal_closure_reducer.py",
+  "reducer_verification": {
+    "status": "INDEPENDENT_PASS",
+    "evidence": "canonical/verification/TERMINAL_CLOSURE_REDUCER_VERIFICATION_20261001_V1.json",
+    "brain_blob_sha": "bc1b6c97a2941197553903e49a7b6ad6d1ec5ab7",
+    "runner_workflow_run_id": 36907485969
+  },
+  "current_machine_verdict": {
+    "achieved": false,
+    "reason": "17_FAMILIES_OPEN_AND_REQUIRED_COUNTERS_OR_TERMINAL_PREDICATES_NOT_YET_CLOSED",
+    "override_allowed": false
+  }
 }
