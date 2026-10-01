@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ATOMIC-CAUSAL-INTELLIGENCE-STRATEGY-UPDATE-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "1de0ea9ad1e2e8250d4d15b18211f335bcf483de",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "causal_blocker": "USEFUL_BEHAVIOR_NOT_YET_REDUCED_TO_MINIMUM_CAUSALLY_SUFFICIENT_BRAIN_OWNED_MECHANISMS__17_FAMILY_LEVEL_VERIFICATION_INCOMPLETE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::USEFUL_BEHAVIOR_NOT_YET_REDUCED_TO_MINIMUM_CAUSALLY_SUFFICIENT_BRAIN_OWNED_MECHANISMS__17_FAMILY_LEVEL_VERIFICATION_INCOMPLETE",
+  "expected_parent_frontier_change": "19_FAMILIES_BECOME_EVALUATION_SURFACES_ONLY__ATOMIC_CAUSAL_TRANSFORMS_BECOME_PRIMARY_INTERNAL_WORK_UNITS__RANK9_CODING_EXECUTION_PRESERVED",
+  "highest_leverage_now": true,
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": true,
+  "evidence_presence_classification": "LIVE_OWNERSHIP_MATRIX_AND_CURRENT_CAMPAIGNS_PRESENT__STRATEGIC_REPRESENTATION_RECONCILIATION",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_INTELLIGENCE_DECOMPOSITION_STRATEGY_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "1de0ea9ad1e2e8250d4d15b18211f335bcf483de",
+    "deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "WHITE_BOX_HARVEST",
+      "COMPOSE",
+      "CONFIGURE",
+      "INTEGRATE"
+    ],
+    "selected_surviving_route": "ATOMIC_CAUSAL_DECOMPOSITION__SUBTRACT_SOLVED_FUNCTIONS__RANK_BY_CROSS_DOMAIN_LEVERAGE",
+    "stop_condition": "STRATEGY_BOUND_TO_CURRENT_CONTROL_SURFACES_WITHOUT_CHANGING_RANK9_TASK_BOUNDARY_OR_CAPABILITY_CREDIT",
+    "affected_layers_only_on_revalidation": true
+  }
+}
