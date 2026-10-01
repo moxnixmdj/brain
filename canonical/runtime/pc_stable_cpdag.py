@@ -18,22 +18,39 @@ import numpy as np
 
 
 def fisher_z_pvalue(corr: np.ndarray, n: int, x: int, y: int, cond: Iterable[int]=()) -> float:
+    """Singular-safe Fisher-Z partial-correlation test.
+
+    Uses a Moore-Penrose pseudoinverse for the relevant correlation block,
+    matching the conservative numerical behavior harvested from the pinned
+    MIT PC donor. Undefined/degenerate precision yields p=1 rather than
+    crashing or inventing a dependency.
+    """
     s=tuple(sorted(set(int(i) for i in cond)))
     if x==y or x in s or y in s:
         raise ValueError("x, y and conditioning set must be disjoint")
-    if n-len(s)-3 <= 0:
-        raise ValueError("insufficient samples for conditioning set")
+    dof=n-len(s)-3
+    if dof <= 0:
+        return 1.0
     var=(int(x),int(y),*s)
-    sub=corr[np.ix_(var,var)]
+    sub=np.asarray(corr[np.ix_(var,var)],dtype=float)
+    if not np.isfinite(sub).all():
+        return 1.0
     try:
-        inv=np.linalg.inv(sub)
-    except np.linalg.LinAlgError as exc:
-        raise ValueError("singular correlation submatrix") from exc
-    r=-inv[0,1]/sqrt(abs(inv[0,0]*inv[1,1]))
-    if abs(r)>=1:
-        r=(1.0-np.finfo(float).eps)*(1.0 if r>=0 else -1.0)
+        precision=np.linalg.pinv(sub)
+    except np.linalg.LinAlgError:
+        return 1.0
+    denom=precision[0,0]*precision[1,1]
+    if not np.isfinite(denom) or denom <= 0.0:
+        return 1.0
+    denom=sqrt(denom)
+    if denom == 0.0:
+        return 1.0
+    r=float(-precision[0,1]/denom)
+    if not np.isfinite(r):
+        return 1.0
+    r=max(-0.999999,min(0.999999,r))
     z=0.5*log((1+r)/(1-r))
-    statistic=sqrt(n-len(s)-3)*abs(z)
+    statistic=sqrt(dof)*abs(z)
     return erfc(statistic/sqrt(2.0))
 
 
