@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_PROMOTE_COMPLETE_CALCULATION_GRAPH_001",
+  "status": "CURRENT_BASE_SUPPORT_PROMOTION__ZERO_FAMILY_CREDIT",
+  "real_objective": "Reduce the current prequalification blocker by internalizing the already-existing, independently verified deterministic requirement-to-output completeness mechanism without spending fresh qualification evidence.",
+  "governing_invariants": [
+    "Terminal objective remains permanent Brain-owned Opus-5.5-or-better useful capability with knowledge external/JIT.",
+    "Rank 15 remains frozen.",
+    "No untouched task instruction, solution, verifier, or task-specific search is used.",
+    "The mechanism is verification/integration glue, not invention of an underlying cognitive capability.",
+    "Claim scope is limited to structural requirement-to-output completeness, not semantic requirement extraction or domain correctness.",
+    "Independent verification and exact source identity are required before Brain-owned narrow-component promotion.",
+    "Capability and family credit remain zero."
+  ],
+  "material_premises": [
+    "Brain PR 637 candidate source blob is 8582afcbca63fba6b363e236fc2336a3eaed20d7.",
+    "Runner PR 314 independently executed the exact same source blob and completed workflow run 36909084764 successfully.",
+    "The verification corpus includes spent SA-CCR missing-lineage and CAD local-only/global-requirement regressions.",
+    "The current blocker explicitly requires internalizing or reusing the minimum requirement-graph mechanism and validating mutation defenses before rank 15."
+  ],
+  "evidence_refs": [
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "runner:PR314@4e2332365301e47a4ceb9749eb25b95b17bc3bee",
+    "runner:workflow:36909084764",
+    "brain:PR637@d760b558677380afb700300138bfd0f856c17ef9"
+  ],
+  "conclusion": "Install the exact independently verified complete-calculation-graph validator, preserve its narrow scope, record independent evidence, and advance the remaining frontier to composed requirement+acceptance+verifier-mutation validation. Do not authorize rank 15.",
+  "selected_route": "REUSE_EXACT_VERIFIED_COMPLETE_CALCULATION_GRAPH_SLICE",
+  "rejected_material_alternatives": [
+    "Build another requirement graph mechanism.",
+    "Use stale PR 637 directly despite base drift.",
+    "Treat structural graph completeness as semantic correctness.",
+    "Authorize rank 15 after this narrow promotion."
+  ],
+  "uncertainties": [
+    "Arbitrary natural-language-to-complete-requirement-graph extraction remains unresolved.",
+    "Independent acceptance coverage and verifier mutation coverage remain incomplete as a composed bundle."
+  ],
+  "assumptions": [
+    "Runner PR 314 workflow success is valid independent execution evidence for the exact source blob.",
+    "Current main base remains 980d1b77d41a498ba772196f0226a164bc12649d until guard evaluation."
+  ],
+  "non_goals": [
+    "No fresh benchmark execution.",
+    "No family promotion.",
+    "No semantic extractor promotion.",
+    "No domain-gold synthesis."
+  ],
+  "next_action": "Validate the composed normalized requirement graph + complete calculation graph + independent acceptance model + requirement/verifier mutation bundle on spent heldouts, then produce the remaining Stage-A certificates; keep rank 15 frozen.",
+  "supersession_conditions": [
+    "Main changes before guarded merge.",
+    "Independent evidence is invalidated or source identity diverges.",
+    "A stronger already-owned mechanism proves this slice redundant."
+  ],
+  "supersedes": null
+}
