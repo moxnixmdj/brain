@@ -65,7 +65,8 @@
     "reasoning_durability",
     "recursive_obs",
     "behavioral_contract",
-    "prequalification_controls"
+    "prequalification_controls",
+    "qualification_stage"
   ],
   "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V9.json",
   "required_deletion_first_order": [
@@ -130,6 +131,11 @@
       "composition_qualification_plan"
     ],
     "fail_closed_on_unknown": true,
-    "control_matrix": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json"
+    "control_matrix": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "stage_semantics": {
+      "STAGE_A_PRE_EXPOSURE": "No task instruction or task-specific hint may be read. Prove generic route/surface readiness.",
+      "STAGE_B_POST_EXPOSURE_PRE_EXECUTION": "Official instruction may be read. No task command or candidate execution. Compile and falsify task-specific plan.",
+      "STAGE_C_EXECUTION": "Only after A and B pass; execute once and independently verify."
+    }
   }
 }
