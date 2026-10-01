@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "GLOBAL_MINIMUM_REALITY_CUT_VERDICT",
+  "next_progress_event_target": "FROZEN_THREE_RESIDUAL_ACTION_UNIVERSE_OR_FAIL_CLOSED_UNCOVERED_RESIDUAL",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1003,14 +1003,14 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "GLOBAL_TERMINAL_PROOF_CUT_PRIMARY__RANK23_SOURCE_READ_RECONCILED_AS_NONPROMOTION_EVIDENCE",
-    "blocker": "GLOBAL_TERMINAL_PROOF_CUT_NOT_YET_COMPUTED_ACROSS_ALL_17_OPEN_FAMILIES",
+    "status": "M0B_FROZEN_ENVELOPE_SCOPED_CLOSURE_VERIFIED__THREE_MECHANISM_RESIDUALS_REMAIN",
+    "blocker": "M0A_M1A_M1B_EXISTING_MECHANISM_REUSE_SEARCH_AND_COMPLETE_CANDIDATE_ACTION_UNIVERSE_NOT_YET_FROZEN",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
-    "next_clean_task_authorized": false
+    "evidence_path": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
+    "new_reality_units": 0
   },
-  "next_required_action": "SATURATE_ALL_OPEN_TERMINAL_OBLIGATIONS__GLOBAL_DEDUCTIVE_CLOSURE__COMPRESS_SHARED_RESIDUALS__COMPUTE_EXACT_GLOBAL_MINIMUM_REALITY_CUT__NO_NEW_UNTOUCHED_SOURCE_READ_OR_EXECUTION_UNTIL_ADMITTED",
+  "next_required_action": "SEARCH_AND_COMPOSE_ADMISSIBLE_ZERO_COST_SELF_CONTAINED_ACTION_BUNDLES_FOR_M0A_M1A_M1B__FREEZE_HASHED_ACTION_UNIVERSE_AND_COST_MODEL__RUN_CANONICAL_EXACT_FROZEN_UNIVERSE_CUT_COMPILER__NO_FRESH_UNTOUCHED_INFORMATION_SPEND_BEFORE_VERDICT",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1191,5 +1191,11 @@
     "status": "SOURCE_READ_AFTER_GLOBAL_CUT_REVOCATION__NO_EXECUTION__CLEAN_PROMOTION_INELIGIBLE",
     "evidence": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
     "task_execution_authorized": false
+  },
+  "m0b_frozen_envelope_closure": {
+    "status": "VERIFIED_SCOPED_CLOSURE",
+    "evidence": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
   }
 }
