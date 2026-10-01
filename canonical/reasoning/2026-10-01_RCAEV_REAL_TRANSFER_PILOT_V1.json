@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_RCAEV_REAL_TRANSFER_PILOT_V1",
+  "status": "PROPOSED__ZERO_FAMILY_CREDIT",
+  "real_objective": "Test the installed residual cause ranker on independent real microservice telemetry.",
+  "governing_invariants": [
+    "RANK9_UNTOUCHED",
+    "RCAEV_GROUND_TRUTH_EXTERNAL",
+    "PC_GRAPH_EXTERNAL",
+    "RANKING_ONLY_CLAIM",
+    "ZERO_FAMILY_CREDIT"
+  ],
+  "material_premises": [
+    "RANKER_INSTALLED_EXACT_BLOB",
+    "400_TRIAL_DONOR_MINIMIZATION_PASS",
+    "RCAEV_HAS_ANNOTATED_REAL_FAILURE_CASES"
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/ATOMIC_RESIDUAL_CAUSE_RANKER_INSTALL_001_RECONCILIATION.json",
+    "https://github.com/phamquiluan/RCAEval"
+  ],
+  "conclusion": "Run four untouched RCAEval RE1-OB CPU/MEM cases with RCAEval PC as graph supplier and Brain-owned ranking only.",
+  "selected_route": "FOUR_CASE_RCAEV_REAL_TELEMETRY_TRANSFER_PILOT",
+  "rejected_material_alternatives": [
+    "ALL_735_CASES_FIRST",
+    "HAND_LABELS",
+    "GRAPH_DISCOVERY_CLAIM",
+    "RANK9_DATA_USE"
+  ],
+  "uncertainties": [
+    "PC_GRAPH_QUALITY",
+    "FOUR_CASE_SAMPLE_SMALL"
+  ],
+  "assumptions": [
+    "CPU_MEM_ROOT_METRICS_EXIST"
+  ],
+  "non_goals": [
+    "NO_GENERAL_RCA",
+    "NO_EDGE_DISCOVERY",
+    "NO_FAMILY_PROMOTION"
+  ],
+  "next_action": "Guard then launch prepared pilot.",
+  "supersession_conditions": [
+    "ADAPTER_INVALID",
+    "RANK9_NEEDS_OPERATOR"
+  ],
+  "supersedes": null
+}
