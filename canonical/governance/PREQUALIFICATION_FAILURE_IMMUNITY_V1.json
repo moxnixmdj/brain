@@ -231,6 +231,11 @@
       "kernel": "canonical/runtime/source_contract_compiler.py",
       "git_blob_sha": "8f68e0e8aba6585626b414e3cb49c20d0470ea0c",
       "rule": "STAGE_B_CANNOT_PASS_WITH_UNACCOUNTED_SOURCE_ATOMS__OPEN_SPECIFICATION_HOLES__OR_NON_BIDIRECTIONAL_TRACEABILITY"
+    },
+    "derived_stage_c_state_gate": {
+      "status": "VERIFIED_AND_MERGED",
+      "verification": "canonical/governance/DERIVED_STAGE_C_STATE_GATE_20261001_V1.json",
+      "runner_merge_commit": "f7c62fca832e31d26e15c755c1486b2bea3bb98e"
     }
   },
   "core_hardening_verification": "canonical/governance/CORE_HARDENING_VERIFICATION_20261001_V1.json"
