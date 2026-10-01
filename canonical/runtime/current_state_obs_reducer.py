@@ -22,6 +22,9 @@ GATE="canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json"
 TEMPLATE="canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json"
 OBS_POLICY="canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json"
 OBS_RUNTIME="canonical/runtime/continuous_obs_runtime.py"
+EVIDENCE_LAW="canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md"
+COUNTERFACTUAL_COMPILER="canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json"
+MINIMUM_REALITY_CUT_RUNTIME="canonical/runtime/minimum_reality_cut.py"
 
 REQUIRED_GATE_CHECKS={
     "CONTINUOUS_OBS_CONTEXT_PRESENT_AND_CURRENT",
@@ -31,6 +34,13 @@ REQUIRED_GATE_CHECKS={
     "INFORMATION_BOUNDARY_COMPLETE_AND_CURRENT",
     "POST_EXPOSURE_EXTERNAL_DISCOVERY_DISABLED",
     "POST_RECEIPT_OBS_REVALIDATION_REQUIRED",
+    "EXISTING_EVIDENCE_SATURATION_COMPLETE_BEFORE_NEW_REALITY_QUERY",
+    "DEDUCTIVE_CLOSURE_COMPLETE_BEFORE_NEW_REALITY_QUERY",
+    "COUNTERFACTUAL_TERMINAL_DISTINCTIONS_EXPLICIT",
+    "DOMINATED_REALITY_QUERIES_DELETED",
+    "REALITY_QUERY_HAS_TERMINAL_DECISION_VALUE",
+    "MINIMUM_REALITY_CUT_MEMBER_OR_GRANDFATHERED_CURRENT_VALID_ACTION",
+    "NO_REACQUISITION_OF_ALREADY_KNOWN_TERMINAL_RELEVANT_INFORMATION",
 }
 
 def load(root:pathlib.Path, rel:str)->dict[str,Any]:
@@ -202,6 +212,65 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
             errors.append("ACTION_TEMPLATE_POST_RECEIPT_REVALIDATION_MISSING")
         if required.get("post_exposure_discovery_forbidden") is not True:
             errors.append("ACTION_TEMPLATE_POST_EXPOSURE_DISCOVERY_NOT_FORBIDDEN")
+
+    # Information-minimization controls must be live across the canonical surfaces.
+    eg=pointer.get("execution_governance") or {}
+    expected_info_paths={
+      "evidence_saturation_and_minimum_reality_query_law":EVIDENCE_LAW,
+      "counterfactual_terminal_compiler":COUNTERFACTUAL_COMPILER,
+      "minimum_reality_cut_runtime":MINIMUM_REALITY_CUT_RUNTIME,
+    }
+    for key,value in expected_info_paths.items():
+        if _s(eg.get(key))!=value:
+            errors.append("POINTER_INFORMATION_MINIMIZATION_PATH_DRIFT:"+key)
+        if not (root/value).is_file():
+            errors.append("INFORMATION_MINIMIZATION_CONTROL_MISSING:"+value)
+    if eg.get("new_fresh_evidence_requires_minimum_reality_cut") is not True:
+        errors.append("POINTER_MINIMUM_REALITY_CUT_NOT_REQUIRED")
+    if eg.get("reacquire_existing_terminal_information_without_invalidation") is not False:
+        errors.append("POINTER_REACQUISITION_GUARD_NOT_FAIL_CLOSED")
+
+    him=hierarchy.get("information_minimization_control") or {}
+    if not _s(him.get("status")).startswith("ACTIVE_CANONICAL"):
+        errors.append("HIERARCHY_INFORMATION_MINIMIZATION_NOT_ACTIVE")
+    if _s(him.get("law"))!=EVIDENCE_LAW:
+        errors.append("HIERARCHY_EVIDENCE_LAW_DRIFT")
+    if _s(him.get("compiler"))!=COUNTERFACTUAL_COMPILER:
+        errors.append("HIERARCHY_COUNTERFACTUAL_COMPILER_DRIFT")
+    if _s(him.get("exact_minimum_cut_runtime"))!=MINIMUM_REALITY_CUT_RUNTIME:
+        errors.append("HIERARCHY_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
+
+    gim=gate.get("information_minimization") or {}
+    if _s(gim.get("law"))!=EVIDENCE_LAW:
+        errors.append("GATE_EVIDENCE_LAW_DRIFT")
+    if _s(gim.get("compiler"))!=COUNTERFACTUAL_COMPILER:
+        errors.append("GATE_COUNTERFACTUAL_COMPILER_DRIFT")
+    if _s(gim.get("exact_minimum_cut_runtime"))!=MINIMUM_REALITY_CUT_RUNTIME:
+        errors.append("GATE_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
+    if gim.get("required_for_new_fresh_evidence") is not True:
+        errors.append("GATE_INFORMATION_MINIMIZATION_NOT_REQUIRED")
+
+    if "reality_query_admission" not in (template.get("action_fields") or []):
+        errors.append("ACTION_TEMPLATE_REALITY_QUERY_ADMISSION_FIELD_MISSING")
+    rqa=template.get("required_reality_query_admission") or {}
+    if _s(rqa.get("law"))!=EVIDENCE_LAW:
+        errors.append("ACTION_TEMPLATE_EVIDENCE_LAW_DRIFT")
+    if _s(rqa.get("compiler"))!=COUNTERFACTUAL_COMPILER:
+        errors.append("ACTION_TEMPLATE_COUNTERFACTUAL_COMPILER_DRIFT")
+    if _s(rqa.get("exact_minimum_cut_runtime"))!=MINIMUM_REALITY_CUT_RUNTIME:
+        errors.append("ACTION_TEMPLATE_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
+    if rqa.get("fail_closed_on_unknown") is not True:
+        errors.append("ACTION_TEMPLATE_REALITY_QUERY_UNKNOWN_NOT_FAIL_CLOSED")
+
+    sim=score.get("information_acquisition_optimization") or {}
+    if _s(sim.get("law"))!=EVIDENCE_LAW:
+        errors.append("SCOREBOARD_EVIDENCE_LAW_DRIFT")
+    if _s(sim.get("compiler"))!=COUNTERFACTUAL_COMPILER:
+        errors.append("SCOREBOARD_COUNTERFACTUAL_COMPILER_DRIFT")
+    if _s(sim.get("exact_minimum_cut_runtime"))!=MINIMUM_REALITY_CUT_RUNTIME:
+        errors.append("SCOREBOARD_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
+    if sim.get("minimum_reality_cut_required_for_future_fresh_spend") is not True:
+        errors.append("SCOREBOARD_MINIMUM_REALITY_CUT_NOT_REQUIRED")
 
     if _s(obs.get("status"))!="CANONICAL_FAIL_CLOSED_RUNTIME_REQUIREMENT":
         errors.append("OBS_POLICY_NOT_CANONICAL_FAIL_CLOSED")
