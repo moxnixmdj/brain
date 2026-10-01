@@ -1,0 +1,27 @@
+name: Verify M0B frozen envelope type coverage
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/M0B_FROZEN_ENVELOPE_TYPE_BINDINGS_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/runtime/m0b_frozen_envelope_type_audit.py
+      - canonical/runtime/requirement_acceptance_compiler.py
+      - canonical/runtime/independent_acceptance_model.py
+      - canonical/tests/test_m0b_frozen_envelope_type_audit.py
+      - .github/workflows/verify-m0b-frozen-envelope.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_m0b_frozen_envelope_type_audit
