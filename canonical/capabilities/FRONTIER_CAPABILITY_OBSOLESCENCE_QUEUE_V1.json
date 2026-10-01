@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "M0A_M1A_M1B_EXISTING_MECHANISM_REUSE_SEARCH_AND_COMPLETE_CANDIDATE_ACTION_UNIVERSE_NOT_YET_FROZEN",
+    "exact_blocker": "M0A_CONTEXTUAL_IMPLICIT_LONG_RANGE_SEMANTICS_AND_M1A_OCR_NONAXIS_REGISTRATION_COMPOUND_VISUAL_NOTATION_ROBUSTNESS_BLOCK_COMPLETE_ZERO_REALITY_BUNDLES__M1B_READY",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "SEARCH_AND_COMPOSE_ADMISSIBLE_ZERO_COST_SELF_CONTAINED_ACTION_BUNDLES_FOR_M0A_M1A_M1B__FREEZE_HASHED_ACTION_UNIVERSE_AND_COST_MODEL__RUN_CANONICAL_EXACT_FROZEN_UNIVERSE_CUT_COMPILER__NO_FRESH_UNTOUCHED_INFORMATION_SPEND_BEFORE_VERDICT",
+    "next_action": "SEARCH_REUSE_SUBSTITUTE_ZERO_COST_ROUTES_PER_UNCOVERED_M0A_M1A_ATOM__PIN_AND_ACCOUNT_OCR_DEPENDENCIES__BOUND_UNSUPPORTED_SEMANTICS_FAIL_CLOSED__COMPLETE_M0A_M1A_BUNDLES__FREEZE_RESIDUAL_ACTION_UNIVERSE_V2__RUN_EXACT_FROZEN_UNIVERSE_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -185,14 +185,20 @@
       "status": "SOURCE_READ_AFTER_REVOCATION__ZERO_CREDIT__NO_EXECUTION",
       "evidence_path": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json"
     },
-    "next_progress_event_target": "FROZEN_THREE_RESIDUAL_ACTION_UNIVERSE_OR_FAIL_CLOSED_UNCOVERED_RESIDUAL",
+    "next_progress_event_target": "M0A_M1A_COMPLETE_BUNDLES_OR_FAIL_CLOSED_IMPOSSIBILITY_BOUNDARY",
     "open_mechanism_residual_count": 3,
     "open_mechanism_residuals": [
       "M0A_ARBITRARY_SOURCE_TO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
       "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
       "M1B_CONSTRAINT_GRAPH_TO_HIDDEN_TOPOLOGY_AND_CONTINUOUS_GEOMETRY"
     ],
-    "m0b_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json"
+    "m0b_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
+    "residual_action_universe_v2": {
+      "path": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+      "status": "M1B_COMPLETE__M0A_M1A_OPEN__NOT_FROZEN",
+      "exact_cut_ready": false,
+      "new_reality_authorized": false
+    }
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
