@@ -41,9 +41,17 @@
       ],
       "existing_evidence": [
         "canonical/capabilities/opus55/CAD_MODEL_TB4_SPENT_CAUSAL_DECOMPOSITION_20261001_V1.json",
-        "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
+        "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json",
+        "canonical/capabilities/opus55/ORTHOGRAPHIC_VISUAL_HULL_001.json",
+        "canonical/runtime/orthographic_visual_hull.py"
       ],
-      "remaining": "DRAWING_OR_VISUAL_REFERENCE_TO_GLOBALLY_CORRECT_STRUCTURED_EDITABLE_REALIZATION_GENERALITY_NOT_PROVEN"
+      "remaining": "RAW_DRAWING_OR_VISUAL_REFERENCE_TO_CORRECT_SEMANTIC_PARTSPEC_AND_HIDDEN_OR_INTERNAL_GEOMETRY_BEYOND_ORTHOGRAPHIC_VISUAL_HULL_NOT_WHOLE_SCOPE_OWNED",
+      "owned_components": [
+        "THREE_ORTHOGRAPHIC_SILHOUETTES_TO_MAXIMAL_CONSISTENT_3D_VISUAL_HULL",
+        "SOURCE_VS_CANDIDATE_GLOBAL_ORTHOGRAPHIC_ACCEPTANCE",
+        "VISUAL_HULL_ADD_CUT_REPAIR_LOCALIZATION",
+        "RECTANGULAR_REPAIR_TO_PARTSPEC_BOX_BOOLEAN_PAYLOAD"
+      ]
     },
     {
       "id": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
@@ -108,7 +116,16 @@
         "COMPLEX_MULTI_TOOL_AGENCY",
         "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
       ],
-      "remaining": "GENERAL_CAUSAL_FAILURE_LOCALIZATION_AND_SCOPE_RECOVERY_NOT_WHOLE_SCOPE_OWNED"
+      "remaining": "NON_REPLAYABLE_TEXT_EVENT_CAUSE_CANDIDATE_GENERATION_AND_WHOLE_SCOPE_RECOVERY_JUDGMENT_NOT_WHOLE_SCOPE_OWNED",
+      "existing_evidence": [
+        "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/INTERNALIZATION_MANIFEST.json",
+        "canonical/verification/test_owned_causal_falsification_v1.py"
+      ],
+      "owned_components": [
+        "REPLAYABLE_TRAJECTORY_COUNTERFACTUAL_STEP_ABLATION",
+        "POINT_OF_COMMITMENT_CAUSAL_LOCALIZATION",
+        "BRAIN_OWNED_REPLAYABLE_CAUSAL_FALSIFICATION"
+      ]
     }
   ],
   "open_family_proof_obligations": [
