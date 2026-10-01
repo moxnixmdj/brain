@@ -12,7 +12,10 @@
     "preserve_current_coding_run": true,
     "parallelize_shared_residual_discovery": true,
     "capability_credit_requires_independent_verification": true,
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "primary_terminal_priority": true,
+    "priority_invariant": "ACTIONABLE_LIVE_PRIMARY_FRESH_TERMINAL_EVIDENCE_PREEMPTS_SIDE_PROBE_CHURN__PARALLEL_DISCOVERY_ONLY_ON_INDEPENDENT_SPARE_CAPACITY",
+    "current_lane_A_state": "RANK7_JAX_SPEEDRUN_GPU_PRESTART_SURFACE_QUALIFICATION__INSTRUCTION_UNREAD"
   },
   "lanes": [
     {
@@ -20,7 +23,7 @@
       "families": [
         "ADVANCED_AGENTIC_CODING"
       ],
-      "next": "finish current fresh coding breadth evaluation"
+      "next": "qualify rank-7 execution surface; if compatible run once cleanly, if incompatible skip unspent and continue frozen order"
     },
     {
       "id": "B",
