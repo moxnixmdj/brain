@@ -1011,14 +1011,15 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK5_CONTAMINATION_QUARANTINED__RANK6_CLEAN_RUNNER_LAUNCHED__STAGE1_BREADTH_BLOCKER_REMAINS",
+    "status": "RANK6_TRANSPORT_INADMISSIBLE__NO_TASK_CAPABILITY_VERDICT__RANK7_PRESTART_SURFACE_QUALIFICATION_NEXT__STAGE1_BREADTH_BLOCKER_REMAINS",
     "blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
     "capability_credit_delta": 0,
     "whole_envelope_complete": false,
     "latest_real_output_evidence": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json",
-    "latest_contamination_evidence": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json",
-    "current_task": "glycan-ms2-elucidation",
-    "current_runner_pr": 289,
-    "current_runner_workflow_run_id": 36822123561
-  }
+    "latest_transport_inadmissible_evidence": "canonical/capabilities/opus55/GLYCAN_MS2_ELUCIDATION_TB4_TRANSPORT_INADMISSIBLE_20261001_V1.json",
+    "current_task": "jax-speedrun-gpu",
+    "current_rank": 7,
+    "current_state": "PRESTART_EXECUTION_SURFACE_QUALIFICATION_REQUIRED__INSTRUCTION_UNREAD"
+  },
+  "next_required_action": "QUALIFY_JAX_SPEEDRUN_GPU_RANK_7_EXECUTION_SURFACE_BEFORE_INSTRUCTION_READ__IF_COMPATIBLE_LEASE_AND_RUN_ONCE__IF_INCOMPATIBLE_SKIP_UNSPENT"
 }
