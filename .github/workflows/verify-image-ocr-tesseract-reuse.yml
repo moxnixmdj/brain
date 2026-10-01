@@ -28,4 +28,4 @@ jobs:
             tesseract-ocr-eng=1:4.1.0-2
       - run: python -m unittest -v canonical.tests.test_image_ocr_tesseract
       - run: python canonical/verification/verify_image_ocr_tesseract_reuse.py
-      - run: python canonical/verification/verify_pinned_image_ocr_surface.py
+      - run: python -m canonical.verification.verify_pinned_image_ocr_surface
