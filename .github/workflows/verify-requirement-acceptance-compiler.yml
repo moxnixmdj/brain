@@ -28,4 +28,4 @@ jobs:
         with:
           python-version: "3.11"
       - name: Verify deterministic acceptance compiler
-        run: python -m pytest -q canonical/tests/test_requirement_acceptance_compiler.py
+        run: python -m unittest -v canonical.tests.test_requirement_acceptance_compiler
