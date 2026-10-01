@@ -257,11 +257,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "SEARCH_REUSE_SUBSTITUTE_ZERO_COST_ROUTES_PER_UNCOVERED_M0A_M1A_ATOM__PIN_AND_ACCOUNT_OCR_DEPENDENCIES__BOUND_UNSUPPORTED_SEMANTICS_FAIL_CLOSED__COMPLETE_M0A_M1A_BUNDLES__FREEZE_RESIDUAL_ACTION_UNIVERSE_V2__RUN_EXACT_FROZEN_UNIVERSE_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+    "next_step": "SEARCH_REUSE_SUBSTITUTE_PER_REMAINING_M0A_M1A_ATOM__WHITE_BOX_HARVEST_ONLY_SPECIFIC_M0A_SEMANTIC_RESIDUAL__DETERMINISTIC_GEOMETRY_FIRST_FOR_M1A_REGISTRATION_NOTATION_ROBUSTNESS__COMPLETE_BUNDLES__FREEZE_V2__RUN_EXACT_FROZEN_UNIVERSE_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "M0A_CONTEXTUAL_IMPLICIT_LONG_RANGE_SEMANTICS_AND_M1A_OCR_NONAXIS_REGISTRATION_COMPOUND_VISUAL_NOTATION_ROBUSTNESS_BLOCK_COMPLETE_ZERO_REALITY_BUNDLES__M1B_READY",
+    "critical_blocker": "M0A_CONTEXTUAL_IMPLICIT_LONG_RANGE_SEMANTICS_AND_M1A_NON_GLOBAL_REGISTRATION_COMPOUND_VISUAL_GD_AND_T_ROBUSTNESS_BLOCK_COMPLETE_ZERO_REALITY_BUNDLES__M1B_READY__PINNED_OCR_CLOSED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -338,7 +338,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "M0A_CONTEXTUAL_IMPLICIT_LONG_RANGE_SEMANTICS_AND_M1A_OCR_NONAXIS_REGISTRATION_COMPOUND_VISUAL_NOTATION_ROBUSTNESS_BLOCK_COMPLETE_ZERO_REALITY_BUNDLES__M1B_READY",
+    "highest_leverage_capability_gap": "M0A_CONTEXTUAL_IMPLICIT_LONG_RANGE_SEMANTICS_AND_M1A_NON_GLOBAL_REGISTRATION_COMPOUND_VISUAL_GD_AND_T_ROBUSTNESS_BLOCK_COMPLETE_ZERO_REALITY_BUNDLES__M1B_READY__PINNED_OCR_CLOSED",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -826,8 +826,10 @@
     "m0b_frozen_envelope_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
     "residual_action_universe_v2": {
       "path": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
-      "status": "M1B_READY__M0A_M1A_BLOCKING__NOT_FROZEN",
-      "exact_cut_ready": false
+      "status": "OCR_CLOSED__M1B_READY__M0A_M1A_BLOCKING__NOT_FROZEN",
+      "exact_cut_ready": false,
+      "pinned_image_ocr": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
+      "m0a_donor_policy": "canonical/governance/M0A_WHITE_BOX_DONOR_SELECTION_POLICY_V1.json"
     }
   },
   "provider_rules": {
