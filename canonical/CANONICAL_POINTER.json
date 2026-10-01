@@ -745,7 +745,7 @@
       "task": "glycan-ms2-elucidation",
       "runner_pr": 289,
       "workflow_run_id": 36822123561,
-      "state": "RUNNER_LAUNCHED__BUILDING_RUNTIME__INSTRUCTION_UNREAD"
+      "state": "RUNNER_READY__INSTRUCTION_UNREAD"
     },
     "latest_clean_stage1_result": {
       "task": "gsea-proteomics",
