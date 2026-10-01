@@ -155,7 +155,7 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         # so a report -- identity drift, stale control paths -- printed and then
         # exited 0. That is fail-open: the
         # standing oracle above stayed green while enforce_goal_hierarchy.py
-        # failed the same tree with HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH.
+        # failed the same tree.
         record_rel = f"canonical/capabilities/frontier/{self.target}.json"
         record = self.read(record_rel)
         record["capability_id"] = "SOME_OTHER_CAPABILITY_V1"
