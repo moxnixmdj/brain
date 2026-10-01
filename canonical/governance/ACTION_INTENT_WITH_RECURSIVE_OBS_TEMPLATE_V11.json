@@ -67,7 +67,8 @@
     "behavioral_contract",
     "prequalification_controls",
     "qualification_stage",
-    "terminal_proof_control"
+    "terminal_proof_control",
+    "continuous_obs"
   ],
   "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
   "required_deletion_first_order": [
@@ -159,5 +160,28 @@
     "proof_action_before_meta_optimization": true,
     "reuse_unaffected_proofs": true,
     "fail_closed_on_unknown": true
+  },
+  "required_continuous_obs": {
+    "required": true,
+    "policy": "canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json",
+    "runtime": "canonical/runtime/continuous_obs_runtime.py",
+    "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+    "required_fields": [
+      "canonical_generation",
+      "canonical_state_dependencies",
+      "dependency_inventory_complete",
+      "material_world_state_dependencies_complete",
+      "unknown_material_dependencies",
+      "obs_layers_current",
+      "stale_authority_absent",
+      "valid_proof_action_priority",
+      "information_boundary_complete",
+      "information_policy",
+      "dependencies"
+    ],
+    "material_unknown_fails_closed": true,
+    "post_receipt_revalidation_required": true,
+    "post_exposure_discovery_forbidden": true,
+    "anti_meta_loop": "OBS_MUST_NOT_DELAY_A_VALID_PROOF_PRODUCING_ACTION"
   }
 }
