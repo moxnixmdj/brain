@@ -1,0 +1,189 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RANK20-STAGE-A-CURRENTBASE-ADMISSION-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "1cf11d4fda66425e02add7f49916fe7c22caceb3",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_001__RANK19_SPENT_ON_PEP668_BEFORE_TASK_ANALYSIS__GENERIC_RUNNER_REPAIR_PR368_UNDER_INDEPENDENT_VERIFICATION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_001__RANK19_SPENT_ON_PEP668_BEFORE_TASK_ANALYSIS__GENERIC_RUNNER_REPAIR_PR368_UNDER_INDEPENDENT_VERIFICATION",
+  "expected_parent_frontier_change": "RANK20_STAGE_A_PREEXPOSURE_PASS__AUTHORIZES_STAGE_B_INSTRUCTION_EXPOSURE_ONLY__TASK_EXECUTION_REMAINS_FORBIDDEN__ALL_CONTROL_SURFACES_ALIGNED_TO_TRUSTED_V8_V9_GUARD_AUTHORITY",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "evidence_presence_classification": "RANK20_PREEXPOSURE_SEARCH_PASS__INDEPENDENT_STAGE_A_PASS__INSTRUCTION_UNREAD__ZERO_EXECUTION",
+  "stop_condition": "RANK20_STAGE_A_ADMISSION_AND_INDEPENDENT_VERIFICATION_ARE_CANONICAL__POINTER_HIERARCHY_QUEUE_SCOREBOARD_AND_TARGET_SHARE_THE_STAGE_B_BLOCKER_AND_NEXT_ACTION__INSTRUCTION_REMAINS_UNREAD__TASK_EXECUTION_REMAINS_FALSE__TRUSTED_DRIFT_GUARD_PASSES",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_RANK20_STAGE_A_CURRENTBASE_ADMISSION_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "1cf11d4fda66425e02add7f49916fe7c22caceb3",
+    "real_outcome": "Canonicalize verified rank20 pre-exposure eligibility and advance only to Stage-B instruction exposure.",
+    "required_capability": "Pre-exposure classification plus current-base control reconciliation.",
+    "obs_goal": {
+      "real_outcome": "Advance clean evidence without contamination.",
+      "proxy_goals_deleted": [
+        "DUPLICATE_STAGE_A_RUN",
+        "PR_ACTIVITY_AS_PROGRESS"
+      ],
+      "surviving_necessity": "Canonicalize existing proof before instruction exposure."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RANK20_SEARCH_V2",
+        "RANK20_LEDGER_V2",
+        "RUN_36926686092",
+        "EXECUTION_SURFACE_PARITY_REPAIR"
+      ],
+      "external_existing_routes_checked": [
+        "RUNNER_STAGE_A_VERIFIER"
+      ],
+      "capability_work_deleted": [
+        "NO_REPEAT_STAGE_A",
+        "NO_STAGE_C"
+      ],
+      "surviving_gap": "Verified Stage-A evidence is not yet canonical authority."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CANONICAL_ADMISSION_GAP",
+      "delete_bypass_substitute_options": [
+        "REUSE_EXISTING_PASS",
+        "ALIGN_CONTROL_SURFACES"
+      ],
+      "surviving_causal_blocker": "Stale control surfaces still block authoritative Stage-B exposure."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_PASS_AND_RECONCILE",
+        "RERUN_REJECTED"
+      ],
+      "losing_routes_reason": "A repeat run adds no information.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use existing independent pass plus trusted drift guard."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR663",
+        "RANK10_POINTER",
+        "RANK19_REPAIR_PENDING_TEXT"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "SURFACE_PARITY_GUARD",
+        "STAGE_C_BUDGET_GUARD"
+      ],
+      "fresh_reuse_plan": "Stage-B reads official instruction only and compiles contracts without execution."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_SEARCH",
+        "NO_REPEAT_VERIFIER"
+      ],
+      "search_stop_decision": "Eight-surface evidence plus independent pass is sufficient.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_STAGE_A_PASS",
+      "RERUN_STAGE_A",
+      "PREMATURE_EXECUTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "DUPLICATE_STAGE_A_RUN",
+      "STALE_PR663",
+      "PREMATURE_STAGE_C"
+    ],
+    "selected_surviving_route": "CURRENT_BASE_STAGE_A_ADMISSION__CONTROL_SURFACE_RECONCILIATION__STAGE_B_EXPOSURE_ONLY",
+    "why_selected_route_is_fastest_sufficient": "It converts already-verified evidence into authority with zero new task spend.",
+    "expected_parent_level_state_change": "RANK20_STAGE_A_PREEXPOSURE_PASS__AUTHORIZES_STAGE_B_INSTRUCTION_EXPOSURE_ONLY__TASK_EXECUTION_REMAINS_FORBIDDEN__ALL_CONTROL_SURFACES_ALIGNED_TO_TRUSTED_V8_V9_GUARD_AUTHORITY",
+    "stop_condition": "RANK20_STAGE_A_ADMISSION_AND_INDEPENDENT_VERIFICATION_ARE_CANONICAL__POINTER_HIERARCHY_QUEUE_SCOREBOARD_AND_TARGET_SHARE_THE_STAGE_B_BLOCKER_AND_NEXT_ACTION__INSTRUCTION_REMAINS_UNREAD__TASK_EXECUTION_REMAINS_FALSE__TRUSTED_DRIFT_GUARD_PASSES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Existing verified evidence is sufficient; no supplier discovery is needed."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "RANK20_PREEXPOSURE_ADMISSION_001",
+    "inputs": [
+      "FROZEN_TASK_IDENTITY",
+      "EIGHT_SURFACE_METADATA",
+      "INDEPENDENT_STAGE_A_RECEIPT"
+    ],
+    "environment_state": "INSTRUCTION_UNREAD__ZERO_TASK_EXECUTION",
+    "allowed_information": [
+      "TASK_NAME",
+      "RANK",
+      "IDENTITY_HASH",
+      "BENCHMARK_METADATA",
+      "REPOSITORY_METADATA"
+    ],
+    "required_output_or_action": "PASS_TO_STAGE_B_EXPOSURE_ONLY_OR_FAIL_CLOSED",
+    "success_condition": "ZERO_DISQUALIFYING_HITS_AND_INDEPENDENT_PASS",
+    "failure_condition": "ANY_DISQUALIFYING_HIT_OR_UNKNOWN",
+    "terminal_consequence": "PRESERVE_FRESH_EXECUTION_EVIDENCE",
+    "verification_route": "RUN_36926686092_PLUS_DRIFT_GUARD",
+    "dependency_boundary": "NO_INSTRUCTION_SOLUTION_TEST_VERIFIER_HINT_OR_TASK_COMMAND",
+    "scope": "RANK20_STAGE_A_ONLY"
+  },
+  "qualification_stage": "STAGE_A_PRE_EXPOSURE",
+  "terminal_proof_control": {
+    "proof_obligation": "PROVE_RANK20_PREEXPOSURE_ELIGIBILITY",
+    "hole_type": "PREEXPOSURE_ELIGIBILITY",
+    "expected_certificate_or_receipt": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_STAGE_A_ADMISSION_V1.json",
+    "validator": "RUN_36926686092_PLUS_TRUSTED_DRIFT_GUARD",
+    "maximum_cheap_test_cost": "USD_0",
+    "prerequisites": [
+      "SEARCH_V2",
+      "LEDGER_V2",
+      "SURFACE_PARITY_REPAIR"
+    ],
+    "contamination_risk": "TASK_NAME_METADATA_ONLY",
+    "reversibility": "HIGH",
+    "falsification_condition": "ANY_DISQUALIFYING_EXPOSURE_OR_VERIFIER_FAILURE",
+    "critical_path_relation": "MANDATORY_BEFORE_STAGE_B"
+  }
+}
