@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_M1_RESIDUAL_DISCOVERY_V1",
   "date": "2026-10-02",
-  "status": "DISCOVERY_COMPLETE_FOR_CURRENT_FRONTIER__CANDIDATES_CLASSIFIED__NO_WHOLE_RESIDUAL_CREDIT",
+  "status": "DISCOVERY_CURRENT__RAW_PRIMITIVES_AND_CALLOUT_TEXT_PARSER_VERIFIED__THREE_ZERO_REALITY_COMPONENTS_PENDING__NO_WHOLE_RESIDUAL_CREDIT",
   "m1a_candidates": [
     {
       "repo": "skykim/cad-image-to-3d",
@@ -49,7 +49,7 @@
     }
   ],
   "rule": "DETERMINISTIC_CONSTRAINT_SOLVE_AND_EXPLICIT_AMBIGUITY_FIRST__DO_NOT_GUESS_UNOBSERVABLE_GEOMETRY__HARVEST_ONLY_CAUSALLY_NECESSARY_LEARNED_RESIDUAL",
-  "next": "COMPOSE_RAW_DRAWING_PRIMITIVES_WITH_VIEW_SEGMENTATION_REGISTRATION_AND_ORTHOGRAPHIC_CONSTRAINT_GRAPH__SEARCH_PERMISSIVE_OCR_SYMBOL_ROUTE__KEEP_SEMANTIC_FEATURE_MEANING_FAIL_CLOSED",
+  "next": "VERIFY_PENDING_ZERO_REALITY_COMPONENTS__INTERNALIZE_OR_SUBSTITUTE_PINNED_OCR_ROUTE__COMPOSE_WITH_CONSTRAINT_GRAPH__LEAVE_COMPOUND_VISUAL_SEMANTICS_AND_UNSUPPORTED_NOTATION_FAIL_CLOSED",
   "new_reality_spend": 0,
   "capability_credit_delta": 0,
   "verified_owned_components": [
@@ -73,6 +73,13 @@
       "evidence": "canonical/capabilities/opus55/RAW_DRAWING_PRIMITIVES_001.json",
       "scope": "CLEAN_HIGH_CONTRAST_RASTER_TO_BINARY_INK_MASK_AND_SORTED_LINE_CIRCLE_PRIMITIVES",
       "whole_m1a_credit": false
+    },
+    {
+      "id": "ENGINEERING_CALLOUT_PARSER_001",
+      "artifact": "canonical/runtime/engineering_callout_parser.py",
+      "evidence": "canonical/capabilities/opus55/ENGINEERING_CALLOUT_PARSER_001.json",
+      "scope": "EXPLICIT_DIAMETER_RADIUS_LINEAR_THREAD_AND_TOLERANCE_CALLOUT_TEXT_TO_TYPED_VALUES__UNSUPPORTED_COMPOUND_SYNTAX_FAILS_CLOSED",
+      "whole_m1a_credit": false
     }
   ],
   "m1b_remaining": [
@@ -82,10 +89,42 @@
     "RAW_DRAWING_TO_NORMALIZED_CONSTRAINT_GRAPH"
   ],
   "m1a_remaining": [
-    "MULTIVIEW_REGION_SEGMENTATION_AND_VIEW_IDENTITY",
-    "OCR_AND_SYMBOL_TO_EXPLICIT_FEATURE_CALLOUTS",
-    "VIEW_REGISTRATION_FROM_UNNORMALIZED_DRAWINGS",
+    "OCR_IMAGE_TO_TEXT",
+    "VIEW_REGISTRATION_OUTSIDE_BOUNDED_DECLARED_LAYOUTS",
     "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+    "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
     "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
-  ]
+  ],
+  "pending_verification_components": [
+    {
+      "id": "DRAWING_VIEW_REGIONS_V1",
+      "artifact": "canonical/runtime/drawing_view_regions.py",
+      "scope": "SPATIALLY_SEPARATED_CLEAN_HIGH_CONTRAST_VIEW_REGION_SEGMENTATION"
+    },
+    {
+      "id": "ORTHOGRAPHIC_VIEW_IDENTITY_V1",
+      "artifact": "canonical/runtime/orthographic_view_identity.py",
+      "scope": "THREE_VIEW_IDENTITY_WHEN_FIRST_OR_THIRD_ANGLE_CONVENTION_IS_DECLARED"
+    },
+    {
+      "id": "CALLOUT_GEOMETRY_ASSOCIATION_V1",
+      "artifact": "canonical/runtime/callout_geometry_association.py",
+      "scope": "UNIQUE_NEAREST_PRIMITIVE_ASSOCIATION_WITH_AMBIGUITY_MARGIN"
+    }
+  ],
+  "zero_cost_external_candidates": [
+    {
+      "route": "tesseract-ocr/tesseract@db20f322d03664d1e878e2fbf6e904f5da755594",
+      "license": "Apache-2.0",
+      "role": "OCR_TEXT_EXTRACTION_ONLY",
+      "ownership": "MODEL_DATA_AND_DEPENDENCIES_REQUIRE_ACCOUNTING"
+    },
+    {
+      "route": "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c",
+      "license": "Apache-2.0",
+      "role": "SEGMENTATION_AND_REGISTRATION_PRIMITIVES",
+      "ownership": "DETERMINISTIC_LIBRARY_ROUTE"
+    }
+  ],
+  "residual_action_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json"
 }
