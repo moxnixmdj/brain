@@ -41,7 +41,8 @@
         "canonical/runtime/drawing_view_regions.py",
         "canonical/runtime/orthographic_view_identity.py",
         "canonical/runtime/callout_geometry_association.py",
-        "canonical/runtime/drawing_view_registration.py"
+        "canonical/runtime/drawing_view_registration.py",
+        "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -49,7 +50,6 @@
         "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
       ],
       "uncovered": [
-        "OCR_IMAGE_TO_TEXT_WITH_PINNED_MODEL_DATA_AND_DEPENDENCY_ACCOUNTING",
         "VIEW_REGISTRATION_OUTSIDE_SINGLE_BOUNDED_GLOBAL_ROTATION_DESKEW__INCLUDING_LOCAL_WARP_PERSPECTIVE_AND_NONORTHOGONAL_LAYOUTS",
         "COMPOUND_VISUAL_FEATURE_SEMANTICS",
         "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
@@ -82,6 +82,12 @@
           "blob_sha": "0f6189864e415b1837e2f22456b99b568b2af374",
           "repair_commit": "c824540cf95fcec19028b0a72fef22b230fb77ef",
           "scope": "SINGLE_GLOBAL_ROTATION_DESKEW_FOR_ORTHOGONAL_LINE_DOMINATED_DRAWINGS_WITHIN_15_DEGREES__OPENCV4_AND5_HOUGH_RETURN_SHAPES_NORMALIZED"
+        },
+        "pinned_image_ocr_tesseract": {
+          "workflow_run_id": 36943148108,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
+          "scope": "ENGLISH_RASTER_TEXT_EXTRACTION_ON_EXACT_PINNED_TESSERACT_5_3_4_AND_ENG_TRAINEDDATA_SHA256_7D4322BD__NO_ENGINEERING_SEMANTIC_AUTHORITY"
         }
       }
     },
@@ -115,7 +121,7 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "M0A_REMAINS_BLOCKED_BY_CONTEXTUAL_IMPLICIT_LONG_RANGE_AND_OPEN_SEMANTICS__M1A_REMAINS_BLOCKED_BY_OCR_DEPENDENCY_ACCOUNTING_NONAXIS_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_BROADER_ENGINEERING_NOTATION_AND_ROBUSTNESS__SEARCH_REUSE_SUBSTITUTE_PER_UNCOVERED_ATOM__FREEZE_ONLY_WHEN_COMPLETE",
+  "next": "M0A_REMAINS_BLOCKED_BY_CONTEXTUAL_IMPLICIT_LONG_RANGE_AND_OPEN_SEMANTICS__M1A_OCR_ATOM_CLOSED__M1A_REMAINS_BLOCKED_BY_NON_GLOBAL_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_BROADER_ENGINEERING_NOTATION_AND_ROBUSTNESS__SEARCH_REUSE_SUBSTITUTE_PER_UNCOVERED_ATOM__FREEZE_ONLY_WHEN_COMPLETE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -123,7 +129,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "newly_verified_components": 5,
-    "note": "Narrow verification promotion only; M0A and M1A remain open and exact cut remains unauthorized. Drawing registration residual narrowed to non-global-rotation cases."
+    "newly_verified_components": 6,
+    "note": "Pinned English image OCR atom independently closed at exact dependency surface; M0A and M1A remain open and exact cut remains unauthorized."
   }
 }
