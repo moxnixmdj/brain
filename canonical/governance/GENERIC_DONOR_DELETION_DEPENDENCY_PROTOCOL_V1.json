@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_DONOR_DELETION_DEPENDENCY_PROTOCOL_V1",
+  "date": "2026-10-01",
+  "status": "STAGE_A_PROTOCOL_AVAILABLE__NOT_DONOR_DELETION_EVIDENCE__ZERO_CREDIT",
+  "purpose": "Provide the generic predeclared donor-deletion and dependency-accounting protocol required before untouched qualification; actual deletion evidence remains per-capability and promotion-time.",
+  "authorities": [
+    {
+      "path": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+      "blob_sha": "f4d73743d628e3715104993957bccbf701df8df9"
+    },
+    {
+      "path": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
+      "blob_sha": "895461a6c2462b618fef0305e547e578ae3a5ef9"
+    }
+  ],
+  "mandatory_for_donor_derived_promotion": [
+    "PIN_EXACT_DONOR_IDENTITY_VERSION_ARTIFACT_HASHES_LICENSE_AND_PROVENANCE",
+    "ENUMERATE_ALL_UNAVOIDABLE_RUNTIME_DEPENDENCIES_INCLUDING_BASE_MODELS_SERVICES_LIBRARIES_AND_LEARNED_SUBSTRATES",
+    "PHYSICALLY_REMOVE_OR_DENY_THE_DONOR_AS_TARGET_CAPABILITY_PROVIDER_WHERE_APPLICABLE",
+    "RUN_THE_EXACT_BRAIN_ROUTE_IN_A_CLEAN_ROOM_WITH_DONOR_TARGET_CAPABILITY_ACCESS_UNAVAILABLE",
+    "FAIL_PROMOTION_IF_TARGET_BEHAVIOR_DISAPPEARS_OR_AN_UNDISCLOSED_DEPENDENCY_IS_REQUIRED",
+    "RETAIN_SBOM_OR_EQUIVALENT_DEPENDENCY_ACCOUNTING_AND_HASHED_OPERATIVE_ARTIFACTS",
+    "REQUIRE_CAUSAL_ABLATION_RESCUE_SPECIFICITY_HELDOUT_AND_OPUS_BAR_EVIDENCE_SEPARATELY"
+  ],
+  "coding_rank15_interpretation": "This protocol is available before exposure. It does not claim rank15 uses a donor-derived residual and does not itself authorize execution.",
+  "actual_donor_deletion_passed": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
