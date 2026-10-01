@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FAST_EXECUTION_POLICY_V1",
   "policy_id": "FAST_EXECUTION_KERNEL_V1",
-  "status": "VERIFIED_DEFAULT__LEGACY_MICROSTEP_BRIDGE_OBSOLETED_BY_DEFAULT",
+  "status": "SUPERSEDED_BY_HIGH_THROUGHPUT_EXECUTION_V2__EMERGENCY_FALLBACK_ONLY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "MINIMIZE_WALL_CLOCK_TO_VERIFIED_REAL_EFFECT_WITHOUT_WEAKENING_EVIDENCE_OR_OWNERSHIP",
   "obsolete_by_default": [
@@ -63,5 +63,7 @@
     "route": "LEGACY_SESSION_MINI_SWE_RUNTIME_BRIDGE",
     "status": "DISABLED_BY_DEFAULT__EMERGENCY_FALLBACK_ONLY",
     "evidence": "Old mp-checkpoint session consumed 30 externally serialized steps and hit STEP_LIMIT before terminal verification; fast-burst trial reached terminal verifier with no per-microstep Git commits."
-  }
+  },
+  "superseded_by": "canonical/execution/HIGH_THROUGHPUT_EXECUTION_V2.json",
+  "supersession_reason": "OPERATOR_SERIALIZATION_AND_INNER_BURST_SERIALIZATION_REMAINED_MATERIAL_WALL_CLOCK_LIMITS"
 }
