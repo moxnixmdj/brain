@@ -3,7 +3,7 @@
   "action_id": "REPAIR-STAGE-A-ADMISSION-AND-GUARD-VERSION-PINS-20261001-V1",
   "status": "PROPOSED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "c61497aba5de17413d69bc426a6f0922a6b469b8",
+  "canonical_base_commit": "19b2c00b16bb8dac5cd594fd42851c4574dfaadc",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
@@ -14,7 +14,7 @@
   "expected_parent_frontier_change": "No frontier redefinition. The active capability target, the live parent blocker (RANK19_STAGE_C_ONE_SHOT_EXECUTION_NOT_YET_RUN) and the live next required action class stay exactly as ACTIVE_GOAL_HIERARCHY_V1 declares them, and this change edits no authoritative hierarchy field. What changes is that they become enforceable and decidable: the nine stale mirror fields across the boot pointer, obsolescence queue, real-output scoreboard and active target record are reconciled to that live authority instead of still carrying rank-10 text; the trusted guard validates control paths by currency so it stops rejecting a correct pointer; and Stage-A admission becomes satisfiable for a policy-compliant ledger and identical across both reducers, so a recorded admission is reproducible from canonical code rather than being a hand-authored claim.",
   "highest_leverage_now": true,
   "prior_work_checked": [
-    "origin/main c61497aba5de17413d69bc426a6f0922a6b469b8",
+    "origin/main 19b2c00b16bb8dac5cd594fd42851c4574dfaadc",
     "canonical/reasoning/RANK17_STAGE_A_ACTION_INTENT_20261001_V1.json (canonical_generation 2026-10-01-live and capability_target ADVANCED_AGENTIC_CODING are both inconsistent with the live pointer and hierarchy; cited, not relied upon)",
     "canonical/runtime/prequalification_stage_a_generic.py including the runner budget predicate added by 08e04dc and cde584b",
     "canonical/runtime/test_prequalification_stage_a_reducer_v2.py and test_prequalification_stage_a_generic.py (both red at base)",
@@ -26,7 +26,9 @@
     "open PRs #656 and #602: neither adds a file under canonical/action_intents/, so no blocker lease collision",
     "drift-immunity-guard runs: 20 consecutive failures across many branches while main advanced by direct push",
     ".github/workflows/drift-immunity-guard.yml preserves the validator from the trusted base",
-    "canonical/runtime/reconcile_frontier_mirrors.py and canonical/runtime/test_reconcile_frontier_mirrors.py (added by this change)"
+    "canonical/runtime/reconcile_frontier_mirrors.py and canonical/runtime/test_reconcile_frontier_mirrors.py (added by this change)",
+    "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json at 19b2c00: stage_a_pre_exposure.required is still the same ten items, so the reducer policy floor is unchanged; the two new execution-surface parity classes are Stage-B requirements",
+    "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json: rank19 spent on a PEP 668 execution-surface failure with zero credit and no replay; not touched or replayed here"
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -62,12 +64,13 @@
     "mirror_fields_reconciled": 9,
     "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after.",
     "reconciler_cross_check": "Run on the stale base c61497a in a throwaway worktree, canonical/runtime/reconcile_frontier_mirrors.py produced byte-identical output to the hand reconciliation for CANONICAL_POINTER.json, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json, REAL_OUTPUT_SCOREBOARD_V1.json and ACTIVE_GOAL_HIERARCHY_V1.json. The only differing file is the active target record, and only in current_execution, which is a semantic field the tool deliberately does not rewrite. Two independent derivations agreeing is the cross-check; the tool also exits 1 with --check on the stale base, naming all nine drifted fields and both stale control paths.",
-    "reconciler_tests": "14 passed"
+    "reconciler_tests": "14 passed",
+    "reconciler_at_new_base": "At base 19b2c00 the reconciler's --check named all nine drifted mirror fields and both stale control paths and exited 1; a single --fix-control-paths run reconciled them and the follow-up --check reported MIRRORS_CONSISTENT. This is the fourth base at which the same drift had to be recomputed, and the first at which a tool rather than a hand pass did it."
   },
   "reasoning_receipt": "canonical/reasoning/2026-10-01_STAGE_A_ADMISSION_UNSATISFIABLE_AND_GUARD_VERSION_PIN_ROT_V1.json",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "c61497aba5de17413d69bc426a6f0922a6b469b8",
+    "canonical_base_commit": "19b2c00b16bb8dac5cd594fd42851c4574dfaadc",
     "real_outcome": "A policy-compliant eight-surface contamination ledger can be admitted to Stage B again, both Stage-A reducers enforce one contract, recorded admissions are reproducible from canonical code, and the trusted drift guard stops rejecting a correct pointer, so frontier-sensitive PRs stop failing permanently.",
     "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "obs_goal": {
@@ -97,7 +100,7 @@
         "No new guard: the existing trusted validator is repaired in place",
         "No external service, package, model or runner dependency added"
       ],
-      "surviving_gap": "The live blocker is now rank19 Stage-C one-shot execution, which requires opening a fresh carrier, binding a canonical lease and spending exactly one builder burst on the runner. None of that is attempted here: this change repairs the admission and governance layer that frontier depends on and does not advance rank19 itself."
+      "surviving_gap": "The live blocker is now the generic exact-container package-policy probe and binding Stage B to the READY execution-surface profile, with rank20 (vba-userform-port) frozen unread behind it. None of that is attempted here: this change repairs the admission reducers, the guard's version pins and the mirror layer that the frontier depends on, and does not advance rank20."
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "Path-specific implementation defects in Brain's own control plane, not a missing capability and not an intrinsic limit.",
@@ -184,9 +187,9 @@
       "analysis_steps_deleted_or_cached": [
         "Cached the full guard contract read instead of re-reading it per check",
         "Reused the version and currency audit and re-ran it once per new base rather than re-deriving it",
-        "Deleted three successive reconciliation passes computed against bases 9684aaf, 5e81733 and 3681ff8, recomputing against c61497a instead of merging stale values",
+        "Deleted four successive hand reconciliation passes computed against bases 9684aaf, 5e81733, 3681ff8 and c61497a, and at the fifth base let the reconciler recompute the mirrors instead of hand-editing them again",
         "Caught and reverted an over-broad cleanup glob that had deleted 237 tracked artifacts under canonical/astra_runtime/tmp, restoring all 465 before continuing",
-        "Caught a raw-text write that silently discarded parsed-dict edits to the pointer and added an assertion so it cannot recur"
+        "Caught a raw-text write that silently discarded parsed-dict edits to the pointer, then removed that error class by building the tool"
       ],
       "search_stop_decision": "Stopped external search entirely: every fact needed is decidable from this repository and its GitHub metadata, and the sandbox has no outbound HTTPS from Python. Further searching could not change any of the four defects.",
       "affected_layers_only_on_revalidation": true,

@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
-  "canonical_base_commit": "c61497aba5de17413d69bc426a6f0922a6b469b8",
+  "canonical_base_commit": "19b2c00b16bb8dac5cd594fd42851c4574dfaadc",
   "real_objective": "Make the terminal goal reachable again by removing three Brain-side defects that make canonical Stage-A admission undecidable, make the trusted drift guard reject a correct pointer, and leave every frontier mirror stale after each advance, without redefining the live frontier, spending evidence, or reading any task instruction.",
   "governing_invariants": {
     "knowledge": "EXTERNAL_JIT",
@@ -24,7 +24,9 @@
     "The mirror rot is recurring, not one-off. Measured at three consecutive base commits (5e81733, 3681ff8 and c61497a) after 71 further commits in total, the mirror fields were stale against the live hierarchy every time and still carried rank-10 text (CURRENT_V5_TERMINAL_BENCH_4_BREADTH... and LAUNCH_CAD_MODEL_RANK_10...). At this base nine fields needed reconciling; the hierarchy's own next_progress_event_target had just been aligned upstream. Every frontier advance re-stales them, so the drift guard cannot pass any PR, which is consistent with 20 consecutive guard failures across many branches while main advanced by direct push.",
     "The base moved four times during this work (9684aaf, 5e81733, 3681ff8, c61497a). Because enforce_recursive_obs binds obs.canonical_base_commit to the exact literal passed as --base, and the workflow passes github.event.pull_request.base.sha, any push to main expires every open PR's OBS receipt. This is a structural property of the current design, not an error in this change, and it is recorded here rather than papered over.",
     "A trivial sensitive-file change at base produced 20 distinct failures under the base guard, so the wall is independent of any PR's content.",
-    "Reconciling the mirrors by hand is itself a recurring cost and a source of error: it had to be recomputed from scratch four times as the base moved, and one hand pass silently discarded parsed-dict edits when a raw-text replacement was written back afterwards. A deterministic tool that recomputes the mirrors from the authority removes both the repetition and that error class."
+    "Reconciling the mirrors by hand is itself a recurring cost and a source of error: it had to be recomputed from scratch four times as the base moved, and one hand pass silently discarded parsed-dict edits when a raw-text replacement was written back afterwards. A deterministic tool that recomputes the mirrors from the authority removes both the repetition and that error class.",
+    "The base moved five times during this work (9684aaf, 5e81733, 3681ff8, c61497a, 19b2c00). At each of the last three bases all nine mirror fields were stale again, and the frontier moved from rank17 to rank18 to rank19 and now to rank20 (vba-userform-port, FROZEN_UNREAD). rank19 was spent on a PEP 668 execution-surface package failure before any task audio analysis, with zero credit and no replay, which is recorded in SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json.",
+    "PREQUALIFICATION_FAILURE_IMMUNITY_V1 gained two execution-surface parity failure classes at the newest base, but its staged_admission.stage_a_pre_exposure.required list is still the same ten items, so the Stage-A policy floor enforced by both reducers remains correct and unchanged."
   ],
   "evidence_refs": [
     "canonical/runtime/prequalification_stage_a_reducer_v2.py",
@@ -138,9 +140,10 @@
     "mirror_fields_reconciled": 9,
     "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after.",
     "reconciler_cross_check": "Run on the stale base c61497a in a throwaway worktree, canonical/runtime/reconcile_frontier_mirrors.py produced byte-identical output to the hand reconciliation for CANONICAL_POINTER.json, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json, REAL_OUTPUT_SCOREBOARD_V1.json and ACTIVE_GOAL_HIERARCHY_V1.json. The only differing file is the active target record, and only in current_execution, which is a semantic field the tool deliberately does not rewrite. Two independent derivations agreeing is the cross-check; the tool also exits 1 with --check on the stale base, naming all nine drifted fields and both stale control paths.",
-    "reconciler_tests": "14 passed"
+    "reconciler_tests": "14 passed",
+    "reconciler_at_new_base": "At base 19b2c00 the reconciler's --check named all nine drifted mirror fields and both stale control paths and exited 1; a single --fix-control-paths run reconciled them and the follow-up --check reported MIRRORS_CONSISTENT. This is the fourth base at which the same drift had to be recomputed, and the first at which a tool rather than a hand pass did it."
   },
-  "next_action": "OPEN_FRESH_RANK19_STAGE_C_CARRIER__BIND_CANONICAL_ONE_SHOT_LEASE__FREEZE_ACCEPTANCE__EXECUTE_EXACTLY_ONE_BUILDER_BURST_WITH_INTERNAL_SELF_CHECKS__THEN_ONE_TERMINAL_VERIFIER",
+  "next_action": "VERIFY_AND_MERGE_GENERIC_EXACT_CONTAINER_PACKAGE_POLICY_PROBE__BIND_STAGE_B_TO_READY_SURFACE_PROFILE__THEN_ADVANCE_FROZEN_ORDER_TO_CLEAN_RANK20_IF_STILL_UNEXPOSED__NO_RANK19_REPLAY",
   "supersession_conditions": [
     "Canonical main moves materially before merge, especially ACTIVE_GOAL_HIERARCHY_V1 blocker or next action, the pointer's canonical_generation, or the Stage-A required list.",
     "Another worker lands an equivalent reducer, guard-currency or mirror reconciliation first.",
