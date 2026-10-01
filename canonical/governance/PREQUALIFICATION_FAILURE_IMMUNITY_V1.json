@@ -149,6 +149,16 @@
       "id": "CARRIER_IDENTITY_AUTHORITY_COLLISION",
       "defense": "Authorization state must cryptographically bind the exact active carrier evidence/identity. A second carrier may not open while one is active, and a static carrier-agnostic authority hash may never authorize execution.",
       "required_evidence": "EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_PLUS_EXACT_ACTIVE_CARRIER_RECEIPT"
+    },
+    {
+      "id": "RUNTIME_API_CONTRACT_MISMATCH",
+      "defense": "Before Stage-C, every external runtime API symbol/behavior assumed by the planned builder route must have an exact-surface PASS receipt; unverified symbols fail closed.",
+      "required_evidence": "RUNTIME_API_CONTRACT_PREFLIGHT_PLUS_RANK22_BUILDER_FAILURE_IMMUNITY_VERIFICATION"
+    },
+    {
+      "id": "PROCESS_EXIT_ZERO_WITH_SEMANTIC_SCRIPT_FAILURE",
+      "defense": "Fresh builder execution requires a declared success sentinel before spend. Runtime observation is semantically successful only when exit code is zero, the sentinel is observed, and no fatal stderr pattern is present; semantic failure blocks terminal verification.",
+      "required_evidence": "BUILDER_SEMANTIC_SUCCESS_REGRESSION_PLUS_EXACT_RUNTIME_BEHAVIOR_CANARY"
     }
   ],
   "fresh_qualification_admission_rule": "FOR_ALL_SUBSEQUENT_FRESH_EVIDENCE_SPEND__EVIDENCE_SATURATION_AND_DEDUCTIVE_CLOSURE_AND_MINIMUM_REALITY_CUT_ADMISSION_PRECEDE_SPEND__THEN_STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED__RANK22_EXCEPTION_EXPIRED_AFTER_SPENT_BUILDER_FAILURE",
@@ -189,7 +199,9 @@
         "LOSSLESS_SOURCE_CONTRACT_COMPILATION_RECEIPT",
         "ZERO_UNACCOUNTED_AUTHORITATIVE_SOURCE_ATOMS",
         "ZERO_OPEN_SPECIFICATION_HOLES",
-        "BIDIRECTIONAL_SOURCE_REQUIREMENT_TRACEABILITY"
+        "BIDIRECTIONAL_SOURCE_REQUIREMENT_TRACEABILITY",
+        "TASK_SPECIFIC_RUNTIME_API_CONTRACT_PREFLIGHT",
+        "BUILDER_SEMANTIC_SUCCESS_CONTRACT"
       ],
       "failure_disposition": "INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE"
     },
@@ -246,6 +258,13 @@
       "status": "VERIFIED_AND_MERGED",
       "verification": "canonical/governance/DERIVED_STAGE_C_STATE_GATE_20261001_V1.json",
       "runner_merge_commit": "f7c62fca832e31d26e15c755c1486b2bea3bb98e"
+    },
+    "runtime_api_and_semantic_builder_success": {
+      "status": "INDEPENDENT_PASS__MERGED",
+      "verification": "canonical/governance/RANK22_BUILDER_FAILURE_IMMUNITY_VERIFICATION_20261002_V1.json",
+      "runner_pr": 429,
+      "runner_merge_commit": "36dcfbd279790ce95c01bf96163266290cfb9929",
+      "rule": "STAGE_C_REQUIRES_EXACT_RUNTIME_API_PREFLIGHT__BUILDER_COMMANDS_REQUIRE_SEMANTIC_SUCCESS_SENTINELS__FATAL_STDERR_OVERRIDES_EXIT_ZERO"
     }
   },
   "core_hardening_verification": "canonical/governance/CORE_HARDENING_VERIFICATION_20261001_V1.json",
@@ -276,5 +295,6 @@
     "reducer": "canonical/runtime/execution_authority_reducer.py",
     "verification": "canonical/verification/EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_20261002_V1.json",
     "fail_closed": true
-  }
+  },
+  "current_verdict": "RANK22_RUNTIME_API_AND_SEMANTIC_BUILDER_FAILURE_CLASS_VERIFIED_CLOSED__RANK23_STAGE_A_MAY_PROCEED_IF_STILL_UNEXPOSED"
 }
