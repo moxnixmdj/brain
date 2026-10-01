@@ -197,7 +197,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "LAUNCH_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_RECEIPT_BEFORE_INSTRUCTION_READ",
+  "next_progress_event_target": "CONTINUE_ATRX_VEP_CRISPR_RANK_9_ON_PATCHED_FAST_BURST__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
