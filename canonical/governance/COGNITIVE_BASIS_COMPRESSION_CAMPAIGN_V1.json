@@ -69,9 +69,11 @@
       "runner": "canonical/runtime/pointwise_jev_probe.py",
       "evaluation_set": "canonical/capabilities/opus55/evals/COGNITIVE_BASIS_POINTWISE_TRANSFER_001.jsonl",
       "runner_commit": "a07cb967b452cdc98ad9dfe14d882d591bcc72b2",
-      "evaluation_set_commit": "bcde1b3cc8de74b45ee48df219249b0ee1b09791",
+      "evaluation_set_commit": "cd26bda8871956ffe24301973410aa445ddffd86",
       "state": "READY_TO_RUN_AGAINST_A_JEV_COMPATIBLE_ENDPOINT__NO_RESULT_RECORDED_YET",
-      "promotion_credit": 0
+      "promotion_credit": 0,
+      "evaluation_set_blob": "f4cfc7474547bfb3b3f7272e5aa9ba9e88f3ffc9",
+      "provenance_note": "ORIGINAL_SET_ADDED_AT_BCDE1B3__CURRENT_CANONICAL_BYTES_REPAIRED_TO_REAL_JSONL_LINE_BREAKS_AT_CD26BDA"
     },
     "next_required_action": "RUN_THE_POINTWISE_TRANSFER_SET_AGAINST_EXISTING_PERMISSIVE_JEV_COMPATIBLE_ROUTES__RECORD_ACCURACY_CALIBRATION_COVERAGE_TRANSFER_LATENCY__THEN_MEASURE_TERMINAL_TASK_DELTA_BEFORE_ANY_DISTILLATION"
   },
