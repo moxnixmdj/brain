@@ -1,0 +1,138 @@
+{
+  "schema": "PROJECT_BRAIN_RECURSIVE_OBS_META_AUDIT_V1",
+  "status": "EXECUTED_CURRENT_BASE__ZERO_CAPABILITY_CREDIT",
+  "canonical_base_commit": "6cd22d0803e48ae670917230201c3155c2bb42ed",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "directive": "OBS_EVERYTHING_RECURSIVELY_WITHOUT_CREATING_A_NEW_GOVERNANCE_LAYER",
+  "scope": [
+    "REAL_GOAL",
+    "CAPABILITY_DECOMPOSITION",
+    "CAUSAL_BLOCKERS",
+    "SOLUTION_SELECTION",
+    "VERIFICATION",
+    "INHERITED_SYSTEM",
+    "OBS_PROCESS_ITSELF",
+    "EXECUTION_PATH",
+    "REASONING_DECISION_PROCESS"
+  ],
+  "deletion_first_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+  ],
+  "progress_law": "ONLY_VERIFIED_REUSABLE_CAPABILITY_OUTPUT_COUNTS",
+  "reasoning_visibility_contract": {
+    "hidden_chain_of_thought_required_or_exposed": false,
+    "durable_decision_receipt_required_for_consequential_actions": true,
+    "receipt_fields": [
+      "objective",
+      "governing_invariants",
+      "material_premises",
+      "evidence_refs",
+      "conclusion",
+      "selected_route",
+      "rejected_material_alternatives",
+      "uncertainties",
+      "next_action",
+      "supersession_conditions"
+    ],
+    "conversation_execution_truth": [
+      "DO_NOT_CLAIM_BACKGROUND_EXECUTION_AFTER_RESPONSE_ENDS",
+      "RUNNING_REQUIRES_CURRENT_LIVE_EXECUTOR_RECEIPT",
+      "RESEARCH_PLANNING_AND_INSPECTION_DO_NOT_COUNT_AS_EXECUTION",
+      "EXECUTION_END_STATE_MUST_BE_EXECUTED_PARTIAL_OR_BLOCKED"
+    ]
+  },
+  "obs_results": {
+    "goal": {
+      "disposition": "KEEP",
+      "reason": "Terminal objective remains the correct real outcome; no proxy goal dominates it."
+    },
+    "family_taxonomy": {
+      "disposition": "KEEP_AS_EVALUATION_SURFACE__DO_NOT_IMPLEMENT_FAMILY_BY_FAMILY",
+      "reason": "The 19 families remain useful coverage tests, but implementation should target smaller causal residuals."
+    },
+    "minimal_cognitive_basis": {
+      "disposition": "KEEP_AS_FALSIFIABLE_DECOMPOSITION__NOT_AS_ASSUMED_ARCHITECTURE",
+      "reason": "Cross-family compression is still useful, but one generic shared learned judge has been falsified."
+    },
+    "generic_small_judge": {
+      "disposition": "DELETE_AS_DEFAULT_ARCHITECTURE",
+      "evidence": [
+        "canonical/capabilities/opus55/COGNITIVE_PRIMITIVE_IMPLEMENTATION_FRONTIER_V1.json",
+        "canonical/governance/COGNITIVE_BASIS_COMPRESSION_CAMPAIGN_V1.json"
+      ]
+    },
+    "c3_tool_routing": {
+      "disposition": "KEEP_SKILLROUTER_AS_CURRENT_HIGH_ACCURACY_CANDIDATE__DELETE_HAND_TUNED_MARGIN_AND_SIMPLE_MAJORITY_GATES",
+      "reason": "Fresh terminal gain exists for SkillRouter; lexical/ETTIN margin gates and simple majority were falsified out of sample."
+    },
+    "c7_root_cause": {
+      "disposition": "OPEN_HIGH_LEVERAGE_RESIDUAL",
+      "deleted_routes": [
+        "AGENTDEBUGX_AS_GENERAL_ROOT_CAUSE_ROUTE",
+        "AGENTRX_AS_IMMEDIATE_OWNERSHIP_ROUTE"
+      ],
+      "surviving_search": [
+        "GENUINELY_REPLAYABLE_POLICY_CAUSAL_SCREEN",
+        "NONTRIVIAL_DETERMINISTIC_TRACE_AUDITOR_SCREEN",
+        "STRONGER_EXISTING_OPEN_CAUSAL_LOCALIZATION_MECHANISMS"
+      ]
+    },
+    "execution_path": {
+      "disposition": "KEEP_FAST_BURST__DELETE_STALE_READY_STATES_AND_EXCESSIVE_PR_COMMENT_POLLING",
+      "required_invariant": "RUNNING_OR_READY_REQUIRES_CURRENT_LIVE_EXECUTOR_RECEIPT",
+      "current_rank6_task": "glycan-ms2-elucidation",
+      "current_run_id": 36826634715
+    },
+    "reasoning_process": {
+      "disposition": "KEEP_REASONING__DELETE_UNAUDITABLE_AUTHORITY",
+      "rules": [
+        "MEMORY_AND_PRIOR_CONCLUSIONS_ARE_HINTS_NOT_CURRENT_AUTHORITY",
+        "CONSEQUENTIAL_CONCLUSIONS_REQUIRE_CURRENT_EVIDENCE_BOUND_DECISION_RECEIPTS",
+        "USE_SMALLEST_DISCRIMINATING_TEST",
+        "STOP_SEARCH_WHEN_ADEQUATE_ROUTE_SURVIVES_AND_MORE_SEARCH_CANNOT_CHANGE_DECISION",
+        "AFTER_EVERY_WIN_ASK_WHAT_CAN_NOW_BE_DELETED"
+      ]
+    },
+    "verification": {
+      "disposition": "KEEP_FAIL_CLOSED",
+      "rules": [
+        "NO_CAPABILITY_CREDIT_FROM_DONOR_PERFORMANCE",
+        "NO_CREDIT_FROM_SINGLE_TASK_WHEN_FAMILY_BREADTH_IS_REQUIRED",
+        "REQUIRE_FRESH_HELDOUT_TERMINAL_EFFECT",
+        "REQUIRE_ABLATION_RESCUE_WHERE_CAUSAL_MECHANISM_IS_CLAIMED",
+        "REQUIRE_DONOR_DELETION_FOR_OWNERSHIP"
+      ]
+    },
+    "obs_process": {
+      "disposition": "KEEP_BUT_COMPRESS",
+      "rules": [
+        "NO_NEW_OBS_FRAMEWORK",
+        "REFRESH_ONLY_AFFECTED_LAYERS_WHEN_LOCALIZABLE",
+        "FULL_REFRESH_ON_MATERIAL_BASE_GOAL_OR_ROUTE_CHANGE",
+        "OBS_ACTIVITY_GETS_ZERO_CAPABILITY_CREDIT",
+        "EVERY_OBS_PASS_MUST_END_IN_EXECUTE_DELETE_OR_EXPLICIT_BLOCK"
+      ]
+    }
+  },
+  "surviving_execution_strategy": {
+    "lane_A": "PRESERVE_CLEAN_RANK6_CODING_EXECUTION_AND_CONTINUE_FROZEN_FRESH_BREADTH_ORDER_WITHOUT_CONTAMINATION",
+    "cognitive_residual_order": [
+      "C7_ROOT_CAUSE_LIKELIHOOD",
+      "C2_CANDIDATE_ACTION_UTILITY",
+      "C5_EXPECTED_INFORMATION_GAIN",
+      "C1_RELEVANCE_AND_GOAL_ALIGNMENT",
+      "C4_HYPOTHESIS_PLAUSIBILITY"
+    ],
+    "acquisition_rule": "DETERMINISTIC_OR_BRAIN_OWNED_FIRST__THEN_EXISTING_OPEN_REUSE__THEN_CONFIGURE_OR_INTEGRATE__DISTILL_ONLY_TRUE_RESIDUAL",
+    "composition_rule": "PRIMITIVE_SPECIFIC_MECHANISMS_COMPOSE_UNDER_ONE_CONTROL_LOOP__NO_GENERIC_SMALL_JUDGE_AUTHORITY",
+    "verification_rule": "TERMINAL_TASK_GAIN_BEFORE_PROMOTION__THEN_ABLATION_RESCUE__DONOR_DELETION__CROSS_DOMAIN_BREADTH"
+  },
+  "stop_condition": "TERMINAL_OBJECTIVE_VERIFIED_OR_A_MATERIAL_CAUSAL_BLOCKER_REMAINS_AFTER_CURRENT_OBS_FRONTIER_IS_EXHAUSTED",
+  "capability_credit_delta": 0
+}
