@@ -159,7 +159,7 @@
     "opus_5_5_or_better_acceptance_bar_required": true,
     "reasoning_decision_receipt_required": true,
     "reasoning_decision_receipt_law_path": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
-    "current_theory_receipt_path": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_INTELLIGENCE_DECOMPOSITION_STRATEGY_V1.json",
+    "current_theory_receipt_path": "canonical/reasoning/2026-10-01_TERMINAL_SUCCESS_PREMORTEM_AND_FAILURE_IMMUNITY_V1.json",
     "capability_map_is_permanent_ownership_queue": true,
     "capability_acquisition_first": true,
     "build_interpretation": "INTEGRATION_GLUE_ONLY__UNDERLYING_CAPABILITY_INVENTION_FORBIDDEN",
@@ -189,7 +189,10 @@
     "prequalification_failure_immunity_required": true,
     "prequalification_failure_immunity_path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure_manifest_required": true,
-    "terminal_closure_manifest_path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+    "terminal_closure_manifest_path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "terminal_closure_reducer_required": true,
+    "terminal_closure_reducer_path": "canonical/runtime/terminal_closure_reducer.py",
+    "terminal_closure_reducer_verification_path": "canonical/verification/TERMINAL_CLOSURE_REDUCER_VERIFICATION_20261001_V1.json"
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -773,7 +776,9 @@
     },
     "atomic_causal_intelligence_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
     "behavioral_contract_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
-    "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+    "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "terminal_closure_reducer": "canonical/runtime/terminal_closure_reducer.py",
+    "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
