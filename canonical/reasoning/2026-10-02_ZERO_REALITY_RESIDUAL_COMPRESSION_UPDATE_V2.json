@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ZERO_REALITY_RESIDUAL_COMPRESSION_UPDATE_V2",
+  "date": "2026-10-02",
+  "status": "EXECUTED__RESIDUALS_SHRUNK_WITHOUT_FRESH_UNTOUCHED_INFORMATION__EXACT_CUT_STILL_BLOCKED_BY_M0A_M1A",
+  "verified_new_since_prior_cut": [
+    "canonical/capabilities/opus55/RAW_DRAWING_PRIMITIVES_001.json",
+    "canonical/capabilities/opus55/ENGINEERING_CALLOUT_PARSER_001.json"
+  ],
+  "installed_verification_pending_components": [
+    "canonical/runtime/explicit_compound_requirement_decomposer.py",
+    "canonical/runtime/drawing_view_regions.py",
+    "canonical/runtime/orthographic_view_identity.py",
+    "canonical/runtime/callout_geometry_association.py"
+  ],
+  "external_zero_cost_routes": {
+    "M0A": [
+      "stanfordnlp/stanza@c9a2158a87502dd63f757ab1aa933230b0acbce7__APACHE_2",
+      "explosion/spaCy@c2dabfce56ad2991685ec85783cd59637a5d7b8f__MIT"
+    ],
+    "M1A": [
+      "tesseract-ocr/tesseract@db20f322d03664d1e878e2fbf6e904f5da755594__APACHE_2",
+      "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c__APACHE_2"
+    ],
+    "M1B": [
+      "skykim/cad-image-to-3d@b70f7b5a8cd18c96a7ec869e0a5d946f79480226__APACHE_2_PROTOCOL_DONOR_ONLY",
+      "AdityaJoglekar/Ortho2CAD@546efb1facc4066e7904aacd259c9dd140c1e2ba__LICENSE_UNVERIFIED_NO_CODE_IMPORT"
+    ]
+  },
+  "exactness_statement": "NO_GLOBAL_EXACT_CUT_CLAIM_UNTIL_M0A_AND_M1A_HAVE_COMPLETE_ADMISSIBLE_SELF_CONTAINED_ACTION_BUNDLES",
+  "terminal_family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "next": "MAKE_M0A_AND_M1A_ACTION_BUNDLES_COMPLETE_USING_ZERO_REALITY_REUSE_AND_BOUNDED_FAIL_CLOSED_COMPONENTS__THEN_FREEZE_AND_COMPILE_EXACT_CUT"
+}
