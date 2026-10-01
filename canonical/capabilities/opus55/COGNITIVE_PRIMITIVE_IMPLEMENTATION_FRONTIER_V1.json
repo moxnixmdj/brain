@@ -10,6 +10,7 @@
     "consequence": "DO_NOT_SEARCH_FOR_ONE_GENERIC_SMALL_JUDGE_AS_THE_DEFAULT_ARCHITECTURE__DECOMPOSE_BY_PRIMITIVE_AND_DELETE_LEARNED_DEPENDENCE_WHERE_EXACT_VERIFICATION_DOMINATES"
   },
   "implementation_law": [
+    "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__C1_C10_NAMES_ARE_ACCOUNTING_CLUSTERS_NOT_IMPLEMENTATION_ONTOLOGY",
     "DETERMINISTIC_OR_EXECUTABLE_VERIFIER_FIRST_WHEN_AVAILABLE_AND_CHEAPER_THAN_LEARNED_SCORING",
     "RETRIEVE_THEN_RERANK_FOR_SEMANTIC_RELEVANCE_AND_TOOL_ROUTE_SELECTION",
     "NLI_OR_ENTAILMENT_MODELS_MAY_SCORE_SEMANTIC_SUPPORT_BUT_DO_NOT_BY_THEMSELVES_ESTABLISH_EVIDENCE_SUFFICIENCY",
@@ -33,7 +34,11 @@
         "learned_residual": "SEMANTIC_GOAL_CANDIDATE_RELEVANCE_ONLY_AFTER_HARD_FILTERING"
       },
       "owned_exact_subtransform": "HARD_CONSTRAINT_ADMISSIBILITY",
-      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json"
+      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C2_CANDIDATE_ACTION_UTILITY",
@@ -51,7 +56,11 @@
         "google-deepmind/open_spiel MCTS/PUCT primitives (Apache-2.0)"
       ],
       "owned_exact_subtransform": "EXPECTED_UTILITY_GIVEN_EXPLICIT_PROBABILITIES_UTILITIES_AND_COSTS",
-      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json"
+      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C3_TOOL_ROUTE_SUITABILITY",
@@ -91,7 +100,11 @@
       "learned_route_mean_latency_ms": 2535.918673133339,
       "margin_gate_falsification": "canonical/capabilities/opus55/C3_LEXICAL_MARGIN_GATE_OOS_FALSIFICATION_001.json",
       "head_to_head_evidence": "canonical/capabilities/opus55/C3_ETTIN_VS_SKILLROUTER_SAME_CASES_001_RECONCILIATION.json",
-      "cascade_gate_falsification": "canonical/capabilities/opus55/C3_ETTIN_SKILLROUTER_CASCADE_OOS_FALSIFICATION_001.json"
+      "cascade_gate_falsification": "canonical/capabilities/opus55/C3_ETTIN_SKILLROUTER_CASCADE_OOS_FALSIFICATION_001.json",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C4_HYPOTHESIS_PLAUSIBILITY",
@@ -109,7 +122,11 @@
         "generation_boundary": "HYPOTHESIS_GENERATION_IS_SEPARATE_AND_REQUIRED_WHEN_CANDIDATE_HYPOTHESIS_IS_ABSENT"
       },
       "owned_exact_subtransform": "BAYES_POSTERIOR_GIVEN_EXPLICIT_PRIORS_AND_LIKELIHOODS",
-      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json"
+      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C5_EXPECTED_INFORMATION_GAIN",
@@ -126,7 +143,11 @@
         "emdgroup/baybe Bayesian experimental planning / design of experiments (Apache-2.0)"
       ],
       "owned_exact_subtransform": "EXPECTED_ENTROPY_REDUCTION_GIVEN_EXPLICIT_MODELS",
-      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json"
+      "owned_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C6_ANOMALY_AND_FAILURE_DETECTION",
@@ -136,7 +157,11 @@
       "open_candidate": "AgentDebugX/AgentDebugX@0.5.2",
       "candidate_evidence": "canonical/capabilities/opus55/AGENTDEBUGX_ZERO_LLM_SPENT_SCREEN_001_RECONCILIATION.json",
       "real_spent_evidence": "canonical/capabilities/opus55/AGENTDEBUGX_REAL_SPENT_BRAIN_001_RECONCILIATION.json",
-      "causal_limit": "DO_NOT_INFER_GENERAL_UPSTREAM_ROOT_CAUSE_LOCALIZATION_FROM_C6_PASS"
+      "causal_limit": "DO_NOT_INFER_GENERAL_UPSTREAM_ROOT_CAUSE_LOCALIZATION_FROM_C6_PASS",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C7_ROOT_CAUSE_LIKELIHOOD",
@@ -166,13 +191,21 @@
         "OBSERVATIONAL_CAUSAL_STRUCTURE_DISCOVERY_WHEN_GRAPH_NOT_EXPLICIT"
       ],
       "intervenability_rule": "EXPLICIT_ACTION_API_POLICY_AUTHORITY_ONLY__MISSING_METADATA_RETURNS_UNKNOWN__DO_NOT_INFER_FROM_PASSIVE_TELEMETRY",
-      "intervenability_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json"
+      "intervenability_evidence": "canonical/capabilities/opus55/DETERMINISTIC_DECISION_PRIMITIVES_001.json",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C8_PROGRESS_ESTIMATION",
       "class": "DETERMINISTIC_FIRST",
       "preferred_route": "CANONICAL_SCOREBOARD_AND_OBJECTIVE_DELTA_WHERE_EXPLICIT__SEMANTIC_RESIDUAL_ONLY_FOR_OPEN_ENDED_GOALS",
-      "state": "PARTIALLY_ALREADY_DETERMINISTIC"
+      "state": "PARTIALLY_ALREADY_DETERMINISTIC",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C9_EVIDENCE_SUFFICIENCY",
@@ -181,13 +214,21 @@
       "open_candidates": [],
       "state": "DETERMINISTIC_AUTHORITY_GATES_PREFERRED__GENERIC_NLI_AUTHORITY_ROUTE_FALSIFIED",
       "falsified_candidate": "MoritzLaurer/deberta-v3-base-zeroshot-v1",
-      "evidence": "canonical/capabilities/opus55/C9_DEBERTA_NLI_FRESH_001_RECONCILIATION.json"
+      "evidence": "canonical/capabilities/opus55/C9_DEBERTA_NLI_FRESH_001_RECONCILIATION.json",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     },
     {
       "id": "C10_STOP_CONTINUE_RETRY_ESCALATE",
       "class": "DETERMINISTIC_POLICY_FIRST",
       "preferred_route": "STATE_MACHINE_AND_EXPLICIT_RETRY_STOP_POLICIES_WHERE_AVAILABLE__LEARNED_POLICY_ONLY_FOR_OPEN_ENDED_RESIDUAL",
-      "state": "GENERIC_JEVOS_FALSIFIED"
+      "state": "GENERIC_JEVOS_FALSIFIED",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "behavioral_contract_required_before_new_mechanism_search": true,
+      "interpretation": "DECOMPOSE_TO_MEASURABLE_BEHAVIORAL_LEAVES__RETAIN_NAME_ONLY_FOR_COVERAGE_ACCOUNTING"
     }
   ],
   "open_reuse_frontier": [
@@ -220,7 +261,7 @@
     "TREAT_NLI_ENTAILMENT_AS_COMPLETE_EVIDENCE_SUFFICIENCY",
     "TRAIN_GENERIC_DECISION_MODEL_BEFORE_PRIMITIVE_SPECIFIC_REUSE_SPACE_IS_EXHAUSTED"
   ],
-  "next_required_action": "TEST_AND_INTERNALIZE_EXISTING_OPEN_OBSERVATIONAL_CAUSAL_STRUCTURE_DISCOVERY__THEN_ATTACK_ONLY_SEMANTIC_MODEL_ESTIMATION_AND_GENERATION_RESIDUALS__NO_DUPLICATE_LEARNED_SCORERS_FOR_OWNED_EXACT_SUBTRANSFORMS",
+  "next_required_action": "COMPLETE_BEHAVIORAL_LEAF_CONTRACTS_FOR_ACTIVE_RESIDUALS__VALIDATE_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_ON_SPENT_HELDOUT_FAILURES__NO_FRESH_RANK14_SPEND",
   "capability_credit_delta": 0,
   "latest_probe_results": {
     "c3": {
@@ -254,7 +295,7 @@
     "conclusion": "NO_GENERIC_SMALL_AUTO_ADMIT_JUDGE_IS_CURRENTLY_AUTHORIZED"
   },
   "vagueness_correction_20261001": {
-    "status": "EXECUTED__C1_C2_C4_C5_CONVERTED_TO_TESTABLE_CONTRACTS__ZERO_CAPABILITY_CREDIT",
+    "status": "SUPERSEDED_BY_GLOBAL_BEHAVIORAL_CONTRACT_PURGE__PRIOR_C1_C2_C4_C5_CONTRACTS_RETAINED_ONLY_AS_PARTIAL_LEAF_EVIDENCE",
     "rule": "DO_NOT_BUILD_OR_TRAIN_FOR_A_PRIMITIVE_UNTIL_INPUT_OUTPUT_CONTRACT_AND_DETERMINISTIC_SUBTRACTION_ARE_EXPLICIT",
     "candidate_license_checks": {
       "huggingface/sentence-transformers": "Apache-2.0",
@@ -268,5 +309,13 @@
       "C5_BELIEF_OR_OBSERVATION_MODEL_WHEN_NOT_EXPLICIT"
     ],
     "capability_credit_delta": 0
+  },
+  "semantic_reclassification_20261001": {
+    "status": "EXECUTED__C1_C10_RECLASSIFIED_AS_ACCOUNTING_CLUSTERS__ZERO_CAPABILITY_CREDIT",
+    "law": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+    "schema": "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+    "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "rule": "NO_C1_C10_LABEL_MAY_BE_USED_AS_A_CAUSAL_MECHANISM_TARGET_WITHOUT_A_LEAF_BEHAVIORAL_CONTRACT",
+    "reason": "ABSTRACT_NAMES_HIDE_MULTIPLE_DISTINCT_TRANSFORMS_AND_CAN_CAUSE_EXPENSIVE_FALSE_EQUIVALENCE"
   }
 }
