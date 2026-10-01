@@ -454,10 +454,10 @@
     "evidence_path": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json"
   },
   "prequalification_failure_immunity": {
-    "status": "MANDATORY_BEFORE_RANK21_STAGE_C",
+    "status": "MANDATORY_BEFORE_RANK22_STAGE_C",
     "path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-    "current_verdict": "RANK21_STAGE_A_AND_STAGE_B_PASS__EXACT_SURFACE_AND_SOURCE_BOUNDARY_STAGE_C_GATES_PENDING"
+    "current_verdict": "RANK22_STAGE_A_STAGE_B_LOSSLESS_SOURCE_EXACT_SURFACE_AND_SOURCE_BOUNDARY_PASS__FRESH_LEASE_REISSUED__CARRIER_OPEN_AND_DERIVED_CAN_EXECUTE_PENDING"
   },
   "terminal_closure": {
     "manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
