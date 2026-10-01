@@ -98,8 +98,48 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
             failures.append("PRIOR_EXPOSURE_SEARCH_INCOMPLETE")
         if [k for k in EXPECTED_HIT_FIELDS if k not in search]:
             failures.append("PRIOR_EXPOSURE_SEARCH_FIELDS_MISSING")
-        if any(search.get(k)!=0 for k in EXPECTED_HIT_FIELDS):
-            failures.append("PRIOR_EXPOSURE_SEARCH_NOT_CLEAN")
+        # Raw hits are not automatically contamination. Once a frozen task name is
+        # canonically recorded, later searches legitimately find self-referential
+        # frontier bookkeeping, so every nonzero raw hit must be completely
+        # classified while any disqualifying or unclassified hit fails closed.
+        # This mirrors prequalification_stage_a_generic exactly: two reducers
+        # emitting verdicts for one staged-admission contract must not disagree,
+        # and a blanket "any nonzero hit is contamination" test wrongly refuses
+        # ledgers whose hits are fully classified as non-disqualifying.
+        disqualifying=search.get("disqualifying_hits",{})
+        nondis=search.get("non_disqualifying_hits",[])
+        if not isinstance(disqualifying,dict):
+            failures.append("PRIOR_EXPOSURE_DISQUALIFYING_COUNTS_INVALID")
+            disqualifying={}
+        if not isinstance(nondis,list):
+            failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_CLASSIFICATION_INVALID")
+            nondis=[]
+        classified_counts={k:0 for k in EXPECTED_HIT_FIELDS}
+        for item in nondis:
+            if not isinstance(item,dict):
+                failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID")
+                continue
+            field=item.get("counter_field")
+            if field not in classified_counts or not item.get("classification") or not item.get("evidence"):
+                failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID")
+                continue
+            classified_counts[field]+=1
+        for field in EXPECTED_HIT_FIELDS:
+            raw=search.get(field)
+            if type(raw) is not int or raw<0:
+                failures.append("PRIOR_EXPOSURE_RAW_COUNT_INVALID")
+                continue
+            dis=disqualifying.get(field,0)
+            if type(dis) is not int or dis<0 or dis>raw:
+                failures.append("PRIOR_EXPOSURE_DISQUALIFYING_COUNT_INVALID")
+                continue
+            if dis!=0:
+                failures.append("PRIOR_EXPOSURE_DISQUALIFYING_HIT")
+            if classified_counts.get(field,0)+dis!=raw:
+                failures.append("PRIOR_EXPOSURE_HIT_CLASSIFICATION_INCOMPLETE")
+        # v2 additionally enforces the searched-surface list, which the policy item
+        # COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS mandates and
+        # v1 omits. This is a tightening only: it can never admit what v1 refuses.
         surfaces=search.get("searched_surfaces")
         if not isinstance(surfaces,list) or not set(EXPECTED_SURFACES)<=set(surfaces):
             failures.append("PRIOR_EXPOSURE_SEARCH_SURFACES_INCOMPLETE")

@@ -52,7 +52,9 @@ def test_brain_pr_prior_exposure_fails():
         p.write_text(json.dumps(o))
         out=evaluate(Path(td),LEDGER,TASK,RANK,HASH)
         assert out["pass"] is False
-        assert "PRIOR_EXPOSURE_SEARCH_NOT_CLEAN" in out["failed_predicates"]
+        # v1 replaced the blanket NOT_CLEAN predicate with a classification
+        # model: an unclassified nonzero raw hit is incomplete classification.
+        assert "PRIOR_EXPOSURE_HIT_CLASSIFICATION_INCOMPLETE" in out["failed_predicates"]
 
 def test_missing_exposure_surface_fails():
     with tempfile.TemporaryDirectory() as td:

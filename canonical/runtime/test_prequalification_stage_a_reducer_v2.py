@@ -197,12 +197,138 @@ class StageAReducerTests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
 
     # --- seeded faults: each must be killed by its own named predicate --------
-    def test_nonzero_hit_counter_is_killed(self):
+    def test_unclassified_nonzero_hit_is_killed(self):
         for field in EXPECTED_HIT_FIELDS:
             with self.subTest(field=field):
                 out = self.mutated(lambda l, f=field: self.search(l).__setitem__(f, 1))
                 self.assertFalse(out["pass"])
-                self.assertIn("PRIOR_EXPOSURE_SEARCH_NOT_CLEAN", out["failed_predicates"])
+                self.assertIn(
+                    "PRIOR_EXPOSURE_HIT_CLASSIFICATION_INCOMPLETE", out["failed_predicates"]
+                )
+
+    # --- hit classification (mirrors prequalification_stage_a_generic) --------
+    # A nonzero raw hit is not automatically contamination: once a frozen task
+    # name is canonically recorded, later searches legitimately find
+    # self-referential frontier bookkeeping. Every nonzero hit must be completely
+    # classified, and any disqualifying or unclassified hit fails closed.
+    def classify(self, ledger, field, count=1):
+        search = self.search(ledger)
+        search[field] = count
+        search.setdefault("disqualifying_hits", {})
+        entries = search.setdefault("non_disqualifying_hits", [])
+        for index in range(count):
+            entries.append(
+                {
+                    "counter_field": field,
+                    "classification": "FROZEN_TASK_NAME_FRONTIER_BOOKKEEPING_ONLY",
+                    "evidence": f"brain PR #{index + 1} body explicitly says instruction unread",
+                }
+            )
+
+    def test_fully_classified_nonzero_hit_admits(self):
+        out = self.mutated(lambda l: self.classify(l, "brain_pr_hits", 2))
+        self.assertTrue(out["pass"], out)
+
+    def test_partially_classified_hit_is_killed(self):
+        def fault(ledger):
+            self.classify(ledger, "brain_pr_hits", 1)
+            self.search(ledger)["brain_pr_hits"] = 2
+
+        out = self.mutated(fault)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PRIOR_EXPOSURE_HIT_CLASSIFICATION_INCOMPLETE", out["failed_predicates"]
+        )
+
+    def test_disqualifying_hit_is_killed(self):
+        def fault(ledger):
+            search = self.search(ledger)
+            search["brain_code_hits"] = 1
+            search["disqualifying_hits"] = {"brain_code_hits": 1}
+
+        out = self.mutated(fault)
+        self.assertFalse(out["pass"])
+        self.assertIn("PRIOR_EXPOSURE_DISQUALIFYING_HIT", out["failed_predicates"])
+
+    def test_disqualifying_count_exceeding_raw_is_killed(self):
+        def fault(ledger):
+            search = self.search(ledger)
+            search["brain_pr_hits"] = 1
+            search["disqualifying_hits"] = {"brain_pr_hits": 5}
+
+        out = self.mutated(fault)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PRIOR_EXPOSURE_DISQUALIFYING_COUNT_INVALID", out["failed_predicates"]
+        )
+
+    def test_non_integer_raw_count_is_killed(self):
+        out = self.mutated(
+            lambda l: self.search(l).__setitem__("brain_pr_hits", "0")
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn("PRIOR_EXPOSURE_RAW_COUNT_INVALID", out["failed_predicates"])
+
+    def test_negative_raw_count_is_killed(self):
+        out = self.mutated(lambda l: self.search(l).__setitem__("brain_pr_hits", -1))
+        self.assertFalse(out["pass"])
+        self.assertIn("PRIOR_EXPOSURE_RAW_COUNT_INVALID", out["failed_predicates"])
+
+    def test_classification_item_without_evidence_is_killed(self):
+        def fault(ledger):
+            search = self.search(ledger)
+            search["brain_pr_hits"] = 1
+            search["non_disqualifying_hits"] = [
+                {"counter_field": "brain_pr_hits", "classification": "BOOKKEEPING_ONLY"}
+            ]
+
+        out = self.mutated(fault)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID", out["failed_predicates"]
+        )
+
+    def test_classification_for_unknown_field_is_killed(self):
+        def fault(ledger):
+            search = self.search(ledger)
+            search["non_disqualifying_hits"] = [
+                {
+                    "counter_field": "not_a_real_counter",
+                    "classification": "BOOKKEEPING_ONLY",
+                    "evidence": "brain PR #1",
+                }
+            ]
+
+        out = self.mutated(fault)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID", out["failed_predicates"]
+        )
+
+    def test_malformed_disqualifying_counts_are_killed(self):
+        out = self.mutated(
+            lambda l: self.search(l).__setitem__("disqualifying_hits", "not-a-dict")
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PRIOR_EXPOSURE_DISQUALIFYING_COUNTS_INVALID", out["failed_predicates"]
+        )
+
+    def test_malformed_classification_list_is_killed(self):
+        out = self.mutated(
+            lambda l: self.search(l).__setitem__("non_disqualifying_hits", "not-a-list")
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PRIOR_EXPOSURE_NONDISQUALIFYING_CLASSIFICATION_INVALID",
+            out["failed_predicates"],
+        )
+
+    def test_zero_hits_need_no_classification_block(self):
+        # Backward compatibility: a ledger predating the classification keys is
+        # still admissible when every raw counter is zero.
+        out = evaluate(self.root, task=TASK, rank=RANK, ledger_path=LEDGER)
+        self.assertTrue(out["pass"], out)
 
     def test_incomplete_search_flag_is_killed(self):
         out = self.mutated(lambda l: self.search(l).__setitem__("search_complete", False))
@@ -218,7 +344,7 @@ class StageAReducerTests(unittest.TestCase):
                     "PRIOR_EXPOSURE_SEARCH_FIELDS_MISSING", out["failed_predicates"]
                 )
                 # A missing counter must never be read as a zero counter.
-                self.assertIn("PRIOR_EXPOSURE_SEARCH_NOT_CLEAN", out["failed_predicates"])
+                self.assertIn("PRIOR_EXPOSURE_RAW_COUNT_INVALID", out["failed_predicates"])
 
     def test_missing_surface_is_killed(self):
         for surface in EXPECTED_SURFACES:
@@ -302,6 +428,19 @@ class StageAReducerTests(unittest.TestCase):
     def test_recorded_rank19_admission_artifact_is_reproducible(self):
         self.assert_reproduces_recorded_admission(
             "satb-audio-transcription", 19, RANK19_LEDGER, RANK19_ADMISSION
+        )
+
+    def test_recorded_rank20_admission_artifact_is_reproducible(self):
+        # rank20's ledger carries nonzero raw hits that are fully classified as
+        # non-disqualifying frontier bookkeeping, so it is the live case that a
+        # blanket "any nonzero hit is contamination" test wrongly refuses.
+        self.assert_reproduces_recorded_admission(
+            "vba-userform-port",
+            20,
+            "canonical/capabilities/opus55/"
+            "VBA_USERFORM_PORT_RANK20_CONTAMINATION_LEDGER_V1.json",
+            "canonical/capabilities/opus55/"
+            "VBA_USERFORM_PORT_RANK20_STAGE_A_ADMISSION_V1.json",
         )
 
     def test_absent_budget_guard_evidence_fails_closed(self):
