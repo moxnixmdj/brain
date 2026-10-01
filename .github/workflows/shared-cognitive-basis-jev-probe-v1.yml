@@ -15,7 +15,7 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - name: Oracle mechanics self-test
@@ -24,17 +24,53 @@ jobs:
             --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
             --oracle-self-test \
             --out /tmp/oracle.json
-      - name: Live zero-cost Simple-JEV probe
+
+      - name: Install local Simple-JEV
+        run: |
+          git clone --depth 1 https://github.com/featherless-ai/simple-jev.git /tmp/simple-jev
+          python -m pip install -e /tmp/simple-jev/hf-server
+
+      - name: Start local decision server
+        run: |
+          nohup simple-jev \
+            --model Qwen/Qwen3.5-0.8B \
+            --device cpu \
+            --dtype float32 \
+            --classifier-prompt-policy baseline \
+            --max-model-len 2048 \
+            --max-batch-size 4 \
+            --max-batch-tokens 2048 \
+            > /tmp/simple-jev.log 2>&1 &
+          echo $! > /tmp/simple-jev.pid
+          for i in $(seq 1 180); do
+            if curl --fail --silent http://127.0.0.1:8000/health >/tmp/health.json; then
+              cat /tmp/health.json
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/simple-jev.log
+          exit 1
+
+      - name: Live local shared-decision probe
         run: |
           python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
             --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
-            --endpoint https://simple-jev-demo-api.featherless.ai \
-            --model featherless-ai/gemma-4-26B-A4B-classifier \
+            --endpoint http://127.0.0.1:8000 \
+            --model Qwen/Qwen3.5-0.8B \
+            --delay 0 \
             --out cognitive_basis_probe_result_v1.json
+
+      - name: Preserve server log
+        if: always()
+        run: cp /tmp/simple-jev.log simple_jev_server_v1.log 2>/dev/null || true
+
       - name: Upload diagnostic evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cognitive-basis-probe-v1
-          path: cognitive_basis_probe_result_v1.json
+          path: |
+            cognitive_basis_probe_result_v1.json
+            simple_jev_server_v1.log
           if-no-files-found: ignore
