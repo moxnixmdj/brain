@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_PER_ACTION_CANONICAL_LEASE_REVALIDATION_VERIFICATION_V1",
+  "date": "2026-10-01",
+  "status": "VERIFIED_AND_MERGED__RANK15_REVOCATION_ESCAPE_CLASS_BLOCKED",
+  "root_failure": "SESSION_START_LEASE_WAS_CACHED_AND_REMAINED_SUFFICIENT_AFTER_CANONICAL_REVOCATION",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 331,
+    "merge_commit": "06486cd04c6a0940f9445bf41a943c7359398fc3",
+    "verification_workflow_run_id": 36914358764,
+    "verification_job_id": 110544554570,
+    "verification_tests_run": 9,
+    "verification_tests_passed": 9,
+    "verification_tests_failed": 0,
+    "execution_guard_regression_run_id": 36914358752,
+    "execution_guard_regression_conclusion": "success"
+  },
+  "enforced_invariants": [
+    "SESSION_START_LEASE_DOES_NOT_AUTHORIZE_BUILDER_BURSTS_BY_ITSELF",
+    "EACH_BUILDER_BURST_REQUIRES_FRESH_SINGLE_USE_LEASE_REVALIDATION",
+    "REVALIDATION_BINDS_SESSION_TASK_LEASE_PATH_SAMPLE_RANK_CANONICAL_COMMIT_AND_EXACT_BURST",
+    "TERMINAL_SUBMISSION_REQUIRES_FRESH_TERMINAL_SCOPE_REVALIDATION",
+    "CLOSED_RUNNER_PR_FAILS_CLOSED",
+    "BURST_REVALIDATION_IS_CONSUMED_BEFORE_EXECUTION"
+  ],
+  "rank15_causal_rescue": "A post-revocation burst like PR325 burst 2 would now fail with PER_ACTION_CANONICAL_LEASE_REVALIDATION_REQUIRED unless newly reauthorized after the canonical revocation.",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
