@@ -987,26 +987,27 @@
     }
   ],
   "last_real_output_event": {
-    "event_id": "VBA_USERFORM_PORT_RANK20_EXTERNAL_SEARCH_CONTAMINATION_20261001",
+    "event_id": "FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_20261001",
     "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "status": "CONTAMINATED_PREEXECUTION__STAGE_C_LEASE_REVOKED__ZERO_BUILDER_BURSTS__ZERO_TERMINAL_VERIFIER_RUNS__ZERO_CREDIT__NO_REPLAY",
-    "evidence_path": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_CONTAMINATION_LEDGER_V1.json",
+    "status": "CONTAMINATED_POST_STAGE_B__EXTERNAL_DISCOVERY_RETURNED_TASK_SPECIFIC_VERIFIER_DERIVED_CONTENT__STAGE_C_FORBIDDEN__ZERO_CREDIT__NO_REPLAY",
+    "evidence_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
     "capability_credit_delta": 0,
-    "progress_credit": "GENERIC_SOURCE_BOUNDARY_PROMOTION_GAP_LOCALIZED_AND_SYSTEMICALLY_CLOSED",
-    "residual_gaps": [],
+    "progress_credit": "POST_EXPOSURE_DISCOVERY_SEARCH_COLLISION_LOCALIZED_AND_CANONICALLY_HARDENED",
+    "execution_count_used": 0,
+    "terminal_verifier_count_used": 0,
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK21_STAGE_A_INDEPENDENT_PASS__STAGE_B_EXPOSURE_ONLY_AUTHORIZED",
-    "blocker": "RANK21_STAGE_B_TASK_SPECIFIC_PLAN_NOT_YET_COMPILED_AND_FALSIFIED",
+    "status": "RANK21_CONTAMINATED_POST_STAGE_B__NO_REPLAY",
+    "blocker": "RANK22_STAGE_A_PREEXPOSURE_ADMISSION_NOT_YET_ESTABLISHED",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_STAGE_A_ADMISSION_V1.json",
-    "next_clean_rank": 21,
-    "next_clean_task": "foodstuff-beta-activity",
+    "evidence_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
+    "next_clean_rank": 22,
+    "next_clean_task": "freecad-spring-clip",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "EXPOSE_RANK21_OFFICIAL_INSTRUCTION_ONCE_UNDER_STAGE_B_ALLOWLIST__NO_TASK_COMMAND__COMPILE_REQUIREMENTS_ACCEPTANCE_FEASIBILITY_AND_SOURCE_BOUNDARY_PREFLIGHT",
+  "next_required_action": "DERIVE_RANK22_IDENTITY_FROM_FROZEN_MANIFEST__RUN_STAGE_A_ONLY__NO_INSTRUCTION_READ",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1097,9 +1098,9 @@
     "replay_allowed": false
   },
   "next_clean_task": {
-    "rank": 21,
-    "task": "foodstuff-beta-activity",
-    "state": "STAGE_A_INDEPENDENT_PASS__STAGE_B_EXPOSURE_ONLY_AUTHORIZED"
+    "rank": 22,
+    "task": "freecad-spring-clip",
+    "state": "STAGE_A_PREEXPOSURE_REQUIRED__INSTRUCTION_UNREAD"
   },
   "rank19_stage_c": {
     "status": "SPENT_EXECUTION_SURFACE_FAILURE__NO_TASK_AUDIO_ANALYSIS__NO_OUTPUT__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
@@ -1133,5 +1134,12 @@
     "status": "VERIFIED_AND_MERGED",
     "evidence": "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json",
     "runner_merge_commit": "a902df6b5e8393cf8aff563f5394dc40a0b314d0"
+  },
+  "rank21_post_stage_b_contamination_20261001": {
+    "status": "CONTAMINATED_POST_STAGE_B__EXTERNAL_DISCOVERY_RETURNED_TASK_SPECIFIC_VERIFIER_DERIVED_CONTENT__STAGE_C_FORBIDDEN__ZERO_CREDIT__NO_REPLAY",
+    "evidence": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
+    "execution_count_used": 0,
+    "terminal_verifier_count_used": 0,
+    "replay_allowed": false
   }
 }
