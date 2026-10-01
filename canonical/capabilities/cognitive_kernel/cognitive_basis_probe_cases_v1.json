@@ -1,0 +1,132 @@
+[
+  {
+    "id": "debug-01",
+    "primitive": "next_action_selection",
+    "domain": "debugging",
+    "state": "A service starts returning 500 after a deploy. Logs show KeyError: DATABASE_URL. The deploy changed environment configuration; application code is unchanged.",
+    "instructions": "Choose the next action with the highest information gain and lowest unnecessary mutation.",
+    "criteria": {
+      "inspect_env": "Compare deployed environment variables with the last known-good deployment.",
+      "rewrite_db": "Replace the database implementation.",
+      "restart_randomly": "Repeatedly restart the service."
+    },
+    "expected": "inspect_env"
+  },
+  {
+    "id": "coding-01",
+    "primitive": "verification_judgment",
+    "domain": "coding",
+    "state": "A patch changes parsing behavior. Unit tests for unrelated modules pass, but no parser tests or reproducer for the reported bug have been run.",
+    "instructions": "Decide the correct verification state.",
+    "criteria": {
+      "done": "Declare the patch verified.",
+      "target_test": "Run the bug reproducer and parser-specific tests before promotion.",
+      "rewrite": "Rewrite the patch from scratch without testing."
+    },
+    "expected": "target_test"
+  },
+  {
+    "id": "browser-01",
+    "primitive": "tool_selection",
+    "domain": "browser",
+    "state": "The task is to find the current price of a product on the vendor's live website. A cached note from six months ago contains an old price.",
+    "instructions": "Choose the appropriate information source.",
+    "criteria": {
+      "live_site": "Inspect the vendor's current page.",
+      "cached_note": "Use only the six-month-old cached note.",
+      "guess": "Estimate from similar products."
+    },
+    "expected": "live_site"
+  },
+  {
+    "id": "research-01",
+    "primitive": "evidence_sufficiency",
+    "domain": "research",
+    "state": "A strong claim is supported by one company blog post. Two independent primary sources that could verify the claim have not been checked.",
+    "instructions": "Choose whether evidence is sufficient for a high-confidence conclusion.",
+    "criteria": {
+      "sufficient": "Treat the claim as established.",
+      "verify_more": "Check independent primary evidence before high-confidence promotion.",
+      "discard": "Assume the claim is false."
+    },
+    "expected": "verify_more"
+  },
+  {
+    "id": "scope-01",
+    "primitive": "scope_judgment",
+    "domain": "instruction_following",
+    "state": "User asks to edit one configuration file and explicitly says not to modify dependencies. A dependency upgrade could make the edit easier.",
+    "instructions": "Choose the action that respects scope.",
+    "criteria": {
+      "edit_only": "Edit only the requested configuration file.",
+      "upgrade": "Upgrade dependencies too.",
+      "refactor": "Refactor adjacent modules while there."
+    },
+    "expected": "edit_only"
+  },
+  {
+    "id": "debug-02",
+    "primitive": "root_cause_ranking",
+    "domain": "debugging",
+    "state": "A deterministic test fails only when system locale is fr_FR. Expected decimal text uses a dot; actual output uses a comma. The same binary passes under en_US.",
+    "instructions": "Choose the most likely root cause.",
+    "criteria": {
+      "locale_format": "Locale-sensitive number formatting.",
+      "memory_corruption": "Random memory corruption.",
+      "network": "Network packet loss."
+    },
+    "expected": "locale_format"
+  },
+  {
+    "id": "research-02",
+    "primitive": "next_action_selection",
+    "domain": "research",
+    "state": "Two sources disagree on a software library's current API. One is a 2024 tutorial and one is the library's 2026 official documentation.",
+    "instructions": "Choose the next action.",
+    "criteria": {
+      "official_docs": "Use the current official documentation as the authoritative starting point.",
+      "old_tutorial": "Prefer the older tutorial.",
+      "average": "Average the two descriptions."
+    },
+    "expected": "official_docs"
+  },
+  {
+    "id": "coding-02",
+    "primitive": "stop_continue",
+    "domain": "coding",
+    "state": "The target test passes once, but a concurrency bug was reported as intermittent and no repeated or stress run has been performed.",
+    "instructions": "Decide whether to stop or continue verification.",
+    "criteria": {
+      "stop": "Stop and declare deterministic success.",
+      "stress": "Continue with repeated/stress verification.",
+      "ignore": "Ignore the original concurrency report."
+    },
+    "expected": "stress"
+  },
+  {
+    "id": "tool-01",
+    "primitive": "tool_selection",
+    "domain": "tool_use",
+    "state": "Need the exact result of a symbolic integral. A deterministic computer algebra system is available, while a language model can estimate it from memory.",
+    "instructions": "Choose the best tool.",
+    "criteria": {
+      "cas": "Use the computer algebra system.",
+      "memory": "Use unaided language-model memory.",
+      "vote": "Ask several language models and take majority vote."
+    },
+    "expected": "cas"
+  },
+  {
+    "id": "agency-01",
+    "primitive": "escalation_judgment",
+    "domain": "agency",
+    "state": "All currently proposed actions have already failed twice for the same reason and confidence in their ranking is low.",
+    "instructions": "Choose the next control action.",
+    "criteria": {
+      "regenerate": "Escalate to generation of new hypotheses/actions.",
+      "retry": "Repeat the highest-ranked failed action indefinitely.",
+      "finish": "Declare success."
+    },
+    "expected": "regenerate"
+  }
+]
