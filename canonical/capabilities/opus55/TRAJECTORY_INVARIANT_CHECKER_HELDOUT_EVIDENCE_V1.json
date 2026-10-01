@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_INVARIANT_CHECKER_HELDOUT_EVIDENCE_V1",
+  "status": "HELDOUT_REAL_TRACE_PASS__NARROW_DETERMINISTIC_COMPONENT_ONLY__ZERO_FAMILY_CREDIT",
+  "date": "2026-10-01",
+  "frozen_candidate_commit": "8a99cde574087997b3d1ce2c03b63fec67ac6c50",
+  "heldout_set_commit": "c18a5d4cd17bf98b852952f089dcf3485cdfb2f6",
+  "candidate": "canonical/runtime/trajectory_invariant_checker.py",
+  "tests": [
+    {
+      "trace": "runner_pr_293",
+      "independent_disposition": "CONTAMINATED__INELIGIBLE",
+      "generic_invariant": {
+        "kind": "must_not_contain",
+        "pattern_class": "TASK_SPECIFIC_SOLUTION_MATERIAL"
+      },
+      "observed_result": "VIOLATION_DETECTED",
+      "expected_result": "VIOLATION_DETECTED",
+      "pass": true
+    },
+    {
+      "trace": "runner_pr_289",
+      "independent_disposition": "TRANSPORT_INADMISSIBLE__MISSING_DECLARED_RESULT_ARTIFACT",
+      "generic_invariant": {
+        "kind": "required_after",
+        "trigger_class": "TERMINAL_SUBMISSION_AUTHORIZED",
+        "required_class": "EMPTY_MISSING_ARTIFACTS"
+      },
+      "observed_result": "VIOLATION_DETECTED",
+      "expected_result": "VIOLATION_DETECTED",
+      "pass": true
+    },
+    {
+      "trace": "runner_pr_283",
+      "independent_disposition": "GENUINE_TASK_COGNITION_FAILURE__ARTIFACT_DELIVERY_PRESENT",
+      "generic_invariant": {
+        "kind": "required_after",
+        "trigger_class": "TERMINAL_SUBMISSION_AUTHORIZED",
+        "required_class": "EMPTY_MISSING_ARTIFACTS"
+      },
+      "observed_result": "NO_MECHANICAL_VIOLATION",
+      "expected_result": "NO_MECHANICAL_VIOLATION",
+      "pass": true
+    }
+  ],
+  "aggregate": {
+    "heldout_traces": 3,
+    "correct_narrow_classifications": 3,
+    "mechanical_violation_detections": 2,
+    "genuine_cognition_false_positive_count": 0,
+    "pass": true
+  },
+  "causal_scope": {
+    "owned_now": [
+      "TRAJECTORY_NORMALIZATION_FOR_SUPPORTED_EVENT_SHAPES",
+      "EXPLICIT_MACHINE_CHECKABLE_INVARIANT_EVALUATION_FOR_SUPPORTED_KINDS",
+      "MECHANICAL_POLICY_OR_TRANSPORT_VIOLATION_LOCALIZATION_TO_FIRST_MATCH"
+    ],
+    "still_unresolved": [
+      "INVARIANT_SYNTHESIS",
+      "AMBIGUOUS_SEMANTIC_JUDGMENT",
+      "GENERAL_ROOT_CAUSE_REASONING",
+      "WHOLE_SELF_VERIFICATION_DEBUGGING_RECOVERY_FAMILY"
+    ]
+  },
+  "donor_independence": {
+    "runtime_requires_AgentRx": false,
+    "implementation_is_brain_owned": true,
+    "donor_role": "MECHANISM_DECOMPOSITION_REFERENCE_ONLY"
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
