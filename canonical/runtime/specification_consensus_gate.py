@@ -17,15 +17,65 @@ from typing import Any
 
 
 def source_sentences(text: str) -> list[dict[str, Any]]:
-    parts=[]
-    for m in re.finditer(r"[^.!?\n]+(?:[.!?]+|$)", text):
-        raw=m.group(0)
-        stripped=raw.strip()
+    """Return stable source units without splitting decimals or dotted code tokens.
+
+    Units are sentence-like outside fenced code blocks. Fenced blocks are kept
+    intact as one unit so schemas/examples can be accounted for explicitly.
+    """
+    parts: list[dict[str, Any]] = []
+
+    def emit(start: int, end: int) -> None:
+        raw = text[start:end]
+        stripped = raw.strip()
         if not stripped:
+            return
+        left = start + len(raw) - len(raw.lstrip())
+        right = left + len(stripped)
+        parts.append({"id": f"S{len(parts)+1}", "start": left, "end": right, "text": stripped})
+
+    start = 0
+    i = 0
+    in_inline = False
+    in_fence = False
+    while i < len(text):
+        if text.startswith("~~~", i) or text.startswith("```", i):
+            marker = text[i:i+3]
+            in_fence = not in_fence
+            i += len(marker)
             continue
-        start=m.start()+len(raw)-len(raw.lstrip())
-        end=start+len(stripped)
-        parts.append({"id":f"S{len(parts)+1}","start":start,"end":end,"text":stripped})
+        ch = text[i]
+        if ch == "`" and not in_fence:
+            in_inline = not in_inline
+            i += 1
+            continue
+        if in_inline or in_fence:
+            i += 1
+            continue
+
+        if text.startswith("\n\n", i):
+            emit(start, i)
+            while i < len(text) and text[i] == "\n":
+                i += 1
+            start = i
+            continue
+
+        if ch in ".!?":
+            if ch == "." and i > 0 and i + 1 < len(text) and text[i-1].isdigit() and text[i+1].isdigit():
+                i += 1
+                continue
+            tail = text[max(start, i-4):i+1].lower()
+            if ch == "." and (tail.endswith("i.e.") or tail.endswith("e.g.")):
+                i += 1
+                continue
+            j = i + 1
+            if j < len(text) and not text[j].isspace():
+                i += 1
+                continue
+            emit(start, i + 1)
+            start = i + 1
+        i += 1
+
+    emit(start, len(text))
     return parts
 
 
