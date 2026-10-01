@@ -6,10 +6,19 @@
     "M0A": {
       "brain_routes": [
         "canonical/runtime/bound_capabilities/broad_objective_decompose.py",
-        "canonical/runtime/source_contract_compiler.py"
+        "canonical/runtime/source_contract_compiler.py",
+        "canonical/runtime/bounded_semantic_decomposer.py"
       ],
-      "conclusion": "BOUNDED_DECOMPOSITION_AND_CONSENSUS_GATES_EXIST__ARBITRARY_SOURCE_SEMANTIC_GENERATION_NOT_OWNED",
-      "next": "DECOMPOSE_BY_FROZEN_SOURCE_SURFACE_AND_REUSE_DETERMINISTIC_PARSERS"
+      "conclusion": "BOUNDED_SINGLE_OBLIGATION_LEXICAL_SUBSET_NOW_VERIFIED_BRAIN_OWNED__ARBITRARY_SOURCE_SEMANTIC_GENERATION_STILL_NOT_OWNED",
+      "next": "SEARCH_EXISTING_PERMISSIVE_DETERMINISTIC_OR_WHITE_BOX_ROUTES_FOR_COMPOUND_AND_CONTEXT_DEPENDENT_SOURCE_SURFACES__DO_NOT_SPEND_UNTOUCHED_TASKS",
+      "verification": "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
+      "remaining": [
+        "COMPOUND_NATURAL_LANGUAGE_OBLIGATION_DECOMPOSITION",
+        "MULTI_CLASS_OR_CONTEXT_DEPENDENT_SEMANTICS",
+        "IMPLICIT_REQUIREMENTS",
+        "LONG_RANGE_CROSS_SENTENCE_SEMANTICS",
+        "ARBITRARY_SOURCE_SEMANTIC_GENERATION"
+      ]
     },
     "M0B": {
       "brain_routes": [
