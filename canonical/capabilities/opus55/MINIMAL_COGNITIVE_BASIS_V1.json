@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_MINIMAL_COGNITIVE_BASIS_V1",
-  "status": "ACTIVE_HYPOTHESIS_FOR_FALSIFICATION__ZERO_CAPABILITY_CREDIT",
+  "status": "ACTIVE_BEHAVIORAL_DECOMPOSITION_HYPOTHESIS__C1_C10_NONONTOLOGICAL__ZERO_CAPABILITY_CREDIT",
   "created_utc": "2026-10-01",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "FIND_THE_SMALLEST_SHARED_LEARNED_DECISION_BASIS_THAT_CAUSALLY_EXPLAINS_AND_IMPROVES_THE_17_UNFINISHED_CAPABILITY_FAMILIES",
@@ -13,43 +13,73 @@
   "candidate_shared_decision_primitives": [
     {
       "id": "C1_RELEVANCE_AND_GOAL_ALIGNMENT",
-      "pointwise_question": "Given the current state and goal, is this candidate materially relevant to progress?"
+      "pointwise_question": "Given the current state and goal, is this candidate materially relevant to progress?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C2_CANDIDATE_ACTION_UTILITY",
-      "pointwise_question": "Given the current state and goal, is executing this candidate action high expected utility relative to alternatives?"
+      "pointwise_question": "Given the current state and goal, is executing this candidate action high expected utility relative to alternatives?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C3_TOOL_ROUTE_SUITABILITY",
-      "pointwise_question": "Is this tool, route, or mechanism suitable for the current subproblem under the active constraints?"
+      "pointwise_question": "Is this tool, route, or mechanism suitable for the current subproblem under the active constraints?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C4_HYPOTHESIS_PLAUSIBILITY",
-      "pointwise_question": "Given current evidence, is this candidate explanation or hypothesis plausible enough to test next?"
+      "pointwise_question": "Given current evidence, is this candidate explanation or hypothesis plausible enough to test next?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C5_EXPECTED_INFORMATION_GAIN",
-      "pointwise_question": "Will testing or observing this candidate materially reduce uncertainty about the current blocker?"
+      "pointwise_question": "Will testing or observing this candidate materially reduce uncertainty about the current blocker?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C6_ANOMALY_AND_FAILURE_DETECTION",
-      "pointwise_question": "Does the current observation indicate a material failure, inconsistency, or unexpected state?"
+      "pointwise_question": "Does the current observation indicate a material failure, inconsistency, or unexpected state?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C7_ROOT_CAUSE_LIKELIHOOD",
-      "pointwise_question": "Is this candidate cause a likely explanation of the observed failure or gap?"
+      "pointwise_question": "Is this candidate cause a likely explanation of the observed failure or gap?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C8_PROGRESS_ESTIMATION",
-      "pointwise_question": "Did the latest action materially reduce distance to the goal rather than merely change state?"
+      "pointwise_question": "Did the latest action materially reduce distance to the goal rather than merely change state?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C9_EVIDENCE_SUFFICIENCY",
-      "pointwise_question": "Is the current evidence sufficient to support the candidate conclusion or promotion under the active standard?"
+      "pointwise_question": "Is the current evidence sufficient to support the candidate conclusion or promotion under the active standard?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     },
     {
       "id": "C10_STOP_CONTINUE_RETRY_ESCALATE",
-      "pointwise_question": "Given state, confidence, progress, and remaining options, is this candidate control decision appropriate now?"
+      "pointwise_question": "Given state, confidence, progress, and remaining options, is this candidate control decision appropriate now?",
+      "semantic_class": "ACCOUNTING_LABEL",
+      "ontology_authority": false,
+      "pointwise_question_role": "HEURISTIC_DECOMPOSITION_PROMPT_ONLY__NOT_A_BEHAVIORAL_CONTRACT"
     }
   ],
   "candidate_reuse_routes": [
@@ -83,7 +113,9 @@
       "CONFIDENCE"
     ],
     "ranking": "SCORE_EACH_CANDIDATE_THEN_RANK",
-    "escalation": "LOW_CONFIDENCE_OR_ALL_CANDIDATES_BAD__ESCALATE_TO_GENERATOR"
+    "escalation": "LOW_CONFIDENCE_OR_ALL_CANDIDATES_BAD__ESCALATE_TO_GENERATOR",
+    "status": "HISTORICAL_HYPOTHESIS_ONLY__GENERIC_SHARED_POINTWISE_SCORER_FALSIFIED__NOT_DEFAULT_INTERFACE",
+    "authority": false
   },
   "falsification_gates": [
     "CROSS_DOMAIN_HELDOUT_TRANSFER",
@@ -95,6 +127,7 @@
     "NO_PROMOTION_FROM_TEACHER_AGREEMENT_ALONE"
   ],
   "stop_conditions": [
+    "UNCONTRACTED_TERM__STOP_MECHANISM_SEARCH_AND_DECOMPOSE_TO_OBSERVABLE_BEHAVIOR",
     "NO_TERMINAL_TASK_SUCCESS_GAIN__DO_NOT_SCALE",
     "DETERMINISTIC_SOLUTION_EXISTS__DELETE_LEARNED_DEPENDENCY",
     "EXISTING_OPEN_MECHANISM_MEETS_GATE__DO_NOT_TRAIN_DUPLICATE",
@@ -113,5 +146,11 @@
       "C7_INTERVENABILITY_FROM_EXPLICIT_EXECUTION_AUTHORITY"
     ],
     "rule": "DO_NOT_USE_LEARNED_SCORER_FOR_AN_OWNED_EXACT_SUBTRANSFORM__MISSING_AUTHORITY_OR_MODEL_IS_UNKNOWN_NOT_PERMISSION_TO_INFER"
+  },
+  "semantic_reclassification_20261001": {
+    "law": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+    "conclusion": "C1_C10_NAMES_DO_NOT_IDENTIFY_UNIQUE_CAUSAL_PRIMITIVES__THEY_CLUSTER_MULTIPLE_POSSIBLE_BEHAVIORS",
+    "implementation_rule": "SPLIT_EACH_CLUSTER_TO_COMPLETE_BEHAVIORAL_LEAF_CONTRACTS_BEFORE_MECHANISM_SEARCH",
+    "retained_value": "COVERAGE_BOOKKEEPING_AND_QUESTION_GENERATION_ONLY"
   }
 }
