@@ -32,6 +32,8 @@ class ExecutorBrokerTests(unittest.TestCase):
             "canonical_generation":pointer["canonical_generation"],
             "dependency_inventory_complete":True,
             "material_world_state_dependencies_complete":True,
+      "information_boundary_complete":True,
+      "information_policy":{"mode":"OPEN_DISCOVERY","allowed_exact_sources":[],"allowed_external_tool_kinds":[]},
             "unknown_material_dependencies":[],
             "stale_authority_absent":True,
             "valid_proof_action_priority":True,
