@@ -772,10 +772,12 @@ def enforce_active_target_record_consistency(hierarchy,target):
         return
     if str(target.get("capability_id") or "")!=target_id:
         fail("TARGET_RECORD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
-    if str(target.get("residual_gap") or "")!=str(hierarchy.get("current_parent_blocker") or ""):
-        fail("TARGET_RECORD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
-    if str(target.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-        fail("TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH")
+    atomic_blocker=target.get("current_atomic_blocker")
+    atomic_next=target.get("current_atomic_next_action")
+    if str(atomic_blocker or "")!=str(hierarchy.get("current_parent_blocker") or ""):
+        fail("TARGET_RECORD_HIERARCHY_ATOMIC_BLOCKER_MISMATCH")
+    if str(atomic_next or "")!=str(hierarchy.get("next_required_action_class") or ""):
+        fail("TARGET_RECORD_HIERARCHY_ATOMIC_NEXT_ACTION_MISMATCH")
 
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:
