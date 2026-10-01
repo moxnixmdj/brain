@@ -131,6 +131,28 @@
       ],
       "evidence_basis": "atomic map explicitly names permissive white-box donor search as next action",
       "exact_cost_known": false
+    },
+    {
+      "id": "O_SPEC_INTENT_FORMALIZATION_DIFFERENTIAL",
+      "covers": [
+        "D_SPEC_RAW_SOURCE_TO_REQUIREMENTS"
+      ],
+      "evidence_basis": "microsoft/intent-formalization is a public MIT repository of artifacts for translating natural-language intent to formal declarative specifications; use as specimen/differential only, zero ownership credit until donor-independent mechanism is isolated",
+      "donor": "microsoft/intent-formalization",
+      "license": "MIT",
+      "license_blob": "9e841e7a26e4eb057b24511e7b92d42b257a80e5",
+      "exact_cost_known": false
+    },
+    {
+      "id": "O_SPEC_NL2SPEC_AMBIGUITY_DIFFERENTIAL",
+      "covers": [
+        "D_SPEC_ALTERNATIVE_INTERPRETATIONS"
+      ],
+      "evidence_basis": "realChrisHahn2/nl2spec is MIT and explicitly targets unstructured natural-language to temporal-logic formalization with ambiguity detection/resolution; use only as white-box specimen/differential",
+      "donor": "realChrisHahn2/nl2spec",
+      "license": "MIT",
+      "license_blob": "08d0bb4541a4484cd19b48f12d035633b93579af",
+      "exact_cost_known": false
     }
   ],
   "uncovered_distinctions": [
@@ -138,15 +160,13 @@
     "D_B_VISION_DENSE_DOC_RESIDUAL",
     "D_C_GENERAL_MULTI_TOOL_COMPOSITION",
     "D_D_UNKNOWN_DOMAIN_LEARNED_RESIDUAL",
-    "D_SPEC_RAW_SOURCE_TO_REQUIREMENTS",
     "D_SPEC_GENERAL_NAMED_METHOD_RULE_SET",
-    "D_SPEC_ALTERNATIVE_INTERPRETATIONS",
     "D_CAUSE_GENERATION_NON_TELEMETRY"
   ],
   "exact_cut_blockers": [
-    "CANDIDATE_OBSERVATION_COVERAGE_IS_INCOMPLETE_FOR_EIGHT_TERMINAL_DISTINCTIONS",
+    "CANDIDATE_OBSERVATION_COVERAGE_IS_INCOMPLETE_FOR_SIX_TERMINAL_DISTINCTIONS",
     "LAW_REQUIRES_WALL_CLOCK_AWARE_COST_ORDERING_BUT_EVIDENCED_COMPARABLE_COSTS_ARE_NOT_YET_BOUND",
-    "THEREFORE_RUNNING_MINIMUM_REALITY_CUT_PY_NOW_COULD_NOT_TRUTHFULLY CLAIM_THE_GLOBAL_EXACT_MINIMUM"
+    "THEREFORE_RUNNING_MINIMUM_REALITY_CUT_PY_NOW_COULD_NOT_TRUTHFULLY_CLAIM_THE_GLOBAL_EXACT_MINIMUM"
   ],
   "next_required_action": [
     "SATURATE_EXISTING_BRAIN_AND_OPEN_SOURCE_EVIDENCE_FOR_THE_EIGHT_UNCOVERED_DISTINCTIONS",
