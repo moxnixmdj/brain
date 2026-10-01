@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-WAL-RECOVERY-TB4-PASS-20261001-V1",
+  "status": "PROPOSED_CURRENT_BASE__VERIFIED_REAL_TASK_RECONCILIATION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a032ad73572edd42889387018281c2be765687c1",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+  "expected_parent_frontier_change": "RECORD_WAL_REWARD_1_AS_VERIFIED_REAL_TASK__KEEP_ZERO_OPUS_CREDIT__REPLACE_NO_VERIFICATION_BLOCKER_WITH_STAGE1_BREADTH_SCORE_BLOCKER",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "WAL pass evidence is canonical, cross-surface frontier points to stage-1 breadth/score, counters add exactly one verified real task and zero capability credit, trusted guard passes.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__NO_OPAQUE_TARGET_CAPABILITY_CREDIT",
+    "underlying_capability_invention": "FORBIDDEN",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__NO_RUNTIME_TARGET_CAPABILITY_CREDIT"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-10-01_WAL_RECOVERY_TB4_PASS_RECONCILIATION_V1.json"
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PASS_CONFIGURATION_EXISTS",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_FOR_COMPOSITION",
+    "GENERAL_SUBSTRATE_TEST": "PASS_FOR_VERIFIED_TASK_EXECUTION",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_FOR_CONFIGURED_ROUTE",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "ONE_DISTINCT_FRESH_TASK_PASS__BENCHMARK_LEVEL_STAGE1_SCORE_PENDING",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_WHOLE_FAMILY_PERFORMANCE_VERIFICATION"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a032ad73572edd42889387018281c2be765687c1",
+    "real_outcome": "Truthfully convert an independent WAL reward-1 result into durable coding progress without overstating whole-family parity.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Advance the coding family from zero current-route verified fresh-task success to one independently verified pass and expose only the remaining benchmark-level proof.",
+      "proxy_goals_deleted": [
+        "PR completion",
+        "workflow completion",
+        "single-task equals benchmark score",
+        "infrastructure cleanup"
+      ],
+      "surviving_necessity": "Reconcile the verified task and update the active blocker to the stage-1 breadth/score requirement."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Current V5 mini-SWE + Superpowers composed route",
+        "Current three-stage coding evaluation protocol",
+        "WAL independent verifier evidence"
+      ],
+      "external_existing_routes_checked": [
+        "No external route search required for evidence reconciliation"
+      ],
+      "capability_work_deleted": [
+        "No new configuration",
+        "No new infrastructure",
+        "No WAL replay",
+        "No white-box harvest before a residual learned failure exists"
+      ],
+      "surviving_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The old blocker is partially removed by a verified fresh task, but aggregate stage-1 score evidence remains absent.",
+      "delete_bypass_substitute_options": [
+        "Cannot delete benchmark-level evidence requirement without weakening the claim",
+        "Cannot infer 66.4% from one task",
+        "Cannot replay spent WAL task"
+      ],
+      "surviving_causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Reconcile reward-1 and continue distinct fresh stage-1 tasks",
+        "Promote whole family from one task",
+        "Ignore result and keep old blocker",
+        "Return to infrastructure"
+      ],
+      "losing_routes_reason": "Whole-family promotion is unsupported; ignoring the result wastes real evidence; infrastructure does not remove the remaining benchmark proof requirement.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "None. Independent Terminal-Bench verifier reward 1 is the real effect evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Old no-current-route-verification blocker wording",
+        "WAL untouched qualification status"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "Use unchanged V5 route on additional distinct fresh Terminal-Bench tasks; never replay WAL."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Do not rediscover route or rebuild harness",
+        "Reuse exact verifier evidence"
+      ],
+      "search_stop_decision": "Evidence reconciliation is deterministic; external discovery cannot change the reward-1 fact.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_VERIFIED_WAL_PASS_AND_CONTINUE_STAGE1",
+      "PROMOTE_WHOLE_CODING_FAMILY_FROM_ONE_TASK",
+      "IGNORE_PASS_KEEP_OLD_BLOCKER",
+      "RETURN_TO_INFRASTRUCTURE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PROMOTE_WHOLE_CODING_FAMILY_FROM_ONE_TASK",
+      "IGNORE_PASS_KEEP_OLD_BLOCKER",
+      "RETURN_TO_INFRASTRUCTURE"
+    ],
+    "selected_surviving_route": "RECONCILE_VERIFIED_WAL_PASS_AND_CONTINUE_STAGE1",
+    "why_selected_route_is_fastest_sufficient": "It preserves the real win, removes the obsolete blocker, and moves directly to the minimum remaining benchmark proof with no new machinery.",
+    "expected_parent_level_state_change": "RECORD_WAL_REWARD_1_AS_VERIFIED_REAL_TASK__KEEP_ZERO_OPUS_CREDIT__REPLACE_NO_VERIFICATION_BLOCKER_WITH_STAGE1_BREADTH_SCORE_BLOCKER",
+    "stop_condition": "WAL pass evidence is canonical, cross-surface frontier points to stage-1 breadth/score, counters add exactly one verified real task and zero capability credit, trusted guard passes.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action from exact independent verifier evidence; no external execution route is being selected in this reconciliation."
+    }
+  }
+}
