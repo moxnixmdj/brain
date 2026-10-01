@@ -145,7 +145,7 @@
   "recursive_obs": {
     "required": true,
     "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V5.json",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
@@ -157,7 +157,7 @@
       "INTEGRATE"
     ],
     "exact_base_commit_binding_required": true,
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V7.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_route_frontier_age_hours": 24,
@@ -282,7 +282,7 @@
   },
   "reasoning_authority": {
     "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
-    "theory_receipt": "canonical/reasoning/2026-09-30_CAPABILITY_KNOWLEDGE_THEORY_CORRECTION_V1.json"
+    "theory_receipt": "canonical/reasoning/2026-10-01_WHITE_BOX_CAPABILITY_HARVEST_STRATEGY_V1.json"
   },
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -309,7 +309,7 @@
     "primary_control_law": "DETERMINISTIC_OR_EXECUTABLE_GATES_FIRST__PRIMITIVE_SPECIFIC_LEARNED_ROUTE_ONLY_FOR_RESIDUAL_SEMANTIC_CHOICE",
     "generic_small_auto_admit_judge": "FALSIFIED__NOT_AUTHORIZED",
     "c3_control": "VERIFIED_DETERMINISTIC_AUTHORITY_AVAILABILITY_FILTER",
-    "c3_current_scorer": "NONE__ETTIN_REJECTED_AFTER_ZERO_TERMINAL_DELTA__SKILLROUTER_SPENT_SCREEN_RUNNING",
+    "c3_current_scorer": "SKILLROUTER_FRESH_PASS__NO_DEFAULT_SCORER_SELECTED__LEXICAL_MARGIN_ETTIN_CASCADE_AND_SIMPLE_MAJORITY_ENSEMBLE_FALSIFIED_OOS__BROADER_GENERALIZATION_OR_STRONGER_OPEN_ROUTER_REQUIRED",
     "c9_authority": "DETERMINISTIC__GENERIC_NLI_FALSIFIED"
   },
   "execution_truth_and_visibility": {
@@ -365,7 +365,7 @@
   "obs_everything_terminal_acceleration_20261001": {
     "status": "ACTIVE__CURRENT_BASE_META_OBS_EXECUTED__ZERO_CAPABILITY_CREDIT",
     "receipt_path": "canonical/governance/OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V1.json",
-    "receipt_base_commit": "6cd22d0803e48ae670917230201c3155c2bb42ed",
+    "receipt_base_commit": "44d42ab54d7a98e2c0d6820b9775b67ff483ba67",
     "directive": "OBS_EVERYTHING_RECURSIVELY__NO_NEW_GOVERNANCE_LAYER",
     "execution_truth": "RUNNING_REQUIRES_CURRENT_LIVE_EXECUTOR_RECEIPT__NO_BACKGROUND_WORK_CLAIMS",
     "reasoning_truth": "CONSEQUENTIAL_DECISIONS_REQUIRE_EVIDENCE_BOUND_RECEIPTS__PRIVATE_CHAIN_OF_THOUGHT_IS_NOT_AUTHORITY",
@@ -388,6 +388,7 @@
       "BYPASS",
       "REUSE",
       "SUBSTITUTE",
+      "WHITE_BOX_HARVEST",
       "COMPOSE",
       "CONFIGURE",
       "INTEGRATE"
