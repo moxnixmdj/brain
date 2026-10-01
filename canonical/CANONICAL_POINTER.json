@@ -792,7 +792,8 @@
     "reasoning_authority": {
       "evidence_saturation_activation": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json",
       "evidence_saturation_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
-      "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json"
+      "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+      "global_terminal_proof_cut_activation": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json"
     },
     "next_clean": {
       "rank": 23,
@@ -816,7 +817,9 @@
       "path": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
       "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
       "open_families": 17,
-      "rank23_status": "SOURCE_SPENT_NONPROMOTION_ONLY"
+      "rank23_status": "SOURCE_SPENT_NONPROMOTION_ONLY",
+      "activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
+      "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
     }
   },
   "provider_rules": {
@@ -1017,7 +1020,8 @@
     "untouched_source_read_requires_global_cut_membership": true,
     "untouched_task_selection_requires_global_cut_membership": true,
     "family_local_rank_progression_is_scheduling_authority": false,
-    "unadmitted_source_read_forces_clean_promotion_ineligible": true
+    "unadmitted_source_read_forces_clean_promotion_ineligible": true,
+    "global_terminal_proof_cut_activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
