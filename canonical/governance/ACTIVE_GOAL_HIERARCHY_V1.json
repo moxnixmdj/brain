@@ -754,5 +754,13 @@
     "blob_sha": "d49deb24be6a0ac268c700f788777c39fe33086d",
     "runner_merge_commit": "2365b5fabaa26312318f4dbbf2f0808b99ccba93",
     "rank23_task_content_touched": false
+  },
+  "source_contract_completeness_v2": {
+    "status": "VERIFIED_AND_INSTALLED",
+    "evidence": "canonical/verification/SOURCE_CONTRACT_COMPLETENESS_V2_VERIFICATION_20261002_V1.json",
+    "compiler": "canonical/runtime/source_contract_compiler.py",
+    "blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231",
+    "runner_merge_commit": "8a5a36bedfecb1563f8ad9f222e459ad3a9b702c",
+    "rank23_task_content_touched": false
   }
 }
