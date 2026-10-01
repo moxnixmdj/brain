@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_RCAEV_REAL_TRACE_TRANSFER_PILOT_RECONCILIATION_V1",
+  "status": "FRESH_REAL_TELEMETRY_PILOT_PASS__BROAD_TRANSFER_PENDING__ZERO_FAMILY_CREDIT",
+  "date": "2026-10-01",
+  "dataset": {
+    "repo": "phamquiluan/RCAEval",
+    "revision": "259ea4167160256a74ad30004aa3d96a998c846e",
+    "suite": "RE1-OB",
+    "cases": [
+      "re1ob_adservice_cpu_1",
+      "re1ob_cartservice_cpu_1",
+      "re1ob_checkoutservice_mem_1",
+      "re1ob_currencyservice_mem_1"
+    ],
+    "ground_truth": "RCAEval cases.parquet annotations"
+  },
+  "graph_supplier": {
+    "implementation": "RCAEval.graph_construction.pc.pc_default",
+    "ownership_claim": false
+  },
+  "brain_ranker": {
+    "path": "canonical/runtime/causal_residual_ranker.py",
+    "git_blob_sha": "18edb083ab52d845fefe757df5a300cdd07b33f7",
+    "donor_runtime_required": false
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36841341962
+  },
+  "metrics": {
+    "root_service_top3_fraction": 0.75,
+    "root_service_top5_fraction": 1,
+    "root_metric_top10_fraction": 0.75,
+    "median_root_service_best_metric_rank": 2.5
+  },
+  "pilot_gate": {
+    "min_root_service_top3_fraction": 0.5,
+    "min_root_service_top5_fraction": 0.75,
+    "min_root_metric_top10_fraction": 0.5,
+    "pass": true
+  },
+  "notable_residual": {
+    "case": "re1ob_currencyservice_mem_1",
+    "root_metric_rank": 11,
+    "root_service_best_metric_rank": 4,
+    "interpretation": "SERVICE_LOCALIZATION_SURVIVED__EXACT_FAULT_METRIC_RANKING_WEAKER"
+  },
+  "interpretation": [
+    "SUPPORTS_FRESH_REAL_TELEMETRY_TRANSFER_FEASIBILITY_FOR_INSTALLED_RANKER",
+    "DOES_NOT_CREDIT_EXTERNAL_PC_GRAPH_DISCOVERY",
+    "DOES_NOT_PROVE_GENERAL_RCA",
+    "BROAD_FRESH_TRANSFER_STILL_REQUIRED"
+  ],
+  "capability_credit_delta": 0
+}
