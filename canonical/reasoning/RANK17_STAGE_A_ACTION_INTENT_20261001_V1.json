@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RANK17-STAGE-A-CLOSURE-20261001-V1",
+  "status": "EXECUTING_NONCONTAMINATING_PREEXPOSURE_PROOF",
+  "canonical_generation": "2026-10-01-live",
+  "canonical_base_commit": "ba2e0296fdf59ca069610420b635fa2434782747",
+  "capability_target": "ADVANCED_AGENTIC_CODING",
+  "action_kind": "PREQUALIFICATION_STAGE_A_PROOF",
+  "blocker_lease_key": "2026-10-01-live::ADVANCED_AGENTIC_CODING::RANK17_STAGE_A_ADMISSION",
+  "expected_parent_frontier_change": "RANK17_STAGE_A_UNKNOWN_TO_PASS_OR_EXACT_FAILED_PREDICATE",
+  "theory_invariants": [
+    "NO_TASK_INSTRUCTION_READ",
+    "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH",
+    "SELF_REFERENTIAL_FRONTIER_METADATA_IS_NOT_TASK_CONTENT_EXPOSURE",
+    "NO_TASK_SPECIFIC_HINT_SEARCH",
+    "ZERO_CAPABILITY_CREDIT",
+    "STAGE_A_PASS_DOES_NOT_AUTHORIZE_EXECUTION"
+  ],
+  "behavioral_contract": {
+    "behavior_id": "RANK17_STAGE_A_PREEXPOSURE_ADMISSION_001",
+    "inputs": "frozen target metadata, complete rank17 eight-surface exposure ledger, generic independently verified mechanisms",
+    "environment_state": "data-anonymization remains instruction-unread and unexecuted",
+    "allowed_information": "task name, rank, frozen identity hash, benchmark/sample metadata, exposure-index metadata only",
+    "required_output_or_action": "deterministic PASS or exact failed Stage-A predicates",
+    "success_condition": "all generic Stage-A predicates pass including complete Brain+runner code/branch/commit/PR exposure search",
+    "failure_condition": "any predicate false/unknown, search incomplete, material prior exposure nonzero, or contamination detected",
+    "terminal_consequence": "preserves rank17 as untouched qualification evidence until Stage B is safely authorized",
+    "verification_route": "independent runner executes exact patched reducer bytes",
+    "dependency_boundary": "no instruction, README, solution, tests, cheat, verifier, task-specific hints, or task commands",
+    "scope": "rank17 Stage-A pre-exposure admission"
+  },
+  "qualification_stage": "STAGE_A_PRE_EXPOSURE",
+  "task_execution_authorized": false
+}
