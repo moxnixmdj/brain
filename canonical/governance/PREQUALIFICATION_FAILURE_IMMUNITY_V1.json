@@ -109,6 +109,11 @@
       "id": "NO_REALIZABLE_ROUTE_UNDER_HARD_CONSTRAINTS",
       "defense": "Before fresh qualification, require at least one current plausible route satisfying ownership, $0, knowledge boundary, license and execution constraints; otherwise decompose or return exact impossibility boundary",
       "required_evidence": "FEASIBILITY_CERTIFICATE"
+    },
+    {
+      "id": "ONE_SHOT_EXECUTION_BUDGET_ESCAPE",
+      "defense": "Runner binds explicit canonical execution_count_allowed and terminal_verifier_count_allowed, consumes each unit before invocation, and fails closed after exhaustion.",
+      "required_evidence": "RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION"
     }
   ],
   "fresh_qualification_admission_rule": "STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_READS_MUST_OBEY_TB4_SOURCE_ALLOWLIST__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
@@ -125,6 +130,7 @@
         "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
         "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
         "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
+        "TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED",
         "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS"
       ],
       "failure_disposition": "TASK_REMAINS_UNEXPOSED"
