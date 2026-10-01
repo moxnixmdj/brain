@@ -77,8 +77,8 @@
     },
     {
       "id": "STALE_STATE_OR_CONCURRENT_DUPLICATION",
-      "defense": "Exact base binding, blocker lease, liveness receipt and duplicate-open-intent rejection",
-      "required_evidence": "CURRENT_EXECUTION_AUTHORITY_RECEIPT"
+      "defense": "Exact base binding, blocker lease, liveness receipt, duplicate-open-intent rejection, exact active-carrier identity binding in execution_authority_reducer, intrinsic rejection of a second CARRIER_OPEN, and live canonical authority revalidation after the last material state transition immediately before any irreversible task command.",
+      "required_evidence": "CURRENT_EXECUTION_AUTHORITY_RECEIPT_WITH_EXACT_CARRIER_BINDING_PLUS_POST_TRANSITION_REVALIDATION"
     },
     {
       "id": "PERFORMANCE_OR_RESOURCE_REGRESSION",
@@ -144,6 +144,11 @@
       "id": "REDUNDANT_REALITY_QUERY",
       "defense": "Before any new fresh evidence spend, saturate admissible existing Brain and external evidence, apply deterministic/deductive closure, compile terminal-relevant counterfactual distinctions, delete dominated observations, and require membership in the exact minimum reality cut. Existing evidence or proof that closes the same obligation deletes the experiment.",
       "required_evidence": "EVIDENCE_SATURATION_AND_MINIMUM_REALITY_CUT_RECEIPT"
+    },
+    {
+      "id": "CARRIER_IDENTITY_AUTHORITY_COLLISION",
+      "defense": "Authorization state must cryptographically bind the exact active carrier evidence/identity. A second carrier may not open while one is active, and a static carrier-agnostic authority hash may never authorize execution.",
+      "required_evidence": "EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_PLUS_EXACT_ACTIVE_CARRIER_RECEIPT"
     }
   ],
   "fresh_qualification_admission_rule": "FOR_ALL_SUBSEQUENT_FRESH_EVIDENCE_SPEND__EVIDENCE_SATURATION_AND_DEDUCTIVE_CLOSURE_AND_MINIMUM_REALITY_CUT_ADMISSION_PRECEDE_SPEND__THEN_STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED__RANK22_EXCEPTION_EXPIRED_AFTER_SPENT_BUILDER_FAILURE",
@@ -265,5 +270,11 @@
       "status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE",
       "failure_evidence": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json"
     }
+  },
+  "carrier_authority_regression": {
+    "regression": "canonical/regressions/2026-10-02_DUPLICATE_CARRIER_AUTHORITY_HASH_COLLISION.json",
+    "reducer": "canonical/runtime/execution_authority_reducer.py",
+    "verification": "canonical/verification/EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_20261002_V1.json",
+    "fail_closed": true
   }
 }
