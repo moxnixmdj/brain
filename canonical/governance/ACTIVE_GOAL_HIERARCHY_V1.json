@@ -341,13 +341,11 @@
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
   "active_stage1_execution": {
-    "task": "fin-saccr-rwa",
-    "rank": 13,
-    "state": "VERIFIED_CAPABILITY_FAILURE__SPENT__ZERO_CREDIT__DO_NOT_REPLAY",
-    "lease_path": "canonical/governance/LEASE_FIN_SACCR_RWA_TB4_20261001_V1.json",
-    "runner_pr": 302,
-    "verifier_comment_id": 5937276529,
-    "evidence_path": "canonical/capabilities/opus55/FIN_SACCR_RWA_TB4_FAILURE_20261001_V1.json"
+    "task": "formal-crypto",
+    "rank": 14,
+    "state": "INSTRUCTION_EXPOSED__NO_TASK_COMMAND_EXECUTED__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE",
+    "runner_pr": 308,
+    "evidence_path": "canonical/capabilities/opus55/FORMAL_CRYPTO_TB4_INSTRUCTION_EXPOSED_UNSPENT_20261001_V1.json"
   },
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
@@ -439,8 +437,8 @@
     "capability_credit_delta": 0
   },
   "stage1_next_clean_task": {
-    "task": "formal-crypto",
-    "rank": 14,
+    "task": "wdm-design",
+    "rank": 15,
     "state": "FROZEN_UNREAD__NOT_AUTHORIZED_TO_LEASE_OR_EXECUTE",
     "authorization_gate": "BEHAVIORAL_SEMANTIC_PURGE_COMPLETE_FOR_ACTIVE_BLOCKER__INDEPENDENT_ACCEPTANCE_MODEL_ROUTE_CHANGED_AND_VALIDATED_ON_SPENT_HELDOUT_FAILURES"
   },
@@ -451,5 +449,11 @@
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "rule": "NO_TERM_WITHOUT_BEHAVIORAL_CONTRACT__FAMILY_AND_C1_C10_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY",
     "fresh_evidence_gate": "NO_FRESH_TASK_SPEND_TO_RESOLVE_UNDEFINED_SEMANTICS_WHEN_SPENT_OR_NONCONTAMINATING_EVIDENCE_CAN_DECOMPOSE_THE_BEHAVIOR"
+  },
+  "latest_benchmark_exposure": {
+    "task": "formal-crypto",
+    "rank": 14,
+    "status": "INSTRUCTION_EXPOSED__UNSPENT__ZERO_CAPABILITY_VERDICT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE",
+    "evidence_path": "canonical/capabilities/opus55/FORMAL_CRYPTO_TB4_INSTRUCTION_EXPOSED_UNSPENT_20261001_V1.json"
   }
 }
