@@ -5,9 +5,9 @@
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
-  "probe_state": "RANK15_STAGE_B_V3_REVERIFY_REQUIRED__SOURCE_ACCOUNTING_FOUND_AND_REPAIRED_MATERIAL_REQUIREMENT_GAP__TASK_EXECUTION_FORBIDDEN",
-  "current_parent_blocker": "RANK15_STAGE_B_V3_INDEPENDENT_GRAPH_ACCEPTANCE_AND_SPEC_CONSENSUS_REVERIFICATION_NOT_YET_PASSED",
-  "next_required_action_class": "REVERIFY_V3_REQUIREMENT_GRAPH_MUTATIONS_ACCEPTANCE_COVERAGE_AND_DUAL_ROUTE_SOURCE_ACCOUNTING__REUSE_ALREADY_VALID_MEEP_ENVIRONMENT_RECEIPT__NO_CANDIDATE_EXECUTION",
+  "probe_state": "RANK15_STAGE_B_V3_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_EXECUTION_AUTHORIZED__NOT_YET_EXECUTED",
+  "current_parent_blocker": "RANK15_ONE_SHOT_REAL_TASK_EXECUTION_AND_INDEPENDENT_TERMINAL_VERIFICATION_NOT_YET_COMPLETED",
+  "next_required_action_class": "EXECUTE_WDM_DESIGN_EXACTLY_ONCE_THROUGH_CANONICAL_RUNNER__FREEZE_OUTPUT__THEN_INDEPENDENT_VERIFIER__NO_REPLAY",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -198,7 +198,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "REVERIFY_V3_REQUIREMENT_GRAPH_MUTATIONS_ACCEPTANCE_COVERAGE_AND_DUAL_ROUTE_SOURCE_ACCOUNTING__REUSE_ALREADY_VALID_MEEP_ENVIRONMENT_RECEIPT__NO_CANDIDATE_EXECUTION",
+  "next_progress_event_target": "EXECUTE_WDM_DESIGN_EXACTLY_ONCE_THROUGH_CANONICAL_RUNNER__FREEZE_OUTPUT__THEN_INDEPENDENT_VERIFIER__NO_REPLAY",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -442,8 +442,8 @@
   "stage1_next_clean_task": {
     "task": "wdm-design",
     "rank": 15,
-    "state": "STAGE_B_V2_REVOKED__TASK_NOT_EXECUTED__V3_VERIFICATION_PENDING",
-    "authorization_gate": "STAGE_B_V3_INDEPENDENT_SOURCE_CLOSURE_PASS"
+    "state": "STAGE_C_ONE_SHOT_EXECUTION_AUTHORIZED__NOT_YET_EXECUTED",
+    "authorization_gate": "SATISFIED_BY_V3_INDEPENDENT_PASS__ONE_SHOT_ONLY__NO_REPLAY"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -494,10 +494,16 @@
     "task_execution_authorized": false
   },
   "rank15_stage_b": {
-    "status": "V3_REVERIFY_REQUIRED",
+    "status": "INDEPENDENT_V3_PASS__STAGE_C_ONE_SHOT_AUTHORIZED",
     "contract": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_STAGE_B_CONTRACT_V3.json",
-    "v2_disposition": "SUPERSEDED_AFTER_SOURCE_ACCOUNTING_FOUND_MISSING_MATERIAL_MODEL_REQUIREMENT",
-    "structural_v2_evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_STAGE_B_STRUCTURAL_VERIFICATION_V1.json",
+    "evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_STAGE_B_VERIFICATION_V3.json",
+    "runner_pr": 326,
+    "runner_head_sha": "b6e75a5b2870ef7ffc4174d45ea2eedccc5fef8f",
+    "runner_merge_sha": "d6d816d36f6b9971477e696db02dba3816cdc6a0",
+    "runner_workflow_run_id": 36912513349,
+    "runner_job_id": 110538392157,
+    "tests_passed": 7,
+    "tests_failed": 0,
     "meep_environment_receipt": {
       "runner_pr": 323,
       "workflow_run_id": 36911891392,
@@ -505,9 +511,10 @@
       "valid": true,
       "candidate_task_executed": false
     },
+    "task_execution_authorized": true,
+    "same_task_replay_allowed": false,
     "solution_read": false,
     "tests_read": false,
-    "hidden_verifier_read": false,
-    "task_execution_authorized": false
+    "hidden_verifier_read": false
   }
 }
