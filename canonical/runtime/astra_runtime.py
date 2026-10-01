@@ -6049,6 +6049,30 @@ def main():
     mid=mission["mission_id"]
     mission_sha256=sha_file(mission_path)
     mission["_runtime_mission_path"]=mission_rel
+
+    # Continuous OBS is an execution invariant, not an external monitor.
+    # Every material step revalidates canonical state and all declared volatile
+    # world/dependency evidence. Any stale/unknown material dependency blocks.
+    continuous_obs=_load_runtime_helper("continuous_obs_runtime")
+    def _continuous_obs_revalidate(event):
+        verdict=continuous_obs.validate_context(
+            mission.get("continuous_obs"),
+            root=ROOT,
+        )
+        verdict["event"]=str(event)
+        verdict["mission_id"]=mid
+        verdict["mission_sha256"]=mission_sha256
+        obs_path=EVID_DIR/f"{mid}__CONTINUOUS_OBS.jsonl"
+        obs_path.parent.mkdir(parents=True,exist_ok=True)
+        with obs_path.open("a",encoding="utf-8",newline="\n") as fh:
+            fh.write(json.dumps(verdict,sort_keys=True,separators=(",",":"))+"\n")
+        if not verdict.get("pass"):
+            raise Blocker(
+                "CONTINUOUS_OBS_BLOCKED:"+"|".join(verdict.get("errors") or ["UNKNOWN"])
+            )
+        return verdict
+
+    _continuous_obs_revalidate("MISSION_START")
     supervisor_agent_id,supervisor_task_id=_supervisor_binding_from_env()
     state_path=STATE_DIR/f"{mid}.json"
     state=readj(state_path) if state_path.exists() else {
@@ -6096,8 +6120,10 @@ def main():
             if not prior.get("replay_on_resume", False):
                 continue
             try:
+                _continuous_obs_revalidate(f"BEFORE_REHYDRATION_STEP:{j}")
                 result=execute_step(prior, context_results(state), mission)
                 ok=verify(prior,result)
+                _continuous_obs_revalidate(f"AFTER_REHYDRATION_STEP:{j}")
             except Exception as e:
                 blocker={
                   "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
@@ -6136,8 +6162,10 @@ def main():
         step=mission["steps"][i]
         adapter=step["adapter"]
         try:
+            _continuous_obs_revalidate(f"BEFORE_STEP:{i}")
             result=execute_step(step, context_results(state), mission)
             ok=verify(step,result)
+            _continuous_obs_revalidate(f"AFTER_STEP_RECEIPT:{i}")
         except Exception as e:
             blocker={
               "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
@@ -6170,6 +6198,7 @@ def main():
         state["status"]="RUNNING"
         state["updated_at_utc"]=utc()
         writej(state_path,state)
+    _continuous_obs_revalidate("BEFORE_TERMINAL_RECEIPT")
     state.pop("blocker",None)
     state["status"]="COMPLETE"; state["completed_at_utc"]=utc()
     writej(state_path,state)
