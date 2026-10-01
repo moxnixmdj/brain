@@ -693,5 +693,27 @@
     "source_boundary": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_SOURCE_BOUNDARY_PREFLIGHT_V1.json",
     "execution_count_used": 0,
     "terminal_verifier_count_used": 0
+  },
+  "information_minimization_control": {
+    "status": "ACTIVE_CANONICAL__PROSPECTIVE_FAIL_CLOSED__CURRENT_VALID_PROOF_ACTION_NONREGRESSION",
+    "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "exact_minimum_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "objective": "MINIMIZE_NEW_REALITY_INFORMATION_ACQUISITION_SUBJECT_TO_TRUTHFUL_TERMINAL_CLOSURE",
+    "required_for": "ALL_NEW_FRESH_EVIDENCE_SPEND_AFTER_ACTIVATION",
+    "current_rank22": {
+      "task": "freecad-spring-clip",
+      "rank": 22,
+      "status": "GRANDFATHERED_CURRENT_VALID_PROOF_ACTION",
+      "rule": "DO_NOT_DELAY_BUILDER_BURST_WHILE_DERIVED_CAN_EXECUTE_TRUE_AND_AUTHORITY_CURRENT"
+    },
+    "future_sequence": [
+      "SATURATE_EXISTING_EVIDENCE",
+      "DEDUCTIVE_CLOSURE",
+      "COUNTERFACTUAL_TERMINAL_COMPILATION",
+      "DOMINANCE_DELETION",
+      "EXACT_MINIMUM_REALITY_CUT",
+      "EXECUTE_ONLY_IRREDUCIBLE_CUT_MEMBERS"
+    ]
   }
 }
