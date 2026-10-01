@@ -5,12 +5,12 @@ Status: CANONICAL / MANDATORY / FAIL-CLOSED
 Supersedes:
 - canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md
 
-## V6 capability-internalization override
+## V7 capability-internalization override
 
 This control law is subordinate to:
-- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md
-- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md
-- canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md
+- canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md
+- canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md
+- canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md
 - canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md
 
 For the current program:
@@ -65,11 +65,11 @@ Every consequential action MUST evaluate all seven layers in order:
 6. OBS the inherited system after a win.
 7. OBS the OBS/search process itself.
 
-For the V6 capability-internalization program, the mandatory route-elimination order is:
+For the V7 capability-internalization program, the mandatory route-elimination order is:
 
 **DELETE -> BYPASS -> REUSE -> SUBSTITUTE -> COMPOSE -> CONFIGURE -> INTEGRATE**
 
-REPAIR/BUILD are not current route classes. Existing mechanisms may be configured and integrated; invention of the underlying target capability is forbidden. Historical V1-V3 rules remain binding except where this V6 order or the V6 mission lock explicitly supersedes them.
+REPAIR/BUILD are not current route classes. Existing mechanisms may be configured and integrated; invention of the underlying target capability is forbidden. Historical V1-V3 rules remain binding except where this V7 order or the V7 mission lock explicitly supersedes them.
 
 ## Live challenger frontier
 
