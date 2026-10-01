@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_SOURCE_CONTRACT_COMPLETENESS_V2_VERIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__MERGED__EXACT_BLOB_INSTALLED__ZERO_FAMILY_CREDIT",
+  "artifact": "canonical/runtime/source_contract_compiler.py",
+  "brain_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 435,
+    "merge_commit": "8a5a36bedfecb1563f8ad9f222e459ad3a9b702c",
+    "verified_blob_sha": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231",
+    "workflow_run_id": 36937734954,
+    "job_id": 110621837291,
+    "conclusion": "success"
+  },
+  "verified_properties": [
+    "LOSSLESS_BYTE_RECONSTRUCTION_PRESERVED",
+    "RISKY_SOURCE_ATOMS_REQUIRE_AT_LEAST_TWO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
+    "INDEPENDENT_DECOMPOSITIONS_MUST_AGREE_ON_SPAN_BOUNDARIES_SEMANTIC_CLASS_AND_CANONICAL_FINGERPRINT",
+    "OBVIOUS_COMPOUND_OBLIGATIONS_CANNOT_COLLAPSE_BELOW_DETERMINISTIC_OBLIGATION_LOWER_BOUND",
+    "EVERY_NONWHITESPACE_CHARACTER_OF_RISKY_SOURCE_ATOMS_MUST_BE_COVERED_BY_EACH_EXTRACTOR",
+    "EVERY_OPERATIVE_CONSENSUS_SEMANTIC_UNIT_REQUIRES_A_REQUIREMENT",
+    "REQUIREMENT_TO_SEMANTIC_UNIT_REFERENCES_FAIL_CLOSED_ON_UNKNOWN_UNITS",
+    "AMBIGUOUS_CONSENSUS_UNITS_REMAIN_BLOCKING_OPEN_SPECIFICATION_HOLES"
+  ],
+  "limitation": "This proves bounded-source coverage plus independent semantic decomposition consensus. It does not prove that two extractors cannot share the same hidden conceptual error; disagreement is detected, agreement is necessary but not metaphysical proof of natural-language meaning.",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
