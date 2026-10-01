@@ -25,6 +25,8 @@ OBS_RUNTIME="canonical/runtime/continuous_obs_runtime.py"
 EVIDENCE_LAW="canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md"
 COUNTERFACTUAL_COMPILER="canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json"
 MINIMUM_REALITY_CUT_RUNTIME="canonical/runtime/minimum_reality_cut.py"
+GLOBAL_PROOF_LAW="canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md"
+GLOBAL_CUT="canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
 
 REQUIRED_GATE_CHECKS={
     "CONTINUOUS_OBS_CONTEXT_PRESENT_AND_CURRENT",
@@ -45,6 +47,12 @@ REQUIRED_GATE_CHECKS={
     "SECOND_OPEN_CARRIER_FAILS_CLOSED",
     "LIVE_AUTHORITY_REVALIDATED_AFTER_LAST_MATERIAL_STATE_TRANSITION_BEFORE_IRREVERSIBLE_COMMAND",
     "EXECUTION_PATH_USES_CANONICAL_AUTHORITY_REDUCER_AND_MAY_NOT_BYPASS_IT",
+    "GLOBAL_TERMINAL_PROOF_CUT_CURRENT",
+    "FAMILY_AND_BENCHMARK_RANK_ARE_NOT_SCHEDULING_AUTHORITY",
+    "UNTOUCHED_TASK_SELECTION_REQUIRES_GLOBAL_CUT_MEMBERSHIP",
+    "UNTOUCHED_SOURCE_READ_REQUIRES_GLOBAL_CUT_MEMBERSHIP",
+    "LOCAL_STAGE_A_PASS_CANNOT_ALONE_AUTHORIZE_SOURCE_READ",
+    "UNADMITTED_SOURCE_READ_QUARANTINED_FROM_CLEAN_PROMOTION",
 }
 
 def load(root:pathlib.Path, rel:str)->dict[str,Any]:
@@ -108,6 +116,7 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         gate=load(root,GATE)
         template=load(root,TEMPLATE)
         obs=load(root,OBS_POLICY)
+        global_cut=load(root,GLOBAL_CUT)
     except Exception as exc:
         return {
             "schema":"PROJECT_BRAIN_CURRENT_STATE_OBS_REDUCER_V1",
@@ -236,6 +245,8 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
       "evidence_saturation_and_minimum_reality_query_law":EVIDENCE_LAW,
       "counterfactual_terminal_compiler":COUNTERFACTUAL_COMPILER,
       "minimum_reality_cut_runtime":MINIMUM_REALITY_CUT_RUNTIME,
+      "global_terminal_proof_tree_law":GLOBAL_PROOF_LAW,
+      "global_terminal_proof_cut":GLOBAL_CUT,
     }
     for key,value in expected_info_paths.items():
         if _s(eg.get(key))!=value:
@@ -246,6 +257,24 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("POINTER_MINIMUM_REALITY_CUT_NOT_REQUIRED")
     if eg.get("reacquire_existing_terminal_information_without_invalidation") is not False:
         errors.append("POINTER_REACQUISITION_GUARD_NOT_FAIL_CLOSED")
+    if eg.get("untouched_source_read_requires_global_cut_membership") is not True:
+        errors.append("POINTER_UNTOUCHED_SOURCE_READ_GLOBAL_CUT_NOT_REQUIRED")
+    if eg.get("untouched_task_selection_requires_global_cut_membership") is not True:
+        errors.append("POINTER_UNTOUCHED_TASK_SELECTION_GLOBAL_CUT_NOT_REQUIRED")
+    if eg.get("family_local_rank_progression_is_scheduling_authority") is not False:
+        errors.append("POINTER_FAMILY_LOCAL_RANK_STILL_SCHEDULING_AUTHORITY")
+
+    if not _s(global_cut.get("status")).startswith("ACTIVE"):
+        errors.append("GLOBAL_TERMINAL_PROOF_CUT_NOT_ACTIVE")
+    if _s(global_cut.get("law"))!=GLOBAL_PROOF_LAW:
+        errors.append("GLOBAL_TERMINAL_PROOF_CUT_LAW_DRIFT")
+    if _s(global_cut.get("exact_cut_runtime"))!=MINIMUM_REALITY_CUT_RUNTIME:
+        errors.append("GLOBAL_TERMINAL_PROOF_CUT_RUNTIME_DRIFT")
+    scheduling=global_cut.get("scheduling_authority") or {}
+    if scheduling.get("global_terminal_proof_cut") is not True:
+        errors.append("GLOBAL_CUT_NOT_SCHEDULING_AUTHORITY")
+    if scheduling.get("family_labels") is not False or scheduling.get("benchmark_rank_order") is not False:
+        errors.append("GLOBAL_CUT_LOCAL_ORDER_STILL_AUTHORITATIVE")
 
     him=hierarchy.get("information_minimization_control") or {}
     if not _s(him.get("status")).startswith("ACTIVE_CANONICAL"):
@@ -256,6 +285,13 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("HIERARCHY_COUNTERFACTUAL_COMPILER_DRIFT")
     if _s(him.get("exact_minimum_cut_runtime"))!=MINIMUM_REALITY_CUT_RUNTIME:
         errors.append("HIERARCHY_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
+    hglobal=hierarchy.get("global_terminal_proof_cut_control") or {}
+    if _s(hglobal.get("cut"))!=GLOBAL_CUT:
+        errors.append("HIERARCHY_GLOBAL_CUT_DRIFT")
+    if _s(hglobal.get("law"))!=GLOBAL_PROOF_LAW:
+        errors.append("HIERARCHY_GLOBAL_PROOF_LAW_DRIFT")
+    if hglobal.get("family_or_rank_order_is_scheduling_authority") is not False:
+        errors.append("HIERARCHY_LOCAL_ORDER_STILL_SCHEDULING_AUTHORITY")
 
     gim=gate.get("information_minimization") or {}
     if _s(gim.get("law"))!=EVIDENCE_LAW:
@@ -266,6 +302,11 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("GATE_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
     if gim.get("required_for_new_fresh_evidence") is not True:
         errors.append("GATE_INFORMATION_MINIMIZATION_NOT_REQUIRED")
+    gglobal=gate.get("global_terminal_proof_cut") or {}
+    if gglobal.get("required") is not True or gglobal.get("fail_closed") is not True:
+        errors.append("GATE_GLOBAL_CUT_NOT_FAIL_CLOSED")
+    if _s(gglobal.get("cut"))!=GLOBAL_CUT or _s(gglobal.get("law"))!=GLOBAL_PROOF_LAW:
+        errors.append("GATE_GLOBAL_CUT_PATH_DRIFT")
 
     if "reality_query_admission" not in (template.get("action_fields") or []):
         errors.append("ACTION_TEMPLATE_REALITY_QUERY_ADMISSION_FIELD_MISSING")
@@ -278,6 +319,13 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("ACTION_TEMPLATE_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
     if rqa.get("fail_closed_on_unknown") is not True:
         errors.append("ACTION_TEMPLATE_REALITY_QUERY_UNKNOWN_NOT_FAIL_CLOSED")
+    gt=template.get("required_global_terminal_proof_cut") or {}
+    if _s(gt.get("cut"))!=GLOBAL_CUT or _s(gt.get("law"))!=GLOBAL_PROOF_LAW:
+        errors.append("ACTION_TEMPLATE_GLOBAL_CUT_DRIFT")
+    if gt.get("fail_closed_on_missing_or_unknown") is not True:
+        errors.append("ACTION_TEMPLATE_GLOBAL_CUT_NOT_FAIL_CLOSED")
+    if gt.get("stage_a_cleanliness_does_not_imply_membership") is not True:
+        errors.append("ACTION_TEMPLATE_STAGE_A_CLEANLINESS_CONFUSION")
 
     sim=score.get("information_acquisition_optimization") or {}
     if _s(sim.get("law"))!=EVIDENCE_LAW:
@@ -288,6 +336,10 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("SCOREBOARD_MINIMUM_REALITY_CUT_RUNTIME_DRIFT")
     if sim.get("minimum_reality_cut_required_for_future_fresh_spend") is not True:
         errors.append("SCOREBOARD_MINIMUM_REALITY_CUT_NOT_REQUIRED")
+    if _s(sim.get("global_terminal_proof_cut"))!=GLOBAL_CUT:
+        errors.append("SCOREBOARD_GLOBAL_CUT_DRIFT")
+    if sim.get("family_or_benchmark_rank_progression_authority") is not False:
+        errors.append("SCOREBOARD_LOCAL_ORDER_STILL_SCHEDULING_AUTHORITY")
 
     if _s(obs.get("status"))!="CANONICAL_FAIL_CLOSED_RUNTIME_REQUIREMENT":
         errors.append("OBS_POLICY_NOT_CANONICAL_FAIL_CLOSED")
