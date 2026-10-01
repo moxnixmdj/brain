@@ -18,7 +18,7 @@
     "current_lane_A_state": "RANK10_CAD_MODEL_LIVE__READY_REACHED__CANDIDATE_V4_SINGLE_SOLID__R16_GEOMETRY_UNRESOLVED__PRE_VERIFICATION",
     "atomic_causal_decomposition_parallel": true,
     "atomic_decomposition_sources": "SPENT_OR_VERIFIED_TRAJECTORIES_AND_NONCONTAMINATING_DONOR_EVIDENCE_ONLY",
-    "semantic_purge_gate": "ACTIVE__NO_FRESH_CLEAN_TASK_SPEND_UNTIL_INDEPENDENT_ACCEPTANCE_MODEL_ROUTE_CHANGE_VALIDATED_ON_SPENT_HELDOUT_FAILURES"
+    "semantic_purge_gate": "ACTIVE__RANK15_FROZEN__REQUIREMENT_GRAPH_PLUS_INDEPENDENT_ACCEPTANCE_PLUS_MUTATION_AND_FAILURE_IMMUNITY_VALIDATION_REQUIRED_BEFORE_FRESH_SPEND"
   },
   "lanes": [
     {
@@ -109,7 +109,7 @@
     "decomposition_rule": "RECURSIVELY_SPLIT_UNTIL_EACH_LEAF_HAS_EXPLICIT_IO_STATE_CAUSAL_FUNCTION_IMPLEMENTATION_DEPENDENCIES_ABLATION_RESCUE_MINIMALITY_OWNERSHIP_AND_EVIDENCE"
   },
   "family_lanes_are_evaluation_surfaces_only": true,
-  "cross_family_priority_metric": "TERMINAL_EFFECT_PER_WALL_CLOCK_ON_CONTRACTED_BEHAVIORAL_LEAVES__NOT_LABEL_COVERAGE",
+  "cross_family_priority_metric": "REDUCTION_IN_UNCLOSED_TERMINAL_BEHAVIORAL_PROOF_PREDICATES_PER_WALL_CLOCK__THEN_TERMINAL_EFFECT__NOT_LABEL_COVERAGE",
   "primary_progress_metrics": [
     "UNEXPLAINED_USEFUL_BEHAVIOR",
     "DONOR_DEPENDENT_USEFUL_BEHAVIOR"
@@ -120,5 +120,8 @@
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "family_and_lane_names_have_implementation_authority": false,
     "rule": "ALL_ACQUISITION_WORK_MUST_BE_BOUND_TO_CONTRACTED_BEHAVIORAL_LEAVES"
-  }
+  },
+  "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+  "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+  "existing_requirement_graph_candidate": "canonical/capabilities/opus55/AGENT_SPEC_REQUIREMENT_GRAPH_CANDIDATE_V1.json"
 }
