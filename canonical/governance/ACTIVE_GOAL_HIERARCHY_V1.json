@@ -285,7 +285,10 @@
     "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
     "theory_receipt": "canonical/reasoning/2026-10-01_TERMINAL_SUCCESS_PREMORTEM_AND_FAILURE_IMMUNITY_V1.json",
     "execution_first_optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
-    "export_live_reconciliation": "canonical/reasoning/2026-10-01_COMBINED_EXPORT_LIVE_RECONCILIATION_V1.json"
+    "export_live_reconciliation": "canonical/reasoning/2026-10-01_COMBINED_EXPORT_LIVE_RECONCILIATION_V1.json",
+    "evidence_saturation_activation": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json",
+    "evidence_saturation_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json"
   },
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
