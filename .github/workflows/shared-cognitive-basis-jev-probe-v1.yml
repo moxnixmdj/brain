@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - probe/shared-cognitive-basis-jev-v1
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -29,7 +32,9 @@ jobs:
             --model auto \
             --out cognitive_basis_probe_result_v1.json
       - name: Upload diagnostic evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cognitive-basis-probe-v1
           path: cognitive_basis_probe_result_v1.json
+          if-no-files-found: ignore
