@@ -51,23 +51,63 @@
     "required_capability": "FAIL_CLOSED_WHITE_BOX_CAPABILITY_HARVESTING_GOVERNANCE",
     "obs_goal": {
       "real_outcome": "Close capability gaps faster while preserving permanent Brain ownership, zero capability invention, and exact verification.",
-      "proxy_goals_deleted": ["download a whole frontier model", "compress a donor for its own sake", "interpretability for its own sake", "benchmark activity"],
+      "proxy_goals_deleted": [
+        "download a whole frontier model",
+        "compress a donor for its own sake",
+        "interpretability for its own sake",
+        "benchmark activity"
+      ],
       "surviving_necessity": "Add a governed extraction route for already-existing learned mechanisms that current acquisition law only describes generically as extractable configuration."
     },
     "obs_capability": {
-      "existing_inherited_routes_checked": ["current V6 capability acquisition law", "current V6 arbitrage strategy", "V6 mission lock", "V8/V7 active gates", "V5 OBS schema", "current drift validator"],
-      "external_existing_routes_checked": ["weight-delta/task-vector extraction", "adapter and sparse-delta transfer", "MoE expert/module isolation", "distillation of residual behavior", "causal ablation/rescue methodology"],
-      "capability_work_deleted": ["whole-model adoption", "knowledge harvesting", "parameter-count-as-progress", "SAE correlation as promotion proof"],
+      "existing_inherited_routes_checked": [
+        "current V6 capability acquisition law",
+        "current V6 arbitrage strategy",
+        "V6 mission lock",
+        "V8/V7 active gates",
+        "V5 OBS schema",
+        "current drift validator"
+      ],
+      "external_existing_routes_checked": [
+        "weight-delta/task-vector extraction",
+        "adapter and sparse-delta transfer",
+        "MoE expert/module isolation",
+        "distillation of residual behavior",
+        "causal ablation/rescue methodology"
+      ],
+      "capability_work_deleted": [
+        "whole-model adoption",
+        "knowledge harvesting",
+        "parameter-count-as-progress",
+        "SAE correlation as promotion proof"
+      ],
       "surviving_gap": "No canonical first-class route, artifact contract, or guard semantics exist for donor extraction and donor-independent capability capsules."
     },
     "obs_blocker": {
       "intrinsic_or_path_specific": "Intrinsic governance gap: the existing system permits generic extraction but cannot distinguish safe causal harvesting from importing an opaque capability provider.",
-      "delete_bypass_substitute_options": ["Do nothing rejected because a materially faster existing-capability route would remain noncanonical", "Whole-model substitution rejected because it violates parameter obsolescence and ownership goals", "Patch one document rejected because active gates and validator encode route order"],
+      "delete_bypass_substitute_options": [
+        "Do nothing rejected because a materially faster existing-capability route would remain noncanonical",
+        "Whole-model substitution rejected because it violates parameter obsolescence and ownership goals",
+        "Patch one document rejected because active gates and validator encode route order"
+      ],
       "surviving_causal_blocker": "CAPABILITY_ACQUISITION_ENGINE_LACKS_WHITE_BOX_DONOR_EXTRACTION_ROUTE"
     },
     "obs_solution": {
-      "deletion_first_order_applied": ["DELETE","BYPASS","REUSE","SUBSTITUTE","COMPOSE","CONFIGURE","INTEGRATE"],
-      "routes_ranked": ["Synchronize mission/acquisition/arbitrage law, capsule schema, OBS/gates, validator, pointer, queue, and ownership matrix", "Patch acquisition law only", "Defer until current WAL result"],
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Synchronize mission/acquisition/arbitrage law, capsule schema, OBS/gates, validator, pointer, queue, and ownership matrix",
+        "Patch acquisition law only",
+        "Defer until current WAL result"
+      ],
       "losing_routes_reason": "Partial synchronization creates contradictory authority; deferral leaves a known high-leverage route outside the control plane. Governance promotion itself does not contaminate the WAL task.",
       "implementation_still_necessary": true
     },
@@ -77,17 +117,36 @@
       "synthetic_verification_necessity": "Validate cross-surface route-order equality and fail-closed capsule invariants; no capability benchmark or WAL task execution in this governance change."
     },
     "obs_inherited_system": {
-      "downstream_work_to_delete_or_supersede": ["V6 mission/acquisition/arbitrage authority references", "V5 OBS schema", "V8/V7 gates", "V7 action template route semantics"],
-      "adjacent_capabilities_absorbed": ["existing extractable-configuration search class", "existing donor/specimen separation", "existing no-capability-invention law"],
+      "downstream_work_to_delete_or_supersede": [
+        "V6 mission/acquisition/arbitrage authority references",
+        "V5 OBS schema",
+        "V8/V7 gates",
+        "V7 action template route semantics"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "existing extractable-configuration search class",
+        "existing donor/specimen separation",
+        "existing no-capability-invention law"
+      ],
       "fresh_reuse_plan": "Keep the existing untouched wal-recovery-ordering lease reserved for final coding qualification. Use white-box harvesting only if selected by a fresh OBS route decision or after material route failure."
     },
     "obs_obs": {
-      "analysis_steps_deleted_or_cached": ["Reuse current canonical ownership theory and route-frontier machinery", "Do not reopen terminal objective or capability target"],
+      "analysis_steps_deleted_or_cached": [
+        "Reuse current canonical ownership theory and route-frontier machinery",
+        "Do not reopen terminal objective or capability target"
+      ],
       "search_stop_decision": "The governance gap is direct and bounded; further discovery cannot remove the need for consistent control-plane semantics.",
       "affected_layers_only_on_revalidation": true
     },
-    "routes_considered": ["SYNC_ALL_ACTIVE_CONTROL_SURFACES", "PATCH_ACQUISITION_LAW_ONLY", "DEFER_UNTIL_WAL_RESULT"],
-    "deleted_or_bypassed_paths": ["PATCH_ACQUISITION_LAW_ONLY", "DEFER_UNTIL_WAL_RESULT"],
+    "routes_considered": [
+      "SYNC_ALL_ACTIVE_CONTROL_SURFACES",
+      "PATCH_ACQUISITION_LAW_ONLY",
+      "DEFER_UNTIL_WAL_RESULT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PATCH_ACQUISITION_LAW_ONLY",
+      "DEFER_UNTIL_WAL_RESULT"
+    ],
     "selected_surviving_route": "SYNC_ALL_ACTIVE_CONTROL_SURFACES",
     "why_selected_route_is_fastest_sufficient": "It makes the route legal, fail-closed, reusable, and immediately available without changing current capability credit or spending a fresh benchmark.",
     "expected_parent_level_state_change": "White-box capability harvesting becomes a canonical acquisition route; capability credit remains unchanged; current coding target and untouched WAL qualification remain intact.",
@@ -96,5 +155,6 @@
       "discovery_required": false,
       "not_applicable_reason": "User-authorized governance strategy promotion; no external execution route is selected or executed in this PR."
     }
-  }
+  },
+  "stop_condition": "All active control surfaces agree on the new route order and capsule promotion tests; trusted guard passes; no capability counter changes; current WAL task remains unread and unexecuted by this change."
 }
