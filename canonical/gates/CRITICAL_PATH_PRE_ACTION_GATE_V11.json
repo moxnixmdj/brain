@@ -35,18 +35,23 @@
   ],
   "checks": [
     {
+      "id": "QUALIFICATION_STAGE_EXPLICIT",
+      "question": "If qualification-related, declare STAGE_A_PRE_EXPOSURE, STAGE_B_POST_EXPOSURE_PRE_EXECUTION, or STAGE_C_EXECUTION and forbid later-stage information in earlier stages.",
+      "required": true
+    },
+    {
       "id": "TERMINAL_TARGET_CLOSURE_CURRENT",
       "question": "For qualification or ownership promotion, is the current 19-family terminal target and its behavioral/proof scope closed enough that the proposed evidence has a predeclared meaning?",
       "required": true
     },
     {
       "id": "PREQUALIFICATION_FAILURE_IMMUNITY",
-      "question": "If this action can expose/spend untouched qualification evidence, are all applicable PREQUALIFICATION_FAILURE_IMMUNITY_V1 classes backed by current evidence or explicit contract-bound not-applicable justification?",
+      "question": "For qualification work, satisfy Stage A before instruction exposure, Stage B after exposure but before task execution, and Stage C for one-shot execution as defined by PREQUALIFICATION_FAILURE_IMMUNITY_V1.",
       "required": true
     },
     {
       "id": "FEASIBILITY_CERTIFICATE_CURRENT",
-      "question": "Before untouched evidence is spent, is there a current plausible route satisfying $0 incremental spend, ownership, knowledge-boundary, license, resource and execution constraints?",
+      "question": "Use generic feasibility before exposure and task-specific feasibility only after official instruction exposure but before task execution.",
       "required": true
     },
     {
@@ -472,6 +477,7 @@
   "prequalification_failure_immunity": {
     "path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "applies_to": "UNTOUCHED_QUALIFICATION_SPEND_OR_OPUS_LEVEL_PROMOTION",
-    "fail_closed": true
+    "fail_closed": true,
+    "stage_protocol": "STAGE_A_PRE_EXPOSURE__STAGE_B_POST_EXPOSURE_PRE_EXECUTION__STAGE_C_ONE_SHOT_EXECUTION"
   }
 }
