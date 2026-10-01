@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TASK_DISPOSITION_V1",
+  "status": "SURFACE_BLOCKED_UNSPENT__ZERO_CAPABILITY_VERDICT",
+  "benchmark": "Terminal-Bench 4.0",
+  "sample_manifest": "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json",
+  "rank": 10,
+  "instruction_read": false,
+  "hidden_verifier_read": false,
+  "terminal_submission": false,
+  "surface_finding": {
+    "authorized_runner_branch_created": true,
+    "session_configuration_write_accepted": false,
+    "task_content_exposed": false,
+    "classification": "CURRENT_AUTHORIZED_EXECUTION_SURFACE_COULD_NOT_STAGE_SESSION_CONFIGURATION"
+  },
+  "adjudication": [
+    "NO_CAPABILITY_SUCCESS_OR_FAILURE_INFERENCE",
+    "ZERO_CAPABILITY_CREDIT",
+    "TASK_REMAINS_UNSPENT",
+    "CONTINUE_FROZEN_ORDER_TO_RANK_11"
+  ],
+  "capability_credit_delta": 0,
+  "next_required_action": "LEASE_FROZEN_RANK_11_AFTER_CLEAN_FRESHNESS_CHECK"
+}
