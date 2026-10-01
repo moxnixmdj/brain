@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FAST_EXECUTION_POLICY_V1",
   "policy_id": "FAST_EXECUTION_KERNEL_V1",
-  "status": "DEPLOYED_CANDIDATE__LIVE_TRIAL_ACTIVE__LEGACY_MICROSTEP_BRIDGE_FALLBACK_ONLY",
+  "status": "VERIFIED_DEFAULT__LEGACY_MICROSTEP_BRIDGE_OBSOLETED_BY_DEFAULT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective": "MINIMIZE_WALL_CLOCK_TO_VERIFIED_REAL_EFFECT_WITHOUT_WEAKENING_EVIDENCE_OR_OWNERSHIP",
   "obsolete_by_default": [
@@ -31,7 +31,18 @@
     "current_live_trial_pr": 278,
     "current_session": "mp-checkpoint-consolidation-20261001-fast-v3",
     "bootstrap_replay": "STATE_MUTATIONS_ONLY__HISTORICAL_COMMANDS_8_TO_11",
-    "microstep_git_commits": 0
+    "microstep_git_commits": 0,
+    "trial_result": {
+      "status": "VERIFIED_TRANSPORT_PASS",
+      "reward": 1,
+      "verifier_exit_code": 0,
+      "hidden_tests": "4/4 PASS",
+      "ready_at_utc": "2026-10-01T03:47:41Z",
+      "final_at_utc": "2026-10-01T03:58:03Z",
+      "ready_to_final_seconds": 622,
+      "coding_capability_credit": 0,
+      "coding_credit_reason": "TASK_CONTAMINATED_BY_PUBLIC_SOLUTION_EXPOSURE_BEFORE_FINALIZATION"
+    }
   },
   "invariants": [
     "DO_NOT_READ_OR_RUN_HIDDEN_VERIFIER_BEFORE_EXPLICIT_TERMINAL_AUTHORIZATION",
@@ -42,10 +53,15 @@
   ],
   "promotion_gate": {
     "required": "LIVE_TASK_COMPLETES_OR_MATERIAL_FAILURE_IS_LOCALIZED_WITH_LOWER_WALL_CLOCK_AND_NO_EVIDENCE_REGRESSION",
-    "current": "PENDING_LIVE_TRIAL"
+    "current": "PASS__LIVE_TRANSPORT_TRIAL_REACHED_INDEPENDENT_VERIFIER_REWARD_1_WITH_ZERO_EVIDENCE_REGRESSION"
   },
   "fallback": {
     "route": "LEGACY_SESSION_MINI_SWE_RUNTIME_BRIDGE",
-    "use_only_if": "FAST_BURST_TRANSPORT_ITSELF_FAILS_OR_LOSES_REQUIRED_EVIDENCE"
+    "use_only_if": "FAST_BURST_TRANSPORT_ITSELF_FAILS_OR_LOSES_REQUIRED_EVIDENCE__NOT_FOR_NORMAL_EXECUTION"
+  },
+  "obsoleted_legacy": {
+    "route": "LEGACY_SESSION_MINI_SWE_RUNTIME_BRIDGE",
+    "status": "DISABLED_BY_DEFAULT__EMERGENCY_FALLBACK_ONLY",
+    "evidence": "Old mp-checkpoint session consumed 30 externally serialized steps and hit STEP_LIMIT before terminal verification; fast-burst trial reached terminal verifier with no per-microstep Git commits."
   }
 }
