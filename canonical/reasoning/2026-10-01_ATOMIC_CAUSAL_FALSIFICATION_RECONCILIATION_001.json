@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_ATOMIC_CAUSAL_FALSIFICATION_RECONCILIATION_001",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Promote only the causal knowledge supported by the completed spent replay screen: executable falsification of a route-decision cause, not general root-cause intelligence.",
+  "governing_invariants": [
+    "Active rank-9 atrx-vep-crispr remains isolated and untouched.",
+    "Spent causal evidence may update mechanism state but cannot grant family ownership.",
+    "Candidate generation and causal falsification are distinct atomic transformations.",
+    "External open code is not Brain-owned until internalized and independently verified.",
+    "No training while reusable open routes remain."
+  ],
+  "material_premises": [
+    "Atomic replay screen workflow 36834627961 completed successfully.",
+    "All six factual C3 runs failed.",
+    "Route-step intervention localized the causal decision in 6/6 cases.",
+    "Each case had exactly one rescuing admissible route.",
+    "Repair selected by the replay mechanism matched the evaluation route in 6/6 cases.",
+    "Changing only the downstream output while preserving the wrong route failed in 6/6 cases.",
+    "The candidate is MIT-licensed trajectory-causal-attribution v1.0.0 with zero runtime dependencies."
+  ],
+  "evidence_refs": [
+    "moxnixmdj/verification-capsule-runner@38f3b24c585a85c4ebd6272a3d5fffb122709ac8",
+    "canonical/capabilities/opus55/ATOMIC_CAUSAL_SEED_001_EVIDENCE.json",
+    "canonical/capabilities/opus55/C7_AGENT_REPLAY_ROUTE_SCREEN_001.json"
+  ],
+  "conclusion": "Mark executable cause-hypothesis falsification as a spent-pass reusable mechanism candidate. Do not claim cause-candidate generation, cross-domain root-cause generality, donor independence, or capability ownership.",
+  "selected_route": "RECONCILE_SPENT_EXECUTABLE_CAUSAL_FALSIFICATION_PASS__KEEP_CAUSE_GENERATION_OPEN",
+  "rejected_material_alternatives": [
+    "Promote the whole C7/root-cause capability.",
+    "Treat exhaustive route enumeration as general cause generation.",
+    "Spend fresh evidence before internalization/minimality planning.",
+    "Touch rank-9 task content."
+  ],
+  "uncertainties": [
+    "Fresh unseen transfer is untested.",
+    "The minimum Brain-owned subset of the donor package is not yet localized.",
+    "General cause-candidate generation remains unresolved."
+  ],
+  "assumptions": [
+    "The six spent C3 failures remain valid architectural evidence but not fresh promotion evidence."
+  ],
+  "non_goals": [
+    "No family credit.",
+    "No rank-9 mutation.",
+    "No training."
+  ],
+  "next_action": "Search existing reusable mechanisms specifically for cause-candidate generation; in parallel plan the smallest donor-independent executable-falsification slice for later fresh transfer.",
+  "supersession_conditions": [
+    "Fresh transfer falsifies the replay mechanism.",
+    "A smaller existing mechanism dominates it."
+  ],
+  "supersedes": null
+}
