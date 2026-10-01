@@ -247,7 +247,9 @@
       "task": "freecad-spring-clip",
       "rank": 22,
       "condition": "DERIVED_CAN_EXECUTE_TRUE_AND_AUTHORITY_CURRENT",
-      "exempt_from_retroactive_requalification": true
-    }
+      "exempt_from_retroactive_requalification": false,
+      "status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE"
+    },
+    "full_enforcement_active": true
   }
 }
