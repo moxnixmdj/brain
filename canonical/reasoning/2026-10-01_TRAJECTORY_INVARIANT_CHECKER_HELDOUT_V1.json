@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_TRAJECTORY_INVARIANT_CHECKER_HELDOUT_V1",
+  "status": "HELDOUT_REAL_TRACE_EVALUATION__ZERO_FAMILY_CREDIT",
+  "real_objective": "Delete the deterministic explicit-invariant-checking slice from the learned self-verification problem if a frozen Brain-owned checker separates mechanical policy/transport violations from a genuine cognition failure on precommitted held-out real traces.",
+  "governing_invariants": [
+    "No whole-family ownership claim from this component test.",
+    "Frozen candidate must not be modified after held-out trace read.",
+    "Only generic policy/transport invariants may be encoded; no task-solution literals.",
+    "A genuine cognition failure should not be reclassified as deterministic transport/policy failure.",
+    "Current live coding frontier remains primary; this is an orthogonal zero-credit atomic decomposition."
+  ],
+  "material_premises": [
+    "Candidate was frozen before held-out trace read at commit 8a99cde574087997b3d1ce2c03b63fec67ac6c50.",
+    "Held-out set was precommitted at commit c18a5d4cd17bf98b852952f089dcf3485cdfb2f6: runner PRs 293, 289, and 283.",
+    "PR293 independently records contamination from task-specific solution README exposure.",
+    "PR289 independently records terminal submission with missing /results/output.json and transport-inadmissible disposition.",
+    "PR283 independently records no missing artifacts but reward 0 from substantive verifier failures."
+  ],
+  "evidence_refs": [
+    "canonical/runtime/trajectory_invariant_checker.py",
+    "canonical/capabilities/opus55/TRAJECTORY_INVARIANT_CHECKER_CANDIDATE_V1.json",
+    "https://github.com/moxnixmdj/verification-capsule-runner/pull/293",
+    "https://github.com/moxnixmdj/verification-capsule-runner/pull/289",
+    "https://github.com/moxnixmdj/verification-capsule-runner/pull/283"
+  ],
+  "conclusion": "The frozen deterministic checker cleanly detects the contamination-policy trace and the missing-artifact transport trace while leaving the genuine GSEA cognition failure unflagged by those mechanical invariants. Promote only the narrow deterministic normalization/invariant-checking component; invariant synthesis, semantic judgment, and general root-cause reasoning remain unresolved.",
+  "selected_route": "PROMOTE_NARROW_DETERMINISTIC_TRAJECTORY_INVARIANT_CHECKING_COMPONENT__NO_FAMILY_CREDIT",
+  "rejected_material_alternatives": [
+    "Promote general self-verification/recovery family ownership.",
+    "Modify the candidate after reading held-out traces.",
+    "Treat PR283 reward 0 as a deterministic invariant-checker failure."
+  ],
+  "uncertainties": [
+    "Invariant synthesis remains outside this component.",
+    "The present held-out set is small and validates only explicit machine-checkable invariant classes."
+  ],
+  "assumptions": [
+    "The precommitted trace dispositions remain authoritative for their narrow failure classes."
+  ],
+  "non_goals": [
+    "No change to current coding benchmark order.",
+    "No whole-family capability credit.",
+    "No claim of general root-cause localization."
+  ],
+  "next_action": "Record narrow component evidence and subtract deterministic explicit-invariant checking from the learned residual map; continue searching for invariant synthesis and semantic/root-cause mechanisms.",
+  "supersession_conditions": [
+    "Fresh held-out traces show false positives on genuine cognition failures or false negatives on explicit invariant violations.",
+    "A smaller deterministic mechanism with equal coverage is found."
+  ],
+  "supersedes": null
+}
