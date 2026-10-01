@@ -257,11 +257,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "HARDEN_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE__VERIFY_FAIL_CLOSED__THEN_RECOMPUTE_NEXT_UNTOUCHED_SAMPLE",
+    "next_step": "EXPOSE_RANK23_OFFICIAL_INSTRUCTION_EXACTLY_ONCE__FREEZE_RAW_SOURCE__LOSSLESSLY_COMPILE_STAGE_B_BEHAVIORAL_CONTRACT__NO_TASK_EXECUTION__NO_DISCOVERY_SEARCH",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "GENERIC_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE_NOT_YET_HARDENED",
+    "critical_blocker": "RANK23_STAGE_B_OFFICIAL_INSTRUCTION_EXPOSURE_AND_LOSSLESS_SOURCE_CONTRACT_COMPILATION",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -338,7 +338,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "GENERIC_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE_NOT_YET_HARDENED",
+    "highest_leverage_capability_gap": "RANK23_STAGE_B_OFFICIAL_INSTRUCTION_EXPOSURE_AND_LOSSLESS_SOURCE_CONTRACT_COMPILATION",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -766,9 +766,9 @@
     },
     "execution_kernel": "canonical/execution/HIGH_THROUGHPUT_EXECUTION_V2.json",
     "active_stage1_task": {
-      "rank": 22,
-      "task": "freecad-spring-clip",
-      "state": "SPENT_BUILDER_RUNTIME_FAILURE__NO_REPLAY"
+      "rank": 23,
+      "task": "layout-config-recreation2",
+      "state": "STAGE_A_INDEPENDENT_PASS__STAGE_B_EXPOSURE_AUTHORIZED__INSTRUCTION_UNREAD"
     },
     "latest_clean_stage1_result": {
       "task": "gsea-proteomics",
@@ -797,13 +797,18 @@
     "next_clean": {
       "rank": 23,
       "task": "layout-config-recreation2",
-      "state": "FROZEN_UNREAD__STAGE_A_REQUIRED"
+      "state": "STAGE_A_PASS__STAGE_B_EXPOSURE_AUTHORIZED__INSTRUCTION_UNREAD"
     },
-    "blocker": "RANK23_PREEXPOSURE_STAGE_A_NOT_YET_INDEPENDENTLY_ADJUDICATED",
+    "blocker": "RANK23_STAGE_B_OFFICIAL_INSTRUCTION_EXPOSURE_AND_LOSSLESS_SOURCE_CONTRACT_COMPILATION",
     "rank22_failure_immunity": {
       "status": "VERIFIED_AND_MERGED",
       "evidence": "canonical/governance/RANK22_BUILDER_FAILURE_IMMUNITY_VERIFICATION_20261002_V1.json",
       "runner_merge_commit": "36dcfbd279790ce95c01bf96163266290cfb9929"
+    },
+    "rank23_stage_a": {
+      "status": "INDEPENDENT_PASS__MERGED",
+      "evidence": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_STAGE_A_ADMISSION_V1.json",
+      "runner_merge_commit": "c61dab63ef2f24c3e18b2d3cdd39298f9d40a54d"
     }
   },
   "provider_rules": {
