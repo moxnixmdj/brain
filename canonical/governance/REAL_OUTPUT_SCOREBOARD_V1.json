@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK20_ONE_SHOT_STAGE_C_EXECUTION_PLUS_TERMINAL_VERDICT",
+  "next_progress_event_target": "NEXT_UNTOUCHED_FROZEN_SAMPLE_PREEXPOSURE_STAGE_A",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -987,32 +987,26 @@
     }
   ],
   "last_real_output_event": {
-    "event_id": "SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_SURFACE_FAILURE_20261001",
+    "event_id": "VBA_USERFORM_PORT_RANK20_EXTERNAL_SEARCH_CONTAMINATION_20261001",
     "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "status": "SPENT_EXECUTION_SURFACE_FAILURE__PEP668__NO_TASK_AUDIO_ANALYSIS__NO_TERMINAL_VERDICT__ZERO_CREDIT",
-    "evidence_path": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
-    "public_runner_pr": 364,
-    "session_id": "satb-audio-transcription-20261001-stagec-v1",
-    "verifier_exit_code": null,
-    "reward": null,
+    "status": "CONTAMINATED_PREEXECUTION__STAGE_C_LEASE_REVOKED__ZERO_BUILDER_BURSTS__ZERO_TERMINAL_VERIFIER_RUNS__ZERO_CREDIT__NO_REPLAY",
+    "evidence_path": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_CONTAMINATION_LEDGER_V1.json",
     "capability_credit_delta": 0,
-    "progress_credit": "GENERIC_EXECUTION_SURFACE_BLOCKER_LOCALIZED",
-    "residual_gaps": [
-      "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_001"
-    ],
+    "progress_credit": "GENERIC_SOURCE_BOUNDARY_PROMOTION_GAP_LOCALIZED_AND_SYSTEMICALLY_CLOSED",
+    "residual_gaps": [],
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK19_SPENT_EXECUTION_SURFACE_FAILURE__ZERO_TERMINAL_VERDICT__RANK20_PREEXPOSURE_PRIMARY",
-    "blocker": "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_GAP_REPAIRED_IN_CONTROL__RANK20_ELIGIBILITY_NEXT",
+    "status": "RANK20_CONTAMINATED_PREEXECUTION__SOURCE_BOUNDARY_PROMOTION_GATE_VERIFIED_MERGED__NEXT_CLEAN_SAMPLE_RECOMPUTE_PRIMARY",
+    "blocker": "NEXT_UNTOUCHED_FROZEN_SAMPLE_NOT_YET_RECOMPUTED",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
-    "next_clean_rank": 20,
-    "next_clean_task": "vba-userform-port",
+    "evidence_path": "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json",
+    "next_clean_rank": null,
+    "next_clean_task": null,
     "next_clean_task_authorized": false
   },
-  "next_required_action": "OPEN_STAGE_C_CARRIER__BIND_EXACT_READY_SURFACE_PROFILE__ONE_BUILDER_COMMAND__OUTPUT_FREEZE__ONE_TERMINAL_VERIFIER__NO_REPLAY",
+  "next_required_action": "RECOMPUTE_NEXT_UNTOUCHED_FROZEN_SAMPLE_FROM_PRECOMMITTED_ORDER__RUN_STAGE_A_WITH_SOURCE_BOUNDARY_AND_EXECUTION_SURFACE_GATES__NO_RANK20_REPLAY",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1103,9 +1097,9 @@
     "replay_allowed": false
   },
   "next_clean_task": {
-    "rank": 20,
-    "task": "vba-userform-port",
-    "state": "FROZEN_UNREAD__PREEXPOSURE_ELIGIBILITY_CHECK_REQUIRED"
+    "rank": null,
+    "task": null,
+    "state": "RECOMPUTE_FROM_PRECOMMITTED_FROZEN_ORDER__RANK20_INELIGIBLE"
   },
   "rank19_stage_c": {
     "status": "SPENT_EXECUTION_SURFACE_FAILURE__NO_TASK_AUDIO_ANALYSIS__NO_OUTPUT__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
@@ -1128,10 +1122,16 @@
     "next_clean_task": "vba-userform-port"
   },
   "rank20_vba_userform_port": {
-    "status": "STAGE_B_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_LEASED__ZERO_CREDIT_PENDING_TERMINAL_VERDICT",
+    "status": "CONTAMINATED_PREEXECUTION__STAGE_C_LEASE_REVOKED__ZERO_CREDIT__NO_REPLAY",
     "stage_b_verification": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_STAGE_B_VERIFICATION_V1.json",
     "lease": "canonical/governance/LEASE_VBA_USERFORM_PORT_TB4_STAGE_C_20261001_V1.json",
+    "contamination_ledger": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_CONTAMINATION_LEDGER_V1.json",
     "execution_count_used": 0,
     "terminal_verifier_count_used": 0
+  },
+  "source_boundary_promotion_gate": {
+    "status": "VERIFIED_AND_MERGED",
+    "evidence": "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json",
+    "runner_merge_commit": "a902df6b5e8393cf8aff563f5394dc40a0b314d0"
   }
 }
