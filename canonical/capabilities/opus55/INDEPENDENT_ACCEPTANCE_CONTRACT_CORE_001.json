@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_INDEPENDENT_ACCEPTANCE_CORE_V1",
+  "result_id": "INDEPENDENT_ACCEPTANCE_CONTRACT_CORE_001",
+  "date": "2026-10-01",
+  "status": "VERIFIED_BRAIN_OWNED_DETERMINISTIC_VERIFICATION_COMPONENT__ZERO_FAMILY_CREDIT",
+  "artifact": {
+    "path": "canonical/runtime/independent_acceptance_contract.py",
+    "runner_verified_blob_sha": "cb116ec30aba085060a5767a494df446f9d1df0b",
+    "donor_runtime_required": false
+  },
+  "execution_enforcement": {
+    "runner_pr": 311,
+    "runner_merge_commit": "30b13e6d6d0944d1cfb05d04db97a71bca2260bd",
+    "verification_workflow_run_id": 36904773753,
+    "execution_guard_run_id": 36904773727,
+    "artifact_preflight_run_id": 36904773813
+  },
+  "owned_scope": [
+    "CANONICAL_LEASE_AUTHORIZATION_REQUIRED_BEFORE_INSTRUCTION_EXPOSURE",
+    "BEHAVIORAL_CONTRACT_COMPLETENESS_VALIDATION",
+    "APPLICABLE_REQUIREMENT_MUST_BE_COVERED_BY_FROZEN_ACCEPTANCE_CHECK",
+    "BUILDER_RECOMPUTE_EXCLUDED_AS_INDEPENDENT_CHECK_CLASS",
+    "CANONICAL_ACCEPTANCE_PAYLOAD_HASHING",
+    "COMMANDS_BOUND_TO_FROZEN_ACCEPTANCE_HASH",
+    "TERMINAL_AUTHORIZATION_BOUND_TO_SAME_FROZEN_ACCEPTANCE_HASH",
+    "DETERMINISTIC_REQUIRED_NODE_EDGE_AND_INPUT_OUTPUT_REACHABILITY_AUDIT"
+  ],
+  "verification": {
+    "fresh_randomized_requirement_graph_omission_cases": 500,
+    "result": "SUCCESS",
+    "negative_tests": [
+      "MISSING_BEHAVIOR_FIELD",
+      "UNCOVERED_REQUIREMENT",
+      "BUILDER_RECOMPUTE_AS_FAKE_INDEPENDENCE",
+      "TERMINAL_HASH_MISMATCH",
+      "INVALID_CANONICAL_LEASE_AUTHORITY"
+    ]
+  },
+  "not_claimed": [
+    "SEMANTIC_EXTRACTION_OF_COMPLETE_REQUIREMENTS_FROM_RAW_SPECIFICATIONS",
+    "GENERATION_OF_CORRECT_DOMAIN_SPECIFIC_ACCEPTANCE_PREDICATES",
+    "DISCOVERY_OF_UNSTATED_DOMAIN_RULES",
+    "WHOLE_SELF_VERIFICATION_FAMILY"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
