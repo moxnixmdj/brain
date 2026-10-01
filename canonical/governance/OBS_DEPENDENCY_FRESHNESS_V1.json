@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_OBS_DEPENDENCY_FRESHNESS_V1",
+  "date": "2026-10-01",
+  "status": "CANDIDATE_FAIL_CLOSED_ZERO_CREDIT",
+  "purpose": "Invalidate decision authority when any material execution dependency or evidence input becomes stale, contradictory, unavailable, or unverified.",
+  "rules": [
+    "Every consequential action declares all material dependencies.",
+    "Each volatile dependency declares evidence, scope, observation time and freshness lease.",
+    "Expired, contradictory, unavailable or missing dependency evidence becomes UNKNOWN.",
+    "UNKNOWN material dependencies block dependent authoritative actions.",
+    "Every material execution or verification receipt invalidates the affected OBS layers before the next action.",
+    "Only affected OBS layers are recomputed when dependency scope is safely localizable.",
+    "A valid proof-producing action that survives revalidation executes immediately; OBS work itself receives zero progress credit."
+  ],
+  "dependency_classes": [
+    "canonical_state",
+    "execution_authority",
+    "verification_receipt",
+    "execution_surface",
+    "tool_or_service",
+    "data_source",
+    "package_or_model",
+    "network_or_capacity",
+    "cost_or_rate_limit",
+    "benchmark_or_target_version"
+  ],
+  "incremental_spend_usd": 0
+}
