@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "RCAEV_REAL_TRANSFER_PILOT_RECONCILE_V1",
+  "status": "ZERO_FAMILY_CREDIT",
+  "real_objective": "Preserve the four-case real-transfer result and advance to broader untouched cases.",
+  "governing_invariants": [
+    "RANK9_UNTOUCHED",
+    "EXTERNAL_PC_GRAPH",
+    "BRAIN_OWNED_RANKER",
+    "SAME_GATE_FOR_BROADER_SET"
+  ],
+  "material_premises": [
+    "SERVICE_TOP3=0.75",
+    "SERVICE_TOP5=1.0",
+    "METRIC_TOP10=0.75",
+    "PILOT_GATE=PASS"
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/RCAEV_REAL_TRACE_TRANSFER_PILOT_20261001_V1.json"
+  ],
+  "conclusion": "Pilot transfer passed; broaden without replay or threshold relaxation.",
+  "selected_route": "BROAD_FRESH_TRANSFER_NEXT",
+  "rejected_material_alternatives": [
+    "GENERAL_RCA_CLAIM",
+    "PILOT_REPLAY",
+    "GATE_LOOSENING"
+  ],
+  "uncertainties": [
+    "GRAPH_SUPPLIER_QUALITY",
+    "ONE_WEAK_EXACT_METRIC_CASE"
+  ],
+  "assumptions": [
+    "Untouched cases remain available."
+  ],
+  "non_goals": [
+    "NO_GRAPH_OWNERSHIP",
+    "NO_FAMILY_CREDIT"
+  ],
+  "next_action": "Run broader untouched RCAEval transfer with the same gate.",
+  "supersession_conditions": [
+    "Broader transfer fails."
+  ],
+  "supersedes": null
+}
