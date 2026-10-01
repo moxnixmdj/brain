@@ -40,7 +40,8 @@
         "canonical/capabilities/opus55/ORTHOGRAPHIC_CONSTRAINT_GRAPH_001.json",
         "canonical/runtime/drawing_view_regions.py",
         "canonical/runtime/orthographic_view_identity.py",
-        "canonical/runtime/callout_geometry_association.py"
+        "canonical/runtime/callout_geometry_association.py",
+        "canonical/runtime/drawing_view_registration.py"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -49,7 +50,7 @@
       ],
       "uncovered": [
         "OCR_IMAGE_TO_TEXT_WITH_PINNED_MODEL_DATA_AND_DEPENDENCY_ACCOUNTING",
-        "VIEW_REGISTRATION_OUTSIDE_DECLARED_AXIS_ALIGNED_LAYOUTS",
+        "VIEW_REGISTRATION_OUTSIDE_SINGLE_BOUNDED_GLOBAL_ROTATION_DESKEW__INCLUDING_LOCAL_WARP_PERSPECTIVE_AND_NONORTHOGONAL_LAYOUTS",
         "COMPOUND_VISUAL_FEATURE_SEMANTICS",
         "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
         "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
@@ -74,6 +75,13 @@
           "conclusion": "success",
           "blob_sha": "6971ca86ffba0185c419ae893800312994efeacd",
           "scope": "BOUNDED_DETERMINISTIC_CALLOUT_TO_GEOMETRY_ASSOCIATION_ONLY"
+        },
+        "drawing_view_registration": {
+          "workflow_run_id": 36942693774,
+          "conclusion": "success",
+          "blob_sha": "0f6189864e415b1837e2f22456b99b568b2af374",
+          "repair_commit": "c824540cf95fcec19028b0a72fef22b230fb77ef",
+          "scope": "SINGLE_GLOBAL_ROTATION_DESKEW_FOR_ORTHOGONAL_LINE_DOMINATED_DRAWINGS_WITHIN_15_DEGREES__OPENCV4_AND5_HOUGH_RETURN_SHAPES_NORMALIZED"
         }
       }
     },
@@ -115,7 +123,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "newly_verified_components": 4,
-    "note": "Narrow verification promotion only; M0A and M1A remain open and exact cut remains unauthorized."
+    "newly_verified_components": 5,
+    "note": "Narrow verification promotion only; M0A and M1A remain open and exact cut remains unauthorized. Drawing registration residual narrowed to non-global-rotation cases."
   }
 }
