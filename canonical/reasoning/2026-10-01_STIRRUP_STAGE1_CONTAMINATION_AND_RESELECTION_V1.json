@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_WORK_STAGE1_CONTAMINATION_CORRECTION_V1",
+  "date": "2026-10-01",
+  "status": "CONTAMINATION_QUARANTINED__CLEAN_REPLACEMENTS_FROZEN__ZERO_CREDIT",
+  "contaminated": [
+    {
+      "artifact_class": "XLSX",
+      "task_id": "a079d38f-c529-436a-beca-3e291f9e62a3"
+    },
+    {
+      "artifact_class": "PPTX",
+      "task_id": "be830ca0-b352-4658-a5bd-57139d6780ba"
+    }
+  ],
+  "preserved": {
+    "artifact_class": "TEXT_CONFIG",
+    "task_id": "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f"
+  },
+  "replacement_selection": {
+    "runner_pr": 301,
+    "workflow_run_id": 36899819951,
+    "artifact_id": 11181317308,
+    "artifact_zip_sha256": "97c1cc0d60c2037149517f87191891b2760fb5ceea9659f10813bbd1514b4b38",
+    "method": "METADATA_ONLY__SAME_PRECOMMITTED_LEXICOGRAPHIC_MIN_SHA256_TASK_ID_RULE",
+    "prompts_read": false,
+    "replacements": [
+      {
+        "artifact_class": "XLSX",
+        "task_id": "bb863dd9-31c2-4f64-911a-ce11f457143b",
+        "task_id_sha256": "19028054c2b90b3a8d4c3ee78076118745cbe3f358b69502e8788a4ac65ef397"
+      },
+      {
+        "artifact_class": "PPTX",
+        "task_id": "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+        "task_id_sha256": "1b9a593b3c8a26bfa1e3f84c8969f74737f9abeb2c1627578c9c98f69539c6ec"
+      }
+    ]
+  },
+  "corrected_stage1_task_ids": [
+    "bb863dd9-31c2-4f64-911a-ce11f457143b",
+    "9a0d8d36-6233-4c76-9107-0d1f783c7340",
+    "2c249e0f-4a8c-4f8e-b4f4-6508ba29b34f"
+  ],
+  "rule": "PRE_OUTPUT_EXPOSURE_OF_TASK_SPECIFIC_RUBRIC_GOLD_MODEL_OUTPUT_OR_EVALUATION_CHECKS_INVALIDATES_FRESH_STAGE1_USE",
+  "capability_credit_delta": 0
+}
