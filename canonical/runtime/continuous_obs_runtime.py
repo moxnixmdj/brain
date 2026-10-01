@@ -32,6 +32,8 @@ ALLOWED_CLASSES = {
     "EXTERNAL_WORLD_STATE",
 }
 ALLOWED_VOLATILITY = {"STATIC","VOLATILE"}
+INFORMATION_MODES = {"OPEN_DISCOVERY","EXACT_FETCH_ONLY","NO_EXTERNAL_INFORMATION"}
+INFORMATION_ACTIONS = {"EXACT_FETCH","DISCOVERY_SEARCH","EXTERNAL_TOOL","PACKAGE_INSTALL","PLANNER"}
 ALLOWED_SCOPE = {"GLOBAL","ACCOUNT_SPECIFIC","LOCAL","REGION_SPECIFIC","TASK_SPECIFIC"}
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
@@ -80,6 +82,18 @@ def validate_context(
         errors.append("DEPENDENCY_INVENTORY_NOT_COMPLETE")
     if context.get("material_world_state_dependencies_complete") is not True:
         errors.append("MATERIAL_WORLD_STATE_INVENTORY_NOT_COMPLETE")
+    if context.get("information_boundary_complete") is not True:
+        errors.append("INFORMATION_BOUNDARY_NOT_COMPLETE")
+    info=context.get("information_policy")
+    if not isinstance(info,dict):
+        errors.append("INFORMATION_POLICY_MISSING")
+    else:
+        if info.get("mode") not in INFORMATION_MODES:
+            errors.append("INFORMATION_POLICY_MODE_INVALID")
+        if not isinstance(info.get("allowed_exact_sources"),list):
+            errors.append("INFORMATION_ALLOWED_EXACT_SOURCES_INVALID")
+        if not isinstance(info.get("allowed_external_tool_kinds"),list):
+            errors.append("INFORMATION_ALLOWED_EXTERNAL_TOOL_KINDS_INVALID")
     unknown=context.get("unknown_material_dependencies")
     if not isinstance(unknown, list) or unknown:
         errors.append("UNKNOWN_MATERIAL_DEPENDENCIES_PRESENT")
@@ -195,6 +209,45 @@ def validate_context(
         "canonical_generation":generation,
         "dependency_count":len(deps),
         "rule":"NO_MATERIAL_UNKNOWN_OR_STALE_DEPENDENCY_MAY_AUTHORIZE_WORK",
+    }
+
+
+def authorize_information_action(
+    context: Any,
+    action: Mapping[str, Any],
+    *,
+    root: pathlib.Path,
+    now: datetime | None = None,
+) -> dict[str, Any]:
+    base=validate_context(context,root=root,now=now)
+    errors=list(base.get("errors") or [])
+    kind=str(action.get("kind") or "")
+    source=str(action.get("source") or "")
+    tool_kind=str(action.get("tool_kind") or "")
+    if kind not in INFORMATION_ACTIONS:
+        errors.append("INFORMATION_ACTION_KIND_INVALID")
+    info=context.get("information_policy") if isinstance(context,dict) else None
+    if isinstance(info,dict):
+        mode=info.get("mode")
+        allowed=[str(x) for x in info.get("allowed_exact_sources") or [] if str(x)]
+        allowed_tools=[str(x) for x in info.get("allowed_external_tool_kinds") or [] if str(x)]
+        if mode=="NO_EXTERNAL_INFORMATION":
+            errors.append("EXTERNAL_INFORMATION_FORBIDDEN")
+        elif mode=="EXACT_FETCH_ONLY":
+            if kind!="EXACT_FETCH":
+                errors.append("DISCOVERY_FORBIDDEN_EXACT_FETCH_ONLY")
+            elif not source or source not in allowed:
+                errors.append("EXACT_FETCH_SOURCE_NOT_PREDECLARED")
+        elif mode=="OPEN_DISCOVERY":
+            if tool_kind and allowed_tools and tool_kind not in allowed_tools:
+                errors.append("EXTERNAL_TOOL_KIND_NOT_ALLOWED")
+    return {
+        "schema":"PROJECT_BRAIN_CONTINUOUS_OBS_INFORMATION_ADMISSION_V1",
+        "pass":not errors,
+        "errors":sorted(set(errors)),
+        "action":{"kind":kind,"source":source,"tool_kind":tool_kind},
+        "mode":info.get("mode") if isinstance(info,dict) else None,
+        "checked_at_utc":base.get("checked_at_utc"),
     }
 
 
