@@ -44,9 +44,16 @@ def evaluate(root: Path, ledger_rel: str, task: str, rank: int, identity_sha256:
         failures.append("QUALIFICATION_CONTAMINATION_LEDGER")
     exposure=c.get("prior_exposure_search",{})
     expected_hit_fields=(
-        "brain_code_hits","runner_code_hits","brain_branch_hits","runner_branch_hits",
-        "brain_commit_hits","runner_commit_hits","runner_pr_hits"
+        "brain_code_hits","runner_code_hits",
+        "brain_branch_hits","runner_branch_hits",
+        "brain_commit_hits","runner_commit_hits",
+        "brain_pr_hits","runner_pr_hits"
     )
+    if exposure.get("search_complete") is not True:
+        failures.append("PRIOR_EXPOSURE_SEARCH_INCOMPLETE")
+    missing=[k for k in expected_hit_fields if k not in exposure]
+    if missing:
+        failures.append("PRIOR_EXPOSURE_SEARCH_FIELDS_MISSING")
     if any(exposure.get(k) != 0 for k in expected_hit_fields):
         failures.append("PRIOR_EXPOSURE_SEARCH_NOT_CLEAN")
     if e.get("status")!="STAGE_A_GENERIC_SURFACE_PASS__TASK_SPECIFIC_SURFACE_UNCLAIMED":
