@@ -1,6 +1,10 @@
 {
-  "runner": "HARBOR_DOCKER",
+  "control_branch": "arena/01a0f44a-brain",
+  "control_branch_fetch": {
+    "detail": "ok",
+    "ok": true
+  },
+  "next_step": 1,
   "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
-  "status": "STARTING_TASK_RUNTIME",
-  "task": "mp-checkpoint-consolidation"
+  "status": "READY_FOR_COMMAND"
 }
