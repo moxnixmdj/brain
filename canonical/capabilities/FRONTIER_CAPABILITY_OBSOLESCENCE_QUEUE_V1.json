@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "EXECUTE_FROZEN_SAMPLE_RANK_5_BATCHED_EVAL_PARITY_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER__THEN_UPDATE_STAGE1_BREADTH",
+    "next_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -115,13 +115,15 @@
       "contaminated_or_inadmissible": [
         "live-database-cutover",
         "mp-checkpoint-consolidation",
-        "hof-topology-interpenetration"
+        "hof-topology-interpenetration",
+        "batched-eval-parity"
       ],
       "current_task": {
-        "rank": 5,
-        "task": "batched-eval-parity",
-        "state": "RUNNER_READY__INSTRUCTION_UNREAD",
-        "runner_pr": 288
+        "rank": 6,
+        "task": "glycan-ms2-elucidation",
+        "state": "RUNNER_LAUNCHED__BUILDING_RUNTIME__INSTRUCTION_UNREAD",
+        "runner_pr": 289,
+        "workflow_run_id": 36822123561
       },
       "comparable_score_established": false
     },
@@ -137,6 +139,13 @@
         "GSEA_DEFAULT_PARAMETER_SEMANTICS",
         "FDR_AND_LEADING_EDGE_INTERPRETATION"
       ]
+    },
+    "latest_contamination": {
+      "task": "batched-eval-parity",
+      "rank": 5,
+      "cause": "TASK_TOML_SOLUTION_EXPOSURE",
+      "hidden_verifier_run": false,
+      "evidence_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json"
     }
   },
   "promotion_claim": false,
