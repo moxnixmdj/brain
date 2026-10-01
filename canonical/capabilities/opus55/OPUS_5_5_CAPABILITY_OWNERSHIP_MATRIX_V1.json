@@ -74,7 +74,22 @@
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "trymeka/agent",
+          "license": "MIT",
+          "role": "vision-first autonomous browser agent scaffold",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "visnia-ai/browser-agent",
+          "license": "MIT",
+          "role": "open browser agent runtime with pluggable model substrate",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass."
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -98,7 +113,16 @@
         "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
         "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
       ],
-      "next_required_action": "Run stage-1 contamination-safe cross-artifact falsification on a deterministic small public GDPval subset before any broad matched comparison; zero Opus credit until pass."
+      "next_required_action": "Run stage-1 contamination-safe cross-artifact falsification on a deterministic small public GDPval subset before any broad matched comparison; zero Opus credit until pass.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "genspark-ai/genoffice",
+          "license": "Apache-2.0",
+          "role": "local native DOCX/XLSX/PPTX/PDF engines plus CLI/agent skill",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Reuse Stirrup plus Brain-owned XLSX/PPTX and candidate native DOCX/PDF mechanisms, then run the already-required contamination-safe cross-artifact falsification."
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -113,7 +137,22 @@
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "trymeka/agent",
+          "license": "MIT",
+          "role": "vision-first autonomous browser agent scaffold",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "visnia-ai/browser-agent",
+          "license": "MIT",
+          "role": "open browser agent runtime with pluggable model substrate",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Reuse browser/tool execution mechanisms only where they transfer to multi-app workflows; verify on clean automation tasks."
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -128,7 +167,16 @@
         "https://labs.scale.com/leaderboard/hle-diamond"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "Alibaba-NLP/DeepResearch",
+          "license": "Apache-2.0",
+          "role": "open long-horizon research framework and Tongyi-DeepResearch-30B-A3B weights",
+          "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Test transfer of the research agent's planning/evidence loop across fresh multidisciplinary tasks; harvest learned residual only after deterministic components are removed."
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -143,7 +191,16 @@
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "Alibaba-NLP/DeepResearch",
+          "license": "Apache-2.0",
+          "role": "open long-horizon research framework and Tongyi-DeepResearch-30B-A3B weights",
+          "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Reuse the open research framework first; causally isolate learned long-horizon research residual from the open weights only if framework reuse is insufficient."
     },
     {
       "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
@@ -159,7 +216,16 @@
         "https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "genspark-ai/genoffice",
+          "license": "Apache-2.0",
+          "role": "local native DOCX/XLSX/PPTX/PDF engines plus CLI/agent skill",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Separate deterministic document parsing/rendering from learned visual understanding; internalize deterministic scope first, then localize any remaining learned residual."
     },
     {
       "family": "COMPUTER_AND_BROWSER_USE",
@@ -174,7 +240,22 @@
         "https://openai.com/index/gpt-6-astra/"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "trymeka/agent",
+          "license": "MIT",
+          "role": "vision-first autonomous browser agent scaffold",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "visnia-ai/browser-agent",
+          "license": "MIT",
+          "role": "open browser agent runtime with pluggable model substrate",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Compare candidate runtimes against Brain-owned tool/coordination machinery, internalize only missing browser-control/state/recovery primitives, then run fresh same-harness evaluation."
     },
     {
       "family": "FINANCIAL_ANALYSIS",
@@ -202,7 +283,22 @@
         "https://www.anthropic.com/claude-opus-5-5"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "ReflexioAI/reflexio",
+          "license": "Apache-2.0",
+          "role": "persistent playbook extraction and behavioral self-improvement",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "microsoft/AgentRx",
+          "license": "MIT",
+          "role": "failure diagnosis from agent execution trajectories",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior."
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -239,7 +335,16 @@
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
       ],
-      "next_required_action": "Reuse this owned coordination mechanism; separately acquire/verify residual cognitive delegation quality and broader-scale behavior."
+      "next_required_action": "Reuse this owned coordination mechanism; separately acquire/verify residual cognitive delegation quality and broader-scale behavior.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "Alibaba-NLP/DeepResearch",
+          "license": "Apache-2.0",
+          "role": "open long-horizon research framework and Tongyi-DeepResearch-30B-A3B weights",
+          "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Inspect supervisor/researcher decomposition for cognitive delegation mechanisms not covered by Brain's owned mechanical coordination."
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -256,7 +361,22 @@
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json"
       ],
-      "next_required_action": "Acquire/verify the remaining cognitive self-critique, root-cause debugging and arbitrary recovery mechanisms; reuse the owned deterministic guard globally."
+      "next_required_action": "Acquire/verify the remaining cognitive self-critique, root-cause debugging and arbitrary recovery mechanisms; reuse the owned deterministic guard globally.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "ReflexioAI/reflexio",
+          "license": "Apache-2.0",
+          "role": "persistent playbook extraction and behavioral self-improvement",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "microsoft/AgentRx",
+          "license": "MIT",
+          "role": "failure diagnosis from agent execution trajectories",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Compose Brain's deterministic fail-closed guard with failure diagnosis and reflection/playbook mechanisms; verify root-cause localization and recovery on fresh failures."
     },
     {
       "family": "ARTIFACT_CREATION",
@@ -275,7 +395,16 @@
       "internalized_configuration": [
         "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07"
       ],
-      "next_required_action": "Internalize/verify strongest permissively licensed DOCX/PDF/advanced artifact mechanisms, then run direct Brain-vs-Opus professional artifact quality evaluation."
+      "next_required_action": "Internalize/verify strongest permissively licensed DOCX/PDF/advanced artifact mechanisms, then run direct Brain-vs-Opus professional artifact quality evaluation.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "genspark-ai/genoffice",
+          "license": "Apache-2.0",
+          "role": "local native DOCX/XLSX/PPTX/PDF engines plus CLI/agent skill",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Determine the minimum vendorable GenOffice slice that closes DOCX/PDF and advanced-editing gaps; independently verify round-trip preservation and professional quality before credit."
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
@@ -301,7 +430,22 @@
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven."
+      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "trymeka/agent",
+          "license": "MIT",
+          "role": "vision-first autonomous browser agent scaffold",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "visnia-ai/browser-agent",
+          "license": "MIT",
+          "role": "open browser agent runtime with pluggable model substrate",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay."
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -314,7 +458,16 @@
         "https://openai.com/index/gpt-6-astra/"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "Alibaba-NLP/DeepResearch",
+          "license": "Apache-2.0",
+          "role": "open long-horizon research framework and Tongyi-DeepResearch-30B-A3B weights",
+          "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Use fresh unseen-domain tasks to distinguish generic research-loop transfer from learned donor behavior; zero credit until donor-independent."
     },
     {
       "family": "MULTI_CAPABILITY_COMPOSITION",
@@ -326,7 +479,28 @@
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven."
+      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven.",
+      "candidate_internalization_routes": [
+        {
+          "repo": "trymeka/agent",
+          "license": "MIT",
+          "role": "vision-first autonomous browser agent scaffold",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "visnia-ai/browser-agent",
+          "license": "MIT",
+          "role": "open browser agent runtime with pluggable model substrate",
+          "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
+        },
+        {
+          "repo": "Alibaba-NLP/DeepResearch",
+          "license": "Apache-2.0",
+          "role": "open long-horizon research framework and Tongyi-DeepResearch-30B-A3B weights",
+          "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
+        }
+      ],
+      "campaign_next_action": "Test whether shared orchestration primitives transfer across browser, research and artifact tasks before treating them as a common composition mechanism."
     },
     {
       "family": "EXACT_SYMBOLIC_COMPUTATION",
@@ -382,5 +556,12 @@
     "capsule_schema": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "rule": "HARVEST_ONLY_RESIDUAL_LEARNED_BEHAVIOR_AFTER_DELETE_REUSE_SUBSTITUTE__DONOR_PERFORMANCE_ZERO_OWNERSHIP_CREDIT",
     "promotion": "CAUSAL_ABLATION_RESCUE__SPECIFICITY__HELDOUT__DONOR_DELETION__FULL_DEPENDENCY_ACCOUNTING__EXACT_BRAIN_ROUTE_GE_OPUS55"
+  },
+  "all_family_obsolescence_campaign": {
+    "status": "ACTIVE__CANDIDATE_DISCOVERY_RECORDED__ZERO_NEW_CAPABILITY_CREDIT",
+    "path": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
+    "activation_date": "2026-10-01",
+    "unfinished_families_at_activation": 17,
+    "shared_residual_lanes": 5
   }
 }
