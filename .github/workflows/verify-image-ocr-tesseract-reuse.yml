@@ -6,6 +6,7 @@ on:
       - canonical/runtime/bound_capabilities/image_ocr_tesseract.py
       - canonical/tests/test_image_ocr_tesseract.py
       - canonical/verification/verify_image_ocr_tesseract_reuse.py
+      - canonical/verification/verify_pinned_image_ocr_surface.py
       - .github/workflows/verify-image-ocr-tesseract-reuse.yml
   workflow_dispatch:
 permissions:
@@ -18,5 +19,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y \
+            tesseract-ocr=5.3.4-1build5 \
+            libtesseract5=5.3.4-1build5 \
+            tesseract-ocr-eng=1:4.1.0-2
       - run: python -m unittest -v canonical.tests.test_image_ocr_tesseract
       - run: python canonical/verification/verify_image_ocr_tesseract_reuse.py
+      - run: python canonical/verification/verify_pinned_image_ocr_surface.py
