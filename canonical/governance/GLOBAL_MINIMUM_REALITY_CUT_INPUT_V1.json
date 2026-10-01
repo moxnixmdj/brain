@@ -120,20 +120,81 @@
         "P_COMPUTER_AND_BROWSER_USE"
       ],
       "cost": 1
+    },
+    {
+      "id": "Q_COMPLEX_MULTI_TOOL_MATCHED",
+      "covers": [
+        "P_COMPLEX_MULTI_TOOL_AGENCY"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_FINANCE_COMPOSITE_MATCHED",
+      "covers": [
+        "P_FINANCIAL_ANALYSIS"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_INSTRUCTION_LIVEBENCH_SCOPE",
+      "covers": [
+        "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_SUBAGENT_MATCHED_DELEGATION",
+      "covers": [
+        "P_SUBAGENT_DELEGATION_AND_COORDINATION"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_SELF_VERIFY_CAUSAL_INTERVENTION",
+      "covers": [
+        "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_ARTIFACT_MECHANICAL_PLUS_QUALITY",
+      "covers": [
+        "P_ARTIFACT_CREATION"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_COMMUNICATION_GROUNDED_SYNTHESIS",
+      "covers": [
+        "P_COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_TOOL_ECOSYSTEM_TRANSFER",
+      "covers": [
+        "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_UNKNOWN_DOMAIN_TRANSFER",
+      "covers": [
+        "P_UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_MULTI_CAPABILITY_INTERACTION",
+      "covers": [
+        "P_MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "cost": 1
     }
   ],
-  "expected_current_verdict": "UNRESOLVABLE_WITH_DECLARED_OBSERVATIONS",
-  "expected_missing_distinctions": [
-    "P_ARTIFACT_CREATION",
-    "P_COMMUNICATION_AND_SYNTHESIS",
-    "P_COMPLEX_MULTI_TOOL_AGENCY",
-    "P_FINANCIAL_ANALYSIS",
-    "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-    "P_MULTI_CAPABILITY_COMPOSITION",
-    "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-    "P_SUBAGENT_DELEGATION_AND_COORDINATION",
-    "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "P_UNKNOWN_DOMAIN_ADAPTATION"
-  ],
-  "consequence": "NO_NEW_REALITY_SPEND_IS_JUSTIFIED_YET__FIRST_CLOSE_TERMINAL_PROOF_PROTOCOLS_FOR_THE_TEN_UNCOVERED_FAMILY_DISTINCTIONS_USING_EXISTING_EVIDENCE_AND_BEHAVIORAL_DECOMPOSITION"
+  "expected_current_verdict": "EXACT_MINIMUM",
+  "consequence": "ALL_23_CURRENT_DISTINCTIONS_NOW_HAVE_DECLARED_OBSERVATION_PROTOCOLS__RUN_EXACT_SOLVER__THEN_COMPRESS_DOMINATED_OR_SHARED_OBSERVATIONS_BEFORE_ANY_REALITY_SPEND",
+  "proof_protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+  "expected_selected_observation_count": 23,
+  "expected_total_cost": 23
 }
