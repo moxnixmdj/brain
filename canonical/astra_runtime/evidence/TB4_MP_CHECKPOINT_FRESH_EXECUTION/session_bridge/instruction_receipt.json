@@ -1,0 +1,6 @@
+{
+  "instruction_length": 1301,
+  "instruction_sha256": "00331ae42776231ad409a76ad972b635ab8804d81c597fdaadb05a16cde93fd6",
+  "schema": "BRAIN_HARBOR_INSTRUCTION_RECEIPT_V1",
+  "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1"
+}
