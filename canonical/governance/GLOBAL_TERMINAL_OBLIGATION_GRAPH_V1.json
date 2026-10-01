@@ -1,0 +1,233 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1",
+  "date": "2026-10-02",
+  "status": "ATOMIZED_TO_6_SHARED_MECHANISM_OBLIGATIONS_PLUS_17_OPEN_FAMILY_PROOF_OBLIGATIONS__NO_NEW_REALITY_SPEND",
+  "source_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+  "source_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+  "source_atomic_map": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+  "shared_mechanism_obligations": [
+    {
+      "id": "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+      "state": "OPEN",
+      "behaviors": [
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+      ],
+      "covers_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "FINANCIAL_ANALYSIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "ARTIFACT_CREATION",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "existing_evidence": [
+        "canonical/runtime/source_contract_compiler.py",
+        "canonical/verification/SOURCE_CONTRACT_COMPLETENESS_V2_VERIFICATION_20261002_V1.json",
+        "canonical/runtime/independent_acceptance_model.py",
+        "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json"
+      ],
+      "remaining": "ARBITRARY_SOURCE_TO_SEMANTICALLY_COMPLETE_NORMALIZED_REQUIREMENTS_AND_INDEPENDENT_ALTERNATIVE_INTERPRETATIONS_NOT_YET_WHOLE_SCOPE_OWNED"
+    },
+    {
+      "id": "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
+      "state": "OPEN",
+      "behaviors": [
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+      ],
+      "covers_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ],
+      "existing_evidence": [
+        "canonical/capabilities/opus55/CAD_MODEL_TB4_SPENT_CAUSAL_DECOMPOSITION_20261001_V1.json",
+        "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
+      ],
+      "remaining": "DRAWING_OR_VISUAL_REFERENCE_TO_GLOBALLY_CORRECT_STRUCTURED_EDITABLE_REALIZATION_GENERALITY_NOT_PROVEN"
+    },
+    {
+      "id": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+      "state": "OPEN",
+      "behaviors": [
+        "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001"
+      ],
+      "covers_families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "FINANCIAL_ANALYSIS",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ],
+      "remaining": "MECHANICAL_NATIVE_EDIT_SCOPE_PARTIAL__QUALITY_JUDGMENT_AND_BROAD_FINANCIAL_DOCUMENT_SCOPE_OPEN"
+    },
+    {
+      "id": "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+      "state": "OPEN",
+      "behaviors": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "TASK_TO_DELEGATION_GRAPH_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+      ],
+      "covers_families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "MULTI_CAPABILITY_COMPOSITION",
+        "SUBAGENT_DELEGATION_AND_COORDINATION"
+      ],
+      "remaining": "GROUNDING_ADAPTIVE_ASSIGNMENT_AND_INCOMPLETE_EVIDENCE_TOOL_SELECTION_NOT_WHOLE_SCOPE_OWNED"
+    },
+    {
+      "id": "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+      "state": "OPEN",
+      "behaviors": [
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "covers_families": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "remaining": "QUERY_SOURCE_TOOL_AND_STOP_CONTROL_GENERALIZATION_NOT_WHOLE_SCOPE_OWNED"
+    },
+    {
+      "id": "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+      "state": "OPEN",
+      "behaviors": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+      ],
+      "covers_families": [
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "remaining": "GENERAL_CAUSAL_FAILURE_LOCALIZATION_AND_SCOPE_RECOVERY_NOT_WHOLE_SCOPE_OWNED"
+    }
+  ],
+  "open_family_proof_obligations": [
+    {
+      "id": "P_ADVANCED_AGENTIC_CODING",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "proof_protocol": "PUBLIC_BARS",
+      "bars": [
+        "Terminal-Bench 4.0 >=66.4",
+        "FrontierCode v1.1 Main >=54.4",
+        "CursorBench 4.0 >=57.8"
+      ]
+    },
+    {
+      "id": "P_COMPLEX_MULTI_TOOL_AGENCY",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_PROFESSIONAL_KNOWLEDGE_WORK",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "proof_protocol": "PUBLIC_BARS",
+      "bars": [
+        "GDPval-AA v2.1 >=1846 Elo",
+        "AA-Briefcase v1.1 >=1822 Elo"
+      ]
+    },
+    {
+      "id": "P_BUSINESS_WORKFLOW_AUTOMATION",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "proof_protocol": "PUBLIC_BAR",
+      "bars": [
+        "AutomationBench >=40%"
+      ]
+    },
+    {
+      "id": "P_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "proof_protocol": "PUBLIC_BAR",
+      "bars": [
+        "Humanity's Last Exam with tools >=67.7%"
+      ]
+    },
+    {
+      "id": "P_AGENTIC_SCIENTIFIC_RESEARCH",
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "proof_protocol": "PUBLIC_BAR",
+      "bars": [
+        "Terminal-Bench-Science 0.1 >=58.7%"
+      ]
+    },
+    {
+      "id": "P_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "proof_protocol": "PUBLIC_BAR",
+      "bars": [
+        "Chartography with tools >=89%"
+      ]
+    },
+    {
+      "id": "P_COMPUTER_AND_BROWSER_USE",
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "proof_protocol": "PUBLIC_BAR_WITH_COMPARABILITY_WARNING",
+      "bars": [
+        "OSWorld 2.1 partial >=81.8% on matched harness"
+      ]
+    },
+    {
+      "id": "P_FINANCIAL_ANALYSIS",
+      "family": "FINANCIAL_ANALYSIS",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_SUBAGENT_DELEGATION_AND_COORDINATION",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_ARTIFACT_CREATION",
+      "family": "ARTIFACT_CREATION",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_COMMUNICATION_AND_SYNTHESIS",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_UNKNOWN_DOMAIN_ADAPTATION",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "P_MULTI_CAPABILITY_COMPOSITION",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "proof_protocol": "UNDEFINED_TERMINAL_PROTOCOL_REQUIRED"
+    }
+  ],
+  "closed_family_surfaces": [
+    "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "EXACT_SYMBOLIC_COMPUTATION"
+  ],
+  "distinction_count": 23,
+  "exact_solver_limit": 24,
+  "invariant": "FAMILY_PROOF_OBLIGATIONS_ARE_TERMINAL_EVALUATION_PREDICATES_ONLY__SHARED_MECHANISM_OBLIGATIONS_ARE_THE_IMPLEMENTATION_SIDE__NEITHER_FAMILY_NAMES_NOR_LANE_NAMES_IMPLY_ONE_INTERNAL_MODULE",
+  "next": "DECLARE_ADMISSIBLE_OBSERVATION_PROTOCOLS_FOR_THE_10_UNBARRED_OPEN_FAMILY_PROOFS_FROM_EXISTING_EVIDENCE_OR_BEHAVIORAL_DECOMPOSITION__THEN_COMPUTE_EXACT_MINIMUM_REALITY_CUT"
+}
