@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_PC_STABLE_SKELETON_COMPONENT_V1",
+  "result_id": "PC_STABLE_SKELETON_001",
+  "date": "2026-10-01",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_CAUSAL_STRUCTURE_COMPONENT__ZERO_FAMILY_CREDIT",
+  "artifact": {
+    "path": "canonical/runtime/pc_stable_skeleton.py",
+    "runner_verified_blob_sha": "1bf5eea93c2284dba1469a1ee20d37560cd46f0e",
+    "donor_runtime_required": false
+  },
+  "donor": {
+    "repository": "py-why/causal-learn",
+    "revision": "0dacacf36390e3084704636bc3c36e82e35ee0cc",
+    "license": "MIT",
+    "role": "WHITE_BOX_MECHANISM_DONOR_ONLY"
+  },
+  "independent_verification": {
+    "runner_pr": 307,
+    "workflow_run_id": 36903383947,
+    "result": "SUCCESS",
+    "differential_cases": 60,
+    "randomized_dimensions": "p=4..8; 12 fresh linear-Gaussian DAG cases per p",
+    "exact_skeleton_match_fraction": 1,
+    "additional_checks": [
+      "FISHER_Z_UNCONDITIONAL_INDEPENDENCE",
+      "CHAIN_CONDITIONAL_SEPARATION",
+      "FAIL_CLOSED_ON_NAN_INF_ZERO_VARIANCE"
+    ]
+  },
+  "owned_scope": [
+    "PC_STABLE_UNDIRECTED_OBSERVATIONAL_SKELETON_DISCOVERY",
+    "FISHER_Z_CONDITIONAL_INDEPENDENCE",
+    "COMPLETE_CONTINUOUS_FINITE_DATA"
+  ],
+  "not_claimed": [
+    "EDGE_ORIENTATION_IN_GENERAL",
+    "MISSING_DATA_CORRECTION",
+    "DISCRETE_OR_KERNEL_CI",
+    "CAUSAL_EFFECT_IDENTIFICATION",
+    "GENERAL_ROOT_CAUSE_LOCALIZATION"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
