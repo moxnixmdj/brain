@@ -4,7 +4,7 @@
     "detail": "ok",
     "ok": true
   },
-  "next_step": 3,
+  "next_step": 4,
   "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
   "status": "READY_FOR_COMMAND"
 }
