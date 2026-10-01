@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_PREQUALIFICATION_ACCEPTANCE_BUNDLE_CANDIDATE_V1",
+  "date": "2026-10-01",
+  "status": "BRAIN_OWNED_NARROW_COMPONENT__INDEPENDENT_VERIFICATION_PASS__ZERO_FAMILY_CREDIT",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "artifact": "canonical/runtime/prequalification_acceptance_bundle.py",
+  "composes": [
+    "canonical/runtime/requirement_graph_kernel.py",
+    "canonical/runtime/independent_acceptance_model.py"
+  ],
+  "owned_if_verified": [
+    "COMPOSED_NORMALIZED_REQUIREMENT_AND_OUTPUT_LINEAGE_GATE",
+    "INDEPENDENT_ACCEPTANCE_COVERAGE_GATE",
+    "REQUIREMENT_MUTATION_GATE",
+    "SEEDED_VERIFIER_MUTATION_KILL_GATE"
+  ],
+  "limitations": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_REQUIREMENT_EXTRACTION",
+    "NO_DOMAIN_GOLD_SYNTHESIS",
+    "NO_FRESH_EXECUTION_AUTHORIZATION",
+    "NO_FAMILY_LEVEL_OWNERSHIP_CLAIM"
+  ],
+  "spent_regression_scope": [
+    "RANK10_CAD",
+    "RANK12_KG",
+    "RANK13_SACCR",
+    "PRECOMMITTED_BUN_POLICY_FAILURE_SHAPE"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "artifact_git_blob_sha": "d08542505ba9e3849d266a96854bb0ec84938465",
+  "independent_verification": "canonical/capabilities/opus55/PREQUALIFICATION_ACCEPTANCE_BUNDLE_001.json",
+  "donor_runtime_required": false
+}
