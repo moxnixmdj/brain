@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_BLOCKER_OBSOLETION_V1",
+  "date": "2026-10-01",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "status": "ACTIVE__BLOCKER_SET_COMPRESSED__RANK10_EXECUTION_LIVENESS_RESTORED__ZERO_NEW_CAPABILITY_CREDIT",
+  "obs_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+  ],
+  "obsolete_or_absorbed": [
+    {
+      "prior_label": "PLANNED_BUT_NOT_RUNNING_RANK10",
+      "disposition": "OBSOLETE",
+      "reason": "Fresh rank-10 cad-model is now launched on the existing patched fast-burst carrier.",
+      "evidence": [
+        "verification-capsule-runner PR #296",
+        "workflow run 36895618018",
+        "READY receipt issuecomment-5936277592"
+      ]
+    },
+    {
+      "prior_label": "SEPARATE_INFRASTRUCTURE_BUILD_FOR_RANK10",
+      "disposition": "OBSOLETE",
+      "reason": "Existing patched fast-burst carrier reached READY; no new execution substrate is required for this task."
+    },
+    {
+      "prior_label": "RANK9_REPLAY_OR_REPAIR",
+      "disposition": "OBSOLETE",
+      "reason": "Rank 9 is spent and policy-inadmissible; frozen order advanced to rank 10."
+    },
+    {
+      "prior_label": "TREAT_35_SURFACE_SYMPTOMS_AS_35_INDEPENDENT_ROOT_BLOCKERS",
+      "disposition": "OBSOLETE",
+      "reason": "They compress into shared causal classes and family-specific residual proof obligations."
+    }
+  ],
+  "surviving_root_blockers": [
+    {
+      "id": "B1",
+      "blocker": "MISSING_DONOR_INDEPENDENT_COGNITIVE_RESIDUALS",
+      "meaning": "After deterministic/JIT/state/tool functions are removed, some judgment/generation mechanisms are still external or unknown."
+    },
+    {
+      "id": "B2",
+      "blocker": "MINIMAL_CAUSAL_MECHANISM_NOT_YET_IDENTIFIED_FOR_ALL_RESIDUALS",
+      "meaning": "Need smallest causally sufficient mechanism, not whole donor systems."
+    },
+    {
+      "id": "B3",
+      "blocker": "OWNERSHIP_PROOF_INCOMPLETE",
+      "meaning": "Fresh transfer, ablation/rescue, donor deletion, cross-domain generalization and matched Opus-level verification remain incomplete across unfinished families."
+    },
+    {
+      "id": "B4",
+      "blocker": "WHOLE_SYSTEM_COMPOSITION_NOT_YET_VERIFIED",
+      "meaning": "Individually owned components must compose across all required families without hidden provider dependence or regression."
+    }
+  ],
+  "current_execution": {
+    "family": "ADVANCED_AGENTIC_CODING",
+    "benchmark": "Terminal-Bench 4.0",
+    "rank": 10,
+    "task": "cad-model",
+    "pr": 296,
+    "workflow_run_id": 36895618018,
+    "ready_receipt_comment_id": 5936277592,
+    "state": "READY__OFFICIAL_TASK_INSTRUCTION_EXPOSURE_ALLOWED__ZERO_CREDIT",
+    "artifact": "/app/out.step"
+  },
+  "next_rule": "CONTINUE_CURRENT_CLEAN_RANK10_TO_TERMINAL_VERDICT__IN_PARALLEL_DO_NOT_CREATE_NEW_INFRASTRUCTURE_OR_REOPEN_OBSOLETE_BLOCKERS__ON_RESULT_RECOMPUTE_ONLY_AFFECTED_ROOT_BLOCKER",
+  "capability_credit_delta": 0
+}
