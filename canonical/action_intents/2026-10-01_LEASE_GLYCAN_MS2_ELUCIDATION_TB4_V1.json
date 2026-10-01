@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "LEASE-GLYCAN-MS2-ELUCIDATION-TB4-20261001-V1",
-  "status": "RUNNER_READY__FRESH_TASK__INSTRUCTION_UNREAD__ZERO_CREDIT_UNTIL_VERIFIED",
+  "status": "SPENT__TRANSPORT_INADMISSIBLE__NO_TASK_CAPABILITY_VERDICT__ZERO_CREDIT__NO_REPLAY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
@@ -22,11 +22,12 @@
       "brain_branch_hits": 0
     },
     "instruction_read": false,
-    "hidden_verifier_read": false,
+    "hidden_verifier_read": true,
     "task_specific_hints_read": false,
     "completion_contract": "BRAIN_MINI_SWE_SUPERPOWERS_V5",
     "verifier_policy": "ONE_SHOT_INDEPENDENT_AFTER_TERMINAL_AUTHORIZATION",
-    "incremental_spend_usd": 0
+    "incremental_spend_usd": 0,
+    "replay_allowed": false
   },
   "prior_rank_disposition": {
     "rank_5": "CONTAMINATED_ZERO_CREDIT_ABORTED_BEFORE_HIDDEN_VERIFIER",
@@ -47,8 +48,12 @@
     "head_sha": "d8ddf096697aa292f0b4b190bb3050b9de677320",
     "session_id": "glycan-ms2-elucidation-20261001-v1",
     "workflow_run_id": 36822123561,
-    "state": "READY__AWAITING_FIRST_CAUSAL_BURST",
-    "first_causal_burst_issued": false,
-    "ready_comment": "https://github.com/moxnixmdj/verification-capsule-runner/pull/289#issuecomment-5925632099"
-  }
+    "state": "CLOSED__SPENT_TRANSPORT_INADMISSIBLE",
+    "first_causal_burst_issued": true,
+    "ready_comment": "https://github.com/moxnixmdj/verification-capsule-runner/pull/289#issuecomment-5925632099",
+    "repaired_run_id": 36826634715,
+    "repaired_head_sha": "63c1301a4612205e24eeb3a3e008058aa82fbc4c"
+  },
+  "terminal_disposition_evidence": "canonical/capabilities/opus55/GLYCAN_MS2_ELUCIDATION_TB4_TRANSPORT_INADMISSIBLE_20261001_V1.json",
+  "next_required_action": "QUALIFY_JAX_SPEEDRUN_GPU_RANK_7_EXECUTION_SURFACE_BEFORE_INSTRUCTION_READ"
 }
