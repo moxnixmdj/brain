@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_RECONCILE_PYRCA_HT_RESIDUAL_RANKING_SCREEN_V1",
+  "status": "RESULT_RECONCILIATION__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Preserve the exact causal value of the successful PyRCA HT screen without overstating ownership or generality, then advance the atomic residual to donor minimization and real noncontaminating transfer.",
+  "governing_invariants": [
+    "Rank-9 atrx-vep-crispr remains primary and untouched.",
+    "Synthetic multi-survivor success is not real-trace transfer.",
+    "External PyRCA performance is specimen/challenger evidence, not Brain ownership.",
+    "Causal edge discovery and intervenability inference remain separate unresolved transforms.",
+    "No family or Opus credit is added."
+  ],
+  "material_premises": [
+    "The PyRCA HT screen completed successfully on workflow 36838565763.",
+    "HT achieved top-1 accuracy 1.0 across 120 usable hidden-intervention trials.",
+    "Graph-order baselines achieved 0.175 and 0.20833333333333334.",
+    "The screen only covered explicit numeric causal DAGs with multiple surviving candidates."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "canonical/capabilities/opus55/ATOMIC_RESIDUAL_CAUSE_RANKING_PYRCA_HT_001_RECONCILIATION.json",
+    "https://github.com/salesforce/PyRCA/blob/411310d589fac5cb8e7bdce67d33eadb091a1083/pyrca/analyzers/ht.py"
+  ],
+  "conclusion": "Keep PyRCA HT as the current strongest residual cause-ranking challenger for the explicit numeric multi-survivor contract. Do not promote ownership. Next isolate the minimal ranking slice and test donor-independent fresh real-trace transfer.",
+  "selected_route": "RECONCILE_NARROW_PASS__MINIMIZE_DONOR_SLICE__REAL_TRANSFER_NEXT",
+  "rejected_material_alternatives": [
+    "Promote general root-cause capability.",
+    "Adopt the whole PyRCA framework.",
+    "Run more identical synthetic trials.",
+    "Train a new ranker before donor minimization."
+  ],
+  "uncertainties": [
+    "Real software/tool traces may not satisfy the numeric continuous-data assumptions.",
+    "The minimal donor-independent slice may be substantially smaller than PyRCA HT."
+  ],
+  "assumptions": [
+    "The ranking residual is worth pursuing only if fresh real transfer survives after donor minimization."
+  ],
+  "non_goals": [
+    "No causal-edge discovery claim.",
+    "No intervenability inference claim.",
+    "No rank-9 task inspection.",
+    "No capability credit."
+  ],
+  "next_action": "Minimize the exact HT ranking mechanism into a donor-independent Brain candidate, then test fresh noncontaminating real traces; kill if transfer fails.",
+  "supersession_conditions": [
+    "Fresh real transfer falsifies the route.",
+    "A strictly smaller existing open ranker dominates before internalization."
+  ],
+  "supersedes": null
+}
