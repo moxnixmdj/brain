@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
   "receipt_id": "RECONCILE-ACTIVE-PROGRAM-AND-GSEA-INFRA-FAILURE-20261001-V1",
   "status": "CURRENT_BASE_DECISION_RECEIPT",
-  "canonical_base_commit": "18d7bd1470d95b9f9f04e575eb87274db4b84e72",
+  "canonical_base_commit": "8148af1ec5f4913b905af42c7acc07ac78cbd072",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "real_objective": "Permanently own all useful Opus 5.5-or-better capabilities with external/JIT knowledge; the active coding lane still needs a comparable fresh-task Stage-1 score of at least 66.4 percent.",
   "governing_invariants": [
@@ -44,7 +44,8 @@
     "The exact-head guard on prior base b7c4efa4d35ba3709f37f3109daac87849a1c945/head 6350ca8 failed with pointer, queue, and target-record next-action mismatches. No task-specific contents were read or route fields changed.",
     "Current base 9d2087800409a2ee5363441a5d61c16573ac7346: active program/target/blocker remain unchanged; the hierarchy and scoreboard select a rank-6 high-throughput action class, while pointer/queue/target next-action mirrors diverge. The capability target summary reports a Brain-configured fresh-task pass, benchmark score pending, and zero credit; underlying evidence remains unopened. This reconciliation changes only exact next-action mirrors and makes no task execution or result claim.",
     "Current exact base is 18d7bd1470d95b9f9f04e575eb87274db4b84e72. Main still has the active program mirror and next-action mirror disagreements; hierarchy and scoreboard remain at the Stage-1 rank-6 route, queue/pointer retain the no-task-TOML constraint, and the active target record still names the generic Stage-1 action. The branch normalizes mirrors to one combined action string. Main’s latest C3 commit subjects add/advance campaign evidence, but its project-level campaign summary remains zero-credit; task-specific contents are not used.",
-    "Boundary incident: a targeted diagnostic unexpectedly printed the current-context block from the historical rank-4 GSEA record. Its task-related details are disregarded and not used; no rank-6 task material was opened and no task was executed. Further inspection of that record is stopped."
+    "Boundary incident: a targeted diagnostic unexpectedly printed the current-context block from the historical rank-4 GSEA record. Its task-related details are disregarded and not used; no rank-6 task material was opened and no task was executed. Further inspection of that record is stopped.",
+    "Latest current base 8148af1ec5f4913b905af42c7acc07ac78cbd072 adds two C3-related commits and advances the generic cognitive primitive frontier summary. The project-level campaign status remains ACTIVE__C3_FRESH_AUTHORIZED__AGENTDEBUGX_C7_FALSIFIED__C6_NARROW_SURVIVES__ZERO_CAPABILITY_CREDIT. Control-plane next-action and program mirrors remain mismatched exactly as before; the selected parent route remains the rank-6 Stage-1 path with the no-task-TOML boundary preserved. No cognitive/task-specific payload was opened."
   ],
   "evidence_refs": [
     "canonical/CANONICAL_POINTER.json",
@@ -119,7 +120,7 @@
     "No change to the terminal objective, active capability target, Stage-1 score threshold, or sample order.",
     "No new pointwise JEV request or cognitive-basis follow-up experiment is run by this reconciliation; the already-recorded Jevos baseline remains zero-credit until heldout transfer and terminal-task evidence are established."
   ],
-  "next_action": "Run the trusted exact-head guard, active-target mirror/firewall unit tests and action-intent sensitivity checks, and cross-surface JSON checks against current base 18d7bd1470d95b9f9f04e575eb87274db4b84e72. If clean, push only the fixed branch and wait for fresh PR checks, then return to the authorized rank-6 route without fetching task TOML or reading task-specific materials. Keep capability credit at zero until independent Brain-configured evidence establishes the Stage-1 bar.",
+  "next_action": "Run the trusted exact-head guard, active-target mirror/firewall unit tests and action-intent sensitivity checks, and cross-surface JSON checks against current base 8148af1ec5f4913b905af42c7acc07ac78cbd072. If clean, push only the fixed branch and wait for fresh PR checks, then return to the authorized rank-6 route without fetching task TOML or reading task-specific materials. Keep capability credit at zero until independent Brain-configured evidence establishes the Stage-1 bar.",
   "supersession_conditions": [
     "A newer canonical main commit changes the pointer, active program, active capability target, Stage-1 blocker, or task sample order.",
     "Independent retrieval or adjudication of the rank-4 artifact establishes additional terminal-verifier facts.",
