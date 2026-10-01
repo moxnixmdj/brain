@@ -138,7 +138,7 @@
     "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json",
     "parent_capability_promoted": false
   },
-  "active_operating_mode": "REAL_CAPABILITY_ACQUISITION_WITH_RECURSIVE_OBS",
+  "active_operating_mode": "EXECUTION_FIRST_SELF_PROVING_OPTIMIZATION_WITH_RECURSIVE_OBS",
   "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
   "synthetic_probe_frontier_default": false,
   "real_task_first": false,
@@ -157,11 +157,12 @@
       "INTEGRATE"
     ],
     "exact_base_commit_binding_required": true,
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_route_frontier_age_hours": 24,
-    "max_selected_route_preflight_age_hours": 2
+    "max_selected_route_preflight_age_hours": 2,
+    "hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json"
   },
   "last_real_output_event": {
     "event_id": "FIN_SACCR_RWA_TB4_VERIFIED_FAILURE_20261001",
@@ -282,7 +283,9 @@
   },
   "reasoning_authority": {
     "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
-    "theory_receipt": "canonical/reasoning/2026-10-01_TERMINAL_SUCCESS_PREMORTEM_AND_FAILURE_IMMUNITY_V1.json"
+    "theory_receipt": "canonical/reasoning/2026-10-01_TERMINAL_SUCCESS_PREMORTEM_AND_FAILURE_IMMUNITY_V1.json",
+    "execution_first_optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
+    "export_live_reconciliation": "canonical/reasoning/2026-10-01_COMBINED_EXPORT_LIVE_RECONCILIATION_V1.json"
   },
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -468,5 +471,20 @@
     "reducer_verification": "canonical/verification/TERMINAL_CLOSURE_REDUCER_VERIFICATION_20261001_V1.json",
     "current_verdict": "NOT_ACHIEVED",
     "override_allowed": false
+  },
+  "execution_first_self_proving_optimizer": {
+    "status": "ACTIVE__META_WORK_CANNOT_BLOCK_VALID_TERMINAL_PROOF_ACTION",
+    "policy": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
+    "hole_types": [
+      "?S",
+      "?M",
+      "?P"
+    ],
+    "specification_before_solution": true,
+    "incremental_proof_updates": true,
+    "critical_path_scheduling": true,
+    "compile_successes_and_failures": true,
+    "fresh_evidence_kill_ladder": true,
+    "live_frontier_preserved": true
   }
 }
