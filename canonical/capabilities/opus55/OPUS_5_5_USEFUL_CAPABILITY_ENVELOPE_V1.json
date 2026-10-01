@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1",
-  "status": "CANONICAL_TARGET_ENVELOPE__PUBLIC_EVIDENCE_RECOVERED_2026_09_30",
+  "status": "CANONICAL_TARGET_ENVELOPE__19_FAMILIES_RECONCILED__BEHAVIORAL_CLOSURE_PENDING_FOR_UNBARRED_OPEN_ENDED_SURFACES",
   "target_model": "Claude Opus 5.5",
   "target_rule": "USEFUL_BEHAVIOR_NOT_INTERNAL_IMPLEMENTATION",
   "acceptance_rule": "BRAIN_CONFIGURED_CAPABILITY_MUST_EQUAL_OR_EXCEED_OPUS_5_5_ON_RELEVANT_USEFUL_CONDITIONS",
@@ -158,6 +158,18 @@
     {
       "id": "MULTI_CAPABILITY_COMPOSITION",
       "useful_behavior": "Compose reasoning, research, tools, code, memory, actions and verification into one causal execution system."
+    },
+    {
+      "id": "EXACT_SYMBOLIC_COMPUTATION",
+      "useful_behavior": "For the bounded verified operation classes in OBS-EXACT-SYMBOLIC-001, compute objective symbolic results exactly and deterministically without relying on frontier-model internal reasoning.",
+      "absolute_bar": {
+        "definition": "100% exact correctness on frozen bounded task class OBS-EXACT-SYMBOLIC-001",
+        "basis": "THEORETICAL_CEILING"
+      },
+      "scope_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+      "scope_warning": "Does not claim general mathematical reasoning, theorem proving, scientific reasoning, word-problem reasoning, or symbolic operations outside the frozen suite classes."
     }
-  ]
+  ],
+  "target_family_count": 19,
+  "acceptance_closure_note": "Every family must terminate in a complete behavioral contract and one admissible proof mode: theoretical ceiling/formal proof, exhaustive finite verification, or predeclared matched statistical comparison against the Opus 5.5 bar. Broad prose alone is not terminal acceptance."
 }
