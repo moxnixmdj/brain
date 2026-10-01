@@ -95,15 +95,17 @@
       "id": "C7_ROOT_CAUSE_LIKELIHOOD",
       "class": "GENERATOR_PLUS_RANKER_RESIDUAL",
       "preferred_route": "GENERATE_CAUSES__FALSIFY_WITH_EXECUTABLE_EVIDENCE__RANK_ONLY_WHEN_EXACT_TEST_UNAVAILABLE",
-      "state": "AGENTDEBUGX_LOCAL_DEFAULT_FALSIFIED_FOR_GENERAL_UPSTREAM_CAUSAL_LOCALIZATION__UNRESOLVED",
+      "state": "AGENTDEBUGX_FALSIFIED__AGENTRX_OPAQUE_DEPENDENCY_REJECTED__AGENT_REPLAY_REAL_POLICY_SCREEN_PENDING",
       "open_candidate": "AgentDebugX/AgentDebugX@0.5.2",
       "candidate_evidence": "canonical/capabilities/opus55/AGENTDEBUGX_ZERO_LLM_SPENT_SCREEN_001_RECONCILIATION.json",
       "real_spent_evidence": "canonical/capabilities/opus55/AGENTDEBUGX_REAL_SPENT_BRAIN_001_RECONCILIATION.json",
       "rejected_candidate": "AgentDebugX/AgentDebugX@0.5.2",
       "falsification_evidence": "canonical/capabilities/opus55/AGENTDEBUGX_REAL_SPENT_C3_CAUSAL_FALSIFICATION_001_RECONCILIATION.json",
       "open_candidates": [
-        "microsoft/AgentRx"
-      ]
+        "krishddd/Trajectory_Causal_Attribution"
+      ],
+      "agent_rx_screen": "canonical/capabilities/opus55/C7_AGENTRX_ROUTE_SCREEN_001.json",
+      "agent_replay_screen": "canonical/capabilities/opus55/C7_AGENT_REPLAY_ROUTE_SCREEN_001.json"
     },
     {
       "id": "C8_PROGRESS_ESTIMATION",
@@ -157,7 +159,7 @@
     "TREAT_NLI_ENTAILMENT_AS_COMPLETE_EVIDENCE_SUFFICIENCY",
     "TRAIN_GENERIC_DECISION_MODEL_BEFORE_PRIMITIVE_SPECIFIC_REUSE_SPACE_IS_EXHAUSTED"
   ],
-  "next_required_action": "RUN_MINIMAL_FRESH_C3_SKILLROUTER_TERMINAL_DELTA__SCREEN_MICROSOFT_AGENTRX_ON_SAME_SPENT_C3_CAUSAL_TRACES__KEEP_AGENTDEBUGX_ONLY_AS_NARROW_C6_CANDIDATE__NO_TRAINING",
+  "next_required_action": "COMPLETE_FRESH_C3_SKILLROUTER_GATE__THEN_SCREEN_AGENT_REPLAY_ON_A_GENUINELY_REPLAYABLE_SPENT_BRAIN_POLICY__NO_SYNTHETIC_KNOWN_ANSWER_RESAMPLER__NO_TRAINING",
   "capability_credit_delta": 0,
   "latest_probe_results": {
     "c3": {
