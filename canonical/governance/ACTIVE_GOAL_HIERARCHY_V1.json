@@ -288,7 +288,8 @@
     "export_live_reconciliation": "canonical/reasoning/2026-10-01_COMBINED_EXPORT_LIVE_RECONCILIATION_V1.json",
     "evidence_saturation_activation": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json",
     "evidence_saturation_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
-    "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json"
+    "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "global_terminal_proof_cut_activation": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json"
   },
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -739,7 +740,9 @@
     "open_family_count": 17,
     "family_or_rank_order_is_scheduling_authority": false,
     "instruction_exposure_is_information_spend": true,
-    "next": "SATURATE_ALL_OPEN_TERMINAL_OBLIGATIONS__GLOBAL_DEDUCTIVE_CLOSURE__COMPRESS_SHARED_RESIDUALS__COMPUTE_EXACT_GLOBAL_MINIMUM_REALITY_CUT__NO_NEW_UNTOUCHED_SOURCE_READ_OR_EXECUTION_UNTIL_ADMITTED"
+    "next": "SATURATE_ALL_OPEN_TERMINAL_OBLIGATIONS__GLOBAL_DEDUCTIVE_CLOSURE__COMPRESS_SHARED_RESIDUALS__COMPUTE_EXACT_GLOBAL_MINIMUM_REALITY_CUT__NO_NEW_UNTOUCHED_SOURCE_READ_OR_EXECUTION_UNTIL_ADMITTED",
+    "activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
+    "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   },
   "rank23_post_revoke_exposure": {
     "status": "RECONCILED__SOURCE_READ__NO_EXECUTION__CLEAN_PROMOTION_INELIGIBLE",
