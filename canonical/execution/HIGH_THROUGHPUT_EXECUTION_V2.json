@@ -17,14 +17,14 @@
     "moxnixmdj/verification-capsule-runner@4bc0b3ba09d73b8787e57ca7dfad234e04edbd92"
   ],
   "live_validation": {
-    "pr": 288,
-    "branch": "burst/session-mini-swe-batched-eval-parity-20261001-v1",
-    "branch_head": "104ef8163efe3258b88dea8c7f887eea02320790",
-    "session_id": "batched-eval-parity-20261001-v1",
-    "task": "batched-eval-parity",
-    "sample_rank": 5,
-    "state": "RUNNER_READY__AWAITING_FIRST_CAUSAL_BURST__INSTRUCTION_UNREAD",
-    "ready_comment": "https://github.com/moxnixmdj/verification-capsule-runner/pull/288#issuecomment-5925538994"
+    "pr": 289,
+    "branch": "burst/session-mini-swe-glycan-ms2-elucidation-20261001-v1",
+    "branch_head": "d8ddf096697aa292f0b4b190bb3050b9de677320",
+    "session_id": "glycan-ms2-elucidation-20261001-v1",
+    "task": "glycan-ms2-elucidation",
+    "sample_rank": 6,
+    "state": "RUNNER_LAUNCHED__BUILDING_RUNTIME__INSTRUCTION_UNREAD",
+    "workflow_run_id": 36822123561
   },
   "capability_credit_delta": 0,
   "incremental_spend_usd": 0,
@@ -37,5 +37,14 @@
       "4bc0b3ba09d73b8787e57ca7dfad234e04edbd92"
     ],
     "interpretation": "CARRIER_RECOVERY_WORKED__TASK_FAILURE_IS_AUTHORITATIVE"
+  },
+  "latest_contamination": {
+    "task": "batched-eval-parity",
+    "sample_rank": 5,
+    "runner_pr": 288,
+    "reason": "TASK_TOML_EXPOSED_SOLUTION_EXPLANATION_AND_VERIFICATION_EXPLANATION",
+    "promotion_credit": 0,
+    "hidden_verifier_run": false,
+    "evidence_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json"
   }
 }
