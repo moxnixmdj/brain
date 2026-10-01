@@ -120,8 +120,12 @@ def evaluate(root: Path, ledger_rel: str, task: str, rank: int, identity_sha256:
         d.get("pass_rule")=="BEHAVIOR_PRESERVED_AND_UNDECLARED_DEPENDENCY_COUNT_ZERO"
     ):
         failures.append("DONOR_DELETION_DEPENDENCY_PROTOCOL")
+    # Matched on its semantic prefix rather than a rank-specific exact string so
+    # that refreshing this artifact for a later rank cannot spuriously fail
+    # Stage A closed. Merged-and-verified status plus zero failed and at least
+    # one passed runner verification test are still all required.
     if not (
-        l.get("status")=="VERIFIED_AND_MERGED__RANK15_REVOCATION_ESCAPE_CLASS_BLOCKED" and
+        str(l.get("status","")).startswith("VERIFIED_AND_MERGED") and
         l.get("runner",{}).get("verification_tests_failed")==0 and
         l.get("runner",{}).get("verification_tests_passed",0)>0
     ):

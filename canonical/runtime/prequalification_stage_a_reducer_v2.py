@@ -11,8 +11,51 @@ from typing import Any
 REF="452bf305c6daa62fc59061d22133a7cbc7c1572e"
 BAR=0.664
 
+# The eight prior-exposure surfaces required by
+# PREQUALIFICATION_FAILURE_IMMUNITY_V1 staged_admission.stage_a_pre_exposure
+# (COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS).
+EXPECTED_HIT_FIELDS=(
+    "brain_code_hits","runner_code_hits",
+    "brain_branch_hits","runner_branch_hits",
+    "brain_commit_hits","runner_commit_hits",
+    "brain_pr_hits","runner_pr_hits",
+)
+EXPECTED_SURFACES=(
+    "brain_code","runner_code",
+    "brain_branches","runner_branches",
+    "brain_commits","runner_commits",
+    "brain_prs","runner_prs",
+)
+# Runner total Stage-C budget behaviors that must be independently verified and
+# merged before any task may be admitted to Stage B. Without them a single
+# execution lease can be spent more than once, which is what invalidated rank18.
+REQUIRED_BUDGET_BEHAVIORS={
+    "EVERY_ACCEPTED_BUILDER_BURST_CONSUMES_ONE_EXECUTION_UNIT_BEFORE_ANY_TASK_COMMAND_RUNS",
+    "BUILDER_BURST_REJECTED_WHEN_EXECUTION_COUNT_USED_GTE_EXECUTION_COUNT_ALLOWED",
+    "TERMINAL_VERIFIER_UNIT_CONSUMED_BEFORE_HIDDEN_VERIFIER_INVOCATION",
+    "TERMINAL_SUBMISSION_REJECTED_WHEN_TERMINAL_COUNT_USED_GTE_TERMINAL_VERIFIER_COUNT_ALLOWED",
+}
+REQUIRED_BUDGET_WORKFLOWS={
+    "Verify independent acceptance gate",
+    "Stage lease promotion regression",
+    "Execution Guard Regression",
+}
+
 def load(root: Path, rel: str) -> dict[str,Any]:
     return json.loads((root/rel).read_text(encoding="utf-8"))
+
+def load_evidence(root: Path, rel: str) -> dict[str,Any]:
+    """Load governance evidence, failing closed instead of raising when absent.
+
+    A missing or unreadable verification artifact must produce a named failed
+    predicate in the verdict, not an uncaught exception that yields no verdict at
+    all. Absence of evidence is refusal, never admission.
+    """
+    try:
+        value=load(root,rel)
+    except Exception:
+        return {}
+    return value if isinstance(value,dict) else {}
 
 def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,Any]:
     failures=[]
@@ -24,11 +67,11 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
     s=load(root,"canonical/capabilities/opus55/TB4_V5_STAGE1_STATISTICAL_PROMOTION_PLAN_V1.json")
     d=load(root,"canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V1.json")
     p=load(root,"canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json")
+    l=load_evidence(root,"canonical/governance/PER_ACTION_CANONICAL_LEASE_REVALIDATION_VERIFICATION_20261001_V1.json")
+    b=load_evidence(root,"canonical/governance/RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION_20261001_V1.json")
 
     if not (str(t.get("status","")).startswith("FROZEN_") and t.get("benchmark_ref")==REF and t.get("stage1_target_success_fraction")==BAR and t.get("target_model")=="Claude Opus 5.5"):
         failures.append("TARGET_VERSION_LOCK")
-    search=c.get("prior_exposure_search")
-    search_clean=isinstance(search,dict) and all(v==0 for v in search.values())
     if not (
         c.get("task")==task and c.get("rank")==rank and c.get("benchmark_ref")==REF
         and c.get("state")=="UNEXPOSED__STAGE_A_PRE_EXPOSURE"
@@ -39,9 +82,27 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
         and c.get("task_command_executed") is False
         and c.get("clean_for_stage_b_exposure") is True
         and not c.get("disqualifying_exposure_events")
-        and search_clean
     ):
         failures.append("QUALIFICATION_CONTAMINATION_LEDGER")
+    # Only the named hit counters are exposure evidence. Policy-mandated
+    # completeness metadata (search_complete, searched_surfaces, and the
+    # non-disqualifying self-referential frontier PR notes) is provenance, not a
+    # hit. The previous blanket "every value must equal 0" test therefore made
+    # every eight-surface-compliant ledger unsatisfiable and failed Stage A
+    # closed permanently for any task whose ledger obeyed the current policy.
+    search=c.get("prior_exposure_search")
+    if not isinstance(search,dict):
+        failures.append("PRIOR_EXPOSURE_SEARCH_MISSING")
+    else:
+        if search.get("search_complete") is not True:
+            failures.append("PRIOR_EXPOSURE_SEARCH_INCOMPLETE")
+        if [k for k in EXPECTED_HIT_FIELDS if k not in search]:
+            failures.append("PRIOR_EXPOSURE_SEARCH_FIELDS_MISSING")
+        if any(search.get(k)!=0 for k in EXPECTED_HIT_FIELDS):
+            failures.append("PRIOR_EXPOSURE_SEARCH_NOT_CLEAN")
+        surfaces=search.get("searched_surfaces")
+        if not isinstance(surfaces,list) or not set(EXPECTED_SURFACES)<=set(surfaces):
+            failures.append("PRIOR_EXPOSURE_SEARCH_SURFACES_INCOMPLETE")
     if e.get("status")!="STAGE_A_GENERIC_SURFACE_PASS__TASK_SPECIFIC_SURFACE_UNCLAIMED":
         failures.append("GENERAL_EXECUTION_SURFACE_CERTIFICATE")
     ar=a.get("runner",{})
@@ -75,13 +136,42 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
         and d.get("pass_rule")=="BEHAVIOR_PRESERVED_AND_UNDECLARED_DEPENDENCY_COUNT_ZERO"
     ):
         failures.append("DONOR_DELETION_DEPENDENCY_PROTOCOL")
+    # Ported from the v1 generic reducer so the two reducers cannot disagree.
+    # v2 previously enforced neither check, which made it a fail-open admission
+    # path for exactly the escape that let rank18 spend one lease twice.
+    # The status is matched on its semantic prefix rather than on a
+    # rank-specific exact string, so refreshing this artifact for a later rank
+    # cannot spuriously fail Stage A closed.
+    lr=l.get("runner") if isinstance(l.get("runner"),dict) else {}
+    if not (
+        str(l.get("status","")).startswith("VERIFIED_AND_MERGED")
+        and lr.get("verification_tests_failed")==0
+        and lr.get("verification_tests_passed",0)>0
+    ):
+        failures.append("PER_ACTION_CANONICAL_LEASE_REVALIDATION")
+    verified_workflows={
+        x.get("workflow")
+        for x in (b.get("independent_verification") or [])
+        if isinstance(x,dict) and x.get("conclusion")=="success"
+    }
+    repair=b.get("repair") if isinstance(b.get("repair"),dict) else {}
+    behaviors=set(repair.get("behavior") or [])
+    if not (
+        str(b.get("status","")).startswith("INDEPENDENT_PASS__MERGED")
+        and repair.get("merge_commit")
+        and REQUIRED_BUDGET_BEHAVIORS<=behaviors
+        and REQUIRED_BUDGET_WORKFLOWS<=verified_workflows
+    ):
+        failures.append("TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD")
     required=set(p.get("staged_admission",{}).get("stage_a_pre_exposure",{}).get("required",[]))
     expected={
       "TARGET_VERSION_LOCK","QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
+      "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS",
       "GENERAL_EXECUTION_SURFACE_CERTIFICATE","INDEPENDENT_ACCEPTANCE_MECHANISM_VERIFIED",
       "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
       "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
       "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
+      "TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED",
       "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS"
     }
     if not expected <= required:
