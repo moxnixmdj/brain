@@ -61,5 +61,9 @@
     "prior_rank7": "SKIPPED_UNSPENT__SURFACE_INCOMPATIBLE",
     "prior_rank6": "TRANSPORT_INADMISSIBLE__NO_COGNITION_VERDICT"
   },
-  "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
+  "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+  "current_atomic_blocker": "RANK21_INELIGIBLE__NEXT_UNTOUCHED_FROZEN_SAMPLE_RANK22_REQUIRES_STAGE_A_PREEXPOSURE_ADMISSION",
+  "current_atomic_next_action": "DERIVE_RANK22_FROM_FROZEN_MANIFEST__RUN_COMPLETE_STAGE_A_PREEXPOSURE_SEARCH__DO_NOT_READ_INSTRUCTION",
+  "current_atomic_progress_event": "RANK22_STAGE_A_PASS_OR_FAIL_CLOSED",
+  "current_atomic_state_source": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json"
 }
