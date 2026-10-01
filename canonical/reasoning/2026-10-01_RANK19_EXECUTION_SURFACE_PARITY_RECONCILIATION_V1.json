@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_RANK19_EXECUTION_SURFACE_PARITY_RECONCILIATION_V1",
+  "status": "PROPOSED_CURRENT_BASE__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Stop fresh benchmark tasks from being spent on generic execution-surface mismatches and make all canonical control surfaces reflect the latest rank-19 evidence truth.",
+  "governing_invariants": [
+    "Rank 19 is spent and cannot be replayed for promotion.",
+    "The rank-19 failure is execution-surface/package-policy failure, not a cognition verdict.",
+    "No fresh clean task should be spent until exact or materially equivalent execution-surface package policy is proven before task execution.",
+    "Capability credit remains zero.",
+    "The atomic-causal strategy remains authoritative.",
+    "Incremental spend remains zero."
+  ],
+  "material_premises": [
+    "Latest rank-19 evidence records PEP668_EXTERNALLY_MANAGED_ENVIRONMENT before task audio analysis and before terminal verification.",
+    "The prior Stage-B feasibility run used GitHub setup-python CPython 3.12 and therefore did not represent the actual Debian-managed Python policy in the task image.",
+    "Current canonical pointer/queue/scoreboard mirrors remain stale relative to the latest rank-19 hierarchy/evidence.",
+    "Runner PR 367 is the current generic exact-task-container execution-surface profile repair candidate."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+    "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_CONTAMINATION_LEDGER_V1.json",
+    "canonical/governance/LEASE_SATB_AUDIO_TRANSCRIPTION_TB4_STAGE_C_20261001_V1.json",
+    "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "https://github.com/moxnixmdj/verification-capsule-runner/pull/367"
+  ],
+  "conclusion": "Reconcile the control plane to rank 19 spent with zero cognition verdict, freeze the next clean Stage-C spend behind exact execution-surface profile/parity validation, and do not alter ownership credit.",
+  "selected_route": "CONTROL_SURFACE_RECONCILIATION__EXACT_EXECUTION_SURFACE_PARITY_GATE__NO_TASK_REPLAY",
+  "rejected_material_alternatives": [
+    "Replay rank 19.",
+    "Treat PEP 668 failure as coding capability failure.",
+    "Advance another clean task before exact-surface package-policy parity is proven.",
+    "Leave rank-10/rank-17 stale mirrors active."
+  ],
+  "uncertainties": [
+    "Runner PR 367 has not yet completed its focused verification at receipt creation time.",
+    "The next untouched benchmark rank after 19 is not asserted here."
+  ],
+  "assumptions": [
+    "Rank-19 reconciliation artifacts are the newest authoritative task evidence on main."
+  ],
+  "non_goals": [
+    "No task-specific solution/test/verifier inspection.",
+    "No capability promotion.",
+    "No new benchmark execution."
+  ],
+  "next_action": "FREEZE_NEXT_CLEAN_STAGE_C_SPEND_UNTIL_EXACT_TASK_CONTAINER_EXECUTION_SURFACE_PROFILE_AND_PACKAGE_POLICY_PARITY_ARE_VERIFIED__THEN_ADVANCE_FROZEN_ORDER",
+  "supersession_conditions": [
+    "Runner exact-surface profile repair is independently verified and merged.",
+    "Newer canonical evidence changes the active blocker."
+  ],
+  "supersedes": null
+}
