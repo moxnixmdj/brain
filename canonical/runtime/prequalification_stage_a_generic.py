@@ -55,8 +55,42 @@ def evaluate(root: Path, ledger_rel: str, task: str, rank: int, identity_sha256:
     missing=[k for k in expected_hit_fields if k not in exposure]
     if missing:
         failures.append("PRIOR_EXPOSURE_SEARCH_FIELDS_MISSING")
-    if any(exposure.get(k) != 0 for k in expected_hit_fields):
-        failures.append("PRIOR_EXPOSURE_SEARCH_NOT_CLEAN")
+
+    # Raw hits are not automatically contamination. Once a frozen task name is
+    # canonically recorded, later searches can legitimately find self-referential
+    # frontier bookkeeping. Every nonzero raw hit must therefore be completely
+    # classified, while any disqualifying or unclassified hit still fails closed.
+    disqualifying=exposure.get("disqualifying_hits",{})
+    nondis=exposure.get("non_disqualifying_hits",[])
+    if not isinstance(disqualifying,dict):
+        failures.append("PRIOR_EXPOSURE_DISQUALIFYING_COUNTS_INVALID")
+        disqualifying={}
+    if not isinstance(nondis,list):
+        failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_CLASSIFICATION_INVALID")
+        nondis=[]
+    classified_counts={k:0 for k in expected_hit_fields}
+    for item in nondis:
+        if not isinstance(item,dict):
+            failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID")
+            continue
+        field=item.get("counter_field")
+        if field not in classified_counts or not item.get("classification") or not item.get("evidence"):
+            failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID")
+            continue
+        classified_counts[field]+=1
+    for field in expected_hit_fields:
+        raw=exposure.get(field)
+        if type(raw) is not int or raw < 0:
+            failures.append("PRIOR_EXPOSURE_RAW_COUNT_INVALID")
+            continue
+        dis=disqualifying.get(field,0)
+        if type(dis) is not int or dis < 0 or dis > raw:
+            failures.append("PRIOR_EXPOSURE_DISQUALIFYING_COUNT_INVALID")
+            continue
+        if dis != 0:
+            failures.append("PRIOR_EXPOSURE_DISQUALIFYING_HIT")
+        if classified_counts.get(field,0) + dis != raw:
+            failures.append("PRIOR_EXPOSURE_HIT_CLASSIFICATION_INCOMPLETE")
     if e.get("status")!="STAGE_A_GENERIC_SURFACE_PASS__TASK_SPECIFIC_SURFACE_UNCLAIMED":
         failures.append("GENERAL_EXECUTION_SURFACE_CERTIFICATE")
     ar=a.get("runner",{})
