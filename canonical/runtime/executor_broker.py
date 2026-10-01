@@ -8,7 +8,19 @@ available executor attestations that satisfy the capsule's declared policy.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import importlib.util
+import pathlib
+import sys
 from typing import Any, Iterable
+
+ROOT=pathlib.Path(__file__).resolve().parents[2]
+_OBS_PATH=ROOT/"canonical"/"runtime"/"continuous_obs_runtime.py"
+_OBS_SPEC=importlib.util.spec_from_file_location("project_brain_executor_continuous_obs",_OBS_PATH)
+if _OBS_SPEC is None or _OBS_SPEC.loader is None:
+    raise RuntimeError("CONTINUOUS_OBS_RUNTIME_LOAD_FAILED")
+continuous_obs_runtime=importlib.util.module_from_spec(_OBS_SPEC)
+sys.modules[_OBS_SPEC.name]=continuous_obs_runtime
+_OBS_SPEC.loader.exec_module(continuous_obs_runtime)
 
 
 class ExecutorUnavailable(RuntimeError):
@@ -55,6 +67,14 @@ def select_executor(
     capsule: dict[str, Any],
     executors: Iterable[dict[str, Any] | ExecutorAttestation],
 ) -> ExecutorAttestation:
+    obs=continuous_obs_runtime.validate_context(
+        capsule.get("continuous_obs"),
+        root=ROOT,
+    )
+    if not obs.get("pass"):
+        raise ExecutorUnavailable(
+            "CONTINUOUS_OBS_BLOCKED:"+repr(obs.get("errors") or ["UNKNOWN"])
+        )
     policy=dict(capsule.get("executor_policy") or {})
     required=_norm_platform(policy.get("required_platform") or "")
     allow_any=required in {"","any","platform_neutral"}
