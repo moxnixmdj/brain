@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "canonical_base_commit": "c61497aba5de17413d69bc426a6f0922a6b469b8",
+  "real_objective": "Make the terminal goal reachable again by removing three Brain-side defects that make canonical Stage-A admission undecidable, make the trusted drift guard reject a correct pointer, and leave every frontier mirror stale after each advance, without redefining the live frontier, spending evidence, or reading any task instruction.",
+  "governing_invariants": {
+    "knowledge": "EXTERNAL_JIT",
+    "capabilities": "EXTERNAL_WINNERS_ARE_SPECIMENS__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL_MODEL_OR_RUNTIME__MUST_NOT_BE_CREDITED_AS_OPAQUE_CAPABILITY_PROVIDER",
+    "opus_bar": "EQUAL_OR_BETTER",
+    "capability_externalization": false,
+    "underlying_capability_invention": false
+  },
+  "theory_invariants_source": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json#theory_invariants",
+  "material_premises": [
+    "prequalification_stage_a_reducer_v2.py tested the whole prior_exposure_search dict with all(v==0 for v in search.values()). The eight-surface policy mandates that the same dict also carry search_complete=true, searched_surfaces=[8 names] and optional self-referential Brain PR metadata. True==0 and ['brain_code',...]==0 are both False, so every policy-compliant ledger was rejected as QUALIFICATION_CONTAMINATION_LEDGER.",
+    "Consequence at the previous base: FREECAD_IMPELLER_RANK18_CONTAMINATION_LEDGER_V1.json was UNEXPOSED__STAGE_A_PRE_EXPOSURE with search_complete=true, 8 surfaces and all 8 hit counters zero, yet the reducer returned pass=false / authorization=NONE while FREECAD_IMPELLER_RANK18_STAGE_A_ADMISSION_V1.json asserted pass=true / STAGE_B_INSTRUCTION_EXPOSURE_ONLY under the same PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2 schema. Its rule string differs from the reducer's, so it was not reducer output. rank18 Stage B and Stage C were then spent on an admission the canonical reducer could not reproduce.",
+    "The same pattern repeated for rank19: SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_A_ADMISSION_V1.json is hand-authored under the V2 verdict schema with the same divergent rule string and names the rank18 artifact as its prior_stage_a_template.",
+    "The committed test_prequalification_stage_a_reducer_v2.py pinned rank16, whose ledger is CONTAMINATED_DURING_STAGE_B (instruction_read=true, task_specific_hints_read=true, clean_for_stage_b_exposure=false), and asserted a pass, so it was already failing at base and could not detect the defect because it never exercised a compliant ledger.",
+    "v2 also enforced neither PER_ACTION_CANONICAL_LEASE_REVALIDATION nor TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD, both of which prequalification_stage_a_generic.py (v1) enforces and the second of which the live policy requires as TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED. Two reducers emitting admission verdicts for one staged-admission contract disagreed, and the weaker one was a fail-open path for exactly the escape that let rank18 spend one execution lease twice.",
+    "v1 pinned the lease-revalidation status to the exact rank15-specific string VERIFIED_AND_MERGED__RANK15_REVOCATION_ESCAPE_CLASS_BLOCKED, so re-issuing that artifact for a later rank would spuriously fail Stage A closed.",
+    "main added the runner budget predicate to v1 and the ninth policy item without updating v1's synthetic test fixture, so all 7 tests in test_prequalification_stage_a_generic.py were failing at base, the fixture missing RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION_20261001_V1.json entirely.",
+    "enforce_goal_hierarchy.py compared the pointer's control paths to a frozen expected_control_paths constant naming PRE_ACTION_GATE_V9, GOAL_HIERARCHY_ACTION_GATE_V8 and TEMPLATE_V8 while the base pointer declares V11, V10 and V10, so three POINTER_CONTROL_PATH_MISMATCH failures fired for every frontier-sensitive PR regardless of content. The same file loaded V6/V8/V8 for its semantic order checks, verifying superseded artifacts while the live V11 control surface went unchecked.",
+    ".github/workflows/drift-immunity-guard.yml copies the validator from the trusted base before checking out the PR head, so this PR is judged by the base guard and the three control-path failures cannot be cleared from inside it without downgrading the pointer to superseded V9/V8/V8 artifacts.",
+    "The mirror rot is recurring, not one-off. Measured at three consecutive base commits (5e81733, 3681ff8 and c61497a) after 71 further commits in total, the mirror fields were stale against the live hierarchy every time and still carried rank-10 text (CURRENT_V5_TERMINAL_BENCH_4_BREADTH... and LAUNCH_CAD_MODEL_RANK_10...). At this base nine fields needed reconciling; the hierarchy's own next_progress_event_target had just been aligned upstream. Every frontier advance re-stales them, so the drift guard cannot pass any PR, which is consistent with 20 consecutive guard failures across many branches while main advanced by direct push.",
+    "The base moved four times during this work (9684aaf, 5e81733, 3681ff8, c61497a). Because enforce_recursive_obs binds obs.canonical_base_commit to the exact literal passed as --base, and the workflow passes github.event.pull_request.base.sha, any push to main expires every open PR's OBS receipt. This is a structural property of the current design, not an error in this change, and it is recorded here rather than papered over.",
+    "A trivial sensitive-file change at base produced 20 distinct failures under the base guard, so the wall is independent of any PR's content."
+  ],
+  "evidence_refs": [
+    "canonical/runtime/prequalification_stage_a_reducer_v2.py",
+    "canonical/runtime/prequalification_stage_a_generic.py",
+    "canonical/runtime/test_prequalification_stage_a_reducer_v2.py",
+    "canonical/runtime/test_prequalification_stage_a_generic.py",
+    "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "canonical/governance/RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION_20261001_V1.json",
+    "canonical/governance/PER_ACTION_CANONICAL_LEASE_REVALIDATION_VERIFICATION_20261001_V1.json",
+    "canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_CONTAMINATION_LEDGER_V1.json",
+    "canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_STAGE_A_ADMISSION_V1.json",
+    "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_CONTAMINATION_LEDGER_V1.json",
+    "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_A_ADMISSION_V1.json",
+    "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_CONTAMINATION_LEDGER_V1.json",
+    "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_CONTAMINATION_LEDGER_V1.json",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    ".github/workflows/drift-immunity-guard.yml",
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+    "canonical/capabilities/frontier/ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
+    "canonical/tests/test_frontier_target_mirror_firewall.py",
+    "canonical/reasoning/RANK17_STAGE_A_ACTION_INTENT_20261001_V1.json"
+  ],
+  "reproduction_commands": [
+    "python3 canonical/runtime/prequalification_stage_a_reducer_v2.py . --task freecad-impeller --rank 18 --ledger canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_CONTAMINATION_LEDGER_V1.json",
+    "python3 canonical/runtime/enforce_goal_hierarchy.py --base c61497aba5de17413d69bc426a6f0922a6b469b8 --head HEAD",
+    "python3 -m pytest canonical/tests canonical/runtime tests -q"
+  ],
+  "conclusion": "Repair the predicates and the comparison rules, never the evidence. Replace the blanket dict-wide zero test with named checks over the eight canonical hit counters plus explicit completeness predicates; port the two predicates v2 was missing so both reducers enforce one contract and absence of evidence refuses rather than raises; match the lease status on its semantic prefix so it cannot rot per rank; bind v2 to the eight-surface policy item it never enforced and raise its policy floor to the ninth; replace the guard's frozen version constants with a currency rule resolving the semantic loads from the pointer-declared live surfaces; then reconcile the nine stale mirror fields to the live hierarchy. No frontier is redefined and no evidence is spent.",
+  "selected_route": "FIX_PREDICATES_AND_PORT_MISSING_CHECKS__REPLACE_VERSION_CONSTANTS_WITH_CURRENCY_RULE__RECONCILE_ALL_MIRRORS_TO_LIVE_HIERARCHY",
+  "rejected_material_alternatives": [
+    {
+      "route": "STRIP_search_complete_AND_searched_surfaces_FROM_THE_LEDGERS_SO_THE_BLANKET_ZERO_TEST_PASSES",
+      "reason": "Deletes mandated eight-surface completeness evidence to satisfy a buggy predicate and makes recorded admissions even less reproducible."
+    },
+    {
+      "route": "DOWNGRADE_THE_POINTER_TO_V9_V8_V8_TO_SATISFY_THE_FROZEN_CONSTANT",
+      "reason": "Points boot at superseded control surfaces and contradicts ACTIVE_GOAL_HIERARCHY_V1, which already declares V11."
+    },
+    {
+      "route": "PORT_ONLY_THE_BUDGET_PREDICATE_AND_LEAVE_THE_LEASE_PREDICATE_OUT",
+      "reason": "Leaves the two reducers disagreeing, which is the defect class being repaired."
+    },
+    {
+      "route": "DERIVE_THE_REDUCER_POLICY_FLOOR_FROM_THE_POLICY_FILE",
+      "reason": "The floor exists to detect a policy weakened by removal; deriving it from the same file makes the check vacuous."
+    },
+    {
+      "route": "PIN_THE_REPRODUCIBILITY_TESTS_TO_A_FROZEN_LEDGER_SNAPSHOT",
+      "reason": "Live ledgers legitimately mutate as a task advances past Stage A. Asserting both states keeps the oracle honest without freezing a copy that would silently drift from canonical truth."
+    },
+    {
+      "route": "REDEFINE_THE_FRONTIER_TO_A_BLOCKER_I_CAN_CLOSE_INSIDE_THIS_REPO",
+      "reason": "Forbidden without RECONCILE_FRONTIER evidence and would abandon the real live rank19 Stage-C blocker."
+    },
+    {
+      "route": "HAND_WRITE_ADMISSION_ARTIFACTS_FOR_THE_NEXT_RANK",
+      "reason": "That is exactly the defect being repaired."
+    },
+    {
+      "route": "RECONCILE_MIRRORS_ONLY",
+      "reason": "Leaves admission undecidable and the version pins rot again on the next control-surface bump."
+    }
+  ],
+  "uncertainties": [
+    "CI will still report three POINTER_CONTROL_PATH_MISMATCH failures for this PR because the workflow runs the base validator; they clear only once this repair is the trusted base.",
+    "main advanced four times during this work and every advance re-staled the mirrors and expired the OBS base binding, so the base may move again before merge and both the reconciliation and the receipt stamp may need recomputing.",
+    "canonical/runtime/test_data_anonymization_stage_b_gate.py::test_live_contract_passes_structural_gate is red at base and stays red here: it asserts a live rank17 Stage-B contract passes the structural gate, but rank17's ledger is SPENT__SOURCE_BOUNDARY_CONTAMINATED so the gate correctly fails closed on LEDGER_STAGE_B_STATE. The gate is right and the test is pinned to mutable live state; deciding rank17 Stage-B truth belongs to the worker owning that lane.",
+    "v1 still raises FileNotFoundError rather than failing closed when a governance artifact is absent; v2 now fails closed for the two artifacts it loads defensively. Aligning v1 fully is a separate change.",
+    "18 other pre-existing failures remain in canonical/tests: 5 need outbound HTTPS, which this sandbox has no Python egress for, and 13 are open-research relevance and admission drifts, grounded-composition registry binding gaps and auto-acquisition environment probes."
+  ],
+  "assumptions": [
+    "canonical base c61497aba5de17413d69bc426a6f0922a6b469b8 (origin/main) is the comparison base for this change.",
+    "The eight canonical hit fields and eight searched surfaces named by PREQUALIFICATION_FAILURE_IMMUNITY_V1 are the authoritative completeness contract.",
+    "A missing hit counter must be treated as unknown, never as zero.",
+    "ACTIVE_GOAL_HIERARCHY_V1 is the single authority all mirrors are reconciled to; this change never edits its blocker or next action."
+  ],
+  "non_goals": [
+    "No capability promotion and no scoreboard counter movement",
+    "No task instruction read for any rank",
+    "No Stage-B or Stage-C execution and no lease issued or consumed",
+    "No runner repository mutation",
+    "No frontier redefinition",
+    "No relaxation of any existing mandatory guard check"
+  ],
+  "verified_results": {
+    "guard_repaired_on_full_diff": "DRIFT_GUARD_PASS, 0 failures",
+    "guard_base_on_full_diff": "3 failures, all POINTER_CONTROL_PATH_MISMATCH caused by the base guard's own frozen constants",
+    "guard_base_on_trivial_sensitive_change_at_base": "20 failures including 8 cross-surface hierarchy mismatches",
+    "suite_base": "28 failed / 417 passed / 1 skipped",
+    "suite_this_branch": "19 failed / 454 passed / 1 skipped / 49 subtests",
+    "tests_fixed": 9,
+    "new_regressions": 0,
+    "fixed_tests": [
+      "canonical/runtime/test_prequalification_stage_a_generic.py (all 7, fixture was missing the runner budget artifact and the ninth policy item)",
+      "canonical/runtime/test_prequalification_stage_a_reducer_v2.py::TestGenericStageA::test_live_rank16_repo_passes (replaced by an adversarial suite)",
+      "canonical/tests/test_frontier_target_mirror_firewall.py::FrontierTargetMirrorTests::test_current_target_record_matches_active_frontier (existing independent oracle)"
+    ],
+    "reducer_on_live_ledgers": {
+      "rank18_freecad_impeller": "still UNEXPOSED__STAGE_A_PRE_EXPOSURE: pass=true STAGE_B_INSTRUCTION_EXPOSURE_ONLY, matching the recorded artifact field for field on pass, authorization, failed_predicates and task_execution_authorized",
+      "rank19_satb_audio_transcription": "has legitimately advanced to INSTRUCTION_EXPOSED__STAGE_B_PASS__STAGE_C_ONE_SHOT_LEASED, so the reducer now refuses it with QUALIFICATION_CONTAMINATION_LEDGER while the recorded Stage-A pass stands as history; both branches are asserted",
+      "rank17_data_anonymization": "pass=false NONE QUALIFICATION_CONTAMINATION_LEDGER (spent, source-boundary contaminated)",
+      "rank16_session_window_debug": "pass=false NONE with QUALIFICATION_CONTAMINATION_LEDGER plus four exposure-search predicates (7 fields, no brain_pr_hits, no searched_surfaces)"
+    },
+    "mirror_fields_reconciled": 9,
+    "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after."
+  },
+  "next_action": "OPEN_FRESH_RANK19_STAGE_C_CARRIER__BIND_CANONICAL_ONE_SHOT_LEASE__FREEZE_ACCEPTANCE__EXECUTE_EXACTLY_ONE_BUILDER_BURST_WITH_INTERNAL_SELF_CHECKS__THEN_ONE_TERMINAL_VERIFIER",
+  "supersession_conditions": [
+    "Canonical main moves materially before merge, especially ACTIVE_GOAL_HIERARCHY_V1 blocker or next action, the pointer's canonical_generation, or the Stage-A required list.",
+    "Another worker lands an equivalent reducer, guard-currency or mirror reconciliation first.",
+    "A V12 control surface appears, which the currency rule will then require the pointer to declare."
+  ],
+  "supersedes": [
+    "canonical/reasoning/RANK17_STAGE_A_ACTION_INTENT_20261001_V1.json (canonical_generation 2026-10-01-live and capability_target ADVANCED_AGENTIC_CODING are both inconsistent with the live pointer generation and live hierarchy target; cited as prior work, not relied upon)",
+    "The rank-10 blocker and next-action text mirrored across pointer, queue, scoreboard and target record"
+  ]
+}
