@@ -41,6 +41,10 @@ REQUIRED_GATE_CHECKS={
     "REALITY_QUERY_HAS_TERMINAL_DECISION_VALUE",
     "MINIMUM_REALITY_CUT_MEMBER_OR_GRANDFATHERED_CURRENT_VALID_ACTION",
     "NO_REACQUISITION_OF_ALREADY_KNOWN_TERMINAL_RELEVANT_INFORMATION",
+    "EXECUTION_AUTHORITY_BINDS_EXACT_ACTIVE_CARRIER_IDENTITY",
+    "SECOND_OPEN_CARRIER_FAILS_CLOSED",
+    "LIVE_AUTHORITY_REVALIDATED_AFTER_LAST_MATERIAL_STATE_TRANSITION_BEFORE_IRREVERSIBLE_COMMAND",
+    "EXECUTION_PATH_USES_CANONICAL_AUTHORITY_REDUCER_AND_MAY_NOT_BYPASS_IT",
 }
 
 def load(root:pathlib.Path, rel:str)->dict[str,Any]:
@@ -164,6 +168,7 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
       "recursive_obs_action_intent_template_path":TEMPLATE,
       "continuous_obs_policy_path":OBS_POLICY,
       "continuous_obs_runtime_path":OBS_RUNTIME,
+      "execution_authority_reducer_path":"canonical/runtime/execution_authority_reducer.py",
     }
     for key,value in expected.items():
         if _s(boot.get(key))!=value:
@@ -175,6 +180,10 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
       "continuous_obs_on_every_material_state_transition",
       "material_world_state_unknown_fails_closed",
       "information_action_authorization_required",
+      "execution_authority_reducer_required",
+      "exact_active_carrier_identity_binding_required",
+      "second_open_execution_carrier_forbidden",
+      "post_material_transition_authority_revalidation_required",
     ):
         if boot.get(key) is not True:
             errors.append("POINTER_CONTINUOUS_OBS_FLAG_FALSE:"+key)
@@ -215,6 +224,14 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
 
     # Information-minimization controls must be live across the canonical surfaces.
     eg=pointer.get("execution_governance") or {}
+    if _s(eg.get("execution_authority_reducer"))!="canonical/runtime/execution_authority_reducer.py":
+        errors.append("POINTER_EXECUTION_AUTHORITY_REDUCER_DRIFT")
+    if _s(eg.get("execution_authority_carrier_binding_verification"))!="canonical/verification/EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_20261002_V1.json":
+        errors.append("POINTER_CARRIER_BINDING_VERIFICATION_DRIFT")
+    if _s(eg.get("duplicate_carrier_regression"))!="canonical/regressions/2026-10-02_DUPLICATE_CARRIER_AUTHORITY_HASH_COLLISION.json":
+        errors.append("POINTER_DUPLICATE_CARRIER_REGRESSION_DRIFT")
+    if eg.get("static_carrier_agnostic_authority_forbidden") is not True:
+        errors.append("POINTER_CARRIER_AGNOSTIC_AUTHORITY_NOT_FORBIDDEN")
     expected_info_paths={
       "evidence_saturation_and_minimum_reality_query_law":EVIDENCE_LAW,
       "counterfactual_terminal_compiler":COUNTERFACTUAL_COMPILER,
