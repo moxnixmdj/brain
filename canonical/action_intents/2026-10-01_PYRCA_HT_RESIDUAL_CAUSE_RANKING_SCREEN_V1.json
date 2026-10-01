@@ -1,0 +1,147 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PYRCA-HT-RESIDUAL-CAUSE-RANKING-SCREEN-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "a55078c95524817b49930a6eafa4018fa8cc29ca",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "AUTHORIZE_ONE_NONOVERLAPPING_PYRCA_HT_RESIDUAL_CAUSE_RANKING_SCREEN__ZERO_CAPABILITY_CREDIT__RANK9_PRIMARY_EXECUTION_UNCHANGED",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": false,
+  "evidence_presence_classification": "ATOMIC_RESIDUAL_UNRESOLVED__EXISTING_OPEN_CHALLENGER_IDENTIFIED",
+  "stop_condition": "ONE_GUARD_VALIDATED_PYRCA_HT_SCREEN_AUTHORIZED__NO_ACTIVE_RANK9_TASK_CONTENT_TOUCHED__ZERO_CAPABILITY_CREDIT",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_PYRCA_HT_RESIDUAL_CAUSE_RANKING_SCREEN_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a55078c95524817b49930a6eafa4018fa8cc29ca",
+    "real_outcome": "Authorize one independent side screen of an existing open residual cause-ranking mechanism while preserving the live primary rank-9 coding lane.",
+    "required_capability": "Current-base authorization for one zero-credit atomic residual-ranking experiment.",
+    "obs_goal": {
+      "real_outcome": "Reduce unexplained donor-dependent causal-ranking behavior with minimum wall-clock and zero interference with rank 9.",
+      "proxy_goals_deleted": [
+        "GENERAL_RCA_SYSTEM_BUILD",
+        "NEW_RANKER_TRAINING",
+        "ACTIVE_TASK_ANALYSIS"
+      ],
+      "surviving_necessity": "Test whether an existing open ranker can solve the multiple-survivor ranking residual."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "BRAIN_OWNED_CAUSE_CANDIDATE_GENERATOR",
+        "ATOMIC_CAUSAL_MAP",
+        "CURRENT_C7_EVIDENCE"
+      ],
+      "external_existing_routes_checked": [
+        "SALESFORCE_PYRCA_HT",
+        "PYWHY_DOWHY_ANOMALY_ATTRIBUTION"
+      ],
+      "capability_work_deleted": [
+        "WHOLE_PYRCA_ADOPTION",
+        "WHOLE_DOWHY_ADOPTION",
+        "NEW_TRAINING"
+      ],
+      "surviving_gap": "RESIDUAL_CAUSE_RANKING_WHEN_MULTIPLE_CANDIDATES_SURVIVE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "ATOMIC_RESIDUAL",
+      "delete_bypass_substitute_options": [
+        "EXACT_GRAPH_ORDER_BASELINE",
+        "EXISTING_OPEN_PYRCA_HT"
+      ],
+      "surviving_causal_blocker": "No Brain-owned verified mechanism yet ranks multiple surviving causal candidates."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "PYRCA_HT_NARROW_SCREEN",
+        "DOWHY_ATTRIBUTION_LATER_IF_NEEDED",
+        "NEW_TRAINING_REJECTED"
+      ],
+      "losing_routes_reason": "PyRCA HT is the smallest directly relevant existing open scorer found; broader frameworks and training add unnecessary machinery.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A generated hidden-intervention multi-survivor benchmark can test ranking value without consuming clean terminal tasks."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "TRAIN_NEW_CAUSE_RANKER_IF_OPEN_ROUTE_SUCCEEDS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "CAUSE_CANDIDATE_GENERATION_ALREADY_BRAIN_OWNED_NARROW",
+        "EXECUTABLE_CAUSAL_FALSIFICATION_ALREADY_SCREENED"
+      ],
+      "fresh_reuse_plan": "If HT adds ranking value, minimize and donor-delete only the ranking slice before fresh transfer."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_RANDOM_DAG_CANDIDATE_GENERATOR_TEST",
+        "NO_ACTIVE_TASK_INSPECTION"
+      ],
+      "search_stop_decision": "PyRCA HT is sufficient to justify one cheap discriminator before broader search.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PYRCA_HT",
+      "DOWHY_GCM_ATTRIBUTION",
+      "NEW_TRAINED_RANKER",
+      "NO_RANKER_BASELINE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "WHOLE_RCA_FRAMEWORK_ADOPTION",
+      "NEW_TRAINING_FIRST",
+      "ACTIVE_RANK9_DATA_USE"
+    ],
+    "selected_surviving_route": "PYRCA_HT_NARROW_RESIDUAL_RANKING_SCREEN",
+    "why_selected_route_is_fastest_sufficient": "It is open, directly scores root causes over a supplied causal graph, and is smaller than a whole causal-attribution stack.",
+    "expected_parent_level_state_change": "AUTHORIZE_ONE_NONOVERLAPPING_PYRCA_HT_RESIDUAL_CAUSE_RANKING_SCREEN__ZERO_CAPABILITY_CREDIT__RANK9_PRIMARY_EXECUTION_UNCHANGED",
+    "stop_condition": "ONE_GUARD_VALIDATED_PYRCA_HT_SCREEN_AUTHORIZED__NO_ACTIVE_RANK9_TASK_CONTENT_TOUCHED__ZERO_CAPABILITY_CREDIT",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Existing open challenger already identified; this action only authorizes one discriminator."
+    }
+  },
+  "highest_leverage_scope": "INDEPENDENT_NONOVERLAPPING_SIDE_CAPACITY__PRIMARY_RANK9_EXECUTION_REMAINS_HIGHER_GLOBAL_PRIORITY"
+}
