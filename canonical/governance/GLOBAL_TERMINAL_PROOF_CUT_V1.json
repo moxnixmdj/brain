@@ -288,7 +288,8 @@
     "task_execution_authorized": false,
     "source_role": "SPENT_NONPROMOTION_EVIDENCE_ONLY",
     "incident": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
-    "disposition": "PRESERVE_SOURCE_AS_SPENT_EVIDENCE__NO_EXECUTION__NO_AUTOMATIC_NEXT_RANK"
+    "disposition": "PRESERVE_SOURCE_AS_SPENT_EVIDENCE__NO_EXECUTION__NO_AUTOMATIC_NEXT_RANK",
+    "spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   },
   "next_action": "SATURATE_ALL_OPEN_TERMINAL_OBLIGATIONS_USING_EXISTING_VERIFIED_CONTROLS_AND_SPENT_EVIDENCE__GLOBAL_DEDUCTIVE_CLOSURE__COMPRESS_SHARED_RESIDUALS__COMPUTE_EXACT_GLOBAL_MINIMUM_REALITY_CUT",
   "capability_credit_delta": 0,
@@ -297,6 +298,8 @@
   "existing_evidence_priority": [
     "canonical/governance/RANK22_BUILDER_FAILURE_IMMUNITY_VERIFICATION_20261002_V1.json",
     "canonical/verification/SOURCE_CONTRACT_COMPLETENESS_V2_VERIFICATION_20261002_V1.json",
-    "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json"
-  ]
+    "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
+    "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
+  ],
+  "activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json"
 }
