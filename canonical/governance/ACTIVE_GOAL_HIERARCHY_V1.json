@@ -652,7 +652,11 @@
     "task_execution": false,
     "terminal_verifier_executed": false,
     "capability_credit_delta": 0,
-    "replay_allowed": false
+    "replay_allowed": false,
+    "execution_count_used": 1,
+    "terminal_verifier_count_used": 0,
+    "execution_admissible": false,
+    "correction": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_REVOCATION_EXECUTION_TRUTH_CORRECTION_V1.json"
   },
   "next_clean_task": {
     "rank": 22,
@@ -675,5 +679,9 @@
       "AMBIGUITY_IS_A_BLOCKING_SPECIFICATION_HOLE_NOT_AN_INVENTED_REQUIREMENT",
       "CAN_EXECUTE_AND_CAN_VERIFY_MUST_BE_DERIVED_FROM_EVENT_STATE_NOT_WRITABLE_BOoleans"
     ]
+  },
+  "rank21_execution_truth_correction_20261001": {
+    "status": "BUILDER_EXECUTED_EXACTLY_ONCE_AFTER_CANONICAL_CONTAMINATION_REVOCATION__OUTPUT_INADMISSIBLE__NO_TERMINAL_VERIFIER__ZERO_CREDIT__NO_REPLAY",
+    "evidence": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_REVOCATION_EXECUTION_TRUTH_CORRECTION_V1.json"
   }
 }
