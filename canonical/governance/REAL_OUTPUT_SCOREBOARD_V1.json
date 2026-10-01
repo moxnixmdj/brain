@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "BEHAVIORAL_SEMANTIC_PURGE_AND_INDEPENDENT_ACCEPTANCE_MODEL_VALIDATION_ON_SPENT_HELDOUT_FAILURES__NO_RANK15_SPEND",
+  "next_progress_event_target": "CLOSE_TERMINAL_BEHAVIORAL_PROOF_GAPS_AND_PASS_PREQUALIFICATION_FAILURE_IMMUNITY_WITHOUT_SPENDING_RANK15",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1023,7 +1023,7 @@
     "next_clean_task": "wdm-design",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "COMPLETE_BEHAVIORAL_CONTRACT_PURGE__VALIDATE_BUILDER_INDEPENDENT_ACCEPTANCE_MODEL_ON_SPENT_HELDOUTS__ONLY_THEN_REOPEN_FROZEN_RANK15",
+  "next_required_action": "VALIDATE_COMPLETE_REQUIREMENT_GRAPH_PLUS_INDEPENDENT_ACCEPTANCE_PLUS_REQUIREMENT_AND_VERIFIER_MUTATION_ON_SPENT_HELDOUTS__PRODUCE_FEASIBILITY_STATISTICAL_CONTAMINATION_EXECUTION_AND_COMPOSITION_CERTIFICATES__KEEP_RANK15_FROZEN",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1042,5 +1042,12 @@
     "rank": 14,
     "status": "INSTRUCTION_EXPOSED__NO_TASK_COMMAND__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT",
     "evidence_path": "canonical/capabilities/opus55/FORMAL_CRYPTO_TB4_INSTRUCTION_EXPOSED_UNSPENT_20261001_V1.json"
-  }
+  },
+  "terminal_closure_control": {
+    "manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "reducer": "canonical/runtime/terminal_closure_reducer.py",
+    "current_status": "NOT_ACHIEVED",
+    "promotion_override_allowed": false
+  },
+  "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json"
 }
