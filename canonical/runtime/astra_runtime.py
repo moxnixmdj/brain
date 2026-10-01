@@ -6,6 +6,44 @@ from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
+_ACTIVE_CONTINUOUS_OBS_CONTEXT=None
+_ACTIVE_CONTINUOUS_OBS_MODULE=None
+_ACTIVE_CONTINUOUS_OBS_MISSION_ID=None
+
+def _authorize_external_information(kind,payload):
+    if _ACTIVE_CONTINUOUS_OBS_CONTEXT is None or _ACTIVE_CONTINUOUS_OBS_MODULE is None:
+        raise Blocker("CONTINUOUS_OBS_INFORMATION_CONTEXT_NOT_BOUND")
+    raw_kind=str(kind)
+    if raw_kind in {"http_get","urlopen"}:
+        action_kind="EXACT_FETCH"
+        source=str((payload or {}).get("url") or "")
+    elif raw_kind in {"package_name_search","python_source_tree","pypi_wheel_closure"}:
+        action_kind="DISCOVERY_SEARCH"
+        source=str((payload or {}).get("goal") or (payload or {}).get("effect") or (payload or {}).get("project") or raw_kind)
+    elif raw_kind=="planner":
+        action_kind="PLANNER"
+        source="planner"
+    else:
+        action_kind="EXTERNAL_TOOL"
+        source=raw_kind
+    verdict=_ACTIVE_CONTINUOUS_OBS_MODULE.authorize_information_action(
+        _ACTIVE_CONTINUOUS_OBS_CONTEXT,
+        {"kind":action_kind,"source":source,"tool_kind":raw_kind},
+        root=ROOT,
+    )
+    verdict["mission_id"]=_ACTIVE_CONTINUOUS_OBS_MISSION_ID
+    evidence_id=_ACTIVE_CONTINUOUS_OBS_MISSION_ID or "UNBOUND"
+    p=EVID_DIR/f"{evidence_id}__INFORMATION_ADMISSION.jsonl"
+    p.parent.mkdir(parents=True,exist_ok=True)
+    with p.open("a",encoding="utf-8",newline="\n") as fh:
+        fh.write(json.dumps(verdict,sort_keys=True,separators=(",",":"))+"\n")
+    if not verdict.get("pass"):
+        raise Blocker(
+            "CONTINUOUS_OBS_INFORMATION_BLOCKED:"
+            +"|".join(verdict.get("errors") or ["UNKNOWN"])
+        )
+    return verdict
+
 def _load_runtime_helper(module_name):
     path=ROOT/"canonical"/"runtime"/(str(module_name)+".py")
     if not path.is_file():
@@ -110,6 +148,7 @@ def run_shell(step, prior_results=None):
     }
 
 def _external_tool_bridge(kind,payload):
+    _authorize_external_information(kind,payload)
     raw_dir=os.environ.get("PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR","").strip()
     if not raw_dir:
         return None
@@ -211,8 +250,9 @@ def _bridge_aware_urlopen(request, timeout=20, *args, **kwargs):
     return _ExternalBridgeHTTPResponse(raw,status,final_url,headers)
 
 def _activate_external_http_bridge():
-    if os.environ.get('PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR','').strip():
-        urllib.request.urlopen=_bridge_aware_urlopen
+    # Always wrap raw urllib access so the information boundary is enforced
+    # even when no external relay process is configured.
+    urllib.request.urlopen=_bridge_aware_urlopen
 
 def run_http(step):
     bridged=_external_tool_bridge("http_get",{
@@ -6054,6 +6094,11 @@ def main():
     # Every material step revalidates canonical state and all declared volatile
     # world/dependency evidence. Any stale/unknown material dependency blocks.
     continuous_obs=_load_runtime_helper("continuous_obs_runtime")
+    global _ACTIVE_CONTINUOUS_OBS_CONTEXT, _ACTIVE_CONTINUOUS_OBS_MODULE, _ACTIVE_CONTINUOUS_OBS_MISSION_ID
+    _ACTIVE_CONTINUOUS_OBS_CONTEXT=mission.get("continuous_obs")
+    _ACTIVE_CONTINUOUS_OBS_MODULE=continuous_obs
+    _ACTIVE_CONTINUOUS_OBS_MISSION_ID=mid
+    _activate_external_http_bridge()
     def _continuous_obs_revalidate(event):
         verdict=continuous_obs.validate_context(
             mission.get("continuous_obs"),
