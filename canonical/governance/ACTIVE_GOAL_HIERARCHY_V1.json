@@ -5,9 +5,9 @@
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
-  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__STAGE1_BREADTH_ACTIVE__RANK6_LIVE_RESTART_AFTER_TRANSPORT_OBS",
+  "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__STAGE1_BREADTH_ACTIVE__RANK6_TRANSPORT_INADMISSIBLE__RANK7_SURFACE_PREFLIGHT_NEXT",
   "current_parent_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-  "next_required_action_class": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+  "next_required_action_class": "QUALIFY_JAX_SPEEDRUN_GPU_RANK_7_EXECUTION_SURFACE_BEFORE_INSTRUCTION_READ__IF_COMPATIBLE_LEASE_AND_RUN_ONCE__IF_INCOMPATIBLE_SKIP_UNSPENT",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -197,7 +197,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
+  "next_progress_event_target": "QUALIFY_JAX_SPEEDRUN_GPU_RANK_7_EXECUTION_SURFACE_BEFORE_INSTRUCTION_READ__IF_COMPATIBLE_LEASE_AND_RUN_ONCE__IF_INCOMPATIBLE_SKIP_UNSPENT",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -292,10 +292,10 @@
     "path": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
     "unfinished_families_at_activation": 17,
     "shared_residual_lanes": 5,
-    "current_atomic_execution_preserved": "glycan-ms2-elucidation",
+    "current_atomic_execution_preserved": "jax-speedrun-gpu",
     "parallel_discovery_and_internalization_allowed": true,
     "promotion_requires_independent_family_specific_evidence": true,
-    "current_atomic_execution_state": "RANK6_LIVE_RESTART_AFTER_OBS_TRANSPORT_FIX__BURST_0_QUEUED__ONE_SHOT_VERIFIER"
+    "current_atomic_execution_state": "RANK7_PRESTART_EXECUTION_SURFACE_QUALIFICATION_REQUIRED__INSTRUCTION_UNREAD"
   },
   "cognitive_basis_compression_campaign": {
     "status": "ACTIVE__PRIMITIVE_SPECIFIC_COMPOSITION__GENERIC_SMALL_JUDGE_FALSIFIED__ZERO_CAPABILITY_CREDIT",
@@ -338,16 +338,12 @@
     "evidence_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json"
   },
   "active_stage1_execution": {
-    "task": "glycan-ms2-elucidation",
-    "rank": 6,
-    "runner_pr": 289,
-    "workflow_run_id": 36826634715,
-    "head_sha": "63c1301a4612205e24eeb3a3e008058aa82fbc4c",
-    "state": "LIVE_RESTART_AFTER_OBS_TRANSPORT_FIX__BURST_0_QUEUED__CLEAN_BOUNDARY_PRESERVED",
-    "prior_failed_run_id": 36822123561,
-    "prior_failure": "PERSISTENT_PR_COMMENT_CONTROLLER_SELF_RATE_LIMITED__HTTP_403__RUN_DIED_WHILE_CANONICAL_STATE_REMAINED_READY",
-    "transport_fix_commit": "63c1301a4612205e24eeb3a3e008058aa82fbc4c",
-    "liveness_authority": "LIVE_GITHUB_ACTIONS_RUN_REQUIRED__READY_OR_RUNNING_IS_NOT_DURABLE"
+    "task": "jax-speedrun-gpu",
+    "rank": 7,
+    "state": "PRESTART_EXECUTION_SURFACE_QUALIFICATION_REQUIRED__INSTRUCTION_UNREAD",
+    "prior_rank6_evidence": "canonical/capabilities/opus55/GLYCAN_MS2_ELUCIDATION_TB4_TRANSPORT_INADMISSIBLE_20261001_V1.json",
+    "runner_transport_version": "FAST_BURST_SAFE_ARTIFACT_CONTRACT_V3",
+    "runner_transport_fix_commit": "18b46cbb1ed5061cff9b54983e24e1020d1711ce"
   },
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
@@ -404,5 +400,12 @@
       "focused_regression": "PASS"
     },
     "next_execution": "NEXT_ELIGIBLE_UNTOUCHED_FROZEN_SAMPLE_TASK_ON_PATCHED_RUNNER__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER"
+  },
+  "latest_transport_inadmissible": {
+    "task": "glycan-ms2-elucidation",
+    "rank": 6,
+    "evidence_path": "canonical/capabilities/opus55/GLYCAN_MS2_ELUCIDATION_TB4_TRANSPORT_INADMISSIBLE_20261001_V1.json",
+    "capability_credit_delta": 0,
+    "replay_allowed": false
   }
 }
