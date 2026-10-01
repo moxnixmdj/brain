@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_RANK15_STAGE_A_ADMISSION_VERIFICATION_V1",
+  "date": "2026-10-01",
+  "status": "INDEPENDENT_PASS__INSTRUCTION_EXPOSURE_ONLY__ZERO_CREDIT",
+  "artifact": "canonical/runtime/rank15_stage_a_admission.py",
+  "brain_blob_sha": "caadf3f84da2d5c726c6f59bec076d7313dfe5f1",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 321,
+    "head_sha": "a9ff37cac9b4d15a1937d6ae8c04e2b57a31bfc0",
+    "workflow_run_id": 36910666339,
+    "job_id": 110532208203,
+    "runner_blob_sha": "caadf3f84da2d5c726c6f59bec076d7313dfe5f1",
+    "exact_source_match": true,
+    "conclusion": "success"
+  },
+  "authority": {
+    "authorize_instruction_exposure": true,
+    "authorize_task_execution": false,
+    "terminal_goal_achieved": false
+  },
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
