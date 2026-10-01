@@ -25,6 +25,7 @@ def evaluate(root: Path, ledger_rel: str, task: str, rank: int, identity_sha256:
     d=load(root,"canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V1.json")
     p=load(root,"canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json")
     l=load(root,"canonical/governance/PER_ACTION_CANONICAL_LEASE_REVALIDATION_VERIFICATION_20261001_V1.json")
+    b=load(root,"canonical/governance/RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION_20261001_V1.json")
 
     if not (str(t.get("status","")).startswith("FROZEN") and t.get("benchmark_ref")==REF and t.get("stage1_target_success_fraction")==BAR and t.get("target_model")=="Claude Opus 5.5"):
         failures.append("TARGET_VERSION_LOCK")
@@ -91,6 +92,22 @@ def evaluate(root: Path, ledger_rel: str, task: str, rank: int, identity_sha256:
         l.get("runner",{}).get("verification_tests_passed",0)>0
     ):
         failures.append("PER_ACTION_CANONICAL_LEASE_REVALIDATION")
+    bv=b.get("independent_verification",[])
+    verified_workflows={x.get("workflow") for x in bv if isinstance(x,dict) and x.get("conclusion")=="success"}
+    behaviors=set(b.get("repair",{}).get("behavior",[]))
+    required_budget_behaviors={
+      "EVERY_ACCEPTED_BUILDER_BURST_CONSUMES_ONE_EXECUTION_UNIT_BEFORE_ANY_TASK_COMMAND_RUNS",
+      "BUILDER_BURST_REJECTED_WHEN_EXECUTION_COUNT_USED_GTE_EXECUTION_COUNT_ALLOWED",
+      "TERMINAL_VERIFIER_UNIT_CONSUMED_BEFORE_HIDDEN_VERIFIER_INVOCATION",
+      "TERMINAL_SUBMISSION_REJECTED_WHEN_TERMINAL_COUNT_USED_GTE_TERMINAL_VERIFIER_COUNT_ALLOWED"
+    }
+    if not (
+        str(b.get("status","")).startswith("INDEPENDENT_PASS__MERGED") and
+        b.get("repair",{}).get("merge_commit") and
+        required_budget_behaviors <= behaviors and
+        {"Verify independent acceptance gate","Stage lease promotion regression","Execution Guard Regression"} <= verified_workflows
+    ):
+        failures.append("TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD")
     required=set(p.get("staged_admission",{}).get("stage_a_pre_exposure",{}).get("required",[]))
     expected={
       "TARGET_VERSION_LOCK","QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
@@ -99,6 +116,7 @@ def evaluate(root: Path, ledger_rel: str, task: str, rank: int, identity_sha256:
       "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
       "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
       "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
+      "TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED",
       "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS"
     }
     if not expected <= required:
