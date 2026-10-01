@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_STAGE_C_ONE_SHOT_LEASE_V2",
   "date": "2026-10-01",
-  "status": "ACTIVE_ONE_SHOT__RANK17_STAGE_B_INDEPENDENT_PASS__NOT_YET_EXECUTED",
+  "status": "REVOKED__BOUND_TO_CLOSED_STAGE_B_SESSION__ZERO_EXECUTION_AUTHORITY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "benchmark": "Terminal-Bench 4.0",
@@ -15,9 +15,9 @@
   "stage_b_contract": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_B_CONTRACT_V1.json",
   "stage_b_evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_B_VERIFICATION_V1.json",
   "stage_b_pass": true,
-  "task_execution_authorized": true,
-  "execution_count_allowed": 1,
-  "terminal_verifier_count_allowed": 1,
+  "task_execution_authorized": false,
+  "execution_count_allowed": 0,
+  "terminal_verifier_count_allowed": 0,
   "output_freeze_before_verifier": true,
   "per_action_canonical_lease_revalidation_required": true,
   "replay_for_credit": false,
@@ -38,5 +38,12 @@
     "verifier_mutants_total": 25,
     "verifier_mutants_survived": 0
   },
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "revocation_reason": "PR341 was already permanently bound by the runner to the Stage-B exposure lease; controller forbids replacing the bound canonical lease path. PR341 closed with zero builder commands and zero terminal verifier runs. Stage C continues only in separately leased PR346.",
+  "revocation_evidence": {
+    "stage_b_runner_pr": 341,
+    "stage_b_runner_status": "CLOSED_STAGE_B_ONLY__ZERO_BUILDER__ZERO_TERMINAL_VERIFIER",
+    "successor_runner_pr": 346,
+    "successor_session_id": "data-anonymization-stagec-20261001-v2"
+  }
 }
