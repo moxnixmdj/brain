@@ -971,7 +971,13 @@
     "continuous_obs_policy": "canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json",
     "continuous_obs_runtime": "canonical/runtime/continuous_obs_runtime.py",
     "continuous_obs_event_driven": true,
-    "every_material_work_unit_requires_current_obs": true
+    "every_material_work_unit_requires_current_obs": true,
+    "evidence_saturation_and_minimum_reality_query_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "minimum_reality_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "new_fresh_evidence_requires_minimum_reality_cut": true,
+    "reacquire_existing_terminal_information_without_invalidation": false,
+    "current_rank22_non_regression": "CONTINUE_IF_DERIVED_CAN_EXECUTE_TRUE_AND_AUTHORITY_CURRENT"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
