@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_COGNITIVE_BASIS_STAGE1_ADJUDICATION_V1",
+  "status": "STAGE1_COMPLETE__STAGE2_REQUIRED__ZERO_CAPABILITY_CREDIT",
+  "terminal_objective": "PERMANENTLY_OWN_ALL_19_USEFUL_TARGET_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL",
+  "question": "Can unfinished Brain capabilities plausibly share a compact set of reusable bounded decision primitives, making Jev-style kernels worth pursuing before capability-by-capability model harvesting?",
+  "evidence": [
+    "canonical/capabilities/cognitive_kernel/evidence/SHARED_COGNITIVE_BASIS_QWEN_0_8B_BASELINE_V1.json",
+    "canonical/capabilities/cognitive_kernel/evidence/SHARED_COGNITIVE_BASIS_LAYA_TYPED_DECISIONS_V1.json",
+    "canonical/capabilities/cognitive_kernel/evidence/SHARED_COGNITIVE_BASIS_OPEN_JEV_2B_V1.json"
+  ],
+  "observed_results": {
+    "generic_qwen_0_8b_simple_jev": {"accuracy": 0.7, "mean_nll": 0.44445537330155716},
+    "laya_typed_decisions_421m": {"accuracy": 0.8, "mean_nll": 0.6813137034040841},
+    "open_jev_2b": {"accuracy": 0.9, "mean_nll": 0.4011743577873463}
+  },
+  "adjudication": {
+    "shared_typed_decision_interface": "SUPPORTED_FOR_FURTHER_FALSIFICATION",
+    "specialized_decision_model_value": "SUPPORTED_ON_SANITY_SET",
+    "single_universal_kernel": "NOT_ESTABLISHED",
+    "primitive_specific_model_selection": "HIGH_PRIORITY_HYPOTHESIS",
+    "train_new_model_now": "REJECTED",
+    "capability_credit_delta": 0
+  },
+  "critical_observation": "The generic 0.8B model alone got stop_continue correct while both specialized models failed it; Open-Jev uniquely fixed escalation_judgment. This complementarity argues for per-primitive evidence and possibly primitive-specific routing rather than premature commitment to one universal decision model.",
+  "stage2": {
+    "objective": "Replace synthetic sanity cases with source-grounded historical/spent Brain decisions and obtain multiple independent examples per primitive.",
+    "minimum_rules": [
+      "Every case must cite a pre-existing Brain record or deterministic ground truth that fixes the correct decision independently of the tested model.",
+      "No untouched qualification task may be consumed.",
+      "No case may be labeled from the current model outputs.",
+      "Keep D/R/G residuals separate; score only bounded C decisions.",
+      "Report per-primitive accuracy, NLL, latency and consequence-weighted failures.",
+      "Compare at least the current generic baseline and strongest admissible specialist before any training.",
+      "Promote no capability family from Stage2 alone."
+    ],
+    "stop_rule": "If no stable shared or per-primitive bounded-decision gain survives source-grounded Stage2, abandon this route for that primitive and return to generative/other mechanism discovery."
+  }
+}

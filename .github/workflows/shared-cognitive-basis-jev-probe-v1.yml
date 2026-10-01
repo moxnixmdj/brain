@@ -1,69 +1,14 @@
 name: Shared Cognitive Basis Jev Probe V1
 
 on:
-  push:
-    branches:
-      - probe/shared-cognitive-basis-jev-v1
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  probe-open-jev-2b:
+  archived-stage1-probe:
+    if: ${{ false }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Oracle mechanics self-test
-        run: |
-          python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
-            --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
-            --oracle-self-test \
-            --out /tmp/oracle.json
-
-      - name: Verify exact public Open-Jev deployment
-        run: |
-          python - <<'PY'
-          import json, time, urllib.request
-          url = "https://zefancai-open-jev-workbench.hf.space/health"
-          expected = "0c7aa498b1627be8da4acf34c863ff0ee0a92785"
-          last = None
-          for _ in range(120):
-              try:
-                  req = urllib.request.Request(url, headers={"User-Agent":"Project-Brain-Cognitive-Basis-Probe/1.0","Accept":"application/json"})
-                  with urllib.request.urlopen(req, timeout=30) as r:
-                      last = json.load(r)
-                  print(json.dumps(last, sort_keys=True))
-                  if last.get("checkpoint_revision") != expected:
-                      raise SystemExit("Unexpected Open-Jev checkpoint revision")
-                  if last.get("status") == "ready":
-                      raise SystemExit(0)
-                  if last.get("status") == "error":
-                      raise SystemExit("Open-Jev deployment reports model-load error")
-              except SystemExit:
-                  raise
-              except Exception as exc:
-                  print(type(exc).__name__)
-              time.sleep(5)
-          raise SystemExit(f"Open-Jev deployment never became ready: {last}")
-          PY
-
-      - name: Run unchanged shared-decision cases on Open-Jev 2B
-        run: |
-          python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
-            --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
-            --endpoint https://zefancai-open-jev-workbench.hf.space \
-            --api-path /v1/systemone \
-            --model open-jev \
-            --delay 0 \
-            --out cognitive_basis_probe_open_jev_2b_result_v1.json
-
-      - name: Upload diagnostic evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cognitive-basis-probe-open-jev-2b-v1
-          path: cognitive_basis_probe_open_jev_2b_result_v1.json
-          if-no-files-found: ignore
+      - run: echo "Stage 1 complete; see canonical/capabilities/cognitive_kernel/STAGE1_ADJUDICATION_V1.json"

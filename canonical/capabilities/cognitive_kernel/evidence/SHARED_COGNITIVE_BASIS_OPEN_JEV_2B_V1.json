@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_COGNITIVE_BASIS_PROBE_RESULT_V1",
+  "result_id": "SHARED_COGNITIVE_BASIS_OPEN_JEV_2B_20261001_V1",
+  "status": "ZERO_CREDIT_DIAGNOSTIC__SPECIALIST_COMPARISON_COMPLETE",
+  "capability_credit_delta": 0,
+  "execution": {
+    "workflow_run_id": 36814805344,
+    "workflow_job_id": 110217443913,
+    "artifact_id": 11140513709,
+    "brain_commit": "959d6044f6d6550d4c466e82da1cc32370391c37",
+    "service": "ZefanCai/Open-Jev-Workbench",
+    "service_status_verified": "ready",
+    "model": "ZefanCai/Open-Jev-2B",
+    "model_revision": "0c7aa498b1627be8da4acf34c863ff0ee0a92785",
+    "base_model": "Qwen/Qwen3.5-2B",
+    "base_revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+    "source_license": "MIT",
+    "device": "external_public_cpu_probe",
+    "incremental_spend_usd": 0,
+    "observed_ten_case_inference_wall_clock_seconds": 144.22
+  },
+  "dataset": {
+    "path": "canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json",
+    "n": 10,
+    "kind": "UNCHANGED_SYNTHETIC_SANITY_CASES__NOT_HELDOUT_FAMILY_QUALIFICATION"
+  },
+  "aggregate": {
+    "accuracy": 0.9,
+    "mean_nll": 0.4011743577873463
+  },
+  "primitive_results": {
+    "escalation_judgment": {"n": 1, "accuracy": 1.0, "mean_nll": 0.45143909894858486},
+    "evidence_sufficiency": {"n": 1, "accuracy": 1.0, "mean_nll": 0.2990265690459055},
+    "next_action_selection": {"n": 2, "accuracy": 1.0, "mean_nll": 0.2644404651116593},
+    "root_cause_ranking": {"n": 1, "accuracy": 1.0, "mean_nll": 0.022814013993363823},
+    "scope_judgment": {"n": 1, "accuracy": 1.0, "mean_nll": 0.15110828579945482},
+    "tool_selection": {"n": 2, "accuracy": 1.0, "mean_nll": 0.08925109299957878},
+    "verification_judgment": {"n": 1, "accuracy": 1.0, "mean_nll": 0.2045617811678471},
+    "stop_continue": {"n": 1, "accuracy": 0.0, "mean_nll": 2.17541071269583}
+  },
+  "material_failure": {
+    "case": "coding-02",
+    "primitive": "stop_continue",
+    "expected": "stress",
+    "predicted": "stop",
+    "winning_confidence": 0.6221233435179481
+  },
+  "comparison": {
+    "generic_qwen_0_8b": {"accuracy": 0.7, "mean_nll": 0.44445537330155716},
+    "laya_typed_decisions_421m": {"accuracy": 0.8, "mean_nll": 0.6813137034040841},
+    "open_jev_2b": {"accuracy": 0.9, "mean_nll": 0.4011743577873463},
+    "observation": "Accuracy and probabilistic quality improve overall with Open-Jev on this tiny set, but performance is not monotonic by primitive: the generic 0.8B baseline alone answered stop_continue correctly."
+  },
+  "interpretation": {
+    "supported": [
+      "One typed bounded-decision interface can express useful judgments across multiple Brain domains.",
+      "Specialized decision training can outperform a generic small model on the unchanged interface.",
+      "The remaining error structure is primitive-specific enough that a single universal kernel should not yet be assumed."
+    ],
+    "not_supported": [
+      "Opus 5.5 parity",
+      "ownership of any unfinished family",
+      "causal sufficiency of the twelve-primitive basis",
+      "selection of Open-Jev as a production Brain kernel",
+      "training a new Brain model"
+    ],
+    "next_falsifier": "Build a source-grounded historical/spent Brain decision benchmark with multiple examples per primitive, then compare substrates per primitive under accuracy, NLL, latency and terminal-task consequence."
+  },
+  "promotion_gate": "NO_PROMOTION__STAGE2_REAL_TRACE_AND_LATER_HELDOUT_CAUSAL_GATES_REQUIRED"
+}
