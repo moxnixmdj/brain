@@ -223,7 +223,12 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
       "authorization":"STAGE_B_INSTRUCTION_EXPOSURE_ONLY" if not failures else "NONE",
       "task_execution_authorized":False,
       "failed_predicates":sorted(set(failures)),
-      "rule":"STAGE_A_PASS_AUTHORIZES_ONLY_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
+      "rule":# Every recorded Stage-A admission artifact under schema
+# PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2 (rank18, rank19, rank20) and v1
+# both spell this ONLY_ONE_OFFICIAL. v2 inherited the rank15-specific reducer's
+# shorter wording while emitting the generic schema, so its rule label did not
+# reproduce the evidence it adjudicates. The recorded artifacts are authoritative.
+"STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
     }
 
 def main()->int:

@@ -6,9 +6,10 @@ policy-compliant ledger and require each seeded fault to be killed by a named
 predicate. The real qualification ledger is never written to: mutating frozen
 qualification evidence would itself be contamination.
 """
-import copy, json, shutil, tempfile, unittest
+import copy, hashlib, json, pathlib, shutil, tempfile, unittest
 from pathlib import Path
 
+from canonical.runtime import prequalification_stage_a_generic as stage_a_v1
 from canonical.runtime.prequalification_stage_a_reducer_v2 import (
     EXPECTED_HIT_FIELDS,
     EXPECTED_SURFACES,
@@ -63,6 +64,21 @@ RANK19_ADMISSION = (
     "canonical/capabilities/opus55/"
     "SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_A_ADMISSION_V1.json"
 )
+# rank21 is the LIVE frontier rank: Stage-A independently passed, Stage-B
+# instruction exposure authorized. Its ledger carries a nonzero brain_pr_hits
+# that is fully classified as self-referential pre-exposure bookkeeping, so it
+# is the decisive oracle for the classification model.
+RANK21_TASK = "foodstuff-beta-activity"
+RANK21 = 21
+RANK21_LEDGER = (
+    "canonical/capabilities/opus55/"
+    "FOODSTUFF_BETA_ACTIVITY_RANK21_CONTAMINATION_LEDGER_V1.json"
+)
+RANK21_ADMISSION = (
+    "canonical/capabilities/opus55/"
+    "FOODSTUFF_BETA_ACTIVITY_RANK21_STAGE_A_ADMISSION_V1.json"
+)
+V1_SOURCE = "canonical/runtime/prequalification_stage_a_generic.py"
 
 
 class StageAReducerTests(unittest.TestCase):
@@ -103,7 +119,7 @@ class StageAReducerTests(unittest.TestCase):
         out = evaluate(ROOT, task=TASK, rank=RANK, ledger_path=LEDGER)
         self.assertFalse(out["task_execution_authorized"])
         self.assertIn(
-            "STAGE_A_PASS_AUTHORIZES_ONLY_OFFICIAL_INSTRUCTION_EXPOSURE",
+            "STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE",
             out["rule"],
         )
 
@@ -148,6 +164,13 @@ class StageAReducerTests(unittest.TestCase):
             self.assertEqual(out["pass"], recorded["pass"], out)
             self.assertEqual(out["authorization"], recorded["authorization"])
             self.assertEqual(out["failed_predicates"], recorded["failed_predicates"])
+            # The rule label and schema are part of the recorded verdict, not
+            # decoration: v2 once emitted the generic schema with the legacy
+            # rank15 reducer's shorter rule wording, and a comparison that
+            # skipped those two fields could not see the divergence.
+            for key in ("rule", "schema"):
+                if key in recorded:
+                    self.assertEqual(out[key], recorded[key], key)
             self.assertEqual(
                 out["task_execution_authorized"], recorded["task_execution_authorized"]
             )
@@ -517,6 +540,145 @@ class StageAReducerTests(unittest.TestCase):
             ),
         )
         self.assertTrue(out["pass"], out)
+
+
+def git_blob_sha1(path):
+    """Exactly what `git hash-object` reports, without depending on git."""
+    data = pathlib.Path(path).read_bytes()
+    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+
+
+class Rank21LiveFrontierOracleTests(unittest.TestCase):
+    """rank21 is the live frontier rank, so it is the strongest available oracle.
+
+    Its recorded admission was produced by v1 and independently verified against
+    five named properties. Those properties are re-executed here against v2, so
+    the parity claim rests on upstream's own recorded verification rather than on
+    this suite's assumptions.
+    """
+
+    def tree(self, fault=None):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = Path(tmp.name)
+        for rel in SUPPORT_PATHS + (RANK21_LEDGER,):
+            dst = root / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / rel, dst)
+        ledger = json.loads((root / RANK21_LEDGER).read_text(encoding="utf-8"))
+        if fault is not None:
+            fault(ledger)
+            (root / RANK21_LEDGER).write_text(
+                json.dumps(ledger, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+            )
+        return root, ledger
+
+    def run_v2(self, fault=None):
+        root, _ = self.tree(fault)
+        return evaluate(root, task=RANK21_TASK, rank=RANK21, ledger_path=RANK21_LEDGER)
+
+    def search(self, ledger):
+        return ledger["prior_exposure_search"]
+
+    def test_live_rank21_ledger_is_admitted_for_stage_a_only(self):
+        out = self.run_v2()
+        recorded = json.loads((ROOT / RANK21_ADMISSION).read_text(encoding="utf-8"))
+        self.assertTrue(recorded["status"].startswith("INDEPENDENT_STAGE_A_PASS"))
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["failed_predicates"], [])
+        self.assertEqual(out["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY")
+        self.assertEqual(
+            out["task_execution_authorized"], recorded["task_execution_authorized"]
+        )
+        # The recorded authorization names exactly one official instruction
+        # exposure and nothing else; v2 must not widen it.
+        self.assertIn("ONE_OFFICIAL_INSTRUCTION_EXPOSURE", recorded["authorization"])
+        self.assertIn("STAGE_B_ONLY", recorded["authorization"])
+
+    def test_blanket_nonzero_hit_rule_would_refuse_the_live_frontier_rank(self):
+        # The defect this change repairs, measured on the live frontier ledger:
+        # brain_pr_hits is 1 and fully classified, so the policy-mandated
+        # dict-wide "every value equals 0" test refuses a ledger the canonical
+        # reducer admits and the frontier is currently authorized on.
+        _, ledger = self.tree()
+        search = self.search(ledger)
+        self.assertEqual(search["brain_pr_hits"], 1)
+        self.assertFalse(all(v == 0 for v in search.values()))
+        self.assertTrue(self.run_v2()["pass"])
+
+    def test_recorded_verified_properties_hold_in_v2(self):
+        recorded = json.loads((ROOT / RANK21_ADMISSION).read_text(encoding="utf-8"))
+        properties = {
+            "EXACT_RANK21_LEDGER_PASSES_STAGE_A_ONLY": (None, None),
+            "INSTRUCTION_READ_FAILS_CLOSED": (
+                lambda l: l.__setitem__("instruction_read", True),
+                "QUALIFICATION_CONTAMINATION_LEDGER",
+            ),
+            "UNCLASSIFIED_PR_HIT_FAILS_CLOSED": (
+                lambda l: self.search(l).__setitem__("non_disqualifying_hits", []),
+                "PRIOR_EXPOSURE_HIT_CLASSIFICATION_INCOMPLETE",
+            ),
+            "DISQUALIFYING_HIT_FAILS_CLOSED": (
+                lambda l: self.search(l)["disqualifying_hits"].__setitem__(
+                    "brain_pr_hits", 1
+                ),
+                "PRIOR_EXPOSURE_DISQUALIFYING_HIT",
+            ),
+            "INCOMPLETE_SEARCH_FAILS_CLOSED": (
+                lambda l: self.search(l).__setitem__("search_complete", False),
+                "PRIOR_EXPOSURE_SEARCH_INCOMPLETE",
+            ),
+        }
+        # Anti-rot: if upstream records a sixth property this oracle must be
+        # extended, not silently narrowed.
+        unknown = [p for p in recorded["verified"] if p not in properties]
+        self.assertEqual(unknown, [], "unbound recorded properties: %s" % unknown)
+        for name in recorded["verified"]:
+            fault, predicate = properties[name]
+            with self.subTest(property=name):
+                out = self.run_v2(fault)
+                if predicate is None:
+                    self.assertTrue(out["pass"], out)
+                    self.assertFalse(out["task_execution_authorized"])
+                else:
+                    self.assertFalse(out["pass"], out)
+                    self.assertIn(predicate, out["failed_predicates"])
+
+    def test_v1_and_v2_agree_on_the_live_rank21_ledger(self):
+        root, ledger = self.tree()
+        v2 = evaluate(root, task=RANK21_TASK, rank=RANK21, ledger_path=RANK21_LEDGER)
+        v1 = stage_a_v1.evaluate(
+            root, RANK21_LEDGER, RANK21_TASK, RANK21, ledger["task_identity_sha256"]
+        )
+        shared = sorted(set(v1) & set(v2))
+        self.assertTrue(shared)
+        # Parity is claimed over every shared key, including the rule label, so
+        # a cosmetic divergence cannot hide behind a matching verdict.
+        self.assertEqual({k: v1[k] for k in shared}, {k: v2[k] for k in shared})
+
+    def test_recorded_provenance_drift_does_not_change_the_verdict(self):
+        # rank21's recorded admission cites a ledger blob that upstream later
+        # mutated without refreshing the citation. Drift in a citation is
+        # tolerable only while the live evidence still reproduces the recorded
+        # verdict; the moment it does not, this fails closed.
+        recorded = json.loads((ROOT / RANK21_ADMISSION).read_text(encoding="utf-8"))
+        candidate = recorded["candidate"]
+        live_ledger_blob = git_blob_sha1(ROOT / candidate["ledger"])
+        drifted = live_ledger_blob != candidate["ledger_blob"]
+        out = self.run_v2()
+        self.assertTrue(
+            out["pass"],
+            "recorded provenance drift=%s and the live ledger no longer reproduces "
+            "the recorded admission: recorded_blob=%s live_blob=%s"
+            % (drifted, candidate["ledger_blob"], live_ledger_blob),
+        )
+        self.assertEqual(out["failed_predicates"], [])
+        # v1 is named as the producing source; its live form must agree too.
+        root, ledger = self.tree()
+        v1 = stage_a_v1.evaluate(
+            root, RANK21_LEDGER, RANK21_TASK, RANK21, ledger["task_identity_sha256"]
+        )
+        self.assertTrue(v1["pass"], v1)
 
 
 if __name__ == "__main__":
