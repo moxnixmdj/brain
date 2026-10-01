@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "receipt_id": "RECONCILE-ACTIVE-PROGRAM-AND-GSEA-INFRA-FAILURE-20261001-V1",
+  "status": "CURRENT_BASE_DECISION_RECEIPT",
+  "canonical_base_commit": "e8e007ab6aea154d1518375fb04d2d8f1828859a",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "real_objective": "Permanently own all useful Opus 5.5-or-better capabilities with external/JIT knowledge; the active coding lane still needs a comparable fresh-task Stage-1 score of at least 66.4 percent.",
+  "governing_invariants": [
+    "Do not claim task success or capability credit without an independent verifier pass.",
+    "Do not read task instructions, solutions, tests, or task-specific hints before a valid lease.",
+    "Preserve the frozen sample order and skip contaminated candidates without reordering.",
+    "The all-family campaign activated by commit 8c18360 remains the intended active program; reconcile the pointer to it rather than silently reverting that program.",
+    "Never bypass the trusted drift guard or write to a different branch or runner PR transport."
+  ],
+  "material_premises": [
+    "The trusted drift validator run over base c6c74e0b5a8b1a21f32f6c878eb97ee10bf1608e and head cb684f8019272f944d5deb4154688f735acd97fa returned BLOCKER_LEASE_KEY_MISSING_OR_MISMATCH, RECURSIVE_OBS_RECEIPT_MISSING, HIERARCHY_ACTIVE_PROGRAM_MISMATCH, PARENT_LEVEL_STATE_CHANGE_MISSING, STOP_CONDITION_MISSING, and CANONICAL_GENERATION_MISMATCH.",
+    "Commit 8c18360 intentionally changed ACTIVE_GOAL_HIERARCHY.active_program to OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1 and introduced an ACTIVE campaign while preserving the coding Stage-1 lane; CANONICAL_POINTER.current_frontier.program remained OPUS_5_5_CAPABILITY_OWNERSHIP.",
+    "Rank 4 gsea-proteomics reached the independent-verification launch, but the verifier exited 127 before /tests/test.sh because its configured /app working directory did not exist. The artifact download failed with EOF, so no reward or pass is established.",
+    "The generic fast controller source on runner main hard-codes docker exec -w /app for verifier execution at session_bridge/controller_fast.py lines 214-218.",
+    "The precommitted sample marks batched-eval-parity as contaminated; metadata-only freshness searches for rank 6 glycan-ms2-elucidation returned zero branch, commit-message, PR, or issue hits in both repositories. No rank-6 task material was read.",
+    "Current main advanced through e8e007ab6aea154d1518375fb04d2d8f1828859a. It records two Jevos-v2 baselines and a successful Simple-JEV/Qwen3.5-0.8B comparison on the same 28 cases; the Simple-JEV route is falsified for this role (0.4286 accuracy, ~4033 ms mean latency), all with zero credit and no terminal-task delta. The campaign mirror still says no result; the Stage-1 target/blocker and pointer/hierarchy mismatch remain unchanged.",
+    "Reviewed the generic pointwise probe source and project-level evaluation case set added on base bcde1b3 only to inventory the parallel route; no GSEA or rank-6 instructions, solutions, tests, or hidden verifier files were opened, and no endpoint was called.",
+    "Current main repaired the pointwise JSONL input; the project loader returns 12 unique cases. The independent Jevos-v2 result is recorded at canonical/capabilities/opus55/COGNITIVE_BASIS_JEVOS_BASELINE_001_RESULT.json; `gh run view` confirms workflow 36816986543 succeeded and artifact metadata matches its digest. No new model request was made.",
+    "The baseline result recommends a larger balanced multi-domain heldout set and a Jevos-v2 versus Simple-JEV comparison, with no training yet. Campaign status and next-action fields should reflect this already-recorded result; all capability credit remains zero.",
+    "The latest Jevos result recommends comparing the same 28 cases with pinned Simple-JEV/Qwen3.5-0.8B at zero training, then deciding whether specialized distillation is justified. The new case rows were not inspected in this reconciliation; no new model request was made.",
+    "The canonical Simple-JEV result names a pinned permissive specialized typed-decision model (Laya) as next, before any distillation. The exact route and permission to process prior-task-derived case data remain to be established; no new model request or case-row inspection was made."
+  ],
+  "evidence_refs": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    "canonical/action_intents/2026-10-01_LEASE_GSEA_PROTEOMICS_TB4_V1.json",
+    "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFIER_INFRA_FAILURE_20261001_V1.json",
+    "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json",
+    "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/verification/SESSION_WINDOW_DEBUG_DIRECT_EVIDENCE_20260930_V1.json",
+    "https://github.com/moxnixmdj/verification-capsule-runner/pull/283",
+    "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36814863321",
+    "https://github.com/moxnixmdj/verification-capsule-runner/blob/main/session_bridge/controller_fast.py#L214-L218",
+    "canonical/capabilities/opus55/MINIMAL_COGNITIVE_BASIS_V1.json",
+    "canonical/governance/COGNITIVE_BASIS_COMPRESSION_CAMPAIGN_V1.json",
+    "canonical/runtime/pointwise_jev_probe.py",
+    "canonical/capabilities/opus55/evals/COGNITIVE_BASIS_POINTWISE_TRANSFER_001.jsonl",
+    "canonical/laws/EXECUTION_TRUTH_AND_VISIBILITY_LAW_V1.md",
+    "canonical/reasoning/2026-10-01_COGNITIVE_BASIS_AND_EXECUTION_TRUTH_RECONCILIATION_V1.json",
+    "canonical/capabilities/opus55/COGNITIVE_BASIS_JEVOS_BASELINE_001_RESULT.json",
+    "canonical/capabilities/opus55/COGNITIVE_BASIS_JEVOS_BASELINE_002_RESULT.json",
+    "canonical/capabilities/opus55/evals/COGNITIVE_BASIS_POINTWISE_TRANSFER_002.jsonl",
+    "canonical/capabilities/opus55/COGNITIVE_BASIS_SIMPLE_JEV_QWEN_0_8B_BASELINE_001_RESULT.json"
+  ],
+  "conclusion": "The rank-4 attempt earns no pass and no capability credit. Restore trusted actionability without changing the terminal objective, target, Stage-1 threshold, or scoreboard: align the pointer's active program with the deliberately activated all-family campaign and record the exact no-credit infrastructure outcome. Current main records Jevos-v2 signal on two pointwise sets and falsifies Simple-JEV/Qwen3.5-0.8B for the current role (28 cases, 0.4286 accuracy, about 4.03 seconds mean latency); none measures terminal-task delta or earns capability credit. Reconcile the stale campaign mirror to these results and the Laya next step, but do not launch that separate experiment without explicit permission to process the task-derived case set. Do not lease rank 6 in this change; a separate current-base OBS and ready verifier-route preflight must decide whether rank 6 can safely proceed.",
+  "selected_route": "RECONCILE_POINTER_GSEA_DISPOSITION_AND_THREE_POINTWISE_ROUTE_RESULTS_WITHOUT_CREDIT",
+  "rejected_material_alternatives": [
+    "Revert the hierarchy to the previous narrow program label, undoing the explicit all-family activation.",
+    "Bypass the trusted validator or treat the rank-4 workflow conclusion as a task pass.",
+    "Replay rank 4 after one-shot terminal authorization or reorder the frozen sample around contaminated rank 5.",
+    "Repeat either Jevos baseline or the falsified Simple-JEV/Qwen3.5-0.8B comparison.",
+    "Run Laya on the prior-task-derived case set without explicit permission and a separate current-base intent.",
+    "Read rank-6 task instructions or hidden verifier materials before a valid lease.",
+    "Write to a separate verification-runner branch or use runner PR comments as a command or authorization channel."
+  ],
+  "uncertainties": [
+    "The rank-4 artifact contents and reward field remain unavailable because the download returned EOF.",
+    "Rank-6 test-image compatibility with the controller's /app working-directory assumption remains unknown; task-specific materials remain unopened.",
+    "The 28-case set is hand-curated; heldout generalization and terminal-task success delta remain unmeasured despite the paired Jevos/Simple-JEV scores.",
+    "The Laya candidate's exact version, executable route, and data-handling/zero-cost properties are not bound in the current result record.",
+    "The Simple-JEV artifact's canonical metadata/digest was verified, but its compressed contents and the case rows were not read in this reconciliation.",
+    "The trusted guard must be rerun against the exact PR base after pointer alignment; any newer main commit requires rebinding the OBS receipt."
+  ],
+  "assumptions": [
+    "The later commit titled Activate all-family Opus 5.5 capability obsolescence expresses the intended active-program decision; updating the pointer mirror is the minimum non-goal-changing correction.",
+    "The frozen Stage-1 task order remains authoritative after rank 5 is skipped for contamination."
+  ],
+  "non_goals": [
+    "No benchmark replay or task-instruction read.",
+    "No capability promotion, score increase, or task pass claim.",
+    "No external runner code change, branch write, PR comment, or execution authorization.",
+    "No change to the terminal objective, active capability target, Stage-1 score threshold, or sample order.",
+    "No new pointwise JEV request or cognitive-basis follow-up experiment is run by this reconciliation; the already-recorded Jevos baseline remains zero-credit until heldout transfer and terminal-task evidence are established."
+  ],
+  "next_action": "Merge only after the exact-head trusted drift guard passes, the GSEA disposition stays at zero credit, and the cognitive-basis campaign references both Jevos results, the falsified Simple-JEV comparison, and Laya as next action without promotion. Then refresh current-base OBS and verifier-route preflight for the primary Stage-1 lane. For the parallel cognitive lane, first obtain explicit permission to process the prior-task-derived case set and identify a pinned, permissive, zero-cost Laya route; no training or capability credit until heldout transfer and terminal-task delta pass. No background work continues after this session.",
+  "supersession_conditions": [
+    "A newer canonical main commit changes the pointer, active program, active capability target, Stage-1 blocker, or task sample order.",
+    "Independent retrieval or adjudication of the rank-4 artifact establishes additional terminal-verifier facts.",
+    "An authorized generic verifier-controller fix removes the /app workdir failure and passes a clean independent verification run."
+  ],
+  "supersedes": null
+}
