@@ -60,6 +60,13 @@ PROTECTED_GUARD_PATHS={
     "canonical/governance/OPERATOR_OBS_AUTHORITY_ENVELOPE_V1.json",
     "canonical/regressions/2026-09-30_RECURRING_FRONTIER_MISTAKE_CLASSES.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
+    "canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json",
+    "canonical/runtime/continuous_obs_runtime.py",
+    "canonical/runtime/executor_broker.py",
+    "canonical/runtime/EXECUTOR_POLICY_V1.json",
+    "canonical/runtime/astra_runtime.py",
+    "canonical/runtime/same_identity_supervisor.py",
+    ".github/workflows/superworker-signed-command-relay.yml",
     ".github/workflows/drift-immunity-guard.yml",
 }
 GOVERNANCE_ACTIONS={
