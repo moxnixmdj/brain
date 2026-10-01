@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_C3_LEXICAL_MARGIN_GATE_OOS_FALSIFICATION_V1",
+  "status": "SIMPLE_LEXICAL_MARGIN_GATE_FALSIFIED_OUT_OF_SAMPLE__SKILLROUTER_FRESH_GAIN_STANDS__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "derived_threshold": 0.07142857142857142,
+  "derivation_set": "cognitive_c3_skillrouter_fresh_001/cases.json",
+  "out_of_sample_set": "cognitive_c3_skillrouter_batched_spent/episodes.json",
+  "out_of_sample_metrics": {
+    "total_episodes": 20,
+    "semantic_episodes": 17,
+    "escalations": 6,
+    "escalation_fraction_semantic": 0.35294117647058826,
+    "lexical_semantic_success_rate": 0.8235294117647058,
+    "skillrouter_semantic_success_rate": 0.9411764705882353,
+    "composed_semantic_success_rate": 0.8235294117647058,
+    "composed_total_success_rate": 0.85,
+    "uncaught_lexical_failures": [
+      "sort_priorities",
+      "path_filename"
+    ],
+    "unnecessary_escalations": [
+      "sum_invoice_lines",
+      "average_latency",
+      "median_outlier_resistant",
+      "largest_sample",
+      "dedupe_tags"
+    ],
+    "regression_case": "largest_sample"
+  },
+  "adjudication": [
+    "REJECT_TOP1_MINUS_TOP2_LEXICAL_MARGIN_AS_THE_C3_FALLBACK_TRIGGER",
+    "DO_NOT_REVOKE_SKILLROUTER_FRESH_PASS__THE_FAILURE_IS_THE_CHEAP_GATE_NOT_THE_LEARNED_ROUTER",
+    "DO_NOT_INSTALL_SKILLROUTER_ALWAYS_ON_WHILE_MEAN_ROUTING_LATENCY_IS_ABOUT_2_5_SECONDS",
+    "SEARCH_AND_REUSE_A_STRONGER_CHEAP_ROUTING_OR_UNCERTAINTY_MECHANISM_BEFORE_TRAINING"
+  ],
+  "next_required_action": "SCREEN_EXISTING_BRAIN_BM25_OR_OTHER_CHEAP_ROUTING_MECHANISMS_AS_PREFILTER_OR_PRIMARY_C3_ROUTE__HELDOUT_GATE_REQUIRED__NO_TRAINING",
+  "capability_credit_delta": 0
+}
