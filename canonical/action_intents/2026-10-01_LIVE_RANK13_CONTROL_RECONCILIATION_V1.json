@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "LIVE-RANK13-CONTROL-RECONCILIATION-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3b8554a4311adbeeae698e941739ba16439e0494",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "POINTER_HIERARCHY_QUEUE_SCOREBOARD_AND_TARGET_AGREE_ON_LIVE_RANK13_FIN_SACCR_RWA__NO_CAPABILITY_CREDIT_CHANGE",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "LIVE_RANK13_EXECUTION_PRESENT__CANONICAL_MIRRORS_STALE",
+  "stop_condition": "ALL_FIVE_CANONICAL_NEXT_ACTION_MIRRORS_EQUAL_LIVE_RANK13_ACTION__NO_TASK_RESULT_INFERRED__TRUSTED_GUARD_PASSES",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_LIVE_RANK13_CONTROL_RECONCILIATION_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3b8554a4311adbeeae698e941739ba16439e0494",
+    "real_outcome": "Make every canonical next-action mirror truthfully point to the already-live rank-13 fin-saccr-rwa execution.",
+    "required_capability": "Current-base control-plane reconciliation only.",
+    "obs_goal": {
+      "real_outcome": "Remove stale rank-10 authority without duplicating execution.",
+      "proxy_goals_deleted": [
+        "RANK10_REPLAY",
+        "NEW_EXECUTOR"
+      ],
+      "surviving_necessity": "Align canonical authority to live rank 13."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "LIVE_RANK13_RUN",
+        "CURRENT_RANK13_LEASE",
+        "CURRENT_CONTROL_MIRRORS"
+      ],
+      "external_existing_routes_checked": [
+        "NOT_APPLICABLE"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_CAPABILITY_BUILD"
+      ],
+      "surviving_gap": "Canonical next-action mirrors are stale."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CONTROL_DRIFT",
+      "delete_bypass_substitute_options": [
+        "DELETE_STALE_RANK10_POINTERS",
+        "REUSE_LIVE_RANK13_EXECUTION"
+      ],
+      "surviving_causal_blocker": "Contradictory canonical next actions."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "RECONCILE_TO_LIVE_RANK13",
+        "START_NEW_EXECUTION_REJECTED"
+      ],
+      "losing_routes_reason": "Rank 13 is already live; duplicate execution wastes clean evidence.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Exact equality of canonical mirrors plus trusted drift guard."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "STALE_RANK10_NEXT_ACTIONS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "CURRENT_RANK13_LIVENESS"
+      ],
+      "fresh_reuse_plan": "Continue current rank-13 run only."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_RECHECK_OF_SPENT_RANK10"
+      ],
+      "search_stop_decision": "Live run and stale mirrors are directly observed; no further discovery needed.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_TO_LIVE_RANK13",
+      "LEAVE_STALE_STATE",
+      "DUPLICATE_EXECUTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "STALE_RANK10_NEXT_ACTIONS",
+      "DUPLICATE_RANK13_EXECUTION"
+    ],
+    "selected_surviving_route": "EXACT_CURRENT_BASE_RANK13_CONTROL_RECONCILIATION",
+    "why_selected_route_is_fastest_sufficient": "It changes only stale control mirrors and preserves the already-live execution.",
+    "expected_parent_level_state_change": "POINTER_HIERARCHY_QUEUE_SCOREBOARD_AND_TARGET_AGREE_ON_LIVE_RANK13_FIN_SACCR_RWA__NO_CAPABILITY_CREDIT_CHANGE",
+    "stop_condition": "ALL_FIVE_CANONICAL_NEXT_ACTION_MIRRORS_EQUAL_LIVE_RANK13_ACTION__NO_TASK_RESULT_INFERRED__TRUSTED_GUARD_PASSES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Control-plane reconciliation; no external capability route is selected."
+    }
+  },
+  "prior_work_checked": [
+    "Live workflow 36901863722 is in progress.",
+    "Rank-13 lease exists on main.",
+    "Stale PR 624 was closed."
+  ]
+}
