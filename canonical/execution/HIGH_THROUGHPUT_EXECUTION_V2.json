@@ -17,10 +17,25 @@
     "moxnixmdj/verification-capsule-runner@4bc0b3ba09d73b8787e57ca7dfad234e04edbd92"
   ],
   "live_validation": {
-    "pr": 283,
-    "branch_head": "93e1f6e02e726b00ea91801b23c2680b2ad946e9",
-    "state": "RESUMED_ON_REPAIRED_CARRIER"
+    "pr": 288,
+    "branch": "burst/session-mini-swe-batched-eval-parity-20261001-v1",
+    "branch_head": "104ef8163efe3258b88dea8c7f887eea02320790",
+    "session_id": "batched-eval-parity-20261001-v1",
+    "task": "batched-eval-parity",
+    "sample_rank": 5,
+    "state": "RUNNER_READY__AWAITING_FIRST_CAUSAL_BURST__INSTRUCTION_UNREAD",
+    "ready_comment": "https://github.com/moxnixmdj/verification-capsule-runner/pull/288#issuecomment-5925538994"
   },
   "capability_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "latest_verified_execution_kernel_evidence": {
+    "gsea_pr": 283,
+    "first_attempt": "CARRIER_FAILURE__VERIFIER_PROCESS_DID_NOT_START__OCI_CHDIR_/app",
+    "repaired_attempt": "VERIFIER_EXECUTED__REWARD_0__10_PASS_6_FAIL",
+    "repair_commits": [
+      "1845784351c903ab132358a8aeb93f81f227077c",
+      "4bc0b3ba09d73b8787e57ca7dfad234e04edbd92"
+    ],
+    "interpretation": "CARRIER_RECOVERY_WORKED__TASK_FAILURE_IS_AUTHORITATIVE"
+  }
 }
