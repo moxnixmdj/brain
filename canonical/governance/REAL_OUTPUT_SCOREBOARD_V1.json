@@ -1159,5 +1159,17 @@
     "execution_count_allowed": 1,
     "verifier_count_used": 0,
     "verifier_count_allowed": 1
+  },
+  "information_acquisition_optimization": {
+    "status": "ACTIVE_CANONICAL",
+    "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "exact_minimum_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "progress_metric": "TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_QUERY",
+    "new_reality_information_is_cost": true,
+    "existing_evidence_reuse_is_preferred": true,
+    "deductive_closure_is_preferred": true,
+    "minimum_reality_cut_required_for_future_fresh_spend": true,
+    "current_rank22_not_delayed": true
   }
 }
