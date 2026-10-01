@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_PREEXPOSURE_SEARCH_V1",
+  "date": "2026-10-01",
+  "benchmark": "Terminal-Bench 4.0",
+  "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "sample_manifest": "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json",
+  "task": "foodstuff-beta-activity",
+  "rank": 21,
+  "task_identity_sha256": "739de05acf999b15937939b58320c3eb42e030780cd630a5e8209bc25615756b",
+  "search_complete": true,
+  "searched_surfaces": [
+    "brain_code",
+    "runner_code",
+    "brain_branches",
+    "runner_branches",
+    "brain_commits",
+    "runner_commits",
+    "brain_prs",
+    "runner_prs"
+  ],
+  "raw_hits": {
+    "brain_code_hits": 0,
+    "runner_code_hits": 0,
+    "brain_branch_hits": 0,
+    "runner_branch_hits": 0,
+    "brain_commit_hits": 0,
+    "runner_commit_hits": 0,
+    "brain_pr_hits": 0,
+    "runner_pr_hits": 0
+  },
+  "disqualifying_hits": {
+    "brain_code_hits": 0,
+    "runner_code_hits": 0,
+    "brain_branch_hits": 0,
+    "runner_branch_hits": 0,
+    "brain_commit_hits": 0,
+    "runner_commit_hits": 0,
+    "brain_pr_hits": 0,
+    "runner_pr_hits": 0
+  },
+  "non_disqualifying_hits": [],
+  "task_instruction_read": false,
+  "solution_read": false,
+  "tests_read": false,
+  "hidden_verifier_read": false,
+  "task_specific_hints_read": false,
+  "task_specific_external_search": false,
+  "task_command_executed": false,
+  "verdict": "UNEXPOSED__ELIGIBLE_FOR_STAGE_A_PRE_EXPOSURE_ONLY",
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
