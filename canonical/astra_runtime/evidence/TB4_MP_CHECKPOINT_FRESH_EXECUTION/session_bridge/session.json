@@ -12,8 +12,8 @@
   "observation_char_limit": 120000,
   "harbor_extra_args": [
     "--override-cpus",
-    "4",
+    "2",
     "--override-memory-mb",
-    "12288"
+    "8192"
   ]
 }
