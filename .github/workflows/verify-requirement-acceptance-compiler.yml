@@ -1,0 +1,31 @@
+name: Verify normalized requirement acceptance compiler
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/requirement_acceptance_compiler.py
+      - canonical/runtime/independent_acceptance_model.py
+      - canonical/tests/test_requirement_acceptance_compiler.py
+      - .github/workflows/verify-requirement-acceptance-compiler.yml
+  pull_request:
+    paths:
+      - canonical/runtime/requirement_acceptance_compiler.py
+      - canonical/runtime/independent_acceptance_model.py
+      - canonical/tests/test_requirement_acceptance_compiler.py
+      - .github/workflows/verify-requirement-acceptance-compiler.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify deterministic acceptance compiler
+        run: python -m pytest -q canonical/tests/test_requirement_acceptance_compiler.py
