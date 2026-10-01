@@ -9,7 +9,8 @@
     "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md"
+    "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+    "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md"
   ],
   "required_theory_invariants": {
     "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -68,7 +69,8 @@
     "prequalification_controls",
     "qualification_stage",
     "terminal_proof_control",
-    "continuous_obs"
+    "continuous_obs",
+    "reality_query_admission"
   ],
   "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
   "required_deletion_first_order": [
@@ -130,7 +132,8 @@
       "execution_surface_certificate",
       "statistical_promotion_plan_if_applicable",
       "donor_deletion_plan_if_applicable",
-      "composition_qualification_plan"
+      "composition_qualification_plan",
+      "evidence_saturation_and_minimum_reality_cut_receipt"
     ],
     "fail_closed_on_unknown": true,
     "control_matrix": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
@@ -159,7 +162,9 @@
     "dominance_deletion_before_expensive_selection": true,
     "proof_action_before_meta_optimization": true,
     "reuse_unaffected_proofs": true,
-    "fail_closed_on_unknown": true
+    "fail_closed_on_unknown": true,
+    "existing_evidence_before_fresh_generation": true,
+    "minimum_reality_cut_before_fresh_generation": true
   },
   "required_continuous_obs": {
     "required": true,
@@ -183,5 +188,35 @@
     "post_receipt_revalidation_required": true,
     "post_exposure_discovery_forbidden": true,
     "anti_meta_loop": "OBS_MUST_NOT_DELAY_A_VALID_PROOF_PRODUCING_ACTION"
+  },
+  "required_reality_query_admission": {
+    "required_when": "ACTION_GENERATES_NEW_TERMINAL_RELEVANT_EVIDENCE_AFTER_ACTIVATION",
+    "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "exact_minimum_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "required_fields": [
+      "proof_obligation",
+      "existing_evidence_search",
+      "evidence_scope_equivalence",
+      "deductive_closure",
+      "counterfactual_terminal_distinctions",
+      "dominated_observations_deleted",
+      "candidate_observations",
+      "minimum_reality_cut",
+      "terminal_decision_value",
+      "admission_verdict"
+    ],
+    "allowed_admission_verdicts": [
+      "NO_REALITY_QUERY_REQUIRED",
+      "IRREDUCIBLE_REALITY_QUERY_IN_EXACT_MINIMUM_CUT",
+      "GRANDFATHERED_PREEXISTING_VALID_PROOF_ACTION"
+    ],
+    "simulation_alone_can_promote": false,
+    "fail_closed_on_unknown": true,
+    "current_grandfathered_action": {
+      "task": "freecad-spring-clip",
+      "rank": 22,
+      "rule": "VALID_ONLY_WHILE_DERIVED_CAN_EXECUTE_TRUE_AND_EXACT_AUTHORITY_CHAIN_CURRENT"
+    }
   }
 }
