@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_RANK21_FOODSTUFF_STAGE_A_PREEXPOSURE_V1",
+  "status": "CURRENT_BASE_PREEXPOSURE_DECISION__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Continue the frozen Terminal-Bench 4.0 breadth sequence without contamination by identifying the next untouched sample and independently verifying Stage-A admission before any instruction exposure.",
+  "governing_invariants": [
+    "Frozen sample order is immutable and rank20 is ineligible for replay.",
+    "Task content remains unread at Stage A.",
+    "Eight-surface prior-exposure search must be complete and all disqualifying counts must be zero.",
+    "Stage-A pass authorizes only one official Stage-B instruction exposure, never task execution.",
+    "Current generic execution, acceptance, requirement-graph, statistical, donor-deletion and total Stage-C budget controls remain mandatory.",
+    "Incremental spend remains zero.",
+    "No capability credit is earned by Stage-A admission."
+  ],
+  "material_premises": [
+    "The frozen order places foodstuff-beta-activity at rank 21 after contaminated rank20 vba-userform-port.",
+    "Eight-surface exact-name searches across Brain and verification-capsule-runner returned zero code, branch, commit and PR hits.",
+    "No task instruction, solution, tests, hidden verifier, hints, or task-specific external material were read.",
+    "The current generic Stage-A reducer is canonical and already independently verified on prior ranks."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json",
+    "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_PREEXPOSURE_SEARCH_V1.json",
+    "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_CONTAMINATION_LEDGER_V1.json",
+    "canonical/runtime/prequalification_stage_a_generic.py",
+    "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json"
+  ],
+  "conclusion": "Rank 21 is the next untouched frozen sample and is eligible to enter independent Stage-A pre-exposure admission. No Stage-B content exposure or Stage-C execution is yet authorized.",
+  "selected_route": "RANK21_EIGHT_SURFACE_CLEAN_LEDGER__GUARDED_STAGE_A_ONLY",
+  "rejected_material_alternatives": [
+    "Replay contaminated rank20.",
+    "Skip rank21 without exposure evidence.",
+    "Read rank21 instruction before Stage-A passes.",
+    "Treat task-name-only frozen metadata as task-content exposure.",
+    "Authorize execution from freshness search alone."
+  ],
+  "uncertainties": [
+    "The independent Stage-A reducer may still fail on another generic readiness predicate.",
+    "A new exposure event before Stage-A completion would invalidate the clean ledger."
+  ],
+  "assumptions": [
+    "The current frozen manifest and benchmark reference remain canonical.",
+    "No concurrent worker reads rank21 task-specific content before Stage-A closes."
+  ],
+  "non_goals": [
+    "No task instruction exposure.",
+    "No task execution.",
+    "No capability promotion.",
+    "No benchmark score update."
+  ],
+  "next_action": "Run the exact current generic Stage-A reducer independently against the frozen rank21 ledger. If it passes, record Stage-A admission and only then authorize allowlisted Stage-B instruction exposure.",
+  "supersession_conditions": [
+    "Any task-specific content exposure occurs.",
+    "The frozen sample order or benchmark reference changes.",
+    "A current-base guard identifies a contradictory active lease."
+  ],
+  "supersedes": null
+}
