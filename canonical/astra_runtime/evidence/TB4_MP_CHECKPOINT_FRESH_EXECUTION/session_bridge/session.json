@@ -1,0 +1,19 @@
+{
+  "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
+  "task": "mp-checkpoint-consolidation",
+  "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "command_prefix": "canonical/astra_runtime/evidence/TB4_MP_CHECKPOINT_FRESH_EXECUTION/session_bridge",
+  "observation_branch": "bridge-observations/harbor-mp-checkpoint-consolidation-dev-20261001-v1",
+  "command_timeout_sec": 900,
+  "session_timeout_sec": 14000,
+  "harbor_timeout_sec": 15000,
+  "max_steps": 80,
+  "poll_interval_sec": 3,
+  "observation_char_limit": 120000,
+  "harbor_extra_args": [
+    "--override-cpus",
+    "4",
+    "--override-memory-mb",
+    "12288"
+  ]
+}

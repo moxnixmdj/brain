@@ -1,0 +1,46 @@
+name: MP checkpoint consolidation bridge
+
+on:
+  workflow_dispatch:
+    inputs:
+      note:
+        description: "Operator note"
+        required: false
+        default: ""
+  pull_request:
+    branches: [main]
+    types: [opened]
+
+permissions:
+  contents: write
+
+jobs:
+  bridge:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      startsWith(github.head_ref, 'arena/')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 270
+    steps:
+      - name: Checkout exact session head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Run isolated runtime bridge
+        env:
+          GITHUB_HEAD_REF: ${{ github.head_ref || github.ref_name }}
+        run: |
+          python -V
+          python canonical/astra_runtime/evidence/TB4_MP_CHECKPOINT_FRESH_EXECUTION/session_bridge/controller.py \
+            --session-config canonical/astra_runtime/evidence/TB4_MP_CHECKPOINT_FRESH_EXECUTION/session_bridge/session.json
+
+      - name: Upload terminal evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: mpc-bridge-${{ github.run_id }}
+          path: /tmp/bridge-evidence/
+          if-no-files-found: warn
