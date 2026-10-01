@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
+    "next_action": "LAUNCH_FORMAL_CRYPTO_RANK_14_ON_PATCHED_FAST_BURST__AWAIT_READY_BEFORE_INSTRUCTION_READ",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
