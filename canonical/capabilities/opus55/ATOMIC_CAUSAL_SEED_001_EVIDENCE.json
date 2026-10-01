@@ -1,0 +1,194 @@
+{
+  "schema": "PROJECT_BRAIN_ATOMIC_CAUSAL_DECOMPOSITION_EVIDENCE_V1",
+  "decomposition_id": "ATOMIC_CAUSAL_SEED_001",
+  "status": "EVIDENCE_BOUND_DECOMPOSITION__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "source_scope": "ALREADY_SPENT_OR_FRESH_NON_ACTIVE_TASK_EVIDENCE_ONLY",
+  "active_task_exclusion": "RANK9_ATRX_VEP_CRISPR_NOT_READ_OR_USED",
+  "leaves": [
+    {
+      "id": "AC_ROUTE_ADMISSIBILITY_FILTER_001",
+      "mechanism_class": "DETERMINISTIC_COMPUTATION",
+      "input": "Candidate route records plus explicit provider, route-id, and availability policy constraints.",
+      "output": "Admissible candidate subset, or fail-closed no-route result.",
+      "persistent_state": "None beyond explicit policy/configuration inputs.",
+      "single_causal_function": "Eliminate routes that are unauthorized, disallowed, or unavailable before semantic scoring.",
+      "implementation": {
+        "ownership": "BRAIN_OWNED",
+        "path": "canonical/runtime/cognitive_tool_router.py",
+        "commit": "1bdbc3a86c9271777b37d2f87b698ef8b6a14956",
+        "blob": "e947d086225aa165895dc5addd4847fb686b3454"
+      },
+      "knowledge_dependency": "NONE_REQUIRED_BEYOND_EXPLICIT_ROUTE_METADATA_AND_POLICY",
+      "learned_dependency": "NONE",
+      "upstream_dependencies": [
+        "CANDIDATE_ROUTE_ENUMERATION",
+        "EXPLICIT_AUTHORITY_AND_AVAILABILITY_METADATA"
+      ],
+      "downstream_effect": "Semantic scorer is invoked only on admissible routes; empty admissible set fails closed.",
+      "ablation_effect": "NOT_DIRECTLY_TERMINAL_ABLATED; independent contract verification establishes the guarded behavior with the filter present.",
+      "rescue_result": "NOT_REQUIRED_FOR_CURRENT_NARROW_OWNED_COMPONENT_CLAIM; no learned donor is involved.",
+      "minimality_result": "FUNCTION_IS_ALREADY_DETERMINISTIC; smaller equivalent implementation not yet proven necessary.",
+      "generality_scope": "TOOL_OR_SKILL_ROUTING_WITH_EXPLICIT_PROVIDER_ROUTE_AND_AVAILABILITY_CONSTRAINTS",
+      "ownership_state": "VERIFIED_BRAIN_OWNED_NARROW_COMPONENT",
+      "evidence": [
+        "canonical/capabilities/opus55/C3_DETERMINISTIC_FIRST_ROUTER_CONTRACT_001_VERIFICATION.json"
+      ],
+      "evidence_metrics": {
+        "independent_contract_checks_passed": 5,
+        "independent_contract_checks_total": 5
+      },
+      "capability_credit_delta": 0
+    },
+    {
+      "id": "AC_ROUTE_SEMANTIC_RERANK_ADMISSIBLE_001",
+      "mechanism_class": "EVALUATION",
+      "input": "Task or request representation plus candidate descriptions after deterministic admissibility filtering.",
+      "output": "Semantic ranking of admissible candidates, including top-route selection.",
+      "persistent_state": "No persistent state required by the observed interface.",
+      "single_causal_function": "Estimate semantic task-to-route suitability among candidates that already pass hard constraints.",
+      "implementation": {
+        "ownership": "EXTERNAL_DONOR_DEPENDENT",
+        "model": "pipizhao/SkillRouter-Reranker-0.6B",
+        "revision": "78986e1142d12857cfd85b8005e62902cd42d858",
+        "license": "Apache-2.0"
+      },
+      "knowledge_dependency": "Candidate/task descriptions supplied at inference time; no project factual warehouse required.",
+      "learned_dependency": "YES__CURRENT_BEST_OBSERVED_ROUTE_USES_LEARNED_RERANKER",
+      "upstream_dependencies": [
+        "AC_ROUTE_ADMISSIBILITY_FILTER_001"
+      ],
+      "downstream_effect": "Improves selected-route correctness on the observed fresh C3 set.",
+      "ablation_effect": "Lexical baseline substitution on the fresh 15-episode set reduced terminal success from 1.0 to 0.8 and semantic success from 1.0 to 0.75.",
+      "rescue_result": "SkillRouter restored terminal and semantic success to 1.0 on that frozen fresh set; this is route substitution evidence, not donor-deletion ownership proof.",
+      "minimality_result": "UNRESOLVED__ETTIN was over 17x faster on the same set but lower success at 0.9333 terminal; tested cheap gates/cascades did not establish a smaller equally effective route.",
+      "generality_scope": "FRESH_C3_TOOL_OR_SKILL_ROUTING_SET_ONLY__NO_CROSS_DOMAIN_GENERALITY_CLAIM",
+      "ownership_state": "DONOR_DEPENDENT_REUSABLE_MECHANISM_CANDIDATE__NOT_BRAIN_OWNED",
+      "evidence": [
+        "canonical/capabilities/opus55/C3_SKILLROUTER_FRESH_TERMINAL_DELTA_001_RECONCILIATION.json",
+        "canonical/capabilities/opus55/C3_ETTIN_VS_SKILLROUTER_SAME_CASES_001_RECONCILIATION.json"
+      ],
+      "evidence_metrics": {
+        "fresh_episodes": 15,
+        "lexical_terminal_success_rate": 0.8,
+        "skillrouter_terminal_success_rate": 1,
+        "terminal_success_delta": 0.2,
+        "skillrouter_mean_latency_ms": 2535.918673133339,
+        "ettin_terminal_success_rate_same_set": 0.9333333333333333,
+        "ettin_speedup_vs_skillrouter": 17.273612831253597
+      },
+      "capability_credit_delta": 0
+    },
+    {
+      "id": "AC_FAILURE_PRESENCE_DETECTION_001",
+      "mechanism_class": "VERIFICATION",
+      "input": "Ordered execution trace or event log containing explicit success/failure signals.",
+      "output": "Failure-present versus clean-success classification.",
+      "persistent_state": "None required by the observed zero-LLM path.",
+      "single_causal_function": "Detect whether the observed execution contains an explicit failure rather than a clean terminal success.",
+      "implementation": {
+        "ownership": "EXTERNAL_OPEN_CODE_CANDIDATE",
+        "repo": "AgentDebugX/AgentDebugX",
+        "package": "agentdebugx",
+        "version": "0.5.2",
+        "mode": "DiagnosePipeline.local_default",
+        "learned_model_dependency": "NONE_IN_TESTED_ZERO_LLM_PATH"
+      },
+      "knowledge_dependency": "NONE_BEYOND_TRACE_CONTENT_AND_EVENT_SCHEMA",
+      "learned_dependency": "NONE_OBSERVED_IN_TESTED_ZERO_LLM_PATH",
+      "upstream_dependencies": [
+        "EXECUTION_TRACE_OR_EVENT_LOG"
+      ],
+      "downstream_effect": "Prevents clean runs from entering failure-recovery logic and marks failed runs for diagnosis.",
+      "ablation_effect": "NOT_DIRECTLY_ABLATED; real spent evaluation contained two failures and one verified clean control.",
+      "rescue_result": "Candidate correctly detected the two failures and produced no false positive on the clean WAL control.",
+      "minimality_result": "UNRESOLVED__vendor-independent smallest deterministic slice not yet extracted.",
+      "generality_scope": "THREE_REAL_SPENT_BRAIN_CASES__NO_FRESH_UNSEEN_TRANSFER_CLAIM",
+      "ownership_state": "REUSABLE_OPEN_MECHANISM_CANDIDATE__NOT_YET_BRAIN_OWNED",
+      "evidence": [
+        "canonical/capabilities/opus55/AGENTDEBUGX_REAL_SPENT_BRAIN_001_RECONCILIATION.json"
+      ],
+      "evidence_metrics": {
+        "real_spent_cases": 3,
+        "false_positive_on_clean_control": false
+      },
+      "capability_credit_delta": 0
+    },
+    {
+      "id": "AC_EXPLICIT_FAILURE_SITE_ATTRIBUTION_001",
+      "mechanism_class": "EVALUATION",
+      "input": "A trace already known to contain an explicit failure.",
+      "output": "Observed failure step and explicit failure-mode label.",
+      "persistent_state": "None required by the observed zero-LLM path.",
+      "single_causal_function": "Attribute an observed explicit failure to the trace step and failure mode where it manifests.",
+      "implementation": {
+        "ownership": "EXTERNAL_OPEN_CODE_CANDIDATE",
+        "repo": "AgentDebugX/AgentDebugX",
+        "package": "agentdebugx",
+        "version": "0.5.2",
+        "mode": "DiagnosePipeline.local_default",
+        "learned_model_dependency": "NONE_IN_TESTED_ZERO_LLM_PATH"
+      },
+      "knowledge_dependency": "NONE_BEYOND_TRACE_CONTENT_AND_EVENT_SCHEMA",
+      "learned_dependency": "NONE_OBSERVED_IN_TESTED_ZERO_LLM_PATH",
+      "upstream_dependencies": [
+        "AC_FAILURE_PRESENCE_DETECTION_001"
+      ],
+      "downstream_effect": "Supplies a concrete observed failure site/mode for recovery logic or deeper causal diagnosis.",
+      "ablation_effect": "NOT_DIRECTLY_ABLATED.",
+      "rescue_result": "On the three-case real spent screen, reported root-step and primary-mode metrics were both 1.0 for the evaluated scope.",
+      "minimality_result": "UNRESOLVED__smallest donor-independent procedural slice not yet extracted.",
+      "generality_scope": "NARROW_EXPLICIT_FAILURE_ATTRIBUTION_ONLY__MUST_NOT_BE_INTERPRETED_AS_UPSTREAM_CAUSAL_ROOT_LOCALIZATION",
+      "ownership_state": "REUSABLE_OPEN_MECHANISM_CANDIDATE__NOT_YET_BRAIN_OWNED",
+      "evidence": [
+        "canonical/capabilities/opus55/AGENTDEBUGX_REAL_SPENT_BRAIN_001_RECONCILIATION.json",
+        "canonical/capabilities/opus55/AGENTDEBUGX_REAL_SPENT_C3_CAUSAL_FALSIFICATION_001_RECONCILIATION.json"
+      ],
+      "evidence_metrics": {
+        "real_spent_cases": 3,
+        "observed_step_accuracy": 1,
+        "observed_mode_accuracy": 1
+      },
+      "capability_credit_delta": 0
+    }
+  ],
+  "non_atomic_frontiers": [
+    {
+      "id": "NF_UPSTREAM_ROOT_CAUSAL_LOCALIZATION_001",
+      "prior_label": "C7_ROOT_CAUSE_LIKELIHOOD",
+      "status": "PROVEN_NOT_ATOMIC_AS_PREVIOUSLY_TREATED__UNRESOLVED",
+      "decisive_evidence": "AgentDebugX local-default achieved 0/6 upstream root localization on real spent C3 failures despite succeeding at narrow explicit failure detection/attribution.",
+      "required_split": [
+        {
+          "transform": "CAUSE_CANDIDATE_GENERATION",
+          "input": "Trace, observed failure site/mode, relevant state transitions.",
+          "output": "Finite plausible upstream causal hypotheses.",
+          "current_mechanism": "UNRESOLVED"
+        },
+        {
+          "transform": "CAUSE_HYPOTHESIS_EXECUTABLE_FALSIFICATION",
+          "input": "One causal hypothesis plus available replay/probe/verifier surface.",
+          "output": "FALSIFIED, SURVIVES, or UNTESTABLE.",
+          "current_mechanism": "DETERMINISTIC_OR_EXECUTABLE_FIRST_WHERE_AVAILABLE__SPECIFIC_GENERAL_ROUTE_NOT_YET_PROVEN"
+        },
+        {
+          "transform": "RESIDUAL_CAUSE_RANKING",
+          "input": "Surviving or untestable causal hypotheses plus evidence.",
+          "output": "Ordered hypotheses or escalation decision.",
+          "current_mechanism": "UNRESOLVED__LEARNED_RANKER_ONLY_IF_EXACT_FALSIFICATION_CANNOT_DECIDE"
+        }
+      ],
+      "rejected_mechanism": "AgentDebugX/AgentDebugX@0.5.2 DiagnosePipeline.local_default AS GENERAL UPSTREAM ROOT-CAUSE LOCALIZER",
+      "evidence": [
+        "canonical/capabilities/opus55/AGENTDEBUGX_REAL_SPENT_C3_CAUSAL_FALSIFICATION_001_RECONCILIATION.json"
+      ]
+    }
+  ],
+  "immediate_subtractions": [
+    "DO_NOT_SPEND_LEARNED_CAPACITY_ON_ROUTE_AUTHORITY_OR_AVAILABILITY_FILTERING",
+    "DO_NOT_TREAT_EXPLICIT_FAILURE_SITE_ATTRIBUTION_AS_UPSTREAM_CAUSAL_EXPLANATION",
+    "DO_NOT_TREAT_SKILLROUTER_SUCCESS_AS_GENERAL_ACTION_UTILITY_OR_GLOBAL_INTELLIGENCE"
+  ],
+  "next_frontier": "SCREEN_EXISTING_REUSABLE_MECHANISMS_FOR_CAUSE_CANDIDATE_GENERATION_AND_EXECUTABLE_CAUSAL_FALSIFICATION_ON_ALREADY_SPENT_TRACES__IN_PARALLEL_PRESERVE_RANK9_PRIMARY_EXECUTION",
+  "capability_credit_delta": 0
+}

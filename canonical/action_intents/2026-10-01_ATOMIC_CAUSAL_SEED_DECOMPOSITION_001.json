@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ATOMIC-CAUSAL-SEED-DECOMPOSITION-001-20261001",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "820bb1dd3d26ff1050af87911d3250b157b31d6e",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "ADD_FIRST_EVIDENCE_BOUND_ATOMIC_CAUSAL_LEAVES_FROM_SPENT_C3_C6_C7_EVIDENCE__SPLIT_DOWNSTREAM_FAILURE_DETECTION_FROM_UPSTREAM_CAUSAL_ATTRIBUTION__PRESERVE_LIVE_RANK9_TASK_BOUNDARY__ZERO_CAPABILITY_CREDIT",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": false,
+  "evidence_presence_classification": "SPENT_AND_FRESH_NON_ACTIVE_TASK_EVIDENCE_PRESENT__NO_NEW_INFERENCE_REQUIRED",
+  "stop_condition": "FIRST_ATOMIC_LEAF_RECORDS_PERSISTED_AND_REFERENCED_BY_ATOMIC_MAP_AND_COGNITIVE_CAMPAIGN__NO_ACTIVE_RANK9_TASK_CONTENT_TOUCHED__NO_CAPABILITY_CREDIT_ADDED__TRUSTED_DRIFT_GUARD_PASSES_ON_EXACT_BASE",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_SEED_DECOMPOSITION_001.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "820bb1dd3d26ff1050af87911d3250b157b31d6e",
+    "real_outcome": "Convert existing spent/fresh non-active-task evidence into precise atomic causal leaves while preserving the live rank-9 clean execution.",
+    "required_capability": "Evidence-bound decomposition and bookkeeping only; no new capability acquisition.",
+    "obs_goal": {
+      "real_outcome": "Reduce unexplained useful behavior by separating distinct causal transformations.",
+      "proxy_goals_deleted": [
+        "PRIMITIVE_LABEL_COMPLETION",
+        "FAMILY_LABEL_COMPLETION"
+      ],
+      "surviving_necessity": "Persist only causal distinctions supported by evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "C3 deterministic router contract",
+        "C3 SkillRouter fresh delta",
+        "C3 ETTIN head-to-head",
+        "AgentDebugX real spent pass",
+        "AgentDebugX C7 falsification"
+      ],
+      "external_existing_routes_checked": [
+        "NO_NEW_EXTERNAL_SEARCH_REQUIRED"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_INFERENCE",
+        "NO_TRAINING",
+        "NO_ACTIVE_TASK_READ"
+      ],
+      "surviving_gap": "Atomic causal map has rules but no evidence-bound leaf instances."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_REPRESENTATION_GAP",
+      "delete_bypass_substitute_options": [
+        "REUSE_SPENT_EVIDENCE",
+        "SPLIT_ONLY_WHERE_CAUSAL_EVIDENCE_REQUIRES"
+      ],
+      "surviving_causal_blocker": "Without concrete leaves the new atomic strategy cannot guide acquisition."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_EVIDENCE_TO_CREATE_LEAVES",
+        "NEW_PROBE_REJECTED",
+        "ACTIVE_TASK_DECOMPOSITION_REJECTED"
+      ],
+      "losing_routes_reason": "New probes or active-task inspection add cost/contamination without being necessary to instantiate the first leaves.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic capability verification needed; repository guard and evidence-reference consistency are sufficient for this bookkeeping mutation."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "C7_AS_SINGLE_GENERAL_ROOT_CAUSE_LEAF",
+        "C3_AS_SINGLE_MONOLITHIC_ROUTING_PRIMITIVE"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "DETERMINISTIC_ADMISSIBILITY_FILTER",
+        "SEMANTIC_RERANK_EVIDENCE",
+        "EXPLICIT_FAILURE_DETECTION_EVIDENCE"
+      ],
+      "fresh_reuse_plan": "Use spent/fresh non-active-task evidence only."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_OF_CITED_PROBES",
+        "NO_RANK9_CONTENT_READ"
+      ],
+      "search_stop_decision": "Evidence already discriminates the required split.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EVIDENCE_BOUND_ATOMIC_SPLIT",
+      "NEW_PROBE",
+      "ACTIVE_TASK_DECOMPOSITION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MONOLITHIC_C3",
+      "MONOLITHIC_C7",
+      "NEW_PROBE_FOR_ALREADY_PROVEN_SPLIT"
+    ],
+    "selected_surviving_route": "EVIDENCE_BOUND_ATOMIC_SPLIT_FROM_SPENT_TRAJECTORIES__NO_ACTIVE_TASK_CONTACT",
+    "why_selected_route_is_fastest_sufficient": "It converts already-paid evidence into usable causal structure with zero new inference and zero contamination risk.",
+    "expected_parent_level_state_change": "ADD_FIRST_EVIDENCE_BOUND_ATOMIC_CAUSAL_LEAVES_FROM_SPENT_C3_C6_C7_EVIDENCE__SPLIT_DOWNSTREAM_FAILURE_DETECTION_FROM_UPSTREAM_CAUSAL_ATTRIBUTION__PRESERVE_LIVE_RANK9_TASK_BOUNDARY__ZERO_CAPABILITY_CREDIT",
+    "stop_condition": "FIRST_ATOMIC_LEAF_RECORDS_PERSISTED_AND_REFERENCED_BY_ATOMIC_MAP_AND_COGNITIVE_CAMPAIGN__NO_ACTIVE_RANK9_TASK_CONTENT_TOUCHED__NO_CAPABILITY_CREDIT_ADDED__TRUSTED_DRIFT_GUARD_PASSES_ON_EXACT_BASE",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "No new external route selection is needed for this decomposition step."
+    }
+  },
+  "highest_leverage_scope": "INDEPENDENT_SPARE_CAPACITY_ONLY__DOES_NOT_PREEMPT_LIVE_RANK9_PRIMARY_EXECUTION"
+}
