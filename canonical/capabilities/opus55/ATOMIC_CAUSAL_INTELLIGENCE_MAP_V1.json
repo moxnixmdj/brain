@@ -84,7 +84,8 @@
   ],
   "primary_progress_metrics": {
     "unexplained_useful_behavior": "USEFUL_TERMINAL_BEHAVIOR_WITHOUT_CAUSALLY_SUFFICIENT_OWNED_MECHANISM",
-    "donor_dependent_useful_behavior": "REQUIRED_USEFUL_BEHAVIOR_THAT_DISAPPEARS_WHEN_EXTERNAL_DONOR_IS_REMOVED"
+    "donor_dependent_useful_behavior": "REQUIRED_USEFUL_BEHAVIOR_THAT_DISAPPEARS_WHEN_EXTERNAL_DONOR_IS_REMOVED",
+    "unexplained_useful_behavior_note": "Explicit machine-checkable trajectory invariant evaluation is a verified Brain-owned deterministic component; learned residual excludes that supported slice."
   },
   "completion_condition": "UNEXPLAINED_REQUIRED_BEHAVIOR_MINIMIZED__DONOR_DEPENDENT_REQUIRED_BEHAVIOR_ZERO__ALL_19_EVALUATION_SURFACES_MEET_OR_EXCEED_OPUS_5_5_WITH_BRAIN_OWNED_ROUTE",
   "current_execution_boundary": {
@@ -193,5 +194,27 @@
       "scope": "DRAWING_TO_GLOBALLY_CORRECT_3D_SOLID_ENVELOPE_TOPOLOGY_AND_CURVATURE",
       "replay_allowed": false
     }
-  ]
+  ],
+  "atomic_trajectory_invariant_checking_001": {
+    "status": "VERIFIED_BRAIN_OWNED_NARROW_DETERMINISTIC_COMPONENT__ZERO_FAMILY_CREDIT",
+    "transform": "EXPLICIT_TRAJECTORY_INVARIANT_CHECKING",
+    "artifact": "canonical/runtime/trajectory_invariant_checker.py",
+    "candidate_record": "canonical/capabilities/opus55/TRAJECTORY_INVARIANT_CHECKER_CANDIDATE_V1.json",
+    "heldout_evidence": "canonical/capabilities/opus55/TRAJECTORY_INVARIANT_CHECKER_HELDOUT_EVIDENCE_V1.json",
+    "heldout_real_traces": 3,
+    "correct_narrow_classifications": 3,
+    "mechanical_violation_detections": 2,
+    "genuine_cognition_false_positive_count": 0,
+    "donor_runtime_required": false,
+    "owned_scope": [
+      "TRAJECTORY_NORMALIZATION_FOR_SUPPORTED_EVENT_SHAPES",
+      "EXPLICIT_MACHINE_CHECKABLE_INVARIANT_EVALUATION_FOR_SUPPORTED_KINDS",
+      "MECHANICAL_POLICY_OR_TRANSPORT_VIOLATION_LOCALIZATION_TO_FIRST_MATCH"
+    ],
+    "residuals_not_solved": [
+      "INVARIANT_SYNTHESIS",
+      "AMBIGUOUS_SEMANTIC_JUDGMENT",
+      "GENERAL_ROOT_CAUSE_REASONING"
+    ]
+  }
 }
