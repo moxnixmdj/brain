@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1",
+  "date": "2026-10-01",
+  "status": "CANONICAL_EXECUTION_POLICY__FAIL_CLOSED__ZERO_CAPABILITY_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "purpose": "Minimize wall-clock time to truthful terminal ownership by making verified proof state drive execution and by forbidding meta-optimization from delaying an already-valid proof-producing action.",
+  "authority_order": [
+    "IMMUTABLE_REALITY_RECEIPTS",
+    "TRUSTED_VERIFICATION",
+    "DETERMINISTIC_PROOF_STATE_REDUCTION",
+    "CANONICAL_TERMINAL_CLOSURE_MANIFEST",
+    "PROPOSALS_AND_MODELS_NONAUTHORITATIVE"
+  ],
+  "proof_state": {
+    "rule": "CANONICAL_STATE_IS_A_DETERMINISTIC_REDUCTION_OF_VERIFIED_RECEIPTS",
+    "no_receipt_rule": "NO_RECEIPT__NO_CANONICAL_STATE_CHANGE",
+    "incremental_update_only": true,
+    "reuse_unaffected_proofs": true,
+    "dependency_cone_invalidation": true,
+    "terminal_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "reducer": "canonical/runtime/terminal_closure_reducer.py"
+  },
+  "hole_types": {
+    "?S": "SPECIFICATION_UNKNOWN__LEARN_REQUIRED_BEHAVIOR_BEFORE_IMPLEMENTATION",
+    "?M": "MECHANISM_MISSING__SEARCH_REUSE_SUBSTITUTE_COMPOSE_THEN_SYNTHESIZE_ONLY_RESIDUAL",
+    "?P": "PROOF_MISSING__VERIFY_ONLY__DO_NOT_REDESIGN_MECHANISM_WITHOUT_CAUSAL_FAILURE"
+  },
+  "specification_before_solution": {
+    "hard_rule": "IF_ANY_RELEVANT_?S_EXISTS__IMPLEMENTATION_SEARCH_FOR_THAT_HOLE_IS_FORBIDDEN",
+    "closure_sequence": [
+      "COLLECT_AUTHORITATIVE_BEHAVIOR_AND_EVIDENCE",
+      "FIND_MINIMUM_DISTINCTIONS_THAT_CHANGE_IMPLEMENTATION",
+      "BUILD_EXECUTABLE_INPUT_OUTPUT_BEHAVIORAL_CONTRACT",
+      "ATTACK_WITH_COUNTEREXAMPLES_AND_MUTATIONS",
+      "FREEZE_SEMANTICS_OR_RETURN_UNKNOWN"
+    ],
+    "existing_controls": [
+      "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+      "canonical/runtime/requirement_graph_kernel.py",
+      "canonical/runtime/specification_consensus_gate.py"
+    ]
+  },
+  "execution_ladder": [
+    "COMPILED_REFLEX_OR_TRIGGER",
+    "DIRECT_NONDOMINATED_PROOF_ACTION",
+    "CHEAP_REVERSIBLE_INDEPENDENT_RACE",
+    "CHEAPEST_DISCRIMINATING_EXPERIMENT",
+    "EXPENSIVE_SYNTHESIS_OR_RESEARCH_ONLY_FOR_IRREDUCIBLE_RESIDUE"
+  ],
+  "action_contract_required_fields": [
+    "proof_obligation",
+    "hole_type",
+    "expected_certificate_or_receipt",
+    "validator",
+    "maximum_cheap_test_cost",
+    "prerequisites",
+    "contamination_risk",
+    "reversibility",
+    "falsification_condition",
+    "critical_path_relation"
+  ],
+  "dominance_deletion": {
+    "required": true,
+    "delete_action_if": "ANOTHER_ACTION_CLOSES_AT_LEAST_THE_SAME_PROOF_OBLIGATIONS_WITH_NO_GREATER_COST_NO_LOWER_REVERSIBILITY_AND_NO_GREATER_EVIDENCE_RISK"
+  },
+  "fresh_evidence_kill_ladder": [
+    "STATIC_INCOMPATIBILITY",
+    "LICENSE_DEPENDENCY_DONOR_AND_AUTHORITY_CHECKS",
+    "DETERMINISTIC_COUNTEREXAMPLES",
+    "HISTORICAL_SPENT_CASES",
+    "ADVERSARIAL_SPENT_CASES",
+    "TINY_EXECUTABLE_REPLAY",
+    "FRESH_MICRO_TEST",
+    "FRESH_TERMINAL_TEST",
+    "ABLATION_RESCUE_SPECIFICITY",
+    "DONOR_DELETION_CLEANROOM"
+  ],
+  "evidence_rule": "FRESH_EVIDENCE_IS_ONE_USE_PROOF_AMMUNITION__DO_NOT_SPEND_IT_TO_DISCOVER_PREFLIGHT_FAILURES",
+  "execution_zones": {
+    "GREEN": "VERIFIED_CANONICAL_TRUTH",
+    "YELLOW": "ISOLATED_SPECULATIVE_WORK__CANNOT_MUTATE_CANONICAL_STATE",
+    "RED": "INVALID_FALSIFIED_PROHIBITED_OR_CONTAMINATED"
+  },
+  "parallelism": {
+    "rule": "PARALLELIZE_ONLY_TRULY_INDEPENDENT_BRANCHES_OF_THE_CURRENT_MINIMAL_OR_CRITICAL_TERMINAL_PROOF_CUT",
+    "speculative_downstream_allowed_only_if": [
+      "CHEAP",
+      "REVERSIBLE",
+      "UNCONTAMINATED",
+      "ISOLATED_FROM_CANONICAL_STATE"
+    ]
+  },
+  "scheduling": {
+    "objective": "MINIMIZE_PREDICTED_COMPLETION_TIME_OF_THE_LONGEST_UNAVOIDABLE_TERMINAL_PROOF_CHAIN",
+    "local_activity_not_objective": true,
+    "shortest_proof_and_critical_path_recomputed_incrementally": true
+  },
+  "model_role": {
+    "allowed": "PROPOSAL_SEARCH_ACCELERATION",
+    "forbidden": "TRUTH_AUTHORITY_OR_OWNERSHIP_AUTHORITY",
+    "truth_pipeline": "PROPOSAL_TO_EXECUTABLE_CONSEQUENCE_TO_RECEIPT_TO_TRUSTED_VERIFIER_TO_PROOF_STATE"
+  },
+  "compilation": {
+    "success": "THEOREM_REFLEX_MACRO_OR_STATE_TO_ACTION_TRIGGER",
+    "failure": "EXECUTABLE_EXCLUSION_OR_UNSAT_REGION",
+    "invalid": "PREFLIGHT_RULE",
+    "new_distinction": "STRONGER_SPECIFICATION",
+    "goal": "CONTINUOUSLY_REDUCE_FUTURE_RUNTIME_REASONING"
+  },
+  "meta_optimization_guard": {
+    "hard_rule": "IF_A_VALID_ACTION_CAN_ADVANCE_OR_DISCRIMINATE_THE_CURRENT_SMALLEST_BLOCKING_PROOF_HOLE_NOW__META_OPTIMIZATION_IS_FORBIDDEN__EXECUTE",
+    "optimizer_change_admission": [
+      "CONCRETE_OBSERVED_CONTROLLER_MISTAKE",
+      "MEASURABLE_AVOIDABLE_TERMINAL_DELAY",
+      "SMALLEST_CAUSAL_PATCH",
+      "SHADOW_TEST",
+      "PROMOTE_ONLY_IF_MEASURED_TIME_TO_TERMINAL_PROOF_IMPROVES"
+    ]
+  },
+  "self_deletion": {
+    "rule": "DELETE_ANY_ROUTER_CONTROLLER_POLICY_CACHE_JUDGE_OR_INTERMEDIATE_REPRESENTATION_WHOSE_REMOVAL_PRESERVES_REQUIRED_VERIFIED_TERMINAL_BEHAVIOR",
+    "runtime_cost_target": "APPROACH_NOVELTY_ONLY"
+  },
+  "compatibility_and_non_regression": {
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+    "reasoning_durability_law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "prequalification": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "terminal_closure": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "staged_qualification_semantics": "STAGE_A_PRE_EXPOSURE__STAGE_B_POST_EXPOSURE_PRE_EXECUTION__STAGE_C_ONE_SHOT_EXECUTION",
+    "live_hierarchy_remains_frontier_authority": true
+  },
+  "termination": "STOP_ONLY_WHEN_TERMINAL_CLOSURE_REDUCER_RETURNS_TRUE",
+  "incremental_spend_usd": 0
+}
