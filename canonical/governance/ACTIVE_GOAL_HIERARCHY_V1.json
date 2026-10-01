@@ -338,12 +338,10 @@
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
   "active_stage1_execution": {
-    "task": "atrx-vep-crispr",
-    "rank": 9,
-    "state": "LIVE_PATCHED_FAST_BURST__INSTRUCTION_BOUNDARY_PRESERVED",
-    "lease_path": "canonical/governance/LEASE_ATRX_VEP_CRISPR_TB4_20261001_V1.json",
-    "runner_base": "2c5e2ef7a195f2224aa7d5aba335ce99e03e11e5",
-    "workflow_run_id": 36831169681
+    "task": "cad-model",
+    "rank": 10,
+    "state": "LEASED_FRESH_TASK__INSTRUCTION_UNREAD__LAUNCH_PATCHED_FAST_BURST",
+    "lease_path": "canonical/governance/LEASE_CAD_MODEL_TB4_20261001_V1.json"
   },
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
