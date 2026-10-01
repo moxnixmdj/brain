@@ -40,7 +40,7 @@
       "open_candidates": [
         "pipizhao/SkillRouter-Reranker-0.6B"
       ],
-      "state": "SKILLROUTER_100PCT_AT_2536MS__ETTIN_93PCT_AT_147MS__NO_DOMINANCE__CASCADE_EVAL_PENDING__ZERO_CREDIT",
+      "state": "SKILLROUTER_FRESH_PASS__ETTIN_FAST_PARTIAL__LEXICAL_MARGIN_AND_ETTIN_MARGIN_GATES_BOTH_FALSIFIED_OOS__ENSEMBLE_ANALYSIS_NEXT__ZERO_CREDIT",
       "execution_repo": "moxnixmdj/verification-capsule-runner",
       "execution_commit": "45ec7906c979813bafea11a7db0a97d08d4eab83",
       "selected_candidate": null,
@@ -70,7 +70,8 @@
       "fresh_semantic_success_delta": 0.25,
       "learned_route_mean_latency_ms": 2535.918673133339,
       "margin_gate_falsification": "canonical/capabilities/opus55/C3_LEXICAL_MARGIN_GATE_OOS_FALSIFICATION_001.json",
-      "head_to_head_evidence": "canonical/capabilities/opus55/C3_ETTIN_VS_SKILLROUTER_SAME_CASES_001_RECONCILIATION.json"
+      "head_to_head_evidence": "canonical/capabilities/opus55/C3_ETTIN_VS_SKILLROUTER_SAME_CASES_001_RECONCILIATION.json",
+      "cascade_gate_falsification": "canonical/capabilities/opus55/C3_ETTIN_SKILLROUTER_CASCADE_OOS_FALSIFICATION_001.json"
     },
     {
       "id": "C4_HYPOTHESIS_PLAUSIBILITY",
@@ -165,7 +166,7 @@
     "TREAT_NLI_ENTAILMENT_AS_COMPLETE_EVIDENCE_SUFFICIENCY",
     "TRAIN_GENERIC_DECISION_MODEL_BEFORE_PRIMITIVE_SPECIFIC_REUSE_SPACE_IS_EXHAUSTED"
   ],
-  "next_required_action": "RUN_ETTIN_ON_PRIOR_SKILLROUTER_SPENT_SET_WITH_SCORES__DERIVE_AND_CROSS_VALIDATE_ETTIN_TO_SKILLROUTER_FALLBACK_GATE__NO_NEW_FRESH_EVIDENCE",
+  "next_required_action": "ANALYZE_EXISTING_LEXICAL_ETTIN_SKILLROUTER_DISAGREEMENTS_ON_BOTH_DATASETS__NO_NEW_INFERENCE__C7_REMAINS_UNRESOLVED",
   "capability_credit_delta": 0,
   "latest_probe_results": {
     "c3": {
