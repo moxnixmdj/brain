@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_ATOMIC_RESIDUAL_CAUSE_RANKER_INSTALLATION_V1",
+  "result_id": "ATOMIC_RESIDUAL_CAUSE_RANKER_INSTALL_001",
+  "status": "BRAIN_OWNED_NARROW_CANDIDATE__DONOR_RUNTIME_DELETED__FRESH_REAL_TRANSFER_PENDING__ZERO_FAMILY_CREDIT",
+  "date": "2026-10-01",
+  "atomic_transform": "RESIDUAL_CAUSE_RANKING_WHEN_MULTIPLE_CANDIDATES_SURVIVE",
+  "installed_artifact": {
+    "path": "canonical/runtime/causal_residual_ranker.py",
+    "git_blob_sha": "18edb083ab52d845fefe757df5a300cdd07b33f7",
+    "exact_verifier_candidate_blob_match": true,
+    "external_runtime_dependencies": [
+      "numpy"
+    ]
+  },
+  "donor": {
+    "repo": "salesforce/PyRCA",
+    "revision": "411310d589fac5cb8e7bdce67d33eadb091a1083",
+    "algorithm": "HT",
+    "runtime_required_after_installation": false
+  },
+  "fresh_differential": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36840123904,
+    "fresh_trials": 400,
+    "top1_equivalence_fraction": 1,
+    "full_candidate_order_equivalence_fraction": 1,
+    "max_candidate_score_abs_error": 4.973799150320701e-14
+  },
+  "scope": "EXPLICIT_NUMERIC_CAUSAL_DAG__NORMAL_REFERENCE_SAMPLES__ABNORMAL_INCIDENT_SAMPLES__MULTIPLE_SURVIVING_CANDIDATES",
+  "unresolved": [
+    "FRESH_NONCONTAMINATING_REAL_TRACE_TRANSFER",
+    "CAUSAL_EDGE_DISCOVERY_WHEN_NOT_EXPLICIT",
+    "INTERVENABILITY_METADATA_INFERENCE_WHEN_NOT_EXPLICIT"
+  ],
+  "adjudication": [
+    "BRAIN_ARTIFACT_PRESENT",
+    "EXACT_DIFFERENTIAL_TESTED_SOURCE_INSTALLED",
+    "PYRCA_RUNTIME_DELETED",
+    "NO_SKLEARN_SCIPY_PANDAS_NETWORKX_RUNTIME_DEPENDENCY_IN_CANDIDATE",
+    "NUMPY_GENERAL_COMPUTATION_DEPENDENCY_ONLY",
+    "NARROW_COMPONENT_CANDIDATE_ONLY",
+    "NO_FAMILY_OR_OPUS_CREDIT"
+  ],
+  "capability_credit_delta": 0
+}
