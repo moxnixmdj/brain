@@ -38,13 +38,12 @@
       "class": "SEMANTIC_RERANKING",
       "preferred_route": "RETRIEVE_THEN_CROSS_ENCODER_RERANK",
       "open_candidates": [
-        "cross-encoder/ettin-reranker-150m-v1",
         "pipizhao/SkillRouter-Reranker-0.6B"
       ],
-      "state": "FRESH_FILTERED_TRANSFER_PASS__16_OF_16__ZERO_WRONG__REAL_READ_ONLY_TOOL_EXECUTION_DELTA_NEXT",
+      "state": "DETERMINISTIC_CONTROL_VERIFIED__ETTIN_ZERO_TERMINAL_DELTA_REJECTED__NEXT_REUSE_CANDIDATE_SPENT_SCREEN_REQUIRED",
       "execution_repo": "moxnixmdj/verification-capsule-runner",
       "execution_commit": "45ec7906c979813bafea11a7db0a97d08d4eab83",
-      "selected_candidate": "cross-encoder/ettin-reranker-150m-v1",
+      "selected_candidate": null,
       "required_pre_filter": "DETERMINISTIC_PROVIDER_AUTHORITY_AND_AVAILABILITY_FILTER",
       "evidence": "canonical/capabilities/opus55/C3_ETTIN_RERANKER_FRESH_001_RECONCILIATION.json",
       "control_contract": "VERIFIED",
@@ -55,7 +54,11 @@
       "raw_ettin_accuracy": 0.6875,
       "composed_accuracy": 1,
       "safe_escalations": 5,
-      "mean_composed_latency_ms": 34.01247906249871
+      "mean_composed_latency_ms": 34.01247906249871,
+      "rejected_candidate": "cross-encoder/ettin-reranker-150m-v1",
+      "terminal_delta_evidence": "canonical/capabilities/opus55/C3_ETTIN_TERMINAL_TASK_DELTA_001_RESULT.json",
+      "terminal_success_delta": 0,
+      "semantic_terminal_success_delta": 0
     },
     {
       "id": "C4_HYPOTHESIS_PLAUSIBILITY",
@@ -112,14 +115,14 @@
       "license": "Apache-2.0",
       "role": "C1_C3_RELEVANCE_AND_ROUTE_RERANKING",
       "evidence_url": "https://huggingface.co/cross-encoder/ettin-reranker-150m-v1",
-      "status": "FRESH_C3_PROBE_LAUNCHED"
+      "status": "REJECTED_FOR_CURRENT_C3_DEFAULT__ZERO_TERMINAL_DELTA_ON_20_EXECUTABLE_EPISODES"
     },
     {
       "route": "pipizhao/SkillRouter-Reranker-0.6B",
       "license": "Apache-2.0",
       "role": "C3_TOOL_AND_SKILL_ROUTING",
       "evidence_url": "https://huggingface.co/pipizhao/SkillRouter-Reranker-0.6B",
-      "status": "DISCOVERED__NOT_YET_BRAIN_VERIFIED"
+      "status": "NEXT_SPENT_OR_DEVELOPMENT_TERMINAL_SCREEN__NO_FRESH_EVIDENCE_YET"
     },
     {
       "route": "MoritzLaurer/deberta-v3-base-zeroshot-v1",
@@ -136,7 +139,7 @@
     "TREAT_NLI_ENTAILMENT_AS_COMPLETE_EVIDENCE_SUFFICIENCY",
     "TRAIN_GENERIC_DECISION_MODEL_BEFORE_PRIMITIVE_SPECIFIC_REUSE_SPACE_IS_EXHAUSTED"
   ],
-  "next_required_action": "EXECUTE_SELECTED_C3_ROUTES_ON_READ_ONLY_REAL_TOOLS__RECORD_TERMINAL_COMPLETION_AND_ROUTE_FAILURES__NO_C3_PROMOTION_UNTIL_REAL_EPISODES_AND_FRESH_FAILURE_GATES_SUPPORT_IT",
+  "next_required_action": "SCREEN_SKILLROUTER_RERANKER_ON_ALREADY_SPENT_C3_EXECUTABLE_EPISODES__IF_AND_ONLY_IF_IT_BEATS_CHEAP_BASELINE_THEN_FREEZE_A_NEW_FRESH_TERMINAL_SET__NO_TRAINING",
   "capability_credit_delta": 0,
   "latest_probe_results": {
     "c3": {
@@ -152,6 +155,14 @@
       "accuracy": 0.8,
       "wrong_cases": 4,
       "disposition": "FALSIFIED_AS_AUTHORITY_ROUTE__DELETE_FROM_CURRENT_C9_PATH"
+    },
+    "c3_terminal_delta": {
+      "evidence": "canonical/capabilities/opus55/C3_ETTIN_TERMINAL_TASK_DELTA_001_RESULT.json",
+      "episodes": 20,
+      "baseline_terminal_success_rate": 0.85,
+      "ettin_terminal_success_rate": 0.85,
+      "terminal_success_delta": 0,
+      "disposition": "ETTIN_REJECTED__DETERMINISTIC_CONTROL_RETAINED"
     }
   },
   "generic_shared_scorer_dispositions": {
