@@ -946,6 +946,39 @@ def active_target_mirror_errors(hierarchy,target):
         errors.append("FRONTIER_TARGET_NEXT_ACTION_MISMATCH")
     return errors
 
+# A bare predicate name tells an agent that the tree is wrong but not how to make
+# it right, which is how a self-repairable drift becomes a deadlock: twenty
+# consecutive guard failures across many branches were all mirror or control-path
+# rot that one deterministic command repairs. These hints are additive output
+# only; no check is weakened and none is skipped.
+REMEDIATION_HINTS=(
+    (("POINTER_HIERARCHY_","QUEUE_HIERARCHY_","SCOREBOARD_HIERARCHY_",
+      "TARGET_RECORD_HIERARCHY_"),
+     "mirror fields drifted from canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json; "
+     "recompute all of them deterministically instead of hand-editing: "
+     "python3 canonical/runtime/reconcile_frontier_mirrors.py . --check "
+     "(then re-run without --check to write)"),
+    (("HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH",),
+     "the authority's own next_progress_event_target is stale against its "
+     "next_required_action_class; align it, which changes no active target, parent "
+     "blocker or action class: "
+     "python3 canonical/runtime/reconcile_frontier_mirrors.py . "
+     "--align-hierarchy-progress-event"),
+    (("POINTER_CONTROL_PATH_",),
+     "pointer control paths are not the current version of their family; advance "
+     "them: python3 canonical/runtime/reconcile_frontier_mirrors.py . "
+     "--fix-control-paths"),
+)
+
+def print_remediation(failures):
+    hinted=False
+    for prefixes,text in REMEDIATION_HINTS:
+        if any(str(item).split(":")[0].startswith(prefixes) for item in failures):
+            if not hinted:
+                print(" REMEDIATION (deterministic; does not weaken any check)")
+                hinted=True
+            print("  -",text)
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -1190,6 +1223,7 @@ def main():
         print("DRIFT_GUARD_FAIL")
         for item in FAIL:
             print(" -",item)
+        print_remediation(FAIL)
         return 1
 
     digest=hashlib.sha256(terminal.encode()).hexdigest()
