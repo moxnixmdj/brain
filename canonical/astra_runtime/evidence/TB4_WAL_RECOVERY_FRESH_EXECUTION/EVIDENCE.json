@@ -93,6 +93,21 @@
   },
   "schema": "PROJECT_BRAIN_TB4_FRESH_EXECUTION_EVIDENCE_V1",
   "submission": {
+    "authorization_protocol_2026_10_01": {
+      "correction": "The payload previously shipped with submission_authorized=true set by the session substrate. That was wrong and is now corrected: the staged terminal_authorization.json carries submission_authorized=false, authorized_by=CENTRAL_INTEGRATOR_AFTER_COMPLETION_AUDIT, and an explicit note, exactly as the project's protocol requires.",
+      "drive_sh_protocol": [
+        "drive.sh (prepare): stages commands 000-006 + the UNAUTHORIZED completion audit, pushes as 'Brain Session Bridge'.",
+        "drive.sh --authorize (central integrator): reviews the audit, flips submission_authorized to true, records authorized_by=CENTRAL_INTEGRATOR + authorized_utc, commits as 'Central Integrator' with the message 'Authorize one-shot wal-recovery-ordering verification', pushes.",
+        "drive.sh --submit: REFUSES unless submission_authorized is true AND the authorization is attributable to an integrator (not the placeholder, not empty), then asserts no open PR exists, then opens the PR. Both refusal paths were tested locally and fail closed before any PR surface is touched.",
+        "drive.sh --all: prepare -> authorize -> submit in one go on an operator-driven surface."
+      ],
+      "precedent_verified": [
+        "BRIDGE_PAYLOAD_htmljs/session_bridge/terminal_authorization.json: submission_authorized=false, authorized_by='CENTRAL_INTEGRATOR_AFTER_COMPLETION_AUDIT', with the note 'authorizing the credit-bearing submission is the central integrator's decision after the completion audit, not the substrate's'.",
+        "The completed cargo-flight-dispatch drive (branch bridge/session-mini-swe-cargo-flight-dispatch-submit-20261001-v2) shows the mechanism in practice: commit 3729b11 'Authorize one-shot cargo-flight-dispatch verification' by moxnixmdj is a DEDICATED, attributable commit separate from 2652b98 'Submit cargo-flight-dispatch for one-shot verification'. Its terminal_authorization.json ends with submission_authorized=true but authorized_by=null -- the attribution lives in the commit history, which is why drive.sh now records the authorizer in a dedicated commit AND in the artifact."
+      ],
+      "tested": "Full state machine exercised against a local bare remote seeded from the real submit branch: prepare pushed 4fbe747 (unauthorized), authorize pushed d1f8ce3 as 'Central Integrator' with the dedicated authorize commit, and --submit correctly refused on both an unauthorized branch and a simulated substrate-self-authorized artifact (authorized_by left as the placeholder).",
+      "why_it_matters": "Driving the PR with a substrate-self-authorized submission would spend the one-shot on an unauthorized credit-bearing submission: the result would not be creditable and the act would violate the project's verification-before-completion discipline and the standing no-self-authorization constraint."
+    },
     "blocker": "This sandbox's GitHub credential (arena-ai-coding-agent[bot]) has no write access to moxnixmdj/verification-capsule-runner: the push of the staged submission to the runner branch was rejected HTTP 403 (verified). The bridge workflow only triggers on pull_request types:[opened] from a bridge/session-mini-swe-* branch in that repo, and its controller needs contents:write to publish the observation branch, so a fork PR is not a viable route (fork PRs receive a read-only token).",
     "drive_blocker_evidence": {
       "additional_routes_examined_2026_10_01": {
@@ -126,7 +141,7 @@
     "payload_artifacts": {
       "controller_contract_verified": "commands are polled per step as session_bridge/commands/{step:03d}.sh from CONFIG['control_branch'], which defaults to GITHUB_HEAD_REF = the PR head branch; the submission step is recognized only when its stripped content is exactly 'echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT'; terminal_authorization.json must satisfy schema/session_id/submission_authorized/known_relevant_failures/acceptance_criteria(all PASS with evidence)/verification_commands(all exit_code 0 with command). The payload passes every gate; the live workflow triggers only on pull_request:opened with head_ref prefix bridge/session-mini-swe-.",
       "directory": "BRIDGE_PAYLOAD_wal/ (self-contained handoff: candidate/, app/, session_bridge/commands/000-006.sh, session_bridge/terminal_authorization.json, drive.sh, HANDOFF.md)",
-      "drive_sh": "drive.sh <runner-checkout> <payload-dir> performs the whole drive fail-closed: re-verifies every payload sha256 against EVIDENCE.json, asserts session.json (session_id/task/terminal_bench_ref), refuses to run if an open PR already exists from the submit branch, replaces the commands, pushes the branch, then opens the PR to main (the only step that triggers the bridge workflow)."
+      "drive_sh": "drive.sh is fail-closed and protocol-aware: it re-verifies every payload sha256 against EVIDENCE.json, asserts session.json, stages commands 000-006 plus the UNAUTHORIZED completion audit, requires a separate central-integrator --authorize step (dedicated attributable commit, mirroring the completed cargo drive), refuses to open the PR unless the authorization is present and attributable, and asserts no open PR already exists from the submit branch before opening it. Modes: (default) prepare, --authorize, --submit, --all, --dry-run."
     },
     "reference_receipt_format": {
       "shape": "schema BRAIN_SESSION_MINI_SWE_FINAL_VERIFICATION_V1 with keys artifact_paths, candidate_archive, environment_mode ('separate'), incremental_spend_usd, missing_artifacts, reward, session_id, status ('VERIFIER_COMPLETED'), task, terminal_bench_ref, verifier_exit_code, verifier_stderr, verifier_stdout (full pytest output)",
@@ -136,6 +151,7 @@
     "runner_branch": "bridge/session-mini-swe-wal-recovery-ordering-submit-20261001-v1",
     "session_id": "wal-recovery-ordering-submit-20261001-v1",
     "state_summary": {
+      "authorization": "COMPLETION_AUDIT_PREPARED__SUBMISSION_AWAITING_CENTRAL_INTEGRATOR_AUTHORIZATION (submission_authorized=false by design; drive.sh --authorize is the operator's step)",
       "capability_credit": "ZERO until the independent verifier passes",
       "durable_staging": "COMMITTED_AND_PUSHED on arena/01a0f44a-brain (commit 945d025)",
       "one_shot_verification": "NOT_YET_DRIVEN \u2014 requires opening the bridge PR from the runner-bridge-scoped surface (exact steps in BRIDGE_PAYLOAD_wal/HANDOFF.md)",

@@ -12,9 +12,13 @@
   efficiency, AST forbidden-construct audit) → `FINAL_SUBMISSION_PREVERIFY_PASS`.
 - `session_bridge/commands/006.sh` — `echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT`.
 - `session_bridge/terminal_authorization.json` — verification-before-completion evidence:
-  `submission_authorized: true`, 14 acceptance criteria all PASS with evidence, 2
-  verification commands with `exit_code: 0`, and the provenance block
-  (`development_verifier_consumed: false`, `solution_or_tests_read: false`).
+  14 acceptance criteria all PASS with evidence, 2 verification commands with `exit_code: 0`,
+  the provenance block (`development_verifier_consumed: false`, `solution_or_tests_read: false`),
+  and **`submission_authorized: false` with `authorized_by: CENTRAL_INTEGRATOR_AFTER_COMPLETION_AUDIT`**
+  — deliberately unauthorized, because authorizing the credit-bearing submission is the central
+  integrator's decision after the completion audit, not the substrate's. (The htmljs payload states
+  this explicitly; the completed cargo-flight-dispatch drive shows it as a dedicated
+  `Authorize one-shot …` commit by the integrator, separate from the submit commit.)
 
 ## Verified scope boundary (why this is a handoff, not a hedge)
 The independent verifier is the project's `session-mini-swe-runtime-bridge`
@@ -31,10 +35,23 @@ There is no in-repo (`moxnixmdj/brain`) coding-task verifier — only package-qu
 This is a verified credential/scope constraint, not "I can't".
 
 ## Exact steps to drive (from a runner-bridge-scoped surface, e.g. the moxnixmdj account)
-`./drive.sh <runner-checkout> <this-payload-dir>` does all of it, fail-closed (it
-re-verifies every payload sha256 against `EVIDENCE.json`, asserts `session.json`,
-refuses to run if an open PR already exists from the submit branch, replaces the
-commands, pushes, then opens the PR). The manual equivalent:
+`drive.sh` is fail-closed and re-verifies every payload sha256 against `EVIDENCE.json`
+and asserts `session.json` on every invocation. The drive is three steps, matching the
+project's completed drives:
+
+```bash
+./drive.sh             # 1. substrate: stage commands 000-006 + the UNAUTHORIZED audit, push
+./drive.sh --authorize # 2. CENTRAL INTEGRATOR: authorize in a dedicated attributable commit, push
+./drive.sh --submit    # 3. open the PR (refuses unless step 2 happened)
+./drive.sh --dry-run   # every check + the exact plan, no push and no PR
+./drive.sh --all       # 1+2+3 in one go on an operator-driven surface
+```
+
+Step 2 must not be skipped or self-granted: it reviews the completion audit, flips
+`submission_authorized` to `true`, records `authorized_by`/`authorized_utc`, and commits as
+`Central Integrator` with the message `Authorize one-shot wal-recovery-ordering verification`.
+`--submit` fails closed unless the authorization is both present **and** attributable to an
+integrator, so a substrate-self-authorized artifact cannot be driven. The manual equivalent:
 
 1. In `moxnixmdj/verification-capsule-runner`, check out
    `bridge/session-mini-swe-wal-recovery-ordering-submit-20261001-v1`.
@@ -46,8 +63,8 @@ commands, pushes, then opens the PR). The manual equivalent:
    `task: wal-recovery-ordering`, ref `452bf305c6daa62fc59061d22133a7cbc7c1572e`,
    `max_steps: 12`; the payload has 7 steps). Leave `session_bridge/controller.py` and
    `session_bridge/session.json` untouched.
-3. Commit to that branch and **push it** (no edit to `submission_authorized` is needed — it
-   is already `true` with the completion audit recorded).
+3. Commit to that branch and **push it** (the completion audit stays
+   `submission_authorized: false` — authorization is the next, separate step).
 4. Open a PR from `bridge/session-mini-swe-wal-recovery-ordering-submit-20261001-v1` to `main`.
    The bridge workflow triggers **only** on `pull_request: types: [opened]` with
    `head_ref` starting `bridge/session-mini-swe-` (verified against the live workflow file),

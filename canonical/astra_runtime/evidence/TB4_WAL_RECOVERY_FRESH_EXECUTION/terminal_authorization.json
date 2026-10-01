@@ -1,4 +1,12 @@
 {
+  "schema": "BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1",
+  "session_id": "wal-recovery-ordering-submit-20261001-v1",
+  "task": "wal-recovery-ordering",
+  "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "submission_authorized": false,
+  "authorized_by": "CENTRAL_INTEGRATOR_AFTER_COMPLETION_AUDIT",
+  "note": "Evidence prepared by the session substrate via verification-before-completion. submission_authorized is intentionally false: authorizing the credit-bearing submission is the central integrator's decision after reviewing this completion audit, not the substrate's. The INDEPENDENT verifier (the task's hidden tests/**, run by the session-mini-swe-runtime-bridge in a separate container) is the authoritative arbiter; this local assessment does not by itself establish a pass or any capability credit. The central integrator authorizes by running drive.sh --authorize, which flips submission_authorized to true in a dedicated attributable commit (the pattern used by the completed cargo-flight-dispatch drive: 'Authorize one-shot ... verification').",
+  "known_relevant_failures": [],
   "acceptance_criteria": [
     {
       "criterion": "recover_engine/recover_from_snapshot return (state, replayed, stats); replayed keys exactly RECOVERY_ENTRY_FIELDS ordered by strictly increasing lsn; stats keys exactly RECOVERY_STATS_KEYS.",
@@ -71,25 +79,6 @@
       "status": "PASS"
     }
   ],
-  "artifact_hashes": {
-    "/app/log_writer.py": "644bd953da5f289a4d9d060ce252a052a7ab087dd1e0b8f80b74b4a3c312c505",
-    "/app/recovery.py": "a5732c957e5a2c4d19ba8c7349a4d9c81c4802426d7e0a105ea5e8cb51a119b2",
-    "/app/segment_manager.py": "27e7ecbfb4e7d08dda6deebc795c74424c93b95757bec32cc0b04e2c40dc8cf5",
-    "/app/serializer.py": "26db8cd82b56a0f65e4eb717aa7660499fef2d5b8bf343dc13b700dde749a6ae",
-    "/app/wal.py": "25f9b7881532630dd301650c16f5392cee08e6af94c11c7f75d7cafed6e374aa"
-  },
-  "known_relevant_failures": [],
-  "provenance": {
-    "candidate_replayed_without_verifier_feedback": true,
-    "development_session": "wal-recovery-ordering-dev-20261001-v1",
-    "development_verifier_consumed": false,
-    "solution_or_tests_read": false
-  },
-  "schema": "BRAIN_SESSION_TERMINAL_AUTHORIZATION_V1",
-  "session_id": "wal-recovery-ordering-submit-20261001-v1",
-  "submission_authorized": true,
-  "task": "wal-recovery-ordering",
-  "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
   "verification_commands": [
     {
       "command": "python3 -m py_compile /app/serializer.py /app/recovery.py /app/segment_manager.py /app/log_writer.py /app/wal.py",
@@ -101,5 +90,18 @@
       "evidence": "FINAL_SUBMISSION_PREVERIFY_PASS with SUBMISSION_WAL_AUTHORED_AUDIT_PASS, HIGH_LSN_DURABLE_FIRST_PASS True, CONCURRENT_WRITERS_PASS 64, RECOVERY_5000_SECONDS 0.048245, SUBMISSION_EMPTY_ENV_PASS.",
       "exit_code": 0
     }
-  ]
+  ],
+  "artifact_hashes": {
+    "/app/log_writer.py": "644bd953da5f289a4d9d060ce252a052a7ab087dd1e0b8f80b74b4a3c312c505",
+    "/app/recovery.py": "a5732c957e5a2c4d19ba8c7349a4d9c81c4802426d7e0a105ea5e8cb51a119b2",
+    "/app/segment_manager.py": "27e7ecbfb4e7d08dda6deebc795c74424c93b95757bec32cc0b04e2c40dc8cf5",
+    "/app/serializer.py": "26db8cd82b56a0f65e4eb717aa7660499fef2d5b8bf343dc13b700dde749a6ae",
+    "/app/wal.py": "25f9b7881532630dd301650c16f5392cee08e6af94c11c7f75d7cafed6e374aa"
+  },
+  "provenance": {
+    "candidate_replayed_without_verifier_feedback": true,
+    "development_session": "wal-recovery-ordering-dev-20261001-v1",
+    "development_verifier_consumed": false,
+    "solution_or_tests_read": false
+  }
 }
