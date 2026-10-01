@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTION_TRANSPORT_VERIFICATION_V1",
+  "status": "PASS__FAST_BURST_DEFAULT__LEGACY_MICROSTEP_OBSOLETED",
+  "old_route": {
+    "name": "LEGACY_SESSION_MINI_SWE_RUNTIME_BRIDGE",
+    "task": "mp-checkpoint-consolidation",
+    "first_observed_command_commit_utc": "2026-10-01T03:00:12Z",
+    "step_limit_utc": "2026-10-01T03:32:51Z",
+    "elapsed_seconds_to_step_limit": 1959,
+    "max_steps": 30,
+    "terminal_verifier_reached": false,
+    "per_microstep_git_serialization": true
+  },
+  "new_route": {
+    "name": "FAST_EXECUTION_KERNEL_V1",
+    "implementation_commit": "48257eebca06d3c9e96bb64cd909a65afdff36c5",
+    "live_pr": 278,
+    "ready_utc": "2026-10-01T03:47:41Z",
+    "terminal_verifier_utc": "2026-10-01T03:58:03Z",
+    "ready_to_terminal_seconds": 622,
+    "microstep_git_commits": 0,
+    "bootstrap_state_mutations_replayed": 4,
+    "burst_capacity": 8,
+    "verifier_reward": 1,
+    "verifier_exit_code": 0,
+    "hidden_tests_passed": "4/4"
+  },
+  "interpretation": {
+    "execution_transport_verified": true,
+    "coding_capability_credit": 0,
+    "reason_for_zero_coding_credit": "PUBLIC_TASK_SOLUTION_EXPOSURE_CONTAMINATED_THE_TASK",
+    "supported_claim": "The persistent burst transport can preserve independent verification while eliminating per-microstep Git serialization and state-history replay.",
+    "unsupported_claim": "This contaminated task does not establish current-V5 coding breadth or Opus-5.5 parity."
+  },
+  "default_rule": "USE_FAST_EXECUTION_KERNEL_V1_FOR_NEW_SESSIONS__LEGACY_BRIDGE_EMERGENCY_ONLY"
+}
