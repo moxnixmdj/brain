@@ -4,14 +4,25 @@ from __future__ import annotations
 import argparse, json, math, pathlib, time, urllib.request
 from collections import defaultdict
 
+HTTP_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; Project-Brain-Cognitive-Basis-Probe/1.0)",
+    "Accept": "application/json"
+}
+
 def post_json(url, payload, timeout=60):
     data = json.dumps(payload).encode()
-    req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
+    headers = dict(HTTP_HEADERS)
+    headers["Content-Type"] = "application/json"
+    req = urllib.request.Request(url, data=data, headers=headers)
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.load(r)
 
 def discover_model(endpoint):
-    with urllib.request.urlopen(endpoint.rstrip("/") + "/v1/models", timeout=30) as r:
+    req = urllib.request.Request(
+        endpoint.rstrip("/") + "/v1/models",
+        headers=HTTP_HEADERS
+    )
+    with urllib.request.urlopen(req, timeout=30) as r:
         payload = json.load(r)
     data = payload.get("data", [])
     if not data or "id" not in data[0]:
