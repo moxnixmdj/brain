@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_MINIMAL_COGNITIVE_BASIS_V1",
+  "status": "ACTIVE_HYPOTHESIS_FOR_FALSIFICATION__ZERO_CAPABILITY_CREDIT",
+  "created_utc": "2026-10-01",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "FIND_THE_SMALLEST_SHARED_LEARNED_DECISION_BASIS_THAT_CAUSALLY_EXPLAINS_AND_IMPROVES_THE_17_UNFINISHED_CAPABILITY_FAMILIES",
+  "decomposition_law": {
+    "D": "DETERMINISTIC_SOFTWARE_OR_EXACT_COMPUTATION__REUSE_OR_IMPLEMENT",
+    "R": "EXTERNAL_KNOWLEDGE_OR_EVIDENCE__FETCH_JIT",
+    "C": "CHOICE_RANKING_JUDGMENT_OR_CALIBRATED_DECISION__TARGET_FOR_POINTWISE_DECISION_KERNEL",
+    "G": "GENUINELY_NOVEL_CANDIDATE_GENERATION__KEEP_GENERATOR_FALLBACK_AND_HARVEST_ONLY_AFTER_D_R_C_SUBTRACTION"
+  },
+  "candidate_shared_decision_primitives": [
+    {
+      "id": "C1_RELEVANCE_AND_GOAL_ALIGNMENT",
+      "pointwise_question": "Given the current state and goal, is this candidate materially relevant to progress?"
+    },
+    {
+      "id": "C2_CANDIDATE_ACTION_UTILITY",
+      "pointwise_question": "Given the current state and goal, is executing this candidate action high expected utility relative to alternatives?"
+    },
+    {
+      "id": "C3_TOOL_ROUTE_SUITABILITY",
+      "pointwise_question": "Is this tool, route, or mechanism suitable for the current subproblem under the active constraints?"
+    },
+    {
+      "id": "C4_HYPOTHESIS_PLAUSIBILITY",
+      "pointwise_question": "Given current evidence, is this candidate explanation or hypothesis plausible enough to test next?"
+    },
+    {
+      "id": "C5_EXPECTED_INFORMATION_GAIN",
+      "pointwise_question": "Will testing or observing this candidate materially reduce uncertainty about the current blocker?"
+    },
+    {
+      "id": "C6_ANOMALY_AND_FAILURE_DETECTION",
+      "pointwise_question": "Does the current observation indicate a material failure, inconsistency, or unexpected state?"
+    },
+    {
+      "id": "C7_ROOT_CAUSE_LIKELIHOOD",
+      "pointwise_question": "Is this candidate cause a likely explanation of the observed failure or gap?"
+    },
+    {
+      "id": "C8_PROGRESS_ESTIMATION",
+      "pointwise_question": "Did the latest action materially reduce distance to the goal rather than merely change state?"
+    },
+    {
+      "id": "C9_EVIDENCE_SUFFICIENCY",
+      "pointwise_question": "Is the current evidence sufficient to support the candidate conclusion or promotion under the active standard?"
+    },
+    {
+      "id": "C10_STOP_CONTINUE_RETRY_ESCALATE",
+      "pointwise_question": "Given state, confidence, progress, and remaining options, is this candidate control decision appropriate now?"
+    }
+  ],
+  "candidate_reuse_routes": [
+    {
+      "repo": "featherless-ai/simple-jev",
+      "license": "Apache-2.0",
+      "role": "POINTWISE_OR_BOUNDED_DECISION_SCORING_USING_EXISTING_OPEN_MODELS",
+      "status": "DISCOVERED__ZERO_CREDIT"
+    },
+    {
+      "repo": "feder-cr/jev",
+      "license": "MIT",
+      "role": "LOCAL_CPU_POINTWISE_DECISION_MODEL_AND_JEV_COMPATIBLE_API",
+      "status": "DISCOVERED__ZERO_CREDIT"
+    },
+    {
+      "repo": "Shalimov04/open-jev",
+      "license": "MIT",
+      "role": "DISTILL_DECISION_FUNCTIONS_INTO_SMALL_CALIBRATED_STUDENTS",
+      "status": "DISCOVERED__ZERO_CREDIT"
+    }
+  ],
+  "primary_interface": {
+    "input": [
+      "STATE",
+      "QUESTION",
+      "ONE_CANDIDATE"
+    ],
+    "output": [
+      "CALIBRATED_SCORE",
+      "CONFIDENCE"
+    ],
+    "ranking": "SCORE_EACH_CANDIDATE_THEN_RANK",
+    "escalation": "LOW_CONFIDENCE_OR_ALL_CANDIDATES_BAD__ESCALATE_TO_GENERATOR"
+  },
+  "falsification_gates": [
+    "CROSS_DOMAIN_HELDOUT_TRANSFER",
+    "CALIBRATION_MEASURED",
+    "TERMINAL_TASK_SUCCESS_DELTA_REQUIRED",
+    "ABLATION_REMOVE_KERNEL_LOSES_GAIN",
+    "RESCUE_RESTORE_KERNEL_REGAINS_GAIN",
+    "DONOR_DELETION_REQUIRED_FOR_OWNERSHIP",
+    "NO_PROMOTION_FROM_TEACHER_AGREEMENT_ALONE"
+  ],
+  "stop_conditions": [
+    "NO_TERMINAL_TASK_SUCCESS_GAIN__DO_NOT_SCALE",
+    "DETERMINISTIC_SOLUTION_EXISTS__DELETE_LEARNED_DEPENDENCY",
+    "EXISTING_OPEN_MECHANISM_MEETS_GATE__DO_NOT_TRAIN_DUPLICATE",
+    "CORRECT_ACTION_NOT_IN_CANDIDATE_SET__ESCALATE_TO_GENERATOR"
+  ],
+  "capability_credit_delta": 0
+}
