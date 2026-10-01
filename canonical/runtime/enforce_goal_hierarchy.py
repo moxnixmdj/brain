@@ -68,6 +68,7 @@ PROTECTED_GUARD_PATHS={
     "canonical/runtime/enforce_goal_hierarchy.py",
     "canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json",
     "canonical/runtime/continuous_obs_runtime.py",
+    "canonical/runtime/current_state_obs_reducer.py",
     "canonical/runtime/executor_broker.py",
     "canonical/runtime/EXECUTOR_POLICY_V1.json",
     "canonical/runtime/astra_runtime.py",
