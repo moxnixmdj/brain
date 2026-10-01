@@ -1,0 +1,32 @@
+name: Verify donor-derived bounded GD&T legality grammar
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/gdt_feature_control_frame.py
+      - canonical/tests/test_gdt_feature_control_frame.py
+      - canonical/provenance/GDT_FEATURE_CONTROL_FRAME_DONOR_V1.json
+      - .github/workflows/verify-gdt-feature-control-frame.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_gdt_feature_control_frame
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path("canonical/provenance/GDT_FEATURE_CONTROL_FRAME_DONOR_V1.json").read_text())
+          assert p["donor"]["license"]=="MIT"
+          assert p["donor"]["revision"]=="c29daa0832bc0f1cf66bfa6549bfa626a87b34a8"
+          assert p["donor_runtime_required"] is False
+          print("DONOR_PROVENANCE_PASS")
+          PY
+ 
