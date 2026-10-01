@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_RANK20_STAGE_A_CURRENTBASE_ADMISSION_V1",
+  "status": "PROPOSED_CURRENT_BASE__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Advance clean rank20 from verified pre-exposure eligibility to Stage-B instruction exposure only, without spending task execution evidence and while reconciling stale canonical control surfaces.",
+  "governing_invariants": [
+    "Official rank20 instruction remains unread until Stage-A admission is canonical.",
+    "Stage-A authorizes instruction exposure only; task execution remains forbidden.",
+    "Eight-surface prior-exposure search must distinguish raw task-name bookkeeping from disqualifying task-content exposure.",
+    "Independent Stage-A verification must pass.",
+    "Rank19 remains spent and non-replayable.",
+    "Execution-surface parity repair is already verified and merged.",
+    "Trusted guard implementation, not merely newer template filenames, defines enforceable control authority.",
+    "No capability credit is created by Stage-A admission.",
+    "Incremental spend remains zero."
+  ],
+  "material_premises": [
+    "Corrected rank20 pre-exposure search and contamination ledger are on main and record zero disqualifying hits.",
+    "Raw metadata hits are fully classified as frozen-task-name or verifier-bookkeeping only.",
+    "Independent runner verification run 36926686092 passed the exact Brain Stage-A reducer.",
+    "Execution-surface parity repair is verified and merged in runner commit 7d16c86705fd5da7954d6857844c854bbaf148c8 and Brain receipt 2026-10-01_EXECUTION_SURFACE_PARITY_REPAIR_V1.",
+    "Pointer, hierarchy, queue, scoreboard and target records still disagree on the active blocker/next action.",
+    "The trusted drift validator currently hardcodes V9/V8 control paths even though newer V11 metadata files exist."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_PREEXPOSURE_SEARCH_V1.json",
+    "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_CONTAMINATION_LEDGER_V1.json",
+    "canonical/reasoning/2026-10-01_EXECUTION_SURFACE_PARITY_REPAIR_V1.json",
+    "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36926686092"
+  ],
+  "conclusion": "Admit rank20 to Stage-B instruction exposure only, reconcile all control surfaces to one Stage-B blocker/next action, align advertised control paths with the trusted V8/V9 guard actually enforcing mutations, and keep task execution forbidden.",
+  "selected_route": "CURRENT_BASE_STAGE_A_ADMISSION__CONTROL_SURFACE_RECONCILIATION__STAGE_B_EXPOSURE_ONLY",
+  "rejected_material_alternatives": [
+    "Merge stale PR663 without a current action intent.",
+    "Read the rank20 instruction before Stage-A admission.",
+    "Authorize task execution at Stage-A.",
+    "Treat newer V11 filenames as enforceable authority while the trusted validator still hardcodes V8/V9.",
+    "Rerun independent Stage-A verification that already passed."
+  ],
+  "uncertainties": [
+    "A concurrent worker may advance main before this PR validates.",
+    "Stage-B may still falsify task-specific feasibility after official instruction exposure."
+  ],
+  "assumptions": [
+    "The independent Stage-A run 36926686092 corresponds to the corrected rank20 contamination evidence and exact generic reducer.",
+    "No task-content exposure occurred after the corrected ledger was frozen."
+  ],
+  "non_goals": [
+    "No rank20 task command.",
+    "No solution/test/hidden-verifier inspection.",
+    "No Stage-C lease.",
+    "No capability promotion."
+  ],
+  "next_action": "EXPOSE_RANK20_OFFICIAL_INSTRUCTION_ONCE_UNDER_STAGE_B_ONLY__NO_TASK_EXECUTION__COMPILE_BEHAVIORAL_CONTRACT_REQUIREMENT_GRAPH_INDEPENDENT_ACCEPTANCE_AND_EXACT_SURFACE_PARITY",
+  "supersession_conditions": [
+    "New disqualifying rank20 exposure is discovered.",
+    "A newer canonical admission supersedes this receipt.",
+    "Trusted guard implementation is upgraded beyond V8/V9 before merge."
+  ],
+  "supersedes": null
+}
