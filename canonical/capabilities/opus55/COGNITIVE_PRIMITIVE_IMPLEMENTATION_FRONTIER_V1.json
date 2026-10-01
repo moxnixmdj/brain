@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_COGNITIVE_PRIMITIVE_IMPLEMENTATION_FRONTIER_V1",
+  "status": "ACTIVE_AFTER_GENERIC_JEVOS_FALSIFICATION__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "causal_update": {
+    "falsification": "canonical/capabilities/opus55/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001_RESULT.json",
+    "route_tournament": "canonical/capabilities/opus55/COGNITIVE_BASIS_OPEN_REUSE_TOURNAMENT_001.json",
+    "observation": "A_GENERIC_HIGH_CONFIDENCE_POINTWISE_AUTO_ADMIT_KERNEL_DID_NOT_GENERALIZE_TO_FRESH_EXECUTABLE_SOFTWARE_CONTRACT_ADJUDICATION",
+    "consequence": "DO_NOT_SEARCH_FOR_ONE_GENERIC_SMALL_JUDGE_AS_THE_DEFAULT_ARCHITECTURE__DECOMPOSE_BY_PRIMITIVE_AND_DELETE_LEARNED_DEPENDENCE_WHERE_EXACT_VERIFICATION_DOMINATES"
+  },
+  "implementation_law": [
+    "DETERMINISTIC_OR_EXECUTABLE_VERIFIER_FIRST_WHEN_AVAILABLE_AND_CHEAPER_THAN_LEARNED_SCORING",
+    "RETRIEVE_THEN_RERANK_FOR_SEMANTIC_RELEVANCE_AND_TOOL_ROUTE_SELECTION",
+    "NLI_OR_ENTAILMENT_MODELS_MAY_SCORE_SEMANTIC_SUPPORT_BUT_DO_NOT_BY_THEMSELVES_ESTABLISH_EVIDENCE_SUFFICIENCY",
+    "LEARNED_AUTO_ADMISSION_REQUIRES_FRESH_HELDOUT_ZERO_WRONG_ADMISSIONS_AND_REAL_TERMINAL_TASK_GAIN",
+    "NO_TRAINING_WHILE_A_PERMISSIVE_OPEN_REUSE_ROUTE_FOR_THE_EXACT_PRIMITIVE_REMAINS_UNTESTED"
+  ],
+  "primitives": [
+    {
+      "id": "C1_RELEVANCE_AND_GOAL_ALIGNMENT",
+      "class": "MIXED",
+      "preferred_route": "DETERMINISTIC_FILTERS_THEN_CROSS_ENCODER_RERANKER",
+      "open_candidates": [
+        "cross-encoder/ettin-reranker-150m-v1",
+        "pipizhao/SkillRouter-Reranker-0.6B"
+      ],
+      "state": "OPEN__PRIMITIVE_SPECIFIC_REUSE_TEST_REQUIRED"
+    },
+    {
+      "id": "C2_CANDIDATE_ACTION_UTILITY",
+      "class": "LEARNED_OR_GENERATIVE_RESIDUAL",
+      "preferred_route": "EXPLICIT_COST_BENEFIT_WHERE_COMPUTABLE__OTHERWISE_GENERATOR_PLUS_OUTCOME_MODEL",
+      "state": "UNRESOLVED"
+    },
+    {
+      "id": "C3_TOOL_ROUTE_SUITABILITY",
+      "class": "SEMANTIC_RERANKING",
+      "preferred_route": "RETRIEVE_THEN_CROSS_ENCODER_RERANK",
+      "open_candidates": [
+        "cross-encoder/ettin-reranker-150m-v1",
+        "pipizhao/SkillRouter-Reranker-0.6B"
+      ],
+      "state": "FRESH_ETTIN_PROBE_LAUNCHED",
+      "execution_repo": "moxnixmdj/verification-capsule-runner",
+      "execution_commit": "45ec7906c979813bafea11a7db0a97d08d4eab83"
+    },
+    {
+      "id": "C4_HYPOTHESIS_PLAUSIBILITY",
+      "class": "SEMANTIC_INFERENCE",
+      "preferred_route": "NLI_OR_SPECIALIZED_PLAUSIBILITY_SCORER_WHEN_HYPOTHESIS_EXISTS__GENERATOR_REQUIRED_WHEN_MISSING",
+      "open_candidates": [
+        "MoritzLaurer/deberta-v3-base-zeroshot-v1"
+      ],
+      "state": "OPEN"
+    },
+    {
+      "id": "C5_EXPECTED_INFORMATION_GAIN",
+      "class": "MIXED",
+      "preferred_route": "DETERMINISTIC_UNCERTAINTY_REDUCTION_WHERE_STATE_DISTRIBUTION_EXISTS__LEARNED_ESTIMATOR_ONLY_FOR_OPEN_ENDED_RESIDUAL",
+      "state": "OPEN"
+    },
+    {
+      "id": "C6_ANOMALY_AND_FAILURE_DETECTION",
+      "class": "DETERMINISTIC_FIRST",
+      "preferred_route": "ASSERTIONS_INVARIANTS_TESTS_VERIFIERS_LOG_CONTRACTS__SEMANTIC_SCORER_ONLY_FOR_UNSTRUCTURED_RESIDUAL",
+      "state": "GENERIC_JEVOS_NOT_AUTHORIZED"
+    },
+    {
+      "id": "C7_ROOT_CAUSE_LIKELIHOOD",
+      "class": "GENERATOR_PLUS_RANKER_RESIDUAL",
+      "preferred_route": "GENERATE_CAUSES__FALSIFY_WITH_EXECUTABLE_EVIDENCE__RANK_ONLY_WHEN_EXACT_TEST_UNAVAILABLE",
+      "state": "UNRESOLVED"
+    },
+    {
+      "id": "C8_PROGRESS_ESTIMATION",
+      "class": "DETERMINISTIC_FIRST",
+      "preferred_route": "CANONICAL_SCOREBOARD_AND_OBJECTIVE_DELTA_WHERE_EXPLICIT__SEMANTIC_RESIDUAL_ONLY_FOR_OPEN_ENDED_GOALS",
+      "state": "PARTIALLY_ALREADY_DETERMINISTIC"
+    },
+    {
+      "id": "C9_EVIDENCE_SUFFICIENCY",
+      "class": "DETERMINISTIC_GATE_PLUS_SEMANTIC_SUPPORT",
+      "preferred_route": "EXPLICIT_PROMOTION_RULES_AND_PROVENANCE_GATES_FIRST__NLI_FOR_SUPPORT_RELATION_ONLY",
+      "open_candidates": [
+        "MoritzLaurer/deberta-v3-base-zeroshot-v1"
+      ],
+      "state": "JEVOS_SIGNAL_NOT_GENERALIZED__NO_GENERIC_AUTO_ADMIT"
+    },
+    {
+      "id": "C10_STOP_CONTINUE_RETRY_ESCALATE",
+      "class": "DETERMINISTIC_POLICY_FIRST",
+      "preferred_route": "STATE_MACHINE_AND_EXPLICIT_RETRY_STOP_POLICIES_WHERE_AVAILABLE__LEARNED_POLICY_ONLY_FOR_OPEN_ENDED_RESIDUAL",
+      "state": "GENERIC_JEVOS_FALSIFIED"
+    }
+  ],
+  "open_reuse_frontier": [
+    {
+      "route": "cross-encoder/ettin-reranker-150m-v1",
+      "license": "Apache-2.0",
+      "role": "C1_C3_RELEVANCE_AND_ROUTE_RERANKING",
+      "evidence_url": "https://huggingface.co/cross-encoder/ettin-reranker-150m-v1",
+      "status": "FRESH_C3_PROBE_LAUNCHED"
+    },
+    {
+      "route": "pipizhao/SkillRouter-Reranker-0.6B",
+      "license": "Apache-2.0",
+      "role": "C3_TOOL_AND_SKILL_ROUTING",
+      "evidence_url": "https://huggingface.co/pipizhao/SkillRouter-Reranker-0.6B",
+      "status": "DISCOVERED__NOT_YET_BRAIN_VERIFIED"
+    },
+    {
+      "route": "MoritzLaurer/deberta-v3-base-zeroshot-v1",
+      "license": "MODEL_CARD_GOVERNED",
+      "role": "C4_AND_C9_SEMANTIC_ENTAILMENT_SUBPROBLEMS",
+      "evidence_url": "https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1",
+      "status": "DISCOVERED__NOT_YET_BRAIN_VERIFIED"
+    }
+  ],
+  "forbidden": [
+    "RESTORE_GENERIC_JEVOS_AUTO_ADMIT_ROUTE_WITHOUT_NEW_CAUSAL_EVIDENCE",
+    "USE_CLASSIFIER_WHEN_AN_EXACT_VERIFIER_IS_CHEAPER_AND_AVAILABLE",
+    "TREAT_RERANKING_RELEVANCE_AS_GENERAL_ACTION_UTILITY",
+    "TREAT_NLI_ENTAILMENT_AS_COMPLETE_EVIDENCE_SUFFICIENCY",
+    "TRAIN_GENERIC_DECISION_MODEL_BEFORE_PRIMITIVE_SPECIFIC_REUSE_SPACE_IS_EXHAUSTED"
+  ],
+  "next_required_action": "ADJUDICATE_FRESH_C3_ETTIN_RERANKER_PROBE__IF_PRIMITIVE_SPECIFIC_TRANSFER_EXISTS_TEST_REAL_TOOL_ROUTE_DELTA__IN_PARALLEL_PROBE_NLI_ONLY_FOR_SEMANTIC_SUPPORT_SUBPROBLEM__KEEP_C6_C8_C9_C10_DETERMINISTIC_WHERE_EXACT_RULES_EXIST",
+  "capability_credit_delta": 0
+}
