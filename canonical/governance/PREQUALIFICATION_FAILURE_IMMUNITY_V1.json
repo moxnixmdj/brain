@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_PREQUALIFICATION_FAILURE_IMMUNITY_V1",
+  "date": "2026-10-01",
+  "status": "MANDATORY_FAIL_CLOSED_BEFORE_UNTOUCHED_QUALIFICATION_SPEND",
+  "objective": "Prevent known classes of false success, wasted clean evidence, hidden dependency, infrastructure misclassification, statistical luck, and composition failure before untouched qualification evidence is spent.",
+  "applies_to": "ANY_ACTION_THAT_CAN_EXPOSE_OR_SPEND_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_PROMOTE_OPUS_LEVEL_OWNERSHIP",
+  "failure_classes": [
+    {
+      "id": "TARGET_NOT_CLOSED",
+      "defense": "Frozen 19-family target envelope plus complete behavioral leaves and explicit acceptance scope",
+      "required_evidence": "TERMINAL_CLOSURE_MANIFEST_CURRENT"
+    },
+    {
+      "id": "MISSING_OR_IMPLICIT_REQUIREMENT",
+      "defense": "Independent requirement extraction plus requirement-to-consumer traceability; unresolved ambiguity fails closed",
+      "required_evidence": "COMPLETE_REQUIREMENT_GRAPH"
+    },
+    {
+      "id": "WRONG_SEMANTIC_EXTRACTION",
+      "defense": "At least two structurally independent extraction/interpretation routes or one deterministic parser plus adversarial challenger; disagreements surfaced",
+      "required_evidence": "SPECIFICATION_DISAGREEMENT_RECEIPT"
+    },
+    {
+      "id": "BUILDER_VERIFIER_CORRELATION",
+      "defense": "Independent acceptance model rejects shared non-raw dependencies and builder-derived checks",
+      "required_evidence": "INDEPENDENT_ACCEPTANCE_MODEL_PASS"
+    },
+    {
+      "id": "INCOMPLETE_ORACLE",
+      "defense": "Requirement mutation and verifier mutation suites must kill seeded critical faults",
+      "required_evidence": "VERIFIER_MUTATION_SCORECARD"
+    },
+    {
+      "id": "BENCHMARK_CONTAMINATION",
+      "defense": "Pre-exposure hash, immutable exposure ledger, automatic ineligibility after task-specific instruction/solution/verifier leakage",
+      "required_evidence": "QUALIFICATION_CONTAMINATION_LEDGER"
+    },
+    {
+      "id": "BENCHMARK_OVERFIT",
+      "defense": "Development/validation/final qualification partitions disjoint; no post-reveal candidate change",
+      "required_evidence": "FROZEN_PARTITION_AND_CANDIDATE_HASH"
+    },
+    {
+      "id": "STATISTICAL_FALSE_PROMOTION",
+      "defense": "Predeclared estimator, confidence method, sample size/stop rule and familywise error control before results",
+      "required_evidence": "STATISTICAL_PROMOTION_PLAN"
+    },
+    {
+      "id": "VERIFIER_IMPLEMENTATION_BUG",
+      "defense": "Verifier tested against known-pass, known-fail, metamorphic, mutation and differential cases",
+      "required_evidence": "VERIFIER_VALIDATION_BUNDLE"
+    },
+    {
+      "id": "LEARNED_RESIDUAL_DISTRIBUTION_SHIFT",
+      "defense": "Leave-domain-out/adversarial transfer plus explicit abstention outside verified envelope",
+      "required_evidence": "RESIDUAL_VALIDITY_ENVELOPE"
+    },
+    {
+      "id": "HIDDEN_DONOR_DEPENDENCE",
+      "defense": "Physical donor deletion/network denial plus dependency/SBOM accounting and clean-room rerun",
+      "required_evidence": "DONOR_DELETION_CLEANROOM_RECEIPT"
+    },
+    {
+      "id": "LICENSE_OR_PROVENANCE_FAILURE",
+      "defense": "Pinned revision, source hash, license and derivative-use compatibility recorded before internalization",
+      "required_evidence": "PROVENANCE_AND_LICENSE_RECEIPT"
+    },
+    {
+      "id": "ZERO_COST_OR_COMPUTE_INFEASIBILITY",
+      "defense": "Current feasibility certificate proves a $0 route, resource envelope and hard stop before qualification",
+      "required_evidence": "FEASIBILITY_CERTIFICATE"
+    },
+    {
+      "id": "RUNTIME_TRANSPORT_RATE_LIMIT_FAILURE",
+      "defense": "Live executor heartbeat, artifact roundtrip, path contract, permissions, rate-limit budget and verifier reachability preflight",
+      "required_evidence": "EXECUTION_SURFACE_CERTIFICATE"
+    },
+    {
+      "id": "STALE_STATE_OR_CONCURRENT_DUPLICATION",
+      "defense": "Exact base binding, blocker lease, liveness receipt and duplicate-open-intent rejection",
+      "required_evidence": "CURRENT_EXECUTION_AUTHORITY_RECEIPT"
+    },
+    {
+      "id": "PERFORMANCE_OR_RESOURCE_REGRESSION",
+      "defense": "Latency/memory/storage/throughput bounds included in behavioral contract and tested where material",
+      "required_evidence": "RESOURCE_ACCEPTANCE_RECEIPT"
+    },
+    {
+      "id": "TOOL_OR_PERMISSION_FAILURE",
+      "defense": "Exact tool authority/availability/permission probes bound to execution context",
+      "required_evidence": "TOOL_AUTHORITY_PREFLIGHT"
+    },
+    {
+      "id": "MECHANISM_COMPOSITION_CONFLICT",
+      "defense": "Pairwise/t-way interaction suite plus adversarial mixed-capability scenarios before terminal closure",
+      "required_evidence": "COMPOSITION_QUALIFICATION_BUNDLE"
+    },
+    {
+      "id": "MOVING_TARGET_OR_BENCHMARK_VERSION",
+      "defense": "Pinned benchmark/model reference, harness version and acceptance bar; drift forces re-adjudication",
+      "required_evidence": "TARGET_VERSION_LOCK"
+    },
+    {
+      "id": "PROXY_METRIC_GAMING",
+      "defense": "Direct terminal-effect evidence required; proxy-only improvements receive zero promotion credit",
+      "required_evidence": "TERMINAL_EFFECT_RECEIPT"
+    },
+    {
+      "id": "NO_REALIZABLE_ROUTE_UNDER_HARD_CONSTRAINTS",
+      "defense": "Before fresh qualification, require at least one current plausible route satisfying ownership, $0, knowledge boundary, license and execution constraints; otherwise decompose or return exact impossibility boundary",
+      "required_evidence": "FEASIBILITY_CERTIFICATE"
+    }
+  ],
+  "fresh_qualification_admission_rule": "EVERY_APPLICABLE_FAILURE_CLASS_MUST_HAVE_CURRENT_EVIDENCE_OR_EXPLICIT_NOT_APPLICABLE_JUSTIFICATION_BOUND_TO_THE_BEHAVIORAL_CONTRACT",
+  "terminal_promotion_rule": "NO_MODEL_OR_HUMAN_JUDGMENT_CAN_OVERRIDE_A_FAILED_OR_UNKNOWN_MACHINE_CHECKABLE_PREDICATE"
+}
