@@ -119,6 +119,11 @@
       "id": "EXECUTION_SURFACE_ENVIRONMENT_PARITY_FAILURE",
       "defense": "Before untouched Stage-C spend, prove package/install/runtime behavior on the exact task image or a materially equivalent container. Equivalence must cover OS/base image, runtime provenance, package-management policy including PEP 668 or analogous restrictions, shell, permissions, artifact paths, required native libraries, and network assumptions. A host-only or setup-python probe is insufficient when the task container differs.",
       "required_evidence": "TASK_SPECIFIC_EXECUTION_SURFACE_PARITY_CERTIFICATE"
+    },
+    {
+      "id": "EXECUTION_SURFACE_PACKAGE_POLICY_MISMATCH",
+      "defense": "Stage-B dependency feasibility must bind to the exact built task-container READY execution_surface_profile or a separately proven-equivalent container. PEP-668/external-management state, Python identity, venv usability and safe install policy may not be inferred from GitHub setup-python or host Python. If task-specific non-system packages are required, Stage-B must verify the selected venv/portable install route on the equivalent package-management surface before Stage-C authorization.",
+      "required_evidence": "READY_EXECUTION_SURFACE_PROFILE_PLUS_TASK_SPECIFIC_DEPENDENCY_FEASIBILITY_RECEIPT"
     }
   ],
   "fresh_qualification_admission_rule": "STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_READS_MUST_OBEY_TB4_SOURCE_ALLOWLIST__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
@@ -178,5 +183,13 @@
       "repair": "Require exact-or-materially-equivalent task-container execution-surface parity before Stage-C authorization.",
       "fresh_evidence_cost_avoided": "Generic environment/package failures must be discovered before untouched qualification execution."
     }
-  ]
+  ],
+  "verified_generic_controls": {
+    "execution_surface_package_policy_probe": {
+      "status": "INDEPENDENT_PASS__MERGED",
+      "verification": "canonical/governance/EXECUTION_SURFACE_PACKAGE_POLICY_PROBE_VERIFICATION_20261001_V1.json",
+      "runner_merge_commit": "aea49829cceca3cc87828001bf2a76a2d5e32332",
+      "rule": "READY_PROFILE_IS_AUTHORITATIVE_FOR_ACTUAL_TASK_CONTAINER_PACKAGE_POLICY__TASK_SPECIFIC_INSTALL_FEASIBILITY_MUST_BIND_TO_IT"
+    }
+  }
 }
