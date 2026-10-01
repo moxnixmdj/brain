@@ -5,9 +5,9 @@
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
-  "probe_state": "RANK15_SPENT_NO_REPLAY__RUNNER_REVOCATION_GUARD_REPAIRED__RANK16_PREEXPOSURE_ELIGIBILITY_ACTIVE",
-  "current_parent_blocker": "RANK16_SESSION_WINDOW_DEBUG_PREEXPOSURE_ELIGIBILITY_NOT_YET_ADJUDICATED",
-  "next_required_action_class": "SEARCH_BRAIN_AND_RUNNER_FOR_RANK16_SESSION_WINDOW_DEBUG_PRIOR_EXPOSURE_WITHOUT_READING_TASK_INSTRUCTION",
+  "probe_state": "RANK15_SPENT_NO_REPLAY__RANK16_INELIGIBLE_PRIOR_EXPOSURE__RANK17_PREEXPOSURE_STAGE_A_REQUIRED",
+  "current_parent_blocker": "RANK17_DATA_ANONYMIZATION_GENERIC_STAGE_A_ADMISSION_NOT_YET_VERIFIED",
+  "next_required_action_class": "GENERALIZE_STAGE_A_PREEXPOSURE_REDUCER_FOR_ARBITRARY_FROZEN_SAMPLE_TASK__INDEPENDENTLY_VERIFY__THEN_APPLY_TO_RANK17_WITHOUT_READING_INSTRUCTION",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -198,7 +198,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "SEARCH_BRAIN_AND_RUNNER_FOR_RANK16_SESSION_WINDOW_DEBUG_PRIOR_EXPOSURE_WITHOUT_READING_TASK_INSTRUCTION",
+  "next_progress_event_target": "GENERALIZE_STAGE_A_PREEXPOSURE_REDUCER_FOR_ARBITRARY_FROZEN_SAMPLE_TASK__INDEPENDENTLY_VERIFY__THEN_APPLY_TO_RANK17_WITHOUT_READING_INSTRUCTION",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -343,14 +343,7 @@
     "status": "CONTAMINATED__INELIGIBLE__DO_NOT_REPLAY",
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
-  "active_stage1_execution": {
-    "task": "wdm-design",
-    "rank": 15,
-    "state": "STAGE_C_ONE_SHOT_EXECUTION_AUTHORIZED__LEASED__NOT_YET_EXECUTED",
-    "lease_path": "canonical/governance/LEASE_WDM_DESIGN_TB4_STAGE_C_V3_20261001_V1.json",
-    "session_id": "wdm-design-20261001-v3",
-    "replay_allowed": false
-  },
+  "active_stage1_execution": null,
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
     "stale_state_falsified": "RANK6_FRESH_TASK_RUNNER_READY__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
@@ -441,10 +434,10 @@
     "capability_credit_delta": 0
   },
   "stage1_next_clean_task": {
-    "task": "session-window-debug",
-    "rank": 16,
-    "state": "FROZEN_UNREAD__PREEXPOSURE_ELIGIBILITY_CHECK_ACTIVE",
-    "authorization_gate": "NO_PRIOR_TASK_EXPOSURE__THEN_STAGE_A_PREQUALIFICATION"
+    "task": "data-anonymization",
+    "rank": 17,
+    "state": "FROZEN_UNREAD__PREEXPOSURE_ELIGIBILITY_PASS__GENERIC_STAGE_A_REQUIRED",
+    "authorization_gate": "GENERIC_PARAMETERIZED_STAGE_A_INDEPENDENT_PASS__THEN_INSTRUCTION_EXPOSURE_ONLY"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -464,7 +457,7 @@
     "status": "MANDATORY_BEFORE_RANK15",
     "path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-    "current_verdict": "RANK15_STAGE_B_V3_TASK_SPECIFIC_PREQUALIFICATION_PASS__STAGE_C_ONE_SHOT_AUTHORIZED"
+    "current_verdict": "RANK15_SPENT_NO_REPLAY__RANK16_INELIGIBLE__RANK17_STAGE_A_NOT_YET_RUN"
   },
   "terminal_closure": {
     "manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
@@ -512,11 +505,12 @@
       "valid": true,
       "candidate_task_executed": false
     },
-    "task_execution_authorized": true,
+    "task_execution_authorized": false,
     "same_task_replay_allowed": false,
     "solution_read": false,
     "tests_read": false,
-    "hidden_verifier_read": false
+    "hidden_verifier_read": false,
+    "post_spend_authority": "NONE"
   },
   "rank15_stage_c": {
     "status": "SPENT_BY_POST_REVOCATION_TASK_SPECIFIC_EXECUTION__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
@@ -533,5 +527,25 @@
     "runner_merge_commit": "06486cd04c6a0940f9445bf41a943c7359398fc3",
     "verification_run_id": 36914358764,
     "execution_guard_regression_run_id": 36914358752
+  },
+  "rank16_disposition": {
+    "task": "session-window-debug",
+    "rank": 16,
+    "status": "INELIGIBLE__PRIOR_PUBLIC_TASK_EXPOSURE_AND_REPAIR__SKIP_WITHOUT_INSTRUCTION_READ",
+    "evidence": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_PRIOR_EXPOSURE_20261001_V1.json",
+    "source_brain_pr": 558,
+    "source_merge_commit": "cd3b82ff8866e040d4f6aaf167fa8cdfcaaadcca",
+    "instruction_read_during_current_eligibility_check": false
+  },
+  "rank17_preexposure": {
+    "task": "data-anonymization",
+    "rank": 17,
+    "status": "ELIGIBILITY_SEARCH_PASS__INSTRUCTION_UNREAD__STAGE_A_REQUIRED",
+    "evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_PREEXPOSURE_ELIGIBILITY_V1.json",
+    "task_execution_authorized": false
+  },
+  "rank15_v3_replay_reconciliation": {
+    "status": "V3_LEASE_REVOKED__PR330_CLOSED__PR332_ALREADY_STOPPED__ZERO_CREDIT",
+    "evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_V3_UNAUTHORIZED_REPLAY_RECONCILIATION_V1.json"
   }
 }
