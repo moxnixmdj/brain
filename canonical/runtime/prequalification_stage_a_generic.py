@@ -11,6 +11,28 @@ from typing import Any
 REF="452bf305c6daa62fc59061d22133a7cbc7c1572e"
 BAR=0.664
 
+# The global terminal proof cut membership predicate is defined once, in the v2
+# reducer, and reused here so the two generic Stage-A reducers cannot diverge on
+# the check whose absence burned rank23
+# (LOCAL_STAGE_A_PASS_COULD_ADVANCE_SOURCE_READ_WITHOUT_ENFORCED_GLOBAL_CUT_
+# MEMBERSHIP). A second copy would be a second definition to keep in sync.
+try:
+    from canonical.runtime.prequalification_stage_a_reducer_v2 import (
+        BASE_STAGE_A_EXPECTED,
+        CLEANNESS_ONLY_AUTHORIZATION,
+        CUT_MEMBERSHIP_ITEM,
+        global_cut_membership,
+    )
+except ImportError:  # executed as a script rather than as a package module
+    import sys
+    sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
+    from canonical.runtime.prequalification_stage_a_reducer_v2 import (
+        BASE_STAGE_A_EXPECTED,
+        CLEANNESS_ONLY_AUTHORIZATION,
+        CUT_MEMBERSHIP_ITEM,
+        global_cut_membership,
+    )
+
 def load(root: Path, rel: str) -> dict[str,Any]:
     return json.loads((root/rel).read_text(encoding="utf-8"))
 
@@ -147,27 +169,48 @@ def evaluate(root: Path, ledger_rel: str, task: str, rank: int, identity_sha256:
     ):
         failures.append("TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD")
     required=set(p.get("staged_admission",{}).get("stage_a_pre_exposure",{}).get("required",[]))
-    expected={
-      "TARGET_VERSION_LOCK","QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
-      "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS",
-      "GENERAL_EXECUTION_SURFACE_CERTIFICATE","INDEPENDENT_ACCEPTANCE_MECHANISM_VERIFIED",
-      "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
-      "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
-      "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
-      "TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED",
-      "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS"
-    }
+    # The policy is the single trigger, matching the v2 reducer exactly.
+    membership_required=CUT_MEMBERSHIP_ITEM in required
+    expected=set(BASE_STAGE_A_EXPECTED)
+    if membership_required:
+        expected.add(CUT_MEMBERSHIP_ITEM)
     if not expected <= required:
         failures.append("STAGE_A_POLICY_INCOMPLETE")
+    # The subset test above fires only when the policy LOSES an item this reducer
+    # adjudicates. When the policy GAINS one, `expected <= required` still holds,
+    # so the reducer would bless a candidate against a required item that nothing
+    # checks. Every live required item is therefore adjudicated by name.
+    for item in sorted(required-expected):
+        failures.append("STAGE_A_POLICY_ITEM_NOT_ADJUDICATED:%s"%item)
     failures=sorted(set(failures))
+    # Membership is adjudicated but is not a cleanliness predicate: rank23's
+    # recorded adjudication preserves prior Stage-A cleanliness while separately
+    # refusing global cut admission, so membership gates authorization only.
+    cut_membership=global_cut_membership(root,task,rank)
+    if not failures:
+        if not membership_required or cut_membership["current"]:
+            authorization="STAGE_B_INSTRUCTION_EXPOSURE_ONLY"
+        else:
+            authorization=CLEANNESS_ONLY_AUTHORIZATION
+    else:
+        authorization="NONE"
     return {
       "schema":"PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2",
       "task":task,"rank":rank,"task_identity_sha256":identity_sha256,
       "pass":not failures,
-      "authorization":"STAGE_B_INSTRUCTION_EXPOSURE_ONLY" if not failures else "NONE",
+      "authorization":authorization,
       "task_execution_authorized":False,
       "failed_predicates":failures,
-      "rule":"STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
+      "global_cut_membership":cut_membership,
+      "rule":# Stated relative to the law in force, matching the v2 reducer: while
+# the global terminal proof cut governs untouched-sample selection a local pass
+# cannot alone authorize a source read (rank23's recorded root cause). Under a
+# root where that law is absent the recorded pre-cut label is reproduced exactly.
+(
+  "STAGE_A_CLEANLINESS_ALONE_CANNOT_AUTHORIZE_AN_UNTOUCHED_SOURCE_READ__GLOBAL_CUT_MEMBERSHIP_IS_REQUIRED__AND_A_PASS_NEVER_AUTHORIZES_TASK_EXECUTION"
+  if membership_required else
+  "STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
+)
     }
 
 def main()->int:

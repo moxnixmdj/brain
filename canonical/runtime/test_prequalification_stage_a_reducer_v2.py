@@ -11,12 +11,35 @@ from pathlib import Path
 
 from canonical.runtime import prequalification_stage_a_generic as stage_a_v1
 from canonical.runtime.prequalification_stage_a_reducer_v2 import (
+    BASE_STAGE_A_EXPECTED,
+    CLEANNESS_ONLY_AUTHORIZATION,
+    CUT_MEMBERSHIP_ITEM,
     EXPECTED_HIT_FIELDS,
     EXPECTED_SURFACES,
+    GLOBAL_CUT,
     REQUIRED_BUDGET_BEHAVIORS,
     REQUIRED_BUDGET_WORKFLOWS,
     evaluate,
+    global_cut_membership,
 )
+
+POLICY_REL = "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json"
+
+
+def live_policy_requires_cut_membership(root=None):
+    """Whether the policy at `root` lists the global cut membership item.
+
+    Read from the policy rather than assumed, so the suite follows the live
+    authority instead of rotting when the required list changes again.
+    """
+    base = root or ROOT
+    policy = json.loads((base / POLICY_REL).read_text(encoding="utf-8"))
+    required = (
+        policy.get("staged_admission", {})
+        .get("stage_a_pre_exposure", {})
+        .get("required", [])
+    )
+    return CUT_MEMBERSHIP_ITEM in required
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -112,16 +135,35 @@ class StageAReducerTests(unittest.TestCase):
     def test_live_policy_compliant_ledger_passes(self):
         out = evaluate(ROOT, task=TASK, rank=RANK, ledger_path=LEDGER)
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY")
         self.assertEqual(out["failed_predicates"], [])
+        # Cleanliness is established, but the live policy also requires global
+        # cut membership for the selected untouched sample, and the live cut
+        # cannot satisfy it: its own status declares the exact cut computation
+        # still required and it records no member for this sample. So the
+        # truthful live authorization is cleanliness without any source-read
+        # authority - the control whose absence burned rank23.
+        if live_policy_requires_cut_membership():
+            self.assertFalse(out["global_cut_membership"]["current"], out)
+            self.assertTrue(out["global_cut_membership"]["reasons"], out)
+            self.assertEqual(out["authorization"], CLEANNESS_ONLY_AUTHORIZATION)
+        else:
+            self.assertEqual(out["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY")
 
     def test_stage_a_never_authorizes_execution(self):
         out = evaluate(ROOT, task=TASK, rank=RANK, ledger_path=LEDGER)
         self.assertFalse(out["task_execution_authorized"])
-        self.assertIn(
-            "STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE",
-            out["rule"],
-        )
+        # The rule label states what a pass does and does not authorize, and it
+        # is stated relative to the policy in force. While the policy requires
+        # global cut membership, a label claiming that a Stage-A pass authorizes
+        # instruction exposure is the exact belief that spent rank23's source.
+        if live_policy_requires_cut_membership():
+            self.assertIn("CLEANLINESS_ALONE_CANNOT_AUTHORIZE", out["rule"])
+            self.assertIn("NEVER_AUTHORIZES_TASK_EXECUTION", out["rule"])
+        else:
+            self.assertIn(
+                "STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE",
+                out["rule"],
+            )
 
     def test_spent_rank17_ledger_fails_closed(self):
         out = evaluate(
@@ -162,15 +204,31 @@ class StageAReducerTests(unittest.TestCase):
         out = evaluate(ROOT, task=task, rank=rank, ledger_path=ledger_rel)
         if ledger.get("state") == "UNEXPOSED__STAGE_A_PRE_EXPOSURE":
             self.assertEqual(out["pass"], recorded["pass"], out)
-            self.assertEqual(out["authorization"], recorded["authorization"])
             self.assertEqual(out["failed_predicates"], recorded["failed_predicates"])
-            # The rule label and schema are part of the recorded verdict, not
-            # decoration: v2 once emitted the generic schema with the legacy
-            # rank15 reducer's shorter rule wording, and a comparison that
-            # skipped those two fields could not see the divergence.
-            for key in ("rule", "schema"):
-                if key in recorded:
-                    self.assertEqual(out[key], recorded[key], key)
+            self.assertEqual(out["schema"], recorded["schema"], "schema")
+            membership = out["global_cut_membership"]
+            if not live_policy_requires_cut_membership() or membership["current"]:
+                # The recorded semantics reproduce field for field.
+                self.assertEqual(out["authorization"], recorded["authorization"])
+                # The rule label is part of the recorded verdict, not
+                # decoration: v2 once emitted the generic schema with the legacy
+                # rank15 reducer's shorter rule wording, and a comparison that
+                # skipped that field could not see the divergence.
+                if "rule" in recorded:
+                    self.assertEqual(out["rule"], recorded["rule"], "rule")
+            else:
+                # The global terminal proof cut became the scheduling authority
+                # after this artifact was recorded, and rank23's recorded root
+                # cause is
+                # LOCAL_STAGE_A_PASS_COULD_ADVANCE_SOURCE_READ_WITHOUT_ENFORCED_
+                # GLOBAL_CUT_MEMBERSHIP. rank23's own adjudication preserves
+                # prior Stage-A cleanliness while refusing cut admission, so the
+                # recorded cleanliness reproduces exactly and only the exposure
+                # claim is withheld. The withholding is conditional, not a new
+                # deadlock: see test_current_cut_membership_restores_exposure.
+                self.assertEqual(out["authorization"], CLEANNESS_ONLY_AUTHORIZATION)
+                self.assertTrue(membership["reasons"], out)
+                self.assertIn("CLEANLINESS_ALONE_CANNOT_AUTHORIZE", out["rule"])
             self.assertEqual(
                 out["task_execution_authorized"], recorded["task_execution_authorized"]
             )
@@ -721,9 +779,22 @@ class RecordedStageAOracleTests(unittest.TestCase):
                     self.assertEqual(out["pass"], entry["recorded_pass"], out)
                     if entry["recorded_pass"]:
                         self.assertEqual(out["failed_predicates"], [])
-                        self.assertEqual(
-                            out["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY"
-                        )
+                        # Recorded cleanliness reproduces; the recorded exposure
+                        # claim is withheld while the live policy requires global
+                        # cut membership that the live cut cannot satisfy. See
+                        # assert_reproduces_recorded_admission for the citation.
+                        if (
+                            not live_policy_requires_cut_membership()
+                            or out["global_cut_membership"]["current"]
+                        ):
+                            self.assertEqual(
+                                out["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY"
+                            )
+                        else:
+                            self.assertEqual(
+                                out["authorization"], CLEANNESS_ONLY_AUTHORIZATION
+                            )
+                            self.assertTrue(out["global_cut_membership"]["reasons"], out)
                 else:
                     # Advanced past Stage A: refusal is the truthful verdict and
                     # the recorded pass stands as history.
@@ -1130,3 +1201,279 @@ class RecordedProvenanceCitationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def current_cut(task=TASK, rank=RANK):
+    """A global cut that satisfies every binding the reducer resolves.
+
+    Built from the live artifact rather than written from scratch, so the
+    terminal-predicate names follow the authority: when the cut gains a
+    predicate this fixture gains it too, and a test that stops exercising the
+    real predicate set fails instead of quietly passing on a stale fixture.
+    """
+    live = json.loads((ROOT / GLOBAL_CUT).read_text(encoding="utf-8"))
+    cut = copy.deepcopy(live)
+    cut["status"] = "ACTIVE_CURRENT__EXACT_CUT_COMPUTED_ACROSS_ALL_OPEN_FAMILIES"
+    cut["law"] = "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md"
+    cut["exact_cut_runtime"] = "canonical/runtime/minimum_reality_cut.py"
+    cut["scheduling_authority"] = {
+        "global_terminal_proof_cut": True,
+        "family_labels": False,
+        "benchmark_rank_order": False,
+        "current_active_family": False,
+    }
+    cut["untouched_information_spend"] = {
+        "unknown_fails_closed": True,
+        "selection_of_scarce_clean_sample_requires_cut_membership": True,
+        "admission_required_before_stage_b_instruction_fetch": True,
+        "instruction_exposure_is_spend": True,
+        "task_execution_is_spend": True,
+        "terminal_verifier_is_spend": True,
+    }
+    predicates = (live.get("snapshot") or {}).get("terminal_predicates") or {}
+    cut.setdefault("snapshot", {})["terminal_predicates"] = (
+        {key: True for key in predicates} or {"exact_cut_computed": True}
+    )
+    cut["selected_untouched_sample"] = {
+        "task": task,
+        "rank": rank,
+        "global_cut_membership_current": True,
+    }
+    return cut
+
+
+class GlobalCutMembershipTests(unittest.TestCase):
+    """Stage-A policy item CURRENT_GLOBAL_TERMINAL_PROOF_CUT_MEMBERSHIP.
+
+    rank23's recorded root cause is
+    LOCAL_STAGE_A_PASS_COULD_ADVANCE_SOURCE_READ_WITHOUT_ENFORCED_GLOBAL_CUT_
+    MEMBERSHIP: both generic reducers reported
+    authorization=STAGE_B_INSTRUCTION_EXPOSURE_ONLY for any local pass and never
+    resolved cut membership, so a verdict claimed an authority the live law did
+    not grant. These tests kill every way that check can fail open, and prove it
+    is satisfiable so the repair is not a second unsatisfiable-admission bug.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        for rel in SUPPORT_PATHS + (LEDGER,):
+            dst = self.root / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / rel, dst)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def write_cut(self, cut):
+        dst = self.root / GLOBAL_CUT
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_text(json.dumps(cut, indent=2) + "\n", encoding="utf-8")
+
+    def verdict(self):
+        return evaluate(self.root, task=TASK, rank=RANK, ledger_path=LEDGER)
+
+    def mutated_cut(self, fn, task=TASK, rank=RANK):
+        cut = current_cut(task, rank)
+        fn(cut)
+        self.write_cut(cut)
+        return self.verdict()
+
+    # --- satisfiability: the withholding must be conditional ------------------
+    def test_current_cut_membership_restores_exposure(self):
+        self.write_cut(current_cut())
+        out = self.verdict()
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["failed_predicates"], [])
+        self.assertTrue(out["global_cut_membership"]["current"], out)
+        self.assertEqual(out["global_cut_membership"]["reasons"], [])
+        self.assertEqual(out["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY")
+        self.assertFalse(out["task_execution_authorized"])
+
+    def test_absent_cut_fails_closed_but_preserves_cleanliness(self):
+        out = self.verdict()
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["failed_predicates"], [])
+        self.assertEqual(
+            out["global_cut_membership"]["reasons"], ["GLOBAL_TERMINAL_PROOF_CUT_ABSENT"]
+        )
+        self.assertEqual(out["authorization"], CLEANNESS_ONLY_AUTHORIZATION)
+
+    # --- every binding must bite ---------------------------------------------
+    def test_each_cut_binding_fails_closed(self):
+        cases = {
+            "GLOBAL_TERMINAL_PROOF_CUT_NOT_ACTIVE": lambda c: c.update(
+                status="SUPERSEDED__CUT_WITHDRAWN"
+            ),
+            "GLOBAL_TERMINAL_PROOF_CUT_LAW_DRIFT": lambda c: c.update(
+                law="canonical/laws/SOME_OTHER_LAW_V1.md"
+            ),
+            "GLOBAL_TERMINAL_PROOF_CUT_RUNTIME_DRIFT": lambda c: c.update(
+                exact_cut_runtime="canonical/runtime/some_other_cut.py"
+            ),
+            "GLOBAL_CUT_NOT_SCHEDULING_AUTHORITY": lambda c: c["scheduling_authority"].update(
+                global_terminal_proof_cut=False
+            ),
+            "GLOBAL_CUT_LOCAL_ORDER_STILL_AUTHORITATIVE": lambda c: c[
+                "scheduling_authority"
+            ].update(benchmark_rank_order=True),
+            "GLOBAL_CUT_UNTOUCHED_SPEND_RULE_NOT_ASSERTED:unknown_fails_closed": (
+                lambda c: c["untouched_information_spend"].update(unknown_fails_closed=False)
+            ),
+            "GLOBAL_CUT_TERMINAL_PREDICATES_NOT_SATISFIED": lambda c: c["snapshot"][
+                "terminal_predicates"
+            ].update(
+                {
+                    next(iter(c["snapshot"]["terminal_predicates"])): False,
+                }
+            ),
+            "GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_UNKNOWN": (
+                lambda c: c.pop("selected_untouched_sample")
+            ),
+            "GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_NOT_CURRENT": (
+                lambda c: c["selected_untouched_sample"].update(
+                    global_cut_membership_current=False
+                )
+            ),
+        }
+        for reason, mutate in cases.items():
+            with self.subTest(reason=reason):
+                out = self.mutated_cut(mutate)
+                self.assertFalse(out["global_cut_membership"]["current"], out)
+                self.assertIn(reason, out["global_cut_membership"]["reasons"])
+                # Cleanliness is a separate question and must survive: rank23's
+                # adjudication preserves prior Stage-A cleanliness while refusing
+                # cut admission.
+                self.assertTrue(out["pass"], out)
+                self.assertEqual(out["authorization"], CLEANNESS_ONLY_AUTHORIZATION)
+                self.assertFalse(out["task_execution_authorized"])
+
+    def test_empty_terminal_predicate_set_is_unknown_not_satisfied(self):
+        out = self.mutated_cut(
+            lambda c: c["snapshot"].update(terminal_predicates={})
+        )
+        self.assertIn(
+            "GLOBAL_CUT_TERMINAL_PREDICATES_NOT_SATISFIED",
+            out["global_cut_membership"]["reasons"],
+        )
+        self.assertEqual(out["authorization"], CLEANNESS_ONLY_AUTHORIZATION)
+
+    def test_membership_recorded_for_another_sample_does_not_leak(self):
+        # A deep token search would accept an entry naming a different task,
+        # which is how a spent sample's admission could be reused by a fresh one.
+        out = self.mutated_cut(lambda c: None, task="some-other-task", rank=999)
+        self.assertIn(
+            "GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_UNKNOWN",
+            out["global_cut_membership"]["reasons"],
+        )
+        self.assertEqual(out["authorization"], CLEANNESS_ONLY_AUTHORIZATION)
+
+    def test_recorded_rank23_sample_is_not_a_current_member(self):
+        # Real data: the live cut records rank23 with stage_b_exposure_admitted
+        # false after its source was read post-revocation.
+        membership = global_cut_membership(ROOT, "layout-config-recreation2", 23)
+        self.assertFalse(membership["current"], membership)
+        self.assertIn(
+            "GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_NOT_CURRENT",
+            membership["reasons"],
+        )
+
+    def test_exposure_authorization_never_survives_a_lost_binding(self):
+        # No single binding may be droppable while exposure authority survives.
+        self.write_cut(current_cut())
+        self.assertEqual(
+            self.verdict()["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY"
+        )
+        for path in (
+            ("status",),
+            ("law",),
+            ("exact_cut_runtime",),
+            ("scheduling_authority", "global_terminal_proof_cut"),
+            ("untouched_information_spend", "unknown_fails_closed"),
+            ("snapshot", "terminal_predicates"),
+            ("selected_untouched_sample",),
+        ):
+            with self.subTest(path=path):
+                cut = current_cut()
+                node = cut
+                for key in path[:-1]:
+                    node = node[key]
+                node.pop(path[-1], None)
+                self.write_cut(cut)
+                out = self.verdict()
+                self.assertNotEqual(
+                    out["authorization"], "STAGE_B_INSTRUCTION_EXPOSURE_ONLY", out
+                )
+
+    # --- policy completeness: the durable fail-closed -------------------------
+    def test_every_live_required_item_is_adjudicated(self):
+        # Standing tripwire. If the authority adds a Stage-A required item that
+        # no predicate adjudicates, this names it instead of letting a candidate
+        # be blessed against an unchecked requirement.
+        out = evaluate(ROOT, task=TASK, rank=RANK, ledger_path=LEDGER)
+        unadjudicated = [
+            f
+            for f in out["failed_predicates"]
+            if f.startswith("STAGE_A_POLICY_ITEM_NOT_ADJUDICATED:")
+        ]
+        self.assertEqual(unadjudicated, [], out)
+
+    def test_a_new_required_item_nobody_adjudicates_fails_closed(self):
+        policy_rel = POLICY_REL
+        path = self.root / policy_rel
+        policy = json.loads(path.read_text(encoding="utf-8"))
+        required = policy["staged_admission"]["stage_a_pre_exposure"]["required"]
+        required.append("SOME_FUTURE_REQUIRED_ITEM_NOBODY_ADJUDICATES_YET")
+        path.write_text(json.dumps(policy, indent=2) + "\n", encoding="utf-8")
+        out = self.verdict()
+        self.assertFalse(out["pass"], out)
+        self.assertIn(
+            "STAGE_A_POLICY_ITEM_NOT_ADJUDICATED:"
+            "SOME_FUTURE_REQUIRED_ITEM_NOBODY_ADJUDICATES_YET",
+            out["failed_predicates"],
+        )
+        self.assertEqual(out["authorization"], "NONE")
+
+    def test_expected_item_set_is_the_policy_floor(self):
+        # The shared set is the single definition both reducers use; if it loses
+        # an item the policy requires, the subset test must fire rather than
+        # silently narrowing what Stage-A checks.
+        self.assertTrue(BASE_STAGE_A_EXPECTED, "shared item set must not be empty")
+        policy = json.loads((ROOT / POLICY_REL).read_text(encoding="utf-8"))
+        required = set(
+            policy["staged_admission"]["stage_a_pre_exposure"]["required"]
+        )
+        self.assertTrue(BASE_STAGE_A_EXPECTED <= required, sorted(BASE_STAGE_A_EXPECTED - required))
+
+    # --- the two generic reducers must not diverge ---------------------------
+    def test_v1_and_v2_agree_on_membership_and_authorization(self):
+        shared = (
+            "pass",
+            "authorization",
+            "rule",
+            "schema",
+            "task_execution_authorized",
+            "global_cut_membership",
+        )
+        for label, prepare in (
+            ("live_root", None),
+            ("no_cut", lambda: None),
+            ("current_cut", lambda: self.write_cut(current_cut())),
+        ):
+            with self.subTest(root=label):
+                if label == "live_root":
+                    root = ROOT
+                else:
+                    prepare()
+                    root = self.root
+                v2 = evaluate(root, task=TASK, rank=RANK, ledger_path=LEDGER)
+                ledger_doc = json.loads((root / LEDGER).read_text(encoding="utf-8"))
+                v1 = stage_a_v1.evaluate(
+                    root,
+                    LEDGER,
+                    TASK,
+                    RANK,
+                    ledger_doc["task_identity_sha256"],
+                )
+                for key in shared:
+                    self.assertEqual(v1[key], v2[key], "%s/%s" % (label, key))

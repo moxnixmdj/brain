@@ -40,6 +40,47 @@ REQUIRED_BUDGET_WORKFLOWS={
     "Stage lease promotion regression",
     "Execution Guard Regression",
 }
+# Stage-A policy item added when the global terminal proof cut became the
+# scheduling authority. rank23's recorded root cause is
+# LOCAL_STAGE_A_PASS_COULD_ADVANCE_SOURCE_READ_WITHOUT_ENFORCED_GLOBAL_CUT_
+# MEMBERSHIP: its official instruction was read on the strength of a local
+# Stage-A pass after the cut had already revoked that source read
+# (canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json, whose
+# repair list includes LOCAL_STAGE_A_PASS_CANNOT_ALONE_AUTHORIZE_SOURCE_READ).
+# A Stage-A verdict that reports exposure authorization without resolving cut
+# membership reproduces that incident, so the currency bindings already enforced
+# by canonical/runtime/current_state_obs_reducer.py are reused verbatim here
+# instead of being redefined, and anything unresolved fails closed.
+CUT_MEMBERSHIP_ITEM=(
+    "CURRENT_GLOBAL_TERMINAL_PROOF_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE"
+)
+# The Stage-A required items this reducer adjudicates by predicate. Defined once
+# and imported by the generic reducer so the two cannot drift apart. Membership
+# in the global terminal proof cut is deliberately NOT in this set: it is
+# expected only at a root where that law is in force, because demanding it
+# everywhere would fail every pre-cut root, which is where the recorded
+# rank16-rank23 admissions were adjudicated. A reducer that cannot reproduce its
+# own recorded evidence is not an oracle.
+BASE_STAGE_A_EXPECTED=frozenset({
+    "TARGET_VERSION_LOCK",
+    "QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
+    "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS",
+    "GENERAL_EXECUTION_SURFACE_CERTIFICATE",
+    "INDEPENDENT_ACCEPTANCE_MECHANISM_VERIFIED",
+    "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
+    "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
+    "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
+    "TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED",
+    "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS",
+})
+GLOBAL_CUT="canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
+GLOBAL_PROOF_LAW="canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md"
+MINIMUM_REALITY_CUT_RUNTIME="canonical/runtime/minimum_reality_cut.py"
+# Emitted when every cleanliness predicate holds but cut membership does not.
+# The project's own vocabulary for that state is INDEPENDENT_PASS__CLEANNESS_ONLY
+# (GLOBAL_TERMINAL_PROOF_CUT_V1.json rank23.stage_a_status); the suffix makes it
+# impossible to mistake for exposure authority.
+CLEANNESS_ONLY_AUTHORIZATION="CLEANNESS_ONLY__NO_UNTOUCHED_SOURCE_READ_AUTHORIZATION"
 
 def load(root: Path, rel: str) -> dict[str,Any]:
     return json.loads((root/rel).read_text(encoding="utf-8"))
@@ -56,6 +97,87 @@ def load_evidence(root: Path, rel: str) -> dict[str,Any]:
     except Exception:
         return {}
     return value if isinstance(value,dict) else {}
+
+def _cut_sample_entry(cut: dict[str,Any], task: str, rank: int) -> dict[str,Any]|None:
+    """Resolve the cut's own recorded entry for this candidate sample.
+
+    Only an explicit entry naming this exact task and rank counts. A deep search
+    for a matching token would admit unrelated records, so the absence of an
+    explicit entry is unknown - and unknown fails closed.
+    """
+    def matches(entry:Any)->bool:
+        return (
+            isinstance(entry,dict)
+            and str(entry.get("task") or "")==str(task)
+            and entry.get("rank")==rank
+        )
+    for key in ("selected_untouched_sample","admitted_samples","members"):
+        value=cut.get(key)
+        if matches(value):
+            return value
+        if isinstance(value,list):
+            for entry in value:
+                if matches(entry):
+                    return entry
+    # A rank-keyed block, which is how the live cut records rank23.
+    block=cut.get("rank%d"%rank)
+    return block if matches(block) else None
+
+def global_cut_membership(root: Path, task: str, rank: int) -> dict[str,Any]:
+    """Adjudicate CUT_MEMBERSHIP_ITEM for one candidate sample.
+
+    Returns {"current": bool, "reasons": [...]}. `current` is True only when the
+    global cut is bound to its law and runtime, is the scheduling authority, its
+    untouched-spend rules are all asserted, its terminal predicates are all
+    satisfied, and it records positive membership for THIS task and rank. Every
+    other outcome is a named reason, never a silent pass.
+
+    Membership is read from the entry's own recorded vocabulary:
+    `global_cut_membership_current` or `stage_b_exposure_admitted`. Neither is
+    asserted for any sample in the live cut, so no candidate can satisfy this
+    item until the cut is computed across the open families.
+    """
+    cut=load_evidence(root,GLOBAL_CUT)
+    reasons:list[str]=[]
+    if not cut:
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_ABSENT")
+        return {"current":False,"reasons":reasons}
+    if not str(cut.get("status") or "").startswith("ACTIVE"):
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_NOT_ACTIVE")
+    if str(cut.get("law") or "")!=GLOBAL_PROOF_LAW:
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_LAW_DRIFT")
+    if str(cut.get("exact_cut_runtime") or "")!=MINIMUM_REALITY_CUT_RUNTIME:
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_RUNTIME_DRIFT")
+    scheduling=cut.get("scheduling_authority") or {}
+    if scheduling.get("global_terminal_proof_cut") is not True:
+        reasons.append("GLOBAL_CUT_NOT_SCHEDULING_AUTHORITY")
+    if (
+        scheduling.get("family_labels") is not False
+        or scheduling.get("benchmark_rank_order") is not False
+    ):
+        reasons.append("GLOBAL_CUT_LOCAL_ORDER_STILL_AUTHORITATIVE")
+    spend=cut.get("untouched_information_spend") or {}
+    for field in (
+        "unknown_fails_closed",
+        "selection_of_scarce_clean_sample_requires_cut_membership",
+        "admission_required_before_stage_b_instruction_fetch",
+    ):
+        if spend.get(field) is not True:
+            reasons.append("GLOBAL_CUT_UNTOUCHED_SPEND_RULE_NOT_ASSERTED:%s"%field)
+    predicates=(cut.get("snapshot") or {}).get("terminal_predicates") or {}
+    if not predicates or not all(v is True for v in predicates.values()):
+        reasons.append("GLOBAL_CUT_TERMINAL_PREDICATES_NOT_SATISFIED")
+    entry=_cut_sample_entry(cut,task,rank)
+    if entry is None:
+        reasons.append("GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_UNKNOWN")
+    elif (
+        entry.get("global_cut_membership_current") is not True
+        and entry.get("stage_b_exposure_admitted") is not True
+    ):
+        reasons.append(
+            "GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_NOT_CURRENT"
+        )
+    return {"current":not reasons,"reasons":reasons}
 
 def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,Any]:
     failures=[]
@@ -204,31 +326,68 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
     ):
         failures.append("TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD")
     required=set(p.get("staged_admission",{}).get("stage_a_pre_exposure",{}).get("required",[]))
-    expected={
-      "TARGET_VERSION_LOCK","QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
-      "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS",
-      "GENERAL_EXECUTION_SURFACE_CERTIFICATE","INDEPENDENT_ACCEPTANCE_MECHANISM_VERIFIED",
-      "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
-      "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
-      "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
-      "TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED",
-      "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS"
-    }
+    # The policy is the single trigger. Cut membership is adjudicated exactly
+    # when the live policy requires it, so a root whose policy predates the
+    # global cut law reproduces its recorded verdict unchanged, and a root whose
+    # policy does require membership can never be blessed without resolving it.
+    membership_required=CUT_MEMBERSHIP_ITEM in required
+    expected=set(BASE_STAGE_A_EXPECTED)
+    if membership_required:
+        expected.add(CUT_MEMBERSHIP_ITEM)
     if not expected <= required:
         failures.append("STAGE_A_POLICY_INCOMPLETE")
+    # The subset test above fires only when the policy LOSES an item this reducer
+    # adjudicates. When the policy GAINS one, `expected <= required` still holds,
+    # so the reducer would bless a candidate against a required item that nothing
+    # checks. That is the same fail-open class that let rank23 advance its source
+    # read on a local pass, so every live required item is adjudicated by name.
+    for item in sorted(required-expected):
+        failures.append("STAGE_A_POLICY_ITEM_NOT_ADJUDICATED:%s"%item)
+    unique=sorted(set(failures))
+    # CUT_MEMBERSHIP_ITEM is adjudicated here, but it is NOT a cleanliness
+    # predicate and it does not make `pass` false. rank23's own adjudication
+    # records prior_stage_a_cleanliness_preserved true together with
+    # global_cut_admission_before_source_read false, and the global cut records
+    # that sample as INDEPENDENT_PASS__CLEANNESS_ONLY: established cleanliness
+    # survives while membership separately withholds the source read. Encoding
+    # membership as a cleanliness failure would contradict that recorded
+    # encoding; ignoring it is what burned rank23. So it is reported on its own
+    # and it gates authorization, which is the only thing it ever gated.
+    cut_membership=global_cut_membership(root,task,rank)
+    if not unique:
+        # Where the policy does not require membership there is none to resolve
+        # and the recorded pre-cut semantics stand; where it does require it, a
+        # pass without current membership reports cleanliness and withholds the
+        # untouched source read.
+        if not membership_required or cut_membership["current"]:
+            authorization="STAGE_B_INSTRUCTION_EXPOSURE_ONLY"
+        else:
+            authorization=CLEANNESS_ONLY_AUTHORIZATION
+    else:
+        authorization="NONE"
     return {
       "schema":"PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2",
       "task":task,"rank":rank,
-      "pass":not failures,
-      "authorization":"STAGE_B_INSTRUCTION_EXPOSURE_ONLY" if not failures else "NONE",
+      "pass":not unique,
+      "authorization":authorization,
       "task_execution_authorized":False,
-      "failed_predicates":sorted(set(failures)),
+      "failed_predicates":unique,
+      "global_cut_membership":cut_membership,
       "rule":# Every recorded Stage-A admission artifact under schema
 # PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2 (rank18, rank19, rank20) and v1
 # both spell this ONLY_ONE_OFFICIAL. v2 inherited the rank15-specific reducer's
 # shorter wording while emitting the generic schema, so its rule label did not
 # reproduce the evidence it adjudicates. The recorded artifacts are authoritative.
-"STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
+# The label is stated relative to the law in force: while the global terminal
+# proof cut governs untouched-sample selection, a local Stage-A pass cannot alone
+# authorize a source read - rank23's recorded root cause - so a live verdict must
+# not claim that it does. Under a root where that law is absent, the recorded
+# pre-cut label is reproduced exactly.
+(
+  "STAGE_A_CLEANLINESS_ALONE_CANNOT_AUTHORIZE_AN_UNTOUCHED_SOURCE_READ__GLOBAL_CUT_MEMBERSHIP_IS_REQUIRED__AND_A_PASS_NEVER_AUTHORIZES_TASK_EXECUTION"
+  if membership_required else
+  "STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
+)
     }
 
 def main()->int:
