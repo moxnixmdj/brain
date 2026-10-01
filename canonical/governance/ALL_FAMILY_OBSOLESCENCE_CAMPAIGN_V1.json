@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "status": "ACTIVE",
+  "directive": "OBSOLETE_EVERYTHING",
+  "created_utc": "2026-10-01",
+  "terminal_objective": "PERMANENTLY_OWN_ALL_19_USEFUL_TARGET_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL",
+  "baseline": {
+    "verified": 2,
+    "unfinished": 17
+  },
+  "execution": {
+    "preserve_current_coding_run": true,
+    "parallelize_shared_residual_discovery": true,
+    "capability_credit_requires_independent_verification": true,
+    "incremental_spend_usd": 0
+  },
+  "lanes": [
+    {
+      "id": "A",
+      "families": [
+        "ADVANCED_AGENTIC_CODING"
+      ],
+      "next": "finish current fresh coding breadth evaluation"
+    },
+    {
+      "id": "B",
+      "families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "FINANCIAL_ANALYSIS",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ],
+      "next": "reuse and internalize strongest open professional document mechanisms"
+    },
+    {
+      "id": "C",
+      "families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "MULTI_CAPABILITY_COMPOSITION",
+        "SUBAGENT_DELEGATION_AND_COORDINATION"
+      ],
+      "next": "reuse and internalize strongest open agent/browser control mechanisms"
+    },
+    {
+      "id": "D",
+      "families": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "next": "reuse open research frameworks and isolate only missing learned behavior"
+    },
+    {
+      "id": "E",
+      "families": [
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "next": "reuse failure-diagnosis, reflection and scope-control mechanisms"
+    }
+  ],
+  "discovered_candidates": [
+    {
+      "repo": "genspark-ai/genoffice",
+      "license": "Apache-2.0",
+      "lane": "B"
+    },
+    {
+      "repo": "trymeka/agent",
+      "license": "MIT",
+      "lane": "C"
+    },
+    {
+      "repo": "visnia-ai/browser-agent",
+      "license": "MIT",
+      "lane": "C"
+    },
+    {
+      "repo": "Alibaba-NLP/DeepResearch",
+      "lane": "D"
+    },
+    {
+      "repo": "ReflexioAI/reflexio",
+      "license": "Apache-2.0",
+      "lane": "E"
+    },
+    {
+      "repo": "microsoft/AgentRx",
+      "license": "MIT",
+      "lane": "E"
+    }
+  ],
+  "rule": "Candidate discovery gives zero capability credit. Promote only after Brain-owned execution passes clean independent evaluation."
+}
