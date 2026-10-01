@@ -28,7 +28,23 @@
       "canonical/capabilities/opus55/evals/COGNITIVE_BASIS_POINTWISE_TRANSFER_001.jsonl"
     ],
     "preserved_clean_coding_task": "gsea-proteomics",
-    "cognitive_probe_result_state": "NOT_YET_RUN_OR_RECORDED__ZERO_CAPABILITY_CREDIT"
+    "cognitive_probe_result_state": "NOT_YET_RUN_OR_RECORDED__ZERO_CAPABILITY_CREDIT",
+    "concurrent_changes_detected_after_initial_read": [
+      {
+        "commit": "7bd58995276975df1ced20a7af87f0e8f3f48dff",
+        "message": "Fix cognitive basis JSONL line separators"
+      },
+      {
+        "commit": "cd26bda8871956ffe24301973410aa445ddffd86",
+        "message": "Repair cognitive basis JSONL to real line breaks",
+        "current_eval_blob": "f4cfc7474547bfb3b3f7272e5aa9ba9e88f3ffc9"
+      }
+    ],
+    "current_eval_authority": {
+      "path": "canonical/capabilities/opus55/evals/COGNITIVE_BASIS_POINTWISE_TRANSFER_001.jsonl",
+      "commit": "cd26bda8871956ffe24301973410aa445ddffd86",
+      "blob": "f4cfc7474547bfb3b3f7272e5aa9ba9e88f3ffc9"
+    }
   },
   "selected_updates": [
     {
