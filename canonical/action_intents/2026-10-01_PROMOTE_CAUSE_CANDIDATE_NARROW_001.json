@@ -1,0 +1,139 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-CAUSE-CANDIDATE-NARROW-001-20261001",
+  "status": "PROPOSED__ZERO_FAMILY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "baccd8798e43ec1bbd188c0f9ab317885c46a1ad",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "PROMOTE_EXPLICIT_CAUSAL_DAG_CAUSE_CANDIDATE_GENERATION_TO_VERIFIED_BRAIN_OWNED_NARROW_COMPONENT__KEEP_GENERAL_CAUSAL_DISCOVERY_UNRESOLVED__ZERO_FAMILY_CREDIT__RANK9_UNCHANGED",
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "INDEPENDENT_SPARE_CAPACITY_ONLY__LIVE_RANK9_PRIMARY_EXECUTION_REMAINS_PREEMPTIVE",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": false,
+  "evidence_presence_classification": "FRESH_1000_DAG_DIFFERENTIAL_PASS__DONOR_INDEPENDENT_BRAIN_ARTIFACT_ALREADY_MERGED",
+  "stop_condition": "FRESH_1000_DAG_DIFFERENTIAL_IS_BOUND_IN_CANONICAL_EVIDENCE__NARROW_COMPONENT_STATUS_IS_VERIFIED_BRAIN_OWNED__GENERAL_CAUSAL_DISCOVERY_REMAINS_OPEN__RANK9_UNTOUCHED__TRUSTED_GUARD_PASSES",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_PROMOTE_CAUSE_CANDIDATE_NARROW_001.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "baccd8798e43ec1bbd188c0f9ab317885c46a1ad",
+    "real_outcome": "Update canonical ownership state for the narrow explicit-causal-DAG transform after fresh differential verification.",
+    "required_capability": "Evidence reconciliation only; implementation already exists in Brain.",
+    "obs_goal": {
+      "real_outcome": "Reduce unresolved atomic state without inflating claim scope.",
+      "proxy_goals_deleted": [
+        "GENERAL_ROOT_CAUSE_PROMOTION",
+        "FAMILY_CREDIT"
+      ],
+      "surviving_necessity": "Promote only the narrow contract that passed fresh structural verification."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Brain causal_candidate_generator.py",
+        "PyRapide donor differential",
+        "spent six-case donor-deletion screen"
+      ],
+      "external_existing_routes_checked": [
+        "NO_NEW_ROUTE_SEARCH_REQUIRED_FOR_PROMOTION"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_CODE",
+        "NO_TRAINING",
+        "NO_RANK9_CONTACT"
+      ],
+      "surviving_gap": "Canonical status still says fresh transfer pending despite completed fresh transfer."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_EVIDENCE_STATE_LAG",
+      "delete_bypass_substitute_options": [
+        "RECONCILE_EXISTING_FRESH_EVIDENCE"
+      ],
+      "surviving_causal_blocker": "Stale candidate status prevents inheritance of the verified narrow component."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "PROMOTE_NARROW_COMPONENT_ONLY",
+        "GENERAL_PROMOTION_REJECTED"
+      ],
+      "losing_routes_reason": "Only narrow promotion matches the evidence scope.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "1000 unseen random-DAG differential cases against pinned donor provide fresh structural verification for the narrow deterministic contract."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "FRESH_TRANSFER_PENDING_FOR_EXPLICIT_CAUSAL_DAG_COMPONENT"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "BRAIN_OWNED_CAUSE_CANDIDATE_GENERATOR"
+      ],
+      "fresh_reuse_plan": "Use the verified owned component wherever explicit causal graph metadata exists; retain broader gaps separately."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_1000_CASE_DIFFERENTIAL"
+      ],
+      "search_stop_decision": "Fresh verification is decisive for this narrow contract.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PROMOTE_NARROW_COMPONENT",
+      "KEEP_PENDING",
+      "PROMOTE_GENERAL_ROOT_CAUSE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "KEEP_STALE_PENDING_STATE",
+      "GENERAL_ROOT_CAUSE_PROMOTION"
+    ],
+    "selected_surviving_route": "PROMOTE_ONLY_VERIFIED_NARROW_EXPLICIT_CAUSAL_DAG_COMPONENT",
+    "why_selected_route_is_fastest_sufficient": "It exactly matches the fresh evidence and requires no new execution.",
+    "expected_parent_level_state_change": "PROMOTE_EXPLICIT_CAUSAL_DAG_CAUSE_CANDIDATE_GENERATION_TO_VERIFIED_BRAIN_OWNED_NARROW_COMPONENT__KEEP_GENERAL_CAUSAL_DISCOVERY_UNRESOLVED__ZERO_FAMILY_CREDIT__RANK9_UNCHANGED",
+    "stop_condition": "FRESH_1000_DAG_DIFFERENTIAL_IS_BOUND_IN_CANONICAL_EVIDENCE__NARROW_COMPONENT_STATUS_IS_VERIFIED_BRAIN_OWNED__GENERAL_CAUSAL_DISCOVERY_REMAINS_OPEN__RANK9_UNTOUCHED__TRUSTED_GUARD_PASSES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "No route selection is occurring; this action reconciles completed fresh verification."
+    }
+  }
+}
