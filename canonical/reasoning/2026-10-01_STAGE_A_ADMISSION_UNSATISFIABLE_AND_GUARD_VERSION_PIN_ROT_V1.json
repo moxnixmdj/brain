@@ -23,7 +23,8 @@
     ".github/workflows/drift-immunity-guard.yml copies the validator from the trusted base before checking out the PR head, so this PR is judged by the base guard and the three control-path failures cannot be cleared from inside it without downgrading the pointer to superseded V9/V8/V8 artifacts.",
     "The mirror rot is recurring, not one-off. Measured at three consecutive base commits (5e81733, 3681ff8 and c61497a) after 71 further commits in total, the mirror fields were stale against the live hierarchy every time and still carried rank-10 text (CURRENT_V5_TERMINAL_BENCH_4_BREADTH... and LAUNCH_CAD_MODEL_RANK_10...). At this base nine fields needed reconciling; the hierarchy's own next_progress_event_target had just been aligned upstream. Every frontier advance re-stales them, so the drift guard cannot pass any PR, which is consistent with 20 consecutive guard failures across many branches while main advanced by direct push.",
     "The base moved four times during this work (9684aaf, 5e81733, 3681ff8, c61497a). Because enforce_recursive_obs binds obs.canonical_base_commit to the exact literal passed as --base, and the workflow passes github.event.pull_request.base.sha, any push to main expires every open PR's OBS receipt. This is a structural property of the current design, not an error in this change, and it is recorded here rather than papered over.",
-    "A trivial sensitive-file change at base produced 20 distinct failures under the base guard, so the wall is independent of any PR's content."
+    "A trivial sensitive-file change at base produced 20 distinct failures under the base guard, so the wall is independent of any PR's content.",
+    "Reconciling the mirrors by hand is itself a recurring cost and a source of error: it had to be recomputed from scratch four times as the base moved, and one hand pass silently discarded parsed-dict edits when a raw-text replacement was written back afterwards. A deterministic tool that recomputes the mirrors from the authority removes both the repetition and that error class."
   ],
   "evidence_refs": [
     "canonical/runtime/prequalification_stage_a_reducer_v2.py",
@@ -49,14 +50,16 @@
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
     "canonical/tests/test_frontier_target_mirror_firewall.py",
-    "canonical/reasoning/RANK17_STAGE_A_ACTION_INTENT_20261001_V1.json"
+    "canonical/reasoning/RANK17_STAGE_A_ACTION_INTENT_20261001_V1.json",
+    "canonical/runtime/reconcile_frontier_mirrors.py",
+    "canonical/runtime/test_reconcile_frontier_mirrors.py"
   ],
   "reproduction_commands": [
     "python3 canonical/runtime/prequalification_stage_a_reducer_v2.py . --task freecad-impeller --rank 18 --ledger canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_CONTAMINATION_LEDGER_V1.json",
     "python3 canonical/runtime/enforce_goal_hierarchy.py --base c61497aba5de17413d69bc426a6f0922a6b469b8 --head HEAD",
     "python3 -m pytest canonical/tests canonical/runtime tests -q"
   ],
-  "conclusion": "Repair the predicates and the comparison rules, never the evidence. Replace the blanket dict-wide zero test with named checks over the eight canonical hit counters plus explicit completeness predicates; port the two predicates v2 was missing so both reducers enforce one contract and absence of evidence refuses rather than raises; match the lease status on its semantic prefix so it cannot rot per rank; bind v2 to the eight-surface policy item it never enforced and raise its policy floor to the ninth; replace the guard's frozen version constants with a currency rule resolving the semantic loads from the pointer-declared live surfaces; then reconcile the nine stale mirror fields to the live hierarchy. No frontier is redefined and no evidence is spent.",
+  "conclusion": "Repair the predicates and the comparison rules, never the evidence. Replace the blanket dict-wide zero test with named checks over the eight canonical hit counters plus explicit completeness predicates; port the two predicates v2 was missing so both reducers enforce one contract and absence of evidence refuses rather than raises; match the lease status on its semantic prefix so it cannot rot per rank; bind v2 to the eight-surface policy item it never enforced and raise its policy floor to the ninth; replace the guard's frozen version constants with a currency rule resolving the semantic loads from the pointer-declared live surfaces; then reconcile the nine stale mirror fields to the live hierarchy. No frontier is redefined and no evidence is spent. Because the mirrors re-rot on every frontier advance, the reconciliation is also delivered as a tested tool, canonical/runtime/reconcile_frontier_mirrors.py, which recomputes all nine mirror fields and the pointer control-path currency from ACTIVE_GOAL_HIERARCHY_V1, reports identity drift instead of rewriting it, refuses to move a scoreboard counter, and refuses to edit the authoritative hierarchy without an explicit opt-in.",
   "selected_route": "FIX_PREDICATES_AND_PORT_MISSING_CHECKS__REPLACE_VERSION_CONSTANTS_WITH_CURRENCY_RULE__RECONCILE_ALL_MIRRORS_TO_LIVE_HIERARCHY",
   "rejected_material_alternatives": [
     {
@@ -133,7 +136,9 @@
       "rank16_session_window_debug": "pass=false NONE with QUALIFICATION_CONTAMINATION_LEDGER plus four exposure-search predicates (7 fields, no brain_pr_hits, no searched_surfaces)"
     },
     "mirror_fields_reconciled": 9,
-    "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after."
+    "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after.",
+    "reconciler_cross_check": "Run on the stale base c61497a in a throwaway worktree, canonical/runtime/reconcile_frontier_mirrors.py produced byte-identical output to the hand reconciliation for CANONICAL_POINTER.json, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json, REAL_OUTPUT_SCOREBOARD_V1.json and ACTIVE_GOAL_HIERARCHY_V1.json. The only differing file is the active target record, and only in current_execution, which is a semantic field the tool deliberately does not rewrite. Two independent derivations agreeing is the cross-check; the tool also exits 1 with --check on the stale base, naming all nine drifted fields and both stale control paths.",
+    "reconciler_tests": "14 passed"
   },
   "next_action": "OPEN_FRESH_RANK19_STAGE_C_CARRIER__BIND_CANONICAL_ONE_SHOT_LEASE__FREEZE_ACCEPTANCE__EXECUTE_EXACTLY_ONE_BUILDER_BURST_WITH_INTERNAL_SELF_CHECKS__THEN_ONE_TERMINAL_VERIFIER",
   "supersession_conditions": [

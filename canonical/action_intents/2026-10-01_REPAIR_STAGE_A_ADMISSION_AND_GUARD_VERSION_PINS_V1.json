@@ -25,7 +25,8 @@
     "canonical/tests/test_frontier_target_mirror_firewall.py: red at base on the target-record mirror, green after reconciliation",
     "open PRs #656 and #602: neither adds a file under canonical/action_intents/, so no blocker lease collision",
     "drift-immunity-guard runs: 20 consecutive failures across many branches while main advanced by direct push",
-    ".github/workflows/drift-immunity-guard.yml preserves the validator from the trusted base"
+    ".github/workflows/drift-immunity-guard.yml preserves the validator from the trusted base",
+    "canonical/runtime/reconcile_frontier_mirrors.py and canonical/runtime/test_reconcile_frontier_mirrors.py (added by this change)"
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
@@ -59,7 +60,9 @@
       "rank16_session_window_debug": "pass=false NONE with QUALIFICATION_CONTAMINATION_LEDGER plus four exposure-search predicates (7 fields, no brain_pr_hits, no searched_surfaces)"
     },
     "mirror_fields_reconciled": 9,
-    "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after."
+    "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after.",
+    "reconciler_cross_check": "Run on the stale base c61497a in a throwaway worktree, canonical/runtime/reconcile_frontier_mirrors.py produced byte-identical output to the hand reconciliation for CANONICAL_POINTER.json, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json, REAL_OUTPUT_SCOREBOARD_V1.json and ACTIVE_GOAL_HIERARCHY_V1.json. The only differing file is the active target record, and only in current_execution, which is a semantic field the tool deliberately does not rewrite. Two independent derivations agreeing is the cross-check; the tool also exits 1 with --check on the stale base, naming all nine drifted fields and both stale control paths.",
+    "reconciler_tests": "14 passed"
   },
   "reasoning_receipt": "canonical/reasoning/2026-10-01_STAGE_A_ADMISSION_UNSATISFIABLE_AND_GUARD_VERSION_PIN_ROT_V1.json",
   "recursive_obs": {
@@ -154,7 +157,7 @@
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
-      "direct_real_effect_verification": "Ran the repaired reducer on all four live canonical ledgers: {\n\"rank18_freecad_impeller\": \"still UNEXPOSED__STAGE_A_PRE_EXPOSURE: pass=true STAGE_B_INSTRUCTION_EXPOSURE_ONLY, matching the recorded artifact field for field on pass, authorization, failed_predicates and task_execution_authorized\",\n\"rank19_satb_audio_transcription\": \"has legitimately advanced to INSTRUCTION_EXPOSED__STAGE_B_PASS__STAGE_C_ONE_SHOT_LEASED, so the reducer now refuses it with QUALIFICATION_CONTAMINATION_LEDGER while the recorded Stage-A pass stands as history; both branches are asserted\",\n\"rank17_data_anonymization\": \"pass=false NONE QUALIFICATION_CONTAMINATION_LEDGER (spent, source-boundary contaminated)\",\n\"rank16_session_window_debug\": \"pass=false NONE with QUALIFICATION_CONTAMINATION_LEDGER plus four exposure-search predicates (7 fields, no brain_pr_hits, no searched_surfaces)\"\n} Ran the repaired guard over the full diff: DRIFT_GUARD_PASS, 0 failures. Ran the base guard over the same diff: 3 failures, all POINTER_CONTROL_PATH_MISMATCH caused by the base guard's own frozen constants; a trivial sensitive change at base yields 20 failures including 8 cross-surface hierarchy mismatches. Ran the full suite selection at base and on this branch: base 28 failed / 417 passed / 1 skipped, this branch 19 failed / 454 passed / 1 skipped / 49 subtests, 9 tests fixed and 0 new failures.",
+      "direct_real_effect_verification": "Ran the repaired reducer on all four live canonical ledgers: {\n\"rank18_freecad_impeller\": \"still UNEXPOSED__STAGE_A_PRE_EXPOSURE: pass=true STAGE_B_INSTRUCTION_EXPOSURE_ONLY, matching the recorded artifact field for field on pass, authorization, failed_predicates and task_execution_authorized\",\n\"rank19_satb_audio_transcription\": \"has legitimately advanced to INSTRUCTION_EXPOSED__STAGE_B_PASS__STAGE_C_ONE_SHOT_LEASED, so the reducer now refuses it with QUALIFICATION_CONTAMINATION_LEDGER while the recorded Stage-A pass stands as history; both branches are asserted\",\n\"rank17_data_anonymization\": \"pass=false NONE QUALIFICATION_CONTAMINATION_LEDGER (spent, source-boundary contaminated)\",\n\"rank16_session_window_debug\": \"pass=false NONE with QUALIFICATION_CONTAMINATION_LEDGER plus four exposure-search predicates (7 fields, no brain_pr_hits, no searched_surfaces)\"\n} Ran the repaired guard over the full diff: DRIFT_GUARD_PASS, 0 failures. Ran the base guard over the same diff: 3 failures, all POINTER_CONTROL_PATH_MISMATCH caused by the base guard's own frozen constants; a trivial sensitive change at base yields 20 failures including 8 cross-surface hierarchy mismatches. Ran the full suite selection at base and on this branch: base 28 failed / 417 passed / 1 skipped, this branch 19 failed / 454 passed / 1 skipped / 49 subtests, 9 tests fixed and 0 new failures. Built canonical/runtime/reconcile_frontier_mirrors.py with 14 tests covering detection, repair, idempotence, byte-formatting preservation, counter immutability, authority boundaries and fail-closed refusals, then cross-checked it against the hand reconciliation: run on the stale base in a throwaway worktree it produced byte-identical output for four of the five files, differing only in the target record's current_execution, a semantic field the tool deliberately leaves alone.",
       "existing_oracle_considered": true,
       "existing_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after. Two recorded admission artifacts (rank18 and rank19) are also existing canonical verdicts now asserted reproducible inside the suite rather than left as unverifiable claims.",
       "synthetic_verification_necessity": "Adversarial mutations are written only to temporary copies; the frozen qualification ledgers and governance artifacts themselves are never modified, so no synthetic evidence is substituted for real canonical state. The v1 module's fixture tree is synthetic by existing design and was completed to match the current ten-item policy."
@@ -172,9 +175,10 @@
         "v1's predicate shape and its lease-revalidation and runner budget checks, now enforced identically by v2",
         "PREQUALIFICATION_FAILURE_IMMUNITY_V1 eight-surface and budget policy items, now bound into v2's policy floor",
         "the drift guard's existing cross-surface consistency checks, left intact and extended",
-        "test_frontier_target_mirror_firewall as a standing oracle for the reconciliation"
+        "test_frontier_target_mirror_firewall as a standing oracle for the reconciliation",
+        "test_frontier_target_mirror_firewall as a standing oracle, now reinforced by test_live_repository_is_reconciled which fails if the live canonical tree drifts"
       ],
-      "fresh_reuse_plan": "The repaired reducers are the admission oracle for rank20 and every later rank without further edits; the currency rule keeps the pointer honest on every future control-surface bump; the mirror reconciliation is re-runnable verbatim against whatever the hierarchy declares next, which matters because the base moved four times during this work alone."
+      "fresh_reuse_plan": "The repaired reducers are the admission oracle for rank20 and every later rank without further edits; the currency rule keeps the pointer honest on every future control-surface bump; and canonical/runtime/reconcile_frontier_mirrors.py recomputes all nine mirror fields plus control-path currency from the live hierarchy in one command, so the reconciliation no longer has to be redone by hand each time the base moves - which it did four times during this work alone."
     },
     "obs_obs": {
       "analysis_steps_deleted_or_cached": [
