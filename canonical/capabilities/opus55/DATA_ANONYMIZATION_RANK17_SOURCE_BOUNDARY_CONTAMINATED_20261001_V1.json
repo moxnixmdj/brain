@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TASK_DISPOSITION_V1",
+  "date": "2026-10-01",
+  "benchmark": "Terminal-Bench 4.0",
+  "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "rank": 17,
+  "task": "data-anonymization",
+  "status": "SOURCE_BOUNDARY_CONTAMINATED__SPENT__ZERO_CAPABILITY_VERDICT__DO_NOT_REPLAY",
+  "execution": {
+    "stage_b_runner_pr": 341,
+    "stage_c_runner_pr": 346,
+    "stage_c_session_id": "data-anonymization-stagec-20261001-v2",
+    "instruction_exposed": true,
+    "read_only_builder_bursts": 1,
+    "candidate_created": false,
+    "terminal_submission": false,
+    "hidden_verifier_read": false
+  },
+  "contamination": {
+    "class": "POST_STAGE_B_TASK_SPECIFIC_BROAD_REPOSITORY_SEARCH_RETURNED_FORBIDDEN_PATH_SNIPPETS",
+    "forbidden_path_classes": [
+      "README*",
+      "solution/**",
+      "tests/**"
+    ],
+    "cause": "Search results are repository-wide and can return paths outside the Stage-B allowlist even when the intent was to inspect one allowed generator.",
+    "required_repair": "AFTER_STAGE_B_EXPOSURE_FORBID_TASK_SPECIFIC_REPOSITORY_SEARCH__ALLOW_ONLY_EXACT_FETCH_OF_PREDECLARED_ALLOWLISTED_PATHS",
+    "bypass_attempted": false
+  },
+  "adjudication": [
+    "NO_CAPABILITY_SUCCESS_OR_FAILURE_INFERENCE",
+    "ZERO_CAPABILITY_CREDIT",
+    "TASK_SPENT_AFTER_INSTRUCTION_EXPOSURE",
+    "NO_REPLAY_FOR_PROMOTION",
+    "ADVANCE_FROZEN_ORDER_TO_RANK18_AFTER_COMPLETE_PRIOR_EXPOSURE_CHECK"
+  ],
+  "capability_credit_delta": 0,
+  "next_required_action": "PREQUALIFY_RANK18_FREECAD_IMPELLER_WITH_COMPLETE_8_SURFACE_BRAIN_AND_RUNNER_EXPOSURE_SEARCH__DO_NOT_READ_TASK_CONTENT"
+}
