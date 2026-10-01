@@ -129,6 +129,11 @@
       "id": "POST_EXPOSURE_TASK_SPECIFIC_EXTERNAL_SEARCH",
       "defense": "Before Stage-C promotion, require a machine-bound source-boundary receipt hashed to the canonical contamination ledger. Any task-specific external search/hints, solution/tests, hidden verifier access, or pre-Stage-C task execution makes promotion fail closed.",
       "required_evidence": "SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_PLUS_TASK_SPECIFIC_SOURCE_BOUNDARY_PREFLIGHT"
+    },
+    {
+      "id": "POST_EXPOSURE_DISCOVERY_SEARCH_COLLISION",
+      "defense": "After Stage-B task identity/instruction exposure, perform zero discovery search of any kind, including apparently generic web/repository queries. Only exact predeclared allowlisted task fetches and pre-exposure-frozen generic-reference URLs may be retrieved. Any unbounded-result query contaminates the task because ranking can surface task-specific or verifier-derived content.",
+      "required_evidence": "POST_EXPOSURE_ZERO_DISCOVERY_SEARCH_RECEIPT_PLUS_SOURCE_BOUNDARY_PREFLIGHT"
     }
   ],
   "fresh_qualification_admission_rule": "STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_READS_MUST_OBEY_TB4_SOURCE_ALLOWLIST__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
@@ -164,7 +169,8 @@
         "TASK_SPECIFIC_FEASIBILITY_CERTIFICATE",
         "TASK_SPECIFIC_EXECUTION_SURFACE_PARITY_CERTIFICATE",
         "TASK_SPECIFIC_TOOL_AUTHORITY_AND_RESOURCE_PREFLIGHT",
-        "TASK_SPECIFIC_SOURCE_BOUNDARY_PREFLIGHT"
+        "TASK_SPECIFIC_SOURCE_BOUNDARY_PREFLIGHT",
+        "POST_EXPOSURE_ZERO_DISCOVERY_SEARCH_RECEIPT"
       ],
       "failure_disposition": "INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE"
     },
@@ -188,6 +194,13 @@
       "observed": "Stage-B feasibility passed on GitHub Actions setup-python CPython 3.12, while the actual Ubuntu 24.04 task image used Debian-managed Python and rejected system pip under PEP 668. The one allowed builder burst was spent before task audio analysis.",
       "repair": "Require exact-or-materially-equivalent task-container execution-surface parity before Stage-C authorization.",
       "fresh_evidence_cost_avoided": "Generic environment/package failures must be discovered before untouched qualification execution."
+    },
+    {
+      "id": "RANK21_GENERIC_QUERY_COLLISION_REPAIR_20261001",
+      "source": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
+      "observed": "A general-method discovery query issued after Stage-B exposure returned task-specific verifier-derived content even though the query text was not task-specific.",
+      "repair": "Forbid all post-exposure discovery search; permit only exact allowlisted/pre-frozen fetches.",
+      "fresh_evidence_cost_avoided": "Prevents search-engine ranking from contaminating untouched tasks after identity exposure."
     }
   ],
   "verified_generic_controls": {
