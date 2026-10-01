@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1",
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "status": "CANONICAL_EXECUTION_POLICY__FAIL_CLOSED__ZERO_CAPABILITY_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "purpose": "Minimize wall-clock time to truthful terminal ownership by making verified proof state drive execution and by forbidding meta-optimization from delaying an already-valid proof-producing action.",
+  "purpose": "Minimize wall-clock time and newly generated reality information to truthful terminal ownership by saturating existing evidence, applying deductive and counterfactual closure, and spending fresh evidence only on irreducible terminal-relevant distinctions.",
   "authority_order": [
     "IMMUTABLE_REALITY_RECEIPTS",
     "TRUSTED_VERIFICATION",
@@ -42,9 +42,13 @@
   },
   "execution_ladder": [
     "COMPILED_REFLEX_OR_TRIGGER",
-    "DIRECT_NONDOMINATED_PROOF_ACTION",
-    "CHEAP_REVERSIBLE_INDEPENDENT_RACE",
-    "CHEAPEST_DISCRIMINATING_EXPERIMENT",
+    "EXISTING_EVIDENCE_SATURATION",
+    "DEDUCTIVE_CLOSURE",
+    "COUNTERFACTUAL_TERMINAL_COMPILATION",
+    "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
+    "EXACT_MINIMUM_REALITY_CUT",
+    "DIRECT_NONDOMINATED_IRREDUCIBLE_PROOF_ACTION",
+    "CHEAP_REVERSIBLE_INDEPENDENT_RACE_ONLY_WITHIN_MINIMUM_REALITY_CUT",
     "EXPENSIVE_SYNTHESIS_OR_RESEARCH_ONLY_FOR_IRREDUCIBLE_RESIDUE"
   ],
   "action_contract_required_fields": [
@@ -64,18 +68,23 @@
     "delete_action_if": "ANOTHER_ACTION_CLOSES_AT_LEAST_THE_SAME_PROOF_OBLIGATIONS_WITH_NO_GREATER_COST_NO_LOWER_REVERSIBILITY_AND_NO_GREATER_EVIDENCE_RISK"
   },
   "fresh_evidence_kill_ladder": [
+    "RECOVER_EXISTING_CANONICAL_OR_EXTERNAL_ADMISSIBLE_EVIDENCE",
     "STATIC_INCOMPATIBILITY",
     "LICENSE_DEPENDENCY_DONOR_AND_AUTHORITY_CHECKS",
+    "DETERMINISTIC_AND_FORMAL_DEDUCTIVE_CLOSURE",
     "DETERMINISTIC_COUNTEREXAMPLES",
     "HISTORICAL_SPENT_CASES",
     "ADVERSARIAL_SPENT_CASES",
-    "TINY_EXECUTABLE_REPLAY",
-    "FRESH_MICRO_TEST",
-    "FRESH_TERMINAL_TEST",
+    "COUNTERFACTUAL_WORLD_ELIMINATION",
+    "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
+    "EXACT_MINIMUM_REALITY_CUT",
+    "TINY_EXECUTABLE_REPLAY_ONLY_IF_CUT_MEMBER",
+    "FRESH_MICRO_TEST_ONLY_IF_CUT_MEMBER",
+    "FRESH_TERMINAL_TEST_ONLY_IF_CUT_MEMBER",
     "ABLATION_RESCUE_SPECIFICITY",
     "DONOR_DELETION_CLEANROOM"
   ],
-  "evidence_rule": "FRESH_EVIDENCE_IS_ONE_USE_PROOF_AMMUNITION__DO_NOT_SPEND_IT_TO_DISCOVER_PREFLIGHT_FAILURES",
+  "evidence_rule": "NEVER_GENERATE_TERMINAL_RELEVANT_INFORMATION_THAT_ALREADY_EXISTS_OR_CAN_BE_DEDUCED__FRESH_EVIDENCE_IS_ONE_USE_PROOF_AMMUNITION__REALITY_QUERY_ONLY_FOR_IRREDUCIBLE_MINIMUM_CUT",
   "execution_zones": {
     "GREEN": "VERIFIED_CANONICAL_TRUTH",
     "YELLOW": "ISOLATED_SPECULATIVE_WORK__CANNOT_MUTATE_CANONICAL_STATE",
@@ -108,7 +117,7 @@
     "goal": "CONTINUOUSLY_REDUCE_FUTURE_RUNTIME_REASONING"
   },
   "meta_optimization_guard": {
-    "hard_rule": "IF_A_VALID_ACTION_CAN_ADVANCE_OR_DISCRIMINATE_THE_CURRENT_SMALLEST_BLOCKING_PROOF_HOLE_NOW__META_OPTIMIZATION_IS_FORBIDDEN__EXECUTE",
+    "hard_rule": "IF_A_VALID_ACTION_CAN_ADVANCE_OR_DISCRIMINATE_THE_CURRENT_SMALLEST_BLOCKING_PROOF_HOLE_NOW__DO_NOT_DELAY_IT__NEW_INFORMATION_MINIMIZATION_CONTROLS_APPLY_PROSPECTIVELY_AND_MUST_NOT_REVOKE_ALREADY_VALID_CURRENT_PROOF_AUTHORITY",
     "optimizer_change_admission": [
       "CONCRETE_OBSERVED_CONTROLLER_MISTAKE",
       "MEASURABLE_AVOIDABLE_TERMINAL_DELAY",
@@ -127,8 +136,27 @@
     "prequalification": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "staged_qualification_semantics": "STAGE_A_PRE_EXPOSURE__STAGE_B_POST_EXPOSURE_PRE_EXECUTION__STAGE_C_ONE_SHOT_EXECUTION",
-    "live_hierarchy_remains_frontier_authority": true
+    "live_hierarchy_remains_frontier_authority": true,
+    "evidence_saturation_and_minimum_reality_query_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "counterfactual_terminal_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "minimum_reality_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "grandfathered_current_action": "RANK22_FREECAD_SPRING_CLIP_STAGE_C_MAY_CONTINUE_WHILE_DERIVED_CAN_EXECUTE_TRUE_AND_AUTHORITY_CURRENT"
   },
   "termination": "STOP_ONLY_WHEN_TERMINAL_CLOSURE_REDUCER_RETURNS_TRUE",
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "reality_query_admission": {
+    "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "exact_minimum_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "required_before_new_fresh_evidence_spend": true,
+    "existing_evidence_saturation_required": true,
+    "deductive_closure_required": true,
+    "counterfactual_world_reduction_required": true,
+    "dominance_deletion_required": true,
+    "terminal_decision_value_required": true,
+    "minimum_reality_cut_membership_required": true,
+    "approximation_cannot_be_labeled_minimum": true,
+    "same_information_reacquisition_forbidden_without_documented_invalidation": true,
+    "fail_closed_on_unknown": true
+  }
 }
