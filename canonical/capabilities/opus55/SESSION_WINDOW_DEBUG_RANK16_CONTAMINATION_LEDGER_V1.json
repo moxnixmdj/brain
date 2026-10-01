@@ -6,7 +6,7 @@
   "task_identity_sha256": "5df6bc292b2d76c3f5832db8e6ef134a1cb5030fcc965ee6997381243e64e49d",
   "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
   "sample_manifest_blob_sha": "4f0113c2fd670d7d4cb9b267593225f8b66f4ab6",
-  "state": "OFFICIAL_INSTRUCTION_EXPOSED__STAGE_B_BEHAVIOR_CONTRACT_FREEZE",
+  "state": "INSTRUCTION_EXPOSED__STAGE_B_PRE_EXECUTION",
   "instruction_read": true,
   "hidden_verifier_read": false,
   "task_specific_hints_read": false,
@@ -28,7 +28,7 @@
     "runner_pr_hits": 0
   },
   "disqualifying_exposure_events": [],
-  "clean_for_stage_b_exposure": true,
+  "clean_for_stage_b_exposure": false,
   "rule": "ANY_TASK_SPECIFIC_INSTRUCTION_SOLUTION_VERIFIER_OR_HINT_ACCESS_MUST_BE_APPENDED_IMMEDIATELY_AND_CHANGES_STATE_FROM_UNEXPOSED",
   "exposure_events": [
     {
@@ -80,5 +80,15 @@
     }
   ],
   "stage_a_admission": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_STAGE_A_ADMISSION_V1.json",
-  "task_execution_authorized": false
+  "task_execution_authorized": false,
+  "instruction_source": {
+    "repository": "harbor-framework/terminal-bench",
+    "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "path": "tasks/session-window-debug/instruction.md",
+    "blob_sha": "81a3e9aeddcbc01ba12ae480e06340ef82d62878"
+  },
+  "task_metadata_read": true,
+  "task_metadata_path": "tasks/session-window-debug/task.toml",
+  "task_metadata_blob_sha": "a0f4cc0491c7b5b2c4d59c39afd557c8648aad28",
+  "stage_b_required_before_execution": true
 }
