@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_RESEARCH_RESULT_EVIDENCE_V1",
+  "task_id": "PARENT-OPENENDED-HTTP2-FLOW-CONTROL-LIMITS-REAL-TASK-20260930-003",
+  "record_type": "EVIDENCE_PROVENANCE__NOT_A_CAPABILITY_CREDIT_OR_PROMOTION_CLAIM",
+  "status": "ANSWERED_WITH_VERIFIED_PROVENANCE__VIA_SANCTIONED_CAPABILITY_ACQUISITION_ROUTE",
+  "note": "The frozen ASTRA mission fail-closed at SOURCE_DISCOVERY because its web-search backends (Bing/DuckDuckGo/Crossref) are not reachable from this execution surface. The project's sanctioned acquisition route (relay-allowlist hosts pypi.org / registry.npmjs.org / api.github.com) IS reachable, so the research was completed model-independently by acquiring a real, hash-verified HTTP/2 implementation and running a real executable check plus an independent recomputation. This is provenance evidence of a real model-independent research result; it asserts no Opus 5.5 credit and does not replay the frozen mission.",
+  "research_plan": [
+    "resolve an authoritative HTTP/2 implementation from the sanctioned pypi host",
+    "hash-verify the acquired source against the registry-declared sha256",
+    "extract the normative initial-stream flow-control window default and maximum from real source",
+    "run a real executable check comparing maximum vs default",
+    "independently recompute both bounds from the protocol field widths and confirm agreement",
+    "state material protocol-scope and interpretation limitations"
+  ],
+  "source_provenance": {
+    "package": "h2",
+    "version": "4.4.1",
+    "source_url": "https://files.pythonhosted.org/packages/e7/85/7c366e69d84c17bb778fe41419e1fbcce3033d5b7ce29bbffff0a98b859f/h2-4.4.1.tar.gz",
+    "registry": "https://pypi.org/pypi/h2/json",
+    "declared_sha256": "4e866ffb1a869ae14dd9b5e6beb5c24a13da0495ad72b65925ded182521c1516",
+    "observed_sha256": "4e866ffb1a869ae14dd9b5e6beb5c24a13da0495ad72b65925ded182521c1516",
+    "hash_verified": true,
+    "bytes": 2157281,
+    "authoritative_lines": {
+      "default_initial_stream_window": "src/h2/settings.py:140  SettingCodes.INITIAL_WINDOW_SIZE: collections.deque([65535])",
+      "max_initial_window_setting": "src/h2/settings.py:352  if not 0 <= value <= 2147483647:  # 2^31 - 1",
+      "largest_flow_control_window": "src/h2/windows.py:19  LARGEST_FLOW_CONTROL_WINDOW = 2**31 - 1",
+      "max_window_increment": "src/h2/connection.py:317  MAX_WINDOW_INCREMENT = 2**31 - 1"
+    }
+  },
+  "tool_provenance": {
+    "acquisition": "urllib GET of pypi JSON metadata + sdist from sanctioned hosts",
+    "hash": "hashlib.sha256 over downloaded bytes",
+    "extraction": "tarfile + regex over real source lines",
+    "executable_check": "pure-Python integer comparison over extracted constants",
+    "independent_verification": "recomputation from protocol field widths (16-bit default, 31-bit window), no h2 import",
+    "incremental_spend_usd": 0
+  },
+  "experiment": {
+    "default_initial_stream_window": 65535,
+    "max_permitted_window": 2147483647,
+    "comparison": "max_permitted_window > default_initial_stream_window",
+    "result": true
+  },
+  "observations": [
+    "Default initial stream flow-control window (SETTINGS_INITIAL_WINDOW_SIZE) = 65,535 = 2^16 - 1.",
+    "Maximum permitted flow-control window = 2^31 - 1 = 2,147,483,647 (LARGEST_FLOW_CONTROL_WINDOW; SETTINGS_INITIAL_WINDOW_SIZE upper bound; MAX_WINDOW_INCREMENT).",
+    "2,147,483,647 > 65,535."
+  ],
+  "decision": "YES. The maximum permitted HTTP/2 initial stream flow-control window (2^31 - 1 = 2,147,483,647 bytes) is greater than the protocol's default initial stream flow-control window (2^16 - 1 = 65,535 bytes).",
+  "limitations": [
+    "Grounded in the h2 4.4.1 implementation of RFC 9113 (hash-verified) plus protocol field-width reasoning; the RFC text at rfc-editor.org was not fetched because that host is outside the sanctioned relay allowlist, but h2 encodes the RFC's normative constants and enforces them at runtime.",
+    "'Initial stream flow-control window' is interpreted as SETTINGS_INITIAL_WINDOW_SIZE; the connection-level and stream-level initial windows share the same 2^31 - 1 ceiling and the same 65,535 default.",
+    "2^31 - 1 is a protocol-encoded ceiling, not a value every endpoint must accept; endpoints may advertise lower maxima and must treat a window above 2^31 - 1 as a FLOW_CONTROL_ERROR.",
+    "This is a bounded, decision-quality assessment of one boolean protocol relation; it does not by itself establish whole-family research parity or any Opus 5.5 credit."
+  ],
+  "independent_verification": {
+    "method": "recompute both bounds from the flow-control field widths without importing h2",
+    "independent_default": 65535,
+    "independent_max": 2147483647,
+    "independent_result": true,
+    "agrees_with_extracted_source": true
+  },
+  "model_dependency_count": 0,
+  "cognition_dependency_class": "DETERMINISTIC__STDLIB_PLUS_HASH_VERIFIED_ACQUIRED_LIBRARY",
+  "cognition_provenance_authority": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_ENGINE__MODEL_INDEPENDENT",
+  "recorded_utc": "2026-10-01T00:00:00Z"
+}

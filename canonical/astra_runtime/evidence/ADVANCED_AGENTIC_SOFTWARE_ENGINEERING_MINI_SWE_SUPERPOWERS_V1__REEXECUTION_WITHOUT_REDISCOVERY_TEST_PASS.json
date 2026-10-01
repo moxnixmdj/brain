@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_CAPABILITY_OWNERSHIP_TEST_RECEIPT_V1",
+  "record_type": "VERIFICATION_RUN_RECEIPT__SINGLE_OWNERSHIP_TEST__NOT_AN_OWNERSHIP_OR_CREDIT_CLAIM",
+  "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "test": "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+  "test_definition_source": "canonical/action_intents/2026-09-30_COMPOSE_MINI_SWE_SUPERPOWERS_V1.json -> ownership_tests.REEXECUTION_WITHOUT_REDISCOVERY_TEST = PASS_IF_PACKAGE_VERIFIER_PASSES",
+  "verifier": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verify_package.py",
+  "command": "python3 canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verify_package.py",
+  "result": "BRAIN_MINI_SWE_SUPERPOWERS_COMPOSED_PACKAGE_PASS",
+  "exit_code": 0,
+  "what_was_verified": [
+    "underlying_capability_invention is False",
+    "opus_5_5_credit == 0",
+    "harness base_config_blob matches git hash-object of mini.yaml",
+    "harness manifest_blob matches mini_swe_agent_2_4_6 INTERNALIZATION_MANIFEST.json",
+    "methodology manifest_blob matches superpowers_6_4_2 INTERNALIZATION_MANIFEST.json",
+    "methodology evaluation_protocol_blob matches superpowers_6_4_2 EVALUATION_PROTOCOL_V1.json",
+    "all 13 methodology skill_pins match git hash-object of their SKILL.md",
+    "build_overlay.py produces overlay.yaml starting with the required header, containing BRAIN FAIL-CLOSED COMPLETION CONTRACT, and containing every SUPER POWERS SKILL pin"
+  ],
+  "remaining_ownership_tests_status": {
+    "BRAIN_ARTIFACT_TEST": "PASS (files exist)",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_FOR_CONFIGURATION",
+    "GENERAL_SUBSTRATE_TEST": "PASS_ARCHITECTURALLY__EXECUTION_PENDING",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS__THIS_RECEIPT",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PENDING_FRESH_EXECUTION",
+    "OWNERSHIP_PACKAGE_TEST": "PENDING_FINAL_PERFORMANCE_VERIFICATION"
+  },
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "claim_scope": "ONE ownership test (REEXECUTION_WITHOUT_REDISCOVERY) passes deterministically and model-independently. This is NOT whole-capability ownership, NOT an Opus 5.5 credit, and does not advance the canonical scoreboard. Whole-capability credit remains gated on BRAIN_CONFIGURED_VERIFICATION_TEST and OWNERSHIP_PACKAGE_TEST (>= Opus 5.5 performance verification).",
+  "next_required_step": "Authorized fresh execution on Terminal-Bench 4.0 task html-js-filter (lease 2026-09-30_LEASE_HTML_JS_FILTER_TB4_V1, release_commit 452bf305c6daa62fc59061d22133a7cbc7c1572e), with independent public GitHub Actions verifier.",
+  "recorded_utc": "2026-10-01T00:00:00Z"
+}

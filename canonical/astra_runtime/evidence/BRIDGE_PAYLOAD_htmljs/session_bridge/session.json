@@ -1,0 +1,16 @@
+{
+  "session_id": "htmljs-001",
+  "task": "html-js-filter",
+  "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "observation_branch": "bridge-observations/htmljs-001",
+  "session_timeout_sec": 7200,
+  "max_steps": 20,
+  "poll_interval_sec": 5,
+  "command_timeout_sec": 600,
+  "build_timeout_sec": 1800,
+  "verifier_build_timeout_sec": 1800,
+  "verifier_timeout_sec": 1800,
+  "observation_char_limit": 120000,
+  "verifier_output_char_limit": 120000,
+  "_note": "control_branch defaults to GITHUB_HEAD_REF (the bridge PR head branch). Drop this file at session_bridge/session.json on the bridge branch."
+}
