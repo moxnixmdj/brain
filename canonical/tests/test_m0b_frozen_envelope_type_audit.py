@@ -45,5 +45,22 @@ class Tests(unittest.TestCase):
         e=validate(registry(["A","NEW"]),b,SUPPORTED)
         self.assertIn("FROZEN_BEHAVIOR_UNTYPED:NEW",e)
 
+
+    def test_live_frozen_registry_compiles_all_bindings(self):
+        from canonical.runtime.requirement_acceptance_compiler import compile_requirements
+        with open("canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",encoding="utf-8") as f:
+            reg=json.load(f)
+        with open("canonical/governance/M0B_FROZEN_ENVELOPE_TYPE_BINDINGS_V1.json",encoding="utf-8") as f:
+            b=json.load(f)
+        self.assertEqual(validate(reg,b,SUPPORTED),[])
+        rows=[
+            {"id":row["behavior_id"],"transform_kinds":row["transform_kinds"]}
+            for row in b["bindings"]
+        ]
+        out=compile_requirements(rows)
+        self.assertEqual(out["status"],"COMPILED",out)
+        self.assertEqual(out["requirement_count"],len(reg["active_contracted_residuals"]))
+        self.assertTrue(all(p["required_failure_modes"] for p in out["plans"]))
+
 if __name__=="__main__":
     unittest.main()
