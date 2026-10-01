@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_RANK17_ABSORBING_SPEND_RESTORATION_V1",
+  "date": "2026-10-01",
+  "status": "CANONICAL_TRUTH_RESTORED__ZERO_CAPABILITY_CREDIT",
+  "falsified_states": [
+    "RANK17_STAGE_C_V3_ONE_SHOT_AUTHORIZED",
+    "RANK17_STAGE_C_V4_ONE_SHOT_AUTHORIZED"
+  ],
+  "authoritative_receipt": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_SOURCE_BOUNDARY_CONTAMINATED_20261001_V1.json",
+  "authoritative_commit": "76205584b0cf095caa20f2d4862d27766f8b39e2",
+  "runner_pr": 346,
+  "disposition": "SOURCE_BOUNDARY_CONTAMINATED__SPENT__ZERO_CAPABILITY_VERDICT__DO_NOT_REPLAY",
+  "candidate_created": false,
+  "terminal_verifier_runs": 0,
+  "invariant": "AN_ABSORBING_TASK_SPEND_OR_CONTAMINATION_RECEIPT_CANNOT_BE_OVERRIDDEN_BY_A_LATER_EXECUTION_LEASE",
+  "next_frontier": {
+    "rank": 18,
+    "task": "freecad-impeller",
+    "runner_pr": 354
+  },
+  "incremental_spend_usd": 0
+}
