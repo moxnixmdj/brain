@@ -133,7 +133,9 @@
       "statistical_promotion_plan_if_applicable",
       "donor_deletion_plan_if_applicable",
       "composition_qualification_plan",
-      "evidence_saturation_and_minimum_reality_cut_receipt"
+      "evidence_saturation_and_minimum_reality_cut_receipt",
+      "exact_active_carrier_authority",
+      "post_transition_authority_revalidation"
     ],
     "fail_closed_on_unknown": true,
     "control_matrix": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
@@ -141,6 +143,18 @@
       "STAGE_A_PRE_EXPOSURE": "No task instruction or task-specific hint may be read. Prove generic route/surface readiness.",
       "STAGE_B_POST_EXPOSURE_PRE_EXECUTION": "Official instruction may be read. No task command or candidate execution. Compile and falsify task-specific plan.",
       "STAGE_C_EXECUTION": "Only after A and B pass; execute once and independently verify."
+    },
+    "exact_carrier_authority": {
+      "reducer": "canonical/runtime/execution_authority_reducer.py",
+      "required_receipt_fields": [
+        "active_carrier_binding_sha256",
+        "state_sha256",
+        "can_execute",
+        "can_verify"
+      ],
+      "second_carrier_open_forbidden": true,
+      "static_authority_hash_without_carrier_identity_forbidden": true,
+      "revalidate_after_last_material_transition_before_irreversible_command": true
     }
   },
   "required_terminal_proof_control": {
