@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+    "exact_blocker": "RANK20_STAGE_B_POST_EXPOSURE_PRE_EXECUTION_CONTRACT_NOT_YET_ESTABLISHED",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
+    "next_action": "EXPOSE_RANK20_OFFICIAL_INSTRUCTION_ONCE_UNDER_STAGE_B_ONLY__NO_TASK_EXECUTION__COMPILE_BEHAVIORAL_CONTRACT_REQUIREMENT_GRAPH_INDEPENDENT_ACCEPTANCE_AND_EXACT_SURFACE_PARITY",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -121,9 +121,11 @@
         "intrastat-meldung"
       ],
       "current_task": {
-        "rank": 10,
-        "task": "cad-model",
-        "state": "LEASED_FRESH_TASK__INSTRUCTION_UNREAD"
+        "rank": 20,
+        "task": "vba-userform-port",
+        "state": "STAGE_A_PASS__STAGE_B_EXPOSURE_ONLY__TASK_EXECUTION_FORBIDDEN",
+        "stage_a_evidence": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_STAGE_A_ADMISSION_V1.json",
+        "independent_workflow_run_id": 36926686092
       },
       "comparable_score_established": false,
       "surface_skipped_unspent": [
