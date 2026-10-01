@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
-import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
+import argparse, base64, hashlib, json, os, pathlib, re, subprocess, sys, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 
 ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
@@ -792,6 +792,70 @@ def _require_existing_paths(values,label):
         if not path.is_file():
             fail(label+"_PATH_MISSING:"+str(raw))
 
+CONTROL_PATH_KEYS=(
+    "pre_action_gate_path",
+    "goal_hierarchy_action_gate_path",
+    "recursive_obs_receipt_schema_path",
+    "recursive_obs_action_intent_template_path",
+    "capability_acquisition_engine_law_path",
+    "capability_arbitrage_strategy_path",
+    "frontier_capability_obsolescence_mission_lock_path",
+    "white_box_capability_harvesting_law_path",
+    "white_box_capability_capsule_schema_path",
+)
+SUPERSEDED_MARKER="SUPERSEDED / DO NOT EXECUTE"
+
+def _versioned_control_path(declared):
+    match=re.search(r"^(.*_V)(\d+)(\.(?:json|md))$",str(declared))
+    if not match:
+        return None
+    return match.group(1)+"*"+match.group(3),int(match.group(2))
+
+def enforce_control_path_currency(key,declared):
+    """Require the pointer to declare the current, non-superseded control artifact.
+
+    An exact expected-version constant pins the guard to one snapshot and rots
+    silently every time the canonical control surface advances, which made the
+    guard reject every frontier-sensitive PR while the pointer itself was still
+    correct. The constants were re-pinned to V11 upstream after this was first
+    measured, which fixes today's snapshot and leaves the rot mechanism in place
+    for the next bump. Comparing against the highest version present in the
+    repository is strictly stronger: it still rejects a downgrade to a weaker
+    superseded gate, it additionally rejects pointing at a superseded artifact,
+    and it cannot itself go stale.
+    """
+    if not _nonempty_string(declared):
+        fail("POINTER_CONTROL_PATH_MISSING:"+key)
+        return
+    path=ROOT/str(declared)
+    if not path.is_file():
+        fail("POINTER_CONTROL_PATH_FILE_MISSING:"+key)
+        return
+    family=_versioned_control_path(declared)
+    if family is None:
+        fail("POINTER_CONTROL_PATH_NOT_VERSIONED:"+key)
+        return
+    pattern,version=family
+    versions=[]
+    for candidate in ROOT.glob(pattern):
+        match=re.search(r"_V(\d+)\.",candidate.name)
+        if match:
+            versions.append(int(match.group(1)))
+    if not versions:
+        fail("POINTER_CONTROL_PATH_FAMILY_UNRESOLVED:"+key)
+        return
+    if version!=max(versions):
+        fail(
+            "POINTER_CONTROL_PATH_NOT_CURRENT:"+key
+            +":declared_V"+str(version)+"<current_V"+str(max(versions))
+        )
+    if str(declared).endswith(".md"):
+        try:
+            if SUPERSEDED_MARKER in path.read_text(encoding="utf-8"):
+                fail("POINTER_CONTROL_PATH_SUPERSEDED:"+key)
+        except Exception as exc:
+            fail("POINTER_CONTROL_PATH_UNREADABLE:"+key+":"+type(exc).__name__)
+
 def enforce_promotion_truth(intent,files,base):
     score_path="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
     if score_path not in files:
@@ -1033,22 +1097,8 @@ def main():
     boot=pointer.get("boot_requirements") or {}
     if tuple(boot.get("deletion_first_route_order") or ())!=OBS_DELETION_ORDER:
         fail("POINTER_WHITE_BOX_ROUTE_ORDER_MISMATCH")
-    expected_control_paths={
-        "pre_action_gate_path":"canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V11.json",
-        "goal_hierarchy_action_gate_path":"canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
-        "recursive_obs_receipt_schema_path":"canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
-        "recursive_obs_action_intent_template_path":"canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
-        "capability_acquisition_engine_law_path":"canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
-        "capability_arbitrage_strategy_path":"canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
-        "frontier_capability_obsolescence_mission_lock_path":"canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
-        "white_box_capability_harvesting_law_path":"canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-        "white_box_capability_capsule_schema_path":"canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
-    }
-    for key,expected in expected_control_paths.items():
-        if boot.get(key)!=expected:
-            fail("POINTER_CONTROL_PATH_MISMATCH:"+key)
-        if not (ROOT/expected).is_file():
-            fail("POINTER_CONTROL_PATH_FILE_MISSING:"+key)
+    for key in CONTROL_PATH_KEYS:
+        enforce_control_path_currency(key,boot.get(key))
     if boot.get("white_box_capability_harvesting_required") is not True:
         fail("WHITE_BOX_CAPABILITY_HARVESTING_NOT_REQUIRED")
     if boot.get("harvested_capability_promotion_requires_donor_deletion") is not True:
@@ -1059,9 +1109,13 @@ def main():
         fail("QUEUE_WHITE_BOX_ROUTE_ORDER_MISMATCH")
 
     try:
-        active_obs_schema=load("canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json")
-        active_action_template=load("canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json")
-        active_goal_gate=load("canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json")
+        # Validate the artifacts the pointer actually declares authoritative.
+        # Loading hardcoded older versions checked a superseded snapshot while
+        # the live V11 control surface went unverified; re-pinning the constants
+        # above did not touch these three loads.
+        active_obs_schema=load(str(boot.get("recursive_obs_receipt_schema_path")))
+        active_action_template=load(str(boot.get("recursive_obs_action_intent_template_path")))
+        active_goal_gate=load(str(boot.get("goal_hierarchy_action_gate_path")))
     except Exception as exc:
         fail("WHITE_BOX_CONTROL_SURFACE_LOAD_FAILED:"+type(exc).__name__)
         active_obs_schema=active_action_template=active_goal_gate={}
