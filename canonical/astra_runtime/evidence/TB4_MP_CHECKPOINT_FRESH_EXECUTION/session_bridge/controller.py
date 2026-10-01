@@ -154,7 +154,10 @@ def main():
             "BRAIN_REPO_ROOT": str(ROOT),
             "BRAIN_OBSERVATION_DIR": str(OBS),
             "BRAIN_CONTROL_BRANCH": os.environ.get("GITHUB_HEAD_REF", ""),
-            "BRAIN_OBSERVATION_BRANCH": CFG["observation_branch"],
+            # the per-attempt branch from init_obs(), NOT the fixed configured
+            # name: overriding it here made every concurrent attempt force-push
+            # its observations over every other attempt's.
+            "BRAIN_OBSERVATION_BRANCH": obs_branch,
             "BRAIN_SESSION_ID": CFG["session_id"],
             "BRAIN_COMMAND_PREFIX": CFG["command_prefix"],
             "BRAIN_POLL_INTERVAL_SEC": str(CFG.get("poll_interval_sec", 3)),

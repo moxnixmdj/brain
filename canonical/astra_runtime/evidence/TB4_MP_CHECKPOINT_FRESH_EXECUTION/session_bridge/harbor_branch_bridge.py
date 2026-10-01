@@ -38,12 +38,37 @@ def run_host(*args, check=True):
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 
 
+FETCH_STATUS = {"ok": None, "detail": ""}
+
+
 def fetch_file(rel: str):
-    cp = run_host("git", "fetch", "--quiet", "origin", CONTROL, check=False)
-    if cp.returncode:
-        return None
-    cp = run_host("git", "show", f"FETCH_HEAD:{rel}", check=False)
-    return cp.stdout if cp.returncode == 0 else None
+    """Read a control-branch file.
+
+    A real fetch is attempted first so that commands pushed *after* this run
+    started are still picked up, but a failed fetch must never hide a command
+    that is already present in the checkout this run was started from: that
+    used to wedge the whole session, because the agent would sit at
+    READY_FOR_COMMAND forever waiting for a step it could not see.  The fetch
+    outcome is recorded in FETCH_STATUS so it shows up in status.json.
+    """
+    tracking = f"refs/remotes/origin/{CONTROL}"
+    ok, detail = False, "no fetch attempted"
+    for args in (["fetch", "--quiet", "origin", f"+{CONTROL}:{tracking}"],
+                 ["fetch", "--quiet", "origin", CONTROL]):
+        cp = run_host("git", *args, check=False)
+        if cp.returncode == 0:
+            ok, detail = True, "ok"
+            break
+        detail = ((cp.stdout or "") + (cp.stderr or "")).strip()[-300:]
+    FETCH_STATUS["ok"], FETCH_STATUS["detail"] = ok, detail
+    for spec in (f"{tracking}:{rel}", f"FETCH_HEAD:{rel}"):
+        cp = run_host("git", "show", spec, check=False)
+        if cp.returncode == 0:
+            return cp.stdout
+    local = ROOT / rel
+    if local.is_file():
+        return local.read_text(encoding="utf-8")
+    return None
 
 
 def commit_obs(rel: str, value, message: str):
@@ -201,7 +226,10 @@ class HarborBranchBridgeAgent(BaseAgent):
             commit_obs(f"{PREFIX}/observations/{step:03d}.json", obs,
                        f"harbor bridge: observation step {step}")
             commit_obs(f"{PREFIX}/status.json", {
-                "status": "READY_FOR_COMMAND", "session_id": SESSION, "next_step": step + 1
+                "status": "READY_FOR_COMMAND", "session_id": SESSION,
+                "next_step": step + 1,
+                "control_branch_fetch": FETCH_STATUS,
+                "control_branch": CONTROL,
             }, f"harbor bridge: ready step {step+1}")
 
         commit_obs(f"{PREFIX}/status.json", {
