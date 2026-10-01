@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_EXECUTION_SURFACE_CERTIFICATE_V1",
+  "date": "2026-10-01",
+  "status": "STAGE_A_GENERIC_SURFACE_PASS__TASK_SPECIFIC_SURFACE_UNCLAIMED",
+  "runner_repository": "moxnixmdj/verification-capsule-runner",
+  "verified": [
+    {
+      "predicate": "EXECUTION_GUARD_COMPILES_AND_REJECTS_DIRECT_BYPASS",
+      "workflow_run_id": 36909004325,
+      "job_id": 110526679009,
+      "conclusion": "success"
+    },
+    {
+      "predicate": "ARTIFACT_STAGING_AND_VERIFIER_HANDOFF_PATH_REGRESSION",
+      "workflow_run_id": 36828009487,
+      "job_id": 110257951033,
+      "conclusion": "success"
+    },
+    {
+      "predicate": "PYTHON_3_12_CHECKOUT_AND_INDEPENDENT_BRAIN_BLOB_EXECUTION",
+      "workflow_run_id": 36909004095,
+      "job_id": 110526679108,
+      "conclusion": "success"
+    }
+  ],
+  "stage_a_claims": [
+    "PUBLIC_GITHUB_ACTIONS_RUNNER_REACHABLE",
+    "REPOSITORY_CHECKOUT_FUNCTIONAL",
+    "PYTHON_VERIFICATION_SURFACE_FUNCTIONAL",
+    "GLOBAL_EXECUTION_GUARD_REGRESSION_PASS",
+    "KNOWN_ARTIFACT_HANDOFF_PATH_REGRESSION_PASS"
+  ],
+  "explicitly_not_claimed": [
+    "RANK15_TASK_SPECIFIC_DEPENDENCIES",
+    "RANK15_REQUIRED_HARDWARE",
+    "RANK15_TOOL_AUTHORITY",
+    "RANK15_RUNTIME_RESOURCE_SUFFICIENCY"
+  ],
+  "next": "TASK_SPECIFIC_SURFACE_MUST_BE_CERTIFIED_ONLY_IN_STAGE_B_AFTER_OFFICIAL_INSTRUCTION_EXPOSURE_AND_BEFORE_TASK_EXECUTION",
+  "incremental_spend_usd": 0
+}
