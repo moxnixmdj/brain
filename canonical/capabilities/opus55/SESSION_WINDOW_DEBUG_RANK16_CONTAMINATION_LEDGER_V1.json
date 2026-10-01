@@ -6,10 +6,10 @@
   "task_identity_sha256": "5df6bc292b2d76c3f5832db8e6ef134a1cb5030fcc965ee6997381243e64e49d",
   "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
   "sample_manifest_blob_sha": "4f0113c2fd670d7d4cb9b267593225f8b66f4ab6",
-  "state": "INSTRUCTION_EXPOSED__PRIOR_HISTORICAL_EXPOSURE_CONFIRMED__INELIGIBLE__NO_TASK_EXECUTION__ZERO_VERDICT",
+  "state": "CONTAMINATED_DURING_STAGE_B__TASK_SPECIFIC_SOLUTION_HINTS_READ__NO_TASK_EXECUTION__ZERO_VERDICT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE",
   "instruction_read": true,
   "hidden_verifier_read": false,
-  "task_specific_hints_read": false,
+  "task_specific_hints_read": true,
   "task_specific_web_or_repo_search": false,
   "task_command_executed": false,
   "allowed_pre_exposure_information": [
@@ -33,6 +33,14 @@
       "source": "moxnixmdj/brain PR #558",
       "evidence": "PR title/body explicitly record direct Superpowers reproduction and repair of session-window-debug on 2026-09-30",
       "consequence": "INELIGIBLE_FOR_CLEAN_STAGE1__NO_REPLAY"
+    },
+    {
+      "type": "TASK_SPECIFIC_SOLUTION_HINT_EXPOSURE",
+      "source_repository": "harbor-framework/terminal-bench",
+      "path": "tasks/session-window-debug/README.md",
+      "blob_sha": "4fcab8cc73838b56bfdc891c062d0cfc3e23fb44",
+      "detail": "README contained explicit Difficulty explanation and Solution explanation identifying task-specific bugs and targeted fixes.",
+      "consequence": "RANK16_INELIGIBLE_FOR_CLEAN_CAPABILITY_VERDICT__NO_TASK_EXECUTION__NO_REPLAY_FOR_CREDIT"
     }
   ],
   "clean_for_stage_b_exposure": false,
@@ -104,5 +112,7 @@
     "terminal_verifier_executed": false,
     "capability_verdict": "NONE",
     "closed": true
-  }
+  },
+  "replay_allowed_for_clean_evidence": false,
+  "capability_verdict": "NONE"
 }
