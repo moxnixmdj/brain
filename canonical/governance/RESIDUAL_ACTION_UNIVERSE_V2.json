@@ -1,18 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__NOT_FROZEN__NO_EXACT_CUT_CLAIM__ZERO_FRESH_UNTOUCHED_INFORMATION",
+  "status": "OPEN_DISCOVERY__VERIFIED_ZERO_REALITY_COMPONENTS_PROMOTED__NOT_FROZEN__NO_EXACT_CUT_CLAIM",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
     "M0A": {
       "status": "OPEN",
       "verified_owned": [
-        "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json"
-      ],
-      "verification_pending": [
+        "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
         "canonical/runtime/explicit_compound_requirement_decomposer.py"
       ],
+      "verification_pending": [],
       "external_candidates": [
         "stanfordnlp/stanza@c9a2158a87502dd63f757ab1aa933230b0acbce7",
         "explosion/spaCy@c2dabfce56ad2991685ec85783cd59637a5d7b8f"
@@ -23,20 +22,27 @@
         "LONG_RANGE_CROSS_SENTENCE_SEMANTICS",
         "ARBITRARY_SOURCE_SEMANTIC_GENERATION_OUTSIDE_DECIDABLE_SUBSETS"
       ],
-      "complete_action_bundle": false
+      "complete_action_bundle": false,
+      "verification_receipts": {
+        "explicit_compound_requirement_decomposer": {
+          "workflow_run_id": 36942070623,
+          "conclusion": "success",
+          "blob_sha": "06da82ccd7cf5ba37b78d1d664b5638caa4e1956",
+          "scope": "EXPLICIT_BULLET_LISTS_AND_FLAT_SINGLE_MODAL_AND_COORDINATION_ONLY__AMBIGUOUS_OR_CONTEXTUAL_FORMS_FAIL_CLOSED"
+        }
+      }
     },
     "M1A": {
       "status": "OPEN",
       "verified_owned": [
         "canonical/capabilities/opus55/RAW_DRAWING_PRIMITIVES_001.json",
         "canonical/capabilities/opus55/ENGINEERING_CALLOUT_PARSER_001.json",
-        "canonical/capabilities/opus55/ORTHOGRAPHIC_CONSTRAINT_GRAPH_001.json"
-      ],
-      "verification_pending": [
+        "canonical/capabilities/opus55/ORTHOGRAPHIC_CONSTRAINT_GRAPH_001.json",
         "canonical/runtime/drawing_view_regions.py",
         "canonical/runtime/orthographic_view_identity.py",
         "canonical/runtime/callout_geometry_association.py"
       ],
+      "verification_pending": [],
       "external_candidates": [
         "tesseract-ocr/tesseract@db20f322d03664d1e878e2fbf6e904f5da755594",
         "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
@@ -48,7 +54,28 @@
         "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
         "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
       ],
-      "complete_action_bundle": false
+      "complete_action_bundle": false,
+      "verification_receipts": {
+        "drawing_view_regions": {
+          "workflow_run_id": 36942081745,
+          "conclusion": "success",
+          "blob_sha": "6a5be47a04b0b62e270d3de6d60270ba5d011851",
+          "scope": "SPATIALLY_SEPARATED_CLEAN_HIGH_CONTRAST_VIEW_REGION_SEGMENTATION_ONLY__NO_VIEW_IDENTITY"
+        },
+        "orthographic_view_identity": {
+          "workflow_run_id": 36942366419,
+          "conclusion": "success",
+          "blob_sha": "e09a05201f29fe34cef8f44aaefc931c48dfbf1a",
+          "repair_commit": "7a85b85e323e6205f9a7b4d68089c1d3d6c085fc",
+          "scope": "THREE_SPATIALLY_SEPARATED_AXIS_ALIGNED_VIEWS_WITH_EXPLICIT_FIRST_OR_THIRD_ANGLE_CONVENTION"
+        },
+        "callout_geometry_association": {
+          "workflow_run_id": 36942293933,
+          "conclusion": "success",
+          "blob_sha": "6971ca86ffba0185c419ae893800312994efeacd",
+          "scope": "BOUNDED_DETERMINISTIC_CALLOUT_TO_GEOMETRY_ASSOCIATION_ONLY"
+        }
+      }
     },
     "M1B": {
       "status": "OPEN",
@@ -65,8 +92,8 @@
     }
   },
   "rules": [
+    "VERIFIED_ZERO_REALITY_COMPONENTS_ARE_OWNED_ONLY_AT_THEIR_EXACT_TESTED_SCOPE",
     "NO_FRESH_UNTOUCHED_TASK_OR_INSTRUCTION_SPEND",
-    "VERIFICATION_PENDING_COMPONENTS_HAVE_ZERO_OWNERSHIP_CREDIT",
     "OPAQUE_MODEL_GENERATION_HAS_ZERO_OWNERSHIP_CREDIT",
     "M0A_AND_M1A_MUST_HAVE_COMPLETE_SELF_CONTAINED_BUNDLES_BEFORE_FREEZE",
     "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
@@ -80,9 +107,15 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "VERIFY_ZERO_REALITY_PENDING_COMPONENTS__INTERNALIZE_OR_SUBSTITUTE_OCR_ROUTE__CLOSE_OR_EXPLICITLY_BOUND_M0A_CONTEXTUAL_SEMANTICS__COMPLETE_M1A_BUNDLE__THEN_FREEZE_V2_AND_RUN_EXACT_CUT",
+  "next": "M0A_REMAINS_BLOCKED_BY_CONTEXTUAL_IMPLICIT_LONG_RANGE_AND_OPEN_SEMANTICS__M1A_REMAINS_BLOCKED_BY_OCR_DEPENDENCY_ACCOUNTING_NONAXIS_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_BROADER_ENGINEERING_NOTATION_AND_ROBUSTNESS__SEARCH_REUSE_SUBSTITUTE_PER_UNCOVERED_ATOM__FREEZE_ONLY_WHEN_COMPLETE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "reconciliation": {
+    "date": "2026-10-02",
+    "new_reality_units_consumed": 0,
+    "newly_verified_components": 4,
+    "note": "Narrow verification promotion only; M0A and M1A remain open and exact cut remains unauthorized."
+  }
 }
