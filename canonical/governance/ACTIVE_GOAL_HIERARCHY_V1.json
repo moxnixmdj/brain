@@ -412,5 +412,15 @@
     "rank": 7,
     "status": "SKIPPED_UNSPENT__SURFACE_INCOMPATIBLE",
     "evidence_path": "canonical/capabilities/opus55/JAX_SPEEDRUN_GPU_TB4_SURFACE_INCOMPATIBLE_20261001_V1.json"
+  },
+  "atomic_causal_intelligence_strategy": {
+    "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
+    "map_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "family_labels": "EVALUATION_SURFACES_ONLY",
+    "primary_internal_work_unit": "SMALLEST_CAUSALLY_MEANINGFUL_TRANSFORMATION",
+    "progress_metrics": [
+      "UNEXPLAINED_USEFUL_BEHAVIOR",
+      "DONOR_DEPENDENT_USEFUL_BEHAVIOR"
+    ]
   }
 }
