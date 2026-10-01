@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ATOMIC_CAUSAL_FALSIFICATION_RECONCILIATION_V1",
+  "result_id": "ATOMIC_CAUSAL_FALSIFICATION_001",
+  "status": "SPENT_PASS__REUSABLE_MECHANISM_CANDIDATE__FRESH_TRANSFER_AND_INTERNALIZATION_REQUIRED__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "atomic_transform": "CAUSE_HYPOTHESIS_EXECUTABLE_FALSIFICATION",
+  "candidate": {
+    "repo": "krishddd/Trajectory_Causal_Attribution",
+    "package": "trajectory-causal-attribution",
+    "version": "1.0.0",
+    "license": "MIT",
+    "runtime_dependencies": 0
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36834627961,
+    "launch_commit": "87aec7b6b54dd9fd19501ea548ffcf4af54424d1",
+    "result_commit": "38f3b24c585a85c4ebd6272a3d5fffb122709ac8"
+  },
+  "metrics": {
+    "cases": 6,
+    "route_step_causal_localization_accuracy": 1,
+    "unique_rescue_fraction": 1,
+    "repair_matches_evaluation_route_fraction": 1,
+    "all_factual_runs_failed": true,
+    "all_downstream_symptom_only_repairs_failed": true
+  },
+  "causal_scope": [
+    "EXHAUSTIVE_ADMISSIBLE_ACTION_INTERVENTION_USED_FOR_CANDIDATE_SET",
+    "EXPECTED_ROUTE_NOT_USED_TO_GENERATE_INTERVENTIONS",
+    "ORIGINAL_TERMINAL_VERIFIER_SELECTED_VALID_RESCUES",
+    "DOWNSTREAM_OUTPUT_ONLY_REPAIR_FAILED_IN_ALL_CASES"
+  ],
+  "adjudication": [
+    "EXECUTABLE_CAUSAL_FALSIFICATION_SURVIVES_ON_SIX_REAL_SPENT_C3_FAILURES",
+    "THIS_DOES_NOT_SOLVE_CAUSE_CANDIDATE_GENERATION",
+    "THIS_DOES_NOT_ESTABLISH_CROSS_DOMAIN_ROOT_CAUSE_GENERALITY",
+    "THIS_DOES_NOT_ESTABLISH_BRAIN_OWNERSHIP_OF_THE_EXTERNAL_PACKAGE",
+    "NEXT_ACQUISITION_TARGET_IS_CAUSE_CANDIDATE_GENERATION_WHILE_MINIMAL_DONOR_INDEPENDENT_FALSIFICATION_SLICE_IS_PLANNED"
+  ],
+  "evidence": [
+    "canonical/capabilities/opus55/ATOMIC_CAUSAL_SEED_001_EVIDENCE.json",
+    "canonical/capabilities/opus55/C7_AGENT_REPLAY_ROUTE_SCREEN_001.json"
+  ],
+  "capability_credit_delta": 0
+}

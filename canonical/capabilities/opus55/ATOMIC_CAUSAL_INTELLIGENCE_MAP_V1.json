@@ -108,11 +108,26 @@
   },
   "current_high_leverage_unresolved_frontier": {
     "id": "NF_UPSTREAM_ROOT_CAUSAL_LOCALIZATION_001",
-    "decomposition": [
+    "resolved_subtransforms": [
+      "CAUSE_HYPOTHESIS_EXECUTABLE_FALSIFICATION__SPENT_PASS"
+    ],
+    "unresolved_subtransforms": [
       "CAUSE_CANDIDATE_GENERATION",
-      "CAUSE_HYPOTHESIS_EXECUTABLE_FALSIFICATION",
       "RESIDUAL_CAUSE_RANKING"
     ],
-    "rule": "SCREEN_EXISTING_REUSABLE_MECHANISMS_ON_SPENT_TRACES_BEFORE_FRESH_EVIDENCE_OR_TRAINING"
+    "next": "SEARCH_EXISTING_REUSABLE_CAUSE_CANDIDATE_GENERATION_MECHANISMS__NO_TRAINING__PRESERVE_RANK9_PRIMARY_EXECUTION"
+  },
+  "atomic_causal_falsification_001": {
+    "status": "SPENT_PASS__REUSABLE_MECHANISM_CANDIDATE__ZERO_CAPABILITY_CREDIT",
+    "transform": "CAUSE_HYPOTHESIS_EXECUTABLE_FALSIFICATION",
+    "evidence_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_FALSIFICATION_001_RECONCILIATION.json",
+    "candidate": "krishddd/Trajectory_Causal_Attribution@v1.0.0",
+    "spent_metrics": {
+      "cases": 6,
+      "route_step_causal_localization_accuracy": 1,
+      "unique_rescue_fraction": 1,
+      "downstream_symptom_only_repair_failed_fraction": 1
+    },
+    "ownership_state": "EXTERNAL_OPEN_MECHANISM__MINIMAL_INTERNALIZATION_AND_FRESH_TRANSFER_REQUIRED"
   }
 }
