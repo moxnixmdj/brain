@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_PREQUALIFICATION_FAILURE_IMMUNITY_V1",
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "status": "MANDATORY_FAIL_CLOSED_BEFORE_UNTOUCHED_QUALIFICATION_SPEND",
-  "objective": "Prevent known classes of false success, wasted clean evidence, hidden dependency, infrastructure misclassification, statistical luck, and composition failure before untouched qualification evidence is spent.",
+  "objective": "Prevent known false success and wasted clean evidence, and prevent generating fresh reality information that admissible existing evidence, deduction, or a smaller discriminating observation could replace.",
   "applies_to": "ANY_ACTION_THAT_CAN_EXPOSE_OR_SPEND_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_PROMOTE_OPUS_LEVEL_OWNERSHIP",
   "failure_classes": [
     {
@@ -139,9 +139,14 @@
       "id": "LOSSY_SOURCE_TO_REQUIREMENT_COMPILATION",
       "defense": "Atomize every authoritative textual source losslessly; every atom requires an explicit disposition. Normative/high-risk atoms cannot be silently informational. Operative atoms must map bidirectionally to requirements. Ambiguity creates a blocking specification hole rather than a guessed interpretation.",
       "required_evidence": "LOSSLESS_SOURCE_CONTRACT_COMPILATION_RECEIPT__ZERO_UNACCOUNTED_ATOMS__ZERO_OPEN_SPECIFICATION_HOLES"
+    },
+    {
+      "id": "REDUNDANT_REALITY_QUERY",
+      "defense": "Before any new fresh evidence spend, saturate admissible existing Brain and external evidence, apply deterministic/deductive closure, compile terminal-relevant counterfactual distinctions, delete dominated observations, and require membership in the exact minimum reality cut. Existing evidence or proof that closes the same obligation deletes the experiment.",
+      "required_evidence": "EVIDENCE_SATURATION_AND_MINIMUM_REALITY_CUT_RECEIPT"
     }
   ],
-  "fresh_qualification_admission_rule": "STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_READS_MUST_OBEY_TB4_SOURCE_ALLOWLIST__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
+  "fresh_qualification_admission_rule": "FOR_NEW_FRESH_EVIDENCE_SPEND_AFTER_ACTIVATION__EVIDENCE_SATURATION_AND_DEDUCTIVE_CLOSURE_AND_MINIMUM_REALITY_CUT_ADMISSION_PRECEDE_SPEND__THEN_STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED__CURRENT_RANK22_ALREADY_AUTHORIZED_ACTION_IS_GRANDFATHERED_WHILE_AUTHORITY_REMAINS_CURRENT",
   "terminal_promotion_rule": "NO_MODEL_OR_HUMAN_JUDGMENT_CAN_OVERRIDE_A_FAILED_OR_UNKNOWN_MACHINE_CHECKABLE_PREDICATE",
   "staged_admission": {
     "stage_a_pre_exposure": {
@@ -238,5 +243,25 @@
       "runner_merge_commit": "f7c62fca832e31d26e15c755c1486b2bea3bb98e"
     }
   },
-  "core_hardening_verification": "canonical/governance/CORE_HARDENING_VERIFICATION_20261001_V1.json"
+  "core_hardening_verification": "canonical/governance/CORE_HARDENING_VERIFICATION_20261001_V1.json",
+  "information_minimization": {
+    "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "exact_minimum_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "applies_to": "NEW_FRESH_EVIDENCE_SPEND_AFTER_ACTIVATION",
+    "closure_order": [
+      "EXISTING_EVIDENCE",
+      "DEDUCTION",
+      "COUNTERFACTUAL_REDUCTION",
+      "DOMINANCE_DELETION",
+      "MINIMUM_REALITY_CUT",
+      "IRREDUCIBLE_REALITY_QUERY"
+    ],
+    "grandfathered_current_action": {
+      "task": "freecad-spring-clip",
+      "rank": 22,
+      "condition": "DERIVED_CAN_EXECUTE_TRUE_AND_CURRENT_AUTHORITY_UNCHANGED",
+      "rule": "DO_NOT_DELAY_OR_REQUALIFY_SOLELY_FOR_THIS_NEW_CONTROL"
+    }
+  }
 }
