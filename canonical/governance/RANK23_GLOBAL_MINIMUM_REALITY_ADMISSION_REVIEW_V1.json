@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_RANK23_GLOBAL_MINIMUM_REALITY_ADMISSION_REVIEW_V1",
+  "date": "2026-10-02",
+  "task": "layout-config-recreation2",
+  "rank": 23,
+  "status": "STAGE_A_CLEANNESS_PRESERVED__STAGE_B_EXPOSURE_REVOKED_PENDING_GLOBAL_MINIMUM_REALITY_CUT__INSTRUCTION_UNREAD__ZERO_CREDIT",
+  "stage_a_receipt": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_STAGE_A_ADMISSION_V1.json",
+  "observed_stage_a_scope": [
+    "PREEXPOSURE_CONTAMINATION_SEARCH",
+    "INSTRUCTION_UNREAD",
+    "DISQUALIFYING_PRIOR_HIT_GUARD",
+    "8_SURFACE_SEARCH_COMPLETENESS",
+    "UNCLASSIFIED_EXTRA_PR_HIT_GUARD"
+  ],
+  "missing_global_admission_evidence": [
+    "GLOBAL_OPEN_OBLIGATION_GRAPH_SNAPSHOT",
+    "ALL_OPEN_OBLIGATION_EXISTING_EVIDENCE_SATURATION",
+    "GLOBAL_DEDUCTIVE_CLOSURE",
+    "CROSS_FAMILY_SHARED_RESIDUAL_COMPRESSION",
+    "COUNTERFACTUAL_TERMINAL_DISTINCTIONS",
+    "DOMINATED_OBSERVATION_DELETION",
+    "EXACT_GLOBAL_MINIMUM_REALITY_CUT",
+    "EXPLICIT_RANK23_INSTRUCTION_EXPOSURE_MEMBERSHIP_IN_CUT",
+    "TERMINAL_DECISION_VALUE"
+  ],
+  "conclusion": "CLEANNESS_IS_NOT_NECESSITY__STAGE_A_PASS_DOES_NOT_AUTHORIZE_STAGE_B_UNDER_GLOBAL_INFORMATION_MINIMIZATION",
+  "official_instruction_read": false,
+  "hidden_verifier_read": false,
+  "task_execution_count": 0,
+  "stage_b_exposure_authorized": false,
+  "task_execution_authorized": false,
+  "preservation_rule": "KEEP_SAMPLE_UNREAD_AND_CLEAN",
+  "re_admission_condition": "CURRENT_GLOBAL_TERMINAL_PROOF_CUT_EXPLICITLY_ADMITS_RANK23_OFFICIAL_INSTRUCTION_EXPOSURE_AS_IRREDUCIBLE",
+  "global_cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+  "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
