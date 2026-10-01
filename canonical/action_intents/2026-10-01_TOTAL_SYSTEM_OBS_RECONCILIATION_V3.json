@@ -1,0 +1,216 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "TOTAL-SYSTEM-OBS-RECONCILIATION-20261001-V3",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "44d42ab54d7a98e2c0d6820b9775b67ff483ba67",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "Reconcile OBS-everything control surfaces to current canonical authority without changing terminal objective, active capability target, frozen coding order, or capability credit: align OBS schema/template and theory receipt mirrors, restore WHITE_BOX_HARVEST in meta-OBS acquisition order, refresh the stale C3 mirror, and preserve the newly adjudicated rank-6 execution-handoff failure plus patched-runner next step.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": false,
+  "evidence_presence_classification": "CONTROL_SURFACE_DRIFT_PRESENT__RANK6_TRANSPORT_FAILURE_CANONICALLY_ADJUDICATED__ZERO_CODING_CREDIT",
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "prior_work_checked": [
+    "Current pointer, hierarchy, OBS-everything receipt, cognitive campaign/frontier, rank-6 failure adjudication, and open PR list refreshed on exact base.",
+    "PR #605 closed as obsolete.",
+    "No rank-6 replay or hidden task material read."
+  ],
+  "stop_condition": "Stop when hierarchy and OBS-everything metadata match CANONICAL_POINTER on OBS schema V6, action-intent V8, current theory receipt, and deletion-first order including WHITE_BOX_HARVEST; C3 no longer claims a stale spent-screen-running state; rank-6 remains classified only as a spent transport/handoff failure with zero coding credit and no replay; and trusted guard validation passes on the exact PR base/head.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_TOTAL_SYSTEM_OBS_RECONCILIATION_V3.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "44d42ab54d7a98e2c0d6820b9775b67ff483ba67",
+    "real_outcome": "One current cross-surface authority for OBS, reasoning, acquisition order, cognitive frontier mirrors, and rank-6 execution truth.",
+    "required_capability": "Current-base reconciliation of existing Brain control surfaces.",
+    "obs_goal": {
+      "real_outcome": "Reduce wall-clock to verified 19/19 ownership.",
+      "proxy_goals_deleted": [
+        "new OBS framework",
+        "workflow-green equals capability-green"
+      ],
+      "surviving_necessity": "Align existing current authority and delete stale work."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "OBS V6/V8",
+        "V7 acquisition laws",
+        "current reasoning receipt",
+        "execution-truth law"
+      ],
+      "external_existing_routes_checked": [
+        "NOT_APPLICABLE_TO_RECONCILIATION"
+      ],
+      "capability_work_deleted": [
+        "no new model probe",
+        "no new architecture"
+      ],
+      "surviving_gap": "Cross-surface drift and stale mirrors."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CONTROL_SURFACE_DRIFT",
+      "delete_bypass_substitute_options": [
+        "close obsolete PR #605",
+        "reuse current schemas/laws",
+        "patch only affected mirrors"
+      ],
+      "surviving_causal_blocker": "Hierarchy/meta-OBS mirrors conflict with current canonical pointer and evidence."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1_DELETE_STALE_WORK",
+        "2_REUSE_CURRENT_AUTHORITY",
+        "3_RECONCILE_AFFECTED_FIELDS",
+        "4_NEW_FRAMEWORK_REJECTED"
+      ],
+      "losing_routes_reason": "New machinery adds no capability output; stale mirrors preserve contradictory authority.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Trusted drift guard plus exact JSON cross-surface checks are sufficient."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR #605",
+        "V5/V7 hierarchy mirrors",
+        "old theory receipt mirror",
+        "C3 spent-screen-running mirror"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "execution liveness truth",
+        "white-box acquisition route"
+      ],
+      "fresh_reuse_plan": "Use current laws and revalidate only affected layers after material changes."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "no generic-Jev rerun",
+        "no new OBS layer",
+        "no rank6 replay"
+      ],
+      "search_stop_decision": "Stop governance search because the exact authoritative replacements already exist.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXACT_CURRENT_BASE_CONTROL_SURFACE_RECONCILIATION",
+      "NEW_OBS_FRAMEWORK",
+      "LEAVE_STALE_STATE",
+      "REPLAY_RANK6"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PR_605_GENERIC_SHARED_JEV",
+      "NEW_OBS_FRAMEWORK",
+      "RANK6_REPLAY",
+      "WORKFLOW_SUCCESS_AS_CAPABILITY_SUCCESS"
+    ],
+    "selected_surviving_route": "EXACT_CURRENT_BASE_CONTROL_SURFACE_RECONCILIATION__NO_NEW_OBS_LAYER",
+    "why_selected_route_is_fastest_sufficient": "All correct authorities and fixes already exist; only stale mirrors and one omitted acquisition route need correction.",
+    "expected_parent_level_state_change": "Reconcile OBS-everything control surfaces to current canonical authority without changing terminal objective, active capability target, frozen coding order, or capability credit: align OBS schema/template and theory receipt mirrors, restore WHITE_BOX_HARVEST in meta-OBS acquisition order, refresh the stale C3 mirror, and preserve the newly adjudicated rank-6 execution-handoff failure plus patched-runner next step.",
+    "stop_condition": "Stop when hierarchy and OBS-everything metadata match CANONICAL_POINTER on OBS schema V6, action-intent V8, current theory receipt, and deletion-first order including WHITE_BOX_HARVEST; C3 no longer claims a stale spent-screen-running state; rank-6 remains classified only as a spent transport/handoff failure with zero coding credit and no replay; and trusted guard validation passes on the exact PR base/head.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action only; no external capability route is selected."
+    },
+    "reasoning_durability": {
+      "real_objective": "Remove stale or contradictory OBS, reasoning, acquisition, and execution-control state so every worker uses one current authority while preserving clean evidence and minimum wall-clock to 19/19 ownership.",
+      "governing_invariants": [
+        "Knowledge external/JIT; capabilities permanently Brain-owned.",
+        "Underlying capability invention forbidden.",
+        "Use current V7 acquisition laws, OBS schema V6, and action-intent template V8.",
+        "WHITE_BOX_HARVEST belongs before COMPOSE in deletion-first acquisition order.",
+        "Workflow success is not terminal task success.",
+        "Rank-6 is spent after execution artifact handoff failure and must not be replayed for promotion.",
+        "OBS activity adds zero capability credit.",
+        "Private chain-of-thought is not required; consequential rationale is preserved by evidence-bound receipts."
+      ],
+      "material_premises": [
+        "ACTIVE_GOAL_HIERARCHY still references OBS schema V5 and action template V7 while CANONICAL_POINTER requires V6/V8.",
+        "ACTIVE_GOAL_HIERARCHY still points to the September 30 theory receipt while CANONICAL_POINTER names the October 1 white-box strategy receipt.",
+        "The newly landed OBS-everything acquisition order omits WHITE_BOX_HARVEST despite V7 law and CANONICAL_POINTER requiring it.",
+        "The hierarchy C3 mirror still says SkillRouter spent screen running even though fresh SkillRouter gain is recorded and several cheap gate/cascade/majority variants were falsified out of sample.",
+        "PR #605 was closed as obsolete because it encoded the superseded generic shared-Jev route.",
+        "Rank-6 run 36826634715 reached terminal verification but failed artifact handoff; canonical evidence records reward 0, no cognition verdict, no coding credit, and a merged generic staging fix."
+      ],
+      "evidence_refs": [
+        "canonical/CANONICAL_POINTER.json",
+        "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "canonical/governance/OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V1.json",
+        "canonical/capabilities/opus55/RANK6_GLYCAN_EXECUTION_HANDOFF_FAILURE_20261001_V1.json",
+        "canonical/governance/COGNITIVE_BASIS_COMPRESSION_CAMPAIGN_V1.json",
+        "canonical/capabilities/opus55/COGNITIVE_PRIMITIVE_IMPLEMENTATION_FRONTIER_V1.json",
+        "canonical/reasoning/2026-10-01_WHITE_BOX_CAPABILITY_HARVEST_STRATEGY_V1.json",
+        "https://github.com/moxnixmdj/brain/pull/605",
+        "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36826634715"
+      ],
+      "conclusion": "Keep the OBS-everything direction, but correct the stale cross-surface authority and missing white-box route. Delete obsolete generic-Jev work, preserve rank-6 as transport failure only, and continue with the next untouched frozen coding task on the patched runner.",
+      "selected_route": "EXACT_CURRENT_BASE_CONTROL_SURFACE_RECONCILIATION__NO_NEW_OBS_LAYER",
+      "rejected_material_alternatives": [
+        "Create another OBS framework.",
+        "Treat workflow success or reward zero as a cognition verdict.",
+        "Replay rank 6.",
+        "Continue generic shared-Jev default architecture.",
+        "Ignore schema/template/theory mirror drift.",
+        "Remove WHITE_BOX_HARVEST from the acquisition order."
+      ],
+      "uncertainties": [
+        "A newer main commit before merge would invalidate this exact-base receipt.",
+        "C3 broader generalization and latency remain unresolved despite fresh gain.",
+        "Next untouched coding task outcome is unknown."
+      ],
+      "next_action": "Run trusted guard on the exact branch. If valid and main is unchanged, merge this reconciliation, then continue the next untouched frozen coding task on the patched runner while the cognitive residual lane separately attacks C7/C2/C5/C1/C4.",
+      "supersession_conditions": [
+        "Main materially changes before merge.",
+        "A newer theory receipt supersedes the current October 1 strategy.",
+        "Active coding blocker changes after a fresh admissible task."
+      ],
+      "supersedes": null
+    }
+  }
+}
