@@ -41,7 +41,7 @@
         "cross-encoder/ettin-reranker-150m-v1",
         "pipizhao/SkillRouter-Reranker-0.6B"
       ],
-      "state": "PROMISING_PRIMITIVE_SPECIFIC_REUSE_CANDIDATE__FRESH_20_CASE_HIT_AT_1_0_95__TERMINAL_TASK_DELTA_PENDING",
+      "state": "FRESH_FILTERED_TRANSFER_PASS__16_OF_16__ZERO_WRONG__REAL_READ_ONLY_TOOL_EXECUTION_DELTA_NEXT",
       "execution_repo": "moxnixmdj/verification-capsule-runner",
       "execution_commit": "45ec7906c979813bafea11a7db0a97d08d4eab83",
       "selected_candidate": "cross-encoder/ettin-reranker-150m-v1",
@@ -50,7 +50,12 @@
       "control_contract": "VERIFIED",
       "control_contract_evidence": "canonical/capabilities/opus55/C3_DETERMINISTIC_FIRST_ROUTER_CONTRACT_001_VERIFICATION.json",
       "runtime": "canonical/runtime/cognitive_tool_router.py",
-      "fresh_filtered_transfer": "RUNNING__ZERO_CREDIT"
+      "fresh_filtered_transfer": "PASS",
+      "fresh_filtered_transfer_evidence": "canonical/capabilities/opus55/C3_FILTERED_ETTIN_FRESH_TRANSFER_001_RECONCILIATION.json",
+      "raw_ettin_accuracy": 0.6875,
+      "composed_accuracy": 1,
+      "safe_escalations": 5,
+      "mean_composed_latency_ms": 34.01247906249871
     },
     {
       "id": "C4_HYPOTHESIS_PLAUSIBILITY",
@@ -131,7 +136,7 @@
     "TREAT_NLI_ENTAILMENT_AS_COMPLETE_EVIDENCE_SUFFICIENCY",
     "TRAIN_GENERIC_DECISION_MODEL_BEFORE_PRIMITIVE_SPECIFIC_REUSE_SPACE_IS_EXHAUSTED"
   ],
-  "next_required_action": "ADJUDICATE_FRESH_FILTERED_ETTIN_C3_TRANSFER__IF_SUCCESS_EXECUTE_READ_ONLY_REAL_TOOL_ROUTE_DELTA__KEEP_GENERIC_SHARED_AUTO_ADMIT_JUDGES_REJECTED__NO_TRAINING_YET",
+  "next_required_action": "EXECUTE_SELECTED_C3_ROUTES_ON_READ_ONLY_REAL_TOOLS__RECORD_TERMINAL_COMPLETION_AND_ROUTE_FAILURES__NO_C3_PROMOTION_UNTIL_REAL_EPISODES_AND_FRESH_FAILURE_GATES_SUPPORT_IT",
   "capability_credit_delta": 0,
   "latest_probe_results": {
     "c3": {
