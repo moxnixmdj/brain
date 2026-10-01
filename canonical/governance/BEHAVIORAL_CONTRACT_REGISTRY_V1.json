@@ -60,7 +60,15 @@
       "terminal_consequence": "required for financial-analysis and coding tasks implementing structured regulatory or quantitative methods",
       "verification_route": "independent calculation graph with intermediate factor checks; not a recomputation sharing builder formulas",
       "dependency_boundary": "deterministic once the applicable method rules are structured; semantic rule retrieval/selection is separate",
-      "scope": "structured quantitative methods with explicit intermediate factors"
+      "scope": "structured quantitative methods with explicit intermediate factors",
+      "mechanism_state": "VERIFIED_BRAIN_OWNED_NARROW_COMPONENT",
+      "mechanism_artifact": "canonical/runtime/saccr_credit_kernel.py",
+      "mechanism_evidence": "canonical/capabilities/opus55/SACCR_CREDIT_KERNEL_001.json",
+      "remaining_scope": [
+        "OPTIONS_AND_CDO_TRANCHE_DELTAS_IF_REQUIRED",
+        "WHOLE_NETTING_SET_RC_PFE_IF_REQUIRED",
+        "GENERAL_AUTHORITATIVE_METHOD_RULE_RETRIEVAL_AND_APPLICABILITY_SELECTION"
+      ]
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
