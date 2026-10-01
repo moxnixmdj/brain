@@ -783,14 +783,7 @@
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "terminal_closure_reducer": "canonical/runtime/terminal_closure_reducer.py",
     "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
-    "rank22_active_execution": {
-      "task": "freecad-spring-clip",
-      "rank": 22,
-      "runner_pr": 425,
-      "lease": "canonical/governance/LEASE_FREECAD_SPRING_CLIP_TB4_STAGE_C_20261001_V2.json",
-      "derived_authority": "canonical/governance/FREECAD_SPRING_CLIP_RANK22_DERIVED_AUTHORITY_V1.json",
-      "state": "CAN_EXECUTE_TRUE__EXECUTION_COUNT_0"
-    }
+    "rank22_active_execution": null
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
