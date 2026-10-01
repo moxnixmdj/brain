@@ -93,8 +93,7 @@ def current_version(root:pathlib.Path,declared:str)->tuple[int,int]|str:
     return int(match.group(2)),max(versions)
 
 
-def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
-              align_hierarchy_progress_event:bool)->int:
+def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool)->int:
     changes:list[str]=[]
     reports:list[str]=[]
     pending_mirrors:list[tuple[str,str]]=[]
@@ -180,17 +179,15 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
                 f"!= hierarchy {target[:60]} (frontier redefinition; needs RECONCILE_FRONTIER, not this tool)"
             )
 
-    # --- the hierarchy's own progress-event target -------------------------
-    if hierarchy.get("next_progress_event_target")!=action:
-        if align_hierarchy_progress_event:
-            changed=hierarchy.put(action,"next_progress_event_target")
-            if changed: changes.append(changed)
-        else:
-            reports.append(
-                "HIERARCHY_PROGRESS_EVENT_DRIFT next_progress_event_target = "
-                f"{str(hierarchy.get('next_progress_event_target'))[:60]} != next_required_action_class "
-                "(authoritative file; pass --align-hierarchy-progress-event to edit it)"
-            )
+    # The authority's own next_progress_event_target is NOT a mirror of
+    # next_required_action_class. enforce_goal_hierarchy.py once required the two
+    # to be equal (added in 44d6a09) and that requirement was repealed in d32bf4d;
+    # upstream's live value is a distinct event name such as
+    # RANK22_BUILDER_ARTIFACT_FREEZE. This tool therefore never edits the
+    # authority: it only mirrors the value the guard actually compares against.
+    # Aligning the two under the repealed law overwrote that event name with the
+    # action class, which is why the capability is removed rather than defaulted
+    # off.
 
     # --- pointer control-path currency -------------------------------------
     boot=pointer.get("boot_requirements") or {}
@@ -227,7 +224,7 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
                 reports.append(f"CONTROL_PATH_UNREADABLE {key}: {type(exc).__name__}")
 
     # --- invariants that must never be violated ----------------------------
-    docs=[pointer,queue,scoreboard,record]+([hierarchy] if align_hierarchy_progress_event else [])
+    docs=[pointer,queue,scoreboard,record]
     if json.dumps(scoreboard.data.get("counters_since_epoch_start"),sort_keys=True)!=counters_before:
         print("REFUSED: this tool must never move a scoreboard counter")
         return 2
@@ -262,8 +259,7 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
     elif not reports:
         print("MIRRORS_CONSISTENT no drift found")
     # A report is drift this run did NOT repair: identity drift needs
-    # RECONCILE_FRONTIER, hierarchy progress-event drift needs the explicit
-    # opt-in, control-path drift needs --fix-control-paths. Exiting 0 on an
+    # RECONCILE_FRONTIER and control-path drift needs --fix-control-paths. Exiting 0 on an
     # unrepaired report is fail-open: test_live_repository_is_reconciled would
     # stay green while enforce_goal_hierarchy.py fails the same tree, which is
     # exactly the lying-green-check this tool exists to prevent.
@@ -279,15 +275,12 @@ def main()->int:
     ap.add_argument("--check",action="store_true",help="report drift without writing")
     ap.add_argument("--fix-control-paths",action="store_true",
                     help="advance stale pointer control paths to the current family version")
-    ap.add_argument("--align-hierarchy-progress-event",action="store_true",
-                    help="also align the authoritative hierarchy's next_progress_event_target")
     ns=ap.parse_args()
     root=ns.repo_root.resolve()
     for rel in (HIERARCHY,POINTER,QUEUE,SCOREBOARD):
         if not (root/rel).is_file():
             print(f"REFUSED: required canonical file missing: {rel}"); return 2
-    return reconcile(root,write=not ns.check,fix_control_paths=ns.fix_control_paths,
-                     align_hierarchy_progress_event=ns.align_hierarchy_progress_event)
+    return reconcile(root,write=not ns.check,fix_control_paths=ns.fix_control_paths)
 
 
 if __name__=="__main__":

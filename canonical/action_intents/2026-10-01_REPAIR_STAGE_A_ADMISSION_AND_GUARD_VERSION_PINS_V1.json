@@ -72,7 +72,7 @@
       "rank17_data_anonymization": "pass=false NONE QUALIFICATION_CONTAMINATION_LEDGER (spent, source-boundary contaminated)",
       "rank16_session_window_debug": "pass=false NONE with QUALIFICATION_CONTAMINATION_LEDGER plus four exposure-search predicates (7 fields, no brain_pr_hits, no searched_surfaces)"
     },
-    "mirror_fields_reconciled": "twelve mirror fields across four surfaces plus four identity mirrors and the authority's own next_progress_event_target, audited against every mirror comparison in enforce_goal_hierarchy.py; stale at ten distinct bases, and the authority self-contradicted at three consecutive ones",
+    "mirror_fields_reconciled": "twelve mirror fields across four surfaces plus four identity mirrors, audited against every mirror comparison in enforce_goal_hierarchy.py; stale at ten distinct bases",
     "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after.",
     "reconciler_cross_check": "Run on the stale base c61497a in a throwaway worktree, canonical/runtime/reconcile_frontier_mirrors.py produced byte-identical output to the hand reconciliation for CANONICAL_POINTER.json, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json, REAL_OUTPUT_SCOREBOARD_V1.json and ACTIVE_GOAL_HIERARCHY_V1.json. The only differing file is the active target record, and only in current_execution, which is a semantic field the tool deliberately does not rewrite. Two independent derivations agreeing is the cross-check; the tool also exits 1 with --check on the stale base, naming all nine drifted fields and both stale control paths.",
     "reconciler_tests": "14 passed",
@@ -81,10 +81,10 @@
     "rank20_disposition": "v2 refuses rank20 with QUALIFICATION_CONTAMINATION_LEDGER, the true predicate for a ledger whose state is CONTAMINATED__TASK_SPECIFIC_EXTERNAL_SEARCH__INELIGIBLE_FOR_STAGE_C__NO_REPLAY with instruction_read true and a revoked Stage-C lease.",
     "live_frontier_oracle": "rank21 foodstuff-beta-activity, the live frontier rank, is admitted by the repaired v2 with pass true, no failed predicates, authorization STAGE_B_INSTRUCTION_EXPOSURE_ONLY and task_execution_authorized false, matching its recorded INDEPENDENT_STAGE_A_PASS__STAGE_B_INSTRUCTION_EXPOSURE_ONLY_AUTHORIZED. The blanket rule evaluates False on the same ledger and would have refused it.",
     "recorded_properties_reexecuted": "All twenty properties recorded across the four independently verified Stage-A admission artifacts (rank17, rank20 V2, rank21, rank22) re-execute against v2, and the binding test fails closed on any recorded property it does not know, so a newly recorded property cannot be silently ignored.",
-    "authority_self_consistency": "ACTIVE_GOAL_HIERARCHY_V1.json next_progress_event_target now equals next_required_action_class, propagated by the reconciler under its explicit --align-hierarchy-progress-event opt-in. This removes HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH, which failed every frontier-sensitive PR at this base under both the base validator and the repaired guard.",
+    "authority_self_consistency": "NOT MODIFIED. The guard requirement that the authority's next_progress_event_target equal next_required_action_class was repealed upstream in d32bf4d after this change had aligned them to clear it at three consecutive bases. The alignment overwrote a distinct event name (RANK22_BUILDER_ARTIFACT_FREEZE) with the action class, so it is reverted: the authority's own value is restored from upstream, the reconciler's alignment capability is removed rather than defaulted off, and the scoreboard mirror now follows the field the guard actually compares. This branch no longer touches ACTIVE_GOAL_HIERARCHY_V1.json.",
     "reconciler_fail_open_repaired": "The reconciler's verdict is no longer driven only by pending mirror changes: any report it cannot repair in the current invocation now fails closed with UNREPAIRED_DRIFT_PRESENT and exit 1. 15 reconciler tests pass, including the new report-only-drift regression.",
     "recorded_admissions_adjudicated": "Every recorded Stage-A admission in the tree is adjudicated from live evidence: reproduced while its ledger is still at Stage A, truthfully refused once it has advanced, with v1 and v2 compared on every shared key of both an admission and a refusal.",
-    "guard_remediation": "the guard names the deterministic reconciler invocation for each repairable failure family; additive output only, no check weakened, skipped or reordered",
+    "guard_remediation": "the guard names the deterministic reconciler invocation for each repairable failure family; additive output only, no check weakened, skipped or reordered. The hint for the repealed HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH was removed with the law it served, because a hint for a predicate no code path can emit is dead weight that misdescribes the gate.",
     "rank18_ledger_contradiction": "Reported and pinned by an executable invariant, not rewritten: rank18's ledger reads UNEXPOSED while its Stage-B contract, Stage-C reconciliation and all three leases attest exposure and spend."
   },
   "reasoning_receipt": "canonical/reasoning/2026-10-01_STAGE_A_ADMISSION_UNSATISFIABLE_AND_GUARD_VERSION_PIN_ROT_V1.json",
@@ -139,7 +139,8 @@
         "DELETE the loose verdict-only comparison between v1 and v2 and compare every shared key instead, which is what exposed the rule-label divergence",
         "DELETE the reconciler's fail-open verdict, which exited 0 while printing unrepaired drift reports, so its standing oracle cannot pass on a tree the guard fails",
         "DELETE the rank-pinned reproducibility oracles and discover every recorded Stage-A admission from the tree instead, branching on live ledger state, because rank21 rotted from live-admitted to contaminated before this change was pushed",
-        "DELETE the attempt to reconstruct an advanced ledger back to its pre-exposure state, which would have fabricated the disqualifying evidence the ledger legitimately carries"
+        "DELETE the attempt to reconstruct an advanced ledger back to its pre-exposure state, which would have fabricated the disqualifying evidence the ledger legitimately carries",
+        "DELETE the reconciler's authority-alignment capability entirely once the law it served was repealed, and restore the value it had overwritten"
       ],
       "surviving_causal_blocker": "STAGE_A_ADMISSION_REDUCER_UNSATISFIABLE_AND_DIVERGENT_FROM_LIVE_POLICY__TRUSTED_GUARD_REJECTS_CURRENT_CANONICAL_CONTROL_PATHS__FRONTIER_MIRRORS_LEFT_STALE_ON_EVERY_ADVANCE"
     },
@@ -199,6 +200,11 @@
           "route": "REWRITE_RANK18_LEDGER_TO_RECORD_ITS_SPEND",
           "rank": 9,
           "why": "The ledger is false and should be corrected, but it is frontier evidence owned by rank18's lease history and correcting it is a second causal work unit, which the guard rejects as MULTIPLE_ACTION_INTENTS_IN_ONE_PR. Reported and pinned by an executable invariant instead."
+        },
+        {
+          "route": "ALIGN_THE_AUTHORITY_PROGRESS_EVENT_TARGET_TO_THE_ACTION_CLASS",
+          "rank": 10,
+          "why": "Was correct while enforce_goal_hierarchy.py required the two to be equal, and became destructive the moment d32bf4d repealed that requirement: it overwrites a distinct recorded event name with the action class, so the capability is removed rather than kept behind a flag."
         }
       ],
       "losing_routes_reason": "Ranks 2 to 5 each trade canonical truth, mandated evidence or permanent mergeability for a locally green check, which is proxy work under the truth-first and fail-closed laws.",
@@ -241,7 +247,8 @@
         "Arbitrated the v2 rule label from the recorded rank18/rank19/rank20 admission artifacts instead of from preference, and widened the v1/v2 comparison to every shared key after the narrower comparison hid a real divergence",
         "Caught the reconciler's own fail-open verdict by running it against live base state that exercised the report path, instead of trusting the suite that had been written against a consistent tree",
         "Measured which ledger fields actually block a reconstructed admission before rejecting reconstruction, instead of assuming three fields were the only obstacle",
-        "Audited every mirror comparison in enforce_goal_hierarchy.py against the reconciler's maintained field list instead of assuming the nine fields first found were the whole family, which surfaced two more latent gaps"
+        "Audited every mirror comparison in enforce_goal_hierarchy.py against the reconciler's maintained field list instead of assuming the nine fields first found were the whole family, which surfaced two more latent gaps",
+        "Simulated a future frontier advance end to end and noticed the guard no longer reported the predicate being repaired, which is how the repeal of the alignment law was caught before it shipped"
       ],
       "search_stop_decision": "Stopped external search entirely: every fact needed is decidable from this repository and its GitHub metadata, and the sandbox has no outbound HTTPS from Python. Further searching could not change any of the four defects.",
       "affected_layers_only_on_revalidation": true,
@@ -257,7 +264,8 @@
       "HAND_WRITE_STAGE_A_ADMISSION_ARTIFACTS",
       "KEEP_A_BLANKET_NONZERO_HIT_REFUSAL_IN_V2",
       "LEAVE_THE_AUTHORITY_SELF_INCONSISTENT_AND_ONLY_REPAIR_THE_REDUCER_AND_GUARD",
-      "RECONSTRUCT_AN_ADVANCED_LEDGER_TO_FORCE_A_RECORDED_PASS_TO_REPRODUCE"
+      "RECONSTRUCT_AN_ADVANCED_LEDGER_TO_FORCE_A_RECORDED_PASS_TO_REPRODUCE",
+      "ALIGN_THE_AUTHORITY_PROGRESS_EVENT_TARGET_TO_THE_ACTION_CLASS"
     ],
     "deleted_or_bypassed_paths": [
       "RECONCILE_MIRRORS_ONLY",
@@ -268,7 +276,8 @@
       "HAND_WRITE_STAGE_A_ADMISSION_ARTIFACTS",
       "KEEP_A_BLANKET_NONZERO_HIT_REFUSAL_IN_V2",
       "LEAVE_THE_AUTHORITY_SELF_INCONSISTENT_AND_ONLY_REPAIR_THE_REDUCER_AND_GUARD",
-      "RECONSTRUCT_AN_ADVANCED_LEDGER_TO_FORCE_A_RECORDED_PASS_TO_REPRODUCE"
+      "RECONSTRUCT_AN_ADVANCED_LEDGER_TO_FORCE_A_RECORDED_PASS_TO_REPRODUCE",
+      "ALIGN_THE_AUTHORITY_PROGRESS_EVENT_TARGET_TO_THE_ACTION_CLASS"
     ],
     "selected_surviving_route": "FIX_PREDICATES_MIRROR_V1_CLASSIFICATION_AND_PORT_MISSING_CHECKS__REPLACE_VERSION_CONSTANTS_WITH_CURRENCY_RULE__RECONCILE_MIRRORS_WITH_A_TESTED_TOOL",
     "why_selected_route_is_fastest_sufficient": "It is the only route that removes all four root causes rather than their symptoms, strictly strengthens every mandatory check, costs zero incremental spend, needs no external access this identity lacks, and its effect is directly verifiable in minutes against four live canonical ledgers, two recorded admission artifacts, one existing mirror-firewall oracle and the full test suite.",

@@ -1022,12 +1022,6 @@ REMEDIATION_HINTS=(
      "recompute all of them deterministically instead of hand-editing: "
      "python3 canonical/runtime/reconcile_frontier_mirrors.py . --check "
      "(then re-run without --check to write)"),
-    (("HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH",),
-     "the authority's own next_progress_event_target is stale against its "
-     "next_required_action_class; align it, which changes no active target, parent "
-     "blocker or action class: "
-     "python3 canonical/runtime/reconcile_frontier_mirrors.py . "
-     "--align-hierarchy-progress-event"),
     (("POINTER_CONTROL_PATH_",),
      "pointer control paths are not the current version of their family; advance "
      "them: python3 canonical/runtime/reconcile_frontier_mirrors.py . "
