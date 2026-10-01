@@ -198,7 +198,12 @@
     "continuous_obs_runtime_path": "canonical/runtime/continuous_obs_runtime.py",
     "continuous_obs_on_every_material_state_transition": true,
     "material_world_state_unknown_fails_closed": true,
-    "information_action_authorization_required": true
+    "information_action_authorization_required": true,
+    "execution_authority_reducer_required": true,
+    "execution_authority_reducer_path": "canonical/runtime/execution_authority_reducer.py",
+    "exact_active_carrier_identity_binding_required": true,
+    "second_open_execution_carrier_forbidden": true,
+    "post_material_transition_authority_revalidation_required": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -977,7 +982,11 @@
     "reacquire_existing_terminal_information_without_invalidation": false,
     "current_rank22_non_regression": "INVALIDATED_BY_SPENT_BUILDER_FAILURE__NO_LONGER_APPLIES",
     "minimum_reality_cut_now_fully_active": true,
-    "evidence_saturation_activation_receipt": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json"
+    "evidence_saturation_activation_receipt": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json",
+    "execution_authority_reducer": "canonical/runtime/execution_authority_reducer.py",
+    "execution_authority_carrier_binding_verification": "canonical/verification/EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_20261002_V1.json",
+    "duplicate_carrier_regression": "canonical/regressions/2026-10-02_DUPLICATE_CARRIER_AUTHORITY_HASH_COLLISION.json",
+    "static_carrier_agnostic_authority_forbidden": true
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
