@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_REDUCER_VERIFICATION_V1",
+  "date": "2026-10-01",
+  "status": "INDEPENDENT_VERIFICATION_PASS__TERMINAL_VERDICT_REDUCER_AUTHORIZED_FOR_FAIL_CLOSED_USE",
+  "brain_artifact": "canonical/runtime/terminal_closure_reducer.py",
+  "brain_blob_sha": "bc1b6c97a2941197553903e49a7b6ad6d1ec5ab7",
+  "runner_repo": "moxnixmdj/verification-capsule-runner",
+  "runner_pr": 315,
+  "runner_merge_commit": "b4e2eda107eb07f8ac9ac0101cd9af593d162720",
+  "runner_source_blob_sha": "bc1b6c97a2941197553903e49a7b6ad6d1ec5ab7",
+  "exact_source_blob_match": true,
+  "workflow_run_id": 36907485969,
+  "job_id": 110521553752,
+  "conclusion": "success",
+  "verified_behaviors": [
+    "COMPLETE_19_FAMILY_PASS_CASE_RETURNS_ACHIEVED",
+    "EVERY_TERMINAL_PREDICATE_FALSE_FAILS_CLOSED",
+    "EVERY_REQUIRED_COUNTER_NONZERO_FAILS_CLOSED",
+    "EVERY_REQUIRED_COUNTER_UNKNOWN_FAILS_CLOSED",
+    "OPEN_FAMILY_FAILS_CLOSED",
+    "MISSING_FAMILY_FAILS_CLOSED",
+    "DUPLICATE_FAMILY_ID_FAILS_CLOSED",
+    "COUNTER_PREDICATE_CONTRADICTION_FAILS_CLOSED"
+  ],
+  "limitation": "This verifies reducer logic, not current terminal-goal completion. Current manifest remains NOT ACHIEVED until every required predicate is evidenced.",
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
