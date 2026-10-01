@@ -1,0 +1,122 @@
+name: Shared Cognitive Basis Stage2 Real Trace V1
+
+on:
+  push:
+    branches:
+      - probe/shared-cognitive-basis-jev-v1
+    paths:
+      - canonical/capabilities/cognitive_kernel/cognitive_basis_real_trace_stage2_v1.json
+      - canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py
+      - .github/workflows/shared-cognitive-basis-stage2-real-trace-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generic-qwen-0-8b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Simple-JEV
+        run: |
+          git clone https://github.com/featherless-ai/simple-jev.git /tmp/simple-jev
+          git -C /tmp/simple-jev checkout 146d3a65cc6e52926bf136e2e29cd2d9d7108e39
+          python -m pip install -e /tmp/simple-jev/hf-server
+      - name: Start generic local decision server
+        run: |
+          nohup simple-jev --model Qwen/Qwen3.5-0.8B --device cpu --dtype float32 \
+            --classifier-prompt-policy baseline --max-model-len 2048 --max-batch-size 4 --max-batch-tokens 2048 \
+            > /tmp/generic.log 2>&1 &
+          for i in $(seq 1 180); do
+            curl --fail --silent http://127.0.0.1:8000/health >/dev/null && exit 0
+            sleep 2
+          done
+          cat /tmp/generic.log
+          exit 1
+      - name: Run Stage2 real-trace cases
+        run: |
+          python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
+            --cases canonical/capabilities/cognitive_kernel/cognitive_basis_real_trace_stage2_v1.json \
+            --endpoint http://127.0.0.1:8000 --model Qwen/Qwen3.5-0.8B --delay 0 \
+            --out stage2_generic_qwen_0_8b.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2-generic-qwen-0-8b
+          path: stage2_generic_qwen_0_8b.json
+          if-no-files-found: ignore
+
+  laya-typed-decisions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Simple-JEV with Laya
+        run: |
+          git clone https://github.com/featherless-ai/simple-jev.git /tmp/simple-jev
+          git -C /tmp/simple-jev checkout 146d3a65cc6e52926bf136e2e29cd2d9d7108e39
+          python -m pip install -e '/tmp/simple-jev/hf-server[laya]'
+      - name: Start pinned Laya server
+        env:
+          USE_TF: "0"
+        run: |
+          nohup simple-jev --backend laya --model convaiinnovations/laya --subfolder typed-decisions \
+            --revision 458d7563c5cab85ff9f7f6e06cf2dd166fb697e2 --device cpu --max-model-len 1024 \
+            > /tmp/laya.log 2>&1 &
+          for i in $(seq 1 180); do
+            curl --fail --silent http://127.0.0.1:8000/health >/dev/null && exit 0
+            sleep 2
+          done
+          cat /tmp/laya.log
+          exit 1
+      - name: Run Stage2 real-trace cases
+        run: |
+          python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
+            --cases canonical/capabilities/cognitive_kernel/cognitive_basis_real_trace_stage2_v1.json \
+            --endpoint http://127.0.0.1:8000 --model convaiinnovations/laya --delay 0 \
+            --out stage2_laya.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2-laya
+          path: stage2_laya.json
+          if-no-files-found: ignore
+
+  open-jev-2b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify pinned public Open-Jev deployment
+        run: |
+          python - <<'PY'
+          import json, time, urllib.request
+          u="https://zefancai-open-jev-workbench.hf.space/health"
+          expected="0c7aa498b1627be8da4acf34c863ff0ee0a92785"
+          for _ in range(120):
+              try:
+                  req=urllib.request.Request(u,headers={"User-Agent":"Project-Brain-Stage2/1.0","Accept":"application/json"})
+                  with urllib.request.urlopen(req,timeout=30) as r: x=json.load(r)
+                  print(json.dumps(x,sort_keys=True))
+                  if x.get("checkpoint_revision") != expected: raise SystemExit("checkpoint drift")
+                  if x.get("status")=="ready": raise SystemExit(0)
+                  if x.get("status")=="error": raise SystemExit("model load error")
+              except SystemExit: raise
+              except Exception as e: print(type(e).__name__)
+              time.sleep(5)
+          raise SystemExit("deployment not ready")
+          PY
+      - name: Run Stage2 real-trace cases
+        run: |
+          python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
+            --cases canonical/capabilities/cognitive_kernel/cognitive_basis_real_trace_stage2_v1.json \
+            --endpoint https://zefancai-open-jev-workbench.hf.space --api-path /v1/systemone \
+            --model open-jev --delay 0 --out stage2_open_jev_2b.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2-open-jev-2b
+          path: stage2_open_jev_2b.json
+          if-no-files-found: ignore
