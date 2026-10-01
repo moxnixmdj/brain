@@ -22,16 +22,32 @@
       "class": "MIXED",
       "preferred_route": "DETERMINISTIC_FILTERS_THEN_CROSS_ENCODER_RERANKER",
       "open_candidates": [
-        "cross-encoder/ettin-reranker-150m-v1",
+        "huggingface/sentence-transformers::CrossEncoder retrieve-then-rerank (Apache-2.0)",
         "pipizhao/SkillRouter-Reranker-0.6B"
       ],
-      "state": "OPEN__PRIMITIVE_SPECIFIC_REUSE_TEST_REQUIRED"
+      "state": "DEFINED__DETERMINISTIC_FILTER_FIRST__CROSS_ENCODER_TRANSFER_TEST_REQUIRED",
+      "executable_contract": {
+        "input": "GOAL_PLUS_CANDIDATE_PLUS_HARD_CONSTRAINTS",
+        "output": "ADMISSIBLE_AND_RELEVANCE_SCORE_OR_RANK",
+        "deterministic_part": "REJECT_CANDIDATES_VIOLATING_EXPLICIT_SCOPE_AUTHORITY_AVAILABILITY_OR_TYPE_CONSTRAINTS",
+        "learned_residual": "SEMANTIC_GOAL_CANDIDATE_RELEVANCE_ONLY_AFTER_HARD_FILTERING"
+      }
     },
     {
       "id": "C2_CANDIDATE_ACTION_UTILITY",
       "class": "LEARNED_OR_GENERATIVE_RESIDUAL",
       "preferred_route": "EXPLICIT_COST_BENEFIT_WHERE_COMPUTABLE__OTHERWISE_GENERATOR_PLUS_OUTCOME_MODEL",
-      "state": "UNRESOLVED"
+      "state": "DEFINED__EXACT_EXPECTED_UTILITY_OR_MCTS_WHEN_MODEL_EXISTS__OUTCOME_MODEL_RESIDUAL_OPEN",
+      "executable_contract": {
+        "input": "CANDIDATE_ACTIONS_PLUS_OBJECTIVE_PLUS_COSTS_PLUS_TRANSITION_OR_OUTCOME_MODEL_WHEN_AVAILABLE",
+        "output": "EXPECTED_UTILITY_OR_ACTION_RANK",
+        "deterministic_part": "IF_OUTCOME_PROBABILITIES_AND_UTILITIES_ARE_EXPLICIT_COMPUTE_EXPECTED_UTILITY_EXACTLY",
+        "search_part": "IF_STATE_TRANSITIONS_AND_REWARDS_ARE_EXECUTABLE_USE_TREE_SEARCH_OR_MCTS",
+        "learned_residual": "OUTCOME_OR_VALUE_ESTIMATION_ONLY_WHEN_TRANSITION_REWARD_EFFECTS_CANNOT_BE_COMPUTED"
+      },
+      "open_candidates": [
+        "google-deepmind/open_spiel MCTS/PUCT primitives (Apache-2.0)"
+      ]
     },
     {
       "id": "C3_TOOL_ROUTE_SUITABILITY",
@@ -80,13 +96,29 @@
       "open_candidates": [
         "MoritzLaurer/deberta-v3-base-zeroshot-v1"
       ],
-      "state": "OPEN"
+      "state": "DEFINED__BAYES_WHEN_MODEL_EXISTS__SEMANTIC_SCORER_NOT_AUTHORITY__GENERATION_SEPARATE",
+      "executable_contract": {
+        "input": "EXPLICIT_HYPOTHESES_PLUS_EVIDENCE_PLUS_LIKELIHOOD_MODEL_WHEN_AVAILABLE",
+        "output": "POSTERIOR_OR_RELATIVE_PLAUSIBILITY_RANK",
+        "deterministic_part": "USE_BAYES_OR_LOG_LIKELIHOOD_WHEN_PRIORS_AND_LIKELIHOODS_ARE_EXPLICIT",
+        "semantic_residual": "TEXTUAL_COMPATIBILITY_SCORING_ONLY_WHEN_NO_EXPLICIT_LIKELIHOOD_MODEL_EXISTS",
+        "generation_boundary": "HYPOTHESIS_GENERATION_IS_SEPARATE_AND_REQUIRED_WHEN_CANDIDATE_HYPOTHESIS_IS_ABSENT"
+      }
     },
     {
       "id": "C5_EXPECTED_INFORMATION_GAIN",
       "class": "MIXED",
       "preferred_route": "DETERMINISTIC_UNCERTAINTY_REDUCTION_WHERE_STATE_DISTRIBUTION_EXISTS__LEARNED_ESTIMATOR_ONLY_FOR_OPEN_ENDED_RESIDUAL",
-      "state": "OPEN"
+      "state": "DEFINED__EIG_IS_DETERMINISTIC_GIVEN_BELIEF_AND_OBSERVATION_MODEL__MODEL_ESTIMATION_RESIDUAL_OPEN",
+      "executable_contract": {
+        "input": "CURRENT_BELIEF_OR_HYPOTHESIS_DISTRIBUTION_PLUS_CANDIDATE_OBSERVATIONS_OR_EXPERIMENTS_PLUS_OBSERVATION_MODEL",
+        "output": "EXPECTED_ENTROPY_REDUCTION_OR_INFORMATION_GAIN_RANK",
+        "deterministic_part": "COMPUTE_EXPECTED_POSTERIOR_ENTROPY_REDUCTION_WHEN_BELIEF_AND_OBSERVATION_MODEL_ARE_EXPLICIT",
+        "learned_residual": "BELIEF_OR_OBSERVATION_MODEL_ESTIMATION_ONLY_WHEN THOSE MODELS ARE NOT AVAILABLE"
+      },
+      "open_candidates": [
+        "emdgroup/baybe Bayesian experimental planning / design of experiments (Apache-2.0)"
+      ]
     },
     {
       "id": "C6_ANOMALY_AND_FAILURE_DETECTION",
@@ -198,5 +230,21 @@
     "simple_jev_qwen": "FALSIFIED_ZERO_TRAINING_BASELINE",
     "laya": "DOMINATED_BASELINE",
     "conclusion": "NO_GENERIC_SMALL_AUTO_ADMIT_JUDGE_IS_CURRENTLY_AUTHORIZED"
+  },
+  "vagueness_correction_20261001": {
+    "status": "EXECUTED__C1_C2_C4_C5_CONVERTED_TO_TESTABLE_CONTRACTS__ZERO_CAPABILITY_CREDIT",
+    "rule": "DO_NOT_BUILD_OR_TRAIN_FOR_A_PRIMITIVE_UNTIL_INPUT_OUTPUT_CONTRACT_AND_DETERMINISTIC_SUBTRACTION_ARE_EXPLICIT",
+    "candidate_license_checks": {
+      "huggingface/sentence-transformers": "Apache-2.0",
+      "google-deepmind/open_spiel": "Apache-2.0",
+      "emdgroup/baybe": "Apache-2.0"
+    },
+    "unresolved_after_definition": [
+      "C1_FRESH_CROSS_DOMAIN_RELEVANCE_TRANSFER_AFTER_HARD_FILTERING",
+      "C2_OUTCOME_OR_VALUE_MODEL_WHEN_DYNAMICS_REWARD_CANNOT_BE_COMPUTED",
+      "C4_SEMANTIC_PLAUSIBILITY_WITHOUT_EXPLICIT_LIKELIHOOD_AND_HYPOTHESIS_GENERATION_WHEN_ABSENT",
+      "C5_BELIEF_OR_OBSERVATION_MODEL_WHEN_NOT_EXPLICIT"
+    ],
+    "capability_credit_delta": 0
   }
 }

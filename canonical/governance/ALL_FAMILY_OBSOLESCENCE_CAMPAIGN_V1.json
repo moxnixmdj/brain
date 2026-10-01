@@ -15,7 +15,7 @@
     "incremental_spend_usd": 0,
     "primary_terminal_priority": true,
     "priority_invariant": "ACTIONABLE_LIVE_PRIMARY_FRESH_TERMINAL_EVIDENCE_PREEMPTS_SIDE_PROBE_CHURN__PARALLEL_DISCOVERY_ONLY_ON_INDEPENDENT_SPARE_CAPACITY",
-    "current_lane_A_state": "RANK9_ATRX_VEP_CRISPR_LIVE_PATCHED_FAST_BURST__CLEAN_BOUNDARY_PRESERVED",
+    "current_lane_A_state": "RANK10_CAD_MODEL_LIVE__READY_REACHED__CANDIDATE_V4_SINGLE_SOLID__R16_GEOMETRY_UNRESOLVED__PRE_VERIFICATION",
     "atomic_causal_decomposition_parallel": true,
     "atomic_decomposition_sources": "SPENT_OR_VERIFIED_TRAJECTORIES_AND_NONCONTAMINATING_DONOR_EVIDENCE_ONLY"
   },
@@ -25,7 +25,7 @@
       "families": [
         "ADVANCED_AGENTIC_CODING"
       ],
-      "next": "continue rank-9 atrx-vep-crispr clean execution; use family label only as an evaluation surface, not as an implementation decomposition"
+      "next": "resolve the known R16 geometry gap on clean rank-10 cad-model, completion-audit the artifact, then spend the one-shot verifier only if no known acceptance gap remains"
     },
     {
       "id": "B",
