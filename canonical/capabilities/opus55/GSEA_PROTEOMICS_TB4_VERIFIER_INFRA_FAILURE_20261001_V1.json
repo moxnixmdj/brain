@@ -3,7 +3,7 @@
   "record_id": "TB4-GSEA-PROTEOMICS-RANK4-INFRA-FAILURE-20261001-V1",
   "status": "UNVERIFIED_INFRASTRUCTURE_FAILURE_BEFORE_TEST_SCRIPT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "f33ab5771af2e4669b4c05e18fd19b69dbc0b0fe",
+  "canonical_base_commit": "70cb51cafaa0d1f111c9eec0a5daa7d25792f617",
   "task": {
     "benchmark": "Terminal-Bench 4.0",
     "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
@@ -11,7 +11,7 @@
     "sample_rank": 4,
     "task_id": "gsea-proteomics",
     "lease_action_base_commit": "c6c74e0b5a8b1a21f32f6c878eb97ee10bf1608e",
-    "disposition_record_base_commit": "f33ab5771af2e4669b4c05e18fd19b69dbc0b0fe"
+    "disposition_record_base_commit": "70cb51cafaa0d1f111c9eec0a5daa7d25792f617"
   },
   "attempt": {
     "runner_repository": "moxnixmdj/verification-capsule-runner",
@@ -84,10 +84,10 @@
     "frozen_sample_reordered": false,
     "rank_6_instruction_read": false
   },
-  "next_action": "After canonical current-base reconciliation and a fresh route preflight, evaluate the rank-6 candidate only if the independent-verification route is honestly ready; do not read its instructions before a valid lease.",
+  "next_action": "After this current-base reconciliation passes the trusted guard, honor the live pointer metadata but do not read or execute the rank-5 task while the standing user instruction to skip the contaminated sample remains unreversed. Keep rank 6 unopened. Review newer GSEA/cognitive result records only after explicit user permission; do not infer any new pass, score, or credit from paths/commit subjects.",
   "current_canonical_context": {
     "all_family_campaign_preserved_atomic_execution": "gsea-proteomics",
-    "cognitive_basis_campaign": "ACTIVE__CURRENT_BASE_TOURNAMENT_AND_FRESH_RESULT_UNREVIEWED__NO_ROUTE_ADOPTED__ZERO_CAPABILITY_CREDIT",
+    "cognitive_basis_campaign": "ACTIVE__C3_DETERMINISTIC_CONTROL_RETAINED__ETTIN_ZERO_TERMINAL_DELTA_FALSIFIED__ZERO_CAPABILITY_CREDIT",
     "pointwise_evaluation_set": "FIXED_ON_MAIN__12_UNIQUE_CASES_LOAD_LOCALLY",
     "pointwise_probe_result": "canonical/capabilities/opus55/COGNITIVE_BASIS_JEVOS_BASELINE_002_RESULT.json",
     "pointwise_probe_workflow_run_id": 36817492953,
@@ -121,7 +121,7 @@
     "simple_jev_comparison_capability_credit_delta": 0,
     "simple_jev_comparison_artifact_id": 11142535841,
     "simple_jev_comparison_artifact_digest": "sha256:a5225de447054211cb25416ee83553c111a53189aa1fd13a510fd9ce8dced9c7",
-    "next_cognitive_basis_action": "REQUEST_EXPLICIT_PERMISSION_BEFORE_REVIEWING_CURRENT_BASE_TOURNAMENT_OR_FRESH_TASK_RESULT__KEEP_PRIOR_JEVOS_ROUTE_ON_HOLD",
+    "next_cognitive_basis_action": "REQUEST_EXPLICIT_PERMISSION_BEFORE_REVIEWING_NEW_CURRENT_BASE_COGNITIVE_RESULTS_OR_TASK_MATERIALS__NO_ROUTE_OR_CREDIT_CLAIM",
     "laya_case_processing_permission": "NOT_GRANTED_IN_THIS_RECONCILIATION",
     "laya_typed_decisions_result": "canonical/capabilities/opus55/COGNITIVE_BASIS_LAYA_TYPED_DECISIONS_BASELINE_001_RESULT.json",
     "laya_typed_decisions_workflow_run_id": 36818008161,
@@ -136,12 +136,12 @@
     "laya_typed_decisions_capability_credit_delta": 0,
     "laya_typed_decisions_artifact_id": 11142780325,
     "laya_typed_decisions_artifact_digest": "sha256:66312ccfbd12f69a0b80c7dc53ca021405b0047e0800cb6f32bea9d31ba0b664",
-    "best_current_zero_training_open_route": "CURRENT_BASE_TOURNAMENT_AND_FRESH_RESULT_UNREVIEWED__NO_COGNITIVE_ROUTE_ADOPTED",
+    "best_current_zero_training_open_route": "CURRENT_MAIN_CAMPAIGN_C3_STATUS__NEW_TASK_RESULT_CONTENTS_UNREVIEWED__NO_ROUTE_CLAIM",
     "open_reuse_tournament_result": "canonical/capabilities/opus55/COGNITIVE_BASIS_OPEN_REUSE_TOURNAMENT_001.json",
-    "open_reuse_tournament_status": "CURRENT_BASE_TOURNAMENT_MODIFIED__CONTENT_UNREVIEWED__NO_ROUTE_OUTCOME_ADOPTED",
-    "provisional_selected_route": "HISTORICAL_JEVOS_SELECTION_HELD_PENDING_REVIEW_OF_CURRENT_BASE_TOURNAMENT_AND_RESULT",
+    "open_reuse_tournament_status": "CURRENT_MAIN_CAMPAIGN_ADVANCED_TO_C3__NEWER_ROUTE_AND_RESULT_PAYLOADS_UNREVIEWED",
+    "provisional_selected_route": "NO_CURRENT_COGNITIVE_ROUTE_ADOPTED_BY_THIS_RECONCILIATION__CURRENT_BASE_CAMPAIGN_STATUS_C3__RESULTS_UNREVIEWED",
     "decision_kernel_candidate": "canonical/runtime/cognitive_decision_kernel.py",
-    "decision_kernel_candidate_status": "SYNTHETIC_CANARIES_PASS__CURRENT_BASE_GATE_AND_FRESH_RESULT_UNREVIEWED__NO_ADMISSION_OR_ROUTE_CLAIM",
+    "decision_kernel_candidate_status": "HISTORICAL_SYNTHETIC_TESTED_CANDIDATE__NOT_INTEGRATED__CURRENT_MAIN_CAMPAIGN_ADVANCED__NEW_ROUTE_RECORDS_UNREVIEWED",
     "decision_kernel_candidate_commit": "10a0647db81aba7fb7aacf626ccf6b8a8382b6c1",
     "frozen_v2_wrong_admission_gate": "EARLIER_GATE_AND_FRESH_TASK_RESULT_RECORDS_UNREVIEWED__NO_OUTCOME_INFERRED",
     "decision_kernel_synthetic_tests": "canonical/tests/test_cognitive_decision_kernel.py",
@@ -161,7 +161,7 @@
     "jevOS_runtime_rebind_artifact_digest": "sha256:c7cdb28a335b8f4f82b8d73c8ec959dd288c08d72705355ebf8c8d5eca14fc95",
     "jevOS_runtime_rebind_exact_decision_equivalence_on_frozen_v2": true,
     "decision_kernel_runtime_fingerprint_enforced_in_adapter": false,
-    "current_canonical_base_commit": "f33ab5771af2e4669b4c05e18fd19b69dbc0b0fe",
+    "current_canonical_base_commit": "70cb51cafaa0d1f111c9eec0a5daa7d25792f617",
     "current_base_kernel_gate_result_record": "canonical/capabilities/opus55/COGNITIVE_DECISION_KERNEL_GATE_VERIFY_001_RESULT.json",
     "current_base_kernel_gate_result_record_reviewed": false,
     "fresh_software_adjudication_task": "canonical/tasks/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001.json",
@@ -172,6 +172,18 @@
     "current_base_tournament_revision_reviewed": false,
     "current_base_fresh_task_result": "canonical/capabilities/opus55/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001_RESULT.json",
     "current_base_fresh_task_result_reviewed": false,
-    "no_route_outcome_or_capability_credit_inferred_from_unreviewed_records": true
+    "no_route_outcome_or_capability_credit_inferred_from_unreviewed_records": true,
+    "current_main_pointer_next_step": "EXECUTE_BATCHED_EVAL_PARITY_RANK_5_ON_HIGH_THROUGHPUT_EXECUTION_V2__ONE_SHOT_INDEPENDENT_VERIFIER__NO_TASK_SPECIFIC_PUBLIC_SEARCH",
+    "current_main_rank5_lease_path": "canonical/action_intents/2026-10-01_LEASE_BATCHED_EVAL_PARITY_TB4_V1.json",
+    "current_main_rank5_lease_content_reviewed": false,
+    "rank5_task_execution_or_result_claim_in_this_reconciliation": false,
+    "rank5_user_permission_status": "NOT_GRANTED__STANDING_SKIP_CONTAMINATED_RANK5_INSTRUCTION_REMAINS",
+    "current_main_gsea_record_path": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json",
+    "current_main_gsea_record_reviewed": false,
+    "current_main_cognitive_router_path": "canonical/runtime/cognitive_tool_router.py",
+    "current_main_task_and_result_payloads_reviewed": false,
+    "current_main_new_pass_score_or_credit_inferred": false,
+    "prior_verified_pass_snapshot_base": "6d440fb1052adb50b2926de5af21df5fe00af46c",
+    "current_base_scoreboard_review_status": "NOT_REVIEWED_IN_THIS_RECONCILIATION"
   }
 }
