@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+    "exact_blocker": "RANK21_INELIGIBLE__NEXT_UNTOUCHED_FROZEN_SAMPLE_RANK22_REQUIRES_STAGE_A_PREEXPOSURE_ADMISSION",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
+    "next_action": "DERIVE_RANK22_FROM_FROZEN_MANIFEST__RUN_COMPLETE_STAGE_A_PREEXPOSURE_SEARCH__DO_NOT_READ_INSTRUCTION",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -121,9 +121,9 @@
         "intrastat-meldung"
       ],
       "current_task": {
-        "rank": 10,
-        "task": "cad-model",
-        "state": "LEASED_FRESH_TASK__INSTRUCTION_UNREAD"
+        "rank": 22,
+        "task": "freecad-spring-clip",
+        "state": "STAGE_A_PREEXPOSURE_REQUIRED__INSTRUCTION_UNREAD"
       },
       "comparable_score_established": false,
       "surface_skipped_unspent": [
@@ -144,11 +144,11 @@
       ]
     },
     "latest_contamination": {
-      "task": "intrastat-meldung",
-      "rank": 8,
-      "cause": "ACCIDENTAL_TASK_SPECIFIC_SOLUTION_EXPOSURE",
+      "task": "foodstuff-beta-activity",
+      "rank": 21,
+      "cause": "POST_STAGE_B_EXTERNAL_DISCOVERY_COLLISION_WITH_TASK_SPECIFIC_VERIFIER_DERIVED_CONTENT",
       "hidden_verifier_run": false,
-      "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
+      "evidence_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json"
     },
     "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
     "latest_policy_inadmissible": {
