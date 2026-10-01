@@ -9,7 +9,7 @@ HTTP_HEADERS = {
     "Accept": "application/json"
 }
 
-def post_json(url, payload, timeout=60):
+def post_json(url, payload, timeout=300):
     data = json.dumps(payload).encode()
     headers = dict(HTTP_HEADERS)
     headers["Content-Type"] = "application/json"
@@ -18,10 +18,7 @@ def post_json(url, payload, timeout=60):
         return json.load(r)
 
 def discover_model(endpoint):
-    req = urllib.request.Request(
-        endpoint.rstrip("/") + "/v1/models",
-        headers=HTTP_HEADERS
-    )
+    req = urllib.request.Request(endpoint.rstrip("/") + "/v1/models", headers=HTTP_HEADERS)
     with urllib.request.urlopen(req, timeout=30) as r:
         payload = json.load(r)
     data = payload.get("data", [])
@@ -29,9 +26,9 @@ def discover_model(endpoint):
         raise RuntimeError("No model id returned by /v1/models")
     return data[0]["id"]
 
-def endpoint_decider(endpoint, model, delay):
+def endpoint_decider(endpoint, model, delay, api_path):
     model = discover_model(endpoint) if model == "auto" else model
-    url = endpoint.rstrip("/") + "/v1/classifier"
+    url = endpoint.rstrip("/") + "/" + api_path.strip("/")
     first = True
     def decide(case):
         nonlocal first
@@ -97,6 +94,7 @@ def main():
     ap.add_argument("--cases", required=True)
     ap.add_argument("--endpoint", default="https://simple-jev-demo-api.featherless.ai")
     ap.add_argument("--model", default="auto")
+    ap.add_argument("--api-path", default="/v1/classifier")
     ap.add_argument("--delay", type=float, default=0.6)
     ap.add_argument("--out")
     ap.add_argument("--oracle-self-test", action="store_true")
@@ -111,7 +109,9 @@ def main():
         if case["expected"] not in case["criteria"]:
             raise SystemExit(f"{case['id']}: expected choice absent from criteria")
 
-    decide = oracle_decider if args.oracle_self_test else endpoint_decider(args.endpoint, args.model, args.delay)
+    decide = oracle_decider if args.oracle_self_test else endpoint_decider(
+        args.endpoint, args.model, args.delay, args.api_path
+    )
     report = evaluate(cases, decide)
     rendered = json.dumps(report, indent=2, sort_keys=True)
     if args.out:

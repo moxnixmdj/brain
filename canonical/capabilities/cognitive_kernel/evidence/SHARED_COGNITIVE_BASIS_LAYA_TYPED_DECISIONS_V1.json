@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_COGNITIVE_BASIS_PROBE_RESULT_V1",
+  "result_id": "SHARED_COGNITIVE_BASIS_LAYA_TYPED_DECISIONS_20261001_V1",
+  "status": "ZERO_CREDIT_DIAGNOSTIC__SPECIALIST_COMPARISON_COMPLETE",
+  "capability_credit_delta": 0,
+  "execution": {
+    "workflow_run_id": 36814298489,
+    "workflow_job_id": 110215899208,
+    "artifact_id": 11141125722,
+    "brain_commit": "3bac69ece4f738513c3f8aa23ad9698f1bd50355",
+    "simple_jev_repo": "featherless-ai/simple-jev",
+    "simple_jev_revision": "146d3a65cc6e52926bf136e2e29cd2d9d7108e39",
+    "simple_jev_license": "Apache-2.0",
+    "model_repo": "convaiinnovations/laya",
+    "model_subfolder": "typed-decisions",
+    "model_revision": "458d7563c5cab85ff9f7f6e06cf2dd166fb697e2",
+    "model_license": "Apache-2.0",
+    "model_parameters": 421000000,
+    "device": "cpu",
+    "incremental_spend_usd": 0
+  },
+  "dataset": {
+    "path": "canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json",
+    "n": 10,
+    "kind": "UNCHANGED_SYNTHETIC_SANITY_CASES__NOT_HELDOUT_FAMILY_QUALIFICATION"
+  },
+  "aggregate": {
+    "accuracy": 0.8,
+    "mean_nll": 0.6813137034040841
+  },
+  "primitive_results": {
+    "next_action_selection": {"n": 2, "accuracy": 1.0, "mean_nll": 0.6703324791632697},
+    "root_cause_ranking": {"n": 1, "accuracy": 1.0, "mean_nll": 0.22991643560163852},
+    "scope_judgment": {"n": 1, "accuracy": 1.0, "mean_nll": 0.8198448336059029},
+    "tool_selection": {"n": 2, "accuracy": 1.0, "mean_nll": 0.7371314980674113},
+    "verification_judgment": {"n": 1, "accuracy": 1.0, "mean_nll": 0.5771435048036392},
+    "evidence_sufficiency": {"n": 1, "accuracy": 1.0, "mean_nll": 0.5518212444695104},
+    "stop_continue": {"n": 1, "accuracy": 0.0, "mean_nll": 0.928616381564792},
+    "escalation_judgment": {"n": 1, "accuracy": 0.0, "mean_nll": 0.8908666795339967}
+  },
+  "material_failures": [
+    {
+      "case": "coding-02",
+      "primitive": "stop_continue",
+      "expected": "stress",
+      "predicted": "ignore",
+      "winning_confidence": 0.4253
+    },
+    {
+      "case": "agency-01",
+      "primitive": "escalation_judgment",
+      "expected": "regenerate",
+      "predicted": "retry",
+      "winning_confidence": 0.4153
+    }
+  ],
+  "comparison_to_generic_qwen_0_8b": {
+    "accuracy_delta": 0.1,
+    "mean_nll_delta": 0.23685833010252694,
+    "corrected_primitives": ["verification_judgment", "evidence_sufficiency"],
+    "regressed_primitives": ["stop_continue"],
+    "persistently_failed_primitives": ["escalation_judgment"]
+  },
+  "interpretation": {
+    "supported": "Specialized bounded-decision training can improve exact-choice accuracy on the unchanged cross-domain sanity interface.",
+    "counterevidence": "Probabilistic quality by mean NLL worsened and specialization did not dominate the generic baseline on every primitive.",
+    "next_falsifier": "Run an independently specialized Open-Jev 2B decision model on the exact unchanged cases before considering any Brain-specific training."
+  },
+  "promotion_gate": "NO_PROMOTION__TEN_SYNTHETIC_CASES_CANNOT_ESTABLISH_SHARED_KERNEL_CAUSALITY_OR_OPUS_PARITY"
+}
