@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_REQUIREMENT_ACCEPTANCE_COMPILER_VERIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__DETERMINISTIC_M0B_SUBMECHANISM_VERIFIED__ZERO_FAMILY_CREDIT",
+  "artifact": "canonical/runtime/requirement_acceptance_compiler.py",
+  "tests": "canonical/tests/test_requirement_acceptance_compiler_unittest.py",
+  "workflow": ".github/workflows/verify-requirement-acceptance-compiler-v2.yml",
+  "run_id": 36940501300,
+  "head_sha": "4c5087a3197f47fe6a1beac955ad60510ec150f2",
+  "conclusion": "success",
+  "verified": [
+    "ALL_CURRENT_INDEPENDENT_ACCEPTANCE_MODEL_TRANSFORM_KINDS_COMPILE_TO_NONEMPTY_FAILURE_OBLIGATIONS",
+    "UNKNOWN_TRANSFORM_KIND_FAILS_CLOSED",
+    "COMPOSED_KNOWN_TRANSFORMS_PRESERVE_REQUIRED_FAILURE_MODES",
+    "NO_NATURAL_LANGUAGE_SEMANTIC_EXTRACTION_IS_CLAIMED",
+    "NO_TERMINAL_CORRECTNESS_AUTHORITY_IS_GRANTED"
+  ],
+  "m0b_effect": "NORMALIZED_REQUIREMENT_TO_ACCEPTANCE_CONSEQUENCE_COMPILATION_MECHANISM_EXISTS__FROZEN_ENVELOPE_REQUIREMENT_TYPE_COVERAGE_STILL_REQUIRES_PROOF",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
