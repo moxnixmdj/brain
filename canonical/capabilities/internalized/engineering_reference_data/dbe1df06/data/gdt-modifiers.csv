@@ -1,0 +1,16 @@
+modifier,meaning,symbol,codepoint,unicode_name,codepoint_dedicated_to_gdt,note
+MMC,maximum material condition,Ⓜ,U+24C2,CIRCLED LATIN CAPITAL LETTER M,no,
+LMC,least material condition,Ⓛ,U+24C1,CIRCLED LATIN CAPITAL LETTER L,no,
+RFS,regardless of feature size,Ⓢ,U+24C8,CIRCLED LATIN CAPITAL LETTER S,no,legacy - RFS applies by default and the symbol is no longer used in ASME practice
+Projected tolerance zone,projected tolerance zone,Ⓟ,U+24C5,CIRCLED LATIN CAPITAL LETTER P,no,
+Free state,free state,Ⓕ,U+24BB,CIRCLED LATIN CAPITAL LETTER F,no,
+Tangent plane,tangent plane,Ⓣ,U+24C9,CIRCLED LATIN CAPITAL LETTER T,no,
+Unequally disposed,unequally disposed profile,Ⓤ,U+24CA,CIRCLED LATIN CAPITAL LETTER U,no,
+Diameter,diameter,⌀,U+2300,DIAMETER SIGN,no,
+Counterbore,counterbore or spotface,⌴,U+2334,COUNTERBORE,yes,
+Countersink,countersink,⌵,U+2335,COUNTERSINK,yes,
+Depth,depth or deep,↧,U+21A7,DOWNWARDS ARROW FROM BAR,no,
+All around,all around,⌮,U+232E,ALL AROUND-PROFILE,yes,
+Dimension origin,dimension origin,⌱,U+2331,DIMENSION ORIGIN,yes,
+Conical taper,conical taper,⌲,U+2332,CONICAL TAPER,yes,
+Slope,slope,⌳,U+2333,SLOPE,yes,
