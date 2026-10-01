@@ -67,6 +67,24 @@ OBLIGATIONS: dict[str, tuple[str, ...]] = {
         "idempotence",
         "failure_recovery",
     ),
+    "measurement_calibration": (
+        "standard_composition",
+        "measurement_channel_scope",
+        "reference_decay_or_time_alignment",
+        "blank_or_background_treatment",
+    ),
+    "signal_correction": (
+        "cross_talk_direction",
+        "correction_parameter_identity",
+        "correction_order",
+        "unphysical_solution_rejection",
+    ),
+    "method_model_selection": (
+        "method_variant",
+        "assumptions_to_formula",
+        "dimensional_form",
+        "limiting_case",
+    ),
 }
 
 COUNTEREXAMPLE_TEMPLATES: dict[str, str] = {
@@ -97,6 +115,18 @@ COUNTEREXAMPLE_TEMPLATES: dict[str, str] = {
     "roundtrip_or_parse": "Open/parse/round-trip the artifact with an independent implementation.",
     "idempotence": "Repeat an allowed state transition and verify the contract-defined idempotent/non-idempotent behavior.",
     "failure_recovery": "Inject a recoverable failure at a transition boundary and verify the specified recovery semantics.",
+    "standard_composition": "Vary whether a calibration standard contributes to one measurement channel or multiple channels; require calibration to follow the independently established physical composition rather than a convenient single channel.",
+    "measurement_channel_scope": "Construct a calibration case where total signal and one-window signal differ materially and require the accepted route to select the channel scope justified by the measurement model.",
+    "reference_decay_or_time_alignment": "Shift calibration reference and measurement times while holding raw counts fixed; require the independently derived time/decay alignment to change calibration efficiency accordingly.",
+    "blank_or_background_treatment": "Vary blank/background separately from standard and sample signals and require every applicable blank correction to appear at the correct stage.",
+    "cross_talk_direction": "Construct asymmetric cross-talk between measurement channels and require correction in the physically applicable direction; swapping spillover direction must fail.",
+    "correction_parameter_identity": "Provide distinct correction coefficients for different directions/components and require the correct coefficient to be selected by semantics, not numerical convenience.",
+    "correction_order": "Make correction and aggregation non-commutative and verify corrections occur at the independently justified stage before/after aggregation.",
+    "unphysical_solution_rejection": "Create a mathematically solvable but physically invalid correction result and require the route to reject or fail closed rather than accept an unphysical value.",
+    "method_variant": "Instantiate two standard method variants that produce materially different outputs and require the selected formula to be justified by explicit task/method assumptions.",
+    "assumptions_to_formula": "Perturb one declared methodological assumption and require the selected formula branch to change when the governing method says it should.",
+    "dimensional_form": "Check the full dimensional structure of the method-specific formula, not merely unit conversion of its final numerical result.",
+    "limiting_case": "Evaluate a method-specific limiting case whose expected behavior distinguishes competing formulas that otherwise agree on ordinary inputs.",
 }
 
 
