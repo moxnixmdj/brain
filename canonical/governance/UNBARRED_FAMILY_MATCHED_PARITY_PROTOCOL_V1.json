@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_PREDECLARED_PROTOCOL__ZERO_CAPABILITY_CREDIT_UNTIL_EXECUTED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target": {
+    "exact_comparator": "Claude Opus 5.5",
+    "rule": "BRAIN_CONFIGURED_ROUTE_MUST_BE_EQUAL_OR_BETTER_ON_THE_FROZEN_FAMILY_BEHAVIORAL_ENVELOPE",
+    "proxy_comparator_allowed": false,
+    "paid_comparator_acquisition_allowed": false,
+    "unavailable_zero_incremental_comparator_disposition": "BLOCKED__DO_NOT_SUBSTITUTE_ANOTHER_MODEL"
+  },
+  "applicability": {
+    "only_when_no_public_or_absolute_terminal_bar_exists": true,
+    "proof_mode": "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND",
+    "family_behavior_source": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "leaf_source": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "all_leaf_contracts_must_be_semantically_closed_before_challenge_selection": true,
+    "zero_open_specification_holes_required": true
+  },
+  "freeze_order": [
+    "FREEZE_FAMILY_USEFUL_BEHAVIOR_AND_BEHAVIORAL_LEAF_IDS",
+    "FREEZE_BRAIN_OWNED_CAPABILITY_PACKAGE_AND_DEPENDENCY_MANIFEST",
+    "PROVE_DONOR_CAPABILITY_ROUTES_BLOCKED__JIT_KNOWLEDGE_ONLY_REMAINS_ALLOWED",
+    "FREEZE_COMPARATOR_VERSION_TOOL_SURFACE_INFORMATION_BOUNDARY_RESOURCE_POLICY_AND_SCORING_RUBRIC",
+    "FREEZE_CONTAMINATION_SAFE_CHALLENGE_SOURCE_POOLS",
+    "ONLY_THEN_SELECT_CHALLENGES_USING_AN_INDEPENDENT_POST_FREEZE_PUBLIC_UNPREDICTABLE_BEACON_OR_EQUIVALENT_NONCONTROLLABLE_SELECTOR"
+  ],
+  "harness_equivalence": {
+    "same_task_input": true,
+    "same_visible_information": true,
+    "same_jit_knowledge_sources": true,
+    "same_tool_classes": true,
+    "same_external_action_authority": true,
+    "same_task_time_or_step_budget": true,
+    "same_scoring_rubric": true,
+    "identity_blinded_to_adjudicators": true,
+    "material_noncomparability_disposition": "INCONCLUSIVE__NO_PROMOTION"
+  },
+  "challenge_coverage": {
+    "every_family_leaf_requires_its_own_statistical_scope": true,
+    "multi_leaf_family_requires_composition_scope": true,
+    "composition_scope_requires_at_least_two_distinct_family_leaves_per_challenge": true,
+    "duplicate_or_near_duplicate_challenges_do_not_count_as_independent_coverage": true,
+    "selection_after_candidate_freeze": true,
+    "tuning_on_selected_challenges_forbidden": true
+  },
+  "scoring": {
+    "per_challenge_score_range": [
+      0,
+      1
+    ],
+    "deterministic_oracle_preferred": true,
+    "subjective_case_rule": "FROZEN_RUBRIC__AT_LEAST_TWO_INDEPENDENT_BLINDED_ADJUDICATION_ROUTES__MATERIAL_DISAGREEMENT_IS_INCONCLUSIVE_UNLESS_PREDECLARED_TIEBREAKER_RESOLVES",
+    "paired_difference": "D_i = BRAIN_SCORE_i - OPUS_5_5_SCORE_i",
+    "paired_difference_range": [
+      -1,
+      1
+    ],
+    "family_alpha": 0.05,
+    "scope_alpha_rule": "ALPHA_SCOPE = 0.05 / NUMBER_OF_REQUIRED_SCOPES",
+    "anytime_alpha_spending": "ALPHA_SCOPE_N = 6 * ALPHA_SCOPE / (PI^2 * N^2)",
+    "one_sided_hoeffding_lower_bound": "LCB_N = MEAN(D_1..D_N) - SQRT(2 * LN(1 / ALPHA_SCOPE_N) / N)",
+    "justification": "For D_i in [-1,1], fixed-N Hoeffding error is <= ALPHA_SCOPE_N; sum_N ALPHA_SCOPE_N = ALPHA_SCOPE, giving an anytime-valid union-bound sequence.",
+    "pass_rule": [
+      "OVERALL_FAMILY_SCOPE_LCB >= 0",
+      "EVERY_BEHAVIORAL_LEAF_SCOPE_LCB >= 0",
+      "COMPOSITION_SCOPE_LCB >= 0 WHEN_FAMILY_HAS_MULTIPLE_LEAVES",
+      "NO_HARD_SCOPE_AUTHORITY_CONTAMINATION_OR_DONOR_DEPENDENCE_FAILURE",
+      "ALL_REQUIRED_CAUSAL_OWNERSHIP_CHECKS_PASS"
+    ],
+    "stop_rule": "STOP_AT_FIRST_N_WHERE_ALL_REQUIRED_SCOPES_PASS__OTHERWISE_CONTINUE_ONLY_WHILE_PREDECLARED_ZERO_COST_RESOURCE_BUDGET_REMAINS__NO_PASS_IF_BUDGET_EXHAUSTS",
+    "strict_equality_note": "Finite open-domain statistics cannot prove exact equality in expectation; this protocol proves equal-or-better only when the one-sided lower bound reaches zero or above. Exact equality requires a finite exhaustive/formal proof mode instead."
+  },
+  "causal_ownership": {
+    "donor_deletion_cleanroom_required": true,
+    "external_jit_factual_knowledge_allowed": true,
+    "opaque_external_capability_provider_allowed": false,
+    "per_claimed_residual_ablation_required": true,
+    "rescue_required_after_ablation": true,
+    "provenance_complete": true,
+    "family_promotion_requires": "MATCHED_PARITY_PASS_AND_DONOR_DELETION_AND_ABLATION_RESCUE_AND_COMPLETE_LEAF_COVERAGE"
+  },
+  "families": {
+    "COMPLEX_MULTI_TOOL_AGENCY": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "TASK_TO_DELEGATION_GRAPH_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "FINANCIAL_ANALYSIS": [
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "SUBAGENT_DELEGATION_AND_COORDINATION": [
+      "TASK_TO_DELEGATION_GRAPH_001"
+    ],
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY": [
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "ARTIFACT_CREATION": [
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+    ],
+    "COMMUNICATION_AND_SYNTHESIS": [
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING": [
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+    ],
+    "UNKNOWN_DOMAIN_ADAPTATION": [
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+    ],
+    "MULTI_CAPABILITY_COMPOSITION": [
+      "TASK_TO_DELEGATION_GRAPH_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ]
+  },
+  "fail_closed_conditions": [
+    "UNFROZEN_OR_CHANGED_BRAIN_PACKAGE_AFTER_CHALLENGE_SELECTION",
+    "COMPARATOR_NOT_EXACT_OPUS_5_5",
+    "MATERIAL_HARNESS_ASYMMETRY",
+    "LEAF_WITHOUT_CHALLENGE_COVERAGE",
+    "MISSING_COMPOSITION_SCOPE_WHERE_REQUIRED",
+    "TASK_OR_SOURCE_CONTAMINATION",
+    "DONOR_CAPABILITY_ROUTE_REMAINS_REACHABLE",
+    "ADJUDICATION_IDENTITY_LEAK",
+    "STATISTICAL_RULE_CHANGED_AFTER_RESULTS",
+    "LCB_BELOW_ZERO_IN_ANY_REQUIRED_SCOPE",
+    "UNKNOWN_OR_MISSING_PROVENANCE"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
