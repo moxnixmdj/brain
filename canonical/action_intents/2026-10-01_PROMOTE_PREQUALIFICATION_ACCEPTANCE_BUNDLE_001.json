@@ -1,0 +1,193 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-PREQUALIFICATION-ACCEPTANCE-BUNDLE-20261001-V1",
+  "status": "PROPOSED__ZERO_FAMILY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "24896e8664fa768bb9d0aa8bbac6dee06cb86a34",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "TERMINAL_BEHAVIORAL_AND_PROOF_CLOSURE_INCOMPLETE__ARBITRARY_SPEC_TO_COMPLETE_ACCEPTANCE_PLAN_NOT_YET_OWNED__PREQUALIFICATION_FAILURE_IMMUNITY_NOT_YET_SATISFIED_FOR_RANK15",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::TERMINAL_BEHAVIORAL_AND_PROOF_CLOSURE_INCOMPLETE__ARBITRARY_SPEC_TO_COMPLETE_ACCEPTANCE_PLAN_NOT_YET_OWNED__PREQUALIFICATION_FAILURE_IMMUNITY_NOT_YET_SATISFIED_FOR_RANK15",
+  "expected_parent_frontier_change": "PROMOTE_EXACT_INDEPENDENTLY_VERIFIED_PREQUALIFICATION_ACCEPTANCE_BUNDLE_AS_BRAIN_OWNED_NARROW_COMPONENT__RECOMPUTE_STAGE_A_PROOF_STATE__KEEP_RANK15_FROZEN__ZERO_FAMILY_CREDIT",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "stop_condition": "EXACT_CANDIDATE_BYTES_MATCH_RUNNER__RUNNER_6_OF_6_PASS_BOUND_TO_CANONICAL_RECEIPT__NO_FAMILY_CREDIT__RANK15_REMAINS_FROZEN__TRUSTED_DRIFT_GUARD_PASSES",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_PROMOTE_PREQUALIFICATION_ACCEPTANCE_BUNDLE_001.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "24896e8664fa768bb9d0aa8bbac6dee06cb86a34",
+    "real_outcome": "Convert already-produced independent execution evidence into a durable verified narrow component without spending fresh qualification evidence.",
+    "required_capability": "Canonical proof binding for the exact prequalification acceptance composition.",
+    "obs_goal": {
+      "real_outcome": "Close a current proof hole on the shortest terminal proof path.",
+      "proxy_goals_deleted": [
+        "MORE_VERIFIER_RUNS_WITHOUT_INVALIDATION",
+        "MORE_META_OPTIMIZATION",
+        "FRESH_RANK15_SPEND"
+      ],
+      "surviving_necessity": "Bind the successful independent receipt and recompute remaining proof holes."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "REQUIREMENT_GRAPH_KERNEL",
+        "REQUIREMENT_OUTPUT_REACHABILITY",
+        "INDEPENDENT_ACCEPTANCE_MODEL",
+        "RUNNER_PR319"
+      ],
+      "external_existing_routes_checked": [
+        "NOT_APPLICABLE__PROOF_ALREADY_EXISTS"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_MODEL",
+        "NO_NEW_MECHANISM_SEARCH",
+        "NO_DUPLICATE_RUN"
+      ],
+      "surviving_gap": "Canonical proof receipt for the exact composed bundle."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PROOF_MISSING_FOR_EXISTING_MECHANISM",
+      "delete_bypass_substitute_options": [
+        "RECOVER_AND_BIND_EXISTING_RUNNER_RECEIPT"
+      ],
+      "surviving_causal_blocker": "Independent pass is not yet represented in canonical Brain proof state."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "BIND_EXISTING_INDEPENDENT_RECEIPT",
+        "DUPLICATE_VERIFICATION_REJECTED",
+        "REDESIGN_REJECTED"
+      ],
+      "losing_routes_reason": "The exact candidate already passed independent verification; rerun or redesign adds delay without closing a new uncertainty.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Already satisfied by runner PR319 exact-byte independent execution over spent failure shapes and seeded mutants."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "UNVERIFIED_CANDIDATE_STATUS",
+        "DUPLICATE_ACCEPTANCE_BUNDLE_VERIFICATION"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "REQUIREMENT_GRAPH_KERNEL",
+        "OUTPUT_REACHABILITY",
+        "INDEPENDENT_ACCEPTANCE_MODEL"
+      ],
+      "fresh_reuse_plan": "Use the verified bundle as a Stage-A/Stage-B prequalification component; do not spend rank15 until all required proof predicates close."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_SEARCH",
+        "NO_REPEAT_VERIFIER",
+        "NO_NEW_TAXONOMY"
+      ],
+      "search_stop_decision": "A correctness-sufficient independently verified exact route already exists.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "BIND_EXISTING_INDEPENDENT_RECEIPT",
+      "DUPLICATE_VERIFICATION",
+      "REDESIGN_BUNDLE",
+      "SPEND_RANK15"
+    ],
+    "deleted_or_bypassed_paths": [
+      "DUPLICATE_VERIFICATION",
+      "REDESIGN_BUNDLE",
+      "SPEND_RANK15"
+    ],
+    "selected_surviving_route": "BIND_EXISTING_INDEPENDENT_PROOF__PROMOTE_NARROW_COMPONENT_ONLY",
+    "why_selected_route_is_fastest_sufficient": "It closes the proof hole using a completed exact-byte independent run at zero additional evidence spend.",
+    "expected_parent_level_state_change": "PROMOTE_EXACT_INDEPENDENTLY_VERIFIED_PREQUALIFICATION_ACCEPTANCE_BUNDLE_AS_BRAIN_OWNED_NARROW_COMPONENT__RECOMPUTE_STAGE_A_PROOF_STATE__KEEP_RANK15_FROZEN__ZERO_FAMILY_CREDIT",
+    "stop_condition": "EXACT_CANDIDATE_BYTES_MATCH_RUNNER__RUNNER_6_OF_6_PASS_BOUND_TO_CANONICAL_RECEIPT__NO_FAMILY_CREDIT__RANK15_REMAINS_FROZEN__TRUSTED_DRIFT_GUARD_PASSES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Current hole is ?P proof binding; mechanism discovery is already complete."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "inputs": "normalized task requirements, explicit requirement-to-output calculation graph, builder dependency declarations, independent check dependency declarations, seeded requirement and verifier mutants",
+    "environment_state": "prequalification state before any untouched qualification execution",
+    "allowed_information": "spent/historical failures, task-visible specification when appropriately staged, Brain-owned deterministic mechanisms; no hidden verifier or task-specific solution",
+    "required_output_or_action": "fail closed unless normalized requirement structure, output lineage, independent acceptance coverage, requirement mutation coverage, and seeded verifier mutation coverage all pass",
+    "success_condition": "valid composed bundle passes and all seeded critical mutants/spent failure shapes are rejected before fresh evidence spend",
+    "failure_condition": "a critical requirement is structurally lost, fails to reach output, acceptance shares builder semantics, required failure mode is uncovered, or a seeded verifier mutant survives",
+    "terminal_consequence": "reduces clean-evidence waste and correlated self-verification before qualification",
+    "verification_route": "independent runner execution of exact candidate bytes against spent Bun/CAD/KG/SA-CCR shapes and seeded mutants",
+    "dependency_boundary": "deterministic integration over normalized requirements and declared checks; does not itself perform arbitrary natural-language understanding or domain-gold synthesis",
+    "scope": "prequalification of consequential structured/open-ended tasks before fresh one-shot verification"
+  },
+  "qualification_stage": "SUPPORT_PROOF_ONLY__NO_UNTOUCHED_QUALIFICATION_EVIDENCE_EXPOSED_OR_SPENT",
+  "prequalification_controls": {
+    "target_version_lock": "UNCHANGED__SUPPORT_PROOF_ONLY",
+    "feasibility_certificate": "GENERIC_STAGE_A_CERTIFICATE_ALREADY_CANONICAL__NO_FRESH_EXECUTION_IN_THIS_ACTION",
+    "complete_requirement_graph": "REQUIREMENT_GRAPH_KERNEL_PLUS_OUTPUT_REACHABILITY_ALREADY_INDEPENDENTLY_VERIFIED",
+    "independent_acceptance_evidence": "RUNNER_PR319_WORKFLOW_36910419053_JOB_110531391635__6_OF_6_PASS",
+    "requirement_mutation_evidence": "REQUIREMENT_GRAPH_KERNEL_MUTATION_SCORE_ZERO_SURVIVORS",
+    "verifier_mutation_evidence": "PREQUALIFICATION_BUNDLE_SEEDED_MUTANTS_AND_SPENT_BUN_CAD_KG_SACCR_SHAPES__6_OF_6_PASS",
+    "contamination_ledger": "SPENT_CASES_ONLY__RANK15_UNTOUCHED_AND_FROZEN",
+    "execution_surface_certificate": "NOT_USED_FOR_FRESH_EXECUTION__SUPPORT_PROOF_ONLY",
+    "statistical_promotion_plan_if_applicable": "ALREADY_FROZEN_FOR_STAGE1__NO_PROMOTION_IN_THIS_ACTION",
+    "donor_deletion_plan_if_applicable": "NOT_APPLICABLE__NO_EXTERNAL_DONOR_RUNTIME",
+    "composition_qualification_plan": "THIS_ACTION_VERIFIES_COMPOSITION_OF_REQUIREMENT_GRAPH_OUTPUT_REACHABILITY_INDEPENDENT_ACCEPTANCE_AND_MUTATION_GATES"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "Prove the exact composed prequalification bundle catches known spent structural/semantic acceptance failures and seeded verifier mutants before any fresh qualification spend.",
+    "hole_type": "?P",
+    "expected_certificate_or_receipt": "canonical/capabilities/opus55/PREQUALIFICATION_ACCEPTANCE_BUNDLE_001.json",
+    "validator": "moxnixmdj/verification-capsule-runner PR319 workflow 36910419053 job 110531391635 plus trusted Brain drift guard",
+    "maximum_cheap_test_cost": "USD_0__NO_FRESH_EVIDENCE",
+    "prerequisites": [
+      "EXACT_CANDIDATE_BYTES",
+      "VERIFIED_REQUIREMENT_GRAPH_KERNEL",
+      "VERIFIED_OUTPUT_REACHABILITY",
+      "INDEPENDENT_ACCEPTANCE_MODEL",
+      "SPENT_REGRESSION_CORPUS"
+    ],
+    "contamination_risk": "LOW__SPENT_HISTORICAL_CASES_ONLY__RANK15_UNTOUCHED",
+    "reversibility": "FULLY_REVERSIBLE_NARROW_COMPONENT_PROMOTION",
+    "falsification_condition": "Any independent spent regression fails, any seeded critical verifier mutant survives, candidate bytes differ, or trusted guard rejects current-base promotion.",
+    "critical_path_relation": "DIRECTLY_CLOSES_PREQUALIFICATION_PROOF_HOLE_BLOCKING_STAGE_A_RECOMPUTATION_AND_RANK15_ADMISSION"
+  }
+}
