@@ -1,0 +1,7 @@
+{
+  "observation_branch": "bridge-observations/harbor-mp-checkpoint-consolidation-dev-20261001-v1-9a89cc25",
+  "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
+  "status": "STARTING_HARBOR",
+  "task": "mp-checkpoint-consolidation",
+  "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e"
+}
