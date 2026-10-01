@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_COUNTERFACTUAL_TERMINAL_COMPILER_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_ACCELERATION_CONTROLLER__ZERO_CAPABILITY_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+  "objective": "MINIMIZE_NEW_REALITY_INFORMATION_ACQUISITION_SUBJECT_TO_TRUTHFUL_TERMINAL_CLOSURE",
+  "stages": [
+    "ATOMIZE_TERMINAL_PROOF_OBLIGATIONS",
+    "SATURATE_EXISTING_EVIDENCE",
+    "VALIDATE_PROVENANCE_SCOPE_VERSION_ENVIRONMENT_INDEPENDENCE_CONTAMINATION_AND_FRESHNESS",
+    "DEDUCTIVE_CLOSURE",
+    "COUNTERFACTUAL_WORLD_COMPILATION_FOR_REMAINING_UNKNOWN",
+    "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
+    "MINIMUM_REALITY_CUT",
+    "EXECUTE_ONLY_IRREDUCIBLE_OBSERVATIONS",
+    "COMPILE_RECEIPTS_TO_DURABLE_RULES_AND_RECOMPUTE"
+  ],
+  "evidence_sources": [
+    "BRAIN_CANONICAL_RECEIPTS",
+    "PRESERVED_PRIMARY_ARTIFACTS",
+    "HISTORICAL_RUNS_AND_SPENT_FAILURES",
+    "SOURCE_CODE_TESTS_AND_GIT_HISTORY",
+    "OFFICIAL_DOCUMENTATION_AND_SPECIFICATIONS",
+    "PUBLISHED_BENCHMARK_ARTIFACTS",
+    "PUBLIC_DATASETS",
+    "PAPERS_AND_SUPPLEMENTARY_MATERIAL",
+    "INDEPENDENT_REPRODUCTIONS",
+    "CURRENT_EXTERNAL_PUBLIC_EVIDENCE_WHEN_INFORMATION_POLICY_ALLOWS"
+  ],
+  "closure_states": [
+    "EXISTING_EVIDENCE_PASS",
+    "EXISTING_EVIDENCE_FAIL",
+    "DEDUCTIVE_PASS",
+    "DEDUCTIVE_FAIL",
+    "IRREDUCIBLE_REALITY_QUERY",
+    "UNKNOWN_BLOCKED"
+  ],
+  "simulation_authority": {
+    "prediction_can_close_ownership": false,
+    "exact_deduction_can_close_matching_predicate": true,
+    "simulation_roles": [
+      "CANDIDATE_ELIMINATION",
+      "FAILURE_MODE_PREDICTION",
+      "COUNTERFACTUAL_WORLD_REDUCTION",
+      "UNCERTAINTY_LOCALIZATION",
+      "MINIMUM_OBSERVATION_SELECTION"
+    ],
+    "rule": "PREDICTION_IS_NONAUTHORITATIVE_UNLESS_REDUCED_TO_A_MACHINE_CHECKABLE_DEDUCTIVE_PROOF"
+  },
+  "evidence_equivalence": {
+    "exact_scope_or_proven_stronger_scope_required": true,
+    "version_environment_harness_population_protocol_material_by_default": true,
+    "monotonic_substitution_requires_explicit_proof": true,
+    "conflicting_admissible_evidence_returns": "UNKNOWN_BLOCKED"
+  },
+  "reality_query_admission": {
+    "required_before_new_fresh_evidence_spend": true,
+    "existing_evidence_exhausted": true,
+    "deductive_closure_exhausted": true,
+    "dominance_deletion_applied": true,
+    "terminal_decision_value_required": true,
+    "minimum_reality_cut_membership_required": true,
+    "fail_closed_on_unknown": true
+  },
+  "minimum_reality_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+  "minimum_reality_cut_input": {
+    "unresolved_distinctions": "TERMINAL_RELEVANT_BINARY_OR_FINITE_DISTINCTIONS_ONLY",
+    "candidate_observations": "OBSERVATIONS_WITH_DECLARED_COVERAGE_AND_NONNEGATIVE_COST",
+    "exactness": "EXACT_OR_DECOMPOSE__NO_APPROXIMATE_RESULT_MAY_BE_LABELED_MINIMUM"
+  },
+  "compilation_outputs": [
+    "THEOREM_OR_EXACT_RULE",
+    "EXECUTABLE_EXCLUSION",
+    "ENVIRONMENT_FACT",
+    "VERSION_BOUND_COMPATIBILITY_FACT",
+    "FAILURE_CLASS_PREFLIGHT",
+    "REUSABLE_CAUSAL_MECHANISM",
+    "RESIDUAL_VALIDITY_ENVELOPE",
+    "STRONGER_BEHAVIORAL_SPECIFICATION"
+  ],
+  "grandfathered_active_action": {
+    "task": "freecad-spring-clip",
+    "rank": 22,
+    "qualification_stage": "STAGE_C_EXECUTION",
+    "rule": "DO_NOT_DELAY_IF_CURRENT_DERIVED_CAN_EXECUTE_TRUE_AND_NO_MATERIAL_AUTHORITY_INVALIDATION",
+    "new_policy_applies_after": "CURRENT_ONE_SHOT_CONSUMED_OR_AUTHORITY_INVALIDATED"
+  },
+  "progress_credit": "ZERO_UNTIL_EXISTING_TERMINAL_PROOF_RULES_CLOSE_CAPABILITY",
+  "incremental_spend_usd": 0
+}
