@@ -5,9 +5,9 @@
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
-  "probe_state": "RANK17_STAGE_B_INDEPENDENT_PASS__STAGE_C_V4_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
-  "current_parent_blocker": "RANK17_STAGE_C_V4_ONE_SHOT_DATA_ANONYMIZATION_EXECUTION_AND_TERMINAL_VERIFICATION",
-  "next_required_action_class": "BIND_STAGE_C_V4_LEASE_AND_EXACT_FROZEN_ACCEPTANCE_TO_RUNNER_PR352__EXECUTE_ONE_BUILDER_BURST__FREEZE_OUTPUT__RUN_ONE_INDEPENDENT_TERMINAL_VERIFIER__NO_REPLAY",
+  "probe_state": "RANK17_SPENT_ZERO_VERDICT_NO_REPLAY__RANK18_STAGE_B_INDEPENDENT_PASS__STAGE_C_SINGLE_CARRIER_READY",
+  "current_parent_blocker": "RANK18_STAGE_C_FROZEN_ACCEPTANCE_BINDING_AND_ONE_SHOT_FREECAD_EXECUTION_NOT_YET_COMPLETED",
+  "next_required_action_class": "USE_ONLY_RUNNER_PR354__FREEZE_SOURCE_ACCOUNTED_ACCEPTANCE_BEFORE_BUILDER__FRESH_BURST_REVALIDATION__EXECUTE_ONCE__FREEZE_OUTPUT__FRESH_TERMINAL_REVALIDATION__RUN_ONE_INDEPENDENT_VERIFIER__NO_REPLAY",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -198,7 +198,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "BIND_STAGE_C_V4_LEASE_AND_EXACT_FROZEN_ACCEPTANCE_TO_RUNNER_PR352__EXECUTE_ONE_BUILDER_BURST__FREEZE_OUTPUT__RUN_ONE_INDEPENDENT_TERMINAL_VERIFIER__NO_REPLAY",
+  "next_progress_event_target": "RANK18_STAGE_C_ONE_SHOT_TERMINAL_VERDICT",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -344,15 +344,14 @@
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
   "active_stage1_execution": {
-    "task": "data-anonymization",
-    "rank": 17,
-    "state": "STAGE_C_V3_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
-    "lease_path": "canonical/governance/LEASE_DATA_ANONYMIZATION_TB4_STAGE_C_V3_20261001_V1.json",
-    "stage_b_evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_B_VERIFICATION_V1.json",
-    "runner_pr": 349,
-    "session_id": "data-anonymization-stagec-20261001-v3",
-    "prior_carrier_pr": 346,
-    "prior_carrier_builder_bursts_executed": 0,
+    "task": "freecad-impeller",
+    "rank": 18,
+    "state": "STAGE_C_ONE_SHOT_AUTHORIZED__SINGLE_LEASE_BOUND_CARRIER_PR354__NOT_YET_EXECUTED",
+    "lease_path": "canonical/governance/LEASE_FREECAD_IMPELLER_TB4_STAGE_C_20261001_V1.json",
+    "stage_b_evidence": "canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_STAGE_B_VERIFICATION_V1.json",
+    "runner_pr": 354,
+    "session_id": "freecad-impeller-20261001-stagec-v1",
+    "duplicate_runner_pr_closed": 353,
     "replay_allowed": false
   },
   "execution_liveness_correction_20261001": {
@@ -445,11 +444,11 @@
     "capability_credit_delta": 0
   },
   "stage1_next_clean_task": {
-    "task": "data-anonymization",
-    "rank": 17,
-    "state": "STAGE_C_V4_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
-    "authorization_gate": "SATISFIED__ONE_EXECUTION_PLUS_ONE_TERMINAL_VERIFIER_ONLY",
-    "lease_path": "canonical/governance/LEASE_DATA_ANONYMIZATION_TB4_STAGE_C_V4_20261001_V1.json"
+    "task": "freecad-impeller",
+    "rank": 18,
+    "state": "STAGE_C_ONE_SHOT_AUTHORIZED__NOT_YET_EXECUTED",
+    "authorization_gate": "ONE_EXECUTION_PLUS_ONE_TERMINAL_VERIFIER_ONLY__SINGLE_CARRIER_PR354",
+    "lease_path": "canonical/governance/LEASE_FREECAD_IMPELLER_TB4_STAGE_C_20261001_V1.json"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -469,7 +468,7 @@
     "status": "MANDATORY_BEFORE_RANK16_STAGE_C",
     "path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-    "current_verdict": "RANK17_STAGE_A_AND_STAGE_B_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_AUTHORIZED"
+    "current_verdict": "RANK17_SPENT_NO_REPLAY__RANK18_STAGE_A_AND_STAGE_B_INDEPENDENT_PASS__STAGE_C_ONE_SHOT_AUTHORIZED_ON_SINGLE_CARRIER_PR354"
   },
   "terminal_closure": {
     "manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
@@ -576,5 +575,23 @@
     "prior_v3_disposition": "CLOSED_PREEXECUTION_ACCEPTANCE_HASH_MISMATCH",
     "replay_allowed": false,
     "acceptance_semantic_equivalence": "EXACT_PAYLOAD_MATCH_TO_INDEPENDENTLY_VERIFIED_V2_AFTER_SESSION_ID_NORMALIZATION"
+  },
+  "rank17_stage_c_execution_truth": {
+    "status": "SPENT_ZERO_VERDICT_NO_REPLAY",
+    "evidence": "canonical/governance/OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V2.json",
+    "runner_pr": 346,
+    "accepted_burst_id": 0,
+    "observation_comment_id": 5939471910,
+    "commands_executed": 5,
+    "candidate_artifact_created": false,
+    "terminal_verifier_executed": false,
+    "capability_credit_delta": 0
+  },
+  "obs_everything_terminal_acceleration_20261001_v2": {
+    "status": "OBS_PASS_COMPLETE__RANK17_EXECUTION_TRUTH_CORRECTED__RANK17_SPENT_NO_REPLAY__RANK18_SINGLE_CARRIER_FRONTIER__ZERO_CAPABILITY_CREDIT",
+    "receipt_path": "canonical/governance/OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V2.json",
+    "rank17_replay_allowed": false,
+    "rank18_single_carrier_pr": 354,
+    "next_action": "USE_ONLY_RUNNER_PR354_FOR_RANK18_STAGE_C__FREEZE_ACCEPTANCE__FRESH_BURST_REVALIDATION__EXECUTE_ONCE__FREEZE_OUTPUT__FRESH_TERMINAL_REVALIDATION__VERIFY_ONCE"
   }
 }
