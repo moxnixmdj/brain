@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK21_STAGE_B_INDEPENDENT_PREEXECUTION_PASS_OR_FAIL_CLOSED",
+  "next_progress_event_target": "RANK21_SOURCE_CONSUMER_CLOSURE_VERDICT",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1006,7 +1006,7 @@
     "next_clean_task": "foodstuff-beta-activity",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "EXPOSE_RANK21_OFFICIAL_INSTRUCTION_ONCE_UNDER_STAGE_B_ALLOWLIST__NO_TASK_COMMAND__COMPILE_REQUIREMENTS_ACCEPTANCE_FEASIBILITY_AND_SOURCE_BOUNDARY_PREFLIGHT",
+  "next_required_action": "INDEPENDENTLY_VERIFY_RANK21_SOURCE_CONSUMER_CHALLENGE__NO_STAGE_C_LEASE_UNTIL_ALL_AUTHORITATIVE_FIELDS_ARE_CONSUMED_OR_JUSTIFIABLY_CLASSIFIED",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1133,5 +1133,11 @@
     "status": "VERIFIED_AND_MERGED",
     "evidence": "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json",
     "runner_merge_commit": "a902df6b5e8393cf8aff563f5394dc40a0b314d0"
+  },
+  "rank21_source_consumer_challenge": {
+    "status": "FAIL_CLOSED_PENDING_INDEPENDENT_VERIFICATION",
+    "evidence": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_STAGE_B_SOURCE_CONSUMER_CHALLENGE_V1.json",
+    "material_ambiguity": true,
+    "task_execution_authorized": false
   }
 }
