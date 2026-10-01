@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK15_STAGE_B_V3_INDEPENDENT_SOURCE_CLOSURE_PASS__NO_TASK_EXECUTION",
+  "next_progress_event_target": "RANK15_ONE_SHOT_TASK_EXECUTION_THEN_INDEPENDENT_VERIFIER_RESULT",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1021,9 +1021,9 @@
     "evidence_path": "canonical/capabilities/opus55/FIN_SACCR_RWA_TB4_FAILURE_20261001_V1.json",
     "next_clean_rank": 15,
     "next_clean_task": "wdm-design",
-    "next_clean_task_authorized": false
+    "next_clean_task_authorized": true
   },
-  "next_required_action": "VERIFY_CORRECTED_RANK15_STAGE_B_V3__TASK_EXECUTION_REVOKED_UNTIL_PASS",
+  "next_required_action": "EXECUTE_WDM_DESIGN_EXACTLY_ONCE__FREEZE_OUTPUT__RUN_INDEPENDENT_VERIFIER__NO_REPLAY",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1056,9 +1056,9 @@
     "task_execution_authorized": false
   },
   "rank15_stage_b": {
-    "status": "V2_REVOKED__MATERIAL_REQUIREMENT_OMISSION__V3_PENDING",
-    "prior_evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_STAGE_B_VERIFICATION_V2.json",
-    "revocation": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_STAGE_B_V2_REVOCATION_V1.json",
-    "task_execution_authorized": false
+    "status": "INDEPENDENT_V3_PASS__ONE_SHOT_EXECUTION_AUTHORIZED",
+    "evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_STAGE_B_VERIFICATION_V3.json",
+    "task_execution_authorized": true,
+    "replay_allowed": false
   }
 }
