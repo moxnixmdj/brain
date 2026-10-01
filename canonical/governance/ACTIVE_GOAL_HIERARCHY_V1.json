@@ -292,18 +292,25 @@
     "path": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
     "unfinished_families_at_activation": 17,
     "shared_residual_lanes": 5,
-    "current_atomic_execution_preserved": "gsea-proteomics",
+    "current_atomic_execution_preserved": "batched-eval-parity",
     "parallel_discovery_and_internalization_allowed": true,
-    "promotion_requires_independent_family_specific_evidence": true
+    "promotion_requires_independent_family_specific_evidence": true,
+    "current_atomic_execution_state": "RANK5_FRESH_TASK_LEASED__INSTRUCTION_UNREAD__HIGH_THROUGHPUT_EXECUTION_V2"
   },
   "cognitive_basis_compression_campaign": {
-    "status": "ACTIVE__PARALLEL__ZERO_CAPABILITY_CREDIT",
+    "status": "ACTIVE__PRIMITIVE_SPECIFIC_COMPOSITION__GENERIC_SMALL_JUDGE_FALSIFIED__ZERO_CAPABILITY_CREDIT",
     "path": "canonical/governance/COGNITIVE_BASIS_COMPRESSION_CAMPAIGN_V1.json",
     "basis_path": "canonical/capabilities/opus55/MINIMAL_COGNITIVE_BASIS_V1.json",
-    "hypothesis": "THE_17_UNFINISHED_FAMILIES_SHARE_A_SMALLER_SET_OF_REUSABLE_LEARNED_DECISION_FUNCTIONS",
+    "hypothesis": "THE_17_UNFINISHED_FAMILIES_SHARE_REUSABLE_DECISION_PRIMITIVES_BUT_NOT_NECESSARILY_ONE_LEARNED_SCORER",
     "primary_interface": "POINTWISE_STATE_PLUS_QUESTION_PLUS_ONE_CANDIDATE_TO_CALIBRATED_SCORE",
-    "training_policy": "REUSE_AND_PROBE_BEFORE_DISTILLATION",
-    "promotion": "TERMINAL_TASK_GAIN_PLUS_ABLATION_RESCUE_PLUS_DONOR_DELETION_REQUIRED"
+    "training_policy": "NO_TRAINING_UNTIL_PRIMITIVE_SPECIFIC_OPEN_REUSE_SPACE_IS_CHEAPLY_EXHAUSTED",
+    "promotion": "REAL_TERMINAL_TASK_GAIN_PLUS_ABLATION_RESCUE_PLUS_DONOR_DELETION_REQUIRED",
+    "implementation_frontier": "canonical/capabilities/opus55/COGNITIVE_PRIMITIVE_IMPLEMENTATION_FRONTIER_V1.json",
+    "primary_control_law": "DETERMINISTIC_OR_EXECUTABLE_GATES_FIRST__PRIMITIVE_SPECIFIC_LEARNED_ROUTE_ONLY_FOR_RESIDUAL_SEMANTIC_CHOICE",
+    "generic_small_auto_admit_judge": "FALSIFIED__NOT_AUTHORIZED",
+    "c3_control": "VERIFIED_DETERMINISTIC_AUTHORITY_AVAILABILITY_FILTER",
+    "c3_current_scorer": "NONE__ETTIN_REJECTED_AFTER_ZERO_TERMINAL_DELTA__SKILLROUTER_SPENT_SCREEN_RUNNING",
+    "c9_authority": "DETERMINISTIC__GENERIC_NLI_FALSIFIED"
   },
   "execution_truth_and_visibility": {
     "status": "CANONICAL_MANDATORY_FAIL_CLOSED",
