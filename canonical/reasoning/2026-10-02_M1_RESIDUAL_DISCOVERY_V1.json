@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_M1_RESIDUAL_DISCOVERY_V1",
+  "date": "2026-10-02",
+  "status": "DISCOVERY_COMPLETE_FOR_CURRENT_FRONTIER__CANDIDATES_CLASSIFIED__NO_WHOLE_RESIDUAL_CREDIT",
+  "m1a_candidates": [
+    {
+      "repo": "skykim/cad-image-to-3d",
+      "license": "Apache-2.0",
+      "reuse": "FEATURE_AUDIT_RENDER_COMPARE_DIMENSION_ASSUMPTION_LOGGING",
+      "limit": "EXTERNAL_MODEL_PERFORMS_CORE_SEMANTIC_RECONSTRUCTION"
+    },
+    {
+      "repo": "D4V1ND/tech_europe",
+      "license": "MIT",
+      "reuse": "PARTSPEC_SCHEMA_DETERMINISTIC_CADQUERY_AND_DIMENSION_VALIDATION",
+      "limit": "VISION_LLM_PERFORMS_DRAWING_TO_PARTSPEC"
+    },
+    {
+      "repo": "unes21/pen2step",
+      "license": "MIT_CODE",
+      "reuse": "MULTIVIEW_OCR_AST_REPAIR_EXECUTION_SELECTION_SCALE_RECOVERY",
+      "limit": "13B_VLM_IS_SEMANTIC_BACKBONE"
+    },
+    {
+      "repo": "zackska/cadRip",
+      "license": "GPL-3.0",
+      "reuse": "DIMENSION_SYMBOL_OCR_AND_TEXT_CLUSTERING",
+      "limit": "COPYLEFT_COMPATIBILITY_AND_NARROW_SCOPE"
+    },
+    {
+      "repo": "Scan2Sketch/Scan2Sketch",
+      "license": "GPL-3.0-OR-LATER",
+      "reuse": "EDGE_REFINEMENT_CURVE_FITTING_TOPOLOGY_VALIDATION",
+      "limit": "FLAT_SILHOUETTE_ONLY"
+    }
+  ],
+  "m1b_candidates": [
+    {
+      "repo": "Mohil-Ahuja/2D-to-3D-CAD-Reconstruction",
+      "license": "MIT",
+      "reuse": "PROCEDURAL_DATA_GENERATOR_CAD_TOKEN_SPACE_BUILD123D_EXECUTOR",
+      "limit": "TRAINED_MODEL_REQUIRED__NO_VERIFIED_PRETRAINED_CHECKPOINT_DISCOVERED"
+    },
+    {
+      "repo": "skykim/cad-image-to-3d",
+      "license": "Apache-2.0",
+      "reuse": "RENDER_COMPARE_AND_FEATURE_AUDIT",
+      "limit": "EXTERNAL_MODEL_INFERS_HIDDEN_GEOMETRY"
+    }
+  ],
+  "rule": "DETERMINISTIC_CONSTRAINT_SOLVE_AND_EXPLICIT_AMBIGUITY_FIRST__DO_NOT_GUESS_UNOBSERVABLE_GEOMETRY__HARVEST_ONLY_CAUSALLY_NECESSARY_LEARNED_RESIDUAL",
+  "next": "COMPOSE_PERMISSIVE_DETERMINISTIC_SHELL_CANDIDATE__DEFINE_CONSTRAINT_SOLVER_AND_AMBIGUITY_GATE__THEN_FREEZE_ACTION_BUNDLE",
+  "new_reality_spend": 0,
+  "capability_credit_delta": 0
+}
