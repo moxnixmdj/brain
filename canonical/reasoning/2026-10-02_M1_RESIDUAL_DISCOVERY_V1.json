@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_M1_RESIDUAL_DISCOVERY_V1",
   "date": "2026-10-02",
-  "status": "DISCOVERY_CURRENT__RAW_PRIMITIVES_AND_CALLOUT_TEXT_PARSER_VERIFIED__THREE_ZERO_REALITY_COMPONENTS_PENDING__NO_WHOLE_RESIDUAL_CREDIT",
+  "status": "DISCOVERY_CURRENT__M1A_DETERMINISTIC_FRONTEND_AND_PINNED_OCR_VERIFIED__WHOLE_RESIDUAL_STILL_OPEN__ZERO_FAMILY_CREDIT",
   "m1a_candidates": [
     {
       "repo": "skykim/cad-image-to-3d",
@@ -49,7 +49,7 @@
     }
   ],
   "rule": "DETERMINISTIC_CONSTRAINT_SOLVE_AND_EXPLICIT_AMBIGUITY_FIRST__DO_NOT_GUESS_UNOBSERVABLE_GEOMETRY__HARVEST_ONLY_CAUSALLY_NECESSARY_LEARNED_RESIDUAL",
-  "next": "VERIFY_PENDING_ZERO_REALITY_COMPONENTS__INTERNALIZE_OR_SUBSTITUTE_PINNED_OCR_ROUTE__COMPOSE_WITH_CONSTRAINT_GRAPH__LEAVE_COMPOUND_VISUAL_SEMANTICS_AND_UNSUPPORTED_NOTATION_FAIL_CLOSED",
+  "next": "SEARCH_REUSE_SUBSTITUTE_NON_GLOBAL_REGISTRATION__COMPOUND_VISUAL_FEATURE_SEMANTICS__GD_AND_T_BROADER_NOTATION__ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST__NO_FRESH_UNTOUCHED_INFORMATION",
   "new_reality_spend": 0,
   "capability_credit_delta": 0,
   "verified_owned_components": [
@@ -80,6 +80,41 @@
       "evidence": "canonical/capabilities/opus55/ENGINEERING_CALLOUT_PARSER_001.json",
       "scope": "EXPLICIT_DIAMETER_RADIUS_LINEAR_THREAD_AND_TOLERANCE_CALLOUT_TEXT_TO_TYPED_VALUES__UNSUPPORTED_COMPOUND_SYNTAX_FAILS_CLOSED",
       "whole_m1a_credit": false
+    },
+    {
+      "id": "DRAWING_VIEW_REGIONS_V1",
+      "artifact": "canonical/runtime/drawing_view_regions.py",
+      "evidence": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+      "scope": "SPATIALLY_SEPARATED_CLEAN_HIGH_CONTRAST_VIEW_REGION_SEGMENTATION",
+      "whole_m1a_credit": false
+    },
+    {
+      "id": "ORTHOGRAPHIC_VIEW_IDENTITY_V1",
+      "artifact": "canonical/runtime/orthographic_view_identity.py",
+      "evidence": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+      "scope": "THREE_SPATIALLY_SEPARATED_AXIS_ALIGNED_VIEWS_WITH_EXPLICIT_FIRST_OR_THIRD_ANGLE_CONVENTION",
+      "whole_m1a_credit": false
+    },
+    {
+      "id": "CALLOUT_GEOMETRY_ASSOCIATION_V1",
+      "artifact": "canonical/runtime/callout_geometry_association.py",
+      "evidence": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+      "scope": "BOUNDED_DETERMINISTIC_CALLOUT_TO_GEOMETRY_ASSOCIATION",
+      "whole_m1a_credit": false
+    },
+    {
+      "id": "DRAWING_VIEW_REGISTRATION_V1",
+      "artifact": "canonical/runtime/drawing_view_registration.py",
+      "evidence": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+      "scope": "SINGLE_GLOBAL_ROTATION_DESKEW_FOR_ORTHOGONAL_LINE_DOMINATED_DRAWINGS_WITHIN_15_DEGREES",
+      "whole_m1a_credit": false
+    },
+    {
+      "id": "PINNED_IMAGE_OCR_TESSERACT_001",
+      "artifact": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+      "evidence": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
+      "scope": "ENGLISH_RASTER_TEXT_EXTRACTION_ON_EXACT_PINNED_TESSERACT_AND_ENG_MODEL_SURFACE__NO_ENGINEERING_SEMANTIC_AUTHORITY",
+      "whole_m1a_credit": false
     }
   ],
   "m1b_remaining": [
@@ -89,29 +124,12 @@
     "RAW_DRAWING_TO_NORMALIZED_CONSTRAINT_GRAPH"
   ],
   "m1a_remaining": [
-    "OCR_IMAGE_TO_TEXT",
-    "VIEW_REGISTRATION_OUTSIDE_BOUNDED_DECLARED_LAYOUTS",
+    "VIEW_REGISTRATION_OUTSIDE_SINGLE_BOUNDED_GLOBAL_ROTATION_DESKEW__INCLUDING_LOCAL_WARP_PERSPECTIVE_AND_NONORTHOGONAL_LAYOUTS",
     "COMPOUND_VISUAL_FEATURE_SEMANTICS",
     "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
     "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
   ],
-  "pending_verification_components": [
-    {
-      "id": "DRAWING_VIEW_REGIONS_V1",
-      "artifact": "canonical/runtime/drawing_view_regions.py",
-      "scope": "SPATIALLY_SEPARATED_CLEAN_HIGH_CONTRAST_VIEW_REGION_SEGMENTATION"
-    },
-    {
-      "id": "ORTHOGRAPHIC_VIEW_IDENTITY_V1",
-      "artifact": "canonical/runtime/orthographic_view_identity.py",
-      "scope": "THREE_VIEW_IDENTITY_WHEN_FIRST_OR_THIRD_ANGLE_CONVENTION_IS_DECLARED"
-    },
-    {
-      "id": "CALLOUT_GEOMETRY_ASSOCIATION_V1",
-      "artifact": "canonical/runtime/callout_geometry_association.py",
-      "scope": "UNIQUE_NEAREST_PRIMITIVE_ASSOCIATION_WITH_AMBIGUITY_MARGIN"
-    }
-  ],
+  "pending_verification_components": [],
   "zero_cost_external_candidates": [
     {
       "route": "tesseract-ocr/tesseract@db20f322d03664d1e878e2fbf6e904f5da755594",
@@ -126,5 +144,10 @@
       "ownership": "DETERMINISTIC_LIBRARY_ROUTE"
     }
   ],
-  "residual_action_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json"
+  "residual_action_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+  "ocr_closure": {
+    "status": "INDEPENDENT_PASS__PINNED_EXACT_SURFACE",
+    "evidence": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
+    "workflow_run_id": 36943148108
+  }
 }
