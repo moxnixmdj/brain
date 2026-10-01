@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_M0_SPENT_EVIDENCE_REDUCTION_V1",
+  "date": "2026-10-02",
+  "status": "PARTIAL__OPEN",
+  "obligation": "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+  "evidence_count": 2,
+  "proven_subscope": [
+    "LOSSLESS_SOURCE_ACCOUNTING",
+    "SEMANTIC_DECOMPOSITION_DISAGREEMENT_BLOCKING",
+    "EXPLICIT_ACCEPTANCE_PLAN_GAP_DETECTION"
+  ],
+  "remaining_subscope": [
+    "FROZEN_ENVELOPE_SEMANTIC_REQUIREMENT_CORRECTNESS",
+    "INDEPENDENT_INTERPRETATION_COVERAGE",
+    "ACCEPTANCE_SUFFICIENCY"
+  ],
+  "new_information_spend": 0,
+  "closes_obligation": false,
+  "cut_recompute_required": true,
+  "capability_credit_delta": 0
+}
