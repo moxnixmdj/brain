@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_PREQUALIFICATION_ACCEPTANCE_BUNDLE_VERIFICATION_V1",
+  "date": "2026-10-01",
+  "status": "INDEPENDENT_VERIFICATION_PASS__BRAIN_OWNED_NARROW_COMPONENT__ZERO_FAMILY_CREDIT",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "artifact": "canonical/runtime/prequalification_acceptance_bundle.py",
+  "artifact_blob_sha": "d08542505ba9e3849d266a96854bb0ec84938465",
+  "dependencies": {
+    "requirement_graph_kernel_blob_sha": "18001b4b7ace6fe77497c7fb92dd8d9dd2d0f607",
+    "independent_acceptance_model_blob_sha": "c420b8be1f79a0b06afa98f461f443f53d7fc77a"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 319,
+    "head_sha": "019f7903ca0330e405fbdd1d7580e038de5f1867",
+    "workflow_run_id": 36910419053,
+    "job_id": 110531391635,
+    "conclusion": "success",
+    "candidate_blob_sha": "d08542505ba9e3849d266a96854bb0ec84938465",
+    "exact_candidate_source_match": true,
+    "test_wrapper_change_only": "PYTEST_STYLE_FUNCTIONS_WRAPPED_IN_UNITTEST_TESTCASE_AFTER_INITIAL_ZERO_TEST_DISCOVERY__CANDIDATE_AND_DEPENDENCY_BYTES_UNCHANGED"
+  },
+  "independently_verified_tests": {
+    "count": 6,
+    "passed": 6,
+    "failed": 0,
+    "cases": [
+      "COMPLETE_COMPOSED_BUNDLE_PASSES_AND_KILLS_SEEDED_MUTANTS",
+      "MISSING_VERIFIER_MUTANTS_FAILS_CLOSED",
+      "SPENT_BUN_BUILDER_ONLY_POLICY_CHECK_FAILS",
+      "SPENT_CAD_LOCAL_ONLY_ACCEPTANCE_FAILS_GLOBAL_OBLIGATIONS",
+      "SPENT_KG_SHARED_SEMANTIC_ACCEPTANCE_FAILS",
+      "SPENT_SACCR_MISSING_REQUIREMENT_LINEAGE_FAILS"
+    ]
+  },
+  "owned_scope": [
+    "COMPOSED_NORMALIZED_REQUIREMENT_AND_OUTPUT_LINEAGE_GATE",
+    "INDEPENDENT_ACCEPTANCE_COVERAGE_GATE",
+    "REQUIREMENT_MUTATION_GATE",
+    "SEEDED_VERIFIER_MUTATION_KILL_GATE"
+  ],
+  "not_owned": [
+    "ARBITRARY_NATURAL_LANGUAGE_TO_COMPLETE_NORMALIZED_REQUIREMENT_GRAPH",
+    "SEMANTIC_CORRECTNESS_AND_COMPLETENESS_OF_EXTRACTED_REQUIREMENTS",
+    "DOMAIN_GOLD_VALUE_SYNTHESIS",
+    "FRESH_TASK_STAGE_B_PLAN_BEFORE_OFFICIAL_INSTRUCTION_EXPOSURE",
+    "WHOLE_19_FAMILY_TERMINAL_CLOSURE"
+  ],
+  "fresh_execution_authorized": false,
+  "rank15_authorized": false,
+  "donor_runtime_required": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "RECOMPUTE_STAGE_A_PREQUALIFICATION_PROOF_STATE__EXECUTE_NEXT_SMALLEST_MISSING_PROOF_OBLIGATION__KEEP_RANK15_FROZEN_UNLESS_LIVE_HIERARCHY_AUTHORIZES"
+}
