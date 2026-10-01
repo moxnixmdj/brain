@@ -545,12 +545,12 @@
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
     "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_optimization_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+    "next_optimization_target": "COMPLETE_BEHAVIORAL_SEMANTIC_PURGE_AND_VALIDATE_INDEPENDENT_ACCEPTANCE_MODEL_ON_SPENT_HELDOUTS__THEN_RESUME_MATCHED_OPUS_VERIFICATION",
     "brain_configured_verification_pending": [
       "ADVANCED_AGENTIC_CODING",
       "PROFESSIONAL_KNOWLEDGE_WORK"
     ],
-    "primary_internal_work_representation": "ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1",
+    "primary_internal_work_representation": "BEHAVIORAL_CONTRACT_REGISTRY_V1_PLUS_ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1",
     "family_labels_are_evaluation_surfaces_only": true,
     "primary_progress_metrics": [
       "UNEXPLAINED_USEFUL_BEHAVIOR",
@@ -571,9 +571,16 @@
     "shared_residual_lanes": 5
   },
   "internal_interpretation": {
-    "family_rows": "EVALUATION_SURFACES_AND_ACCEPTANCE_ACCOUNTING_ONLY",
+    "family_rows": "ACCOUNTING_LABEL_ONLY__EVALUATION_AND_ACCEPTANCE_SURFACES",
     "implementation_ontology": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
-    "rule": "DO_NOT_INFER_ONE_INTERNAL_MODULE_PER_FAMILY",
-    "ownership_accounting_unchanged": true
+    "rule": "DO_NOT_INFER_ONE_INTERNAL_MODULE_PER_FAMILY__NO_TERM_WITHOUT_BEHAVIORAL_CONTRACT",
+    "ownership_accounting_unchanged": true,
+    "behavioral_contract_law": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+    "behavioral_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+  },
+  "behavioral_contract_control": {
+    "status": "ACTIVE_FAIL_CLOSED",
+    "law": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+    "rule": "OWNERSHIP_CREDIT_ONLY_FOR_OBSERVABLE_CONTRACTED_BEHAVIOR__LABEL_MATCHING_ZERO_CREDIT"
   }
 }
