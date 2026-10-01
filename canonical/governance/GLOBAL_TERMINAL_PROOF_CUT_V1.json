@@ -1,0 +1,294 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_PROOF_CUT_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__GLOBAL_EVIDENCE_SATURATION_AND_CUT_COMPUTATION_REQUIRED__NO_NEW_UNTOUCHED_INFORMATION_SPEND",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+  "evidence_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+  "counterfactual_compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+  "exact_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+  "source_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+  "behavioral_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+  "atomic_map": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+  "all_family_campaign": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
+  "snapshot": {
+    "expected_family_count": 19,
+    "closed_family_count": 2,
+    "open_family_count": 17,
+    "terminal_predicates": {
+      "exact_target_family_count_19": true,
+      "every_required_behavior_contracted": false,
+      "every_required_behavior_has_admissible_proof": false,
+      "donor_dependent_required_behaviors_zero": false,
+      "unexplained_required_behaviors_zero": false,
+      "unresolved_verifier_mutations_zero": false,
+      "unresolved_composition_failures_zero": false,
+      "contaminated_evidence_used_for_promotion_zero": true,
+      "resource_or_authority_violations_zero": true,
+      "all_frozen_opus_acceptance_predicates_pass": false,
+      "final_donor_deletion_cleanroom_pass": false,
+      "proof_bundle_frozen": false
+    },
+    "counters": {
+      "uncontracted_required_behaviors": null,
+      "unproved_required_behaviors": null,
+      "donor_dependent_required_behaviors": null,
+      "unresolved_verifier_mutations": null,
+      "unresolved_composition_failures": null,
+      "contaminated_promotion_evidence": 0,
+      "resource_or_authority_violations": 0
+    }
+  },
+  "family_surfaces": [
+    {
+      "id": "ADVANCED_AGENTIC_CODING",
+      "closure_state": "OPEN",
+      "ownership_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "unresolved": [
+        "Establish current-V5 Terminal-Bench 4.0 breadth and a comparable stage-1 score >=66.4% using additional distinct fresh tasks; then complete FrontierCode v1.1 Main >=54.4% and CursorBench 4.0 or matched direct equivalent >=57.8%. No WAL replay."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "COMPLEX_MULTI_TOOL_AGENCY",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "closure_state": "OPEN",
+      "ownership_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING",
+      "unresolved": [
+        "Find existing route >= both relevant professional-work bars or stronger direct evidence."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "BUSINESS_WORKFLOW_AUTOMATION",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Reuse browser/tool execution mechanisms only where they transfer to multi-app workflows; verify on clean automation tasks."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Older HLE-with-tools variant remains preserved as a distinct non-equivalent benchmark; no blanket universal-reasoning claim."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Reuse the open research framework first; causally isolate learned long-horizon research residual from the open weights only if framework reuse is insufficient."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Separate deterministic document parsing/rendering from learned visual understanding; internalize deterministic scope first, then localize any remaining learned residual."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "COMPUTER_AND_BROWSER_USE",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Need comparable evidence or direct same-harness evaluation."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "FINANCIAL_ANALYSIS",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "COMPLETE_BEHAVIORAL_LEAF_CLOSURE_AND_OPUS_LEVEL_PROOF"
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "closure_state": "PASS",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "unresolved": [],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "unresolved": [
+        "Reuse this owned coordination mechanism; separately acquire/verify residual cognitive delegation quality and broader-scale behavior."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "unresolved": [
+        "Acquire/verify the remaining cognitive self-critique, root-cause debugging and arbitrary recovery mechanisms; reuse the owned deterministic guard globally."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "ARTIFACT_CREATION",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "unresolved": [
+        "Internalize/verify strongest permissively licensed DOCX/PDF/advanced artifact mechanisms, then run direct Brain-vs-Opus professional artifact quality evaluation."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "COMMUNICATION_AND_SYNTHESIS",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "COMPLETE_BEHAVIORAL_LEAF_CLOSURE_AND_OPUS_LEVEL_PROOF"
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "unresolved": [
+        "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "UNKNOWN_DOMAIN_ADAPTATION",
+      "closure_state": "OPEN",
+      "ownership_status": "EXTERNAL_CAPABILITY_SPECIMEN_FOUND",
+      "unresolved": [
+        "Use fresh unseen-domain tasks to distinguish generic research-loop transfer from learned donor behavior; zero credit until donor-independent."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "MULTI_CAPABILITY_COMPOSITION",
+      "closure_state": "OPEN",
+      "ownership_status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "unresolved": [
+        "Test whether shared orchestration primitives transfer across browser, research and artifact tasks before treating them as a common composition mechanism."
+      ],
+      "evaluation_surface_only": true
+    },
+    {
+      "id": "EXACT_SYMBOLIC_COMPUTATION",
+      "closure_state": "PASS",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "unresolved": [],
+      "evaluation_surface_only": true
+    }
+  ],
+  "inherited_shared_lanes": [
+    {
+      "id": "A",
+      "families": [
+        "ADVANCED_AGENTIC_CODING"
+      ]
+    },
+    {
+      "id": "B",
+      "families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "FINANCIAL_ANALYSIS",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION"
+      ]
+    },
+    {
+      "id": "C",
+      "families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "MULTI_CAPABILITY_COMPOSITION",
+        "SUBAGENT_DELEGATION_AND_COORDINATION"
+      ]
+    },
+    {
+      "id": "D",
+      "families": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ]
+    },
+    {
+      "id": "E",
+      "families": [
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ]
+    }
+  ],
+  "scheduling_authority": {
+    "family_labels": false,
+    "benchmark_rank_order": false,
+    "current_active_family": false,
+    "global_terminal_proof_cut": true
+  },
+  "required_pipeline": [
+    "ATOMIZE_ALL_OPEN_TERMINAL_PROOF_OBLIGATIONS",
+    "SATURATE_EXISTING_EVIDENCE_FOR_ALL_OPEN_OBLIGATIONS",
+    "GLOBAL_DEDUCTIVE_CLOSURE",
+    "CROSS_FAMILY_SHARED_RESIDUAL_COMPRESSION",
+    "COUNTERFACTUAL_WORLD_REDUCTION",
+    "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
+    "EXACT_GLOBAL_MINIMUM_REALITY_CUT",
+    "PARALLEL_EXECUTION_OF_INDEPENDENT_CUT_MEMBERS_ONLY",
+    "COMPILE_RECEIPTS_AND_RECOMPUTE_GLOBAL_CUT"
+  ],
+  "untouched_information_spend": {
+    "instruction_exposure_is_spend": true,
+    "task_execution_is_spend": true,
+    "terminal_verifier_is_spend": true,
+    "selection_of_scarce_clean_sample_requires_cut_membership": true,
+    "admission_required_before_stage_b_instruction_fetch": true,
+    "unknown_fails_closed": true
+  },
+  "rank23": {
+    "task": "layout-config-recreation2",
+    "rank": 23,
+    "stage_a_receipt": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_STAGE_A_ADMISSION_V1.json",
+    "stage_a_status": "INDEPENDENT_PASS__CLEANNESS_ONLY",
+    "official_instruction_read": false,
+    "stage_b_exposure_admitted": false,
+    "reason": "STAGE_A_RECEIPT_PROVES_PREEXPOSURE_CLEANNESS_BUT_CONTAINS_NO_GLOBAL_MINIMUM_REALITY_CUT_ADMISSION",
+    "disposition": "PRESERVE_UNREAD__REVOKE_STAGE_B_EXPOSURE_UNTIL_GLOBAL_CUT_MEMBERSHIP_PROVEN"
+  },
+  "next_action": "SATURATE_AND_DEDUCTIVELY_CLOSE_ALL_OPEN_TERMINAL_OBLIGATIONS__COMPRESS_SHARED_RESIDUALS__COMPUTE_EXACT_GLOBAL_MINIMUM_REALITY_CUT__DO_NOT_EXPOSE_RANK23_OR_ANY_OTHER_UNTOUCHED_TASK_UNTIL_ADMITTED",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
