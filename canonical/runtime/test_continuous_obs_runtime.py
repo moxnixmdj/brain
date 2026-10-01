@@ -1,5 +1,10 @@
-import hashlib, json, pathlib
+import hashlib
+import json
+import tempfile
+import unittest
 from datetime import datetime, timezone, timedelta
+from pathlib import Path
+
 from canonical.runtime.continuous_obs_runtime import validate_context
 
 REQ=(
@@ -9,15 +14,16 @@ REQ=(
 )
 
 def put(root, rel, obj):
-    p=root/rel; p.parent.mkdir(parents=True,exist_ok=True)
+    p=root/rel
+    p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text(json.dumps(obj,sort_keys=True)+"\n",encoding="utf-8")
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
-def ctx(tmp_path, now):
+def make_context(root, now):
     hashes={}
-    hashes[REQ[0]]=put(tmp_path,REQ[0],{"canonical_generation":"g1"})
-    hashes[REQ[1]]=put(tmp_path,REQ[1],{"x":1})
-    hashes[REQ[2]]=put(tmp_path,REQ[2],{"x":2})
+    hashes[REQ[0]]=put(root,REQ[0],{"canonical_generation":"g1"})
+    hashes[REQ[1]]=put(root,REQ[1],{"x":1})
+    hashes[REQ[2]]=put(root,REQ[2],{"x":2})
     return {
       "schema":"PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
       "status":"CURRENT","canonical_generation":"g1",
@@ -36,30 +42,33 @@ def ctx(tmp_path, now):
       }]
     }
 
-def test_current_context_passes(tmp_path):
-    now=datetime(2026,10,1,20,0,tzinfo=timezone.utc)
-    assert validate_context(ctx(tmp_path,now),root=tmp_path,now=now)["pass"] is True
+class ContinuousObsRuntimeTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory()
+        self.root=Path(self.tmp.name)
+        self.now=datetime(2026,10,1,20,0,tzinfo=timezone.utc)
+    def tearDown(self):
+        self.tmp.cleanup()
+    def test_current_context_passes(self):
+        self.assertTrue(validate_context(make_context(self.root,self.now),root=self.root,now=self.now)["pass"])
+    def test_stale_world_dependency_fails(self):
+        c=make_context(self.root,self.now-timedelta(minutes=10))
+        out=validate_context(c,root=self.root,now=self.now)
+        self.assertFalse(out["pass"])
+        self.assertTrue(any(x.startswith("VOLATILE_DEPENDENCY_STALE") for x in out["errors"]))
+    def test_canonical_state_change_fails(self):
+        c=make_context(self.root,self.now)
+        put(self.root,REQ[1],{"x":"changed"})
+        out=validate_context(c,root=self.root,now=self.now)
+        self.assertIn("CANONICAL_STATE_CHANGED:"+REQ[1],out["errors"])
+    def test_unknown_material_dependency_fails(self):
+        c=make_context(self.root,self.now)
+        c["unknown_material_dependencies"]=["mystery"]
+        self.assertFalse(validate_context(c,root=self.root,now=self.now)["pass"])
+    def test_incomplete_world_inventory_fails(self):
+        c=make_context(self.root,self.now)
+        c["material_world_state_dependencies_complete"]=False
+        self.assertFalse(validate_context(c,root=self.root,now=self.now)["pass"])
 
-def test_stale_world_dependency_fails(tmp_path):
-    now=datetime(2026,10,1,20,10,tzinfo=timezone.utc)
-    c=ctx(tmp_path,now-timedelta(minutes=10))
-    out=validate_context(c,root=tmp_path,now=now)
-    assert out["pass"] is False
-    assert any(x.startswith("VOLATILE_DEPENDENCY_STALE") for x in out["errors"])
-
-def test_canonical_state_change_fails(tmp_path):
-    now=datetime(2026,10,1,20,0,tzinfo=timezone.utc)
-    c=ctx(tmp_path,now)
-    put(tmp_path,REQ[1],{"x":"changed"})
-    out=validate_context(c,root=tmp_path,now=now)
-    assert "CANONICAL_STATE_CHANGED:"+REQ[1] in out["errors"]
-
-def test_unknown_material_dependency_fails(tmp_path):
-    now=datetime(2026,10,1,20,0,tzinfo=timezone.utc)
-    c=ctx(tmp_path,now); c["unknown_material_dependencies"]=["mystery"]
-    assert validate_context(c,root=tmp_path,now=now)["pass"] is False
-
-def test_incomplete_world_inventory_fails(tmp_path):
-    now=datetime(2026,10,1,20,0,tzinfo=timezone.utc)
-    c=ctx(tmp_path,now); c["material_world_state_dependencies_complete"]=False
-    assert validate_context(c,root=tmp_path,now=now)["pass"] is False
+if __name__=="__main__":
+    unittest.main()
