@@ -121,7 +121,7 @@
       "current_task": {
         "rank": 6,
         "task": "glycan-ms2-elucidation",
-        "state": "RUNNER_LAUNCHED__BUILDING_RUNTIME__INSTRUCTION_UNREAD",
+        "state": "RUNNER_READY__INSTRUCTION_UNREAD",
         "runner_pr": 289,
         "workflow_run_id": 36822123561
       },
