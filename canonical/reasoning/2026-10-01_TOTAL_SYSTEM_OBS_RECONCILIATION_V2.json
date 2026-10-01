@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_TOTAL_SYSTEM_OBS_RECONCILIATION_V2",
+  "status": "CURRENT_BASE_RECONCILIATION__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Minimize wall-clock time to verified 19/19 Opus-5.5-or-better Brain ownership by recursively OBSing execution, reasoning authority, acquisition order, stale work, and evidence truth without creating another governance layer.",
+  "governing_invariants": [
+    "Terminal target remains OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.",
+    "Knowledge remains external/JIT; capabilities must be permanently Brain-owned.",
+    "Underlying capability invention is forbidden; reuse/substitution/white-box harvesting/configuration/integration only.",
+    "Workflow success is not capability success.",
+    "OBS activity receives zero capability credit.",
+    "Private chain-of-thought is neither required nor canonical authority; consequential rationale must be preserved as compact evidence-bound receipts.",
+    "Incremental spend remains $0."
+  ],
+  "material_premises": [
+    "CANONICAL_POINTER requires RECURSIVE_OBS_RECEIPT_SCHEMA_V6 and ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.",
+    "ACTIVE_GOAL_HIERARCHY still advertises OBS schema V5 and action template V7.",
+    "CANONICAL_POINTER names 2026-10-01_WHITE_BOX_CAPABILITY_HARVEST_STRATEGY_V1.json as the current theory receipt while ACTIVE_GOAL_HIERARCHY still points to the older 2026-09-30 theory correction.",
+    "The newly created OBS-everything receipt and hierarchy mirror omit WHITE_BOX_HARVEST from acquisition order, contradicting current V7 law and the canonical pointer.",
+    "The hierarchy C3 mirror still says SkillRouter spent screen running, while current canonical cognitive campaign records a fresh SkillRouter pass plus out-of-sample falsification of cheap margin/cascade/majority gates.",
+    "PR #605 preserves the obsolete generic shared-Jev route even though the generic-small-judge default architecture is now falsified; it was closed during this audit as historical evidence only.",
+    "Rank-6 workflow run 36826634715 completed with workflow conclusion success and artifact 11145433867, but no terminal task verdict has yet been canonically reconciled."
+  ],
+  "evidence_refs": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/governance/OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V1.json",
+    "canonical/governance/COGNITIVE_BASIS_COMPRESSION_CAMPAIGN_V1.json",
+    "canonical/capabilities/opus55/COGNITIVE_PRIMITIVE_IMPLEMENTATION_FRONTIER_V1.json",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
+    "canonical/reasoning/2026-10-01_WHITE_BOX_CAPABILITY_HARVEST_STRATEGY_V1.json",
+    "https://github.com/moxnixmdj/brain/pull/605",
+    "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36826634715"
+  ],
+  "conclusion": "The OBS-everything direction is correct, but the current implementation contains cross-surface authority drift and one acquisition-order omission. Correct those exact defects, delete the obsolete generic-Jev PR, keep the rank-6 execution evidence fail-closed until terminal adjudication, and do not create a new OBS framework.",
+  "selected_route": "EXACT_CONTROL_SURFACE_RECONCILIATION__DELETE_OBSOLETE_PR__NO_NEW_OBS_LAYER",
+  "rejected_material_alternatives": [
+    "Create another OBS law or architecture layer.",
+    "Treat the rank-6 workflow conclusion as a coding-task pass.",
+    "Reopen or continue the generic shared-Jev PR.",
+    "Ignore the V5/V7 versus V6/V8 authority mismatch because the concepts are similar.",
+    "Remove WHITE_BOX_HARVEST from the acquisition order.",
+    "Expose or store private chain-of-thought as the reasoning audit."
+  ],
+  "uncertainties": [
+    "The terminal rank-6 task/verifier result is not yet canonically reconciled.",
+    "Further concurrent commits may invalidate this exact-base reconciliation and require rebinding before merge.",
+    "C3 SkillRouter has fresh terminal gain but its broader generalization and cost/latency tradeoff remain unresolved."
+  ],
+  "assumptions": [
+    "Current main at the start of this reconciliation is dad38321b8163e1de72d6eac81bde8cfbc5e2bb7.",
+    "Closing PR #605 does not delete historical evidence and adds no capability credit."
+  ],
+  "non_goals": [
+    "No task instruction or hidden verifier material read.",
+    "No coding-task replay.",
+    "No capability promotion or score change.",
+    "No new model training.",
+    "No new governance layer."
+  ],
+  "next_action": "Run the trusted PR guard on the exact base/head. If it passes and main has not materially changed, merge this reconciliation; then independently reconcile the rank-6 terminal artifact before changing coding evidence or score.",
+  "supersession_conditions": [
+    "Main changes any affected control surface before merge.",
+    "A newer canonical theory receipt supersedes the October 1 white-box strategy.",
+    "The rank-6 terminal result is canonically reconciled and changes the active blocker or next action."
+  ],
+  "supersedes": null
+}
