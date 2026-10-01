@@ -76,6 +76,11 @@
       "required_evidence": "EXECUTION_SURFACE_CERTIFICATE"
     },
     {
+      "id": "EXECUTION_SURFACE_PACKAGE_POLICY_MISMATCH",
+      "defense": "Stage-B package/runtime feasibility must execute on the exact task image or a surface proven equivalent for OS image, Python provenance, environment-management policy, package-install policy, architecture and required native libraries. setup-python success cannot substitute for Debian-managed Python parity. PEP 668 or any externally-managed-environment policy must be probed explicitly. Prefer venv or an already-proven portable environment where allowed.",
+      "required_evidence": "TASK_SURFACE_PACKAGE_POLICY_PARITY_RECEIPT"
+    },
+    {
       "id": "STALE_STATE_OR_CONCURRENT_DUPLICATION",
       "defense": "Exact base binding, blocker lease, liveness receipt and duplicate-open-intent rejection",
       "required_evidence": "CURRENT_EXECUTION_AUTHORITY_RECEIPT"
@@ -147,6 +152,7 @@
         "REQUIREMENT_MUTATION_COVERAGE",
         "VERIFIER_MUTATION_OR_SEEDED_FAILURE_MODE_COVERAGE",
         "TASK_SPECIFIC_FEASIBILITY_CERTIFICATE",
+        "TASK_SURFACE_PACKAGE_POLICY_PARITY_RECEIPT",
         "TASK_SPECIFIC_TOOL_AUTHORITY_AND_RESOURCE_PREFLIGHT"
       ],
       "failure_disposition": "INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE"
