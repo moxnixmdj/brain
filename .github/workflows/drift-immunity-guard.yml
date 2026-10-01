@@ -92,3 +92,16 @@ jobs:
           CURRENT_PR_NUMBER: ${{ github.event.pull_request.number || 0 }}
         run: |
           python /tmp/trusted_drift_guard.py --base "${{ steps.refs.outputs.base }}" --head "${{ steps.refs.outputs.head }}"
+      - name: Run the frontier mirror and Stage-A admission oracles
+        run: |
+          set -euo pipefail
+          # No step in any workflow executed these modules, so the standing
+          # oracles that keep the frontier mirrors reconciled and the generic
+          # Stage-A reducers fail-closed never ran in CI. A repair that nothing
+          # re-executes rots on the next advance, which is how the mirrors came
+          # to be stale at ten consecutive bases. They are unittest modules and
+          # need no third-party runner. Deleting one fails this step outright.
+          python3 -m unittest \
+            canonical.runtime.test_reconcile_frontier_mirrors \
+            canonical.runtime.test_prequalification_stage_a_generic \
+            canonical.runtime.test_prequalification_stage_a_reducer_v2

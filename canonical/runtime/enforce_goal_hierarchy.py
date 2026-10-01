@@ -73,6 +73,9 @@ PROTECTED_GUARD_PATHS={
     "canonical/runtime/EXECUTOR_POLICY_V1.json",
     "canonical/runtime/astra_runtime.py",
     "canonical/runtime/same_identity_supervisor.py",
+    # CI executes the frontier mirror oracles, so the reconciler they exercise is
+    # a trusted control surface: editing it must declare governance intent.
+    "canonical/runtime/reconcile_frontier_mirrors.py",
     ".github/workflows/superworker-signed-command-relay.yml",
     ".github/workflows/drift-immunity-guard.yml",
 }
