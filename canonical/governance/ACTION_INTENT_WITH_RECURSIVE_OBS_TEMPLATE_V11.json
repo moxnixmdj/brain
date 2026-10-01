@@ -216,7 +216,8 @@
     "current_grandfathered_action": {
       "task": "freecad-spring-clip",
       "rank": 22,
-      "rule": "VALID_ONLY_WHILE_DERIVED_CAN_EXECUTE_TRUE_AND_EXACT_AUTHORITY_CHAIN_CURRENT"
+      "rule": "NO_LONGER_ADMISSIBLE",
+      "status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE"
     }
   }
 }
