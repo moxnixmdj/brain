@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_RAW_DRAWING_PRIMITIVES_V1",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_COMPONENT__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M1A_RAW_DRAWING_TO_NORMALIZED_VIEW_MASKS",
+  "artifact": "canonical/runtime/raw_drawing_primitives.py",
+  "tests": "canonical/tests/test_raw_drawing_primitives.py",
+  "verification": {
+    "first_run_id": 36941682879,
+    "first_run_result": "FAIL__OPENCV5_HOUGH_RETURN_SHAPE_API_DIFFERENCE",
+    "repair_commit": "2cedaf2177582b479d1f14838e44823d1319cfa8",
+    "passing_run_id": 36941738855,
+    "conclusion": "success"
+  },
+  "white_box_reuse_source": {
+    "repository": "szzhoujiarui/opencv-technical-drawing-vectorizer",
+    "license": "MIT",
+    "inspected_revision_context": "main on 2026-10-02",
+    "inspected_source_role": "PROOF_OF_DETERMINISTIC_OPENCV_ROUTE_AND_MECHANISM_REFERENCE__BRAIN_IMPLEMENTATION_IS_SEPARATE",
+    "copied_donor_runtime_required": false
+  },
+  "verified_scope": [
+    "RAW_GRAYSCALE_OR_BGR_BGRA_RASTER_TO_NORMALIZED_BINARY_INK_MASK",
+    "OTSU_OR_FIXED_ADAPTIVE_THRESHOLD_PATH",
+    "DETERMINISTIC_HOUGH_LINE_PRIMITIVE_EXTRACTION",
+    "DETERMINISTIC_HOUGH_CIRCLE_PRIMITIVE_EXTRACTION",
+    "STABLE_SORTED_MACHINE_READABLE_PRIMITIVES",
+    "INK_BOUNDING_BOX"
+  ],
+  "key_breakthrough": "A_NONTRIVIAL_RAW_DRAWING_NORMALIZATION_SLICE_REQUIRES_NO_VISION_MODEL",
+  "remaining": [
+    "MULTIVIEW_REGION_SEGMENTATION_AND_VIEW_IDENTITY",
+    "OCR_AND_SYMBOL_TO_EXPLICIT_FEATURE_CALLOUTS",
+    "VIEW_REGISTRATION_FROM_UNNORMALIZED_DRAWINGS",
+    "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+    "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
