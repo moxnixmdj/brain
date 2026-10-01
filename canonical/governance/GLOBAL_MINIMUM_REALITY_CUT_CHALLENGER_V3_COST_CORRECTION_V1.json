@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3_COST_CORRECTION_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_CORRECTION__ZERO_CAPABILITY_CREDIT",
+  "challenger": "canonical/governance/GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3.json",
+  "correction": {
+    "observation_count": 15,
+    "total_cost": 16,
+    "prior_total_cost": 15,
+    "reason": "SUM_OF_DECLARED_OBSERVATION_COSTS_IS_16"
+  },
+  "consequence": "DO_NOT_USE_CHALLENGER_V3_PRIOR_TOTAL_COST_15_AS_AUTHORITY",
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
