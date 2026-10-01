@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTHORIZATION_V1",
+  "date": "2026-10-01",
+  "task": "wal-recovery-ordering",
+  "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "completion_contract": "BRAIN_MINI_SWE_SUPERPOWERS_V5",
+  "verifier_policy": "ONE_SHOT_INDEPENDENT_AFTER_TERMINAL_AUTHORIZATION",
+  "terminal_submission_exact": "echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT",
+  "solution_ready": true,
+  "local_verification": "28/28 spec-derived tests pass; forbidden-construct scan clean; import surface + internal structure preserved",
+  "submission_authorized": false,
+  "authorization_note": "NOT self-authorized. The one-shot independent verifier cannot be driven from this session (Docker unavailable; runner-bridge outside pinned branch scope; superworker needs signing key + main push). Deferred to the central integrator to run the single independent verification shot."
+}
