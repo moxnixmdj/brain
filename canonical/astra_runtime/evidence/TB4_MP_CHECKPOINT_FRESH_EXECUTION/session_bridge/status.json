@@ -1,5 +1,5 @@
 {
-  "next_step": 7,
+  "harbor_exit_code": 0,
   "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
-  "status": "SESSION_TIMEOUT"
+  "status": "COMPLETE"
 }
