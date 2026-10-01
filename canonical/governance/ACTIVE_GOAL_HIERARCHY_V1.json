@@ -309,7 +309,7 @@
     "primary_control_law": "DETERMINISTIC_OR_EXECUTABLE_GATES_FIRST__PRIMITIVE_SPECIFIC_LEARNED_ROUTE_ONLY_FOR_RESIDUAL_SEMANTIC_CHOICE",
     "generic_small_auto_admit_judge": "FALSIFIED__NOT_AUTHORIZED",
     "c3_control": "VERIFIED_DETERMINISTIC_AUTHORITY_AVAILABILITY_FILTER",
-    "c3_current_scorer": "NONE__ETTIN_REJECTED_AFTER_ZERO_TERMINAL_DELTA__SKILLROUTER_SPENT_SCREEN_RUNNING",
+    "c3_current_scorer": "SKILLROUTER_FRESH_PASS__NO_DEFAULT_SCORER_SELECTED__CHEAP_GATE_AND_SIMPLE_ENSEMBLE_VARIANTS_FALSIFIED_OOS",
     "c9_authority": "DETERMINISTIC__GENERIC_NLI_FALSIFIED"
   },
   "execution_truth_and_visibility": {
@@ -340,10 +340,12 @@
   "active_stage1_execution": {
     "task": "jax-speedrun-gpu",
     "rank": 7,
-    "state": "PRESTART_EXECUTION_SURFACE_QUALIFICATION_REQUIRED__INSTRUCTION_UNREAD",
+    "state": "PREFLIGHT_CONTROLLER_LIVE__STALE_V1_LEASE_SUPERSEDED__CURRENT_V8_LEASE_REQUIRED_BEFORE_TASK_COMMAND",
     "prior_rank6_evidence": "canonical/capabilities/opus55/GLYCAN_MS2_ELUCIDATION_TB4_TRANSPORT_INADMISSIBLE_20261001_V1.json",
     "runner_transport_version": "FAST_BURST_SAFE_ARTIFACT_CONTRACT_V3",
-    "runner_transport_fix_commit": "18b46cbb1ed5061cff9b54983e24e1020d1711ce"
+    "runner_transport_fix_commit": "18b46cbb1ed5061cff9b54983e24e1020d1711ce",
+    "workflow_run_id": 36828317942,
+    "head_sha": "b6f696d3d7cc4545255b6598fb7a6bd1739373c0"
   },
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
@@ -408,5 +410,12 @@
     "evidence_path": "canonical/capabilities/opus55/GLYCAN_MS2_ELUCIDATION_TB4_TRANSPORT_INADMISSIBLE_20261001_V1.json",
     "capability_credit_delta": 0,
     "replay_allowed": false
+  },
+  "rank7_control_authority": {
+    "status": "PREFLIGHT_ONLY__TASK_COMMAND_AUTHORITY_BLOCKED_PENDING_CURRENT_V8_LEASE",
+    "stale_lease": "canonical/action_intents/2026-10-01_LEASE_JAX_SPEEDRUN_GPU_TB4_V1.json",
+    "reconciliation_intent": "canonical/action_intents/2026-10-01_TOTAL_SYSTEM_RANK7_CONTROL_RECONCILIATION_V1.json",
+    "live_controller_run_id": 36828317942,
+    "capability_credit_delta": 0
   }
 }
