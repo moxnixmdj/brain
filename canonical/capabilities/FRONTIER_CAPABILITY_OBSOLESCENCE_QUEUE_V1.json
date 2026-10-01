@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "RANK21_INELIGIBLE__NEXT_UNTOUCHED_FROZEN_SAMPLE_RANK22_REQUIRES_STAGE_A_PREEXPOSURE_ADMISSION",
+    "exact_blocker": "RANK22_PREEXECUTION_GATES_ALL_PASS__FRESH_STAGE_C_LEASE_WITH_DERIVED_AUTHORITY_NOT_YET_REISSUED",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "DERIVE_RANK22_FROM_FROZEN_MANIFEST__RUN_COMPLETE_STAGE_A_PREEXPOSURE_SEARCH__DO_NOT_READ_INSTRUCTION",
+    "next_action": "REISSUE_RANK22_STAGE_C_FROM_CURRENT_GATES__BIND_DERIVED_AUTHORITY_EVENT_CHAIN__THEN_ONE_BUILDER_BURST__FREEZE_OUTPUT__ONE_TERMINAL_VERIFIER",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -123,7 +123,7 @@
       "current_task": {
         "rank": 22,
         "task": "freecad-spring-clip",
-        "state": "STAGE_A_PREEXPOSURE_REQUIRED__INSTRUCTION_UNREAD"
+        "state": "PREEXECUTION_GATES_PASS__FRESH_STAGE_C_LEASE_REQUIRED"
       },
       "comparable_score_established": false,
       "surface_skipped_unspent": [
