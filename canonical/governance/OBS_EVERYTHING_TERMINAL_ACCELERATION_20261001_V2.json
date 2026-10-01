@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_OBS_EVERYTHING_TERMINAL_ACCELERATION_V2",
+  "date": "2026-10-01",
+  "status": "OBS_PASS_COMPLETE__RANK17_EXECUTION_TRUTH_CORRECTED__RANK17_SPENT_NO_REPLAY__RANK18_SINGLE_CARRIER_FRONTIER__ZERO_CAPABILITY_CREDIT",
+  "canonical_base_commit": "a105859643e140a46c6e7acab9c6ea39ab5a4505",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "exact_findings": {
+    "rank17_v2_execution_truth": {
+      "false_canonical_claim": "PR346_STAGE_C_V2_BUILDER_BURSTS_EXECUTED_0",
+      "runner_pr": 346,
+      "session_id": "data-anonymization-stagec-20261001-v2",
+      "valid_lease_revalidation_comment_id": 5939470388,
+      "accepted_command_comment_id": 5939471135,
+      "observation_comment_id": 5939471910,
+      "burst_id": 0,
+      "commands_executed": [
+        "input_inventory",
+        "headers",
+        "policy",
+        "identity_samples",
+        "discriminating_rows"
+      ],
+      "successful_results": 5,
+      "candidate_artifact_created": false,
+      "terminal_verifier_runs": 0,
+      "capability_verdict": "NONE",
+      "consequence": "RANK17_STAGE_C_EVIDENCE_SPENT__NO_REPLAY_FOR_CREDIT"
+    },
+    "rank17_source_boundary": "Existing V2 canonical revocation also records forbidden task-specific repository search after Stage-B exposure; this independently prevents clean-evidence continuation.",
+    "rank17_hash_transport": {
+      "v3_runner_hash": "1e169f69b043f0d178547ec53a21e5d756d957ac7a32d02e06ee6d55ed9ec429",
+      "v4_runner_hash": "1b98cda7a95d8fa365cf4585ecb1d146f6133cfca62085e1a88f53a94bd8b2dd",
+      "semantic_reconciliation": "V4 transport hash was reconciled as session-id-normalized equivalent, but hash reconciliation cannot restore evidence already spent by V2."
+    },
+    "rank18_duplicate_carrier": {
+      "duplicate_pr": 353,
+      "duplicate_disposition": "CLOSED_BY_OBS__UNBOUND__ZERO_EXECUTION",
+      "canonical_carrier_pr": 354,
+      "canonical_carrier_state": "OPEN__LEASE_BOUND__INSTRUCTION_SURFACED__NO_BUILDER_RECEIPT_OBSERVED_AT_OBS_TIME"
+    }
+  },
+  "seven_layers": {
+    "goal": "UNCHANGED__TERMINAL_19_FAMILY_EQUAL_OR_BETTER_DONOR_INDEPENDENT_OWNERSHIP",
+    "capability": "ADVANCED_AGENTIC_CODING_BREADTH_REQUIRES_DISTINCT_ADMISSIBLE_FRESH_TASK_EVIDENCE",
+    "blocker": "RANK17_IS_SPENT_AND_CAN_NO_LONGER_SUPPLY_CLEAN_TERMINAL_EVIDENCE",
+    "solution": "DELETE_RANK17_CONTINUATION_AUTHORITY__PRESERVE_DIAGNOSTIC_STAGE_A_B_EVIDENCE__ADVANCE_TO_RANK18",
+    "verification": "RUNNER_ACCEPTED_COMMAND_AND_OBSERVATION_RECEIPTS_OVERRIDE_STALE_CANONICAL_COUNTERS",
+    "inherited_system": "ANY_ACCEPTED_STAGE_C_BURST_COUNTS_AS_EXECUTION_SPEND_EVEN_IF_READ_ONLY_AND_NO_CANDIDATE_ARTIFACT_IS_CREATED",
+    "obs_process": "EVERY_CANONICAL_EXECUTION_COUNT_MUST_BE_RECONCILED_AGAINST_RUNNER_ACCEPTED_COMMAND_PLUS_OBSERVATION_RECEIPTS_BEFORE_SUCCESSOR_CARRIER_AUTHORIZATION"
+  },
+  "actions_executed": [
+    "RUNNER_PR352_CLOSED__RANK17_ALREADY_SPENT",
+    "RUNNER_PR353_CLOSED__DUPLICATE_RANK18_CARRIER"
+  ],
+  "next_action": "USE_ONLY_RUNNER_PR354_FOR_RANK18_STAGE_C__FREEZE_ACCEPTANCE__FRESH_BURST_REVALIDATION__EXECUTE_ONCE__FREEZE_OUTPUT__FRESH_TERMINAL_REVALIDATION__VERIFY_ONCE",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
