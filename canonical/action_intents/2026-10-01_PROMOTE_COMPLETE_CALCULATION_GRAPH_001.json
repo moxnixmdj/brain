@@ -1,0 +1,167 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-COMPLETE-CALCULATION-GRAPH-20261001-V2",
+  "status": "PROPOSED__ZERO_FAMILY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3ab210262d5ac60229ccd1ac49f3ef4e123e7b26",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "TERMINAL_BEHAVIORAL_AND_PROOF_CLOSURE_INCOMPLETE__ARBITRARY_SPEC_TO_COMPLETE_ACCEPTANCE_PLAN_NOT_YET_OWNED__PREQUALIFICATION_FAILURE_IMMUNITY_NOT_YET_SATISFIED_FOR_RANK15",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::TERMINAL_BEHAVIORAL_AND_PROOF_CLOSURE_INCOMPLETE__ARBITRARY_SPEC_TO_COMPLETE_ACCEPTANCE_PLAN_NOT_YET_OWNED__PREQUALIFICATION_FAILURE_IMMUNITY_NOT_YET_SATISFIED_FOR_RANK15",
+  "expected_parent_frontier_change": "PROMOTE_INDEPENDENTLY_VERIFIED_COMPLETE_CALCULATION_GRAPH_AS_BRAIN_OWNED_NARROW_COMPONENT__REMOVE_MISSING_GRAPH_MECHANISM_SUBBLOCKER__KEEP_RANK15_FROZEN__ZERO_FAMILY_CREDIT",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "stop_condition": "EXACT_VERIFIED_SOURCE_INSTALLED__INDEPENDENT_RUNNER_EVIDENCE_BOUND__SPENT_CAD_AND_SACCR_REGRESSIONS_PRESERVED__NO_FAMILY_CREDIT__RANK15_REMAINS_FROZEN__TRUSTED_DRIFT_GUARD_PASSES",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_PROMOTE_COMPLETE_CALCULATION_GRAPH_001.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3ab210262d5ac60229ccd1ac49f3ef4e123e7b26",
+    "real_outcome": "Remove the already-solvable structural completeness subblocker without spending fresh evidence.",
+    "required_capability": "Brain-owned deterministic requirement-to-output lineage validation.",
+    "obs_goal": {
+      "real_outcome": "Reduce prequalification failure risk before rank15.",
+      "proxy_goals_deleted": [
+        "NEW_REQUIREMENT_GRAPH_INFRASTRUCTURE",
+        "FRESH_TASK_SPEND"
+      ],
+      "surviving_necessity": "Internalize the independently verified minimum slice."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "BRAIN_PR637_CANDIDATE",
+        "RUNNER_PR314_INDEPENDENT_VERIFICATION",
+        "REQUIREMENT_GRAPH_KERNEL_001"
+      ],
+      "external_existing_routes_checked": [
+        "ZhangHanDong/agent-spec already harvested for adjacent graph mechanics"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_SEARCH",
+        "NO_NEW_MODEL",
+        "NO_DUPLICATE_VALIDATOR"
+      ],
+      "surviving_gap": "Verified slice exists but is not on current main."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_UNMERGED_VERIFIED_COMPONENT",
+      "delete_bypass_substitute_options": [
+        "REUSE_EXACT_VERIFIED_BYTES",
+        "DO_NOT_REBUILD"
+      ],
+      "surviving_causal_blocker": "Current main lacks the verified complete calculation graph slice."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_EXACT_VERIFIED_SLICE",
+        "REBUILD_REJECTED"
+      ],
+      "losing_routes_reason": "Rebuilding duplicates an already verified mechanism and adds wall-clock.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Runner PR314 independently executed exact bytes on spent regressions and structural cases."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "STALE_BRAIN_PR637_AFTER_CURRENT_BASE_PROMOTION"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "REQUIREMENT_GRAPH_KERNEL_001"
+      ],
+      "fresh_reuse_plan": "Use promoted slice inside composed prequalification bundle; no rank15 spend."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_REPEAT_CANDIDATE_SEARCH",
+        "NO_REPEAT_INDEPENDENT_RUN"
+      ],
+      "search_stop_decision": "Exact verified mechanism already exists.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_EXACT_VERIFIED_SLICE",
+      "REBUILD_NEW_VALIDATOR",
+      "DEFER_AND_SPEND_RANK15"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REBUILD_NEW_VALIDATOR",
+      "DEFER_AND_SPEND_RANK15"
+    ],
+    "selected_surviving_route": "REUSE_EXACT_VERIFIED_COMPLETE_CALCULATION_GRAPH_SLICE",
+    "why_selected_route_is_fastest_sufficient": "Exact candidate bytes have already been independently verified and directly cover spent SA-CCR/CAD structural failures.",
+    "expected_parent_level_state_change": "PROMOTE_INDEPENDENTLY_VERIFIED_COMPLETE_CALCULATION_GRAPH_AS_BRAIN_OWNED_NARROW_COMPONENT__REMOVE_MISSING_GRAPH_MECHANISM_SUBBLOCKER__KEEP_RANK15_FROZEN__ZERO_FAMILY_CREDIT",
+    "stop_condition": "EXACT_VERIFIED_SOURCE_INSTALLED__INDEPENDENT_RUNNER_EVIDENCE_BOUND__SPENT_CAD_AND_SACCR_REGRESSIONS_PRESERVED__NO_FAMILY_CREDIT__RANK15_REMAINS_FROZEN__TRUSTED_DRIFT_GUARD_PASSES",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Existing verified route already dominates further search."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "inputs": "normalized explicit requirements, graph nodes/edges, declared outputs, justified exclusions",
+    "environment_state": "prequalification validation over spent or task-visible structured specification state",
+    "allowed_information": "task-visible specification/evidence and general/JIT authoritative method knowledge; no hidden verifier or task-specific solution",
+    "required_output_or_action": "fail closed unless every non-excluded material requirement has explicit graph lineage to a declared output and graph structure is valid",
+    "success_condition": "all required nodes are uniquely represented or explicitly justified-excluded; no dangling edges/cycles; each required node reaches output",
+    "failure_condition": "any material requirement is orphaned, has no output path, graph is cyclic/dangling, or exclusion is invalid",
+    "terminal_consequence": "prevents local-shortcut implementations from passing prequalification when required factors/features never affect terminal outputs",
+    "verification_route": "independent execution of exact source bytes on spent CAD and SA-CCR regressions plus structural pass/fail cases",
+    "dependency_boundary": "deterministic after requirements are normalized; does not solve semantic extraction or domain truth",
+    "scope": "structured methods with explicit requirement-to-intermediate-to-output lineage"
+  },
+  "qualification_stage": "SUPPORT_ONLY__NO_UNTOUCHED_QUALIFICATION_EVIDENCE_EXPOSED_OR_SPENT",
+  "prequalification_controls": {
+    "target_version_lock": "UNCHANGED__SUPPORT_ONLY",
+    "feasibility_certificate": "NOT_APPLICABLE_TO_ZERO_CREDIT_SPENT_EVIDENCE_COMPONENT_PROMOTION",
+    "complete_requirement_graph": "REQUIREMENT_GRAPH_KERNEL_001_ALREADY_VERIFIED",
+    "independent_acceptance_evidence": "RUNNER_PR314_EXACT_SOURCE_INDEPENDENT_VERIFICATION",
+    "requirement_mutation_evidence": "REQUIREMENT_GRAPH_KERNEL_001_ZERO_SURVIVORS",
+    "verifier_mutation_evidence": "SPENT_CAD_AND_SACCR_REGRESSION_FAILURES_DETECTED_BY_VERIFIED_SLICE",
+    "contamination_ledger": "ONLY_SPENT_HISTORICAL_FAILURES_USED__RANK15_UNTOUCHED",
+    "execution_surface_certificate": "RUNNER_WORKFLOW_36909084764_SUCCESS",
+    "statistical_promotion_plan_if_applicable": "NOT_APPLICABLE__NO_PROMOTION",
+    "donor_deletion_plan_if_applicable": "NOT_APPLICABLE__NO_DONOR_RUNTIME",
+    "composition_qualification_plan": "NEXT_ACTION__COMPOSE_WITH_REQUIREMENT_GRAPH_AND_INDEPENDENT_ACCEPTANCE_ON_SPENT_HELDOUTS"
+  }
+}
