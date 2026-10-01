@@ -5,9 +5,9 @@
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "active_probe": null,
-  "probe_state": "RANK16_INELIGIBLE_PRIOR_EXPOSURE__INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__ZERO_VERDICT__RANK17_PREEXPOSURE_ELIGIBILITY_ACTIVE",
-  "current_parent_blocker": "RANK17_DATA_ANONYMIZATION_PREEXPOSURE_ELIGIBILITY_NOT_YET_ADJUDICATED",
-  "next_required_action_class": "SEARCH_BRAIN_AND_RUNNER_FOR_RANK17_DATA_ANONYMIZATION_PRIOR_EXPOSURE_WITHOUT_READING_TASK_INSTRUCTION",
+  "probe_state": "RANK17_STAGE_A_INDEPENDENT_PASS__STAGE_B_ONE_INSTRUCTION_EXPOSURE_AUTHORIZED__NO_TASK_EXECUTION",
+  "current_parent_blocker": "RANK17_STAGE_B_TASK_SPECIFICATION_CONTRACT_AND_FEASIBILITY_NOT_YET_COMPILED",
+  "next_required_action_class": "EXPOSE_OFFICIAL_DATA_ANONYMIZATION_INSTRUCTION_EXACTLY_ONCE__COMPILE_STAGE_B_SOURCE_ACCOUNTING_REQUIREMENT_GRAPH_INDEPENDENT_ACCEPTANCE_AND_FEASIBILITY__NO_TASK_COMMAND",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY",
   "progress_level_minimum": "PERMANENT_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "probe_budget": {
@@ -198,7 +198,7 @@
     "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
   },
-  "next_progress_event_target": "SEARCH_BRAIN_AND_RUNNER_FOR_RANK17_DATA_ANONYMIZATION_PRIOR_EXPOSURE_WITHOUT_READING_TASK_INSTRUCTION",
+  "next_progress_event_target": "EXPOSE_OFFICIAL_DATA_ANONYMIZATION_INSTRUCTION_EXACTLY_ONCE__COMPILE_STAGE_B_SOURCE_ACCOUNTING_REQUIREMENT_GRAPH_INDEPENDENT_ACCEPTANCE_AND_FEASIBILITY__NO_TASK_COMMAND",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -343,15 +343,7 @@
     "status": "CONTAMINATED__INELIGIBLE__DO_NOT_REPLAY",
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
-  "active_stage1_execution": {
-    "task": "session-window-debug",
-    "rank": 16,
-    "state": "INSTRUCTION_EXPOSED__PRIOR_HISTORICAL_EXPOSURE_CONFIRMED__INELIGIBLE__ZERO_VERDICT__DO_NOT_REPLAY",
-    "evidence_path": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_PRIOR_EXPOSURE_INELIGIBILITY_V1.json",
-    "runner_pr": 333,
-    "terminal_verifier_executed": false,
-    "replay_allowed": false
-  },
+  "active_stage1_execution": null,
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
     "stale_state_falsified": "RANK6_FRESH_TASK_RUNNER_READY__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
@@ -444,8 +436,8 @@
   "stage1_next_clean_task": {
     "task": "data-anonymization",
     "rank": 17,
-    "state": "FROZEN_UNREAD__PREEXPOSURE_ELIGIBILITY_CHECK_ACTIVE",
-    "authorization_gate": "NO_PRIOR_TASK_EXPOSURE__THEN_STAGE_A_PREQUALIFICATION"
+    "state": "STAGE_A_PASS__STAGE_B_INSTRUCTION_EXPOSURE_AUTHORIZED__TASK_EXECUTION_FORBIDDEN",
+    "authorization_gate": "STAGE_B_PASS_REQUIRED_BEFORE_ANY_TASK_COMMAND"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -513,11 +505,12 @@
       "valid": true,
       "candidate_task_executed": false
     },
-    "task_execution_authorized": true,
+    "task_execution_authorized": false,
     "same_task_replay_allowed": false,
     "solution_read": false,
     "tests_read": false,
-    "hidden_verifier_read": false
+    "hidden_verifier_read": false,
+    "post_spend_authority": "NONE"
   },
   "rank15_stage_c": {
     "status": "SPENT_BY_POST_REVOCATION_TASK_SPECIFIC_EXECUTION__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
@@ -542,9 +535,15 @@
     "task_execution_authorized": false
   },
   "rank16_stage_b": {
-    "status": "ABORTED_BY_PRIOR_EXPOSURE_DISCOVERY__INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__ZERO_VERDICT",
-    "behavioral_contract": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_STAGE_B_CONTRACT_V1.json",
-    "ineligibility_evidence": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_PRIOR_EXPOSURE_INELIGIBILITY_V1.json",
-    "runner_pr": 333
+    "status": "ABORTED_PRIOR_EXPOSURE_AND_SOURCE_CLASSIFICATION_FAILURE__ZERO_VERDICT__NO_CLEAN_CREDIT",
+    "runner_pr": 333,
+    "task_execution_authorized": false
+  },
+  "rank17_stage_a": {
+    "status": "INDEPENDENT_PASS__STAGE_B_EXPOSURE_AUTHORIZED",
+    "evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_A_ADMISSION_V1.json",
+    "runner_pr": 337,
+    "workflow_run_id": 36915892308,
+    "task_execution_authorized": false
   }
 }
