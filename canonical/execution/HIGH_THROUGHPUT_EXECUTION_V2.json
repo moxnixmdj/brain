@@ -23,8 +23,9 @@
     "session_id": "glycan-ms2-elucidation-20261001-v1",
     "task": "glycan-ms2-elucidation",
     "sample_rank": 6,
-    "state": "RUNNER_LAUNCHED__BUILDING_RUNTIME__INSTRUCTION_UNREAD",
-    "workflow_run_id": 36822123561
+    "state": "RUNNER_READY__AWAITING_FIRST_CAUSAL_BURST__INSTRUCTION_UNREAD",
+    "workflow_run_id": 36822123561,
+    "ready_comment": "https://github.com/moxnixmdj/verification-capsule-runner/pull/289#issuecomment-5925632099"
   },
   "capability_credit_delta": 0,
   "incremental_spend_usd": 0,
