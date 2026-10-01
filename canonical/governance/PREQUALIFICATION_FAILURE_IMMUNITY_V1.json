@@ -32,8 +32,8 @@
     },
     {
       "id": "BENCHMARK_CONTAMINATION",
-      "defense": "Pre-exposure hash, immutable exposure ledger, automatic ineligibility after task-specific instruction/solution/verifier leakage",
-      "required_evidence": "QUALIFICATION_CONTAMINATION_LEDGER"
+      "defense": "Pre-exposure identity plus complete zero-hit search across Brain+runner code, branches, commits, and PR metadata; immutable exposure ledger; automatic ineligibility after any task-specific instruction/solution/verifier/hint leakage.",
+      "required_evidence": "QUALIFICATION_CONTAMINATION_LEDGER_WITH_COMPLETE_8_SURFACE_SEARCH"
     },
     {
       "id": "BENCHMARK_OVERFIT",
@@ -119,6 +119,7 @@
       "required": [
         "TARGET_VERSION_LOCK",
         "QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
+        "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS",
         "GENERAL_EXECUTION_SURFACE_CERTIFICATE",
         "INDEPENDENT_ACCEPTANCE_MECHANISM_VERIFIED",
         "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
