@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ORTHOGRAPHIC_VISUAL_HULL_CANDIDATE_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_LOCAL_VERIFICATION_PASS__INDEPENDENT_REPOSITORY_VERIFICATION_PENDING__ZERO_FAMILY_CREDIT",
+  "status": "INDEPENDENT_VERIFICATION_PASS__BRAIN_OWNED_NARROW_ORTHOGRAPHIC_GEOMETRY_COMPONENT__ZERO_FAMILY_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "parent_frontier": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
   "target_residual": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
@@ -44,5 +44,19 @@
     "INTEGRATE_ONLY_AS_INDEPENDENT_ACCEPTANCE_OR_REPAIR_PRIMITIVE_UNTIL BROADER_SEMANTIC_SCOPE_IS_PROVEN"
   ],
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 436,
+    "workflow_run_id": 36938155014,
+    "workflow_job_id": 110623189232,
+    "runner_merge_commit": "f987c3a944bc838eacebd69710c660d70380a961",
+    "exact_source_git_blob_sha1": "d102226cfde581cf3d7de97ec2e55862edf1c31b",
+    "exact_blob_check": "PASS",
+    "independent_suite": "PASS",
+    "randomized_differential_reconstruction_cases": 3000,
+    "randomized_repair_conservation_cases": 1000,
+    "randomized_exact_acceptance_cases": 500
+  },
+  "ownership_state": "BRAIN_OWNED_NARROW_COMPONENT__NO_EXTERNAL_RUNTIME_DEPENDENCY"
 }
