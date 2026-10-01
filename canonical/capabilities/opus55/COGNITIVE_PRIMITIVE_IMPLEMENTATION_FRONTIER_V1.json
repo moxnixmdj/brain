@@ -40,7 +40,7 @@
       "open_candidates": [
         "pipizhao/SkillRouter-Reranker-0.6B"
       ],
-      "state": "SKILLROUTER_FRESH_GATE_PASS__CHEAP_FIRST_COMPOSITION_OPTIMIZATION_REQUIRED__ZERO_CREDIT",
+      "state": "SKILLROUTER_FRESH_PASS__SIMPLE_LEXICAL_MARGIN_GATE_FALSIFIED_OOS__CHEAP_COMPOSITION_UNRESOLVED__ZERO_CREDIT",
       "execution_repo": "moxnixmdj/verification-capsule-runner",
       "execution_commit": "45ec7906c979813bafea11a7db0a97d08d4eab83",
       "selected_candidate": null,
@@ -68,7 +68,8 @@
       "fresh_evidence": "canonical/capabilities/opus55/C3_SKILLROUTER_FRESH_TERMINAL_DELTA_001_RECONCILIATION.json",
       "fresh_terminal_success_delta": 0.2,
       "fresh_semantic_success_delta": 0.25,
-      "learned_route_mean_latency_ms": 2535.918673133339
+      "learned_route_mean_latency_ms": 2535.918673133339,
+      "margin_gate_falsification": "canonical/capabilities/opus55/C3_LEXICAL_MARGIN_GATE_OOS_FALSIFICATION_001.json"
     },
     {
       "id": "C4_HYPOTHESIS_PLAUSIBILITY",
@@ -163,7 +164,7 @@
     "TREAT_NLI_ENTAILMENT_AS_COMPLETE_EVIDENCE_SUFFICIENCY",
     "TRAIN_GENERIC_DECISION_MODEL_BEFORE_PRIMITIVE_SPECIFIC_REUSE_SPACE_IS_EXHAUSTED"
   ],
-  "next_required_action": "DERIVE_C3_CHEAP_FIRST_MARGIN_GATE__TEST_SKILLROUTER_ONLY_ON_AMBIGUOUS_CASES__C7_AGENT_REPLAY_REMAINS_BLOCKED_ON_REAL_REPLAYABLE_POLICY__NO_TRAINING",
+  "next_required_action": "SCREEN_EXISTING_CHEAP_C3_ROUTING_MECHANISMS_BEFORE_TRAINING__SKILLROUTER_FALLBACK_REMAINS_CANDIDATE__C7_CAUSAL_ROUTE_SEARCH_CONTINUES",
   "capability_credit_delta": 0,
   "latest_probe_results": {
     "c3": {
