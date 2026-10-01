@@ -9,7 +9,7 @@ on:
         default: ""
   pull_request:
     branches: [main]
-    types: [opened]
+    types: [opened, reopened, synchronize]
 
 permissions:
   contents: write

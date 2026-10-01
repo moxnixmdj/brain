@@ -134,7 +134,7 @@ def main():
         })
         started = time.time()
         cmd = [harbor, "run", "-p", str(task_dir), "--agent",
-               f"{CFG['command_prefix']}.harbor_branch_bridge:HarborBranchBridgeAgent",
+               f"{CFG.get('agent_import_path', 'mpc_bridge:HarborBranchBridgeAgent')}",
                "--env", "docker", *[str(a) for a in CFG.get("harbor_extra_args", [])]]
         cp = subprocess.run(cmd, cwd=ROOT, env=env, text=True, capture_output=True,
                             timeout=int(CFG.get("harbor_timeout_sec", 15000)))
