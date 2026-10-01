@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_INTERNALIZE_CAUSE_CANDIDATE_GENERATOR_001",
+  "status": "PROPOSED_NARROW_COMPONENT_INTERNALIZATION__ZERO_FAMILY_CREDIT",
+  "real_objective": "Make the screened deterministic cause-candidate generation mechanism Brain-owned without the PyRapide donor while preserving the active clean rank-9 coding execution.",
+  "governing_invariants": [
+    "Scope is explicit causal graphs with event role/intervenability metadata only.",
+    "This is not general causal discovery or full root-cause intelligence.",
+    "The exact dependency-free source independently verified in the runner is the source installed into Brain.",
+    "No external runtime dependency or model is allowed for this narrow component.",
+    "Family ownership and Opus-level capability credit remain unchanged.",
+    "Rank-9 atrx-vep-crispr remains isolated and untouched."
+  ],
+  "material_premises": [
+    "PyRapide MIT revision d1dc66efbefe3442e247ac896416bf00c25d3ca1 produced the desired backward-causal-slice plus intervenable-decision filtering behavior.",
+    "Spent screen run 36835495109 achieved 6/6 true-cause candidate recall, 6/6 unique candidate, and mean candidate fraction 1/3 of all upstream events.",
+    "The dependency-free candidate exactly matched the donor on all six cases.",
+    "The dependency-free candidate also passed unknown-parent, causal-cycle, and unknown-target fail-closed checks.",
+    "The candidate imports no donor and has zero external runtime dependencies."
+  ],
+  "evidence_refs": [
+    "moxnixmdj/verification-capsule-runner@95acbb43a82e6aba5346da38e9a14dc8b85bf64c",
+    "moxnixmdj/verification-capsule-runner@3abf57d",
+    "moxnixmdj/verification-capsule-runner:atomic_cause_candidate_spent/brain_owned_result.json",
+    "canonical/capabilities/opus55/ATOMIC_CAUSAL_FALSIFICATION_001_RECONCILIATION.json"
+  ],
+  "conclusion": "Internalize the exact verified dependency-free ancestor walk plus intervenable-decision filter as a narrow Brain-owned component, while keeping general cause discovery and residual cause ranking unresolved.",
+  "selected_route": "INTERNALIZE_VERIFIED_DONOR_INDEPENDENT_CAUSAL_ANCESTOR_DECISION_FILTER",
+  "rejected_material_alternatives": [
+    "Keep PyRapide as a runtime dependency.",
+    "Import the full PyRapide framework.",
+    "Claim general cause-candidate generation beyond explicit causal graphs.",
+    "Train a model for this deterministic subproblem."
+  ],
+  "uncertainties": [
+    "Fresh unseen transfer beyond the six spent C3 traces remains unverified.",
+    "General traces may lack explicit causal edges or reliable intervenability metadata."
+  ],
+  "assumptions": [
+    "The independently verified runner source is byte-for-byte equivalent in behavior to the Brain-installed source."
+  ],
+  "non_goals": [
+    "No family promotion.",
+    "No general root-cause claim.",
+    "No rank-9 interaction.",
+    "No training."
+  ],
+  "next_action": "Guard-validate the Brain-owned component, then seek fresh noncontaminating transfer for this narrow contract while moving residual root-cause work to traces lacking explicit causal structure or to residual cause ranking.",
+  "supersession_conditions": [
+    "Fresh transfer falsifies the narrow contract.",
+    "A smaller Brain-owned mechanism with equal behavior is verified."
+  ],
+  "supersedes": null
+}
