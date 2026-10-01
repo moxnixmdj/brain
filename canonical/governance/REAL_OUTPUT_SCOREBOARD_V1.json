@@ -1023,7 +1023,7 @@
     "next_clean_task": "session-window-debug",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "FIX_AND_VERIFY_PER_BURST_CANONICAL_LEASE_REVALIDATION__DO_NOT_REPLAY_RANK15",
+  "next_required_action": "EXECUTE_WDM_DESIGN_V3_SESSION_EXACTLY_ONCE__FREEZE_OUTPUT__RUN_INDEPENDENT_VERIFIER__NO_REPLAY",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1062,9 +1062,9 @@
     "replay_allowed": false
   },
   "rank15_stage_c": {
-    "status": "SPENT_BY_POST_REVOCATION_TASK_SPECIFIC_EXECUTION__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
-    "evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_POST_REVOCATION_EXECUTION_RECONCILIATION_V1.json",
-    "terminal_verifier_executed": false,
-    "task_replay_allowed": false
+    "status": "ONE_SHOT_AUTHORIZED__FRESH_V3_LEASE_ACTIVE__NOT_YET_EXECUTED",
+    "lease": "canonical/governance/LEASE_WDM_DESIGN_TB4_STAGE_C_V3_20261001_V1.json",
+    "session_id": "wdm-design-20261001-v3",
+    "replay_allowed": false
   }
 }
