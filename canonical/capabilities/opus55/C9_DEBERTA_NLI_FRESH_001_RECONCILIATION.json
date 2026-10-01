@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_C9_SEMANTIC_SUPPORT_PRIMITIVE_PROBE_RECONCILIATION_V1",
+  "result_id": "C9_DEBERTA_NLI_FRESH_001",
+  "status": "FALSIFIED_AS_BRAIN_SEMANTIC_SUPPORT_AUTHORITY_ROUTE__ZERO_CAPABILITY_CREDIT",
+  "date": "2026-10-01",
+  "primitive_component": "C9_SEMANTIC_SUPPORT_RELATION_ONLY",
+  "candidate": {
+    "model": "MoritzLaurer/deberta-v3-base-zeroshot-v1",
+    "role": "EVIDENCE_TO_CLAIM_ENTAILMENT_SCORING",
+    "training": "ZERO_NEW_TRAINING"
+  },
+  "frozen_execution": {
+    "runner_repo": "moxnixmdj/verification-capsule-runner",
+    "cases_commit": "11e491f5c029f0bfb574c79ecf546dde3ae925b6",
+    "probe_commit": "4013ac89ea714909ee3cb9d407c6618521b6901b",
+    "visible_push_status_commit": "1893985164d70b10e1f966fd2b34df931dfd9ee7",
+    "visible_pr": 284,
+    "visible_pr_run_id": 36820555932,
+    "visible_pr_job_id": 110235001443,
+    "persisted_result_blob": "ad4326afc9d34bf8fec76c2976ae6c045e558b98"
+  },
+  "metrics": {
+    "cases": 20,
+    "accuracy": 0.8,
+    "wrong_cases": 4,
+    "mean_latency_ms": 601.3710218499966
+  },
+  "decisive_failures": [
+    {
+      "case_id": "one_task_not_breadth",
+      "gold": false,
+      "predicted": true,
+      "entailment_probability": 0.88134765625,
+      "reason": "OVERCLAIMED_BREADTH_FROM_SINGLE_TASK"
+    },
+    {
+      "case_id": "fresh_falsification",
+      "gold": true,
+      "predicted": false,
+      "entailment_probability": 0.00455474853515625,
+      "reason": "FAILED_TO_RECOGNIZE_EXPLICIT_FALSIFICATION_CONCLUSION"
+    },
+    {
+      "case_id": "promotion_all_met",
+      "gold": true,
+      "predicted": false,
+      "entailment_probability": 0.2294921875,
+      "reason": "FAILED_COMPOSITION_OF_EXPLICIT_PREREQUISITES"
+    },
+    {
+      "case_id": "surface_blocked",
+      "gold": true,
+      "predicted": false,
+      "entailment_probability": 0.1854248046875,
+      "reason": "FAILED_TO_INFER_UNSPENT_STATE_FROM_PRESTART_BLOCK"
+    }
+  ],
+  "causal_interpretation": [
+    "GENERIC_NLI_ENTAILMENT_IS_NOT_RELIABLE_ENOUGH_TO_SERVE_AS_BRAIN_EVIDENCE_SUFFICIENCY_OR_PROMOTION_AUTHORITY",
+    "THE_ROUTE_CAN_REMAIN_AN_OPTIONAL_NONAUTHORITATIVE_SEMANTIC_HINT_ONLY_IF_A_FUTURE_TASK_JUSTIFIES_IT",
+    "EXPLICIT_SCOPE_PROMOTION_PROVENANCE_AND_BREADTH_RULES_SHOULD_REMAIN_DETERMINISTIC_WHERE_AVAILABLE",
+    "NO_TRAINING_IS_JUSTIFIED_FROM_THIS RESULT"
+  ],
+  "disposition": "DELETE_FROM_CURRENT_C9_AUTHORITY_PATH__KEEP_DETERMINISTIC_EVIDENCE_GATES__SEARCH_ONLY_FOR_UNSTRUCTURED_SUPPORT_RESIDUAL_IF_A_REAL_TASK_EXPOSES_ONE",
+  "capability_credit_delta": 0
+}
