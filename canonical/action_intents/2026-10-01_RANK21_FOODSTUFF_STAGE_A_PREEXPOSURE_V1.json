@@ -1,0 +1,195 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RANK21-FOODSTUFF-BETA-ACTIVITY-STAGE-A-PREEXPOSURE-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "2466e7de1bc59bfb90003120d51d4d5c4a74e9d4",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "NEXT_UNTOUCHED_FROZEN_SAMPLE_NOT_YET_RECOMPUTED",
+  "action_kind": "PREQUALIFICATION_STAGE_A",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::NEXT_UNTOUCHED_FROZEN_SAMPLE_NOT_YET_RECOMPUTED",
+  "expected_parent_frontier_change": "RANK21_FOODSTUFF_BETA_ACTIVITY_RECOMPUTED_AS_NEXT_UNTOUCHED_SAMPLE__STAGE_A_PREEXPOSURE_ADMISSION_PENDING__NO_TASK_CONTENT_READ__NO_TASK_EXECUTION_AUTHORIZED",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": false,
+  "evidence_presence_classification": "RANK20_CONTAMINATED__RANK21_EIGHT_SURFACE_ZERO_HIT_PREEXPOSURE_EVIDENCE_PRESENT",
+  "stop_condition": "STOP_AFTER_CURRENT_BASE_GUARD_ACCEPTS_RANK21_PREEXPOSURE_EVIDENCE_AND_AUTHORIZES_INDEPENDENT_STAGE_A_VERIFICATION_ONLY__DO_NOT_READ_INSTRUCTION__DO_NOT_EXECUTE_TASK",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "semantic_contract_policy": "NO_TERM_WITHOUT_COMPLETE_BEHAVIORAL_CONTRACT__ACCOUNTING_LABELS_HAVE_ZERO_IMPLEMENTATION_ONTOLOGY_AUTHORITY"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_RANK21_FOODSTUFF_STAGE_A_PREEXPOSURE_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "2466e7de1bc59bfb90003120d51d4d5c4a74e9d4",
+    "real_outcome": "Admit only the next genuinely untouched frozen task to independent Stage-A pre-exposure verification without consuming task content or execution budget.",
+    "required_capability": "Fail-closed pre-exposure eligibility classification from frozen task identity, current generic readiness receipts, and complete eight-surface exposure evidence.",
+    "obs_goal": {
+      "real_outcome": "Preserve clean benchmark evidence while continuing the frozen breadth sequence.",
+      "proxy_goals_deleted": [
+        "TASK_ACTIVITY_AS_PROGRESS",
+        "SKIPPING_FROZEN_ORDER",
+        "REPLAYING_CONTAMINATED_RANK20"
+      ],
+      "surviving_necessity": "Select and prequalify the next untouched task without content exposure."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "GENERIC_STAGE_A_REDUCER",
+        "PREQUALIFICATION_FAILURE_IMMUNITY",
+        "SOURCE_BOUNDARY_GATE",
+        "TOTAL_STAGE_C_BUDGET_GUARD"
+      ],
+      "external_existing_routes_checked": [
+        "NOT_APPLICABLE_PREEXPOSURE"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_STAGE_A_MECHANISM",
+        "NO_TASK_SPECIFIC_REASONING",
+        "NO_NEW_TRAINING"
+      ],
+      "surviving_gap": "Rank21 has not yet received current-base independent Stage-A admission."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_FROZEN_SAMPLE_ADMISSION",
+      "delete_bypass_substitute_options": [
+        "DELETE_RANK20_REPLAY",
+        "REUSE_GENERIC_STAGE_A",
+        "USE_EIGHT_SURFACE_ZERO_HIT_LEDGER"
+      ],
+      "surviving_causal_blocker": "Independent Stage-A admission for the recomputed next untouched sample is not yet recorded."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_GENERIC_STAGE_A_ON_RANK21",
+        "SKIP_TASK_WITHOUT_CAUSE_REJECTED",
+        "READ_INSTRUCTION_EARLY_REJECTED"
+      ],
+      "losing_routes_reason": "They either violate frozen-order evidence discipline or consume task content before generic readiness is proven.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Independent runner executes the exact canonical Stage-A reducer against mirrored current Brain policy and rank21 ledger."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "RANK20_STAGE_C_LEASE",
+        "ANY_RANK20_REPLAY"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "EIGHT_SURFACE_EXPOSURE_CLASSIFICATION",
+        "EXACT_CONTAINER_PACKAGE_POLICY_PROBE",
+        "SOURCE_BOUNDARY_PROMOTION_GATE"
+      ],
+      "fresh_reuse_plan": "Mirror the exact current reducer, prequalification policy, and rank21 ledger into the independent runner."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_TASK_INSTRUCTION_READ",
+        "NO_TASK_SPECIFIC_WEB_SEARCH",
+        "NO_RESEARCH_ON_FOODSTUFF_TASK"
+      ],
+      "search_stop_decision": "The complete eight-surface search is zero-hit; further task-name searching would add contamination risk without changing eligibility.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_GENERIC_STAGE_A_ON_RANK21",
+      "SKIP_RANK21",
+      "READ_RANK21_INSTRUCTION_BEFORE_STAGE_A"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RANK20_REPLAY",
+      "EARLY_STAGE_B_EXPOSURE",
+      "EARLY_STAGE_C_EXECUTION"
+    ],
+    "selected_surviving_route": "RANK21_EIGHT_SURFACE_CLEAN_LEDGER__GUARDED_STAGE_A_ONLY",
+    "why_selected_route_is_fastest_sufficient": "All generic controls already exist; only the next untouched task identity and clean ledger must be bound and independently evaluated.",
+    "expected_parent_level_state_change": "RANK21_FOODSTUFF_BETA_ACTIVITY_RECOMPUTED_AS_NEXT_UNTOUCHED_SAMPLE__STAGE_A_PREEXPOSURE_ADMISSION_PENDING__NO_TASK_CONTENT_READ__NO_TASK_EXECUTION_AUTHORIZED",
+    "stop_condition": "STOP_AFTER_CURRENT_BASE_GUARD_ACCEPTS_RANK21_PREEXPOSURE_EVIDENCE_AND_AUTHORIZES_INDEPENDENT_STAGE_A_VERIFICATION_ONLY__DO_NOT_READ_INSTRUCTION__DO_NOT_EXECUTE_TASK",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Stage-A pre-exposure uses existing canonical machinery and does not select an external capability supplier."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "TB4_PREEXPOSURE_STAGE_A_ADMISSION_001",
+    "inputs": [
+      "FROZEN_TASK_NAME",
+      "FROZEN_RANK",
+      "PRECOMMITTED_IDENTITY_HASH",
+      "EIGHT_SURFACE_PRIOR_EXPOSURE_COUNTS",
+      "GENERIC_READINESS_RECEIPTS"
+    ],
+    "environment_state": "CURRENT_EXACT_BASE_BRAIN_CONTROL_PLANE__TASK_CONTENT_UNREAD",
+    "allowed_information": [
+      "FROZEN_SAMPLE_METADATA",
+      "GENERIC_PREQUALIFICATION_RECEIPTS",
+      "EXPOSURE_SEARCH_METADATA"
+    ],
+    "required_output_or_action": "FAIL_CLOSED_STAGE_A_PASS_OR_FAIL_WITH_FAILED_PREDICATES__PASS_AUTHORIZES_STAGE_B_INSTRUCTION_EXPOSURE_ONLY",
+    "success_condition": "EXACT_GENERIC_REDUCER_RETURNS_PASS_TRUE_WITH_ZERO_FAILED_PREDICATES",
+    "failure_condition": "ANY_REQUIRED_GENERIC_PREDICATE_FAILS_OR_EXPOSURE_STATE_IS_UNKNOWN_OR_DISQUALIFYING",
+    "terminal_consequence": "PRESERVE_CLEAN_EVIDENCE_AND_ALLOW_ONLY_NEXT_STAGE_IF_GENERIC_PRECONDITIONS_ARE_PROVEN",
+    "verification_route": "INDEPENDENT_VERIFICATION_CAPSULE_RUNNER_EXECUTES_EXACT_CANONICAL_REDUCER",
+    "dependency_boundary": "NO_TASK_SPECIFIC_CONTENT__NO_HIDDEN_VERIFIER__NO_TASK_EXECUTION",
+    "scope": "TERMINAL_BENCH_4_STAGE_A_PRE_EXPOSURE_ADMISSION_ONLY"
+  },
+  "prequalification_controls": {
+    "source_allowlist_enforced_if_tb4_stage_b": "NOT_APPLICABLE_STAGE_A",
+    "target_version_lock": "canonical/capabilities/opus55/TB4_V5_TARGET_VERSION_LOCK_V1.json",
+    "feasibility_certificate": "canonical/capabilities/opus55/GENERIC_EXECUTION_SURFACE_CERTIFICATE_20261001_V1.json",
+    "complete_requirement_graph": "canonical/capabilities/opus55/REQUIREMENT_GRAPH_KERNEL_001.json",
+    "independent_acceptance_evidence": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+    "requirement_mutation_evidence": "canonical/capabilities/opus55/REQUIREMENT_GRAPH_KERNEL_001.json",
+    "verifier_mutation_evidence": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+    "contamination_ledger": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_CONTAMINATION_LEDGER_V1.json",
+    "execution_surface_certificate": "canonical/capabilities/opus55/GENERIC_EXECUTION_SURFACE_CERTIFICATE_20261001_V1.json",
+    "statistical_promotion_plan_if_applicable": "canonical/capabilities/opus55/TB4_V5_STAGE1_STATISTICAL_PROMOTION_PLAN_V1.json",
+    "donor_deletion_plan_if_applicable": "canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V1.json",
+    "composition_qualification_plan": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "fail_closed_on_unknown": true
+  },
+  "qualification_stage": "STAGE_A_PRE_EXPOSURE",
+  "prior_work_checked": [
+    "Frozen rank20 is contaminated and no replay is allowed.",
+    "Rank21 is next in frozen order.",
+    "Eight exposure surfaces were checked with zero hits.",
+    "No task-specific content was read."
+  ]
+}
