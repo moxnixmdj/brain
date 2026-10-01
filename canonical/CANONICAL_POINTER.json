@@ -246,7 +246,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
+    "next_step": "FREEZE_NEXT_CLEAN_STAGE_C_SPEND_UNTIL_EXACT_TASK_CONTAINER_EXECUTION_SURFACE_PROFILE_AND_PACKAGE_POLICY_PARITY_ARE_VERIFIED__THEN_ADVANCE_FROZEN_ORDER",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
@@ -778,7 +778,14 @@
     "behavioral_contract_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "terminal_closure_reducer": "canonical/runtime/terminal_closure_reducer.py",
-    "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json"
+    "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "latest_execution_truth": {
+      "task": "satb-audio-transcription",
+      "rank": 19,
+      "status": "SPENT_EXECUTION_SURFACE_FAILURE__ZERO_COGNITION_VERDICT__NO_REPLAY",
+      "evidence_path": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json"
+    },
+    "execution_surface_parity_gate": "RUNNER_PR_367_EXACT_TASK_CONTAINER_PROFILE_REQUIRED_BEFORE_NEXT_CLEAN_STAGE_C_SPEND"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
