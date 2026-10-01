@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
+    "next_action": "FREEZE_NEXT_CLEAN_STAGE_C_SPEND_UNTIL_EXACT_TASK_CONTAINER_EXECUTION_SURFACE_PROFILE_AND_PACKAGE_POLICY_PARITY_ARE_VERIFIED__THEN_ADVANCE_FROZEN_ORDER",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -121,9 +121,9 @@
         "intrastat-meldung"
       ],
       "current_task": {
-        "rank": 10,
-        "task": "cad-model",
-        "state": "LEASED_FRESH_TASK__INSTRUCTION_UNREAD"
+        "rank": 19,
+        "task": "satb-audio-transcription",
+        "state": "SPENT_EXECUTION_SURFACE_FAILURE__NO_TASK_AUDIO_ANALYSIS__NO_TERMINAL_VERDICT__NO_REPLAY"
       },
       "comparable_score_established": false,
       "surface_skipped_unspent": [
@@ -156,6 +156,13 @@
       "rank": 9,
       "status": "POLICY_INADMISSIBLE__SPENT__ZERO_CAPABILITY_VERDICT__DO_NOT_REPLAY",
       "evidence_path": "canonical/capabilities/opus55/ATRX_VEP_CRISPR_TB4_POLICY_INADMISSIBLE_20261001_V1.json"
+    },
+    "latest_execution_surface_failure": {
+      "rank": 19,
+      "task": "satb-audio-transcription",
+      "root_cause": "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_001",
+      "evidence_path": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+      "next_gate": "RUNNER_PR_367_EXACT_TASK_CONTAINER_PROFILE_AND_PACKAGE_POLICY_PARITY"
     }
   },
   "promotion_claim": false,
