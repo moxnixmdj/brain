@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "task": "layout-config-recreation2",
+  "rank": 23,
+  "status": "SOURCE_READ_AFTER_GLOBAL_CUT_REVOCATION__NOT_ADMISSIBLE_FOR_CLEAN_PROMOTION__NO_EXECUTION",
+  "chronology": [
+    {
+      "commit": "b1fe30bf8f2306b9cde72e653433b1cf9344ed3c",
+      "event": "GLOBAL_PROOF_TREE_LAW_CREATED"
+    },
+    {
+      "commit": "c73788754b891d4bc489b092d9143b16cba8a923",
+      "event": "STAGE_B_SOURCE_READ_REVOKED_PENDING_GLOBAL_CUT"
+    },
+    {
+      "commit": "39958a9a26976f6dd4c0555815c3946f8f55f8de",
+      "event": "SOURCE_READ_OCCURRED"
+    }
+  ],
+  "observed": {
+    "instruction_read": true,
+    "task_execution": false,
+    "external_task_search": false
+  },
+  "adjudication": {
+    "prior_stage_a_cleanliness_preserved": true,
+    "global_cut_admission_before_source_read": false,
+    "clean_promotion_eligibility": false,
+    "task_execution_authorized": false,
+    "source_reusable_as_spent_evidence": true
+  },
+  "root_cause": "LOCAL_STAGE_A_PASS_COULD_ADVANCE_SOURCE_READ_WITHOUT_ENFORCED_GLOBAL_CUT_MEMBERSHIP",
+  "repair": [
+    "GLOBAL_CUT_MEMBERSHIP_REQUIRED_BEFORE_UNTOUCHED_SOURCE_READ",
+    "LOCAL_STAGE_A_PASS_CANNOT_ALONE_AUTHORIZE_SOURCE_READ",
+    "UNADMITTED_SOURCE_READ_REMOVES_CLEAN_PROMOTION_ELIGIBILITY",
+    "DO_NOT_AUTOMATICALLY_ADVANCE_TO_NEXT_RANK"
+  ],
+  "global_cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+  "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PRESERVE_RANK23_AS_SPENT_EVIDENCE__COMPUTE_GLOBAL_17_FAMILY_MINIMUM_REALITY_CUT"
+}
