@@ -27,6 +27,7 @@ import time
 import uuid
 from dataclasses import dataclass
 from typing import Any, Callable
+from canonical.runtime import continuous_obs_runtime
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TASK_SCHEMA = "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1"
@@ -284,6 +285,15 @@ def claim_task(
         raise NoCausallyReadyTask("MISSION_MISSING")
     if _sha_file(mission) != task["mission_sha256"]:
         raise SupervisorError("MISSION_SHA_MISMATCH")
+    mission_doc = _read_json(mission)
+    obs_verdict = continuous_obs_runtime.validate_context(
+        mission_doc.get("continuous_obs"),
+        root=root,
+    )
+    if not obs_verdict.get("pass"):
+        raise NoCausallyReadyTask(
+            "CONTINUOUS_OBS_NOT_CURRENT:"+"|".join(obs_verdict.get("errors") or ["UNKNOWN"])
+        )
 
     with _claim_lock(state_dir):
         state = _load_state(state_dir, task["task_id"])
@@ -314,6 +324,16 @@ def choose_causally_ready_task(
             continue
         mission = _repo_path(root, task["mission_path"])
         if not mission.is_file() or _sha_file(mission) != task["mission_sha256"]:
+            continue
+        try:
+            mission_doc = _read_json(mission)
+            obs_verdict = continuous_obs_runtime.validate_context(
+                mission_doc.get("continuous_obs"),
+                root=root,
+            )
+        except Exception:
+            continue
+        if not obs_verdict.get("pass"):
             continue
         candidates.append((-int(task["priority"]), task["task_id"], path))
     if not candidates:
@@ -376,6 +396,16 @@ def execute_claimed_task(
     mission = _repo_path(root, task["mission_path"])
     if _sha_file(mission) != task["mission_sha256"]:
         raise SupervisorError("MISSION_SHA_MISMATCH_BEFORE_EXECUTION")
+    mission_doc = _read_json(mission)
+    obs_verdict = continuous_obs_runtime.validate_context(
+        mission_doc.get("continuous_obs"),
+        root=root,
+    )
+    if not obs_verdict.get("pass"):
+        raise SupervisorError(
+            "CONTINUOUS_OBS_BLOCKED_BEFORE_EXECUTION:"
+            +"|".join(obs_verdict.get("errors") or ["UNKNOWN"])
+        )
 
     state["status"] = "RUNNING"
     state["runtime_attempt_count"] = int(state.get("runtime_attempt_count", 0)) + 1
