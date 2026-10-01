@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK22_BUILDER_BURST_0_OBSERVATION",
+  "next_progress_event_target": "GENERIC_RANK22_FAILURE_IMMUNITY_VERIFIED_AND_MERGED",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -988,14 +988,12 @@
     }
   ],
   "last_real_output_event": {
-    "event_id": "FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_20261001",
+    "event_id": "FREECAD_SPRING_CLIP_RANK22_BUILDER_RUNTIME_FAILURE_20261002",
     "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "status": "CONTAMINATED_POST_STAGE_B__EXTERNAL_DISCOVERY_RETURNED_TASK_SPECIFIC_VERIFIER_DERIVED_CONTENT__STAGE_C_FORBIDDEN__ZERO_CREDIT__NO_REPLAY",
-    "evidence_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
+    "status": "SPENT_BUILDER_RUNTIME_FAILURE__VECTOR_API_CASE_MISMATCH__EXECUTION_1__VERIFIER_0__ZERO_CREDIT__NO_REPLAY",
+    "evidence_path": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
     "capability_credit_delta": 0,
-    "progress_credit": "POST_EXPOSURE_DISCOVERY_SEARCH_COLLISION_LOCALIZED_AND_CANONICALLY_HARDENED",
-    "execution_count_used": 0,
-    "terminal_verifier_count_used": 0,
+    "progress_credit": "GENERIC_API_CONTRACT_AND_SEMANTIC_SUCCESS_GAPS_LOCALIZED",
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
@@ -1008,7 +1006,7 @@
     "next_clean_task": "freecad-spring-clip",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "RUN_RANK22_STAGE_C_BUILDER_ONCE_ON_CANONICAL_PR425__FREEZE_OUTPUT__APPEND_EXECUTION_CONSUMED__THEN_DERIVE_CAN_VERIFY",
+  "next_required_action": "HARDEN_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE__VERIFY_FAIL_CLOSED__THEN_RECOMPUTE_NEXT_UNTOUCHED_SAMPLE",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1151,11 +1149,9 @@
     "post_receipt_revalidation": true
   },
   "rank22_stage_c": {
-    "status": "ACTIVE_ONE_SHOT__DERIVED_CAN_EXECUTE_TRUE",
-    "task": "freecad-spring-clip",
-    "rank": 22,
+    "status": "SPENT_BUILDER_RUNTIME_FAILURE__ZERO_CREDIT__NO_REPLAY",
     "runner_pr": 425,
-    "execution_count_used": 0,
+    "execution_count_used": 1,
     "execution_count_allowed": 1,
     "verifier_count_used": 0,
     "verifier_count_allowed": 1
