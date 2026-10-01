@@ -434,13 +434,10 @@
     "capability_credit_delta": 0
   },
   "stage1_next_clean_task": {
-    "task": "foodstuff-beta-activity",
-    "rank": 21,
-    "state": "STAGE_B_INDEPENDENT_PASS__PREEXECUTION",
-    "stage_a_evidence": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_STAGE_A_ADMISSION_V1.json",
-    "stage_b_contract": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_STAGE_B_CONTRACT_V1.json",
-    "stage_b_verification": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_STAGE_B_VERIFICATION_V1.json",
-    "authorization_gate": "EXACT_TASK_CONTAINER_PREFLIGHT_PASS__CURRENT_SOURCE_BOUNDARY_PREFLIGHT_PASS__ONE_SHOT_STAGE_C_LEASE"
+    "task": "freecad-spring-clip",
+    "rank": 22,
+    "state": "STAGE_A_PREEXPOSURE_REQUIRED__INSTRUCTION_UNREAD",
+    "authorization_gate": "PREEXPOSURE_EIGHT_SURFACE_SEARCH__NO_INSTRUCTION_READ__THEN_INDEPENDENT_STAGE_A"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -666,5 +663,17 @@
     "status": "CANONICALIZED__INDEPENDENT_VERIFICATION_PENDING",
     "rule": "ZERO_DISCOVERY_SEARCH_AFTER_STAGE_B_EXPOSURE__EXACT_PREDECLARED_FETCH_ONLY",
     "evidence": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json"
+  },
+  "core_hardening_20261001": {
+    "status": "INSTALLED__INDEPENDENT_VERIFICATION_RUNNING__ZERO_CAPABILITY_CREDIT",
+    "source_contract_compiler": "canonical/runtime/source_contract_compiler.py",
+    "execution_authority_reducer": "canonical/runtime/execution_authority_reducer.py",
+    "runner_pr": 400,
+    "verification_workflow_run": 36931538986,
+    "rules": [
+      "SOURCE_BYTES_MUST_BE_LOSSLESSLY_ACCOUNTED_FOR",
+      "AMBIGUITY_IS_A_BLOCKING_SPECIFICATION_HOLE_NOT_AN_INVENTED_REQUIREMENT",
+      "CAN_EXECUTE_AND_CAN_VERIFY_MUST_BE_DERIVED_FROM_EVENT_STATE_NOT_WRITABLE_BOoleans"
+    ]
   }
 }
