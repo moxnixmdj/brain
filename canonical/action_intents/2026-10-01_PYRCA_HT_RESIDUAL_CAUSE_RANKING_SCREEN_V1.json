@@ -11,7 +11,7 @@
   "action_kind": "RECONCILE_FRONTIER",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
   "expected_parent_frontier_change": "AUTHORIZE_ONE_NONOVERLAPPING_PYRCA_HT_RESIDUAL_CAUSE_RANKING_SCREEN__ZERO_CAPABILITY_CREDIT__RANK9_PRIMARY_EXECUTION_UNCHANGED",
-  "highest_leverage_now": false,
+  "highest_leverage_now": true,
   "governance_change": false,
   "weakens_existing_guard": false,
   "user_authorized_governance_change": false,
@@ -142,5 +142,6 @@
       "discovery_required": false,
       "not_applicable_reason": "Existing open challenger already identified; this action only authorizes one discriminator."
     }
-  }
+  },
+  "highest_leverage_scope": "INDEPENDENT_NONOVERLAPPING_SIDE_CAPACITY__PRIMARY_RANK9_EXECUTION_REMAINS_HIGHER_GLOBAL_PRIORITY"
 }
