@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-  "status": "BRAIN_CONFIGURED_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
+  "status": "BRAIN_CONFIGURED_FRESH_TASK_VERIFIED_PASS__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_CAPABILITY_CREDIT",
   "real_capability": true,
   "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "parent_families": [
@@ -27,9 +27,9 @@
     "source_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
   },
   "current_brain_route": {
-    "configuration": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
-    "evaluation_protocol": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/EVALUATION_PROTOCOL_V1.json",
-    "status": "DIRECT_SEMANTIC_VERIFICATION_PASS__WHOLE_OPUS_5_5_BAR_UNPROVEN",
+    "configuration": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+    "evaluation_protocol": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
+    "status": "WAL_RECOVERY_ORDERING_FRESH_VERIFIED_PASS__TERMINAL_BENCH_STAGE1_SCORE_PENDING",
     "current_opus_5_5_credit": 0
   },
   "prior_route_falsification": {
@@ -37,8 +37,19 @@
     "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
     "disposition": "FALSIFIED_FOR_ADVANCEMENT__DO_NOT_REPAIR_SPENT_TASKS"
   },
-  "residual_gap": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
-  "next_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
-  "promotion_rule": "NO_OWNERSHIP_CREDIT_UNTIL_THE_BRAIN_CONFIGURED_SUPERPOWERS_ROUTE_MEETS_OR_EXCEEDS_THE_OPUS_5_5_BAR_ON_THE_CLAIMED_SCOPE_WITH_INDEPENDENT_VERIFICATION_AND_CONFIGURATION_ATTRIBUTION.",
-  "incremental_spend_usd": 0
+  "residual_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "next_action": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
+  "promotion_rule": "NO_OWNERSHIP_CREDIT_UNTIL_STAGE1_TERMINAL_BENCH_COMPARABLE_SCORE_MEETS_OR_EXCEEDS_66_4_PERCENT_AND_STAGES_2_AND_3_OR_VALIDATED_DIRECT_EQUIVALENTS_PASS_WITH_CONFIGURATION_ATTRIBUTION.",
+  "incremental_spend_usd": 0,
+  "verified_fresh_task_evidence": [
+    {
+      "benchmark": "Terminal-Bench 4.0",
+      "task": "wal-recovery-ordering",
+      "reward": 1,
+      "verifier_exit_code": 0,
+      "tests_per_run": 97,
+      "determinism_runs": 10,
+      "evidence": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
+    }
+  ]
 }
