@@ -47,6 +47,13 @@ def fetch_file(rel: str):
 
 
 def commit_obs(rel: str, value, message: str):
+    """Write an observation and publish it to the observation branch.
+
+    The push is forced with retries: the observation branch is a per-attempt
+    scratch mirror, and a plain push is rejected as non-fast-forward whenever a
+    previous attempt left commits there -- which used to kill the whole session
+    with a CalledProcessError before a single command ever ran.
+    """
     p = OBS / rel
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -55,9 +62,17 @@ def commit_obs(rel: str, value, message: str):
     if cp.returncode:
         subprocess.run(["git", "commit", "-m", message], cwd=OBS, check=True,
                        capture_output=True, text=True)
-        subprocess.run(["git", "push", "origin",
-                        f"HEAD:refs/heads/{os.environ['BRAIN_OBSERVATION_BRANCH']}"],
-                       cwd=OBS, check=True, capture_output=True, text=True)
+        branch = os.environ["BRAIN_OBSERVATION_BRANCH"]
+        last = None
+        for attempt in range(3):
+            cp = subprocess.run(["git", "push", "--force", "origin",
+                                 f"HEAD:refs/heads/{branch}"],
+                                cwd=OBS, capture_output=True, text=True)
+            if cp.returncode == 0:
+                return
+            last = (cp.stdout or "") + (cp.stderr or "")
+            time.sleep(2 * (attempt + 1))
+        raise RuntimeError("OBSERVATION_PUSH_FAILED: " + (last or "")[-800:])
 
 
 def validate_auth(raw: str | None):

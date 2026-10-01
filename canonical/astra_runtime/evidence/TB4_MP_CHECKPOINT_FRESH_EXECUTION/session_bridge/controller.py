@@ -55,6 +55,12 @@ def commit_obs(rel, value, message):
 
 
 def init_obs():
+    """Create the observation worktree and publish its branch.
+
+    The branch name is suffixed with this attempt's head SHA so overlapping
+    attempts never clobber one another's observations. The agent is told the
+    exact name through BRAIN_OBSERVATION_BRANCH.
+    """
     if OBS.exists():
         shutil.rmtree(OBS)
     git("worktree", "remove", "--force", str(OBS), check=False)
@@ -63,8 +69,11 @@ def init_obs():
     git("worktree", "add", "-b", "harbor-observation-work", str(OBS), "HEAD")
     git("config", "user.email", "brain-harbor-bridge@users.noreply.github.com", cwd=OBS)
     git("config", "user.name", "Brain Harbor Bridge", cwd=OBS)
-    git("push", "--force", "origin",
-        f"HEAD:refs/heads/{CFG['observation_branch']}", cwd=OBS)
+    head = git("rev-parse", "--short", "HEAD").stdout.strip()
+    branch = f"{CFG['observation_branch']}-{head}"
+    os.environ["BRAIN_OBSERVATION_BRANCH"] = branch
+    git("push", "--force", "origin", f"HEAD:refs/heads/{branch}", cwd=OBS)
+    return branch
 
 
 def ensure_harbor():
@@ -116,8 +125,9 @@ def main():
     if "--session-config" in args:
         CFG_REL = args[args.index("--session-config") + 1]
         CFG = json.loads((ROOT / CFG_REL).read_text())
+    obs_branch = None
     try:
-        init_obs()
+        obs_branch = init_obs()
     except Exception as exc:
         # Last-resort reporting path: publish the failure through a throwaway
         # clone so a broken worktree cannot silence the run.
@@ -128,7 +138,8 @@ def main():
         raise
     commit_obs(f"{CFG['command_prefix']}/status.json", {
         "status": "STARTING_HARBOR", "session_id": CFG["session_id"],
-        "task": CFG["task"], "terminal_bench_ref": CFG["terminal_bench_ref"]
+        "task": CFG["task"], "terminal_bench_ref": CFG["terminal_bench_ref"],
+        "observation_branch": obs_branch
     }, "harbor bridge: initialize")
     try:
         harbor = ensure_harbor()
@@ -165,6 +176,7 @@ def main():
         write_json(EVIDENCE / "harbor_results.json", results)
         final = {
             "schema": "BRAIN_HARBOR_FINAL_RUN_V1", "session_id": CFG["session_id"],
+            "observation_branch": obs_branch,
             "task": CFG["task"], "terminal_bench_ref": CFG["terminal_bench_ref"],
             "harbor_exit_code": cp.returncode, "results": results,
             "stdout_tail": (cp.stdout or "")[-120000:],
