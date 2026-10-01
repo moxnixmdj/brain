@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "real_objective": "Reduce wall-clock time to permanent verified Opus-5.5-or-better capability ownership by harvesting only missing learned mechanisms from existing white-box donors.",
+  "governing_invariants": [
+    "Knowledge remains external/JIT.",
+    "Underlying capability invention remains forbidden.",
+    "Opaque provider access is not ownership.",
+    "Capability credit requires a Brain-owned operative route independently verified >= Opus 5.5.",
+    "Current untouched wal-recovery-ordering qualification must not be contaminated by governance work.",
+    "Incremental spend remains $0."
+  ],
+  "material_premises": [
+    "Current V6 law already allows generic extraction but does not define a first-class white-box donor route or promotion contract.",
+    "Open-weight/white-box systems can expose already-existing learned mechanisms that may be transferable as deltas, adapters, experts/modules, distilled residual behavior, or explicit algorithms.",
+    "A harvested artifact is not owned if it still requires the donor's hidden target capability at runtime.",
+    "Correlation or interpretability alone is insufficient; causal ablation/rescue, held-out verification, specificity, and donor deletion are required."
+  ],
+  "evidence_refs": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "canonical/action_intents/2026-10-01_LEASE_WAL_RECOVERY_ORDERING_TB4_V1.json"
+  ],
+  "conclusion": "Promote white-box capability harvesting as a governed acquisition route after deletion/reuse/substitution and before composition/configuration, with a strict capability-capsule contract and no capability credit from donor performance alone.",
+  "selected_route": "SYNC_ALL_ACTIVE_CONTROL_SURFACES",
+  "rejected_material_alternatives": [
+    "Adopt a whole open model as Brain",
+    "Treat weights as automatically owned capability",
+    "Patch only the acquisition-law prose",
+    "Use SAE feature correlation as capability proof",
+    "Execute or inspect the untouched WAL task during governance update"
+  ],
+  "uncertainties": [
+    "Transferability is capability- and architecture-dependent.",
+    "Some learned mechanisms may be distributed and not practically separable.",
+    "Licenses may constrain derivative extraction or redistribution and must be checked per donor."
+  ],
+  "assumptions": [
+    "At least some future capability gaps have legally usable white-box donors.",
+    "Existing Brain verification infrastructure can test donor-independent capsules."
+  ],
+  "non_goals": [
+    "No claim that every capability is localizable.",
+    "No claim that parameter count alone measures progress.",
+    "No capability promotion in this governance change."
+  ],
+  "next_action": "Merge only after trusted guard validates cross-surface consistency; then continue the current direct WAL qualification unless a fresh OBS route decision changes the frontier.",
+  "supersession_conditions": [
+    "Causal harvesting is falsified across materially different capability classes.",
+    "A faster sufficient acquisition route dominates harvesting for a target.",
+    "Terminal ownership theory changes under explicit user authorization."
+  ],
+  "supersedes": null
+}
