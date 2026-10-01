@@ -344,11 +344,12 @@
     "evidence_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json"
   },
   "active_stage1_execution": {
-    "task": "formal-crypto",
-    "rank": 14,
-    "state": "INSTRUCTION_EXPOSED__NO_TASK_COMMAND_EXECUTED__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE",
-    "runner_pr": 308,
-    "evidence_path": "canonical/capabilities/opus55/FORMAL_CRYPTO_TB4_INSTRUCTION_EXPOSED_UNSPENT_20261001_V1.json"
+    "task": "wdm-design",
+    "rank": 15,
+    "state": "STAGE_C_ONE_SHOT_EXECUTION_AUTHORIZED__LEASED__NOT_YET_EXECUTED",
+    "lease_path": "canonical/governance/LEASE_WDM_DESIGN_TB4_STAGE_C_V3_20261001_V1.json",
+    "session_id": "wdm-design-20261001-v3",
+    "replay_allowed": false
   },
   "execution_liveness_correction_20261001": {
     "status": "ACTIVE__ZERO_CAPABILITY_CREDIT",
@@ -440,10 +441,12 @@
     "capability_credit_delta": 0
   },
   "stage1_next_clean_task": {
-    "task": "session-window-debug",
-    "rank": 16,
-    "state": "FROZEN_UNREAD__ELIGIBILITY_CHECK_PENDING__EXECUTION_FORBIDDEN_UNTIL_RUNNER_REVOCATION_GUARD_REPAIR",
-    "authorization_gate": "PER_BURST_CANONICAL_LEASE_REVALIDATION_INDEPENDENTLY_VERIFIED__THEN_PREEXPOSURE_ELIGIBILITY_PASS"
+    "task": "wdm-design",
+    "rank": 15,
+    "state": "STAGE_C_ONE_SHOT_EXECUTION_AUTHORIZED__FRESH_V3_LEASE_ACTIVE__NOT_YET_EXECUTED",
+    "authorization_gate": "SATISFIED_BY_V3_INDEPENDENT_PASS__ONE_SHOT_ONLY__NO_REPLAY",
+    "lease_path": "canonical/governance/LEASE_WDM_DESIGN_TB4_STAGE_C_V3_20261001_V1.json",
+    "session_id": "wdm-design-20261001-v3"
   },
   "behavioral_contract_control": {
     "status": "CANONICAL_FAIL_CLOSED",
@@ -463,7 +466,7 @@
     "status": "MANDATORY_BEFORE_RANK15",
     "path": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-    "current_verdict": "NOT_SATISFIED__RANK15_REMAINS_FROZEN"
+    "current_verdict": "RANK15_STAGE_B_V3_TASK_SPECIFIC_PREQUALIFICATION_PASS__STAGE_C_ONE_SHOT_AUTHORIZED"
   },
   "terminal_closure": {
     "manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
