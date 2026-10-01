@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK22_TERMINAL_VERDICT",
+  "next_progress_event_target": "RANK22_BUILDER_ARTIFACT_FREEZE",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -680,11 +680,12 @@
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "residual_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-    "next_required_action": "LAUNCH_CAD_MODEL_RANK_10_ON_PATCHED_FAST_BURST__AWAIT_SURFACE_READY_BEFORE_INSTRUCTION_READ",
+    "next_required_action": "RUN_RANK22_STAGE_C_BUILDER_ONCE__FREEZE_OUTPUT__APPEND_EXECUTION_CONSUMED__SELF_VERIFY__THEN_DERIVE_CAN_VERIFY",
     "internalization_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
     "falsified_prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
     "falsification_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
-    "envelope_parent_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1"
+    "envelope_parent_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "current_parent_blocker": "RANK22_STAGE_C_DERIVED_AUTHORITY_PASS__ONE_BUILDER_BURST_NOT_YET_CONSUMED"
   },
   "events": [
     {
@@ -1007,7 +1008,7 @@
     "next_clean_task": "freecad-spring-clip",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "REISSUE_RANK22_STAGE_C_FROM_CURRENT_GATES__BIND_DERIVED_AUTHORITY_EVENT_CHAIN__THEN_ONE_BUILDER_BURST__FREEZE_OUTPUT__ONE_TERMINAL_VERIFIER",
+  "next_required_action": "RUN_RANK22_STAGE_C_BUILDER_ONCE__FREEZE_OUTPUT__APPEND_EXECUTION_CONSUMED__SELF_VERIFY__THEN_DERIVE_CAN_VERIFY",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1148,5 +1149,15 @@
     "runtime": "canonical/runtime/continuous_obs_runtime.py",
     "external_information_actions_pre_authorized": true,
     "post_receipt_revalidation": true
+  },
+  "rank22_stage_c": {
+    "status": "ACTIVE_ONE_SHOT__DERIVED_CAN_EXECUTE_TRUE",
+    "task": "freecad-spring-clip",
+    "rank": 22,
+    "runner_pr": 427,
+    "execution_count_used": 0,
+    "execution_count_allowed": 1,
+    "verifier_count_used": 0,
+    "verifier_count_allowed": 1
   }
 }
