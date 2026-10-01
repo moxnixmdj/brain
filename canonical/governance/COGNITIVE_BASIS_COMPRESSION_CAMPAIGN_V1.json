@@ -123,7 +123,7 @@
       "state": "FALSIFIED_AS_AUTHORITY_ROUTE__REMOVED_FROM_CURRENT_C9_PATH"
     }
   },
-  "next_required_action": "FRESH_NONCONTAMINATING_REAL_TRACE_TRANSFER_OF_BRAIN_OWNED_CAUSE_CANDIDATE_GENERATOR_PLUS_RESIDUAL_RANKER__KEEP_EDGE_DISCOVERY_AND_INTERVENABILITY_INFERENCE_SEPARATE__NO_TRAINING__RANK9_PRIMARY_EXECUTION_UNCHANGED",
+  "next_required_action": "BROAD_UNTOUCHED_RCAEV_TRANSFER_WITH_PILOT_THRESHOLDS_FROZEN__NO_REPLAY__KEEP_EXTERNAL_PC_GRAPH_SEPARATE__RANK9_PRIMARY_EXECUTION_UNCHANGED",
   "generic_shared_scorer_status": "FALSIFIED_AS_DEFAULT_ARCHITECTURE__NO_GENERIC_AUTO_ADMIT_ROUTE_AUTHORIZED",
   "generic_shared_scorer_evidence": [
     "canonical/capabilities/opus55/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001_RESULT.json",
@@ -280,6 +280,8 @@
     "best_graph_order_baseline_accuracy": 0.20833333333333334,
     "delta_vs_best_baseline": 0.7916666666666666,
     "next": "FRESH_REAL_TRACE_TRANSFER__KILL_OR_NARROW_IF_FAIL",
-    "installed_artifact": "canonical/runtime/causal_residual_ranker.py"
+    "installed_artifact": "canonical/runtime/causal_residual_ranker.py",
+    "real_trace_transfer": "PILOT_PASS__BROAD_TRANSFER_PENDING",
+    "real_transfer_evidence": "canonical/capabilities/opus55/RCAEV_REAL_TRACE_TRANSFER_PILOT_20261001_V1.json"
   }
 }
