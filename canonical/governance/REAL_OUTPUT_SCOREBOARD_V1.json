@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "BEHAVIORAL_SEMANTIC_PURGE_AND_INDEPENDENT_ACCEPTANCE_MODEL_VALIDATION_ON_SPENT_HELDOUT_FAILURES__NO_RANK14_SPEND",
+  "next_progress_event_target": "BEHAVIORAL_SEMANTIC_PURGE_AND_INDEPENDENT_ACCEPTANCE_MODEL_VALIDATION_ON_SPENT_HELDOUT_FAILURES__NO_RANK15_SPEND",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1019,11 +1019,11 @@
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
     "evidence_path": "canonical/capabilities/opus55/FIN_SACCR_RWA_TB4_FAILURE_20261001_V1.json",
-    "next_clean_rank": 14,
-    "next_clean_task": "formal-crypto",
+    "next_clean_rank": 15,
+    "next_clean_task": "wdm-design",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "COMPLETE_BEHAVIORAL_CONTRACT_PURGE__VALIDATE_BUILDER_INDEPENDENT_ACCEPTANCE_MODEL_ON_SPENT_HELDOUTS__ONLY_THEN_REOPEN_FROZEN_RANK14",
+  "next_required_action": "COMPLETE_BEHAVIORAL_CONTRACT_PURGE__VALIDATE_BUILDER_INDEPENDENT_ACCEPTANCE_MODEL_ON_SPENT_HELDOUTS__ONLY_THEN_REOPEN_FROZEN_RANK15",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1036,5 +1036,11 @@
     "law": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "status": "FAIL_CLOSED_BEFORE_NEW_CLEAN_EVIDENCE"
+  },
+  "latest_benchmark_exposure": {
+    "task": "formal-crypto",
+    "rank": 14,
+    "status": "INSTRUCTION_EXPOSED__NO_TASK_COMMAND__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT",
+    "evidence_path": "canonical/capabilities/opus55/FORMAL_CRYPTO_TB4_INSTRUCTION_EXPOSED_UNSPENT_20261001_V1.json"
   }
 }
