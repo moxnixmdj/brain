@@ -103,7 +103,10 @@
     "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V6.md",
     "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
     "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
-    "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json"
+    "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json",
+    "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
+    "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   ],
   "compliance_state": {
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
@@ -1175,7 +1178,9 @@
     "family_or_benchmark_rank_progression_authority": false,
     "untouched_source_read_requires_cut_membership": true,
     "rank23_source_role": "SPENT_NONPROMOTION_EVIDENCE_ONLY",
-    "no_automatic_rank24_progression": true
+    "no_automatic_rank24_progression": true,
+    "global_terminal_proof_cut_activation": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
+    "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   },
   "rank22_failure_immunity": {
     "status": "VERIFIED_AND_MERGED",
