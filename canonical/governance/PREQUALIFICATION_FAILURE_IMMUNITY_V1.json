@@ -114,6 +114,11 @@
       "id": "ONE_SHOT_EXECUTION_BUDGET_ESCAPE",
       "defense": "Runner binds explicit canonical execution_count_allowed and terminal_verifier_count_allowed, consumes each unit before invocation, and fails closed after exhaustion.",
       "required_evidence": "RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION"
+    },
+    {
+      "id": "EXECUTION_SURFACE_ENVIRONMENT_PARITY_FAILURE",
+      "defense": "Before untouched Stage-C spend, prove package/install/runtime behavior on the exact task image or a materially equivalent container. Equivalence must cover OS/base image, runtime provenance, package-management policy including PEP 668 or analogous restrictions, shell, permissions, artifact paths, required native libraries, and network assumptions. A host-only or setup-python probe is insufficient when the task container differs.",
+      "required_evidence": "TASK_SPECIFIC_EXECUTION_SURFACE_PARITY_CERTIFICATE"
     }
   ],
   "fresh_qualification_admission_rule": "STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_READS_MUST_OBEY_TB4_SOURCE_ALLOWLIST__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
@@ -147,6 +152,7 @@
         "REQUIREMENT_MUTATION_COVERAGE",
         "VERIFIER_MUTATION_OR_SEEDED_FAILURE_MODE_COVERAGE",
         "TASK_SPECIFIC_FEASIBILITY_CERTIFICATE",
+        "TASK_SPECIFIC_EXECUTION_SURFACE_PARITY_CERTIFICATE",
         "TASK_SPECIFIC_TOOL_AUTHORITY_AND_RESOURCE_PREFLIGHT"
       ],
       "failure_disposition": "INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE"
@@ -163,5 +169,14 @@
       "failure_disposition": "CLASSIFY_TRANSPORT_VS_CAPABILITY_VS_POLICY_FAILURE_FROM_INDEPENDENT_RECEIPTS__NO_REPLAY_FOR_CREDIT"
     }
   },
-  "tb4_stage_b_source_allowlist": "canonical/governance/TB4_STAGE_B_SOURCE_ALLOWLIST_V1.json"
+  "tb4_stage_b_source_allowlist": "canonical/governance/TB4_STAGE_B_SOURCE_ALLOWLIST_V1.json",
+  "observed_failure_repairs": [
+    {
+      "id": "RANK19_PEP668_PARITY_REPAIR_20261001",
+      "source": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+      "observed": "Stage-B feasibility passed on GitHub Actions setup-python CPython 3.12, while the actual Ubuntu 24.04 task image used Debian-managed Python and rejected system pip under PEP 668. The one allowed builder burst was spent before task audio analysis.",
+      "repair": "Require exact-or-materially-equivalent task-container execution-surface parity before Stage-C authorization.",
+      "fresh_evidence_cost_avoided": "Generic environment/package failures must be discovered before untouched qualification execution."
+    }
+  ]
 }

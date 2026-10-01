@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RUNNER_ONE_SHOT_TOTAL_BUDGET_GUARD_INDEPENDENT_PASS",
+  "next_progress_event_target": "RANK20_PREEXPOSURE_ELIGIBILITY_ADJUDICATION",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1014,16 +1014,16 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK17_SPENT_ZERO_VERDICT__RANK18_SPENT_EXECUTION_BUDGET_EXCEEDED__RUNNER_GUARD_REPAIR_PRIMARY",
-    "blocker": "RUNNER_TOTAL_STAGE_C_EXECUTION_BUDGET_NOT_ENFORCED",
+    "status": "RANK19_SPENT_EXECUTION_SURFACE_FAILURE__ZERO_TERMINAL_VERDICT__RANK20_PREEXPOSURE_PRIMARY",
+    "blocker": "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_GAP_REPAIRED_IN_CONTROL__RANK20_ELIGIBILITY_NEXT",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/capabilities/opus55/FREECAD_IMPELLER_RANK18_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
-    "next_clean_rank": 19,
-    "next_clean_task": "satb-audio-transcription",
+    "evidence_path": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+    "next_clean_rank": 20,
+    "next_clean_task": "vba-userform-port",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "PATCH_RUNNER_TO_BIND_AND_ENFORCE_CANONICAL_EXECUTION_COUNT_ALLOWED_AND_TERMINAL_VERIFIER_COUNT_ALLOWED__VERIFY_FAIL_CLOSED__THEN_RANK19_STAGE_A_IF_CLEAN",
+  "next_required_action": "SEARCH_VBA_USERFORM_PORT_PRIOR_EXPOSURE_WITHOUT_READING_INSTRUCTION__THEN_STAGE_A_IF_CLEAN__DO_NOT_STAGE_C_SPEND_WITHOUT_TASK_SURFACE_PARITY",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1114,8 +1114,20 @@
     "replay_allowed": false
   },
   "next_clean_task": {
-    "rank": 19,
-    "task": "satb-audio-transcription",
-    "state": "FROZEN_UNREAD__RUNNER_GUARD_REPAIR_REQUIRED"
+    "rank": 20,
+    "task": "vba-userform-port",
+    "state": "FROZEN_UNREAD__PREEXPOSURE_ELIGIBILITY_CHECK_REQUIRED"
+  },
+  "rank19_stage_c": {
+    "status": "SPENT_EXECUTION_SURFACE_FAILURE__NO_TASK_AUDIO_ANALYSIS__NO_OUTPUT__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
+    "evidence": "canonical/capabilities/opus55/SATB_AUDIO_TRANSCRIPTION_RANK19_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
+    "root_cause": "EXECUTION_SURFACE_PACKAGE_INSTALLATION_PARITY_001",
+    "builder_burst_used": 1,
+    "terminal_verifier_runs": 0,
+    "replay_allowed": false
+  },
+  "obs_execution_surface_parity_repair_20261001": {
+    "status": "ACTIVE",
+    "receipt": "canonical/reasoning/2026-10-01_OBS_EXECUTION_SURFACE_PARITY_AND_STALE_AUTHORITY_REPAIR_V1.json"
   }
 }
