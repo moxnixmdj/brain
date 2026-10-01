@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_PROMOTE_PREQUALIFICATION_ACCEPTANCE_BUNDLE_001",
+  "status": "CURRENT_BASE_PROOF_PROMOTION__ZERO_FAMILY_CREDIT",
+  "real_objective": "Close the smallest current proof hole by canonically binding independently verified evidence for the composed prequalification acceptance bundle without spending rank-15 evidence.",
+  "governing_invariants": [
+    "Rank 15 remains frozen.",
+    "Fresh evidence is one-use proof ammunition and is not spent to discover preflight defects.",
+    "The candidate is integration/verification glue over already-owned deterministic mechanisms, not a new underlying cognitive capability.",
+    "Claim scope is limited to the exact composed gates independently executed on spent failure shapes.",
+    "Exact candidate bytes must match the independently executed runner copy.",
+    "Family and Opus-level capability credit remain zero."
+  ],
+  "material_premises": [
+    "Brain candidate artifact canonical/runtime/prequalification_acceptance_bundle.py has git blob d08542505ba9e3849d266a96854bb0ec84938465.",
+    "Runner PR 319 independently executed the exact same candidate bytes.",
+    "Runner workflow 36910419053 job 110531391635 completed success.",
+    "Six independent tests passed: valid composed bundle, fail-closed missing mutants, spent Bun policy, spent CAD global obligations, spent KG shared semantics, spent SA-CCR missing lineage.",
+    "The only first-run failure was runner test discovery; candidate and dependency bytes were unchanged before the successful rerun.",
+    "Current execution-first policy classifies this as a proof hole because the candidate mechanism already exists and has independent evidence."
+  ],
+  "evidence_refs": [
+    "canonical/runtime/requirement_graph_kernel.py",
+    "canonical/runtime/independent_acceptance_model.py",
+    "runner:PR319@019f7903ca0330e405fbdd1d7580e038de5f1867",
+    "runner:workflow:36910419053",
+    "runner:job:110531391635"
+  ],
+  "conclusion": "Promote the exact candidate as a verified Brain-owned narrow prequalification component, bind the independent receipt, and continue to the remaining semantic/specification and full prequalification closure. Do not authorize rank 15 from this proof alone.",
+  "selected_route": "BIND_EXISTING_INDEPENDENT_PROOF__PROMOTE_NARROW_COMPONENT_ONLY",
+  "rejected_material_alternatives": [
+    "Rerun the same candidate on another carrier without invalidation.",
+    "Redesign the candidate despite a successful independent execution.",
+    "Use the pass to authorize rank 15 before the remaining Stage-A/terminal-closure predicates are satisfied.",
+    "Treat the composed prequalification gate as general intelligence or family-level ownership."
+  ],
+  "uncertainties": [
+    "Arbitrary natural-language specification to complete normalized requirement graph remains incomplete.",
+    "Task-specific Stage-B plans for future fresh tasks remain unproven until their official instructions are exposed under authorization.",
+    "Terminal closure across all 19 evaluation surfaces remains incomplete."
+  ],
+  "assumptions": [
+    "Runner workflow receipts are authoritative for the independent execution reported.",
+    "Current base remains 24896e8664fa768bb9d0aa8bbac6dee06cb86a34 through trusted drift-guard adjudication."
+  ],
+  "non_goals": [
+    "No fresh benchmark execution.",
+    "No rank-15 instruction exposure.",
+    "No family promotion.",
+    "No model training.",
+    "No claim of semantic requirement extraction."
+  ],
+  "next_action": "Recompute Stage-A prequalification proof state from verified receipts; execute the next smallest missing proof obligation only; keep rank 15 frozen unless the live hierarchy explicitly authorizes Stage-A completion.",
+  "supersession_conditions": [
+    "Main materially changes before merge.",
+    "Independent verifier evidence is invalidated.",
+    "A stronger existing verified component makes this bundle redundant."
+  ],
+  "supersedes": null
+}
