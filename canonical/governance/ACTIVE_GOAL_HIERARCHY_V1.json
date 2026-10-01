@@ -157,7 +157,7 @@
       "INTEGRATE"
     ],
     "exact_base_commit_binding_required": true,
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V9.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_route_frontier_age_hours": 24,
