@@ -86,18 +86,30 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "VERIFIED_BRAIN_INTERNALIZED_OPUS_5_5_OR_BETTER_CAPABILITY_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
+    "exact_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json"
+      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+      "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+      "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
+      "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+    "next_action": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
-    "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_FOR_CURRENT_UNTOUCHED_WAL_QUALIFICATION",
+    "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
     "white_box_harvest_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "wal_recovery_ordering_contamination_policy": "KEEP_UNREAD_UNTUNED_UNSELECTED_AGAINST_UNTIL_FINAL_QUALIFICATION"
+    "wal_recovery_ordering_contamination_policy": "SPENT_AFTER_INDEPENDENT_VERIFIER__VERIFIED_REWARD_1__NO_REPLAY_FOR_PROMOTION",
+    "current_stage_1_evidence": {
+      "benchmark": "Terminal-Bench 4.0",
+      "strict_outer_target_percent": 66.4,
+      "verified_current_v5_passes": 1,
+      "tasks": [
+        "wal-recovery-ordering"
+      ],
+      "comparable_score_established": false
+    }
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [

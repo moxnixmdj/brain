@@ -37,8 +37,8 @@
         "Brain-owned Supreme configuration retained only as falsified evidence, not active route",
         "White-box capability harvesting from a legally usable donor after fresh OBS selection or material incumbent failure; preserve untouched final qualification tasks"
       ],
-      "evidence": "Supreme was falsified for advancement by fresh Terminal-Bench 4.0 preflights, including bun-sourcemap-leak independent verifier reward 0 after its self-test passed. The queue therefore falls back to the already-internalized Superpowers 6.4.2 configuration, which has one clean direct semantic debugging/repair pass but no whole Opus 5.5 bar yet.",
-      "residual": "Verify the Brain-owned Superpowers route itself >= Opus 5.5 across the relevant advanced-coding behavior. White-box harvesting is now a legal challenger/fallback for residual learned gaps, but the current untouched wal-recovery-ordering task remains reserved for final qualification.",
+      "evidence": "Brain-owned mini-SWE + Superpowers V5 route achieved an independently verified fresh Terminal-Bench 4.0 pass on wal-recovery-ordering: reward 1, verifier exit 0, 97/97 tests across 10 determinism runs including hidden concurrency/durability cases. This is real task evidence but not yet a benchmark-level percentage comparable to the 66.4% Opus 5.5 Terminal-Bench bar.",
+      "residual": "Establish current-V5 Terminal-Bench 4.0 breadth and a comparable stage-1 score >=66.4% using additional distinct fresh tasks; then complete FrontierCode v1.1 Main >=54.4% and CursorBench 4.0 or matched direct equivalent >=57.8%. No WAL replay.",
       "sources": [
         "https://www.anthropic.com/claude-opus-5-5",
         "https://www.anthropic.com/claude-sonnet-5-5",
@@ -46,14 +46,20 @@
       ],
       "internalization_required": false,
       "ownership_note": "Supreme and Superpowers operative configurations are Brain-owned. Supreme preserves the upstream root Apache-2.0 license despite conflicting MIT metadata in README/SKILL frontmatter. Opus-level ownership credit remains zero until the Brain-configured route itself verifies >= Opus 5.5.",
-      "internalized_configuration": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
-      "next_required_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
-      "leading_internalized_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+      "internalized_configuration": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+      "next_required_action": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
+      "leading_internalized_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
       "falsified_candidate": {
         "capability_candidate_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
         "status": "FALSIFIED_FOR_ADVANCEMENT",
         "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
         "opus_5_5_credit": 0
+      },
+      "latest_verified_task": {
+        "task": "wal-recovery-ordering",
+        "reward": 1,
+        "workflow_run_id": 36803852769,
+        "evidence": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
       }
     },
     {

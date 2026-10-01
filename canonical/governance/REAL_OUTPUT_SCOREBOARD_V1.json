@@ -7,7 +7,7 @@
   "progress_currency": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
   "counters_since_epoch_start": {
     "reusable_capabilities_inherited": 10,
-    "verified_real_tasks_completed": 9,
+    "verified_real_tasks_completed": 10,
     "fresh_reuse_passes": 2,
     "frontier_dependencies_removed": 2,
     "residual_gaps_localized": 16
@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
+  "next_progress_event_target": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -621,17 +621,43 @@
       "progress_credit": "GENERIC_ROUTING_REPAIR_ONLY",
       "next_causal_gap": "PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH__FRESH_MATERIALLY_DIFFERENT_TASK_B_REQUIRED",
       "parent_capability_promoted": false
+    },
+    {
+      "event_id": "WAL_RECOVERY_ORDERING_TB4_VERIFIED_PASS_20261001",
+      "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+      "status": "FRESH_REAL_TASK_VERIFIED_PASS__REWARD_1__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_WHOLE_FAMILY_CREDIT",
+      "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
+      "public_runner_pr": 266,
+      "workflow_run_id": 36803852769,
+      "artifact_id": 11136866847,
+      "session_id": "wal-recovery-ordering-submit-20261001-v2",
+      "reward": 1,
+      "verifier_exit_code": 0,
+      "tests_per_run": 97,
+      "determinism_runs": 10,
+      "capability_credit_delta": 0,
+      "counter_effects": {
+        "reusable_capabilities_inherited": 0,
+        "verified_real_tasks_completed": 1,
+        "fresh_reuse_passes": 0,
+        "frontier_dependencies_removed": 0,
+        "residual_gaps_localized": 0
+      },
+      "progress_credit": "VERIFIED_REAL_TASK_COMPLETED__CURRENT_CONFIGURED_ROUTE",
+      "next_causal_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0
     }
   ],
   "active_frontier_accounting": {
     "parent_frontier_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "subcapability_status": "BRAIN_CONFIGURED_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
+    "subcapability_status": "BRAIN_CONFIGURED_FRESH_TASK_VERIFIED_PASS__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "residual_gap": "BRAIN_INTERNALIZED_SUPERPOWERS_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
-    "next_required_action": "VERIFY_BRAIN_INTERNALIZED_SUPERPOWERS_CODING_ROUTE_GE_OPUS_5_5_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE__ZERO_CREDIT_UNTIL_PASS",
-    "internalization_manifest": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+    "residual_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+    "next_required_action": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
+    "internalization_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
     "falsified_prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
     "falsification_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
     "envelope_parent_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1"
@@ -937,32 +963,37 @@
     }
   ],
   "last_real_output_event": {
-    "event_id": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_OWNED_20260930",
-    "capability_id": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1",
-    "status": "VERIFIED_OWNED_EQUAL_OR_BETTER__FRESH_FORCED_PROCESS_BOUNDARY_PASS",
-    "capability_package": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
-    "public_run_id": 36762735723,
-    "public_job_id": 110049133395,
-    "artifact_id": 11119213213,
-    "artifact_digest": "sha256:b3171075fc05fdba6dfc64ccfc1b00eff15e3d564166ea23831bb05c1f988d30",
-    "capability_credit_delta": 1,
+    "event_id": "WAL_RECOVERY_ORDERING_TB4_VERIFIED_PASS_20261001",
+    "capability_id": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "status": "FRESH_REAL_TASK_VERIFIED_PASS__REWARD_1__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_WHOLE_FAMILY_CREDIT",
+    "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
+    "public_runner_pr": 266,
+    "workflow_run_id": 36803852769,
+    "artifact_id": 11136866847,
+    "session_id": "wal-recovery-ordering-submit-20261001-v2",
+    "reward": 1,
+    "verifier_exit_code": 0,
+    "tests_per_run": 97,
+    "determinism_runs": 10,
+    "capability_credit_delta": 0,
     "counter_effects": {
-      "reusable_capabilities_inherited": 1,
-      "verified_real_tasks_completed": 0,
+      "reusable_capabilities_inherited": 0,
+      "verified_real_tasks_completed": 1,
       "fresh_reuse_passes": 0,
-      "frontier_dependencies_removed": 1,
+      "frontier_dependencies_removed": 0,
       "residual_gaps_localized": 0
     },
-    "progress_credit": "VERIFIED_REUSABLE_OPUS55_FAMILY_CAPABILITY_OWNED",
+    "progress_credit": "VERIFIED_REAL_TASK_COMPLETED__CURRENT_CONFIGURED_ROUTE",
+    "next_causal_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
     "model_dependency_count": 0,
-    "incremental_spend_usd": 0,
-    "limitations": "Scoped to durable cross-session state and same-mission checkpoint/relaunch continuity; excludes autonomous wake and general semantic-memory quality."
+    "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "OPUS55_LONG_HORIZON_CONTINUITY_PROMOTED__CODING_BLOCKER_REMAINS",
-    "blocker": "BRAIN_INTERNALIZED_SUPREME_LED_CODING_CONFIGURATION_NOT_YET_VERIFIED_GE_OPUS_5_5",
-    "counter_delta": 1,
+    "status": "WAL_RECOVERY_ORDERING_VERIFIED_PASS__STAGE1_BREADTH_SCORE_BLOCKER_REMAINS",
+    "blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+    "counter_delta_verified_real_tasks": 1,
+    "capability_credit_delta": 0,
     "whole_envelope_complete": false,
-    "promoted_capability": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1"
+    "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
   }
 }
