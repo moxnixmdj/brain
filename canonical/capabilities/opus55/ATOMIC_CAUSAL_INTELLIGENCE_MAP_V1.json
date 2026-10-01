@@ -116,9 +116,9 @@
     "unresolved_subtransforms": [
       "CAUSAL_EDGE_DISCOVERY_WHEN_NOT_EXPLICIT",
       "INTERVENABILITY_METADATA_INFERENCE_WHEN_NOT_EXPLICIT",
-      "FRESH_CROSS_DOMAIN_TRANSFER"
+      "BROAD_FRESH_CROSS_DOMAIN_TRANSFER"
     ],
-    "next": "FRESH_NONCONTAMINATING_REAL_TRACE_TRANSFER_OF_BRAIN_OWNED_CAUSE_CANDIDATE_GENERATOR_PLUS_RESIDUAL_RANKER__KEEP_EDGE_DISCOVERY_AND_INTERVENABILITY_SEPARATE__RANK9_PRIMARY_EXECUTION_UNCHANGED"
+    "next": "BROAD_UNTOUCHED_RCAEV_TRANSFER_WITH_PILOT_THRESHOLDS_FROZEN__NO_REPLAY__RANK9_PRIMARY_EXECUTION_UNCHANGED"
   },
   "atomic_causal_falsification_001": {
     "status": "SPENT_PASS__REUSABLE_MECHANISM_CANDIDATE__ZERO_CAPABILITY_CREDIT",
@@ -166,8 +166,9 @@
     "best_graph_order_baseline_accuracy": 0.20833333333333334,
     "delta_vs_best_baseline": 0.7916666666666666,
     "ownership_state": "BRAIN_OWNED_CANDIDATE__EXACT_VERIFIED_SOURCE_INSTALLED",
-    "real_trace_transfer": false,
+    "real_trace_transfer": "PILOT_PASS__4_UNTOUCHED_RCAEV_CASES__BROAD_TRANSFER_PENDING",
     "installed_artifact": "canonical/runtime/causal_residual_ranker.py",
-    "installation_evidence": "canonical/capabilities/opus55/ATOMIC_RESIDUAL_CAUSE_RANKER_INSTALL_001_RECONCILIATION.json"
+    "installation_evidence": "canonical/capabilities/opus55/ATOMIC_RESIDUAL_CAUSE_RANKER_INSTALL_001_RECONCILIATION.json",
+    "real_transfer_evidence": "canonical/capabilities/opus55/RCAEV_REAL_TRACE_TRANSFER_PILOT_20261001_V1.json"
   }
 }
