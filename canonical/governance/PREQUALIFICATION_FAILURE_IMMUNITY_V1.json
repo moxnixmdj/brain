@@ -124,6 +124,11 @@
       "id": "EXECUTION_SURFACE_PACKAGE_POLICY_MISMATCH",
       "defense": "Stage-B dependency feasibility must bind to the exact built task-container READY execution_surface_profile or a separately proven-equivalent container. PEP-668/external-management state, Python identity, venv usability and safe install policy may not be inferred from GitHub setup-python or host Python. If task-specific non-system packages are required, Stage-B must verify the selected venv/portable install route on the equivalent package-management surface before Stage-C authorization.",
       "required_evidence": "READY_EXECUTION_SURFACE_PROFILE_PLUS_TASK_SPECIFIC_DEPENDENCY_FEASIBILITY_RECEIPT"
+    },
+    {
+      "id": "POST_EXPOSURE_TASK_SPECIFIC_EXTERNAL_SEARCH",
+      "defense": "Before Stage-C promotion, require a machine-bound source-boundary receipt hashed to the canonical contamination ledger. Any task-specific external search/hints, solution/tests, hidden verifier access, or pre-Stage-C task execution makes promotion fail closed.",
+      "required_evidence": "SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_PLUS_TASK_SPECIFIC_SOURCE_BOUNDARY_PREFLIGHT"
     }
   ],
   "fresh_qualification_admission_rule": "STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_READS_MUST_OBEY_TB4_SOURCE_ALLOWLIST__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
@@ -158,7 +163,8 @@
         "VERIFIER_MUTATION_OR_SEEDED_FAILURE_MODE_COVERAGE",
         "TASK_SPECIFIC_FEASIBILITY_CERTIFICATE",
         "TASK_SPECIFIC_EXECUTION_SURFACE_PARITY_CERTIFICATE",
-        "TASK_SPECIFIC_TOOL_AUTHORITY_AND_RESOURCE_PREFLIGHT"
+        "TASK_SPECIFIC_TOOL_AUTHORITY_AND_RESOURCE_PREFLIGHT",
+        "TASK_SPECIFIC_SOURCE_BOUNDARY_PREFLIGHT"
       ],
       "failure_disposition": "INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE"
     },
@@ -190,6 +196,12 @@
       "verification": "canonical/governance/EXECUTION_SURFACE_PACKAGE_POLICY_PROBE_VERIFICATION_20261001_V1.json",
       "runner_merge_commit": "aea49829cceca3cc87828001bf2a76a2d5e32332",
       "rule": "READY_PROFILE_IS_AUTHORITATIVE_FOR_ACTUAL_TASK_CONTAINER_PACKAGE_POLICY__TASK_SPECIFIC_INSTALL_FEASIBILITY_MUST_BIND_TO_IT"
+    },
+    "source_boundary_promotion_gate": {
+      "status": "INDEPENDENT_PASS__MERGED",
+      "verification": "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json",
+      "runner_merge_commit": "a902df6b5e8393cf8aff563f5394dc40a0b314d0",
+      "rule": "STAGE_C_LEASE_UPGRADE_REQUIRES_BRAIN_SOURCE_BOUNDARY_PREFLIGHT_V1_PASS"
     }
   }
 }
