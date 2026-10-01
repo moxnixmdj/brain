@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK17_STAGE_C_ONE_SHOT_TERMINAL_VERDICT",
+  "next_progress_event_target": "RANK18_STAGE_C_ONE_SHOT_TERMINAL_VERDICT",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1014,16 +1014,16 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK16_INELIGIBLE__RANK17_STAGE_A_INDEPENDENT_PASS",
-    "blocker": "BEHAVIORAL_CONTRACT_AND_INDEPENDENT_ACCEPTANCE_MODEL_GAP",
+    "status": "RANK17_SPENT_ZERO_VERDICT_NO_REPLAY__RANK18_STAGE_B_INDEPENDENT_PASS_STAGE_C_ACTIVE",
+    "blocker": "RANK18_STAGE_C_ONE_SHOT_EXECUTION_AND_TERMINAL_VERIFICATION",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/capabilities/opus55/FIN_SACCR_RWA_TB4_FAILURE_20261001_V1.json",
-    "next_clean_rank": 17,
-    "next_clean_task": "data-anonymization",
-    "next_clean_task_authorized": false
+    "evidence_path": "canonical/governance/OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V2.json",
+    "next_clean_rank": 18,
+    "next_clean_task": "freecad-impeller",
+    "next_clean_task_authorized": true
   },
-  "next_required_action": "BIND_REPAIRED_STAGE_C_LEASE_PROMOTION_ON_RUNNER_PR341__REVALIDATE_BURST0__EXECUTE_ONCE__FREEZE_OUTPUT__TERMINAL_REVALIDATE__RUN_ONE_INDEPENDENT_VERIFIER__NO_REPLAY",
+  "next_required_action": "USE_ONLY_PR354__FREEZE_RANK18_ACCEPTANCE__FRESH_BURST_REVALIDATION__EXECUTE_ONCE__FREEZE_OUTPUT__FRESH_TERMINAL_REVALIDATION__VERIFY_ONCE__NO_REPLAY",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1090,5 +1090,21 @@
     "reason": "Rank17 instruction is already exposed, Stage-B independently passed, and Stage-C one-shot is canonically authorized.",
     "rank15_replay": false,
     "rank16_replay": false
+  },
+  "rank17_stage_c": {
+    "status": "SPENT_BY_VALID_V2_BURST0__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
+    "runner_pr": 346,
+    "observation_comment_id": 5939471910,
+    "commands_executed": 5,
+    "candidate_artifact_created": false,
+    "terminal_verifier_runs": 0,
+    "capability_credit_delta": 0
+  },
+  "rank18_stage_c": {
+    "status": "ONE_SHOT_AUTHORIZED__SINGLE_CARRIER_PR354__NOT_YET_EXECUTED",
+    "lease": "canonical/governance/LEASE_FREECAD_IMPELLER_TB4_STAGE_C_20261001_V1.json",
+    "runner_pr": 354,
+    "duplicate_pr_closed": 353,
+    "replay_allowed": false
   }
 }
