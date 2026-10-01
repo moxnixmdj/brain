@@ -72,7 +72,7 @@
       "rank17_data_anonymization": "pass=false NONE QUALIFICATION_CONTAMINATION_LEDGER (spent, source-boundary contaminated)",
       "rank16_session_window_debug": "pass=false NONE with QUALIFICATION_CONTAMINATION_LEDGER plus four exposure-search predicates (7 fields, no brain_pr_hits, no searched_surfaces)"
     },
-    "mirror_fields_reconciled": "eleven mirror fields across four surfaces plus the authority's own next_progress_event_target; stale at ten distinct bases, and the authority self-contradicted at three consecutive ones",
+    "mirror_fields_reconciled": "twelve mirror fields across four surfaces plus four identity mirrors and the authority's own next_progress_event_target, audited against every mirror comparison in enforce_goal_hierarchy.py; stale at ten distinct bases, and the authority self-contradicted at three consecutive ones",
     "independent_oracle": "canonical/tests/test_frontier_target_mirror_firewall.py verifies the target-record mirror reconciliation from outside this change's own tests: failing at base, passing after.",
     "reconciler_cross_check": "Run on the stale base c61497a in a throwaway worktree, canonical/runtime/reconcile_frontier_mirrors.py produced byte-identical output to the hand reconciliation for CANONICAL_POINTER.json, FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json, REAL_OUTPUT_SCOREBOARD_V1.json and ACTIVE_GOAL_HIERARCHY_V1.json. The only differing file is the active target record, and only in current_execution, which is a semantic field the tool deliberately does not rewrite. Two independent derivations agreeing is the cross-check; the tool also exits 1 with --check on the stale base, naming all nine drifted fields and both stale control paths.",
     "reconciler_tests": "14 passed",
@@ -240,7 +240,8 @@
         "Re-derived the live frontier from ACTIVE_GOAL_HIERARCHY_V1.json after rank20 was contaminated and its Stage-C lease revoked mid-flight, instead of carrying the earlier rank20-Stage-B-leasing state into the receipts",
         "Arbitrated the v2 rule label from the recorded rank18/rank19/rank20 admission artifacts instead of from preference, and widened the v1/v2 comparison to every shared key after the narrower comparison hid a real divergence",
         "Caught the reconciler's own fail-open verdict by running it against live base state that exercised the report path, instead of trusting the suite that had been written against a consistent tree",
-        "Measured which ledger fields actually block a reconstructed admission before rejecting reconstruction, instead of assuming three fields were the only obstacle"
+        "Measured which ledger fields actually block a reconstructed admission before rejecting reconstruction, instead of assuming three fields were the only obstacle",
+        "Audited every mirror comparison in enforce_goal_hierarchy.py against the reconciler's maintained field list instead of assuming the nine fields first found were the whole family, which surfaced two more latent gaps"
       ],
       "search_stop_decision": "Stopped external search entirely: every fact needed is decidable from this repository and its GitHub metadata, and the sandbox has no outbound HTTPS from Python. Further searching could not change any of the four defects.",
       "affected_layers_only_on_revalidation": true,

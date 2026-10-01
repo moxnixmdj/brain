@@ -127,7 +127,7 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
 
     counters_before=json.dumps(scoreboard.get("counters_since_epoch_start"),sort_keys=True)
 
-    # --- the eleven mirror fields -----------------------------------------
+    # --- the twelve mirror fields -----------------------------------------
     for doc,keys in (
         (pointer,("current_frontier","critical_blocker")),
         (queue,("immediate_frontier","exact_blocker")),
@@ -145,18 +145,32 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
     for doc,keys in (
         (pointer,("current_frontier","next_step")),
         (queue,("immediate_frontier","next_action")),
-        (scoreboard,("next_progress_event_target",)),
+        # The guard reads the scoreboard's TOP-LEVEL next_required_action; the
+        # nested active_frontier_accounting copy is a second mirror of the same
+        # authority field. Maintaining only one of them is how a reconciled tree
+        # still fails the guard.
+        (scoreboard,("next_required_action",)),
         (scoreboard,("active_frontier_accounting","next_required_action")),
         (record,("next_action",)),
         (record,("current_atomic_next_action",)),
     ):
         changed=doc.put(action,*keys)
         if changed: changes.append(changed)
+    # enforce_goal_hierarchy.py compares scoreboard.next_progress_event_target to
+    # hierarchy.next_progress_event_target, NOT to next_required_action_class.
+    # Mirroring the action class here would manufacture the very mismatch the
+    # guard reports whenever the authority is not self-aligned, which it was not
+    # at three consecutive bases. Mirror the field the guard actually reads; the
+    # alignment of the authority itself stays behind its explicit opt-in.
+    progress_event=hierarchy.get("next_progress_event_target") or action
+    changed=scoreboard.put(progress_event,"next_progress_event_target")
+    if changed: changes.append(changed)
 
     # --- identity mirrors are reported, never rewritten --------------------
     for doc,keys in (
         (pointer,("current_frontier","active_capability_target")),
         (queue,("immediate_frontier","selected_capability")),
+        (scoreboard,("active_frontier_accounting","parent_frontier_capability")),
         (record,("capability_id",)),
     ):
         value=doc.get(*keys)

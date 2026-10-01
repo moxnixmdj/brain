@@ -39,6 +39,11 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         self.blocker = self.hierarchy["current_parent_blocker"]
         self.action = self.hierarchy["next_required_action_class"]
         self.target = self.hierarchy["active_capability_target"]
+        # The guard compares the scoreboard's progress-event mirror to this field,
+        # not to next_required_action_class.
+        self.progress_event = (
+            self.hierarchy.get("next_progress_event_target") or self.action
+        )
 
         paths = [HIERARCHY, POINTER, QUEUE, SCOREBOARD]
         paths.append(f"canonical/capabilities/frontier/{self.target}.json")
@@ -92,6 +97,8 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         scoreboard["next_progress_event_target"] = STALE_ACTION
         scoreboard["active_frontier_accounting"]["residual_gap"] = STALE_BLOCKER
         scoreboard["active_frontier_accounting"]["next_required_action"] = STALE_ACTION
+        if "next_required_action" in scoreboard:
+            scoreboard["next_required_action"] = STALE_ACTION
         self.write(SCOREBOARD, scoreboard)
 
         record_rel = f"canonical/capabilities/frontier/{self.target}.json"
@@ -117,6 +124,8 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
             "queue.exact_blocker": queue["immediate_frontier"]["exact_blocker"],
             "queue.next_action": queue["immediate_frontier"]["next_action"],
             "scoreboard.next_progress_event_target": scoreboard["next_progress_event_target"],
+            **({"scoreboard.next_required_action": scoreboard["next_required_action"]}
+               if "next_required_action" in scoreboard else {}),
             "scoreboard.afa.residual_gap": scoreboard["active_frontier_accounting"]["residual_gap"],
             "scoreboard.afa.next_required_action": scoreboard["active_frontier_accounting"][
                 "next_required_action"
@@ -175,8 +184,48 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         self.assertIn("MIRROR_CHANGES", out)
         values = self.mirror_values()
         for key, value in values.items():
-            expected = self.blocker if "blocker" in key or "residual_gap" in key else self.action
+            if key.endswith("next_progress_event_target"):
+                expected = self.progress_event
+            elif "blocker" in key or "residual_gap" in key:
+                expected = self.blocker
+            else:
+                expected = self.action
             self.assertEqual(value, expected, key)
+
+    def test_progress_event_mirror_follows_the_field_the_guard_reads(self):
+        # enforce_goal_hierarchy.py compares scoreboard.next_progress_event_target
+        # to hierarchy.next_progress_event_target, not to next_required_action_class.
+        # Mirroring the action class would manufacture the mismatch the guard
+        # reports whenever the authority itself is unaligned.
+        hierarchy = self.read(HIERARCHY)
+        hierarchy["next_progress_event_target"] = "SOME_OTHER_EVENT_NAME"
+        self.write(HIERARCHY, hierarchy)
+        code, out = self.run_tool(write=True, fix_control_paths=False,
+                                  align_hierarchy_progress_event=False)
+        self.assertIn("HIERARCHY_PROGRESS_EVENT_DRIFT", out)
+        self.assertEqual(code, 1, out)
+        self.assertEqual(
+            self.read(SCOREBOARD)["next_progress_event_target"], "SOME_OTHER_EVENT_NAME",
+            "the mirror must follow the field the guard compares against",
+        )
+
+    def test_top_level_scoreboard_action_mirror_is_maintained(self):
+        # The guard reads the scoreboard's top-level next_required_action; a tool
+        # that maintained only the nested active_frontier_accounting copy would
+        # report MIRRORS_CONSISTENT on a tree the guard fails.
+        scoreboard = self.read(SCOREBOARD)
+        if "next_required_action" not in scoreboard:
+            self.skipTest("live scoreboard carries no top-level next_required_action")
+        scoreboard["next_required_action"] = STALE_ACTION
+        self.write(SCOREBOARD, scoreboard)
+        code, out = self.run_tool(write=False, fix_control_paths=False,
+                                  align_hierarchy_progress_event=False)
+        self.assertEqual(code, 1, out)
+        self.assertIn("next_required_action", out)
+        code, out = self.run_tool(write=True, fix_control_paths=False,
+                                  align_hierarchy_progress_event=False)
+        self.assertEqual(code, 0, out)
+        self.assertEqual(self.read(SCOREBOARD)["next_required_action"], self.action)
 
     def test_atomic_pair_drift_alone_is_detected_and_repaired(self):
         # The guard checks the target record's current_atomic_* pair. A tool that
