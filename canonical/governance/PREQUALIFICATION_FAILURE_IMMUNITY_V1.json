@@ -159,14 +159,20 @@
       "id": "PROCESS_EXIT_ZERO_WITH_SEMANTIC_SCRIPT_FAILURE",
       "defense": "Fresh builder execution requires a declared success sentinel before spend. Success requires exit zero, sentinel observed, and no fatal stderr; semantic failure blocks terminal verification.",
       "required_evidence": "BUILDER_SEMANTIC_SUCCESS_REGRESSION_PLUS_EXACT_RUNTIME_BEHAVIOR_CANARY"
+    },
+    {
+      "id": "UNADMITTED_UNTOUCHED_INFORMATION_EXPOSURE",
+      "defense": "Before selecting or reading any untouched task-specific source, require current global terminal proof-cut membership. Stage-A cleanliness alone is insufficient. An unadmitted source read removes clean-promotion eligibility and forbids task execution for qualification.",
+      "required_evidence": "GLOBAL_TERMINAL_PROOF_CUT_MEMBERSHIP_RECEIPT"
     }
   ],
-  "fresh_qualification_admission_rule": "FOR_ALL_SUBSEQUENT_FRESH_EVIDENCE_SPEND__EVIDENCE_SATURATION_AND_DEDUCTIVE_CLOSURE_AND_MINIMUM_REALITY_CUT_ADMISSION_PRECEDE_SPEND__THEN_STAGE_A_MUST_PASS_BEFORE_INSTRUCTION_EXPOSURE__STAGE_B_MUST_PASS_BEFORE_ANY_TASK_EXECUTION__STAGE_C_IS_ONE_SHOT__UNKNOWN_FAILS_CLOSED__RANK22_EXCEPTION_EXPIRED_AFTER_SPENT_BUILDER_FAILURE",
+  "fresh_qualification_admission_rule": "GLOBAL_TERMINAL_PROOF_CUT_MEMBERSHIP_PRECEDES_UNTOUCHED_TASK_SELECTION_AND_SOURCE_READ__THEN_STAGE_A_MUST_PASS_BEFORE_ANY_ALLOWED_SOURCE_EXPOSURE__STAGE_B_MUST_PASS_BEFORE_TASK_EXECUTION__STAGE_C_ONE_SHOT__UNKNOWN_FAILS_CLOSED",
   "terminal_promotion_rule": "NO_MODEL_OR_HUMAN_JUDGMENT_CAN_OVERRIDE_A_FAILED_OR_UNKNOWN_MACHINE_CHECKABLE_PREDICATE",
   "staged_admission": {
     "stage_a_pre_exposure": {
       "purpose": "PROVE_GENERIC_ROUTE_AND_SURFACE_READY_WITHOUT_READING_TASK_INSTRUCTION",
       "required": [
+        "CURRENT_GLOBAL_TERMINAL_PROOF_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE",
         "TARGET_VERSION_LOCK",
         "QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
         "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS",
@@ -203,7 +209,8 @@
         "TASK_SPECIFIC_RUNTIME_API_CONTRACT_PREFLIGHT",
         "BUILDER_SEMANTIC_SUCCESS_CONTRACT"
       ],
-      "failure_disposition": "INSTRUCTION_EXPOSED__NO_TASK_EXECUTION__UNSPENT_CAPABILITY_VERDICT__ZERO_CREDIT__DO_NOT_REPLAY_FOR_CLEAN_EVIDENCE"
+      "failure_disposition": "IF_SOURCE_ALREADY_READ_WITHOUT_GLOBAL_CUT__CLEAN_PROMOTION_INELIGIBLE__TASK_EXECUTION_FORBIDDEN__PRESERVE_SOURCE_AS_SPENT_EVIDENCE",
+      "precondition": "GLOBAL_CUT_MEMBERSHIP_AND_STAGE_A_PASS_MUST_EXIST_BEFORE_OFFICIAL_SOURCE_FETCH"
     },
     "stage_c_execution": {
       "purpose": "EXECUTE_EXACTLY_ONCE_ONLY_AFTER_STAGE_A_AND_STAGE_B_PASS",
@@ -296,5 +303,14 @@
     "verification": "canonical/verification/EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_20261002_V1.json",
     "fail_closed": true
   },
-  "current_verdict": "RANK22_RUNTIME_API_AND_SEMANTIC_BUILDER_FAILURE_CLASS_VERIFIED_CLOSED__RANK23_STAGE_A_MAY_PROCEED_IF_STILL_UNEXPOSED"
+  "current_verdict": "RANK23_SOURCE_READ_AFTER_GLOBAL_CUT_REVOCATION_RECONCILED__NO_EXECUTION__GLOBAL_17_FAMILY_CUT_NOW_PRIMARY",
+  "global_terminal_proof_cut": {
+    "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "regression": "canonical/regressions/2026-10-02_GLOBAL_CUT_SOURCE_READ_REGRESSION.json",
+    "required_before_untouched_task_selection": true,
+    "required_before_official_instruction_fetch": true,
+    "stage_a_cleanliness_is_not_necessity": true,
+    "unadmitted_source_read_disposition": "CLEAN_PROMOTION_INELIGIBLE__TASK_EXECUTION_FORBIDDEN__PRESERVE_AS_SPENT_EVIDENCE"
+  }
 }
