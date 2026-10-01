@@ -10,7 +10,8 @@
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
-    "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md"
+    "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md"
   ],
   "required_theory_invariants": {
     "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -70,7 +71,8 @@
     "qualification_stage",
     "terminal_proof_control",
     "continuous_obs",
-    "reality_query_admission"
+    "reality_query_admission",
+    "global_terminal_proof_cut"
   ],
   "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
   "required_deletion_first_order": [
@@ -218,7 +220,9 @@
       "candidate_observations",
       "minimum_reality_cut",
       "terminal_decision_value",
-      "admission_verdict"
+      "admission_verdict",
+      "global_cut_snapshot",
+      "global_cut_membership"
     ],
     "allowed_admission_verdicts": [
       "NO_REALITY_QUERY_REQUIRED",
@@ -233,5 +237,29 @@
       "rule": "NO_LONGER_ADMISSIBLE",
       "status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE"
     }
+  },
+  "required_global_terminal_proof_cut": {
+    "required_for": [
+      "UNTOUCHED_TASK_SELECTION",
+      "UNTOUCHED_OFFICIAL_SOURCE_READ",
+      "TASK_EXECUTION",
+      "TERMINAL_VERIFICATION",
+      "NEW_TERMINAL_RELEVANT_OBSERVATION"
+    ],
+    "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "required_fields": [
+      "graph_snapshot",
+      "existing_evidence_saturation",
+      "deductive_closure",
+      "shared_residual_compression",
+      "candidate_observations",
+      "dominance_deletions",
+      "exact_global_minimum_reality_cut",
+      "proposed_action_membership",
+      "terminal_decision_value"
+    ],
+    "stage_a_cleanliness_does_not_imply_membership": true,
+    "fail_closed_on_missing_or_unknown": true
   }
 }
