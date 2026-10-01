@@ -5,6 +5,8 @@ from pathlib import Path
 p=Path(__file__).with_name("cognitive_tool_router.py")
 spec=importlib.util.spec_from_file_location("router", p)
 m=importlib.util.module_from_spec(spec)
+import sys
+sys.modules[spec.name]=m
 spec.loader.exec_module(m)
 
 def fake(_q, texts):
