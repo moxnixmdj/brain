@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_EXTERNAL_RUNTIME_REBIND_VERIFICATION_V1",
+  "event_id": "JEVOS_V2_RUNTIME_REBIND_AFTER_MUTABLE_RELEASE_REPLACEMENT_20261001",
+  "status": "CURRENT_RUNTIME_BEHAVIORALLY_REBOUND_ON_FROZEN_V2__ZERO_CAPABILITY_CREDIT",
+  "prior_runtime_sha256": "e1b1f2c629ef53c8abafe9bff158cb92e08a6478ec3382c66c6de9d2efac7004",
+  "current_runtime_sha256": "719540869b8fc019c237894bf481346b0f534b50ba9be01d9496dd8f07ee21c4",
+  "model_sha256": "adb0057720a00b5c49aaeee68e4552a7a2cd52dc5fd33919e9787b0a97ed1570",
+  "frozen_eval": "canonical/capabilities/opus55/evals/COGNITIVE_BASIS_POINTWISE_TRANSFER_002.jsonl",
+  "independent_execution": {
+    "repo": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 36818633488,
+    "job_id": 110229145065,
+    "artifact_id": 11142607034,
+    "artifact_digest": "sha256:c7cdb28a335b8f4f82b8d73c8ec959dd288c08d72705355ebf8c8d5eca14fc95"
+  },
+  "exact_decision_equivalence": {
+    "accuracy": true,
+    "brier": true,
+    "ece_10bin": true,
+    "high_confidence_coverage": true,
+    "high_confidence_accuracy": true,
+    "all_known_wrong_case_scores_bit_exact": true
+  },
+  "limitations": [
+    "EQUIVALENCE_PROVEN_ONLY_ON_FROZEN_28_CASE_POINTWISE_PROBE",
+    "CURRENT_RELEASE_URL_REMAINS_MUTABLE",
+    "HASH_CHECK_REMAINS_MANDATORY",
+    "NO_CAPABILITY_PROMOTION"
+  ],
+  "capability_credit_delta": 0
+}
