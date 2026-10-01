@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "EXECUTE_BATCHED_EVAL_PARITY_RANK_5_ON_HIGH_THROUGHPUT_EXECUTION_V2__THEN_RECONCILE_STAGE1_SCORE",
+  "next_progress_event_target": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -676,11 +676,11 @@
   "active_frontier_accounting": {
     "parent_frontier_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "active_subcapability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "subcapability_status": "BRAIN_CONFIGURED_STAGE1_BREADTH_ACTIVE__ONE_PASS_ONE_CLEAN_FAILURE__ZERO_CAPABILITY_CREDIT",
+    "subcapability_status": "BRAIN_CONFIGURED_STAGE1_BREADTH_ACTIVE__ONE_PASS_ONE_CLEAN_FAILURE__FOUR_CONTAMINATED_OR_INADMISSIBLE__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
     "residual_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-    "next_required_action": "EXECUTE_BATCHED_EVAL_PARITY_RANK_5_ON_HIGH_THROUGHPUT_EXECUTION_V2__THEN_RECONCILE_STAGE1_SCORE",
+    "next_required_action": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER",
     "internalization_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
     "falsified_prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
     "falsification_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
@@ -1011,13 +1011,14 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "GSEA_VERIFIED_FAILURE_RECONCILED__RANK5_RUNNER_READY__STAGE1_BREADTH_BLOCKER_REMAINS",
+    "status": "RANK5_CONTAMINATION_QUARANTINED__RANK6_CLEAN_RUNNER_LAUNCHED__STAGE1_BREADTH_BLOCKER_REMAINS",
     "blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-    "counter_delta_residual_gaps_localized": 1,
     "capability_credit_delta": 0,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json",
-    "next_task": "batched-eval-parity",
-    "next_runner_pr": 288
+    "latest_real_output_evidence": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json",
+    "latest_contamination_evidence": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json",
+    "current_task": "glycan-ms2-elucidation",
+    "current_runner_pr": 289,
+    "current_runner_workflow_run_id": 36822123561
   }
 }
