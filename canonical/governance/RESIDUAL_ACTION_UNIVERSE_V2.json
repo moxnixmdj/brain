@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
+  "date": "2026-10-02",
+  "status": "OPEN_DISCOVERY__NOT_FROZEN__NO_EXACT_CUT_CLAIM__ZERO_FRESH_UNTOUCHED_INFORMATION",
+  "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+  "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
+  "obligations": {
+    "M0A": {
+      "status": "OPEN",
+      "verified_owned": [
+        "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json"
+      ],
+      "verification_pending": [
+        "canonical/runtime/explicit_compound_requirement_decomposer.py"
+      ],
+      "external_candidates": [
+        "stanfordnlp/stanza@c9a2158a87502dd63f757ab1aa933230b0acbce7",
+        "explosion/spaCy@c2dabfce56ad2991685ec85783cd59637a5d7b8f"
+      ],
+      "uncovered": [
+        "MULTI_CLASS_OR_CONTEXT_DEPENDENT_SEMANTICS",
+        "IMPLICIT_REQUIREMENTS",
+        "LONG_RANGE_CROSS_SENTENCE_SEMANTICS",
+        "ARBITRARY_SOURCE_SEMANTIC_GENERATION_OUTSIDE_DECIDABLE_SUBSETS"
+      ],
+      "complete_action_bundle": false
+    },
+    "M1A": {
+      "status": "OPEN",
+      "verified_owned": [
+        "canonical/capabilities/opus55/RAW_DRAWING_PRIMITIVES_001.json",
+        "canonical/capabilities/opus55/ENGINEERING_CALLOUT_PARSER_001.json",
+        "canonical/capabilities/opus55/ORTHOGRAPHIC_CONSTRAINT_GRAPH_001.json"
+      ],
+      "verification_pending": [
+        "canonical/runtime/drawing_view_regions.py",
+        "canonical/runtime/orthographic_view_identity.py",
+        "canonical/runtime/callout_geometry_association.py"
+      ],
+      "external_candidates": [
+        "tesseract-ocr/tesseract@db20f322d03664d1e878e2fbf6e904f5da755594",
+        "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
+      ],
+      "uncovered": [
+        "OCR_IMAGE_TO_TEXT_WITH_PINNED_MODEL_DATA_AND_DEPENDENCY_ACCOUNTING",
+        "VIEW_REGISTRATION_OUTSIDE_DECLARED_AXIS_ALIGNED_LAYOUTS",
+        "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+        "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
+        "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
+      ],
+      "complete_action_bundle": false
+    },
+    "M1B": {
+      "status": "OPEN",
+      "complete_action_bundle": true,
+      "candidate_action": "A1_M1B_DETERMINISTIC",
+      "new_reality_units": 0,
+      "dependency_depth": 1,
+      "scope": "IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_SUBVOXEL_TOLERANCE_BOUNDED_DETERMINISTIC_ROUTE",
+      "source_input": "canonical/governance/RESIDUAL_CUT_INPUT_V1.json",
+      "external_specimen_only": [
+        "skykim/cad-image-to-3d@b70f7b5a8cd18c96a7ec869e0a5d946f79480226",
+        "AdityaJoglekar/Ortho2CAD@546efb1facc4066e7904aacd259c9dd140c1e2ba"
+      ]
+    }
+  },
+  "rules": [
+    "NO_FRESH_UNTOUCHED_TASK_OR_INSTRUCTION_SPEND",
+    "VERIFICATION_PENDING_COMPONENTS_HAVE_ZERO_OWNERSHIP_CREDIT",
+    "OPAQUE_MODEL_GENERATION_HAS_ZERO_OWNERSHIP_CREDIT",
+    "M0A_AND_M1A_MUST_HAVE_COMPLETE_SELF_CONTAINED_BUNDLES_BEFORE_FREEZE",
+    "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
+    "RUN_EXACT_FROZEN_UNIVERSE_COMPILER_ONLY_AFTER_ALL_TERMINALLY_NECESSARY_RESIDUALS_HAVE_AT_LEAST_ONE_ADMISSIBLE_COMPLETE_BUNDLE"
+  ],
+  "exact_cut_ready": false,
+  "blocking_obligations": [
+    "M0A",
+    "M1A"
+  ],
+  "nonblocking_ready_obligation": [
+    "M1B"
+  ],
+  "next": "VERIFY_ZERO_REALITY_PENDING_COMPONENTS__INTERNALIZE_OR_SUBSTITUTE_OCR_ROUTE__CLOSE_OR_EXPLICITLY_BOUND_M0A_CONTEXTUAL_SEMANTICS__COMPLETE_M1A_BUNDLE__THEN_FREEZE_V2_AND_RUN_EXACT_CUT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
