@@ -29,7 +29,7 @@ jobs:
           python canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py \
             --cases canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json \
             --endpoint https://simple-jev-demo-api.featherless.ai \
-            --model auto \
+            --model featherless-ai/gemma-4-26B-A4B-classifier \
             --out cognitive_basis_probe_result_v1.json
       - name: Upload diagnostic evidence
         if: always()
