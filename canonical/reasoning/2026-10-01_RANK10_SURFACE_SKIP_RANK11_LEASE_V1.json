@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_RANK10_SURFACE_SKIP_RANK11_LEASE_V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Preserve the frozen coding evidence sequence after rank 10 was blocked before task exposure, and lease untouched rank 11 without changing capability credit.",
+  "governing_invariants": [
+    "Do not infer capability success or failure from a prestart surface block.",
+    "Do not consume blocked rank-10 task content.",
+    "Advance only in frozen precommitted order.",
+    "Do not read rank-11 task instructions before current guarded lease and READY receipt.",
+    "Do not read solution, tests, or hidden verifier before terminal authorization.",
+    "Incremental spend remains zero."
+  ],
+  "material_premises": [
+    "Rank 10 remained instruction-unread and unspent.",
+    "The current authorized runner surface could not stage the rank-10 session configuration.",
+    "Rank 11 is the next frozen sample.",
+    "Rank-11 pre-lease freshness checks returned zero code, branch, and commit hits in Brain and the runner."
+  ],
+  "evidence_refs": [
+    "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json",
+    "canonical/capabilities/opus55/TB4_RANK10_SURFACE_BLOCKED_20261001_V1.json"
+  ],
+  "conclusion": "Preserve rank 10 as unspent surface-blocked evidence and lease frozen rank 11 under current OBS/guard authority.",
+  "selected_route": "ADVANCE_FROZEN_ORDER_TO_RANK11_AFTER_PRESTART_SURFACE_BLOCK",
+  "rejected_material_alternatives": [
+    "Force the blocked rank-10 runner write.",
+    "Count rank 10 as a capability failure.",
+    "Read rank-10 content through another path.",
+    "Skip beyond rank 11 without cause."
+  ],
+  "uncertainties": [
+    "Rank-11 execution-surface compatibility and terminal result remain unknown."
+  ],
+  "assumptions": [
+    "Frozen sample order remains authoritative."
+  ],
+  "non_goals": [
+    "No rank-11 task-content inspection.",
+    "No capability promotion.",
+    "No change to atomic RCA transfer lane."
+  ],
+  "next_action": "Guard the rank-11 lease, then stage its fast-burst session and wait for READY before reading instructions.",
+  "supersession_conditions": [
+    "Main changes the active coding blocker or frozen sample authority before merge.",
+    "Rank-11 exposure is discovered before lease."
+  ],
+  "supersedes": null
+}
