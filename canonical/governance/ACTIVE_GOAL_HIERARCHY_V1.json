@@ -746,5 +746,13 @@
     "evidence": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
     "task_execution_authorized": false,
     "source_role": "SPENT_NONPROMOTION_EVIDENCE_ONLY"
+  },
+  "full_state_execution_authority_v3": {
+    "status": "VERIFIED_AND_INSTALLED",
+    "evidence": "canonical/verification/EXECUTION_AUTHORITY_REDUCER_V3_VERIFICATION_20261002_V1.json",
+    "reducer": "canonical/runtime/execution_authority_reducer.py",
+    "blob_sha": "d49deb24be6a0ac268c700f788777c39fe33086d",
+    "runner_merge_commit": "2365b5fabaa26312318f4dbbf2f0808b99ccba93",
+    "rank23_task_content_touched": false
   }
 }
