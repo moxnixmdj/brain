@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3_DETERMINISTIC_REPLAY_V1",
+  "date": "2026-10-02",
+  "status": "DETERMINISTIC_EXACT_REPLAY_PASS__INDEPENDENT_VERIFICATION_PENDING__ZERO_EXECUTION_AUTHORITY",
+  "challenger": "canonical/governance/GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3.json",
+  "challenger_blob_sha": "c0ceaba4919201119faa94d92abc6b8efacc86d0",
+  "solver": "canonical/runtime/minimum_reality_cut.py",
+  "solver_blob_sha": "9d67f538749519de2f7402f01c74be8025e809a2",
+  "distinction_count": 23,
+  "candidate_observation_count": 15,
+  "exact_minimum": true,
+  "selected_observation_count": 15,
+  "total_cost": 16,
+  "zero_new_information_members": [
+    "Q_SEMANTIC_ACCEPTANCE_SPENT_PORTFOLIO",
+    "Q_STRUCTURED_GEOMETRY_SPENT_PORTFOLIO"
+  ],
+  "proof_summary": "UNDER_THE_DECLARED_COVERAGE_SET_EVERY_CANDIDATE_IS_NECESSARY_TO_COVER_AT_LEAST_ONE_DISTINCTION_NOT_COVERED_BY_ANY_OTHER_CANDIDATE",
+  "correction": "canonical/governance/GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3_COST_CORRECTION_V1.json",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RESULT__ZERO_NEW_INFORMATION_MEMBERS_MAY_BE_REDUCED_FROM_ALREADY_SPENT_EVIDENCE"
+}
