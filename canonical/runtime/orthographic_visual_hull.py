@@ -420,3 +420,45 @@ def infer_visual_hull_repairs(
     return _component_regions(underbuilt, "add") + _component_regions(
         overbuilt, "cut"
     )
+
+
+def compile_rectangular_repairs_to_body_payloads(
+    regions: Sequence[RepairRegion],
+    *,
+    cell_size: tuple[float, float, float],
+    origin: tuple[float, float, float] = (0.0, 0.0, 0.0),
+) -> tuple[list[dict], list[dict]]:
+    """Compile proven-full rectangular repair regions to cad_partspec.Body payloads.
+
+    Non-rectangular regions remain unresolved rather than being approximated by their
+    bounding boxes. This prevents the repair compiler from inventing material/voids that
+    were not justified by the visual-hull difference.
+    """
+    sx, sy, sz = cell_size
+    if sx <= 0 or sy <= 0 or sz <= 0:
+        raise VisualHullError("cell_size components must be positive")
+    ox, oy, oz = origin
+    bodies: list[dict] = []
+    unresolved: list[dict] = []
+    for region in regions:
+        if region.operation not in ("add", "cut"):
+            raise VisualHullError(f"unknown repair operation: {region.operation}")
+        if not region.rectangular:
+            unresolved.append({
+                "reason": "NON_RECTANGULAR_REPAIR_REGION",
+                "region": region.to_dict(),
+            })
+            continue
+        x0, y0, z0 = region.bbox_min
+        x1, y1, z1 = region.bbox_max_exclusive
+        bodies.append({
+            "shape": "box",
+            "operation": region.operation,
+            "x": ox + x0 * sx,
+            "y": oy + y0 * sy,
+            "z": oz + z0 * sz,
+            "dx": (x1 - x0) * sx,
+            "dy": (y1 - y0) * sy,
+            "dz": (z1 - z0) * sz,
+        })
+    return bodies, unresolved
