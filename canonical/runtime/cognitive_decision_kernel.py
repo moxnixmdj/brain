@@ -78,9 +78,14 @@ def _request(
     latency_ms = (time.perf_counter() - started) * 1000.0
     obj = json.loads(raw)
     try:
-        p_yes = float(obj["answers"]["decision"]["noul"])
-    except (KeyError, TypeError, ValueError) as exc:
+        raw_probability = obj["answers"]["decision"]["noul"]
+    except (KeyError, TypeError) as exc:
         raise RuntimeError(f"malformed Jev-compatible response: {obj!r}") from exc
+    # bool is a subclass of int in Python, but a boolean is not a probability.
+    # Reject non-numeric JSON values rather than coercing them into an admission.
+    if isinstance(raw_probability, bool) or not isinstance(raw_probability, (int, float)):
+        raise RuntimeError("malformed Jev-compatible response: decision probability must be numeric")
+    p_yes = float(raw_probability)
     if not math.isfinite(p_yes) or not 0.0 <= p_yes <= 1.0:
         raise RuntimeError(f"invalid decision probability: {p_yes!r}")
     return p_yes, latency_ms
@@ -101,14 +106,28 @@ def decide(
     if not str(question).strip():
         raise ValueError("question must be non-empty")
 
-    p_yes, latency_ms = _request(
-        endpoint=endpoint,
-        model=model,
-        state=state,
-        question=str(question).strip(),
-        timeout_s=timeout_s,
-        api_key=api_key,
-    )
+    request_started = time.perf_counter()
+    try:
+        p_yes, latency_ms = _request(
+            endpoint=endpoint,
+            model=model,
+            state=state,
+            question=str(question).strip(),
+            timeout_s=timeout_s,
+            api_key=api_key,
+        )
+    except Exception:
+        # A missing, malformed, or failing decision route never admits a candidate.
+        return DecisionResult(
+            status="ESCALATE",
+            decision=None,
+            probability_yes=0.5,
+            confidence=0.5,
+            threshold=threshold,
+            latency_ms=(time.perf_counter() - request_started) * 1000.0,
+            model=model,
+            reason="ENDPOINT_OR_RESPONSE_FAILURE_FAIL_CLOSED",
+        )
     decision = p_yes >= 0.5
     confidence = max(p_yes, 1.0 - p_yes)
 

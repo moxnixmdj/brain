@@ -1,0 +1,228 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-ACTIVE-PROGRAM-AND-GSEA-INFRA-FAILURE-20261001-V1",
+  "status": "VALIDATED__EXACT_BASE_GUARD_AND_TARGETED_TESTS_PASS__NO_TASK_EXECUTION",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "8148af1ec5f4913b905af42c7acc07ac78cbd072",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "Restore exact current-base consistency across the canonical pointer, active hierarchy, immediate queue, target record, and scoreboard: use the hierarchy-authoritative rank-6 high-throughput action class, preserving the explicit clean-boundary and no-task-TOML constraint. Keep the Stage-1 target/blocker and zero-credit accounting unchanged; preserve the historical rank-4 GSEA no-pass disposition, and record newer result paths only as unread. This reconciliation performs no task lease/execution, reads no task-specific instruction/result, reorders no frozen sample, and claims no new pass, score, or capability credit.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "RANK4_VERIFIER_INFRASTRUCTURE_FAILURE_PRESENT__NO_TASK_PASS_OR_CAPABILITY_CREDIT",
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "prior_work_checked": [
+    "Current canonical pointer and active goal hierarchy were compared directly.",
+    "Trusted validator was run read-only against c6c74e0b5a8b1a21f32f6c878eb97ee10bf1608e..cb684f8019272f944d5deb4154688f735acd97fa and failed closed with six listed defects.",
+    "Rank-4 runner PR #283 and workflow run 36814863321 were checked by metadata; artifact 11141625068 could not be retrieved because gh run download returned EOF.",
+    "Generic runner controller source was checked on main; no task instructions, tests, solutions, or PR comments were read.",
+    "At the earlier base, the precommitted sample marked batched-eval-parity contaminated and the standing user instruction was to skip it without reordering. Current base 70cb51cafaa0d1f111c9eec0a5daa7d25792f617 now points to rank 5 on a high-throughput one-shot route and adds a lease-intent/result path, but those task-specific contents remain unread. This reconciliation does not lease/execute rank 5, reorder the sample, or claim any outcome; rank-6 freshness searches were previously metadata-only.",
+    "At prior base f33ab5771af2e4669b4c05e18fd19b69dbc0b0fe, the tournament had changed and a fresh cognitive task-result path was present but unread. Current base 70cb51cafaa0d1f111c9eec0a5daa7d25792f617 further advances the campaign; only project-level status, pointer fields, commit subjects, and changed path names were inspected. Task instructions, result payloads, and task-derived records remain unread; no outcome or credit is inferred.",
+    "Reviewed the generic pointwise probe source and project-level evaluation case set added on base bcde1b3 only to inventory the parallel route; no GSEA or rank-6 instructions, solutions, tests, or hidden verifier files were opened, and no endpoint was called.",
+    "At prior base bcde1b3 the pointwise JSONL serialization failed the loader; main independently repaired the same 12-case bytes at cd26bda. The current-base loader now parses 12 unique cases; this PR does not modify the evaluation set.",
+    "Rank-6 freshness metadata was rechecked on the current-base repositories at 2026-10-01T05:10:50Z; zero branch, commit-message, PR, or issue hits in either repository; no task materials were read.",
+    "Verified runner metadata for baseline run 36816986543 (workflow Cognitive Basis Jevos Probe, one probe job, conclusion SUCCESS) and artifact 11141732615 (not expired; digest sha256:ab0539feeee92ce974b2f210c5c07ec0929de16e555d61367363686d92a3c7c4). The current canonical result reports 12 cases, 0.75 accuracy, and zero capability credit; the artifact itself was not downloaded.",
+    "Verified runner metadata for broader baseline run 36817492953 (workflow Cognitive Basis Jevos Probe, one probe job, conclusion SUCCESS) and artifact 11141559144 (not expired; digest sha256:b0547b261d1d9e9cd93dd34c2229d476cad2255f16e811fe12a59eb86b25cc7f). The canonical result reports 28 cases, 0.8214286 accuracy, no terminal-task delta, and zero capability credit; artifact contents were not downloaded and the 28 case rows were not inspected here.",
+    "Verified runner metadata for Simple-JEV run 36817625834 (Cognitive Basis Simple Jev Qwen Probe, one probe job, conclusion SUCCESS) and artifact 11142535841 (not expired; digest sha256:a5225de447054211cb25416ee83553c111a53189aa1fd13a510fd9ce8dced9c7). The canonical result reports 28 cases, 0.42857 accuracy, mean latency about 4033 ms, and zero capability credit; artifact contents and case rows were not downloaded/read.",
+    "Verified runner metadata for Laya run 36818008161 (Cognitive Basis Laya Typed Decisions Probe, one probe job, conclusion SUCCESS) and artifact 11142780325 (not expired; digest sha256:66312ccfbd12f69a0b80c7dc53ca021405b0047e0800cb6f32bea9d31ba0b664). The canonical result reports 28 cases, 0.57143 accuracy, and zero credit; artifact contents and case rows were not downloaded/read.",
+    "Inspected only the generic kernel candidate and prior tournament summary before the latest base update. Current main has changed canonical/capabilities/opus55/COGNITIVE_BASIS_OPEN_REUSE_TOURNAMENT_001.json and added canonical/capabilities/opus55/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001_RESULT.json; their contents were not opened. The earlier gate-result path canonical/capabilities/opus55/COGNITIVE_DECISION_KERNEL_GATE_VERIFY_001_RESULT.json is also unread, and fresh task path canonical/tasks/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001.json remains unopened. No pointwise rows, endpoint, gate artifact, task instruction, or fresh result payload was processed; no gate or route outcome is adopted.",
+    "Synthetic canary against the generic kernel found JSON boolean true being coerced to probability 1.0 and ADMIT. The parser now rejects booleans/nonnumeric probabilities and `decide` returns ESCALATE on request/response exceptions. Six persisted synthetic tests pass; no model endpoint or frozen case set was called/read.",
+    "Verified runner metadata for Jevos runtime rebind run 36818633488 (one probe job, conclusion SUCCESS) and artifact 11142607034 (not expired; digest sha256:c7cdb28a335b8f4f82b8d73c8ec959dd288c08d72705355ebf8c8d5eca14fc95). The current-main rebind record reports exact decision-metric and known-wrong-score equivalence on frozen V2; no artifact payload or case row was downloaded/read in this reconciliation.",
+    "The Jevos release tag is mutable: prior runtime SHA e1b1f2c6... was replaced by 71954086... while the model SHA stayed unchanged. Current release hash check is mandatory before use; the Brain adapter does not enforce that hash itself.",
+    "At prior base 5b82211b19969cedda50f855d39b13c3fac48a21 adds canonical/capabilities/opus55/COGNITIVE_DECISION_KERNEL_GATE_VERIFY_001_RESULT.json and canonical/tasks/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001.json. Their paths and commit metadata are recorded only; the gate-result contents and task instructions remain unread, no lease/execution occurred, and no result or credit is inferred.",
+    "Boundary incident: a broad repository search intended to find guard usage unintentionally emitted partial matching excerpts from unrelated historical task-specific reasoning records. This read excerpts contrary to the standing boundary; no full task instruction, test payload, solution, or case-row file was opened, and the excerpts were not used. The broad search was stopped; subsequent inspection was limited to the trusted guard source, this reconciliation, and non-task metadata. The newly frozen task and its result remain unread.",
+    "At prior base f33ab5771af2e4669b4c05e18fd19b69dbc0b0fe adds canonical/capabilities/opus55/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001_RESULT.json and modifies canonical/capabilities/opus55/COGNITIVE_BASIS_OPEN_REUSE_TOURNAMENT_001.json. The commit subject indicates a Jevos-route revocation after fresh falsification, but the underlying canonical content/result was left unread. The historical Jevos recommendation is held pending authorized review; no task/result outcome or credit is inferred.",
+    "On pushed PR head 9b8033a3e68aba82605c37f0af5983f57f2239f7 (base f33ab5771af2e4669b4c05e18fd19b69dbc0b0fe), the trusted exact-head guard passed, all six mocked synthetic kernel tests passed, and both fresh GitHub checks passed (guard run 36819448063/job 110231634524; exact-symbolic-obsolescence run 36819450641/job 110231642260). PR #606 was OPEN, MERGEABLE, and CLEAN; no merge was performed. This verification snapshot predates this status/evidence-only receipt update.",
+    "At prior main 70cb51cafaa0d1f111c9eec0a5daa7d25792f617 keeps the same Stage-1 target/blocker but points the canonical pointer next step at rank 5 on high-throughput execution V2; it also adds canonical/action_intents/2026-10-01_LEASE_BATCHED_EVAL_PARITY_TB4_V1.json, canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json, and canonical/runtime/cognitive_tool_router.py, plus multiple result/reconciliation paths. Campaign status metadata reads ACTIVE__C3_DETERMINISTIC_CONTROL_RETAINED__ETTIN_ZERO_TERMINAL_DELTA_FALSIFIED__ZERO_CAPABILITY_CREDIT. The action/result contents and task-specific artifacts were not opened; no rank-5 execution or new pass/score/credit is claimed. The earlier precommitted rank-5 contamination instruction remains binding absent explicit user reversal.",
+    "The fixed branch was rebased onto current main 70cb51cafaa0d1f111c9eec0a5daa7d25792f617. The pointer now preserves the current high-throughput rank-5 next-step metadata while aligning its program mirror to the active hierarchy. The new rank-5 lease/task/result and newer GSEA/cognitive records were not opened; no rank-5 execution or outcome is claimed. Exact-head validation against this new base remains pending.",
+    "After rebasing onto 70cb51cafaa0d1f111c9eec0a5daa7d25792f617, the trusted guard at local head 3b510dc failed with POINTER_HIERARCHY_NEXT_ACTION_MISMATCH and QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH. Current pointer and queue metadata name a rank-5 high-throughput step, while the hierarchy requires a generic additional-fresh-task Stage-1 action. No task lease/instructions/results were opened and no route fields were changed; the earlier user instruction to skip rank 5 remains binding. Await explicit user direction before changing pointer/queue next-action mirrors or reviewing rank-5 materials.",
+    "Boundary incident 2: a narrowly intended scan of nested hierarchy/queue next-action fields unexpectedly printed unrelated route next-action excerpts from other task-specific records. This was contrary to the standing boundary; no associated task files were opened and the excerpts were not used. The scan was stopped; further inspection is restricted to exact control-plane fields and path metadata.",
+    "Current base b7c4efa4d35ba3709f37f3109daac87849a1c945 preserves the active target/blocker and C3 zero-credit campaign status. Pointer and queue metadata now point to a rank-6 high-throughput action; hierarchy action-class metadata also refers to rank 6 but the pointer/queue/hierarchy strings do not match exactly. Main contains canonical/action_intents/2026-10-01_LEASE_GLYCAN_MS2_ELUCIDATION_TB4_V1.json, but its contents, task instructions, result records, and canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json were not opened. Rank 5 remains under the standing skip instruction; no task execution, lease, pass, score, or credit is claimed.",
+    "Current base 60c26db3f44069e38264a284f6edbf8f2203298c changed the hierarchy next-action class to rank 6. Pointer and queue still contain nonidentical rank-6 strings, and the target record retains a generic Stage-1 next action, so exact next-action mirrors remain inconsistent. The current target summary status says BRAIN_CONFIGURED_FRESH_TASK_VERIFIED_PASS__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_CAPABILITY_CREDIT; underlying evidence was not opened and this reconciliation makes no independent task-pass or score claim. The rank-6 lease/task files remain unread.",
+    "On prior base b7c4efa4d35ba3709f37f3109daac87849a1c945, the exact-head guard at 6350ca8 failed with POINTER_HIERARCHY_NEXT_ACTION_MISMATCH, QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH, and TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH. Current base changed hierarchy metadata again; a fresh guard is still required after current-base rebinding.",
+    "Current base 9d2087800409a2ee5363441a5d61c16573ac7346 reports C3_FRESH_AUTHORIZED with zero capability credit; the target summary says a Brain-configured fresh-task pass is recorded while the Stage-1 score remains pending. The underlying result/task evidence was not opened. The active hierarchy selects rank 6; this action aligns exact pointer/queue/target/scoreboard mirrors to that hierarchy class while preserving the no-task-TOML constraint and performing no task execution.",
+    "After origin/main advanced, the fixed branch was rebased onto 18d7bd1470d95b9f9f04e575eb87274db4b84e72. Current-base control-plane fields were read through git-show only: pointer program OPUS_5_5_CAPABILITY_OWNERSHIP and pointer rank-6 action differ from the all-family hierarchy; queue adds the explicit no-task-TOML qualifier; target retains the generic Stage-1 action; hierarchy and scoreboard agree on rank 6 without that qualifier. The branch copies the hierarchy route and preserves the existing no-task-TOML constraint in all mirrors. Latest main commit subjects are C3 campaign updates; the campaign summary still reports zero capability credit. No task instructions, task-specific result payloads, frozen cases, or runner output were opened for this refresh.",
+    "Boundary incident: a targeted Python diagnostic accidentally printed the current-context block of the historical rank-4 GSEA record while checking rebased receipt metadata. That exceeded the intended summary-only inspection. The printed task-related details are disregarded and were not used; no rank-6 task instructions/result or frozen case material was opened, and no task was executed. Further inspection of that record is stopped.",
+    "Latest origin/main is 8148af1ec5f4913b905af42c7acc07ac78cbd072, with two new C3 campaign commits (same-cases ETTIN/SkillRouter reconciliation and cross-validated cascade-evaluation update; subjects/path names only). The campaign summary remains zero-capability-credit. Exact current-base pointer/hierarchy/queue/target/scoreboard fields were checked by git-show; they retain the previously recorded disagreement, so this rebased branch keeps the same metadata-only mirror correction. No task instructions/results, frozen cases, or task-specific records were opened for this update.",
+    "Validation on local head 4f91d76 against exact base 8148af1 passed: trusted drift guard, eight active-target mirror/firewall unittest cases, two action-intent sensitivity checks, JSON parse, exact next-action equality across all mirrors, and active-program equality. This was before the final validation-receipt-only commit; the trusted guard is rerun on the resulting exact head before push. No task-specific instructions/results were read and no task was executed."
+  ],
+  "stop_condition": "Stop when pointer, hierarchy, queue, target record, hierarchy progress event, and scoreboard next-action fields exactly match the current hierarchy action class; the trusted exact-head guard, active-target mirror/firewall unit tests, action-intent sensitivity checks, and cross-surface JSON checks pass; and the rank-4 disposition remains no-pass/no-credit. Do not fetch or read task TOML/instructions or task-specific results, execute rank 6, reorder rank 5, or claim any new score/pass/credit in this mirror-reconciliation action. The rank-6 route remains a subsequent action under the current canonical control plane.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/reasoning/2026-10-01_RECONCILE_ACTIVE_PROGRAM_AND_GSEA_INFRA_FAILURE_V1.json"
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "PARTIAL_SYNTHETIC_RUNTIME_SAFETY_TEST_ONLY__NO_INTEGRATION_OR_OWNERSHIP",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_NO_PROVIDER_OR_CAPABILITY_CLAIM",
+    "GENERAL_SUBSTRATE_TEST": "NOT_APPLICABLE_NO_TASK_EXECUTION",
+    "SPECIMEN_SEPARATION_TEST": "PASS_NO_EXTERNAL_CAPABILITY_PROMOTION",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_SYNTHETIC_FAIL_CLOSED_CANARIES_ONLY__NO_CAPABILITY_REEXECUTION",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "NOT_APPLICABLE_NO_TASK_PASS_ESTABLISHED",
+    "OWNERSHIP_PACKAGE_TEST": "NOT_APPLICABLE_NO_PROMOTION"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "8148af1ec5f4913b905af42c7acc07ac78cbd072",
+    "real_outcome": "Permanently own useful Opus 5.5-or-better capabilities; immediately, establish a comparable fresh-task Stage-1 score of at least 66.4 percent without claiming unverified work.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Establish Stage-1 breadth and score through distinct fresh tasks under the Brain-configured route; a verifier process that never starts its test script contributes neither a pass nor a score.",
+      "proxy_goals_deleted": [
+        "A successful GitHub Actions conclusion as a task-pass proxy",
+        "A completed candidate PR as a capability-pass proxy",
+        "Treating a pre-test infrastructure error as task behavior",
+        "Changing the terminal objective to hide a blocked score"
+      ],
+      "surviving_necessity": "Restore trusted actionability and keep the verified Stage-1 evidence truthful before authorizing another task."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Current V5 mini-SWE plus Superpowers configured route",
+        "Frozen Terminal-Bench Stage-1 sample and evaluation protocol",
+        "Existing independently verified wal-recovery-ordering pass",
+        "Current fast-burst controller and exact rank-4 workflow outcome",
+        "Current main records the Jevos-v2 runtime rebind: new runtime SHA 719540869b8f... was decision-equivalent to the prior runtime on the frozen 28-case set (all summary metrics and known wrong-case scores exact), model asset unchanged; mutable tag/hash-check limitations remain. The candidate kernel has six passing synthetic tests but no frozen-set gate or task delta."
+      ],
+      "external_existing_routes_checked": [
+        "Generic verification-capsule-runner controller source only; no task-specific or hidden verifier materials were read",
+        "No alternative execution provider was selected in this control-plane reconciliation",
+        "The earlier open-reuse tournament provisionally selected Jevos-v2 for advisory decisions, with >=0.80 admission and escalation otherwise. The release tag is mutable and its runtime was rebound only on frozen V2. Current main later modified the tournament and added a fresh task-result record; both remain unread here, so the historical selection is held and no current route is adopted. The kernel still does not enforce runtime fingerprints."
+      ],
+      "capability_work_deleted": [
+        "One fail-closed parser/error-handling correction was made to the existing candidate; no capability package, model weights, or integrated Brain decision route was produced.",
+        "No rank-4 replay",
+        "No rank-5 reorder or replay",
+        "No speculative white-box harvest",
+        "No scoreboard or capability-credit increase",
+        "This reconciliation made no endpoint call, frozen-set evaluation, training, rank-5/rank-6 lease or task execution, or Brain-control-loop integration; six local synthetic tests used mocks. Current task/action/result contents were not opened.",
+        "No Stage-1 task was leased or executed by this reconciliation."
+      ],
+      "surviving_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The active target/blocker are unchanged. The current base had a program mirror mismatch and three divergent next-action mirrors: pointer, queue, and target record did not match the hierarchy’s rank-6 class; hierarchy progress and scoreboard already matched the hierarchy. This action normalizes those mirrors to the hierarchy while preserving the no-task-TOML/clean-boundary constraint. It does not inspect the rank-6 lease/task/result, call a verifier, or claim a task outcome.",
+      "delete_bypass_substitute_options": [
+        "DELETE: remove no task or capability; preserve the Stage-1 evidence requirement.",
+        "BYPASS: rejected; do not bypass the trusted drift guard, hash check, or independent verifier.",
+        "REUSE: hold the historical Jevos recommendation pending authorized review of the current-base tournament/result; do not claim or use a current route, and keep runtime/model hash checks mandatory.",
+        "SUBSTITUTE: align the pointer mirror to the later active campaign rather than revert the hierarchy.",
+        "WHITE_BOX_HARVEST: not applicable; no residual learned behavior was evaluated.",
+        "COMPOSE: preserve the rank-4 infrastructure disposition and WAL pass while binding historical route/runtime evidence plus current-base unread tournament/result metadata without inferring a route outcome.",
+        "CONFIGURE: change only the contradictory pointer program field, stale pointwise-campaign state, and proven malformed-response fail-open in this PR.",
+        "INTEGRATE: bind the changes to a current-base intent and exact-head trusted validation.",
+        "DEFER: frozen-set gate and real-task delta require separate current-base action; processing prior-task-derived cases also requires explicit permission and hash-verified runtime.",
+        "TASK EXECUTION: defer to a separate one-shot authorized action after mirror guard passes; do not fetch task TOML or inspect task-specific results here."
+      ],
+      "surviving_causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET; rank-4 contributes no pass because independent tests did not start."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1. EXACT_MIRROR_RECONCILIATION_TO_HIERARCHY__PRESERVE_NO_TASK_TOML_BOUNDARY__NO_EXECUTION: copy the hierarchy-authoritative next-action class exactly to every current mirror; make no task-material access or execution.",
+        "2. Use a Jevos mutable release URL without checking asset hashes; rejected because a confirmed in-place runtime replacement occurred and the release tag is not immutable.",
+        "3. Promote or autonomously deploy the current kernel/Jevo route; rejected because the latest current-base tournament and fresh task-result contents are unreviewed, the adapter does not enforce runtime/model fingerprints, and no terminal-task delta is established; no route is promoted.",
+        "4. Process the frozen 28-case pointwise set again; blocked by the explicit user boundary on prior-task-derived data absent permission.",
+        "5. Read or execute the rank-6 task now; deferred to a separate authorized, exact-base action. This PR only reconciles control-plane mirrors and will not fetch task TOML or inspect task-specific results.",
+        "6. Revert the hierarchy to the old narrow program label; rejected because commit 8c18360 explicitly activated the all-family campaign.",
+        "7. Bypass the trusted guard or count the GSEA workflow conclusion as reward; rejected as unsupported and fail-open.",
+        "8. Replay rank 4, reorder rank 5, or read rank-6 instructions before a valid lease; rejected by one-shot and contamination controls.",
+        "9. Write to a runner branch or use PR comments as a command channel; excluded by the standing branch/transport boundary.",
+        "10. Fetch rank-6 task TOML or inspect task results during this reconciliation; rejected by the explicit no-task-material boundary and the pointer’s clean-boundary action class."
+      ],
+      "losing_routes_reason": "This metadata-only correction directly removes the exact mirror mismatch while preserving the active Stage-1 blocker and zero-credit state. Route execution, task inspection, sample changes, and any claim of a fresh score are not needed or authorized within this action.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run the trusted drift validator against the exact PR base and the six persisted synthetic unit tests. Verify pointer/hierarchy equality, historical route-result bindings, runtime drift/rebind evidence, current-base tournament/gate/task-result metadata marked unread, and zero capability credit. Do not execute frozen V2 cases, open task instructions, or process task-derived rows without explicit permission. Preserve rank-4 as pre-test infrastructure failure with no reward/pass/credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Do not reuse the invalid rank-4 action intent as current authorization; retain it only as the historical lease record.",
+        "Supersede the implicit task-success interpretation with the explicit no-pass/no-credit GSEA disposition record.",
+        "Replace the stale pointwise ready/no-result mirror with the four historical route summaries, runtime drift/rebind, synthetic tests, and explicit metadata that the current tournament and fresh result are unread; do not carry forward an active Jevos selection.",
+        "A rank-6 task, if later authorized, needs a new current-base lease and a ready verifier-route preflight.",
+        "The adapter frozen-V2 gate and terminal-delta work, if later authorized, require separate current-base action and explicit permission for prior-task-derived case processing; no current baseline grants credit."
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Current Stage-1 task sequence and contamination evidence.",
+        "Existing all-family capability-obsolescence campaign remains active without extra capability credit.",
+        "The earlier tournament provisionally selected Jevos-v2, but current main later modified the tournament and added a fresh task-result record. Those contents remain unread here, so the prior selection is held and no new route is adopted. Runtime hash checks remain mandatory; the six local synthetic adapter tests are not capability evidence."
+      ],
+      "fresh_reuse_plan": "Preserve Stage-1 primacy. Current pointer metadata names rank 5 on the high-throughput route, but do not read its task instructions, lease, or result and do not execute/reorder it unless the user explicitly reverses the standing skip instruction. For the cognitive lane, obtain explicit permission before reviewing new tournament/task-result content. Keep runtime/model hash checks mandatory before any future use."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused the current pointer, hierarchy, queue, validator, active campaign, and current-base execution-truth law.",
+        "Reused the exact rank-4 run outcome and generic /app controller contract; did not redownload or inspect task files.",
+        "Reused current-main route/tournament/runtime-rebind summaries plus the generic kernel candidate; verified workflow/artifact metadata only, no artifact payload or 28-case row access.",
+        "Ran six mocked-response canaries against the local kernel candidate; no endpoint call. Refreshed rank-6 freshness with repository metadata only."
+      ],
+      "search_stop_decision": "The current base and hierarchy have been reviewed at summary-field level. Exact mirrors are normalized on this branch. Stop after the exact-base trusted guard, targeted mirror/firewall unit tests, sensitivity tests, and JSON equality checks; do not open task materials or execute rank 6 in this reconciliation.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "ALIGN_POINTER_WITH_ACTIVE_ALL_FAMILY_PROGRAM",
+      "RECORD_GSEA_VERIFIER_INFRA_FAILURE_WITH_ZERO_CREDIT",
+      "RECONCILE_POINTWISE_CAMPAIGN_RUNTIME_DRIFT_AND_KERNEL_CANDIDATE",
+      "USE_MUTABLE_JEVOS_RELEASE_WITHOUT_HASH_CHECK",
+      "PROMOTE_KERNEL_WITHOUT_FROZEN_ADAPTER_GATE",
+      "PROCESS_PRIOR_TASK_DERIVED_FROZEN_CASES_WITHOUT_PERMISSION",
+      "LEASE_RANK6_BEFORE_VERIFIER_PREFLIGHT",
+      "REVERT_HIERARCHY_TO_OLD_PROGRAM",
+      "BYPASS_TRUSTED_GUARD",
+      "REPLAY_GSEA_OR_REORDER_RANK5",
+      "READ_RANK6_TASK_MATERIALS_BEFORE_LEASE",
+      "WRITE_TO_RUNNER_BRANCH_OR_PR_COMMENT_TRANSPORT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "USE_MUTABLE_JEVOS_RELEASE_WITHOUT_RUNTIME_AND_MODEL_HASH_CHECK",
+      "PROMOTE_KERNEL_WITHOUT_FROZEN_SET_AND_TERMINAL_DELTA_GATES",
+      "PROCESS_PRIOR_TASK_DERIVED_FROZEN_CASES_WITHOUT_PERMISSION",
+      "LEASE_RANK6_BEFORE_VERIFIER_PREFLIGHT",
+      "REVERT_HIERARCHY_TO_OLD_PROGRAM",
+      "BYPASS_TRUSTED_GUARD",
+      "REPLAY_GSEA_OR_REORDER_RANK5",
+      "READ_RANK6_TASK_MATERIALS_BEFORE_LEASE",
+      "WRITE_TO_RUNNER_BRANCH_OR_PR_COMMENT_TRANSPORT"
+    ],
+    "selected_surviving_route": "EXACT_MIRROR_RECONCILIATION_TO_HIERARCHY__PRESERVE_NO_TASK_TOML_BOUNDARY__NO_EXECUTION",
+    "why_selected_route_is_fastest_sufficient": "The remaining defect is purely control-plane metadata: the branch’s active hierarchy already selects the rank-6 action, but current-base pointer, queue, and target mirrors do not all match it. Copying one exact hierarchy action class to every mirror is the smallest sufficient repair; adding the existing explicit clean-boundary/no-task-TOML qualifier preserves the user boundary. No task instructions/results or runner state need to be read, and no task or score is produced by this action.",
+    "expected_parent_level_state_change": "Restore exact current-base consistency across the canonical pointer, active hierarchy, immediate queue, target record, and scoreboard: use the hierarchy-authoritative rank-6 high-throughput action class, preserving the explicit clean-boundary and no-task-TOML constraint. Keep the Stage-1 target/blocker and zero-credit accounting unchanged; preserve the historical rank-4 GSEA no-pass disposition, and record newer result paths only as unread. This reconciliation performs no task lease/execution, reads no task-specific instruction/result, reorders no frozen sample, and claims no new pass, score, or capability credit.",
+    "stop_condition": "Stop when pointer, hierarchy, queue, target record, hierarchy progress event, and scoreboard next-action fields exactly match the current hierarchy action class; the trusted exact-head guard, active-target mirror/firewall unit tests, action-intent sensitivity checks, and cross-surface JSON checks pass; and the rank-4 disposition remains no-pass/no-credit. Do not fetch or read task TOML/instructions or task-specific results, execute rank 6, reorder rank 5, or claim any new score/pass/credit in this mirror-reconciliation action. The rank-6 route remains a subsequent action under the current canonical control plane.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is a canonical pointer/hierarchy reconciliation and no-credit evidence record; it does not select or execute a capability-acquisition route."
+    }
+  }
+}
