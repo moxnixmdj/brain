@@ -118,6 +118,7 @@
   "required_prequalification_controls": {
     "applies_when": "ACTION_CAN_EXPOSE_OR_SPEND_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_PROMOTE_OPUS_LEVEL_OWNERSHIP",
     "required_fields": [
+      "source_allowlist_enforced_if_tb4_stage_b",
       "target_version_lock",
       "feasibility_certificate",
       "complete_requirement_graph",
@@ -136,6 +137,7 @@
       "STAGE_A_PRE_EXPOSURE": "No task instruction or task-specific hint may be read. Prove generic route/surface readiness.",
       "STAGE_B_POST_EXPOSURE_PRE_EXECUTION": "Official instruction may be read. No task command or candidate execution. Compile and falsify task-specific plan.",
       "STAGE_C_EXECUTION": "Only after A and B pass; execute once and independently verify."
-    }
+    },
+    "tb4_stage_b_source_allowlist": "canonical/governance/TB4_STAGE_B_SOURCE_ALLOWLIST_V1.json"
   }
 }
