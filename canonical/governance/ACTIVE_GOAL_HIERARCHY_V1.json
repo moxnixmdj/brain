@@ -392,6 +392,17 @@
       "CONFIGURE",
       "INTEGRATE"
     ],
-    "promotion": "TERMINAL_DELTA__ABLATION_RESCUE__DONOR_DELETION__BREADTH"
+    "promotion": "TERMINAL_DELTA__ABLATION_RESCUE__DONOR_DELETION__BREADTH",
+    "first_material_execution_finding": {
+      "rank6_task": "glycan-ms2-elucidation",
+      "disposition": "SPENT_EXECUTION_HANDOFF_FAILURE__NO_CODING_CREDIT__DO_NOT_REPLAY",
+      "evidence_path": "canonical/capabilities/opus55/RANK6_GLYCAN_EXECUTION_HANDOFF_FAILURE_20261001_V1.json",
+      "causal_blocker_removed": "EXECUTION_ARTIFACT_HANDOFF_PATH_MISMATCH",
+      "runner_fix_pr": 290,
+      "runner_fix_commit": "1aa7cfdb299c541dd58278441d8e26f100f9b285",
+      "focused_regression_run": 36828009487,
+      "focused_regression": "PASS"
+    },
+    "next_execution": "NEXT_ELIGIBLE_UNTOUCHED_FROZEN_SAMPLE_TASK_ON_PATCHED_RUNNER__PRESERVE_CLEAN_BOUNDARY__ONE_SHOT_VERIFIER"
   }
 }
