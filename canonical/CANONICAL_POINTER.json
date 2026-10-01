@@ -252,11 +252,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "REISSUE_RANK22_STAGE_C_FROM_CURRENT_GATES__BIND_DERIVED_AUTHORITY_EVENT_CHAIN__THEN_ONE_BUILDER_BURST__FREEZE_OUTPUT__ONE_TERMINAL_VERIFIER",
+    "next_step": "RUN_RANK22_STAGE_C_BUILDER_ONCE__FREEZE_OUTPUT__APPEND_EXECUTION_CONSUMED__SELF_VERIFY__THEN_DERIVE_CAN_VERIFY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "RANK22_PREEXECUTION_GATES_ALL_PASS__FRESH_STAGE_C_LEASE_WITH_DERIVED_AUTHORITY_NOT_YET_REISSUED",
+    "critical_blocker": "RANK22_STAGE_C_DERIVED_AUTHORITY_PASS__ONE_BUILDER_BURST_NOT_YET_CONSUMED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -333,7 +333,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "RANK22_PREEXECUTION_GATES_ALL_PASS__FRESH_STAGE_C_LEASE_WITH_DERIVED_AUTHORITY_NOT_YET_REISSUED",
+    "highest_leverage_capability_gap": "RANK22_STAGE_C_DERIVED_AUTHORITY_PASS__ONE_BUILDER_BURST_NOT_YET_CONSUMED",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -782,7 +782,15 @@
     "behavioral_contract_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "terminal_closure_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "terminal_closure_reducer": "canonical/runtime/terminal_closure_reducer.py",
-    "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json"
+    "prequalification_failure_immunity": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "rank22_active_execution": {
+      "task": "freecad-spring-clip",
+      "rank": 22,
+      "runner_pr": 427,
+      "lease": "canonical/governance/LEASE_FREECAD_SPRING_CLIP_TB4_STAGE_C_20261001_V2.json",
+      "derived_authority": "canonical/governance/FREECAD_SPRING_CLIP_RANK22_DERIVED_AUTHORITY_V1.json",
+      "state": "CAN_EXECUTE_TRUE__EXECUTION_COUNT_0"
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
