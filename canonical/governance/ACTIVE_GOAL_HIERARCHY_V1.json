@@ -315,5 +315,24 @@
     "primary_interface": "POINTWISE_STATE_PLUS_QUESTION_PLUS_ONE_CANDIDATE_TO_CALIBRATED_SCORE",
     "training_policy": "REUSE_AND_PROBE_BEFORE_DISTILLATION",
     "promotion": "TERMINAL_TASK_GAIN_PLUS_ABLATION_RESCUE_PLUS_DONOR_DELETION_REQUIRED"
+  },
+  "execution_truth_and_visibility": {
+    "status": "CANONICAL_MANDATORY_FAIL_CLOSED",
+    "law": "canonical/laws/EXECUTION_TRUTH_AND_VISIBILITY_LAW_V1.md",
+    "execute_means": "MATERIAL_ACTION_NOW_PLUS_OBSERVABLE_EVIDENCE",
+    "non_execution": [
+      "RESEARCH_ONLY",
+      "PLANNING_ONLY",
+      "INSPECTION_ONLY",
+      "DESIGN_ONLY",
+      "SEARCH_ONLY"
+    ],
+    "terminal_states": [
+      "EXECUTED",
+      "PARTIALLY_EXECUTED",
+      "BLOCKED"
+    ],
+    "background_work_claim_requires": "EVIDENCED_PERSISTENT_EXECUTOR_OR_AUTOMATION_REFERENCE",
+    "private_chain_of_thought_disclosure_required": false
   }
 }
