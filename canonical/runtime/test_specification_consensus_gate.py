@@ -1,4 +1,4 @@
-from canonical.runtime.specification_consensus_gate import assess_consensus
+from canonical.runtime.specification_consensus_gate import assess_consensus, source_sentences
 
 SOURCE="The service must retain records for 30 days. Logging is informational. If deletion is requested, the service must delete the record within 24 hours."
 
@@ -43,3 +43,23 @@ def test_one_extractor_is_insufficient():
     out=assess_consensus(SOURCE,x)
     assert out["pass"] is False
     assert "FEWER_THAN_TWO_INDEPENDENT_EXTRACTORS" in out["failures"]
+
+
+def test_source_segmentation_preserves_decimals_dotted_code_and_fenced_schema():
+    src = """Material index is 2.85. Use `mp.ODD_Z`, not `mp.EVEN_Z`. Write `design.npy`.
+
+Schema:
+
+```
+{"fdtd_resolution": 20}
+```
+
+The minimum diameter is 0.12 um, i.e. preserve the feature."""
+    units = source_sentences(src)
+    texts = [x["text"] for x in units]
+    assert any("2.85" in x for x in texts)
+    assert any("mp.ODD_Z" in x and "mp.EVEN_Z" in x for x in texts)
+    assert any("design.npy" in x for x in texts)
+    assert any('"fdtd_resolution": 20' in x for x in texts)
+    assert any("0.12 um, i.e. preserve the feature." in x for x in texts)
+    assert not any(x in {"85", "ODD_Z", "npy"} for x in texts)
