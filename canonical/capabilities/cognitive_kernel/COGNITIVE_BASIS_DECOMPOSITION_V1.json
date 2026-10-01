@@ -1,0 +1,169 @@
+{
+  "schema": "PROJECT_BRAIN_COGNITIVE_BASIS_DECOMPOSITION_V1",
+  "status": "HYPOTHESIS__FALSIFICATION_REQUIRED__ZERO_CAPABILITY_CREDIT",
+  "terminal_objective": "PERMANENTLY_OWN_ALL_19_USEFUL_TARGET_CAPABILITY_FAMILIES_AT_EQUAL_OR_BETTER_LEVEL",
+  "scope": "17_UNFINISHED_FAMILIES_ONLY",
+  "decomposition_rule": {
+    "D": "deterministic software/procedure; reuse or implement, never train",
+    "R": "external/JIT knowledge retrieval; do not internalize as weights",
+    "C": "bounded learned judgment, ranking, gating, scoring or classification; prime Jev-style target",
+    "G": "genuinely generative residual where the correct candidate may not yet exist"
+  },
+  "candidate_shared_decision_basis": [
+    "RELEVANCE_FILTER",
+    "STATE_CLASSIFICATION",
+    "NEXT_ACTION_RANKING",
+    "TOOL_ROUTING",
+    "INFORMATION_GAIN_RANKING",
+    "ROOT_CAUSE_RANKING",
+    "EVIDENCE_SUFFICIENCY",
+    "SCOPE_CONSTRAINT_JUDGMENT",
+    "PROGRESS_SUCCESS_VERIFICATION",
+    "STOP_RETRY_ESCALATE",
+    "DELEGATION_TARGET_RANKING",
+    "RISK_UNCERTAINTY_CALIBRATION"
+  ],
+  "candidate_generative_basis": [
+    "HYPOTHESIS_GENERATION",
+    "PLAN_GENERATION",
+    "CODE_OR_STRUCTURED_ARTIFACT_GENERATION",
+    "EXPLANATION_AND_SYNTHESIS_GENERATION",
+    "NOVEL_DOMAIN_MODEL_CONSTRUCTION"
+  ],
+  "families": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "D_R_already_separable": ["repository/tool execution", "tests/verifiers", "JIT documentation"],
+      "C": ["NEXT_ACTION_RANKING", "TOOL_ROUTING", "ROOT_CAUSE_RANKING", "PROGRESS_SUCCESS_VERIFICATION", "STOP_RETRY_ESCALATE", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["HYPOTHESIS_GENERATION", "PLAN_GENERATION", "CODE_OR_STRUCTURED_ARTIFACT_GENERATION"],
+      "critical_unknown": "How much of coding score comes from bounded policy judgment versus generative patch synthesis."
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "D_R_already_separable": ["document engines", "spreadsheet operations", "JIT authoritative sources"],
+      "C": ["RELEVANCE_FILTER", "TOOL_ROUTING", "EVIDENCE_SUFFICIENCY", "SCOPE_CONSTRAINT_JUDGMENT", "PROGRESS_SUCCESS_VERIFICATION"],
+      "G": ["PLAN_GENERATION", "EXPLANATION_AND_SYNTHESIS_GENERATION", "CODE_OR_STRUCTURED_ARTIFACT_GENERATION"],
+      "critical_unknown": "Whether professional judgment is mostly shared bounded evaluation or domain-specific generation."
+    },
+    {
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "D_R_already_separable": ["tool invocation", "state persistence", "JIT tool documentation"],
+      "C": ["STATE_CLASSIFICATION", "NEXT_ACTION_RANKING", "TOOL_ROUTING", "INFORMATION_GAIN_RANKING", "STOP_RETRY_ESCALATE", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["HYPOTHESIS_GENERATION", "PLAN_GENERATION"],
+      "critical_unknown": "Whether one shared action policy generalizes across tool domains without interference."
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "D_R_already_separable": ["workflow APIs", "deterministic transformations", "JIT business records"],
+      "C": ["NEXT_ACTION_RANKING", "TOOL_ROUTING", "SCOPE_CONSTRAINT_JUDGMENT", "PROGRESS_SUCCESS_VERIFICATION", "STOP_RETRY_ESCALATE"],
+      "G": ["PLAN_GENERATION"],
+      "critical_unknown": "How much workflow variability requires novel planning versus routing among known operations."
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "D_R_already_separable": ["symbolic tools", "calculators", "JIT literature"],
+      "C": ["RELEVANCE_FILTER", "TOOL_ROUTING", "INFORMATION_GAIN_RANKING", "EVIDENCE_SUFFICIENCY", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["HYPOTHESIS_GENERATION", "PLAN_GENERATION", "EXPLANATION_AND_SYNTHESIS_GENERATION", "NOVEL_DOMAIN_MODEL_CONSTRUCTION"],
+      "critical_unknown": "Whether domain transfer needs a general generative world-model residual beyond retrieval plus shared judgment."
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "D_R_already_separable": ["search/retrieval", "calculators", "experiment execution where deterministic"],
+      "C": ["RELEVANCE_FILTER", "INFORMATION_GAIN_RANKING", "EVIDENCE_SUFFICIENCY", "ROOT_CAUSE_RANKING", "PROGRESS_SUCCESS_VERIFICATION", "STOP_RETRY_ESCALATE", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["HYPOTHESIS_GENERATION", "PLAN_GENERATION", "EXPLANATION_AND_SYNTHESIS_GENERATION", "NOVEL_DOMAIN_MODEL_CONSTRUCTION"],
+      "critical_unknown": "Size of the irreducible hypothesis-generation residual after evidence ranking is factored out."
+    },
+    {
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "D_R_already_separable": ["rendering", "OCR/layout extraction when deterministic", "JIT metadata"],
+      "C": ["RELEVANCE_FILTER", "STATE_CLASSIFICATION", "EVIDENCE_SUFFICIENCY"],
+      "G": ["EXPLANATION_AND_SYNTHESIS_GENERATION"],
+      "critical_unknown": "Whether a separate learned visual representation module is unavoidable or bounded multimodal decisions are sufficient."
+    },
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "D_R_already_separable": ["browser/computer actuation", "DOM/accessibility extraction", "JIT page content"],
+      "C": ["STATE_CLASSIFICATION", "NEXT_ACTION_RANKING", "TOOL_ROUTING", "PROGRESS_SUCCESS_VERIFICATION", "STOP_RETRY_ESCALATE", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["PLAN_GENERATION", "HYPOTHESIS_GENERATION"],
+      "critical_unknown": "Whether robust GUI grounding requires a dedicated learned visual encoder beyond shared state/action judgment."
+    },
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "D_R_already_separable": ["spreadsheets", "exact math", "JIT filings/market data"],
+      "C": ["RELEVANCE_FILTER", "EVIDENCE_SUFFICIENCY", "RISK_UNCERTAINTY_CALIBRATION", "PROGRESS_SUCCESS_VERIFICATION"],
+      "G": ["EXPLANATION_AND_SYNTHESIS_GENERATION", "NOVEL_DOMAIN_MODEL_CONSTRUCTION"],
+      "critical_unknown": "How much expert financial judgment remains after authoritative data and exact computation are removed."
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "D_R_already_separable": ["hard policy gates", "explicit constraints", "durable receipts"],
+      "C": ["RELEVANCE_FILTER", "SCOPE_CONSTRAINT_JUDGMENT", "RISK_UNCERTAINTY_CALIBRATION", "STOP_RETRY_ESCALATE"],
+      "G": ["PLAN_GENERATION"],
+      "critical_unknown": "Whether scope judgment can be isolated without degrading helpfulness on ambiguous tasks."
+    },
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "D_R_already_separable": ["leases", "identity", "fan-in", "exactly-once mechanics"],
+      "C": ["DELEGATION_TARGET_RANKING", "NEXT_ACTION_RANKING", "PROGRESS_SUCCESS_VERIFICATION", "STOP_RETRY_ESCALATE", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["PLAN_GENERATION"],
+      "critical_unknown": "Whether adaptive decomposition/delegation is one shared ranking policy or requires generative task decomposition."
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "D_R_already_separable": ["fail-closed guards", "immutable evidence", "deterministic rollback/retry"],
+      "C": ["ROOT_CAUSE_RANKING", "EVIDENCE_SUFFICIENCY", "PROGRESS_SUCCESS_VERIFICATION", "STOP_RETRY_ESCALATE", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["HYPOTHESIS_GENERATION", "PLAN_GENERATION"],
+      "critical_unknown": "How much recovery quality depends on novel failure hypotheses versus ranking existing diagnoses."
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "D_R_already_separable": ["DOCX/PDF/XLSX/PPTX engines", "format validation", "JIT templates/reference material"],
+      "C": ["SCOPE_CONSTRAINT_JUDGMENT", "PROGRESS_SUCCESS_VERIFICATION", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["CODE_OR_STRUCTURED_ARTIFACT_GENERATION", "EXPLANATION_AND_SYNTHESIS_GENERATION"],
+      "critical_unknown": "Whether visual/professional quality requires specialized learned evaluators or only a shared critic plus deterministic engines."
+    },
+    {
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "D_R_already_separable": ["style constraints", "citation/evidence plumbing", "JIT facts"],
+      "C": ["RELEVANCE_FILTER", "SCOPE_CONSTRAINT_JUDGMENT", "EVIDENCE_SUFFICIENCY", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["EXPLANATION_AND_SYNTHESIS_GENERATION"],
+      "critical_unknown": "Amount of quality attributable to generation versus bounded editing/evaluation loops."
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "D_R_already_separable": ["tool registry search", "schema parsing", "JIT documentation"],
+      "C": ["RELEVANCE_FILTER", "TOOL_ROUTING", "INFORMATION_GAIN_RANKING", "PROGRESS_SUCCESS_VERIFICATION", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["PLAN_GENERATION"],
+      "critical_unknown": "Whether unseen-tool learning is reducible to documentation retrieval plus generic routing and verification."
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "D_R_already_separable": ["JIT research", "tool discovery", "durable memory"],
+      "C": ["RELEVANCE_FILTER", "INFORMATION_GAIN_RANKING", "EVIDENCE_SUFFICIENCY", "RISK_UNCERTAINTY_CALIBRATION", "STOP_RETRY_ESCALATE"],
+      "G": ["HYPOTHESIS_GENERATION", "PLAN_GENERATION", "NOVEL_DOMAIN_MODEL_CONSTRUCTION"],
+      "critical_unknown": "Whether novel-domain competence needs a general learned model-construction residual or emerges from retrieval plus generic decision primitives."
+    },
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "D_R_already_separable": ["shared state", "invocation plumbing", "provenance", "JIT knowledge"],
+      "C": ["STATE_CLASSIFICATION", "NEXT_ACTION_RANKING", "TOOL_ROUTING", "PROGRESS_SUCCESS_VERIFICATION", "STOP_RETRY_ESCALATE", "RISK_UNCERTAINTY_CALIBRATION"],
+      "G": ["PLAN_GENERATION"],
+      "critical_unknown": "Whether one policy can compose capability modules without cross-domain interference or catastrophic routing errors."
+    }
+  ],
+  "falsification_sequence": [
+    "Probe bounded primitives across multiple domains using one unchanged decision substrate.",
+    "Increase difficulty using spent/public calibration tasks while keeping domain labels hidden from the shared kernel where possible.",
+    "Compare one shared kernel against per-domain kernels under matched parameter/resource budgets.",
+    "Ablate each primitive head or routing feature and measure terminal-task loss, not classifier accuracy alone.",
+    "Escalate to training/distillation only for primitives that existing reusable models cannot satisfy.",
+    "After bounded decisions are factored out, measure the remaining generative residual; do not assume it is small.",
+    "Promote no capability family until exact Brain route passes independent held-out family-level verification."
+  ],
+  "current_probe": {
+    "intent": "canonical/action_intents/2026-10-01_SHARED_COGNITIVE_BASIS_JEV_PROBE_V1.json",
+    "harness": "canonical/capabilities/cognitive_kernel/cognitive_basis_probe_v1.py",
+    "cases": "canonical/capabilities/cognitive_kernel/cognitive_basis_probe_cases_v1.json",
+    "status": "RUNNING_LOCAL_OPEN_MODEL_TRIAL"
+  }
+}
