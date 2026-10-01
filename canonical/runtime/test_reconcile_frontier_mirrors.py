@@ -98,13 +98,20 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         record = self.read(record_rel)
         record["residual_gap"] = STALE_BLOCKER
         record["next_action"] = STALE_ACTION
+        # enforce_goal_hierarchy.py checks the target record's atomic pair, so the
+        # tool must maintain it as well as residual_gap/next_action. Seeded only
+        # where the live record carries those keys.
+        for key, stale in (("current_atomic_blocker", STALE_BLOCKER),
+                           ("current_atomic_next_action", STALE_ACTION)):
+            if key in record:
+                record[key] = stale
         self.write(record_rel, record)
 
     def mirror_values(self):
         pointer, queue = self.read(POINTER), self.read(QUEUE)
         scoreboard = self.read(SCOREBOARD)
         record = self.read(f"canonical/capabilities/frontier/{self.target}.json")
-        return {
+        values = {
             "pointer.critical_blocker": pointer["current_frontier"]["critical_blocker"],
             "pointer.next_step": pointer["current_frontier"]["next_step"],
             "queue.exact_blocker": queue["immediate_frontier"]["exact_blocker"],
@@ -117,6 +124,10 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
             "record.residual_gap": record["residual_gap"],
             "record.next_action": record["next_action"],
         }
+        for key in ("current_atomic_blocker", "current_atomic_next_action"):
+            if key in record:
+                values["record." + key] = record[key]
+        return values
 
     # --- detection and repair ----------------------------------------------
     def test_live_repository_is_reconciled(self):
@@ -166,6 +177,29 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         for key, value in values.items():
             expected = self.blocker if "blocker" in key or "residual_gap" in key else self.action
             self.assertEqual(value, expected, key)
+
+    def test_atomic_pair_drift_alone_is_detected_and_repaired(self):
+        # The guard checks the target record's current_atomic_* pair. A tool that
+        # maintained only residual_gap/next_action would report MIRRORS_CONSISTENT
+        # on a tree enforce_goal_hierarchy.py fails, which is the fail-open shape
+        # this suite exists to prevent.
+        record_rel = f"canonical/capabilities/frontier/{self.target}.json"
+        record = self.read(record_rel)
+        if "current_atomic_blocker" not in record:
+            self.skipTest("live target record carries no atomic pair")
+        record["current_atomic_blocker"] = STALE_BLOCKER
+        record["current_atomic_next_action"] = STALE_ACTION
+        self.write(record_rel, record)
+        code, out = self.run_tool(write=False, fix_control_paths=False,
+                                  align_hierarchy_progress_event=False)
+        self.assertEqual(code, 1, out)
+        self.assertIn("current_atomic_blocker", out)
+        code, out = self.run_tool(write=True, fix_control_paths=False,
+                                  align_hierarchy_progress_event=False)
+        self.assertEqual(code, 0, out)
+        repaired = self.read(record_rel)
+        self.assertEqual(repaired["current_atomic_blocker"], self.blocker)
+        self.assertEqual(repaired["current_atomic_next_action"], self.action)
 
     def test_repair_is_idempotent(self):
         self.seed_stale_mirrors()

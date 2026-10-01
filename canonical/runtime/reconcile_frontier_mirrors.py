@@ -127,12 +127,18 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
 
     counters_before=json.dumps(scoreboard.get("counters_since_epoch_start"),sort_keys=True)
 
-    # --- the nine mirror fields -------------------------------------------
+    # --- the eleven mirror fields -----------------------------------------
     for doc,keys in (
         (pointer,("current_frontier","critical_blocker")),
         (queue,("immediate_frontier","exact_blocker")),
         (scoreboard,("active_frontier_accounting","residual_gap")),
         (record,("residual_gap",)),
+        # enforce_goal_hierarchy.py checks the target record's atomic pair, while
+        # tests/test_frontier_target_mirror.py checks residual_gap/next_action via
+        # active_target_mirror_errors. Both pairs are mirrors of the same authority
+        # fields, so the tool maintains all of them; covering only one half would
+        # let test_live_repository_is_reconciled pass on a tree the guard fails.
+        (record,("current_atomic_blocker",)),
     ):
         changed=doc.put(blocker,*keys)
         if changed: changes.append(changed)
@@ -142,6 +148,7 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool,
         (scoreboard,("next_progress_event_target",)),
         (scoreboard,("active_frontier_accounting","next_required_action")),
         (record,("next_action",)),
+        (record,("current_atomic_next_action",)),
     ):
         changed=doc.put(action,*keys)
         if changed: changes.append(changed)
