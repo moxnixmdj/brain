@@ -252,11 +252,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_RANK22_STAGE_C_BUILDER_ONCE__FREEZE_OUTPUT__APPEND_EXECUTION_CONSUMED__SELF_VERIFY__THEN_DERIVE_CAN_VERIFY",
+    "next_step": "HARDEN_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE__VERIFY_FAIL_CLOSED__THEN_RECOMPUTE_NEXT_UNTOUCHED_SAMPLE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "RANK22_STAGE_C_DERIVED_AUTHORITY_PASS__ONE_BUILDER_BURST_NOT_YET_CONSUMED",
+    "critical_blocker": "GENERIC_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE_NOT_YET_HARDENED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -333,7 +333,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "RANK22_STAGE_C_DERIVED_AUTHORITY_PASS__ONE_BUILDER_BURST_NOT_YET_CONSUMED",
+    "highest_leverage_capability_gap": "GENERIC_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE_NOT_YET_HARDENED",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -763,7 +763,7 @@
     "active_stage1_task": {
       "rank": 22,
       "task": "freecad-spring-clip",
-      "state": "PREEXECUTION_GATES_PASS__FRESH_STAGE_C_LEASE_REQUIRED"
+      "state": "SPENT_BUILDER_RUNTIME_FAILURE__NO_REPLAY"
     },
     "latest_clean_stage1_result": {
       "task": "gsea-proteomics",
@@ -970,7 +970,8 @@
     "minimum_reality_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
     "new_fresh_evidence_requires_minimum_reality_cut": true,
     "reacquire_existing_terminal_information_without_invalidation": false,
-    "current_rank22_non_regression": "CONTINUE_IF_DERIVED_CAN_EXECUTE_TRUE_AND_AUTHORITY_CURRENT"
+    "current_rank22_non_regression": "INVALIDATED_BY_SPENT_BUILDER_FAILURE__NO_LONGER_APPLIES",
+    "minimum_reality_cut_now_fully_active": true
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
