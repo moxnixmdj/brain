@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_BRAIN_BYTES__5_OF_5",
+  "artifact": "canonical/runtime/execution_authority_reducer.py",
+  "brain_blob_sha": "2081a1bad9e6c97b3c4988d7962c7bb648e94796",
+  "runner": {
+    "repo": "moxnixmdj/verification-capsule-runner",
+    "pr": 428,
+    "merge_commit": "6415f5ecdcf198fe78db50a48966a32bcc422ef0",
+    "workflow_run_id": 36936535241,
+    "job_id": 110618002476,
+    "mirrored_blob_sha": "2081a1bad9e6c97b3c4988d7962c7bb648e94796",
+    "exact_blob_match": true,
+    "tests_run": 5,
+    "tests_passed": 5
+  },
+  "verified_properties": [
+    "EXACT_CARRIER_IDENTITY_CHANGES_AUTHORITY_STATE_HASH",
+    "SECOND_CARRIER_OPEN_WITHOUT_CLOSE_FAILS_CLOSED",
+    "EXECUTION_CONSUMPTION_FLIPS_CAN_EXECUTE_FALSE_CAN_VERIFY_TRUE",
+    "CONSUMPTION_WITHOUT_OPEN_CARRIER_IS_INVALID",
+    "REVOCATION_AND_CARRIER_CLOSE_REMOVE_ALL_AUTHORITY"
+  ],
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
