@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SHARED_COGNITIVE_BASIS_JEV_PROBE_20261001_V1",
+  "status": "EXECUTING__ZERO_CREDIT_DIAGNOSTIC",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "action_kind": "SHARED_COGNITIVE_BASIS_DISCOVERY",
+  "hypothesis": "A substantial fraction of unfinished capability families share a small set of reusable bounded decision primitives that can be implemented by Brain-owned Jev-style decision kernels, leaving deterministic software, JIT knowledge, and genuinely generative residuals separate.",
+  "why_now": "The remaining 17 unfinished families are already grouped into shared residual lanes. Before family-by-family harvesting or training, test whether cross-domain choice and judgment can share one decision substrate.",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "no_hidden_chain_of_thought_dependency": true,
+    "no_untouched_qualification_task_exposure": true,
+    "donor_or_public_service_is_probe_only": true
+  },
+  "initial_shared_primitives": [
+    "NEXT_ACTION_SELECTION",
+    "TOOL_SELECTION",
+    "ROOT_CAUSE_RANKING",
+    "EVIDENCE_SUFFICIENCY",
+    "VERIFICATION_JUDGMENT",
+    "SCOPE_JUDGMENT",
+    "STOP_CONTINUE",
+    "ESCALATION_JUDGMENT"
+  ],
+  "candidate_probe_substrates": [
+    {
+      "repo": "featherless-ai/simple-jev",
+      "license": "Apache-2.0",
+      "role": "model-agnostic state-plus-questions logits-based decision interface",
+      "status": "ADMISSIBLE_PROBE_CANDIDATE__ZERO_CREDIT"
+    },
+    {
+      "repo": "Zefan-Cai/Open-Jev",
+      "license": "MIT",
+      "role": "open trained decision heads/adapters and datasets for later donor-independent evaluation",
+      "status": "ADMISSIBLE_FOLLOWUP_CANDIDATE__ZERO_CREDIT"
+    }
+  ],
+  "experiment": {
+    "stage_0": "Run oracle self-test to verify Brain probe mechanics.",
+    "stage_1": "Run the exact same Brain probe against a Simple-JEV-compatible public endpoint across multiple domains.",
+    "stage_2": "If stage_1 shows nontrivial cross-domain competence, replace synthetic sanity cases with frozen spent/public calibration tasks and an untouched held-out set. Compare shared versus per-domain heads and generator-only baseline.",
+    "stage_3": "Only after causal benefit is established, test the smallest locally runnable permissive checkpoint/configuration and perform ablation, rescue, specificity, held-out, donor-deletion and exact-Brain-route verification."
+  },
+  "interpretation": {
+    "stage_1_pass_means": "The common decision interface is technically viable across domains and merits harder falsification.",
+    "stage_1_pass_does_not_mean": "Opus parity, capability ownership, causal sufficiency, or a need to train a new model.",
+    "stage_1_fail_means": "Localize whether the failure is model choice, prompt/interface, primitive definition, or the shared-kernel hypothesis before any training."
+  },
+  "promotion_gate": "ZERO_CAPABILITY_CREDIT_UNTIL_WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1_CAUSAL_AND_HELDOUT_GATES_PASS",
+  "stop_rule": "If an already-owned deterministic or simpler reusable route meets the target bar, stop neural harvesting for that primitive."
+}
