@@ -1,0 +1,160 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_MINIMUM_REALITY_CUT_INPUT_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED_PREPARATION__NO_EXACT_GLOBAL_CUT_CLAIM",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_binding": {
+    "global_cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "terminal_manifest": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "campaign": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
+    "atomic_map": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json"
+  },
+  "distinctions": [
+    {
+      "id": "D_A_CODING_OPUS_PARITY",
+      "source": "ADVANCED_AGENTIC_CODING unresolved benchmark-level parity proof"
+    },
+    {
+      "id": "D_B_PROFESSIONAL_ARTIFACT_MECHANISMS",
+      "source": "lane B reusable DOCX/PDF/advanced artifact mechanism gap"
+    },
+    {
+      "id": "D_B_PROFESSIONAL_JUDGMENT_AND_COMMUNICATION",
+      "source": "professional work / financial analysis / communication open behavioral closure"
+    },
+    {
+      "id": "D_B_VISION_DENSE_DOC_RESIDUAL",
+      "source": "vision/dense-document learned residual after deterministic parsing"
+    },
+    {
+      "id": "D_C_BROWSER_TOOL_CONTROL",
+      "source": "browser/tool execution and tool-selection residuals"
+    },
+    {
+      "id": "D_C_GENERAL_MULTI_TOOL_COMPOSITION",
+      "source": "multi-tool agency / workflow / composition / cognitive delegation residuals"
+    },
+    {
+      "id": "D_D_RESEARCH_LOOP",
+      "source": "research planning/evidence loop transfer"
+    },
+    {
+      "id": "D_D_UNKNOWN_DOMAIN_LEARNED_RESIDUAL",
+      "source": "unknown-domain adaptation donor-independent residual"
+    },
+    {
+      "id": "D_E_ROOT_CAUSE_SELF_CRITIQUE",
+      "source": "self-verification/debugging remaining cognitive root-cause residual"
+    },
+    {
+      "id": "D_E_SCOPE_JUDGMENT",
+      "source": "instruction-following/scope/judgment remaining residual"
+    },
+    {
+      "id": "D_SPEC_RAW_SOURCE_TO_REQUIREMENTS",
+      "source": "ATOMIC_CAUSAL current system frontier"
+    },
+    {
+      "id": "D_SPEC_GENERAL_NAMED_METHOD_RULE_SET",
+      "source": "ATOMIC_CAUSAL current system frontier"
+    },
+    {
+      "id": "D_SPEC_ENGINEERING_DRAWING_TO_PARTSPEC",
+      "source": "ATOMIC_CAUSAL current system frontier"
+    },
+    {
+      "id": "D_SPEC_ALTERNATIVE_INTERPRETATIONS",
+      "source": "ATOMIC_CAUSAL current system frontier"
+    },
+    {
+      "id": "D_CAUSE_GENERATION_NON_TELEMETRY",
+      "source": "ATOMIC_CAUSAL NF_UPSTREAM_ROOT_CAUSAL_LOCALIZATION_001"
+    }
+  ],
+  "existing_evidence_closures": [
+    "EXACT_SYMBOLIC_COMPUTATION",
+    "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "NORMALIZED_REQUIREMENT_GRAPH_TO_TEST_OBLIGATIONS",
+    "EXPLICIT_SOURCE_SCOPE_VARIATION_TO_NONEXAMPLE_OBLIGATION",
+    "SA_CCR_LINEAR_CREDIT_METHOD_CALCULATION_GRAPH",
+    "NUMERIC_TELEMETRY_CAUSE_CANDIDATE_GENERATION",
+    "PC_STABLE_SKELETON_AND_IDENTIFIABLE_CPDAG_ORIENTATION",
+    "NARROW_RESIDUAL_CAUSE_RANKING"
+  ],
+  "candidate_observations": [
+    {
+      "id": "O_A_MATCHED_CODING_PARITY",
+      "covers": [
+        "D_A_CODING_OPUS_PARITY"
+      ],
+      "evidence_basis": "ownership matrix requires additional distinct fresh Terminal-Bench and matched coding bars",
+      "exact_cost_known": false
+    },
+    {
+      "id": "O_B_GENOFFICE_INTERNALIZE_VERIFY",
+      "covers": [
+        "D_B_PROFESSIONAL_ARTIFACT_MECHANISMS"
+      ],
+      "evidence_basis": "campaign + ownership matrix identify genspark-ai/genoffice Apache-2.0 candidate",
+      "exact_cost_known": false
+    },
+    {
+      "id": "O_C_BROWSER_AGENT_MECHANISM_DIFFERENTIAL",
+      "covers": [
+        "D_C_BROWSER_TOOL_CONTROL"
+      ],
+      "evidence_basis": "campaign identifies trymeka/agent and visnia-ai/browser-agent candidates",
+      "exact_cost_known": false
+    },
+    {
+      "id": "O_D_DEEPRESEARCH_FRAMEWORK_TRANSFER",
+      "covers": [
+        "D_D_RESEARCH_LOOP"
+      ],
+      "evidence_basis": "campaign identifies Alibaba-NLP/DeepResearch candidate",
+      "exact_cost_known": false
+    },
+    {
+      "id": "O_E_FAILURE_DIAGNOSIS_DIFFERENTIAL",
+      "covers": [
+        "D_E_ROOT_CAUSE_SELF_CRITIQUE",
+        "D_E_SCOPE_JUDGMENT"
+      ],
+      "evidence_basis": "campaign identifies ReflexioAI/reflexio and microsoft/AgentRx candidates",
+      "exact_cost_known": false
+    },
+    {
+      "id": "O_SPEC_ENGINEERING_DRAWING_WHITEBOX",
+      "covers": [
+        "D_SPEC_ENGINEERING_DRAWING_TO_PARTSPEC"
+      ],
+      "evidence_basis": "atomic map explicitly names permissive white-box donor search as next action",
+      "exact_cost_known": false
+    }
+  ],
+  "uncovered_distinctions": [
+    "D_B_PROFESSIONAL_JUDGMENT_AND_COMMUNICATION",
+    "D_B_VISION_DENSE_DOC_RESIDUAL",
+    "D_C_GENERAL_MULTI_TOOL_COMPOSITION",
+    "D_D_UNKNOWN_DOMAIN_LEARNED_RESIDUAL",
+    "D_SPEC_RAW_SOURCE_TO_REQUIREMENTS",
+    "D_SPEC_GENERAL_NAMED_METHOD_RULE_SET",
+    "D_SPEC_ALTERNATIVE_INTERPRETATIONS",
+    "D_CAUSE_GENERATION_NON_TELEMETRY"
+  ],
+  "exact_cut_blockers": [
+    "CANDIDATE_OBSERVATION_COVERAGE_IS_INCOMPLETE_FOR_EIGHT_TERMINAL_DISTINCTIONS",
+    "LAW_REQUIRES_WALL_CLOCK_AWARE_COST_ORDERING_BUT_EVIDENCED_COMPARABLE_COSTS_ARE_NOT_YET_BOUND",
+    "THEREFORE_RUNNING_MINIMUM_REALITY_CUT_PY_NOW_COULD_NOT_TRUTHFULLY CLAIM_THE_GLOBAL_EXACT_MINIMUM"
+  ],
+  "next_required_action": [
+    "SATURATE_EXISTING_BRAIN_AND_OPEN_SOURCE_EVIDENCE_FOR_THE_EIGHT_UNCOVERED_DISTINCTIONS",
+    "DECLARE_ONLY_EVIDENCE_BACKED_CANDIDATE_OBSERVATIONS_AND_COVERAGE",
+    "BIND_COMPARABLE_COST_ORDER_OR_PROVE_DOMINANCE",
+    "THEN_RUN_EXACT_MINIMUM_REALITY_CUT"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
