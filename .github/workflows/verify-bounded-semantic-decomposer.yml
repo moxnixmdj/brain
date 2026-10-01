@@ -1,0 +1,23 @@
+name: Verify bounded semantic decomposer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/bounded_semantic_decomposer.py
+      - canonical/tests/test_bounded_semantic_decomposer.py
+      - .github/workflows/verify-bounded-semantic-decomposer.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_bounded_semantic_decomposer
