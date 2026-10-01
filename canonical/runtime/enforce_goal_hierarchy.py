@@ -46,12 +46,18 @@ PROTECTED_GUARD_PATHS={
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V9.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V9.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V10.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V5.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V9.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
     "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
@@ -969,10 +975,10 @@ def main():
     accounting=scoreboard.get("active_frontier_accounting") or {}
     if str(accounting.get("parent_frontier_capability") or "")!=str(hierarchy.get("active_capability_target") or ""):
         fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
-    if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
+    if str(scoreboard.get("next_required_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
-    if str(hierarchy.get("next_progress_event_target") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-        fail("HIERARCHY_NEXT_PROGRESS_EVENT_TARGET_MISMATCH")
+    if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_progress_event_target") or ""):
+        fail("SCOREBOARD_HIERARCHY_NEXT_PROGRESS_EVENT_MISMATCH")
 
     target_id=str(hierarchy.get("active_capability_target") or "").strip()
     target_path="canonical/capabilities/frontier/"+target_id+".json" if target_id else ""
@@ -992,10 +998,10 @@ def main():
     if tuple(boot.get("deletion_first_route_order") or ())!=OBS_DELETION_ORDER:
         fail("POINTER_WHITE_BOX_ROUTE_ORDER_MISMATCH")
     expected_control_paths={
-        "pre_action_gate_path":"canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V9.json",
-        "goal_hierarchy_action_gate_path":"canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json",
+        "pre_action_gate_path":"canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V11.json",
+        "goal_hierarchy_action_gate_path":"canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
         "recursive_obs_receipt_schema_path":"canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
-        "recursive_obs_action_intent_template_path":"canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
+        "recursive_obs_action_intent_template_path":"canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
         "capability_acquisition_engine_law_path":"canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
         "capability_arbitrage_strategy_path":"canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
         "frontier_capability_obsolescence_mission_lock_path":"canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
