@@ -60,7 +60,7 @@
     ]
   },
   "promotion_rule": "ZERO_OPUS_CREDIT_UNTIL_A_DISTINCT_FRESH_BRAIN_CONFIGURED_ROUTE_WITH_RUNTIME_ORACLE_COVERAGE_IS_INDEPENDENTLY_VERIFIED_GE_OPUS55_AND_ATTRIBUTION_GATE_PASSES",
-  "current_state": "CARGO_FLIGHT_DISPATCH_FRESH_TASK_FAIL__CONSTRAINT_ROLE_AND_SATURATION_GATE_REPAIRED__NEW_DISTINCT_TASK_REQUIRED__ZERO_OPUS_CREDIT",
+  "current_state": "WAL_RECOVERY_ORDERING_FRESH_TASK_VERIFIED_PASS__REWARD_1__STAGE1_COMPARABLE_SCORE_NOT_YET_ESTABLISHED__ZERO_OPUS_CREDIT",
   "contamination_events": [
     "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/verification/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json"
   ],
@@ -109,6 +109,29 @@
       "evidence": "canonical/capabilities/opus55/CARGO_FLIGHT_DISPATCH_TB4_VERIFICATION_FAILURE_20261001_V1.json",
       "capability_credit": 0,
       "may_replay_for_promotion": false
+    },
+    {
+      "task": "wal-recovery-ordering",
+      "benchmark": "Terminal-Bench 4.0",
+      "verdict": "EXECUTED_PASS__REWARD_1__97_OF_97_TESTS_X10_DETERMINISM__TASK_SPENT__REAL_TASK_EVIDENCE",
+      "runner_pr": 266,
+      "workflow_run_id": 36803852769,
+      "session_id": "wal-recovery-ordering-submit-20261001-v2",
+      "evidence": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
+      "capability_credit": 0,
+      "verified_real_task_credit": 1,
+      "may_replay_for_promotion": false
     }
-  ]
+  ],
+  "next_required_action": "EVALUATE_ADDITIONAL_DISTINCT_FRESH_TERMINAL_BENCH_4_TASKS_UNDER_CURRENT_V5_ROUTE__NO_WAL_REPLAY__STOP_ON_MATERIAL_FAILURE__ESTABLISH_COMPARABLE_STAGE1_SCORE_GE_66_4",
+  "stage_1_progress": {
+    "current_v5_verified_fresh_passes": 1,
+    "verified_tasks": [
+      "wal-recovery-ordering"
+    ],
+    "benchmark_comparable_score_established": false,
+    "strict_outer_target_percent": 66.4,
+    "matched_independent_reference_percent": 59.6,
+    "rule": "DO_NOT_INFER_BENCHMARK_PERCENTAGE_FROM_ONE_TASK__CONTINUE_DISTINCT_FRESH_TASKS"
+  }
 }
