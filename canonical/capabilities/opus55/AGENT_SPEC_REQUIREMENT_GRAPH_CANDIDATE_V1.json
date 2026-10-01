@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_REUSABLE_MECHANISM_CANDIDATE_V1",
   "date": "2026-10-01",
   "candidate_id": "AGENT_SPEC_REQUIREMENT_GRAPH_AND_TEST_OBLIGATION_001",
-  "status": "DISCOVERED_EXISTING_PERMISSIVE_CANDIDATE__NOT_INTERNALIZED__ZERO_CAPABILITY_CREDIT",
+  "status": "MINIMUM_MECHANISM_SLICE_INTERNALIZED_AND_INDEPENDENTLY_VERIFIED__ZERO_FAMILY_CREDIT",
   "repository": "ZhangHanDong/agent-spec",
   "pinned_revision": "2483398da89bd392186849bb865aae969667ac0a",
   "license": "MIT",
@@ -28,5 +28,18 @@
     "INDEPENDENTLY_TEST_ON_SPENT_CROSS_DOMAIN_REQUIREMENT_CASES",
     "DELETE_REDUNDANT_IMPORTED_SCOPE"
   ],
-  "capability_credit_delta": 0
+  "capability_credit_delta": 0,
+  "internalized_artifact": "canonical/runtime/requirement_graph_kernel.py",
+  "verification_evidence": "canonical/capabilities/opus55/REQUIREMENT_GRAPH_KERNEL_001.json",
+  "donor_runtime_required": false,
+  "owned_narrow_behavior": [
+    "NORMALIZED_REQUIREMENT_GRAPH_VALIDATION",
+    "SCENARIO_DERIVED_IMPLEMENTATION_INDEPENDENT_TEST_OBLIGATIONS",
+    "REQUIREMENT_MUTATION_KILL_SCORING"
+  ],
+  "remaining_gap": [
+    "ARBITRARY_NATURAL_LANGUAGE_TO_COMPLETE_NORMALIZED_REQUIREMENT_GRAPH",
+    "SEMANTIC_CORRECTNESS_AND_COMPLETENESS_OF_EXTRACTED_REQUIREMENTS",
+    "DOMAIN_GOLD_VALUE_SYNTHESIS"
+  ]
 }
