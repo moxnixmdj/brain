@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "TOTAL-SYSTEM-RANK7-CONTROL-RECONCILIATION-20261001-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "766acb6d1dd6b9d992998333e97a894a03f9844e",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
+  "expected_parent_frontier_change": "Align pointer, hierarchy, queue, scoreboard and target to the rank-7 preflight frontier; repair OBS V6/V8/current-theory mirrors; restore WHITE_BOX_HARVEST order; supersede rank-7 V1 lease for task-command authority; zero capability credit.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "evidence_presence_classification": "CONTROL_SURFACE_DRIFT_PRESENT__NO_RANK7_TASK_COMMAND_AUTHORIZED",
+  "stop_condition": "Stop when current mirrors agree on rank-7 preflight, OBS authority matches CANONICAL_POINTER, rank-7 V1 cannot authorize task commands, and trusted exact-head validation passes.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__ACQUIRE_EXISTING_REUSABLE_MECHANISM_OR_WHITE_BOX_HARVEST_CAUSAL_RESIDUAL__INTERNALIZE_IN_BRAIN__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-01_TOTAL_SYSTEM_RANK7_CONTROL_RECONCILIATION_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "766acb6d1dd6b9d992998333e97a894a03f9844e",
+    "real_outcome": "One current authoritative control plane before further rank-7 evidence spend.",
+    "required_capability": "Control-plane reconciliation only.",
+    "obs_goal": {
+      "real_outcome": "Protect clean evidence while accelerating 19/19 ownership.",
+      "proxy_goals_deleted": [
+        "activity_as_progress"
+      ],
+      "surviving_necessity": "Repair contradictory current authority."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "OBS_V6",
+        "INTENT_V8",
+        "V7_ACQUISITION"
+      ],
+      "external_existing_routes_checked": [
+        "NOT_APPLICABLE"
+      ],
+      "capability_work_deleted": [
+        "NEW_OBS_FRAMEWORK",
+        "NEW_MODEL_PROBE"
+      ],
+      "surviving_gap": "STALE_CONTROL_MIRRORS_AND_LEASE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC",
+      "delete_bypass_substitute_options": [
+        "SUPERSEDE_STALE_LEASE",
+        "ALIGN_EXISTING_MIRRORS"
+      ],
+      "surviving_causal_blocker": "RANK7_CAN_RUN_BEFORE_CURRENT_AUTHORITY_IS_ALIGNED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "SUPERSEDE_AND_RECONCILE",
+        "CONTINUE_STALE_REJECTED"
+      ],
+      "losing_routes_reason": "Stale execution risks fresh evidence.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "TRUSTED_DRIFT_GUARD_AND_MIRROR_EQUALITY"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "RANK7_V1_TASK_COMMAND_AUTHORITY",
+        "RANK6_NEXT_ACTION_MIRRORS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "EXECUTION_LIVENESS",
+        "WHITE_BOX_ROUTE"
+      ],
+      "fresh_reuse_plan": "FRESH_V8_LEASE_AFTER_RECONCILIATION"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_RANK6_REPLAY",
+        "NO_NEW_OBS_LAYER"
+      ],
+      "search_stop_decision": "Exact replacements already exist.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXACT_CONTROL_RECONCILIATION",
+      "CONTINUE_STALE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RANK7_V1_TASK_COMMAND_AUTHORITY",
+      "RANK6_STALE_MIRRORS"
+    ],
+    "selected_surviving_route": "EXACT_CURRENT_BASE_CONTROL_RECONCILIATION__PREFLIGHT_ONLY",
+    "why_selected_route_is_fastest_sufficient": "Reuse current canonical contracts; patch only stale mirrors.",
+    "expected_parent_level_state_change": "Align pointer, hierarchy, queue, scoreboard and target to the rank-7 preflight frontier; repair OBS V6/V8/current-theory mirrors; restore WHITE_BOX_HARVEST order; supersede rank-7 V1 lease for task-command authority; zero capability credit.",
+    "stop_condition": "Stop when current mirrors agree on rank-7 preflight, OBS authority matches CANONICAL_POINTER, rank-7 V1 cannot authorize task commands, and trusted exact-head validation passes.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER_ONLY"
+    }
+  },
+  "prior_work_checked": [
+    "Current pointer/hierarchy/queue/scoreboard/target and rank-7 V1 lease refreshed on exact base.",
+    "Rank-7 controller run 36828317942 observed live; no commands sent by this operator.",
+    "Obsolete PR 605 closed unmerged."
+  ]
+}
