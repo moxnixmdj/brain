@@ -1,0 +1,174 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V4",
+  "date": "2026-10-02",
+  "status": "CHALLENGER__THREE_BUNDLE_CROSS_FAMILY_COMPRESSION__REQUIRES_INDEPENDENT_VERIFICATION",
+  "graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+  "unbarred_protocols": "canonical/governance/GLOBAL_TERMINAL_PROOF_PROTOCOLS_V1.json",
+  "matched_parity_protocol": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+  "geometry_component": "canonical/capabilities/opus55/ORTHOGRAPHIC_VISUAL_HULL_001.json",
+  "cost_semantics": "Count independently scored qualification surfaces. A single matched portfolio may cover multiple distinctions only when the same frozen cases directly exercise every listed contract and report each family/leaf acceptance mapping separately. Public fixed-bar conjunctions cost one per distinct benchmark surface.",
+  "distinctions": [
+    "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+    "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
+    "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+    "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+    "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+    "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+    "P_ADVANCED_AGENTIC_CODING",
+    "P_COMPLEX_MULTI_TOOL_AGENCY",
+    "P_PROFESSIONAL_KNOWLEDGE_WORK",
+    "P_BUSINESS_WORKFLOW_AUTOMATION",
+    "P_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "P_AGENTIC_SCIENTIFIC_RESEARCH",
+    "P_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+    "P_COMPUTER_AND_BROWSER_USE",
+    "P_FINANCIAL_ANALYSIS",
+    "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "P_SUBAGENT_DELEGATION_AND_COORDINATION",
+    "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "P_ARTIFACT_CREATION",
+    "P_COMMUNICATION_AND_SYNTHESIS",
+    "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "P_UNKNOWN_DOMAIN_ADAPTATION",
+    "P_MULTI_CAPABILITY_COMPOSITION"
+  ],
+  "already_resolved": [],
+  "observations": [
+    {
+      "id": "Q_STRUCTURED_GEOMETRY_SPENT_TRANSFER",
+      "covers": [
+        "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION"
+      ],
+      "cost": 0,
+      "authority": [
+        "canonical/capabilities/opus55/ORTHOGRAPHIC_VISUAL_HULL_001.json",
+        "canonical/capabilities/opus55/CAD_MODEL_TB4_SPENT_CAUSAL_DECOMPOSITION_20261001_V1.json",
+        "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
+      ],
+      "rationale": "Use only already-spent/nonpromotion geometry evidence to test whether the new visual-hull primitive rejects/localizes known global-shape failures. No untouched qualification information."
+    },
+    {
+      "id": "Q_AGENTIC_ADAPTIVE_CONTROL_COMPOSITION_BUNDLE",
+      "covers": [
+        "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+        "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+        "P_COMPLEX_MULTI_TOOL_AGENCY",
+        "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "P_SUBAGENT_DELEGATION_AND_COORDINATION",
+        "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "P_MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "cost": 1,
+      "authority": "canonical/governance/GLOBAL_TERMINAL_PROOF_PROTOCOLS_V1.json"
+    },
+    {
+      "id": "Q_PROFESSIONAL_ARTIFACT_FINANCE_SYNTHESIS_BUNDLE",
+      "covers": [
+        "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+        "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+        "P_FINANCIAL_ANALYSIS",
+        "P_ARTIFACT_CREATION",
+        "P_COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "cost": 1,
+      "authority": "canonical/governance/GLOBAL_TERMINAL_PROOF_PROTOCOLS_V1.json"
+    },
+    {
+      "id": "Q_UNKNOWN_DOMAIN_TRANSFER_BUNDLE",
+      "covers": [
+        "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+        "P_UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "cost": 1,
+      "authority": "canonical/governance/GLOBAL_TERMINAL_PROOF_PROTOCOLS_V1.json"
+    },
+    {
+      "id": "Q_CODING_FIXED_BARS",
+      "covers": [
+        "P_ADVANCED_AGENTIC_CODING"
+      ],
+      "cost": 3,
+      "surfaces": [
+        "Terminal-Bench 4.0",
+        "FrontierCode v1.1 Main",
+        "CursorBench 4.0"
+      ]
+    },
+    {
+      "id": "Q_PROFESSIONAL_FIXED_BARS",
+      "covers": [
+        "P_PROFESSIONAL_KNOWLEDGE_WORK"
+      ],
+      "cost": 2,
+      "surfaces": [
+        "GDPval-AA v2.1",
+        "AA-Briefcase v1.1"
+      ]
+    },
+    {
+      "id": "Q_AUTOMATIONBENCH",
+      "covers": [
+        "P_BUSINESS_WORKFLOW_AUTOMATION"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_HLE_TOOLS",
+      "covers": [
+        "P_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_TERMINAL_BENCH_SCIENCE",
+      "covers": [
+        "P_AGENTIC_SCIENTIFIC_RESEARCH"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_CHARTOGRAPHY",
+      "covers": [
+        "P_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "Q_OSWORLD_MATCHED",
+      "covers": [
+        "P_COMPUTER_AND_BROWSER_USE"
+      ],
+      "cost": 1
+    }
+  ],
+  "protocol_validation_requirements": [
+    "The three cross-family bundle IDs and cover sets must exactly match GLOBAL_TERMINAL_PROOF_PROTOCOLS_V1.",
+    "Every formerly missing family proof occurs in exactly one cross-family bundle.",
+    "Each bundle must retain explicit per-contract pass requirements and zero capability credit before execution.",
+    "Matched unbarred family parity must use exact Claude Opus 5.5 comparator or block; proxy comparator is forbidden.",
+    "No rank23 task execution/verifier observation is admitted."
+  ],
+  "expected_exact_minimum": {
+    "observation_count": 11,
+    "total_cost": 13,
+    "zero_new_information_members": [
+      "Q_STRUCTURED_GEOMETRY_SPENT_TRANSFER"
+    ]
+  },
+  "dominance": {
+    "naive_v2": {
+      "observation_count": 23,
+      "total_cost": 23
+    },
+    "verified_v3": {
+      "observation_count": 15,
+      "total_cost": 16
+    },
+    "v4_expected": {
+      "observation_count": 11,
+      "total_cost": 13
+    }
+  },
+  "next_if_verified": "PROMOTE_V4_AS_CURRENT_GLOBAL_CUT__EXECUTE_Q_STRUCTURED_GEOMETRY_SPENT_TRANSFER_FIRST__VALIDATE_THREE_BUNDLE_PROTOCOLS_FROM_EXISTING_EVIDENCE__THEN_RECOMPUTE_BEFORE_ANY_POSITIVE_COST_REALITY_SPEND"
+}
