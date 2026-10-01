@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "OBSOLETE-MICROSTEP-EXECUTION-20261001-V1",
+  "status": "EXECUTING__FAST_BURST_DEPLOYED__LIVE_TRIAL_ACTIVE__ZERO_CAPABILITY_CREDIT_DELTA",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_CAPABILITY_OWNERSHIP",
+  "action_kind": "EXECUTION_PATH_OBSOLESCENCE",
+  "causal_blocker": "EXCESSIVE_WALL_CLOCK_AND_STEP_LIMIT_FAILURE_FROM_EXTERNALLY_SERIALIZED_MICROSTEP_EXECUTION",
+  "highest_leverage_now": true,
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "expected_real_effect": "REMOVE_PER_MICROSTEP_GIT_FETCH_COMMIT_PUSH_OVERHEAD_AND_REPLAY_ONLY_STATE_MUTATIONS_WHILE_PRESERVING_INDEPENDENT_TERMINAL_VERIFICATION",
+  "implementation_evidence": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "merged_commit": "48257eebca06d3c9e96bb64cd909a65afdff36c5",
+    "controller": "session_bridge/controller_fast.py",
+    "workflow": ".github/workflows/session-mini-swe-fast-burst.yml",
+    "transport": "PR_COMMENT_BURST",
+    "current_live_trial_pr": 278,
+    "current_session": "mp-checkpoint-consolidation-20261001-fast-v3",
+    "bootstrap_replay": "STATE_MUTATIONS_ONLY__HISTORICAL_COMMANDS_8_TO_11",
+    "microstep_git_commits": 0
+  },
+  "obsolete_paths": [
+    "ONE_EXTERNAL_ROUND_TRIP_PER_REASONING_MICROSTEP",
+    "ONE_GIT_COMMIT_PER_EPHEMERAL_COMMAND",
+    "ONE_GIT_PUSH_PER_EPHEMERAL_OBSERVATION",
+    "REPLAYING_DIAGNOSTIC_HISTORY_TO_RECONSTRUCT_STATE",
+    "SERIAL_SINGLE_PROBE_EXECUTION_WHEN_INDEPENDENT_PROBES_CAN_BE_BATCHED",
+    "INFRASTRUCTURE_WORK_WITHOUT_A_DIRECT_CAUSAL_PATH_TO_CURRENT_GOAL"
+  ],
+  "surviving_route": "PERSISTENT_FAST_BURST_EXECUTION_WITH_STATE_ONLY_RECOVERY",
+  "verification_required": "COMPLETE_CURRENT_FRESH_MP_CHECKPOINT_CONSOLIDATION_SESSION_OR_LOCALIZE_A_MATERIAL_FAILURE_AND_COMPARE_WALL_CLOCK/ROUND_TRIPS_WITH_LEGACY",
+  "capability_credit_delta": 0
+}
