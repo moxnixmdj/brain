@@ -6,8 +6,8 @@
   "task_identity_sha256": "65c02927e5914f433922f83db07e89608b906e383c6bed904f452640238bd31c",
   "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
   "sample_manifest_blob_sha": "4f0113c2fd670d7d4cb9b267593225f8b66f4ab6",
-  "state": "STAGE_A_INDEPENDENT_PASS__STAGE_B_INSTRUCTION_EXPOSURE_AUTHORIZED",
-  "instruction_read": false,
+  "state": "INSTRUCTION_EXPOSED__STAGE_B_ACTIVE__NO_TASK_EXECUTION",
+  "instruction_read": true,
   "hidden_verifier_read": false,
   "task_specific_hints_read": false,
   "task_specific_web_or_repo_search": false,
@@ -61,7 +61,27 @@
     "instruction_remains_unread": true
   },
   "disqualifying_exposure_events": [],
-  "clean_for_stage_b_exposure": true,
+  "clean_for_stage_b_exposure": false,
   "rule": "ANY_TASK_SPECIFIC_INSTRUCTION_SOLUTION_VERIFIER_OR_HINT_ACCESS_MUST_BE_APPENDED_IMMEDIATELY_AND_CHANGES_STATE_FROM_UNEXPOSED",
-  "stage_a_evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_A_ADMISSION_V1.json"
+  "stage_a_evidence": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_STAGE_A_ADMISSION_V1.json",
+  "instruction_source": {
+    "repository": "harbor-framework/terminal-bench",
+    "ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "path": "tasks/data-anonymization/instruction.md",
+    "blob_sha": "6fa0d17d26fa500e6b7caa766820cb02e1f89df0"
+  },
+  "exposure_events": [
+    {
+      "kind": "OFFICIAL_INSTRUCTION_EXPOSED",
+      "source": "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e:tasks/data-anonymization/instruction.md",
+      "source_blob": "6fa0d17d26fa500e6b7caa766820cb02e1f89df0",
+      "source_class": "ALLOWLISTED_OFFICIAL_INSTRUCTION",
+      "solution_read": false,
+      "tests_read": false,
+      "hidden_verifier_read": false,
+      "task_specific_external_search": false,
+      "task_command_executed": false
+    }
+  ],
+  "clean_for_stage_c_execution": "UNKNOWN_UNTIL_STAGE_B_PASS"
 }
