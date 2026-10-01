@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK22_STAGE_A_PASS_OR_FAIL_CLOSED",
+  "next_progress_event_target": "RANK22_EXACT_FREECAD_SURFACE_PASS_OR_FAIL_CLOSED",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1007,7 +1007,7 @@
     "next_clean_task": "freecad-spring-clip",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "DERIVE_RANK22_FROM_FROZEN_MANIFEST__RUN_COMPLETE_STAGE_A_PREEXPOSURE_SEARCH__DO_NOT_READ_INSTRUCTION",
+  "next_required_action": "RUN_EXACT_RANK22_DOCKERFILE_SURFACE_BUILD_AND_FREECAD_IMPORT_SMOKE__NO_TASK_COMMAND",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1100,7 +1100,9 @@
   "next_clean_task": {
     "rank": 22,
     "task": "freecad-spring-clip",
-    "state": "STAGE_A_PREEXPOSURE_REQUIRED__INSTRUCTION_UNREAD"
+    "state": "STAGE_B_INDEPENDENT_PASS__EXACT_SURFACE_PREFLIGHT_RUNNING",
+    "surface_runner_pr": 422,
+    "surface_workflow_run_id": 36933271247
   },
   "rank19_stage_c": {
     "status": "SPENT_EXECUTION_SURFACE_FAILURE__NO_TASK_AUDIO_ANALYSIS__NO_OUTPUT__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
