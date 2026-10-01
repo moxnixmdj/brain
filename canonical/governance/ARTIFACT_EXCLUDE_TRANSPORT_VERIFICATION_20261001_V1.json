@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ARTIFACT_EXCLUDE_TRANSPORT_VERIFICATION_V1",
+  "date": "2026-10-01",
+  "status": "INDEPENDENT_VERIFICATION_PASS__MERGED__GENERIC_TRANSPORT_REPAIR_ACTIVE__ZERO_CAPABILITY_CREDIT",
+  "behavior_id": "EXCLUDE_AWARE_DIRECTORY_ARTIFACT_TRANSPORT_001",
+  "source_failure": {
+    "task": "vba-userform-port",
+    "rank": 20,
+    "runner_pr": 376,
+    "disposition": "PREINSTRUCTION_SURFACE_REJECTION__UNSPENT__INSTRUCTION_NOT_READ_BY_CARRIER",
+    "reason": "ARTIFACT_EXCLUDE_FILTER_UNSUPPORTED"
+  },
+  "runner": {
+    "repo": "moxnixmdj/verification-capsule-runner",
+    "repair_pr": 379,
+    "merge_commit": "df52668daba5c228cf92973dcef7bfd02fd644ed",
+    "controller_blob": "33972c25019c5bc3ec480b75537daf78654ea58e",
+    "controller_fast_blob": "569fe778e120a7499d75070bb7e52e3afd7ae53e",
+    "targeted_workflow_run_id": 36928224700,
+    "targeted_conclusion": "success",
+    "artifact_staging_regression_run_id": 36928224767,
+    "artifact_staging_conclusion": "success",
+    "artifact_contract_preflight_run_id": 36928224717,
+    "artifact_contract_preflight_conclusion": "success",
+    "execution_guard_run_id": 36928224749,
+    "execution_guard_conclusion": "success"
+  },
+  "verified_behaviors": [
+    "SAFE_RELATIVE_EXCLUDE_PATTERNS_ACCEPTED",
+    "ABSOLUTE_OR_PARENT_TRAVERSAL_EXCLUDES_REJECTED_FAIL_CLOSED",
+    "DIRECTORY_ARTIFACT_STREAM_PRESERVES_REQUIRED_FILES",
+    "NODE_MODULES_VENV_PYCACHE_AND_PYC_EXCLUDES_REMOVED_IN_TWO_CONTAINER_TRANSFER",
+    "SOURCE_TO_DIFFERENT_DESTINATION_REMAP_PRESERVES_TREE",
+    "NORMALIZED_ARTIFACT_CONTRACT_PERSISTS_FROM_READY_TO_TERMINAL_VERIFICATION",
+    "LEGACY_SINGLE_FILE_FALLBACK_STAGING_PRESERVED",
+    "PER_SERVICE_ARTIFACTS_REMAIN_FAIL_CLOSED"
+  ],
+  "limitation": "Does not authorize rank20 Stage-C execution by itself. Stage-B task behavioral contract, task-specific feasibility, independent acceptance, and one-shot Stage-C lease remain required.",
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
