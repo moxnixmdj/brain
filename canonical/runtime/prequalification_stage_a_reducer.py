@@ -1,7 +1,8 @@
-"""Deterministic Stage-A pre-exposure admission reducer for rank-15 TB4.
+"""Deterministic Stage-A pre-exposure admission reducer for TB4 clean tasks.
 
-Reads only generic/pre-exposure Brain evidence. It MUST NOT read the rank-15
-instruction, solution, hidden verifier, task-specific hints, or execute the task.
+Reads only generic/pre-exposure Brain evidence plus an explicit contamination
+ledger. It MUST NOT read task instructions, solutions, hidden verifiers,
+task-specific hints, or execute the task.
 """
 from __future__ import annotations
 import argparse, json
@@ -9,17 +10,16 @@ from pathlib import Path
 from typing import Any
 
 REF="452bf305c6daa62fc59061d22133a7cbc7c1572e"
-TASK="wdm-design"
-RANK=15
 BAR=0.664
+DEFAULT_LEDGER="canonical/capabilities/opus55/WDM_DESIGN_RANK15_CONTAMINATION_LEDGER_V1.json"
 
 def load(root: Path, rel: str) -> dict[str,Any]:
     return json.loads((root/rel).read_text(encoding="utf-8"))
 
-def evaluate(root: Path) -> dict[str,Any]:
+def evaluate(root: Path, ledger_path: str=DEFAULT_LEDGER) -> dict[str,Any]:
     failures=[]
     t=load(root,"canonical/capabilities/opus55/TB4_V5_TARGET_VERSION_LOCK_V1.json")
-    c=load(root,"canonical/capabilities/opus55/WDM_DESIGN_RANK15_CONTAMINATION_LEDGER_V1.json")
+    c=load(root,ledger_path)
     e=load(root,"canonical/capabilities/opus55/GENERIC_EXECUTION_SURFACE_CERTIFICATE_20261001_V1.json")
     a=load(root,"canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json")
     r=load(root,"canonical/capabilities/opus55/REQUIREMENT_GRAPH_KERNEL_001.json")
@@ -27,22 +27,71 @@ def evaluate(root: Path) -> dict[str,Any]:
     d=load(root,"canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V1.json")
     p=load(root,"canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json")
 
-    if not (t.get("status")=="FROZEN_BEFORE_RANK15_INSTRUCTION_EXPOSURE" and t.get("benchmark_ref")==REF and t.get("stage1_target_success_fraction")==BAR and t.get("target_model")=="Claude Opus 5.5"):
+    task=str(c.get("task","")).strip()
+    rank=c.get("rank")
+    if not task or not isinstance(rank,int) or rank <= 0:
+        failures.append("QUALIFICATION_IDENTITY")
+
+    if not (
+        t.get("benchmark_ref")==REF
+        and t.get("stage1_target_success_fraction")==BAR
+        and t.get("target_model")=="Claude Opus 5.5"
+        and str(t.get("status","")).startswith("FROZEN_BEFORE_")
+    ):
         failures.append("TARGET_VERSION_LOCK")
-    if not (c.get("task")==TASK and c.get("rank")==RANK and c.get("benchmark_ref")==REF and c.get("state")=="UNEXPOSED__STAGE_A_PRE_EXPOSURE" and c.get("instruction_read") is False and c.get("hidden_verifier_read") is False and c.get("task_specific_hints_read") is False and c.get("task_specific_web_or_repo_search") is False and c.get("task_command_executed") is False and c.get("clean_for_stage_b_exposure") is True and not c.get("disqualifying_exposure_events")):
+
+    if not (
+        c.get("benchmark_ref")==REF
+        and c.get("state")=="UNEXPOSED__STAGE_A_PRE_EXPOSURE"
+        and c.get("instruction_read") is False
+        and c.get("hidden_verifier_read") is False
+        and c.get("task_specific_hints_read") is False
+        and c.get("task_specific_web_or_repo_search") is False
+        and c.get("task_command_executed") is False
+        and c.get("clean_for_stage_b_exposure") is True
+        and not c.get("disqualifying_exposure_events")
+    ):
         failures.append("QUALIFICATION_CONTAMINATION_LEDGER")
+
     if e.get("status")!="STAGE_A_GENERIC_SURFACE_PASS__TASK_SPECIFIC_SURFACE_UNCLAIMED":
         failures.append("GENERAL_EXECUTION_SURFACE_CERTIFICATE")
+
     ar=a.get("runner",{})
-    if not (ar.get("source_exact_match") is True and ar.get("tests_run",0)>0 and ar.get("tests_passed")==ar.get("tests_run") and str(a.get("heldout_selection",{}).get("result","")).startswith("BLOCKED_TERMINAL_SUBMISSION_AS_REQUIRED")):
+    if not (
+        ar.get("source_exact_match") is True
+        and ar.get("tests_run",0)>0
+        and ar.get("tests_passed")==ar.get("tests_run")
+        and str(a.get("heldout_selection",{}).get("result","")).startswith("BLOCKED_TERMINAL_SUBMISSION_AS_REQUIRED")
+    ):
         failures.append("INDEPENDENT_ACCEPTANCE_MECHANISM")
+
     rr=r.get("runner",{})
-    if not (str(r.get("status","")).startswith("INDEPENDENT_VERIFICATION_PASS") and rr.get("exact_source_match") is True and rr.get("conclusion")=="success" and r.get("donor_runtime_required") is False and "SEEDED_REQUIREMENT_MUTATION_SUITE_HAS_ZERO_SURVIVORS_ON_VERIFICATION_CORPUS" in r.get("independently_verified_behaviors",[])):
+    if not (
+        str(r.get("status","")).startswith("INDEPENDENT_VERIFICATION_PASS")
+        and rr.get("exact_source_match") is True
+        and rr.get("conclusion")=="success"
+        and r.get("donor_runtime_required") is False
+        and "SEEDED_REQUIREMENT_MUTATION_SUITE_HAS_ZERO_SURVIVORS_ON_VERIFICATION_CORPUS"
+            in r.get("independently_verified_behaviors",[])
+    ):
         failures.append("REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM")
-    if not (s.get("status")=="FROZEN_BEFORE_RANK15_INSTRUCTION_EXPOSURE" and s.get("benchmark_ref")==REF and s.get("target_success_fraction")==BAR and s.get("replay") is False and s.get("cherry_picking") is False):
+
+    if not (
+        str(s.get("status","")).startswith("FROZEN_BEFORE_")
+        and s.get("benchmark_ref")==REF
+        and s.get("target_success_fraction")==BAR
+        and s.get("replay") is False
+        and s.get("cherry_picking") is False
+    ):
         failures.append("STATISTICAL_PROMOTION_PLAN")
-    if not (str(d.get("status","")).startswith("ACTIVE_GENERIC_PROTOCOL") and d.get("fail_closed") is True and d.get("pass_rule")=="BEHAVIOR_PRESERVED_AND_UNDECLARED_DEPENDENCY_COUNT_ZERO"):
+
+    if not (
+        str(d.get("status","")).startswith("ACTIVE_GENERIC_PROTOCOL")
+        and d.get("fail_closed") is True
+        and d.get("pass_rule")=="BEHAVIOR_PRESERVED_AND_UNDECLARED_DEPENDENCY_COUNT_ZERO"
+    ):
         failures.append("DONOR_DELETION_DEPENDENCY_PROTOCOL")
+
     required=set(p.get("staged_admission",{}).get("stage_a_pre_exposure",{}).get("required",[]))
     expected={
       "TARGET_VERSION_LOCK","QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
@@ -54,9 +103,12 @@ def evaluate(root: Path) -> dict[str,Any]:
     }
     if not expected <= required:
         failures.append("STAGE_A_POLICY_INCOMPLETE")
+
     return {
-      "schema":"PROJECT_BRAIN_RANK15_STAGE_A_ADMISSION_VERDICT_V1",
-      "task":TASK,"rank":RANK,
+      "schema":"PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2",
+      "task":task,
+      "rank":rank,
+      "ledger_path":ledger_path,
       "pass":not failures,
       "authorization":"STAGE_B_INSTRUCTION_EXPOSURE_ONLY" if not failures else "NONE",
       "task_execution_authorized":False,
@@ -65,8 +117,13 @@ def evaluate(root: Path) -> dict[str,Any]:
     }
 
 def main()->int:
-    ap=argparse.ArgumentParser(); ap.add_argument("repo_root",type=Path); args=ap.parse_args()
-    out=evaluate(args.repo_root); print(json.dumps(out,indent=2,sort_keys=True))
+    ap=argparse.ArgumentParser()
+    ap.add_argument("repo_root",type=Path)
+    ap.add_argument("--ledger",default=DEFAULT_LEDGER)
+    args=ap.parse_args()
+    out=evaluate(args.repo_root,args.ledger)
+    print(json.dumps(out,indent=2,sort_keys=True))
     return 0 if out["pass"] else 1
 
-if __name__=="__main__": raise SystemExit(main())
+if __name__=="__main__":
+    raise SystemExit(main())
