@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTION_SURFACE_PARITY_REPAIR_V1",
+  "date": "2026-10-01",
+  "status": "VERIFIED_AND_MERGED__SYSTEMIC_BLOCKER_OBSOLETED",
+  "root_cause": "Stage-B feasibility could pass on a host/setup-python environment while Stage-C used a materially different task container package-management surface.",
+  "repair": {
+    "runner_repo": "moxnixmdj/verification-capsule-runner",
+    "pr": 365,
+    "merged_commit": "7d16c86705fd5da7954d6857844c854bbaf148c8",
+    "guard": "Stage-C lease upgrade requires BRAIN_EXECUTION_SURFACE_PREFLIGHT_V1 PASS",
+    "required_fields": [
+      "exact_or_materially_equivalent",
+      "package_management_policy_verified",
+      "required_install_steps_verified",
+      "required_runtime_imports_verified",
+      "environment_sha256",
+      "evidence"
+    ]
+  },
+  "verification": {
+    "workflow_run_id": 36926106761,
+    "unit_job_id": 110583704518,
+    "surface_job_id": 110583704143,
+    "unit_conclusion": "success",
+    "ubuntu24_pep668_surface_conclusion": "success",
+    "proved": [
+      "SYSTEM_PIP_IS_BLOCKED_ON_UBUNTU_24_04_DEBIAN_PYTHON",
+      "VENV_ROUTE_SUCCEEDS",
+      "STAGE_C_PROMOTION_FAILS_CLOSED_WITHOUT_PARITY_RECEIPT"
+    ]
+  },
+  "obsolete_paths": [
+    "HOST_ONLY_RUNTIME_FEASIBILITY_AS_STAGE_C_AUTHORITY",
+    "SETUP_PYTHON_EQUIVALENCE_ASSUMPTION",
+    "SPEND_FRESH_TASK_TO_DISCOVER_GENERIC_PACKAGE_POLICY_FAILURE"
+  ],
+  "capability_credit_delta": 0,
+  "blocker_delta": "EXECUTION_EVIDENCE_PIPELINE_GENERIC_SURFACE_MISMATCH_CLASS_CLOSED"
+}
