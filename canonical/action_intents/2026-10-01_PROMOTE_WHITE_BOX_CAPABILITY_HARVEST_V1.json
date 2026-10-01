@@ -98,7 +98,6 @@
         "BYPASS",
         "REUSE",
         "SUBSTITUTE",
-        "WHITE_BOX_HARVEST",
         "COMPOSE",
         "CONFIGURE",
         "INTEGRATE"
@@ -149,7 +148,7 @@
     ],
     "selected_surviving_route": "SYNC_ALL_ACTIVE_CONTROL_SURFACES",
     "why_selected_route_is_fastest_sufficient": "It makes the route legal, fail-closed, reusable, and immediately available without changing current capability credit or spending a fresh benchmark.",
-    "expected_parent_level_state_change": "White-box capability harvesting becomes a canonical acquisition route; capability credit remains unchanged; current coding target and untouched WAL qualification remain intact.",
+    "expected_parent_level_state_change": "Add white-box capability harvesting as a first-class pre-invention acquisition route with causal sufficiency, donor deletion, contamination control, capability-capsule packaging, and no ownership credit until the exact Brain route independently verifies >= Opus 5.5. Preserve the untouched WAL qualification lease and current capability target.",
     "stop_condition": "All active control surfaces agree on the new route order and capsule promotion tests; trusted guard passes; no capability counter changes; current WAL task remains unread and unexecuted by this change.",
     "route_frontier": {
       "discovery_required": false,
