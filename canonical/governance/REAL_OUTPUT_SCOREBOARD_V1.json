@@ -1023,7 +1023,7 @@
     "next_clean_task": "satb-audio-transcription",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "PATCH_RUNNER_TO_BIND_AND_ENFORCE_CANONICAL_EXECUTION_COUNT_ALLOWED_AND_TERMINAL_VERIFIER_COUNT_ALLOWED__VERIFY_FAIL_CLOSED__THEN_RANK19_STAGE_A_IF_CLEAN",
+  "next_required_action": "FREEZE_NEXT_CLEAN_STAGE_C_SPEND_UNTIL_EXACT_TASK_CONTAINER_EXECUTION_SURFACE_PROFILE_AND_PACKAGE_POLICY_PARITY_ARE_VERIFIED__THEN_ADVANCE_FROZEN_ORDER",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
