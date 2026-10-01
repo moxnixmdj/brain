@@ -157,6 +157,13 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         self.assertIn("MIRRORS_CONSISTENT", out)
 
     def test_repair_preserves_byte_formatting_of_untouched_files(self):
+        # Start from a queue whose mirrors already equal the authority, so this
+        # test measures formatting preservation rather than live-tree drift,
+        # which test_live_repository_is_reconciled covers explicitly.
+        queue = self.read(QUEUE)
+        queue["immediate_frontier"]["exact_blocker"] = self.blocker
+        queue["immediate_frontier"]["next_action"] = self.action
+        self.write(QUEUE, queue)
         queue_before = (self.root / QUEUE).read_text(encoding="utf-8")
         pointer = self.read(POINTER)
         pointer["current_frontier"]["critical_blocker"] = STALE_BLOCKER
