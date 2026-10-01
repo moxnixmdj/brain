@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_PARTSPEC_V1",
+  "date": "2026-10-01",
+  "status": "VERIFIED_BRAIN_OWNED_TYPED_CAD_REPRESENTATION__ZERO_FAMILY_CREDIT",
+  "transform": "STRUCTURED_PART_GEOMETRY_FACTS_TO_TYPED_VALIDATED_PARTSPEC",
+  "artifact": "canonical/runtime/cad_partspec.py",
+  "artifact_blob_sha": "e5b68367cbaaeedb97c6eb8f2d080f19e3a2cdbb",
+  "donor": {
+    "repository": "D4V1ND/tech_europe",
+    "revision": "9d7026d6441153032b4bc1d93050bfd1d825296a",
+    "license": "MIT",
+    "runtime_required": false
+  },
+  "scope": [
+    "EXTRUDED_GEOMETRY",
+    "REVOLVED_GEOMETRY",
+    "MULTIBODY_BOX_CYLINDER_SPHERE_PRISM",
+    "ADD_AND_CUT_BODIES",
+    "THROUGH_BLIND_COUNTERBORE_COUNTERSINK_THREADED_HOLE_SCHEMA",
+    "RECTANGULAR_CUTS_FILLET_CHAMFER_DIMENSION_SCHEMA",
+    "BBOX_AND_SANITY_SEMANTICS"
+  ],
+  "verification": {
+    "runner_pr": 387,
+    "workflow_run_id": 36929737311,
+    "merged_runner_commit": "8d2e2647c82e6e96f6d312eea9807a18f35aa433",
+    "randomized_differential_cases": 1200,
+    "pinned_donor_examples": true,
+    "model_dump_bbox_sanity_equivalence": true,
+    "conclusion": "success"
+  },
+  "not_claimed": [
+    "DRAWING_PIXELS_TO_PARTSPEC",
+    "PARTSPEC_SEMANTIC_CORRECTNESS_RELATIVE_TO_DRAWING",
+    "WHOLE_CAD_MODEL_CORRECTNESS",
+    "OPUS_5_5_PARITY"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
