@@ -569,11 +569,12 @@
     "status": "AUTHORIZED__NOT_YET_EXECUTED",
     "runner_pr": 352,
     "session_id": "data-anonymization-stagec-20261001-v4",
-    "canonical_acceptance_contract_sha256": "fc9fe99427ed715fdef62a465d6c4d537e0113e676c1610f88a53717938df968",
+    "canonical_acceptance_contract_sha256": "1b98cda7a95d8fa365cf4585ecb1d146f6133cfca62085e1a88f53a94bd8b2dd",
     "prior_v3_runner_pr": 349,
     "prior_v3_builder_bursts_executed": 0,
     "prior_v3_terminal_verifier_runs": 0,
     "prior_v3_disposition": "CLOSED_PREEXECUTION_ACCEPTANCE_HASH_MISMATCH",
-    "replay_allowed": false
+    "replay_allowed": false,
+    "acceptance_semantic_equivalence": "EXACT_PAYLOAD_MATCH_TO_INDEPENDENTLY_VERIFIED_V2_AFTER_SESSION_ID_NORMALIZATION"
   }
 }
