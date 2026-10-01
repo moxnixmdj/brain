@@ -1,0 +1,173 @@
+{
+  "harbor_exit_code": 0,
+  "incremental_spend_usd": 0,
+  "observation_branch": "bridge-observations/harbor-mp-checkpoint-consolidation-dev-20261001-v1-2d53377e",
+  "results": [
+    {
+      "path": "jobs/2026-10-01__07-35-35/mp-checkpoint-consolidation__2r6oXLk/result.json",
+      "result": {
+        "agent_execution": {
+          "finished_at": "2026-10-01T11:30:12.792290Z",
+          "started_at": "2026-10-01T07:36:49.281189Z"
+        },
+        "agent_info": {
+          "model_info": null,
+          "name": "brain-harbor-branch-bridge",
+          "version": "1.0.0"
+        },
+        "agent_result": {
+          "cost_usd": null,
+          "metadata": null,
+          "model_usage": null,
+          "n_cache_tokens": null,
+          "n_input_tokens": null,
+          "n_output_tokens": null,
+          "rollout_details": null
+        },
+        "agent_setup": {
+          "finished_at": "2026-10-01T07:36:49.281109Z",
+          "started_at": "2026-10-01T07:36:49.281047Z"
+        },
+        "config": {
+          "agent": {
+            "concurrency_group": null,
+            "extra_allowed_hosts": [],
+            "import_path": null,
+            "kwargs": {},
+            "load_trajectory": null,
+            "max_timeout_sec": null,
+            "mcp_servers": [],
+            "model_name": null,
+            "n_concurrent": null,
+            "name": "mpc_bridge:HarborBranchBridgeAgent",
+            "override_setup_timeout_sec": null,
+            "override_timeout_sec": null,
+            "resume_trajectory": false,
+            "skills": []
+          },
+          "agent_setup_timeout_multiplier": null,
+          "agent_timeout_multiplier": null,
+          "artifacts": [],
+          "environment": {
+            "cpu_enforcement_policy": "auto",
+            "delete": true,
+            "extra_allowed_hosts": [],
+            "extra_docker_compose": [],
+            "force_build": false,
+            "import_path": null,
+            "kwargs": {},
+            "memory_enforcement_policy": "auto",
+            "mounts": null,
+            "override_cpus": 2,
+            "override_gpus": null,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_tpu": null,
+            "type": "docker"
+          },
+          "environment_build_timeout_multiplier": null,
+          "extra_instruction_paths": [],
+          "extra_instructions": [],
+          "install_only": false,
+          "job_id": "84b85204-16bc-4377-8204-ed5865fd7a22",
+          "source_trial": null,
+          "task": {
+            "download_dir": null,
+            "git_commit_id": null,
+            "git_url": null,
+            "name": null,
+            "overwrite": false,
+            "path": "/tmp/terminal-bench-harbor/tasks/mp-checkpoint-consolidation",
+            "ref": null,
+            "source": null
+          },
+          "timeout_multiplier": 1.0,
+          "trial_name": "mp-checkpoint-consolidation__2r6oXLk",
+          "trials_dir": "jobs/2026-10-01__07-35-35",
+          "user_agent": null,
+          "verifier": {
+            "disable": false,
+            "max_timeout_sec": null,
+            "override_timeout_sec": null
+          },
+          "verifier_timeout_multiplier": null
+        },
+        "environment_setup": {
+          "finished_at": "2026-10-01T07:36:49.280983Z",
+          "started_at": "2026-10-01T07:35:36.960236Z"
+        },
+        "exception_info": null,
+        "finished_at": "2026-10-01T11:31:15.226150Z",
+        "id": "2b7b5552-77d1-4e51-bdeb-8d6a2b042f08",
+        "source": null,
+        "started_at": "2026-10-01T07:35:36.820162Z",
+        "step_results": null,
+        "task_checksum": "eecf37b090679a226bd930075b00336d02a55cbffa8d25ed93eee7bcf7746612",
+        "task_id": {
+          "path": "/tmp/terminal-bench-harbor/tasks/mp-checkpoint-consolidation"
+        },
+        "task_name": "terminal-bench/mp-checkpoint-consolidation",
+        "trial_name": "mp-checkpoint-consolidation__2r6oXLk",
+        "trial_uri": "file:///home/runner/work/brain/brain/jobs/2026-10-01__07-35-35/mp-checkpoint-consolidation__2r6oXLk",
+        "verifier": {
+          "finished_at": "2026-10-01T11:31:15.226135Z",
+          "started_at": "2026-10-01T11:30:24.032672Z"
+        },
+        "verifier_environment_mode": "separate",
+        "verifier_result": {
+          "rewards": {
+            "reward": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "jobs/2026-10-01__07-35-35/result.json",
+      "result": {
+        "finished_at": "2026-10-01T11:31:15.228850",
+        "id": "84b85204-16bc-4377-8204-ed5865fd7a22",
+        "n_total_trials": 1,
+        "started_at": "2026-10-01T07:35:36.780325",
+        "stats": {
+          "cost_usd": null,
+          "evals": {
+            "brain-harbor-branch-bridge__adhoc": {
+              "exception_stats": {},
+              "metrics": [
+                {
+                  "mean": 0.0
+                }
+              ],
+              "n_errors": 0,
+              "n_trials": 1,
+              "pass_at_k": {},
+              "reward_stats": {
+                "reward": {
+                  "0.0": [
+                    "mp-checkpoint-consolidation__2r6oXLk"
+                  ]
+                }
+              }
+            }
+          },
+          "n_cache_tokens": null,
+          "n_cancelled_trials": 0,
+          "n_completed_trials": 1,
+          "n_errored_trials": 0,
+          "n_input_tokens": null,
+          "n_output_tokens": null,
+          "n_pending_trials": 0,
+          "n_retries": 0,
+          "n_running_trials": 0
+        },
+        "updated_at": "2026-10-01T11:31:15.228850"
+      }
+    }
+  ],
+  "schema": "BRAIN_HARBOR_FINAL_RUN_V1",
+  "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
+  "stderr_tail": "",
+  "stdout_tail": "Tip: There are many benchmarks available in Harbor's registry.\nRun `harbor datasets list` to see all available datasets.\n\n  1/1 Mean: 0.000 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 3:55:38 0:00:00\nadhoc \u2022 brain-harbor-branch-bridge\n\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513\n\u2503 Trials \u2503 Exceptions \u2503  Mean \u2503\n\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529\n\u2502      1 \u2502          0 \u2502 0.000 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513\n\u2503 Reward \u2503 Count \u2503\n\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529\n\u2502 0.0    \u2502     1 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\nJob Info\nTotal runtime: 3h 55m 38s\nResults written to jobs/2026-10-01__07-35-35/result.json\nInspect results by running `harbor view jobs`\nShare results by running `harbor upload jobs/2026-10-01__07-35-35`\n\n",
+  "task": "mp-checkpoint-consolidation",
+  "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e"
+}
