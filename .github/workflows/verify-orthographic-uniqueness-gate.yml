@@ -1,0 +1,24 @@
+name: Verify orthographic uniqueness gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/orthographic_uniqueness_gate.py
+      - canonical/tests/test_orthographic_uniqueness_gate.py
+      - canonical/runtime/orthographic_visual_hull.py
+      - .github/workflows/verify-orthographic-uniqueness-gate.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_orthographic_uniqueness_gate
