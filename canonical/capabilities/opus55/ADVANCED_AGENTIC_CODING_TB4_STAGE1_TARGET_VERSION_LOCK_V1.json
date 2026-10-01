@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ADVANCED_AGENTIC_CODING_TB4_STAGE1_TARGET_VERSION_LOCK_V1",
+  "date": "2026-10-01",
+  "status": "FROZEN_STAGE_A_LOCAL_QUALIFICATION_SCOPE",
+  "purpose": "Give rank15 evidence a predeclared coding-scope meaning without requiring final 19-family closure before collecting evidence needed to reach that closure.",
+  "family": "ADVANCED_AGENTIC_CODING",
+  "target_model": "Claude Opus 5.5",
+  "benchmark": "Terminal-Bench 4.0",
+  "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "acceptance_bar": {
+    "success_fraction": 0.664,
+    "unit": "fraction"
+  },
+  "target_envelope": {
+    "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+  },
+  "sample_manifest": {
+    "path": "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json",
+    "blob_sha": "4f0113c2fd670d7d4cb9b267593225f8b66f4ab6",
+    "rank15_task": "wdm-design",
+    "rank15_identity_sha256": "57a897eff90387df26415d1bfb81c492d50b4d41159587617bfefda8c2f2bf8d"
+  },
+  "statistical_plan": {
+    "path": "canonical/capabilities/opus55/TB4_V5_STAGE1_STATISTICAL_PROMOTION_PLAN_V1.json",
+    "blob_sha": "ae18ff148f5ee5a3816c567a724fe5a0a27baf9d"
+  },
+  "evidence_semantics": [
+    "RANK15_ONE_SHOT_REWARD_UPDATES_ONLY_THE_PREDECLARED_TERMINAL_BENCH_STAGE1_CODING_ESTIMATOR",
+    "ONE_TASK_CANNOT_PROMOTE_ADVANCED_AGENTIC_CODING_OR_THE_19_FAMILY_TERMINAL_OBJECTIVE",
+    "FINAL_19_FAMILY_TERMINAL_CLOSURE_REMAINS_MANDATORY_FOR_TERMINAL_SUCCESS_BUT_IS_NOT_A_PREREQUISITE_TO_COLLECT_PREDECLARED_FAMILY_SPECIFIC_EVIDENCE"
+  ],
+  "drift_rule": "ANY_CHANGE_TO_TARGET_MODEL_BENCHMARK_REF_BAR_SAMPLE_IDENTITY_OR_STATISTICAL_PLAN_INVALIDATES_THIS_LOCK_BEFORE_FURTHER_QUALIFICATION",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
