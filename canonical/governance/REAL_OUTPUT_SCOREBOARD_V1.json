@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "RANK15_ONE_SHOT_TASK_EXECUTION_THEN_INDEPENDENT_VERIFIER_RESULT",
+  "next_progress_event_target": "RUNNER_PER_BURST_LEASE_REVOCATION_GUARD_PASS__THEN_RANK16_PREEXPOSURE_ELIGIBILITY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1014,16 +1014,16 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK13_VERIFIED_FAILURE__SEMANTIC_PURGE_GATE_NOW_PRIMARY",
+    "status": "RANK15_SPENT_POST_REVOCATION__NO_TERMINAL_VERDICT__RUNNER_GUARD_REPAIR_PRIMARY",
     "blocker": "BEHAVIORAL_CONTRACT_AND_INDEPENDENT_ACCEPTANCE_MODEL_GAP",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
     "evidence_path": "canonical/capabilities/opus55/FIN_SACCR_RWA_TB4_FAILURE_20261001_V1.json",
-    "next_clean_rank": 15,
-    "next_clean_task": "wdm-design",
-    "next_clean_task_authorized": true
+    "next_clean_rank": 16,
+    "next_clean_task": "session-window-debug",
+    "next_clean_task_authorized": false
   },
-  "next_required_action": "EXECUTE_WDM_DESIGN_EXACTLY_ONCE__FREEZE_OUTPUT__RUN_INDEPENDENT_VERIFIER__NO_REPLAY",
+  "next_required_action": "FIX_AND_VERIFY_PER_BURST_CANONICAL_LEASE_REVALIDATION__DO_NOT_REPLAY_RANK15",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1060,5 +1060,11 @@
     "evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_STAGE_B_VERIFICATION_V3.json",
     "task_execution_authorized": true,
     "replay_allowed": false
+  },
+  "rank15_stage_c": {
+    "status": "SPENT_BY_POST_REVOCATION_TASK_SPECIFIC_EXECUTION__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
+    "evidence": "canonical/capabilities/opus55/WDM_DESIGN_RANK15_POST_REVOCATION_EXECUTION_RECONCILIATION_V1.json",
+    "terminal_verifier_executed": false,
+    "task_replay_allowed": false
   }
 }
