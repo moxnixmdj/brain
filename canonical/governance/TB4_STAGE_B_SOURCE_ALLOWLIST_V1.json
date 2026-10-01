@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_STAGE_B_SOURCE_ALLOWLIST_V1",
+  "date": "2026-10-01",
+  "status": "CANONICAL_FAIL_CLOSED",
+  "applies_to": "TERMINAL_BENCH_4_STAGE_B_POST_INSTRUCTION_PRE_EXECUTION",
+  "allowed_reads": [
+    "tasks/<task>/instruction.md",
+    "tasks/<task>/task.toml",
+    "tasks/<task>/environment/**"
+  ],
+  "forbidden_until_post_spend_diagnostic": [
+    "tasks/<task>/README*",
+    "tasks/<task>/solution/**",
+    "tasks/<task>/tests/**",
+    "tasks/<task>/cheat/**",
+    "task-specific pull requests",
+    "task-specific issues",
+    "task-specific commit history",
+    "task-specific external web or social search",
+    "hidden verifier or verifier-derived artifacts"
+  ],
+  "classification_rule": "OFFICIAL_REPOSITORY_LOCATION_DOES_NOT_IMPLY_SAFE_PREQUALIFICATION_CONTENT__PATH_CLASS_MUST_BE_ALLOWLISTED_BEFORE_READ",
+  "contamination_rule": "ANY_FORBIDDEN_READ_IMMEDIATELY_INVALIDATES_CLEAN_QUALIFICATION_ELIGIBILITY_FOR_THAT_TASK__NO_TASK_EXECUTION_FOR_CREDIT__NO_REPLAY",
+  "root_incident": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_CONTAMINATED_20261001_V1.json",
+  "task_execution_after_contamination_for_credit": false
+}
