@@ -3,7 +3,7 @@
   "record_id": "TB4-GSEA-PROTEOMICS-RANK4-INFRA-FAILURE-20261001-V1",
   "status": "UNVERIFIED_INFRASTRUCTURE_FAILURE_BEFORE_TEST_SCRIPT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "70cb51cafaa0d1f111c9eec0a5daa7d25792f617",
+  "canonical_base_commit": "b7c4efa4d35ba3709f37f3109daac87849a1c945",
   "task": {
     "benchmark": "Terminal-Bench 4.0",
     "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
@@ -11,7 +11,7 @@
     "sample_rank": 4,
     "task_id": "gsea-proteomics",
     "lease_action_base_commit": "c6c74e0b5a8b1a21f32f6c878eb97ee10bf1608e",
-    "disposition_record_base_commit": "70cb51cafaa0d1f111c9eec0a5daa7d25792f617"
+    "disposition_record_base_commit": "b7c4efa4d35ba3709f37f3109daac87849a1c945"
   },
   "attempt": {
     "runner_repository": "moxnixmdj/verification-capsule-runner",
@@ -84,7 +84,7 @@
     "frozen_sample_reordered": false,
     "rank_6_instruction_read": false
   },
-  "next_action": "After this current-base reconciliation passes the trusted guard, honor the live pointer metadata but do not read or execute the rank-5 task while the standing user instruction to skip the contaminated sample remains unreversed. Keep rank 6 unopened. Review newer GSEA/cognitive result records only after explicit user permission; do not infer any new pass, score, or credit from paths/commit subjects.",
+  "next_action": "After canonical reconciliation, do not inspect or execute the current rank-6 task unless the user explicitly authorizes task-specific reading; preserve the rank-5 skip/no-reorder instruction. The current pointer/queue/hierarchy next-action mismatch must be reconciled under trusted guard before any task action. Keep rank-4 failure at no pass/no credit and make no new pass/score/credit claim.",
   "current_canonical_context": {
     "all_family_campaign_preserved_atomic_execution": "gsea-proteomics",
     "cognitive_basis_campaign": "ACTIVE__C3_DETERMINISTIC_CONTROL_RETAINED__ETTIN_ZERO_TERMINAL_DELTA_FALSIFIED__ZERO_CAPABILITY_CREDIT",
@@ -121,7 +121,7 @@
     "simple_jev_comparison_capability_credit_delta": 0,
     "simple_jev_comparison_artifact_id": 11142535841,
     "simple_jev_comparison_artifact_digest": "sha256:a5225de447054211cb25416ee83553c111a53189aa1fd13a510fd9ce8dced9c7",
-    "next_cognitive_basis_action": "REQUEST_EXPLICIT_PERMISSION_BEFORE_REVIEWING_NEW_CURRENT_BASE_COGNITIVE_RESULTS_OR_TASK_MATERIALS__NO_ROUTE_OR_CREDIT_CLAIM",
+    "next_cognitive_basis_action": "HOLD_HISTORICAL_COGNITIVE_ROUTE__REQUEST_PERMISSION_BEFORE_OPENING_TASK_RESULTS",
     "laya_case_processing_permission": "NOT_GRANTED_IN_THIS_RECONCILIATION",
     "laya_typed_decisions_result": "canonical/capabilities/opus55/COGNITIVE_BASIS_LAYA_TYPED_DECISIONS_BASELINE_001_RESULT.json",
     "laya_typed_decisions_workflow_run_id": 36818008161,
@@ -161,7 +161,7 @@
     "jevOS_runtime_rebind_artifact_digest": "sha256:c7cdb28a335b8f4f82b8d73c8ec959dd288c08d72705355ebf8c8d5eca14fc95",
     "jevOS_runtime_rebind_exact_decision_equivalence_on_frozen_v2": true,
     "decision_kernel_runtime_fingerprint_enforced_in_adapter": false,
-    "current_canonical_base_commit": "70cb51cafaa0d1f111c9eec0a5daa7d25792f617",
+    "current_canonical_base_commit": "b7c4efa4d35ba3709f37f3109daac87849a1c945",
     "current_base_kernel_gate_result_record": "canonical/capabilities/opus55/COGNITIVE_DECISION_KERNEL_GATE_VERIFY_001_RESULT.json",
     "current_base_kernel_gate_result_record_reviewed": false,
     "fresh_software_adjudication_task": "canonical/tasks/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001.json",
@@ -173,7 +173,7 @@
     "current_base_fresh_task_result": "canonical/capabilities/opus55/COGNITIVE_KERNEL_FRESH_SOFTWARE_ADJUDICATION_001_RESULT.json",
     "current_base_fresh_task_result_reviewed": false,
     "no_route_outcome_or_capability_credit_inferred_from_unreviewed_records": true,
-    "current_main_pointer_next_step": "EXECUTE_BATCHED_EVAL_PARITY_RANK_5_ON_HIGH_THROUGHPUT_EXECUTION_V2__ONE_SHOT_INDEPENDENT_VERIFIER__NO_TASK_SPECIFIC_PUBLIC_SEARCH",
+    "current_main_pointer_next_step": "RUN_GLYCAN_MS2_ELUCIDATION_RANK_6_ON_HIGH_THROUGHPUT_EXECUTION_V2__DO_NOT_FETCH_TASK_TOML__ONE_SHOT_VERIFIER",
     "current_main_rank5_lease_path": "canonical/action_intents/2026-10-01_LEASE_BATCHED_EVAL_PARITY_TB4_V1.json",
     "current_main_rank5_lease_content_reviewed": false,
     "rank5_task_execution_or_result_claim_in_this_reconciliation": false,
@@ -184,6 +184,17 @@
     "current_main_task_and_result_payloads_reviewed": false,
     "current_main_new_pass_score_or_credit_inferred": false,
     "prior_verified_pass_snapshot_base": "6d440fb1052adb50b2926de5af21df5fe00af46c",
-    "current_base_scoreboard_review_status": "NOT_REVIEWED_IN_THIS_RECONCILIATION"
+    "current_base_scoreboard_review_status": "NOT_REVIEWED_IN_THIS_RECONCILIATION",
+    "current_main_rank6_lease_path": "canonical/action_intents/2026-10-01_LEASE_GLYCAN_MS2_ELUCIDATION_TB4_V1.json",
+    "current_main_rank6_lease_content_reviewed": false,
+    "rank6_user_permission_status": "NOT_GRANTED_FOR_TASK_INSTRUCTIONS_OR_EXECUTION",
+    "rank6_task_execution_or_result_claim_in_this_reconciliation": false,
+    "current_main_rank5_contamination_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json",
+    "current_main_rank5_contamination_record_reviewed": false,
+    "current_main_rank5_user_instruction": "SKIP_WITHOUT_REORDERING__NO_EXPLICIT_REVERSAL",
+    "current_base_pointer_queue_hierarchy_next_action_mismatch": true,
+    "current_base_exact_head_guard_status": "BLOCKED_PENDING_AUTHORIZED_NEXT_ACTION_MIRROR_RECONCILIATION",
+    "current_base_campaign_status": "ACTIVE__C3_DETERMINISTIC_CONTROL_RETAINED__ETTIN_ZERO_TERMINAL_DELTA_FALSIFIED__ZERO_CAPABILITY_CREDIT",
+    "current_base_new_pass_score_or_credit_inferred": false
   }
 }
