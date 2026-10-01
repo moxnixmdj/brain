@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "NEXT_UNTOUCHED_FROZEN_SAMPLE_PREEXPOSURE_STAGE_A",
+  "next_progress_event_target": "RANK21_STAGE_B_INDEPENDENT_PREEXECUTION_PASS_OR_FAIL_CLOSED",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -997,16 +997,16 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "RANK20_CONTAMINATED_PREEXECUTION__SOURCE_BOUNDARY_PROMOTION_GATE_VERIFIED_MERGED__NEXT_CLEAN_SAMPLE_RECOMPUTE_PRIMARY",
-    "blocker": "NEXT_UNTOUCHED_FROZEN_SAMPLE_NOT_YET_RECOMPUTED",
+    "status": "RANK21_STAGE_A_INDEPENDENT_PASS__STAGE_B_EXPOSURE_ONLY_AUTHORIZED",
+    "blocker": "RANK21_STAGE_B_TASK_SPECIFIC_PLAN_NOT_YET_COMPILED_AND_FALSIFIED",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/governance/SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1.json",
-    "next_clean_rank": null,
-    "next_clean_task": null,
+    "evidence_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_STAGE_A_ADMISSION_V1.json",
+    "next_clean_rank": 21,
+    "next_clean_task": "foodstuff-beta-activity",
     "next_clean_task_authorized": false
   },
-  "next_required_action": "RECOMPUTE_NEXT_UNTOUCHED_FROZEN_SAMPLE_FROM_PRECOMMITTED_ORDER__RUN_STAGE_A_WITH_SOURCE_BOUNDARY_AND_EXECUTION_SURFACE_GATES__NO_RANK20_REPLAY",
+  "next_required_action": "EXPOSE_RANK21_OFFICIAL_INSTRUCTION_ONCE_UNDER_STAGE_B_ALLOWLIST__NO_TASK_COMMAND__COMPILE_REQUIREMENTS_ACCEPTANCE_FEASIBILITY_AND_SOURCE_BOUNDARY_PREFLIGHT",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1097,9 +1097,9 @@
     "replay_allowed": false
   },
   "next_clean_task": {
-    "rank": null,
-    "task": null,
-    "state": "RECOMPUTE_FROM_PRECOMMITTED_FROZEN_ORDER__RANK20_INELIGIBLE"
+    "rank": 21,
+    "task": "foodstuff-beta-activity",
+    "state": "STAGE_A_INDEPENDENT_PASS__STAGE_B_EXPOSURE_ONLY_AUTHORIZED"
   },
   "rank19_stage_c": {
     "status": "SPENT_EXECUTION_SURFACE_FAILURE__NO_TASK_AUDIO_ANALYSIS__NO_OUTPUT__NO_TERMINAL_VERDICT__ZERO_CREDIT__NO_REPLAY",
