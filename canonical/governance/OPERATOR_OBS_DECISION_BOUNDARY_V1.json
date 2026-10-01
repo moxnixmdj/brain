@@ -50,25 +50,27 @@
   "platform_pre_response_hard_gate_available": false,
   "truth_boundary": "HARD_ENFORCEMENT_APPLIES_TO_CANONICAL_BRAIN_AUTHORITY_AND_GUARDED_MUTATIONS__NOT_TO_RAW_CHAT_MESSAGE_EMISSION",
   "authority": [
-    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
     "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md"
   ],
   "required_pre_authority_steps": [
-    "LOAD_CURRENT_V6_INTERNALIZATION_INVARIANTS",
+    "LOAD_CURRENT_V7_INTERNALIZATION_INVARIANTS",
     "PERSIST_DURABLE_REASONING_DECISION_RECEIPT"
   ],
   "reasoning_durability": {
     "required": true,
     "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
     "chat_only_authority": false,
-    "current_theory_receipt": "canonical/reasoning/2026-09-30_OPAQUE_MODEL_CAPABILITY_OWNERSHIP_CORRECTION_V1.json"
+    "current_theory_receipt": "canonical/reasoning/2026-10-01_ATOMIC_CAUSAL_INTELLIGENCE_DECOMPOSITION_STRATEGY_V1.json"
   },
   "authority_refresh_20261001": {
     "status": "CURRENT",
     "obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "reason": "V3_REFERENCE_WAS_STALE_MIRROR__NO_BEHAVIORAL_REASON_TO_RETAIN_OLD_AUTHORITY"
-  }
+  },
+  "atomic_causal_intelligence_map": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+  "family_taxonomy_rule": "FAMILY_LABELS_ARE_EVALUATION_SURFACES_ONLY__CONSEQUENTIAL_IMPLEMENTATION_CLAIMS_REQUIRE_ATOMIC_CAUSAL_DECOMPOSITION"
 }
