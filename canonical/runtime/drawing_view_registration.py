@@ -61,7 +61,10 @@ def register_global_axis_deskew(
 
     weighted_deviations: list[float] = []
     usable_line_count = 0
-    for x1, y1, x2, y2 in lines[:, 0]:
+    # OpenCV 4 commonly returns N×1×4 while OpenCV 5 may return N×4.
+    # Normalize both exact API surfaces before consuming line tuples.
+    normalized_lines = np.asarray(lines).reshape(-1, 4)
+    for x1, y1, x2, y2 in normalized_lines:
         dx = float(x2 - x1)
         dy = float(y2 - y1)
         length = math.hypot(dx, dy)
