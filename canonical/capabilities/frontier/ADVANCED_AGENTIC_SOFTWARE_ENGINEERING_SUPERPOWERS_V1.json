@@ -62,9 +62,9 @@
     "prior_rank6": "TRANSPORT_INADMISSIBLE__NO_COGNITION_VERDICT"
   },
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
-  "current_atomic_blocker": "GENERIC_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE_NOT_YET_HARDENED",
-  "current_atomic_next_action": "HARDEN_FREECAD_API_CONTRACT_PREFLIGHT_AND_BUILDER_SEMANTIC_SUCCESS_ORACLE__VERIFY_FAIL_CLOSED__THEN_RECOMPUTE_NEXT_UNTOUCHED_SAMPLE",
-  "current_atomic_progress_event": "GENERIC_RANK22_FAILURE_IMMUNITY_VERIFIED_AND_MERGED",
+  "current_atomic_blocker": "GLOBAL_TERMINAL_PROOF_CUT_NOT_YET_COMPUTED_ACROSS_ALL_17_OPEN_FAMILIES",
+  "current_atomic_next_action": "SATURATE_ALL_OPEN_TERMINAL_OBLIGATIONS__GLOBAL_DEDUCTIVE_CLOSURE__COMPRESS_SHARED_RESIDUALS__COMPUTE_EXACT_GLOBAL_MINIMUM_REALITY_CUT__NO_NEW_UNTOUCHED_SOURCE_READ_OR_EXECUTION_UNTIL_ADMITTED",
+  "current_atomic_progress_event": "GLOBAL_MINIMUM_REALITY_CUT_VERDICT",
   "current_atomic_state_source": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
   "rank22_execution_reconciliation": {
     "status": "SPENT_BUILDER_RUNTIME_FAILURE__ZERO_CREDIT__NO_REPLAY",
@@ -78,5 +78,13 @@
   "information_minimization": {
     "status": "ACTIVE",
     "rule": "HARDEN_FROM_EXISTING_SPENT_EVIDENCE_BEFORE_NEW_UNTOUCHED_QUALIFICATION_SPEND"
+  },
+  "current_target_role": "ACCOUNTING_SURFACE_ONLY_WHILE_GLOBAL_CUT_SELECTS_CROSS_FAMILY_CRITICAL_PATH",
+  "global_terminal_proof_cut": {
+    "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "status": "PRIMARY_SCHEDULING_AUTHORITY",
+    "coding_rank_progression_paused": true,
+    "rank23": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json"
   }
 }
