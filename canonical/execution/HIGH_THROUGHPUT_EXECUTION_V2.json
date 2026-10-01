@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTION_MODE_V2",
+  "id": "HIGH_THROUGHPUT_EXECUTION_V2",
+  "status": "ACTIVE_DEFAULT",
+  "supersedes": "canonical/execution/FAST_EXECUTION_KERNEL_V1.json",
+  "objective": "MINIMIZE_WALL_CLOCK_TO_VERIFIED_REAL_EFFECT_WITHOUT_WEAKENING_EVIDENCE",
+  "defaults": [
+    "COARSE_CAUSAL_BURSTS",
+    "MINIMAL_STATE_REPLAY",
+    "PARALLELIZE_INDEPENDENT_TASK_SCOPED_WORK",
+    "RESUME_EXISTING_SESSIONS_AFTER_CARRIER_ONLY_REPAIR",
+    "VERIFY_CARRIER_PRECONDITIONS_BEFORE_CLASSIFYING_TASK_FAILURE",
+    "RECONCILE_AT_CAUSAL_OR_TERMINAL_BOUNDARIES"
+  ],
+  "runner_repairs": [
+    "moxnixmdj/verification-capsule-runner@1845784351c903ab132358a8aeb93f81f227077c",
+    "moxnixmdj/verification-capsule-runner@4bc0b3ba09d73b8787e57ca7dfad234e04edbd92"
+  ],
+  "live_validation": {
+    "pr": 283,
+    "branch_head": "93e1f6e02e726b00ea91801b23c2680b2ad946e9",
+    "state": "RESUMED_ON_REPAIRED_CARRIER"
+  },
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
