@@ -1138,9 +1138,11 @@
   "rank21_post_stage_b_contamination_20261001": {
     "status": "CONTAMINATED_POST_STAGE_B__EXTERNAL_DISCOVERY_RETURNED_TASK_SPECIFIC_VERIFIER_DERIVED_CONTENT__STAGE_C_FORBIDDEN__ZERO_CREDIT__NO_REPLAY",
     "evidence": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
-    "execution_count_used": 0,
+    "execution_count_used": 1,
     "terminal_verifier_count_used": 0,
-    "replay_allowed": false
+    "replay_allowed": false,
+    "execution_admissible": false,
+    "correction": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_REVOCATION_EXECUTION_TRUTH_CORRECTION_V1.json"
   },
   "continuous_obs": {
     "status": "ACTIVE_FAIL_CLOSED",
@@ -1148,5 +1150,12 @@
     "runtime": "canonical/runtime/continuous_obs_runtime.py",
     "external_information_actions_pre_authorized": true,
     "post_receipt_revalidation": true
+  },
+  "rank21_execution_truth_correction_20261001": {
+    "status": "BUILDER_EXECUTED_EXACTLY_ONCE_AFTER_CANONICAL_CONTAMINATION_REVOCATION__OUTPUT_INADMISSIBLE__NO_TERMINAL_VERIFIER__ZERO_CREDIT__NO_REPLAY",
+    "execution_count_used": 1,
+    "terminal_verifier_count_used": 0,
+    "capability_credit_delta": 0,
+    "evidence": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_REVOCATION_EXECUTION_TRUTH_CORRECTION_V1.json"
   }
 }
