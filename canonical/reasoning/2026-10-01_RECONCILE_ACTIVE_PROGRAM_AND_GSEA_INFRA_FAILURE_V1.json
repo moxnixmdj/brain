@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
   "receipt_id": "RECONCILE-ACTIVE-PROGRAM-AND-GSEA-INFRA-FAILURE-20261001-V1",
   "status": "CURRENT_BASE_DECISION_RECEIPT",
-  "canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
+  "canonical_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "real_objective": "Permanently own all useful Opus 5.5-or-better capabilities with external/JIT knowledge; the active coding lane still needs a comparable fresh-task Stage-1 score of at least 66.4 percent.",
   "governing_invariants": [
@@ -41,7 +41,8 @@
     "Metadata-only current-base paths also include canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json, canonical/action_intents/2026-10-01_LEASE_BATCHED_EVAL_PARITY_TB4_V1.json, and canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json; the new action/result contents were not opened. The historical user instruction to skip rank 5 without reordering remains binding absent explicit reversal.",
     "After rebase to current base, the branch pointer program mirrors the hierarchy but pointer/queue/hierarchy next-action equality remains unresolved; exact-head guard validation is pending.",
     "Current base 60c26db3f44069e38264a284f6edbf8f2203298c changes the hierarchy next-action class to rank 6. Pointer/queue/target next-action strings remain nonidentical. The current target summary status records a Brain-configured fresh-task pass, benchmark score pending, and zero capability credit; the underlying task/evidence was not opened, so this receipt makes no independent pass or score claim.",
-    "The exact-head guard on prior base b7c4efa4d35ba3709f37f3109daac87849a1c945/head 6350ca8 failed with pointer, queue, and target-record next-action mismatches. No task-specific contents were read or route fields changed."
+    "The exact-head guard on prior base b7c4efa4d35ba3709f37f3109daac87849a1c945/head 6350ca8 failed with pointer, queue, and target-record next-action mismatches. No task-specific contents were read or route fields changed.",
+    "Current base 9d2087800409a2ee5363441a5d61c16573ac7346: active program/target/blocker remain unchanged; the hierarchy and scoreboard select a rank-6 high-throughput action class, while pointer/queue/target next-action mirrors diverge. The capability target summary reports a Brain-configured fresh-task pass, benchmark score pending, and zero credit; underlying evidence remains unopened. This reconciliation changes only exact next-action mirrors and makes no task execution or result claim."
   ],
   "evidence_refs": [
     "canonical/CANONICAL_POINTER.json",
@@ -77,8 +78,8 @@
     "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFICATION_FAILURE_20261001_V1.json",
     "canonical/runtime/cognitive_tool_router.py"
   ],
-  "conclusion": "The historical rank-4 GSEA attempt earned no pass or capability credit; no new outcome is inferred from the newer unread record. This branch aligns the pointer program mirror with the active hierarchy and preserves the Stage-1 blocker. Current main now points toward a rank-6 high-throughput step and its target summary records a Brain-configured fresh-task pass with benchmark score pending and zero capability credit, but underlying task evidence remains unread and unverified by this reconciliation. The standing user boundary bars task-specific processing absent explicit permission. Pointer/queue/target next-action strings remain inconsistent and the exact guard failed on the prior base. The local kernel patch remains synthetic-only and unintegrated.",
-  "selected_route": "RECONCILE_POINTER_AND_GSEA_DISPOSITION__HOLD_COGNITIVE_ROUTE_PENDING_AUTHORIZED_REVIEW__NO_CREDIT",
+  "conclusion": "The current frontier remains Stage-1 coding breadth/score with zero capability credit. Current hierarchy/scoreboard metadata select the rank-6 high-throughput action class; the target summary records a fresh Brain-configured pass but the Stage-1 score is pending, and the underlying evidence was not inspected. The current blocker in this PR is a control-plane consistency defect: pointer, queue, and target next-action mirrors differ from hierarchy. Aligning all to the exact hierarchy string, including its clean-boundary/no-task-TOML qualifier, is the smallest safe correction. This action does not read task materials or execute the task, and does not claim score, pass, or capability credit.",
+  "selected_route": "EXACT_MIRROR_RECONCILIATION_TO_HIERARCHY__PRESERVE_NO_TASK_TOML_BOUNDARY__NO_EXECUTION",
   "rejected_material_alternatives": [
     "Revert the hierarchy to the previous narrow program label, undoing the explicit all-family activation.",
     "Bypass the trusted validator or treat the rank-4 workflow conclusion as a task pass.",
@@ -102,7 +103,8 @@
     "Current main’s rank-5 lease/result and newer GSEA/cognitive result paths are present by metadata only. Their outcomes are not reviewed here, and this receipt cannot say whether the sample was adjudicated clean or whether any new pass/score exists.",
     "The current pointer next-step conflicts with the user’s earlier skip-rank-5 instruction; this reconciliation obeys the user boundary and does not execute the task.",
     "Current main has a next-action mirror disagreement across pointer, queue, and hierarchy. The correct route is not adjudicated here because the rank-5 task-specific materials are unopened and the standing user instruction conflicts with current pointer metadata.",
-    "Current base metadata indicates a rank-6 lease action exists, but this reconciliation did not review whether it is valid/current or whether the task is actually leased; no task state is inferred from filenames."
+    "Current base metadata indicates a rank-6 lease action exists, but this reconciliation did not review whether it is valid/current or whether the task is actually leased; no task state is inferred from filenames.",
+    "The target record’s fresh-task-pass summary is not independently checked here; it does not establish the Stage-1 benchmark score, which remains pending."
   ],
   "assumptions": [
     "The later commit titled Activate all-family Opus 5.5 capability obsolescence expresses the intended active-program decision; updating the pointer mirror is the minimum non-goal-changing correction.",
@@ -115,7 +117,7 @@
     "No change to the terminal objective, active capability target, Stage-1 score threshold, or sample order.",
     "No new pointwise JEV request or cognitive-basis follow-up experiment is run by this reconciliation; the already-recorded Jevos baseline remains zero-credit until heldout transfer and terminal-task evidence are established."
   ],
-  "next_action": "Request explicit permission before opening the current rank-6 lease/task/result materials or underlying evidence summarized by the target record. Do not push/merge PR #606 while pointer/queue/target next-action mirrors disagree and the trusted exact-head guard is blocked. After the user resolves the route/permission, rebind to then-current main, reconcile only authorized control-plane fields, run the exact-head guard and synthetic tests, and wait for fresh checks.",
+  "next_action": "Run the trusted exact-head guard, active-target mirror/firewall unit tests and action-intent sensitivity checks, and cross-surface JSON checks against current base 9d2087800409a2ee5363441a5d61c16573ac7346. If clean, push only the fixed branch and wait for fresh PR checks, then return to the authorized rank-6 route without fetching task TOML or reading task-specific materials. Keep capability credit at zero until independent Brain-configured evidence establishes the Stage-1 bar.",
   "supersession_conditions": [
     "A newer canonical main commit changes the pointer, active program, active capability target, Stage-1 blocker, or task sample order.",
     "Independent retrieval or adjudication of the rank-4 artifact establishes additional terminal-verifier facts.",

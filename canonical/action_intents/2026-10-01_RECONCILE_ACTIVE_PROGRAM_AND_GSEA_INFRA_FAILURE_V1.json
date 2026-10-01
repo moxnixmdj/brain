@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "RECONCILE-ACTIVE-PROGRAM-AND-GSEA-INFRA-FAILURE-20261001-V1",
-  "status": "BLOCKED__CURRENT_BASE_NEXT_ACTION_MIRROR_DRIFT__RANK6_PERMISSION_REQUIRED",
+  "status": "PARTIALLY_EXECUTED__LIVE_ACTION_MIRRORS_RECONCILED__GUARD_PENDING",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
+  "canonical_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
   "causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
   "action_kind": "RECONCILE_FRONTIER",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-  "expected_parent_frontier_change": "Align the canonical pointer program mirror with the active hierarchy and preserve the historical rank-4 GSEA no-pass/no-credit disposition without inferring any new result. Current main metadata reports C3 deterministic control retained with zero credit and now directs the frontier to a rank-6 high-throughput execution; a rank-6 lease-action path exists, but its action/task/result contents remain unread. The standing user boundary bars task-specific reading or execution absent explicit permission. Keep the frozen sample order unchanged, preserve the Stage-1 target, make no pass/score/credit claim, and leave the current pointer/queue/hierarchy next-action mismatch unresolved pending user direction.",
+  "expected_parent_frontier_change": "Restore exact current-base consistency across the canonical pointer, active hierarchy, immediate queue, target record, and scoreboard: use the hierarchy-authoritative rank-6 high-throughput action class, preserving the explicit clean-boundary and no-task-TOML constraint. Keep the Stage-1 target/blocker and zero-credit accounting unchanged; preserve the historical rank-4 GSEA no-pass disposition, and record newer result paths only as unread. This reconciliation performs no task lease/execution, reads no task-specific instruction/result, reorders no frozen sample, and claims no new pass, score, or capability credit.",
   "highest_leverage_now": true,
   "governance_change": false,
   "weakens_existing_guard": false,
@@ -49,9 +49,10 @@
     "Boundary incident 2: a narrowly intended scan of nested hierarchy/queue next-action fields unexpectedly printed unrelated route next-action excerpts from other task-specific records. This was contrary to the standing boundary; no associated task files were opened and the excerpts were not used. The scan was stopped; further inspection is restricted to exact control-plane fields and path metadata.",
     "Current base b7c4efa4d35ba3709f37f3109daac87849a1c945 preserves the active target/blocker and C3 zero-credit campaign status. Pointer and queue metadata now point to a rank-6 high-throughput action; hierarchy action-class metadata also refers to rank 6 but the pointer/queue/hierarchy strings do not match exactly. Main contains canonical/action_intents/2026-10-01_LEASE_GLYCAN_MS2_ELUCIDATION_TB4_V1.json, but its contents, task instructions, result records, and canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json were not opened. Rank 5 remains under the standing skip instruction; no task execution, lease, pass, score, or credit is claimed.",
     "Current base 60c26db3f44069e38264a284f6edbf8f2203298c changed the hierarchy next-action class to rank 6. Pointer and queue still contain nonidentical rank-6 strings, and the target record retains a generic Stage-1 next action, so exact next-action mirrors remain inconsistent. The current target summary status says BRAIN_CONFIGURED_FRESH_TASK_VERIFIED_PASS__STAGE1_BENCHMARK_SCORE_PENDING__ZERO_CAPABILITY_CREDIT; underlying evidence was not opened and this reconciliation makes no independent task-pass or score claim. The rank-6 lease/task files remain unread.",
-    "On prior base b7c4efa4d35ba3709f37f3109daac87849a1c945, the exact-head guard at 6350ca8 failed with POINTER_HIERARCHY_NEXT_ACTION_MISMATCH, QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH, and TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH. Current base changed hierarchy metadata again; a fresh guard is still required after current-base rebinding."
+    "On prior base b7c4efa4d35ba3709f37f3109daac87849a1c945, the exact-head guard at 6350ca8 failed with POINTER_HIERARCHY_NEXT_ACTION_MISMATCH, QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH, and TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH. Current base changed hierarchy metadata again; a fresh guard is still required after current-base rebinding.",
+    "Current base 9d2087800409a2ee5363441a5d61c16573ac7346 reports C3_FRESH_AUTHORIZED with zero capability credit; the target summary says a Brain-configured fresh-task pass is recorded while the Stage-1 score remains pending. The underlying result/task evidence was not opened. The active hierarchy selects rank 6; this action aligns exact pointer/queue/target/scoreboard mirrors to that hierarchy class while preserving the no-task-TOML constraint and performing no task execution."
   ],
-  "stop_condition": "Stop after current-base reconciliation, exact-head guard validation, and cross-surface JSON consistency. Keep rank-4 at no pass/no credit; record the newer GSEA record as unread. The active target/blocker and C3 campaign status are project-level metadata only. Current main has a rank-6 lease-action path and rank-6 next-step metadata, but its contents and task instructions remain unopened; do not execute or claim lease/result under the standing boundary. Do not reorder rank 5 or open rank 6 without explicit permission. Resolve the pointer/queue/hierarchy next-action mismatch only after user direction; do not claim route or capability credit.",
+  "stop_condition": "Stop when pointer, hierarchy, queue, target record, hierarchy progress event, and scoreboard next-action fields exactly match the current hierarchy action class; the trusted exact-head guard, active-target mirror/firewall unit tests, action-intent sensitivity checks, and cross-surface JSON checks pass; and the rank-4 disposition remains no-pass/no-credit. Do not fetch or read task TOML/instructions or task-specific results, execute rank 6, reorder rank 5, or claim any new score/pass/credit in this mirror-reconciliation action. The rank-6 route remains a subsequent action under the current canonical control plane.",
   "theory_invariants": {
     "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
     "knowledge_policy": "EXTERNAL_JIT",
@@ -77,7 +78,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "60c26db3f44069e38264a284f6edbf8f2203298c",
+    "canonical_base_commit": "9d2087800409a2ee5363441a5d61c16573ac7346",
     "real_outcome": "Permanently own useful Opus 5.5-or-better capabilities; immediately, establish a comparable fresh-task Stage-1 score of at least 66.4 percent without claiming unverified work.",
     "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "obs_goal": {
@@ -115,7 +116,7 @@
       "surviving_gap": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET"
     },
     "obs_blocker": {
-      "intrinsic_or_path_specific": "The program mirror aligns with the active hierarchy, and the Stage-1 target/blocker remain. Historical rank-4 verification failed before tests with no pass/credit; a newer current-base GSEA record exists but is unread. Current main metadata points to a rank-6 high-throughput route and contains a rank-6 lease-action path; task instructions and results were not opened. Pointer/queue/hierarchy next-action mirrors are inconsistent, and the trusted guard requires exact agreement. The user boundary bars task-specific processing without explicit permission.",
+      "intrinsic_or_path_specific": "The active target/blocker are unchanged. The current base had a program mirror mismatch and three divergent next-action mirrors: pointer, queue, and target record did not match the hierarchy’s rank-6 class; hierarchy progress and scoreboard already matched the hierarchy. This action normalizes those mirrors to the hierarchy while preserving the no-task-TOML/clean-boundary constraint. It does not inspect the rank-6 lease/task/result, call a verifier, or claim a task outcome.",
       "delete_bypass_substitute_options": [
         "DELETE: remove no task or capability; preserve the Stage-1 evidence requirement.",
         "BYPASS: rejected; do not bypass the trusted drift guard, hash check, or independent verifier.",
@@ -126,8 +127,7 @@
         "CONFIGURE: change only the contradictory pointer program field, stale pointwise-campaign state, and proven malformed-response fail-open in this PR.",
         "INTEGRATE: bind the changes to a current-base intent and exact-head trusted validation.",
         "DEFER: frozen-set gate and real-task delta require separate current-base action; processing prior-task-derived cases also requires explicit permission and hash-verified runtime.",
-        "EXECUTE_CURRENT_RANK5_POINTER_STEP: rejected here because the user’s standing instruction says skip the contaminated rank-5 sample without reordering; require explicit reversal and valid current-base authority first.",
-        "OPEN_OR_EXECUTE_RANK6_NOW: rejected pending explicit user permission to read its task-specific lease/instructions and resolve the current pointer/queue/hierarchy mismatch."
+        "TASK EXECUTION: defer to a separate one-shot authorized action after mirror guard passes; do not fetch task TOML or inspect task-specific results here."
       ],
       "surviving_causal_blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET; rank-4 contributes no pass because independent tests did not start."
     },
@@ -143,19 +143,18 @@
         "INTEGRATE"
       ],
       "routes_ranked": [
-        "1. Preserve pointer program alignment and the historical GSEA no-credit disposition; record current C3/rank-6 control metadata and the exact next-action mirror drift without opening task materials, leasing, or execution.",
+        "1. EXACT_MIRROR_RECONCILIATION_TO_HIERARCHY__PRESERVE_NO_TASK_TOML_BOUNDARY__NO_EXECUTION: copy the hierarchy-authoritative next-action class exactly to every current mirror; make no task-material access or execution.",
         "2. Use a Jevos mutable release URL without checking asset hashes; rejected because a confirmed in-place runtime replacement occurred and the release tag is not immutable.",
         "3. Promote or autonomously deploy the current kernel/Jevo route; rejected because the latest current-base tournament and fresh task-result contents are unreviewed, the adapter does not enforce runtime/model fingerprints, and no terminal-task delta is established; no route is promoted.",
         "4. Process the frozen 28-case pointwise set again; blocked by the explicit user boundary on prior-task-derived data absent permission.",
-        "5. Open or execute the current rank-6 candidate now; deferred because the user has not explicitly permitted reading task-specific materials, and the current lease/action path has not been reviewed.",
+        "5. Read or execute the rank-6 task now; deferred to a separate authorized, exact-base action. This PR only reconciles control-plane mirrors and will not fetch task TOML or inspect task-specific results.",
         "6. Revert the hierarchy to the old narrow program label; rejected because commit 8c18360 explicitly activated the all-family campaign.",
         "7. Bypass the trusted guard or count the GSEA workflow conclusion as reward; rejected as unsupported and fail-open.",
         "8. Replay rank 4, reorder rank 5, or read rank-6 instructions before a valid lease; rejected by one-shot and contamination controls.",
         "9. Write to a runner branch or use PR comments as a command channel; excluded by the standing branch/transport boundary.",
-        "10. Execute the current pointer rank-5 step or read its lease/task materials now; rejected in this reconciliation because the user explicitly required skipping the contaminated rank-5 sample and no later explicit reversal/permission was given.",
-        "11. Change the pointer/queue next-action now to resolve current hierarchy drift; defer pending user direction because this would supersede current-main rank-5 metadata while the standing user instruction still says skip rank 5."
+        "10. Fetch rank-6 task TOML or inspect task results during this reconciliation; rejected by the explicit no-task-material boundary and the pointer’s clean-boundary action class."
       ],
-      "losing_routes_reason": "The pointer and queue now indicate rank 6, but the new lease-action and task-specific files are unread and the standing permission boundary remains. The hierarchy’s corresponding next-action class differs from the pointer/queue strings, so the trusted guard fails until the control-plane mirrors are reconciled. No route or task outcome is adopted.",
+      "losing_routes_reason": "This metadata-only correction directly removes the exact mirror mismatch while preserving the active Stage-1 blocker and zero-credit state. Route execution, task inspection, sample changes, and any claim of a fresh score are not needed or authorized within this action.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
@@ -185,7 +184,7 @@
         "Reused current-main route/tournament/runtime-rebind summaries plus the generic kernel candidate; verified workflow/artifact metadata only, no artifact payload or 28-case row access.",
         "Ran six mocked-response canaries against the local kernel candidate; no endpoint call. Refreshed rank-6 freshness with repository metadata only."
       ],
-      "search_stop_decision": "The pointer program mirror now matches the hierarchy; the remaining trusted-guard blocker is exact next-action disagreement across pointer, queue, and hierarchy. Current main metadata points to rank 6 and a lease-action path, but task-specific contents remain unopened; the prior rank-5 skip instruction remains in force. Stop task discovery here, request explicit permission, and do not claim a pass, score, or credit.",
+      "search_stop_decision": "The current base and hierarchy have been reviewed at summary-field level. Exact mirrors are normalized on this branch. Stop after the exact-base trusted guard, targeted mirror/firewall unit tests, sensitivity tests, and JSON equality checks; do not open task materials or execute rank 6 in this reconciliation.",
       "affected_layers_only_on_revalidation": true
     },
     "routes_considered": [
@@ -213,10 +212,10 @@
       "READ_RANK6_TASK_MATERIALS_BEFORE_LEASE",
       "WRITE_TO_RUNNER_BRANCH_OR_PR_COMMENT_TRANSPORT"
     ],
-    "selected_surviving_route": "RECONCILE_CURRENT_BASE__HOLD_COGNITIVE_ROUTE_PENDING_AUTHORIZED_REVIEW__KEEP_STAGE1_PRIMARY",
-    "why_selected_route_is_fastest_sufficient": "It repairs the exact program mirror contradiction and records the rank-4 pre-test infrastructure failure without overclaim, while avoiding an unsupported cognitive-route conclusion after current main changed the tournament and added a fresh result. It keeps the task unopened, preserves Stage-1 primacy, and adds no capability credit or case processing.",
-    "expected_parent_level_state_change": "Align the canonical pointer program mirror with the active hierarchy and preserve the historical rank-4 GSEA no-pass/no-credit disposition without inferring any new result. Current main metadata reports C3 deterministic control retained with zero credit and now directs the frontier to a rank-6 high-throughput execution; a rank-6 lease-action path exists, but its action/task/result contents remain unread. The standing user boundary bars task-specific reading or execution absent explicit permission. Keep the frozen sample order unchanged, preserve the Stage-1 target, make no pass/score/credit claim, and leave the current pointer/queue/hierarchy next-action mismatch unresolved pending user direction.",
-    "stop_condition": "Stop after current-base reconciliation, exact-head guard validation, and cross-surface JSON consistency. Keep rank-4 at no pass/no credit; record the newer GSEA record as unread. The active target/blocker and C3 campaign status are project-level metadata only. Current main has a rank-6 lease-action path and rank-6 next-step metadata, but its contents and task instructions remain unopened; do not execute or claim lease/result under the standing boundary. Do not reorder rank 5 or open rank 6 without explicit permission. Resolve the pointer/queue/hierarchy next-action mismatch only after user direction; do not claim route or capability credit.",
+    "selected_surviving_route": "EXACT_MIRROR_RECONCILIATION_TO_HIERARCHY__PRESERVE_NO_TASK_TOML_BOUNDARY__NO_EXECUTION",
+    "why_selected_route_is_fastest_sufficient": "The remaining defect is purely control-plane metadata: the branch’s active hierarchy already selects the rank-6 action, but current-base pointer, queue, and target mirrors do not all match it. Copying one exact hierarchy action class to every mirror is the smallest sufficient repair; adding the existing explicit clean-boundary/no-task-TOML qualifier preserves the user boundary. No task instructions/results or runner state need to be read, and no task or score is produced by this action.",
+    "expected_parent_level_state_change": "Restore exact current-base consistency across the canonical pointer, active hierarchy, immediate queue, target record, and scoreboard: use the hierarchy-authoritative rank-6 high-throughput action class, preserving the explicit clean-boundary and no-task-TOML constraint. Keep the Stage-1 target/blocker and zero-credit accounting unchanged; preserve the historical rank-4 GSEA no-pass disposition, and record newer result paths only as unread. This reconciliation performs no task lease/execution, reads no task-specific instruction/result, reorders no frozen sample, and claims no new pass, score, or capability credit.",
+    "stop_condition": "Stop when pointer, hierarchy, queue, target record, hierarchy progress event, and scoreboard next-action fields exactly match the current hierarchy action class; the trusted exact-head guard, active-target mirror/firewall unit tests, action-intent sensitivity checks, and cross-surface JSON checks pass; and the rank-4 disposition remains no-pass/no-credit. Do not fetch or read task TOML/instructions or task-specific results, execute rank 6, reorder rank 5, or claim any new score/pass/credit in this mirror-reconciliation action. The rank-6 route remains a subsequent action under the current canonical control plane.",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "This is a canonical pointer/hierarchy reconciliation and no-credit evidence record; it does not select or execute a capability-acquisition route."
