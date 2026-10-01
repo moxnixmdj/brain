@@ -90,7 +90,7 @@ def extract_primitives(
     )
     lines: list[LinePrimitive] = []
     if lines_raw is not None:
-        for x1, y1, x2, y2 in lines_raw[:, 0]:
+        for x1, y1, x2, y2 in np.asarray(lines_raw).reshape(-1, 4):
             a = (int(x1), int(y1))
             b = (int(x2), int(y2))
             if b < a:
