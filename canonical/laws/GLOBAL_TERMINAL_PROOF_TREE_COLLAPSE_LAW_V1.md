@@ -81,3 +81,29 @@ MINIMIZE_LONGEST_UNAVOIDABLE_TERMINAL_INFORMATION_CHAIN
 THEN MINIMIZE_NEW_REALITY_INFORMATION
 THEN MINIMIZE_WALL_CLOCK
 subject always to truthful terminal closure and hard $0 incremental spend.
+
+
+## Exactness scope hardening
+
+An exact global minimum is not a meaningful claim over an open-ended, undiscovered action universe.
+
+Therefore every claim of an exact global minimum reality cut MUST be explicitly relative to a frozen finite universe and frozen cost model. Before exact-cut computation, the controller must freeze and hash:
+
+- the complete current open terminal-obligation graph;
+- the evidence-saturation receipt;
+- the finite admissible candidate proof-action universe;
+- the discovery frontier that produced that universe;
+- the cost model used to compare new reality and wall-clock;
+- each candidate action's complete internal dependency bundle.
+
+The canonical compiler is `canonical/runtime/global_proof_cut_compiler.py`, verified by `canonical/verification/GLOBAL_PROOF_CUT_COMPILER_FROZEN_UNIVERSE_VERIFICATION_20261002_V1.json`.
+
+The exactness label is:
+
+`EXACT_RELATIVE_TO_FROZEN_DECLARED_CANDIDATE_UNIVERSE_AND_COST_MODEL`
+
+and never means that no undiscovered strategy could exist.
+
+Any newly discovered candidate action, newly discovered terminal obligation, changed cost model, or invalidated evidence receipt immediately invalidates the freeze and requires global recomputation before new untouched information is spent.
+
+Independent admitted cut members are parallel. Wall-clock optimization therefore uses the maximum declared critical-path wall-clock of selected independent bundles, not the arithmetic sum of their wall clocks.
