@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-01",
+  "decision_id": "2026-10-01_TOTAL_SYSTEM_OBS_RECONCILIATION_V3",
+  "status": "CURRENT_BASE_RECONCILIATION__ZERO_CAPABILITY_CREDIT",
+  "real_objective": "Remove stale or contradictory OBS, reasoning, acquisition, and execution-control state so every worker uses one current authority while preserving clean evidence and minimum wall-clock to 19/19 ownership.",
+  "governing_invariants": [
+    "Knowledge external/JIT; capabilities permanently Brain-owned.",
+    "Underlying capability invention forbidden.",
+    "Use current V7 acquisition laws, OBS schema V6, and action-intent template V8.",
+    "WHITE_BOX_HARVEST belongs before COMPOSE in deletion-first acquisition order.",
+    "Workflow success is not terminal task success.",
+    "Rank-6 is spent after execution artifact handoff failure and must not be replayed for promotion.",
+    "OBS activity adds zero capability credit.",
+    "Private chain-of-thought is not required; consequential rationale is preserved by evidence-bound receipts."
+  ],
+  "material_premises": [
+    "ACTIVE_GOAL_HIERARCHY still references OBS schema V5 and action template V7 while CANONICAL_POINTER requires V6/V8.",
+    "ACTIVE_GOAL_HIERARCHY still points to the September 30 theory receipt while CANONICAL_POINTER names the October 1 white-box strategy receipt.",
+    "The newly landed OBS-everything acquisition order omits WHITE_BOX_HARVEST despite V7 law and CANONICAL_POINTER requiring it.",
+    "The hierarchy C3 mirror still says SkillRouter spent screen running even though fresh SkillRouter gain is recorded and several cheap gate/cascade/majority variants were falsified out of sample.",
+    "PR #605 was closed as obsolete because it encoded the superseded generic shared-Jev route.",
+    "Rank-6 run 36826634715 reached terminal verification but failed artifact handoff; canonical evidence records reward 0, no cognition verdict, no coding credit, and a merged generic staging fix."
+  ],
+  "evidence_refs": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/governance/OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V1.json",
+    "canonical/capabilities/opus55/RANK6_GLYCAN_EXECUTION_HANDOFF_FAILURE_20261001_V1.json",
+    "canonical/governance/COGNITIVE_BASIS_COMPRESSION_CAMPAIGN_V1.json",
+    "canonical/capabilities/opus55/COGNITIVE_PRIMITIVE_IMPLEMENTATION_FRONTIER_V1.json",
+    "canonical/reasoning/2026-10-01_WHITE_BOX_CAPABILITY_HARVEST_STRATEGY_V1.json",
+    "https://github.com/moxnixmdj/brain/pull/605",
+    "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36826634715"
+  ],
+  "conclusion": "Keep the OBS-everything direction, but correct the stale cross-surface authority and missing white-box route. Delete obsolete generic-Jev work, preserve rank-6 as transport failure only, and continue with the next untouched frozen coding task on the patched runner.",
+  "selected_route": "EXACT_CURRENT_BASE_CONTROL_SURFACE_RECONCILIATION__NO_NEW_OBS_LAYER",
+  "rejected_material_alternatives": [
+    "Create another OBS framework.",
+    "Treat workflow success or reward zero as a cognition verdict.",
+    "Replay rank 6.",
+    "Continue generic shared-Jev default architecture.",
+    "Ignore schema/template/theory mirror drift.",
+    "Remove WHITE_BOX_HARVEST from the acquisition order."
+  ],
+  "uncertainties": [
+    "A newer main commit before merge would invalidate this exact-base receipt.",
+    "C3 broader generalization and latency remain unresolved despite fresh gain.",
+    "Next untouched coding task outcome is unknown."
+  ],
+  "assumptions": [
+    "Main base for this receipt is exactly 44d42ab54d7a98e2c0d6820b9775b67ff483ba67."
+  ],
+  "non_goals": [
+    "No task replay.",
+    "No capability promotion.",
+    "No new training.",
+    "No new governance layer.",
+    "No hidden-verifier or task-solution inspection."
+  ],
+  "next_action": "Run trusted guard on the exact branch. If valid and main is unchanged, merge this reconciliation, then continue the next untouched frozen coding task on the patched runner while the cognitive residual lane separately attacks C7/C2/C5/C1/C4.",
+  "supersession_conditions": [
+    "Main materially changes before merge.",
+    "A newer theory receipt supersedes the current October 1 strategy.",
+    "Active coding blocker changes after a fresh admissible task."
+  ],
+  "supersedes": null
+}
