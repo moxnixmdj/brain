@@ -1,0 +1,10 @@
+{
+  "command_sha256": "878adbb64bf76316ebd55b7a0389ed1c10edf7239fff7e109de0a514f867288d",
+  "duration_sec": 0.092,
+  "exit_code": 0,
+  "schema": "BRAIN_HARBOR_OBSERVATION_V1",
+  "session_id": "harbor-mp-checkpoint-consolidation-dev-20261001-v1",
+  "stderr": "",
+  "stdout": "superseded: layout search + consolidation is commands/003.sh\n",
+  "step": 1
+}
