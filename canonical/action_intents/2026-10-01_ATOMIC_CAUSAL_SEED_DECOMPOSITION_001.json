@@ -11,7 +11,7 @@
   "action_kind": "RECONCILE_FRONTIER",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
   "expected_parent_frontier_change": "ADD_FIRST_EVIDENCE_BOUND_ATOMIC_CAUSAL_LEAVES_FROM_SPENT_C3_C6_C7_EVIDENCE__SPLIT_DOWNSTREAM_FAILURE_DETECTION_FROM_UPSTREAM_CAUSAL_ATTRIBUTION__PRESERVE_LIVE_RANK9_TASK_BOUNDARY__ZERO_CAPABILITY_CREDIT",
-  "highest_leverage_now": false,
+  "highest_leverage_now": true,
   "governance_change": false,
   "weakens_existing_guard": false,
   "user_authorized_governance_change": false,
@@ -143,5 +143,6 @@
       "discovery_required": false,
       "not_applicable_reason": "No new external route selection is needed for this decomposition step."
     }
-  }
+  },
+  "highest_leverage_scope": "INDEPENDENT_SPARE_CAPACITY_ONLY__DOES_NOT_PREEMPT_LIVE_RANK9_PRIMARY_EXECUTION"
 }
