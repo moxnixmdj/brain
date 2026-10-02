@@ -1,7 +1,8 @@
 """Content-addressed candidate receipt index for canonical proof atoms.
 
-This is discovery only. Exact proposition occurrence identifies a file worth explicit
-semantic review; it is never acceptance evidence by itself.
+Discovery only. Exact proposition occurrence identifies a file worth explicit semantic
+review; it is never acceptance evidence by itself. V2 consumes the active refinement-
+aware proof-atom basis and fails closed if candidate enumeration bounds are exceeded.
 """
 from __future__ import annotations
 
@@ -38,6 +39,7 @@ EXCLUDED_BASENAMES = {
     "CURRENT_TERMINAL_AUTHORITY_V1.json",
     "EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
     "PROOF_ATOM_RECEIPT_INDEX_V1.json",
+    "PROOF_ATOM_RECEIPT_INDEX_V2.json",
 }
 EXCLUDED_REL_PATHS = {
     "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V1.json",
@@ -52,6 +54,9 @@ def _fail(*errors: str) -> dict[str, Any]:
         "errors": sorted(set(errors)),
         "canonical_atom_count": 0,
         "candidate_match_count": 0,
+        "candidate_match_total_count": 0,
+        "bounded_incomplete": False,
+        "bounded_atoms": [],
         "atoms": [],
         "new_reality_units_consumed": 0,
         "capability_credit_delta": 0,
@@ -126,9 +131,11 @@ def build_index(
         file_cache.append((rel, _source_class(rel), _blob_sha(data), text))
 
     atom_rows = []
-    total_matches = 0
+    retained_match_count = 0
+    discovered_match_count = 0
     source_class_counts: dict[str, int] = {}
     atoms_with_matches = 0
+    bounded_atoms: list[str] = []
 
     for atom in atoms:
         proposition = atom.get("proposition")
@@ -137,54 +144,71 @@ def build_index(
             return _fail("CANONICAL_ATOM_INVALID")
 
         matches = []
+        discovered = 0
         for rel, source_class, blob_sha, text in file_cache:
             if proposition not in text:
                 continue
             hits = _line_hits(text, proposition)
             if not hits:
                 continue
-            matches.append({
-                "path": rel,
-                "git_blob_sha": blob_sha,
-                "source_class": source_class,
-                "line_numbers": hits[:16],
-                "candidate_only": True,
-            })
+            discovered += 1
             source_class_counts[source_class] = source_class_counts.get(source_class, 0) + 1
-            if len(matches) >= MAX_MATCHES_PER_ATOM:
-                break
+            if len(matches) < MAX_MATCHES_PER_ATOM:
+                matches.append({
+                    "path": rel,
+                    "git_blob_sha": blob_sha,
+                    "source_class": source_class,
+                    "line_numbers": hits[:16],
+                    "candidate_only": True,
+                })
 
-        if matches:
+        truncated = discovered > MAX_MATCHES_PER_ATOM
+        if truncated:
+            bounded_atoms.append(atom_id)
+        if discovered:
             atoms_with_matches += 1
-        total_matches += len(matches)
+        retained_match_count += len(matches)
+        discovered_match_count += discovered
         atom_rows.append({
             "atom_id": atom_id,
             "proposition": proposition,
             "associated_target_predicates": atom.get("associated_target_predicates", []),
             "candidate_match_count": len(matches),
+            "candidate_match_total_count": discovered,
+            "candidate_match_truncated": truncated,
             "candidate_matches": matches,
             "candidate_only": True,
         })
 
-    zero = sorted(row["atom_id"] for row in atom_rows if row["candidate_match_count"] == 0)
-    nonzero = sorted(row["atom_id"] for row in atom_rows if row["candidate_match_count"] > 0)
+    zero = sorted(row["atom_id"] for row in atom_rows if row["candidate_match_total_count"] == 0)
+    nonzero = sorted(row["atom_id"] for row in atom_rows if row["candidate_match_total_count"] > 0)
+    bounded_incomplete = bool(bounded_atoms)
+    status = (
+        "BOUNDED_INCOMPLETE__CANDIDATE_MATCH_CAP_BOUND__ZERO_CREDIT"
+        if bounded_incomplete
+        else "PASS__CONTENT_ADDRESSED_CANDIDATE_RECEIPT_INDEX_COMPUTED__ZERO_CREDIT"
+    )
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__CONTENT_ADDRESSED_CANDIDATE_RECEIPT_INDEX_COMPUTED__ZERO_CREDIT",
+        "status": status,
         "errors": [],
         "canonical_atom_count": len(atom_rows),
         "scanned_file_count": len(file_cache),
-        "candidate_match_count": total_matches,
+        "candidate_match_count": retained_match_count,
+        "candidate_match_total_count": discovered_match_count,
         "atoms_with_candidate_matches": atoms_with_matches,
         "atoms_without_candidate_matches": len(zero),
         "atom_ids_with_candidate_matches": nonzero,
         "atom_ids_without_candidate_matches": zero,
         "candidate_matches_by_source_class": dict(sorted(source_class_counts.items())),
+        "bounded_incomplete": bounded_incomplete,
+        "bounded_atoms": sorted(bounded_atoms),
         "atoms": atom_rows,
         "rule": (
             "EXACT_LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
             "CONTENT_ADDRESS_EACH_MATCH__EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
+            "ANY_MATCH_ENUMERATION_CAP_BINDING_FORBIDS_COMPLETE_SCAN_STATUS__"
             "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
         ),
         "new_reality_units_consumed": 0,
