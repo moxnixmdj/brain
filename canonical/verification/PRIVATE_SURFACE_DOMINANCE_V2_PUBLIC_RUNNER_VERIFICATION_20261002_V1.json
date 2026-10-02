@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__ALL_BLOCKED_PRIVATE_SURFACES_REDUNDANT_AS_EXECUTION_ROUTES__ZERO_TERMINAL_RESULTS",
+  "brain_repository": "moxnixmdj/brain",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 484,
+  "public_merge_commit": "fb660fe12b818e409237b2293d36a61ab8343750",
+  "workflow_run_id": 36955432710,
+  "job_id": 110677238228,
+  "input_path": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_INPUT_V2.json",
+  "input_blob_sha": "d651a9af9ba4ac16c4a0c1271fb4933ff3e9f277",
+  "compiler_path": "canonical/runtime/proof_route_dominance.py",
+  "compiler_blob_sha": "64efeaad5d4295d5bd1a3bd53feae5170c22a8a4",
+  "conclusions": [
+    "GLOBAL_UNCOVERED_BEHAVIORAL_OBLIGATIONS_ZERO",
+    "BLOCKED_FRONTIERCODE_1_1_REDUNDANT",
+    "BLOCKED_CURSORBENCH_4_0_REDUNDANT",
+    "BLOCKED_AA_BRIEFCASE_V1_1_REDUNDANT",
+    "BLOCKED_FINANCE_AGENT_V2_PRIVATE_REDUNDANT",
+    "BLOCKED_MYSTERYMECHANISM_REDUNDANT",
+    "ROUTE_DELETION_DOES_NOT_INHERIT_PRIVATE_SCORE_OR_GRANT_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
