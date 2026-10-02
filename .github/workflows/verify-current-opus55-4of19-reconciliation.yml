@@ -1,0 +1,45 @@
+name: Verify current Opus55 4-of-19 reconciliation
+
+on:
+  push:
+    paths:
+      - "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+      - "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+      - "canonical/runtime/acceptance_proof_transmuter_v1.py"
+      - "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py"
+      - "canonical/runtime/opus55_acceptance_residual_compiler_v2.py"
+      - "canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py"
+      - "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py"
+      - "canonical/tests/test_current_opus55_acceptance_residual_v10.py"
+      - ".github/workflows/verify-current-opus55-4of19-reconciliation.yml"
+  pull_request:
+    paths:
+      - "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+      - "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+      - "canonical/runtime/acceptance_proof_transmuter_v1.py"
+      - "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py"
+      - "canonical/runtime/opus55_acceptance_residual_compiler_v2.py"
+      - "canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py"
+      - "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py"
+      - "canonical/tests/test_current_opus55_acceptance_residual_v10.py"
+      - ".github/workflows/verify-current-opus55-4of19-reconciliation.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify delegation transmutation remains load-bearing
+        run: python -m unittest canonical.tests.test_delegation_temporal_ceiling_transmutation_v1 -v
+      - name: Recompute live acceptance calibration
+        run: python -m unittest canonical.tests.test_opus55_acceptance_calibration_reducer_v2 -v
+      - name: Recompute live atomic residual
+        run: python -m unittest canonical.tests.test_current_opus55_acceptance_residual_v10 -v
