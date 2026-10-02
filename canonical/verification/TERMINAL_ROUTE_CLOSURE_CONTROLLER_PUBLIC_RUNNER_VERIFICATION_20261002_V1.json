@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_CONTROLLER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_BLOBS__OPEN_DOMAIN_DEADLOCK_AUDIT_ENFORCED__ZERO_TERMINAL_CREDIT",
+  "purpose": "Verify the canonical terminal route closure scheduler exact bytes after open-domain proof-mode reconciliation.",
+  "brain_merge_commit": "97888abf6e3f11eaa2c1c42d65975dfda65fa2d4",
+  "exact_bound_blobs": {
+    "canonical/runtime/terminal_route_closure_controller.py": "1f905cb57bd50abfc91059599f0a9a8f0c0c0c1a",
+    "canonical/tests/test_terminal_route_closure_controller.py": "ccfd6336e58dc7656f5e95e87fbe521f6ecf30be"
+  },
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 613,
+  "public_pr_head": "2b3068562110bb8f35bcc9ba9520a01cc00a2aba",
+  "workflow_name": "Verify terminal route closure controller",
+  "workflow_run_id": 36963070206,
+  "workflow_job_id": 110700782924,
+  "workflow_conclusion": "success",
+  "verified": [
+    "EXACT_BRAIN_CONTROLLER_AND_TEST_BLOBS_HASH_MATCHED",
+    "FAIL_CLOSED_SCHEDULER_TEST_SUITE_PASSED",
+    "CANONICAL_OPEN_DOMAIN_DEADLOCK_AUDIT_RECLASSIFIES_STALE_FINITE_SCOPE_EQUIVALENCE_BEFORE_PROOF_WORK",
+    "EXTERNAL_COMPARATOR_BLOCKING_REMAINS_PRESERVED",
+    "INVALID_OPEN_DOMAIN_AUDIT_FAILS_CLOSED",
+    "CLOSED_ROUTE_AND_DECLARED_COUNT_DRIFT_GUARDS_PRESERVED"
+  ],
+  "limitations": [
+    "SCHEDULER_ONLY",
+    "NO_TERMINAL_ROUTE_PROMOTION_AUTHORITY",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
