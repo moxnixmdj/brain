@@ -15,6 +15,16 @@ class CadT0RouteSpecificTerminalExecutorTests(unittest.TestCase):
         out = ex.static_dependency_preflight(Path("."))
         self.assertTrue(out["pass"], out)
 
+    def test_git_blob_hash_uses_real_nul_separator(self):
+        import hashlib
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "blob.bin"
+            p.write_bytes(b"abc")
+            expected = hashlib.sha1(b"blob 3\0abc").hexdigest()
+            self.assertEqual(ex._git_blob_sha(p), expected)
+
     def test_exact_frozen_count_and_family_cycle(self):
         self.assertEqual(ex.COUNT, 128)
         cases = population.generate_post_freeze(self.C, self.B)
