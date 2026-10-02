@@ -30,6 +30,12 @@
           "evidence": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
+          "id": "SCOPE_SAFE_ALGEBRA_V2_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "note": "Independent public runner PR906 verified exact v2 blobs and adversarial narrow-scope leakage block."
+        },
+        {
           "id": "MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS",
           "satisfied": true,
           "evidence": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
@@ -51,7 +57,7 @@
           "note": "Independent public runner PR914 verifies all 9 normalized witness sources contamination-admissible over four exact source objects; zero semantic credit."
         }
       ],
-      "notes": "Witness catalog identity and contamination admissibility are independently verified. Implication algebra remains fail-closed only on explicit witness-to-target atom/metric bindings. Catalog identity or contamination cleanliness alone grants no semantic edge, scope relation, metric bound, or acceptance credit."
+      "notes": "Scope-safe implication algebra v2, witness catalog identity, and contamination admissibility are independently verified. Action remains fail-closed on explicit witness-to-target atom/metric and scope bindings. No name/prose analogy, no narrow-to-broad scope leakage, zero credit from compiler readiness alone."
     },
     {
       "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
