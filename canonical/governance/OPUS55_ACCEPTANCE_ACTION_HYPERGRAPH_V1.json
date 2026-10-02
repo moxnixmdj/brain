@@ -54,8 +54,8 @@
         },
         {
           "id": "MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS",
-          "satisfied": false,
-          "evidence": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json"
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "COMPLETE_FROZEN_FINITE_SHARED_CRITERION_SCOPE_AVAILABLE_PER_TARGET",
