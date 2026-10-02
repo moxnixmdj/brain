@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_SCOPE_AUDIT_V2",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED__CONTRACT_BOUNDARY_CORRECTED__ONE_REAL_SCOPE_DIMENSION_REMAINS",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "supersedes": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V1.json",
+  "contract_boundary": {
+    "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "inputs": "structured method/specification requirements plus normalized applicable rules and input schema",
+    "dependency_boundary": "graph validation is deterministic after rule extraction; semantic extraction of unstated/implicit rules remains a separate residual",
+    "ruling": "ARBITRARY_NATURAL_LANGUAGE_OR_UNSTATED_RULE_EXTRACTION_IS_OUTSIDE_THIS_CONTRACT_AND_MUST_NOT_BLOCK_SCOPE_EQUIVALENCE"
+  },
+  "verified_dimensions": [
+    "INTERMEDIATE_DAG_STRUCTURE_AND_CONSUMER_LINEAGE",
+    "JUSTIFIED_EXCLUSION_OF_INAPPLICABLE_REQUIREMENTS",
+    "DIMENSION_AND_TYPE_ANNOTATION_AND_VALIDATION",
+    "INVARIANT_ANNOTATION_AND_VALIDATION",
+    "MULTIPLE_METHOD_BRANCH_SELECTION",
+    "SCHEMA_STANDARD_FEATURE_CALLOUT_AND_CONSTRAINT_REQUIREMENT_LINEAGE",
+    "STRUCTURALLY_INDEPENDENT_OUTPUT_CONSEQUENCES_PER_MATERIAL_EDGE"
+  ],
+  "receipts": [
+    "canonical/verification/STRUCTURED_METHOD_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "unresolved_required_dimensions": [
+    "NORMALIZED_RULE_EXPRESSION_GRAMMAR_MUST_BE_GENERAL_ENOUGH_FOR_THE_FROZEN_STRUCTURED_METHOD_SCOPE"
+  ],
+  "minimum_residual_proof_basis": [
+    "NORMALIZED_RULE_EXPRESSION_GRAMMAR"
+  ],
+  "next": [
+    "INSTALL_COMPOSITIONAL_TYPED_EXPRESSION_AST_ROUTE_SUPERSEDING_FIXED_OPCODE_V1",
+    "INDEPENDENTLY_VERIFY_RANDOMIZED_CROSS_GRAMMAR_DAGS_AND_ANTI_SHORTCUT_MUTATIONS",
+    "RUN_SCOPE_EQUIVALENT_PROOF_GATE_V2_WITH_ZERO_UNRESOLVED_DIMENSIONS",
+    "FREEZE_POST_BEACON_TERMINAL_POPULATION_AND_ACCEPTANCE_BINDING"
+  ],
+  "execution_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
