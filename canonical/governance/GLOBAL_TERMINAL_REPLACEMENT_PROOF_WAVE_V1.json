@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_ROUTE_MAP__V3_ROUTE_DELETION_AUTHORITY_SUSPENDED__CORRECTED_RAW_SOURCE_TO_ACCEPTANCE_BINDING_REQUIRED",
+  "status": "FROZEN_PREWAVE_ROUTE_MAP__ALL_TEN_BRAIN_CANDIDATE_BINDINGS_INDEPENDENTLY_VERIFIED__ONE_SHOT_EXECUTOR_AND_PACKAGE_FREEZE_REMAIN",
   "supersedes_required_named_surface_execution": false,
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authority": {
@@ -65,14 +65,14 @@
       "id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
       "route": "VERIFIED_ACCEPTANCE_COMPILER_DIRECT",
       "implementation": "canonical/runtime/requirement_acceptance_compiler.py",
-      "fresh_terminal_binding": "REQUIRED"
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
       "route": "VERIFIED_CONTRACT_NATIVE_STRUCTURED_METHOD",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
@@ -80,7 +80,7 @@
       "route": "VERIFIED_CONTRACT_NATIVE_TRAJECTORY_FAILURE_LOCALIZATION",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
@@ -88,54 +88,51 @@
       "route": "VERIFIED_CONTRACT_NATIVE_PROFESSIONAL_PLAN_QUALITY",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
       "route": "VERIFIED_NATIVE_ARTIFACT_TRANSACTIONS",
       "implementation": "canonical/runtime/exact_artifact_materializer.py",
-      "fresh_terminal_binding": "REQUIRED"
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "route": "VERIFIED_CONTRACT_NATIVE_EVIDENCE_SYNTHESIS",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
       "route": "VERIFIED_M4_RESEARCH_CONTROL",
       "implementation": "canonical/runtime/m4_research_control.py",
-      "fresh_terminal_binding": "REQUIRED"
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "route": "VERIFIED_TOOL_SELECTION_PRIMITIVES",
       "implementation": "canonical/runtime/shared_decision_primitives.py",
-      "fresh_terminal_binding": "REQUIRED"
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
       "route": "VERIFIED_M3_CONSENSUS_DOM_GROUNDING",
       "implementation": "canonical/runtime/consensus_dom_grounding.py",
-      "fresh_terminal_binding": "REQUIRED"
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "TASK_TO_DELEGATION_GRAPH_001",
       "route": "VERIFIED_TASK_TO_DELEGATION_GRAPH_DIRECT_PROOF",
       "evaluator": "canonical/runtime/delegation_contract_proof_suite.py",
-      "fresh_terminal_binding": "REQUIRED"
+      "fresh_terminal_binding": "INDEPENDENT_PREFLIGHT_PASS__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     }
   ],
   "remaining_prequalification_work": [
-    "FREEZE_AND_VERIFY_COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_TERMINAL_ROUTE",
-    "PASS_SCOPE_EQUIVALENT_PROOF_GATE_FOR_CORRECTED_SPECIFICATION_TO_ACCEPTANCE_SCOPE",
-    "RECOMPUTE_GLOBAL_SURFACE_DOMINANCE_V4",
-    "FREEZE_FRESH_TERMINAL_CANDIDATE_BINDINGS_FOR_ACCEPTANCE_ARTIFACT_RESEARCH_TOOL_GROUNDING_AND_DELEGATION_ROUTES",
-    "FREEZE_POST_FREEZE_SEED_AND_POPULATION_SELECTION_PROTOCOL_FOR_ALL_TEN_OBLIGATIONS",
+    "INDEPENDENTLY_VERIFY_ONE_SHOT_TERMINAL_REPLACEMENT_WAVE_WIRING_WITH_NONTERMINAL_PREFLIGHT_SEED",
+    "FREEZE_EXACT_CANDIDATE_EVALUATOR_DEPENDENCY_BLOB_PACKAGE",
     "RUN_MACHINE_PREQUALIFICATION_REDUCER__AUTHORIZE_WAVE_ONLY_ON_PASS"
   ],
   "brain_head_at_freeze": "1619d381df36f3a805f576d07ffeb4b29e476e8f",
