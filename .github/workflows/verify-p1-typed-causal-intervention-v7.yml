@@ -1,0 +1,22 @@
+name: Verify P1 typed causal intervention V7
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py"
+      - "canonical/tests/test_trajectory_failure_typed_ir_v7.py"
+      - "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V7.json"
+      - ".github/workflows/verify-p1-typed-causal-intervention-v7.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V7 failure-semantics-aware tests
+        run: python -m unittest canonical.tests.test_trajectory_failure_typed_ir_v7 -v
