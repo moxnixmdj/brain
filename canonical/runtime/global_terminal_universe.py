@@ -83,9 +83,16 @@ def build_universe():
         "globally_authorized": False,
         "disposition": "PRESERVE_AS_VALID_LOCAL_SUBCUT__DO_NOT_SPEND_CLEAN_BATCHES_UNTIL_OUTER_GLOBAL_MINIMUM_REALITY_CUT_PROVES_NONDOMINATION",
     }
+    if spec_open:
+        global_cut_reason = "OPEN_QUESTION_S_OR_MECHANISM_HOLES_EXIST_OUTSIDE_LOCAL_V6_SCOPE"
+    elif mech_open:
+        global_cut_reason = "OPEN_MECHANISM_HOLES_EXIST_OUTSIDE_LOCAL_V6_SCOPE"
+    else:
+        global_cut_reason = None
+
     regenerated["global_cut"] = {
         "exact_cut_ready": (not spec_open and not mech_open),
-        "reason": None if (not spec_open and not mech_open) else "OPEN_QUESTION_S_OR_MECHANISM_HOLES_EXIST_OUTSIDE_LOCAL_V6_SCOPE",
+        "reason": global_cut_reason,
         "open_specification_holes": [x["id"] for x in gates if x["hole_type"] == "?S" and not x["closed"]],
         "open_mechanism_holes": [x["id"] for x in lanes if x["hole_type"] == "?M"] + [x["id"] for x in gates if x["hole_type"] == "?M" and not x["closed"]],
         "open_proof_holes": [x["id"] for x in lanes if x["hole_type"] == "?P"] + [x["id"] for x in proofs] + [x["id"] for x in gates if x["hole_type"] == "?P" and not x["closed"]],
