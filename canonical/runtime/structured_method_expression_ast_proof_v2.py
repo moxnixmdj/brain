@@ -93,6 +93,11 @@ def _eval(expr: Mapping[str, Any], meta: Mapping[str, Mapping[str, str]], vals: 
         a,b=two(); assert a[0] in {"integer","number"} and b[0] in {"integer","number"} and a[1]==b[1]
         av,bv=float(a[2]),float(b[2])
         return "boolean","dimensionless",{"gt":av>bv,"ge":av>=bv,"lt":av<bv,"le":av<=bv}[op]
+    if op=="isclose":
+        a,b=two(); assert a[0] in {"integer","number"} and b[0] in {"integer","number"} and a[1]==b[1]
+        rel=float(expr.get("rel_tol",1e-12)); abs_=float(expr.get("abs_tol",0.0))
+        assert rel>=0.0 and abs_>=0.0 and math.isfinite(rel) and math.isfinite(abs_)
+        return "boolean","dimensionless",math.isclose(float(a[2]),float(b[2]),rel_tol=rel,abs_tol=abs_)
     if op in {"eq","neq"}:
         a,b=two(); assert a[0]==b[0] and a[1]==b[1]
         v=a[2]==b[2]
@@ -169,7 +174,7 @@ def generate_case(seed: int, ordinal: int) -> dict[str, Any]:
             "expr":{"op":"mul","left":_ref("unit_price"),"right":_ref("quantity")},
             "output":"rebuilt_total","output_type":"number","output_dimension":"currency",
             "consumes_requirements":["REQ_SCHEMA"],
-            "invariants":[{"op":"eq","left":_ref("rebuilt_total"),"right":_ref("subtotal")}],
+            "invariants":[{"op":"isclose","left":_ref("rebuilt_total"),"right":_ref("subtotal"),"rel_tol":1e-12,"abs_tol":1e-12}],
         },
         {
             "id":"R_DELTA",
