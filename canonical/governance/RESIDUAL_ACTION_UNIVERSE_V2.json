@@ -47,7 +47,8 @@
         "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
         "canonical/capabilities/opus55/PLANAR_PERSPECTIVE_REGISTRATION_001.json",
         "canonical/capabilities/opus55/ENGINEERING_FEATURE_NOTATION_001.json",
-        "canonical/capabilities/opus55/DRAWING_PERSPECTIVE_REGISTRATION_001.json"
+        "canonical/capabilities/opus55/DRAWING_PERSPECTIVE_REGISTRATION_001.json",
+        "canonical/capabilities/opus55/M1A_DRAWING_HARDENING_COMPONENTS_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -55,9 +56,10 @@
         "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
       ],
       "uncovered": [
-        "NONPROJECTIVE_LOCAL_WARP_OR_DISTORTION_WITHOUT_DISCRIMINATING_CALIBRATION",
-        "SPECIALIZED_GDT_MODIFIERS_COMPOSITE_FRAMES_AND_AMBIGUOUS_FEATURE_ASSOCIATION",
-        "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
+        "LOCAL_NONPLANAR_WARP_OR_REGISTRATION_OUTSIDE_BOUNDED_GLOBAL_ROTATION_AND_PLANAR_PROJECTIVE_RECTIFICATION",
+        "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+        "ENGINEERING_NOTATION_OUTSIDE_VERIFIED_BOUNDED_DIMENSION_THREAD_TOLERANCE_AND_FCF_GRAMMARS",
+        "ROBUSTNESS_OUTSIDE_VERIFIED_CLEAN_AND_MILD_DEGRADATION_SURFACES"
       ],
       "complete_action_bundle": false,
       "verification_receipts": {
@@ -109,6 +111,13 @@
           "conclusion": "success",
           "repair_commit": "b7f1d92b4561d760f02d2bc3dcf91bcfdac9e4bd",
           "capability_receipt": "canonical/capabilities/opus55/DRAWING_PERSPECTIVE_REGISTRATION_001.json"
+        },
+        "m1a_drawing_hardening": {
+          "capability_receipt": "canonical/capabilities/opus55/M1A_DRAWING_HARDENING_COMPONENTS_001.json",
+          "hardening_run_id": 36943497999,
+          "strict_gdt_run_id": 36943601544,
+          "conclusion": "success",
+          "scope": "PLANAR_PROJECTIVE_RECTIFICATION__MILD_DEGRADED_RASTER_NORMALIZATION__BOUNDED_FCF_NOTATION__DECLARED_EDITION_FEATURE_TYPE_FCF_LEGALITY"
         }
       }
     },
@@ -142,7 +151,7 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "CLOSE_OR_BOUND_M0A_CONTEXT_REFERENCE_LONG_RANGE_EXPLICIT_SEMANTICS__HARDEN_M1A_DIRTY_SCAN_ROBUSTNESS_AND_ONLY_IDENTIFIABLE_REGISTRATION__FREEZE_ONLY_AFTER_COMPLETE_ACTION_COVERAGE_OR_EXPLICIT_FAIL_CLOSED_UNCOVERED_ATOM",
+  "next": "M0A_AND_M1A_STILL_BLOCK_EXACT_CUT__M1A_NOW_NARROWED_TO_NONPLANAR_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_RESIDUAL_ENGINEERING_NOTATION_AND_SEVERE_ROBUSTNESS__M0A_SEMANTIC_DECOMPOSITION_REMAINS_PRIMARY_SHARED_BLOCKER__FREEZE_ONLY_AFTER_COMPLETE_SELF_CONTAINED_ACTION_BUNDLES",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -150,7 +159,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "newly_verified_components": 7,
-    "note": "Planar projective perspective rectification independently closed at explicit-quad scope; local nonlinear warp and free-form layout remain open."
+    "newly_verified_components": 11,
+    "note": "M1A hardening promoted at exact tested scopes; whole M1A remains open; exact cut remains unauthorized."
   }
 }
