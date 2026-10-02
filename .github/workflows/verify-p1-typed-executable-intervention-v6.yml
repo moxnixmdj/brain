@@ -1,0 +1,46 @@
+name: Verify P1 typed executable intervention V6
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py"
+      - "canonical/tests/test_trajectory_failure_typed_ir_v6.py"
+      - "canonical/governance/P1_V5_INTERVENTION_RESCUE_QUARANTINE_V1.json"
+      - "canonical/governance/P1_EXECUTABLE_INTERVENTION_ENVELOPE_V6.json"
+      - ".github/workflows/verify-p1-typed-executable-intervention-v6.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V6 executable intervention tests
+        run: python -m unittest canonical.tests.test_trajectory_failure_typed_ir_v6 -v
+      - name: Emit exact V6 proof summary
+        run: |
+          python - <<'PY'
+          from canonical.runtime import trajectory_failure_typed_ir_proof_v6 as p
+          from canonical.runtime import trajectory_failure_typed_ir_candidate_v5 as c
+
+          cases=p.suite_cases()
+          verdicts=[p.score_case(x,c.solve(p.public_task(x))) for x in cases]
+          assert len(cases)==192
+          assert all(v.get("pass") is True for v in verdicts)
+          assert any(x["_causal_model"]["local_faults"].get("A1")=="SCOPE" for x in cases)
+          assert all(p.replay_terminal(x,[]).get("terminal_failed") is True for x in cases)
+          print({
+            "case_count":len(cases),
+            "domains":sorted(p.DOMAINS),
+            "mechanisms":sorted(p.KINDS),
+            "patterns":sorted(p.PATTERNS),
+            "all_pass":True,
+            "new_reality_units_consumed":0,
+            "capability_credit_delta":0,
+            "family_credit_delta":0,
+          })
+          PY
