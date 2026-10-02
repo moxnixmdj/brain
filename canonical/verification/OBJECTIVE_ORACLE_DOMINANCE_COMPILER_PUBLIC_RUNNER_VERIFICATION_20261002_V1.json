@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_OBJECTIVE_ORACLE_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS__FOUR_CONTRACT_STRUCTURAL_OBJECTIVE_DOMINANCE_PASS__ZERO_TERMINAL_CREDIT",
+  "exact_brain_blobs": {
+    "canonical/runtime/objective_oracle_dominance_compiler.py": "c00d59dd0ab7df6ffb0ba5c26a1cb2a5cd82203c",
+    "canonical/tests/test_objective_oracle_dominance_compiler.py": "b4df7e088cd4da2889b0e3dc8b03ba9608e04b48",
+    "canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json": "79d1c88b854f05b73d37734cbb2b4bf5000a5472"
+  },
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 655,
+  "public_pr_head_sha": "d0129af66890d314d3c8e1cbd448be4e18d770fd",
+  "public_merge_commit": "5e56e4c08e7674f607a54642cdc238ba0b7be320",
+  "workflow_run_id": 36966565959,
+  "workflow_name": "Verify objective-oracle dominance compiler",
+  "workflow_conclusion": "success",
+  "verified": [
+    "EXACT_BRAIN_RUNTIME_BLOB_HASH_MATCH",
+    "EXACT_BRAIN_TEST_BLOB_HASH_MATCH",
+    "EXACT_LIVE_INPUT_BLOB_HASH_MATCH",
+    "FAIL_CLOSED_ON_HIDDEN_ORACLE_LEAK",
+    "FAIL_CLOSED_ON_MISSING_REQUIRED_DIMENSION",
+    "FAIL_CLOSED_ON_NONOBJECTIVE_DIMENSION",
+    "OPEN_INDEPENDENT_VERIFICATION_GATE_PRESERVES_WEAKER_COMPARATOR",
+    "ALL_FOUR_LIVE_CONTRACTS_HAVE_STRUCTURALLY_COMPLETE_OBJECTIVE_ORACLE_SPECIFICATIONS",
+    "ALL_FOUR_LIVE_ROUTES_RETAIN_OPEN_PREWAVE_GATES",
+    "NO_COMPARATOR_OR_GATED_ROUTE_DELETION_AUTHORIZED_YET",
+    "ZERO_EXECUTION_PROMOTION_CAPABILITY_AND_FAMILY_AUTHORITY"
+  ],
+  "live_verified_summary": {
+    "target_behavior_count": 4,
+    "all_objective_specs_complete": true,
+    "all_prewave_routes_ready_for_promotion_law": false,
+    "structural_stronger_route_candidates": [
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "TASK_TO_DELEGATION_GRAPH_001",
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+    ]
+  },
+  "authority_effect": "VERIFIES_STRUCTURAL_OBJECTIVE_ROUTE_DISCOVERY_AND_GATE_COMPILATION_ONLY__DOES_NOT_DELETE_ANY_EXTERNAL_DEPENDENCY_UNTIL_EACH_ROUTE_GATES_AND_EXISTING_PROMOTION_LAW_PASS",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
