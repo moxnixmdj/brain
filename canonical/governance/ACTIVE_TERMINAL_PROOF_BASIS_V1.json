@@ -71,7 +71,8 @@
       "terminal_population_binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
       "terminal_population_preflight": "canonical/verification/SA_CCR_TERMINAL_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "prewave_admissible": true,
-      "population_binding_verification": "canonical/verification/SA_CCR_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "population_binding_verification": "canonical/verification/SA_CCR_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "terminal_acceptance_mode_verification": "canonical/verification/SA_CCR_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
