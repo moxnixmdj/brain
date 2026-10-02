@@ -23,7 +23,8 @@ class CandidateError(ValueError):
 
 
 def _attr_number(attrs: str, name: str) -> float | None:
-    m = re.search(r"\b" + re.escape(name) + r"\s*=\s*["']\s*([-+]?[0-9]+(?:\.[0-9]+)?)", attrs, re.I)
+    pattern = "\\b" + re.escape(name) + "\\s*=\\s*[\"']\\s*([-+]?[0-9]+(?:\\.[0-9]+)?)"
+    m = re.search(pattern, attrs, re.I)
     if not m:
         return None
     try:
