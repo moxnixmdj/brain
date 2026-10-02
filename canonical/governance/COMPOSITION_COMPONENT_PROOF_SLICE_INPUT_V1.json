@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_LITERAL_INTERFACES__ZERO_RECEIPT_BINDINGS__ZERO_CREDIT",
+  "status": "FROZEN_LITERAL_INTERFACES__TWO_INDEPENDENT_BEHAVIORAL_BRIDGE_RECEIPTS_BOUND__ZERO_CREDIT",
   "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
   "source_manifest": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
   "interfaces": [
@@ -90,8 +90,39 @@
       ]
     }
   ],
-  "receipts": [],
-  "rule": "EMPTY_RECEIPT_SET_IS_INTENTIONAL_BASELINE__SLICER_MUST_RETURN_EXACT_MISSING_SCOPED_PROOF_PROPERTIES__NO_FAMILY_MAPPING_INFERRED",
+  "receipts": [
+    {
+      "receipt_id": "COMPOSITION_BRIDGE::TOOL_DISCOVERY::V1",
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "acceptance_scoped": true,
+      "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+      "bridge_verification": "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "source_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json"
+    },
+    {
+      "receipt_id": "COMPOSITION_BRIDGE::DELEGATION::V1",
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "acceptance_scoped": true,
+      "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+      "bridge_verification": "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "source_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+    }
+  ],
+  "rule": "ONLY_THE_TWO_INDEPENDENTLY_VERIFIED_EXACT_BEHAVIORAL_BRIDGE_BINDINGS_ARE_ADMITTED__ALL_OTHER_COMPONENT_INTERFACES_REMAIN_OPEN__NO_FAMILY_NAME_INHERITANCE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
