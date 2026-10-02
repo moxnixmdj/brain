@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_PROOF_CUT_INPUT_V1",
+  "obligations": [
+    {
+      "id": "M0A",
+      "status": "OPEN",
+      "terminal_necessary": true
+    },
+    {
+      "id": "M1A",
+      "status": "OPEN",
+      "terminal_necessary": true
+    },
+    {
+      "id": "M1B",
+      "status": "OPEN",
+      "terminal_necessary": true
+    }
+  ],
+  "candidate_actions": [
+    {
+      "id": "A1_M1B_DETERMINISTIC",
+      "covers": [
+        "M1B"
+      ],
+      "new_reality_units": 0,
+      "dependency_depth": 1,
+      "critical_path_wall_clock_units": 1,
+      "admissible": true,
+      "bundle_complete": true
+    },
+    {
+      "id": "A_M0A_COMPOSED_SEMANTIC_GRAPH_V1",
+      "covers": [
+        "M0A"
+      ],
+      "new_reality_units": 1,
+      "dependency_depth": 2,
+      "critical_path_wall_clock_units": 1,
+      "admissible": true,
+      "bundle_complete": true
+    },
+    {
+      "id": "A_M1A_DETERMINISTIC_PLUS_BOUNDED_RESIDUAL_V1",
+      "covers": [
+        "M1A"
+      ],
+      "new_reality_units": 1,
+      "dependency_depth": 2,
+      "critical_path_wall_clock_units": 1,
+      "admissible": true,
+      "bundle_complete": true
+    }
+  ],
+  "cost_model": {
+    "status": "FROZEN",
+    "information_unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_UNIT",
+    "parallel_wall_clock_aggregation": "MAX_CRITICAL_PATH",
+    "bundle_internal_dependencies_included": true
+  },
+  "freeze": {
+    "schema": "PROJECT_BRAIN_FROZEN_PROOF_ACTION_UNIVERSE_V1",
+    "status": "FROZEN",
+    "evidence_saturation_complete": true,
+    "discovery_frontier_frozen": true,
+    "candidate_universe_complete_relative_to_freeze": true,
+    "invalidated_by_new_candidate": false,
+    "obligation_graph_sha256": "43e16199325e95099ebc194ffebf33f0aecb38df5c118700ed2029974e4ddfb7",
+    "candidate_universe_sha256": "7b15d191ecbafc715842d73162cbf7b8f6a6db2def81676267cda944bc9ad678",
+    "cost_model_sha256": "b5f4b50b4e5244cbc7bb91e2d73bd80c40e638c50da0649a5a84a429fe34114b",
+    "evidence_saturation_receipt_sha256": "15d0bda26d5bb6c6df29c87d40f89976ccf7dee437bab2ebe43c640dd5ff8656"
+  },
+  "status": "FROZEN_V2__EXACT_RESIDUAL_CUT_AUTHORIZED"
+}
