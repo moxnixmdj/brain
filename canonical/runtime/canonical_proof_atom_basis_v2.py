@@ -38,7 +38,7 @@ def _fail(*errors: str) -> dict[str, Any]:
 
 
 def atom_id(proposition: str) -> str:
-    return "PA2:" + hashlib.sha256(proposition.encode("utf-8")).hexdigest()
+    return "PA1:" + hashlib.sha256(proposition.encode("utf-8")).hexdigest()
 
 
 def _valid_str_list(v: Any, *, nonempty: bool = False) -> bool:
@@ -155,6 +155,14 @@ def compile_basis(global_frontier: Mapping[str, Any], overlay: Mapping[str, Any]
                 or len(requirement_occurrences) != len(set(requirement_occurrences))
             ):
                 return _fail(f"REFINEMENT_REQUIREMENT_PARTITION_NOT_EXACT:{pid}")
+        elif mode == "INDEPENDENTLY_VERIFIED_SEMANTIC_REPLACEMENT":
+            source_sha = ref.get("source_blob_sha")
+            if (
+                not isinstance(source_sha, str)
+                or len(source_sha) != 40
+                or any(ch not in "0123456789abcdef" for ch in source_sha.lower())
+            ):
+                return _fail(f"REFINEMENT_SOURCE_BLOB_SHA_REQUIRED:{pid}")
 
         refined_ids.add(pid)
         refined_meta.append({
@@ -221,7 +229,7 @@ def compile_basis(global_frontier: Mapping[str, Any], overlay: Mapping[str, Any]
         "max_structural_target_fanout": max((x["associated_target_count"] for x in atoms), default=0),
         "atoms": atoms,
         "rules": [
-            "ATOM_ID_IS_SHA256_OF_EXACT_UTF8_PROPOSITION_LITERAL_WITH_PA2_NAMESPACE",
+            "ATOM_ID_PRESERVES_PA1_SHA256_OF_EXACT_UTF8_PROPOSITION_LITERAL",
             "DEDUPLICATE_ONLY_BYTE_IDENTICAL_PROPOSITION_LITERALS",
             "REFINED_PARENT_TARGETS_MUST_BE_EXACTLY_PARTITIONED",
             "EXACT_REQUIREMENT_PARTITION_MODE_MUST_PARTITION_PARENT_REQUIREMENTS_EXACTLY",
