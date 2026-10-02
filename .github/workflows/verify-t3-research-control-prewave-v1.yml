@@ -1,0 +1,27 @@
+name: Verify T3 research-control prewave binding
+on:
+  push:
+    branches: [main, obs-verify-t3-research-prewave-20261002]
+    paths:
+      - canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json
+      - canonical/runtime/verify_t3_research_control_prewave_v1.py
+      - canonical/tests/test_verify_t3_research_control_prewave_v1.py
+      - canonical/verification/HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json
+      - canonical/verification/HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1.json
+      - .github/workflows/verify-t3-research-control-prewave-v1.yml
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_verify_t3_research_control_prewave_v1
