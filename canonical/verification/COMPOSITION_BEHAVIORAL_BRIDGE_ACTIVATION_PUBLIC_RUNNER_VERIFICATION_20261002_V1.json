@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__TWO_CLAIM_BOUND_COMPONENT_RECEIPTS__2_PROVED_10_OPEN__ZERO_CREDIT",
+  "objective": "Independently verify the mechanical activation of exactly two composition component receipts derived from the previously verified behavioral bridge, and recompute the component slicer without granting parent composition credit.",
+  "exact_brain_blobs": {
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json": "96052a6b5178305b37a2526fb25c3f53fa33b9b5",
+    "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d",
+    "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_V1.json": "d6cb17f548493e64ca3d200d51b049412a939ef7",
+    "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "bb9ecf9b34e3a41d8cd9a387fe70d9376accbccc",
+    "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V1.json": "adc7db65b20361be54fa26935e36aa88babf373d",
+    "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_V1.json": "59504f4608f9490022c1aa58214e34191fb0b6e9",
+    "canonical/runtime/composition_behavioral_bridge_verifier_v1.py": "d6bfd80bab2742332ceb3c4105e535202ae00b20",
+    "canonical/runtime/composition_component_proof_slicer_v1.py": "0e5028d8547bc3e17e7128b6311f734ac30a16d8",
+    "canonical/runtime/composition_behavioral_bridge_activation_verifier_v1.py": "55278d01e3815b308b3007885971a4e129d42ed2",
+    "canonical/tests/test_composition_behavioral_bridge_activation_v1.py": "7003a2e8c53129af39937f517a4d0c8c14d4e7d1"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 926,
+    "pull_request_head": "2cc48e982ec636e5297d489c9981957e024d74e9",
+    "merge_commit": "16a49e7d42e80e07445ef141febbd7ed6ff23544",
+    "workflow_run_id": 37014960442,
+    "workflow_job_id": 110863453993,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_ACTIVATION_AUTHORITY_BLOBS_RECOMPUTED",
+    "ONLY_DELEGATION_AND_TOOL_DISCOVERY_RECEIPTS_ACTIVATABLE",
+    "ACTIVATION_RECEIPTS_ARE_EXACT_MECHANICAL_TRANSLATIONS_OF_VERIFIED_BRIDGE_BINDINGS",
+    "COMPONENT_SLICER_RECOMPUTES_EXACTLY_2_SCOPED_PROVED_AND_10_OPEN",
+    "PARENT_COMPOSITION_COMPONENT_PREDICATE_REMAINS_OPEN",
+    "INVENTED_THIRD_COMPONENT_RECEIPT_REJECTED",
+    "ZERO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "activated_receipt_count": 2,
+  "activated_components": [
+    "delegation",
+    "tool discovery"
+  ],
+  "open_component_interface_count": 10,
+  "parent_predicate_closed": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
