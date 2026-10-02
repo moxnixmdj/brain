@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_CURRENT_SCOPE_INPUT_ADMISSIBLE_SUBSTITUTION__ZERO_TERMINAL_RESULT",
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/scope_equivalent_proof_gate_v2.py": "2d05172becfc559de3ff1e4e5623c5180028be1b",
+    "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json": "e1334040617340b232d74c187116aedc09236398",
+    "canonical/governance/SA_CCR_SCOPE_EQUIVALENCE_RELATION_V1.json": "2a330aaae7ed626c13bdd0bbeff7ec5564d977b5"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/saccr-scope-gate-v2-20261002",
+    "head_sha": "187814816174b42040869b6ceaaf35bfea0b9273",
+    "workflow_run_id": 36959940524,
+    "job_id": 110691187973,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_CURRENT_GATE_INPUT_AND_SCOPE_RELATION_BLOBS_BOUND",
+    "SCOPE_GATE_V2_RETURNS_ADMISSIBLE_SUBSTITUTION",
+    "REQUIRED_BEHAVIOR_AND_INTERACTION_COVERAGE_COMPLETE_FOR_FROZEN_ACTIVE_CONTRACT",
+    "NO_LOAD_BEARING_INFERENCE_LEAKED_TO_CANDIDATE",
+    "ZERO_UNRESOLVED_REQUIRED_DIMENSIONS"
+  ],
+  "supersedes_for_current_input": "canonical/verification/SA_CCR_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
