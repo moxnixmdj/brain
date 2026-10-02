@@ -23,7 +23,7 @@ class CandidateError(ValueError):
 
 
 def _attr_number(attrs: str, name: str) -> float | None:
-    m = re.search(r"\\b" + re.escape(name) + r"\\s*=\\s*[\"']\\s*([-+]?[0-9]+(?:\\.[0-9]+)?)", attrs, re.I)
+    m = re.search(r"\b" + re.escape(name) + r"\s*=\s*[\"']\s*([-+]?[0-9]+(?:\.[0-9]+)?)", attrs, re.I)
     if not m:
         return None
     try:
@@ -40,7 +40,7 @@ def _texts(svg: Any) -> list[str]:
     groups: dict[tuple[str, float | int], list[tuple[float, int, str]]] = {}
     first_seen: dict[tuple[str, float | int], int] = {}
     count = 0
-    for m in re.finditer(r"<text\\b([^>]*)>(.*?)</text>", svg, flags=re.I | re.S):
+    for m in re.finditer(r"<text\b([^>]*)>(.*?)</text>", svg, flags=re.I | re.S):
         attrs, raw = m.group(1), m.group(2)
         text = html.unescape(re.sub(r"<[^>]+>", "", raw))
         if not text.strip():
@@ -60,7 +60,7 @@ def _texts(svg: Any) -> list[str]:
     for key in sorted(groups, key=lambda k: first_seen[k]):
         fragments = sorted(groups[key], key=lambda row: (row[0], row[1]))
         rendered = "".join(fragment for _, _, fragment in fragments)
-        rendered = re.sub(r"\\s+", " ", rendered).strip()
+        rendered = re.sub(r"\s+", " ", rendered).strip()
         if rendered:
             rows.append(rendered)
     if not rows:
