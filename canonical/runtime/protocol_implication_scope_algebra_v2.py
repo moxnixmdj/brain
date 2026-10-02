@@ -185,7 +185,6 @@ def evaluate(doc: Mapping[str, Any]) -> dict[str, Any]:
         "candidate_scope_relation": relation,
         "verified_scope_relation": scope_relation,
         "verified_scope_relation_receipt": scope_receipt,
-        "verified_scope_relation_receipt": scope_receipt,
         "target_scope_ref": target_scope,
         "witness_scope_ref": witness_scope,
         "target_required_atoms": sorted(target_atoms),
