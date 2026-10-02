@@ -132,6 +132,7 @@ def generate_case(seed: int, ordinal: int) -> dict[str, Any]:
         {"id":"REQ_FORMULA","source_kind":"formula"},
         {"id":"REQ_CALLOUT","source_kind":"feature_callout"},
         {"id":"REQ_CONSTRAINT","source_kind":"constraint","applies_when":positive_a},
+        {"id":"REQ_NEQ","source_kind":"constraint","applies_when":{"op":"neq","left":_ref("mode"),"right":{"op":"const","type":"enum","dimension":"dimensionless","value":"impossible"}}},
         {"id":"REQ_REG","source_kind":"standard","applies_when":is_reg},
         {"id":"REQ_STD","source_kind":"standard","applies_when":is_std},
         {"id":"REQ_STRESS","source_kind":"standard","applies_when":is_stress},
@@ -204,7 +205,7 @@ def generate_case(seed: int, ordinal: int) -> dict[str, Any]:
                 ],
             },
             "output":"needs_review","output_type":"boolean","output_dimension":"dimensionless",
-            "consumes_requirements":["REQ_CALLOUT"],
+            "consumes_requirements":["REQ_CALLOUT","REQ_NEQ"],
             "invariants":[],
         },
     ]
