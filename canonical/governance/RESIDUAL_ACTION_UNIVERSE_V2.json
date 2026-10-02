@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M0A_ZERO_REALITY_LOCALIZATION_ACTIVE__M1A_PROOF_ONLY__M1B_PROOF_ONLY__NOT_FROZEN",
+  "status": "ZERO_REALITY_PREFIXES_SATURATED__M0A_M1A_M1B_PROOF_ONLY__READY_TO_FREEZE_V6",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
     "M0A": {
-      "status": "OPEN__SHRUNK_AFTER_VERIFIED_BOUNDED_CONTEXTUAL_AND_SEMANTIC_CONSENSUS",
+      "status": "PROOF_ONLY__ZERO_REALITY_PREFIX_SATURATED__MATCHED_PARITY_NOT_YET_AUTHORIZED",
       "verified_owned": [
         "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
         "canonical/runtime/explicit_compound_requirement_decomposer.py",
@@ -63,7 +63,7 @@
         }
       },
       "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL",
-      "candidate_action": "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
+      "candidate_action": "A_M0A_MATCHED_SEMANTIC_PARITY_V2",
       "complete_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V1.json",
       "new_reality_units": 1,
       "dependency_depth": 2,
@@ -78,7 +78,8 @@
         "branch_result": "canonical/capabilities/opus55/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_001.json",
         "subspace_protocol": "canonical/evaluation/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_V1.json",
         "scope": "ONLY_LAYER_1_AND_11_MLP_INTERMEDIATE_SUBSPACES__BASELINE_CORRECT_SIGNAL_ONLY__NO_HELDOUT"
-      }
+      },
+      "proof_only_reconciliation": "canonical/reasoning/2026-10-02_M0A_PROOF_ONLY_RECONCILIATION_V1.json"
     },
     "M1A": {
       "status": "PROOF_ONLY__ZERO_REALITY_PREFIX_SATURATED__MATCHED_PARITY_NOT_YET_AUTHORIZED",
@@ -251,25 +252,22 @@
     "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
     "RUN_EXACT_FROZEN_UNIVERSE_COMPILER_ONLY_AFTER_ALL_TERMINALLY_NECESSARY_RESIDUALS_HAVE_AT_LEAST_ONE_ADMISSIBLE_COMPLETE_BUNDLE"
   ],
-  "exact_cut_ready": false,
-  "blocking_obligations": [
+  "exact_cut_ready": true,
+  "blocking_obligations": [],
+  "nonblocking_ready_obligation": [
     "M0A",
     "M1A",
     "M1B"
   ],
-  "nonblocking_ready_obligation": [
-    "M1A",
-    "M1B"
-  ],
-  "next": "FINISH_ONLY_ACTIVE_M0A_ZERO_REALITY_USEFUL_SIGNAL_SUBSPACE_LOCALIZATION_AND_COMPOSITION__THEN_FREEZE_V6_FROM_CURRENT_FAITHFUL_COSTS__M1A_AND_M1B_ARE_PROOF_ONLY_PENDING_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+  "next": "FREEZE_V6_WITH_CURRENT_COMPLETE_BUNDLES_AND_FAITHFUL_NEW_REALITY_COSTS__RUN_EXACT_SOLVER__THEN_ONLY_SELECTED_ACTIONS",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "reconciliation": {
     "date": "2026-10-02",
+    "conclusion": "M0A_ZERO_REALITY_LOCALIZATION_TERMINATED_WITH_NO_SMALL_MATERIAL_SUBSPACE__DONOR_SCAN_HAS_NO_MANDATORY_DOMINATING_ZERO_REALITY_ROUTE__ALL_THREE_RESIDUALS_NOW_PROOF_ONLY",
     "new_reality_units_consumed": 0,
-    "note": "M1A zero-reality mechanism search saturated into proof-only V2 after verified compound visual resolver and identifiability/JIT classification. M1B formal zero-reality coverage audit completed and cannot prove whole terminal coverage; one matched coverage distinction survives. M0A remains the only active zero-reality mechanism localization.",
-    "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json"
+    "evidence": "canonical/reasoning/2026-10-02_M0A_PROOF_ONLY_RECONCILIATION_V1.json"
   }
 }
