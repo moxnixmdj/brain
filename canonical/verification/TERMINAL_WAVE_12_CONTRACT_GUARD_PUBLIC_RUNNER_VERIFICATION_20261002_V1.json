@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_WAVE_12_CONTRACT_GUARD_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__12_CONTRACT_TERMINAL_WAVE_FAIL_CLOSED_GUARD__ZERO_TERMINAL_CREDIT",
+  "brain_exact_blobs": {
+    "canonical/runtime/terminal_replacement_wave.py": "589fd2b334b8faefaf71ba0116cc355f639bd76f",
+    "canonical/tests/test_terminal_replacement_wave_guard.py": "89b4e011d15b0e23761ea8ed85edba4e903ca209",
+    ".github/workflows/verify-terminal-replacement-wave-guard.yml": "ce99c4a5c668b5508ac526a555a5cd1f9a6c12de"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 528,
+    "merge_commit": "4a28bb5e50e035c5a36103dcbd513413e4eb457a",
+    "workflow_run_id": 36958411172,
+    "conclusion": "success"
+  },
+  "verified": [
+    "ACTIVE_CONTRACT_REGISTRY_DUPLICATES_FAIL_CLOSED",
+    "NONADMISSIBLE_ROUTE_STATE_BLOCKS_BEFORE_CASE_GENERATION",
+    "EXECUTOR_CONTRACT_SET_MUST_EQUAL_ACTIVE_12_CONTRACT_SET",
+    "PROOF_BASIS_AND_ACTIVE_REGISTRY_MUST_MATCH"
+  ],
+  "limitations": [
+    "GUARD_VERIFICATION_ONLY",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
