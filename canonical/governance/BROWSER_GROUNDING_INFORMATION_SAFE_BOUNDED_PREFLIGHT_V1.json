@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_BROWSER_GROUNDING_INFORMATION_SAFE_BOUNDED_PREFLIGHT_V1",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_CI__BOUNDED_PREFLIGHT_ONLY__ZERO_TERMINAL_AUTHORITY",
+  "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+  "candidate": "canonical/runtime/browser_grounding_information_safe_candidate.py",
+  "proof_population": "canonical/runtime/browser_grounding_information_safe_proof.py",
+  "tests": "canonical/tests/test_browser_grounding_information_safe.py",
+  "candidate_visible": [
+    "user goal",
+    "current rendered DOM accessibility OCR element state",
+    "supported actions",
+    "public action and state-mismatch receipts"
+  ],
+  "hidden_oracle": [
+    "target element identity",
+    "correct action",
+    "expected state transition",
+    "mismatch schedule"
+  ],
+  "preflight_properties": [
+    "GOAL_TO_TARGET_INFERENCE_IS_CANDIDATE_WORK",
+    "TARGET_IDENTITY_NOT_EXPOSED",
+    "EXPECTED_STATE_TRANSITION_NOT_EXPOSED",
+    "PARTIAL_TOKEN_DECOYS_PRESENT",
+    "STATE_MISMATCH_REQUIRES_OBSERVED_RECOVERY",
+    "CANDIDATE_DOES_NOT_IMPORT_EVALUATOR_OR_HIDDEN_ORACLE"
+  ],
+  "scope_limitation": "BOUNDED_CONTROLLED_LANGUAGE_CLICK_NAVIGATION_WITH_STRUCTURED_RENDERED_DOM_ACCESSIBILITY_OCR_STATE__DOES_NOT_PROVE_WHOLE_OPEN_ENDED_VISUAL_BROWSER_CONTRACT",
+  "terminal_scope_gate_v2_admissible": false,
+  "execution_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
