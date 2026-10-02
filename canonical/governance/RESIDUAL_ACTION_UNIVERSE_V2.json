@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "FROZEN_SHARED_MECHANISM_FRONTIER__M0A_M1A_M1B_PROOF_ONLY__V6_EXACT_CUT_READY",
+  "status": "ZERO_REALITY_SATURATED__M0A_M1A_M1B_ALL_PROOF_ONLY__READY_TO_FREEZE_V6",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
     "M0A": {
-      "status": "PROOF_ONLY__ZERO_REALITY_FRONTIER_SATURATED__MATCHED_PARITY_NOT_YET_AUTHORIZED",
+      "status": "PROOF_ONLY__ZERO_REALITY_PREFIX_SATURATED__MATCHED_PARITY_NOT_YET_AUTHORIZED",
       "verified_owned": [
         "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
         "canonical/runtime/explicit_compound_requirement_decomposer.py",
@@ -16,7 +16,9 @@
         "canonical/capabilities/opus55/BOUNDED_CONTEXTUAL_SEMANTICS_001.json",
         "canonical/capabilities/opus55/M0A_SEMANTIC_GRAPH_CONSENSUS_001.json",
         "canonical/capabilities/opus55/EXPLICIT_DISCOURSE_OPERATOR_ALGEBRA_001.json",
-        "canonical/capabilities/opus55/BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_001.json"
+        "canonical/capabilities/opus55/BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_001.json",
+        "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json",
+        "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -27,7 +29,7 @@
         "allenai/allennlp-models@b1f372248c17ad12684d344955fbcd98e957e77e"
       ],
       "uncovered": [
-        "ONLY_IF_PREDECLARED_MATCHED_CROSS_DOMAIN_PARITY_EXPOSES_GENERAL_COREFERENCE_IMPLICIT_OR_LONG_RANGE_DISCOURSE_OUT_OF_GRAMMAR_PREDICATE_ARGUMENT_OR_OTHER_REPEATABLE_SOLVABLE_SEMANTIC_CLASS"
+        "ONLY_IF_PREDECLARED_MATCHED_CROSS_DOMAIN_M0A_PARITY_EVALUATION_EXPOSES_A_REPEATABLE_SOLVABLE_SEMANTIC_CLASS_OUTSIDE_VERIFIED_BRAIN_OWNED_ROUTES"
       ],
       "complete_action_bundle": true,
       "verification_receipts": {
@@ -64,13 +66,13 @@
           "workflow_run_id": 36947127783,
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/EXPLICIT_DISCOURSE_OPERATOR_ALGEBRA_001.json",
-          "scope": "FORMER_LATTER_RESPECTIVELY_EXPLICIT_TOO_ALSO_AS_WELL_ELLIPSIS_AND_UNIQUE_EXPLICIT_DEMONSTRATIVE_EVENT_REFERENCE"
+          "scope": "FORMER_LATTER_RESPECTIVELY_EXPLICIT_TOO_ELLIPSIS_AND_UNIQUE_DEMONSTRATIVE_EVENT_OPERATORS_OVER_IDENTIFIED_CONSTITUENTS"
         },
         "bounded_predicate_argument_semantics": {
           "workflow_run_id": 36947746244,
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_001.json",
-          "scope": "SIMPLE_ACTIVE_PASSIVE_MODAL_PREDICATE_ARGUMENT_AND_ONE_EXPLICIT_IF_WHEN_CONDITION"
+          "scope": "SIMPLE_ACTIVE_PASSIVE_MODAL_PREDICATE_ARGUMENT_CLAUSES_AND_ONE_EXPLICIT_IF_WHEN_CONDITION"
         }
       },
       "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL",
@@ -86,14 +88,11 @@
         "do_not_repeat_feasibility_probe": true
       },
       "active_causal_localization": {
-        "status": "STOPPED_OR_INVALIDATED_BEFORE_FURTHER_HARVEST",
-        "subspace_stop_results": [
-          "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_001.json",
-          "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json"
-        ],
-        "mixed_protocol_invalidation": "canonical/governance/M0A_OLMO_MLP_SUBSPACE_PROTOCOL_INVALIDATION_V1.json",
-        "lowrank_invalidation": "canonical/governance/M0A_OLMO_LOWRANK_PROTOCOL_INVALIDATION_V1.json",
-        "next": "MATCHED_PARITY_ONLY_IF_ADMITTED_BY_EXACT_CUT__REOPEN_DONOR_ONLY_AFTER_LOCALIZED_FAILURE"
+        "status": "TERMINATED__NO_SMALL_CAUSALLY_MATERIAL_CONTIGUOUS_OR_LOWRANK_OLMO_SUBSPACE_FOUND",
+        "branch_result": "canonical/capabilities/opus55/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_001.json",
+        "contiguous_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json",
+        "lowrank_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json",
+        "consequence": "NO_FURTHER_OLMO_HARVEST__MATCHED_PARITY_ONLY_IF_ADMITTED_BY_EXACT_CUT"
       },
       "donor_frontier": {
         "reconciliation": "canonical/reasoning/2026-10-02_M0A_SPECIALIZED_DONOR_FEASIBILITY_RECONCILIATION_V2.json",
@@ -279,7 +278,7 @@
     "M1A",
     "M1B"
   ],
-  "next": "FREEZE_FAITHFUL_V6_INPUT_FROM_THIS_EXACT_BLOB__COMPUTE_EXACT_MINIMUM_REALITY_CUT__AUTHORIZE_ONLY_SELECTED_CLEAN_MATCHED_OBSERVATIONS",
+  "next": "FREEZE_V6_FROM_CURRENT_ACTION_UNIVERSE_WITH_FAITHFUL_COSTS_M0A_1_M1A_1_M1B_1__RUN_EXACT_MINIMUM_REALITY_CUT__AUTHORIZE_NO_FRESH_EVIDENCE_EXCEPT_SELECTED_CUT_MEMBERS",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -287,8 +286,9 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "All three shared M0/M1 mechanism residuals are now proof-only after bounded deterministic closures, donor dominance deletion, M1A saturation and M1B coverage audit. One end-to-end M1 batch can distinguish both M1A and M1B using independently frozen intermediate and final oracles.",
-    "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json"
+    "note": "M0A zero-reality search saturated: deterministic contextual/operator/predicate-argument slices verified; FastCoref partial; RST/DPLP/AllenNLP routes non-dominating fallbacks; OLMo contiguous and low-rank causal harvests found no small material capsule. M0A, M1A and M1B are now proof-only.",
+    "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json",
+    "m0a_lowrank_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json"
   },
   "combined_evaluation_candidates": [
     {
