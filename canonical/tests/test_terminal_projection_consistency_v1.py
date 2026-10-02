@@ -43,6 +43,18 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("AUTHORITY_SOURCE_BLOB_MISMATCH:terminal_closure_manifest", out["errors"])
 
+    def test_delegation_acceptance_underclaim_fails_closed(self):
+        docs, shas = self.live()
+        docs = copy.deepcopy(docs)
+        row = next(
+            r for r in docs["matrix"]["rows"]
+            if r.get("family") == "SUBAGENT_DELEGATION_AND_COORDINATION"
+        )
+        row["postwave_opus55_acceptance_status"] = "DEFINED_RESULT_OPEN"
+        out = self.evaluate(docs, shas)
+        self.assertFalse(out["pass"])
+        self.assertIn("MATRIX_DELEGATION_ACCEPTANCE_NOT_PASS", out["errors"])
+
     def test_authorized_case_action_fails_while_residual_is_blocked(self):
         docs, shas = self.live()
         docs = copy.deepcopy(docs)
