@@ -65,5 +65,6 @@
   "scope_gate_verification": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "terminal_population_binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
   "route_admissible_for_global_prequalification": true,
-  "terminal_results_observed": 0
+  "terminal_results_observed": 0,
+  "terminal_acceptance_mode_verification": "canonical/verification/SA_CCR_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
