@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_INPUT_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_SCOPE_SAFE_V2__SCOPE_RELATION_PLUS_ONE_ATOM_PLUS_TWO_NUMERIC_BOUNDS_OPEN__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "supersedes_for_scheduling_after_independent_verification": "canonical/governance/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_INPUT_V1.json",
+  "authority": {
+    "target_normalization_candidate": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json",
+      "git_blob_sha": "515f24f3000218d324be4a7c774b42f790a6ebaa"
+    },
+    "synthesis_binding_candidate": {
+      "path": "canonical/governance/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_CANDIDATE_V1.json",
+      "git_blob_sha": "a988b6fa4baf1d753f709c757c97f17185181f0a"
+    },
+    "synthesis_binding_verification": {
+      "path": "canonical/verification/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "64ad40c1c10bd01e4c0f4418fac29efafea838fc"
+    },
+    "algebra_runtime": {
+      "path": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
+      "git_blob_sha": "6aba64c26433b4a8646d5d96bb07e5ba5b46ca1b"
+    }
+  },
+  "algebra_input": {
+    "target": {
+      "scope_ref": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "required_atoms": [
+        "dimension:claim_to_source_fidelity",
+        "dimension:required_evidence_coverage",
+        "dimension:uncertainty_and_disagreement_preservation",
+        "dimension:audience_adaptation",
+        "dimension:format_and_style_constraints",
+        "dimension:compression_without_decision_relevant_loss",
+        "metric:matched_quality",
+        "metric:required_claim_coverage"
+      ],
+      "metric_requirements": [
+        {"metric": "matched_quality_noninferiority", "direction": "higher", "threshold": 0},
+        {"metric": "required_claim_coverage_noninferiority", "direction": "higher", "threshold": 0}
+      ]
+    },
+    "witness": {
+      "scope_ref": "scope://brain/EVIDENCE_TO_AUDIENCE_SYNTHESIS_001/T1_T3_TERMINAL",
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "proved_atoms": [
+        "dimension:audience_adaptation",
+        "dimension:claim_to_source_fidelity",
+        "dimension:compression_without_decision_relevant_loss",
+        "dimension:format_and_style_constraints",
+        "dimension:required_evidence_coverage",
+        "dimension:uncertainty_and_disagreement_preservation",
+        "metric:required_claim_coverage"
+      ],
+      "metric_bounds": {}
+    },
+    "verified_implications": [],
+    "verified_scope_relations": []
+  },
+  "expected_residual": {
+    "status": "TARGET_SCOPE_NOT_COVERED",
+    "implies_target": false,
+    "candidate_scope_relation": null,
+    "verified_scope_relation": null,
+    "missing_scope_relation": true,
+    "missing_atoms": ["metric:matched_quality"],
+    "missing_metric_bounds": [
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ]
+  },
+  "rule": "V2_SCOPE_FIREWALL_IS_LOAD_BEARING__SEVEN_OPERATIONAL_ATOMS_ARE_INDEPENDENTLY_BOUND__NO_SCOPE_RELATION_OR_MATCHED_NUMERIC_BOUND_IS_INFERRED__ZERO_ACCEPTANCE_OR_FAMILY_CREDIT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
