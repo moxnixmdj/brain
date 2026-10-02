@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_INTERVENTION_REPLAY_FALSIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXECUTABLE_COUNTEREXAMPLE_REPRODUCED_LOCALLY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Test the exact P1 V5 claim that its hidden evaluator machine-verifies heterogeneous intervention rescue rather than merely checking oracle-derived repair identity.",
+  "exact_brain_blobs": {
+    "canonical/runtime/p1_v5_intervention_replay_semantic_audit_v1.py": "47e6c675e3c3abd935da1a128c3850fa57a01e2c",
+    "canonical/tests/test_p1_v5_intervention_replay_semantic_audit_v1.py": "a9bf57a5ffd2a5b78de6eff65307a060a62f1300",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "9221744bafba669a8b596e2fcce63d4a5537654b",
+    "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json": "23f7b1cc5dd0a795bf88deb160431ea4528f3f74"
+  },
+  "counterexamples": [
+    "EMPTY_TRAJECTORY_STILL_RESCUES_AND_SCORES_PASS",
+    "ORPHAN_TERMINAL_RESOURCE_STILL_RESCUES_AND_SCORES_PASS",
+    "TERMINAL_WRITER_REMOVED_STILL_RESCUES_AND_SCORES_PASS",
+    "TERMINAL_FAILURE_MARKER_FALSE_STILL_RESCUES_AND_SCORES_PASS"
+  ],
+  "finding": "V5 evaluate_intervention derives rescue from required_root_repairs subset repair_targets, where required_root_repairs is generated from the hidden oracle. It does not replay trajectory state, recompute dependency propagation, or verify that the declared terminal failed resource becomes valid.",
+  "semantic_consequence": "P1_HETEROGENEOUS_INTERVENTION_RESCUE_IS_NOT_DISCHARGED_BY_V5_AS_CURRENTLY_IMPLEMENTED__REPAIR_TARGET_IDENTITY_IS_NOT_INTERVENTION_RESCUE",
+  "affected_claims_if_independently_verified": [
+    "P1_TYPED_INTERVENTION_ENVELOPE_V5 heterogenous intervention rescue claim must be narrowed or superseded",
+    "P1 V5 terminal-scope transport must not count P1_HETEROGENEOUS_INTERVENTION_RESCUE as discharged",
+    "P1 V5 direct-surface scope-superset composition must not lift quarantine from V5 rescue labels"
+  ],
+  "required_correction": "Implement an independent forward post-intervention trajectory evaluator that applies repairs to causal faults, propagates dependency/resource validity, and declares rescue only when the terminal failed resource is recomputed valid; symptom-only and incomplete repairs must fail by the state transition semantics rather than by expected-label comparison.",
+  "p1_scope_quarantine_clearable": false,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
