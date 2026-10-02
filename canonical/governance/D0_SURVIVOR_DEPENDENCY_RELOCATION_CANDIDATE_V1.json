@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_D0_SURVIVOR_DEPENDENCY_RELOCATION_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__REQUIRES_RESIDUAL_ELIMINATOR_VERIFICATION__ZERO_CAPABILITY_CREDIT",
+  "authority": [
+    "canonical/governance/ZERO_REALITY_RESIDUAL_SUBTRACTION_RESULT_V1.json",
+    "canonical/governance/D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_CLOSURE_V1.json",
+    "canonical/capabilities/opus55/D0_EXACT_ARTIFACT_MATERIALIZATION_001.json",
+    "canonical/runtime/residual_dependency_eliminator.py"
+  ],
+  "claims": [
+    {
+      "residual_id": "D0_DOCX_BROAD_NATIVE_STRUCTURAL_EDIT_PRESERVATION",
+      "required_behavior": "Broader DOCX structural/content edits while preserving unrelated native structure and round-trip validity.",
+      "owned_mechanical_suffix": [
+        "EXACT_PREDECLARED_MULTI_PART_OOXML_PACKAGE_PATCH_TRANSACTION",
+        "DOCX_FIELDS_TRACKED_CHANGES_TABLES_STYLES_RELATIONSHIPS_DRAWING_MEDIA_EXACT_PATCH_MECHANICS",
+        "RELATIONSHIP_BOUND_IMAGE_PAYLOAD_REPLACEMENT",
+        "EXACT_TARGET_BYTES_TO_NATIVE_ARTIFACT_MATERIALIZATION"
+      ],
+      "upstream_dependencies": [
+        "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+        "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS"
+      ],
+      "decomposition": "HIGH_LEVEL_EDIT_REQUEST_TO_EXACT_PATCH_PLAN_OR_TARGET_REPRESENTATION_IS_SEMANTIC_OR_GENERATIVE__EXECUTION_OF_THAT_DECLARED_PLAN_IS_ALREADY_D0_OWNED",
+      "disposition_if_verified": "DEPENDENCY_RELOCATION__NO_NEW_D0_MECHANISM"
+    },
+    {
+      "residual_id": "D0_PDF_NATIVE_TEXT_IMAGE_EDIT_AND_ROUNDTRIP",
+      "required_behavior": "Native PDF text/image edits with unrelated content preserved and valid reopen/render.",
+      "owned_mechanical_suffix": [
+        "PDF_EXACT_UNIQUE_WHOLE_TEXT_SHOW_OPERAND_REPLACEMENT_ON_DECLARED_PAGE",
+        "PDF_DECLARED_IMAGE_XOBJECT_REPLACEMENT_WITH_IDENTICAL_PIXEL_GEOMETRY",
+        "EXACT_TARGET_BYTES_TO_NATIVE_ARTIFACT_MATERIALIZATION"
+      ],
+      "upstream_dependencies": [
+        "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+        "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS"
+      ],
+      "decomposition": "REQUEST_TO_DECLARED_PDF_OBJECT_OR_EXACT_TARGET_REPRESENTATION_IS_UPSTREAM_SEMANTIC_OR_GENERATIVE__DECLARED_OBJECT_MUTATION_AND_EXACT_MATERIALIZATION_ARE_ALREADY_OWNED",
+      "disposition_if_verified": "DEPENDENCY_RELOCATION__NO_NEW_D0_MECHANISM"
+    }
+  ],
+  "guards": [
+    "DO_NOT_CLAIM_ARBITRARY_FORMAT_VALIDITY_OR_LAYOUT_AUTHORITY_FROM_BYTE_MATERIALIZATION",
+    "IF_A_FROZEN_TERMINAL_CASE_REQUIRES_A_NATIVE_MUTATION_NOT_REPRESENTABLE_BY_VERIFIED_TRANSACTIONS_AND_NOT_REDUCIBLE_TO_EXACT_TARGET_BYTES__REOPEN_D0_SPECIFIC_CLASS",
+    "NO_WHOLE_M2_OR_FAMILY_CREDIT",
+    "NO_TERMINAL_PROOF_FROM_DEPENDENCY_RELOCATION"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
