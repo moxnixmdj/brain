@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_SCOPE_AUDIT_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED__CURRENT_DIRECT_ROUTE_PROVES_ONLY_EXPLICIT_WEIGHTED_SUM_FACTOR_SUBSET__WHOLE_CONTRACT_SCOPE_NOT_PROVEN",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "authority": {
+    "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "active_basis": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "candidate": {
+      "path": "canonical/runtime/contract_native_brain_candidate.py",
+      "blob_sha": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85"
+    },
+    "proof_suite": {
+      "path": "canonical/runtime/contract_native_proof_suites.py",
+      "blob_sha": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+    },
+    "suite_spec": {
+      "path": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+      "blob_sha": "d8cf10dfbe041f63a43ccf43bd5dcdc8fe6f9e2b"
+    }
+  },
+  "frozen_contract_requires": [
+    "STRUCTURED_METHOD_SPECIFICATION_REQUIREMENTS_PLUS_NORMALIZED_APPLICABLE_RULES_AND_INPUT_SCHEMA",
+    "EXPLICIT_REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_GRAPH",
+    "EVERY_APPLICABLE_REQUIREMENT_OR_FACTOR_HAS_TRACED_CONSUMER_OR_EXPLICIT_JUSTIFIED_EXCLUSION",
+    "DIMENSIONS_TYPES_AND_INVARIANTS_CONSISTENT",
+    "INDEPENDENT_ACCEPTANCE_CHECKS_COVER_EACH_MATERIAL_GRAPH_EDGE",
+    "SCOPE_INCLUDES_STRUCTURED_CONSTRAINTS_FORMULAS_SCHEMAS_STANDARDS_AND_FEATURE_CALLOUTS"
+  ],
+  "current_route_actually_proves": [
+    "ALL_GENERATED_REQUIREMENTS_ARE_REQUIRED_TRUE",
+    "SINGLE_ALLOWED_OPERATION_WEIGHTED_SUM",
+    "UNIFORM_UNIT_LABEL_U_WITHOUT_DIMENSION_OR_TYPE_REASONING",
+    "CANDIDATE_EMITS_ONLY_FACTOR_AND_INTEGER_COEFFICIENT_ROWS",
+    "HIDDEN_NUMERIC_PROBES_REJECT_MISSING_EXTRA_OR_WRONG_WEIGHTED_SUM_FACTORS"
+  ],
+  "missing_whole_contract_dimensions": [
+    "INTERMEDIATE_DAG_STRUCTURE_AND_CONSUMER_LINEAGE",
+    "JUSTIFIED_EXCLUSION_OF_INAPPLICABLE_REQUIREMENTS",
+    "DIMENSION_AND_TYPE_ANNOTATION_AND_VALIDATION",
+    "INVARIANT_ANNOTATION_AND_VALIDATION",
+    "MULTIPLE_METHOD_BRANCH_SELECTION",
+    "SCHEMA_STANDARD_AND_FEATURE_CALLOUT_INTERACTIONS",
+    "STRUCTURALLY_INDEPENDENT_ACCEPTANCE_CONSEQUENCES_PER_MATERIAL_EDGE"
+  ],
+  "concrete_evidence": [
+    "solve_structured_method reads required factor ids and integer coefficients and returns graph rows containing only factor and coefficient",
+    "_structured_method_case fixes allowed_ops to weighted_sum, sets every generated factor required=true, and uses units='u'",
+    "_score_structured_method checks factor set, coefficients, and weighted-sum hidden probes but does not check the missing whole-contract dimensions"
+  ],
+  "ruling": "CURRENT_ROUTE_MAY_REMAIN_AS_BOUNDED_PREFLIGHT_COMPONENT__MUST_NOT_BE_PROMOTED_TO_TERMINAL_ROUTE_FOR_WHOLE_CONTRACT",
+  "remaining_before_terminal_admission": [
+    "EXPAND_OR_COMPOSE_INFORMATION_SAFE_ROUTE_TO_COVER_ALL_FROZEN_CONTRACT_DIMENSIONS",
+    "ADD_INDEPENDENT_ORACLE_AND_ANTI_SHORTCUT_MUTATIONS_FOR_EACH_LOAD_BEARING_DIMENSION",
+    "PASS_SCOPE_EQUIVALENT_PROOF_GATE_V2_WITH_ZERO_UNRESOLVED_REQUIRED_DIMENSIONS",
+    "FREEZE_POST_CANDIDATE_TERMINAL_POPULATION_AND_ACCEPTANCE_BINDING"
+  ],
+  "execution_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
