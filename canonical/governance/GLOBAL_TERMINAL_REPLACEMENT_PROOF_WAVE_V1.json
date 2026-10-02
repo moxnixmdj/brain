@@ -72,21 +72,24 @@
       "route": "VERIFIED_CONTRACT_NATIVE_STRUCTURED_METHOD",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
       "route": "VERIFIED_CONTRACT_NATIVE_TRAJECTORY_FAILURE_LOCALIZATION",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "route": "VERIFIED_CONTRACT_NATIVE_PROFESSIONAL_PLAN_QUALITY",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
@@ -99,7 +102,8 @@
       "route": "VERIFIED_CONTRACT_NATIVE_EVIDENCE_SYNTHESIS",
       "evaluator": "canonical/runtime/contract_native_proof_suites.py",
       "candidate": "canonical/runtime/contract_native_brain_candidate.py",
-      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PENDING"
+      "fresh_terminal_binding": "CANDIDATE_INSTALLED__INDEPENDENT_PREFLIGHT_PASS__FRESH_TERMINAL_POPULATION_BINDING_REQUIRED",
+      "candidate_preflight_receipt": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
@@ -130,7 +134,6 @@
     "FREEZE_AND_VERIFY_COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_TERMINAL_ROUTE",
     "PASS_SCOPE_EQUIVALENT_PROOF_GATE_FOR_CORRECTED_SPECIFICATION_TO_ACCEPTANCE_SCOPE",
     "RECOMPUTE_GLOBAL_SURFACE_DOMINANCE_V4",
-    "INDEPENDENTLY_VERIFY_CONTRACT_NATIVE_BRAIN_CANDIDATE_FOR_FOUR_GENERATED_CONTRACTS",
     "FREEZE_FRESH_TERMINAL_CANDIDATE_BINDINGS_FOR_ACCEPTANCE_ARTIFACT_RESEARCH_TOOL_GROUNDING_AND_DELEGATION_ROUTES",
     "FREEZE_POST_FREEZE_SEED_AND_POPULATION_SELECTION_PROTOCOL_FOR_ALL_TEN_OBLIGATIONS",
     "RUN_MACHINE_PREQUALIFICATION_REDUCER__AUTHORIZE_WAVE_ONLY_ON_PASS"
@@ -154,5 +157,6 @@
     ],
     "fresh_population": "FRESH_POST_FREEZE_CROSS_DOMAIN_RAW_SPECS_WITH_INDEPENDENT_ALTERNATIVE_INTERPRETATION_AND_ACCEPTANCE_CONSEQUENCE_ORACLE",
     "admission": "MUST_PASS_SCOPE_EQUIVALENT_PROOF_GATE_BEFORE_ANY_NAMED_SURFACE_ROUTE_DELETION_CREDIT"
-  }
+  },
+  "contract_native_candidate_verification": "canonical/verification/CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
