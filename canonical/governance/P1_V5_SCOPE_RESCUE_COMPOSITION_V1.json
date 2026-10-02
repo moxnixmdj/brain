@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_SCOPE_RESCUE_COMPOSITION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ZERO_REALITY_SEMANTIC_COMPOSITION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Compose two already-separated P1 proof strengths into one information-safe typed envelope: V4 heterogeneous delayed/interaction causal localization plus V2 counterfactual terminal-rescue semantics, while adding SCOPE as an explicit first-class failure mechanism. This is a separate scope-safe proof candidate and does not retroactively change the Terminal V3 scorer.",
+  "source_residual": {
+    "path": "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json",
+    "git_blob_sha": "23f7b1cc5dd0a795bf88deb160431ea4528f3f74",
+    "exact_open_obligations": [
+      "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+      "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+    ]
+  },
+  "inherited_verified_mechanisms": {
+    "counterfactual_rescue": {
+      "path": "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "c571023e8b126c558f3995b2b0d348a7fbd084a0",
+      "verified": [
+        "COUNTERFACTUAL_TERMINAL_RESCUE_REQUIRED_FOR_CAUSE_CLAIM",
+        "MULTIPLE_RESCUERS_FORCE_NONIDENTIFIABILITY"
+      ],
+      "limitation": "BOUNDED_ADDITIVE_STATE_TRANSITIONS_ONLY"
+    },
+    "heterogeneous_typed_causality": {
+      "path": "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "ee69a93c45a2b16676c49bfb0a01749a5c4ea1e2",
+      "verified": [
+        "SIX_NORMALIZED_DOMAINS",
+        "DELAYED_CAUSAL_CHAINS",
+        "CONJUNCTIVE_INTERACTIONS",
+        "AMBIGUOUS_ROOTS",
+        "SEVEN_TYPED_MECHANISM_CLASSES"
+      ],
+      "limitation": "NO_EXPLICIT_SCOPE_KIND_AND_NO_MACHINE_VERIFIED_POST_INTERVENTION_RESCUE_FIELD"
+    }
+  },
+  "candidate": {
+    "runtime": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+    "runtime_git_blob_sha": "5c55e932b158b2692a8cf65fb356a214aad3b80c",
+    "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py",
+    "proof_git_blob_sha": "dfd530535b16d0c01845eb13b69aee4eb575f574",
+    "tests": "canonical/tests/test_trajectory_failure_typed_ir_v5.py",
+    "tests_git_blob_sha": "d96f260b3855c87d35f7f09e98ba21f23d231197"
+  },
+  "frozen_preflight_envelope": {
+    "normalized_domains": [
+      "BROWSER",
+      "FILESYSTEM",
+      "TOOL_API",
+      "ARTIFACT",
+      "RESEARCH",
+      "CODE"
+    ],
+    "mechanism_classes": [
+      "AUTHORITY",
+      "SCOPE",
+      "SCHEMA",
+      "PROVENANCE",
+      "INVARIANT",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT",
+      "DEPENDENCY"
+    ],
+    "causal_patterns": [
+      "SINGLE",
+      "DELAYED",
+      "INTERACTION",
+      "AMBIGUOUS"
+    ],
+    "cross_product_case_count": 192,
+    "explicit_primary_scope_case_count": 24,
+    "candidate_visible_hidden_intervention_worlds": false,
+    "intervention_semantics": [
+      "IDENTIFIED_AND_DELAYED_REPAIR_SET_MUST_RESCUE_THE_HIDDEN_TERMINAL_WORLD",
+      "CONJUNCTIVE_INTERACTION_REQUIRES_FULL_ROOT_REPAIR_SET_AND_REJECTS_SINGLETON_FALSE_RESCUE",
+      "AMBIGUOUS_ROOT_REPAIRS_MAY_RESCUE_A_POSSIBLE_WORLD_BUT_NO_SINGLE_ROOT_MAY_BE_PROMOTED_AS_UNIVERSAL_CAUSE"
+    ]
+  },
+  "candidate_residual_effect": {
+    "may_discharge_after_exact_independent_verification": [
+      "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+      "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+    ],
+    "p1_quarantine_cleared_now": false,
+    "terminal_v3_reinterpreted": false,
+    "terminal_replay_authorized": false
+  },
+  "hard_rules": [
+    "SCOPE_MUST_BE_PRESENT_AS_AN_EXPLICIT_VISIBLE_FAILED_CHECK__NEVER_INFER_SCOPE_FROM_AUTHORITY_SCHEMA_NAMES_OR_PROSE",
+    "HIDDEN_INTERVENTION_WORLDS_MUST_NEVER_ENTER_CANDIDATE_VISIBLE_PAYLOAD",
+    "REPAIR_TARGET_NAMING_ALONE_IS_INSUFFICIENT__SCORER_MUST_APPLY_THE_REPAIR_SET_TO_HIDDEN_INTERVENTION_WORLDS",
+    "DELAYED_AND_INTERACTION_CASES_ARE_LOAD_BEARING",
+    "INTERACTION_SINGLETON_REPAIR_MUST_NOT_RECEIVE_RESCUE_CREDIT",
+    "AMBIGUITY_MUST_NOT_BE_COLLAPSED_TO_A_UNIQUE_CAUSE_WITHOUT_A_DISCRIMINATOR",
+    "NO_RETROACTIVE_CLAIM_THAT_TERMINAL_V3_SCORED_THESE_SEMANTICS",
+    "NO_P1_WHOLE_SCOPE_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE_OR_SAME_REPO_CI",
+    "SEPARATE_EXACT_BLOB_INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_ANY_RESIDUAL_DISCHARGE",
+    "ZERO_FRESH_TERMINAL_EVIDENCE_AND_ZERO_INCREMENTAL_SPEND"
+  ],
+  "next": "RUN_EXACT_TESTS__THEN_INDEPENDENTLY_VERIFY_THE_THREE_EXACT_V5_BLOBS_ON_A_SEPARATE_PUBLIC_RUNNER__IF_AND_ONLY_IF_THAT_PASSES_COMPILE_THE_TWO_P1_RESIDUAL_OBLIGATIONS_AGAINST_THE_VERIFIED_V5_RECEIPT_WITHOUT_REPLAYING_TERMINAL_V3",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
