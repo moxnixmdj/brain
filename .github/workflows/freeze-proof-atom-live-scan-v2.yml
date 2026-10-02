@@ -1,0 +1,95 @@
+name: Freeze V2 live proof atom receipt scan
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/freeze-proof-atom-live-scan-v2.yml"
+      - "canonical/runtime/proof_atom_receipt_index_v2.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v2.py"
+      - "canonical/runtime/canonical_proof_atom_basis_v2.py"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
+      - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
+  workflow_dispatch:
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify V2 indexer tests
+        run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Compute content-addressed live corpus scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/runtime/proof_atom_receipt_index_v2.py > /tmp/index.json
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          p = Path("/tmp/index.json")
+          out = json.loads(p.read_text(encoding="utf-8"))
+          assert str(out.get("status", "")).startswith("PASS"), out
+          assert out.get("canonical_atom_count") == 40, out
+          assert out.get("scanned_file_count", 0) > 0, out
+
+          def git(*args):
+              return subprocess.check_output(["git", *args], text=True).strip()
+
+          receipt = {
+              "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2_LIVE_SCAN_RUNNER_RECEIPT",
+              "status": "INDEPENDENT_RUNNER_PASS__LIVE_CORPUS_INDEX_FROZEN__ZERO_CREDIT",
+              "verified_head": git("rev-parse", "HEAD"),
+              "verified_tree": git("rev-parse", "HEAD^{tree}"),
+              "exact_blobs": {
+                  "canonical/runtime/proof_atom_receipt_index_v2.py": git("hash-object", "canonical/runtime/proof_atom_receipt_index_v2.py"),
+                  "canonical/tests/test_proof_atom_receipt_index_v2.py": git("hash-object", "canonical/tests/test_proof_atom_receipt_index_v2.py"),
+                  "canonical/runtime/canonical_proof_atom_basis_v2.py": git("hash-object", "canonical/runtime/canonical_proof_atom_basis_v2.py"),
+                  "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json": git("hash-object", "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"),
+                  "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json": git("hash-object", "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"),
+              },
+              "scan_summary": {
+                  "canonical_atom_count": out["canonical_atom_count"],
+                  "canonical_atom_manifest_sha256": out["canonical_atom_manifest_sha256"],
+                  "scanned_file_count": out["scanned_file_count"],
+                  "scanned_corpus_manifest_sha256": out["scanned_corpus_manifest_sha256"],
+                  "candidate_match_count": out["candidate_match_count"],
+                  "atoms_with_candidate_matches": out["atoms_with_candidate_matches"],
+                  "atoms_without_candidate_matches": out["atoms_without_candidate_matches"],
+                  "atoms_with_truncated_candidate_lists": out["atoms_with_truncated_candidate_lists"],
+                  "candidate_matches_by_source_class": out["candidate_matches_by_source_class"],
+              },
+              "new_reality_units_consumed": 0,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "rule": "LIVE_SCAN_ARTIFACT_IS_DISCOVERY_ONLY__CANDIDATE_MATCHES_REQUIRE_EXPLICIT_SEMANTIC_REVIEW__NO_ACCEPTANCE_CREDIT_FROM_INDEX",
+          }
+          Path("proof_atom_receipt_index_v2_live_scan.json").write_text(
+              json.dumps(out, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+          )
+          Path("proof_atom_receipt_index_v2_live_scan_runner_receipt.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(receipt["scan_summary"], sort_keys=True))
+          PY
+      - name: Upload frozen scan
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-live-scan
+          path: |
+            proof_atom_receipt_index_v2_live_scan.json
+            proof_atom_receipt_index_v2_live_scan_runner_receipt.json
+          if-no-files-found: error
+          retention-days: 7
