@@ -262,11 +262,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "CLOSE_D0_S0_S1_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__FREEZE_DONOR_INDEPENDENT_M2_M3_M5_OPERATIVE_ROUTES__VERIFY_COMPOSITION_AND_MUTATION_GATES__THEN_ADMIT_T0_T1_T2_T3_AS_ONE_PARALLEL_TERMINAL_WAVE",
+    "next_step": "CLOSE_D0_AND_S0_FOR_SURVIVING_M2_M3_SCOPE__FREEZE_DONOR_INDEPENDENT_M2_M3_OPERATIVE_ROUTES__VERIFY_COMPOSITION_AND_MUTATION_GATES__THEN_ADMIT_T0_T1_T2_T3_AS_ONE_PARALLEL_TERMINAL_WAVE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EXACT_FOUR_PORTFOLIO_TERMINAL_OBSERVATION_CUT_FROZEN__M2_M3_M5_OPERATIVE_ROUTE_CLOSURE_DONOR_INDEPENDENCE_AND_COMPOSITION_GATES_PENDING",
+    "critical_blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__D0_NATIVE_EDIT_TAIL_AND_S0_SOURCE_TRACEABLE_MODEL_ACQUISITION_REMAIN_FOR_M2_M3__DONOR_INDEPENDENCE_AND_COMPOSITION_GATES_PENDING",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -343,7 +343,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "EXACT_FOUR_PORTFOLIO_TERMINAL_OBSERVATION_CUT_FROZEN__M2_M3_M5_OPERATIVE_ROUTE_CLOSURE_DONOR_INDEPENDENCE_AND_COMPOSITION_GATES_PENDING",
+    "highest_leverage_capability_gap": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__D0_NATIVE_EDIT_TAIL_AND_S0_SOURCE_TRACEABLE_MODEL_ACQUISITION_REMAIN_FOR_M2_M3__DONOR_INDEPENDENCE_AND_COMPOSITION_GATES_PENDING",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -826,8 +826,8 @@
       "activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
       "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
     },
-    "next_progress_event_target": "M2_M3_M5_OPERATIVE_ROUTES_FROZEN_OR_EXACT_UNSOLVED_BOUNDARY",
-    "open_mechanism_residual_count": 3,
+    "next_progress_event_target": "D0_S0_CLOSED_OR_EXACT_FAIL_CLOSED_BLOCKER_VERDICT",
+    "open_mechanism_residual_count": 2,
     "m0b_frozen_envelope_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
     "residual_action_universe_v2": {
       "path": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
@@ -853,9 +853,7 @@
       "local_v6_globally_authorized": false,
       "open_mechanism_lanes": [
         "M2",
-        "M3",
-        "M4",
-        "M5"
+        "M3"
       ]
     },
     "active_stage1_execution": null,
