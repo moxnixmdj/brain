@@ -99,3 +99,36 @@ def test_exact_derivation_deleted():
         ResidualClaim("s0-derive", "derived template", exactly_derivable=True, evidence=ev())
     )
     assert out["disposition"] == "EXACT_DEDUCTIVE_CLOSURE"
+
+def test_dependency_relocation_deleted():
+    out = eliminate_residual(
+        ResidualClaim(
+            "D0-broad",
+            "native artifact edit from high-level request",
+            mechanical_suffix_owned=True,
+            decomposes_to_existing_residuals=True,
+            dependency_residual_ids=("S0", "G0"),
+            evidence=ev(),
+        )
+    )
+    assert out["status"] == "ELIMINATED"
+    assert out["disposition"] == "DEPENDENCY_RELOCATION__OWNED_MECHANICAL_SUFFIX_PLUS_EXISTING_RESIDUALS"
+    assert out["dependency_residual_ids"] == ["S0", "G0"]
+
+def test_dependency_relocation_incomplete_fails_closed():
+    out = eliminate_residual(
+        ResidualClaim("D0-bad","bad relocation",mechanical_suffix_owned=True,evidence=ev())
+    )
+    assert out["status"] == "FAIL_CLOSED"
+
+def test_dependency_relocation_self_cycle_fails_closed():
+    out = eliminate_residual(
+        ResidualClaim(
+            "D0-self","self cycle",
+            mechanical_suffix_owned=True,
+            decomposes_to_existing_residuals=True,
+            dependency_residual_ids=("D0-self",),
+            evidence=ev(),
+        )
+    )
+    assert out["status"] == "FAIL_CLOSED"
