@@ -18,9 +18,12 @@ Safety properties enforced in code, before any network call where applicable
   run stops (exit 4) instead of exceeding a token cap or a per-UTC-day neuron cap.
   The Cloudflare ``cf-run`` style refuses to start without a neuron cap and a price
   table, so zero spend is the default by construction.
-* Frozen-release protection: questions whose release equals ``--frozen-release``
-  are refused (exit 3) unless a content-addressed authorization file matches the
-  exact questions file, config file and model id. Nothing is sent before this check.
+* Frozen-set protection, explicit and fail closed: a frozen policy MUST be chosen
+  (``--frozen-release`` exact dates, ``--frozen-release-min`` a minimum date, or
+  ``--assert-no-frozen-questions``). A question is frozen if its release matches a rule
+  or if its release date is unknown. Frozen questions are refused (exit 3) unless a
+  content-addressed authorization file matches the exact questions file, config file,
+  model id and rule. Nothing is sent before this check.
 * Provenance: every call appends a hash-chained line (request/response digests,
   usage, neurons). API keys are read from the environment and never written.
 * Resume: answered question ids are skipped; the provenance chain is verified first.
@@ -33,6 +36,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -84,6 +88,17 @@ def utc_day(now: dt.datetime) -> str:
 
 
 # --------------------------------------------------------------------------- questions
+_DATE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
+
+
+def normalize_release(value: Any) -> str | None:
+    """ISO date (YYYY-MM-DD) from a date, datetime or string; None when absent or unparseable."""
+    if value is None:
+        return None
+    m = _DATE.match(str(value).strip())
+    return m.group(1) if m else None
+
+
 def load_questions(path: Path, id_field: str = "question_id", prompt_field: str = "prompt",
                    release_field: str = "livebench_release_date") -> list[dict[str, Any]]:
     text = Path(path).read_text(encoding="utf-8")
@@ -113,8 +128,7 @@ def load_questions(path: Path, id_field: str = "question_id", prompt_field: str 
             prompt = turns[0] if isinstance(turns, list) and turns and isinstance(turns[0], str) else None
         if not isinstance(prompt, str) or not prompt.strip():
             raise Blocked(f"QUESTION_PROMPT_MISSING:{qid!r}")
-        release = row.get(release_field)
-        out.append({"question_id": qid, "prompt": prompt, "release": None if release is None else str(release)})
+        out.append({"question_id": qid, "prompt": prompt, "release": normalize_release(row.get(release_field))})
     return out
 
 
@@ -131,14 +145,41 @@ def load_config(path: Path) -> dict[str, Any]:
     return cfg
 
 
-def enforce_frozen_protection(questions: Sequence[Mapping[str, Any]], frozen_release: str | None,
-                              authorization_path: Path | None, questions_path: Path, config_path: Path,
-                              model_id: str) -> dict[str, Any]:
-    frozen_ids = [q["question_id"] for q in questions if frozen_release and q["release"] == frozen_release]
+def frozen_rule_label(exact: Sequence[str], minimum: str | None) -> str:
+    parts = []
+    if exact:
+        parts.append(",".join(sorted(exact)))
+    if minimum:
+        parts.append(">=" + minimum)
+    return ";".join(parts)
+
+
+def enforce_frozen_protection(questions: Sequence[Mapping[str, Any]], exact: Sequence[str], minimum: str | None,
+                              assert_none: bool, authorization_path: Path | None, questions_path: Path,
+                              config_path: Path, model_id: str) -> dict[str, Any]:
+    exact = [normalize_release(x) or "" for x in exact]
+    if any(not x for x in exact):
+        raise Blocked("FROZEN_RELEASE_NOT_AN_ISO_DATE")
+    minimum = normalize_release(minimum) if minimum else None
+    if not exact and not minimum and not assert_none:
+        raise Blocked("FROZEN_POLICY_REQUIRED__PASS_--frozen-release_OR_--frozen-release-min_OR_--assert-no-frozen-questions")
+    if assert_none and (exact or minimum):
+        raise Blocked("FROZEN_POLICY_CONFLICT__ASSERT_NONE_CANNOT_BE_COMBINED_WITH_A_FROZEN_RULE")
+    if assert_none:
+        return {"frozen_questions": 0, "authorized": False, "policy": "ASSERTED_NO_FROZEN_QUESTIONS"}
+
+    def is_frozen(q: Mapping[str, Any]) -> bool:
+        rel = q["release"]
+        if rel is None:
+            return True  # unknown release is treated as frozen (fail closed)
+        return rel in exact or (minimum is not None and rel >= minimum)
+
+    rule = frozen_rule_label(exact, minimum)
+    frozen_ids = [q["question_id"] for q in questions if is_frozen(q)]
     if not frozen_ids:
-        return {"frozen_questions": 0, "authorized": False}
+        return {"frozen_questions": 0, "authorized": False, "policy": "RULE", "rule": rule}
     if authorization_path is None:
-        raise FrozenBlocked("FROZEN_RELEASE_PRESENT_AND_NO_AUTHORIZATION")
+        raise FrozenBlocked("FROZEN_QUESTIONS_PRESENT_AND_NO_AUTHORIZATION")
     try:
         auth = json.loads(Path(authorization_path).read_text(encoding="utf-8"))
     except Exception as exc:  # unreadable or invalid JSON
@@ -146,7 +187,7 @@ def enforce_frozen_protection(questions: Sequence[Mapping[str, Any]], frozen_rel
     checks = {
         "schema": auth.get("schema") == AUTH_SCHEMA,
         "execution_authority": auth.get("execution_authority") is True,
-        "frozen_release": auth.get("frozen_release") == frozen_release,
+        "frozen_rule": auth.get("frozen_rule") == rule,
         "model_id": auth.get("model_id") == model_id,
         "questions_sha256": auth.get("questions_sha256") == sha256_file(questions_path),
         "config_sha256": auth.get("config_sha256") == sha256_file(config_path),
@@ -154,7 +195,7 @@ def enforce_frozen_protection(questions: Sequence[Mapping[str, Any]], frozen_rel
     bad = sorted(k for k, ok in checks.items() if not ok)
     if bad:
         raise FrozenBlocked("AUTHORIZATION_MISMATCH:" + ",".join(bad))
-    return {"frozen_questions": len(frozen_ids), "authorized": True}
+    return {"frozen_questions": len(frozen_ids), "authorized": True, "policy": "RULE", "rule": rule}
 
 
 # --------------------------------------------------------------------------- budget
@@ -346,13 +387,16 @@ def verify_chain(path: Path) -> tuple[bool, str, int]:
 def run(*, questions_path: Path, config_path: Path, out_dir: Path, model_id: str, transport: Transport,
         max_total_tokens: int | None = None, max_neurons_per_day: float | None = None,
         prices: Mapping[str, Any] | None = None, frozen_release: str | None = None,
+        frozen_release_min: str | None = None, assert_no_frozen_questions: bool = False,
         authorization_path: Path | None = None, id_field: str = "question_id", prompt_field: str = "prompt",
         release_field: str = "livebench_release_date", max_attempts: int = 3, timeout: float = 120.0,
         clock: Callable[[], dt.datetime] | None = None, sleep: Callable[[float], None] = time.sleep) -> dict[str, Any]:
     clock = clock or (lambda: dt.datetime.now(dt.timezone.utc))
     cfg = load_config(config_path)
     questions = load_questions(questions_path, id_field, prompt_field, release_field)
-    frozen = enforce_frozen_protection(questions, frozen_release, authorization_path, questions_path, config_path, model_id)
+    exact = [x.strip() for x in (frozen_release or "").split(",") if x.strip()]
+    frozen = enforce_frozen_protection(questions, exact, frozen_release_min, assert_no_frozen_questions,
+                                       authorization_path, questions_path, config_path, model_id)
     if isinstance(transport, CfRunTransport) and (max_neurons_per_day is None or prices is None):
         raise Blocked("CF_RUN_REQUIRES_NEURON_CAP_AND_PRICE_TABLE__ZERO_SPEND_BY_CONSTRUCTION")
     if max_total_tokens is None and max_neurons_per_day is None:
@@ -480,7 +524,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     ap.add_argument("--max-total-tokens", type=int, default=None)
     ap.add_argument("--max-neurons-per-utc-day", type=float, default=None)
     ap.add_argument("--prices", type=Path, default=None)
-    ap.add_argument("--frozen-release", default=None)
+    ap.add_argument("--frozen-release", default=None, help="comma-separated exact release dates treated as frozen")
+    ap.add_argument("--frozen-release-min", default=None, help="releases on or after this date are frozen")
+    ap.add_argument("--assert-no-frozen-questions", action="store_true", help="explicitly assert the file holds only non-frozen questions")
     ap.add_argument("--authorization", type=Path, default=None)
     ap.add_argument("--id-field", default="question_id")
     ap.add_argument("--prompt-field", default="prompt")
@@ -496,6 +542,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             questions_path=args.questions, config_path=args.config, out_dir=args.out, model_id=args.model,
             transport=build_transport(args), max_total_tokens=args.max_total_tokens,
             max_neurons_per_day=args.max_neurons_per_utc_day, prices=prices, frozen_release=args.frozen_release,
+            frozen_release_min=args.frozen_release_min, assert_no_frozen_questions=args.assert_no_frozen_questions,
             authorization_path=args.authorization, id_field=args.id_field, prompt_field=args.prompt_field,
             release_field=args.release_field, max_attempts=args.max_attempts, timeout=args.timeout)
     except Blocked as exc:

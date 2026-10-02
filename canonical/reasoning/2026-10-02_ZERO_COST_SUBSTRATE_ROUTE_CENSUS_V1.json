@@ -745,10 +745,11 @@
           "Only the first part of the leaderboard page was retrieved; more rows may exist.",
           "The snapshot's release date was not recorded; the registry pins the bar to the 2026-06-25 release, so cross-release comparison is invalid until the same release is confirmed.",
           "LiveBench model names map to Workers AI IDs by name only; version identity and pinning are unverified.",
-          "The Opus 5.5 row and the open rows are measured by the same leaderboard, but effort settings differ by row."
+          "The Opus 5.5 row and the open rows are measured by the same leaderboard, but effort settings differ by row.",
+          "The registry label 'LiveBench 2026-06-25' matches no release in LiveBench's changelog at the pinned upstream commit (latest entry 2026-01-08; IF tasks refreshed 2025-11-25); the leaderboard snapshot release is unrecorded."
         ]
       },
-      "scorer_state": "The scorer (58 checkers, prompt-level loose accuracy), the response adapter and the ID-set preflight are already independently verified in the repo (LIVEBENCH_IF_* public-runner verification receipts); the adapter contract is a list of {question_id, response} records.",
+      "scorer_state": "The 58 checkers, the response adapter and the ID-set preflight are independently verified in the repo, but the AGGREGATOR the leaderboard uses (strict check, per-question mean of 'all followed' and 'fraction followed', answer taken from inside <solution> tags) differs from the one declared in LIVEBENCH_IF_VERIFIER_BINDING_V1 (prompt-level loose accuracy). See the public-bar receipt, defect finding LIVEBENCH_IF_METRIC_AND_RELEASE_ALIGNMENT. The adapter contract is a list of {question_id, response} records.",
       "ownership_caveat": "A raw open model that already exceeds the bar would be an 'external capability provider' under General Cognition Substrate Law V3 unless the Brain-owned operative configuration measurably adds value (ablation: configuration versus bare 'use model X'). A passing score would still close the atomic public-bar predicate; family promotion and ownership credit have separate tests."
     },
     {
@@ -1102,7 +1103,7 @@
   "reconciliation": {
     "law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md section 15",
     "question": "What is the shortest verified path from the current state to the terminal capability now?",
-    "answer": "There is no verified path to the terminal conjunction. The shortest verified path to the first real predicate closure is LIVEBENCH_IF_GE_65_7: (1) bind a pinned generator route from the P13 candidates; (2) measure tokens per question and raw-versus-Brain-configured difference on non-frozen LiveBench IF questions from earlier releases; (3) one-shot frozen run after global prewave admission; (4) independent scoring with the already verified scorer.",
+    "answer": "There is no verified path to the terminal conjunction. The shortest verified path to the first real predicate closure is LIVEBENCH_IF_GE_65_7: (1) bind a pinned generator route from the P13 candidates; (2) measure tokens per question and raw-versus-Brain-configured difference on non-frozen LiveBench IF questions from earlier releases; (3) one-shot frozen run after global prewave admission; (4) scoring with LiveBench's own strict mean-of-two aggregator (the repo's declared prompt-level loose metric is not the leaderboard's; defect finding in the public-bar receipt), by the independently verified checkers.",
     "verified_parts": [
       "Leaderboard scores and the 65.7 bar (official page, P13)",
       "Scorer, adapter and ID-set preflight independently verified (repo receipts)",
@@ -1115,7 +1116,8 @@
       "Model version pinning semantics",
       "Brain-configuration uplift (unmeasured) and the ablation needed for ownership credit",
       "Global prewave admission timing",
-      "The one external dependency: a Workers AI route (owner Worker or scoped credential) reachable from the public runner"
+      "The one external dependency: a Workers AI route (owner Worker or scoped credential) reachable from the public runner",
+      "Metric alignment: the binding declares prompt-level loose accuracy; the leaderboard uses the strict mean of prompt-level and instruction-level; the registry's release label matches no LiveBench release"
     ]
   }
 }

@@ -470,9 +470,15 @@
           "url": "https://livebench.ai/",
           "retrieved_utc": "2026-10-02",
           "excerpt": "Leaderboard, Instruction Following column: Claude 5.5 Opus Thinking Max Effort 65.7; open-weights rows above it include Qwen 3.8 Flash Next 77.1, Qwen3.8 27B 72.7, Kimi K3 71.4, DeepSeek V4.1 Flash 70.0, GLM-5.3 69.3, DeepSeek V4 Pro 0813 67.7."
+        },
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/process_results/instruction_following/utils.py",
+          "retrieved_utc": "2026-10-02",
+          "excerpt": "score_results: score_1 = 1 if follow_all_instructions else 0; score_2 = fraction of instructions followed; avg_score = (score_1 + score_2) / 2. ifbench_process_results: 'Evaluate using IFBench's strict evaluation' (test_instruction_following_strict); the answer is taken from inside <solution>...</solution> when present."
         }
       ],
-      "note": "Questions rotate monthly, so a score is comparable only within one pinned release; repo has a hermetic pinned input and 58 checkers (scorer ready, generator missing). UPDATE: the official leaderboard shows at least ten open-weights models above the bar, so for this surface the capability gap is negative and the open generator question is the only gap (see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1 P13/P14). Release comparability (registry pins 2026-06-25) is unverified.",
+      "note": "Questions rotate monthly, so a score is comparable only within one pinned release; repo has a hermetic pinned input and 58 checkers (scorer ready, generator missing). UPDATE: the official leaderboard shows at least ten open-weights models above the bar, so for this surface the capability gap is negative and the open generator question is the only gap (see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1 P13/P14). Release comparability (registry pins 2026-06-25) is unverified. METRIC FINDING: LiveBench scores a question as the mean of 'all instructions followed' and 'fraction followed' under the STRICT check, not as prompt-level loose accuracy; see defect_findings LIVEBENCH_IF_METRIC_AND_RELEASE_ALIGNMENT.",
       "repo_readiness": {
         "dataset": "PINNED_HERMETIC_INPUT_BINDING_READY",
         "scorer": "58_CHECKERS_HERMETIC_AND_MUTATION_PREFLIGHT_PASS",
@@ -564,7 +570,7 @@
     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
     "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json"
   ],
-  "conclusion": "No unilateral zero-cost route to the conjunction of the 15 public-bar predicates is currently evidenced, and the project's own route audit agrees (zero_cost_executable_surface_count = 0 of 14 surfaces). Eight predicates are owner-computed or owner-private: the project cannot measure them, and the only candidate route is the owner's stronger-proof substitution, for which no discharge mechanism is visible and which, by the project's own scope-transport prohibition, cannot imply a numeric bar on an unobservable private population from finite Brain-side evidence (an inference to be tested by the first BUILD_*_STRONGER_PROOF attempt; the repo's fallback for such predicates is to remain blocked). Three predicates are third-party runnable (TB4, TB-Science, LiveBench IF) but all need a pinned donor-independent generator that is not bound in the repo (a pinned open-weights route exists on Cloudflare Workers AI, but its $0 allocation is orders of magnitude below one benchmark pass; see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1): the best CPU-hostable open model found scores 9.2% on Terminal-Bench (version unspecified), about 57 points below the TB4 bar, and the best open-weights model on an independent TB4 board (41.8%) needs GPU-class inference that is not zero-cost. Because the terminal certificate requires every predicate, the terminal goal cannot be made true by capability work inside the current constraints unless the owner-computed predicates are re-posed or proven by a mechanism not yet shown, and a pinned generator is bound. This is evidence about the formulation and constraints, not a claim that Opus-level capability is impossible in principle. CORRECTION (added later in this PR): LiveBench Instruction Following is an exception to the generator and capability gap described for agentic surfaces; open-weights models already exceed its bar (census P13), making it the first credible zero-cost route to a real predicate. AUTOMATIONBENCH_GE_40 is reclassified as UNRESOLVED: its surface is public but its bar comes from the private official set, so passing it would not be scope-equivalent to Opus 5.5 (defect_findings).",
+  "conclusion": "No unilateral zero-cost route to the conjunction of the 15 public-bar predicates is currently evidenced, and the project's own route audit agrees (zero_cost_executable_surface_count = 0 of 14 surfaces). Eight predicates are owner-computed or owner-private: the project cannot measure them, and the only candidate route is the owner's stronger-proof substitution, for which no discharge mechanism is visible and which, by the project's own scope-transport prohibition, cannot imply a numeric bar on an unobservable private population from finite Brain-side evidence (an inference to be tested by the first BUILD_*_STRONGER_PROOF attempt; the repo's fallback for such predicates is to remain blocked). Three predicates are third-party runnable (TB4, TB-Science, LiveBench IF) but all need a pinned donor-independent generator that is not bound in the repo (a pinned open-weights route exists on Cloudflare Workers AI, but its $0 allocation is orders of magnitude below one benchmark pass; see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1): the best CPU-hostable open model found scores 9.2% on Terminal-Bench (version unspecified), about 57 points below the TB4 bar, and the best open-weights model on an independent TB4 board (41.8%) needs GPU-class inference that is not zero-cost. Because the terminal certificate requires every predicate, the terminal goal cannot be made true by capability work inside the current constraints unless the owner-computed predicates are re-posed or proven by a mechanism not yet shown, and a pinned generator is bound. This is evidence about the formulation and constraints, not a claim that Opus-level capability is impossible in principle. CORRECTION (added later in this PR): LiveBench Instruction Following is an exception to the generator and capability gap described for agentic surfaces; open-weights models already exceed its bar (census P13), making it the first credible zero-cost route to a real predicate. AUTOMATIONBENCH_GE_40 is reclassified as UNRESOLVED: its surface is public but its bar comes from the private official set, so passing it would not be scope-equivalent to Opus 5.5 (defect_findings). SECOND CORRECTION: for LIVEBENCH_IF_GE_65_7 the repo's declared metric (prompt-level loose accuracy) differs from the leaderboard's (strict, mean of prompt-level and instruction-level) and the registry's release label matches no LiveBench release; the route stays the shortest path only if the owner pipeline fixes the metric and shows the question-set match (defect_findings).",
   "selected_route": "RECORD_THEORY_FALSIFICATION_EVIDENCE__REQUIRE_OWNER_LEVEL_RECONCILIATION_OF_PREDICATES_AND_CONSTRAINTS__SPEND_NO_REALITY_UNIT_ON_THE_8_OWNER_COMPUTED_PREDICATES__CONTINUE_ONLY_ZERO_REALITY_ACTIONS",
   "owner_level_levers_not_adopted": [
     {
@@ -652,6 +658,51 @@
         "Use a within-public-set comparator already published (for example Opus 5 = 50.3%) only as a documented weaker proxy, never as proof of equal-or-better than Opus 5.5."
       ],
       "confidence": "High for the existence of the mismatch (primary source); medium for the exact official value of Opus 5 (26.0 to 26.9 across secondary sources)."
+    },
+    {
+      "id": "LIVEBENCH_IF_METRIC_AND_RELEASE_ALIGNMENT",
+      "predicate": "LIVEBENCH_IF_GE_65_7 (bar 'LiveBench 2026-06-25 Instruction Following, Opus 5.5 = 65.7')",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/process_results/instruction_following/utils.py",
+          "excerpt": "avg_score = (score_1 + score_2) / 2 with score_1 = all instructions followed and score_2 = fraction followed; instruction_following_process_results uses results['strict']; ifbench_process_results calls test_instruction_following_strict."
+        },
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/gen_ground_truth_judgment.py",
+          "excerpt": "Instruction-following questions with livebench_release_date < '2025-11-25' are routed to the old instruction_following_process_results path; current ones go through ifbench_process_results."
+        },
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/livebench/if_runner/ifbench/README.md",
+          "excerpt": "Note: In the paper we generally report the prompt-level loose accuracy of IFBench. (This is the IFBench paper's metric, not the LiveBench leaderboard's.)"
+        },
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://github.com/LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/changelog.md",
+          "excerpt": "Latest entry 2026-01-08; instruction-following tasks last refreshed 2025-11-25 ('newer articles as well as new, more difficult types of instructions'). No 2026-06-25 release is listed."
+        },
+        {
+          "class": "REPO",
+          "path": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
+          "git_blob_sha": "477c82d98a15fe9e3b1d47f56cd50afe357202bf",
+          "excerpt": "verified_static_properties: PROMPT_LEVEL_LOOSE_ACCURACY_IS_PUBLICLY_DECLARED_REPORTED_METRIC"
+        },
+        {
+          "class": "REPO",
+          "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+          "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+          "excerpt": "public_reference.benchmark: 'LiveBench 2026-06-25 Instruction Following', opus_5_5 65.7"
+        }
+      ],
+      "consequence": "A score computed as prompt-level loose accuracy is not comparable with the 65.7 bar, which the leaderboard computes with the strict mean-of-two aggregator; the direction of the error is not fixed (prompt-level-only is harsher, loose is more lenient), so the predicate could be wrongly passed or wrongly failed. The registry's release label does not match any LiveBench changelog release, so the pinned dataset revision must be shown (from release-date metadata only) to hold the question set the leaderboard scored.",
+      "fixes_for_owner_reconciliation_not_adopted": [
+        "Define the metric as LiveBench's own per-question score (strict; mean of prompt-level and instruction-level), averaged over questions and multiplied by 100, using ifbench_process_results from the pinned upstream commit.",
+        "Replace the label 'LiveBench 2026-06-25' by what the evidence supports: the current IFBench-format set (questions with livebench_release_date on or after 2025-11-25) as scored by the leaderboard snapshot, and record the snapshot date.",
+        "Keep the existing 58-checker boundary preflight; it validates the checkers, not the aggregator."
+      ],
+      "confidence": "High that the leaderboard aggregator is the strict mean-of-two (code at the pinned commit); medium on which release the 65.7 snapshot used (no release page was read); the dataset schema was inferred from upstream code, not from the dataset."
     }
   ]
 }

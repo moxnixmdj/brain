@@ -289,6 +289,37 @@ class PublicBarReceiptTests(unittest.TestCase):
         self.assertIn("Opus 4.8 scores 41.00%", row["note"])
         self.assertIn("3_RUNNABLE_NEED_A_PINNED_GENERATOR__4_UNRESOLVED", self.receipt["status"])
 
+    def test_livebench_metric_and_release_defect_is_pinned_to_sources(self):
+        defect = {d["id"]: d for d in self.receipt["defect_findings"]}["LIVEBENCH_IF_METRIC_AND_RELEASE_ALIGNMENT"]
+        primaries = [e for e in defect["evidence"] if e["class"] == "OFFICIAL_PRIMARY"]
+        text = " ".join(e["excerpt"] for e in primaries)
+        self.assertIn("(score_1 + score_2) / 2", text)
+        self.assertIn("results['strict']", text)
+        self.assertIn("2025-11-25", text)
+        self.assertIn("latest entry 2026-01-08".lower(), text.lower())
+        self.assertIn("prompt-level loose accuracy of IFBench", text)
+        for e in primaries:
+            self.assertIn("LiveBench/LiveBench/blob/8f8e5c381a16e3f24257776edd53471fe86f8091/", e["url"])
+        self.assertGreaterEqual(len(defect["fixes_for_owner_reconciliation_not_adopted"]), 3)
+        self.assertIn("direction of the error is not fixed", defect["consequence"])
+        self.assertIn("dataset schema was inferred", defect["confidence"])
+        # the repo-side claims quoted by the receipt must be what the repo files say (skip if they were later changed)
+        for e in (x for x in defect["evidence"] if x["class"] == "REPO"):
+            if not (ROOT / e["path"]).is_file() or _git_blob_sha(e["path"]) != e["git_blob_sha"]:
+                continue
+            blob = (ROOT / e["path"]).read_text(encoding="utf-8")
+            self.assertIn("PROMPT_LEVEL_LOOSE_ACCURACY_IS_PUBLICLY_DECLARED_REPORTED_METRIC" if "BINDING" in e["path"] else "LiveBench 2026-06-25 Instruction Following", blob)
+
+    def test_kit_readme_states_the_corrected_metric_and_does_not_endorse_the_repo_binding(self):
+        readme = (ROOT / "livebench_if_generation_v1" / "README.md").read_text(encoding="utf-8")
+        self.assertIn("ifbench_process_results", readme)
+        self.assertIn("0.5 * [all instructions followed] + 0.5 * [fraction of instructions followed]", readme)
+        self.assertIn("CAUTION", readme)
+        self.assertIn("LIVEBENCH_IF_METRIC_AND_RELEASE_ALIGNMENT", readme)
+        self.assertNotIn("declared metric = prompt-level loose accuracy", readme)
+        self.assertIn("--assert-no-frozen-questions", readme)
+        self.assertIn("--frozen-release-min 2025-11-25", readme)
+
     def test_livebench_row_records_the_open_model_update(self):
         row = next(r for r in self.receipt["public_bar_rows"] if r["predicate_id"] == "LIVEBENCH_IF_GE_65_7")
         self.assertTrue(any("livebench.ai" in e["url"] and e["class"] == "OFFICIAL_PRIMARY" for e in row["evidence"]))
@@ -439,6 +470,14 @@ class CensusReceiptTests(unittest.TestCase):
         self.assertIn(f"{min(days):.1f} to {max(days):.1f} days", concl)
         self.assertIn(f"${min(usd):.2f} to ${max(usd):.2f}", concl)
         self.assertIn("parametric grid, not a measurement", p["fact"])
+
+    def test_census_no_longer_repeats_the_wrong_metric(self):
+        p13 = self.premises["P13_LIVEBENCH_IF_OPEN_WEIGHTS_EXCEED_THE_BAR"]
+        self.assertIn("AGGREGATOR", p13["scorer_state"])
+        self.assertNotIn("prompt-level loose accuracy)", p13["scorer_state"].split("differs from")[0])
+        self.assertIn("strict mean-of-two", self.receipt["reconciliation"]["answer"])
+        self.assertTrue(any("matches no release" in c for c in p13["evidence"]["caveats"]))
+        self.assertTrue(any(u.startswith("Metric alignment") for u in self.receipt["reconciliation"]["unverified_parts"]))
 
     def test_correction_and_reconciliation_are_explicit(self):
         self.assertIn("was wrong", self.receipt["correction_notice"])

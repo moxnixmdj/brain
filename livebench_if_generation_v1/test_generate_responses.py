@@ -96,6 +96,8 @@ class Base(unittest.TestCase):
             tr = gr.CfRunTransport("ACCT", SECRET, base_url=mock.url)
         else:
             tr = gr.PlainTransport(mock.url + "/")
+        if not any(k in kw for k in ("frozen_release", "frozen_release_min", "assert_no_frozen_questions")):
+            kw["assert_no_frozen_questions"] = True  # tests that are not about the frozen policy state it explicitly
         return gr.run(questions_path=qpath, config_path=cpath, out_dir=out or self.dir / "out", model_id=kw.pop("model_id", MODEL),
                       transport=tr, sleep=lambda s: None, **kw)
 
@@ -212,7 +214,7 @@ class FrozenProtection(Base):
                 {"question_id": "f1", "prompt": "frozen-1", "livebench_release_date": self.FROZEN}]
 
     def auth(self, q: Path, c: Path, **override) -> Path:
-        body = {"schema": gr.AUTH_SCHEMA, "execution_authority": True, "frozen_release": self.FROZEN, "model_id": MODEL,
+        body = {"schema": gr.AUTH_SCHEMA, "execution_authority": True, "frozen_rule": self.FROZEN, "model_id": MODEL,
                 "questions_sha256": gr.sha256_file(q), "config_sha256": gr.sha256_file(c)}
         body.update(override)
         p = self.dir / "auth.json"
@@ -236,7 +238,7 @@ class FrozenProtection(Base):
     def test_each_authorization_field_is_checked_before_any_request(self):
         q, c = self.questions(self.rows()), self.config()
         for field, bad in (("execution_authority", False), ("model_id", "other"), ("questions_sha256", "0" * 64),
-                           ("config_sha256", "0" * 64), ("frozen_release", "2025-01-01"), ("schema", "WRONG")):
+                           ("config_sha256", "0" * 64), ("frozen_rule", "2025-01-01"), ("schema", "WRONG")):
             m = self.mock("openai")
             a = self.auth(q, c, **{field: bad})
             with self.subTest(field=field), self.assertRaises(gr.FrozenBlocked) as cm:
@@ -257,7 +259,57 @@ class FrozenProtection(Base):
         q, c = self.questions(self.rows()), self.config()
         m = self.mock("openai")
         s = self.run_gen(m, q, c, max_total_tokens=10_000, frozen_release=self.FROZEN, authorization_path=self.auth(q, c))
-        self.assertEqual((s["status"], s["answered"], s["frozen"]), ("COMPLETE", 2, {"frozen_questions": 1, "authorized": True}))
+        self.assertEqual((s["status"], s["answered"]), ("COMPLETE", 2))
+        self.assertEqual(s["frozen"], {"frozen_questions": 1, "authorized": True, "policy": "RULE", "rule": self.FROZEN})
+
+    def test_a_frozen_policy_must_be_chosen_explicitly(self):
+        m = self.mock("openai")
+        with self.assertRaises(gr.Blocked) as cm:
+            gr.run(questions_path=self.questions(self.rows()), config_path=self.config(), out_dir=self.dir / "o",
+                   model_id=MODEL, transport=gr.OpenAITransport(m.url, SECRET), max_total_tokens=10_000, sleep=lambda s: None)
+        self.assertIn("FROZEN_POLICY_REQUIRED", str(cm.exception))
+        self.assertEqual(len(m.requests), 0)
+
+    def test_assert_none_cannot_be_combined_with_a_rule(self):
+        m = self.mock("openai")
+        for kw in ({"frozen_release": self.FROZEN}, {"frozen_release_min": "2025-11-25"}):
+            with self.subTest(kw=kw), self.assertRaises(gr.Blocked) as cm:
+                self.run_gen(m, self.questions(self.rows()), self.config(), max_total_tokens=10_000, assert_no_frozen_questions=True, **kw)
+            self.assertIn("FROZEN_POLICY_CONFLICT", str(cm.exception))
+        self.assertEqual(len(m.requests), 0)
+
+    def test_minimum_date_rule_covers_every_later_release(self):
+        rows = [{"question_id": "old", "prompt": "o", "livebench_release_date": "2025-11-24"},
+                {"question_id": "edge", "prompt": "e", "livebench_release_date": "2025-11-25"},
+                {"question_id": "new", "prompt": "n", "livebench_release_date": "2026-01-08"}]
+        m = self.mock("openai")
+        with self.assertRaises(gr.FrozenBlocked):
+            self.run_gen(m, self.questions(rows), self.config(), max_total_tokens=10_000, frozen_release_min="2025-11-25")
+        self.assertEqual(len(m.requests), 0)
+        s = self.run_gen(m, self.questions(rows[:1], name="old.jsonl"), self.config(), max_total_tokens=10_000,
+                         frozen_release_min="2025-11-25", out=self.dir / "dev")
+        self.assertEqual((s["status"], s["frozen"]["frozen_questions"], s["frozen"]["rule"]), ("COMPLETE", 0, ">=2025-11-25"))
+
+    def test_unknown_release_date_is_treated_as_frozen(self):
+        rows = [{"question_id": "u", "prompt": "no release field"}]
+        m = self.mock("openai")
+        with self.assertRaises(gr.FrozenBlocked):
+            self.run_gen(m, self.questions(rows), self.config(), max_total_tokens=10_000, frozen_release="2025-11-25")
+        self.assertEqual(len(m.requests), 0)
+
+    def test_release_dates_are_normalized_and_exact_lists_work(self):
+        self.assertEqual(gr.normalize_release("2025-11-25T00:00:00"), "2025-11-25")
+        self.assertEqual(gr.normalize_release("2025-11-25 00:00:00+00:00"), "2025-11-25")
+        self.assertIsNone(gr.normalize_release("R"))
+        self.assertIsNone(gr.normalize_release(None))
+        rows = [{"question_id": "a", "prompt": "a", "livebench_release_date": "2025-11-25T00:00:00"}]
+        m = self.mock("openai")
+        with self.assertRaises(gr.FrozenBlocked):
+            self.run_gen(m, self.questions(rows), self.config(), max_total_tokens=10_000, frozen_release="2026-01-08, 2025-11-25")
+        self.assertEqual(len(m.requests), 0)
+        with self.assertRaises(gr.Blocked) as cm:
+            self.run_gen(m, self.questions(rows), self.config(), max_total_tokens=10_000, frozen_release="not-a-date")
+        self.assertIn("NOT_AN_ISO_DATE", str(cm.exception))
 
 
 class Provenance(Base):
@@ -380,15 +432,18 @@ class Validation(Base):
     def test_cli_exit_codes(self):
         m = self.mock("plain")
         q, c = self.questions(ROWS3), self.config(max_out=200)
-        base = ["--questions", str(q), "--config", str(c), "--model", "mock", "--api-style", "plain", "--base-url", m.url + "/"]
+        base = ["--questions", str(q), "--config", str(c), "--model", "mock", "--api-style", "plain", "--base-url", m.url + "/",
+                "--assert-no-frozen-questions"]
         self.assertEqual(gr.main(base + ["--out", str(self.dir / "o1"), "--max-total-tokens", "100000"]), 0)
         # plain style estimates 12 tokens per call; 215 allows only the first call (see the plain-style test)
         self.assertEqual(gr.main(base + ["--out", str(self.dir / "o2"), "--max-total-tokens", "215"]), 4)
         self.assertEqual(gr.main(base + ["--out", str(self.dir / "o3")]), 2)  # no cap
-        fq = self.questions([{"question_id": "f", "prompt": "p", "livebench_release_date": "R"}], name="f.jsonl")
+        no_policy = [a for a in base if a != "--assert-no-frozen-questions"] + ["--out", str(self.dir / "o5"), "--max-total-tokens", "100000"]
+        self.assertEqual(gr.main(no_policy), 2)  # no frozen policy chosen
+        fq = self.questions([{"question_id": "f", "prompt": "p", "livebench_release_date": "2025-11-25"}], name="f.jsonl")
         n_before = len(m.requests)
         code = gr.main(["--questions", str(fq), "--config", str(c), "--model", "mock", "--api-style", "plain", "--base-url", m.url + "/",
-                        "--out", str(self.dir / "o4"), "--max-total-tokens", "1000", "--frozen-release", "R"])
+                        "--out", str(self.dir / "o4"), "--max-total-tokens", "1000", "--frozen-release-min", "2025-11-25"])
         self.assertEqual(code, 3)
         self.assertEqual(len(m.requests), n_before, "frozen refusal must precede any request")
 
