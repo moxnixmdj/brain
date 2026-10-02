@@ -232,7 +232,8 @@
       "weaker_exact_opus_comparator_required_for_prewave": false,
       "terminal_results_observed": 0,
       "fresh_terminal_evidence_consumed": 0,
-      "no_overclaim": "PREWAVE_ROUTE_ADMISSION_ONLY__ZERO_TERMINAL_RESULTS__NO_CAPABILITY_OR_FAMILY_CREDIT"
+      "no_overclaim": "PREWAVE_ROUTE_ADMISSION_ONLY__ZERO_TERMINAL_RESULTS__NO_CAPABILITY_OR_FAMILY_CREDIT",
+      "independent_verification": "canonical/verification/BROWSER_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
@@ -331,7 +332,7 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 12,
   "execution_authority": false,
-  "next": "CLOSE_TOOL_DISCOVERY_DIRECT_OBJECTIVE_ROUTE__THEN_RUN_CANONICAL_PREQUALIFICATION_REDUCER",
+  "next": "CLOSE_REMAINING_ACTIVE_TERMINAL_ROUTE_BINDINGS__TOOL_DISCOVERY_REQUIRES_CURRENT_INDEPENDENT_PASS__RESEARCH_REMAINS_HLE_EXTERNAL_BLOCKED__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
