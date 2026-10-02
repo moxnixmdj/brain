@@ -48,6 +48,10 @@ EXCLUDED_REL_PATHS = {
     "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V2.json",
     "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V3.json",
 }
+EXCLUDED_BASENAME_PREFIXES = (
+    "TERMINAL_CERTIFICATE_FRONTIER_",
+    "MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_",
+)
 SOURCE_RANK = {
     "VERIFICATION_RECEIPT": 0,
     "CAPABILITY_EVIDENCE": 1,
@@ -104,6 +108,8 @@ def _candidate_files(root: Path) -> list[Path]:
             rel = p.relative_to(root).as_posix()
             if rel in EXCLUDED_REL_PATHS or p.name in EXCLUDED_BASENAMES:
                 continue
+            if any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES):
+                continue
             try:
                 if p.stat().st_size > MAX_FILE_BYTES:
                     continue
@@ -136,6 +142,7 @@ def _scan_policy() -> dict[str, Any]:
         "max_matches_per_atom": MAX_MATCHES_PER_ATOM,
         "excluded_basenames": sorted(EXCLUDED_BASENAMES),
         "excluded_rel_paths": sorted(EXCLUDED_REL_PATHS),
+        "excluded_basename_prefixes": list(EXCLUDED_BASENAME_PREFIXES),
         "source_rank": dict(sorted(SOURCE_RANK.items())),
         "identifier_neighbor_regex_class": _IDENTIFIER_NEIGHBOR,
     }
