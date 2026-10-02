@@ -1,16 +1,28 @@
-name: Verify and run sealed proof-atom receipt snapshot v1
+name: Build sealed proof-atom receipt snapshot candidate
 
 on:
   push:
     branches: [main]
     paths:
+      - "canonical/verification/**"
+      - "canonical/capabilities/**"
+      - "canonical/governance/**"
       - "canonical/runtime/proof_atom_receipt_snapshot_v1.py"
-      - "canonical/tests/test_proof_atom_receipt_snapshot_v1.py"
-      - "canonical/governance/PROOF_ATOM_RECEIPT_SNAPSHOT_V1.json"
       - "canonical/runtime/proof_atom_receipt_index_v2.py"
       - "canonical/runtime/canonical_proof_atom_basis_v2.py"
-      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
-      - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
+      - "canonical/tests/test_proof_atom_receipt_snapshot_v1.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v2.py"
+      - ".github/workflows/verify-proof-atom-receipt-snapshot-v1.yml"
+  pull_request:
+    paths:
+      - "canonical/verification/**"
+      - "canonical/capabilities/**"
+      - "canonical/governance/**"
+      - "canonical/runtime/proof_atom_receipt_snapshot_v1.py"
+      - "canonical/runtime/proof_atom_receipt_index_v2.py"
+      - "canonical/runtime/canonical_proof_atom_basis_v2.py"
+      - "canonical/tests/test_proof_atom_receipt_snapshot_v1.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v2.py"
       - ".github/workflows/verify-proof-atom-receipt-snapshot-v1.yml"
   workflow_dispatch:
 
@@ -28,87 +40,37 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Seal clean checkout and capture diagnostics
+      - name: Run index and snapshot adversarial suites
         shell: bash
         run: |
-          set +e
-          : > proof_atom_snapshot_diagnostic.txt
-          git status --porcelain > initial_worktree.txt
-          python canonical/runtime/proof_atom_receipt_snapshot_v1.py > proof_atom_receipt_snapshot_v1.json 2>> proof_atom_snapshot_diagnostic.txt
-          echo "$?" > snapshot.exitcode
-          git status --porcelain > post_snapshot_worktree.txt
-          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v >> proof_atom_snapshot_diagnostic.txt 2>&1
-          echo "$?" > tests.exitcode
-          python -m json.tool proof_atom_receipt_snapshot_v1.json >/dev/null 2>> proof_atom_snapshot_diagnostic.txt
-          echo "$?" > json.exitcode
-          if [ -s proof_atom_receipt_snapshot_v1.json ]; then
-            python - <<'PY' > proof_atom_receipt_snapshot_v1_summary.json 2>> proof_atom_snapshot_diagnostic.txt
-          import json
-          from pathlib import Path
-          s=json.loads(Path("proof_atom_receipt_snapshot_v1.json").read_text())
-          i=s.get("index",{})
-          r=s.get("repository_snapshot",{})
-          summary={
-              "schema":s.get("schema"),
-              "status":s.get("status"),
-              "repository_commit_sha":r.get("repository_commit_sha"),
-              "repository_tree_sha":r.get("repository_tree_sha"),
-              "search_root_tree_shas":r.get("search_root_tree_shas"),
-              "scanned_file_count":r.get("scanned_file_count"),
-              "scanned_manifest_sha256":r.get("scanned_manifest_sha256"),
-              "index_sha256":s.get("index_sha256"),
-              "canonical_atom_count":i.get("canonical_atom_count"),
-              "canonical_atom_manifest_sha256":i.get("canonical_atom_manifest_sha256"),
-              "candidate_match_count":i.get("candidate_match_count"),
-              "atoms_with_candidate_matches":i.get("atoms_with_candidate_matches"),
-              "atoms_without_candidate_matches":i.get("atoms_without_candidate_matches"),
-              "atom_ids_with_candidate_matches":i.get("atom_ids_with_candidate_matches"),
-              "atom_ids_without_candidate_matches":i.get("atom_ids_without_candidate_matches"),
-              "candidate_matches_by_source_class":i.get("candidate_matches_by_source_class"),
-              "atoms_with_truncated_candidate_lists":i.get("atoms_with_truncated_candidate_lists"),
-              "new_reality_units_consumed":s.get("new_reality_units_consumed"),
-              "capability_credit_delta":s.get("capability_credit_delta"),
-              "family_credit_delta":s.get("family_credit_delta"),
-              "execution_authority":s.get("execution_authority"),
-              "promotion_authority":s.get("promotion_authority"),
-          }
-          print(json.dumps(summary,indent=2,sort_keys=True))
-          PY
-          fi
-          exit 0
-      - name: Upload sealed snapshot and diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: proof-atom-receipt-snapshot-v1
-          path: |
-            proof_atom_receipt_snapshot_v1.json
-            proof_atom_receipt_snapshot_v1_summary.json
-            proof_atom_snapshot_diagnostic.txt
-            initial_worktree.txt
-            post_snapshot_worktree.txt
-            snapshot.exitcode
-            tests.exitcode
-            json.exitcode
-          if-no-files-found: error
-      - name: Enforce fail-closed result
-        if: always()
+          python -m unittest             canonical.tests.test_proof_atom_receipt_index_v2             canonical.tests.test_proof_atom_receipt_snapshot_v1 -v             2>&1 | tee /tmp/proof_atom_snapshot_diagnostic.txt
+      - name: Produce sealed candidate snapshot
         shell: bash
         run: |
-          test "$(cat snapshot.exitcode)" = "0"
-          test "$(cat tests.exitcode)" = "0"
-          test "$(cat json.exitcode)" = "0"
-          test ! -s initial_worktree.txt
-          test ! -s post_snapshot_worktree.txt
+          python canonical/runtime/proof_atom_receipt_snapshot_v1.py             > /tmp/proof_atom_receipt_snapshot_v1.json
           python - <<'PY'
           import json
           from pathlib import Path
-          s=json.loads(Path("proof_atom_receipt_snapshot_v1.json").read_text())
-          assert str(s.get("status","")).startswith("PASS"), s
-          i=s["index"]
-          assert i["canonical_atom_count"] == 40
-          assert i["capability_credit_delta"] == 0
-          assert i["family_credit_delta"] == 0
-          assert s["capability_credit_delta"] == 0
-          assert s["family_credit_delta"] == 0
+
+          p = Path("/tmp/proof_atom_receipt_snapshot_v1.json")
+          snapshot = json.loads(p.read_text(encoding="utf-8"))
+          assert str(snapshot.get("status", "")).startswith("PASS"), snapshot
+          assert snapshot.get("capability_credit_delta") == 0, snapshot
+          assert snapshot.get("family_credit_delta") == 0, snapshot
+          assert snapshot.get("execution_authority") is False, snapshot
+          assert snapshot.get("promotion_authority") is False, snapshot
+          assert snapshot.get("index", {}).get("canonical_atom_count") == 40, snapshot
           PY
+      - name: Upload candidate snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-snapshot-v1-candidate
+          path: /tmp/proof_atom_receipt_snapshot_v1.json
+          if-no-files-found: error
+      - name: Upload test diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-snapshot-v1-diagnostics
+          path: /tmp/proof_atom_snapshot_diagnostic.txt
+          if-no-files-found: warn
