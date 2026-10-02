@@ -51,7 +51,7 @@ jobs:
           # assertion must observe only repository mutations, never its own logs.
           git status --porcelain > "$SNAPSHOT_TMP/initial_worktree.txt"
 
-          python canonical/runtime/proof_atom_receipt_snapshot_v1.py \
+          python -m canonical.runtime.proof_atom_receipt_snapshot_v1 \
             > "$SNAPSHOT_TMP/snapshot.json" \
             2>> "$SNAPSHOT_TMP/diagnostic.txt"
           echo "$?" > "$SNAPSHOT_TMP/snapshot.exitcode"
