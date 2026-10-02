@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "ZERO_REALITY_PREFIXES_SATURATED__M0A_M1A_M1B_PROOF_ONLY__READY_TO_FREEZE_V6",
+  "status": "FROZEN_BY_EXACT_V6_CUT__THREE_SELECTED_PROOF_ACTIONS_AUTHORIZED",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -259,7 +259,7 @@
     "M1A",
     "M1B"
   ],
-  "next": "FREEZE_V6_WITH_CURRENT_COMPLETE_BUNDLES_AND_FAITHFUL_NEW_REALITY_COSTS__RUN_EXACT_SOLVER__THEN_ONLY_SELECTED_ACTIONS",
+  "next": "EXECUTE_THE_THREE_V6_SELECTED_PROOF_ACTIONS_IN_PARALLEL__COMPILE_RECEIPTS__RECOMPUTE_GLOBAL_TERMINAL_GRAPH",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -269,5 +269,12 @@
     "conclusion": "M0A_ZERO_REALITY_LOCALIZATION_TERMINATED_WITH_NO_SMALL_MATERIAL_SUBSPACE__DONOR_SCAN_HAS_NO_MANDATORY_DOMINATING_ZERO_REALITY_ROUTE__ALL_THREE_RESIDUALS_NOW_PROOF_ONLY",
     "new_reality_units_consumed": 0,
     "evidence": "canonical/reasoning/2026-10-02_M0A_PROOF_ONLY_RECONCILIATION_V1.json"
-  }
+  },
+  "exact_cut_verdict": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
+  "selected_actions": [
+    "A_M0A_MATCHED_SEMANTIC_PARITY_V2",
+    "A_M1A_COMPOSED_ROUTE_MATCHED_PARITY_V2",
+    "A_M1B_MATCHED_GEOMETRY_COVERAGE_V3"
+  ],
+  "any_other_fresh_action_authorized": false
 }
