@@ -242,7 +242,6 @@ def select_repair_target(
     eligible.sort(key=lambda c:(c.step_index,-c.predicted_rescue,-c.evidence_strength,c.candidate_id))
     return RepairDecision("SELECT",eligible[0].candidate_id,"EARLIEST_CAUSALLY_SUPPORTED_RESCUE_TARGET")
 
-
 # ---- Cross-lane bounded control primitives (M2-M5 zero-reality subtraction) ----
 
 import re
