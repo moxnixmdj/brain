@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__PUBLIC_RUNNER__EXACT_BRAIN_BLOBS_BOUND__ZERO_TERMINAL_CASE_EXPOSURE",
+  "brain_repository": "moxnixmdj/brain",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 476,
+  "public_merge_commit": "662b53519d546f923de6f77db7f4d8a008ae0592",
+  "workflow_run_id": 36954591954,
+  "verified_jobs": [
+    {
+      "name": "proof-route-dominance",
+      "job_id": 110674645504,
+      "conclusion": "success",
+      "source_path": "canonical/runtime/proof_route_dominance.py",
+      "source_blob_sha": "64efeaad5d4295d5bd1a3bd53feae5170c22a8a4",
+      "test_path": "canonical/tests/test_proof_route_dominance.py",
+      "test_blob_sha": "836b3285a44d2f345e0b0088abe5f6e17a80020b"
+    },
+    {
+      "name": "finite-population-proof",
+      "job_id": 110674645632,
+      "conclusion": "success",
+      "source_path": "canonical/runtime/finite_population_proof.py",
+      "source_blob_sha": "20980ac7ddb4cab713c847ac03e5a6fa40748154",
+      "test_path": "canonical/tests/test_finite_population_proof.py",
+      "test_blob_sha": "50e790b52e5b5158b3b1a6b4b0fd4c98c69bf3d8"
+    }
+  ],
+  "conclusions": [
+    "PROOF_ROUTE_DOMINANCE_COMPILER_INDEPENDENTLY_EXECUTABLE_AND_FAIL_CLOSED_ON_ITS_TESTED_SCOPE",
+    "FINITE_BINARY_POPULATION_EXACT_LOWER_BOUND_PRIMITIVE_INDEPENDENTLY_EXECUTABLE_ON_ITS_TESTED_SCOPE",
+    "PRIVATE_BRAIN_ACTIONS_RUNNER_FAILURES_FOR_THESE_ARTIFACTS_ARE_NOT_CODE_FAILURE_EVIDENCE",
+    "NO_TERMINAL_BENCHMARK_CASES_OR_PRIVATE_HELDOUT_CONTENT_WERE_USED"
+  ],
+  "execution_authority_delta": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
