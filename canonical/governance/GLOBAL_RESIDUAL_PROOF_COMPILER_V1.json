@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_RESIDUAL_PROOF_COMPILER_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_PREPROOF_SCHEDULING_CONTROLLER__INDEPENDENTLY_VERIFIED__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE_PREPROOF_SCHEDULING_CONTROLLER__RUNTIME_INDEPENDENTLY_VERIFIED__CURRENT_LIVE_INPUT_REVERIFICATION_REQUIRED__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
   "purpose": "Compile all open terminal obligations into one residual proof graph so externally blocked obligations cannot stall independent internally solvable proof closure, while allowing blocker deduplication only through explicit semantic-equivalence assertions.",
   "runtime": "canonical/runtime/global_residual_proof_compiler.py",
   "tests": "canonical/tests/test_global_residual_proof_compiler.py",
@@ -13,7 +13,8 @@
     "CROSS_RESIDUAL_ROUTE_PROJECTION_FORBIDDEN_UNLESS_EXPLICITLY_MARKED_SAFE",
     "CLOSE_ONLY_EXACT_INTERNAL_MINIMUM_UNBLOCK_CUT_THEN_RECOMPUTE",
     "NO_PROXY_SUBSTITUTION_FOR_UNAVAILABLE_EXTERNAL_COMPARATOR",
-    "NO_EXECUTION_PROMOTION_CAPABILITY_OR_FAMILY_AUTHORITY"
+    "NO_EXECUTION_PROMOTION_CAPABILITY_OR_FAMILY_AUTHORITY",
+    "CURRENT_LIVE_INPUT_MUST_MATCH_AN_INDEPENDENT_RECEIPT_BEFORE ITS COMPILED CUT IS TREATED AS VERIFIED"
   ],
   "objective_order": [
     "CORRECTNESS_AND_FAIL_CLOSED_ADMISSIBILITY",
@@ -31,12 +32,16 @@
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
   "independent_verification": {
-    "status": "INDEPENDENT_PASS",
+    "runtime_status": "INDEPENDENT_PASS",
     "receipt": "canonical/verification/GLOBAL_RESIDUAL_PROOF_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "public_runner_pr": 645,
     "workflow_run_id": 36965447334,
     "merged_commit": "f9e60ad370d7029f195598f93e8c04faed3edbff",
     "exact_runtime_blob_sha": "49719238fcaee0ea3cc5dab4a5cd220f440ce2cf",
-    "live_input_verified": true
+    "exact_base_supercompiler_blob_sha": "c7a4b8bc29d041fcc04fbcfa8a79db44fa9fe370",
+    "verified_live_input_blob_sha": "5584fbcbfb3f3327b3d706a4ef50034d5d5ada5c",
+    "current_live_input_blob_sha_at_reconciliation": "f2f6f937b86915267480809a410a4d76ec3a2fff",
+    "current_live_input_verified": false,
+    "disposition": "RUNTIME_IMPLEMENTATION_REMAINS_VERIFIED__LIVE_SCHEDULING_RESULT_MUST_BE_REVERIFIED_AFTER_INPUT_DRIFT__NO_TERMINAL_OR_PROMOTION_AUTHORITY"
   }
 }
