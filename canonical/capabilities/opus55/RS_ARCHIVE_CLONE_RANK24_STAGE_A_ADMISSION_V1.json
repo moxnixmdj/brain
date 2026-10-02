@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_RS_ARCHIVE_CLONE_RANK24_STAGE_A_ADMISSION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_STAGE_A_PASS__STAGE_B_INSTRUCTION_EXPOSURE_ONLY__TASK_EXECUTION_FORBIDDEN",
+  "benchmark": "Terminal-Bench 4.0",
+  "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "task": "rs-archive-clone",
+  "rank": 24,
+  "task_identity_sha256": "8a2560ebd36e573172892d5475723327a4e22ddcb05fe1fa4c645f2ad4034890",
+  "contamination_ledger": {
+    "path": "canonical/capabilities/opus55/RS_ARCHIVE_CLONE_RANK24_CONTAMINATION_LEDGER_V1.json",
+    "git_blob_sha": "0c0705e11878a6d6c7c311f6e512ceaf8098f4fa"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 822,
+    "pull_request_head": "097fb0b89c1d9c527fa2984a8dcbf1ed1f953887",
+    "merge_commit": "afcebf30ac78b2903acb0508f2b3869152b4722b",
+    "workflow_run_id": 36986298313,
+    "workflow_job_id": 110771991737,
+    "conclusion": "success"
+  },
+  "authorization": "STAGE_B_INSTRUCTION_EXPOSURE_ONLY",
+  "task_execution_authorized": false,
+  "hidden_verifier_read_authorized": false,
+  "task_command_execution_authorized": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "OPEN_STAGE_B_EXPOSURE_SESSION__BIND_CANONICAL_EXPOSURE_ONLY_LEASE__SURFACE_OFFICIAL_INSTRUCTION_ONCE__FREEZE_SOURCE_AND_ACCEPTANCE_CONTRACT_BEFORE_ANY_TASK_EXECUTION"
+}
