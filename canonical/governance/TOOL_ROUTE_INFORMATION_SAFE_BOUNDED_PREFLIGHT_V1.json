@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_ROUTE_INFORMATION_SAFE_BOUNDED_PREFLIGHT_V1",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_CI__BOUNDED_PREFLIGHT_ONLY__ZERO_TERMINAL_AUTHORITY",
+  "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "candidate": "canonical/runtime/tool_route_information_safe_candidate_v1.py",
+  "proof_population": "canonical/runtime/tool_route_information_safe_proof_v1.py",
+  "information_boundary": {
+    "candidate_visible": [
+      "tool ids",
+      "route costs",
+      "safe-probe permission",
+      "required capability",
+      "catalog epoch",
+      "probe outcomes only after candidate-selected probes"
+    ],
+    "hidden_oracle": [
+      "actual tool capability map",
+      "least-cost capable route"
+    ],
+    "exposed_verified_capabilities": false
+  },
+  "preflight_properties": [
+    "CAPABILITY_NOT_PREDECLARED",
+    "SAFE_PROBE_REQUIRED",
+    "CHEAPER_ROUTES_PROBED_BEFORE_SELECTION",
+    "LEAST_COST_VERIFIED_CAPABLE_ROUTE_SELECTED",
+    "LEARNED_CAPABILITY_TRANSFERS_WITHIN_EPOCH",
+    "CAPABILITY_MEMORY_INVALIDATED_ON_CATALOG_EPOCH_CHANGE"
+  ],
+  "scope_limitation": "BOUNDED_SINGLE_CAPABILITY_FINITE_TOOL_ECOSYSTEM__DOES_NOT_PROVE_WHOLE_OPEN_ENDED_TOOL_DISCOVERY_CONTRACT",
+  "terminal_scope_gate_v2_admissible": false,
+  "execution_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
