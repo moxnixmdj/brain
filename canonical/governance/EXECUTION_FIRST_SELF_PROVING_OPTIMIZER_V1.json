@@ -51,6 +51,7 @@
     "PROOF_MODE_TRANSMUTATION",
     "VERIFIED_ENVELOPE_AND_IMPLICATION_CLOSURE",
     "NORMALIZED_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "ABDUCTIVE_WEAKEST_SUFFICIENT_RESIDUAL_COMPILATION",
     "EPISTEMIC_CLOSURE_AND_MINIMUM_DISCRIMINATOR",
     "LOAD_BEARING_COMPONENT_PROOF_SLICING",
     "FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
@@ -187,7 +188,9 @@
     "differential_dominance_activation": "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_ACTIVATION_V1.json",
     "terminal_certificate_cut_required": true,
     "terminal_certificate_cut_activation": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
-    "information_dominance_recompute_required_on_active_frontier": true
+    "information_dominance_recompute_required_on_active_frontier": true,
+    "abductive_residual_theorem_required_when_verified_finite_implication_graph_available": true,
+    "abductive_residual_theorem_activation": "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1.json"
   },
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
@@ -320,11 +323,14 @@
     "protocol_implication_scope_algebra": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
     "epistemic_closure_minimum_discriminator": "canonical/runtime/epistemic_closure_kernel_v1.py",
     "composition_component_proof_slicer": "canonical/runtime/composition_component_proof_slicer_v1.py",
-    "ordering_rule": "TOTALIZE_BASE_SURFACE__COMPILE_EXACT_VERIFIED_PAIR_OVERLAYS__PRESERVE_NEGATIVE_RECEIPTS__RUN_SCOPE_SAFE_V2_ALGEBRA__THEN_CONTINUE_ZERO_REALITY_PROOF_COMPRESSION",
+    "ordering_rule": "TOTALIZE_BASE_SURFACE__COMPILE_EXACT_VERIFIED_PAIR_OVERLAYS__PRESERVE_NEGATIVE_RECEIPTS__RUN_SCOPE_SAFE_V2_ALGEBRA__RUN_ABDUCTIVE_WEAKEST_SUFFICIENT_RESIDUAL_ON_EXPLICIT_VERIFIED_FINITE_IMPLICATION_CONES__THEN_CONTINUE_ZERO_REALITY_PROOF_COMPRESSION",
     "terminal_credit_from_kernels_alone": false,
     "protocol_implication_scope_algebra_verification": "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "verified_witness_target_overlay_activation": "canonical/governance/VERIFIED_WITNESS_TARGET_OVERLAY_ACTIVATION_V1.json",
-    "verified_witness_target_overlay_runtime": "canonical/runtime/protocol_implication_overlay_batch_reducer_v1.py"
+    "verified_witness_target_overlay_runtime": "canonical/runtime/protocol_implication_overlay_batch_reducer_v1.py",
+    "abductive_residual_theorem_activation": "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1.json",
+    "abductive_residual_theorem_runtime": "canonical/runtime/abductive_residual_theorem_v1.py",
+    "abductive_residual_theorem_verification": "canonical/verification/ABDUCTIVE_RESIDUAL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "differential_dominance_compiler": {
     "status": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_ONLY__ZERO_CREDIT",
@@ -370,5 +376,13 @@
     "subhypergraph": "canonical/governance/MATCHED_SCOPE_BINDING_SUBHYPERGRAPH_V1.json",
     "verification": "canonical/verification/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "rule": "PARTIAL_CHILD_CLOSURE_PROPAGATES_IMMEDIATELY__NO_WAIT_FOR_BLOCKED_SIBLINGS__NO_CROSS_TARGET_INHERITANCE"
+  },
+  "abductive_residual_theorem_compiler": {
+    "status": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_PROOF_COMPRESSION_ONLY",
+    "activation": "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1.json",
+    "runtime": "canonical/runtime/abductive_residual_theorem_v1.py",
+    "verification": "canonical/verification/ABDUCTIVE_RESIDUAL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "rule": "DERIVE_ONLY_MINIMAL_PRIMITIVE_RESIDUALS_FROM_EXPLICIT_INDEPENDENTLY_VERIFIED_FINITE_HORN_EDGES__NO_SEMANTIC_SCOPE_METRIC_OR_CREDIT_INVENTION",
+    "live_input_state": "NOT_BOUND_BY_ACTIVATION__DO_NOT_DELAY_CURRENT_VALID_ZERO_REALITY_ACTIONS"
   }
 }
