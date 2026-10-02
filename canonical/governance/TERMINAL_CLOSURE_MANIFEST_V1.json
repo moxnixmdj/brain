@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FAIL_CLOSED__19_OF_19_BEHAVIORAL_PASS__4_OF_19_OPUS55_ACCEPTANCE_CALIBRATED__2_OF_19_VERIFIED_OWNED__15_ACCEPTANCE_OPEN",
+  "status": "FAIL_CLOSED__RAW_TERMINAL_3352_OF_3352_PASS__P1_WHOLE_SCOPE_QUARANTINE__11_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__11_OF_19_UNAFFECTED_BEHAVIORAL_FAMILIES_PASS__2_OF_19_OPUS55_ACCEPTANCE_PASS__17_OPEN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -12,8 +12,8 @@
   "families": [
     {
       "id": "ADVANCED_AGENTIC_CODING",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
       "acceptance_basis": [
         {
@@ -34,27 +34,31 @@
       ],
       "proof_bundle": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "COMPLEX_MULTI_TOOL_AGENCY",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Plan and execute complex multi-tool work, coordinate subagents, maintain state and drive long-running work with minimal oversight.",
       "acceptance_basis": null,
       "proof_bundle": "Astra is designed for complex end-to-end multi-step work and Work provides agentic execution, but no direct whole-family Opus 5.5 comparison establishes parity.",
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -89,8 +93,8 @@
     },
     {
       "id": "BUSINESS_WORKFLOW_AUTOMATION",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Execute real multi-application business workflows accurately end-to-end.",
       "acceptance_basis": [
         {
@@ -101,12 +105,14 @@
       ],
       "proof_bundle": "AutomationBench: GPT-6 Astra 41.4 vs Opus 5.5 40.0 on Anthropic's published comparison.",
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -131,8 +137,8 @@
     },
     {
       "id": "AGENTIC_SCIENTIFIC_RESEARCH",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
       "acceptance_basis": [
         {
@@ -143,12 +149,14 @@
       ],
       "proof_bundle": "Terminal-Bench-Science 0.1: GPT-6 Astra 64.6 vs Opus 5.5 58.7.",
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
@@ -173,8 +181,8 @@
     },
     {
       "id": "COMPUTER_AND_BROWSER_USE",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Complete multi-step workflows across browsers and arbitrary applications with planning, visual grounding and judgment.",
       "acceptance_basis": [
         {
@@ -186,12 +194,14 @@
       ],
       "proof_bundle": "OpenAI describes Astra as state-of-the-art in computer/browser use, but current published OSWorld figures are not directly comparable with Anthropic's Opus 5.5 81.8 partial result.",
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "FINANCIAL_ANALYSIS",
@@ -210,18 +220,20 @@
     },
     {
       "id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Follow complex instructions, stay within authorization/scope, resolve routine ambiguity and adapt when requirements change.",
       "acceptance_basis": null,
       "proof_bundle": "OpenAI reports strong intent/scope behavior for Astra, but no direct Opus 5.5 matched comparison closes the whole family.",
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -254,20 +266,22 @@
     },
     {
       "id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal.",
       "acceptance_basis": null,
       "proof_bundle": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json"
       ],
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "ARTIFACT_CREATION",
@@ -313,11 +327,8 @@
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-      "opus55_acceptance_calibrated": true,
-      "opus55_acceptance_state": "PASS",
-      "opus55_acceptance_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
-      "opus55_acceptance_closure_mode": "ABSOLUTE_DOMINANCE",
-      "opus55_acceptance_note": "FULL_FROZEN_PROTOCOL_EFFECTIVELY_PASS_VIA_INDEPENDENT_FULL_SCOPE_THEORETICAL_CEILING_WITNESS__OWNERSHIP_PROMOTION_REMAINS_SEPARATE"
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -336,18 +347,20 @@
     },
     {
       "id": "MULTI_CAPABILITY_COMPOSITION",
-      "closure_state": "BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_OPEN",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "closure_state": "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED",
+      "ownership_status": "OPEN__P1_WHOLE_SCOPE_QUARANTINE__OPUS55_ACCEPTANCE_OPEN",
       "target_behavior": "Compose reasoning, research, tools, code, memory, actions and verification into one causal execution system.",
       "acceptance_basis": null,
       "proof_bundle": "Historical Brain has verified grounding, composition and decision-synthesis components; whole Opus-level general composition remains unverified.",
       "unresolved": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001_WHOLE_FROZEN_SCOPE_QUARANTINED",
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
       "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
       "opus55_acceptance_calibrated": false,
-      "opus55_acceptance_state": "OPEN"
+      "opus55_acceptance_state": "OPEN",
+      "behavioral_scope_quarantine_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "id": "EXACT_SYMBOLIC_COMPUTATION",
@@ -368,7 +381,7 @@
   "terminal_predicates": {
     "exact_target_family_count_19": true,
     "every_required_behavior_contracted": true,
-    "every_required_behavior_has_admissible_proof": true,
+    "every_required_behavior_has_admissible_proof": false,
     "donor_dependent_required_behaviors_zero": true,
     "unexplained_required_behaviors_zero": true,
     "unresolved_verifier_mutations_zero": true,
@@ -381,7 +394,7 @@
   },
   "counters": {
     "uncontracted_required_behaviors": 0,
-    "unproved_required_behaviors": 0,
+    "unproved_required_behaviors": 1,
     "donor_dependent_required_behaviors": 0,
     "unresolved_verifier_mutations": 0,
     "unresolved_composition_failures": 0,
@@ -400,7 +413,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "19_OF_19_BEHAVIORAL_PASS__GLOBAL_POSTCONDITIONS_PASS__3_OF_19_OPUS55_ACCEPTANCE_CALIBRATED__16_ACCEPTANCE_FAMILIES_OPEN__30_OF_38_ATOMIC_PREDICATES_BLOCKED__ZERO_AUTHORIZED_ACCEPTANCE_CASE_ACTIONS",
+    "reason": "RAW_TERMINAL_EXECUTION_3352_OF_3352_PASS__P1_WHOLE_SCOPE_QUARANTINED__11_OF_12_WHOLE_SCOPE_CONTRACTS_PASS__11_OF_19_UNAFFECTED_BEHAVIORAL_FAMILY_ROWS_PASS__8_P1_DEPENDENT_ROWS_QUARANTINED__2_OF_19_OPUS55_ACCEPTANCE_PASS__17_OPEN__7_OF_38_ATOMIC_ACCEPTANCE_PREDICATES_PROVED__31_UNRESOLVED",
     "override_allowed": false
   },
   "specification_closure": {
@@ -409,16 +422,22 @@
     "invalidation": "ANY_TARGET_ENVELOPE_FAMILY_OR_BEHAVIOR_REGISTRY_CHANGE"
   },
   "postwave_behavioral_adjudication": {
-    "evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-    "terminal_contracts_passed": 12,
-    "terminal_contracts_total": 12,
-    "families_passed": 19,
-    "families_total": 19,
-    "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
-    "beacon": "36977020853",
-    "source_terminal_run": 36977803089,
-    "source_full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
-    "note": "FAMILY_PASS_IS_PROVISIONAL_BEHAVIORAL_ADJUDICATION__GLOBAL_OWNERSHIP_POSTCONDITIONS_STILL_REQUIRED"
+    "historical_source_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+    "historical_source_contracts_passed": 12,
+    "historical_source_contracts_total": 12,
+    "historical_source_families_passed": 19,
+    "historical_source_families_total": 19,
+    "historical_status": "SUPERSEDED_FOR_WHOLE_SCOPE_INTERPRETATION_BY_INDEPENDENT_P1_SCOPE_QUARANTINE",
+    "scope_quarantine_evidence": "canonical/verification/P1_TERMINAL_EXECUTION_SCOPE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "scope_quarantine_propagation": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "whole_scope_contracts_passed": 11,
+    "whole_scope_contracts_quarantined": 1,
+    "whole_scope_quarantined_contract": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "unaffected_behavioral_families_passed": 11,
+    "p1_dependent_behavioral_families_quarantined": 8,
+    "raw_terminal_execution_result": "3352/3352_PASS__IMMUTABLE_RAW_EXECUTION_EVIDENCE",
+    "terminal_results_replayed": 0,
+    "note": "RAW_EXECUTION_SUCCESS_IS_PRESERVED__WHOLE_SCOPE_SEMANTIC_CREDIT_FAILS_CLOSED_WHERE_EXECUTED_SCORER_WAS_NARROWER_THAN_FROZEN_CONTRACT"
   },
   "postwave_global_ownership_reducer": {
     "path": "canonical/runtime/postwave_global_ownership_reducer_v1.py",
@@ -428,42 +447,28 @@
     "retained_role": "HISTORICAL_GLOBAL_POSTCONDITION_RESIDUAL_DIAGNOSTIC_ONLY",
     "rule": "GLOBAL_POSTCONDITION_CLOSURE_DOES_NOT_SUBSTITUTE_FOR_FROZEN_OPUS55_PROTOCOL_RESULT"
   },
-  "next": "WORK_ONLY_THE_30_BLOCKED_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES__PRIORITIZE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING__TB4_REALITY_REMAINS_REVOKED_AT_180_LT_220__NO_TERMINAL_REPLAY",
+  "next": "WORK_ONLY_CURRENT_31_UNRESOLVED_ATOMIC_ACCEPTANCE_PREDICATES_AND_P1_WHOLE_SCOPE_REPAIR_OBLIGATIONS__PRIORITIZE_ZERO_REALITY_CONTENT_ADDRESSED_SCOPE_ATOM_METRIC_PROOFS__NO_TERMINAL_REPLAY__NO_FRESH_REALITY_UNTIL_MACHINE_AUTHORIZED",
   "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
   "postwave_remaining_exact_gates": [
-    "CLOSE_30_BLOCKED_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES_FOR_16_PENDING_FAMILIES",
-    "REBUILD_FINAL_PROOF_BUNDLE_AFTER_ALL_19_ACCEPTANCE_PROTOCOLS_EFFECTIVELY_PASS",
+    "RESTORE_OR_REDEFINE_P1_WHOLE_FROZEN_SCOPE_ONLY_WITH_ADMISSIBLE_PREDECLARED_EVIDENCE_OR_EXPLICITLY_AUTHORIZED_IRREDUCIBLE_NEW_OBSERVATION",
+    "CLOSE_31_UNRESOLVED_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES_FOR_17_PENDING_FAMILIES",
+    "REBUILD_FINAL_PROOF_BUNDLE_ONLY_AFTER_ALL_CURRENT_ACCEPTANCE_AND_SCOPE_GATES_CLOSE",
     "RUN_FINAL_CLOSURE_REDUCER_AND_INDEPENDENT_FINALITY_VERIFICATION"
   ],
   "final_proof_bundle_candidate": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1.json",
-  "behavioral_pass_family_count": 19,
+  "behavioral_pass_family_count": 11,
   "acceptance_calibration": {
-    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FAIL_CLOSED_2_OF_19_CALIBRATED__17_OPEN",
-    "evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
-    "independent_verification": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "independent_verification_blob_sha": "7c507155ed5fbe847b8b0a9ca1c49b19685f2ff8",
+    "status": "CURRENT_FAIL_CLOSED__2_OF_19_ACCEPTANCE_PASS__17_OPEN__FINITE_SAMPLE_ABSOLUTE_DOMINANCE_CLAIMS_REOPENED",
+    "current_authority": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "historical_four_family_receipt": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+    "historical_four_family_receipt_status": "SUPERSEDED_FOR_CURRENT_AUTHORITY",
     "acceptance_calibrated_family_count": 2,
     "acceptance_pending_family_count": 17,
-    "acceptance_pending_families": [
-      "ADVANCED_AGENTIC_CODING",
-      "AGENTIC_SCIENTIFIC_RESEARCH",
-      "ARTIFACT_CREATION",
-      "BUSINESS_WORKFLOW_AUTOMATION",
-      "COMMUNICATION_AND_SYNTHESIS",
-      "COMPLEX_MULTI_TOOL_AGENCY",
-      "COMPUTER_AND_BROWSER_USE",
-      "FINANCIAL_ANALYSIS",
-      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
-      "MULTI_CAPABILITY_COMPOSITION",
-      "PROFESSIONAL_KNOWLEDGE_WORK",
-      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "UNKNOWN_DOMAIN_ADAPTATION",
-      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    "calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
     ],
-    "rule": "BEHAVIORAL_CONTRACT_PASS_NEQ_OPUS55_EQUAL_OR_BETTER_ACCEPTANCE"
+    "rule": "FINITE_SAMPLE_SUCCESS_CANNOT_CLOSE_PROTOCOL_WIDE_ABSOLUTE_DOMINANCE_WITHOUT_INDEPENDENT_SCOPE_COMPLETENESS"
   },
   "global_ownership_postconditions": {
     "status": "INDEPENDENT_PASS",
@@ -481,33 +486,39 @@
     "invalidation_blob_sha": "9dfda8e533e0d51985b2b32f709b1b238db1ef19"
   },
   "opus55_acceptance_summary": {
-    "calibrated_family_count": 4,
-    "pending_family_count": 15,
+    "calibrated_family_count": 2,
+    "pending_family_count": 17,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "SUBAGENT_DELEGATION_AND_COORDINATION"
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
     ],
     "pending_families": [
       "ADVANCED_AGENTIC_CODING",
-      "AGENTIC_SCIENTIFIC_RESEARCH",
-      "ARTIFACT_CREATION",
-      "BUSINESS_WORKFLOW_AUTOMATION",
-      "COMMUNICATION_AND_SYNTHESIS",
       "COMPLEX_MULTI_TOOL_AGENCY",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
-      "MULTI_CAPABILITY_COMPOSITION",
-      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "ARTIFACT_CREATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "UNKNOWN_DOMAIN_ADAPTATION",
-      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      "MULTI_CAPABILITY_COMPOSITION"
     ],
-    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+    "authority": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "atomic_predicates": {
+      "proved": 7,
+      "unresolved": 31,
+      "total": 38
+    },
     "ownership_promotion_authority": false,
-    "rule": "ACCEPTANCE_CALIBRATION_NEQ_OWNERSHIP_PROMOTION__ZERO_DIRECT_FAMILY_CREDIT_FROM_CALIBRATION"
-  }
+    "rule": "ACCEPTANCE_PASS_REQUIRES_CURRENT_SCOPE_COMPLETE_PROTOCOL_EVIDENCE__RAW_BEHAVIORAL_EXECUTION_DOES_NOT_SUBSTITUTE"
+  },
+  "behavioral_quarantined_family_count": 8
 }
