@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_DEPENDENCY_INVALIDATION_PROTOCOL_V1",
   "date": "2026-10-02",
-  "status": "CANONICAL_INCREMENTAL_PROOF_PRESERVATION_RULE__ZERO_PROMOTION_AUTHORITY",
+  "status": "AUXILIARY_TRANSITIVE_DEPENDENCY_PRIMITIVE__CANONICAL_PROMOTION_GATE_REMAINS_TERMINAL_ROUTE_EVIDENCE_FRESHNESS",
   "purpose": "Prevent broad proof invalidation after unrelated repository changes while still invalidating every proof whose frozen transitive behavior-relevant dependency changed or disappeared.",
   "runtime": "canonical/runtime/proof_dependency_guard.py",
   "rules": [
@@ -11,7 +11,8 @@
     "UNFROZEN_OR_UNKNOWN_DEPENDENCY_CLOSURE_INVALIDATES_THE_PROOF",
     "UNRELATED_REPOSITORY_CHANGES_DO_NOT_INVALIDATE_THE_PROOF",
     "DEPENDENCY_PRESERVATION_DOES_NOT_GRANT_TERMINAL_OR_CAPABILITY_CREDIT",
-    "HIGHER_LEVEL_PROMOTION_REDUCERS_REMAIN_AUTHORITATIVE"
+    "HIGHER_LEVEL_PROMOTION_REDUCERS_REMAIN_AUTHORITATIVE",
+    "THIS_PROTOCOL_MUST_NOT_OVERRIDE_TERMINAL_ROUTE_EVIDENCE_FRESHNESS_OR_ACTIVE_BASIS_AUTHORITY"
   ],
   "intended_first_applications": [
     "TASK_TO_DELEGATION_GRAPH_001_EXACT_BLOB_REVALIDATION",
@@ -22,5 +23,7 @@
   "execution_authority": false,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "canonical_promotion_gate": "canonical/runtime/terminal_route_evidence_freshness.py",
+  "relationship": "USE_THIS_PRIMITIVE_TO_DEFINE_FINE_GRAINED_TRANSITIVE_DEPENDENCY_CLOSURES__USE_TERMINAL_ROUTE_EVIDENCE_FRESHNESS_FOR_CANONICAL_ROUTE_PROMOTION_AND_STALENESS_AUTHORITY"
 }
