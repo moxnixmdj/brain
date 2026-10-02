@@ -16,10 +16,12 @@ on:
       - canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json
       - canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json
       - canonical/runtime/objective_route_certificate_verifier.py
+      - canonical/runtime/objective_route_promotion_transition.py
       - canonical/runtime/browser_*
       - canonical/runtime/tool_discovery_*
       - canonical/runtime/research_*
       - canonical/tests/test_objective_route_certificate_verifier.py
+      - canonical/tests/test_objective_route_promotion_transition.py
       - canonical/tests/test_browser_t2_objective_binding_validator.py
       - canonical/tests/test_tool_discovery_t2_t3_objective_binding_validator.py
       - canonical/tests/test_research_t3_objective_binding_validator.py
@@ -44,7 +46,9 @@ jobs:
           python-version: "3.11"
       - name: Verify common certificate kernel
         run: |
-          python -m unittest -v canonical.tests.test_objective_route_certificate_verifier
+          python -m unittest -v \
+            canonical.tests.test_objective_route_certificate_verifier \
+            canonical.tests.test_objective_route_promotion_transition
           python canonical/runtime/objective_route_certificate_verifier.py .
       - name: Verify browser residual
         run: |
