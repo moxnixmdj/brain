@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_BENCHMARK_SOURCE_PINS_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PUBLIC_REPOSITORY_PINS__NO_TERMINAL_CASE_CONTENT_EXPOSED",
+  "pins": [
+    {
+      "surface": "Terminal-Bench 4.0",
+      "repository": "harbor-framework/terminal-bench",
+      "observed_main_commit": "1dcda8716784493721921c23e4bc7f7d988b4494",
+      "declared_benchmark_release": "terminal-bench/terminal-bench@4.0.0",
+      "release_source": "https://github.com/harbor-framework/terminal-bench/releases",
+      "use_rule": "EXECUTION_MUST_BIND_EXACT_4_0_0_DATASET_RELEASE_NOT_UNPINNED_MAIN"
+    },
+    {
+      "surface": "OSWorld 2.1",
+      "repository": "xlang-ai/OSWorld-V2",
+      "observed_main_commit": "acdd3493808e716825975b0f0208194bb2faf3c3",
+      "declared_benchmark_release": "osworld-v2.1",
+      "source": "https://github.com/xlang-ai/OSWorld-V2",
+      "use_rule": "EXECUTION_MUST_CHECKOUT_OSWORLD_V2_1_TAG_AND_MATCH_TASK_ASSET_WEB_AND_PROVIDER_IMAGE_RELEASES"
+    },
+    {
+      "surface": "LiveBench Instruction Following",
+      "repository": "LiveBench/LiveBench",
+      "pinned_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "source": "https://github.com/LiveBench/LiveBench",
+      "use_rule": "PIN_IF_DATA_AND_VERIFIER_BYTES_FROM_THIS_COMMIT_OR_AN_EXPLICITLY_RECONCILED_NEWER_RELEASE_BEFORE_CASE_EXPOSURE"
+    },
+    {
+      "surface": "Humanity's Last Exam",
+      "repository": "centerforaisafety/hle",
+      "pinned_commit": "22ed3074b1e7b134bcbc09028d0ba320839b0655",
+      "source": "https://github.com/centerforaisafety/hle",
+      "use_rule": "PIN_EVALUATION_CODE_AND_DATASET_REVISION_HASH_SEPARATELY_BEFORE_CASE_EXPOSURE"
+    },
+    {
+      "surface": "Terminal-Bench-Science 0.1",
+      "repository": "harbor-framework/terminal-bench-science",
+      "pinned_commit": "61f4a549ebf77c29bedda0faf10779c9333ddad2",
+      "source": "https://github.com/harbor-framework/terminal-bench-science",
+      "use_rule": "PIN_TASK_DATASET_RELEASE_AND_HARBOR_ENVIRONMENT_SEPARATELY__DO_NOT_USE_MOVING_LATEST_AT_TERMINAL_EXECUTION"
+    },
+    {
+      "surface": "Chartography",
+      "repository": "surge-ai/chartography",
+      "pinned_commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+      "source": "https://github.com/surge-ai/chartography",
+      "use_rule": "PIN_HUGGINGFACE_DATASET_REVISION_AND_SCORER_ROUTE_SEPARATELY_BEFORE_CASE_EXPOSURE"
+    },
+    {
+      "surface": "Finance Agent v2 public route candidate",
+      "repository": "vals-ai/finance-agent-v2",
+      "pinned_commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+      "source": "https://github.com/vals-ai/finance-agent-v2",
+      "use_rule": "OFFICIAL_PLATFORM_REMAINS_GATED__PINNED_REPO_MAY_ONLY_SUPPORT_DECLARED_SCOPE_EQUIVALENT_PUBLIC_ROUTE"
+    },
+    {
+      "surface": "AutomationBench public 600-task route candidate",
+      "repository": "zapier/AutomationBench",
+      "pinned_commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+      "source": "https://github.com/zapier/AutomationBench",
+      "use_rule": "PUBLIC_SET_DIFFERS_FROM_PRIVATE_OFFICIAL_LEADERBOARD__NO_EXACT_SCORE_EQUIVALENCE_CLAIM"
+    }
+  ],
+  "not_pinned_due_no_exact_public_executable_route": [
+    "FrontierCode 1.1 Main",
+    "CursorBench 4.0",
+    "GDPval-AA v2.1 exact Artificial Analysis Elo route",
+    "AA-Briefcase v1.1 official private set",
+    "Vals MysteryMechanism exact benchmark"
+  ],
+  "guards": [
+    "PINNING_METADATA_DOES_NOT_AUTHORIZE_READING_CLEAN_TASK_CONTENT",
+    "NO_MOVING_MAIN_BRANCH_AT_TERMINAL_EXECUTION",
+    "DATASET_AND_ASSET_REVISIONS_MUST_BE_HASH_BOUND_WHERE_SEPARATE_FROM_CODE_REPOSITORY",
+    "NO_SCORE_EQUIVALENCE_ACROSS_BENCHMARK_VERSIONS_WITHOUT_EXPLICIT_COMPARABILITY_PROOF"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0
+}
