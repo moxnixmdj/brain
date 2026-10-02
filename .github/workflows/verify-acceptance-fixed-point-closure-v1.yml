@@ -1,0 +1,36 @@
+name: verify-acceptance-fixed-point-closure-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/acceptance_ir_compiler_v1.py"
+      - "canonical/runtime/proof_fixed_point_saturator_v1.py"
+      - "canonical/runtime/minimum_terminal_cut_solver_v1.py"
+      - "canonical/tests/test_acceptance_ir_compiler_v1.py"
+      - "canonical/tests/test_proof_fixed_point_saturator_v1.py"
+      - "canonical/tests/test_minimum_terminal_cut_solver_v1.py"
+      - "canonical/governance/ACCEPTANCE_FIXED_POINT_CLOSURE_ENGINE_V1.json"
+      - ".github/workflows/verify-acceptance-fixed-point-closure-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile runtimes
+        run: |
+          python -m py_compile canonical/runtime/acceptance_ir_compiler_v1.py
+          python -m py_compile canonical/runtime/proof_fixed_point_saturator_v1.py
+          python -m py_compile canonical/runtime/minimum_terminal_cut_solver_v1.py
+      - name: Run deterministic tests
+        run: |
+          python canonical/tests/test_acceptance_ir_compiler_v1.py
+          python canonical/tests/test_proof_fixed_point_saturator_v1.py
+          python canonical/tests/test_minimum_terminal_cut_solver_v1.py
