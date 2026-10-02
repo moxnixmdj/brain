@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_POST_DELEGATION_ACCEPTANCE_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_PROOF_COMPRESSION_HYPERGRAPH__4_OF_19__9_OF_38__29_BLOCKED__29_OF_29_ACTION_COVERAGE__ZERO_REPLAY__ZERO_CREDIT",
+  "supersedes": "canonical/verification/POST_DELEGATION_ACCEPTANCE_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 884,
+    "pull_request_head": "acb3fb8fc3af78eaabc85df62b773df0cc2d2fb1",
+    "merge_commit": "12ea1db21915d225083a6a542e97d8b96a1e1c4c",
+    "workflow_run_id": 37008010571,
+    "workflow_job_id": 110840769779,
+    "conclusion": "success"
+  },
+  "verified": [
+    "ACTUAL_POST_DELEGATION_EVIDENCE_LEDGER_CONTENT_ADDRESS_CHAIN_PASS",
+    "CALIBRATION_REGRESSION_TESTS_PASS",
+    "EXACT_4_OF_19_ACCEPTANCE_CALIBRATION",
+    "EXACT_9_OF_38_PROVED__0_OPEN__29_BLOCKED_ATOMIC_RESIDUAL",
+    "AUTHORIZED_ACCEPTANCE_CASE_ACTIONS_EMPTY",
+    "CURRENT_PROOF_COMPRESSION_HYPERGRAPH_29_OF_29_UNPROVED_PREDICATE_COVERAGE",
+    "PROVED_PREDICATES_ABSENT_FROM_LIVE_ACTION_TARGETS",
+    "ZERO_TERMINAL_REPLAY",
+    "ZERO_DIRECT_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "current_hypergraph_blob_sha": "755a3291d8271acb3eb3a9f5db0857235fa0efd9",
+  "evidence_bindings_blob_sha": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
+  "result": {
+    "acceptance_calibrated_family_count": 4,
+    "acceptance_pending_family_count": 15,
+    "atomic_predicate_count": 38,
+    "proved_predicate_count": 9,
+    "open_predicate_count": 0,
+    "blocked_predicate_count": 29,
+    "represented_unproved_predicate_count": 29,
+    "uncovered_unproved_predicate_count": 0,
+    "authorized_acceptance_case_actions": [],
+    "terminal_promotion_allowed": false
+  },
+  "terminal_results_replayed": 0,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
