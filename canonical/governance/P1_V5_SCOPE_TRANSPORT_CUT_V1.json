@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_SCOPE_TRANSPORT_CUT_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__VERIFIED_V5_CARRIER_COMPRESSED_TO_THREE_DIRECT_SURFACE_SCOPE_TRANSPORT_ATOMS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Convert the independently verified P1 V5 mechanism carrier into the smallest truthful remaining terminal proof cut without importing synthetic carrier success into frozen terminal surface credit.",
+  "runtime": "canonical/runtime/p1_v5_scope_transport_cut_v1.py",
+  "tests": "canonical/tests/test_p1_v5_scope_transport_cut_v1.py",
+  "verified_carrier_receipt": "canonical/verification/P1_TYPED_INTERVENTION_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "expected_transport_atoms": [
+    "V5_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS::T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "V5_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS::T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "V5_EXACT_OR_SUPERSET_SCOPE_RELATION_INDEPENDENT_PASS::T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+  ],
+  "hard_rules": [
+    "VERIFIED_V5_CARRIER_DISCHARGES_MECHANISM_RESIDUALS_ONLY_INSIDE_ITS_VERIFIED_ENVELOPE",
+    "NO_SCOPE_TRANSPORT_FROM_DOMAIN_LABELS_OR_SHARED_VOCABULARY",
+    "EACH_FROZEN_DIRECT_SURFACE_REQUIRES_EXPLICIT_INDEPENDENT_EXACT_OR_SUPERSET_SCOPE_RELATION",
+    "P1_QUARANTINE_REMAINS_ACTIVE_UNTIL_ALL_THREE_TRANSPORT_ATOMS_PASS",
+    "NO_FULL_TERMINAL_REPLAY_FROM_THIS_CUT",
+    "ZERO_CREDIT_AND_ZERO_AUTHORITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THIS_COMPILER__THEN_SEARCH_EXISTING_IMMUTABLE_RECEIPTS_FOR_THE_THREE_TRANSPORT_ATOMS__AUTHORIZE_ONLY_IRREDUCIBLE_MISSING_SCOPE_RELATION_EVIDENCE",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
