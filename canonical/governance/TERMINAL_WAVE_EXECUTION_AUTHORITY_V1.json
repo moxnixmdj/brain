@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_WAVE_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-02",
-  "status": "REVOKED_FAIL_CLOSED__PARENT_WAVE_NO_ABORT_REPAIR_REQUIRED__ZERO_TERMINAL_RESULTS",
+  "status": "CONSUMED__TERMINAL_V3_ONE_SHOT_WAVE_EXECUTED_ONCE__RERUN_FORBIDDEN__POSTWAVE_REDUCTION_ONLY",
   "authority_receipt": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "authorization": "NONE_UNTIL_PARENT_RUNNER_NO_ABORT_SEMANTICS_ARE_INDEPENDENTLY_VERIFIED_AND_AUTHORITY_REDERIVED",
+  "authorization": null,
   "execution_authority": false,
   "promotion_authority": false,
-  "terminal_results_observed": 0,
-  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 1,
+  "fresh_terminal_evidence_consumed": 3352,
   "conditions": [
     "CURRENT_ACTIVE_CONTRACT_REGISTRY_EXACTLY_MATCHES_CURRENT_PREQUALIFICATION_INPUT",
     "CURRENT_ACTIVE_TERMINAL_PROOF_BASIS_HAS_12_OF_12_FROZEN_ADMISSIBLE_ROUTES",
@@ -22,7 +22,7 @@
     "LEGACY_GLOBAL_12_SLOT_TERMINAL_REPLACEMENT_WAVE_MUST_NOT_EXECUTE_UNDER_V2_PROTOCOL",
     "ROUTE_SPECIFIC_EXECUTOR_SET_MUST_EQUAL_ALL_12_FROZEN_BINDINGS"
   ],
-  "terminal_launcher_state": "FAIL_CLOSED_PREBEACON__PARENT_PORTFOLIO_FAILURE_MUST_NOT_ABORT_REMAINING_FROZEN_PARENT_OBSERVATIONS",
+  "terminal_launcher_state": "CONSUMED_LOCKED__DO_NOT_REEXECUTE",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -34,7 +34,7 @@
   "parent_case_producer_manifest": "canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json",
   "launch_authority_reducer": "canonical/runtime/terminal_wave_launch_authority_reducer_v1.py",
   "derived_launch_authority_verification": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "next": "REPAIR_PARENT_RUNNER_TO_RETURN_FAILURE_RECEIPTS_WITHOUT_ABORT__REVERIFY_PARENT_PRODUCER__REDERIVE_AUTHORITY__REFREEZE_PACKAGE",
+  "next": "REDUCE_IMMUTABLE_TERMINAL_RESULT_TO_12_CONTRACT_VERDICTS__THEN_19_FAMILY_ADJUDICATION__THEN_GLOBAL_POSTWAVE_CLOSURE__NO_TERMINAL_REPLAY",
   "revocation": {
     "reason": "EXECUTE_EACH_CONTRACT_ONCE_REQUIRES_PARENT_FAILURE_TO_REDUCE_AS_FAILURE_WITHOUT_ABORTING_LATER_PARENT_PORTFOLIOS",
     "terminal_beacon_constructed": false,
@@ -51,5 +51,17 @@
     "failed_predicates": [],
     "terminal_results_observed": 0,
     "fresh_terminal_evidence_consumed": 0
+  },
+  "terminal_result_receipt": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+  "consumption": {
+    "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "beacon": "36977020853",
+    "workflow_run_id": 36977803089,
+    "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+    "result": "PASS",
+    "rerun_allowed": false,
+    "case_replacement": false,
+    "tuning_replay": false
   }
 }
