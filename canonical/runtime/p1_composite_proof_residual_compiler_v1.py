@@ -140,6 +140,8 @@ def evaluate(
         e.append("V4_DOMAIN_COVERAGE_DRIFT")
     if set(verified.get("mechanism_classes") or []) != V4_EXPLICIT_CLASSES:
         e.append("V4_MECHANISM_CLASS_COVERAGE_DRIFT")
+    if set(verified.get("causal_patterns") or []) != V4_REQUIRED_PATTERNS:
+        e.append("V4_CAUSAL_PATTERN_COVERAGE_DRIFT")
     if int(verified.get("cross_product_case_count") or 0) != 168:
         e.append("V4_CASE_COUNT_DRIFT")
     if verified.get("hidden_oracle_not_candidate_visible") is not True:
