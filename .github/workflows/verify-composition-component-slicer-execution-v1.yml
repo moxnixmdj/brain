@@ -1,0 +1,27 @@
+name: Verify composition component slicer execution v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"
+      - "canonical/runtime/opus55_composition_component_proof_slicer_execution_v1.py"
+      - "canonical/tests/test_opus55_composition_component_proof_slicer_execution_v1.py"
+      - ".github/workflows/verify-composition-component-slicer-execution-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run slicer execution test
+        run: python canonical/tests/test_opus55_composition_component_proof_slicer_execution_v1.py
+      - name: Run live slicer execution
+        run: python canonical/runtime/opus55_composition_component_proof_slicer_execution_v1.py
