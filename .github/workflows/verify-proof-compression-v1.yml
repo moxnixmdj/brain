@@ -25,7 +25,11 @@ jobs:
         with:
           python-version: '3.11'
       - name: Run exact proof-compression tests
+        env:
+          PYTHONPATH: .
         run: |
-          python canonical/tests/test_acceptance_bound_compiler_v1.py
-          python canonical/tests/test_evaluation_information_firewall_v1.py
-          python canonical/tests/test_acceptance_proof_first_frontier_v1.py
+          set -euxo pipefail
+          python -m unittest -v \
+            canonical.tests.test_acceptance_bound_compiler_v1 \
+            canonical.tests.test_evaluation_information_firewall_v1 \
+            canonical.tests.test_acceptance_proof_first_frontier_v1
