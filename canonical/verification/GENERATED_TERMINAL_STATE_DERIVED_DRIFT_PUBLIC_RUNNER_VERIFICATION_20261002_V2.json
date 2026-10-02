@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_GENERATED_TERMINAL_STATE_DERIVED_DRIFT_PUBLIC_RUNNER_VERIFICATION_20261002_V2",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_BLOBS__15_STACK_TESTS_PASS__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verification_pr": 660,
+  "verification_pr_head_sha": "75068b8741869781158f91edcff7be61cff2a3db",
+  "verification_merge_commit": "f4f7fc128db5fbe4c387126217de4bd89c97d3c1",
+  "workflow_run_id": 36966897922,
+  "workflow_name": "Verify terminal closure compiler stack",
+  "workflow_conclusion": "success",
+  "exact_updated_brain_blobs": {
+    "canonical/runtime/generated_terminal_state_compiler.py": "b67ad872ed8a1bdd582e2223bd4240f6eef34b81",
+    "canonical/tests/test_generated_terminal_state_compiler.py": "19de5232a53d779fe7e8f1cf1f1164878b8c2eda"
+  },
+  "unchanged_stack_blobs_reverified_in_same_run": {
+    "canonical/runtime/terminal_proof_supercompiler.py": "c7a4b8bc29d041fcc04fbcfa8a79db44fa9fe370",
+    "canonical/tests/test_terminal_proof_supercompiler.py": "e91e2c2dc3f7978d115fdd45efdfe4b66e9af33a",
+    "canonical/runtime/prewave_anti_circularity_compiler.py": "e610b392fdb8bce337b748f2924b1134ccdfbbd9",
+    "canonical/tests/test_prewave_anti_circularity_compiler.py": "6c69bfb96d5c28916774b4d0e044d981b2e48f60"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_HASH_BINDING_PASS",
+    "CLOSURE_QUEUE_CLOSED_SET_DRIFT_FAILS_CLOSED",
+    "CLOSURE_QUEUE_OPEN_SET_DRIFT_FAILS_CLOSED",
+    "CLOSURE_QUEUE_COUNT_DRIFT_FAILS_CLOSED",
+    "CLOSURE_QUEUE_BASIS_STATUS_DRIFT_FAILS_CLOSED",
+    "NESTED_PREQUALIFICATION_ADMISSION_COUNT_DRIFT_FAILS_CLOSED",
+    "NESTED_PREQUALIFICATION_ADMISSION_SET_DRIFT_FAILS_CLOSED",
+    "EXISTING_PROTOCOL_AND_PREQUALIFICATION_LAG_GUARDS_REPASS",
+    "PROGRESS_ARTIFACTS_STILL_CANNOT_SELF_PROMOTE",
+    "CONTRACT_SET_MISMATCH_STILL_FAILS_CLOSED",
+    "TERMINAL_PROOF_SUPERCOMPILER_REGRESSIONS_REPASS",
+    "PREWAVE_ANTI_CIRCULARITY_REGRESSIONS_REPASS"
+  ],
+  "test_count": 15,
+  "test_result": "OK",
+  "authority_effect": "DERIVED_TERMINAL_STATE_DRIFT_NOW_FAILS_CLOSED_ACROSS_PROTOCOL_PREQUALIFICATION_AND_CLOSURE_QUEUE__NO_ROUTE_CAPABILITY_OR_FAMILY_PROMOTION_FROM_THIS_RECEIPT",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
