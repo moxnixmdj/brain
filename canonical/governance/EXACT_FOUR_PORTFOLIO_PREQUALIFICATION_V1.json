@@ -51,7 +51,7 @@
         "CursorBench 4.0 >=57.8%"
       ],
       "blockers": [
-        "TERMINAL_BENCH_4_0_PUBLIC_ROUTE_EXISTS__PER_CASE_RESOURCE_AND_BRAIN_ADAPTER_PREFLIGHT_NOT_YET_FROZEN"
+        "TERMINAL_BENCH_4_0_HARBOR_DOCKER_CARRIER_PASS__PER_CASE_RESOURCE_AND_BRAIN_AGENT_ADAPTER_PREFLIGHT_OPEN"
       ],
       "deleted_required_surfaces": [
         "FrontierCode v1.1 Main official/nonreproducible route",
@@ -88,7 +88,6 @@
       ],
       "blockers": [
         "AUTOMATIONBENCH_PUBLIC_600_TASK_ABSOLUTE_ACCEPTANCE_AND_SCOPE_BINDING_NOT_YET_FROZEN",
-        "LIVEBENCH_IF_FULL_58_CHECKER_HERMETIC_RUNTIME_INDEPENDENT_PASS__SYNTHETIC_GOOD_BAD_BOUNDARY_MUTATION_PREFLIGHT_REMAINS",
         "OSWORLD_2_1_EXACT_ZERO_COST_ROUTE_FAIL_CLOSED_ON_GATED_ASSETS__SCOPE_EQUIVALENT_PROOF_OR_PROVEN_ASSET_ACCESS_REQUIRED"
       ]
     },
@@ -99,7 +98,7 @@
         "Terminal-Bench-Science 0.1 >=58.7%"
       ],
       "blockers": [
-        "TERMINAL_BENCH_SCIENCE_0_1_PUBLIC_ROUTE_EXISTS__RESOURCE_AND_BRAIN_ADAPTER_PREFLIGHT_NOT_YET_FROZEN",
+        "TERMINAL_BENCH_SCIENCE_HARBOR_DOCKER_CARRIER_PASS__PER_CASE_RESOURCE_AND_BRAIN_AGENT_ADAPTER_PREFLIGHT_OPEN",
         "HLE_DATA_AND_CORE_EVAL_ARE_PUBLIC__TOOLS_HARNESS_AND_ZERO_COST_SHORT_ANSWER_GRADER_NOT_YET_FROZEN",
         "T3_UNKNOWN_DOMAIN_DIRECT_SYNTHESIS_BINDING_FROZEN__REMAINING_UNKNOWN_DOMAIN_SCOPE_AUDIT_NOT_YET_FROZEN"
       ],
@@ -173,7 +172,6 @@
   "execution_authority": false,
   "next": [
     "CLOSE_SURVIVING_PUBLIC_SURFACE_PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_AND_SCOPE_EQUIVALENCE_PREFLIGHTS_USING_SHARDED_ROUTE_WHERE_APPLICABLE",
-    "COMPLETE_LIVEBENCH_IF_58_CHECKER_SYNTHETIC_MUTATION_PREFLIGHT_WITHOUT_TERMINAL_CASE_EXPOSURE",
     "FREEZE_FINANCE_INDEX_COMPONENT_ROUTE_BINDINGS_AND_T3_UNKNOWN_DOMAIN_SCOPE_AUDIT",
     "RUN_FINAL_OPAQUE_PROVIDER_DONOR_AND_DEPENDENCY_CLEANLINESS_AUDIT__CONTROLLER_COMPOSITION_ALREADY_INDEPENDENT_PASS",
     "DERIVE_EXECUTION_AUTHORITY_ONLY_IF_ALL_PRE_WAVE_GATES_PASS__THEN_RUN_T0_T1_T2_T3_IN_PARALLEL"
@@ -209,7 +207,7 @@
     "proxy_benchmark_substitutions_admitted": 0,
     "livebench_if_response_adapter_independently_verified": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "livebench_if_dataset_revision_hash_frozen_without_case_exposure": true,
-    "livebench_if_58_checker_mutation_preflight_pass": false,
+    "livebench_if_58_checker_mutation_preflight_pass": "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_VERIFICATION_20261002_V1.json",
     "livebench_if_full_verifier_runtime_hermetic_smoke_pass": "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "four_uncovered_behavioral_direct_proof_contracts_frozen": true,
     "four_uncovered_behavioral_direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
@@ -234,7 +232,9 @@
     "direct_proof_surface_scope_bindings_frozen": true,
     "sharded_finite_population_route_independently_verified": "canonical/verification/SHARDED_FINITE_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "full_suite_single_runner_fit_required": false,
-    "sharded_resource_rule": "EACH_SELECTED_CASE_RUNS_IN_FRESH_ZERO_COST_JOB__CASE_LOCAL_RESOURCE_FAILURE_COUNTS_AS_FAILURE__NO_REPLACEMENT"
+    "sharded_resource_rule": "EACH_SELECTED_CASE_RUNS_IN_FRESH_ZERO_COST_JOB__CASE_LOCAL_RESOURCE_FAILURE_COUNTS_AS_FAILURE__NO_REPLACEMENT",
+    "livebench_if_prequalification_verifier_stack_complete": true,
+    "harbor_0_23_local_docker_carrier_pass": "canonical/verification/HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -252,7 +252,6 @@
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
   "remaining_irreducible_prequalification_blockers": [
     "SURVIVING_PUBLIC_SURFACES_REQUIRE_PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHT",
-    "LIVEBENCH_IF_CURRENT_58_CHECKERS_REQUIRE_SYNTHETIC_GOOD_BAD_BOUNDARY_MUTATION_PREFLIGHT",
     "FINANCE_INDEX_COMPONENT_ROUTE_BINDINGS_AND_T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_REQUIRE_FREEZE",
     "FINAL_OPAQUE_PROVIDER_DONOR_AND_DEPENDENCY_CLEANLINESS_AUDIT_REQUIRES_PASS"
   ],
