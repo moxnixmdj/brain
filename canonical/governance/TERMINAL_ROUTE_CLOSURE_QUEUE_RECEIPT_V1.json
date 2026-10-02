@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "49519f016789c0f4eeddfbf200fb14c3350813b9",
+  "source_basis_blob_sha": "beeddfb8027c3f0712265673cd72bfd493f43ae7",
   "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__4_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
-  "status": "CANONICAL_SCHEDULING_RECEIPT__ZERO_PROMOTION_AUTHORITY",
+  "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_BASIS__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
   "closed_route_count": 4,
   "open_route_count": 8,
