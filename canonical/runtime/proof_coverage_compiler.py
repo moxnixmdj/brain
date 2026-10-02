@@ -87,6 +87,11 @@ def _route_admissibility(route: dict[str, Any], required: set[str]) -> tuple[boo
             errors.append(f"{rid}:EXACT_OPUS_COMPARATOR_NOT_BOUND")
         if route.get("symmetric_harness_frozen") is not True:
             errors.append(f"{rid}:SYMMETRIC_HARNESS_NOT_FROZEN")
+    elif mode == "PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN":
+        if route.get("portfolio_multiplex_binding_frozen") is not True:
+            errors.append(f"{rid}:PORTFOLIO_MULTIPLEX_BINDING_NOT_FROZEN")
+        if route.get("independent_preflight_bound") is not True:
+            errors.append(f"{rid}:PORTFOLIO_MULTIPLEX_INDEPENDENT_PREFLIGHT_NOT_BOUND")
     elif mode == "CANONICAL_ADMITTED_ROUTE":
         if route.get("canonical_active_basis_admitted") is not True:
             errors.append(f"{rid}:CANONICAL_ADMISSION_NOT_PROVEN")

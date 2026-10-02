@@ -125,5 +125,39 @@ class ProofCoverageCompilerTests(unittest.TestCase):
         self.assertIn("BAR:PUBLIC_BAR_SOURCE_MISSING", errs)
 
 
+    def test_portfolio_multiplexed_open_domain_requires_frozen_binding_and_independent_preflight(self):
+        rejected = evaluate({
+            "required_obligations": ["A"],
+            "routes": [
+                route(
+                    "MUX_BAD",
+                    ["A"],
+                    proof_mode="PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN",
+                    portfolio_multiplex_binding_frozen=False,
+                    independent_preflight_bound=False,
+                ),
+            ],
+        })
+        self.assertEqual(rejected["status"], "INCOMPLETE_COVER")
+        errs = rejected["rejected_routes"][0]["errors"]
+        self.assertIn("MUX_BAD:PORTFOLIO_MULTIPLEX_BINDING_NOT_FROZEN", errs)
+        self.assertIn("MUX_BAD:PORTFOLIO_MULTIPLEX_INDEPENDENT_PREFLIGHT_NOT_BOUND", errs)
+
+        accepted = evaluate({
+            "required_obligations": ["A"],
+            "routes": [
+                route(
+                    "MUX_OK",
+                    ["A"],
+                    proof_mode="PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN",
+                    portfolio_multiplex_binding_frozen=True,
+                    independent_preflight_bound=True,
+                ),
+            ],
+        })
+        self.assertEqual(accepted["status"], "EXACT_MINIMUM_COVER_FOUND")
+        self.assertEqual(accepted["selected_route_ids"], ["MUX_OK"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
