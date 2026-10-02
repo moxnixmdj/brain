@@ -45,7 +45,10 @@
   "ablation": {
     "same_substrate": true,
     "baseline": "USER_PROMPT_ONLY_WITHOUT_BRAIN_SYSTEM_CONFIGURATION",
-    "role": "OWNERSHIP_MATERIALITY_DIAGNOSTIC_ONLY__NOT_ACCEPTANCE_THRESHOLD"
+    "role": "OWNERSHIP_MATERIALITY_DIAGNOSTIC_ONLY__NOT_ACCEPTANCE_THRESHOLD",
+    "sample_size": 40,
+    "selection": "40_SMALLEST_SHA256(UTF8('BRAIN_LIVEBENCH_IF_ABLATION_V1\\\\0'||question_id))",
+    "acceptance_role": "NONE__DIAGNOSTIC_ONLY"
   },
   "frozen_generation": {
     "temperature": 0,
@@ -64,5 +67,13 @@
   "terminal_v3_replay": false,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "transport_retry": {
+    "max_attempts_per_case": 2,
+    "rule": "IDENTICAL_PROMPT_MESSAGES_SEED_AND_GENERATION_PARAMETERS__ONLY_TRANSPORT_OR_EMPTY_RESPONSE_RETRY__NO_SCORER_OR_RESULT_FEEDBACK"
+  },
+  "result_use": {
+    "full_400_configured_route": "ACCEPTANCE_AUTHORITY",
+    "ablation_40": "OWNERSHIP_MATERIALITY_DIAGNOSTIC_ONLY"
+  }
 }
