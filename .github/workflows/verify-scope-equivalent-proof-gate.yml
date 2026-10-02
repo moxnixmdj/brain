@@ -9,10 +9,18 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python canonical/runtime/scope_equivalent_proof_gate.py --self-test
-      - run: python -m unittest canonical.tests.test_scope_equivalent_proof_gate -v
+      - name: Compile runtime and tests
+        run: python -m py_compile canonical/runtime/scope_equivalent_proof_gate.py canonical/tests/test_scope_equivalent_proof_gate.py
+      - name: Import runtime
+        run: python -c "from canonical.runtime.scope_equivalent_proof_gate import evaluate; assert callable(evaluate)"
+      - name: Runtime self-test
+        run: python canonical/runtime/scope_equivalent_proof_gate.py --self-test
+      - name: Unit tests
+        run: python -m unittest canonical.tests.test_scope_equivalent_proof_gate -v
