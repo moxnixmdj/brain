@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CARRIER_PARETO_FRONTIER_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_EXHAUSTIVE_495_SET_RESOURCE_FRONTIER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Exhaustively reduce every eight-of-twelve resource-only TB4 carrier-recovery choice to the nondominated hardware frontier, and prove the unavoidable per-task resource floor without reading task instructions or executing acceptance cases.",
+  "authority": {
+    "minimum_carrier_recovery_cut": {
+      "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+      "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc"
+    }
+  },
+  "combinatorics": {
+    "resource_exceed_task_count": 12,
+    "recovered_tasks_required": 8,
+    "exhaustive_subset_count": 495,
+    "theorem": "C(12,8)=495"
+  },
+  "single_carrier_pareto_frontier": [
+    {
+      "envelope": {
+        "cpus_at_least": 8,
+        "usable_memory_mb_at_least": 16384,
+        "free_storage_mb_at_least": 30720,
+        "gpus_at_least": 1
+      },
+      "qualifying_subset_count": 9,
+      "interpretation": "LOWEST_CPU_AND_STORAGE_FRONTIER_REQUIRES_GPU"
+    },
+    {
+      "envelope": {
+        "cpus_at_least": 8,
+        "usable_memory_mb_at_least": 16384,
+        "free_storage_mb_at_least": 51200,
+        "gpus_at_least": 0
+      },
+      "qualifying_subset_count": 1,
+      "representative_recovery_set": [
+        "terminal-bench/distributed-dedup",
+        "terminal-bench/formal-crypto",
+        "terminal-bench/lake-temp-glm",
+        "terminal-bench/medical-claims-processing",
+        "terminal-bench/shadow-relay",
+        "terminal-bench/takens-embedding-lean",
+        "terminal-bench/uefi-bootkit",
+        "terminal-bench/wdm-design"
+      ],
+      "interpretation": "LOWEST_CPU_GPU_FREE_FRONTIER_PAYS_51200_MB_STORAGE"
+    },
+    {
+      "envelope": {
+        "cpus_at_least": 16,
+        "usable_memory_mb_at_least": 16384,
+        "free_storage_mb_at_least": 20480,
+        "gpus_at_least": 0
+      },
+      "qualifying_subset_count": 1,
+      "representative_recovery_set": [
+        "terminal-bench/distributed-dedup",
+        "terminal-bench/formal-crypto",
+        "terminal-bench/lake-temp-glm",
+        "terminal-bench/live-database-cutover",
+        "terminal-bench/medical-claims-processing",
+        "terminal-bench/shadow-relay",
+        "terminal-bench/uefi-bootkit",
+        "terminal-bench/wdm-design"
+      ],
+      "interpretation": "LOWEST_STORAGE_GPU_FREE_FRONTIER_PAYS_16_CPU"
+    }
+  ],
+  "unavoidable_resource_floor": {
+    "any_eight_task_recovery_set_contains_at_least_one_task_with": {
+      "cpus_at_least": 8,
+      "memory_mb_at_least": 16384
+    },
+    "proof_counting_argument": {
+      "tasks_not_jointly_requiring_8_cpu_and_16384_mb": 7,
+      "tasks_to_recover": 8,
+      "consequence": "EVERY_VALID_8_TASK_RECOVERY_SET_CONTAINS_AT_LEAST_ONE_8CPU_AND_16384MB_TASK"
+    },
+    "implication": "HETEROGENEOUS_CARRIER_SPLITTING_CANNOT_REMOVE_THE_NEED_FOR_AT_LEAST_ONE_PROTOCOL_COMPARABLE_CARRIER_WITH_8_CPU_AND_16384_MB_USABLE_MEMORY"
+  },
+  "search_pruning": [
+    "DELETE_ALL_SINGLE_CARRIER_SHAPES_DOMINATED_BY_THE_THREE_PARETO_ENVELOPES",
+    "DELETE_ANY_HETEROGENEOUS_PLAN_WITH_NO_CARRIER_CAPABLE_OF_AT_LEAST_8_CPU_AND_16384_MB_USABLE_MEMORY",
+    "IF_GPU_IS_FORBIDDEN_OR_NONZERO_COST__SEARCH_ONLY_THE_TWO_GPU_FREE_FRONTIER_ENVELOPES",
+    "IF_CPU_IS_CAPPED_AT_8__THE_GPU_FREE_RECOVERY_SET_IS_UNIQUE_AND_REQUIRES_51200_MB_FREE_STORAGE",
+    "IF_FREE_STORAGE_IS_CAPPED_AT_20480_MB__THE_GPU_FREE_RECOVERY_SET_IS_UNIQUE_AND_REQUIRES_16_CPU"
+  ],
+  "hard_rules": [
+    "RESOURCE_METADATA_ONLY__NO_TASK_INSTRUCTIONS_OR_SOLUTIONS_READ",
+    "NO_ACCEPTANCE_CASE_EXECUTION",
+    "NO_CARRIER_EXISTENCE_INFERRED_FROM_RESOURCE_FRONTIER",
+    "NO_PROTOCOL_EQUIVALENCE_INFERRED",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT",
+    "RECOMPUTE_IF_SOURCE_RECOVERY_CUT_BLOB_CHANGES"
+  ],
+  "new_reality_units_consumed": 0,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
