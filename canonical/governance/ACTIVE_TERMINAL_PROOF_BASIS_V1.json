@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__7_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__8_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -135,34 +135,28 @@
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
       "portfolio": "T0_T2",
-      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL_FREEZE_PENDING__EXACT_COMPARATOR_ZERO_COST_ROUTE_CURRENTLY_BLOCKED",
-      "route": "canonical/runtime/trajectory_failure_information_safe_proof_v2.py",
-      "blockers": [
-        "FREEZE_SELF_VERIFICATION_CAUSAL_INTERVENTION_CHALLENGE_SOURCE_POOL_AND_SCORER",
-        "FREEZE_BRAIN_OWNED_TRAJECTORY_CAPABILITY_PACKAGE_AND_DEPENDENCY_MANIFEST",
-        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
-        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_CAUSAL_RECOVERY_SCOPE",
-        "FREEZE_POST_FREEZE_SELECTOR_ONLY_AFTER_COMPARATOR_OR_SCOPE_EQUIVALENT_PUBLIC_EVIDENCE_ROUTE_EXISTS"
-      ],
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "route": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "blockers": [],
       "candidate": "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py",
-      "independent_preflight": "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/P1_TRAJECTORY_T0_T2_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "scope_audit": "canonical/governance/TRAJECTORY_WHOLE_SCOPE_AUDIT_V1.json",
       "prequalification_law": "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json",
       "terminal_family_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json::SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "comparator_feasibility": "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json",
       "scope_audit_role": "BOUNDED_MECHANISM_ENVELOPE_AND_RESIDUAL_DIAGNOSTIC_ONLY__NOT_REQUIRED_AS_SYNTHETIC_WHOLE_OPEN_DOMAIN_SUPERSET_PROOF",
+      "proof_mode_classification": "T0_T2_MULTIPLEXED_DETERMINISTIC_INTERVENTION_RESCUE_GATE",
+      "synthetic_whole_domain_scope_gate_required": false,
       "supercompiler_reconciliation": {
-        "status": "STRONGER_ABSOLUTE_ROUTE_CANDIDATE_PRECEDES_COMPARATOR_IRREDUCIBILITY",
-        "route": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json::P1_TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_DIRECT",
-        "proposed_proof_mode": "DETERMINISTIC_HIDDEN_ORACLE",
-        "minimum_internal_unblock": [
-          "P1_SCOPE_EQUIVALENCE",
-          "P1_TERMINAL_BINDING"
-        ],
-        "exact_opus_irreducibility": "NOT_PROVEN",
-        "verdict": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
-        "authority_effect": "SCHEDULING_ONLY__EXISTING_BLOCKERS_AND_ZERO_TERMINAL_CREDIT_PRESERVED"
-      }
+        "status": "P1_INTERNAL_UNBLOCK_RESOLVED_BY_TERMINAL_PORTFOLIO_MULTIPLEX_DIRECT_INTERVENTION_RESCUE_INSTRUMENTATION",
+        "route": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "proof_mode": "T0_T2_MULTIPLEXED_DETERMINISTIC_INTERVENTION_RESCUE_GATE",
+        "exact_opus_irreducibility": "ELIMINATED_FOR_PREWAVE_ADMISSION",
+        "independent_verification": "canonical/verification/P1_TRAJECTORY_T0_T2_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "terminal_credit": "ZERO_UNTIL_TERMINAL_WAVE"
+      },
+      "prewave_admissible": true,
+      "terminal_results_observed": 0
     },
     {
       "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
@@ -324,7 +318,7 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 7,
+  "admissible_frozen_terminal_route_count": 8,
   "execution_authority": false,
   "next": "CLOSE_CAD_CLEAN_REFREEZE_BROWSER_TOOL_DISCOVERY_RESEARCH_AND_TRAJECTORY_DIRECT_OBJECTIVE_ROUTES__NO_TERMINAL_WAVE_BEFORE_12_OF_12",
   "fresh_terminal_evidence_consumed": 0,
