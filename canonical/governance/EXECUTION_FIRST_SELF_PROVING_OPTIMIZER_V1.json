@@ -210,6 +210,12 @@
       "key": "HASH_OF_CODE_TEST_VERIFIER_ENVIRONMENT_AND_RELEVANT_DEPENDENCY_CONE",
       "reuse_rule": "EXISTING_PASS_WITH_IDENTICAL_KEY_IS_REUSED_WITHOUT_REMOTE_REEXECUTION",
       "invalidation_rule": "RERUN_ONLY_IF_KEY_COMPONENT_OR_EXPLICIT_PROOF_ASSUMPTION_CHANGES"
+    },
+    "independent_verification": {
+      "status": "INDEPENDENT_PASS",
+      "receipt": "canonical/verification/FRONTIER_CONTROLLER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "brain_commit": "c4099ae1eb2b00dca1614a4efb8dfa472abe2e23",
+      "public_runner_commit": "b3c4ad36b097c336e8eafc5f6e6a2a71205f3465"
     }
   }
 }
