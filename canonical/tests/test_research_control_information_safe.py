@@ -22,6 +22,16 @@ class ResearchControlInformationSafeTests(unittest.TestCase):
         self.assertTrue(out["all_pass"],out)
         self.assertEqual(set(out["by_domain"]),set(proof.DOMAINS))
 
+
+    def test_recovers_from_high_authority_nonresponsive_source_without_research(self):
+        case=proof.generate_case(9,0)  # deterministic first high-authority miss
+        out=proof.run_episode(case,candidate.next_action)
+        self.assertTrue(out["pass"],out)
+        searches=[x for x in out["history"] if x["action"]=="SEARCH"]
+        fetches=[x for x in out["history"] if x["action"]=="FETCH"]
+        self.assertEqual(len(searches),len(case["material_requirements"]))
+        self.assertGreater(len(fetches),len(searches))
+
     def test_premature_stop_rejected(self):
         case=proof.generate_case(9,0)
         out=proof.run_episode(case,lambda public:{"action":"STOP"})
