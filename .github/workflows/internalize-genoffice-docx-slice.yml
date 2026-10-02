@@ -59,10 +59,35 @@ jobs:
             }
           }
           JSON
+      - name: Normalize isolated local workspace edges
+        shell: bash
+        working-directory: canonical/capabilities/internalized/artifact_creation/genoffice_db347087
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          edits={
+            "packages/docx-engine/package.json":{
+              "@genoffice/pptx-engine":"file:../pptx-engine",
+              "@genoffice/zip-gate":"file:../zip-gate"
+            },
+            "packages/pptx-engine/package.json":{
+              "@genoffice/zip-gate":"file:../zip-gate"
+            }
+          }
+          for rel,repls in edits.items():
+              p=Path(rel)
+              j=json.loads(p.read_text())
+              for k,v in repls.items():
+                  assert k in j.get("dependencies",{}), (rel,k)
+                  j["dependencies"][k]=v
+              p.write_text(json.dumps(j,indent=2)+"\n")
+          PY
       - name: Install pinned dependency closure
         shell: bash
         working-directory: canonical/capabilities/internalized/artifact_creation/genoffice_db347087
-        run: npm install --ignore-scripts
+        run: npm install --ignore-scripts --workspaces --include-workspace-root
       - name: Verify Brain-owned vendored packages
         shell: bash
         working-directory: canonical/capabilities/internalized/artifact_creation/genoffice_db347087
