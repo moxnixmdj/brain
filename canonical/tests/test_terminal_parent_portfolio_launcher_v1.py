@@ -1,5 +1,6 @@
 import unittest
 from collections import Counter
+from unittest.mock import patch
 
 from canonical.runtime import portfolio_multiplex_terminal_instrumentation_v1 as multiplex
 from canonical.runtime import terminal_parent_portfolio_launcher_v1 as launcher
@@ -76,18 +77,59 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
                 "terminal_result": True,
             }
 
-        out = launcher.execute_wave(
-            commitment=COMMITMENT,
-            beacon=BEACON,
-            parent_runner=parent_runner,
-            direct_runner=direct_runner,
-            cad_runner=cad_runner,
-        )
+        with patch.object(
+            launcher.launch_authority,
+            "evaluate",
+            return_value={"launch_authority": True},
+        ):
+            out = launcher.execute_wave(
+                commitment=COMMITMENT,
+                beacon=BEACON,
+                parent_runner=parent_runner,
+                direct_runner=direct_runner,
+                cad_runner=cad_runner,
+            )
         self.assertTrue(out["pass"], out)
         self.assertEqual(parent_calls, Counter({"T0": 1, "T1": 1, "T2": 1, "T3": 1}))
         self.assertEqual(set(direct_calls), set(launcher.DIRECT_PORTFOLIOS))
         self.assertTrue(all(count == 1 for count in direct_calls.values()))
         self.assertEqual(out["shared_direct_route_duplicate_execution_count"], 0)
+
+    def test_launch_authority_guard_blocks_before_any_runner_invocation(self):
+        parent_calls = Counter()
+        direct_calls = Counter()
+
+        def parent_runner(portfolio, **kwargs):
+            parent_calls[portfolio] += 1
+            raise AssertionError("parent runner must not execute without authority")
+
+        def direct_runner(behavior_id, **kwargs):
+            direct_calls[behavior_id] += 1
+            raise AssertionError("direct runner must not execute without authority")
+
+        with patch.object(
+            launcher.launch_authority,
+            "evaluate",
+            return_value={
+                "launch_authority": False,
+                "failed_predicates": ["PARENT_PRODUCER_MISSING:T0"],
+            },
+        ):
+            out = launcher.execute_wave(
+                commitment=COMMITMENT,
+                beacon=BEACON,
+                parent_runner=parent_runner,
+                direct_runner=direct_runner,
+                cad_runner=lambda **kwargs: (_ for _ in ()).throw(
+                    AssertionError("CAD runner must not execute without authority")
+                ),
+            )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED_LAUNCH_NOT_AUTHORIZED")
+        self.assertFalse(out["parent_runner_invoked"])
+        self.assertFalse(out["direct_runner_invoked"])
+        self.assertEqual(parent_calls, Counter())
+        self.assertEqual(direct_calls, Counter())
 
     def test_missing_required_parent_coverage_fails_closed(self):
         receipts = {
@@ -134,13 +176,18 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
                 "terminal_result": True,
             }
 
-        out = launcher.execute_wave(
-            commitment=COMMITMENT,
-            beacon=BEACON,
-            parent_runner=parent_runner,
-            direct_runner=direct_runner,
-            cad_runner=cad_runner,
-        )
+        with patch.object(
+            launcher.launch_authority,
+            "evaluate",
+            return_value={"launch_authority": True},
+        ):
+            out = launcher.execute_wave(
+                commitment=COMMITMENT,
+                beacon=BEACON,
+                parent_runner=parent_runner,
+                direct_runner=direct_runner,
+                cad_runner=cad_runner,
+            )
         self.assertFalse(out["pass"])
         self.assertEqual(out["direct_failures"], [launcher.direct.BROWSER_ID])
 
