@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V4",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREBEACON_EXACT_POST_AUTHORITY_PACKAGE__AWAITING_INDEPENDENT_VERIFICATION__ZERO_TERMINAL_RESULTS",
+  "objective": "Freeze one unambiguous exact terminal execution package before the first post-freeze beacon.",
+  "supersedes_for_execution": [
+    "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V2.json",
+    "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3.json"
+  ],
+  "execution_snapshot": {
+    "repository": "moxnixmdj/brain",
+    "commit_sha": "3757d6777ef0122d21ce1f1ee2e6d6a5e560aeb5",
+    "rule": "TERMINAL_EXECUTION_MUST_CHECK_OUT_EXACT_EXECUTION_SNAPSHOT_COMMIT__LATER_MAIN_BYTES_ARE_NOT_EXECUTION_INPUTS"
+  },
+  "ordered_components": [
+    {
+      "id": "candidate_blob_manifest",
+      "path": "canonical/governance/TERMINAL_V2_CANDIDATE_BLOB_MANIFEST_V2.json",
+      "git_blob_sha": "cb73ac3f52c0aafcfb1f38d52aacac46c2385148",
+      "canonical_json_sha256": "66a493ad9606d0c49dedcdefe6d9252cfbceccbe69393a0086554a0e87bf21ca"
+    },
+    {
+      "id": "evaluator_oracle_manifest",
+      "path": "canonical/governance/TERMINAL_V2_EVALUATOR_ORACLE_MANIFEST_V2.json",
+      "git_blob_sha": "a6aa473e894b993de6b062e38d540b8dd2abe35a",
+      "canonical_json_sha256": "cea6314326a32fbdb8a8e49ffa2f80e4ff019546c922ae46939ee625fed492dd"
+    },
+    {
+      "id": "population_manifest",
+      "path": "canonical/governance/TERMINAL_V2_POPULATION_MANIFEST_V2.json",
+      "git_blob_sha": "462e8f94702f86c7c55a6c0a253304bc0b300243",
+      "canonical_json_sha256": "8333df99b16e93fc8b50772961b0f295cb008cf05cf242e5461541324e1f8086"
+    },
+    {
+      "id": "dependency_manifest",
+      "path": "canonical/governance/TERMINAL_V2_DEPENDENCY_MANIFEST_V2.json",
+      "git_blob_sha": "72834d30c54034eaa75f01f164115753fe7ddb3d",
+      "canonical_json_sha256": "fd39224550d5b9339c1c4c790083a113ba9c2e32c14bca2bd8216059587c7db3"
+    },
+    {
+      "id": "acceptance_rule_manifest",
+      "path": "canonical/governance/TERMINAL_V2_ACCEPTANCE_RULE_MANIFEST_V2.json",
+      "git_blob_sha": "0d6214c149cbf70e996dd4877f51f1d7a27ce3e7",
+      "canonical_json_sha256": "4d0cb82b258798d0ce0d8db32370416e8faa5805eb4d47fa4ddd63ae81d6cbe7"
+    }
+  ],
+  "commitment_encoding": "SHA256(CONCAT(CANONICAL_JSON_UTF8_SORT_KEYS_TRUE_SEPARATORS_COMMA_COLON(component_i)) IN ordered_components order)",
+  "package_commitment": "4c1307e2b144e2a9b5a05c325b991123b06fa33dc073cbaafcad879475f7944f",
+  "prebeacon_invariants": {
+    "all_component_execution_snapshot_commits_identical": true,
+    "post_freeze_beacon": null,
+    "beacon_known_before_freeze": false,
+    "terminal_results_observed": 0,
+    "fresh_terminal_evidence_consumed": 0,
+    "candidate_mutation_after_freeze_allowed": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "independent_verification": null,
+  "verified_for_beacon": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V4_PACKAGE_AND_SNAPSHOT_BINDINGS__ONLY_ON_PASS_CREATE_FIRST_AUTHORIZED_PUBLIC_TERMINAL_RUN_AS_BEACON__EXECUTE_EXACT_SNAPSHOT_ONCE"
+}
