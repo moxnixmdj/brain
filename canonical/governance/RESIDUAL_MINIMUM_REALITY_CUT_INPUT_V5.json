@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V5",
+  "date": "2026-10-02",
+  "status": "FROZEN_FOR_EXACT_SOLVER",
+  "source_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+  "source_universe_blob_sha": "1da11bb0696bed273cdb974bcc5cfc8ac1438cb7",
+  "distinctions": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "already_resolved": [],
+  "observations": [
+    {
+      "id": "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
+      "covers": [
+        "M0A"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "zero_reality_prefix": true
+    },
+    {
+      "id": "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
+      "covers": [
+        "M1A"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "zero_reality_prefix": true
+    },
+    {
+      "id": "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V2",
+      "covers": [
+        "M1B"
+      ],
+      "cost": 0,
+      "action_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json",
+      "zero_reality_prefix": true
+    }
+  ],
+  "cost_model": {
+    "unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_UNIT",
+    "objective": "MINIMIZE_NEW_REALITY_UNITS__THEN_OBSERVATION_COUNT",
+    "semantics": "M0A_AND_M1A_COST_ONE_ONLY_FOR_CONDITIONAL_MATCHED_PARITY_REALITY_AFTER_ZERO_COST_PREFIXES__M1B_V2_FULL_PREFIX_COST_ZERO"
+  },
+  "freeze": {
+    "frozen": true,
+    "rule": "ANY_NEW_ADMISSIBLE_ACTION_CHANGED_COST_CHANGED_OBLIGATION_OR_CHANGED_ACTION_BUNDLE_INVALIDATES_V5"
+  },
+  "new_reality_units_consumed_so_far": 0,
+  "incremental_spend_usd": 0
+}
