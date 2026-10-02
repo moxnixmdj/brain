@@ -1,12 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_ACCEPTANCE_PUBLIC_BAR_CAPABILITY_SOURCE_AUDIT_V2",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__CANONICAL_V6_V3_SUBSTRATE_PROVIDER_DISTINCTION_ENFORCED",
+  "status": "ACTIVE_FAIL_CLOSED__CANONICAL_V7_V3_SUBSTRATE_PROVIDER_DISTINCTION_ENFORCED",
   "objective": "Prevent clean Opus-acceptance benchmark case spend unless the benchmark is ready and the operative candidate is a Brain-internalized capability configuration; allow declared general cognition substrate but forbid hidden target-capability outsourcing.",
   "authority": [
-    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
     "canonical/reasoning/2026-10-02_ACCEPTANCE_CAPABILITY_SOURCE_GATE_SUBSTRATE_CORRECTION_V1.json"
   ],
   "gate": {
