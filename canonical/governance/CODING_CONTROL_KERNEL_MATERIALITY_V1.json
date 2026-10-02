@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_CONTROL_KERNEL_MATERIALITY_V1",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION__ZERO_CAPABILITY_CREDIT",
+  "objective": "Replace the invalid external-model differential with a provider-independent load-bearing Brain control proof.",
+  "invalid_empirical_probe": {
+    "public_runner_pr": 813,
+    "workflow_run_id": 36983229625,
+    "disposition": "INVALID_INFRASTRUCTURE__ALL_PUBLIC_MODEL_CALLS_HTTP_402_PAYMENT_REQUIRED__NO_CODE_OR_CAPABILITY_VERDICT",
+    "acceptance_cases_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "implementation": {
+    "control_kernel": "canonical/runtime/coding_control_kernel_v1.py",
+    "carrier": "canonical/runtime/harbor_brain_agent.py",
+    "tests": "canonical/tests/test_harbor_brain_agent.py",
+    "brain_configuration": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json"
+  },
+  "universal_materiality_claim": {
+    "scope": "TERMINAL_AUTHORIZATION_AND_VERIFICATION_CONTROL",
+    "statement": "For every planner/model proposal, completion is impossible unless Brain-owned deterministic control validates successful verification evidence, diff inspection, acceptance-criterion evidence, and zero known relevant failures. Model output alone has no terminal authority.",
+    "proof_mode": "UNIVERSAL_CONTROL_FLOW_PLUS_FAIL_CLOSED_TESTS",
+    "external_model_calls_required": false,
+    "acceptance_case_content_required": false,
+    "limitations": "Does not itself prove Terminal-Bench performance or whole-family Opus 5.5 acceptance."
+  },
+  "next": "INDEPENDENTLY_VERIFY_EXACT_KERNEL_AND_ADAPTER_BLOBS__THEN_RECONCILE_V3_SOURCE_GATE__NO_TB4_CASE_EXPOSURE_BEFORE_RECONCILIATION",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "fresh_acceptance_cases_consumed": 0
+}
