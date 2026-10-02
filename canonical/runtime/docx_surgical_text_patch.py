@@ -19,10 +19,10 @@ import re
 import shutil
 import zipfile
 
-_PARA_TOKEN_RE = re.compile(r"<w:p(?:\\s[^>]*)?/>|<w:p(?:\\s[^>]*)?>|</w:p>")
-_WT_RE = re.compile(r"<w:t(?:\\s[^>]*)?>([\\s\\S]*?)</w:t>")
+_PARA_TOKEN_RE = re.compile(r"<w:p(?:\s[^>]*)?/>|<w:p(?:\s[^>]*)?>|</w:p>")
+_WT_RE = re.compile(r"<w:t(?:\s[^>]*)?>([\s\S]*?)</w:t>")
 _ALLOWED_PART_RE = re.compile(
-    r"^word/(?:document|comments|footnotes|endnotes|header\\d+|footer\\d+)\\.xml$"
+    r"^word/(?:document|comments|footnotes|endnotes|header\d+|footer\d+)\.xml$"
 )
 
 
@@ -167,9 +167,9 @@ def patch_paragraph_texts_xml(
             text = text.lstrip()
         old_texts.append(text)
 
-    if "\\n".join(old_texts) == new_text:
+    if "\n".join(old_texts) == new_text:
         return entry_xml
-    new_texts = new_text.split("\\n")
+    new_texts = new_text.split("\n")
     if len(new_texts) != len(paras):
         return None
 
@@ -198,7 +198,7 @@ def patch_paragraph_texts_xml(
         if i == 0 and strip_first_para_leading_space:
             text = text.lstrip()
         check.append(text)
-    return out if "\\n".join(check) == new_text else None
+    return out if "\n".join(check) == new_text else None
 
 
 def _sha(data: bytes) -> str:
@@ -278,7 +278,7 @@ def patch_docx_part_paragraph_texts(
         if i == 0 and strip_first_para_leading_space:
             text = text.lstrip()
         verify_text.append(text)
-    if "\\n".join(verify_text) != new_text:
+    if "\n".join(verify_text) != new_text:
         dst.unlink(missing_ok=True)
         return {"status": "FAIL_CLOSED", "reason": "ROUNDTRIP_CONTENT_MISMATCH"}
 
