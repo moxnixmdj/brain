@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_V5_VERIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_RECOMPUTATION_PASS",
+  "input": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V5.json",
+  "verdict": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json",
+  "solver": "canonical/runtime/minimum_reality_cut.py",
+  "workflow_run_id": 36946222915,
+  "conclusion": "success",
+  "verified": {
+    "exact_minimum": true,
+    "selected_observations": [
+      "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
+      "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
+      "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V2"
+    ],
+    "observation_count": 3,
+    "total_cost": 2.0
+  },
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
