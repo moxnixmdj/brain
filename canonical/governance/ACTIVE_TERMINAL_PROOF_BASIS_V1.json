@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_GATE_V2_PASS__ENVELOPE_COMPILER_ACTIVE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -168,11 +168,9 @@
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
       "portfolio": "T2",
-      "proof_state": "INDEPENDENT_TERMINAL_POPULATION_BINDING_PREFLIGHT_PASS__REGISTRY_TERMINAL_ACCEPTANCE_MODE_BINDING_PENDING",
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
       "route_requirement": "ARBITRARY_FINITE_EXPLICIT_TASK_GRAPH_PARTITION_ASSIGNMENT_RESOURCE_EVIDENCE_FANIN_BASELINE_AND_RECEIPT_DRIVEN_REPLAN",
-      "blockers": [
-        "REGISTRY_TERMINAL_ACCEPTANCE_MODE_BINDING_PENDING"
-      ],
+      "blockers": [],
       "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
       "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
       "independent_preflight": "canonical/verification/DELEGATION_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -191,7 +189,9 @@
       "terminal_population_binding": "canonical/runtime/delegation_terminal_population_binding_v1.py",
       "terminal_population_binding_test": "canonical/tests/test_delegation_terminal_population_binding_v1.py",
       "population_binding_verification": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "population_binding_workflow_run_id": 36962042528
+      "population_binding_workflow_run_id": 36962042528,
+      "terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1.json",
+      "prewave_admissible": true
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -226,9 +226,9 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 1,
+  "admissible_frozen_terminal_route_count": 2,
   "execution_authority": false,
-  "next": "CLOSE_NEXT_NONDOMINATED_ACTIVE_TERMINAL_ROUTE_BINDINGS_IN_PARALLEL__PRIORITIZE_ALREADY_PREFLIGHTED_ROUTES__NO_FRESH_TERMINAL_WAVE_BEFORE_12_OF_12_AND_PREQUALIFICATION_PASS",
+  "next": "CLOSE_REMAINING_NONDOMINATED_ACTIVE_TERMINAL_ROUTE_BINDINGS_IN_PARALLEL__PRIORITIZE_ALREADY_PREFLIGHTED_ROUTES__NO_FRESH_TERMINAL_WAVE_BEFORE_12_OF_12_AND_PREQUALIFICATION_PASS",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
