@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V2_POPULATION_MANIFEST_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREBEACON_EXACT_CURRENT",
+  "zero_terminal_results": true,
+  "post_freeze_beacon_known": false,
+  "incremental_spend_usd": 0,
+  "role": "Freeze all selection/population roots before the unpredictable post-freeze beacon.",
+  "bindings": {
+    "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1",
+    "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json": "a636d1292e6f92d240fab420a9ee75ced7a05104",
+    "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "d1dc7f28738ba24a3ca5919755e03190fbf30939",
+    "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
+    "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+    "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "a7015b12f55fc971233f9fdddf59d50cfc43892b",
+    "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json": "b1f712d61bfa6ad0c77fd55ce909664df3c97c5f",
+    "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "5212f5996dbc83e87a308b8c9d9d1d9ed3da5aab",
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+  },
+  "selection_rule": "Use only frozen per-contract sample counts/source pools/selectors. Derive post-freeze case identities from package commitment plus beacon. No adaptive selection, replacement, or tuning replay."
+}
