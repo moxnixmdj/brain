@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  compile:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: .
@@ -26,13 +26,40 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Compile runtimes
-        run: |
+      - run: |
           python -m py_compile canonical/runtime/acceptance_ir_compiler_v1.py
           python -m py_compile canonical/runtime/proof_fixed_point_saturator_v1.py
           python -m py_compile canonical/runtime/minimum_terminal_cut_solver_v1.py
-      - name: Run deterministic tests
-        run: |
-          python canonical/tests/test_acceptance_ir_compiler_v1.py
-          python canonical/tests/test_proof_fixed_point_saturator_v1.py
-          python canonical/tests/test_minimum_terminal_cut_solver_v1.py
+
+  test_acceptance_ir:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python canonical/tests/test_acceptance_ir_compiler_v1.py
+
+  test_fixed_point:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python canonical/tests/test_proof_fixed_point_saturator_v1.py
+
+  test_terminal_cut:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python canonical/tests/test_minimum_terminal_cut_solver_v1.py
