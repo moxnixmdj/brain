@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M1B_COMPLETENESS_REOPENED_AFTER_AUTHORITY_AUDIT__NOT_FROZEN",
+  "status": "FROZEN_COMPLETE_ACTION_BUNDLES__V4_EXACT_CUT_READY__ZERO_CAPABILITY_CREDIT",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -182,8 +182,8 @@
     },
     "M1B": {
       "status": "OPEN",
-      "complete_action_bundle": false,
-      "candidate_action": "REBUILD_M1B_FROM_CURRENT_VERIFIED_MECHANISMS",
+      "complete_action_bundle": true,
+      "candidate_action": "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V1",
       "new_reality_units": 0,
       "dependency_depth": 1,
       "scope": "IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_SUBVOXEL_TOLERANCE_BOUNDED_DETERMINISTIC_ROUTE",
@@ -196,7 +196,8 @@
       "uncovered": [
         "IDENTIFIABLE_CONTINUOUS_CURVE_AND_SURFACE_GEOMETRY_NOT_YET_PROVEN_BY_CURRENT_EXECUTABLE_COMPILER",
         "SUBVOXEL_DIMENSION_AND_TOLERANCE_SEMANTICS_NOT_YET_PROVEN_END_TO_END"
-      ]
+      ],
+      "complete_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V1.json"
     }
   },
   "rules": [
@@ -207,15 +208,14 @@
     "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
     "RUN_EXACT_FROZEN_UNIVERSE_COMPILER_ONLY_AFTER_ALL_TERMINALLY_NECESSARY_RESIDUALS_HAVE_AT_LEAST_ONE_ADMISSIBLE_COMPLETE_BUNDLE"
   ],
-  "exact_cut_ready": false,
-  "blocking_obligations": [
-    "M1B"
-  ],
+  "exact_cut_ready": true,
+  "blocking_obligations": [],
   "nonblocking_ready_obligation": [
     "M0A",
-    "M1A"
+    "M1A",
+    "M1B"
   ],
-  "next": "BUILD_VERIFY_AND_FREEZE_CURRENT_M1B_CONTINUOUS_GEOMETRY_AND_TOLERANCE_ACTION_BUNDLE__THEN_RECOMPUTE_EVIDENCE_SATURATION_AND_EXACT_RESIDUAL_CUT",
+  "next": "RUN_EXACT_RESIDUAL_MINIMUM_REALITY_CUT_V4__EXECUTE_ZERO_REALITY_PREFIXES__RECOMPUTE_BEFORE_ANY_FRESH_MATCHED_EVALUATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -223,7 +223,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M0A and M1A complete action bundles refreshed to latest verified frontier; V2 cut superseded; universe frozen for V3 exact solver.",
+    "note": "M1B current continuous geometry and tolerance action bundle frozen; all three shared residuals now have complete self-contained action bundles; ready for V4 exact cut.",
     "supersedes": "canonical/governance/RESIDUAL_CUT_RECONCILIATION_V1.json"
   }
 }
