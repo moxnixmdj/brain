@@ -93,14 +93,15 @@
       "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
       "known_required_surfaces": [
         "Humanity's Last Exam with tools >=67.7%",
-        "Terminal-Bench-Science 0.1 >=58.7%",
-        "Vals MysteryMechanism >=49.55% for represented scope"
+        "Terminal-Bench-Science 0.1 >=58.7%"
       ],
       "blockers": [
         "TERMINAL_BENCH_SCIENCE_0_1_PUBLIC_ROUTE_EXISTS__RESOURCE_AND_BRAIN_ADAPTER_PREFLIGHT_NOT_YET_FROZEN",
         "HLE_DATA_AND_CORE_EVAL_ARE_PUBLIC__EXACT_WITH_TOOLS_ROUTE_EQUIVALENCE_NOT_YET_FROZEN",
-        "VALS_MYSTERYMECHANISM_IS_PROPRIETARY__FREEZE_SCOPE_EQUIVALENT_ABSOLUTE_UNKNOWN_DOMAIN_PROOF_OR_REMAIN_BLOCKED",
         "UNKNOWN_DOMAIN_TOOL_TRANSFER_AND_ABSTENTION_LEAVES_REQUIRE_EXPLICIT_SCOPE_AUDIT"
+      ],
+      "reference_only_deleted_surfaces": [
+        "Vals MysteryMechanism >=49.55% (background reference only; required execution route deleted by verified behavioral-route dominance)"
       ]
     }
   },
@@ -196,7 +197,8 @@
     "private_brain_actions_runner_currently_unusable_for_new_checks": "RUNNER_NOT_ASSIGNED__PUBLIC_VERIFICATION_CAPSULE_ROUTE_USED",
     "livebench_spacy_dead_dependency_deleted": true,
     "independent_verifier_failover_installed": true,
-    "public_runner_exact_blob_binding_verified": true
+    "public_runner_exact_blob_binding_verified": true,
+    "mysterymechanism_required_route_deleted_by_verified_dominance": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -219,5 +221,6 @@
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "finite_population_proof_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "private_surface_dependency_deletion_map": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
-  "independent_verification_carrier_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json"
+  "independent_verification_carrier_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json",
+  "private_surface_dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V1.json"
 }
