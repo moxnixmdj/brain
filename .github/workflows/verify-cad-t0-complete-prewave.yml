@@ -18,13 +18,27 @@ on:
 permissions:
   contents: read
 jobs:
-  verify:
+  population_oracle:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_cad_t0_geometry_population_and_oracle canonical.tests.test_cad_t0_prewave_binding_guard
+        with: {python-version: "3.11"}
+      - run: python -m unittest -v canonical.tests.test_cad_t0_geometry_population_and_oracle
+  guard_unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: python -m unittest -v canonical.tests.test_cad_t0_prewave_binding_guard
+  guard_live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
       - run: python canonical/runtime/cad_t0_prewave_binding_guard.py .
