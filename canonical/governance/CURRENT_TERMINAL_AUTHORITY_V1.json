@@ -107,7 +107,7 @@
     },
     "terminal_projection_consistency": {
       "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json",
-      "governance_git_blob_sha": "2ca1be79d8183602eac4ffbdf0765c063772f6d6",
+      "governance_git_blob_sha": "0b1db563c7f1c1d0bc90fca025b8576f24d09378",
       "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
       "runtime_git_blob_sha": "3393dbecc7e02cba444ce05fc327d5d6fcf01a1c",
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
@@ -115,7 +115,8 @@
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
       "workflow_git_blob_sha": "7c7e03a1e771d5fda0a280a01b042c058fb8eb8a",
       "status": "ACTIVE_FAIL_CLOSED__P1_SCOPE_RESTORED__2_OF_19__7_OF_38__12_OF_12_CONTRACTS__19_OF_19_PROVISIONAL_BEHAVIORAL_ROWS",
-      "git_blob_sha": "0b1db563c7f1c1d0bc90fca025b8576f24d09378"
+      "git_blob_sha": "0b1db563c7f1c1d0bc90fca025b8576f24d09378",
+      "path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json"
     },
     "acceptance_residual_verdict_v10": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
