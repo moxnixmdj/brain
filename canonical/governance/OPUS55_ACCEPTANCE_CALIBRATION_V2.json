@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_CALIBRATION_V2",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
+  "objective": "Calibrate behavioral terminal passes against effective unchanged frozen Opus55 protocol results, allowing only independently admissible full-protocol stronger witnesses accepted by the existing proof transmuter.",
+  "runtime": "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py",
+  "tests": "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py",
+  "inputs": {
+    "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "frozen_protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "behavioral_reduction": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+    "transmutation_input": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json",
+    "transmuter": "canonical/runtime/acceptance_proof_transmuter_v1.py"
+  },
+  "hard_rules": [
+    "FROZEN_PROTOCOL_DEFINITIONS_ARE_NOT_MUTATED",
+    "BEHAVIORAL_PASS_REMAINS_REQUIRED",
+    "STRONGER_WITNESS_COUNTS_ONLY_IF_EXISTING_FAIL_CLOSED_TRANSMUTER_RETURNS_PROTOCOL_PASS",
+    "NO_CALIBRATION_FROM_PARTIAL_SCOPE_EVIDENCE",
+    "NO_TERMINAL_REPLAY",
+    "OUTPUT_GRANTS_ZERO_EXECUTION_PROMOTION_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "expected_current_result": {
+    "behavioral_pass_family_count": 19,
+    "acceptance_calibrated_family_count": 3,
+    "acceptance_pending_family_count": 16,
+    "newly_effective_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "terminal_goal_acceptance_closed": false
+  },
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
