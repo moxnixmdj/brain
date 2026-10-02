@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_AST_V2_REPAIRED_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__REPAIRED_POST_FAILURE_BLOBS__300_OF_300_CROSS_GRAMMAR__ZERO_TERMINAL_AUTHORITY",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "prior_failed_run": 36962920695,
+  "exact_brain_blobs": {
+    "candidate": "7623f68bab3c1b207e237389841a4b688e509ff3",
+    "independent_proof": "19f522501a3f89179f80d90800d0f18b40d23627",
+    "tests": "46a4d1138af70a9a34ab490a20db56ad019c5fdd"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 620,
+    "head_sha": "9dec754a85380a4249667169bd43079f5dbfc60b",
+    "merge_commit": "c8c0a19d6afef578f1c3ed893a0add0d67ebe7ec",
+    "workflow_run_id": 36963450023,
+    "conclusion": "success"
+  },
+  "verified": [
+    "300_OF_300_RANDOMIZED_CROSS_GRAMMAR_CASES_PASS",
+    "REGULATED_STANDARD_STRESS_100_OF_100_EACH",
+    "FULL_CLAIMED_OPERATOR_COVERAGE",
+    "CANDIDATE_INDEPENDENT_FROM_PROOF_MODULE",
+    "FLOATING_RECONSTRUCTION_REGRESSION_115_PASS",
+    "WRONG_OUTPUT_REJECTED_BY_INDEPENDENT_ORACLE",
+    "DIMENSION_BRANCH_LINEAGE_EXCLUSION_INVARIANT_AND_UNSUPPORTED_OPERATION_GATES_LOAD_BEARING"
+  ],
+  "limitations": [
+    "PREFLIGHT_NOT_TERMINAL_RESULT",
+    "RANDOMIZED_POPULATION_IS_NOT_EXHAUSTIVE_PROOF_OF_INFINITE_RECURSIVE_GRAMMAR",
+    "SEMANTIC_EXTRACTION_OF_UNSTATED_RULES_IS_OUTSIDE_THIS_BEHAVIOR_CONTRACT"
+  ],
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
