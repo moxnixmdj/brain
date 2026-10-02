@@ -49,6 +49,19 @@ def evaluate(cand:Mapping[str,Any],suites:Mapping[str,Any],wave:Mapping[str,Any]
   req=next((x for x in t.get("metric_requirements",[]) if isinstance(x,Mapping) and x.get("metric")==METRIC),None)
  if not isinstance(req,Mapping) or req.get("direction")!="higher" or req.get("threshold")!=0: e.append("TARGET_METRIC_REQUIREMENT_MISMATCH")
 
+ # Scope firewall: a global metric ceiling does not transport a Brain lower bound
+ # from one evaluated population to another. The source performance population must
+ # independently cover the frozen matched target population.
+ sf=cand.get("scope_firewall")
+ if not isinstance(sf,Mapping):
+  e.append("SOURCE_TARGET_SCOPE_FIREWALL_MISSING")
+ else:
+  relation=sf.get("verified_source_to_target_relation")
+  if relation not in {"EXACT","SUPERSET"}:
+   e.append("SOURCE_SCOPE_NOT_PROVED_EXACT_OR_SUPERSET_OF_TARGET_SCOPE")
+  if sf.get("independent_verification") is not True or not isinstance(sf.get("verification_receipt"),str) or not sf.get("verification_receipt"):
+   e.append("SOURCE_TARGET_SCOPE_RELATION_NOT_INDEPENDENTLY_VERIFIED")
+
  parent=wave.get("reduction_input",{}).get("wave",{}).get("parent_portfolio_receipts",{})
  for tier in ("T1","T3"):
   hits=[x for x in parent.get(tier,[]) if isinstance(x,Mapping) and x.get("behavior_id")==BEHAVIOR]
