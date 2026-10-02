@@ -1,0 +1,63 @@
+name: Verify LiveBench IF Candidate
+on:
+  push:
+    branches:
+      - prewave-livebench-if-verifier-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NLTK_DATA: ${{ runner.temp }}/nltk_data
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned Python candidate stack
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/nltk.whl https://github.com/nltk/nltk/releases/download/v3.10.3/nltk-3.10.3-py3-none-any.whl
+          echo "140d520a40adcababab9963fcebcf37b5b520d2d326cf02fe11e9d3fb385cee7  /tmp/nltk.whl" | sha256sum -c -
+          python -m pip install /tmp/nltk.whl
+          python -m pip install "git+https://github.com/carpedm20/emoji.git@d5d59d591f8590ada989f0bdf31603b3fe84e103"
+          python -m pip install "git+https://github.com/mholtzscher/syllapy.git@f8ab6cab87082537f5df564f2a2cae8065504780"
+
+      - name: Materialize pinned NLTK data
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nltk_data_repo
+          git clone --filter=blob:none --no-checkout https://github.com/nltk/nltk_data.git /tmp/nltk_data_repo
+          cd /tmp/nltk_data_repo
+          git checkout 550b6625bcef1f2abff2ff770a5a0d272c9c6b2a --             packages/tokenizers/punkt.zip             packages/tokenizers/punkt_tab.zip             packages/corpora/stopwords.zip             packages/taggers/averaged_perceptron_tagger.zip             packages/taggers/averaged_perceptron_tagger_eng.zip
+          test "$(git hash-object packages/tokenizers/punkt.zip)" = "da7ffbd1e6fd6cc5c2f6879c2d4da23c7691944c"
+          test "$(git hash-object packages/tokenizers/punkt_tab.zip)" = "5e5ff6137d5ee6025e400d1c3a7b21914c48b635"
+          test "$(git hash-object packages/corpora/stopwords.zip)" = "56d35b5d204d64480f71edc0f5f82aebce6730b6"
+          test "$(git hash-object packages/taggers/averaged_perceptron_tagger.zip)" = "d5bfb6852aa5d288c8f33b3f0ef0fde343afa405"
+          test "$(git hash-object packages/taggers/averaged_perceptron_tagger_eng.zip)" = "b792e19546a5711218a05f4029ef17c8d62cd839"
+          mkdir -p "$NLTK_DATA/tokenizers" "$NLTK_DATA/corpora" "$NLTK_DATA/taggers"
+          unzip -q packages/tokenizers/punkt.zip -d "$NLTK_DATA/tokenizers"
+          unzip -q packages/tokenizers/punkt_tab.zip -d "$NLTK_DATA/tokenizers"
+          unzip -q packages/corpora/stopwords.zip -d "$NLTK_DATA/corpora"
+          unzip -q packages/taggers/averaged_perceptron_tagger.zip -d "$NLTK_DATA/taggers"
+          unzip -q packages/taggers/averaged_perceptron_tagger_eng.zip -d "$NLTK_DATA/taggers"
+
+      - name: Run synthetic non-terminal verifier smoke tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_livebench_if_candidate_smoke.py
+
+      - name: Record resolved environment
+        shell: bash
+        run: |
+          python -m pip freeze

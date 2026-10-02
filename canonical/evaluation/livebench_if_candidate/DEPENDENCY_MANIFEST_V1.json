@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_HERMETIC_CANDIDATE_MANIFEST_V1",
+  "date": "2026-10-02",
+  "status": "ISOLATED_CANDIDATE__NO_TERMINAL_CASE_DATA__NO_CAPABILITY_CREDIT",
+  "upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "source_blobs": {
+      "evaluation_lib.py": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+      "instructions.py": "02b2dfeb50f036b89bec3df34522c73f756d8f44",
+      "instructions_registry.py": "adfed4832877566e62970257b50c6fa32c302fb2",
+      "instructions_util.py": "21b13c7fcfc2c2de01e80c9e7dd222b9bca81342",
+      "LICENSE": "f49a4e16e68b128803cc2dcea614603632b04eac"
+    }
+  },
+  "candidate_runtime": {
+    "python": "3.12",
+    "nltk": {
+      "version": "3.10.3",
+      "commit": "303f6e2ba8e4548a5f54fd65d86bb5c9a949f1db",
+      "wheel_sha256": "140d520a40adcababab9963fcebcf37b5b520d2d326cf02fe11e9d3fb385cee7"
+    },
+    "emoji": {
+      "version": "2.16.0",
+      "commit": "d5d59d591f8590ada989f0bdf31603b3fe84e103"
+    },
+    "syllapy": {
+      "version": "0.8.0",
+      "commit": "f8ab6cab87082537f5df564f2a2cae8065504780"
+    },
+    "nltk_data": {
+      "commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2a",
+      "blobs": {
+        "packages/tokenizers/punkt.zip": "da7ffbd1e6fd6cc5c2f6879c2d4da23c7691944c",
+        "packages/tokenizers/punkt_tab.zip": "5e5ff6137d5ee6025e400d1c3a7b21914c48b635",
+        "packages/corpora/stopwords.zip": "56d35b5d204d64480f71edc0f5f82aebce6730b6",
+        "packages/taggers/averaged_perceptron_tagger.zip": "d5bfb6852aa5d288c8f33b3f0ef0fde343afa405",
+        "packages/taggers/averaged_perceptron_tagger_eng.zip": "b792e19546a5711218a05f4029ef17c8d62cd839"
+      }
+    }
+  },
+  "dead_dependency_elimination": {
+    "spacy": "UPSTREAM_IMPORT_AND_EN_CORE_WEB_SM_DOWNLOAD_HAVE_ZERO_CHECKER_REFERENCES__STUBBED_ONLY_IN_ADAPTER__UPSTREAM_SOURCE_BYTES_UNMODIFIED"
+  },
+  "test_scope": [
+    "REGISTRY_COUNT",
+    "WORD_COUNT_RANGE",
+    "STOPWORD_PERCENTAGE_LOCAL_RESOURCE",
+    "NGRAM_OVERLAP",
+    "POS_TAGGER_START_WITH_VERB",
+    "EMOJI_SENTENCE",
+    "SYLLABLE_PARITY",
+    "EVALUATION_LIB_END_TO_END_SYNTHETIC_INPUT"
+  ],
+  "limitations": [
+    "NOT_A_58_CHECKER_COMPLETE_MUTATION_PREFLIGHT",
+    "NOT_IFBENCH_DATASET_BINDING",
+    "NOT_TERMINAL_SCORE",
+    "NOT_EXECUTION_AUTHORITY"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0
+}
