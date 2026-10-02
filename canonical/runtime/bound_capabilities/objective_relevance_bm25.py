@@ -41,6 +41,85 @@ def _focus(objective):
         return None
     return result
 
+def _decision_role_focus(objective):
+    """Recover bounded explicit comparison roles from the already-verified binder.
+
+    This is an admission aid, not semantic truth.  It only applies when the
+    objective is inside the binder's verified explicit binary-comparison
+    grammar. Unsupported/ambiguous objectives fall back to lexical ranking.
+    """
+    path=pathlib.Path(__file__).resolve().with_name("objective_claim_operand_binding.py")
+    spec=importlib.util.spec_from_file_location("project_brain_objective_claim_role_relevance",path)
+    if spec is None or spec.loader is None:
+        return None
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    parsed,reason=module._parse_objective(objective)
+    if reason or not parsed or parsed.get("mode")!="NUMERIC_RELATION":
+        return None
+
+    left=_tokens(parsed.get("left_entity"))
+    right=_tokens(parsed.get("right_entity"))
+    if not left or not right:
+        return None
+    right_set=set(right)
+    shared=[x for x in left if x in right_set]
+
+    # Common tokens are the safest bounded proxy for the measured property.
+    # For asymmetric "PROPERTY of ENTITY vs ENTITY" wording, recover the
+    # explicit pre-"of" property phrase when the two sides share no tokens.
+    if not shared:
+        m=re.match(r"^(.+?)\\s+of\\s+(.+)$",_canon(parsed.get("left_entity")),re.I)
+        if m:
+            shared=_tokens(m.group(1))
+
+    property_tokens=list(dict.fromkeys(shared))
+    prop=set(property_tokens)
+    left_operand=[x for x in left if x not in prop] or left
+    right_operand=[x for x in right if x not in prop] or right
+    return {
+        "operator":parsed.get("operator"),
+        "property_tokens":property_tokens,
+        "left_operand_tokens":left_operand,
+        "right_operand_tokens":right_operand,
+        "claim_scope":"BOUNDED_EXPLICIT_COMPARISON_ROLE_ANCHORS_ONLY",
+    }
+
+def _coverage(required, observed):
+    req=list(dict.fromkeys(required or []))
+    obs=set(observed or [])
+    hits=[x for x in req if x in obs]
+    need=0 if not req else max(1,(len(req)+1)//2)
+    return {
+        "required_tokens":req,
+        "matched_tokens":hits,
+        "required_match_count":need,
+        "verified":len(hits)>=need,
+    }
+
+def _decision_role_coverage(role_focus,doc_tokens):
+    if not role_focus:
+        return None
+    prop=_coverage(role_focus.get("property_tokens"),doc_tokens)
+    left=_coverage(role_focus.get("left_operand_tokens"),doc_tokens)
+    right=_coverage(role_focus.get("right_operand_tokens"),doc_tokens)
+    # If the explicit relation exposes a property phrase, a source must anchor
+    # that property plus at least one applicable operand. Generic subject
+    # overlap alone is insufficient.
+    property_ok=prop["verified"] if prop["required_tokens"] else True
+    roles=[]
+    if property_ok and left["verified"]:
+        roles.append("LEFT")
+    if property_ok and right["verified"]:
+        roles.append("RIGHT")
+    return {
+        "property":prop,
+        "left_operand":left,
+        "right_operand":right,
+        "applicable_roles":roles,
+        "verified":bool(roles),
+    }
+
 def _candidate_text(candidate):
     c=dict(candidate or {})
     title=_canon(c.get("title"))
@@ -123,15 +202,21 @@ def rank(objective,candidates,limit=None):
 
     docs=[_tokens(_candidate_text(c)) for c in candidates]
     scored=_bm25_scores(q,docs)
+    role_focus=_decision_role_focus(objective)
     rows=[]
-    for index,(candidate,(score,parts)) in enumerate(zip(candidates,scored)):
-        rows.append({
+    for index,(candidate,(score,parts),doc_tokens) in enumerate(zip(candidates,scored,docs)):
+        row={
             "original_index":index,
             "candidate":candidate,
             "lexical_relevance_score":round(float(score),12),
             "matched_terms":sorted(parts),
             "term_contributions":{k:round(float(v),12) for k,v in sorted(parts.items())},
-        })
+        }
+        if role_focus:
+            rc=_decision_role_coverage(role_focus,doc_tokens)
+            row["decision_role_coverage"]=rc
+            row["decision_role_admitted"]=bool(rc and rc.get("verified"))
+        rows.append(row)
     rows.sort(key=lambda x:(-x["lexical_relevance_score"],x["original_index"]))
     positive=[x for x in rows if x["lexical_relevance_score"]>0]
     if not positive:
@@ -142,8 +227,28 @@ def rank(objective,candidates,limit=None):
             "query_tokens":q,
             "ranked_candidates":rows,
         }
-    top=positive[0]
+    eligible=positive
+    if role_focus:
+        eligible=[x for x in positive if x.get("decision_role_admitted") is True]
+        if not eligible:
+            return {
+                **base,
+                "status":"RELEVANCE_UNRESOLVED",
+                "reason":"NO_DECISION_ROLE_COMPLETE_CANDIDATE",
+                "query_tokens":q,
+                "query_focus":focus,
+                "decision_role_focus":role_focus,
+                "ranked_candidates":rows,
+            }
+    top=eligible[0]
     admission=_top_candidate_admission(q,top.get("matched_terms") or [])
+    if role_focus:
+        admission={
+            **admission,
+            "method":"FOCUSED_QUERY_TOKEN_COVERAGE_PLUS_DECISION_ROLE_ANCHORS_V1",
+            "decision_role_verified":top.get("decision_role_admitted") is True,
+            "verified":bool(admission.get("verified") and top.get("decision_role_admitted") is True),
+        }
     if limit is not None:
         rows=rows[:max(1,min(int(limit),len(rows)))]
     return {
@@ -152,12 +257,16 @@ def rank(objective,candidates,limit=None):
         "verification_method":"DETERMINISTIC_BM25",
         "query_tokens":q,
         "query_focus":focus,
+        "decision_role_focus":role_focus,
         "candidate_count":len(candidates),
         "positive_relevance_count":len(positive),
         "ranked_candidates":rows,
         "top_candidate_original_index":top["original_index"],
         "top_candidate_admission":admission,
-        "admission_claim_scope":"BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY",
+        "admission_claim_scope":(
+            "BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_PLUS_EXPLICIT_DECISION_ROLE_ANCHORS"
+            if role_focus else "BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY"
+        ),
         "output_verified":True,
     }
 

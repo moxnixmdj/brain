@@ -1,0 +1,35 @@
+name: Verify M4 decision-role relevance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/bound_capabilities/objective_relevance_bm25.py
+      - canonical/runtime/bound_capabilities/objective_claim_operand_binding.py
+      - canonical/runtime/bound_capabilities/research_query_focus.py
+      - canonical/tests/test_open_research_query_focus_relevance.py
+      - .github/workflows/verify-m4-decision-role-relevance.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/bound_capabilities/objective_relevance_bm25.py
+      - canonical/runtime/bound_capabilities/objective_claim_operand_binding.py
+      - canonical/runtime/bound_capabilities/research_query_focus.py
+      - canonical/tests/test_open_research_query_focus_relevance.py
+      - .github/workflows/verify-m4-decision-role-relevance.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run decision-role relevance regressions
+        run: PYTHONPATH=. python canonical/tests/test_open_research_query_focus_relevance.py
