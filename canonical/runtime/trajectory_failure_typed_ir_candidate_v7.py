@@ -228,7 +228,7 @@ def solve(public_case: Mapping[str, Any]) -> dict[str, Any]:
             "mechanism_by_action": {d["action_id"]: d["mechanism_classes"] for d in details},
             "supporting_receipts": sorted({e for d in details for e in d["supporting_receipts"]}),
             "repair_targets": sorted({r for d in details for r in d["repair_targets"]}),
-            "reason": "MULTIPLE_ROOT_VIOLATIONS_JOIN_UNDER_VISIBLE_CONJUNCTIVE_DEPENDENCY",
+            "reason": "MULTIPLE_DIRECT_CONTRACT_DEFECTS_REQUIRE_JOINT_REPAIR_ON_TERMINAL_CAUSAL_SLICE",
         }
 
     return {
