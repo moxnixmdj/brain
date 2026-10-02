@@ -58,6 +58,13 @@ def validate(root: Path) -> dict:
         if selector.get(key) is not False:
             errors.append(f"SELECTOR_{key.upper()}_NOT_FALSE")
 
+    if selector.get("protocol")!="GLOBAL_TERMINAL_SELECTION_KERNEL_V1":
+        errors.append("SELECTOR_PROTOCOL_NOT_IMMUTABLE_KERNEL")
+    sel_sem=binding.get("selection_semantics") or {}
+    kernel=(binding.get("exact_bound_blobs") or {}).get("selection_kernel") or {}
+    if sel_sem.get("kernel")!=kernel.get("path") or sel_sem.get("kernel_blob_sha")!=kernel.get("blob_sha"):
+        errors.append("SELECTION_KERNEL_BINDING_MISMATCH")
+
     info=binding.get("information_boundary") or {}
     hidden=set(info.get("hidden_from_candidate") or [])
     if "ACTUAL_TOOL_CAPABILITY_MATRIX" not in hidden or "LEAST_COST_CAPABLE_ROUTE" not in hidden:
