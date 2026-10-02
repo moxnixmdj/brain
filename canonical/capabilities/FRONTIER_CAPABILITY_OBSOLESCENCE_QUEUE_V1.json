@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "EXACT_FOUR_PORTFOLIO_PUBLIC_SURFACE_PREFLIGHTS_REMAIN__PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_AND_SCOPE_EQUIVALENCE_BINDINGS_ONLY",
+    "exact_blocker": "GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_INDEPENDENT_VERIFICATION_PENDING__V3_SCOPE_MAPPING_INVALIDATED",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "CLOSE_ONLY_SURVIVING_PUBLIC_SURFACE_BINDINGS__TERMINAL_BENCH_4_AND_SCIENCE_PER_CASE_BRAIN_ADAPTER_RESOURCE__GDPVAL_PUBLIC_SCOPE__CHARTOGRAPHY_SCORER_TOOL_EQUIVALENCE__AUTOMATIONBENCH_PUBLIC_SCOPE__OSWORLD_SCOPE_EQUIVALENT_OR_ASSET_ROUTE__HLE_WITH_TOOLS_EQUIVALENCE__THEN_DERIVE_T0_T1_T2_T3_PARALLEL_AUTHORITY",
+    "next_action": "INDEPENDENTLY_VERIFY_CORRECTED_V4_DOMINANCE__THEN_RECOMPUTE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_WITH_REPLACEMENT_DIRECT_PROOF_POPULATIONS__NO_TERMINAL_EXECUTION_BEFORE_PASS",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -242,6 +242,11 @@
       "finance_index_component_routes": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
       "t3_unknown_domain_scope": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
       "provider_dependency_cleanliness": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json"
+    },
+    "global_surface_dominance_correction": {
+      "invalidation": "canonical/governance/GLOBAL_SURFACE_DOMINANCE_V3_SCOPE_MAPPING_INVALIDATION_V1.json",
+      "v4_input": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V4.json",
+      "v4_independent_verification": "PENDING"
     }
   },
   "promotion_claim": false,
