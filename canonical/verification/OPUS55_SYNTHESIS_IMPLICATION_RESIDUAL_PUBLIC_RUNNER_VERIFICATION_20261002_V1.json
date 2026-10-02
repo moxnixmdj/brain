@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SYNTHESIS_RESIDUAL_ONE_ATOM_PLUS_TWO_NUMERIC_BOUNDS__ZERO_CREDIT",
+  "exact_brain_blobs": {
+    "canonical/governance/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_INPUT_V1.json": "7b759ffeb482f414b75e17bce1055c7ba04c315b",
+    "canonical/runtime/synthesis_implication_residual_verifier_v1.py": "cb82aa0bc95577ac7f458d43c8af29aae6000abe",
+    "canonical/tests/test_synthesis_implication_residual_v1.py": "5c1aef911bebe64cd9b4cb9368166653d02c5d36",
+    "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json": "515f24f3000218d324be4a7c774b42f790a6ebaa",
+    "canonical/governance/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_CANDIDATE_V1.json": "a988b6fa4baf1d753f709c757c97f17185181f0a",
+    "canonical/verification/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "64ad40c1c10bd01e4c0f4418fac29efafea838fc",
+    "canonical/runtime/protocol_implication_scope_algebra_v1.py": "bee693051d043a5438571fd3435733e4878d0002"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 918,
+    "pull_request_head": "c4e2145e3358fac0e9a9702fb7ddda2a3e07cb17",
+    "merge_commit": "f385443b4ae599767e29449dcf59d32813771acc",
+    "workflow_run_id": 37014529463,
+    "workflow_job_id": 110862035113,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_TARGET_ROW_RECOMPUTED",
+    "EXACT_SEVEN_VERIFIED_WITNESS_ATOMS_ADMITTED",
+    "ZERO_NUMERIC_METRIC_BOUNDS_ADMITTED",
+    "ZERO_UNVERIFIED_IMPLICATION_EDGES_ADMITTED",
+    "PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_RECOMPUTED",
+    "EXACT_MISSING_ATOM_METRIC_MATCHED_QUALITY",
+    "EXACT_TWO_MISSING_NUMERIC_BOUNDS_MATCHED_QUALITY_AND_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY",
+    "INVENTED_BOUND_EDGE_OR_TARGET_MUTATION_FAILS_CLOSED",
+    "ZERO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "result": {
+    "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "proved_atom_count": 7,
+    "missing_atoms": [
+      "metric:matched_quality"
+    ],
+    "missing_metric_bounds": [
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ],
+    "implies_target": false
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
