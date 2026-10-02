@@ -283,7 +283,7 @@
           "falsifiable": true,
           "hidden_from_candidate": true,
           "terminal_load_bearing": true,
-          "existing_evidence": "NEW_TERMINAL_OBJECTIVE_ORACLE_COMPONENT_REQUIRED"
+          "existing_evidence": "canonical/runtime/tool_discovery_information_safe_proof.py"
         },
         {
           "id": "CORRECT_NO_ROUTE_ESCALATION",
@@ -345,7 +345,7 @@
           "falsifiable": true,
           "hidden_from_candidate": true,
           "terminal_load_bearing": true,
-          "existing_evidence": "NEW_TERMINAL_OBJECTIVE_ORACLE_COMPONENT_REQUIRED"
+          "existing_evidence": "canonical/runtime/research_control_information_safe_proof.py"
         },
         {
           "id": "PROVENANCE_PRESERVATION",
@@ -372,7 +372,7 @@
           "falsifiable": true,
           "hidden_from_candidate": true,
           "terminal_load_bearing": true,
-          "existing_evidence": "NEW_TERMINAL_OBJECTIVE_ORACLE_COMPONENT_REQUIRED"
+          "existing_evidence": "canonical/runtime/research_control_information_safe_proof.py"
         },
         {
           "id": "SUFFICIENCY_AND_STOP_CALIBRATION",
@@ -397,7 +397,7 @@
       "weaker_comparator_dependency": "HLE_CANONICAL_CONTENT_ACCESS_AT_ZERO_INCREMENTAL_SPEND_AS_REQUIRED_PROOF_ROUTE",
       "route_gates": {
         "candidate_package_frozen": true,
-        "executable_evaluator_bound": false,
+        "executable_evaluator_bound": true,
         "population_or_source_pool_frozen": false,
         "information_boundary_frozen": true,
         "post_freeze_selector_frozen": false,
