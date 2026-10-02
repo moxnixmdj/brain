@@ -65,3 +65,5 @@ jobs:
           assert authority.get("terminal_results_observed",0) == 0, authority
           assert authority.get("fresh_terminal_evidence_consumed",0) == 0, authority
           PY
+
+# trigger: exact-current SA-CCR launcher and hardened reducer reverify v3
