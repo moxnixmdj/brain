@@ -1,0 +1,26 @@
+name: Verify contract-native proof suites
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/contract_native_proof_suites.py
+      - canonical/tests/test_contract_native_proof_suites.py
+      - .github/workflows/verify-contract-native-proof-suites.yml
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/contract_native_proof_suites.py
+      - canonical/tests/test_contract_native_proof_suites.py
+      - .github/workflows/verify-contract-native-proof-suites.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_contract_native_proof_suites
