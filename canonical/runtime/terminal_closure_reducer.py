@@ -62,6 +62,8 @@ def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         ids.append(fid)
         if family.get("closure_state") != "PASS":
             failures.append(f"FAMILY_OPEN:{fid}")
+        if family.get("ownership_status") != "VERIFIED_OWNED_EQUAL_OR_BETTER":
+            failures.append(f"FAMILY_NOT_VERIFIED_OWNED:{fid}")
 
     if len(families) != REQUIRED_FAMILY_COUNT:
         failures.append(f"ACTUAL_FAMILY_COUNT:{len(families)}")
