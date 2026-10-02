@@ -22,6 +22,9 @@ SEARCH_ROOTS = (
 TEXT_SUFFIXES = {".json", ".md", ".py", ".yml", ".yaml", ".txt"}
 MAX_FILE_BYTES = 5_000_000
 MAX_MATCHES_PER_ATOM = 64
+EXCLUDED_BASENAME_PREFIXES = (
+    "PROOF_ATOM_RECEIPT_INDEX_",
+)
 
 EXCLUDED_BASENAMES = {
     "TERMINAL_CERTIFICATE_FRONTIER_V5.json",
@@ -85,7 +88,11 @@ def _candidate_files(root: Path) -> list[Path]:
             if not p.is_file() or p.suffix.lower() not in TEXT_SUFFIXES:
                 continue
             rel = p.relative_to(root).as_posix()
-            if rel in EXCLUDED_REL_PATHS or p.name in EXCLUDED_BASENAMES:
+            if (
+                rel in EXCLUDED_REL_PATHS
+                or p.name in EXCLUDED_BASENAMES
+                or any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES)
+            ):
                 continue
             try:
                 if p.stat().st_size > MAX_FILE_BYTES:
@@ -98,6 +105,17 @@ def _candidate_files(root: Path) -> list[Path]:
 
 def _line_hits(text: str, literal: str) -> list[int]:
     return [i for i, line in enumerate(text.splitlines(), start=1) if literal in line]
+
+
+def _corpus_manifest_sha256(file_cache: list[tuple[str, str, str, str]]) -> str:
+    manifest = [
+        {"path": rel, "git_blob_sha": blob_sha}
+        for rel, _source_class_name, blob_sha, _text in file_cache
+    ]
+    payload = json.dumps(
+        manifest, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def build_index(
@@ -124,6 +142,8 @@ def build_index(
         except (OSError, UnicodeDecodeError):
             continue
         file_cache.append((rel, _source_class(rel), _blob_sha(data), text))
+
+    corpus_manifest_sha256 = _corpus_manifest_sha256(file_cache)
 
     atom_rows = []
     total_matches = 0
@@ -175,6 +195,8 @@ def build_index(
         "errors": [],
         "canonical_atom_count": len(atom_rows),
         "scanned_file_count": len(file_cache),
+        "scanned_corpus_manifest_sha256": corpus_manifest_sha256,
+        "scanned_corpus_manifest_entry_count": len(file_cache),
         "candidate_match_count": total_matches,
         "atoms_with_candidate_matches": atoms_with_matches,
         "atoms_without_candidate_matches": len(zero),
@@ -184,7 +206,8 @@ def build_index(
         "atoms": atom_rows,
         "rule": (
             "EXACT_LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
-            "CONTENT_ADDRESS_EACH_MATCH__EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
+            "CONTENT_ADDRESS_EACH_MATCH__CONTENT_ADDRESS_WHOLE_SCANNED_CORPUS__"
+            "EXCLUDE_FRONTIER_REFINEMENT_INDEX_AND_SCHEDULER_RESTATEMENTS__"
             "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
         ),
         "new_reality_units_consumed": 0,
