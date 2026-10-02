@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_WAVE_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-02",
-  "status": "AUTHORIZED_IN_PRINCIPLE__ROUTE_SPECIFIC_TERMINAL_WAVE__LEGACY_LAUNCHER_FAIL_CLOSED__ZERO_TERMINAL_RESULTS",
+  "status": "REVOKED_FAIL_CLOSED__CAD_ANTI_SHORTCUT_FALSIFICATION_REOPENS_PREQUALIFICATION__ZERO_TERMINAL_RESULTS",
   "authority_receipt": "canonical/verification/TERMINAL_PREQUALIFICATION_AUTHORIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "authorization": "T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE",
-  "execution_authority": true,
+  "authorization": "NONE_UNTIL_CURRENT_ACTIVE_BASIS_RETURNS_TO_INDEPENDENTLY_VERIFIED_12_OF_12",
+  "execution_authority": false,
   "promotion_authority": false,
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
@@ -20,7 +20,7 @@
     "ROUTE_SPECIFIC_EXECUTOR_SET_MUST_EQUAL_ALL_12_FROZEN_BINDINGS",
     "LEGACY_GLOBAL_12_SLOT_TERMINAL_REPLACEMENT_WAVE_MUST_NOT_EXECUTE_UNDER_V2_PROTOCOL"
   ],
-  "terminal_launcher_state": "LEGACY_GLOBAL_12_SLOT_LAUNCHER_INVALIDATED_FAIL_CLOSED__ROUTE_SPECIFIC_EXECUTOR_COVERAGE_REQUIRED_FOR_ALL_12_FROZEN_BINDINGS",
+  "terminal_launcher_state": "FAIL_CLOSED__CAD_ROUTE_REOPENED__NO_POST_FREEZE_BEACON_OR_TERMINAL_CASE_GENERATION",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -30,5 +30,11 @@
     "reason": "GLOBAL_12_SLOT_SHORTCUT_CONFLICTS_WITH_PER_CONTRACT_FROZEN_PROOF_MODES_POPULATIONS_ACCEPTANCE_RULES_AND_SELECTORS",
     "terminal_results_observed": 0,
     "fresh_terminal_evidence_consumed": 0
+  },
+  "revocation": {
+    "evidence": "canonical/verification/CAD_T0_SOURCE_STRUCTURE_ANTISHORTCUT_FALSIFICATION_20261002_V1.json",
+    "reason": "CURRENT_CAD_CANDIDATE_FAILS_RENDER_EQUIVALENT_ANTI_SHORTCUT_MUTATION_REQUIRED_BY_GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2",
+    "terminal_beacon_constructed": false,
+    "terminal_cases_consumed": 0
   }
 }
