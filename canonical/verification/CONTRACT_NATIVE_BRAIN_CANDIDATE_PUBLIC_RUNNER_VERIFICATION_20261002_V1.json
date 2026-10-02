@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_CONTRACT_NATIVE_BRAIN_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__FOUR_BRAIN_CANDIDATE_ADAPTERS_PASS_FRESH_GENERATED_CONTRACT_GRID__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 521,
+  "public_merge_commit": "22d7ba33f2202a1645509889b3cdde859b9d7697",
+  "workflow_run_id": 36957641984,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/contract_native_brain_candidate.py": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85",
+    "canonical/tests/test_contract_native_brain_candidate.py": "c97680cdcdf50a841c168f080e28f2a153ef7916",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+  },
+  "verified": [
+    "CANDIDATE_SOURCE_DOES_NOT_IMPORT_CONTRACT_NATIVE_EVALUATOR",
+    "CANDIDATE_SOURCE_DOES_NOT_REFERENCE_HIDDEN_ORACLE_FIELD",
+    "FOUR_CONTRACTS_PASS_ACROSS_80_GENERATED_SEED_DIFFICULTY_CASES",
+    "TRAJECTORY_CANDIDATE_PASSES_WITH_ORACLE_FIELD_REMOVED_FROM_PUBLIC_PAYLOAD"
+  ],
+  "limitations": [
+    "PREFLIGHT_ONLY__NOT_TERMINAL_POPULATION_RESULT",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT",
+    "REMAINING_SIX_BEHAVIORAL_ROUTE_BINDINGS_STILL_REQUIRED"
+  ],
+  "brain_head_at_record": "334ee6310fb9e74af8af09c64cb0b8d0c4b781df",
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
