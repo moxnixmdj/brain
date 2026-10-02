@@ -142,16 +142,44 @@ def build_universe():
         + [x["id"] for x in gates if x["hole_type"] == "?P" and not x["closed"]]
     )
 
+    open_lane_mech = list(graph.get("open_mechanism_residuals", []))
+    open_impl_mech = open_lane_mech + shared_open
+    open_all_mech = open_impl_mech + open_gate_mech
+
     cut = copy.deepcopy(frozen["global_cut"])
-    cut["exact_cut_ready"] = False
     cut["open_specification_holes"] = open_spec
-    cut["open_mechanism_holes"] = (
-        list(graph.get("open_mechanism_residuals", []))
-        + shared_open
-        + open_gate_mech
-    )
+    cut["open_mechanism_holes"] = open_all_mech
     cut["open_proof_holes"] = open_proof
+    cut["exact_cut_ready"] = (
+        not open_spec
+        and not open_all_mech
+        and bool(cut.get("terminal_observation_cut_exact"))
+    )
+    if open_impl_mech:
+        cut["reason"] = (
+            "TERMINAL_OBSERVATION_SET_IS_EXACT__SHARED_OR_LANE_IMPLEMENTATION_RESIDUALS"
+            "_PLUS_GLOBAL_OWNERSHIP_GATES_FORBID_EXECUTION"
+        )
+    elif open_gate_mech:
+        cut["reason"] = (
+            "TERMINAL_OBSERVATION_SET_IS_EXACT__ONLY_GLOBAL_OWNERSHIP_GATES_FORBID_EXECUTION"
+        )
+    elif open_spec:
+        cut["reason"] = (
+            "TERMINAL_OBSERVATION_SET_IS_EXACT__OPEN_SPECIFICATION_HOLES_FORBID_EXECUTION"
+        )
+    else:
+        cut["reason"] = "TERMINAL_OBSERVATION_SET_IS_EXACT__NO_OPEN_SPECIFICATION_OR_MECHANISM_HOLES"
+    cut["execution_ready"] = cut["exact_cut_ready"]
     regenerated["global_cut"] = cut
+
+    authority = copy.deepcopy(frozen["execution_authority"])
+    authority["fresh_terminal_evidence_allowed"] = cut["execution_ready"]
+    authority["immediate_zero_reality_work"] = (
+        [f"CLOSE_OR_EXACTLY_BOUND_{item}" for item in open_impl_mech]
+        + [f"CLOSE_{item}" for item in open_gate_mech]
+    )
+    regenerated["execution_authority"] = authority
 
     counts = copy.deepcopy(frozen["counts"])
     counts.update(
@@ -164,9 +192,26 @@ def build_universe():
             "open_mechanism_lanes": len(graph.get("open_mechanism_residuals", [])),
         }
     )
-    if "open_shared_cross_lane_mechanism_primitive_count" in counts:
-        counts["open_shared_cross_lane_mechanism_primitive_count"] = len(shared_open)
+    counts["open_shared_cross_lane_mechanism_primitives"] = len(shared_open)
+    counts["open_shared_cross_lane_mechanism_primitive_count"] = len(shared_open)
     regenerated["counts"] = counts
+
+    if open_impl_mech:
+        regenerated["next"] = (
+            "CLOSE_OR_EXACTLY_BOUND_ONLY_CURRENT_DERIVED_IMPLEMENTATION_RESIDUALS__"
+            "THEN_CLOSE_GLOBAL_OWNERSHIP_GATES__REGENERATE_AND_VERIFY_UNIVERSE__"
+            "THEN_EXECUTE_FROZEN_GLOBAL_TERMINAL_OBSERVATION_CUT"
+        )
+    elif open_gate_mech:
+        regenerated["next"] = (
+            "CLOSE_ONLY_CURRENT_DERIVED_GLOBAL_OWNERSHIP_GATES__"
+            "REGENERATE_AND_VERIFY_UNIVERSE__THEN_EXECUTE_FROZEN_GLOBAL_TERMINAL_OBSERVATION_CUT"
+        )
+    else:
+        regenerated["next"] = (
+            "EXECUTE_FROZEN_GLOBAL_TERMINAL_OBSERVATION_CUT_IF_EXECUTION_READY__"
+            "COMPILE_RECEIPTS__RECOMPUTE_TERMINAL_STATE"
+        )
 
     return regenerated
 
