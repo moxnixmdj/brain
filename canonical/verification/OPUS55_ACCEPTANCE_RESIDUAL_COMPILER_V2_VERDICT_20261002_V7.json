@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V7",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SATURATION_COMPLETE__7_PROVED__1_OPEN__30_BLOCKED__TB4_EXECUTION_AUTHORIZED__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V6.json",
+  "reconciliation_basis": {
+    "tb4_threshold_cut": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "readiness": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+    "readiness_blob_sha": "6c56daef46dc0904d153fc147fb5f299d2c9b38b"
+  },
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 7,
+  "open_predicate_count": 1,
+  "blocked_predicate_count": 30,
+  "newly_open_predicate": {
+    "predicate_id": "CODING_TB4_GE_66_4",
+    "family": "ADVANCED_AGENTIC_CODING",
+    "kind": "PUBLIC_FIXED_BAR",
+    "surface": "Terminal-Bench 4.0",
+    "state": "OPEN",
+    "authorization_basis": "OPEN_PREDICATE_AND_SCORE_PRODUCING_ROUTE_READY"
+  },
+  "authorized_acceptance_case_actions": [
+    {
+      "action_id": "ACTION::CODING_TB4_GE_66_4",
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "action_class": "RUN_PUBLIC_FIXED_BAR",
+      "execution_authorized": true,
+      "verdict_changing": true,
+      "authorization_basis": "OPEN_PREDICATE_AND_SCORE_PRODUCING_ROUTE_READY"
+    }
+  ],
+  "terminal_promotion_allowed": false,
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "TB4_MAY_EXECUTE_ONLY_THROUGH_THE_INDEPENDENTLY_VERIFIED_CONSERVATIVE_THRESHOLD_CUT__ALL_UNAVAILABLE_CONTAMINATED_FAILED_OR_UNRUN_TRIAL_SLOTS_SCORE_ZERO__NO_TB4_CREDIT_BEFORE_220_SUCCESS_RECEIPTS",
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 837,
+    "pull_request_head": "a8b0727e160a31aa4fb33482b5db2aeb6562a195",
+    "merge_commit": "87a6a553ba8d853c1d2fcc215d7bae5f9fb4a370",
+    "workflow_run_id": 36996733260,
+    "workflow_job_id": 110805062561,
+    "conclusion": "success",
+    "result_comment_id": 5950581319,
+    "exact_compiler_replay": true
+  }
+}
