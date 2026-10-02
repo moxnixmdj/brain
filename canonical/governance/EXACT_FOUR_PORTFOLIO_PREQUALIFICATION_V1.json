@@ -174,7 +174,6 @@
   "next": [
     "CLOSE_TERMINAL_BENCH_AND_TERMINAL_BENCH_SCIENCE_BRAIN_AGENT_ADAPTER_ZERO_CASE_BINDINGS_WITHOUT_READING_TERMINAL_CASE_CONTENT",
     "CLOSE_AUTOMATIONBENCH_GDPVAL_CHARTOGRAPHY_HLE_AND_OSWORLD_SCOPE_EQUIVALENT_OR_RESOURCE_SCORER_ASSET_PREFLIGHTS",
-    "FREEZE_FINANCE_INDEX_COMPONENT_ROUTE_BINDINGS_AND_T3_UNKNOWN_DOMAIN_SCOPE_AUDIT",
     "RUN_FINAL_PREWAVE_OPAQUE_PROVIDER_DONOR_COMPOSITION_DEPENDENCY_AND_VERIFIER_IMMUTABILITY_AUDIT",
     "DERIVE_EXECUTION_AUTHORITY_ONLY_IF_ALL_PRE_WAVE_GATES_PASS__THEN_RUN_T0_T1_T2_T3_IN_PARALLEL"
   ],
@@ -240,7 +239,8 @@
     "terminal_bench_4_zero_case_route_preflight": "INDEPENDENT_PASS__canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "harbor_zero_cost_terminal_carrier_preflight": "INDEPENDENT_PASS__canonical/verification/HARBOR_TERMINAL_CARRIERS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "finance_index_component_route_binding_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
-    "t3_unknown_domain_scope_audit_frozen": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json"
+    "t3_unknown_domain_scope_audit_frozen": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
+    "finance_index_component_route_bindings_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
