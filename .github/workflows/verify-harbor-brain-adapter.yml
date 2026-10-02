@@ -30,6 +30,7 @@ jobs:
           exit 0
       - name: Upload Harbor test receipt
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: harbor-brain-adapter-test-output
