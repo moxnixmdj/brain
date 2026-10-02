@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_GATE_BLOB_VERIFIED",
+  "brain": {
+    "repository": "moxnixmdj/brain",
+    "path": "canonical/runtime/acceptance_capability_source_gate_v1.py",
+    "git_blob_sha": "d99ace6e00b0bd4bbfc6345315ab1a088b97bbc8",
+    "test_path": "canonical/tests/test_acceptance_capability_source_gate_v1.py",
+    "test_git_blob_sha": "9cfa01db79629a8e7457402f08cc493b9262bb4b"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 808,
+    "pull_request_head": "5c5a2ec7405a328a036e4aaf4048402a0dd664ba",
+    "merge_commit": "dfca9d800d2108d7f8707f53186d0d7fb5631ab2",
+    "workflow_run_id": 36981628587,
+    "workflow_job_id": 110757231831,
+    "conclusion": "success"
+  },
+  "verified": [
+    "FREE_PUBLIC_HARNESS_ALONE_DOES_NOT_AUTHORIZE_ACCEPTANCE_CASE_SPEND",
+    "MODEL_DEPENDENCY_COUNT_NONZERO_FAILS_CLOSED",
+    "UNBOUND_BRAIN_CANDIDATE_FAILS_CLOSED",
+    "CANDIDATE_DONOR_INDEPENDENCE_NOT_PROVEN_FAILS_CLOSED",
+    "OPAQUE_EXTERNAL_CAPABILITY_PROVIDER_NOT_ZERO_FAILS_CLOSED",
+    "NONZERO_INCREMENTAL_SPEND_FAILS_CLOSED",
+    "FULLY_BOUND_DONOR_INDEPENDENT_MODEL_DEPENDENCY_ZERO_ZERO_SPEND_ROUTE_PASSES"
+  ],
+  "private_brain_actions_run": {
+    "workflow_run_id": 36981414457,
+    "disposition": "INVALID_INFRASTRUCTURE_FAILURE__RUNNER_ID_ZERO__ZERO_STEPS_EXECUTED__NOT_A_CODE_VERDICT"
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
