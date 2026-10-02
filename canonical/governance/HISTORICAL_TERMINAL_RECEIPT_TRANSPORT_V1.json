@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_HISTORICAL_TERMINAL_RECEIPT_TRANSPORT_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__ZERO_REPLAY__ZERO_ACCEPTANCE_CREDIT",
+  "objective": "Prove that immutable terminal evidence remains admissible under the current exact binding when the execution-snapshot binding blob and current binding blob are identical, while refusing to infer full-scope Opus55 noninferiority from receipt transport alone.",
+  "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+  "terminal_wave": {
+    "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+    "blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "required_status": "ONE_SHOT_TERMINAL_WAVE_PASS__IMMUTABLE_PUBLIC_RUNNER_RECEIPT__NO_REPLAY_AUTHORIZED"
+  },
+  "current_binding_verification": {
+    "path": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "blob_sha": "3aa8168fc7f81581eea4085504e4a70205949af9",
+    "required_status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_CURRENT_OBJECTIVE_BINDINGS_EXACT_BYTES__PREWAVE_ONLY__ZERO_TERMINAL_CREDIT"
+  },
+  "routes": [
+    {
+      "id": "DELEGATION_CURRENT_BINDING_RECEIPT_TRANSPORT",
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "binding_path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "expected_binding_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+      "evidence_mode": "DIRECT_TERMINAL_ROUTE",
+      "expected_cases": 132,
+      "expected_passes": 132,
+      "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "remaining_acceptance_obligation": "EXACT_MATCHED_OPUS55_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+      "scope_caveat_field": ["source_pool", "terminal_scope_claim"],
+      "scope_caveat_must_contain": "NOT_EXHAUSTIVE"
+    },
+    {
+      "id": "RECOVERY_CAUSAL_LOCALIZATION_CURRENT_BINDING_RECEIPT_TRANSPORT",
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "binding_path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "expected_binding_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+      "evidence_mode": "PARENT_PORTFOLIO_RECEIPTS",
+      "expected_portfolios": ["T0", "T2"],
+      "target_predicate": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "remaining_acceptance_obligation": "EXACT_MATCHED_OPUS55_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF"
+    },
+    {
+      "id": "SYNTHESIS_CURRENT_BINDING_RECEIPT_TRANSPORT",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "binding_path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "expected_binding_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+      "evidence_mode": "PARENT_PORTFOLIO_RECEIPTS",
+      "expected_portfolios": ["T1", "T3"],
+      "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "remaining_acceptance_obligation": "EXACT_MATCHED_OPUS55_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF"
+    }
+  ],
+  "hard_rules": [
+    "HISTORICAL_RECEIPT_TRANSPORT_REQUIRES_EXECUTION_SNAPSHOT_IDENTITY",
+    "HISTORICAL_AND_CURRENT_BINDING_GIT_BLOBS_MUST_BE_IDENTICAL",
+    "CURRENT_BINDING_MUST_HAVE_INDEPENDENT_EXACT_BYTE_VERIFICATION",
+    "TERMINAL_WAVE_MUST_HAVE_NO_CASE_REPLACEMENT_NO_TUNING_REPLAY_AND_NO_RESULT_TO_RUNTIME_FEEDBACK",
+    "TRANSPORTED_TERMINAL_EVIDENCE_DOES_NOT_BY_ITSELF_PROVE_MATCHED_OPUS55_NONINFERIORITY",
+    "NO_TERMINAL_REPLAY",
+    "ZERO_CAPABILITY_FAMILY_OR_PROMOTION_CREDIT_FROM_RECEIPT_TRANSPORT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "execution_authority": false
+}
