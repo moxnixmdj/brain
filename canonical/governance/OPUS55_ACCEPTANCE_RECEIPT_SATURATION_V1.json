@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RECEIPT_SATURATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE__PINNED_SNAPSHOT_SATURATION__ZERO_NEW_REALITY",
+  "objective": "Exhaustively search the canonical immutable receipt roots at one pinned repository tree, then bind only exact hash-bound scope-complete acceptance consequences.",
+  "source_snapshot_sha": "8687e93675abbba973bb263db5d4224ced94240f",
+  "source_tree_sha": "43291b9a528877e8a4e72fe9208d845444ce06e6",
+  "scan_roots": [
+    "canonical/verification",
+    "canonical/governance",
+    "canonical/capabilities/opus55"
+  ],
+  "expected_json_file_count": 768,
+  "runtime": "canonical/runtime/opus55_acceptance_receipt_saturator_v1.py",
+  "tests": "canonical/tests/test_opus55_acceptance_receipt_saturator_v1.py",
+  "proof_bundle": "canonical/governance/OPUS55_ACCEPTANCE_ZERO_REALITY_DERIVATIONS_V1.json",
+  "rules": [
+    "SEARCH_COMPLETION_DOES_NOT_ITSELF_GRANT_ACCEPTANCE_CREDIT",
+    "NO_BEHAVIORAL_PASS_INHERITANCE",
+    "ONLY_HASH_BOUND_SCOPE_COMPLETE_DERIVATIONS_MAY_EMIT_PROVED_CLAIMS",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_NEW_ACCEPTANCE_CASES",
+    "ANY_SOURCE_BLOB_DRIFT_INVALIDATES_THE_DERIVATION"
+  ],
+  "expected_result": {
+    "saturation_status": "COMPLETE",
+    "proved_atomic_predicates": 3,
+    "fresh_acceptance_cases_consumed": 0
+  },
+  "incremental_spend_usd": 0
+}
