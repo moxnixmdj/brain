@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_COMPILER_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__SCHEDULING_AND_PROOF_ROUTING_ONLY__ZERO_CAPABILITY_CREDIT",
+  "objective": "Delete unnecessary matched-comparator and fresh-reality work by allowing only formally stronger proof modes to satisfy an unchanged frozen Opus 5.5 acceptance protocol.",
+  "runtime": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+  "tests": "canonical/tests/test_acceptance_proof_transmuter_v1.py",
+  "live_input": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json",
+  "frozen_protocols": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+  },
+  "proof_priority": [
+    "UNIVERSAL",
+    "EXHAUSTIVE_FINITE",
+    "ABSOLUTE_DOMINANCE",
+    "PUBLIC_FIXED_BAR",
+    "MATCHED_COMPARATOR"
+  ],
+  "absolute_dominance_rules": [
+    "HIGHER_IS_BETTER_CLOSES_IF_BRAIN_CONSERVATIVE_LOWER_BOUND_REACHES_THEORETICAL_UPPER_BOUND",
+    "LOWER_IS_BETTER_CLOSES_IF_BRAIN_CONSERVATIVE_UPPER_BOUND_REACHES_THEORETICAL_LOWER_BOUND",
+    "BOUND_SQUEEZE_CLOSES_IF_BRAIN_CONSERVATIVE_BOUND_DOMINATES_AN_ADMISSIBLE_TARGET_BOUND"
+  ],
+  "hard_rules": [
+    "FROZEN_ACCEPTANCE_PROTOCOL_IS_NOT_WEAKENED_OR_REWRITTEN",
+    "BEHAVIORAL_ONLY_EVIDENCE_NEVER_CLOSES_OPUS55_ACCEPTANCE",
+    "EVERY_CLOSING_WITNESS_MUST_BE_VERIFIED_INDEPENDENT_CONTAMINATION_CLEAN_AND_BIND_THE_FROZEN_PROTOCOL",
+    "SCOPE_RELATION_MUST_BE_EXACT_OR_PROVEN_STRONGER",
+    "PARTIAL_PUBLIC_BAR_OR_MECHANICAL_GATE_EVIDENCE_CANNOT_CLOSE_A_COMPOSITE_PROTOCOL",
+    "CLOSING_WITNESS_MUST_EXPLICITLY_COVER_THE_ENTIRE_PROTOCOL",
+    "PROXY_MODEL_SUBSTITUTION_FOR_OPUS55_IS_FORBIDDEN",
+    "OUTPUT_HAS_ZERO_CAPABILITY_AND_FAMILY_CREDIT_BY_ITSELF"
+  ],
+  "integration": {
+    "before": [
+      "NEW_PUBLIC_BAR_EXECUTION",
+      "NEW_MATCHED_COMPARATOR_EXECUTION",
+      "NEW_TERMINAL_REALITY_QUERY"
+    ],
+    "after": [
+      "EXISTING_IMMUTABLE_RECEIPT_SEARCH",
+      "OPUS55_ACCEPTANCE_CALIBRATION"
+    ],
+    "downstream": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json"
+  },
+  "current_truth": {
+    "behavioral_family_pass": "19/19",
+    "opus55_acceptance_closed": "2/19",
+    "opus55_acceptance_open": "17/19",
+    "terminal_goal_achieved": false
+  },
+  "expected_breakthrough": "Convert comparator-dependent or benchmark-dependent protocol obligations into zero-new-reality universal, exhaustive, or absolute-dominance proofs wherever the complete frozen scope admits such a stronger proof.",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
