@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_CURRENT_BLOB_REVALIDATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__CURRENT_DELEGATION_CANDIDATE_AND_ORACLE_EXACT_BLOBS__UNCHANGED_WHOLE_DIMENSION_REGRESSION_PASS__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 605,
+  "public_merge_commit": "01ee5d2f89f2e1876aa5bd5a766aae98e3a9c7b2",
+  "workflow_run_id": 36962748027,
+  "workflow_job_id": 110699794169,
+  "workflow_conclusion": "success",
+  "exact_bound_blobs": {
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
+    "canonical/tests/test_delegation_whole_scope_v2.py": "7052641c539cf179b48f344c6092ab24e6e931ff"
+  },
+  "verified": [
+    "EXACT_CURRENT_BRAIN_CANDIDATE_BLOB_BOUND",
+    "EXACT_CURRENT_BRAIN_ORACLE_BLOB_BOUND",
+    "UNCHANGED_WHOLE_DIMENSION_REGRESSION_PASS"
+  ],
+  "limitations": [
+    "PREWAVE_REVALIDATION_ONLY",
+    "DOES_NOT_SUPPLY_EXACT_OPUS_5_5_MATCHED_COMPARATOR_EVIDENCE",
+    "ZERO_TERMINAL_RESULT_AND_ZERO_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
