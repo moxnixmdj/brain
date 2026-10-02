@@ -6,7 +6,9 @@ on:
       - "canonical/tests/test_proof_atom_receipt_index_v2.py"
       - "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V2.json"
       - "canonical/runtime/canonical_proof_atom_basis_v2.py"
+      - "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json"
       - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
       - ".github/workflows/verify-proof-atom-receipt-index-v2.yml"
   workflow_dispatch:
 jobs:
@@ -20,4 +22,78 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run V2 receipt index tests
-        run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+        id: tests
+        continue-on-error: true
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v > receipt-index-v2-tests.stdout 2> receipt-index-v2-tests.stderr
+          code=$?
+          echo "$code" > receipt-index-v2-tests.exitcode
+          exit 0
+      - name: Execute and freeze exact V2 current-corpus scan
+        id: scan
+        continue-on-error: true
+        run: |
+          set +e
+          git rev-parse HEAD > receipt-index-v2-repository-head.txt
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > proof-atom-receipt-index-v2.json 2> receipt-index-v2.stderr
+          code=$?
+          echo "$code" > receipt-index-v2.exitcode
+          if [ "$code" -eq 0 ]; then
+            sha256sum proof-atom-receipt-index-v2.json > proof-atom-receipt-index-v2.sha256
+            python - <<'PY' > proof-atom-receipt-index-v2-summary.json
+          import json
+          p=json.load(open("proof-atom-receipt-index-v2.json"))
+          summary={
+            "status":p.get("status"),
+            "canonical_atom_count":p.get("canonical_atom_count"),
+            "basis_atom_manifest_sha256":p.get("basis_atom_manifest_sha256"),
+            "scanned_file_count":p.get("scanned_file_count"),
+            "scanned_corpus_manifest_sha256":p.get("scanned_corpus_manifest_sha256"),
+            "index_input_fingerprint_sha256":p.get("index_input_fingerprint_sha256"),
+            "candidate_match_count":p.get("candidate_match_count"),
+            "atoms_with_candidate_matches":p.get("atoms_with_candidate_matches"),
+            "atoms_without_candidate_matches":p.get("atoms_without_candidate_matches"),
+            "candidate_matches_by_source_class":p.get("candidate_matches_by_source_class"),
+            "candidate_matches_by_kind":p.get("candidate_matches_by_kind"),
+            "candidate_review_priority":p.get("candidate_review_priority"),
+            "atom_ids_without_candidate_matches":p.get("atom_ids_without_candidate_matches")
+          }
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+          fi
+          exit 0
+      - name: Upload V2 frozen scan diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-frozen-scan
+          path: |
+            proof-atom-receipt-index-v2.json
+            proof-atom-receipt-index-v2.sha256
+            proof-atom-receipt-index-v2-summary.json
+            receipt-index-v2-repository-head.txt
+            receipt-index-v2.stderr
+            receipt-index-v2.exitcode
+            receipt-index-v2-tests.stdout
+            receipt-index-v2-tests.stderr
+            receipt-index-v2-tests.exitcode
+          if-no-files-found: warn
+      - name: Enforce pass
+        if: always()
+        run: |
+          test "$(cat receipt-index-v2-tests.exitcode)" = "0"
+          test "$(cat receipt-index-v2.exitcode)" = "0"
+          python - <<'PY'
+          import json
+          p=json.load(open("proof-atom-receipt-index-v2.json"))
+          assert p["status"].startswith("PASS"), p
+          assert p["canonical_atom_count"] == 40
+          assert len(p["basis_atom_manifest_sha256"]) == 64
+          assert len(p["scanned_corpus_manifest_sha256"]) == 64
+          assert len(p["index_input_fingerprint_sha256"]) == 64
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          assert p["execution_authority"] is False
+          assert p["promotion_authority"] is False
+          PY
