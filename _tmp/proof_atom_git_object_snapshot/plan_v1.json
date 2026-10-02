@@ -8237,7 +8237,8 @@
       "source_class": "VERIFICATION_RECEIPT"
     }
   ],
-  "shard_size": 88,
-  "shard_count": 16,
-  "rule": "TEMPORARY_CONTENT_ADDRESSED_REPLAY_PLAN__NO_ACCEPTANCE_CREDIT"
+  "shard_size": 58,
+  "shard_count": 23,
+  "rule": "TEMPORARY_CONTENT_ADDRESSED_REPLAY_PLAN__NO_ACCEPTANCE_CREDIT",
+  "replay_note": "Shard size reduced only to satisfy connector nested-call ceiling; frozen source commit/tree, candidates, atoms, and proof inputs unchanged."
 }
