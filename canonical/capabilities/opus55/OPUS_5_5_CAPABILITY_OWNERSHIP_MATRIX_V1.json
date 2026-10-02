@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__2_VERIFIED_OWNED__17_OPUS55_PROTOCOL_RESULTS_OPEN",
+  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__3_ACCEPTANCE_CALIBRATED__2_VERIFIED_OWNED__16_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -64,7 +64,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -97,7 +97,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -134,7 +134,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -168,7 +168,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -196,7 +196,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -224,7 +224,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
@@ -253,7 +253,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "COMPUTER_AND_BROWSER_USE",
@@ -287,7 +287,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "FINANCIAL_ANALYSIS",
@@ -305,7 +305,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
@@ -338,7 +338,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -391,7 +391,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -427,7 +427,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "ARTIFACT_CREATION",
@@ -459,7 +459,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
@@ -477,7 +477,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
@@ -504,11 +504,12 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay.",
+      "campaign_next_action": "PRESERVE_ACCEPTANCE_PASS__DO_NOT_REPLAY__CONTINUE_ONLY_GLOBAL_OWNERSHIP_PROMOTION_AFTER_TERMINAL_ACCEPTANCE_CLOSURE",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_opus55_acceptance_status": "PASS_VIA_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS",
+      "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "postwave_acceptance_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json"
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -534,7 +535,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "MULTI_CAPABILITY_COMPOSITION",
@@ -571,7 +572,7 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
     },
     {
       "family": "EXACT_SYMBOLIC_COMPUTATION",
@@ -687,5 +688,17 @@
       "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
     ],
     "rule": "ROW_MECHANISM_STATUS_BELOW_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_OWNERSHIP_CREDIT_IS_CONTROLLED_BY_POSTWAVE_ACCEPTANCE_CALIBRATION"
+  },
+  "postwave_acceptance_summary": {
+    "calibrated_family_count": 3,
+    "verified_owned_family_count": 2,
+    "pending_acceptance_family_count": 16,
+    "calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+    "promotion_authority": false
   }
 }
