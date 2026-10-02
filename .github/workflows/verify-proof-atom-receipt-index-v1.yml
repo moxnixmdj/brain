@@ -1,0 +1,45 @@
+name: Verify proof atom receipt index v1
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_receipt_index_v1.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v1.py"
+      - "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V1.json"
+      - "canonical/verification/ABDUCTIVE_OPTIMIZER_INTEGRATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      - ".github/workflows/verify-proof-atom-receipt-index-v1.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run proof atom receipt index tests
+        run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v1 -v
+      - name: Execute current 40-atom receipt index
+        run: |
+          python canonical/runtime/proof_atom_receipt_index_v1.py > proof-atom-receipt-index.json
+          python - <<'PY'
+          import json
+          p=json.load(open("proof-atom-receipt-index.json"))
+          assert p["status"].startswith("PASS")
+          assert p["canonical_atom_count"] == 40
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          print(json.dumps({
+            "canonical_atom_count":p["canonical_atom_count"],
+            "scanned_file_count":p["scanned_file_count"],
+            "candidate_match_count":p["candidate_match_count"],
+            "atoms_with_candidate_matches":p["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":p["atoms_without_candidate_matches"],
+            "candidate_matches_by_source_class":p["candidate_matches_by_source_class"],
+          },indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index
+          path: proof-atom-receipt-index.json
