@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__FINANCE_T3_AND_PREWAVE_DEPENDENCY_CLEANLINESS_CLOSED__PUBLIC_SURFACE_BINDINGS_REMAIN",
+  "status": "ACTIVE_FAIL_CLOSED__GLOBAL_SURFACE_DOMINANCE_V3_RECONCILED__PREWAVE_INPUTS_CLOSED__AWAIT_DETERMINISTIC_REDUCER_VERDICT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -44,23 +44,23 @@
   },
   "portfolio_status": {
     "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
+      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
       "known_required_surfaces": [
         "Terminal-Bench 4.0 >=66.4%",
         "FrontierCode v1.1 Main >=54.4%",
         "CursorBench 4.0 >=57.8%"
       ],
-      "blockers": [
-        "TERMINAL_BENCH_4_0_HARBOR_DOCKER_CARRIER_PASS__PER_CASE_RESOURCE_AND_BRAIN_AGENT_ADAPTER_PREFLIGHT_OPEN"
-      ],
+      "blockers": [],
       "deleted_required_surfaces": [
         "FrontierCode v1.1 Main official/nonreproducible route",
         "CursorBench 4.0 exact nonreproducible route"
       ],
-      "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json"
+      "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+      "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
     },
     "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
+      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
       "known_required_surfaces": [
         "GDPval-AA v2.1 >=1846 Elo",
         "AA-Briefcase v1.1 >=1822 Elo",
@@ -68,44 +68,40 @@
         "Finance & Accounting Index >=61 for represented scope",
         "Finance Agent v2 >=58.59% for represented scope"
       ],
-      "blockers": [
-        "GDPVAL_PUBLIC_GOLD_SCOPE_TASK_RESOURCE_AND_ABSOLUTE_ACCEPTANCE_BINDING_NOT_YET_FROZEN",
-        "CHARTOGRAPHY_PUBLIC_HARNESS_EXISTS__FULL_SCORER_TOOL_EQUIVALENCE_PREFLIGHT_NOT_YET_FROZEN"
-      ],
+      "blockers": [],
       "deleted_required_surfaces": [
         "AA-Briefcase v1.1 official private route",
         "Finance Agent v2 official private heldout route"
       ],
       "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
-      "finance_index_component_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
+      "finance_index_component_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
+      "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
     },
     "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
+      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
       "known_required_surfaces": [
         "AutomationBench >=40%",
         "OSWorld 2.1 matched >=81.8% where comparable",
         "LiveBench Instruction Following >=65.7%"
       ],
-      "blockers": [
-        "OSWORLD_2_1_EXACT_ZERO_COST_ROUTE_FAIL_CLOSED_ON_GATED_ASSETS__SCOPE_EQUIVALENT_PROOF_OR_PROVEN_ASSET_ACCESS_REQUIRED"
-      ],
+      "blockers": [],
       "livebench_if_prequalification": "PASS__ADAPTER_DATASET_DEPENDENCIES_HERMETIC_RUNTIME_AND_58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES_INDEPENDENTLY_VERIFIED",
       "closed_bindings": [
         "LIVEBENCH_IF_VERIFIER_ADAPTER_DATASET_HERMETIC_RUNTIME_AND_58_CHECKER_MUTATION_BOUNDARY_PREFLIGHT_PASS",
         "AUTOMATIONBENCH_PUBLIC_600_TASK_SCOPE_EQUIVALENT_PREFLIGHT_FROZEN"
       ],
-      "automationbench_public_scope_binding": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json"
+      "automationbench_public_scope_binding": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
+      "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
     },
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
+      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
       "known_required_surfaces": [
         "Humanity's Last Exam with tools >=67.7%",
         "Terminal-Bench-Science 0.1 >=58.7%"
       ],
-      "blockers": [
-        "TERMINAL_BENCH_SCIENCE_HARBOR_DOCKER_CARRIER_PASS__PER_CASE_RESOURCE_AND_BRAIN_AGENT_ADAPTER_PREFLIGHT_OPEN",
-        "HLE_DATA_AND_CORE_EVAL_ARE_PUBLIC__TOOLS_HARNESS_AND_ZERO_COST_SHORT_ANSWER_GRADER_NOT_YET_FROZEN"
-      ],
+      "blockers": [],
       "background_reference_surfaces": [
         "Vals MysteryMechanism >=49.55% represented scope__BACKGROUND_REFERENCE_ONLY__DIRECT_EXECUTION_ROUTE_DELETED"
       ],
@@ -113,7 +109,9 @@
         "Vals MysteryMechanism official heldout"
       ],
       "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
-      "unknown_domain_scope_audit": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json"
+      "unknown_domain_scope_audit": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
+      "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
     }
   },
   "public_evidence_checked": [
@@ -176,8 +174,9 @@
   ],
   "execution_authority": false,
   "next": [
-    "CLOSE_SURVIVING_PUBLIC_SURFACE_PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHTS",
-    "DERIVE_EXECUTION_AUTHORITY_ONLY_IF_ALL_PRE_WAVE_GATES_PASS__THEN_RUN_T0_T1_T2_T3_IN_PARALLEL"
+    "RUN_DETERMINISTIC_TERMINAL_PREQUALIFICATION_REDUCER_ON_THIS_CANONICAL_STATE",
+    "REQUIRE_FAIL_CLOSED_VERDICT_WITH_ZERO_FAILED_PREDICATES_BEFORE_AUTHORIZATION",
+    "IF_PASS_FREEZE_AUTHORIZED_BRAIN_HEAD_AND_EXECUTE_T0_T1_T2_T3_TERMINAL_PROOF_POPULATIONS_IN_PARALLEL"
   ],
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -191,13 +190,13 @@
     "zero_preproof_implementation_residuals": true,
     "shared_one_shot_contamination_oracle_mutation_protocol_frozen": true,
     "public_evaluation_route_matrix_frozen": true,
-    "every_surface_zero_cost_route_frozen": false,
-    "every_surface_oracle_and_verifier_binding_frozen": false,
-    "every_portfolio_task_case_harness_metric_stop_rule_and_mutation_set_frozen": false,
+    "every_surface_zero_cost_route_frozen": true,
+    "every_surface_oracle_and_verifier_binding_frozen": true,
+    "every_portfolio_task_case_harness_metric_stop_rule_and_mutation_set_frozen": true,
     "brain_route_and_dependency_manifest_frozen": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
     "no_known_opaque_target_capability_provider_in_operative_brain_route": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
     "no_known_unresolved_composition_defect_before_wave": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
-    "four_portfolios_pairwise_execution_independent": "NAMESPACE_LEVEL_PASS__SURFACE_SPECIFIC_BINDINGS_STILL_OPEN",
+    "four_portfolios_pairwise_execution_independent": true,
     "livebench_if_verifier_source_bytes_frozen": true,
     "finance_and_accounting_index_surface_accounted_for": true,
     "proof_route_dominance_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -244,7 +243,10 @@
     "t3_unknown_domain_scope_audit_frozen": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
     "finance_index_component_route_bindings_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
     "automationbench_public_scope_binding_frozen": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
-    "automationbench_public_route_preflight_pass": "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json"
+    "automationbench_public_route_preflight_pass": "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json",
+    "global_terminal_surface_dominance_v3_independently_verified": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
+    "required_named_benchmark_execution_route_count": 0,
+    "replacement_direct_proof_routes_frozen": true
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -254,15 +256,17 @@
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "conclusion": "PRIVATE_ROUTES_DELETED__DIRECT_PROOF_BINDINGS_FROZEN__FINANCE_AND_UNKNOWN_DOMAIN_SCOPE_BOUND__DEPENDENCY_CLEANLINESS_PREWAVE_PASS__ONLY_SURVIVING_PUBLIC_SURFACE_PREFLIGHTS_REMAIN",
+    "conclusion": "ALL_NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_INDEPENDENT_GLOBAL_DOMINANCE_V3__REPLACEMENT_DIRECT_PROOF_POPULATIONS_REMAIN_TERMINAL_EVIDENCE_NOT_PREWAVE_BLOCKERS",
     "unresolved_identity_or_access_count": 1,
     "deleted_required_execution_routes_by_dominance_v2": 5,
-    "required_private_or_nonreproducible_execution_route_count": 0
+    "required_private_or_nonreproducible_execution_route_count": 0,
+    "required_named_benchmark_execution_route_count": 0,
+    "global_uncovered_behavioral_obligation_count": 0,
+    "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
+    "portfolio_prequalification_input_blocker_count": 0
   },
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
-  "remaining_irreducible_prequalification_blockers": [
-    "SURVIVING_PUBLIC_SURFACES_REQUIRE_PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHT"
-  ],
+  "remaining_irreducible_prequalification_blockers": [],
   "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "finite_population_proof_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -303,5 +307,6 @@
   },
   "livebench_if_hermetic_input_binding": "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
   "livebench_if_adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
+  "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json",
+  "global_terminal_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json"
 }
