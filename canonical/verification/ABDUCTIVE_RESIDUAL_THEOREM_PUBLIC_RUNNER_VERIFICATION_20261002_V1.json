@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ABDUCTIVE_RESIDUAL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_THREE_BRAIN_BLOBS__ABDUCTIVE_WEAKEST_SUFFICIENT_RESIDUAL_COMPILER__ZERO_CREDIT",
+  "objective": "Bind the independent exact-byte public verification of the abductive residual theorem compiler before activating it in terminal scheduling.",
+  "exact_brain_blobs": {
+    "canonical/runtime/abductive_residual_theorem_v1.py": "aef25c462163170defd9d6c81beec628b350b51f",
+    "canonical/tests/test_abductive_residual_theorem_v1.py": "d38ad776500d98dc5e96cd49bfcbfb4ba151ae63",
+    "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_COMPILER_V1.json": "3749962bf9cf4eedcf0f4d50465b5a6b2b415ac3"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 986,
+    "verified_head": "b82043399f8f9d021a577cd61870bbf057f073a1",
+    "merge_commit": "19166df8613d7f76b81ea9c5bf8a9305d96f518f",
+    "workflow_run_id": 37028380726,
+    "workflow_job_id": 110908709575,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_IDENTITIES_MATCH_PUBLIC_CAPSULE",
+    "PYTHON_3_12_COMPILE_PASS",
+    "UNIT_REGRESSION_SUITE_PASS",
+    "UNLISTED_LEAF_RESIDUAL_SYNTHESIS_PASS",
+    "TRANSITIVE_BACKWARD_RESIDUAL_PASS",
+    "WEAKER_ALTERNATIVE_PROOF_SELECTION_PASS",
+    "EQUAL_SIZE_ALTERNATIVES_PRESERVED",
+    "SHARED_RESIDUAL_QUOTIENT_PASS",
+    "JOINT_RESIDUAL_DEDUPLICATION_PASS",
+    "KNOWN_TARGET_EMPTY_RESIDUAL_PASS",
+    "CYCLE_DOES_NOT_SELF_PROVE",
+    "UNVERIFIED_EDGE_FAILS_CLOSED",
+    "RECEIPT_REQUIRED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "COMPILER_DOES_NOT_CREATE_SEMANTIC_EDGES",
+    "COMPILER_DOES_NOT_CREATE_SCOPE_RELATIONS",
+    "COMPILER_DOES_NOT_CREATE_METRIC_BOUNDS",
+    "COMPILER_DOES_NOT_PROVE_RESIDUAL_FACTS",
+    "COMPILER_DOES_NOT_AUTHORIZE_FRESH_REALITY"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
