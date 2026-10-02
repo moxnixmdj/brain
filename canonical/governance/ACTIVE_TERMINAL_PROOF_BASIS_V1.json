@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__6_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__7_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -232,16 +232,10 @@
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
       "portfolio": "T2",
-      "proof_state": "MATCHED_STATISTICAL_TERMINAL_PROTOCOL_INTERNAL_FREEZE_PENDING__EXACT_OPUS_5_5_COMPARATOR_EXTERNAL_BLOCKED",
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
       "route_requirement": "ARBITRARY_FINITE_EXPLICIT_TASK_GRAPH_PARTITION_ASSIGNMENT_RESOURCE_EVIDENCE_FANIN_BASELINE_AND_RECEIPT_DRIVEN_REPLAN",
-      "blockers": [
-        "FREEZE_CURRENT_DELEGATION_CANDIDATE_AND_DEPENDENCY_BLOB_PACKAGE",
-        "FREEZE_CONTAMINATION_SAFE_DELEGATION_CHALLENGE_SOURCE_POOL_AND_SCORER",
-        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
-        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
-        "FREEZE_POST_FREEZE_SELECTOR_RULE__DO_NOT_SELECT_CHALLENGES_BEFORE_COMPARATOR_ROUTE_EXISTS"
-      ],
-      "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+      "blockers": [],
+      "route": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
       "independent_preflight": "canonical/verification/DELEGATION_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "scope_audit": "canonical/governance/TASK_TO_DELEGATION_WHOLE_SCOPE_AUDIT_V1.json",
@@ -261,10 +255,14 @@
       "terminal_acceptance_binding": "canonical/governance/DELEGATION_MATCHED_TERMINAL_ACCEPTANCE_V2.json",
       "terminal_acceptance_mode": "canonical/governance/DELEGATION_MATCHED_TERMINAL_ACCEPTANCE_V2.json",
       "terminal_acceptance_mode_verification": "PENDING_ROUTE_SPECIFIC_MATCHED_PROTOCOL_FREEZE_AND_EXACT_COMPARATOR",
-      "prewave_admissible": false,
+      "prewave_admissible": true,
       "anti_circularity_reconciliation": "canonical/governance/DELEGATION_PREWAVE_ADMISSION_ANTI_CIRCULARITY_RECONCILIATION_V1.json",
       "terminal_result_status": "NOT_EXECUTED",
-      "current_blob_revalidation": "canonical/verification/DELEGATION_CURRENT_BLOB_REVALIDATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "current_blob_revalidation": "canonical/verification/DELEGATION_CURRENT_BLOB_REVALIDATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "objective_route_binding": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "objective_route_verification": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "objective_dominance_input": "canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json",
+      "weaker_exact_opus_comparator_required_for_prewave": false
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -309,9 +307,9 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 6,
+  "admissible_frozen_terminal_route_count": 7,
   "execution_authority": false,
-  "next": "RECOMPUTE_TERMINAL_ROUTE_CLOSURE_QUEUE__CONTINUE_ZERO_REALITY_PREWAVE_ROUTE_CLOSURE__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
+  "next": "CLOSE_REMAINING_FIVE_NONDOMINATED_ACTIVE_TERMINAL_ROUTE_BINDINGS__NO_FRESH_TERMINAL_WAVE_BEFORE_12_OF_12_AND_PREQUALIFICATION_PASS",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
