@@ -75,5 +75,12 @@
   "result_use": {
     "full_400_configured_route": "ACCEPTANCE_AUTHORITY",
     "ablation_40": "OWNERSHIP_MATERIALITY_DIAGNOSTIC_ONLY"
+  },
+  "parquet_reader": {
+    "package": "pyarrow",
+    "version": "21.0.0",
+    "wheel": "pyarrow-21.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+    "bytes": 42829529,
+    "sha256": "b7ae0bbdc8c6674259b25bef5d2a1d6af5d39d7200c819cf99e07f7dfef1c51e"
   }
 }
