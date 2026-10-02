@@ -1,6 +1,8 @@
 name: Verify bounded research frontier
 on:
   push:
+  pull_request:
+    branches: [main]
     branches: [main]
     paths:
       - canonical/runtime/bounded_research_frontier.py
