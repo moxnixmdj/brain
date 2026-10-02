@@ -171,3 +171,43 @@ class Tests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class WholeFrontierCapacityTests(unittest.TestCase):
+    def test_eight_contract_frontier_capacity(self):
+        payload = {
+            "schema": SCHEMA,
+            "obligations": [f"C{i}" for i in range(8)],
+            "blockers": [
+                {
+                    "id": f"B{i}",
+                    "status": "OPEN",
+                    "closable": True,
+                    "external_blocked": False,
+                    "dependency_depth": 1,
+                    "critical_path_wall_clock_units": 1,
+                    "new_reality_units": 0,
+                }
+                for i in range(40)
+            ],
+            "routes": [
+                {
+                    "id": f"R{i}",
+                    "covers": [f"C{i}"],
+                    "proof_mode": "DETERMINISTIC_HIDDEN_ORACLE",
+                    "blockers": [f"B{i}"],
+                    "base_admissible": True,
+                    "terminal_scope_authority": False,
+                    "terminal_scope_authority_after_blockers": True,
+                    "scope_authority_blocker": f"B{i}",
+                    "zero_incremental_spend": True,
+                    "oracle_independent": True,
+                    "candidate_oracle_hidden": True,
+                }
+                for i in range(8)
+            ],
+        }
+        out = compile_superproof(payload)
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["minimum_unblock_cut"]["blocker_count"], 8)
+        self.assertEqual(out["minimum_unblock_cut"]["new_reality_units"], 0)
