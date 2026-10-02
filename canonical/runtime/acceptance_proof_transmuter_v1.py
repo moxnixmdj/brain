@@ -52,6 +52,43 @@ def _absolute(r: Mapping[str,Any]) -> tuple[bool,str]:
         return False,"NO_LOWER_IS_BETTER_DOMINANCE"
     return False,"DIRECTION_INVALID"
 
+def _absolute_scope_complete(e: Mapping[str,Any]) -> tuple[bool,str]:
+    """Require a proof that the bound applies to the entire frozen protocol scope.
+
+    A perfect score on a finite sampled population is an empirical result, not a
+    protocol-wide mathematical lower/upper bound.  ABSOLUTE_DOMINANCE therefore
+    needs an independently verified completeness certificate in addition to the
+    numerical ceiling/floor relation.
+    """
+    s=e.get("scope_completeness")
+    if not isinstance(s,Mapping):
+        return False,"ABSOLUTE_SCOPE_COMPLETENESS_MISSING"
+    if s.get("verified") is not True:
+        return False,"ABSOLUTE_SCOPE_COMPLETENESS_NOT_VERIFIED"
+    if s.get("independent") is not True:
+        return False,"ABSOLUTE_SCOPE_COMPLETENESS_NOT_INDEPENDENT"
+
+    exact=(
+        s.get("basis")=="EXACT_COMPLETE_TARGET_CASE_UNIVERSE"
+        and s.get("complete_target_case_set") is True
+    )
+    exhaustive=(
+        s.get("basis")=="EXHAUSTIVE_FINITE_SUPERSET"
+        and s.get("exhaustive") is True
+        and s.get("target_subset_proved") is True
+    )
+    universal=(
+        s.get("basis")=="UNIVERSAL_FORMAL_SCOPE_PROOF"
+        and s.get("all_admissible_target_inputs_proved") is True
+        and s.get("formal_completeness") is True
+    )
+    if not (exact or exhaustive or universal):
+        return False,"ABSOLUTE_SCOPE_COMPLETENESS_BASIS_INVALID"
+    receipt=s.get("receipt")
+    if not isinstance(receipt,str) or not receipt:
+        return False,"ABSOLUTE_SCOPE_COMPLETENESS_RECEIPT_MISSING"
+    return True,str(s.get("basis"))
+
 def _mode_pass(e: Mapping[str,Any]) -> tuple[bool,str]:
     mode=e.get("mode")
     r=e.get("result")
@@ -64,7 +101,12 @@ def _mode_pass(e: Mapping[str,Any]) -> tuple[bool,str]:
     if mode=="EXHAUSTIVE_FINITE":
         ok=r.get("exhaustive") is True and r.get("all_cases_pass") is True
         return ok,"EXHAUSTIVE_FINITE_COMPLETE" if ok else "EXHAUSTIVE_FINITE_INCOMPLETE"
-    if mode=="ABSOLUTE_DOMINANCE": return _absolute(r)
+    if mode=="ABSOLUTE_DOMINANCE":
+        scope_ok,scope_reason=_absolute_scope_complete(e)
+        if not scope_ok:
+            return False,scope_reason
+        ok,reason=_absolute(r)
+        return ok,reason if ok else reason
     if mode=="PUBLIC_FIXED_BAR":
         ok=r.get("threshold_pass") is True
         return ok,"PUBLIC_FIXED_BAR_PASS" if ok else "PUBLIC_FIXED_BAR_NOT_PASS"
@@ -131,7 +173,7 @@ def evaluate(protocols_doc: Mapping[str,Any], evidence_doc: Mapping[str,Any]|Non
         "closed_family_count":closed,
         "open_family_count":len(out)-closed,
         "families":out,
-        "rule":"NO_ACCEPTANCE_PROMOTION_WITHOUT_FULL_FROZEN_SCOPE_WITNESS__UNIVERSAL_EXHAUSTIVE_OR_ABSOLUTE_DOMINANCE_MAY_SUPERSEDE_WEAKER_COMPARATOR_WORK_ONLY_WHEN_THE_WITNESS_BINDS_THE_ENTIRE_FROZEN_PROTOCOL",
+        "rule":"NO_ACCEPTANCE_PROMOTION_WITHOUT_FULL_FROZEN_SCOPE_WITNESS__FINITE_SAMPLE_SUCCESS_IS_NOT_A_PROTOCOL_WIDE_BOUND__ABSOLUTE_DOMINANCE_REQUIRES_INDEPENDENT_EXACT_EXHAUSTIVE_OR_UNIVERSAL_SCOPE_COMPLETENESS",
         "capability_credit_delta":0,
         "family_credit_delta":0,
         "execution_authority":False,

@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FINITE_SAMPLE_ABSOLUTE_DOMINANCE_FAILS_CLOSED__ZERO_CREDIT",
+  "objective": "Prevent finite empirical acceptance samples from being relabeled as protocol-wide mathematical ceiling/floor bounds.",
+  "defect": {
+    "runtime": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+    "prior_behavior": "ABSOLUTE_DOMINANCE accepted brain_lower_bound==theoretical_upper_bound without proving the claimed Brain bound covered the entire frozen protocol population.",
+    "consequence": "A 100% finite sampled result could close a matched-comparator protocol even when the source binding explicitly disclaimed exhaustive scope."
+  },
+  "live_counterexample": {
+    "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+    "source_case_count": 180,
+    "source_binding": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+    "source_binding_scope_claim": "DIRECT_OBJECTIVE_INSTRUMENTATION_INSIDE_T2_T3__NOT_EXHAUSTIVE_PROOF_OF_ALL_OPEN_DOMAIN_TOOL_ECOSYSTEMS",
+    "old_transmutation": "PASS_VIA_ABSOLUTE_DOMINANCE",
+    "repaired_transmutation": "DEFINED_RESULT_OPEN__ABSOLUTE_SCOPE_COMPLETENESS_MISSING"
+  },
+  "second_affected_witness": {
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+    "source_case_count": 132,
+    "note": "The existing compact acceptance witness does not carry an independently verified exact, exhaustive-finite, or universal formal scope-completeness certificate. Its underlying scope-equivalence relation may be reusable to construct such a certificate, but absence must fail closed until that proof is explicit and independently verified.",
+    "repaired_transmutation": "DEFINED_RESULT_OPEN__ABSOLUTE_SCOPE_COMPLETENESS_MISSING"
+  },
+  "admissible_absolute_dominance_bases": [
+    "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+    "EXHAUSTIVE_FINITE_SUPERSET",
+    "UNIVERSAL_FORMAL_SCOPE_PROOF"
+  ],
+  "expected_current_reduction": {
+    "family_count": 19,
+    "closed_family_count": 2,
+    "open_family_count": 17,
+    "preserved_closed_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+    ],
+    "reopened_pending_scope_completeness": [
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
+    ],
+    "terminal_goal_achieved": false
+  },
+  "hard_nonclaims": [
+    "RAW_180_OF_180_TOOL_DISCOVERY_RESULT_REMAINS_VALID_FOR_ITS_EXECUTED_SAMPLE",
+    "RAW_132_OF_132_DELEGATION_RESULT_REMAINS_VALID_FOR_ITS_EXECUTED_SAMPLE",
+    "THIS_RECONCILIATION_DOES_NOT_ASSERT_THE_TWO_FAMILIES_CANNOT_BE_CLOSED",
+    "THIS_RECONCILIATION_DOES_NOT_CONSUME_NEW_ACCEPTANCE_CASES"
+  ],
+  "next": "SEARCH_EXISTING_IMMUTABLE_PROOFS_FOR_SCOPE_COMPLETE_CERTIFICATES__PREFER_UNIVERSAL_OR_EXHAUSTIVE_REUSE__ONLY_IRREDUCIBLE_UNCERTAINTY_MAY_AUTHORIZE_NEW_REALITY",
+  "new_reality_units": 0,
+  "terminal_cases_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 938,
+    "pull_request_head": "0411779d6c6ad95a5eab479a372d8e128fad7297",
+    "merge_commit": "aa1ba4ed4665dc0861c513d554abb02336c88f9f",
+    "workflow_run_id": 37015697773,
+    "workflow_job_id": 110865885540,
+    "conclusion": "success",
+    "exact_brain_blobs": {
+      "canonical/runtime/acceptance_proof_transmuter_v1.py": "39b5611e53485674b29e2a05da91b89801bc5aa6",
+      "canonical/tests/test_acceptance_proof_transmuter_v1.py": "0ee24ebcde11679f468bb1ba653ddbb16fa27834",
+      "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+      "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json": "96052a6b5178305b37a2526fb25c3f53fa33b9b5",
+      "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+    }
+  }
+}

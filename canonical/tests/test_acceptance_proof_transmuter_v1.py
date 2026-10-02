@@ -39,18 +39,41 @@ class Tests(unittest.TestCase):
     def test_unverified_never_closes(self):
         self.assertEqual(self.row(evaluate(protocols(),{"evidence":[ev(verified=False)]}),"MATCHED")["result_status"],"DEFINED_RESULT_OPEN")
 
+    def scope(self):
+        return {"verified":True,"independent":True,"basis":"UNIVERSAL_FORMAL_SCOPE_PROOF",
+                "all_admissible_target_inputs_proved":True,"formal_completeness":True,
+                "receipt":"canonical/verification/test_scope_complete.json"}
+
     def test_absolute_ceiling(self):
-        e=ev(mode="ABSOLUTE_DOMINANCE",result={"direction":"higher","brain_lower_bound":1.0,"theoretical_upper_bound":1.0})
+        e=ev(mode="ABSOLUTE_DOMINANCE",scope_completeness=self.scope(),
+             result={"direction":"higher","brain_lower_bound":1.0,"theoretical_upper_bound":1.0})
         r=self.row(evaluate(protocols(),{"evidence":[e]}),"MATCHED")
         self.assertEqual((r["result_status"],r["witness_reason"]),("PASS","THEORETICAL_CEILING_DOMINANCE"))
 
     def test_bound_squeeze(self):
-        e=ev(mode="ABSOLUTE_DOMINANCE",result={"direction":"higher","brain_lower_bound":0.94,"target_upper_bound":0.91})
+        e=ev(mode="ABSOLUTE_DOMINANCE",scope_completeness=self.scope(),
+             result={"direction":"higher","brain_lower_bound":0.94,"target_upper_bound":0.91})
         self.assertEqual(self.row(evaluate(protocols(),{"evidence":[e]}),"MATCHED")["result_status"],"PASS")
 
     def test_lower_floor(self):
-        e=ev(mode="ABSOLUTE_DOMINANCE",result={"direction":"lower","brain_upper_bound":0.0,"theoretical_lower_bound":0.0})
+        e=ev(mode="ABSOLUTE_DOMINANCE",scope_completeness=self.scope(),
+             result={"direction":"lower","brain_upper_bound":0.0,"theoretical_lower_bound":0.0})
         self.assertEqual(self.row(evaluate(protocols(),{"evidence":[e]}),"MATCHED")["result_status"],"PASS")
+
+    def test_finite_perfect_sample_without_scope_completeness_does_not_close(self):
+        e=ev(mode="ABSOLUTE_DOMINANCE",
+             result={"direction":"higher","brain_lower_bound":1.0,"theoretical_upper_bound":1.0})
+        r=self.row(evaluate(protocols(),{"evidence":[e]}),"MATCHED")
+        self.assertEqual(r["result_status"],"DEFINED_RESULT_OPEN")
+        self.assertIn("ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
+                      r["rejections"][0]["reasons"])
+
+    def test_unverified_scope_completeness_does_not_close(self):
+        s=self.scope(); s["verified"]=False
+        e=ev(mode="ABSOLUTE_DOMINANCE",scope_completeness=s,
+             result={"direction":"higher","brain_lower_bound":1.0,"theoretical_upper_bound":1.0})
+        self.assertEqual(self.row(evaluate(protocols(),{"evidence":[e]}),"MATCHED")["result_status"],
+                         "DEFINED_RESULT_OPEN")
 
     def test_partial_public_bar_does_not_close_composite(self):
         e=ev(id="M",family="MIXED",mode="PUBLIC_FIXED_BAR",closes_entire_protocol=False,result={"threshold_pass":True})
