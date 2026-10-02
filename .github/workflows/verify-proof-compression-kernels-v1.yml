@@ -1,0 +1,38 @@
+name: Verify proof compression kernels v1
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/epistemic_closure_kernel_v1.py"
+      - "canonical/runtime/composition_component_proof_slicer_v1.py"
+      - "canonical/runtime/protocol_implication_scope_algebra_v1.py"
+      - "canonical/tests/test_epistemic_closure_kernel_v1.py"
+      - "canonical/tests/test_composition_component_proof_slicer_v1.py"
+      - "canonical/tests/test_protocol_implication_scope_algebra_v1.py"
+      - "canonical/governance/PROOF_COMPRESSION_KERNELS_V1.json"
+      - ".github/workflows/verify-proof-compression-kernels-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/epistemic_closure_kernel_v1.py"
+      - "canonical/runtime/composition_component_proof_slicer_v1.py"
+      - "canonical/runtime/protocol_implication_scope_algebra_v1.py"
+      - "canonical/tests/test_epistemic_closure_kernel_v1.py"
+      - "canonical/tests/test_composition_component_proof_slicer_v1.py"
+      - "canonical/tests/test_protocol_implication_scope_algebra_v1.py"
+      - "canonical/governance/PROOF_COMPRESSION_KERNELS_V1.json"
+      - ".github/workflows/verify-proof-compression-kernels-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run exact deterministic tests
+        run: |
+          python canonical/tests/test_epistemic_closure_kernel_v1.py
+          python canonical/tests/test_composition_component_proof_slicer_v1.py
+          python canonical/tests/test_protocol_implication_scope_algebra_v1.py
