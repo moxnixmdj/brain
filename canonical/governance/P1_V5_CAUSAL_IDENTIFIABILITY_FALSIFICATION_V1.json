@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_CAUSAL_IDENTIFIABILITY_FALSIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_FALSIFICATION__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Falsify any claim that P1 V5 is a full semantic superset of the frozen P1 contract by exhibiting two evaluator-admissible hidden intervention worlds with byte-identical candidate-visible trajectory evidence and different causal roots.",
+  "exact_source_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/runtime/p1_v5_direct_surface_scope_superset_v1.py": "9036bd9855409650bb25015caaee8c9c1aa0a43a"
+  },
+  "frozen_semantics_targeted": [
+    "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+    "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE",
+    "NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE"
+  ],
+  "theorem": "IF_TWO_ADMISSIBLE_HIDDEN_CAUSAL_WORLDS_HAVE_IDENTICAL_CANDIDATE_VISIBLE_BYTES_BUT_DIFFERENT_TRUE_CAUSES__NO_DETERMINISTIC_UNIQUE_CAUSE_OUTPUT_CAN_BE_CORRECT_IN_BOTH__THEREFORE_UNIQUE_CAUSE_REQUIRES_AN_EARNED_DISCRIMINATOR_OR_THE_ROUTE_MUST_ABSTAIN",
+  "expected_v5_failure": {
+    "candidate_status": "IDENTIFIED",
+    "candidate_cause_action_id": "A1",
+    "candidate_repair": "restore:A1:AUTHORITY",
+    "hidden_late_world_true_cause": "A2",
+    "hidden_late_world_rescuing_repair": "restore:A2:STATE_TRANSITION"
+  },
+  "consequence_if_verified": [
+    "P1_V5_DIRECT_SURFACE_SCOPE_SUPERSET_V1_MUST_BE_QUARANTINED_AS_FALSE_POSITIVE",
+    "THE_V4_TWO_RESIDUAL_COMPRESSION_IS_NOT_COMPLETE_FOR_WHOLE_P1_CAUSAL_IDENTIFIABILITY",
+    "ADD_RESIDUAL_P1_OBSERVATIONALLY_EQUIVALENT_CAUSAL_WORLD_DISCRIMINATION",
+    "V6_MUST_ABSTAIN_OR_ACQUIRE_AN_EARNED_CAUSAL_DISCRIMINATOR_BEFORE_UNIQUE_LOCALIZATION_WHEN_VISIBLE_TRACE_DOES_NOT_IDENTIFY_CAUSE"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
