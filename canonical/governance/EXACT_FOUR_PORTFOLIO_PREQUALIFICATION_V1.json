@@ -90,7 +90,10 @@
         "AUTOMATIONBENCH_PUBLIC_600_TASK_ABSOLUTE_ACCEPTANCE_AND_SCOPE_BINDING_NOT_YET_FROZEN",
         "OSWORLD_2_1_EXACT_ZERO_COST_ROUTE_FAIL_CLOSED_ON_GATED_ASSETS__SCOPE_EQUIVALENT_PROOF_OR_PROVEN_ASSET_ACCESS_REQUIRED"
       ],
-      "livebench_if_prequalification": "PASS__ADAPTER_DATASET_DEPENDENCIES_HERMETIC_RUNTIME_AND_58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES_INDEPENDENTLY_VERIFIED"
+      "livebench_if_prequalification": "PASS__ADAPTER_DATASET_DEPENDENCIES_HERMETIC_RUNTIME_AND_58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES_INDEPENDENTLY_VERIFIED",
+      "closed_bindings": [
+        "LIVEBENCH_IF_VERIFIER_ADAPTER_DATASET_HERMETIC_RUNTIME_AND_58_CHECKER_MUTATION_BOUNDARY_PREFLIGHT_PASS"
+      ]
     },
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": {
       "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
@@ -208,7 +211,7 @@
     "proxy_benchmark_substitutions_admitted": 0,
     "livebench_if_response_adapter_independently_verified": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "livebench_if_dataset_revision_hash_frozen_without_case_exposure": true,
-    "livebench_if_58_checker_mutation_preflight_pass": "INDEPENDENT_PASS__canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_VERIFICATION_20261002_V1.json",
+    "livebench_if_58_checker_mutation_preflight_pass": "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "livebench_if_full_verifier_runtime_hermetic_smoke_pass": "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "four_uncovered_behavioral_direct_proof_contracts_frozen": true,
     "four_uncovered_behavioral_direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
@@ -250,7 +253,7 @@
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "conclusion": "LIVEBENCH_IF_PREQUALIFICATION_CLOSED__TERMINAL_BENCH_4_ZERO_CASE_ROUTE_PASS__HARBOR_BASE_CARRIER_PASS__REMAINING_WORK_IS_PUBLIC_SURFACE_ADAPTER_SCORER_ASSET_GRADER_SCOPE_BINDINGS_FINANCE_UNKNOWN_DOMAIN_AND_FINAL_DEPENDENCY_CLEANLINESS",
+    "conclusion": "LIVEBENCH_IF_PREWAVE_VERIFIER_BINDING_CLOSED__PRIVATE_ROUTES_DELETED__DIRECT_PROOF_BINDINGS_FROZEN__GENERAL_ZERO_COST_CARRIER_AND_SHARDED_FINITE_POPULATION_ROUTE_INDEPENDENT_PASS__REMAINING_WORK_IS_SURFACE_SPECIFIC_PUBLIC_BINDINGS_FINANCE_UNKNOWN_DOMAIN_AND_FINAL_DEPENDENCY_CLEANLINESS",
     "unresolved_identity_or_access_count": 1,
     "deleted_required_execution_routes_by_dominance_v2": 5,
     "required_private_or_nonreproducible_execution_route_count": 0
