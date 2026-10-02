@@ -1,0 +1,207 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-V5-ZERO-REALITY-FRONTIER-20261002-V1",
+  "status": "PROPOSED_CURRENT_BASE__ZERO_FAMILY_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "3920b7838c5044b0c9619b9779155de0bcf19f4e",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "CANONICAL_MIRROR_DRIFT_AFTER_V5_INVALIDATION_AND_ZERO_REALITY_COMPRESSION_TO_M0A_ONLY",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::CANONICAL_MIRROR_DRIFT_AFTER_V5_INVALIDATION_AND_ZERO_REALITY_COMPRESSION_TO_M0A_ONLY",
+  "expected_parent_frontier_change": "SYNC_M0A_ONLY_ACTIVE_ZERO_REALITY_AND_M1A_M1B_PROOF_ONLY_FRONTIER__STOP_OBSOLETE_OLMO_SUBSPACE_HARVEST__REVOKE_V5_AUTHORITY__FREEZE_V6_ONLY_AFTER_M0A_SATURATION",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "All canonical mirrors agree M0A is the only active zero-reality obligation, M1A and M1B are proof-only, obsolete mixed OLMo subspace harvesting is stopped, exposed M0A heldouts are quarantined, V5 is historical only, and no fresh matched evaluation is authorized before V6.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__INTERNALIZE_ONLY_CAUSALLY_NECESSARY_RESIDUALS__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "general_computation_substrate": "MAY_BE_EXTERNAL__MUST_NOT_BE_OPAQUE_TARGET_CAPABILITY_PROVIDER",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "semantic_contract_policy": "NO_CONFIDENCE_OR_DONOR_OUTPUT_IS_TERMINAL_SEMANTIC_AUTHORITY"
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "M1A_RESOLVER_SOURCE_TESTS_AND_RECEIPT_BRAIN_OWNED",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "PASS_FOR_PROMOTED_M1A_COMPONENT",
+    "GENERAL_SUBSTRATE_TEST": "PASS",
+    "SPECIMEN_SEPARATION_TEST": "PASS",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "PASS_FOR_M1A_COMPONENT",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "INDEPENDENT_WORKFLOW_36946523488_SUCCESS",
+    "OWNERSHIP_PACKAGE_TEST": "BOUNDED_COMPONENT_ONLY__ZERO_FAMILY_CREDIT"
+  },
+  "reasoning_durability": {
+    "receipt": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json"
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3920b7838c5044b0c9619b9779155de0bcf19f4e",
+    "real_outcome": "Make the scheduler reflect the final current zero-reality compression: M0A only, deterministic composition first, M1A/M1B proof-only, no fresh evidence before V6.",
+    "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+    "obs_goal": {
+      "real_outcome": "Delete obsolete research lanes and leave one active zero-reality critical path.",
+      "proxy_goals_deleted": [
+        "V5 badge",
+        "M1A mechanism search",
+        "M1B mechanism search",
+        "OLMo mixed subspace refinement",
+        "exposed heldout promotion",
+        "premature matched evaluation"
+      ],
+      "surviving_necessity": "Atomic scheduler and M0A action-bundle reconciliation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "BOUNDED_CONTEXTUAL_SEMANTICS_001",
+        "EXPLICIT_DISCOURSE_OPERATOR_ALGEBRA_001",
+        "M0A_SEMANTIC_GRAPH_CONSENSUS_001",
+        "M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001",
+        "M0A_OLMO_MLP_SUBSPACE_PROTOCOL_INVALIDATION_V1",
+        "M1A_COMPLETE_ACTION_BUNDLE_V2",
+        "M1B_ZERO_REALITY_COVERAGE_AUDIT_V1"
+      ],
+      "external_existing_routes_checked": [
+        "Fastcoref partial only",
+        "OLMo mixed probe diagnostic only after deterministic closure"
+      ],
+      "capability_work_deleted": [
+        "M1A mechanism search",
+        "M1B mechanism search",
+        "OLMo binary subspace refinement",
+        "V5 restoration",
+        "fresh matched evaluation"
+      ],
+      "surviving_gap": "M0A upstream mention identification, harder contextual anaphora, predicate-argument semantics, and implicit/long-range discourse via zero-reality deterministic/specialized composition."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific scheduler drift after rapid deletion and closure of zero-reality branches.",
+      "delete_bypass_substitute_options": [
+        "Delete V5",
+        "Delete M1A/M1B mechanism lanes",
+        "Delete obsolete OLMo subspace refinement",
+        "Reuse deterministic operators",
+        "Use specialized donors as proposal-only behind consensus"
+      ],
+      "surviving_causal_blocker": "CANONICAL_MIRROR_DRIFT_AFTER_V5_INVALIDATION_AND_ZERO_REALITY_COMPRESSION_TO_M0A_ONLY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Atomic M0A-only reconciliation",
+        "Keep stale multilane scheduler",
+        "Continue obsolete OLMo refinement",
+        "Spend matched evidence"
+      ],
+      "losing_routes_reason": "All other routes either contradict verified receipts, reuse contaminated evidence, or spend information while zero-reality M0A work remains.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Trusted drift guard plus merged-main current-state reducer."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "V5 authority",
+        "M1A active lane",
+        "M1B active lane",
+        "mixed OLMo subspace protocol",
+        "exposed contextual heldout promotion"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "bounded contextual semantics",
+        "explicit discourse algebra",
+        "semantic consensus",
+        "M1A proof-only V2",
+        "M1B coverage audit"
+      ],
+      "fresh_reuse_plan": "Finish only M0A deterministic/specialized zero-reality composition, then freeze V6 from faithful costs."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Do not recompute invalidated V5",
+        "Do not repeat resolver verification",
+        "Do not repeat fastcoref feasibility",
+        "Do not replay M1B compilers"
+      ],
+      "search_stop_decision": "Existing canonical receipts determine the current scheduler; external search is not needed for this reconciliation.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_M0A_ONLY_ZERO_REALITY_FRONTIER",
+      "KEEP_STALE_MULTILANE_STATE",
+      "CONTINUE_OLMO_SUBSPACE_REFINEMENT",
+      "SPEND_MATCHED_EVIDENCE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "KEEP_STALE_MULTILANE_STATE",
+      "CONTINUE_OLMO_SUBSPACE_REFINEMENT",
+      "SPEND_MATCHED_EVIDENCE"
+    ],
+    "selected_surviving_route": "RECONCILE_M0A_ONLY_ZERO_REALITY_FRONTIER",
+    "why_selected_route_is_fastest_sufficient": "Verified receipts deleted every other zero-reality lane; synchronization costs no new reality and exposes the sole causal frontier.",
+    "expected_parent_level_state_change": "SYNC_M0A_ONLY_ACTIVE_ZERO_REALITY_AND_M1A_M1B_PROOF_ONLY_FRONTIER__STOP_OBSOLETE_OLMO_SUBSPACE_HARVEST__REVOKE_V5_AUTHORITY__FREEZE_V6_ONLY_AFTER_M0A_SATURATION",
+    "stop_condition": "All canonical mirrors agree M0A is the only active zero-reality obligation, M1A and M1B are proof-only, obsolete mixed OLMo subspace harvesting is stopped, exposed M0A heldouts are quarantined, V5 is historical only, and no fresh matched evaluation is authorized before V6.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER uses already-canonical receipts and does not select a new external execution route."
+    }
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "CANONICAL_SCHEDULER_EQUALS_M0A_ONLY_ACTIVE_ZERO_REALITY_RECEIPT_DERIVED_STATE",
+    "hole_type": "?P",
+    "expected_certificate_or_receipt": "DRIFT_GUARD_PASS_PLUS_MAIN_CURRENT_STATE_OBS_PASS",
+    "validator": "canonical/runtime/enforce_goal_hierarchy.py",
+    "maximum_cheap_test_cost": "ONE_PR_GUARD_PASS",
+    "prerequisites": [
+      "V5_INVALIDATED",
+      "M0A_BOUNDED_CONTEXTUAL_VERIFIED",
+      "M0A_EXPLICIT_DISCOURSE_VERIFIED",
+      "M0A_SEMANTIC_CONSENSUS_VERIFIED",
+      "MIXED_OLMO_SUBSPACE_STOPPED",
+      "M0A_HELDOUTS_QUARANTINED",
+      "M1A_PROOF_ONLY_V2",
+      "M1B_COVERAGE_AUDIT_COMPLETE"
+    ],
+    "contamination_risk": "NONE__NO_FRESH_TERMINAL_EVIDENCE",
+    "reversibility": "FULLY_REVERSIBLE_STATE_RECONCILIATION",
+    "falsification_condition": "ANY_MIRROR_DISAGREES_OR_ANY_DELETED_ZERO_REALITY_LANE_REMAINS_SCHEDULED",
+    "critical_path_relation": "REMOVES_STALE_AUTHORITY_BEFORE_ZERO_REALITY_FRONTIER_EXECUTION"
+  },
+  "continuous_obs": {
+    "required": true,
+    "post_receipt_revalidation_required": true,
+    "material_unknown_fails_closed": true
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "proof_obligation": "STATE_AND_M0A_BUNDLE_RECONCILIATION_ONLY",
+    "minimum_reality_cut": "V5_INVALIDATED__V6_NOT_YET_FROZEN",
+    "terminal_decision_value": "ZERO_NEW_INFORMATION"
+  },
+  "global_terminal_proof_cut": {
+    "proposed_action_membership": "RECONCILIATION_ONLY__NO_NEW_TERMINAL_OBSERVATION",
+    "shared_residual_cut": "M0A_ONLY_ACTIVE_ZERO_REALITY__M1A_M1B_PROOF_ONLY__V6_REQUIRED",
+    "full_17_family_cut_remains_open": true
+  }
+}
