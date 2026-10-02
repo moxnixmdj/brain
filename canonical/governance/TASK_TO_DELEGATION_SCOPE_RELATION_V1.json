@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_TASK_TO_DELEGATION_SCOPE_RELATION_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_RELATION_CANDIDATE__AWAITING_INDEPENDENT_SCOPE_GATE_VERIFICATION__ZERO_TERMINAL_CREDIT",
+  "status": "FROZEN_RELATION_CANDIDATE__CURRENT_EXACT_BLOB_REVALIDATION_PENDING__ZERO_TERMINAL_CREDIT",
   "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
   "registry": {
     "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
-    "blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84"
+    "blob_sha": "b70c11595f601bcece387b79cd60a366ed930739"
   },
   "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
-  "candidate_blob_sha": "9f2c3aa42352cba66967afb1f8a3f45357833c41",
+  "candidate_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
   "primary_proof": "canonical/runtime/delegation_whole_scope_proof_v2.py",
-  "primary_proof_blob_sha": "5785b07f482e38acdf7916e5414d90c2c0c305b7",
+  "primary_proof_blob_sha": "928466401b36e4f3b09c517950cc050432a0616f",
   "structural_proof": "canonical/runtime/delegation_structural_variety_proof_v3.py",
   "structural_proof_blob_sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
   "exact_contract_boundary": {
