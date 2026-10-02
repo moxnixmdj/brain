@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "PASS__4_OF_4_REAL_PARENT_CASE_PRODUCERS_EXACTLY_BOUND_AND_INDEPENDENTLY_VERIFIED__ZERO_TERMINAL_RESULTS",
+  "status": "PASS__4_OF_4_SEALED_REAL_PARENT_CASE_PRODUCERS_EXACTLY_BOUND_AND_INDEPENDENTLY_VERIFIED__ZERO_TERMINAL_RESULTS",
   "objective": "BIND_REAL_POST_FREEZE_T0_T1_T2_T3_PARENT_CASE_PRODUCERS_THAT_EMIT_SAME_CASE_MULTIPLEX_INSTRUMENTATION_RECEIPTS",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
@@ -11,12 +11,12 @@
   "invariant": "A_PARENT_PRODUCER_MUST_GENERATE_OR_EXECUTE_THE_REAL_FROZEN_PARENT_CASES_AND_DERIVE_INSTRUMENTATION_VERDICTS_FROM_THEIR_HIDDEN_ORACLES__A_CALLABLE_STUB_OR_RECEIPT_VALIDATOR_IS_NOT_A_PRODUCER",
   "portfolios": {
     "T0": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SEALED_REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
-      "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
-      "test_blob_sha": "7735a0851c87463b1a19bd9ffcfbee44812296f0",
-      "independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "producer_blob_sha": "d8f25e9e37d7ab93eab254c77d1a6ff211fff4f3",
+      "test_blob_sha": "28cc776b808fe8787efe5bf0f33a459e544c32df",
+      "independent_verification": "canonical/verification/TERMINAL_LAUNCH_HARDENING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "runner_binding": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
       "real_parent_case_producer": true,
       "post_freeze_selection_only": true,
@@ -27,12 +27,12 @@
       "no_stub_receipts": true
     },
     "T1": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SEALED_REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
-      "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
-      "test_blob_sha": "7735a0851c87463b1a19bd9ffcfbee44812296f0",
-      "independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "producer_blob_sha": "d8f25e9e37d7ab93eab254c77d1a6ff211fff4f3",
+      "test_blob_sha": "28cc776b808fe8787efe5bf0f33a459e544c32df",
+      "independent_verification": "canonical/verification/TERMINAL_LAUNCH_HARDENING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "runner_binding": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
       "real_parent_case_producer": true,
       "post_freeze_selection_only": true,
@@ -43,12 +43,12 @@
       "no_stub_receipts": true
     },
     "T2": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SEALED_REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
-      "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
-      "test_blob_sha": "7735a0851c87463b1a19bd9ffcfbee44812296f0",
-      "independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "producer_blob_sha": "d8f25e9e37d7ab93eab254c77d1a6ff211fff4f3",
+      "test_blob_sha": "28cc776b808fe8787efe5bf0f33a459e544c32df",
+      "independent_verification": "canonical/verification/TERMINAL_LAUNCH_HARDENING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "runner_binding": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
       "real_parent_case_producer": true,
       "post_freeze_selection_only": true,
@@ -59,12 +59,12 @@
       "no_stub_receipts": true
     },
     "T3": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SEALED_REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
-      "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
-      "test_blob_sha": "7735a0851c87463b1a19bd9ffcfbee44812296f0",
-      "independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "producer_blob_sha": "d8f25e9e37d7ab93eab254c77d1a6ff211fff4f3",
+      "test_blob_sha": "28cc776b808fe8787efe5bf0f33a459e544c32df",
+      "independent_verification": "canonical/verification/TERMINAL_LAUNCH_HARDENING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "runner_binding": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
       "real_parent_case_producer": true,
       "post_freeze_selection_only": true,
