@@ -98,7 +98,10 @@
         "INDEPENDENT_ACCEPTANCE_CONSEQUENCES_COVER_MATERIAL_INTERPRETATIONS"
       ],
       "nonclaim": "CURRENT_BOUNDED_COMPONENTS_AND_ACCEPTANCE_COMPILER_DO_NOT_YET_PROVE_WHOLE_RAW_SOURCE_SEMANTIC_SCOPE",
-      "terminal_proof_state": "REQUIRED_NOT_YET_EXECUTED"
+      "terminal_proof_state": "REQUIRED_NOT_YET_EXECUTED",
+      "terminal_result_required": true,
+      "terminal_result_pass": false,
+      "terminal_result_receipt": null
     },
     {
       "id": "VERIFIED_NATIVE_ARTIFACT_TRANSACTIONS",
