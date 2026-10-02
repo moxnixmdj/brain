@@ -1,0 +1,27 @@
+name: Verify terminal proof route autocompiler
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/terminal_proof_route_autocompiler.py
+      - canonical/tests/test_terminal_proof_route_autocompiler.py
+      - canonical/governance/TERMINAL_PROOF_ROUTE_AUTOCOMPILER_ACTIVATION_V1.json
+      - canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json
+      - .github/workflows/verify-terminal-proof-route-autocompiler.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_terminal_proof_route_autocompiler
+      - run: python canonical/runtime/terminal_proof_route_autocompiler.py canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json
