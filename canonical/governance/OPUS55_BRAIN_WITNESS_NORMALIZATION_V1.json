@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_BRAIN_WITNESS_NORMALIZATION_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_CONTENT_ADDRESSED_RECEIPT_NORMALIZATION__9_PROVED_WITNESSES__TARGET_ATOM_MAPPING_AND_SEMANTIC_IMPLICATION_OPEN__ZERO_CREDIT",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CONTENT_ADDRESSED_RECEIPT_NORMALIZATION__9_PROVED_WITNESSES__SEMANTIC_IMPLICATION_OPEN__ZERO_CREDIT",
   "objective": "Normalize only already-proved content-addressed Brain acceptance witnesses into a stable machine-readable catalog. This artifact does not infer target-atom coverage, semantic equivalence, family equivalence, or stronger-scope implication.",
   "authority": {
     "evidence_bindings": {
@@ -252,11 +252,18 @@
     "NO_FAMILY_ACCEPTANCE_CREDIT",
     "NO_OWNERSHIP_CREDIT"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_RECOMPUTATION_FROM_CONTENT_ADDRESSED_EVIDENCE_BINDINGS__THEN_ADD_ONLY_EXPLICIT_MACHINE_CHECKABLE_WITNESS_TO_TARGET_ATOM_EDGES_WITH_SCOPE_RELATIONS__RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+  "next": "ADD_ONLY_EXPLICIT_MACHINE_CHECKABLE_WITNESS_TO_TARGET_ATOM_EDGES_WITH_SCOPE_RELATIONS__INDEPENDENTLY_VERIFY_EACH_EDGE__RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA__NO_SEMANTIC_CREDIT_BY_NAME_OR_ANALOGY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "path": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_verifier_pr": 900,
+    "workflow_run_id": 37012631436,
+    "workflow_job_id": 110855791529,
+    "merge_commit": "3a31802756303660448e2204440c0634df0cc81a"
+  }
 }
