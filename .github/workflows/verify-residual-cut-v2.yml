@@ -1,0 +1,44 @@
+name: Verify exact residual cut v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/RESIDUAL_CUT_INPUT_V2.json
+      - canonical/governance/RESIDUAL_EVIDENCE_SATURATION_V2.json
+      - canonical/runtime/global_proof_cut_compiler.py
+      - .github/workflows/verify-residual-cut-v2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile exact frozen residual cut
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.global_proof_cut_compiler import compile_cut
+          p=json.loads(Path("canonical/governance/RESIDUAL_CUT_INPUT_V2.json").read_text())
+          out=compile_cut(p)
+          print(json.dumps(out,sort_keys=True,indent=2))
+          assert out["status"]=="EXACT_CUT",out
+          assert out["exact"] is True,out
+          assert out["open_obligations"]==["M0A","M1A","M1B"],out
+          assert set(out["selected_actions"])=={
+            "A1_M1B_DETERMINISTIC",
+            "A_M0A_COMPOSED_SEMANTIC_GRAPH_V1",
+            "A_M1A_DETERMINISTIC_PLUS_BOUNDED_RESIDUAL_V1"
+          },out
+          assert out["total_new_reality_units"]==2.0,out
+          assert out["max_dependency_depth"]==2,out
+          assert out["parallel_critical_path_wall_clock_units"]==1.0,out
+          PY
