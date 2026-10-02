@@ -97,6 +97,23 @@ class Tests(unittest.TestCase):
         self.assertEqual(by["FRONTIERCODE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS"]["associated_target_predicates"],["CODING_FRONTIERCODE_GE_54_4"])
         self.assertEqual(by["ARTIFACT_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS"]["associated_target_predicates"],["ARTIFACT_AA_BRIEFCASE_GE_1822"])
 
+    def test_scan_snapshot_is_content_bound_even_when_candidate_count_is_unchanged(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/unmatched.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"note":"unrelated-a"}\\n',encoding="utf-8")
+            out1=build_index(frontier(),overlay(),root=root,source_revision="rev-a")
+            p.write_text('{"note":"unrelated-b"}\\n',encoding="utf-8")
+            out2=build_index(frontier(),overlay(),root=root,source_revision="rev-b")
+            self.assertEqual(out1["candidate_match_count"],out2["candidate_match_count"])
+            self.assertNotEqual(out1["scan_manifest_sha256"],out2["scan_manifest_sha256"])
+            self.assertEqual(out1["scan_source_revision"],"rev-a")
+            self.assertEqual(out2["scan_source_revision"],"rev-b")
+            self.assertEqual(out1["basis_manifest_sha256"],out2["basis_manifest_sha256"])
+            self.assertEqual(len(out1["scan_manifest_sha256"]),64)
+            self.assertEqual(len(out1["basis_manifest_sha256"]),64)
+
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
