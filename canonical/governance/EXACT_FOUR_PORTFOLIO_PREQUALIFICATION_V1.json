@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_PREQUALIFICATION_READY__12_CONTRACT_PROOF_BASIS_RESYNCHRONIZED__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__REDUCER_PASS_PENDING",
+  "status": "ACTIVE_FAIL_CLOSED__12_CONTRACT_PROOF_BASIS_RESYNCHRONIZED__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__REDUCER_VERDICT_PENDING",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -217,9 +217,8 @@
   ],
   "execution_authority": false,
   "next": [
-    "RUN_CANONICAL_PREQUALIFICATION_REDUCER_ON_RECONCILED_12_OF_12_STATE",
-    "IF_ZERO_FAILED_PREDICATES__AUTHORIZE_T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE",
-    "DO_NOT_GRANT_CAPABILITY_OR_FAMILY_CREDIT_BEFORE_TERMINAL_RESULTS"
+    "RUN_CANONICAL_NONCIRCULAR_PREQUALIFICATION_REDUCER",
+    "AUTHORIZE_T0_T1_T2_T3_ONLY_IF_REDUCER_FAILED_PREDICATES_EMPTY"
   ],
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -239,7 +238,7 @@
     "brain_route_and_dependency_manifest_frozen": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
     "no_known_opaque_target_capability_provider_in_operative_brain_route": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
     "no_known_unresolved_composition_defect_before_wave": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
-    "four_portfolios_pairwise_execution_independent": "INDEPENDENT_PASS__canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "four_portfolios_pairwise_execution_independent": "PASS__FROZEN__ALL_12_ROUTE_AND_POPULATION_BINDINGS_COMPLETE",
     "livebench_if_verifier_source_bytes_frozen": true,
     "finance_and_accounting_index_surface_accounted_for": true,
     "proof_route_dominance_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -354,7 +353,8 @@
     "browser_t2_objective_binding": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
     "browser_t2_objective_binding_verification": "canonical/verification/BROWSER_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "tool_discovery_t2_t3_objective_binding": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
-    "tool_discovery_t2_t3_objective_binding_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "tool_discovery_t2_t3_objective_binding_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "research_t3_objective_binding_verification": "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -431,7 +431,7 @@
     "v4_independent_verification": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_CURRENT_FAIL_CLOSED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "active_terminal_proof_basis": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-  "active_terminal_proof_basis_blob_sha": "411f054140f25c4b0c71dc7287c48893ff550082",
+  "active_terminal_proof_basis_blob_sha": "2ba39428f0065f0d8739c43935f7026ba6eedcfb",
   "population_protocol": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
   "superseded_ten_obligation_package": {
     "path": "canonical/governance/TERMINAL_REPLACEMENT_CANDIDATE_PACKAGE_FREEZE_V1.json",
@@ -442,14 +442,14 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 12,
   "last_basis_resynchronization": {
-    "basis_blob_sha": "411f054140f25c4b0c71dc7287c48893ff550082",
-    "method": "MECHANICAL_RECONCILIATION_FROM_ACTIVE_BASIS__NO_TERMINAL_CREDIT",
+    "basis_blob_sha": "2ba39428f0065f0d8739c43935f7026ba6eedcfb",
+    "method": "MECHANICAL_RECONCILIATION_FROM_ACTIVE_12_OF_12_BASIS__NO_TERMINAL_CREDIT",
     "date": "2026-10-02"
   },
   "derived_state_reconciliation": {
     "authority": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-    "authority_blob_sha": "411f054140f25c4b0c71dc7287c48893ff550082",
-    "rule": "ADMISSIBLE_ROUTE_COUNTS_PORTFOLIO_BLOCKERS_AND_CLOSED_BINDINGS_ARE_DERIVED_FROM_CURRENT_ACTIVE_BASIS__STALE_DERIVED_BINDINGS_FORBIDDEN",
+    "authority_blob_sha": "2ba39428f0065f0d8739c43935f7026ba6eedcfb",
+    "rule": "ROUTE_COUNTS_PORTFOLIO_BLOCKERS_AND_PREWAVE_BINDINGS_DERIVED_FROM_CURRENT_ACTIVE_BASIS__TERMINAL_EXECUTION_AUTHORITY_REMAINS_REDUCER_DERIVED",
     "current_admissible_route_count": 12,
     "current_open_route_count": 0
   }
