@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ZERO_COST_EVALUATION_ROUTE_MATRIX_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PUBLIC_ROUTE_AUDIT__ZERO_TERMINAL_REALITY__SURFACE_SPECIFIC_BLOCKERS_EXPLICIT",
+  "status": "FROZEN_PUBLIC_ROUTE_AUDIT__PRIVATE_ROUTE_DOMINANCE_V2_APPLIED__SURVIVING_PUBLIC_SURFACE_PREFLIGHTS_EXPLICIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "authority": [
     "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
@@ -32,22 +32,26 @@
       {
         "surface": "FrontierCode 1.1 Main",
         "target": ">=54.4%",
-        "classification": "PUBLIC_SCORE_ONLY_NO_EXACT_EXECUTABLE_ROUTE_FOUND",
+        "classification": "DELETED_AS_REQUIRED_EXECUTION_ROUTE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_V2",
         "sources": [
           "https://cognition.com/blog/frontier-code-1.1"
         ],
-        "zero_cost_status": "BLOCKED_EXACT",
-        "next": "PROVE_SCOPE_EQUIVALENT_PUBLIC_ABSOLUTE_ROUTE_FOR_CODE_CORRECTNESS_QUALITY_AND_MERGEABILITY_OR_OBTAIN_EXACT_PUBLIC_HARNESS"
+        "zero_cost_status": "NOT_REQUIRED_FOR_TERMINAL_EXECUTION__FROZEN_CONTRACT_NATIVE_OR_EXISTING_DIRECT_PROOF_ROUTE_DOMINATES_BLOCKED_OFFICIAL_ROUTE",
+        "next": "NONE__PRESERVE_PUBLISHED_TARGET_AS_BACKGROUND_REFERENCE_ONLY",
+        "dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+        "capability_credit_from_deletion": 0
       },
       {
         "surface": "CursorBench 4.0",
         "target": ">=57.8%",
-        "classification": "PUBLIC_SCORE_ONLY_NO_EXACT_EXECUTABLE_ROUTE_FOUND",
+        "classification": "DELETED_AS_REQUIRED_EXECUTION_ROUTE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_V2",
         "sources": [
           "https://epoch.ai/benchmarks/cursorbench"
         ],
-        "zero_cost_status": "BLOCKED_EXACT",
-        "next": "PROVE_SCOPE_EQUIVALENT_PUBLIC_ABSOLUTE_ROUTE_FOR_LONG_HORIZON_CODING_AND_INSTRUCTION_FOLLOWING_OR_OBTAIN_EXACT_PUBLIC_HARNESS"
+        "zero_cost_status": "NOT_REQUIRED_FOR_TERMINAL_EXECUTION__FROZEN_CONTRACT_NATIVE_OR_EXISTING_DIRECT_PROOF_ROUTE_DOMINATES_BLOCKED_OFFICIAL_ROUTE",
+        "next": "NONE__PRESERVE_PUBLISHED_TARGET_AS_BACKGROUND_REFERENCE_ONLY",
+        "dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+        "capability_credit_from_deletion": 0
       }
     ],
     "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO": [
@@ -66,13 +70,15 @@
       {
         "surface": "AA-Briefcase v1.1",
         "target": ">=1822 Elo",
-        "classification": "OFFICIAL_GATED_OR_PRIVATE",
+        "classification": "DELETED_AS_REQUIRED_EXECUTION_ROUTE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_V2",
         "sources": [
           "https://artificialanalysis.ai/evaluations/aa-briefcase"
         ],
         "fact": "Official evaluation uses a private dataset; the public demonstration scenario does not produce the official result.",
-        "zero_cost_status": "BLOCKED_EXACT",
-        "next": "FREEZE_SCOPE_EQUIVALENT_PUBLIC_PROFESSIONAL_ARTIFACT_QUALITY_ROUTE"
+        "zero_cost_status": "NOT_REQUIRED_FOR_TERMINAL_EXECUTION__FROZEN_CONTRACT_NATIVE_OR_EXISTING_DIRECT_PROOF_ROUTE_DOMINATES_BLOCKED_OFFICIAL_ROUTE",
+        "next": "NONE__PRESERVE_PUBLISHED_TARGET_AS_BACKGROUND_REFERENCE_ONLY",
+        "dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+        "capability_credit_from_deletion": 0
       },
       {
         "surface": "Chartography",
@@ -98,13 +104,15 @@
       {
         "surface": "Finance Agent v2",
         "target": ">=58.59% represented scope",
-        "classification": "OFFICIAL_GATED_OR_PRIVATE",
+        "classification": "DELETED_AS_REQUIRED_EXECUTION_ROUTE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_V2",
         "sources": [
           "https://github.com/vals-ai/finance-agent-v2"
         ],
         "fact": "Repository and public questions are available, but official Vals platform access is gated and default harness expects external tool/API credentials and suite IDs.",
-        "zero_cost_status": "BLOCKED_EXACT__PUBLIC_QUESTIONS_AND_CODE_AVAILABLE_FOR_SCOPE_EQUIVALENT_ROUTE",
-        "next": "FREEZE_PUBLIC_QUESTION_SET_WITH_BRAIN_OWNED_ZERO_COST_WEB_SEC_PRICE_TOOLS_AND_EQUIVALENT_GRADER"
+        "zero_cost_status": "NOT_REQUIRED_FOR_TERMINAL_EXECUTION__FROZEN_CONTRACT_NATIVE_OR_EXISTING_DIRECT_PROOF_ROUTE_DOMINATES_BLOCKED_OFFICIAL_ROUTE",
+        "next": "NONE__PRESERVE_PUBLISHED_TARGET_AS_BACKGROUND_REFERENCE_ONLY",
+        "dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+        "capability_credit_from_deletion": 0
       }
     ],
     "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": [
@@ -170,14 +178,15 @@
       {
         "surface": "Vals MysteryMechanism",
         "target": ">=49.55% represented scope",
-        "classification": "DELETED_AS_REQUIRED_ROUTE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_PROOF",
+        "classification": "DELETED_AS_REQUIRED_EXECUTION_ROUTE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_V2",
         "sources": [
           "https://www.vals.ai/home"
         ],
         "fact": "A public score is visible, but this audit did not establish a public exact task+harness route.",
-        "zero_cost_status": "NOT_REQUIRED_FOR_TERMINAL_EXECUTION__PUBLISHED_SCORE_BACKGROUND_REFERENCE_ONLY",
-        "next": "NONE__DO_NOT_SPEND_REALITY_OR_COMPUTE_ON_THIS_PRIVATE_ROUTE",
-        "dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V1.json"
+        "zero_cost_status": "NOT_REQUIRED_FOR_TERMINAL_EXECUTION__FROZEN_CONTRACT_NATIVE_OR_EXISTING_DIRECT_PROOF_ROUTE_DOMINATES_BLOCKED_OFFICIAL_ROUTE",
+        "next": "NONE__PRESERVE_PUBLISHED_TARGET_AS_BACKGROUND_REFERENCE_ONLY",
+        "dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+        "capability_credit_from_deletion": 0
       }
     ]
   },
@@ -191,7 +200,16 @@
     "portfolio_prequalification_pass_count": 0,
     "livebench_if_verifier_source_binding_frozen": true,
     "unresolved_identity_or_access_count": 1,
-    "private_surface_routes_deleted_by_dominance": 1
+    "private_surface_routes_deleted_by_dominance": 5,
+    "deleted_route_names": [
+      "FrontierCode 1.1 Main",
+      "CursorBench 4.0",
+      "AA-Briefcase v1.1",
+      "Finance Agent v2",
+      "Vals MysteryMechanism"
+    ],
+    "required_private_or_nonreproducible_execution_route_count": 0,
+    "zero_cost_direct_proof_routes_available": 4
   },
   "cross_surface_deductions": [
     "PUBLIC_LEADERBOARD_VISIBILITY_IS_NOT_EXECUTION_AUTHORITY",
@@ -200,7 +218,7 @@
     "NO_DIRECT_OPUS_CASE_LEVEL_COMPARATOR_IS_REQUIRED_WHERE_A_FIXED_PUBLIC_BAR_OR_THEORETICAL_CEILING_ROUTE_PROVES_EQUAL_OR_BETTER_SCOPE",
     "ZERO_COST_REQUIRES_THE_FULL_AGENT_ENVIRONMENT_AND_GRADER_ROUTE_TO_HAVE_A_HARD_NO_SPEND_PATH__PUBLIC_CODE_ALONE_IS_INSUFFICIENT",
     "A_FROZEN_PORTFOLIO_SURFACE_MAY_NOT_DISAPPEAR_FROM_PREQUALIFICATION_SIMPLY_BECAUSE_ITS_IDENTITY_OR_ACCESS_IS_UNRESOLVED",
-    "MYSTERYMECHANISM_PRIVATE_ROUTE_IS_DELETED_AS_REQUIRED_EXECUTION_SURFACE_BY_INDEPENDENT_BEHAVIORAL_DOMINANCE_PROOF__ZERO_CAPABILITY_CREDIT_FROM_DELETION"
+    "PRIVATE_SURFACE_DOMINANCE_V2_DELETES_FRONTIERCODE_CURSORBENCH_AA_BRIEFCASE_FINANCE_AGENT_V2_PRIVATE_AND_MYSTERYMECHANISM_AS_REQUIRED_EXECUTION_ROUTES__PUBLISHED_TARGETS_REMAIN_BACKGROUND_REFERENCES__ZERO_CAPABILITY_CREDIT_FROM_DELETION"
   ],
   "fresh_terminal_evidence_consumed": 0,
   "new_reality_units_consumed": 0,
