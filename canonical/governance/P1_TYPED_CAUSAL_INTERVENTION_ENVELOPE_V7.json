@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V7",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__DERIVED_ROOT_SAFE_FORWARD_CAUSAL_SCOPE_AND_INTERVENTION_RESCUE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Supersede V6 terminal-scope overclaim by making failure_semantics load-bearing: DERIVED_UPSTREAM failures remain downstream consequences for intervention recomputation but can never be promoted to causal roots; if no direct cause is visible, fail safely by escalation.",
+  "supersedes_candidate": "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V6.json",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v7.py",
+  "inherited_verified_basis": {
+    "v6_verification": "canonical/verification/P1_TYPED_CAUSAL_INTERVENTION_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "v6_candidate_git_blob_sha": "18d4de68ee8352410e986c318868642333ec085a",
+    "v6_proof_git_blob_sha": "0f41a36e6ad16722ce05b180e036fb921a2ef886"
+  },
+  "repair_rule": [
+    "FAILED_CHECK_FAILURE_SEMANTICS_MUST_BE_DIRECT_CONTRACT_OR_DERIVED_UPSTREAM",
+    "ONLY_DIRECT_CONTRACT_FAILURES_MAY_ENTER_ROOT_LOCALIZATION_SET",
+    "DERIVED_UPSTREAM_FAILURES_REMAIN_VISIBLE_ONLY_AS_CAUSAL_CONSEQUENCES_FOR_FORWARD_INTERVENTION_RECOMPUTATION",
+    "NO_VISIBLE_DIRECT_ROOT_MEANS_ESCALATE_WITH_INFORMATION_REQUEST_NOT_CAUSAL_OVERCLAIM",
+    "DIRECT_ROOT_PLUS_DERIVED_SYMPTOM_CASES_MUST_RETAIN_V6_FORWARD_RESCUE_BEHAVIOR"
+  ],
+  "required_regression": "V6_DERIVED_ONLY_SCOPE_COUNTEREXAMPLE_MUST_RETURN_ESCALATE_WITH_NO_REPAIR_TARGET",
+  "envelope": {
+    "domains": 6,
+    "mechanism_classes": 8,
+    "causal_patterns": 4,
+    "cross_product_cases": 192,
+    "derived_only_regression_cases": 1
+  },
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V7_BLOBS_AND_REPRODUCE_V6_DERIVED_ONLY_FAILURE_AS_NEGATIVE_CONTROL__ONLY_THEN_COMPILE_V7_SCOPE_TRANSPORT_TO_THE_THREE_FROZEN_P1_DIRECT_SURFACES"
+}
