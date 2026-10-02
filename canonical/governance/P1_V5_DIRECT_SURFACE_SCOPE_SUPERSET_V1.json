@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_DIRECT_SURFACE_SCOPE_SUPERSET_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__V5_SCOPE_SUPERSET_OF_FROZEN_P1_DIRECT_PROOF_CONTRACT_SEMANTICS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove that independently verified P1 V5 closes the exact V4 whole-contract residuals and kills all nine frozen P1 mutations for the single frozen direct-proof behavioral contract bound to all three declared P1 surfaces, without claiming private benchmark population equivalence.",
+  "runtime": "canonical/runtime/p1_v5_direct_surface_scope_superset_v1.py",
+  "tests": "canonical/tests/test_p1_v5_direct_surface_scope_superset_v1.py",
+  "authority": [
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
+    "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+    "canonical/verification/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"
+  ],
+  "direct_surfaces": [
+    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+  ],
+  "claimed_relation": "SUPERSET_OF_FROZEN_P1_DIRECT_PROOF_CONTRACT_SEMANTICS_BOUND_TO_ALL_THREE_DECLARED_SURFACES",
+  "forbidden_claim": "NO_PRIVATE_BENCHMARK_POPULATION_OR_SCORE_EQUIVALENCE_CLAIM",
+  "operational_requirements": [
+    "EXACT_V4_RESIDUAL_SET_IS_SCOPE_PLUS_HETEROGENEOUS_INTERVENTION_RESCUE",
+    "INDEPENDENT_V5_ADDRESSES_EXACTLY_THOSE_RESIDUALS",
+    "ALL_NINE_FROZEN_P1_MUTATIONS_EXECUTABLY_KILLED",
+    "ALL_THREE_SURFACES_BIND_SAME_FROZEN_P1_DIRECT_PROOF_CONTRACT",
+    "DIRECT_ROUTE_SCOPE_MAPPING_REMAINS_FROZEN",
+    "IMMUTABLE_T0_T2_P1_RECEIPTS_REMAIN_CLEAN_AND_UNREPLAYED"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_SCOPE_SUPERSET_GATE__THEN_COMPOSE_VERIFIED_V5_SEMANTICS_WITH_IMMUTABLE_T0_T2_TERMINAL_RECEIPTS_IN_SEPARATE_P1_RESTORATION_VERIFIER__NO_DIRECT_QUARANTINE_LIFT_OR_FAMILY_CREDIT_FROM_THIS_GATE",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
