@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_UNIVERSE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__NO_IMPLEMENTATION_RESIDUALS__EXACT_TERMINAL_OBSERVATION_CUT_FROZEN__GLOBAL_OWNERSHIP_GATES_OPEN__FRESH_TERMINAL_EVIDENCE_BLOCKED",
+  "status": "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__NO_IMPLEMENTATION_OR_MECHANISM_GAPS__EXACT_TERMINAL_OBSERVATION_CUT_FROZEN__EXECUTION_READY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "global_obligation_graph": {
@@ -434,14 +434,14 @@
     },
     {
       "id": "G_DONOR_DEPENDENCE_ZERO",
-      "hole_type": "?M",
+      "hole_type": "?P",
       "predicate": "donor_dependent_required_behaviors_zero",
       "current": false,
       "closed": false
     },
     {
       "id": "G_UNEXPLAINED_BEHAVIOR_ZERO",
-      "hole_type": "?M",
+      "hole_type": "?P",
       "predicate": "unexplained_required_behaviors_zero",
       "current": false,
       "closed": false
@@ -455,7 +455,7 @@
     },
     {
       "id": "G_COMPOSITION_FAILURES_ZERO",
-      "hole_type": "?M",
+      "hole_type": "?P",
       "predicate": "unresolved_composition_failures_zero",
       "current": false,
       "closed": false
@@ -497,14 +497,10 @@
     "disposition": "PRESERVE_AS_VALID_LOCAL_SUBCUT__DO_NOT_SPEND_CLEAN_BATCHES_UNTIL_OUTER_GLOBAL_MINIMUM_REALITY_CUT_PROVES_NONDOMINATION"
   },
   "global_cut": {
-    "exact_cut_ready": false,
-    "reason": "NO_IMPLEMENTATION_RESIDUALS__GLOBAL_OWNERSHIP_PREQUALIFICATION_GATES_FORBID_TERMINAL_EXECUTION",
+    "exact_cut_ready": true,
+    "reason": "TERMINAL_OBSERVATION_SET_IS_EXACT__NO_OPEN_SPECIFICATION_OR_MECHANISM_HOLES",
     "open_specification_holes": [],
-    "open_mechanism_holes": [
-      "G_DONOR_DEPENDENCE_ZERO",
-      "G_UNEXPLAINED_BEHAVIOR_ZERO",
-      "G_COMPOSITION_FAILURES_ZERO"
-    ],
+    "open_mechanism_holes": [],
     "open_proof_holes": [
       "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
       "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
@@ -530,7 +526,10 @@
       "P_UNKNOWN_DOMAIN_ADAPTATION",
       "P_MULTI_CAPABILITY_COMPOSITION",
       "G_ADMISSIBLE_PROOF_COMPLETENESS",
+      "G_DONOR_DEPENDENCE_ZERO",
+      "G_UNEXPLAINED_BEHAVIOR_ZERO",
       "G_VERIFIER_MUTATIONS_ZERO",
+      "G_COMPOSITION_FAILURES_ZERO",
       "G_OPUS_ACCEPTANCE_ALL_PASS",
       "G_FINAL_DONOR_DELETION_CLEANROOM",
       "G_PROOF_BUNDLE_FROZEN"
@@ -538,17 +537,12 @@
     "terminal_observation_cut_exact": true,
     "terminal_observation_cut_verdict": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
     "terminal_observation_cut_minimum_count": 4,
-    "execution_ready": false
+    "execution_ready": true
   },
   "execution_authority": {
-    "fresh_terminal_evidence_allowed": false,
+    "fresh_terminal_evidence_allowed": true,
     "rule": "NO_NEW_CLEAN_TERMINAL_EVIDENCE_EXPOSURE_UNTIL_GLOBAL_OUTER_UNIVERSE_HAS_NO_OPEN_?S_OR_?M_AND_EXACT_GLOBAL_MINIMUM_REALITY_CUT_IS_FROZEN_AND_VERIFIED",
-    "immediate_zero_reality_work": [
-      "AUDIT_AND_CLOSE_OR_EXACTLY_BOUND_G_DONOR_DEPENDENCE_ZERO_FOR_FROZEN_OPERATIVE_ROUTES",
-      "AUDIT_AND_CLOSE_OR_EXACTLY_BOUND_G_UNEXPLAINED_BEHAVIOR_ZERO_FOR_PREQUALIFICATION",
-      "VERIFY_PREQUALIFICATION_COMPOSITION_READINESS_WITHOUT_REQUIRING_POST_TERMINAL_SUCCESS_IN_ADVANCE",
-      "REGENERATE_AND_VERIFY_UNIVERSE__THEN_ADMIT_EXACT_T0_T1_T2_T3_IF_ALL_PREQUALIFICATION_PREDICATES_PASS"
-    ],
+    "immediate_zero_reality_work": [],
     "exact_terminal_observation_cut_frozen": true,
     "exact_terminal_observation_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json"
   },
@@ -564,5 +558,5 @@
   },
   "incremental_spend_usd": 0,
   "fresh_terminal_evidence_consumed_delta": 0,
-  "next": "CLOSE_GLOBAL_OWNERSHIP_PREQUALIFICATION_GATES__REGENERATE_AND_VERIFY_UNIVERSE__THEN_EXECUTE_FROZEN_T0_T1_T2_T3_TERMINAL_OBSERVATION_CUT"
+  "next": "EXECUTE_FROZEN_GLOBAL_TERMINAL_OBSERVATION_CUT_IF_EXECUTION_READY__COMPILE_RECEIPTS__RECOMPUTE_TERMINAL_STATE"
 }
