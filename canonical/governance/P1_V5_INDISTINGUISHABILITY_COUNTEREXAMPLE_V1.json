@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_INDISTINGUISHABILITY_COUNTEREXAMPLE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_EXECUTABLE_INFORMATION_THEORETIC_COUNTEREXAMPLE__V5_ONE_SHOT_SCOPE_SUPERSET_NOT_ADMISSIBLE_IF_VERIFIED__ZERO_CREDIT",
+  "objective": "Test the strongest current P1 V5 scope-superset claim against the frozen population class containing multiple visible deviations with one terminal rescuer, under the frozen information boundary that hides unearned intervention outcomes.",
+  "runtime": "canonical/runtime/p1_v5_indistinguishability_counterexample_v1.py",
+  "tests": "canonical/tests/test_p1_v5_indistinguishability_counterexample_v1.py",
+  "exact_source_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/governance/P1_TRAJECTORY_ABSOLUTE_TERMINAL_BINDING_V1.json": "e2fd56a5074e007506c151cfc81a2b3bca62b804",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/P1_V5_DIRECT_SURFACE_SCOPE_SUPERSET_V1.json": "a25ab34f2bd2ee7f127ecdc572187d6f40fe7b13"
+  },
+  "falsification_claim": "TWO_HIDDEN_WORLDS_HAVE_IDENTICAL_CANDIDATE_VISIBLE_PAYLOADS_BUT_DIFFERENT_UNIQUE_RESCUERS_AND_THEREFORE_DIFFERENT_REQUIRED_IDENTIFIED_OUTPUTS__NO_DETERMINISTIC_ONE_SHOT_CANDIDATE_CAN_BE_CORRECT_ON_BOTH",
+  "target_population_class": "MULTIPLE_VISIBLE_DEVIATIONS_WITH_ONLY_ONE_TERMINAL_RESCUER",
+  "repair_direction": "TWO_STAGE_EARNED_INTERVENTION_PROTOCOL__PROBE_FIRST__THEN_LOCALIZE_FROM_EARNED_RESULTS",
+  "hard_rules": [
+    "DO_NOT_WEAKEN_OR_DELETE_THE_DECLARED_POPULATION_CLASS_TO_ESCAPE_THE_COUNTEREXAMPLE",
+    "DO_NOT_EXPOSE_UNEARNED_HIDDEN_INTERVENTION_OUTCOMES_TO_THE_CANDIDATE",
+    "AN_INFORMATION_REQUEST_OR_INTERVENTION_PROBE_IS_NOT_A_UNIQUE_CAUSAL_CLAIM",
+    "ONLY_EARNED_INTERVENTION_RESULTS_MAY_RESOLVE_PUBLIC_INDISTINGUISHABILITY",
+    "NO_TERMINAL_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_COUNTEREXAMPLE__IF_PASS_QUARANTINE_THE_CURRENT_V5_SCOPE_SUPERSET_CANDIDATE__BUILD_AND_VERIFY_AN_EARNED_INTERVENTION_V6_CARRIER_BEFORE_RECOMPUTING_TERMINAL_SCOPE",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
