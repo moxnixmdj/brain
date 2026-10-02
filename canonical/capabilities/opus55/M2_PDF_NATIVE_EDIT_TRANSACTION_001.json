@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_M2_PDF_NATIVE_EDIT_TRANSACTION_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_NATIVE_PDF_EDIT_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+  "implementation": "canonical/runtime/pdf_native_edit_transaction.py",
+  "tests": "canonical/tests/test_pdf_native_edit_transaction.py",
+  "workflow": ".github/workflows/verify-pdf-native-edit-transaction.yml",
+  "independent_verification": {
+    "workflow_run_ids": [
+      36952354675,
+      36952398934
+    ],
+    "conclusion": "success",
+    "pinned_dependencies": {
+      "pypdf": "6.19.0",
+      "pypdf_license": "BSD-3-Clause",
+      "pillow": "12.3.0"
+    }
+  },
+  "owned_scope": [
+    "EXACT_UNIQUE_WHOLE_TEXT_SHOW_OPERAND_REPLACEMENT_ON_DECLARED_PAGE",
+    "Tj_TJ_SINGLE_QUOTE_AND_DOUBLE_QUOTE_TEXT_SHOW_OPERATORS",
+    "DECLARED_PAGE_IMAGE_XOBJECT_REPLACEMENT_WITH_IDENTICAL_PIXEL_DIMENSIONS_AND_MODE",
+    "PAGE_CONTENT_STREAM_PRESERVATION_DURING_IMAGE_REPLACEMENT",
+    "PAGE_COUNT_MEDIABOX_ROTATION_AND_OPERATOR_SEQUENCE_ROUNDTRIP_GATES_FOR_CLAIMED_TEXT_SCOPE",
+    "ENCRYPTED_AMBIGUOUS_DUPLICATE_SPLIT_OR_UNSUPPORTED_CASES_FAIL_CLOSED"
+  ],
+  "exclusions": [
+    "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION",
+    "NO_EQUAL_GLYPH_WIDTH_OR_VISUAL_LAYOUT_CLAIM_FOR_TEXT_REPLACEMENT",
+    "NO_ENCRYPTED_PDF",
+    "NO_INLINE_IMAGE_REPLACEMENT",
+    "NO_WHOLE_M2_OR_FAMILY_CREDIT"
+  ],
+  "donor_runtime_model_required": false,
+  "external_model_or_api_required": false,
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
