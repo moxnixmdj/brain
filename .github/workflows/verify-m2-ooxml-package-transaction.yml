@@ -1,7 +1,7 @@
 name: Verify M2 OOXML package transaction
 on:
   push:
-    branches: [obs-m2-ooxml-package-transaction-20261002]
+    branches: [main, obs-m2-ooxml-package-transaction-20261002]
     paths:
       - canonical/runtime/ooxml_package_transaction.py
       - canonical/tests/test_ooxml_package_transaction.py
