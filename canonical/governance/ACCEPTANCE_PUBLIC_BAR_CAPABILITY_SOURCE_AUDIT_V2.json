@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_ACCEPTANCE_PUBLIC_BAR_CAPABILITY_SOURCE_AUDIT_V2",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__CANONICAL_V6_V3_SUBSTRATE_PROVIDER_DISTINCTION_ENFORCED",
+  "objective": "Prevent clean Opus-acceptance benchmark case spend unless the benchmark is ready and the operative candidate is a Brain-internalized capability configuration; allow declared general cognition substrate but forbid hidden target-capability outsourcing.",
+  "authority": [
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V6.md",
+    "canonical/reasoning/2026-10-02_ACCEPTANCE_CAPABILITY_SOURCE_GATE_SUBSTRATE_CORRECTION_V1.json"
+  ],
+  "gate": {
+    "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "tests": {
+    "path": "canonical/tests/test_acceptance_capability_source_gate_v2.py",
+    "git_blob_sha": "b4e185a3692009fd477b88dae64ca0903f4ae60c"
+  },
+  "supersedes": "canonical/governance/ACCEPTANCE_PUBLIC_BAR_CAPABILITY_SOURCE_AUDIT_V1.json",
+  "routes": [
+    {
+      "id": "TERMINAL_BENCH_4_CURRENT_HARBOR_ROUTE",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "benchmark_harness_zero_cost": true,
+      "scorer_frozen": true,
+      "brain_candidate_bound": true,
+      "brain_owned_operative_configuration": false,
+      "configuration_materially_constrains_execution": false,
+      "capability_package_contains_configuration": false,
+      "promotion_evaluates_brain_configured_system": false,
+      "external_hidden_target_capability_provider": true,
+      "ownership_claim_relies_on_model_standalone_superiority": false,
+      "future_use_requires_capability_rediscovery": true,
+      "model_role": "UNCLASSIFIED_EXTERNAL_TARGET_CAPABILITY_PROVIDER",
+      "model_dependency_count": 1,
+      "model_dependencies_declared": true,
+      "general_substrate_test_pass": false,
+      "incremental_spend_usd": 0,
+      "evidence": [
+        "canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/HARBOR_BRAIN_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/runtime/harbor_brain_agent.py"
+      ],
+      "disposition": "BLOCKED_BEFORE_CASE_SPEND__EXTERNAL_PLANNER_NOT_PROVEN_TO_BE_MERELY_GENERAL_SUBSTRATE_UNDER_A_MATERIALLY_SUFFICIENT_BRAIN_OWNED_CODING_CONFIGURATION",
+      "next": "FIND_OR_BIND_ALREADY_EXISTING_REUSABLE_CODING_CAPABILITY_CONFIGURATION_INTO_BRAIN__CLASSIFY_ANY_MODEL_ONLY_AS_GENERAL_SUBSTRATE_AFTER_V3_TEST_PASSES"
+    },
+    {
+      "id": "AUTOMATIONBENCH_PUBLIC_600_ROUTE",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "benchmark_harness_zero_cost": true,
+      "scorer_frozen": true,
+      "brain_candidate_bound": false,
+      "brain_owned_operative_configuration": false,
+      "configuration_materially_constrains_execution": false,
+      "capability_package_contains_configuration": false,
+      "promotion_evaluates_brain_configured_system": false,
+      "external_hidden_target_capability_provider": false,
+      "ownership_claim_relies_on_model_standalone_superiority": false,
+      "future_use_requires_capability_rediscovery": true,
+      "model_role": "NONE",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "evidence": [
+        "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
+        "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json"
+      ],
+      "disposition": "BLOCKED_BEFORE_CASE_SPEND__NO_BRAIN_INTERNALIZED_OPERATIVE_AUTOMATION_CANDIDATE_BOUND",
+      "next": "BIND_EXISTING_REUSABLE_AUTOMATION_CAPABILITY_CONFIGURATION_INTO_BRAIN__THEN_RUN_V2_GATE"
+    },
+    {
+      "id": "LIVEBENCH_IF_PUBLIC_ROUTE",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "benchmark_harness_zero_cost": true,
+      "scorer_frozen": true,
+      "brain_candidate_bound": false,
+      "brain_owned_operative_configuration": false,
+      "configuration_materially_constrains_execution": false,
+      "capability_package_contains_configuration": false,
+      "promotion_evaluates_brain_configured_system": false,
+      "external_hidden_target_capability_provider": false,
+      "ownership_claim_relies_on_model_standalone_superiority": false,
+      "future_use_requires_capability_rediscovery": true,
+      "model_role": "NONE",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "evidence": [
+        "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
+        "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      ],
+      "disposition": "BLOCKED_BEFORE_CASE_SPEND__NO_BRAIN_INTERNALIZED_OPERATIVE_INSTRUCTION_FOLLOWING_CANDIDATE_BOUND",
+      "next": "BIND_EXISTING_REUSABLE_INSTRUCTION_FOLLOWING_SCOPE_JUDGMENT_CONFIGURATION_INTO_BRAIN__THEN_RUN_V2_GATE"
+    }
+  ],
+  "conclusion": {
+    "currently_clean_case_executable_routes": 0,
+    "public_harness_ready_but_candidate_blocked_routes": 3,
+    "terminal_cases_authorized": 0,
+    "reason": "PUBLIC_HARNESS_READINESS_NEQ_INTERNALIZED_CAPABILITY_READINESS__MODELS_MAY_BE_GENERAL_SUBSTRATE_BUT_HIDDEN_TARGET_CAPABILITY_PROVIDER_IS_FORBIDDEN"
+  },
+  "v1_correction": {
+    "old_requirement": "MODEL_DEPENDENCY_COUNT_ZERO",
+    "disposition": "SUPERSEDED_AS_OVERSTRICT_TERMINAL_REQUIREMENT",
+    "replacement": "GENERAL_COGNITION_SUBSTRATE_ALLOWED_IF_V3_SUBSTRATE_TEST_PASSES_AND_BRAIN_OWNS_MATERIAL_OPERATIVE_CONFIGURATION"
+  },
+  "incremental_spend_usd": 0,
+  "fresh_acceptance_cases_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
