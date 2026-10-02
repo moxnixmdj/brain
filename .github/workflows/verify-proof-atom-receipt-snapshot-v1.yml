@@ -32,20 +32,24 @@ jobs:
         shell: bash
         run: |
           set +e
-          : > proof_atom_snapshot_diagnostic.txt
-          git status --porcelain > initial_worktree.txt
-          python canonical/runtime/proof_atom_receipt_snapshot_v1.py > proof_atom_receipt_snapshot_v1.json 2>> proof_atom_snapshot_diagnostic.txt
-          echo "$?" > snapshot.exitcode
-          git status --porcelain > post_snapshot_worktree.txt
-          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v >> proof_atom_snapshot_diagnostic.txt 2>&1
-          echo "$?" > tests.exitcode
-          python -m json.tool proof_atom_receipt_snapshot_v1.json >/dev/null 2>> proof_atom_snapshot_diagnostic.txt
-          echo "$?" > json.exitcode
-          if [ -s proof_atom_receipt_snapshot_v1.json ]; then
-            python - <<'PY' > proof_atom_receipt_snapshot_v1_summary.json 2>> proof_atom_snapshot_diagnostic.txt
+          D="$RUNNER_TEMP/proof-atom-receipt-snapshot-v1"
+          rm -rf "$D"
+          mkdir -p "$D"
+          : > "$D/proof_atom_snapshot_diagnostic.txt"
+          git status --porcelain > "$D/initial_worktree.txt"
+          python canonical/runtime/proof_atom_receipt_snapshot_v1.py > "$D/proof_atom_receipt_snapshot_v1.json" 2>> "$D/proof_atom_snapshot_diagnostic.txt"
+          echo "$?" > "$D/snapshot.exitcode"
+          git status --porcelain > "$D/post_snapshot_worktree.txt"
+          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v >> "$D/proof_atom_snapshot_diagnostic.txt" 2>&1
+          echo "$?" > "$D/tests.exitcode"
+          python -m json.tool "$D/proof_atom_receipt_snapshot_v1.json" >/dev/null 2>> "$D/proof_atom_snapshot_diagnostic.txt"
+          echo "$?" > "$D/json.exitcode"
+          if [ -s "$D/proof_atom_receipt_snapshot_v1.json" ]; then
+            SNAPSHOT_JSON="$D/proof_atom_receipt_snapshot_v1.json" python - <<'PY' > "$D/proof_atom_receipt_snapshot_v1_summary.json" 2>> "$D/proof_atom_snapshot_diagnostic.txt"
           import json
+          import os
           from pathlib import Path
-          s=json.loads(Path("proof_atom_receipt_snapshot_v1.json").read_text())
+          s=json.loads(Path(os.environ["SNAPSHOT_JSON"]).read_text())
           i=s.get("index",{})
           r=s.get("repository_snapshot",{})
           summary={
@@ -82,28 +86,30 @@ jobs:
         with:
           name: proof-atom-receipt-snapshot-v1
           path: |
-            proof_atom_receipt_snapshot_v1.json
-            proof_atom_receipt_snapshot_v1_summary.json
-            proof_atom_snapshot_diagnostic.txt
-            initial_worktree.txt
-            post_snapshot_worktree.txt
-            snapshot.exitcode
-            tests.exitcode
-            json.exitcode
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/proof_atom_receipt_snapshot_v1.json
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/proof_atom_receipt_snapshot_v1_summary.json
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/proof_atom_snapshot_diagnostic.txt
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/initial_worktree.txt
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/post_snapshot_worktree.txt
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/snapshot.exitcode
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/tests.exitcode
+            ${{ runner.temp }}/proof-atom-receipt-snapshot-v1/json.exitcode
           if-no-files-found: error
       - name: Enforce fail-closed result
         if: always()
         shell: bash
         run: |
-          test "$(cat snapshot.exitcode)" = "0"
-          test "$(cat tests.exitcode)" = "0"
-          test "$(cat json.exitcode)" = "0"
-          test ! -s initial_worktree.txt
-          test ! -s post_snapshot_worktree.txt
-          python - <<'PY'
+          D="$RUNNER_TEMP/proof-atom-receipt-snapshot-v1"
+          test "$(cat "$D/snapshot.exitcode")" = "0"
+          test "$(cat "$D/tests.exitcode")" = "0"
+          test "$(cat "$D/json.exitcode")" = "0"
+          test ! -s "$D/initial_worktree.txt"
+          test ! -s "$D/post_snapshot_worktree.txt"
+          SNAPSHOT_JSON="$D/proof_atom_receipt_snapshot_v1.json" python - <<'PY'
           import json
+          import os
           from pathlib import Path
-          s=json.loads(Path("proof_atom_receipt_snapshot_v1.json").read_text())
+          s=json.loads(Path(os.environ["SNAPSHOT_JSON"]).read_text())
           assert str(s.get("status","")).startswith("PASS"), s
           i=s["index"]
           assert i["canonical_atom_count"] == 40
