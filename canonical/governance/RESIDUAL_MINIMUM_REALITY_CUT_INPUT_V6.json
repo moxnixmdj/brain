@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6",
+  "date": "2026-10-02",
+  "status": "FROZEN_CURRENT_FAITHFUL_RESIDUAL_PROOF_UNIVERSE",
+  "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+  "source_action_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+  "exact_solver": "canonical/runtime/minimum_reality_cut.py",
+  "source_blob_shas": {
+    "global_terminal_obligation_graph": "d3fbcfeecbd7b59d33ac2ebf68590080f654e138",
+    "residual_action_universe": "9c5d3ea2e5a7ff49105fe217b55d4298d0f32805",
+    "m0a_complete_action_bundle": "50f261ff75ca04e3f06653fb6131ed47a5fc7a4f",
+    "m1a_complete_action_bundle": "65f4dc24c398c1f49cffde5711776074fc9f89ff",
+    "m1b_complete_action_bundle": "4e2fde88553a4f9b01ac7c55750c3bc2d393ac15",
+    "exact_solver": "9d67f538749519de2f7402f01c74be8025e809a2"
+  },
+  "distinctions": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "already_resolved": [],
+  "observations": [
+    {
+      "id": "A_M0A_MATCHED_SEMANTIC_PARITY_V2",
+      "covers": [
+        "M0A"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "A_M1A_COMPOSED_ROUTE_MATCHED_PARITY_V2",
+      "covers": [
+        "M1A"
+      ],
+      "cost": 1
+    },
+    {
+      "id": "A_M1B_MATCHED_GEOMETRY_COVERAGE_V3",
+      "covers": [
+        "M1B"
+      ],
+      "cost": 1
+    }
+  ],
+  "cost_semantics": {
+    "unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_UNIT",
+    "rule": "COSTS_COPIED_FROM_CURRENT_COMPLETE_ACTION_BUNDLES__NO_REINTERPRETATION",
+    "wall_clock_rule": "INDEPENDENT_SELECTED_ACTIONS_MAY_EXECUTE_IN_PARALLEL__INFORMATION_COST_IS_NOT_DISCOUNTED_BY_BATCHING"
+  },
+  "freeze": {
+    "zero_reality_prefixes_saturated": true,
+    "complete_bundles_present_for_all_distinctions": true,
+    "candidate_universe_complete_relative_to_current_canonical_frontier": true,
+    "invalidated_by_any_new_zero_reality_candidate": true,
+    "invalidated_by_any_behavioral_contract_registry_change": true
+  },
+  "new_reality_units_consumed_before_freeze": 0,
+  "incremental_spend_usd": 0
+}
