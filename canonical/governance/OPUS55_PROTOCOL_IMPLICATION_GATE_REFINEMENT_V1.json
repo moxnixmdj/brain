@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__CATALOG_CONTAMINATION_AND_SCOPE_SAFE_ALGEBRA_VERIFIED__ATOM_METRIC_AND_SCOPE_BINDINGS_OPEN__ZERO_CREDIT",
+  "status": "ACTIVE_SCOPE_SAFE_GATE_REFINEMENT__CATALOG_CONTAMINATION_AND_ALGEBRA_V2_SOURCE_RECEIPTS_PASS__CURRENT_GATE_BLOB_REVERIFICATION_PENDING__ATOM_METRIC_AND_SCOPE_BINDINGS_OPEN__ZERO_CREDIT",
   "objective": "Prevent independently verified witness-catalog normalization from being mistaken for the stronger witness-side semantic inputs required by protocol implication/scope algebra.",
   "authority": {
     "witness_normalization": "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json",
@@ -72,5 +72,15 @@
     "workflow_job_id": 110861847357,
     "merge_commit": "98a36509467a13b18c68a66e3b8bad6c5a9cf87d",
     "conclusion": "success"
+  },
+  "current_blob_verification": {
+    "independent_verification": false,
+    "reason": "GATE_REFINEMENT_DOCUMENT_CHANGED_AFTER_PRIOR_PUBLIC_RUNNER_RECEIPT_TO_EXPOSE_SCOPE_RELATION_AS_AN_EXPLICIT_PRECONDITION",
+    "prior_receipt_preserved": "canonical/verification/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "source_receipts_still_valid": [
+      "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    ],
+    "promotion_authority": false
   }
 }
