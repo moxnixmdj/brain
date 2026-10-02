@@ -303,6 +303,12 @@ class PublicBarReceiptTests(unittest.TestCase):
         self.assertGreaterEqual(len(defect["fixes_for_owner_reconciliation_not_adopted"]), 3)
         self.assertIn("direction of the error is not fixed", defect["consequence"])
         self.assertIn("dataset schema was inferred", defect["confidence"])
+        self.assertIn("executed by the integration test", defect["confidence"])
+        ev = defect["executable_evidence"]
+        self.assertTrue((ROOT / ev["test"].split(" ")[0]).is_file())
+        self.assertTrue((ROOT / ev["driver"].split(" ")[0]).is_file())
+        self.assertIn("0.25", " ".join(ev["demonstrates"]))
+        self.assertIn("Synthetic questions", ev["limit"])
         # the repo-side claims quoted by the receipt must be what the repo files say (skip if they were later changed)
         for e in (x for x in defect["evidence"] if x["class"] == "REPO"):
             if not (ROOT / e["path"]).is_file() or _git_blob_sha(e["path"]) != e["git_blob_sha"]:

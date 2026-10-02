@@ -20,6 +20,14 @@
 
 It does **not** score, read results, authorize anything, or claim capability.
 
+## Executable evidence for the metric finding
+
+`test_score_livebench_if.py` has a layer that runs only when `LIVEBENCH_ROOT` points at a LiveBench checkout at the pinned commit. It calls the REAL upstream scorer on synthetic questions (three checkers that need no NLTK data) and executes the facts behind the defect finding: the per-question score is the mean of "all followed" and "fraction followed" (one of two instructions followed scores 0.25, not 0), `<solution>` tags are honoured, prompt-level accuracy never exceeds the official score, loose can be more lenient than strict, and prompt-level loose accuracy has no fixed order against the official score.
+
+```text
+LIVEBENCH_ROOT=/path/to/LiveBench@8f8e5c3 python -m pytest livebench_if_generation_v1/test_score_livebench_if.py
+```
+
 ## Safety properties (each is tested and mutation-checked)
 
 1. **Budget cap, fail closed.** A worst-case check (`estimated input + max_completion_tokens`) runs before every call; the run stops with exit code 4 rather than exceed `--max-total-tokens` or `--max-neurons-per-utc-day`. A failed attempt is never counted as spend.
@@ -51,8 +59,13 @@ python livebench_if_generation_v1/generate_responses.py ... --api-style plain \
 #    response from inside <solution>...</solution> when present, and scores each question as
 #    0.5 * [all instructions followed] + 0.5 * [fraction of instructions followed]; the leaderboard shows the
 #    task-averaged mean x 100. The public runner already carries the hermetic setup
-#    (capsules/livebench_if_full_verifier, workflows verify-livebench-if-*). A driver that walks a questions
-#    file and aggregates this metric is NOT included.
+#    (capsules/livebench_if_full_verifier, workflows verify-livebench-if-*).
+#    Driver (calls upstream's own function; refuses unless --livebench-root is at the pinned commit and
+#    unmodified; stores only ids and scores, never prompts or responses):
+python livebench_if_generation_v1/score_livebench_if.py --questions q.jsonl --model-answers out_raw/model_answers.json \
+  --livebench-root /path/to/LiveBench@8f8e5c381a16e3f24257776edd53471fe86f8091 --out scores_raw.json
+#    It needs the packages upstream imports (pandas, nltk, emoji, syllapy, langdetect, immutabledict, absl-py)
+#    and the project's hermetic setup for the two import-time downloads (spaCy is dead code; NLTK punkt).
 #    CAUTION: canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json declares "prompt-level loose accuracy"
 #    as the reported metric. That is the IFBench paper's metric, not LiveBench's leaderboard metric, so a
 #    score computed that way is not comparable with the 65.7 bar (see the public-bar receipt, defect finding
