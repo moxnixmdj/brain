@@ -45,5 +45,7 @@
   "current_manifest_builder": "canonical/runtime/build_current_proof_coverage_manifest.py",
   "source_of_truth": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
   "static_manifest_policy": "FORBIDDEN__DERIVE_CURRENT_COVERAGE_FROM_ACTIVE_BASIS_EACH_RUN",
-  "closure_controller": "canonical/runtime/terminal_route_closure_controller.py"
+  "closure_controller": "canonical/runtime/terminal_route_closure_controller.py",
+  "independent_verification": "canonical/verification/PROOF_OPTIMIZER_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "independent_verification_status": "INDEPENDENT_PASS__PUBLIC_RUN_36964311598"
 }
