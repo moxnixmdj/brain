@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PORTFOLIO_ZERO_COST_ACCESS_AUDIT_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED__EXACT_FOUR_PORTFOLIO_WAVE_NOT_FULLY_ZERO_COST_REEXECUTABLE__EXTERNAL_EVALUATION_ACCESS_OR_SCOPE_EQUIVALENT_PROOF_REQUIRED",
+  "objective": "Prove a zero-incremental-spend executable route for every frozen public-bar or scope-equivalent terminal proof surface before exposing terminal cases.",
+  "findings": {
+    "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO": [
+      {
+        "surface": "Terminal-Bench 4.0",
+        "access": "PUBLIC_TASKS_AND_HARBOR_HARNESS",
+        "official_protocol": "FULL_RELEASE__AT_LEAST_5_TRIALS_PER_TASK_FOR_LEADERBOARD",
+        "zero_cost_issue": "OFFICIAL_DOCS_REQUIRE_GPU_CAPABLE_SANDBOX_FOR_THE_FULL_BENCHMARK__NO_CURRENT_BRAIN_GITHUB_ACTIONS_ZERO_INCREMENTAL_GPU_ROUTE_FROZEN",
+        "disposition": "PUBLIC_BUT_ZERO_COST_FULL_PROTOCOL_NOT_PROVEN"
+      },
+      {
+        "surface": "FrontierCode 1.1 Main",
+        "access": "PUBLIC_LEADERBOARD_AND_METHODOLOGY__NO_CANONICAL_PUBLIC_TASK_RUBRIC_HARNESS_ROUTE_ESTABLISHED_IN_AUDIT",
+        "disposition": "PUBLIC_SCORE_NOT_EQUIVALENT_TO_REEXECUTABLE_EVALUATION"
+      },
+      {
+        "surface": "CursorBench 4.0",
+        "access": "PUBLIC_LEADERBOARD__TASKS_DERIVED_FROM_REAL_CURSOR_SESSIONS__NO_PUBLIC_REEXECUTABLE_TASK_HARNESS_ROUTE_ESTABLISHED_IN_AUDIT",
+        "disposition": "PUBLIC_SCORE_NOT_EQUIVALENT_TO_REEXECUTABLE_EVALUATION"
+      }
+    ],
+    "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO": [
+      {
+        "surface": "GDPval-AA v2.1",
+        "access": "ARTIFICIAL_ANALYSIS_RUN_EVALUATION__ELO_FROM_BLIND_PAIRWISE_JUDGING",
+        "zero_cost_issue": "NO_PUBLIC_ZERO_COST_REPRODUCTION_OF_OFFICIAL_ELO_PIPELINE_AND_OPPONENT_JUDGING_POOL_FROZEN",
+        "disposition": "PROVIDER_RUN_OFFICIAL_RESULT__SCOPE_EQUIVALENT_PROOF_NEEDED"
+      },
+      {
+        "surface": "AA-Briefcase v1.1",
+        "access": "OFFICIAL_DATASET_PRIVATE__PUBLIC_FIFTH_SCENARIO_DEMONSTRATIVE_ONLY",
+        "disposition": "PRIVATE_OFFICIAL_EVALUATION__SCOPE_EQUIVALENT_PROOF_NEEDED"
+      },
+      {
+        "surface": "Chartography",
+        "access": "PUBLIC_100_CASE_TEST_SET_AND_OPEN_HARNESS",
+        "disposition": "PUBLIC_EXECUTABLE__BRAIN_ROUTE_INTEGRATION_AND_CONTAMINATION_FREEZE_STILL_REQUIRED"
+      },
+      {
+        "surface": "Finance Agent v2",
+        "access": "27_PUBLIC_SAMPLES__450_PRIVATE_VALIDATION__450_PRIVATE_TEST__OFFICIAL_REPORTED_RESULTS_USE_PRIVATE_TEST",
+        "disposition": "PUBLIC_SUBSET_AVAILABLE__OFFICIAL_BAR_NOT_DIRECTLY_REEXECUTABLE"
+      }
+    ],
+    "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": [
+      {
+        "surface": "AutomationBench-AA",
+        "access": "ARTIFICIAL_ANALYSIS_PROVIDER_RUN_COMPONENT_OF_INTELLIGENCE_INDEX",
+        "disposition": "OFFICIAL_PROVIDER_RUN_ROUTE__ZERO_COST_CASE_LEVEL_COMPARATOR_NOT_FROZEN"
+      },
+      {
+        "surface": "OSWorld 2.1",
+        "access": "PUBLIC_BENCHMARK",
+        "disposition": "PUBLIC_EXECUTABLE_IN_PRINCIPLE__MATCHED_ENVIRONMENT_AND_ZERO_COST_VM_ROUTE_NOT_YET_FROZEN"
+      },
+      {
+        "surface": "LiveBench Instruction Following",
+        "access": "PUBLIC_QUESTIONS_AND_OBJECTIVE_VERIFIERS",
+        "disposition": "PUBLIC_EXECUTABLE__BRAIN_ROUTE_INTEGRATION_REQUIRED"
+      }
+    ],
+    "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": [
+      {
+        "surface": "Humanity's Last Exam",
+        "access": "PUBLIC_HUGGINGFACE_DATASET_AFTER_DATASET_ACCESS__AUTOMATED_GRADING_ROUTE_AVAILABLE",
+        "disposition": "PUBLIC_OR_GATED_FREE_DATA__BRAIN_ROUTE_INTEGRATION_REQUIRED"
+      },
+      {
+        "surface": "Terminal-Bench-Science 0.1",
+        "access": "PUBLIC_70_TASK_HARBOR_RELEASE",
+        "zero_cost_issue": "OFFICIAL_EXAMPLES_USE_MODAL_OR_DAYTONA__NO_CURRENT_FULL_ZERO_INCREMENTAL_EXECUTION_SURFACE_FROZEN",
+        "disposition": "PUBLIC_TASKS__ZERO_COST_FULL_EXECUTION_ROUTE_NOT_PROVEN"
+      },
+      {
+        "surface": "Vals MysteryMechanism",
+        "access": "PUBLIC_LEADERBOARD_DESCRIPTION__222_HELD_OUT_TEST_MECHANISMS",
+        "disposition": "HELD_OUT_OFFICIAL_TEST__ZERO_COST_REEXECUTABLE_CASE_ROUTE_NOT_ESTABLISHED"
+      }
+    ]
+  },
+  "executable_public_prefixes": [
+    "CHARTOGRAPHY_PUBLIC_TEST_SET",
+    "LIVEBENCH_PUBLIC_OBJECTIVE_IF_DATA",
+    "HLE_DATASET_ROUTE_SUBJECT_TO_FREE_DATASET_ACCESS",
+    "TERMINAL_BENCH_PUBLIC_TASK_RELEASE",
+    "TERMINAL_BENCH_SCIENCE_PUBLIC_TASK_RELEASE",
+    "OSWORLD_PUBLIC_BENCHMARK"
+  ],
+  "hard_prequalification_blockers": [
+    "NO_FROZEN_ZERO_INCREMENTAL_GENERAL_BRAIN_EXECUTION_SUBSTRATE_ROUTE_FOR_HIGH_VOLUME_TERMINAL_PORTFOLIOS",
+    "FRONTIERCODE_1_1_MAIN_OFFICIAL_REEXECUTABLE_TASK_RUBRIC_ROUTE_NOT_ESTABLISHED",
+    "CURSORBENCH_4_0_OFFICIAL_REEXECUTABLE_TASK_ROUTE_NOT_ESTABLISHED",
+    "GDPVAL_AA_V2_1_OFFICIAL_ELO_PIPELINE_NOT_ZERO_COST_REPRODUCIBLE",
+    "AA_BRIEFCASE_V1_1_OFFICIAL_DATASET_PRIVATE",
+    "FINANCE_AGENT_V2_OFFICIAL_TEST_PRIVATE",
+    "AUTOMATIONBENCH_AA_OFFICIAL_PROVIDER_RUN_CASE_ROUTE_NOT_FROZEN",
+    "MYSTERYMECHANISM_OFFICIAL_HELDOUT_TEST_ROUTE_NOT_ESTABLISHED",
+    "FULL_TERMINAL_BENCH_4_0_GPU_EXECUTION_AT_ZERO_INCREMENTAL_SPEND_NOT_PROVEN",
+    "FULL_TERMINAL_BENCH_SCIENCE_0_1_EXECUTION_AT_ZERO_INCREMENTAL_SPEND_NOT_PROVEN"
+  ],
+  "allowed_escape_hatch": "A_PRIVATE_OR_NONEXECUTABLE_PUBLIC_BAR_MAY_BE_REPLACED_ONLY_BY_A_FROZEN_SCOPE_EQUIVALENT_OR_STRONGER_ABSOLUTE_PROOF_ROUTE_WITH_INDEPENDENT_ACCEPTANCE_AND_NO_TARGET_WEAKENING",
+  "prohibited": [
+    "DO_NOT_TREAT_PUBLIC_LEADERBOARD_SCORE_AS_BRAIN_EXECUTION_EVIDENCE",
+    "DO_NOT_SUBSTITUTE_PUBLIC_SAMPLE_SUBSET_FOR_PRIVATE_TEST_WITHOUT_STATISTICAL_AND_SCOPE_EQUIVALENCE_PROOF",
+    "DO_NOT_DROP_PRIVATE_BARS_MERELY_BECAUSE_ACCESS_IS_INCONVENIENT",
+    "DO_NOT_USE_PAID_API_OR_PAID_SANDBOX_TO_BYPASS_HARD_ZERO_INCREMENTAL_SPEND"
+  ],
+  "external_evidence": [
+    "https://www.tbench.ai/run",
+    "https://github.com/harbor-framework/terminal-bench/blob/main/leaderboard/SUBMIT.md",
+    "https://cognition.com/blog/frontier-code-1.1",
+    "https://prod.cursor.com/evals",
+    "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "https://www.vals.ai/benchmarks/fabv2",
+    "https://github.com/surge-ai/chartography",
+    "https://github.com/livebench/livebench",
+    "https://github.com/centerforaisafety/hle",
+    "https://github.com/harbor-framework/terminal-bench-science"
+  ],
+  "execution_authority": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
