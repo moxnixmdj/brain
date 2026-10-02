@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_T3_RESEARCH_CONTROL_MULTIPLEX_BINDING_PUBLIC_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__HARDENED_PREWAVE_BINDING__ONE_EXPLICIT_HLE_GATED_ACCESS_DEPENDENCY_REMAINS__ZERO_TERMINAL_RESULTS",
+  "binding": "canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json",
+  "verified_binding_semantics": [
+    "HLE_TARGET_67_7_AND_CANONICAL_POPULATION_2500",
+    "HLE_OFFICIAL_SOURCE_AND_DATASET_METADATA_IDENTITIES",
+    "HLE_STRICT_REFERENCE_SCORER_BINDING",
+    "HLE_CONTENT_ACCESS_GATED_AND_ANONYMOUS_EXECUTION_FALSE",
+    "TERMINAL_BENCH_SCIENCE_V0_1_SOURCE_REVISION_AND_CONTENT_HASH",
+    "TB_SCIENCE_RESOURCE_FAILURE_COUNTS_AS_FAILURE_WITH_NO_POST_HOC_REPLACEMENT",
+    "REFERENCE_ANSWER_AND_HIDDEN_ORACLE_NOT_CANDIDATE_VISIBLE",
+    "NO_POST_RESULT_TUNING",
+    "ZERO_TERMINAL_RESULTS_AND_ZERO_FRESH_EVIDENCE",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "remaining_execution_dependency": {
+    "id": "HLE_CANONICAL_CONTENT_ACCESS_AT_ZERO_INCREMENTAL_SPEND",
+    "state": "OPEN_GATED_ACCESS_DEPENDENCY",
+    "effect": "BLOCKS_HLE_TERMINAL_EXECUTION_ONLY__DOES_NOT_INVALIDATE_TB_SCIENCE_OR_DIRECT_BEHAVIOR_PREWAVE_BINDING"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 643,
+    "workflow_run_id": 36964867246,
+    "job_id": 110706300656,
+    "merge_commit": "0b1e8c1fa42fcc9622e3ecd4e88fedb37db5b7ca"
+  },
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
