@@ -29,6 +29,10 @@ on:
       - '.github/workflows/drift-immunity-guard.yml'
   workflow_dispatch:
 
+concurrency:
+  group: drift-immunity-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   pull-requests: read

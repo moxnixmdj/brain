@@ -7,7 +7,15 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'canonical/obsolescence/run_exact_symbolic_v1.py'
+      - 'canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json'
+      - '.github/workflows/obsolescence-exact-symbolic-v1.yml'
   workflow_dispatch:
+
+concurrency:
+  group: exact-symbolic-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
