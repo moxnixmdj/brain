@@ -25,5 +25,29 @@ class CadSourceStructureAntishortcutRepairTests(unittest.TestCase):
         self.assertEqual(a_contract, b_contract)
 
 
+    def test_split_inside_numeric_token_is_render_equivalent(self):
+        original = """<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120">
+        <text x="10" y="25">FRONT: rectangle 20.5 mm x 10 mm</text>
+        <text x="10" y="45">DEPTH: 5 mm</text>
+        </svg>"""
+        split = """<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120">
+        <text x="10" y="25">FRONT: rectangle 20.</text><text x="150" y="25">5 mm x 10 mm</text>
+        <text x="10" y="45">DEPTH: 5 mm</text>
+        </svg>"""
+        self.assertEqual(_texts(original), _texts(split))
+        self.assertEqual(_parse_visible(_texts(original)), _parse_visible(_texts(split)))
+
+    def test_dom_source_order_does_not_override_rendered_x_order(self):
+        original = """<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120">
+        <text x="10" y="25">FRONT: rectangle 20 mm</text><text x="180" y="25"> x 10 mm</text>
+        <text x="10" y="45">DEPTH: 5 mm</text>
+        </svg>"""
+        reordered = """<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120">
+        <text x="180" y="25"> x 10 mm</text><text x="10" y="45">DEPTH: 5 mm</text><text x="10" y="25">FRONT: rectangle 20 mm</text>
+        </svg>"""
+        self.assertEqual(_texts(original), _texts(reordered))
+        self.assertEqual(_parse_visible(_texts(original)), _parse_visible(_texts(reordered)))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
