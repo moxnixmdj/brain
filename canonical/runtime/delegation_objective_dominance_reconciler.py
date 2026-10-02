@@ -29,6 +29,9 @@ def _git_blob_sha(path:Path)->str:
     raw=path.read_bytes()
     return hashlib.sha1(b"blob "+str(len(raw)).encode("ascii")+b"\0"+raw).hexdigest()
 
+def _blob_matches(path:Path, expected:Any)->bool:
+    return isinstance(expected,str) and bool(expected) and path.exists() and _git_blob_sha(path)==expected
+
 def reconcile(root:Path)->dict[str,Any]:
     errors=[]
     try:
@@ -68,8 +71,10 @@ def reconcile(root:Path)->dict[str,Any]:
         errors.append("BINDING_BEHAVIOR_MISMATCH")
     if binding.get("proof_mode")!="T2_MULTIPLEXED_DIRECT_OBJECTIVE_DELEGATION_GATE":
         errors.append("BINDING_PROOF_MODE_INVALID")
-    if binding.get("prewave_admissible") is not False:
-        errors.append("SOURCE_BINDING_MUST_REMAIN_PREPROMOTION")
+    if binding.get("prewave_admissible") is not True:
+        errors.append("CURRENT_BINDING_NOT_PREWAVE_ADMISSIBLE")
+    if binding.get("independent_verification") != BINDING_RECEIPT:
+        errors.append("CURRENT_BINDING_VERIFICATION_POINTER_INVALID")
 
     required=set(row.get("covered_dimensions") or [])
     declared=set(binding.get("objective_dimensions") or [])
@@ -119,7 +124,7 @@ def reconcile(root:Path)->dict[str,Any]:
             "canonical/runtime/delegation_structural_variety_proof_v3.py",
         ):
             expected=exact.get(rel)
-            if not isinstance(expected,str) or expected!=_git_blob_sha(root/rel):
+            if not _blob_matches(root/rel, expected):
                 errors.append("OPERATIVE_BLOB_NOT_COVERED_BY_RECEIPT:"+rel)
 
     comparator_deletion=not errors
