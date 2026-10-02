@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_M2_M5_BOUNDED_DETERMINISTIC_SUBTRACTION_V1",
   "date": "2026-10-02",
-  "status": "BRAIN_OWNED_BOUNDED_CORES_IDENTIFIED__WHOLE_LANES_REMAIN_OPEN__INDEPENDENT_SHARED_KERNEL_VERIFICATION_PENDING",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_CORES__WHOLE_LANES_REMAIN_OPEN",
   "source_runtime": "canonical/runtime/shared_decision_primitives.py",
   "source_commit": "f6dd835cfe7f27769fc0f4521fa9ff47bf66fb81",
   "verification_workflow": ".github/workflows/verify-shared-decision-primitives.yml",
@@ -52,9 +52,14 @@
       ]
     }
   },
-  "promotion_limit": "NO_M2_M3_M4_M5_LANE_CLOSURE_FROM_THIS_RECEIPT__INDEPENDENT_RUNTIME_VERIFICATION_AND_RESIDUAL_OWNERSHIP_STILL_REQUIRED",
-  "next": "VERIFY_SHARED_DECISION_PRIMITIVES__THEN_UPDATE_OUTER_UNIVERSE_TO_REMOVE_ONLY_THE_BOUNDED_CORES_AND_CONTINUE_EXISTING_MECHANISM_REUSE_FOR_SURVIVING_RESIDUALS",
+  "promotion_limit": "NO_M2_M3_M4_M5_WHOLE_LANE_CLOSURE__ONLY_THE_EXPLICIT_BOUNDED_CORES_LISTED_HERE_ARE_OWNED",
+  "next": "REMOVE_VERIFIED_BOUNDED_CORES_FROM_OUTER_MECHANISM_HOLES__ATTACK_ONLY_SURVIVING_UNCERTAIN_OR_IMPLICIT_RESIDUALS",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "verification": {
+    "capability_receipt": "canonical/capabilities/opus55/SHARED_DECISION_PRIMITIVES_001.json",
+    "workflow_run_id": 36949081936,
+    "conclusion": "success"
+  }
 }
