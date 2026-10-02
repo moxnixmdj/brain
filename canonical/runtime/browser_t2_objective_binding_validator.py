@@ -58,6 +58,13 @@ def validate(root: Path) -> dict:
         if selector.get(key) is not False:
             errors.append(f"SELECTOR_{key.upper()}_NOT_FALSE")
 
+    if selector.get("protocol")!="GLOBAL_TERMINAL_SELECTION_KERNEL_V1":
+        errors.append("SELECTOR_PROTOCOL_NOT_IMMUTABLE_KERNEL")
+    sel_sem=b.get("selection_semantics") or {}
+    kernel=(b.get("exact_bound_blobs") or {}).get("selection_kernel") or {}
+    if sel_sem.get("kernel")!=kernel.get("path") or sel_sem.get("kernel_blob_sha")!=kernel.get("blob_sha"):
+        errors.append("SELECTION_KERNEL_BINDING_MISMATCH")
+
     info=b.get("information_boundary") or {}
     if info.get("candidate_receives_hidden_oracle") is not False:
         errors.append("CANDIDATE_RECEIVES_HIDDEN_ORACLE")
