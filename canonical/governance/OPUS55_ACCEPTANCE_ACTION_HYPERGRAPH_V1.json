@@ -15,15 +15,11 @@
       ],
       "preconditions": [
         {
-          "id": "RANK26_PRIOR_EXPOSURE_SEARCH_COMPLETE_ZERO_HITS",
-          "satisfied": true
-        },
-        {
-          "id": "RANK26_INSTRUCTION_UNREAD",
-          "satisfied": true
+          "id": "RANK26_STAGE_A_NOT_ALREADY_VERIFIED",
+          "satisfied": false
         }
       ],
-      "notes": "Independent pre-exposure Stage-A verification only. PR 833. No task source exposure or acceptance credit."
+      "notes": "Completed independently in verification-capsule-runner PR 833 and canonically admitted. Kept only as provenance; must not execute again."
     },
     {
       "id": "EXPOSE_RANK26_STAGE_B_ALLOWLISTED_OFFICIAL_SOURCES_ONCE",
@@ -37,10 +33,14 @@
       "preconditions": [
         {
           "id": "RANK26_STAGE_A_INDEPENDENT_PASS",
+          "satisfied": true
+        },
+        {
+          "id": "RANK26_STAGE_B_EXPOSURE_CONSUMPTION_STATE_REVALIDATED_BY_SEALED_TASK_LANE",
           "satisfied": false
         }
       ],
-      "notes": "One allowlisted official Stage-B exposure only after independent Stage-A pass. No task execution."
+      "notes": "Stage-A is independently passed and one exposure lease was authorized. Central/global lane remains fail-closed; only the sealed task lane may revalidate consumption state and perform the one exact allowlisted exposure, preventing another post-exposure discovery incident."
     },
     {
       "id": "EXECUTE_NEXT_CLEAN_TB4_PRECOMMITTED_TRIAL_BATCH",
@@ -168,7 +168,7 @@
     "date": "2026-10-02",
     "rank24": "CONTAMINATED_POST_STAGE_B__NO_STAGE_C__NO_REPLAY",
     "rank25": "INELIGIBLE_PREEXPOSURE__PRIOR_RUNNER_EXPOSURE",
-    "rank26": "CLEAN_PREEXPOSURE__STAGE_A_INDEPENDENT_VERIFICATION_PENDING__PR833"
+    "rank26": "STAGE_A_INDEPENDENT_PASS__ONE_STAGE_B_EXPOSURE_AUTHORIZED__CENTRAL_LANE_SEALED_FROM_TASK_SPECIFIC_DISCOVERY"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
