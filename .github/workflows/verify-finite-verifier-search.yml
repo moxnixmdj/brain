@@ -1,20 +1,23 @@
 name: Verify finite complete-verifier search bypass
+
 on:
   pull_request:
     branches: [main]
     paths:
-      - canonical/runtime/finite_verifier_search.py
-      - canonical/verification/test_finite_verifier_search.py
-      - .github/workflows/verify-finite-verifier-search.yml
+      - "canonical/runtime/finite_verifier_search.py"
+      - "canonical/verification/test_finite_verifier_search.py"
+      - ".github/workflows/verify-finite-verifier-search.yml"
   push:
     branches: [main]
     paths:
-      - canonical/runtime/finite_verifier_search.py
-      - canonical/verification/test_finite_verifier_search.py
-      - .github/workflows/verify-finite-verifier-search.yml
+      - "canonical/runtime/finite_verifier_search.py"
+      - "canonical/verification/test_finite_verifier_search.py"
+      - ".github/workflows/verify-finite-verifier-search.yml"
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -23,6 +26,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m pip install --disable-pip-version-check --no-input pytest
-      - run: PYTHONPATH=. pytest -q canonical/verification/test_finite_verifier_search.py
-      - run: PYTHONPATH=. python canonical/runtime/finite_verifier_search.py
+      - name: Run bounded verifier search tests
+        run: PYTHONPATH=. python -m unittest -v canonical.verification.test_finite_verifier_search
+      - name: Run runtime self-test
+        run: PYTHONPATH=. python canonical/runtime/finite_verifier_search.py
