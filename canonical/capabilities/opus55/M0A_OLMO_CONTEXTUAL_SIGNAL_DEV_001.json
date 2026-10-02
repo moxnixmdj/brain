@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_OLMO_CONTEXTUAL_SIGNAL_DEV_RESULT_V1",
+  "date": "2026-10-02",
+  "status": "DEV_SIGNAL_PRESENT__ZERO_CAPABILITY_CREDIT__CAUSAL_LOCALIZATION_REQUIRED",
+  "parent_residual": "M0A_ARBITRARY_SOURCE_TO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
+  "donor": {
+    "repository": "allenai/OLMo-2-0425-1B",
+    "resolved_hf_sha": "a1847dff35000b4271fa70afc5db10fd29fedbdf",
+    "license": "Apache-2.0",
+    "role": "WHITE_BOX_DONOR_SPECIMEN_ONLY"
+  },
+  "frozen_probe": "canonical/evaluation/M0A_OLMO_CONTRASTIVE_DEV_V1.json",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 455,
+    "merge_commit": "f1936159a11eb318fdc0cbfdf8c767ea68e25b37",
+    "workflow_run_id": 36944964749,
+    "job_id": 110644865471,
+    "conclusion": "success"
+  },
+  "dev_result": {
+    "case_count": 7,
+    "correct_preference_count": 6,
+    "accuracy": 0.8571428571428571,
+    "mean_margin": 0.649952713772116,
+    "median_margin": 0.6452794458184921,
+    "min_margin": -0.3565803267993033,
+    "max_margin": 2.0010097935677518,
+    "failed_case": "DEV_FORMER_LATTER_001"
+  },
+  "deterministic_baseline": {
+    "contextual_resolution_count": 0,
+    "note": "Current bounded semantic, explicit compound, and explicit named-definition routes did not resolve the tested contextual references."
+  },
+  "ambiguity_diagnostic": {
+    "case": "DEV_AMBIGUOUS_PRONOUN_001",
+    "donor_top_preference": "The parser was unavailable.",
+    "top_mean_logprob": -1.7906288623809814,
+    "runner_up_mean_logprob": -2.1620022535324095,
+    "conclusion": "DONOR_CAN_BE_CONFIDENT_ON_AN_INTENTIONALLY_AMBIGUOUS_CASE__DONOR_PREFERENCE_MUST_NEVER_OVERRIDE_FAIL_CLOSED_AMBIGUITY"
+  },
+  "admissible_conclusion": "PINNED_OLMO_1B_CONTAINS_MEASURABLE_CONTEXTUAL_EXPLICIT_SEMANTIC_SIGNAL_ABSENT_FROM_CURRENT_DETERMINISTIC_BASELINE_ON_THIS_FROZEN_DEV_SET",
+  "nonclaims": [
+    "NO_HELDOUT_PROMOTION",
+    "NO_M0A_OWNERSHIP",
+    "NO_FAMILY_CREDIT",
+    "NO_CLAIM_SIGNAL_IS_LOCALIZED_TO_A_MINIMAL_MECHANISM",
+    "NO_CLAIM_DONOR_CONFIDENCE_IS_SEMANTIC_TRUTH",
+    "NO_DONOR_DELETION_YET"
+  ],
+  "next": "LOCALIZE_WHERE_CONTRASTIVE_SIGNAL_EMERGES__CAUSALLY_ABLATE_CANDIDATE_LAYERS_OR_SUBMODULES__FREEZE_MINIMUM_RESIDUAL_CANDIDATE_BEFORE_HELDOUT__THEN_DONOR_DELETE",
+  "heldout_cases_exposed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
