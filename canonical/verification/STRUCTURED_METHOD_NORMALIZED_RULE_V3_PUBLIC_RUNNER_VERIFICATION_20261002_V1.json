@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__OPERATOR_AGNOSTIC_NORMALIZED_RULE_GRAPH_AND_STRUCTURAL_ORACLE__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 615,
+  "verified_head": "ddb6787afdaf2081161b623f8c8e1ace4fc75695",
+  "workflow_run_id": 36963285517,
+  "workflow_conclusion": "success",
+  "exact_bound_blobs": {
+    "canonical/runtime/structured_method_normalized_rule_graph_v3.py": "79d3896818b03223348f05adf4fdcd574f6f355e",
+    "canonical/runtime/structured_method_normalized_rule_oracle_v3.py": "5d92b1360fbb1bb27baacc8a04adb3744abf690c",
+    "canonical/tests/test_structured_method_normalized_rule_oracle_v3.py": "f48657d8637eb03b3a0bbc02566d54871b800687"
+  },
+  "verified": [
+    "ARBITRARY_NORMALIZED_OPERATOR_IDENTITY_IS_NOT_A_COMPILER_SCOPE_LIMIT",
+    "REQUIREMENT_LINEAGE_AND_JUSTIFIED_EXCLUSION_ARE_SOURCE_DERIVED_AND_LOAD_BEARING",
+    "TYPE_AND_DIMENSION_CONTRACT_MUTATIONS_ARE_REJECTED",
+    "EDGE_DELETION_AND_REWIRE_ARE_REJECTED",
+    "INVARIANT_DECLARATION_MUTATION_IS_REJECTED",
+    "REQUIRED_OUTPUT_MUTATION_IS_REJECTED",
+    "CYCLE_OR_UNRESOLVED_DEPENDENCY_FAILS_CLOSED",
+    "ORACLE_DOES_NOT_IMPORT_BRAIN_COMPILER"
+  ],
+  "boundary": {
+    "normalized_rule_semantics_are_upstream": true,
+    "hidden_or_unstated_semantic_extraction_claimed": false,
+    "contract_owned_behavior": "REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_GRAPH_MATERIALIZATION_AND_STRUCTURAL_ACCEPTANCE_AFTER_RULE_NORMALIZATION"
+  },
+  "does_not_prove": [
+    "UNSTATED_OR_IMPLICIT_RULE_EXTRACTION",
+    "ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_INTERPRETATION",
+    "TERMINAL_FAMILY_OPUS_PARITY"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
