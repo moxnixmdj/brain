@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_HYPERGRAPH_OPEN_PREDICATE_GUARD_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_10_BLOBS__OPEN_PREDICATE_AND_DERIVED_EVIDENCE_GUARDS_PASS__ZERO_CREDIT",
+  "source_brain_candidate_commit": "2232d2464e3c8cce2a2788e9f7f339123c8163d4",
+  "exact_brain_blobs": {
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json": "83450969ad0a7852789870c6ed7f305a2fd1a146",
+    "canonical/runtime/action_hypergraph_open_predicate_guard_v1.py": "449ce8e0beaed333ff616cd110c103a680031a6e",
+    "canonical/tests/test_action_hypergraph_open_predicate_guard_v1.py": "394b34a9a86f4694e49045b040203cbab7efb717",
+    "canonical/governance/ACTION_HYPERGRAPH_OPEN_PREDICATE_GUARD_V1.json": "4aceda893641a5cfa54cbab2770ce1b3f49c4840",
+    "canonical/governance/OBJECTIVE_GATE_FRONTIER_RECONCILIATION_20261002_V3.json": "38ce9e539bdfe8b53891b971d6afe91b6c40843d",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f26d250f86e7f2ce18d790e451fe09bbacecb694",
+    "canonical/runtime/action_hypergraph_evidence_guard_v1.py": "2ddc7479b8e6cfc9320713983799f31354b3e855",
+    "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json": "3aa8168fc7f81581eea4085504e4a70205949af9",
+    "canonical/verification/TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "04cb0aa4b202b57062bc2057f7adf8791980e385"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 863,
+    "pull_request_head": "0931c86d602c4194abb137b70879f06570a05e37",
+    "merge_commit": "1e1b8f3b96e71aece1e13ba68df1423a20d631bd",
+    "workflow_run_id": 37001305628,
+    "workflow_job_id": 110819389798,
+    "workflow_name": "Verify Brain open-predicate action frontier guard v1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_10_OF_10_MIRRORED_BRAIN_GIT_BLOB_IDENTITIES_MATCH",
+    "OPEN_AND_EXTERNAL_BLOCKED_TARGETS_ALLOWED",
+    "PROVED_TARGET_REJECTED_FAIL_CLOSED",
+    "UNKNOWN_TARGET_REJECTED_FAIL_CLOSED",
+    "LIVE_FRONTIER_EXCLUDES_TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "REINSERTING_CLOSED_TOOL_LEARNING_TARGET_FAILS_CLOSED",
+    "EXISTING_DERIVED_PRECONDITION_EVIDENCE_GUARD_STILL_PASSES",
+    "TOOL_LEARNING_ATOMIC_RECEIPT_REMAINS_3_OF_3_PROVED_AND_GLOBAL_TERMINAL_PROMOTION_FALSE",
+    "ZERO_CREDIT_GOVERNANCE_PASS"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
