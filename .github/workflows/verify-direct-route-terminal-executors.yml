@@ -1,0 +1,35 @@
+name: Verify direct route terminal executors
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/direct_route_terminal_executors_v1.py
+      - canonical/tests/test_direct_route_terminal_executors_v1.py
+      - canonical/runtime/saccr_credit_information_safe_proof.py
+      - canonical/runtime/saccr_credit_information_safe_candidate.py
+      - canonical/runtime/browser_state_information_safe_proof.py
+      - canonical/runtime/browser_state_information_safe_candidate.py
+      - canonical/runtime/delegation_whole_scope_proof_v2.py
+      - canonical/runtime/delegation_structural_variety_proof_v3.py
+      - canonical/runtime/delegation_whole_scope_candidate_v2.py
+      - canonical/runtime/tool_discovery_information_safe_proof_v2.py
+      - canonical/runtime/tool_discovery_information_safe_candidate.py
+      - canonical/runtime/research_control_information_safe_proof.py
+      - canonical/runtime/research_control_information_safe_candidate.py
+      - .github/workflows/verify-direct-route-terminal-executors.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_direct_route_terminal_executors_v1
