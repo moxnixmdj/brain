@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_T3_RESEARCH_CONTROL_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_FROZEN_T3_RESEARCH_CONTROL_MULTIPLEX_PREWAVE_BINDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 641,
+  "public_pr_head_sha": "6787d743ec15f3ff83f363a0820620c93bd1b554",
+  "workflow_run_id": 36964747979,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json": "46834cff249f02cec1046e2f7188e1b5e1b24ab1",
+    "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json": "9bd8a3848510e1b450d07bcfd90ce6e6a9f4adbb",
+    "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json": "d3f05f1c0ed727c6e792cd3694461e92568770d7",
+    "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "860cd929e3b7fdab6befec5bf052479dc4ae41ac",
+    "canonical/verification/HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "624959a5c731b3ecff4cac200122d028744d15a3",
+    "canonical/verification/HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1.json": "608415d65b0b4cd50df9e3ca1044cd8f4eb7830f",
+    "canonical/runtime/research_control_information_safe_candidate.py": "cd6bf6e4163bbba64878b856766b1af4372d68bc",
+    "canonical/runtime/research_control_information_safe_proof.py": "16c47efee0e0e38f479163d1285d7079798efdaf",
+    "canonical/runtime/hle_strict_reference_scorer.py": "d30882400982c058f1130b82af790b197767a091"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOBS_BOUND",
+    "PUBLIC_FIXED_BAR_TARGETS_FROZEN_AT_HLE_67_7_AND_TERMINAL_BENCH_SCIENCE_58_7",
+    "HLE_ROUTE_REQUIRES_NO_PAID_JUDGE_FOR_DECLARED_STRICT_LOWER_BOUND",
+    "CANDIDATE_INFORMATION_BOUNDARY_EXCLUDES_REFERENCE_ANSWER_HIDDEN_SUPPORT_TRUTH_AND_POST_FREEZE_SELECTION",
+    "RESEARCH_CONTROL_OBSERVABLES_ARE_LOAD_BEARING_AND_CANNOT_BE_HIDDEN_BY_AGGREGATE_PUBLIC_SCORE",
+    "NO_CROSS_CONTRACT_INHERITANCE_TO_TOOL_DISCOVERY_SYNTHESIS_OR_SPECIFICATION",
+    "CONTAMINATION_RULES_FROZEN",
+    "UPSTREAM_RESEARCH_CONTROL_HLE_AND_HARBOR_RECEIPTS_INDEPENDENTLY_PASS"
+  ],
+  "limitations": [
+    "PREWAVE_BINDING_ONLY",
+    "TERMINAL_HLE_AND_TERMINAL_BENCH_SCIENCE_RESULTS_NOT_EXECUTED",
+    "ZERO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "prewave_admissible": true,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
