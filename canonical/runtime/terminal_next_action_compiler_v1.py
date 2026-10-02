@@ -4,7 +4,8 @@ This is a zero-credit scheduler over the canonical acceptance IR. It never
 infers semantic equivalence, creates evidence, authorizes benchmark execution,
 or promotes capability ownership.
 
-Purpose: prevent stale prose pointers from naming blocked actions as runnable.
+Purpose: prevent stale prose pointers from naming blocked actions as runnable,
+while keeping the blocked strategic goal separate from the best runnable action.
 """
 from __future__ import annotations
 
@@ -64,7 +65,10 @@ def compile_next_frontier(
         a for a in ranked
         if a["available_now"] and int(a.get("new_reality_units", 0) or 0) == 0
     ]
+    available_any = [a for a in ranked if a["available_now"]]
 
+    # Strategic goal pointer: preserve the highest-leverage critical action even
+    # when blocked so its missing preconditions remain explicit.
     if critical_blocked:
         primary = critical_blocked[0]
         primary_state = "BLOCKED_PRECONDITIONS"
@@ -78,6 +82,19 @@ def compile_next_frontier(
         primary = None
         primary_state = "NO_RESIDUAL_ACTION"
 
+    # Runnable execution pointer: never point execution at a blocked action.
+    # Prefer zero-reality work, then any currently available action under the
+    # same deterministic rank. This is a scheduling pointer only, not authority.
+    if available_zero_reality:
+        execution = available_zero_reality[0]
+        execution_state = "AVAILABLE_ZERO_REALITY"
+    elif available_any:
+        execution = available_any[0]
+        execution_state = "AVAILABLE"
+    else:
+        execution = None
+        execution_state = "NO_RUNNABLE_ACTION"
+
     return {
         "schema": SCHEMA,
         "status": "PASS__DETERMINISTIC_FRONTIER__ZERO_CREDIT",
@@ -88,6 +105,10 @@ def compile_next_frontier(
         "primary_unresolved_target_count": len(primary["unresolved_target_predicates"]) if primary else 0,
         "primary_unresolved_targets": primary["unresolved_target_predicates"] if primary else [],
         "primary_unsatisfied_preconditions": primary["unsatisfied_preconditions"] if primary else [],
+        "execution_action_id": execution["id"] if execution else None,
+        "execution_action_state": execution_state,
+        "execution_unresolved_target_count": len(execution["unresolved_target_predicates"]) if execution else 0,
+        "execution_unresolved_targets": execution["unresolved_target_predicates"] if execution else [],
         "available_zero_reality_critical_actions": [a["id"] for a in critical_available_zero_reality],
         "available_zero_reality_actions": [a["id"] for a in available_zero_reality],
         "blocked_critical_actions": [
@@ -99,7 +120,8 @@ def compile_next_frontier(
             for a in critical_blocked
         ],
         "rule": (
-            "PRIMARY_IS_HIGHEST_COVERAGE_CRITICAL_PATH_FRONTIER__"
+            "PRIMARY_IS_STRATEGIC_GOAL_AND_MAY_BE_BLOCKED__"
+            "EXECUTION_ACTION_IS_HIGHEST_RANKED_CURRENTLY_RUNNABLE_ROUTE__"
             "BLOCKED_PRIMARY_MEANS_DISCHARGE_LISTED_PRECONDITIONS_NOT_RUN_ACTION__"
             "NO_SEMANTIC_INFERENCE_NO_NEW_EVIDENCE_NO_PROMOTION"
         ),
