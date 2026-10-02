@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_SURFACE_DOMINANCE_V3_SCOPE_MAPPING_INVALIDATION_V1",
+  "date": "2026-10-02",
+  "status": "V3_SCOPE_MAPPING_PARTIALLY_INVALID__SPECIFICATION_TO_ACCEPTANCE_SUPPORTER_TOO_NARROW__ROUTE_DELETION_NOT_TERMINAL_AUTHORITY",
+  "source_verdict": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json",
+  "source_verification": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "exact_contradiction": {
+    "behavioral_contract": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "registry_blob": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
+    "required_scope": "TASK_SPECIFICATION_AND_VISIBLE_EVIDENCE_TO_INDEPENDENT_ACCEPTANCE_CONSEQUENCES_FOR_CONSEQUENTIAL_OPEN_ENDED_TASKS_WITH_AMBIGUITY_OR_MULTIPLE_PLAUSIBLE_INTERPRETATIONS",
+    "v3_supporter": "VERIFIED_ACCEPTANCE_COMPILER_DIRECT",
+    "supporter_implementation": "canonical/runtime/requirement_acceptance_compiler.py",
+    "supporter_blob": "c306ac6191e2d6f6d84445d7a698eeec8676a0ef",
+    "supporter_declared_boundary": "NORMALIZED_REQUIREMENT_TO_ACCEPTANCE_CONSEQUENCES_ONLY__NO_SEMANTIC_EXTRACTION_OR_TERMINAL_CORRECTNESS_CREDIT",
+    "atomic_map_unresolved": "RAW_SOURCE_TO_SEMANTICALLY_CORRECT_NORMALIZED_REQUIREMENTS",
+    "atomic_map": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
+    "prior_independent_acceptance_evidence": "canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json",
+    "prior_boundary": "WHOLE_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_NOT_OWNED"
+  },
+  "adjudication": {
+    "independent_v3_runner_result_valid_for_mechanical_input_compilation": true,
+    "frozen_v3_scope_mapping_semantically_sufficient": false,
+    "all_14_surface_deletion_as_required_routes_suspended": true,
+    "named_benchmark_scores_still_not_required_as_ownership_credit": true,
+    "zero_capability_credit": true,
+    "fresh_terminal_evidence_consumed": 0
+  },
+  "corrected_support_requirement": {
+    "route_id": "COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_TERMINAL_PROOF",
+    "candidate_route": [
+      "CURRENT_BOUNDED_TEXT_SEMANTIC_COMPOSITION_FROM_S0_G0_ZERO_REALITY_SATURATION",
+      "M0A_SEMANTIC_GRAPH_CONSENSUS",
+      "SOURCE_CONTRACT_COMPILER_V2",
+      "REQUIREMENT_ACCEPTANCE_COMPILER"
+    ],
+    "proof_population_requirement": "FRESH_POST_FREEZE_CROSS_DOMAIN_RAW_SPECS_WITH_INDEPENDENT_ALTERNATIVE_INTERPRETATION_AND_ACCEPTANCE_CONSEQUENCE_ORACLE",
+    "authority_boundary": "THIS_ROUTE_MAY_REPLACE_NAMED_SURFACE_EXECUTION_ONLY_AFTER_ITS_SCOPE_EQUIVALENT_TERMINAL_PROOF_POPULATION_IS_FROZEN_AND_ADMITTED"
+  },
+  "next": "BUILD_CORRECTED_DOMINANCE_V4_WITH_COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_TERMINAL_PROOF_ROUTE__RECOMPUTE_PREQUALIFICATION_FAIL_CLOSED",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
