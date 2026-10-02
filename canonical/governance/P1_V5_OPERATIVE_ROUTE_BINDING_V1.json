@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_OPERATIVE_ROUTE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_BRAIN_OWNED_OPERATIVE_ROUTE__SOURCE_GATE_V2_VERIFICATION_PENDING__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Bind the independently verified P1 V5 capability mechanism as an explicit Brain-owned executable route without lifting P1 scope quarantine or inheriting terminal credit.",
+  "entrypoint": "canonical.runtime.trajectory_failure_typed_ir_candidate_v5:solve",
+  "proof_evaluator": "canonical.runtime.trajectory_failure_typed_ir_proof_v5:score_case",
+  "proof_public_task_adapter": "canonical.runtime.trajectory_failure_typed_ir_proof_v5:public_task",
+  "package": {
+    "candidate": {
+      "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+      "git_blob_sha": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d"
+    },
+    "proof": {
+      "path": "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py",
+      "git_blob_sha": "3fc600a8176dac250219e3d98b92cf93d8fceef5"
+    },
+    "governance": {
+      "path": "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json",
+      "git_blob_sha": "26cd9f4c626d4754200c64c3f298383580d67c14"
+    },
+    "activation": {
+      "path": "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5_ACTIVATION_V1.json",
+      "git_blob_sha": "e01df1a703266e055ab965ec7c37c491051b221b"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "9221744bafba669a8b596e2fcce63d4a5537654b"
+    }
+  },
+  "source_gate": {
+    "runtime": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "runtime_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "independent_verification": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "independent_verification_git_blob_sha": "5eb6cdb71bc59f180aacfac1e9de6048f30814b2",
+    "route_input": {
+      "benchmark_harness_zero_cost": true,
+      "scorer_frozen": true,
+      "brain_candidate_bound": true,
+      "brain_owned_operative_configuration": true,
+      "configuration_materially_constrains_execution": true,
+      "capability_package_contains_configuration": true,
+      "promotion_evaluates_brain_configured_system": true,
+      "external_hidden_target_capability_provider": false,
+      "ownership_claim_relies_on_model_standalone_superiority": false,
+      "future_use_requires_capability_rediscovery": false,
+      "incremental_spend_usd": 0,
+      "model_role": "NONE",
+      "model_dependency_count": 0,
+      "model_dependencies_declared": true,
+      "general_substrate_test_pass": false
+    }
+  },
+  "operative_constraints": [
+    "ENTRYPOINT_IS_EXACTLY_THE_V5_CANDIDATE_SOLVE_FUNCTION",
+    "P1_INPUT_MUST_BE_PUBLIC_NORMALIZED_TRAJECTORY_IR_ONLY",
+    "HIDDEN_ORACLE_AND_INTERVENTION_STATE_MUST_NOT_ENTER_CANDIDATE_PAYLOAD",
+    "NO_NETWORK_EXTERNAL_MODEL_OR_OPAQUE_TARGET_CAPABILITY_PROVIDER_IN_CANDIDATE_ROUTE",
+    "V5_INDEPENDENT_VERIFICATION_MUST_REMAIN_CURRENT",
+    "P1_SCOPE_QUARANTINE_REMAINS_ACTIVE_UNTIL_SEPARATE_SCOPE_AND_RESTORATION_VERIFIERS_PASS"
+  ],
+  "current_claim": {
+    "brain_owned_operative_route_candidate": true,
+    "p1_whole_scope_restored": false,
+    "terminal_credit_authorized": false,
+    "family_credit_authorized": false
+  },
+  "next": "INDEPENDENTLY_VERIFY_THIS_BINDING__THEN_REQUIRE_IT_AS_A_PRECONDITION_OF_ANY_P1_RESTORATION_VERIFIER",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
