@@ -1,18 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M1A_SHRUNK__M0A_PRIMARY__M1B_READY__NOT_FROZEN",
+  "status": "OPEN_DISCOVERY__M0A_SHRUNK__M1A_SHRUNK__M1B_READY__NOT_FROZEN",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
     "M0A": {
-      "status": "OPEN",
+      "status": "OPEN__SHRUNK_AFTER_VERIFIED_BOUNDED_CONTEXTUAL_SEMANTICS",
       "verified_owned": [
         "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
         "canonical/runtime/explicit_compound_requirement_decomposer.py",
         "canonical/reasoning/2026-10-02_M0A_IMPLICIT_REQUIREMENT_RECLASSIFICATION_V1.json",
         "canonical/capabilities/opus55/EXPLICIT_DEFINITION_REFERENCE_GRAPH_001.json",
-        "canonical/capabilities/opus55/SEMANTIC_IDENTIFIABILITY_GATE_001.json"
+        "canonical/capabilities/opus55/SEMANTIC_IDENTIFIABILITY_GATE_001.json",
+        "canonical/capabilities/opus55/BOUNDED_CONTEXTUAL_SEMANTICS_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -23,8 +24,8 @@
         "allenai/allennlp-models@b1f372248c17ad12684d344955fbcd98e957e77e"
       ],
       "uncovered": [
-        "COREFERENCE_AND_NONEXACT_REFERENCE_BINDING_OUTSIDE_EXPLICIT_NAMED_REFERENCES",
-        "LONG_RANGE_DISCOURSE_RELATION_AND_CONTEXTUAL_SCOPE_STRUCTURE",
+        "GENERAL_COREFERENCE_AND_NONEXACT_REFERENCE_BINDING_OUTSIDE_EXPLICIT_NAMED_OR_BOUNDED_UNIQUE_FEATURE_COMPATIBLE_REFERENCES",
+        "IMPLICIT_OR_LONG_RANGE_DISCOURSE_RELATION_AND_CONTEXTUAL_SCOPE_STRUCTURE_OUTSIDE_EXPLICIT_CONNECTIVES",
         "PREDICATE_ARGUMENT_AND_MULTI_CLASS_CONTEXT_DEPENDENT_EXPLICIT_SEMANTICS",
         "OTHER_SEMANTIC_PHENOMENA_OUTSIDE_EXISTING_DECIDABLE_ROUTES"
       ],
@@ -46,6 +47,12 @@
           "workflow_run_id": 36944299306,
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/SEMANTIC_IDENTIFIABILITY_GATE_001.json"
+        },
+        "bounded_contextual_semantics": {
+          "workflow_run_id": 36946873047,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/BOUNDED_CONTEXTUAL_SEMANTICS_001.json",
+          "scope": "BOUNDED_UNIQUE_FEATURE_COMPATIBLE_THIRD_PERSON_PRONOUN_BINDING_AND_EXPLICIT_DISCOURSE_CONNECTIVES__FAIL_CLOSED_AMBIGUITY__NO_GENERAL_COREFERENCE_OR_COMMONSENSE"
         }
       },
       "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL",
@@ -239,7 +246,7 @@
     "M0A",
     "M1A"
   ],
-  "next": "M0A_PRIMARY__VERIFY_AND_COMPOSE_BOUNDED_CONTEXTUAL_SEMANTICS_AND_WHITE_BOX_RESIDUAL_HARVEST__M1A_ONLY_NONIDENTIFIABLE_OR_OUT_OF_GRAMMAR_VISUAL_BINDING_REMAINS__NO_FRESH_UNTOUCHED_INFORMATION",
+  "next": "M0A_PRIMARY__EXECUTE_REFROZEN_USEFUL_SIGNAL_MLP_SUBSPACE_LOCALIZATION_AND_COMPOSE_VERIFIED_BOUNDED_CONTEXTUAL_SEMANTICS__M1A_REMAINDER_ONLY_OUTSIDE_VERIFIED_DETERMINISTIC_GRAMMARS_OR_IDENTIFIABILITY__M1B_COVERAGE_AUDIT__THEN_FREEZE_V6__NO_FRESH_UNTOUCHED_INFORMATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -247,7 +254,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M1B current continuous geometry and tolerance action bundle frozen; all three shared residuals now have complete self-contained action bundles; ready for V4 exact cut.",
-    "supersedes": "canonical/governance/RESIDUAL_CUT_RECONCILIATION_V1.json"
+    "note": "Reconciled verified bounded M0A contextual semantics and verified bounded M1A compound visual resolution into current open residual universe. V5 remains invalid historical state; V6 must be frozen only after current zero-reality M0A localization and M1B coverage audit.",
+    "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json"
   }
 }
