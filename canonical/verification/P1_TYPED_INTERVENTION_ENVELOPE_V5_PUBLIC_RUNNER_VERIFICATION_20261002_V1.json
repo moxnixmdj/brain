@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS__192_TYPED_CASES__SCOPE_AND_HETEROGENEOUS_INTERVENTION_RESCUE__TWO_COUNTEREXAMPLES_KILLED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/tests/test_trajectory_failure_typed_ir_v5.py": "abc87ada119e42b720af5fb0f472816df975bc25",
+    "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json": "26cd9f4c626d4754200c64c3f298383580d67c14"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 1036,
+    "pr_head_sha": "dbe6c77dc270cac5efb2a1da50a20b9441be8791",
+    "merge_commit": "f78652560b1d0663cb8086d89f4e727772f11067",
+    "workflow_run_id": 37039428204,
+    "workflow_job_id": 110945592690,
+    "conclusion": "success"
+  },
+  "verified": {
+    "typed_case_count": 192,
+    "explicit_scope_case_count": 24,
+    "identifiable_or_interaction_rescue_count": 144,
+    "domains": [
+      "BROWSER",
+      "FILESYSTEM",
+      "TOOL_API",
+      "ARTIFACT",
+      "RESEARCH",
+      "CODE"
+    ],
+    "mechanism_classes": [
+      "AUTHORITY",
+      "SCOPE",
+      "SCHEMA",
+      "PROVENANCE",
+      "INVARIANT",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT",
+      "DEPENDENCY"
+    ],
+    "causal_patterns": [
+      "SINGLE",
+      "DELAYED",
+      "INTERACTION",
+      "AMBIGUOUS"
+    ],
+    "drop_provenance_mutation_killed": true,
+    "unfalsifiable_output_injection_killed": true,
+    "hidden_intervention_state_candidate_visible": false,
+    "symptom_only_repair_does_not_rescue": true,
+    "partial_interaction_repair_does_not_rescue": true,
+    "ambiguous_cases_do_not_force_unique_cause": true
+  },
+  "exact_residuals_addressed": [
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+  ],
+  "limitation": "THIS_VERIFIES_THE_STRONGER_TYPED_INTERVENTION_ENVELOPE_ITSELF__IT_DOES_NOT_YET_PROVE_EXACT_OR_SUPERSET_SCOPE_RELATION_TO_ALL_THREE_FROZEN_P1_DIRECT_SURFACES__P1_QUARANTINE_MUST_REMAIN_UNTIL_THAT_RELATION_AND_COMPOSITE_RESTORATION_ARE_INDEPENDENTLY_VERIFIED",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
