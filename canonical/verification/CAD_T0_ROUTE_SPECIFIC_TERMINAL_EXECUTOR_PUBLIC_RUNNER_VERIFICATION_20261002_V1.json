@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CAD_128_CASE_ROUTE_SPECIFIC_EXECUTOR_EXACT_BLOBS_VERIFIED__ZERO_TERMINAL_CASES_CONSUMED",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/cad_t0_route_specific_terminal_executor_v1.py": "573efab38cbf7ab25e63b564f0eb1599d755b7d2",
+    "canonical/tests/test_cad_t0_route_specific_terminal_executor_v1.py": "af1a7e63548fefd503def4091e04488a75e227c4",
+    "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json": "c0f55a55091186c5ab785b670f935bbc6a2f9432"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 713,
+    "head_sha": "0495fd73f15e9d4eba672a93d023407b4aadf810",
+    "merge_commit": "051a7870534648f28a698b9a8159998955f09d1f",
+    "workflow_run_id": 36971218347,
+    "workflow_name": "Verify CAD T0 terminal executor v1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_BLOB_HASHES_MATCHED",
+    "FROZEN_ROUTE_STATIC_PREFLIGHT_PASS",
+    "EXACT_SAMPLE_COUNT_128",
+    "POST_FREEZE_SEED_RULE_MATCHES_FROZEN_CAD_POPULATION",
+    "SIXTEEN_CASE_PRETERMINAL_ALL_EIGHT_FAMILY_CYCLE_PASS",
+    "TERMINAL_EXECUTION_REQUIRES_ALL_12_BOUND_AND_LAUNCH_AUTHORITY",
+    "NO_REAL_POST_FREEZE_BEACON_USED",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
