@@ -325,11 +325,12 @@
     "terminal_credit_from_compiler_alone": false
   },
   "closure_compiler_stack": {
-    "status": "ACTIVE_PENDING_INDEPENDENT_VERIFICATION_OF_NEW_COMPONENTS",
+    "status": "ACTIVE_INDEPENDENT_PASS",
     "activation": "canonical/governance/TERMINAL_CLOSURE_COMPILER_STACK_V1.json",
     "generated_state": "canonical/runtime/generated_terminal_state_compiler.py",
     "anti_circularity": "canonical/runtime/prewave_anti_circularity_compiler.py",
     "proof_supercompiler": "canonical/runtime/terminal_proof_supercompiler.py",
-    "authority_effect": "SCHEDULING_AND_RECONCILIATION_ONLY__NO_ROUTE_PROMOTION_FROM_STACK_ALONE"
+    "authority_effect": "SCHEDULING_RECONCILIATION_AND_ANTI_CIRCULARITY_ONLY__NO_ROUTE_PROMOTION_FROM_STACK_ALONE",
+    "independent_verification": "canonical/verification/TERMINAL_CLOSURE_COMPILER_STACK_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   }
 }
