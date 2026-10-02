@@ -17,5 +17,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m py_compile canonical/runtime/minimum_terminal_basis_v1.py canonical/tests/test_minimum_terminal_basis_v1.py
-      - run: python -m unittest canonical.tests.test_minimum_terminal_basis_v1 -v
+      - name: Compile
+        run: python -m py_compile canonical/runtime/minimum_terminal_basis_v1.py canonical/tests/test_minimum_terminal_basis_v1.py
+      - name: Unit tests
+        env:
+          PYTHONPATH: .
+        run: python canonical/tests/test_minimum_terminal_basis_v1.py
