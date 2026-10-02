@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_SCOPE_COMPLETENESS_RECONCILED__19_BEHAVIORAL_PASS__2_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__17_ACCEPTANCE_OPEN",
+  "status": "POSTWAVE_SCOPE_QUARANTINE_RECONCILED__RAW_TERMINAL_3352_OF_3352_PASS__11_OF_19_UNAFFECTED_BEHAVIORAL_FAMILY_ROWS_PASS__8_P1_DEPENDENT_ROWS_QUARANTINED__2_ACCEPTANCE_CLOSED__2_VERIFIED_OWNED__17_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -64,7 +64,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -97,7 +99,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -134,7 +138,8 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -168,7 +173,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -196,7 +203,8 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -224,7 +232,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
@@ -253,7 +263,8 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "COMPUTER_AND_BROWSER_USE",
@@ -287,7 +298,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "FINANCIAL_ANALYSIS",
@@ -305,7 +318,8 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
@@ -338,7 +352,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -361,7 +377,8 @@
       "next_required_action": "Use the owned continuity route by default for cross-session work; treat autonomous wake and semantic-memory quality as separate capabilities.",
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "PASS",
-      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
@@ -392,7 +409,8 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN__REOPENED_ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
       "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
       "postwave_acceptance_evidence": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
-      "postwave_acceptance_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+      "postwave_acceptance_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -428,7 +446,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "ARTIFACT_CREATION",
@@ -460,7 +480,8 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
@@ -478,7 +499,8 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
@@ -510,7 +532,8 @@
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN__REOPENED_ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
       "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
       "postwave_acceptance_evidence": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
-      "postwave_acceptance_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json"
+      "postwave_acceptance_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -536,7 +559,8 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     },
     {
       "family": "MULTI_CAPABILITY_COMPOSITION",
@@ -573,7 +597,9 @@
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
       "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
+      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "family": "EXACT_SYMBOLIC_COMPUTATION",
@@ -587,7 +613,8 @@
       "ownership_basis": "Brain-owned SymPy execution configuration plus independent Wolfram verification; target behavior is not hidden solely inside an opaque frontier model.",
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "PASS",
-      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER"
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "current_behavioral_scope_state": "UNAFFECTED_BY_P1_SCOPE_QUARANTINE"
     }
   ],
   "summary": {
@@ -702,5 +729,14 @@
     ],
     "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
     "promotion_authority": false
+  },
+  "postwave_scope_quarantine_reconciliation": {
+    "evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "raw_terminal_execution": "3352/3352_PASS__IMMUTABLE",
+    "whole_scope_contracts": "11/12_PASS__1_P1_QUARANTINED",
+    "unaffected_behavioral_family_pass_count": 11,
+    "quarantined_behavioral_family_count": 8,
+    "quarantined_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "rule": "PRESERVE_INTERNALIZATION_STATUS__RETRACT_ONLY_WHOLE_SCOPE_BEHAVIORAL_CREDIT_CAUSALLY_DEPENDENT_ON_P1"
   }
 }
