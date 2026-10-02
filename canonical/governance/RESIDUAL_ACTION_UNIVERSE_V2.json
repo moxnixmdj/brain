@@ -10,7 +10,8 @@
       "verified_owned": [
         "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
         "canonical/runtime/explicit_compound_requirement_decomposer.py",
-        "canonical/reasoning/2026-10-02_M0A_IMPLICIT_REQUIREMENT_RECLASSIFICATION_V1.json"
+        "canonical/reasoning/2026-10-02_M0A_IMPLICIT_REQUIREMENT_RECLASSIFICATION_V1.json",
+        "canonical/capabilities/opus55/EXPLICIT_DEFINITION_REFERENCE_GRAPH_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -19,7 +20,7 @@
       ],
       "uncovered": [
         "MULTI_CLASS_OR_CONTEXT_DEPENDENT_EXPLICIT_SEMANTICS",
-        "CROSS_SENTENCE_REFERENCE_AND_SCOPE_BINDING",
+        "CROSS_SENTENCE_REFERENCE_AND_SCOPE_BINDING_OUTSIDE_EXPLICIT_NAMED_DEFINITION_REFERENCES__INCLUDING_PRONOUNS_ELLIPSIS_AND_CONTEXTUAL_SCOPE",
         "LONG_RANGE_EXPLICIT_RELATION_BINDING",
         "SEMANTIC_PHENOMENA_NOT_COVERED_BY_EXISTING_DECIDABLE_OPERATOR_AND_COMPOUND_ROUTES"
       ],
@@ -30,6 +31,12 @@
           "conclusion": "success",
           "blob_sha": "06da82ccd7cf5ba37b78d1d664b5638caa4e1956",
           "scope": "EXPLICIT_BULLET_LISTS_AND_FLAT_SINGLE_MODAL_AND_COORDINATION_ONLY__AMBIGUOUS_OR_CONTEXTUAL_FORMS_FAIL_CLOSED"
+        },
+        "explicit_definition_reference_graph": {
+          "workflow_run_id": 36943790301,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/EXPLICIT_DEFINITION_REFERENCE_GRAPH_001.json",
+          "scope": "EXPLICIT_NAMED_DEFINITION_PROPAGATION_AND_EXACT_LATER_NAMED_REFERENCE_BINDING_ACROSS_SENTENCES__CONFLICTS_AND_CYCLES_FAIL_CLOSED"
         }
       },
       "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL"
@@ -151,7 +158,7 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "M0A_AND_M1A_STILL_BLOCK_EXACT_CUT__M1A_NOW_NARROWED_TO_NONPLANAR_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_RESIDUAL_ENGINEERING_NOTATION_AND_SEVERE_ROBUSTNESS__M0A_SEMANTIC_DECOMPOSITION_REMAINS_PRIMARY_SHARED_BLOCKER__FREEZE_ONLY_AFTER_COMPLETE_SELF_CONTAINED_ACTION_BUNDLES",
+  "next": "M0A_AND_M1A_STILL_BLOCK_EXACT_CUT__M0A_EXPLICIT_NAMED_DEFINITION_PROPAGATION_CLOSED__M0A_REMAINS_CONTEXTUAL_EXPLICIT_SEMANTICS_NONEXACT_REFERENCE_SCOPE_LONG_RANGE_RELATIONS_AND_NONDECIDABLE_SEMANTIC_RESIDUE__M1A_REMAINS_NARROWED__FREEZE_ONLY_AFTER_COMPLETE_SELF_CONTAINED_ACTION_BUNDLES",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -159,7 +166,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "newly_verified_components": 11,
-    "note": "M1A hardening promoted at exact tested scopes; whole M1A remains open; exact cut remains unauthorized."
+    "newly_verified_components": 12,
+    "note": "M0A explicit named definition/reference propagation independently verified and promoted at exact scope; exact cut remains unauthorized."
   }
 }
