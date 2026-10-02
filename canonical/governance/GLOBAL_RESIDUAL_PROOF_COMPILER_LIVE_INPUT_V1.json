@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RESIDUAL_PROOF_COMPILER_INPUT_V1",
+  "snapshot_date": "2026-10-02",
+  "purpose": "GLOBALIZE_CURRENT_OPEN_TERMINAL_RESIDUALS__SCHEDULING_ONLY__NO_TERMINAL_CREDIT",
+  "source": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+  "obligations": [
+    "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "TASK_TO_DELEGATION_GRAPH_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+  ],
+  "blockers": [
+    {
+      "id": "P1_SCOPE_EQUIVALENCE",
+      "status": "OPEN",
+      "closable": true,
+      "external_blocked": false,
+      "dependency_depth": 1,
+      "critical_path_wall_clock_units": 1,
+      "new_reality_units": 0
+    },
+    {
+      "id": "P1_TERMINAL_BINDING",
+      "status": "OPEN",
+      "closable": true,
+      "external_blocked": false,
+      "dependency_depth": 1,
+      "critical_path_wall_clock_units": 1,
+      "new_reality_units": 0
+    },
+    {
+      "id": "P3_SCOPE_EQUIVALENCE",
+      "status": "OPEN",
+      "closable": true,
+      "external_blocked": false,
+      "dependency_depth": 1,
+      "critical_path_wall_clock_units": 1,
+      "new_reality_units": 0
+    },
+    {
+      "id": "P3_TERMINAL_BINDING",
+      "status": "OPEN",
+      "closable": true,
+      "external_blocked": false,
+      "dependency_depth": 1,
+      "critical_path_wall_clock_units": 1,
+      "new_reality_units": 0
+    }
+  ],
+  "semantic_blocker_equivalence": [],
+  "routes": [
+    {
+      "id": "P1_INTERVENTION_RESCUE_ABSOLUTE",
+      "covers": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ],
+      "proof_mode": "DETERMINISTIC_HIDDEN_ORACLE",
+      "blockers": [
+        "P1_SCOPE_EQUIVALENCE",
+        "P1_TERMINAL_BINDING"
+      ],
+      "base_admissible": true,
+      "terminal_scope_authority": false,
+      "terminal_scope_authority_after_blockers": true,
+      "scope_authority_blocker": "P1_SCOPE_EQUIVALENCE",
+      "zero_incremental_spend": true,
+      "oracle_independent": true,
+      "candidate_oracle_hidden": true
+    },
+    {
+      "id": "P3_HIDDEN_SUPPORT_GRAPH_EXHAUSTIVE",
+      "covers": [
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      ],
+      "proof_mode": "EXHAUSTIVE_FINITE",
+      "blockers": [
+        "P3_SCOPE_EQUIVALENCE",
+        "P3_TERMINAL_BINDING"
+      ],
+      "base_admissible": true,
+      "terminal_scope_authority": false,
+      "terminal_scope_authority_after_blockers": true,
+      "scope_authority_blocker": "P3_SCOPE_EQUIVALENCE",
+      "zero_incremental_spend": true,
+      "finite_domain_frozen": true,
+      "exhaustive": true
+    }
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "note": "Five obligations intentionally have no internally admissible route encoded yet; they remain residual rather than being proxied or guessed."
+}
