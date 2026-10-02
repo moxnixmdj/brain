@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -105,6 +106,7 @@ def build_index(
     refinement_overlay: Mapping[str, Any],
     *,
     root: Path = ROOT,
+    source_revision: str | None = None,
 ) -> dict[str, Any]:
     basis = compile_basis(global_frontier, refinement_overlay)
     if not str(basis.get("status", "")).startswith("PASS"):
@@ -124,6 +126,25 @@ def build_index(
         except (OSError, UnicodeDecodeError):
             continue
         file_cache.append((rel, _source_class(rel), _blob_sha(data), text))
+
+    scan_manifest_payload = "\n".join(
+        f"{rel}\\0{blob_sha}" for rel, _source_class_name, blob_sha, _text in file_cache
+    ).encode("utf-8")
+    scan_manifest_sha256 = hashlib.sha256(scan_manifest_payload).hexdigest()
+    basis_manifest_payload = json.dumps(
+        [
+            {
+                "atom_id": atom.get("atom_id"),
+                "proposition": atom.get("proposition"),
+                "associated_target_predicates": sorted(atom.get("associated_target_predicates", [])),
+            }
+            for atom in atoms
+        ],
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    basis_manifest_sha256 = hashlib.sha256(basis_manifest_payload).hexdigest()
 
     atom_rows = []
     total_matches = 0
@@ -175,6 +196,9 @@ def build_index(
         "errors": [],
         "canonical_atom_count": len(atom_rows),
         "scanned_file_count": len(file_cache),
+        "scan_source_revision": source_revision,
+        "scan_manifest_sha256": scan_manifest_sha256,
+        "basis_manifest_sha256": basis_manifest_sha256,
         "candidate_match_count": total_matches,
         "atoms_with_candidate_matches": atoms_with_matches,
         "atoms_without_candidate_matches": len(zero),
@@ -185,7 +209,8 @@ def build_index(
         "rule": (
             "EXACT_LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
             "CONTENT_ADDRESS_EACH_MATCH__EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
-            "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
+            "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX__"
+            "SCAN_SNAPSHOT_BOUND_TO_SOURCE_REVISION_AND_CONTENT_MANIFEST"
         ),
         "new_reality_units_consumed": 0,
         "capability_credit_delta": 0,
@@ -202,7 +227,11 @@ def main() -> int:
     refinement_overlay = json.loads(
         (ROOT / "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text(encoding="utf-8")
     )
-    out = build_index(global_frontier, refinement_overlay)
+    out = build_index(
+        global_frontier,
+        refinement_overlay,
+        source_revision=os.environ.get("GITHUB_SHA"),
+    )
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if str(out.get("status", "")).startswith("PASS") else 1
 
