@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__PREDECLARED_SYNTHESIS_CONTRACT_TO_TARGET_ATOMS__MATCHED_METRIC_BOUNDS_OPEN__ZERO_CREDIT",
+  "objective": "Bind only synthesis target atoms that are operationally discharged by the predeclared EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 contract and its frozen load-bearing T1/T3 terminal proof. Do not infer matched-quality noninferiority or any numeric comparator bound.",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "family": "COMMUNICATION_AND_SYNTHESIS",
+  "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "authority": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "p3_binding_independent_verification": {
+      "path": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "597854ad2cfffe6b943c8c0c3990071a5d5e5a44"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "postwave_reduction": {
+      "path": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "git_blob_sha": "51e3e7578e9adbeee2168d2223b84481fea16a09"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+      "git_blob_sha": "0910ce3a2351fc439e03a1fa2ae708fb3c6463ef"
+    }
+  },
+  "operational_basis": {
+    "family_contract_set": [
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "contract_success_condition": "Independent claim-support audit has no unsupported material claims, required coverage is complete, audience/format constraints pass, and compression does not delete decision-relevant evidence",
+    "contract_required_output": "Select, organize and express the necessary evidence so required claims are supported, material uncertainty/disagreement is preserved and irrelevant detail is omitted",
+    "frozen_required_checks": [
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED",
+      "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+      "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+      "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION",
+      "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS"
+    ],
+    "terminal_observations": [
+      "T1",
+      "T3"
+    ],
+    "terminal_rule": "BOTH_T1_AND_T3_SYNTHESIS_RECEIPTS_MUST_BE_LOAD_BEARING_DIRECT_INSTRUMENTATION_PASS_AND_PARENT_TERMINAL_ACCEPTANCE_PASS_WITH_NO_CASE_REPLACEMENT_TUNING_REPLAY_OR_RESULT_FEEDBACK"
+  },
+  "atom_bindings": [
+    {
+      "target_atom": "dimension:claim_to_source_fidelity",
+      "operational_evidence": [
+        "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+        "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS"
+      ]
+    },
+    {
+      "target_atom": "dimension:required_evidence_coverage",
+      "operational_evidence": [
+        "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED"
+      ]
+    },
+    {
+      "target_atom": "dimension:uncertainty_and_disagreement_preservation",
+      "operational_evidence": [
+        "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED"
+      ]
+    },
+    {
+      "target_atom": "dimension:audience_adaptation",
+      "operational_evidence": [
+        "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS"
+      ]
+    },
+    {
+      "target_atom": "dimension:format_and_style_constraints",
+      "operational_evidence": [
+        "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS"
+      ]
+    },
+    {
+      "target_atom": "dimension:compression_without_decision_relevant_loss",
+      "operational_evidence": [
+        "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION"
+      ]
+    },
+    {
+      "target_atom": "metric:required_claim_coverage",
+      "operational_evidence": [
+        "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED"
+      ]
+    }
+  ],
+  "proved_atoms": [
+    "dimension:audience_adaptation",
+    "dimension:claim_to_source_fidelity",
+    "dimension:compression_without_decision_relevant_loss",
+    "dimension:format_and_style_constraints",
+    "dimension:required_evidence_coverage",
+    "dimension:uncertainty_and_disagreement_preservation",
+    "metric:required_claim_coverage"
+  ],
+  "metric_bounds": {},
+  "deliberately_unproved": {
+    "target_atoms": [
+      "metric:matched_quality"
+    ],
+    "metric_requirements": [
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ],
+    "reason": "THE_PREDECLARED_BEHAVIORAL_CONTRACT_PROVES_THE_OPERATIONAL_SYNTHESIS_OBLIGATIONS_BUT_DOES_NOT_ESTABLISH_A_NUMERIC_BRAIN_MINUS_OPUS_MATCHED_BOUND__NO_COMPARATOR_OR_CEILING_IS_INFERRED"
+  },
+  "contamination_admissibility_basis": {
+    "binding_forbids_post_freeze_tuning": true,
+    "binding_forbids_case_replacement": true,
+    "binding_forbids_result_feedback": true,
+    "terminal_receipts_show_case_replaced_false": true,
+    "terminal_receipts_show_tuning_replay_false": true,
+    "terminal_receipts_show_result_to_runtime_feedback_false": true
+  },
+  "independent_verification_required": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
