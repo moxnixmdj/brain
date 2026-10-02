@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__WHOLE_P1_CONTRACT_RESTORED__ZERO_AUTOMATIC_OPUS55_ACCEPTANCE_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "supersedes": [
+    "canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json::WHOLE_FROZEN_P1_CONTRACT_PASS_QUARANTINE",
+    "canonical/governance/P1_COMPOSITE_PROOF_COUNTEREXAMPLE_QUARANTINE_V1.json::CANDIDATE_RESTORATION_INADMISSIBLE"
+  ],
+  "authority": {
+    "restoration_candidate": {
+      "path": "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V2.json",
+      "git_blob_sha": "a99ffadcdbef32beb89c2ff86ee4534800f8e19e"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "git_blob_sha": "0e288acce32d06742db2a7b940820a74f9731073",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+    },
+    "frozen_binding": {
+      "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    },
+    "immutable_terminal_result": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    }
+  },
+  "restored": [
+    "WHOLE_FROZEN_P1_CONTRACT_PASS",
+    "POSTWAVE_12_OF_12_WHOLE_CONTRACT_CLAIM"
+  ],
+  "recompute_required": [
+    "P1_DEPENDENT_BEHAVIORAL_FAMILY_PROJECTION",
+    "P1_FULL_SCOPE_COMPOSITION_COMPONENT_CREDIT"
+  ],
+  "explicitly_not_restored": [
+    "P1_WITNESS_TRANSPORT_INTO_RECOVERY_ACCEPTANCE",
+    "RECOVERY_MATCHED_NONINFERIORITY",
+    "COMPOSITION_PARENT_ACCEPTANCE",
+    "ANY_OPEN_OPUS55_ACCEPTANCE_PREDICATE",
+    "ANY_OPEN_OPUS55_FAMILY_ACCEPTANCE"
+  ],
+  "proof_summary": {
+    "frozen_required_checks": 8,
+    "frozen_required_mutations": 9,
+    "strict_v4_existing_cases": 168,
+    "strict_v4_failures": 0,
+    "v4_assigned_mutations_killed": 6,
+    "terminal_assigned_mutations_killed": 3,
+    "t0_terminal_cases": 30,
+    "t2_terminal_cases": 30,
+    "t0_direct_instrumentation_pass": true,
+    "t2_direct_instrumentation_pass": true,
+    "t0_parent_acceptance_pass": true,
+    "t2_parent_acceptance_pass": true
+  },
+  "hard_rules": [
+    "RESTORATION_IS_LIMITED_TO_THE_PREDECLARED_P1_BEHAVIORAL_CONTRACT",
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_NEW_TERMINAL_EVIDENCE",
+    "NO_ACCEPTANCE_TRANSPORT_BEYOND_SEPARATELY_VERIFIED_SCOPE",
+    "NO_OPUS55_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_ACTIVATION_ALONE",
+    "RECOMPUTE_ALL_DERIVED_PROJECTIONS_FROM_THIS_ACTIVE_RESTORATION"
+  ],
+  "terminal_results_replayed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "opus55_predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
