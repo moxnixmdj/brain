@@ -11,31 +11,34 @@ on:
 permissions:
   contents: read
 jobs:
+  diagnose:
+    name: Harbor diagnostic - ${{ matrix.test }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test:
+          - test_command_gate_blocks_external_acquisition
+          - test_command_gate_allows_local_task_actions
+          - test_configuration_is_durable_and_load_bearing
+          - test_finish_gate_rejects_model_only_completion
+          - test_bounded_goal_verified_exec_diff_then_finish
+          - test_premature_finish_is_rejected_but_run_can_recover
+          - test_failed_verification_cannot_authorize_finish
+          - test_max_cycles_never_force_model_finalization
+          - test_rejects_non_allowlisted_planner_action
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_harbor_brain_agent.HarborBrainAdapterTests.${{ matrix.test }}
   verify:
+    needs: diagnose
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run Harbor adapter tests
-        id: tests
-        shell: bash
-        run: |
-          set +e
-          python -m unittest -v canonical.tests.test_harbor_brain_agent > harbor-test-output.txt 2>&1
-          code=$?
-          cat harbor-test-output.txt
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
-      - name: Upload Harbor test receipt
-        if: always()
-        continue-on-error: true
-        uses: actions/upload-artifact@v4
-        with:
-          name: harbor-brain-adapter-test-output
-          path: harbor-test-output.txt
-          if-no-files-found: error
-      - name: Enforce test verdict
-        shell: bash
-        run: exit "${{ steps.tests.outputs.exit_code }}"
+      - run: python -m unittest -v canonical.tests.test_harbor_brain_agent
