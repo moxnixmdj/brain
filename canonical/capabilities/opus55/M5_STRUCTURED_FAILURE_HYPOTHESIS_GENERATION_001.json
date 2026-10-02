@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_M5_STRUCTURED_FAILURE_HYPOTHESIS_GENERATION_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_NONREPLAYABLE_OBSERVABLE_FAILURE_HYPOTHESIS_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+  "implementation": "canonical/runtime/structured_failure_hypotheses.py",
+  "implementation_blob_sha": "90f173071cfb7e5c8e0d74db1893f6ed4e17911e",
+  "tests": "canonical/tests/test_structured_failure_hypotheses.py",
+  "tests_blob_sha": "7d20a994e868593720c8866959445adde588e500",
+  "independent_verification": {
+    "workflow_run_id": 36949576769,
+    "conclusion": "success",
+    "verified_commit": "d174d5879205861041119590a3401691e3d805f6"
+  },
+  "owned_scope": [
+    "NORMALIZED_NONREPLAYABLE_EVENT_SEQUENCE_TO_FALSIFIABLE_OBSERVABLE_FIRST_CHANGE_FAILURE_CANDIDATES",
+    "FIRST_NEW_INVARIANT_VIOLATION_EXPLICIT_ERROR_AND_FIRST_UNEXPECTED_CHANGE_SURFACES"
+  ],
+  "exclusions": [
+    "NO_TEXT_SEMANTIC_CAUSE_INFERENCE",
+    "NO_CAUSAL_SUPPORT_CLAIM",
+    "NO_UNSTRUCTURED_ROOT_CAUSE_RANKING",
+    "NO_RECOVERY_JUDGMENT"
+  ],
+  "donor_runtime_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "family_credit_delta": 0
+}
