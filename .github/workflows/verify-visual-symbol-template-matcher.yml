@@ -1,0 +1,21 @@
+name: Verify visual symbol template matcher
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/visual_symbol_template_matcher.py
+      - canonical/tests/test_visual_symbol_template_matcher.py
+      - .github/workflows/verify-visual-symbol-template-matcher.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --disable-pip-version-check --no-input numpy opencv-python-headless
+      - run: python -m unittest -v canonical.tests.test_visual_symbol_template_matcher
