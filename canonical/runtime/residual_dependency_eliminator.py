@@ -34,6 +34,9 @@ class ResidualClaim:
     verifier_complete_for_scope: bool = False
     proposal_source_has_zero_authority: bool = False
     bounded_owned_synthesis_applies: bool = False
+    mechanical_suffix_owned: bool = False
+    decomposes_to_existing_residuals: bool = False
+    dependency_residual_ids: tuple[str, ...] = ()
     terminal_success_requires_unverifiable_ranking: bool = False
     evidence: Mapping[str, Any] | None = None
 
@@ -139,6 +142,33 @@ def eliminate_residual(claim: ResidualClaim) -> dict[str, Any]:
             **base,
             "status": "ELIMINATED",
             "disposition": "BOUNDED_BRAIN_OWNED_SYNTHESIS",
+        }
+
+    if claim.mechanical_suffix_owned or claim.decomposes_to_existing_residuals or claim.dependency_residual_ids:
+        if not (claim.mechanical_suffix_owned and claim.decomposes_to_existing_residuals and claim.dependency_residual_ids):
+            return {
+                **base,
+                "status": "FAIL_CLOSED",
+                "reason": "DEPENDENCY_RELOCATION_REQUIRES_OWNED_SUFFIX_DECOMPOSITION_AND_NONEMPTY_DEPENDENCIES",
+            }
+        deps = tuple(claim.dependency_residual_ids)
+        if claim.residual_id in set(deps):
+            return {
+                **base,
+                "status": "FAIL_CLOSED",
+                "reason": "DEPENDENCY_RELOCATION_SELF_CYCLE",
+            }
+        if any(not isinstance(x, str) or not x for x in deps):
+            return {
+                **base,
+                "status": "FAIL_CLOSED",
+                "reason": "DEPENDENCY_RELOCATION_INVALID_DEPENDENCY_ID",
+            }
+        return {
+            **base,
+            "status": "ELIMINATED",
+            "disposition": "DEPENDENCY_RELOCATION__OWNED_MECHANICAL_SUFFIX_PLUS_EXISTING_RESIDUALS",
+            "dependency_residual_ids": list(deps),
         }
 
     return {
