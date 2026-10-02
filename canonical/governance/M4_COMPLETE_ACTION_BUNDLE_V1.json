@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_M4_COMPLETE_ACTION_BUNDLE_V1",
+  "date": "2026-10-02",
+  "status": "ZERO_REALITY_FRONTIER_SATURATED__PROOF_ONLY__ZERO_FAMILY_CREDIT",
+  "lane": "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+  "behaviors": [
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+  ],
+  "composed_route": [
+    {
+      "component": "M0_OR_EXPLICIT_CONTRACT",
+      "role": "NORMALIZE_MATERIAL_REQUIREMENTS_AND_EVIDENCE_GAPS",
+      "boundary": "SEMANTIC_AUTHORITY_UPSTREAM"
+    },
+    {
+      "component": "canonical/runtime/bound_capabilities/research_query_focus.py",
+      "role": "FOCUS_EXPLICIT_REQUIREMENT_QUERY"
+    },
+    {
+      "component": "canonical/capabilities/opus55/M4_BOUNDED_RESEARCH_FRONTIER_001.json",
+      "role": "NORMALIZED_GAP_QUERY_AND_EXPLICIT_SOURCE_PARETO_FRONTIER"
+    },
+    {
+      "component": "canonical/capabilities/opus55/M4_DECISION_ROLE_RELEVANCE_001.json",
+      "role": "BOUNDED_EXPLICIT_DECISION_ROLE_RELEVANCE_ADMISSION"
+    },
+    {
+      "component": "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+      "role": "DISCOVERY_PROVENANCE_RELEVANCE_EXTRACTION_AND_RELATION_PIPELINE"
+    },
+    {
+      "component": "canonical/capabilities/opus55/SHARED_DECISION_PRIMITIVES_001.json",
+      "role": "VERIFIED_ACTION_SELECTION_AND_EXACT_STOP_FROM_EXPLICIT_REQUIREMENT_COVERAGE"
+    },
+    {
+      "component": "canonical/runtime/m4_research_control.py",
+      "role": "COMPOSE_REQUIREMENT_QUERY_ACTION_STOP_CONTROL"
+    }
+  ],
+  "independent_verification": {
+    "m4_control_workflow_run": 36949570837,
+    "m4_control_conclusion": "success",
+    "m4_control_merge_commit": "b1e2814c13925117d72b9f75222faf08cd179a58",
+    "relevance_workflow_run": 36949070962,
+    "bounded_frontier_workflow_run": 36949630214,
+    "shared_decision_hardening_workflow_run": 36948986083
+  },
+  "deduplicated_dependencies": {
+    "semantic_requirement_formation": "M0_SHARED_PREREQUISITE__NOT_A_SECOND_M4_MECHANISM",
+    "domain_factual_knowledge": "EXTERNAL_JIT_ALLOWED_BY_TERMINAL_OBJECTIVE",
+    "source_truth": "MUST_REMAIN_PROVENANCE_AND_EVIDENCE_BOUND__NO_UNSUPPORTED_AUTHORITY_INFERENCE"
+  },
+  "proof_required": [
+    "FRESH_CROSS_DOMAIN_RESEARCH_TRANSFER",
+    "REQUIREMENT_COVERAGE_AND_PROVENANCE_AUDIT",
+    "QUERY_SOURCE_ACTION_STOP_ABLATION_AND_RESCUE",
+    "DONOR_DELETION_OR_NO_EXTERNAL_TARGET_CAPABILITY_PROVIDER",
+    "FAMILY_LEVEL_PUBLIC_OR_MATCHED_ACCEPTANCE"
+  ],
+  "reopen_rule": "ONLY_REPEATABLE_SOLVABLE_CLEAN_PROOF_FAILURE_LOCALIZED_TO_M4_REOPENS_MECHANISM_SEARCH",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
