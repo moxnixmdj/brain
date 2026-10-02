@@ -11,11 +11,13 @@ package commitment and beacon after PREPARE has closed.
 from __future__ import annotations
 
 from collections import defaultdict
+from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import direct_route_terminal_executors_v1 as direct
 from canonical.runtime import cad_t0_route_specific_terminal_executor_v1 as cad
 from canonical.runtime import portfolio_multiplex_terminal_instrumentation_v1 as multiplex
+from canonical.runtime import terminal_wave_launch_authority_reducer_v1 as launch_authority
 
 SCHEMA = "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_LAUNCHER_V1"
 PORTFOLIOS = ("T0", "T1", "T2", "T3")
@@ -210,6 +212,7 @@ def execute_wave(
     parent_runner: Callable[..., list[Mapping[str, Any]]],
     direct_runner: Callable[..., dict[str, Any]] = direct.execute_direct_route,
     cad_runner: Callable[..., dict[str, Any]] = cad.execute_cad_route,
+    root: Path = Path("."),
 ) -> dict[str, Any]:
     """Execute each unique direct route once plus all four parent portfolios.
 
@@ -218,6 +221,21 @@ def execute_wave(
     """
     _require_text(commitment, "COMMITMENT")
     _require_text(beacon, "BEACON")
+
+    authority = launch_authority.evaluate(root)
+    if authority.get("launch_authority") is not True:
+        return {
+            "schema": SCHEMA,
+            "status": "FAIL_CLOSED_LAUNCH_NOT_AUTHORIZED",
+            "pass": False,
+            "launch_authority": authority,
+            "parent_runner_invoked": False,
+            "direct_runner_invoked": False,
+            "terminal_result": False,
+            "capability_credit_delta": 0,
+            "family_credit_delta": 0,
+        }
+
     plan = build_launch_plan()
     if not plan["pass"]:
         return {
