@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CERTIFICATE_FALSIFICATION_PRUNER_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__FALSIFICATION_AWARE_TERMINAL_SCHEDULING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Consume independently verified certificate-route falsifications in terminal scheduling without treating route impossibility as target falsity. Recompute the executable certificate cut and V2 proof-atom basis after pruning.",
+  "runtime": "canonical/runtime/terminal_certificate_falsification_pruner_v1.py",
+  "tests": "canonical/tests/test_terminal_certificate_falsification_pruner_v1.py",
+  "overlay": "canonical/governance/TERMINAL_CERTIFICATE_FALSIFICATION_OVERLAY_V1.json",
+  "exact_source_blobs": {
+    "canonical/runtime/terminal_certificate_falsification_pruner_v1.py": "19f8e0355c7f53ddbf3c8776529cc666afec3372",
+    "canonical/tests/test_terminal_certificate_falsification_pruner_v1.py": "ca8de38dd23924acdd92192f68074f138eaa8a9d",
+    "canonical/governance/TERMINAL_CERTIFICATE_FALSIFICATION_OVERLAY_V1.json": "e57f6e7a37cbc33ca7aea7080e8bc581d1d351b2",
+    "canonical/runtime/terminal_certificate_cut_v1.py": "7ad852e65e47a6ab3110b02dac402b126cac78b7",
+    "canonical/runtime/canonical_proof_atom_basis_v2.py": "5b5957f353edab6c86a34f947ef253099822b0d1",
+    "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+    "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json": "898e450c62c06cf6d1a4a3f826a255da9161a229",
+    "canonical/governance/TB4_PROOF_ATOM_FALSIFICATION_ADJUDICATION_V1.json": "9f2831b5daf0bf811a11c322d85906869fdef433"
+  },
+  "expected_current_result": {
+    "input_unresolved_predicate_count": 31,
+    "input_certificate_count": 17,
+    "active_certificate_count": 16,
+    "pruned_certificate_ids": [
+      "TB4_ATTAINABLE_ROUTE_CERTIFICATE"
+    ],
+    "covered_predicate_count_after_pruning": 30,
+    "uncovered_predicates_after_pruning": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "executable_leaf_atom_count_after_pruning": 39,
+    "executable_leaf_requirement_occurrence_count_after_pruning": 39
+  },
+  "hard_rules": [
+    "FALSIFIED_ROUTE_IS_NOT_FALSIFIED_TARGET",
+    "PRUNE_ONLY_EXACT_CERTIFICATE_ID_REQUIREMENT_AND_TARGET_BINDING",
+    "INDEPENDENT_VERIFICATION_RECEIPT_REQUIRED",
+    "RECOMPUTE_TERMINAL_CUT_AFTER_PRUNING",
+    "RECOMPUTE_V2_PROOF_ATOM_BASIS_AFTER_PRUNING",
+    "UNcovered_TARGET_REMAINS_OPEN_AND_REQUIRES_ALTERNATIVE_CERTIFICATE_OR_VERIFIED_ASSUMPTION_CHANGE",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_PRUNER_TEST_OVERLAY_AND_DEPENDENCY_BYTES__THEN_BIND_AS_SCHEDULING_AUTHORITY__SEARCH_ONLY_FOR_A_TARGET_PRESERVING_ALTERNATIVE_TB4_CERTIFICATE_OR_VERIFIED_ROUTE_ASSUMPTION_CHANGE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
