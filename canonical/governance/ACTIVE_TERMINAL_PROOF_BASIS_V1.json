@@ -319,7 +319,10 @@
       ],
       "external_execution_dependency": null,
       "weaker_hle_prewave_dependency_deleted": true,
-      "hle_score_equivalence_claimed": false
+      "hle_score_equivalence_claimed": false,
+      "hle_preaverage_dependency_deleted_by_objective_route": true,
+      "no_overclaim": "DIRECT_OBJECTIVE_RESEARCH_CONTROL_PREWAVE_ROUTE_ONLY__NO_HLE_SCORE_EQUIVALENCE__ZERO_TERMINAL_RESULTS",
+      "fresh_terminal_evidence_consumed": 0
     }
   ],
   "active_contract_count": 12,
