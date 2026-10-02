@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1",
   "date": "2026-10-02",
-  "status": "ASSEMBLED_FAIL_CLOSED__ONLY_DONOR_CLEANROOM_RECEIPT_SLOT_OPEN__NOT_FINAL_FROZEN",
+  "status": "SUPERSEDED__DONOR_CLEANROOM_CLOSED__17_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_OPEN",
   "objective": "Preassemble the final terminal proof bundle without overstating donor independence.",
   "evidence": [
     {
@@ -51,20 +51,36 @@
   ],
   "open_slots": [
     {
-      "id": "FINAL_DONOR_INDEPENDENCE_CLEANROOM_RECEIPT",
-      "required_fields": [
-        "exhaustive_runtime_dependency_classification",
-        "target_capability_donor_runtime_dependency_count_zero",
-        "network_denial_or_equivalent_proof_of_target_donor_unavailability",
-        "undeclared_dependency_count_zero",
-        "behavior_preserved_on_frozen_brain_route_without_target_donor"
+      "id": "OPUS55_ACCEPTANCE_PROTOCOL_RESULTS",
+      "count": 17,
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "ARTIFACT_CREATION",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "COMPUTER_AND_BROWSER_USE",
+        "FINANCIAL_ANALYSIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "MULTI_CAPABILITY_COMPOSITION",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
       ],
       "current_status": "OPEN_FAIL_CLOSED"
     }
   ],
-  "finalization_rule": "ONLY_AFTER_OPEN_SLOTS_EMPTY__REHASH_ALL_EVIDENCE__SET_PROOF_BUNDLE_FROZEN_TRUE__RUN_TERMINAL_CLOSURE_REDUCER__NO_TERMINAL_REPLAY",
+  "finalization_rule": "ONLY_AFTER_ALL_19_PREDECLARED_OPUS55_PROTOCOL_RESULTS_PASS__THEN_REBUILD_BUNDLE_FROM_CURRENT_EVIDENCE_ROOT__INDEPENDENTLY_VERIFY_CURRENT_CLOSURE_REDUCER__NO_TERMINAL_REPLAY",
   "terminal_replay_permitted": false,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "superseded_by": "canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_INVALIDATION_20261002_V1.json",
+  "acceptance_calibration": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+  "residual_plan": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json"
 }
