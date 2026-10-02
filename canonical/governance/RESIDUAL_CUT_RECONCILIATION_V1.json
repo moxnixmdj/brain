@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_CUT_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "status": "SUPERSEDED_BY_NEWER_EVIDENCE__ZERO_CREDIT",
+  "prior_verdict": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
+  "newer_evidence": [
+    "canonical/capabilities/opus55/SEMANTIC_IDENTIFIABILITY_GATE_001.json",
+    "canonical/governance/M0A_SPECIALIZED_WHITE_BOX_DONOR_DECOMPOSITION_V1.json",
+    "canonical/capabilities/opus55/CALIBRATED_DENSE_WARP_RECTIFIER_001.json",
+    "canonical/capabilities/opus55/FEATURE_CONSTRAINT_COMPOSER_001.json",
+    "canonical/capabilities/opus55/JIT_ENGINEERING_NOTATION_ENGINE_001.json"
+  ],
+  "consequence": "REFRESH_M0A_M1A_ACTION_BUNDLES__REFREEZE_RESIDUAL_ACTION_UNIVERSE__RERUN_EXACT_SOLVER",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
