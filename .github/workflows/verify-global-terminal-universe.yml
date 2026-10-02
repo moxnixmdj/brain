@@ -1,20 +1,8 @@
 name: Verify global terminal universe
+# AUTO_MAIN_PUSH_QUARANTINED_2026-10-02: private Brain Actions jobs are failing before runner assignment; PR/manual verification remains available.
 
 on:
   pull_request:
-    branches: [main]
-    paths:
-      - "canonical/runtime/global_terminal_universe.py"
-      - "canonical/tests/test_global_terminal_universe.py"
-      - "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
-      - "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
-      - "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
-      - "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
-      - "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
-      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
-      - "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json"
-      - ".github/workflows/verify-global-terminal-universe.yml"
-  push:
     branches: [main]
     paths:
       - "canonical/runtime/global_terminal_universe.py"

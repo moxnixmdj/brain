@@ -1,8 +1,6 @@
 name: Frontier State Consistency
+# AUTO_MAIN_PUSH_QUARANTINED_2026-10-02: private Brain Actions jobs are failing before runner assignment; PR/manual verification remains available.
 on:
-  push:
-    branches: [main]
-    paths: [canonical/CANONICAL_POINTER.json, canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json, canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json, canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json, .github/workflows/frontier-state-consistency.yml]
   pull_request:
     branches: [main]
     paths: [canonical/CANONICAL_POINTER.json, canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json, canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json, canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json, .github/workflows/frontier-state-consistency.yml]

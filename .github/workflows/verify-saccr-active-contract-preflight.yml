@@ -1,13 +1,6 @@
 name: Verify SA-CCR active-contract preflight
+# AUTO_MAIN_PUSH_QUARANTINED_2026-10-02: private Brain Actions jobs are failing before runner assignment; PR/manual verification remains available.
 on:
-  push:
-    branches: [main]
-    paths:
-      - canonical/runtime/saccr_active_contract_proof_v1.py
-      - canonical/runtime/saccr_active_contract_candidate_v1.py
-      - canonical/runtime/saccr_credit_kernel.py
-      - canonical/tests/test_saccr_active_contract_proof_v1.py
-      - .github/workflows/verify-saccr-active-contract-preflight.yml
   workflow_dispatch:
 permissions:
   contents: read
