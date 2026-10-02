@@ -24,9 +24,9 @@ V5 = "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json"
 BEHAVIOR = "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
 ROUTE = "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
 EXPECTED_SURFACES = {
-    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": ("T0", "FRONTIERCODE_V1_1"),
-    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": ("T0", "CURSORBENCH_4_0"),
-    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": ("T2", "RECOVERY_SCOPE_COMPOSITION"),
+    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": ("T0", "FRONTIERCODE_V1_1", "P1-V5-SCOPE-FRONTIERCODE-V1"),
+    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": ("T0", "CURSORBENCH_4_0", "P1-V5-SCOPE-CURSORBENCH-V1"),
+    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": ("T2", "RECOVERY_SCOPE_COMPOSITION", "P1-V5-SCOPE-RECOVERY-COMPOSITION-V1"),
 }
 EXPECTED_OUTPUTS = {
     "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_STEP",
@@ -163,7 +163,7 @@ def evaluate(
             errors.append("P1_CONTRACT_NATIVE_ROUTE_BLOCKED")
 
     surface_relations: list[dict[str, Any]] = []
-    for binding_id, (portfolio_id, surface_id) in EXPECTED_SURFACES.items():
+    for binding_id, (portfolio_id, surface_id, claim_id) in EXPECTED_SURFACES.items():
         s = _surface(p, portfolio_id, surface_id)
         if s is None:
             errors.append("DECLARED_SURFACE_MISSING:" + binding_id)
@@ -177,7 +177,9 @@ def evaluate(
             continue
         surface_relations.append({
             "binding": binding_id,
-            "relation": "EXACT_FROZEN_P1_CONTRACT_ROLE_BINDING",
+            "claim_id": claim_id,
+            "relation": "SUPERSET",
+            "relation_scope": "UNRESOLVED_SEMANTICS_WITHIN_EXACT_FROZEN_P1_CONTRACT_ROLE_ONLY",
             "behavior_id": BEHAVIOR,
             "route_id": ROUTE,
             "full_surface_superset_claim": False,
@@ -236,7 +238,7 @@ def evaluate(
         "route_id": ROUTE,
         "surface_relations": surface_relations,
         "all_declared_p1_surface_relations_exact_or_superset": len(surface_relations) == 3,
-        "v5_relation": "SUPERSET_OF_UNRESOLVED_SEMANTICS_WITHIN_FROZEN_P1_CONTRACT_ROLE",
+        "v5_relation": "SUPERSET",
         "v5_is_superset_carrier_for_frozen_p1_residual_role": True,
         "residual_semantics_carried": sorted(residual_semantics),
         "anti_overclaim": {
