@@ -243,7 +243,7 @@
       "blockers": [],
       "route": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
-      "independent_preflight": "canonical/verification/DELEGATION_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "scope_audit": "canonical/governance/TASK_TO_DELEGATION_WHOLE_SCOPE_AUDIT_V1.json",
       "scope_audit_verification": "canonical/verification/TASK_TO_DELEGATION_WHOLE_SCOPE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "preflight_manifest": "canonical/governance/DELEGATION_WHOLE_DIMENSION_PREFLIGHT_V2.json",
@@ -268,7 +268,18 @@
       "objective_route_binding": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "objective_route_verification": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "objective_dominance_input": "canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json",
-      "weaker_exact_opus_comparator_required_for_prewave": false
+      "weaker_exact_opus_comparator_required_for_prewave": false,
+      "proof_mode_classification": "T2_MULTIPLEXED_DIRECT_OBJECTIVE_DELEGATION_GATE",
+      "terminal_results_observed": 0,
+      "supercompiler_reconciliation": {
+        "status": "DELEGATION_EXTERNAL_COMPARATOR_DEPENDENCY_DELETED_BY_VERIFIED_DIRECT_OBJECTIVE_ROUTE",
+        "route": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+        "proof_mode": "T2_MULTIPLEXED_DIRECT_OBJECTIVE_DELEGATION_GATE",
+        "exact_opus_irreducibility": "ELIMINATED_FOR_PREWAVE_ADMISSION",
+        "objective_oracle_live_input": "canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json",
+        "independent_verification": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "terminal_credit": "ZERO_UNTIL_TERMINAL_WAVE"
+      }
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -315,7 +326,7 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 7,
   "execution_authority": false,
-  "next": "CLOSE_CAD_POSITIONED_OCR_VERIFICATION_AND_CLEAN_REFREEZE__THEN_CLOSE_REMAINING_OPEN_ROUTE_OBJECTIVE_ORACLE_BINDINGS__NO_TERMINAL_WAVE_BEFORE_12_OF_12",
+  "next": "CLOSE_CAD_CLEAN_REFREEZE_BROWSER_TOOL_DISCOVERY_RESEARCH_AND_TRAJECTORY_DIRECT_OBJECTIVE_ROUTES__NO_TERMINAL_WAVE_BEFORE_12_OF_12",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
