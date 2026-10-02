@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "ASSEMBLED_FAIL_CLOSED__ONLY_DONOR_CLEANROOM_RECEIPT_SLOT_OPEN__NOT_FINAL_FROZEN",
+  "objective": "Preassemble the final terminal proof bundle without overstating donor independence.",
+  "evidence": [
+    {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "role": "immutable one-shot terminal result"
+    },
+    {
+      "path": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "blob_sha": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+      "role": "12-contract and 19-family reduction"
+    },
+    {
+      "path": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
+      "blob_sha": "1af4060f241e5c5147dc674557ed865938a6bac7",
+      "role": "postwave global ownership reconciliation"
+    },
+    {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "blob_sha": "131bd0a80ff28e849b8660b042288f69241cd43e",
+      "role": "current closure manifest"
+    },
+    {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "blob_sha": "2732a577b441e8031ee128629410f792bfe36201",
+      "role": "fail-closed terminal closure reducer"
+    },
+    {
+      "path": "canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V1.json",
+      "blob_sha": "2ec3dfffd6191449fddbd2868c82606de7a9105d",
+      "role": "donor independence acceptance protocol"
+    },
+    {
+      "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "blob_sha": "e2b88ed9b4caca8f789cb12e78ae0374e67ebe9f",
+      "role": "fail-closed donor-dependency audit implementation"
+    }
+  ],
+  "closed": [
+    "19_OF_19_BEHAVIORAL_FAMILIES_PASS",
+    "EVERY_REQUIRED_BEHAVIOR_HAS_ADMISSIBLE_PROOF",
+    "UNEXPLAINED_REQUIRED_BEHAVIORS_ZERO",
+    "UNRESOLVED_VERIFIER_MUTATIONS_ZERO",
+    "UNRESOLVED_COMPOSITION_FAILURES_ZERO",
+    "CONTAMINATED_EVIDENCE_USED_FOR_PROMOTION_ZERO",
+    "RESOURCE_OR_AUTHORITY_VIOLATIONS_ZERO"
+  ],
+  "open_slots": [
+    {
+      "id": "FINAL_DONOR_INDEPENDENCE_CLEANROOM_RECEIPT",
+      "required_fields": [
+        "exhaustive_runtime_dependency_classification",
+        "target_capability_donor_runtime_dependency_count_zero",
+        "network_denial_or_equivalent_proof_of_target_donor_unavailability",
+        "undeclared_dependency_count_zero",
+        "behavior_preserved_on_frozen_brain_route_without_target_donor"
+      ],
+      "current_status": "OPEN_FAIL_CLOSED"
+    }
+  ],
+  "finalization_rule": "ONLY_AFTER_OPEN_SLOTS_EMPTY__REHASH_ALL_EVIDENCE__SET_PROOF_BUNDLE_FROZEN_TRUE__RUN_TERMINAL_CLOSURE_REDUCER__NO_TERMINAL_REPLAY",
+  "terminal_replay_permitted": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
