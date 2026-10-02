@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_CONTROL_RUNTIME_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_RUNTIME_CLOSURE_VERIFIED__ZERO_BENCHMARK_CASES",
+  "private_brain_commit": "04a3f24c430d1b7be0c0819698499972a71e4625",
+  "verified_blobs": {
+    "canonical/runtime/coding_control_kernel_v1.py": "2b5cd4bebc28b8e7096f87aa63ffbb329a819057",
+    "canonical/runtime/harbor_brain_agent.py": "3d7d803bdd25df0379d81b360af3ea40da254771",
+    "canonical/tests/test_harbor_brain_agent.py": "68b3d219ca8cec70fcaa07821397b0ecfad6d6a5",
+    "canonical/runtime/harbor_command_policy.py": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "canonical/runtime/harbor_environment_transport.py": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "canonical/runtime/astra_runtime.py": "7f5d16b1db69cb620954bc778e0ba6e15e687b75",
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json": "d63d7656c7da293a7c22c32042a4f03f2d13593d"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 819,
+    "pull_request_head": "cfadb591b75042e63eff1f9cff49f61188599a9e",
+    "merge_commit": "862905c878fbdf9d12fc250e109a4f8516e7b644",
+    "workflow_run_id": 36985248070,
+    "workflow_job_id": 110768689055,
+    "conclusion": "success"
+  },
+  "verified": [
+    "ALL_EXACT_BLOB_IDENTITIES_MATCHED",
+    "HARBOR_CONTROL_TEST_SUITE_PASS",
+    "MODEL_ONLY_FINISH_REJECTED",
+    "PREMATURE_FINISH_REJECTED_AND_RECOVERY_SUPPORTED",
+    "FAILED_VERIFICATION_CANNOT_AUTHORIZE_FINISH",
+    "MAX_CYCLES_NEVER_FORCE_MODEL_FINALIZATION",
+    "BRAIN_CONFIGURATION_DURABLE_AND_LOAD_BEARING"
+  ],
+  "benchmark_case_content_consumed": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
