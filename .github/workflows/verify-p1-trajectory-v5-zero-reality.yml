@@ -1,0 +1,63 @@
+name: Verify P1 typed trajectory V5 zero-reality composition
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py"
+      - "canonical/tests/test_trajectory_failure_typed_ir_v5.py"
+      - "canonical/governance/P1_V5_SCOPE_RESCUE_COMPOSITION_V1.json"
+      - ".github/workflows/verify-p1-trajectory-v5-zero-reality.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V5 scope and rescue tests
+        run: python -m unittest canonical.tests.test_trajectory_failure_typed_ir_v5 -v
+      - name: Emit exact V5 proof summary
+        run: |
+          python - <<'PY'
+          import json
+          from canonical.runtime import trajectory_failure_typed_ir_candidate_v5 as candidate
+          from canonical.runtime import trajectory_failure_typed_ir_proof_v5 as proof
+
+          cases = proof.suite_cases()
+          failed = []
+          pattern_counts = {}
+          primary_scope = 0
+          for case in cases:
+              oracle = case["_oracle"]
+              pattern = oracle["status"]
+              pattern_counts[pattern] = pattern_counts.get(pattern, 0) + 1
+              if any("SCOPE" in kinds for kinds in oracle["mechanisms"].values()):
+                  primary_scope += 1
+              out = candidate.solve(proof.public_task(case))
+              scored = proof.score_case(case, out)
+              if scored.get("pass") is not True:
+                  failed.append({"seed": case["seed"], "score": scored})
+          summary = {
+              "status": "PASS" if not failed else "FAIL",
+              "case_count": len(cases),
+              "failed_count": len(failed),
+              "cases_with_scope_mechanism": primary_scope,
+              "mechanism_classes": list(proof.KINDS),
+              "domains": list(proof.DOMAINS),
+              "pattern_status_counts": pattern_counts,
+              "hidden_intervention_worlds_candidate_visible": False,
+              "fresh_terminal_evidence_consumed": 0,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+          }
+          print(json.dumps(summary, sort_keys=True))
+          assert len(cases) == 192
+          assert "SCOPE" in proof.KINDS
+          assert not failed, failed[:3]
+          PY
