@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FAIL_CLOSED__19_OF_19_BEHAVIORAL_PASS__2_OF_19_OPUS55_ACCEPTANCE_CALIBRATED__17_PROTOCOL_RESULTS_OPEN",
+  "status": "FAIL_CLOSED__19_OF_19_BEHAVIORAL_PASS__3_OF_19_OPUS55_ACCEPTANCE_CALIBRATED__2_OF_19_VERIFIED_OWNED__16_ACCEPTANCE_OPEN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -37,7 +37,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -50,7 +52,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -79,7 +83,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -98,7 +104,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -117,7 +125,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -136,7 +146,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
@@ -155,7 +167,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "COMPUTER_AND_BROWSER_USE",
@@ -175,7 +189,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "FINANCIAL_ANALYSIS",
@@ -188,7 +204,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
@@ -201,7 +219,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -211,7 +231,9 @@
       "acceptance_basis": null,
       "proof_bundle": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
       "unresolved": [],
-      "terminal_behavioral_adjudication_evidence": null
+      "terminal_behavioral_adjudication_evidence": null,
+      "opus55_acceptance_calibrated": true,
+      "opus55_acceptance_state": "PASS"
     },
     {
       "id": "SUBAGENT_DELEGATION_AND_COORDINATION",
@@ -226,7 +248,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -241,7 +265,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "ARTIFACT_CREATION",
@@ -256,7 +282,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "COMMUNICATION_AND_SYNTHESIS",
@@ -269,7 +297,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
@@ -282,7 +312,12 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": true,
+      "opus55_acceptance_state": "PASS",
+      "opus55_acceptance_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "opus55_acceptance_closure_mode": "ABSOLUTE_DOMINANCE",
+      "opus55_acceptance_note": "FULL_FROZEN_PROTOCOL_EFFECTIVELY_PASS_VIA_INDEPENDENT_FULL_SCOPE_THEORETICAL_CEILING_WITNESS__OWNERSHIP_PROMOTION_REMAINS_SEPARATE"
     },
     {
       "id": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -295,7 +330,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "MULTI_CAPABILITY_COMPOSITION",
@@ -308,7 +345,9 @@
         "OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN"
       ],
       "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "acceptance_calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+      "opus55_acceptance_calibrated": false,
+      "opus55_acceptance_state": "OPEN"
     },
     {
       "id": "EXACT_SYMBOLIC_COMPUTATION",
@@ -321,7 +360,9 @@
       },
       "proof_bundle": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
       "unresolved": [],
-      "terminal_behavioral_adjudication_evidence": null
+      "terminal_behavioral_adjudication_evidence": null,
+      "opus55_acceptance_calibrated": true,
+      "opus55_acceptance_state": "PASS"
     }
   ],
   "terminal_predicates": {
@@ -359,7 +400,7 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "19_OF_19_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PASS__17_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_REMAIN_OPEN__PRIOR_FINAL_BUNDLE_INVALIDATED_FOR_OVERCLAIM",
+    "reason": "19_OF_19_BEHAVIORAL_PASS__GLOBAL_POSTCONDITIONS_PASS__3_OF_19_OPUS55_ACCEPTANCE_CALIBRATED__16_ACCEPTANCE_FAMILIES_OPEN__30_OF_38_ATOMIC_PREDICATES_BLOCKED__ZERO_AUTHORIZED_ACCEPTANCE_CASE_ACTIONS",
     "override_allowed": false
   },
   "specification_closure": {
@@ -387,11 +428,11 @@
     "retained_role": "HISTORICAL_GLOBAL_POSTCONDITION_RESIDUAL_DIAGNOSTIC_ONLY",
     "rule": "GLOBAL_POSTCONDITION_CLOSURE_DOES_NOT_SUBSTITUTE_FOR_FROZEN_OPUS55_PROTOCOL_RESULT"
   },
-  "next": "WORK_ONLY_THE_17_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS__REUSE_EXISTING_EVIDENCE_FIRST__NO_TERMINAL_WAVE_REPLAY__NO_FAMILY_PROMOTION_WITHOUT_PROTOCOL_PASS",
+  "next": "WORK_ONLY_THE_30_BLOCKED_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES__PRIORITIZE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING__TB4_REALITY_REMAINS_REVOKED_AT_180_LT_220__NO_TERMINAL_REPLAY",
   "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
   "postwave_remaining_exact_gates": [
-    "CLOSE_17_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_WITH_SCOPE_EQUIVALENT_ADMISSIBLE_EVIDENCE",
-    "REBUILD_FINAL_PROOF_BUNDLE_AFTER_ACCEPTANCE_CALIBRATION_CLOSES",
+    "CLOSE_30_BLOCKED_ATOMIC_OPUS55_ACCEPTANCE_PREDICATES_FOR_16_PENDING_FAMILIES",
+    "REBUILD_FINAL_PROOF_BUNDLE_AFTER_ALL_19_ACCEPTANCE_PROTOCOLS_EFFECTIVELY_PASS",
     "RUN_FINAL_CLOSURE_REDUCER_AND_INDEPENDENT_FINALITY_VERIFICATION"
   ],
   "final_proof_bundle_candidate": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1.json",
@@ -438,5 +479,35 @@
     "status": "INVALIDATED_FOR_TERMINAL_OWNERSHIP_CLOSURE",
     "invalidation": "canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_INVALIDATION_20261002_V1.json",
     "invalidation_blob_sha": "9dfda8e533e0d51985b2b32f709b1b238db1ef19"
+  },
+  "opus55_acceptance_summary": {
+    "calibrated_family_count": 3,
+    "pending_family_count": 16,
+    "calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "pending_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "ARTIFACT_CREATION",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ],
+    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+    "ownership_promotion_authority": false,
+    "rule": "ACCEPTANCE_CALIBRATION_NEQ_OWNERSHIP_PROMOTION__ZERO_DIRECT_FAMILY_CREDIT_FROM_CALIBRATION"
   }
 }
