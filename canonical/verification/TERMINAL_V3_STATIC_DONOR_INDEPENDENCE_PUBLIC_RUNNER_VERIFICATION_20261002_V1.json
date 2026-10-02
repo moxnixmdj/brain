@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V3_STATIC_DONOR_INDEPENDENCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXHAUSTIVE_FROZEN_V3_CANDIDATE_DEPENDENCY_CLASSIFICATION__ZERO_TARGET_DONOR_DEPENDENCIES",
+  "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+  "brain_audit": {
+    "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+    "blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 804,
+    "head_sha": "220c727dc16b62541f5ba355b3c27749f29dea34",
+    "workflow_run_id": 36981076690,
+    "workflow_job_id": 110755498446,
+    "conclusion": "success",
+    "artifact_id": 11215323046,
+    "artifact_name": "terminal-v3-static-donor-independence"
+  },
+  "verified": [
+    "EXACT_BRAIN_AUDIT_BLOB",
+    "FROZEN_V3_CANDIDATE_ROOTS_RECURSIVELY_CLASSIFIED",
+    "REPOSITORY_OWNED_DEPENDENCY_FILE_COUNT_22",
+    "TARGET_CAPABILITY_DONOR_RUNTIME_DEPENDENCIES_ZERO",
+    "NETWORK_PROVIDER_DEPENDENCIES_ZERO",
+    "UNDECLARED_DEPENDENCY_COUNT_ZERO",
+    "CAD_DYNAMIC_EXECUTION_ACCEPTED_ONLY_ON_EXACT_TERMINAL_FROZEN_BLOBS",
+    "CAD_PARTSPEC_RUN_CODE_HELPER_UNREACHABLE"
+  ],
+  "repository_owned_dependency_file_count": 22,
+  "target_capability_donor_runtime_dependency_count": 0,
+  "network_provider_dependency_count": 0,
+  "undeclared_dependency_count": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
