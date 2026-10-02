@@ -45,9 +45,17 @@ assert "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL" not in u["global_cut"]["o
 if "open_shared_cross_lane_mechanism_primitive_count" in u["counts"]:
     assert u["counts"]["open_shared_cross_lane_mechanism_primitive_count"] == len(shared_open)
 
-assert u["global_cut"]["exact_cut_ready"] is False
-assert u["global_cut"]["execution_ready"] is False
-assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is False
+# Donor-independence, unexplained-behavior, and composition-zero are terminal proof
+# predicates. They remain mandatory for final closure but may not circularly block
+# the exact portfolios that measure them.
+if not open_mechanisms and not shared_open and not gate_mech:
+    assert u["global_cut"]["exact_cut_ready"] is True
+    assert u["global_cut"]["execution_ready"] is True
+    assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is True
+else:
+    assert u["global_cut"]["exact_cut_ready"] is False
+    assert u["global_cut"]["execution_ready"] is False
+    assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is False
 assert u["execution_authority"]["immediate_zero_reality_work"] == (
     [f"CLOSE_OR_EXACTLY_BOUND_{x}" for x in open_mechanisms + shared_open]
     + [f"CLOSE_{x}" for x in gate_mech]
