@@ -43,7 +43,7 @@ def test_v3_compiles_existing_receipts_without_overclaiming_them():
     # Impossible routes are deleted.
     assert "TOOL_SCOPE::EXACT_FUTURE_TARGET_UNIVERSE" not in selected
     assert "DELEGATION_SCOPE::EXACT_FUTURE_TARGET_UNIVERSE" not in selected
-    assert "TB4_CARRIER::STANDARD_HOSTED_RUNNER_DECLARED_LIMITS" not in selected
+    assert "TB4_CARRIER::PR958_GITHUB_HOSTED_4CPU_DECLARED_LIMITS" not in selected
 
     # Still-real obligations remain explicit.
     assert "TB4::TASK_IDENTITY_BINDING" in selected
