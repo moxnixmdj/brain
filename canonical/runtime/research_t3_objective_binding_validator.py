@@ -22,9 +22,12 @@ BEHAVIOR = "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
 PROOF_MODE = "T3_MULTIPLEXED_DIRECT_OBJECTIVE_RESEARCH_CONTROL_GATE"
 
 
-def _git_blob_sha(path: Path) -> str:
-    data = path.read_bytes()
+def _git_blob_sha_bytes(data: bytes) -> str:
     return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+
+
+def _git_blob_sha(path: Path) -> str:
+    return _git_blob_sha_bytes(path.read_bytes())
 
 
 def _read(path: Path) -> dict[str, Any]:
@@ -59,8 +62,6 @@ def validate(root: Path) -> dict[str, Any]:
         errors.append("BEHAVIOR_ID_MISMATCH")
     if binding.get("proof_mode") != PROOF_MODE:
         errors.append("PROOF_MODE_MISMATCH")
-    if binding.get("prewave_admissible") is not False:
-        errors.append("SOURCE_BINDING_MUST_REMAIN_PREPROMOTION")
     if binding.get("execution_authority") is not False or binding.get("promotion_authority") is not False:
         errors.append("SOURCE_BINDING_AUTHORITY_MUST_REMAIN_FALSE")
 
@@ -198,8 +199,67 @@ def validate(root: Path) -> dict[str, Any]:
     ):
         if gates.get(key) is not True:
             errors.append(f"ROUTE_GATE_NOT_FROZEN:{key}")
-    if gates.get("independent_verification_pass") is not False:
-        errors.append("INDEPENDENT_VERIFICATION_MUST_REMAIN_FALSE_BEFORE_EXTERNAL_RECEIPT")
+    independent = gates.get("independent_verification_pass")
+    prewave_admissible = binding.get("prewave_admissible")
+    if not isinstance(independent, bool):
+        errors.append("INDEPENDENT_VERIFICATION_GATE_NOT_BOOLEAN")
+    elif prewave_admissible is not independent:
+        errors.append("PREWAVE_ADMISSIBILITY_VERIFICATION_STATE_MISMATCH")
+    elif independent:
+        expected_promoted_status = (
+            "FROZEN_PREWAVE_BINDING__SELECTION_KERNEL_REBOUND__"
+            "INDEPENDENT_PASS__PREWAVE_ADMISSIBLE__ZERO_TERMINAL_RESULTS"
+        )
+        if binding.get("status") != expected_promoted_status:
+            errors.append("PROMOTED_STATUS_MISMATCH")
+        receipt_rel = binding.get("independent_verification")
+        if not isinstance(receipt_rel, str) or not receipt_rel:
+            errors.append("PROMOTION_RECEIPT_PATH_MISSING")
+        else:
+            try:
+                promotion_receipt = _read(root / receipt_rel)
+            except Exception as exc:
+                errors.append("PROMOTION_RECEIPT_READ_FAILURE:" + type(exc).__name__)
+            else:
+                if promotion_receipt.get("behavior_id") != BEHAVIOR:
+                    errors.append("PROMOTION_RECEIPT_BEHAVIOR_MISMATCH")
+                if not str(promotion_receipt.get("status", "")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+                    errors.append("PROMOTION_RECEIPT_NOT_INDEPENDENT_PASS")
+                if promotion_receipt.get("workflow_conclusion") != "success":
+                    errors.append("PROMOTION_RECEIPT_WORKFLOW_NOT_SUCCESS")
+                if promotion_receipt.get("terminal_results_observed") != 0 or promotion_receipt.get("fresh_terminal_evidence_consumed") != 0:
+                    errors.append("PROMOTION_RECEIPT_CONSUMED_TERMINAL_EVIDENCE")
+                exact_receipt = promotion_receipt.get("exact_brain_blobs")
+                expected_base_sha = exact_receipt.get(BINDING) if isinstance(exact_receipt, Mapping) else None
+                if not isinstance(expected_base_sha, str) or not expected_base_sha:
+                    errors.append("PROMOTION_RECEIPT_BASE_BINDING_SHA_MISSING")
+                else:
+                    base = json.loads(json.dumps(binding))
+                    base["status"] = (
+                        "FROZEN_PREWAVE_BINDING__SELECTION_KERNEL_REBOUND__"
+                        "INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS"
+                    )
+                    base["route_gates"]["independent_verification_pass"] = False
+                    base["prewave_admissible"] = False
+                    base.pop("independent_verification", None)
+                    base_bytes = (json.dumps(base, indent=2) + "\n").encode("utf-8")
+                    reconstructed_base_sha = _git_blob_sha_bytes(base_bytes)
+                    if reconstructed_base_sha != expected_base_sha:
+                        errors.append(
+                            "PROMOTION_TRANSITION_BASE_SHA_MISMATCH:"
+                            + reconstructed_base_sha
+                            + "!="
+                            + expected_base_sha
+                        )
+    else:
+        expected_pending_status = (
+            "FROZEN_PREWAVE_BINDING__SELECTION_KERNEL_REBOUND__"
+            "INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS"
+        )
+        if binding.get("status") != expected_pending_status:
+            errors.append("PREPROMOTION_STATUS_MISMATCH")
+        if binding.get("independent_verification") is not None:
+            errors.append("PREPROMOTION_RECEIPT_MUST_BE_ABSENT")
 
     return {
         "schema": "PROJECT_BRAIN_RESEARCH_T3_OBJECTIVE_BINDING_VALIDATION_V1",
