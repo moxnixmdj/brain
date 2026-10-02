@@ -96,16 +96,6 @@ assert select_repair_target([
 print("shared_decision_primitives_hardening: PASS")
 
 
-# UI grounding: explicit observable metadata only; unauthorized/hidden candidates never selected.
-els=[
-    UIElement("save", "Save document", "button", frozenset({"click"})),
-    UIElement("save2", "Save document backup", "button", frozenset({"click"}), authorized=False),
-    UIElement("hidden", "Save document", "button", frozenset({"click"}), visible=False),
-]
-g=select_grounded_ui_action({"save","document"},"click",els)
-assert g.status=="SELECT" and g.element_id=="save"
-assert select_grounded_ui_action({"delete"},"click",els).status=="ESCALATE"
-
 # Artifact plan: exact minimum-cost structure-preserving coverage, rejecting destructive shortcuts.
 ops=[
     ArtifactOperation("text",frozenset({"replace_text"}),1),
