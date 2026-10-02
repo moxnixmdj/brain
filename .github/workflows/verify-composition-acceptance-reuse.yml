@@ -24,12 +24,40 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run adversarial receipt-reuse tests
-        run: python -m unittest canonical.tests.test_composition_component_acceptance_binding_verifier_v1 -v
-      - name: Run live content-addressed verifier
-        run: python canonical/runtime/composition_component_acceptance_binding_verifier_v1.py
+      - name: Run proof and preserve exact diagnostics
+        id: proof
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_composition_component_acceptance_binding_verifier_v1 -v > /tmp/composition-proof-diagnostic.txt 2>&1
+          TEST_STATUS=$?
+          echo "" >> /tmp/composition-proof-diagnostic.txt
+          echo "=== LIVE VERIFIER ===" >> /tmp/composition-proof-diagnostic.txt
+          python canonical/runtime/composition_component_acceptance_binding_verifier_v1.py >> /tmp/composition-proof-diagnostic.txt 2>&1
+          VERIFY_STATUS=$?
+          cat /tmp/composition-proof-diagnostic.txt
+          echo "test_status=$TEST_STATUS" >> "$GITHUB_OUTPUT"
+          echo "verify_status=$VERIFY_STATUS" >> "$GITHUB_OUTPUT"
+          if [ "$TEST_STATUS" -ne 0 ] || [ "$VERIFY_STATUS" -ne 0 ]; then
+            exit 1
+          fi
+      - name: Post exact failure diagnostic to PR
+        if: failure() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo "### composition acceptance receipt reuse CI diagnostic"
+            echo
+            echo '~~~text'
+            cat /tmp/composition-proof-diagnostic.txt
+            echo '~~~'
+          } > /tmp/pr-comment.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/pr-comment.md
