@@ -21,6 +21,7 @@ import xml.etree.ElementTree as ET
 import zipfile
 
 REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
+OFFICE_REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 IMAGE_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
 
 
@@ -183,6 +184,7 @@ def replace_image_by_relationship(
         "output_path": str(dst),
         "source_part": source_part,
         "relationship_id": relationship_id,
+        "relationship_reference_count": reference_count,
         "media_part": target,
         "changed_members": changed,
         "preserved_member_count": len(original) - 1,
