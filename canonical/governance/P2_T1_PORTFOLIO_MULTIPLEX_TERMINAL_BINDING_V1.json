@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_P2_T1_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_T1_MULTIPLEX_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "proof_mode": "PORTFOLIO_MULTIPLEXED_CONTRACT_NATIVE_QUALITY_PROOF",
+  "authority": [
+    "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
+    "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+    "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+    "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+    "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json"
+  ],
+  "portfolio_bindings": [
+    "T1"
+  ],
+  "direct_surface_bindings": [
+    "T1/GDPVAL_AA_V2_1::P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
+    "T1/AA_BRIEFCASE_V1_1::P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF"
+  ],
+  "private_surface_rule": {
+    "official_private_elo_reproduction_required": false,
+    "reason": "PRIVATE_SURFACE_DOMINANCE_VERDICT_V2_PROVES_BLOCKED_AA_BRIEFCASE_EXECUTION_ROUTE_REDUNDANT_WHEN_FROZEN_P2_NATIVE_ARTIFACT_AND_P3_CONTRACTS_HAVE_DIRECT_INDEPENDENT_PROOFS",
+    "private_score_inference_forbidden": true
+  },
+  "candidate": {
+    "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+    "exact_blob": "ea8057b0eadac210c4f4378298df93ed233c5824"
+  },
+  "evaluator": {
+    "path": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
+    "exact_blob": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860",
+    "contract_native_route": "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
+    "required_checks": [
+      "SELECTED_EDIT_IDS_EXIST",
+      "EDIT_BUDGET_NOT_EXCEEDED",
+      "UNSUPPORTED_OR_HARD_CONSTRAINT_EDITS_REJECTED",
+      "REQUIRED_ANALYSIS_COVERAGE_LOAD_BEARING",
+      "AUDIENCE_FIT_LOAD_BEARING",
+      "HIDDEN_QUALITY_PLAN_MATCH_OR_FAIL_CLOSED",
+      "PLAN_ABLATION_DEGRADES_AND_RESCUE_RESTORES_ON_APPLICABLE_CASES"
+    ],
+    "mutations": [
+      "REMOVE_REQUIRED_ANALYSIS",
+      "INSERT_UNSUPPORTED_POLISHED_CLAIM",
+      "SWAP_AUDIENCE_PRIORITY",
+      "OBSCURE_KEY_INFORMATION",
+      "BREAK_NATIVE_STRUCTURE"
+    ]
+  },
+  "information_boundary": {
+    "candidate_visible": [
+      "OBJECTIVE",
+      "AUDIENCE",
+      "REQUIRED_TOPICS",
+      "RUBRIC_WEIGHTS",
+      "SOURCE_FACTS_WITH_PROVENANCE",
+      "CURRENT_DRAFT",
+      "EDIT_CANDIDATES",
+      "EDIT_BUDGET"
+    ],
+    "hidden_oracle": [
+      "HIDDEN_SUPPORTED_FLAG",
+      "HIDDEN_REQUIRED_TOPIC_QUALITY_FACTOR",
+      "HIDDEN_AUDIENCE_FIT_QUALITY_FACTOR",
+      "HIDDEN_ANALYSIS_VALUE_FACTOR",
+      "GOLD_OPTIMAL_EDIT_SUBSET"
+    ],
+    "candidate_receives_hidden_oracle": false,
+    "candidate_receives_reference_solution": false
+  },
+  "terminal_acceptance": {
+    "prewave_binding_is_terminal_result": false,
+    "terminal_evidence_source": "THE_FROZEN_T1_TERMINAL_OBSERVATION_PLUS_CONTRACT_NATIVE_P2_DIRECT_PROOF_CASES_SELECTED_ONLY_AFTER_FREEZE",
+    "proof_rule": "EVERY_T1_CASE_WHERE_P2_IS_LOAD_BEARING_MUST_PASS_THE_FROZEN_P2_ORACLE_AND_PARENT_T1_ACCEPTANCE__PLAN_ABLATION_RESCUE_MUST_PASS_WHERE_APPLICABLE__NO_PRIVATE_ELO_SCORE_INFERENCE__NO_CROSS_BEHAVIOR_SCORE_INHERITANCE",
+    "standalone_private_benchmark_reproduction_required": false,
+    "synthetic_whole_open_domain_superset_claim_forbidden": true
+  },
+  "population_selection": {
+    "selector": "POST_FREEZE_UNCONTROLLABLE_PUBLIC_BEACON_HASH_TO_INTEGER_SEEDS",
+    "difficulty_schedule": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "exact_sample_count": "DERIVED_BY_T1_PORTFOLIO_PREWAVE_PROTOCOL_AND_FROZEN_BEFORE_BEACON",
+    "no_result_seen_before_freeze": true
+  },
+  "contamination": {
+    "post_freeze_candidate_change": false,
+    "evaluator_change_after_first_result": false,
+    "result_to_runtime_feedback_during_wave": false
+  },
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
