@@ -21,7 +21,7 @@ def _git_blob_sha(path:Path)->str:
 def evaluate(root:Path)->dict[str,Any]:
     errors=[]
     try:
-        freeze=_load(root,FREEZE); binding=_load(root,BINDING); ocr=_load(root,OCR_VERIFY)
+        freeze=_load(root,FREEZE); binding=_load(root,BINDING); ocr=_load(root,OCR_VERIFY); pop_verify=_load(root,POP_VERIFY)
     except Exception as exc:
         return {"schema":SCHEMA,"status":"FAIL_CLOSED","pass":False,"errors":[str(exc)],
                 "execution_authority":False,"promotion_authority":False}
