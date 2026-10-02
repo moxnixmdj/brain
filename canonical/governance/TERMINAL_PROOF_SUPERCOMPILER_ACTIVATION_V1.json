@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_PREPROOF_ACCELERATION_CONTROLLER__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "runtime": "canonical/runtime/terminal_proof_supercompiler.py",
+  "tests": "canonical/tests/test_terminal_proof_supercompiler.py",
+  "purpose": "Decompose proof work to obligation-level routes, transmute every obligation to the strongest admissible proof mode available, and compute the exact smallest internally closable blocker set whose closure enables complete terminal proof coverage.",
+  "proof_mode_order": [
+    "EXISTING_RECEIPT",
+    "EXACT_DEDUCTION",
+    "FORMAL_PROOF",
+    "EXHAUSTIVE_FINITE",
+    "DETERMINISTIC_HIDDEN_ORACLE",
+    "PUBLIC_FIXED_BAR",
+    "PUBLIC_SAME_CASE_OPUS",
+    "MATCHED_EXACT_OPUS"
+  ],
+  "hard_rules": [
+    "MATCHED_EXACT_OPUS_IS_LAST_RESORT_NOT_DEFAULT",
+    "NO_WHOLE_CONTRACT_COMPARATOR_DEPENDENCY_WHEN_A_STRONGER_SCOPE_EQUIVALENT_ATOMIC_ROUTE_EXISTS",
+    "SHARED_UPSTREAM_BLOCKERS_ARE_PAID_ONCE_ACROSS_ALL_COVERED_OBLIGATIONS",
+    "UNAVAILABLE_EXTERNAL_COMPARATOR_NEVER_AUTHORIZES_PROXY_SUBSTITUTION",
+    "NO_CLEAN_TERMINAL_CASE_SPEND_WHILE_AN_INTERNAL_STRONGER_PROOF_ROUTE_CAN_REMOVE_THE_COMPARATOR_DEPENDENCY",
+    "FAIL_CLOSED_IF_FROZEN_ROUTE_OR_BLOCKER_UNIVERSE_IS_INCOMPLETE_OR_TOO_LARGE_FOR_EXACT_SEARCH",
+    "OUTPUT_IS_SCHEDULING_ONLY__NEVER_CAPABILITY_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "integration": {
+    "existing_evidence_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "existing_proof_coverage_compiler": "canonical/runtime/proof_coverage_compiler.py",
+    "existing_global_proof_cut_compiler": "canonical/runtime/global_proof_cut_compiler.py",
+    "sequencing": [
+      "ATOMIZE_TERMINAL_OBLIGATIONS",
+      "SATURATE_EXISTING_EVIDENCE",
+      "TRANSMUTE_PROOF_MODES",
+      "COMPUTE_EXACT_MINIMUM_UNBLOCK_CUT",
+      "CLOSE_ONLY_SELECTED_INTERNAL_BLOCKERS",
+      "RECOMPUTE",
+      "COMPUTE_EXACT_MINIMUM_REALITY_CUT_ONLY_AFTER_INTERNAL_UNBLOCK_CUT_REACHES_ZERO_OR_EXTERNAL_IRREDUCIBILITY_IS_PROVEN"
+    ]
+  },
+  "objective_order": [
+    "TERMINAL_CORRECTNESS_AND_ADMISSIBILITY",
+    "MINIMIZE_LONGEST_BLOCKER_DEPENDENCY_DEPTH",
+    "MINIMIZE_PARALLEL_CRITICAL_PATH_WALL_CLOCK",
+    "MINIMIZE_NEW_REALITY_INFORMATION",
+    "MINIMIZE_WEAKEST_SELECTED_PROOF_MODE",
+    "MINIMIZE_UNIQUE_BLOCKERS",
+    "MINIMIZE_ROUTE_COUNT"
+  ],
+  "expected_breakthrough": "DELETE_STALE_COMPARATOR_DEPENDENCIES_AND_DUPLICATED_SEMANTIC_OR_UPSTREAM_PROOF_COST_BEFORE_ANY_FRESH_TERMINAL_EVIDENCE_SPEND",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
