@@ -76,7 +76,11 @@
       "fresh_terminal_evidence_consumed": 0,
       "antishortcut_falsification": "canonical/verification/CAD_T0_SOURCE_STRUCTURE_ANTISHORTCUT_FALSIFICATION_20261002_V1.json",
       "antishortcut_repair_verification": "canonical/verification/CURRENT_EXECUTOR_SNAPSHOT_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "antishortcut_falsification_disposition": "SUPERSEDED_FOR_CURRENT_CANDIDATE_BLOB_AA32750B__HISTORICAL_FALSIFICATION_RETAINED"
+      "antishortcut_falsification_disposition": "SUPERSEDED_FOR_CURRENT_CANDIDATE_BLOB_AA32750B__HISTORICAL_FALSIFICATION_RETAINED",
+      "runtime_dependency_closure": "canonical/governance/CAD_T0_TRANSITIVE_RUNTIME_DEPENDENCY_CLOSURE_V1.json",
+      "current_terminal_executor": "canonical/runtime/cad_t0_route_specific_terminal_executor_v1.py",
+      "current_terminal_executor_blob_sha": "72586ea16289fbfc51460bc8abbb0cd9fee652a1",
+      "terminal_executor_independent_verification": "PENDING_CURRENT_72586EA1_PUBLIC_RUNNER_PASS"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
@@ -335,7 +339,7 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 12,
   "execution_authority": false,
-  "next": "REVERIFY_CURRENT_CAD_EXECUTOR_BINDING__SYNCHRONIZE_PREQUALIFICATION__INDEPENDENTLY_REDERIVE_GLOBAL_TERMINAL_WAVE_AUTHORITY__ONLY_THEN_CREATE_POST_FREEZE_BEACON",
+  "next": "INDEPENDENTLY_VERIFY_CURRENT_CAD_EXECUTOR_72586EA1__SYNCHRONIZE_12_OF_12_EXECUTOR_MANIFEST__INDEPENDENTLY_REDERIVE_GLOBAL_TERMINAL_WAVE_AUTHORITY__ONLY_THEN_CREATE_POST_FREEZE_BEACON",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
