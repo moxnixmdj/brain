@@ -111,8 +111,8 @@
       "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
       "tests_git_blob_sha": "fc1daa3ee8588c1d7eef4537c2f79baa1dcfaaf1",
       "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
-      "workflow_git_blob_sha": "7dc47098d54e8dbe9bb2e7ada75cecd6b54de1a8",
-      "status": "ACTIVE_FAIL_CLOSED__BRANCH_VERIFICATION_PENDING"
+      "workflow_git_blob_sha": "893e895785692f97d4936920d39c9688b05754a1",
+      "status": "ACTIVE_FAIL_CLOSED__PR_VERIFICATION_PENDING"
     }
   },
   "residual": [
