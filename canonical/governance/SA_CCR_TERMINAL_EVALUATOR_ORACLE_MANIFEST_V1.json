@@ -1,0 +1,34 @@
+{
+  "anti_shortcut_requirements": [
+    "WRONG_INTERMEDIATE_WITH_CORRECT_FINAL_FAILS",
+    "WRONG_FINAL_WITH_CORRECT_INTERMEDIATES_FAILS",
+    "MISSING_TRADE_LINEAGE_FAILS"
+  ],
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "blobs": {
+    "canonical/runtime/saccr_credit_information_safe_proof.py": "8eb94b8e8b00e3ace662e7fac2e8b6a8f7bb2200",
+    "canonical/tests/test_saccr_credit_information_safe.py": "ed8b37685411a35485f7b65fc299ff170cf0a886"
+  },
+  "case_generator_entrypoint": "canonical/runtime/saccr_credit_information_safe_proof.py::generate_case",
+  "checks_every_required_intermediate_and_final": true,
+  "date": "2026-10-02",
+  "hidden_oracle_fields": [
+    "SUPERVISORY_DURATION",
+    "ADJUSTED_NOTIONAL",
+    "DELTA",
+    "MATURITY_FACTOR",
+    "EFFECTIVE_NOTIONAL",
+    "SUPERVISORY_FACTOR",
+    "CORRELATION",
+    "REFERENCE_ENTITY_AGGREGATION",
+    "CREDIT_ADDON"
+  ],
+  "imports_candidate_kernel": false,
+  "independent_from_candidate_implementation": true,
+  "independent_prewave_receipt": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "mutation_after_freeze_forbidden": true,
+  "oracle_entrypoint": "canonical/runtime/saccr_credit_information_safe_proof.py::score_case",
+  "public_projection_entrypoint": "canonical/runtime/saccr_credit_information_safe_proof.py::public_task",
+  "schema": "PROJECT_BRAIN_TERMINAL_EVALUATOR_ORACLE_MANIFEST_V1",
+  "status": "FROZEN_PRE_BEACON"
+}
