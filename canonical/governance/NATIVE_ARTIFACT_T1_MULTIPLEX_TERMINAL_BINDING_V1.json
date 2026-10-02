@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "INDEPENDENT_PASS__PREWAVE_T1_MULTIPLEX_BINDING_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
   "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
   "proof_mode": "T1_MULTIPLEXED_MECHANICAL_GATE_PLUS_PUBLIC_PROFESSIONAL_BAR",
   "decomposition": {
@@ -68,5 +68,7 @@
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_verification": "canonical/verification/NATIVE_ARTIFACT_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "prewave_admissible": true
 }
