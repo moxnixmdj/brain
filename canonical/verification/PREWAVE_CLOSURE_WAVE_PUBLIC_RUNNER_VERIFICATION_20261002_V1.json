@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_PREWAVE_CLOSURE_WAVE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__PUBLIC_RUNNER__FOUR_CRITICAL_PREWAVE_CHECKS_GREEN__ZERO_TERMINAL_CASE_EXPOSURE",
+  "brain_repository": "moxnixmdj/brain",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verifier_pr": 485,
+  "verifier_head_sha": "dbf93c29bcb2b3ba2d7c7aa0de267d5b851f421a",
+  "workflow_run_id": 36955437348,
+  "workflow_url": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36955437348",
+  "verified_jobs": [
+    {
+      "name": "contract-native-proofs",
+      "job_id": 110677253481,
+      "conclusion": "success"
+    },
+    {
+      "name": "residual-eliminator",
+      "job_id": 110677253521,
+      "conclusion": "success"
+    },
+    {
+      "name": "livebench-adapter",
+      "job_id": 110677253305,
+      "conclusion": "success"
+    },
+    {
+      "name": "terminal-universe",
+      "job_id": 110677253655,
+      "conclusion": "success"
+    }
+  ],
+  "conclusions": [
+    "RESIDUAL_DEPENDENCY_ELIMINATOR_INDEPENDENTLY_EXECUTABLE_ON_MIRRORED_LIVE_BRAIN_BYTES",
+    "FOUR_CONTRACT_NATIVE_PROOF_SUITES_PASS_ADVERSARIAL_AND_ORACLE_TESTS_ON_MIRRORED_LIVE_BRAIN_BYTES",
+    "LIVEBENCH_IF_RESPONSE_ADAPTER_FAIL_CLOSED_TESTS_PASS_ON_MIRRORED_LIVE_BRAIN_BYTES",
+    "GLOBAL_TERMINAL_UNIVERSE_REGENERATES_EXACTLY_FROM_MIRRORED_FROZEN_INPUTS",
+    "NO_TERMINAL_BENCHMARK_CASE_CONTENT_WAS_EXPOSED"
+  ],
+  "execution_authority_delta": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
