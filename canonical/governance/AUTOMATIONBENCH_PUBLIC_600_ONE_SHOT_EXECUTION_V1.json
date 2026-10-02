@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PUBLIC_600_ONE_SHOT_EXECUTION_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREEXPOSURE__AUTHORIZED_BY_RESIDUAL_V7__NOT_YET_EXECUTED",
+  "status": "FROZEN_PREEXPOSURE__AUTHORIZED_BY_RESIDUAL_V8__NOT_YET_EXECUTED",
   "objective": "Close atomic acceptance predicate AUTOMATIONBENCH_GE_40 using the frozen scope-equivalent public 600-task AutomationBench route with the Brain-owned operative gateway and zero incremental spend.",
-  "authorization": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V7.json",
+  "authorization": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V8.json",
   "benchmark": {
     "repository": "zapier/AutomationBench",
     "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
