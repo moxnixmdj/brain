@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_TB4_SOURCE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CLEAN_ACCEPTANCE_CASE_EXECUTION_AUTHORITY_TRUE__ZERO_CAPABILITY_CREDIT",
+  "brain": {
+    "gate_path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+    "admission_path": "canonical/governance/CODING_TB4_SOURCE_GATE_V2_ADMISSION_V1.json",
+    "admission_git_blob_sha": "b3c1fe5d379c47d0731c4a32b94c4c2f47660bac"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 815,
+    "pull_request_head": "4a94488609d276976a48604d7d1208e2c23262fc",
+    "merge_commit": "c0a85f5794c7467e8fbd982b45be3d84ccd5c778",
+    "workflow_run_id": 36984305110,
+    "workflow_job_id": 110765706711,
+    "conclusion": "success"
+  },
+  "result": {
+    "pass": true,
+    "clean_case_execution_authority": true,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  },
+  "verified": [
+    "BRAIN_CANDIDATE_BOUND",
+    "BRAIN_OWNED_OPERATIVE_CONFIGURATION",
+    "CONFIGURATION_MATERIAL_CONTROL_PROVEN",
+    "CAPABILITY_PACKAGE_CONTAINS_CONFIGURATION",
+    "PROMOTION_BOUND_TO_BRAIN_CONFIGURED_SYSTEM",
+    "NO_HIDDEN_TARGET_CAPABILITY_PROVIDER",
+    "MODEL_ROLE_GENERAL_COGNITION_SUBSTRATE",
+    "MODEL_DEPENDENCIES_DECLARED",
+    "GENERAL_SUBSTRATE_TEST_PASS",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
