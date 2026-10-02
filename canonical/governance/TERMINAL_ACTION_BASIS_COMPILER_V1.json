@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACTION_BASIS_COMPILER_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__STRUCTURAL_TERMINAL_COVERAGE_ONLY__ZERO_CREDIT",
+  "objective": "Prove that every currently unproved atomic Opus55 acceptance predicate has at least one explicit discharge action and compute the smallest declared structural action cover.",
+  "runtime": "canonical/runtime/terminal_action_basis_compiler_v1.py",
+  "tests": "canonical/tests/test_terminal_action_basis_compiler_v1.py",
+  "inputs": {
+    "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "evidence": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"
+  },
+  "hard_rules": [
+    "UNPROVED_PREDICATE_WITHOUT_DECLARED_DISCHARGE_ACTION_FAILS_CLOSED",
+    "UNKNOWN_ACTION_TARGET_FAILS_CLOSED",
+    "STRUCTURAL_COVERAGE_NEVER_IMPLIES_EXECUTION_AUTHORITY",
+    "STRUCTURAL_COVERAGE_NEVER_IMPLIES_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "ACTION_PRECONDITIONS_ATTAINABILITY_INFORMATION_BOUNDARIES_AND_SOURCE_GATES_REMAIN_LOAD_BEARING"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
