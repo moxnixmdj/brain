@@ -11,7 +11,8 @@
       "current_binding_path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "receipt_anchor": "DIRECT_SUMMARY_ONLY",
       "minimum_cases": 132,
-      "disposition": "IDENTITY_ONLY_UNTIL_A_PER_ROUTE_BINDING_BLOB_ANCHOR_IS_PROVED__132_OF_132_DIRECT_PASS_DOES_NOT_BY_ITSELF_ESTABLISH_CURRENT_BINDING_LOAD_BEARINGNESS_OR_OPUS_NONINFERIORITY"
+      "disposition": "IDENTITY_ONLY_UNTIL_A_PER_ROUTE_BINDING_BLOB_ANCHOR_IS_PROVED__132_OF_132_DIRECT_PASS_DOES_NOT_BY_ITSELF_ESTABLISH_CURRENT_BINDING_LOAD_BEARINGNESS_OR_OPUS_NONINFERIORITY",
+      "expected_historical_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1"
     },
     {
       "id": "RECOVERY_CAUSAL_LOCALIZATION_T0_T2",
@@ -52,5 +53,6 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "historical_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4"
 }
