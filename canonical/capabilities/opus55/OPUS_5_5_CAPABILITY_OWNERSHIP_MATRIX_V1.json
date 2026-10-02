@@ -687,9 +687,15 @@
     "rule": "OWNERSHIP_CREDIT_ONLY_FOR_OBSERVABLE_CONTRACTED_BEHAVIOR__LABEL_MATCHING_ZERO_CREDIT"
   },
   "postwave_terminal_reconciliation": {
-    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
-    "authority_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62",
-    "behavioral_pass_family_count": 19,
+    "authority": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "authority_blob_sha": "8c1a4db776e419ebb263da9f781245dd6491ea2f",
+    "historical_source_reduction": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+    "historical_source_behavioral_pass_family_count": 19,
+    "current_unaffected_behavioral_pass_family_count": 11,
+    "current_p1_dependent_quarantined_family_count": 8,
+    "whole_scope_contracts_passed": 11,
+    "whole_scope_contracts_quarantined": 1,
+    "quarantined_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
     "verified_owned_equal_or_better_count": 2,
     "acceptance_protocol_result_open_count": 17,
     "verified_owned_equal_or_better_families": [
@@ -698,37 +704,45 @@
     ],
     "acceptance_protocol_result_open_families": [
       "ADVANCED_AGENTIC_CODING",
-      "AGENTIC_SCIENTIFIC_RESEARCH",
-      "ARTIFACT_CREATION",
-      "BUSINESS_WORKFLOW_AUTOMATION",
-      "COMMUNICATION_AND_SYNTHESIS",
       "COMPLEX_MULTI_TOOL_AGENCY",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "COMPUTER_AND_BROWSER_USE",
       "FINANCIAL_ANALYSIS",
       "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
-      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
-      "MULTI_CAPABILITY_COMPOSITION",
-      "PROFESSIONAL_KNOWLEDGE_WORK",
-      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "ARTIFACT_CREATION",
+      "COMMUNICATION_AND_SYNTHESIS",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "UNKNOWN_DOMAIN_ADAPTATION",
-      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+      "MULTI_CAPABILITY_COMPOSITION"
     ],
-    "rule": "ROW_MECHANISM_STATUS_BELOW_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_OWNERSHIP_CREDIT_IS_CONTROLLED_BY_POSTWAVE_ACCEPTANCE_CALIBRATION"
+    "rule": "ROW_MECHANISM_STATUS_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_BEHAVIORAL_SCOPE_CREDIT_OBEYS_INDEPENDENT_P1_QUARANTINE_PROPAGATION__CURRENT_OPUS55_ACCEPTANCE_OBEYS_SCOPE_COMPLETE_ACCEPTANCE_AUTHORITY"
   },
   "postwave_acceptance_summary": {
-    "calibrated_family_count": 4,
+    "calibrated_family_count": 2,
     "verified_owned_family_count": 2,
-    "pending_acceptance_family_count": 15,
+    "pending_acceptance_family_count": 17,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+    ],
+    "reopened_scope_incomplete_families": [
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "SUBAGENT_DELEGATION_AND_COORDINATION"
     ],
-    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
-    "promotion_authority": false
+    "authority": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "atomic_acceptance": {
+      "proved": 7,
+      "unresolved": 31,
+      "total": 38
+    },
+    "promotion_authority": false,
+    "rule": "FINITE_SAMPLE_SUCCESS_IS_SAMPLE_EVIDENCE_ONLY_UNTIL_PROTOCOL_WIDE_SCOPE_COMPLETENESS_IS_INDEPENDENTLY_PROVED"
   },
   "postwave_scope_quarantine_reconciliation": {
     "evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
