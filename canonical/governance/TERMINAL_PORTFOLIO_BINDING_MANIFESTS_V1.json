@@ -1,0 +1,194 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_NAMESPACE_AND_STOP_RULE_BINDINGS__SURFACE_SPECIFIC_HASHES_AND_ZERO_COST_RESOURCE_PREFLIGHTS_STILL_FAIL_CLOSED",
+  "shared_protocol": "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
+  "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
+  "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+  "global": {
+    "brain_branch": "main",
+    "brain_commit_binding": "FREEZE_AT_EXECUTION_AUTHORIZATION",
+    "paid_fallback": "FORBIDDEN",
+    "shared_brain_state": "READ_ONLY_DURING_TERMINAL_WAVE",
+    "result_compile_rule": "COMPILE_ONLY_AFTER_ALL_STARTED_PORTFOLIOS_TERMINATE",
+    "cross_portfolio_mutation": "FORBIDDEN"
+  },
+  "portfolios": {
+    "T0": {
+      "id": "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+      "namespace": "terminal_wave/T0/",
+      "surfaces": [
+        {
+          "id": "TERMINAL_BENCH_4_0",
+          "route": "harbor run -d terminal-bench/terminal-bench@4.0.0",
+          "binding_state": "RESOURCE_ADAPTER_PREFLIGHT_OPEN"
+        },
+        {
+          "id": "FRONTIERCODE_V1_1",
+          "route": "SCOPE_EQUIVALENT_DIRECT_PROOF",
+          "proof_routes": [
+            "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
+            "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+          ],
+          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+        },
+        {
+          "id": "CURSORBENCH_4_0",
+          "route": "SCOPE_EQUIVALENT_DIRECT_PROOF_OR_EXACT_PUBLIC_RUNNER",
+          "proof_routes": [
+            "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+          ],
+          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+        }
+      ],
+      "metric_thresholds": [
+        "Terminal-Bench 4.0 >=66.4%",
+        "FrontierCode v1.1 Main >=54.4% represented scope",
+        "CursorBench 4.0 >=57.8% represented scope"
+      ],
+      "mutation_set": [
+        "SPECIFICATION_TRACE_BREAK",
+        "FAILURE_LOCALIZATION_SHIFT",
+        "REGRESSION_OR_SCOPE_VIOLATION"
+      ],
+      "stop_rule": "STOP_ON_INFRASTRUCTURE_OR_ORACLE_INVALIDATION_UNDECLARED_SPEND_OR_SCOPE_MISMATCH",
+      "execution_authorized": false
+    },
+    "T1": {
+      "id": "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO",
+      "namespace": "terminal_wave/T1/",
+      "surfaces": [
+        {
+          "id": "GDPVAL_AA_V2_1",
+          "route": "PUBLIC_GDPVAL_SCOPE_EQUIVALENT_OR_EXACT_ROUTE",
+          "binding_state": "ABSOLUTE_ACCEPTANCE_INSTANCE_OPEN"
+        },
+        {
+          "id": "AA_BRIEFCASE_V1_1",
+          "route": "SCOPE_EQUIVALENT_DIRECT_PROOF",
+          "proof_routes": [
+            "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
+            "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
+          ],
+          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+        },
+        {
+          "id": "CHARTOGRAPHY",
+          "route": "PUBLIC_HARNESS",
+          "binding_state": "SCORER_TOOL_EQUIVALENCE_PREFLIGHT_OPEN"
+        },
+        {
+          "id": "FINANCE_ACCOUNTING_INDEX",
+          "route": "BEHAVIORALLY_DOMINANT_ABSOLUTE_PROOF",
+          "proof_routes": [
+            "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
+            "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
+          ],
+          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+        },
+        {
+          "id": "FINANCE_AGENT_V2",
+          "route": "PUBLIC_SCOPE_PLUS_DIRECT_PROOF",
+          "proof_routes": [
+            "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
+            "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
+          ],
+          "binding_state": "PUBLIC_SAMPLE_AND_GRADER_PREFLIGHT_OPEN"
+        }
+      ],
+      "mutation_set": [
+        "UNSUPPORTED_POLISHED_CLAIM",
+        "MISSING_REQUIRED_ANALYSIS",
+        "AUDIENCE_PRIORITY_SWAP",
+        "NATIVE_STRUCTURE_BREAK",
+        "CALCULATION_TRACE_BREAK"
+      ],
+      "stop_rule": "STOP_ON_PRIVATE_GRADER_DEPENDENCE_OR_UNDECLARED_MODEL_JUDGE_OR_ORACLE_INVALIDATION",
+      "execution_authorized": false
+    },
+    "T2": {
+      "id": "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO",
+      "namespace": "terminal_wave/T2/",
+      "surfaces": [
+        {
+          "id": "AUTOMATIONBENCH",
+          "route": "PUBLIC_600_TASK_SCOPE_EQUIVALENT",
+          "binding_state": "PUBLIC_SET_ABSOLUTE_ACCEPTANCE_OPEN"
+        },
+        {
+          "id": "OSWORLD_2_1",
+          "route": "PUBLIC_RELEASE",
+          "binding_state": "ZERO_COST_ENVIRONMENT_ASSET_PREFLIGHT_OPEN"
+        },
+        {
+          "id": "LIVEBENCH_IF",
+          "route": "PUBLIC_DETERMINISTIC_VERIFIER",
+          "binding_state": "58_CHECKER_MUTATION_AND_HERMETIC_RUNTIME_PREFLIGHT_OPEN",
+          "adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "RECOVERY_SCOPE_COMPOSITION",
+          "route": "DIRECT_PROOF",
+          "proof_routes": [
+            "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+          ],
+          "binding_state": "COMPOSITION_MUTATION_INSTANCE_OPEN"
+        }
+      ],
+      "mutation_set": [
+        "STALE_STATE",
+        "WRONG_ACTION_TARGET",
+        "DOWNSTREAM_SYMPTOM_DIAGNOSIS",
+        "SCOPE_ESCAPE",
+        "DELEGATION_DEPENDENCY_BREAK"
+      ],
+      "stop_rule": "STOP_ON_UNAVAILABLE_ASSET_OR_NONHERMETIC_VERIFIER_OR_UNDECLARED_PROVIDER",
+      "execution_authorized": false
+    },
+    "T3": {
+      "id": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+      "namespace": "terminal_wave/T3/",
+      "surfaces": [
+        {
+          "id": "HLE_WITH_TOOLS",
+          "route": "PUBLIC_DATA_PLUS_FROZEN_BRAIN_TOOL_HARNESS",
+          "binding_state": "TOOLS_AND_SHORT_ANSWER_GRADER_PREFLIGHT_OPEN"
+        },
+        {
+          "id": "TERMINAL_BENCH_SCIENCE_0_1",
+          "route": "PUBLIC_HARBOR_HARNESS",
+          "binding_state": "ZERO_COST_ENVIRONMENT_RESOURCE_PREFLIGHT_OPEN"
+        },
+        {
+          "id": "UNKNOWN_DOMAIN_SYNTHESIS",
+          "route": "DIRECT_PROOF",
+          "proof_routes": [
+            "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
+          ],
+          "binding_state": "SCOPE_AUDIT_AND_INSTRUMENTATION_OPEN"
+        }
+      ],
+      "mutation_set": [
+        "IRRELEVANT_QUERY_DRIFT",
+        "SOURCE_PRIORITY_SWAP",
+        "PREMATURE_STOP",
+        "UNSUPPORTED_SYNTHESIS",
+        "TOOL_ROUTE_MISSELECTION",
+        "UNCERTAINTY_DELETION"
+      ],
+      "stop_rule": "STOP_ON_GRADER_NON_EQUIVALENCE_TOOL_ROUTE_PAID_REQUIREMENT_OR_SOURCE_CONTAMINATION",
+      "execution_authorized": false
+    }
+  },
+  "independence": {
+    "pairwise_namespaces_distinct": true,
+    "shared_result_files": false,
+    "result_to_runtime_feedback_during_wave": false,
+    "admission": "PASS_ONLY_WHEN_EACH_SURFACE_BINDING_STATE_HAS_NO_OPEN_ITEM"
+  },
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
