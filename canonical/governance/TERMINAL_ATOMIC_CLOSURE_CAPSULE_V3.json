@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3",
   "date": "2026-10-02",
-  "status": "FROZEN_PREBEACON_EXACT_POST_AUTHORITY_GIT_SNAPSHOT__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREBEACON_EXACT_POST_AUTHORITY_GIT_SNAPSHOT__INDEPENDENTLY_VERIFIED_FOR_BEACON__ZERO_TERMINAL_RESULTS",
   "supersedes_for_execution": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V2.json",
   "objective": "Freeze the exact post-authority repaired-launcher terminal execution world before the first post-freeze beacon.",
   "execution_snapshot": {
@@ -81,7 +81,7 @@
     "case_replacement": false,
     "incremental_spend_usd": 0
   },
-  "independent_verification": null,
-  "verified_for_beacon": false,
-  "next": "INDEPENDENTLY_VERIFY_THIS_EXACT_PACKAGE__THEN_USE_FIRST_AUTHORIZED_PUBLIC_TERMINAL_RUN_ID_AS_POST_FREEZE_BEACON__EXECUTE_EXACT_SNAPSHOT_ONCE"
+  "independent_verification": "canonical/verification/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_INDEPENDENT_VERIFICATION_20261002_V1.json",
+  "verified_for_beacon": true,
+  "next": "CREATE_FIRST_AUTHORIZED_POST_FREEZE_BEACON_BOUND_TO_THIS_EXACT_PACKAGE_COMMITMENT__THEN_EXECUTE_EXACT_SNAPSHOT_ONCE_WITH_ZERO_CASE_REPLACEMENT_OR_TUNING_REPLAY"
 }
