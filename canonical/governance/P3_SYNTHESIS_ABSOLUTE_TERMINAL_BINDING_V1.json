@@ -11,5 +11,94 @@
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "authority": [
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+    "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
+    "canonical/runtime/p3_information_safe_proof_suite_v3.py"
+  ],
+  "scope_equivalence": {
+    "visible_inputs": [
+      "OBJECTIVE",
+      "AUDIENCE",
+      "RAW_EVIDENCE_WITH_PROVENANCE",
+      "CLAIM_CANDIDATES_OR_REQUIRED_CLAIM_CLASSES",
+      "FORMAT_AND_LENGTH_CONSTRAINTS"
+    ],
+    "required_outputs": [
+      "SUPPORTED_REQUIRED_CLAIMS",
+      "SOURCE_PROVENANCE",
+      "MATERIAL_UNCERTAINTY_AND_DISAGREEMENT",
+      "AUDIENCE_AND_FORMAT_CONFORMANT_SYNTHESIS"
+    ],
+    "hidden_oracle": [
+      "CLAIM_SUPPORT_GRAPH",
+      "DECISION_RELEVANCE",
+      "CONFLICT_AND_UNCERTAINTY_STATE",
+      "REQUIRED_CLAIM_COVERAGE",
+      "AUDIENCE_PRIORITY_CONSEQUENCES"
+    ],
+    "scope_rule": "FOR_FINITE_EVIDENCE_BUNDLES_WITH_EXHAUSTIVELY_ENUMERABLE_CLAIM_SUPPORT_AND_FORMAT_CONSTRAINTS__SUCCESS_IS_ABSOLUTELY_DECIDABLE_BY_HIDDEN_SUPPORT_GRAPH_AND_CONSTRAINT_ORACLE",
+    "no_weakening": [
+      "UNSUPPORTED_MATERIAL_CLAIM_FAILS",
+      "REQUIRED_SUPPORT_DELETION_FAILS",
+      "CONFLICT_COLLAPSE_FAILS",
+      "MATERIAL_UNCERTAINTY_DROP_FAILS",
+      "DECISION_RELEVANT_EVIDENCE_DROP_FAILS",
+      "AUDIENCE_OR_FORMAT_MISMATCH_FAILS"
+    ],
+    "verdict": "FINITE_SUPPORT_GRAPH_SUBDOMAIN_IS_ABSOLUTELY_DECIDABLE__OPEN_ENDED_AESTHETIC_PREFERENCE_OUTSIDE_DECLARED_CONTRACT_IS_NOT_REQUIRED_FOR_THIS_BEHAVIORAL_PROOF"
+  },
+  "candidate": {
+    "implementation": "canonical/runtime/p3_information_safe_candidate_v3.py",
+    "proof_suite": "canonical/runtime/p3_information_safe_proof_suite_v3.py",
+    "dependency_manifest_required": true
+  },
+  "population": {
+    "classes": [
+      "FINITE_EVIDENCE_BUNDLES_WITH_HIDDEN_SUPPORT_GRAPH",
+      "CONFLICTING_EVIDENCE_WITH_MATERIAL_UNCERTAINTY",
+      "REQUIRED_AND_OPTIONAL_CLAIMS_UNDER_LENGTH_BUDGET",
+      "AUDIENCE_PRIORITY_VARIATION",
+      "PUBLIC_RESEARCH_AND_PROFESSIONAL_SOURCE_BUNDLES_WITH_MACHINE_CHECKABLE_FACTS",
+      "FINANCE_PUBLIC_FILINGS_WITH_MACHINE_CHECKABLE_FACTS"
+    ],
+    "selection_rule": "FREEZE_EVIDENCE_BUNDLE_POOL_SUPPORT_GRAPH_GENERATOR_FORMAT_CONSTRAINTS_MUTATIONS_AND_SEED_RULE_BEFORE_TERMINAL_BEACON",
+    "spent_cases_role": "VERIFIER_MUTATION_PREFLIGHT_ONLY__NO_TERMINAL_SCORE"
+  },
+  "evaluator": {
+    "required_checks": [
+      "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "ONE_HUNDRED_PERCENT_REQUIRED_CLAIM_COVERAGE",
+      "NO_DECISION_RELEVANT_EVIDENCE_DROPPED",
+      "CONFLICT_AND_UNCERTAINTY_PRESERVED",
+      "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+      "IRRELEVANT_EVIDENCE_EXCLUDED_WITHOUT_REQUIRED_SUPPORT_LOSS"
+    ],
+    "mutations": [
+      "UNSUPPORTED_CLAIM",
+      "DELETE_REQUIRED_SUPPORT",
+      "COLLAPSE_CONFLICT_TO_SINGLE_ASSERTION",
+      "DROP_MATERIAL_UNCERTAINTY",
+      "ADD_IRRELEVANT_DETAIL_UNDER_BUDGET",
+      "AUDIENCE_FORMAT_MISMATCH"
+    ],
+    "acceptance": "ALL_HIDDEN_SUPPORT_GRAPH_AND_FORMAT_ORACLES_PASS__CRITICAL_MUTATION_KILL_RATE_100_PERCENT"
+  },
+  "terminal_binding": {
+    "portfolios": [
+      "T1",
+      "T3"
+    ],
+    "terminal_evidence_source": "FROZEN_T1_T3_OBSERVATIONS_WITH_DIRECT_P3_INSTRUMENTATION",
+    "any_load_bearing_failure_blocks_behavior_proof": true,
+    "external_opus_comparator_required": false,
+    "reason": "ABSOLUTE_FINITE_SUPPORT_GRAPH_ORACLE_DEFINES_CORRECTNESS_FOR_DECLARED_SYNTHESIS_CONTRACT"
+  },
+  "contamination": {
+    "post_freeze_tuning": false,
+    "case_replacement": false,
+    "evaluator_edit_after_results": false
+  }
 }
