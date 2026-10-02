@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5",
+  "date": "2026-10-02",
+  "status": "EXACT_MINIMUM__CURRENT_FROZEN_V5_RESIDUAL_UNIVERSE__ZERO_FRESH_EVIDENCE_SPENT_BY_COMPUTATION",
+  "source_input": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V5.json",
+  "exact_minimum": true,
+  "unresolved_distinctions": ["M0A", "M1A", "M1B"],
+  "selected_observations": [
+    "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
+    "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
+    "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V2"
+  ],
+  "observation_count": 3,
+  "total_cost": 2.0,
+  "rule": "MINIMUM_COST__THEN_MINIMUM_COUNT__THEN_LEXICOGRAPHIC_ID",
+  "execution_order": {
+    "execute_without_new_terminal_information": [
+      "M0A_CAUSAL_LOCALIZATION_AND_SPECIALIZED_WHITE_BOX_COMPOSITION_ON_FROZEN_DEV_OR_PUBLIC_SPENT_EVIDENCE",
+      "M1A_DETERMINISTIC_PREFIX_AND_BOUNDED_COMPOUND_VISUAL_RESOLUTION_ON_FROZEN_DEV_OR_PUBLIC_SPENT_EVIDENCE",
+      "M1B_KERNEL_GEOMETRY_COVERAGE_AUDIT_USING_VERIFIED_ANALYTIC_AND_SMOOTH_SURFACE_COMPILERS"
+    ],
+    "recompute_after_zero_reality_work": true,
+    "only_if_still_irreducible": [
+      "M0A_MATCHED_SEMANTIC_PARITY_EVALUATION_BATCH",
+      "M1A_MATCHED_DRAWING_PARITY_EVALUATION_BATCH"
+    ]
+  },
+  "m1b_note": "M1B_SELECTED_ACTION_HAS_ZERO_NEW_REALITY_COST__DO_NOT_SPEND_A_FRESH_M1B_BATCH_UNLESS_A_RECOMPUTED_CUT_AFTER_ZERO_REALITY_COVERAGE_AUDIT_EXPLICITLY_REQUIRES_IT",
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
