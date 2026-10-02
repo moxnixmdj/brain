@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__PUBLIC_600_TASK_HARNESS_EVALUATOR_AND_PROVIDER_INDEPENDENT_ROUTE_PREFLIGHT__NO_TERMINAL_TASK_EXECUTION",
+  "upstream": {
+    "repository": "zapier/AutomationBench",
+    "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+    "public_scored_domains": [
+      "sales",
+      "marketing",
+      "operations",
+      "support",
+      "finance",
+      "hr"
+    ],
+    "public_scored_task_count_documented": 600,
+    "official_private_holdout_distinct": true
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 509,
+    "merge_commit": "d22e7a142427bf169111a215975cfa46c1c6a2b0",
+    "workflow_run_id": 36956875776,
+    "job_id": 110681690461
+  },
+  "verified": [
+    "PINNED_PUBLIC_REPOSITORY_INSTALLS_ON_PYTHON_3_13",
+    "REPOSITORY_TEST_SUITE_1398_OF_1398_PASS",
+    "SIX_SCORED_PUBLIC_DOMAIN_TASK_SOURCE_FILES_FROZEN_BY_SHA256",
+    "STRICT_TASK_COMPLETED_CORRECTLY_BINARY_ASSERTION_METRIC_PRESENT",
+    "CLI_SUPPORTS_CUSTOM_BASE_URL_AND_API_KEY_BINDING",
+    "PAID_PROVIDER_RUNTIME_NOT_REQUIRED_BY_CLI_ROUTE"
+  ],
+  "task_source_sha256": {
+    "sales": "393d265026fb69b3254bf6f172e298c79e48444f35fba6cd955e605e224f21ee",
+    "marketing": "9fc7da71b77f8cb3e4a1dc5cfbd33f85e7d88b954b1fb904e1c51e60a52d9a04",
+    "operations": "3c50c69b774a5bee99e1bc4f39dd337302d0ce480906ba8582eb73acd16cb5bc",
+    "support": "a9429e87c1c62878b876bc82ab09739fc482c204d7f37803975aad178084cc06",
+    "finance": "7ce169cc71ee6be1f22cd0c6239cfc4cb9cfa2faa5496b0acf878ecf4fe6d49a",
+    "hr": "c173a36a03f43096bd122577584aa32f9df379d8760aa46c43be04c85d101779"
+  },
+  "scope_boundary": [
+    "PUBLIC_600_TASK_SET_IS_SCOPE_EQUIVALENT_NOT_IDENTICAL_TO_OFFICIAL_PRIVATE_LEADERBOARD_SET",
+    "NO_OFFICIAL_PRIVATE_SCORE_EQUIVALENCE_CLAIM",
+    "TERMINAL_EXECUTION_REQUIRES_PREDECLARED_PUBLIC_SET_ACCEPTANCE_THRESHOLD_AND_BRAIN_ADAPTER_BINDING",
+    "NO_TERMINAL_TASK_CONTENT_OR_RESULTS_OBSERVED_IN_THIS_PREFLIGHT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
