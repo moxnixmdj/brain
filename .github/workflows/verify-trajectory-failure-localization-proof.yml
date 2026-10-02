@@ -1,0 +1,24 @@
+name: Verify trajectory failure-localization proof surface
+
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/trajectory_failure_localization_proof.py
+      - canonical/tests/test_trajectory_failure_localization_proof.py
+      - canonical/governance/TRAJECTORY_FAILURE_LOCALIZATION_PROOF_SURFACE_V1.json
+      - .github/workflows/verify-trajectory-failure-localization-proof.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest -v canonical.tests.test_trajectory_failure_localization_proof
