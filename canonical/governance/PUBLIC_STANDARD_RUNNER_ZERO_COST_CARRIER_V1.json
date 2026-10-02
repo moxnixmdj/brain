@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_PUBLIC_STANDARD_RUNNER_ZERO_COST_CARRIER_V1",
+  "date": "2026-10-02",
+  "status": "VERIFIED_ZERO_INCREMENTAL_SPEND_CARRIER__PUBLIC_STANDARD_GITHUB_HOSTED_RUNNERS__SURFACE_RESOURCE_FIT_STILL_REQUIRED",
+  "objective": "FREEZE_A_REMOTE_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER_FOR_PREWAVE_AND_TERMINAL_ROUTES_THAT_FIT_STANDARD_PUBLIC_RUNNER_RESOURCE_AND_OS_CONSTRAINTS",
+  "carrier": {
+    "provider": "GitHub Actions",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "repository_visibility": "public",
+    "allowed_runner_labels": [
+      "ubuntu-24.04",
+      "windows-2025",
+      "macos-15-intel"
+    ],
+    "default_runner": "ubuntu-24.04",
+    "default_public_linux_resources": {
+      "cpu_cores": 4,
+      "memory_gb": 16,
+      "ssd_gb": 14
+    },
+    "paid_or_larger_runners": "FORBIDDEN",
+    "artifact_storage_policy": "NO_LARGE_DURABLE_ARTIFACTS__DELETE_OR_AVOID_UPLOADS_UNLESS_WITHIN_FREE_INCLUDED_STORAGE"
+  },
+  "billing_authority": [
+    "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "https://docs.github.com/en/billing/concepts/product-billing/github-actions"
+  ],
+  "billing_fact": "STANDARD_GITHUB_HOSTED_RUNNERS_ARE_FREE_FOR_PUBLIC_REPOSITORIES",
+  "observed_execution_receipts": [
+    "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/PREWAVE_CLOSURE_WAVE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "admission_rule": [
+    "SURFACE_MUST_FIT_RUNNER_CPU_MEMORY_DISK_OS_AND_CONTAINER_REQUIREMENTS",
+    "SURFACE_MUST_NOT_REQUIRE_PAID_EXTERNAL_API_OR_PAID_LARGER_RUNNER",
+    "NETWORK_ASSETS_MUST_BE_PUBLIC_OR_ALREADY_ADMISSIBLY_PINNED",
+    "NO_TERMINAL_CASE_EXPOSURE_DURING_PREFLIGHT",
+    "TERMINAL_RUN_MUST_USE_FROZEN_COMMIT_HARNESS_SCORER_ASSET_AND_ADAPTER_HASHES"
+  ],
+  "limitation": "THIS_CARRIER_RECEIPT_PROVES_ZERO_INCREMENTAL_SPEND_AND_BASE_EXECUTION_CAPACITY_ONLY__IT_DOES_NOT_PROVE_ANY_SPECIFIC_BENCHMARK_FITS_OR_PASSES",
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
