@@ -7,7 +7,8 @@ requires:
 3. exact 12-route executor manifest;
 4. current executor + test Git blob identities;
 5. independent public-runner receipt for every current executor blob;
-6. zero terminal results/evidence before launch.
+6. four real independently verified T0/T1/T2/T3 parent-case producers;
+7. zero terminal results/evidence before launch.
 
 This reducer grants no capability or family credit and does not create a beacon.
 """
@@ -23,6 +24,8 @@ from canonical.runtime import terminal_prequalification_reducer as prequal
 SCHEMA = "PROJECT_BRAIN_TERMINAL_WAVE_LAUNCH_AUTHORITY_VERDICT_V1"
 MANIFEST = "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json"
 BASIS = "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
+PARENT_PRODUCERS = "canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json"
+PARENT_PORTFOLIOS = ("T0", "T1", "T2", "T3")
 
 
 def _load(root: Path, rel: str) -> dict[str, Any]:
@@ -50,6 +53,7 @@ def evaluate_documents(
     prequalification: dict[str, Any],
     manifest: dict[str, Any],
     basis: dict[str, Any],
+    parent_producers: dict[str, Any],
     *,
     load_verification: Callable[[str], dict[str, Any]],
     blob_sha: Callable[[str], str | None],
@@ -58,6 +62,87 @@ def evaluate_documents(
 
     if prequalification.get("pass") is not True or prequalification.get("execution_authority") is not True:
         errors.append("PREQUALIFICATION_NOT_AUTHORIZED")
+
+    producer_rows = parent_producers.get("portfolios")
+    if not isinstance(producer_rows, dict):
+        producer_rows = {}
+        errors.append("PARENT_PRODUCER_PORTFOLIOS_INVALID")
+    if set(producer_rows) != set(PARENT_PORTFOLIOS):
+        errors.append("PARENT_PRODUCER_PORTFOLIO_SET_MISMATCH")
+
+    required_semantic_flags = (
+        "real_parent_case_producer",
+        "post_freeze_selection_only",
+        "same_case_instrumentation",
+        "hidden_oracle_isolated",
+        "parent_terminal_acceptance_derived",
+        "direct_instrumentation_verdict_derived",
+        "no_stub_receipts",
+    )
+    for portfolio in PARENT_PORTFOLIOS:
+        row = producer_rows.get(portfolio)
+        if not isinstance(row, dict):
+            errors.append("PARENT_PRODUCER_MISSING:" + portfolio)
+            continue
+        if not _independent_pass_status(row.get("status")):
+            errors.append("PARENT_PRODUCER_STATUS_NOT_CURRENT_INDEPENDENT_PASS:" + portfolio)
+        for flag in required_semantic_flags:
+            if row.get(flag) is not True:
+                errors.append("PARENT_PRODUCER_SEMANTIC_FLAG_MISSING:" + portfolio + ":" + flag)
+
+        producer = row.get("producer")
+        tests = row.get("tests")
+        producer_sha = row.get("producer_blob_sha")
+        test_sha = row.get("test_blob_sha")
+        if not all(isinstance(x, str) and x for x in (producer, tests, producer_sha, test_sha)):
+            errors.append("PARENT_PRODUCER_BINDING_FIELDS_MISSING:" + portfolio)
+            continue
+        if blob_sha(producer) != producer_sha:
+            errors.append("PARENT_PRODUCER_BLOB_DRIFT:" + portfolio)
+        if blob_sha(tests) != test_sha:
+            errors.append("PARENT_PRODUCER_TEST_BLOB_DRIFT:" + portfolio)
+
+        receipt_path = row.get("independent_verification")
+        if not isinstance(receipt_path, str) or not receipt_path:
+            errors.append("PARENT_PRODUCER_INDEPENDENT_RECEIPT_MISSING:" + portfolio)
+            continue
+        try:
+            receipt = load_verification(receipt_path)
+        except Exception:
+            errors.append("PARENT_PRODUCER_INDEPENDENT_RECEIPT_UNREADABLE:" + portfolio)
+            continue
+        if not _independent_pass_status(receipt.get("status")):
+            errors.append("PARENT_PRODUCER_INDEPENDENT_RECEIPT_NOT_PASS:" + portfolio)
+        if receipt.get("terminal_results_observed", 0) != 0:
+            errors.append("PARENT_PRODUCER_RECEIPT_TERMINAL_RESULTS_NONZERO:" + portfolio)
+        if receipt.get("fresh_terminal_evidence_consumed", 0) != 0:
+            errors.append("PARENT_PRODUCER_RECEIPT_FRESH_TERMINAL_EVIDENCE_NONZERO:" + portfolio)
+        exact = receipt.get("exact_brain_blobs")
+        if not isinstance(exact, dict):
+            errors.append("PARENT_PRODUCER_RECEIPT_EXACT_BLOBS_MISSING:" + portfolio)
+        else:
+            if exact.get(producer) != producer_sha:
+                errors.append("PARENT_PRODUCER_RECEIPT_BLOB_NOT_CURRENT:" + portfolio)
+            if exact.get(tests) != test_sha:
+                errors.append("PARENT_PRODUCER_RECEIPT_TEST_BLOB_NOT_CURRENT:" + portfolio)
+        verified = set(receipt.get("verified") or ())
+        needed = {
+            "REAL_PARENT_CASE_PRODUCER",
+            "POST_FREEZE_SELECTION_ONLY",
+            "SAME_CASE_INSTRUMENTATION",
+            "PARENT_TERMINAL_ACCEPTANCE_DERIVED",
+            "DIRECT_INSTRUMENTATION_VERDICT_DERIVED",
+            "NO_STUB_RECEIPTS",
+            "ZERO_TERMINAL_CASES_CONSUMED",
+        }
+        missing_verified = sorted(needed - verified)
+        if missing_verified:
+            errors.append(
+                "PARENT_PRODUCER_RECEIPT_SEMANTICS_INCOMPLETE:"
+                + portfolio
+                + ":"
+                + ",".join(missing_verified)
+            )
 
     routes = manifest.get("routes")
     contracts = basis.get("contracts")
@@ -174,7 +259,7 @@ def evaluate_documents(
         "family_credit_delta": 0,
         "terminal_results_observed": 0,
         "fresh_terminal_evidence_consumed": 0,
-        "rule": "DERIVE_LAUNCH_ONLY_FROM_CURRENT_PREQUALIFICATION_AND_EXACT_CURRENT_INDEPENDENTLY_VERIFIED_EXECUTOR_BINDINGS__WRITABLE_AUTHORITY_FLAGS_ARE_NONAUTHORITATIVE",
+        "rule": "DERIVE_LAUNCH_ONLY_FROM_CURRENT_PREQUALIFICATION__EXACT_CURRENT_INDEPENDENTLY_VERIFIED_EXECUTOR_BINDINGS__AND_FOUR_REAL_INDEPENDENTLY_VERIFIED_PARENT_CASE_PRODUCERS__WRITABLE_AUTHORITY_FLAGS_ARE_NONAUTHORITATIVE",
     }
 
 
@@ -184,6 +269,7 @@ def evaluate(root: Path) -> dict[str, Any]:
         pre = prequal.evaluate(root)
         manifest = _load(root, MANIFEST)
         basis = _load(root, BASIS)
+        parent_producers = _load(root, PARENT_PRODUCERS)
     except Exception as exc:
         return {
             "schema": SCHEMA,
@@ -207,6 +293,7 @@ def evaluate(root: Path) -> dict[str, Any]:
         pre,
         manifest,
         basis,
+        parent_producers,
         load_verification=load_receipt,
         blob_sha=blob,
     )
