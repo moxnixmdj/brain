@@ -56,8 +56,7 @@ def _assert_stdlib_only(rel: str) -> None:
             roots.add(node.module.split(".",1)[0])
     assert roots <= ALLOWED_IMPORT_ROOTS[rel], (rel,sorted(roots))
 
-def _assert_witness(rel: str, family: str, expected_cases: int) -> None:
-    d=_load(rel)
+def _assert_witness_doc(d: dict[str, Any], family: str, expected_cases: int) -> None:
     assert d["family"] == family
     assert d["verified"] is True
     assert d["independent"] is True
@@ -69,6 +68,9 @@ def _assert_witness(rel: str, family: str, expected_cases: int) -> None:
     assert d["result"]["brain_lower_bound"] == 1
     assert d["result"]["theoretical_upper_bound"] == 1
     assert d["promotion_authority"] is False
+
+def _assert_witness(rel: str, family: str, expected_cases: int) -> None:
+    _assert_witness_doc(_load(rel), family, expected_cases)
 
 def _assert_current_prestate() -> None:
     m=_load("canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json")
