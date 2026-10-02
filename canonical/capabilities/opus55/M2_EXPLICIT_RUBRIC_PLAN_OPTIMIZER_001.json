@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_EXPLICIT_RUBRIC_PLAN_OPTIMIZER_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+  "runtime": "canonical/runtime/explicit_rubric_plan_optimizer.py",
+  "tests": "canonical/tests/test_explicit_rubric_plan_optimizer.py",
+  "verification": {
+    "workflow": ".github/workflows/verify-explicit-rubric-plan-optimizer.yml",
+    "workflow_run_id": 36949682251,
+    "conclusion": "success"
+  },
+  "verified_scope": [
+    "EXPLICIT_NONNEGATIVE_RUBRIC_WEIGHTS",
+    "PRE-SCORED_CANDIDATE_PLANS",
+    "HARD_CONSTRAINT_VIOLATION_REJECTION",
+    "EVIDENCE_SUPPORT_GATE",
+    "MAX_WEIGHTED_RUBRIC_SCORE_THEN_MIN_COST",
+    "EXACT_SCORE_COST_TIE_FAILS_CLOSED"
+  ],
+  "remaining": [
+    "SUBJECTIVE_OR_IMPLICIT_RUBRIC_INFERENCE",
+    "CANDIDATE_PLAN_GENERATION",
+    "SEMANTIC_SCORING_OF_PLANS_WHEN_DIMENSION_SCORES_ARE_NOT_EXPLICIT"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
