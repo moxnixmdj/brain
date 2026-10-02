@@ -1,0 +1,116 @@
+name: Verify proof atom receipt index v2
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_receipt_index_v2.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v2.py"
+      - "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V2.json"
+      - "canonical/runtime/canonical_proof_atom_basis_v2.py"
+      - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
+      - ".github/workflows/verify-proof-atom-receipt-index-v2.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Bind exact source revision
+        run: echo "BRAIN_SOURCE_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+      - name: Run proof atom receipt index v2 tests
+        id: tests
+        continue-on-error: true
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v > receipt-index-v2-tests.stdout 2> receipt-index-v2-tests.stderr
+          code=$?
+          echo "$code" > receipt-index-v2-tests.exitcode
+          exit 0
+      - name: Execute current v2-bound 40-atom receipt index
+        id: index
+        continue-on-error: true
+        run: |
+          set +e
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > proof-atom-receipt-index-v2.json 2> receipt-index-v2.stderr
+          code=$?
+          echo "$code" > receipt-index-v2.exitcode
+          if [ "$code" -eq 0 ]; then
+            python - <<'PY' > receipt-index-v2-summary.json 2>> receipt-index-v2.stderr
+          import json
+          p=json.load(open("proof-atom-receipt-index-v2.json"))
+          summary={
+            "status":p.get("status"),
+            "source_revision":p.get("source_revision"),
+            "basis_binding":p.get("basis_binding"),
+            "canonical_atom_count":p.get("canonical_atom_count"),
+            "scanned_file_count":p.get("scanned_file_count"),
+            "scanned_corpus_manifest_sha256":p.get("scanned_corpus_manifest_sha256"),
+            "result_payload_sha256":p.get("result_payload_sha256"),
+            "candidate_match_count":p.get("candidate_match_count"),
+            "atoms_with_candidate_matches":p.get("atoms_with_candidate_matches"),
+            "atoms_without_candidate_matches":p.get("atoms_without_candidate_matches"),
+            "candidate_matches_by_source_class":p.get("candidate_matches_by_source_class"),
+            "zero_reality_semantic_review_queue":p.get("zero_reality_semantic_review_queue"),
+          }
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+          fi
+          exit 0
+      - name: Upload v2 proof atom receipt index diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-diagnostics
+          path: |
+            proof-atom-receipt-index-v2.json
+            receipt-index-v2-summary.json
+            receipt-index-v2.stderr
+            receipt-index-v2.exitcode
+            receipt-index-v2-tests.stdout
+            receipt-index-v2-tests.stderr
+            receipt-index-v2-tests.exitcode
+          if-no-files-found: warn
+      - name: Enforce fail-closed invariants
+        if: always()
+        run: |
+          test "$(cat receipt-index-v2-tests.exitcode)" = "0"
+          test "$(cat receipt-index-v2.exitcode)" = "0"
+          python - <<'PY'
+          import json, subprocess
+          p=json.load(open("proof-atom-receipt-index-v2.json"))
+          assert p["status"].startswith("PASS"), p
+          assert p["canonical_atom_count"] == 40, p
+          assert p["basis_binding"]["schema"] == "PROJECT_BRAIN_CANONICAL_PROOF_ATOM_BASIS_V2", p
+          assert p["basis_binding"]["refined_parent_count"] == 3, p
+          assert p["basis_binding"]["canonical_atom_count"] == 40, p
+          assert all(isinstance(p["basis_binding"][k], str) and len(p["basis_binding"][k]) == 40 for k in (
+              "frontier_git_blob_sha",
+              "refinement_overlay_git_blob_sha",
+              "basis_runtime_git_blob_sha",
+              "index_runtime_git_blob_sha",
+          )), p
+          assert len(p["basis_binding"]["atom_manifest_sha256"]) == 64, p
+          assert len(p["scanned_corpus_manifest_sha256"]) == 64, p
+          assert len(p["result_payload_sha256"]) == 64, p
+          head=subprocess.check_output(["git","rev-parse","HEAD"], text=True).strip()
+          assert p["source_revision"] == head, (p["source_revision"], head)
+          forbidden={
+              "PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+              "CANONICAL_PROOF_ATOM_BASIS_V2_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "GLOBAL_ABDUCTIVE_AND_MULTITARGET_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          }
+          paths={m["path"].split("/")[-1] for a in p["atoms"] for m in a["candidate_matches"]}
+          assert not (paths & forbidden), sorted(paths & forbidden)
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          assert p["execution_authority"] is False
+          assert p["promotion_authority"] is False
+          PY
