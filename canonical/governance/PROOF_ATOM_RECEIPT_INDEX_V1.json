@@ -1,13 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__CONTENT_ADDRESSED_40_ATOM_RECEIPT_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Index existing verification, capability, and governance evidence against the 40 canonical leaf proof atoms using exact literal occurrence and Git blob identity, so semantic review can start from the smallest existing-receipt candidate set without reacquiring reality.",
+  "status": "CANDIDATE__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_RECEIPT_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Index existing verification, capability, and governance evidence against the active canonical V2 40-leaf proof-atom basis using exact literal occurrence and Git blob identity, while preserving PA1 atom identity and consuming only independently verified refinement overlays.",
   "runtime": "canonical/runtime/proof_atom_receipt_index_v1.py",
   "tests": "canonical/tests/test_proof_atom_receipt_index_v1.py",
   "source_basis": {
-    "activation": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V1.json",
-    "expected_canonical_atoms": 40
+    "activation": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json",
+    "runtime": "canonical/runtime/canonical_proof_atom_basis_v2.py",
+    "runtime_git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1",
+    "refinement_overlay": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+    "refinement_overlay_git_blob_sha": "898e450c62c06cf6d1a4a3f826a255da9161a229",
+    "expected_canonical_atoms": 40,
+    "expected_refined_parents": 3,
+    "atom_identity_namespace": "PA1"
   },
   "searched_roots": [
     "canonical/verification",
@@ -15,15 +21,18 @@
     "canonical/governance"
   ],
   "hard_rules": [
+    "ACTIVE_CANONICAL_V2_BASIS_ONLY",
+    "PA1_ATOM_IDS_MUST_REMAIN_SHA256_OF_EXACT_UTF8_PROPOSITION_LITERAL",
+    "ONLY_INDEPENDENTLY_VERIFIED_REFINEMENT_OVERLAY_IS_CONSUMED",
     "EXACT_LITERAL_OCCURRENCE_IS_ONLY_A_CANDIDATE_POINTER",
     "EVERY_MATCH_MUST_BE_CONTENT_ADDRESSED_BY_GIT_BLOB_SHA",
-    "FRONTIER_SCHEDULER_AND_AUTHORITY_RESTATEMENTS_ARE_EXCLUDED_FROM_CANDIDATE_EVIDENCE",
+    "FRONTIER_REFINEMENT_SCHEDULER_AND_AUTHORITY_RESTATEMENTS_ARE_EXCLUDED_FROM_CANDIDATE_EVIDENCE",
     "NO_SEMANTIC_EQUIVALENCE_FROM_NAMES_OR_PROSE",
     "NO_SCOPE_RELATION_METRIC_BOUND_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_INDEX",
     "ZERO_FRESH_REALITY",
-    "RECOMPUTE_WHEN_PROOF_ATOM_BASIS_OR_SCANNED_EVIDENCE_CHANGES"
+    "RECOMPUTE_WHEN_PROOF_ATOM_BASIS_REFINEMENT_OVERLAY_OR_SCANNED_EVIDENCE_CHANGES"
   ],
-  "next": "RUN_INDEX_ON_CURRENT_REPOSITORY__RANK_ATOMS_WITH_EXISTING_CANDIDATE_RECEIPTS_FOR_EXPLICIT_SEMANTIC_PROOF_OR_FALSIFICATION__KEEP_ZERO_MATCH_ATOMS_AS_TRUE_RESIDUAL_SEARCH_TARGETS__NO_FRESH_REALITY",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_INDEXER_BYTES__FREEZE_ONE_CONTENT_ADDRESSED_CURRENT_CORPUS_INDEX_RESULT__REVIEW_ONLY_EXPLICIT_CANDIDATE_RECEIPTS_TO_DISCHARGE_OR_FALSIFY_ACTIVE_V2_ATOMS__RUN_ACCEPTANCE_FIXED_POINT_AFTER_EACH_NEW_VERIFIED_FACT__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
