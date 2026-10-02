@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RESIDUAL_PROOF_COMPILER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_PREPROOF_SCHEDULING_CONTROLLER__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "purpose": "Compile all open terminal obligations into one residual proof graph so externally blocked obligations cannot stall independent internally solvable proof closure, while allowing blocker deduplication only through explicit semantic-equivalence assertions.",
+  "runtime": "canonical/runtime/global_residual_proof_compiler.py",
+  "tests": "canonical/tests/test_global_residual_proof_compiler.py",
+  "base_supercompiler": "canonical/runtime/terminal_proof_supercompiler.py",
+  "laws": [
+    "GLOBALIZE_OPEN_OBLIGATIONS_BEFORE_SCHEDULING",
+    "EXTERNAL_OR_UNPROVEN_RESIDUALS_DO_NOT_STALL_INDEPENDENT_INTERNAL_CLOSURE",
+    "SEMANTIC_BLOCKERS_DEDUPLICATE_ONLY_BY_EXPLICIT_ASSERTED_EQUIVALENCE",
+    "CROSS_RESIDUAL_ROUTE_PROJECTION_FORBIDDEN_UNLESS_EXPLICITLY_MARKED_SAFE",
+    "CLOSE_ONLY_EXACT_INTERNAL_MINIMUM_UNBLOCK_CUT_THEN_RECOMPUTE",
+    "NO_PROXY_SUBSTITUTION_FOR_UNAVAILABLE_EXTERNAL_COMPARATOR",
+    "NO_EXECUTION_PROMOTION_CAPABILITY_OR_FAMILY_AUTHORITY"
+  ],
+  "objective_order": [
+    "CORRECTNESS_AND_FAIL_CLOSED_ADMISSIBILITY",
+    "MAXIMIZE_INTERNALLY_COVERABLE_OPEN_OBLIGATIONS",
+    "MINIMIZE_LONGEST_BLOCKER_DEPENDENCY_DEPTH",
+    "MINIMIZE_PARALLEL_CRITICAL_PATH_WALL_CLOCK",
+    "MINIMIZE_NEW_REALITY_INFORMATION",
+    "MINIMIZE_WEAKEST_SELECTED_PROOF_MODE",
+    "MINIMIZE_UNIQUE_SEMANTIC_BLOCKERS",
+    "MINIMIZE_ROUTE_COUNT"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
