@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_BRAIN_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__6_OF_6_SYNTHETIC_MATERIALITY_TESTS__SOURCE_GATE_V2_ADMISSIBLE__ZERO_BENCHMARK_CASES",
+  "candidate": {
+    "runtime": "canonical/runtime/automationbench_brain_gateway_v1.py",
+    "runtime_git_blob_sha": "04bf6543c3ff1b3ad77acc2423f22fde191a8917",
+    "tests": "canonical/tests/test_automationbench_brain_gateway_v1.py",
+    "tests_git_blob_sha": "40e21379d4554aa9f1288ad1a51e6a3b11bf1463",
+    "configuration": "canonical/capabilities/opus55/AUTOMATIONBENCH_BRAIN_GATEWAY_CONFIGURATION_V1.json",
+    "configuration_git_blob_sha": "70d4e9f07436e0529ccdfee9d8b17b623a437d43",
+    "source_gate_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 836,
+    "merge_commit": "6a4a0b9e33884d14f00a41c39e9bf84190806ead",
+    "workflow_run_id": 36996633313,
+    "workflow_job_id": 110804751011,
+    "conclusion": "success"
+  },
+  "verified": [
+    "VALID_TOOL_CALL_NORMALIZED",
+    "UNKNOWN_TOOL_PROPOSAL_BLOCKED",
+    "EXTRA_ARGUMENT_BLOCKED",
+    "MISSING_REQUIRED_ARGUMENT_BLOCKED",
+    "ENUM_VIOLATION_BLOCKED",
+    "FINISH_WITHOUT_EFFECT_ALLOWED",
+    "CANONICAL_SOURCE_GATE_V2_RETURNS_ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION"
+  ],
+  "source_gate_result": {
+    "pass": true,
+    "clean_case_execution_authority": true,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "configuration_materially_constrains_execution": true,
+    "external_hidden_target_capability_provider": false
+  },
+  "benchmark_cases_read": 0,
+  "benchmark_cases_executed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
