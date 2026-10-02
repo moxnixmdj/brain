@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_COMPRESSION_V1_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_10_BRAIN_BLOBS__12_TESTS_PASS__ZERO_ACCEPTANCE_CASES__ZERO_CREDIT",
+  "source_brain_commit": "1aa15ba944e8b38775d9d3ce3d882e67beee8173",
+  "exact_brain_blobs": {
+    "canonical/runtime/acceptance_bound_compiler_v1.py": "4ef569ab0663c0d4a3b2b91c82a8dfec880eefd0",
+    "canonical/runtime/evaluation_information_firewall_v1.py": "11776f87f41c66802a28a417c344cccb394eb2aa",
+    "canonical/runtime/acceptance_proof_first_frontier_v1.py": "1fe8087bd7874b6a02604971649ed959735009a9",
+    "canonical/tests/test_acceptance_bound_compiler_v1.py": "0f12d9836dbe2445768eb3a4d7f1b48b531f6813",
+    "canonical/tests/test_evaluation_information_firewall_v1.py": "710006e95a7107320945461fd5b8eca1f61c5fe7",
+    "canonical/tests/test_acceptance_proof_first_frontier_v1.py": "035c86759622380c3ba439baa7ec8dfc78f04e43",
+    "canonical/governance/ACCEPTANCE_BOUND_COMPILER_V1.json": "84fa0ea9924a74912664ba6c054e4f351d13cf18",
+    "canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json": "902c19851629bfb2342eea29e73f4a7ab5d212c5",
+    "canonical/governance/PROOF_FIRST_FRONTIER_V1.json": "9f268e9ffc4c870a8016e7870a177c1cfcc2ba4c",
+    "canonical/governance/ACCEPTANCE_BOUND_SCAN_20261002_V1.json": "25dfbc45fe8bad4a4ff773e095aa9173ecb129f5"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 855,
+    "pull_request_head": "7c94e33111fe352689a5e101246c30e6837890a5",
+    "merge_commit": "8f27d7573b3a487ac0107e4d1ea321ce51492a5d",
+    "workflow_run_id": 36998978519,
+    "workflow_job_id": 110812058873,
+    "workflow_name": "Verify Brain proof compression v1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_10_OF_10_MIRRORED_BRAIN_GIT_BLOB_IDENTITIES_MATCH",
+    "GENERAL_CONSERVATIVE_ACCEPTANCE_BOUND_COMPILER_TESTS_PASS",
+    "IRREVERSIBLE_POST_EXPOSURE_INFORMATION_FIREWALL_TESTS_PASS",
+    "BOUNDED_PROOF_FIRST_FRONTIER_TESTS_PASS",
+    "EXACT_12_TESTS_PASS",
+    "ZERO_CAPABILITY_CREDIT_GOVERNANCE_ASSERTED",
+    "ZERO_FAMILY_CREDIT_GOVERNANCE_ASSERTED",
+    "ZERO_INCREMENTAL_SPEND_GOVERNANCE_ASSERTED",
+    "ZERO_ACCEPTANCE_CASE_EXECUTION"
+  ],
+  "repository_ci_note": {
+    "brain_workflow": ".github/workflows/verify-proof-compression-v1.yml",
+    "observed_runs": [
+      36997612214,
+      36998348468,
+      36998434178
+    ],
+    "conclusion": "FAILURE_ON_PRIVATE_BRAIN_CARRIER__NOT_USED_AS_PROMOTION_EVIDENCE",
+    "correction": "INDEPENDENT_PUBLIC_RUNNER_EXACT_BLOB_VERIFICATION_IS_THE_LOAD_BEARING_RECEIPT"
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
