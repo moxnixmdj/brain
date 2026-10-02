@@ -273,5 +273,13 @@
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "envelope_closure": {
+    "status": "ACTIVE_INDEPENDENT_PASS",
+    "policy": "canonical/governance/TERMINAL_COUNTEREXAMPLE_AND_ENVELOPE_COMPILER_V1.json",
+    "verification": "canonical/verification/TERMINAL_COUNTEREXAMPLE_ENVELOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "runtime": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
+    "rule": "PROPAGATE_VERIFIED_ENVELOPES_FAILURES_AND_IMPLICATIONS_BEFORE_SHARED_RESIDUAL_COMPRESSION__ONLY_UNKNOWN_RESIDUAL_BASIS_CAN_ADVANCE_TO_NEW_PROOF_OR_REALITY_QUERY",
+    "terminal_credit_from_compiler_alone": false
+  }
 }
