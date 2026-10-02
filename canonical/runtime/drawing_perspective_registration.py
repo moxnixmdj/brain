@@ -63,7 +63,7 @@ def detect_unique_dominant_quadrilateral(
         raise ValueError("ambiguity_ratio must be in (0,1)")
     mask = normalize_ink_mask(image)
     work = (mask * 255).astype(np.uint8)
-    contours, _ = cv2.findContours(work, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(work, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     h, w = mask.shape
     image_area = float(h * w)
     candidates: list[tuple[float, np.ndarray]] = []
