@@ -1,0 +1,40 @@
+name: Verify P1 V7 failure semantics
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+      - "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py"
+      - "canonical/tests/test_trajectory_failure_typed_ir_v7.py"
+      - "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V7.json"
+      - ".github/workflows/verify-p1-typed-intervention-v7.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run P1 V7 tests
+        run: python -m unittest canonical.tests.test_trajectory_failure_typed_ir_v7 -v
+      - name: Execute 240-case envelope
+        run: |
+          python - <<'PY'
+          from canonical.runtime import trajectory_failure_typed_ir_candidate_v7 as candidate
+          from canonical.runtime import trajectory_failure_typed_ir_proof_v7 as proof
+          cases=proof.suite_cases()
+          assert len(cases)==240
+          failures=[]
+          for case in cases:
+              out=candidate.solve(proof.public_task(case))
+              v=proof.score_case(case,out)
+              if v.get("pass") is not True:
+                  failures.append((case["seed"],v,out))
+          assert failures==[], failures
+          assert sum(c["_oracle"].get("status")=="ESCALATE_DERIVED_ONLY" for c in cases)==48
+          print({"status":"PASS","cases":240,"derived_only":48,"credit_delta":0})
+          PY
