@@ -5,15 +5,15 @@
   "objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_terminal_closure_manifest": {
     "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-    "blob_sha": "b76c08408f010918622e5b862d0679ee50d7ce82"
+    "blob_sha": "e47758f36de75ef8a979813c63503193d4449633"
   },
   "source_ownership_matrix": {
     "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-    "blob_sha": "998b6b69b55285b30776557bc3db66add0bb0df8",
-    "evaluated_utc": "2026-09-30"
+    "blob_sha": "ea4aec645fc84b2ae4745763c13b65fb1d064f4f",
+    "evaluated_utc": "2026-10-02"
   },
   "source_terminal_behavior_receipt": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
-  "postwave_reducer": "canonical/runtime/postwave_global_ownership_reducer_v1.py",
+  "postwave_reducer": "SUPERSEDED_FOR_FINAL_OWNERSHIP_CREDIT_BY_canonical/runtime/opus55_acceptance_calibration_reducer_v1.py",
   "family_state": {
     "behavioral_pass_count": 19,
     "verified_owned_count": 2,
