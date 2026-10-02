@@ -12,7 +12,7 @@ from typing import Any
 SCHEMA="BRAIN_EXPLICIT_DEFINITION_REFERENCE_GRAPH_V1"
 
 _DEF_PATTERNS=[
-    re.compile(r"^\s*(?:for purposes of this [^,]+,\s*)?["']?([A-Za-z][A-Za-z0-9 _-]{0,80}?)["']?\s+(?:means|refers to|is defined as)\s+(.+?)\s*$",re.I),
+    re.compile(r"""^\\s*(?:for purposes of this [^,]+,\\s*)?["\']?([A-Za-z][A-Za-z0-9 _-]{0,80}?)["\']?\\s+(?:means|refers to|is defined as)\\s+(.+?)\\s*$""",re.I),
 ]
 
 def _sentences(text:str)->list[str]:
