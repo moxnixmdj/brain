@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_ACTIVE_CONTRACT_SCOPE_CLOSURE_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_CONTRACT_MECHANISM_SCOPE_CLOSED__INDEPENDENT_INFORMATION_SAFE_PREFLIGHT_PASS__SCOPE_GATE_AND_POST_FREEZE_TERMINAL_RESULT_PENDING__ZERO_FAMILY_CREDIT",
+  "status": "ACTIVE_CONTRACT_MECHANISM_SCOPE_CLOSED__CANONICAL_SCOPE_GATE_V2_INDEPENDENT_PASS__POST_FREEZE_TERMINAL_RESULT_PENDING__ZERO_FAMILY_CREDIT",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "authority": [
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
@@ -72,8 +72,10 @@
       "ENTITY_AGGREGATION",
       "CREDIT_ADDON"
     ],
-    "scope_equivalent_proof_gate_v2_pass": false,
-    "terminal_result_observed": false
+    "scope_equivalent_proof_gate_v2_pass": true,
+    "terminal_result_observed": false,
+    "scope_gate_input": "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+    "scope_gate_verification": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CANONICAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "reopen_conditions": [
     "ACTIVE_CONTRACT_REGISTRY_ADDS_OPTION_OR_TRANCHE_INPUTS_OR_OUTPUTS",
