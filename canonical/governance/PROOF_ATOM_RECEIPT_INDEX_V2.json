@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2",
   "date": "2026-10-02",
-  "status": "CANDIDATE__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Index existing evidence against the active V2 40-atom basis while preserving PA1 content addresses and target-specific refinement associations.",
+  "status": "CANDIDATE__V2_REFINEMENT_AWARE_40_ATOM_INDEX__FULL_INPUT_FINGERPRINT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Index existing evidence against the active V2 40-atom basis while preserving PA1 content addresses and target-specific refinement associations, and fingerprint the entire scanned corpus plus basis so one exact zero-reality scan can be frozen and replayed.",
   "runtime": "canonical/runtime/proof_atom_receipt_index_v2.py",
   "tests": "canonical/tests/test_proof_atom_receipt_index_v2.py",
   "source_basis": {
@@ -16,17 +16,29 @@
     "canonical/capabilities",
     "canonical/governance"
   ],
+  "new_compaction": {
+    "basis_atom_manifest_sha256": "COMPUTED_AT_RUNTIME",
+    "scanned_corpus_manifest_sha256": "COMPUTED_AT_RUNTIME",
+    "index_input_fingerprint_sha256": "SHA256_OF_EXACT_BASIS_CORPUS_AND_SCAN_POLICY",
+    "match_kind_classes": [
+      "EXACT_SYMBOL_LITERAL",
+      "EMBEDDED_LITERAL"
+    ],
+    "purpose": "Make the current zero-reality evidence scan a content-addressable proof input rather than an ephemeral workflow observation."
+  },
   "hard_rules": [
-    "EXACT_LITERAL_OCCURRENCE_IS_ONLY_A_CANDIDATE_POINTER",
+    "LITERAL_OCCURRENCE_IS_ONLY_A_CANDIDATE_POINTER",
+    "EXACT_SYMBOL_OCCURRENCE_AND_EMBEDDED_OCCURRENCE_MUST_NOT_BE_CONFLATED",
     "EVERY_MATCH_CONTENT_ADDRESSED_BY_GIT_BLOB_SHA",
-    "SCHEDULER_FRONTIER_REFINEMENT_AND_AUTHORITY_RESTATEMENTS_EXCLUDED",
+    "FULL_SCANNED_CORPUS_AND_ATOM_BASIS_MUST_BE_FINGERPRINTED",
+    "SCHEDULER_FRONTIER_REFINEMENT_AUTHORITY_AND_INDEX_RESTATEMENTS_EXCLUDED",
     "PRESERVE_PA1_ATOM_IDS",
     "NO_SEMANTIC_EQUIVALENCE_FROM_NAMES_OR_PROSE",
     "NO_SCOPE_RELATION_METRIC_BOUND_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_INDEX",
     "ZERO_FRESH_REALITY",
-    "RECOMPUTE_WHEN_V2_BASIS_REFINEMENT_OVERLAY_OR_SCANNED_EVIDENCE_CHANGES"
+    "RECOMPUTE_WHEN_V2_BASIS_REFINEMENT_OVERLAY_SCAN_POLICY_OR_SCANNED_EVIDENCE_CHANGES"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_INDEXER_BYTES__THEN_FREEZE_ONE_EXACT_REPOSITORY_SCAN_RESULT_AND_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES__NO_FRESH_REALITY",
+  "next": "RUN_EXACT_BRANCH_SCAN_AND_FREEZE_INDEX_INPUT_FINGERPRINT_PLUS_RESULT_DIGEST__INDEPENDENTLY_VERIFY_EXACT_V2_INDEXER_BYTES__THEN_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES_IN_PRIORITY_ORDER__RUN_ACCEPTANCE_FIXED_POINT_AFTER_ANY_EXPLICIT_DISCHARGE_OR_FALSIFICATION__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
