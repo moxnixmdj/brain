@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_M4_BOUNDED_RESEARCH_FRONTIER_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_NORMALIZED_GAP_QUERY_AND_EXPLICIT_SOURCE_FRONTIER_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+  "implementation": "canonical/runtime/bounded_research_frontier.py",
+  "implementation_blob_sha": "116c897a6c5f6460792e386dd60db62fe43758d3",
+  "tests": "canonical/tests/test_bounded_research_frontier.py",
+  "tests_blob_sha": "de3161b18057815ebb7ced275bbc8dc4cde701f0",
+  "independent_verification": {
+    "workflow_run_id": 36949630214,
+    "conclusion": "success",
+    "verified_commit": "c48c0d8bc9311df8cd94741368579f94c7e0b1b0"
+  },
+  "owned_scope": [
+    "NORMALIZED_EXPLICIT_EVIDENCE_GAP_TO_DETERMINISTIC_SEARCH_QUERY_SET",
+    "VERIFIED_EXPLICIT_SOURCE_METADATA_TO_PARETO_NONDOMINATED_SOURCE_FRONTIER",
+    "UNIQUE_PARETO_DOMINANT_SOURCE_SELECTION_WHEN_JUSTIFIED"
+  ],
+  "exclusions": [
+    "NO_OPEN_DOMAIN_SEMANTIC_QUERY_GENERATION_FROM_RAW_AMBIGUOUS_OBJECTIVES",
+    "NO_SOURCE_TRUTH_OR_AUTHORITY_INFERENCE_BEYOND_EXPLICIT_METADATA",
+    "NO_IMPLICIT_REQUIREMENT_SUFFICIENCY_JUDGMENT"
+  ],
+  "donor_runtime_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "family_credit_delta": 0
+}
