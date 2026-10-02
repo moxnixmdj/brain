@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_GATE_TYPE_CORRECTION_V2",
+  "date": "2026-10-02",
+  "status": "DEDUCTIVE_TYPE_CORRECTION__TERMINAL_AUDITS_ARE_PROOF_OBLIGATIONS_NOT_INDEPENDENT_MECHANISMS__ZERO_CAPABILITY_CREDIT",
+  "corrected_gates": [
+    {
+      "id": "G_DONOR_DEPENDENCE_ZERO",
+      "from": "?M",
+      "to": "?P"
+    },
+    {
+      "id": "G_UNEXPLAINED_BEHAVIOR_ZERO",
+      "from": "?M",
+      "to": "?P"
+    },
+    {
+      "id": "G_COMPOSITION_FAILURES_ZERO",
+      "from": "?M",
+      "to": "?P"
+    }
+  ],
+  "rationale": [
+    "THESE_GATES_AUDIT_END_STATE_PROPERTIES_RATHER_THAN_SUPPLYING_OPERATIVE_CAPABILITY",
+    "A_FAILURE_MUST_LOCALIZE_OR_REOPEN_AN_UNDERLYING_BEHAVIOR_OR_MECHANISM_LEAF",
+    "COUNTING_THE_AUDIT_ITSELF_AS_A_MECHANISM_DOUBLE_COUNTS_THE_CAUSAL_GAP"
+  ],
+  "invariant": "RECLASSIFICATION_DOES_NOT_CLOSE_ANY_GATE_OR_GRANT_CAPABILITY_CREDIT",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
