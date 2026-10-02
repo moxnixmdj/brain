@@ -35,6 +35,15 @@ def good_parent_rows(portfolio, *, commitment=COMMITMENT, beacon=BEACON, direct_
         )
     return rows
 
+def good_saccr_result():
+    return {
+        "status": "PASS",
+        "all_pass": True,
+        "case_count": 2000,
+        "terminal_authority": True,
+        "fresh_terminal_evidence_consumed": 2000,
+    }
+
 
 class TerminalParentPortfolioLauncherTests(unittest.TestCase):
     def test_static_route_algebra_is_exact_twelve(self):
@@ -63,12 +72,17 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
             return good_parent_rows(portfolio, **kwargs)
 
         def direct_runner(behavior_id, **kwargs):
+            self.assertNotEqual(behavior_id, launcher.SA_CCR_ID)
             direct_calls[behavior_id] += 1
             return {
                 "behavior_id": behavior_id,
                 "pass": True,
                 "terminal_result": True,
             }
+
+        def saccr_runner(**kwargs):
+            direct_calls[launcher.SA_CCR_ID] += 1
+            return good_saccr_result()
 
         def cad_runner(**kwargs):
             direct_calls[launcher.CAD_ID] += 1
@@ -88,6 +102,7 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
                 beacon=BEACON,
                 parent_runner=parent_runner,
                 direct_runner=direct_runner,
+                saccr_runner=saccr_runner,
                 cad_runner=cad_runner,
             )
         self.assertTrue(out["pass"], out)
@@ -100,8 +115,13 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
         direct_calls = Counter()
 
         def direct_runner(behavior_id, **kwargs):
+            self.assertNotEqual(behavior_id, launcher.SA_CCR_ID)
             direct_calls[behavior_id] += 1
             return {"behavior_id": behavior_id, "pass": True, "terminal_result": True}
+
+        def saccr_runner(**kwargs):
+            direct_calls[launcher.SA_CCR_ID] += 1
+            return good_saccr_result()
 
         def cad_runner(**kwargs):
             direct_calls[launcher.CAD_ID] += 1
@@ -118,6 +138,7 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
                 commitment=COMMITMENT,
                 beacon=BEACON,
                 direct_runner=direct_runner,
+                saccr_runner=saccr_runner,
                 cad_runner=cad_runner,
             )
         self.assertTrue(out["pass"], out)
@@ -208,6 +229,9 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
                 "terminal_result": True,
             }
 
+        def saccr_runner(**kwargs):
+            return good_saccr_result()
+
         with patch.object(
             launcher.launch_authority,
             "evaluate",
@@ -218,10 +242,43 @@ class TerminalParentPortfolioLauncherTests(unittest.TestCase):
                 beacon=BEACON,
                 parent_runner=parent_runner,
                 direct_runner=direct_runner,
+                saccr_runner=saccr_runner,
                 cad_runner=cad_runner,
             )
         self.assertFalse(out["pass"])
         self.assertEqual(out["direct_failures"], [launcher.direct.BROWSER_ID])
+
+
+    def test_saccr_route_specific_executor_is_normalized_into_direct_result(self):
+        def direct_runner(behavior_id, **kwargs):
+            self.assertNotEqual(behavior_id, launcher.SA_CCR_ID)
+            return {"behavior_id": behavior_id, "pass": True, "terminal_result": True}
+
+        def saccr_runner(**kwargs):
+            self.assertEqual(kwargs["candidate_package_commitment"], COMMITMENT)
+            self.assertEqual(kwargs["post_freeze_beacon"], BEACON)
+            return good_saccr_result()
+
+        def cad_runner(**kwargs):
+            return {"behavior_id": launcher.CAD_ID, "pass": True, "terminal_result": True}
+
+        def parent_runner(portfolio, **kwargs):
+            return good_parent_rows(portfolio, **kwargs)
+
+        with patch.object(launcher.launch_authority, "evaluate", return_value={"launch_authority": True}):
+            out = launcher.execute_wave(
+                commitment=COMMITMENT,
+                beacon=BEACON,
+                parent_runner=parent_runner,
+                direct_runner=direct_runner,
+                saccr_runner=saccr_runner,
+                cad_runner=cad_runner,
+            )
+        self.assertTrue(out["pass"], out)
+        row = out["direct_results"][launcher.SA_CCR_ID]
+        self.assertTrue(row["pass"])
+        self.assertTrue(row["terminal_result"])
+        self.assertEqual(row["case_count"], 2000)
 
 
 if __name__ == "__main__":
