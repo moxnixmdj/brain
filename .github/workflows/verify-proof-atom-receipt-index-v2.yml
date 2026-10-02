@@ -21,3 +21,31 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Execute exact V2 corpus scan
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > proof-atom-receipt-index-v2.json
+          python - <<'PY'
+          import json
+          p=json.load(open("proof-atom-receipt-index-v2.json",encoding="utf-8"))
+          assert p["status"].startswith("PASS")
+          assert p["canonical_atom_count"] == 40
+          assert len(p["scanned_corpus_manifest_sha256"]) == 64
+          assert p["scanned_corpus_manifest_entry_count"] == p["scanned_file_count"]
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          assert p["execution_authority"] is False
+          assert p["promotion_authority"] is False
+          print(json.dumps({
+              "canonical_atom_count":p["canonical_atom_count"],
+              "scanned_file_count":p["scanned_file_count"],
+              "scanned_corpus_manifest_sha256":p["scanned_corpus_manifest_sha256"],
+              "candidate_match_count":p["candidate_match_count"],
+              "atoms_with_candidate_matches":p["atoms_with_candidate_matches"],
+              "atoms_without_candidate_matches":p["atoms_without_candidate_matches"],
+          },indent=2,sort_keys=True))
+          PY
+      - name: Upload exact V2 corpus scan
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2
+          path: proof-atom-receipt-index-v2.json
