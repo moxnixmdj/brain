@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_INDEPENDENT_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_EXTERNAL_RECOMPUTATION_PASS__EXACT_SNAPSHOT_TREE_11_OF_11_AND_PACKAGE_COMMITMENT_MATCH__ZERO_TERMINAL_RESULTS",
+  "capsule": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3.json",
+  "capsule_blob_sha": "05f6c86297a593658aefc84a0905079d0138c129",
+  "execution_snapshot": {
+    "repository": "moxnixmdj/brain",
+    "commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "git_tree_sha": "69118f357aebc9fab37282bfad4ed49a64ff1dc8",
+    "recursive_tree_truncated": false,
+    "asserted_blob_count": 11,
+    "matched_blob_count": 11
+  },
+  "snapshot_blob_verification": {
+    "method": "GITHUB_GIT_COMMIT_TO_RECURSIVE_TREE_PATH_BLOB_IDENTITY_CHECK",
+    "all_match": true,
+    "mismatches": []
+  },
+  "commitment_verification": {
+    "method": "INDEPENDENT_PYTHON_STDLIB_JSON_CANONICALIZATION_AND_HASHLIB_SHA256_RECOMPUTATION",
+    "canonical_json": "UTF8_JSON_SORT_KEYS_TRUE_SEPARATORS_COMMA_COLON",
+    "component_matches": {
+      "candidate_blob_manifest": true,
+      "evaluator_oracle_manifest": true,
+      "population_manifest": true,
+      "dependency_manifest": true,
+      "acceptance_rule_manifest": true
+    },
+    "recomputed_component_sha256": {
+      "candidate_blob_manifest": "7b89a0a58f0404bb7e762c8d298bcd9fc029dbef17e272ff9c932cd0405f5709",
+      "evaluator_oracle_manifest": "82960535bfd00564f3eae124675dcd360655c5e7f6de3973a602be5e99a53aa3",
+      "population_manifest": "80976ae30ebdbd9d1821ff89f79113fdf93d21d7c5ff3bc0a40b0bacc5df3653",
+      "dependency_manifest": "083031e97bc8c7c6b2c612e1f7b8e077ad9d18adae3a3437c73f394c62aef4aa",
+      "acceptance_rule_manifest": "c32d58cf255a66feb48073af4b83e4a4e8fd5e5dbf24c53926c4c6be1472daca"
+    },
+    "expected_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "recomputed_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "package_commitment_match": true
+  },
+  "prebeacon_invariants": {
+    "terminal_results_observed": 0,
+    "fresh_terminal_evidence_consumed": 0,
+    "post_freeze_beacon_constructed": false,
+    "candidate_mutation_after_freeze": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "incremental_spend_usd": 0
+  },
+  "ruling": "CAPSULE_V3_IS_INDEPENDENTLY_VERIFIED_FOR_POST_FREEZE_BEACON_CREATION__THIS_GRANTS_NO_CAPABILITY_OR_FAMILY_CREDIT_AND_DOES_NOT_EXECUTE_TERMINAL_CASES",
+  "verified_for_beacon": true,
+  "execution_authority_delta": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
