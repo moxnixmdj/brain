@@ -101,7 +101,7 @@ class P1ScopeRestorationProjectionV3Tests(unittest.TestCase):
     def test_synthesis_exhausted_action_is_not_scheduled(self):
         authority = load("authority")
         exhaustion = load("synthesis_exhaustion")
-        self.assertFalse(exhaustion["zero_reality_discharge_available"])
+        self.assertFalse(exhaustion["current_zero_reality_discharge_available"])
         frontier = authority["compiled_next_frontier"]
         self.assertNotEqual(frontier["primary_action_id"], "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA")
         self.assertNotIn("DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA", frontier["available_zero_reality_critical_actions"])
