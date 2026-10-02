@@ -1,0 +1,150 @@
+{
+  "schema": "PROJECT_BRAIN_RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+  "proof_mode": "T3_MULTIPLEXED_DIRECT_OBJECTIVE_RESEARCH_CONTROL_GATE",
+  "purpose": "PROVE_RESEARCH_LOOP_CONTROL_DIRECTLY_WITH_HIDDEN_REQUIREMENT_SOURCE_AND_STOP_ORACLES__DELETE_HLE_CANONICAL_CONTENT_ACCESS_AS_A_REQUIRED_PROOF_DEPENDENCY_FOR_THIS_BEHAVIOR_ONLY_AFTER_INDEPENDENT_PREWAVE_VERIFICATION",
+  "parent_portfolio": "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO",
+  "authorities": [
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
+    "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "exact_bound_blobs": {
+    "candidate": {
+      "path": "canonical/runtime/research_control_information_safe_candidate.py",
+      "blob_sha": "cd6bf6e4163bbba64878b856766b1af4372d68bc"
+    },
+    "evaluator": {
+      "path": "canonical/runtime/research_control_information_safe_proof.py",
+      "blob_sha": "16c47efee0e0e38f479163d1285d7079798efdaf"
+    },
+    "tests": {
+      "path": "canonical/tests/test_research_control_information_safe.py",
+      "blob_sha": "ab540c8bb91bd9e7fb024f7d94d13253a7fc3d05"
+    },
+    "preflight_receipt": {
+      "path": "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "blob_sha": "860cd929e3b7fdab6befec5bf052479dc4ae41ac"
+    },
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "blob_sha": "afa00109031d638fef32cc3fe10be18786605c39"
+    }
+  },
+  "source_pool": {
+    "version": "RESEARCH_T3_OBJECTIVE_POOL_V1",
+    "terminal_sample_count": 600,
+    "domain_cycle": [
+      "biology",
+      "finance",
+      "systems",
+      "law",
+      "energy",
+      "materials"
+    ],
+    "requirement_count_cycle": [
+      3,
+      4,
+      5
+    ],
+    "class_coverage_rule": "600_SLOTS_EQUALS_100_COMPLETE_SIX_DOMAIN_CYCLES__REQUIREMENT_COUNTS_3_4_5_REPEAT_DETERMINISTICALLY__NO_DOMAIN_OR_REQUIREMENT_COUNT_CLASS_MAY_BE_DROPPED_OR_REPLACED",
+    "case_generation_rule": "CASE_DOMAIN_AND_REQUIREMENT_COUNT_ARE_SLOT_DETERMINISTIC__CASE_SEED_DERIVED_ONLY_FROM_FROZEN_COMMITMENT_POST_FREEZE_BEACON_AND_SLOT_ID",
+    "fresh_terminal_rule": "NO_TERMINAL_CASE_SEED_OR_SOURCE_SUPPORT_ASSIGNMENT_IS_MATERIALIZED_BEFORE_PREWAVE_ADMISSION",
+    "terminal_scope_claim": "DIRECT_OBJECTIVE_TEST_OF_RESEARCH_LOOP_CONTROL_GIVEN_DECLARED_OBJECTIVE_REQUIREMENT_GRAPH_SOURCE_METADATA_EARNED_SEARCH_FETCH_RECEIPTS_AND_BUDGET__NOT_A_CLAIM_THAT_THIS SINGLE CONTRACT_OWNS_UPSTREAM_REQUIREMENT_EXTRACTION_SYNTHESIS_OR_TOOL_DISCOVERY"
+  },
+  "selector": {
+    "beacon_known_before_freeze": false,
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "result_to_runtime_feedback": false
+  },
+  "objective_dimensions": [
+    "UNRESOLVED_REQUIREMENT_TARGETING",
+    "SOURCE_AUTHORITY_PRIORITIZATION",
+    "INFORMATION_GAIN_OR_NEW_REQUIREMENT_COVERAGE",
+    "PROVENANCE_PRESERVATION",
+    "REDUNDANT_RETRIEVAL_BOUND",
+    "MATERIAL_SOURCE_COVERAGE",
+    "SUFFICIENCY_AND_STOP_CALIBRATION",
+    "TERMINAL_CORRECTNESS_AND_COVERAGE"
+  ],
+  "information_boundary": {
+    "candidate_visible": [
+      "RESEARCH_OBJECTIVE",
+      "NORMALIZED_MATERIAL_REQUIREMENT_GRAPH",
+      "PUBLIC_SOURCE_METADATA",
+      "EARNED_SEARCH_RESULTS",
+      "EARNED_FETCH_RECEIPTS",
+      "PRIOR_ACTION_OBSERVATION_HISTORY",
+      "FROZEN_RESOURCE_BUDGET"
+    ],
+    "hidden_from_candidate": [
+      "HIDDEN_SOURCE_SUPPORT_TRUTH_BEFORE_FETCH",
+      "REFERENCE_IDEAL_ACTION_SEQUENCE",
+      "POST_FREEZE_BEACON_BEFORE_FREEZE",
+      "TERMINAL_ACCEPTANCE_RESULT",
+      "MUTATION_IDENTITY"
+    ],
+    "candidate_receives_hidden_oracle": false
+  },
+  "acceptance": {
+    "every_selected_case_must_pass": true,
+    "every_domain_class_must_be_present": true,
+    "requirement_count_classes_required": [
+      3,
+      4,
+      5
+    ],
+    "direct_checks": [
+      "QUERY_TARGETS_CURRENT_UNRESOLVED_MATERIAL_REQUIREMENT",
+      "SOURCE_SELECTION_RESPECTS_MINIMUM_AUTHORITY_AND_FROZEN_COST_TIEBREAK",
+      "FAILED_HIGH_AUTHORITY_FETCH_RECOVERS_WITHOUT_REDUNDANT_SEARCH",
+      "EVIDENCE_RECEIPTS_PRESERVE_PROVENANCE",
+      "REDUNDANT_REFETCH_REJECTED",
+      "PREMATURE_STOP_REJECTED",
+      "STOP_ONLY_AFTER_ALL_MATERIAL_REQUIREMENTS_HAVE_AUTHORITATIVE_SUPPORT",
+      "ACTION_BUDGET_RESPECTED"
+    ],
+    "required_negative_controls": [
+      "PREMATURE_STOP",
+      "IRRELEVANT_QUERY_DRIFT",
+      "REDUNDANT_REFETCH",
+      "FETCH_WITHOUT_CURRENT_SEARCH_HIT",
+      "SEARCH_ALREADY_RESOLVED_REQUIREMENT"
+    ],
+    "family_credit_source": "GLOBAL_TERMINAL_12_CONTRACT_ACCEPTANCE__NOT_THIS_PREWAVE_BINDING"
+  },
+  "contract_boundary": {
+    "upstream_requirement_extraction_owned_here": false,
+    "evidence_to_audience_synthesis_owned_here": false,
+    "tool_route_discovery_owned_here": false,
+    "loop_control_owned_here": true,
+    "rule": "DO_NOT_INHERIT_ADJACENT_CONTRACT_CREDIT__THIS_ROUTE_PROVES_ONLY_ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
+  },
+  "weaker_dependency_reconciliation": {
+    "dependency": "HLE_CANONICAL_CONTENT_ACCESS_AT_ZERO_INCREMENTAL_SPEND",
+    "required_for_this_behavioral_prewave": false,
+    "deletion_authorized_before_independent_binding_verification": false,
+    "reason": "HLE_IS_A_REFERENCE_PUBLIC_BAR_FOR_BROADER_T3_PORTFOLIO__THE_RESEARCH_CONTROL_BEHAVIOR_HAS_A_STRONGER_DIRECT_HIDDEN_ORACLE_ACCEPTANCE_ROUTE"
+  },
+  "route_gates": {
+    "candidate_package_frozen": true,
+    "executable_evaluator_bound": true,
+    "population_or_source_pool_frozen": true,
+    "information_boundary_frozen": true,
+    "post_freeze_selector_frozen": true,
+    "terminal_parent_binding_frozen": true,
+    "independent_verification_pass": false
+  },
+  "prewave_admissible": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
