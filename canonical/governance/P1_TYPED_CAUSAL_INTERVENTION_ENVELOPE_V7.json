@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V7",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__FAILURE_SEMANTICS_LOAD_BEARING__SERIAL_COFAULT_HARDENED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Repair the V6 serial direct-cofault counterexample by making DIRECT_CONTRACT versus DERIVED_UPSTREAM semantics load-bearing in diagnosis and requiring every direct defect on the terminal causal slice to participate in the repair set.",
+  "supersedes_candidate": "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V6.json",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v7.py",
+  "targeted_residuals": [
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+  ],
+  "inherited_hardening": [
+    "FAILED_CAUSAL_CHECK_REQUIRES_NONEMPTY_VISIBLE_SUPPORTING_RECEIPTS",
+    "EXTRA_UNBOUND_DIAGNOSIS_FIELDS_ARE_REJECTED"
+  ],
+  "forward_causal_hardening": [
+    "SCOPE_IS_FIRST_CLASS_NOT_ALIAS_OF_AUTHORITY",
+    "REPAIR_LABEL_MEMBERSHIP_IS_NOT_RESCUE_EVIDENCE",
+    "INTERVENTION_EXECUTOR_CONSUMES_ONLY_CANDIDATE_VISIBLE_TRAJECTORY_DEPENDENCY_AND_FAILURE_SEMANTICS",
+    "DIRECT_ROOT_FAILURES_CLEAR_ONLY_WHEN_THE_MATCHING_REPAIR_IS_ACTUALLY_APPLIED",
+    "DERIVED_DOWNSTREAM_FAILURES_ARE_RECOMPUTED_FROM_UNREPAIRED_UPSTREAM_DIRECT_FAILURES",
+    "CONJUNCTIVE_INTERACTION_REQUIRES_ALL_CAUSAL_ROOT_REPAIRS",
+    "SYMPTOM_ONLY_REPAIR_CANNOT_CLEAR_AN_UNREPAIRED_ROOT",
+    "AMBIGUOUS_CASES_ABSTAIN_AND_CANNOT_CLAIM_RESCUE",
+    "HIDDEN_ORACLE_NEVER_ENTERS_CANDIDATE_PAYLOAD",
+    "FAILURE_SEMANTICS_FIELD_IS_LOAD_BEARING_IN_CAUSE_SELECTION",
+    "SERIAL_DIRECT_COFAULTS_REMAIN_JOINT_REPAIR_OBLIGATIONS",
+    "FAILED_ANCESTRY_ALONE_CANNOT_DOWNGRADE_A_DIRECT_CONTRACT_DEFECT_TO_A_SYMPTOM",
+    "FAILED_CHECK_REQUIRES_EXPLICIT_FAILURE_SEMANTICS__NO_DIRECT_DEFAULT"
+  ],
+  "envelope": {
+    "domains": 6,
+    "mechanism_classes": 8,
+    "causal_patterns": 5,
+    "cross_product_cases": 240,
+    "nonambiguous_forward_rescue_cases": 192,
+    "ambiguous_abstention_cases": 48,
+    "serial_direct_cofault_cases": 48
+  },
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V7_BLOBS__THEN_PROVE_OR_FALSIFY_EXACT_OR_SUPERSET_RELATION_TO_EACH_OF_THE_THREE_FROZEN_P1_DIRECT_SURFACES__ZERO_TERMINAL_CREDIT_UNTIL_TRANSPORT_AND_COMPOSITE_RECONCILIATION",
+  "known_v6_counterexample": {
+    "public_audit_pr": "moxnixmdj/verification-capsule-runner#1070",
+    "exact_v6_candidate_blob": "18d4de68ee8352410e986c318868642333ec085a",
+    "exact_v6_proof_blob": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "counterexample": "TWO_SERIAL_DIRECT_CONTRACT_FAILURES_PLUS_DERIVED_SYMPTOM__V6_DROPS_DOWNSTREAM_DIRECT_DEFECT_BY_ANCESTRY__ITS_NOMINATED_REPAIR_DOES_NOT_RESCUE"
+  }
+}
