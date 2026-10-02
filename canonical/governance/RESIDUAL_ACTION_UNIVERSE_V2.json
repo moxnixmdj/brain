@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "ZERO_REALITY_SATURATED__M0A_M1A_M1B_ALL_PROOF_ONLY__READY_TO_FREEZE_V6",
+  "status": "PROOF_ONLY_INNER_UNIVERSE__M0A_M1A_M1B_COMPLETE_BUNDLES__OUTER_FOUR_PORTFOLIO_CUT_IS_LIVE",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -291,7 +291,7 @@
     "M1A",
     "M1B"
   ],
-  "next": "FINISH_FROZEN_M0A_LOWRANK_CAUSAL_DIAGNOSTIC__COMPOSE_VERIFIED_BRAIN_OWNED_CONTEXTUAL_REFERENCE_AND_DISCOURSE_SLICES__IF_NO_SMALL_CAUSALLY_SUFFICIENT_RESIDUAL_EXISTS_MOVE_M0A_TO_PROOF_ONLY__THEN_FREEZE_V6_AND_RECOMPUTE_EXACT_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+  "next": "NO_FURTHER_INNER_M0A_M1A_M1B_ZERO_REALITY_MECHANISM_SEARCH__FOLLOW_OUTER_SHARED_S0_G0_FRONTIER__NO_FRESH_TERMINAL_EVIDENCE_UNTIL_OUTER_EXECUTION_BLOCKERS_CLOSE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -301,7 +301,9 @@
     "new_reality_units_consumed": 0,
     "note": "M0A zero-reality search saturated: deterministic contextual/operator/predicate-argument slices verified; FastCoref partial; RST/DPLP/AllenNLP routes non-dominating fallbacks; OLMo contiguous and low-rank causal harvests found no small material capsule. M0A, M1A and M1B are now proof-only.",
     "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json",
-    "m0a_lowrank_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json"
+    "m0a_lowrank_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json",
+    "inner_frontier_retirement": "M0A_M1A_M1B_HAVE_COMPLETE_ACTION_BUNDLES_AND_ARE_PROOF_ONLY__STALE_M0A_CAUSAL_DIAGNOSTIC_NEXT_ACTION_RETIRED",
+    "outer_frontier": "SHARED_S0_G0_OPERATIVE_ROUTE_CLOSURE_THEN_EXACT_T0_T1_T2_T3_PARALLEL_WAVE"
   },
   "combined_evaluation_candidates": [
     {
@@ -320,11 +322,21 @@
       ]
     }
   ],
-  "active_zero_reality_mechanism_blockers": [
-    "M0A"
-  ],
+  "active_zero_reality_mechanism_blockers": [],
   "proof_only_obligations": [
+    "M0A",
     "M1A",
     "M1B"
-  ]
+  ],
+  "outer_frontier_authority": {
+    "global_terminal_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+    "outer_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
+    "shared_semantic_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
+    "live_shared_residuals": [
+      "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+      "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS"
+    ],
+    "execution_authority": false,
+    "fresh_terminal_evidence_authorized": false
+  }
 }
