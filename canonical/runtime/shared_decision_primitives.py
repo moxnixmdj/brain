@@ -1,0 +1,204 @@
+"""Brain-owned bounded shared decision primitives.
+
+These primitives intentionally solve only cases where requirements, capabilities,
+evidence relations, and causal support are explicit. Unknown semantics fail closed.
+"""
+from __future__ import annotations
+from dataclasses import dataclass
+from itertools import combinations
+from typing import FrozenSet, Iterable, Sequence
+
+@dataclass(frozen=True)
+class ToolRoute:
+    route_id: str
+    capabilities: FrozenSet[str]
+    cost: float = 0.0
+    available: bool = True
+    authorized: bool = True
+    verified: bool = True
+
+@dataclass(frozen=True)
+class ToolDecision:
+    status: str
+    route_id: str | None
+    reason: str
+
+def select_verified_tool(required: Iterable[str], routes: Sequence[ToolRoute]) -> ToolDecision:
+    req=frozenset(required)
+    eligible=[
+        r for r in routes
+        if r.available and r.authorized and r.verified and req.issubset(r.capabilities)
+    ]
+    if not eligible:
+        return ToolDecision("ESCALATE",None,"NO_VERIFIED_SUFFICIENT_ROUTE")
+    eligible.sort(key=lambda r:(r.cost,len(r.capabilities-req),r.route_id))
+    return ToolDecision("SELECT",eligible[0].route_id,"MIN_COST_VERIFIED_SUFFICIENT_ROUTE")
+
+@dataclass(frozen=True)
+class Task:
+    task_id: str
+    deps: FrozenSet[str]
+    required_capabilities: FrozenSet[str]
+    priority: int = 0
+
+@dataclass(frozen=True)
+class Worker:
+    worker_id: str
+    capabilities: FrozenSet[str]
+
+def _downstream_counts(tasks: Sequence[Task]) -> dict[str,int]:
+    children={t.task_id:set() for t in tasks}
+    for t in tasks:
+        for d in t.deps:
+            if d in children:
+                children[d].add(t.task_id)
+    out={}
+    for root in children:
+        seen=set()
+        stack=list(children[root])
+        while stack:
+            x=stack.pop()
+            if x in seen: continue
+            seen.add(x)
+            stack.extend(children.get(x,()))
+        out[root]=len(seen)
+    return out
+
+def assign_ready_tasks(
+    tasks: Sequence[Task],
+    workers: Sequence[Worker],
+    completed: Iterable[str],
+    already_assigned: Iterable[str]=(),
+) -> dict[str,str]:
+    completed=set(completed)
+    assigned=set(already_assigned)
+    downstream=_downstream_counts(tasks)
+    ready=[
+        t for t in tasks
+        if t.task_id not in completed and t.task_id not in assigned and t.deps.issubset(completed)
+    ]
+    ready.sort(key=lambda t:(-downstream.get(t.task_id,0),-t.priority,t.task_id))
+    free=sorted(workers,key=lambda w:w.worker_id)
+    result={}
+    used=set()
+    for task in ready:
+        candidates=[
+            w for w in free
+            if w.worker_id not in used and task.required_capabilities.issubset(w.capabilities)
+        ]
+        if not candidates:
+            continue
+        candidates.sort(key=lambda w:(len(w.capabilities-task.required_capabilities),w.worker_id))
+        w=candidates[0]
+        result[task.task_id]=w.worker_id
+        used.add(w.worker_id)
+    return result
+
+@dataclass(frozen=True)
+class ResearchAction:
+    action_id: str
+    covers: FrozenSet[str]
+    cost: float
+    reliability: float = 1.0
+    verified: bool = True
+
+@dataclass(frozen=True)
+class ResearchDecision:
+    status: str
+    action_id: str | None
+    unresolved: FrozenSet[str]
+    reason: str
+
+def next_research_action(
+    material_requirements: Iterable[str],
+    resolved_requirements: Iterable[str],
+    actions: Sequence[ResearchAction],
+) -> ResearchDecision:
+    unresolved=frozenset(material_requirements)-frozenset(resolved_requirements)
+    if not unresolved:
+        return ResearchDecision("STOP",None,unresolved,"ALL_MATERIAL_REQUIREMENTS_RESOLVED")
+    scored=[]
+    for a in actions:
+        new=len(a.covers & unresolved)
+        if not a.verified or new==0 or a.cost < 0 or not (0 <= a.reliability <= 1):
+            continue
+        denom=a.cost if a.cost>0 else 1e-12
+        score=(new*a.reliability)/denom
+        scored.append((score,new,a.reliability,-a.cost,a.action_id,a))
+    if not scored:
+        return ResearchDecision("ESCALATE",None,unresolved,"NO_VERIFIED_ACTION_ADDS_REQUIREMENT_COVERAGE")
+    scored.sort(reverse=True)
+    return ResearchDecision("ACT",scored[0][-1].action_id,unresolved,"MAX_VERIFIED_COVERAGE_PER_COST")
+
+@dataclass(frozen=True)
+class EvidenceUnit:
+    evidence_id: str
+    supports: FrozenSet[str]
+    cost: float = 1.0
+    reliability: float = 1.0
+    conflicts_with: FrozenSet[str] = frozenset()
+
+@dataclass(frozen=True)
+class EvidenceDecision:
+    status: str
+    evidence_ids: tuple[str,...]
+    unsupported_claims: FrozenSet[str]
+    reason: str
+
+def minimal_support_bundle(required_claims: Iterable[str], units: Sequence[EvidenceUnit]) -> EvidenceDecision:
+    required=frozenset(required_claims)
+    if not required:
+        return EvidenceDecision("PASS",(),frozenset(),"NO_REQUIRED_CLAIMS")
+    n=len(units)
+    if n>20:
+        return EvidenceDecision("ESCALATE",(),required,"TOO_MANY_UNITS_FOR_EXACT_BOUNDED_SEARCH")
+    best=None
+    for k in range(n+1):
+        for idxs in combinations(range(n),k):
+            subset=[units[i] for i in idxs]
+            ids={u.evidence_id for u in subset}
+            if any((u.conflicts_with & ids) for u in subset):
+                continue
+            covered=frozenset().union(*(u.supports for u in subset)) if subset else frozenset()
+            if not required.issubset(covered):
+                continue
+            total_cost=sum(u.cost for u in subset)
+            rel=sum(u.reliability for u in subset)
+            key=(total_cost,k,-rel,tuple(sorted(ids)))
+            if best is None or key<best[0]:
+                best=(key,tuple(sorted(ids)))
+        if best is not None:
+            break
+    if best is None:
+        covered=frozenset().union(*(u.supports for u in units)) if units else frozenset()
+        return EvidenceDecision("ESCALATE",(),required-covered,"REQUIRED_CLAIM_WITHOUT_NONCONFLICTING_SUPPORT")
+    return EvidenceDecision("PASS",best[1],frozenset(),"MINIMUM_COST_NONCONFLICTING_COMPLETE_SUPPORT")
+
+@dataclass(frozen=True)
+class FailureCandidate:
+    candidate_id: str
+    step_index: int
+    causal_supported: bool
+    intervenable: bool
+    evidence_strength: float
+    predicted_rescue: float
+
+@dataclass(frozen=True)
+class RepairDecision:
+    status: str
+    candidate_id: str | None
+    reason: str
+
+def select_repair_target(
+    candidates: Sequence[FailureCandidate],
+    *,
+    min_evidence: float = 0.5,
+) -> RepairDecision:
+    eligible=[
+        c for c in candidates
+        if c.causal_supported and c.intervenable and c.evidence_strength>=min_evidence and c.predicted_rescue>0
+    ]
+    if not eligible:
+        return RepairDecision("ESCALATE",None,"NO_CAUSALLY_SUPPORTED_INTERVENABLE_REPAIR")
+    eligible.sort(key=lambda c:(c.step_index,-c.predicted_rescue,-c.evidence_strength,c.candidate_id))
+    return RepairDecision("SELECT",eligible[0].candidate_id,"EARLIEST_CAUSALLY_SUPPORTED_RESCUE_TARGET")
