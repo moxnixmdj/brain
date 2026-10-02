@@ -58,5 +58,13 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "receipt": "canonical/verification/ACCEPTANCE_PROOF_TRANSMUTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "runtime_git_blob_sha": "0580f9819b5465c9617f0a1e8ff9a96902eedfc6",
+    "workflow_run_id": 36982809428,
+    "workflow_job_id": 110760951980,
+    "verifier_merge_commit": "5581a1e6b5fcc49d6f14488288d9cc4137de2b10"
+  }
 }
