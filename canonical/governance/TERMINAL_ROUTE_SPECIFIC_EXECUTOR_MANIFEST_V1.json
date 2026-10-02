@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "12_FROZEN_ROUTES_ENUMERATED__5_DIRECT_EXECUTORS_IMPLEMENTED__1_OF_12_INDEPENDENTLY_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
+  "status": "12_FROZEN_ROUTES_ENUMERATED__12_ROUTE_EXECUTOR_BINDINGS_IMPLEMENTED__1_OF_12_INDEPENDENTLY_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
@@ -40,45 +40,70 @@
       "frozen_route": "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN",
       "independent_verification": "canonical/verification/M0_PORTFOLIO_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "standalone_terminal_population": false,
+      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
     },
     {
       "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
       "frozen_route": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T1_MULTIPLEXED_MECHANICAL_GATE_PLUS_PUBLIC_PROFESSIONAL_BAR",
       "independent_verification": "canonical/verification/NATIVE_ARTIFACT_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "standalone_terminal_population": false,
+      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
       "frozen_route": "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "PORTFOLIO_MULTIPLEXED_DETERMINISTIC_GATE",
       "independent_verification": "canonical/verification/STRUCTURED_METHOD_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "standalone_terminal_population": false,
+      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
     },
     {
       "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "frozen_route": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T1_MULTIPLEXED_DIRECT_PROFESSIONAL_QUALITY_GATE",
       "independent_verification": "canonical/verification/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "standalone_terminal_population": false,
+      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
     },
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "frozen_route": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T1_T3_MULTIPLEXED_DIRECT_GROUNDED_SYNTHESIS_GATE",
       "independent_verification": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "standalone_terminal_population": false,
+      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
     },
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
@@ -97,18 +122,28 @@
       "frozen_route": "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json",
       "proof_mode": "T0_MULTIPLEXED_OPEN_DOMAIN_OBJECTIVE_GEOMETRY",
       "independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "standalone_terminal_population": false,
+      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
     },
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
       "frozen_route": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "proof_mode": "T0_T2_MULTIPLEXED_DETERMINISTIC_INTERVENTION_RESCUE_GATE",
       "independent_verification": "canonical/verification/P1_TRAJECTORY_T0_T2_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "standalone_terminal_population": false,
+      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
     },
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
@@ -148,11 +183,11 @@
     }
   ],
   "launch_authority": false,
-  "next": "INDEPENDENTLY_VERIFY_AND_BIND_REMAINING_DIRECT_EXECUTORS__IMPLEMENT_PORTFOLIO_INSTRUMENTATION_AND_CAD_ROUTE_EXECUTORS__BIND_ALL_12__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
+  "next": "INDEPENDENTLY_VERIFY_AND_BIND_11_REMAINING_EXECUTORS__CONSTRUCT_ROUTE_SPECIFIC_PARENT_PORTFOLIO_LAUNCHER_WITH_EXACT_FROZEN_BINDINGS__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "implemented_executor_count": 5
+  "implemented_executor_count": 12
 }
