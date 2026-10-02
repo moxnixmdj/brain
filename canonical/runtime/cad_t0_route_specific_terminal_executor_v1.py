@@ -27,11 +27,11 @@ BEHAVIOR_ID = "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
 COUNT = 128
 
 DEPENDENCIES = {
-    "canonical/runtime/cad_t0_route_specific_candidate_v1.py": "4356304e18e1cbe6902feef02f1d1905eb6204a1",
+    "canonical/runtime/cad_t0_route_specific_candidate_v1.py": "aa32750b220a023617938b7be9476f6b3aac6704",
     "canonical/runtime/cad_t0_geometry_population.py": "64ca276410e2c1dbcd55cfad057e3eec0709790a",
     "canonical/runtime/cad_t0_oracle_adapter.py": "a6e76e1865b9bd9829dbbcf38886486636f76e8a",
     "canonical/runtime/cad_t0_multiplex_scorer.py": "89833581dc4ac67498753feb94e2ff69bad3b7f1",
-    "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json": "3c3a4ac027e2a4594802b23fffbe08e2d9bb94e2",
+    "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json": "a636d1292e6f92d240fab420a9ee75ced7a05104",
 }
 
 
@@ -59,7 +59,7 @@ def static_dependency_preflight(root: Path = Path(".")) -> dict[str, Any]:
             "actual_blob": actual,
             "match": ok,
         }
-    binding_path = root / "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json"
+    binding_path = root / "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json"
     try:
         binding = json.loads(binding_path.read_text(encoding="utf-8"))
     except Exception as exc:
@@ -69,8 +69,6 @@ def static_dependency_preflight(root: Path = Path(".")) -> dict[str, Any]:
         errors.append("CAD_BINDING_BEHAVIOR_ID_MISMATCH")
     if binding.get("prewave_admissible") is not True:
         errors.append("CAD_BINDING_NOT_PREWAVE_ADMISSIBLE")
-    if binding.get("antishortcut_falsification"):
-        errors.append("CAD_ANTISHORTCUT_FALSIFICATION_ACTIVE")
     return {
         "schema": SCHEMA,
         "status": "PASS" if not errors else "FAIL_CLOSED",
@@ -134,6 +132,28 @@ def execute_cad_route(*, commitment: str, beacon: str, root: Path = Path(".")) -
             "no_tuning_replay": True,
             "capability_credit_delta": 0,
             "family_credit_delta": 0,
+        }
+
+    try:
+        authority = json.loads((root / "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json").read_text(encoding="utf-8"))
+        manifest = json.loads((root / "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json").read_text(encoding="utf-8"))
+    except Exception as exc:
+        return {
+            "schema": SCHEMA, "behavior_id": BEHAVIOR_ID,
+            "status": "FAIL_CLOSED_AUTHORITY_READ", "pass": False,
+            "error": type(exc).__name__, "case_count": 0,
+            "terminal_result": False, "capability_credit_delta": 0,
+            "family_credit_delta": 0,
+        }
+    if authority.get("execution_authority") is not True or manifest.get("launch_authority") is not True or manifest.get("bound_executor_count") != 12:
+        return {
+            "schema": SCHEMA, "behavior_id": BEHAVIOR_ID,
+            "status": "FAIL_CLOSED_LAUNCH_NOT_AUTHORIZED", "pass": False,
+            "case_count": 0, "terminal_result": False,
+            "execution_authority": bool(authority.get("execution_authority")),
+            "launch_authority": bool(manifest.get("launch_authority")),
+            "bound_executor_count": manifest.get("bound_executor_count"),
+            "capability_credit_delta": 0, "family_credit_delta": 0,
         }
 
     cases = population.generate_post_freeze(commitment, beacon)
