@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_M2_GENOFFICE_DOCX_INTERNALIZATION_TRIGGER_V1",
+  "date": "2026-10-02",
+  "status": "EXECUTE_ZERO_REALITY_DETERMINISTIC_INTERNALIZATION",
+  "source": {
+    "repository": "genspark-ai/genoffice",
+    "commit": "db347087628281d49e53d009183d2fb506c3a444"
+  },
+  "target_behavior": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+  "scope": "DOCX_ENGINE_PLUS_REQUIRED_LOCAL_GENOFFICE_PACKAGE_DEPENDENCIES",
+  "prohibited_claims": [
+    "NO_PDF_NATIVE_EDIT_CREDIT",
+    "NO_PROFESSIONAL_JUDGMENT_CREDIT",
+    "NO_WHOLE_M2_CLOSURE",
+    "NO_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
