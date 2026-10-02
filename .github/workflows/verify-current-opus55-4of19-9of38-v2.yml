@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  verify:
+  calibration:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,5 +25,15 @@ jobs:
           python-version: "3.12"
       - name: Recompute live acceptance calibration
         run: python -m unittest canonical.tests.test_opus55_acceptance_calibration_reducer_v2 -v
+
+  residual:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Recompute live atomic residual
         run: python -m unittest canonical.tests.test_current_opus55_acceptance_residual_v10 -v
