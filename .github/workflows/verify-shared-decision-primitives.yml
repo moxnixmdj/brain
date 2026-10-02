@@ -2,6 +2,11 @@ name: Verify shared decision primitives
 
 on:
   push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/shared_decision_primitives.py"
+      - "canonical/tests/test_shared_decision_primitives.py"
+      - ".github/workflows/verify-shared-decision-primitives.yml"
   pull_request:
     branches: [main]
     paths:
