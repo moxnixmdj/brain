@@ -7,6 +7,7 @@ from typing import Any
 
 ACTIVE_REGISTRY=Path("canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json")
 ACTIVE_BASIS=Path("canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json")
+POPULATION_PROTOCOL=Path("canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json")
 
 from canonical.runtime import contract_native_proof_suites as c_suite
 from canonical.runtime import contract_native_brain_candidate as c_candidate
@@ -18,6 +19,25 @@ PREFIX=b"PROJECT_BRAIN_TERMINAL_V1\0"
 DIFFICULTIES=(1,2,3,4,5)
 CONTRACTS=tuple(sorted(set(c_suite.CONTRACTS)|set(r_suite.CONTRACTS)))
 
+
+def _preflight_route_specific_protocol()->None:
+    """Block the legacy global-12-slot executor when V2 requires route-specific bindings.
+
+    V2 explicitly forbids a global sample-count shortcut: each contract must
+    honor its frozen proof mode, population/source-pool binding, acceptance
+    rule, and selector. This legacy executor cannot truthfully satisfy that
+    contract, so it must fail before case generation.
+    """
+    protocol=json.loads(POPULATION_PROTOCOL.read_text(encoding="utf-8"))
+    req=protocol.get("route_specific_requirements",{})
+    frozen=protocol.get("frozen_route_bindings",{})
+    active=protocol.get("active_contracts",[])
+    if req.get("sample_count")=="MUST_BE_FROZEN_PER_CONTRACT_FROM_ITS_PROOF_MODE_AND_ACCEPTANCE_RULE__NO_GLOBAL_12_OF_12_SHORTCUT":
+        if len(frozen)==len(active)==12:
+            raise ValueError(
+                "LEGACY_TERMINAL_LAUNCHER_INADMISSIBLE:"
+                "V2_REQUIRES_ROUTE_SPECIFIC_EXECUTORS_AND_FORBIDS_GLOBAL_12_SLOT_SHORTCUT"
+            )
 
 def _preflight_active_basis()->tuple[str,...]:
     registry=json.loads(ACTIVE_REGISTRY.read_text(encoding="utf-8"))
@@ -64,6 +84,7 @@ def execute(
     if slots_per_obligation!=12:
         raise ValueError("TERMINAL_PROTOCOL_REQUIRES_EXACTLY_12_SLOTS")
     active_contracts=_preflight_active_basis()
+    _preflight_route_specific_protocol()
     root=work_root or Path(tempfile.mkdtemp(prefix="brain-terminal-wave-"))
     root.mkdir(parents=True,exist_ok=True)
     behaviors={}
