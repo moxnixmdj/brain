@@ -1,0 +1,31 @@
+name: Verify P1 composite readjudication v2
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/p1_composite_proof_readjudicator_v2.py"
+      - "canonical/tests/test_p1_composite_proof_readjudicator_v2.py"
+      - "canonical/governance/P1_COMPOSITE_PROOF_READJUDICATION_CANDIDATE_V2.json"
+      - ".github/workflows/verify-p1-composite-readjudication-v2.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/p1_composite_proof_readjudicator_v2.py"
+      - "canonical/tests/test_p1_composite_proof_readjudicator_v2.py"
+      - "canonical/governance/P1_COMPOSITE_PROOF_READJUDICATION_CANDIDATE_V2.json"
+      - ".github/workflows/verify-p1-composite-readjudication-v2.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run P1 readjudication regression tests
+        run: python -m unittest canonical.tests.test_p1_composite_proof_readjudicator_v2 -v
+      - name: Run P1 readjudicator
+        run: python canonical/runtime/p1_composite_proof_readjudicator_v2.py

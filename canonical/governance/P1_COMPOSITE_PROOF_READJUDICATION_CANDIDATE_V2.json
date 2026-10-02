@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_P1_COMPOSITE_PROOF_READJUDICATION_CANDIDATE_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PREDECLARED_SEMANTIC_READJUDICATION__BRAIN_CI_AND_INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Repair the two independently reproduced P1 proof-role enforcement defects and verify the complete predeclared 8-check/9-mutation partition without changing the Brain candidate or replaying Terminal V3.",
+  "frozen_authority": {
+    "p1_binding": {
+      "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    },
+    "current_reconciliation_candidate": {
+      "path": "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json",
+      "git_blob_sha": "1da223b8133e83d3ba1b238012593b39dcae91f9"
+    },
+    "v4_candidate": {
+      "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py",
+      "git_blob_sha": "0c386e6b78a8e97e9c1944e63600047bc4e2849b"
+    },
+    "v4_original_proof": {
+      "path": "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py",
+      "git_blob_sha": "6e1dfaa6b63fc629d55d07b2361bf625f11a5ce3"
+    },
+    "terminal_suite": {
+      "path": "canonical/runtime/contract_native_proof_suites.py",
+      "git_blob_sha": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+    },
+    "terminal_v3_raw_result": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    }
+  },
+  "repair": {
+    "readjudicator": {
+      "path": "canonical/runtime/p1_composite_proof_readjudicator_v2.py",
+      "git_blob_sha": "4c78106d5cda114f052cf8ef160ba0d172d1bacf"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p1_composite_proof_readjudicator_v2.py",
+      "git_blob_sha": "7013994bb52709efe7d3f2a5d60e1ad6fcbf2215"
+    },
+    "semantics": [
+      "VISIBLE_SUPPORTING_RECEIPTS_MUST_BE_NONEMPTY_AND_LOAD_BEARING_FOR_IDENTIFIED_INTERACTION_AND_AMBIGUOUS_V4_CAUSES",
+      "AN_EXPLICIT_DIAGNOSIS_IF_PRESENT_MUST_BE_FALSIFIABLE_AND_SUPPORTED_BY_VISIBLE_RECEIPTS",
+      "ALL_NINE_FROZEN_REQUIRED_MUTATIONS_MUST_BE_EXECUTABLY_KILLED",
+      "THE_EIGHT_FROZEN_REQUIRED_CHECKS_AND_NINE_FROZEN_REQUIRED_MUTATIONS_MUST_PARTITION_EXACTLY_WITH_NO_OVERLAP_OMISSION_OR_EXTRA"
+    ]
+  },
+  "anti_retroactivity": [
+    "NO_NEW_P1_REQUIRED_CHECK_OR_MUTATION_ADDED",
+    "NO_BRAIN_CANDIDATE_CODE_CHANGED",
+    "NO_TERMINAL_V3_CASE_REPLAYED",
+    "NO_TERMINAL_RESULT_USED_TO_TUNE_CANDIDATE",
+    "READJUDICATION_IS_LIMITED_TO_SEMANTICS_PREDECLARED_IN_THE_FROZEN_P1_BINDING"
+  ],
+  "promotion_gate": [
+    "BRAIN_CI_PASS_ON_EXACT_REPAIR_BLOBS",
+    "INDEPENDENT_PUBLIC_RUNNER_PASS_MIRRORING_EXACT_BLOBS",
+    "INDEPENDENT_RUNNER_CONFIRMS_9_OF_9_MUTATIONS_KILLED_AND_ZERO_BASELINE_REGRESSIONS",
+    "ONLY_THEN_CREATE_A_FRESH_P1_COMPOSITE_RESTORATION_ACTIVATION",
+    "ONLY_AFTER_FRESH_ACTIVATION_RECOMPUTE_TERMINAL_PROJECTION_AND_ACCEPTANCE"
+  ],
+  "terminal_results_replayed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
