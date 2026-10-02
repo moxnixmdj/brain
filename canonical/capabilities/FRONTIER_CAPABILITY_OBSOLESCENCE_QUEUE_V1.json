@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "M0A_CONTEXTUAL_SEMANTICS_PRIMARY__M1A_ONLY_EVIDENCE_IDENTIFIABILITY_AND_NO_CONSENSUS_BOUNDARIES_REMAIN__M1B_COMPLETE",
+    "exact_blocker": "V6_TWO_SELECTED_REALITY_BATCH_PROTOCOLS_NOT_YET_FROZEN_AND_PREQUALIFIED",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "LOCALIZE_MINIMAL_M0A_CONTEXTUAL_RESIDUAL_FROM_FROZEN_NONPROMOTION_EVIDENCE__BOUND_REMAINING_M1A_EVIDENCE_IDENTIFIABILITY_CASES__FREEZE_RESIDUAL_UNIVERSE_V2__RUN_EXACT_FROZEN_UNIVERSE_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+    "next_action": "FREEZE_AND_PREQUALIFY_IN_PARALLEL__A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2__AND__A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1__NO_CASE_CONTENT_READ__NO_BATCH_EXECUTION_UNTIL_BOTH_ORACLES_AND_CONTAMINATION_BOUNDARIES_PASS",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -204,7 +204,18 @@
     "zero_reality_residual_reconciliation_v3": {
       "evidence": "canonical/reasoning/2026-10-02_ZERO_REALITY_RESIDUAL_RECONCILIATION_V3.json",
       "residual_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json"
-    }
+    },
+    "v6_residual_cut": {
+      "status": "VERIFIED_EXACT_MINIMUM__ONLY_SELECTED_BATCHES_ADMISSIBLE",
+      "verdict": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
+      "verification": "canonical/verification/RESIDUAL_MINIMUM_REALITY_CUT_V6_VERIFICATION_20261002_V1.json",
+      "selected": [
+        "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
+        "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
+      ],
+      "execution_authorized": false
+    },
+    "next_clean_task": null
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
