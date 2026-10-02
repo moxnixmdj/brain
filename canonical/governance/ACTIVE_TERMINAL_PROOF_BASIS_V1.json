@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__TERMINAL_WAVE_AUTHORIZED__ZERO_TERMINAL_RESULTS",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -331,8 +331,8 @@
   ],
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 12,
-  "execution_authority": false,
-  "next": "CLOSE_REMAINING_ACTIVE_TERMINAL_ROUTE_BINDINGS__TOOL_DISCOVERY_REQUIRES_CURRENT_INDEPENDENT_PASS__RESEARCH_REMAINS_HLE_EXTERNAL_BLOCKED__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
+  "execution_authority": true,
+  "next": "EXECUTE_T0_T1_T2_T3_IN_PARALLEL_ONCE_UNDER_FROZEN_POST_FREEZE_SELECTION_PROTOCOL",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
@@ -357,5 +357,6 @@
   },
   "latest_independent_objective_binding_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "prewave_route_execution_readiness": true,
-  "prewave_route_execution_readiness_rule": "ALL_12_ACTIVE_BEHAVIORAL_CONTRACTS_HAVE_FROZEN_ADMISSIBLE_PREWAVE_ROUTES_WITH_ZERO_BLOCKERS__DISTINCT_FROM_TERMINAL_WAVE_EXECUTION_AUTHORITY"
+  "prewave_route_execution_readiness_rule": "ALL_12_ACTIVE_BEHAVIORAL_CONTRACTS_HAVE_FROZEN_ADMISSIBLE_PREWAVE_ROUTES_WITH_ZERO_BLOCKERS__DISTINCT_FROM_TERMINAL_WAVE_EXECUTION_AUTHORITY",
+  "prequalification_verdict": "canonical/verification/TERMINAL_PREQUALIFICATION_CURRENT_PUBLIC_RUNNER_PASS_20261002_V2.json"
 }
