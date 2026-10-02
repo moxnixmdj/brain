@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V7",
+  "date": "2026-10-02",
+  "status": "COMPLETE_FAIL_CLOSED__7_PROVED__3_BOUND_BLOCKERS__28_OTHER_UNRESOLVED__ZERO_NEW_REALITY",
+  "bound_inputs": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "evidence_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "sha": "54782e5ef898fef69fa28b1e8f702b77560cc129"
+    }
+  },
+  "proved_predicate_count": 7,
+  "bound_blocker_count": 3,
+  "unresolved_predicate_count": 31,
+  "direct_acceptance_case_actions_ready": 0,
+  "blockers_added": [
+    "FINANCE_UNCOVERED_SCOPE_AUDIT__INTERNAL_OPERATIVE_SOURCE_MISSING",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT__INTERNAL_OPERATIVE_SOURCE_MISSING"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "WHEN_DIRECT_ORACLES_EXIST_BUT_NO_ADMITTED_OPERATIVE_BRAIN_SOURCE_EXISTS__BLOCK_CASE_EXPOSURE_AND_MOVE_CRITICAL_PATH_TO_SOURCE_INTERNALIZATION_OR_BINDING"
+}
