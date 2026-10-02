@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ZERO_REALITY_RECEIPT_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Index existing content-addressed canonical receipts against the active 40 exact proof atoms without converting literal mentions into proof.",
+  "runtime": "canonical/runtime/proof_atom_receipt_index_v1.py",
+  "tests": "canonical/tests/test_proof_atom_receipt_index_v1.py",
+  "source_basis": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V1.json",
+  "semantics": {
+    "discovery": "EXACT_UTF8_PROPOSITION_LITERAL_OCCURRENCE_IN_NONEXCLUDED_CANONICAL_JSON",
+    "content_address": "GIT_BLOB_SHA1_OF_EXACT_BYTES",
+    "explicit_binding_candidate": "INDEPENDENT_PUBLIC_RUNNER_PASS_RECEIPT_PLUS_ALLOWLISTED_EXACT_PROPOSITION_ASSERTION",
+    "authority": "DISCOVERY_AND_BINDING_CANDIDATE_INDEX_ONLY"
+  },
+  "excluded_self_proof_classes": [
+    "ACTIVE_FRONTIER_AND_MATCHED_SUBFRONTIER",
+    "CURRENT_TERMINAL_AUTHORITY",
+    "ACTION_HYPERGRAPH_AND_SCHEDULING_ACTIVATION",
+    "PROOF_ATOM_BASIS_ACTIVATION",
+    "INDEX_OUTPUT_ITSELF"
+  ],
+  "hard_rules": [
+    "MENTION_IS_NOT_PROOF",
+    "NO_SEMANTIC_EQUIVALENCE_FROM_NAMES_PROSE_PREFIXES_FAMILIES_OR_ANALOGY",
+    "NO_SCHEDULER_OR_FRONTIER_SELF_PROOF",
+    "NO_BINDING_WITHOUT_EXACT_CONTENT_ADDRESS",
+    "EXPLICIT_BINDING_CANDIDATE_IS_NOT_ACCEPTANCE_CREDIT",
+    "RUN_EXISTING_ADMISSION_AND_FIXED_POINT_MACHINERY_AFTER_SEPARATE_BINDING_ADMISSION",
+    "NO_FRESH_REALITY_AUTHORIZED"
+  ],
+  "next": "RUN_EXACT_LIVE_INDEX__FREEZE_CONTENT_ADDRESSED_PROJECTION__INDEPENDENTLY_VERIFY__REVIEW_ONLY_EXPLICIT_VERIFIED_BINDING_CANDIDATES_FOR_EXISTING_ADMISSION__USE_MENTION_ONLY_CANDIDATES_FOR_ZERO_REALITY_RECEIPT_RECOVERY_SEARCH",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
