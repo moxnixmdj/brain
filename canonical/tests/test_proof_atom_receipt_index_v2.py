@@ -116,6 +116,26 @@ class Tests(unittest.TestCase):
             self.assertTrue(row["candidate_match_truncated"])
             self.assertEqual(out["atoms_with_truncated_candidate_lists"],1)
 
+    def test_receipt_index_self_verification_is_excluded(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"repeated_atom":"R1"}\n',encoding="utf-8")
+            out=build_index(frontier(),overlay(),root=root)
+            row=next(x for x in out["atoms"] if x["proposition"]=="R1")
+            self.assertEqual(row["candidate_match_count"],0)
+
+    def test_declared_corpus_restatement_is_excluded(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/governance/DECLARED_CONTENT_ADDRESSED_EVIDENCE_CORPUS_V1_PART_0.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"lexical_projection":"R1"}\n',encoding="utf-8")
+            out=build_index(frontier(),overlay(),root=root)
+            row=next(x for x in out["atoms"] if x["proposition"]=="R1")
+            self.assertEqual(row["candidate_match_count"],0)
+
     def test_no_credit_or_authority(self):
         with tempfile.TemporaryDirectory() as td:
             out=build_index(frontier(),overlay(),root=Path(td))
