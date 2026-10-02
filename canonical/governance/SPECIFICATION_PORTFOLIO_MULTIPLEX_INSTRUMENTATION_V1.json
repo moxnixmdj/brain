@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_SPECIFICATION_PORTFOLIO_MULTIPLEX_INSTRUMENTATION_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_INSTRUMENTATION__AWAITING_INDEPENDENT_VALIDATION__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "authority": [
+    "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/verification/M0A_RAW_SOURCE_POST_REPAIR_PUBLIC_RUNNER_20261002_V1.json"
+  ],
+  "bounded_preflight": {
+    "route": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+    "exact_suite_blob": "63b5daacfa5623c38228d41f6a84e548890d252d",
+    "result": "64_OF_64_ALL_EIGHT_BOUNDED_CLASSES",
+    "role": "DIAGNOSTIC_AND_INSTRUMENTATION_PREFLIGHT_ONLY__NOT_OPEN_DOMAIN_TERMINAL_PROOF"
+  },
+  "candidate_visible_information": {
+    "universal": [
+      "RAW_TASK_SPECIFICATION_TEXT",
+      "PORTFOLIO_ID",
+      "PUBLIC_TASK_METADATA_EXPLICITLY_ALLOWED_BY_PORTFOLIO"
+    ],
+    "forbidden": [
+      "HIDDEN_ACCEPTANCE_CRITERIA",
+      "REFERENCE_SOLUTION",
+      "MUTATION_EXPECTED_EFFECT",
+      "GOLD_REQUIREMENT_GRAPH",
+      "AMBIGUITY_TRUTH",
+      "FINAL_TASK_SCORE",
+      "VERIFIER_IMPLEMENTATION"
+    ]
+  },
+  "direct_semantic_acceptance_instrumentation": {
+    "candidate_outputs": [
+      "RESOLUTION_STATUS_RESOLVED_OR_AMBIGUOUS",
+      "TYPED_REQUIREMENT_SET",
+      "CONDITIONS_AND_POLARITY",
+      "INDEPENDENT_ACCEPTANCE_FAILURE_MODE_PLAN"
+    ],
+    "hidden_observation_interface": [
+      "PORTFOLIO_NATIVE_ACCEPTANCE_CRITERION_IDS",
+      "COUNTEREXAMPLE_MUTATION_IDS_AND_TARGETED_REQUIREMENT_IDS",
+      "MUTATION_EXPECTED_VALIDITY",
+      "PORTFOLIO_NATIVE_TASK_OUTCOME"
+    ],
+    "rule": "INSTRUMENTATION_RECORDS_ALIGNMENT_ONLY__HIDDEN_FIELDS_NEVER_ENTER_CANDIDATE_INPUT"
+  },
+  "ambiguity_and_counterexample_scorer": {
+    "deterministic": true,
+    "mutation_classes": [
+      "REQUIRED_ITEM_OMISSION",
+      "POLARITY_FLIP",
+      "CONDITION_DROP",
+      "SUBJECT_OBJECT_SWAP",
+      "DEPENDENCY_OR_ORDER_VIOLATION",
+      "UNSUPPORTED_EXTRA_REQUIREMENT",
+      "AMBIGUOUS_REFERENT"
+    ],
+    "per_case_critical_failures": [
+      "REQUIRED_MUTATION_NOT_REJECTED_BY_ACCEPTANCE_MODEL",
+      "VALID_CONTROL_REJECTED",
+      "KNOWN_AMBIGUITY_FORCED_TO_RESOLVED",
+      "UNAMBIGUOUS_CONTROL_FORCED_TO_AMBIGUOUS",
+      "PORTFOLIO_HIDDEN_ORACLE_FIELD_VISIBLE_TO_CANDIDATE"
+    ],
+    "accounting": {
+      "score_range": [
+        0,
+        1
+      ],
+      "pass_score": 1,
+      "case_local_execution_failure_counts_as_failure": true,
+      "missing_oracle_or_provenance": "FAIL_CLOSED"
+    }
+  },
+  "portfolio_information_boundaries": {
+    "T0": {
+      "visible": "TASK_INSTRUCTION_SPECIFICATION_AND_PUBLIC_REPOSITORY_OR_ENVIRONMENT_STATE_ALLOWED_BY_T0",
+      "hidden": "TESTS_REFERENCE_PATCH_GOLD_CAUSE_VERIFIER_INTERNALS_AND_MUTATION_EXPECTED_EFFECT"
+    },
+    "T1": {
+      "visible": "USER_BRIEF_ALLOWED_EVIDENCE_AND_PUBLIC_ARTIFACT_INPUTS",
+      "hidden": "RUBRIC_GOLD_PRIVATE_SCORER_REFERENCE_DELIVERABLE_AND_MUTATION_EXPECTED_EFFECT"
+    },
+    "T2": {
+      "visible": "TASK_GOAL_CURRENT_OBSERVATIONS_AND_PUBLIC_TOOL_OR_ACTION_SCHEMAS",
+      "hidden": "HIDDEN_TARGET_STATE_FUTURE_OBSERVATIONS_VERIFIER_INTERNALS_AND_MUTATION_EXPECTED_EFFECT"
+    },
+    "T3": {
+      "visible": "RESEARCH_QUESTION_PUBLIC_SOURCE_ACCESS_POLICY_AND_ALLOWED_TOOLS",
+      "hidden": "ANSWER_KEY_PRIVATE_RUBRIC_HIDDEN_EVIDENCE_REQUIREMENTS_AND_MUTATION_EXPECTED_EFFECT"
+    }
+  },
+  "post_freeze_selector": {
+    "selection_before_downstream_portfolio_freeze": false,
+    "selector": "DERIVE_SPEC_INSTRUMENTATION_CASE_IDS_FROM_EACH_PORTFOLIO_FROZEN_COMMITMENT_PLUS_ITS_AUTHORIZED_POST_FREEZE_BEACON",
+    "adaptive_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "challenge_reuse_rule": "SAME_SELECTED_PORTFOLIO_TASK_MAY_EMIT_ONE_SPECIFICATION_BEHAVIOR_RECEIPT__NO_CROSS_BEHAVIOR_SCORE_INHERITANCE"
+  },
+  "acceptance_accounting": {
+    "terminal_promotion_from_this_manifest": false,
+    "prewave_ready_if_independently_validated": true,
+    "terminal_behavior_evidence_requires": [
+      "INSTRUMENTATION_EXECUTED_ON_EVERY_REQUIRED_T0_T1_T2_T3_SCOPE_THAT_CONSUMES_THIS_BEHAVIOR",
+      "ZERO_CRITICAL_SEMANTIC_ACCEPTANCE_MISS_IN_CLAIMED_SCOPE",
+      "ZERO_INFORMATION_LEAK",
+      "PROVENANCE_COMPLETE",
+      "DOWNSTREAM_PORTFOLIO_RESULT_ADMISSIBLE_UNDER_ITS_OWN_PROOF_MODE"
+    ],
+    "rule": "ONE_BEHAVIOR_RECEIPT_MAY_MULTIPLEX_ACROSS_PORTFOLIOS_ONLY_FOR_THIS_SAME_BEHAVIOR_ID__NO_FAMILY_OR_OTHER_BEHAVIOR_CREDIT"
+  },
+  "remaining_external_or_terminal_dependency": [
+    "ACTUAL_T0_T1_T2_T3_POST_FREEZE_TERMINAL_OBSERVATIONS_NOT_YET_AVAILABLE"
+  ],
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
