@@ -11,11 +11,9 @@ class CadT0RouteSpecificTerminalExecutorTests(unittest.TestCase):
     C = "TEST_ONLY_COMMITMENT"
     B = "TEST_ONLY_NONTERMINAL_BEACON"
 
-    def test_static_dependency_preflight_fails_closed_on_reopened_cad_binding(self):
+    def test_static_dependency_preflight_passes_on_current_v4_binding(self):
         out = ex.static_dependency_preflight(Path("."))
-        self.assertFalse(out["pass"], out)
-        self.assertIn("CAD_BINDING_NOT_PREWAVE_ADMISSIBLE", out["errors"])
-        self.assertIn("CAD_ANTISHORTCUT_FALSIFICATION_ACTIVE", out["errors"])
+        self.assertTrue(out["pass"], out)
 
     def test_exact_frozen_count_and_family_cycle(self):
         self.assertEqual(ex.COUNT, 128)
@@ -34,10 +32,10 @@ class CadT0RouteSpecificTerminalExecutorTests(unittest.TestCase):
                 self.assertTrue(row["pass"], row)
                 self.assertFalse(row["candidate_hidden_oracle_present"])
 
-    def test_full_executor_refuses_to_consume_cases_while_binding_reopened(self):
+    def test_terminal_executor_refuses_before_global_launch_authority(self):
         out = ex.execute_cad_route(commitment=self.C, beacon=self.B, root=Path("."))
         self.assertFalse(out["pass"], out)
-        self.assertEqual(out["status"], "FAIL_CLOSED_PREEXECUTION")
+        self.assertEqual(out["status"], "FAIL_CLOSED_LAUNCH_NOT_AUTHORIZED")
         self.assertEqual(out["case_count"], 0)
         self.assertFalse(out["terminal_result"])
 
