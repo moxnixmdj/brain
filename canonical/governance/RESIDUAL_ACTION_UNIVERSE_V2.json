@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M0A_IMPLICIT_ATOM_RECLASSIFIED__M1A_PROJECTIVE_REGISTRATION_AND_COMPOUND_NOTATION_VERIFIED__NOT_FROZEN",
+  "status": "OPEN_DISCOVERY__LATEST_VERIFIED_M1A_COMPONENTS_INGESTED__M0A_PRIMARY__NOT_FROZEN",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -56,7 +56,10 @@
         "canonical/capabilities/opus55/ENGINEERING_FEATURE_NOTATION_001.json",
         "canonical/capabilities/opus55/DRAWING_PERSPECTIVE_REGISTRATION_001.json",
         "canonical/capabilities/opus55/M1A_DRAWING_HARDENING_COMPONENTS_001.json",
-        "canonical/capabilities/opus55/DRAWING_PREPROCESS_CONSENSUS_001.json"
+        "canonical/capabilities/opus55/DRAWING_PREPROCESS_CONSENSUS_001.json",
+        "canonical/capabilities/opus55/CALIBRATED_DENSE_WARP_RECTIFIER_001.json",
+        "canonical/capabilities/opus55/FEATURE_CONSTRAINT_COMPOSER_001.json",
+        "canonical/capabilities/opus55/JIT_ENGINEERING_NOTATION_ENGINE_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -64,10 +67,10 @@
         "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
       ],
       "uncovered": [
-        "LOCAL_NONPLANAR_WARP_OR_REGISTRATION_OUTSIDE_BOUNDED_GLOBAL_ROTATION_AND_PLANAR_PROJECTIVE_RECTIFICATION",
-        "COMPOUND_VISUAL_FEATURE_SEMANTICS",
-        "ENGINEERING_NOTATION_OUTSIDE_VERIFIED_BOUNDED_DIMENSION_THREAD_TOLERANCE_AND_FCF_GRAMMARS",
-        "ROBUSTNESS_WHEN_DETERMINISTIC_PREPROCESSING_ROUTES_DO_NOT_REACH_STABLE_PLAUSIBLE_CONSENSUS__INCLUDING_SEVERE_OCCLUSION_BLUR_DAMAGE_OR_SHARED_SYSTEMATIC_ERROR"
+        "CALIBRATION_OR_OTHER_DISCRIMINATING_EVIDENCE_MISSING_FOR_NONPROJECTIVE_REGISTRATION",
+        "AMBIGUOUS_VISUAL_ASSOCIATION_WITHOUT_SUFFICIENT_DISCRIMINATING_GEOMETRY",
+        "NOTATION_NOT_EXPRESSIBLE_IN_CURRENT_DECLARATIVE_INTERFACE",
+        "SEVERE_DEGRADATION_OR_SHARED_SYSTEMATIC_ERROR_WITHOUT_TRUSTWORTHY_PREPROCESSING_CONSENSUS"
       ],
       "complete_action_bundle": false,
       "verification_receipts": {
@@ -167,15 +170,14 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "M0A_AND_M1A_STILL_BLOCK_EXACT_CUT__M1A_ROBUSTNESS_NOW_CONSENSUS_GATED__REMAINING_M1A_IS_NONPLANAR_OR_GEOMETRY_POOR_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_RESIDUAL_ENGINEERING_NOTATION_AND_NO_CONSENSUS_DEGRADATION__M0A_REMAINS_PRIMARY_SHARED_SEMANTIC_BLOCKER",
+  "next": "BOUND_REMAINING_M1A_EVIDENCE_IDENTIFIABILITY_CASES__LOCALIZE_MINIMAL_M0A_CONTEXTUAL_SEMANTIC_RESIDUAL__THEN_FREEZE_V2_AND_RUN_EXACT_FROZEN_UNIVERSE_CUT",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "reconciliation": {
     "date": "2026-10-02",
-    "new_reality_units_consumed": 0,
-    "newly_verified_components": 13,
-    "note": "Degraded drawing deterministic preprocessing consensus independently verified; M1A robustness residual narrowed; exact cut remains unauthorized."
+    "evidence": "canonical/reasoning/2026-10-02_ZERO_REALITY_RESIDUAL_RECONCILIATION_V3.json",
+    "new_reality_units_consumed": 0
   }
 }
