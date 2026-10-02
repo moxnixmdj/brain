@@ -35,7 +35,7 @@
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
       "binding_path": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
-      "binding_blob_sha": "374ed4d686ce2d0542e0fb1f69c07c5e8a24af35",
+      "binding_blob_sha": "a7015b12f55fc971233f9fdddf59d50cfc43892b",
       "residual_validator": "canonical/runtime/research_t3_objective_binding_validator.py",
       "residual_tests": "canonical/tests/test_research_t3_objective_binding_validator.py"
     }
