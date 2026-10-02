@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_TERMINAL_PROOF_PROTOCOLS_V1",
   "date": "2026-10-02",
-  "status": "PROTOCOLS_DEFINED_FOR_ALL_19_FAMILIES__ZERO_NEW_CAPABILITY_CREDIT__QUALIFICATION_RESULTS_STILL_REQUIRED",
+  "status": "PROTOCOLS_DEFINED_FOR_ALL_19_FAMILIES__PUBLIC_FIXED_BARS_PREFERRED_WHERE_SCOPE_EQUIVALENT__ZERO_NEW_CAPABILITY_CREDIT",
   "objective": "Give every terminal family proof obligation an admissible, predeclared proof protocol so the global minimum-reality cut can be computed without inventing success criteria after seeing results.",
   "universal_rules": {
     "same_scope": "Brain and Opus 5.5 must be evaluated on the same frozen task population/harness/tool authority unless an absolute/theoretical ceiling is the proof mode.",
@@ -103,18 +103,28 @@
     },
     {
       "family": "FINANCIAL_ANALYSIS",
-      "proof_mode": "PUBLIC_COMPOSITE_BAR_PLUS_MATCHED_SCOPE_AUDIT",
-      "public_reference": {
-        "benchmark": "Artificial Analysis Finance & Accounting Index",
-        "opus_5_5": 61,
-        "source": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
-        "role": "Broad finance/accounting composite across business knowledge, agentic knowledge work, reasoning, tool use, long-context and non-hallucination."
-      },
+      "proof_mode": "PUBLIC_FIXED_BARS_PLUS_EXPLICIT_UNCOVERED_SCOPE_AUDIT",
       "acceptance": [
-        "Finance & Accounting Index >= 61 on comparable published harness/configuration",
-        "structured quantitative-method and compliance-sensitive leaves not represented in the index must pass matched direct scope audit"
+        "Finance & Accounting Index >= 61 on comparable published harness/configuration for its measured broad finance/accounting scope",
+        "Finance Agent v2 >= 58.59% on comparable Vals setup for its measured core financial-analyst scope",
+        "structured quantitative-method, supervisory/compliance, and document-specific leaves not represented by either public bar remain explicit separate obligations and may not inherit credit"
       ],
-      "status": "DEFINED_RESULT_OPEN"
+      "status": "DEFINED_RESULT_OPEN",
+      "public_references": [
+        {
+          "benchmark": "Artificial Analysis Finance & Accounting Index",
+          "opus_5_5": 61,
+          "source": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+          "role": "Broad finance/accounting composite."
+        },
+        {
+          "benchmark": "Vals Finance Agent v2",
+          "opus_5_5": "58.59% ±0.17",
+          "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+          "role": "Core financial-analyst task bar across held-out expert-reviewed analyst work."
+        }
+      ],
+      "direct_opus_case_level_comparator_required_for_represented_public_scopes": false
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
@@ -195,7 +205,7 @@
     },
     {
       "family": "ARTIFACT_CREATION",
-      "proof_mode": "ABSOLUTE_MECHANICAL_GATES_PLUS_MATCHED_QUALITY",
+      "proof_mode": "ABSOLUTE_MECHANICAL_GATES_PLUS_PUBLIC_PROFESSIONAL_DELIVERABLE_BAR_PLUS_UNCOVERED_SCOPE_AUDIT",
       "supporting_public_reference": {
         "benchmark": "AA-Briefcase v1.1",
         "opus_5_5": 1822,
@@ -216,8 +226,19 @@
         "analysis/content quality",
         "instruction/rubric compliance"
       ],
-      "acceptance": "All mechanical gates pass at ceiling on the scoped format corpus and Brain matched deliverable-quality score is noninferior to Opus on the same frozen portfolio; AA-Briefcase >=1822 may serve as supporting broad deliverable evidence when harness access is comparable.",
-      "status": "DEFINED_RESULT_OPEN"
+      "acceptance": [
+        "All mechanical gates pass at ceiling on each claimed native format scope",
+        "AA-Briefcase v1.1 >= 1822 Elo on comparable harness for the professional deliverable scope it actually exercises",
+        "format-specific visual/layout/quality leaves not exercised by AA-Briefcase remain explicit separate obligations; no matched Opus comparator is required for scope already covered by the public bar"
+      ],
+      "status": "DEFINED_RESULT_OPEN",
+      "public_bar_scope_authority": {
+        "benchmark": "AA-Briefcase v1.1",
+        "opus_5_5": "1822 Elo",
+        "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+        "role": "Direct public bar for covered professional deliverables including spreadsheets, presentations, memos, tool use and rubric-scored quality."
+      },
+      "direct_opus_case_level_comparator_required_for_public_bar_scope": false
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
@@ -269,7 +290,7 @@
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
-      "proof_mode": "PUBLIC_BAR_PLUS_MATCHED_UNSEEN_DOMAIN_TRANSFER",
+      "proof_mode": "PUBLIC_FIXED_UNKNOWN_MECHANISM_BAR_PLUS_EXPLICIT_UNCOVERED_TRANSFER_AUDIT",
       "public_reference": {
         "benchmark": "Vals MysteryMechanism",
         "opus_5_5": 49.55,
@@ -284,10 +305,11 @@
         "calibrated unknown/abstention"
       ],
       "acceptance": [
-        "MysteryMechanism >= 49.55% on comparable Vals setup",
-        "matched frozen unseen-domain portfolio Brain conservative terminal-success bound >= Opus matched bound without prior domain-specific internalized knowledge"
+        "MysteryMechanism >= 49.55% on comparable Vals setup for unknown-mechanism inference with active experimentation",
+        "new-tool discovery, cross-domain transfer outside the MysteryMechanism task structure, and calibrated abstention leaves remain explicit separate obligations and may not inherit benchmark credit"
       ],
-      "status": "DEFINED_RESULT_OPEN"
+      "status": "DEFINED_RESULT_OPEN",
+      "direct_opus_case_level_comparator_required_for_mysterymechanism_scope": false
     },
     {
       "family": "MULTI_CAPABILITY_COMPOSITION",
@@ -323,5 +345,7 @@
     "proof_results_closed_count": 2,
     "protocol_definition_is_not_capability_credit": true
   },
-  "next": "RECOMPUTE_GLOBAL_MINIMUM_REALITY_CUT_WITH_ALL_23_DISTINCTIONS_NOW_COVERABLE_BY_DECLARED_OBSERVATION_PROTOCOLS__THEN_EXECUTE_ONLY_EXACT_CUT_MEMBERS"
+  "next": "USE_SCOPE_EQUIVALENT_PUBLIC_FIXED_BARS_AND_OBJECTIVE_CEILINGS_BEFORE_ANY_MATCHED_OPUS_CALL__KEEP_UNCOVERED_LEAVES_EXPLICIT__RECOMPUTE_OUTER_GLOBAL_OBSERVATION_COVERAGE_AFTER_M2_M5_ZERO_REALITY_SATURATION",
+  "public_bar_reconciliation": "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json",
+  "observation_dominance": "canonical/governance/TERMINAL_OBSERVATION_DOMINANCE_AND_PROOF_MULTIPLEXING_V1.json"
 }
