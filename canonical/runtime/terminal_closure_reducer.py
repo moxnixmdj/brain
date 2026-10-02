@@ -62,6 +62,8 @@ def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         ids.append(fid)
         if family.get("closure_state") != "PASS":
             failures.append(f"FAMILY_OPEN:{fid}")
+        if family.get("ownership_status") != "VERIFIED_OWNED_EQUAL_OR_BETTER":
+            failures.append(f"FAMILY_NOT_VERIFIED_OWNED:{fid}")
 
     if len(families) != REQUIRED_FAMILY_COUNT:
         failures.append(f"ACTUAL_FAMILY_COUNT:{len(families)}")
@@ -69,6 +71,10 @@ def evaluate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         failures.append("DUPLICATE_FAMILY_ID")
     if manifest.get("actual_family_count") != len(families):
         failures.append("DECLARED_ACTUAL_FAMILY_COUNT_MISMATCH")
+    if manifest.get("verified_closed_family_count") != REQUIRED_FAMILY_COUNT:
+        failures.append("VERIFIED_CLOSED_FAMILY_COUNT_NOT_19")
+    if manifest.get("open_family_count") != 0:
+        failures.append("OPEN_FAMILY_COUNT_NONZERO")
 
     counters = manifest.get("counters")
     if not isinstance(counters, dict):
