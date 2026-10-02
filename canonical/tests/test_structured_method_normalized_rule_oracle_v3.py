@@ -27,7 +27,7 @@ def make(seed:int,n:int=8):
           "output":out,
           "type":"number",
           "dimension":"USD",
-          "consumes_requirements":["R_SCHEMA"] if i==0 else (["R_FORMULA"] if i==1 else []),
+          "consumes_requirements":(["R_SCHEMA","R_FORMULA"] if n==1 and i==0 else (["R_SCHEMA"] if i==0 else (["R_FORMULA"] if i==1 else []))),
           "invariants":[{"kind":"domain_invariant","statement":f"I_{seed}_{i}({out})"}],
         })
         prior=out
