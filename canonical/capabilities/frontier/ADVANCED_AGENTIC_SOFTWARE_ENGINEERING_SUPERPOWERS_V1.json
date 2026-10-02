@@ -37,8 +37,8 @@
     "evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
     "disposition": "FALSIFIED_FOR_ADVANCEMENT__DO_NOT_REPAIR_SPENT_TASKS"
   },
-  "residual_gap": "OUTER_GLOBAL_TERMINAL_UNIVERSE_NOT_YET_EXACT_CUT_READY__M2_M3_M4_M5_SURVIVING_MECHANISM_RESIDUALS_AND_TERMINAL_PROOF_MULTIPLEXING_REMAIN",
-  "next_action": "SATURATE_M2_M3_M4_M5_SURVIVING_RESIDUALS_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__APPLY_TERMINAL_OBSERVATION_DOMINANCE_AND_SCOPE_EQUIVALENT_PUBLIC_BARS__RECOMPUTE_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
+  "residual_gap": "ZERO_PREPROOF_IMPLEMENTATION_AND_MECHANISM_GAPS__EXACT_FOUR_PORTFOLIO_TERMINAL_OBSERVATION_CUT_FROZEN__PREQUALIFICATION_SURFACE_BINDINGS_SCOPE_EQUIVALENT_PROOFS_AND_PRE_WAVE_SAFETY_IDENTIFIABILITY_GATES_REMAIN",
+  "next_action": "COMPLETE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION__FREEZE_ZERO_COST_EVALUATION_ROUTES_ORACLES_MUTATIONS_CONTAMINATION_DEPENDENCIES_AND_PRE_WAVE_DONOR_COMPOSITION_PREFLIGHT__THEN_DERIVE_ONE_PARALLEL_T0_T1_T2_T3_EXECUTION_AUTHORITY",
   "promotion_rule": "NO_OWNERSHIP_CREDIT_UNTIL_STAGE1_TERMINAL_BENCH_COMPARABLE_SCORE_MEETS_OR_EXCEEDS_66_4_PERCENT_AND_STAGES_2_AND_3_OR_VALIDATED_DIRECT_EQUIVALENTS_PASS_WITH_CONFIGURATION_ATTRIBUTION.",
   "incremental_spend_usd": 0,
   "verified_fresh_task_evidence": [
@@ -54,9 +54,9 @@
   ],
   "current_execution": null,
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
-  "current_atomic_blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__OPERATIVE_ROUTE_CLOSURE__ONLY_SHARED_S0_G0_SEMANTIC_MODEL_ACQUISITION_REMAINS",
-  "current_atomic_next_action": "CLOSE_OR_BOUND_S0_G0_IMPLICIT_LONG_RANGE_MULTIMODAL_AND_NOVEL_TYPED_STRUCTURE_RESIDUAL__FREEZE_DONOR_INDEPENDENT_SHARED_SEMANTIC_ROUTE__VERIFY_COMPOSITION_MUTATION_AND_DONOR_GATES__THEN_ADMIT_T0_T1_T2_T3_ONE_PARALLEL_WAVE",
-  "current_atomic_progress_event": "S0_G0_CLOSED_OR_EXACT_FAIL_CLOSED_BLOCKER_VERDICT",
+  "current_atomic_blocker": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_NOT_YET_PASS__ORACLES_MUTATIONS_CONTAMINATION_DEPENDENCY_MANIFESTS_ZERO_COST_EVALUATION_ROUTES_AND_PRE_WAVE_DONOR_COMPOSITION_PREFLIGHT_NOT_YET_ALL_FROZEN",
+  "current_atomic_next_action": "COMPLETE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION__FREEZE_ZERO_COST_EVALUATION_ROUTES_ORACLES_MUTATIONS_CONTAMINATION_DEPENDENCIES_AND_PRE_WAVE_DONOR_COMPOSITION_PREFLIGHT__THEN_DERIVE_ONE_PARALLEL_T0_T1_T2_T3_EXECUTION_AUTHORITY",
+  "current_atomic_progress_event": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_PASS_OR_FAIL_CLOSED_SPECIFIC_BLOCKER",
   "current_atomic_state_source": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
   "rank22_execution_reconciliation": {
     "status": "SPENT_BUILDER_RUNTIME_FAILURE__ZERO_CREDIT__NO_REPLAY",
@@ -71,7 +71,7 @@
     "status": "ACTIVE",
     "rule": "HARDEN_FROM_EXISTING_SPENT_EVIDENCE_BEFORE_NEW_UNTOUCHED_QUALIFICATION_SPEND"
   },
-  "current_target_role": "ACCOUNTING_SURFACE_ONLY_WHILE_GLOBAL_TERMINAL_SCHEDULER_CLOSES_D0_AND_SHARED_S0_G0",
+  "current_target_role": "ACCOUNTING_AND_FINAL_ACCEPTANCE_SURFACE_ONLY__GLOBAL_TERMINAL_PREQUALIFICATION_IS_SCHEDULING_AUTHORITY",
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
     "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
@@ -80,7 +80,7 @@
     "rank23": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json",
     "residual_action_universe_v2": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
     "m1b_complete": true,
-    "m0a_m1a_complete": false,
+    "m0a_m1a_complete": true,
     "m1a_ocr_closed": true,
     "pinned_image_ocr": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
     "m0a_donor_policy": "canonical/governance/M0A_WHITE_BOX_DONOR_SELECTION_POLICY_V1.json",
@@ -97,38 +97,49 @@
         "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
       ],
       "execution_authorized": false
-    }
+    },
+    "preproof_implementation_residual_count": 0,
+    "current_prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
   },
   "outer_global_terminal_universe": {
-    "status": "PRIMARY_SCHEDULING_AUTHORITY",
+    "status": "PRIMARY_SCHEDULING_AUTHORITY__PREQUALIFICATION_REQUIRED__FRESH_TERMINAL_EVIDENCE_BLOCKED",
     "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
-    "fresh_terminal_evidence_allowed": false
+    "fresh_terminal_evidence_allowed": false,
+    "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
+    "zero_cost_route_matrix": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+    "zero_cost_access_ledger": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_ACCESS_LEDGER_V1.json",
+    "private_surface_candidate_map": "canonical/governance/PRIVATE_TERMINAL_SURFACE_SUBSTITUTION_CANDIDATES_V1.json"
   },
   "exact_outer_terminal_observation_cut": {
     "verdict": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
     "exact_minimum_count": 4,
-    "execution_authorized": false
+    "portfolios": [
+      "T0",
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "execution_authorized": false,
+    "blocked_by": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION"
   },
   "shared_semantic_residual_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
   "open_mechanism_frontier": {
-    "lane_local": [
-      "M2"
-    ],
-    "shared": [
-      "S0",
-      "G0"
-    ],
-    "deterministic_tail": [
-      "D0"
-    ],
+    "lane_local": [],
+    "shared": [],
+    "deterministic_tail": [],
     "proof_only": [
       "M0",
       "M1",
+      "M2",
       "M3",
       "M4",
       "M5",
+      "S0",
+      "G0",
       "S1"
-    ]
+    ],
+    "preproof_implementation_residual_count": 0,
+    "rule": "NO_GENERIC_MECHANISM_WORK_BEFORE_TERMINAL_WAVE__REOPEN_ONLY_FROM_CAUSALLY_LOCALIZED_REPEATABLE_SOLVABLE_TERMINAL_FAILURE"
   },
   "m3_dependency_compression": "canonical/governance/M3_DEPENDENCY_COMPRESSION_V1.json",
   "m5_dependency_compression": "canonical/governance/M5_DEPENDENCY_COMPRESSION_V1.json"
