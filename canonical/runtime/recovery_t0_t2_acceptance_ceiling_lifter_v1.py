@@ -5,6 +5,8 @@ SELF_VERIFICATION_DEBUGGING_AND_RECOVERY -> TRAJECTORY_CRITICAL_FAILURE_LOCALIZA
 scope relation, exact frozen P1 binding, and immutable terminal V3 T0/T2 receipts.
 """
 from __future__ import annotations
+import json
+from pathlib import Path
 from typing import Any, Mapping
 
 SCHEMA="PROJECT_BRAIN_RECOVERY_T0_T2_ACCEPTANCE_CEILING_LIFTER_V1"
@@ -30,6 +32,18 @@ TARGET_DIMS={
 "repair selection","recovery after injected failure",
 }
 MUTATION_RULE="ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE"
+ROOT=Path(__file__).resolve().parents[2]
+P1_SCOPE_QUARANTINE="canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json"
+
+def _scope_quarantine_error()->str|None:
+    try:
+        q=json.loads((ROOT/P1_SCOPE_QUARANTINE).read_text(encoding="utf-8"))
+    except Exception:
+        return "P1_EXECUTION_SCOPE_QUARANTINE_UNREADABLE"
+    blocked=q.get("quarantine_pending_independent_verification")
+    if isinstance(blocked,list) and "P1_TO_RECOVERY_ACCEPTANCE_SEMANTIC_TRANSPORT" in blocked:
+        return "P1_EXECUTED_TERMINAL_SCOPE_MISMATCH_QUARANTINE_ACTIVE"
+    return None
 
 def _fail(errors:list[str])->dict[str,Any]:
     return {"schema":SCHEMA,"status":"FAIL_CLOSED","pass":False,"errors":sorted(set(errors)),
@@ -59,6 +73,9 @@ def _receipt(terminal:Mapping[str,Any],portfolio:str)->Mapping[str,Any]|None:
 def evaluate(*,protocols:Mapping[str,Any],registry:Mapping[str,Any],predicates:Mapping[str,Any],
              binding:Mapping[str,Any],terminal:Mapping[str,Any],relation:Mapping[str,Any])->dict[str,Any]:
     e:list[str]=[]
+    quarantine_error=_scope_quarantine_error()
+    if quarantine_error is not None:
+        e.append(quarantine_error)
     p=_protocol(protocols)
     if p is None: e.append("RECOVERY_PROTOCOL_MISSING_OR_DUPLICATE")
     else:
