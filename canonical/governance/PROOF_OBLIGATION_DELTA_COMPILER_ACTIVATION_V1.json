@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_OBLIGATION_DELTA_COMPILER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_CANDIDATE__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Compile frozen target obligations and verified witness evidence into one explicit content-addressed normal form and return the exact unresolved proof delta before any semantic implication, comparator execution, or fresh reality query.",
+  "runtime": "canonical/runtime/proof_obligation_delta_compiler_v1.py",
+  "tests": "canonical/tests/test_proof_obligation_delta_compiler_v1.py",
+  "placement": [
+    "AFTER_TARGET_AND_WITNESS_SOURCE_NORMALIZATION",
+    "AFTER_INDEPENDENT_CONTAMINATION_ADMISSIBILITY",
+    "BEFORE_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "BEFORE_PROOF_MODE_TRANSMUTATION",
+    "BEFORE_FRESH_REALITY_QUERY"
+  ],
+  "normal_form": {
+    "target": [
+      "CONTENT_ADDRESSED_SCOPE_COMPONENTS",
+      "REQUIRED_ATOMS",
+      "REQUIRED_INVARIANTS",
+      "METRIC_REQUIREMENTS"
+    ],
+    "witness": [
+      "CONTENT_ADDRESSED_SCOPE_COMPONENTS",
+      "PROVED_ATOMS",
+      "PROVED_INVARIANTS",
+      "METRIC_BOUNDS"
+    ],
+    "bindings": [
+      "INDEPENDENT_VERIFIED_SCOPE_BINDINGS",
+      "INDEPENDENT_VERIFIED_ATOM_BINDINGS",
+      "INDEPENDENT_VERIFIED_INVARIANT_BINDINGS",
+      "INDEPENDENT_VERIFIED_METRIC_BINDINGS"
+    ]
+  },
+  "hard_rules": [
+    "NO_BINDING_BY_NAME_PROSE_FAMILY_LABEL_OR_STRING_EQUALITY",
+    "NO_SCOPE_CREDIT_WITHOUT_EXPLICIT_INDEPENDENT_CONTENT_ADDRESSED_BINDING",
+    "NO_ATOM_INVARIANT_OR_METRIC_CREDIT_WITHOUT_EXPLICIT_INDEPENDENT_BINDING",
+    "PERFECT_METRIC_VALUES_CANNOT_REPAIR_MISSING_SCOPE",
+    "EXTRA_WITNESS_SCOPE_MAY_COUNT_AS_PROVEN_STRONGER_ONLY_AFTER_ALL_TARGET_SCOPE_COMPONENTS_ARE_EXPLICITLY_COVERED",
+    "OUTPUT_IS_PREPROOF_DELTA_ONLY__ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "expected_breakthrough": "Replace bespoke family-specific residual bookkeeping with one machine-checkable residual representation, prevent recurrence of narrow-scope ceiling lifts, and reduce subsequent search to only exact unresolved scope/atom/invariant/metric obligations.",
+  "first_required_applications": [
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "MULTI_CAPABILITY_COMPOSITION_COMPONENT_INTERFACES",
+    "P1_RECOVERY_QUARANTINED_SCOPE_RESIDUAL"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
