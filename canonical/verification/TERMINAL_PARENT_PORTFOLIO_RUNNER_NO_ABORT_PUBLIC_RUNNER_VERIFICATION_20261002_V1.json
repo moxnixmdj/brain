@@ -29,7 +29,12 @@
     "HIDDEN_ORACLE_ISOLATED",
     "NO_CASE_REPLACEMENT",
     "NO_TUNING_REPLAY",
-    "ZERO_TERMINAL_CASES_CONSUMED"
+    "ZERO_TERMINAL_CASES_CONSUMED",
+    "REAL_PARENT_CASE_PRODUCER",
+    "SAME_CASE_INSTRUMENTATION",
+    "PARENT_TERMINAL_ACCEPTANCE_DERIVED",
+    "DIRECT_INSTRUMENTATION_VERDICT_DERIVED",
+    "NO_STUB_RECEIPTS"
   ],
   "execution_authority": false,
   "promotion_authority": false,
@@ -37,5 +42,11 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "semantic_continuity": {
+    "prior_independent_receipt": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "repair_commit": "2ee71c5c333d28a4cce6cccc05b2cccbb84dd58d",
+    "repair_scope": "ONLY_REPLACE_POST_EXECUTION_EXCEPTION_WITH_RECEIPT_RETURN__NO_CASE_GENERATION_OR_ORACLE_SEMANTICS_CHANGED",
+    "current_full_runner_regression_run": 36977657368
+  }
 }
