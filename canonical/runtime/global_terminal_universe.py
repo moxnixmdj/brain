@@ -17,6 +17,7 @@ def build_universe():
     manifest = _load("canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json")
     v6 = _load("canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json")
     frozen = _load("canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json")
+    prequalification = _load("canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json")
 
     proof_only = set(graph.get("proof_only_mechanism_obligations", []))
     open_lane_ids = set(graph.get("open_mechanism_residuals", []))
@@ -170,8 +171,17 @@ def build_universe():
         )
     else:
         cut["reason"] = "TERMINAL_OBSERVATION_SET_IS_EXACT__NO_OPEN_SPECIFICATION_OR_MECHANISM_HOLES"
-    cut["execution_ready"] = cut["exact_cut_ready"]
+    prequalification_ready = bool(prequalification.get("execution_authority", False))
+    cut["prequalification_ready"] = prequalification_ready
+    cut["execution_ready"] = cut["exact_cut_ready"] and prequalification_ready
+    if cut["exact_cut_ready"] and not prequalification_ready:
+        cut["reason"] = "TERMINAL_OBSERVATION_SET_IS_EXACT__PREQUALIFICATION_INCOMPLETE__DO_NOT_SPEND_CLEAN_TERMINAL_EVIDENCE"
     regenerated["global_cut"] = cut
+    regenerated["terminal_prequalification"] = {
+        "source": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
+        "status": prequalification.get("status"),
+        "execution_authority": prequalification_ready,
+    }
 
     authority = copy.deepcopy(frozen["execution_authority"])
     authority["fresh_terminal_evidence_allowed"] = cut["execution_ready"]
@@ -179,6 +189,8 @@ def build_universe():
         [f"CLOSE_OR_EXACTLY_BOUND_{item}" for item in open_impl_mech]
         + [f"CLOSE_{item}" for item in open_gate_mech]
     )
+    if cut["exact_cut_ready"] and not prequalification_ready:
+        authority["immediate_zero_reality_work"] = list(prequalification.get("next", []))
     regenerated["execution_authority"] = authority
 
     counts = copy.deepcopy(frozen["counts"])
@@ -209,6 +221,12 @@ def build_universe():
             "NO_IMPLEMENTATION_RESIDUALS__EXACT_TERMINAL_OBSERVATION_CUT_FROZEN__"
             "GLOBAL_OWNERSHIP_GATES_OPEN__FRESH_TERMINAL_EVIDENCE_BLOCKED"
         )
+    elif not prequalification_ready:
+        regenerated["status"] = (
+            "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__"
+            "NO_IMPLEMENTATION_OR_MECHANISM_GAPS__EXACT_TERMINAL_OBSERVATION_CUT_FROZEN__"
+            "PREQUALIFICATION_BLOCKED"
+        )
     else:
         regenerated["status"] = (
             "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__"
@@ -226,6 +244,12 @@ def build_universe():
         regenerated["next"] = (
             "CLOSE_ONLY_CURRENT_DERIVED_GLOBAL_OWNERSHIP_GATES__"
             "REGENERATE_AND_VERIFY_UNIVERSE__THEN_EXECUTE_FROZEN_GLOBAL_TERMINAL_OBSERVATION_CUT"
+        )
+    elif not prequalification_ready:
+        regenerated["next"] = (
+            "COMPLETE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION__"
+            "FREEZE_ZERO_COST_EXECUTION_ROUTES_ORACLES_MUTATIONS_CONTAMINATION_AND_DEPENDENCY_MANIFESTS__"
+            "THEN_REGENERATE_AND_EXECUTE_T0_T1_T2_T3_IN_PARALLEL"
         )
     else:
         regenerated["next"] = (
