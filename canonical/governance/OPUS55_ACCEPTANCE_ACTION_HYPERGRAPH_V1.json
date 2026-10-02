@@ -63,7 +63,7 @@
           "note": "Scope-safe algebra v2 requires an independently verified EXACT or SUPERSET witness-to-target scope relation; no relation may be inferred from names, prose, family labels, or atom overlap."
         }
       ],
-      "notes": "Scope-safe implication algebra v2, witness catalog identity, and contamination admissibility are independently verified. Action remains fail-closed on explicit witness-to-target atom/metric bindings AND independently verified exact-or-superset scope relations. No name/prose analogy, no narrow-to-broad scope leakage, zero credit from compiler readiness alone."
+      "notes": "Scope-safe implication algebra v2, witness catalog identity, and contamination admissibility are independently verified. Action remains fail-closed on explicit witness-to-target atom/metric bindings AND independently verified EXACT/SUPERSET scope relations. No name/prose analogy, no narrow-to-broad scope leakage, zero credit from compiler readiness alone."
     },
     {
       "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
