@@ -5,63 +5,24 @@
   "source": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
   "obligations": [
     "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
-    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
     "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
     "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001"
   ],
-  "blockers": [
-    {
-      "id": "P1_SCOPE_EQUIVALENCE",
-      "status": "OPEN",
-      "closable": true,
-      "external_blocked": false,
-      "dependency_depth": 1,
-      "critical_path_wall_clock_units": 1,
-      "new_reality_units": 0
-    },
-    {
-      "id": "P1_TERMINAL_BINDING",
-      "status": "OPEN",
-      "closable": true,
-      "external_blocked": false,
-      "dependency_depth": 1,
-      "critical_path_wall_clock_units": 1,
-      "new_reality_units": 0
-    }
-  ],
+  "blockers": [],
   "semantic_blocker_equivalence": [],
-  "routes": [
-    {
-      "id": "P1_INTERVENTION_RESCUE_ABSOLUTE",
-      "covers": [
-        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
-      ],
-      "proof_mode": "DETERMINISTIC_HIDDEN_ORACLE",
-      "blockers": [
-        "P1_SCOPE_EQUIVALENCE",
-        "P1_TERMINAL_BINDING"
-      ],
-      "base_admissible": true,
-      "terminal_scope_authority": false,
-      "terminal_scope_authority_after_blockers": true,
-      "scope_authority_blocker": "P1_SCOPE_EQUIVALENCE",
-      "zero_incremental_spend": true,
-      "oracle_independent": true,
-      "candidate_oracle_hidden": true
-    }
-  ],
+  "routes": [],
   "execution_authority": false,
   "promotion_authority": false,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "note": "Live frontier resynchronized to ACTIVE_TERMINAL_PROOF_BASIS_V1 after independently verified delegation objective route promotion: five contracts remain blocked. Trajectory retains the P1 internal absolute-route candidate; CAD, Browser, Tool Discovery, and Research remain residual until stronger routes are fully bound. Scheduling only; no terminal credit.",
+  "note": "Live frontier resynchronized to ACTIVE_TERMINAL_PROOF_BASIS_V1 after independently verified P1 T0/T2 trajectory admission: four contracts remain blocked (CAD, Browser, Tool Discovery, Research). No currently encoded residual route is independently admissible in this compiler input; objective-oracle dominance routes are governed separately and must close their route-specific gates before promotion. Scheduling only; no terminal credit.",
   "authority_sync": {
     "source": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-    "authority_basis_blob_sha": "b345393acde78c9c9ce005facc6ba801d3cd3edf",
-    "admitted_contract_removed": "TASK_TO_DELEGATION_GRAPH_001",
-    "expected_open_obligation_count": 5,
+    "authority_basis_blob_sha": "e2b95e407bd83943ffc74bfb0bf72092def38ba7",
+    "admitted_contract_removed": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "expected_open_obligation_count": 4,
     "fail_closed_if_authority_diverges": true
   }
 }
