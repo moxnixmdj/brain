@@ -1,0 +1,18 @@
+name: Verify final CAD T0 prewave binding
+on:
+  push:
+    branches: [main, obs-cad-final-oracle-binding-20261002]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_cad_t0_oracle_extractor canonical.tests.test_verify_cad_t0_final_prewave_v1
