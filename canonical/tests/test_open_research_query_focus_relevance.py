@@ -173,6 +173,60 @@ class ResearchQueryFocusTests(unittest.TestCase):
         self.assertIn("size",q,out)
         self.assertNotIn("authoritative",q,out)
 
+    def test_decision_role_admission_rejects_wrong_property_despite_operand_overlap(self):
+        objective=(
+            "Assess whether the thermal conductivity of AISI type 304 stainless steel "
+            "is higher than the thermal conductivity of 6061 aluminum. "
+            "Use authoritative primary technical evidence."
+        )
+        candidates=[
+            {
+              "url":"https://wrong.example/ignition",
+              "title":"Ignition Temperature of Bulk 6061 Aluminum, 302 Stainless Steel and 1018 Carbon Steel in Oxygen",
+              "snippet":"6061 aluminum and stainless steel ignition temperature measurements."
+            },
+            {
+              "url":"https://right.example/304",
+              "title":"Thermal conductivity of AISI type 304 stainless steel",
+              "snippet":"Measured thermal conductivity for AISI type 304 stainless steel."
+            },
+            {
+              "url":"https://right.example/6061",
+              "title":"Thermal conductivity of 6061 aluminum",
+              "snippet":"Measured thermal conductivity for 6061 aluminum."
+            },
+        ]
+        out=self.rank.rank(objective,candidates)
+        self.assertEqual(out["status"],"LEXICAL_RELEVANCE_RANKED",out)
+        by_index={x["original_index"]:x for x in out["ranked_candidates"]}
+        self.assertFalse(by_index[0]["decision_role_admitted"],out)
+        self.assertTrue(by_index[1]["decision_role_admitted"],out)
+        self.assertTrue(by_index[2]["decision_role_admitted"],out)
+        self.assertNotEqual(out["top_candidate_original_index"],0,out)
+        self.assertTrue(out["top_candidate_admission"]["decision_role_verified"],out)
+
+    def test_decision_role_admission_rejects_wrong_operand_with_correct_property(self):
+        objective=(
+            "Determine whether France population growth is higher than Germany population growth."
+        )
+        candidates=[
+            {
+              "url":"https://wrong.example/spain",
+              "title":"Spain population growth",
+              "snippet":"Population growth estimate for Spain."
+            },
+            {
+              "url":"https://right.example/france",
+              "title":"France population growth",
+              "snippet":"Population growth estimate for France."
+            },
+        ]
+        out=self.rank.rank(objective,candidates)
+        by_index={x["original_index"]:x for x in out["ranked_candidates"]}
+        self.assertFalse(by_index[0]["decision_role_admitted"],out)
+        self.assertTrue(by_index[1]["decision_role_admitted"],out)
+        self.assertEqual(out["top_candidate_original_index"],1,out)
+
     def test_focus_is_deterministic_and_model_free(self):
         objective="Compare sodium battery energy density with lithium battery energy density."
         a=self.focus.focus(objective)
