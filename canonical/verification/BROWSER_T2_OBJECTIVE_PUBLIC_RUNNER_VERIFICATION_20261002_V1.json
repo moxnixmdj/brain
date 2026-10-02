@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_BROWSER_T2_OBJECTIVE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_CURRENT_BROWSER_T2_OBJECTIVE_PACKAGE__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 683,
+  "public_pr_state": "closed",
+  "public_pr_head_sha": "cff4fe7040b6f0a45d8fbdc88da8210e8094b8c1",
+  "workflow_run_id": 36968248324,
+  "workflow_job_id": 110716579898,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "36e96b9dc90301fe89f7a8f963c24920f6c6595e",
+    "canonical/runtime/browser_t2_objective_binding_validator.py": "0d8fc6d67c840033bd0412630e7199161b291165",
+    "canonical/tests/test_browser_t2_objective_binding_validator.py": "d16727f95d48cd5a7288dc7416e88b9b1d5b1c46",
+    "canonical/runtime/browser_state_information_safe_candidate.py": "8acf61f21a15a0d3b3e0e5735ebb80e20393e405",
+    "canonical/runtime/browser_state_information_safe_proof.py": "3723d3233d6058f0a43491e4654a21490f992d1e",
+    "canonical/runtime/browser_transition_objective_audit_v1.py": "e37548030083627d711f12b85f7c3785aed41081",
+    "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json": "1cb9b4ca93699e4db965dd2a682017eebd6649be",
+    "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json": "669afcde50302e76c1b0a1f6b186aaafa8730515",
+    "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "afa00109031d638fef32cc3fe10be18786605c39",
+    "canonical/runtime/consensus_dom_grounding.py": "2849a9eea74c6c595709f77eba23fd40a3be8c9a"
+  },
+  "verified": [
+    "EXACT_CURRENT_BRAIN_PACKAGE_BLOBS_BOUND",
+    "PYTHON_COMPILE_PASS",
+    "LIVE_FROZEN_BROWSER_OBJECTIVE_BINDING_VALIDATOR_PASS",
+    "FIVE_CLASS_BROWSER_DIAGNOSTIC_50_OF_50_PASS",
+    "HIDDEN_ORACLE_BOUNDARY_PASS",
+    "IMMUTABLE_SELECTION_KERNEL_BINDING_PASS",
+    "AUTOMATIONBENCH_PUBLIC_PARENT_BINDING_PASS",
+    "ALL_PREWAVE_ROUTE_GATES_FROZEN",
+    "NO_TERMINAL_BEACON_CONSUMED",
+    "NO_TERMINAL_CASE_EXECUTED"
+  ],
+  "limitations": [
+    "PREWAVE_ADMISSION_ONLY",
+    "NO_TERMINAL_BROWSER_RESULT",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
