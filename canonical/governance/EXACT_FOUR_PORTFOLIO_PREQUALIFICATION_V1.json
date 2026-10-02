@@ -93,14 +93,16 @@
       "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
       "known_required_surfaces": [
         "Humanity's Last Exam with tools >=67.7%",
-        "Terminal-Bench-Science 0.1 >=58.7%",
-        "Vals MysteryMechanism >=49.55% for represented scope"
+        "Terminal-Bench-Science 0.1 >=58.7%"
       ],
       "blockers": [
         "TERMINAL_BENCH_SCIENCE_0_1_PUBLIC_ROUTE_EXISTS__RESOURCE_AND_BRAIN_ADAPTER_PREFLIGHT_NOT_YET_FROZEN",
         "HLE_DATA_AND_CORE_EVAL_ARE_PUBLIC__EXACT_WITH_TOOLS_ROUTE_EQUIVALENCE_NOT_YET_FROZEN",
-        "VALS_MYSTERYMECHANISM_IS_PROPRIETARY__FREEZE_SCOPE_EQUIVALENT_ABSOLUTE_UNKNOWN_DOMAIN_PROOF_OR_REMAIN_BLOCKED",
-        "UNKNOWN_DOMAIN_TOOL_TRANSFER_AND_ABSTENTION_LEAVES_REQUIRE_EXPLICIT_SCOPE_AUDIT"
+        "UNKNOWN_DOMAIN_TOOL_TRANSFER_AND_ABSTENTION_LEAVES_REQUIRE_EXPLICIT_SCOPE_AUDIT",
+        "T3_CONTRACT_NATIVE_UNKNOWN_DOMAIN_RESEARCH_TOOL_SELECTION_AND_ABSTENTION_INSTRUMENTATION_MUST_BE_FROZEN_AND_PASS__NO_PRIVATE_SCORE_CREDIT"
+      ],
+      "background_reference_surfaces": [
+        "Vals MysteryMechanism >=49.55% represented scope__BACKGROUND_REFERENCE_ONLY__DIRECT_EXECUTION_ROUTE_DELETED"
       ]
     }
   },
@@ -196,7 +198,9 @@
     "private_brain_actions_runner_currently_unusable_for_new_checks": "RUNNER_NOT_ASSIGNED__PUBLIC_VERIFICATION_CAPSULE_ROUTE_USED",
     "livebench_spacy_dead_dependency_deleted": true,
     "independent_verifier_failover_installed": true,
-    "public_runner_exact_blob_binding_verified": true
+    "public_runner_exact_blob_binding_verified": true,
+    "mysterymechanism_direct_execution_route_deleted": true,
+    "proxy_benchmark_substitutions_admitted": 0
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -219,5 +223,6 @@
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "finite_population_proof_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "private_surface_dependency_deletion_map": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
-  "independent_verification_carrier_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json"
+  "independent_verification_carrier_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json",
+  "private_surface_route_deletion_vs_substitution_reconciliation": "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json"
 }
