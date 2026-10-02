@@ -3,6 +3,8 @@ name: Verify DOCX relationship image replacement
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
     paths:
       - canonical/runtime/docx_relationship_image_replace.py
       - canonical/tests/test_docx_relationship_image_replace.py
