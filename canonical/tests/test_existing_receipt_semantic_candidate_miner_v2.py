@@ -98,6 +98,7 @@ class Tests(unittest.TestCase):
                 )
             (root / "canonical/verification/witness.json").write_text('{"claim":"R1"}\n', encoding="utf-8")
             _, out = run_miner(root)
+            self.assertGreater(out["global_actual_reuse_candidate_count"], m.MAX_MATCHES_PER_LITERAL)
             self.assertEqual(out["global_stored_reuse_candidate_count"], m.MAX_MATCHES_PER_LITERAL)
             self.assertEqual(out["truncated_literal_search_count"], 1)
 
