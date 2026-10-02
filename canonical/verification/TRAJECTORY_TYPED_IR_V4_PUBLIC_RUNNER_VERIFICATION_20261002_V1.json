@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__TYPED_CROSS_DOMAIN_CAUSAL_PREFLIGHT__REPAIR_TARGET_NOT_CANDIDATE_VISIBLE__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py": "0c386e6b78a8e97e9c1944e63600047bc4e2849b",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py": "6e1dfaa6b63fc629d55d07b2361bf625f11a5ce3",
+    "canonical/tests/test_trajectory_failure_typed_ir_v4.py": "70a224fec7341775e46bb1bfb8bd2d33b3c355b3"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 654,
+    "verified_head": "21efffbb059d40a5417d4c7b1262e93cb0538213",
+    "merge_commit": "041771482e0b3959d2914b1fe4988c65deb6850e",
+    "workflow_run_id": 36966034129,
+    "job_id": 110709867920,
+    "conclusion": "success"
+  },
+  "verified": [
+    "168_DOMAIN_MECHANISM_CAUSAL_PATTERN_CASES_PASS",
+    "HIDDEN_ORACLE_NOT_IN_PUBLIC_PAYLOAD",
+    "REFERENCE_REPAIR_TARGET_NOT_IN_CANDIDATE_VISIBLE_CHECKS",
+    "CANDIDATE_DERIVES_REPAIR_TARGET_FROM_CAUSAL_ACTION_AND_VIOLATED_MECHANISM",
+    "INJECTED_VISIBLE_REPAIR_TARGET_CANNOT_CONTROL_CANDIDATE",
+    "WRONG_DERIVED_REPAIR_TARGET_REJECTED_BY_HIDDEN_ORACLE",
+    "DOWNSTREAM_SYMPTOM_REJECTED",
+    "AMBIGUOUS_MULTI_ROOT_CASE_ABSTAINS",
+    "CONJUNCTIVE_INTERACTION_PRESERVED"
+  ],
+  "limitations": [
+    "PREFLIGHT_ONLY__NOT_TERMINAL_RESULT",
+    "TERMINAL_INTERVENTION_RESCUE_REMAINS_LOAD_BEARING_IN_FROZEN_T0_T2_OBSERVATIONS"
+  ],
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
