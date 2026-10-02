@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_CROSS_FORMAT_INFORMATION_SAFE_PREFLIGHT_V1",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION__BOUNDED_STRUCTURAL_PRESERVATION_ONLY__ZERO_TERMINAL_AUTHORITY",
+  "status": "INDEPENDENT_BOUNDED_PREFLIGHT_PASS__CROSS_FORMAT_STRUCTURAL_PRESERVATION__VISUAL_AND_WHOLE_SCOPE_GATES_PENDING__ZERO_TERMINAL_AUTHORITY",
   "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
   "candidate": "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
   "proof_population": "canonical/runtime/native_artifact_cross_format_proof_v1.py",
@@ -24,7 +24,12 @@
     "EXPECTED_FORMAT_REOPEN_SNAPSHOT",
     "PDF_PAGE_GEOMETRY_AND_OPERATOR_INVARIANTS"
   ],
-  "preflight_formats": ["DOCX","XLSX","PPTX","PDF"],
+  "preflight_formats": [
+    "DOCX",
+    "XLSX",
+    "PPTX",
+    "PDF"
+  ],
   "verified_intent": [
     "REQUESTED_TARGET_MUST_CHANGE",
     "UNRELATED_OOXML_PACKAGE_MEMBERS_MUST_REMAIN_BYTE_IDENTICAL",
@@ -41,7 +46,6 @@
     "NO_WHOLE_CONTRACT_SCOPE_EQUIVALENCE_YET"
   ],
   "remaining_before_scope_gate_v2": [
-    "INDEPENDENT_PUBLIC_RUNNER_PREFLIGHT_PASS",
     "VISUAL_RENDER_OR_STRONGER_LAYOUT_EQUIVALENCE_ROUTE",
     "WHOLE_CONTRACT_SCOPE_RELATION_FREEZE"
   ],
@@ -50,5 +54,6 @@
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_preflight": "canonical/verification/NATIVE_ARTIFACT_CROSS_FORMAT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
