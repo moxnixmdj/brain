@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_AGENCY_MATCHED_SUCCESS_EXISTING_RECEIPT_REDUCTION_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ZERO_REALITY_ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "exact_base_commit": "6e4b739bcaba178b0965e7b5cda21e3dfd22be74",
+  "target_predicate": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+  "authority": {
+    "subfrontier": "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json",
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V2.json",
+      "git_blob_sha": "c63fa69b3b4c5c677a05319e87fdcc01780e81ec"
+    },
+    "witness_catalog": {
+      "path": "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json",
+      "git_blob_sha": "45e1a4eaa2214c4a92f5d5787695069f2fe48aaf"
+    }
+  },
+  "candidate_reuse": {
+    "witness_id": "WITNESS::DELEGATION_ZERO_CRITICAL_COORDINATION_VIOLATIONS",
+    "witness_source_predicate": "DELEGATION_ZERO_CRITICAL_COORDINATION_VIOLATIONS",
+    "candidate_target_atom": "dimension:subtask_dependency_and_fan_in",
+    "basis": "The target normalization explicitly requires subtask dependency and fan-in. The content-addressed witness basis explicitly states that its frozen scorer rejects dependency violation and fan-in loss across 132/132 frozen delegation direct cases. This is a candidate atom-level semantic binding only, not target implication or scope transport.",
+    "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+    "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "supporting_sources": [
+      {
+        "path": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+        "sha": "928466401b36e4f3b09c517950cc050432a0616f"
+      },
+      {
+        "path": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+        "sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492"
+      }
+    ]
+  },
+  "residual_after_candidate_if_independently_verified": {
+    "still_missing_atoms": [
+      "dimension:multi_step_planning_with_at_least_three_distinct_tool_or_action_types",
+      "dimension:state_change_after_actions_requiring_replanning",
+      "dimension:long_horizon_state_retention",
+      "dimension:tool_failure_and_recovery",
+      "dimension:minimal_oversight_completion",
+      "metric:terminal_task_success"
+    ],
+    "still_missing_metric_bounds": [
+      "terminal_task_success_noninferiority"
+    ],
+    "exact_or_superset_scope_relation": "UNPROVED",
+    "target_implication": false
+  },
+  "hard_rules": [
+    "NO_BINDING_CREDIT_UNTIL_INDEPENDENT_EXACT_BLOB_VERIFICATION",
+    "NO_SCOPE_RELATION_INFERRED_FROM_ATOM_OVERLAP",
+    "NO_TARGET_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "P1_QUARANTINED_RECOVERY_TRANSPORT_FORBIDDEN",
+    "NO_FRESH_REALITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THE_SINGLE_CANDIDATE_ATOM_BINDING__IF_PASS_INJECT_ONLY_THAT_ATOM_INTO_THE_TARGET_SPECIFIC_CHILD_AND_RECOMPUTE_SCOPE_SAFE_ALGEBRA_V2__DO_NOT_CREDIT_TARGET_OR_SCOPE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
