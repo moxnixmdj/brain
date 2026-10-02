@@ -12,6 +12,7 @@ the frozen candidate-package commitment and a post-freeze beacon.
 from __future__ import annotations
 
 import hashlib
+import json
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -58,6 +59,18 @@ def static_dependency_preflight(root: Path = Path(".")) -> dict[str, Any]:
             "actual_blob": actual,
             "match": ok,
         }
+    binding_path = root / "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json"
+    try:
+        binding = json.loads(binding_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        errors.append("CAD_BINDING_READ:" + type(exc).__name__)
+        binding = {}
+    if binding.get("behavior_id") != BEHAVIOR_ID:
+        errors.append("CAD_BINDING_BEHAVIOR_ID_MISMATCH")
+    if binding.get("prewave_admissible") is not True:
+        errors.append("CAD_BINDING_NOT_PREWAVE_ADMISSIBLE")
+    if binding.get("antishortcut_falsification"):
+        errors.append("CAD_ANTISHORTCUT_FALSIFICATION_ACTIVE")
     return {
         "schema": SCHEMA,
         "status": "PASS" if not errors else "FAIL_CLOSED",
