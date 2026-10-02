@@ -68,5 +68,8 @@
   "complete_action_bundle": true,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "exact_cut_authorization": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
+  "fresh_matched_evaluation_authorized": true,
+  "authorization_scope": "ONLY_THE_PREDECLARED_SELECTED_PROOF_ACTION_FOR_THIS_BUNDLE"
 }
