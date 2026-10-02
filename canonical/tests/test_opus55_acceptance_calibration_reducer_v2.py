@@ -56,8 +56,9 @@ class Tests(unittest.TestCase):
         r=copy.deepcopy(r)
         r["family_verdict"]["passed_families"].remove("TOOL_DISCOVERY_SELECTION_AND_LEARNING")
         out=evaluate(e,p,r,t)
-        self.assertEqual(out["acceptance_calibrated_family_count"],2)
+        self.assertEqual(out["acceptance_calibrated_family_count"],3)
         self.assertIn("TOOL_DISCOVERY_SELECTION_AND_LEARNING",out["behavioral_missing_families"])
+        self.assertIn("SUBAGENT_DELEGATION_AND_COORDINATION",out["acceptance_calibrated_families"])
 
     def test_malformed_transmutation_fails_closed(self):
         e,p,r,t=self.live()
