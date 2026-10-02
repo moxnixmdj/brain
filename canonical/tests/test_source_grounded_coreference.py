@@ -1,5 +1,5 @@
 import unittest
-from canonical.runtime.source_grounded_coreference import Mention,compile_coreference_candidates
+from canonical.runtime.source_grounded_coreference import Mention,compile_coreference_candidates,extract_surface_mentions
 
 class SourceGroundedCoreferenceTests(unittest.TestCase):
     def test_ambiguity_preserved(self):
@@ -35,6 +35,17 @@ class SourceGroundedCoreferenceTests(unittest.TestCase):
         o=compile_coreference_candidates([Mention("r","it",0,2,0,is_reference=True)])
         self.assertEqual(o["candidate_edges"],[])
         self.assertEqual(o["unresolved_references"][0]["reason"],"NO_COMPATIBLE_PRIOR_MENTION")
+
+    def test_surface_extractor_does_not_promote_lowercase_words(self):
+        o=extract_surface_mentions("the server met Alice and she left.")
+        texts=[m["text"] for m in o["mentions"]]
+        self.assertEqual(texts,["Alice","she"])
+        self.assertTrue(o["mentions"][1]["is_reference"])
+
+    def test_surface_extractor_keeps_multiword_capitalized_np(self):
+        o=extract_surface_mentions("New York met Alice. It changed.")
+        texts=[m["text"] for m in o["mentions"]]
+        self.assertEqual(texts,["New York","Alice","It"])
 
     def test_overlap_fails_closed(self):
         ms=[Mention("a","A",0,2,0),Mention("b","B",1,3,0)]
