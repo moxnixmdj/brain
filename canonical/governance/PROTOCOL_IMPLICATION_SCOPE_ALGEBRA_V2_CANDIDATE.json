@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_CANDIDATE",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED_CANDIDATE__SCOPE_FIREWALL_ADDED__FIRST_INDEPENDENT_RUN_EXPOSED_RETURN_CONTRACT_BUG__FIXED__REVERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__SCOPE_FIREWALL_V2__ZERO_CREDIT",
   "objective": "Prevent narrow or merely similarly named Brain evidence from satisfying a broader frozen Opus55 acceptance target by requiring an explicit independently verified EXACT or SUPERSET witness-to-target scope relation before atom/metric implication can pass.",
   "runtime": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
   "tests": "canonical/tests/test_protocol_implication_scope_algebra_v2.py",
@@ -43,7 +43,7 @@
     "exact_target_literal_matches_in_proved_witness_sources": 0,
     "consequence": "NO_EXISTING_LITERAL_ONLY_WITNESS_TO_TARGET_EDGE_CAN_BE_PROMOTED_FROM_THE_CURRENT_NINE_WITNESSES"
   },
-  "next": "REVERIFY_FIXED_RUNTIME_EXACT_BLOB_WITH_UNCHANGED_ADVERSARIAL_TESTS__ONLY_AFTER_PASS_ACTIVATE_V2__THEN_NORMALIZE_EXPLICIT_TARGET_AND_WITNESS_SCOPE_REFS_AND_VERIFIED_SCOPE_RELATIONS__RERUN_ZERO_REALITY_ALGEBRA",
+  "next": "ACTIVATE_V2_IN_PROTOCOL_IMPLICATION_GATE__NORMALIZE_EXPLICIT_TARGET_AND_WITNESS_SCOPE_REFS_AND_VERIFIED_SCOPE_RELATIONS__MATERIALIZE_ONLY_INDEPENDENT_CONTENT_ADDRESSED_ATOM_METRIC_BINDINGS__RERUN_ZERO_REALITY_ALGEBRA",
   "incremental_spend_usd": 0,
   "new_reality_units_consumed": 0,
   "capability_credit_delta": 0,
@@ -62,5 +62,13 @@
       "safety_observation": "NARROW_RECOVERY_SCOPE_LEAKAGE_ADVERSARIAL_TEST_PASSED_DURING_FAILED_RUN",
       "disposition": "IMPLEMENTATION_BUG_FIXED_IN_BRAIN_COMMIT_df8fac9769cd99203c41e1a9d80cc925d99cef94__NO_ACTIVATION_NO_CREDIT"
     }
-  ]
+  ],
+  "independent_verification": {
+    "path": "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_runner_pr": 906,
+    "workflow_run_id": 37014473371,
+    "workflow_job_id": 110861847357,
+    "merge_commit": "98a36509467a13b18c68a66e3b8bad6c5a9cf87d",
+    "conclusion": "success"
+  }
 }
