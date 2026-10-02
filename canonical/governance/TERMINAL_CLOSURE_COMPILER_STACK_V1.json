@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_COMPILER_STACK_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_PREPROOF_CONTROL_STACK__NO_TERMINAL_CREDIT",
+  "objective": "ELIMINATE_ALL_NONCAUSAL_PREWAVE_LATENCY_AND_CLOSE_THE_SMALLEST_TRUTHFUL_GLOBAL_ADMISSION_CUT_BEFORE_ANY_FRESH_TERMINAL_EVIDENCE",
+  "components": {
+    "generated_truth": {
+      "runtime": "canonical/runtime/generated_terminal_state_compiler.py",
+      "tests": "canonical/tests/test_generated_terminal_state_compiler.py",
+      "progress_index": "canonical/governance/TERMINAL_PROGRESS_EVIDENCE_INDEX_V1.json",
+      "role": "DETECT_SET_COUNT_AND_RECONCILIATION_LAG_WITHOUT_SELF_PROMOTION"
+    },
+    "anti_circularity": {
+      "runtime": "canonical/runtime/prewave_anti_circularity_compiler.py",
+      "tests": "canonical/tests/test_prewave_anti_circularity_compiler.py",
+      "role": "PREVENT_TERMINAL_RESULT_DEPENDENT_FACTS_FROM_BECOMING_PREWAVE_PERMISSION_GATES"
+    },
+    "proof_supercompiler": {
+      "runtime": "canonical/runtime/terminal_proof_supercompiler.py",
+      "tests": "canonical/tests/test_terminal_proof_supercompiler.py",
+      "role": "ATOMIZE_ALL_OPEN_CONTRACTS__SATURATE_EXISTING_EVIDENCE__TRANSMUTE_TO_STRONGEST_PROOF_MODE__COMPUTE_EXACT_MINIMUM_INTERNAL_UNBLOCK_CUT",
+      "capacity": {
+        "obligations": 32,
+        "routes": 96,
+        "blockers": 64
+      }
+    },
+    "existing_prequalification": {
+      "runtime": "canonical/runtime/terminal_prequalification_reducer.py",
+      "tests": "canonical/tests/test_terminal_prequalification_reducer.py",
+      "independent_verification": "canonical/verification/TERMINAL_PREQUALIFICATION_12_CONTRACT_CURRENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    }
+  },
+  "sequencing": [
+    "GENERATE_CURRENT_STATE_FROM_CANONICAL_INPUTS",
+    "RECONCILE_ONLY_WITH_EXISTING_PROMOTION_LAW__NO_PROGRESS_SELF_PROMOTION",
+    "CLASSIFY_PREWAVE_VS_POSTWAVE_PREDICATES",
+    "ATOMIZE_ALL_REMAINING_PREWAVE_OBLIGATIONS",
+    "SATURATE_EXISTING_RECEIPTS_AND_DEDUCTIONS",
+    "TRANSMUTE_EACH_OBLIGATION_TO_STRONGEST_ADMISSIBLE_PROOF_MODE",
+    "COMPUTE_ONE_EXACT_GLOBAL_MINIMUM_UNBLOCK_CUT",
+    "EXECUTE_ONLY_CUT_MEMBERS_IN_PARALLEL",
+    "RECOMPUTE_AFTER_EACH_CAUSAL_CLOSURE",
+    "WHEN_PREWAVE_CUT_ZERO__RUN_T0_T1_T2_T3_ONE_SHOT_IN_PARALLEL",
+    "COMPILE_RECEIPTS__REOPEN_ONLY_CAUSALLY_LOCALIZED_FAILED_RESIDUALS",
+    "FINAL_DONOR_DELETION_CLEANROOM_AND_PROOF_BUNDLE_FREEZE"
+  ],
+  "deletion_rules": [
+    "NO_NEW_GENERIC_MECHANISM_WORK_WHILE_PREPROOF_IMPLEMENTATION_RESIDUAL_COUNT_IS_ZERO",
+    "NO_MATCHED_EXACT_OPUS_WHILE_STRONGER_INTERNAL_OR_PUBLIC_PROOF_ROUTE_REMAINS_REACHABLE",
+    "NO_TERMINAL_CASE_SPEND_BEFORE_PREWAVE_ADMISSION",
+    "NO_TASK_WITHOUT_A_DECLARED_EDGE_REMOVAL_IN_THE_GLOBAL_PROOF_GRAPH",
+    "NO_DUPLICATE_STATUS_TRUTH_SOURCE"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
