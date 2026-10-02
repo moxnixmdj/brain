@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__FULL_OPEN_PREDICATE_ACTION_COVERAGE__TOOL_LEARNING_ATOMIC_CEILING_CLOSED__MATCHED_PROOF_FRONTIER_OPEN_FOR_REMAINING_RESIDUALS__NO_CREDIT",
+  "status": "ACTIVE__DELEGATION_CEILING_CANDIDATE_STAGED__29_UNPROVED_PREDICATES_COVERED__NO_CREDIT_UNTIL_INDEPENDENT_VERIFICATION",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
@@ -33,7 +33,6 @@
         "VISION_DENSE_NONCHART_SCOPE",
         "IF_SCOPE_BOUNDARY_NONINFERIOR",
         "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-        "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
         "RECOVERY_TERMINAL_NONINFERIOR",
         "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
         "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
@@ -54,7 +53,7 @@
           }
         }
       ],
-      "notes": "Resume exactly once from the changed direct-objective gate evidence. Recompile the admissible witness frontier against the five independently revalidated current objective bindings; do not grant acceptance credit from prewave evidence alone. Terminal evidence remains required for any direct-objective replacement witness.",
+      "notes": "Resume exactly once from changed admissible witness evidence. Delegation terminal-success is removed after the staged exact-binding 132/132 absolute-ceiling witness; remaining matched predicates still require full-scope stronger proof or exact comparator.",
       "saturation_receipt": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V1.json",
       "gate_change_receipt": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
     },
@@ -217,7 +216,8 @@
     "matched_proof_frontier": "REOPENED_ON_NEW_ADMISSIBLE_DIRECT_OBJECTIVE_GATE_RECEIPT__ZERO_ACCEPTANCE_CREDIT",
     "tb4_global_attainability": "IMPOSSIBLE__180_LT_220__EXECUTION_REVOKED",
     "tool_learning_atomic_acceptance": "PROVED_3_OF_3__canonical/verification/TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "tool_learning_success_route_noninferior": "CLOSED_BY_INDEPENDENT_ABSOLUTE_CEILING_WITNESS__REMOVED_FROM_MATCHED_PROOF_SEARCH_TARGETS"
+    "tool_learning_success_route_noninferior": "CLOSED_BY_INDEPENDENT_ABSOLUTE_CEILING_WITNESS__REMOVED_FROM_MATCHED_PROOF_SEARCH_TARGETS",
+    "delegation_terminal_success": "STAGED_ABSOLUTE_CEILING_CANDIDATE__PENDING_INDEPENDENT_VERIFICATION"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
