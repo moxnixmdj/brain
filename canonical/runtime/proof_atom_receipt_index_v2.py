@@ -1,13 +1,15 @@
-"""Content-addressed candidate receipt index for canonical proof atoms.
+"""V2 content-addressed candidate receipt index for the active proof-atom basis.
 
-This is discovery only. Exact proposition occurrence identifies a file worth explicit
-semantic review; it is never acceptance evidence by itself.
+Discovery only. Candidate occurrence never grants acceptance, capability, family,
+execution, or promotion credit. The full scanned corpus and basis are fingerprinted so
+one repository scan can be frozen and independently replayed exactly.
 """
 from __future__ import annotations
 
 import hashlib
 import json
 from pathlib import Path
+import re
 from typing import Any, Mapping
 
 from canonical.runtime.canonical_proof_atom_basis_v2 import compile_basis
@@ -22,6 +24,7 @@ SEARCH_ROOTS = (
 TEXT_SUFFIXES = {".json", ".md", ".py", ".yml", ".yaml", ".txt"}
 MAX_FILE_BYTES = 5_000_000
 MAX_MATCHES_PER_ATOM = 64
+_SYMBOL_CHAR_CLASS = r"A-Za-z0-9_:.-"
 
 EXCLUDED_BASENAMES = {
     "TERMINAL_CERTIFICATE_FRONTIER_V5.json",
@@ -38,6 +41,7 @@ EXCLUDED_BASENAMES = {
     "CURRENT_TERMINAL_AUTHORITY_V1.json",
     "EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
     "PROOF_ATOM_RECEIPT_INDEX_V1.json",
+    "PROOF_ATOM_RECEIPT_INDEX_V2.json",
 }
 EXCLUDED_REL_PATHS = {
     "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V1.json",
@@ -96,8 +100,73 @@ def _candidate_files(root: Path) -> list[Path]:
     return sorted(out, key=lambda p: p.relative_to(root).as_posix())
 
 
-def _line_hits(text: str, literal: str) -> list[int]:
-    return [i for i, line in enumerate(text.splitlines(), start=1) if literal in line]
+def _occurrence_hits(text: str, literal: str) -> tuple[list[int], list[int]]:
+    pattern = re.compile(
+        rf"(?<![{_SYMBOL_CHAR_CLASS}]){re.escape(literal)}(?![{_SYMBOL_CHAR_CLASS}])"
+    )
+    exact: list[int] = []
+    embedded: list[int] = []
+    for i, line in enumerate(text.splitlines(), start=1):
+        if literal not in line:
+            continue
+        if pattern.search(line):
+            exact.append(i)
+        else:
+            embedded.append(i)
+    return exact, embedded
+
+
+def _manifest_sha256(entries: list[tuple[str, str, str, str]]) -> str:
+    h = hashlib.sha256()
+    for rel, source_class, blob_sha, _text in entries:
+        h.update(rel.encode("utf-8"))
+        h.update(b"\0")
+        h.update(source_class.encode("utf-8"))
+        h.update(b"\0")
+        h.update(blob_sha.encode("ascii"))
+        h.update(b"\n")
+    return h.hexdigest()
+
+
+def _basis_manifest_sha256(atoms: list[Mapping[str, Any]]) -> str:
+    h = hashlib.sha256()
+    for atom in sorted(atoms, key=lambda x: str(x.get("atom_id", ""))):
+        atom_id = atom.get("atom_id")
+        proposition = atom.get("proposition")
+        if not isinstance(atom_id, str) or not isinstance(proposition, str):
+            continue
+        h.update(atom_id.encode("utf-8"))
+        h.update(b"\0")
+        h.update(proposition.encode("utf-8"))
+        h.update(b"\n")
+    return h.hexdigest()
+
+
+def _index_input_fingerprint(basis_digest: str, corpus_digest: str) -> str:
+    payload = {
+        "schema": SCHEMA,
+        "basis_atom_manifest_sha256": basis_digest,
+        "scanned_corpus_manifest_sha256": corpus_digest,
+        "searched_roots": list(SEARCH_ROOTS),
+        "excluded_basenames": sorted(EXCLUDED_BASENAMES),
+        "max_file_bytes": MAX_FILE_BYTES,
+        "max_matches_per_atom": MAX_MATCHES_PER_ATOM,
+    }
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _priority_key(row: Mapping[str, Any]) -> tuple[int, int, int, int, str]:
+    matches = row.get("candidate_matches", [])
+    exact = any(m.get("match_kind") == "EXACT_SYMBOL_LITERAL" for m in matches)
+    classes = {m.get("source_class") for m in matches}
+    return (
+        0 if exact else 1,
+        0 if "VERIFICATION_RECEIPT" in classes else 1,
+        0 if "CAPABILITY_EVIDENCE" in classes else 1,
+        int(row.get("candidate_match_count", 0)),
+        str(row.get("atom_id", "")),
+    )
 
 
 def build_index(
@@ -108,7 +177,7 @@ def build_index(
 ) -> dict[str, Any]:
     basis = compile_basis(global_frontier, refinement_overlay)
     if not str(basis.get("status", "")).startswith("PASS"):
-        return _fail("CANONICAL_PROOF_ATOM_BASIS_NOT_PASS")
+        return _fail("CANONICAL_PROOF_ATOM_BASIS_V2_NOT_PASS")
 
     atoms = basis.get("atoms")
     if not isinstance(atoms, list) or not atoms:
@@ -125,9 +194,10 @@ def build_index(
             continue
         file_cache.append((rel, _source_class(rel), _blob_sha(data), text))
 
-    atom_rows = []
+    atom_rows: list[dict[str, Any]] = []
     total_matches = 0
     source_class_counts: dict[str, int] = {}
+    match_kind_counts: dict[str, int] = {}
     atoms_with_matches = 0
 
     for atom in atoms:
@@ -140,54 +210,82 @@ def build_index(
         for rel, source_class, blob_sha, text in file_cache:
             if proposition not in text:
                 continue
-            hits = _line_hits(text, proposition)
-            if not hits:
+            exact_hits, embedded_hits = _occurrence_hits(text, proposition)
+            if not exact_hits and not embedded_hits:
                 continue
-            matches.append({
-                "path": rel,
-                "git_blob_sha": blob_sha,
-                "source_class": source_class,
-                "line_numbers": hits[:16],
-                "candidate_only": True,
-            })
+            kind = "EXACT_SYMBOL_LITERAL" if exact_hits else "EMBEDDED_LITERAL"
+            hits = exact_hits if exact_hits else embedded_hits
+            matches.append(
+                {
+                    "path": rel,
+                    "git_blob_sha": blob_sha,
+                    "source_class": source_class,
+                    "match_kind": kind,
+                    "line_numbers": hits[:16],
+                    "candidate_only": True,
+                }
+            )
             source_class_counts[source_class] = source_class_counts.get(source_class, 0) + 1
+            match_kind_counts[kind] = match_kind_counts.get(kind, 0) + 1
             if len(matches) >= MAX_MATCHES_PER_ATOM:
                 break
 
         if matches:
             atoms_with_matches += 1
         total_matches += len(matches)
-        atom_rows.append({
-            "atom_id": atom_id,
-            "proposition": proposition,
-            "associated_target_predicates": atom.get("associated_target_predicates", []),
-            "candidate_match_count": len(matches),
-            "candidate_matches": matches,
-            "candidate_only": True,
-        })
+        atom_rows.append(
+            {
+                "atom_id": atom_id,
+                "proposition": proposition,
+                "layers": atom.get("layers", []),
+                "certificate_ids": atom.get("certificate_ids", []),
+                "associated_target_predicates": atom.get("associated_target_predicates", []),
+                "candidate_match_count": len(matches),
+                "candidate_matches": matches,
+                "candidate_only": True,
+            }
+        )
 
     zero = sorted(row["atom_id"] for row in atom_rows if row["candidate_match_count"] == 0)
     nonzero = sorted(row["atom_id"] for row in atom_rows if row["candidate_match_count"] > 0)
+    review_priority = [
+        row["atom_id"]
+        for row in sorted((x for x in atom_rows if x["candidate_match_count"] > 0), key=_priority_key)
+    ]
+    basis_digest = _basis_manifest_sha256(atoms)
+    corpus_digest = _manifest_sha256(file_cache)
 
     return {
         "schema": SCHEMA,
-        "status": "PASS__CONTENT_ADDRESSED_CANDIDATE_RECEIPT_INDEX_COMPUTED__ZERO_CREDIT",
+        "status": "PASS__V2_CONTENT_ADDRESSED_CANDIDATE_RECEIPT_INDEX_COMPUTED__INPUTS_FINGERPRINTED__ZERO_CREDIT",
         "errors": [],
+        "source_basis_schema": basis.get("schema"),
+        "source_basis_status": basis.get("status"),
         "canonical_atom_count": len(atom_rows),
+        "basis_atom_manifest_sha256": basis_digest,
+        "searched_roots": list(SEARCH_ROOTS),
+        "excluded_basenames": sorted(EXCLUDED_BASENAMES),
         "scanned_file_count": len(file_cache),
+        "scanned_corpus_manifest_sha256": corpus_digest,
+        "index_input_fingerprint_sha256": _index_input_fingerprint(basis_digest, corpus_digest),
         "candidate_match_count": total_matches,
         "atoms_with_candidate_matches": atoms_with_matches,
         "atoms_without_candidate_matches": len(zero),
         "atom_ids_with_candidate_matches": nonzero,
         "atom_ids_without_candidate_matches": zero,
+        "candidate_review_priority": review_priority,
         "candidate_matches_by_source_class": dict(sorted(source_class_counts.items())),
+        "candidate_matches_by_kind": dict(sorted(match_kind_counts.items())),
         "atoms": atom_rows,
         "rule": (
-            "EXACT_LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
-            "CONTENT_ADDRESS_EACH_MATCH__EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
-            "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
+            "ACTIVE_V2_BASIS_ONLY__LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
+            "CLASSIFY_EXACT_SYMBOL_VS_EMBEDDED_OCCURRENCE__CONTENT_ADDRESS_EACH_MATCH__"
+            "FINGERPRINT_ENTIRE_SCANNED_CORPUS_AND_BASIS__"
+            "EXCLUDE_FRONTIER_BASIS_OVERLAY_AUTHORITY_AND_INDEX_RESTATEMENTS__"
+            "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
         ),
         "new_reality_units_consumed": 0,
+        "incremental_spend_usd": 0,
         "capability_credit_delta": 0,
         "family_credit_delta": 0,
         "execution_authority": False,
@@ -196,13 +294,17 @@ def build_index(
 
 
 def main() -> int:
-    global_frontier = json.loads(
-        (ROOT / "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json").read_text(encoding="utf-8")
+    frontier = json.loads(
+        (ROOT / "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json").read_text(
+            encoding="utf-8"
+        )
     )
-    refinement_overlay = json.loads(
-        (ROOT / "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text(encoding="utf-8")
+    overlay = json.loads(
+        (ROOT / "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text(
+            encoding="utf-8"
+        )
     )
-    out = build_index(global_frontier, refinement_overlay)
+    out = build_index(frontier, overlay)
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if str(out.get("status", "")).startswith("PASS") else 1
 
