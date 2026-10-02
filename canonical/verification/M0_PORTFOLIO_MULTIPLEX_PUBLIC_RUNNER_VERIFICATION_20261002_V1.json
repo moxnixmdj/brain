@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_M0_PORTFOLIO_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__PREWAVE_MULTIPLEX_BINDING_ADMISSIBLE__ZERO_TERMINAL_RESULT",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "exact_brain_blobs": {
+    "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "33f0efd1407b36211d40908d97b63fae571fb50f",
+    "canonical/runtime/m0_portfolio_multiplex_preflight.py": "f57482627eea74e6d0f06d4ac7579e02eced4ab5",
+    "canonical/tests/test_m0_portfolio_multiplex_preflight.py": "e902e8bf6fd34c7a33f32d488bcd9ba7d57c020a"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 614,
+    "head_sha": "fabdaa0c520e1ba126ab38d365b0161c4dd4db01",
+    "merge_commit": "bcde26ddd2561880a3d5d0b47e4a077a885ab1fb",
+    "workflow_run_id": 36963130775,
+    "workflow_name": "Verify M0 portfolio multiplex binding",
+    "conclusion": "success"
+  },
+  "verified": [
+    "T0_T1_T2_T3_BINDINGS_PRESENT",
+    "CANDIDATE_VISIBLE_INFORMATION_EXCLUDES_HIDDEN_ORACLE_FIELDS",
+    "FORBIDDEN_INFORMATION_SET_COMPLETE",
+    "SEMANTIC_MUTATION_SET_FROZEN",
+    "PREWAVE_BINDING_IS_NOT_TERMINAL_RESULT",
+    "SYNTHETIC_WHOLE_OPEN_DOMAIN_SUPERSET_OVERCLAIM_FORBIDDEN",
+    "TERMINAL_EVIDENCE_SOURCE_IS_THE_FROZEN_FOUR_PORTFOLIO_WAVE",
+    "POST_FREEZE_TUNING_CASE_REPLACEMENT_AND_RESULT_FEEDBACK_FORBIDDEN",
+    "ZERO_EXECUTION_AUTHORITY_AND_ZERO_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
