@@ -1,0 +1,23 @@
+name: Diagnose M0A raw-source semantic route
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/m0a_raw_source_terminal_suite_v2.py
+      - canonical/runtime/m0a_raw_source_brain_candidate_v2.py
+      - canonical/tests/test_m0a_raw_source_terminal_suite_v2.py
+      - .github/workflows/diagnose-m0a-raw-source.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_BRAIN_POST_FREEZE_SEED: "8675309"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_m0a_raw_source_terminal_suite_v2
