@@ -100,6 +100,30 @@ class TerminalRouteClosureControllerTests(unittest.TestCase):
         ])
         self.assertEqual(out["queue"][0]["behavior_id"], "FOUR")
 
+
+    def test_queue_reconciles_against_derived_proof_coverage(self):
+        out = self.run_basis([
+            {
+                "behavior_id": "A",
+                "portfolio": "T1",
+                "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+                "blockers": [],
+            },
+            {
+                "behavior_id": "B",
+                "portfolio": "T2",
+                "proof_state": "INDEPENDENT_PREFLIGHT_PASS",
+                "blockers": ["POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"],
+            },
+        ])
+        self.assertEqual(out["status"], "PASS")
+        recon = out["proof_coverage_reconciliation"]
+        self.assertEqual(recon["status"], "INCOMPLETE_COVER")
+        self.assertEqual(recon["admissible_route_count"], 1)
+        self.assertEqual(recon["uncovered_obligations"], ["B"])
+        self.assertEqual(recon["queue_behavior_ids"], ["B"])
+
+
     def test_declared_closed_count_cannot_drift(self):
         out = self.run_basis([
             {
