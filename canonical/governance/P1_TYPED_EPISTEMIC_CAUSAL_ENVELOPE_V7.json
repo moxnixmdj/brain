@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_EPISTEMIC_CAUSAL_ENVELOPE_V7",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__V6_REGRESSION_PRESERVED__NESTED_COMPETING_CAUSE_OVERCLAIM_REMOVED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Remove V6's failed-ancestry causal overclaim by distinguishing visible derived symptoms from direct/unknown failures and abstaining when multiple causally compatible non-derived failures lack a visible discriminator.",
+  "supersedes_candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v6.py",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v7.py",
+  "hardening": [
+    "DERIVED_UPSTREAM_FAILURES_CAN_BE_DELETED_AS_SYMPTOMS",
+    "DIRECT_OR_UNKNOWN_FAILURES_REMAIN_CAUSALLY_LIVE",
+    "NESTED_DIRECT_OR_UNKNOWN_FAILURES_WITHOUT_VISIBLE_DISCRIMINATOR_FORCE_AMBIGUITY",
+    "ONLY_PAIRWISE_INDEPENDENT_NONDERIVED_ROOTS_WITH_VISIBLE_CONJUNCTIVE_WITNESS_MAY_FORM_INTERACTION",
+    "MISSING_FAILURE_SEMANTICS_DEFAULTS_TO_UNKNOWN_NOT_DERIVED",
+    "V6_192_TYPED_CASES_MUST_REGRESSION_PASS",
+    "48_NESTED_COMPETING_DIRECT_HIDDEN_WORLD_CASES_MUST_ABSTAIN"
+  ],
+  "envelope": {
+    "v6_regression_cases": 192,
+    "nested_competing_direct_cases": 48,
+    "total_cases": 240
+  },
+  "scope_limit": "PREWAVE_TYPED_CAUSAL_ENVELOPE_ONLY__DOES_NOT_PROVE_WHOLE_FROZEN_P1_POPULATION_OR_TERMINAL_SURFACE_SCOPE",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V7_BLOBS__THEN_USE_V7_NOT_V6_FOR_ANY_FUTURE_P1_SCOPE_RELATION_ATTEMPT__REQUIRE_A_SEPARATE_SCOPE_THEOREM_OR_DIRECT_SURFACE_EVIDENCE",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
