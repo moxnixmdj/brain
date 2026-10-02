@@ -1,0 +1,26 @@
+name: Verify M5 causal identifiability counterexample
+on:
+  push:
+    branches: [obs-m5-causal-identifiability-20261002]
+    paths:
+      - canonical/runtime/m5_causal_identifiability.py
+      - canonical/tests/test_m5_causal_identifiability.py
+      - .github/workflows/verify-m5-causal-identifiability.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/m5_causal_identifiability.py
+      - canonical/tests/test_m5_causal_identifiability.py
+      - .github/workflows/verify-m5-causal-identifiability.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_m5_causal_identifiability
