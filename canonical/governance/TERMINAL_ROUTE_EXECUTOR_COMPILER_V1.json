@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_EXECUTOR_COMPILER_V1",
+  "date": "2026-10-02",
+  "status": "INSTALLED_ON_VERIFICATION_BRANCH__ZERO_TERMINAL_RESULTS__NO_LAUNCH_AUTHORITY",
+  "objective": "DERIVE_EXACT_ROUTE_SPECIFIC_TERMINAL_EXECUTION_CLASSES_FROM_FROZEN_AUTHORITIES_WITHOUT_GENERATING_OR_OBSERVING_TERMINAL_CASES",
+  "runtime": "canonical/runtime/terminal_route_executor_compiler.py",
+  "tests": "canonical/tests/test_terminal_route_executor_compiler.py",
+  "workflow": ".github/workflows/verify-terminal-route-executor-compiler.yml",
+  "authorities": [
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+    "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json"
+  ],
+  "execution_classes": [
+    "DIRECT_POPULATION",
+    "MULTIPLEX_INSTRUMENTATION"
+  ],
+  "rules": [
+    "NO_GLOBAL_SAMPLE_COUNT_DEFAULT",
+    "DIRECT_POPULATIONS_REQUIRE_EXPLICIT_FROZEN_CASE_COUNT_AND_CASE_ID_OR_SELECTION_RULE",
+    "MULTIPLEX_INSTRUMENTATION_REQUIRES_EXPLICIT_PARENT_TERMINAL_EVIDENCE_SOURCE_AND_PROOF_RULE",
+    "UNKNOWN_AMBIGUOUS_OR_CONTRADICTORY_STATE_FAILS_CLOSED",
+    "COMPILER_NEVER_CREATES_POST_FREEZE_BEACON",
+    "COMPILER_NEVER_GENERATES_TERMINAL_CASES",
+    "COMPILER_NEVER_INVOKES_BRAIN_CANDIDATE_OR_ORACLE",
+    "COMPILER_NEVER_GRANTS_CAPABILITY_FAMILY_OR_PROMOTION_CREDIT",
+    "LAUNCH_READY_REQUIRES_ALL_12_ROUTE_SPECIFIC_EXECUTORS_BOUND"
+  ],
+  "expected_latency_effect": "DELETE_MANUAL_ROUTE_CLASSIFICATION_AND_PREVENT_GLOBAL_RERUNS_CAUSED_BY_LAUNCHER_SEMANTIC_DRIFT",
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
