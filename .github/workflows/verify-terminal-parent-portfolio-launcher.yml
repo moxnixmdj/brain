@@ -13,6 +13,29 @@ permissions:
   contents: read
 
 jobs:
+  import-boundary:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: import_direct
+            module: canonical.runtime.direct_route_terminal_executors_v1
+          - name: import_multiplex
+            module: canonical.runtime.portfolio_multiplex_terminal_instrumentation_v1
+          - name: import_cad
+            module: canonical.runtime.cad_t0_route_specific_terminal_executor_v1
+          - name: import_launcher
+            module: canonical.runtime.terminal_parent_portfolio_launcher_v1
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -c "import ${{ matrix.module }}"
+
   invariant:
     strategy:
       fail-fast: false
