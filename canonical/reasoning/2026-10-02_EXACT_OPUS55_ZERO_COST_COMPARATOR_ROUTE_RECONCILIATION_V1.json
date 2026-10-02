@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "status": "FREE_ARENA_DIRECT_GUEST_ROUTE_FALSIFIED_FOR_EXACT_OPUS_5_5__SELECTED_V6_PROOFS_BLOCKED_BEFORE_CASE_EXPOSURE",
+  "terminal_context": {
+    "cut": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
+    "verification": "canonical/verification/RESIDUAL_MINIMUM_REALITY_CUT_V6_VERIFICATION_20261002_V1.json",
+    "selected_observations": [
+      "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
+      "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
+    ]
+  },
+  "public_route_evidence": [
+    {
+      "claim": "ARENA_DIRECT_MODE_SUPPORTS_SELECTING_SPECIFIC_MODELS",
+      "source": "https://help.arena.ai/articles/1858200927-lmarena-experiments-new-model-selector"
+    },
+    {
+      "claim": "CLAUDE_OPUS_5_5_HIGH_EXISTS_ON_CURRENT_ARENA_TEXT_LEADERBOARD",
+      "source": "https://arena.ai/leaderboard/text/overall-no-style-control"
+    },
+    {
+      "claim": "OFFICIAL_ARENA_API_REQUIRES_AUTHENTICATED_KEY_AND_TRACKED_USAGE_SPEND",
+      "source": "https://portal.api.preview.arena.ai/docs/api-reference"
+    }
+  ],
+  "executed_smoke": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 473,
+    "workflow_run_id": 36948876496,
+    "second_probe_head_sha": "c05e216aa8834e761adc6533124a5803a0d03156",
+    "terminal_proof_case_exposed": false,
+    "arena_guest_auth_blocker": false,
+    "direct_selector_opened": true,
+    "selector_search_term": "opus",
+    "result": "NO_MODELS_FOUND__CLAUDE_OPUS_5_5_NOT_EXPOSED_IN_GUEST_DIRECT_SELECTOR",
+    "prompt_submitted": false
+  },
+  "admissibility_conclusion": [
+    "DO_NOT_EXPOSE_THE_TWO_CLEAN_V6_PROOF_BATCHES_WITHOUT_EXACT_OPUS_5_5_COMPARATOR_ACCESS",
+    "ARENA_LEADERBOARD_RESULTS_ARE_NOT_CASE_LEVEL_MATCHED_COMPARATOR_OUTPUTS",
+    "PROXY_MODEL_SUBSTITUTION_FORBIDDEN",
+    "BRAIN_ONLY_EXECUTION_WOULD_SPEND_CLEAN_CASES_WITHOUT_AN_ADMISSIBLE_PARITY_VERDICT"
+  ],
+  "remaining_zero_cost_routes": [
+    "EXISTING_USER_OR_ORGANIZATION_ENTITLEMENT_TO_EXACT_OPUS_5_5_WITH_ZERO_INCREMENTAL_COST_AND_REPRODUCIBLE_HARNESS",
+    "A_PUBLIC_CASE_LEVEL_OPUS_5_5_DATASET_THAT_EXACTLY_MATCHES_THE_PREDECLARED_V6_CASES_AND_HARNESS__CURRENTLY_NOT_ESTABLISHED",
+    "A_COMPLETE_ABSOLUTE_OR_FORMAL_CEILING_PROOF_THAT_ELIMINATES_THE_NEED_FOR_A_COMPARATOR__NOT_ESTABLISHED_FOR_M0A_OR_WHOLE_M1_SCOPE"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
