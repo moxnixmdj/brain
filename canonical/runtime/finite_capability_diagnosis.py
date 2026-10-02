@@ -1,8 +1,8 @@
 """Exact finite-hypothesis capability diagnosis and probe selection.
 
 When a tool/worker capability uncertainty can be represented as a finite frozen version
-space with predeclared probe outcomes, choose the probe that minimizes the worst-case
-remaining hypotheses per unit cost. Unknown/open-ended capability inference remains out
+space with predeclared probe outcomes, choose the probe lexicographically by diagnostic
+power first (worst-case then expected remaining hypotheses), then probe cost. Unknown/open-ended capability inference remains out
 of scope and fails closed.
 """
 from __future__ import annotations
@@ -43,17 +43,18 @@ def select_probe(hypotheses:Sequence[Hypothesis],probes:Sequence[Probe])->dict:
         worst=max(len(v) for v in buckets.values())
         expected_numerator=sum(len(v)*len(v) for v in buckets.values())
         expected=expected_numerator/len(hids)
-        scored.append((worst/float(p.cost),expected/float(p.cost),float(p.cost),p.probe_id,worst,expected))
+        scored.append((worst,expected,float(p.cost),p.probe_id))
     if not scored:
         return {"status":"ESCALATE","reason":"NO_VALID_DISCRIMINATING_PROBE"}
     scored.sort(key=lambda x:(x[0],x[1],x[2],x[3]))
-    s=scored[0]
+    worst,expected,cost,probe_id=scored[0]
     return {
         "status":"SELECT",
-        "probe_id":s[3],
-        "worst_case_remaining":s[4],
-        "expected_remaining_uniform":s[5],
-        "reason":"MIN_WORST_CASE_VERSION_SPACE_PER_COST__THEN_EXPECTED_REMAINING_PER_COST",
+        "probe_id":probe_id,
+        "worst_case_remaining":worst,
+        "expected_remaining_uniform":expected,
+        "probe_cost":cost,
+        "reason":"MIN_WORST_CASE_REMAINING__THEN_EXPECTED_REMAINING__THEN_COST__THEN_ID",
         "terminal_authority":False,
     }
 
