@@ -17,17 +17,43 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m unittest canonical.tests.test_abductive_residual_theorem_v2 -v
-      - name: Shadow current matched-scope input
+      - name: Run diagnostics
+        id: diag
+        shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          : > /tmp/abductive-v2-diagnostic.txt
+          echo "HEAD=$(git rev-parse HEAD)" >> /tmp/abductive-v2-diagnostic.txt
+          echo "=== UNIT TESTS ===" >> /tmp/abductive-v2-diagnostic.txt
+          python -m unittest canonical.tests.test_abductive_residual_theorem_v2 -v >> /tmp/abductive-v2-diagnostic.txt 2>&1
+          TEST_RC=$?
+          echo "TEST_RC=$TEST_RC" >> /tmp/abductive-v2-diagnostic.txt
+          echo "=== MATCHED SHADOW ===" >> /tmp/abductive-v2-diagnostic.txt
+          python - <<'PY' >> /tmp/abductive-v2-diagnostic.txt 2>&1
           import json
           from pathlib import Path
           from canonical.runtime.abductive_residual_theorem_v2 import evaluate
           p=Path("canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V1.json")
           d=json.loads(p.read_text())
           out=evaluate({"targets":d["targets"],"baseline_facts":d["baseline_facts"],"implications":d["implications"]})
+          print(json.dumps(out,indent=2,sort_keys=True))
           assert out["exact"] is True, out
           assert out["minimum_joint_residual_size"] == 22, out
-          print(json.dumps({"status":out["status"],"joint":out["minimum_joint_residual_size"],"bounded":out["bounded_incomplete"]},indent=2))
           PY
+          SHADOW_RC=$?
+          echo "SHADOW_RC=$SHADOW_RC" >> /tmp/abductive-v2-diagnostic.txt
+          echo "test_rc=$TEST_RC" >> "$GITHUB_OUTPUT"
+          echo "shadow_rc=$SHADOW_RC" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abductive-residual-v2-diagnostic
+          path: /tmp/abductive-v2-diagnostic.txt
+          if-no-files-found: error
+      - name: Enforce pass
+        if: always()
+        run: |
+          test "${{ steps.diag.outputs.test_rc }}" = "0"
+          test "${{ steps.diag.outputs.shadow_rc }}" = "0"
