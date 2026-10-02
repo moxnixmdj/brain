@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_FAMILY_ADJUDICATION_V1_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_PREBEACON_12_CONTRACT_TO_19_FAMILY_ADJUDICATION_READY__ZERO_TERMINAL_RESULTS",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_family_adjudication_reducer_v1.py": "183b21005084343bfaad65dd0efa9b1b27054d41",
+    "canonical/tests/test_terminal_family_adjudication_reducer_v1.py": "be40006da7be9aa4a0477cefe3d4986a0cdc979c",
+    "canonical/governance/TERMINAL_FAMILY_ADJUDICATION_POLICY_V1.json": "ce16854ee8c113cd4113c02c835e9863a097632d",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V6.json": "d7f31958b3de17478ee45b8b2f8490cdc59c17ca",
+    "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "e9d405576c540388b48d74da0f2e498c03e4684a"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 793,
+    "head_sha": "43df38b81c399bdea56ec035936a2fa310abe023",
+    "workflow_run_id": 36977329643,
+    "workflow_job_id": 110743883111,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_12_ACTIVE_CONTRACTS",
+    "EXACT_17_OPEN_FAMILY_MAPPINGS",
+    "EXACT_2_PREEXISTING_PASS_FAMILIES",
+    "EXACT_19_TERMINAL_FAMILY_ACCOUNTING_ROWS",
+    "ZERO_ORPHAN_ACTIVE_CONTRACTS",
+    "V6_DOMINANCE_RECEIPT_CURRENT",
+    "FAIL_CLOSED_ON_STALE_DOMINANCE_OR_ORPHAN_CONTRACT",
+    "VALID_NEGATIVE_CONTRACT_RESULTS_PROPAGATE_ONLY_TO_DEPENDENT_FAMILIES",
+    "ZERO_TERMINAL_RESULTS",
+    "ZERO_FAMILY_CREDIT_PREWAVE"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
