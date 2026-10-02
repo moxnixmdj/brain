@@ -320,6 +320,36 @@ class CensusReceiptTests(unittest.TestCase):
         self.assertEqual(tb["residual_points"], round(tb["bar"] - tb["best_open_baseline"], 1))
         self.assertGreater(tb["residual_points"], fc["residual_points"])
 
+    def test_rate_limit_estimate_recomputes(self):
+        d = self.premises["P10_WORKERS_AI_RATE_LIMITS"]["derived"]
+        self.assertEqual(d["requests_low"], 91 * 52)
+        self.assertEqual(d["requests_high"], 91 * 63)
+        self.assertEqual(d["hours_at_20_rpm_low"], round(d["requests_low"] / 20 / 60, 1))
+        self.assertEqual(d["hours_at_20_rpm_high"], round(d["requests_high"] / 20 / 60, 1))
+        self.assertLess(d["hours_at_20_rpm_high"], 24)  # the rate limit is not the binding constraint
+
+    def test_tb21_dev_set_is_name_disjoint_from_frozen_tb4_tasks(self):
+        ev = self.premises["P11_TB21_IS_A_NAME_DISJOINT_DEV_SET"]["evidence"]
+        names21 = ev["tb21_task_names"]
+        self.assertEqual(len(names21), len(set(names21)))
+        self.assertEqual(len(names21), ev["result"]["tb21_count"])
+        pin = ev["tb4_names_source"]
+        if not (ROOT / pin["path"]).is_file() or _git_blob_sha(pin["path"]) != pin["git_blob_sha"]:
+            self.skipTest("TB4 sample manifest changed since this receipt; receipt is a point-in-time record")
+        sample = json.loads((ROOT / pin["path"]).read_text(encoding="utf-8"))
+        tb4 = {t["task"] for t in sample["ordered_tasks"]} | set(sample["known_spent_or_contaminated_exclusions"])
+        self.assertEqual(len(tb4), ev["result"]["tb4_count"])
+        self.assertEqual(sorted(tb4 & set(names21)), ev["result"]["exact_overlap"])
+        self.assertEqual(ev["result"]["exact_overlap"], [])
+        import difflib
+
+        near = [
+            a for a in names21
+            if difflib.get_close_matches(a, sorted(tb4), n=1, cutoff=0.85)
+        ]
+        self.assertEqual(near, [])
+        self.assertIn("NAME only", self.premises["P11_TB21_IS_A_NAME_DISJOINT_DEV_SET"]["fact"])
+
     def test_non_comparable_evidence_is_excluded_and_dev_protocol_forbids_frozen_cases(self):
         self.assertIn("NOT used as Terminal-Bench 4.0 evidence", self.premises["P9_EXCLUDED_NON_COMPARABLE_EVIDENCE"]["fact"])
         text = json.dumps(self.receipt["proposed_stage_gate_for_owner_reconciliation_not_adopted"])

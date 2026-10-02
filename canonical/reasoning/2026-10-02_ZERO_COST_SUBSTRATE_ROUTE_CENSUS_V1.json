@@ -3,8 +3,8 @@
   "date": "2026-10-02",
   "decision_id": "2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1",
   "status": "EXECUTED__PINNED_OPEN_WEIGHTS_GENERATOR_EXISTS_BUT_ZERO_COST_QUOTA_IS_1_TO_4_ORDERS_BELOW_ONE_BENCHMARK_PASS__GITHUB_MODELS_DISQUALIFIED__MEASURED_RESIDUAL_FOR_BRAIN_CONFIGURATION_RECORDED__ZERO_CREDIT",
-  "canonical_base_commit": "d486c816f6d1fe92a313baaae96111757a7609ba",
-  "facts_first_gathered_at_commit": "d486c816f6d1fe92a313baaae96111757a7609ba",
+  "canonical_base_commit": "069d633ef86ec92c2342cf76cedbb63ee2710f1c",
+  "facts_first_gathered_at_commit": "069d633ef86ec92c2342cf76cedbb63ee2710f1c",
   "real_objective": "Replace the vague claim 'no pinned generator is bound' with an exact, falsifiable statement of what blocks a donor-independent response generator for the four third-party-runnable public bars, so the owner can decide the one lever that matters.",
   "governing_invariants": [
     "Hard $0 incremental spend unless the owner records an explicit exception.",
@@ -229,6 +229,142 @@
         "retrieved_utc": "2026-10-02",
         "excerpt": "TB 2.1 · Same parameters: 89 tasks · 5 trials/task"
       }
+    },
+    {
+      "id": "P10_WORKERS_AI_RATE_LIMITS",
+      "fact": "Workers AI text generation is limited to 300 requests per minute by default, but any model that requires the Workers Paid plan is limited to 20 requests per minute per account per model (50 with prepaid AI Gateway credits); Cloudflare states these limits are designed for typical agentic and coding workloads. At 20 requests/minute a pass of about 5,000 to 5,700 requests (91 tasks x 52..63 median turns, the AA-Briefcase scale) takes roughly 4 to 5 hours, so the rate limit is not the binding constraint; the budget is. Which of the candidate model IDs require Workers Paid is stated on per-model pages that were not read.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://developers.cloudflare.com/workers-ai/platform/limits/",
+        "retrieved_utc": "2026-10-02",
+        "page_last_updated": "2026-09-17",
+        "turn_scale_source": "AA thread: Opus 4.8 52 and Claude Fable 5 63 median turns per task (https://x.com/ArtificialAnlys/status/2067744637155226101)"
+      },
+      "derived": {
+        "requests_low": 4732,
+        "requests_high": 5733,
+        "hours_at_20_rpm_low": 3.9,
+        "hours_at_20_rpm_high": 4.8
+      }
+    },
+    {
+      "id": "P11_TB21_IS_A_NAME_DISJOINT_DEV_SET",
+      "fact": "The public Terminal-Bench 2.1 set (89 tasks, official verified public leaderboard, Harbor route) shares no task name, exact or near (similarity >= 0.85), with the 66 frozen Terminal-Bench 4.0 tasks, so it can serve as a non-frozen development set for measuring Brain-configuration uplift without touching any frozen TB4 task. Checked by task NAME only (no instruction, solution or test was read); name-disjointness does not prove semantic disjointness.",
+      "evidence": {
+        "class": "COMPUTED_FROM_REPO_AND_GITHUB_API",
+        "tb4_names_source": {
+          "path": "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json",
+          "git_blob_sha": "4f0113c2fd670d7d4cb9b267593225f8b66f4ab6",
+          "fields": [
+            "ordered_tasks[].task",
+            "known_spent_or_contaminated_exclusions"
+          ]
+        },
+        "tb21_listing": "GitHub contents API listing of harbor-framework/terminal-bench-2-1/tasks (directory names only), retrieved 2026-10-02",
+        "tb21_task_names": [
+          "adaptive-rejection-sampler",
+          "bn-fit-modify",
+          "break-filter-js-from-html",
+          "build-cython-ext",
+          "build-pmars",
+          "build-pov-ray",
+          "caffe-cifar-10",
+          "cancel-async-tasks",
+          "chess-best-move",
+          "circuit-fibsqrt",
+          "cobol-modernization",
+          "code-from-image",
+          "compile-compcert",
+          "configure-git-webserver",
+          "constraints-scheduling",
+          "count-dataset-tokens",
+          "crack-7z-hash",
+          "custom-memory-heap-crash",
+          "db-wal-recovery",
+          "distribution-search",
+          "dna-assembly",
+          "dna-insert",
+          "extract-elf",
+          "extract-moves-from-video",
+          "feal-differential-cryptanalysis",
+          "feal-linear-cryptanalysis",
+          "filter-js-from-html",
+          "financial-document-processor",
+          "fix-code-vulnerability",
+          "fix-git",
+          "fix-ocaml-gc",
+          "gcode-to-text",
+          "git-leak-recovery",
+          "git-multibranch",
+          "gpt2-codegolf",
+          "headless-terminal",
+          "hf-model-inference",
+          "install-windows-3.11",
+          "kv-store-grpc",
+          "large-scale-text-editing",
+          "largest-eigenval",
+          "llm-inference-batching-scheduler",
+          "log-summary-date-ranges",
+          "mailman",
+          "make-doom-for-mips",
+          "make-mips-interpreter",
+          "mcmc-sampling-stan",
+          "merge-diff-arc-agi-task",
+          "model-extraction-relu-logits",
+          "modernize-scientific-stack",
+          "mteb-leaderboard",
+          "mteb-retrieve",
+          "multi-source-data-merger",
+          "nginx-request-logging",
+          "openssl-selfsigned-cert",
+          "overfull-hbox",
+          "password-recovery",
+          "path-tracing",
+          "path-tracing-reverse",
+          "polyglot-c-py",
+          "polyglot-rust-c",
+          "portfolio-optimization",
+          "protein-assembly",
+          "prove-plus-comm",
+          "pypi-server",
+          "pytorch-model-cli",
+          "pytorch-model-recovery",
+          "qemu-alpine-ssh",
+          "qemu-startup",
+          "query-optimize",
+          "raman-fitting",
+          "regex-chess",
+          "regex-log",
+          "reshard-c4-data",
+          "rstan-to-pystan",
+          "sam-cell-seg",
+          "sanitize-git-repo",
+          "schemelike-metacircular-eval",
+          "sparql-university",
+          "sqlite-db-truncate",
+          "sqlite-with-gcov",
+          "torch-pipeline-parallelism",
+          "torch-tensor-parallelism",
+          "train-fasttext",
+          "tune-mjcf",
+          "video-processing",
+          "vulnerable-secret",
+          "winning-avg-corewars",
+          "write-compressor"
+        ],
+        "result": {
+          "tb4_count": 66,
+          "tb21_count": 89,
+          "exact_overlap": [],
+          "near_name_matches": [],
+          "tb21_only_count": 89
+        }
+      },
+      "leaderboard_reference": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://antigma.ai/eval",
+        "excerpt": "Verified Public Leaderboard ... Same parameters: 89 tasks, 5 trials/task (22 official rows)"
+      }
     }
   ],
   "evidence_refs": [
@@ -249,11 +385,11 @@
       "detail": "Its zero_cost_executable_surface_count = 0 is consistent with P6: no zero-cost route reaches benchmark scale."
     }
   ],
-  "conclusion": "A pinned, donor-independent, strong open-weights generator exists (Cloudflare Workers AI), so 'no generator exists' is false; but at $0 it is unusable at benchmark scale: the free allocation covers one agentic pass in 35 to 9,964 days (P6), GitHub Models is retired (P1) and keyed free tiers are request-capped (P4). The decisive lever is therefore the $0 rule itself: an estimated $4 to $1,096 per pass would buy a pinned generator. Money does not close the capability gap: the best open-weights baselines sit about 14.3 points (FrontierCode) and 24.6 points (TB4, independent harness) below the bars, and that residual is exactly what a Brain-owned configuration would have to supply and demonstrate.",
+  "conclusion": "A pinned, donor-independent, strong open-weights generator exists (Cloudflare Workers AI), so 'no generator exists' is false; but at $0 it is unusable at benchmark scale: the free allocation covers one agentic pass in 35 to 9,964 days (P6), GitHub Models is retired (P1) and keyed free tiers are request-capped (P4). Rate limits are not binding (about 4 to 5 hours per pass at 20 requests/minute, P10). The decisive lever is therefore the $0 rule itself: an estimated $4 to $1,096 per pass would buy a pinned generator. Money does not close the capability gap: the best open-weights baselines sit about 14.3 points (FrontierCode) and 24.6 points (TB4, independent harness) below the bars, and that residual is exactly what a Brain-owned configuration would have to supply and demonstrate.",
   "selected_route": "RECORD_THE_SUBSTRATE_ROUTE_CENSUS__FRAME_LEVER_L2_AS_A_BOUNDED_STAGE_GATED_BUDGET_EXCEPTION_FOR_A_PINNED_WORKERS_AI_SUBSTRATE__MEASURE_BRAIN_CONFIGURATION_UPLIFT_ON_NON_FROZEN_DEVELOPMENT_TASKS_BEFORE_ANY_FROZEN_RUN",
   "proposed_stage_gate_for_owner_reconciliation_not_adopted": [
-    "S0 (zero spend): read Workers AI limits (requests/minute, tokens/minute) and confirm which model IDs are version-pinned.",
-    "S1 (bounded budget B, cap set by the owner): run the raw pinned substrate and the Brain-configured system on the same non-frozen development tasks (for example the public Terminal-Bench 2.1 set, after checking it does not overlap the exposed TB4 ledger) and estimate the configuration uplift with a confidence interval.",
+    "S0 (zero spend; partly done in P10/P11): read the per-model pages to learn which candidate IDs require Workers Paid and which are version-pinned, and check semantic (not only name) disjointness of Terminal-Bench 2.1 from the exposed TB4 ledger using metadata only.",
+    "S1 (bounded budget B, cap set by the owner): run the raw pinned substrate and the Brain-configured system on the same non-frozen development tasks (the public Terminal-Bench 2.1 set, name-disjoint from the frozen TB4 tasks per P11) and estimate the configuration uplift with a confidence interval.",
     "S2 (only if projected uplift is at least the residual in P7/P8): authorize frozen runs under the existing one-shot lease rules; otherwise record the predicate as unattainable on this substrate."
   ],
   "rejected_material_alternatives": [
@@ -281,10 +417,11 @@
   "uncertainties": [
     "The Cloudflare pricing page is a 2026-10-01 snapshot; model availability, prices and pinning may change.",
     "Token mixes in P6 are assumptions; AA-Briefcase token totals are only an order-of-magnitude proxy for TB4 and other passes.",
-    "Whether the project's existing Worker AI binding can call these model IDs, and the Workers AI rate limits, were not tested or read.",
+    "Whether the project's existing Worker AI binding can call these model IDs was not tested; which candidate IDs require the Workers Paid plan (and so get the 20 requests/minute limit) is on per-model pages that were not read.",
     "The TB4 open-weights ceiling (P8) comes from a secondary aggregator and one harness; a stronger harness could move it by an unknown amount.",
     "Other keyed free tiers (Cerebras, Groq, NVIDIA NIM, Hugging Face, Google AI Studio) were not investigated.",
-    "Whether Terminal-Bench 2.1 tasks overlap the exposed TB4 ledger was not checked."
+    "Terminal-Bench 2.1 vs frozen TB4 disjointness was checked by task name only; semantic overlap (renamed or derived tasks) was not examined and must be checked from metadata only before any use.",
+    "Cognition's 'Kimi K2.7' row is not verified to be the same model as Workers AI's kimi-k2.7-code; GLM 5.3 and the DeepSeek rows map by name."
   ],
   "assumptions": [
     "Prices and quotas on the retrieved pages are current as of 2026-10-02."
