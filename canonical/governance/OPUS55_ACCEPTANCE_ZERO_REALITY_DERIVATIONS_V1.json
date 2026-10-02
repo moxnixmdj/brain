@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ZERO_REALITY_DERIVATIONS_V1",
+  "date": "2026-10-02",
+  "status": "HASH_BOUND_ZERO_REALITY_DERIVATIONS__3_ATOMIC_ACCEPTANCE_PREDICATES",
+  "source_snapshot_sha": "8687e93675abbba973bb263db5d4224ced94240f",
+  "source_tree_sha": "43291b9a528877e8a4e72fe9208d845444ce06e6",
+  "source_blobs": {
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+  },
+  "derivations": [
+    {
+      "predicate_id": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "proof_kind": "RECEIPT",
+      "scope_complete": true,
+      "basis": [
+        "T1 and T3 terminal parent receipts bind exact P3 blob ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+        "Both receipts are load-bearing direct-instrumentation passes under parent terminal acceptance",
+        "The frozen P3 evaluator requires ZERO_UNSUPPORTED_MATERIAL_CLAIMS and any load-bearing P3 failure blocks the behavior proof"
+      ]
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_SECOND_TASK_TRANSFER",
+      "proof_kind": "RECEIPT",
+      "scope_complete": true,
+      "basis": [
+        "Exact frozen tool binding blob 6bcabc0a7d0525532ce7b80e132278f7c99caa43 is independently verified",
+        "Its 180-slot source pool directly checks CROSS_TASK_TRANSFER_WITHIN_VALID_EPOCH",
+        "Terminal one-shot result records 180/180 TOOL_ROUTE_DISCOVERY_AND_SELECTION_001 passes"
+      ]
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION",
+      "proof_kind": "RECEIPT",
+      "scope_complete": true,
+      "basis": [
+        "Exact frozen tool binding requires NO_SELECTION_WITHOUT_CURRENT_POSITIVE_EVIDENCE",
+        "The objective dimensions include EVIDENCE_BACKED_CAPABILITY_UPDATE",
+        "Terminal one-shot result records 180/180 passes with no tuning replay or result feedback"
+      ]
+    }
+  ],
+  "explicitly_not_promoted": [
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "ANY_PUBLIC_FIXED_BAR",
+    "ANY_FAMILY_OR_TERMINAL_OWNERSHIP_CLAIM"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_replay": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
