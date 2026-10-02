@@ -173,5 +173,27 @@
     "instruction_exposure_is_reality_query": true,
     "exact_global_cut_before_new_exposure": true,
     "parallelize_independent_cut_members": true
+  },
+  "atomic_frontier_transaction": {
+    "status": "ACTIVE__MEASURED_AVOIDABLE_LATENCY_PATCH__NO_NEW_GOVERNANCE_LAYER",
+    "measured_observation": {
+      "sample_commits": 100,
+      "sample_span_minutes": 23.9,
+      "commits_per_minute": 4.19,
+      "sampled_workflow_runs": 100,
+      "drift_guard_runs": 40,
+      "drift_guard_failures": 26,
+      "unrelated_exact_symbolic_runs": 15,
+      "median_completed_workflow_seconds": 14
+    },
+    "hard_rules": [
+      "ONE_FRONTIER_CHANGE_LANDS_AS_ONE_TREE_COMMIT_WITH_IMPLEMENTATION_TESTS_RECEIPTS_AND_ALL_MIRRORS",
+      "CHEAP_DETERMINISTIC_TESTS_PASS_BEFORE_REMOTE_VERIFICATION",
+      "REMOTE_CI_CONFIRMS_INDEPENDENTLY_AND_IS_NOT_PRIMARY_DEBUGGER",
+      "CLOSED_FAMILY_WORKFLOWS_DO_NOT_RUN_ON_UNRELATED_CHANGES",
+      "SUPERSEDED_RUNS_CANCEL_WHEN_SAFE",
+      "CANONICAL_STATE_REDUCES_ONCE_PER_ACCEPTED_TRANSACTION"
+    ],
+    "optimization_metric": "TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_CRITICAL_PATH_WALL_CLOCK_MINUTE"
   }
 }
