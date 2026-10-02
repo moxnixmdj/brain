@@ -168,9 +168,10 @@
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
       "portfolio": "T2",
-      "proof_state": "SCOPE_EQUIVALENT_GATE_V2_INDEPENDENT_PASS__TERMINAL_POPULATION_BINDING_PENDING",
+      "proof_state": "INDEPENDENT_WHOLE_DIMENSION_AND_STRUCTURAL_VARIETY_PREFLIGHT_PASS__SCOPE_GATE_ADMISSION_PENDING",
       "route_requirement": "ARBITRARY_FINITE_EXPLICIT_TASK_GRAPH_PARTITION_ASSIGNMENT_RESOURCE_EVIDENCE_FANIN_BASELINE_AND_RECEIPT_DRIVEN_REPLAN",
       "blockers": [
+        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
         "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
       ],
       "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
@@ -182,7 +183,9 @@
       "whole_dimension_preflight": "canonical/governance/DELEGATION_WHOLE_DIMENSION_PREFLIGHT_V2.json",
       "scope_equivalence_relation": "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json",
       "scope_gate_input": "canonical/governance/DELEGATION_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
-      "scope_gate_verification": "canonical/verification/DELEGATION_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "scope_gate_verification": "canonical/verification/DELEGATION_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "structural_variety_route": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+      "structural_variety_verification": "canonical/verification/DELEGATION_STRUCTURAL_VARIETY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
