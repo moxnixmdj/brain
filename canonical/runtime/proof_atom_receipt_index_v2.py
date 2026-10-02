@@ -44,6 +44,10 @@ EXCLUDED_REL_PATHS = {
     "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V1.json",
     "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V2.json",
 }
+EXCLUDED_BASENAME_PREFIXES = (
+    "PROOF_ATOM_RECEIPT_INDEX_",
+    "DECLARED_CONTENT_ADDRESSED_EVIDENCE_CORPUS_",
+)
 
 
 def _fail(*errors: str) -> dict[str, Any]:
@@ -87,6 +91,8 @@ def _candidate_files(root: Path) -> list[Path]:
                 continue
             rel = p.relative_to(root).as_posix()
             if rel in EXCLUDED_REL_PATHS or p.name in EXCLUDED_BASENAMES:
+                continue
+            if any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES):
                 continue
             try:
                 if p.stat().st_size > MAX_FILE_BYTES:
@@ -235,6 +241,7 @@ def build_index(
             "CONTENT_ADDRESS_EACH_MATCH__CONTENT_ADDRESS_FULL_SCANNED_CORPUS_MANIFEST__"
             "REPORT_MATCH_TRUNCATION_EXPLICITLY__"
             "EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
+            "EXCLUDE_RECEIPT_INDEX_SELF_VERIFICATION_AND_DECLARED_CORPUS_RESTATEMENTS__"
             "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_INDEX"
         ),
         "new_reality_units_consumed": 0,
