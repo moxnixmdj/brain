@@ -1,6 +1,12 @@
 name: Verify global terminal universe
 
 on:
+  pull_request:
+    paths:
+      - "canonical/runtime/global_terminal_universe.py"
+      - "canonical/tests/test_global_terminal_universe.py"
+      - "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
+      - ".github/workflows/verify-global-terminal-universe.yml"
   push:
     paths:
       - "canonical/runtime/global_terminal_universe.py"
