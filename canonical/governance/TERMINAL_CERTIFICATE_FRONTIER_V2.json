@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CERTIFICATE_FRONTIER_V2",
   "date": "2026-10-02",
-  "status": "CANDIDATE_SHARED_CERTIFICATE_FRONTIER__31_PREDICATES__ABSOLUTE_SCOPE_COMPLETENESS_RECONCILED__ZERO_CREDIT",
+  "status": "REDUNDANT_PARALLEL_CANDIDATE__NONCANONICAL__SUPERSEDED_BY_RECONCILED_TERMINAL_CERTIFICATE_FRONTIER_V1__ZERO_CREDIT",
   "objective": "Quotient the current 31 unresolved Opus 5.5 atomic acceptance predicates by exact shared missing certificate obligations after the absolute-dominance scope-completeness correction, so the controller schedules missing truths rather than duplicative procedures.",
   "authority": {
     "predicate_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
@@ -252,5 +252,6 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "superseded_by": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V1.json"
 }
