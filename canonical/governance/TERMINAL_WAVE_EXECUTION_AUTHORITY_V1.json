@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_WAVE_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-02",
-  "status": "REVOKED_FAIL_CLOSED__CURRENT_LAUNCHER_BYTES_PENDING_INDEPENDENT_REVERIFICATION__ZERO_TERMINAL_RESULTS",
-  "authority_receipt": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "authorization": "NONE_UNTIL_CURRENT_TOP_LEVEL_LAUNCHER_AND_HARDENED_AUTHORITY_REDUCER_ARE_INDEPENDENTLY_VERIFIED",
-  "execution_authority": false,
+  "status": "AUTHORIZED__HARDENED_EXACT_CURRENT_SA_CCR_CORRECTED_12_ROUTE_PARENT_PORTFOLIO_WAVE__ZERO_TERMINAL_RESULTS",
+  "authority_receipt": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "authorization": "T0_T1_T2_T3_ROUTE_SPECIFIC_PARALLEL_TERMINAL_WAVE",
+  "execution_authority": true,
   "promotion_authority": false,
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
@@ -22,24 +22,17 @@
     "LEGACY_GLOBAL_12_SLOT_TERMINAL_REPLACEMENT_WAVE_MUST_NOT_EXECUTE_UNDER_V2_PROTOCOL",
     "ROUTE_SPECIFIC_EXECUTOR_SET_MUST_EQUAL_ALL_12_FROZEN_BINDINGS"
   ],
-  "terminal_launcher_state": "FAIL_CLOSED_PREBEACON__CURRENT_LAUNCHER_CHANGED_AFTER_PRIOR_RECEIPT__NO_TERMINAL_CASE_GENERATION",
+  "terminal_launcher_state": "AUTHORIZED_PREBEACON__HARDENED_REDUCER_BINDS_CURRENT_SA_CCR_CORRECTED_LAUNCHER__PACKAGE_FREEZE_REQUIRED_BEFORE_BEACON",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "launcher": {
     "binding": "canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json",
-    "state": "INDEPENDENT_PUBLIC_RUNNER_PASS__CONCRETE_PARENT_LAUNCHER_EXACTLY_BOUND",
+    "state": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_SA_CCR_ROUTE_SPECIFIC_LAUNCHER_EXACTLY_BOUND",
     "launch_ready": true
   },
   "parent_case_producer_manifest": "canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json",
   "launch_authority_reducer": "canonical/runtime/terminal_wave_launch_authority_reducer_v1.py",
-  "derived_launch_authority_verification": null,
-  "next": "INDEPENDENTLY_VERIFY_CURRENT_LAUNCHER_TEST_AND_HARDENED_LAUNCH_AUTHORITY_REDUCER__REDERIVE_AUTHORITY__THEN_REFREEZE_FULL_EXECUTION_CLOSURE_BEFORE_BEACON",
-  "revocation": {
-    "reason": "TOP_LEVEL_LAUNCHER_BLOB_CHANGED_AFTER_PRIOR_INDEPENDENT_RECEIPT__HARDENED_REDUCER_NOW_BINDS_LAUNCHER_BYTES",
-    "current_launcher_blob_sha": "d7f20a66f1f534b06ea11782cb350a582c07d985",
-    "current_launcher_test_blob_sha": "01996bc0cca7246c0dcfea5b1602c4740fa3e45d",
-    "terminal_beacon_constructed": false,
-    "terminal_cases_consumed": 0
-  }
+  "derived_launch_authority_verification": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "next": "FREEZE_EXACT_POST_AUTHORITY_EXECUTION_SNAPSHOT__INDEPENDENTLY_VERIFY_PACKAGE__ONLY_THEN_CREATE_FIRST_POST_FREEZE_BEACON_AND_EXECUTE_ONCE"
 }
