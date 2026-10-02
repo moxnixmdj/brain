@@ -15,7 +15,8 @@
     "MATERIAL_MAIN_MICROCOMMITS",
     "HAND_MAINTAINED_DUPLICATE_FRONTIER_FACTS",
     "REACQUISITION_OF_UNINVALIDATED_EVIDENCE",
-    "UNRELATED_CLOSED_FAMILY_CI"
+    "UNRELATED_CLOSED_FAMILY_CI",
+    "PROMOTION_FROM_STALE_OR_SUPERSEDED_RECEIPT_BINDING"
   ],
   "preserve": [
     "INDEPENDENT_VERIFICATION",
@@ -23,7 +24,8 @@
     "CONTAMINATION_AND_INFORMATION_BOUNDARIES",
     "FAIL_CLOSED_IDENTIFIABILITY",
     "FINAL_DONOR_DELETION_CLEANROOM",
-    "EXACT_MINIMUM_REALITY_CUT"
+    "EXACT_MINIMUM_REALITY_CUT",
+    "CURRENT_EXACT_BLOB_RECEIPT_BINDING_FOR_LOAD_BEARING_ROUTE_ARTIFACTS"
   ],
   "carrier_quarantine": {
     "private_brain_actions_health": "DEGRADED__RUNNER_ID_ZERO__NO_STEPS",
@@ -35,5 +37,11 @@
   "transaction_rule": "BUFFER_CAUSALLY_ADJACENT_CHANGES__VERIFY_EXACT_BYTES__LAND_ONE_MAIN_COMMIT",
   "stale_projection_rule": "RECEIPTS_AND_ACTIVE_PROOF_BASIS_DOMINATE_DERIVED_POINTER_SCOREBOARD_QUEUE_MIRRORS",
   "no_target_weakening": true,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "evidence_freshness": {
+    "guard": "canonical/runtime/terminal_route_evidence_freshness.py",
+    "controller": "canonical/runtime/terminal_route_closure_controller.py",
+    "rule": "NEWEST_EXPLICIT_CURRENT_BLOB_REVALIDATION_OVERRIDES_OLDER_RECEIPTS_FOR_THE_SAME_ARTIFACT__OTHERWISE_EXACT_BLOB_MISMATCH_FAILS_CLOSED",
+    "promotion_authority": false
+  }
 }

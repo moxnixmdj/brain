@@ -24,6 +24,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from canonical.runtime.terminal_route_evidence_freshness import evaluate_row_evidence_freshness
+
 BASIS = "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
 OPEN_DOMAIN_AUDIT = "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json"
 
@@ -53,6 +55,9 @@ _OPEN_DOMAIN_PROTOCOL_TOKENS = (
     "CHALLENGE_SOURCE_POOL_AND_SCORER",
     "OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL",
 )
+_STALE_EVIDENCE_TOKENS = ("STALE_INDEPENDENT_EVIDENCE_BINDING", "EXACT_BLOB_REVALIDATION", "CURRENT_ARTIFACT_RECEIPT_MISMATCH")
+_ACCEPTANCE_PROOF_TOKENS = ("TERMINAL_ACCEPTANCE_PROOF", "ACCEPTANCE_PROOF_NOT_YET_TRUTHFULLY_ESTABLISHED")
+
 _EXTERNAL_BLOCK_TOKENS = (
     "COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
     "EXTERNAL_BLOCKED",
@@ -92,6 +97,10 @@ def _portfolio_count(value: Any) -> int:
 
 
 def _classify(blocker: str) -> str:
+    if any(tok in blocker for tok in _STALE_EVIDENCE_TOKENS):
+        return "STALE_EVIDENCE"
+    if any(tok in blocker for tok in _ACCEPTANCE_PROOF_TOKENS):
+        return "ACCEPTANCE_PROOF"
     if any(tok in blocker for tok in _EXTERNAL_BLOCK_TOKENS):
         return "EXTERNAL_BLOCK"
     if any(tok in blocker for tok in _OPEN_DOMAIN_PROTOCOL_TOKENS):
@@ -157,21 +166,28 @@ def evaluate(root: Path) -> dict[str, Any]:
             errors.append("BLOCKERS_INVALID:" + bid)
             continue
 
-        if state == "TERMINAL_ROUTE_FROZEN_ADMISSIBLE":
+        freshness = evaluate_row_evidence_freshness(root, row)
+        effective_blockers = list(blockers) + list(freshness.get("blockers") or [])
+
+        if state == "TERMINAL_ROUTE_FROZEN_ADMISSIBLE" and not freshness.get("stale"):
             if blockers:
                 errors.append("CLOSED_ROUTE_HAS_BLOCKERS:" + bid)
             closed.append(bid)
             continue
-        if not blockers:
+        if state == "TERMINAL_ROUTE_FROZEN_ADMISSIBLE" and freshness.get("stale"):
+            errors.append("CLOSED_ROUTE_STALE_EVIDENCE:" + bid)
+        if not effective_blockers:
             errors.append("OPEN_ROUTE_WITHOUT_BLOCKER:" + bid)
             continue
 
-        classes = [_classify(x) for x in blockers]
+        classes = [_classify(x) for x in effective_blockers]
         binding = sum(x == "BINDING" for x in classes)
         gate = sum(x == "SCOPE_GATE" for x in classes)
         expansion = sum(x == "SCOPE_EXPANSION" for x in classes)
         protocol = sum(x == "OPEN_DOMAIN_PROTOCOL" for x in classes)
         external = sum(x == "EXTERNAL_BLOCK" for x in classes)
+        stale = sum(x == "STALE_EVIDENCE" for x in classes)
+        acceptance_proof = sum(x == "ACCEPTANCE_PROOF" for x in classes)
         other = sum(x == "OTHER" for x in classes)
         preflight = any(
             token in state
@@ -186,7 +202,10 @@ def evaluate(root: Path) -> dict[str, Any]:
         is_open_domain = bid in open_domain_contracts
         legacy_open_domain_scope = is_open_domain and (gate + expansion > 0)
 
-        if legacy_open_domain_scope:
+        if stale:
+            score = -2000 - min(leverage, 4) * 3
+            next_action = "REVERIFY_CHANGED_BYTES_BEFORE_ANY_SCOPE_OR_ACCEPTANCE_PROMOTION"
+        elif legacy_open_domain_scope:
             score = -1000 - min(leverage, 4) * 3
             next_action = "RECLASSIFY_TO_OPEN_DOMAIN_MATCHED_PROTOCOL"
             reclassification_required.append(bid)
@@ -195,32 +214,34 @@ def evaluate(root: Path) -> dict[str, Any]:
                 external * 1000
                 + expansion * 100
                 + other * 50
+                + acceptance_proof * 2
                 + gate * 10
                 + protocol * 4
                 + binding
                 - min(leverage, 4) * 3
                 - (8 if preflight else 0)
             )
-            next_action = (
-                "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
-                if external
-                else (
-                    "FREEZE_OPEN_DOMAIN_MATCHED_PROTOCOL"
-                    if protocol and expansion == 0 and other == 0
-                    else (
-                        "FREEZE_BINDING_AND_ACCEPTANCE"
-                        if expansion == 0 and other == 0 and protocol == 0 and (binding or gate)
-                        else "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
-                    )
-                )
-            )
+            if acceptance_proof:
+                next_action = "ESTABLISH_REGISTERED_TERMINAL_ACCEPTANCE_PROOF"
+            elif external:
+                next_action = "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+            elif protocol and expansion == 0 and other == 0:
+                next_action = "FREEZE_OPEN_DOMAIN_MATCHED_PROTOCOL"
+            elif expansion == 0 and other == 0 and protocol == 0 and (binding or gate):
+                next_action = "FREEZE_BINDING_AND_ACCEPTANCE"
+            else:
+                next_action = "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
 
         queue.append({
             "behavior_id": bid,
             "portfolio": row.get("portfolio"),
             "proof_state": state,
-            "blockers": blockers,
+            "blockers": effective_blockers,
+            "canonical_blockers": blockers,
+            "evidence_freshness": freshness,
             "blocker_classes": {
+                "stale_evidence": stale,
+                "acceptance_proof": acceptance_proof,
                 "binding": binding,
                 "scope_gate": gate,
                 "scope_expansion": expansion,

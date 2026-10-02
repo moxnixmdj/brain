@@ -208,7 +208,10 @@
     "atomic_frontier_transaction_policy_path": "canonical/governance/ATOMIC_FRONTIER_TRANSACTION_V1.json",
     "frontier_state_consistency_workflow_path": ".github/workflows/frontier-state-consistency.yml",
     "remote_ci_debugging_forbidden_when_local_preflight_available": true,
-    "closed_family_ci_requires_relevant_path_change": true
+    "closed_family_ci_requires_relevant_path_change": true,
+    "terminal_route_evidence_freshness_required": true,
+    "terminal_route_evidence_freshness_path": "canonical/runtime/terminal_route_evidence_freshness.py",
+    "route_closure_controller_must_reject_stale_receipt_bindings": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",

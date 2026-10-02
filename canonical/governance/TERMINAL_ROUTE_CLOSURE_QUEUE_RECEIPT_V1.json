@@ -3,7 +3,7 @@
   "date": "2026-10-02",
   "source_basis_blob_sha": "ead2ce276ae240e1450892ce0be817adb3be9faf",
   "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
-  "status": "CANONICAL_SCHEDULING_RECEIPT__ZERO_PROMOTION_AUTHORITY",
+  "status": "INVALIDATED_BY_TERMINAL_ROUTE_EVIDENCE_FRESHNESS_GUARD_UPGRADE__RECOMPUTE_REQUIRED__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
   "closed_route_count": 2,
   "open_route_count": 10,
@@ -252,5 +252,11 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "rule": "SCHEDULING_ONLY__OPEN_DOMAIN_MATCHED_PROTOCOLS_NOT_FINITE_SCOPE_SUPERSET_PROOFS__EXTERNAL_COMPARATOR_BLOCKS_DO_NOT_SPEND_CLEAN_CASES"
+  "rule": "SCHEDULING_ONLY__OPEN_DOMAIN_MATCHED_PROTOCOLS_NOT_FINITE_SCOPE_SUPERSET_PROOFS__EXTERNAL_COMPARATOR_BLOCKS_DO_NOT_SPEND_CLEAN_CASES",
+  "invalidated_by": {
+    "guard": "canonical/runtime/terminal_route_evidence_freshness.py",
+    "controller": "canonical/runtime/terminal_route_closure_controller.py",
+    "public_verification": "canonical/verification/TERMINAL_ROUTE_EVIDENCE_FRESHNESS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "reason": "PREVIOUS_QUEUE_DID_NOT_CHECK_CURRENT_ARTIFACT_BYTES_AGAINST_INDEPENDENT_RECEIPT_BINDINGS"
+  }
 }
