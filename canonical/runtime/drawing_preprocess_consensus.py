@@ -61,14 +61,15 @@ def consensus_ink_mask(
     *,
     min_pairwise_iou:float=0.72,
     min_cluster_size:int=3,
+    min_ink_fraction:float=0.0005,
     max_ink_fraction:float=0.45,
 )->dict[str,Any]:
     if not (0<min_pairwise_iou<=1):
         raise ValueError("min_pairwise_iou must be in (0,1]")
     if min_cluster_size<2:
         raise ValueError("min_cluster_size must be >=2")
-    if not (0<max_ink_fraction<1):
-        raise ValueError("max_ink_fraction must be in (0,1)")
+    if not (0<=min_ink_fraction<max_ink_fraction<1):
+        raise ValueError("ink fraction bounds must satisfy 0 <= min < max < 1")
 
     variants=_variants(image)
     names=sorted(variants)
@@ -110,9 +111,10 @@ def consensus_ink_mask(
     votes=stack.sum(axis=0)
     mask=(votes >= (len(cluster)//2+1)).astype(np.uint8)
     ink_fraction=float(mask.mean())
-    if ink_fraction>max_ink_fraction:
+    if ink_fraction<min_ink_fraction or ink_fraction>max_ink_fraction:
         return {
-            "schema":SCHEMA,"status":"FAIL_CLOSED","error":"INK_FRACTION_IMPLAUSIBLY_HIGH",
+            "schema":SCHEMA,"status":"FAIL_CLOSED",
+            "error":"INK_FRACTION_IMPLAUSIBLY_LOW" if ink_fraction<min_ink_fraction else "INK_FRACTION_IMPLAUSIBLY_HIGH",
             "ink_fraction":ink_fraction,"cluster":cluster,"terminal_authority":False
         }
 
