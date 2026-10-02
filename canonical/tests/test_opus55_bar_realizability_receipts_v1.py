@@ -226,7 +226,7 @@ class PublicBarReceiptTests(unittest.TestCase):
                 self.assertTrue(e["excerpt"].strip(), row["predicate_id"])
         self.assertEqual(
             counts,
-            {"OWNER_COMPUTED_OR_PRIVATE": 8, "THIRD_PARTY_RUNNABLE_IN_PRINCIPLE": 4, "UNRESOLVED": 3},
+            {"OWNER_COMPUTED_OR_PRIVATE": 8, "THIRD_PARTY_RUNNABLE_IN_PRINCIPLE": 3, "UNRESOLVED": 4},
         )
         for row in rows:
             if row["third_party_reproducibility"].startswith(("OWNER", "THIRD_PARTY")):
@@ -263,7 +263,7 @@ class PublicBarReceiptTests(unittest.TestCase):
     def test_prior_work_references_exist_and_relations_are_declared(self):
         relations = self.receipt["relation_to_prior_work"]
         self.assertTrue(relations)
-        allowed = {"AGREES", "EXTENDS", "AGREES_AND_QUESTIONS_DISCHARGEABILITY"}
+        allowed = {"AGREES", "EXTENDS", "AGREES_AND_QUESTIONS_DISCHARGEABILITY", "QUESTIONS_SCOPE_EQUIVALENCE"}
         for item in relations:
             with self.subTest(artifact=item["artifact"]):
                 self.assertIn(item["relation"], allowed)
@@ -273,6 +273,21 @@ class PublicBarReceiptTests(unittest.TestCase):
             any(i["relation"] == "AGREES_AND_QUESTIONS_DISCHARGEABILITY" and "INFERENCE" in i["detail"] for i in relations),
             "the dischargeability concern must stay labelled as an inference",
         )
+
+    def test_automationbench_scope_mismatch_defect_is_pinned_to_primary_sources(self):
+        row = next(r for r in self.receipt["public_bar_rows"] if r["predicate_id"] == "AUTOMATIONBENCH_GE_40")
+        self.assertTrue(row["third_party_reproducibility"].startswith("UNRESOLVED__PUBLIC_SURFACE_BUT_BAR_COMES_FROM_THE_PRIVATE"))
+        self.assertEqual(row["registry_acceptance"], "AutomationBench >= 40.0%")
+        primaries = [e for e in row["evidence"] if e["class"] == "OFFICIAL_PRIMARY"]
+        self.assertTrue(any("github.com/zapier/AutomationBench" in e["url"] and "held-out private task set" in e["excerpt"] for e in primaries))
+        self.assertTrue(any("50.3%" in e["excerpt"] for e in primaries), "public-600 Opus 5 baseline must be quoted")
+        defect = {d["id"]: d for d in self.receipt["defect_findings"]}["AUTOMATIONBENCH_BAR_SCOPE_MISMATCH"]
+        self.assertIn("false-success hazard", defect["consequence"])
+        self.assertIn("scope-equivalence", defect["consequence"])
+        self.assertGreaterEqual(len(defect["fixes_for_owner_reconciliation_not_adopted"]), 2)
+        self.assertIn("medium for the exact official value", defect["confidence"])
+        self.assertIn("Opus 4.8 scores 41.00%", row["note"])
+        self.assertIn("3_RUNNABLE_NEED_A_PINNED_GENERATOR__4_UNRESOLVED", self.receipt["status"])
 
     def test_livebench_row_records_the_open_model_update(self):
         row = next(r for r in self.receipt["public_bar_rows"] if r["predicate_id"] == "LIVEBENCH_IF_GE_65_7")

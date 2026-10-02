@@ -1098,7 +1098,7 @@
   "promotion_authority": false,
   "authority_status": "PROVISIONAL_ANALYSIS__NO_CURRENT_BASE_SEVEN_LAYER_OBS_RECEIPT__ZERO_CANONICAL_AUTHORITY_UNTIL_OBS_AND_TRUSTED_GUARD",
   "progress_credit": "ZERO__ACTIVITY_AND_CORRECTION_ONLY",
-  "correction_notice": "The first version of this receipt headlined 'the decisive lever is the $0 rule' and applied the AA-Briefcase token scale (52M to 970M tokens per pass) and the TB4/FrontierCode residuals to all four third-party-runnable bars. For LiveBench Instruction Following that was wrong: a pass is about 0.4M tokens and open-weights models already exceed the bar (P13, P14). Regime 2 below (agentic surfaces) keeps the original analysis; regime 1 (text-only surfaces) is new.",
+  "correction_notice": "The first version of this receipt headlined 'the decisive lever is the $0 rule' and applied the AA-Briefcase token scale (52M to 970M tokens per pass) and the TB4/FrontierCode residuals to all four third-party-runnable bars. For LiveBench Instruction Following that was wrong: a pass is about 0.4M tokens and open-weights models already exceed the bar (P13, P14). Regime 2 below (agentic surfaces) keeps the original analysis; regime 1 (text-only surfaces) is new. Later in this PR a further correction was made in the public-bar receipt: AUTOMATIONBENCH_GE_40 compares a private-set bar to a public-set run (defect_findings).",
   "reconciliation": {
     "law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md section 15",
     "question": "What is the shortest verified path from the current state to the terminal capability now?",

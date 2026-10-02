@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
   "date": "2026-10-02",
   "decision_id": "2026-10-02_PUBLIC_BAR_MEASURABILITY_AND_SUBSTRATE_FEASIBILITY_V1",
-  "status": "EXECUTED__THEORY_FALSIFICATION_EVIDENCE_RECORDED__8_OF_15_PUBLIC_BARS_OWNER_COMPUTED__4_RUNNABLE_NEED_A_PINNED_GENERATOR__3_UNRESOLVED__NO_EVIDENCED_UNILATERAL_ZERO_COST_ROUTE_TO_THE_CONJUNCTION__ZERO_CREDIT",
+  "status": "EXECUTED__THEORY_FALSIFICATION_EVIDENCE_RECORDED__8_OF_15_PUBLIC_BARS_OWNER_COMPUTED__3_RUNNABLE_NEED_A_PINNED_GENERATOR__4_UNRESOLVED__NO_EVIDENCED_UNILATERAL_ZERO_COST_ROUTE_TO_THE_CONJUNCTION__ZERO_CREDIT",
   "canonical_base_commit": "ea4b09a134fcec7761e9070eca76a1c52aa6fc56",
   "facts_first_gathered_at_commit": "f8c3ffd7ba1fc6725e866ce245c726936dbebe2f",
   "base_reverification": "All repo sources pinned in material_premises were re-verified byte-identical at canonical_base_commit; newer upstream commits were read for overlap (see relation_to_prior_work where present).",
@@ -34,7 +34,7 @@
     },
     {
       "id": "P2_CLASSIFICATION",
-      "fact": "Source review classifies 8 of the 15 as owner-computed or owner-private (no third-party route to an official score), 4 as third-party runnable in principle, and 3 as unresolved. Per-predicate rows with excerpts are in public_bar_rows.",
+      "fact": "Source review classifies 8 of the 15 as owner-computed or owner-private (no third-party route to an official score), 3 as third-party runnable in principle (TB4, TB-Science, LiveBench IF), and 4 as unresolved (HLE, Chartography, OSWorld 2.1, and AutomationBench whose bar comes from the private official set). Per-predicate rows with excerpts are in public_bar_rows.",
       "evidence": {
         "class": "MIXED",
         "see": "public_bar_rows"
@@ -266,17 +266,36 @@
       "predicate_id": "AUTOMATIONBENCH_GE_40",
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
       "registry_acceptance": "AutomationBench >= 40.0%",
-      "evaluator": "Zapier (public 600-task set per repo; Opus 5.5 figure run by Zapier)",
-      "third_party_reproducibility": "THIRD_PARTY_RUNNABLE_IN_PRINCIPLE__NEEDS_A_PINNED_GENERATOR",
+      "evaluator": "Zapier (official private held-out set for the bar; public 600 set is runnable by anyone)",
+      "third_party_reproducibility": "UNRESOLVED__PUBLIC_SURFACE_BUT_BAR_COMES_FROM_THE_PRIVATE_OFFICIAL_SET__NOT_SCOPE_EQUIVALENT",
       "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
       "evidence": [
         {
           "class": "OFFICIAL_PRIMARY",
           "url": "https://www.anthropic.com/claude/opus",
           "excerpt": "AutomationBench results were run and reported by Zapier ... Claude Opus 5.5 results come from Zapier's own evaluation during early access."
+        },
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://github.com/zapier/AutomationBench",
+          "retrieved_utc": "2026-10-02",
+          "pinned_commit": "4a8e1061254004d9dac807054eed33fad7d1ff14 (latest main, 2026-08-04)",
+          "excerpt": "This repository ships the public task set. The official AutomationBench leaderboard is scored on a separate, held-out private task set per domain. ... Pass rates on the 600-task public benchmark: Claude Opus 5 (max) 50.3%; Kimi K3 (max) 46.67%; Claude Opus 4.8 (max) 41.00%; GLM 5.2 (max) 26.17%."
+        },
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://github.com/zapier/AutomationBench/blob/main/CHANGELOG.md",
+          "retrieved_utc": "2026-10-02",
+          "excerpt": "1.0.6: Private tasks were made a bit harder to compensate for bug fixes."
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://benchlm.ai/benchmarks/automationbench",
+          "retrieved_utc": "2026-10-02",
+          "excerpt": "Official-board style rows (Sep 24, 2026): Claude Opus 5.5 40.0%, Claude Opus 5 26.0%; open-weights rows above 40.0 include DeepSeek V4.1 Flash 54.8%, MiMo-V2.6 Pro/Flash 53.1/52.3%, GLM-5.3 Flash 48.8%, GLM-5.3 48.2%."
         }
       ],
-      "note": "Repo froze the public 600 set and a strict binary assertion metric; the Opus 5.5 number was owner-run in early access, so comparability to a third-party run is plausible but unproven.",
+      "note": "DEFECT FINDING (see defect_findings): the registry bar 40.0 is Opus 5.5's score on the official private held-out set, while the registry surface is the public 600. On the public 600, Opus 5 scores 50.3% but about 26 to 27% on the official board (Anthropic's table via secondary report; benchlm 26.0), so the two sets are not scope-equivalent. A system weaker than Opus 5.5 can clear 'public 600 >= 40.0' (Opus 4.8 scores 41.00% on the public set). Repo status: public 600 frozen, gateway configuration exists (PR 865), substrate not yet qualified.",
       "repo_readiness": {
         "dataset": "PUBLIC_600_TASK_SET_FROZEN",
         "scorer": "STRICT_BINARY_ASSERTION_METRIC_BOUND",
@@ -529,6 +548,11 @@
       "artifact": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
       "relation": "EXTENDS",
       "detail": "It lists BIND_GDPVAL_PUBLIC_ROUTE and BIND_FINANCE_ACCOUNTING_INDEX_PUBLIC_ROUTE as live public route candidates. Primary sources show the scored quantities (GDPval-AA Elo, Finance & Accounting Index) are Artificial Analysis computations (judge-panel pairwise Elo anchored to AA's model pool; a composite that includes the private AA-Briefcase), so the numeric bars are not third-party reproducible although GDPval's task data is public. The same deletion logic would apply unless a precise public surrogate with a scope audit is adopted."
+    },
+    {
+      "artifact": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
+      "relation": "QUESTIONS_SCOPE_EQUIVALENCE",
+      "detail": "The frozen public-600 binding, and the AutomationBench Brain gateway in open PR 865 (operative configuration; substrate not yet qualified), are untouched by this finding. The question raised is whether the 40.0 bar, taken from the private official set, may be applied to the public set at all."
     }
   ],
   "evidence_refs": [
@@ -540,7 +564,7 @@
     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
     "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json"
   ],
-  "conclusion": "No unilateral zero-cost route to the conjunction of the 15 public-bar predicates is currently evidenced, and the project's own route audit agrees (zero_cost_executable_surface_count = 0 of 14 surfaces). Eight predicates are owner-computed or owner-private: the project cannot measure them, and the only candidate route is the owner's stronger-proof substitution, for which no discharge mechanism is visible and which, by the project's own scope-transport prohibition, cannot imply a numeric bar on an unobservable private population from finite Brain-side evidence (an inference to be tested by the first BUILD_*_STRONGER_PROOF attempt; the repo's fallback for such predicates is to remain blocked). Four predicates are third-party runnable but all need a pinned donor-independent generator that is not bound in the repo (a pinned open-weights route exists on Cloudflare Workers AI, but its $0 allocation is orders of magnitude below one benchmark pass; see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1): the best CPU-hostable open model found scores 9.2% on Terminal-Bench (version unspecified), about 57 points below the TB4 bar, and the best open-weights model on an independent TB4 board (41.8%) needs GPU-class inference that is not zero-cost. Because the terminal certificate requires every predicate, the terminal goal cannot be made true by capability work inside the current constraints unless the owner-computed predicates are re-posed or proven by a mechanism not yet shown, and a pinned generator is bound. This is evidence about the formulation and constraints, not a claim that Opus-level capability is impossible in principle. CORRECTION (added later in this PR): LiveBench Instruction Following is an exception to the generator and capability gap described for agentic surfaces; open-weights models already exceed its bar (census P13), making it the first credible zero-cost route to a real predicate.",
+  "conclusion": "No unilateral zero-cost route to the conjunction of the 15 public-bar predicates is currently evidenced, and the project's own route audit agrees (zero_cost_executable_surface_count = 0 of 14 surfaces). Eight predicates are owner-computed or owner-private: the project cannot measure them, and the only candidate route is the owner's stronger-proof substitution, for which no discharge mechanism is visible and which, by the project's own scope-transport prohibition, cannot imply a numeric bar on an unobservable private population from finite Brain-side evidence (an inference to be tested by the first BUILD_*_STRONGER_PROOF attempt; the repo's fallback for such predicates is to remain blocked). Three predicates are third-party runnable (TB4, TB-Science, LiveBench IF) but all need a pinned donor-independent generator that is not bound in the repo (a pinned open-weights route exists on Cloudflare Workers AI, but its $0 allocation is orders of magnitude below one benchmark pass; see 2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1): the best CPU-hostable open model found scores 9.2% on Terminal-Bench (version unspecified), about 57 points below the TB4 bar, and the best open-weights model on an independent TB4 board (41.8%) needs GPU-class inference that is not zero-cost. Because the terminal certificate requires every predicate, the terminal goal cannot be made true by capability work inside the current constraints unless the owner-computed predicates are re-posed or proven by a mechanism not yet shown, and a pinned generator is bound. This is evidence about the formulation and constraints, not a claim that Opus-level capability is impossible in principle. CORRECTION (added later in this PR): LiveBench Instruction Following is an exception to the generator and capability gap described for agentic surfaces; open-weights models already exceed its bar (census P13), making it the first credible zero-cost route to a real predicate. AUTOMATIONBENCH_GE_40 is reclassified as UNRESOLVED: its surface is public but its bar comes from the private official set, so passing it would not be scope-equivalent to Opus 5.5 (defect_findings).",
   "selected_route": "RECORD_THEORY_FALSIFICATION_EVIDENCE__REQUIRE_OWNER_LEVEL_RECONCILIATION_OF_PREDICATES_AND_CONSTRAINTS__SPEND_NO_REALITY_UNIT_ON_THE_8_OWNER_COMPUTED_PREDICATES__CONTINUE_ONLY_ZERO_REALITY_ACTIONS",
   "owner_level_levers_not_adopted": [
     {
@@ -615,5 +639,19 @@
   "execution_authority": false,
   "promotion_authority": false,
   "authority_status": "PROVISIONAL_ANALYSIS__NO_CURRENT_BASE_SEVEN_LAYER_OBS_RECEIPT__ZERO_CANONICAL_AUTHORITY_UNTIL_OBS_AND_TRUSTED_GUARD",
-  "progress_credit": "ZERO__ACTIVITY_AND_CORRECTION_ONLY"
+  "progress_credit": "ZERO__ACTIVITY_AND_CORRECTION_ONLY",
+  "defect_findings": [
+    {
+      "id": "AUTOMATIONBENCH_BAR_SCOPE_MISMATCH",
+      "predicate": "AUTOMATIONBENCH_GE_40 (surface 'AutomationBench public 600', bar 'Opus 5.5 = 40.0')",
+      "evidence": "Zapier's README states the official leaderboard is a separate held-out private set and publishes public-600 baselines (Opus 5 = 50.3%) that are far above the official-board value for the same model (about 26 to 27%).",
+      "consequence": "Passing the predicate as frozen would not establish equal-or-better than Opus 5.5 and would breach the scope-equivalence rule (PUBLIC_BAR_REPLACES_DIRECT_OPUS_COMPARATOR_ONLY_FOR_SCOPE_EQUIVALENT_BEHAVIOR; claim scope must not exceed evidence scope). It is a false-success hazard for the single-predicate BUSINESS_WORKFLOW_AUTOMATION family.",
+      "fixes_for_owner_reconciliation_not_adopted": [
+        "Re-pose the bar as Opus 5.5's score on the PUBLIC 600 (unpublished at the pinned commit; would need Zapier to publish it or a paid Opus run, which the owner's rule forbids).",
+        "Treat the official-set bar as owner-computed (like the other private surfaces) and keep the predicate blocked until a scope-equivalent proof exists.",
+        "Use a within-public-set comparator already published (for example Opus 5 = 50.3%) only as a documented weaker proxy, never as proof of equal-or-better than Opus 5.5."
+      ],
+      "confidence": "High for the existence of the mismatch (primary source); medium for the exact official value of Opus 5 (26.0 to 26.9 across secondary sources)."
+    }
+  ]
 }
