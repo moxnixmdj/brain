@@ -13,45 +13,20 @@ permissions:
   contents: read
 
 jobs:
-  checkout:
+  verify-native:
     runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      HEAD_REF: ${{ github.head_ref }}
+      REPOSITORY: ${{ github.repository }}
     steps:
-      - uses: actions/checkout@v4
-
-  python-runtime:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python --version
-
-  syntax:
-    needs: [checkout, python-runtime]
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python -m py_compile canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
-
-  tests:
-    needs: syntax
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python -m unittest canonical.tests.test_synthesis_future_absolute_ceiling_route_v1 -v
-
-  live-verdict:
-    needs: tests
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
+      - name: Clone PR head without marketplace actions
+        run: |
+          git clone --depth 1 --branch "$HEAD_REF" "https://x-access-token:$GH_TOKEN@github.com/$REPOSITORY.git" repo
+      - name: Native Python verification
+        run: |
+          cd repo
+          python3 --version
+          python3 -m py_compile canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
+          python3 -m unittest canonical.tests.test_synthesis_future_absolute_ceiling_route_v1 -v
+          python3 canonical/runtime/synthesis_future_absolute_ceiling_route_v1.py
