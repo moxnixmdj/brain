@@ -10,7 +10,7 @@ from canonical.runtime import structured_method_expression_ast_proof_v2 as proof
 
 CLAIMED_OPS = {
     "ref","const","add","sub","min","max","mul","div","neg","abs","pow_int",
-    "exp","log","sqrt","gt","ge","lt","le","eq","neq","and","or","not","if",
+    "exp","log","sqrt","gt","ge","lt","le","eq","neq","isclose","and","or","not","if",
 }
 
 
@@ -27,6 +27,12 @@ class StructuredMethodExpressionAstV2Tests(unittest.TestCase):
         self.assertEqual(out["by_branch"]["STANDARD"]["pass"], 100)
         self.assertEqual(out["by_branch"]["STRESS"]["pass"], 100)
         self.assertEqual(set(out["operation_coverage"]), CLAIMED_OPS)
+
+    def test_floating_reconstruction_regression_115(self):
+        case = proof.generate_case(20261002, 115)
+        out = candidate.compile_graph(proof.public_case(case))
+        self.assertEqual(out["status"], "COMPILED", out)
+        self.assertTrue(proof.score(case, out)["pass"], out)
 
     def test_recursive_expression_is_load_bearing(self):
         case = proof.generate_case(17, 2)  # stress branch uses nested if/or/mul/sub/add
