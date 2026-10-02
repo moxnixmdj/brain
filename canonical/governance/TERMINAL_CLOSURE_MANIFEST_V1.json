@@ -380,9 +380,11 @@
   },
   "postwave_global_ownership_reducer": {
     "path": "canonical/runtime/postwave_global_ownership_reducer_v1.py",
-    "tests": "canonical/tests/test_postwave_global_ownership_reducer_v1.py",
-    "status": "ACTIVE_FAIL_CLOSED__DERIVE_EXACT_RESIDUAL_OWNERSHIP_CUT",
-    "rule": "TERMINAL_BEHAVIORAL_PASS_DOES_NOT_IMPLY_DONOR_INDEPENDENT_OWNERSHIP__ALL_GLOBAL_POSTCONDITIONS_REQUIRE_EXPLICIT_INDEPENDENT_RECEIPTS"
+    "status": "SUPERSEDED_FOR_TERMINAL_OWNERSHIP_CREDIT_BY_OPUS55_ACCEPTANCE_CALIBRATION",
+    "superseded_by": "canonical/runtime/opus55_acceptance_calibration_reducer_v1.py",
+    "calibration_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+    "retained_role": "HISTORICAL_GLOBAL_POSTCONDITION_RESIDUAL_DIAGNOSTIC_ONLY",
+    "rule": "GLOBAL_POSTCONDITION_CLOSURE_DOES_NOT_SUBSTITUTE_FOR_FROZEN_OPUS55_PROTOCOL_RESULT"
   },
   "next": "WORK_ONLY_THE_17_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS__REUSE_EXISTING_EVIDENCE_FIRST__NO_TERMINAL_WAVE_REPLAY__NO_FAMILY_PROMOTION_WITHOUT_PROTOCOL_PASS",
   "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
