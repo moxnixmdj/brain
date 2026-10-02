@@ -85,6 +85,55 @@ def compile_state(root:Path)->dict[str,Any]:
     if preq_basis_status is not None and preq_basis_status!=basis.get("status"):
         errors.append("PREQUAL_BASIS_STATUS_MISMATCH")
 
+    preq_progress=prequal.get("prequalification_progress")
+    if isinstance(preq_progress,dict):
+        nested_count=preq_progress.get("admissible_frozen_terminal_route_count")
+        if nested_count is not None and nested_count!=len(admitted):
+            errors.append(f"PREQUAL_NESTED_ADMISSIBLE_COUNT_MISMATCH:{nested_count}!={len(admitted)}")
+        nested_routes=preq_progress.get("admissible_frozen_terminal_routes")
+        if nested_routes is not None:
+            if not isinstance(nested_routes,list) or any(not isinstance(x,str) or not x for x in nested_routes):
+                errors.append("PREQUAL_NESTED_ADMISSIBLE_ROUTES_INVALID")
+            elif set(nested_routes)!=set(admitted):
+                errors.append(
+                    "PREQUAL_NESTED_ADMISSION_MISMATCH:"
+                    +"missing="+",".join(sorted(set(admitted)-set(nested_routes)))
+                    +";extra="+",".join(sorted(set(nested_routes)-set(admitted)))
+                )
+
+    queue_closed=queue.get("closed_behavior_ids")
+    queue_rows=queue.get("queue")
+    queue_open_ids=[]
+    if not isinstance(queue_closed,list) or any(not isinstance(x,str) or not x for x in queue_closed):
+        errors.append("QUEUE_CLOSED_IDS_INVALID")
+        queue_closed=[]
+    if not isinstance(queue_rows,list):
+        errors.append("QUEUE_ROWS_INVALID")
+    else:
+        for row in queue_rows:
+            if not isinstance(row,dict) or not isinstance(row.get("behavior_id"),str) or not row.get("behavior_id"):
+                errors.append("QUEUE_ROW_INVALID")
+                continue
+            queue_open_ids.append(row["behavior_id"])
+    if set(queue_closed)!=set(admitted):
+        errors.append(
+            "QUEUE_CLOSED_ADMISSION_MISMATCH:"
+            +"missing="+",".join(sorted(set(admitted)-set(queue_closed)))
+            +";extra="+",".join(sorted(set(queue_closed)-set(admitted)))
+        )
+    if set(queue_open_ids)!=set(blocked):
+        errors.append(
+            "QUEUE_OPEN_SET_MISMATCH:"
+            +"missing="+",".join(sorted(set(blocked)-set(queue_open_ids)))
+            +";extra="+",".join(sorted(set(queue_open_ids)-set(blocked)))
+        )
+    if queue.get("closed_route_count")!=len(admitted):
+        errors.append("QUEUE_CLOSED_COUNT_MISMATCH")
+    if queue.get("open_route_count")!=len(blocked):
+        errors.append("QUEUE_OPEN_COUNT_MISMATCH")
+    if queue.get("source_basis_status")!=basis.get("status"):
+        errors.append("QUEUE_BASIS_STATUS_MISMATCH")
+
     portfolios=prequal.get("portfolio_status")
     portfolio_blockers={}
     if isinstance(portfolios,dict):
@@ -121,13 +170,13 @@ def compile_state(root:Path)->dict[str,Any]:
     passed=not errors
     return {
         "schema":OUT_SCHEMA,"status":"GENERATED" if passed else "FAIL_CLOSED","pass":passed,
-        "source_sha256":{"registry":rh,"basis":bh,"protocol":ph,"prequalification":qh,"progress_index":ih},
+        "source_sha256":{"registry":rh,"basis":bh,"protocol":ph,"prequalification":qh,"closure_queue":qeh,"progress_index":ih},
         "active_contract_count":len(set(active_ids)),
         "authoritative_admissible_route_count":len(admitted),
         "authoritative_admissible_routes":sorted(admitted),
         "protocol_admissible_routes":sorted(protocol_admitted),
         "derived_state_reconciliation_required": any(
-            x.startswith(("PROTOCOL_ADMISSION_MISMATCH","PROTOCOL_ADMISSIBLE_COUNT_MISMATCH","PREQUAL_ADMISSIBLE_COUNT_MISMATCH","PREQUAL_BASIS_STATUS_MISMATCH"))
+            x.startswith(("PROTOCOL_ADMISSION_MISMATCH","PROTOCOL_ADMISSIBLE_COUNT_MISMATCH","PREQUAL_ADMISSIBLE_COUNT_MISMATCH","PREQUAL_NESTED_","PREQUAL_BASIS_STATUS_MISMATCH","QUEUE_"))
             for x in errors
         ),
         "blocked_contracts":blocked,
