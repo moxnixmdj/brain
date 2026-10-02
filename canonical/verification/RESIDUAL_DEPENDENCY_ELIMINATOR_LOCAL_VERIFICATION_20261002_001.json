@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_DEPENDENCY_ELIMINATOR_LOCAL_VERIFICATION_001",
+  "date": "2026-10-02",
+  "status": "LOCAL_INDEPENDENT_EXECUTION_PASS__CI_RECEIPT_STILL_PENDING__ZERO_CAPABILITY_CREDIT",
+  "runtime": "canonical/runtime/residual_dependency_eliminator.py",
+  "runtime_blob_sha": "804a848c2fef4073fc1da39b843e1cb3bf4efaa8",
+  "tests": "canonical/tests/test_residual_dependency_eliminator.py",
+  "tests_blob_sha": "fad3f49dcd414e5070db9e1c3ef5ad44b73f2e59",
+  "assertions_passed": 9,
+  "verified_cases": [
+    "OWNED_EXACT_ROUTE_ELIMINATION",
+    "JIT_SOURCE_GROUNDED_ELIMINATION",
+    "PRINCIPLED_NONIDENTIFIABILITY_ABSTENTION",
+    "VERIFIER_COMPLETE_PROPOSAL_SUBSTRATE_BYPASS",
+    "UNVERIFIABLE_RANKING_SURVIVES",
+    "BOUNDED_OWNED_SYNTHESIS_ELIMINATION",
+    "MISSING_EVIDENCE_FAILS_CLOSED",
+    "BATCH_ONLY_SURVIVOR_GETS_IMPLEMENTATION_AUTHORITY",
+    "EXACT_DEDUCTIVE_CLOSURE"
+  ],
+  "limitations": [
+    "NOT_GITHUB_ACTIONS_VERIFICATION",
+    "NOT_TERMINAL_PROMOTION_AUTHORITY",
+    "DOES_NOT_CLOSE_D0_S0_G0_BY_ITSELF"
+  ],
+  "incremental_spend_usd": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0
+}
