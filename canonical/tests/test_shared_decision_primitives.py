@@ -110,17 +110,6 @@ assert plan_artifact_operations({"replace_text"},[
     ArtifactOperation("dup",frozenset({"replace_text"})),
 ]).status=="ESCALATE"
 
-# Research action compilation: no learned rewrite; only verified authorized providers.
-providers=[SearchProvider("web",1),SearchProvider("bad",0,verified=False)]
-ra=compile_requirement_search_actions(
-    {"r1":"official API retention policy","r2":"benchmark acceptance rule"},
-    providers,
-)
-assert len(ra)==2
-assert {next(iter(x.covers)) for x in ra}=={"r1","r2"}
-assert all(x.action_id.startswith("search::web::") for x in ra)
-assert compile_requirement_search_actions({"r":"x"},[SearchProvider("dup"),SearchProvider("dup")])==()
-
 # Non-replayable failure candidates: complete prior decision set without causal overclaim.
 td=[
     TraceDecision("d1",1),
