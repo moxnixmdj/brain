@@ -1,0 +1,36 @@
+name: Verify minimum terminal basis compiler v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/minimum_terminal_basis_v1.py"
+      - "canonical/tests/test_minimum_terminal_basis_v1.py"
+      - "canonical/governance/MINIMUM_TERMINAL_BASIS_COMPILER_V1.json"
+      - "canonical/governance/OPUS55_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json"
+      - ".github/workflows/verify-minimum-terminal-basis-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_minimum_terminal_basis_v1 -v
+      - name: Fail closed composition manifest smoke
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.composition_component_proof_slicer_v1 import evaluate
+          p=Path("canonical/governance/OPUS55_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json")
+          d=json.loads(p.read_text())
+          out=evaluate(d)
+          assert out["status"] == "RESIDUAL_COMPONENT_INTERFACE_PROOFS_OPEN", out
+          assert len(out["interfaces"]) == 5, out
+          assert out["all_used_component_interfaces_scoped_proved"] is False, out
+          assert out["capability_credit_delta"] == 0 and out["family_credit_delta"] == 0, out
+          print(out["status"])
+          PY
