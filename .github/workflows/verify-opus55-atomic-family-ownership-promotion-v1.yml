@@ -1,0 +1,39 @@
+name: Verify Opus55 atomic ownership 2-to-4 activation v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/OPUS55_ATOMIC_FAMILY_OWNERSHIP_PROMOTION_V1.json'
+      - 'canonical/capabilities/opus55/OPUS55_TOOL_DISCOVERY_SELECTION_AND_LEARNING_V1.json'
+      - 'canonical/capabilities/opus55/OPUS55_SUBAGENT_DELEGATION_AND_COORDINATION_V1.json'
+      - 'canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json'
+      - 'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json'
+      - 'canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json'
+      - 'canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json'
+      - 'canonical/runtime/terminal_projection_consistency_v1.py'
+      - 'canonical/tests/test_terminal_projection_consistency_v1.py'
+      - 'canonical/verification/OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json'
+      - 'canonical/runtime/opus55_atomic_family_ownership_promotion_v1.py'
+      - 'canonical/tests/test_opus55_atomic_family_ownership_promotion_v1.py'
+      - '.github/workflows/verify-opus55-atomic-family-ownership-promotion-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run projection firewall
+        run: python -m unittest -v canonical.tests.test_terminal_projection_consistency_v1
+      - name: Run atomic promotion counterfactuals
+        run: python -m unittest -v canonical.tests.test_opus55_atomic_family_ownership_promotion_v1
+      - name: Compile atomic promotion verdict
+        run: python canonical/runtime/opus55_atomic_family_ownership_promotion_v1.py
