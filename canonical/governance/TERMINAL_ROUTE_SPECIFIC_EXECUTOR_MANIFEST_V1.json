@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "12_FROZEN_ROUTES_ENUMERATED__0_OF_12_ROUTE_SPECIFIC_TERMINAL_EXECUTORS_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
+  "status": "12_FROZEN_ROUTES_ENUMERATED__5_DIRECT_EXECUTORS_IMPLEMENTED__0_OF_12_INDEPENDENTLY_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
@@ -24,9 +24,12 @@
       "frozen_route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
       "proof_mode": null,
       "independent_verification": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
+      "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
+      "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
@@ -78,9 +81,12 @@
       "frozen_route": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "T2_MULTIPLEXED_DIRECT_OBJECTIVE_DELEGATION_GATE",
       "independent_verification": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
+      "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
+      "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml"
     },
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
@@ -105,34 +111,44 @@
       "frozen_route": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "PUBLIC_FIXED_BAR_MULTIPLEX_PLUS_EXPLICIT_UNCOVERED_SCOPE",
       "independent_verification": "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
+      "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
+      "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml"
     },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
       "frozen_route": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "T2_MULTIPLEXED_DIRECT_OBJECTIVE_BROWSER_GATE",
       "independent_verification": "canonical/verification/BROWSER_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
+      "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
+      "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "frozen_route": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "proof_mode": "T2_T3_MULTIPLEXED_DIRECT_OBJECTIVE_TOOL_DISCOVERY_GATE",
       "independent_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "MISSING_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_BINDING",
+      "executor_status": "IMPLEMENTED__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "legacy_global_executor_allowed": false,
-      "terminal_result_status": "NOT_EXECUTED"
+      "terminal_result_status": "NOT_EXECUTED",
+      "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
+      "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
+      "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml"
     }
   ],
   "launch_authority": false,
-  "next": "IMPLEMENT_AND_INDEPENDENTLY_VERIFY_ROUTE_SPECIFIC_EXECUTORS__THEN_BIND_ALL_12__ONLY_THEN_CONSTRUCT_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
+  "next": "INDEPENDENTLY_VERIFY_FIVE_DIRECT_EXECUTORS__IMPLEMENT_PORTFOLIO_INSTRUMENTATION_AND_CAD_ROUTE_EXECUTORS__BIND_ALL_12__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "implemented_executor_count": 5
 }
