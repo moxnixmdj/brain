@@ -3,12 +3,13 @@
   "date": "2026-10-02",
   "status": "VERIFIED_BRAIN_OWNED_BOUNDED_CROSS_LANE_COMPONENT__ZERO_FAMILY_CREDIT",
   "implementation": "canonical/runtime/shared_decision_primitives.py",
-  "implementation_blob_sha": "33730246cef75dae1f95ed7b7f93a2dd51cf68a3",
+  "implementation_blob_sha": "d7d4cd6eeb1adc0363f78df0a476e40231431a3f",
   "independent_verification": {
     "workflow": "Verify shared decision primitives",
-    "workflow_run_id": 36948844235,
+    "workflow_run_id": 36948986083,
     "conclusion": "success",
-    "verified_commit": "8e5a92375e8125b058dfd7f4701460f133402b7f"
+    "verified_pr_head": "71e539019731906e5fa45a5c705175061c0dafaf",
+    "merged_main_commit": "50fb5bf443c78f5f1bada887edcf3bd36eff5c0c"
   },
   "owned_scope": [
     "EXPLICIT_VERIFIED_TOOL_CAPABILITY_SET_TO_MINIMUM_COST_SUFFICIENT_AUTHORIZED_ROUTE",
@@ -32,5 +33,11 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "hardening": [
+    "EXACT_EVIDENCE_BUNDLE_OPTIMIZATION_IS_GLOBAL_MINIMUM_TOTAL_COST_WITHIN_BOUND",
+    "DUPLICATE_IDENTITIES_FAIL_CLOSED",
+    "NONFINITE_NEGATIVE_OR_OUT_OF_RANGE_NUMERIC_STATE_FAILS_CLOSED",
+    "BOUNDED_EXPLICIT_INPUT_SCOPE_PRESERVED"
+  ]
 }
