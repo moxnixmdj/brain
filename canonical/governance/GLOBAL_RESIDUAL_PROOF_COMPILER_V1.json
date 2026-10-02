@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_RESIDUAL_PROOF_COMPILER_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_PREPROOF_SCHEDULING_CONTROLLER__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE_PREPROOF_SCHEDULING_CONTROLLER__INDEPENDENTLY_VERIFIED__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
   "purpose": "Compile all open terminal obligations into one residual proof graph so externally blocked obligations cannot stall independent internally solvable proof closure, while allowing blocker deduplication only through explicit semantic-equivalence assertions.",
   "runtime": "canonical/runtime/global_residual_proof_compiler.py",
   "tests": "canonical/tests/test_global_residual_proof_compiler.py",
@@ -29,5 +29,14 @@
   "promotion_authority": false,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_verification": {
+    "status": "INDEPENDENT_PASS",
+    "receipt": "canonical/verification/GLOBAL_RESIDUAL_PROOF_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_runner_pr": 645,
+    "workflow_run_id": 36965447334,
+    "merged_commit": "f9e60ad370d7029f195598f93e8c04faed3edbff",
+    "exact_runtime_blob_sha": "49719238fcaee0ea3cc5dab4a5cd220f440ce2cf",
+    "live_input_verified": true
+  }
 }
