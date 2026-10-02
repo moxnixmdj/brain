@@ -102,10 +102,17 @@
   "v1_correction": {
     "old_requirement": "MODEL_DEPENDENCY_COUNT_ZERO",
     "disposition": "SUPERSEDED_AS_OVERSTRICT_TERMINAL_REQUIREMENT",
-    "replacement": "GENERAL_COGNITION_SUBSTRATE_ALLOWED_IF_V3_SUBSTRATE_TEST_PASSES_AND_BRAIN_OWNS_MATERIAL_OPERATIVE_CONFIGURATION"
+    "replacement": "GENERAL_COGNITION_SUBSTRATE_ALLOWED_IF_V3_SUBSTRATE_TEST_PASSES_AND_BRAIN_OWNS_MATERIAL_OPERATIVE_CONFIGURATION",
+    "superseded_verification": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "current_verification": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
   },
   "incremental_spend_usd": 0,
   "fresh_acceptance_cases_consumed": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "independent_gate_verification": {
+    "path": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "git_blob_sha": "913496d739afa5a695a358e6d57de89e8202bd29",
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS"
+  }
 }
