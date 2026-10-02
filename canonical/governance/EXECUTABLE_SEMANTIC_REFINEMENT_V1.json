@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_SEMANTIC_REFINEMENT_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_FAIL_CLOSED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Normalize Brain-owned verified receipts into the exact semantic atom and metric-bound witness shape consumed by protocol implication/scope algebra, without lexical analogy, raw-text semantic inference, or capability credit.",
+  "runtime": "canonical/runtime/brain_witness_semantic_refinement_v1.py",
+  "tests": "canonical/tests/test_brain_witness_semantic_refinement_v1.py",
+  "upstream_target_normalization": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+  "downstream_scope_algebra": "canonical/runtime/protocol_implication_scope_algebra_v1.py",
+  "admission_requirements": [
+    "WITNESS_FACT_HAS_CONTENT_ADDRESSED_RECEIPT",
+    "SEMANTIC_BINDING_HAS_SEPARATE_VERIFICATION_RECEIPT",
+    "VERIFIED_TRUE",
+    "INDEPENDENT_TRUE",
+    "CONTAMINATION_CLEAN_TRUE",
+    "SOURCE_TRACEABLE_TRUE",
+    "ACCEPTANCE_SCOPED_TRUE",
+    "SEMANTIC_BINDING_VERIFIED_TRUE",
+    "EXACT_SCOPE_ID_MATCH"
+  ],
+  "hard_rules": [
+    "NO_ATOM_BINDING_BY_NAME_SIMILARITY",
+    "NO_RAW_TEXT_TO_SEMANTIC_ATOM_INFERENCE",
+    "NO_UNVERIFIED_SEMANTIC_BINDING_ENTERS_NORMALIZED_WITNESS",
+    "NO_CROSS_SCOPE_RECEIPT_TRANSPORT_WITHOUT_SEPARATE_VERIFIED_TRANSPORT_RECEIPT",
+    "NO_METRIC_BOUND_WITHOUT_SOURCE_TRACEABLE_VERIFIED_BINDING",
+    "OUTPUT_IS_WITNESS_NORMALIZATION_ONLY__NOT_ACCEPTANCE_OR_FAMILY_CREDIT",
+    "EXISTING_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_REMAINS_THE_ONLY_SCOPE_RELATION_DERIVER_FOR_THIS_PATH"
+  ],
+  "expected_effect": [
+    "MAKE_BRAIN_WITNESS_NORMALIZATION_MACHINE_CHECKABLE",
+    "CONNECT_VERIFIED_BRAIN_RECEIPTS_TO_ALREADY_VERIFIED_MATCHED_TARGET_ATOMS",
+    "TURN_FAILED_BINDINGS_INTO_EXACT_MISSING_ATOM_OR_METRIC_LISTS",
+    "ENABLE_ZERO_REALITY_SCOPE_ALGEBRA_RECOMPUTATION_BEFORE_MATCHED_COMPARATOR_EXECUTION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
