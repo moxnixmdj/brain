@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_MINIMUM_CARRIER_RECOVERY_CUT_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PASS__MINIMUM_CUT_PROVED__TASK_IDENTITY_CARRIER_AND_PROTOCOL_BINDINGS_OPEN__ZERO_CREDIT",
+  "objective": "Promote the independently reproduced TB4 minimum carrier recovery cut into the zero-reality scheduling frontier without granting execution or capability credit.",
+  "authority": {
+    "candidate": {
+      "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+      "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc"
+    },
+    "verification": {
+      "path": "canonical/verification/TB4_MINIMUM_CARRIER_RECOVERY_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "public_verifier_pr": 961,
+      "workflow_run_id": 37017018110,
+      "workflow_job_id": 110870274918,
+      "merge_commit": "6cb65d79713eaaabb3e465869d4755a78113fdfd"
+    }
+  },
+  "proved": {
+    "raw_resource_metadata_reproduced": true,
+    "minimum_additional_creditable_tasks": 8,
+    "minimum_recovery_cardinality_proved": true,
+    "minimum_carrier_envelope": {
+      "cpus_at_least": 8,
+      "usable_memory_mb_at_least": 16384,
+      "free_storage_mb_at_least": 51200,
+      "gpus_required": 0,
+      "docker_required": true,
+      "docker_compose_required": true
+    },
+    "current_upper_bound_successes": 180,
+    "conditional_upper_bound_after_recovery": 220,
+    "required_successes": 220
+  },
+  "not_proved": {
+    "frozen_task_identity_binding": true,
+    "concrete_zero_incremental_spend_carrier": true,
+    "protocol_equivalence": true,
+    "attainability_recompiled": true,
+    "execution_authority": true
+  },
+  "next_exact_obligations": [
+    "CONTENT_ADDRESS_THE_EIGHT_SELECTED_RESOURCE_ONLY_TASK_NAMES_TO_THE_EXACT_FROZEN_TB4_TASK_IDENTITIES_WITHOUT_READING_TASK_INSTRUCTIONS_OR_SOLUTIONS",
+    "BIND_A_CONCRETE_ZERO_INCREMENTAL_SPEND_CARRIER_MEETING_OR_EXCEEDING_8_CPU_16384_MB_USABLE_RAM_51200_MB_FREE_STORAGE_WITH_DOCKER_AND_COMPOSE",
+    "PROVE_PROTOCOL_EQUIVALENCE_FOR_THAT_CARRIER_OR_EACH_HETEROGENEOUS_CARRIER",
+    "RECOMPILE_TB4_ATTAINABILITY_CUT_ONLY_AFTER_THE_ABOVE_BINDINGS_PROVE",
+    "DO_NOT_EXECUTE_ACCEPTANCE_CASES_UNTIL_RECOMPILED_MACHINE_AUTHORITY_EXPLICITLY_ALLOWS_IT"
+  ],
+  "scheduling_effect": "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE_IS_NOW_REDUCED_FROM_RESOURCE_SET_DISCOVERY_TO_THREE_EXPLICIT_BINDING_OBLIGATIONS_PLUS_RECOMPILE",
+  "fresh_acceptance_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
