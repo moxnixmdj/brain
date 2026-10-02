@@ -297,47 +297,6 @@ def plan_artifact_operations(
     return ArtifactPlanDecision("PASS",best[1],frozenset(),"MINIMUM_COST_COMPLETE_STRUCTURE_PRESERVING_PLAN")
 
 @dataclass(frozen=True)
-class SearchProvider:
-    provider_id: str
-    cost: float = 0.0
-    verified: bool = True
-    available: bool = True
-    authorized: bool = True
-
-def compile_requirement_search_actions(
-    unresolved_requirements: Mapping[str,str],
-    providers: Sequence[SearchProvider],
-) -> tuple[ResearchAction,...]:
-    """Compile explicit unresolved requirements into direct admissible search actions.
-
-    Query text is the normalized requirement itself. Semantic requirement extraction
-    remains upstream (M0); this function does not invent latent query semantics.
-    """
-    ids=[p.provider_id for p in providers]
-    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
-        return ()
-    good=sorted(
-        [p for p in providers if p.verified and p.available and p.authorized and _finite_nonnegative(p.cost)],
-        key=lambda p:(p.cost,p.provider_id),
-    )
-    out=[]
-    for rid,text in sorted(unresolved_requirements.items()):
-        if not isinstance(rid,str) or not rid.strip():
-            continue
-        q=" ".join(str(text).split())
-        if not q:
-            continue
-        for p in good:
-            out.append(ResearchAction(
-                action_id=f"search::{p.provider_id}::{rid}::{q}",
-                covers=frozenset({rid}),
-                cost=float(p.cost),
-                reliability=1.0,
-                verified=True,
-            ))
-    return tuple(out)
-
-@dataclass(frozen=True)
 class TraceDecision:
     event_id: str
     step_index: int
