@@ -30,7 +30,7 @@ class DelegationScopeGateV2Tests(unittest.TestCase):
         text=" ".join([
             self.contract["inputs"],self.contract["required_output_or_action"],
             self.contract["success_condition"],self.contract["failure_condition"],
-            self.contract["verification_route"],
+            self.contract["verification_route"],self.contract["allowed_information"],
         ]).lower()
         for phrase in ("resource constraints","evidence ownership","live receipts","conflicting writes","fanin","single-worker","naive fanout"):
             self.assertIn(phrase,text)
