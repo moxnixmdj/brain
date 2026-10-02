@@ -1,0 +1,518 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_UNIVERSE_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_OUTER_UNIVERSE__GLOBAL_EXACT_CUT_NOT_READY__FRESH_TERMINAL_EVIDENCE_BLOCKED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "global_obligation_graph": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+      "blob_sha": "998e9df668da4d0376ed508cea50c85749071679"
+    },
+    "global_terminal_proof_cut": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+      "blob_sha": "aef8403f9265b152996efd652b1fd24f55fc3f98"
+    },
+    "terminal_closure_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "blob_sha": "e58f646060a60bf8b62367a3366719bf959133dd"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84"
+    },
+    "local_v6_cut": {
+      "path": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
+      "blob_sha": "393aea8cae3b9ffeb27b8f7a5cb568f09ce31396"
+    }
+  },
+  "family_accounting": {
+    "expected": 19,
+    "closed": [
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "EXACT_SYMBOLIC_COMPUTATION"
+    ],
+    "open_proof_count": 17,
+    "open_proofs": [
+      {
+        "id": "P_ADVANCED_AGENTIC_CODING",
+        "family": "ADVANCED_AGENTIC_CODING",
+        "hole_type": "?P",
+        "proof_protocol": "PUBLIC_BARS",
+        "bars": [
+          "Terminal-Bench 4.0 >=66.4",
+          "FrontierCode v1.1 Main >=54.4",
+          "CursorBench 4.0 >=57.8"
+        ],
+        "protocol_path": null,
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+          "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_COMPLEX_MULTI_TOOL_AGENCY",
+        "family": "COMPLEX_MULTI_TOOL_AGENCY",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+          "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_PROFESSIONAL_KNOWLEDGE_WORK",
+        "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+        "hole_type": "?P",
+        "proof_protocol": "PUBLIC_BARS",
+        "bars": [
+          "GDPval-AA v2.1 >=1846 Elo",
+          "AA-Briefcase v1.1 >=1822 Elo"
+        ],
+        "protocol_path": null,
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+          "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_BUSINESS_WORKFLOW_AUTOMATION",
+        "family": "BUSINESS_WORKFLOW_AUTOMATION",
+        "hole_type": "?P",
+        "proof_protocol": "PUBLIC_BAR",
+        "bars": [
+          "AutomationBench >=40%"
+        ],
+        "protocol_path": null,
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "hole_type": "?P",
+        "proof_protocol": "PUBLIC_BAR",
+        "bars": [
+          "Humanity's Last Exam with tools >=67.7%"
+        ],
+        "protocol_path": null,
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_AGENTIC_SCIENTIFIC_RESEARCH",
+        "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+        "hole_type": "?P",
+        "proof_protocol": "PUBLIC_BAR",
+        "bars": [
+          "Terminal-Bench-Science 0.1 >=58.7%"
+        ],
+        "protocol_path": null,
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "hole_type": "?P",
+        "proof_protocol": "PUBLIC_BAR",
+        "bars": [
+          "Chartography with tools >=89%"
+        ],
+        "protocol_path": null,
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
+          "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_COMPUTER_AND_BROWSER_USE",
+        "family": "COMPUTER_AND_BROWSER_USE",
+        "hole_type": "?P",
+        "proof_protocol": "PUBLIC_BAR_WITH_COMPARABILITY_WARNING",
+        "bars": [
+          "OSWorld 2.1 partial >=81.8% on matched harness"
+        ],
+        "protocol_path": null,
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_FINANCIAL_ANALYSIS",
+        "family": "FINANCIAL_ANALYSIS",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+          "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+          "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_SUBAGENT_DELEGATION_AND_COORDINATION",
+        "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_ARTIFACT_CREATION",
+        "family": "ARTIFACT_CREATION",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+          "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_COMMUNICATION_AND_SYNTHESIS",
+        "family": "COMMUNICATION_AND_SYNTHESIS",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+          "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+          "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_UNKNOWN_DOMAIN_ADAPTATION",
+        "family": "UNKNOWN_DOMAIN_ADAPTATION",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "P_MULTI_CAPABILITY_COMPOSITION",
+        "family": "MULTI_CAPABILITY_COMPOSITION",
+        "hole_type": "?P",
+        "proof_protocol": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AND_SCOPE_AUDIT_V1",
+        "bars": null,
+        "protocol_path": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
+        "blocked_by": [
+          "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+          "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL"
+        ],
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      }
+    ]
+  },
+  "shared_mechanism_accounting": {
+    "expected_lane_keys": [
+      "M0",
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5"
+    ],
+    "lanes": [
+      {
+        "id": "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+        "hole_type": "?P",
+        "state": "OPEN",
+        "covers_families": [
+          "ADVANCED_AGENTIC_CODING",
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "FINANCIAL_ANALYSIS",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+          "ARTIFACT_CREATION",
+          "COMMUNICATION_AND_SYNTHESIS"
+        ],
+        "remaining": "M0B_CLOSED__M0A_EXPLICIT_REFERENCE_DISCOURSE_OPERATOR_BOUNDED_PREDICATE_ARGUMENT_AND_CONSENSUS_SLICES_OWNED__CONTIGUOUS_MLP_SUBSPACE_HARVEST_FALSIFIED__REMAINING_IS_GENERAL_COREFERENCE_IMPLICIT_LONG_RANGE_DISCOURSE_AND_SEMANTICS_OUTSIDE_BOUNDED_EXPLICIT_GRAMMARS",
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
+        "hole_type": "?P",
+        "state": "OPEN",
+        "covers_families": [
+          "ADVANCED_AGENTIC_CODING",
+          "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+        ],
+        "remaining": "M1A_UNCALIBRATED_NONPLANAR_WARP_REQUIREMENT_DELETED_AS_NONIDENTIFIABLE__REMAINING_VISUAL_TAIL_IS_AMBIGUOUS_BINDING_NOVEL_NOTATION_OUTSIDE_JIT_AND_NO_CONSENSUS_DEGRADATION__M1B_READY",
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+        "hole_type": "?M",
+        "state": "OPEN",
+        "covers_families": [
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+          "FINANCIAL_ANALYSIS",
+          "COMMUNICATION_AND_SYNTHESIS",
+          "ARTIFACT_CREATION"
+        ],
+        "remaining": "MECHANICAL_NATIVE_EDIT_SCOPE_PARTIAL__QUALITY_JUDGMENT_AND_BROAD_FINANCIAL_DOCUMENT_SCOPE_OPEN",
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+        "hole_type": "?M",
+        "state": "OPEN",
+        "covers_families": [
+          "COMPLEX_MULTI_TOOL_AGENCY",
+          "BUSINESS_WORKFLOW_AUTOMATION",
+          "COMPUTER_AND_BROWSER_USE",
+          "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+          "MULTI_CAPABILITY_COMPOSITION",
+          "SUBAGENT_DELEGATION_AND_COORDINATION"
+        ],
+        "remaining": "GROUNDING_ADAPTIVE_ASSIGNMENT_AND_INCOMPLETE_EVIDENCE_TOOL_SELECTION_NOT_WHOLE_SCOPE_OWNED",
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+        "hole_type": "?M",
+        "state": "OPEN",
+        "covers_families": [
+          "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "AGENTIC_SCIENTIFIC_RESEARCH",
+          "UNKNOWN_DOMAIN_ADAPTATION"
+        ],
+        "remaining": "QUERY_SOURCE_TOOL_AND_STOP_CONTROL_GENERALIZATION_NOT_WHOLE_SCOPE_OWNED",
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      },
+      {
+        "id": "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+        "hole_type": "?M",
+        "state": "OPEN",
+        "covers_families": [
+          "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+          "COMPLEX_MULTI_TOOL_AGENCY",
+          "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+        ],
+        "remaining": "NON_REPLAYABLE_TEXT_EVENT_CAUSE_CANDIDATE_GENERATION_AND_WHOLE_SCOPE_RECOVERY_JUDGMENT_NOT_WHOLE_SCOPE_OWNED",
+        "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      }
+    ]
+  },
+  "global_terminal_gates": [
+    {
+      "id": "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
+      "hole_type": "?S",
+      "predicate": "every_required_behavior_contracted",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_ADMISSIBLE_PROOF_COMPLETENESS",
+      "hole_type": "?P",
+      "predicate": "every_required_behavior_has_admissible_proof",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_DONOR_DEPENDENCE_ZERO",
+      "hole_type": "?M",
+      "predicate": "donor_dependent_required_behaviors_zero",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_UNEXPLAINED_BEHAVIOR_ZERO",
+      "hole_type": "?M",
+      "predicate": "unexplained_required_behaviors_zero",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_VERIFIER_MUTATIONS_ZERO",
+      "hole_type": "?P",
+      "predicate": "unresolved_verifier_mutations_zero",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_COMPOSITION_FAILURES_ZERO",
+      "hole_type": "?M",
+      "predicate": "unresolved_composition_failures_zero",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_OPUS_ACCEPTANCE_ALL_PASS",
+      "hole_type": "?P",
+      "predicate": "all_frozen_opus_acceptance_predicates_pass",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_FINAL_DONOR_DELETION_CLEANROOM",
+      "hole_type": "?P",
+      "predicate": "final_donor_deletion_cleanroom_pass",
+      "current": false,
+      "closed": false
+    },
+    {
+      "id": "G_PROOF_BUNDLE_FROZEN",
+      "hole_type": "?P",
+      "predicate": "proof_bundle_frozen",
+      "current": false,
+      "closed": false
+    }
+  ],
+  "local_v6_subcut": {
+    "valid_for_scope": [
+      "M0A",
+      "M1A",
+      "M1B"
+    ],
+    "exact_minimum": true,
+    "selected_observations": [
+      "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
+      "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
+    ],
+    "globally_authorized": false,
+    "disposition": "PRESERVE_AS_VALID_LOCAL_SUBCUT__DO_NOT_SPEND_CLEAN_BATCHES_UNTIL_OUTER_GLOBAL_MINIMUM_REALITY_CUT_PROVES_NONDOMINATION"
+  },
+  "global_cut": {
+    "exact_cut_ready": false,
+    "reason": "OPEN_QUESTION_S_OR_MECHANISM_HOLES_EXIST_OUTSIDE_LOCAL_V6_SCOPE",
+    "open_specification_holes": [
+      "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS"
+    ],
+    "open_mechanism_holes": [
+      "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+      "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+      "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+      "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
+      "G_DONOR_DEPENDENCE_ZERO",
+      "G_UNEXPLAINED_BEHAVIOR_ZERO",
+      "G_COMPOSITION_FAILURES_ZERO"
+    ],
+    "open_proof_holes": [
+      "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+      "M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION",
+      "P_ADVANCED_AGENTIC_CODING",
+      "P_COMPLEX_MULTI_TOOL_AGENCY",
+      "P_PROFESSIONAL_KNOWLEDGE_WORK",
+      "P_BUSINESS_WORKFLOW_AUTOMATION",
+      "P_MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "P_AGENTIC_SCIENTIFIC_RESEARCH",
+      "P_VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "P_COMPUTER_AND_BROWSER_USE",
+      "P_FINANCIAL_ANALYSIS",
+      "P_INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "P_SUBAGENT_DELEGATION_AND_COORDINATION",
+      "P_SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "P_ARTIFACT_CREATION",
+      "P_COMMUNICATION_AND_SYNTHESIS",
+      "P_TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "P_UNKNOWN_DOMAIN_ADAPTATION",
+      "P_MULTI_CAPABILITY_COMPOSITION",
+      "G_ADMISSIBLE_PROOF_COMPLETENESS",
+      "G_VERIFIER_MUTATIONS_ZERO",
+      "G_OPUS_ACCEPTANCE_ALL_PASS",
+      "G_FINAL_DONOR_DELETION_CLEANROOM",
+      "G_PROOF_BUNDLE_FROZEN"
+    ]
+  },
+  "execution_authority": {
+    "fresh_terminal_evidence_allowed": false,
+    "rule": "NO_NEW_CLEAN_TERMINAL_EVIDENCE_EXPOSURE_UNTIL_GLOBAL_OUTER_UNIVERSE_HAS_NO_OPEN_?S_OR_?M_AND_EXACT_GLOBAL_MINIMUM_REALITY_CUT_IS_FROZEN_AND_VERIFIED",
+    "immediate_zero_reality_work": [
+      "CLOSE_G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS_FROM_EXISTING_REGISTRY_EVIDENCE_OR_EXPLICITLY_LOCALIZE_MISSING_CONTRACTS",
+      "SATURATE_M2_M3_M4_M5_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS",
+      "DEDUPLICATE_SHARED_BEHAVIORAL_LEAVES_ACROSS_17_OPEN_FAMILY_PROOFS",
+      "RECOMPUTE_OUTER_GLOBAL_MINIMUM_REALITY_CUT"
+    ]
+  },
+  "counts": {
+    "families_total": 19,
+    "families_closed": 2,
+    "families_open_proof": 17,
+    "shared_mechanism_lanes": 6,
+    "open_specification_holes": 1,
+    "open_mechanism_lanes": 4
+  },
+  "incremental_spend_usd": 0,
+  "fresh_terminal_evidence_consumed_delta": 0
+}

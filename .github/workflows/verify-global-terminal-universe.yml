@@ -1,0 +1,22 @@
+name: Verify global terminal universe
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/global_terminal_universe.py"
+      - "canonical/tests/test_global_terminal_universe.py"
+      - "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
+      - "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
+      - ".github/workflows/verify-global-terminal-universe.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify outer universe and evidence guard
+        run: python canonical/tests/test_global_terminal_universe.py
