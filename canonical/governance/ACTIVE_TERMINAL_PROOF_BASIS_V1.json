@@ -190,10 +190,10 @@
       "terminal_population_binding_test": "canonical/tests/test_delegation_terminal_population_binding_v1.py",
       "population_binding_verification": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "population_binding_workflow_run_id": 36962042528,
-      "terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1.json",
-      "prewave_admissible": true,
+      "terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_MODE_V1.json",
       "terminal_acceptance_mode": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_MODE_V1.json",
-      "terminal_acceptance_mode_verification": "canonical/verification/DELEGATION_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "terminal_acceptance_mode_verification": "canonical/verification/DELEGATION_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "prewave_admissible": true
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
