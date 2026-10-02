@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES_PASS__ZERO_TERMINAL_CASE_CONTENT",
+  "upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "checker_count": 58
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 497,
+    "workflow_run_id": 36956380345,
+    "job_id": 110680125186,
+    "merge_commit": "9411479d5bbb53a6bc9823bdb03207c004e36552"
+  },
+  "result": {
+    "passed": 58,
+    "failed": 0,
+    "all_pass": true,
+    "terminal_case_content_read": false
+  },
+  "limitation": "BOUNDARY_DIRECTION_VERIFIED__FULL_HERMETIC_RUNTIME_NETWORK_ISOLATION_REMAINS_SEPARATE_GATE_UNTIL ITS OWN PASS",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
