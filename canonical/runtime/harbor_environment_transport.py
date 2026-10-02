@@ -47,7 +47,7 @@ class HarborEnvironmentTransport:
             kwargs["timeout_sec"] = timeout_sec
         result = await self._environment.exec(command, **kwargs)
 
-        rc = getattr(result, "returncode", getattr(result, "exit_code", None))
+        rc = getattr(result, "return_code", getattr(result, "returncode", getattr(result, "exit_code", None)))
         stdout = getattr(result, "stdout", "")
         stderr = getattr(result, "stderr", "")
         if rc is None and isinstance(result, Mapping):
