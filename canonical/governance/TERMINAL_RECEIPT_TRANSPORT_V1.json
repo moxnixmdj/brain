@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_RECEIPT_TRANSPORT_MANIFEST_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__ZERO_REALITY_RECEIPT_REUSE_CLASSIFIER__ZERO_CREDIT",
+  "objective": "Prove which immutable terminal-wave results remain admissible evidence under the exact current binding bytes without replaying terminal cases.",
+  "wave": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+  "bindings": [
+    {
+      "id": "DELEGATION_DIRECT_TERMINAL",
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "current_binding_path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "receipt_anchor": "DIRECT_SUMMARY_ONLY",
+      "minimum_cases": 132,
+      "disposition": "IDENTITY_ONLY_UNTIL_A_PER_ROUTE_BINDING_BLOB_ANCHOR_IS_PROVED__132_OF_132_DIRECT_PASS_DOES_NOT_BY_ITSELF_ESTABLISH_CURRENT_BINDING_LOAD_BEARINGNESS_OR_OPUS_NONINFERIORITY"
+    },
+    {
+      "id": "RECOVERY_CAUSAL_LOCALIZATION_T0_T2",
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "current_binding_path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "receipt_anchor": "PARENT_RECEIPT_BINDING_BLOB",
+      "required_portfolios": [
+        "T0",
+        "T2"
+      ],
+      "disposition": "TRANSPORT_ELIGIBLE_IF_EXACT_GIT_BLOB_IDENTITY_AND_BOTH_PARENT_RECEIPT_BINDING_BLOBS_MATCH"
+    },
+    {
+      "id": "SYNTHESIS_T1_T3",
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "current_binding_path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "receipt_anchor": "PARENT_RECEIPT_BINDING_BLOB",
+      "required_portfolios": [
+        "T1",
+        "T3"
+      ],
+      "disposition": "TRANSPORT_ELIGIBLE_IF_EXACT_GIT_BLOB_IDENTITY_AND_BOTH_PARENT_RECEIPT_BINDING_BLOBS_MATCH"
+    }
+  ],
+  "expected_live_counts": {
+    "transport_eligible_count": 2,
+    "identity_only_count": 1,
+    "blocked_count": 0
+  },
+  "hard_rules": [
+    "NO_TERMINAL_REPLAY",
+    "NO_RECEIPT_TRANSPORT_WITHOUT_EXACT_HISTORICAL_CURRENT_GIT_BLOB_IDENTITY",
+    "NO_RECEIPT_TRANSPORT_WITHOUT_AN_IMMUTABLE_RECEIPT_BINDING_ANCHOR",
+    "DIRECT_SUMMARY_WITHOUT_BINDING_BLOB_IS_IDENTITY_ONLY",
+    "TRANSPORT_ELIGIBILITY_NEQ_ACCEPTANCE_NONINFERIORITY_OR_FAMILY_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
