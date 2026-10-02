@@ -1,0 +1,30 @@
+name: Verify browser information-safe bounded preflight
+on:
+  push:
+    branches: [obs-browser-information-safe-v1-20261002]
+    paths:
+      - canonical/runtime/browser_grounding_information_safe_candidate.py
+      - canonical/runtime/browser_grounding_information_safe_proof.py
+      - canonical/tests/test_browser_grounding_information_safe.py
+      - canonical/governance/BROWSER_GROUNDING_INFORMATION_SAFE_BOUNDED_PREFLIGHT_V1.json
+      - .github/workflows/verify-browser-information-safe-bounded.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/browser_grounding_information_safe_candidate.py
+      - canonical/runtime/browser_grounding_information_safe_proof.py
+      - canonical/tests/test_browser_grounding_information_safe.py
+      - canonical/governance/BROWSER_GROUNDING_INFORMATION_SAFE_BOUNDED_PREFLIGHT_V1.json
+      - .github/workflows/verify-browser-information-safe-bounded.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_browser_grounding_information_safe
