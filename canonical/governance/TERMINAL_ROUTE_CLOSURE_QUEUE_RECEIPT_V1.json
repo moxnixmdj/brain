@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "e1f2a1c1f8fa048579423b2fdb0cdc181d1c3f2d",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "source_basis_blob_sha": "bce749415e15172f170193889f9f7389fb29452b",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_MATCHED_PROTOCOL_EXTERNAL_BLOCKED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "status": "CANONICAL_SCHEDULING_RECEIPT__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
   "closed_route_count": 1,
@@ -10,145 +10,30 @@
   "closed_behavior_ids": [
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001"
   ],
-  "top_priority_behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "top_priority_behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
   "queue": [
     {
-      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
-      "portfolio": "T2",
-      "proof_state": "CURRENT_CANDIDATE_ORACLE_CHANGED__EXACT_BLOB_REVALIDATION_REQUIRED__ZERO_TERMINAL_AUTHORITY",
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "portfolio": "T0_T1_T2_T3",
+      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__PORTFOLIO_MULTIPLEXED_OPEN_DOMAIN_PREWAVE_BINDING_PENDING",
       "blockers": [
-        "CURRENT_DELEGATION_CANDIDATE_ORACLE_EXACT_BLOB_REVALIDATION_PENDING"
+        "FREEZE_DIRECT_SEMANTIC_ACCEPTANCE_INSTRUMENTATION",
+        "FREEZE_AMBIGUITY_AND_COUNTEREXAMPLE_SCORER",
+        "BIND_BEHAVIOR_INSTRUMENTATION_TO_T0_T1_T2_T3_INFORMATION_BOUNDARIES",
+        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
       ],
       "blocker_classes": {
         "binding": 0,
         "scope_gate": 0,
         "scope_expansion": 0,
-        "other": 1
-      },
-      "independent_or_information_safe_preflight_present": false,
-      "portfolio_leverage": 0,
-      "priority_score": 50,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
-    },
-    {
-      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
-      "portfolio": "T2",
-      "proof_state": "INDEPENDENT_INFORMATION_SAFE_GOAL_TO_TARGET_RECOVERY_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
-      "blockers": [
-        "WHOLE_BROWSER_VISUAL_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 1,
-        "scope_expansion": 0,
+        "open_domain_protocol": 3,
+        "external_block": 0,
         "other": 1
       },
       "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 53,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
-    },
-    {
-      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
-      "portfolio": "T1_T3",
-      "proof_state": "INDEPENDENT_INFORMATION_SAFE_V3_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
-      "blockers": [
-        "WHOLE_OPEN_ENDED_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_AND_ACCEPTANCE_RULE_NOT_YET_FROZEN"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 1,
-        "scope_expansion": 1,
-        "other": 0
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 103,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
-    },
-    {
-      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
-      "portfolio": "T3",
-      "proof_state": "INDEPENDENT_HARDENED_INFORMATION_SAFE_RESEARCH_CONTROL_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
-      "blockers": [
-        "WHOLE_OPEN_ENDED_RESEARCH_CONTROL_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 1,
-        "scope_expansion": 1,
-        "other": 0
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 103,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
-    },
-    {
-      "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
-      "portfolio": "T1",
-      "proof_state": "INDEPENDENT_CROSS_FORMAT_STRUCTURAL_AND_BOUNDED_RENDER_PRESERVATION_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
-      "blockers": [
-        "WHOLE_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 1,
-        "scope_expansion": 1,
-        "other": 0
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 103,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
-    },
-    {
-      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
-      "portfolio": "T1",
-      "proof_state": "INFORMATION_SAFE_PREQUALIFICATION_INDEPENDENT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
-      "blockers": [
-        "WHOLE_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_AND_ACCEPTANCE_RULE_NOT_YET_FROZEN"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 1,
-        "scope_expansion": 1,
-        "other": 0
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 103,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
-    },
-    {
-      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
-      "portfolio": "T0_T1_T2_T3",
-      "proof_state": "BOUNDED_INFORMATION_SAFE_POST_REPAIR_PASS__WHOLE_OPEN_ENDED_SCOPE_ADMISSION_PENDING",
-      "blockers": [
-        "BOUNDED_SYNTHETIC_ENVELOPE_DOES_NOT_PROVE_WHOLE_OPEN_ENDED_RAW_SOURCE_CONTRACT",
-        "POST_FREEZE_SCOPE_EQUIVALENT_TERMINAL_POPULATION_NOT_YET_FROZEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 1,
-        "scope_expansion": 1,
-        "other": 0
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 103,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
+      "portfolio_leverage": 4,
+      "priority_score": 42,
+      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
@@ -163,56 +48,83 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 103,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
+      "portfolio_leverage": 2,
+      "priority_score": 97,
+      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
     },
     {
-      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
-      "portfolio": "T0_T2",
-      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL_FREEZE_PENDING__EXACT_COMPARATOR_ZERO_COST_ROUTE_CURRENTLY_BLOCKED",
+      "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "portfolio": "T1",
+      "proof_state": "INDEPENDENT_CROSS_FORMAT_STRUCTURAL_AND_BOUNDED_RENDER_PRESERVATION_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
       "blockers": [
-        "FREEZE_SELF_VERIFICATION_CAUSAL_INTERVENTION_CHALLENGE_SOURCE_POOL_AND_SCORER",
-        "FREEZE_BRAIN_OWNED_TRAJECTORY_CAPABILITY_PACKAGE_AND_DEPENDENCY_MANIFEST",
-        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
-        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_CAUSAL_RECOVERY_SCOPE",
-        "FREEZE_POST_FREEZE_SELECTOR_ONLY_AFTER_COMPARATOR_OR_SCOPE_EQUIVALENT_PUBLIC_EVIDENCE_ROUTE_EXISTS"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "other": 4
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 193,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
-    },
-    {
-      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
-      "portfolio": "T2_T3",
-      "proof_state": "INDEPENDENT_HARDENED_INFORMATION_SAFE_V2_PREFLIGHT_PASS__WHOLE_SCOPE_ROUTE_EXPANSION_REQUIRED",
-      "blockers": [
-        "DYNAMIC_TOOL_DISCOVERY_BEYOND_PREENUMERATED_CATALOG_NOT_YET_PROVEN",
-        "GENERAL_ACTIVE_CONSTRAINT_SCHEMA_BEYOND_COST_AVAILABILITY_AUTHORIZATION_NOT_YET_PROVEN",
-        "MATCHED_SCHEMA_ONLY_OR_POPULARITY_BASELINE_ADVANTAGE_NOT_YET_PROVEN",
+        "WHOLE_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
         "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
         "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
       ],
       "blocker_classes": {
         "binding": 1,
         "scope_gate": 1,
-        "scope_expansion": 2,
-        "other": 1
+        "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
+        "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 253,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
+      "portfolio_leverage": 1,
+      "priority_score": 100,
+      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "portfolio": "T1",
+      "proof_state": "INFORMATION_SAFE_PREFLIGHT_PRESERVED__PUBLIC_FIXED_BAR_AND_UNCOVERED_SCOPE_BINDING_PENDING",
+      "blockers": [
+        "FREEZE_GDPVAL_AA_AND_AA_BRIEFCASE_HARNESS_SCOPE_MAPPING",
+        "FREEZE_INFORMATION_BOUNDARY_AND_ZERO_COST_ROUTE_FOR_PUBLIC_BAR_SCOPE",
+        "FREEZE_EXPLICIT_UNCOVERED_ARTIFACT_QUALITY_SCOPE_AUDIT",
+        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 1,
+        "external_block": 0,
+        "other": 3
+      },
+      "independent_or_information_safe_preflight_present": true,
+      "portfolio_leverage": 1,
+      "priority_score": 143,
+      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "portfolio": "T3",
+      "proof_state": "HARDENED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__PUBLIC_FIXED_BAR_MULTIPLEX_PREWAVE_BINDING_PENDING",
+      "blockers": [
+        "FREEZE_HLE_TOOLS_TERMINAL_BENCH_SCIENCE_AND_MYSTERYMECHANISM_SCOPE_MAPPING",
+        "FREEZE_RESEARCH_QUERY_SOURCE_STOP_INSTRUMENTATION_AND_INFORMATION_BOUNDARY",
+        "FREEZE_ZERO_COST_EXECUTABLE_PUBLIC_BAR_ROUTES_FOR_REPRESENTED_SCOPE",
+        "FREEZE_EXPLICIT_UNCOVERED_RESEARCH_CONTROL_SCOPE_AUDIT",
+        "FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 2,
+        "external_block": 0,
+        "other": 3
+      },
+      "independent_or_information_safe_preflight_present": true,
+      "portfolio_leverage": 1,
+      "priority_score": 147,
+      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
     },
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
@@ -229,12 +141,131 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 3,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 0,
-      "priority_score": 303,
-      "next_action_class": "EXECUTE_EXACT_REVALIDATION_OR_CLOSE_LOWEST_COST_OPEN_PREDICATE"
+      "portfolio_leverage": 1,
+      "priority_score": 300,
+      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+    },
+    {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "portfolio": "T1_T3",
+      "proof_state": "INFORMATION_SAFE_V3_PREFLIGHT_PRESERVED__OBJECTIVE_GROUNDING_BINDING_ACTIONABLE__UNCOVERED_SUBJECTIVE_QUALITY_EXTERNAL_BLOCKED",
+      "blockers": [
+        "FREEZE_OBJECTIVE_CLAIM_SUPPORT_COVERAGE_UNCERTAINTY_AND_CONSTRAINT_SCORER",
+        "FREEZE_BRAIN_OWNED_SYNTHESIS_PACKAGE_AND_DEPENDENCY_MANIFEST",
+        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_SUBJECTIVE_SYNTHESIS_QUALITY"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 2,
+        "external_block": 1,
+        "other": 0
+      },
+      "independent_or_information_safe_preflight_present": true,
+      "portfolio_leverage": 2,
+      "priority_score": 994,
+      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "portfolio": "T2_T3",
+      "proof_state": "HARDENED_INFORMATION_SAFE_V2_PREFLIGHT_PRESERVED__OPEN_DOMAIN_MATCHED_PROTOCOL_FREEZE_PENDING__EXACT_COMPARATOR_EXTERNAL_BLOCKED",
+      "blockers": [
+        "FREEZE_HIDDEN_TOOL_ECOSYSTEM_CHALLENGE_SOURCE_POOL_AND_SCORER",
+        "FREEZE_BRAIN_OWNED_TOOL_DISCOVERY_PACKAGE_AND_DEPENDENCY_MANIFEST",
+        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
+        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_OPEN_ENDED_TOOL_TRANSFER_QUALITY",
+        "FREEZE_POST_FREEZE_SELECTOR_ONLY_AFTER_COMPARATOR_OR_SCOPE_EQUIVALENT_PUBLIC_EVIDENCE_ROUTE_EXISTS"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 4,
+        "external_block": 1,
+        "other": 0
+      },
+      "independent_or_information_safe_preflight_present": true,
+      "portfolio_leverage": 2,
+      "priority_score": 1002,
+      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+    },
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "portfolio": "T0_T2",
+      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL_FREEZE_PENDING__EXACT_COMPARATOR_ZERO_COST_ROUTE_CURRENTLY_BLOCKED",
+      "blockers": [
+        "FREEZE_SELF_VERIFICATION_CAUSAL_INTERVENTION_CHALLENGE_SOURCE_POOL_AND_SCORER",
+        "FREEZE_BRAIN_OWNED_TRAJECTORY_CAPABILITY_PACKAGE_AND_DEPENDENCY_MANIFEST",
+        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
+        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_CAUSAL_RECOVERY_SCOPE",
+        "FREEZE_POST_FREEZE_SELECTOR_ONLY_AFTER_COMPARATOR_OR_SCOPE_EQUIVALENT_PUBLIC_EVIDENCE_ROUTE_EXISTS"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 4,
+        "external_block": 1,
+        "other": 0
+      },
+      "independent_or_information_safe_preflight_present": true,
+      "portfolio_leverage": 2,
+      "priority_score": 1002,
+      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "portfolio": "T2",
+      "proof_state": "MATCHED_STATISTICAL_TERMINAL_PROTOCOL_INTERNAL_FREEZE_PENDING__EXACT_OPUS_5_5_COMPARATOR_EXTERNAL_BLOCKED",
+      "blockers": [
+        "FREEZE_CURRENT_DELEGATION_CANDIDATE_AND_DEPENDENCY_BLOB_PACKAGE",
+        "FREEZE_CONTAMINATION_SAFE_DELEGATION_CHALLENGE_SOURCE_POOL_AND_SCORER",
+        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
+        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
+        "FREEZE_POST_FREEZE_SELECTOR_RULE__DO_NOT_SELECT_CHALLENGES_BEFORE_COMPARATOR_ROUTE_EXISTS"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 3,
+        "external_block": 1,
+        "other": 1
+      },
+      "independent_or_information_safe_preflight_present": false,
+      "portfolio_leverage": 1,
+      "priority_score": 1059,
+      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "portfolio": "T2",
+      "proof_state": "INFORMATION_SAFE_PREFLIGHT_PRESERVED__PUBLIC_BAR_MULTIPLEX_BINDING_PENDING__UNCOVERED_COMPLEX_AGENCY_QUALITY_EXTERNAL_BLOCKED",
+      "blockers": [
+        "FREEZE_AUTOMATIONBENCH_AND_OSWORLD_HARNESS_SCOPE_MAPPING",
+        "FREEZE_GROUNDED_ACTION_RECOVERY_INSTRUMENTATION_AND_INFORMATION_BOUNDARY",
+        "FREEZE_ZERO_COST_EXECUTABLE_PUBLIC_BAR_ROUTE_OR_SCOPE_EQUIVALENT_ROUTE",
+        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNMEASURED_COMPLEX_MULTI_TOOL_AGENCY_QUALITY"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 1,
+        "external_block": 1,
+        "other": 2
+      },
+      "independent_or_information_safe_preflight_present": true,
+      "portfolio_leverage": 1,
+      "priority_score": 1093,
+      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
     }
   ],
   "execution_authority": false,
@@ -243,5 +274,5 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "rule": "SCHEDULING_ONLY__RECOMPUTE_AFTER_EVERY_ACTIVE_BASIS_CHANGE__NO_ROUTE_PROMOTION_WITHOUT_CANONICAL_ACCEPTANCE_AND_PREQUALIFICATION_AUTHORITY"
+  "rule": "SCHEDULING_ONLY__OPEN_DOMAIN_MATCHED_PROTOCOLS_NOT_FINITE_SCOPE_SUPERSET_PROOFS__EXTERNAL_COMPARATOR_BLOCKS_DO_NOT_SPEND_CLEAN_CASES"
 }
