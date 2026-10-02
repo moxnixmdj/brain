@@ -1,14 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1",
   "date": "2026-10-02",
-  "status": "INTERNAL_PREWAVE_ROUTE_FROZEN__PUBLIC_BAR_EXECUTION_EXTERNAL_BLOCKED__ZERO_TERMINAL_RESULT",
+  "status": "INTERNAL_PREWAVE_ROUTE_FROZEN__AUTHORITATIVE_UNCOVERED_SCOPE_BOUND__PUBLIC_BAR_EXECUTION_EXTERNAL_BLOCKED__ZERO_TERMINAL_RESULT",
   "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
   "exact_blobs": {
     "candidate": "ea8057b0eadac210c4f4378298df93ed233c5824",
     "information_safe_suite": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860",
     "preflight_receipt": "11a7212c3b54ed130212b3a7d4f4e4386bc590f5",
     "behavioral_registry": "afa00109031d638fef32cc3fe10be18786605c39",
-    "population_protocol": "adc413a2127141a1bc032149967eb07b86e0fde7"
+    "population_protocol": "adc413a2127141a1bc032149967eb07b86e0fde7",
+    "scope_equivalence_audit": "51882e456e5e9b2c8dfc95a377ec0fa950693d6a"
   },
   "information_boundary": {
     "candidate_visible": [
@@ -46,7 +47,17 @@
       "PRIVATE_AA_BRIEFCASE_OFFICIAL_TASK_ACCESS_AND_OFFICIAL_ELO_SCORING",
       "ANY_PROFESSIONAL_QUALITY_LEAF_NOT_MEASURED_BY_THE_PUBLIC_BAR_HARNESS"
     ],
-    "no_scope_inheritance": true
+    "no_scope_inheritance": true,
+    "audit_source": "canonical/governance/P2_P3_SCOPE_EQUIVALENCE_AUDIT_V1.json",
+    "authoritative_unresolved_dimensions": [
+      "ACTUAL_CURRENT_DRAFT_OR_RENDER_STATE_WITH_CROSS_ARTIFACT_STRUCTURE_AND_LAYOUT",
+      "CONTENT_ANALYSIS_AND_LAYOUT_REVISION_CHOICE_ACROSS_REALISTIC_PROFESSIONAL_DELIVERABLES",
+      "CONCRETE_EDIT_ISSUANCE_AND_NATIVE_FORMAT_PRESERVATION_INTERACTION",
+      "INDEPENDENT_RUBRIC_IMPROVEMENT_VERSUS_MECHANICS_ONLY_BASELINE",
+      "PLAN_ABLATION_AND_RESCUE_ACROSS_FRESH_CROSS_ARTIFACT_TASKS"
+    ],
+    "authoritative_scope_equivalent_now": false,
+    "residual_binding_rule": "EXACT_SET_EQUALITY_TO_AUTHORITATIVE_P2_P3_SCOPE_AUDIT__NO_UNRESOLVED_DIMENSION_MAY_BE_DROPPED_OR_INHERITED_FROM_A_PUBLIC_BAR"
   },
   "post_freeze_accounting": {
     "adaptive_case_selection": false,
