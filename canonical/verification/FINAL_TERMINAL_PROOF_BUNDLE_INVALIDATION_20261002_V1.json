@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_FINAL_TERMINAL_PROOF_BUNDLE_INVALIDATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INVALIDATED_FOR_TERMINAL_OWNERSHIP_CLOSURE__HISTORICAL_EVIDENCE_BUNDLE_RETAINED",
+  "invalidated_bundle": {
+    "path": "canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_20261002_V1.json",
+    "git_blob_sha": "a054603a5b9c1e865a5271985899bf7fc2b0ba0a"
+  },
+  "invalidation_basis": {
+    "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+    "git_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62"
+  },
+  "preserved_facts": [
+    "TERMINAL_V3_ONE_SHOT_RESULT_REMAINS_IMMUTABLE_AND_ADMISSIBLE",
+    "3352_OF_3352_TERMINAL_EXECUTIONS_PASS",
+    "12_OF_12_BEHAVIORAL_CONTRACTS_PASS",
+    "19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILY_ROWS_PASS",
+    "GLOBAL_OWNERSHIP_POSTCONDITIONS_INDEPENDENT_PASS",
+    "DONOR_DELETION_CLEANROOM_INDEPENDENT_PASS"
+  ],
+  "invalidated_claim": [
+    "FROZEN_BUNDLE_IS_SUFFICIENT_FOR_19_OF_19_OPUS55_EQUAL_OR_BETTER_OWNERSHIP_CLOSURE"
+  ],
+  "exact_residual": {
+    "acceptance_calibrated_family_count": 2,
+    "acceptance_pending_family_count": 17,
+    "acceptance_pending_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "ARTIFACT_CREATION",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ]
+  },
+  "reason": "The frozen bundle treated provisional 12-contract-to-19-family behavioral adjudication as if it closed the predeclared Opus 5.5 acceptance protocols. The frozen protocol authority still records 17 family results as DEFINED_RESULT_OPEN.",
+  "terminal_replay_permitted": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "INVALIDATE_ONLY_THE_OVERCLAIM__PRESERVE_ALL_INDEPENDENTLY_VALID_UNDERLYING_RECEIPTS"
+}
