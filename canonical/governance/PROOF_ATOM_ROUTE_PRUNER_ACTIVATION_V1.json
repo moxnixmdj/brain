@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_ROUTE_PRUNER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Consume independently verified false proof atoms without goal weakening: prune only certificates that require the false literal, preserve every unresolved target, and expose any target left without a live certificate as requiring an alternative target-preserving certificate.",
+  "runtime": "canonical/runtime/proof_atom_route_pruner_v1.py",
+  "tests": "canonical/tests/test_proof_atom_route_pruner_v1.py",
+  "current_inputs": {
+    "frontier": {
+      "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+      "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+    },
+    "tb4_adjudication": {
+      "path": "canonical/governance/TB4_PROOF_ATOM_FALSIFICATION_ADJUDICATION_V1.json",
+      "git_blob_sha": "9f2831b5daf0bf811a11c322d85906869fdef433"
+    }
+  },
+  "expected_live_projection": {
+    "falsified_atom_count": 1,
+    "blocked_certificate_ids": [
+      "TB4_ATTAINABLE_ROUTE_CERTIFICATE"
+    ],
+    "uncovered_target_predicates": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "alternative_certificate_required": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "target_predicates_removed": []
+  },
+  "hard_rules": [
+    "ONLY_INDEPENDENT_PUBLIC_RUNNER_PASS_ADJUDICATIONS_MAY_BE_CONSUMED",
+    "FALSE_ATOM_MUST_BE_AN_EXACT_REQUIRED_LITERAL_OF_THE_NAMED_CERTIFICATE",
+    "FALSE_ATOM_BLOCKS_CERTIFICATE_ROUTE_NOT_TARGET_PREDICATE",
+    "TARGET_PREDICATE_DELETION_IS_FORBIDDEN",
+    "IF_ALL_CURRENT_CERTIFICATES_FOR_A_TARGET_ARE_BLOCKED_EMIT_ALTERNATIVE_CERTIFICATE_REQUIRED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
