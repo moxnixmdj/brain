@@ -8,6 +8,16 @@ ROOT = Path(__file__).resolve().parents[2]
 
 inp = json.loads((ROOT / "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V1.json").read_text(encoding="utf-8"))
 sub = json.loads((ROOT / "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json").read_text(encoding="utf-8"))
+refinement = json.loads((ROOT / "canonical/verification/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json").read_text(encoding="utf-8"))
+activation = json.loads((ROOT / "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1.json").read_text(encoding="utf-8"))
+
+assert refinement["status"].startswith("INDEPENDENT_PUBLIC_RUNNER_PASS")
+assert refinement["exact_brain_blobs"]["canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json"] == "89162df13fae66edabaa53ac9c8d95a88829e3ec"
+assert activation["status"].startswith("ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS")
+assert all(
+    edge["receipt"] == "canonical/verification/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    for edge in inp["implications"]
+)
 
 out = evaluate(inp)
 
