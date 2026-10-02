@@ -94,6 +94,18 @@ def replace_image_by_relationship(
             "match_count": len(matches),
         }
 
+    try:
+        source_root = ET.fromstring(original[source_part])
+    except Exception as exc:
+        return {"status": "FAIL_CLOSED", "reason": "SOURCE_PART_XML_INVALID", "error": type(exc).__name__}
+    reference_count = 0
+    for node in source_root.iter():
+        for key, value in node.attrib.items():
+            if key.startswith("{%s}" % OFFICE_REL_NS) and value == relationship_id:
+                reference_count += 1
+    if reference_count == 0:
+        return {"status": "FAIL_CLOSED", "reason": "RELATIONSHIP_ID_NOT_REFERENCED_BY_SOURCE_PART"}
+
     rel = matches[0]
     if rel.get("Type") != IMAGE_REL:
         return {"status": "FAIL_CLOSED", "reason": "RELATIONSHIP_NOT_IMAGE"}
