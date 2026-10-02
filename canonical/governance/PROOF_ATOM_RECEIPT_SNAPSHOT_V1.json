@@ -1,11 +1,24 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_SNAPSHOT_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__SEALED_REPLAYABLE_V2_RECEIPT_SNAPSHOT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__SEALED_REPLAYABLE_V2_RECEIPT_SNAPSHOT__INDEPENDENT_RUNNER_VERIFICATION_REQUIRED__BRAIN_SELF_RUN_NONAUTHORITATIVE__ZERO_CREDIT",
   "objective": "Make both positive proof-atom candidate matches and negative literal-search claims independently replayable by binding the complete scanned file universe, exact repository commit/tree, search-root trees, proof inputs, and V2 index output.",
   "runtime": "canonical/runtime/proof_atom_receipt_snapshot_v1.py",
   "tests": "canonical/tests/test_proof_atom_receipt_snapshot_v1.py",
   "source_index": "canonical/runtime/proof_atom_receipt_index_v2.py",
+  "independent_verification_target": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 1032,
+    "source_brain_commit": "a79e213df4522389373e24bd873ebebada5300bc",
+    "status": "PENDING_PUBLIC_RUNNER_RESULT__ZERO_CREDIT_UNTIL_PASS"
+  },
+  "brain_workflow": {
+    "path": ".github/workflows/verify-proof-atom-receipt-snapshot-v1.yml",
+    "role": "SELF_RUN_CANDIDATE_SNAPSHOT_AND_DIAGNOSTICS_ONLY",
+    "independent_verification": false,
+    "repository_write_permission": false,
+    "canonical_verification_credit": false
+  },
   "hard_rules": [
     "WORKTREE_MUST_BE_CLEAN",
     "EVERY_SCANNED_FILE_MUST_BE_TRACKED_AT_HEAD",
@@ -14,9 +27,12 @@
     "SEARCH_ROOT_TREE_SHAS_AND_REPOSITORY_COMMIT_TREE_MUST_BE_BOUND",
     "EVERY_POSITIVE_MATCH_MUST_RESOLVE_INSIDE_THE_SEALED_MANIFEST_WITH_IDENTICAL_BLOB_SHA",
     "ZERO_MATCH_IS_ONLY_A_LITERAL_SEARCH_STATEMENT_WITHIN_THE_SEALED_CANDIDATE_UNIVERSE",
+    "BRAIN_REPOSITORY_SELF_RUN_IS_NOT_INDEPENDENT_PUBLIC_VERIFICATION",
+    "ONLY_SEPARATE_PUBLIC_VERIFIER_MAY_CLOSE_RUNNER_BYTE_VERIFICATION",
+    "BRAIN_SELF_RUN_ARTIFACT_MUST_REMAIN_ZERO_CREDIT_UNTIL_EXACT_RUNNER_BYTES_INDEPENDENTLY_PASS",
     "NO_SEMANTIC_EQUIVALENCE_SCOPE_METRIC_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNNER_BYTES__RUN_ON_ONE_CLEAN_CURRENT_MAIN_SNAPSHOT__FREEZE_THE_RESULT__THEN_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES_FOR_THE_40_ACTIVE_ATOMS",
+  "next": "WAIT_ONLY_FOR_ALREADY_TRIGGERED_PUBLIC_RUNNER_RESULT__IF_EXACT_BYTES_PASS_FREEZE_ONE_CURRENT_BRAIN_CANDIDATE_SNAPSHOT_WITH_THE_VERIFIED_RUNNER__THEN_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES_FOR_THE_40_ACTIVE_ATOMS__NO_SEMANTIC_CREDIT_FROM_LITERAL_MATCH_ALONE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
