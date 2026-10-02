@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M0A_AND_M1A_SHRUNK__M1B_READY__CURRENT_ZERO_REALITY_WORK_ACTIVE__NOT_FROZEN",
+  "status": "OPEN_DISCOVERY__M0A_ZERO_REALITY_LOCALIZATION_ACTIVE__M1A_PROOF_ONLY__M1B_PROOF_ONLY__NOT_FROZEN",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -81,7 +81,7 @@
       }
     },
     "M1A": {
-      "status": "OPEN__SHRUNK_AFTER_VERIFIED_COMPOUND_VISUAL_RESOLVER",
+      "status": "PROOF_ONLY__ZERO_REALITY_PREFIX_SATURATED__MATCHED_PARITY_NOT_YET_AUTHORIZED",
       "verified_owned": [
         "canonical/capabilities/opus55/RAW_DRAWING_PRIMITIVES_001.json",
         "canonical/capabilities/opus55/ENGINEERING_CALLOUT_PARSER_001.json",
@@ -108,10 +108,7 @@
         "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
       ],
       "uncovered": [
-        "UNIDENTIFIED_LOCAL_NONPLANAR_WARP_WITHOUT_AUTHORIZED_CALIBRATION_MAP_OR_IDENTIFIABLE_GEOMETRY",
-        "NOVEL_NOTATION_CAPABILITY_NOT_EXPRESSIBLE_IN_VERIFIED_JIT_DECLARATIVE_INTERFACES",
-        "ROBUSTNESS_WHEN_DETERMINISTIC_PREPROCESSING_ROUTES_DO_NOT_REACH_STABLE_PLAUSIBLE_CONSENSUS",
-        "VISUAL_BINDING_OUTSIDE_BOUNDED_EQUIVALENCE_AND_EXPLICIT_CONSTRAINT_GRAMMARS"
+        "ONLY_IF_PREDECLARED_MATCHED_PARITY_EVALUATION_EXPOSES_A_REPEATABLE_SOLVABLE_VISUAL_OR_RESTORATION_CLASS_OUTSIDE_VERIFIED_DETERMINISTIC_JIT_AND_IDENTIFIABILITY_ROUTES"
       ],
       "complete_action_bundle": true,
       "verification_receipts": {
@@ -205,18 +202,18 @@
           "scope": "BOUNDED_QUANTITY_BEARING_EQUAL_FEATURE_BINDING_WITH_AMBIGUITY_WITNESS_ON_NONUNIQUE_TARGET_OR_SUBSET"
         }
       },
-      "candidate_action": "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
-      "complete_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "candidate_action": "A_M1A_COMPOSED_ROUTE_MATCHED_PARITY_V2",
+      "complete_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json",
       "new_reality_units": 1,
-      "dependency_depth": 2,
+      "dependency_depth": 1,
       "white_box_donor_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json"
     },
     "M1B": {
-      "status": "OPEN",
+      "status": "PROOF_ONLY__ZERO_REALITY_COVERAGE_AUDIT_COMPLETE__MATCHED_COVERAGE_NOT_YET_AUTHORIZED",
       "complete_action_bundle": true,
-      "candidate_action": "A_M1B_KERNEL_CONTINUOUS_GEOMETRY_V2",
+      "candidate_action": "A_M1B_MATCHED_GEOMETRY_COVERAGE_V3",
       "new_reality_units": 1,
-      "dependency_depth": 2,
+      "dependency_depth": 1,
       "scope": "IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_SUBVOXEL_TOLERANCE_BOUNDED_DETERMINISTIC_ROUTE",
       "source_input": "canonical/governance/RESIDUAL_CUT_INPUT_V1.json",
       "external_specimen_only": [
@@ -225,7 +222,7 @@
       ],
       "source_input_invalidated": "canonical/governance/RESIDUAL_CUT_INPUT_V1.json",
       "uncovered": [
-        "ONLY_IF_CURRENT_FORMAL_OR_MATCHED_COVERAGE_AUDIT_EXPOSES_AN_IDENTIFIABLE_TERMINAL_GEOMETRY_CLASS_OUTSIDE_THE_VERIFIED_ANALYTIC_CSG_ARC_SPLINE_REVOLVE_AND_LOFT_GRAMMARS"
+        "DOES_CURRENT_VERIFIED_CONSTRUCTION_GRAMMAR_COVER_IDENTIFIABLE_GEOMETRY_CLASSES_REQUIRED_ON_PREDECLARED_MATCHED_M1B_ACCEPTANCE_BATCH"
       ],
       "complete_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json",
       "verified_owned": [
@@ -242,7 +239,8 @@
           "workflow_run_id": 36945814841,
           "conclusion": "success"
         }
-      }
+      },
+      "coverage_audit": "canonical/reasoning/2026-10-02_M1B_ZERO_REALITY_COVERAGE_AUDIT_V1.json"
     }
   },
   "rules": [
@@ -260,10 +258,10 @@
     "M1B"
   ],
   "nonblocking_ready_obligation": [
-    "M0A",
-    "M1A"
+    "M1A",
+    "M1B"
   ],
-  "next": "FINISH_M0A_CORRECTED_MLP_SUBSPACE_LOCALIZATION_AND_TARGETED_SPECIALIZED_DONOR_COMPOSITION__AUDIT_M1B_COVERAGE_AND_M1A_PROOF_RESIDUAL__THEN_FREEZE_V6_FROM_EXACT_CURRENT_UNIVERSE_WITH_COSTS_COPIED_VERBATIM",
+  "next": "FINISH_ONLY_ACTIVE_M0A_ZERO_REALITY_USEFUL_SIGNAL_SUBSPACE_LOCALIZATION_AND_COMPOSITION__THEN_FREEZE_V6_FROM_CURRENT_FAITHFUL_COSTS__M1A_AND_M1B_ARE_PROOF_ONLY_PENDING_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -271,6 +269,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M0A bounded contextual semantics and independent semantic consensus verified; FastCoref default route falsified; M1A compound visual resolver verified; V5 invalidated; current universe remains open until active zero-reality candidates settle."
+    "note": "M1A zero-reality mechanism search saturated into proof-only V2 after verified compound visual resolver and identifiability/JIT classification. M1B formal zero-reality coverage audit completed and cannot prove whole terminal coverage; one matched coverage distinction survives. M0A remains the only active zero-reality mechanism localization.",
+    "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json"
   }
 }
