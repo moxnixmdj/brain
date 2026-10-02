@@ -186,7 +186,7 @@
     "differential_dominance_required_when_complete_finite_matched_scope_available": true,
     "differential_dominance_activation": "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_ACTIVATION_V1.json",
     "terminal_certificate_cut_required": true,
-    "terminal_certificate_cut_activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V1.json"
+    "terminal_certificate_cut_activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json"
   },
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
@@ -333,11 +333,11 @@
     "terminal_credit_from_compiler_alone": false
   },
   "terminal_certificate_cut": {
-    "status": "ACTIVE_INDEPENDENT_PASS__SCHEDULING_LAYER_ONLY__ZERO_CREDIT",
-    "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V1.json",
+    "status": "ACTIVE_INDEPENDENT_PASS__31_PREDICATE_FRONTIER__15_CERTIFICATE_CANDIDATES__ZERO_CREDIT",
+    "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json",
     "runtime": "canonical/runtime/terminal_certificate_cut_v1.py",
-    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V1.json",
-    "verification": "canonical/verification/TERMINAL_CERTIFICATE_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "rule": "AFTER_EXISTING_EVIDENCE_AND_DEDUCTIVE_SATURATION__QUOTIENT_SHARED_MISSING_CERTIFICATES_BEFORE_PROCEDURAL_ACTION_SELECTION__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE__NEVER_GRANTS_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V2.json",
+    "verification": "canonical/verification/TERMINAL_CERTIFICATE_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "rule": "AFTER_EXISTING_EVIDENCE_AND_DEDUCTIVE_SATURATION__QUOTIENT_SHARED_MISSING_CERTIFICATES_BEFORE_PROCEDURAL_ACTION_SELECTION__PRESERVE_DISTINCT_SCOPE_COMPLETENESS_OBLIGATIONS__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE__NEVER_GRANTS_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
   }
 }
