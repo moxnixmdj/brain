@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_CONTEXTUAL_HELDOUT_EXPOSURE_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "status": "HELDOUT_CONTENT_EXPOSED_DURING_ZERO_REALITY_RESIDUAL_AUDIT__PROMOTION_INELIGIBLE_FOR_CURRENT_AND_DESCENDANT_IMPLEMENTATION_PATHS",
+  "corpus": "canonical/evaluation/M0A_CONTEXTUAL_SEMANTICS_FROZEN_CORPUS_V1.json",
+  "exposed_cases": [
+    "HOLDOUT_PRONOUN_OBJECT_001",
+    "HOLDOUT_DO_SO_001",
+    "HOLDOUT_LATTER_001",
+    "HOLDOUT_CONTEXT_SCOPE_001",
+    "HOLDOUT_PLURAL_001",
+    "HOLDOUT_AMBIGUOUS_FORMER_001"
+  ],
+  "cause": "INTEGRATOR_FETCHED_FULL_FROZEN_CORPUS_TO_AUDIT_POST_FREEZE_DETERMINISTIC_COVERAGE",
+  "task_execution": false,
+  "donor_execution_on_heldout": false,
+  "terminal_verifier_execution": false,
+  "implementation_from_exposed_cases_forbidden": true,
+  "promotion_use_forbidden": true,
+  "replay_for_promotion_forbidden": true,
+  "preserved_role": "SPENT_NONPROMOTION_DIAGNOSTIC_ONLY",
+  "required_replacement": "ANY_FUTURE_M0A_PROMOTION_REQUIRING_FRESH_MATCHED_EVIDENCE_MUST_USE_A_NEW_PREDECLARED_CLEAN_BATCH_ADMITTED_BY_THE_RECOMPUTED_MINIMUM_REALITY_CUT",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
