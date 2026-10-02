@@ -229,21 +229,6 @@ def _eval(expr: Mapping[str, Any], meta: Mapping[str, Mapping[str, str]], vals: 
         value = a[2] == b[2]
         return "boolean", "dimensionless", value if op == "eq" else not value
 
-    if op == "approx_eq":
-        a, b = two()
-        if a[0] not in _NUMERIC or b[0] not in _NUMERIC or a[1] != b[1]:
-            raise CompileError("APPROX_EQUALITY_TYPE_OR_DIMENSION_INVALID")
-        rel_tol = expr.get("rel_tol", 1e-12)
-        abs_tol = expr.get("abs_tol", 0.0)
-        if (
-            not isinstance(rel_tol, (int, float)) or isinstance(rel_tol, bool)
-            or not isinstance(abs_tol, (int, float)) or isinstance(abs_tol, bool)
-            or not math.isfinite(float(rel_tol)) or not math.isfinite(float(abs_tol))
-            or float(rel_tol) < 0.0 or float(abs_tol) < 0.0
-        ):
-            raise CompileError("APPROX_EQUALITY_TOLERANCE_INVALID")
-        value = math.isclose(float(a[2]), float(b[2]), rel_tol=float(rel_tol), abs_tol=float(abs_tol))
-        return "boolean", "dimensionless", value
 
     if op in {"and", "or"}:
         args = expr.get("args")
