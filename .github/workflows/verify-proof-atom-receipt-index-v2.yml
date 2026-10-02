@@ -21,3 +21,33 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Execute and freeze current V2 receipt index scan
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > proof-atom-receipt-index-v2.json
+          python - <<'PY'
+          import json, os
+          p=json.load(open("proof-atom-receipt-index-v2.json"))
+          assert p["status"].startswith("PASS"), p
+          assert p["canonical_atom_count"] == 40, p
+          assert p["scan_source_revision"] == os.environ["GITHUB_SHA"], p
+          assert len(p["scan_manifest_sha256"]) == 64, p
+          assert len(p["basis_manifest_sha256"]) == 64, p
+          assert p["capability_credit_delta"] == 0, p
+          assert p["family_credit_delta"] == 0, p
+          print(json.dumps({
+            "scan_source_revision": p["scan_source_revision"],
+            "scan_manifest_sha256": p["scan_manifest_sha256"],
+            "basis_manifest_sha256": p["basis_manifest_sha256"],
+            "scanned_file_count": p["scanned_file_count"],
+            "candidate_match_count": p["candidate_match_count"],
+            "atoms_with_candidate_matches": p["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches": p["atoms_without_candidate_matches"],
+            "atom_ids_with_candidate_matches": p["atom_ids_with_candidate_matches"],
+            "atom_ids_without_candidate_matches": p["atom_ids_without_candidate_matches"],
+          },indent=2,sort_keys=True))
+          PY
+      - name: Preserve frozen V2 receipt index scan
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-frozen-scan
+          path: proof-atom-receipt-index-v2.json
