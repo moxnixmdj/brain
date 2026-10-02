@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "12_FROZEN_ROUTES_ENUMERATED__12_ROUTE_EXECUTOR_BINDINGS_IMPLEMENTED__1_OF_12_INDEPENDENTLY_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
+  "status": "12_FROZEN_ROUTES_ENUMERATED__11_ROUTE_EXECUTOR_BINDINGS_IMPLEMENTED__1_OF_12_INDEPENDENTLY_BOUND__CAD_DIRECT_EXECUTOR_OPEN__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
@@ -122,14 +122,17 @@
       "frozen_route": "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json",
       "proof_mode": "T0_MULTIPLEXED_OPEN_DOMAIN_OBJECTIVE_GEOMETRY",
       "independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "IMPLEMENTED_AS_PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
+      "executor_status": "PARENT_PORTFOLIO_INSTRUMENTATION_ADAPTER_IMPLEMENTED__DIRECT_128_CASE_ROUTE_EXECUTOR_MISSING",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
-      "executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
-      "tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
-      "brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
-      "standalone_terminal_population": false,
-      "binding_mode": "LOAD_BEARING_PARENT_PORTFOLIO_OBSERVATION_ONLY"
+      "parent_instrumentation_executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+      "parent_instrumentation_tests": "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py",
+      "parent_instrumentation_brain_ci": ".github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml",
+      "direct_population_required": true,
+      "direct_population_sample_count": 128,
+      "direct_population_generator": "canonical/runtime/cad_t0_geometry_population.py",
+      "direct_population_oracle": "canonical/runtime/cad_t0_oracle_adapter.py",
+      "direct_population_scorer": "canonical/runtime/cad_t0_multiplex_scorer.py"
     },
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
@@ -183,11 +186,11 @@
     }
   ],
   "launch_authority": false,
-  "next": "INDEPENDENTLY_VERIFY_AND_BIND_11_REMAINING_EXECUTORS__CONSTRUCT_ROUTE_SPECIFIC_PARENT_PORTFOLIO_LAUNCHER_WITH_EXACT_FROZEN_BINDINGS__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
+  "next": "CLOSE_CAD_128_CASE_DIRECT_EXECUTOR_AND_INTERFACE_COMPOSITION__INDEPENDENTLY_VERIFY_AND_BIND_REMAINING_EXECUTORS__CONSTRUCT_ROUTE_SPECIFIC_PARENT_PORTFOLIO_LAUNCHER__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "implemented_executor_count": 12
+  "implemented_executor_count": 11
 }
