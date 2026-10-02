@@ -1,9 +1,17 @@
 """Fail-closed consistency reducer for Project Brain terminal projections.
 
-This checker grants no capability or promotion credit. It verifies that the
-derived control-plane projections agree with the current independently verified
-Opus 5.5 acceptance calibration and residual frontier, and that authority blob
-pointers match the actual Git blob identities of their source files.
+This checker grants no capability, family, execution, or promotion credit.
+It verifies only that the current derived projections agree with the strongest
+current independently verified scope/acceptance authorities.
+
+Current truth after scope reconciliation:
+- raw terminal execution receipt remains 3352/3352 PASS;
+- P1 whole frozen scope is quarantined, leaving 11/12 whole-scope contracts;
+- quarantine propagates to exactly 8 dependent family rows, leaving 11 unaffected
+  provisional behavioral family passes;
+- Opus55 acceptance is 2/19 closed and 17/19 open;
+- atomic acceptance is 7/38 proved and 31/38 unresolved;
+- terminal goal remains false.
 """
 from __future__ import annotations
 
@@ -18,233 +26,267 @@ PATHS = {
     "authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
     "closure": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-    "calibration": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
-    "residual": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
-    "plan": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
-    "kernel": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2.json",
+    "scope_reconciliation": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "atomic_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "p1_propagation": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
 }
 
-EXPECTED_CALIBRATED = {
+EXPECTED_ACCEPTED = {
     "EXACT_SYMBOLIC_COMPUTATION",
     "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-    "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "SUBAGENT_DELEGATION_AND_COORDINATION",
+}
+EXPECTED_P1_QUARANTINED = {
+    "ADVANCED_AGENTIC_CODING",
+    "AGENTIC_SCIENTIFIC_RESEARCH",
+    "BUSINESS_WORKFLOW_AUTOMATION",
+    "COMPLEX_MULTI_TOOL_AGENCY",
+    "COMPUTER_AND_BROWSER_USE",
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
 }
 
 def _load(rel: str) -> dict[str, Any]:
-    v = json.loads((ROOT / rel).read_text(encoding="utf-8"))
-    if not isinstance(v, dict):
-        raise ValueError(rel)
-    return v
+    value = json.loads((ROOT / rel).read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError(rel + ":NOT_OBJECT")
+    return value
 
 def _git_blob_sha(rel: str) -> str:
-    b = (ROOT / rel).read_bytes()
+    data = (ROOT / rel).read_bytes()
     h = hashlib.sha1()
-    h.update(f"blob {len(b)}\0".encode())
-    h.update(b)
+    h.update(f"blob {len(data)}\0".encode())
+    h.update(data)
     return h.hexdigest()
 
 def evaluate_documents(
     authority: Mapping[str, Any],
     closure: Mapping[str, Any],
     matrix: Mapping[str, Any],
-    calibration: Mapping[str, Any],
-    residual: Mapping[str, Any],
-    plan: Mapping[str, Any],
-    kernel: Mapping[str, Any],
+    scope_reconciliation: Mapping[str, Any],
+    atomic_bindings: Mapping[str, Any],
+    p1_propagation: Mapping[str, Any],
     actual_blob_shas: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
+    # Independent acceptance scope reconciliation.
+    expected = scope_reconciliation.get("expected_current_reduction")
+    if not isinstance(expected, Mapping):
+        errors.append("SCOPE_RECONCILIATION_EXPECTED_STATE_MISSING")
+        expected = {}
+    if expected.get("closed_family_count") != 2:
+        errors.append("SCOPE_RECONCILIATION_CLOSED_COUNT_NOT_2")
+    if expected.get("open_family_count") != 17:
+        errors.append("SCOPE_RECONCILIATION_OPEN_COUNT_NOT_17")
+    if set(expected.get("preserved_closed_families") or []) != EXPECTED_ACCEPTED:
+        errors.append("SCOPE_RECONCILIATION_CLOSED_SET_MISMATCH")
+    if expected.get("terminal_goal_achieved") is not False:
+        errors.append("SCOPE_RECONCILIATION_TERMINAL_MUST_BE_FALSE")
+
+    # Current atomic acceptance authority.
+    saturation = atomic_bindings.get("saturation")
+    if not isinstance(saturation, Mapping):
+        errors.append("ATOMIC_BINDING_SATURATION_MISSING")
+        saturation = {}
+    if saturation.get("proved_predicate_count") != 7:
+        errors.append("ATOMIC_PROVED_COUNT_NOT_7")
+    if saturation.get("unresolved_predicate_count") != 31:
+        errors.append("ATOMIC_UNRESOLVED_COUNT_NOT_31")
+    if saturation.get("new_reality_units_consumed") != 0:
+        errors.append("ATOMIC_RECONCILIATION_CONSUMED_NEW_REALITY")
+
+    # Independent P1 whole-scope quarantine propagation.
+    if p1_propagation.get("status") != (
+        "INDEPENDENT_PUBLIC_RUNNER_PASS__P1_WHOLE_SCOPE_QUARANTINE_PROPAGATED__"
+        "11_UNAFFECTED_FAMILY_PASSES__8_FAMILY_ROWS_QUARANTINED__ZERO_NEW_REALITY"
+    ):
+        errors.append("P1_PROPAGATION_NOT_EXACT_INDEPENDENT_PASS")
+    if p1_propagation.get("quarantined_behavior_id") != "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001":
+        errors.append("P1_QUARANTINED_BEHAVIOR_ID_MISMATCH")
+    if set(p1_propagation.get("quarantined_families") or []) != EXPECTED_P1_QUARANTINED:
+        errors.append("P1_QUARANTINED_FAMILY_SET_MISMATCH")
+    if len(p1_propagation.get("unaffected_behavioral_families") or []) != 11:
+        errors.append("P1_UNAFFECTED_FAMILY_COUNT_NOT_11")
+    if p1_propagation.get("terminal_results_replayed") != 0:
+        errors.append("P1_PROPAGATION_TERMINAL_REPLAY_NONZERO")
+    if p1_propagation.get("new_reality_units_consumed") != 0:
+        errors.append("P1_PROPAGATION_NEW_REALITY_NONZERO")
+
+    # Single current authority pointer.
     truth = authority.get("truth")
     if not isinstance(truth, Mapping):
         errors.append("AUTHORITY_TRUTH_MISSING")
         truth = {}
-    if truth.get("opus55_acceptance") != "4/19_PASS__15/19_OPEN":
-        errors.append("AUTHORITY_ACCEPTANCE_NOT_4_OF_19")
+    if truth.get("terminal_execution") != "3352/3352_RAW_EXECUTIONS_PASS__IMMUTABLE":
+        errors.append("AUTHORITY_RAW_TERMINAL_EXECUTION_MISMATCH")
+    if truth.get("contracts") != (
+        "11/12_WHOLE_SCOPE_PASS__1/12_P1_WHOLE_SCOPE_QUARANTINED__RAW_NARROW_P1_EVIDENCE_PRESERVED"
+    ):
+        errors.append("AUTHORITY_WHOLE_SCOPE_CONTRACT_STATE_MISMATCH")
+    if truth.get("behavioral_families") != (
+        "11/19_UNAFFECTED_PROVISIONAL_BEHAVIORAL_PASS__8/19_P1_DEPENDENT_ROWS_QUARANTINED"
+    ):
+        errors.append("AUTHORITY_BEHAVIORAL_FAMILY_STATE_MISMATCH")
+    if truth.get("opus55_acceptance") != "2/19_PASS__17/19_OPEN":
+        errors.append("AUTHORITY_ACCEPTANCE_NOT_2_OF_19")
     if truth.get("achieved") is not False:
         errors.append("AUTHORITY_TERMINAL_GOAL_MUST_REMAIN_FALSE")
-
-    cres = calibration.get("result")
-    if not isinstance(cres, Mapping):
-        errors.append("CALIBRATION_RESULT_MISSING")
-        cres = {}
-    if cres.get("acceptance_calibrated_family_count") != 4:
-        errors.append("CALIBRATION_COUNT_NOT_4")
-    if cres.get("acceptance_pending_family_count") != 15:
-        errors.append("CALIBRATION_PENDING_NOT_15")
-    if set(cres.get("acceptance_calibrated_families") or []) != EXPECTED_CALIBRATED:
-        errors.append("CALIBRATION_FAMILY_SET_MISMATCH")
-    if cres.get("terminal_goal_acceptance_closed") is not False:
-        errors.append("CALIBRATION_TERMINAL_GOAL_MUST_REMAIN_FALSE")
-
-    if residual.get("predicate_count") != 38:
-        errors.append("RESIDUAL_PREDICATE_COUNT_NOT_38")
-    if residual.get("proved_predicate_count") != 9:
-        errors.append("RESIDUAL_PROVED_COUNT_NOT_9")
-    if residual.get("open_predicate_count") != 0:
-        errors.append("RESIDUAL_OPEN_COUNT_NOT_0")
-    if residual.get("blocked_predicate_count") != 29:
-        errors.append("RESIDUAL_BLOCKED_COUNT_NOT_29")
-    if residual.get("authorized_acceptance_case_actions") != []:
-        errors.append("RESIDUAL_UNAUTHORIZED_CASE_ACTION_PRESENT")
-    tb = residual.get("tb4_attainability")
-    if not isinstance(tb, Mapping) or tb.get("reality_execution_authorized") is not False:
-        errors.append("TB4_REALITY_MUST_REMAIN_REVOKED")
-    elif not (
-        isinstance(tb.get("maximum_attainable_successes"), int)
-        and isinstance(tb.get("required_successes"), int)
-        and tb["maximum_attainable_successes"] < tb["required_successes"]
-    ):
-        errors.append("TB4_ATTAINABILITY_INEQUALITY_INVALID")
-
-    summary = closure.get("opus55_acceptance_summary")
-    if not isinstance(summary, Mapping):
-        errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISSING")
-        summary = {}
-    if summary.get("calibrated_family_count") != 4 or summary.get("pending_family_count") != 15:
-        errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISMATCH")
-    if set(summary.get("calibrated_families") or []) != EXPECTED_CALIBRATED:
-        errors.append("CLOSURE_ACCEPTANCE_FAMILY_SET_MISMATCH")
-    predicates = closure.get("terminal_predicates")
-    if not isinstance(predicates, Mapping):
-        errors.append("CLOSURE_TERMINAL_PREDICATES_MISSING")
-        predicates = {}
-    if predicates.get("all_frozen_opus_acceptance_predicates_pass") is not False:
-        errors.append("CLOSURE_MUST_NOT_CLAIM_ALL_ACCEPTANCE_PASS")
-    if predicates.get("proof_bundle_frozen") is not False:
-        errors.append("CLOSURE_PROOF_BUNDLE_MUST_REMAIN_UNFROZEN")
-
-    msum = matrix.get("postwave_acceptance_summary")
-    if not isinstance(msum, Mapping):
-        errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISSING")
-        msum = {}
-    if msum.get("calibrated_family_count") != 4 or msum.get("pending_acceptance_family_count") != 15:
-        errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISMATCH")
-    if msum.get("verified_owned_family_count") != 2:
-        errors.append("MATRIX_VERIFIED_OWNED_COUNT_NOT_2")
-    rows = matrix.get("rows")
-    tool = None
-    if isinstance(rows, list):
-        tool = next((r for r in rows if isinstance(r, Mapping) and r.get("family") == "TOOL_DISCOVERY_SELECTION_AND_LEARNING"), None)
-    if not isinstance(tool, Mapping):
-        errors.append("MATRIX_TOOL_DISCOVERY_ROW_MISSING")
-    else:
-        if tool.get("postwave_opus55_acceptance_status") != "PASS_VIA_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS":
-            errors.append("MATRIX_TOOL_DISCOVERY_ACCEPTANCE_NOT_PASS")
-        if tool.get("postwave_ownership_credit") != "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE":
-            errors.append("MATRIX_TOOL_DISCOVERY_PROMOTION_OVERCLAIM")
-
-    delegation = None
-    if isinstance(rows, list):
-        delegation = next((r for r in rows if isinstance(r, Mapping) and r.get("family") == "SUBAGENT_DELEGATION_AND_COORDINATION"), None)
-    if not isinstance(delegation, Mapping):
-        errors.append("MATRIX_DELEGATION_ROW_MISSING")
-    else:
-        if delegation.get("postwave_opus55_acceptance_status") != "PASS_VIA_TEMPORALLY_TRANSPORTED_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS":
-            errors.append("MATRIX_DELEGATION_ACCEPTANCE_NOT_PASS")
-        if delegation.get("postwave_ownership_credit") != "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE":
-            errors.append("MATRIX_DELEGATION_PROMOTION_OVERCLAIM")
-
-    if plan.get("residual_family_count") != 15:
-        errors.append("PLAN_PENDING_FAMILY_COUNT_NOT_15")
-    pf = plan.get("residual_families")
-    if not isinstance(pf, list):
-        errors.append("PLAN_RESIDUAL_FAMILIES_MISSING")
-    else:
-        names = {r if isinstance(r, str) else r.get("family") for r in pf if isinstance(r, (str, Mapping))}
-        if "TOOL_DISCOVERY_SELECTION_AND_LEARNING" in names:
-            errors.append("PLAN_RETAINS_ALREADY_CALIBRATED_TOOL_DISCOVERY")
-        if "SUBAGENT_DELEGATION_AND_COORDINATION" in names:
-            errors.append("PLAN_RETAINS_ALREADY_CALIBRATED_DELEGATION")
-        if len(names) != 15:
-            errors.append("PLAN_RESIDUAL_FAMILY_SET_NOT_15")
-    state = plan.get("current_acceptance_state")
-    if not isinstance(state, Mapping):
-        errors.append("PLAN_CURRENT_ACCEPTANCE_STATE_MISSING")
-    else:
-        expected = {
-            "calibrated_family_count": 4,
-            "pending_family_count": 15,
-            "atomic_predicates_total": 38,
-            "proved_atomic_predicates": 9,
-            "blocked_atomic_predicates": 29,
-            "open_direct_atomic_predicates": 0,
-        }
-        for k, v in expected.items():
-            if state.get(k) != v:
-                errors.append(f"PLAN_STATE_MISMATCH:{k}")
-        if state.get("authorized_acceptance_case_actions") != []:
-            errors.append("PLAN_UNAUTHORIZED_CASE_ACTION_PRESENT")
-
-    ks = kernel.get("current_expected_state")
-    if not isinstance(ks, Mapping):
-        errors.append("KERNEL_CURRENT_STATE_MISSING")
-    else:
-        expected = {
-            "residual_registry_families": 17,
-            "acceptance_pending_families": 15,
-            "atomic_predicates": 38,
-            "receipt_saturation_complete": True,
-            "proved_predicates": 9,
-            "open_direct_predicates": 0,
-            "blocked_predicates": 29,
-            "authorized_acceptance_case_actions": 0,
-            "terminal_promotion_allowed": False,
-        }
-        for k, v in expected.items():
-            if ks.get(k) != v:
-                errors.append(f"KERNEL_STATE_MISMATCH:{k}")
 
     af = authority.get("atomic_acceptance_frontier")
     if not isinstance(af, Mapping):
         errors.append("AUTHORITY_ATOMIC_FRONTIER_MISSING")
-    else:
-        if (af.get("proved"), af.get("open_direct"), af.get("blocked"), af.get("total")) != (9, 0, 29, 38):
-            errors.append("AUTHORITY_ATOMIC_FRONTIER_MISMATCH")
-        if af.get("authorized_acceptance_case_actions") != []:
-            errors.append("AUTHORITY_UNAUTHORIZED_CASE_ACTION_PRESENT")
+        af = {}
+    if (af.get("proved"), af.get("unresolved"), af.get("total")) != (7, 31, 38):
+        errors.append("AUTHORITY_ATOMIC_FRONTIER_MISMATCH")
+    if af.get("authorized_acceptance_case_actions") != []:
+        errors.append("AUTHORITY_UNAUTHORIZED_CASE_ACTION_PRESENT")
 
+    # Closure projection.
+    if closure.get("behavioral_pass_family_count") != 11:
+        errors.append("CLOSURE_UNAFFECTED_BEHAVIORAL_PASS_COUNT_NOT_11")
+    if closure.get("behavioral_quarantined_family_count") != 8:
+        errors.append("CLOSURE_BEHAVIORAL_QUARANTINE_COUNT_NOT_8")
+    counters = closure.get("counters")
+    if not isinstance(counters, Mapping):
+        errors.append("CLOSURE_COUNTERS_MISSING")
+        counters = {}
+    if counters.get("unproved_required_behaviors") != 1:
+        errors.append("CLOSURE_UNPROVED_REQUIRED_BEHAVIOR_COUNT_NOT_1")
+    predicates = closure.get("terminal_predicates")
+    if not isinstance(predicates, Mapping):
+        errors.append("CLOSURE_TERMINAL_PREDICATES_MISSING")
+        predicates = {}
+    if predicates.get("every_required_behavior_has_admissible_proof") is not False:
+        errors.append("CLOSURE_MUST_FAIL_REQUIRED_BEHAVIOR_PROOF_ON_P1")
+    if predicates.get("all_frozen_opus_acceptance_predicates_pass") is not False:
+        errors.append("CLOSURE_MUST_NOT_CLAIM_ALL_ACCEPTANCE_PASS")
+    if predicates.get("proof_bundle_frozen") is not False:
+        errors.append("CLOSURE_PROOF_BUNDLE_MUST_REMAIN_UNFROZEN")
+    csum = closure.get("opus55_acceptance_summary")
+    if not isinstance(csum, Mapping):
+        errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISSING")
+        csum = {}
+    if csum.get("calibrated_family_count") != 2 or csum.get("pending_family_count") != 17:
+        errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISMATCH")
+    if set(csum.get("calibrated_families") or []) != EXPECTED_ACCEPTED:
+        errors.append("CLOSURE_ACCEPTANCE_FAMILY_SET_MISMATCH")
+    catomic = csum.get("atomic_predicates")
+    if not isinstance(catomic, Mapping) or (
+        catomic.get("proved"), catomic.get("unresolved"), catomic.get("total")
+    ) != (7, 31, 38):
+        errors.append("CLOSURE_ATOMIC_ACCEPTANCE_SUMMARY_MISMATCH")
+
+    rows = closure.get("families")
+    if not isinstance(rows, list):
+        errors.append("CLOSURE_FAMILIES_MISSING")
+        rows = []
+    qrows = {
+        row.get("id") for row in rows
+        if isinstance(row, Mapping)
+        and row.get("closure_state") == "P1_WHOLE_SCOPE_QUARANTINED__BEHAVIORAL_PASS_RETRACTED"
+    }
+    if qrows != EXPECTED_P1_QUARANTINED:
+        errors.append("CLOSURE_P1_QUARANTINED_FAMILY_SET_MISMATCH")
+
+    # Ownership matrix projection retains route/internalization status while
+    # making current behavioral scope and acceptance summaries explicit.
+    mscope = matrix.get("postwave_scope_quarantine_reconciliation")
+    if not isinstance(mscope, Mapping):
+        errors.append("MATRIX_SCOPE_QUARANTINE_SUMMARY_MISSING")
+        mscope = {}
+    if mscope.get("unaffected_behavioral_family_pass_count") != 11:
+        errors.append("MATRIX_UNAFFECTED_BEHAVIORAL_COUNT_NOT_11")
+    if mscope.get("quarantined_behavioral_family_count") != 8:
+        errors.append("MATRIX_QUARANTINED_BEHAVIORAL_COUNT_NOT_8")
+    macc = matrix.get("postwave_acceptance_summary")
+    if not isinstance(macc, Mapping):
+        errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISSING")
+        macc = {}
+    if macc.get("calibrated_family_count") != 2 or macc.get("pending_acceptance_family_count") != 17:
+        errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISMATCH")
+    if set(macc.get("calibrated_families") or []) != EXPECTED_ACCEPTED:
+        errors.append("MATRIX_ACCEPTANCE_FAMILY_SET_MISMATCH")
+    matomic = macc.get("atomic_acceptance")
+    if not isinstance(matomic, Mapping) or (
+        matomic.get("proved"), matomic.get("unresolved"), matomic.get("total")
+    ) != (7, 31, 38):
+        errors.append("MATRIX_ATOMIC_ACCEPTANCE_SUMMARY_MISMATCH")
+
+    mrows = matrix.get("rows")
+    if not isinstance(mrows, list):
+        errors.append("MATRIX_ROWS_MISSING")
+        mrows = []
+    mq = {
+        row.get("family") for row in mrows
+        if isinstance(row, Mapping)
+        and row.get("current_behavioral_scope_state") ==
+            "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED"
+    }
+    if mq != EXPECTED_P1_QUARANTINED:
+        errors.append("MATRIX_P1_QUARANTINED_FAMILY_SET_MISMATCH")
+
+    # Current authority must point to exact current projection blobs.
     if actual_blob_shas is not None:
         sources = authority.get("sources")
         if not isinstance(sources, Mapping):
             errors.append("AUTHORITY_SOURCES_MISSING")
             sources = {}
-        for key in ("terminal_closure_manifest", "ownership_matrix", "residual_plan", "acceptance_residual_proof_kernel_v2"):
+        pointer_expectations = {
+            "terminal_closure_manifest": PATHS["closure"],
+            "ownership_matrix": PATHS["matrix"],
+            "acceptance_predicate_evidence_bindings_reconciled": PATHS["atomic_bindings"],
+            "p1_scope_quarantine_propagation": PATHS["p1_propagation"],
+        }
+        for key, rel in pointer_expectations.items():
             row = sources.get(key)
             if not isinstance(row, Mapping):
-                errors.append(f"AUTHORITY_SOURCE_MISSING:{key}")
+                errors.append("AUTHORITY_SOURCE_MISSING:" + key)
                 continue
-            path = row.get("path")
-            expected_sha = row.get("git_blob_sha")
-            if not isinstance(path, str) or actual_blob_shas.get(path) != expected_sha:
-                errors.append(f"AUTHORITY_SOURCE_BLOB_MISMATCH:{key}")
+            if row.get("path") != rel:
+                errors.append("AUTHORITY_SOURCE_PATH_MISMATCH:" + key)
+            if row.get("git_blob_sha") != actual_blob_shas.get(rel):
+                errors.append("AUTHORITY_SOURCE_BLOB_MISMATCH:" + key)
 
-    errors = sorted(set(errors))
+    unique = sorted(set(errors))
     return {
-        "schema": "PROJECT_BRAIN_TERMINAL_PROJECTION_CONSISTENCY_VERDICT_V1",
-        "status": "PASS" if not errors else "FAIL_CLOSED",
-        "pass": not errors,
-        "errors": errors,
-        "acceptance_calibrated_families": 4,
-        "acceptance_pending_families": 15,
-        "atomic_predicates_proved": 9,
-        "atomic_predicates_blocked": 29,
+        "schema": "PROJECT_BRAIN_TERMINAL_PROJECTION_CONSISTENCY_VERDICT_V2",
+        "status": "PASS" if not unique else "FAIL_CLOSED",
+        "pass": not unique,
+        "errors": unique,
+        "raw_terminal_execution_passes": 3352,
+        "whole_scope_contract_passes": 11,
+        "whole_scope_contract_quarantined": 1,
+        "unaffected_behavioral_family_passes": 11,
+        "p1_dependent_behavioral_families_quarantined": 8,
+        "acceptance_closed_families": 2,
+        "acceptance_open_families": 17,
+        "atomic_predicates_proved": 7,
+        "atomic_predicates_unresolved": 31,
         "authorized_acceptance_case_actions": 0,
         "terminal_goal_achieved": False,
         "capability_credit_delta": 0,
         "family_credit_delta": 0,
         "promotion_authority": False,
         "execution_authority": False,
-        "rule": "DERIVED_PROJECTIONS_MUST_AGREE_WITH_INDEPENDENT_CALIBRATION_AND_RESIDUAL_AUTHORITY__ALL_HASH_POINTERS_MUST_RESOLVE__NO_PROMOTION_CREDIT",
+        "rule": (
+            "DERIVED_PROJECTIONS_MUST_AGREE_WITH_CURRENT_SCOPE_COMPLETE_ACCEPTANCE_AND_P1_QUARANTINE_AUTHORITIES__"
+            "RAW_EXECUTION_SUCCESS_MAY_NOT_OVERRIDE_WHOLE_SCOPE_SEMANTIC_QUARANTINE__"
+            "ALL_CURRENT_AUTHORITY_HASH_POINTERS_MUST_RESOLVE__NO_PROMOTION_CREDIT"
+        ),
     }
 
 def evaluate_live() -> dict[str, Any]:
-    docs = {k: _load(v) for k, v in PATHS.items()}
-    shas = {v: _git_blob_sha(v) for v in PATHS.values()}
+    docs = {key: _load(rel) for key, rel in PATHS.items()}
+    shas = {rel: _git_blob_sha(rel) for rel in PATHS.values()}
     return evaluate_documents(
-        docs["authority"], docs["closure"], docs["matrix"], docs["calibration"],
-        docs["residual"], docs["plan"], docs["kernel"], shas,
+        docs["authority"],
+        docs["closure"],
+        docs["matrix"],
+        docs["scope_reconciliation"],
+        docs["atomic_bindings"],
+        docs["p1_propagation"],
+        shas,
     )
 
 def main() -> int:
