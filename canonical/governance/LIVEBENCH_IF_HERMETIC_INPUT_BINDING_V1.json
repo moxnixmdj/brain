@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREQUALIFICATION_INPUTS__NO_TERMINAL_CASE_CONTENT_READ__ADAPTER_VERIFICATION_PENDING",
+  "status": "FROZEN_PREQUALIFICATION_INPUTS__ADAPTER_INDEPENDENTLY_VERIFIED__58_CHECKER_PREFLIGHT_PENDING__NO_TERMINAL_CASE_CONTENT_READ",
   "upstream_repository": {
     "repository": "LiveBench/LiveBench",
     "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -69,9 +69,18 @@
     "NO_EXTERNAL_MODEL_JUDGE"
   ],
   "remaining": [
-    "VERIFY_ADAPTER_GREEN",
     "VERIFY_CURRENT_58_CHECKER_GOOD_BAD_BOUNDARIES"
   ],
   "incremental_spend_usd": 0,
-  "fresh_terminal_evidence_consumed": 0
+  "fresh_terminal_evidence_consumed": 0,
+  "adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "adapter_verification_state": {
+    "status": "INDEPENDENT_PASS",
+    "public_runner_repository": "moxnixmdj/verification-capsule-runner",
+    "public_runner_workflow_run_id": 36955010460,
+    "public_runner_job_id": 110675940934,
+    "public_merge_commit": "2208dca072e46fe847eee85841566694c923ff71",
+    "exact_adapter_blob_sha": "eb497ae5585f4f22b06b8088609b6d17714ebc53",
+    "exact_test_blob_sha": "ac012754816cd007d893980247d55670f70b21ec"
+  }
 }
