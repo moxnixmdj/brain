@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PREFLIGHT_PASS__SCOPE_GATE_AND_POST_FREEZE_TERMINAL_POPULATION_PENDING__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "candidate": "canonical/runtime/saccr_credit_information_safe_candidate.py",
+  "proof_population": "canonical/runtime/saccr_credit_information_safe_proof.py",
+  "tests": "canonical/tests/test_saccr_credit_information_safe.py",
+  "information_boundary": {
+    "candidate_visible": [
+      "CREDIT_DERIVATIVE_NOTIONAL",
+      "EFFECTIVE_AND_MATURITY_DATES",
+      "DIRECTION",
+      "REFERENCE_ENTITY",
+      "SUPERVISORY_FACTOR_CLASSIFICATION_INPUT",
+      "MARGIN_STATE_AND_MPOR"
+    ],
+    "hidden_oracle": [
+      "SUPERVISORY_DURATION",
+      "ADJUSTED_NOTIONAL",
+      "DELTA",
+      "MATURITY_FACTOR",
+      "EFFECTIVE_NOTIONAL",
+      "SUPERVISORY_FACTOR",
+      "CORRELATION",
+      "ENTITY_AGGREGATION",
+      "CREDIT_ADDON"
+    ],
+    "candidate_receives_reference_solution": false,
+    "candidate_receives_hidden_oracle": false
+  },
+  "population": {
+    "generator": "DETERMINISTIC_PREWAVE_GENERATOR__TERMINAL_SEEDS_DERIVED_ONLY_AFTER_PACKAGE_FREEZE",
+    "covers": [
+      "SINGLE_NAME_AND_INDEX",
+      "LONG_AND_SHORT_DIRECTION",
+      "MARGINED_AND_UNMARGINED",
+      "MULTIPLE_MATURITIES",
+      "MULTIPLE_REFERENCE_ENTITIES",
+      "REFERENCE_ENTITY_AGGREGATION",
+      "ALL_FROZEN_SINGLE_NAME_RATING_CLASSES",
+      "ALL_FROZEN_INDEX_RATING_CLASSES"
+    ],
+    "preflight_seed_count": 2000,
+    "terminal_results_observed": 0
+  },
+  "oracle": {
+    "independent_implementation": true,
+    "imports_candidate_kernel": false,
+    "checks_every_intermediate_and_final_credit_addon": true
+  },
+  "anti_shortcuts": [
+    "WRONG_INTERMEDIATE_WITH_CORRECT_FINAL_FAILS",
+    "WRONG_FINAL_WITH_CORRECT_INTERMEDIATES_FAILS",
+    "MISSING_TRADE_LINEAGE_FAILS"
+  ],
+  "execution_authority": false,
+  "remaining_before_terminal_authority": [
+    "SCOPE_EQUIVALENT_PROOF_GATE_V2_PASS",
+    "POST_FREEZE_TERMINAL_POPULATION_BINDING"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+}
