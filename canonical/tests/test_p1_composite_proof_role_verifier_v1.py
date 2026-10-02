@@ -9,13 +9,19 @@ class P1CompositeProofRoleVerifierTests(unittest.TestCase):
     def candidate(self):
         return load(CANDIDATE)
 
-    def test_live_candidate_is_lift_eligible_but_not_lifted(self):
+    def test_live_candidate_stays_quarantined_when_assigned_mutation_survives_scorer(self):
         out = evaluate(self.candidate())
-        self.assertTrue(out["pass"], out)
-        self.assertTrue(out["quarantine_lift_eligible"])
+        self.assertFalse(out["pass"], out)
+        self.assertFalse(out["quarantine_lift_eligible"])
         self.assertFalse(out["quarantine_resolved"])
         self.assertEqual(out["required_check_count"], 8)
         self.assertEqual(out["required_mutation_count"], 9)
+        self.assertIn("V4_DROP_PROVENANCE_MUTATION_SURVIVES_SCORER", out["errors"])
+        ce = out["v4_drop_provenance_counterexample"]
+        self.assertTrue(ce["counterexample_holds"], ce)
+        self.assertGreater(ce["failed_check_receipt_lists_erased"], 0)
+        self.assertEqual(ce["candidate_supporting_receipts"], [])
+        self.assertTrue(ce["scorer_pass_after_mutation"])
 
     def test_missing_check_fails_closed(self):
         c = copy.deepcopy(self.candidate())
