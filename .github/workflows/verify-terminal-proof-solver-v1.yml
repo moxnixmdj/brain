@@ -1,0 +1,35 @@
+name: Verify terminal proof solver v1
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/terminal_proof_solver_v1.py"
+      - "canonical/tests/test_terminal_proof_solver_v1.py"
+      - "canonical/governance/TERMINAL_PROOF_SOLVER_ACTIVATION_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"
+      - ".github/workflows/verify-terminal-proof-solver-v1.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/terminal_proof_solver_v1.py"
+      - "canonical/tests/test_terminal_proof_solver_v1.py"
+      - "canonical/governance/TERMINAL_PROOF_SOLVER_ACTIVATION_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"
+      - ".github/workflows/verify-terminal-proof-solver-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run solver and live projection regressions
+        run: python -m unittest canonical.tests.test_terminal_proof_solver_v1 -v
+      - name: Recompute live next-action frontier
+        run: python canonical/runtime/terminal_next_action_compiler_v1.py
