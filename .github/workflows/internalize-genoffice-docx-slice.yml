@@ -1,0 +1,141 @@
+name: Internalize GenOffice DOCX engine slice
+on:
+  push:
+    branches: [m2-genoffice-docx-internalization-v1]
+    paths:
+      - canonical/governance/M2_GENOFFICE_DOCX_INTERNALIZATION_TRIGGER_V1.json
+permissions:
+  contents: write
+jobs:
+  vendor-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: m2-genoffice-docx-internalization-v1
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch exact upstream slice
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/genoffice
+          mkdir -p /tmp/genoffice
+          git -C /tmp/genoffice init
+          git -C /tmp/genoffice remote add origin https://github.com/genspark-ai/genoffice.git
+          git -C /tmp/genoffice sparse-checkout init --cone
+          git -C /tmp/genoffice sparse-checkout set packages/docx-engine packages/pptx-engine packages/zip-gate LICENSE NOTICE
+          git -C /tmp/genoffice fetch --depth 1 origin db347087628281d49e53d009183d2fb506c3a444
+          git -C /tmp/genoffice checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/genoffice rev-parse HEAD)" = "db347087628281d49e53d009183d2fb506c3a444"
+      - name: Vendor deterministic dependency closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEST=canonical/capabilities/internalized/artifact_creation/genoffice_db347087
+          rm -rf "$DEST"
+          mkdir -p "$DEST/packages"
+          cp -a /tmp/genoffice/packages/docx-engine "$DEST/packages/"
+          cp -a /tmp/genoffice/packages/pptx-engine "$DEST/packages/"
+          cp -a /tmp/genoffice/packages/zip-gate "$DEST/packages/"
+          cp /tmp/genoffice/LICENSE "$DEST/LICENSE"
+          cp /tmp/genoffice/NOTICE "$DEST/NOTICE"
+          cat > "$DEST/package.json" <<'JSON'
+          {
+            "name": "project-brain-genoffice-docx-owned-slice",
+            "private": true,
+            "version": "0.0.0",
+            "type": "module",
+            "workspaces": ["packages/*"],
+            "devDependencies": {
+              "@types/node": "^24.10.1",
+              "pptxgenjs": "^4.0.1",
+              "tsx": "^4.21.0",
+              "typescript": "^5.9.3",
+              "vitest": "^4.1.11"
+            }
+          }
+          JSON
+      - name: Install pinned dependency closure
+        shell: bash
+        working-directory: canonical/capabilities/internalized/artifact_creation/genoffice_db347087
+        run: npm install --ignore-scripts
+      - name: Verify Brain-owned vendored packages
+        shell: bash
+        working-directory: canonical/capabilities/internalized/artifact_creation/genoffice_db347087
+        run: |
+          set -euo pipefail
+          npm --workspace @genoffice/zip-gate test
+          npm --workspace @genoffice/pptx-engine test
+          npm --workspace @genoffice/docx-engine test
+          npm --workspace @genoffice/docx-engine run typecheck
+      - name: Audit production dependency licenses
+        shell: bash
+        working-directory: canonical/capabilities/internalized/artifact_creation/genoffice_db347087
+        run: |
+          set -euo pipefail
+          npx --yes license-checker --production --json > LICENSE_AUDIT.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("LICENSE_AUDIT.json").read_text())
+          forbidden=("GPL","AGPL","SSPL","BUSL","Commons Clause")
+          bad=[]
+          for name,meta in data.items():
+              lic=str(meta.get("licenses",""))
+              if any(x.lower() in lic.lower() for x in forbidden):
+                  bad.append((name,lic))
+          assert not bad, bad
+          print("LICENSE_AUDIT_PASS",len(data))
+          PY
+      - name: Write internalization manifest
+        shell: bash
+        working-directory: canonical/capabilities/internalized/artifact_creation/genoffice_db347087
+        run: |
+          set -euo pipefail
+          TREE_SHA256="$(find packages -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')"
+          python - "$TREE_SHA256" <<'PY'
+          import json,sys
+          from pathlib import Path
+          tree_sha=sys.argv[1]
+          manifest={
+            "schema":"PROJECT_BRAIN_INTERNALIZATION_MANIFEST_V1",
+            "status":"BRAIN_OWNED_VENDOR_COPY__VERIFICATION_EXECUTED_ON_THIS_BRANCH",
+            "capability_family":"ARTIFACT_CREATION",
+            "target_behavior":"NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+            "upstream":{
+              "repository":"genspark-ai/genoffice",
+              "commit":"db347087628281d49e53d009183d2fb506c3a444",
+              "license":"Apache-2.0",
+              "notice_preserved":True
+            },
+            "vendored_packages":[
+              "packages/docx-engine",
+              "packages/pptx-engine",
+              "packages/zip-gate"
+            ],
+            "vendored_tree_sha256":tree_sha,
+            "model_dependency_count":0,
+            "incremental_spend_usd":0,
+            "claim_limits":[
+              "DOCX_ENGINE_AND_REQUIRED_LOCAL_PACKAGE_DEPENDENCIES_ONLY",
+              "NO_PDF_NATIVE_EDIT_CREDIT",
+              "NO_PROFESSIONAL_JUDGMENT_CREDIT",
+              "NO_WHOLE_ARTIFACT_FAMILY_CREDIT"
+            ]
+          }
+          Path("INTERNALIZATION_MANIFEST.json").write_text(json.dumps(manifest,indent=2)+"\n")
+          PY
+      - name: Commit verified vendor copy to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "project-brain-verifier"
+          git config user.email "actions@users.noreply.github.com"
+          git add canonical/capabilities/internalized/artifact_creation/genoffice_db347087
+          git diff --cached --check
+          git commit -m "Vendor verified GenOffice DOCX engine slice"
+          git push origin HEAD:m2-genoffice-docx-internalization-v1
