@@ -89,7 +89,7 @@ def propose_contextual_references(source: str) -> dict[str, Any]:
 
     # 2) Explicit "that mode" anaphora from a preceding "X mode is enabled".
     mode_targets = list(re.finditer(
-        r"(?P<target>(?:the\s+)?[A-Za-z][A-Za-z0-9_-]*(?:\s+[A-Za-z][A-Za-z0-9_-]*){0,3}\s+mode)\s+is\s+enabled",
+        r"\bIf\s+(?P<target>(?:the\s+)?[A-Za-z][A-Za-z0-9_-]*(?:\s+[A-Za-z][A-Za-z0-9_-]*){0,3}\s+mode)\s+is\s+enabled",
         source,
         re.I,
     ))
