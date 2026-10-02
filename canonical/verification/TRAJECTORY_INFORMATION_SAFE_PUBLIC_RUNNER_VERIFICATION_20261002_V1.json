@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__400_OF_400_FRESH_COUNTERFACTUAL_RESCUE_CASES__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 537,
+  "public_merge_commit": "592ea30a569227a3e0fe74b6867f0e55b0cd6bee",
+  "workflow_run_id": 36958974498,
+  "workflow_job_id": 110688182552,
+  "workflow_conclusion": "success",
+  "post_freeze_seed": 36958974498,
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_information_safe_proof.py": "3bc29023ea04d2dfb4dd0474efff2e267e0f7e8d",
+    "canonical/runtime/trajectory_failure_information_safe_candidate.py": "9ede7fdeaf82d9a8c59fb9eca1aa99fff2a5cd87",
+    "canonical/tests/test_trajectory_failure_information_safe.py": "8fff062484df34afcb89f1ae0e5a046a0d7d641e"
+  },
+  "result": {
+    "case_count": 400,
+    "failed": 0,
+    "identified_and_ambiguous_cases_included": true
+  },
+  "verified": [
+    "HIDDEN_CAUSAL_IDENTITY_AND_RESCUE_VERDICT_NEVER_ENTER_CANDIDATE_VISIBLE_PAYLOAD",
+    "EARLIEST_VISIBLE_CONTRACT_VIOLATION_SHORTCUT_IS_FALSIFIED",
+    "CAUSE_CLAIM_REQUIRES_COUNTERFACTUAL_TERMINAL_RESCUE",
+    "MULTIPLE_RESCUERS_FORCE_AMBIGUITY_INSTEAD_OF_FALSE_UNIQUE_CAUSE",
+    "CANDIDATE_DOES_NOT_IMPORT_PROOF_ORACLE"
+  ],
+  "limitations": [
+    "PREWAVE_INFORMATION_SAFE_MECHANISM_EVIDENCE_ONLY",
+    "FRESH_GRID_USES_BOUNDED_ADDITIVE_STATE_TRANSITION_GRAMMAR",
+    "DOES_NOT_BY_ITSELF_PROVE_FULL_CROSS_DOMAIN_TRAJECTORY_SCOPE_EQUIVALENCE",
+    "TERMINAL_POST_FREEZE_POPULATION_AND_SCOPE_GATE_V2_STILL_REQUIRED"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
