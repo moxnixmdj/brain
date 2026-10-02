@@ -1,6 +1,7 @@
 from canonical.runtime.residual_dependency_eliminator import (
     ResidualClaim,
     eliminate_batch,
+    eliminate_payload,
     eliminate_residual,
 )
 
@@ -132,3 +133,91 @@ def test_dependency_relocation_self_cycle_fails_closed():
         )
     )
     assert out["status"] == "FAIL_CLOSED"
+
+
+def test_proof_only_deferral_deletes_preproof_implementation():
+    out = eliminate_residual(
+        ResidualClaim(
+            "S0-tail",
+            "unmeasured semantic tail",
+            terminal_failure_required_before_implementation=True,
+            repeatable_solvable_terminal_failure_observed=False,
+            current_composed_route_exists=True,
+            evidence=ev(),
+        )
+    )
+    assert out["status"] == "ELIMINATED"
+    assert out["disposition"] == "PROOF_ONLY_DEFERRED__MEASURE_CURRENT_COMPOSED_ROUTE_FIRST"
+    assert out["implementation_authorized"] is False
+
+
+def test_proof_only_deferral_requires_current_route():
+    out = eliminate_residual(
+        ResidualClaim(
+            "S0-bad",
+            "unmeasured tail without route",
+            terminal_failure_required_before_implementation=True,
+            current_composed_route_exists=False,
+            evidence=ev(),
+        )
+    )
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["reason"] == "PROOF_ONLY_DEFERRAL_REQUIRES_CURRENT_COMPOSED_ROUTE"
+
+
+def test_observed_repeatable_failure_reopens_implementation():
+    out = eliminate_residual(
+        ResidualClaim(
+            "S0-reopened",
+            "terminal localized tail",
+            terminal_failure_required_before_implementation=True,
+            repeatable_solvable_terminal_failure_observed=True,
+            current_composed_route_exists=True,
+            evidence=ev(),
+        )
+    )
+    assert out["status"] == "SURVIVES"
+    assert out["implementation_authorized"] is True
+
+
+def test_payload_three_proof_only_tails_reduce_to_zero_preproof_survivors():
+    payload = {
+        "claims": [
+            {
+                "residual_id": "S0_LONG_RANGE",
+                "required_behavior": "long range semantics",
+                "terminal_failure_required_before_implementation": True,
+                "repeatable_solvable_terminal_failure_observed": False,
+                "current_composed_route_exists": True,
+                "evidence": {"authority": "canonical/governance/S0_G0_ZERO_REALITY_SATURATION_V1.json"},
+            },
+            {
+                "residual_id": "S0_MULTIMODAL",
+                "required_behavior": "raw multimodal binding",
+                "terminal_failure_required_before_implementation": True,
+                "repeatable_solvable_terminal_failure_observed": False,
+                "current_composed_route_exists": True,
+                "evidence": {"authority": "canonical/governance/S0_G0_ZERO_REALITY_SATURATION_V1.json"},
+            },
+            {
+                "residual_id": "G0_NOVEL",
+                "required_behavior": "novel structure",
+                "terminal_failure_required_before_implementation": True,
+                "repeatable_solvable_terminal_failure_observed": False,
+                "current_composed_route_exists": True,
+                "evidence": {"authority": "canonical/governance/G0_DEPENDENCY_COMPRESSION_V1.json"},
+            },
+        ]
+    }
+    out = eliminate_payload(payload)
+    assert out["status"] == "PASS"
+    assert out["implementation_count"] == 0
+    assert out["surviving_residual_ids"] == []
+
+
+def test_payload_unknown_field_fails_closed():
+    out = eliminate_payload({"claims": [{
+        "residual_id":"x","required_behavior":"y","evidence":ev(),"invented":True
+    }]})
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["reason"].startswith("UNKNOWN_CLAIM_FIELDS")
