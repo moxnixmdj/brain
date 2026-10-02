@@ -171,3 +171,13 @@ jobs:
           test "$TEST_RC" = "0"
           test "$SNAPSHOT_RC" = "0"
           test "$JSON_RC" = "0"
+
+      - name: Upload sealed snapshot diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-snapshot-v1-diagnostics
+          path: |
+            /tmp/proof_atom_snapshot_diagnostic.txt
+            /tmp/proof_atom_receipt_snapshot_v1.json
+          if-no-files-found: warn
