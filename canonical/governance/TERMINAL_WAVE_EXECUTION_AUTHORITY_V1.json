@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_WAVE_EXECUTION_AUTHORITY_V1",
   "date": "2026-10-02",
-  "status": "AUTHORIZED__DERIVED_EXACT_CURRENT_HARDENED_12_ROUTE_PARENT_PORTFOLIO_WAVE__ZERO_TERMINAL_RESULTS",
+  "status": "AUTHORIZED__HARDENED_EXACT_CURRENT_12_ROUTE_LAUNCH_AUTHORITY_INDEPENDENT_PUBLIC_RUNNER_PASS__PREBEACON__ZERO_TERMINAL_RESULTS",
   "authority_receipt": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "authorization": "T0_T1_T2_T3_ROUTE_SPECIFIC_PARALLEL_TERMINAL_WAVE",
   "execution_authority": true,
@@ -22,7 +22,7 @@
     "LEGACY_GLOBAL_12_SLOT_TERMINAL_REPLACEMENT_WAVE_MUST_NOT_EXECUTE_UNDER_V2_PROTOCOL",
     "ROUTE_SPECIFIC_EXECUTOR_SET_MUST_EQUAL_ALL_12_FROZEN_BINDINGS"
   ],
-  "terminal_launcher_state": "AUTHORIZED_PRE_BEACON__EXACT_CURRENT_HARDENED_LAUNCHER_AND_12_ROUTE_CLOSURE_INDEPENDENTLY_VERIFIED__FULL_EXECUTION_CLOSURE_REFREEZE_REQUIRED_BEFORE_BEACON",
+  "terminal_launcher_state": "AUTHORIZED_PREBEACON__CURRENT_EXACT_LAUNCHER_AND_HARDENED_REDUCER_INDEPENDENTLY_VERIFIED__NO_TERMINAL_CASE_GENERATION_YET",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -34,12 +34,18 @@
   "parent_case_producer_manifest": "canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json",
   "launch_authority_reducer": "canonical/runtime/terminal_wave_launch_authority_reducer_v1.py",
   "derived_launch_authority_verification": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "next": "REFREEZE_COMPLETE_EXACT_CURRENT_EXECUTION_CLOSURE__INDEPENDENTLY_VERIFY_FREEZE__ONLY_THEN_CREATE_POST_FREEZE_BEACON_AND_EXECUTE_ONCE",
-  "revocation": {
-    "prior_reason": "TOP_LEVEL_LAUNCHER_BLOB_CHANGED_AFTER_PRIOR_INDEPENDENT_RECEIPT",
-    "resolved_by": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "exact_current_launch_authority_pass": true,
-    "terminal_beacon_constructed": false,
-    "terminal_cases_consumed": 0
+  "next": "FREEZE_COMPLETE_EXACT_CURRENT_EXECUTION_CLOSURE_AT_IMMUTABLE_GIT_COMMIT__INDEPENDENTLY_VERIFY_PACKAGE_COMMITMENT_AND_SNAPSHOT_ASSERTIONS__ONLY_THEN_CREATE_POST_FREEZE_BEACON_AND_EXECUTE_ONCE",
+  "revocation": null,
+  "independent_verification": {
+    "receipt": "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 777,
+    "workflow_run_id": 36976144379,
+    "workflow_job_id": 110740291597,
+    "conclusion": "success",
+    "verified_route_count": 12,
+    "failed_predicates": [],
+    "terminal_results_observed": 0,
+    "fresh_terminal_evidence_consumed": 0
   }
 }
