@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAD_T0_POST_REFREEZE_BINDING_V4",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_BINDING__CURRENT_CANDIDATE_AND_ANTISHORTCUT_REPAIR_BOUND__INDEPENDENT_BINDING_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "PREWAVE_ADMISSIBLE__INDEPENDENT_V4_BINDING_PASS__ZERO_TERMINAL_RESULTS",
   "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
   "candidate_freeze": {
     "path": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V4.json",
@@ -47,8 +47,8 @@
     ]
   },
   "admission_rule": "ALL_PRIOR_GATES_PLUS_CURRENT_EXACT_CANDIDATE_CONE_AND_ANTISHORTCUT_REGRESSIONS_PASS_INDEPENDENTLY",
-  "independent_verification": null,
-  "prewave_admissible": false,
+  "independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "prewave_admissible": true,
   "execution_authority": false,
   "promotion_authority": false,
   "terminal_results_observed": 0,
@@ -57,7 +57,6 @@
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
   "supersedes": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V3.json",
-  "opened_blockers": [
-    "CAD_V4_POST_REFREEZE_BINDING_INDEPENDENT_VERIFICATION"
-  ]
+  "opened_blockers": [],
+  "admission_receipt_blob_sha": "1010fc910f674bc2bec311df34b23a2f04fcb349"
 }
