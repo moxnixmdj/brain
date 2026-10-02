@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_FAIL_CLOSED_RECONCILIATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FINITE_SAMPLE_ABSOLUTE_DOMINANCE_FAILS_CLOSED__ZERO_CREDIT",
   "objective": "Prevent finite empirical acceptance samples from being relabeled as protocol-wide mathematical ceiling/floor bounds.",
   "defect": {
     "runtime": "canonical/runtime/acceptance_proof_transmuter_v1.py",
@@ -56,5 +56,21 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 938,
+    "pull_request_head": "0411779d6c6ad95a5eab479a372d8e128fad7297",
+    "merge_commit": "aa1ba4ed4665dc0861c513d554abb02336c88f9f",
+    "workflow_run_id": 37015697773,
+    "workflow_job_id": 110865885540,
+    "conclusion": "success",
+    "exact_brain_blobs": {
+      "canonical/runtime/acceptance_proof_transmuter_v1.py": "39b5611e53485674b29e2a05da91b89801bc5aa6",
+      "canonical/tests/test_acceptance_proof_transmuter_v1.py": "0ee24ebcde11679f468bb1ba653ddbb16fa27834",
+      "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+      "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json": "96052a6b5178305b37a2526fb25c3f53fa33b9b5",
+      "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+    }
+  }
 }
