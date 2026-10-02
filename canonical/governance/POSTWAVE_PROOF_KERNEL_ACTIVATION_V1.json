@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_POSTWAVE_PROOF_KERNEL_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_CANDIDATE__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "phase": "POSTWAVE_ACCEPTANCE",
+  "objective": "Replace stale manually synchronized postwave scheduling state with chronology-safe evidence reconciliation and one generated atomic acceptance read model.",
+  "components": {
+    "postwave_evidence_reconciler": {
+      "runtime": "canonical/runtime/postwave_evidence_reconciler_v1.py",
+      "tests": "canonical/tests/test_postwave_evidence_reconciler_v1.py",
+      "input": "canonical/governance/POSTWAVE_EVIDENCE_RECONCILIATION_INPUT_V1.json",
+      "role": "JOIN_CURRENT_EXACT_BINDING_VERIFICATION_TO_UNCHANGED_EXECUTION_SNAPSHOT_BYTES_AND_IMMUTABLE_V3_TERMINAL_RESULTS_WITHOUT_REWRITING_HISTORY"
+    },
+    "generated_postwave_acceptance_state": {
+      "runtime": "canonical/runtime/generated_postwave_acceptance_state_v1.py",
+      "tests": "canonical/tests/test_generated_postwave_acceptance_state_v1.py",
+      "policy": "canonical/governance/POSTWAVE_ACCEPTANCE_STATE_POLICY_V1.json",
+      "role": "GENERATE_CURRENT_38_PREDICATE_POSTWAVE_FRONTIER_FROM_ATOMIC_REGISTRY_EVIDENCE_HYPERGRAPH_AND_NONAUTHORITATIVE_RECONCILIATION_CANDIDATES"
+    }
+  },
+  "immediate_live_outputs_expected": {
+    "strict_closed_families_before_any_new_promotion": 3,
+    "atomic_predicates": 38,
+    "proved_atomic_predicates": 8,
+    "unresolved_atomic_predicates": 30,
+    "delegation": "ABSOLUTE_DOMINANCE_ATOMIC_CANDIDATE_ONLY__INDEPENDENT_VERIFICATION_REQUIRED",
+    "recovery_causal_localization": "SCOPE_VALID_POSTWAVE_TERMINAL_EVIDENCE_READY__NONINFERIORITY_BOUND_ADJUDICATION_STILL_REQUIRED"
+  },
+  "supersession_boundary": {
+    "non_authoritative_for_postwave_acceptance": "canonical/governance/GLOBAL_RESIDUAL_PROOF_COMPILER_LIVE_INPUT_V1.json",
+    "reason": "OLDER_BEHAVIORAL_PREWAVE_RESIDUAL_SNAPSHOT_DRIFTED_FROM_ITS_INDEPENDENT_RECEIPT_AND_DOES_NOT_REPRESENT_THE_CURRENT_38_PREDICATE_POSTWAVE_ACCEPTANCE_FRONTIER",
+    "runtime_implementation_not_revoked": true
+  },
+  "hard_rules": [
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_HISTORICAL_BINDING_REWRITE",
+    "NO_CANDIDATE_WITNESS_SELF_PROMOTION",
+    "NO_RECOVERY_NONINFERIORITY_CREDIT_FROM_SCOPE_EVIDENCE_ALONE",
+    "NO_FAMILY_COUNT_CHANGE_UNTIL_EXISTING_ATOMIC_PROMOTION_LAW_AND_INDEPENDENT_VERIFICATION_CLOSE_THE_REQUIRED_PREDICATES",
+    "NO_NEW_REALITY_SPEND_FROM_THIS ACTIVATION"
+  ],
+  "workflow": ".github/workflows/verify-postwave-proof-kernel-v1.yml",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
