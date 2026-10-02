@@ -34,7 +34,7 @@ def _failed_checks(row:Mapping[str,Any])->list[dict[str,Any]]|None:
         cid=item.get("id")
         passed=item.get("pass")
         evidence=_list_str(item.get("evidence"))
-        semantics=item.get("failure_semantics","DIRECT_CONTRACT")
+        semantics=item.get("failure_semantics")
         if kind not in ALLOWED_KINDS or not isinstance(cid,str) or not cid:
             return None
         if type(passed) is not bool or evidence is None:
