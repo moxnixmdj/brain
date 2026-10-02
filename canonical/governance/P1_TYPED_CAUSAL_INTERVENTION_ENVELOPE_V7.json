@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V7",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__FAILURE_SEMANTICS_AWARE_FORWARD_CAUSAL_ENVELOPE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Preserve the verified V6 forward-causal rescue envelope while eliminating its derived-only root-overclaim by making DIRECT_CONTRACT versus DERIVED_UPSTREAM semantics load-bearing and fail-closed.",
+  "supersedes": "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V6.json",
+  "v6_counterexample": "canonical/governance/P1_V6_DERIVED_ONLY_SCOPE_FALSIFICATION_V1.json",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v7.py",
+  "exact_candidate_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py": "06bcd9bef6c292a39923b27cc58d9af94e49b473",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py": "b7f6d9c9d80fa87964d14a3384dac4d00b08b6e7",
+    "canonical/tests/test_trajectory_failure_typed_ir_v7.py": "9e5feaa3ebfed3a8a7b56cfb227c17921a984e96"
+  },
+  "envelope": {
+    "v6_baseline_cases_preserved": 192,
+    "derived_only_cases_added": 48,
+    "total_typed_cases": 240,
+    "domains": 6,
+    "mechanism_classes": 8,
+    "baseline_causal_patterns": 4,
+    "derived_only_matrix": "6_DOMAINS_X_8_MECHANISM_CLASSES"
+  },
+  "load_bearing_semantics": [
+    "DIRECT_CONTRACT_FAILURES_MAY_BE_CAUSAL_ROOTS",
+    "DERIVED_UPSTREAM_FAILURES_ARE_SYMPTOMS_NOT_REPAIRABLE_ROOTS_BY_THEMSELVES",
+    "ONLY_DERIVED_FAILURES_VISIBLE_REQUIRES_ABSTENTION_AND_UPSTREAM_INFORMATION_REQUEST",
+    "DERIVED_DOWNSTREAM_FAILURES_MUST_NOT_ENTER_ROOT_REPAIR_TARGETS",
+    "MISSING_FAILURE_SEMANTICS_FAILS_CLOSED",
+    "UNKNOWN_FAILURE_SEMANTICS_FAILS_CLOSED",
+    "V6_FORWARD_CAUSAL_INTERVENTION_RESCUE_REMAINS_REQUIRED_FOR_NONAMBIGUOUS_BASELINE_CASES"
+  ],
+  "counterexamples_required_to_die": [
+    "V6_DERIVED_ONLY_SCOPE_IDENTIFIED_A1_AS_ROOT",
+    "FAILURE_SEMANTICS_ERASURE_PROMOTES_DERIVED_FAILURE_TO_DIRECT_ROOT",
+    "DOWNSTREAM_DERIVED_REPAIR_RECEIVES_ROOT_CAUSAL_CREDIT"
+  ],
+  "terminal_scope_rule": "V7_REMAINS_PREWAVE_ONLY_UNTIL_EXACT_OR_SUPERSET_RELATION_TO_EACH_FROZEN_P1_DIRECT_SURFACE_IS_INDEPENDENTLY_VERIFIED",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V7_BYTES_AND_240_CASE_ENVELOPE__THEN_RECOMPILE_THREE_CLAIM_BOUND_P1_DIRECT_SURFACE_SCOPE_RELATIONS_AGAINST_V7__NO_TERMINAL_PROMOTION_FROM_PREFLIGHT_ALONE",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
