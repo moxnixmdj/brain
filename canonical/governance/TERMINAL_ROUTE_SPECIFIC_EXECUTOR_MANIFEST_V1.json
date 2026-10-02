@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "12_FROZEN_ROUTES_ENUMERATED__5_DIRECT_EXECUTORS_IMPLEMENTED__0_OF_12_INDEPENDENTLY_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
+  "status": "12_FROZEN_ROUTES_ENUMERATED__5_DIRECT_EXECUTORS_IMPLEMENTED__1_OF_12_INDEPENDENTLY_BOUND__LEGACY_GLOBAL_EXECUTOR_FAIL_CLOSED",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
@@ -17,19 +17,23 @@
     "UNDECLARED_PAID_FALLBACK"
   ],
   "route_count": 12,
-  "bound_executor_count": 0,
+  "bound_executor_count": 1,
   "routes": [
     {
       "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
       "frozen_route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
       "proof_mode": null,
       "independent_verification": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "IMPLEMENTED__BRAIN_CI_AND_INDEPENDENT_BINDING_VERIFICATION_PENDING",
+      "executor_status": "INDEPENDENTLY_BOUND__ROUTE_SPECIFIC_EXECUTOR_PREFLIGHT_PASS__ZERO_TERMINAL_RESULTS",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
-      "executor": "canonical/runtime/direct_route_terminal_executors_v1.py",
-      "tests": "canonical/tests/test_direct_route_terminal_executors_v1.py",
-      "brain_ci": ".github/workflows/verify-direct-route-terminal-executors.yml"
+      "executor": "canonical/runtime/saccr_route_specific_terminal_executor_v1.py",
+      "tests": "canonical/tests/test_saccr_route_specific_terminal_executor_v1.py",
+      "executor_independent_verification": "canonical/verification/SACCR_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "executor_blob_sha": "9810e3f9a2dd94dc372b6b9a865510795d0262fd",
+      "executor_test_blob_sha": "59e01148f9cc0cff741e81b3238e023358a2a88a",
+      "terminal_population_binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
+      "terminal_population_binding_blob_sha": "d8059952cdf358f3e682cd8177be4a7a0b2801ed"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
@@ -144,7 +148,7 @@
     }
   ],
   "launch_authority": false,
-  "next": "INDEPENDENTLY_VERIFY_FIVE_DIRECT_EXECUTORS__IMPLEMENT_PORTFOLIO_INSTRUMENTATION_AND_CAD_ROUTE_EXECUTORS__BIND_ALL_12__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
+  "next": "INDEPENDENTLY_VERIFY_AND_BIND_REMAINING_DIRECT_EXECUTORS__IMPLEMENT_PORTFOLIO_INSTRUMENTATION_AND_CAD_ROUTE_EXECUTORS__BIND_ALL_12__ONLY_THEN_CONSTRUCT_REAL_POST_FREEZE_BEACON_AND_LAUNCH_ONCE",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
