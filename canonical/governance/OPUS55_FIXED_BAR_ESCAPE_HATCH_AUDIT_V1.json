@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FIXED_BAR_ESCAPE_HATCH_AUDIT_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__NEW_FIRST_PARTY_FIXED_BAR_CANDIDATES_DISCOVERED__NO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "sources": {
+    "opus55_system_card_archive": {
+      "url": "https://malob.github.io/ai-system-cards/anthropic/claude-opus-5-5/",
+      "original_pdf": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+      "provenance": "FAITHFUL_WEB_RENDER_OF_ANTHROPIC_SYSTEM_CARD__ORIGINAL_PDF_LINKED"
+    },
+    "anthropic_opus_page": {
+      "url": "https://www.anthropic.com/claude/opus",
+      "provenance": "FIRST_PARTY_PUBLIC_LAUNCH_BENCHMARK_PAGE"
+    }
+  },
+  "candidates": [
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "benchmark": "Toolathlon-Verified",
+      "opus55_bar": {
+        "pass_at_1_percent": 77.8,
+        "pass_at_3_percent": 82.4,
+        "pass_cubed_percent": 72.2,
+        "avg_assistant_turns": 26.9,
+        "effort": "max",
+        "trials": 3,
+        "task_count": 108
+      },
+      "task_surface": {
+        "description": "REAL_WORLD_LONG_HORIZON_TOOL_USE",
+        "applications": 32,
+        "tools_over": 600,
+        "requires": [
+          "CORRECT_TOOL_SELECTION",
+          "MULTI_STEP_SEQUENCING",
+          "CHECKER_EXACT_END_STATE"
+        ],
+        "scoring": "EXECUTION_BASED_CHECKERS_OVER_ARTIFACTS_AND_APP_OR_WEBSITE_STATE"
+      },
+      "public_route": {
+        "repository": "https://github.com/hkust-nlp/Toolathlon",
+        "release": "TOOLATHLON_VERIFIED_FINAL__2026_06_30",
+        "code_and_tasks_public": true,
+        "exact_zero_incremental_spend_execution_not_yet_proven": true
+      },
+      "disposition": "PUBLIC_FIXED_BAR_CANDIDATE_FOR_REPRESENTED_TOOL_SELECTION_AND_LONG_HORIZON_SEQUENCING_SCOPE",
+      "does_not_yet_close": [
+        "EXACT_ZERO_COST_EXECUTION_CARRIER_NOT_YET_PREFLIGHTED",
+        "CROSS_TASK_LEARNED_CAPABILITY_TRANSFER_DIMENSION_NOT_PROVEN_BY_TOOLATHLON_BAR_ALONE",
+        "SCOPE_MAPPING_TO_FULL_FROZEN_BEHAVIOR_CONTRACT_NOT_YET_INDEPENDENTLY_VERIFIED"
+      ],
+      "terminal_credit_delta": 0
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "benchmark": "ProgramBench multi-agent",
+      "opus55_bar": {
+        "target_score": 0.6,
+        "fixed_five_agent_latency_improvement_vs_single_agent": 2.7,
+        "task_count": 166,
+        "note": "ANTHROPIC_REPORTS_FIXED_FIVE_AGENT_TEAM_REACHES_SCORE_0_6_WITH_2_7X_LATENCY_IMPROVEMENT_VS_SINGLE_AGENT_BASELINE"
+      },
+      "harness": {
+        "fixed_team": "PEER_AGENTS__FULL_TASK_VISIBLE__SEND_MESSAGE__WAIT_FOR_MESSAGE__PER_AGENT_REPO_CHECKOUT__GIT_CODE_SHARING",
+        "async_subagents": "LEAD_CAN_SPAWN_LONG_LIVED_ASYNC_SUBAGENTS__SUBAGENT_SEES_ONLY_LEAD_INSTRUCTIONS__STATUS_AND_TERMINATION_TOOLS",
+        "latency_method": "DERIVED_PER_TASK_LATENCY_USING_FIXED_PREFILL_DECODE_RATES_PLUS_MEASURED_TOOL_TIME__LONGEST_AGENT_TRAJECTORY_ON_PROGRAMBENCH"
+      },
+      "public_route": {
+        "repository": "https://github.com/facebookresearch/programbench",
+        "benchmark_public": true,
+        "current_exact_166_task_identity_vs_anthropic_run_not_yet_proven": true
+      },
+      "disposition": "PUBLIC_FIXED_RELATIVE_BAR_CANDIDATE_FOR_REPRESENTED_MULTI_AGENT_DELEGATION_EFFICIENCY_SCOPE",
+      "does_not_yet_close": [
+        "EXACT_ANTHROPIC_166_GOLDEN_TASK_IDENTITY_NOT_YET_REPRODUCED",
+        "HARNESS_EQUIVALENCE_AND_LATENCY_ACCOUNTING_NOT_YET_PREFLIGHTED",
+        "FULL_ADAPTIVE_RECEIPT_DRIVEN_REASSIGNMENT_SCOPE_NOT_PROVEN_BY_FIXED_TEAM_BAR_ALONE"
+      ],
+      "terminal_credit_delta": 0
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "benchmark": "OfficeQA Pro",
+      "opus55_bar": {
+        "accuracy_percent": 67.7,
+        "task_count": 133,
+        "effort": "max",
+        "run_aggregation": "MEAN_OF_FIVE"
+      },
+      "task_surface": {
+        "description": "END_TO_END_GROUNDED_REASONING_OVER_DENSE_REAL_WORLD_FINANCIAL_DOCUMENT_CORPUS",
+        "requires": [
+          "RETRIEVAL",
+          "DOCUMENT_SELECTION",
+          "PRECISE_NUMERICAL_REASONING"
+        ]
+      },
+      "public_route": {
+        "repository": "https://github.com/databricks/officeqa",
+        "code_public": true,
+        "dataset": "GATED_HUGGINGFACE_ACCESS__NOT_AN_UNCONDITIONAL_ZERO_COST_ROUTE"
+      },
+      "disposition": "REFERENCE_FIXED_BAR_ONLY_UNTIL_DATA_ACCESS_AND_SCOPE_MAPPING_ARE_PROVEN",
+      "terminal_credit_delta": 0
+    }
+  ],
+  "governance_law": [
+    "DISCOVERY_OF_A_PUBLISHED_BAR_DOES_NOT_ITSELF_CLOSE_A_CONTRACT",
+    "REPLACE_LIVE_OPUS_COMPARATOR_ONLY_AFTER_BENCHMARK_IDENTITY_HARNESS_METRIC_SCOPE_AND_ZERO_COST_EXECUTION_ARE_FROZEN",
+    "A_FIXED_BAR_MAY_COVER_ONLY_THE_REPRESENTED_BEHAVIORAL_DIMENSIONS__UNCOVERED_DIMENSIONS_REMAIN_EXPLICIT",
+    "NO_PROXY_OR_SCOPE_WEAKENING"
+  ],
+  "next": [
+    "PREFLIGHT_TOOLATHLON_VERIFIED_PUBLIC_ZERO_COST_ROUTE_AND_MAP_FROZEN_TOOL_SELECTION_CONTRACT_DIMENSIONS",
+    "REPRODUCE_PROGRAMBENCH_166_GOLDEN_TASK_SELECTION_AND_ANTHROPIC_MULTI_AGENT_HARNESS_LATENCY_METRIC",
+    "ONLY_AFTER_INDEPENDENT_SCOPE_AND_EXECUTION_RECEIPTS__UPDATE_COMPARATOR_FEASIBILITY_AND_ACTIVE_BASIS"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
