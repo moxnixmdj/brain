@@ -216,7 +216,7 @@
       "state": "PROVED",
       "proof_kind": "ABSOLUTE_CEILING",
       "source_path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
-      "source_sha": null,
+      "source_sha": "18a388265a4430aed84052d141063b37394d70df",
       "independent_or_objective": true,
       "scope_complete": true,
       "objective_ceiling": true,
@@ -238,7 +238,7 @@
         },
         {
           "path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
-          "sha": null
+          "sha": "18a388265a4430aed84052d141063b37394d70df"
         }
       ]
     }
