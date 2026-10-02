@@ -7,21 +7,17 @@ class Tests(unittest.TestCase):
   return (gate._load(gate.P1_BINDING),gate._load(gate.MANIFEST),gate._load(gate.DIRECT_ROUTES),gate._load(gate.FOUR_CONTRACTS),
           gate._load(gate.V4_RESIDUAL),gate._load(gate.V5_RECEIPT),gate._load(gate.TERMINAL_WAVE))
 
- def test_live_scope_relation_passes_without_private_population_claim(self):
+ def historical_supersession(self):
+  return {"status":"HISTORICAL_PRE_V6"}
+
+ def test_live_v5_scope_gate_fails_closed_after_verified_v6_supersession(self):
   out=gate.evaluate()
-  self.assertTrue(out["pass"],out)
-  self.assertEqual(out["surface_count"],3)
-  self.assertEqual(set(out["surfaces"]),gate.EXPECTED_SURFACES)
-  self.assertIn("SUPERSET_OF_FROZEN_P1_DIRECT_PROOF_CONTRACT_SEMANTICS",out["scope_relation"])
-  self.assertFalse(out["private_benchmark_population_scope_claimed"])
-  self.assertEqual(len(out["claim_bound_relations"]),3)
-  self.assertEqual({x["direct_surface"] for x in out["claim_bound_relations"]},gate.EXPECTED_SURFACES)
-  self.assertEqual(len({x["claim_id"] for x in out["claim_bound_relations"]}),3)
-  self.assertTrue(all(x["relation"]=="SUPERSET" for x in out["claim_bound_relations"]))
-  self.assertTrue(all(x["private_benchmark_population_scope_claimed"] is False for x in out["claim_bound_relations"]))
+  self.assertFalse(out["pass"],out)
+  self.assertEqual(out["status"],"FAIL_CLOSED__V5_RESCUE_SUPERSEDED_BY_VERIFIED_V6")
+  self.assertIn("V5_RESCUE_SUPERSEDED_BY_VERIFIED_V6",out["errors"])
+  self.assertEqual(out["claim_bound_relations"],[])
   self.assertFalse(out["quarantine_lift_eligible"])
   self.assertEqual(out["new_reality_units_consumed"],0)
-  self.assertEqual(out["terminal_receipts_preserved"]["terminal_results_replayed"],0)
 
  def test_all_nine_frozen_mutations_are_executably_killed(self):
   a=gate._mutation_audit()
@@ -32,7 +28,7 @@ class Tests(unittest.TestCase):
  def test_missing_surface_fails_closed(self):
   b,m,r,c,d,v,w=self.sources(); m=copy.deepcopy(m)
   m["portfolios"]["T0"]["surfaces"]=[x for x in m["portfolios"]["T0"]["surfaces"] if x.get("id")!="CURSORBENCH_4_0"]
-  out=gate.evaluate(b,m,r,c,d,v,w)
+  out=gate.evaluate(b,m,r,c,d,v,w,self.historical_supersession())
   self.assertFalse(out["pass"]); self.assertIn("MANIFEST_P1_SURFACE_SET_DRIFT",out["errors"])
 
  def test_v5_requires_independent_receipt(self):
