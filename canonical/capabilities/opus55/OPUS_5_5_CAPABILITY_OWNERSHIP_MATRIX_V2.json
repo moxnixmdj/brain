@@ -1,0 +1,203 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_19_OF_19_VERIFIED_OWNED_EQUAL_OR_BETTER__PENDING_INDEPENDENT_FINALITY_VERIFICATION",
+  "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "supersedes_after_finality_verification": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+  "source_v1_blob_sha": "998b6b69b55285b30776557bc3db66add0bb0df8",
+  "hard_constraints": {
+    "incremental_spend_usd": 0,
+    "knowledge_external_jit": true,
+    "underlying_capability_invention": false
+  },
+  "promotion_basis": {
+    "terminal_behavioral_adjudication": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+    "global_ownership_postconditions": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "donor_deletion_cleanroom": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "final_bundle": "canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_V2_20261002.json"
+  },
+  "rows": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "family": "EXACT_SYMBOLIC_COMPUTATION",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "ownership_basis": "BRAIN_CONFIGURED_TERMINAL_BEHAVIOR_PASS_PLUS_ZERO_DONOR_DEPENDENCE_PLUS_GLOBAL_OWNERSHIP_POSTCONDITIONS",
+      "terminal_behavioral_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "global_ownership_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "donor_cleanroom_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    }
+  ],
+  "summary": {
+    "full_opus_5_5_envelope_obsoleted": true,
+    "verified_owned_equal_or_better_capabilities": [
+      "ADVANCED_AGENTIC_CODING",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "ARTIFACT_CREATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "EXACT_SYMBOLIC_COMPUTATION"
+    ],
+    "verified_owned_count": 19,
+    "ownership_pending_count": 0,
+    "external_specimen_backed_families": [],
+    "owned_components_not_full_family": [],
+    "rule": "FAMILY_OWNERSHIP_PROMOTED_ONLY_FROM_INDEPENDENT_TERMINAL_BEHAVIORAL_AND_GLOBAL_OWNERSHIP_EVIDENCE"
+  },
+  "candidate_only_until_independent_finality_verification": true
+}
