@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CERTIFICATE_FRONTIER_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_SHARED_CERTIFICATE_FRONTIER__31_PREDICATES__ABSOLUTE_DOMINANCE_SCOPE_FIREWALL_RECONCILED__ZERO_CREDIT",
+  "status": "SUPERSEDED_BY_TERMINAL_CERTIFICATE_FRONTIER_V2__NONCANONICAL__ZERO_CREDIT",
   "objective": "Quotient the current 31 unresolved Opus 5.5 atomic acceptance predicates by exact shared missing certificate obligations so the controller schedules missing truths rather than duplicative procedures.",
   "authority": {
     "predicate_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
@@ -221,11 +221,13 @@
     "TOOL_DISCOVERY_AND_DELEGATION_MATCHED_NONINFERIORITY_REMAIN_UNRESOLVED_UNTIL_SCOPE_COMPLETE_CERTIFICATES_PASS",
     "FINITE_SAMPLE_ABSOLUTE_DOMINANCE_CANNOT_REMOVE_PREDICATES_FROM_THIS_FRONTIER"
   ],
-  "next": "RUN_EXACT_TERMINAL_CERTIFICATE_CUT_ON_31_PREDICATES__PRIORITIZE_13_PREDICATE_MATCHED_BINDING_SCOPE_CERTIFICATE_AND_COMPOSITION_RECEIPT_AUTOBINDING__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE",
+  "next": "DO_NOT_SCHEDULE_FROM_V1__USE_CANONICAL_TERMINAL_CERTIFICATE_FRONTIER_V2",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "superseded_by": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V2.json",
+  "canonical_role": "HISTORICAL_SUPERSEDED_FRONTIER"
 }
