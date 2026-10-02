@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import Any
 
 PREQUAL = "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
+REGISTRY = "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+SURFACE_DOMINANCE = "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V3.json"
 
 _REQUIRED_TRUE_PROGRESS = (
     "exact_cut_current_and_verified",
@@ -57,6 +59,35 @@ def _closed_marker(value: Any) -> bool:
 def evaluate(root: Path) -> dict[str, Any]:
     p = _load(root, PREQUAL)
     failures: list[str] = []
+
+    # Global execution authority requires the terminal proof basis to cover every
+    # active behavioral contract, not merely every contract referenced by a
+    # family mapping. A missing active contract is an unproved terminal behavior.
+    try:
+        registry = _load(root, REGISTRY)
+        dominance = _load(root, SURFACE_DOMINANCE)
+        active_rows = registry.get("active_contracted_residuals")
+        obligation_rows = dominance.get("obligations")
+        if not isinstance(active_rows, list) or not isinstance(obligation_rows, list):
+            failures.append("ACTIVE_CONTRACT_COVERAGE_INPUT_INVALID")
+        else:
+            active_ids = {
+                row.get("behavior_id")
+                for row in active_rows
+                if isinstance(row, dict) and isinstance(row.get("behavior_id"), str)
+            }
+            obligation_ids = {
+                row.get("id")
+                for row in obligation_rows
+                if isinstance(row, dict) and isinstance(row.get("id"), str)
+            }
+            if len(active_ids) != len(active_rows):
+                failures.append("ACTIVE_CONTRACT_REGISTRY_INVALID_OR_DUPLICATE")
+            missing_active = sorted(active_ids - obligation_ids)
+            if missing_active:
+                failures.append("ACTIVE_CONTRACTS_MISSING_FROM_TERMINAL_PROOF_BASIS:" + ",".join(missing_active))
+    except (FileNotFoundError, ValueError, json.JSONDecodeError):
+        failures.append("ACTIVE_CONTRACT_COVERAGE_INPUT_MISSING_OR_INVALID")
 
     if p.get("schema") != "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1":
         failures.append("SCHEMA")
