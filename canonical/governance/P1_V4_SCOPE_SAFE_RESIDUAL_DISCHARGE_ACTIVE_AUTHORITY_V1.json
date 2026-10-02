@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__P1_QUARANTINE_COMPRESSED_TO_TWO_EXACT_RESIDUALS__QUARANTINE_REMAINS__ZERO_CREDIT",
+  "objective": "Promote only the independently verified zero-reality P1 V4 residual compression into canonical scheduling authority without clearing P1 quarantine or granting acceptance, capability, family, execution, or promotion credit.",
+  "verified_candidate": {
+    "governance_path": "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json",
+    "governance_git_blob_sha": "23f7b1cc5dd0a795bf88deb160431ea4528f3f74",
+    "runtime_path": "canonical/runtime/p1_v4_scope_safe_residual_discharge_v1.py",
+    "runtime_git_blob_sha": "6beb3b529f2bda999fd9d7da1cbecc25f68a7667",
+    "tests_path": "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py",
+    "tests_git_blob_sha": "6c44f3620e30906b198d6046023f913143a9cdfc",
+    "verification_path": "canonical/verification/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "verification_git_blob_sha": "4dd7cf140e2a5d1c01cfd589d9fb8a69ec4fa24a"
+  },
+  "verified_projection": {
+    "audited_terminal_missing_semantics_before": 4,
+    "semantics_discharged_by_existing_v4": 3,
+    "residual_obligation_count": 2,
+    "residual_obligations": [
+      "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+      "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+    ],
+    "can_clear_p1_scope_quarantine": false,
+    "terminal_results_replayed": 0,
+    "new_reality_units_consumed": 0
+  },
+  "scheduling_effect": {
+    "supersedes_residual_description": "P1_FOUR_UNTYPED_OR_COARSE_MISSING_TERMINAL_SEMANTICS",
+    "current_exact_residual": [
+      {
+        "id": "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+        "required_evidence": "A P1-scoped causal-localization path where explicit SCOPE failure is a first-class failure mechanism rather than inferred from AUTHORITY."
+      },
+      {
+        "id": "P1_HETEROGENEOUS_INTERVENTION_RESCUE",
+        "required_evidence": "Machine-verified intervention/rescue on the heterogeneous typed P1 envelope, including delayed and interaction cases; repair-target naming alone is insufficient."
+      }
+    ],
+    "quarantine_remains_active": true
+  },
+  "next": "SEARCH_EXISTING_CONTENT_ADDRESSED_P1_RECEIPTS_FOR_THE_TWO_EXACT_RESIDUALS__IF_EITHER IS PROVED_PROPAGATE_IMMEDIATELY__IF ABSENT_FREEZE_ONLY_THE_IRREDUCIBLE_RESIDUAL_BEFORE_ANY_NEW_REALITY",
+  "hard_rules": [
+    "DO_NOT_CLEAR_P1_SCOPE_QUARANTINE_FROM_V4_PREFLIGHT_ALONE",
+    "DO_NOT_TREAT_AUTHORITY_AS_IMPLICIT_SCOPE",
+    "DO_NOT_TREAT_REPAIR_TARGET_IDENTITY_AS_INTERVENTION_RESCUE",
+    "DO_NOT_REPLAY_TERMINAL_V3",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_RESIDUAL_COMPRESSION",
+    "SEARCH_EXISTING_IMMUTABLE_RECEIPTS_BEFORE_ANY_NEW_REALITY"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
