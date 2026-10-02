@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_V2_INDEX_BYTES__11_ADVERSARIAL_TESTS_PASS__40_PA1_ATOMS__ZERO_CREDIT",
+  "objective": "Independently verify the exact current self-reflection-quarantined V2 proof-atom receipt indexer, tests, governance binding, active V2 basis, frontier, and refinement overlay before using any live corpus result for proof-atom discharge.",
+  "source_brain": {
+    "repository": "moxnixmdj/brain",
+    "verified_commit": "6458c21403fba855d0eee1cc11f74a9dd6ffd7d9",
+    "current_main_compatibility_checked_at": "2651cb6932cb64fae316bdc975e31514ed0a9d89",
+    "exact_brain_blobs": {
+      "canonical/runtime/proof_atom_receipt_index_v2.py": "7faf9f16acc2b18c501f0d08164833027d3d68fa",
+      "canonical/tests/test_proof_atom_receipt_index_v2.py": "14103ef7c96330a281367409a5b76a0a74e7129d",
+      "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V2.json": "b9803927a2e1f2935686f1d37382e4d2d8d968ed",
+      "canonical/runtime/canonical_proof_atom_basis_v2.py": "5b5957f353edab6c86a34f947ef253099822b0d1",
+      "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+      "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json": "898e450c62c06cf6d1a4a3f826a255da9161a229"
+    }
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1021,
+    "pull_request_head": "c0254cb4e69da0308177eb21ea9cb0fe68f2693c",
+    "pull_request_merge_commit": "86b415c65bcef971c0506d9ab20bcb92bfe3cdad",
+    "workflow_name": "Verify proof atom receipt index v2",
+    "workflow_run_id": 37038712536,
+    "workflow_job_id": 110943228509,
+    "conclusion": "success",
+    "python_version": "3.12.14"
+  },
+  "verified": [
+    "ALL_SIX_EXACT_BRAIN_INPUT_BLOBS_MATCH_PUBLIC_CAPSULE",
+    "ELEVEN_V2_INDEX_ADVERSARIAL_TESTS_PASS",
+    "EXACT_LITERAL_TOKEN_MATCHING_REJECTS_IDENTIFIER_SUPERSTRINGS",
+    "CONTENT_ADDRESSED_MATCHES_AND_FULL_CORPUS_MANIFEST_HASHING_PASS",
+    "MATCH_TRUNCATION_ACCOUNTING_PRESERVES_ACTUAL_CANDIDATE_COUNT",
+    "RECEIPT_INDEX_SELF_REFLECTION_EXCLUDED",
+    "RECEIPT_SNAPSHOT_SELF_REFLECTION_EXCLUDED",
+    "DECLARED_CORPUS_RESTATEMENTS_EXCLUDED",
+    "ACTIVE_V2_BASIS_COMPILES_TO_40_PA1_ATOMS",
+    "TARGET_SPECIFIC_REFINEMENT_ASSOCIATIONS_PRESERVED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "result": {
+    "canonical_atom_count": 40,
+    "adversarial_test_count": 11,
+    "pa1_identity_preserved": true,
+    "target_specific_refinement_associations": true,
+    "tool_verified_for_live_candidate_discovery": true,
+    "live_private_brain_corpus_snapshot_verified": false
+  },
+  "next": "CONSUME_ONLY_A_SEALED_CLEAN_GIT_SNAPSHOT_FROM_THIS_EXACT_VERIFIED_INDEXER__THEN_SEMANTICALLY_REVIEW_CONTENT_ADDRESSED_CANDIDATES_AND_DISCHARGE_OR_FALSIFY_ATOMS_EXPLICITLY__NO_LITERAL_HIT_ALONE_GETS_CREDIT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
