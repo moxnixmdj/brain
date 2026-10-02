@@ -1,15 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2",
   "date": "2026-10-02",
-  "status": "CANDIDATE__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Index existing evidence against the active V2 40-atom basis while preserving PA1 content addresses and target-specific refinement associations.",
+  "status": "CANDIDATE__AUTHORITY_BOUND_V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_INDEX__CI_SCAN_ARTIFACT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Index existing evidence against the exact independently verified active V2 40-atom basis, preserve PA1 content addresses and target-specific refinement associations, and emit one reproducible CI corpus-scan artifact.",
   "runtime": "canonical/runtime/proof_atom_receipt_index_v2.py",
   "tests": "canonical/tests/test_proof_atom_receipt_index_v2.py",
   "source_basis": {
     "activation": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json",
     "verification": "canonical/verification/CANONICAL_PROOF_ATOM_BASIS_V2_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "expected_canonical_atoms": 40,
-    "atom_identity_namespace": "PA1"
+    "atom_identity_namespace": "PA1",
+    "active_authority": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json"
   },
   "searched_roots": [
     "canonical/verification",
@@ -17,6 +18,9 @@
     "canonical/governance"
   ],
   "hard_rules": [
+    "SCANNER_MUST_FAIL_CLOSED_UNLESS_ACTIVE_V2_AUTHORITY_EXACTLY_BINDS_FRONTIER_OVERLAY_BASIS_RUNTIME_TESTS_AND_ACTIVATION_BLOBS",
+    "ACTIVE_V2_INDEPENDENT_VERIFICATION_RECEIPT_MUST_RESTATE_THE_SAME_EXACT_BLOB_PINS",
+    "CI_MUST_EXECUTE_THE_AUTHORITY_BOUND_SCAN_AND_UPLOAD_THE_EXACT_JSON_ARTIFACT",
     "EXACT_LITERAL_OCCURRENCE_IS_ONLY_A_CANDIDATE_POINTER",
     "EVERY_MATCH_CONTENT_ADDRESSED_BY_GIT_BLOB_SHA",
     "SCHEDULER_FRONTIER_REFINEMENT_AND_AUTHORITY_RESTATEMENTS_EXCLUDED",
@@ -26,7 +30,7 @@
     "ZERO_FRESH_REALITY",
     "RECOMPUTE_WHEN_V2_BASIS_REFINEMENT_OVERLAY_OR_SCANNED_EVIDENCE_CHANGES"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_INDEXER_BYTES__THEN_FREEZE_ONE_EXACT_REPOSITORY_SCAN_RESULT_AND_REVIEW_ONLY_CONTENT_ADDRESSED_CANDIDATES__NO_FRESH_REALITY",
+  "next": "RUN_PULL_REQUEST_CI_ON_EXACT_INDEXER_BYTES__INSPECT_CONTENT_ADDRESSED_SCAN_ARTIFACT__SEMANTICALLY_VERIFY_OR_FALSIFY_ONLY_HIGHEST_LEVERAGE_CANDIDATE_ATOMS__ZERO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
