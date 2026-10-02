@@ -2,7 +2,7 @@
 
 Representation closure is not semantic closure. This reducer runs every
 witness/target pair through the fail-closed algebra and exposes the exact
-remaining atoms/metrics. It cannot manufacture bindings or acceptance credit.
+remaining scope/atom/metric holes. It cannot manufacture bindings or acceptance credit.
 """
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime.protocol_implication_scope_algebra_v1 import evaluate as evaluate_pair
+from canonical.runtime.protocol_implication_scope_algebra_v2 import evaluate as evaluate_pair
 from canonical.runtime.witness_target_binding_totalizer_v1 import totalize
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -74,10 +74,12 @@ def reduce_batch(
         for w in witnesses:
             candidate = {
                 "target": {
+                    "scope_ref": "opus55://target/" + t["predicate_id"],
                     "required_atoms": required_atoms,
                     "metric_requirements": metric_requirements,
                 },
                 "witness": {
+                    "scope_ref": "brain://witness/" + w["witness_id"],
                     "verified": witness_normalization_verified,
                     "independent": w.get("independent_or_objective") is True,
                     "contamination_clean": True,
@@ -85,6 +87,10 @@ def reduce_batch(
                     "metric_bounds": dict(w.get("normalized_metric_bounds", {})),
                 },
                 "verified_implications": list(w.get("semantic_implications", [])),
+                # Scope-safe v2 forbids this batch layer from inventing a relation.
+                # Independently verified EXACT/SUPERSET relations must be injected
+                # by a separate content-addressed binding stage.
+                "verified_scope_relations": [],
             }
             verdict = evaluate_pair(candidate)
             row = {
@@ -95,6 +101,7 @@ def reduce_batch(
                 "missing_atoms": verdict.get("missing_atoms", []),
                 "metric_results": verdict.get("metric_results", []),
                 "candidate_scope_relation": verdict.get("candidate_scope_relation"),
+                "scope_relation_missing": verdict.get("status") == "TARGET_SCOPE_NOT_COVERED",
             }
             pair_results.append(row)
             per_target.append(row)
@@ -103,7 +110,8 @@ def reduce_batch(
         best = min(
             per_target,
             key=lambda r: (
-                len(r["missing_atoms"])
+                (1 if r["scope_relation_missing"] else 0)
+                + len(r["missing_atoms"])
                 + sum(1 for m in r["metric_results"] if not m.get("pass")),
                 r["witness_id"],
             ),
@@ -113,6 +121,7 @@ def reduce_batch(
             "implied": bool(implied),
             "implying_witness_ids": sorted(r["witness_id"] for r in implied),
             "best_current_witness_id": best["witness_id"],
+            "best_current_scope_relation_missing": best["scope_relation_missing"],
             "best_current_missing_atoms": best["missing_atoms"],
             "best_current_failed_metrics": [
                 m["metric"] for m in best["metric_results"] if not m.get("pass")
@@ -131,8 +140,9 @@ def reduce_batch(
         "target_results": target_results,
         "pair_results": pair_results,
         "rule": (
-            "BATCH_EXECUTION_MAY_EXPOSE_TARGET_NOT_IMPLIED_WITH_EXPLICIT_HOLES__"
-            "ONLY_PAIR_ALGEBRA_PASS_CAN_MARK_A_TARGET_IMPLIED__"
+            "SCOPE_SAFE_V2_ONLY__BATCH_EXECUTION_MAY_EXPOSE_TARGET_NOT_IMPLIED_WITH_EXPLICIT_HOLES__"
+            "NO_SCOPE_RELATION_IS_INFERRED_OR_INJECTED_BY_THIS_LAYER__"
+            "ONLY_PAIR_ALGEBRA_PASS_WITH_AN_INDEPENDENT_EXACT_OR_SUPERSET_SCOPE_RECEIPT_CAN_MARK_A_TARGET_IMPLIED__"
             "NO_ACCEPTANCE_PROMOTION_FROM_THIS_REDUCER"
         ),
         "acceptance_credit_delta": 0,
