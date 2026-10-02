@@ -29,6 +29,20 @@
       "runtime": "canonical/runtime/terminal_prequalification_reducer.py",
       "tests": "canonical/tests/test_terminal_prequalification_reducer.py",
       "independent_verification": "canonical/verification/TERMINAL_PREQUALIFICATION_12_CONTRACT_CURRENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    "global_residual_partition": {
+      "runtime": "canonical/runtime/global_residual_proof_compiler.py",
+      "tests": "canonical/tests/test_global_residual_proof_compiler.py",
+      "activation": "canonical/governance/GLOBAL_RESIDUAL_PROOF_COMPILER_V1.json",
+      "live_input": "canonical/governance/GLOBAL_RESIDUAL_PROOF_COMPILER_LIVE_INPUT_V1.json",
+      "independent_verification": "canonical/verification/GLOBAL_RESIDUAL_PROOF_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "role": "PARTITION_WHOLE_OPEN_FRONTIER_INTO_EXACT_INTERNAL_UNBLOCK_CUT_PLUS_EXTERNAL_OR_UNPROVEN_RESIDUALS__DEDUPE_BLOCKERS_ONLY_BY_EXPLICIT_SEMANTIC_EQUIVALENCE",
+      "live_verified_summary": {
+        "internal_coverable_count": 2,
+        "residual_count": 5,
+        "minimum_internal_unblock_blocker_count": 4,
+        "new_reality_units": 0
+      }
     }
   },
   "sequencing": [
@@ -38,8 +52,9 @@
     "ATOMIZE_ALL_REMAINING_PREWAVE_OBLIGATIONS",
     "SATURATE_EXISTING_RECEIPTS_AND_DEDUCTIONS",
     "TRANSMUTE_EACH_OBLIGATION_TO_STRONGEST_ADMISSIBLE_PROOF_MODE",
-    "COMPUTE_ONE_EXACT_GLOBAL_MINIMUM_UNBLOCK_CUT",
-    "EXECUTE_ONLY_CUT_MEMBERS_IN_PARALLEL",
+    "PARTITION_GLOBAL_FRONTIER_INTO_EXACT_INTERNAL_CUT_AND_EXTERNAL_OR_UNPROVEN_RESIDUALS",
+    "DEDUPE_ONLY_EXPLICITLY_EQUIVALENT_SEMANTIC_BLOCKERS",
+    "EXECUTE_ONLY_EXACT_INTERNAL_CUT_MEMBERS_IN_PARALLEL",
     "RECOMPUTE_AFTER_EACH_CAUSAL_CLOSURE",
     "WHEN_PREWAVE_CUT_ZERO__RUN_T0_T1_T2_T3_ONE_SHOT_IN_PARALLEL",
     "COMPILE_RECEIPTS__REOPEN_ONLY_CAUSALLY_LOCALIZED_FAILED_RESIDUALS",
@@ -50,7 +65,10 @@
     "NO_MATCHED_EXACT_OPUS_WHILE_STRONGER_INTERNAL_OR_PUBLIC_PROOF_ROUTE_REMAINS_REACHABLE",
     "NO_TERMINAL_CASE_SPEND_BEFORE_PREWAVE_ADMISSION",
     "NO_TASK_WITHOUT_A_DECLARED_EDGE_REMOVAL_IN_THE_GLOBAL_PROOF_GRAPH",
-    "NO_DUPLICATE_STATUS_TRUTH_SOURCE"
+    "NO_DUPLICATE_STATUS_TRUTH_SOURCE",
+    "NO_EXTERNAL_OR_UNPROVEN_RESIDUAL_MAY_STALL_AN_INDEPENDENT_EXACT_INTERNAL_CUT",
+    "NO_HEURISTIC_SEMANTIC_BLOCKER_DEDUPLICATION",
+    "NO_CROSS_RESIDUAL_ROUTE_PROJECTION_WITHOUT_EXPLICIT_PROJECTION_SAFETY"
   ],
   "execution_authority": false,
   "promotion_authority": false,
