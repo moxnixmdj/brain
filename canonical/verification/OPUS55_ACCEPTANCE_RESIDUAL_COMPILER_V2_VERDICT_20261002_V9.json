@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V9",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION__8_PROVED__0_OPEN__30_BLOCKED__TB4_ATTAINABILITY_IMPOSSIBLE__TOOL_LEARNING_CEILING_PROVED__ZERO_NEW_REALITY",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V8.json",
+  "reconciliation_basis": {
+    "attainability_cut": "canonical/governance/OPUS55_ATTAINABILITY_CUT_V1.json",
+    "attainability_verdict": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "tool_discovery_ceiling_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+    "tool_discovery_transmutation_verification": "canonical/verification/TOOL_DISCOVERY_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "tool_learning_atomic_verification": "canonical/verification/TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 8,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 30,
+  "newly_proved_predicate": {
+    "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "source": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+    "source_git_blob_sha": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+    "reason": "FULL_FROZEN_TOOL_DISCOVERY_TERMINAL_POPULATION_PASSED_180_OF_180_AT_THEORETICAL_BINARY_CEILING",
+    "counterfactual": "REMOVING_CEILING_CLAIM_REOPENS_TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+  },
+  "still_blocked_anchor": {
+    "predicate_id": "CODING_TB4_GE_66_4",
+    "family": "ADVANCED_AGENTIC_CODING",
+    "state": "EXTERNAL_BLOCKED",
+    "blocker_class": "CURRENT_SCORE_ROUTE_MATHEMATICALLY_UNATTAINABLE",
+    "reason": "MAXIMUM_ATTAINABLE_SUCCESSES_180_LT_REQUIRED_220"
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "independent_verification": null,
+  "rule": "ATTAINABILITY_CUT_PRECEDES_REALITY_QUERY__ABSOLUTE_CEILING_WITNESS_MAY_CLOSE_ONLY_ITS_SCOPE_COMPLETE_FROZEN_PROTOCOL__GLOBAL_TERMINAL_PROMOTION_REMAINS_FALSE"
+}
