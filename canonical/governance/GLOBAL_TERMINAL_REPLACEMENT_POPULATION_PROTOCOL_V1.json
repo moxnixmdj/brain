@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PRE_RESULT__POST_FREEZE_UNPREDICTABLE_SEED_POLICY__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PRE_RESULT__12_ACTIVE_CONTRACTS__POST_FREEZE_UNPREDICTABLE_SEED_POLICY__ZERO_TERMINAL_RESULTS",
   "authority": [
-    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json",
-    "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json",
-    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+    "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/runtime/scope_equivalent_proof_gate_v2.py"
   ],
   "population_policy": {
-    "unique_behavioral_obligation_count": 10,
+    "unique_behavioral_obligation_count": 12,
     "case_slots_per_obligation": 12,
-    "total_case_count": 120,
+    "total_case_count": 144,
     "difficulty_schedule": [
       1,
       2,
@@ -26,8 +26,8 @@
     "replacement": false
   },
   "execution": {
-    "independence_unit": "UNIQUE_BEHAVIORAL_OBLIGATION",
-    "parallelism": "ALL_TEN_UNIQUE_OBLIGATIONS_MAY_RUN_IN_PARALLEL",
+    "independence_unit": "ACTIVE_BEHAVIORAL_CONTRACT",
+    "parallelism": "ALL_TWELVE_ACTIVE_CONTRACTS_MAY_RUN_IN_PARALLEL_ONLY_AFTER_EACH_ROUTE_IS_INFORMATION_SAFE_AND_SCOPE_EQUIVALENT",
     "portfolio_multiplexing": "ONE_BEHAVIOR_RECEIPT_MAY_SATISFY_EVERY_FROZEN_PORTFOLIO_AND_FAMILY_MAPPING_THAT_NAMES_THE_SAME_BEHAVIOR_ID",
     "candidate_visible": "PUBLIC_TASK_PAYLOAD_ONLY",
     "oracle_visible_to_candidate": false,
@@ -37,10 +37,11 @@
   "acceptance": {
     "per_behavior": "12_OF_12_MACHINE_ORACLE_PASS",
     "mutation_boundary": "PREWAVE_INDEPENDENT_MUTATION_PREFLIGHT_MUST_ALREADY_PASS",
-    "overall": "10_OF_10_BEHAVIORAL_OBLIGATION_RECEIPTS_PASS",
+    "overall": "12_OF_12_ACTIVE_BEHAVIORAL_CONTRACT_RECEIPTS_PASS",
     "no_named_benchmark_score_inheritance": true
   },
   "freeze_requirements": [
+    "ALL_12_ACTIVE_CONTRACT_ROUTE_BINDINGS_INFORMATION_SAFE_AND_SCOPE_EQUIVALENT",
     "CANDIDATE_PACKAGE_BLOB_SET_FROZEN_BEFORE_RUN_ID_EXISTS",
     "EVALUATOR_AND_ORACLE_BLOB_SET_FROZEN_BEFORE_RUN_ID_EXISTS",
     "BEHAVIORAL_SCOPE_MAPPING_FROZEN_BEFORE_RUN_ID_EXISTS",
@@ -50,5 +51,10 @@
   "incremental_spend_usd": 0,
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "reconciliation": {
+    "reason": "ACTIVE_CONTRACT_COVERAGE_GUARD_PROVED_PRIOR_10_OBLIGATION_PROTOCOL_INCOMPLETE",
+    "active_contract_basis": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "rule": "NO_TERMINAL_EXECUTION_AUTHORITY_UNTIL_ALL_12_ROUTES_PASS_SCOPE_EQUIVALENT_INFORMATION_BOUNDARY_GATES"
+  }
 }
