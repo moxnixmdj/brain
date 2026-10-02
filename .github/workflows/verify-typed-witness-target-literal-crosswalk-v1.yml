@@ -1,0 +1,49 @@
+name: Verify typed witness target literal crosswalk v1
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/typed_witness_target_literal_crosswalk_v1.py"
+      - "canonical/tests/test_typed_witness_target_literal_crosswalk_v1.py"
+      - "canonical/governance/TYPED_WITNESS_TARGET_LITERAL_CROSSWALK_ACTIVATION_V1.json"
+      - "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json"
+      - "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json"
+      - ".github/workflows/verify-typed-witness-target-literal-crosswalk-v1.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adversarial crosswalk tests
+        run: python -m unittest canonical.tests.test_typed_witness_target_literal_crosswalk_v1 -v
+      - name: Execute live 99-pair crosswalk
+        run: python -m canonical.runtime.typed_witness_target_literal_crosswalk_v1 > typed-witness-target-crosswalk.json
+      - name: Assert zero-credit live surface
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("typed-witness-target-crosswalk.json"))
+          assert p["status"].startswith("PASS")
+          assert p["target_count"] == 11
+          assert p["witness_count"] == 9
+          assert p["pair_count"] == 99
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          assert p["execution_authority"] is False
+          assert p["promotion_authority"] is False
+          print(json.dumps({
+              "pairs_with_literal_hits":p["pairs_with_literal_hits"],
+              "pairs_without_literal_hits":p["pairs_without_literal_hits"],
+              "distinct_literal_hits_across_pairs":p["distinct_literal_hits_across_pairs"],
+              "top_pairs":p["pairs"][:12],
+          },indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: typed-witness-target-crosswalk-v1
+          path: typed-witness-target-crosswalk.json
