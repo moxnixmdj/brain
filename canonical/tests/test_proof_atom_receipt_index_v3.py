@@ -116,6 +116,23 @@ class Tests(unittest.TestCase):
                 changed["scanned_corpus_manifest_sha256"],
             )
 
+    def test_historical_frontier_and_residual_restatement_prefixes_are_excluded(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            g = root / "canonical/governance"
+            g.mkdir(parents=True)
+            (g / "TERMINAL_CERTIFICATE_FRONTIER_V4.json").write_text(
+                '{"restatement":"A"}\\n', encoding="utf-8"
+            )
+            (g / "MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V1.json").write_text(
+                '{"restatement":"B"}\\n', encoding="utf-8"
+            )
+            out = build_index(frontier(), overlay(), root=root)
+            self.assertTrue(out["status"].startswith("PASS"), out)
+            self.assertEqual(out["scanned_file_count"], 0)
+            self.assertEqual(out["candidate_match_count"], 0)
+            self.assertEqual(out["review_queue_length"], 0)
+
     def test_identifier_superstring_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
