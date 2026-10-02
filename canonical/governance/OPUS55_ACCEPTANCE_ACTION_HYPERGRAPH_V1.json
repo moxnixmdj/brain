@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__FULL_OPEN_PREDICATE_ACTION_COVERAGE__TOOL_AND_DELEGATION_ATOMIC_CEILINGS_CLOSED__MATCHED_PROOF_FRONTIER_OPEN_FOR_REMAINING_RESIDUALS__NO_CREDIT",
+  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__FULL_OPEN_PREDICATE_ACTION_COVERAGE__TOOL_AND_DELEGATION_ATOMIC_CEILINGS_CLOSED__MATCHED_PROOF_FRONTIER_OPEN_FOR_REMAINING_RESIDUALS__NO_CREDIT__SYNTHESIS_EXACT_DELTA_BOUND",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
@@ -329,6 +329,49 @@
       ],
       "preconditions": [],
       "notes": "Bind a comparable MysteryMechanism route for the frozen public threshold without inheriting credit to uncovered transfer or abstention leaves."
+    },
+    {
+      "id": "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "preconditions": [
+        {
+          "id": "SYNTHESIS_PROOF_OBLIGATION_DELTA_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_SYNTHESIS_PROOF_OBLIGATION_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "note": "Independent public runner PR949 proves the exact open residual only: one unmatched target-population scope component, metric:matched_quality, matched_quality_noninferiority, and required_claim_coverage_noninferiority. Zero acceptance credit."
+        }
+      ],
+      "exact_residual": {
+        "missing_scope_components": [
+          "population:frozen_matched_synthesis_portfolio"
+        ],
+        "missing_atoms": [
+          "metric:matched_quality"
+        ],
+        "missing_metric_bindings": [
+          "matched_quality_noninferiority",
+          "required_claim_coverage_noninferiority"
+        ]
+      },
+      "admissible_work": [
+        "SEARCH_EXISTING_CONTENT_ADDRESSED_RECEIPTS_FOR_EXACT_OR_SUPERSET_TARGET_POPULATION_SCOPE_RELATION",
+        "SEARCH_EXISTING_CONTENT_ADDRESSED_RECEIPTS_FOR_MATCHED_QUALITY_ATOM_BINDING",
+        "SEARCH_EXISTING_CONTENT_ADDRESSED_RECEIPTS_FOR_THE_TWO_NUMERIC_NONINFERIORITY_BOUNDS",
+        "RUN_SCOPE_SAFE_ALGEBRA_V2_ONLY_AFTER_THE_CORRESPONDING_BINDINGS_ARE_INDEPENDENTLY_VERIFIED"
+      ],
+      "forbidden": [
+        "NO_FRESH_SYNTHESIS_CASE_EXPOSURE_FROM_THIS_ACTION",
+        "NO_SCOPE_INFERENCE_FROM_T1_T3_TO_MATCHED_PORTFOLIO",
+        "NO_CEILING_TRANSPORT_ACROSS_UNPROVED_POPULATIONS",
+        "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_RESIDUAL_REDUCTION_ALONE"
+      ],
+      "notes": "Work only the independently verified synthesis delta. Do not rerun generic witness binding, invent population equivalence, or reopen seven already-bound atoms."
     }
   ],
   "incremental_spend_usd": 0,
