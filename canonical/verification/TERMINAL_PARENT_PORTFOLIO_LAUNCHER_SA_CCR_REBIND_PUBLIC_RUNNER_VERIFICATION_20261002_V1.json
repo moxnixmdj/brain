@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_LAUNCHER_SA_CCR_REBIND_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SA_CCR_ROUTE_SPECIFIC_LAUNCHER_REBIND_VERIFIED__ZERO_TERMINAL_RESULTS",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_parent_portfolio_launcher_v1.py": "d7f20a66f1f534b06ea11782cb350a582c07d985",
+    "canonical/tests/test_terminal_parent_portfolio_launcher_v1.py": "01996bc0cca7246c0dcfea5b1602c4740fa3e45d",
+    "canonical/runtime/saccr_route_specific_terminal_executor_v1.py": "9810e3f9a2dd94dc372b6b9a865510795d0262fd",
+    "canonical/runtime/direct_route_terminal_executors_v1.py": "28ef55db77ac81e78bd5c67e4d2b39fef131b505",
+    "canonical/runtime/cad_t0_route_specific_terminal_executor_v1.py": "72586ea16289fbfc51460bc8abbb0cd9fee652a1",
+    "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py": "dd8fba0f27691002babbc7ad1fc6b65d7bb57282",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
+    "canonical/runtime/terminal_wave_launch_authority_reducer_v1.py": "0b5b5e8229cc3e5ee950169469811e7576c43514"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 763,
+    "head_sha": "8fddbec263f553b7e48fc74ed4e446630d903812",
+    "merge_commit": "27d8b215e9e4debf5f3c0861a01927251ab36c80",
+    "workflow_run_id": 36975689971,
+    "workflow_job_id": 110738911232,
+    "workflow_name": "Verify SA-CCR terminal launcher rebind V1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "SA_CCR_USES_ROUTE_SPECIFIC_EXECUTOR",
+    "COMMON_DIRECT_EXECUTOR_DOES_NOT_EXECUTE_SA_CCR",
+    "SA_CCR_RESULT_NORMALIZED_FOR_LAUNCH_REDUCTION",
+    "SIX_UNIQUE_DIRECT_ROUTES_REMAIN_EXACT_ONCE",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
