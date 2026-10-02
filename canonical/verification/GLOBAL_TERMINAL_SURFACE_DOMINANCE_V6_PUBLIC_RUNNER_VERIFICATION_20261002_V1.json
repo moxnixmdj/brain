@@ -1,36 +1,39 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_SURFACE_DOMINANCE_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__12_OF_12_ACTIVE_CONTRACTS_COVERED__14_NAMED_SURFACES_REDUNDANT__ZERO_TERMINAL_RESULTS",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V6_COMPLETE__12_OF_12_BEHAVIORAL_OBLIGATIONS_COVERED__ALL_14_NAMED_SURFACES_REDUNDANT_AS_REQUIRED_EXECUTION_ROUTES__ZERO_TERMINAL_CREDIT",
   "exact_brain_blobs": {
-    "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V6.json": "d7f31958b3de17478ee45b8b2f8490cdc59c17ca",
-    "canonical/runtime/proof_route_dominance.py": "78f4dc70846a773a420da9dc5cf8f76bee5e154b"
+    "canonical/runtime/proof_route_dominance.py": "78f4dc70846a773a420da9dc5cf8f76bee5e154b",
+    "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V6.json": "d7f31958b3de17478ee45b8b2f8490cdc59c17ca"
   },
   "public_verifier": {
     "repository": "moxnixmdj/verification-capsule-runner",
-    "pull_request": 787,
-    "head_sha": "9b6de04a4c2c577cc30f6056bae3efe1d2dee64b",
-    "merge_commit": "e864fa9daa0281ff5848bf01611fa3d2e30abd5a",
-    "workflow_run_id": 36976806731,
-    "workflow_job_id": 110742279159,
-    "conclusion": "success",
-    "verifier_test_blob_sha": "e918fb7950556fd78e75db2aa58fa1b8f9e1edbd",
-    "workflow_blob_sha": "3073d4128e529624ba9417395d240c68542fd8ec"
+    "pull_request": 785,
+    "head_sha": "91946779433d16529fba43366a8a8317754180f9",
+    "workflow_run_id": 36976717947,
+    "workflow_job_id": 110742022379,
+    "workflow_name": "Verify global terminal surface dominance V6",
+    "conclusion": "success"
   },
   "verified": [
-    "ACTIVE_CONTRACT_COUNT_12",
-    "GLOBAL_UNCOVERED_OBLIGATIONS_EMPTY",
-    "PENDING_TERMINAL_RESULT_ROUTES_EMPTY",
-    "ALL_14_BLOCKED_NAMED_BENCHMARK_SURFACES_REDUNDANT",
-    "ADMITTED_M0_ROUTE_PRESENT",
-    "ADMITTED_CAD_ROUTE_PRESENT",
-    "ADMITTED_SACCR_ROUTE_PRESENT",
-    "DELEGATION_DIRECT_PROOF_PRESENT",
-    "ZERO_FRESH_TERMINAL_EVIDENCE",
-    "ZERO_INCREMENTAL_SPEND"
+    "EXACT_COMPILER_BLOB_HASH_MATCH",
+    "EXACT_V6_INPUT_BLOB_HASH_MATCH",
+    "DOMINANCE_STATUS_COMPLETE",
+    "GLOBAL_UNCOVERED_BEHAVIORAL_OBLIGATIONS_ZERO",
+    "EXACT_12_ACTIVE_BEHAVIORAL_OBLIGATIONS_COVERED",
+    "CAD_ROUTE_HAS_ADMISSIBLE_EQUAL_OR_STRONGER_SUPPORT",
+    "SA_CCR_ROUTE_HAS_ADMISSIBLE_EQUAL_OR_STRONGER_SUPPORT",
+    "ALL_14_NAMED_SURFACES_REDUNDANT",
+    "ALL_14_NAMED_SURFACES_HAVE_ZERO_UNCOVERED_OBLIGATIONS",
+    "PENDING_TERMINAL_RESULT_ROUTES_ZERO_IN_DOMINANCE_MODEL",
+    "ZERO_TERMINAL_CASES_CONSUMED"
   ],
-  "execution_authority": false,
-  "promotion_authority": false,
+  "nonclaims": [
+    "NO_NAMED_BENCHMARK_SCORE_INHERITANCE",
+    "NO_TERMINAL_CAPABILITY_RESULT",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT",
+    "NO_FINAL_DONOR_DELETION_CLAIM"
+  ],
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
