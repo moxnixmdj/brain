@@ -1,0 +1,34 @@
+name: Verify proof atom receipt index v1
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_receipt_index_v1.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v1.py"
+      - "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_ACTIVATION_V1.json"
+      - ".github/workflows/verify-proof-atom-receipt-index-v1.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v1 -v
+      - name: Compile live 40-atom receipt index
+        run: python canonical/runtime/proof_atom_receipt_index_v1.py > /tmp/proof_atom_receipt_index.json
+      - name: Assert zero-credit index
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/proof_atom_receipt_index.json"))
+          assert d["leaf_atom_count"]==40
+          assert d["capability_credit_delta"]==0
+          assert d["family_credit_delta"]==0
+          assert d["execution_authority"] is False
+          assert d["promotion_authority"] is False
+          print("proof atom receipt index: PASS", d["atoms_with_candidates"], d["atoms_with_explicit_verified_binding_candidates"], d["atoms_without_candidates"])
+          PY
