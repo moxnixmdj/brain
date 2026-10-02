@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__SATURATION_AND_READINESS_AWARE_EXECUTION_GATE__ZERO_CREDIT",
+  "objective": "Make the 17-family acceptance campaign self-reducing and forbid all non-verdict-changing or source-unready reality spend.",
+  "inputs": {
+    "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "evidence_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "comparator_reconciliation": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+    "public_bar_readiness": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+    "source_gate_v2": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "source_audit_v2": "canonical/governance/ACCEPTANCE_PUBLIC_BAR_CAPABILITY_SOURCE_AUDIT_V2.json",
+    "matched_superportfolio": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+    "obstruction_certificate": "canonical/governance/OPUS55_ACCEPTANCE_MINIMUM_OBSTRUCTION_CERTIFICATE_V1.json"
+  },
+  "runtime": "canonical/runtime/opus55_acceptance_residual_compiler_v2.py",
+  "tests": "canonical/tests/test_opus55_acceptance_residual_compiler_v2.py",
+  "execution_law": [
+    "BEFORE_SATURATION_COMPLETE_THE_ONLY_AUTHORIZED_ACTION_IS_EXISTING_RECEIPT_SATURATION",
+    "AFTER_SATURATION_ONLY_OPEN_VERDICT_CHANGING_PREDICATES_MAY_AUTHORIZE_ACTION",
+    "PUBLIC_BAR_ACTION_REQUIRES_SCORE_PRODUCING_ROUTE_READY_TRUE_AND_SOURCE_GATE_V2_ADMISSIBILITY_BEFORE_CASE_EXPOSURE",
+    "MATCHED_ACTION_REQUIRES_EXACT_ZERO_INCREMENTAL_OPUS55_CASE_LEVEL_ROUTE_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+    "BOUND_DOMINANCE_AND_OBJECTIVE_CEILING_MAY_ELIMINATE_COMPARATOR_ONLY_WHEN_SCOPE_COMPLETE",
+    "NO_FAMILY_PROMOTION_UNTIL_ALL_REGISTERED_FAMILY_PREDICATES_PROVED",
+    "NO_TERMINAL_PROMOTION_UNTIL_ALL_38_ATOMIC_PREDICATES_PROVED"
+  ],
+  "current_expected_state": {
+    "residual_families": 17,
+    "atomic_predicates": 38,
+    "receipt_saturation_complete": false,
+    "public_score_producing_routes_ready": 0,
+    "terminal_promotion_allowed": false
+  },
+  "next": [
+    "SATURATE_EXISTING_IMMUTABLE_RECEIPTS_AT_SNAPSHOT_566a97863e0244f9ebd3ad26041f5a4f7f07e342",
+    "BIND_ANY_EXACT_MATCHING_RECEIPTS_TO_ATOMIC_PREDICATES",
+    "RERUN_COMPILER",
+    "THEN_WORK_ONLY_COMPILER_AUTHORIZED_ROUTE_BINDING_OR_DIRECT_PROOF_ACTIONS",
+    "NO_CLEAN_BENCHMARK_CASES_UNTIL_READINESS_AND_SOURCE_GATE_V2_PASS"
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
