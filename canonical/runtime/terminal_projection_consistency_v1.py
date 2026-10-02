@@ -22,6 +22,7 @@ PATHS = {
     "residual": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
     "plan": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
     "kernel": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2.json",
+    "eligibility": "canonical/verification/OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
 }
 
 EXPECTED_CALIBRATED = {
@@ -52,6 +53,7 @@ def evaluate_documents(
     residual: Mapping[str, Any],
     plan: Mapping[str, Any],
     kernel: Mapping[str, Any],
+    eligibility: Mapping[str, Any],
     actual_blob_shas: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -62,6 +64,8 @@ def evaluate_documents(
         truth = {}
     if truth.get("opus55_acceptance") != "4/19_PASS__15/19_OPEN":
         errors.append("AUTHORITY_ACCEPTANCE_NOT_4_OF_19")
+    if truth.get("verified_owned") != "4/19_VERIFIED_OWNED__15/19_NOT_YET_OWNED":
+        errors.append("AUTHORITY_OWNERSHIP_NOT_4_OF_19")
     if truth.get("achieved") is not False:
         errors.append("AUTHORITY_TERMINAL_GOAL_MUST_REMAIN_FALSE")
 
@@ -77,6 +81,24 @@ def evaluate_documents(
         errors.append("CALIBRATION_FAMILY_SET_MISMATCH")
     if cres.get("terminal_goal_acceptance_closed") is not False:
         errors.append("CALIBRATION_TERMINAL_GOAL_MUST_REMAIN_FALSE")
+
+    if "INDEPENDENT_PUBLIC_RUNNER_PASS" not in str(eligibility.get("status", "")):
+        errors.append("OWNERSHIP_ELIGIBILITY_NOT_INDEPENDENT_PASS")
+    eres = eligibility.get("result")
+    if not isinstance(eres, Mapping):
+        errors.append("OWNERSHIP_ELIGIBILITY_RESULT_MISSING")
+        eres = {}
+    if eres.get("eligible_family_count") != 2:
+        errors.append("OWNERSHIP_ELIGIBILITY_COUNT_NOT_2")
+    if set(eres.get("eligible_families") or []) != {"TOOL_DISCOVERY_SELECTION_AND_LEARNING", "SUBAGENT_DELEGATION_AND_COORDINATION"}:
+        errors.append("OWNERSHIP_ELIGIBILITY_FAMILY_SET_MISMATCH")
+    if eres.get("projected_strict_owned_families_after_atomic_promotion") != 4:
+        errors.append("OWNERSHIP_ELIGIBILITY_PROJECTION_NOT_4")
+    if eres.get("terminal_goal_achieved") is not False:
+        errors.append("OWNERSHIP_ELIGIBILITY_MUST_NOT_CLOSE_TERMINAL_GOAL")
+    pv = eligibility.get("public_verifier")
+    if not isinstance(pv, Mapping) or pv.get("conclusion") != "success":
+        errors.append("OWNERSHIP_ELIGIBILITY_PUBLIC_VERIFIER_NOT_SUCCESS")
 
     if residual.get("predicate_count") != 38:
         errors.append("RESIDUAL_PREDICATE_COUNT_NOT_38")
@@ -106,6 +128,19 @@ def evaluate_documents(
         errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISMATCH")
     if set(summary.get("calibrated_families") or []) != EXPECTED_CALIBRATED:
         errors.append("CLOSURE_ACCEPTANCE_FAMILY_SET_MISMATCH")
+    promotion = closure.get("family_local_ownership_promotion")
+    if not isinstance(promotion, Mapping):
+        errors.append("CLOSURE_FAMILY_LOCAL_PROMOTION_MISSING")
+        promotion = {}
+    if promotion.get("verified_owned_family_count") != 4:
+        errors.append("CLOSURE_VERIFIED_OWNED_COUNT_NOT_4")
+    if set(promotion.get("promoted_families") or []) != {"TOOL_DISCOVERY_SELECTION_AND_LEARNING", "SUBAGENT_DELEGATION_AND_COORDINATION"}:
+        errors.append("CLOSURE_PROMOTED_FAMILY_SET_MISMATCH")
+    if promotion.get("terminal_goal_achieved") is not False:
+        errors.append("CLOSURE_PROMOTION_MUST_NOT_CLOSE_TERMINAL_GOAL")
+    if promotion.get("eligibility_evidence") != PATHS["eligibility"]:
+        errors.append("CLOSURE_PROMOTION_EVIDENCE_MISMATCH")
+
     predicates = closure.get("terminal_predicates")
     if not isinstance(predicates, Mapping):
         errors.append("CLOSURE_TERMINAL_PREDICATES_MISSING")
@@ -121,8 +156,16 @@ def evaluate_documents(
         msum = {}
     if msum.get("calibrated_family_count") != 4 or msum.get("pending_acceptance_family_count") != 15:
         errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISMATCH")
-    if msum.get("verified_owned_family_count") != 2:
-        errors.append("MATRIX_VERIFIED_OWNED_COUNT_NOT_2")
+    if msum.get("verified_owned_family_count") != 4:
+        errors.append("MATRIX_VERIFIED_OWNED_COUNT_NOT_4")
+    expected_owned = {
+        "EXACT_SYMBOLIC_COMPUTATION",
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+    }
+    if set(matrix.get("summary", {}).get("verified_owned_equal_or_better_capabilities") or []) != expected_owned:
+        errors.append("MATRIX_VERIFIED_OWNED_SET_MISMATCH")
     rows = matrix.get("rows")
     tool = None
     if isinstance(rows, list):
@@ -132,8 +175,12 @@ def evaluate_documents(
     else:
         if tool.get("postwave_opus55_acceptance_status") != "PASS_VIA_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS":
             errors.append("MATRIX_TOOL_DISCOVERY_ACCEPTANCE_NOT_PASS")
-        if tool.get("postwave_ownership_credit") != "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE":
-            errors.append("MATRIX_TOOL_DISCOVERY_PROMOTION_OVERCLAIM")
+        if tool.get("status") != "VERIFIED_OWNED_EQUAL_OR_BETTER":
+            errors.append("MATRIX_TOOL_DISCOVERY_NOT_VERIFIED_OWNED")
+        if tool.get("postwave_ownership_credit") != "VERIFIED_OWNED_EQUAL_OR_BETTER__INDEPENDENT_FAMILY_LOCAL_PROMOTION":
+            errors.append("MATRIX_TOOL_DISCOVERY_PROMOTION_MISMATCH")
+        if tool.get("ownership_promotion_evidence") != PATHS["eligibility"]:
+            errors.append("MATRIX_TOOL_DISCOVERY_PROMOTION_EVIDENCE_MISMATCH")
 
     delegation = None
     if isinstance(rows, list):
@@ -143,8 +190,12 @@ def evaluate_documents(
     else:
         if delegation.get("postwave_opus55_acceptance_status") != "PASS_VIA_TEMPORALLY_TRANSPORTED_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS":
             errors.append("MATRIX_DELEGATION_ACCEPTANCE_NOT_PASS")
-        if delegation.get("postwave_ownership_credit") != "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE":
-            errors.append("MATRIX_DELEGATION_PROMOTION_OVERCLAIM")
+        if delegation.get("status") != "VERIFIED_OWNED_EQUAL_OR_BETTER":
+            errors.append("MATRIX_DELEGATION_NOT_VERIFIED_OWNED")
+        if delegation.get("postwave_ownership_credit") != "VERIFIED_OWNED_EQUAL_OR_BETTER__INDEPENDENT_FAMILY_LOCAL_PROMOTION":
+            errors.append("MATRIX_DELEGATION_PROMOTION_MISMATCH")
+        if delegation.get("ownership_promotion_evidence") != PATHS["eligibility"]:
+            errors.append("MATRIX_DELEGATION_PROMOTION_EVIDENCE_MISMATCH")
 
     if plan.get("residual_family_count") != 15:
         errors.append("PLAN_PENDING_FAMILY_COUNT_NOT_15")
@@ -210,7 +261,7 @@ def evaluate_documents(
         if not isinstance(sources, Mapping):
             errors.append("AUTHORITY_SOURCES_MISSING")
             sources = {}
-        for key in ("terminal_closure_manifest", "ownership_matrix", "residual_plan", "acceptance_residual_proof_kernel_v2"):
+        for key in ("terminal_closure_manifest", "ownership_matrix", "residual_plan", "acceptance_residual_proof_kernel_v2", "family_local_ownership_promotion_eligibility"):
             row = sources.get(key)
             if not isinstance(row, Mapping):
                 errors.append(f"AUTHORITY_SOURCE_MISSING:{key}")
@@ -228,6 +279,7 @@ def evaluate_documents(
         "errors": errors,
         "acceptance_calibrated_families": 4,
         "acceptance_pending_families": 15,
+        "verified_owned_families": 4,
         "atomic_predicates_proved": 9,
         "atomic_predicates_blocked": 29,
         "authorized_acceptance_case_actions": 0,
@@ -236,7 +288,7 @@ def evaluate_documents(
         "family_credit_delta": 0,
         "promotion_authority": False,
         "execution_authority": False,
-        "rule": "DERIVED_PROJECTIONS_MUST_AGREE_WITH_INDEPENDENT_CALIBRATION_AND_RESIDUAL_AUTHORITY__ALL_HASH_POINTERS_MUST_RESOLVE__NO_PROMOTION_CREDIT",
+        "rule": "DERIVED_PROJECTIONS_MUST_AGREE_WITH_INDEPENDENT_CALIBRATION_RESIDUAL_AND_FAMILY_LOCAL_OWNERSHIP_PROMOTION_EVIDENCE__ALL_HASH_POINTERS_MUST_RESOLVE__FIREWALL_GRANTS_NO_NEW_CREDIT",
     }
 
 def evaluate_live() -> dict[str, Any]:
@@ -244,7 +296,7 @@ def evaluate_live() -> dict[str, Any]:
     shas = {v: _git_blob_sha(v) for v in PATHS.values()}
     return evaluate_documents(
         docs["authority"], docs["closure"], docs["matrix"], docs["calibration"],
-        docs["residual"], docs["plan"], docs["kernel"], shas,
+        docs["residual"], docs["plan"], docs["kernel"], docs["eligibility"], shas,
     )
 
 def main() -> int:
