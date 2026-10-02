@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from canonical.runtime.p1_composite_proof_residual_compiler_v1 import evaluate
+from canonical.runtime.p1_terminal_execution_scope_audit_v1 import evaluate as audit_p1_terminal
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -22,22 +23,9 @@ def live():
         v4_candidate_source=s("canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py"),
         v4_proof_source=s("canonical/runtime/trajectory_failure_typed_ir_proof_v4.py"),
         v4_tests_source=s("canonical/tests/test_trajectory_failure_typed_ir_v4.py"),
-        terminal_scope_audit=j("canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json").get("verification") and
-            j("canonical/runtime/P1_TERMINAL_EXECUTION_SCOPE_AUDIT_RESULT_V1.json")
-            if (ROOT / "canonical/runtime/P1_TERMINAL_EXECUTION_SCOPE_AUDIT_RESULT_V1.json").exists()
-            else _audit_fixture(),
+        terminal_scope_audit=audit_p1_terminal(),
         terminal_suite_source=s("canonical/runtime/contract_native_proof_suites.py"),
     )
-
-def _audit_fixture():
-    # Canonical audit runtime is deterministic; fixture binds only its published result shape.
-    return {
-        "status": "FAIL_CLOSED__EXECUTED_P1_TERMINAL_INSTRUMENTATION_NARROWER_THAN_FROZEN_P1_BINDING",
-        "scope_mismatch_proved": True,
-        "executed_route": {
-            "candidate_output_keys_scored": ["cause_step", "repair_id", "evidence_steps"]
-        },
-    }
 
 class Tests(unittest.TestCase):
     def test_live_residual_is_exact_and_zero_credit(self):
