@@ -54,8 +54,14 @@
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
         "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
       ],
-      "preconditions": [],
-      "notes": "Search only existing/public admissible evidence for universal, exhaustive, absolute-ceiling or bound-dominance witnesses before any matched case exposure."
+      "preconditions": [
+        {
+          "id": "TYPED_WITNESS_INDEX_OR_DIRECT_OBJECTIVE_GATE_INPUT_CHANGED_SINCE_LAST_SATURATION",
+          "satisfied": false
+        }
+      ],
+      "notes": "Current typed witness index is saturated with zero immediate full-protocol closures. Do not repeat proof search until the witness-index blob or an admissible direct-objective gate receipt changes. Direct-objective replacement routes remain separate and may advance after exact-byte revalidation plus terminal evidence.",
+      "saturation_receipt": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V1.json"
     },
     {
       "id": "BIND_SHARED_PUBLIC_BENCHMARK_EXECUTION_ABI",
