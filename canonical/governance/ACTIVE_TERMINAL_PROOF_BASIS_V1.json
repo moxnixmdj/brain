@@ -38,10 +38,12 @@
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
       "portfolio": "T0",
-      "proof_state": "T0_OPEN_DOMAIN_MULTIPLEX_PROTOCOL_AND_SCORER_VERIFIED__ORACLE_EXTRACTION_POPULATION_BINDING_PENDING",
+      "proof_state": "T0_GEOMETRY_POPULATION_AND_ORACLE_IMPLEMENTED__POSITIONED_OCR_BRIDGE_IMPLEMENTED__INDEPENDENT_BRIDGE_VERIFICATION_AND_CLEAN_CANDIDATE_REFREEZE_PENDING",
       "route_requirement": "END_TO_END_DRAWING_TO_SOLID_WITH_HIDDEN_GLOBAL_GEOMETRY_ORACLE_AND_IDENTIFIABILITY_GATE",
       "blockers": [
-        "T0_GEOMETRY_CASE_SOURCE_OR_POPULATION_BINDING_AND_INDEPENDENT_ORACLE_EXTRACTION_ROUTE_NOT_YET_FROZEN"
+        "M1A_PINNED_POSITIONED_OCR_TSV_BRIDGE_INDEPENDENT_CI_PASS_PENDING",
+        "CAD_CLEAN_POST_CONTAMINATION_CANDIDATE_PACKAGE_REFREEZE_PENDING",
+        "CAD_T0_POST_REFREEZE_SOURCE_POPULATION_ORACLE_BINDING_REVALIDATION_PENDING"
       ],
       "route": "canonical/runtime/cad_orthographic_information_safe_proof.py",
       "candidate": "canonical/runtime/cad_orthographic_information_safe_candidate.py",
@@ -64,7 +66,10 @@
         "WHOLE_COMPOSED_M1A_OPEN_DOMAIN_PARITY",
         "M1B_GEOMETRY_CLASS_COVERAGE_BEYOND_CURRENT_VERIFIED_GRAMMARS"
       ],
-      "scorer_independent_verification": "canonical/verification/CAD_T0_MULTIPLEX_SCORER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "scorer_independent_verification": "canonical/verification/CAD_T0_MULTIPLEX_SCORER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "positioned_ocr_bridge": "canonical/runtime/positioned_ocr_tesseract_bridge.py",
+      "positioned_ocr_gap_reconciliation": "canonical/reasoning/2026-10-02_CAD_M1A_POSITIONED_OCR_INTERFACE_GAP_V1.json",
+      "candidate_contamination_rule": "CURRENT_PRE_BRIDGE_FREEZE_MAY_BE_SPENT_DIAGNOSTIC_ONLY_AFTER_RUNTIME_CHANGE__PROMOTION_REQUIRES_FRESH_CLEAN_REFREEZE_AND_POST_FREEZE_CASES"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
@@ -309,7 +314,7 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 7,
   "execution_authority": false,
-  "next": "CLOSE_REMAINING_FIVE_NONDOMINATED_ACTIVE_TERMINAL_ROUTE_BINDINGS__NO_FRESH_TERMINAL_WAVE_BEFORE_12_OF_12_AND_PREQUALIFICATION_PASS",
+  "next": "CLOSE_CAD_POSITIONED_OCR_VERIFICATION_AND_CLEAN_REFREEZE__THEN_CLOSE_REMAINING_OPEN_ROUTE_OBJECTIVE_ORACLE_BINDINGS__NO_TERMINAL_WAVE_BEFORE_12_OF_12",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
