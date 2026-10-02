@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_EARLIEST_NONIMPLICATION_CERTIFICATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PERMANENT_FAIL_CLOSED_SEMANTIC_GUARD__ZERO_CREDIT",
+  "objective": "Prevent a future recovery ceiling lift from treating the frozen P1 disjunction EARLIEST_OR_CRITICAL as proof of the stricter normalized Opus55 atom earliest causal failure localization.",
+  "target": {
+    "predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+    "required_atom": "dimension:earliest_causal_failure_localization",
+    "source": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+    "git_blob_sha": "0910ce3a2351fc439e03a1fa2ae708fb3c6463ef"
+  },
+  "current_source_literal": {
+    "binding": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "literal": "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE"
+  },
+  "countermodel": {
+    "critical_causal_failure_localized": true,
+    "earliest_causal_failure_localized": false,
+    "source_disjunction_satisfied": true,
+    "strict_target_atom_satisfied": false
+  },
+  "logical_result": "SOURCE_LITERAL_DOES_NOT_IMPLY_STRICT_TARGET_ATOM",
+  "current_invalid_derivation": {
+    "relation": "canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json",
+    "mapping": "earliest causal failure localization <- EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+    "ceiling_derivation": "causal_localization observed_bound=1 theoretical_bound=1 from the same disjunctive source check",
+    "disposition": "FAIL_CLOSED__NO_STRICT_EARLIEST_OR_CAUSAL_LOCALIZATION_CEILING_CREDIT"
+  },
+  "independent_of_execution_scope_quarantine": true,
+  "reason": "The existing P1 execution-scope quarantine is sufficient to block the current lift, but it is not a proof that the semantic relation becomes valid once execution scope is repaired. This certificate is a separate permanent logical guard.",
+  "repair_condition": "Bind a machine-verified source check that entails strict earliest causal failure localization, or explicitly change the frozen target protocol through its lawful supersession process. A critical-only success is insufficient.",
+  "runtime_guard": "canonical/runtime/recovery_t0_t2_acceptance_ceiling_lifter_v1.py::_semantic_relation_errors",
+  "tests": "canonical/tests/test_recovery_t0_t2_acceptance_ceiling_lifter_v1.py",
+  "hard_rules": [
+    "OR_DOES_NOT_IMPLY_LEFT_DISJUNCT",
+    "NO_1_0_TARGET_CEILING_FROM_A_WEAKER_SOURCE_DISJUNCTION",
+    "EXECUTION_SCOPE_REPAIR_DOES_NOT_AUTOMATICALLY_REPAIR_SEMANTIC_IMPLICATION",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
