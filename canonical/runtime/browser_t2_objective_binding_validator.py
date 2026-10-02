@@ -12,6 +12,7 @@ from pathlib import Path
 
 from canonical.runtime import browser_state_information_safe_proof as proof
 from canonical.runtime import browser_state_information_safe_candidate as candidate
+from canonical.runtime.objective_route_promotion_transition import validate_promotion_transition
 
 BINDING="canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json"
 
@@ -106,8 +107,16 @@ def validate(root: Path) -> dict:
     ):
         if gates.get(key) is not True:
             errors.append(f"ROUTE_GATE_NOT_FROZEN:{key}")
-    if gates.get("independent_verification_pass") is not False:
-        errors.append("INDEPENDENT_VERIFICATION_MUST_REMAIN_FALSE_BEFORE_EXTERNAL_RECEIPT")
+    errors.extend(
+        validate_promotion_transition(
+            root,
+            b,
+            binding_path=BINDING,
+            behavior_id="BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+            prepromotion_status="FROZEN_PREWAVE_BINDING__SELECTION_KERNEL_REBOUND__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+            promoted_status="FROZEN_PREWAVE_BINDING__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_TERMINAL_RESULTS",
+        )
+    )
 
     return {
         "schema":"PROJECT_BRAIN_BROWSER_T2_OBJECTIVE_BINDING_VALIDATION_V1",
