@@ -7,7 +7,8 @@
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
     "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
     "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json",
-    "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json"
+    "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
+    "canonical/reasoning/2026-10-02_CAD_OPEN_DOMAIN_PROOF_MODE_RECONCILIATION_V1.json"
   ],
   "rules": {
     "finite_or_formal": "SCOPE_EQUIVALENCE_OR_EXHAUSTIVE_DOMAIN_PROOF_REQUIRED",
@@ -19,8 +20,15 @@
   "classifications": [
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
-      "mode": "FINITE_OR_FORMAL_SCOPE_EQUIVALENT",
-      "disposition": "KEEP_CURRENT_SCOPE_GATE_PATH"
+      "mode": "T0_MULTIPLEXED_OPEN_DOMAIN_OBJECTIVE_GEOMETRY",
+      "disposition": "FREEZE_T0_M1_OBJECTIVE_GEOMETRY_SCORER_POPULATION_INFORMATION_BOUNDARY_AND_POST_FREEZE_SELECTOR__NO_SYNTHETIC_WHOLE_DOMAIN_SUPERSET_PROOF",
+      "covered_by": [
+        "T0"
+      ],
+      "synthetic_superset_required": false,
+      "exact_opus_case_level_comparator_required_for_direct_m1_behavior": false,
+      "proof_mode_reconciliation": "canonical/reasoning/2026-10-02_CAD_OPEN_DOMAIN_PROOF_MODE_RECONCILIATION_V1.json",
+      "prewave_binding": "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
