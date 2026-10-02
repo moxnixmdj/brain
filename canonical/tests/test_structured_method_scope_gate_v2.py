@@ -10,11 +10,12 @@ class Tests(unittest.TestCase):
     def payload(self):
         return json.loads(INPUT.read_text(encoding="utf-8"))
 
-    def test_current_input_is_admissible(self):
+    def test_current_input_fails_closed_on_invariant_semantics_gap(self):
         out=evaluate(self.payload())
-        self.assertTrue(out["admissible"],out)
-        self.assertEqual(out["errors"],[])
-        self.assertEqual(out["covered_interaction_count"],8)
+        self.assertFalse(out["admissible"],out)
+        self.assertTrue(any(x.startswith("MISSING_REQUIRED_INTERACTIONS") for x in out["errors"]),out)
+        self.assertTrue(any(x.startswith("UNRESOLVED_REQUIRED_DIMENSIONS") for x in out["errors"]),out)
+        self.assertIn("NORMALIZED_INVARIANT_SEMANTIC_VALIDATION",out["errors"][0] if out["errors"] else "")
 
     def test_load_bearing_graph_oracle_leak_fails_closed(self):
         p=self.payload()
