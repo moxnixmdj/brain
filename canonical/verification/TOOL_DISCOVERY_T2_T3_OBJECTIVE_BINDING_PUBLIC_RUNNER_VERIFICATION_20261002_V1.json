@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_T2_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_HARDENED_SELECTION_KERNEL_BINDING_AND_VALIDATOR__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 687,
+  "public_pr_head_sha": "fe9ad47d60ec13b95373216063ccbabc4a270f90",
+  "public_merge_commit": "bea81b041611b10d281531bcb01a776af79b4062",
+  "workflow_run_id": 36968197198,
+  "workflow_job_id": 110716422744,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "c68ab0f9480dacc758171df74e891e1ac817c7d3",
+    "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json": "669afcde50302e76c1b0a1f6b186aaafa8730515",
+    "canonical/runtime/tool_discovery_t2_t3_objective_binding_validator.py": "c042cbc05e753f8d1454f134eca58a27a4d65051",
+    "canonical/tests/test_tool_discovery_t2_t3_objective_binding_validator.py": "4f5cf6472e8f33c1a032fbe84b4fafce80dab278"
+  },
+  "verified": [
+    "CURRENT_SELECTION_KERNEL_REBOUND_BINDING_EXACT",
+    "HARDENED_SELECTOR_PROTOCOL_IDENTITY_CHECK_PASS",
+    "SELECTION_KERNEL_PATH_AND_BLOB_BINDING_CHECK_PASS",
+    "TRANSITIVE_V1_ORACLE_DEPENDENCY_BOUND",
+    "ALL_BOUND_ROUTE_DEPENDENCIES_MATCH",
+    "SIX_CLASS_DIRECT_OBJECTIVE_TOOL_DISCOVERY_DIAGNOSTIC_PASS",
+    "HIDDEN_CAPABILITY_MATRIX_AND_IDEAL_ROUTE_NOT_CANDIDATE_VISIBLE",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "limitation": "PREWAVE_ROUTE_ADMISSION_ONLY__TERMINAL_AND_FAMILY_CREDIT_REMAIN_ZERO_UNTIL_T2_T3_TERMINAL_WAVE_AND_FINAL_OWNERSHIP_GATES",
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
