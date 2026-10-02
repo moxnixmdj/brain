@@ -1,0 +1,46 @@
+name: Freeze full Brain proof atom receipt scan v1
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/freeze_proof_atom_receipt_index_scan_v1.py"
+      - "canonical/tests/test_freeze_proof_atom_receipt_index_scan_v1.py"
+      - ".github/workflows/freeze-proof-atom-receipt-index-scan-v1.yml"
+  workflow_dispatch:
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: \${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_freeze_proof_atom_receipt_index_scan_v1 -v
+      - name: Freeze exact current scan
+        run: |
+          python -m canonical.runtime.freeze_proof_atom_receipt_index_scan_v1 > full-brain-proof-atom-receipt-index-scan-v1.json
+          python - <<'PY'
+          import json
+          p=json.load(open("full-brain-proof-atom-receipt-index-scan-v1.json"))
+          s=p["index_result"]
+          print("FULL_SCAN_BEGIN")
+          print(json.dumps(p,separators=(",",":"),sort_keys=True))
+          print("FULL_SCAN_END")
+          print(json.dumps({
+            "scanned_commit_sha":p["scanned_commit_sha"],
+            "scanned_tree_sha":p["scanned_tree_sha"],
+            "canonical_atom_count":s["canonical_atom_count"],
+            "scanned_file_count":s["scanned_file_count"],
+            "candidate_match_count":s["candidate_match_count"],
+            "atoms_with_candidate_matches":s["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":s["atoms_without_candidate_matches"],
+          },indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: full-brain-proof-atom-receipt-index-scan-v1
+          path: full-brain-proof-atom-receipt-index-scan-v1.json
