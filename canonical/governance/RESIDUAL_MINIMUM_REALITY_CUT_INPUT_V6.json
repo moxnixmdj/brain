@@ -1,9 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6",
   "date": "2026-10-02",
-  "status": "FROZEN_FOR_EXACT_SOLVER__FAITHFUL_TO_SOURCE_UNIVERSE",
+  "status": "FROZEN_FAITHFUL_CURRENT_SHARED_MECHANISM_FRONTIER",
   "source_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
   "source_universe_blob_sha": "7664a9373e36a0a867e6eb84d2d6984277a5089e",
+  "source_universe_commit": "e0729cb342358cf08266e3b843967b4b7f740987",
+  "supporting_post_freeze_evidence": [
+    {
+      "path": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json",
+      "commit": "1fca996c966b5428bb22ca4098137c4ec14f8b3b",
+      "consequence": "NO_ACTION_OR_COST_CHANGE__CONFIRMS_OLMO_HARVEST_STOP_AND_M0A_PROOF_ONLY"
+    }
+  ],
   "distinctions": [
     "M0A",
     "M1A",
@@ -17,23 +25,8 @@
         "M0A"
       ],
       "cost": 1,
-      "action_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V2.json"
-    },
-    {
-      "id": "A_M1A_COMPOSED_ROUTE_MATCHED_PARITY_V2",
-      "covers": [
-        "M1A"
-      ],
-      "cost": 1,
-      "action_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json"
-    },
-    {
-      "id": "A_M1B_MATCHED_GEOMETRY_COVERAGE_V3",
-      "covers": [
-        "M1B"
-      ],
-      "cost": 1,
-      "action_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json"
+      "action_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V2.json",
+      "clean_batch": true
     },
     {
       "id": "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1",
@@ -42,19 +35,48 @@
         "M1B"
       ],
       "cost": 1,
-      "source": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json#combined_evaluation_candidates"
+      "action_bundles": [
+        "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json",
+        "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json"
+      ],
+      "clean_batch": true,
+      "oracle_split": [
+        "M1A_INTERMEDIATE_NORMALIZED_FEATURE_CONSTRAINT_GRAPH",
+        "M1B_FINAL_GLOBAL_GEOMETRY_TOPOLOGY_MASS_CURVATURE_AND_COVERAGE"
+      ]
+    },
+    {
+      "id": "A_M1A_MATCHED_DRAWING_PARITY_ONLY_V2",
+      "covers": [
+        "M1A"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json",
+      "dominated_by": "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
+    },
+    {
+      "id": "A_M1B_MATCHED_GEOMETRY_COVERAGE_ONLY_V3",
+      "covers": [
+        "M1B"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json",
+      "dominated_by": "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
     }
   ],
   "cost_model": {
-    "unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_UNIT",
-    "objective": "MINIMIZE_NEW_REALITY_UNITS__THEN_OBSERVATION_COUNT__THEN_LEXICOGRAPHIC_ID",
-    "semantics": "M0A_REQUIRES_ONE_NEW_CLEAN_MATCHED_CROSS_DOMAIN_BATCH__M1A_AND_M1B_MAY_BE_JOINTLY_SCORED_FROM_ONE_NEW_CLEAN_DRAWING_BATCH_WITH_INDEPENDENT_INTERMEDIATE_AND_FINAL_ORACLES"
+    "unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_BATCH",
+    "objective": "MINIMIZE_NEW_REALITY_UNITS__THEN_OBSERVATION_COUNT",
+    "semantics": "ONE_NEW_CLEAN_M1_DRAWING_BATCH_MAY_SCORE_M1A_INTERMEDIATE_GRAPH_AND_M1B_FINAL_GEOMETRY_WITH_SEPARATELY_FROZEN_ORACLES__M0A_REQUIRES_SEPARATE_CROSS_DOMAIN_SEMANTIC_BATCH"
+  },
+  "contamination_boundaries": {
+    "M0A": "canonical/governance/M0A_CONTEXTUAL_HELDOUT_EXPOSURE_RECONCILIATION_V1.json",
+    "rule": "OLD_EXPOSED_M0A_HELDOUT_CASES_FORBIDDEN__NEW_CLEAN_CASES_REQUIRED"
   },
   "freeze": {
     "frozen": true,
-    "source_universe_exact_blob_required": true,
-    "rule": "ANY_NEW_ADMISSIBLE_ACTION_CHANGED_COST_CHANGED_OBLIGATION_CHANGED_BUNDLE_OR_SOURCE_UNIVERSE_BLOB_INVALIDATES_V6"
+    "rule": "ANY_CHANGED_SOURCE_UNIVERSE_BLOB_CHANGED_ACTION_CHANGED_COST_CHANGED_COVERAGE_OR_NEW_DOMINATING_OBSERVATION_INVALIDATES_V6"
   },
-  "fresh_terminal_evidence_consumed_so_far": 0,
+  "new_reality_units_consumed_so_far": 0,
   "incremental_spend_usd": 0
 }

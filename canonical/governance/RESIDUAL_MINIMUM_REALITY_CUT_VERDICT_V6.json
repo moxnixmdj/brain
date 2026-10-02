@@ -1,8 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6",
   "date": "2026-10-02",
-  "status": "EXACT_MINIMUM__PENDING_INDEPENDENT_RECOMPUTATION",
+  "status": "EXACT_MINIMUM__CURRENT_FROZEN_V6_SHARED_MECHANISM_FRONTIER__ZERO_FRESH_EVIDENCE_SPENT_BY_COMPUTATION",
   "source_input": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6.json",
+  "source_universe_blob_sha": "7664a9373e36a0a867e6eb84d2d6984277a5089e",
   "exact_minimum": true,
   "unresolved_distinctions": [
     "M0A",
@@ -16,11 +17,21 @@
   "observation_count": 2,
   "total_cost": 2,
   "rule": "MINIMUM_COST__THEN_MINIMUM_COUNT__THEN_LEXICOGRAPHIC_ID",
-  "interpretation": {
-    "M0A": "ONE_NEW_CLEAN_PREDECLARED_CROSS_DOMAIN_SEMANTIC_PARITY_BATCH",
-    "M1": "ONE_NEW_CLEAN_PREDECLARED_DRAWING_BATCH_WITH_FROZEN_INDEPENDENT_M1A_INTERMEDIATE_AND_M1B_FINAL_ORACLES"
+  "dominance": [
+    "M1A_ONLY_PLUS_M1B_ONLY_COST_2_FOR_M1_WHILE_COMBINED_END_TO_END_M1_BATCH_COSTS_1_AND_COVERS_BOTH",
+    "NO_ZERO_REALITY_ACTION_REMAINS_THAT_IS_PROVEN_TO_DOMINATE_THE_SELECTED_MATCHED_PROOFS"
+  ],
+  "execution_order": {
+    "parallel_independent_cut_members": [
+      "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
+      "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
+    ],
+    "freeze_oracles_before_source_exposure": true,
+    "one_shot_no_replay": true,
+    "compile_failure_to_localized_residual": true,
+    "recompute_global_terminal_proof_cut_after_results": true
   },
-  "authorization": "NO_BATCH_EXECUTION_UNTIL_V6_INDEPENDENT_VERIFICATION_PASS_AND_BATCH_PROTOCOLS_FROZEN",
+  "authorization_boundary": "ONLY_THE_TWO_SELECTED_CLEAN_BATCHES_ARE_ADMISSIBLE_NEW_SHARED_MECHANISM_REALITY_QUERIES__THIS_DOES_NOT_AUTHORIZE_ARBITRARY_17_FAMILY_BENCHMARK_EXECUTION",
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
