@@ -32,6 +32,8 @@ TARGET_DIMS={
 "repair selection","recovery after injected failure",
 }
 MUTATION_RULE="ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE"
+WEAK_EARLIEST_DISJUNCTION="EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE"
+STRICT_EARLIEST_CHECK="EARLIEST_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE"
 ROOT=Path(__file__).resolve().parents[2]
 P1_SCOPE_QUARANTINE="canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json"
 
@@ -44,6 +46,22 @@ def _scope_quarantine_error()->str|None:
     if isinstance(blocked,list) and "P1_TO_RECOVERY_ACCEPTANCE_SEMANTIC_TRANSPORT" in blocked:
         return "P1_EXECUTED_TERMINAL_SCOPE_MISMATCH_QUARANTINE_ACTIVE"
     return None
+
+def _semantic_relation_errors(relation:Mapping[str,Any])->list[str]:
+    """Reject semantic weakening even if the execution-scope quarantine is later cleared."""
+    errors:list[str]=[]
+    maps=relation.get("target_dimension_to_source_checks")
+    if isinstance(maps,Mapping):
+        earliest=maps.get("earliest causal failure localization")
+        if not isinstance(earliest,list) or STRICT_EARLIEST_CHECK not in earliest:
+            errors.append("RELATION_STRICT_EARLIEST_TARGET_HAS_NO_STRICT_SOURCE_PROOF")
+        if isinstance(earliest,list) and WEAK_EARLIEST_DISJUNCTION in earliest:
+            errors.append("RELATION_EARLIEST_TARGET_WEAKENED_TO_EARLIEST_OR_CRITICAL")
+    ceilings=relation.get("acceptance_to_objective_floor_ceiling")
+    causal=ceilings.get("causal_localization") if isinstance(ceilings,Mapping) else None
+    if isinstance(causal,Mapping) and causal.get("source_check")==WEAK_EARLIEST_DISJUNCTION:
+        errors.append("CAUSAL_LOCALIZATION_CEILING_DERIVED_FROM_WEAKER_DISJUNCTION")
+    return sorted(set(errors))
 
 def _fail(errors:list[str])->dict[str,Any]:
     return {"schema":SCHEMA,"status":"FAIL_CLOSED","pass":False,"errors":sorted(set(errors)),
@@ -76,6 +94,7 @@ def evaluate(*,protocols:Mapping[str,Any],registry:Mapping[str,Any],predicates:M
     quarantine_error=_scope_quarantine_error()
     if quarantine_error is not None:
         e.append(quarantine_error)
+    e.extend(_semantic_relation_errors(relation))
     p=_protocol(protocols)
     if p is None: e.append("RECOVERY_PROTOCOL_MISSING_OR_DUPLICATE")
     else:
