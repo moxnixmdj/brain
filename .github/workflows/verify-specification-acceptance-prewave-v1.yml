@@ -1,0 +1,26 @@
+name: Verify specification acceptance prewave binding
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/SPECIFICATION_INDEPENDENT_ACCEPTANCE_PREWAVE_BINDING_V1.json
+      - canonical/runtime/verify_specification_acceptance_prewave_v1.py
+      - canonical/tests/test_specification_acceptance_prewave_v1.py
+      - canonical/runtime/m0a_raw_source_brain_candidate_v2.py
+      - canonical/runtime/m0a_raw_source_terminal_suite_v2.py
+      - canonical/runtime/independent_acceptance_model.py
+      - canonical/runtime/requirement_acceptance_compiler.py
+      - canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_specification_acceptance_prewave_v1
