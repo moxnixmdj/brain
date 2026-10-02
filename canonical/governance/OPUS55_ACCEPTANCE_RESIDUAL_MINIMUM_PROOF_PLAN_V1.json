@@ -312,12 +312,8 @@
   "incremental_spend_usd": 0,
   "terminal_replay_permitted": false,
   "current_execution_frontier": {
-    "clean_case_authorized_public_bar_routes": 0,
+    "clean_case_authorized_public_bar_routes": 1,
     "blocked_ready_routes": [
-      {
-        "route": "TERMINAL_BENCH_4_CURRENT_HARBOR_ROUTE",
-        "reason": "EXISTING_BRAIN_OWNED_MINI_SWE_SUPERPOWERS_CONFIGURATION_FOUND__V3_GENERAL_SUBSTRATE_MATERIALITY_COUNTERFACTUAL_PENDING__CLEAN_CASE_SPEND_STILL_FORBIDDEN"
-      },
       {
         "route": "AUTOMATIONBENCH_PUBLIC_600_ROUTE",
         "reason": "NO_BRAIN_INTERNALIZED_OPERATIVE_AUTOMATION_CANDIDATE_BOUND"
@@ -327,12 +323,22 @@
         "reason": "NO_BRAIN_INTERNALIZED_OPERATIVE_INSTRUCTION_FOLLOWING_SCOPE_JUDGMENT_CANDIDATE_BOUND"
       }
     ],
-    "next_exact_action": "FINISH_SYNTHETIC_CODING_GENERAL_SUBSTRATE_COUNTERFACTUAL__IF_PASS_BIND_MINI_SWE_SUPERPOWERS_TO_HARBOR_AND_RERUN_SOURCE_GATE_V2__IN_PARALLEL_CONTINUE_SEARCH_FOR_EXISTING_AUTOMATION_AND_INSTRUCTION_FOLLOWING_CONFIGURATIONS__DO_NOT_EXPOSE_ACCEPTANCE_CASES",
+    "next_exact_action": "EXECUTE_ONLY_TERMINAL_BENCH_4_FRESH_CASES_NEEDED_FOR_THE_OPEN_CODING_PUBLIC_BAR_PREDICATE_UNDER_THE_ADMITTED_CONFIGURED_ROUTE__NO_REPLAY__STOP_ON_MATERIAL_FAILURE__IN_PARALLEL_CONTINUE_EXISTING_RECEIPT_SATURATION_FOR_OTHER_ATOMIC_PREDICATES",
     "discovered_reusable_coding_configuration": {
       "path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
       "git_blob_sha": "d63d7656c7da293a7c22c32042a4f03f2d13593d",
-      "state": "BRAIN_OWNED_CONFIGURATION_EXISTS__FRESH_TB4_WAL_TASK_PASS__GENERAL_SUBSTRATE_MATERIALITY_NOT_YET_PROVEN_FOR_PUBLIC_BAR_EXECUTION"
-    }
+      "state": "BRAIN_OWNED_CONFIGURATION_EXISTS__FRESH_TB4_WAL_TASK_PASS__INDEPENDENT_MATERIALITY_PASS__SOURCE_GATE_V2_PASS__CLEAN_CASE_EXECUTION_AUTHORIZED__SCORE_OPEN"
+    },
+    "authorized_routes": [
+      {
+        "route": "TERMINAL_BENCH_4_MINI_SWE_SUPERPOWERS_SESSION_ROUTE",
+        "family": "ADVANCED_AGENTIC_CODING",
+        "source_gate": "INDEPENDENT_PASS",
+        "score_state": "OPEN",
+        "next": "EXECUTE_DISTINCT_FRESH_TB4_CASES_UNDER_FROZEN_CONFIGURED_ROUTE__NO_REPLAY"
+      }
+    ],
+    "coding_source_gate_evidence": "canonical/verification/CODING_TB4_SOURCE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "v1_source_gate_correction": {
     "superseded_gate": "canonical/runtime/acceptance_capability_source_gate_v1.py",
