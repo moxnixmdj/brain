@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__GLOBAL_SURFACE_DOMINANCE_V3_RECONCILED__PREWAVE_INPUTS_CLOSED__AWAIT_DETERMINISTIC_REDUCER_VERDICT",
+  "status": "ACTIVE_FAIL_CLOSED__ALL_14_NAMED_BENCHMARK_EXECUTION_ROUTES_DELETED_BY_VERIFIED_GLOBAL_DOMINANCE_V3__REPLACEMENT_PROOF_POPULATION_BINDINGS_REMAIN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -174,9 +174,11 @@
   ],
   "execution_authority": false,
   "next": [
-    "RUN_DETERMINISTIC_TERMINAL_PREQUALIFICATION_REDUCER_ON_THIS_CANONICAL_STATE",
-    "REQUIRE_FAIL_CLOSED_VERDICT_WITH_ZERO_FAILED_PREDICATES_BEFORE_AUTHORIZATION",
-    "IF_PASS_FREEZE_AUTHORIZED_BRAIN_HEAD_AND_EXECUTE_T0_T1_T2_T3_TERMINAL_PROOF_POPULATIONS_IN_PARALLEL"
+    "PROMOTE_FOUR_CONTRACT_NATIVE_BRAIN_CANDIDATE_ONLY_IF_INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "BIND_FRESH_TERMINAL_POPULATIONS_FOR_REMAINING_SIX_BEHAVIORAL_ROUTES",
+    "FREEZE_POST_FREEZE_SEED_AND_POPULATION_SELECTION_PROTOCOL_FOR_ALL_TEN_OBLIGATIONS",
+    "RUN_CANONICAL_TERMINAL_PREQUALIFICATION_REDUCER",
+    "IF_AND_ONLY_IF_REDUCER_PASS__FREEZE_CANDIDATE_COMMIT_AND_EXECUTE_T0_T1_T2_T3_REPLACEMENT_WAVE_IN_PARALLEL"
   ],
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -192,11 +194,11 @@
     "public_evaluation_route_matrix_frozen": true,
     "every_surface_zero_cost_route_frozen": true,
     "every_surface_oracle_and_verifier_binding_frozen": true,
-    "every_portfolio_task_case_harness_metric_stop_rule_and_mutation_set_frozen": true,
+    "every_portfolio_task_case_harness_metric_stop_rule_and_mutation_set_frozen": false,
     "brain_route_and_dependency_manifest_frozen": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
     "no_known_opaque_target_capability_provider_in_operative_brain_route": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
     "no_known_unresolved_composition_defect_before_wave": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
-    "four_portfolios_pairwise_execution_independent": true,
+    "four_portfolios_pairwise_execution_independent": "NAMESPACE_LEVEL_PASS__REPLACEMENT_POPULATION_BINDINGS_PENDING",
     "livebench_if_verifier_source_bytes_frozen": true,
     "finance_and_accounting_index_surface_accounted_for": true,
     "proof_route_dominance_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -246,7 +248,9 @@
     "automationbench_public_route_preflight_pass": "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json",
     "global_terminal_surface_dominance_v3_independently_verified": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
     "required_named_benchmark_execution_route_count": 0,
-    "replacement_direct_proof_routes_frozen": true
+    "replacement_direct_proof_routes_frozen": true,
+    "all_14_named_benchmark_execution_routes_redundant": "INDEPENDENT_PASS__canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "global_terminal_replacement_proof_wave_frozen": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -266,7 +270,11 @@
     "portfolio_prequalification_input_blocker_count": 0
   },
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
-  "remaining_irreducible_prequalification_blockers": [],
+  "remaining_irreducible_prequalification_blockers": [
+    "INDEPENDENT_PASS_REQUIRED_FOR_FOUR_CONTRACT_NATIVE_BRAIN_CANDIDATE_ADAPTERS",
+    "FRESH_TERMINAL_CANDIDATE_AND_POPULATION_BINDINGS_REQUIRED_FOR_ACCEPTANCE_ARTIFACT_RESEARCH_TOOL_GROUNDING_AND_DELEGATION_ROUTES",
+    "POST_FREEZE_SEED_POPULATION_SELECTION_AND_FULL_FOUR_PORTFOLIO_BINDING_MUST_BE_MACHINE_FROZEN"
+  ],
   "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "finite_population_proof_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -308,5 +316,6 @@
   "livebench_if_hermetic_input_binding": "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
   "livebench_if_adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json",
-  "global_terminal_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json"
+  "global_terminal_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json",
+  "global_terminal_replacement_proof_wave": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json"
 }
