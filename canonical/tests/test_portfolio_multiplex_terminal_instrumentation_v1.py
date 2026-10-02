@@ -1,10 +1,12 @@
 import unittest
+from pathlib import Path
 
 from canonical.runtime.portfolio_multiplex_terminal_instrumentation_v1 import (
     BINDINGS,
     bound_behavior_ids,
     validate_parent_observation,
     reduce_behavior_receipts,
+    static_binding_preflight,
 )
 
 
@@ -27,6 +29,12 @@ class Tests(unittest.TestCase):
             "candidate_visible_keys": ["task", "visible_evidence"],
             "claims_behavior_credit": False,
         }
+
+
+    def test_exact_frozen_binding_blobs_match_live_tree(self):
+        out = static_binding_preflight(Path("."))
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["binding_count"], 7)
 
     def test_all_seven_bound(self):
         self.assertEqual(len(bound_behavior_ids()), 7)
