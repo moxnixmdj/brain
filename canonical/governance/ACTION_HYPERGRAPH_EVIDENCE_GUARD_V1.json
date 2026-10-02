@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_HYPERGRAPH_EVIDENCE_GUARD_GOVERNANCE_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__DERIVED_PRECONDITION_RECEIPT_BINDING__ZERO_CREDIT",
+  "objective": "Prevent stale action-frontier booleans by binding declared derived preconditions to exact canonical receipt assertions.",
+  "runtime": "canonical/runtime/action_hypergraph_evidence_guard_v1.py",
+  "tests": "canonical/tests/test_action_hypergraph_evidence_guard_v1.py",
+  "guarded_frontier": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+  "hard_rules": [
+    "HANDWRITTEN_SATISFIED_STATE_MAY_NOT_DISAGREE_WITH_DECLARED_CANONICAL_RECEIPT_ASSERTION",
+    "UNKNOWN_OR_UNREADABLE_EVIDENCE_FAILS_CLOSED",
+    "GUARD_OUTPUT_GRANTS_ZERO_EXECUTION_PROMOTION_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
