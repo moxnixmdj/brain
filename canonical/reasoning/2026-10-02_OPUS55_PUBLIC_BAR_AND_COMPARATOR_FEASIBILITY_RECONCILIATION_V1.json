@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "status": "PUBLIC_FIXED_BARS_EXPANDED__EXACT_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND__PROXY_SUBSTITUTION_FORBIDDEN",
+  "comparator_evidence": [
+    {
+      "source": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+      "conclusion": "FREE_ARENA_DIRECT_GUEST_ROUTE_FALSIFIED__NO_CLEAN_CASE_EXPOSURE"
+    },
+    {
+      "source": "https://www.anthropic.com/claude/opus",
+      "conclusion": "OPUS_5_5_DISTRIBUTION_IS_PAID_CLAUDE_TIERS_AND_PAID_API_OR_CLOUD_CHANNELS__NO_FREE_CASE_LEVEL_ROUTE_ESTABLISHED"
+    }
+  ],
+  "independent_public_bars": [
+    {
+      "family_or_scope": "FINANCIAL_ANALYSIS",
+      "benchmark": "Vals Finance Agent v2",
+      "opus_5_5": "58.59% ±0.17",
+      "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "role": "DIRECT_PUBLIC_FIXED_BAR_FOR_CORE_FINANCIAL_ANALYST_TASKS"
+    },
+    {
+      "family_or_scope": "PROFESSIONAL_KNOWLEDGE_WORK_AND_ARTIFACTS",
+      "benchmark": "AA-Briefcase v1.1",
+      "opus_5_5": "1822 Elo",
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "role": "DIRECT_PUBLIC_FIXED_BAR_FOR_LONG_HORIZON_KNOWLEDGE_WORK_WITH_SPREADSHEETS_PRESENTATIONS_MEMOS_AND_TOOL_USE"
+    },
+    {
+      "family_or_scope": "UNKNOWN_DOMAIN_ADAPTATION",
+      "benchmark": "Vals MysteryMechanism",
+      "opus_5_5": "49.55% ±3.36",
+      "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "role": "DIRECT_PUBLIC_FIXED_BAR_FOR_UNKNOWN_MECHANISM_INFERENCE_WITH_ACTIVE_EXPERIMENTATION"
+    },
+    {
+      "family_or_scope": "AUTONOMOUS_RESEARCH_SUPPORTING",
+      "benchmark": "Vals RSI Index",
+      "opus_5_5": "37.31%",
+      "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "role": "SUPPORTING_PUBLIC_BAR_FOR_AUTONOMOUS_LLM_R_AND_D__NOT_WHOLE_SCIENTIFIC_RESEARCH_FAMILY"
+    },
+    {
+      "family_or_scope": "COMPUTER_USE_SUPPORTING",
+      "benchmark": "Vals CUA-bench",
+      "opus_5_5": "14.00%",
+      "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "role": "SUPPORTING_COMPUTER_USE_BAR__DOES_NOT_REPLACE_FROZEN_OSWORLD_PROTOCOL_WITHOUT_COMPARABILITY"
+    },
+    {
+      "family_or_scope": "CODING_SUPPORTING",
+      "benchmark": "Vals ProgramBench",
+      "opus_5_5": "18.50% ±2.75",
+      "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "role": "SUPPORTING_PROGRAM_SOLVING_BAR__NOT_DELEGATION_PROOF"
+    },
+    {
+      "family_or_scope": "RELIABILITY_SUPPORTING",
+      "benchmark": "Vals SRE Bench",
+      "opus_5_5": "33.59% ±2.92",
+      "source": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "role": "SUPPORTING_RELIABILITY_EVIDENCE__NOT_CAUSAL_RECOVERY_PROOF_WITHOUT_TASK_CONTRACT_MATCH"
+    }
+  ],
+  "benchmark_scope_evidence": [
+    {
+      "source": "https://www.vals.ai/methodology",
+      "fact": "VALS_BENCHMARKS_EXERCISE_TOOL_USE_MULTIMODALITY_LONG_CONTEXT_AND_LONG_HORIZON_BUT_EACH_BENCHMARK_CREDITS_ONLY_ITS_DECLARED_SCOPE"
+    },
+    {
+      "source": "https://www.vals.ai/benchmarks/fabv2",
+      "fact": "FINANCE_AGENT_V2_TESTS_CORE_FINANCIAL_ANALYST_WORK_ACROSS_NINE_CATEGORIES_WITH_EXPERT_REVIEW_AND_HELDOUT_SPLITS"
+    },
+    {
+      "source": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "fact": "AA_BRIEFCASE_TESTS_REALISTIC_LONG_HORIZON_BUSINESS_WORKFLOWS_AND_DELIVERABLES_WITH_RUBRIC_ANALYTICAL_AND_PRESENTATION_SCORING"
+    }
+  ],
+  "protocol_replacements": [
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "prior_dependency": "MATCHED_OPUS55_BEHAVIORAL_PARITY_AS_PRIMARY_WHOLE_FAMILY_ROUTE",
+      "replacement": "FINANCE_AGENT_V2_GE_58_59_PERCENT_ON_COMPARABLE_HARNESS_PLUS_EXPLICIT_SCOPE_AUDIT_FOR_UNREPRESENTED_STRUCTURED_METHOD_AND_COMPLIANCE_LEAVES",
+      "comparator_needed_for_represented_scope": false
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "prior_dependency": "MATCHED_OPUS55_QUALITY_COMPARATOR_FOR_ALL_ARTIFACT_QUALITY",
+      "replacement": "AA_BRIEFCASE_V1_1_GE_1822_ELO_FOR_COVERED_PROFESSIONAL_DELIVERABLE_SCOPE_PLUS_ABSOLUTE_NATIVE_FILE_MECHANICAL_GATES_PLUS_EXPLICIT_UNCOVERED_FORMAT_SCOPE",
+      "comparator_needed_for_represented_scope": false
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "prior_dependency": "MATCHED_OPUS55_UNSEEN_DOMAIN_COMPARATOR_AS_PRIMARY",
+      "replacement": "MYSTERYMECHANISM_GE_49_55_PERCENT_ON_COMPARABLE_VALS_SETUP_PLUS_EXPLICIT_SCOPE_AUDIT_FOR_TOOL_TRANSFER_AND_ABSTENTION_LEAVES_NOT_MEASURED",
+      "comparator_needed_for_represented_scope": false
+    }
+  ],
+  "still_comparator_or_equivalent_evidence_blocked": [
+    "COMPLEX_MULTI_TOOL_AGENCY_WHOLE_SCOPE",
+    "SUBAGENT_DELEGATION_AND_COORDINATION_OPEN_ENDED_ADAPTIVE_QUALITY",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY_WHOLE_SCOPE_CAUSAL_RECOVERY_QUALITY",
+    "COMMUNICATION_AND_SYNTHESIS_SUBJECTIVE_QUALITY_BEYOND_OBJECTIVE_GROUNDING_GATES",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING_OPEN_ENDED_TRANSFER_QUALITY",
+    "MULTI_CAPABILITY_COMPOSITION_WHOLE_SCOPE_INTERACTION_QUALITY"
+  ],
+  "rule": "PUBLIC_BAR_REPLACES_DIRECT_OPUS_COMPARATOR_ONLY_FOR_SCOPE_EQUIVALENT_BEHAVIOR__NEVER_STRETCH_AGGREGATE_BENCHMARKS_TO_UNMEASURED_LEAVES",
+  "next": "REWRITE_TERMINAL_PROTOCOLS_TO_USE_SCOPE_EQUIVALENT_PUBLIC_FIXED_BARS_FIRST__RETAIN_MATCHED_COMPARATOR_ONLY_FOR_TRULY_UNCOVERED_OPEN_ENDED_QUALITY",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
