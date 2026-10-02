@@ -55,7 +55,8 @@
         "canonical/capabilities/opus55/PLANAR_PERSPECTIVE_REGISTRATION_001.json",
         "canonical/capabilities/opus55/ENGINEERING_FEATURE_NOTATION_001.json",
         "canonical/capabilities/opus55/DRAWING_PERSPECTIVE_REGISTRATION_001.json",
-        "canonical/capabilities/opus55/M1A_DRAWING_HARDENING_COMPONENTS_001.json"
+        "canonical/capabilities/opus55/M1A_DRAWING_HARDENING_COMPONENTS_001.json",
+        "canonical/capabilities/opus55/DRAWING_PREPROCESS_CONSENSUS_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -66,7 +67,7 @@
         "LOCAL_NONPLANAR_WARP_OR_REGISTRATION_OUTSIDE_BOUNDED_GLOBAL_ROTATION_AND_PLANAR_PROJECTIVE_RECTIFICATION",
         "COMPOUND_VISUAL_FEATURE_SEMANTICS",
         "ENGINEERING_NOTATION_OUTSIDE_VERIFIED_BOUNDED_DIMENSION_THREAD_TOLERANCE_AND_FCF_GRAMMARS",
-        "ROBUSTNESS_OUTSIDE_VERIFIED_CLEAN_AND_MILD_DEGRADATION_SURFACES"
+        "ROBUSTNESS_WHEN_DETERMINISTIC_PREPROCESSING_ROUTES_DO_NOT_REACH_STABLE_PLAUSIBLE_CONSENSUS__INCLUDING_SEVERE_OCCLUSION_BLUR_DAMAGE_OR_SHARED_SYSTEMATIC_ERROR"
       ],
       "complete_action_bundle": false,
       "verification_receipts": {
@@ -125,6 +126,14 @@
           "strict_gdt_run_id": 36943601544,
           "conclusion": "success",
           "scope": "PLANAR_PROJECTIVE_RECTIFICATION__MILD_DEGRADED_RASTER_NORMALIZATION__BOUNDED_FCF_NOTATION__DECLARED_EDITION_FEATURE_TYPE_FCF_LEGALITY"
+        },
+        "drawing_preprocess_consensus": {
+          "passing_run_id": 36943978384,
+          "failed_predecessor_run_id": 36943899531,
+          "repair_commit": "92072145c3431560120167a02358c7b25b6bbeb4",
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/DRAWING_PREPROCESS_CONSENSUS_001.json",
+          "scope": "DEGRADED_RASTER_NORMALIZATION_WHEN_AT_LEAST_THREE_INDEPENDENT_DETERMINISTIC_PREPROCESSING_ROUTES_AGREE__PLAUSIBILITY_GATED"
         }
       }
     },
@@ -158,7 +167,7 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "M0A_AND_M1A_STILL_BLOCK_EXACT_CUT__M0A_EXPLICIT_NAMED_DEFINITION_PROPAGATION_CLOSED__M0A_REMAINS_CONTEXTUAL_EXPLICIT_SEMANTICS_NONEXACT_REFERENCE_SCOPE_LONG_RANGE_RELATIONS_AND_NONDECIDABLE_SEMANTIC_RESIDUE__M1A_REMAINS_NARROWED__FREEZE_ONLY_AFTER_COMPLETE_SELF_CONTAINED_ACTION_BUNDLES",
+  "next": "M0A_AND_M1A_STILL_BLOCK_EXACT_CUT__M1A_ROBUSTNESS_NOW_CONSENSUS_GATED__REMAINING_M1A_IS_NONPLANAR_OR_GEOMETRY_POOR_REGISTRATION_COMPOUND_VISUAL_SEMANTICS_RESIDUAL_ENGINEERING_NOTATION_AND_NO_CONSENSUS_DEGRADATION__M0A_REMAINS_PRIMARY_SHARED_SEMANTIC_BLOCKER",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -166,7 +175,7 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "newly_verified_components": 12,
-    "note": "M0A explicit named definition/reference propagation independently verified and promoted at exact scope; exact cut remains unauthorized."
+    "newly_verified_components": 13,
+    "note": "Degraded drawing deterministic preprocessing consensus independently verified; M1A robustness residual narrowed; exact cut remains unauthorized."
   }
 }
