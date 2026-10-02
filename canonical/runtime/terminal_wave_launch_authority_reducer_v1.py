@@ -7,8 +7,7 @@ requires:
 3. exact 12-route executor manifest;
 4. current executor + test Git blob identities;
 5. independent public-runner receipt for every current executor blob;
-6. four real independently verified T0/T1/T2/T3 parent-case producers;
-7. zero terminal results/evidence before launch.
+6. four real independently verified T0/T1/T2/T3 parent-case producers plus the exact frozen producer schedule binding;\n7. zero terminal results/evidence before launch.
 
 This reducer grants no capability or family credit and does not create a beacon.
 """
@@ -125,6 +124,15 @@ def evaluate_documents(
                 errors.append("PARENT_PRODUCER_RECEIPT_BLOB_NOT_CURRENT:" + portfolio)
             if exact.get(tests) != test_sha:
                 errors.append("PARENT_PRODUCER_RECEIPT_TEST_BLOB_NOT_CURRENT:" + portfolio)
+            runner_binding = row.get("runner_binding")
+            if not isinstance(runner_binding, str) or not runner_binding:
+                errors.append("PARENT_PRODUCER_RUNNER_BINDING_MISSING:" + portfolio)
+            else:
+                expected_binding_sha = exact.get(runner_binding)
+                if not isinstance(expected_binding_sha, str) or not expected_binding_sha:
+                    errors.append("PARENT_PRODUCER_RECEIPT_BINDING_BLOB_MISSING:" + portfolio)
+                elif blob_sha(runner_binding) != expected_binding_sha:
+                    errors.append("PARENT_PRODUCER_RUNNER_BINDING_BLOB_DRIFT:" + portfolio)
         verified = set(receipt.get("verified") or ())
         needed = {
             "REAL_PARENT_CASE_PRODUCER",
