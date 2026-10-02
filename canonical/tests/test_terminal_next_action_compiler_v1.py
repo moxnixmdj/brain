@@ -34,7 +34,7 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
         self.assertEqual(out["highest_leverage_blocked_action_target_count"], 11)
         self.assertEqual(
             out["highest_leverage_blocked_action_preconditions"],
-            ["MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS"],
+            ["MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS", "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"],
         )
         self.assertIn("RUN_COMPOSITION_COMPONENT_PROOF_SLICER", out["available_zero_reality_critical_actions"])
         self.assertIn("RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE", out["available_zero_reality_critical_actions"])
@@ -46,7 +46,7 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
         mutated = copy.deepcopy(hypergraph)
         action = next(a for a in mutated["actions"] if a["id"] == "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
         for p in action["preconditions"]:
-            if p["id"] == "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS":
+            if p["id"] in {"MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS", "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"}:
                 p["satisfied"] = True
         out = compile_next_frontier(registry, evidence, mutated)
         self.assertEqual(out["primary_action_id"], "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
