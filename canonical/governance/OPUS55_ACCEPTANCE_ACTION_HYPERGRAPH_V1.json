@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__OBJECTIVE_GATE_INPUT_CHANGED__MATCHED_PROOF_FRONTIER_REOPENED__NO_CREDIT",
+  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__TOOL_LEARNING_CEILING_PROVED__MATCHED_PROOF_FRONTIER_RESATURATED__NO_REALITY_AUTHORIZED",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
@@ -38,25 +38,24 @@
         "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
         "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
         "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
-        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
         "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
       ],
       "preconditions": [
         {
           "id": "TYPED_WITNESS_INDEX_OR_DIRECT_OBJECTIVE_GATE_INPUT_CHANGED_SINCE_LAST_SATURATION",
-          "satisfied": true,
-          "evidence": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
-          "reason": "FIVE_CURRENT_OBJECTIVE_BINDING_BLOBS_INDEPENDENTLY_REVALIDATED_AFTER_SATURATION",
+          "satisfied": false,
+          "evidence": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V3.json",
+          "reason": "TOOL_DISCOVERY_CEILING_WITNESS_CONSUMED__REMAINING_MATCHED_WITNESS_SET_UNCHANGED",
           "derived_evidence": {
-            "path": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
-            "field": "status",
-            "equals": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_CURRENT_OBJECTIVE_BINDINGS_EXACT_BYTES__PREWAVE_ONLY__ZERO_TERMINAL_CREDIT"
+            "path": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V3.json",
+            "field": "reopen_required",
+            "equals": true
           }
         }
       ],
-      "notes": "Resume exactly once from the changed direct-objective gate evidence. Recompile the admissible witness frontier against the five independently revalidated current objective bindings; do not grant acceptance credit from prewave evidence alone. Terminal evidence remains required for any direct-objective replacement witness.",
-      "saturation_receipt": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V1.json",
+      "notes": "Tool-learning matched noninferiority is now closed by the verified absolute-ceiling witness. The remaining 12 matched/superportfolio predicates are saturated against the current full-witness set; do not repeat search until a new scope-complete witness or terminal objective receipt changes the set.",
+      "saturation_receipt": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V3.json",
       "gate_change_receipt": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
     },
     {
@@ -140,8 +139,10 @@
     "stage_c_batch5_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json",
     "attainability_verification": "verification-capsule-runner PR854__RUN36998571400__JOB110810813480__PASS",
     "objective_binding_gate_change": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
-    "matched_proof_frontier": "REOPENED_ON_NEW_ADMISSIBLE_DIRECT_OBJECTIVE_GATE_RECEIPT__ZERO_ACCEPTANCE_CREDIT",
-    "tb4_global_attainability": "IMPOSSIBLE__180_LT_220__EXECUTION_REVOKED"
+    "matched_proof_frontier": "RESATURATED__12_MATCHED_PREDICATES_REMAIN__REOPEN_ONLY_ON_NEW_FULL_WITNESS",
+    "tb4_global_attainability": "IMPOSSIBLE__180_LT_220__EXECUTION_REVOKED",
+    "tool_learning_ceiling": "PROVED__ABSOLUTE_CEILING__180_OF_180__ZERO_NEW_REALITY",
+    "v9_residual": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
