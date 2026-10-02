@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V10",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_PROVED__0_OPEN__29_BLOCKED__DELEGATION_FULLY_PROVED__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 9,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 29,
+  "refuted_predicate_count": 0,
+  "fully_proved_residual_family_count": 2,
+  "newly_proved_predicate": {
+    "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "source": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+  },
+  "blocker_partition": {
+    "current_tb4_public_bar_impossible": 1,
+    "other_public_fixed_bars_not_score_ready": 14,
+    "matched_or_scope_audit_without_exact_comparator_or_full_scope_stronger_proof": 11,
+    "direct_judgment_source_blockers": 2,
+    "composition_dependency_blocker": 1,
+    "total": 29
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 880,
+    "pull_request_head": "481e82164c3c40bbda608a91aea6c08a67c7b56d",
+    "merge_commit": "93a2ae6494ddba7ade68f09c3a4f8673cfabace2",
+    "workflow_run_id": 37007111747,
+    "workflow_job_id": 110837871150,
+    "conclusion": "success"
+  },
+  "evidence_integrity": {
+    "evidence_bindings_blob_sha": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
+    "delegation_witness_blob_sha": "cb3b7c4b6c4e1f2a0471c6b6be72c4ca9ebddc80",
+    "delegation_transport_receipt_blob_sha": "5278abb7fcaa6b97189b67598c75e4df395e1788",
+    "delegation_transmutation_receipt_blob_sha": "5023cc222a44f99b57785f5954cc95a29b739193",
+    "nested_supporting_source_hashes_checked": true
+  },
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "CURRENT_CONTENT_ADDRESSED_EVIDENCE_LEDGER_CONTROLS_ATOMIC_COUNTS__PROVED_PREDICATES_DELETE_WORK__NO_CASE_EXECUTION_WHILE_AUTHORIZED_ACTION_SET_EMPTY"
+}
