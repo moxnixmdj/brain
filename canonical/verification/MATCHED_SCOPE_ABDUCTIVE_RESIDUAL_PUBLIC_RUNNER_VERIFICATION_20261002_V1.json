@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__11_TARGETS__11_VERIFIED_CHILD_EDGES__22_PRIMITIVE_RESIDUALS__ZERO_SHARED_GROUPS__ZERO_CREDIT",
+  "objective": "Independently execute the active abductive residual theorem compiler on the active independently verified 11-child matched-scope frontier and bind the exact current residual structure.",
+  "exact_brain_blobs": {
+    "canonical/runtime/abductive_residual_theorem_v1.py": "aef25c462163170defd9d6c81beec628b350b51f",
+    "canonical/tests/test_matched_scope_abductive_residual_v1.py": "a3ca0737dae501e5c732f280f9f5d82b10b535a9",
+    "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V1.json": "79574d5f5134142477decc97d0434e7c863fea7d",
+    "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json": "89162df13fae66edabaa53ac9c8d95a88829e3ec",
+    "canonical/verification/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "14496949201835b086b41b10929e3a487468b028",
+    "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1.json": "dfb9fe54db345d4260db8163809a4a2ebb1befbb"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 990,
+    "verified_head": "984409aaf58f2c3fc2194c5c8b3b8c722f26cb2b",
+    "merge_commit": "85f80314f673398b38aa76316e5c9f1f8fb948b9",
+    "workflow_run_id": 37029744407,
+    "workflow_job_id": 110913292982,
+    "conclusion": "success"
+  },
+  "result": {
+    "target_count": 11,
+    "verified_rule_count": 11,
+    "primitive_residual_fact_count": 22,
+    "shared_residual_group_count": 0,
+    "minimum_joint_residual_size": 22,
+    "minimum_joint_residual_set_count": 1,
+    "exact_further_compression_found": false
+  },
+  "meaning": "UNDER_THE_CURRENT_INDEPENDENTLY_VERIFIED_CHILD_CERTIFICATE_GRAPH_THERE_IS_NO_EXACT_SHARED_WEAKEST_RESIDUAL_BETWEEN_MATCHED_CHILD_TARGETS__ADVANCE_BY_TARGET_SPECIFIC_PROOF_OR_BY_ADDING_NEW_INDEPENDENTLY_VERIFIED_IMPLICATION_EDGES",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
