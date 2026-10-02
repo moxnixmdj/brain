@@ -25,6 +25,12 @@ def _blob(path:Path)->str:
     b=path.read_bytes()
     return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
 
+def _matches(root:Path,rel:Any,expected:Any)->bool:
+    if not isinstance(rel,str) or not rel or not isinstance(expected,str) or not expected:
+        return False
+    p=root/rel
+    return p.exists() and _blob(p)==expected
+
 def validate(root:Path)->dict[str,Any]:
     errors=[]
     try:
@@ -51,7 +57,7 @@ def validate(root:Path)->dict[str,Any]:
             if _blob(p)!=expected: errors.append("DEPENDENCY_DRIFT:"+rel)
 
     cf=binding.get("candidate_freeze")
-    if not isinstance(cf,Mapping) or cf.get("path")!=FREEZE or cf.get("blob_sha")!=_blob(root/FREEZE):
+    if not isinstance(cf,Mapping) or cf.get("path")!=FREEZE or not _matches(root,FREEZE,cf.get("blob_sha")):
         errors.append("CANDIDATE_FREEZE_BINDING_INVALID")
 
     population=binding.get("population")
@@ -75,11 +81,11 @@ def validate(root:Path)->dict[str,Any]:
         ("generator","generator_blob_sha"),
     ]
     gen=population.get("generator"); gsha=population.get("generator_blob_sha")
-    if not isinstance(gen,str) or gsha!=_blob(root/gen) or exact.get(gen)!=gsha:
+    if not _matches(root,gen,gsha) or exact.get(gen)!=gsha:
         errors.append("GENERATOR_NOT_COVERED_BY_INDEPENDENT_RECEIPT")
     for path_key,sha_key in (("oracle_adapter","oracle_adapter_blob_sha"),("scorer","scorer_blob_sha")):
         rel=evaluator.get(path_key); sha=evaluator.get(sha_key)
-        if not isinstance(rel,str) or sha!=_blob(root/rel) or exact.get(rel)!=sha:
+        if not _matches(root,rel,sha) or exact.get(rel)!=sha:
             errors.append(path_key.upper()+"_NOT_COVERED_BY_INDEPENDENT_RECEIPT")
 
     bridge=binding.get("ocr_bridge")
@@ -89,7 +95,7 @@ def validate(root:Path)->dict[str,Any]:
     if not str(ocr.get("status","")).startswith("INDEPENDENT"):
         errors.append("OCR_RECEIPT_NOT_PASS")
     rel=bridge.get("runtime"); sha=bridge.get("runtime_blob_sha")
-    if not isinstance(rel,str) or sha!=_blob(root/rel):
+    if not _matches(root,rel,sha):
         errors.append("OCR_RUNTIME_DRIFT")
 
     policy=binding.get("fresh_evidence_policy")
