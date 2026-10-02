@@ -1,0 +1,26 @@
+name: Verify typed hypothesis compiler
+on:
+  push:
+    branches: [main, obs-typed-hypothesis-compiler-20261002]
+    paths:
+      - canonical/runtime/typed_hypothesis_compiler.py
+      - canonical/tests/test_typed_hypothesis_compiler.py
+      - .github/workflows/verify-typed-hypothesis-compiler.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/typed_hypothesis_compiler.py
+      - canonical/tests/test_typed_hypothesis_compiler.py
+      - .github/workflows/verify-typed-hypothesis-compiler.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_typed_hypothesis_compiler
