@@ -43,19 +43,23 @@ class FrontierTargetMirrorTests(unittest.TestCase):
 
     def test_target_blocker_drift_fails_closed(self):
         bad=copy.deepcopy(self.target)
-        bad["residual_gap"]="STALE_BLOCKER"
+        # enforce_active_target_record_consistency checks the atomic pair; the
+        # residual_gap/next_action pair is checked by active_target_mirror_errors
+        # and covered in tests/test_frontier_target_mirror.py. Mutating a field
+        # the called function does not read made this oracle pass vacuously red.
+        bad["current_atomic_blocker"]="STALE_BLOCKER"
         guard.enforce_active_target_record_consistency(self.hierarchy,bad)
         self.assertIn(
-            "TARGET_RECORD_HIERARCHY_CRITICAL_BLOCKER_MISMATCH",
+            "TARGET_RECORD_HIERARCHY_ATOMIC_BLOCKER_MISMATCH",
             guard.FAIL,
         )
 
     def test_target_next_action_drift_fails_closed(self):
         bad=copy.deepcopy(self.target)
-        bad["next_action"]="STALE_NEXT_ACTION"
+        bad["current_atomic_next_action"]="STALE_NEXT_ACTION"
         guard.enforce_active_target_record_consistency(self.hierarchy,bad)
         self.assertIn(
-            "TARGET_RECORD_HIERARCHY_NEXT_ACTION_MISMATCH",
+            "TARGET_RECORD_HIERARCHY_ATOMIC_NEXT_ACTION_MISMATCH",
             guard.FAIL,
         )
 

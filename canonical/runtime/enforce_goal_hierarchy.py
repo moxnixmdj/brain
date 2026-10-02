@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
-import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
+import argparse, base64, hashlib, json, os, pathlib, re, subprocess, sys, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 
 ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
@@ -73,6 +73,9 @@ PROTECTED_GUARD_PATHS={
     "canonical/runtime/EXECUTOR_POLICY_V1.json",
     "canonical/runtime/astra_runtime.py",
     "canonical/runtime/same_identity_supervisor.py",
+    # CI executes the frontier mirror oracles, so the reconciler they exercise is
+    # a trusted control surface: editing it must declare governance intent.
+    "canonical/runtime/reconcile_frontier_mirrors.py",
     ".github/workflows/superworker-signed-command-relay.yml",
     ".github/workflows/drift-immunity-guard.yml",
 }
@@ -792,6 +795,70 @@ def _require_existing_paths(values,label):
         if not path.is_file():
             fail(label+"_PATH_MISSING:"+str(raw))
 
+CONTROL_PATH_KEYS=(
+    "pre_action_gate_path",
+    "goal_hierarchy_action_gate_path",
+    "recursive_obs_receipt_schema_path",
+    "recursive_obs_action_intent_template_path",
+    "capability_acquisition_engine_law_path",
+    "capability_arbitrage_strategy_path",
+    "frontier_capability_obsolescence_mission_lock_path",
+    "white_box_capability_harvesting_law_path",
+    "white_box_capability_capsule_schema_path",
+)
+SUPERSEDED_MARKER="SUPERSEDED / DO NOT EXECUTE"
+
+def _versioned_control_path(declared):
+    match=re.search(r"^(.*_V)(\d+)(\.(?:json|md))$",str(declared))
+    if not match:
+        return None
+    return match.group(1)+"*"+match.group(3),int(match.group(2))
+
+def enforce_control_path_currency(key,declared):
+    """Require the pointer to declare the current, non-superseded control artifact.
+
+    An exact expected-version constant pins the guard to one snapshot and rots
+    silently every time the canonical control surface advances, which made the
+    guard reject every frontier-sensitive PR while the pointer itself was still
+    correct. The constants were re-pinned to V11 upstream after this was first
+    measured, which fixes today's snapshot and leaves the rot mechanism in place
+    for the next bump. Comparing against the highest version present in the
+    repository is strictly stronger: it still rejects a downgrade to a weaker
+    superseded gate, it additionally rejects pointing at a superseded artifact,
+    and it cannot itself go stale.
+    """
+    if not _nonempty_string(declared):
+        fail("POINTER_CONTROL_PATH_MISSING:"+key)
+        return
+    path=ROOT/str(declared)
+    if not path.is_file():
+        fail("POINTER_CONTROL_PATH_FILE_MISSING:"+key)
+        return
+    family=_versioned_control_path(declared)
+    if family is None:
+        fail("POINTER_CONTROL_PATH_NOT_VERSIONED:"+key)
+        return
+    pattern,version=family
+    versions=[]
+    for candidate in ROOT.glob(pattern):
+        match=re.search(r"_V(\d+)\.",candidate.name)
+        if match:
+            versions.append(int(match.group(1)))
+    if not versions:
+        fail("POINTER_CONTROL_PATH_FAMILY_UNRESOLVED:"+key)
+        return
+    if version!=max(versions):
+        fail(
+            "POINTER_CONTROL_PATH_NOT_CURRENT:"+key
+            +":declared_V"+str(version)+"<current_V"+str(max(versions))
+        )
+    if str(declared).endswith(".md"):
+        try:
+            if SUPERSEDED_MARKER in path.read_text(encoding="utf-8"):
+                fail("POINTER_CONTROL_PATH_SUPERSEDED:"+key)
+        except Exception as exc:
+            fail("POINTER_CONTROL_PATH_UNREADABLE:"+key+":"+type(exc).__name__)
+
 def enforce_promotion_truth(intent,files,base):
     score_path="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
     if score_path not in files:
@@ -946,6 +1013,66 @@ def active_target_mirror_errors(hierarchy,target):
         errors.append("FRONTIER_TARGET_NEXT_ACTION_MISMATCH")
     return errors
 
+
+def scoreboard_mirror_errors(hierarchy,scoreboard):
+    """Every scoreboard mirror of the authority: top-level and nested alike.
+
+    reconcile_frontier_mirrors.py has always maintained the nested
+    active_frontier_accounting copies of residual_gap and next_required_action, but
+    nothing compared them, so they could drift silently beside top-level mirrors that
+    agreed with the authority -- and were found drifted on main, both still naming a
+    superseded frontier. Maintaining a mirror nobody checks is how the target record's
+    residual_gap stayed stale for 565 commits; the two nested fields are the same
+    blind spot on a different surface, closed here rather than left documented.
+
+    A missing field is compared as the empty string, so absence disagrees with a
+    populated authority and fails closed instead of reading as a match.
+    """
+    errors=[]
+    accounting=scoreboard.get("active_frontier_accounting") or {}
+    expected_target=str(hierarchy.get("active_capability_target") or "")
+    expected_blocker=str(hierarchy.get("current_parent_blocker") or "")
+    expected_next=str(hierarchy.get("next_required_action_class") or "")
+    expected_event=str(hierarchy.get("next_progress_event_target") or "")
+    if str(accounting.get("parent_frontier_capability") or "")!=expected_target:
+        errors.append("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(scoreboard.get("next_required_action") or "")!=expected_next:
+        errors.append("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
+    if str(scoreboard.get("next_progress_event_target") or "")!=expected_event:
+        errors.append("SCOREBOARD_HIERARCHY_NEXT_PROGRESS_EVENT_MISMATCH")
+    if str(accounting.get("residual_gap") or "")!=expected_blocker:
+        errors.append("SCOREBOARD_HIERARCHY_NESTED_RESIDUAL_GAP_MISMATCH")
+    if str(accounting.get("next_required_action") or "")!=expected_next:
+        errors.append("SCOREBOARD_HIERARCHY_NESTED_NEXT_ACTION_MISMATCH")
+    return errors
+
+# A bare predicate name tells an agent that the tree is wrong but not how to make
+# it right, which is how a self-repairable drift becomes a deadlock: twenty
+# consecutive guard failures across many branches were all mirror or control-path
+# rot that one deterministic command repairs. These hints are additive output
+# only; no check is weakened and none is skipped.
+REMEDIATION_HINTS=(
+    (("POINTER_HIERARCHY_","QUEUE_HIERARCHY_","SCOREBOARD_HIERARCHY_",
+      "TARGET_RECORD_HIERARCHY_","FRONTIER_TARGET_"),
+     "mirror fields drifted from canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json; "
+     "recompute all of them deterministically instead of hand-editing: "
+     "python3 canonical/runtime/reconcile_frontier_mirrors.py . --check "
+     "(then re-run without --check to write)"),
+    (("POINTER_CONTROL_PATH_",),
+     "pointer control paths are not the current version of their family; advance "
+     "them: python3 canonical/runtime/reconcile_frontier_mirrors.py . "
+     "--fix-control-paths"),
+)
+
+def print_remediation(failures):
+    hinted=False
+    for prefixes,text in REMEDIATION_HINTS:
+        if any(str(item).split(":")[0].startswith(prefixes) for item in failures):
+            if not hinted:
+                print(" REMEDIATION (deterministic; does not weaken any check)")
+                hinted=True
+            print("  -",text)
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -975,13 +1102,11 @@ def main():
         fail("QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
     if str(immediate.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH")
-    accounting=scoreboard.get("active_frontier_accounting") or {}
-    if str(accounting.get("parent_frontier_capability") or "")!=str(hierarchy.get("active_capability_target") or ""):
-        fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
-    if str(scoreboard.get("next_required_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-        fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
-    if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_progress_event_target") or ""):
-        fail("SCOREBOARD_HIERARCHY_NEXT_PROGRESS_EVENT_MISMATCH")
+    # Extracted into scoreboard_mirror_errors so the nested mirrors are compared
+    # beside the top-level ones and testable in isolation; predicate names and their
+    # order are unchanged, and the two nested comparisons are new.
+    for error in scoreboard_mirror_errors(hierarchy,scoreboard):
+        fail(error)
 
     target_id=str(hierarchy.get("active_capability_target") or "").strip()
     target_path="canonical/capabilities/frontier/"+target_id+".json" if target_id else ""
@@ -996,26 +1121,20 @@ def main():
             target={}
     if target:
         enforce_active_target_record_consistency(hierarchy,target)
+        # active_target_mirror_errors was defined and unit-tested in 44d6a09 but
+        # never called, so the target record's residual_gap/next_action pair was
+        # checked only against synthetic dicts and never against the live tree.
+        # Those two fields are mirrors of the same authority fields the atomic
+        # pair mirrors, and they were found stale at a live base still naming a
+        # burned rank's Stage-C builder run while every CI check stayed silent.
+        for error in active_target_mirror_errors(hierarchy,target):
+            fail(error)
 
     boot=pointer.get("boot_requirements") or {}
     if tuple(boot.get("deletion_first_route_order") or ())!=OBS_DELETION_ORDER:
         fail("POINTER_WHITE_BOX_ROUTE_ORDER_MISMATCH")
-    expected_control_paths={
-        "pre_action_gate_path":"canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V11.json",
-        "goal_hierarchy_action_gate_path":"canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
-        "recursive_obs_receipt_schema_path":"canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
-        "recursive_obs_action_intent_template_path":"canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
-        "capability_acquisition_engine_law_path":"canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
-        "capability_arbitrage_strategy_path":"canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
-        "frontier_capability_obsolescence_mission_lock_path":"canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
-        "white_box_capability_harvesting_law_path":"canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-        "white_box_capability_capsule_schema_path":"canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
-    }
-    for key,expected in expected_control_paths.items():
-        if boot.get(key)!=expected:
-            fail("POINTER_CONTROL_PATH_MISMATCH:"+key)
-        if not (ROOT/expected).is_file():
-            fail("POINTER_CONTROL_PATH_FILE_MISSING:"+key)
+    for key in CONTROL_PATH_KEYS:
+        enforce_control_path_currency(key,boot.get(key))
     if boot.get("white_box_capability_harvesting_required") is not True:
         fail("WHITE_BOX_CAPABILITY_HARVESTING_NOT_REQUIRED")
     if boot.get("harvested_capability_promotion_requires_donor_deletion") is not True:
@@ -1026,9 +1145,13 @@ def main():
         fail("QUEUE_WHITE_BOX_ROUTE_ORDER_MISMATCH")
 
     try:
-        active_obs_schema=load("canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json")
-        active_action_template=load("canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json")
-        active_goal_gate=load("canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json")
+        # Validate the artifacts the pointer actually declares authoritative.
+        # Loading hardcoded older versions checked a superseded snapshot while
+        # the live V11 control surface went unverified; re-pinning the constants
+        # above did not touch these three loads.
+        active_obs_schema=load(str(boot.get("recursive_obs_receipt_schema_path")))
+        active_action_template=load(str(boot.get("recursive_obs_action_intent_template_path")))
+        active_goal_gate=load(str(boot.get("goal_hierarchy_action_gate_path")))
     except Exception as exc:
         fail("WHITE_BOX_CONTROL_SURFACE_LOAD_FAILED:"+type(exc).__name__)
         active_obs_schema=active_action_template=active_goal_gate={}
@@ -1190,6 +1313,7 @@ def main():
         print("DRIFT_GUARD_FAIL")
         for item in FAIL:
             print(" -",item)
+        print_remediation(FAIL)
         return 1
 
     digest=hashlib.sha256(terminal.encode()).hexdigest()

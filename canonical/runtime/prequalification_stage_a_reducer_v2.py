@@ -11,8 +11,177 @@ from typing import Any
 REF="452bf305c6daa62fc59061d22133a7cbc7c1572e"
 BAR=0.664
 
+# The eight prior-exposure surfaces required by
+# PREQUALIFICATION_FAILURE_IMMUNITY_V1 staged_admission.stage_a_pre_exposure
+# (COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS).
+EXPECTED_HIT_FIELDS=(
+    "brain_code_hits","runner_code_hits",
+    "brain_branch_hits","runner_branch_hits",
+    "brain_commit_hits","runner_commit_hits",
+    "brain_pr_hits","runner_pr_hits",
+)
+EXPECTED_SURFACES=(
+    "brain_code","runner_code",
+    "brain_branches","runner_branches",
+    "brain_commits","runner_commits",
+    "brain_prs","runner_prs",
+)
+# Runner total Stage-C budget behaviors that must be independently verified and
+# merged before any task may be admitted to Stage B. Without them a single
+# execution lease can be spent more than once, which is what invalidated rank18.
+REQUIRED_BUDGET_BEHAVIORS={
+    "EVERY_ACCEPTED_BUILDER_BURST_CONSUMES_ONE_EXECUTION_UNIT_BEFORE_ANY_TASK_COMMAND_RUNS",
+    "BUILDER_BURST_REJECTED_WHEN_EXECUTION_COUNT_USED_GTE_EXECUTION_COUNT_ALLOWED",
+    "TERMINAL_VERIFIER_UNIT_CONSUMED_BEFORE_HIDDEN_VERIFIER_INVOCATION",
+    "TERMINAL_SUBMISSION_REJECTED_WHEN_TERMINAL_COUNT_USED_GTE_TERMINAL_VERIFIER_COUNT_ALLOWED",
+}
+REQUIRED_BUDGET_WORKFLOWS={
+    "Verify independent acceptance gate",
+    "Stage lease promotion regression",
+    "Execution Guard Regression",
+}
+# Stage-A policy item added when the global terminal proof cut became the
+# scheduling authority. rank23's recorded root cause is
+# LOCAL_STAGE_A_PASS_COULD_ADVANCE_SOURCE_READ_WITHOUT_ENFORCED_GLOBAL_CUT_
+# MEMBERSHIP: its official instruction was read on the strength of a local
+# Stage-A pass after the cut had already revoked that source read
+# (canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json, whose
+# repair list includes LOCAL_STAGE_A_PASS_CANNOT_ALONE_AUTHORIZE_SOURCE_READ).
+# A Stage-A verdict that reports exposure authorization without resolving cut
+# membership reproduces that incident, so the currency bindings already enforced
+# by canonical/runtime/current_state_obs_reducer.py are reused verbatim here
+# instead of being redefined, and anything unresolved fails closed.
+CUT_MEMBERSHIP_ITEM=(
+    "CURRENT_GLOBAL_TERMINAL_PROOF_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE"
+)
+# The Stage-A required items this reducer adjudicates by predicate. Defined once
+# and imported by the generic reducer so the two cannot drift apart. Membership
+# in the global terminal proof cut is deliberately NOT in this set: it is
+# expected only when the live policy lists it, because demanding it everywhere
+# would fail every root whose policy predates that law, which is where the
+# recorded rank16-rank23 admissions were adjudicated. A reducer that cannot
+# reproduce its own recorded evidence is not an oracle.
+BASE_STAGE_A_EXPECTED=frozenset({
+    "TARGET_VERSION_LOCK",
+    "QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
+    "COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS",
+    "GENERAL_EXECUTION_SURFACE_CERTIFICATE",
+    "INDEPENDENT_ACCEPTANCE_MECHANISM_VERIFIED",
+    "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
+    "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
+    "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
+    "TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD_VERIFIED",
+    "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS",
+})
+GLOBAL_CUT="canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
+GLOBAL_PROOF_LAW="canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md"
+MINIMUM_REALITY_CUT_RUNTIME="canonical/runtime/minimum_reality_cut.py"
+# Emitted when every cleanliness predicate holds but cut membership does not.
+# The project's own vocabulary for that state is INDEPENDENT_PASS__CLEANNESS_ONLY
+# (GLOBAL_TERMINAL_PROOF_CUT_V1.json rank23.stage_a_status); the suffix makes it
+# impossible to mistake for exposure authority.
+CLEANNESS_ONLY_AUTHORIZATION="CLEANNESS_ONLY__NO_UNTOUCHED_SOURCE_READ_AUTHORIZATION"
+
 def load(root: Path, rel: str) -> dict[str,Any]:
     return json.loads((root/rel).read_text(encoding="utf-8"))
+
+def load_evidence(root: Path, rel: str) -> dict[str,Any]:
+    """Load governance evidence, failing closed instead of raising when absent.
+
+    A missing or unreadable verification artifact must produce a named failed
+    predicate in the verdict, not an uncaught exception that yields no verdict at
+    all. Absence of evidence is refusal, never admission.
+    """
+    try:
+        value=load(root,rel)
+    except Exception:
+        return {}
+    return value if isinstance(value,dict) else {}
+
+def _cut_sample_entry(cut: dict[str,Any], task: str, rank: int) -> dict[str,Any]|None:
+    """Resolve the cut's own recorded entry for this candidate sample.
+
+    Only an explicit entry naming this exact task and rank counts. A deep search
+    for a matching token would admit unrelated records, so the absence of an
+    explicit entry is unknown - and unknown fails closed.
+    """
+    def matches(entry:Any)->bool:
+        return (
+            isinstance(entry,dict)
+            and str(entry.get("task") or "")==str(task)
+            and entry.get("rank")==rank
+        )
+    for key in ("selected_untouched_sample","admitted_samples","members"):
+        value=cut.get(key)
+        if matches(value):
+            return value
+        if isinstance(value,list):
+            for entry in value:
+                if matches(entry):
+                    return entry
+    # A rank-keyed block, which is how the live cut records rank23.
+    block=cut.get("rank%d"%rank)
+    return block if matches(block) else None
+
+def global_cut_membership(root: Path, task: str, rank: int) -> dict[str,Any]:
+    """Adjudicate CUT_MEMBERSHIP_ITEM for one candidate sample.
+
+    Returns {"current": bool, "reasons": [...]}. `current` is True only when the
+    global cut is bound to its law and runtime, is the scheduling authority, its
+    untouched-spend rules are all asserted, its terminal predicates are all
+    satisfied, and it records positive membership for THIS task and rank. Every
+    other outcome is a named reason, never a silent pass.
+
+    Membership is read from the entry's own recorded vocabulary, preferring the
+    field the live cut already uses (`stage_b_exposure_admitted`) and accepting
+    `global_cut_membership_current` as an explicit alternative. Neither is
+    asserted true for any sample in the live cut - its only recorded sample,
+    rank23, has stage_b_exposure_admitted false after its post-revocation read -
+    so no candidate can satisfy this item until the cut is computed across the
+    open families. That is the cut's own declared state, not a defect here: its
+    status names the exact cut computation as still required.
+    """
+    cut=load_evidence(root,GLOBAL_CUT)
+    reasons:list[str]=[]
+    if not cut:
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_ABSENT")
+        return {"current":False,"reasons":reasons}
+    if not str(cut.get("status") or "").startswith("ACTIVE"):
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_NOT_ACTIVE")
+    if str(cut.get("law") or "")!=GLOBAL_PROOF_LAW:
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_LAW_DRIFT")
+    if str(cut.get("exact_cut_runtime") or "")!=MINIMUM_REALITY_CUT_RUNTIME:
+        reasons.append("GLOBAL_TERMINAL_PROOF_CUT_RUNTIME_DRIFT")
+    scheduling=cut.get("scheduling_authority") or {}
+    if scheduling.get("global_terminal_proof_cut") is not True:
+        reasons.append("GLOBAL_CUT_NOT_SCHEDULING_AUTHORITY")
+    if (
+        scheduling.get("family_labels") is not False
+        or scheduling.get("benchmark_rank_order") is not False
+    ):
+        reasons.append("GLOBAL_CUT_LOCAL_ORDER_STILL_AUTHORITATIVE")
+    spend=cut.get("untouched_information_spend") or {}
+    for field in (
+        "unknown_fails_closed",
+        "selection_of_scarce_clean_sample_requires_cut_membership",
+        "admission_required_before_stage_b_instruction_fetch",
+    ):
+        if spend.get(field) is not True:
+            reasons.append("GLOBAL_CUT_UNTOUCHED_SPEND_RULE_NOT_ASSERTED:%s"%field)
+    predicates=(cut.get("snapshot") or {}).get("terminal_predicates") or {}
+    if not predicates or not all(v is True for v in predicates.values()):
+        reasons.append("GLOBAL_CUT_TERMINAL_PREDICATES_NOT_SATISFIED")
+    entry=_cut_sample_entry(cut,task,rank)
+    if entry is None:
+        reasons.append("GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_UNKNOWN")
+    elif (
+        entry.get("global_cut_membership_current") is not True
+        and entry.get("stage_b_exposure_admitted") is not True
+    ):
+        reasons.append(
+            "GLOBAL_CUT_MEMBERSHIP_FOR_SELECTED_UNTOUCHED_SAMPLE_NOT_CURRENT"
+        )
+    return {"current":not reasons,"reasons":reasons}
 
 def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,Any]:
     failures=[]
@@ -24,11 +193,11 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
     s=load(root,"canonical/capabilities/opus55/TB4_V5_STAGE1_STATISTICAL_PROMOTION_PLAN_V1.json")
     d=load(root,"canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V1.json")
     p=load(root,"canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json")
+    l=load_evidence(root,"canonical/governance/PER_ACTION_CANONICAL_LEASE_REVALIDATION_VERIFICATION_20261001_V1.json")
+    b=load_evidence(root,"canonical/governance/RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION_20261001_V1.json")
 
     if not (str(t.get("status","")).startswith("FROZEN_") and t.get("benchmark_ref")==REF and t.get("stage1_target_success_fraction")==BAR and t.get("target_model")=="Claude Opus 5.5"):
         failures.append("TARGET_VERSION_LOCK")
-    search=c.get("prior_exposure_search")
-    search_clean=isinstance(search,dict) and all(v==0 for v in search.values())
     if not (
         c.get("task")==task and c.get("rank")==rank and c.get("benchmark_ref")==REF
         and c.get("state")=="UNEXPOSED__STAGE_A_PRE_EXPOSURE"
@@ -39,9 +208,67 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
         and c.get("task_command_executed") is False
         and c.get("clean_for_stage_b_exposure") is True
         and not c.get("disqualifying_exposure_events")
-        and search_clean
     ):
         failures.append("QUALIFICATION_CONTAMINATION_LEDGER")
+    # Only the named hit counters are exposure evidence. Policy-mandated
+    # completeness metadata (search_complete, searched_surfaces, and the
+    # non-disqualifying self-referential frontier PR notes) is provenance, not a
+    # hit. The previous blanket "every value must equal 0" test therefore made
+    # every eight-surface-compliant ledger unsatisfiable and failed Stage A
+    # closed permanently for any task whose ledger obeyed the current policy.
+    search=c.get("prior_exposure_search")
+    if not isinstance(search,dict):
+        failures.append("PRIOR_EXPOSURE_SEARCH_MISSING")
+    else:
+        if search.get("search_complete") is not True:
+            failures.append("PRIOR_EXPOSURE_SEARCH_INCOMPLETE")
+        if [k for k in EXPECTED_HIT_FIELDS if k not in search]:
+            failures.append("PRIOR_EXPOSURE_SEARCH_FIELDS_MISSING")
+        # Raw hits are not automatically contamination. Once a frozen task name is
+        # canonically recorded, later searches legitimately find self-referential
+        # frontier bookkeeping, so every nonzero raw hit must be completely
+        # classified while any disqualifying or unclassified hit fails closed.
+        # This mirrors prequalification_stage_a_generic exactly: two reducers
+        # emitting verdicts for one staged-admission contract must not disagree,
+        # and a blanket "any nonzero hit is contamination" test wrongly refuses
+        # ledgers whose hits are fully classified as non-disqualifying.
+        disqualifying=search.get("disqualifying_hits",{})
+        nondis=search.get("non_disqualifying_hits",[])
+        if not isinstance(disqualifying,dict):
+            failures.append("PRIOR_EXPOSURE_DISQUALIFYING_COUNTS_INVALID")
+            disqualifying={}
+        if not isinstance(nondis,list):
+            failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_CLASSIFICATION_INVALID")
+            nondis=[]
+        classified_counts={k:0 for k in EXPECTED_HIT_FIELDS}
+        for item in nondis:
+            if not isinstance(item,dict):
+                failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID")
+                continue
+            field=item.get("counter_field")
+            if field not in classified_counts or not item.get("classification") or not item.get("evidence"):
+                failures.append("PRIOR_EXPOSURE_NONDISQUALIFYING_ITEM_INVALID")
+                continue
+            classified_counts[field]+=1
+        for field in EXPECTED_HIT_FIELDS:
+            raw=search.get(field)
+            if type(raw) is not int or raw<0:
+                failures.append("PRIOR_EXPOSURE_RAW_COUNT_INVALID")
+                continue
+            dis=disqualifying.get(field,0)
+            if type(dis) is not int or dis<0 or dis>raw:
+                failures.append("PRIOR_EXPOSURE_DISQUALIFYING_COUNT_INVALID")
+                continue
+            if dis!=0:
+                failures.append("PRIOR_EXPOSURE_DISQUALIFYING_HIT")
+            if classified_counts.get(field,0)+dis!=raw:
+                failures.append("PRIOR_EXPOSURE_HIT_CLASSIFICATION_INCOMPLETE")
+        # v2 additionally enforces the searched-surface list, which the policy item
+        # COMPLETE_8_SURFACE_PRIOR_EXPOSURE_SEARCH_INCLUDING_BRAIN_PRS mandates and
+        # v1 omits. This is a tightening only: it can never admit what v1 refuses.
+        surfaces=search.get("searched_surfaces")
+        if not isinstance(surfaces,list) or not set(EXPECTED_SURFACES)<=set(surfaces):
+            failures.append("PRIOR_EXPOSURE_SEARCH_SURFACES_INCOMPLETE")
     if e.get("status")!="STAGE_A_GENERIC_SURFACE_PASS__TASK_SPECIFIC_SURFACE_UNCLAIMED":
         failures.append("GENERAL_EXECUTION_SURFACE_CERTIFICATE")
     ar=a.get("runner",{})
@@ -75,25 +302,96 @@ def evaluate(root: Path, *, task: str, rank: int, ledger_path: str) -> dict[str,
         and d.get("pass_rule")=="BEHAVIOR_PRESERVED_AND_UNDECLARED_DEPENDENCY_COUNT_ZERO"
     ):
         failures.append("DONOR_DELETION_DEPENDENCY_PROTOCOL")
-    required=set(p.get("staged_admission",{}).get("stage_a_pre_exposure",{}).get("required",[]))
-    expected={
-      "TARGET_VERSION_LOCK","QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
-      "GENERAL_EXECUTION_SURFACE_CERTIFICATE","INDEPENDENT_ACCEPTANCE_MECHANISM_VERIFIED",
-      "REQUIREMENT_GRAPH_AND_MUTATION_MECHANISM_VERIFIED",
-      "STATISTICAL_PROMOTION_PLAN_FROZEN_IF_BENCHMARK_SCORE_WILL_BE_USED",
-      "GENERIC_DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_AVAILABLE",
-      "NO_TASK_SPECIFIC_SEARCH_OR_HINT_ACCESS"
+    # Ported from the v1 generic reducer so the two reducers cannot disagree.
+    # v2 previously enforced neither check, which made it a fail-open admission
+    # path for exactly the escape that let rank18 spend one lease twice.
+    # The status is matched on its semantic prefix rather than on a
+    # rank-specific exact string, so refreshing this artifact for a later rank
+    # cannot spuriously fail Stage A closed.
+    lr=l.get("runner") if isinstance(l.get("runner"),dict) else {}
+    if not (
+        str(l.get("status","")).startswith("VERIFIED_AND_MERGED")
+        and lr.get("verification_tests_failed")==0
+        and lr.get("verification_tests_passed",0)>0
+    ):
+        failures.append("PER_ACTION_CANONICAL_LEASE_REVALIDATION")
+    verified_workflows={
+        x.get("workflow")
+        for x in (b.get("independent_verification") or [])
+        if isinstance(x,dict) and x.get("conclusion")=="success"
     }
+    repair=b.get("repair") if isinstance(b.get("repair"),dict) else {}
+    behaviors=set(repair.get("behavior") or [])
+    if not (
+        str(b.get("status","")).startswith("INDEPENDENT_PASS__MERGED")
+        and repair.get("merge_commit")
+        and REQUIRED_BUDGET_BEHAVIORS<=behaviors
+        and REQUIRED_BUDGET_WORKFLOWS<=verified_workflows
+    ):
+        failures.append("TOTAL_STAGE_C_EXECUTION_AND_TERMINAL_BUDGET_GUARD")
+    required=set(p.get("staged_admission",{}).get("stage_a_pre_exposure",{}).get("required",[]))
+    # The policy is the single trigger. Cut membership is adjudicated exactly
+    # when the live policy requires it, so a root whose policy predates the
+    # global cut law reproduces its recorded verdict unchanged, and a root whose
+    # policy does require membership can never be blessed without resolving it.
+    membership_required=CUT_MEMBERSHIP_ITEM in required
+    expected=set(BASE_STAGE_A_EXPECTED)
+    if membership_required:
+        expected.add(CUT_MEMBERSHIP_ITEM)
     if not expected <= required:
         failures.append("STAGE_A_POLICY_INCOMPLETE")
+    # The subset test above fires only when the policy LOSES an item this reducer
+    # adjudicates. When the policy GAINS one, `expected <= required` still holds,
+    # so the reducer would bless a candidate against a required item that nothing
+    # checks. That is the same fail-open class that let rank23 advance its source
+    # read on a local pass, so every live required item is adjudicated by name.
+    for item in sorted(required-expected):
+        failures.append("STAGE_A_POLICY_ITEM_NOT_ADJUDICATED:%s"%item)
+    unique=sorted(set(failures))
+    # CUT_MEMBERSHIP_ITEM is adjudicated here, but it is NOT a cleanliness
+    # predicate and it does not make `pass` false. rank23's own adjudication
+    # records prior_stage_a_cleanliness_preserved true together with
+    # global_cut_admission_before_source_read false, and the global cut records
+    # that sample as INDEPENDENT_PASS__CLEANNESS_ONLY: established cleanliness
+    # survives while membership separately withholds the source read. Encoding
+    # membership as a cleanliness failure would contradict that recorded
+    # encoding; ignoring it is what burned rank23. So it is reported on its own
+    # and it gates authorization, which is the only thing it ever gated.
+    cut_membership=global_cut_membership(root,task,rank)
+    if not unique:
+        # Where the policy does not require membership there is none to resolve
+        # and the recorded pre-cut semantics stand; where it does require it, a
+        # pass without current membership reports cleanliness and withholds the
+        # untouched source read.
+        if not membership_required or cut_membership["current"]:
+            authorization="STAGE_B_INSTRUCTION_EXPOSURE_ONLY"
+        else:
+            authorization=CLEANNESS_ONLY_AUTHORIZATION
+    else:
+        authorization="NONE"
     return {
       "schema":"PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2",
       "task":task,"rank":rank,
-      "pass":not failures,
-      "authorization":"STAGE_B_INSTRUCTION_EXPOSURE_ONLY" if not failures else "NONE",
+      "pass":not unique,
+      "authorization":authorization,
       "task_execution_authorized":False,
-      "failed_predicates":sorted(set(failures)),
-      "rule":"STAGE_A_PASS_AUTHORIZES_ONLY_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
+      "failed_predicates":unique,
+      "global_cut_membership":cut_membership,
+      "rule":# Every recorded Stage-A admission artifact under schema
+# PROJECT_BRAIN_TB4_STAGE_A_ADMISSION_VERDICT_V2 (rank18, rank19, rank20) and v1
+# both spell this ONLY_ONE_OFFICIAL. v2 inherited the rank15-specific reducer's
+# shorter wording while emitting the generic schema, so its rule label did not
+# reproduce the evidence it adjudicates. The recorded artifacts are authoritative.
+# The label is stated relative to the law in force: while the global terminal
+# proof cut governs untouched-sample selection, a local Stage-A pass cannot alone
+# authorize a source read - rank23's recorded root cause - so a live verdict must
+# not claim that it does. Under a root where that law is absent, the recorded
+# pre-cut label is reproduced exactly.
+(
+  "STAGE_A_CLEANLINESS_ALONE_CANNOT_AUTHORIZE_AN_UNTOUCHED_SOURCE_READ__GLOBAL_CUT_MEMBERSHIP_IS_REQUIRED__AND_A_PASS_NEVER_AUTHORIZES_TASK_EXECUTION"
+  if membership_required else
+  "STAGE_A_PASS_AUTHORIZES_ONLY_ONE_OFFICIAL_INSTRUCTION_EXPOSURE__NOT_TASK_EXECUTION"
+)
     }
 
 def main()->int:

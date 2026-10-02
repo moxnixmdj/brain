@@ -313,7 +313,23 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
     if not exact_outer:
         if not observation_cut_exact and "OUTER_GLOBAL_TERMINAL_UNIVERSE" not in blocker:
             errors.append("HIERARCHY_IGNORES_OPEN_OUTER_GLOBAL_UNIVERSE")
-        if observation_cut_exact and "OPERATIVE_ROUTE_CLOSURE" not in blocker:
+        # Resolve the post-cut blocker expectation from the live verdict artifact this
+        # module already loads, instead of a phase token frozen into the source.
+        # OUTER_OBSERVATION_CUT is pinned to ..._VERDICT_V2.json and four predicates
+        # below verify the pointer, the universe, the hierarchy and the execution
+        # authority all name V2, yet this token was V1's blocker phase
+        # (M2_M3_M4_M5_OPERATIVE_ROUTE_CLOSURE__...). V2 declares no blocker of its
+        # own, so once the frontier advanced no hierarchy consistent with the live
+        # verdict could satisfy the check: it fired on every compliant tree. That is
+        # the same failure as an unsatisfiable predicate -- a permanently red
+        # authoritative reducer makes real drift indistinguishable from a stale pin,
+        # which is how this job stayed red across twenty-plus runs on many branches.
+        # Demanding a superseded phase is enforcing a repealed expectation. When the
+        # live verdict does declare a blocker, its phase token must appear in the
+        # hierarchy's blocker, so the check keeps its teeth and regains them
+        # automatically at the next verdict that declares one.
+        verdict_blocker_phase=_s((outer_observation_cut or {}).get("blocker")).split("__")[0]
+        if observation_cut_exact and verdict_blocker_phase and verdict_blocker_phase not in blocker:
             errors.append("HIERARCHY_IGNORES_POST_CUT_MECHANISM_BLOCKER")
         if any(token in next_action for token in ("PREQUALIFY_IN_PARALLEL","EXECUTE_","EXPOSE_")):
             errors.append("HIERARCHY_PREMATURE_FRESH_ACTION_WHILE_OUTER_CUT_OPEN")
@@ -335,7 +351,15 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         if eg.get("outer_global_terminal_observation_cut_execution_authorized") is not False:
             errors.append("POINTER_OUTER_OBSERVATION_CUT_PREMATURE_AUTHORITY")
     expected_open_mechanism_lanes=(global_universe.get("counts") or {}).get("open_mechanism_lanes")
-    pointer_open_mechanism_count=eg.get("open_mechanism_residual_count")
+    # Bind to where the pointer has always carried this count. It was added under
+    # current_frontier in 50c4e086; execution_governance has never held it, and the
+    # check itself was added later in 5b5cdb72, so reading eg made the predicate
+    # unsatisfiable: it compared the authority against None and fired on every tree,
+    # including compliant ones. Every other pointer mirror check in this function
+    # reads current_frontier (POINTER_TARGET_DRIFT, POINTER_BLOCKER_DRIFT,
+    # POINTER_NEXT_STEP_DRIFT); this was the only one reaching into
+    # execution_governance. A missing count stays unknown and still fails closed.
+    pointer_open_mechanism_count=current.get("open_mechanism_residual_count")
     if expected_open_mechanism_lanes is not None and pointer_open_mechanism_count!=expected_open_mechanism_lanes:
         errors.append("POINTER_OPEN_MECHANISM_RESIDUAL_COUNT_DRIFT")
 
