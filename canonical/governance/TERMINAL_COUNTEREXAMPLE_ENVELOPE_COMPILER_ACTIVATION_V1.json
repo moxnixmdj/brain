@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_COUNTEREXAMPLE_ENVELOPE_COMPILER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_ZERO_REALITY_REDUCTION_STEP__FAIL_CLOSED__NO_INDEPENDENT_CAPABILITY_AUTHORITY",
+  "purpose": "Collapse already-verified behavioral envelopes and verified implication relations into the smallest unresolved proof basis before any fresh reality query.",
+  "compiler": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
+  "independent_verification": "canonical/verification/TERMINAL_COUNTEREXAMPLE_ENVELOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "authority_rule": "ONLY_PREVERIFIED_ENVELOPES_VERIFIED_FAILURES_AND_VERIFIED_IMPLICATIONS_MAY_PROPAGATE__PREDICTION_SIMULATION_OR_SEARCH_FAILURE_NEVER_BECOMES_PROOF",
+  "placement": [
+    "AFTER_EXISTING_EVIDENCE_SATURATION_AND_SCOPE_EQUIVALENCE_RECEIPTS",
+    "BEFORE_FRESH_COUNTEREXAMPLE_GENERATION_OR_MINIMUM_REALITY_QUERY_SELECTION"
+  ],
+  "outputs": [
+    "PROVED_DIMENSIONS",
+    "FAILED_DIMENSIONS",
+    "UNKNOWN_DIMENSIONS",
+    "EXACT_MINIMUM_RESIDUAL_PROOF_BASIS_WHEN_DECLARED_UNKNOWN_DIMENSION_COUNT_LE_20",
+    "COUNTEREXAMPLE_OBLIGATIONS_FOR_RESIDUAL_BASIS"
+  ],
+  "first_live_application": {
+    "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+    "authority_receipt": "canonical/verification/DELEGATION_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "required_interaction_count": 11,
+    "proved_interaction_count": 11,
+    "unknown_interaction_count": 0,
+    "counterexample_obligation_count": 0,
+    "residual_terminal_blocker": "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING",
+    "fresh_terminal_evidence_consumed": 0
+  },
+  "no_target_weakening": true,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
