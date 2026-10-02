@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__ALL_FOUR_FROZEN_DIRECT_PROOF_MUTATION_PREFLIGHTS_GREEN__ZERO_TERMINAL_EVIDENCE",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 487,
+    "head_sha": "ca5ac61d49ec79013cfaddf00ea30a1ee097eb10",
+    "workflow_run_id": 36955721157,
+    "job_id": 110678128724,
+    "merge_commit": "df686de7999e197ad44a29fdbaa99d8ae1c16562"
+  },
+  "exact_brain_blobs": [
+    {
+      "path": "canonical/runtime/prewave_direct_proof_preflight.py",
+      "blob_sha": "9c61e61e12cf2c773a980a8f31110ebf6d21be80"
+    },
+    {
+      "path": "canonical/tests/test_prewave_direct_proof_preflight.py",
+      "blob_sha": "e0af38fb07f3727dc49e00ff99fa7c543a4260b6"
+    }
+  ],
+  "verified_routes": [
+    "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
+    "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
+    "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
+  ],
+  "verified_property": "KNOWN_GOOD_ACCEPTED_AND_EVERY_PREDECLARED_SYNTHETIC_MUTATION_REJECTED__P1_NONIDENTIFIABLE_CASE_ABSTAINS_AND_REQUESTS_DISCRIMINATOR",
+  "limitations": [
+    "THIS_IS_PROOF_MACHINERY_PREFLIGHT_NOT_TERMINAL_CAPABILITY_PROOF",
+    "NO_HELDOUT_OR_TERMINAL_BENCHMARK_CASES_EXPOSED",
+    "FULL_DIRECT_PROOF_POPULATIONS_AND_STATISTICAL_BOUNDS_STILL_REQUIRE_TERMINAL_EXECUTION_AUTHORITY"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
