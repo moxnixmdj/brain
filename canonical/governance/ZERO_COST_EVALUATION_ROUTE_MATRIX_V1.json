@@ -13,7 +13,8 @@
     "PUBLIC_SCOPE_EQUIVALENT_CANDIDATE_ONLY": "A public task set or gold subset exists but it is not the exact official hidden/private leaderboard surface.",
     "OFFICIAL_GATED_OR_PRIVATE": "Exact official evaluation depends on private tasks, gated platform access, private suite identifiers, or paid/gated infrastructure.",
     "PUBLIC_SCORE_ONLY_NO_EXACT_EXECUTABLE_ROUTE_FOUND": "Public result/leaderboard exists but this audit did not establish a public exact task+harness route.",
-    "ZERO_COST_EXECUTABLE": "Exact public inputs+harness plus a proven hard-$0 execution and scoring route with no paid/gated dependency."
+    "ZERO_COST_EXECUTABLE": "Exact public inputs+harness plus a proven hard-$0 execution and scoring route with no paid/gated dependency.",
+    "UNRESOLVED_IDENTITY_OR_ACCESS": "The frozen portfolio names a required evidence surface whose authoritative benchmark identity, current task set, harness, or access route has not yet been established."
   },
   "portfolios": {
     "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO": [
@@ -84,6 +85,15 @@
         "fact": "The complete task set is available from Hugging Face and the public repository provides the Inspect evaluation harness. Leaderboard scoring uses a model judge.",
         "zero_cost_status": "INPUTS_AND_HARNESS_PUBLIC__OFFICIAL_MODEL_JUDGE_ZERO_COST_ROUTE_NOT_FROZEN",
         "next": "FREEZE_INDEPENDENT_ZERO_COST_EQUIVALENT_SCORER_OR_PROVE_EXISTING_GOLD_RANGE_SCORING_SUFFICIENT"
+      },
+      {
+        "surface": "Finance & Accounting Index",
+        "target": ">=61 represented scope",
+        "classification": "UNRESOLVED_IDENTITY_OR_ACCESS",
+        "sources": [],
+        "fact": "The frozen T1 portfolio requires this surface, but the current public-route audit has not established an authoritative benchmark identity, task set, harness, scorer, or exact zero-cost route.",
+        "zero_cost_status": "BLOCKED_IDENTITY_AND_ACCESS_UNRESOLVED",
+        "next": "RESOLVE_AUTHORITATIVE_BENCHMARK_IDENTITY_AND_SCOPE__OR_FREEZE_A_BEHAVIORALLY_DOMINANT_ABSOLUTE_PROOF_ROUTE_BEFORE_ANY_T1_EXECUTION"
       },
       {
         "surface": "Finance Agent v2",
@@ -171,21 +181,23 @@
     ]
   },
   "summary": {
-    "surface_count": 13,
+    "surface_count": 14,
     "exact_public_inputs_or_harness_count": 6,
     "public_scope_equivalent_candidate_count": 3,
     "official_gated_or_private_count": 2,
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "livebench_if_verifier_source_binding_frozen": true
+    "livebench_if_verifier_source_binding_frozen": true,
+    "unresolved_identity_or_access_count": 1
   },
   "cross_surface_deductions": [
     "PUBLIC_LEADERBOARD_VISIBILITY_IS_NOT_EXECUTION_AUTHORITY",
     "PRIVATE_OR_GATED_OFFICIAL_SURFACES_MUST_BE_REPLACED_BY_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_OR_REMAIN_BLOCKED",
     "PUBLIC_TASKS_WITH_PRIVATE_OFFICIAL_HOLDOUTS_MAY_SUPPORT_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_BUT_NOT CLAIM EXACT_OFFICIAL_SCORE_EQUIVALENCE",
     "NO_DIRECT_OPUS_CASE_LEVEL_COMPARATOR_IS_REQUIRED_WHERE_A_FIXED_PUBLIC_BAR_OR_THEORETICAL_CEILING_ROUTE_PROVES_EQUAL_OR_BETTER_SCOPE",
-    "ZERO_COST_REQUIRES_THE_FULL_AGENT_ENVIRONMENT_AND_GRADER_ROUTE_TO_HAVE_A_HARD_NO_SPEND_PATH__PUBLIC_CODE_ALONE_IS_INSUFFICIENT"
+    "ZERO_COST_REQUIRES_THE_FULL_AGENT_ENVIRONMENT_AND_GRADER_ROUTE_TO_HAVE_A_HARD_NO_SPEND_PATH__PUBLIC_CODE_ALONE_IS_INSUFFICIENT",
+    "A_FROZEN_PORTFOLIO_SURFACE_MAY_NOT_DISAPPEAR_FROM_PREQUALIFICATION_SIMPLY_BECAUSE_ITS_IDENTITY_OR_ACCESS_IS_UNRESOLVED"
   ],
   "fresh_terminal_evidence_consumed": 0,
   "new_reality_units_consumed": 0,
