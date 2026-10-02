@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_TERMINAL_POPULATION_BINDING_V1",
   "date": "2026-10-02",
-  "status": "PRE_BEACON_FROZEN__ZERO_TERMINAL_RESULTS",
+  "status": "PRE_BEACON_FROZEN__REGISTRY_TERMINAL_ACCEPTANCE_MODE_BOUND__ZERO_TERMINAL_RESULTS",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
-  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
   "exact_blobs": {
     "candidate": "ff2fa256738ffbe5b15bb813a11c82046692b5e8",
     "independent_oracle": "8eb94b8e8b00e3ace662e7fac2e8b6a8f7bb2200",
@@ -35,7 +35,10 @@
       "CREDIT_ADDON"
     ],
     "allowed_failed_cases": 0,
-    "case_local_execution_failure_counts_as_failure": true
+    "case_local_execution_failure_counts_as_failure": true,
+    "terminal_acceptance_proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+    "ceiling_definition": "100_PERCENT_INDEPENDENT_OBJECTIVE_INTERMEDIATE_AND_FINAL_CORRECTNESS_ON_THE_FROZEN_SCOPE_EQUIVALENT_POST_FREEZE_TERMINAL_POPULATION",
+    "ceiling_reason": "100_PERCENT_CORRECTNESS_IS_THE_MAXIMUM_ATTAINABLE_CORRECTNESS_SCORE_ON_THIS_OBJECTIVE_FROZEN_SCOPE_EQUIVALENT_TERMINAL_POPULATION"
   },
   "scope_gate": {
     "status": "INDEPENDENT_PASS__EXACT_CURRENT_SCOPE_INPUT_ADMISSIBLE_SUBSTITUTION__ZERO_TERMINAL_RESULT",
@@ -55,5 +58,7 @@
   "execution_authority": false,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "proof_mode_basis": "THEORETICAL_CEILING",
+  "terminal_acceptance_mode_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json::terminal_acceptance_proof_modes"
 }

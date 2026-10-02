@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_SA_CCR_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__REGISTRY_TERMINAL_ACCEPTANCE_MODE_BOUND__ZERO_TERMINAL_RESULT",
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 578,
+  "public_merge_commit": "f396659a8faaa36dc06c3e81b93aac246c267128",
+  "workflow_run_id": 36960937134,
+  "workflow_job_id": 110694238832,
+  "workflow_conclusion": "success",
+  "exact_bound_blobs": {
+    "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json": "d8059952cdf358f3e682cd8177be4a7a0b2801ed",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "baf43825cafd30cb1db63a4f60509f619885d5a5",
+    "canonical/verification/SA_CCR_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "f5aa4fbee35a512cceda855036a15e72fb5f58d4"
+  },
+  "verified": [
+    "PROOF_MODE_IS_PRESENT_IN_LIVE_REGISTRY_TERMINAL_ACCEPTANCE_PROOF_MODES",
+    "THEORETICAL_CEILING_BASIS_EXPLICIT",
+    "ZERO_ALLOWED_FAILED_CASES",
+    "FROZEN_2000_CASE_POPULATION_UNCHANGED",
+    "POST_FREEZE_BEACON_STILL_UNKNOWN",
+    "ZERO_ADAPTIVE_SELECTION_CASE_REPLACEMENT_AND_TUNING_REPLAY",
+    "CURRENT_SCOPE_GATE_HAS_ZERO_UNRESOLVED_DIMENSIONS",
+    "PRIOR_TERMINAL_POPULATION_BINDING_VERIFICATION_REMAINS_SUCCESS",
+    "ZERO_TERMINAL_EXECUTION_AND_ZERO_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
