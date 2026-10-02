@@ -129,8 +129,9 @@
           "https://github.com/livebench/livebench/blob/main/livebench/if_runner/ifbench/README.md"
         ],
         "fact": "Instruction-following data and deterministic constraint verifiers are public.",
-        "zero_cost_status": "PUBLIC_DATA_AND_VERIFIERS__BRAIN_RESPONSE_EXECUTION_ROUTE_TO_BIND",
-        "next": "PIN_DATA_COMMIT_AND_VERIFIER_BYTES__BIND_BRAIN_RESPONSE_ADAPTER__NO_EXTERNAL_JUDGE"
+        "zero_cost_status": "VERIFIER_SOURCE_BYTES_FROZEN__HERMETIC_DEPENDENCIES_DATASET_HASH_AND_BRAIN_ADAPTER_STILL_OPEN",
+        "next": "PIN_VERIFIER_RUNTIME_AND_EN_CORE_WEB_SM_ARTIFACT_HASHES__PIN_DATASET_REVISION_WITHOUT_CASE_EXPOSURE__FREEZE_BRAIN_RESPONSE_ADAPTER__RUN_SYNTHETIC_MUTATION_PREFLIGHT",
+        "verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json"
       }
     ],
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": [
@@ -176,7 +177,8 @@
     "official_gated_or_private_count": 2,
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
-    "portfolio_prequalification_pass_count": 0
+    "portfolio_prequalification_pass_count": 0,
+    "livebench_if_verifier_source_binding_frozen": true
   },
   "cross_surface_deductions": [
     "PUBLIC_LEADERBOARD_VISIBILITY_IS_NOT_EXECUTION_AUTHORITY",
