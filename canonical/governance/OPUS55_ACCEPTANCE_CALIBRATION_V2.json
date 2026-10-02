@@ -43,6 +43,10 @@
   "promotion_authority": false,
   "independent_verification": {
     "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V4.json",
-    "status": "INDEPENDENT_VERIFICATION_REQUIRED"
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__2_OF_19_ACCEPTANCE_CALIBRATED__17_PENDING__TERMINAL_FALSE__ZERO_NEW_REALITY",
+    "public_verifier_pr": 955,
+    "workflow_run_id": 37016821635,
+    "workflow_job_id": 110869620839,
+    "public_merge_commit": "8378723bd850fa2c6148b679ac27aea6c6a48c1e"
   }
 }
