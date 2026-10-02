@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__OBJECTIVE_GATE_INPUT_CHANGED__MATCHED_PROOF_FRONTIER_REOPENED__NO_CREDIT",
+  "status": "ACTIVE__FULL_UNRESOLVED_ACTION_COVERAGE_TARGET__ATTAINABILITY_FAIL_CLOSED__MATCHED_PROOF_FRONTIER_REOPENED__NO_CREDIT",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
@@ -126,6 +126,81 @@
         }
       ],
       "notes": "Automatically becomes useful only after upstream component acceptance proofs close."
+    },
+    {
+      "id": "BIND_PROFESSIONAL_AND_AA_BRIEFCASE_PUBLIC_ROUTES",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "preconditions": [],
+      "notes": "Bind complete comparable Brain-owned professional-work score-producing routes for GDPval-AA and AA-Briefcase. Shared harness or execution infrastructure may be reused, but each frozen predicate retains its own threshold and scope; no score inheritance."
+    },
+    {
+      "id": "RESOLVE_HLE_PUBLIC_BAR_ROUTE_OR_SCOPE_COMPLETE_REPLACEMENT",
+      "action_class": "ROUTE_BIND_OR_PROOF",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "preconditions": [],
+      "notes": "First search for admissible canonical case access or an unchanged-protocol scope-complete stronger witness. Do not treat the research-control direct-objective route as HLE score equivalence; it only removes avoidable prewave dependency when its own terminal evidence exists."
+    },
+    {
+      "id": "BIND_CHARTOGRAPHY_PUBLIC_BAR_ROUTE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "CHARTOGRAPHY_TOOLS_GE_89"
+      ],
+      "preconditions": [],
+      "notes": "Bind dataset identity, scorer, Brain vision/document route, carrier, threshold, contamination boundary, and attainability before any case exposure."
+    },
+    {
+      "id": "BIND_OSWORLD_COMPARABLE_PUBLIC_ROUTE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
+      "preconditions": [],
+      "notes": "Bind the same-harness comparable OSWorld 2.1 partial route required by the frozen predicate; otherwise retain the matched fallback. No cross-harness score inheritance."
+    },
+    {
+      "id": "BIND_FINANCE_PUBLIC_BAR_ROUTES",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61",
+        "FINANCE_AGENT_V2_GE_58_59"
+      ],
+      "preconditions": [],
+      "notes": "Bind comparable Brain-owned score-producing routes for both finance public bars. Keep the separate finance judgment source blocker distinct."
+    },
+    {
+      "id": "BIND_MYSTERYMECHANISM_PUBLIC_ROUTE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "preconditions": [],
+      "notes": "Bind a comparable MysteryMechanism route for the frozen public threshold without inheriting credit to uncovered transfer or abstention leaves."
     }
   ],
   "incremental_spend_usd": 0,
@@ -159,5 +234,10 @@
     "maximum_attainable_successes": 180,
     "required_successes": 220,
     "reality_execution_authorized": false
+  },
+  "coverage_contract": {
+    "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "evidence_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "rule": "EVERY_UNPROVED_ATOMIC_ACCEPTANCE_PREDICATE_MUST_BE_TARGETED_BY_AT_LEAST_ONE_DECLARED_DISCHARGE_ACTION__COVERAGE_IS_SCHEDULING_BOOKKEEPING_ONLY_AND_GRANTS_ZERO_EXECUTION_OR_ACCEPTANCE_CREDIT"
   }
 }
