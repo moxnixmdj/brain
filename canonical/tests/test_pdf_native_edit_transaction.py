@@ -60,6 +60,15 @@ class PdfNativeEditTransactionTests(unittest.TestCase):
             self.assertEqual(tuple(float(x) for x in before.mediabox),tuple(float(x) for x in after.mediabox))
             self.assertTrue(out["operator_sequence_preserved"])
 
+    def test_noop_text_replacement_fails_closed_without_output(self):
+        with tempfile.TemporaryDirectory() as td:
+            src=Path(td)/"in.pdf"; dst=Path(td)/"out.pdf"
+            make_text_pdf(src)
+            out=replace_unique_pdf_text_operand(src,dst,page_index=0,old="HELLO",new="HELLO")
+            self.assertEqual(out["status"],"FAIL_CLOSED",out)
+            self.assertEqual(out["reason"],"NO_OP_REPLACEMENT")
+            self.assertFalse(dst.exists())
+
     def test_duplicate_text_operand_fails_closed(self):
         with tempfile.TemporaryDirectory() as td:
             src=Path(td)/"in.pdf"; dst=Path(td)/"out.pdf"
