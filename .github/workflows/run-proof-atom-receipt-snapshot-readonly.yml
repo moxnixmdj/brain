@@ -1,0 +1,67 @@
+name: Run proof atom receipt snapshot read-only
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/run-proof-atom-receipt-snapshot-readonly.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Assert evidence roots unchanged by this PR
+        run: |
+          git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD > /tmp/changed.txt
+          if grep -E '^canonical/(verification|capabilities|governance)/' /tmp/changed.txt; then
+            echo "Evidence roots changed by PR; refusing snapshot." >&2
+            exit 1
+          fi
+      - name: Run sealed snapshot
+        id: snap
+        shell: bash
+        run: |
+          set +e
+          python canonical/runtime/proof_atom_receipt_snapshot_v1.py > /tmp/proof_atom_receipt_snapshot_v1.json 2> /tmp/proof_atom_receipt_snapshot_v1.stderr
+          RC=$?
+          echo "rc=$RC" >> "$GITHUB_OUTPUT"
+          python -m json.tool /tmp/proof_atom_receipt_snapshot_v1.json >/dev/null
+          JRC=$?
+          echo "json_rc=$JRC" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Run snapshot unit tests
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v > /tmp/proof_atom_receipt_snapshot_v1.tests 2>&1
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload exact snapshot and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-snapshot-readonly
+          path: |
+            /tmp/proof_atom_receipt_snapshot_v1.json
+            /tmp/proof_atom_receipt_snapshot_v1.stderr
+            /tmp/proof_atom_receipt_snapshot_v1.tests
+            /tmp/changed.txt
+          if-no-files-found: error
+      - name: Enforce result
+        run: |
+          test "${{ steps.snap.outputs.rc }}" = "0"
+          test "${{ steps.snap.outputs.json_rc }}" = "0"
+          test "${{ steps.tests.outputs.rc }}" = "0"
