@@ -94,10 +94,17 @@
       "preconditions": [
         {
           "id": "FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT",
-          "satisfied": false
+          "satisfied": true,
+          "evidence": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "reason": "INDEPENDENT_PUBLIC_RUNNER_PASS__LITERAL_12_INTERFACE_RECOMPUTATION__ZERO_CREDIT",
+          "derived_evidence": {
+            "path": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "field": "status",
+            "equals": "INDEPENDENT_PUBLIC_RUNNER_PASS__LITERAL_12_INTERFACE_RECOMPUTATION__ZERO_CREDIT"
+          }
         }
       ],
-      "notes": "Slice only exact load-bearing component interfaces used by the frozen composition claim; accept only independently verified acceptance-scoped claim-bound receipts. Never inherit whole-family credit by analogy."
+      "notes": "The frozen isolated-component interface set is now independently verified as a literal 12-interface extraction. Execute the slicer with only independently verified acceptance-scoped claim-bound receipts; missing family/receipt bindings remain explicit residuals and cannot inherit credit."
     },
     {
       "id": "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
@@ -318,7 +325,9 @@
     "proof_compression_kernels": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_PRECEDES_COMPARATOR_JUDGMENT_AND_COMPOSITION_WORK",
     "proof_compression_verification": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "differential_dominance_compiler": "ACTIVE_PENDING_TARGET_NORMALIZATION_AND_SCOPE_INPUTS__INDEPENDENT_IMPLEMENTATION_PASS__ZERO_CREDIT",
-    "differential_dominance_verifier": "verification-capsule-runner PR888__RUN37009287824__JOB110844881495__PASS"
+    "differential_dominance_verifier": "verification-capsule-runner PR888__RUN37009287824__JOB110844881495__PASS",
+    "composition_component_interfaces": "INDEPENDENT_PASS__12_LITERAL_INTERFACES__REPRESENTATION_GATE_SATISFIED__ZERO_CREDIT",
+    "composition_interface_verification": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
