@@ -1,3 +1,5 @@
+import json
+import pathlib
 import unittest
 
 from canonical.runtime.proof_route_dominance import evaluate
@@ -54,6 +56,22 @@ class ProofRouteDominanceTests(unittest.TestCase):
             ]
         })
         self.assertEqual(out["status"],"FAIL_CLOSED_UNCOVERED_OBLIGATIONS")
+
+    def test_frozen_private_surface_input_fails_closed_on_true_uncovered_obligations(self):
+        root=pathlib.Path(__file__).resolve().parents[2]
+        payload=json.loads((root/"canonical/governance/PRIVATE_SURFACE_DOMINANCE_INPUT_V1.json").read_text())
+        out=evaluate(payload)
+        self.assertEqual(out["status"],"FAIL_CLOSED_UNCOVERED_OBLIGATIONS")
+        self.assertEqual(out["global_uncovered_obligations"],[
+            "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+            "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+            "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+            "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+        ])
+        verdicts={v["route_id"]:v for v in out["blocked_route_verdicts"]}
+        self.assertTrue(verdicts["BLOCKED_MYSTERYMECHANISM"]["redundant"])
+        self.assertFalse(verdicts["BLOCKED_FRONTIERCODE_1_1"]["redundant"])
+        self.assertFalse(verdicts["BLOCKED_AA_BRIEFCASE_V1_1"]["redundant"])
 
     def test_invalid_unknown_coverage_rejected(self):
         out=evaluate({
