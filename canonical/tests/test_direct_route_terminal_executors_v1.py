@@ -24,6 +24,13 @@ class DirectRouteTerminalExecutorsTests(unittest.TestCase):
         expected=int.from_bytes(hashlib.sha256(raw).digest()[:8],"big")
         self.assertEqual(ex.derive_seed(ex.SA_CCR_ID,self.C,self.B,17),expected)
 
+    def test_delegation_uses_global_v2_kernel_case_id_and_seed_rule(self):
+        cid=f"{ex.DELEGATION_ID}::DELEGATION_T2_OBJECTIVE_POOL_V1::slot::17"
+        self.assertEqual(ex.case_id(ex.DELEGATION_ID,17),cid)
+        raw=b"PROJECT_BRAIN_TERMINAL_V2\0"+self.C.encode()+b"\0"+self.B.encode()+b"\0"+cid.encode()
+        expected=int.from_bytes(hashlib.sha256(raw).digest()[:8],"big")
+        self.assertEqual(ex.derive_seed(ex.DELEGATION_ID,self.C,self.B,17),expected)
+
     def test_route_specific_prefixes_change_seed_namespace(self):
         seeds={
             bid:ex.derive_seed(bid,self.C,self.B,0)
