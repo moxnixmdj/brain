@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ABDUCTIVE_RESIDUAL_THEOREM_COMPILER_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_FAIL_CLOSED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PASS__ABDUCTIVE_WEAKEST_SUFFICIENT_RESIDUAL_COMPILER__ZERO_CREDIT",
   "objective": "Derive exact weakest sufficient residual proof obligations from the leaves of independently verified finite implication graphs, so terminal work is scheduled against irreducible missing antecedents rather than coarse predeclared certificate names.",
   "runtime": "canonical/runtime/abductive_residual_theorem_v1.py",
   "tests": "canonical/tests/test_abductive_residual_theorem_v1.py",
@@ -38,5 +38,14 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "path": "canonical/verification/ABDUCTIVE_RESIDUAL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "candidate_verified_blob_sha": "3749962bf9cf4eedcf0f4d50465b5a6b2b415ac3",
+    "public_verifier_pr": 986,
+    "workflow_run_id": 37028380726,
+    "workflow_job_id": 110908709575,
+    "merge_commit": "19166df8613d7f76b81ea9c5bf8a9305d96f518f"
+  },
+  "next": "RUN_ONLY_ON_EXPLICIT_INDEPENDENTLY_VERIFIED_IMPLICATION_GRAPHS__COMBINE_WITH_CANONICAL_PROOF_ATOM_BASIS_TO_DERIVE_MINIMUM_RESIDUAL_FACT_SETS__FIXED_POINT_AFTER_EACH_NEW_VERIFIED_FACT__NO_FRESH_REALITY_FROM_THIS COMPILER"
 }
