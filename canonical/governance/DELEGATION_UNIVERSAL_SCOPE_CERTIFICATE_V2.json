@@ -16,13 +16,16 @@
     "canonical/tests/test_delegation_receipt_history_candidate_v4.py": "bf0f4edff4a7553d3e36812da38068e0e06ccdff",
     "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
     "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
-    "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json": "be855e285f0b64ec951b5ea870b4d4cc166740c9",
+    "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json": "8ffe02f3efe1ceebed30354404bc2f60f3bd6bbd",
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
     "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "af83f4899169e81017767c3316ddcf6b61da5ef6",
     "canonical/governance/DELEGATION_RECEIPT_HISTORY_SCOPE_REPAIR_V1.json": "60303b1dd081984e1218c8c2e978c7b1497df9e8",
-    "canonical/runtime/delegation_universal_scope_certificate_v2.py": "4045e5ac7252728c76e8f74da18d578d5e52e364",
-    "canonical/tests/test_delegation_universal_scope_certificate_v2.py": "cdfb10a4dca18bd60cb8ff9dae4840285c0cc60d"
+    "canonical/runtime/delegation_universal_scope_certificate_v2.py": "900a1fba2da1590e0636222091af5b8522574e81",
+    "canonical/tests/test_delegation_universal_scope_certificate_v2.py": "cdfb10a4dca18bd60cb8ff9dae4840285c0cc60d",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "eddfe01c81ae9d6e9453c4bc30737f9ddd273a83"
   },
   "proof_domain": {
     "population": "ALL_FINITE_VALID_EXPLICIT_MONOTONIC_FACT_DELEGATION_CONTRACTS_WITH_DECLARED_CAPABILITIES_RESOURCES_EVIDENCE_RULES_AND_ANY_FINITE_ORDERED_HISTORY_OF_SUPPORTED_LIVE_RECEIPTS_OVER_DECLARED_ENTITIES",
@@ -31,7 +34,8 @@
     "resource_capacity_changes": "ORDERED_LAST_WRITE_WINS",
     "repeated_supported_updates": "VALID_AND_ABSORBING_WHERE_SEMANTICALLY_IDEMPOTENT",
     "unknown_entities_or_receipt_kinds": "FAIL_CLOSED_OUTSIDE_VALID_DECLARED_DOMAIN",
-    "terminal_case_replay_required": false
+    "terminal_case_replay_required": false,
+    "contract_binding": "EXACT_CURRENT_BEHAVIORAL_CONTRACT_REGISTRY_ROW_PLUS_PRIOR_INDEPENDENT_SCOPE_EQUIVALENCE_GATE_ARE_CONTENT_ADDRESSED__ONLY_THE_LATER_RECEIPT_HISTORY_DEFECT_IS_REPLACED"
   },
   "formal_lemmas": [
     {
