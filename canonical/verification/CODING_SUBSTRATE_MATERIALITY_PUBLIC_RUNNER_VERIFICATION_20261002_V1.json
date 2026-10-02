@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_SUBSTRATE_MATERIALITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__BRAIN_CONFIGURATION_MATERIALLY_CHANGES_TERMINAL_EXECUTION__ZERO_BENCHMARK_CASES",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 815,
+  "verified_merge_ref": "5a3db2dd498d08edf2cfa637462680522fced642",
+  "workflow_run_id": 36984305162,
+  "workflow_job_id": 110765707228,
+  "conclusion": "success",
+  "verified_runtime_commit": "327347bf2d3e302ca45161cb09e27f966eab05e2",
+  "verified_runtime_description": "coding_substrate_materiality_counterfactual_v1.py synthetic configured-vs-bare terminal-decision counterfactual",
+  "conclusions": {
+    "configuration_material_control_proven": true,
+    "same_proposal_stream": true,
+    "configured_route_blocks_known_failure": true,
+    "configured_route_blocks_failed_verification": true,
+    "configured_route_accepts_verified_repair": true,
+    "model_quality_compared": false
+  },
+  "scope_limit": "MATERIAL_CONTROL_OF_COMPLETION_AND_VERIFICATION_DISCIPLINE_ONLY__NOT_TERMINAL_BENCH_PERFORMANCE",
+  "benchmark_case_content_consumed": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
