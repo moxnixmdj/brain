@@ -247,59 +247,6 @@ def select_repair_target(
 import re
 from typing import Mapping
 
-def _semantic_tokens(text: str) -> FrozenSet[str]:
-    """Conservative observable tokenization. No synonym or latent-semantic guessing."""
-    return frozenset(re.findall(r"[a-z0-9]+", str(text).lower()))
-
-@dataclass(frozen=True)
-class UIElement:
-    element_id: str
-    label: str
-    role: str
-    actions: FrozenSet[str]
-    visible: bool = True
-    enabled: bool = True
-    authorized: bool = True
-
-@dataclass(frozen=True)
-class GroundedActionDecision:
-    status: str
-    element_id: str | None
-    action: str | None
-    reason: str
-
-def select_grounded_ui_action(
-    required_terms: Iterable[str],
-    action: str,
-    elements: Sequence[UIElement],
-) -> GroundedActionDecision:
-    """Select only an observable, enabled, authorized element with explicit term coverage.
-
-    This deliberately handles the deterministic/observable grounding slice only.
-    If visible metadata is insufficient, it returns ESCALATE instead of inventing
-    an element identity from unstated visual semantics.
-    """
-    req=frozenset(str(x).lower() for x in required_terms if str(x).strip())
-    if not req:
-        return GroundedActionDecision("ESCALATE",None,None,"REQUIRED_TERMS_EMPTY")
-    if not action or not str(action).strip():
-        return GroundedActionDecision("ESCALATE",None,None,"ACTION_INVALID")
-    ids=[e.element_id for e in elements]
-    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
-        return GroundedActionDecision("ESCALATE",None,None,"ELEMENT_IDENTITIES_INVALID_OR_DUPLICATE")
-    eligible=[]
-    for e in elements:
-        if not (e.visible and e.enabled and e.authorized and action in e.actions):
-            continue
-        tokens=_semantic_tokens(e.label) | _semantic_tokens(e.role)
-        if req.issubset(tokens):
-            eligible.append((len(tokens-req),e.element_id,e))
-    if not eligible:
-        return GroundedActionDecision("ESCALATE",None,None,"NO_OBSERVABLE_AUTHORIZED_ELEMENT_WITH_EXPLICIT_TERM_COVERAGE")
-    eligible.sort(key=lambda x:(x[0],x[1]))
-    chosen=eligible[0][2]
-    return GroundedActionDecision("SELECT",chosen.element_id,action,"MIN_EXTRA_TERMS_EXPLICIT_GROUNDING")
-
 @dataclass(frozen=True)
 class ArtifactOperation:
     operation_id: str
