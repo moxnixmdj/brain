@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_M1A_POSITIONED_OCR_INTERFACE_GAP_20261002_V1",
+  "date": "2026-10-02",
+  "status": "STATIC_INTERFACE_DEFECT_CONFIRMED__SPECIFIC_M1A_MECHANISM_RESIDUAL_REOPENED__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "affected_obligation": "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
+  "evidence": {
+    "frozen_candidate": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V1.json",
+    "ocr_component": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
+    "ocr_artifact": {
+      "path": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+      "blob_sha": "45714d7a0160802d986042910da1c4c6462676e5"
+    },
+    "annotation_pipeline": {
+      "path": "canonical/runtime/drawing_annotation_constraint_pipeline.py",
+      "frozen_blob_sha": "ef798e35c45a112f5069f19db623b98b69500e86"
+    },
+    "association": {
+      "path": "canonical/runtime/callout_geometry_association.py",
+      "frozen_blob_sha": "6971ca86ffba0185c419ae893800312994efeacd"
+    }
+  },
+  "static_proof": [
+    "PINNED_IMAGE_OCR_TESSERACT_RUN_RETURNS_TEXT_AND_PSM_BUT_NO_POSITIONED_TEXT_BOXES",
+    "DRAWING_ANNOTATION_CONSTRAINT_PIPELINE_REQUIRES_EACH_TEXT_ITEM_TO_CONTAIN_A_BOX_MAPPING",
+    "CALLOUT_GEOMETRY_ASSOCIATION_REQUIRES_X0_Y0_X1_EXCLUSIVE_Y1_EXCLUSIVE_COORDINATES",
+    "THEREFORE_THE_FROZEN_COMPONENT_SET_DOES_NOT_YET_DEFINE_AN_EXECUTABLE_RAW_RASTER_TO_POSITIONED_TEXT_TO_FEATURE_CONSTRAINT_GRAPH_CHAIN"
+  ],
+  "correction": {
+    "reopen_mechanism_residual": "M1A_PINNED_POSITIONED_OCR_TSV_BRIDGE",
+    "required_properties": [
+      "SAME_PINNED_TESSERACT_BINARY_PACKAGE_AND_ENG_MODEL_SURFACE",
+      "TSV_WORD_EXTRACTION_WITH_DETERMINISTIC_LINE_GROUPING",
+      "X0_Y0_X1_EXCLUSIVE_Y1_EXCLUSIVE_BOX_CONTRACT",
+      "SOURCE_IMAGE_HASH_AND_DEPENDENCY_RECEIPT",
+      "FAIL_CLOSED_ON_MALFORMED_NONFINITE_OR_OUT_OF_BOUNDS_BOXES",
+      "NO_ENGINEERING_SEMANTIC_AUTHORITY"
+    ],
+    "no_other_m1a_mechanism_reopened": true
+  },
+  "contamination_consequence": {
+    "hidden_grader_was_inspected_after_candidate_freeze": true,
+    "current_frozen_candidate_may_still_be_evaluated_without_modification": true,
+    "any_candidate_runtime_change_to_fix_this_gap_invalidates_freecad_platform_drawing_for_clean_promotion": true,
+    "planned_disposition_after_bridge_install": "FREECAD_PLATFORM_DRAWING_BECOMES_SPENT_DIAGNOSTIC_ONLY__DO_NOT_USE_FOR_PROMOTION"
+  },
+  "terminal_case_executed": false,
+  "terminal_result_observed": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
