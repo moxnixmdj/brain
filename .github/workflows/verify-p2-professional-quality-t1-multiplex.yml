@@ -20,11 +20,13 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m unittest -v canonical.tests.test_p2_professional_quality_t1_multiplex_preflight
-      - run: python - <<'PY'
-        from pathlib import Path
-        from canonical.runtime.p2_professional_quality_t1_multiplex_preflight import evaluate
-        import json,sys
-        out=evaluate(Path("."))
-        print(json.dumps(out,indent=2,sort_keys=True))
-        raise SystemExit(0 if out["pass"] else 1)
-        PY
+      - name: Verify live binding
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from canonical.runtime.p2_professional_quality_t1_multiplex_preflight import evaluate
+          import json
+          out=evaluate(Path("."))
+          print(json.dumps(out,indent=2,sort_keys=True))
+          raise SystemExit(0 if out["pass"] else 1)
+          PY
