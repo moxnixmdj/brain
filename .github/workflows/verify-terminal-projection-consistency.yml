@@ -13,6 +13,18 @@ on:
       - "canonical/runtime/terminal_projection_consistency_v1.py"
       - "canonical/tests/test_terminal_projection_consistency_v1.py"
       - ".github/workflows/verify-terminal-projection-consistency.yml"
+  pull_request:
+    paths:
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+      - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json"
+      - "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2.json"
+      - "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      - "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json"
+      - "canonical/runtime/terminal_projection_consistency_v1.py"
+      - "canonical/tests/test_terminal_projection_consistency_v1.py"
+      - ".github/workflows/verify-terminal-projection-consistency.yml"
   workflow_dispatch:
 
 jobs:
