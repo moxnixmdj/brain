@@ -31,7 +31,13 @@ EXPECTED_BLOBS = {
     "canonical/runtime/delegation_whole_scope_proof_v2.py":
         "928466401b36e4f3b09c517950cc050432a0616f",
     "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json":
-        "be855e285f0b64ec951b5ea870b4d4cc166740c9",
+        "8ffe02f3efe1ceebed30354404bc2f60f3bd6bbd",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json":
+        "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json":
+        "52392515cd4de672f82f8afac82a41d3ce442656",
+    "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json":
+        "eddfe01c81ae9d6e9453c4bc30737f9ddd273a83",
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":
         "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
     "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json":
@@ -294,6 +300,31 @@ def verify() -> dict[str, Any]:
     assert repair["falsified_prior_claim"]["disposition"] == (
         "DO_NOT_PROMOTE_EXISTING_SCOPE_RELATION_TO_UNIVERSAL_FORMAL_SCOPE_PROOF"
     )
+
+    registry = json.loads(_text(
+        "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+    ))
+    registry_row = next(
+        x for x in registry["behaviors"]
+        if x.get("behavior_id") == "TASK_TO_DELEGATION_GRAPH_001"
+    )
+    assert "live receipts" in registry_row["allowed_information"].lower()
+    assert "lost provenance" in registry_row["success_condition"].lower()
+    assert "fanin loses required evidence" in registry_row["failure_condition"].lower()
+
+    prior_scope = json.loads(_text(
+        "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json"
+    ))
+    assert prior_scope["behavior_id"] == "TASK_TO_DELEGATION_GRAPH_001"
+    assert prior_scope["environment_relation"] == "EXACT"
+    assert prior_scope["information_relation"] == "EXACT_CANDIDATE_VISIBLE_INFORMATION"
+
+    prior_gate = json.loads(_text(
+        "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    ))
+    assert prior_gate["workflow_conclusion"] == "success"
+    assert prior_gate["verdict"]["admissible"] is True
+    assert prior_gate["verdict"]["required_interaction_count"] == prior_gate["verdict"]["covered_interaction_count"]
 
     relation = json.loads(_text(
         "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V2.json"
