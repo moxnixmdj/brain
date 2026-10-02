@@ -1,0 +1,21 @@
+name: Verify composition component slice v2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      - "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V2.json"
+      - "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_20261002_V2.json"
+      - "canonical/tests/test_composition_component_slice_v2.py"
+      - ".github/workflows/verify-composition-component-slice-v2.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python canonical/tests/test_composition_component_slice_v2.py
