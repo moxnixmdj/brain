@@ -117,6 +117,44 @@ def _v4_drop_provenance_counterexample() -> dict[str, Any]:
     }
 
 
+
+def _v4_unfalsifiable_diagnosis_counterexample() -> dict[str, Any]:
+    """Execute the reassigned UNFALSIFIABLE_DIAGNOSIS mutation against V4.
+
+    Moving a mutation between proof roles is not a kill. If V4's exact scorer
+    accepts an otherwise-correct output after injection of an explicitly
+    unfalsifiable diagnosis with no supporting receipts, the mutation survives
+    and quarantine cannot lift.
+    """
+    case = v4_proof.generate_case(
+        41002,
+        pattern="SINGLE",
+        domain="RESEARCH",
+        kind="AUTHORITY",
+    )
+    public = copy.deepcopy(v4_proof.public_task(case))
+    candidate = v4_candidate.solve(public)
+    baseline = v4_proof.score_case(case, candidate)
+
+    mutated = dict(candidate)
+    mutated["diagnosis"] = {
+        "claim": "THE_CAUSE_IS_CORRECT_BECAUSE_AN_UNOBSERVABLE_FORCE_SAYS_SO",
+        "falsifiable": False,
+        "supporting_receipts": [],
+    }
+    verdict = v4_proof.score_case(case, mutated)
+    holds = baseline.get("pass") is True and verdict.get("pass") is True
+    return {
+        "mutation": "UNFALSIFIABLE_DIAGNOSIS",
+        "mutation_instance": "INJECT_EXPLICIT_UNFALSIFIABLE_DIAGNOSIS_WITH_ZERO_RECEIPTS",
+        "baseline_pass": baseline.get("pass") is True,
+        "scorer_pass_after_mutation": verdict.get("pass") is True,
+        "mutated_diagnosis": mutated["diagnosis"],
+        "counterexample_holds": holds,
+        "verdict": verdict,
+    }
+
+
 def evaluate(candidate: Mapping[str, Any] | None = None) -> dict[str, Any]:
     errors: list[str] = []
     candidate = copy.deepcopy(dict(candidate)) if candidate is not None else load(CANDIDATE)
@@ -223,6 +261,10 @@ def evaluate(candidate: Mapping[str, Any] | None = None) -> dict[str, Any]:
     if "UNFALSIFIABLE_DIAGNOSIS" in term_mut:
         errors.append("UNFALSIFIABLE_DIAGNOSIS_STILL_ASSIGNED_TO_NARROW_TERMINAL_SCORER")
 
+    v4_diagnosis_counterexample = _v4_unfalsifiable_diagnosis_counterexample()
+    if v4_diagnosis_counterexample["counterexample_holds"]:
+        errors.append("V4_UNFALSIFIABLE_DIAGNOSIS_MUTATION_SURVIVES_SCORER")
+
     suite_src = EXECUTED_SUITE.read_text(encoding="utf-8")
     for lit in ["CAUSE_STEP_WRONG", "REPAIR_TARGET_WRONG", "CAUSAL_EVIDENCE_MISSING", "RESCUE_FAILED"]:
         if lit not in suite_src:
@@ -260,6 +302,7 @@ def evaluate(candidate: Mapping[str, Any] | None = None) -> dict[str, Any]:
         "terminal_mutation_count": len(term_mut),
         "quarantine_lift_eligible": not unique,
         "v4_drop_provenance_counterexample": v4_provenance_counterexample,
+        "v4_unfalsifiable_diagnosis_counterexample": v4_diagnosis_counterexample,
         "quarantine_resolved": False,
         "terminal_results_replayed": 0,
         "new_reality_units_consumed": 0,
