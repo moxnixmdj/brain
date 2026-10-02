@@ -26,18 +26,18 @@
   ],
   "current_expected_state": {
     "residual_registry_families": 17,
-    "acceptance_pending_families": 16,
+    "acceptance_pending_families": 15,
     "atomic_predicates": 38,
     "receipt_saturation_complete": true,
-    "proved_predicates": 8,
+    "proved_predicates": 9,
     "open_direct_predicates": 0,
-    "blocked_predicates": 30,
+    "blocked_predicates": 29,
     "authorized_acceptance_case_actions": 0,
     "public_score_producing_routes_ready": 0,
     "terminal_promotion_allowed": false
   },
   "next": [
-    "RECOMPUTE_TERMINAL_PROOF_SUPERCOMPILER_ON_30_BLOCKED_FRONTIER",
+    "RUN_ACTIVE_PROOF_COMPRESSION_AND_RECOMPUTE_TERMINAL_PROOF_SUPERCOMPILER_ON_29_BLOCKED_FRONTIER",
     "SEARCH_EXISTING_RECEIPTS_AND_SCOPE_COMPLETE_STRONGER_WITNESSES_BEFORE_ANY_NEW_REALITY",
     "BIND_ONLY_BRAIN_OWNED_OR_ADMISSIBLE_CONFIGURED_SCORE_PRODUCING_ROUTES",
     "TB4_REALITY_REMAINS_REVOKED_UNTIL_ATTAINABILITY_UPPER_BOUND_IS_MACHINE_VERIFIED_GE_220",
