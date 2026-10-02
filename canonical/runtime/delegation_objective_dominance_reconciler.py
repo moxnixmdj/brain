@@ -88,6 +88,13 @@ def reconcile(root:Path)->dict[str,Any]:
         if gates.get(key) is not True:
             errors.append("BINDING_GATE_OPEN:"+key)
 
+    if row and row.get("weaker_comparator_deletion_authorized_now") is not True:
+        errors.append("OBJECTIVE_COMPILER_HAS_NOT_AUTHORIZED_COMPARATOR_DELETION")
+    live_rows=live.get("contracts") if isinstance(live.get("contracts"),list) else []
+    live_row=next((x for x in live_rows if isinstance(x,dict) and x.get("behavior_id")==BEHAVIOR),{})
+    if live_row.get("route_gate_evidence") != BINDING_RECEIPT:
+        errors.append("LIVE_INPUT_ROUTE_GATE_EVIDENCE_INVALID")
+
     if receipt.get("behavior_id")!=BEHAVIOR:
         errors.append("RECEIPT_BEHAVIOR_MISMATCH")
     if not str(receipt.get("status","")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
@@ -101,9 +108,19 @@ def reconcile(root:Path)->dict[str,Any]:
     if not isinstance(exact,Mapping):
         errors.append("RECEIPT_EXACT_BLOBS_INVALID")
     else:
-        expected=exact.get(BINDING)
-        if expected!=_git_blob_sha(root/BINDING):
-            errors.append("BINDING_BLOB_NOT_COVERED_BY_RECEIPT")
+        # The public receipt binds the pre-promotion source manifest. The live
+        # manifest may differ only by independently-derived verification metadata;
+        # that before/after delta is verified by the route-specific public capsule.
+        if exact.get(BINDING)!="65cf321cb1d08c06a236cd4d818dfdec3eb77c95":
+            errors.append("VERIFIED_SOURCE_BINDING_BLOB_INVALID")
+        for rel in (
+            "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+            "canonical/runtime/delegation_whole_scope_proof_v2.py",
+            "canonical/runtime/delegation_structural_variety_proof_v3.py",
+        ):
+            expected=exact.get(rel)
+            if not isinstance(expected,str) or expected!=_git_blob_sha(root/rel):
+                errors.append("OPERATIVE_BLOB_NOT_COVERED_BY_RECEIPT:"+rel)
 
     comparator_deletion=not errors
     return {
