@@ -1,5 +1,6 @@
 from __future__ import annotations
 import unittest
+from unittest.mock import patch
 
 from canonical.runtime import terminal_parent_portfolio_runner_v1 as runner
 
@@ -48,6 +49,32 @@ class TerminalParentPortfolioRunnerTests(unittest.TestCase):
                     }
                 },
             )
+
+
+    def test_real_entrypoint_returns_fail_closed_receipts_without_aborting_wave(self):
+        failed_receipt = {
+            "behavior_id": runner.M0,
+            "portfolio": "T0",
+            "load_bearing": True,
+            "direct_instrumentation_pass": False,
+            "parent_terminal_acceptance_pass": False,
+            "case_replaced": False,
+            "tuning_replay": False,
+        }
+        with patch.object(
+            runner,
+            "_run_portfolio",
+            return_value={"pass": False, "receipts": [failed_receipt]},
+        ):
+            rows = runner.execute_parent_portfolio(
+                "T0",
+                commitment="frozen-commitment",
+                beacon="post-freeze-beacon",
+                direct_results={},
+            )
+        self.assertEqual(rows, [failed_receipt])
+        self.assertFalse(rows[0]["direct_instrumentation_pass"])
+        self.assertFalse(rows[0]["parent_terminal_acceptance_pass"])
 
 
 if __name__ == "__main__":
