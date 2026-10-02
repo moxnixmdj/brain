@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_EXPLICIT_FROZEN_LOAD_BEARING_INTERFACES__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Materialize only the component interfaces literally required by the frozen MULTI_CAPABILITY_COMPOSITION protocol so the existing composition proof slicer has an explicit finite interface surface. This artifact does not assert any interface is proved.",
+  "authority": {
+    "protocol": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+    },
+    "superportfolio": {
+      "path": "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+      "git_blob_sha": "d9ac894594ebcd2883520f7b7977a3548420541c"
+    }
+  },
+  "claim_id": "OPUS55_MULTI_CAPABILITY_COMPOSITION_FROZEN_V1",
+  "extraction_rule": "ONE_INTERFACE_PER_LITERAL_TASK_DIMENSION__PROPERTIES_ARE_ONLY_LITERAL_LOAD_BEARING_CAPABILITIES_AND_FROZEN_METRIC_OR_INVARIANT_OBLIGATIONS__NO_FAMILY_PASS_INHERITANCE",
+  "interfaces": [
+    {
+      "component_id": "COMPOSITION_SLICE_RESEARCH_TOOL_ARTIFACT",
+      "interface_id": "research_tool_artifact",
+      "required_properties": [
+        "research",
+        "tool_use",
+        "artifact_creation",
+        "terminal_success",
+        "evidence_provenance_complete"
+      ]
+    },
+    {
+      "component_id": "COMPOSITION_SLICE_BROWSER_MEMORY_RECOVERY",
+      "interface_id": "browser_memory_recovery",
+      "required_properties": [
+        "browser_or_computer_action",
+        "memory",
+        "recovery",
+        "terminal_success",
+        "cross_component_state_loss_zero_or_noncritical"
+      ]
+    },
+    {
+      "component_id": "COMPOSITION_SLICE_CODING_DEBUG_TOOL_DISCOVERY",
+      "interface_id": "coding_debug_tool_discovery",
+      "required_properties": [
+        "coding",
+        "debugging",
+        "tool_discovery",
+        "terminal_success",
+        "recovery"
+      ]
+    },
+    {
+      "component_id": "COMPOSITION_SLICE_DELEGATION_SYNTHESIS_ARTIFACT",
+      "interface_id": "delegation_synthesis_artifact",
+      "required_properties": [
+        "delegation",
+        "evidence_synthesis",
+        "artifact_production",
+        "terminal_success",
+        "evidence_provenance_complete"
+      ]
+    },
+    {
+      "component_id": "COMPOSITION_SLICE_STATE_HANDOFF_ROLLBACK",
+      "interface_id": "cross_capability_state_handoff_rollback",
+      "required_properties": [
+        "cross_capability_state_handoff",
+        "rollback",
+        "cross_component_state_loss_zero_or_noncritical",
+        "recovery",
+        "evidence_provenance_complete"
+      ]
+    }
+  ],
+  "receipts": [],
+  "slicer": "canonical/runtime/composition_component_proof_slicer_v1.py",
+  "expected_current_slicer_result": "RESIDUAL_COMPONENT_INTERFACE_PROOFS_OPEN",
+  "hard_rules": [
+    "MANIFEST_EXPLICITNESS_DOES_NOT_PROVE_ANY_COMPONENT_PROPERTY",
+    "NO_WHOLE_FAMILY_PASS_INHERITANCE",
+    "NO_RECEIPT_MAY_COUNT_UNLESS_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_AND_BOUND_TO_THE_FROZEN_CLAIM",
+    "NO_SEMANTIC_COMPONENT_OR_PROPERTY_MAY_BE_ADDED_WITHOUT_CONTENT_ADDRESSED_FROZEN_AUTHORITY",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_MARKING_FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT_SATISFIED"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
