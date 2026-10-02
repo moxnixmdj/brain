@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_FASTCOREF_CAUSAL_PROBE_V1",
+  "date": "2026-10-02",
+  "status": "RUNNABLE_ZERO_COST_CPU__NARROW_PARTIAL_SIGNAL__INSUFFICIENT_AS_DEFAULT_M0A_COREFERENCE_ROUTE__ZERO_CREDIT",
+  "parent_residual": "M0A_CROSS_SENTENCE_COREFERENCE_AND_NONEXACT_REFERENCES",
+  "donor": {
+    "repository": "shon-otmazgin/fastcoref",
+    "revision": "8888e51d97d4818a25dd5f5d8b541d397fad9362",
+    "license": "MIT",
+    "model_parameters_millions": 90.5,
+    "transformer_parameters_millions": 82.1,
+    "coref_head_parameters_millions": 8.4
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 450,
+    "workflow_run_id": 36944924569,
+    "execution_surface": "UBUNTU_24_04__CPU__PRETOKENIZED_INFERENCE__NO_SPACY_PIPELINE",
+    "package_install": "PASS",
+    "model_load": "PASS",
+    "inference": "PASS"
+  },
+  "probe": {
+    "text": "Alice approved the release package. She archived it after approval.",
+    "observed_clusters": [
+      [
+        [
+          "the",
+          "release",
+          "package"
+        ],
+        [
+          "it"
+        ]
+      ]
+    ],
+    "required_subject_link": [
+      "Alice",
+      "She"
+    ],
+    "required_object_link": [
+      "the release package",
+      "it"
+    ],
+    "object_link_observed": true,
+    "subject_link_observed": false
+  },
+  "conclusion": "PRESERVE_AS_POSSIBLE_OBJECT_ANAPHORA_SUBCOMPONENT_ONLY__DO_NOT_USE_AS_WHOLE_M0A_COREFERENCE_CLOSURE__DO_NOT_REPEAT_FEASIBILITY_PROBE",
+  "next": "CONTINUE_PRECOMMITTED_OLMO_CAUSAL_LOCALIZATION_AND_OTHER_SPECIALIZED_DONOR_COMPOSITION",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
