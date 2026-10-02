@@ -20,6 +20,7 @@ FOUR_CONTRACTS = "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS
 ABSOLUTE_SUITES = "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json"
 NATIVE_ROUTES = "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json"
 V5 = "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json"
+V5_VERIFY = "canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 
 BEHAVIOR = "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
 ROUTE = "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
@@ -52,6 +53,56 @@ EXPECTED_KINDS = {
     "STATE_TRANSITION", "TOOL_CONTRACT", "DEPENDENCY",
 }
 EXPECTED_PATTERNS = {"SINGLE", "DELAYED", "INTERACTION", "AMBIGUOUS"}
+EXPECTED_NORMALIZATION_BOUNDARY = "TASK_SPECIFIC_RAW_LOGS_SCREENSHOTS_TOOL_OUTPUTS_AND_ARTIFACT_EVENTS_MAY_BE_NORMALIZED_TO_THE_CANONICAL_TRAJECTORY_IR_BY_OWNED_DETERMINISTIC_OR_SEPARATELY_PROVEN_UPSTREAM_COMPONENTS"
+EXPECTED_OWNED_BEHAVIOR = "FAILED_EXECUTION_TRAJECTORY_TO_EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_CLASS_AND_FALSIFIABLE_REPAIR_TARGET_WITH_INTERVENTION_RESCUE_EVIDENCE"
+EXPECTED_REQUIRED_CHECKS = {
+    "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+    "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS",
+    "NOMINATED_REPAIR_IS_FALSIFIABLE",
+    "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE",
+    "SYMPTOM_ONLY_OR_COMPETING_REPAIR_DOES_NOT_RECEIVE_CAUSAL_CREDIT",
+    "NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE",
+    "AUTHORITY_SCOPE_TOOL_STATE_PROVENANCE_AND_DEPENDENCY_FAILURE_CLASSES_ARE_LOAD_BEARING_WHEN_PRESENT",
+    "MULTISTEP_OR_DELAYED_CAUSAL_INTERACTIONS_ARE_NOT_REDUCED_TO_FIRST_VISIBLE_SYMPTOM",
+}
+EXPECTED_REQUIRED_MUTATIONS = {
+    "SELECT_DOWNSTREAM_SYMPTOM",
+    "SELECT_LATER_CORRELATED_STEP",
+    "IGNORE_VIOLATED_AUTHORITY_OR_INVARIANT",
+    "UNFALSIFIABLE_DIAGNOSIS",
+    "REPAIR_TARGET_WITH_NO_RESCUE",
+    "FORCE_UNIQUE_CAUSE_ON_NONIDENTIFIABLE_TRACE",
+    "DROP_CAUSAL_PREDECESSOR_IN_MULTI_STEP_CHAIN",
+    "SWAP_TOOL_OR_AUTHORITY_FAILURE_CLASS",
+    "DROP_PROVENANCE_OR_DEPENDENCY_EDGE",
+}
+EXPECTED_V5_BLOBS = {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/tests/test_trajectory_failure_typed_ir_v5.py": "abc87ada119e42b720af5fb0f472816df975bc25",
+    "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json": "26cd9f4c626d4754200c64c3f298383580d67c14",
+}
+CHECK_EVIDENCE = {
+    "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE": {"V5_192_TYPED_CROSS_PRODUCT", "ALL_CAUSAL_PATTERNS"},
+    "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS": {"ALL_MECHANISM_CLASSES", "VISIBLE_RECEIPT_SUPPORT_REQUIRED"},
+    "NOMINATED_REPAIR_IS_FALSIFIABLE": {"UNFALSIFIABLE_OUTPUT_KILLED"},
+    "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE": {"HETEROGENEOUS_RESCUE_VERIFIED"},
+    "SYMPTOM_ONLY_OR_COMPETING_REPAIR_DOES_NOT_RECEIVE_CAUSAL_CREDIT": {"SYMPTOM_NONRESCUE_VERIFIED"},
+    "NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE": {"AMBIGUITY_ABSTENTION_VERIFIED"},
+    "AUTHORITY_SCOPE_TOOL_STATE_PROVENANCE_AND_DEPENDENCY_FAILURE_CLASSES_ARE_LOAD_BEARING_WHEN_PRESENT": {"ALL_MECHANISM_CLASSES", "EXPLICIT_SCOPE_FIRST_CLASS"},
+    "MULTISTEP_OR_DELAYED_CAUSAL_INTERACTIONS_ARE_NOT_REDUCED_TO_FIRST_VISIBLE_SYMPTOM": {"ALL_CAUSAL_PATTERNS", "PARTIAL_INTERACTION_NONRESCUE_VERIFIED"},
+}
+MUTATION_EVIDENCE = {
+    "SELECT_DOWNSTREAM_SYMPTOM": {"SYMPTOM_NONRESCUE_VERIFIED"},
+    "SELECT_LATER_CORRELATED_STEP": {"ALL_CAUSAL_PATTERNS", "V5_192_TYPED_CROSS_PRODUCT"},
+    "IGNORE_VIOLATED_AUTHORITY_OR_INVARIANT": {"ALL_MECHANISM_CLASSES"},
+    "UNFALSIFIABLE_DIAGNOSIS": {"UNFALSIFIABLE_OUTPUT_KILLED"},
+    "REPAIR_TARGET_WITH_NO_RESCUE": {"HETEROGENEOUS_RESCUE_VERIFIED"},
+    "FORCE_UNIQUE_CAUSE_ON_NONIDENTIFIABLE_TRACE": {"AMBIGUITY_ABSTENTION_VERIFIED"},
+    "DROP_CAUSAL_PREDECESSOR_IN_MULTI_STEP_CHAIN": {"ALL_CAUSAL_PATTERNS", "HETEROGENEOUS_RESCUE_VERIFIED"},
+    "SWAP_TOOL_OR_AUTHORITY_FAILURE_CLASS": {"ALL_MECHANISM_CLASSES"},
+    "DROP_PROVENANCE_OR_DEPENDENCY_EDGE": {"DROP_PROVENANCE_KILLED", "VISIBLE_RECEIPT_SUPPORT_REQUIRED"},
+}
 REQUIRED_V5_RULES = {
     "SCOPE_IS_FIRST_CLASS_NOT_ALIAS_OF_AUTHORITY",
     "FAILED_CAUSAL_CHECK_REQUIRES_NONEMPTY_VISIBLE_SUPPORTING_RECEIPTS",
@@ -98,6 +149,7 @@ def evaluate(
     absolute_suites: Mapping[str, Any] | None = None,
     native_routes: Mapping[str, Any] | None = None,
     v5: Mapping[str, Any] | None = None,
+    v5_verify: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     b = dict(binding or _load(BINDING))
     p = dict(portfolios or _load(PORTFOLIOS))
@@ -105,12 +157,18 @@ def evaluate(
     a = dict(absolute_suites or _load(ABSOLUTE_SUITES))
     nr = dict(native_routes or _load(NATIVE_ROUTES))
     v = dict(v5 or _load(V5))
+    vv = dict(v5_verify or _load(V5_VERIFY))
     errors: list[str] = []
 
     if b.get("behavior_id") != BEHAVIOR:
         errors.append("P1_BINDING_BEHAVIOR_DRIFT")
     if set(b.get("direct_surface_bindings") or []) != set(EXPECTED_SURFACES):
         errors.append("P1_DECLARED_DIRECT_SURFACE_SET_DRIFT")
+    decomposition = b.get("decomposition") or {}
+    if decomposition.get("owned_behavior") != EXPECTED_OWNED_BEHAVIOR:
+        errors.append("P1_OWNED_BEHAVIOR_BOUNDARY_DRIFT")
+    if decomposition.get("normalization_boundary") != EXPECTED_NORMALIZATION_BOUNDARY:
+        errors.append("P1_NORMALIZATION_BOUNDARY_DRIFT")
     terminal = b.get("terminal_acceptance") or {}
     if terminal.get("standalone_synthetic_whole_domain_score_forbidden") is not True:
         errors.append("SYNTHETIC_TERMINAL_SCORE_FIREWALL_MISSING")
@@ -118,6 +176,11 @@ def evaluate(
         errors.append("DECLARED_SCOPE_CREDIT_FIREWALL_MISSING")
     if b.get("terminal_results_observed") != 0:
         errors.append("P1_BINDING_ALREADY_OBSERVED_TERMINAL_RESULT")
+    evaluator = b.get("evaluator") or {}
+    if set(evaluator.get("required_checks") or []) != EXPECTED_REQUIRED_CHECKS:
+        errors.append("P1_FULL_REQUIRED_CHECK_SET_DRIFT")
+    if set(evaluator.get("required_mutations") or []) != EXPECTED_REQUIRED_MUTATIONS:
+        errors.append("P1_FULL_REQUIRED_MUTATION_SET_DRIFT")
 
     obligation = _one(
         fc.get("obligations"),
@@ -171,6 +234,9 @@ def evaluate(
         if ROUTE not in set(s.get("proof_routes") or []):
             errors.append("P1_ROUTE_NOT_BOUND_TO_SURFACE:" + binding_id)
             continue
+        if s.get("direct_proof_contracts") != FOUR_CONTRACTS:
+            errors.append("P1_SURFACE_CONTRACT_POINTER_DRIFT:" + binding_id)
+            continue
         evaluator = s.get("evaluator")
         if evaluator != "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json":
             errors.append("P1_SURFACE_EVALUATOR_DRIFT:" + binding_id)
@@ -184,6 +250,51 @@ def evaluate(
             "route_id": ROUTE,
             "full_surface_superset_claim": False,
         })
+
+    if not str(vv.get("status") or "").startswith("INDEPENDENT_PUBLIC_RUNNER_PASS__"):
+        errors.append("V5_INDEPENDENT_VERIFICATION_MISSING")
+    if vv.get("behavior_id") != BEHAVIOR:
+        errors.append("V5_VERIFICATION_BEHAVIOR_DRIFT")
+    if dict(vv.get("exact_brain_blobs") or {}) != EXPECTED_V5_BLOBS:
+        errors.append("V5_VERIFIED_BLOB_SET_DRIFT")
+    verified = vv.get("verified") or {}
+    verified_ids: set[str] = set()
+    if int(verified.get("typed_case_count") or -1) == 192:
+        verified_ids.add("V5_192_TYPED_CROSS_PRODUCT")
+    if set(verified.get("mechanism_classes") or []) == EXPECTED_KINDS:
+        verified_ids.add("ALL_MECHANISM_CLASSES")
+    if set(verified.get("causal_patterns") or []) == EXPECTED_PATTERNS:
+        verified_ids.add("ALL_CAUSAL_PATTERNS")
+    if int(verified.get("explicit_scope_case_count") or -1) == 24 and "SCOPE" in set(verified.get("mechanism_classes") or []):
+        verified_ids.add("EXPLICIT_SCOPE_FIRST_CLASS")
+    if int(verified.get("identifiable_or_interaction_rescue_count") or -1) == 144:
+        verified_ids.add("HETEROGENEOUS_RESCUE_VERIFIED")
+    if verified.get("symptom_only_repair_does_not_rescue") is True:
+        verified_ids.add("SYMPTOM_NONRESCUE_VERIFIED")
+    if verified.get("partial_interaction_repair_does_not_rescue") is True:
+        verified_ids.add("PARTIAL_INTERACTION_NONRESCUE_VERIFIED")
+    if verified.get("ambiguous_cases_do_not_force_unique_cause") is True:
+        verified_ids.add("AMBIGUITY_ABSTENTION_VERIFIED")
+    if verified.get("drop_provenance_mutation_killed") is True:
+        verified_ids.add("DROP_PROVENANCE_KILLED")
+    if verified.get("unfalsifiable_output_injection_killed") is True:
+        verified_ids.add("UNFALSIFIABLE_OUTPUT_KILLED")
+    if verified.get("hidden_intervention_state_candidate_visible") is False:
+        verified_ids.add("HIDDEN_GOLD_ISOLATED")
+    if "FAILED_CAUSAL_CHECK_REQUIRES_NONEMPTY_VISIBLE_SUPPORTING_RECEIPTS" in set(v.get("hard_rules") or []):
+        verified_ids.add("VISIBLE_RECEIPT_SUPPORT_REQUIRED")
+    if set(CHECK_EVIDENCE) != EXPECTED_REQUIRED_CHECKS:
+        errors.append("P1_CHECK_EVIDENCE_MAP_INCOMPLETE")
+    if set(MUTATION_EVIDENCE) != EXPECTED_REQUIRED_MUTATIONS:
+        errors.append("P1_MUTATION_EVIDENCE_MAP_INCOMPLETE")
+    for req, evidence_ids in CHECK_EVIDENCE.items():
+        missing = set(evidence_ids) - verified_ids
+        if missing:
+            errors.append("P1_REQUIRED_CHECK_UNVERIFIED:" + req + ":" + ",".join(sorted(missing)))
+    for req, evidence_ids in MUTATION_EVIDENCE.items():
+        missing = set(evidence_ids) - verified_ids
+        if missing:
+            errors.append("P1_REQUIRED_MUTATION_UNVERIFIED:" + req + ":" + ",".join(sorted(missing)))
 
     if v.get("behavior_id") != BEHAVIOR:
         errors.append("V5_BEHAVIOR_DRIFT")
@@ -241,6 +352,9 @@ def evaluate(
         "v5_relation": "SUPERSET",
         "v5_is_superset_carrier_for_frozen_p1_residual_role": True,
         "residual_semantics_carried": sorted(residual_semantics),
+        "full_frozen_p1_required_checks_mapped": sorted(EXPECTED_REQUIRED_CHECKS),
+        "full_frozen_p1_required_mutations_mapped": sorted(EXPECTED_REQUIRED_MUTATIONS),
+        "verified_evidence_ids": sorted(verified_ids),
         "anti_overclaim": {
             "full_surface_superset_claim": False,
             "private_benchmark_score_reproduction_claim": False,
