@@ -27,7 +27,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["future_case_count"],18)
         self.assertTrue(out["route_preexposure_valid"])
         self.assertFalse(out["exact_opus_required_if_brain_hits_ceiling"])
-        self.assertFalse(out["old_terminal_evidence_admissible"])
+        self.assertFalse(out["old_terminal_evidence_admissible"])\n        self.assertFalse(out["scope_completeness_currently_proved"])\n        self.assertEqual(out["required_scope_completeness_basis"],"EXACT_COMPLETE_TARGET_CASE_UNIVERSE")
         self.assertEqual(out["acceptance_credit_delta"],0)
         self.assertFalse(out["execution_authority"])
 
@@ -59,7 +59,7 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("QUALITY_CEILING_SCORER_DRIFT",out["errors"])
 
-    def test_scope_source_class_drift_fails_closed(self):
+    def test_blueprint_cannot_claim_scope_complete(self):\n        x=live(); x["route"]=copy.deepcopy(x["route"])\n        x["route"]["scope_completeness_requirement"]["current_state"]="VERIFIED"\n        out=evaluate(**x)\n        self.assertFalse(out["pass"])\n        self.assertIn("SCOPE_COMPLETENESS_STATE_DRIFT",out["errors"])\n\n    def test_scope_source_class_drift_fails_closed(self):
         x=live(); x["route"]=copy.deepcopy(x["route"])
         x["route"]["preexposure_scope_blueprint"]["source_classes"]=x["route"]["preexposure_scope_blueprint"]["source_classes"][:-1]
         out=evaluate(**x)
