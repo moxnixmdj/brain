@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__TERMINAL_GOAL_NOT_ACHIEVED",
+  "truth": {
+    "terminal_execution": "3352/3352_PASS",
+    "contracts": "12/12_PASS",
+    "behavioral_families": "19/19_PASS",
+    "opus55_acceptance": "2/19_PASS__17/19_OPEN",
+    "global_postconditions": "INDEPENDENT_PASS",
+    "donor_cleanroom": "INDEPENDENT_PASS",
+    "achieved": false
+  },
+  "sources": {
+    "terminal_closure_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "5dba1cb63e0f73e8ba545c1254512b038b556f63"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "ea4aec645fc84b2ae4745763c13b65fb1d064f4f"
+    },
+    "acceptance_calibration": {
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+      "git_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62"
+    },
+    "residual_plan": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
+      "git_blob_sha": "d71f3ffb2136dc3265fdbccb31276901827c4602"
+    },
+    "global_postconditions": {
+      "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f"
+    },
+    "invalidated_bundle": {
+      "path": "canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_INVALIDATION_20261002_V1.json",
+      "git_blob_sha": "9dfda8e533e0d51985b2b32f709b1b238db1ef19"
+    }
+  },
+  "residual": [
+    "17_FROZEN_OPUS55_PROTOCOL_RESULTS_OPEN",
+    "REBUILD_FINAL_BUNDLE_AFTER_ACCEPTANCE_CLOSURE",
+    "REVERIFY_CURRENT_TERMINAL_CLOSURE_REDUCER",
+    "FINAL_CLOSURE_AND_INDEPENDENT_FINALITY"
+  ],
+  "no_terminal_replay": true,
+  "next": "EXECUTE_OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1",
+  "rule": "DERIVED_POINTER_ONLY__RECOMPUTE_IF_ANY_SOURCE_BLOB_CHANGES"
+}
