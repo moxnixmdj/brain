@@ -7,7 +7,8 @@ from typing import Any
 SCHEMA="PROJECT_BRAIN_CAD_T0_POST_REFREEZE_GUARD_V2"
 FREEZE="canonical/governance/CAD_T0_CANDIDATE_FREEZE_V2.json"
 BINDING="canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json"
-OCR_VERIFY="canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"\nPOP_VERIFY="canonical/verification/CAD_T0_POPULATION_ORACLE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+OCR_VERIFY="canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+POP_VERIFY="canonical/verification/CAD_T0_POPULATION_ORACLE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 
 def _load(root:Path,rel:str)->dict[str,Any]:
     x=json.loads((root/rel).read_text(encoding="utf-8"))
