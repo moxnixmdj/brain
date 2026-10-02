@@ -8,7 +8,7 @@ from canonical.runtime.research_t3_objective_binding_validator import validate
 
 
 class ResearchT3ObjectiveBindingValidatorTests(unittest.TestCase):
-    def test_live_binding_passes_pre_external_verification(self):
+    def test_live_binding_passes_receipt_backed_promotion_transition(self):
         root = Path(__file__).resolve().parents[2]
         out = validate(root)
         self.assertTrue(out["pass"], out)
@@ -21,6 +21,15 @@ class ResearchT3ObjectiveBindingValidatorTests(unittest.TestCase):
         self.assertEqual(out["terminal_results_observed"], 0)
         self.assertFalse(out["execution_authority"])
         self.assertFalse(out["promotion_authority"])
+        binding = json.loads(
+            (root / "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json").read_text()
+        )
+        self.assertTrue(binding["route_gates"]["independent_verification_pass"])
+        self.assertTrue(binding["prewave_admissible"])
+        self.assertEqual(
+            binding["independent_verification"],
+            "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        )
 
     def test_binding_explicitly_disclaims_hle_score_equivalence(self):
         root = Path(__file__).resolve().parents[2]
