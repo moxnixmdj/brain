@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FINAL_TERMINAL_PROOF_BUNDLE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN__19_OF_19_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_INDEPENDENT_PASS__PENDING_FINAL_CLOSURE_REDUCER",
+  "status": "FROZEN__19_OF_19_VERIFIED_OWNERSHIP_CANDIDATE__GLOBAL_OWNERSHIP_POSTCONDITIONS_INDEPENDENT_PASS__HARDENED_FINAL_CLOSURE_CI_PENDING",
   "objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "terminal_execution": {
     "snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
@@ -19,9 +19,14 @@
     "unresolved_composition_failures": 0,
     "contaminated_promotion_evidence": 0,
     "resource_or_authority_violations": 0,
-    "donor_deletion_cleanroom_pass": true
+    "donor_deletion_cleanroom_pass": true,
+    "capability_families_verified_owned": "19/19"
   },
   "ordered_evidence": [
+    {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "50999088fe7b77b404a8d155539649bd61ce28b8"
+    },
     {
       "path": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
       "git_blob_sha": "76be865fb7f20a36f7daab4a2708950432034b37"
@@ -32,7 +37,7 @@
     },
     {
       "path": "canonical/runtime/terminal_closure_reducer.py",
-      "git_blob_sha": "2732a577b441e8031ee128629410f792bfe36201"
+      "git_blob_sha": "9b8430faf5e34e8ffc723c1dcd059dd63b3988c1"
     },
     {
       "path": "canonical/runtime/terminal_contract_result_reducer_v1.py",
@@ -84,9 +89,9 @@
     "leaf": "SHA256(UTF8('leaf\\\\0'||path||'\\\\0'||git_blob_sha))",
     "parent": "SHA256(UTF8('node\\\\0')||HEX_DECODE(left)||HEX_DECODE(right))",
     "odd_node_rule": "DUPLICATE_LAST",
-    "evidence_count": 14
+    "evidence_count": 15
   },
-  "merkle_root_sha256": "f6265acf3f35010672a3a681958faf6971be0e829f349846ef3fc1334581d604",
+  "merkle_root_sha256": "74df741ad4c5ddf056fc1c67f0dd608bc13d613b167cc2b308e950f15d9ef132",
   "proof_bundle_frozen": true,
   "postwave_lock": {
     "new_capability_testing": false,
@@ -100,5 +105,11 @@
   "accidental_replay_disposition": "EXCLUDED_FROM_ALL_PROOF_ACCOUNTING",
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "final_closure": {
+    "reducer": "canonical/runtime/terminal_closure_reducer.py",
+    "reducer_blob_sha": "9b8430faf5e34e8ffc723c1dcd059dd63b3988c1",
+    "ownership_matrix_blob_sha": "50999088fe7b77b404a8d155539649bd61ce28b8",
+    "status": "PENDING_INDEPENDENT_CI"
+  }
 }
