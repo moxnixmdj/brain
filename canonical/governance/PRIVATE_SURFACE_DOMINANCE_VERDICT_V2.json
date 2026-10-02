@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PRIVATE_SURFACE_DOMINANCE_VERDICT_V2",
+  "date": "2026-10-02",
+  "status": "COMPLETE__ZERO_UNCOVERED_BEHAVIORAL_OBLIGATIONS__ALL_BLOCKED_PRIVATE_SURFACES_REDUNDANT_AS_EXECUTION_ROUTES",
+  "input": {
+    "path": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_INPUT_V2.json",
+    "blob_sha": "d651a9af9ba4ac16c4a0c1271fb4933ff3e9f277"
+  },
+  "compiler": {
+    "path": "canonical/runtime/proof_route_dominance.py",
+    "blob_sha": "64efeaad5d4295d5bd1a3bd53feae5170c22a8a4"
+  },
+  "independent_verification": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "global_uncovered_obligations": [],
+  "obligation_support": {
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001": [
+      "VERIFIED_ACCEPTANCE_COMPILER_DIRECT"
+    ],
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001": [
+      "VERIFIED_CONTRACT_NATIVE_STRUCTURED_METHOD"
+    ],
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001": [
+      "VERIFIED_CONTRACT_NATIVE_TRAJECTORY_FAILURE_LOCALIZATION"
+    ],
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001": [
+      "VERIFIED_CONTRACT_NATIVE_PROFESSIONAL_PLAN_QUALITY"
+    ],
+    "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001": [
+      "VERIFIED_NATIVE_ARTIFACT_TRANSACTIONS"
+    ],
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001": [
+      "VERIFIED_CONTRACT_NATIVE_EVIDENCE_SYNTHESIS"
+    ],
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001": [
+      "VERIFIED_M4_RESEARCH_CONTROL"
+    ],
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": [
+      "VERIFIED_TOOL_SELECTION_PRIMITIVES"
+    ],
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001": [
+      "VERIFIED_M3_CONSENSUS_DOM_GROUNDING"
+    ]
+  },
+  "blocked_route_verdicts": {
+    "BLOCKED_FRONTIERCODE_1_1": {
+      "redundant": true,
+      "uncovered_obligations": []
+    },
+    "BLOCKED_CURSORBENCH_4_0": {
+      "redundant": true,
+      "uncovered_obligations": []
+    },
+    "BLOCKED_AA_BRIEFCASE_V1_1": {
+      "redundant": true,
+      "uncovered_obligations": []
+    },
+    "BLOCKED_FINANCE_AGENT_V2_PRIVATE": {
+      "redundant": true,
+      "uncovered_obligations": []
+    },
+    "BLOCKED_MYSTERYMECHANISM": {
+      "redundant": true,
+      "uncovered_obligations": []
+    }
+  },
+  "deduction": "ALL_PRIVATE_OR_NONREPRODUCIBLE_SURFACES_IN_V2_ARE_DELETEABLE_AS_REQUIRED_EXECUTION_ROUTES_BECAUSE_EVERY_FROZEN_BEHAVIORAL_OBLIGATION_HAS_EQUAL_OR_STRONGER_ZERO_COST_EXECUTABLE_INDEPENDENT_SUPPORT",
+  "target_weakening": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

@@ -211,7 +211,10 @@
     "livebench_if_full_verifier_runtime_hermetic_smoke_pass": false,
     "four_uncovered_behavioral_direct_proof_contracts_frozen": true,
     "four_uncovered_behavioral_direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
-    "scope_equivalent_proof_gate_independently_verified": "canonical/verification/PREWAVE_CRITICAL_PATH_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "scope_equivalent_proof_gate_independently_verified": "canonical/verification/PREWAVE_CRITICAL_PATH_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "private_surface_behavioral_coverage_complete": true,
+    "contract_native_absolute_proof_suites_independently_verified": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "controller_composition_independent_pass": "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -236,20 +239,17 @@
   "private_surface_dependency_deletion_map": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
   "independent_verification_carrier_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json",
   "private_surface_route_deletion_vs_substitution_reconciliation": "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json",
-  "private_surface_dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V1.json",
+  "private_surface_dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
   "private_surface_dependency_status": {
     "independently_verified_runner": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "deleted_required_route": [
       "Vals MysteryMechanism official heldout"
     ],
-    "remaining_uncovered_behavioral_obligations": [
-      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
-      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
-      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
-      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
-    ],
+    "remaining_uncovered_behavioral_obligations": [],
     "rule": "PRIVATE_SURFACE_DELETION_CHANGES_REQUIRED_EVIDENCE_ROUTE_ONLY__ZERO_FAMILY_OR_CAPABILITY_CREDIT",
-    "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json"
+    "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+    "all_blocked_private_execution_routes_redundant": true,
+    "verification": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "execution_carrier_state": {
     "private_brain_github_actions": "FAIL_CLOSED_PRESTEP_CARRIER_FAILURE",
