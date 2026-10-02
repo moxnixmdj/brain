@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_PROVED__0_OPEN__29_BLOCKED__TB4_ATTAINABILITY_IMPOSSIBLE__ZERO_CREDIT",
+  "source_brain_commit": "9167718f20002f966f30c22cf968083a09534bd4",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 876,
+    "pull_request_head": "5eded38f6a3bf7a418039765ece5306b94ce49b4",
+    "merge_commit": "9ec1c4d04c9fb95b207f95a4b1b517409f5abd07",
+    "workflow_run_id": 37006350326,
+    "workflow_job_id": 110835431302,
+    "conclusion": "success"
+  },
+  "exact_brain_blobs": {
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
+    "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1",
+    "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json": "4e59e30461c9ff1bee1a9474627d5fb4074844b2",
+    "canonical/runtime/opus55_acceptance_residual_compiler_v2.py": "cae5bc3bfda9c77d7d7e5151127f55aafddb9522"
+  },
+  "predicate_count": 38,
+  "proved_predicate_count": 9,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 29,
+  "refuted_predicate_count": 0,
+  "authorized_acceptance_case_actions": [],
+  "newly_proved_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+  "newly_closed_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+  "tb4_attainability": {
+    "source": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "state": "IMPOSSIBLE",
+    "maximum_attainable_successes": 180,
+    "required_successes": 220,
+    "reality_execution_authorized": false
+  },
+  "rule": "INDEPENDENT_EXACT_BLOB_RECOMPUTATION__DELEGATION_ATOMIC_CEILING_REDUCES_BLOCKED_FRONTIER_BY_ONE__NO_NEW_ACCEPTANCE_CASE_EXECUTION",
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
