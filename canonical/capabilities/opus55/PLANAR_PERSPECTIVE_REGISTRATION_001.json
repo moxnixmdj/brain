@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PLANAR_PERSPECTIVE_REGISTRATION_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_COMPONENT__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
+  "closed_atom": "PLANAR_PROJECTIVE_PERSPECTIVE_RECTIFICATION_FROM_EXPLICIT_CONVEX_QUADRILATERAL",
+  "artifact": "canonical/runtime/drawing_view_registration.py",
+  "artifact_blob_sha": "374138c31a635dd172fae54f82a0ca5ac7456e63",
+  "mechanism": "OpenCV getPerspectiveTransform + warpPerspective with convexity/degeneracy fail-closed validation",
+  "external_dependency": "opencv/opencv__Apache-2.0__already-used Brain dependency",
+  "verification": {
+    "runner_repo": "moxnixmdj/verification-capsule-runner",
+    "runner_pr": 446,
+    "runner_merge_commit": "c3913e11778e375e7dffdbf5b19d5f381d4c23af",
+    "workflow_run_id": 36943628353,
+    "conclusion": "success",
+    "tests": [
+      "synthetic projective warp recovery",
+      "nonconvex quadrilateral rejection",
+      "degenerate quadrilateral rejection",
+      "nonsemantic terminal-authority boundary"
+    ]
+  },
+  "owned_scope": [
+    "PLANAR_PROJECTIVE_RECTIFICATION",
+    "EXPLICIT_TL_TR_BR_BL_CONVEX_QUAD_INPUT",
+    "DEGENERATE_OR_INVALID_QUAD_FAIL_CLOSED"
+  ],
+  "explicit_nonclaims": [
+    "LOCAL_NONLINEAR_WARP",
+    "AUTOMATIC_QUADRILATERAL_DISCOVERY",
+    "ARBITRARY_NONORTHOGONAL_VIEW_LAYOUT_SEMANTICS",
+    "WHOLE_M1A_CLOSURE"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
