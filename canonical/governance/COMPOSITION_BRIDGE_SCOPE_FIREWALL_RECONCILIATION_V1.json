@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_BRIDGE_SCOPE_FIREWALL_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__STALE_TWO_RECEIPTS_FAIL_CLOSED_AFTER_SCOPE_FIREWALL__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Reconcile the frozen composition component proof slice against the later absolute-dominance scope-completeness firewall so no component proof continues to inherit from a source-family closure that is no longer current.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "authorities": {
+    "behavioral_bridge": {
+      "path": "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_V1.json",
+      "git_blob_sha": "d6cb17f548493e64ca3d200d51b049412a939ef7"
+    },
+    "bridge_activation": {
+      "path": "canonical/governance/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_V1.json",
+      "git_blob_sha": "59504f4608f9490022c1aa58214e34191fb0b6e9"
+    },
+    "current_slice_v2": {
+      "path": "canonical/verification/COMPOSITION_COMPONENT_PROOF_SLICE_20261002_V2.json",
+      "git_blob_sha": "714d1771ad2fa3ca240c0fb73609dc4873ea4390"
+    },
+    "scope_firewall": {
+      "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+      "git_blob_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d"
+    },
+    "current_acceptance_bindings": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "af83f4899169e81017767c3316ddcf6b61da5ef6"
+    }
+  },
+  "stale_receipts": [
+    {
+      "receipt_id": "COMPOSITION_BRIDGE::TOOL_ROUTE_DISCOVERY_AND_SELECTION_001::tool_discovery",
+      "component_id": "tool discovery",
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "current_source_acceptance_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "current_source_predicate_state": "EXTERNAL_BLOCKED",
+      "current_blocker": "ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
+      "effect": "QUARANTINE_FROM_CURRENT_COMPOSITION_SCOPED_PROOF"
+    },
+    {
+      "receipt_id": "COMPOSITION_BRIDGE::TASK_TO_DELEGATION_GRAPH_001::delegation",
+      "component_id": "delegation",
+      "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "current_source_acceptance_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "current_source_predicate_state": "EXTERNAL_BLOCKED",
+      "current_blocker": "ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
+      "effect": "QUARANTINE_FROM_CURRENT_COMPOSITION_SCOPED_PROOF"
+    }
+  ],
+  "derivation": {
+    "bridge_required_rule": "THE_SOURCE_FAMILY_CLOSURE_MUST_BE_VERIFIED_INDEPENDENT_CONTAMINATION_CLEAN_BIND_THE_FROZEN_PROTOCOL_BE_PROVEN_STRONGER_AND_CLOSE_THE_ENTIRE_PROTOCOL",
+    "later_firewall_effect": "TOOL_DISCOVERY_SELECTION_AND_LEARNING_AND_SUBAGENT_DELEGATION_AND_COORDINATION_REOPENED_PENDING_SCOPE_COMPLETENESS",
+    "current_terminal_family_acceptance": "2_OF_19_CLOSED__17_OPEN",
+    "preserved_closed_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+    ],
+    "conclusion": "BOTH_EXISTING_COMPOSITION_BRIDGE_RECEIPTS_NO_LONGER_MEET_THEIR_OWN_SOURCE_FAMILY_CLOSURE_PRECONDITION"
+  },
+  "corrected_composition_component_state_before_any_new_receipt": {
+    "scoped_proved_interface_count": 0,
+    "open_interface_count": 12,
+    "parent_predicate_closed": false,
+    "tool_discovery_prior_sample_evidence_preserved": true,
+    "delegation_prior_sample_evidence_preserved": true
+  },
+  "hard_rules": [
+    "LATER_SCOPE_FIREWALL_SUPERSEDES_EARLIER_ABSOLUTE_DOMINANCE_FAMILY_CLOSURE",
+    "A_COMPONENT_BRIDGE_RECEIPT_CANNOT_OUTLIVE_A_SOURCE_FAMILY_CLOSURE_WHEN_THE_BRIDGE_DERIVATION_EXPLICITLY_REQUIRES_WHOLE_PROTOCOL_CLOSURE",
+    "PRESERVE_RAW_180_OF_180_TOOL_DISCOVERY_AND_132_OF_132_DELEGATION_SAMPLE_EVIDENCE",
+    "DO_NOT_DELETE_SOURCE_WITNESSES__QUARANTINE_ONLY_CURRENT_ACCEPTANCE_TRANSPORT",
+    "REOPEN_EACH_RECEIPT_IF_AND_ONLY_IF_ITS_SOURCE_FAMILY_CLOSURE_PRECONDITION_BECOMES_CURRENT_AGAIN_OR_A_SEPARATE_SCOPE_COMPLETE_COMPONENT_PROOF_IS_INDEPENDENTLY_VERIFIED",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_THIS_RECONCILIATION__THEN_REBUILD_COMPOSITION_SLICER_INPUT_FROM_CURRENT_ADMISSIBLE_RECEIPTS_ONLY__THE_SEPARATE_MEMORY_OWNED_FAMILY_BRIDGE_MAY_ADD_ONE_RECEIPT_IF_IT_INDEPENDENTLY_PASSES",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
