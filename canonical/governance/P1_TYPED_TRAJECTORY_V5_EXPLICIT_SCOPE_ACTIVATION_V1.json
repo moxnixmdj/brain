@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_TRAJECTORY_V5_EXPLICIT_SCOPE_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ZERO_REALITY_PREFLIGHT__EXPLICIT_SCOPE_FIRST_CLASS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only P1_EXPLICIT_SCOPE_FAILURE_CLASS by extending the independently verified V4 typed causal-localization mechanism with SCOPE as an explicit first-class failure kind across the same six normalized domains and four causal patterns.",
+  "source_residual": "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json",
+  "source_v4_verification": "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "exact_candidate_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "b571076490099addbfd142e635241b730a4d8cad",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "4a4f65e4a93938afa5d781e3994130f6dbe7aaf5",
+    "canonical/tests/test_trajectory_failure_typed_ir_v5.py": "38f79d2461dadc7e0945cd9e78c9fa42e8177238"
+  },
+  "expected": {
+    "normalized_domain_count": 6,
+    "mechanism_class_count": 8,
+    "causal_pattern_count": 4,
+    "cross_product_case_count": 192,
+    "required_new_mechanism_class": "SCOPE",
+    "residual_discharged_if_independently_verified": "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "residual_not_discharged": "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+  },
+  "hard_rules": [
+    "V4_VERIFIED_CAUSAL_LOGIC_PRESERVED_EXCEPT_EXPLICIT_SCOPE_KIND_ADMISSION",
+    "SCOPE_MUST_BE_CLASSIFIED_FROM_VISIBLE_FAILED_CONTRACT_CHECK_NOT_INFERRED_FROM_AUTHORITY",
+    "SCOPE_MUST_PASS_SINGLE_DELAYED_INTERACTION_AND_AMBIGUOUS_PATTERNS_ACROSS_ALL_NORMALIZED_DOMAINS",
+    "NO_TERMINAL_OBSERVATION_OR_REPLAY",
+    "NO_HETEROGENEOUS_INTERVENTION_RESCUE_CREDIT",
+    "NO_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V5_BLOBS__IF_PASS_BIND_ONLY_P1_EXPLICIT_SCOPE_FAILURE_CLASS_AS_DISCHARGED__LEAVE_P1_HETEROGENEOUS_INTERVENTION_RESCUE_OPEN",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
