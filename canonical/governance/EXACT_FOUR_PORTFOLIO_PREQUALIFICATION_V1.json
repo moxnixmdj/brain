@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__SCOPE_FREEZES_CLOSED__SURVIVING_PUBLIC_SURFACE_PREFLIGHTS_AND_FINAL_DEPENDENCY_CLEANLINESS_REMAIN",
+  "status": "ACTIVE_FAIL_CLOSED__OPAQUE_PROVIDER_COMPOSITION_AND_LIVEBENCH_MUTATION_GATES_CLOSED__ONLY_SURFACE_SPECIFIC_BINDINGS_AND_PORTFOLIO_FREEZE_REMAIN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -177,7 +177,8 @@
   "next": [
     "CLOSE_TERMINAL_BENCH_AND_TERMINAL_BENCH_SCIENCE_BRAIN_AGENT_ADAPTER_ZERO_CASE_BINDINGS_WITHOUT_READING_TERMINAL_CASE_CONTENT",
     "CLOSE_AUTOMATIONBENCH_GDPVAL_CHARTOGRAPHY_HLE_AND_OSWORLD_SCOPE_EQUIVALENT_OR_RESOURCE_SCORER_ASSET_PREFLIGHTS",
-    "RUN_FINAL_PREWAVE_OPAQUE_PROVIDER_DONOR_COMPOSITION_DEPENDENCY_AND_VERIFIER_IMMUTABILITY_AUDIT",
+    "FREEZE_FINANCE_INDEX_COMPONENT_ROUTE_BINDINGS_AND_T3_UNKNOWN_DOMAIN_SCOPE_AUDIT",
+    "REDUCE_ALL_PREWAVE_BINDINGS_TO_ONE_MACHINE_CHECKED_PREQUALIFICATION_VERDICT",
     "DERIVE_EXECUTION_AUTHORITY_ONLY_IF_ALL_PRE_WAVE_GATES_PASS__THEN_RUN_T0_T1_T2_T3_IN_PARALLEL"
   ],
   "capability_credit_delta": 0,
@@ -195,9 +196,9 @@
     "every_surface_zero_cost_route_frozen": false,
     "every_surface_oracle_and_verifier_binding_frozen": false,
     "every_portfolio_task_case_harness_metric_stop_rule_and_mutation_set_frozen": false,
-    "brain_route_and_dependency_manifest_frozen": false,
-    "no_known_opaque_target_capability_provider_in_operative_brain_route": "PREWAVE_AUDIT_REQUIRED",
-    "no_known_unresolved_composition_defect_before_wave": "PREWAVE_AUDIT_REQUIRED",
+    "brain_route_and_dependency_manifest_frozen": "HASH_BOUND_CURRENT_CONTROLLER_SCOPE__canonical/verification/PREWAVE_OPAQUE_PROVIDER_COMPOSITION_AUDIT_20261002_V1.json",
+    "no_known_opaque_target_capability_provider_in_operative_brain_route": "PASS__canonical/verification/PREWAVE_OPAQUE_PROVIDER_COMPOSITION_AUDIT_20261002_V1.json",
+    "no_known_unresolved_composition_defect_before_wave": "PASS__canonical/verification/PREWAVE_OPAQUE_PROVIDER_COMPOSITION_AUDIT_20261002_V1.json",
     "four_portfolios_pairwise_execution_independent": "NAMESPACE_LEVEL_PASS__SURFACE_SPECIFIC_BINDINGS_STILL_OPEN",
     "livebench_if_verifier_source_bytes_frozen": true,
     "finance_and_accounting_index_surface_accounted_for": true,
@@ -261,7 +262,8 @@
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
   "remaining_irreducible_prequalification_blockers": [
     "SURVIVING_PUBLIC_SURFACES_REQUIRE_ONLY_SURFACE_SPECIFIC_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHTS_NOT_ALREADY_INDEPENDENTLY_CLOSED",
-    "FINAL_PREWAVE_OPAQUE_PROVIDER_DONOR_COMPOSITION_AND_DEPENDENCY_AUDITS_REQUIRE_PASS"
+    "FINANCE_INDEX_COMPONENT_ROUTE_BINDINGS_AND_T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_REQUIRE_FREEZE",
+    "PORTFOLIO_WIDE_ORACLE_VERIFIER_TASK_CASE_HARNESS_METRIC_STOP_RULE_AND_DEPENDENCY_BINDINGS_MUST_ALL_REDUCE_TO_PASS"
   ],
   "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
