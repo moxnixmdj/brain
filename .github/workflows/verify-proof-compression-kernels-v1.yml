@@ -33,6 +33,6 @@ jobs:
           python-version: "3.12"
       - name: Run exact deterministic tests
         run: |
-          python canonical/tests/test_epistemic_closure_kernel_v1.py
-          python canonical/tests/test_composition_component_proof_slicer_v1.py
-          python canonical/tests/test_protocol_implication_scope_algebra_v1.py
+          PYTHONPATH=. python canonical/tests/test_epistemic_closure_kernel_v1.py
+          PYTHONPATH=. python canonical/tests/test_composition_component_proof_slicer_v1.py
+          PYTHONPATH=. python canonical/tests/test_protocol_implication_scope_algebra_v1.py
