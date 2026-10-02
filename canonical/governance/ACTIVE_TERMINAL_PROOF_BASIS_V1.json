@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__11_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -223,14 +223,16 @@
       "blockers": [],
       "route": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/browser_goal_grounding_recovery_candidate.py",
-      "independent_preflight": "canonical/verification/BROWSER_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "proof_mode_classification": "T2_MULTIPLEXED_PUBLIC_BAR_PLUS_DIRECT_OBJECTIVE_BROWSER_GATE",
       "synthetic_whole_domain_scope_gate_required": false,
       "objective_binding_validator": "canonical/runtime/browser_t2_objective_binding_validator.py",
       "objective_binding_ci": ".github/workflows/verify-browser-t2-objective-binding.yml",
       "prewave_admissible": true,
       "weaker_exact_opus_comparator_required_for_prewave": false,
-      "terminal_results_observed": 0
+      "terminal_results_observed": 0,
+      "fresh_terminal_evidence_consumed": 0,
+      "no_overclaim": "PREWAVE_ROUTE_ADMISSION_ONLY__ZERO_TERMINAL_RESULTS__NO_CAPABILITY_OR_FAMILY_CREDIT"
     },
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
@@ -284,20 +286,21 @@
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "portfolio": "T2_T3",
-      "proof_state": "DIRECT_OBJECTIVE_T2_T3_TERMINAL_BINDING_FROZEN__INDEPENDENT_VERIFICATION_PENDING",
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
       "route_requirement": "HIDDEN_TOOL_CAPABILITY_ECOSYSTEM_WITH_SAFE_PROBES_SELECTION_COST_AND_SECOND_TASK_TRANSFER",
-      "blockers": [
-        "INDEPENDENT_PUBLIC_RUNNER_VERIFICATION_OF_EXACT_TOOL_DISCOVERY_T2_T3_BINDING_PENDING"
-      ],
+      "blockers": [],
       "route": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/tool_discovery_information_safe_candidate.py",
-      "independent_preflight": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "preferred_over_bounded_single_capability_route": "canonical/governance/TOOL_ROUTE_INFORMATION_SAFE_BOUNDED_PREFLIGHT_V1.json",
       "proof_mode_classification": "T2_T3_MULTIPLEXED_DIRECT_OBJECTIVE_TOOL_DISCOVERY_GATE",
       "synthetic_whole_domain_scope_gate_required": false,
       "objective_binding_validator": "canonical/runtime/tool_discovery_t2_t3_objective_binding_validator.py",
       "objective_binding_ci": ".github/workflows/verify-tool-discovery-t2-t3-objective-binding.yml",
-      "prewave_admissible": false
+      "prewave_admissible": true,
+      "terminal_results_observed": 0,
+      "fresh_terminal_evidence_consumed": 0,
+      "no_overclaim": "PREWAVE_ROUTE_ADMISSION_ONLY__ZERO_TERMINAL_RESULTS__NO_CAPABILITY_OR_FAMILY_CREDIT"
     },
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
@@ -326,7 +329,7 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 11,
+  "admissible_frozen_terminal_route_count": 12,
   "execution_authority": false,
   "next": "CLOSE_TOOL_DISCOVERY_DIRECT_OBJECTIVE_ROUTE__THEN_RUN_CANONICAL_PREQUALIFICATION_REDUCER",
   "fresh_terminal_evidence_consumed": 0,
@@ -350,5 +353,6 @@
     "proof_supercompiler": "canonical/runtime/terminal_proof_supercompiler.py",
     "authority_effect": "SCHEDULING_RECONCILIATION_AND_ANTI_CIRCULARITY_ONLY__NO_ROUTE_PROMOTION_FROM_STACK_ALONE",
     "independent_verification": "canonical/verification/TERMINAL_CLOSURE_COMPILER_STACK_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
-  }
+  },
+  "latest_independent_objective_binding_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
