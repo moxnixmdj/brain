@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_SCOPE_AUDIT_V3",
+  "date": "2026-10-02",
+  "status": "SCOPE_CLOSED__OPERATOR_AGNOSTIC_NORMALIZED_RULE_GRAPH_ADMISSIBLE__TERMINAL_ACCEPTANCE_PROOF_STILL_OPEN__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "supersedes": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V2.json",
+  "contract_boundary": {
+    "inputs": "structured method/specification requirements plus normalized applicable rules and input schema",
+    "dependency_boundary": "semantic extraction of unstated/implicit rules remains a separate residual",
+    "owned_behavior": "explicit requirement-to-intermediate-to-output graph materialization and structural acceptance after rule normalization"
+  },
+  "closed_dimensions": [
+    "INTERMEDIATE_DAG_STRUCTURE_AND_CONSUMER_LINEAGE",
+    "JUSTIFIED_EXCLUSION_OF_INAPPLICABLE_REQUIREMENTS",
+    "TYPE_AND_DIMENSION_CONTRACT_VALIDATION",
+    "DECLARED_INVARIANT_PRESERVATION",
+    "ARBITRARY_NORMALIZED_OPERATOR_IDENTITY_WITHOUT_FINITE_OPCODE_SCOPE_LIMIT",
+    "DEPENDENCY_ORDER_AND_CYCLE_REJECTION",
+    "REQUIRED_OUTPUT_TRACEABILITY",
+    "MATERIAL_EDGE_INDEPENDENT_STRUCTURAL_ACCEPTANCE"
+  ],
+  "independent_receipts": [
+    "canonical/verification/STRUCTURED_METHOD_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "scope_gate": {
+    "input": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+    "verdict": "ADMISSIBLE_SUBSTITUTION",
+    "unresolved_required_dimensions": [],
+    "leaked_inference_ids": [],
+    "required_interactions": 8,
+    "covered_interactions": 8
+  },
+  "unresolved_scope_dimensions": [],
+  "terminal_acceptance_open": {
+    "reason": "NORMALIZED_GRAPH_DOMAIN_IS_UNBOUNDED_FINITE_INPUT_FAMILY__BOUNDED_SAMPLE_IS_NOT_EXHAUSTIVE_FINITE_PROOF",
+    "legal_modes": [
+      "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+      "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND"
+    ],
+    "next": "FREEZE_CERTIFYING_OR_FORMALLY_VERIFIED_ROUTE_IF_AVAILABLE__OTHERWISE_BIND_MATCHED_TERMINAL_PROTOCOL_WITH_EXACT_OPUS_COMPARATOR"
+  },
+  "execution_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
