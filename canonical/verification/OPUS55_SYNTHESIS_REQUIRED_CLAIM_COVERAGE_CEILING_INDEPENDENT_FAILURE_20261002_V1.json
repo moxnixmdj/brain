@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_INDEPENDENT_FAILURE_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_FAIL_CLOSED__EXACT_10_OF_10_BLOBS_PASS__SOURCE_SCOPE_NOT_PROVED_EXACT_OR_SUPERSET__ZERO_CREDIT",
+  "objective": "Preserve the independent falsification of the proposed synthesis required-claim-coverage ceiling transport so the same population-scope shortcut cannot be retried or promoted without a new independently verified EXACT or SUPERSET source-to-target scope relation.",
+  "exact_brain_blobs": {
+    "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V1.json": "559e1548790af4fccf19150a81419f1d39fa5b8d",
+    "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json": "d8cf10dfbe041f63a43ccf43bd5dcdc8fe6f9e2b",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+    "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+    "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json": "515f24f3000218d324be4a7c774b42f790a6ebaa",
+    "canonical/verification/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "64ad40c1c10bd01e4c0f4418fac29efafea838fc",
+    "canonical/verification/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "ea0abdebe8e492033aad818660709b074d870dd9",
+    "canonical/verification/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json": "c9a3046dd5a409379d675051861600919c3017fb",
+    "canonical/runtime/synthesis_required_claim_coverage_ceiling_lift_verifier_v1.py": "5e4800b36beb3a25fa1d18bbb78d8549c9346c5f",
+    "canonical/tests/test_synthesis_required_claim_coverage_ceiling_lift_v1.py": "f74d40b2a7e7eca365849c74b02540c634cfa0cf"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 943,
+    "verified_head": "4c268154fc4c24a1bbca41c8d96ecfc1a385e80d",
+    "workflow_run_id": 37016051900,
+    "workflow_job_id": 110867058083,
+    "conclusion": "failure",
+    "pull_request_disposition": "CLOSED_UNMERGED_AFTER_USEFUL_FAIL_CLOSED_FALSIFICATION"
+  },
+  "verified_before_failure": [
+    "EXACT_10_OF_10_BRAIN_BLOBS_MATCHED",
+    "SCOPE_SAFE_SYNTHESIS_RESIDUAL_V2_STILL_DECLARES_MISSING_SCOPE_RELATION_TRUE",
+    "SCOPE_SAFE_SYNTHESIS_RESIDUAL_V2_IMPLIES_TARGET_FALSE"
+  ],
+  "failure": [
+    "SOURCE_SCOPE_NOT_PROVED_EXACT_OR_SUPERSET_OF_TARGET_SCOPE",
+    "SOURCE_TARGET_SCOPE_RELATION_NOT_INDEPENDENTLY_VERIFIED"
+  ],
+  "consequence": [
+    "DO_NOT_ACTIVATE_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_METRIC_BOUND_FROM_THIS_P3_T1_T3_CEILING",
+    "DO_NOT_TREAT_GLOBAL_METRIC_UPPER_BOUND_AS_TRANSPORT_OF_BRAIN_PERFORMANCE_LOWER_BOUND_ACROSS_DISTINCT_POPULATIONS",
+    "REQUIRE_INDEPENDENT_EXACT_OR_SUPERSET_P3_T1_T3_TO_FROZEN_MATCHED_SYNTHESIS_SCOPE_RELATION_BEFORE_RECONSIDERATION"
+  ],
+  "target_predicate_closed": false,
+  "scope_relation_verified": false,
+  "metric_bound_activated": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
