@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "CANONICAL_PREPROOF_ACCELERATION_CONTROLLER__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "status": "CANONICAL_PREPROOF_ACCELERATION_CONTROLLER__INDEPENDENTLY_VERIFIED__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "runtime": "canonical/runtime/terminal_proof_supercompiler.py",
   "tests": "canonical/tests/test_terminal_proof_supercompiler.py",
@@ -53,5 +53,12 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification": {
+    "status": "INDEPENDENT_PASS",
+    "receipt": "canonical/verification/TERMINAL_PROOF_SUPERCOMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "public_runner_pr": 639,
+    "workflow_run_id": 36964597245,
+    "exact_runtime_blob_sha": "d92f37853437e1626d45e79b1da3638d8f943cd4"
+  }
 }
