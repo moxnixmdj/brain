@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREBEACON_EXACT_POST_AUTHORITY_GIT_SNAPSHOT__ZERO_TERMINAL_RESULTS",
+  "supersedes_for_execution": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V2.json",
+  "objective": "Freeze the exact post-authority repaired-launcher terminal execution world before the first post-freeze beacon.",
+  "execution_snapshot": {
+    "repository": "moxnixmdj/brain",
+    "commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "rule": "TERMINAL_EXECUTION_MUST_USE_THIS_EXACT_COMMIT_SHA__NO_LATER_MAIN_BYTES_ARE_EXECUTION_INPUTS",
+    "local_dependency_closure": "COMPLETE_BY_GIT_CONTENT_ADDRESSING__EVERY_LOCAL_FILE_IN_THE_CHECKED_OUT_SNAPSHOT_IS_IMMUTABLY_FIXED_BY_COMMIT_SHA"
+  },
+  "commitment_encoding": {
+    "canonical_json": "UTF8_JSON_SORT_KEYS_TRUE_SEPARATORS_COMMA_COLON",
+    "ordered_components": [
+      "candidate_blob_manifest",
+      "evaluator_oracle_manifest",
+      "population_manifest",
+      "dependency_manifest",
+      "acceptance_rule_manifest"
+    ],
+    "package_commitment_rule": "SHA256(canonical_json(candidate_blob_manifest)||canonical_json(evaluator_oracle_manifest)||canonical_json(population_manifest)||canonical_json(dependency_manifest)||canonical_json(acceptance_rule_manifest))"
+  },
+  "candidate_blob_manifest": {
+    "execution_snapshot_commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "terminal_parent_launcher_binding_blob_sha": "8a40fd5139830650adaacd984a9133258292398c",
+    "terminal_parent_launcher_verification_blob_sha": "db27f7965259d5e53b23924791e891fb78f45c4b",
+    "terminal_route_specific_executor_manifest_blob_sha": "cd2dabd11fd169ad9b972e976ad474be51cc9e35"
+  },
+  "evaluator_oracle_manifest": {
+    "active_terminal_proof_basis_blob_sha": "9c60356ab509a16df5104777f360b9fb18255842",
+    "execution_snapshot_commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "terminal_wave_execution_authority_blob_sha": "a4d6ff87c934ad674e10679badca308c8df8ef76",
+    "terminal_wave_launch_authority_verification_blob_sha": "d48a9037b49f309b7c2cdbad7acc77ecf722a2bf"
+  },
+  "population_manifest": {
+    "execution_snapshot_commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "global_terminal_replacement_population_protocol_v2_blob_sha": "d1dc7f28738ba24a3ca5919755e03190fbf30939",
+    "global_terminal_selection_kernel_v1_blob_sha": "669afcde50302e76c1b0a1f6b186aaafa8730515",
+    "terminal_parent_case_producer_manifest_blob_sha": "5ff24e390056ba8e980ad3b88116149869ee85ce",
+    "terminal_parent_portfolio_runner_binding_blob_sha": "5212f5996dbc83e87a308b8c9d9d1d9ed3da5aab"
+  },
+  "dependency_manifest": {
+    "dependency_closure_rule": "ALL_LOCAL_REPOSITORY_BYTES_ARE_IMMUTABLY_PINNED_BY_EXACT_GIT_COMMIT_SHA__EXTERNAL_EXECUTION_ENVIRONMENT_REMAINS_AS_FROZEN_BY_ROUTE_BINDINGS_AND_VERIFIED_RUNNER",
+    "execution_snapshot_commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4"
+  },
+  "acceptance_rule_manifest": {
+    "active_terminal_proof_basis_v1_blob_sha": "9c60356ab509a16df5104777f360b9fb18255842",
+    "behavioral_contract_registry_v1_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
+    "execution_snapshot_commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4"
+  },
+  "component_sha256": {
+    "candidate_blob_manifest": "7b89a0a58f0404bb7e762c8d298bcd9fc029dbef17e272ff9c932cd0405f5709",
+    "evaluator_oracle_manifest": "82960535bfd00564f3eae124675dcd360655c5e7f6de3973a602be5e99a53aa3",
+    "population_manifest": "80976ae30ebdbd9d1821ff89f79113fdf93d21d7c5ff3bc0a40b0bacc5df3653",
+    "dependency_manifest": "083031e97bc8c7c6b2c612e1f7b8e077ad9d18adae3a3437c73f394c62aef4aa",
+    "acceptance_rule_manifest": "c32d58cf255a66feb48073af4b83e4a4e8fd5e5dbf24c53926c4c6be1472daca"
+  },
+  "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "snapshot_blob_assertions": {
+    "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json": "a4d6ff87c934ad674e10679badca308c8df8ef76",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "cd2dabd11fd169ad9b972e976ad474be51cc9e35",
+    "canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json": "5ff24e390056ba8e980ad3b88116149869ee85ce",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "5212f5996dbc83e87a308b8c9d9d1d9ed3da5aab",
+    "canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json": "8a40fd5139830650adaacd984a9133258292398c",
+    "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json": "9c60356ab509a16df5104777f360b9fb18255842",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "afa00109031d638fef32cc3fe10be18786605c39",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "d1dc7f28738ba24a3ca5919755e03190fbf30939",
+    "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json": "669afcde50302e76c1b0a1f6b186aaafa8730515",
+    "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_HARDENED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "d48a9037b49f309b7c2cdbad7acc77ecf722a2bf",
+    "canonical/verification/TERMINAL_PARENT_LAUNCHER_SA_CCR_REBIND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "db27f7965259d5e53b23924791e891fb78f45c4b"
+  },
+  "prebeacon_invariants": {
+    "post_freeze_beacon": null,
+    "terminal_results_observed": 0,
+    "fresh_terminal_evidence_consumed": 0,
+    "execution_authority_at_snapshot": true,
+    "route_specific_launch_authority_at_snapshot": true,
+    "candidate_mutation_after_freeze_allowed": false,
+    "tuning_replay": false,
+    "case_replacement": false,
+    "incremental_spend_usd": 0
+  },
+  "independent_verification": null,
+  "verified_for_beacon": false,
+  "next": "INDEPENDENTLY_VERIFY_THIS_EXACT_PACKAGE__THEN_USE_FIRST_AUTHORIZED_PUBLIC_TERMINAL_RUN_ID_AS_POST_FREEZE_BEACON__EXECUTE_EXACT_SNAPSHOT_ONCE"
+}
