@@ -37,7 +37,7 @@ DEPENDENCIES = {
 
 def _git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
-    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
 
 
 def static_dependency_preflight(root: Path = Path(".")) -> dict[str, Any]:
