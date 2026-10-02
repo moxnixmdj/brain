@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREQUALIFICATION_INPUTS__ADAPTER_INDEPENDENTLY_VERIFIED__FULL_58_CHECKER_HERMETIC_RUNTIME_SMOKE_INDEPENDENT_PASS__SYNTHETIC_BOUNDARY_PREFLIGHT_PENDING__NO_TERMINAL_CASE_CONTENT_READ",
+  "status": "FROZEN_PREQUALIFICATION_INPUTS__ADAPTER_HERMETIC_RUNTIME_AND_58_CHECKER_GOOD_BAD_BOUNDARY_PREFLIGHT_INDEPENDENT_PASS__NO_TERMINAL_CASE_CONTENT_READ",
   "upstream_repository": {
     "repository": "LiveBench/LiveBench",
     "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -78,9 +78,7 @@
     "DUPLICATE_IDS_AND_NONSTRING_RESPONSES_FAIL_CLOSED",
     "NO_EXTERNAL_MODEL_JUDGE"
   ],
-  "remaining": [
-    "VERIFY_CURRENT_58_CHECKER_GOOD_BAD_BOUNDARIES"
-  ],
+  "remaining": [],
   "incremental_spend_usd": 0,
   "fresh_terminal_evidence_consumed": 0,
   "adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -100,5 +98,6 @@
     "version": "80.9.0",
     "reason": "syllapy_0_7_2_imports_pkg_resources_on_python_3_12",
     "verification_role": "PUBLIC_RUNNER_HERMETIC_SMOKE"
-  }
+  },
+  "mutation_preflight_verification": "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
