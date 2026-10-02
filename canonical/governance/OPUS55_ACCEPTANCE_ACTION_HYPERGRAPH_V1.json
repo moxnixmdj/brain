@@ -50,7 +50,7 @@
           "reason": "FIVE_CURRENT_OBJECTIVE_ROUTE_GATES_CONSUMED_BY_ZERO_REALITY_RECOMPILE__NO_FULL_PROTOCOL_WITNESS__NO_NEW_TERMINAL_EVIDENCE",
           "derived_evidence": {
             "path": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V2.json",
-            "field": "observed.reopen_required",
+            "field": "reopen_required",
             "equals": true
           }
         }
