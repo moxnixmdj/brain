@@ -1,0 +1,99 @@
+name: verify-postwave-evidence-lifter-v1
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/postwave_evidence_reconciler_v1.py'
+      - 'canonical/tests/test_postwave_evidence_reconciler_v1.py'
+      - 'canonical/governance/POSTWAVE_EVIDENCE_RECONCILIATION_INPUT_V1.json'
+      - 'canonical/runtime/postwave_atomic_family_witness_lifter_v1.py'
+      - 'canonical/tests/test_postwave_atomic_family_witness_lifter_v1.py'
+      - 'canonical/governance/POSTWAVE_EVIDENCE_LIFTER_ACTIVATION_V1.json'
+      - '.github/workflows/verify-postwave-evidence-lifter-v1.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify immutable execution-snapshot binding identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          SNAP=821712c059b139f3494723dca6e8d0fc82ee59a4
+          git cat-file -e "$SNAP^{commit}"
+          D=$(git rev-parse "$SNAP:canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json")
+          P=$(git rev-parse "$SNAP:canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json")
+          test "$D" = "a1e441567b132d71713ed55dfc51f01d8de112d1"
+          test "$P" = "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+          test "$(git rev-parse HEAD:canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json)" = "$D"
+          test "$(git rev-parse HEAD:canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json)" = "$P"
+      - name: Run fail-closed tests
+        run: |
+          python -m unittest \
+            canonical.tests.test_postwave_evidence_reconciler_v1 \
+            canonical.tests.test_postwave_atomic_family_witness_lifter_v1 -v
+      - name: Compile live zero-credit candidates
+        shell: bash
+        run: |
+          python - <<'PY' | tee postwave-evidence-lifter-diagnostic.json
+          import json
+          from pathlib import Path
+          from canonical.runtime.postwave_evidence_reconciler_v1 import evaluate as reconcile
+          from canonical.runtime.postwave_atomic_family_witness_lifter_v1 import evaluate as lift
+          root=Path('.')
+          load=lambda p: json.loads((root/p).read_text(encoding='utf-8'))
+          rec=reconcile(
+            load('canonical/governance/POSTWAVE_EVIDENCE_RECONCILIATION_INPUT_V1.json'),
+            load('canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json'),
+            load('canonical/governance/OPUS55_REOPENED_OBJECTIVE_ROUTE_RESIDUAL_V1.json'),
+            load('canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json'),
+            load('canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json'),
+          )
+          assert rec['status']=='PASS', rec
+          fam=lift(
+            family='SUBAGENT_DELEGATION_AND_COORDINATION',
+            target_predicate='DELEGATION_TERMINAL_SUCCESS_NONINFERIOR',
+            reconciliation=rec,
+            registry=load('canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json'),
+            evidence=load('canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json'),
+            behavioral_registry=load('canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json'),
+            behavioral_reduction=load('canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json'),
+            protocols=load('canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json'),
+          )
+          assert fam['status']=='CANDIDATE_FAMILY_WITNESS_READY__INDEPENDENT_VERIFICATION_REQUIRED', fam
+          w=fam['candidate_witness']
+          assert w['verified'] is False and w['independent'] is False
+          assert w['family']=='SUBAGENT_DELEGATION_AND_COORDINATION'
+          assert w['source_case_count']==132
+          assert w['result']=={'direction':'higher','brain_lower_bound':1.0,'theoretical_upper_bound':1.0}
+          assert [x['predicate_id'] for x in rec['scope_valid_terminal_evidence']]==[
+            'RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR'
+          ]
+          authority=load('canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json')
+          assert authority['truth']['opus55_acceptance']=='3/19_PASS__16/19_OPEN'
+          assert authority['atomic_acceptance_frontier']['proved']==8
+          assert authority['truth']['achieved'] is False
+          print(json.dumps({
+            'status':'PASS_ZERO_CREDIT',
+            'delegation_candidate':w,
+            'recovery_scope_evidence':rec['scope_valid_terminal_evidence'],
+            'current_authority_unchanged':{
+              'opus55_acceptance':authority['truth']['opus55_acceptance'],
+              'atomic_proved':authority['atomic_acceptance_frontier']['proved'],
+              'achieved':authority['truth']['achieved'],
+            }
+          },indent=2,sort_keys=True))
+          PY
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: postwave-evidence-lifter-diagnostic
+          path: postwave-evidence-lifter-diagnostic.json
+          if-no-files-found: ignore
