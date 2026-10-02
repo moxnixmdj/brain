@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_GEOMETRY_SOURCE_POOL_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_METADATA_ONLY_SOURCE_POOL__SOLE_CURRENTLY_ELIGIBLE_CANONICAL_UNEXPOSED_GEOMETRY_TASK__CONTENT_UNOPENED",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "source": {
+    "repository": "harbor-framework/terminal-bench",
+    "release": "v4.0.0",
+    "release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "tree_complete": true,
+    "task_count_at_release": 66
+  },
+  "eligible_cases": [
+    {
+      "task_id": "freecad-platform-drawing",
+      "task_tree_sha": "495851e9b86ba3c5a091795fcd384c73b6e403dd",
+      "task_path": "tasks/freecad-platform-drawing",
+      "metadata_blobs": {
+        "readme": "175d6c8036f9347133b009211500ee17c5b4d78f",
+        "environment_dockerfile": "3508aa33ec71d4ad036f18f387ead2991b6ed473",
+        "visible_asset_png": "3a1a1af0bf7968adcd9b5bd07ae1deb704a69888",
+        "instruction": "530457d4cfc6f22681c11f59aef7f888ec43cf99",
+        "task_toml": "46fe6378ad554da5010c6f8e2aabbf9ec89ade40",
+        "verifier_dockerfile": "54eea1f97abb1574d5a0b0d8e8d5dac54dc01493",
+        "grader_param_check": "64b73a4b2a5d5d0d1b3e00bc62ec8d7f556a759d",
+        "grader_reference_fcstd": "70c0efd1107498bd5c593dfd0e6156dd8611c7df",
+        "grader_spec": "2721d28d255eba7c781487a90069c6857f554f23",
+        "grader_run_scorer": "a4d13cbcc0da8e5e9a386afd8f5de6a74ff8d627",
+        "verifier_test_sh": "d00851ee84a299412a835a39c7a09441419fe627"
+      },
+      "content_opened_before_candidate_freeze": false
+    }
+  ],
+  "excluded_known_spent_or_exposed_geometry_task_ids": [
+    "cad-model",
+    "freecad-impeller",
+    "freecad-spring-clip"
+  ],
+  "current_brain_search_audit": {
+    "exact_queries": [
+      "freecad-platform-drawing",
+      "tasks/freecad-platform-drawing",
+      "FREECAD_PLATFORM_DRAWING"
+    ],
+    "result_count_each": 0,
+    "limitation": "GITHUB_CURRENT_REPOSITORY_CODE_SEARCH_IS_NOT_A_FORMAL_PROOF_OF_ABSENCE_FROM_ALL_DELETED_HISTORY_OR_NONCANONICAL_CHATS"
+  },
+  "selection_rule": "AFTER_CANDIDATE_FREEZE_THE_SOLE_ELIGIBLE_UNEXPOSED_METADATA_BOUND_CASE_IS_SELECTED__NO_ALTERNATE_CASE_REPLACEMENT__FAILURE_COUNTS_AS_FAILURE",
+  "scope_rule": "ONE_DIRECT_M1_INSTRUMENTATION_CASE_CANNOT_PROVE_WHOLE_OPEN_DOMAIN_CAD_SCOPE__IT_IS_LOAD_BEARING_DIRECT_MECHANISM_EVIDENCE_INSIDE_T0_ONLY",
+  "forbidden_before_candidate_freeze": [
+    "READ_INSTRUCTION_CONTENT",
+    "READ_SOLUTION_CONTENT",
+    "READ_GRADER_CONTENT",
+    "READ_REFERENCE_MODEL_CONTENT",
+    "READ_VISIBLE_ASSET_PIXELS"
+  ],
+  "candidate_freeze": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V1.json",
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
