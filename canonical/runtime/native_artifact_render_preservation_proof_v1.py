@@ -107,15 +107,24 @@ def _page_diff(a: Image.Image, b: Image.Image) -> dict[str, Any]:
     else:
         bbox_area = (bbox[2] - bbox[0]) * (bbox[3] - bbox[1])
         bbox_fraction = bbox_area / total if total else 1.0
+    if changed == 0:
+        return {
+            "pass":True,
+            "changed":False,
+            "reason":"UNCHANGED_PAGE_PRESERVED",
+            "pixel_fraction":0.0,
+            "bbox_fraction":0.0,
+            "bbox":None,
+            "page_size":list(a.size),
+        }
+    localized = (
+        pixel_fraction <= MAX_DIFF_PIXEL_FRACTION
+        and bbox_fraction <= MAX_DIFF_BBOX_FRACTION
+    )
     return {
-        "pass": (
-            0 < pixel_fraction <= MAX_DIFF_PIXEL_FRACTION
-            and 0 < bbox_fraction <= MAX_DIFF_BBOX_FRACTION
-        ),
-        "reason":"PASS" if (
-            0 < pixel_fraction <= MAX_DIFF_PIXEL_FRACTION
-            and 0 < bbox_fraction <= MAX_DIFF_BBOX_FRACTION
-        ) else "VISUAL_DIFF_OUTSIDE_BOUNDED_EDIT_REGION",
+        "pass":localized,
+        "changed":True,
+        "reason":"PASS" if localized else "VISUAL_DIFF_OUTSIDE_BOUNDED_EDIT_REGION",
         "pixel_fraction":pixel_fraction,
         "bbox_fraction":bbox_fraction,
         "bbox":list(bbox) if bbox else None,
@@ -146,10 +155,14 @@ def compare_renders(source: bytes, output: bytes, fmt: str) -> dict[str, Any]:
                     rows.append(_page_diff(a, b))
             if not all(x["pass"] for x in rows):
                 return {"pass":False,"reason":"PAGE_RENDER_DIFF_FAILED","pages":rows}
+            changed_pages = sum(1 for x in rows if x.get("changed") is True)
+            if changed_pages == 0:
+                return {"pass":False,"reason":"NO_VISIBLE_EDIT","pages":rows}
             return {
                 "pass":True,
                 "reason":"PASS",
                 "page_count":len(rows),
+                "changed_page_count":changed_pages,
                 "pages":rows,
                 "max_pixel_fraction":max(x["pixel_fraction"] for x in rows),
                 "max_bbox_fraction":max(x["bbox_fraction"] for x in rows),
