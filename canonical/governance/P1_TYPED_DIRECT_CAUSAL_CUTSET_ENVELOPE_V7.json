@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_DIRECT_CAUSAL_CUTSET_ENVELOPE_V7",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__DIRECT_CAUSAL_CUTSET_HARDENING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Replace V6 ancestor-pruning with a candidate-visible direct causal cutset that never promotes DERIVED_UPSTREAM symptoms to roots and never drops a later DIRECT_CONTRACT co-fault merely because another direct fault is its ancestor.",
+  "candidate": {
+    "path": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+    "git_blob_sha": "9604a7f0e67e9278abc5ee6402a387c81c7b934e"
+  },
+  "proof": {
+    "path": "canonical/runtime/trajectory_failure_typed_ir_proof_v7.py",
+    "git_blob_sha": "8ef4ebe5e1a3404e5d6eaa4d63988651b6c44c1d"
+  },
+  "tests": {
+    "path": "canonical/tests/test_trajectory_failure_typed_ir_v7.py",
+    "git_blob_sha": "22addf0014ea44b71370a3a4371193a29a3a5514"
+  },
+  "verified_v6_basis": {
+    "candidate_git_blob_sha": "18d4de68ee8352410e986c318868642333ec085a",
+    "proof_git_blob_sha": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "tests_git_blob_sha": "6961f69cafd718da6dd439765a13f59ffc9790e1",
+    "verification": "canonical/verification/P1_TYPED_CAUSAL_INTERVENTION_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "counterexamples_closed": [
+    "DERIVED_ONLY_VISIBLE_FAILURE_MUST_NOT_BE_PROMOTED_TO_CAUSAL_ROOT",
+    "SERIAL_DIRECT_COFAULT_MUST_PRESERVE_ALL_DIRECT_REPAIRS_IN_CAUSAL_CUTSET"
+  ],
+  "hard_rules": [
+    "FAILED_CHECK_FAILURE_SEMANTICS_MUST_BE_EXPLICIT_AND_TYPED",
+    "DERIVED_UPSTREAM_FAILURE_IS_SYMPTOM_ONLY_AND_NEVER_A_DIRECT_CAUSAL_ROOT",
+    "DIRECT_CONTRACT_FAILURE_REMAINS_LOAD_BEARING_EVEN_WITH_A_FAILED_DIRECT_ANCESTOR",
+    "SERIAL_DIRECT_COFAULT_REQUIRES_ALL_DIRECT_REPAIRS",
+    "EXPLICIT_ALTERNATIVE_COMPOSITION_PRESERVES_NONIDENTIFIABILITY",
+    "EXPLICIT_CONJUNCTIVE_COMPOSITION_PRESERVES_JOINT_CAUSAL_SET",
+    "FORWARD_INTERVENTION_RECOMPUTATION_NOT_REPAIR_LABEL_MEMBERSHIP_DEFINES_RESCUE",
+    "PRESERVE_VERIFIED_V6_192_CASE_ENVELOPE",
+    "NO_TERMINAL_CASE_REPLAY",
+    "NO_TERMINAL_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "verification_requirements": {
+    "v6_cross_product_cases_pass": 192,
+    "nonambiguous_forward_rescues_preserved": 144,
+    "ambiguous_abstentions_preserved": 48,
+    "derived_only_counterexamples_killed_across_domains": 6,
+    "serial_direct_cofault_counterexamples_killed_across_domains": 6,
+    "terminal_seeds_consumed": 0,
+    "terminal_case_ids_consumed": 0
+  },
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V7_BYTES__THEN_RECOMPILE_P1_SCOPE_TRANSPORT_AGAINST_V7__DO_NOT_RESTORE_P1_DIRECT_SURFACES_OR_TERMINAL_CREDIT_FROM_THIS PREFLIGHT_ALONE",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
