@@ -1,4 +1,53 @@
 {
   "schema": "PROJECT_BRAIN_P2_P3_INFORMATION_SAFE_PROOF_REDESIGN_V1",
-  "status": "DRAFT_FAIL_CLOSED"
+  "date": "2026-10-02",
+  "status": "FROZEN_PREQUALIFICATION_SPEC__ZERO_TERMINAL_RESULT",
+  "contracts": [
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+  ],
+  "p2": {
+    "candidate_visible": [
+      "objective",
+      "audience",
+      "raw_verified_evidence",
+      "required_topics",
+      "rubric_weights",
+      "edit_options_without_gold_quality_scores",
+      "cost_budget"
+    ],
+    "hidden_oracle": [
+      "per_edit_quality_effect",
+      "grounding_truth",
+      "audience_fit_outcome",
+      "independent_final_rubric_result"
+    ]
+  },
+  "p3": {
+    "candidate_visible": [
+      "raw_verified_evidence",
+      "provenance",
+      "explicit_required_claims",
+      "audience_constraints",
+      "focus_topics",
+      "tight_output_budget"
+    ],
+    "hidden_oracle": [
+      "support_graph",
+      "decision_relevance_graph",
+      "salience_gold",
+      "conflict_uncertainty_adjudication"
+    ]
+  },
+  "forbidden_candidate_fields": [
+    "gold_edit_quality_scores",
+    "gold_role_labels",
+    "gold_support_labels",
+    "hidden_decision_relevance"
+  ],
+  "terminal_result_required_after_candidate_freeze": true,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
 }
