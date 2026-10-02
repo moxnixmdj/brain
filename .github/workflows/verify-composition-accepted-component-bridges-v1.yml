@@ -21,6 +21,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Capture binder diagnostic
+        if: always()
+        run: |
+          python canonical/runtime/composition_accepted_component_scoped_binder_v1.py > composition_bridge_diagnostic.txt 2>&1 || true
+          cat composition_bridge_diagnostic.txt
+      - name: Upload binder diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: composition-bridge-diagnostic
+          path: composition_bridge_diagnostic.txt
+          if-no-files-found: error
       - name: Run bridge tests
         run: python -m unittest canonical.tests.test_composition_accepted_component_scoped_binder_v1 -v
       - name: Run live bridge binder
