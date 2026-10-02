@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_M2_DOCX_RUN_SPAN_REPLACEMENT_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_NATIVE_DOCX_EDIT_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+  "implementation": "canonical/runtime/docx_run_span_replace.py",
+  "implementation_blob_sha": "915cea0532a1a304f2f08c764135d2f6f44614e5",
+  "tests": "canonical/tests/test_docx_run_span_replace.py",
+  "tests_blob_sha": "a7eaeacd2cbc7f9c37cf185fe4ad1bb0d92bc957",
+  "workflow": ".github/workflows/verify-m2-docx-run-span-replace.yml",
+  "workflow_blob_sha": "84791d98ff3903ec3cae22849e414d259857e9b6",
+  "merged_main_commit": "c7de72404f623b270e969f286f9c502120904a7c",
+  "independent_verification": {
+    "workflow_run_id": 36950340416,
+    "conclusion": "success",
+    "verified_pr_head": "b0272e64cabd801583ba84657763b0fce4616e72"
+  },
+  "owned_scope": [
+    "ONE_UNIQUE_EXACT_VISIBLE_TEXT_OCCURRENCE_WITHIN_A_SINGLE_WORD_PARAGRAPH",
+    "TARGET_MAY_SPAN_ONE_OR_MORE_W_T_TEXT_NODES_AND_WORD_RUNS",
+    "NON_DOCUMENT_XML_PACKAGE_MEMBERS_PRESERVED_BYTE_FOR_BYTE",
+    "VISIBLE_PARAGRAPH_TEXT_OUTSIDE_THE_TARGET_PARAGRAPH_VERIFIED_UNCHANGED",
+    "AMBIGUOUS_MISSING_CROSS_PARAGRAPH_INVALID_OR_UNMAPPABLE_TARGETS_FAIL_CLOSED"
+  ],
+  "exclusions": [
+    "NO_VISUAL_LAYOUT_EQUIVALENCE_CLAIM",
+    "NO_ARBITRARY_DOCX_STRUCTURAL_EDIT_CLAIM",
+    "NO_HEADERS_FOOTERS_COMMENTS_TRACKED_CHANGES_FIELDS_DRAWINGS_OR_RELATIONSHIP_EDIT_CLAIM",
+    "NO_SEMANTIC_DOCUMENT_UNDERSTANDING",
+    "NO_WHOLE_M2_OR_FAMILY_CAPABILITY_CREDIT"
+  ],
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
