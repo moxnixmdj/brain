@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_GATE_V2_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_GATE_V2_PASS__ENVELOPE_COMPILER_ACTIVE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -168,11 +168,10 @@
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
       "portfolio": "T2",
-      "proof_state": "INDEPENDENT_WHOLE_DIMENSION_AND_STRUCTURAL_VARIETY_PREFLIGHT_PASS__SCOPE_GATE_ADMISSION_PENDING",
+      "proof_state": "SCOPE_EQUIVALENT_GATE_V2_INDEPENDENT_PASS__TERMINAL_POPULATION_BINDING_IMPLEMENTED__INDEPENDENT_BINDING_VERIFICATION_PENDING",
       "route_requirement": "ARBITRARY_FINITE_EXPLICIT_TASK_GRAPH_PARTITION_ASSIGNMENT_RESOURCE_EVIDENCE_FANIN_BASELINE_AND_RECEIPT_DRIVEN_REPLAN",
       "blockers": [
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
+        "POST_FREEZE_TERMINAL_POPULATION_BINDING_INDEPENDENT_VERIFICATION_PENDING"
       ],
       "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
       "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
@@ -185,20 +184,28 @@
       "scope_gate_input": "canonical/governance/DELEGATION_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
       "scope_gate_verification": "canonical/verification/DELEGATION_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "structural_variety_route": "canonical/runtime/delegation_structural_variety_proof_v3.py",
-      "structural_variety_verification": "canonical/verification/DELEGATION_STRUCTURAL_VARIETY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "structural_variety_verification": "canonical/verification/DELEGATION_STRUCTURAL_VARIETY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "envelope_reduction": "DECLARED_CONTRACT_DIMENSIONS_COVERED_BY_VERIFIED_EVIDENCE__ZERO_UNKNOWN_SCOPE_DIMENSIONS__ZERO_COUNTEREXAMPLE_OBLIGATIONS",
+      "envelope_compiler": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
+      "envelope_compiler_verification": "canonical/verification/TERMINAL_COUNTEREXAMPLE_ENVELOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "terminal_population_binding": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+      "terminal_population_binding_test": "canonical/tests/test_delegation_terminal_population_binding_v1.py"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "portfolio": "T2_T3",
-      "proof_state": "INDEPENDENT_INFORMATION_SAFE_MULTI_CAPABILITY_DISCOVERY_TRANSFER_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
+      "proof_state": "INDEPENDENT_HARDENED_INFORMATION_SAFE_V2_PREFLIGHT_PASS__WHOLE_SCOPE_ROUTE_EXPANSION_REQUIRED",
       "route_requirement": "HIDDEN_TOOL_CAPABILITY_ECOSYSTEM_WITH_SAFE_PROBES_SELECTION_COST_AND_SECOND_TASK_TRANSFER",
       "blockers": [
+        "DYNAMIC_TOOL_DISCOVERY_BEYOND_PREENUMERATED_CATALOG_NOT_YET_PROVEN",
+        "GENERAL_ACTIVE_CONSTRAINT_SCHEMA_BEYOND_COST_AVAILABILITY_AUTHORIZATION_NOT_YET_PROVEN",
+        "MATCHED_SCHEMA_ONLY_OR_POPULARITY_BASELINE_ADVANTAGE_NOT_YET_PROVEN",
         "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
         "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
       ],
-      "route": "canonical/runtime/tool_discovery_information_safe_proof.py",
+      "route": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
       "candidate": "canonical/runtime/tool_discovery_information_safe_candidate.py",
-      "independent_preflight": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "preferred_over_bounded_single_capability_route": "canonical/governance/TOOL_ROUTE_INFORMATION_SAFE_BOUNDED_PREFLIGHT_V1.json"
     },
     {
