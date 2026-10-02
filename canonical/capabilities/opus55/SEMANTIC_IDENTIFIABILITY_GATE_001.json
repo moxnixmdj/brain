@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_IDENTIFIABILITY_GATE_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_NARROW_COMPONENT__M0A_HALLUCINATORY_SELECTION_PATH_DELETED__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M0A_ARBITRARY_SOURCE_TO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
+  "artifact": "canonical/runtime/semantic_identifiability_gate.py",
+  "artifact_blob_sha": "74facea74f6590bed57a916a9f6cebc10d6d614a",
+  "theorem": "canonical/reasoning/2026-10-02_M0A_SEMANTIC_IDENTIFIABILITY_BOUNDARY_V1.json",
+  "owned_scope": [
+    "UNIQUE_VS_AMBIGUOUS_INTERPRETATION_ADJUDICATION_FROM_EXPLICIT_UPSTREAM_EVIDENCE_FLAGS",
+    "FAIL_CLOSED_ON_UNKNOWN_SOURCE_CONTEXT_OR_MATERIALITY_STATUS",
+    "AMBIGUITY_WITNESS_EMISSION",
+    "DISCRIMINATING_EVIDENCE_REQUIREMENT",
+    "NO_PLAUSIBILITY_RANKING_BETWEEN_MULTIPLE_SOURCE_CONSISTENT_MATERIAL_INTERPRETATIONS"
+  ],
+  "nonclaims": [
+    "SEMANTIC_CANDIDATE_GENERATION",
+    "SOURCE_CONSISTENCY_INFERENCE",
+    "CONTEXT_CONSISTENCY_INFERENCE",
+    "MATERIALITY_INFERENCE",
+    "WHOLE_M0A_CLOSURE"
+  ],
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 449,
+    "workflow_run_id": 36944169225,
+    "conclusion": "success",
+    "merge_commit": "2c0a6643ebd413f78bb74a5f9b44aec3cfbc4816"
+  },
+  "donor_runtime_required": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
