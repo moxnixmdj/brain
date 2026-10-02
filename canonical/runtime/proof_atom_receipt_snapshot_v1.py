@@ -15,6 +15,11 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime.proof_atom_receipt_index_v2 import (
     ROOT,
     SEARCH_ROOTS,
+    EXCLUDED_BASENAMES,
+    EXCLUDED_BASENAME_PREFIXES,
+    EXCLUDED_REL_PATHS,
+    MAX_FILE_BYTES,
+    TEXT_SUFFIXES,
     _blob_sha,
     _candidate_files,
     _source_class,
@@ -41,8 +46,52 @@ def _canonical_digest(value: Any) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def _tracked_candidate_paths(root: Path) -> list[str]:
+    """Return every HEAD-tracked blob that is eligible for the V2 candidate scan."""
+    out: list[str] = []
+    for rel_root in SEARCH_ROOTS:
+        raw = _git(root, "ls-tree", "-r", "-l", "-z", "HEAD", "--", rel_root)
+        for record in raw.split("\0"):
+            if not record:
+                continue
+            try:
+                header, rel = record.split("\t", 1)
+            except ValueError as exc:
+                raise RuntimeError(f"INVALID_GIT_LS_TREE_RECORD:{record!r}") from exc
+            parts = header.split()
+            if len(parts) != 4:
+                raise RuntimeError(f"INVALID_GIT_LS_TREE_HEADER:{header!r}")
+            _mode, object_type, _sha, size_text = parts
+            if object_type != "blob":
+                continue
+            p = Path(rel)
+            if p.suffix.lower() not in TEXT_SUFFIXES:
+                continue
+            if rel in EXCLUDED_REL_PATHS or p.name in EXCLUDED_BASENAMES:
+                continue
+            if any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES):
+                continue
+            try:
+                size = int(size_text)
+            except ValueError as exc:
+                raise RuntimeError(f"INVALID_GIT_BLOB_SIZE:{rel}:{size_text}") from exc
+            if size > MAX_FILE_BYTES:
+                continue
+            out.append(rel)
+    return sorted(set(out))
+
+
 def seal_candidate_universe(root: Path, files: Sequence[Path]) -> dict[str, Any]:
     """Bind every scanned candidate file to HEAD and hash the ordered manifest."""
+    scanned_paths = sorted(p.relative_to(root).as_posix() for p in files)
+    tracked_paths = _tracked_candidate_paths(root)
+    if scanned_paths != tracked_paths:
+        missing = sorted(set(tracked_paths) - set(scanned_paths))
+        extra = sorted(set(scanned_paths) - set(tracked_paths))
+        raise RuntimeError(
+            "CANDIDATE_UNIVERSE_NOT_EXHAUSTIVE:"
+            f"missing_tracked={missing}:extra_worktree={extra}"
+        )
     manifest: list[dict[str, Any]] = []
     for path in sorted(files, key=lambda p: p.relative_to(root).as_posix()):
         rel = path.relative_to(root).as_posix()
