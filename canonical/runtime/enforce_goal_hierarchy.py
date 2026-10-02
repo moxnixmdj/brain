@@ -1020,7 +1020,7 @@ def active_target_mirror_errors(hierarchy,target):
 # only; no check is weakened and none is skipped.
 REMEDIATION_HINTS=(
     (("POINTER_HIERARCHY_","QUEUE_HIERARCHY_","SCOREBOARD_HIERARCHY_",
-      "TARGET_RECORD_HIERARCHY_"),
+      "TARGET_RECORD_HIERARCHY_","FRONTIER_TARGET_"),
      "mirror fields drifted from canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json; "
      "recompute all of them deterministically instead of hand-editing: "
      "python3 canonical/runtime/reconcile_frontier_mirrors.py . --check "
@@ -1090,6 +1090,14 @@ def main():
             target={}
     if target:
         enforce_active_target_record_consistency(hierarchy,target)
+        # active_target_mirror_errors was defined and unit-tested in 44d6a09 but
+        # never called, so the target record's residual_gap/next_action pair was
+        # checked only against synthetic dicts and never against the live tree.
+        # Those two fields are mirrors of the same authority fields the atomic
+        # pair mirrors, and they were found stale at a live base still naming a
+        # burned rank's Stage-C builder run while every CI check stayed silent.
+        for error in active_target_mirror_errors(hierarchy,target):
+            fail(error)
 
     boot=pointer.get("boot_requirements") or {}
     if tuple(boot.get("deletion_first_route_order") or ())!=OBS_DELETION_ORDER:

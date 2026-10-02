@@ -57,10 +57,10 @@ CUT_MEMBERSHIP_ITEM=(
 # The Stage-A required items this reducer adjudicates by predicate. Defined once
 # and imported by the generic reducer so the two cannot drift apart. Membership
 # in the global terminal proof cut is deliberately NOT in this set: it is
-# expected only at a root where that law is in force, because demanding it
-# everywhere would fail every pre-cut root, which is where the recorded
-# rank16-rank23 admissions were adjudicated. A reducer that cannot reproduce its
-# own recorded evidence is not an oracle.
+# expected only when the live policy lists it, because demanding it everywhere
+# would fail every root whose policy predates that law, which is where the
+# recorded rank16-rank23 admissions were adjudicated. A reducer that cannot
+# reproduce its own recorded evidence is not an oracle.
 BASE_STAGE_A_EXPECTED=frozenset({
     "TARGET_VERSION_LOCK",
     "QUALIFICATION_CONTAMINATION_LEDGER_CREATED_WITH_PRE_EXPOSURE_IDENTITY",
@@ -132,10 +132,14 @@ def global_cut_membership(root: Path, task: str, rank: int) -> dict[str,Any]:
     satisfied, and it records positive membership for THIS task and rank. Every
     other outcome is a named reason, never a silent pass.
 
-    Membership is read from the entry's own recorded vocabulary:
-    `global_cut_membership_current` or `stage_b_exposure_admitted`. Neither is
-    asserted for any sample in the live cut, so no candidate can satisfy this
-    item until the cut is computed across the open families.
+    Membership is read from the entry's own recorded vocabulary, preferring the
+    field the live cut already uses (`stage_b_exposure_admitted`) and accepting
+    `global_cut_membership_current` as an explicit alternative. Neither is
+    asserted true for any sample in the live cut - its only recorded sample,
+    rank23, has stage_b_exposure_admitted false after its post-revocation read -
+    so no candidate can satisfy this item until the cut is computed across the
+    open families. That is the cut's own declared state, not a defect here: its
+    status names the exact cut computation as still required.
     """
     cut=load_evidence(root,GLOBAL_CUT)
     reasons:list[str]=[]

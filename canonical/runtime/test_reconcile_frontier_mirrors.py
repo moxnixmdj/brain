@@ -150,6 +150,38 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         self.assertEqual(code, 0, out.getvalue())
         self.assertIn("MIRRORS_CONSISTENT", out.getvalue())
 
+    def test_every_mirror_drift_family_names_a_repair(self):
+        """A failure the guard can emit must come with the command that fixes it.
+
+        Wiring active_target_mirror_errors into main() added three failure names
+        that the remediation table did not cover, which would have reproduced the
+        original defect - a named failure with no named repair - for exactly the
+        fields that were found stale at a live base. This pins the coupling for
+        every mirror family the reconciler maintains.
+        """
+        import io
+        import contextlib
+        from canonical.runtime import enforce_goal_hierarchy as guard
+
+        families = (
+            "POINTER_HIERARCHY_NEXT_ACTION_MISMATCH",
+            "QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH",
+            "SCOREBOARD_HIERARCHY_NEXT_PROGRESS_EVENT_MISMATCH",
+            "TARGET_RECORD_HIERARCHY_ATOMIC_NEXT_ACTION_MISMATCH",
+            "FRONTIER_TARGET_RESIDUAL_GAP_MISMATCH",
+            "FRONTIER_TARGET_NEXT_ACTION_MISMATCH",
+            "FRONTIER_TARGET_CAPABILITY_ID_MISMATCH",
+            "POINTER_CONTROL_PATH_NOT_CURRENT:goal_hierarchy_action_gate_path",
+        )
+        for failure in families:
+            with self.subTest(failure=failure):
+                buffer = io.StringIO()
+                with contextlib.redirect_stdout(buffer):
+                    guard.print_remediation([failure])
+                printed = buffer.getvalue()
+                self.assertIn("reconcile_frontier_mirrors.py", printed)
+                self.assertIn("REMEDIATION", printed)
+
     def test_report_only_drift_fails_the_check(self):
         # Regression: the verdict was once driven only by pending mirror changes,
         # so a report -- identity drift, stale control paths -- printed and then

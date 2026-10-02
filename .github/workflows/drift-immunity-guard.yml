@@ -101,7 +101,10 @@ jobs:
           # re-executes rots on the next advance, which is how the mirrors came
           # to be stale at ten consecutive bases. They are unittest modules and
           # need no third-party runner. Deleting one fails this step outright.
+          # canonical.tests.test_frontier_target_mirror is included because the
+          # checker it exercises is now wired into the guard above.
           python3 -m unittest \
             canonical.runtime.test_reconcile_frontier_mirrors \
+            canonical.tests.test_frontier_target_mirror \
             canonical.runtime.test_prequalification_stage_a_generic \
             canonical.runtime.test_prequalification_stage_a_reducer_v2
