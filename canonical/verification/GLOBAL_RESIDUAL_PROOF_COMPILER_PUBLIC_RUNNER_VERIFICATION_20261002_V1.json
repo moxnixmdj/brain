@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_RESIDUAL_PROOF_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS__LIVE_SEVEN_OBLIGATION_PARTITION_PASS__ZERO_TERMINAL_CREDIT",
+  "brain_runtime": {
+    "path": "canonical/runtime/global_residual_proof_compiler.py",
+    "blob_sha": "49719238fcaee0ea3cc5dab4a5cd220f440ce2cf"
+  },
+  "base_supercompiler": {
+    "path": "canonical/runtime/terminal_proof_supercompiler.py",
+    "blob_sha": "c7a4b8bc29d041fcc04fbcfa8a79db44fa9fe370"
+  },
+  "brain_tests": {
+    "path": "canonical/tests/test_global_residual_proof_compiler.py",
+    "blob_sha": "8d6b063b1c92c03eaf45161ec65fa00b41c1268d"
+  },
+  "live_input": {
+    "path": "canonical/governance/GLOBAL_RESIDUAL_PROOF_COMPILER_LIVE_INPUT_V1.json",
+    "blob_sha": "5584fbcbfb3f3327b3d706a4ef50034d5d5ada5c"
+  },
+  "independent_public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 645,
+    "merged_commit": "f9e60ad370d7029f195598f93e8c04faed3edbff",
+    "workflow_run_id": 36965447334,
+    "workflow_name": "Verify global residual proof compiler",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_RUNTIME_BLOB_HASH_MATCH",
+    "EXACT_BASE_SUPERCOMPILER_BLOB_HASH_MATCH",
+    "EXACT_BRAIN_TEST_BLOB_HASH_MATCH",
+    "EXACT_LIVE_INPUT_BLOB_HASH_MATCH",
+    "PYTHON_COMPILE_PASS",
+    "SIX_UNIT_TESTS_PASS",
+    "EXTERNAL_OR_UNPROVEN_RESIDUAL_DOES_NOT_STALL_INDEPENDENT_INTERNAL_EXACT_CUT",
+    "SEMANTIC_BLOCKER_DEDUP_REQUIRES_EXPLICIT_ASSERTED_EQUIVALENCE",
+    "UNKNOWN_OR_OVERLAPPING_SEMANTIC_EQUIVALENCE_FAILS_CLOSED",
+    "CROSS_RESIDUAL_ROUTE_PROJECTION_NOT_ASSUMED",
+    "LIVE_SEVEN_OBLIGATION_PARTITION_COMPILES",
+    "LIVE_INTERNAL_COVERABLE_OBLIGATIONS_EQUAL_P1_AND_P3",
+    "LIVE_MINIMUM_INTERNAL_UNBLOCK_CUT_HAS_FOUR_BLOCKERS",
+    "LIVE_MINIMUM_INTERNAL_UNBLOCK_CUT_NEW_REALITY_UNITS_ZERO",
+    "LIVE_RESIDUAL_OBLIGATION_COUNT_FIVE",
+    "ZERO_EXECUTION_PROMOTION_CAPABILITY_AND_FAMILY_AUTHORITY"
+  ],
+  "live_verified_summary": {
+    "internally_coverable_obligations": [
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+    ],
+    "minimum_internal_unblock_cut": [
+      "P1_SCOPE_EQUIVALENCE",
+      "P1_TERMINAL_BINDING",
+      "P3_SCOPE_EQUIVALENCE",
+      "P3_TERMINAL_BINDING"
+    ],
+    "new_reality_units": 0,
+    "residual_obligation_count": 5
+  },
+  "authority_effect": "VERIFIES_GLOBAL_RESIDUAL_SCHEDULING_AND_PARTITION_IMPLEMENTATION_ONLY__NO_TERMINAL_BEHAVIOR_OR_CAPABILITY_PROVEN",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
