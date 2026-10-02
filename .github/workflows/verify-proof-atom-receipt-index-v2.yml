@@ -21,3 +21,39 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Run content-addressed live corpus scan
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > /tmp/proof_atom_receipt_index_v2.json
+          python - <<'PY'
+          import json
+          p="/tmp/proof_atom_receipt_index_v2.json"
+          d=json.load(open(p,encoding="utf-8"))
+          print("status=",d.get("status"))
+          print("canonical_atom_count=",d.get("canonical_atom_count"))
+          print("scanned_file_count=",d.get("scanned_file_count"))
+          print("candidate_match_count=",d.get("candidate_match_count"))
+          print("atoms_with_candidate_matches=",d.get("atoms_with_candidate_matches"))
+          print("atoms_without_candidate_matches=",d.get("atoms_without_candidate_matches"))
+          assert str(d.get("status","")).startswith("PASS")
+          assert d.get("canonical_atom_count")==40
+          assert d.get("capability_credit_delta")==0
+          assert d.get("family_credit_delta")==0
+          assert d.get("execution_authority") is False
+          assert d.get("promotion_authority") is False
+          print("=== PER_ATOM_CANDIDATE_LEDGER ===")
+          for row in d.get("atoms",[]):
+              print(json.dumps({
+                  "atom_id": row.get("atom_id"),
+                  "proposition": row.get("proposition"),
+                  "targets": row.get("associated_target_predicates"),
+                  "candidate_match_count": row.get("candidate_match_count"),
+                  "top_candidate_paths": [m.get("path") for m in row.get("candidate_matches",[])[:8]],
+              },sort_keys=True))
+          PY
+      - name: Upload live corpus scan
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-live
+          path: /tmp/proof_atom_receipt_index_v2.json
+          if-no-files-found: error
