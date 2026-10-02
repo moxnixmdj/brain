@@ -30,7 +30,9 @@ class Tests(unittest.TestCase):
         }
         out = configured_terminal_decision(p, fake, mode="FINANCE")
         self.assertFalse(out["accepted"])
-        self.assertIn("SEMANTIC_IR_FAIL_CLOSED", out["errors"])
+        self.assertIn("SEMANTIC_IR_CONTENT_EMPTY", out["errors"])
+        self.assertIn("SOURCE_TEXT_MISSING", out["errors"])
+        self.assertIn("EVIDENCE_DECISION_SYNTHESIS_FAIL_CLOSED", out["errors"])
 
     def test_finance_missing_exception_evidence_blocks(self):
         text = "Every applicable rule must not omit a material exception before execution."
