@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_PROTOCOL_POPULATION_INCLUSION_GAP_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED__DELEGATION_UNIVERSAL_SCOPE_POPULATION_INCLUSION_NOT_PROVEN__ZERO_CREDIT",
+  "objective": "Prevent a self-asserted candidate-superset relation from discharging the reopened delegation protocol scope-completeness atom without an independent proof that the frozen target population is contained in the candidate domain.",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_DELEGATION_PROTOCOL",
+  "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+  "exact_brain_base_commit": "1a090bd5cd32aceab3197426ec029c6c7caebb84",
+  "exact_sources": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "terminal_proof_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+    },
+    "prior_scope_relation_candidate": {
+      "path": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V1.json",
+      "git_blob_sha": "7ac39220b1a83b9779f4d400ce916ea308a0e613"
+    },
+    "prior_public_runner_verification": {
+      "path": "canonical/verification/DELEGATION_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "ae24117149e6acdcc8c4db977f8460b89480f0b2"
+    },
+    "scope_equivalent_gate_input": {
+      "path": "canonical/governance/TASK_TO_DELEGATION_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+      "git_blob_sha": "fed1fcd1d1c7da7842a7daa0f0879e52334942a8"
+    },
+    "candidate_runtime": {
+      "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+    }
+  },
+  "source_candidate_pull_request": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 1009,
+    "observed_head": "81bbc5ecde7be255b7afef7e89c4e3bb12c140ba",
+    "role": "CANDIDATE_ONLY__MUST_NOT_DISCHARGE_ATOM_UNTIL_THIS_GAP_IS_CLOSED"
+  },
+  "frozen_target_authority_facts": [
+    "TASK_TO_DELEGATION_GRAPH_001 scope is Adaptive task partition and worker/tool assignment.",
+    "Its dependency boundary states partition/assignment quality remains residual when task structure or capabilities are uncertain.",
+    "The family protocol includes task partition quality, adaptive worker selection, dependency-respecting fan-out/fan-in, greater-than-two-worker coordination, duplicate/conflicting-work suppression, and failure reassignment."
+  ],
+  "candidate_domain_facts": [
+    "The current candidate runtime operates on finite explicit monotonic fact task graphs with declared steps, requires/produces facts, capabilities, resources, evidence rules, workers, and supported live receipt classes.",
+    "The candidate monotonically accumulates produced facts and requires explicit step and worker collections.",
+    "The prior V1 relation labels CANDIDATE_SUPERSET_PROVEN but is itself a FROZEN_RELATION_CANDIDATE with exact-blob revalidation pending.",
+    "The prior public runner verifies strong mechanics on generated explicit-contract cases but explicitly lists EXPLICIT_TASK_PRECONDITION_POSTCONDITION_AND_CAPABILITY_CONTRACTS_REQUIRED and SCOPE_EQUIVALENCE_GATE_V2_STILL_REQUIRED as limitations."
+  ],
+  "falsification": [
+    {
+      "id": "SELF_ATTESTED_POPULATION_RELATION",
+      "finding": "The universal-scope candidate treats population_relation=CANDIDATE_SUPERSET_PROVEN from the candidate relation/gate as a premise. That label is not an independent proof of target-population inclusion."
+    },
+    {
+      "id": "IMPLEMENTATION_GENERICITY_NOT_DOMAIN_INCLUSION",
+      "finding": "Absence of a static task-count cutoff, generic iteration over explicit task dictionaries, and multiple structural graph tests establish implementation breadth inside the candidate model; they do not prove that every task in the frozen target protocol belongs to that model."
+    },
+    {
+      "id": "EXPLICIT_CONTRACT_LIMIT_PRESERVED_BY_INDEPENDENT_RECEIPT",
+      "finding": "The independent public-runner receipt explicitly preserves the requirement for explicit task precondition/postcondition/capability contracts and leaves scope equivalence outstanding."
+    },
+    {
+      "id": "TARGET_DOMAIN_NOT_FORMALLY_DERIVED",
+      "finding": "No bound source in this proof cone formally derives the complete frozen target population and proves it is a subset of the candidate's finite explicit monotonic fact-graph domain."
+    }
+  ],
+  "consequence": {
+    "proof_atom_state": "OPEN_FAIL_CLOSED",
+    "delegation_terminal_success_noninferior_state": "UNCHANGED_OPEN",
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "new_reality_units_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "admissible_repairs": [
+    "Derive the target task population from independently frozen contract/protocol authority and prove target_population SUBSET_OF candidate_domain without relying on a candidate relation's own label.",
+    "Find an independently verified exact complete target-case universe or exhaustive finite superset that satisfies the existing scope-completeness discharge condition.",
+    "Provide a stronger Brain-owned delegation route whose independently verified domain genuinely contains the frozen target population."
+  ],
+  "forbidden_repairs": [
+    "Do not narrow or rewrite the terminal delegation protocol to fit the current candidate.",
+    "Do not relabel the 132-of-132 finite sample as exhaustive protocol-wide proof.",
+    "Do not infer population inclusion from matching names, prose similarity, source-fragment presence, or the candidate relation's own CANDIDATE_SUPERSET_PROVEN field.",
+    "Do not grant acceptance, capability, family, execution, or promotion credit from this negative finding."
+  ],
+  "next": "SEARCH_ONLY_EXISTING_CONTENT_ADDRESSED_AUTHORITY_FOR_AN_INDEPENDENT_TARGET_DOMAIN_OR_EXACT_EXHAUSTIVE_POPULATION_PROOF__IF_NONE_EXISTS_MARK_THIS UNIVERSAL_ROUTE_IRREDUCIBLY_OPEN_AND_MOVE_WITHIN_THE_SAME_ATOM_TO_THE_NEXT_ADMISSIBLE_DISCHARGE_BASIS__NO_TARGET_WEAKENING"
+}
