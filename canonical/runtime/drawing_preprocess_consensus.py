@@ -71,6 +71,16 @@ def consensus_ink_mask(
     if not (0<=min_ink_fraction<max_ink_fraction<1):
         raise ValueError("ink fraction bounds must satisfy 0 <= min < max < 1")
 
+    gray=_gray(image)
+    # A nearly uniform dark raster is not distinguishable here from an inverted
+    # blank/full-ink surface without an external polarity convention. Fail closed.
+    if float(gray.std()) < 1.0 and float(gray.mean()) < 32.0:
+        return {
+            "schema":SCHEMA,"status":"FAIL_CLOSED",
+            "error":"UNIFORM_DARK_INPUT_POLARITY_AMBIGUOUS",
+            "terminal_authority":False,
+        }
+
     variants=_variants(image)
     names=sorted(variants)
     if min_cluster_size>len(names):
