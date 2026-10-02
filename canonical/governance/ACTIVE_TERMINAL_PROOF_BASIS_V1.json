@@ -88,15 +88,16 @@
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
       "portfolio": "T0_T1",
-      "proof_state": "SCOPE_EQUIVALENT_GATE_V2_INDEPENDENT_PASS__POST_FREEZE_TERMINAL_BINDING_PENDING",
-      "route": "canonical/runtime/structured_method_graph_proof_v1.py",
+      "proof_state": "SCOPE_GATE_INDEPENDENT_PASS__TERMINAL_ACCEPTANCE_MODE_AND_POPULATION_BINDING_PENDING",
+      "route": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
       "blockers": [
+        "TRUTHFUL_REGISTERED_TERMINAL_ACCEPTANCE_MODE_NOT_YET_BOUND",
         "POST_FREEZE_TERMINAL_POPULATION_AND_CANDIDATE_BINDING_PENDING"
       ],
       "route_requirement": "FULL_STRUCTURED_METHOD_REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_DAG_WITH_DIMENSION_TYPE_INVARIANT_BRANCH_EXCLUSION_AND_INDEPENDENT_EDGE_ACCEPTANCE_ORACLE",
-      "scope_audit": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V1.json",
-      "candidate": "canonical/runtime/structured_method_graph_candidate_v1.py",
-      "independent_preflight": "canonical/verification/STRUCTURED_METHOD_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "scope_audit": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json",
+      "candidate": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+      "independent_preflight": "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "normalized_rule_verification": "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "normalized_rule_boundary": "NORMALIZED_RULE_SEMANTICS_UPSTREAM__STRUCTURED_METHOD_OWNS_GRAPH_MATERIALIZATION_AND_STRUCTURAL_ACCEPTANCE",
       "scope_gate_input": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
