@@ -1,0 +1,269 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE__19_BEHAVIORAL_PASS__2_ACCEPTANCE_CLOSED__17_FROZEN_PROTOCOL_RESULTS_OPEN",
+  "objective": "Close only the frozen Opus 5.5 equal-or-better acceptance residuals with the minimum new reality, preserving the immutable terminal wave and zero incremental spend.",
+  "authorities": {
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+    },
+    "calibration": {
+      "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+      "git_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62"
+    },
+    "v6_dominance_input": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V6.json",
+      "git_blob_sha": "d7f31958b3de17478ee45b8b2f8490cdc59c17ca"
+    },
+    "v6_dominance_verification": {
+      "path": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e9d405576c540388b48d74da0f2e498c03e4684a"
+    },
+    "family_adjudication_policy": {
+      "path": "canonical/governance/TERMINAL_FAMILY_ADJUDICATION_POLICY_V1.json",
+      "git_blob_sha": "ce16854ee8c113cd4113c02c835e9863a097632d"
+    },
+    "exact_opus55_zero_cost_comparator_reconciliation": {
+      "path": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+      "git_blob_sha": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1"
+    }
+  },
+  "invariant_truths": [
+    "V6_SURFACE_DELETION_IS_EXECUTION_ROUTE_DEDUPLICATION_ONLY",
+    "V6_EXPLICITLY_FORBIDS_NAMED_BENCHMARK_SCORE_INHERITANCE",
+    "PROVISIONAL_12_TO_19_FAMILY_PASS_GIVES_ZERO_OWNERSHIP_CREDIT",
+    "TERMINAL_V3_ONE_SHOT_WAVE_MUST_NOT_BE_REPLAYED",
+    "FROZEN_PROTOCOL_RESULT_CONTROLS_EQUAL_OR_BETTER_OWNERSHIP_CREDIT"
+  ],
+  "residual_family_count": 17,
+  "residual_families": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "proof_mode": "PUBLIC_FIXED_BARS_CONJUNCTION",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "Terminal-Bench 4.0 >= 66.4%",
+        "FrontierCode v1.1 Main >= 54.4%",
+        "CursorBench 4.0 >= 57.8%"
+      ]
+    },
+    {
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "proof_mode": "MATCHED_DIRECT_NONINFERIORITY",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": "On a frozen representative portfolio exercising every dimension, Brain conservative success bound >= Opus 5.5 matched bound, with no material regression on safety/scope/invalid-action invariants."
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "proof_mode": "PUBLIC_FIXED_BARS_CONJUNCTION",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "GDPval-AA v2.1 >= 1846 Elo",
+        "AA-Briefcase v1.1 >= 1822 Elo"
+      ]
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "proof_mode": "PUBLIC_FIXED_BAR",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "AutomationBench >= 40.0%"
+      ]
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "proof_mode": "PUBLIC_FIXED_BAR",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "Humanity's Last Exam with tools >= 67.7%"
+      ]
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "proof_mode": "PUBLIC_FIXED_BAR",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "Terminal-Bench-Science 0.1 >= 58.7%"
+      ]
+    },
+    {
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "proof_mode": "PUBLIC_FIXED_BAR_PLUS_SCOPE_AUDIT",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "Chartography with tools >= 89.0%",
+        "dense-document non-chart leaves require matched direct scope audit if not exercised by Chartography"
+      ]
+    },
+    {
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "proof_mode": "MATCHED_OSWORLD_PROTOCOL",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "OSWorld 2.1 partial >= 81.8% only on the same harness/setup; otherwise direct matched Brain-vs-Opus noninferiority on frozen OSWorld-compatible portfolio"
+      ]
+    },
+    {
+      "family": "FINANCIAL_ANALYSIS",
+      "proof_mode": "PUBLIC_FIXED_BARS_PLUS_EXPLICIT_UNCOVERED_SCOPE_AUDIT",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "Finance & Accounting Index >= 61 on comparable published harness/configuration for its measured broad finance/accounting scope",
+        "Finance Agent v2 >= 58.59% on comparable Vals setup for its measured core financial-analyst scope",
+        "structured quantitative-method, supervisory/compliance, and document-specific leaves not represented by either public bar remain explicit separate obligations and may not inherit credit"
+      ]
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "proof_mode": "PUBLIC_BAR_PLUS_FAIL_CLOSED_SCOPE_AUDIT",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "LiveBench Instruction Following >= 65.7%",
+        "matched scope-boundary portfolio Brain conservative success bound >= Opus matched bound with zero critical authority violations in the frozen portfolio"
+      ]
+    },
+    {
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "proof_mode": "MATCHED_DIRECT_NONINFERIORITY_WITH_MECHANICAL_CEILINGS",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": "Brain matched portfolio terminal success conservative bound >= Opus matched bound; deterministic coordination invariants must reach zero critical violations; claimed speedup must not trade away correctness."
+    },
+    {
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "proof_mode": "MATCHED_CAUSAL_INTERVENTION_PROTOCOL",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": "On a frozen failure portfolio with independently established fault interventions, Brain conservative terminal-recovery and causal-localization bounds >= Opus matched bounds; deterministic fail-closed invariants must have zero critical misses."
+    },
+    {
+      "family": "ARTIFACT_CREATION",
+      "proof_mode": "ABSOLUTE_MECHANICAL_GATES_PLUS_PUBLIC_PROFESSIONAL_DELIVERABLE_BAR_PLUS_UNCOVERED_SCOPE_AUDIT",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "All mechanical gates pass at ceiling on each claimed native format scope",
+        "AA-Briefcase v1.1 >= 1822 Elo on comparable harness for the professional deliverable scope it actually exercises",
+        "format-specific visual/layout/quality leaves not exercised by AA-Briefcase remain explicit separate obligations; no matched Opus comparator is required for scope already covered by the public bar"
+      ]
+    },
+    {
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "proof_mode": "MATCHED_GROUNDED_SYNTHESIS_NONINFERIORITY",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": "Zero unsupported material claims in objective-source cases plus Brain conservative matched quality/coverage bound >= Opus matched bound on frozen synthesis portfolio."
+    },
+    {
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "proof_mode": "MATCHED_HIDDEN_TOOL_ECOSYSTEM_TRANSFER",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": "On frozen tool ecosystems with hidden capability variants, Brain conservative terminal-success/valid-route bounds >= Opus matched bounds, with demonstrated second-task transfer from first-task evidence and no unsupported capability-state promotion."
+    },
+    {
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "proof_mode": "PUBLIC_FIXED_UNKNOWN_MECHANISM_BAR_PLUS_EXPLICIT_UNCOVERED_TRANSFER_AUDIT",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": [
+        "MysteryMechanism >= 49.55% on comparable Vals setup for unknown-mechanism inference with active experimentation",
+        "new-tool discovery, cross-domain transfer outside the MysteryMechanism task structure, and calibrated abstention leaves remain explicit separate obligations and may not inherit benchmark credit"
+      ]
+    },
+    {
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "proof_mode": "MATCHED_INTERACTION_AND_COMPOSITION_PROTOCOL",
+      "status": "DEFINED_RESULT_OPEN",
+      "acceptance": "Every isolated component used in the claim has its own scoped proof; on the frozen mixed-capability portfolio Brain conservative terminal-success bound >= Opus matched bound and no critical composition invariant fails."
+    }
+  ],
+  "lanes": {
+    "public_or_fixed_bar_first": {
+      "families": [
+        "ADVANCED_AGENTIC_CODING",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMPUTER_AND_BROWSER_USE",
+        "FINANCIAL_ANALYSIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "ARTIFACT_CREATION",
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "rule": "REUSE_EXISTING_ROUTE_SCORER_DATASET_AND_PREFLIGHT_RECEIPTS__RUN_ONLY_THE_BRAIN_ROUTE_NEEDED_TO_OBTAIN_THE_PREDECLARED_PUBLIC_BAR_RESULT__NO_OPUS_CASE_LEVEL_COMPARATOR_WHERE_PUBLIC_BAR_IS_SCOPE_EQUIVALENT"
+    },
+    "explicit_scope_audits": {
+      "families": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "FINANCIAL_ANALYSIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "ARTIFACT_CREATION"
+      ],
+      "rule": "CLOSE_ONLY_UNCOVERED_LEAVES__PREFER_ABSOLUTE_MECHANICAL_OR_INDEPENDENT_DIRECT_ORACLES__DO_NOT_INHERIT_CREDIT_FROM_PUBLIC_BAR_OUTSIDE_ITS_SCOPE"
+    },
+    "matched_comparator_or_noninferiority": {
+      "families": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "COMPUTER_AND_BROWSER_USE",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "ARTIFACT_CREATION",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "zero_cost_exact_opus55_comparator_status": "BLOCKED__NO_REPRODUCIBLE_EXACT_OPUS55_ZERO_INCREMENTAL_ROUTE_ESTABLISHED",
+      "rule": "DO_NOT_EXPOSE_CLEAN_MATCHED_CASES_UNTIL_EXACT_OPUS55_COMPARATOR_ACCESS_OR_AN_ALREADY_ADMISSIBLE_CASE_LEVEL_DATASET_EXISTS__PROXY_MODEL_SUBSTITUTION_FORBIDDEN"
+    }
+  },
+  "existing_reusable_infrastructure": [
+    {
+      "family": "ADVANCED_AGENTIC_CODING",
+      "evidence": "canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_VERIFICATION_20261002_V1.json",
+      "state": "ROUTE_PREFLIGHT_ONLY__NO_BAR_RESULT"
+    },
+    {
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "evidence": "canonical/action_intents/2026-09-30_VERIFY_STIRRUP_PROFESSIONAL_WORK_STAGE1_V1.json",
+      "state": "CLEAN_GDPVAL_STAGE1_REPLACEMENTS_FROZEN__NO_OPUS_BAR_RESULT"
+    },
+    {
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "evidence": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
+      "state": "PUBLIC_SCOPE_PREFLIGHT_FROZEN__NO_40_PERCENT_RESULT"
+    },
+    {
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "evidence": "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "state": "VERIFIER_PREFLIGHT_ONLY__NO_65_7_PERCENT_RESULT"
+    },
+    {
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "evidence": "canonical/verification/HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "state": "SCORER_VERIFIED__CANONICAL_CONTENT_ACCESS_ZERO_COST_BLOCKED"
+    },
+    {
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "evidence": "canonical/verification/TERMINAL_BENCH_SCIENCE_0_1_ZERO_CASE_ROUTE_VERIFICATION_20261002_V1.json",
+      "state": "ZERO_CASE_ROUTE_FROZEN__NO_58_7_PERCENT_RESULT"
+    }
+  ],
+  "execution_order": [
+    "FOR_EACH_OPEN_PROTOCOL_SEARCH_EXISTING_IMMUTABLE_RECEIPTS_FOR_AN_EXACT_MATCHING_RESULT_BEFORE_NEW_EXECUTION",
+    "RUN_OR_COMPILE_PUBLIC_FIXED_BAR_RESULTS_WHERE_ZERO_COST_SCOPE_EQUIVALENT_ROUTE_IS_ALREADY_ADMISSIBLE",
+    "CLOSE_ABSOLUTE_MECHANICAL_AND_UNCOVERED_SCOPE_AUDITS_WITH_DIRECT_INDEPENDENT_ORACLES_WHERE_POSSIBLE",
+    "RECOMPUTE_ACCEPTANCE_CALIBRATION_AND_DELETE_CLOSED_FAMILIES_FROM_RESIDUAL",
+    "ONLY_THEN_ADDRESS_MATCHED_COMPARATOR_RESIDUALS__FAIL_CLOSED_IF_EXACT_OPUS55_ZERO_COST_ROUTE_REMAINS_UNAVAILABLE",
+    "WHEN_ALL_19_PROTOCOL_RESULTS_PASS__REBUILD_FINAL_PROOF_BUNDLE__VERIFY_CURRENT_FINALITY_KERNEL__RUN_FINAL_CLOSURE_ONCE"
+  ],
+  "forbidden": [
+    "TERMINAL_V3_REPLAY",
+    "NAMED_BENCHMARK_SCORE_INHERITANCE_FROM_V6_DOMINANCE",
+    "PROXY_MODEL_SUBSTITUTION_FOR_OPUS55_MATCHED_PROTOCOLS",
+    "POST_HOC_WEAKENING_OF_FROZEN_ACCEPTANCE_RULES",
+    "HANDWRITTEN_FAMILY_PROMOTION",
+    "PAID_INCREMENTAL_COMPARATOR_ACCESS"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_replay_permitted": false
+}
