@@ -92,3 +92,10 @@ def test_batch_only_survivor_authorized():
     assert out["status"] == "PASS"
     assert out["surviving_residual_ids"] == ["b"]
     assert out["implementation_count"] == 1
+
+
+def test_exact_derivation_deleted():
+    out = eliminate_residual(
+        ResidualClaim("s0-derive", "derived template", exactly_derivable=True, evidence=ev())
+    )
+    assert out["disposition"] == "EXACT_DEDUCTIVE_CLOSURE"
