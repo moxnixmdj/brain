@@ -12,9 +12,12 @@ from __future__ import annotations
 
 from collections import defaultdict
 import hashlib
+import json
+from pathlib import Path
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_PROOF_ATOM_BASIS_V2"
+ROOT = Path(__file__).resolve().parents[2]
 ALLOWED_MODES = {
     "EXACT_REQUIREMENT_PARTITION",
     "INDEPENDENTLY_VERIFIED_SEMANTIC_REPLACEMENT",
@@ -244,3 +247,23 @@ def compile_basis(global_frontier: Mapping[str, Any], overlay: Mapping[str, Any]
         "execution_authority": False,
         "promotion_authority": False,
     }
+
+
+def main() -> int:
+    frontier = json.loads(
+        (ROOT / "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    overlay = json.loads(
+        (ROOT / "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    out = compile_basis(frontier, overlay)
+    print(json.dumps(out, indent=2, sort_keys=True))
+    return 0 if str(out.get("status", "")).startswith("PASS") else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
