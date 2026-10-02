@@ -28,6 +28,7 @@ MINIMUM_REALITY_CUT_RUNTIME="canonical/runtime/minimum_reality_cut.py"
 GLOBAL_PROOF_LAW="canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md"
 GLOBAL_CUT="canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
 GLOBAL_UNIVERSE="canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
+OUTER_OBSERVATION_CUT="canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json"
 
 REQUIRED_GATE_CHECKS={
     "CONTINUOUS_OBS_CONTEXT_PRESENT_AND_CURRENT",
@@ -119,6 +120,7 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         obs=load(root,OBS_POLICY)
         global_cut=load(root,GLOBAL_CUT)
         global_universe=load(root,GLOBAL_UNIVERSE)
+        outer_observation_cut=load(root,OUTER_OBSERVATION_CUT)
     except Exception as exc:
         return {
             "schema":"PROJECT_BRAIN_CURRENT_STATE_OBS_REDUCER_V1",
@@ -286,12 +288,33 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
     if not _s(global_universe.get("status")).startswith("FROZEN_OUTER_UNIVERSE"):
         errors.append("GLOBAL_TERMINAL_UNIVERSE_NOT_FROZEN")
     exact_outer=outer.get("exact_cut_ready") is True
+    observation_cut_exact=outer.get("terminal_observation_cut_exact") is True
     fresh_allowed=outer_auth.get("fresh_terminal_evidence_allowed") is True
     if not exact_outer and fresh_allowed:
         errors.append("OUTER_UNIVERSE_PREMATURE_FRESH_EVIDENCE_AUTHORITY")
+    if observation_cut_exact:
+        if outer.get("execution_ready") is not False:
+            errors.append("OUTER_OBSERVATION_CUT_EXECUTION_READINESS_NOT_FALSE_WHILE_MECHANISMS_OPEN")
+        if outer_auth.get("exact_terminal_observation_cut_frozen") is not True:
+            errors.append("OUTER_OBSERVATION_CUT_NOT_BOUND_IN_EXECUTION_AUTHORITY")
+        if _s(outer_auth.get("exact_terminal_observation_cut"))!=OUTER_OBSERVATION_CUT:
+            errors.append("OUTER_OBSERVATION_CUT_AUTHORITY_PATH_DRIFT")
+        if _s(outer.get("terminal_observation_cut_verdict"))!=OUTER_OBSERVATION_CUT:
+            errors.append("OUTER_OBSERVATION_CUT_UNIVERSE_PATH_DRIFT")
+        if outer_observation_cut.get("exact_minimum") is not True:
+            errors.append("OUTER_OBSERVATION_CUT_NOT_EXACT")
+        if outer_observation_cut.get("execution_authority") is not False:
+            errors.append("OUTER_OBSERVATION_CUT_PREMATURE_EXECUTION_AUTHORITY")
+        hcut=hierarchy.get("exact_outer_terminal_observation_cut") or {}
+        if _s(hcut.get("verdict"))!=OUTER_OBSERVATION_CUT:
+            errors.append("HIERARCHY_OUTER_OBSERVATION_CUT_DRIFT")
+        if hcut.get("execution_authorized") is not False:
+            errors.append("HIERARCHY_OUTER_OBSERVATION_CUT_PREMATURE_AUTHORITY")
     if not exact_outer:
-        if "OUTER_GLOBAL_TERMINAL_UNIVERSE" not in blocker:
+        if not observation_cut_exact and "OUTER_GLOBAL_TERMINAL_UNIVERSE" not in blocker:
             errors.append("HIERARCHY_IGNORES_OPEN_OUTER_GLOBAL_UNIVERSE")
+        if observation_cut_exact and "OPERATIVE_ROUTE_CLOSURE" not in blocker:
+            errors.append("HIERARCHY_IGNORES_POST_CUT_MECHANISM_BLOCKER")
         if any(token in next_action for token in ("PREQUALIFY_IN_PARALLEL","EXECUTE_","EXPOSE_")):
             errors.append("HIERARCHY_PREMATURE_FRESH_ACTION_WHILE_OUTER_CUT_OPEN")
         local_v6=hierarchy.get("v6_residual_cut") or {}
@@ -304,6 +327,13 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("POINTER_LOCAL_V6_WRONGLY_GLOBAL")
     if eg.get("fresh_terminal_evidence_requires_outer_exact_cut") is not True:
         errors.append("POINTER_OUTER_EXACT_CUT_NOT_REQUIRED")
+    if observation_cut_exact:
+        if _s(eg.get("outer_global_terminal_observation_cut"))!=OUTER_OBSERVATION_CUT:
+            errors.append("POINTER_OUTER_OBSERVATION_CUT_DRIFT")
+        if eg.get("outer_global_terminal_observation_cut_exact") is not True:
+            errors.append("POINTER_OUTER_OBSERVATION_CUT_EXACT_FLAG_FALSE")
+        if eg.get("outer_global_terminal_observation_cut_execution_authorized") is not False:
+            errors.append("POINTER_OUTER_OBSERVATION_CUT_PREMATURE_AUTHORITY")
     expected_open_mechanism_lanes=(global_universe.get("counts") or {}).get("open_mechanism_lanes")
     pointer_open_mechanism_count=eg.get("open_mechanism_residual_count")
     if expected_open_mechanism_lanes is not None and pointer_open_mechanism_count!=expected_open_mechanism_lanes:
