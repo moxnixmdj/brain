@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_V2_ACCEPTANCE_RULE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREBEACON_EXACT_CURRENT",
+  "status": "FROZEN_PREBEACON_EXACT_CURRENT_POST_SA_CCR_REBIND",
   "zero_terminal_results": true,
   "post_freeze_beacon_known": false,
   "incremental_spend_usd": 0,
@@ -21,9 +21,11 @@
     "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "a7015b12f55fc971233f9fdddf59d50cfc43892b",
     "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json": "b1f712d61bfa6ad0c77fd55ce909664df3c97c5f",
     "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
-    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "62e888a0ca582306dc1125521178466767c8cd5e",
+    "canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json": "8a40fd5139830650adaacd984a9133258292398c",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "3ffc4484ab4ac69f60258859d5d6e2a7cc8024a7",
     "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
-    "canonical/verification/TERMINAL_WAVE_LAUNCH_AUTHORITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "39ba79433b946eadc7ac6725a1f2359d327a9305"
+    "canonical/runtime/terminal_wave_launch_authority_reducer_v1.py": "0b5b5e8229cc3e5ee950169469811e7576c43514",
+    "canonical/verification/TERMINAL_PARENT_LAUNCHER_SA_CCR_REBIND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "db27f7965259d5e53b23924791e891fb78f45c4b"
   },
   "credit_rule": "No capability or family credit is granted by prewave state. Credit is computed only from immutable terminal receipts through the terminal closure reducer."
 }
