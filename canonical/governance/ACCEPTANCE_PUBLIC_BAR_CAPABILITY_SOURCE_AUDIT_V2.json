@@ -28,12 +28,12 @@
       "brain_candidate_bound": true,
       "brain_owned_operative_configuration": false,
       "configuration_materially_constrains_execution": false,
-      "capability_package_contains_configuration": false,
+      "capability_package_contains_configuration": true,
       "promotion_evaluates_brain_configured_system": false,
       "external_hidden_target_capability_provider": true,
       "ownership_claim_relies_on_model_standalone_superiority": false,
-      "future_use_requires_capability_rediscovery": true,
-      "model_role": "UNCLASSIFIED_EXTERNAL_TARGET_CAPABILITY_PROVIDER",
+      "future_use_requires_capability_rediscovery": false,
+      "model_role": "UNCLASSIFIED_PENDING_V3_COUNTERFACTUAL_SUBSTRATE_TEST",
       "model_dependency_count": 1,
       "model_dependencies_declared": true,
       "general_substrate_test_pass": false,
@@ -41,10 +41,11 @@
       "evidence": [
         "canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
         "canonical/verification/HARBOR_BRAIN_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-        "canonical/runtime/harbor_brain_agent.py"
+        "canonical/runtime/harbor_brain_agent.py",
+        "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json"
       ],
-      "disposition": "BLOCKED_BEFORE_CASE_SPEND__EXTERNAL_PLANNER_NOT_PROVEN_TO_BE_MERELY_GENERAL_SUBSTRATE_UNDER_A_MATERIALLY_SUFFICIENT_BRAIN_OWNED_CODING_CONFIGURATION",
-      "next": "FIND_OR_BIND_ALREADY_EXISTING_REUSABLE_CODING_CAPABILITY_CONFIGURATION_INTO_BRAIN__CLASSIFY_ANY_MODEL_ONLY_AS_GENERAL_SUBSTRATE_AFTER_V3_TEST_PASSES"
+      "disposition": "BLOCKED_BEFORE_CASE_SPEND__EXISTING_BRAIN_OWNED_MINI_SWE_SUPERPOWERS_CONFIGURATION_IDENTIFIED__V3_GENERAL_SUBSTRATE_MATERIALITY_TEST_PENDING",
+      "next": "COMPLETE_SYNTHETIC_CONFIGURED_VS_BARE_GENERAL_SUBSTRATE_DIFFERENTIAL__IF_PASS_BIND_CONFIGURATION_TO_HARBOR_PROMOTION_ROUTE_AND_RERUN_V2_GATE__DO_NOT_READ_TB4_CASES_BEFORE_PASS"
     },
     {
       "id": "AUTOMATIONBENCH_PUBLIC_600_ROUTE",
@@ -98,7 +99,7 @@
     "currently_clean_case_executable_routes": 0,
     "public_harness_ready_but_candidate_blocked_routes": 3,
     "terminal_cases_authorized": 0,
-    "reason": "PUBLIC_HARNESS_READINESS_NEQ_INTERNALIZED_CAPABILITY_READINESS__MODELS_MAY_BE_GENERAL_SUBSTRATE_BUT_HIDDEN_TARGET_CAPABILITY_PROVIDER_IS_FORBIDDEN"
+    "reason": "TB4_BRAIN_CONFIGURATION_FOUND_BUT_V3_SUBSTRATE_MATERIALITY_PENDING__AUTOMATIONBENCH_AND_LIVEBENCH_OPERATIVE_CANDIDATES_STILL_UNBOUND"
   },
   "v1_correction": {
     "old_requirement": "MODEL_DEPENDENCY_COUNT_ZERO",
