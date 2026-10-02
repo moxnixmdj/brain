@@ -63,4 +63,14 @@ bad["binding_verification"] = json.loads(json.dumps(base["binding_verification"]
 bad["binding_verification"]["exact_brain_blobs"][BINDING] = "stale"
 assert evaluate(**bad)["pass"] is False
 
+bad = dict(base)
+bad["postwave_reduction"] = json.loads(json.dumps(base["postwave_reduction"]))
+bad["postwave_reduction"]["public_verifier"]["conclusion"] = "failure"
+assert evaluate(**bad)["pass"] is False
+
+bad = dict(base)
+bad["binding"] = json.loads(json.dumps(base["binding"]))
+bad["binding"]["terminal_acceptance"]["standalone_synthetic_whole_domain_score_forbidden"] = False
+assert evaluate(**bad)["pass"] is False
+
 print("test_multiplex_exhaustive_family_witness_v1: PASS")
