@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_M4_DECISION_ROLE_RELEVANCE_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_RELEVANCE_ADMISSION_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
+  "implementation": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+  "implementation_blob_sha": "51abc98fd78a895e86600bc4fd7125722013b90d",
+  "tests": "canonical/tests/test_open_research_query_focus_relevance.py",
+  "tests_blob_sha": "27324ce32d299bbbf7420ee4963158bb9a1ef714",
+  "workflow": ".github/workflows/verify-m4-decision-role-relevance.yml",
+  "workflow_blob_sha": "ac769a05f12ef78b101b4c8bb9b599315096ce43",
+  "merged_main_commit": "1e614f4f56d3c661d151a0ef3a9a86f8670b10e3",
+  "independent_verification": {
+    "workflow_run_id": 36949070962,
+    "conclusion": "success",
+    "verified_premerge_head": "4943eed842fa5ef522f54ce8e47c0cf708564c64",
+    "exact_implementation_blob_sha": "51abc98fd78a895e86600bc4fd7125722013b90d",
+    "exact_tests_blob_sha": "27324ce32d299bbbf7420ee4963158bb9a1ef714"
+  },
+  "owned_scope": [
+    "EXPLICIT_BINARY_COMPARISON_OBJECTIVE_TO_BOUNDED_DECISION_PROPERTY_AND_LEFT_RIGHT_OPERAND_ROLE_ANCHORS",
+    "SOURCE_RELEVANCE_ADMISSION_REQUIRES_DECISION_PROPERTY_PLUS_AT_LEAST_ONE_APPLICABLE_OPERAND_ROLE_WITHIN_VERIFIED_EXPLICIT_COMPARISON_GRAMMAR",
+    "WRONG_PROPERTY_CANDIDATE_REJECTED_DESPITE_GENERIC_SUBJECT_OR_OPERAND_OVERLAP",
+    "WRONG_OPERAND_CANDIDATE_REJECTED_DESPITE_CORRECT_PROPERTY_OVERLAP",
+    "UNSUPPORTED_OR_AMBIGUOUS_OBJECTIVE_GRAMMAR_FALLS_BACK_WITHOUT_CLAIMING_ROLE_SEMANTICS"
+  ],
+  "causal_target": "OPEN_RESEARCH_DECISION_ROLE_RELEVANCE_AND_OPERAND_COVERAGE_INSUFFICIENT",
+  "source_failure": "canonical/capabilities/obsolescence/PARENT_MATERIALS_TASK_C_CAUSAL_INTERPRETATION_CORRECTION_20260930_V1.json",
+  "exclusions": [
+    "NO_GENERAL_SEMANTIC_RELEVANCE_CLAIM",
+    "NO_SOURCE_AUTHORITY_OR_TRUTH_JUDGMENT",
+    "NO_EVIDENCE_SUFFICIENCY_JUDGMENT_WHEN_REQUIREMENTS_ARE_IMPLICIT",
+    "NO_OPEN_DOMAIN_QUERY_GENERATION_CLAIM",
+    "NO_PARENT_OPEN_ENDED_RESEARCH_CAPABILITY_CREDIT"
+  ],
+  "spent_parent_replay": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
