@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -112,8 +113,19 @@ def _candidate_files(root: Path) -> list[Path]:
     return sorted(out, key=lambda p: p.relative_to(root).as_posix())
 
 
+_IDENTIFIER_NEIGHBOR = r"A-Za-z0-9_:.\\-"
+
+
 def _line_hits(text: str, literal: str) -> list[int]:
-    return [i for i, line in enumerate(text.splitlines(), start=1) if literal in line]
+    """Return exact literal-token line hits, rejecting identifier superstrings."""
+    pattern = re.compile(
+        rf"(?<![{_IDENTIFIER_NEIGHBOR}]){re.escape(literal)}(?![{_IDENTIFIER_NEIGHBOR}])"
+    )
+    return [
+        i
+        for i, line in enumerate(text.splitlines(), start=1)
+        if pattern.search(line) is not None
+    ]
 
 
 def _scan_policy() -> dict[str, Any]:
@@ -125,6 +137,7 @@ def _scan_policy() -> dict[str, Any]:
         "excluded_basenames": sorted(EXCLUDED_BASENAMES),
         "excluded_rel_paths": sorted(EXCLUDED_REL_PATHS),
         "source_rank": dict(sorted(SOURCE_RANK.items())),
+        "identifier_neighbor_regex_class": _IDENTIFIER_NEIGHBOR,
     }
 
 
@@ -200,6 +213,7 @@ def build_index(
             return _fail("CANONICAL_ATOM_INVALID")
 
         matches: list[dict[str, Any]] = []
+        actual_match_count = 0
         for file_row in file_cache:
             text = file_row["text"]
             if proposition not in text:
@@ -208,19 +222,19 @@ def build_index(
             if not hits:
                 continue
             source_class = file_row["source_class"]
-            matches.append(
-                {
-                    "path": file_row["path"],
-                    "git_blob_sha": file_row["git_blob_sha"],
-                    "source_class": source_class,
-                    "line_numbers": hits[:16],
-                    "explicit_atom_id_reference": atom_id in text,
-                    "candidate_only": True,
-                }
-            )
+            actual_match_count += 1
             source_class_counts[source_class] = source_class_counts.get(source_class, 0) + 1
-            if len(matches) >= MAX_MATCHES_PER_ATOM:
-                break
+            if len(matches) < MAX_MATCHES_PER_ATOM:
+                matches.append(
+                    {
+                        "path": file_row["path"],
+                        "git_blob_sha": file_row["git_blob_sha"],
+                        "source_class": source_class,
+                        "line_numbers": hits[:16],
+                        "explicit_atom_id_reference": atom_id in text,
+                        "candidate_only": True,
+                    }
+                )
 
         matches.sort(
             key=lambda m: (
@@ -230,16 +244,18 @@ def build_index(
                 m["git_blob_sha"],
             )
         )
-        if matches:
+        if actual_match_count:
             atoms_with_matches += 1
-        total_matches += len(matches)
+        total_matches += actual_match_count
         atom_rows.append(
             {
                 "atom_id": atom_id,
                 "proposition": proposition,
                 "associated_target_predicates": atom.get("associated_target_predicates", []),
                 "associated_target_count": len(atom.get("associated_target_predicates", [])),
-                "candidate_match_count": len(matches),
+                "candidate_match_count": actual_match_count,
+                "stored_candidate_match_count": len(matches),
+                "candidate_match_truncated": actual_match_count > len(matches),
                 "candidate_matches": matches,
                 "candidate_only": True,
             }
@@ -283,6 +299,7 @@ def build_index(
         "candidate_bindings": [
             {
                 "atom_id": row["atom_id"],
+                "candidate_match_count": row["candidate_match_count"],
                 "matches": [
                     [m["path"], m["git_blob_sha"], m["explicit_atom_id_reference"]]
                     for m in row["candidate_matches"]
@@ -302,6 +319,9 @@ def build_index(
         "scanned_file_count": len(file_cache),
         "scanned_corpus_manifest_sha256": scanned_corpus_manifest_sha256,
         "candidate_match_count": total_matches,
+        "atoms_with_truncated_candidate_lists": sum(
+            1 for row in atom_rows if row["candidate_match_truncated"]
+        ),
         "atoms_with_candidate_matches": atoms_with_matches,
         "atoms_without_candidate_matches": len(zero),
         "atom_ids_with_candidate_matches": nonzero,
@@ -312,7 +332,9 @@ def build_index(
         "atoms": atom_rows,
         "index_fingerprint_sha256": _sha256_json(result_fingerprint),
         "rules": [
-            "EXACT_PROPOSITION_LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY",
+            "EXACT_PROPOSITION_LITERAL_TOKEN_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY",
+            "IDENTIFIER_SUPERSTRING_FALSE_POSITIVES_ARE_REJECTED",
+            "MATCH_CAP_NEVER_HIDES_ACTUAL_CANDIDATE_COUNT",
             "EVERY_CANDIDATE_MATCH_IS_BOUND_TO_GIT_BLOB_SHA",
             "ZERO_MATCH_STATE_IS_BOUND_TO_DIGEST_OF_EVERY_SCANNED_ELIGIBLE_EVIDENCE_BLOB",
             "ATOM_BASIS_IS_BOUND_TO_DETERMINISTIC_V2_ATOM_MANIFEST_DIGEST",
