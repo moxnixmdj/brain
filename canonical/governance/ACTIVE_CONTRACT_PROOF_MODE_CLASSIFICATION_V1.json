@@ -45,8 +45,15 @@
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
-      "mode": "FINITE_OR_FORMAL_NORMALIZED_GRAMMAR",
-      "disposition": "PROVE_DECLARED_NORMALIZED_GRAMMAR_OR_SPLIT_SEMANTIC_EXTRACTION_TAIL"
+      "mode": "PORTFOLIO_MULTIPLEXED_DETERMINISTIC_GATE",
+      "disposition": "PREWAVE_MULTIPLEX_BINDING_INDEPENDENT_PASS__TERMINAL_EVIDENCE_FROM_FROZEN_T0_T1_WAVE",
+      "covered_by": [
+        "T0",
+        "T1"
+      ],
+      "binding": "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "verification": "canonical/verification/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "synthetic_superset_required": false
     },
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
