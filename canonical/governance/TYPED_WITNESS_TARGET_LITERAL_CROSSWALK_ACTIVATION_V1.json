@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_WITNESS_TARGET_LITERAL_CROSSWALK_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXACT_FROZEN_TARGET_LITERAL_TO_CONTENT_ADDRESSED_WITNESS_SOURCE_CROSSWALK__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Generate the smallest content-addressed candidate set for witness-to-target semantic review by searching exact frozen target source literals only inside source files explicitly declared by each independently verified normalized Brain witness.",
+  "runtime": "canonical/runtime/typed_witness_target_literal_crosswalk_v1.py",
+  "tests": "canonical/tests/test_typed_witness_target_literal_crosswalk_v1.py",
+  "inputs": {
+    "target_normalization": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+    "witness_normalization": "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json",
+    "contamination_admissibility": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "overlay_endpoint": "canonical/governance/VERIFIED_WITNESS_TARGET_OVERLAY_ACTIVATION_V1.json"
+  },
+  "expected_live_surface": {
+    "target_count": 11,
+    "witness_count": 9,
+    "pair_count": 99
+  },
+  "hard_rules": [
+    "SEARCH_ONLY_EXACT_FROZEN_TARGET_SOURCE_LITERALS",
+    "SEARCH_ONLY_CONTENT_ADDRESSED_PRIMARY_OR_SUPPORTING_SOURCES_DECLARED_BY_THE_NORMALIZED_WITNESS",
+    "FAIL_CLOSED_IF_ANY_DECLARED_WITNESS_SOURCE_BLOB_SHA_MISMATCHES",
+    "LITERAL_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY",
+    "NO_ATOM_EQUIVALENCE_FROM_LITERAL_OCCURRENCE",
+    "NO_METRIC_EQUIVALENCE_FROM_LITERAL_OCCURRENCE",
+    "NO_SCOPE_RELATION_FROM_LITERAL_OCCURRENCE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "POSITIVE_CANDIDATES_MUST_BE_REVIEWED_AND_INDEPENDENTLY_VERIFIED_BEFORE_ENTERING_VERIFIED_WITNESS_TARGET_OVERLAY_MANIFEST"
+  ],
+  "next": "RUN_CURRENT_99_PAIR_CROSSWALK__RANK_NONZERO_LITERAL_CANDIDATES_BY_EXACT_LITERAL_COVERAGE__FOR_EACH_CANDIDATE_CONSTRUCT_EXPLICIT_ALGEBRA_INPUT_WITH_NO_INFERRED_SCOPE_OR_METRIC_BOUNDS__RACE_INDEPENDENT_VERIFICATION_AGAINST_COUNTEREXAMPLE_SEARCH__PROMOTE_ONLY_VERIFIED_PAIR_OVERLAYS__RECOMPUTE_FIXED_POINT_AFTER_EACH",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
