@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_V3_POST_FREEZE_BEACON_POLICY_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PRETRIGGER__BEACON_NOT_YET_KNOWN__ZERO_TERMINAL_RESULTS",
+  "status": "SUPERSEDED_FOR_EXECUTION__V4_WAS_FROZEN_BEFORE_THIS_V3_BEACON__PRESERVE_AUDIT_ONLY",
   "terminal_capsule": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3.json",
   "terminal_capsule_verification": "canonical/verification/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_INDEPENDENT_VERIFICATION_20261002_V1.json",
   "execution_snapshot_commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
@@ -31,5 +31,9 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "superseded_by": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V4.json",
+  "supersession_reason": "TERMINAL_ATOMIC_CLOSURE_CAPSULE_V4_SUPERSEDES_V3_FOR_EXECUTION_AND_WAS_FROZEN_BEFORE_THE_V3_BEACON_TRIGGER",
+  "no_execution_authority": true
 }
