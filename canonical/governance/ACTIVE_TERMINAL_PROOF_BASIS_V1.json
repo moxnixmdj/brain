@@ -36,14 +36,25 @@
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
       "portfolio": "T0_T1_T2_T3",
-      "proof_state": "INFORMATION_SAFE_RAW_SOURCE_DIAGNOSTIC_BUILT__WHOLE_CONTRACT_TERMINAL_ROUTE_PENDING",
+      "proof_state": "BOUNDED_INFORMATION_SAFE_POST_REPAIR_PASS__WHOLE_OPEN_ENDED_SCOPE_ADMISSION_PENDING",
       "route_requirement": "RAW_SOURCE_TO_TYPED_REQUIREMENTS_TO_INDEPENDENT_ACCEPTANCE_WITH_HIDDEN_SEMANTIC_GOLD_AND_AMBIGUITY_ORACLE",
       "blockers": [
-        "CURRENT_DIAGNOSTIC_IS_BOUNDED_SYNTHETIC_SEMANTIC_ENVELOPE_NOT_WHOLE_OPEN_ENDED_CONTRACT",
+        "BOUNDED_SYNTHETIC_ENVELOPE_DOES_NOT_PROVE_WHOLE_OPEN_ENDED_RAW_SOURCE_CONTRACT",
         "POST_FREEZE_SCOPE_EQUIVALENT_TERMINAL_POPULATION_NOT_YET_FROZEN",
         "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS"
       ],
-      "route": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py"
+      "route": "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+      "prewave_receipt": "canonical/verification/M0A_RAW_SOURCE_POST_REPAIR_PUBLIC_RUNNER_20261002_V1.json",
+      "verified_bounded_classes": [
+        "DIRECT_ACTIVE",
+        "PASSIVE",
+        "IF_CONDITION",
+        "FLAT_COMPOUND",
+        "PRONOUN_UNIQUE",
+        "PRONOUN_AMBIGUOUS",
+        "TEMPORAL_AFTER",
+        "UNLESS_EXCEPTION"
+      ]
     },
     {
       "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
