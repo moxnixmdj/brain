@@ -77,6 +77,33 @@ class Tests(unittest.TestCase):
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
             self.assertEqual(row["candidate_match_count"],0)
 
+    def test_frozen_index_artifact_cannot_feed_itself(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/PROOF_ATOM_RECEIPT_INDEX_RESULT_20261002_V1.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"claim":"R1"}\n',encoding="utf-8")
+            out=build_index(frontier(),overlay(),root=root)
+            row=next(x for x in out["atoms"] if x["proposition"]=="R1")
+            self.assertEqual(row["candidate_match_count"],0)
+
+    def test_corpus_manifest_digest_tracks_nonmatching_corpus_changes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/unrelated.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"note":"alpha"}\n',encoding="utf-8")
+            first=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(len(first["scanned_corpus_manifest_sha256"]),64)
+            self.assertEqual(first["scanned_corpus_manifest_entry_count"],1)
+            p.write_text('{"note":"beta"}\n',encoding="utf-8")
+            second=build_index(frontier(),overlay(),root=root)
+            self.assertNotEqual(
+                first["scanned_corpus_manifest_sha256"],
+                second["scanned_corpus_manifest_sha256"],
+            )
+            self.assertEqual(first["candidate_match_count"],second["candidate_match_count"])
+
     def test_no_credit_or_authority(self):
         with tempfile.TemporaryDirectory() as td:
             out=build_index(frontier(),overlay(),root=Path(td))
