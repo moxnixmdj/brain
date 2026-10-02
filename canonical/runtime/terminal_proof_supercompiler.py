@@ -27,8 +27,10 @@ VERDICT_SCHEMA = "PROJECT_BRAIN_TERMINAL_PROOF_SUPERCOMPILER_VERDICT_V1"
 PROOF_MODE_ORDER = (
     "EXISTING_RECEIPT",
     "EXACT_DEDUCTION",
+    "UNIVERSAL",
     "FORMAL_PROOF",
     "EXHAUSTIVE_FINITE",
+    "ABSOLUTE_DOMINANCE",
     "DETERMINISTIC_HIDDEN_ORACLE",
     "PUBLIC_FIXED_BAR",
     "PUBLIC_SAME_CASE_OPUS",
@@ -42,13 +44,16 @@ MAX_BLOCKERS = 64
 MAX_STATES_PER_COVERAGE_MASK = 512
 
 
-def _finite_nonnegative(v: Any) -> bool:
+def _finite_number(v: Any) -> bool:
     return (
         isinstance(v, (int, float))
         and not isinstance(v, bool)
         and math.isfinite(float(v))
-        and float(v) >= 0
     )
+
+
+def _finite_nonnegative(v: Any) -> bool:
+    return _finite_number(v) and float(v) >= 0
 
 
 def _fail(*errors: str, details: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -146,8 +151,17 @@ def _proof_mode_checks(route: Mapping[str, Any]) -> list[str]:
     errors: list[str] = []
     if mode not in PROOF_MODE_RANK:
         return [f"{rid}:PROOF_MODE_INVALID"]
-    if mode in {"EXACT_DEDUCTION", "FORMAL_PROOF"} and route.get("machine_checkable") is not True:
-        errors.append(f"{rid}:MACHINE_CHECKABLE_PROOF_REQUIRED")
+
+    if mode in {"EXACT_DEDUCTION", "FORMAL_PROOF"}:
+        if route.get("machine_checkable") is not True:
+            errors.append(f"{rid}:MACHINE_CHECKABLE_PROOF_REQUIRED")
+    elif mode == "UNIVERSAL":
+        if route.get("machine_checkable") is not True:
+            errors.append(f"{rid}:MACHINE_CHECKABLE_PROOF_REQUIRED")
+        if route.get("all_admissible_inputs_proved") is not True:
+            errors.append(f"{rid}:UNIVERSAL_DOMAIN_NOT_PROVED")
+        if route.get("formal_completeness") is not True:
+            errors.append(f"{rid}:UNIVERSAL_COMPLETENESS_NOT_PROVED")
     elif mode == "EXISTING_RECEIPT":
         if route.get("scope_equivalent_receipt") is not True:
             errors.append(f"{rid}:SCOPE_EQUIVALENT_RECEIPT_REQUIRED")
@@ -158,6 +172,36 @@ def _proof_mode_checks(route: Mapping[str, Any]) -> list[str]:
             errors.append(f"{rid}:FINITE_DOMAIN_NOT_FROZEN")
         if route.get("exhaustive") is not True:
             errors.append(f"{rid}:EXHAUSTIVE_PROOF_REQUIRED")
+        if route.get("all_cases_pass") is not True:
+            errors.append(f"{rid}:EXHAUSTIVE_CASES_NOT_ALL_PASS")
+    elif mode == "ABSOLUTE_DOMINANCE":
+        if route.get("scope_equivalent") is not True:
+            errors.append(f"{rid}:ABSOLUTE_DOMINANCE_SCOPE_EQUIVALENCE_REQUIRED")
+        direction = route.get("direction")
+        if direction == "higher":
+            brain = route.get("brain_lower_bound")
+            theory = route.get("theoretical_upper_bound")
+            target = route.get("target_upper_bound")
+            if not _finite_number(brain):
+                errors.append(f"{rid}:BRAIN_LOWER_BOUND_MISSING")
+            elif not (
+                (_finite_number(theory) and float(brain) >= float(theory))
+                or (_finite_number(target) and float(brain) >= float(target))
+            ):
+                errors.append(f"{rid}:NO_HIGHER_IS_BETTER_ABSOLUTE_DOMINANCE")
+        elif direction == "lower":
+            brain = route.get("brain_upper_bound")
+            theory = route.get("theoretical_lower_bound")
+            target = route.get("target_lower_bound")
+            if not _finite_number(brain):
+                errors.append(f"{rid}:BRAIN_UPPER_BOUND_MISSING")
+            elif not (
+                (_finite_number(theory) and float(brain) <= float(theory))
+                or (_finite_number(target) and float(brain) <= float(target))
+            ):
+                errors.append(f"{rid}:NO_LOWER_IS_BETTER_ABSOLUTE_DOMINANCE")
+        else:
+            errors.append(f"{rid}:ABSOLUTE_DOMINANCE_DIRECTION_INVALID")
     elif mode == "DETERMINISTIC_HIDDEN_ORACLE":
         if route.get("oracle_independent") is not True:
             errors.append(f"{rid}:INDEPENDENT_ORACLE_REQUIRED")
@@ -179,7 +223,6 @@ def _proof_mode_checks(route: Mapping[str, Any]) -> list[str]:
         if route.get("symmetric_harness_frozen") is not True:
             errors.append(f"{rid}:SYMMETRIC_HARNESS_REQUIRED")
     return errors
-
 
 def _normalize_routes(
     rows: Any,
