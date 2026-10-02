@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_OBLIGATION_DELTA_COMPILER_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED_CANDIDATE__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "IMPLEMENTED_HARDENED_CANDIDATE__CONTENT_ADDRESSED_BINDING_RECEIPTS_REQUIRED__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Compile frozen target obligations and verified witness evidence into one explicit content-addressed normal form and return the exact unresolved proof delta before any semantic implication, comparator execution, or fresh reality query.",
   "runtime": "canonical/runtime/proof_obligation_delta_compiler_v1.py",
   "tests": "canonical/tests/test_proof_obligation_delta_compiler_v1.py",
@@ -38,7 +38,9 @@
     "NO_ATOM_INVARIANT_OR_METRIC_CREDIT_WITHOUT_EXPLICIT_INDEPENDENT_BINDING",
     "PERFECT_METRIC_VALUES_CANNOT_REPAIR_MISSING_SCOPE",
     "EXTRA_WITNESS_SCOPE_MAY_COUNT_AS_PROVEN_STRONGER_ONLY_AFTER_ALL_TARGET_SCOPE_COMPONENTS_ARE_EXPLICITLY_COVERED",
-    "OUTPUT_IS_PREPROOF_DELTA_ONLY__ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+    "OUTPUT_IS_PREPROOF_DELTA_ONLY__ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "SELF_ASSERTED_OR_OPAQUE_RECEIPT_STRINGS_CANNOT_DISCHARGE_ANY_OBLIGATION",
+    "MULTIPLE_BINDINGS_TO_THE_SAME_TARGET_SCOPE_ATOM_OR_INVARIANT_FAIL_CLOSED"
   ],
   "expected_breakthrough": "Replace bespoke family-specific residual bookkeeping with one machine-checkable residual representation, prevent recurrence of narrow-scope ceiling lifts, and reduce subsequent search to only exact unresolved scope/atom/invariant/metric obligations.",
   "first_required_applications": [
@@ -51,5 +53,19 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "binding_receipt_schema": {
+    "required_fields": [
+      "path",
+      "git_blob_sha"
+    ],
+    "path": "NONEMPTY_CANONICAL_OBJECT_PATH",
+    "git_blob_sha": "EXACT_40_HEX_GIT_BLOB_SHA"
+  },
+  "hardening": {
+    "trigger": "PRE_VERIFICATION_AUDIT_FOUND_OPAQUE_RECEIPT_STRINGS_COULD_BE_SELF_ASSERTED",
+    "runtime_fix_commit": "d931fe110293084b529ecd64623f88ec40621219",
+    "regression_fix_commit": "e65b3683fb463dc527d8c6f35db8cb37c77a0948",
+    "disposition": "FIXED_BEFORE_INDEPENDENT_ACTIVATION__NO_PRIOR_CREDIT"
+  }
 }
