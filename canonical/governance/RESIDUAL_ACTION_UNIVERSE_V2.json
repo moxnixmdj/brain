@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M1B_COMPLETENESS_REOPENED_AFTER_AUTHORITY_AUDIT__NOT_FROZEN",
+  "status": "FROZEN_V2__EXACT_RESIDUAL_CUT_AUTHORIZED__SELECTED_ACTIONS_UNEXECUTED",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -54,7 +54,8 @@
       "new_reality_units": 1,
       "dependency_depth": 2,
       "specialized_white_box_decomposition": "canonical/governance/M0A_SPECIALIZED_WHITE_BOX_DONOR_DECOMPOSITION_V1.json",
-      "white_box_donor_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json"
+      "white_box_donor_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json",
+      "complete_action_bundle_path": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V1.json"
     },
     "M1A": {
       "status": "OPEN",
@@ -178,11 +179,12 @@
       "complete_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V1.json",
       "new_reality_units": 1,
       "dependency_depth": 2,
-      "white_box_donor_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json"
+      "white_box_donor_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json",
+      "complete_action_bundle_path": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V1.json"
     },
     "M1B": {
       "status": "OPEN",
-      "complete_action_bundle": false,
+      "complete_action_bundle": true,
       "candidate_action": "REBUILD_M1B_FROM_CURRENT_VERIFIED_MECHANISMS",
       "new_reality_units": 0,
       "dependency_depth": 1,
@@ -207,7 +209,7 @@
     "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
     "RUN_EXACT_FROZEN_UNIVERSE_COMPILER_ONLY_AFTER_ALL_TERMINALLY_NECESSARY_RESIDUALS_HAVE_AT_LEAST_ONE_ADMISSIBLE_COMPLETE_BUNDLE"
   ],
-  "exact_cut_ready": false,
+  "exact_cut_ready": true,
   "blocking_obligations": [
     "M1B"
   ],
@@ -215,7 +217,7 @@
     "M0A",
     "M1A"
   ],
-  "next": "BUILD_VERIFY_AND_FREEZE_CURRENT_M1B_CONTINUOUS_GEOMETRY_AND_TOLERANCE_ACTION_BUNDLE__THEN_RECOMPUTE_EVIDENCE_SATURATION_AND_EXACT_RESIDUAL_CUT",
+  "next": "EXECUTE_EXACT_RESIDUAL_CUT_V2__A1_M1B_DETERMINISTIC__A_M0A_COMPOSED_SEMANTIC_GRAPH_V1__A_M1A_DETERMINISTIC_PLUS_BOUNDED_RESIDUAL_V1__PARALLELIZE_INDEPENDENT_STEPS__NO_ACTION_OUTSIDE_FROZEN_CUT__RECOMPUTE_ON_INVALIDATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -223,7 +225,31 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M0A and M1A complete action bundles refreshed to latest verified frontier; V2 cut superseded; universe frozen for V3 exact solver.",
-    "supersedes": "canonical/governance/RESIDUAL_CUT_RECONCILIATION_V1.json"
+    "note": "Residual evidence saturation V2 is frozen, complete bundles exist for M0A/M1A/M1B, and exact residual cut V2 independently verified all three selected actions. Scheduler authority advances from discovery/freeze to exact-cut execution."
+  },
+  "selected_open_obligations": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "selected_cut_actions": [
+    "A1_M1B_DETERMINISTIC",
+    "A_M0A_COMPOSED_SEMANTIC_GRAPH_V1",
+    "A_M1A_DETERMINISTIC_PLUS_BOUNDED_RESIDUAL_V1"
+  ],
+  "exact_residual_cut_v2": {
+    "status": "EXACT_CUT_VERIFIED",
+    "input": "canonical/governance/RESIDUAL_CUT_INPUT_V2.json",
+    "evidence_saturation": "canonical/governance/RESIDUAL_EVIDENCE_SATURATION_V2.json",
+    "verification_workflow_run_id": 36945111473,
+    "selected_actions": [
+      "A1_M1B_DETERMINISTIC",
+      "A_M0A_COMPOSED_SEMANTIC_GRAPH_V1",
+      "A_M1A_DETERMINISTIC_PLUS_BOUNDED_RESIDUAL_V1"
+    ],
+    "total_new_reality_units": 2,
+    "max_dependency_depth": 2,
+    "parallel_critical_path_wall_clock_units": 1,
+    "invalidation_rule": "ANY_NEW_ADMISSIBLE_ACTION_OR_CHANGED_OBLIGATION_INVALIDATES_FREEZE_AND_REQUIRES_RECOMPUTATION"
   }
 }
