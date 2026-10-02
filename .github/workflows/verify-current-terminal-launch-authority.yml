@@ -34,12 +34,12 @@ jobs:
       - name: Run fail-closed reducer regressions
         run: |
           set -euo pipefail
-          PYTHONPATH=. python -m unittest -v             canonical.tests.test_terminal_wave_launch_authority_reducer_v1             canonical.tests.test_terminal_parent_portfolio_launcher_v1
+          PYTHONPATH=. python -m unittest -v canonical.tests.test_terminal_wave_launch_authority_reducer_v1 canonical.tests.test_terminal_parent_portfolio_launcher_v1
       - name: Derive authority from exact current state
         shell: bash
         run: |
           set -euo pipefail
-          PYTHONPATH=. python canonical/runtime/terminal_wave_launch_authority_reducer_v1.py > /tmp/terminal-launch-authority.json
+          PYTHONPATH=. python canonical/runtime/terminal_wave_launch_authority_reducer_v1.py . > /tmp/terminal-launch-authority.json
           cat /tmp/terminal-launch-authority.json
           python - <<'PY'
           import json
