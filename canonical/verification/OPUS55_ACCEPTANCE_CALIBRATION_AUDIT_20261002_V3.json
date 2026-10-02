@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_19_ACCEPTANCE_CALIBRATED__15_PENDING__TERMINAL_FALSE__ZERO_NEW_REALITY",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+  "result": {
+    "target_family_count": 19,
+    "behavioral_pass_family_count": 19,
+    "acceptance_calibrated_family_count": 4,
+    "acceptance_pending_family_count": 15,
+    "acceptance_calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "newly_effective_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "terminal_goal_acceptance_closed": false
+  },
+  "exact_brain_inputs": {
+    "canonical/runtime/acceptance_proof_transmuter_v1.py": "0580f9819b5465c9617f0a1e8ff9a96902eedfc6",
+    "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py": "73b0b27644e0fa0d89ff8fbdb51005c20eae3632",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json": "96052a6b5178305b37a2526fb25c3f53fa33b9b5",
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json": "51e3e7578e9adbeee2168d2223b84481fea16a09"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 886,
+    "pull_request_head": "5a4d67768213d4bfc780bc7656ceb98ec29c86d2",
+    "merge_commit": "86a2177fe4490edc9469d128e09eebf7cc93579f",
+    "workflow_run_id": 37008568995,
+    "workflow_job_id": 110842547415,
+    "conclusion": "success"
+  },
+  "counterfactual": {
+    "remove_delegation_full_protocol_witness": "REVERTS_TO_3_OF_19_CALIBRATED__16_PENDING",
+    "verified": true
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "execution_authority": false
+}
