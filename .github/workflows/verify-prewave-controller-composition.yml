@@ -1,0 +1,35 @@
+name: Verify prewave controller composition
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/astra_runtime.py
+      - canonical/runtime/m4_research_control.py
+      - canonical/runtime/bound_capabilities/objective_relevance_bm25.py
+      - canonical/tests/test_astra_runtime_model_independence.py
+      - canonical/tests/test_astra_runtime_verification.py
+      - canonical/tests/test_m4_research_control.py
+      - canonical/tests/test_open_research_query_focus_relevance.py
+      - .github/workflows/verify-prewave-controller-composition.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run current composition regressions
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python -m unittest -v \
+            canonical.tests.test_astra_runtime_model_independence \
+            canonical.tests.test_astra_runtime_verification \
+            canonical.tests.test_m4_research_control \
+            canonical.tests.test_open_research_query_focus_relevance
