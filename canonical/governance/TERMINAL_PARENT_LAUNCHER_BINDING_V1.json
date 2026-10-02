@@ -7,10 +7,10 @@
   "launcher_blob_sha": "d7f20a66f1f534b06ea11782cb350a582c07d985",
   "launcher_test_blob_sha": "01996bc0cca7246c0dcfea5b1602c4740fa3e45d",
   "parent_runner": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
-  "parent_runner_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
+  "parent_runner_blob_sha": "431b62e503a6a179f19339ae5e0ab6948424a650",
   "parent_runner_binding": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
-  "parent_runner_binding_blob_sha": "5212f5996dbc83e87a308b8c9d9d1d9ed3da5aab",
-  "parent_runner_independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "parent_runner_binding_blob_sha": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+  "parent_runner_independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_NO_ABORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "required_semantics": [
     "DERIVED_LAUNCH_AUTHORITY_CHECKED_BEFORE_ANY_CASE_GENERATION",
     "CONCRETE_PARENT_RUNNER_IS_DEFAULT",
