@@ -16,11 +16,11 @@ from __future__ import annotations
 from pathlib import Path
 from posixpath import normpath, dirname, join
 import hashlib
-import mimetypes
 import xml.etree.ElementTree as ET
 import zipfile
 
 REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
+OFFICE_REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 IMAGE_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
 
 
