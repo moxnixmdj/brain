@@ -1,0 +1,38 @@
+name: Mine existing receipt semantic candidates
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/existing_receipt_semantic_candidate_miner_v1.py"
+      - ".github/workflows/mine-existing-receipt-semantic-candidates.yml"
+  workflow_dispatch:
+
+jobs:
+  mine:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Mine exact existing-receipt candidate pointers
+        run: |
+          python canonical/runtime/existing_receipt_semantic_candidate_miner_v1.py > semantic-candidate-mining.json
+          python - <<'PY'
+          import json
+          p=json.load(open("semantic-candidate-mining.json"))
+          print(json.dumps({
+            "status":p["status"],
+            "exact_catalog_edge_candidate_count":p["exact_catalog_edge_candidate_count"],
+            "targets_with_catalog_edge_candidates":p["targets_with_catalog_edge_candidates"],
+            "global_exact_reuse_candidate_count":p["global_exact_reuse_candidate_count"],
+            "targets_with_global_exact_reuse_candidates":p["targets_with_global_exact_reuse_candidates"],
+            "contamination_pointer_count":p["contamination_pointer_count"],
+          },indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semantic-candidate-mining
+          path: semantic-candidate-mining.json
