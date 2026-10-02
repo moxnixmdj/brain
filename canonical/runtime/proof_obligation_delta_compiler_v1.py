@@ -67,6 +67,16 @@ def _string_set(raw: Any, label: str) -> tuple[set[str], list[str]]:
     return set(raw), []
 
 
+def _receipt_ref(v: Any) -> bool:
+    """A binding receipt must be an exact content-addressed canonical object."""
+    return (
+        isinstance(v, Mapping)
+        and isinstance(v.get("path"), str)
+        and bool(v.get("path"))
+        and _sha(v.get("git_blob_sha"))
+    )
+
+
 def _verified_bindings(raw: Any, kind: str) -> tuple[list[Mapping[str, Any]], list[str]]:
     if raw is None:
         return [], []
@@ -81,8 +91,8 @@ def _verified_bindings(raw: Any, kind: str) -> tuple[list[Mapping[str, Any]], li
         if row.get("verified") is not True or row.get("independent") is not True:
             errors.append(f"{kind}_BINDING_NOT_INDEPENDENTLY_VERIFIED:{i}")
             continue
-        if not isinstance(row.get("receipt"), str) or not row.get("receipt"):
-            errors.append(f"{kind}_BINDING_RECEIPT_MISSING:{i}")
+        if not _receipt_ref(row.get("receipt")):
+            errors.append(f"{kind}_BINDING_RECEIPT_NOT_CONTENT_ADDRESSED:{i}")
             continue
         rows.append(row)
     return rows, errors
@@ -166,8 +176,10 @@ def compile_delta(doc: Mapping[str, Any]) -> dict[str, Any]:
         relation = row.get("relation")
         if wc not in w_scope or tc not in t_scope or relation not in {"EXACT", "COVERS"}:
             return _fail("SCOPE_BINDING_ENDPOINT_OR_RELATION_INVALID")
+        if tc in covered_scope:
+            return _fail("TARGET_SCOPE_COMPONENT_MULTIPLY_BOUND:" + str(tc))
         covered_scope.add(str(tc))
-        scope_used.append(str(row["receipt"]))
+        scope_used.append(str(row["receipt"]["path"]) + "@" + str(row["receipt"]["git_blob_sha"]))
     missing_scope = sorted(set(t_scope) - covered_scope)
     exact_scope = (
         not missing_scope
@@ -183,8 +195,10 @@ def compile_delta(doc: Mapping[str, Any]) -> dict[str, Any]:
         wa, ta = row.get("witness_atom"), row.get("target_atom")
         if wa not in w_atoms or ta not in t_atoms:
             return _fail("ATOM_BINDING_ENDPOINT_INVALID")
+        if ta in covered_atoms:
+            return _fail("TARGET_ATOM_MULTIPLY_BOUND:" + str(ta))
         covered_atoms.add(str(ta))
-        atom_used.append(str(row["receipt"]))
+        atom_used.append(str(row["receipt"]["path"]) + "@" + str(row["receipt"]["git_blob_sha"]))
     missing_atoms = sorted(t_atoms - covered_atoms)
 
     covered_invariants: set[str] = set()
@@ -193,8 +207,10 @@ def compile_delta(doc: Mapping[str, Any]) -> dict[str, Any]:
         wi, ti = row.get("witness_invariant"), row.get("target_invariant")
         if wi not in w_invariants or ti not in t_invariants:
             return _fail("INVARIANT_BINDING_ENDPOINT_INVALID")
+        if ti in covered_invariants:
+            return _fail("TARGET_INVARIANT_MULTIPLY_BOUND:" + str(ti))
         covered_invariants.add(str(ti))
-        invariant_used.append(str(row["receipt"]))
+        invariant_used.append(str(row["receipt"]["path"]) + "@" + str(row["receipt"]["git_blob_sha"]))
     missing_invariants = sorted(t_invariants - covered_invariants)
 
     metric_map: dict[str, Mapping[str, Any]] = {}
@@ -206,7 +222,7 @@ def compile_delta(doc: Mapping[str, Any]) -> dict[str, Any]:
         if tm in metric_map:
             return _fail("TARGET_METRIC_BOUND_MULTIPLY_BOUND:" + str(tm))
         metric_map[str(tm)] = {"witness_metric": wm, "receipt": row["receipt"]}
-        metric_used.append(str(row["receipt"]))
+        metric_used.append(str(row["receipt"]["path"]) + "@" + str(row["receipt"]["git_blob_sha"]))
 
     missing_metrics: list[str] = []
     failing_metrics: list[dict[str, Any]] = []
