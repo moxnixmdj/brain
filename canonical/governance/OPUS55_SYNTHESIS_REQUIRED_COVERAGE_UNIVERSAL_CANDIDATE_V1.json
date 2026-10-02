@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_REQUIRED_COVERAGE_UNIVERSAL_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_UNIVERSAL_IMPLEMENTATION_LEMMA__TARGET_SCOPE_RELATION_STILL_OPEN__ZERO_CREDIT",
+  "objective": "Replace finite-case evidence for required-claim coverage with a source-bound universal property of the exact Brain synthesis implementation, while refusing to infer matched-quality or cross-scope Opus55 noninferiority.",
+  "family": "COMMUNICATION_AND_SYNTHESIS",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "authority": {
+    "candidate_runtime": {
+      "path": "canonical/runtime/contract_native_brain_candidate.py",
+      "git_blob_sha": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+      "git_blob_sha": "0910ce3a2351fc439e03a1fa2ae708fb3c6463ef"
+    },
+    "independent_atom_binding": {
+      "path": "canonical/verification/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "64ad40c1c10bd01e4c0f4418fac29efafea838fc"
+    }
+  },
+  "lemma": {
+    "scope": "ALL_VALID_EXECUTIONS_OF_THE_EXACT_SOLVE_SYNTHESIS_IMPLEMENTATION_THAT_REACH_RETURN",
+    "required_claim_definition": "EVIDENCE_ROW_WITH_ROLE_REQUIRED_AND_SUPPORT_NOT_UNSUPPORTED",
+    "property": "EVERY_REQUIRED_CLAIM_ID_IS_PRESENT_IN_RETURNED_SELECTED_CLAIMS",
+    "lower_bound": 1.0,
+    "theoretical_upper_bound": 1.0,
+    "proof_shape": [
+      "EVERY_REQUIRED_SUPPORTED_ROW_APPENDS_ITS_CLAIM_ID_TO_REQUIRED",
+      "REQUIRED_IS_NEVER_DELETED_TRUNCATED_OR_REASSIGNED_AFTER_INITIALIZATION",
+      "BOTH_SELECTED_ASSIGNMENTS_ARE_REQUIRED_PLUS_OPTIONAL",
+      "THE_ONLY_BUDGET_TRUNCATION_MUTATES_OPTIONAL_NOT_REQUIRED",
+      "RETURNED_SELECTED_CLAIMS_IS_SELECTED"
+    ]
+  },
+  "target_transport": {
+    "operational_target_atom": "metric:required_claim_coverage",
+    "independent_atom_binding_present": true,
+    "universal_brain_metric_bound_candidate": {
+      "metric": "required_claim_coverage",
+      "direction": "higher",
+      "brain_lower_bound": 1.0,
+      "theoretical_upper_bound": 1.0
+    },
+    "acceptance_metric_bound_authorized": false,
+    "reason": "THE_OPUS55_TARGET_SCOPE_RELATION_IS_STILL_UNVERIFIED__UNIVERSALITY_IS_PROVED_FOR_THE_EXACT_BRAIN_CONTRACT_IMPLEMENTATION_NOT_YET_MACHINE_BOUND_AS_EXACT_OR_SUPERSET_OF_THE_FROZEN_MATCHED_SYNTHESIS_SCOPE"
+  },
+  "deliberately_unproved": [
+    "metric:matched_quality",
+    "matched_quality_noninferiority",
+    "required_claim_coverage_noninferiority_ON_THE_FROZEN_OPUS55_TARGET_SCOPE",
+    "EXACT_OR_SUPERSET_TARGET_SCOPE_RELATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
