@@ -22,6 +22,7 @@ PROOF_MODES = {
     "EXHAUSTIVE_FINITE",
     "PUBLIC_FIXED_BAR",
     "MATCHED_EXACT_OPUS",
+    "CANONICAL_ADMITTED_ROUTE",
 }
 MAX_EXACT_OBLIGATIONS = 20
 MAX_ADMISSIBLE_ROUTES = 64
@@ -86,6 +87,11 @@ def _route_admissibility(route: dict[str, Any], required: set[str]) -> tuple[boo
             errors.append(f"{rid}:EXACT_OPUS_COMPARATOR_NOT_BOUND")
         if route.get("symmetric_harness_frozen") is not True:
             errors.append(f"{rid}:SYMMETRIC_HARNESS_NOT_FROZEN")
+    elif mode == "CANONICAL_ADMITTED_ROUTE":
+        if route.get("canonical_active_basis_admitted") is not True:
+            errors.append(f"{rid}:CANONICAL_ADMISSION_NOT_PROVEN")
+        if not isinstance(route.get("source_basis_blob_sha"), str) or not route.get("source_basis_blob_sha"):
+            errors.append(f"{rid}:SOURCE_BASIS_BLOB_MISSING")
 
     for key in ("new_reality_units", "clean_case_spend"):
         v = route.get(key, 0)
