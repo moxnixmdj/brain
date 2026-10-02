@@ -21,7 +21,8 @@
     "REMOTE_CI_AS_PRIMARY_DEBUGGER_WHEN_LOCAL_PREFLIGHT_IS_AVAILABLE",
     "CLOSED_FAMILY_CI_ON_UNRELATED_PATH_CHANGES",
     "HAND_MAINTAINED_MIRROR_DIVERGENCE",
-    "REPEATED_ACQUISITION_OF_ALREADY_OBSERVED_INFORMATION_WITHOUT_INVALIDATION"
+    "REPEATED_ACQUISITION_OF_ALREADY_OBSERVED_INFORMATION_WITHOUT_INVALIDATION",
+    "RETRY_PRIVATE_CI_AFTER_RUNNER_ID_ZERO_WITHOUT_HEALTH_CHANGE"
   ],
   "retained_nonnegotiable_costs": [
     "INDEPENDENT_VERIFICATION",
@@ -34,5 +35,13 @@
   "authority": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
   "residual_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
   "consistency_workflow": ".github/workflows/frontier-state-consistency.yml",
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_verification_carrier": {
+    "policy": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json",
+    "primary": "PRIVATE_BRAIN_GITHUB_ACTIONS_WHEN_RUNNER_ASSIGNED",
+    "fallback": "PUBLIC_VERIFICATION_CAPSULE_RUNNER_FOR_MINIMUM_HASH_BOUND_NONSECRET_CAPSULES",
+    "current_primary_health": "DEGRADED__RUNNER_NOT_ASSIGNED_ON_NEW_JOBS",
+    "retry_rule": "NO_IDENTICAL_PRIVATE_RETRY_UNTIL_HEALTH_CHANGE",
+    "terminal_case_authority": "UNCHANGED__PREQUALIFICATION_REQUIRED"
+  }
 }
