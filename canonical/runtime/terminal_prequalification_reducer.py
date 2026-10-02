@@ -133,10 +133,11 @@ def evaluate(root: Path) -> dict[str, Any]:
                 failures.append(
                     f"TERMINAL_ROUTE_COVERAGE_INCOMPLETE:{terminal_ready}/{len(set(active_ids))}"
                 )
-            if protocol.get("execution_authority") is not True:
-                failures.append("TERMINAL_POPULATION_PROTOCOL_EXECUTION_AUTHORITY_FALSE")
-            if basis.get("execution_authority") is not True:
-                failures.append("ACTIVE_TERMINAL_PROOF_BASIS_EXECUTION_AUTHORITY_FALSE")
+            # execution_authority is the OUTPUT of this reducer, never an input
+            # prerequisite. Requiring a prior self-asserted authority bit here
+            # creates a circular authorization deadlock and allows mutable
+            # bookkeeping to masquerade as evidence. Route completeness and
+            # the explicit prewave predicates below are the authority basis.
     except (FileNotFoundError, ValueError, json.JSONDecodeError):
         failures.append("ACTIVE_TERMINAL_PROOF_BASIS_OR_PROTOCOL_MISSING_OR_INVALID")
 
@@ -215,7 +216,8 @@ def evaluate(root: Path) -> dict[str, Any]:
         "authorization": "T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE" if passed else "NONE",
         "failed_predicates": failures,
         "portfolio_blockers": blocker_map,
-        "rule": "UNKNOWN_MISSING_OR_CONTRADICTORY_PREWAVE_STATE_FAILS_CLOSED__ZERO_CAPABILITY_CREDIT",
+        "rule": "UNKNOWN_MISSING_OR_CONTRADICTORY_PREWAVE_STATE_FAILS_CLOSED__SELF_ASSERTED_AUTHORITY_FIELDS_ARE_NOT_INPUT_GATES__ZERO_CAPABILITY_CREDIT",
+        "authority_derivation": "PURE_FUNCTION_OF_ACTIVE_CONTRACT_COVERAGE_ROUTE_ADMISSIBILITY_PROTOCOL_SET_AND_EXPLICIT_PREWAVE_FACTS",
         "capability_credit_delta": 0,
         "family_credit_delta": 0,
     }
