@@ -61,3 +61,5 @@ for lane in graph["shared_mechanism_obligations"]:
         assert "canonical/capabilities/opus55/SHARED_BOUNDED_DECISION_PRIMITIVES_001.json" in lane.get("existing_evidence", [])
 
 print("GLOBAL_TERMINAL_UNIVERSE_V1 verification: PASS")
+
+# PR verification trigger: compiler behavior unchanged.
