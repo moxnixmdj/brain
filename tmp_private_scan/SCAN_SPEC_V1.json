@@ -8552,7 +8552,7 @@
       "source_class": "VERIFICATION_RECEIPT"
     }
   ],
-  "chunk_size": 35,
-  "chunk_count": 38,
+  "chunk_size": 45,
+  "chunk_count": 30,
   "rule": "IMMUTABLE_PRIVATE_SCAN_SPEC__NO_CREDIT"
 }
