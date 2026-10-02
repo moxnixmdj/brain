@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PUBLIC_BENCHMARK_OWNER_SCOPE_MAP__ZERO_SCORE_INHERITANCE__UNMEASURED_LEAVES_EXPLICIT",
+  "objective": "Bind exactly what AA-Briefcase v1.1 measures for ARTIFACT_CREATION so direct audit work is limited to truly uncovered format-specific leaves.",
+  "authority": {
+    "benchmark_owner_page": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "benchmark_owner_launch": "https://artificialanalysis.ai/articles/aa-briefcase/",
+    "canonical_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+  },
+  "benchmark_scope": {
+    "projects": 4,
+    "tasks": 91,
+    "workflow_character": "REALISTIC_MULTI_WEEK_KNOWLEDGE_WORK_PROJECTS__TASKS_EXECUTED_INDEPENDENTLY_BUT_SHARE_SCENARIO_CONTEXT",
+    "required_deliverable_file_types": [
+      "EXCEL",
+      "POWERPOINT",
+      "PDF",
+      "WORD",
+      "OTHER"
+    ],
+    "other_examples": [
+      "HTML",
+      "LATEX"
+    ],
+    "graded_dimensions": [
+      {
+        "id": "RUBRIC",
+        "scoring": "BINARY_CHECKS",
+        "covers": [
+          "TASK_INSTRUCTION_COMPLIANCE",
+          "REQUIREMENTS_HIDDEN_ACROSS_SOURCE_FILES",
+          "CORRECT_EVIDENCE_USE",
+          "RIGHT_CONCLUSIONS",
+          "REQUIRED_CONTENT",
+          "SOURCE_CITATION",
+          "CROSS_SOURCE_CONFLICT_RESOLUTION"
+        ]
+      },
+      {
+        "id": "ANALYTICAL_QUALITY",
+        "scoring": "PAIRWISE",
+        "covers": [
+          "THOROUGHNESS",
+          "ANALYTICAL_RIGOR",
+          "SUPPORT_BY_EVIDENCE"
+        ]
+      },
+      {
+        "id": "PRESENTATION",
+        "scoring": "PAIRWISE",
+        "covers": [
+          "PROFESSIONAL_PRESENTATION_QUALITY"
+        ]
+      }
+    ],
+    "file_type_breakdowns_exist_for": [
+      "RUBRIC_PASS_RATE",
+      "ANALYTICAL_QUALITY_ELO",
+      "PRESENTATION_ELO"
+    ]
+  },
+  "artifact_family_coverage": {
+    "covered_by_public_bar_if_brain_aa_briefcase_result_meets_frozen_threshold": [
+      "PROFESSIONAL_DELIVERABLE_INSTRUCTION_AND_RUBRIC_COMPLIANCE",
+      "PROFESSIONAL_DELIVERABLE_ANALYTICAL_CONTENT_QUALITY",
+      "PROFESSIONAL_DELIVERABLE_PRESENTATION_QUALITY",
+      "EXCEL_DELIVERABLE_QUALITY_AT_BENCHMARK_EXERCISED_SCOPE",
+      "POWERPOINT_DELIVERABLE_QUALITY_AT_BENCHMARK_EXERCISED_SCOPE",
+      "PDF_DELIVERABLE_QUALITY_AT_BENCHMARK_EXERCISED_SCOPE",
+      "WORD_DELIVERABLE_QUALITY_AT_BENCHMARK_EXERCISED_SCOPE",
+      "OTHER_DELIVERABLE_QUALITY_ONLY_WHERE_ACTUALLY_EXERCISED"
+    ],
+    "separately_already_proved": [
+      {
+        "leaf": "DOCX_XLSX_PPTX_PDF_LOW_LEVEL_NATIVE_EDIT_REOPEN_STRUCTURE_AND_BOUNDED_RENDER_PRESERVATION",
+        "evidence": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+        "predicate": "ARTIFACT_MECHANICAL_GATES_CEILING"
+      }
+    ],
+    "not_automatically_covered": [
+      "ARBITRARY_ADVANCED_NATIVE_FEATURE_PRESERVATION_NOT_EXERCISED_BY_AA_BRIEFCASE_OR_THE_FROZEN_MECHANICAL_SCOPE",
+      "FILE_FORMATS_NOT_EXERCISED_BY_AA_BRIEFCASE_AND_NOT_IN_THE_FROZEN_NATIVE_MECHANICAL_SCOPE",
+      "ANY_SPECIFIC_VISUAL_LAYOUT_OR_FORMAT_FEATURE_FOR_WHICH_BENCHMARK_OWNER_SCOPE_EVIDENCE_DOES_NOT_SHOW_EXERCISE",
+      "GENERAL_CODE_ARTIFACT_QUALITY_UNLESS_SEPARATELY_COVERED_BY_THE_CODING_FAMILY_OR_A_DECLARED_ARTIFACT_TASK"
+    ]
+  },
+  "anti_overclaim": [
+    "PUBLIC_BENCHMARK_SCOPE_MAP_IS_NOT_A_BRAIN_SCORE",
+    "FILE_TYPE_CATEGORY_PRESENCE_DOES_NOT_PROVE_EXHAUSTIVE_FEATURE_COVERAGE",
+    "PAIRWISE_PRESENTATION_QUALITY_DOES_NOT_PROVE_NATIVE_ROUND_TRIP_INTEGRITY",
+    "MECHANICAL_NATIVE_PRESERVATION_DOES_NOT_PROVE_PROFESSIONAL_QUALITY",
+    "ONLY_AA_BRIEFCASE_TASKS_ACTUALLY_EXERCISED_MAY_RECEIVE_PUBLIC_BAR_SCOPE_CREDIT"
+  ],
+  "direct_audit_consequence": {
+    "prior_residual": "BROAD_FORMAT_SPECIFIC_VISUAL_LAYOUT_QUALITY_AUDIT",
+    "compressed_residual": "ONLY_FORMAT_OR_FEATURE_LEAVES_NOT_EXERCISED_BY_AA_BRIEFCASE_AND_NOT_ALREADY_CLOSED_BY_NATIVE_MECHANICAL_GATES",
+    "new_case_authority": false,
+    "next": "BIND_EXACT_CLAIMED_ARTIFACT_SCOPE_TO_AA_BRIEFCASE_EXERCISED_FILE_TYPES_AND_EXISTING_NATIVE_MECHANICAL_SCOPE__DELETE_EMPTY_UNCOVERED_LEAVES__OTHERWISE_PROVE_ONLY_NAMED_REMAINDER"
+  },
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
