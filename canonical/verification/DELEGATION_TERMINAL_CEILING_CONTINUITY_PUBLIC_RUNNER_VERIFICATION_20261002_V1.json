@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_CEILING_CONTINUITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_11_BRAIN_BLOBS__8_TESTS_PASS__DELEGATION_CEILING_CANDIDATE_READY__ZERO_CREDIT",
+  "source_brain_candidate_commit": "a0274cb2913d590dfd6c13f3478d3603fbe60efc",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_ceiling_witness_lifter_v1.py": "10dadbe629f8e728b51bd0f5e5e8ec6e2cfabf6f",
+    "canonical/tests/test_terminal_ceiling_witness_lifter_v1.py": "74349d8be5cdc4378fefa106389d86d47df5c9da",
+    "canonical/tests/test_delegation_terminal_ceiling_continuity_v1.py": "3dc298ef9be699d6474aec7e34a92b897eb52af4",
+    "canonical/governance/DELEGATION_TERMINAL_CEILING_CONTINUITY_INPUT_V1.json": "d49f98744bf8b9da1f7cd8c82564c5407cbe78ce",
+    "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "c61882d69a66f61b4ea1ce6ad14f86fcefd1f76a",
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
+    "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json": "3aa8168fc7f81581eea4085504e4a70205949af9",
+    "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "first_behavioral_pr": 872,
+    "first_behavioral_merge_commit": "0f335cfc280c9cd115cf4250a37f75e6def34421",
+    "exact_blob_pr": 875,
+    "exact_blob_head_sha": "4c3363853ce858e96ad772ff3db1653a69aa8450",
+    "exact_blob_merge_commit": "5a7ecb477b642ea4644f7c1401678a06724b962b",
+    "workflow_run_id": 37006222876,
+    "workflow_job_id": 110835022954,
+    "workflow_name": "Verify delegation ceiling continuity exact blobs v2",
+    "conclusion": "success",
+    "log_markers": [
+      "EXACT_11_OF_11_BRAIN_BLOBS_PASS",
+      "DELEGATION_CEILING_CONTINUITY_EXACT_V2_PASS"
+    ]
+  },
+  "verified": [
+    "EXACT_11_OF_11_MIRRORED_BRAIN_GIT_BLOB_IDENTITIES_MATCH",
+    "EIGHT_FAIL_CLOSED_AND_LIVE_TESTS_PASS",
+    "CURRENT_DELEGATION_BINDING_SHA_EQUALS_TERMINAL_SNAPSHOT_BINDING_SHA",
+    "CURRENT_DELEGATION_BINDING_HAS_INDEPENDENT_EXACT_BLOB_RECEIPT",
+    "IMMUTABLE_TERMINAL_DIRECT_POPULATION_132_OF_132_PASS",
+    "LIFTER_EMITS_ABSOLUTE_DOMINANCE_CANDIDATE_AT_THEORETICAL_CEILING",
+    "MISMATCHED_TERMINAL_BINDING_FAILS_CLOSED",
+    "CANDIDATE_ONLY_ZERO_DIRECT_CREDIT"
+  ],
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}

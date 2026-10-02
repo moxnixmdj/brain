@@ -8,6 +8,8 @@ artifacts prove that:
 - that exact route/executor was independently bound into the consumed one-shot wave;
 - the entire frozen direct population passed with no replay/replacement/feedback; and
 - every selected case was required to pass under the frozen route acceptance.
+- or, when stale embedded prewave booleans lag reality, an independent exact-blob
+  receipt proves that the current binding is the identical binding consumed by the terminal snapshot.
 
 The output remains non-authoritative until independently verified.
 """
@@ -61,6 +63,9 @@ def evaluate(
     binding: Mapping[str, Any],
     executor_manifest: Mapping[str, Any],
     terminal_result: Mapping[str, Any],
+    binding_blob_sha: str | None = None,
+    terminal_snapshot_binding_blob_sha: str | None = None,
+    binding_verification: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
@@ -97,10 +102,35 @@ def evaluate(
             errors.append("DIRECT_CHECKS_NOT_FROZEN")
 
     route_gates = binding.get("route_gates")
-    if not isinstance(route_gates, Mapping) or route_gates.get("independent_verification_pass") is not True:
+    embedded_preflight = (
+        isinstance(route_gates, Mapping)
+        and route_gates.get("independent_verification_pass") is True
+        and binding.get("prewave_admissible") is True
+    )
+    receipt_preflight = False
+    if not embedded_preflight and isinstance(binding_verification, Mapping):
+        status = str(binding_verification.get("status", ""))
+        jobs = binding_verification.get("verified_jobs")
+        if (
+            "INDEPENDENT_PUBLIC_RUNNER_PASS" in status
+            and isinstance(binding_blob_sha, str)
+            and binding_blob_sha
+            and binding_blob_sha == terminal_snapshot_binding_blob_sha
+            and isinstance(jobs, list)
+        ):
+            matches = [
+                row for row in jobs
+                if isinstance(row, Mapping)
+                and row.get("binding_path") == binding_path
+                and row.get("binding_blob_sha") == binding_blob_sha
+                and row.get("conclusion") == "success"
+            ]
+            receipt_preflight = len(matches) == 1
+    if not embedded_preflight and not receipt_preflight:
         errors.append("BINDING_NOT_INDEPENDENTLY_VERIFIED")
-    if binding.get("prewave_admissible") is not True:
         errors.append("BINDING_NOT_PREWAVE_ADMISSIBLE")
+    if receipt_preflight and binding_blob_sha != terminal_snapshot_binding_blob_sha:
+        errors.append("BINDING_CHANGED_SINCE_TERMINAL_SNAPSHOT")
 
     info = binding.get("information_boundary")
     if not isinstance(info, Mapping) or info.get("candidate_receives_hidden_oracle") is not False:

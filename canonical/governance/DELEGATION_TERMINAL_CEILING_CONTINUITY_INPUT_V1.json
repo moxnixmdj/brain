@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_CEILING_CONTINUITY_INPUT_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_ZERO_REALITY_CONTINUITY_INPUT__ZERO_CREDIT",
+  "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "binding_path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+  "current_binding_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+  "terminal_snapshot": {
+    "commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "binding_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1"
+  },
+  "current_binding_verification": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+  "terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+  "terminal_full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+  "observed_population": {
+    "cases": 132,
+    "passes": 132
+  },
+  "rule": "CURRENT_BINDING_MAY_REUSE_IMMUTABLE_TERMINAL_EVIDENCE_ONLY_IF_EXACT_GIT_BLOB_IDENTITY_EQUALS_TERMINAL_SNAPSHOT_BINDING_AND_INDEPENDENT_CURRENT_BINDING_RECEIPT_PASSES",
+  "new_reality_units": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
