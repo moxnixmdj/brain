@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_TERMINAL_ACCEPTANCE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_INTERNAL_TERMINAL_PACKAGE__EXTERNAL_OR_FORMAL_ACCEPTANCE_PROOF_BLOCKED__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "contract_boundary": "EXPLICIT_REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_GRAPH_MATERIALIZATION_AND_STRUCTURAL_ACCEPTANCE_AFTER_NORMALIZED_RULE_SEMANTICS_ARE_GIVEN",
+  "exact_candidate": {
+    "path": "canonical/runtime/structured_method_normalized_rule_graph_v3.py",
+    "blob_sha": "79d3896818b03223348f05adf4fdcd574f6f355e"
+  },
+  "exact_independent_oracle": {
+    "path": "canonical/runtime/structured_method_normalized_rule_oracle_v3.py",
+    "blob_sha": "5d92b1360fbb1bb27baacc8a04adb3744abf690c"
+  },
+  "exact_population_generator": {
+    "path": "canonical/runtime/structured_method_terminal_population_v1.py",
+    "blob_sha": "880fff9818296b2f2e2811e5853885310fe276c6",
+    "preflight_case_count": 512,
+    "preflight_role": "NONTERMINAL_COVERAGE_AND_CONTAMINATION_CHECK_ONLY"
+  },
+  "independent_scope_evidence": [
+    "canonical/verification/STRUCTURED_METHOD_NORMALIZED_RULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V3.json"
+  ],
+  "frozen_information_boundary": {
+    "candidate_visible": [
+      "STRUCTURED_REQUIREMENTS",
+      "NORMALIZED_APPLICABLE_RULES",
+      "DECLARED_RULE_SEMANTIC_SIGNATURES",
+      "INPUT_SCHEMA",
+      "REQUIRED_OUTPUTS"
+    ],
+    "candidate_hidden": [
+      "REFERENCE_GRAPH",
+      "GOLD_LINEAGE",
+      "GOLD_EXCLUSIONS",
+      "GOLD_EDGE_ACCEPTANCE",
+      "MUTATION_IDENTITIES",
+      "REFERENCE_SOLUTION"
+    ],
+    "unstated_rule_extraction": "OUTSIDE_THIS_BEHAVIORAL_CONTRACT"
+  },
+  "frozen_acceptance_modes": {
+    "allowed": [
+      "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+      "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_EXACT_OPUS_5_5_COMPARATOR"
+    ],
+    "bounded_preflight_as_terminal_proof": false,
+    "proxy_comparator_allowed": false,
+    "post_result_mode_switching": false
+  },
+  "current_acceptance_state": {
+    "machine_checked_or_theoretical_ceiling_proof_bound": false,
+    "exact_opus_5_5_zero_cost_comparator_bound": false,
+    "comparator_audit": "canonical/governance/EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V1.json",
+    "terminal_acceptance_proven": false,
+    "only_surviving_blocker": "FORMAL_OR_EXACT_OPUS_TERMINAL_ACCEPTANCE_EVIDENCE"
+  },
+  "contamination": {
+    "candidate_mutation_after_freeze": false,
+    "oracle_mutation_after_freeze": false,
+    "population_rule_mutation_after_results": false,
+    "adaptive_case_replacement": false,
+    "tuning_replay": false
+  },
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
