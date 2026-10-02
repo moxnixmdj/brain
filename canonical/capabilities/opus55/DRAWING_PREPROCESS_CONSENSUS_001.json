@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_DRAWING_PREPROCESS_CONSENSUS_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_COMPONENT__M1A_ROBUSTNESS_RESIDUAL_REDUCED__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
+  "artifact": "canonical/runtime/drawing_preprocess_consensus.py",
+  "artifact_blob_sha": "efcc257482b17b79cb0afe423a9fad5fe807ff71",
+  "verification": {
+    "workflow": ".github/workflows/verify-drawing-preprocess-consensus.yml",
+    "failed_run_id": 36943899531,
+    "failed_cause": "CONSENSUS_OF_EMPTY_MASKS_NOT_REJECTED_BY_ONE_SIDED_INK_PLAUSIBILITY_GATE",
+    "repair_commit": "92072145c3431560120167a02358c7b25b6bbeb4",
+    "passing_run_id": 36943978384,
+    "conclusion": "success"
+  },
+  "owned_scope": [
+    "FIVE_DETERMINISTIC_PREPROCESSING_ROUTE_PROPOSALS",
+    "PAIRWISE_IOU_CONSENSUS_CLUSTER_SELECTION",
+    "MAJORITY_MASK_CONSTRUCTION",
+    "LOW_AND_HIGH_INK_FRACTION_FAIL_CLOSED",
+    "CLEAN_DRAWING_CONSENSUS",
+    "GRADIENT_ILLUMINATION_PLUS_MILD_NOISE_CONSENSUS"
+  ],
+  "explicit_nonclaims": [
+    "SEVERE_OCCLUSION",
+    "ARBITRARY_BLUR",
+    "FOLDED_OR_TORN_DRAWINGS",
+    "SEMANTIC_CORRECTNESS_WHEN_ROUTES_AGREE_ON_A_SHARED_SYSTEMATIC_ERROR",
+    "WHOLE_M1A_CLOSURE"
+  ],
+  "terminal_authority": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
