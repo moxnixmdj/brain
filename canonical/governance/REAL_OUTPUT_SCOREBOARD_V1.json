@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_M2_M3_M5_EXACT_BLOCKER_VERDICT",
+  "next_progress_event_target": "M2_M3_M5_OPERATIVE_ROUTES_FROZEN_OR_EXACT_UNSOLVED_BOUNDARY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1010,7 +1010,7 @@
     "evidence_path": "canonical/governance/M4_DEPENDENCY_COMPRESSION_V1.json",
     "new_reality_units": 0
   },
-  "next_required_action": "SATURATE_M2_M3_M5_SURVIVING_RESIDUALS_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__APPLY_IDENTIFIABILITY_AND_CROSS_LANE_DEDUPLICATION__RECOMPUTE_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
+  "next_required_action": "CLOSE_D0_S0_S1_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__FREEZE_DONOR_INDEPENDENT_M2_M3_M5_OPERATIVE_ROUTES__VERIFY_COMPOSITION_AND_MUTATION_GATES__THEN_ADMIT_T0_T1_T2_T3_AS_ONE_PARALLEL_TERMINAL_WAVE",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1235,5 +1235,25 @@
     "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
     "dominance_and_multiplexing": "canonical/governance/TERMINAL_OBSERVATION_DOMINANCE_AND_PROOF_MULTIPLEXING_V1.json",
     "public_bar_reconciliation": "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json"
+  },
+  "exact_outer_terminal_observation_cut": {
+    "status": "EXACT_MINIMUM_4__FROZEN__EXECUTION_BLOCKED",
+    "verdict": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
+    "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
+    "execution_authorized": false,
+    "fresh_terminal_evidence_consumed_delta": 0
+  },
+  "current_mechanism_frontier": {
+    "open_lanes": [
+      "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+      "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+      "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"
+    ],
+    "compressed_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
+    "true_remaining_classes": [
+      "D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_TAIL",
+      "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
+      "S1_IMPLICIT_SEMANTIC_ADJUDICATION_AND_ABSTENTION"
+    ]
   }
 }
