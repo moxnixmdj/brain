@@ -46,3 +46,5 @@ class VisualSymbolTemplateMatcherTests(unittest.TestCase):
 
 if __name__=="__main__":
     unittest.main()
+
+# PR verification trigger: runtime behavior unchanged.
