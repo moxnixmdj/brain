@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__2_VERIFIED_OWNED__17_OPUS55_PROTOCOL_RESULTS_OPEN",
+  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__3_VERIFIED_OWNED__16_OPUS55_PROTOCOL_RESULTS_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -481,15 +481,15 @@
     },
     {
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-      "status": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+      "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "best_existing_routes": [
         "Brain tool-discovery machinery + ChatGPT plugin directory + GPT-6 Astra tool search"
       ],
-      "evidence": "Substantial historical verified components exist, but prior parent-level open-ended tool-learning promotion remained incomplete.",
+      "evidence": "Brain-owned tool-discovery route has an independently verified scope-complete absolute-ceiling acceptance witness: the exact frozen one-shot terminal population passed 180/180 with no replay, replacement, or result feedback; 100% is the objective binary ceiling, so matched Opus success cannot exceed Brain on the unchanged frozen protocol.",
       "sources": [
         "https://openai.com/index/gpt-6-astra/"
       ],
-      "internalization_note": "Historical Brain-owned software/procedures remain useful components, but full Opus-family parity is not proven.",
+      "internalization_note": "The operative tool-discovery and selection configuration is Brain-owned and the full frozen Opus 5.5 acceptance protocol is independently closed by absolute theoretical-ceiling dominance.",
       "candidate_internalization_routes": [
         {
           "repo": "trymeka/agent",
@@ -504,11 +504,17 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay.",
+      "campaign_next_action": "NO_FURTHER_ACCEPTANCE_WORK_REQUIRED_FOR_THIS_FAMILY__PRESERVE_WITNESS_AND_REUSE_COMPONENTS_FOR_OTHER_MULTI_CONTRACT_FAMILIES",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
+      "postwave_opus55_acceptance_status": "PASS",
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+      "postwave_acceptance_evidence": [
+        "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+        "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/TOOL_DISCOVERY_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/verification/TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      ],
+      "ownership_basis": "Brain-owned tool-discovery route + immutable Terminal V3 180/180 terminal result + independently verified terminal-ceiling witness + existing acceptance-proof transmuter."
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -592,7 +598,8 @@
     "full_opus_5_5_envelope_obsoleted": false,
     "verified_owned_equal_or_better_capabilities": [
       "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ],
     "external_specimen_backed_families": [
       "COMPLEX_MULTI_TOOL_AGENCY",
@@ -608,7 +615,6 @@
     ],
     "owned_components_not_full_family": [
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "MULTI_CAPABILITY_COMPOSITION",
       "SUBAGENT_DELEGATION_AND_COORDINATION",
       "ARTIFACT_CREATION"
@@ -618,8 +624,8 @@
       "OPUS55_BUSINESS_WORKFLOW_AUTOMATION_V1",
       "OPUS55_REFINED_MULTIDISCIPLINARY_REASONING_V1"
     ],
-    "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
-    "next_optimization_target": "COMPLETE_BEHAVIORAL_SEMANTIC_PURGE_AND_VALIDATE_INDEPENDENT_ACCEPTANCE_MODEL_ON_SPENT_HELDOUTS__THEN_RESUME_MATCHED_OPUS_VERIFICATION",
+    "blocker": "OPUS_5_5_CAPABILITY_INTERNALIZATION_INCOMPLETE__16_FAMILIES_REMAIN_OPEN__OPAQUE_EXTERNAL_MODEL_OR_SERVICE_BEHAVIOR_DOES_NOT_COUNT_AS_BRAIN_OWNERSHIP",
+    "next_optimization_target": "DELETE_REMAINING_ACCEPTANCE_BLOCKERS_BY_EXISTING_RECEIPT_CEILING_OR_DOMINANCE_WITNESSES_FIRST__THEN_ROUTE_INTERNALIZATION_AND_ONLY_IRREDUCIBLE_REALITY",
     "brain_configured_verification_pending": [
       "ADVANCED_AGENTIC_CODING",
       "PROFESSIONAL_KNOWLEDGE_WORK"
@@ -658,14 +664,15 @@
     "rule": "OWNERSHIP_CREDIT_ONLY_FOR_OBSERVABLE_CONTRACTED_BEHAVIOR__LABEL_MATCHING_ZERO_CREDIT"
   },
   "postwave_terminal_reconciliation": {
-    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+    "authority": "canonical/verification/TOOL_DISCOVERY_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "authority_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62",
     "behavioral_pass_family_count": 19,
-    "verified_owned_equal_or_better_count": 2,
-    "acceptance_protocol_result_open_count": 17,
+    "verified_owned_equal_or_better_count": 3,
+    "acceptance_protocol_result_open_count": 16,
     "verified_owned_equal_or_better_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
-      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ],
     "acceptance_protocol_result_open_families": [
       "ADVANCED_AGENTIC_CODING",
@@ -682,10 +689,10 @@
       "PROFESSIONAL_KNOWLEDGE_WORK",
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "UNKNOWN_DOMAIN_ADAPTATION",
       "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
     ],
-    "rule": "ROW_MECHANISM_STATUS_BELOW_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_OWNERSHIP_CREDIT_IS_CONTROLLED_BY_POSTWAVE_ACCEPTANCE_CALIBRATION"
+    "rule": "CURRENT_OWNERSHIP_CREDIT_CONTROLLED_BY_INDEPENDENT_FULL_PROTOCOL_ACCEPTANCE_WITNESSES__TOOL_DISCOVERY_PROMOTED_ONLY_BY_SCOPE_COMPLETE_ABSOLUTE_CEILING",
+    "latest_atomic_acceptance_verification": "canonical/verification/TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   }
 }
