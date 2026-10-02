@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2",
   "date": "2026-10-02",
-  "status": "FROZEN_SELECTION_AND_INFORMATION_BOUNDARY_PROTOCOL__12_OF_12_ACTIVE_CONTRACTS__9_OF_12_ROUTE_BINDINGS_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_SELECTION_AND_INFORMATION_BOUNDARY_PROTOCOL__12_OF_12_ACTIVE_CONTRACTS__10_OF_12_ROUTE_BINDINGS_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
   "supersedes": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V1.json",
   "supersession_reason": "V1_FROZE_ONLY_10_OF_12_ACTIVE_CONTRACTS_AND_PREDATED_INFORMATION_SAFE_SCOPE_GATE_V2",
   "authority": [
@@ -74,7 +74,7 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "admissible_frozen_route_count": 9,
+  "admissible_frozen_route_count": 10,
   "frozen_route_bindings": {
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001": {
       "route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
@@ -131,6 +131,14 @@
       "independent_verification": "canonical/verification/P1_TRAJECTORY_T0_T2_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "proof_mode": "T0_T2_MULTIPLEXED_DETERMINISTIC_INTERVENTION_RESCUE_GATE",
       "status": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS"
+    },
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001": {
+      "route": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "independent_verification": "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "proof_mode": "PUBLIC_FIXED_BAR_MULTIPLEX_PLUS_EXPLICIT_UNCOVERED_SCOPE__DIRECT_OBJECTIVE_RESEARCH_CONTROL_GATE",
+      "status": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
+      "hle_score_equivalence_claimed": false,
+      "weaker_hle_prewave_dependency_deleted": true
     }
   },
   "invalidated_route_bindings": {
@@ -147,6 +155,7 @@
   "admissible_frozen_routes": [
     "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
     "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
     "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
     "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
@@ -168,10 +177,10 @@
   },
   "derived_state_reconciliation": {
     "authority": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-    "authority_basis_blob_sha": "2a8f7198c124dbaee164d250acfd1f290d27dd97",
+    "authority_basis_blob_sha": "615fb2d82906fd4f3d2b62afcee133d16a8fc9a7",
     "rule": "ADMISSIBLE_ROUTE_REGISTRY_AND_COUNT_ARE_DERIVED_FROM_CURRENT_ACTIVE_BASIS__RECONCILIATION_GRANTS_ZERO_PROMOTION_OR_CAPABILITY_CREDIT",
-    "reconciled_admissible_route_count": 9,
-    "reconciled_open_route_count": 3,
+    "reconciled_admissible_route_count": 10,
+    "reconciled_open_route_count": 2,
     "date": "2026-10-02"
   }
 }
