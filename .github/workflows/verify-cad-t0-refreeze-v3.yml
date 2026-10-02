@@ -1,0 +1,22 @@
+name: Verify CAD T0 refreeze V3
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/CAD_T0_CANDIDATE_FREEZE_V3.json
+      - canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V3.json
+      - canonical/runtime/cad_t0_refreeze_v3_guard.py
+      - canonical/tests/test_cad_t0_refreeze_v3_guard.py
+      - .github/workflows/verify-cad-t0-refreeze-v3.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_cad_t0_refreeze_v3_guard
