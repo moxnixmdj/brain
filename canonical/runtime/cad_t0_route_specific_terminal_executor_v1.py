@@ -28,9 +28,17 @@ COUNT = 128
 
 DEPENDENCIES = {
     "canonical/runtime/cad_t0_route_specific_candidate_v1.py": "aa32750b220a023617938b7be9476f6b3aac6704",
+    "canonical/runtime/m1b_continuous_geometry_compiler.py": "0c7c6355cde87c961319d6f9948839cb56add092",
+    "canonical/runtime/m1b_smooth_surface_compiler.py": "bd3824847f400e8088dc25a83674579f99345a30",
+    "canonical/runtime/cad_partspec_generator.py": "89b4250fa85df8d02d51bcb513f035d102625056",
+    "canonical/runtime/cad_partspec.py": "e5b68367cbaaeedb97c6eb8f2d080f19e3a2cdbb",
     "canonical/runtime/cad_t0_geometry_population.py": "64ca276410e2c1dbcd55cfad057e3eec0709790a",
     "canonical/runtime/cad_t0_oracle_adapter.py": "a6e76e1865b9bd9829dbbcf38886486636f76e8a",
     "canonical/runtime/cad_t0_multiplex_scorer.py": "89833581dc4ac67498753feb94e2ff69bad3b7f1",
+    "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json": "c0f55a55091186c5ab785b670f935bbc6a2f9432",
+    "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V4.json": "37b4286ddd927da316b59c764f65f542f8a774b9",
+    "canonical/governance/CAD_T0_EVALUATOR_OBSERVATION_SCHEMA_V1.json": "2bc87504a54c76003f715be9a52c6e635c8991a6",
+    "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "1010fc910f674bc2bec311df34b23a2f04fcb349",
     "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json": "a636d1292e6f92d240fab420a9ee75ced7a05104",
 }
 
