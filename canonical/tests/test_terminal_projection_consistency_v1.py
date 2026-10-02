@@ -19,7 +19,7 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
     def evaluate(self, docs, shas):
         return evaluate_documents(
             docs["authority"], docs["closure"], docs["matrix"], docs["calibration"],
-            docs["residual"], docs["plan"], docs["kernel"], shas,
+            docs["residual"], docs["plan"], docs["kernel"], docs["eligibility"], shas,
         )
 
     def test_live_projection_is_consistent(self):
@@ -61,14 +61,22 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("PLAN_RETAINS_ALREADY_CALIBRATED_DELEGATION", out["errors"])
 
-    def test_delegation_acceptance_cannot_be_misreported_as_ownership_promotion(self):
+    def test_ownership_promotion_fails_if_independent_eligibility_is_weakened(self):
+        docs, shas = self.live()
+        docs = copy.deepcopy(docs)
+        docs["eligibility"]["result"]["eligible_family_count"] = 1
+        out = self.evaluate(docs, shas)
+        self.assertFalse(out["pass"])
+        self.assertIn("OWNERSHIP_ELIGIBILITY_COUNT_NOT_2", out["errors"])
+
+    def test_delegation_promotion_requires_exact_evidence_binding(self):
         docs, shas = self.live()
         docs = copy.deepcopy(docs)
         row = next(r for r in docs["matrix"]["rows"] if r.get("family") == "SUBAGENT_DELEGATION_AND_COORDINATION")
-        row["postwave_ownership_credit"] = "PROMOTED"
+        row["ownership_promotion_evidence"] = "BAD"
         out = self.evaluate(docs, shas)
         self.assertFalse(out["pass"])
-        self.assertIn("MATRIX_DELEGATION_PROMOTION_OVERCLAIM", out["errors"])
+        self.assertIn("MATRIX_DELEGATION_PROMOTION_EVIDENCE_MISMATCH", out["errors"])
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
