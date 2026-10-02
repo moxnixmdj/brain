@@ -34,5 +34,26 @@ class CadT0RouteSpecificCandidateTests(unittest.TestCase):
                 self._run(987654321 + slot * 313, slot)
 
 
+    def test_render_equivalent_svg_text_node_split_preserves_semantics(self):
+        original = """<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120">
+        <text x="10" y="25">FRONT: rectangle 20 mm x 10 mm</text>
+        <text x="10" y="45">DEPTH: 5 mm</text>
+        <text x="10" y="65">Three orthographic views; all dimensions nominal.</text>
+        </svg>"""
+        split_equivalent = """<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120">
+        <text x="10" y="25">FRONT: rectangle 20 mm</text><text x="180" y="25"> x 10 mm</text>
+        <text x="10" y="45">DEPTH: 5 mm</text>
+        <text x="10" y="65">Three orthographic views; all dimensions nominal.</text>
+        </svg>"""
+        from canonical.runtime.cad_t0_route_specific_candidate_v1 import _texts, _parse_visible
+
+        original_candidate, original_contract = _parse_visible(_texts(original))
+        split_candidate, split_contract = _parse_visible(_texts(split_equivalent))
+
+        self.assertEqual(_texts(split_equivalent)[0], "FRONT: rectangle 20 mm x 10 mm")
+        self.assertEqual(split_candidate, original_candidate)
+        self.assertEqual(split_contract, original_contract)
+
+
 if __name__ == "__main__":
     unittest.main()
