@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_001",
+  "date": "2026-10-02",
+  "status": "DEV_CAUSAL_LOCALIZATION_PASS__DISTRIBUTED_WITHIN_TWO_MLP_BRANCHES_AT_8_GROUP_GRANULARITY__ZERO_CAPABILITY_CREDIT",
+  "parent": "canonical/capabilities/opus55/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_RESULT_001.json",
+  "protocol": "canonical/evaluation/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_V1.json",
+  "donor": {
+    "repository": "allenai/OLMo-2-0425-1B",
+    "resolved_hf_sha": "a1847dff35000b4271fa70afc5db10fd29fedbdf"
+  },
+  "authoritative_run": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 469,
+    "head_sha": "84a93898a832e7e9b2ad9e3045eda79c210bc27d",
+    "workflow_run_id": 36946852226,
+    "job_id": 110650835097,
+    "conclusion": "success"
+  },
+  "independent_corroboration": {
+    "pr": 468,
+    "head_sha": "ea5042d687eed1252232e52d1e2bb30c65e6e0ac",
+    "workflow_run_id": 36946811266,
+    "job_id": 110650706372,
+    "conclusion": "success",
+    "decision_agreement": "NO_MATERIAL_GROUPS_UNDER_USEFUL_SIGNAL_RULE"
+  },
+  "baseline": {
+    "correct_count": 6,
+    "total": 7,
+    "useful_case_count": 6,
+    "useful_mean_margin": 0.8177082205340194,
+    "known_failure": "DEV_FORMER_LATTER_001"
+  },
+  "intervention": "EACH_OF_LAYER_1_AND_LAYER_11_MLP_DOWN_PROJECTION_INPUTS_PARTITIONED_INTO_8_CONTIGUOUS_1024_CHANNEL_GROUPS__ONE_GROUP_ZEROED_PER_INTERVENTION",
+  "material_rule": "USEFUL_BASELINE_CORRECT_MEAN_MARGIN_MINUS_ABLATED_USEFUL_MEAN_MARGIN_GE_0_10_OR_ANY_USEFUL_BASELINE_CORRECT_CASE_FLIPS_WRONG",
+  "material_groups": [],
+  "maximum_observed_useful_margin_drop": {
+    "layer": 1,
+    "group": 5,
+    "channel_start": 5120,
+    "channel_end_exclusive": 6144,
+    "drop": 0.031799359376378344
+  },
+  "conclusion": [
+    "NO_INDIVIDUAL_EIGHTH_OF_EITHER_MATERIAL_MLP_BRANCH_IS_NECESSARY_UNDER_THE_FROZEN_RULE",
+    "USEFUL_SIGNAL_IS_DISTRIBUTED_AT_THIS_GRANULARITY",
+    "PROTOCOL_STOP_RULE_APPLIES__DO_NOT_BINARY_REFINE_NONMATERIAL_GROUPS",
+    "DO_NOT_INVENT_A_SMALL_WEIGHT_SUBSPACE_CAPSULE",
+    "WHOLE_TWO_MLP_BRANCH_HARVEST_REMAINS_NONMINIMAL_AND_LAYER_1_INCLUDES_HARMFUL_DONOR_EFFECT",
+    "OLMO_REMAINS_A_DEV_CONTROL_OR_TEACHER_CANDIDATE_ONLY__NOT_OWNED_SEMANTIC_AUTHORITY"
+  ],
+  "next": "PRIORITIZE_SPECIALIZED_WHITE_BOX_AND_BRAIN_OWNED_DETERMINISTIC_CONTEXTUAL_SEMANTIC_PROPOSAL_COMPOSITION_BEHIND_VERIFIED_M0A_CONSENSUS_GATE__USE_GENERAL_DONOR_DISTILLATION_ONLY_IF_COMPOSED_ROUTE_CAUSALLY_FAILS_MATCHED_PARITY",
+  "heldout_exposed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
