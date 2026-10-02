@@ -1,0 +1,134 @@
+name: Verify final terminal closure
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json'
+      - 'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json'
+      - 'canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json'
+      - 'canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json'
+      - 'canonical/runtime/terminal_closure_reducer.py'
+      - 'canonical/runtime/test_terminal_closure_reducer.py'
+      - '.github/workflows/verify-final-terminal-closure.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  final-terminal-closure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run fail-closed reducer tests
+        run: |
+          set -euo pipefail
+          python -m pytest -q             canonical/runtime/test_terminal_closure_reducer.py             canonical/tests/test_terminal_global_ownership_postconditions_reducer_v1.py
+
+      - name: Verify final content-addressed bundle
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          bundle=json.loads(Path("canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json").read_text())
+          assert bundle["schema"]=="PROJECT_BRAIN_TERMINAL_FINAL_PROOF_BUNDLE_V1"
+          assert bundle["proof_bundle_frozen"] is True
+          assert bundle["terminal_replay_permitted"] is False
+          assert bundle["terminal_result_sha256"]=="f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2"
+
+          def blob(path):
+              b=Path(path).read_bytes()
+              return hashlib.sha1(b"blob "+str(len(b)).encode()+bytes([0])+b).hexdigest()
+
+          seen=set()
+          for row in bundle["evidence"]:
+              path=row["path"]
+              assert path not in seen, ("DUPLICATE_EVIDENCE_PATH",path)
+              seen.add(path)
+              assert Path(path).is_file(), ("MISSING_EVIDENCE",path)
+              got=blob(path)
+              assert got==row["blob_sha"], ("EVIDENCE_BLOB_DRIFT",path,row["blob_sha"],got)
+
+          matrix=json.loads(Path("canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json").read_text())
+          rows=matrix["rows"]
+          assert len(rows)==19
+          assert len({r["family"] for r in rows})==19
+          assert all(r["status"]=="VERIFIED_OWNED_EQUAL_OR_BETTER" for r in rows)
+          assert matrix["summary"]["full_opus_5_5_envelope_obsoleted"] is True
+          assert len(matrix["summary"]["verified_owned_equal_or_better_capabilities"])==19
+          print("FINAL_CONTENT_ADDRESSED_BUNDLE_PASS")
+          PY
+
+      - name: Reduce global ownership postconditions
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.terminal_global_ownership_postconditions_reducer_v1 import evaluate_documents
+
+          def load(p):
+              x=json.loads(Path(p).read_text())
+              assert isinstance(x,dict),p
+              return x
+
+          out=evaluate_documents(
+              load("canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"),
+              load("canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"),
+              load("canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json"),
+              load("canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json"),
+              load("canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"),
+              load("canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"),
+              load("canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"),
+              load("canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"),
+          )
+          assert out["pass"] is True,out
+          assert out["counters"]=={
+              "donor_dependent_required_behaviors":0,
+              "unresolved_verifier_mutations":0,
+              "unresolved_composition_failures":0,
+          },out
+          assert out["terminal_predicates"]["final_donor_deletion_cleanroom_pass"] is True
+          print(json.dumps(out,sort_keys=True))
+          PY
+
+      - name: Reduce terminal closure
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.terminal_closure_reducer import evaluate_manifest
+          m=json.loads(Path("canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json").read_text())
+          out=evaluate_manifest(m)
+          assert out["achieved"] is True,out
+          assert out["failed_predicates"]==[],out
+          assert out["family_count"]==19 and out["closed_family_count"]==19,out
+          print(json.dumps(out,sort_keys=True))
+          PY
+
+      - name: Assert no terminal replay code path
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          workflow=Path(".github/workflows/verify-final-terminal-closure.yml").read_text()
+          forbidden=[
+              "execute_wave(",
+              "terminal_parent_portfolio_launcher_v1",
+              "terminal-v3-wave-receipts",
+              "rerun",
+          ]
+          body=workflow.lower()
+          for token in forbidden:
+              assert token.lower() not in body, ("TERMINAL_REPLAY_TOKEN_IN_FINALIZATION_WORKFLOW",token)
+          print("NO_TERMINAL_REPLAY_PATH_PASS")
+          PY
