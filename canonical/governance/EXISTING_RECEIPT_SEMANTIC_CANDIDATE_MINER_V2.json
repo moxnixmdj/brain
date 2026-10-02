@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_EXISTING_RECEIPT_SEMANTIC_CANDIDATE_MINER_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__SELF_REFLECTION_SAFE_CONTENT_ADDRESSED_DISCOVERY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Mine already-existing Brain evidence for reusable target-literal candidates without allowing implementation text, tests, workflows, definitions, proof-pipeline restatements, or prior discovery output to recursively become evidence.",
+  "runtime": {
+    "path": "canonical/runtime/existing_receipt_semantic_candidate_miner_v2.py",
+    "git_blob_sha": "4646bf8e7cce1192612fe734383e8cb2c6afb1a1"
+  },
+  "tests": {
+    "path": "canonical/tests/test_existing_receipt_semantic_candidate_miner_v2.py",
+    "git_blob_sha": "98ebfaba62a2a0ec0b66044c02bd7b50d4e7601b"
+  },
+  "inputs": {
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+      "git_blob_sha": "0910ce3a2351fc439e03a1fa2ae708fb3c6463ef"
+    },
+    "brain_witness_normalization": {
+      "path": "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json",
+      "git_blob_sha": "45e1a4eaa2214c4a92f5d5787695069f2fe48aaf"
+    }
+  },
+  "global_reuse_search_roots": [
+    "canonical/verification",
+    "canonical/capabilities",
+    "canonical/governance"
+  ],
+  "hard_rules": [
+    "DISCOVERY_ONLY",
+    "LEXICAL_TOKEN_OCCURRENCE_IS_NOT_SEMANTIC_IMPLICATION",
+    "GLOBAL_REUSE_SEARCHES_ONLY_DECLARED_EVIDENCE_ROOTS",
+    "RUNTIME_TEST_WORKFLOW_AND_PRIOR_DISCOVERY_OUTPUTS_CANNOT_BECOME_GLOBAL_REUSE_EVIDENCE",
+    "TARGET_DEFINITIONS_AND_DERIVED_PROOF_PIPELINE_RESTATEMENTS_CANNOT_BECOME_GLOBAL_REUSE_EVIDENCE",
+    "EVERY_STORED_CANDIDATE_MUST_BE_GIT_BLOB_CONTENT_ADDRESSED",
+    "COMPLETE_SEARCHABLE_CORPUS_MANIFEST_MUST_BE_SHA256_ADDRESSED",
+    "ACTUAL_MATCH_COUNT_MUST_REMAIN_SEPARATE_FROM_STORED_CAPPED_CANDIDATES",
+    "MATCH_TRUNCATION_MUST_BE_EXPLICIT",
+    "WITNESS_SOURCE_PATHS_MUST_REMAIN_INSIDE_REPOSITORY_ROOT",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_TEST_BYTES__THEN_RUN_ONE_CONTENT_ADDRESSED_DISCOVERY_PASS_ON_CURRENT_MAIN__ADJUDICATE_ONLY_CANDIDATES_WITH_EXPLICIT_SCOPE_RELATION_METRIC_BOUND_AND_CONTAMINATION_PROOF",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
