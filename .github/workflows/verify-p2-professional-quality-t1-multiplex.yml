@@ -1,4 +1,5 @@
 name: Verify P2 professional quality T1 multiplex
+# current-main verification trigger
 on:
   push:
     branches: [main]
