@@ -22,7 +22,7 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
             load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json"),
         )
 
-    def test_live_frontier_fails_closed_on_semantic_gate(self):
+    def test_live_frontier_fails_closed_on_semantic_gate_but_emits_runnable_pointer(self):
         registry, evidence, hypergraph = self.docs()
         out = compile_next_frontier(registry, evidence, hypergraph)
         self.assertEqual(out["status"], "PASS__DETERMINISTIC_FRONTIER__ZERO_CREDIT")
@@ -40,10 +40,16 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
         )
         self.assertIn("RUN_COMPOSITION_COMPONENT_PROOF_SLICER", out["available_zero_reality_critical_actions"])
         self.assertIn("RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE", out["available_zero_reality_critical_actions"])
+        self.assertEqual(
+            out["execution_action_id"],
+            "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+        )
+        self.assertEqual(out["execution_action_state"], "AVAILABLE_ZERO_REALITY")
+        self.assertNotEqual(out["execution_action_id"], out["primary_action_id"])
         self.assertFalse(out["execution_authority"])
         self.assertFalse(out["promotion_authority"])
 
-    def test_primary_becomes_available_only_after_both_semantic_gates_pass(self):
+    def test_primary_and_execution_converge_after_semantic_gates_pass(self):
         registry, evidence, hypergraph = self.docs()
         mutated = copy.deepcopy(hypergraph)
         action = next(a for a in mutated["actions"] if a["id"] == "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
@@ -57,6 +63,8 @@ class TerminalNextActionCompilerTests(unittest.TestCase):
         self.assertEqual(out["primary_action_id"], "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
         self.assertEqual(out["primary_action_state"], "AVAILABLE_ZERO_REALITY")
         self.assertEqual(out["primary_unsatisfied_preconditions"], [])
+        self.assertEqual(out["execution_action_id"], "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA")
+        self.assertEqual(out["execution_action_state"], "AVAILABLE_ZERO_REALITY")
 
 
 if __name__ == "__main__":
