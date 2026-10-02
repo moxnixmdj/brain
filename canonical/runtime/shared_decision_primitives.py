@@ -281,6 +281,13 @@ def select_grounded_ui_action(
     an element identity from unstated visual semantics.
     """
     req=frozenset(str(x).lower() for x in required_terms if str(x).strip())
+    if not req:
+        return GroundedActionDecision("ESCALATE",None,None,"REQUIRED_TERMS_EMPTY")
+    if not action or not str(action).strip():
+        return GroundedActionDecision("ESCALATE",None,None,"ACTION_INVALID")
+    ids=[e.element_id for e in elements]
+    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
+        return GroundedActionDecision("ESCALATE",None,None,"ELEMENT_IDENTITIES_INVALID_OR_DUPLICATE")
     eligible=[]
     for e in elements:
         if not (e.visible and e.enabled and e.authorized and action in e.actions):
@@ -318,9 +325,13 @@ def plan_artifact_operations(
     required=frozenset(required_changes)
     if not required:
         return ArtifactPlanDecision("PASS",(),frozenset(),"NO_REQUIRED_CHANGES")
+    ids=[o.operation_id for o in operations]
+    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
+        return ArtifactPlanDecision("ESCALATE",(),required,"OPERATION_IDENTITIES_INVALID_OR_DUPLICATE")
     eligible=[
         o for o in operations
-        if o.available and o.deterministic and o.preserves_unrequested_structure and o.cost >= 0
+        if o.available and o.deterministic and o.preserves_unrequested_structure
+        and _finite_nonnegative(o.cost)
     ]
     if len(eligible)>20:
         return ArtifactPlanDecision("ESCALATE",(),required,"TOO_MANY_OPERATIONS_FOR_EXACT_BOUNDED_SEARCH")
@@ -335,8 +346,6 @@ def plan_artifact_operations(
             key=(sum(o.cost for o in subset),k,ids)
             if best is None or key<best[0]:
                 best=(key,ids)
-        if best is not None:
-            break
     if best is None:
         covered=frozenset().union(*(o.satisfies for o in eligible)) if eligible else frozenset()
         return ArtifactPlanDecision("ESCALATE",(),required-covered,"NO_STRUCTURE_PRESERVING_OPERATION_COVERAGE")
@@ -359,8 +368,11 @@ def compile_requirement_search_actions(
     Query text is the requirement itself; this is intentionally not a learned query
     rewrite. Semantic requirement extraction belongs upstream (M0), already separate.
     """
+    ids=[p.provider_id for p in providers]
+    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
+        return ()
     good=sorted(
-        [p for p in providers if p.verified and p.available and p.authorized and p.cost>=0],
+        [p for p in providers if p.verified and p.available and p.authorized and _finite_nonnegative(p.cost)],
         key=lambda p:(p.cost,p.provider_id),
     )
     out=[]
@@ -401,6 +413,13 @@ def enumerate_nonreplayable_failure_candidates(
     that no prior authorized decision is silently omitted before later evidence,
     invariant checks, intervention tests, or causal ranking narrow the set.
     """
+    ids=[d.event_id for d in decisions]
+    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
+        return FailureControlDecision("ESCALATE",(),"DECISION_IDENTITIES_INVALID_OR_DUPLICATE")
+    if not isinstance(failure_step_index,int) or isinstance(failure_step_index,bool) or failure_step_index<0:
+        return FailureControlDecision("ESCALATE",(),"FAILURE_STEP_INVALID")
+    if any(not isinstance(d.step_index,int) or isinstance(d.step_index,bool) or d.step_index<0 for d in decisions):
+        return FailureControlDecision("ESCALATE",(),"DECISION_STEP_INVALID")
     candidates=tuple(
         d.event_id
         for d in sorted(decisions,key=lambda d:(d.step_index,d.event_id))
