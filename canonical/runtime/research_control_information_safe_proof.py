@@ -30,19 +30,19 @@ def generate_case(seed:int, ordinal:int)->dict[str,Any]:
         rid=f"R{i}"
         token=f"{domain}_{r.randrange(1000,9999)}_{i}"
         reqs.append({"id":rid,"text":f"Establish material finding {token}","material":True})
-        auth=f"S-{rid}-AUTH"
-        alt=f"S-{rid}-ALT"
-        distract=f"S-{rid}-DIST"
+        opaque=[f"S-{rid}-{r.randrange(10000,99999)}" for _ in range(3)]
+        first,second,low=opaque
         sources.extend([
-            {"source_id":auth,"authority":0.95,"cost":2.0,"available":True},
-            {"source_id":alt,"authority":0.70,"cost":1.0,"available":True},
-            {"source_id":distract,"authority":0.90,"cost":1.5,"available":True},
+            {"source_id":first,"authority":0.96,"cost":2.0,"available":True},
+            {"source_id":second,"authority":0.93,"cost":1.5,"available":True},
+            {"source_id":low,"authority":0.70,"cost":1.0,"available":True},
         ])
-        hidden[auth]={"query_token":token,"supports":[rid],"content":f"Authoritative evidence for {token}"}
-        hidden[alt]={"query_token":token,"supports":[rid],"content":f"Secondary evidence for {token}"}
-        hidden[distract]={"query_token":token,"supports":[],"content":f"Related but nonresponsive material {token}"}
+        first_supports=((seed+i+ordinal)%2==0)
+        hidden[first]={"query_token":token,"supports":[rid] if first_supports else [],"content":f"Source material for {token}"}
+        hidden[second]={"query_token":token,"supports":[] if first_supports else [rid],"content":f"Source material for {token}"}
+        hidden[low]={"query_token":token,"supports":[rid],"content":f"Secondary source material for {token}"}
     r.shuffle(sources)
-    budget=2*n+1
+    budget=3*n+1
     return {
         "schema":SCHEMA,
         "behavior_id":"ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
@@ -83,7 +83,7 @@ def public_state(case:Mapping[str,Any], *, history=(), search_results=(), eviden
     }
 
 
-def _search(case:Mapping[str,Any], query:str)->list[dict[str,Any]]:
+def _search(case:Mapping[str,Any], query:str, target_requirement_id:str)->list[dict[str,Any]]:
     q=" ".join(str(query).lower().split())
     hits=[]
     by_id={x["source_id"]:x for x in case["source_catalog"]}
@@ -96,6 +96,7 @@ def _search(case:Mapping[str,Any], query:str)->list[dict[str,Any]]:
                 "authority":float(meta["authority"]),
                 "cost":float(meta["cost"]),
                 "query":query,
+                "target_requirement_id":target_requirement_id,
             })
     hits.sort(key=lambda x:(-x["authority"],x["cost"],x["source_id"]))
     return hits
@@ -152,7 +153,7 @@ def run_episode(case:Mapping[str,Any], policy_fn)->dict[str,Any]:
             key=req["text"].split()[-1].lower()
             if key not in query.lower():
                 return {"pass":False,"reason":"QUERY_DRIFT","history":history}
-            results=_search(case,query)
+            results=_search(case,query,rid)
             total_cost+=float(case["policy"]["search_cost"])
             history.append({"action":"SEARCH","target_requirement_id":rid,"query":query,"hit_count":len(results)})
             continue
@@ -167,7 +168,8 @@ def run_episode(case:Mapping[str,Any], policy_fn)->dict[str,Any]:
             receipts.append(rec)
             total_cost+=float(rec.get("cost",0.0))
             history.append({"action":"FETCH","source_id":sid,"target_requirement_id":rid,"supported":rec.get("supported")})
-            results=[]
+            # Keep the current result set so a failed fetch can recover to the
+            # next candidate source without repeating the search.
             continue
         return {"pass":False,"reason":"UNKNOWN_ACTION","history":history}
     return {"pass":False,"reason":"UNREACHABLE"}
