@@ -1,0 +1,23 @@
+name: Verify DOCX structural transaction coverage
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/ooxml_package_transaction.py
+      - canonical/tests/test_docx_structural_transaction_coverage.py
+      - .github/workflows/verify-docx-structural-transaction-coverage.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_docx_structural_transaction_coverage
