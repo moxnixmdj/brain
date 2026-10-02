@@ -94,3 +94,34 @@ assert select_repair_target([
 ]).status=="ESCALATE"
 
 print("shared_decision_primitives_hardening: PASS")
+
+# Artifact planning: global minimum total cost across all subset cardinalities.
+ops=[
+    ArtifactOperation("text",frozenset({"replace_text"}),1),
+    ArtifactOperation("table",frozenset({"edit_table"}),1),
+    ArtifactOperation("both",frozenset({"replace_text","edit_table"}),3),
+    ArtifactOperation("destructive",frozenset({"replace_text","edit_table"}),0,preserves_unrequested_structure=False),
+]
+p=plan_artifact_operations({"replace_text","edit_table"},ops)
+assert p.status=="PASS" and p.operation_ids==("table","text")
+assert plan_artifact_operations({"pdf_redaction"},ops).status=="ESCALATE"
+assert plan_artifact_operations({"replace_text"},[
+    ArtifactOperation("dup",frozenset({"replace_text"})),
+    ArtifactOperation("dup",frozenset({"replace_text"})),
+]).status=="ESCALATE"
+
+# Non-replayable failure candidates: complete prior decision set without causal overclaim.
+td=[
+    TraceDecision("d1",1),
+    TraceDecision("d2",2,intervenable=False),
+    TraceDecision("d3",3),
+    TraceDecision("after",5),
+]
+fc=enumerate_nonreplayable_failure_candidates(td,4)
+assert fc.status=="CANDIDATES" and fc.candidate_ids==("d1","d3")
+assert "NO_CAUSAL_CLAIM" in fc.reason
+assert enumerate_nonreplayable_failure_candidates(td,1).status=="ESCALATE"
+assert enumerate_nonreplayable_failure_candidates([TraceDecision("x",-1)],2).status=="ESCALATE"
+
+print("shared_decision_primitives_m2_m4_m5: PASS")
+

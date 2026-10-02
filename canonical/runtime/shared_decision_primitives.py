@@ -241,3 +241,97 @@ def select_repair_target(
         return RepairDecision("ESCALATE",None,"NO_CAUSALLY_SUPPORTED_INTERVENABLE_REPAIR")
     eligible.sort(key=lambda c:(c.step_index,-c.predicted_rescue,-c.evidence_strength,c.candidate_id))
     return RepairDecision("SELECT",eligible[0].candidate_id,"EARLIEST_CAUSALLY_SUPPORTED_RESCUE_TARGET")
+
+# ---- Cross-lane bounded control primitives (M2/M4/M5 zero-reality subtraction) ----
+
+from typing import Mapping
+
+@dataclass(frozen=True)
+class ArtifactOperation:
+    operation_id: str
+    satisfies: FrozenSet[str]
+    cost: float = 0.0
+    deterministic: bool = True
+    preserves_unrequested_structure: bool = True
+    available: bool = True
+
+@dataclass(frozen=True)
+class ArtifactPlanDecision:
+    status: str
+    operation_ids: tuple[str,...]
+    uncovered: FrozenSet[str]
+    reason: str
+
+def plan_artifact_operations(
+    required_changes: Iterable[str],
+    operations: Sequence[ArtifactOperation],
+) -> ArtifactPlanDecision:
+    """Exact bounded set-cover over deterministic structure-preserving operations."""
+    required=frozenset(required_changes)
+    if not required:
+        return ArtifactPlanDecision("PASS",(),frozenset(),"NO_REQUIRED_CHANGES")
+    ids=[o.operation_id for o in operations]
+    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
+        return ArtifactPlanDecision("ESCALATE",(),required,"OPERATION_IDENTITIES_INVALID_OR_DUPLICATE")
+    eligible=[
+        o for o in operations
+        if o.available and o.deterministic and o.preserves_unrequested_structure
+        and _finite_nonnegative(o.cost)
+    ]
+    if len(eligible)>20:
+        return ArtifactPlanDecision("ESCALATE",(),required,"TOO_MANY_OPERATIONS_FOR_EXACT_BOUNDED_SEARCH")
+    best=None
+    for k in range(len(eligible)+1):
+        for idxs in combinations(range(len(eligible)),k):
+            subset=[eligible[i] for i in idxs]
+            covered=frozenset().union(*(o.satisfies for o in subset)) if subset else frozenset()
+            if not required.issubset(covered):
+                continue
+            chosen=tuple(sorted(o.operation_id for o in subset))
+            key=(sum(float(o.cost) for o in subset),k,chosen)
+            if best is None or key<best[0]:
+                best=(key,chosen)
+    if best is None:
+        covered=frozenset().union(*(o.satisfies for o in eligible)) if eligible else frozenset()
+        return ArtifactPlanDecision("ESCALATE",(),required-covered,"NO_STRUCTURE_PRESERVING_OPERATION_COVERAGE")
+    return ArtifactPlanDecision("PASS",best[1],frozenset(),"MINIMUM_COST_COMPLETE_STRUCTURE_PRESERVING_PLAN")
+
+@dataclass(frozen=True)
+class TraceDecision:
+    event_id: str
+    step_index: int
+    intervenable: bool = True
+    authorized: bool = True
+
+@dataclass(frozen=True)
+class FailureControlDecision:
+    status: str
+    candidate_ids: tuple[str,...]
+    reason: str
+
+def enumerate_nonreplayable_failure_candidates(
+    decisions: Sequence[TraceDecision],
+    failure_step_index: int,
+) -> FailureControlDecision:
+    """Losslessly enumerate prior authorized/intervenable decisions.
+
+    Temporal precedence is not treated as causal support. The returned set is only
+    a conservative candidate universe for later invariant, intervention, replay,
+    or causal-ranking evidence.
+    """
+    ids=[d.event_id for d in decisions]
+    if len(ids)!=len(set(ids)) or any(not isinstance(x,str) or not x.strip() for x in ids):
+        return FailureControlDecision("ESCALATE",(),"DECISION_IDENTITIES_INVALID_OR_DUPLICATE")
+    if not isinstance(failure_step_index,int) or isinstance(failure_step_index,bool) or failure_step_index<0:
+        return FailureControlDecision("ESCALATE",(),"FAILURE_STEP_INVALID")
+    if any(not isinstance(d.step_index,int) or isinstance(d.step_index,bool) or d.step_index<0 for d in decisions):
+        return FailureControlDecision("ESCALATE",(),"DECISION_STEP_INVALID")
+    candidates=tuple(
+        d.event_id
+        for d in sorted(decisions,key=lambda d:(d.step_index,d.event_id))
+        if d.step_index < failure_step_index and d.intervenable and d.authorized
+    )
+    if not candidates:
+        return FailureControlDecision("ESCALATE",(),"NO_PRIOR_AUTHORIZED_INTERVENABLE_DECISION_CANDIDATES")
+    return FailureControlDecision("CANDIDATES",candidates,"LOSSLESS_PRIOR_DECISION_CANDIDATE_SET__NO_CAUSAL_CLAIM")
+
