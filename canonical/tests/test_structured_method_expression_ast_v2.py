@@ -10,7 +10,7 @@ from canonical.runtime import structured_method_expression_ast_proof_v2 as proof
 
 CLAIMED_OPS = {
     "ref","const","add","sub","min","max","mul","div","neg","abs","pow_int",
-    "gt","ge","lt","le","eq","neq","and","or","not","if",
+    "exp","log","sqrt","gt","ge","lt","le","eq","neq","and","or","not","if",
 }
 
 
