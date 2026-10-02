@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ZERO_REALITY_RESIDUAL_SUBTRACTION_INPUT_V3",
+  "date": "2026-10-02",
+  "claims": [
+    {
+      "residual_id": "S0_IMPLICIT_LONG_RANGE_SOURCE_TRACEABLE_RELATION_FORMATION",
+      "required_behavior": "Form source-traceable entities/facts/relations across implicit or long-range discourse outside bounded explicit grammars",
+      "terminal_failure_required_before_implementation": true,
+      "repeatable_solvable_terminal_failure_observed": false,
+      "current_composed_route_exists": true,
+      "evidence": {
+        "saturation": "canonical/governance/S0_G0_ZERO_REALITY_SATURATION_V1.json",
+        "dependency_compression": "canonical/reasoning/2026-10-02_S0_G0_DEPENDENCY_COMPRESSION_V1.json",
+        "m0_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V2.json"
+      }
+    },
+    {
+      "residual_id": "S0_RAW_VISUAL_MULTIMODAL_SEMANTIC_BINDING",
+      "required_behavior": "Bind raw visual or multimodal observations to source-traceable typed entities/facts outside deterministic normalizers",
+      "terminal_failure_required_before_implementation": true,
+      "repeatable_solvable_terminal_failure_observed": false,
+      "current_composed_route_exists": true,
+      "evidence": {
+        "saturation": "canonical/governance/S0_G0_ZERO_REALITY_SATURATION_V1.json",
+        "boundary": "canonical/governance/S0_IRREDUCIBLE_SEMANTIC_BOUNDARY_V1.json",
+        "existing_routes": "canonical/capabilities/opus55/S0_VISUAL_SYMBOL_TEMPLATE_MATCHER_001.json"
+      }
+    },
+    {
+      "residual_id": "G0_NOVEL_PREDICATE_OPERATOR_OR_EMIT_STRUCTURE",
+      "required_behavior": "Produce causally useful new typed predicate/operator/output structures when no admissible JIT template, exact derivation or verified finite synthesis class supplies them",
+      "terminal_failure_required_before_implementation": true,
+      "repeatable_solvable_terminal_failure_observed": false,
+      "current_composed_route_exists": true,
+      "evidence": {
+        "compression": "canonical/governance/G0_DEPENDENCY_COMPRESSION_V1.json",
+        "saturation": "canonical/governance/S0_G0_ZERO_REALITY_SATURATION_V1.json",
+        "finite_synthesis": "canonical/capabilities/opus55/G0_FINITE_TYPED_RULE_SYNTHESIS_001.json"
+      }
+    }
+  ],
+  "guards": [
+    "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_DEFERRAL",
+    "TERMINAL_PROOF_MUST_EXERCISE_THESE_SCOPES",
+    "ANY_REPEATABLE_SOLVABLE_CAUSALLY_LOCALIZED_FAILURE_REOPENS_ONLY_THE_SPECIFIC_RESIDUAL",
+    "NONIDENTIFIABLE_CASES_ABSTAIN_OR_REQUEST_AUTHORIZED_DISCRIMINATOR",
+    "NO_GENERIC_S0_OR_G0_REOPEN_FROM_UNLOCALIZED_FAILURE"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
