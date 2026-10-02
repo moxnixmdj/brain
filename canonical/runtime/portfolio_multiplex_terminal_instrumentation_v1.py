@@ -10,7 +10,7 @@ canonical.runtime.direct_route_terminal_executors_v1.
 """
 from __future__ import annotations
 
-import subprocess
+import hashlib
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -73,18 +73,13 @@ FORBIDDEN_RECEIPT_KEYS = {
 
 
 
-def _git_object_sha(root: Path, relative_path: str) -> str:
-    out = subprocess.check_output(
-        ["git", "-C", str(root), "rev-parse", "HEAD:" + relative_path],
-        text=True,
-        stderr=subprocess.DEVNULL,
-    ).strip()
-    if len(out) != 40 or any(ch not in "0123456789abcdef" for ch in out.lower()):
-        raise ValueError("INVALID_GIT_OBJECT_SHA")
-    return out.lower()
+defdef _git_object_sha(root: Path, relative_path: str) -> str:
+    data = (root / relative_path).read_bytes()
+    header = b"blob " + str(len(data)).encode() + bytes([0])
+    return hashlib.sha1(header + data).hexdigest()
 
 
-def static_binding_preflight(root: Path = Path(".")) -> dict[str, Any]:
+ static_binding_preflight(root: Path = Path(".")) -> dict[str, Any]:
     """Verify the seven exact frozen governance binding blobs before any parent wave."""
     errors: list[str] = []
     rows: dict[str, dict[str, Any]] = {}
