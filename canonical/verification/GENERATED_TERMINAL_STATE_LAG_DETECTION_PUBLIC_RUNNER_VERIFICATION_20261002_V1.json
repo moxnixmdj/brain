@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_GENERATED_TERMINAL_STATE_LAG_DETECTION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_UPDATED_BLOBS__13_STACK_TESTS_PASS__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verification_pr": 653,
+  "verification_pr_head_sha": "c9eeaa54e5749aaff7fadd8e766dc8a6cec53584",
+  "workflow_run_id": 36965919041,
+  "job_id": 110709522204,
+  "workflow_conclusion": "success",
+  "exact_updated_brain_blobs": {
+    "canonical/runtime/generated_terminal_state_compiler.py": "713705912a0db83e587b31139374eac745ea2540",
+    "canonical/tests/test_generated_terminal_state_compiler.py": "c9c0e17bfea83126fbce64bbd02583bbf1d32737"
+  },
+  "unchanged_stack_blobs_reverified_in_same_run": {
+    "canonical/runtime/terminal_proof_supercompiler.py": "c7a4b8bc29d041fcc04fbcfa8a79db44fa9fe370",
+    "canonical/tests/test_terminal_proof_supercompiler.py": "e91e2c2dc3f7978d115fdd45efdfe4b66e9af33a",
+    "canonical/runtime/prewave_anti_circularity_compiler.py": "e610b392fdb8bce337b748f2924b1134ccdfbbd9",
+    "canonical/tests/test_prewave_anti_circularity_compiler.py": "6c69bfb96d5c28916774b4d0e044d981b2e48f60"
+  },
+  "verified": [
+    "DERIVED_ADMISSION_LAG_FAILS_CLOSED",
+    "PROTOCOL_ADMISSION_SET_MISMATCH_DETECTED",
+    "PROTOCOL_ADMISSIBLE_COUNT_MISMATCH_DETECTED",
+    "PREQUAL_ADMISSIBLE_COUNT_MISMATCH_DETECTED",
+    "PROGRESS_ARTIFACTS_STILL_CANNOT_SELF_PROMOTE",
+    "CONTRACT_SET_MISMATCH_FAILS_CLOSED",
+    "READY_SYNTHETIC_FIXTURE_ONLY_AUTHORIZES_WHEN_CANONICAL_INPUTS_AGREE",
+    "WHOLE_FRONTIER_SUPERCOMPILER_AND_ANTI_CIRCULARITY_REGRESSIONS_REPASS"
+  ],
+  "test_count": 13,
+  "test_result": "OK",
+  "authority_effect": "GENERATED_STATE_COMPILER_MAY_FAIL_CLOSED_ON_DERIVED_AUTHORITY_LAG__NO_ROUTE_OR_CAPABILITY_PROMOTION_FROM_THIS RECEIPT",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
