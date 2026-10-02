@@ -91,6 +91,10 @@
     "acceptance_residual_verdict_v8": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V8.json",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__7_PROVED__0_OPEN__31_BLOCKED"
+    },
+    "tb4_carrier_independent_bound": {
+      "path": "canonical/verification/TB4_CARRIER_INDEPENDENT_ACCEPTANCE_BOUND_VERDICT_20261002_V1.json",
+      "status": "CANONICAL_FAIL_LOCKED__INDEPENDENT_REPLAY_PENDING__215_LT_220"
     }
   },
   "residual": [
@@ -105,7 +109,7 @@
     "FINAL_CLOSURE_AND_INDEPENDENT_FINALITY"
   ],
   "no_terminal_replay": true,
-  "next": "CURRENT_SCORE_ROUTE_REVOKED__SEARCH_ONLY_ADMISSIBLE_ZERO_CASE_ROUTE_OR_CREDITABILITY_CHANGES_THAT_CAN_RAISE_THE_ATTAINABILITY_UPPER_BOUND_TO_AT_LEAST_220__CONTINUE_ZERO_REALITY_BLOCKER_DISCHARGE",
+  "next": "TB4_CASE_AND_CARRIER_ROUTE_FAIL_LOCKED__SEARCH_ONLY_A_VERIFIED_FULL_PROTOCOL_UNIVERSAL_EXHAUSTIVE_OR_ABSOLUTE_DOMINANCE_WITNESS_FOR_ADVANCED_AGENTIC_CODING__CONTINUE_ZERO_REALITY_BLOCKER_DISCHARGE_FOR_OTHER_FAMILIES",
   "rule": "DERIVED_POINTER_ONLY__RECOMPUTE_IF_ANY_SOURCE_BLOB_CHANGES",
   "atomic_acceptance_frontier": {
     "proved": 7,
@@ -123,6 +127,11 @@
     "maximum_still_creditable_task_count": 36,
     "maximum_attainable_successes": 180,
     "execution_authorized": false,
-    "state": "INDEPENDENT_PASS__IMPOSSIBLE_UNDER_CURRENT_FROZEN_NO_REPLAY_RULES"
+    "state": "INDEPENDENT_PASS__IMPOSSIBLE_UNDER_CURRENT_FROZEN_NO_REPLAY_RULES",
+    "carrier_independent_maximum_successes": 215,
+    "carrier_independent_required_successes": 220,
+    "carrier_acquisition_authorized": false,
+    "case_execution_authorized": false,
+    "escape_route": "FULL_PROTOCOL_STRONGER_PROOF_TRANSMUTATION_ONLY"
   }
 }
