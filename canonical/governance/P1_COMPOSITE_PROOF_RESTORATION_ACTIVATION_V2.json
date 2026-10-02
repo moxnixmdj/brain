@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_WHOLE_P1_SCOPE_RESTORATION__INDEPENDENT_PROJECTION_VERIFICATION_REQUIRED__ZERO_OPUS_ACCEPTANCE_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Restore the frozen whole-P1 behavioral contract from the immutable narrow T0/T2 terminal result plus the predeclared typed V4 scope-safe preflight after independently verified repair of the two adjudication defects, without replaying Terminal V3 or inferring Opus 5.5 family acceptance.",
+  "exact_authority": {
+    "frozen_p1_binding": {
+      "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    },
+    "role_reconciliation": {
+      "path": "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json",
+      "git_blob_sha": "1da223b8133e83d3ba1b238012593b39dcae91f9"
+    },
+    "readjudication_verification": {
+      "path": "canonical/verification/P1_COMPOSITE_PROOF_READJUDICATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
+    },
+    "terminal_raw_result": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "prior_scope_quarantine": {
+      "path": "canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json",
+      "git_blob_sha": "f4fe68c78ccdf5392b5e24519ae9a57e620221a7"
+    }
+  },
+  "proof_join": {
+    "predeclared_v4_role": {
+      "existing_cross_product_cases": 168,
+      "strict_readjudication_failures": 0,
+      "frozen_mutations_assigned": 6,
+      "assigned_mutations_killed": 6,
+      "supplies": [
+        "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS",
+        "NONIDENTIFIABLE_OR_CAUSALLY_EQUIVALENT_CASE_DOES_NOT_FORCE_UNIQUE_CAUSE",
+        "AUTHORITY_SCOPE_TOOL_STATE_PROVENANCE_AND_DEPENDENCY_FAILURE_CLASSES_ARE_LOAD_BEARING_WHEN_PRESENT",
+        "MULTISTEP_OR_DELAYED_CAUSAL_INTERACTIONS_ARE_NOT_REDUCED_TO_FIRST_VISIBLE_SYMPTOM"
+      ]
+    },
+    "frozen_terminal_role": {
+      "terminal_v3_replayed": false,
+      "t0_p1_aggregate_cases": 30,
+      "t0_direct_instrumentation_pass": true,
+      "t0_parent_terminal_acceptance_pass": true,
+      "t2_p1_aggregate_cases": 30,
+      "t2_direct_instrumentation_pass": true,
+      "t2_parent_terminal_acceptance_pass": true,
+      "binding_blob": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+      "supplies": [
+        "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+        "NOMINATED_REPAIR_IS_FALSIFIABLE",
+        "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE",
+        "SYMPTOM_ONLY_OR_COMPETING_REPAIR_DOES_NOT_RECEIVE_CAUSAL_CREDIT"
+      ],
+      "frozen_mutations_assigned": 3,
+      "assigned_mutations_killed": 3
+    },
+    "complete_required_check_count": 8,
+    "complete_required_mutation_count": 9,
+    "check_partition_exact": true,
+    "mutation_partition_exact": true
+  },
+  "quarantine_disposition_candidate": {
+    "WHOLE_FROZEN_P1_CONTRACT_PASS": "RESTORE_AFTER_INDEPENDENT_PROJECTION_VERIFICATION",
+    "POSTWAVE_12_OF_12_WHOLE_CONTRACT_CLAIM": "RESTORE_AFTER_INDEPENDENT_PROJECTION_VERIFICATION",
+    "P1_FULL_SCOPE_COMPOSITION_COMPONENT_CREDIT": "RECOMPUTE_FROM_RESTORED_P1_CONTRACT__DO_NOT_INFER_PARENT_COMPOSITION_ACCEPTANCE",
+    "P1_WITNESS_TRANSPORT_INTO_RECOVERY_ACCEPTANCE": "REMAINS_SEPARATE__NO_AUTOMATIC_TRANSPORT"
+  },
+  "hard_nonclaims": [
+    "THIS_DOES_NOT_CLOSE_ANY_OPEN_OPUS55_ACCEPTANCE_PREDICATE_BY_ITSELF",
+    "THIS_DOES_NOT_PROVE_PROTOCOL_WIDE_RECOVERY_NONINFERIORITY",
+    "THIS_DOES_NOT CLOSE_COMPOSITION_PARENT_ACCEPTANCE",
+    "THIS_DOES_NOT AUTHORIZE_TERMINAL_V3_REPLAY",
+    "THIS_DOES_NOT CHANGE_THE_3352_RAW_EXECUTION_RECEIPT",
+    "FINITE_V4_PREFLIGHT_IS_USED_ONLY_FOR_ITS_EXACT_PREDECLARED_ROLE"
+  ],
+  "projection_gate": [
+    "INDEPENDENTLY_VERIFY_THIS_ACTIVATION_AGAINST_EXACT_FROZEN_BINDING_AND_RAW_TERMINAL_RECEIPT",
+    "RECOMPUTE_CONTRACT_AND_BEHAVIORAL_FAMILY_PROJECTION_ONLY",
+    "PRESERVE_OPUS55_ACCEPTANCE_2_OF_19_AND_ATOMIC_ACCEPTANCE_7_OF_38_UNLESS_SEPARATE_ACCEPTANCE_EVIDENCE_CLOSES_PREDICATES",
+    "REBUILD_CURRENT_TERMINAL_AUTHORITY_FROM_VERIFIED_DERIVED_STATE"
+  ],
+  "terminal_results_replayed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "opus55_predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
