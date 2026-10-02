@@ -1,0 +1,98 @@
+name: Verify delegation temporal proof transport v1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/temporal_proof_transport_v1.py'
+      - 'canonical/tests/test_temporal_proof_transport_v1.py'
+      - 'canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json'
+      - 'canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json'
+      - 'canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json'
+      - 'canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py'
+      - 'canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json'
+      - '.github/workflows/verify-delegation-temporal-proof-transport-v1.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Bind independent full-history transport verification
+        run: |
+          python - <<'PY'
+          import json
+          p="canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert d["status"]=="INDEPENDENT_PUBLIC_RUNNER_PASS__TEMPORAL_DEPENDENCY_IDENTITY__8_TRANSPORT_TESTS_PASS__ZERO_REPLAY__ZERO_CREDIT", d
+          assert d["public_verifier"]["repository"]=="moxnixmdj/verification-capsule-runner"
+          assert d["public_verifier"]["pull_request"]==870
+          assert d["public_verifier"]["merge_commit"]=="fcf9da8987b89bcfe4fbb77efead6dcf762be652"
+          assert d["public_verifier"]["workflow_run_id"]==37005325244
+          assert d["public_verifier"]["workflow_job_id"]==110832134612
+          assert d["public_verifier"]["conclusion"]=="success"
+          assert d["exact_current_brain_blobs"]["canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json"]=="a1e441567b132d71713ed55dfc51f01d8de112d1"
+          assert d["exact_historical_brain_blobs"]["snapshot_commit"]=="821712c059b139f3494723dca6e8d0fc82ee59a4"
+          assert d["exact_historical_brain_blobs"]["canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json"]=="a1e441567b132d71713ed55dfc51f01d8de112d1"
+          assert "EXACT_CURRENT_AND_HISTORICAL_MIRRORED_BLOB_IDENTITIES_MATCH_EXPECTED_GIT_OBJECTS" in d["verified"]
+          assert "EIGHT_FAIL_CLOSED_TRANSPORT_TESTS_PASS" in d["verified"]
+          assert d["fresh_terminal_evidence_consumed"]==0
+          assert d["terminal_results_replayed"]==0
+          assert d["capability_credit_delta"]==0
+          assert d["family_credit_delta"]==0
+          print("INDEPENDENT_TEMPORAL_TRANSPORT_RECEIPT_BOUND")
+          PY
+
+      - name: Run current transport and transmutation tests
+        run: |
+          python -m unittest -v             canonical.tests.test_temporal_proof_transport_v1             canonical.tests.test_delegation_temporal_ceiling_transmutation_v1
+
+      - name: Recompute exact 4 of 19 stronger-proof transmutation
+        run: |
+          python - <<'PY'
+          import json
+          from canonical.runtime.acceptance_proof_transmuter_v1 import evaluate
+          load=lambda p: json.load(open(p,encoding="utf-8"))
+          protocols=load("canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json")
+          inp=load("canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json")
+          witness=load("canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json")
+          receipt=load("canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
+          assert witness["verified"] is True and witness["independent"] is True
+          assert witness["independent_transport_verification"]=="canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          assert receipt["public_verifier"]["conclusion"]=="success"
+          out=evaluate(protocols,inp)
+          assert out["status"]=="PASS", out
+          assert out["closed_family_count"]==4, out
+          assert out["open_family_count"]==15, out
+          row=next(r for r in out["families"] if r["family"]=="SUBAGENT_DELEGATION_AND_COORDINATION")
+          assert row["result_status"]=="PASS", row
+          assert row["closure_mode"]=="ABSOLUTE_DOMINANCE", row
+          assert row["witness_id"]=="DELEGATION_TEMPORAL_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1", row
+          print(json.dumps({
+            "status":"PASS",
+            "closed_family_count":out["closed_family_count"],
+            "open_family_count":out["open_family_count"],
+            "delegation":row,
+          },indent=2,sort_keys=True))
+          PY
+
+      - name: Assert zero replay and no direct promotion authority
+        run: |
+          python - <<'PY'
+          import json
+          t=json.load(open("canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json",encoding="utf-8"))
+          w=json.load(open("canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",encoding="utf-8"))
+          assert t["capability_credit_delta"]==0
+          assert t["family_credit_delta"]==0
+          assert t["incremental_spend_usd"]==0
+          assert t["fresh_terminal_evidence_consumed"]==0
+          assert t["terminal_replay_count"]==0
+          assert t["execution_authority"] is False
+          assert t["promotion_authority"] is False
+          assert w["promotion_authority"] is False
+          print("ZERO_REPLAY_NO_DIRECT_PROMOTION_AUTHORITY_PASS")
+          PY
