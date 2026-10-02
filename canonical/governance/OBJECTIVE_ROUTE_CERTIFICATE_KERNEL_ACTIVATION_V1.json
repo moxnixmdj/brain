@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OBJECTIVE_ROUTE_CERTIFICATE_KERNEL_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "INSTALLED_PENDING_INDEPENDENT_CI__COMMON_INVARIANTS_QUOTIENTED__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PASS__COMMON_INVARIANTS_QUOTIENTED__RESIDUAL_VALIDATORS_REQUIRED__ZERO_TERMINAL_CREDIT",
   "objective": "VERIFY_SHARED_STRUCTURAL_PREWAVE_INVARIANTS_ONCE_ACROSS_OBJECTIVE_ROUTES_THEN_RUN_ONLY_DOMAIN_SPECIFIC_RESIDUAL_VALIDATORS",
   "runtime": "canonical/runtime/objective_route_certificate_verifier.py",
   "tests": "canonical/tests/test_objective_route_certificate_verifier.py",
@@ -29,5 +29,9 @@
   "terminal_results_observed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_verification": "canonical/verification/OBJECTIVE_ROUTE_CERTIFICATE_KERNEL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "verified_public_pr": 692,
+  "verified_workflow_run_id": 36969544260,
+  "verified_workflow_job_id": 110720428197
 }
