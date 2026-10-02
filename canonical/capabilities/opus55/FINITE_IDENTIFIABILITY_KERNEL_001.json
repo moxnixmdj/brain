@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_IDENTIFIABILITY_KERNEL_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_CROSS_LANE_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "implementation": "canonical/runtime/finite_identifiability.py",
+  "implementation_blob_sha": "c2bf32dd1e22f00a2fa08b043aa8275a07c05bed",
+  "tests": "canonical/tests/test_finite_identifiability.py",
+  "tests_blob_sha": "d8c2858e80941bf342965d9ac682cf60dfe0d5b4",
+  "workflow": ".github/workflows/verify-finite-identifiability.yml",
+  "verification": {
+    "workflow_run_id": 36950637842,
+    "conclusion": "success",
+    "verified_main_head": "7bf4cb712f7594fcb581c210b25e79552fbbfeb9"
+  },
+  "owned_scope": [
+    "FINITE_FROZEN_HYPOTHESIS_SPACE_PLUS_PREDECLARED_EXPERIMENT_OUTCOMES",
+    "EXACT_VERSION_SPACE_FILTERING_FROM_OBSERVED_OUTCOMES",
+    "MINIMUM_WORST_CASE_DISCRIMINATOR_SELECTION_WITH_EXPECTED_REMAINING_AND_COST_TIEBREAKS",
+    "EXPLICIT_EQUIVALENCE_CLASSES_WHEN_AUTHORIZED_EXPERIMENTS_CANNOT_DISCRIMINATE",
+    "MODEL_FALSIFICATION_ON_UNMODELED_OR_INCONSISTENT_EVIDENCE"
+  ],
+  "cross_lane_consequence": {
+    "M3": "FINITE_CAPABILITY_TOOL_OR_WORKER_HYPOTHESES_WITH_EXPLICIT_PROBE_OUTCOME_MODELS",
+    "M5": "FINITE_CAUSAL_OR_REPAIR_EFFECT_HYPOTHESES_WITH_EXPLICIT_INTERVENTION_OR_OBSERVATION_OUTCOME_MODELS"
+  },
+  "exclusions": [
+    "NO_HYPOTHESIS_GENERATION",
+    "NO_EXPERIMENT_OUTCOME_MODEL_GENERATION",
+    "NO_CAUSAL_SEMANTIC_AUTHORITY",
+    "NO_SOURCE_TRUTH_INFERENCE",
+    "NO_SELECTION_BETWEEN_NONIDENTIFIABLE_EQUIVALENT_HYPOTHESES"
+  ],
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
