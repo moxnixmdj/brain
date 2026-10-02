@@ -1,0 +1,224 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CERTIFICATE_FRONTIER_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_SHARED_CERTIFICATE_FRONTIER__29_PREDICATES__ZERO_CREDIT",
+  "objective": "Quotient the current 29 unresolved Opus 5.5 atomic acceptance predicates by exact shared missing certificate obligations so the controller schedules missing truths rather than duplicative procedures.",
+  "authority": {
+    "predicate_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "evidence_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "action_hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+    "runtime": "canonical/runtime/terminal_certificate_cut_v1.py"
+  },
+  "unresolved_predicates": [
+    "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+    "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+    "VISION_DENSE_NONCHART_SCOPE",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "RECOVERY_TERMINAL_NONINFERIOR",
+    "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+    "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+    "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+    "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+    "FINANCE_UNCOVERED_SCOPE_AUDIT",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+    "CODING_TB4_GE_66_4",
+    "AUTOMATIONBENCH_GE_40",
+    "TB_SCIENCE_GE_58_7",
+    "LIVEBENCH_IF_GE_65_7",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "CODING_CURSORBENCH_GE_57_8",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822",
+    "HLE_TOOLS_GE_67_7",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "MYSTERYMECHANISM_GE_49_55"
+  ],
+  "certificates": [
+    {
+      "id": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+      "certificate_class": "MATCHED_SCOPE",
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "requires": [
+        "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+        "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
+      ],
+      "new_reality_units": 0,
+      "note": "Shared certificate means the same verified binding/scope-relation layer is required across these predicates; it does not assert the predicates themselves."
+    },
+    {
+      "id": "FINANCE_JUDGMENT_SOURCE_CERTIFICATE",
+      "certificate_class": "OPERATIVE_JUDGMENT_SOURCE",
+      "target_predicates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "requires": [
+        "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "UNKNOWN_DOMAIN_JUDGMENT_SOURCE_CERTIFICATE",
+      "certificate_class": "OPERATIVE_JUDGMENT_SOURCE",
+      "target_predicates": [
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "requires": [
+        "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "COMPOSITION_INTERFACE_RECEIPT_BINDING_CERTIFICATE",
+      "certificate_class": "COMPOSITION_SCOPED_RECEIPTS",
+      "target_predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "requires": [
+        "TWELVE_LITERAL_INTERFACES_BOUND_TO_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_RECEIPTS"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "TB4_ATTAINABLE_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "requires": [
+        "MACHINE_VERIFIED_TB4_ROUTE_UPPER_BOUND_GE_220"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "SHARED_PUBLIC_BENCHMARK_ABI_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "AUTOMATIONBENCH_GE_40",
+        "TB_SCIENCE_GE_58_7",
+        "LIVEBENCH_IF_GE_65_7"
+      ],
+      "requires": [
+        "COMPLETE_COMPARABLE_SCORE_PRODUCING_ROUTE_PER_FROZEN_PREDICATE"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "CODING_FRONTIER_PUBLIC_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "requires": [
+        "FRONTIERCODE_ROUTE_BOUND",
+        "CURSORBENCH_ROUTE_BOUND"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "PROFESSIONAL_ARTIFACT_PUBLIC_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "PROWORK_GDPVAL_GE_1846",
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "requires": [
+        "GDPVAL_AA_ROUTE_BOUND",
+        "AA_BRIEFCASE_PROWORK_ROUTE_BOUND",
+        "AA_BRIEFCASE_ARTIFACT_ROUTE_BOUND"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "HLE_PUBLIC_ROUTE_OR_SCOPE_COMPLETE_PROOF_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE_OR_PROOF",
+      "target_predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "requires": [
+        "HLE_CANONICAL_ROUTE_OR_UNCHANGED_PROTOCOL_SCOPE_COMPLETE_STRONGER_WITNESS"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "CHARTOGRAPHY_PUBLIC_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "CHARTOGRAPHY_TOOLS_GE_89"
+      ],
+      "requires": [
+        "CHARTOGRAPHY_DATASET_SCORER_ROUTE_CARRIER_THRESHOLD_CONTAMINATION_ATTAINABILITY_BOUND"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "OSWORLD_PUBLIC_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
+      "requires": [
+        "SAME_HARNESS_COMPARABLE_OSWORLD_2_1_PARTIAL_ROUTE_BOUND"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "FINANCE_PUBLIC_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61",
+        "FINANCE_AGENT_V2_GE_58_59"
+      ],
+      "requires": [
+        "FINANCE_ACCOUNTING_INDEX_ROUTE_BOUND",
+        "FINANCE_AGENT_V2_ROUTE_BOUND"
+      ],
+      "new_reality_units": 0
+    },
+    {
+      "id": "MYSTERYMECHANISM_PUBLIC_ROUTE_CERTIFICATE",
+      "certificate_class": "PUBLIC_BAR_ROUTE",
+      "target_predicates": [
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "requires": [
+        "MYSTERYMECHANISM_COMPARABLE_ROUTE_BOUND"
+      ],
+      "new_reality_units": 0
+    }
+  ],
+  "hard_rules": [
+    "CERTIFICATE_COVERAGE_IS_SCHEDULING_COVERAGE_NOT_ACCEPTANCE_PROOF",
+    "NO_SEMANTIC_EQUIVALENCE_MERGE_WITHOUT_EXACT_SHARED_PROPOSITION",
+    "NO_CERTIFICATE_OUTPUT_ALONE_GRANTS_PREDICATE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "RECOMPUTE_WHEN_UNRESOLVED_PREDICATE_SET_OR_CERTIFICATE_CANDIDATES_CHANGE",
+    "FRESH_REALITY_REMAINS_FORBIDDEN_UNLESS_SEPARATELY_AUTHORIZED_BY_EXISTING_MINIMUM_REALITY_GATES"
+  ],
+  "next": "RUN_EXACT_TERMINAL_CERTIFICATE_CUT__PRIORITIZE_SHARED_BINDING_SCOPE_RELATION_CERTIFICATE_AND_COMPOSITION_RECEIPT_AUTOBINDING__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
