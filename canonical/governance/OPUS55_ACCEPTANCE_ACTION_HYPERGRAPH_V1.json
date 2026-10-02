@@ -1,34 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__RANK26_STAGE_B_INDEPENDENT_VERIFICATION_FRONTIER__NO_CREDIT",
+  "status": "ACTIVE__RANK26_STAGE_C_BATCH5_LEASE_ACTIVE__EXECUTION_FRONTIER__NO_CREDIT",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
-    {
-      "id": "VERIFY_RANK26_VLLM_DEEPSEEK_STREAMING_STAGE_B_INDEPENDENTLY",
-      "action_class": "VERIFY_GATE",
-      "effect": "UNLOCKS",
-      "critical_path": true,
-      "new_reality_units": 0,
-      "target_predicates": [
-        "CODING_TB4_GE_66_4"
-      ],
-      "preconditions": [
-        {
-          "id": "RANK26_STAGE_A_INDEPENDENT_PASS",
-          "satisfied": true
-        },
-        {
-          "id": "RANK26_STAGE_B_SOURCE_AND_CONTRACT_FROZEN",
-          "satisfied": true
-        },
-        {
-          "id": "RANK26_TASK_EXECUTION_NOT_YET_CONSUMED",
-          "satisfied": true
-        }
-      ],
-      "notes": "Independent structural and mutation verification only. Public-runner PR 840. No task runtime execution or hidden verifier access."
-    },
     {
       "id": "EXECUTE_NEXT_CLEAN_TB4_PRECOMMITTED_TRIAL_BATCH",
       "action_class": "REALITY_QUERY",
@@ -42,7 +17,7 @@
       "preconditions": [
         {
           "id": "CURRENT_CLEAN_SAMPLE_STAGE_C_LEASE_ACTIVE",
-          "satisfied": false
+          "satisfied": true
         },
         {
           "id": "CURRENT_CARRIER_RUNTIME_REVALIDATED",
@@ -53,7 +28,10 @@
           "satisfied": true
         }
       ],
-      "notes": "For one clean resource-compatible frozen TB4 task, atomically precommit five isolated result-blind replicas before any replica result is visible. Frozen Brain configuration; no cross-trial state, tuning, replay, or task-specific learning propagation. Failed/unrun/contaminated slots score zero. Advances the 220-of-330 conservative threshold cut only after all staged task gates."
+      "notes": "Rank26 vllm-deepseek-streaming: execute exactly five precommitted result-blind Harbor replicas under canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json. Same frozen Brain route, zero retries, no cross-replica tuning; all five slots consumed regardless of result.",
+      "canonical_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json",
+      "current_task": "vllm-deepseek-streaming",
+      "current_rank": 26
     },
     {
       "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
@@ -155,7 +133,9 @@
     "date": "2026-10-02",
     "rank24": "CONTAMINATED_POST_STAGE_B__NO_STAGE_C__NO_REPLAY",
     "rank25": "INELIGIBLE_PREEXPOSURE__PRIOR_RUNNER_EXPOSURE",
-    "rank26": "STAGE_A_PASS__STAGE_B_SOURCE_FROZEN__INDEPENDENT_STAGE_B_VERIFICATION_PENDING__PR840"
+    "rank26": "INDEPENDENT_STAGE_B_PASS__STAGE_C_BATCH5_LEASE_ACTIVE__FIVE_RESULT_BLIND_REPLICAS_AUTHORIZED",
+    "stage_b_receipt": "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_STAGE_B_VERIFICATION_V1.json",
+    "stage_c_batch5_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",

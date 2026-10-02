@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_STAGE_C_RESULT_BLIND_BATCH_LEASE_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE__FIVE_REPLICAS_PRECOMMITTED__RESULT_BLIND__ZERO_INCREMENTAL_SPEND",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_MINI_SWE_SUPERPOWERS_V1",
+  "benchmark": "Terminal-Bench 4.0",
+  "benchmark_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+  "sample_rank": 26,
+  "task": "vllm-deepseek-streaming",
+  "task_identity_sha256": "93f678ab41f52d235ba137710bed150d4a5d0fcdf050efb842b76f8ea83b224c",
+  "session_id": "vllm-deepseek-streaming-20261002-stagec-batch5-v1",
+  "authority": [
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_STAGE_A_ADMISSION_V1.json",
+    "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_STAGE_B_VERIFICATION_V1.json",
+    "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_STAGE_B_CONTRACT_V1.json"
+  ],
+  "contamination_ledger": "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_CONTAMINATION_LEDGER_V1.json",
+  "brain_route": {
+    "harbor_agent": "canonical/runtime/harbor_brain_agent.py",
+    "harbor_agent_blob": "3d7d803bdd25df0379d81b360af3ea40da254771",
+    "coding_control_kernel": "canonical/runtime/coding_control_kernel_v1.py",
+    "coding_control_kernel_blob": "2b5cd4bebc28b8e7096f87aa63ffbb329a819057",
+    "composed_configuration": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+    "composed_configuration_blob": "d63d7656c7da293a7c22c32042a4f03f2d13593d",
+    "harbor_version": "0.23.0"
+  },
+  "batch_contract": {
+    "replica_count": 5,
+    "attempts_per_task": 5,
+    "precommit_all_replicas_before_first_result": true,
+    "frozen_configuration_across_replicas": true,
+    "cross_replica_state_sharing": false,
+    "cross_replica_tuning": false,
+    "cross_replica_task_specific_learning": false,
+    "retries_allowed": 0,
+    "replay_for_credit": false,
+    "every_replica_slot_consumed_on_start": true,
+    "failed_or_infrastructure_failed_slot_credit": 0,
+    "no_result_may_change_later_replica_configuration": true
+  },
+  "execution": {
+    "task_execution_authorized": true,
+    "execution_count_allowed": 5,
+    "execution_count_used": 0,
+    "terminal_verifier_count_allowed": 5,
+    "terminal_verifier_count_used": 0,
+    "hidden_verifier_execution_authorized": true,
+    "hidden_verifier_source_read_authorized": false,
+    "local_task_runtime_source_inspection_authorized": true,
+    "external_task_specific_discovery_authorized": false,
+    "result_observation_before_batch_precommit": false
+  },
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "runner": "ubuntu-24.04",
+    "cpus": 4,
+    "memory_mb_observed": 15989,
+    "task_resource_compatible": true,
+    "harbor_concurrency": 2,
+    "note": "All five attempts are part of one immutable Harbor job before execution; concurrency may be below five without permitting adaptation."
+  },
+  "threshold_accounting": {
+    "full_population_slots": 330,
+    "pass_lock_successes": 220,
+    "compatible_capacity": 270,
+    "this_batch_slots": 5,
+    "unavailable_contaminated_failed_or_unrun_credit": 0,
+    "this_batch_whole_family_credit": 0
+  },
+  "output_freeze_before_each_verifier": true,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "LAUNCH_ONE_IMMUTABLE_HARBOR_JOB_WITH_N_ATTEMPTS_5_AND_NO_RETRIES__COLLECT_RESULTS_ONLY_AFTER_JOB_COMPLETES__THEN_ATOMICALLY_ACCOUNT_FIVE_SLOTS"
+}
