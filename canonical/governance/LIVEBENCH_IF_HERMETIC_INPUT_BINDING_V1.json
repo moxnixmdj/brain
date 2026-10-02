@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREQUALIFICATION_INPUTS__NO_TERMINAL_CASE_CONTENT_READ__ADAPTER_VERIFICATION_PENDING",
+  "upstream_repository": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091"
+  },
+  "dataset": {
+    "repository": "livebench/instruction_following",
+    "revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "data_artifact_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "data_artifact_bytes": 537024,
+    "cases_opened_during_binding": 0
+  },
+  "python_packages": [
+    {
+      "name": "nltk",
+      "version": "3.10.3",
+      "wheel": "nltk-3.10.3-py3-none-any.whl",
+      "sha256": "ff9598a8e20518ee0d557745890cc4435b9578489e2dcbc69c4f81fa060caf7c",
+      "provenance": "https://pypi.org/project/nltk/"
+    },
+    {
+      "name": "emoji",
+      "version": "2.16.0",
+      "wheel": "emoji-2.16.0-py3-none-any.whl",
+      "sha256": "c4230d80640def9071599ff56b1b5950fe13a2a94c0da98c5deab12431b24330",
+      "provenance": "https://pypi.org/project/emoji/"
+    },
+    {
+      "name": "syllapy",
+      "version": "0.7.2",
+      "wheel": "syllapy-0.7.2-py3-none-any.whl",
+      "sha256": "198a7413033c32d7b31e21962efb3f284bcea80d3346e954b938ca1ebe6bee20",
+      "provenance": "https://pypi.org/project/syllapy/"
+    }
+  ],
+  "nltk_data": {
+    "repository": "nltk/nltk_data",
+    "commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2a",
+    "artifacts": [
+      {
+        "path": "packages/tokenizers/punkt.zip",
+        "git_blob_sha": "da7ffbd1e6fd6cc5c2f6879c2d4da23c7691944c",
+        "bytes": 13905355
+      },
+      {
+        "path": "packages/tokenizers/punkt_tab.zip",
+        "git_blob_sha": "5e5ff6137d5ee6025e400d1c3a7b21914c48b635",
+        "bytes": 4319076
+      },
+      {
+        "path": "packages/corpora/stopwords.zip",
+        "git_blob_sha": "56d35b5d204d64480f71edc0f5f82aebce6730b6",
+        "bytes": 37733
+      }
+    ]
+  },
+  "dead_dependencies": [
+    "spacy",
+    "en_core_web_sm"
+  ],
+  "adapter": "canonical/runtime/livebench_if_response_adapter.py",
+  "guards": [
+    "NO_TERMINAL_CASE_CONTENT_READ_DURING_PREQUALIFICATION",
+    "QUESTION_ID_SET_MUST_MATCH_EXACTLY_BEFORE_SCORING",
+    "DUPLICATE_IDS_AND_NONSTRING_RESPONSES_FAIL_CLOSED",
+    "NO_EXTERNAL_MODEL_JUDGE"
+  ],
+  "remaining": [
+    "VERIFY_ADAPTER_GREEN",
+    "VERIFY_CURRENT_58_CHECKER_GOOD_BAD_BOUNDARIES"
+  ],
+  "incremental_spend_usd": 0,
+  "fresh_terminal_evidence_consumed": 0
+}
