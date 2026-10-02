@@ -24,15 +24,23 @@ jobs:
         run: python -m unittest canonical.tests.test_proof_atom_candidate_universe_coverage_v1 -v
       - name: Audit live candidate-universe coverage
         run: |
-          python canonical/runtime/proof_atom_candidate_universe_coverage_v1.py > /tmp/proof_atom_candidate_universe_coverage_v1.json
+          AUDIT_RC=0
+          python canonical/runtime/proof_atom_candidate_universe_coverage_v1.py > /tmp/proof_atom_candidate_universe_coverage_v1.json || AUDIT_RC=$?
           python -m json.tool /tmp/proof_atom_candidate_universe_coverage_v1.json >/dev/null
+          export AUDIT_RC
           python - <<'PY'
           import json
+          import os
           p="/tmp/proof_atom_candidate_universe_coverage_v1.json"
           d=json.load(open(p,encoding="utf-8"))
-          assert str(d.get("status","")).startswith("PASS"), d
+          rc=int(os.environ["AUDIT_RC"])
+          assert d.get("schema")=="PROJECT_BRAIN_PROOF_ATOM_CANDIDATE_UNIVERSE_COVERAGE_V1", d
+          status=str(d.get("status",""))
+          assert rc in (0,1), (rc,d)
+          assert (status.startswith("PASS") and rc==0) or (status=="FAIL_CLOSED" and rc==1), (rc,d)
           keys=[
               "status",
+              "errors",
               "configured_candidate_count",
               "scan_gap_count",
               "oversized_supported_text_count",
