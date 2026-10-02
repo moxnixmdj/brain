@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_UNIVERSE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_OUTER_UNIVERSE__GLOBAL_EXACT_CUT_NOT_READY__FRESH_TERMINAL_EVIDENCE_BLOCKED",
+  "status": "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__GLOBAL_EXACT_CUT_NOT_READY__FRESH_TERMINAL_EVIDENCE_BLOCKED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "global_obligation_graph": {
@@ -10,7 +10,7 @@
     },
     "global_terminal_proof_cut": {
       "path": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
-      "blob_sha": "aef8403f9265b152996efd652b1fd24f55fc3f98"
+      "blob_sha": "5743a9ab0379cd5d93cd5cf56c4ff5399e458a07"
     },
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
@@ -379,8 +379,8 @@
       "id": "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS",
       "hole_type": "?S",
       "predicate": "every_required_behavior_contracted",
-      "current": false,
-      "closed": false
+      "current": true,
+      "closed": true
     },
     {
       "id": "G_ADMISSIBLE_PROOF_COMPLETENESS",
@@ -455,10 +455,8 @@
   },
   "global_cut": {
     "exact_cut_ready": false,
-    "reason": "OPEN_QUESTION_S_OR_MECHANISM_HOLES_EXIST_OUTSIDE_LOCAL_V6_SCOPE",
-    "open_specification_holes": [
-      "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS"
-    ],
+    "reason": "OPEN_MECHANISM_HOLES_EXIST_OUTSIDE_LOCAL_V6_SCOPE",
+    "open_specification_holes": [],
     "open_mechanism_holes": [
       "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
       "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
@@ -499,7 +497,6 @@
     "fresh_terminal_evidence_allowed": false,
     "rule": "NO_NEW_CLEAN_TERMINAL_EVIDENCE_EXPOSURE_UNTIL_GLOBAL_OUTER_UNIVERSE_HAS_NO_OPEN_?S_OR_?M_AND_EXACT_GLOBAL_MINIMUM_REALITY_CUT_IS_FROZEN_AND_VERIFIED",
     "immediate_zero_reality_work": [
-      "CLOSE_G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS_FROM_EXISTING_REGISTRY_EVIDENCE_OR_EXPLICITLY_LOCALIZE_MISSING_CONTRACTS",
       "SATURATE_M2_M3_M4_M5_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS",
       "DEDUPLICATE_SHARED_BEHAVIORAL_LEAVES_ACROSS_17_OPEN_FAMILY_PROOFS",
       "RECOMPUTE_OUTER_GLOBAL_MINIMUM_REALITY_CUT"
@@ -510,7 +507,7 @@
     "families_closed": 2,
     "families_open_proof": 17,
     "shared_mechanism_lanes": 6,
-    "open_specification_holes": 1,
+    "open_specification_holes": 0,
     "open_mechanism_lanes": 4
   },
   "incremental_spend_usd": 0,

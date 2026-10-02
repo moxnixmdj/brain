@@ -17,7 +17,7 @@
     "open_family_count": 17,
     "terminal_predicates": {
       "exact_target_family_count_19": true,
-      "every_required_behavior_contracted": false,
+      "every_required_behavior_contracted": true,
       "every_required_behavior_has_admissible_proof": false,
       "donor_dependent_required_behaviors_zero": false,
       "unexplained_required_behaviors_zero": false,
@@ -30,7 +30,7 @@
       "proof_bundle_frozen": false
     },
     "counters": {
-      "uncontracted_required_behaviors": null,
+      "uncontracted_required_behaviors": 0,
       "unproved_required_behaviors": null,
       "donor_dependent_required_behaviors": null,
       "unresolved_verifier_mutations": null,
@@ -291,7 +291,7 @@
     "disposition": "PRESERVE_SOURCE_AS_SPENT_EVIDENCE__NO_EXECUTION__NO_AUTOMATIC_NEXT_RANK",
     "spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   },
-  "next_action": "SATURATE_GLOBAL_?S_AND_M2_M3_M4_M5_?M_FROM_EXISTING_EVIDENCE__DEDUPLICATE_SHARED_LEAVES__FREEZE_AND_VERIFY_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__ONLY_THEN_SPEND_ANY_NEW_CLEAN_TERMINAL_EVIDENCE",
+  "next_action": "SATURATE_M2_M3_M4_M5_?M_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__DEDUPLICATE_SHARED_LEAVES__FREEZE_AND_VERIFY_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__ONLY_THEN_SPEND_NEW_CLEAN_TERMINAL_EVIDENCE",
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
@@ -320,5 +320,10 @@
       "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
     ],
     "reason": "M2_M3_M4_M5_AND_GLOBAL_TERMINAL_GATES_REMAIN_OUTSIDE_LOCAL_V6_MINIMIZATION__A_GLOBAL_COMBINED_OBSERVATION_MAY_DOMINATE_LOCAL_BATCH_SPEND"
+  },
+  "specification_closure": {
+    "status": "VERIFIED_CLOSED_AT_CURRENT_19_FAMILY_ENVELOPE",
+    "receipt": "canonical/verification/BEHAVIOR_CONTRACT_COMPLETENESS_VERIFICATION_20261002_V1.json",
+    "invalidation": "ANY_TARGET_ENVELOPE_FAMILY_OR_BEHAVIOR_REGISTRY_CHANGE"
   }
 }
