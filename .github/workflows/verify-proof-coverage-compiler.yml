@@ -4,8 +4,10 @@ on:
     branches: [main]
     paths:
       - canonical/runtime/proof_coverage_compiler.py
+      - canonical/runtime/build_current_proof_coverage_manifest.py
       - canonical/tests/test_proof_coverage_compiler.py
-      - canonical/governance/CURRENT_PROOF_COVERAGE_MANIFEST_V1.json
+      - canonical/tests/test_build_current_proof_coverage_manifest.py
+      - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
       - .github/workflows/verify-proof-coverage-compiler.yml
   workflow_dispatch:
 permissions:
@@ -18,5 +20,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_proof_coverage_compiler
-      - run: python canonical/runtime/proof_coverage_compiler.py canonical/governance/CURRENT_PROOF_COVERAGE_MANIFEST_V1.json
+      - run: python -m unittest -v canonical.tests.test_proof_coverage_compiler canonical.tests.test_build_current_proof_coverage_manifest
+      - run: python canonical/runtime/build_current_proof_coverage_manifest.py . > /tmp/current-proof-cover.json
+      - run: python canonical/runtime/proof_coverage_compiler.py /tmp/current-proof-cover.json
