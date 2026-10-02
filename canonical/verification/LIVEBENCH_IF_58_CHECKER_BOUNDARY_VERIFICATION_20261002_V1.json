@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_58_CHECKER_BOUNDARY_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES__MERGED_PUBLIC_RUNNER__NO_TERMINAL_CASE_CONTENT",
+  "upstream": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "checker_count": 58
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 497,
+    "head_sha": "cdeb017489a952da203fc237420b8c06c6dd5f51",
+    "merge_commit": "9411479d5bbb53a6bc9823bdb03207c004e36552",
+    "workflow_run_id": 36956380345,
+    "job_id": 110680125186
+  },
+  "result": {
+    "passed": 58,
+    "failed": 0,
+    "all_pass": true,
+    "terminal_case_content_read": false
+  },
+  "verification_scope": [
+    "EVERY_CURRENT_INSTRUCTION_DICT_CHECKER_HAS_ONE_PREDECLARED_SYNTHETIC_PASS_BOUNDARY",
+    "EVERY_CURRENT_INSTRUCTION_DICT_CHECKER_HAS_ONE_PREDECLARED_SYNTHETIC_FAIL_BOUNDARY",
+    "EXACT_PINNED_UPSTREAM_VERIFIER_SOURCE",
+    "PINNED_NLTK_DATA_REVISION",
+    "DEAD_SPACY_BOOTSTRAP_NOT_REQUIRED"
+  ],
+  "limitations": [
+    "NOT_TERMINAL_BENCHMARK_RESULTS",
+    "DOES_NOT_BY_ITSELF_PROVE_FULL_REAL_CASE_DISTRIBUTION_COVERAGE",
+    "DOES_NOT_GRANT_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
