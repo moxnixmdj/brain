@@ -50,8 +50,8 @@ def _failed_checks(row: Mapping[str, Any]) -> list[dict[str, Any]] | None:
             return None
         if not passed and not evidence:
             return None
-        semantics = item.get("failure_semantics", "DIRECT_CONTRACT")
-        if semantics not in {"DIRECT_CONTRACT", "DERIVED_UPSTREAM"}:
+        semantics = item.get("failure_semantics")
+        if not passed and semantics not in {"DIRECT_CONTRACT", "DERIVED_UPSTREAM"}:
             return None
         if not passed:
             out.append({
