@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_SCOPE_EQUIVALENT_PROOF_SURFACE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PROOF_SURFACE__PROTOCOL_VERIFICATION_PENDING__ZERO_TERMINAL_EVIDENCE",
+  "replaces_if_admitted": "Vals MysteryMechanism proprietary evaluation",
+  "represented_families": [
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+  ],
+  "frozen_behavior_contracts": [
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+  ],
+  "protocol": {
+    "generator": "canonical/runtime/blinded_unknown_mechanism_suite.py",
+    "terminal_seed_policy": "VERIFIER_ONLY_SEED_COMMITTED_BY_HASH_BEFORE_BRAIN_CASE_EXPOSURE__SEED_VALUE_WITHHELD_FROM_OPERATIVE_ROUTE",
+    "public_information": "case id, finite input/output domains, query budget, query interface",
+    "hidden_information": "mechanism family, parameters, verifier seed, hidden evaluation points",
+    "scoring": "exact prediction accuracy on verifier-only hidden evaluation points",
+    "query_cost_accounting": "hard per-case query budget; duplicates forbidden",
+    "contamination_rule": "terminal seed and hidden evaluation points must not be present in Brain route, logs, prompts, or repository-visible execution inputs before final answer"
+  },
+  "mechanism_families": [
+    "AFFINE_MOD",
+    "XOR_ROT",
+    "PIECEWISE_AFFINE"
+  ],
+  "prequalification_claim_if_tests_pass": [
+    "BLINDED_DETERMINISTIC_UNKNOWN_MECHANISM_SUITE_EXISTS",
+    "HIDDEN_GROUND_TRUTH_IS_SEPARATED_FROM_OPERATIVE_BRAIN_VIEW",
+    "QUERY_BUDGET_AND_EXACT_SCORING_FAIL_CLOSED",
+    "NO_PRIVATE_PROVIDER_OR_MODEL_JUDGE_REQUIRED"
+  ],
+  "explicitly_not_claimed": [
+    "OPUS55_EQUAL_OR_BETTER_UNKNOWN_DOMAIN_CAPABILITY",
+    "TERMINAL_T3_PASS",
+    "BEHAVIORAL_SCOPE_EQUIVALENCE_COMPLETE",
+    "ANY_FAMILY_CREDIT"
+  ],
+  "admission_remaining": [
+    "INDEPENDENT_PROTOCOL_VERIFICATION",
+    "FREEZE_TERMINAL_POPULATION_SIZE_CASE_FAMILY_MIX_QUERY_BUDGET_METRIC_AND_CONFIDENCE_RULE",
+    "MAP_EACH_REQUIRED_BEHAVIORAL_LEAF_TO_OBSERVABLE_SUITE_MUTATIONS",
+    "FREEZE_BRAIN_ADAPTER_AND_TERMINAL_SEED_COMMITMENT_PROCESS",
+    "USE_FINITE_POPULATION_PROOF_OR_EXHAUSTIVE_RUN_ONLY_AFTER_PREWAVE_ADMISSION"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
