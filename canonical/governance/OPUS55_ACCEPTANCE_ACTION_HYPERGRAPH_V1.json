@@ -46,11 +46,12 @@
         },
         {
           "id": "MATCHED_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_INDEPENDENT_PASS",
-          "satisfied": false,
-          "evidence": "canonical/governance/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1.json"
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "note": "Independent public runner PR914 verifies all 9 normalized witness sources contamination-admissible over four exact source objects; zero semantic credit."
         }
       ],
-      "notes": "Witness catalog identity is independently verified, but the implication algebra remains fail-closed until explicit witness-to-target atom/metric bindings and contamination-clean admissibility are independently verified. Catalog normalization alone grants no semantic edge, scope relation, metric bound, or acceptance credit."
+      "notes": "Witness catalog identity and contamination admissibility are independently verified. Implication algebra remains fail-closed only on explicit witness-to-target atom/metric bindings. Catalog identity or contamination cleanliness alone grants no semantic edge, scope relation, metric bound, or acceptance credit."
     },
     {
       "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
@@ -348,8 +349,10 @@
     "matched_brain_witness_normalization": "OPEN__REQUIRED_BEFORE_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
     "brain_witness_normalization": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_WITNESSES__ZERO_SEMANTIC_CREDIT",
     "brain_witness_normalization_verification": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "protocol_implication_gate": "FAIL_CLOSED__CATALOG_PASS__TARGET_ATOM_METRIC_BINDINGS_OPEN__CONTAMINATION_ADMISSIBILITY_OPEN",
-    "protocol_implication_gate_refinement": "canonical/governance/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1.json"
+    "protocol_implication_gate": "FAIL_CLOSED__CATALOG_AND_CONTAMINATION_PASS__TARGET_ATOM_METRIC_BINDINGS_OPEN",
+    "protocol_implication_gate_refinement": "canonical/governance/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1.json",
+    "brain_witness_contamination_admissibility": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_OF_9_WITNESSES__FOUR_EXACT_SOURCE_OBJECTS__ZERO_SEMANTIC_CREDIT",
+    "brain_witness_contamination_admissibility_verification": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
