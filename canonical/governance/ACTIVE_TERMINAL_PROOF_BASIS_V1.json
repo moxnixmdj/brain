@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__TERMINAL_WAVE_AUTHORIZED__ZERO_TERMINAL_RESULTS",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__11_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -38,11 +38,15 @@
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
       "portfolio": "T0",
-      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "proof_state": "PREWAVE_REOPENED__CURRENT_SOURCE_ONLY_CANDIDATE_FALSIFIED_BY_RENDER_EQUIVALENT_SVG_SOURCE_STRUCTURE_MUTATION__ANTI_SHORTCUT_REPAIR_REFREEZE_REVERIFY_REQUIRED",
       "route_requirement": "END_TO_END_DRAWING_TO_SOLID_WITH_HIDDEN_GLOBAL_GEOMETRY_ORACLE_AND_IDENTIFIABILITY_GATE",
-      "blockers": [],
+      "blockers": [
+        "CAD_RENDER_EQUIVALENT_SOURCE_STRUCTURE_ANTISHORTCUT_FAILURE",
+        "CAD_CANDIDATE_DEPENDENCY_CONE_REFREEZE_AFTER_REPAIR",
+        "CAD_POST_REFREEZE_BINDING_REVALIDATION_AND_INDEPENDENT_VERIFICATION"
+      ],
       "route": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json",
-      "candidate": "canonical/runtime/cad_orthographic_information_safe_candidate.py",
+      "candidate": "canonical/runtime/cad_t0_route_specific_candidate_v1.py",
       "independent_preflight": "canonical/verification/CAD_ORTHOGRAPHIC_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "terminal_route": "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json",
       "blocker_reconciliation": "canonical/reasoning/2026-10-02_CAD_ZERO_REALITY_BLOCKER_RECONCILIATION_V1.json",
@@ -68,12 +72,13 @@
       "candidate_contamination_rule": "PRE_BRIDGE_FREEZE_IS_SPENT_DIAGNOSTIC_ONLY_AFTER_RUNTIME_CHANGE__PROMOTION_REQUIRES_FRESH_CLEAN_REFREEZE_AND_POST_FREEZE_CASES",
       "positioned_ocr_bridge_verification": "canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "positioned_ocr_bridge_state": "CLOSED_PREWAVE_INTERFACE_COMPONENT",
-      "prewave_admissible": true,
+      "prewave_admissible": false,
       "clean_candidate_refreeze": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V2.json",
       "post_refreeze_binding": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json",
       "post_refreeze_independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "terminal_results_observed": 0,
-      "fresh_terminal_evidence_consumed": 0
+      "fresh_terminal_evidence_consumed": 0,
+      "antishortcut_falsification": "canonical/verification/CAD_T0_SOURCE_STRUCTURE_ANTISHORTCUT_FALSIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
@@ -331,8 +336,8 @@
   ],
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 12,
-  "execution_authority": true,
-  "next": "EXECUTE_T0_T1_T2_T3_IN_PARALLEL_ONCE_UNDER_FROZEN_POST_FREEZE_SELECTION_PROTOCOL",
+  "execution_authority": false,
+  "next": "REPAIR_CAD_RENDER_EQUIVALENT_ANTI_SHORTCUT_FAILURE__REFREEZE_AND_REVERIFY_CAD__RECOMPUTE_PREQUALIFICATION__NO_TERMINAL_BEACON_BEFORE_12_OF_12",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
