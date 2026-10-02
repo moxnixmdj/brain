@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V4",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_RECONCILIATION__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__2_OF_19_ACCEPTANCE_CALIBRATED__17_PENDING__ZERO_NEW_REALITY",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+  "reason": "Canonical acceptance transmuter now fails closed when finite empirical perfect samples lack independent exact/exhaustive/universal protocol-scope completeness. Historical V3 remains a valid record under the superseded proof law but is not current authority.",
+  "exact_brain_blobs": {
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py": "73b0b27644e0fa0d89ff8fbdb51005c20eae3632",
+    "canonical/runtime/acceptance_proof_transmuter_v1.py": "39b5611e53485674b29e2a05da91b89801bc5aa6",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+    "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json": "96052a6b5178305b37a2526fb25c3f53fa33b9b5",
+    "canonical/governance/OPUS55_ACCEPTANCE_CALIBRATION_V2.json": "d55c90c2ba938edb8b89ea2e9af4510f0c5a2c3d",
+    "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py": "74c1ec7c0b95921ba1c564ae0f2d62f27d289c3f"
+  },
+  "result": {
+    "target_family_count": 19,
+    "behavioral_pass_family_count": 19,
+    "acceptance_calibrated_family_count": 2,
+    "acceptance_pending_family_count": 17,
+    "acceptance_calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+    ],
+    "reopened_pending_families": [
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
+    ],
+    "terminal_goal_acceptance_closed": false
+  },
+  "preserved_evidence": {
+    "terminal_execution": "3352/3352_PASS",
+    "behavioral_families": "19/19_PASS",
+    "tool_discovery_sample": "180/180_VALID_FOR_EXECUTED_SAMPLE_ONLY",
+    "delegation_sample": "132/132_VALID_FOR_EXECUTED_SAMPLE_ONLY"
+  },
+  "proof_law": {
+    "absolute_dominance_scope_firewall": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "rule": "FINITE_SAMPLE_SUCCESS_IS_NOT_A_PROTOCOL_WIDE_BOUND",
+    "admissible_scope_completeness": [
+      "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+      "EXHAUSTIVE_FINITE_SUPERSET",
+      "UNIVERSAL_FORMAL_SCOPE_PROOF"
+    ]
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V4_REDUCTION__THEN_RECONCILE_CURRENT_TERMINAL_AUTHORITY_AND_INVALIDATE_OWNERSHIP_PROMOTIONS_DEPENDENT_ON_SUPERSEDED_4_OF_19_ACCEPTANCE"
+}
