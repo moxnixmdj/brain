@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_TERMINAL_POPULATION_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "PRE_BEACON_FROZEN__REGISTRY_TERMINAL_ACCEPTANCE_MODE_BOUND__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+  "exact_blobs": {
+    "candidate": "79d3896818b03223348f05adf4fdcd574f6f355e",
+    "independent_oracle": "5d92b1360fbb1bb27baacc8a04adb3744abf690c",
+    "terminal_population_generator": "880fff9818296b2f2e2811e5853885310fe276c6",
+    "scope_gate_input": "fc2e739789825bba5f30da56c6896de11678b6e8",
+    "scope_gate_receipt": "5325382e88f003b5685d9da13df321c23829174f",
+    "normalized_rule_verification": "1d6159334bf8e7067f5cb8d31ae0f25b7bb473c3",
+    "population_protocol": "adc413a2127141a1bc032149967eb07b86e0fde7"
+  },
+  "population": {
+    "sample_count": 2000,
+    "generator": "canonical/runtime/structured_method_terminal_population_v1.py",
+    "route_population_version": "STRUCTURED_METHOD_TERMINAL_POPULATION_V1",
+    "case_id_rule": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001::STRUCTURED_METHOD_TERMINAL_POPULATION_V1::slot::<0..1999>",
+    "post_freeze_beacon": null,
+    "seed_rule": "uint64_be(first_8_bytes(SHA256('PROJECT_BRAIN_TERMINAL_V2\\0'+commitment+'\\0'+post_freeze_beacon+'\\0'+case_id)))",
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "replay_for_tuning": false
+  },
+  "acceptance": {
+    "rule": "ALL_2000_CASES_PASS_INDEPENDENT_STRUCTURAL_ORACLE__ZERO_CASE_REPLACEMENT__ZERO_TUNING_REPLAY",
+    "required_checks": [
+      "ALL_APPLICABLE_REQUIREMENTS_HAVE_CONSUMERS",
+      "ALL_EXCLUDED_REQUIREMENTS_HAVE_JUSTIFIED_REASONS",
+      "ALL_INPUT_EDGES_PRESENT",
+      "DEPENDENCY_GRAPH_ACYCLIC_AND_COMPLETE",
+      "DECLARED_INPUT_TYPE_DIMENSION_CONTRACTS_HOLD",
+      "OUTPUT_TYPE_DIMENSION_DECLARATIONS_PRESERVED",
+      "DECLARED_INVARIANTS_PRESERVED",
+      "ALL_REQUIRED_OUTPUTS_TRACED",
+      "EDGE_DELETION_OR_REWIRE_DETECTABLE"
+    ],
+    "allowed_failed_cases": 0,
+    "case_local_execution_failure_counts_as_failure": true,
+    "terminal_acceptance_proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+    "ceiling_definition": "100_PERCENT_MACHINE_CHECKED_STRUCTURAL_CORRECTNESS_ON_FROZEN_SCOPE_EQUIVALENT_NORMALIZED_RULE_GRAPH_BEHAVIOR",
+    "ceiling_reason": "THE_SCOPE_GATE_PROVES_ARBITRARY_FINITE_NORMALIZED_RULE_GRAPH_COVERAGE_AT_THE_DECLARED_CONTRACT_BOUNDARY_AND_THE_INDEPENDENT_ORACLE_RECONSTRUCTS_EVERY_LOAD_BEARING_STRUCTURAL_CONSEQUENCE"
+  },
+  "scope_gate": {
+    "status": "INDEPENDENT_PASS__ADMISSIBLE_SUBSTITUTION__ZERO_UNRESOLVED_DIMENSIONS",
+    "input": "canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+    "receipt": "canonical/verification/STRUCTURED_METHOD_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "boundary": {
+    "owned": "REQUIREMENT_TO_INTERMEDIATE_TO_OUTPUT_GRAPH_MATERIALIZATION_AND_STRUCTURAL_ACCEPTANCE_AFTER_RULE_NORMALIZATION",
+    "upstream": "SEMANTIC_EXTRACTION_AND_NORMALIZATION_OF_UNSTATED_OR_IMPLICIT_RULES",
+    "operator_semantics": "EXPLICIT_NORMALIZED_RULE_SIGNATURE_INPUT__NOT_INFERRED_BY_THIS_ROUTE",
+    "target_weakened": false
+  },
+  "information_boundary": {
+    "candidate_receives_hidden_oracle": false,
+    "candidate_receives_reference_solution": false,
+    "hidden_oracle_reconstructs_graph_from_same_public_normalized_source": true
+  },
+  "dependency_mode": "ZERO_INCREMENTAL_SPEND__BRAIN_OWNED_CANDIDATE__INDEPENDENT_ORACLE",
+  "pre_beacon_frozen": true,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "proof_mode_basis": "MACHINE_CHECKED_SCOPE_EQUIVALENT_STRUCTURAL_PROOF",
+  "terminal_acceptance_mode_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json::terminal_acceptance_proof_modes"
+}
