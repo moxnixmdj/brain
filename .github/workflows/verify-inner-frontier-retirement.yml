@@ -1,0 +1,53 @@
+name: Verify inner frontier retirement
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json
+      - canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json
+      - canonical/governance/ATOMIC_FRONTIER_TRANSACTION_V1.json
+      - canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json
+      - .github/workflows/verify-inner-frontier-retirement.yml
+  workflow_dispatch:
+
+concurrency:
+  group: inner-frontier-retirement-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Fail closed on retired inner-frontier work
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          L=lambda p: json.loads(Path(p).read_text())
+          u=L("canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json")
+          h=L("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json")
+          a=L("canonical/governance/ATOMIC_FRONTIER_TRANSACTION_V1.json")
+          o=L("canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json")
+          assert u["active_zero_reality_mechanism_blockers"] == []
+          assert u["proof_only_obligations"] == ["M0A","M1A","M1B"]
+          assert "FINISH_FROZEN_M0A" not in u["next"]
+          assert "OUTER_SHARED_S0_G0_FRONTIER" in u["next"]
+          assert h["residual_action_universe_v2"]["status"] == u["status"]
+          assert h["residual_action_universe_v2"]["active_zero_reality_mechanism_blockers"] == []
+          assert a["current_frontier_phase"] == "OUTER_EXACT_FOUR_PORTFOLIO_CUT_FROZEN__SHARED_S0_G0_ROUTE_CLOSURE_ONLY"
+          assert a["atomicity_enforcement"]["material_state_write"] == "ONE_SQUASHED_MAIN_COMMIT_PER_CAUSAL_FRONTIER_TRANSACTION"
+          assert o["exact_minimum"] is True and o["observation_count"] == 4
+          assert o["execution_authority"] is False
+          shared=o["mechanism_state"]["shared_cross_lane_open"]
+          assert "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL" in shared
+          assert "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS" in shared
+          print("INNER_FRONTIER_RETIRED__OUTER_S0_G0_AUTHORITY_CONSISTENT")
+          PY
