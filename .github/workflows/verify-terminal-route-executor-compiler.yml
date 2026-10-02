@@ -27,12 +27,33 @@ jobs:
         with:
           python-version: "3.11"
       - name: Unit tests
-        run: python -m unittest -v canonical.tests.test_terminal_route_executor_compiler
-      - name: Compile live route plan without consuming terminal evidence
+        id: unit
+        continue-on-error: true
         run: |
-          python canonical/runtime/terminal_route_executor_compiler.py . --output /tmp/terminal-route-plan.json || true
+          set -o pipefail
+          python -m unittest -v canonical.tests.test_terminal_route_executor_compiler 2>&1 | tee /tmp/unit-tests.txt
+      - name: Compile live route plan without consuming terminal evidence
+        id: live
+        continue-on-error: true
+        run: |
+          python canonical/runtime/terminal_route_executor_compiler.py . --output /tmp/terminal-route-plan.json > /tmp/compiler-stdout.txt 2>&1
+      - name: Publish diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminal-route-compiler-diagnostics
+          path: |
+            /tmp/unit-tests.txt
+            /tmp/terminal-route-plan.json
+            /tmp/compiler-stdout.txt
+          if-no-files-found: warn
+      - name: Verify invariants and expose exact live state
+        if: always()
+        run: |
           python - <<'PY'
-          import json
+          import json, pathlib
+          unit = pathlib.Path('/tmp/unit-tests.txt').read_text() if pathlib.Path('/tmp/unit-tests.txt').exists() else ''
+          assert 'FAILED (' not in unit and 'ERROR' not in unit, unit
           p=json.load(open('/tmp/terminal-route-plan.json'))
           assert p['terminal_results_observed']==0
           assert p['fresh_terminal_evidence_consumed']==0
@@ -46,5 +67,6 @@ jobs:
             'direct_population_count':p['direct_population_count'],
             'multiplex_instrumentation_count':p['multiplex_instrumentation_count'],
             'unbound_executor_contracts':p['unbound_executor_contracts'],
+            'errors':p['errors'],
           },sort_keys=True))
           PY
