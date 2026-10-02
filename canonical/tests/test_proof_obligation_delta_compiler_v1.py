@@ -47,7 +47,7 @@ def base():
                 "relation": "EXACT",
                 "verified": True,
                 "independent": True,
-                "receipt": "receipt://scope/1",
+                "receipt": {"path": "canonical/verification/scope1.json", "git_blob_sha": SHA_C},
             },
             {
                 "witness_component": "w_recovery",
@@ -55,7 +55,7 @@ def base():
                 "relation": "EXACT",
                 "verified": True,
                 "independent": True,
-                "receipt": "receipt://scope/2",
+                "receipt": {"path": "canonical/verification/scope2.json", "git_blob_sha": SHA_D},
             },
         ],
         "atom_bindings": [
@@ -64,14 +64,14 @@ def base():
                 "target_atom": "A",
                 "verified": True,
                 "independent": True,
-                "receipt": "receipt://atom/a",
+                "receipt": {"path": "canonical/verification/atom-a.json", "git_blob_sha": SHA_C},
             },
             {
                 "witness_atom": "WB",
                 "target_atom": "B",
                 "verified": True,
                 "independent": True,
-                "receipt": "receipt://atom/b",
+                "receipt": {"path": "canonical/verification/atom-b.json", "git_blob_sha": SHA_D},
             },
         ],
         "invariant_bindings": [
@@ -80,7 +80,7 @@ def base():
                 "target_invariant": "I",
                 "verified": True,
                 "independent": True,
-                "receipt": "receipt://invariant/i",
+                "receipt": {"path": "canonical/verification/invariant-i.json", "git_blob_sha": SHA_C},
             }
         ],
         "metric_bindings": [
@@ -89,14 +89,14 @@ def base():
                 "target_metric": "success",
                 "verified": True,
                 "independent": True,
-                "receipt": "receipt://metric/success",
+                "receipt": {"path": "canonical/verification/metric-success.json", "git_blob_sha": SHA_C},
             },
             {
                 "witness_metric": "w_misses",
                 "target_metric": "misses",
                 "verified": True,
                 "independent": True,
-                "receipt": "receipt://metric/misses",
+                "receipt": {"path": "canonical/verification/metric-misses.json", "git_blob_sha": SHA_D},
             },
         ],
     }
@@ -152,6 +152,23 @@ class ProofObligationDeltaCompilerTests(unittest.TestCase):
         out = compile_delta(d)
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("SCOPE_BINDING_NOT_INDEPENDENTLY_VERIFIED:0", out["errors"])
+
+    def test_non_content_addressed_receipt_fails_closed(self):
+        d = base()
+        d["scope_bindings"][0]["receipt"] = "receipt://self-asserted"
+        out = compile_delta(d)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("SCOPE_BINDING_RECEIPT_NOT_CONTENT_ADDRESSED:0", out["errors"])
+
+    def test_duplicate_target_atom_binding_fails_closed(self):
+        d = base()
+        duplicate = copy.deepcopy(d["atom_bindings"][0])
+        duplicate["witness_atom"] = "WB"
+        duplicate["receipt"] = {"path": "canonical/verification/duplicate.json", "git_blob_sha": SHA_D}
+        d["atom_bindings"].append(duplicate)
+        out = compile_delta(d)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("TARGET_ATOM_MULTIPLY_BOUND:A", out["errors"])
 
     def test_unbound_scope_provenance_fails_closed(self):
         d = base()
