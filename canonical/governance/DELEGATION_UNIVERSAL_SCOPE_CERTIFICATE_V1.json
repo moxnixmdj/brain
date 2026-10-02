@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_UNIVERSAL_SCOPE_CERTIFICATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__UNIVERSAL_FORMAL_SCOPE_PROOF__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge only the delegation absolute-scope-completeness blocker by proving the frozen Brain-owned delegation algorithm correct over its entire admissible finite explicit-task model, without new acceptance cases or empirical extrapolation.",
+  "target_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+  "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+  "target_proof_atom": "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_DELEGATION_PROTOCOL",
+  "blocker_source": {
+    "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+    "git_blob_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
+    "blocker": "ABSOLUTE_SCOPE_COMPLETENESS_MISSING",
+    "admissible_discharge_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF"
+  },
+  "exact_inputs": {
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py": "928466401b36e4f3b09c517950cc050432a0616f",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "af83f4899169e81017767c3316ddcf6b61da5ef6",
+    "canonical/runtime/delegation_universal_scope_certificate_v1.py": "2447ab22a2f1c4647485c31a3ad84c2e6c67f5a4",
+    "canonical/tests/test_delegation_universal_scope_certificate_v1.py": "771bcadbc47195365825f69ad33539ef86eef880"
+  },
+  "proof_domain": {
+    "population": "ALL_FINITE_VALID_EXPLICIT_DELEGATION_CONTRACTS_ACCEPTED_BY_THE_FROZEN_CANDIDATE_MODEL_WITH_AT_LEAST_ONE_EXECUTABLE_FEASIBLE_PLAN",
+    "finite_steps": true,
+    "finite_workers": true,
+    "monotone_explicit_facts": true,
+    "nonnegative_finite_step_costs": true,
+    "positive_finite_resource_capacities": true,
+    "supported_receipt_updates": [
+      "STEP_UNAVAILABLE",
+      "WORKER_UNAVAILABLE",
+      "WORKER_CAPABILITY_REMOVED",
+      "RESOURCE_CAPACITY_CHANGED"
+    ],
+    "no_static_task_count_cutoff": true,
+    "infeasible_or_invalid_contracts": "FAIL_CLOSED__OUTSIDE_POSITIVE_TERMINAL_SUCCESS_CLAIM"
+  },
+  "formal_lemmas": [
+    {
+      "id": "L1_FINITE_SEARCH_COMPLETENESS",
+      "statement": "Because each declared step may appear at most once, only fact-adding applicable unused steps are extended, and the step set is finite, the candidate search tree is finite and reaches every simple executable fact-producing sequence."
+    },
+    {
+      "id": "L2_GLOBAL_PLAN_OPTIMALITY",
+      "statement": "All admitted step costs are finite and nonnegative. The candidate priority queue orders paths by total cost, task count, then lexical sequence and returns a goal only after schedulability succeeds. Therefore the first returned goal is the globally minimal schedulable goal under the frozen objective."
+    },
+    {
+      "id": "L3_EXHAUSTIVE_ORACLE_EQUIVALENCE",
+      "statement": "The frozen oracle enumerates every subset and permutation of available steps, rejects invalid prerequisite sequences, rejects unschedulable plans, and minimizes the identical cost/task-count/lexical key. Thus candidate and oracle select the same plan for every contract in the proof domain."
+    },
+    {
+      "id": "L4_MINIMUM_WAVE_SCHEDULE",
+      "statement": "The candidate scheduler breadth-first searches completed-task subsets through every resource- and capability-feasible worker matching. Since worker availability and resource capacities reset each wave and future readiness depends only on completed tasks, first completion has minimum wave count."
+    },
+    {
+      "id": "L5_EVIDENCE_INVARIANTS",
+      "statement": "Every selected or completed step has a unique evidence owner or the solver fails closed; terminal fan-in includes the evidence of all selected and completed work, so duplicate/conflicting work and lost-evidence critical invariants cannot be hidden by a successful result."
+    },
+    {
+      "id": "L6_REPLANNING_CLOSURE",
+      "statement": "Every supported live receipt transforms the same finite explicit task state and solve_after_receipt reruns the same exact solver. L1-L5 therefore hold after each supported receipt as well as initially."
+    }
+  ],
+  "acceptance_consequence": {
+    "terminal_success": "OBJECTIVE_CEILING_ON_EVERY_ADMISSIBLE_FEASIBLE_CONTRACT_IN_PROOF_DOMAIN",
+    "critical_coordination_violations": "ZERO_BY_CONSTRUCTION_OR_FAIL_CLOSED",
+    "claimed_speedup": "NEVER_OBTAINED_BY_TRADING_AWAY_EXACT_PLAN_CORRECTNESS",
+    "relation_to_opus": "A_MATCHED_SYSTEM_CANNOT_EXCEED_TERMINAL_SUCCESS_CEILING_1__SO_UNIVERSAL_BRAIN_CEILING_IMPLIES_NONINFERIOR_TERMINAL_SUCCESS_ON_THE_SAME_ADMISSIBLE_PROTOCOL_DOMAIN"
+  },
+  "falsification_conditions": [
+    "ANY_LOAD_BEARING_EXACT_INPUT_BLOB_CHANGES",
+    "ANY_REQUIRED_FORMAL_PREMISE_IS_NOT_DERIVABLE_FROM_SOURCE",
+    "A_VALID_FINITE_CONTRACT_EXISTS_FOR_WHICH_CANDIDATE_AND_EXHAUSTIVE_ORACLE_DIFFER",
+    "SCHEDULER_STATE_REQUIRES_HISTORY_NOT_CAPTURED_BY_COMPLETED_TASK_SET",
+    "A_SUPPORTED_RECEIPT_BREAKS_THE_SHARED_EXACT_SOLVER_THEOREM"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_UNTIL_INDEPENDENT_CLEAN_ROOM_VERIFICATION_PASSES",
+    "NO_FAMILY_OWNERSHIP_CREDIT_FROM_THIS_CERTIFICATE_ALONE",
+    "NO_CLAIM_ABOUT_INFEASIBLE_OR_MALFORMED_TASKS_AS_SUCCESS_CASES",
+    "NO_EMPIRICAL_GENERALIZATION_FROM_THE_132_CASE_TERMINAL_SAMPLE",
+    "NO_TERMINAL_REPLAY",
+    "NO_NEW_REALITY"
+  ],
+  "runtime": "canonical/runtime/delegation_universal_scope_certificate_v1.py",
+  "tests": "canonical/tests/test_delegation_universal_scope_certificate_v1.py",
+  "next": "INDEPENDENTLY_MIRROR_EXACT_BLOBS_AND_RUN_FAIL_CLOSED_PROOF_CHECKS__IF_PASS_ACTIVATE_ONLY_THE_DELEGATION_SCOPE_COMPLETENESS_ATOM_AND_REDUCE_ACCEPTANCE_FIXED_POINT",
+  "new_reality_units": 0,
+  "terminal_cases_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
