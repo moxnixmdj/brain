@@ -1,19 +1,20 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "9e89fe83077fd0397534f100071343063846edb1",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__6_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
-  "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_6_OF_12_BASIS__ZERO_PROMOTION_AUTHORITY",
+  "source_basis_blob_sha": "ede516c55a7c5c7d2b6999a25cd982e841b483c1",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__7_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_7_OF_12_BASIS__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
-  "closed_route_count": 6,
-  "open_route_count": 6,
+  "closed_route_count": 7,
+  "open_route_count": 5,
   "closed_behavior_ids": [
     "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
     "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
     "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
     "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
-    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "TASK_TO_DELEGATION_GRAPH_001"
   ],
   "top_priority_behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
   "queue": [
@@ -43,12 +44,13 @@
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
       "portfolio": "T0",
-      "proof_state": "T0_OPEN_DOMAIN_MULTIPLEX_PROTOCOL_AND_SCORER_VERIFIED__ORACLE_EXTRACTION_POPULATION_BINDING_PENDING",
+      "proof_state": "T0_GEOMETRY_POPULATION_AND_ORACLE_IMPLEMENTED__POSITIONED_OCR_BRIDGE_INDEPENDENT_PASS__CLEAN_CANDIDATE_REFREEZE_AND_POST_REFREEZE_BINDING_PENDING",
       "blockers": [
-        "T0_GEOMETRY_CASE_SOURCE_OR_POPULATION_BINDING_AND_INDEPENDENT_ORACLE_EXTRACTION_ROUTE_NOT_YET_FROZEN"
+        "CAD_CLEAN_POST_CONTAMINATION_CANDIDATE_PACKAGE_REFREEZE_PENDING",
+        "CAD_T0_POST_REFREEZE_SOURCE_POPULATION_ORACLE_BINDING_REVALIDATION_PENDING"
       ],
       "blocker_classes": {
-        "binding": 1,
+        "binding": 2,
         "scope_gate": 0,
         "scope_expansion": 0,
         "open_domain_protocol": 0,
@@ -57,7 +59,7 @@
       },
       "portfolio_leverage": 1,
       "priority_score": 300,
-      "next_action_class": "FREEZE_T0_GEOMETRY_CASE_SOURCE_POPULATION_AND_INDEPENDENT_ORACLE_EXTRACTION_ROUTE",
+      "next_action_class": "FREEZE_CLEAN_POST_CONTAMINATION_CAD_CANDIDATE_PACKAGE__THEN_REVALIDATE_POST_REFREEZE_SOURCE_POPULATION_ORACLE_BINDING",
       "zero_reality_blocker_reconciliation": "canonical/reasoning/2026-10-02_CAD_ZERO_REALITY_BLOCKER_RECONCILIATION_V1.json",
       "stale_blockers_deleted": [
         "CADQUERY_OR_EQUIVALENT_NATIVE_SOLID_MATERIALIZATION_NOT_YET_BOUND_IN_THIS_ROUTE"
@@ -69,7 +71,8 @@
       "proof_mode_reconciliation": "canonical/reasoning/2026-10-02_CAD_OPEN_DOMAIN_PROOF_MODE_RECONCILIATION_V1.json",
       "prewave_binding": "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "synthetic_whole_domain_scope_gate_deleted": true,
-      "scorer_independent_verification": "canonical/verification/CAD_T0_MULTIPLEX_SCORER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "scorer_independent_verification": "canonical/verification/CAD_T0_MULTIPLEX_SCORER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "positioned_ocr_bridge_verification": "canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -148,29 +151,6 @@
       "portfolio_leverage": 1,
       "priority_score": 1047,
       "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
-    },
-    {
-      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
-      "portfolio": "T2",
-      "proof_state": "MATCHED_STATISTICAL_TERMINAL_PROTOCOL_INTERNAL_FREEZE_PENDING__EXACT_OPUS_5_5_COMPARATOR_EXTERNAL_BLOCKED",
-      "blockers": [
-        "FREEZE_CURRENT_DELEGATION_CANDIDATE_AND_DEPENDENCY_BLOB_PACKAGE",
-        "FREEZE_CONTAMINATION_SAFE_DELEGATION_CHALLENGE_SOURCE_POOL_AND_SCORER",
-        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
-        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
-        "FREEZE_POST_FREEZE_SELECTOR_RULE__DO_NOT_SELECT_CHALLENGES_BEFORE_COMPARATOR_ROUTE_EXISTS"
-      ],
-      "blocker_classes": {
-        "binding": 0,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "open_domain_protocol": 3,
-        "external_block": 1,
-        "other": 1
-      },
-      "portfolio_leverage": 1,
-      "priority_score": 1059,
-      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
     }
   ],
   "execution_authority": false,
@@ -186,12 +166,13 @@
     "rule": "P1_AND_P3_EXTERNAL_COMPARATOR_BLOCKS_MUST_NOT_DOMINATE_SCHEDULING_UNTIL_STRONGER_ABSOLUTE_ROUTE_SCOPE_EQUIVALENCE_IS_RESOLVED"
   },
   "derived_state_reconciliation": {
-    "basis_blob_sha": "9e89fe83077fd0397534f100071343063846edb1",
+    "basis_blob_sha": "ede516c55a7c5c7d2b6999a25cd982e841b483c1",
     "rule": "QUEUE_MEMBERSHIP_DERIVED_FROM_CURRENT_ACTIVE_TERMINAL_PROOF_BASIS__NO_STALE_ADMITTED_CONTRACT_MAY_REMAIN_OPEN",
     "removed_stale_open_entries": [
-      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "TASK_TO_DELEGATION_GRAPH_001"
     ],
-    "current_closed_count": 6,
-    "current_open_count": 6
+    "current_closed_count": 7,
+    "current_open_count": 5
   }
 }
