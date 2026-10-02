@@ -1,0 +1,24 @@
+name: Verify structured method terminal binding
+on:
+  push:
+    branches: [main, obs-structured-method-terminal-binding-20261002]
+    paths:
+      - canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json
+      - canonical/governance/STRUCTURED_METHOD_SCOPE_EQUIVALENT_PROOF_GATE_V2_VERDICT.json
+      - canonical/governance/STRUCTURED_METHOD_TERMINAL_BINDING_V1.json
+      - canonical/tests/test_structured_method_terminal_binding_v1.py
+      - .github/workflows/verify-structured-method-terminal-binding-v1.yml
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_structured_method_scope_gate_v2 canonical.tests.test_structured_method_terminal_binding_v1
