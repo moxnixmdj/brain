@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_PUBLIC_BAR_EXECUTION_PROTOCOL_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREEXPOSURE__ONE_SCORE_PRODUCING_RUN_AUTHORIZED__NO_RESULTS_OBSERVED",
+  "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "proof_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+  "represented_leaf": "LIVEBENCH_INSTRUCTION_FOLLOWING_PUBLIC_BAR",
+  "acceptance": {
+    "metric": "LOOSE_PROMPT_LEVEL_ACCURACY",
+    "threshold": 0.657,
+    "requirement": "BRAIN_CONFIGURED_ROUTE_SCORE_GE_0_657",
+    "note": "This closes only the frozen public-bar leaf. The separate matched scope-boundary obligation remains explicit."
+  },
+  "dataset": {
+    "repository": "livebench/instruction_following",
+    "revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "file": "data/test-00000-of-00001.parquet",
+    "sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "rows": 400
+  },
+  "evaluator": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "metric": "test_instruction_following_loose + prompt-level all-instructions"
+  },
+  "brain_configuration": {
+    "path": "canonical/runtime/instruction_following_brain_configuration_v1.py",
+    "benchmark_annotations_visible": false,
+    "user_visible_prompt_only": true,
+    "deterministic_source_bound_parsers": [
+      "canonical/runtime/explicit_compound_requirement_decomposer.py",
+      "canonical/runtime/bounded_predicate_argument_semantics.py"
+    ]
+  },
+  "general_substrate": {
+    "base_model": "Qwen/Qwen3.5-9B",
+    "quantization_repository": "TheStageAI/Qwen3.5-9B-GGUF",
+    "file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "bytes": 5060174144,
+    "sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "runtime": "llama.cpp",
+    "runtime_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "hosted_frontier_model": false
+  },
+  "ablation": {
+    "same_substrate": true,
+    "baseline": "USER_PROMPT_ONLY_WITHOUT_BRAIN_SYSTEM_CONFIGURATION",
+    "role": "OWNERSHIP_MATERIALITY_DIAGNOSTIC_ONLY__NOT_ACCEPTANCE_THRESHOLD"
+  },
+  "frozen_generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 512,
+    "seed": 20261002,
+    "parallelism": 2
+  },
+  "contamination_rules": [
+    "CANDIDATE_RECEIVES_ONLY_USER_VISIBLE_PROMPT",
+    "INSTRUCTION_ID_LIST_KWARGS_AND_CHECKER_IDENTITIES_NEVER_CANDIDATE_VISIBLE",
+    "NO_RESULT_DEPENDENT_PROMPT_OR_CONFIGURATION_CHANGE",
+    "NO_CASE_REPLACEMENT",
+    "NO_SAME_CASE_REPLAY_FOR_TUNING"
+  ],
+  "terminal_v3_replay": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
