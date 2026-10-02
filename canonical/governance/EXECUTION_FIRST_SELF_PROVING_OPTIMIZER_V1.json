@@ -266,5 +266,27 @@
       "workflow_run_id": 36964597245,
       "exact_runtime_blob_sha": "d92f37853437e1626d45e79b1da3638d8f943cd4"
     }
+  },
+  "compiled_terminal_closure_stack": {
+    "status": "ACTIVE_PENDING_INDEPENDENT_VERIFICATION_OF_NEW_COMPONENTS",
+    "activation": "canonical/governance/TERMINAL_CLOSURE_COMPILER_STACK_V1.json",
+    "generated_truth": "canonical/runtime/generated_terminal_state_compiler.py",
+    "anti_circularity": "canonical/runtime/prewave_anti_circularity_compiler.py",
+    "global_supercompiler": "canonical/runtime/terminal_proof_supercompiler.py",
+    "mandatory_sequence": [
+      "GENERATE_CURRENT_STATE",
+      "CLASSIFY_PREWAVE_VS_POSTWAVE",
+      "SUPERCOMPILE_WHOLE_OPEN_FRONTIER",
+      "EXECUTE_ONLY_EXACT_MINIMUM_UNBLOCK_CUT",
+      "RECOMPUTE",
+      "AUTHORIZE_TERMINAL_WAVE_ONLY_AFTER_EXISTING_PREQUALIFICATION_REDUCER_PASSES"
+    ],
+    "hard_rules": [
+      "NO_PROGRESS_SELF_PROMOTION",
+      "NO_TERMINAL_RESULT_AS_PREWAVE_PERMISSION",
+      "NO_NEW_GENERIC_MECHANISM_WORK_WHILE_PREPROOF_IMPLEMENTATION_RESIDUAL_COUNT_IS_ZERO",
+      "NO_FRESH_TERMINAL_EVIDENCE_OUTSIDE_CURRENT_EXACT_CUT"
+    ],
+    "authority_effect": "SCHEDULING_ONLY_UNTIL_INDEPENDENTLY_VERIFIED__NEVER_CAPABILITY_CREDIT"
   }
 }
