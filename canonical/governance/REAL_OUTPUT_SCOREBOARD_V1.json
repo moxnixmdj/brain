@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "OUTER_GLOBAL_MINIMUM_REALITY_CUT_READY_OR_EXPLICIT_UNCOVERED_MECHANISM_HOLE",
+  "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_EXACT_BLOCKER_VERDICT",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1003,14 +1003,14 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "V6_EXACT_CUT_VERIFIED__TWO_BATCH_PREQUALIFICATION_PRIMARY",
-    "blocker": "V6_TWO_SELECTED_REALITY_BATCH_PROTOCOLS_NOT_YET_FROZEN_AND_PREQUALIFIED",
+    "status": "OUTER_GLOBAL_UNIVERSE_PRIMARY__SPECIFICATION_CLOSED__M2_M5_RESIDUAL_SATURATION_AND_GLOBAL_MULTIPLEXING",
+    "blocker": "OUTER_GLOBAL_TERMINAL_UNIVERSE_NOT_YET_EXACT_CUT_READY__M2_M3_M4_M5_SURVIVING_MECHANISM_RESIDUALS_AND_TERMINAL_PROOF_MULTIPLEXING_REMAIN",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
-    "evidence_path": "canonical/verification/RESIDUAL_MINIMUM_REALITY_CUT_V6_VERIFICATION_20261002_V1.json",
+    "evidence_path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
     "new_reality_units": 0
   },
-  "next_required_action": "SATURATE_M2_M3_M4_M5_FROM_EXISTING_BRAIN_AND_PERMISSIVE_ZERO_COST_MECHANISMS__DEDUPLICATE_SHARED_BEHAVIORAL_LEAVES__RECOMPUTE_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
+  "next_required_action": "SATURATE_M2_M3_M4_M5_SURVIVING_RESIDUALS_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__APPLY_TERMINAL_OBSERVATION_DOMINANCE_AND_SCOPE_EQUIVALENT_PUBLIC_BARS__RECOMPUTE_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1219,7 +1219,7 @@
     "objective": "MAXIMIZE_TERMINAL_PREDICATES_CLOSED_PER_CRITICAL_PATH_WALL_CLOCK"
   },
   "v6_residual_cut": {
-    "status": "VERIFIED_EXACT_MINIMUM",
+    "status": "VALID_LOCAL_SUBCUT__NOT_GLOBAL_EXECUTION_AUTHORITY",
     "verdict": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
     "verification": "canonical/verification/RESIDUAL_MINIMUM_REALITY_CUT_V6_VERIFICATION_20261002_V1.json",
     "independent_recomputation": "canonical/verification/RESIDUAL_MINIMUM_REALITY_CUT_V6_INDEPENDENT_RECOMPUTATION_20261002_V1.json",
@@ -1227,17 +1227,13 @@
       "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
       "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
     ],
-    "prequalification_parallel": true,
+    "prequalification_parallel": false,
     "execution_authorized": false
   },
   "outer_global_terminal_universe": {
+    "status": "PRIMARY_SCHEDULER__FRESH_TERMINAL_EVIDENCE_BLOCKED",
     "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
-    "open_mechanism_lanes": [
-      "M2",
-      "M3",
-      "M4",
-      "M5"
-    ],
-    "fresh_terminal_evidence_allowed": false
+    "dominance_and_multiplexing": "canonical/governance/TERMINAL_OBSERVATION_DOMINANCE_AND_PROOF_MULTIPLEXING_V1.json",
+    "public_bar_reconciliation": "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json"
   }
 }
