@@ -1,0 +1,22 @@
+name: Verify SA-CCR route-specific terminal executor
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/saccr_route_specific_terminal_executor_v1.py
+      - canonical/tests/test_saccr_route_specific_terminal_executor_v1.py
+      - canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json
+      - canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json
+      - .github/workflows/verify-saccr-route-specific-terminal-executor.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_saccr_route_specific_terminal_executor_v1
