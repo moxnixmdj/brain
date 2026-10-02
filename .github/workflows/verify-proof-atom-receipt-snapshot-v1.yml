@@ -18,6 +18,8 @@ on:
 jobs:
   verify-and-snapshot:
     runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     permissions:
       contents: write
     steps:
@@ -34,9 +36,13 @@ jobs:
           SOURCE_HEAD="$(git rev-parse HEAD)"
           SOURCE_TREE="$(git rev-parse HEAD^{tree})"
           : > /tmp/proof_atom_snapshot_diagnostic.txt
+          echo "=== INITIAL WORKTREE ===" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          git status --porcelain >> /tmp/proof_atom_snapshot_diagnostic.txt
 
           python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v > /tmp/proof_atom_snapshot_diagnostic.txt 2>&1
           TEST_RC=$?
+          echo "=== WORKTREE AFTER TESTS ===" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          git status --porcelain >> /tmp/proof_atom_snapshot_diagnostic.txt
 
           python canonical/runtime/proof_atom_receipt_snapshot_v1.py > /tmp/proof_atom_receipt_snapshot_v1.json 2>> /tmp/proof_atom_snapshot_diagnostic.txt
           SNAPSHOT_RC=$?
