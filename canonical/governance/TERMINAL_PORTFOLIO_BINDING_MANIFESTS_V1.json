@@ -117,7 +117,7 @@
             "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "COMPOSITE_IDENTITY_RESOLVED__COMPONENT_ROUTE_BINDINGS_OPEN",
+          "binding_state": "COMPONENT_BEHAVIOR_ROUTES_FROZEN__PUBLIC_BAR_SCOPE_EQUIVALENCE_ADMISSION_AND_TERMINAL_PROOF_PENDING",
           "identity": {
             "authority": "Artificial Analysis Finance & Accounting Index",
             "target": 61,
@@ -129,7 +129,8 @@
             "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
             "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
             "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
-          }
+          },
+          "component_route_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
         },
         {
           "id": "FINANCE_AGENT_V2",
@@ -232,12 +233,13 @@
           "proof_routes": [
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "DIRECT_PROOF_MACHINE_MUTATION_PREFLIGHT_FROZEN__UNKNOWN_DOMAIN_SCOPE_AUDIT_STILL_OPEN",
+          "binding_state": "DIRECT_PROOF_MACHINE_MUTATION_PREFLIGHT_AND_UNKNOWN_DOMAIN_SCOPE_AUDIT_FROZEN__TERMINAL_EXECUTION_PENDING",
           "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "scope_audit": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json"
         }
       ],
       "mutation_set": [
