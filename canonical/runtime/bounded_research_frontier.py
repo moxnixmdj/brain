@@ -1,4 +1,4 @@
-"""Bounded deterministic research planning for normalized evidence gaps.
+"""Bounded deterministic research planning for normalized evidence gaps.\n\nVERIFICATION_TRIGGER_20261002: semantics-preserving receipt refresh.
 
 No semantic claims are invented. Queries are compiled from already-normalized gap
 fields. Source selection performs exact Pareto dominance over explicit metadata and
