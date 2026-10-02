@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_S0E_STANZA_LORA_CAUSAL_ABLATION_RESULT_001",
+  "date": "2026-10-02",
+  "status": "DEV_ONLY_CAUSAL_SIGNAL__LORA_MATERIAL__DIAGNOSTIC_ONLY__NO_PREPROOF_IMPLEMENTATION_AUTHORITY__ZERO_CAPABILITY_CREDIT",
+  "parent": "S0_E_PROBABILISTIC_SEMANTIC_RELATION_FORMATION_WITHOUT_COMPLETE_ORACLE",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 475,
+    "branch_commit": "913c49a5cf244cdc90b8936b6b4ba4e4cae3a50b",
+    "workflow_run_id": 36955615069,
+    "job_id": 110677800515,
+    "conclusion": "success"
+  },
+  "intervention": "DISABLE_PEFT_LORA_ADAPTER_ONLY__SAME_XLM_ROBERTA_LARGE_BACKBONE_AND_COREF_HEADS",
+  "frozen_dev_result": {
+    "full": {
+      "case_pass": 4,
+      "case_total": 5,
+      "pair_pass": 6,
+      "pair_total": 7
+    },
+    "no_lora": {
+      "case_pass": 1,
+      "case_total": 5,
+      "pair_pass": 3,
+      "pair_total": 7
+    },
+    "pair_pass_drop": 3,
+    "case_pass_drop": 3,
+    "lora_material": true
+  },
+  "deduction": [
+    "THE_26_2M_LORA_DELTA_IS_CAUSALLY_MATERIAL_ON_THE_FROZEN_DEV_CASES",
+    "HEADS_PLUS_UNADAPTED_BACKBONE_DO_NOT_PRESERVE_THE_TESTED_COREFERENCE_BEHAVIOR",
+    "THIS_DOES_NOT_PROVE_TERMINAL_PARITY_CROSS_DOMAIN_TRANSFER_OR_DONOR_INDEPENDENCE",
+    "UNDER_S0_G0_ZERO_REALITY_SATURATION_THIS_RESULT_IS_DIAGNOSTIC_ONLY_UNLESS_TERMINAL_COUNTEREVIDENCE_REOPENS_THE_EXACT_CLASS"
+  ],
+  "heldout_exposed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
