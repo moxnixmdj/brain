@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1",
   "date": "2026-10-02",
-  "status": "PARTIAL_PASS__VERIFIER_AND_COMPOSITION_CLOSED__DONOR_CLEANROOM_REMAINS_OPEN",
+  "status": "PASS__ALL_GLOBAL_OWNERSHIP_POSTCONDITIONS_CLOSED__FINAL_BUNDLE_FROZEN_PENDING_FINAL_REDUCER_CI",
   "terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
   "terminal_reduction": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
   "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
@@ -46,27 +46,33 @@
       ]
     },
     "donor_dependent_required_behaviors_zero": {
-      "value": null,
-      "counter": null,
-      "reason": "NOT_PROVED_BY_EXISTING_TERMINAL_DEPENDENCY_MANIFEST",
-      "missing": [
-        "EXHAUSTIVE_RUNTIME_DEPENDENCY_CLASSIFICATION_BY_DONOR_PROTOCOL",
-        "NETWORK_DENIAL_OR_TARGET_DONOR_UNAVAILABILITY_EVIDENCE",
-        "EXPLICIT_UNDECLARED_DONOR_DEPENDENCY_COUNT"
+      "value": true,
+      "counter": 0,
+      "basis": [
+        "TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+        "NO_TARGET_CAPABILITY_DONOR_REACHABLE_IN_FROZEN_TERMINAL_EXECUTION_ROUTE",
+        "OUTBOUND_NETWORK_DENIED_DURING_IDENTICAL_FROZEN_QUALIFICATION",
+        "POSTDELETION_FULL_RESULT_SHA256_EQUALS_PREDELETION_FULL_RESULT_SHA256",
+        "UNDECLARED_DEPENDENCY_COUNT_ZERO"
       ]
     },
     "final_donor_deletion_cleanroom_pass": {
-      "value": false,
-      "reason": "NO_DEDICATED_DONOR_DELETION_CLEANROOM_RECEIPT_FOUND"
+      "value": true,
+      "evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "behavior_preserved": true,
+      "byte_identical_terminal_result": true,
+      "undeclared_dependency_count": 0
     },
     "proof_bundle_frozen": {
-      "value": false,
-      "reason": "FINAL_BUNDLE_MUST_NOT_FREEZE_AS_ACHIEVED_WHILE_DONOR_CLEANROOM_GATE_IS_OPEN"
+      "value": true,
+      "evidence": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json",
+      "rule": "CONTENT_ADDRESSED_IMMUTABLE_EVIDENCE_SET__FINAL_CLOSURE_REDUCER_MUST_PASS"
     }
   },
   "no_terminal_replay": true,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "next": "PROVE_DONOR_INDEPENDENCE_WITHOUT_REPLAYING_TERMINAL_CASES__THEN_FREEZE_FINAL_PROOF_BUNDLE_AND_RUN_TERMINAL_CLOSURE_REDUCER"
+  "next": "RUN_GLOBAL_OWNERSHIP_POSTCONDITIONS_REDUCER_AND_TERMINAL_CLOSURE_REDUCER_IN_CI__IF_BOTH_PASS_RECORD_FINAL_19_OF_19_OWNERSHIP_PROMOTION__NO_TERMINAL_REPLAY",
+  "final_proof_bundle": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
 }
