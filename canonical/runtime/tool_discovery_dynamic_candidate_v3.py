@@ -95,6 +95,7 @@ def next_action(public:Mapping[str,Any])->dict[str,Any]:
     ]
     tools.sort(key=lambda t:(float(t.get("cost",0.0)),str(t.get("tool_id") or "")))
 
+    queried=_queried_sources(public)
     sources=[
         s for s in public.get("discovery_sources",[])
         if isinstance(s,Mapping)
