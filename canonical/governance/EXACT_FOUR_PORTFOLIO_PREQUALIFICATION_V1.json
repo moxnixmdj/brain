@@ -293,7 +293,7 @@
     "remaining_behavior_information_boundary_audit": "canonical/governance/REMAINING_BEHAVIOR_INFORMATION_BOUNDARY_AUDIT_V1.json",
     "terminal_replacement_population_protocol_v2": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "ten_contract_candidate_package_authority": false,
-    "ten_contract_candidate_package_invalidation": "canonical/governance/TERMINAL_REPLACEMENT_CANDIDATE_PACKAGE_INVALIDATION_V1.json"
+    "ten_contract_candidate_package_invalidation": "canonical/governance/TERMINAL_REPLACEMENT_CANDIDATE_PACKAGE_FREEZE_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
