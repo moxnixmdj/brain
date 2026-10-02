@@ -13,7 +13,18 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  invariant:
+    strategy:
+      fail-fast: false
+      matrix:
+        test:
+          - test_static_route_algebra_is_exact_twelve
+          - test_plan_deduplicates_shared_tool_route
+          - test_zero_terminal_rehearsal_full_wave_passes_with_stubbed_runners
+          - test_missing_required_parent_coverage_fails_closed
+          - test_beacon_mismatch_fails_closed
+          - test_direct_failure_blocks_wave
+    name: ${{ matrix.test }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -21,4 +32,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1
+      - run: python -m unittest -v canonical.tests.test_terminal_parent_portfolio_launcher_v1.TerminalParentPortfolioLauncherTests.${{ matrix.test }}
