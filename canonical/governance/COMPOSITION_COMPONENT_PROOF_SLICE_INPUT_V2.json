@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V2",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PASS__TWO_CLAIM_BOUND_RECEIPTS__TEN_INTERFACES_OPEN__ZERO_CREDIT",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "source_manifest": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+  "interfaces": [
+    {
+      "component_id": "research",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "tool use",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "artifact creation",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "browser/computer action",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "recovery",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "coding",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "debugging",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "evidence synthesis",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    },
+    {
+      "component_id": "artifact production",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "receipt_id": "COMPOSITION_BRIDGE::TOOL_ROUTE_DISCOVERY_AND_SELECTION_001::tool_discovery",
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "acceptance_scoped": true,
+      "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+      "source_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "source_witness_path": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "bridge_verification": "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "receipt_id": "COMPOSITION_BRIDGE::TASK_TO_DELEGATION_GRAPH_001::delegation",
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "verified": true,
+      "independent": true,
+      "contamination_clean": true,
+      "acceptance_scoped": true,
+      "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+      "source_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "source_witness_path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "bridge_verification": "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    }
+  ],
+  "rule": "ONLY_TWO_INDEPENDENTLY_VERIFIED_CLAIM_BOUND_BEHAVIORAL_BRIDGE_RECEIPTS_ADMITTED__TEN_OTHER_INTERFACES_REMAIN_OPEN__NO_PARENT_COMPOSITION_CREDIT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "supersedes_for_scheduling": "canonical/governance/COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V1.json",
+  "activation_verification": "canonical/verification/COMPOSITION_BEHAVIORAL_BRIDGE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+}
