@@ -186,7 +186,7 @@
     "differential_dominance_required_when_complete_finite_matched_scope_available": true,
     "differential_dominance_activation": "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_ACTIVATION_V1.json",
     "terminal_certificate_cut_required": true,
-    "terminal_certificate_cut_activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json"
+    "terminal_certificate_cut_activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json"
   },
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
@@ -333,11 +333,21 @@
     "terminal_credit_from_compiler_alone": false
   },
   "terminal_certificate_cut": {
-    "status": "ACTIVE_INDEPENDENT_PASS__31_PREDICATE_FRONTIER__15_CERTIFICATE_CANDIDATES__ZERO_CREDIT",
-    "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json",
+    "status": "ACTIVE_INDEPENDENT_PASS__EXACT_V3_FRONTIER__INFORMATION_DOMINANCE_SCHEDULING_ACTIVE__ZERO_CREDIT",
+    "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json",
     "runtime": "canonical/runtime/terminal_certificate_cut_v1.py",
-    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V2.json",
-    "verification": "canonical/verification/TERMINAL_CERTIFICATE_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
-    "rule": "AFTER_EXISTING_EVIDENCE_AND_DEDUCTIVE_SATURATION__QUOTIENT_SHARED_MISSING_CERTIFICATES_BEFORE_PROCEDURAL_ACTION_SELECTION__PRESERVE_DISTINCT_SCOPE_COMPLETENESS_OBLIGATIONS__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE__NEVER_GRANTS_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V3.json",
+    "frontier_git_blob_sha": "106139ff69616670993dbc6af324d8686747e8b1",
+    "information_dominance_runtime": "canonical/runtime/terminal_information_dominance_v1.py",
+    "information_dominance_runtime_git_blob_sha": "f10986bd09a7cc64a1fae3c6ea8e69b5655f2199",
+    "verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "rule": "AFTER_EVIDENCE_AND_DEDUCTIVE_SATURATION__VERIFY_EXACT_FRONTIER_BLOB__RUN_CERTIFICATE_CUT__RUN_INFORMATION_DOMINANCE__DELETE_ONLY_STRICTLY_PROVED_DOMINATED_SCHEDULING_OPTIONS__DO_NOT_INVENT_PROOF_COST__RECOMPUTE_AFTER_EVERY_VERIFIED_CERTIFICATE__NEVER_GRANTS_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  },
+  "information_dominance": {
+    "required_before_irreducible_reality_cut": true,
+    "runtime": "canonical/runtime/terminal_information_dominance_v1.py",
+    "activation": "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json",
+    "verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "semantic_rule": "SCHEDULING_ONLY__CERTIFICATE_COVERAGE_IS_NOT_ACCEPTANCE_PROOF__REQUIREMENT_CARDINALITY_IS_NOT_PROOF_DIFFICULTY"
   }
 }
