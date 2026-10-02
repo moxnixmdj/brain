@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__M0A_ZERO_REALITY_LOCALIZATION_ACTIVE__M1A_PROOF_ONLY__M1B_PROOF_ONLY__NOT_FROZEN",
+  "status": "FROZEN_SHARED_MECHANISM_FRONTIER__M0A_M1A_M1B_PROOF_ONLY__V6_EXACT_CUT_READY",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
     "M0A": {
-      "status": "OPEN__SHRUNK_AFTER_VERIFIED_BOUNDED_CONTEXTUAL_AND_SEMANTIC_CONSENSUS",
+      "status": "PROOF_ONLY__ZERO_REALITY_FRONTIER_SATURATED__MATCHED_PARITY_NOT_YET_AUTHORIZED",
       "verified_owned": [
         "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
         "canonical/runtime/explicit_compound_requirement_decomposer.py",
@@ -14,7 +14,9 @@
         "canonical/capabilities/opus55/EXPLICIT_DEFINITION_REFERENCE_GRAPH_001.json",
         "canonical/capabilities/opus55/SEMANTIC_IDENTIFIABILITY_GATE_001.json",
         "canonical/capabilities/opus55/BOUNDED_CONTEXTUAL_SEMANTICS_001.json",
-        "canonical/capabilities/opus55/M0A_SEMANTIC_GRAPH_CONSENSUS_001.json"
+        "canonical/capabilities/opus55/M0A_SEMANTIC_GRAPH_CONSENSUS_001.json",
+        "canonical/capabilities/opus55/EXPLICIT_DISCOURSE_OPERATOR_ALGEBRA_001.json",
+        "canonical/capabilities/opus55/BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -25,10 +27,7 @@
         "allenai/allennlp-models@b1f372248c17ad12684d344955fbcd98e957e77e"
       ],
       "uncovered": [
-        "GENERAL_OR_NONEXACT_COREFERENCE_OUTSIDE_UNIQUE_FEATURE_COMPATIBLE_BOUNDED_PRONOUN_CASES_AND_EXPLICIT_NAMED_REFERENCES",
-        "IMPLICIT_OR_LONG_RANGE_DISCOURSE_RELATION_AND_CONTEXTUAL_SCOPE_OUTSIDE_EXPLICIT_CONNECTIVES",
-        "PREDICATE_ARGUMENT_AND_MULTI_CLASS_CONTEXT_DEPENDENT_EXPLICIT_SEMANTICS",
-        "OTHER_SEMANTIC_PHENOMENA_OUTSIDE_EXISTING_DECIDABLE_AND_VERIFIED_BOUNDED_ROUTES"
+        "ONLY_IF_PREDECLARED_MATCHED_CROSS_DOMAIN_PARITY_EXPOSES_GENERAL_COREFERENCE_IMPLICIT_OR_LONG_RANGE_DISCOURSE_OUT_OF_GRAMMAR_PREDICATE_ARGUMENT_OR_OTHER_REPEATABLE_SOLVABLE_SEMANTIC_CLASS"
       ],
       "complete_action_bundle": true,
       "verification_receipts": {
@@ -60,13 +59,25 @@
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/M0A_SEMANTIC_GRAPH_CONSENSUS_001.json",
           "scope": "SOURCE_TRACEABLE_INDEPENDENT_MECHANISM_CONSENSUS_WITH_AMBIGUITY_AND_UNRESOLVED_GATES"
+        },
+        "explicit_discourse_operator_algebra": {
+          "workflow_run_id": 36947127783,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/EXPLICIT_DISCOURSE_OPERATOR_ALGEBRA_001.json",
+          "scope": "FORMER_LATTER_RESPECTIVELY_EXPLICIT_TOO_ALSO_AS_WELL_ELLIPSIS_AND_UNIQUE_EXPLICIT_DEMONSTRATIVE_EVENT_REFERENCE"
+        },
+        "bounded_predicate_argument_semantics": {
+          "workflow_run_id": 36947746244,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_001.json",
+          "scope": "SIMPLE_ACTIVE_PASSIVE_MODAL_PREDICATE_ARGUMENT_AND_ONE_EXPLICIT_IF_WHEN_CONDITION"
         }
       },
       "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL",
-      "candidate_action": "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
-      "complete_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "candidate_action": "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
+      "complete_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V2.json",
       "new_reality_units": 1,
-      "dependency_depth": 2,
+      "dependency_depth": 1,
       "specialized_white_box_decomposition": "canonical/governance/M0A_SPECIALIZED_WHITE_BOX_DONOR_DECOMPOSITION_V1.json",
       "white_box_donor_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json",
       "fastcoref_disposition": {
@@ -75,9 +86,19 @@
         "do_not_repeat_feasibility_probe": true
       },
       "active_causal_localization": {
-        "branch_result": "canonical/capabilities/opus55/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_001.json",
-        "subspace_protocol": "canonical/evaluation/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_V1.json",
-        "scope": "ONLY_LAYER_1_AND_11_MLP_INTERMEDIATE_SUBSPACES__BASELINE_CORRECT_SIGNAL_ONLY__NO_HELDOUT"
+        "status": "STOPPED_OR_INVALIDATED_BEFORE_FURTHER_HARVEST",
+        "subspace_stop_results": [
+          "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_001.json",
+          "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json"
+        ],
+        "mixed_protocol_invalidation": "canonical/governance/M0A_OLMO_MLP_SUBSPACE_PROTOCOL_INVALIDATION_V1.json",
+        "lowrank_invalidation": "canonical/governance/M0A_OLMO_LOWRANK_PROTOCOL_INVALIDATION_V1.json",
+        "next": "MATCHED_PARITY_ONLY_IF_ADMITTED_BY_EXACT_CUT__REOPEN_DONOR_ONLY_AFTER_LOCALIZED_FAILURE"
+      },
+      "donor_frontier": {
+        "reconciliation": "canonical/reasoning/2026-10-02_M0A_SPECIALIZED_DONOR_FEASIBILITY_RECONCILIATION_V2.json",
+        "dominated_srl_probe": "canonical/governance/M0A_LIAAD_SRL_PREPROOF_DOMINANCE_DELETION_V1.json",
+        "conclusion": "NO_UNEXECUTED_ZERO_REALITY_DONOR_ROUTE_DOMINATES_CURRENT_COMPOSED_BRAIN_PATH"
       }
     },
     "M1A": {
@@ -251,17 +272,14 @@
     "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
     "RUN_EXACT_FROZEN_UNIVERSE_COMPILER_ONLY_AFTER_ALL_TERMINALLY_NECESSARY_RESIDUALS_HAVE_AT_LEAST_ONE_ADMISSIBLE_COMPLETE_BUNDLE"
   ],
-  "exact_cut_ready": false,
-  "blocking_obligations": [
+  "exact_cut_ready": true,
+  "blocking_obligations": [],
+  "nonblocking_ready_obligation": [
     "M0A",
     "M1A",
     "M1B"
   ],
-  "nonblocking_ready_obligation": [
-    "M1A",
-    "M1B"
-  ],
-  "next": "FINISH_ONLY_ACTIVE_M0A_ZERO_REALITY_USEFUL_SIGNAL_SUBSPACE_LOCALIZATION_AND_COMPOSITION__THEN_FREEZE_V6_FROM_CURRENT_FAITHFUL_COSTS__M1A_AND_M1B_ARE_PROOF_ONLY_PENDING_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
+  "next": "FREEZE_FAITHFUL_V6_INPUT_FROM_THIS_EXACT_BLOB__COMPUTE_EXACT_MINIMUM_REALITY_CUT__AUTHORIZE_ONLY_SELECTED_CLEAN_MATCHED_OBSERVATIONS",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -269,7 +287,24 @@
   "reconciliation": {
     "date": "2026-10-02",
     "new_reality_units_consumed": 0,
-    "note": "M1A zero-reality mechanism search saturated into proof-only V2 after verified compound visual resolver and identifiability/JIT classification. M1B formal zero-reality coverage audit completed and cannot prove whole terminal coverage; one matched coverage distinction survives. M0A remains the only active zero-reality mechanism localization.",
+    "note": "All three shared M0/M1 mechanism residuals are now proof-only after bounded deterministic closures, donor dominance deletion, M1A saturation and M1B coverage audit. One end-to-end M1 batch can distinguish both M1A and M1B using independently frozen intermediate and final oracles.",
     "supersedes": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json"
-  }
+  },
+  "combined_evaluation_candidates": [
+    {
+      "id": "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1",
+      "covers": [
+        "M1A",
+        "M1B"
+      ],
+      "cost": 1,
+      "rationale": "ONE_PREDECLARED_DRAWING_BATCH_CAN_INDEPENDENTLY_SCORE_INTERMEDIATE_NORMALIZED_FEATURE_CONSTRAINT_GRAPH_AND_FINAL_GLOBAL_CAD_GEOMETRY_COVERAGE_FROM_THE_SAME_NEW_SOURCE_CASES",
+      "requirements": [
+        "M1A_INTERMEDIATE_ORACLE_FROZEN_BEFORE_SOURCE_EXPOSURE",
+        "M1B_GLOBAL_GEOMETRY_ORACLE_FROZEN_BEFORE_SOURCE_EXPOSURE",
+        "FAILURES_ATTRIBUTED_TO_M1A_VS_M1B_WITHOUT_REPLAY",
+        "NEW_CASES_CLEAN_AND_PREDECLARED"
+      ]
+    }
+  ]
 }
