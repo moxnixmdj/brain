@@ -14,7 +14,10 @@
     "terminal_family_protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
     "unbarred_matched_protocol": "canonical/governance/UNBARRED_FAMILY_MATCHED_PARITY_PROTOCOL_V1.json",
     "proof_mode_classification": "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json",
-    "terminal_proof_supercompiler": "canonical/governance/TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1.json"
+    "terminal_proof_supercompiler": "canonical/governance/TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1.json",
+    "terminal_closure_compiler_stack": "canonical/governance/TERMINAL_CLOSURE_COMPILER_STACK_V1.json",
+    "generated_terminal_state_compiler": "canonical/runtime/generated_terminal_state_compiler.py",
+    "prewave_anti_circularity_compiler": "canonical/runtime/prewave_anti_circularity_compiler.py"
   },
   "rules": [
     "TERMINAL_PROOF_BASIS_IS_DEFINED_BY_ACTIVE_BEHAVIORAL_CONTRACTS_NOT_BENCHMARK_NAMES",
@@ -26,7 +29,10 @@
     "LOAD_BEARING_INFERENCES_MUST_NOT_BE_EXPOSED_IN_CANDIDATE_INPUT",
     "ZERO_INCREMENTAL_SPEND",
     "EXACT_OPUS_5_5_COMPARATOR_REQUIRED_BUT_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_IS_EXTERNAL_BLOCKED__NO_PROXY_SUBSTITUTION",
-    "UNKNOWN_OR_PARTIAL_SCOPE_FAILS_CLOSED"
+    "UNKNOWN_OR_PARTIAL_SCOPE_FAILS_CLOSED",
+    "PROGRESS_ARTIFACTS_NEVER_SELF_PROMOTE__CANONICAL_ADMISSION_REQUIRES_EXISTING_PROMOTION_LAW_AND_INDEPENDENT_EVIDENCE",
+    "TERMINAL_RESULT_DEPENDENT_FACTS_MAY_NOT_BE_PREWAVE_PERMISSION_GATES_UNLESS_INDEPENDENTLY_REQUIRED_FOR_SAFE_IDENTIFIABLE_EXECUTION",
+    "WHOLE_OPEN_CONTRACT_FRONTIER_MUST_BE_SUPERCOMPILED_BEFORE_NEW_MATCHED_COMPARATOR_OR_TERMINAL_CASE_SPEND"
   ],
   "contracts": [
     {
@@ -317,5 +323,13 @@
     "runtime": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
     "rule": "PROPAGATE_VERIFIED_ENVELOPES_FAILURES_AND_IMPLICATIONS_BEFORE_SHARED_RESIDUAL_COMPRESSION__ONLY_UNKNOWN_RESIDUAL_BASIS_CAN_ADVANCE_TO_NEW_PROOF_OR_REALITY_QUERY",
     "terminal_credit_from_compiler_alone": false
+  },
+  "closure_compiler_stack": {
+    "status": "ACTIVE_PENDING_INDEPENDENT_VERIFICATION_OF_NEW_COMPONENTS",
+    "activation": "canonical/governance/TERMINAL_CLOSURE_COMPILER_STACK_V1.json",
+    "generated_state": "canonical/runtime/generated_terminal_state_compiler.py",
+    "anti_circularity": "canonical/runtime/prewave_anti_circularity_compiler.py",
+    "proof_supercompiler": "canonical/runtime/terminal_proof_supercompiler.py",
+    "authority_effect": "SCHEDULING_AND_RECONCILIATION_ONLY__NO_ROUTE_PROMOTION_FROM_STACK_ALONE"
   }
 }
