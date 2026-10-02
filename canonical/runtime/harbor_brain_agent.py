@@ -11,12 +11,12 @@ remains authoritative.
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 from typing import Any
 
 from canonical.runtime import astra_runtime
 from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport
+from canonical.runtime.harbor_command_policy import validate_environment_command
 
 try:
     from harbor.agents.base import BaseAgent
@@ -35,32 +35,7 @@ except ImportError:  # lets Brain unit tests import without Harbor installed
 
 SCHEMA = "PROJECT_BRAIN_HARBOR_AGENT_TRACE_V1"
 MAX_CYCLES = 12
-MAX_COMMAND_CHARS = 12000
 MAX_OUTPUT_CHARS = 16000
-
-_FORBIDDEN_COMMAND_PATTERNS = (
-    r"(?i)\b(curl|wget)\b",
-    r"(?i)\bgit\s+(clone|fetch|pull)\b",
-    r"(?i)\b(pip|pip3|uv|poetry)\s+install\b",
-    r"(?i)\b(apt|apt-get|dnf|yum|apk)\s+.*\binstall\b",
-    r"(?i)\bssh\b",
-    r"(?i)\bscp\b",
-)
-
-
-def validate_environment_command(command: Any) -> str:
-    if not isinstance(command, str) or not command.strip():
-        raise ValueError("HARBOR_COMMAND_REQUIRED")
-    command = command.strip()
-    if len(command) > MAX_COMMAND_CHARS:
-        raise ValueError("HARBOR_COMMAND_TOO_LONG")
-    if "\x00" in command:
-        raise ValueError("HARBOR_COMMAND_NUL")
-    for pattern in _FORBIDDEN_COMMAND_PATTERNS:
-        if re.search(pattern, command):
-            raise ValueError("HARBOR_COMMAND_EXTERNAL_ACQUISITION_FORBIDDEN")
-    return command
-
 
 def _planner_action(raw: dict[str, Any]) -> dict[str, Any]:
     action = raw.get("action")
