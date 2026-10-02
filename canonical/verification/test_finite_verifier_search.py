@@ -18,3 +18,5 @@ def test_bound_fail_closed():
     r = exhaustive_acceptance_search([1,2], lambda x: True, max_candidates=1)
     assert r.status == "BOUND_EXCEEDED"
     assert r.complete_over_declared_universe is False
+
+# PR verification trigger: runtime behavior unchanged.
