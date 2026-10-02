@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_DUAL_JUDGMENT_CONTROL_ENVELOPE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__BRAIN_OWNED_OPERATIVE_JUDGMENT_CONTROL__INDEPENDENT_MATERIALITY_VERIFICATION_PENDING__ZERO_CREDIT",
+  "objective": "Collapse the finance and unknown-domain operative-source blockers into one Brain-owned fail-closed judgment-control configuration while treating any model only as a declared general cognition proposal substrate.",
+  "operative_runtime": "canonical/runtime/judgment_control_envelope_v1.py",
+  "tests": "canonical/tests/test_judgment_control_envelope_v1.py",
+  "families": [
+    "FINANCIAL_ANALYSIS",
+    "UNKNOWN_DOMAIN_ADAPTATION"
+  ],
+  "frozen_direct_protocols": [
+    "canonical/governance/FINANCE_UNCOVERED_SCOPE_DIRECT_PROOF_PROTOCOL_V1.json",
+    "canonical/governance/UNKNOWN_DOMAIN_TRANSFER_ABSTENTION_DIRECT_PROOF_PROTOCOL_V1.json"
+  ],
+  "composed_verified_brain_owned_components": [
+    {
+      "id": "SOURCE_TRACEABLE_SEMANTIC_IR_001",
+      "authority": "canonical/capabilities/opus55/SOURCE_TRACEABLE_SEMANTIC_IR_001.json",
+      "authority_blob_sha": "b1aeb7a60f1f8d6bb1b8b378ff7802f42c618145"
+    },
+    {
+      "id": "SEMANTIC_IDENTIFIABILITY_GATE_001",
+      "authority": "canonical/capabilities/opus55/SEMANTIC_IDENTIFIABILITY_GATE_001.json",
+      "authority_blob_sha": "721ceeae858e92b4bee89130e89f6c329cfe323c"
+    },
+    {
+      "id": "FINITE_IDENTIFIABILITY_KERNEL_001",
+      "authority": "canonical/capabilities/opus55/FINITE_IDENTIFIABILITY_KERNEL_001.json",
+      "authority_blob_sha": "1d3a556f15380dfe3aef1e6120c94563df2ef126"
+    },
+    {
+      "id": "REQUIREMENT_GRAPH_KERNEL_001",
+      "authority": "canonical/capabilities/opus55/REQUIREMENT_GRAPH_KERNEL_001.json",
+      "authority_blob_sha": "254604bfaec6f415d748e31f0de627aa2be59be9"
+    },
+    {
+      "id": "EXPLICIT_SEMANTIC_OPERATOR_COUNTERFACTUALS_001",
+      "authority": "canonical/capabilities/opus55/EXPLICIT_SEMANTIC_OPERATOR_COUNTERFACTUALS_001.json",
+      "authority_blob_sha": "d3cb99dd8107fcf4283cd72c1bb5502b94b424c4"
+    },
+    {
+      "id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+      "authority": "canonical/capabilities/frontier/MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1.json",
+      "authority_blob_sha": "8076e1bd1fc7a1ec50bf4a1bfcecc2e974140b13"
+    }
+  ],
+  "control_contract": {
+    "proposal_source_role": "GENERAL_COGNITION_SUBSTRATE",
+    "brain_terminal_authority": true,
+    "forced_conclusion_requires_unique_semantic_identification": true,
+    "unknown_domain_conclusion_requires_resolved_version_space": true,
+    "abstention_requires_nonidentifiability_witness": true,
+    "discriminator_request_requires_identifiability_gap_and_authorization": true,
+    "finance_conclusion_requires_verified_rule_applicability_material_exceptions_and_exact_reconciliation": true,
+    "all_terminal_acts_require_source_traceability_provenance_requirement_coverage_counterexample_coverage_and_contradiction_handling": true
+  },
+  "source_gate_v2_candidate": {
+    "benchmark_harness_zero_cost": true,
+    "scorer_frozen": true,
+    "brain_candidate_bound": true,
+    "brain_owned_operative_configuration": true,
+    "configuration_materially_constrains_execution": true,
+    "capability_package_contains_configuration": true,
+    "promotion_evaluates_brain_configured_system": true,
+    "external_hidden_target_capability_provider": false,
+    "ownership_claim_relies_on_model_standalone_superiority": false,
+    "future_use_requires_capability_rediscovery": false,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependency_count": 1,
+    "model_dependencies_declared": true,
+    "general_substrate_test_pass": false,
+    "incremental_spend_usd": 0
+  },
+  "current_source_gate_state": "BLOCKED_PENDING_INDEPENDENT_MATERIALITY_VERIFICATION",
+  "clean_direct_case_execution_authority": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "nonclaims": [
+    "NO_FINANCE_DIRECT_LEAF_PASS",
+    "NO_UNKNOWN_DOMAIN_DIRECT_LEAF_PASS",
+    "NO_OPUS55_PARITY",
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_GENERATION",
+    "NO_MODEL_STANDALONE_CAPABILITY_OWNERSHIP"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_TEST_BYTES_AND_CONFIGURED_VS_BARE_MATERIALITY__THEN_EVALUATE_SOURCE_GATE_V2__ONLY_AFTER_GATE_PASS_AUTHORIZE_THE_TWO_FROZEN_FINANCE_AND_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES"
+}
