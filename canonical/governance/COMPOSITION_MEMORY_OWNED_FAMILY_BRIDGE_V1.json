@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__CLOSED_WORLD_TERMINAL_ENVELOPE_MEMORY_BINDING__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Bind only the frozen MULTI_CAPABILITY_COMPOSITION memory component to the already-owned canonical terminal LONG_HORIZON_MEMORY_AND_CONTINUITY family scope, without broadening that scope to general semantic memory.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "component_binding": {
+    "component_id": "memory",
+    "interface_id": "browser/computer action+memory+recovery",
+    "proved_properties_after_independent_verification": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ]
+  },
+  "authority": {
+    "terminal_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+    },
+    "composition_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "owned_memory_package": {
+      "path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
+      "git_blob_sha": "2d912cf8df64bd806fffb6a1070d95644d005470"
+    }
+  },
+  "derivation": {
+    "closed_world_terminal_family_count": 19,
+    "composition_envelope_literal": "Compose reasoning, research, tools, code, memory, actions and verification into one causal execution system.",
+    "memory_family_id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "memory_family_envelope_literal": "Use memory across sessions, preserve project state and resume long-running work coherently.",
+    "frozen_component_literal": "memory",
+    "frozen_interface_literal": "browser/computer action+memory+recovery",
+    "memory_family_protocol_status": "PASS",
+    "owned_memory_package_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+    "owned_memory_parent_family_closed_for_claim_scope": true
+  },
+  "scope_guard": {
+    "included_scope": "Durable cross-session project state and same-mission checkpoint/relaunch continuity: preserve committed work, identity, task and mission bindings across process/context loss; resume without reexecuting completed work; continue to terminal completion.",
+    "excluded_scope": [
+      "AUTONOMOUS_WAKE_WITHOUT_EXTERNAL_TRIGGER",
+      "GENERAL_SEMANTIC_MEMORY_QUALITY_OR_RECALL_ACCURACY",
+      "ARBITRARY_COGNITIVE_COMPETENCE",
+      "UNBOUNDED_AUTONOMY_WITHOUT_CHECKPOINT_TRIGGERS"
+    ],
+    "rule": "THE_COMPOSITION_MEMORY_COMPONENT_RECEIVES_ONLY_THE_CANONICAL_TERMINAL_MEMORY_FAMILY_SCOPE__NO_GENERAL_SEMANTIC_MEMORY_INHERITANCE"
+  },
+  "candidate_receipt": {
+    "receipt_id": "COMPOSITION_OWNED_FAMILY_BRIDGE::LONG_HORIZON_MEMORY_AND_CONTINUITY::memory",
+    "component_id": "memory",
+    "interface_id": "browser/computer action+memory+recovery",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": false,
+    "independent": false,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "source_witness_path": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json"
+  },
+  "hard_rules": [
+    "BIND_BY_CANONICAL_TERMINAL_ENVELOPE_SEMANTICS_AND_EXACT_FROZEN_COMPONENT_ONLY__NOT_BY_FAMILY_NAME_ALONE",
+    "REQUIRE_EXACTLY_ONE_NON_COMPOSITION_TERMINAL_FAMILY_WHOSE_USEFUL_BEHAVIOR_CONTAINS_THE_LITERAL_MEMORY_ROLE",
+    "SOURCE_FAMILY_TERMINAL_PROTOCOL_MUST_ALREADY_BE_PASS",
+    "SOURCE_OWNERSHIP_PACKAGE_MUST_BE_VERIFIED_OWNED_EQUAL_OR_BETTER_AND_CLOSE_ITS_PARENT_FAMILY_FOR_ITS_CLAIM_SCOPE",
+    "PRESERVE_ALL_SOURCE_EXCLUDED_SCOPE",
+    "NO_GENERAL_SEMANTIC_MEMORY_QUALITY_CREDIT",
+    "NO_PARENT_COMPOSITION_ACCEPTANCE_FROM_THIS_COMPONENT",
+    "NO_NEW_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_BEFORE_INDEPENDENT_VERIFICATION"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_SOURCE_AND_BINDING_BYTES__IF_PASS_PROMOTE_ONLY_THIS_MEMORY_COMPONENT_RECEIPT_INTO_COMPOSITION_COMPONENT_PROOF_SLICE_INPUT_V3__RERUN_SLICER__EXPECT_3_OF_12_SCOPED_PROVED",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
