@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PREQUALIFICATION_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__FAIL_CLOSED_GLOBAL_PREQUALIFICATION_REDUCER_VERIFIED__ZERO_TERMINAL_EVIDENCE",
+  "brain_head_at_record": "a23a4e7cddc9e73b1178f82626af069615994712",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 519,
+  "public_merge_commit": "9138e8ff55b5d7386042fdfb9e5533b79ce2f8df",
+  "workflow_run_id": 36957385476,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_prequalification_reducer.py": "2cd230cd4497ff77af1bc207bdb8dcb4a1f37fcb",
+    "canonical/tests/test_terminal_prequalification_reducer.py": "60fd6b73ebccbd96b176c2d8c58a41805f9aae25"
+  },
+  "verified": [
+    "ALL_EXPLICIT_GATES_PASS_AUTHORIZES_ONLY_FOUR_PORTFOLIO_WAVE",
+    "ANY_PORTFOLIO_BLOCKER_FAILS_CLOSED",
+    "MISSING_BOOLEAN_GATE_FAILS_CLOSED",
+    "OPTIMISTIC_STATUS_OR_EXECUTION_AUTHORITY_FIELD_CANNOT_OVERRIDE_BLOCKER"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
