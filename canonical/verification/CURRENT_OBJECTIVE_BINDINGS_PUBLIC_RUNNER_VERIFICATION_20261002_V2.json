@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_CURRENT_OBJECTIVE_BINDINGS_EXACT_BYTES__PREWAVE_ONLY__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 852,
+  "public_pr_head_sha": "54121446254f9eb1440064153569824e7d091e7f",
+  "public_merge_commit": "731851e7f1cb53323fb1b44afc817b3eeffa7634",
+  "verified_jobs": [
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "workflow_run_id": 36998154587,
+      "workflow_job_id": 110809506170,
+      "conclusion": "success",
+      "binding_path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "binding_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1"
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "workflow_run_id": 36998154603,
+      "workflow_job_id": 110809506505,
+      "conclusion": "success",
+      "binding_path": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "binding_blob_sha": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1"
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "workflow_run_id": 36998154603,
+      "workflow_job_id": 110809506514,
+      "conclusion": "success",
+      "binding_path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "binding_blob_sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "workflow_run_id": 36998154603,
+      "workflow_job_id": 110809506559,
+      "conclusion": "success",
+      "binding_path": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "binding_blob_sha": "a7015b12f55fc971233f9fdddf59d50cfc43892b"
+    },
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "workflow_run_id": 36998154581,
+      "workflow_job_id": 110809505782,
+      "conclusion": "success",
+      "binding_path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "binding_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    }
+  ],
+  "verified": [
+    "EXACT_CURRENT_BINDING_BLOB_IDENTITIES",
+    "DELEGATION_REBOUND_BINDING_FAIL_CLOSED_REGRESSION_PASS",
+    "BROWSER_CURRENT_BINDING_VALIDATOR_PASS",
+    "TOOL_DISCOVERY_CURRENT_BINDING_VALIDATOR_PASS",
+    "RESEARCH_CURRENT_BINDING_VALIDATOR_PASS",
+    "TRAJECTORY_CURRENT_PREWAVE_BINDING_PASS",
+    "TRAJECTORY_TYPED_V4_FULL_TEST_FUNCTION_SET_PASS",
+    "ZERO_TERMINAL_RESULTS_CONSUMED",
+    "ZERO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "limitations": [
+    "PREWAVE_ROUTE_GATE_EVIDENCE_ONLY",
+    "DOES_NOT_EXECUTE_ANY_TERMINAL_OBJECTIVE_POPULATION",
+    "DOES_NOT_BY_ITSELF_CLOSE_ANY_OPUS55_ACCEPTANCE_PREDICATE"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
