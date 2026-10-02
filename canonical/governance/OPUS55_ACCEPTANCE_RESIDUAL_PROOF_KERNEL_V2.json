@@ -26,12 +26,12 @@
   ],
   "current_expected_state": {
     "residual_registry_families": 17,
-    "acceptance_pending_families": 16,
+    "acceptance_pending_families": 15,
     "atomic_predicates": 38,
     "receipt_saturation_complete": true,
-    "proved_predicates": 8,
+    "proved_predicates": 9,
     "open_direct_predicates": 0,
-    "blocked_predicates": 30,
+    "blocked_predicates": 29,
     "authorized_acceptance_case_actions": 0,
     "public_score_producing_routes_ready": 0,
     "terminal_promotion_allowed": false
