@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__FOUR_ROUTES_NARROWED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__TRAJECTORY_INFORMATION_SAFE_PREFLIGHT_INDEPENDENT_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -69,14 +69,15 @@
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
       "portfolio": "T0_T2",
-      "proof_state": "INFORMATION_SAFE_COUNTERFACTUAL_RESCUE_ROUTE_BUILT__WHOLE_SCOPE_ADMISSION_PENDING",
+      "proof_state": "INDEPENDENT_INFORMATION_SAFE_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
       "route": "canonical/runtime/trajectory_failure_information_safe_proof.py",
       "blockers": [
         "CURRENT_ROUTE_SELECTS_AMONG_PREDECLARED_FALSIFIABLE_REPAIR_ACTIONS__FULL_REPAIR_TARGET_NOMINATION_SCOPE_NOT_YET_PROVEN",
         "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
         "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
       ],
-      "candidate": "canonical/runtime/trajectory_failure_information_safe_candidate.py"
+      "candidate": "canonical/runtime/trajectory_failure_information_safe_candidate.py",
+      "independent_preflight": "canonical/verification/TRAJECTORY_FAILURE_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
@@ -146,7 +147,7 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 0,
   "execution_authority": false,
-  "next": "IMPLEMENT_AND_PREFLIGHT_INFORMATION_SAFE_POPULATIONS_AND_ORACLES__PASS_SCOPE_EQUIVALENT_PROOF_GATE_V2_PER_CONTRACT__ONLY_THEN_MARK_TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+  "next": "CLOSE_REMAINING_WHOLE_SCOPE_ROUTE_DIMENSIONS__PASS_SCOPE_EQUIVALENT_PROOF_GATE_V2_PER_CONTRACT__FREEZE_ROUTE_SPECIFIC_POPULATIONS_ACCEPTANCE_AND_ORACLES__THEN_REDUCE",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
