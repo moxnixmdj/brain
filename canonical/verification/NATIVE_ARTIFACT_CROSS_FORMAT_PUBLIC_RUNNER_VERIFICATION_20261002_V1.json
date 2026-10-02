@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_CROSS_FORMAT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_BOUNDED_PREFLIGHT_PASS__DOCX_XLSX_PPTX_PDF_STRUCTURAL_PRESERVATION__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 571,
+  "public_merge_commit": "8103cc5a85822007fcf643116e3f1accca4e4e4b",
+  "workflow_run_id": 36960440396,
+  "workflow_job_id": 110692731800,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/native_artifact_cross_format_candidate_v1.py": "f3e5090647dd9029ab9f46efd06dc0c0d0addbc3",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py": "904eb61171f5ee775ff7824c1be7778d7acc4a23",
+    "canonical/tests/test_native_artifact_cross_format_preflight_v1.py": "4ec2b2b2a17b5478475df2765b200b7395e5786b",
+    "canonical/runtime/ooxml_package_transaction.py": "970be62854c918b306ae3f62989009bfbd0e8fc7",
+    "canonical/runtime/pdf_native_edit_transaction.py": "b9f673ffe0474d00a598089077ad93db40c00dd8"
+  },
+  "pinned_verifier_dependencies": {
+    "python-docx": "1.2.0",
+    "openpyxl": "3.1.5",
+    "python-pptx": "1.0.2",
+    "pypdf": "6.19.0",
+    "pillow": "12.3.0"
+  },
+  "verified": [
+    "CANDIDATE_HAS_NO_HIDDEN_ORACLE_IMPORT",
+    "DOCX_XLSX_PPTX_PDF_NATIVE_OUTPUTS_REOPEN_SUCCESSFULLY",
+    "OOXML_UNRELATED_PACKAGE_MEMBERS_REMAIN_BYTE_IDENTICAL",
+    "OOXML_TARGET_PART_DIFF_IS_LIMITED_TO_DECLARED_NODE_TEXT",
+    "DOCX_UNRELATED_PARAGRAPH_RUN_STYLE_AND_SECTION_STRUCTURE_PRESERVED",
+    "XLSX_UNRELATED_CELL_STYLE_FORMULA_DIMENSION_MERGE_AND_SHEET_STRUCTURE_PRESERVED",
+    "PPTX_UNRELATED_SHAPE_GEOMETRY_TEXT_AND_RUN_FORMATTING_PRESERVED",
+    "PDF_PAGE_COUNT_GEOMETRY_OPERATOR_SEQUENCE_AND_UNRELATED_TEXT_PRESERVED",
+    "UNCHANGED_SOURCE_AND_UNRELATED_OOXML_MUTATION_ARE_REJECTED"
+  ],
+  "limitations": [
+    "BOUNDED_EXPLICIT_LOW_LEVEL_EDIT_SPECIFICATION_ONLY",
+    "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION",
+    "NO_PIXEL_RENDER_EQUIVALENCE",
+    "NO_WHOLE_CONTRACT_SCOPE_EQUIVALENCE",
+    "NO_TERMINAL_ACCEPTANCE_OR_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
