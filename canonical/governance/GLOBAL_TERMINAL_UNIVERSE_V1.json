@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_UNIVERSE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__M2_DOCX_RUN_SPAN_AND_SHARED_ZERO_REALITY_SLICES_VERIFIED__CROSS_LANE_SEMANTICS_DEDUPLICATED__GLOBAL_EXACT_CUT_NOT_READY__FRESH_TERMINAL_EVIDENCE_BLOCKED",
+  "status": "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__M4_PROOF_ONLY__M2_M3_M5_INDEPENDENT_MECHANISM_RESIDUALS__GLOBAL_EXACT_CUT_NOT_READY__FRESH_TERMINAL_EVIDENCE_BLOCKED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_bindings": {
     "global_obligation_graph": {
@@ -353,16 +353,22 @@
       },
       {
         "id": "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
-        "hole_type": "?M",
-        "state": "OPEN",
+        "hole_type": "?P",
+        "state": "OPEN_PROOF_ONLY__NO_INDEPENDENT_MECHANISM_RESIDUAL",
         "covers_families": [
           "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
           "AGENTIC_SCIENTIFIC_RESEARCH",
           "UNKNOWN_DOMAIN_ADAPTATION"
         ],
-        "remaining": "SOURCE_TRUTH_AND_AUTHORITY_INFERENCE_BEYOND_EXPLICIT_VERIFIED_METADATA",
+        "remaining": "OWNED_M4_CONTROL_LOOP__DEPENDENT_ON_M0_SEMANTIC_NORMALIZATION_AND_M3_DISCOVERY_WHEN_REQUIRED__END_TO_END_ACCEPTANCE_PROOF_OPEN",
         "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
-        "verified_bounded_research_frontier_receipt": "canonical/capabilities/opus55/M4_BOUNDED_RESEARCH_FRONTIER_001.json"
+        "verified_bounded_research_frontier_receipt": "canonical/capabilities/opus55/M4_BOUNDED_RESEARCH_FRONTIER_001.json",
+        "independent_mechanism_residual": false,
+        "dependencies": [
+          "M0_SEMANTIC_SPEC_AND_INDEPENDENT_ACCEPTANCE",
+          "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL"
+        ],
+        "dependency_compression_receipt": "canonical/governance/M4_DEPENDENCY_COMPRESSION_V1.json"
       },
       {
         "id": "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
@@ -467,7 +473,6 @@
     "open_mechanism_holes": [
       "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
       "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
-      "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
       "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
       "G_DONOR_DEPENDENCE_ZERO",
       "G_UNEXPLAINED_BEHAVIOR_ZERO",
@@ -518,5 +523,6 @@
     "open_mechanism_lanes": 4
   },
   "incremental_spend_usd": 0,
-  "fresh_terminal_evidence_consumed_delta": 0
+  "fresh_terminal_evidence_consumed_delta": 0,
+  "next": "SATURATE_M2_M3_M5_SURVIVING_LANE_LOCAL_RESIDUALS__DEDUP_UPSTREAM_M0_M1_DEPENDENCIES__RECOMPUTE_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE"
 }
