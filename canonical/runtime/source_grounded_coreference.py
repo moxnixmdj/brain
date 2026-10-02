@@ -111,7 +111,9 @@ def extract_surface_mentions(text:str)->dict:
             else: break
         return i
     spans=[]
-    pattern=re.compile(r"\b(?:[A-Z][A-Za-z0-9'_-]*(?:\s+[A-Z][A-Za-z0-9'_-]*)*|he|him|his|she|her|hers|they|them|their|theirs|it|its|this|that|these|those)\b",re.I)
+    pattern=re.compile(
+        r"\b(?:[A-Z][A-Za-z0-9'_-]*(?:\s+[A-Z][A-Za-z0-9'_-]*)*|(?i:he|him|his|she|her|hers|they|them|their|theirs|it|its|this|that|these|those))\b"
+    )
     for i,m in enumerate(pattern.finditer(text)):
         raw=m.group(0)
         low=raw.lower()
