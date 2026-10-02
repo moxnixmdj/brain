@@ -22,7 +22,8 @@
     "CLOSED_FAMILY_CI_ON_UNRELATED_PATH_CHANGES",
     "HAND_MAINTAINED_MIRROR_DIVERGENCE",
     "REPEATED_ACQUISITION_OF_ALREADY_OBSERVED_INFORMATION_WITHOUT_INVALIDATION",
-    "RETRY_PRIVATE_CI_AFTER_RUNNER_ID_ZERO_WITHOUT_HEALTH_CHANGE"
+    "RETRY_PRIVATE_CI_AFTER_RUNNER_ID_ZERO_WITHOUT_HEALTH_CHANGE",
+    "PROMOTION_FROM_RECEIPT_BOUND_TO_SUPERSEDED_ARTIFACT_BYTES"
   ],
   "retained_nonnegotiable_costs": [
     "INDEPENDENT_VERIFICATION",
@@ -50,6 +51,9 @@
     "main_microcommit_policy": "FORBIDDEN",
     "private_main_push_ci": "QUARANTINED_WHILE_RUNNER_ID_ZERO",
     "main_commit_boundary": "ONE_COMMIT_PER_CAUSAL_OR_TERMINAL_BOUNDARY",
-    "repeated_known_information": "FORBIDDEN_UNLESS_EXPLICITLY_INVALIDATED"
+    "repeated_known_information": "FORBIDDEN_UNLESS_EXPLICITLY_INVALIDATED",
+    "terminal_route_evidence_freshness_guard": "canonical/runtime/terminal_route_evidence_freshness.py",
+    "promotion_requires_current_exact_blob_binding": true,
+    "stale_evidence_action": "REVERIFY_CHANGED_BYTES_BEFORE_ANY_SCOPE_OR_ACCEPTANCE_PROMOTION"
   }
 }

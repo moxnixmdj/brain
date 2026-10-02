@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_EVIDENCE_FRESHNESS_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_BLOB_STALENESS_AND_NEWEST_REVALIDATION_PRECEDENCE_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 609,
+  "public_merge_commit": "933626a406e27675010a4628b6401fd5dcc1b985",
+  "workflow_run_id": 36963177523,
+  "workflow_job_id": 110701115002,
+  "workflow_conclusion": "success",
+  "exact_public_blobs": {
+    "canonical/runtime/terminal_route_evidence_freshness.py": "71bbb68188681549c83923d2bfb3a2fe412d2f65",
+    "canonical/runtime/terminal_route_closure_controller.py": "f4508089a6667724e97884c69baa0c2198c92646",
+    "canonical/tests/test_terminal_route_closure_controller.py": "5265931f9a757f2e1f8512228c0c072bddadea93"
+  },
+  "verified": [
+    "21_UNIT_AND_REGRESSION_TESTS_PASS",
+    "CURRENT_ARTIFACT_GIT_BLOB_HASH_RECOMPUTED",
+    "STALE_RECEIPT_BINDING_CREATES_FAIL_CLOSED_SCHEDULER_BLOCKER",
+    "NEWER_CURRENT_BLOB_REVALIDATION_SUPERSEDES_OLDER_BINDING_FOR_SAME_ARTIFACT",
+    "OPEN_DOMAIN_MATCHED_PROTOCOL_SCHEDULING_BEHAVIOR_PRESERVED",
+    "ACTUAL_DELEGATION_STALE_CANDIDATE_RECEIPT_MISMATCH_DETECTED_F1A93_VS_9F2C3"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

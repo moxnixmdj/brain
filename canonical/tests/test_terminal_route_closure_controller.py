@@ -213,5 +213,39 @@ class TerminalRouteClosureControllerTests(unittest.TestCase):
             self.assertTrue(out["errors"][0].startswith("OPEN_DOMAIN_AUDIT_INVALID:"))
 
 
+
+class TerminalRouteEvidenceFreshnessIntegrationTests(TerminalRouteClosureControllerTests):
+    def test_changed_candidate_is_scheduled_for_exact_reverification(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); gov=root/"canonical/governance"; rt=root/"canonical/runtime"; ver=root/"canonical/verification"
+            gov.mkdir(parents=True); rt.mkdir(parents=True); ver.mkdir(parents=True)
+            candidate=rt/"candidate.py"; candidate.write_text("NEW=1\n",encoding="utf-8")
+            old=b"OLD=1\n"; old_sha=hashlib.sha1(b"blob "+str(len(old)).encode()+b"\0"+old).hexdigest()
+            (ver/"receipt.json").write_text(json.dumps({"status":"INDEPENDENT_PASS","exact_brain_blobs":{"canonical/runtime/candidate.py":old_sha}}),encoding="utf-8")
+            (gov/"ACTIVE_TERMINAL_PROOF_BASIS_V1.json").write_text(json.dumps({"active_contract_count":1,"admissible_frozen_terminal_route_count":0,"contracts":[{"behavior_id":"X","portfolio":"T1","proof_state":"INDEPENDENT_PREFLIGHT_PASS","blockers":["POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"],"candidate":"canonical/runtime/candidate.py","independent_preflight":"canonical/verification/receipt.json"}]}),encoding="utf-8")
+            out=evaluate(root); row=out["queue"][0]
+            self.assertEqual(row["blocker_classes"]["stale_evidence"],1)
+            self.assertEqual(row["next_action_class"],"REVERIFY_CHANGED_BYTES_BEFORE_ANY_SCOPE_OR_ACCEPTANCE_PROMOTION")
+            self.assertTrue(row["evidence_freshness"]["stale"])
+
+    def test_newer_current_blob_revalidation_supersedes_old_candidate_binding(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); gov=root/"canonical/governance"; rt=root/"canonical/runtime"; ver=root/"canonical/verification"
+            gov.mkdir(parents=True); rt.mkdir(parents=True); ver.mkdir(parents=True)
+            data=b"NEW=1\n"; (rt/"candidate.py").write_bytes(data)
+            new_sha=hashlib.sha1(b"blob "+str(len(data)).encode()+b"\0"+data).hexdigest()
+            old=b"OLD=1\n"; old_sha=hashlib.sha1(b"blob "+str(len(old)).encode()+b"\0"+old).hexdigest()
+            (ver/"new.json").write_text(json.dumps({"status":"INDEPENDENT_PASS","exact_bound_blobs":{"canonical/runtime/candidate.py":new_sha}}),encoding="utf-8")
+            (ver/"old.json").write_text(json.dumps({"status":"INDEPENDENT_PASS","exact_bound_blobs":{"canonical/runtime/candidate.py":old_sha}}),encoding="utf-8")
+            (gov/"ACTIVE_TERMINAL_PROOF_BASIS_V1.json").write_text(json.dumps({"active_contract_count":1,"admissible_frozen_terminal_route_count":0,"contracts":[{"behavior_id":"X","portfolio":"T1","proof_state":"INDEPENDENT_PREFLIGHT_PASS","blockers":["POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"],"candidate":"canonical/runtime/candidate.py","current_blob_revalidation":"canonical/verification/new.json","population_binding_verification":"canonical/verification/old.json"}]}),encoding="utf-8")
+            out=evaluate(root); self.assertFalse(out["queue"][0]["evidence_freshness"]["stale"])
+
+    def test_acceptance_proof_has_specific_action(self):
+        out=self.run_basis([{"behavior_id":"X","portfolio":"T2","proof_state":"PENDING","blockers":["REGISTRY_TERMINAL_ACCEPTANCE_PROOF_NOT_YET_TRUTHFULLY_ESTABLISHED"]}])
+        self.assertEqual(out["queue"][0]["blocker_classes"]["acceptance_proof"],1)
+        self.assertEqual(out["queue"][0]["next_action_class"],"ESTABLISH_REGISTERED_TERMINAL_ACCEPTANCE_PROOF")
+
 if __name__ == "__main__":
     unittest.main()
