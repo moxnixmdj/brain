@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_MINIMUM_CARRIER_RECOVERY_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__RAW_RESOURCE_METADATA_REPRODUCED__MINIMUM_EIGHT_TASK_CUT_PROVED__TASK_IDENTITY_AND_CARRIER_STILL_UNBOUND__ZERO_CREDIT",
+  "objective": "Independently reproduce the Terminal-Bench 4.0 resource metadata at the exact public source commit and prove the minimum resource-only recovery cut required to raise the frozen score upper bound from 180 to the 220 threshold without opening task instructions, solution files, or acceptance cases.",
+  "exact_brain_blobs": {
+    "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json": "fc5bb61b1b97e6aae46222b9de84e16797510bcc",
+    "canonical/verification/TB4_FULL_CARRIER_COMPATIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "0ac17c6eb66e95b8673b6031c2dbfe420437a6fc",
+    "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json": "36cfd7b29465a2da6c05667b18848bdcabcd22e6",
+    "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json": "a7b0c692251b92819007c581b9fe84b75960cab7"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 961,
+    "verified_head": "6e0e634b63c8ff0c98c474ba6fa061c1ec2d3b38",
+    "merge_commit": "6cb65d79713eaaabb3e465869d4755a78113fdfd",
+    "workflow_name": "Verify TB4 minimum carrier recovery cut v1",
+    "workflow_run_id": 37017018110,
+    "workflow_job_id": 110870274918,
+    "conclusion": "success"
+  },
+  "verifier_blobs": {
+    ".github/workflows/verify-tb4-minimum-carrier-recovery-cut-v1.yml": "cdb5e9c3287935e9eb611c50cb8b19c7d9393445",
+    "canonical/runtime/tb4_minimum_carrier_recovery_independent_verifier_v1.py": "1a694d8898798549ce39d80e4ba8355912d3d454",
+    "canonical/tests/test_tb4_minimum_carrier_recovery_independent_v1.py": "709fc39defb83cbbda67b4bb92bf98164a808eef"
+  },
+  "public_source": {
+    "repository": "harbor-framework/terminal-bench",
+    "commit": "1dcda8716784493721921c23e4bc7f7d988b4494",
+    "declared_version": "4.0.0",
+    "task_count": 66
+  },
+  "verified": [
+    "EXACT_FOUR_BRAIN_AUTHORITY_BLOBS_MATCH_PUBLIC_CAPSULE",
+    "EXACT_PUBLIC_TERMINAL_BENCH_SOURCE_COMMIT_CHECKED_OUT",
+    "ALL_66_TASK_TOML_RESOURCE_RECORDS_REPRODUCED",
+    "RESOURCE_EXCEED_TASK_COUNT_12",
+    "GPU_TASK_COUNT_3",
+    "MINIMUM_ADDITIONAL_CREDITABLE_TASKS_8",
+    "UNIQUE_EIGHT_TASK_NON_GPU_RESOURCE_RECOVERY_SET_REPRODUCED",
+    "MINIMUM_ENVELOPE_8_CPU_16384_MB_USABLE_RAM_51200_MB_FREE_STORAGE_NO_GPU",
+    "CURRENT_SCORE_UPPER_BOUND_180",
+    "CONDITIONAL_REOPENED_SCORE_UPPER_BOUND_220_EQUALS_REQUIRED_220",
+    "SEVEN_TASK_MUTATION_FAILS_CLOSED",
+    "RESOURCE_ROW_TAMPER_FAILS_CLOSED",
+    "AUTHORITY_BLOB_TAMPER_FAILS_CLOSED",
+    "SELF_AUTHORIZATION_TAMPER_FAILS_CLOSED",
+    "ZERO_TASK_INSTRUCTION_FILES_READ",
+    "ZERO_SOLUTION_FILES_READ",
+    "ZERO_ACCEPTANCE_CASE_EXECUTIONS"
+  ],
+  "minimum_recovery_set": [
+    "terminal-bench/distributed-dedup",
+    "terminal-bench/formal-crypto",
+    "terminal-bench/lake-temp-glm",
+    "terminal-bench/medical-claims-processing",
+    "terminal-bench/shadow-relay",
+    "terminal-bench/takens-embedding-lean",
+    "terminal-bench/uefi-bootkit",
+    "terminal-bench/wdm-design"
+  ],
+  "minimum_carrier_envelope": {
+    "cpus_at_least": 8,
+    "usable_memory_mb_at_least": 16384,
+    "free_storage_mb_at_least": 51200,
+    "gpus_required": 0,
+    "docker_required": true,
+    "docker_compose_required": true
+  },
+  "score_effect": {
+    "current_remaining_creditable_tasks": 36,
+    "current_upper_bound_successes": 180,
+    "minimum_additional_creditable_tasks": 8,
+    "conditional_reopened_creditable_tasks": 44,
+    "conditional_reopened_upper_bound_successes": 220,
+    "required_successes": 220,
+    "attainability_boundary_reopens_only_if_remaining_bindings_prove": true
+  },
+  "unresolved": [
+    "EIGHT_SELECTED_TASK_NAMES_NOT_YET_CONTENT_ADDRESSED_TO_EXACT_FROZEN_BENCHMARK_TASK_IDENTITIES",
+    "NO_CONCRETE_ZERO_INCREMENTAL_SPEND_CARRIER_BOUND",
+    "NO_PROTOCOL_EQUIVALENCE_BOUND_FOR_A_NEW_OR_HETEROGENEOUS_CARRIER",
+    "ATTAINABILITY_CUT_NOT_YET_RECOMPILED_WITH_RECOVERED_TASKS",
+    "NO_EXECUTION_AUTHORITY"
+  ],
+  "resource_metadata_independently_reproduced": true,
+  "task_identity_binding": false,
+  "concrete_zero_cost_carrier_bound": false,
+  "protocol_equivalence_bound": false,
+  "attainability_recompiled": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
