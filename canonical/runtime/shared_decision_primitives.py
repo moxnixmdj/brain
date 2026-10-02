@@ -241,3 +241,171 @@ def select_repair_target(
         return RepairDecision("ESCALATE",None,"NO_CAUSALLY_SUPPORTED_INTERVENABLE_REPAIR")
     eligible.sort(key=lambda c:(c.step_index,-c.predicted_rescue,-c.evidence_strength,c.candidate_id))
     return RepairDecision("SELECT",eligible[0].candidate_id,"EARLIEST_CAUSALLY_SUPPORTED_RESCUE_TARGET")
+
+
+# ---- Cross-lane bounded control primitives (M2-M5 zero-reality subtraction) ----
+
+import re
+from typing import Mapping
+
+def _semantic_tokens(text: str) -> FrozenSet[str]:
+    """Conservative observable tokenization. No synonym or latent-semantic guessing."""
+    return frozenset(re.findall(r"[a-z0-9]+", str(text).lower()))
+
+@dataclass(frozen=True)
+class UIElement:
+    element_id: str
+    label: str
+    role: str
+    actions: FrozenSet[str]
+    visible: bool = True
+    enabled: bool = True
+    authorized: bool = True
+
+@dataclass(frozen=True)
+class GroundedActionDecision:
+    status: str
+    element_id: str | None
+    action: str | None
+    reason: str
+
+def select_grounded_ui_action(
+    required_terms: Iterable[str],
+    action: str,
+    elements: Sequence[UIElement],
+) -> GroundedActionDecision:
+    """Select only an observable, enabled, authorized element with explicit term coverage.
+
+    This deliberately handles the deterministic/observable grounding slice only.
+    If visible metadata is insufficient, it returns ESCALATE instead of inventing
+    an element identity from unstated visual semantics.
+    """
+    req=frozenset(str(x).lower() for x in required_terms if str(x).strip())
+    eligible=[]
+    for e in elements:
+        if not (e.visible and e.enabled and e.authorized and action in e.actions):
+            continue
+        tokens=_semantic_tokens(e.label) | _semantic_tokens(e.role)
+        if req.issubset(tokens):
+            eligible.append((len(tokens-req),e.element_id,e))
+    if not eligible:
+        return GroundedActionDecision("ESCALATE",None,None,"NO_OBSERVABLE_AUTHORIZED_ELEMENT_WITH_EXPLICIT_TERM_COVERAGE")
+    eligible.sort(key=lambda x:(x[0],x[1]))
+    chosen=eligible[0][2]
+    return GroundedActionDecision("SELECT",chosen.element_id,action,"MIN_EXTRA_TERMS_EXPLICIT_GROUNDING")
+
+@dataclass(frozen=True)
+class ArtifactOperation:
+    operation_id: str
+    satisfies: FrozenSet[str]
+    cost: float = 0.0
+    deterministic: bool = True
+    preserves_unrequested_structure: bool = True
+    available: bool = True
+
+@dataclass(frozen=True)
+class ArtifactPlanDecision:
+    status: str
+    operation_ids: tuple[str,...]
+    uncovered: FrozenSet[str]
+    reason: str
+
+def plan_artifact_operations(
+    required_changes: Iterable[str],
+    operations: Sequence[ArtifactOperation],
+) -> ArtifactPlanDecision:
+    """Exact bounded set-cover over deterministic structure-preserving operations."""
+    required=frozenset(required_changes)
+    if not required:
+        return ArtifactPlanDecision("PASS",(),frozenset(),"NO_REQUIRED_CHANGES")
+    eligible=[
+        o for o in operations
+        if o.available and o.deterministic and o.preserves_unrequested_structure and o.cost >= 0
+    ]
+    if len(eligible)>20:
+        return ArtifactPlanDecision("ESCALATE",(),required,"TOO_MANY_OPERATIONS_FOR_EXACT_BOUNDED_SEARCH")
+    best=None
+    for k in range(len(eligible)+1):
+        for idxs in combinations(range(len(eligible)),k):
+            subset=[eligible[i] for i in idxs]
+            covered=frozenset().union(*(o.satisfies for o in subset)) if subset else frozenset()
+            if not required.issubset(covered):
+                continue
+            ids=tuple(sorted(o.operation_id for o in subset))
+            key=(sum(o.cost for o in subset),k,ids)
+            if best is None or key<best[0]:
+                best=(key,ids)
+        if best is not None:
+            break
+    if best is None:
+        covered=frozenset().union(*(o.satisfies for o in eligible)) if eligible else frozenset()
+        return ArtifactPlanDecision("ESCALATE",(),required-covered,"NO_STRUCTURE_PRESERVING_OPERATION_COVERAGE")
+    return ArtifactPlanDecision("PASS",best[1],frozenset(),"MINIMUM_COST_COMPLETE_STRUCTURE_PRESERVING_PLAN")
+
+@dataclass(frozen=True)
+class SearchProvider:
+    provider_id: str
+    cost: float = 0.0
+    verified: bool = True
+    available: bool = True
+    authorized: bool = True
+
+def compile_requirement_search_actions(
+    unresolved_requirements: Mapping[str,str],
+    providers: Sequence[SearchProvider],
+) -> tuple[ResearchAction,...]:
+    """Compile each explicit unresolved requirement into admissible direct search actions.
+
+    Query text is the requirement itself; this is intentionally not a learned query
+    rewrite. Semantic requirement extraction belongs upstream (M0), already separate.
+    """
+    good=sorted(
+        [p for p in providers if p.verified and p.available and p.authorized and p.cost>=0],
+        key=lambda p:(p.cost,p.provider_id),
+    )
+    out=[]
+    for rid,text in sorted(unresolved_requirements.items()):
+        q=" ".join(str(text).split())
+        if not q:
+            continue
+        for p in good:
+            out.append(ResearchAction(
+                action_id=f"search::{p.provider_id}::{rid}::{q}",
+                covers=frozenset({rid}),
+                cost=p.cost,
+                reliability=1.0,
+                verified=True,
+            ))
+    return tuple(out)
+
+@dataclass(frozen=True)
+class TraceDecision:
+    event_id: str
+    step_index: int
+    intervenable: bool = True
+    authorized: bool = True
+
+@dataclass(frozen=True)
+class FailureControlDecision:
+    status: str
+    candidate_ids: tuple[str,...]
+    reason: str
+
+def enumerate_nonreplayable_failure_candidates(
+    decisions: Sequence[TraceDecision],
+    failure_step_index: int,
+) -> FailureControlDecision:
+    """Lossless candidate generation over prior authorized/intervenable decisions.
+
+    It makes no claim that temporal precedence is causality. Instead it guarantees
+    that no prior authorized decision is silently omitted before later evidence,
+    invariant checks, intervention tests, or causal ranking narrow the set.
+    """
+    candidates=tuple(
+        d.event_id
+        for d in sorted(decisions,key=lambda d:(d.step_index,d.event_id))
+        if d.step_index < failure_step_index and d.intervenable and d.authorized
+    )
+    if not candidates:
+        return FailureControlDecision("ESCALATE",(),"NO_PRIOR_AUTHORIZED_INTERVENABLE_DECISION_CANDIDATES")
+    return FailureControlDecision("CANDIDATES",candidates,"LOSSLESS_PRIOR_DECISION_CANDIDATE_SET__NO_CAUSAL_CLAIM")
