@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_M2_DOCX_RELATIONSHIP_IMAGE_REPLACEMENT_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_NATIVE_IMAGE_EDIT_COMPONENT__ZERO_WHOLE_M2_OR_FAMILY_CREDIT",
+  "parent_lane": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+  "parent_tail": "D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_TAIL",
+  "implementation": "canonical/runtime/docx_relationship_image_replace.py",
+  "implementation_blob_sha": "f298442677cc77021b3a0c5ca39bbe78b7f265c7",
+  "tests": "canonical/tests/test_docx_relationship_image_replace.py",
+  "tests_blob_sha": "c62bc459a6be3b43f42fa049a57014fe54aa0381",
+  "workflow": ".github/workflows/verify-docx-relationship-image-replace.yml",
+  "workflow_blob_sha": "4707526b89a7cb1dde44a7dd22416022af380a03",
+  "independent_verification": {
+    "workflow_run_id": 36952036063,
+    "job_id": 110666855893,
+    "conclusion": "success",
+    "verified_command": "PYTHONPATH=. python -m unittest -v canonical.tests.test_docx_relationship_image_replace"
+  },
+  "owned_scope": [
+    "EXACT_SOURCE_PART_PLUS_RELATIONSHIP_ID_TO_REFERENCED_INTERNAL_IMAGE_PART_RESOLUTION",
+    "REPLACEMENT_IMAGE_SIGNATURE_MATCH_REQUIRED_FOR_EXISTING_MEDIA_EXTENSION",
+    "ONLY_REFERENCED_MEDIA_PAYLOAD_CHANGED",
+    "SOURCE_LAYOUT_XML_PRESERVED_BYTE_IDENTICAL",
+    "RELATIONSHIP_XML_PRESERVED_BYTE_IDENTICAL",
+    "UNRELATED_PACKAGE_MEMBERS_PRESERVED",
+    "UNREFERENCED_DUPLICATE_OR_NONIMAGE_RELATIONSHIPS_FAIL_CLOSED"
+  ],
+  "exclusions": [
+    "NO_IMAGE_TARGET_INFERENCE_FROM_NATURAL_LANGUAGE",
+    "NO_LAYOUT_RECOMPOSITION",
+    "NO_NEW_RELATIONSHIP_CREATION",
+    "NO_ARBITRARY_IMAGE_GEOMETRY_EDIT",
+    "NO_PDF_IMAGE_EDIT",
+    "NO_WHOLE_D0_M2_OR_ARTIFACT_FAMILY_CREDIT"
+  ],
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "new_reality_units_consumed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
