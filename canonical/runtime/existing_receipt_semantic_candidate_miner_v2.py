@@ -150,10 +150,17 @@ def witness_source_paths(witness: dict[str, Any]) -> list[Path]:
                 raw.append(p)
     seen: set[str] = set()
     out: list[Path] = []
+    root_resolved = ROOT.resolve()
     for p in raw:
-        if p not in seen:
-            seen.add(p)
-            out.append(ROOT / p)
+        if p in seen:
+            continue
+        seen.add(p)
+        try:
+            candidate = (ROOT / p).resolve()
+            candidate.relative_to(root_resolved)
+        except (OSError, ValueError):
+            continue
+        out.append(candidate)
     return out
 
 
