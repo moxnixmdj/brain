@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2",
   "date": "2026-10-02",
-  "status": "FROZEN_SELECTION_AND_INFORMATION_BOUNDARY_PROTOCOL__12_OF_12_ACTIVE_CONTRACTS__1_OF_12_ROUTE_POPULATION_BINDINGS_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_SELECTION_AND_INFORMATION_BOUNDARY_PROTOCOL__12_OF_12_ACTIVE_CONTRACTS__2_OF_12_ROUTE_POPULATION_BINDINGS_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
   "supersedes": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V1.json",
   "supersession_reason": "V1_FROZE_ONLY_10_OF_12_ACTIVE_CONTRACTS_AND_PREDATED_INFORMATION_SAFE_SCOPE_GATE_V2",
   "authority": [
@@ -73,12 +73,19 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "admissible_frozen_route_count": 1,
+  "admissible_frozen_route_count": 2,
   "frozen_route_bindings": {
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001": {
       "route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
       "population_binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
       "independent_verification": "canonical/verification/SA_CCR_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "status": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE"
+    },
+    "TASK_TO_DELEGATION_GRAPH_001": {
+      "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+      "population_binding": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+      "terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1.json",
+      "independent_verification": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "status": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE"
     }
   }
