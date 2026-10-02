@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from canonical.runtime.harbor_environment_transport import HarborEnvironmentTransport
-from canonical.runtime.harbor_brain_agent import validate_environment_command
+from canonical.runtime.harbor_command_policy import validate_environment_command
 
 
 @dataclass
