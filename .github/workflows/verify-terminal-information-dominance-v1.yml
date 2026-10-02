@@ -1,0 +1,39 @@
+name: Verify terminal information dominance v1
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/terminal_information_dominance_v1.py"
+      - "canonical/tests/test_terminal_information_dominance_v1.py"
+      - "canonical/tests/test_terminal_information_dominance_current_v1.py"
+      - "canonical/governance/TERMINAL_INFORMATION_DOMINANCE_CANDIDATE_V1.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V3.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json"
+      - ".github/workflows/verify-terminal-information-dominance-v1.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/terminal_information_dominance_v1.py"
+      - "canonical/tests/test_terminal_information_dominance_v1.py"
+      - "canonical/tests/test_terminal_information_dominance_current_v1.py"
+      - "canonical/governance/TERMINAL_INFORMATION_DOMINANCE_CANDIDATE_V1.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V3.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json"
+      - ".github/workflows/verify-terminal-information-dominance-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run optimizer unit tests
+        run: python -m unittest canonical.tests.test_terminal_information_dominance_v1 -v
+      - name: Run current frontier regression
+        run: python -m unittest canonical.tests.test_terminal_information_dominance_current_v1 -v
+      - name: Evaluate V3 information dominance
+        run: python canonical/runtime/terminal_information_dominance_v1.py
