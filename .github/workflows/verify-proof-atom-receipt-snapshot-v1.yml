@@ -24,15 +24,50 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Unit tests
-        run: python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v
-      - name: Produce sealed live snapshot
+      - name: Run verification and capture diagnostics
+        id: verify
+        shell: bash
         run: |
-          python canonical/runtime/proof_atom_receipt_snapshot_v1.py > /tmp/proof_atom_receipt_snapshot_v1.json
-          python -m json.tool /tmp/proof_atom_receipt_snapshot_v1.json >/dev/null
+          set +e
+          : > /tmp/proof_atom_snapshot_diagnostic.txt
+          echo "HEAD=$(git rev-parse HEAD)" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          echo "TREE=$(git rev-parse HEAD^{tree})" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          echo "=== UNIT TESTS ===" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v >> /tmp/proof_atom_snapshot_diagnostic.txt 2>&1
+          TEST_RC=$?
+          echo "TEST_RC=$TEST_RC" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          echo "=== SNAPSHOT ===" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          python canonical/runtime/proof_atom_receipt_snapshot_v1.py > /tmp/proof_atom_receipt_snapshot_v1.json 2>> /tmp/proof_atom_snapshot_diagnostic.txt
+          SNAPSHOT_RC=$?
+          echo "SNAPSHOT_RC=$SNAPSHOT_RC" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          if [ -s /tmp/proof_atom_receipt_snapshot_v1.json ]; then
+            python -m json.tool /tmp/proof_atom_receipt_snapshot_v1.json >> /tmp/proof_atom_snapshot_diagnostic.txt 2>&1
+            JSON_RC=$?
+          else
+            JSON_RC=99
+          fi
+          echo "JSON_RC=$JSON_RC" >> /tmp/proof_atom_snapshot_diagnostic.txt
+          echo "test_rc=$TEST_RC" >> "$GITHUB_OUTPUT"
+          echo "snapshot_rc=$SNAPSHOT_RC" >> "$GITHUB_OUTPUT"
+          echo "json_rc=$JSON_RC" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-snapshot-v1-diagnostic
+          path: /tmp/proof_atom_snapshot_diagnostic.txt
+          if-no-files-found: error
       - name: Upload sealed snapshot
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: proof-atom-receipt-snapshot-v1
           path: /tmp/proof_atom_receipt_snapshot_v1.json
-          if-no-files-found: error
+          if-no-files-found: warn
+      - name: Enforce verification result
+        shell: bash
+        run: |
+          test "${{ steps.verify.outputs.test_rc }}" = "0"
+          test "${{ steps.verify.outputs.snapshot_rc }}" = "0"
+          test "${{ steps.verify.outputs.json_rc }}" = "0"
