@@ -25,8 +25,8 @@ def p0_oracle(hidden, candidate):
     exclusions=set(candidate.get("justified_exclusions",[]))
     typed=bool(candidate.get("types_consistent"))
     independent=bool(candidate.get("independent_acceptance"))
-    traced={a for a,_ in edges}
-    complete=all(r in traced or r in exclusions for r in req)
+    touched={n for edge in edges for n in edge}
+    complete=all(r in touched or r in exclusions for r in req)
     return bool(complete and required_edges.issubset(edges) and typed and independent)
 
 
