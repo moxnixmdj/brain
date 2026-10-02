@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CARRIER_INDEPENDENT_ACCEPTANCE_BOUND_VERDICT_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_DERIVATION__INDEPENDENT_REPLAY_PENDING__FAIL_LOCKED",
+  "compiler": "canonical/runtime/acceptance_bound_compiler_v1.py",
+  "input": "canonical/governance/TB4_CARRIER_INDEPENDENT_ACCEPTANCE_BOUND_INPUT_V1.json",
+  "expected": {
+    "metric_type": "BINARY_RATE",
+    "decision": "FAIL_LOCKED",
+    "total_slots": 330,
+    "executable_slots": 215,
+    "required_successes": 220,
+    "optimistic_upper_bound_percent": "65.15151515151515151515151515",
+    "execution_authority": false
+  },
+  "consequence": "DO_NOT_SPEND_CASES_OR_ACQUIRE_CARRIERS_FOR_TB4_SCORE_ROUTE__ONLY_FULL_PROTOCOL_STRONGER_PROOF_TRANSMUTATION_CAN_ESCAPE_WITHOUT_CHANGING_THE_FROZEN_ACCEPTANCE_RULE",
+  "independent_verification": {
+    "status": "PENDING"
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
