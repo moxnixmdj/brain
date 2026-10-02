@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V2",
+  "date": "2026-10-02",
+  "status": "FROZEN_FOR_EXACT_SOLVER",
+  "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+  "source_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+  "distinctions": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "already_resolved": [],
+  "observations": [
+    {
+      "id": "A_M0A_COMPOSED_SEMANTIC_GRAPH_V1",
+      "covers": [
+        "M0A"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "interpretation": "ONE_IRREDUCIBLE_MATCHED_M0A_EVALUATION_AFTER_ZERO_REALITY_COMPOSITION_PREFIX"
+    },
+    {
+      "id": "A_M1A_DETERMINISTIC_PLUS_BOUNDED_RESIDUAL_V1",
+      "covers": [
+        "M1A"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "interpretation": "ONE_IRREDUCIBLE_MATCHED_M1A_EVALUATION_AFTER_ZERO_REALITY_DETERMINISTIC_PREFIX"
+    },
+    {
+      "id": "A_M1B_DETERMINISTIC",
+      "covers": [
+        "M1B"
+      ],
+      "cost": 0,
+      "source": "canonical/governance/RESIDUAL_CUT_INPUT_V1.json",
+      "interpretation": "ZERO_NEW_REALITY_DETERMINISTIC_CONSTRUCTION_AND_EXISTING_EVIDENCE_CLOSURE_ROUTE"
+    }
+  ],
+  "dominance_deletions": [
+    {
+      "id": "WHOLE_FRONTIER_OR_MULTIMODAL_MODEL_IMPORT",
+      "reason": "OPAQUE_OR_OVERSIZED_CAPABILITY_PROVIDER__STRICTLY_MORE_DEPENDENCY_THAN_LOCALIZED_RESIDUAL_BUNDLES__ZERO_OWNERSHIP_CREDIT"
+    },
+    {
+      "id": "M0A_TRAIN_BEFORE_COMPOSED_ROUTE",
+      "reason": "DOMINATED_BY_EXISTING_DETERMINISTIC_PLUS_PERMISSIVE_PARSER_COMPOSITION_PREFIX"
+    },
+    {
+      "id": "M1A_GENERAL_VISION_MODEL_FIRST",
+      "reason": "DOMINATED_BY_OWNED_DETERMINISTIC_DRAWING_PIPELINE_PLUS_LOCALIZED_RESIDUAL_ONLY_IF_MATCHED_EVAL_FAILS"
+    }
+  ],
+  "cost_model": {
+    "unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_UNIT",
+    "zero_reality_prefix_cost": 0,
+    "matched_residual_evaluation_batch_cost": 1,
+    "objective": "MINIMIZE_NEW_REALITY_UNITS__THEN_OBSERVATION_COUNT"
+  },
+  "frozen": true,
+  "new_reality_units_consumed_so_far": 0,
+  "incremental_spend_usd": 0
+}
