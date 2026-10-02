@@ -1,0 +1,28 @@
+name: Verify P1 typed causal V3 multiplex binding
+on:
+  push:
+    branches: [main, obs-rebind-p1-v3-20261002]
+    paths:
+      - canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json
+      - canonical/runtime/p1_trajectory_t0_t2_multiplex_preflight.py
+      - canonical/tests/test_p1_trajectory_t0_t2_multiplex_preflight.py
+      - canonical/runtime/trajectory_failure_typed_ir_candidate_v3.py
+      - canonical/runtime/trajectory_failure_typed_ir_proof_v3.py
+      - canonical/tests/test_trajectory_failure_typed_ir_v3.py
+      - canonical/verification/TRAJECTORY_TYPED_IR_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json
+      - .github/workflows/verify-p1-typed-v3-multiplex.yml
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_trajectory_failure_typed_ir_v3 canonical.tests.test_p1_trajectory_t0_t2_multiplex_preflight

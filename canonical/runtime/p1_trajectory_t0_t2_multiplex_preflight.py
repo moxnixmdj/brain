@@ -41,9 +41,9 @@ REQUIRED_MUTATIONS = {
     "DROP_PROVENANCE_OR_DEPENDENCY_EDGE",
 }
 REQUIRED_DEPS = (
-    "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py",
-    "canonical/runtime/trajectory_failure_information_safe_proof_v2.py",
-    "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v3.py",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v3.py",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
     "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
@@ -105,7 +105,13 @@ def evaluate(root: Path) -> dict:
         errors.append("CHECK_SET")
     if set(ev.get("required_mutations") or []) != REQUIRED_MUTATIONS:
         errors.append("MUTATION_SET")
-    if ev.get("role_of_bounded_suite") != "INFORMATION_BOUNDARY_NONIDENTIFIABILITY_AND_COUNTERFACTUAL_REPAIR_PREFLIGHT_ONLY__NOT_WHOLE_DOMAIN_TERMINAL_SCORE":
+    if ev.get("bounded_candidate") != "canonical/runtime/trajectory_failure_typed_ir_candidate_v3.py":
+        errors.append("STALE_CANDIDATE_ROUTE")
+    if ev.get("bounded_information_safe_preflight") != "canonical/runtime/trajectory_failure_typed_ir_proof_v3.py":
+        errors.append("STALE_PROOF_ROUTE")
+    if ev.get("independent_preflight") != "canonical/verification/TRAJECTORY_TYPED_IR_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json":
+        errors.append("STALE_INDEPENDENT_RECEIPT")
+    if ev.get("role_of_bounded_suite") != "TYPED_CROSS_DOMAIN_INFORMATION_BOUNDARY_MECHANISM_CLASS_DELAYED_INTERACTION_NONIDENTIFIABILITY_PREFLIGHT_ONLY__TERMINAL_RESCUE_REMAINS_LOAD_BEARING_INSIDE_FROZEN_T0_T2":
         errors.append("BOUNDED_SUITE_SCOPE_OVERCLAIM")
     if ev.get("mutation_acceptance") != "ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE":
         errors.append("MUTATION_ACCEPTANCE")
