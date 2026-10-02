@@ -95,6 +95,27 @@ def next_action(public:Mapping[str,Any])->dict[str,Any]:
     ]
     tools.sort(key=lambda t:(float(t.get("cost",0.0)),str(t.get("tool_id") or "")))
 
+    sources=[
+        s for s in public.get("discovery_sources",[])
+        if isinstance(s,Mapping)
+        and s.get("available") is True
+        and str(s.get("source_id") or "") not in queried
+    ]
+    sources.sort(key=lambda s:(float(s.get("cost",0.0)),str(s.get("source_id") or "")))
+
+    # Search a source first only when its declared lower bound can beat the
+    # cheapest currently admissible visible route. This avoids both blind
+    # exhaustive discovery and premature commitment to an expensive visible tool.
+    current_floor=min((float(t.get("cost",0.0)) for t in tools),default=float("inf"))
+    dominating=[
+        x for x in sources
+        if isinstance(x.get("lower_bound_tool_cost"),(int,float))
+        and float(x["lower_bound_tool_cost"]) < current_floor
+    ]
+    if dominating:
+        src=sorted(dominating,key=lambda x:(float(x.get("cost",0.0)),str(x.get("source_id") or "")))[0]
+        return {"action":"DISCOVER","source_id":str(src.get("source_id")),"query":" ".join(required)}
+
     for tool in tools:
         tid=str(tool.get("tool_id") or "")
         unknown=[]; impossible=False
