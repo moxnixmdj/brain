@@ -72,11 +72,9 @@ def _tracked_candidate_paths(root: Path) -> list[str]:
             if any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES):
                 continue
             try:
-                size = int(size_text)
+                int(size_text)
             except ValueError as exc:
                 raise RuntimeError(f"INVALID_GIT_BLOB_SIZE:{rel}:{size_text}") from exc
-            if size > MAX_FILE_BYTES:
-                continue
             out.append(rel)
     return sorted(set(out))
 
