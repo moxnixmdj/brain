@@ -1,7 +1,12 @@
 from __future__ import annotations
 import json,unittest
 from pathlib import Path
-from canonical.runtime.recovery_t0_t2_acceptance_ceiling_lifter_v1 import evaluate
+from canonical.runtime.recovery_t0_t2_acceptance_ceiling_lifter_v1 import (
+    STRICT_EARLIEST_CHECK,
+    WEAK_EARLIEST_DISJUNCTION,
+    _semantic_relation_errors,
+    evaluate,
+)
 
 ROOT=Path(__file__).resolve().parents[2]
 
@@ -21,9 +26,36 @@ class RecoveryCeilingLifterTests(unittest.TestCase):
         self.assertFalse(out["pass"],out)
         self.assertIsNone(out["candidate_witness"])
         self.assertIn("P1_EXECUTED_TERMINAL_SCOPE_MISMATCH_QUARANTINE_ACTIVE",out["errors"])
+        self.assertIn("RELATION_STRICT_EARLIEST_TARGET_HAS_NO_STRICT_SOURCE_PROOF",out["errors"])
+        self.assertIn("RELATION_EARLIEST_TARGET_WEAKENED_TO_EARLIEST_OR_CRITICAL",out["errors"])
+        self.assertIn("CAUSAL_LOCALIZATION_CEILING_DERIVED_FROM_WEAKER_DISJUNCTION",out["errors"])
         self.assertEqual(out["capability_credit_delta"],0)
         self.assertEqual(out["family_credit_delta"],0)
         self.assertFalse(out["promotion_authority"])
+
+    def test_or_does_not_imply_strict_earliest(self):
+        relation=load("canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json")
+        errors=_semantic_relation_errors(relation)
+        self.assertIn("RELATION_STRICT_EARLIEST_TARGET_HAS_NO_STRICT_SOURCE_PROOF",errors)
+        self.assertIn("RELATION_EARLIEST_TARGET_WEAKENED_TO_EARLIEST_OR_CRITICAL",errors)
+        self.assertIn("CAUSAL_LOCALIZATION_CEILING_DERIVED_FROM_WEAKER_DISJUNCTION",errors)
+
+        # Explicit Boolean countermodel: the source OR can pass while strict
+        # earliest localization fails. Therefore no 1.0 strict-earliest ceiling
+        # may be derived from the disjunctive source literal.
+        critical_localized=True
+        earliest_localized=False
+        source_disjunction=critical_localized or earliest_localized
+        self.assertTrue(source_disjunction)
+        self.assertFalse(earliest_localized)
+
+    def test_strict_literal_removes_disjunction_errors(self):
+        relation=load("canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json")
+        relation["target_dimension_to_source_checks"]["earliest causal failure localization"]=[
+            STRICT_EARLIEST_CHECK
+        ]
+        relation["acceptance_to_objective_floor_ceiling"]["causal_localization"]["source_check"]=STRICT_EARLIEST_CHECK
+        self.assertEqual(_semantic_relation_errors(relation),[])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
