@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_SA_CCR_TERMINAL_POPULATION_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_TERMINAL_POPULATION_BINDING__INDEPENDENT_EXECUTOR_PREFLIGHT_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "route_population_version": "SA_CCR_ACTIVE_CONTRACT_TERMINAL_POP_V1",
+  "exact_bound_blobs": {
+    "canonical/runtime/saccr_credit_kernel.py": "4a9536a391e21ec9895c1abdf45a673c0451ba3a",
+    "canonical/runtime/saccr_credit_information_safe_candidate.py": "ff2fa256738ffbe5b15bb813a11c82046692b5e8",
+    "canonical/runtime/saccr_credit_information_safe_proof.py": "8eb94b8e8b00e3ace662e7fac2e8b6a8f7bb2200",
+    "canonical/runtime/saccr_terminal_population_binding_v1.py": "ab3a32e65f8ec6de07b8eb294ed1c3e723b34bd9",
+    "canonical/tests/test_saccr_terminal_population_binding_v1.py": "6f62177ffa02848024c81ea9ef134bbabe6c8e4b",
+    "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json": "e1334040617340b232d74c187116aedc09236398",
+    "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "5af6db8b0e47c978043f07bc5005f8597e9128dd",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "baf43825cafd30cb1db63a4f60509f619885d5a5"
+  },
+  "terminal_population": {
+    "sample_count": 512,
+    "case_id_rule": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001::SA_CCR_ACTIVE_CONTRACT_TERMINAL_POP_V1::slot::<0..511>",
+    "seed_rule": "GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2",
+    "selection_time": "ONLY_AFTER_GLOBAL_CANDIDATE_EVALUATOR_POPULATION_DEPENDENCY_ACCEPTANCE_COMMITMENT_AND_UNPREDICTABLE_BEACON",
+    "adaptive_case_selection": false,
+    "replay_for_tuning": false,
+    "case_replacement": false
+  },
+  "acceptance_rule": {
+    "required_case_pass_fraction": 1,
+    "case_failure": "ANY_CANDIDATE_EXCEPTION_EXECUTION_FAILURE_OR_ORACLE_MISMATCH_COUNTS_AS_FAILED_CASE",
+    "coverage_required": [
+      "SINGLE_NAME_AND_INDEX",
+      "ALL_FROZEN_SINGLE_NAME_RATING_CLASSES",
+      "ALL_FROZEN_INDEX_RATING_CLASSES",
+      "LONG_AND_SHORT_DIRECTION",
+      "MARGINED_AND_UNMARGINED",
+      "POSITIVE_AND_NONPOSITIVE_EFFECTIVE_START_BRANCH",
+      "UNMARGINED_RESIDUAL_LT1_AND_GE1_BRANCHES",
+      "MARGINED_MPOR_LT_0_04_AND_GE_0_04_BRANCHES",
+      "MULTIPLE_REFERENCE_ENTITIES",
+      "REPEATED_REFERENCE_ENTITY_AGGREGATION"
+    ],
+    "coverage_failure": "FAIL_ROUTE__NO_CASE_REPLACEMENT",
+    "final_rule": "ALL_512_CASES_EXACT_PASS_AND_ALL_FROZEN_METHOD_BRANCH_COVERAGE_PRESENT"
+  },
+  "information_boundary": {
+    "candidate_receives": "ONLY_PROOF_PUBLIC_TASK",
+    "hidden_oracle_never_candidate_visible": true,
+    "reference_solution_never_candidate_visible": true
+  },
+  "independent_scope_gate": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "independent_route_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "invalidation": [
+    "ANY_EXACT_BOUND_BLOB_CHANGES",
+    "ACTIVE_BEHAVIOR_CONTRACT_CHANGES",
+    "SCOPE_GATE_CURRENT_INPUT_NO_LONGER_ADMISSIBLE",
+    "GLOBAL_TERMINAL_POPULATION_PROTOCOL_CHANGES",
+    "TERMINAL_EXECUTION_USES_ANY_SEED_OR_CASE_NOT_DERIVED_FROM_FROZEN_COMMITMENT_AND_POST_FREEZE_BEACON"
+  ],
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
