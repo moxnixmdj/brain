@@ -87,13 +87,14 @@
         "LiveBench Instruction Following >=65.7%"
       ],
       "blockers": [
-        "AUTOMATIONBENCH_PUBLIC_600_TASK_ABSOLUTE_ACCEPTANCE_AND_SCOPE_BINDING_NOT_YET_FROZEN",
         "OSWORLD_2_1_EXACT_ZERO_COST_ROUTE_FAIL_CLOSED_ON_GATED_ASSETS__SCOPE_EQUIVALENT_PROOF_OR_PROVEN_ASSET_ACCESS_REQUIRED"
       ],
       "livebench_if_prequalification": "PASS__ADAPTER_DATASET_DEPENDENCIES_HERMETIC_RUNTIME_AND_58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES_INDEPENDENTLY_VERIFIED",
       "closed_bindings": [
-        "LIVEBENCH_IF_VERIFIER_ADAPTER_DATASET_HERMETIC_RUNTIME_AND_58_CHECKER_MUTATION_BOUNDARY_PREFLIGHT_PASS"
-      ]
+        "LIVEBENCH_IF_VERIFIER_ADAPTER_DATASET_HERMETIC_RUNTIME_AND_58_CHECKER_MUTATION_BOUNDARY_PREFLIGHT_PASS",
+        "AUTOMATIONBENCH_PUBLIC_600_TASK_SCOPE_EQUIVALENT_PREFLIGHT_FROZEN"
+      ],
+      "automationbench_public_scope_binding": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json"
     },
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": {
       "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
@@ -241,7 +242,9 @@
     "harbor_zero_cost_terminal_carrier_preflight": "INDEPENDENT_PASS__canonical/verification/HARBOR_TERMINAL_CARRIERS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "finance_index_component_route_binding_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
     "t3_unknown_domain_scope_audit_frozen": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
-    "finance_index_component_route_bindings_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
+    "finance_index_component_route_bindings_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
+    "automationbench_public_scope_binding_frozen": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
+    "automationbench_public_route_preflight_pass": "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
