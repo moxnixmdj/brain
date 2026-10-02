@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_POST_REFREEZE_BINDING_V2",
+  "date": "2026-10-02",
+  "status": "FROZEN_POST_REFREEZE_PREWAVE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "candidate_freeze": {
+    "path": "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V2.json",
+    "blob_sha": "039056ad65c1721d871d378ff0497fc461ab4df2"
+  },
+  "population": {
+    "generator": "canonical/runtime/cad_t0_geometry_population.py",
+    "generator_blob_sha": "64ca276410e2c1dbcd55cfad057e3eec0709790a",
+    "slot_count": 128,
+    "selector": "GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2_POST_FREEZE_BEACON_RULE",
+    "post_freeze_beacon_known": false,
+    "case_replacement": false,
+    "adaptive_selection": false,
+    "tuning_replay": false,
+    "external_spent_task_used_for_promotion": false
+  },
+  "evaluator": {
+    "oracle_adapter": "canonical/runtime/cad_t0_oracle_adapter.py",
+    "oracle_adapter_blob_sha": "a6e76e1865b9bd9829dbbcf38886486636f76e8a",
+    "scorer": "canonical/runtime/cad_t0_multiplex_scorer.py",
+    "scorer_blob_sha": "89833581dc4ac67498753feb94e2ff69bad3b7f1",
+    "observation_schema": "canonical/governance/CAD_T0_EVALUATOR_OBSERVATION_SCHEMA_V1.json",
+    "observation_schema_blob_sha": "2bc87504a54c76003f715be9a52c6e635c8991a6",
+    "hidden_reference_candidate_visible": false,
+    "candidate_self_reported_metrics_authoritative": false
+  },
+  "ocr_bridge": {
+    "runtime": "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+    "runtime_blob_sha": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+    "independent_verification": "canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "verification_blob_sha": "949612638affa5891fe74517ad6b83371a783f69"
+  },
+  "fresh_evidence_policy": {
+    "spent_external_task": "freecad-platform-drawing",
+    "spent_external_task_role": "NONPROMOTION_DIAGNOSTIC_ONLY",
+    "fresh_geometry_population_role": "PROMOTION_ELIGIBLE_ONLY_AFTER_POST_FREEZE_BEACON_AND_TERMINAL_AUTHORIZATION"
+  },
+  "admission_rule": "EXACT_DEPENDENCY_CONE_MATCH__OCR_BRIDGE_INDEPENDENT_PASS__POST_BEACON_GENERATOR_AND_ORACLE_BOUND__SPENT_TASK_EXCLUDED__INFORMATION_BOUNDARY_PASS",
+  "independent_verification": "PENDING_PUBLIC_RUNNER",
+  "prewave_admissible": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
