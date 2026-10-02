@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_SHARED_DECISION_PRIMITIVES_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_COMPONENTS__ZERO_WHOLE_LANE_CREDIT",
+  "runtime": "canonical/runtime/shared_decision_primitives.py",
+  "runtime_blob_sha": "d7d4cd6eeb1adc0363f78df0a476e40231431a3f",
+  "tests": "canonical/tests/test_shared_decision_primitives.py",
+  "verification": {
+    "workflow": ".github/workflows/verify-shared-decision-primitives.yml",
+    "passing_run_id": 36949081936,
+    "conclusion": "success",
+    "note": "Earlier workflow failure was CI import-root infrastructure; later exact runtime/tests passed after CI-root repair."
+  },
+  "closed_bounded_cores": {
+    "M2": [
+      "EXACT_MINIMUM_COST_NONCONFLICTING_EVIDENCE_SUPPORT_WHEN_CLAIMS_AND_SUPPORT_RELATIONS_ARE_EXPLICIT"
+    ],
+    "M3": [
+      "MIN_COST_VERIFIED_SUFFICIENT_TOOL_SELECTION_WHEN_REQUIREMENTS_CAPABILITIES_AUTHORITY_AVAILABILITY_AND_COST_ARE_EXPLICIT",
+      "DEPENDENCY_RESPECTING_READY_TASK_ASSIGNMENT_WHEN_TASK_DAG_AND_WORKER_CAPABILITIES_ARE_EXPLICIT"
+    ],
+    "M4": [
+      "STOP_WHEN_ALL_EXPLICIT_MATERIAL_REQUIREMENTS_ARE_RESOLVED",
+      "SELECT_VERIFIED_RESEARCH_ACTION_MAXIMIZING_EXPLICIT_NEW_REQUIREMENT_COVERAGE_TIMES_RELIABILITY_PER_COST"
+    ],
+    "M5": [
+      "SELECT_EARLIEST_CAUSALLY_SUPPORTED_INTERVENABLE_POSITIVE_RESCUE_TARGET_FROM_EXPLICIT_CANDIDATES"
+    ]
+  },
+  "fail_closed_boundaries": [
+    "UNKNOWN_OR_DUPLICATE_IDENTITIES",
+    "NO_VERIFIED_SUFFICIENT_TOOL_ROUTE",
+    "NO_VERIFIED_RESEARCH_ACTION_ADDING_REQUIREMENT_COVERAGE",
+    "UNSUPPORTED_REQUIRED_CLAIM",
+    "NO_CAUSALLY_SUPPORTED_INTERVENABLE_REPAIR",
+    "INVALID_COST_RELIABILITY_OR_THRESHOLD_STATE"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
