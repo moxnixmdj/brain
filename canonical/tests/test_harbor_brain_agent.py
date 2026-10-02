@@ -9,8 +9,8 @@ class FakeEnv:
         self.commands.append((command,timeout_sec)); rc=1 if command in self.failures else 0
         return SimpleNamespace(return_code=rc,stdout="ok\n" if rc==0 else "",stderr="" if rc==0 else "fail\n")
 
-def valid_finish():
-    return {"summary":"done","known_relevant_failures":[],"verification_cycles":[0],"diff_inspection_cycles":[1],"acceptance_criteria":[{"criterion":"task behavior verified and final diff inspected","evidence_cycles":[0,1]}]}
+def valid_finish(verification_cycle=0,diff_cycle=1):
+    return {"summary":"done","known_relevant_failures":[],"verification_cycles":[verification_cycle],"diff_inspection_cycles":[diff_cycle],"acceptance_criteria":[{"criterion":"task behavior verified and final diff inspected","evidence_cycles":[verification_cycle,diff_cycle]}]}
 
 class HarborBrainAdapterTests(unittest.IsolatedAsyncioTestCase):
     def test_command_gate_blocks_external_acquisition(self):
@@ -44,7 +44,7 @@ class HarborBrainAdapterTests(unittest.IsolatedAsyncioTestCase):
             {"actions":[{"type":"finish","args":{"summary":"premature"}}]},
             {"actions":[{"type":"environment_exec","args":{"command":"python -m unittest -q"}}]},
             {"actions":[{"type":"environment_exec","args":{"command":"git status --short"}}]},
-            {"actions":[{"type":"finish","args":valid_finish()}]},
+            {"actions":[{"type":"finish","args":valid_finish(1,2)}]},
         ]); op=h.astra_runtime._planner_post; oe=h.astra_runtime._extract_json_object
         try:
             h.astra_runtime._planner_post=lambda prompt,timeout_s=20:{"text":"ignored","model":"test"}
