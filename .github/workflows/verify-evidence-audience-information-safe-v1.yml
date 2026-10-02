@@ -1,0 +1,30 @@
+name: Verify evidence-audience information-safe preflight
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/bounded_claim_support.py
+      - canonical/runtime/evidence_audience_information_safe_proof_v1.py
+      - canonical/runtime/evidence_audience_information_safe_candidate_v1.py
+      - canonical/tests/test_evidence_audience_information_safe_v1.py
+      - .github/workflows/verify-evidence-audience-information-safe-v1.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/bounded_claim_support.py
+      - canonical/runtime/evidence_audience_information_safe_proof_v1.py
+      - canonical/runtime/evidence_audience_information_safe_candidate_v1.py
+      - canonical/tests/test_evidence_audience_information_safe_v1.py
+      - .github/workflows/verify-evidence-audience-information-safe-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_evidence_audience_information_safe_v1
