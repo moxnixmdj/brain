@@ -41,7 +41,7 @@
     },
     "acceptance_residual_verdict_v2": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V2.json",
-      "git_blob_sha": "PENDING_RESOLVE_FROM_REPO"
+      "git_blob_sha": "64e47d77a4f780b752f478c31b0d7a7c788ac04e"
     }
   },
   "residual": [
