@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_V2_CANDIDATE_BLOB_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREBEACON_EXACT_CURRENT_POST_SA_CCR_REBIND",
+  "status": "FROZEN_PREBEACON_EXACT_CURRENT_POST_SACCR_CORRECTED_BINDING",
   "zero_terminal_results": true,
   "post_freeze_beacon_known": false,
   "incremental_spend_usd": 0,
@@ -18,7 +18,7 @@
     "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "a7015b12f55fc971233f9fdddf59d50cfc43892b",
     "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json": "b1f712d61bfa6ad0c77fd55ce909664df3c97c5f",
     "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
-    "canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json": "8a40fd5139830650adaacd984a9133258292398c",
+    "canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json": "e5c8b1721be1482e038982af359e7bd8698619cf",
     "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "3ffc4484ab4ac69f60258859d5d6e2a7cc8024a7",
     "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
     "canonical/runtime/terminal_parent_portfolio_launcher_v1.py": "d7f20a66f1f534b06ea11782cb350a582c07d985",
