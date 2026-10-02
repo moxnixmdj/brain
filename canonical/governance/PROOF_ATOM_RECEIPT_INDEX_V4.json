@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V4",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__STRUCTURAL_RESTATEMENT_QUARANTINED_CORPUS_BOUND_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Repair V3 discovery self-reflection by excluding structural restatement families by basename prefix while preserving genuine atom adjudication receipts and all V3 content-addressing guarantees.",
+  "supersedes_for_candidate_development": "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V3.json",
+  "runtime": "canonical/runtime/proof_atom_receipt_index_v4.py",
+  "tests": "canonical/tests/test_proof_atom_receipt_index_v4.py",
+  "exact_brain_blobs": {},
+  "repaired_counterexamples": [
+    "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V2_SELF_REFLECTION_COUNTEREXAMPLE_20261002_V1.json",
+    "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V4.json",
+    "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V1.json"
+  ],
+  "structural_prefix_quarantine": [
+    "TERMINAL_CERTIFICATE_FRONTIER_",
+    "MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_",
+    "GLOBAL_CERTIFICATE_ABDUCTIVE_RESIDUAL_",
+    "MULTITARGET_CERTIFICATE_TARGET_REFINEMENT_",
+    "PROOF_ATOM_REFINEMENT_OVERLAY_",
+    "PROOF_ATOM_RECEIPT_INDEX_",
+    "PROOF_ATOM_RECEIPT_SNAPSHOT_",
+    "CANONICAL_PROOF_ATOM_BASIS_",
+    "DECLARED_CONTENT_ADDRESSED_EVIDENCE_CORPUS_"
+  ],
+  "preservation": [
+    "PA1_ATOM_IDENTITY_UNCHANGED",
+    "V2_BASIS_UNCHANGED",
+    "EXACT_LITERAL_MATCH_REMAINS_CANDIDATE_ONLY",
+    "GIT_BLOB_SHA_PER_CANDIDATE",
+    "CORPUS_POLICY_AND_INDEX_FINGERPRINTS_PRESERVED",
+    "GENUINE_ATOM_ADJUDICATION_RECEIPTS_REMAIN_ELIGIBLE",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V4_BYTES_AND_ADVERSARIAL_RESTATEMENT_TESTS__ONLY_AFTER_PASS_ACTIVATE_V4_FOR_PRIVATE_CORPUS_FREEZE",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
