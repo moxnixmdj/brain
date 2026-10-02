@@ -1,0 +1,30 @@
+{
+  "capability_credit_delta": 0,
+  "date": "2026-10-02",
+  "explicitly_not_faked": [
+    "UNIVERSAL_BRAIN_EXECUTION_ABI_REQUIRES_REAL_LOAD_BEARING_OPERATIVE_ROUTE",
+    "GENERAL_JUDGMENT_KERNEL_REQUIRES_REAL_SOURCE_GATE_ADMISSIBLE_OPERATIVE_CONFIGURATION"
+  ],
+  "family_credit_delta": 0,
+  "implemented": [
+    "GENERAL_CONSERVATIVE_ACCEPTANCE_BOUND_COMPILER",
+    "IRREVERSIBLE_POST_EXPOSURE_INFORMATION_FIREWALL",
+    "BOUNDED_PROOF_FIRST_ACTION_FRONTIER"
+  ],
+  "incremental_spend_usd": 0,
+  "local_verification": {
+    "authority": "LOCAL_DEVELOPMENT_ONLY__NOT_INDEPENDENT_ACCEPTANCE_EVIDENCE",
+    "command": "python -m unittest discover -s canonical/tests -v",
+    "tests_passed": 12,
+    "tests_run": 12
+  },
+  "next": [
+    "RUN_REPOSITORY_CI_ON_EXACT_BRANCH",
+    "RUN_INDEPENDENT_VERIFICATION_ON_EXACT_SOURCE_BLOBS",
+    "MERGE_ONLY_AFTER_TEST_PASS",
+    "THEN_INTEGRATE_BOUNDED_PROOF_ACTIONS_INTO_LIVE_HYPERGRAPH_FROM_FRESH_MAIN_HEAD"
+  ],
+  "objective": "Install the highest-leverage control-plane improvements discovered after TB4 carrier elimination, while refusing to represent unimplemented cognition as capability.",
+  "schema": "PROJECT_BRAIN_PROOF_COMPRESSION_EXECUTION_V1",
+  "status": "IMPLEMENTED_ON_BRANCH__LOCAL_UNIT_VERIFICATION_12_OF_12_PASS__PENDING_REPO_AND_INDEPENDENT_VERIFICATION__ZERO_CREDIT"
+}
