@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_PARENT_RUNNER_BINDING__EXACT_ROUTE_SPECIFIC_SCHEDULES_AND_BLOBS_BOUND__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREWAVE_PARENT_RUNNER_BINDING__NO_ABORT_FAILURE_RECEIPTS__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
   "objective": "MATERIALIZE_REAL_T0_T1_T2_T3_PARENT_PORTFOLIO_OBSERVATIONS_FOR_ALL_MULTIPLEX_BEHAVIORS_WITHOUT_GLOBAL_SAMPLE_COUNT_SHORTCUT",
   "seed_policy": {
     "prefix": "PROJECT_BRAIN_TERMINAL_V2\\0",
@@ -102,5 +102,19 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "runner": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+  "runner_blob_sha": "431b62e503a6a179f19339ae5e0ab6948424a650",
+  "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
+  "test_blob_sha": "8b232fb21a78421a10561bf1bc44a7eeef908dd9",
+  "required_semantics": [
+    "ALL_FOUR_PARENT_PORTFOLIOS_REMAIN_EXECUTABLE_AFTER_ANY_PARENT_FAILURE",
+    "PARENT_FAILURE_RETURNS_FAIL_CLOSED_RECEIPTS_NOT_ORCHESTRATION_EXCEPTION",
+    "POST_FREEZE_SELECTION_ONLY",
+    "SAME_CASE_DIRECT_INSTRUMENTATION",
+    "HIDDEN_ORACLE_NEVER_CANDIDATE_VISIBLE",
+    "NO_CASE_REPLACEMENT",
+    "NO_TUNING_REPLAY"
+  ],
+  "independent_verification": null
 }
