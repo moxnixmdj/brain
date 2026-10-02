@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_VERIFICATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__PUBLIC_RUNNER__EXACT_BRAIN_BLOB_BOUND__ZERO_TERMINAL_CASE_EXPOSURE",
+  "brain_source": {
+    "path": "canonical/runtime/contract_native_proof_suites.py",
+    "blob_sha": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 483,
+    "head_sha": "479319084eaf7d266197e363c99451d9be1f4f3a",
+    "workflow_run_id": 36955265839,
+    "conclusion": "success",
+    "test_scope": [
+      "500_INDEPENDENT_REFERENCE_CASES_ACROSS_4_CONTRACTS",
+      "HIDDEN_ORACLE_REMOVAL_FROM_CANDIDATE_VISIBLE_TASK",
+      "STRUCTURED_METHOD_FACTOR_OMISSION_MUTANT_KILLED",
+      "DOWNSTREAM_SYMPTOM_CAUSAL_LOCALIZATION_MUTANT_KILLED",
+      "UNSUPPORTED_SYNTHESIS_CLAIM_MUTANT_KILLED",
+      "SUBOPTIMAL_PROFESSIONAL_PLAN_MUTANT_KILLED",
+      "DETERMINISTIC_SEED_AND_DIFFICULTY_REPLAY"
+    ]
+  },
+  "contracts": [
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+  ],
+  "execution_boundary": {
+    "candidate_receives": "public_task(case)__NO_ORACLE_FIELDS",
+    "verifier_receives": "full_case_plus_candidate_output",
+    "case_selection": "POST_CANDIDATE_FREEZE_FROM_PREDECLARED_UNCONTROLLABLE_SEED_SOURCE",
+    "no_private_benchmark_data": true
+  },
+  "proof_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
