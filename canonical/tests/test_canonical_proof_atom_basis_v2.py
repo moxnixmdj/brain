@@ -46,6 +46,7 @@ sem={
             "mode":"INDEPENDENTLY_VERIFIED_SEMANTIC_REPLACEMENT",
             "independent_verified":True,
             "verification_receipt":"r://semantic",
+            "source_blob_sha":"0"*40,
             "children":[
                 {"id":"PA","target_predicates":["A"],"requires":["XA","YA"]},
                 {"id":"PB","target_predicates":["B"],"requires":["XB","YB"]},
@@ -56,6 +57,11 @@ sem={
 s=compile_basis(frontier,sem)
 assert s["status"].startswith("PASS"), s
 assert s["leaf_atom_count"]==5, s
+assert all(x["atom_id"].startswith("PA1:") for x in s["atoms"]), s
+
+bad_sem=json.loads(json.dumps(sem))
+bad_sem["refinements"][0].pop("source_blob_sha")
+assert compile_basis(frontier,bad_sem)["status"]=="FAIL_CLOSED"
 
 bad=json.loads(json.dumps(overlay))
 bad["refinements"][0]["independent_verified"]=False
