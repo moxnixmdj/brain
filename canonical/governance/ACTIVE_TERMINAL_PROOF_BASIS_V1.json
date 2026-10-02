@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__DELEGATION_AND_TOOL_DISCOVERY_INFORMATION_SAFE_PREFLIGHTS_INDEPENDENT_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__P1_P2_P3_SACCR_DELEGATION_PREFLIGHTS_ADVANCED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -118,17 +118,16 @@
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "portfolio": "T1_T3",
-      "proof_state": "ROUTE_REDESIGN_REQUIRED__P3_V2_SUPPORT_STANCE_LEAK_INVALIDATED",
-      "route": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
+      "proof_state": "INDEPENDENT_INFORMATION_SAFE_V3_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
+      "route": "canonical/runtime/p3_information_safe_proof_suite_v3.py",
       "blockers": [
-        "P3_V2_PUBLIC_EVIDENCE_ENCODES_LOAD_BEARING_SUPPORT_RELATION",
-        "RAW_FACT_TO_CLAIM_SUPPORT_CONFLICT_INFERENCE_MUST_BE_CANDIDATE_WORK",
-        "HIDDEN_DECISION_RELEVANCE_UNDER_TIGHT_BUDGET_REQUIRED",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS"
+        "WHOLE_OPEN_ENDED_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
+        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+        "POST_FREEZE_TERMINAL_POPULATION_AND_ACCEPTANCE_RULE_NOT_YET_FROZEN"
       ],
-      "candidate": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "candidate": "canonical/runtime/p3_information_safe_candidate_v3.py",
       "preflight_verification": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
-      "independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
       "invalidated_route": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py"
     },
     {
