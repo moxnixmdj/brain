@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_CANDIDATE",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED_CANDIDATE__SCOPE_FIREWALL_ADDED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "IMPLEMENTED_CANDIDATE__SCOPE_FIREWALL_ADDED__FIRST_INDEPENDENT_RUN_EXPOSED_RETURN_CONTRACT_BUG__FIXED__REVERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Prevent narrow or merely similarly named Brain evidence from satisfying a broader frozen Opus55 acceptance target by requiring an explicit independently verified EXACT or SUPERSET witness-to-target scope relation before atom/metric implication can pass.",
   "runtime": "canonical/runtime/protocol_implication_scope_algebra_v2.py",
   "tests": "canonical/tests/test_protocol_implication_scope_algebra_v2.py",
@@ -13,10 +13,21 @@
   },
   "new_required_input": {
     "field": "verified_scope_relations",
-    "admissible_relations": ["EXACT", "SUPERSET"],
-    "mandatory_flags": ["verified", "independent"],
+    "admissible_relations": [
+      "EXACT",
+      "SUPERSET"
+    ],
+    "mandatory_flags": [
+      "verified",
+      "independent"
+    ],
     "mandatory_receipt": true,
-    "forbidden_inference_sources": ["name_similarity", "prose_similarity", "family_label", "atom_overlap"]
+    "forbidden_inference_sources": [
+      "name_similarity",
+      "prose_similarity",
+      "family_label",
+      "atom_overlap"
+    ]
   },
   "additional_hardening": [
     "VERIFIED_IMPLICATION_EDGES_MUST_NOW_ALSO_BE_INDEPENDENT",
@@ -32,11 +43,24 @@
     "exact_target_literal_matches_in_proved_witness_sources": 0,
     "consequence": "NO_EXISTING_LITERAL_ONLY_WITNESS_TO_TARGET_EDGE_CAN_BE_PROMOTED_FROM_THE_CURRENT_NINE_WITNESSES"
   },
-  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_TEST_BLOBS__THEN_REPLACE_V1_IN_THE_PROTOCOL_IMPLICATION_GATE__NORMALIZE_EXPLICIT_TARGET_AND_WITNESS_SCOPE_REFS_AND_VERIFIED_SCOPE_RELATIONS__RERUN_ZERO_REALITY_ALGEBRA",
+  "next": "REVERIFY_FIXED_RUNTIME_EXACT_BLOB_WITH_UNCHANGED_ADVERSARIAL_TESTS__ONLY_AFTER_PASS_ACTIVATE_V2__THEN_NORMALIZE_EXPLICIT_TARGET_AND_WITNESS_SCOPE_REFS_AND_VERIFIED_SCOPE_RELATIONS__RERUN_ZERO_REALITY_ALGEBRA",
   "incremental_spend_usd": 0,
   "new_reality_units_consumed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "independent_verification_history": [
+    {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 906,
+      "workflow_run_id": 37013950688,
+      "workflow_job_id": 110860123633,
+      "conclusion": "failure",
+      "exact_blob_identity_before_test": "PASS_3_OF_3",
+      "failure": "SCOPE_HELPER_RETURNED_RELATION_AND_RECEIPT_AS_TWO_VALUES_WHILE_CALLER_INTERPRETED_SECOND_VALUE_AS_ERROR",
+      "safety_observation": "NARROW_RECOVERY_SCOPE_LEAKAGE_ADVERSARIAL_TEST_PASSED_DURING_FAILED_RUN",
+      "disposition": "IMPLEMENTATION_BUG_FIXED_IN_BRAIN_COMMIT_df8fac9769cd99203c41e1a9d80cc925d99cef94__NO_ACTIVATION_NO_CREDIT"
+    }
+  ]
 }
