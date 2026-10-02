@@ -1,0 +1,30 @@
+{
+  "schema":"PROJECT_BRAIN_M0A_LIAAD_SRL_SYNTHETIC_DEV_V1",
+  "date":"2026-10-02",
+  "status":"FROZEN_BEFORE_DONOR_OUTPUT__SYNTHETIC_DEV_ONLY__ZERO_CAPABILITY_CREDIT",
+  "parent_residual":"M0A_PREDICATE_ARGUMENT_AND_MULTI_CLASS_CONTEXT_DEPENDENT_EXPLICIT_SEMANTICS",
+  "donor":{
+    "transformer_repository":"liaad/srl-en_mbert-base",
+    "published_model_license":"Apache-2.0",
+    "decoder_repository":"asofiaoliveira/srl_bert_pt",
+    "decoder_revision":"634d145cdca1aa2dfb0cf66143e3a358ac6e56fd",
+    "decoder_license":"Apache-2.0",
+    "linear_layer_blob_sha":"a41737d7ec117ed19109c3dc3c2e29b8c3c283ec",
+    "labels_blob_sha":"12dd212cc2b65f3479e30ce0d81066a0f2b3a10f"
+  },
+  "provenance_boundary":"MODEL_CARD_STATES_APACHE_2_0_BUT_TRAINING_USED_CONLL2012_ONTONOTES__THIS_PROBE_ESTABLISHES_SIGNAL_ONLY__NO_OWNERSHIP_PROMOTION_OR_LEGAL_CONCLUSION",
+  "runtime_reconstruction":"MODERN_TRANSFORMERS_AUTOMODEL_PLUS_PINNED_LINEAR_HEAD__VERB_WORDPIECES_AS_TOKEN_TYPE_1__FIRST_WORDPIECE_TAG_PER_WORD",
+  "cases":[
+    {"id":"SRL_ACTIVE_WRITE","words":["The","parser","writes","the","manifest","."],"verb_index":2,"expect":{"1":"A0","4":"A1"}},
+    {"id":"SRL_ACTIVE_REJECT","words":["The","verifier","rejected","the","candidate","."],"verb_index":2,"expect":{"1":"A0","4":"A1"}},
+    {"id":"SRL_PASSIVE_WRITE","words":["The","manifest","was","written","by","the","parser","."],"verb_index":3,"expect":{"1":"A1","6":"A0"}},
+    {"id":"SRL_ACTIVE_MOVE","words":["The","operator","moved","the","file","to","the","archive","."],"verb_index":2,"expect":{"1":"A0","4":"A1"}}
+  ],
+  "score_rule":"CASE_PASS_IFF_EACH_EXPECTED_WORD_TAG_IS_B_OR_I_OF_EXPECTED_ROLE__DONOR_SIGNAL_PRESENT_IF_AT_LEAST_3_OF_4_CASES_PASS",
+  "model_revision_rule":"RESOLVE_HUGGINGFACE_SHA_AT_RUN_START_AND_SNAPSHOT_DOWNLOAD_BY_THAT_EXACT_SHA__RECORD_SHA_IN_RESULT",
+  "heldout_exposed":0,
+  "fresh_terminal_evidence_consumed":0,
+  "incremental_spend_usd":0,
+  "capability_credit_delta":0,
+  "family_credit_delta":0
+}
