@@ -394,5 +394,18 @@
     "reconciliation": "canonical/governance/ATOMIC_SURVIVOR_EXECUTION_AUTHORITY_RECONCILIATION_V1.json",
     "execute_now": false,
     "reopen_rule": "ONLY_REPEATABLE_SOLVABLE_CAUSALLY_LOCALIZED_TERMINAL_FAILURE_MAY_REOPEN_A_SPECIFIC_MECHANISM"
+  },
+  "active_execution": {
+    "id": "S0E_STANZA_LORA_CAUSAL_ABLATION_V1",
+    "runner_pr": "moxnixmdj/verification-capsule-runner#475",
+    "workflow_run_id": 36962184532,
+    "status": "IN_PROGRESS_AFTER_PREFLIGHT_REPAIR",
+    "terminal_evidence_consumed": 0,
+    "heldout_exposed": 0,
+    "current_stage": "DEPENDENCY_INSTALL_AND_BACKBONE_PREFLIGHT",
+    "possible_next": [
+      "LORA_NONMATERIAL__DELETE_26_215_424_PARAMETERS_AND_ABLATE_7_721_467_HEAD_PARAMETERS",
+      "LORA_MATERIAL__LOCALIZE_TARGET_MODULE_AND_RANK_SUBSETS_BEFORE_DISTILLATION"
+    ]
   }
 }
