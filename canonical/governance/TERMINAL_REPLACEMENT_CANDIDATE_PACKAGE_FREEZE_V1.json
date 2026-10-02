@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_REPLACEMENT_CANDIDATE_PACKAGE_FREEZE_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_BEFORE_POST_FREEZE_BEACON__EXACT_BLOB_PACKAGE__ZERO_TERMINAL_RESULTS",
+  "package_scope": "TEN_BEHAVIORAL_OBLIGATION_REPLACEMENT_TERMINAL_WAVE",
+  "exact_git_blobs": {
+    "canonical/runtime/terminal_replacement_wave.py": "589fd2b334b8faefaf71ba0116cc355f639bd76f",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/runtime/contract_native_brain_candidate.py": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85",
+    "canonical/runtime/remaining_behavior_proof_suites.py": "7fad453e5d000435dd4373e125fff52ae6676033",
+    "canonical/runtime/remaining_behavior_brain_candidate.py": "4d7a5e884df8ee0d74fece07baf87e70f64644d9",
+    "canonical/runtime/requirement_acceptance_compiler.py": "c306ac6191e2d6f6d84445d7a698eeec8676a0ef",
+    "canonical/runtime/independent_acceptance_model.py": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a",
+    "canonical/runtime/exact_artifact_materializer.py": "309f0e2fc9f34d2069a0beca33fbb9e014aa5e60",
+    "canonical/runtime/m4_research_control.py": "3efb04cde34c344d4c95204b73215249383c46bc",
+    "canonical/runtime/bound_capabilities/research_query_focus.py": "5403e1dc05716fcfc4f9a91b4534f55dc547eb7f",
+    "canonical/runtime/shared_decision_primitives.py": "794e8d1ca9525564b592ffc3af899037183ef655",
+    "canonical/runtime/consensus_dom_grounding.py": "2849a9eea74c6c595709f77eba23fd40a3be8c9a",
+    "canonical/runtime/m3_contract_task_decomposition.py": "90702f9b4c5b53ba2b29eff4faa7741474bd4529",
+    "canonical/runtime/delegation_contract_proof_suite.py": "e75a25f6ed13020ef08e5aa3da92fcfe6217f4c0",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
+    "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json": "410220dccffc38bcfd0d2e6b05f6b419694d688f",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json": "172a905e75a05c61eb9f798d757c5e17cee9d949",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V1.json": "4b3b05c614b55b24feb8bb1cc3ea32f7b8905b92",
+    "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json": "76be865fb7f20a36f7daab4a2708950432034b37"
+  },
+  "file_count": 19,
+  "candidate_and_evaluator_separation": {
+    "candidate_modules": [
+      "canonical/runtime/contract_native_brain_candidate.py",
+      "canonical/runtime/remaining_behavior_brain_candidate.py"
+    ],
+    "evaluator_modules": [
+      "canonical/runtime/contract_native_proof_suites.py",
+      "canonical/runtime/remaining_behavior_proof_suites.py",
+      "canonical/runtime/delegation_contract_proof_suite.py"
+    ],
+    "candidate_may_import_evaluator": false
+  },
+  "pre_beacon_facts": {
+    "post_freeze_beacon_not_yet_generated": true,
+    "terminal_case_content_generated": 0,
+    "terminal_results_observed": 0
+  },
+  "freeze_invalidation": "ANY_EXACT_BLOB_CHANGE_REQUIRES_NEW_PACKAGE_FREEZE_AND_NEW_POST_FREEZE_BEACON",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
