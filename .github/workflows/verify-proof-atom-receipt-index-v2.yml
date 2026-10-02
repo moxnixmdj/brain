@@ -21,3 +21,19 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Emit exact live V2 receipt index
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.proof_atom_receipt_index_v2 import build_index
+
+          root = Path.cwd()
+          frontier = json.loads((root / "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json").read_text())
+          overlay = json.loads((root / "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text())
+          out = build_index(frontier, overlay, root=root)
+          print("PROJECT_BRAIN_V2_INDEX_JSON_BEGIN")
+          print(json.dumps(out, sort_keys=True, separators=(",", ":")))
+          print("PROJECT_BRAIN_V2_INDEX_JSON_END")
+          PY
