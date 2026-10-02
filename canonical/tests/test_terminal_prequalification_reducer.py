@@ -39,13 +39,29 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
             "remaining_irreducible_prequalification_blockers": [],
         }
 
-    def run_fixture(self, payload):
+    def run_fixture(self, payload, *, active_contracts=None, proof_basis=None):
+        active_contracts = active_contracts or ["B1", "B2"]
+        proof_basis = proof_basis or list(active_contracts)
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             path = root / "canonical/governance"
             path.mkdir(parents=True)
             (path / "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").write_text(
                 json.dumps(payload), encoding="utf-8"
+            )
+            (path / "BEHAVIORAL_CONTRACT_REGISTRY_V1.json").write_text(
+                json.dumps({
+                    "active_contracted_residuals": [
+                        {"behavior_id": x} for x in active_contracts
+                    ]
+                }),
+                encoding="utf-8",
+            )
+            (path / "GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V3.json").write_text(
+                json.dumps({
+                    "obligations": [{"id": x, "min_oracle_strength": 1} for x in proof_basis]
+                }),
+                encoding="utf-8",
             )
             return evaluate(root)
 
@@ -71,6 +87,33 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
         p["execution_authority"] = True
         out = self.run_fixture(p)
         self.assertFalse(out["pass"])
+
+    def test_active_contract_missing_from_terminal_basis_fails_closed(self):
+        out = self.run_fixture(
+            self.fixture(),
+            active_contracts=["B1", "B2", "CAD"],
+            proof_basis=["B1", "B2"],
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "ACTIVE_CONTRACTS_MISSING_FROM_TERMINAL_PROOF_BASIS:CAD",
+            out["failed_predicates"],
+        )
+
+    def test_missing_contract_coverage_inputs_fail_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            path = root / "canonical/governance"
+            path.mkdir(parents=True)
+            (path / "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").write_text(
+                json.dumps(self.fixture()), encoding="utf-8"
+            )
+            out = evaluate(root)
+            self.assertFalse(out["pass"])
+            self.assertIn(
+                "ACTIVE_CONTRACT_COVERAGE_INPUT_MISSING_OR_INVALID",
+                out["failed_predicates"],
+            )
 
 
 if __name__ == "__main__":
