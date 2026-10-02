@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "12_ROUTE_IDENTITIES_ENUMERATED__11_CURRENT_EXECUTORS_INDEPENDENTLY_BOUND__ONLY_CAD_V4_REFREEZE_AND_EXECUTOR_REVERIFY_REMAIN__ZERO_TERMINAL_RESULTS",
+  "status": "12_ROUTE_IDENTITIES_ENUMERATED__12_OF_12_CURRENT_EXECUTORS_INDEPENDENTLY_BOUND__GLOBAL_AUTHORITY_REDERIVATION_AND_PARENT_LAUNCHER_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json",
@@ -17,7 +17,7 @@
     "UNDECLARED_PAID_FALLBACK"
   ],
   "route_count": 12,
-  "bound_executor_count": 11,
+  "bound_executor_count": 12,
   "routes": [
     {
       "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
@@ -138,10 +138,10 @@
     },
     {
       "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
-      "frozen_route": "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json",
+      "frozen_route": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json",
       "proof_mode": "T0_MULTIPLEXED_OPEN_DOMAIN_OBJECTIVE_GEOMETRY",
       "independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "executor_status": "CURRENT_EXECUTOR_IMPLEMENTED__INDEPENDENT_VERIFICATION_STALE_AFTER_CAD_ANTISHORTCUT_REPAIR__ROUTE_REOPENED_FAIL_CLOSED",
+      "executor_status": "BOUND_ROUTE_SPECIFIC_EXECUTOR__INDEPENDENT_PUBLIC_RUNNER_PASS_V4",
       "legacy_global_executor_allowed": false,
       "terminal_result_status": "NOT_EXECUTED",
       "parent_instrumentation_executor": "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
@@ -154,9 +154,9 @@
       "direct_population_scorer": "canonical/runtime/cad_t0_multiplex_scorer.py",
       "executor": "canonical/runtime/cad_t0_route_specific_terminal_executor_v1.py",
       "tests": "canonical/tests/test_cad_t0_route_specific_terminal_executor_v1.py",
-      "executor_blob_sha": "573efab38cbf7ab25e63b564f0eb1599d755b7d2",
-      "executor_test_blob_sha": "af1a7e63548fefd503def4091e04488a75e227c4",
-      "independent_executor_verification": null
+      "executor_blob_sha": "4a90d2e6838a6b5fd4a8411de3a3dd654e84ec1c",
+      "executor_test_blob_sha": "49e911745bca7c3b36a7af5e726910d942d538ab",
+      "independent_executor_verification": "canonical/verification/CAD_T0_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
@@ -222,7 +222,7 @@
     }
   ],
   "launch_authority": false,
-  "next": "FREEZE_CURRENT_CAD_CANDIDATE_V4__VERIFY_CURRENT_CAD_POST_REFREEZE_BINDING__REPIN_AND_VERIFY_CURRENT_CAD_TERMINAL_EXECUTOR__RECOMPUTE_LAUNCH_AUTHORITY",
+  "next": "INDEPENDENTLY_REDERIVE_GLOBAL_EXECUTION_AUTHORITY_FROM_CURRENT_12_CONTRACT_BASIS_AND_12_OF_12_EXECUTOR_MANIFEST__THEN_VERIFY_PARENT_T0_T1_T2_T3_LAUNCHER__ONLY_THEN_CONSTRUCT_POST_FREEZE_BEACON",
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
