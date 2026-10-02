@@ -21,7 +21,7 @@ SCHEMA = "PROJECT_BRAIN_COMPOSITION_COMPONENT_ACCEPTANCE_BINDING_VERDICT_V1"
 
 def git_blob_sha(path: Path) -> str:
     b = path.read_bytes()
-    return hashlib.sha1(b"blob " + str(len(b)).encode() + b"\\0" + b).hexdigest()
+    return hashlib.sha1(b"blob " + str(len(b)).encode() + b"\x00" + b).hexdigest()
 
 
 def load_rel(rel: str) -> Mapping[str, Any]:
