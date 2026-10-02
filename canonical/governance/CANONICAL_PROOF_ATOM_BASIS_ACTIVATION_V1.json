@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__EXACT_LEAF_PROOF_ATOM_COMPILER__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "ACTIVE_INDEPENDENT_PASS__40_CANONICAL_LEAF_ATOMS__EXACT_LITERAL_DEDUP_ONLY__ZERO_CREDIT",
   "objective": "Compile the active V5 terminal certificate frontier plus the independently verified matched-scope child refinement into the smallest exact literal proof-atom basis currently exposed by those schedulers, so proof work can be content-addressed and reused without semantic guessing.",
   "sources": {
     "global_frontier": {
@@ -47,11 +47,19 @@
     "FAIL_CLOSED_ON_MALFORMED_OR_NONLOSSLESS_FRONTIER_INPUT",
     "ACTIVATION_REQUIRES_EXACT_BLOB_CI_AND_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION"
   ],
-  "next": "RUN_BRAIN_CI_ON_EXACT_BRANCH_BLOBS__THEN_INDEPENDENT_PUBLIC_RUNNER_EXACT_BYTE_VERIFICATION__ONLY_AFTER_BOTH_PASS_PROMOTE_THIS BASIS_AS_ZERO_CREDIT_SCHEDULING_STRUCTURE_AND_BIND_IT_TO_CURRENT_TERMINAL_AUTHORITY",
+  "next": "INDEX_EXISTING_CONTENT_ADDRESSED_RECEIPTS_AGAINST_THE_40_CANONICAL_LEAF_ATOMS__FOR_EACH_ATOM_PROVE_OR_FALSIFY_FROM_ZERO_REALITY_EVIDENCE__RUN_ATOMIC_ACCEPTANCE_FIXED_POINT_AFTER_EACH_NEW_VERIFIED_FACT__NO_FRESH_REALITY_UNTIL_SEPARATE_MINIMUM_REALITY_AUTHORITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
-}
+  "promotion_authority": false,
+  "independent_verification": {
+    "path": "canonical/verification/CANONICAL_PROOF_ATOM_BASIS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "candidate_verified_blob_sha": "c55f1575b7b58f99cf61e642a6ec61b068343627",
+    "public_verifier_pr": 985,
+    "workflow_run_id": 37027851133,
+    "workflow_job_id": 110906947402,
+    "merge_commit": "9fbc180946a1e1a0fe21efb02e1bac025ed2fc39"
+  }
+}\n
