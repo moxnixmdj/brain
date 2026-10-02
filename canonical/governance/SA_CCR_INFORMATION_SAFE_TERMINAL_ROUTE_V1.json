@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PREFLIGHT_AND_CANONICAL_SCOPE_GATE_V2_PASS__POST_FREEZE_TERMINAL_POPULATION_PENDING__ZERO_TERMINAL_CREDIT",
+  "status": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_CREDIT",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "candidate": "canonical/runtime/saccr_credit_information_safe_candidate.py",
   "proof_population": "canonical/runtime/saccr_credit_information_safe_proof.py",
@@ -55,14 +55,15 @@
     "MISSING_TRADE_LINEAGE_FAILS"
   ],
   "execution_authority": false,
-  "remaining_before_terminal_authority": [
-    "POST_FREEZE_TERMINAL_POPULATION_BINDING"
-  ],
+  "remaining_before_terminal_authority": [],
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
   "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "scope_gate_input": "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
-  "scope_gate_verification": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CANONICAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "scope_gate_verification": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "terminal_population_binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
+  "route_admissible_for_global_prequalification": true,
+  "terminal_results_observed": 0
 }

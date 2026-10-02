@@ -262,11 +262,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "INDEPENDENTLY_VERIFY_CORRECTED_V4_DOMINANCE__THEN_RECOMPUTE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_WITH_REPLACEMENT_DIRECT_PROOF_POPULATIONS__NO_TERMINAL_EXECUTION_BEFORE_PASS",
+    "next_step": "CLOSE_NEXT_NONDOMINATED_ACTIVE_TERMINAL_ROUTE_BINDINGS_IN_PARALLEL__PRIORITIZE_ALREADY_PREFLIGHTED_ROUTES__NO_FRESH_TERMINAL_WAVE_BEFORE_12_OF_12_AND_PREQUALIFICATION_PASS",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_INDEPENDENT_VERIFICATION_PENDING__V3_SCOPE_MAPPING_INVALIDATED",
+    "critical_blocker": "ACTIVE_TERMINAL_PROOF_BASIS_HAS_12_CONTRACTS_AND_1_ADMISSIBLE_FROZEN_TERMINAL_ROUTE__11_REMAINING",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -343,7 +343,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_INDEPENDENT_VERIFICATION_PENDING__V3_SCOPE_MAPPING_INVALIDATED",
+    "highest_leverage_capability_gap": "ACTIVE_TERMINAL_PROOF_BASIS_HAS_12_CONTRACTS_AND_1_ADMISSIBLE_FROZEN_TERMINAL_ROUTE__11_REMAINING",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -826,7 +826,7 @@
       "activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
       "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
     },
-    "next_progress_event_target": "S0_G0_CLOSED_OR_EXACT_FAIL_CLOSED_BLOCKER_VERDICT",
+    "next_progress_event_target": "ADMISSIBLE_FROZEN_TERMINAL_ROUTE_COUNT_INCREASE_OR_PREQUALIFICATION_FAIL_CLOSED",
     "open_mechanism_residual_count": 1,
     "m0b_frozen_envelope_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
     "residual_action_universe_v2": {
@@ -896,7 +896,9 @@
       "invalidation": "canonical/governance/GLOBAL_SURFACE_DOMINANCE_V3_SCOPE_MAPPING_INVALIDATION_V1.json",
       "v4_input": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V4.json",
       "v4_independent_verification": "PENDING"
-    }
+    },
+    "admissible_frozen_terminal_route_count": 1,
+    "remaining_terminal_route_count": 11
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",

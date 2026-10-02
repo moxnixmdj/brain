@@ -1,67 +1,59 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_TERMINAL_POPULATION_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_TERMINAL_POPULATION_BINDING__INDEPENDENT_EXECUTOR_PREFLIGHT_PASS__ZERO_TERMINAL_RESULTS",
+  "status": "PRE_BEACON_FROZEN__ZERO_TERMINAL_RESULTS",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
-  "route_population_version": "SA_CCR_ACTIVE_CONTRACT_TERMINAL_POP_V1",
-  "exact_bound_blobs": {
-    "canonical/runtime/saccr_credit_kernel.py": "4a9536a391e21ec9895c1abdf45a673c0451ba3a",
-    "canonical/runtime/saccr_credit_information_safe_candidate.py": "ff2fa256738ffbe5b15bb813a11c82046692b5e8",
-    "canonical/runtime/saccr_credit_information_safe_proof.py": "8eb94b8e8b00e3ace662e7fac2e8b6a8f7bb2200",
-    "canonical/runtime/saccr_terminal_population_binding_v1.py": "ab3a32e65f8ec6de07b8eb294ed1c3e723b34bd9",
-    "canonical/tests/test_saccr_terminal_population_binding_v1.py": "6f62177ffa02848024c81ea9ef134bbabe6c8e4b",
-    "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json": "e1334040617340b232d74c187116aedc09236398",
-    "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "5af6db8b0e47c978043f07bc5005f8597e9128dd",
-    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "baf43825cafd30cb1db63a4f60509f619885d5a5"
+  "exact_blobs": {
+    "candidate": "ff2fa256738ffbe5b15bb813a11c82046692b5e8",
+    "independent_oracle": "8eb94b8e8b00e3ace662e7fac2e8b6a8f7bb2200",
+    "route_manifest": "688cfcd238b49901e9a1438d1f40c093047b56dc",
+    "scope_gate_receipt": "5af6db8b0e47c978043f07bc5005f8597e9128dd"
   },
-  "terminal_population": {
-    "sample_count": 512,
-    "case_id_rule": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001::SA_CCR_ACTIVE_CONTRACT_TERMINAL_POP_V1::slot::<0..511>",
-    "seed_rule": "GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2",
-    "selection_time": "ONLY_AFTER_GLOBAL_CANDIDATE_EVALUATOR_POPULATION_DEPENDENCY_ACCEPTANCE_COMMITMENT_AND_UNPREDICTABLE_BEACON",
+  "population": {
+    "sample_count": 2000,
+    "generator": "canonical/runtime/saccr_credit_information_safe_proof.py",
+    "route_population_version": "SA_CCR_TERMINAL_POPULATION_V1",
+    "case_id_rule": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001::SA_CCR_TERMINAL_POPULATION_V1::slot::<index>",
+    "post_freeze_beacon": null,
+    "seed_rule": "uint64_be(first_8_bytes(SHA256('PROJECT_BRAIN_TERMINAL_V2\\0'+commitment+'\\0'+post_freeze_beacon+'\\0'+case_id)))",
     "adaptive_case_selection": false,
-    "replay_for_tuning": false,
-    "case_replacement": false
+    "case_replacement": false,
+    "replay_for_tuning": false
   },
-  "acceptance_rule": {
-    "required_case_pass_fraction": 1,
-    "case_failure": "ANY_CANDIDATE_EXCEPTION_EXECUTION_FAILURE_OR_ORACLE_MISMATCH_COUNTS_AS_FAILED_CASE",
-    "coverage_required": [
-      "SINGLE_NAME_AND_INDEX",
-      "ALL_FROZEN_SINGLE_NAME_RATING_CLASSES",
-      "ALL_FROZEN_INDEX_RATING_CLASSES",
-      "LONG_AND_SHORT_DIRECTION",
-      "MARGINED_AND_UNMARGINED",
-      "POSITIVE_AND_NONPOSITIVE_EFFECTIVE_START_BRANCH",
-      "UNMARGINED_RESIDUAL_LT1_AND_GE1_BRANCHES",
-      "MARGINED_MPOR_LT_0_04_AND_GE_0_04_BRANCHES",
-      "MULTIPLE_REFERENCE_ENTITIES",
-      "REPEATED_REFERENCE_ENTITY_AGGREGATION"
+  "acceptance": {
+    "rule": "ALL_2000_CASES_PASS_ALL_HIDDEN_INTERMEDIATE_AND_FINAL_ORACLE_CHECKS__ZERO_CASE_REPLACEMENT__ZERO_TUNING_REPLAY",
+    "required_intermediates": [
+      "SUPERVISORY_DURATION",
+      "ADJUSTED_NOTIONAL",
+      "DELTA",
+      "MATURITY_FACTOR",
+      "EFFECTIVE_NOTIONAL",
+      "SUPERVISORY_FACTOR",
+      "CORRELATION",
+      "ENTITY_AGGREGATION",
+      "CREDIT_ADDON"
     ],
-    "coverage_failure": "FAIL_ROUTE__NO_CASE_REPLACEMENT",
-    "final_rule": "ALL_512_CASES_EXACT_PASS_AND_ALL_FROZEN_METHOD_BRANCH_COVERAGE_PRESENT"
+    "allowed_failed_cases": 0,
+    "case_local_execution_failure_counts_as_failure": true
+  },
+  "scope_gate": {
+    "status": "INDEPENDENT_PASS__EXACT_CURRENT_SCOPE_INPUT_ADMISSIBLE_SUBSTITUTION__ZERO_TERMINAL_RESULT",
+    "receipt": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "unresolved_required_dimensions": []
   },
   "information_boundary": {
-    "candidate_receives": "ONLY_PROOF_PUBLIC_TASK",
-    "hidden_oracle_never_candidate_visible": true,
-    "reference_solution_never_candidate_visible": true
+    "candidate_receives_hidden_oracle": false,
+    "candidate_receives_reference_solution": false,
+    "load_bearing_oracle_hidden": true
   },
-  "independent_scope_gate": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "independent_route_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "invalidation": [
-    "ANY_EXACT_BOUND_BLOB_CHANGES",
-    "ACTIVE_BEHAVIOR_CONTRACT_CHANGES",
-    "SCOPE_GATE_CURRENT_INPUT_NO_LONGER_ADMISSIBLE",
-    "GLOBAL_TERMINAL_POPULATION_PROTOCOL_CHANGES",
-    "TERMINAL_EXECUTION_USES_ANY_SEED_OR_CASE_NOT_DERIVED_FROM_FROZEN_COMMITMENT_AND_POST_FREEZE_BEACON"
-  ],
-  "execution_authority": false,
+  "dependency_mode": "ZERO_INCREMENTAL_SPEND__OWNED_CANDIDATE__INDEPENDENT_ORACLE",
+  "commitment_components_sha256": "86ac5eb685e17113b5c58614d5591afddcc0d57c3a4ec23dde404a35a53db5a3",
+  "pre_beacon_frozen": true,
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
-  "incremental_spend_usd": 0,
+  "execution_authority": false,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "independent_executor_preflight": "canonical/verification/SA_CCR_TERMINAL_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "prewave_admissible": true
+  "incremental_spend_usd": 0
 }
