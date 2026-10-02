@@ -1,19 +1,8 @@
-# replay-trigger: 2026-10-02T19:03+02:00; corpus roots unchanged
 name: Verify and run sealed proof-atom receipt snapshot v1
 
 on:
   push:
     branches: [main]
-    paths:
-      - "canonical/runtime/proof_atom_receipt_snapshot_v1.py"
-      - "canonical/tests/test_proof_atom_receipt_snapshot_v1.py"
-      - "canonical/governance/PROOF_ATOM_RECEIPT_SNAPSHOT_V1.json"
-      - "canonical/runtime/proof_atom_receipt_index_v2.py"
-      - "canonical/runtime/canonical_proof_atom_basis_v2.py"
-      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
-      - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
-      - ".github/workflows/verify-proof-atom-receipt-snapshot-v1.yml"
-  pull_request:
     paths:
       - "canonical/runtime/proof_atom_receipt_snapshot_v1.py"
       - "canonical/tests/test_proof_atom_receipt_snapshot_v1.py"
@@ -29,56 +18,145 @@ jobs:
   verify-and-snapshot:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run verification and capture diagnostics
-        id: verify
+      - name: Verify, seal, and publish canonical receipt
         shell: bash
         run: |
           set +e
+          SOURCE_HEAD="$(git rev-parse HEAD)"
+          SOURCE_TREE="$(git rev-parse HEAD^{tree})"
           : > /tmp/proof_atom_snapshot_diagnostic.txt
-          echo "HEAD=$(git rev-parse HEAD)" >> /tmp/proof_atom_snapshot_diagnostic.txt
-          echo "TREE=$(git rev-parse HEAD^{tree})" >> /tmp/proof_atom_snapshot_diagnostic.txt
-          echo "=== UNIT TESTS ===" >> /tmp/proof_atom_snapshot_diagnostic.txt
-          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v >> /tmp/proof_atom_snapshot_diagnostic.txt 2>&1
+
+          python -m unittest canonical.tests.test_proof_atom_receipt_snapshot_v1 -v > /tmp/proof_atom_snapshot_diagnostic.txt 2>&1
           TEST_RC=$?
-          echo "TEST_RC=$TEST_RC" >> /tmp/proof_atom_snapshot_diagnostic.txt
-          echo "=== SNAPSHOT ===" >> /tmp/proof_atom_snapshot_diagnostic.txt
+
           python canonical/runtime/proof_atom_receipt_snapshot_v1.py > /tmp/proof_atom_receipt_snapshot_v1.json 2>> /tmp/proof_atom_snapshot_diagnostic.txt
           SNAPSHOT_RC=$?
-          echo "SNAPSHOT_RC=$SNAPSHOT_RC" >> /tmp/proof_atom_snapshot_diagnostic.txt
+
           if [ -s /tmp/proof_atom_receipt_snapshot_v1.json ]; then
-            python -m json.tool /tmp/proof_atom_receipt_snapshot_v1.json >> /tmp/proof_atom_snapshot_diagnostic.txt 2>&1
+            python -m json.tool /tmp/proof_atom_receipt_snapshot_v1.json >/dev/null 2>> /tmp/proof_atom_snapshot_diagnostic.txt
             JSON_RC=$?
           else
             JSON_RC=99
           fi
-          echo "JSON_RC=$JSON_RC" >> /tmp/proof_atom_snapshot_diagnostic.txt
-          echo "test_rc=$TEST_RC" >> "$GITHUB_OUTPUT"
-          echo "snapshot_rc=$SNAPSHOT_RC" >> "$GITHUB_OUTPUT"
-          echo "json_rc=$JSON_RC" >> "$GITHUB_OUTPUT"
-          exit 0
-      - name: Upload diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: proof-atom-receipt-snapshot-v1-diagnostic
-          path: /tmp/proof_atom_snapshot_diagnostic.txt
-          if-no-files-found: error
-      - name: Upload sealed snapshot
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: proof-atom-receipt-snapshot-v1
-          path: /tmp/proof_atom_receipt_snapshot_v1.json
-          if-no-files-found: warn
-      - name: Enforce verification result
-        shell: bash
-        run: |
-          test "${{ steps.verify.outputs.test_rc }}" = "0"
-          test "${{ steps.verify.outputs.snapshot_rc }}" = "0"
-          test "${{ steps.verify.outputs.json_rc }}" = "0"
+
+          export SOURCE_HEAD SOURCE_TREE TEST_RC SNAPSHOT_RC JSON_RC
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          diag = Path("/tmp/proof_atom_snapshot_diagnostic.txt").read_text(
+              encoding="utf-8", errors="replace"
+          )
+          snap_path = Path("/tmp/proof_atom_receipt_snapshot_v1.json")
+          snapshot = None
+          try:
+              snapshot = json.loads(snap_path.read_text(encoding="utf-8"))
+          except Exception:
+              snapshot = None
+
+          test_rc = int(os.environ["TEST_RC"])
+          snapshot_rc = int(os.environ["SNAPSHOT_RC"])
+          json_rc = int(os.environ["JSON_RC"])
+          passed = (
+              test_rc == 0
+              and snapshot_rc == 0
+              and json_rc == 0
+              and isinstance(snapshot, dict)
+              and str(snapshot.get("status", "")).startswith("PASS")
+          )
+
+          verification = {
+              "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_SNAPSHOT_V1_PUBLIC_RUNNER_VERIFICATION",
+              "date": "2026-10-02",
+              "status": "PASS" if passed else "FAIL_CLOSED",
+              "source_head_sha": os.environ["SOURCE_HEAD"],
+              "source_tree_sha": os.environ["SOURCE_TREE"],
+              "workflow": ".github/workflows/verify-proof-atom-receipt-snapshot-v1.yml",
+              "runtime": "canonical/runtime/proof_atom_receipt_snapshot_v1.py",
+              "tests": "canonical/tests/test_proof_atom_receipt_snapshot_v1.py",
+              "test_rc": test_rc,
+              "snapshot_rc": snapshot_rc,
+              "json_rc": json_rc,
+              "snapshot_status": snapshot.get("status") if isinstance(snapshot, dict) else None,
+              "snapshot_index_sha256": snapshot.get("index_sha256") if isinstance(snapshot, dict) else None,
+              "scanned_manifest_sha256": (
+                  snapshot.get("repository_snapshot", {}).get("scanned_manifest_sha256")
+                  if isinstance(snapshot, dict)
+                  else None
+              ),
+              "scanned_file_count": (
+                  snapshot.get("repository_snapshot", {}).get("scanned_file_count")
+                  if isinstance(snapshot, dict)
+                  else None
+              ),
+              "canonical_atom_count": (
+                  snapshot.get("index", {}).get("canonical_atom_count")
+                  if isinstance(snapshot, dict)
+                  else None
+              ),
+              "atoms_with_candidate_matches": (
+                  snapshot.get("index", {}).get("atoms_with_candidate_matches")
+                  if isinstance(snapshot, dict)
+                  else None
+              ),
+              "atoms_without_candidate_matches": (
+                  snapshot.get("index", {}).get("atoms_without_candidate_matches")
+                  if isinstance(snapshot, dict)
+                  else None
+              ),
+              "candidate_match_count": (
+                  snapshot.get("index", {}).get("candidate_match_count")
+                  if isinstance(snapshot, dict)
+                  else None
+              ),
+              "diagnostic_tail": None if passed else diag[-12000:],
+              "new_reality_units_consumed": 0,
+              "incremental_spend_usd": 0,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "execution_authority": False,
+              "promotion_authority": False,
+          }
+
+          out = Path(
+              "canonical/verification/"
+              "PROOF_ATOM_RECEIPT_SNAPSHOT_V1_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          )
+          out.write_text(
+              json.dumps(verification, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+
+          if passed:
+              live = Path(
+                  "canonical/verification/"
+                  "PROOF_ATOM_RECEIPT_SNAPSHOT_V1_LIVE_20261002.json"
+              )
+              live.write_text(
+                  json.dumps(snapshot, indent=2, sort_keys=True) + "\n",
+                  encoding="utf-8",
+              )
+          PY
+
+          git config user.name "project-brain-proof-runner"
+          git config user.email "proof-runner@users.noreply.github.com"
+          git add canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V1_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+          if [ "$TEST_RC" = "0" ] && [ "$SNAPSHOT_RC" = "0" ] && [ "$JSON_RC" = "0" ]; then
+            git add canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_V1_LIVE_20261002.json
+          fi
+          git commit -m "Publish sealed proof atom receipt snapshot verification"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+          test "$TEST_RC" = "0"
+          test "$SNAPSHOT_RC" = "0"
+          test "$JSON_RC" = "0"
