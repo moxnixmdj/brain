@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6",
+  "date": "2026-10-02",
+  "status": "EXACT_MINIMUM__PENDING_INDEPENDENT_RECOMPUTATION",
+  "source_input": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6.json",
+  "exact_minimum": true,
+  "unresolved_distinctions": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "selected_observations": [
+    "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
+    "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1"
+  ],
+  "observation_count": 2,
+  "total_cost": 2,
+  "rule": "MINIMUM_COST__THEN_MINIMUM_COUNT__THEN_LEXICOGRAPHIC_ID",
+  "interpretation": {
+    "M0A": "ONE_NEW_CLEAN_PREDECLARED_CROSS_DOMAIN_SEMANTIC_PARITY_BATCH",
+    "M1": "ONE_NEW_CLEAN_PREDECLARED_DRAWING_BATCH_WITH_FROZEN_INDEPENDENT_M1A_INTERMEDIATE_AND_M1B_FINAL_ORACLES"
+  },
+  "authorization": "NO_BATCH_EXECUTION_UNTIL_V6_INDEPENDENT_VERIFICATION_PASS_AND_BATCH_PROTOCOLS_FROZEN",
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
