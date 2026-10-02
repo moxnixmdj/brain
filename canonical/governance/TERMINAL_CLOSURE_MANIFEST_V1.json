@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FAIL_CLOSED__19_OF_19_BEHAVIORAL_FAMILY_ADJUDICATION_PASS__ONLY_DONOR_CLEANROOM_AND_FINAL_BUNDLE_REMAIN",
+  "status": "TERMINAL_19_OF_19_OWNERSHIP_CLOSURE_CANDIDATE__ALL_PREDICATES_CLOSED__PENDING_FINAL_REDUCER_CI",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -13,7 +13,7 @@
     {
       "id": "ADVANCED_AGENTIC_CODING",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Long-running work in unfamiliar/large codebases: feature implementation, debugging, refactoring, review, terminal operation, ambiguous multi-file changes, root-cause analysis and self-checking.",
       "acceptance_basis": [
         {
@@ -33,27 +33,35 @@
         }
       ],
       "proof_bundle": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "COMPLEX_MULTI_TOOL_AGENCY",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Plan and execute complex multi-tool work, coordinate subagents, maintain state and drive long-running work with minimal oversight.",
       "acceptance_basis": null,
       "proof_bundle": "Astra is designed for complex end-to-end multi-step work and Work provides agentic execution, but no direct whole-family Opus 5.5 comparison establishes parity.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "PROFESSIONAL_KNOWLEDGE_WORK",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Produce high-quality professional work products and complete multi-hour/multi-stage office tasks.",
       "acceptance_basis": [
         {
@@ -73,15 +81,19 @@
         "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
         "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json"
       ],
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "BUSINESS_WORKFLOW_AUTOMATION",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Execute real multi-application business workflows accurately end-to-end.",
       "acceptance_basis": [
         {
@@ -91,15 +103,19 @@
         }
       ],
       "proof_bundle": "AutomationBench: GPT-6 Astra 41.4 vs Opus 5.5 40.0 on Anthropic's published comparison.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Solve difficult expert-level questions across domains with search/code/tools.",
       "acceptance_basis": [
         {
@@ -109,15 +125,19 @@
         }
       ],
       "proof_bundle": "HLE-Diamond: GPT-6 Astra 60.6 vs Opus 5.5 55.0 without tools, and 82.9 vs 73.9 with web+code under the same benchmark-owner evaluation.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "AGENTIC_SCIENTIFIC_RESEARCH",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Use scientific software, tools, analysis and iterative reasoning to solve long-horizon research/technical tasks.",
       "acceptance_basis": [
         {
@@ -127,15 +147,19 @@
         }
       ],
       "proof_bundle": "Terminal-Bench-Science 0.1: GPT-6 Astra 64.6 vs Opus 5.5 58.7.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Read and reason over dense documents, charts, screenshots, diagrams and complex real-world imagery.",
       "acceptance_basis": [
         {
@@ -145,15 +169,19 @@
         }
       ],
       "proof_bundle": "Sonnet 5.5 has published Chartography-with-tools 90.2 vs Opus 89.0; current Brain-owned zero-incremental route is not yet verified at that bar.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "COMPUTER_AND_BROWSER_USE",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Complete multi-step workflows across browsers and arbitrary applications with planning, visual grounding and judgment.",
       "acceptance_basis": [
         {
@@ -164,34 +192,46 @@
         }
       ],
       "proof_bundle": "OpenAI describes Astra as state-of-the-art in computer/browser use, but current published OSWorld figures are not directly comparable with Anthropic's Opus 5.5 81.8 partial result.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "FINANCIAL_ANALYSIS",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Read filings/models/charts, maintain deal/reporting context, reason precisely and handle compliance-sensitive nuance.",
       "acceptance_basis": null,
       "proof_bundle": "Existing route is strong and configured conceptually, but no direct Opus-5.5-or-better comparative evidence was found for the full financial-analysis scope.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Follow complex instructions, stay within authorization/scope, resolve routine ambiguity and adapt when requirements change.",
       "acceptance_basis": null,
       "proof_bundle": "OpenAI reports strong intent/scope behavior for Astra, but no direct Opus 5.5 matched comparison closes the whole family.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -206,92 +246,120 @@
     {
       "id": "SUBAGENT_DELEGATION_AND_COORDINATION",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Delegate to multiple workers/subagents, coordinate results and check delegated work.",
       "acceptance_basis": null,
       "proof_bundle": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
       ],
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Check work creatively, falsify conclusions, diagnose failures and recover without losing the goal.",
       "acceptance_basis": null,
       "proof_bundle": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_FAIL_CLOSED_SELF_VERIFICATION_RECOVERY_V1.json"
       ],
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "ARTIFACT_CREATION",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Create professional spreadsheets, slides, documents, reports, code and other immediately usable artifacts.",
       "acceptance_basis": null,
       "proof_bundle": [
         "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07"
       ],
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "COMMUNICATION_AND_SYNTHESIS",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Communicate clearly, prioritize what matters, follow writing rules and synthesize complex work over long sessions.",
       "acceptance_basis": null,
       "proof_bundle": "Brain owns bounded synthesis components, but no broad Opus 5.5 communication parity evaluation exists.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Find, select, learn and correctly use tools/software/APIs/solvers required for unfamiliar work.",
       "acceptance_basis": null,
       "proof_bundle": "Substantial historical verified components exist, but prior parent-level open-ended tool-learning promotion remained incomplete.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "UNKNOWN_DOMAIN_ADAPTATION",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Enter unfamiliar domains, learn ontology/tools and become effective without prior human teaching.",
       "acceptance_basis": null,
       "proof_bundle": "Astra is extremely strong on novel-environment evaluations, but no direct Opus 5.5 matched target is available.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "MULTI_CAPABILITY_COMPOSITION",
       "closure_state": "PASS",
-      "ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "target_behavior": "Compose reasoning, research, tools, code, memory, actions and verification into one causal execution system.",
       "acceptance_basis": null,
       "proof_bundle": "Historical Brain has verified grounding, composition and decision-synthesis components; whole Opus-level general composition remains unverified.",
-      "unresolved": [
-        "GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
-      ],
-      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json"
+      "unresolved": [],
+      "terminal_behavioral_adjudication_evidence": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+      "preterminal_ownership_status": "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING",
+      "terminal_ownership_evidence": [
+        "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+        "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+      ]
     },
     {
       "id": "EXACT_SYMBOLIC_COMPUTATION",
@@ -311,20 +379,20 @@
     "exact_target_family_count_19": true,
     "every_required_behavior_contracted": true,
     "every_required_behavior_has_admissible_proof": true,
-    "donor_dependent_required_behaviors_zero": false,
+    "donor_dependent_required_behaviors_zero": true,
     "unexplained_required_behaviors_zero": true,
     "unresolved_verifier_mutations_zero": true,
     "unresolved_composition_failures_zero": true,
     "contaminated_evidence_used_for_promotion_zero": true,
     "resource_or_authority_violations_zero": true,
     "all_frozen_opus_acceptance_predicates_pass": true,
-    "final_donor_deletion_cleanroom_pass": false,
-    "proof_bundle_frozen": false
+    "final_donor_deletion_cleanroom_pass": true,
+    "proof_bundle_frozen": true
   },
   "counters": {
     "uncontracted_required_behaviors": 0,
     "unproved_required_behaviors": 0,
-    "donor_dependent_required_behaviors": null,
+    "donor_dependent_required_behaviors": 0,
     "unresolved_verifier_mutations": 0,
     "unresolved_composition_failures": 0,
     "contaminated_promotion_evidence": 0,
@@ -340,7 +408,8 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "19_OF_19_BEHAVIORAL_FAMILY_ROWS_PASS__VERIFIER_COMPOSITION_CONTAMINATION_AND_AUTHORITY_GATES_CLOSED__FINAL_PROOF_BUNDLE_PREASSEMBLED__DONOR_INDEPENDENCE_CLEANROOM_IS_THE_ONLY_EVIDENTIARY_BLOCKER",
+    "candidate_achieved": true,
+    "reason": "ALL_TERMINAL_PREDICATES_AND_19_OF_19_OWNERSHIP_ROWS_CLOSED_ON_BRANCH__FINAL_GLOBAL_POSTCONDITIONS_AND_HARDENED_TERMINAL_CLOSURE_REDUCER_CI_PENDING",
     "override_allowed": false
   },
   "specification_closure": {
@@ -366,12 +435,30 @@
     "status": "ACTIVE_FAIL_CLOSED__DERIVE_EXACT_RESIDUAL_OWNERSHIP_CUT",
     "rule": "TERMINAL_BEHAVIORAL_PASS_DOES_NOT_IMPLY_DONOR_INDEPENDENT_OWNERSHIP__ALL_GLOBAL_POSTCONDITIONS_REQUIRE_EXPLICIT_INDEPENDENT_RECEIPTS"
   },
-  "next": "RUN_POSTWAVE_GLOBAL_OWNERSHIP_REDUCER__CLOSE_ONLY_ITS_EXACT_RESIDUAL_BLOCKERS_WITH_INDEPENDENT_RECEIPTS__THEN_RERUN_TERMINAL_CLOSURE_REDUCER__NO_TERMINAL_WAVE_REPLAY",
+  "next": "RUN_FINAL_NO_REPLAY_CI_TRANSACTION__IF_BOTH_REDUCERS_AND_CONTENT_HASH_GATES_PASS__MERGE_CANDIDATE__THEN_RECORD_INDEPENDENT_FINALIZATION_RECEIPT",
   "postwave_global_ownership_reconciliation": "canonical/governance/POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1.json",
   "postwave_remaining_exact_gates": [
-    "DONOR_DEPENDENT_REQUIRED_BEHAVIORS_ZERO",
-    "FINAL_DONOR_DELETION_CLEANROOM_PASS",
-    "PROOF_BUNDLE_FROZEN_AFTER_DONOR_CLEANROOM"
+    "FINAL_GLOBAL_POSTCONDITIONS_AND_TERMINAL_CLOSURE_REDUCER_CI_PASS"
   ],
-  "final_proof_bundle_candidate": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1.json"
+  "final_proof_bundle_candidate": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1.json",
+  "global_ownership_postconditions": {
+    "verifier_mutation_closure": {
+      "status": "INDEPENDENT_PASS",
+      "evidence": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    "composition_closure": {
+      "status": "INDEPENDENT_PASS",
+      "evidence": "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "terminal_confirmation": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"
+    },
+    "final_donor_deletion_cleanroom": {
+      "status": "INDEPENDENT_PASS",
+      "evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    "proof_bundle_freeze": {
+      "status": "FROZEN_PENDING_FINAL_REDUCER_CI",
+      "evidence": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
+    }
+  },
+  "final_proof_bundle": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_V1.json"
 }
