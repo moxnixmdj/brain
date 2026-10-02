@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__REGISTRY_TERMINAL_ACCEPTANCE_MODE_BOUND__ZERO_TERMINAL_RESULT",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 598,
+  "public_merge_commit": "c40192f331a84e410b6994adf24981f33404002f",
+  "workflow_run_id": 36962250614,
+  "workflow_job_id": 110698254499,
+  "workflow_conclusion": "success",
+  "exact_bound_blobs": {
+    "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_MODE_V1.json": "4e709a3f1167b9d67abe4a56758123497f2e970f",
+    "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
+    "canonical/governance/DELEGATION_TERMINAL_POPULATION_BINDING_V1.json": "bb69379f0c73ac28f0491c74deec25347eaf551c",
+    "canonical/verification/DELEGATION_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "ab1d8d19217fe683b62682c8f7f2ce7800fcfe57"
+  },
+  "verified": [
+    "TERMINAL_ACCEPTANCE_PROOF_MODE_IS_PRESENT_IN_LIVE_REGISTRY",
+    "THEORETICAL_CEILING_BASIS_EXPLICIT",
+    "ZERO_ALLOWED_FAILED_CASES",
+    "ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_REQUIRED",
+    "POST_FREEZE_BEACON_STILL_UNKNOWN",
+    "ZERO_ADAPTIVE_SELECTION_CASE_REPLACEMENT_AND_TUNING_REPLAY",
+    "SCOPE_GATE_ADMISSIBLE_WITH_ZERO_ERRORS",
+    "TERMINAL_POPULATION_BINDING_VERIFICATION_SUCCESS",
+    "ZERO_TERMINAL_EXECUTION_AND_ZERO_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
