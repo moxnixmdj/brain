@@ -335,7 +335,9 @@
     "p3_v2_information_safe_preflight_authority": "INVALIDATED_FOR_P3_BY_STANCE_SUPPORT_LEAK__ZERO_TERMINAL_AUTHORITY",
     "p3_raw_evidence_v3_independent_preflight": "INDEPENDENT_PASS_BOUNDED_ONLY__canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
     "delegation_dynamic_reassignment_independent_preflight": "canonical/verification/DYNAMIC_DELEGATION_REASSIGNMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "tool_discovery_information_safe_independent_preflight": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "tool_discovery_information_safe_independent_preflight": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "dynamic_delegation_reassignment_independent_preflight": "canonical/verification/DYNAMIC_DELEGATION_REASSIGNMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "p3_information_safe_v3_independent_preflight": "canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
