@@ -956,10 +956,10 @@
   "active_terminal_proof_basis": {
     "path": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
     "active_contract_count": 12,
-    "admissible_frozen_terminal_route_count": 1,
+    "admissible_frozen_terminal_route_count": 4,
     "execution_authority": false,
     "population_protocol": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
     "narrow_six_audit": "canonical/governance/REMAINING_BEHAVIOR_INFORMATION_BOUNDARY_AUDIT_V1.json",
-    "remaining_route_count": 11
+    "remaining_route_count": 8
   }
 }
