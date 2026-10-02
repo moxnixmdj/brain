@@ -25,6 +25,18 @@
     "receipt_history_defect": {
       "path": "canonical/governance/DELEGATION_RECEIPT_HISTORY_SCOPE_REPAIR_V1.json",
       "git_blob_sha": "60303b1dd081984e1218c8c2e978c7b1497df9e8"
+    },
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "prior_independent_scope_equivalence": {
+      "path": "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json",
+      "git_blob_sha": "52392515cd4de672f82f8afac82a41d3ce442656"
+    },
+    "prior_independent_scope_gate_receipt": {
+      "path": "canonical/verification/DELEGATION_SCOPE_GATE_V2_V3_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "eddfe01c81ae9d6e9453c4bc30737f9ddd273a83"
     }
   },
   "exact_contract_boundary": {
@@ -67,7 +79,8 @@
     "history_induction_step": "Appending one normalized supported receipt extends the stored ordered history by one unique receipt id; V4 replays the entire history from immutable base state before solving.",
     "persistent_effect_algebra": "STEP_UNAVAILABLE, WORKER_UNAVAILABLE and WORKER_CAPABILITY_REMOVED accumulate by idempotent set union; RESOURCE_CAPACITY_CHANGED is an ordered last-write state update. Therefore a later supported receipt cannot resurrect any earlier disable/removal effect.",
     "finite_history_closure": "By induction, after every finite supported receipt history the materialized state equals the ordered fold of the entire history, then the unchanged exact V2 solver is applied to that state.",
-    "infeasible_case_rule": "If exhaustive finite search finds no executable resource/capability-feasible plan under the identical declared constraints, terminal success is unattainable inside the frozen contract and the carrier fails closed."
+    "infeasible_case_rule": "If exhaustive finite search finds no executable resource/capability-feasible plan under the identical declared constraints, terminal success is unattainable inside the frozen contract and the carrier fails closed.",
+    "contract_binding": "The exact current TASK_TO_DELEGATION_GRAPH_001 registry row is content-addressed, and the previously independently verified scope gate established all frozen required interactions before the later receipt-history defect was found; V2 replaces only that falsified live-receipt closure premise with V4 cumulative-history semantics."
   },
   "population_relation": {
     "relation": "UNIVERSAL_FORMAL_SCOPE_CANDIDATE",
