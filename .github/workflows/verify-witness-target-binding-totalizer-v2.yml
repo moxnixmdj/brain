@@ -1,0 +1,23 @@
+name: Test witness target totalizer v2
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/witness_target_binding_totalizer_v2.py"
+      - "canonical/tests/test_witness_target_binding_totalizer_v2.py"
+      - ".github/workflows/verify-witness-target-binding-totalizer-v2.yml"
+      - "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V2.json"
+      - "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
+      - "canonical/governance/OPUS55_BRAIN_WITNESS_NORMALIZATION_V1.json"
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_witness_target_binding_totalizer_v2 -v
