@@ -71,5 +71,43 @@ class Tests(unittest.TestCase):
         self.assertIn("PREWAVE_COMPARATOR_DELETION_INTENT_MISSING", out["errors"])
 
 
+    def test_exact_blob_receipt_can_supersede_stale_embedded_flags(self):
+        x = self.live()
+        x["binding"] = json.loads(json.dumps(x["binding"]))
+        x["binding"]["route_gates"]["independent_verification_pass"] = False
+        x["binding"]["prewave_admissible"] = False
+        x["binding_blob_sha"] = "abc123"
+        x["terminal_snapshot_binding_blob_sha"] = "abc123"
+        x["binding_verification"] = {
+            "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_BINDINGS",
+            "verified_jobs": [{
+                "binding_path": x["binding_path"],
+                "binding_blob_sha": "abc123",
+                "conclusion": "success",
+            }],
+        }
+        out = evaluate(**x)
+        self.assertTrue(out["pass"], out)
+
+    def test_exact_blob_receipt_fails_when_terminal_binding_differs(self):
+        x = self.live()
+        x["binding"] = json.loads(json.dumps(x["binding"]))
+        x["binding"]["route_gates"]["independent_verification_pass"] = False
+        x["binding"]["prewave_admissible"] = False
+        x["binding_blob_sha"] = "current"
+        x["terminal_snapshot_binding_blob_sha"] = "terminal"
+        x["binding_verification"] = {
+            "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_CURRENT_BINDINGS",
+            "verified_jobs": [{
+                "binding_path": x["binding_path"],
+                "binding_blob_sha": "current",
+                "conclusion": "success",
+            }],
+        }
+        out = evaluate(**x)
+        self.assertFalse(out["pass"])
+        self.assertIn("BINDING_NOT_INDEPENDENTLY_VERIFIED", out["errors"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
