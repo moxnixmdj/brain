@@ -13,6 +13,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import xml.etree.ElementTree as ET
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_CAD_T0_ROUTE_SPECIFIC_CANDIDATE_V1"
@@ -22,18 +23,63 @@ class CandidateError(ValueError):
     pass
 
 
+def _coord(value: Any, fallback: float) -> float:
+    """Parse the first SVG coordinate number; fail to a stable source-order fallback."""
+    if value is None:
+        return fallback
+    m = re.search(r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)", str(value))
+    return float(m.group(0)) if m else fallback
+
+
 def _texts(svg: Any) -> list[str]:
+    """Reconstruct rendered text lines independent of SVG <text> node boundaries.
+
+    Text fragments sharing the same rendered y coordinate are ordered by x and
+    concatenated with their original leading/trailing whitespace preserved. This
+    makes semantically identical drawings invariant to source-node splitting,
+    including splits inside numeric tokens.
+    """
     if not isinstance(svg, str) or not svg.strip():
         raise CandidateError("DRAWING_SVG_REQUIRED")
-    rows = []
-    for raw in re.findall(r"<text\b[^>]*>(.*?)</text>", svg, flags=re.I | re.S):
-        text = html.unescape(re.sub(r"<[^>]+>", "", raw)).strip()
-        if text:
-            rows.append(text)
-    if not rows:
-        raise CandidateError("DRAWING_TEXT_EMPTY")
-    return rows
+    try:
+        root = ET.fromstring(svg)
+    except ET.ParseError as exc:
+        raise CandidateError("DRAWING_SVG_XML_INVALID") from exc
 
+    grouped: dict[tuple[str, float], list[tuple[float, int, str]]] = {}
+    unpositioned: list[tuple[int, str]] = []
+    seq = 0
+    for elem in root.iter():
+        if elem.tag.rsplit("}", 1)[-1].lower() != "text":
+            continue
+        raw = html.unescape("".join(elem.itertext()))
+        if not raw.strip():
+            continue
+        y_attr = elem.attrib.get("y")
+        x_attr = elem.attrib.get("x")
+        if y_attr is None:
+            unpositioned.append((seq, raw.strip()))
+        else:
+            y = _coord(y_attr, float(seq))
+            x = _coord(x_attr, float(seq))
+            # String namespace keeps positioned and fallback groups disjoint.
+            key = ("y", round(y, 6))
+            grouped.setdefault(key, []).append((x, seq, raw))
+        seq += 1
+
+    rows: list[tuple[float, int, str]] = []
+    for (_, y), frags in grouped.items():
+        frags.sort(key=lambda z: (z[0], z[1]))
+        rendered = "".join(raw for _, _, raw in frags).strip()
+        if rendered:
+            rows.append((y, min(z[1] for z in frags), rendered))
+    # SVG y grows downward, matching the generator's visual row order.
+    rows.sort(key=lambda z: (z[0], z[1]))
+    out = [row for _, _, row in rows]
+    out.extend(text for _, text in sorted(unpositioned))
+    if not out:
+        raise CandidateError("DRAWING_TEXT_EMPTY")
+    return out
 
 def _one(pattern: str, rows: list[str], label: str, flags: int = 0):
     hits = []
