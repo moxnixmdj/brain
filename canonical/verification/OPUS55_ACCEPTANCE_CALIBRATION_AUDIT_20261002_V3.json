@@ -43,5 +43,34 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "result": {
+    "behavioral_pass_family_count": 19,
+    "acceptance_calibrated_family_count": 4,
+    "acceptance_pending_family_count": 15,
+    "acceptance_calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "acceptance_pending_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "ARTIFACT_CREATION",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ],
+    "terminal_goal_acceptance_closed": false
+  }
 }
