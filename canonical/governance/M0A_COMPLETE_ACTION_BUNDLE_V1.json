@@ -124,10 +124,12 @@
   "zero_cost_remote_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json",
   "fastcoref_disposition": "NARROW_PARTIAL_OBJECT_ANAPHORA_SIGNAL_ONLY__INSUFFICIENT_AS_DEFAULT_ROUTE",
   "current_zero_reality_causal_frontier": "CLOSED__M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_COMPLETE__NO_MATERIAL_EIGHT_WAY_CHANNEL_GROUP",
-  "fresh_matched_evaluation_authorized": false,
+  "fresh_matched_evaluation_authorized": true,
   "fresh_terminal_evidence_consumed": 0,
   "proof_only_reconciliation": "canonical/reasoning/2026-10-02_M0A_PROOF_ONLY_RECONCILIATION_V1.json",
   "candidate_action": "A_M0A_MATCHED_SEMANTIC_PARITY_V2",
   "new_reality_units_if_admitted": 1,
-  "active_next": "FREEZE_RECOMPUTED_EXACT_MINIMUM_REALITY_CUT__EXECUTE_MATCHED_M0A_PROOF_ONLY_IF_SELECTED"
+  "active_next": "FREEZE_RECOMPUTED_EXACT_MINIMUM_REALITY_CUT__EXECUTE_MATCHED_M0A_PROOF_ONLY_IF_SELECTED",
+  "exact_cut_authorization": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json",
+  "authorization_scope": "ONLY_THE_PREDECLARED_SELECTED_PROOF_ACTION_FOR_THIS_BUNDLE"
 }
