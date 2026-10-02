@@ -18,6 +18,7 @@ from canonical.runtime import direct_route_terminal_executors_v1 as direct
 from canonical.runtime import cad_t0_route_specific_terminal_executor_v1 as cad
 from canonical.runtime import portfolio_multiplex_terminal_instrumentation_v1 as multiplex
 from canonical.runtime import terminal_wave_launch_authority_reducer_v1 as launch_authority
+from canonical.runtime import terminal_parent_portfolio_runner_v1 as parent_portfolio_runner
 
 SCHEMA = "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_LAUNCHER_V1"
 PORTFOLIOS = ("T0", "T1", "T2", "T3")
@@ -209,15 +210,16 @@ def execute_wave(
     *,
     commitment: str,
     beacon: str,
-    parent_runner: Callable[..., list[Mapping[str, Any]]],
+    parent_runner: Callable[..., list[Mapping[str, Any]]] | None = None,
     direct_runner: Callable[..., dict[str, Any]] = direct.execute_direct_route,
     cad_runner: Callable[..., dict[str, Any]] = cad.execute_cad_route,
     root: Path = Path("."),
 ) -> dict[str, Any]:
     """Execute each unique direct route once plus all four parent portfolios.
 
-    parent_runner(portfolio, commitment=..., beacon=...) must return the direct
-    instrumentation receipts emitted by the real frozen parent portfolio.
+    parent_runner(portfolio, commitment=..., beacon=..., direct_results=...) must
+    return the direct instrumentation receipts emitted by the real frozen parent portfolio.
+    When omitted, the independently verified concrete parent portfolio runner is used.
     """
     _require_text(commitment, "COMMITMENT")
     _require_text(beacon, "BEACON")
@@ -246,14 +248,8 @@ def execute_wave(
             "terminal_result": False,
         }
 
-    parent_receipts = {
-        portfolio: list(parent_runner(portfolio, commitment=commitment, beacon=beacon))
-        for portfolio in PORTFOLIOS
-    }
-    parent = validate_parent_receipts(
-        parent_receipts, commitment=commitment, beacon=beacon
-    )
-
+    # Execute each unique direct route exactly once first. The real parent runner
+    # reuses the single CAD result for T0 instrumentation rather than executing CAD twice.
     direct_results: dict[str, dict[str, Any]] = {}
     for behavior_id in sorted(DIRECT_PORTFOLIOS):
         if behavior_id == CAD_ID:
@@ -263,6 +259,23 @@ def execute_wave(
                 behavior_id, commitment=commitment, beacon=beacon
             )
         direct_results[behavior_id] = result
+
+    if parent_runner is None:
+        parent_runner = parent_portfolio_runner.execute_parent_portfolio
+    parent_receipts = {
+        portfolio: list(
+            parent_runner(
+                portfolio,
+                commitment=commitment,
+                beacon=beacon,
+                direct_results=direct_results,
+            )
+        )
+        for portfolio in PORTFOLIOS
+    }
+    parent = validate_parent_receipts(
+        parent_receipts, commitment=commitment, beacon=beacon
+    )
 
     direct_failures = sorted(
         behavior_id
