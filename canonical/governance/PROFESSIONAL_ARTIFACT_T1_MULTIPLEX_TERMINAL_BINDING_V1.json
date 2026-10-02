@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "PREWAVE_T1_MULTIPLEX_DIRECT_PROOF_BINDING_FROZEN__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "proof_mode": "T1_MULTIPLEXED_DIRECT_PROFESSIONAL_QUALITY_GATE",
+  "authority": [
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+    "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
+    "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json"
+  ],
+  "decomposition": {
+    "owned_behavior": "PLAN_AND_SELECT_PROFESSIONAL_CONTENT_ANALYSIS_AND_LAYOUT_REVISIONS_USING_OBJECTIVE_AUDIENCE_EVIDENCE_RUBRIC_AND_CURRENT_ARTIFACT_STATE",
+    "reused_adjacent_gate": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+    "adjacent_credit_rule": "NATIVE_MECHANICAL_PRESERVATION_MAY_BE_REQUIRED_AS_A_GATE_BUT_NEVER_STANDS_IN_FOR_PROFESSIONAL_QUALITY_JUDGMENT",
+    "no_cross_behavior_score_inheritance": true
+  },
+  "candidate_visible_information": [
+    "OBJECTIVE",
+    "AUDIENCE",
+    "REQUIRED_TOPICS",
+    "RUBRIC_WEIGHTS",
+    "SOURCE_FACTS_WITH_PROVENANCE",
+    "CURRENT_DRAFT_OR_RENDER_STATE",
+    "EDIT_CANDIDATES",
+    "EDIT_BUDGET",
+    "DECLARED_NATIVE_FORMAT_METADATA"
+  ],
+  "hidden_evaluator_information": [
+    "INDEPENDENT_SOURCE_SUPPORT_ORACLE",
+    "INDEPENDENT_REQUIRED_TOPIC_COVERAGE_ORACLE",
+    "INDEPENDENT_AUDIENCE_FIT_ORACLE",
+    "INDEPENDENT_ANALYSIS_VALUE_ORACLE",
+    "INDEPENDENT_LAYOUT_AND_STRUCTURE_CONSTRAINT_ORACLE",
+    "SEEDED_PLAN_ABLATION_IDENTITY",
+    "SEEDED_RESCUE_EDIT_IDENTITY"
+  ],
+  "candidate_must_not_receive": [
+    "HIDDEN_ORACLE_FACTORS",
+    "REFERENCE_SOLUTION",
+    "GOLD_PLAN",
+    "ABLATION_LABELS",
+    "EXPECTED_SCORE_DELTA",
+    "TERMINAL_ACCEPTANCE_LABEL"
+  ],
+  "terminal_surface": {
+    "portfolio": "T1",
+    "evidence_source": "FROZEN_T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_CASES",
+    "synthetic_whole_domain_superset_required": false,
+    "named_private_benchmarks_required_for_execution": false,
+    "named_surface_deletion_authority": "ONLY_IF_EVERY_REPRESENTED_FROZEN_BEHAVIOR_LEAF_HAS_DIRECT_PREDECLARED_INSTRUMENTATION_AND_TERMINAL_ACCEPTANCE",
+    "deletion_policy": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json"
+  },
+  "direct_instrumentation": [
+    "SELECTED_EDIT_IDS_EXIST_AND_EDIT_BUDGET_IS_RESPECTED",
+    "EVERY_SELECTED_CLAIM_IS_TRACEABLE_TO_VISIBLE_SOURCE_FACTS",
+    "SUPPORTED_REQUIRED_TOPICS_ARE_NOT_SILENTLY_DROPPED",
+    "AUDIENCE_AND_ANALYSIS_KIND_ARE_LOAD_BEARING",
+    "INDEPENDENT_RUBRIC_DELTA_BEATS_MECHANICS_ONLY_BASELINE_WHEN_QUALITY_JUDGMENT_IS_LOAD_BEARING",
+    "SEEDED_PLAN_ABLATION_DEGRADES_OR_FAILS_THE_RELEVANT_RUBRIC_DIMENSION",
+    "SEEDED_RESCUE_EDIT_RESTORES_OR_IMPROVES_THE_RELEVANT_RUBRIC_DIMENSION",
+    "ANY_NATIVE_EDIT_USED_BY_THE_CASE_PASSES_THE_SEPARATE_NATIVE_ARTIFACT_MECHANICAL_GATE"
+  ],
+  "uncovered_scope_rule": "ANY_T1_PROFESSIONAL_QUALITY_LEAF_NOT_DIRECTLY_EXERCISED_AND_SCORED_REMAINS_OPEN__NO_SCOPE_INHERITANCE",
+  "post_freeze_accounting": {
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "tuning_replay": false,
+    "result_to_runtime_feedback_during_wave": false,
+    "oracle_or_threshold_edit_after_first_terminal_result": false,
+    "failed_case_counts_as_failure": true
+  },
+  "dependencies": [
+    "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+    "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+    "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json"
+  ],
+  "prewave_admissible": false,
+  "independent_verification": null,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
