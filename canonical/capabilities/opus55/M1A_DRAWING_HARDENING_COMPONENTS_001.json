@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_M1A_DRAWING_HARDENING_COMPONENTS_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_COMPONENT_SET__M1A_NARROWED__ZERO_FAMILY_CREDIT",
+  "parent_residual": "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
+  "components": [
+    {
+      "artifact": "canonical/runtime/drawing_perspective_rectification.py",
+      "blob_sha": "cceb48f7d971e13b9ac3a5d9c8c3cf94e0eb632c",
+      "verification_run_id": 36943497999,
+      "scope": "SINGLE_PLANAR_FOUR_CORNER_PROJECTIVE_RECTIFICATION_FROM_EXPLICIT_OR_DETECTED_UNAMBIGUOUS_PAGE_QUAD",
+      "nonclaims": [
+        "LOCAL_NONPLANAR_WARP",
+        "FOLDED_PAPER_CORRECTION",
+        "SEMANTIC_VIEW_REGISTRATION"
+      ]
+    },
+    {
+      "artifact": "canonical/runtime/drawing_robust_preprocess.py",
+      "blob_sha": "8e95ffffbf5b0c8a37ccd7505b447eedbdcc4c8c",
+      "verification_run_id": 36943497999,
+      "scope": "UNEVEN_ILLUMINATION_MILD_NOISE_LOW_CONTRAST_RASTER_NORMALIZATION",
+      "nonclaims": [
+        "SEVERE_OCCLUSION",
+        "HEAVY_BLUR",
+        "ARBITRARY_SCAN_DAMAGE",
+        "DOWNSTREAM_SEMANTIC_CORRECTNESS"
+      ]
+    },
+    {
+      "artifact": "canonical/runtime/gdt_feature_control_parser.py",
+      "blob_sha": "de02499836fb41883cb0feadcaa9554604a260e3",
+      "verification_run_id": 36943497999,
+      "scope": "BOUNDED_TEXTUAL_OR_OCR_FEATURE_CONTROL_FRAME_NOTATION_AND_DATUM_TOKEN_PARSING",
+      "nonclaims": [
+        "STANDARD_LEGALITY",
+        "FULL_GD_AND_T",
+        "METROLOGY"
+      ]
+    },
+    {
+      "artifact": "canonical/runtime/gdt_feature_control_frame.py",
+      "blob_sha": "e8fedb44e94c160b1adf98e780cf1878649aaa3e",
+      "verification_run_id": 36943601544,
+      "scope": "BOUNDED_FEATURE_CONTROL_FRAME_GRAMMAR_WITH_DECLARED_2009_OR_2018_EDITION_FEATURE_TYPE_AND_FAIL_CLOSED_LEGALITY_RULES",
+      "donor_provenance": "canonical/provenance/GDT_FEATURE_CONTROL_FRAME_DONOR_V1.json",
+      "donor_runtime_required": false,
+      "nonclaims": [
+        "FULL_ASME_Y14_5_CONFORMANCE",
+        "FULL_ISO_1101_CONFORMANCE",
+        "DATUM_FRAME_GEOMETRIC_RESOLUTION",
+        "PART_CONFORMANCE"
+      ]
+    }
+  ],
+  "independent_verification": {
+    "m1a_hardening_workflow": ".github/workflows/verify-m1a-hardening-components.yml",
+    "m1a_hardening_run_id": 36943497999,
+    "m1a_hardening_conclusion": "success",
+    "strict_gdt_workflow": ".github/workflows/verify-gdt-feature-control-frame.yml",
+    "strict_gdt_run_id": 36943601544,
+    "strict_gdt_conclusion": "success"
+  },
+  "donor": {
+    "repository": "clay-good/anvilate",
+    "revision": "c29daa0832bc0f1cf66bfa6549bfa626a87b34a8",
+    "license": "MIT",
+    "source_blob_sha": "c4a7d4f66de81542874d1239051cf2aa5fc10171",
+    "license_blob_sha": "6094be0298fc418c3c5f850eeeeb70dbfe5e730a",
+    "runtime_required": false
+  },
+  "residuals_still_open": [
+    "LOCAL_NONPLANAR_WARP_OR_REGISTRATION_OUTSIDE_BOUNDED_GLOBAL_ROTATION_AND_PLANAR_PROJECTIVE_RECTIFICATION",
+    "COMPOUND_VISUAL_FEATURE_SEMANTICS",
+    "ENGINEERING_NOTATION_OUTSIDE_VERIFIED_BOUNDED_DIMENSION_THREAD_TOLERANCE_AND_FCF_GRAMMARS",
+    "ROBUSTNESS_OUTSIDE_VERIFIED_CLEAN_AND_MILD_DEGRADATION_SURFACES"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
