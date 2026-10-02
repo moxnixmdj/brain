@@ -114,5 +114,54 @@ class TerminalRouteClosureControllerTests(unittest.TestCase):
         self.assertIn("OPEN_ROUTE_WITHOUT_BLOCKER:A", out["errors"])
 
 
+    def test_external_comparator_block_is_classified_and_not_scope_expansion(self):
+        out = self.run_basis([
+            {
+                "behavior_id": "TRAJECTORY",
+                "portfolio": "T0_T2",
+                "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL_FREEZE_PENDING",
+                "blockers": [
+                    "FREEZE_SELF_VERIFICATION_CAUSAL_INTERVENTION_CHALLENGE_SOURCE_POOL_AND_SCORER",
+                    "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
+                    "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_CAUSAL_RECOVERY_SCOPE",
+                ],
+            },
+        ])
+        self.assertEqual(out["status"], "PASS")
+        row = out["queue"][0]
+        self.assertEqual(row["blocker_classes"]["external_block"], 1)
+        self.assertEqual(row["blocker_classes"]["open_domain_protocol"], 2)
+        self.assertEqual(row["blocker_classes"]["scope_expansion"], 0)
+        self.assertEqual(
+            row["next_action_class"],
+            "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES",
+        )
+
+    def test_external_blocked_lane_is_ranked_after_actionable_internal_lane(self):
+        out = self.run_basis([
+            {
+                "behavior_id": "ACTIONABLE",
+                "portfolio": "T1",
+                "proof_state": "INDEPENDENT_PREFLIGHT_PASS",
+                "blockers": [
+                    "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+                    "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING",
+                ],
+            },
+            {
+                "behavior_id": "BLOCKED",
+                "portfolio": "T0_T2",
+                "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED",
+                "blockers": [
+                    "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
+                    "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
+                ],
+            },
+        ])
+        self.assertEqual(
+            [x["behavior_id"] for x in out["queue"]],
+            ["ACTIONABLE", "BLOCKED"],
+        )
+
 if __name__ == "__main__":
     unittest.main()
