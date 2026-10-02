@@ -262,11 +262,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "SATURATE_M2_M3_M4_M5_FROM_EXISTING_BRAIN_AND_PERMISSIVE_ZERO_COST_MECHANISMS__DEDUPLICATE_SHARED_BEHAVIORAL_LEAVES__RECOMPUTE_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
+    "next_step": "SATURATE_M2_M3_M4_M5_SURVIVING_RESIDUALS_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__APPLY_TERMINAL_OBSERVATION_DOMINANCE_AND_SCOPE_EQUIVALENT_PUBLIC_BARS__RECOMPUTE_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "OUTER_GLOBAL_TERMINAL_UNIVERSE_HAS_OPEN_M2_M3_M4_M5_MECHANISM_HOLES__LOCAL_V6_CUT_NOT_GLOBALLY_AUTHORIZED",
+    "critical_blocker": "OUTER_GLOBAL_TERMINAL_UNIVERSE_NOT_YET_EXACT_CUT_READY__M2_M3_M4_M5_SURVIVING_MECHANISM_RESIDUALS_AND_TERMINAL_PROOF_MULTIPLEXING_REMAIN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -343,7 +343,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "OUTER_GLOBAL_TERMINAL_UNIVERSE_HAS_OPEN_M2_M3_M4_M5_MECHANISM_HOLES__LOCAL_V6_CUT_NOT_GLOBALLY_AUTHORIZED",
+    "highest_leverage_capability_gap": "OUTER_GLOBAL_TERMINAL_UNIVERSE_NOT_YET_EXACT_CUT_READY__M2_M3_M4_M5_SURVIVING_MECHANISM_RESIDUALS_AND_TERMINAL_PROOF_MULTIPLEXING_REMAIN",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -826,7 +826,7 @@
       "activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
       "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
     },
-    "next_progress_event_target": "OUTER_GLOBAL_MINIMUM_REALITY_CUT_READY_OR_EXPLICIT_UNCOVERED_MECHANISM_HOLE",
+    "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_EXACT_BLOCKER_VERDICT",
     "open_mechanism_residual_count": 3,
     "m0b_frozen_envelope_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
     "residual_action_universe_v2": {
@@ -857,6 +857,14 @@
         "M4",
         "M5"
       ]
+    },
+    "active_stage1_execution": null,
+    "next_clean_task": null,
+    "outer_global_terminal_universe": {
+      "status": "PRIMARY_SCHEDULING_AUTHORITY",
+      "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+      "local_v6_globally_authorized": false,
+      "fresh_terminal_evidence_allowed": false
     }
   },
   "provider_rules": {
@@ -1063,7 +1071,12 @@
     "v6_residual_cut_verification": "canonical/verification/RESIDUAL_MINIMUM_REALITY_CUT_V6_VERIFICATION_20261002_V1.json",
     "v6_residual_cut_independent_recomputation": "canonical/verification/RESIDUAL_MINIMUM_REALITY_CUT_V6_INDEPENDENT_RECOMPUTATION_20261002_V1.json",
     "only_v6_selected_batches_may_advance_to_fresh_prequalification": true,
-    "zero_reality_mechanism_search_reopened_without_cut_invalidation": false
+    "zero_reality_mechanism_search_reopened_without_cut_invalidation": false,
+    "outer_global_terminal_universe": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+    "terminal_observation_dominance_and_proof_multiplexing": "canonical/governance/TERMINAL_OBSERVATION_DOMINANCE_AND_PROOF_MULTIPLEXING_V1.json",
+    "public_bar_and_comparator_feasibility": "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json",
+    "local_v6_is_global_execution_authority": false,
+    "fresh_terminal_evidence_requires_outer_exact_cut": true
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
