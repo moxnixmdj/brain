@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__EXACT_PREWAVE_PACKAGE_VERIFIED__ZERO_TERMINAL_RESULT",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "exact_brain_blobs": {
+    "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+    "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json": "89083d0a7039f4e3e9ac0f9fbdd392836eb11f25",
+    "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json": "8b439403a05b4a912f06a8866db25f6e53b52473",
+    "canonical/runtime/p2_professional_quality_t1_multiplex_preflight.py": "d5a3d5990c8573f73d1c68952d2d59a14f4499d2",
+    "canonical/tests/test_p2_professional_quality_t1_multiplex_preflight.py": "66cf407b28151eecbbe99c70683eeba8f89b1019",
+    "canonical/runtime/p2_p3_information_safe_candidate_v2.py": "ea8057b0eadac210c4f4378298df93ed233c5824",
+    "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860",
+    "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json": "11a7212c3b54ed130212b3a7d4f4e4386bc590f5"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 642,
+    "verified_head": "8af530ced5069b132f502f29174d10fcb00ae1c5",
+    "merge_commit": "366366de32e12e06250dc3d6d0eaa5f7fde81979",
+    "workflow_run_id": 36964749911,
+    "job_id": 110705945943,
+    "workflow_name": "Verify P2 professional-quality T1 multiplex binding",
+    "conclusion": "success"
+  },
+  "verified": [
+    "PUBLIC_CAPSULE_GIT_BLOBS_EXACTLY_MATCH_CURRENT_BRAIN_PREWAVE_PACKAGE",
+    "T1_DIRECT_PROFESSIONAL_QUALITY_ROUTE_PRESENT",
+    "CURRENT_ARTIFACT_STATE_OR_RENDER_IS_CANDIDATE_VISIBLE",
+    "HIDDEN_QUALITY_AND_REFERENCE_PLAN_NOT_CANDIDATE_VISIBLE",
+    "INDEPENDENT_RUBRIC_IMPROVEMENT_VERSUS_MECHANICS_ONLY_BASELINE_IS_LOAD_BEARING",
+    "PLAN_ABLATION_AND_RESCUE_ARE_LOAD_BEARING",
+    "NATIVE_EDIT_PRESERVATION_REMAINS_SEPARATE_REQUIRED_GATE_WHEN_APPLICABLE",
+    "PRIVATE_BENCHMARK_EXECUTION_AND_PRIVATE_SCORE_INFERENCE_ARE_NOT_REQUIRED_FOR_PREWAVE_ADMISSION",
+    "NO_CROSS_BEHAVIOR_SCORE_INHERITANCE",
+    "POST_FREEZE_TUNING_CASE_REPLACEMENT_RESULT_FEEDBACK_AND_ORACLE_EDITS_FORBIDDEN",
+    "ZERO_EXECUTION_AUTHORITY_ZERO_TERMINAL_RESULT_ZERO_CAPABILITY_CREDIT"
+  ],
+  "failed_capsule_preserved": {
+    "public_runner_pr": 637,
+    "workflow_run_id": 36964529360,
+    "conclusion": "failure",
+    "exact_failure": "BLOB_DRIFT:population_protocol",
+    "disposition": "STALE_WHOLE_FILE_GLOBAL_COUNTER_BINDING__SUPERSEDED_BY_SEMANTIC_INVARIANT_PROJECTION__NOT_CAPABILITY_FAILURE"
+  },
+  "prewave_admission_only": true,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
