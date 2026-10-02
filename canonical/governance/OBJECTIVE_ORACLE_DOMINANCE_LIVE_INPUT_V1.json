@@ -58,7 +58,7 @@
           "falsifiable": true,
           "hidden_from_candidate": true,
           "terminal_load_bearing": true,
-          "existing_evidence": "NEW_TERMINAL_OBJECTIVE_ORACLE_COMPONENT_REQUIRED"
+          "existing_evidence": "canonical/verification/BROWSER_TRANSITION_OBJECTIVE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "NO_PROGRESS_LOOP_SUPPRESSION",
@@ -67,7 +67,7 @@
           "falsifiable": true,
           "hidden_from_candidate": true,
           "terminal_load_bearing": true,
-          "existing_evidence": "NEW_TERMINAL_OBJECTIVE_ORACLE_COMPONENT_REQUIRED"
+          "existing_evidence": "canonical/verification/BROWSER_TRANSITION_OBJECTIVE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "OPAQUE_TARGET_PROVIDER_NONDEPENDENCE",
@@ -83,7 +83,7 @@
       "weaker_comparator_dependency": "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_FOR_UNMEASURED_COMPLEX_MULTI_TOOL_AGENCY_QUALITY",
       "route_gates": {
         "candidate_package_frozen": true,
-        "executable_evaluator_bound": false,
+        "executable_evaluator_bound": true,
         "population_or_source_pool_frozen": false,
         "information_boundary_frozen": true,
         "post_freeze_selector_frozen": false,
