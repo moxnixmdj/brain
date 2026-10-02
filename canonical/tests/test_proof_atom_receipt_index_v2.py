@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
 
-from canonical.runtime.proof_atom_receipt_index_v2 import build_index
+from canonical.runtime.proof_atom_receipt_index_v2 import build_index, validate_active_basis_binding
 
 
 def frontier():
@@ -96,6 +97,36 @@ class Tests(unittest.TestCase):
         by={x["proposition"]:x for x in out["atoms"]}
         self.assertEqual(by["FRONTIERCODE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS"]["associated_target_predicates"],["CODING_FRONTIERCODE_GE_54_4"])
         self.assertEqual(by["ARTIFACT_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS"]["associated_target_predicates"],["ARTIFACT_AA_BRIEFCASE_GE_1822"])
+
+
+    def test_live_active_basis_binding_passes(self):
+        root=Path(__file__).resolve().parents[2]
+        out=validate_active_basis_binding(root=root)
+        self.assertTrue(out["status"].startswith("PASS"),out)
+        self.assertEqual(len(out["exact_blobs"]),5)
+
+    def test_active_basis_binding_fails_closed_on_overlay_byte_drift(self):
+        source=Path(__file__).resolve().parents[2]
+        authority=json.loads((source/"canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json").read_text())
+        verified=authority["verified_candidate"]
+        rels=[
+            "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json",
+            verified["frontier_path"], verified["refinement_overlay_path"],
+            verified["runtime_path"], verified["tests_path"], verified["governance_path"],
+            verified["verification_path"],
+        ]
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            for rel in rels:
+                dst=root/rel
+                dst.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copy2(source/rel,dst)
+            overlay=root/verified["refinement_overlay_path"]
+            overlay.write_bytes(overlay.read_bytes()+b"\n")
+            out=validate_active_basis_binding(root=root)
+            self.assertEqual(out["status"],"FAIL_CLOSED")
+            self.assertTrue(any(x.startswith("ACTIVE_BASIS_BLOB_MISMATCH:") for x in out["errors"]),out)
+
 
 
 if __name__=="__main__":
