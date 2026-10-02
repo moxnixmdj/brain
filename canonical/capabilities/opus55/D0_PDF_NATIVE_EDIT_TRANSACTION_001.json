@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_D0_PDF_NATIVE_EDIT_TRANSACTION_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_NATIVE_PDF_EDIT_COMPONENT__ZERO_WHOLE_D0_OR_FAMILY_CREDIT",
+  "parent_residual": "D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_TAIL",
+  "implementation": "canonical/runtime/pdf_native_edit_transaction.py",
+  "implementation_blob_sha": "b9f673ffe0474d00a598089077ad93db40c00dd8",
+  "tests": "canonical/tests/test_pdf_native_edit_transaction.py",
+  "tests_blob_sha": "bcd5cfea0327966c1a2c336c084aba8e0e20a55a",
+  "workflow": ".github/workflows/verify-pdf-native-edit-transaction.yml",
+  "workflow_blob_sha": "76c10bd57c3b022111899ea39412ad7fc64b5fe9",
+  "verification_merge_commit": "dd9e4bae416abf2faaf724742b977ac48980306d",
+  "independent_verification": {
+    "workflow_run_id": 36952484547,
+    "conclusion": "success",
+    "verified_pr_head": "0c8f3822e73c16e179a341e325d73ee987965246"
+  },
+  "pinned_mechanics": {
+    "pypdf": "6.19.0",
+    "pillow": "12.3.0"
+  },
+  "owned_scope": [
+    "EXACT_UNIQUE_WHOLE_PDF_TEXT_SHOW_OPERAND_REPLACEMENT_ON_DECLARED_PAGE_FOR_SUPPORTED_TEXTSTRING_OPERANDS",
+    "DECLARED_PAGE_IMAGE_XOBJECT_REPLACEMENT_WITH_IDENTICAL_PIXEL_DIMENSIONS_AND_MODE",
+    "PAGE_GEOMETRY_AND_TEXT_OPERATOR_SEQUENCE_ROUNDTRIP_CHECK_FOR_TEXT_TRANSACTION",
+    "PAGE_CONTENT_STREAM_BYTE_PRESERVATION_FOR_IMAGE_REPLACEMENT",
+    "AMBIGUOUS_SPLIT_ENCODED_UNSUPPORTED_OR_GEOMETRY_MISMATCH_CASES_FAIL_CLOSED",
+    "NO_OP_TEXT_REPLACEMENT_FAILS_CLOSED_WITHOUT_OUTPUT"
+  ],
+  "exclusions": [
+    "NO_ARBITRARY_PDF_TEXT_SEMANTIC_REPLACEMENT",
+    "NO_SPLIT_OR_FONT_ENCODED_TEXT_RECONSTRUCTION",
+    "NO_GENERAL_LAYOUT_EQUIVALENCE_CLAIM",
+    "NO_INLINE_IMAGE_REPLACEMENT",
+    "NO_SEMANTIC_USER_REQUEST_TO_PDF_OPERAND_MAPPING",
+    "NO_WHOLE_D0_M2_OR_FAMILY_CAPABILITY_CREDIT"
+  ],
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
