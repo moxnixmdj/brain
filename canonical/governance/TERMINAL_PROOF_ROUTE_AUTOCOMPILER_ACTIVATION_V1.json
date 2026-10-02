@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_ROUTE_AUTOCOMPILER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_CONTROL_LAYER__PR_CI_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "objective": "COLLAPSE_REPEATED_ROUTE_MATERIALIZATION_OVERHEAD_BY_COMPILING_ONLY_THE_ZERO_REALITY_GATES_JUSTIFIED_BY_FROZEN_OBJECTIVE_SEMANTICS_AND_EXISTING_EVIDENCE",
+  "runtime": "canonical/runtime/terminal_proof_route_autocompiler.py",
+  "tests": "canonical/tests/test_terminal_proof_route_autocompiler.py",
+  "input": "canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json",
+  "upstream": "canonical/runtime/objective_oracle_dominance_compiler.py",
+  "rules": [
+    "NEVER_INVENT_A_MISSING_SEMANTIC_DIMENSION_OR_EVALUATOR",
+    "AUTOCOMPILE_ONLY_ZERO_TERMINAL_REALITY_ROUTE_MATERIALIZATION_ACTIONS",
+    "EXACT_EVIDENCE_REFERENCE_REUSE_DOES_NOT_AUTHORIZE_SEMANTIC_PROJECTION",
+    "A_MISSING_EVALUATOR_BLOCKS_EVALUATOR_BINDING",
+    "OPEN_GATES_ARE_COMPILED_IN_CANONICAL_CAUSAL_ORDER",
+    "COMPILER_OUTPUT_HAS_ZERO_EXECUTION_PROMOTION_CAPABILITY_AND_FAMILY_AUTHORITY",
+    "EXISTING_PROMOTION_LAW_AND_INDEPENDENT_VERIFICATION_REMAIN_MANDATORY"
+  ],
+  "compiled_outputs": [
+    "PER_BEHAVIOR_SEMANTIC_AND_EVALUATOR_GAP_STATE",
+    "EXACT_EVIDENCE_REFERENCE_SHARED_EVALUATOR_BASIS",
+    "ZERO_REALITY_MATERIALIZATION_ACTION_SET",
+    "ROUTE_READY_SET_FOR_EXISTING_PROMOTION_LAW"
+  ],
+  "terminal_case_execution_from_compiler": false,
+  "fresh_terminal_evidence_from_compiler": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
