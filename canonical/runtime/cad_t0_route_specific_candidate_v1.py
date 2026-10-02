@@ -22,18 +22,50 @@ class CandidateError(ValueError):
     pass
 
 
+def _attr_number(attrs: str, name: str) -> float | None:
+    m = re.search(r"\\b" + re.escape(name) + r"\\s*=\\s*[\"']\\s*([-+]?[0-9]+(?:\\.[0-9]+)?)", attrs, re.I)
+    if not m:
+        return None
+    try:
+        return float(m.group(1))
+    except ValueError:
+        return None
+
+
 def _texts(svg: Any) -> list[str]:
+    """Reconstruct rendered text lines independently of SVG source-node boundaries."""
     if not isinstance(svg, str) or not svg.strip():
         raise CandidateError("DRAWING_SVG_REQUIRED")
-    rows = []
-    for raw in re.findall(r"<text\b[^>]*>(.*?)</text>", svg, flags=re.I | re.S):
-        text = html.unescape(re.sub(r"<[^>]+>", "", raw)).strip()
-        if text:
-            rows.append(text)
+
+    groups: dict[tuple[str, float | int], list[tuple[float, int, str]]] = {}
+    first_seen: dict[tuple[str, float | int], int] = {}
+    count = 0
+    for m in re.finditer(r"<text\\b([^>]*)>(.*?)</text>", svg, flags=re.I | re.S):
+        attrs, raw = m.group(1), m.group(2)
+        text = html.unescape(re.sub(r"<[^>]+>", "", raw))
+        if not text.strip():
+            continue
+        x = _attr_number(attrs, "x")
+        y = _attr_number(attrs, "y")
+        key: tuple[str, float | int]
+        if y is None:
+            key = ("node", count)
+        else:
+            key = ("y", round(y, 9))
+        first_seen.setdefault(key, count)
+        groups.setdefault(key, []).append((x if x is not None else float(count), count, text))
+        count += 1
+
+    rows: list[str] = []
+    for key in sorted(groups, key=lambda k: first_seen[k]):
+        fragments = sorted(groups[key], key=lambda row: (row[0], row[1]))
+        rendered = "".join(fragment for _, _, fragment in fragments)
+        rendered = re.sub(r"\\s+", " ", rendered).strip()
+        if rendered:
+            rows.append(rendered)
     if not rows:
         raise CandidateError("DRAWING_TEXT_EMPTY")
     return rows
-
 
 def _one(pattern: str, rows: list[str], label: str, flags: int = 0):
     hits = []
