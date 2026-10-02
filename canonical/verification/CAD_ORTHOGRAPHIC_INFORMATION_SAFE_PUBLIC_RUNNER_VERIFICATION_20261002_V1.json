@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_ORTHOGRAPHIC_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_BOUNDED_PREFLIGHT_PASS__ORTHOGRAPHIC_IDENTIFIABILITY_AND_GLOBAL_GEOMETRY_ORACLE__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 579,
+  "public_merge_commit": "60d68b31420f30bd210db9b688d8aa9f5b94052f",
+  "workflow_run_id": 36960970502,
+  "workflow_job_id": 110694343472,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/cad_orthographic_information_safe_candidate.py": "4c73574cf1fcd75f154d6d267f11be486a265883",
+    "canonical/runtime/cad_orthographic_information_safe_proof.py": "b6c8edd4fff837d4a5c8237f53d7613fe0e00276",
+    "canonical/tests/test_cad_orthographic_information_safe.py": "d0b908d1552ac580e75f6d33abf928addcdb079f",
+    "canonical/runtime/orthographic_visual_hull.py": "d102226cfde581cf3d7de97ec2e55862edf1c31b"
+  },
+  "pinned_oracle_dependencies": {
+    "numpy": "2.1.3",
+    "scipy": "1.14.1"
+  },
+  "verified": [
+    "CANDIDATE_HAS_NO_HIDDEN_ORACLE_OR_GLOBAL_METRIC_INPUT",
+    "IDENTIFIABLE_ORTHOGRAPHIC_VOXEL_SOLIDS_RECONSTRUCT_EXACTLY",
+    "NONIDENTIFIABLE_DRAWINGS_RETURN_CONSTRUCTIVE_ALTERNATIVE_WITH_IDENTICAL_PROJECTIONS",
+    "GLOBAL_VOLUME_SURFACE_AREA_PRINCIPAL_INERTIA_CONVEX_HULL_EULER_CONNECTIVITY_AND_ENVELOPE_CHECKED",
+    "DECLARED_VOXEL_CURVATURE_EQUIVALENT_EXPOSURE_SIGNATURE_CHECKED",
+    "BOUNDING_BOX_SHORTCUT_REJECTED",
+    "FORCED_AMBIGUITY_ON_IDENTIFIABLE_CASE_REJECTED",
+    "FORCED_SINGLE_SOLID_ON_AMBIGUOUS_CASE_REJECTED"
+  ],
+  "limitations": [
+    "NORMALIZED_BINARY_ORTHOGRAPHIC_VOXEL_SUBSET_ONLY",
+    "NO_RAW_RASTER_OCR_DIMENSION_OR_TOLERANCE_INTERPRETATION",
+    "NO_CURVED_ANALYTIC_CSG_SPLINE_OR_LOFT_SCOPE",
+    "NO_CADQUERY_SOLID_MATERIALIZATION_IN_THIS_PREFLIGHT",
+    "NO_WHOLE_CONTRACT_SCOPE_EQUIVALENCE",
+    "NO_TERMINAL_ACCEPTANCE_OR_CAPABILITY_CREDIT"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
