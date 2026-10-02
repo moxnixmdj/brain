@@ -102,7 +102,17 @@
       },
       "portfolio_leverage": 2,
       "priority_score": 994,
-      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+      "next_action_class": "RESOLVE_STRONGER_ABSOLUTE_ROUTE_SCOPE_EQUIVALENCE_AND_BINDING__THEN_RECOMPUTE__NO_CLEAN_CASE_SPEND",
+      "supercompiler_reconciliation": {
+        "verdict": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
+        "stronger_route": "P3_HIDDEN_SUPPORT_GRAPH_EXHAUSTIVE",
+        "proof_mode": "EXHAUSTIVE_FINITE",
+        "exact_opus_irreducibility": "NOT_PROVEN",
+        "internal_blockers_first": [
+          "P3_SCOPE_EQUIVALENCE",
+          "P3_TERMINAL_BINDING"
+        ]
+      }
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -148,7 +158,17 @@
       },
       "portfolio_leverage": 2,
       "priority_score": 1002,
-      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+      "next_action_class": "RESOLVE_STRONGER_ABSOLUTE_ROUTE_SCOPE_EQUIVALENCE_AND_BINDING__THEN_RECOMPUTE__NO_CLEAN_CASE_SPEND",
+      "supercompiler_reconciliation": {
+        "verdict": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
+        "stronger_route": "P1_INTERVENTION_RESCUE_ABSOLUTE",
+        "proof_mode": "DETERMINISTIC_HIDDEN_ORACLE",
+        "exact_opus_irreducibility": "NOT_PROVEN",
+        "internal_blockers_first": [
+          "P1_SCOPE_EQUIVALENCE",
+          "P1_TERMINAL_BINDING"
+        ]
+      }
     },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
@@ -202,5 +222,10 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "rule": "SCHEDULING_ONLY__EXTERNAL_COMPARATOR_BLOCKS_DO_NOT_SPEND_CLEAN_CASES"
+  "rule": "SCHEDULING_ONLY__EXTERNAL_COMPARATOR_BLOCKS_DO_NOT_SPEND_CLEAN_CASES",
+  "supercompiler_scheduler_override": {
+    "status": "ACTIVE_FOR_P1_P3__SCHEDULING_ONLY",
+    "verdict": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
+    "rule": "P1_AND_P3_EXTERNAL_COMPARATOR_BLOCKS_MUST_NOT_DOMINATE_SCHEDULING_UNTIL_STRONGER_ABSOLUTE_ROUTE_SCOPE_EQUIVALENCE_IS_RESOLVED"
+  }
 }
