@@ -1,0 +1,17 @@
+{
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "brain_internal_dependencies": [
+    "canonical/runtime/saccr_credit_kernel.py",
+    "canonical/runtime/saccr_credit_information_safe_candidate.py"
+  ],
+  "date": "2026-10-02",
+  "donor_runtime_required": false,
+  "external_runtime_dependencies": [],
+  "incremental_spend_usd": 0,
+  "mutation_after_freeze_forbidden": true,
+  "network_required": false,
+  "opaque_model_or_target_capability_provider_required": false,
+  "runtime": "CPYTHON_3_X",
+  "schema": "PROJECT_BRAIN_TERMINAL_DEPENDENCY_ZERO_COST_MANIFEST_V1",
+  "status": "FROZEN_PRE_BEACON"
+}
