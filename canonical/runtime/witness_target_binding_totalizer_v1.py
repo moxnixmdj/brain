@@ -108,8 +108,14 @@ def totalize(target_doc: Mapping[str, Any], witness_doc: Mapping[str, Any]) -> d
             errors.append(f"WITNESS_{i}_BINDING_RECEIPTS_INVALID")
             continue
 
-        # Any positive semantic assertion must carry a separate independent
-        # binding receipt. Current live rows are empty by design.
+        # V1 is deliberately a hole-totalizer only. Positive semantics require
+        # a separate independently verified semantic-binding compiler, not a
+        # receipt-shaped string smuggled into this representation pass.
+        if atoms or metric_bounds or implications:
+            errors.append(f"WITNESS_{i}_POSITIVE_SEMANTIC_BINDING_FORBIDDEN_IN_V1")
+
+        # Defensive checks remain below so malformed positive assertions fail
+        # with specific reasons too.
         for atom in atoms:
             if atom not in all_target_atoms:
                 errors.append(f"WITNESS_{i}_ATOM_OUTSIDE_TARGET_VOCAB:{atom}")
@@ -180,7 +186,7 @@ def totalize(target_doc: Mapping[str, Any], witness_doc: Mapping[str, Any]) -> d
         "rule": (
             "TOTALIZATION_PASS_MEANS_EVERY_BINDING_OR_HOLE_IS_EXPLICIT__"
             "IT_DOES_NOT_MEAN_ANY_TARGET_IS_IMPLIED__"
-            "POSITIVE_ATOM_OR_METRIC_BINDINGS_REQUIRE_SEPARATE_INDEPENDENT_RECEIPTS"
+            "V1_FORBIDS_ALL_POSITIVE_SEMANTIC_BINDINGS__A_SEPARATE_INDEPENDENT_SEMANTIC_VERIFIER_IS_REQUIRED"
         ),
         "acceptance_credit_delta": 0,
         "family_credit_delta": 0,
