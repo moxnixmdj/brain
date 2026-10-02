@@ -5,7 +5,7 @@
   "objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "source_terminal_closure_manifest": {
     "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-    "blob_sha": "24ddaaf23e3464161458686206d7007dcaf2589c"
+    "blob_sha": "e19cb25e7f899e003138a34413e7dc780edf6696"
   },
   "source_ownership_matrix": {
     "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -73,7 +73,9 @@
   "achieved": false,
   "acceptance_calibration": {
     "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
-    "git_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62"
+    "independent_verification": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "independent_verification_blob_sha": "7c507155ed5fbe847b8b0a9ca1c49b19685f2ff8",
+    "status": "INDEPENDENT_PASS__RESULT_FAIL_CLOSED_2_OF_19_CLOSED__17_OPEN"
   },
   "global_ownership_postconditions_verification": {
     "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
