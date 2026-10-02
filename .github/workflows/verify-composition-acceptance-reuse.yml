@@ -1,0 +1,35 @@
+name: Verify composition acceptance receipt reuse
+
+on:
+  push:
+    paths:
+      - "canonical/governance/COMPOSITION_COMPONENT_ACCEPTANCE_BINDINGS_V1.json"
+      - "canonical/runtime/composition_component_acceptance_binding_verifier_v1.py"
+      - "canonical/runtime/composition_component_proof_slicer_v1.py"
+      - "canonical/tests/test_composition_component_acceptance_binding_verifier_v1.py"
+      - "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json"
+      - "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+      - "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json"
+      - ".github/workflows/verify-composition-acceptance-reuse.yml"
+  pull_request:
+    paths:
+      - "canonical/governance/COMPOSITION_COMPONENT_ACCEPTANCE_BINDINGS_V1.json"
+      - "canonical/runtime/composition_component_acceptance_binding_verifier_v1.py"
+      - "canonical/tests/test_composition_component_acceptance_binding_verifier_v1.py"
+      - ".github/workflows/verify-composition-acceptance-reuse.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run adversarial receipt-reuse tests
+        run: python -m unittest canonical.tests.test_composition_component_acceptance_binding_verifier_v1 -v
+      - name: Run live content-addressed verifier
+        run: python canonical/runtime/composition_component_acceptance_binding_verifier_v1.py
