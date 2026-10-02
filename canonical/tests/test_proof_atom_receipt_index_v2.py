@@ -136,6 +136,29 @@ class Tests(unittest.TestCase):
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
             self.assertEqual(row["candidate_match_count"],0)
 
+    def test_oversized_candidate_file_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/oversized.json"
+            p.parent.mkdir(parents=True)
+            p.write_bytes(b'{"claim":"R1","pad":"' + (b"x" * 5_000_000) + b'"}\n')
+            out=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(out["status"],"FAIL_CLOSED")
+            self.assertFalse(out["corpus_complete"])
+            self.assertIn("CORPUS_SCAN_INCOMPLETE",out["errors"])
+            self.assertTrue(any(x.startswith("FILE_TOO_LARGE:canonical/verification/oversized.json:") for x in out["corpus_scan_errors"]))
+
+    def test_non_utf8_candidate_file_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/bad.json"
+            p.parent.mkdir(parents=True)
+            p.write_bytes(b"\xff")
+            out=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(out["status"],"FAIL_CLOSED")
+            self.assertFalse(out["corpus_complete"])
+            self.assertIn("UTF8_DECODE_FAILED:canonical/verification/bad.json",out["corpus_scan_errors"])
+
     def test_no_credit_or_authority(self):
         with tempfile.TemporaryDirectory() as td:
             out=build_index(frontier(),overlay(),root=Path(td))
