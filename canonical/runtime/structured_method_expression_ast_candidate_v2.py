@@ -229,7 +229,6 @@ def _eval(expr: Mapping[str, Any], meta: Mapping[str, Mapping[str, str]], vals: 
         value = a[2] == b[2]
         return "boolean", "dimensionless", value if op == "eq" else not value
 
-
     if op in {"and", "or"}:
         args = expr.get("args")
         if not isinstance(args, list) or len(args) < 2:
