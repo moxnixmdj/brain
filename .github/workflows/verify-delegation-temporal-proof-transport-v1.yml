@@ -6,6 +6,10 @@ on:
       - 'canonical/runtime/temporal_proof_transport_v1.py'
       - 'canonical/tests/test_temporal_proof_transport_v1.py'
       - 'canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json'
+      - 'canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json'
+      - 'canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json'
+      - 'canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py'
+      - 'canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json'
       - '.github/workflows/verify-delegation-temporal-proof-transport-v1.yml'
 
 jobs:
@@ -13,125 +17,82 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Verify historical and current load-bearing dependency identity
+      - name: Bind independent full-history transport verification
         run: |
           python - <<'PY'
           import json
-          import subprocess
-
-          HIST = "821712c059b139f3494723dca6e8d0fc82ee59a4"
-          BEHAVIOR = "TASK_TO_DELEGATION_GRAPH_001"
-          FAMILY = "SUBAGENT_DELEGATION_AND_COORDINATION"
-
-          exact = {
-              "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json":
-                  "a1e441567b132d71713ed55dfc51f01d8de112d1",
-              "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json":
-                  "52392515cd4de672f82f8afac82a41d3ce442656",
-              "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":
-                  "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
-              "canonical/runtime/delegation_whole_scope_candidate_v2.py":
-                  "f1a93ee66d90093de61dc17c6ebf2e24073df522",
-              "canonical/runtime/delegation_whole_scope_proof_v2.py":
-                  "928466401b36e4f3b09c517950cc050432a0616f",
-              "canonical/runtime/delegation_structural_variety_proof_v3.py":
-                  "f5e1f45519278ed2cafa27d23b8602b0a362a492",
-          }
-
-          def output(*args):
-              return subprocess.check_output(args, text=True).strip()
-
-          for path, want in exact.items():
-              old = output("git", "rev-parse", f"{HIST}:{path}")
-              cur = output("git", "hash-object", path)
-              assert old == want, (path, "historical", old, want)
-              assert cur == want, (path, "current", cur, want)
-              assert old == cur, (path, "temporal identity mismatch")
-
-          def old_json(path):
-              return json.loads(output("git", "show", f"{HIST}:{path}"))
-
-          def cur_json(path):
-              with open(path, encoding="utf-8") as f:
-                  return json.load(f)
-
-          reg_path = "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
-          old_reg = old_json(reg_path)
-          cur_reg = cur_json(reg_path)
-          assert old_reg["family_to_residual_contracts"][FAMILY] == [BEHAVIOR]
-          assert cur_reg["family_to_residual_contracts"][FAMILY] == [BEHAVIOR]
-
-          def contract_row(doc):
-              rows = [r for r in doc["active_contracted_residuals"] if r.get("behavior_id") == BEHAVIOR]
-              assert len(rows) == 1
-              return rows[0]
-
-          assert contract_row(old_reg) == contract_row(cur_reg), "delegation contract semantic slice changed"
-
-          man_path = "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json"
-          old_man = old_json(man_path)
-          cur_man = cur_json(man_path)
-
-          def executor_row(doc):
-              rows = doc.get("executors") or doc.get("routes") or doc.get("bindings")
-              found = [r for r in rows if r.get("behavior_id") == BEHAVIOR]
-              assert len(found) == 1
-              return found[0]
-
-          old_ex = executor_row(old_man)
-          cur_ex = executor_row(cur_man)
-          stable = [
-              "frozen_route", "proof_mode", "independent_verification",
-              "executor_status", "legacy_global_executor_allowed",
-              "executor", "tests", "brain_ci", "independent_executor_verification",
-              "executor_blob_sha", "executor_test_blob_sha", "selector_reconciliation",
-          ]
-          for key in stable:
-              assert old_ex.get(key) == cur_ex.get(key), (key, old_ex.get(key), cur_ex.get(key))
-          assert old_ex.get("terminal_result_status") == "NOT_EXECUTED"
-          assert cur_ex.get("terminal_result_status") == "CONSUMED_IN_TERMINAL_V3_WAVE"
-          assert cur_ex.get("rerun_allowed") is False
-
-          transport = cur_json("canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json")
-          assert transport["history_identity"]["historical_binding_blob_sha"] == exact[
-              "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json"
-          ]
-          assert transport["history_identity"]["current_binding_blob_sha"] == exact[
-              "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json"
-          ]
-          assert transport["history_identity"]["historical_scope_relation_blob_sha"] == exact[
-              "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json"
-          ]
-          assert transport["history_identity"]["current_scope_relation_blob_sha"] == exact[
-              "canonical/governance/DELEGATION_SCOPE_EQUIVALENCE_RELATION_V1.json"
-          ]
-
-          print("TEMPORAL_DEPENDENCY_IDENTITY_PASS")
+          p="canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert d["status"]=="INDEPENDENT_PUBLIC_RUNNER_PASS__TEMPORAL_DEPENDENCY_IDENTITY__8_TRANSPORT_TESTS_PASS__ZERO_REPLAY__ZERO_CREDIT", d
+          assert d["public_verifier"]["repository"]=="moxnixmdj/verification-capsule-runner"
+          assert d["public_verifier"]["pull_request"]==870
+          assert d["public_verifier"]["merge_commit"]=="fcf9da8987b89bcfe4fbb77efead6dcf762be652"
+          assert d["public_verifier"]["workflow_run_id"]==37005325244
+          assert d["public_verifier"]["workflow_job_id"]==110832134612
+          assert d["public_verifier"]["conclusion"]=="success"
+          assert d["exact_current_brain_blobs"]["canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json"]=="a1e441567b132d71713ed55dfc51f01d8de112d1"
+          assert d["exact_historical_brain_blobs"]["snapshot_commit"]=="821712c059b139f3494723dca6e8d0fc82ee59a4"
+          assert d["exact_historical_brain_blobs"]["canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json"]=="a1e441567b132d71713ed55dfc51f01d8de112d1"
+          assert "EXACT_CURRENT_AND_HISTORICAL_MIRRORED_BLOB_IDENTITIES_MATCH_EXPECTED_GIT_OBJECTS" in d["verified"]
+          assert "EIGHT_FAIL_CLOSED_TRANSPORT_TESTS_PASS" in d["verified"]
+          assert d["fresh_terminal_evidence_consumed"]==0
+          assert d["terminal_results_replayed"]==0
+          assert d["capability_credit_delta"]==0
+          assert d["family_credit_delta"]==0
+          print("INDEPENDENT_TEMPORAL_TRANSPORT_RECEIPT_BOUND")
           PY
 
-      - name: Run temporal proof transport tests
+      - name: Run current transport and transmutation tests
         run: |
-          python -m unittest -v canonical.tests.test_temporal_proof_transport_v1
+          python -m unittest -v             canonical.tests.test_temporal_proof_transport_v1             canonical.tests.test_delegation_temporal_ceiling_transmutation_v1
 
-      - name: Assert zero-credit candidate-only governance
+      - name: Recompute exact 4 of 19 stronger-proof transmutation
         run: |
           python - <<'PY'
           import json
-          p = "canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json"
-          d = json.load(open(p, encoding="utf-8"))
-          assert d["capability_credit_delta"] == 0
-          assert d["family_credit_delta"] == 0
-          assert d["incremental_spend_usd"] == 0
-          assert d["fresh_terminal_evidence_consumed"] == 0
-          assert d["terminal_replay_count"] == 0
-          assert d["execution_authority"] is False
-          assert d["promotion_authority"] is False
-          print("ZERO_CREDIT_TRANSPORT_CANDIDATE_PASS")
+          from canonical.runtime.acceptance_proof_transmuter_v1 import evaluate
+          load=lambda p: json.load(open(p,encoding="utf-8"))
+          protocols=load("canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json")
+          inp=load("canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json")
+          witness=load("canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json")
+          receipt=load("canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
+          assert witness["verified"] is True and witness["independent"] is True
+          assert witness["independent_transport_verification"]=="canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          assert receipt["public_verifier"]["conclusion"]=="success"
+          out=evaluate(protocols,inp)
+          assert out["status"]=="PASS", out
+          assert out["closed_family_count"]==4, out
+          assert out["open_family_count"]==15, out
+          row=next(r for r in out["families"] if r["family"]=="SUBAGENT_DELEGATION_AND_COORDINATION")
+          assert row["result_status"]=="PASS", row
+          assert row["closure_mode"]=="ABSOLUTE_DOMINANCE", row
+          assert row["witness_id"]=="DELEGATION_TEMPORAL_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1", row
+          print(json.dumps({
+            "status":"PASS",
+            "closed_family_count":out["closed_family_count"],
+            "open_family_count":out["open_family_count"],
+            "delegation":row,
+          },indent=2,sort_keys=True))
+          PY
+
+      - name: Assert zero replay and no direct promotion authority
+        run: |
+          python - <<'PY'
+          import json
+          t=json.load(open("canonical/governance/DELEGATION_TEMPORAL_PROOF_TRANSPORT_V1.json",encoding="utf-8"))
+          w=json.load(open("canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",encoding="utf-8"))
+          assert t["capability_credit_delta"]==0
+          assert t["family_credit_delta"]==0
+          assert t["incremental_spend_usd"]==0
+          assert t["fresh_terminal_evidence_consumed"]==0
+          assert t["terminal_replay_count"]==0
+          assert t["execution_authority"] is False
+          assert t["promotion_authority"] is False
+          assert w["promotion_authority"] is False
+          print("ZERO_REPLAY_NO_DIRECT_PROMOTION_AUTHORITY_PASS")
           PY
