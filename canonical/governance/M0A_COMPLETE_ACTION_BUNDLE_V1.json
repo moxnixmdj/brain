@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_M0A_COMPLETE_ACTION_BUNDLE_V1",
   "date": "2026-10-02",
-  "status": "COMPLETE_SELF_CONTAINED_ACTION_BUNDLE__REFRESHED_TO_VERIFIED_CONTEXTUAL_FRONTIER__ZERO_CAPABILITY_CREDIT",
+  "status": "ZERO_REALITY_PREFIX_EXECUTED_AND_SATURATED__PROOF_ONLY_PENDING_EXACT_CUT__ZERO_FAMILY_CREDIT",
   "obligation": "M0A_ARBITRARY_SOURCE_TO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
   "hole_type": "?M",
-  "objective": "CLOSE_THE_REMAINING_EXPLICIT_CONTEXT_DEPENDENT_SOURCE_SEMANTICS_WITH_BRAIN_OWNED_COMPOSED_ROUTES__PRESERVE_AMBIGUITY_WHEN_SOURCE_DOES_NOT_IDENTIFY_ONE_MEANING",
+  "objective": "PROVE_OR_FALSIFY_THE_COMPOSED_BRAIN_OWNED_M0A_ROUTE_ON_ONE_PREDECLARED_MATCHED_CROSS_DOMAIN_SEMANTIC_ACCEPTANCE_BATCH__ONLY_IF_ADMITTED_BY_EXACT_CUT",
   "existing_owned": [
     "canonical/runtime/source_contract_compiler.py",
     "canonical/runtime/explicit_compound_requirement_decomposer.py",
@@ -123,7 +123,11 @@
   "specialized_white_box_frontier": "canonical/governance/M0A_SPECIALIZED_WHITE_BOX_DONOR_DECOMPOSITION_V1.json",
   "zero_cost_remote_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json",
   "fastcoref_disposition": "NARROW_PARTIAL_OBJECT_ANAPHORA_SIGNAL_ONLY__INSUFFICIENT_AS_DEFAULT_ROUTE",
-  "current_zero_reality_causal_frontier": "OLMO_LAYER_1_AND_11_MLP_INTERMEDIATE_SUBSPACE_LOCALIZATION_ON_FROZEN_DEV__BASELINE_CORRECT_SIGNAL_ONLY",
+  "current_zero_reality_causal_frontier": "CLOSED__M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_COMPLETE__NO_MATERIAL_EIGHT_WAY_CHANNEL_GROUP",
   "fresh_matched_evaluation_authorized": false,
-  "fresh_terminal_evidence_consumed": 0
+  "fresh_terminal_evidence_consumed": 0,
+  "proof_only_reconciliation": "canonical/reasoning/2026-10-02_M0A_PROOF_ONLY_RECONCILIATION_V1.json",
+  "candidate_action": "A_M0A_MATCHED_SEMANTIC_PARITY_V2",
+  "new_reality_units_if_admitted": 1,
+  "active_next": "FREEZE_RECOMPUTED_EXACT_MINIMUM_REALITY_CUT__EXECUTE_MATCHED_M0A_PROOF_ONLY_IF_SELECTED"
 }
