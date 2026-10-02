@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_COUNTEREXAMPLE_AND_ENVELOPE_COMPILER_V1",
   "date": "2026-10-02",
-  "status": "CANONICAL_ACTIVE__FAIL_CLOSED__ZERO_CAPABILITY_CREDIT",
+  "status": "CANONICAL_ACTIVE__INDEPENDENT_PASS__FAIL_CLOSED__ZERO_CAPABILITY_CREDIT",
   "objective": "REDUCE_EACH_FROZEN_BEHAVIORAL_CONTRACT_TO_THE_SMALLEST_UNRESOLVED_PROOF_BASIS_BY_PROPAGATING_ONLY_VERIFIED_ENVELOPES_FAILURES_AND_IMPLICATIONS",
   "runtime": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
   "tests": "canonical/tests/test_terminal_counterexample_envelope_compiler.py",
@@ -43,5 +43,13 @@
   "incremental_spend_usd": 0,
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "independent_verification": {
+    "status": "INDEPENDENT_PASS",
+    "receipt": "canonical/verification/TERMINAL_COUNTEREXAMPLE_ENVELOPE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "brain_runtime_blob_sha": "86344162be260f294e5af87c56141e7e41fd0f5a",
+    "public_runner_pr": 589,
+    "public_runner_merge_commit": "b5429c82ffa5d853824d58d470348a5551ae2824",
+    "workflow_run_id": 36961797567
+  }
 }
