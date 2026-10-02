@@ -84,9 +84,10 @@
     "TASK_TO_DELEGATION_GRAPH_001": {
       "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
       "population_binding": "canonical/runtime/delegation_terminal_population_binding_v1.py",
-      "terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1.json",
+      "terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_MODE_V1.json",
       "independent_verification": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "status": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE"
+      "status": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "terminal_acceptance_mode_verification": "canonical/verification/DELEGATION_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     }
   }
 }
