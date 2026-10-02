@@ -10,7 +10,9 @@ Scheduling law:
 3. Already independently preflighted routes precede routes that still need a
    new whole-scope mechanism.
 4. Shared multi-portfolio contracts get higher leverage.
-5. Unknown state fails closed and is scheduled for reconciliation, not promotion.
+5. Open-domain matched protocols are distinct from finite scope-equivalence proofs.
+6. Exact-comparator gaps with no authorized zero-cost route are marked external-blocked and must not consume clean terminal cases.
+7. Unknown state fails closed and is scheduled for reconciliation, not promotion.
 """
 from __future__ import annotations
 
@@ -40,6 +42,17 @@ _SCOPE_EXPANSION_TOKENS = (
     "NATIVE_SOLID_MATERIALIZATION",
     "BOUNDED_SYNTHETIC_ENVELOPE",
 )
+_OPEN_DOMAIN_PROTOCOL_TOKENS = (
+    "FREEZE_MATCHED_HARNESS",
+    "FREEZE_BRAIN_OWNED",
+    "FREEZE_POST_FREEZE_SELECTOR",
+    "CHALLENGE_SOURCE_POOL_AND_SCORER",
+    "OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL",
+)
+_EXTERNAL_BLOCK_TOKENS = (
+    "COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
+    "EXTERNAL_BLOCKED",
+)
 
 
 def _load(root: Path) -> dict[str, Any]:
@@ -56,6 +69,10 @@ def _portfolio_count(value: Any) -> int:
 
 
 def _classify(blocker: str) -> str:
+    if any(tok in blocker for tok in _EXTERNAL_BLOCK_TOKENS):
+        return "EXTERNAL_BLOCK"
+    if any(tok in blocker for tok in _OPEN_DOMAIN_PROTOCOL_TOKENS):
+        return "OPEN_DOMAIN_PROTOCOL"
     if any(tok in blocker for tok in _BINDING_TOKENS):
         return "BINDING"
     if any(tok in blocker for tok in _SCOPE_GATE_TOKENS):
@@ -117,6 +134,8 @@ def evaluate(root: Path) -> dict[str, Any]:
         binding = sum(x == "BINDING" for x in classes)
         gate = sum(x == "SCOPE_GATE" for x in classes)
         expansion = sum(x == "SCOPE_EXPANSION" for x in classes)
+        protocol = sum(x == "OPEN_DOMAIN_PROTOCOL" for x in classes)
+        external = sum(x == "EXTERNAL_BLOCK" for x in classes)
         other = sum(x == "OTHER" for x in classes)
         preflight = any(
             token in state
@@ -131,9 +150,11 @@ def evaluate(root: Path) -> dict[str, Any]:
 
         # Lower score closes sooner. Expansion and unknown work are expensive.
         score = (
-            expansion * 100
+            external * 1000
+            + expansion * 100
             + other * 50
             + gate * 10
+            + protocol * 4
             + binding
             - min(leverage, 4) * 3
             - (8 if preflight else 0)
@@ -147,15 +168,25 @@ def evaluate(root: Path) -> dict[str, Any]:
                 "binding": binding,
                 "scope_gate": gate,
                 "scope_expansion": expansion,
+                "open_domain_protocol": protocol,
+                "external_block": external,
                 "other": other,
             },
             "independent_or_information_safe_preflight_present": preflight,
             "portfolio_leverage": leverage,
             "priority_score": score,
             "next_action_class": (
-                "FREEZE_BINDING_AND_ACCEPTANCE"
-                if expansion == 0 and other == 0 and (binding or gate)
-                else "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+                "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
+                if external
+                else (
+                    "FREEZE_OPEN_DOMAIN_MATCHED_PROTOCOL"
+                    if protocol and expansion == 0 and other == 0
+                    else (
+                        "FREEZE_BINDING_AND_ACCEPTANCE"
+                        if expansion == 0 and other == 0 and protocol == 0 and (binding or gate)
+                        else "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+                    )
+                )
             ),
         })
 
