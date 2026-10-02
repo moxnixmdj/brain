@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__GENERAL_PREWAVE_GATES_AND_FROZEN_INTERNAL_BINDINGS_CLOSED__ONLY_SURVIVING_PUBLIC_SURFACE_PREFLIGHTS_AND_MACHINE_REDUCTION_REMAIN",
+  "status": "ACTIVE_FAIL_CLOSED__FINANCE_T3_AND_PREWAVE_DEPENDENCY_CLEANLINESS_CLOSED__PUBLIC_SURFACE_BINDINGS_REMAIN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -175,9 +175,7 @@
   ],
   "execution_authority": false,
   "next": [
-    "CLOSE_TERMINAL_BENCH_AND_TERMINAL_BENCH_SCIENCE_BRAIN_AGENT_ADAPTER_ZERO_CASE_BINDINGS_WITHOUT_READING_TERMINAL_CASE_CONTENT",
-    "CLOSE_AUTOMATIONBENCH_GDPVAL_CHARTOGRAPHY_HLE_AND_OSWORLD_SCOPE_EQUIVALENT_OR_RESOURCE_SCORER_ASSET_PREFLIGHTS",
-    "REDUCE_ALL_PREWAVE_BINDINGS_TO_ONE_MACHINE_CHECKED_PREQUALIFICATION_VERDICT",
+    "CLOSE_SURVIVING_PUBLIC_SURFACE_PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHTS",
     "DERIVE_EXECUTION_AUTHORITY_ONLY_IF_ALL_PRE_WAVE_GATES_PASS__THEN_RUN_T0_T1_T2_T3_IN_PARALLEL"
   ],
   "capability_credit_delta": 0,
@@ -195,9 +193,9 @@
     "every_surface_zero_cost_route_frozen": false,
     "every_surface_oracle_and_verifier_binding_frozen": false,
     "every_portfolio_task_case_harness_metric_stop_rule_and_mutation_set_frozen": false,
-    "brain_route_and_dependency_manifest_frozen": "HASH_BOUND_CURRENT_CONTROLLER_SCOPE__canonical/verification/PREWAVE_OPAQUE_PROVIDER_COMPOSITION_AUDIT_20261002_V1.json",
-    "no_known_opaque_target_capability_provider_in_operative_brain_route": "PASS__canonical/verification/PREWAVE_OPAQUE_PROVIDER_COMPOSITION_AUDIT_20261002_V1.json",
-    "no_known_unresolved_composition_defect_before_wave": "PASS__canonical/verification/PREWAVE_OPAQUE_PROVIDER_COMPOSITION_AUDIT_20261002_V1.json",
+    "brain_route_and_dependency_manifest_frozen": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
+    "no_known_opaque_target_capability_provider_in_operative_brain_route": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
+    "no_known_unresolved_composition_defect_before_wave": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
     "four_portfolios_pairwise_execution_independent": "NAMESPACE_LEVEL_PASS__SURFACE_SPECIFIC_BINDINGS_STILL_OPEN",
     "livebench_if_verifier_source_bytes_frozen": true,
     "finance_and_accounting_index_surface_accounted_for": true,
@@ -242,8 +240,8 @@
     "terminal_bench_4_zero_case_route_preflight": "INDEPENDENT_PASS__canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "harbor_zero_cost_terminal_carrier_preflight": "INDEPENDENT_PASS__canonical/verification/HARBOR_TERMINAL_CARRIERS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "finance_index_component_route_binding_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
-    "t3_unknown_domain_scope_audit_frozen": "PASS__canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
-    "finance_index_component_route_bindings_frozen": "PASS__canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
+    "t3_unknown_domain_scope_audit_frozen": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
+    "finance_index_component_route_bindings_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -253,15 +251,14 @@
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "conclusion": "LIVEBENCH_IF_PREWAVE_VERIFIER_BINDING_CLOSED__PRIVATE_ROUTES_DELETED__DIRECT_PROOF_BINDINGS_FROZEN__GENERAL_ZERO_COST_CARRIER_AND_SHARDED_FINITE_POPULATION_ROUTE_INDEPENDENT_PASS__REMAINING_WORK_IS_SURFACE_SPECIFIC_PUBLIC_BINDINGS_FINANCE_UNKNOWN_DOMAIN_AND_FINAL_DEPENDENCY_CLEANLINESS",
+    "conclusion": "PRIVATE_ROUTES_DELETED__DIRECT_PROOF_BINDINGS_FROZEN__FINANCE_AND_UNKNOWN_DOMAIN_SCOPE_BOUND__DEPENDENCY_CLEANLINESS_PREWAVE_PASS__ONLY_SURVIVING_PUBLIC_SURFACE_PREFLIGHTS_REMAIN",
     "unresolved_identity_or_access_count": 1,
     "deleted_required_execution_routes_by_dominance_v2": 5,
     "required_private_or_nonreproducible_execution_route_count": 0
   },
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
   "remaining_irreducible_prequalification_blockers": [
-    "SURVIVING_PUBLIC_SURFACES_REQUIRE_ONLY_SURFACE_SPECIFIC_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHTS_NOT_ALREADY_INDEPENDENTLY_CLOSED",
-    "PORTFOLIO_WIDE_ORACLE_VERIFIER_TASK_CASE_HARNESS_METRIC_STOP_RULE_AND_DEPENDENCY_BINDINGS_MUST_ALL_REDUCE_TO_PASS"
+    "SURVIVING_PUBLIC_SURFACES_REQUIRE_PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHT"
   ],
   "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
