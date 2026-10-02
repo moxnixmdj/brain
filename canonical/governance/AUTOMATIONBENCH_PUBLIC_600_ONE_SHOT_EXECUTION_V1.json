@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PUBLIC_600_ONE_SHOT_EXECUTION_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREEXPOSURE__AUTHORIZED_BY_RESIDUAL_V7__NOT_YET_EXECUTED",
+  "objective": "Close atomic acceptance predicate AUTOMATIONBENCH_GE_40 using the frozen scope-equivalent public 600-task AutomationBench route with the Brain-owned operative gateway and zero incremental spend.",
+  "authorization": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V7.json",
+  "benchmark": {
+    "repository": "zapier/AutomationBench",
+    "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+    "scored_domains": [
+      "sales",
+      "marketing",
+      "operations",
+      "support",
+      "finance",
+      "hr"
+    ],
+    "expected_tasks_per_domain": 100,
+    "total_scored_tasks": 600,
+    "toolset": "api",
+    "max_steps": 50,
+    "acceptance_metric": "MEAN_TASK_COMPLETED_CORRECTLY",
+    "threshold": 0.4,
+    "source_hashes": {
+      "sales": "393d265026fb69b3254bf6f172e298c79e48444f35fba6cd955e605e224f21ee",
+      "marketing": "9fc7da71b77f8cb3e4a1dc5cfbd33f85e7d88b954b1fb904e1c51e60a52d9a04",
+      "operations": "3c50c69b774a5bee99e1bc4f39dd337302d0ce480906ba8582eb73acd16cb5bc",
+      "support": "a9429e87c1c62878b876bc82ab09739fc482c204d7f37803975aad178084cc06",
+      "finance": "7ce169cc71ee6be1f22cd0c6239cfc4cb9cfa2faa5496b0acf878ecf4fe6d49a",
+      "hr": "c173a36a03f43096bd122577584aa32f9df379d8760aa46c43be04c85d101779"
+    }
+  },
+  "brain_candidate": {
+    "runtime": "canonical/runtime/automationbench_brain_gateway_v1.py",
+    "runtime_git_blob_sha": "e15f671276952e4dac762eb1fa5531550ed23a46",
+    "configuration": "canonical/capabilities/opus55/AUTOMATIONBENCH_BRAIN_GATEWAY_CONFIGURATION_V1.json",
+    "hermetic_verification": "canonical/verification/AUTOMATIONBENCH_HERMETIC_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "source_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "source_gate_status": "ADMISSIBLE_FOR_CLEAN_ACCEPTANCE_EXECUTION"
+  },
+  "substrate": {
+    "role": "GENERAL_COGNITION_SUBSTRATE",
+    "endpoint": "https://text.pollinations.ai/",
+    "frozen_model_alias": "openai-fast",
+    "api_key_required": false,
+    "fallback_models_allowed": false,
+    "execution_env": {
+      "BRAIN_AUTOMATION_PLANNER_MODELS": "openai-fast",
+      "BRAIN_AUTOMATION_PLANNER_URL": "https://text.pollinations.ai/",
+      "BRAIN_AUTOMATION_PLANNER_TIMEOUT_S": "60"
+    },
+    "preexposure_live_transport_evidence": "canonical/verification/AUTOMATIONBENCH_HERMETIC_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
+  },
+  "execution": {
+    "topology": "SIX_DOMAIN_JOBS_IN_PARALLEL__ONE_FROZEN_DOMAIN_EACH__FINAL_EXACT_AGGREGATION",
+    "max_concurrent_per_domain": 4,
+    "total_nominal_task_concurrency": 24,
+    "domain_failure_policy": "NO_TASK_REPLACEMENT__MISSING_OR_PROVIDER_OR_ADAPTER_FAILURE_COUNTS_AS_TASK_FAILURE_UNLESS_THE_ENTIRE_PREEXPOSURE_FROZEN_EXECUTION_IS_INVALIDATED_BEFORE_ANY_TASK_RESULT_EXISTS",
+    "no_tuning_replay": true,
+    "no_task_replacement": true,
+    "no_model_alias_fallback": true,
+    "no_post_result_candidate_change": true,
+    "exact_600_required_for_pass": true
+  },
+  "result_rule": "PASS_IFF_ALL_600_FROZEN_SCORED_TASKS_HAVE_ONE_RESULT_AND_STRICT_PASS_COUNT_DIVIDED_BY_600_IS_GE_0_40",
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
