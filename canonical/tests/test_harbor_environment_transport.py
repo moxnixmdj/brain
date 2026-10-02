@@ -10,7 +10,7 @@ from canonical.runtime.harbor_environment_transport import (
 
 @dataclass
 class R:
-    returncode: int
+    return_code: int
     stdout: str=""
     stderr: str=""
 
