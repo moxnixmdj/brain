@@ -192,7 +192,7 @@
     "terminal_closure_manifest_path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "terminal_closure_reducer_required": true,
     "terminal_closure_reducer_path": "canonical/runtime/terminal_closure_reducer.py",
-    "terminal_closure_reducer_verification_path": "canonical/verification/TERMINAL_CLOSURE_REDUCER_VERIFICATION_20261001_V1.json",
+    "terminal_closure_reducer_verification_path": "canonical/verification/TERMINAL_CLOSURE_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
     "continuous_obs_required": true,
     "continuous_obs_policy_path": "canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json",
     "continuous_obs_runtime_path": "canonical/runtime/continuous_obs_runtime.py",
@@ -211,7 +211,16 @@
     "closed_family_ci_requires_relevant_path_change": true,
     "terminal_route_evidence_freshness_required": true,
     "terminal_route_evidence_freshness_path": "canonical/runtime/terminal_route_evidence_freshness.py",
-    "route_closure_controller_must_reject_stale_receipt_bindings": true
+    "route_closure_controller_must_reject_stale_receipt_bindings": true,
+    "current_terminal_authority_required": true,
+    "current_terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "opus55_acceptance_calibration_required": true,
+    "opus55_acceptance_calibration_path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "opus55_acceptance_residual_plan_path": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
+    "acceptance_capability_source_gate_path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "acceptance_capability_source_gate_verification_path": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "behavioral_terminal_pass_is_not_opus55_ownership": true,
+    "clean_acceptance_case_spend_requires_source_gate_v2": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -265,11 +274,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "CLOSE_REMAINING_10_ACTIVE_CONTRACT_TERMINAL_ROUTE_BINDINGS_WITH_ZERO_REALITY_SCOPE_EQUIVALENCE_AND_POPULATION_ACCEPTANCE_PREFLIGHTS__THEN_RUN_CANONICAL_PREQUALIFICATION_REDUCER__NO_FRESH_TERMINAL_EVIDENCE_BEFORE_PASS",
+    "next_step": "EXECUTE_OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1__RUN_PROOF_TRANSMUTATION_FIRST__INTERNALIZE_OR_BIND_EXISTING_CAPABILITY_MECHANISMS__SOURCE_GATE_V2_BEFORE_CLEAN_CASE_SPEND__NO_TERMINAL_REPLAY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_ACTIVE__12_CONTRACT_PROOF_BASIS_HAS_2_OF_12_ADMISSIBLE_FROZEN_TERMINAL_ROUTES__10_REMAINING__ZERO_MECHANISM_HOLES",
+    "critical_blocker": "17_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_OPEN__2_OF_19_VERIFIED_EQUAL_OR_BETTER__19_OF_19_PROVISIONAL_BEHAVIORAL_PASS",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -706,16 +715,20 @@
       "capability_credit_restored": true
     },
     "last_frontier_reconciliation": {
-      "status": "WAL_RECOVERY_ORDERING_VERIFIED_PASS__CODING_STAGE1_BREADTH_REMAINS",
-      "blocker": "CURRENT_V5_TERMINAL_BENCH_4_BREADTH_AND_SCORE_NOT_YET_ESTABLISHED_GE_66_4_ON_DISTINCT_FRESH_TASK_SET",
-      "whole_envelope_complete": false,
-      "parent_capability_promoted": false,
-      "verified_real_task": "wal-recovery-ordering",
-      "evidence_path": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
-      "active_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1"
+      "status": "POSTWAVE_ACCEPTANCE_FRONTIER_ACTIVE",
+      "terminal_execution": "3352/3352_PASS",
+      "contracts": "12/12_PASS",
+      "behavioral_families": "19/19_PASS",
+      "opus55_acceptance": "2/19_PASS__17/19_OPEN",
+      "global_postconditions": "INDEPENDENT_PASS",
+      "donor_cleanroom": "INDEPENDENT_PASS",
+      "acceptance_calibration": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "source_gate_v2": "canonical/verification/ACCEPTANCE_CAPABILITY_SOURCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+      "residual_plan": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
+      "terminal_goal_achieved": false
     },
-    "active_capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
-    "canonical_frontier_consistency_status": "V7_OPUS_5_5_CAPABILITY_OWNERSHIP_WITH_WHITE_BOX_HARVEST_ACTIVE",
+    "active_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "canonical_frontier_consistency_status": "POSTWAVE_ACCEPTANCE_CALIBRATION_INDEPENDENT_PASS__2_OF_19_CLOSED__17_OPEN",
     "last_verified_subcapability": {
       "capability_id": "OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1",
       "status": "VERIFIED_OWNED_EQUAL_OR_BETTER",
@@ -829,7 +842,7 @@
       "activation_receipt": "canonical/reasoning/2026-10-02_GLOBAL_TERMINAL_PROOF_CUT_ACTIVATION_V1.json",
       "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
     },
-    "next_progress_event_target": "ADMISSIBLE_FROZEN_TERMINAL_ROUTE_COUNT_INCREASE_OR_PREQUALIFICATION_FAIL_CLOSED",
+    "next_progress_event_target": "ONE_OR_MORE_FROZEN_OPUS55_PROTOCOL_RESULTS_CLOSE_OR_RESIDUAL_IS_FURTHER_CAUSALLY_COMPRESSED",
     "open_mechanism_residual_count": 1,
     "m0b_frozen_envelope_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
     "residual_action_universe_v2": {
@@ -907,7 +920,9 @@
       "admissible_routes": 5,
       "remaining_routes": 7,
       "execution_authority": false
-    }
+    },
+    "postwave_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "terminal_wave_replay_allowed": false
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
