@@ -21,6 +21,7 @@ ROUTE="P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
 P1_BINDING="canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json"
 MANIFEST="canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json"
 DIRECT_ROUTES="canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json"
+FOUR_CONTRACTS="canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json"
 V4_RESIDUAL="canonical/verification/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 V5_RECEIPT="canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 TERMINAL_WAVE="canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"
@@ -135,9 +136,9 @@ def _mutation_audit()->dict[str,Any]:
  return {"all_frozen_mutations_killed":all(results.values()) and set(results)==EXPECTED_MUTATIONS,
          "mutation_count":len(results),"results":dict(sorted(results.items()))}
 
-def evaluate(binding=None,manifest=None,routes=None,residual=None,v5=None,wave=None)->dict[str,Any]:
+def evaluate(binding=None,manifest=None,routes=None,contracts=None,residual=None,v5=None,wave=None)->dict[str,Any]:
  binding=dict(binding or _load(P1_BINDING)); manifest=dict(manifest or _load(MANIFEST))
- routes=dict(routes or _load(DIRECT_ROUTES)); residual=dict(residual or _load(V4_RESIDUAL))
+ routes=dict(routes or _load(DIRECT_ROUTES)); contracts=dict(contracts or _load(FOUR_CONTRACTS)); residual=dict(residual or _load(V4_RESIDUAL))
  v5=dict(v5 or _load(V5_RECEIPT)); wave=dict(wave or _load(TERMINAL_WAVE))
  errors=[]
  if binding.get("behavior_id")!=BEHAVIOR: errors.append("P1_BEHAVIOR_DRIFT")
@@ -152,6 +153,15 @@ def evaluate(binding=None,manifest=None,routes=None,residual=None,v5=None,wave=N
   if row.get("direct_proof_contracts")!="canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json":
    errors.append("SURFACE_DIRECT_CONTRACT_DRIFT:"+key)
   if row.get("evaluator")!=DIRECT_ROUTES: errors.append("SURFACE_EVALUATOR_DRIFT:"+key)
+
+ obligations=[x for x in (contracts.get("obligations") or []) if isinstance(x,Mapping) and x.get("behavior_id")==BEHAVIOR]
+ if len(obligations)!=1: errors.append("FROZEN_P1_CONTRACT_OBLIGATION_COUNT")
+ else:
+  o=obligations[0]
+  if o.get("route_id")!=ROUTE: errors.append("FROZEN_P1_CONTRACT_ROUTE_DRIFT")
+  if o.get("universe")!="INTERVENTION_IDENTIFIED_REPLAYABLE_AGENT_TRAJECTORIES_WITH_HIDDEN_FAULT_METADATA": errors.append("FROZEN_P1_CONTRACT_UNIVERSE_DRIFT")
+  if set(o.get("oracle") or [])!={"EARLIEST_CAUSAL_STEP_MATCH","REPAIR_RESCUES_TERMINAL_OUTCOME","SYMPTOM_ONLY_REPAIR_DOES_NOT_COUNT","NONIDENTIFIABLE_CASE_ABSTAINS"}: errors.append("FROZEN_P1_CONTRACT_ORACLE_DRIFT")
+  if not set(o.get("mutations") or [])<=EXPECTED_MUTATIONS: errors.append("FROZEN_P1_CONTRACT_MUTATION_NOT_SUBSET_OF_BOUND_MUTATIONS")
 
  direct=[x for x in (routes.get("routes") or []) if isinstance(x,Mapping) and BEHAVIOR in (x.get("covers") or [])]
  if len(direct)!=1: errors.append("DIRECT_P1_ROUTE_COUNT")
