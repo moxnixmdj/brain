@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_NORMALIZED_GRAPH_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__GENERIC_NORMALIZED_RULE_GRAPH_PREFLIGHT__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 604,
+  "public_merge_commit": "4feef2e8a0a102b914cea07cd7d2178aea86cc13",
+  "workflow_run_id": 36962663678,
+  "workflow_job_id": 110699529200,
+  "workflow_conclusion": "success",
+  "exact_brain_branch_blobs": {
+    "canonical/runtime/structured_method_normalized_graph_candidate_v3.py": "7ee731e123bca0f42860535bcdfe06504f23a3ec",
+    "canonical/runtime/structured_method_normalized_graph_proof_v3.py": "3f123fd781c85a7f73ffba5a33efebeea0c4a22f",
+    "canonical/tests/test_structured_method_normalized_graph_v3.py": "1e5fa9a0d6fa43d4478fe2e7ec7821d9b42c4275"
+  },
+  "verified": [
+    "ARBITRARY_FINITE_NORMALIZED_OPERATOR_SYMBOLS_HAVE_NO_STATIC_OPERATOR_WHITELIST",
+    "RULE_ORDER_INDEPENDENT_DEPENDENCY_RESOLUTION",
+    "APPLICABLE_REQUIREMENT_CONSUMER_COVERAGE",
+    "EXPLICIT_JUSTIFIED_EXCLUSIONS",
+    "TYPE_AND_DIMENSION_SIGNATURE_CONSISTENCY",
+    "INVARIANT_TARGET_SIGNATURE_BINDING",
+    "REQUIRED_OUTPUT_TRACEABILITY",
+    "EDGE_LEVEL_ACCEPTANCE_BINDINGS",
+    "ALL_FIVE_FROZEN_SOURCE_KINDS_GENERATED",
+    "SIGNATURE_MISMATCH_FAILS_CLOSED",
+    "MISSING_REQUIREMENT_CONSUMER_FAILS_CLOSED",
+    "EXCLUDED_REQUIREMENT_CONSUMPTION_FAILS_CLOSED",
+    "DEPENDENCY_CYCLE_FAILS_CLOSED",
+    "MISSING_REQUIRED_OUTPUT_FAILS_CLOSED",
+    "INVARIANT_SIGNATURE_MISMATCH_FAILS_CLOSED"
+  ],
+  "generated_hidden_oracle_case_count": 256,
+  "limitations": [
+    "BEGINS_AFTER_NORMALIZED_RULE_EXTRACTION",
+    "DOES_NOT_CLAIM_RAW_LANGUAGE_OR_UNSTATED_RULE_SEMANTIC_EXTRACTION",
+    "NORMALIZED_RULE_SIGNATURE_SEMANTICS_ARE_UPSTREAM_RULE_EXTRACTION_AUTHORITY",
+    "ZERO_TERMINAL_RESULT_AND_ZERO_CAPABILITY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
