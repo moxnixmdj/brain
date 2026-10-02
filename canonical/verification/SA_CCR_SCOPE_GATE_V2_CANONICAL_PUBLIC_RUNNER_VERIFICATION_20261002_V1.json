@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_SA_CCR_SCOPE_GATE_V2_CANONICAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__CANONICAL_INPUT_ADMISSIBLE_SUBSTITUTION__ZERO_TERMINAL_RESULT",
+  "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 563,
+  "public_merge_commit": "a61b78eb8398d884d5f80201087829be8430d10f",
+  "workflow_run_id": 36960043738,
+  "workflow_job_id": 110691508041,
+  "workflow_conclusion": "success",
+  "exact_bound_blobs": {
+    "canonical/runtime/scope_equivalent_proof_gate_v2.py": "2d05172becfc559de3ff1e4e5623c5180028be1b",
+    "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json": "e1334040617340b232d74c187116aedc09236398",
+    "canonical/governance/SA_CCR_SCOPE_EQUIVALENCE_RELATION_V1.json": "2a330aaae7ed626c13bdd0bbeff7ec5564d977b5",
+    "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json": "04b030ef0bf13cf9e39f4c6a31077ca2ff0a5394",
+    "canonical/governance/SA_CCR_ACTIVE_CONTRACT_SCOPE_CLOSURE_V1.json": "93c74c5d9d4e49c4f9524d3724a552665da6a702",
+    "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "e95a7e4bababb44f21c218535c362b03fd75e912"
+  },
+  "verified": [
+    "EXACT_CANONICAL_BLOBS_BOUND_BEFORE_EVALUATION",
+    "GATE_V2_SELF_TEST_PASS",
+    "CANONICAL_SCOPE_RELATION_BINDINGS_CROSS_CHECK_PASS",
+    "CANONICAL_SCOPE_INPUT_EVALUATES_ADMISSIBLE_SUBSTITUTION",
+    "PRIOR_INFORMATION_SAFE_PREFLIGHT_RECEIPT_BOUND",
+    "NO_TERMINAL_EXECUTION_OR_CAPABILITY_CREDIT"
+  ],
+  "supersedes_for_current_canonical_input": "canonical/verification/SA_CCR_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "supersession_reason": "PR560_BOUND_OLDER_SCOPE_INPUT_BLOB_6c6927a1ce107cd00bbe40841261baa9798b2750__CURRENT_CANONICAL_INPUT_IS_e1334040617340b232d74c187116aedc09236398",
+  "limitations": [
+    "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING",
+    "TERMINAL_RESULT_NOT_OBSERVED",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
