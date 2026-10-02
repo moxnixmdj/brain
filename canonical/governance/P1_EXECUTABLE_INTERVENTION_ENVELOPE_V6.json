@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_P1_EXECUTABLE_INTERVENTION_ENVELOPE_V6",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_STRONGER_ZERO_REALITY_PROOF_CARRIER__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Close the two P1 V4 semantic residuals inside the accepted normalized typed envelope without oracle-list rescue: make SCOPE first-class and verify repair rescue by executable causal replay for delayed, conjunctive interaction, symptom-only negative controls, and ambiguous alternative rescuers.",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v6.py",
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py": "e1a0bb3133afc44deb4564087faea8a16058d8d0",
+    "canonical/tests/test_trajectory_failure_typed_ir_v6.py": "40c6222df2595809e248d92a3d2c6cfe8917181a"
+  },
+  "intended_verified_envelope": {
+    "normalized_domains": ["BROWSER", "FILESYSTEM", "TOOL_API", "ARTIFACT", "RESEARCH", "CODE"],
+    "mechanism_classes": ["AUTHORITY", "SCOPE", "SCHEMA", "PROVENANCE", "INVARIANT", "STATE_TRANSITION", "TOOL_CONTRACT", "DEPENDENCY"],
+    "causal_patterns": ["SINGLE", "DELAYED", "INTERACTION", "AMBIGUOUS"],
+    "cross_product_case_count": 192,
+    "intervention_semantics": "CLEAR_MATCHING_HIDDEN_LOCAL_FAULT__REEXECUTE_TOPOLOGICAL_ACTION_DAG__RECOMPUTE_TERMINAL_RESOURCE_HEALTH",
+    "negative_controls": [
+      "WRONG_MECHANISM_REPAIR_DOES_NOT_CLEAR_SCOPE_FAULT",
+      "DOWNSTREAM_SYMPTOM_REPAIR_DOES_NOT_RESCUE",
+      "PROPER_SUBSET_OF_CONJUNCTIVE_INTERACTION_REPAIRS_DOES_NOT_RESCUE",
+      "MULTIPLE_MINIMAL_ALTERNATIVE_RESCUERS_FORCE_AMBIGUITY",
+      "ORACLE_LABEL_MUTATION_DOES_NOT_CHANGE_REPLAY_RESULT",
+      "MISSING_SUPPORTING_RECEIPTS_FAIL_CLOSED"
+    ]
+  },
+  "claims_not_granted": [
+    "NO_TERMINAL_SURFACE_PASS",
+    "NO_SCOPE_RELATION_TO_T0_FRONTIERCODE_V1_1_YET",
+    "NO_SCOPE_RELATION_TO_T0_CURSORBENCH_4_0_YET",
+    "NO_SCOPE_RELATION_TO_T2_RECOVERY_SCOPE_COMPOSITION_YET",
+    "NO_P1_SCOPE_QUARANTINE_CLEARANCE_UNTIL_INDEPENDENT_V6_PASS_AND_EXACT_OR_SUPERSET_DIRECT_SURFACE_SCOPE_RELATION"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V6_BYTES__THEN_PROVE_EXACT_OR_SUPERSET_SCOPE_RELATION_TO_ALL_THREE_DECLARED_P1_DIRECT_SURFACES__ONLY_THEN_REEVALUATE_P1_QUARANTINE",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_INTERVENTION_RESCUE_QUARANTINE_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED_CANDIDATE_QUARANTINE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "finding": "V5 DOES NOT YET DISCHARGE P1_HETEROGENEOUS_INTERVENTION_RESCUE: _hidden_intervention_model copies oracle-derived repair identities into required_root_repairs and evaluate_intervention defines rescue by set inclusion against that list; it does not apply repairs to an executable causal state transition and recompute terminal outcome.",
+  "exact_v5_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/tests/test_trajectory_failure_typed_ir_v5.py": "abc87ada119e42b720af5fb0f472816df975bc25"
+  },
+  "preserve": [
+    "V5_FIRST_CLASS_SCOPE_MECHANISM_CANDIDATE",
+    "V5_INFORMATION_BOUNDARY_AND_HIDDEN_ORACLE_SEPARATION",
+    "V5_TYPED_CROSS_DOMAIN_DELAYED_INTERACTION_AMBIGUOUS_CASE_GENERATION"
+  ],
+  "quarantine": [
+    "V5_HETEROGENEOUS_POST_INTERVENTION_TERMINAL_RESCUE_CLAIM",
+    "V5_USE_AS_P1_SCOPE_QUARANTINE_CLEARANCE",
+    "V5_USE_AS_TERMINAL_SURFACE_PROMOTION_AUTHORITY"
+  ],
+  "replacement_candidate": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py",
+  "rule": "REPAIR_TARGET_IDENTITY_IS_NOT_INTERVENTION_RESCUE__RESCUE_REQUIRES_APPLYING_THE_INTERVENTION_TO_AN_EXECUTABLE_CAUSAL_MODEL_AND_RECOMPUTING_TERMINAL_STATE",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
