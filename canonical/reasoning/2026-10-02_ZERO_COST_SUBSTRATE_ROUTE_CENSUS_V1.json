@@ -1,0 +1,309 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-02",
+  "decision_id": "2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1",
+  "status": "EXECUTED__PINNED_OPEN_WEIGHTS_GENERATOR_EXISTS_BUT_ZERO_COST_QUOTA_IS_1_TO_4_ORDERS_BELOW_ONE_BENCHMARK_PASS__GITHUB_MODELS_DISQUALIFIED__MEASURED_RESIDUAL_FOR_BRAIN_CONFIGURATION_RECORDED__ZERO_CREDIT",
+  "canonical_base_commit": "d486c816f6d1fe92a313baaae96111757a7609ba",
+  "facts_first_gathered_at_commit": "d486c816f6d1fe92a313baaae96111757a7609ba",
+  "real_objective": "Replace the vague claim 'no pinned generator is bound' with an exact, falsifiable statement of what blocks a donor-independent response generator for the four third-party-runnable public bars, so the owner can decide the one lever that matters.",
+  "governing_invariants": [
+    "Hard $0 incremental spend unless the owner records an explicit exception.",
+    "Models may be a substrate only if the Brain-owned configuration materially adds the capability (General Cognition Substrate Law V3); a substrate alone earns no ownership credit.",
+    "No untouched or frozen qualification case may be exposed to measure route quality; route quality is estimated on non-frozen development tasks.",
+    "Unknown, unpinned or unverified route facts fail closed."
+  ],
+  "material_premises": [
+    {
+      "id": "P1_GITHUB_MODELS_RETIRED",
+      "fact": "GitHub Models (the only keyless, GITHUB_TOKEN-authenticated inference route) was fully retired on 2026-07-30: playground, model catalog, inference API and BYOK are no longer available to any customer.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://docs.github.com/en/github-models",
+        "retrieved_utc": "2026-10-02",
+        "excerpt": "As of July 30, 2026, GitHub Models has been fully retired. The playground, model catalog, inference API, and bring your own key (BYOK) are no longer available to any customer."
+      },
+      "resolution": "DISQUALIFIED"
+    },
+    {
+      "id": "P2_WORKERS_AI_PINNED_MODELS",
+      "fact": "Cloudflare Workers AI lists strong open-weights models with exact IDs and neuron prices, including @cf/deepseek-ai/deepseek-v4-flash-0731, @cf/deepseek-ai/deepseek-v4-pro-0813, @cf/zai-org/glm-5.2, @cf/zai-org/glm-5.3, @cf/zai-org/glm-5.3-flash, @cf/moonshotai/kimi-k2.5, kimi-k2.6, kimi-k2.7-code, @cf/openai/gpt-oss-120b and @cf/nvidia/nemotron-3-120b-a12b. The DeepSeek IDs carry date suffixes (suggesting pinning); pinning semantics of the others were not verified.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+        "retrieved_utc": "2026-10-02",
+        "page_last_updated": "2026-10-01"
+      },
+      "resolution": "NON_DOMINATED_CANDIDATE"
+    },
+    {
+      "id": "P3_WORKERS_AI_FREE_ALLOCATION",
+      "fact": "Workers AI includes 10,000 Neurons per day at no charge on the Free and Paid Workers plans; usage above that needs the Workers Paid plan at $0.011 per 1,000 Neurons; limits reset daily at 00:00 UTC. The project's own Cloudflare runtime record already declares free_bootstrap.workers_ai_free_neurons_per_day = 10000 and Workers AI in its substrate.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+        "repo_corroboration": {
+          "path": "canonical/agents/SUPERHERO_RUNTIME_CLOUDFLARE_V1.json",
+          "git_blob_sha": "8a85cc67bada5623c74e3ddff8877abacea27413"
+        }
+      }
+    },
+    {
+      "id": "P4_OPENROUTER_FREE_TIER",
+      "fact": "OpenRouter ':free' model variants are keyed and capped at 20 requests per minute and 50 requests per day (1000 per day once at least 10 credits were ever purchased).",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://openrouter.ai/docs/api-reference/limits",
+        "retrieved_utc": "2026-10-02"
+      },
+      "resolution": "NON_DOMINATING__KEYED_AND_REQUEST_CAPPED"
+    },
+    {
+      "id": "P5_TOKEN_SCALE_OF_ONE_AGENTIC_PASS",
+      "fact": "Artificial Analysis reports that total token usage on AA-Briefcase (91 tasks) ranges 18x across models, from 52M (Grok 4.3) to 970M (Claude Fable 5). This is used only as an order-of-magnitude for one long-horizon agentic pass; Terminal-Bench 4.0 token totals were not found.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY_VIA_SEARCH_SNIPPET",
+        "url": "https://x.com/ArtificialAnlys/status/2067744637155226101",
+        "retrieved_utc": "2026-10-02",
+        "excerpt": "Total token usage on AA-Briefcase ranges over 18x across models tested, from 52M for Grok 4.3 to 970M for Claude Fable 5."
+      }
+    },
+    {
+      "id": "P6_COMPUTED_FREE_TIER_VS_ONE_PASS",
+      "fact": "Using the recorded neuron prices, two token mixes (cache-heavy 90/8/2 and cache-light 50/40/10 for cached-input/input/output) and the 52M..970M token scale, one benchmark pass would take 35 to 9,964 days of the free allocation (between 1.5 and 4 orders of magnitude), versus an estimated $3.86 to $1,096.10 on the paid rate. The table is recomputable from the recorded constants.",
+      "evidence": {
+        "class": "COMPUTED",
+        "constants": {
+          "free_neurons_per_day": 10000,
+          "usd_per_1000_neurons": 0.011,
+          "models_neurons_per_million_tokens": {
+            "@cf/deepseek-ai/deepseek-v4-flash-0731": {
+              "input": 40000,
+              "cached_input": 1273,
+              "output": 120000
+            },
+            "@cf/zai-org/glm-5.3": {
+              "input": 127273,
+              "cached_input": 23636,
+              "output": 400000
+            }
+          },
+          "token_mixes": {
+            "M1_CACHE_HEAVY": {
+              "cached_input": 0.9,
+              "input": 0.08,
+              "output": 0.02
+            },
+            "M2_CACHE_LIGHT": {
+              "cached_input": 0.5,
+              "input": 0.4,
+              "output": 0.1
+            }
+          },
+          "tokens_per_pass": {
+            "AA_BRIEFCASE_LOW_52M": 52000000.0,
+            "AA_BRIEFCASE_HIGH_970M": 970000000.0
+          }
+        },
+        "table": [
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "tokens_per_pass_label": "AA_BRIEFCASE_LOW_52M",
+            "tokens_per_pass": 52000000,
+            "neurons_per_million_tokens": 6745.7,
+            "free_tokens_per_day": 1482426,
+            "free_days_per_pass": 35.1,
+            "paid_usd_per_pass_estimate": 3.86
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M1_CACHE_HEAVY",
+            "tokens_per_pass_label": "AA_BRIEFCASE_HIGH_970M",
+            "tokens_per_pass": 970000000,
+            "neurons_per_million_tokens": 6745.7,
+            "free_tokens_per_day": 1482426,
+            "free_days_per_pass": 654.3,
+            "paid_usd_per_pass_estimate": 71.98
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "tokens_per_pass_label": "AA_BRIEFCASE_LOW_52M",
+            "tokens_per_pass": 52000000,
+            "neurons_per_million_tokens": 28636.5,
+            "free_tokens_per_day": 349205,
+            "free_days_per_pass": 148.9,
+            "paid_usd_per_pass_estimate": 16.38
+          },
+          {
+            "model": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+            "mix": "M2_CACHE_LIGHT",
+            "tokens_per_pass_label": "AA_BRIEFCASE_HIGH_970M",
+            "tokens_per_pass": 970000000,
+            "neurons_per_million_tokens": 28636.5,
+            "free_tokens_per_day": 349205,
+            "free_days_per_pass": 2777.7,
+            "paid_usd_per_pass_estimate": 305.55
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M1_CACHE_HEAVY",
+            "tokens_per_pass_label": "AA_BRIEFCASE_LOW_52M",
+            "tokens_per_pass": 52000000,
+            "neurons_per_million_tokens": 39454.2,
+            "free_tokens_per_day": 253458,
+            "free_days_per_pass": 205.2,
+            "paid_usd_per_pass_estimate": 22.57
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M1_CACHE_HEAVY",
+            "tokens_per_pass_label": "AA_BRIEFCASE_HIGH_970M",
+            "tokens_per_pass": 970000000,
+            "neurons_per_million_tokens": 39454.2,
+            "free_tokens_per_day": 253458,
+            "free_days_per_pass": 3827.1,
+            "paid_usd_per_pass_estimate": 420.98
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M2_CACHE_LIGHT",
+            "tokens_per_pass_label": "AA_BRIEFCASE_LOW_52M",
+            "tokens_per_pass": 52000000,
+            "neurons_per_million_tokens": 102727.2,
+            "free_tokens_per_day": 97345,
+            "free_days_per_pass": 534.2,
+            "paid_usd_per_pass_estimate": 58.76
+          },
+          {
+            "model": "@cf/zai-org/glm-5.3",
+            "mix": "M2_CACHE_LIGHT",
+            "tokens_per_pass_label": "AA_BRIEFCASE_HIGH_970M",
+            "tokens_per_pass": 970000000,
+            "neurons_per_million_tokens": 102727.2,
+            "free_tokens_per_day": 97345,
+            "free_days_per_pass": 9964.5,
+            "paid_usd_per_pass_estimate": 1096.1
+          }
+        ],
+        "caveats": [
+          "Estimates assume the stated mixes and exclude retries and any Workers Paid base fee.",
+          "Rate limits (requests/minute, tokens/minute) were not examined."
+        ]
+      }
+    },
+    {
+      "id": "P7_MEASURED_OPEN_WEIGHTS_GAP_FRONTIERCODE",
+      "fact": "On Cognition's own FrontierCode 1.1 Main leaderboard the best Workers-AI-available open-weights row is GLM 5.3 (max) at 40.1% (others: Kimi K2.7 30.1%, DeepSeek V4 Pro 0813 28.5%, DeepSeek V4 Flash 0731 18.8%) against Opus 5.5 (medium) at 54.6%; the registry bar is 54.4%. Residual a Brain-owned configuration must supply over the best such baseline: about 14.3 points.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://cognition.com/frontiercode",
+        "retrieved_utc": "2026-10-02"
+      },
+      "derived": {
+        "bar": 54.4,
+        "best_workers_ai_baseline": 40.1,
+        "residual_points": 14.3
+      }
+    },
+    {
+      "id": "P8_MEASURED_OPEN_WEIGHTS_GAP_TB4",
+      "fact": "On Artificial Analysis's Terminal-Bench 4.0 board (mini-SWE-agent harness, 66 tasks) the best open-weights row is GLM-5.3 at 41.8% against a 70.6% leader; the registry bar is 66.4%. Residual: about 24.6 points under that harness. Harness effects on the same model were not established here.",
+      "evidence": {
+        "class": "SECONDARY_AGGREGATOR",
+        "url": "https://llmlearner.com/rankings/terminal-bench-4-0",
+        "retrieved_utc": "2026-10-02"
+      },
+      "derived": {
+        "bar": 66.4,
+        "best_open_baseline": 41.8,
+        "residual_points": 24.6
+      }
+    },
+    {
+      "id": "P9_EXCLUDED_NON_COMPARABLE_EVIDENCE",
+      "fact": "Ante's published open-weights scores (for example 83.9% for DeepSeek V4.1 Flash) are Terminal-Bench 2.1 (89 tasks, a different and relaxed benchmark) and are deliberately NOT used as Terminal-Bench 4.0 evidence. They do show that the same family of open models scores far higher on the older benchmark with a strong harness, which is why a measured uplift protocol on non-frozen tasks is worth specifying.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://antigma.ai/eval",
+        "retrieved_utc": "2026-10-02",
+        "excerpt": "TB 2.1 · Same parameters: 89 tasks · 5 trials/task"
+      }
+    }
+  ],
+  "evidence_refs": [
+    "canonical/agents/SUPERHERO_RUNTIME_CLOUDFLARE_V1.json",
+    "canonical/reasoning/2026-10-02_PUBLIC_BAR_MEASURABILITY_AND_SUBSTRATE_FEASIBILITY_V1.json",
+    "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md"
+  ],
+  "relation_to_prior_work": [
+    {
+      "artifact": "canonical/reasoning/2026-10-02_PUBLIC_BAR_MEASURABILITY_AND_SUBSTRATE_FEASIBILITY_V1.json",
+      "relation": "REFINES",
+      "detail": "That receipt says no pinned generator is bound in the repo. This census shows a pinned open-weights route exists (Workers AI) and that the binding constraint is the $0 quota, not availability; it does not change the 8/4/3 predicate classification."
+    },
+    {
+      "artifact": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+      "relation": "AGREES",
+      "detail": "Its zero_cost_executable_surface_count = 0 is consistent with P6: no zero-cost route reaches benchmark scale."
+    }
+  ],
+  "conclusion": "A pinned, donor-independent, strong open-weights generator exists (Cloudflare Workers AI), so 'no generator exists' is false; but at $0 it is unusable at benchmark scale: the free allocation covers one agentic pass in 35 to 9,964 days (P6), GitHub Models is retired (P1) and keyed free tiers are request-capped (P4). The decisive lever is therefore the $0 rule itself: an estimated $4 to $1,096 per pass would buy a pinned generator. Money does not close the capability gap: the best open-weights baselines sit about 14.3 points (FrontierCode) and 24.6 points (TB4, independent harness) below the bars, and that residual is exactly what a Brain-owned configuration would have to supply and demonstrate.",
+  "selected_route": "RECORD_THE_SUBSTRATE_ROUTE_CENSUS__FRAME_LEVER_L2_AS_A_BOUNDED_STAGE_GATED_BUDGET_EXCEPTION_FOR_A_PINNED_WORKERS_AI_SUBSTRATE__MEASURE_BRAIN_CONFIGURATION_UPLIFT_ON_NON_FROZEN_DEVELOPMENT_TASKS_BEFORE_ANY_FROZEN_RUN",
+  "proposed_stage_gate_for_owner_reconciliation_not_adopted": [
+    "S0 (zero spend): read Workers AI limits (requests/minute, tokens/minute) and confirm which model IDs are version-pinned.",
+    "S1 (bounded budget B, cap set by the owner): run the raw pinned substrate and the Brain-configured system on the same non-frozen development tasks (for example the public Terminal-Bench 2.1 set, after checking it does not overlap the exposed TB4 ledger) and estimate the configuration uplift with a confidence interval.",
+    "S2 (only if projected uplift is at least the residual in P7/P8): authorize frozen runs under the existing one-shot lease rules; otherwise record the predicate as unattainable on this substrate."
+  ],
+  "rejected_material_alternatives": [
+    {
+      "alternative": "Treat the Workers AI free allocation as sufficient.",
+      "decisive_reason": "10,000 neurons/day is 1.5 to 4 orders of magnitude below one benchmark pass (P6)."
+    },
+    {
+      "alternative": "Use keyed free tiers (OpenRouter free: 50 requests/day) for agentic benchmarks.",
+      "decisive_reason": "Request caps and API-key secrets make benchmark scale infeasible and add a credential the repo deliberately avoids."
+    },
+    {
+      "alternative": "Use a closed frontier model as the generator.",
+      "decisive_reason": "Externalized capability, not Brain ownership (Substrate Law V3), and not zero-cost."
+    },
+    {
+      "alternative": "Spend frozen or untouched cases to measure route quality.",
+      "decisive_reason": "Violates anti-contamination; development tasks must be used instead."
+    },
+    {
+      "alternative": "Use Ante's TB 2.1 scores as evidence for the TB4 bar.",
+      "decisive_reason": "Different, relaxed benchmark; recorded only as a reason to specify a dev-task uplift protocol (P9)."
+    }
+  ],
+  "uncertainties": [
+    "The Cloudflare pricing page is a 2026-10-01 snapshot; model availability, prices and pinning may change.",
+    "Token mixes in P6 are assumptions; AA-Briefcase token totals are only an order-of-magnitude proxy for TB4 and other passes.",
+    "Whether the project's existing Worker AI binding can call these model IDs, and the Workers AI rate limits, were not tested or read.",
+    "The TB4 open-weights ceiling (P8) comes from a secondary aggregator and one harness; a stronger harness could move it by an unknown amount.",
+    "Other keyed free tiers (Cerebras, Groq, NVIDIA NIM, Hugging Face, Google AI Studio) were not investigated.",
+    "Whether Terminal-Bench 2.1 tasks overlap the exposed TB4 ledger was not checked."
+  ],
+  "assumptions": [
+    "Prices and quotas on the retrieved pages are current as of 2026-10-02."
+  ],
+  "non_goals": [
+    "Calling any inference API, creating any account or key, or spending money.",
+    "Exposing any frozen or untouched benchmark case.",
+    "Granting any capability or family credit."
+  ],
+  "next_action": "Owner decision on lever L2 as a bounded, stage-gated budget exception (S0..S2 above). If declined, record in the mission ledger that the four third-party-runnable public bars have no zero-cost generator at benchmark scale and keep all four unexecuted.",
+  "supersession_conditions": [
+    "Cloudflare changes the free allocation or model list, or the owner supplies a different pinned substrate.",
+    "A measured, harness-controlled TB4 or FrontierCode result for a pinned Workers AI model replaces P7/P8.",
+    "The owner grants or refuses the L2 exception."
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

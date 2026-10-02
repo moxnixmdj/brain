@@ -5,6 +5,7 @@ The three receipts are point-in-time records:
 * canonical/reasoning/2026-10-02_GITHUB_ACTIONS_BILLING_ROOT_CAUSE_RECONCILIATION_V1.json
 * canonical/reasoning/2026-10-02_TB4_ATTAINABILITY_RAISE_ANALYSIS_V1.json
 * canonical/reasoning/2026-10-02_PUBLIC_BAR_MEASURABILITY_AND_SUBSTRATE_FEASIBILITY_V1.json
+* canonical/reasoning/2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1.json
 
 Structural and zero-credit invariants are always checked. Numeric claims are
 re-derived with the repository's own code, but only against the exact source
@@ -29,7 +30,8 @@ REASONING = ROOT / "canonical" / "reasoning"
 BILLING = "2026-10-02_GITHUB_ACTIONS_BILLING_ROOT_CAUSE_RECONCILIATION_V1"
 TB4 = "2026-10-02_TB4_ATTAINABILITY_RAISE_ANALYSIS_V1"
 BARS = "2026-10-02_PUBLIC_BAR_MEASURABILITY_AND_SUBSTRATE_FEASIBILITY_V1"
-RECEIPT_IDS = (BILLING, TB4, BARS)
+CENSUS = "2026-10-02_ZERO_COST_SUBSTRATE_ROUTE_CENSUS_V1"
+RECEIPT_IDS = (BILLING, TB4, BARS, CENSUS)
 
 REQUIRED_RECEIPT_KEYS = (
     "schema", "date", "decision_id", "status", "canonical_base_commit",
@@ -265,6 +267,65 @@ class PublicBarReceiptTests(unittest.TestCase):
         self.assertNotRegex(blob, r'"(capability|family)_credit_delta":\s*[1-9]')
         self.assertNotIn('"execution_authority": true', blob)
         self.assertIsNotNone(re.search(r"theory.falsification", blob, re.I))
+
+
+class CensusReceiptTests(unittest.TestCase):
+    def setUp(self):
+        self.receipt = _load(CENSUS)
+        self.premises = {p["id"]: p for p in self.receipt["material_premises"]}
+
+    def test_disqualified_and_candidate_routes_cite_primary_sources(self):
+        p1 = self.premises["P1_GITHUB_MODELS_RETIRED"]
+        self.assertEqual(p1["resolution"], "DISQUALIFIED")
+        self.assertEqual(p1["evidence"]["class"], "OFFICIAL_PRIMARY")
+        self.assertIn("fully retired", p1["evidence"]["excerpt"])
+        for pid in ("P2_WORKERS_AI_PINNED_MODELS", "P3_WORKERS_AI_FREE_ALLOCATION", "P4_OPENROUTER_FREE_TIER"):
+            with self.subTest(premise=pid):
+                self.assertEqual(self.premises[pid]["evidence"]["class"], "OFFICIAL_PRIMARY")
+                self.assertTrue(self.premises[pid]["evidence"]["url"].startswith("https://"))
+
+    def test_throughput_and_cost_table_recompute_from_recorded_constants(self):
+        ev = self.premises["P6_COMPUTED_FREE_TIER_VS_ONE_PASS"]["evidence"]
+        c = ev["constants"]
+        self.assertEqual(c["free_neurons_per_day"], 10000)
+        rows = ev["table"]
+        self.assertEqual(len(rows), len(c["models_neurons_per_million_tokens"]) * len(c["token_mixes"]) * len(c["tokens_per_pass"]))
+        for row in rows:
+            price = c["models_neurons_per_million_tokens"][row["model"]]
+            share = c["token_mixes"][row["mix"]]
+            self.assertAlmostEqual(sum(share.values()), 1.0, places=9)
+            npm = sum(price[k] * share[k] for k in share)
+            per_day = c["free_neurons_per_day"] / npm * 1e6
+            tokens = c["tokens_per_pass"][row["tokens_per_pass_label"]]
+            with self.subTest(model=row["model"], mix=row["mix"], tokens=tokens):
+                self.assertAlmostEqual(row["neurons_per_million_tokens"], npm, delta=0.1)
+                self.assertAlmostEqual(row["free_days_per_pass"], tokens / per_day, delta=0.1)
+                self.assertAlmostEqual(
+                    row["paid_usd_per_pass_estimate"], tokens / 1e6 * npm / 1000 * c["usd_per_1000_neurons"], delta=0.01
+                )
+                self.assertGreater(row["free_days_per_pass"], 30)  # never within a month of the free allocation
+        # the receipt's own prose must quote the computed extremes
+        days = [r["free_days_per_pass"] for r in rows]
+        usd = [r["paid_usd_per_pass_estimate"] for r in rows]
+        fact = self.premises["P6_COMPUTED_FREE_TIER_VS_ONE_PASS"]["fact"]
+        self.assertIn(f"{min(days):,.0f}", fact)
+        self.assertIn(f"{max(days):,.0f}", fact)
+        self.assertIn(f"${min(usd):,.2f}", fact)
+        self.assertIn(f"${max(usd):,.2f}", fact)
+
+    def test_measured_gaps_are_derived_not_asserted(self):
+        fc = self.premises["P7_MEASURED_OPEN_WEIGHTS_GAP_FRONTIERCODE"]["derived"]
+        self.assertEqual(fc["residual_points"], round(fc["bar"] - fc["best_workers_ai_baseline"], 1))
+        tb = self.premises["P8_MEASURED_OPEN_WEIGHTS_GAP_TB4"]["derived"]
+        self.assertEqual(tb["residual_points"], round(tb["bar"] - tb["best_open_baseline"], 1))
+        self.assertGreater(tb["residual_points"], fc["residual_points"])
+
+    def test_non_comparable_evidence_is_excluded_and_dev_protocol_forbids_frozen_cases(self):
+        self.assertIn("NOT used as Terminal-Bench 4.0 evidence", self.premises["P9_EXCLUDED_NON_COMPARABLE_EVIDENCE"]["fact"])
+        text = json.dumps(self.receipt["proposed_stage_gate_for_owner_reconciliation_not_adopted"])
+        self.assertIn("non-frozen development tasks", text)
+        self.assertIn("S2 (only if projected uplift", text)
+        self.assertEqual(self.receipt["incremental_spend_usd"], 0)
 
 
 if __name__ == "__main__":
