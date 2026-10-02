@@ -111,12 +111,27 @@ def score_results(
         by_id[cid]=row
     if set(by_id)!=set(selected):
         raise ValueError("result case IDs must exactly match frozen sample")
+    invalidators=[
+        cid for cid in selected
+        if by_id[cid].get("scorer_invalidated") is True
+    ]
+    if invalidators:
+        return {
+          "schema":"BRAIN_SHARDED_FINITE_POPULATION_VERDICT_V1",
+          "status":"INVALID_SCORER",
+          "population_commitment":manifest["population_commitment"],
+          "invalidating_case_ids":sorted(invalidators),
+          "pass_terminal_rate_lower_bound":False,
+          "rule":"GLOBAL_SCORER_IDENTITY_OR_SEMANTIC_INVALIDATION_INVALIDATES_WAVE__IT_IS_NOT_COUNTED_AS_A_CASE_FAILURE",
+        }
+
     successes=0
     normalized=[]
     for cid in selected:
         row=by_id[cid]
-        # Only an explicit machine-oracle pass counts. Everything else is a failure.
-        passed=row.get("oracle_pass") is True and row.get("scorer_invalidated") is not True
+        # Only an explicit machine-oracle pass counts. Every case-local execution
+        # problem is conservatively a failure; global scorer invalidation was handled above.
+        passed=row.get("oracle_pass") is True
         successes += int(passed)
         normalized.append({
           "case_id":cid,
