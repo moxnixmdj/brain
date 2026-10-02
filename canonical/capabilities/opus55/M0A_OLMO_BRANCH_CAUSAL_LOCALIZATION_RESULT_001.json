@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_RESULT_V1",
+  "date": "2026-10-02",
+  "status": "DEV_CAUSAL_LOCALIZATION_PASS__MATERIAL_MLP_BRANCHES_FOUND__ZERO_CAPABILITY_CREDIT",
+  "protocol": "canonical/evaluation/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_V1.json",
+  "parent_result": "canonical/capabilities/opus55/M0A_OLMO_LAYER_CAUSAL_LOCALIZATION_RESULT_001.json",
+  "donor": {
+    "repository": "allenai/OLMo-2-0425-1B",
+    "resolved_hf_sha": "a1847dff35000b4271fa70afc5db10fd29fedbdf"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 465,
+    "merged_commit": "51c38600d6802afb23703e4371d3dd5b1b9a3aa8",
+    "workflow_run_id": 36946100181,
+    "job_id": 110648468741,
+    "conclusion": "success"
+  },
+  "baseline": {
+    "correct_preference_count": 6,
+    "total": 7,
+    "accuracy": 0.8571428571428571,
+    "mean_margin": 0.6499526791651822,
+    "known_failure": "DEV_FORMER_LATTER_001"
+  },
+  "material_rule": "BASELINE_MEAN_MARGIN_MINUS_ABLATED_MEAN_MARGIN_GE_0_10_OR_ANY_BASELINE_CORRECT_CASE_FLIPS_WRONG",
+  "material_branches": [
+    {
+      "layer": 1,
+      "branch": "MLP_OUTPUT",
+      "mean_margin_loss": 0.3139805821316178,
+      "ablated_correct_preference_count": 7,
+      "baseline_correct_flips_wrong": []
+    },
+    {
+      "layer": 11,
+      "branch": "MLP_OUTPUT",
+      "mean_margin_loss": 0.12810143179706723,
+      "ablated_correct_preference_count": 6,
+      "baseline_correct_flips_wrong": []
+    }
+  ],
+  "deleted_nonmaterial_branches": [
+    "L1_SELF_ATTENTION_OUTPUT",
+    "L3_SELF_ATTENTION_OUTPUT",
+    "L3_MLP_OUTPUT",
+    "L4_SELF_ATTENTION_OUTPUT",
+    "L4_MLP_OUTPUT",
+    "L6_SELF_ATTENTION_OUTPUT",
+    "L6_MLP_OUTPUT",
+    "L11_SELF_ATTENTION_OUTPUT"
+  ],
+  "interpretation": [
+    "CURRENT_DEV_CONTEXTUAL_SIGNAL_CAUSAL_SEARCH_IS_NARROWED_TO_LAYER_1_AND_LAYER_11_MLP_BRANCHES",
+    "ATTENTION_BRANCHES_ARE_NONMATERIAL_UNDER_THE_FROZEN_RULE_ON_THIS_DEV_PROBE",
+    "LAYER_1_MLP_ABLATION_ACCIDENTALLY_CORRECTED_THE_KNOWN_FORMER_LATTER_FAILURE_BUT_THIS_IS_NOT_PROMOTION_EVIDENCE_OR_SEMANTIC_AUTHORITY",
+    "MATERIALITY_ESTABLISHES_CAUSAL_DEPENDENCE_ONLY__NOT_SUFFICIENCY__NOT_OWNERSHIP"
+  ],
+  "next": "LOCALIZE_ONLY_LAYER_1_AND_LAYER_11_MLP_INTERMEDIATE_SUBSPACES_OR_TEST_SPECIALIZED_WHITE_BOX_COMPOSITION__NO_HELDOUT__NO_MATCHED_PARITY_SPEND_BEFORE_POST_V5_RECOMPUTATION",
+  "heldout_exposed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
