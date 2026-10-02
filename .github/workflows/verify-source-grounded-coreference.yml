@@ -1,5 +1,10 @@
 name: Verify source-grounded coreference candidates
 on:
+  pull_request:
+    paths:
+      - canonical/runtime/source_grounded_coreference.py
+      - canonical/tests/test_source_grounded_coreference.py
+      - .github/workflows/verify-source-grounded-coreference.yml
   push:
     branches: [main]
     paths:
