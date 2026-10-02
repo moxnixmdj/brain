@@ -18,6 +18,7 @@ from canonical.runtime import direct_route_terminal_executors_v1 as direct
 from canonical.runtime import cad_t0_route_specific_terminal_executor_v1 as cad
 from canonical.runtime import portfolio_multiplex_terminal_instrumentation_v1 as multiplex
 from canonical.runtime import terminal_wave_launch_authority_reducer_v1 as launch_authority
+from canonical.runtime import terminal_parent_portfolio_runner_v1 as parent_runner
 from canonical.runtime import terminal_parent_portfolio_runner_v1 as parent_portfolio_runner
 
 SCHEMA = "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_LAUNCHER_V1"
@@ -210,16 +211,18 @@ def execute_wave(
     *,
     commitment: str,
     beacon: str,
-    parent_runner: Callable[..., list[Mapping[str, Any]]] | None = None,
-    direct_runner: Callable[..., dict[str, Any]] = direct.execute_direct_route,
-    cad_runner: Callable[..., dict[str, Any]] = cad.execute_cad_route,
     root: Path = Path("."),
 ) -> dict[str, Any]:
-    """Execute each unique direct route once plus all four parent portfolios.
+    """Execute the canonical V2 terminal wave with no injectable executors.
 
-    parent_runner(portfolio, commitment=..., beacon=..., direct_results=...) must
-    return the direct instrumentation receipts emitted by the real frozen parent portfolio.
-    When omitted, the independently verified concrete parent portfolio runner is used.
+    The exact verified direct executors are run once first.  Their results cannot
+    alter any candidate/runtime path; only the exact CAD result is passed to the
+    canonical parent producer because the frozen T0 binding requires deduplicated
+    reuse of that same 128-case CAD population.
+
+    All four parent portfolios are then executed regardless of behavioral pass/
+    fail so started-wave evidence is not selectively truncated.  Results compile
+    only after all direct and parent routes terminate.
     """
     _require_text(commitment, "COMMITMENT")
     _require_text(beacon, "BEACON")
@@ -248,55 +251,80 @@ def execute_wave(
             "terminal_result": False,
         }
 
-    # Execute each unique direct route exactly once first. The real parent runner
-    # reuses the single CAD result for T0 instrumentation rather than executing CAD twice.
+    # Canonical verified direct executors only.  No caller-supplied replacement
+    # can cross this launch boundary.
     direct_results: dict[str, dict[str, Any]] = {}
     for behavior_id in sorted(DIRECT_PORTFOLIOS):
         if behavior_id == CAD_ID:
-            result = cad_runner(commitment=commitment, beacon=beacon)
-        else:
-            result = direct_runner(
-                behavior_id, commitment=commitment, beacon=beacon
-            )
-        direct_results[behavior_id] = result
-
-    if parent_runner is None:
-        parent_runner = parent_portfolio_runner.execute_parent_portfolio
-    parent_receipts = {
-        portfolio: list(
-            parent_runner(
-                portfolio,
+            result = cad.execute_cad_route(
                 commitment=commitment,
                 beacon=beacon,
-                direct_results=direct_results,
+                root=root,
             )
-        )
-        for portfolio in PORTFOLIOS
-    }
-    parent = validate_parent_receipts(
-        parent_receipts, commitment=commitment, beacon=beacon
-    )
+        else:
+            result = direct.execute_direct_route(
+                behavior_id,
+                commitment=commitment,
+                beacon=beacon,
+            )
+        direct_results[behavior_id] = result
 
     direct_failures = sorted(
         behavior_id
         for behavior_id, result in direct_results.items()
         if result.get("pass") is not True or result.get("terminal_result") is not True
     )
-    ok = parent["pass"] and not direct_failures
+
+    # The parent producer is allowed to see only the exact CAD direct result,
+    # never unrelated terminal outcomes.  That is evidence reuse, not runtime
+    # feedback: no candidate path is changed by CAD success/failure.
+    cad_context = {CAD_ID: direct_results[CAD_ID]}
+    parent_receipts: dict[str, list[Mapping[str, Any]]] = {}
+    parent_runner_errors: list[str] = []
+    for portfolio in PORTFOLIOS:
+        try:
+            rows = parent_runner.execute_parent_portfolio(
+                portfolio,
+                commitment=commitment,
+                beacon=beacon,
+                direct_results=cad_context,
+            )
+            parent_receipts[portfolio] = list(rows)
+        except Exception as exc:
+            parent_receipts[portfolio] = []
+            parent_runner_errors.append(
+                portfolio + ":" + type(exc).__name__ + ":" + str(exc)
+            )
+
+    parent = validate_parent_receipts(
+        parent_receipts,
+        commitment=commitment,
+        beacon=beacon,
+    )
+    errors = list(parent_runner_errors)
+    errors.extend(parent.get("errors") or [])
+
+    ok = not direct_failures and parent["pass"] and not parent_runner_errors
     return {
         "schema": SCHEMA,
         "status": "PASS" if ok else "FAIL_CLOSED",
         "pass": ok,
         "plan": plan,
+        "launch_authority": authority,
         "parent_portfolio_receipts": parent_receipts,
         "parent_reduction": parent,
+        "parent_runner_errors": parent_runner_errors,
         "direct_results": direct_results,
         "direct_failures": direct_failures,
         "direct_routes_executed_once": sorted(direct_results),
         "shared_direct_route_duplicate_execution_count": 0,
+        "canonical_parent_runner_only": True,
+        "canonical_direct_runners_only": True,
+        "cad_parent_reuses_exact_direct_result": True,
         "no_case_replacement": True,
         "no_tuning_replay": True,
         "result_to_runtime_feedback_during_wave": False,
+        "errors": sorted(set(errors)),
         "terminal_result": True,
         "capability_credit_delta": "DEFER_TO_TERMINAL_REDUCER",
         "family_credit_delta": "DEFER_TO_TERMINAL_REDUCER",
