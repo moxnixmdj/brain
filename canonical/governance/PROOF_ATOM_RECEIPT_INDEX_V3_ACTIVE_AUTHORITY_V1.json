@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V3_ACTIVE_AUTHORITY_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__CORPUS_BOUND_DISCOVERY_ONLY__ZERO_CREDIT",
+  "objective": "Promote independently verified exact V3 receipt-index bytes as active zero-reality discovery/scheduling authority while preserving V2/PA1 and fail-closed credit rules.",
+  "verified_candidate": {
+    "runtime_path": "canonical/runtime/proof_atom_receipt_index_v3.py",
+    "runtime_git_blob_sha": "fef3cc8dd90ade9e270290321b80b987bd05a560",
+    "tests_path": "canonical/tests/test_proof_atom_receipt_index_v3.py",
+    "tests_git_blob_sha": "f22d1b3b9b8b3e9b1c541200d4130d808f259af7",
+    "governance_path": "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V3.json",
+    "governance_git_blob_sha": "355de86c52c1c4fc7caed7d67efdd4713b55d92d",
+    "basis_runtime_path": "canonical/runtime/canonical_proof_atom_basis_v2.py",
+    "basis_runtime_git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1",
+    "frontier_path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "frontier_git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8",
+    "refinement_overlay_path": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+    "refinement_overlay_git_blob_sha": "898e450c62c06cf6d1a4a3f826a255da9161a229",
+    "verification_path": "canonical/verification/PROOF_ATOM_RECEIPT_INDEX_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "preserve_prior_versions_as_historical_evidence": true,
+  "hard_rules": [
+    "DISCOVERY_AND_SCHEDULING_ONLY",
+    "PA1_ATOM_IDS_REMAIN_CANONICAL",
+    "NO_LITERAL_MATCH_ALONE_GRANTS_PROOF",
+    "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_INDEX",
+    "CURRENT_CORPUS_RESULT_MUST_BIND_EXACT_COMMIT_BASIS_CORPUS_POLICY_AND_INDEX_FINGERPRINT",
+    "REVIEW_QUEUE_PRIORITY_IS_NOT_PROOF",
+    "NO_FRESH_REALITY_AUTHORIZED"
+  ],
+  "next": "EXECUTE_EXACT_VERIFIED_V3_ON_CURRENT_PRIVATE_BRAIN_CORPUS__FREEZE_ONE_CONTENT_ADDRESSED_RESULT__REVIEW_EXISTING_CANDIDATES_ONLY__RUN_ACCEPTANCE_FIXED_POINT_AFTER_EACH_SEPARATELY_VERIFIED_FACT",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
