@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__PENDING_STAGE_C_REVOKED__NO_CREDIT",
+  "status": "ACTIVE__ATTAINABILITY_INDEPENDENT_FAIL_CLOSED__PENDING_STAGE_C_REVOKED__NO_CREDIT",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
-      "id": "VERIFY_TB4_ATTAINABILITY_CUT_INDEPENDENTLY",
-      "action_class": "VERIFY_GATE",
-      "effect": "PROVES",
+      "id": "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
       "critical_path": true,
       "new_reality_units": 0,
       "target_predicates": [
@@ -15,11 +15,11 @@
       ],
       "preconditions": [
         {
-          "id": "CANONICAL_ATTAINABILITY_ARITHMETIC_PASS",
+          "id": "TB4_ATTAINABILITY_INDEPENDENT_PASS__UPPER_180_LT_220",
           "satisfied": true
         }
       ],
-      "notes": "Independent replay only. Current upper bound is 180 versus 220 required; no benchmark case execution is authorized while this cut holds."
+      "notes": "Current score route is mathematically impossible. Search only admissible route, carrier, protocol-equivalence, or preexisting creditability changes that can raise the machine-verified upper bound to at least 220 before any benchmark execution."
     },
     {
       "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
@@ -42,8 +42,14 @@
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
         "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
       ],
-      "preconditions": [],
-      "notes": "Search only existing/public admissible evidence for universal, exhaustive, absolute-ceiling or bound-dominance witnesses before any matched case exposure."
+      "preconditions": [
+        {
+          "id": "TYPED_WITNESS_INDEX_OR_DIRECT_OBJECTIVE_GATE_INPUT_CHANGED_SINCE_LAST_SATURATION",
+          "satisfied": false
+        }
+      ],
+      "notes": "Current typed witness index is saturated with zero immediate full-protocol closures. Do not repeat proof search until the witness-index blob or an admissible direct-objective gate receipt changes. Direct-objective replacement routes remain separate and may advance after exact-byte revalidation plus terminal evidence.",
+      "saturation_receipt": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V1.json"
     },
     {
       "id": "BIND_SHARED_PUBLIC_BENCHMARK_EXECUTION_ABI",
@@ -121,9 +127,10 @@
     "date": "2026-10-02",
     "rank24": "CONTAMINATED_POST_STAGE_B__NO_STAGE_C__NO_REPLAY",
     "rank25": "INELIGIBLE_PREEXPOSURE__PRIOR_RUNNER_EXPOSURE",
-    "rank26": "STAGE_B_PASS__STAGE_C_BATCH_REVOKED_BEFORE_EXECUTION_BY_GLOBAL_ATTAINABILITY_CUT",
+    "rank26": "STAGE_B_PASS__STAGE_C_BATCH_REVOKED_BEFORE_EXECUTION_BY_INDEPENDENT_ATTAINABILITY_CUT",
     "stage_b_receipt": "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_STAGE_B_VERIFICATION_V1.json",
-    "stage_c_batch5_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json"
+    "stage_c_batch5_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json",
+    "attainability_verification": "verification-capsule-runner PR854__RUN36998571400__JOB110810813480__PASS"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -137,7 +144,7 @@
   },
   "attainability_cut": {
     "route": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
-    "state": "IMPOSSIBLE_PENDING_INDEPENDENT_REPLAY",
+    "state": "INDEPENDENT_PASS__IMPOSSIBLE",
     "maximum_attainable_successes": 180,
     "required_successes": 220,
     "reality_execution_authorized": false
