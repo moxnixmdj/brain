@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_DIRECT_SURFACE_SCOPE_RELATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__FAIL_CLOSED_SCOPE_BRIDGE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove that V5 is a superset carrier for the two unresolved P1 semantics within the exact frozen P1 causal-localization contract role delegated by all three declared direct surfaces, without claiming whole-benchmark dominance or terminal completion.",
+  "compiler": "canonical/runtime/p1_v5_direct_surface_scope_relation_v1.py",
+  "tests": "canonical/tests/test_p1_v5_direct_surface_scope_relation_v1.py",
+  "source_v5": "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json",
+  "declared_p1_direct_surfaces": [
+    "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
+    "T2/RECOVERY_SCOPE_COMPOSITION::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
+  ],
+  "relation_claim": "V5_SUPERSET_OF_UNRESOLVED_SEMANTICS_WITHIN_FROZEN_P1_CONTRACT_ROLE_ON_EACH_DECLARED_SURFACE",
+  "explicit_nonclaims": [
+    "NO_CLAIM_V5_SUPERSETS_FRONTIERCODE_AS_A_WHOLE",
+    "NO_CLAIM_V5_SUPERSETS_CURSORBENCH_AS_A_WHOLE",
+    "NO_CLAIM_V5_SUPERSETS_RECOVERY_SCOPE_COMPOSITION_BEYOND_ITS_P1_ROLE",
+    "NO_PRIVATE_BENCHMARK_SCORE_REPRODUCTION_CLAIM",
+    "NO_ADJACENT_CONTRACT_INHERITANCE",
+    "NO_TERMINAL_SURFACE_PASS_FROM_SYNTHETIC_PREWAVE_EVIDENCE"
+  ],
+  "hard_rules": [
+    "ALL_THREE_DECLARED_SURFACES_MUST_EXPLICITLY_BIND_THE_FROZEN_P1_ROUTE",
+    "FROZEN_P1_REQUIRED_OUTPUT_ORACLE_AND_MUTATION_SETS_MUST_NOT_DRIFT",
+    "CONTRACT_NATIVE_P1_ROUTE_MUST_REMAIN_ZERO_COST_EXECUTABLE_INDEPENDENT_AND_SCOPE_FROZEN",
+    "V5_MUST_COVER_EXPLICIT_SCOPE_DELAYED_INTERACTION_RESCUE_NEGATIVE_CONTROLS_NONIDENTIFIABILITY_AND_HIDDEN_GOLD_ISOLATION",
+    "SYNTHETIC_TERMINAL_SCORE_FIREWALL_MUST_REMAIN_ACTIVE",
+    "BRIDGE_CAN_QUALIFY_A_STRONGER_PROOF_CARRIER_BUT_CANNOT_CLEAR_TERMINAL_QUARANTINE"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V5_AND_THIS_BRIDGE__THEN_FREEZE_THE_MINIMUM_P1_TERMINAL_DIRECT_PROOF_CUT__DO_NOT_REPLAY_FULL_TERMINAL_V3",
+  "terminal_surface_proof_complete": false,
+  "can_clear_p1_scope_quarantine": false,
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
