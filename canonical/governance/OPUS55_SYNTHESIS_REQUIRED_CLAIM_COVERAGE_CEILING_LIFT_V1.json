@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_REQUIRED_CLAIM_COVERAGE_CEILING_LIFT_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_COMPARATOR_ELIMINATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "QUARANTINED_SCOPE_FIREWALL__SOURCE_SCOPE_NOT_PROVED_EXACT_OR_SUPERSET_OF_TARGET_SCOPE__ZERO_CREDIT",
   "objective": "Use the frozen P3 oracle 100_PERCENT_REQUIRED_CLAIM_COVERAGE plus the load-bearing terminal pass to derive a comparator-independent lower bound of Brain-minus-any-admissible-comparator required-claim coverage >= 0. No matched-quality claim is made.",
   "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
   "target_metric": "required_claim_coverage_noninferiority",
@@ -58,7 +58,9 @@
     "NO_MATCHED_QUALITY_BOUND_INFERRED",
     "NO_CREDIT_IF_FROZEN_ORACLE_IS_NOT_EXACTLY_100_PERCENT_REQUIRED_CLAIM_COVERAGE",
     "NO_CREDIT_IF_TERMINAL_SYNTHESIS_RECEIPTS_ARE_NOT_LOAD_BEARING_AND_PASSING",
-    "NO_CREDIT_IF_TARGET_METRIC_DIRECTION_OR_THRESHOLD_CHANGES"
+    "NO_CREDIT_IF_TARGET_METRIC_DIRECTION_OR_THRESHOLD_CHANGES",
+    "NO_CEILING_DOMINANCE_ACTIVATION_WITHOUT_INDEPENDENT_EXACT_OR_SUPERSET_SOURCE_TO_TARGET_SCOPE_RELATION",
+    "GLOBAL_METRIC_UPPER_BOUND_DOES_NOT_TRANSPORT_A_BRAIN_PERFORMANCE_LOWER_BOUND_ACROSS_POPULATIONS"
   ],
   "independent_verification_required": true,
   "new_reality_units_consumed": 0,
@@ -66,5 +68,19 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "scope_firewall": {
+    "source_scope_ref": "brain://P3_EVIDENCE_TO_AUDIENCE_SYNTHESIS_DIRECT/T1_T3_LOAD_BEARING_TERMINAL_OBSERVATIONS",
+    "target_scope_ref": "opus55://COMMUNICATION_AND_SYNTHESIS/FROZEN_MATCHED_SYNTHESIS_PORTFOLIO",
+    "verified_source_to_target_relation": null,
+    "independent_verification": false,
+    "verification_receipt": null,
+    "reason": "A Brain lower bound of 1.0 on the T1/T3 terminal observation population does not establish a Brain lower bound of 1.0 on the distinct frozen matched synthesis portfolio. The metric upper bound 1.0 is global, but the Brain performance lower bound is population-scoped.",
+    "admissible_relations_for_activation": [
+      "EXACT",
+      "SUPERSET"
+    ]
+  },
+  "derived_metric_bounds_status": "NOT_ACTIVATABLE_UNTIL_SCOPE_FIREWALL_PASSES",
+  "next": "PROVE_AN_INDEPENDENT_EXACT_OR_SUPERSET_RELATION_FROM_THE_T1_T3_SOURCE_POPULATION_TO_THE_FROZEN_MATCHED_SYNTHESIS_PORTFOLIO__OTHERWISE_DISCARD_THIS_CEILING_LIFT__DO_NOT_PROMOTE_THE_REQUIRED_CLAIM_COVERAGE_METRIC_BOUND"
 }
