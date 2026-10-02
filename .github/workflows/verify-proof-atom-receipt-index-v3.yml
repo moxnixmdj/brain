@@ -1,0 +1,55 @@
+name: Verify proof atom receipt index v3
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_receipt_index_v3.py"
+      - "canonical/tests/test_proof_atom_receipt_index_v3.py"
+      - "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V3.json"
+      - "canonical/runtime/canonical_proof_atom_basis_v2.py"
+      - "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json"
+      - ".github/workflows/verify-proof-atom-receipt-index-v3.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run V3 receipt index adversarial tests
+        run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v3 -v
+      - name: Execute current corpus-bound 40-atom index
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v3 > proof-atom-receipt-index-v3.json
+          python - <<'PY'
+          import json
+          p=json.load(open("proof-atom-receipt-index-v3.json"))
+          assert p["status"].startswith("PASS")
+          assert p["canonical_atom_count"] == 40
+          assert len(p["basis_manifest_sha256"]) == 64
+          assert len(p["scanned_corpus_manifest_sha256"]) == 64
+          assert len(p["scan_policy_sha256"]) == 64
+          assert len(p["index_fingerprint_sha256"]) == 64
+          assert p["review_queue_length"] == p["atoms_with_candidate_matches"]
+          assert p["new_reality_units_consumed"] == 0
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          print(json.dumps({
+            "canonical_atom_count": p["canonical_atom_count"],
+            "scanned_file_count": p["scanned_file_count"],
+            "candidate_match_count": p["candidate_match_count"],
+            "atoms_with_candidate_matches": p["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches": p["atoms_without_candidate_matches"],
+            "review_queue_length": p["review_queue_length"],
+            "basis_manifest_sha256": p["basis_manifest_sha256"],
+            "scanned_corpus_manifest_sha256": p["scanned_corpus_manifest_sha256"],
+            "index_fingerprint_sha256": p["index_fingerprint_sha256"]
+          }, indent=2, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v3
+          path: proof-atom-receipt-index-v3.json
