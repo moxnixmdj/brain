@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_DUAL_JUDGMENT_CONTROL_ENVELOPE_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__BRAIN_OWNED_OPERATIVE_JUDGMENT_CONTROL__INDEPENDENT_MATERIALITY_VERIFICATION_PENDING__ZERO_CREDIT",
-  "objective": "Collapse the finance and unknown-domain operative-source blockers into one Brain-owned fail-closed judgment-control configuration while treating any model only as a declared general cognition proposal substrate.",
+  "status": "CANDIDATE__PROOF_CARRYING_BRAIN_OWNED_OPERATIVE_JUDGMENT_CONTROL__INDEPENDENT_MATERIALITY_VERIFICATION_PENDING__ZERO_CREDIT",
+  "objective": "Collapse the finance and unknown-domain operative-source blockers into one Brain-owned proof-carrying fail-closed judgment-control configuration; a declared model may propose typed structure but cannot self-assert verification.",
   "operative_runtime": "canonical/runtime/judgment_control_envelope_v1.py",
   "tests": "canonical/tests/test_judgment_control_envelope_v1.py",
   "families": [
@@ -47,13 +47,17 @@
   ],
   "control_contract": {
     "proposal_source_role": "GENERAL_COGNITION_SUBSTRATE",
-    "brain_terminal_authority": true,
-    "forced_conclusion_requires_unique_semantic_identification": true,
+    "caller_verified_boolean_authority": false,
+    "brain_recomputes_semantic_ir": true,
+    "brain_recomputes_explicit_operator_counterfactuals": true,
+    "brain_recomputes_semantic_identifiability": true,
+    "brain_recomputes_finite_identifiability": true,
+    "brain_recomputes_typed_evidence_decision": true,
+    "finance_required_evidence_must_contribute_to_selected_decision": true,
+    "finance_reconciliations_computed_with_exact_decimal_arithmetic": true,
     "unknown_domain_conclusion_requires_resolved_version_space": true,
-    "abstention_requires_nonidentifiability_witness": true,
-    "discriminator_request_requires_identifiability_gap_and_authorization": true,
-    "finance_conclusion_requires_verified_rule_applicability_material_exceptions_and_exact_reconciliation": true,
-    "all_terminal_acts_require_source_traceability_provenance_requirement_coverage_counterexample_coverage_and_contradiction_handling": true
+    "abstention_requires_recomputed_nonidentifiability_or_semantic_unknown": true,
+    "discriminator_must_be_derived_from_recomputed_identifiability_gap": true
   },
   "source_gate_v2_candidate": {
     "benchmark_harness_zero_cost": true,
@@ -72,7 +76,7 @@
     "general_substrate_test_pass": false,
     "incremental_spend_usd": 0
   },
-  "current_source_gate_state": "BLOCKED_PENDING_INDEPENDENT_MATERIALITY_VERIFICATION",
+  "current_source_gate_state": "BLOCKED_PENDING_INDEPENDENT_PROOF_CARRYING_MATERIALITY_VERIFICATION",
   "clean_direct_case_execution_authority": false,
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
@@ -84,7 +88,12 @@
     "NO_UNKNOWN_DOMAIN_DIRECT_LEAF_PASS",
     "NO_OPUS55_PARITY",
     "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_GENERATION",
-    "NO_MODEL_STANDALONE_CAPABILITY_OWNERSHIP"
+    "NO_MODEL_STANDALONE_CAPABILITY_OWNERSHIP",
+    "NO_CALLER_ASSERTED_VERIFICATION_AUTHORITY",
+    "NO_RAW_DOMAIN_SEMANTIC_EXTRACTION_OWNERSHIP",
+    "NO_SOURCE_TRUTH_ORACLE_OWNERSHIP"
   ],
-  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_TEST_BYTES_AND_CONFIGURED_VS_BARE_MATERIALITY__THEN_EVALUATE_SOURCE_GATE_V2__ONLY_AFTER_GATE_PASS_AUTHORIZE_THE_TWO_FROZEN_FINANCE_AND_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES"
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_TEST_CONFIG_AND_DEPENDENCY_BYTES__VERIFY_PROOF_CARRYING_CONFIGURED_VS_BARE_MATERIALITY__THEN_SOURCE_GATE_V2__ONLY_AFTER_GATE_PASS_AUTHORIZE_THE_TWO_FROZEN_FINANCE_AND_TWO_FROZEN_UNKNOWN_DOMAIN_DIRECT_ORACLE_LEAVES",
+  "operative_runtime_blob_sha": "42f5c941597f73597fd327aac0576baaba2dfb05",
+  "tests_blob_sha": "b9b371fffdf4f112d636e6ba794d76080fa63f1f"
 }
