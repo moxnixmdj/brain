@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_SCORER_BLOB__ZERO_TERMINAL_CREDIT",
+  "brain_scorer": "canonical/runtime/hle_strict_reference_scorer.py",
+  "brain_blob_sha": "d30882400982c058f1130b82af790b197767a091",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_mirror_path": "capsules/hle_strict_lower_bound/scorer.py",
+  "public_mirror_blob_sha": "d30882400982c058f1130b82af790b197767a091",
+  "workflow_run_id": 36964439554,
+  "workflow_conclusion": "success",
+  "logical_proof": "canonical/governance/HLE_STRICT_LOWER_BOUND_PROOF_V1.json",
+  "verified": [
+    "EXACT_BRAIN_SCORER_BYTES_EXECUTE_SUCCESSFULLY_ON_PUBLIC_RUNNER",
+    "SELF_TEST_PASS",
+    "STDLIB_MUTATION_REGRESSIONS_PASS",
+    "EXACT_REFERENCE_MATCH_ACCEPTED",
+    "NONIDENTICAL_SEMANTIC_OR_NUMERIC_EQUIVALENCE_CONSERVATIVELY_REJECTED",
+    "MULTIPLE_ANSWER_LINES_FAIL_CLOSED",
+    "MISSING_PREDICTION_COUNTS_WRONG",
+    "OFFICIAL_SCORE_EQUIVALENCE_NOT_CLAIMED"
+  ],
+  "implication": "PAID_HLE_JUDGE_IS_NOT_REQUIRED_IF_STRICT_EXACT_REFERENCE_ACCURACY_ON_THE_SAME_FROZEN_REFERENCE_SET_CLEARS_THE_TARGET_BAR",
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
