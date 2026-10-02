@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PRE_RESULT__POST_FREEZE_UNPREDICTABLE_SEED_POLICY__ZERO_TERMINAL_RESULTS",
+  "authority": [
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json",
+    "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+  ],
+  "population_policy": {
+    "unique_behavioral_obligation_count": 10,
+    "case_slots_per_obligation": 12,
+    "total_case_count": 120,
+    "difficulty_schedule": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "case_id_rule": "<behavior_id>::slot::<00..11>",
+    "seed_rule": "uint64_be(first_8_bytes(SHA256('PROJECT_BRAIN_TERMINAL_V1\\0'+candidate_package_commitment+'\\0'+post_freeze_beacon+'\\0'+case_id)))",
+    "post_freeze_beacon": "GITHUB_ACTIONS_RUN_ID_OF_FIRST_AUTHORIZED_TERMINAL_WAVE",
+    "beacon_known_before_candidate_freeze": false,
+    "replay_for_tuning": false,
+    "replacement": false
+  },
+  "execution": {
+    "independence_unit": "UNIQUE_BEHAVIORAL_OBLIGATION",
+    "parallelism": "ALL_TEN_UNIQUE_OBLIGATIONS_MAY_RUN_IN_PARALLEL",
+    "portfolio_multiplexing": "ONE_BEHAVIOR_RECEIPT_MAY_SATISFY_EVERY_FROZEN_PORTFOLIO_AND_FAMILY_MAPPING_THAT_NAMES_THE_SAME_BEHAVIOR_ID",
+    "candidate_visible": "PUBLIC_TASK_PAYLOAD_ONLY",
+    "oracle_visible_to_candidate": false,
+    "per_case_failure_policy": "ANY_CANDIDATE_EXECUTION_RESOURCE_TIMEOUT_OR_CASE_LOCAL_ERROR_COUNTS_AS_FAILURE__NO_REPLACEMENT",
+    "global_invalidation": "ONLY_PROVEN_EVALUATOR_IDENTITY_OR_SEMANTIC_INVALIDATION_INVALIDATES_THE_AFFECTED_OBLIGATION_WAVE"
+  },
+  "acceptance": {
+    "per_behavior": "12_OF_12_MACHINE_ORACLE_PASS",
+    "mutation_boundary": "PREWAVE_INDEPENDENT_MUTATION_PREFLIGHT_MUST_ALREADY_PASS",
+    "overall": "10_OF_10_BEHAVIORAL_OBLIGATION_RECEIPTS_PASS",
+    "no_named_benchmark_score_inheritance": true
+  },
+  "freeze_requirements": [
+    "CANDIDATE_PACKAGE_BLOB_SET_FROZEN_BEFORE_RUN_ID_EXISTS",
+    "EVALUATOR_AND_ORACLE_BLOB_SET_FROZEN_BEFORE_RUN_ID_EXISTS",
+    "BEHAVIORAL_SCOPE_MAPPING_FROZEN_BEFORE_RUN_ID_EXISTS",
+    "DEPENDENCY_MANIFEST_FROZEN_BEFORE_RUN_ID_EXISTS",
+    "NO_TERMINAL_CASE_CONTENT_GENERATED_BEFORE_AUTHORIZED_RUN"
+  ],
+  "incremental_spend_usd": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
