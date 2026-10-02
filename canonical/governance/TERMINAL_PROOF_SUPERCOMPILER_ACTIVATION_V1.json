@@ -60,5 +60,13 @@
     "public_runner_pr": 639,
     "workflow_run_id": 36964597245,
     "exact_runtime_blob_sha": "d92f37853437e1626d45e79b1da3638d8f943cd4"
+  },
+  "global_residual_partition": {
+    "status": "ACTIVE_INDEPENDENT_PASS__SCHEDULING_ONLY",
+    "activation": "canonical/governance/GLOBAL_RESIDUAL_PROOF_COMPILER_V1.json",
+    "runtime": "canonical/runtime/global_residual_proof_compiler.py",
+    "live_input": "canonical/governance/GLOBAL_RESIDUAL_PROOF_COMPILER_LIVE_INPUT_V1.json",
+    "verification": "canonical/verification/GLOBAL_RESIDUAL_PROOF_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "rule": "WHOLE_FRONTIER_EXTERNAL_OR_UNPROVEN_RESIDUALS_CANNOT_STALL_EXACT_INDEPENDENT_INTERNAL_CLOSURE__SEMANTIC_DEDUP_EXPLICIT_ONLY"
   }
 }
