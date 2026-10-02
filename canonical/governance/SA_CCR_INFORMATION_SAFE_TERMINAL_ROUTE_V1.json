@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PREFLIGHT_PASS__SCOPE_GATE_AND_POST_FREEZE_TERMINAL_POPULATION_PENDING__ZERO_TERMINAL_CREDIT",
+  "status": "INDEPENDENT_PREFLIGHT_AND_SCOPE_GATE_V2_PASS__POST_FREEZE_TERMINAL_POPULATION_PENDING__ZERO_TERMINAL_CREDIT",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "candidate": "canonical/runtime/saccr_credit_information_safe_candidate.py",
   "proof_population": "canonical/runtime/saccr_credit_information_safe_proof.py",
@@ -56,12 +56,15 @@
   ],
   "execution_authority": false,
   "remaining_before_terminal_authority": [
-    "SCOPE_EQUIVALENT_PROOF_GATE_V2_PASS",
     "POST_FREEZE_TERMINAL_POPULATION_BINDING"
   ],
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "scope_equivalent_proof_gate_v2": {
+    "status": "PASS",
+    "receipt": "canonical/verification/SA_CCR_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  }
 }
