@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_M2_OOXML_PACKAGE_TRANSACTION_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_GENERIC_OOXML_PACKAGE_MECHANICS_COMPONENT__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+  "implementation": "canonical/runtime/ooxml_package_transaction.py",
+  "implementation_blob_sha": "970be62854c918b306ae3f62989009bfbd0e8fc7",
+  "tests": "canonical/tests/test_ooxml_package_transaction.py",
+  "tests_blob_sha": "76a9f9f859f4f5284169eef9606704dd6765d514",
+  "workflow": ".github/workflows/verify-m2-ooxml-package-transaction.yml",
+  "workflow_blob_sha": "4f4eedb3a2d84fa037eeadaa6243970b7027a129",
+  "independent_verification": {
+    "workflow_run_id": 36951722007,
+    "conclusion": "success",
+    "verified_branch_head": "bdfb509b127b00a510d595228d306a78f2fc647a",
+    "exact_blob_match_on_main": true,
+    "installation_main_commits": [
+      "f3415f18935a2fb5a850121b2d6904dc5735e765",
+      "3ddf7ecef7694775767cf2fac9dc2e2005e27581",
+      "f8d3c2b4200284b578ac80d3fb11b8fa472e7e68"
+    ]
+  },
+  "owned_scope": [
+    "EXACT_PREDECLARED_XML_ELEMENT_TEXT_MUTATION_BY_CHILD_INDEX_PATH",
+    "EXACT_PREDECLARED_XML_ATTRIBUTE_MUTATION_BY_CHILD_INDEX_PATH",
+    "EXACT_PREDECLARED_XML_SUBTREE_REPLACEMENT_BY_CHILD_INDEX_PATH",
+    "WHOLE_PACKAGE_MEMBER_REPLACE_ADD_DELETE_WITH_OPTIONAL_SHA256_PRECONDITIONS",
+    "ATOMIC_MULTI_PART_TRANSACTION_ACROSS_DOCX_XLSX_PPTX_STYLE_ZIP_PACKAGES",
+    "ALL_UNDECLARED_PACKAGE_MEMBERS_PRESERVED_BYTE_FOR_BYTE",
+    "CHANGED_XML_AND_RELS_PARTS_MUST_PARSE_AFTER_MUTATION",
+    "ROUNDTRIP_PACKAGE_BYTES_MUST_MATCH_PLANNED_TRANSACTION"
+  ],
+  "exclusions": [
+    "NO_HIGH_LEVEL_USER_REQUEST_TO_LOW_LEVEL_PATCH_INFERENCE",
+    "NO_VISUAL_LAYOUT_EQUIVALENCE_CLAIM",
+    "NO_SEMANTIC_DOCUMENT_UNDERSTANDING",
+    "NO_AUTOMATIC_RELATIONSHIP_OR_CONTENT_TYPE_SEMANTICS",
+    "NO_WHOLE_M2_OR_FAMILY_CAPABILITY_CREDIT"
+  ],
+  "composition_consequence": "NATIVE_OOXML_EDIT_EXECUTION_IS_NO_LONGER_AN_INDEPENDENT_M2_MECHANISM_GAP_WHEN_AN_EXACT_LOW_LEVEL_PATCH_PLAN_IS_AVAILABLE__HIGH_LEVEL_PATCH_PLAN_SEMANTICS_ROUTE_TO_SHARED_M0_M4_AND_TYPED_HYPOTHESIS_PLANNING",
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
