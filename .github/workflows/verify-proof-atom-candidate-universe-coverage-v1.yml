@@ -1,0 +1,47 @@
+name: Verify proof atom candidate-universe coverage v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/proof_atom_candidate_universe_coverage_v1.py"
+      - "canonical/tests/test_proof_atom_candidate_universe_coverage_v1.py"
+      - "canonical/governance/PROOF_ATOM_CANDIDATE_UNIVERSE_COVERAGE_V1.json"
+      - "canonical/runtime/proof_atom_receipt_index_v2.py"
+      - ".github/workflows/verify-proof-atom-candidate-universe-coverage-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python -m unittest canonical.tests.test_proof_atom_candidate_universe_coverage_v1 -v
+      - name: Audit live candidate-universe coverage
+        run: |
+          python canonical/runtime/proof_atom_candidate_universe_coverage_v1.py > /tmp/proof_atom_candidate_universe_coverage_v1.json
+          python -m json.tool /tmp/proof_atom_candidate_universe_coverage_v1.json >/dev/null
+          python - <<'PY'
+          import json
+          p="/tmp/proof_atom_candidate_universe_coverage_v1.json"
+          d=json.load(open(p,encoding="utf-8"))
+          assert str(d.get("status","")).startswith("PASS"), d
+          keys=[
+              "status",
+              "configured_candidate_count",
+              "scan_gap_count",
+              "oversized_supported_text_count",
+              "unsupported_suffix_count",
+              "explicit_provenance_exclusion_count",
+              "negative_literal_exhaustive_within_configured_candidate_set",
+              "negative_literal_exhaustive_over_supported_text_in_search_roots",
+              "negative_literal_exhaustive_over_all_nonexcluded_files_in_search_roots",
+              "rows_manifest_sha256",
+          ]
+          print(json.dumps({k:d.get(k) for k in keys},sort_keys=True))
+          PY
