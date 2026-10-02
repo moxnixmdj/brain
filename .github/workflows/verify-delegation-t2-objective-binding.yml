@@ -1,0 +1,29 @@
+name: Verify delegation T2 objective binding
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json
+      - canonical/runtime/delegation_t2_objective_binding_validator.py
+      - canonical/tests/test_delegation_t2_objective_binding_validator.py
+      - canonical/runtime/delegation_whole_scope_candidate_v2.py
+      - canonical/runtime/delegation_whole_scope_proof_v2.py
+      - canonical/runtime/delegation_structural_variety_proof_v3.py
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+      - canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - .github/workflows/verify-delegation-t2-objective-binding.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_delegation_t2_objective_binding_validator
+      - run: python canonical/runtime/delegation_t2_objective_binding_validator.py .
