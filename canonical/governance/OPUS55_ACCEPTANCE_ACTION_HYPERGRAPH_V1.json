@@ -5,6 +5,69 @@
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
+      "id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "preconditions": [
+        {
+          "id": "PROOF_COMPRESSION_KERNELS_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        }
+      ],
+      "notes": "Before generic stronger-proof search or exact comparator work, normalize candidate and target scopes into explicit atoms/bounds and derive only verified implications. No semantic-equivalence claim may be invented by the algebra."
+    },
+    {
+      "id": "RUN_EPISTEMIC_CLOSURE_DIRECT_JUDGMENT_SUBTRACTION",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "preconditions": [
+        {
+          "id": "EXPLICIT_FINITE_WORLD_OR_HYPOTHESIS_SET_AVAILABLE",
+          "satisfied": false
+        }
+      ],
+      "notes": "Subtract exact identifiability, safe unanimity, and minimum-discriminator logic before acquiring a broad judgment source. This action cannot prove semantic interpretation or cross-domain transfer by itself."
+    },
+    {
+      "id": "RUN_COMPOSITION_COMPONENT_PROOF_SLICER",
+      "action_class": "DEPENDENCY_REDUCE",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "preconditions": [
+        {
+          "id": "FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT",
+          "satisfied": false
+        }
+      ],
+      "notes": "Slice only exact load-bearing component interfaces used by the frozen composition claim; accept only independently verified acceptance-scoped claim-bound receipts. Never inherit whole-family credit by analogy."
+    },
+    {
       "id": "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
       "action_class": "ROUTE_BIND",
       "effect": "UNLOCKS",
@@ -219,7 +282,9 @@
     "tool_learning_success_route_noninferior": "CLOSED_BY_INDEPENDENT_ABSOLUTE_CEILING_WITNESS__REMOVED_FROM_MATCHED_PROOF_SEARCH_TARGETS",
     "delegation_terminal_success_noninferior": "CLOSED_BY_INDEPENDENT_TEMPORAL_ABSOLUTE_CEILING_WITNESS__REMOVED_FROM_MATCHED_PROOF_SEARCH_TARGETS",
     "delegation_transport_verification": "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "delegation_transmutation_verification": "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "delegation_transmutation_verification": "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "proof_compression_kernels": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_PRECEDES_COMPARATOR_JUDGMENT_AND_COMPOSITION_WORK",
+    "proof_compression_verification": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",

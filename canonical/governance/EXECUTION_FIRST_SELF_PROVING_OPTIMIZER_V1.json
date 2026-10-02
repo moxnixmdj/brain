@@ -50,6 +50,9 @@
     "DEDUCTIVE_CLOSURE",
     "PROOF_MODE_TRANSMUTATION",
     "VERIFIED_ENVELOPE_AND_IMPLICATION_CLOSURE",
+    "NORMALIZED_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "EPISTEMIC_CLOSURE_AND_MINIMUM_DISCRIMINATOR",
+    "LOAD_BEARING_COMPONENT_PROOF_SLICING",
     "COUNTERFACTUAL_TERMINAL_COMPILATION",
     "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
     "EXACT_MINIMUM_UNBLOCK_CUT",
@@ -79,6 +82,9 @@
     "STATIC_INCOMPATIBILITY",
     "LICENSE_DEPENDENCY_DONOR_AND_AUTHORITY_CHECKS",
     "DETERMINISTIC_AND_FORMAL_DEDUCTIVE_CLOSURE",
+    "NORMALIZED_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "EPISTEMIC_IDENTIFIABILITY_AND_MINIMUM_DISCRIMINATOR",
+    "LOAD_BEARING_COMPONENT_PROOF_SLICING",
     "DETERMINISTIC_COUNTEREXAMPLES",
     "HISTORICAL_SPENT_CASES",
     "ADVERSARIAL_SPENT_CASES",
@@ -171,7 +177,9 @@
     "current_existing_evidence_priority": "canonical/capabilities/opus55/FREECAD_SPRING_CLIP_RANK22_STAGE_C_EXECUTION_RECONCILIATION_V1.json",
     "proof_mode_transmutation_required": true,
     "minimum_internal_unblock_cut_required": true,
-    "external_comparator_irreducibility_must_be_proven_relative_to_frozen_routes": true
+    "external_comparator_irreducibility_must_be_proven_relative_to_frozen_routes": true,
+    "proof_compression_kernels_required": true,
+    "proof_compression_activation": "canonical/governance/PROOF_COMPRESSION_KERNELS_ACTIVATION_V1.json"
   },
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
@@ -294,5 +302,15 @@
       "exact_blob_identity": true,
       "test_count": 12
     }
+  },
+  "proof_compression_kernels": {
+    "status": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_ONLY",
+    "activation": "canonical/governance/PROOF_COMPRESSION_KERNELS_ACTIVATION_V1.json",
+    "verification": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "protocol_implication_scope_algebra": "canonical/runtime/protocol_implication_scope_algebra_v1.py",
+    "epistemic_closure_minimum_discriminator": "canonical/runtime/epistemic_closure_kernel_v1.py",
+    "composition_component_proof_slicer": "canonical/runtime/composition_component_proof_slicer_v1.py",
+    "ordering_rule": "RUN_BEFORE_NEW_COMPARATOR_JUDGMENT_OR_COMPOSITION_REALITY_WHEN_APPLICABLE",
+    "terminal_credit_from_kernels_alone": false
   }
 }
