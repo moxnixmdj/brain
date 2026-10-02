@@ -41,13 +41,12 @@ REQUIRED_MUTATIONS = {
     "DROP_PROVENANCE_OR_DEPENDENCY_EDGE",
 }
 REQUIRED_DEPS = (
-    "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py",
-    "canonical/runtime/trajectory_failure_information_safe_proof_v2.py",
-    "canonical/verification/TRAJECTORY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/CONTRACT_NATIVE_PROOF_INFORMATION_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
-    "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
-    "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
 )
 
 
@@ -93,6 +92,22 @@ def evaluate(root: Path) -> dict:
             if not _manifest_has_route(manifest, portfolio, surface):
                 errors.append(f"{portfolio}_{surface}_P1_ROUTE_NOT_BOUND")
 
+            p = ((manifest.get("portfolios") or {}).get(portfolio) or {})
+            surface_row = next((row for row in (p.get("surfaces") or []) if row.get("id") == surface), None)
+            route_specific = ((surface_row or {}).get("route_specific_evaluators") or {}).get(REQUIRED_ROUTE) or {}
+            if (surface_row or {}).get("route_specific_bindings_take_precedence") is not True:
+                errors.append(f"{portfolio}_{surface}_P1_ROUTE_SPECIFIC_PRECEDENCE_MISSING")
+            if route_specific.get("binding") != BINDING:
+                errors.append(f"{portfolio}_{surface}_P1_V4_BINDING_MISSING")
+            if route_specific.get("candidate") != "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py":
+                errors.append(f"{portfolio}_{surface}_P1_V4_CANDIDATE_MISSING")
+            if route_specific.get("preflight_population") != "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py":
+                errors.append(f"{portfolio}_{surface}_P1_V4_PROOF_MISSING")
+            if route_specific.get("independent_preflight") != "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json":
+                errors.append(f"{portfolio}_{surface}_P1_V4_RECEIPT_MISSING")
+            if route_specific.get("generic_contract_native_evaluator_superseded_for_this_route") is not True:
+                errors.append(f"{portfolio}_{surface}_GENERIC_P1_EVALUATOR_NOT_SUPERSEDED")
+
     visible = set(binding.get("candidate_visible_information") or [])
     forbidden = set(binding.get("candidate_must_not_receive") or [])
     if visible & FORBIDDEN_VISIBLE:
@@ -105,7 +120,7 @@ def evaluate(root: Path) -> dict:
         errors.append("CHECK_SET")
     if set(ev.get("required_mutations") or []) != REQUIRED_MUTATIONS:
         errors.append("MUTATION_SET")
-    if ev.get("role_of_bounded_suite") != "INFORMATION_BOUNDARY_NONIDENTIFIABILITY_AND_COUNTERFACTUAL_REPAIR_PREFLIGHT_ONLY__NOT_WHOLE_DOMAIN_TERMINAL_SCORE":
+    if ev.get("role_of_bounded_suite") != "INFORMATION_BOUNDARY_CAUSAL_STRUCTURE_NONIDENTIFIABILITY_AND_DERIVED_REPAIR_TARGET_PREFLIGHT_ONLY__NOT_WHOLE_DOMAIN_TERMINAL_SCORE":
         errors.append("BOUNDED_SUITE_SCOPE_OVERCLAIM")
     if ev.get("mutation_acceptance") != "ALL_APPLICABLE_LOAD_BEARING_P1_MUTATIONS_MUST_BE_REJECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE":
         errors.append("MUTATION_ACCEPTANCE")
