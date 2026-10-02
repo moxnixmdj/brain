@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_SOURCE_STRUCTURE_ANTISHORTCUT_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REPAIRED_CAD_CANDIDATE_SURVIVES_RENDER_EQUIVALENT_SOURCE_STRUCTURE_MUTATIONS__ZERO_TERMINAL_CASES_CONSUMED",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/cad_t0_route_specific_candidate_v1.py": "aa32750b220a023617938b7be9476f6b3aac6704",
+    "canonical/tests/test_cad_t0_source_structure_antishortcut_repair_v1.py": "8222cf83a7476cd453e06865b8e3aaff8a70b5db"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 721,
+    "head_sha": "72ad212990af3bd16f44d32b2c356b9e2793da8c",
+    "workflow_run_id": 36971680252,
+    "workflow_job_id": 110726770752,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_BRAIN_CANDIDATE_BLOB_MATCH",
+    "EXACT_STRENGTHENED_ANTISHORTCUT_TEST_BLOB_MATCH",
+    "RENDER_EQUIVALENT_TEXT_NODE_SPLIT_PRESERVES_ROWS",
+    "RENDER_EQUIVALENT_TEXT_NODE_SPLIT_PRESERVES_SEMANTIC_PARSE",
+    "NUMERIC_TOKEN_SPLIT_PRESERVES_PARSE",
+    "DOM_SOURCE_ORDER_DOES_NOT_OVERRIDE_RENDERED_X_ORDER",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "supersedes_falsification_for_candidate_blob": "canonical/verification/CAD_T0_SOURCE_STRUCTURE_ANTISHORTCUT_FALSIFICATION_20261002_V1.json",
+  "supersession_scope": "CURRENT_CANDIDATE_BLOB_ONLY__OLD_FALSIFICATION_REMAINS_VALID_FOR_OLD_BLOB",
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
