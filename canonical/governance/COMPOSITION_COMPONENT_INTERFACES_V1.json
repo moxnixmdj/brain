@@ -1,0 +1,160 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_INTERFACE_MATERIALIZER_V1",
+  "status": "MATERIALIZED_LITERAL_COMPONENT_INTERFACES__ZERO_CREDIT",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "source_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "family": "MULTI_CAPABILITY_COMPOSITION",
+    "proof_mode": "MATCHED_INTERACTION_AND_COMPOSITION_PROTOCOL"
+  },
+  "interfaces": [
+    {
+      "component_id": "LITERAL_ROLE::ARTIFACT_CREATION",
+      "interface_id": "FROZEN_COMPOSITION_USE::ARTIFACT_CREATION",
+      "role_literal": "artifact creation",
+      "source_dimensions": [
+        "research+tool use+artifact creation"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::ARTIFACT_CREATION"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::ARTIFACT_PRODUCTION",
+      "interface_id": "FROZEN_COMPOSITION_USE::ARTIFACT_PRODUCTION",
+      "role_literal": "artifact production",
+      "source_dimensions": [
+        "delegation+evidence synthesis+artifact production"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::ARTIFACT_PRODUCTION"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::BROWSER_COMPUTER_ACTION",
+      "interface_id": "FROZEN_COMPOSITION_USE::BROWSER_COMPUTER_ACTION",
+      "role_literal": "browser/computer action",
+      "source_dimensions": [
+        "browser/computer action+memory+recovery"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::BROWSER_COMPUTER_ACTION"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::CODING",
+      "interface_id": "FROZEN_COMPOSITION_USE::CODING",
+      "role_literal": "coding",
+      "source_dimensions": [
+        "coding+debugging+tool discovery"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::CODING"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::DEBUGGING",
+      "interface_id": "FROZEN_COMPOSITION_USE::DEBUGGING",
+      "role_literal": "debugging",
+      "source_dimensions": [
+        "coding+debugging+tool discovery"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::DEBUGGING"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::DELEGATION",
+      "interface_id": "FROZEN_COMPOSITION_USE::DELEGATION",
+      "role_literal": "delegation",
+      "source_dimensions": [
+        "delegation+evidence synthesis+artifact production"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::DELEGATION"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::EVIDENCE_SYNTHESIS",
+      "interface_id": "FROZEN_COMPOSITION_USE::EVIDENCE_SYNTHESIS",
+      "role_literal": "evidence synthesis",
+      "source_dimensions": [
+        "delegation+evidence synthesis+artifact production"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::EVIDENCE_SYNTHESIS"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::MEMORY",
+      "interface_id": "FROZEN_COMPOSITION_USE::MEMORY",
+      "role_literal": "memory",
+      "source_dimensions": [
+        "browser/computer action+memory+recovery"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::MEMORY"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::RECOVERY",
+      "interface_id": "FROZEN_COMPOSITION_USE::RECOVERY",
+      "role_literal": "recovery",
+      "source_dimensions": [
+        "browser/computer action+memory+recovery"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::RECOVERY"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::RESEARCH",
+      "interface_id": "FROZEN_COMPOSITION_USE::RESEARCH",
+      "role_literal": "research",
+      "source_dimensions": [
+        "research+tool use+artifact creation"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::RESEARCH"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::TOOL_DISCOVERY",
+      "interface_id": "FROZEN_COMPOSITION_USE::TOOL_DISCOVERY",
+      "role_literal": "tool discovery",
+      "source_dimensions": [
+        "coding+debugging+tool discovery"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::TOOL_DISCOVERY"
+      ]
+    },
+    {
+      "component_id": "LITERAL_ROLE::TOOL_USE",
+      "interface_id": "FROZEN_COMPOSITION_USE::TOOL_USE",
+      "role_literal": "tool use",
+      "source_dimensions": [
+        "research+tool use+artifact creation"
+      ],
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF_FOR_EXACT_ROLE::TOOL_USE"
+      ]
+    }
+  ],
+  "interaction_requirements": [
+    "cross-capability state handoff and rollback"
+  ],
+  "rules": [
+    "PLUS_DELIMITED_LITERALS_ONLY__NO_SEMANTIC_COMPONENT_INFERENCE",
+    "NON_PLUS_DIMENSIONS_REMAIN_INTERACTION_REQUIREMENTS",
+    "NO_LITERAL_SYNONYM_MERGE",
+    "NO_FAMILY_MAPPING_OR_PROOF_INHERITANCE",
+    "INTERFACE_MATERIALIZATION_ALONE_GRANTS_ZERO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

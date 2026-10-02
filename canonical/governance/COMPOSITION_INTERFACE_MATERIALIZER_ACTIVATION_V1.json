@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_INTERFACE_MATERIALIZER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Materialize exact isolated component-role interfaces from the frozen composition protocol using only explicit plus-delimited literals, leaving interaction-only clauses separate.",
+  "runtime": "canonical/runtime/composition_interface_materializer_v1.py",
+  "tests": "canonical/tests/test_composition_interface_materializer_v1.py",
+  "output": "canonical/governance/COMPOSITION_COMPONENT_INTERFACES_V1.json",
+  "source_protocol": {
+    "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+  },
+  "hard_rules": [
+    "NO_SEMANTIC_SYNONYM_MERGE",
+    "NO_FAMILY_MAPPING",
+    "NO_COMPONENT_PROOF_INHERITANCE",
+    "NON_PLUS_DIMENSION_REMAINS_INTERACTION_ONLY",
+    "OUTPUT_MUST_EQUAL_DETERMINISTIC_RUNTIME_MATERIALIZATION_BYTE_FOR_SEMANTIC_JSON_CONTENT",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT_MAY_BECOME_TRUE"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
