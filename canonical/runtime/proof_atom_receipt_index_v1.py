@@ -1,4 +1,4 @@
-"""Content-addressed candidate receipt index for canonical proof atoms.
+"""Content-addressed candidate receipt index for canonical proof atoms.\n\nVerification trigger: current 40-atom basis replay on 2026-10-02.
 
 This is discovery only. Exact proposition occurrence identifies a file worth explicit
 semantic review; it is never acceptance evidence by itself.
