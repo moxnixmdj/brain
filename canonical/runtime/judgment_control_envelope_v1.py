@@ -116,9 +116,17 @@ def _evaluate_bundle(bundle: Any, *, mode: str) -> dict[str, Any]:
             "finite_identifiability": {"status": "FAIL_CLOSED"},
         }
 
+    if not _nonempty(bundle.get("source_text")):
+        errors.append("SOURCE_TEXT_MISSING")
     semantic_ir = compile_semantic_ir(bundle.get("semantic_contract", {}))
     if semantic_ir.get("status") == "FAIL_CLOSED":
         errors.append("SEMANTIC_IR_FAIL_CLOSED")
+    semantic_content_count = sum(
+        len(semantic_ir.get(k) or [])
+        for k in ("entities", "facts", "relations", "templates", "ambiguities", "conflicts")
+    )
+    if semantic_content_count == 0:
+        errors.append("SEMANTIC_IR_CONTENT_EMPTY")
 
     try:
         operator = compile_explicit_operator_contract(
