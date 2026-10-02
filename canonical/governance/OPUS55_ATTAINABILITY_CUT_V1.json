@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ATTAINABILITY_CUT_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__INDEPENDENT_PUBLIC_RUNNER_PASS__REALITY_ACTION_REQUIRES_ATTAINABILITY_OPEN",
+  "status": "ACTIVE_FAIL_CLOSED__SPECIALIZED_TB4_EVIDENCE_ADAPTER__GENERAL_DECISION_AUTHORITY_IS_ACCEPTANCE_BOUND_COMPILER_V1",
   "runtime": "canonical/runtime/attainability_cut_compiler_v1.py",
   "tests": "canonical/tests/test_attainability_cut_compiler_v1.py",
   "evidence_manifest": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
@@ -31,5 +31,14 @@
     "workflow_run_id": 36998571400,
     "workflow_job_id": 110810813480,
     "conclusion": "success"
+  },
+  "generalized_by": "canonical/governance/ACCEPTANCE_BOUND_COMPILER_V1.json",
+  "carrier_independent_extension": {
+    "manifest": "canonical/governance/TB4_CARRIER_INDEPENDENT_BOUND_MANIFEST_V1.json",
+    "generic_input": "canonical/governance/TB4_CARRIER_INDEPENDENT_ACCEPTANCE_BOUND_INPUT_V1.json",
+    "generic_verdict": "canonical/verification/TB4_CARRIER_INDEPENDENT_ACCEPTANCE_BOUND_VERDICT_20261002_V1.json",
+    "maximum_successes": 215,
+    "required_successes": 220,
+    "decision": "FAIL_LOCKED"
   }
 }
