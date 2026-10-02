@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__8_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__7_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -273,7 +273,10 @@
         "objective_oracle_live_input": "canonical/governance/OBJECTIVE_ORACLE_DOMINANCE_LIVE_INPUT_V1.json",
         "independent_verification": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
         "terminal_credit": "ZERO_UNTIL_TERMINAL_WAVE"
-      }
+      },
+      "terminal_route": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "objective_dominance_verification": "canonical/verification/DELEGATION_OBJECTIVE_DOMINANCE_GATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "weaker_comparator_dependency_deleted": "EXACT_OPUS_5_5_MATCHED_STATISTICAL_COMPARATOR"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -318,7 +321,7 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 8,
+  "admissible_frozen_terminal_route_count": 7,
   "execution_authority": false,
   "next": "CLOSE_CAD_CLEAN_REFREEZE_BROWSER_TOOL_DISCOVERY_RESEARCH_AND_TRAJECTORY_DIRECT_OBJECTIVE_ROUTES__NO_TERMINAL_WAVE_BEFORE_12_OF_12",
   "fresh_terminal_evidence_consumed": 0,
