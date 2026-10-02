@@ -69,6 +69,20 @@ class Tests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 seal_candidate_universe(root, _candidate_files(root))
 
+    def test_skip_worktree_omission_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            init_repo(root)
+            hidden=root/"canonical/verification/hidden.json"
+            hidden.write_text('{"claim":"HIDDEN"}\n',encoding="utf-8")
+            run("git","add","canonical/verification/hidden.json",cwd=root)
+            run("git","commit","-qm","add hidden tracked evidence",cwd=root)
+            run("git","update-index","--skip-worktree","canonical/verification/hidden.json",cwd=root)
+            hidden.unlink()
+            self.assertEqual(run("git","status","--porcelain",cwd=root),"")
+            with self.assertRaisesRegex(RuntimeError,"CANDIDATE_UNIVERSE_NOT_EXHAUSTIVE"):
+                seal_candidate_universe(root,_candidate_files(root))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
