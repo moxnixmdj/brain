@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V4",
   "date": "2026-10-02",
-  "status": "FROZEN_PREBEACON_EXACT_POST_AUTHORITY_PACKAGE__AWAITING_INDEPENDENT_VERIFICATION__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREBEACON_EXACT_POST_AUTHORITY_PACKAGE__INDEPENDENT_PUBLIC_RUNNER_VERIFIED_FOR_BEACON__ZERO_TERMINAL_RESULTS",
   "objective": "Freeze one unambiguous exact terminal execution package before the first post-freeze beacon.",
   "supersedes_for_execution": [
     "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V2.json",
@@ -59,7 +59,7 @@
     "capability_credit_delta": 0,
     "family_credit_delta": 0
   },
-  "independent_verification": null,
-  "verified_for_beacon": false,
-  "next": "INDEPENDENTLY_VERIFY_EXACT_V4_PACKAGE_AND_SNAPSHOT_BINDINGS__ONLY_ON_PASS_CREATE_FIRST_AUTHORIZED_PUBLIC_TERMINAL_RUN_AS_BEACON__EXECUTE_EXACT_SNAPSHOT_ONCE"
+  "independent_verification": "canonical/verification/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "verified_for_beacon": true,
+  "next": "FREEZE_V4_POST_FREEZE_BEACON_POLICY__CREATE_FIRST_AUTHORIZED_PUBLIC_TERMINAL_BEACON_RUN__FREEZE_FIRST_RUN_ID_WITHOUT_REROLL__EXECUTE_EXACT_SNAPSHOT_ONCE"
 }
