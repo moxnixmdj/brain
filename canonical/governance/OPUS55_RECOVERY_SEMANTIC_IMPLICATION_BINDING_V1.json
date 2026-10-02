@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_RECOVERY_SEMANTIC_IMPLICATION_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__ONE_POSITIVE_ATOM_BINDING__ONE_NONIMPLICATION_CERTIFICATE__THREE_METRIC_BOUNDS_OPEN__ZERO_PREDICATE_CREDIT",
+  "objective": "Convert the immutable P1 trajectory terminal evidence into only those normalized Opus55 recovery semantic inputs that are explicitly justified, while mechanically rejecting the tempting but invalid earliest-localization implication.",
+  "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "authority": {
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+      "git_blob_sha": "0910ce3a2351fc439e03a1fa2ae708fb3c6463ef"
+    },
+    "p1_binding": {
+      "path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2"
+    },
+    "runtime": "canonical/runtime/recovery_semantic_implication_audit_v1.py",
+    "tests": "canonical/tests/test_recovery_semantic_implication_audit_v1.py"
+  },
+  "positive_atom_bindings": [
+    {
+      "predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "target_atom": "requirement:intervention_or_rescue_establishes_causality",
+      "relation": "CONJUNCTIVE_OPERATIONAL_REFINEMENT",
+      "p1_required_checks": [
+        "NOMINATED_REPAIR_RESCUES_TERMINAL_OUTCOME_WHEN_CAUSE_IS_IDENTIFIABLE",
+        "SYMPTOM_ONLY_OR_COMPETING_REPAIR_DOES_NOT_RECEIVE_CAUSAL_CREDIT"
+      ],
+      "terminal_receipts": [
+        "T0::TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::aggregate::30",
+        "T2::TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::aggregate::30"
+      ],
+      "terminal_receipt_requirements": [
+        "DIRECT_INSTRUMENTATION_PASS",
+        "LOAD_BEARING",
+        "PARENT_TERMINAL_ACCEPTANCE_PASS",
+        "NO_CASE_REPLACEMENT",
+        "NO_TUNING_REPLAY",
+        "NO_RESULT_TO_RUNTIME_FEEDBACK",
+        "EXACT_P1_BINDING_BLOB"
+      ],
+      "scope": "FROZEN_T0_T2_P1_DECLARED_SCOPE_ONLY",
+      "acceptance_predicate_closed": false
+    }
+  ],
+  "nonimplication_certificates": [
+    {
+      "predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "target_atom": "dimension:earliest_causal_failure_localization",
+      "source_p1_literal": "EARLIEST_OR_CRITICAL_CAUSAL_FAILURE_LOCALIZATION_MATCHES_HIDDEN_INTERVENTION_ORACLE",
+      "result": "NOT_IMPLIED",
+      "countermodel": {
+        "critical_causal_failure_localized": true,
+        "earliest_causal_failure_localized": false,
+        "p1_literal_satisfied": true,
+        "target_atom_satisfied": false
+      },
+      "consequence": "CURRENT_P1_TERMINAL_PASS_MUST_NOT_BE_USED_TO_BIND_THE_STRICTER_EARLIEST_LOCALIZATION_ATOM"
+    }
+  ],
+  "open_metric_bounds": [
+    {
+      "predicate_id": "RECOVERY_TERMINAL_NONINFERIOR",
+      "metric": "terminal_recovery_noninferiority",
+      "state": "OPEN",
+      "reason": "NO_EXPLICIT_BRAIN_VS_OPUS_MATCHED_BOUND_BOUND_TO_CURRENT_P1_WITNESS"
+    },
+    {
+      "predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "metric": "causal_localization_noninferiority",
+      "state": "OPEN",
+      "reason": "NO_EXPLICIT_BRAIN_VS_OPUS_MATCHED_BOUND_BOUND_TO_CURRENT_P1_WITNESS"
+    },
+    {
+      "predicate_id": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+      "metric": "critical_fail_closed_misses",
+      "state": "OPEN",
+      "reason": "NO_SCOPE_COMPLETE_ZERO_MISS_RECEIPT_BOUND_TO_CURRENT_P1_WITNESS"
+    }
+  ],
+  "residual_after_this_candidate": [
+    "SEMANTIC_SELF_CHECK_ATOM_UNBOUND",
+    "COUNTEREXAMPLE_DISCOVERY_ATOM_UNBOUND",
+    "STRICT_EARLIEST_CAUSAL_FAILURE_LOCALIZATION_ATOM_NOT_IMPLIED_BY_CURRENT_P1_OR_LITERAL",
+    "REPAIR_SELECTION_ATOM_NOT_YET_BOUND",
+    "RECOVERY_AFTER_INJECTED_FAILURE_ATOM_NOT_YET_BOUND",
+    "TRUE_ROOT_CAUSE_TOPK_METRIC_ATOM_NOT_YET_BOUND",
+    "TERMINAL_RECOVERY_NONINFERIORITY_BOUND_OPEN",
+    "CAUSAL_LOCALIZATION_NONINFERIORITY_BOUND_OPEN",
+    "ZERO_CRITICAL_FAIL_CLOSED_MISSES_BOUND_OPEN"
+  ],
+  "hard_rules": [
+    "NO_NAME_OR_FAMILY_ANALOGY",
+    "NO_WHOLE_BEHAVIOR_PASS_INHERITANCE",
+    "NO_METRIC_BOUND_FROM_BINARY_INSTRUMENTATION_PASS",
+    "NO_EARLIEST_CREDIT_FROM_EARLIEST_OR_CRITICAL_DISJUNCTION",
+    "NO_TERMINAL_REPLAY",
+    "INDEPENDENT_VERIFICATION_REQUIRED_BEFORE_FEEDING_POSITIVE_BINDING_TO_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "ZERO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_CANDIDATE"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "next": "RUN_BRANCH_TESTS_AND_INDEPENDENT_PUBLIC_VERIFICATION__IF_PASS_FEED_ONLY_INTERVENTION_RESCUE_CAUSALITY_ATOM_TO_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA__KEEP_ALL_OPEN_METRICS_AND_NONIMPLIED_ATOMS_FAIL_CLOSED"
+}
