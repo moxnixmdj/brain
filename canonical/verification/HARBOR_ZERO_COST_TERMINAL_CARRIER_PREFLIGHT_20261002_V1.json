@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__HARBOR_0_23_0__LOCAL_DOCKER_CARRIER__PUBLIC_DATASET_IDENTITIES_REACHABLE__NO_TERMINAL_CASE_CONTENT",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 500,
+    "head_sha": "590eda7cccb8f1e36b483516ce0807fb048c6594",
+    "merge_commit": "2fdef7c1fb986324aede609edbbe731b999ea2f7",
+    "workflow_run_id": 36956425644,
+    "job_id": 110680265175
+  },
+  "verified": [
+    "PYTHON_3_12",
+    "HARBOR_0_23_0_INSTALLS_AND_CLI_LOADS",
+    "GITHUB_HOSTED_UBUNTU_24_04_DOCKER_DAEMON_WORKS",
+    "DOCKER_HELLO_WORLD_RUNS",
+    "TERMINAL_BENCH_4_PUBLIC_HARBOR_ENDPOINT_REACHABLE",
+    "TERMINAL_BENCH_SCIENCE_PUBLIC_HARBOR_ENDPOINT_REACHABLE",
+    "HARBOR_RUN_CLI_EXPOSES_DATASET_AND_AGENT_CONTROLS"
+  ],
+  "limitations": [
+    "NO_TERMINAL_TASK_CASES_OPENED",
+    "NO_TASK_IMAGE_BUILD_OR_RESOURCE_ENVELOPE_PROVEN_YET",
+    "NO_BRAIN_AGENT_ADAPTER_END_TO_END_TRIAL_YET",
+    "NO_TERMINAL_RESULTS",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
