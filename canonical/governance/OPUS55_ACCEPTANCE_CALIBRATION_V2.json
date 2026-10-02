@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_CALIBRATION_V2",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION__EXPECTED_4_OF_19__ZERO_CREDIT",
   "objective": "Calibrate behavioral terminal passes against effective unchanged frozen Opus55 protocol results, allowing only independently admissible full-protocol stronger witnesses accepted by the existing proof transmuter.",
   "runtime": "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py",
   "tests": "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py",
@@ -22,9 +22,9 @@
   ],
   "expected_current_result": {
     "behavioral_pass_family_count": 19,
-    "acceptance_calibrated_family_count": 3,
-    "acceptance_pending_family_count": 16,
-    "newly_effective_family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "acceptance_calibrated_family_count": 4,
+    "acceptance_pending_family_count": 15,
+    "newly_effective_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
     "terminal_goal_acceptance_closed": false
   },
   "incremental_spend_usd": 0,
