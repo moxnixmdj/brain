@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V6",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION__SATURATION_COMPLETE__7_PROVED__0_OPEN__31_BLOCKED__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V5.json",
+  "reconciliation_basis": {
+    "prior_v5_sha": "9a8f8e21a5df03c922679bd60c6966fad422f581",
+    "tb4_carrier_verification": "canonical/verification/TB4_FULL_CARRIER_COMPATIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "readiness_after_correction": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json"
+  },
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 7,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 31,
+  "newly_reblocked_predicate": {
+    "predicate_id": "CODING_TB4_GE_66_4",
+    "family": "ADVANCED_AGENTIC_CODING",
+    "kind": "PUBLIC_FIXED_BAR",
+    "surface": "Terminal-Bench 4.0",
+    "state": "EXTERNAL_BLOCKED",
+    "blocker_class": "PUBLIC_SCORE_ROUTE_NOT_READY",
+    "reason": "FULL_SCOPE_ZERO_INCREMENTAL_TB4_CARRIER_NOT_BOUND__STANDARD_GITHUB_RUNNER_INCOMPATIBLE_WITH_EXACT_FROZEN_POPULATION",
+    "discharge_condition": "BIND_A_SCOPE_EQUIVALENT_ZERO_INCREMENTAL_CARRIER_FOR_ALL_66_FROZEN_TB4_TASKS_INCLUDING_GPU_AND_MAX_RESOURCE_REQUIREMENTS__THEN_RECOMPUTE_RESIDUAL_BEFORE_CASE_EXPOSURE"
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "SOURCE_GATE_ADMISSION_IS_PRESERVED__CARRIER_COMPATIBILITY_IS_A_SEPARATE_REQUIRED_READINESS_PREDICATE__NO_TB4_CASE_EXPOSURE_UNTIL_FULL_SCOPE_COMPARABLE_ZERO_COST_CARRIER_IS_BOUND"
+}
