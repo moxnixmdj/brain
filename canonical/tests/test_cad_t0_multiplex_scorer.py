@@ -26,9 +26,9 @@ def identifiable_case():
       "_oracle":{
         "reference_constraint_graph":REF_GRAPH,
         "identifiable":True,
-        "reference_geometry_metrics":REF_METRICS,
+        "reference_geometry_metrics":dict(REF_METRICS),
         "required_geometry_metrics":list(REF_METRICS),
-        "metric_tolerances":TOLS,
+        "metric_tolerances":{k:dict(v) for k,v in TOLS.items()},
       }
     }
 
