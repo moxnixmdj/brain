@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREQUALIFICATION_INPUTS__ADAPTER_INDEPENDENTLY_VERIFIED__58_CHECKER_PREFLIGHT_PENDING__NO_TERMINAL_CASE_CONTENT_READ",
+  "status": "FROZEN_PREQUALIFICATION_INPUTS__ADAPTER_INDEPENDENTLY_VERIFIED__DEPENDENCY_ARTIFACT_IDENTITIES_FROZEN__58_CHECKER_PREFLIGHT_PENDING__NO_TERMINAL_CASE_CONTENT_READ",
   "upstream_repository": {
     "repository": "LiveBench/LiveBench",
     "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -54,6 +54,16 @@
         "path": "packages/corpora/stopwords.zip",
         "git_blob_sha": "56d35b5d204d64480f71edc0f5f82aebce6730b6",
         "bytes": 37733
+      },
+      {
+        "path": "packages/taggers/averaged_perceptron_tagger.zip",
+        "git_blob_sha": "d5bfb6852aa5d288c8f33b3f0ef0fde343afa405",
+        "bytes": null
+      },
+      {
+        "path": "packages/taggers/averaged_perceptron_tagger_eng.zip",
+        "git_blob_sha": "b792e19546a5711218a05f4029ef17c8d62cd839",
+        "bytes": null
       }
     ]
   },
@@ -82,5 +92,6 @@
     "public_merge_commit": "2208dca072e46fe847eee85841566694c923ff71",
     "exact_adapter_blob_sha": "eb497ae5585f4f22b06b8088609b6d17714ebc53",
     "exact_test_blob_sha": "ac012754816cd007d893980247d55670f70b21ec"
-  }
+  },
+  "dependency_note": "PINNED_VERIFIER_USES_NLTK_POS_TAG_FOR_START_WITH_VERB__BOTH_LEGACY_AND_ENG_PERCEPTRON_TAGGER_ARTIFACT_IDENTITIES_FROZEN_FAIL_CLOSED_PENDING_RUNTIME_PREFLIGHT"
 }
