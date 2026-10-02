@@ -229,8 +229,18 @@ def _normalize_routes(
                 why.append(f"{rid}:UNKNOWN_BLOCKER:" + ",".join(sorted(unknown_b)))
         if row.get("base_admissible") is not True:
             why.append(f"{rid}:BASE_NOT_ADMISSIBLE")
-        if row.get("terminal_scope_authority") is not True:
-            why.append(f"{rid}:NO_TERMINAL_SCOPE_AUTHORITY")
+        current_scope_authority = row.get("terminal_scope_authority") is True
+        conditional_scope_authority = row.get("terminal_scope_authority_after_blockers") is True
+        scope_authority_blocker = row.get("scope_authority_blocker")
+        if not current_scope_authority:
+            if not conditional_scope_authority:
+                why.append(f"{rid}:NO_CURRENT_OR_CONDITIONAL_TERMINAL_SCOPE_AUTHORITY")
+            elif (
+                not isinstance(scope_authority_blocker, str)
+                or not scope_authority_blocker
+                or scope_authority_blocker not in bset
+            ):
+                why.append(f"{rid}:CONDITIONAL_SCOPE_AUTHORITY_BLOCKER_NOT_BOUND")
         if row.get("zero_incremental_spend") is not True:
             why.append(f"{rid}:NONZERO_OR_UNKNOWN_INCREMENTAL_SPEND")
         if row.get("opaque_target_capability_provider") is True:
@@ -254,6 +264,9 @@ def _normalize_routes(
                 "proof_mode_rank": PROOF_MODE_RANK[row["proof_mode"]],
                 "open_blockers": open_blockers,
                 "unclosable_blockers": unclosable,
+                "current_terminal_scope_authority": current_scope_authority,
+                "conditional_terminal_scope_authority": conditional_scope_authority,
+                "scope_authority_blocker": scope_authority_blocker if conditional_scope_authority else None,
             }
         )
     if len(accepted) > MAX_ROUTES:
