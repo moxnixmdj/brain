@@ -1,0 +1,31 @@
+name: Verify synthesis required coverage universal proof
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/OPUS55_SYNTHESIS_REQUIRED_COVERAGE_UNIVERSAL_CANDIDATE_V1.json"
+      - "canonical/runtime/synthesis_required_coverage_universal_verifier_v1.py"
+      - "canonical/tests/test_synthesis_required_coverage_universal_v1.py"
+      - "canonical/runtime/contract_native_brain_candidate.py"
+      - "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+      - "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json"
+      - "canonical/verification/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      - ".github/workflows/verify-synthesis-required-coverage-universal-v1.yml"
+  push:
+    branches:
+      - "breakthrough/synthesis-coverage-universal-20261002"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run universal coverage verifier
+        run: python canonical/runtime/synthesis_required_coverage_universal_verifier_v1.py
+      - name: Run adversarial tests
+        run: python -m unittest canonical.tests.test_synthesis_required_coverage_universal_v1 -v
