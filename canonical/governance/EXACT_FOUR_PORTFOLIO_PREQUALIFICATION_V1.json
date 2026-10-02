@@ -83,7 +83,7 @@
         "LiveBench Instruction Following >=65.7%"
       ],
       "blockers": [
-        "LIVEBENCH_IF_VERIFIER_SOURCE_BYTES_FROZEN__SPACY_DEAD_DEPENDENCY_DELETED__NLTK_DATA_EMOJI_SYLLAPY_DATASET_REVISION_BRAIN_ADAPTER_AND_58_CHECKER_SYNTHETIC_MUTATION_PREFLIGHT_REMAIN",
+        "LIVEBENCH_IF_SOURCE_DATASET_DEPENDENCY_AND_BRAIN_ADAPTER_BINDINGS_FROZEN__ADAPTER_INDEPENDENT_PASS__CURRENT_58_CHECKER_SYNTHETIC_GOOD_BAD_BOUNDARY_PREFLIGHT_AND_FULL_VERIFIER_RUNTIME_HERMETIC_SMOKE_REMAIN",
         "OSWORLD_2_1_CODE_IS_PUBLIC_BUT_COMPLETE_ASSET_ROUTE_INCLUDES_GATED_ASSETS__ZERO_COST_END_TO_END_ROUTE_NOT_YET_PROVEN",
         "OPEN_ENDED_DELEGATION_RECOVERY_TOOL_LEARNING_AND_COMPOSITION_LEAVES_REQUIRE_ABSOLUTE_OR_SCOPE_EQUIVALENT_PROOF_CONTRACTS",
         "T2_CAUSAL_ABLATION_RESCUE_AND_COMPOSITION_MUTATION_BUNDLE_NOT_YET_FROZEN"
@@ -204,7 +204,11 @@
     "independent_verifier_failover_installed": true,
     "public_runner_exact_blob_binding_verified": true,
     "mysterymechanism_direct_execution_route_deleted": true,
-    "proxy_benchmark_substitutions_admitted": 0
+    "proxy_benchmark_substitutions_admitted": 0,
+    "livebench_if_response_adapter_independently_verified": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "livebench_if_dataset_revision_hash_frozen_without_case_exposure": true,
+    "livebench_if_58_checker_mutation_preflight_pass": false,
+    "livebench_if_full_verifier_runtime_hermetic_smoke_pass": false
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -258,5 +262,7 @@
     "status": "INDEPENDENT_PASS",
     "receipt": "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "public_runner_workflow_run_id": 36955055153
-  }
+  },
+  "livebench_if_hermetic_input_binding": "canonical/governance/LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1.json",
+  "livebench_if_adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
