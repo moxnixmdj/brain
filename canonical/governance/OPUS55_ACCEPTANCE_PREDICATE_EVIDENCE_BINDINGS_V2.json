@@ -1,13 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "PARTIAL_RECEIPT_SATURATION__5_ATOMIC_PREDICATES_PROVED__NEW_REALITY_STILL_FORBIDDEN",
+  "status": "RECEIPT_SATURATION_COMPLETE__5_ATOMIC_PREDICATES_PROVED__33_REMAIN",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
-    "status": "IN_PROGRESS",
-    "target_source_snapshot_sha": "43fa091bbda1016c1e7a65072d4d3747bc0e3e49",
-    "source_snapshot_sha": null,
-    "rule": "COMPLETE_ONLY_AFTER_EXISTING_IMMUTABLE_RECEIPTS_HAVE_BEEN_SEARCHED_FOR_EVERY_REGISTERED_PREDICATE_AND_ALL_MATCHING_RECEIPTS_ARE_BOUND"
+    "status": "COMPLETE",
+    "source_snapshot_sha": "d096ca148a0af0a226add3b11198093df9bfc8dc",
+    "receipt": "canonical/verification/OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V1.json",
+    "receipt_sha": "d096ca148a0af0a226add3b11198093df9bfc8dc",
+    "proved_predicate_count": 5,
+    "unresolved_predicate_count": 33,
+    "new_reality_units_consumed": 0,
+    "rule": "COMPLETE_FOR_THE_CONTENT_ADDRESSED_CANONICAL_ACCEPTANCE_AUTHORITY_SET_BOUND_IN_THE_SATURATION_RECEIPT__INVALIDATE_AND_RESATURATE_IF_THAT_AUTHORITY_SET_CHANGES"
   },
   "claims": [
     {
