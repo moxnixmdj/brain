@@ -86,10 +86,10 @@ def build_universe():
     gate_spec = [
         ("G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS", "?S", "every_required_behavior_contracted"),
         ("G_ADMISSIBLE_PROOF_COMPLETENESS", "?P", "every_required_behavior_has_admissible_proof"),
-        ("G_DONOR_DEPENDENCE_ZERO", "?M", "donor_dependent_required_behaviors_zero"),
-        ("G_UNEXPLAINED_BEHAVIOR_ZERO", "?M", "unexplained_required_behaviors_zero"),
+        ("G_DONOR_DEPENDENCE_ZERO", "?P", "donor_dependent_required_behaviors_zero"),
+        ("G_UNEXPLAINED_BEHAVIOR_ZERO", "?P", "unexplained_required_behaviors_zero"),
         ("G_VERIFIER_MUTATIONS_ZERO", "?P", "unresolved_verifier_mutations_zero"),
-        ("G_COMPOSITION_FAILURES_ZERO", "?M", "unresolved_composition_failures_zero"),
+        ("G_COMPOSITION_FAILURES_ZERO", "?P", "unresolved_composition_failures_zero"),
         ("G_OPUS_ACCEPTANCE_ALL_PASS", "?P", "all_frozen_opus_acceptance_predicates_pass"),
         ("G_FINAL_DONOR_DELETION_CLEANROOM", "?P", "final_donor_deletion_cleanroom_pass"),
         ("G_PROOF_BUNDLE_FROZEN", "?P", "proof_bundle_frozen"),
