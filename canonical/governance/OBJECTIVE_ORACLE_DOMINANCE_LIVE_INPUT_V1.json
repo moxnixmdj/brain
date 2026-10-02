@@ -303,12 +303,15 @@
       "route_gates": {
         "candidate_package_frozen": true,
         "executable_evaluator_bound": true,
-        "population_or_source_pool_frozen": false,
+        "population_or_source_pool_frozen": true,
         "information_boundary_frozen": true,
-        "post_freeze_selector_frozen": false,
-        "terminal_parent_binding_frozen": false,
+        "post_freeze_selector_frozen": true,
+        "terminal_parent_binding_frozen": true,
         "independent_verification_pass": false
-      }
+      },
+      "route_gate_authority": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "route_gate_validator": "canonical/runtime/tool_discovery_t2_t3_objective_binding_validator.py",
+      "route_gate_verification": "PENDING_INDEPENDENT_CI_RECEIPT"
     },
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
