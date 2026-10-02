@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__POST_V4_M1B_V2_CANDIDATE_ADMITTED__NOT_FROZEN",
+  "status": "OPEN_DISCOVERY__M1A_SHRUNK__M0A_PRIMARY__M1B_READY__NOT_FROZEN",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -57,7 +57,7 @@
       "white_box_donor_feasibility": "canonical/verification/ZERO_COST_WHITE_BOX_DONOR_FEASIBILITY_20261002_V1.json"
     },
     "M1A": {
-      "status": "OPEN",
+      "status": "OPEN__SHRUNK_AFTER_VERIFIED_COMPOUND_VISUAL_RESOLVER",
       "verified_owned": [
         "canonical/capabilities/opus55/RAW_DRAWING_PRIMITIVES_001.json",
         "canonical/capabilities/opus55/ENGINEERING_CALLOUT_PARSER_001.json",
@@ -75,7 +75,8 @@
         "canonical/capabilities/opus55/CALIBRATED_DENSE_WARP_RECTIFIER_001.json",
         "canonical/capabilities/opus55/FEATURE_CONSTRAINT_COMPOSER_001.json",
         "canonical/capabilities/opus55/JIT_ENGINEERING_NOTATION_ENGINE_001.json",
-        "canonical/runtime/calibrated_dense_warp_rectifier.py"
+        "canonical/runtime/calibrated_dense_warp_rectifier.py",
+        "canonical/capabilities/opus55/COMPOUND_VISUAL_FEATURE_RESOLVER_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -84,9 +85,9 @@
       ],
       "uncovered": [
         "UNIDENTIFIED_LOCAL_NONPLANAR_WARP_WITHOUT_AUTHORIZED_CALIBRATION_MAP_OR_IDENTIFIABLE_GEOMETRY",
-        "AMBIGUOUS_CALLOUT_TO_GEOMETRY_OR_VISUAL_FEATURE_BINDING_OUTSIDE_VERIFIED_ASSOCIATION_AND_CONSTRAINT_COMPOSITION",
         "NOVEL_NOTATION_CAPABILITY_NOT_EXPRESSIBLE_IN_VERIFIED_JIT_DECLARATIVE_INTERFACES",
-        "ROBUSTNESS_WHEN_DETERMINISTIC_PREPROCESSING_ROUTES_DO_NOT_REACH_STABLE_PLAUSIBLE_CONSENSUS"
+        "ROBUSTNESS_WHEN_DETERMINISTIC_PREPROCESSING_ROUTES_DO_NOT_REACH_STABLE_PLAUSIBLE_CONSENSUS",
+        "VISUAL_BINDING_OUTSIDE_BOUNDED_EQUIVALENCE_AND_EXPLICIT_CONSTRAINT_GRAMMARS"
       ],
       "complete_action_bundle": true,
       "verification_receipts": {
@@ -172,6 +173,12 @@
           "workflow_run_id": 36944529467,
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/FEATURE_CONSTRAINT_COMPOSER_001.json"
+        },
+        "compound_visual_feature_resolver": {
+          "workflow_run_id": 36946523488,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/COMPOUND_VISUAL_FEATURE_RESOLVER_001.json",
+          "scope": "BOUNDED_QUANTITY_BEARING_EQUAL_FEATURE_BINDING_WITH_AMBIGUITY_WITNESS_ON_NONUNIQUE_TARGET_OR_SUBSET"
         }
       },
       "candidate_action": "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
@@ -232,7 +239,7 @@
     "M0A",
     "M1A"
   ],
-  "next": "M0A_PRIMARY__FINISH_SPECIALIZED_CONTEXTUAL_SEMANTIC_HARVEST_AND_M1A_REMAINDER__AUDIT_M1B_V2_COVERAGE__FREEZE_V5_ONLY_AFTER_CURRENT_CANDIDATE_UNIVERSE_IS_COMPLETE",
+  "next": "M0A_PRIMARY__VERIFY_AND_COMPOSE_BOUNDED_CONTEXTUAL_SEMANTICS_AND_WHITE_BOX_RESIDUAL_HARVEST__M1A_ONLY_NONIDENTIFIABLE_OR_OUT_OF_GRAMMAR_VISUAL_BINDING_REMAINS__NO_FRESH_UNTOUCHED_INFORMATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
