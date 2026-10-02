@@ -147,6 +147,18 @@ class Tests(unittest.TestCase):
                     return
         self.fail("expected failed check")
 
+    def test_missing_failure_semantics_fails_closed(self):
+        case=proof.generate_case(62013,pattern="SINGLE",domain="RESEARCH",kind="PROVENANCE")
+        public=proof.public_task(case)
+        for row in public["task"]["trajectory"]:
+            for check in row["checks"]:
+                if check["pass"] is False:
+                    check.pop("failure_semantics",None)
+                    out=candidate.solve(public)
+                    self.assertEqual(out["status"],"FAIL_CLOSED")
+                    return
+        self.fail("expected failed check")
+
     def test_hidden_oracle_mutation_does_not_change_public_payload(self):
         case=proof.generate_case(62008,pattern="SINGLE",domain="ARTIFACT",kind="SCOPE")
         before=proof.public_task(case)
