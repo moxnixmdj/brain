@@ -129,7 +129,15 @@ def evaluate(route:Mapping[str,Any],protocols:Mapping[str,Any],targets:Mapping[s
           e.append("COVERAGE_CEILING_SCORER_DRIFT")
       if u.get("required_value")!=0: e.append("UNSUPPORTED_CLAIM_ZERO_GATE_DRIFT")
 
-    scope_req=route.get("scope_completeness_requirement")\n    if not isinstance(scope_req,Mapping): e.append("SCOPE_COMPLETENESS_REQUIREMENT_MISSING")\n    else:\n      if scope_req.get("current_state")!="PENDING_PREEXPOSURE__NO_SCOPE_COMPLETENESS_CLAIM__ZERO_CREDIT": e.append("SCOPE_COMPLETENESS_STATE_DRIFT")\n      if scope_req.get("required_basis")!="EXACT_COMPLETE_TARGET_CASE_UNIVERSE": e.append("SCOPE_COMPLETENESS_BASIS_DRIFT")\n      if "not itself" not in str(scope_req.get("explicit_nonclaim") or "").lower(): e.append("BLUEPRINT_NONCLAIM_MISSING")\n      if "PERFECT_FINITE_SAMPLE" not in str(scope_req.get("forbidden") or ""): e.append("FINITE_SAMPLE_FIREWALL_MISSING")\n\n    theorem=route.get("comparator_elimination_theorem")
+    scope_req=route.get("scope_completeness_requirement")
+    if not isinstance(scope_req,Mapping): e.append("SCOPE_COMPLETENESS_REQUIREMENT_MISSING")
+    else:
+      if scope_req.get("current_state")!="PENDING_PREEXPOSURE__NO_SCOPE_COMPLETENESS_CLAIM__ZERO_CREDIT": e.append("SCOPE_COMPLETENESS_STATE_DRIFT")
+      if scope_req.get("required_basis")!="EXACT_COMPLETE_TARGET_CASE_UNIVERSE": e.append("SCOPE_COMPLETENESS_BASIS_DRIFT")
+      if "not itself" not in str(scope_req.get("explicit_nonclaim") or "").lower(): e.append("BLUEPRINT_NONCLAIM_MISSING")
+      if "PERFECT_FINITE_SAMPLE" not in str(scope_req.get("forbidden") or ""): e.append("FINITE_SAMPLE_FIREWALL_MISSING")
+
+    theorem=route.get("comparator_elimination_theorem")
     if not isinstance(theorem,Mapping) or theorem.get("route_kind")!="ABSOLUTE_CEILING_DOMINANCE_ON_EXACT_FUTURE_SCOPE":
         e.append("CEILING_THEOREM_MISSING")
     if route.get("existing_result_inputs")!=[]: e.append("POSTHOC_RESULT_TRANSPORT_FORBIDDEN")
@@ -155,9 +163,12 @@ def evaluate(route:Mapping[str,Any],protocols:Mapping[str,Any],targets:Mapping[s
       },
       "theorem":"WITH_IDENTICAL_BOUNDED_SCORER_ON_THE_EXACT_FUTURE_SCOPE__BRAIN_AT_1_0_QUALITY_AND_1_0_COVERAGE_CANNOT_BE_OUTSCORED_BY_ANY_COMPARATOR",
       "exact_opus_required_if_brain_hits_ceiling":False,
-      "old_terminal_evidence_admissible":False,\n      "scope_completeness_currently_proved":False,\n      "required_scope_completeness_basis":"EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+      "old_terminal_evidence_admissible":False,
+      "scope_completeness_currently_proved":False,
+      "required_scope_completeness_basis":"EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
       "remaining_before_execution":[
-        "CONTENT_ADDRESSED_CASE_GENERATOR_AND_SOURCE_POOL_BINDING",\n        "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_CERTIFICATE",
+        "CONTENT_ADDRESSED_CASE_GENERATOR_AND_SOURCE_POOL_BINDING",
+        "INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_CERTIFICATE",
         "INDEPENDENT_SCOPE_AND_SCORER_VERIFICATION",
         "BRAIN_ROUTE_BINDING",
         "MACHINE_EXECUTION_AUTHORITY"
