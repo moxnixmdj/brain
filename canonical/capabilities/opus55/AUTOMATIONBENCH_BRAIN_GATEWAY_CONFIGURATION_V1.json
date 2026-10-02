@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_BRAIN_GATEWAY_CONFIGURATION_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__HERMETIC_SELF_CONTAINED__SOURCE_GATE_V2_ADMISSIBLE__ZERO_CAPABILITY_CREDIT",
+  "family": "BUSINESS_WORKFLOW_AUTOMATION",
+  "benchmark": "AutomationBench public 600",
+  "runtime": "canonical/runtime/automationbench_brain_gateway_v1.py",
+  "tests": "canonical/tests/test_automationbench_brain_gateway_v1.py",
+  "upstream_benchmark": {
+    "repository": "zapier/AutomationBench",
+    "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14"
+  },
+  "operative_configuration": [
+    "ONE_MODEL_PROPOSAL_PER_AGENT_STEP",
+    "EXACT_BENCHMARK_TOOL_NAME_ALLOWLIST",
+    "JSON_ARGUMENT_SCHEMA_VALIDATION",
+    "REQUIRED_FIELD_ENUM_TYPE_AND_ADDITIONAL_PROPERTY_ENFORCEMENT",
+    "UNKNOWN_TOOL_FAIL_CLOSED",
+    "OPENAI_COMPATIBLE_TOOL_CALL_NORMALIZATION",
+    "MODEL_IS_UNTRUSTED_GENERAL_COGNITION_SUBSTRATE"
+  ],
+  "ownership_boundary": {
+    "brain_owns_configuration": true,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_standalone_score_not_ownership_evidence": true,
+    "hidden_target_capability_provider_forbidden": true
+  },
+  "materiality_test": "A deliberately invalid substrate proposal that would request an unknown or schema-invalid tool must be blocked by Brain while an equivalent valid proposal passes.",
+  "next": "QUALIFY_AND_FREEZE_GENERAL_COGNITION_SUBSTRATE_ON_SYNTHETIC_NON_BENCHMARK_TOOL_CONTRACTS__RERUN_ATOMIC_RESIDUAL__EXECUTE_PUBLIC_600_ONLY_AFTER_EXACT_FINAL_AUTHORIZATION",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "independent_verification": "canonical/verification/AUTOMATIONBENCH_BRAIN_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "free_planner_transport_verification": "canonical/verification/AUTOMATIONBENCH_FREE_PLANNER_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "current_runtime_git_blob_sha": "e15f671276952e4dac762eb1fa5531550ed23a46",
+  "current_authority": "canonical/verification/AUTOMATIONBENCH_HERMETIC_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+  "historical_receipts": [
+    "canonical/verification/AUTOMATIONBENCH_BRAIN_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/AUTOMATIONBENCH_FREE_PLANNER_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ]
+}
