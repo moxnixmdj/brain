@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import direct_route_terminal_executors_v1 as direct
+from canonical.runtime import saccr_route_specific_terminal_executor_v1 as saccr
 from canonical.runtime import cad_t0_route_specific_terminal_executor_v1 as cad
 from canonical.runtime import portfolio_multiplex_terminal_instrumentation_v1 as multiplex
 from canonical.runtime import terminal_wave_launch_authority_reducer_v1 as launch_authority
@@ -24,9 +25,10 @@ SCHEMA = "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_LAUNCHER_V1"
 PORTFOLIOS = ("T0", "T1", "T2", "T3")
 
 CAD_ID = cad.BEHAVIOR_ID
+SA_CCR_ID = saccr.BEHAVIOR_ID
 
 DIRECT_PORTFOLIOS: dict[str, tuple[str, ...]] = {
-    direct.SA_CCR_ID: ("T1",),
+    SA_CCR_ID: ("T1",),
     direct.BROWSER_ID: ("T2",),
     direct.DELEGATION_ID: ("T2",),
     direct.TOOL_ID: ("T2", "T3"),
@@ -212,6 +214,7 @@ def execute_wave(
     beacon: str,
     parent_runner: Callable[..., list[Mapping[str, Any]]] | None = None,
     direct_runner: Callable[..., dict[str, Any]] = direct.execute_direct_route,
+    saccr_runner: Callable[..., dict[str, Any]] = saccr.execute_terminal,
     cad_runner: Callable[..., dict[str, Any]] = cad.execute_cad_route,
     root: Path = Path("."),
 ) -> dict[str, Any]:
@@ -254,6 +257,20 @@ def execute_wave(
     for behavior_id in sorted(DIRECT_PORTFOLIOS):
         if behavior_id == CAD_ID:
             result = cad_runner(commitment=commitment, beacon=beacon)
+        elif behavior_id == SA_CCR_ID:
+            raw = saccr_runner(
+                candidate_package_commitment=commitment,
+                post_freeze_beacon=beacon,
+                root=root,
+            )
+            result = dict(raw)
+            result["behavior_id"] = SA_CCR_ID
+            result["pass"] = (
+                raw.get("status") == "PASS"
+                and raw.get("all_pass") is True
+                and raw.get("case_count") == saccr.SAMPLE_COUNT
+            )
+            result["terminal_result"] = raw.get("terminal_authority") is True
         else:
             result = direct_runner(
                 behavior_id, commitment=commitment, beacon=beacon
