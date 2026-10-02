@@ -44,16 +44,16 @@ def _fail(*errors: str) -> dict[str, Any]:
     }
 
 
-def _scope_relation(doc: Mapping[str, Any], target_scope: str, witness_scope: str) -> tuple[str | None, str | None]:
+def _scope_relation(doc: Mapping[str, Any], target_scope: str, witness_scope: str) -> tuple[str | None, str | None, str | None]:
     rows = doc.get("verified_scope_relations", [])
     if not isinstance(rows, list):
-        return None, "SCOPE_RELATIONS_INVALID"
+        return None, None, "SCOPE_RELATIONS_INVALID"
     admissible: list[tuple[str, str]] = []
     for i, row in enumerate(rows):
         if not isinstance(row, Mapping):
-            return None, f"SCOPE_RELATION_{i}_INVALID"
+            return None, None, f"SCOPE_RELATION_{i}_INVALID"
         if row.get("verified") is not True or row.get("independent") is not True:
-            return None, f"SCOPE_RELATION_{i}_NOT_INDEPENDENTLY_VERIFIED"
+            return None, None, f"SCOPE_RELATION_{i}_NOT_INDEPENDENTLY_VERIFIED"
         source = row.get("witness_scope")
         target = row.get("target_scope")
         relation = row.get("relation")
@@ -68,10 +68,11 @@ def _scope_relation(doc: Mapping[str, Any], target_scope: str, witness_scope: st
         if source == witness_scope and target == target_scope and relation in {"EXACT", "SUPERSET"}:
             admissible.append((relation, receipt))
     if not admissible:
-        return None, None
+        return None, None, None
     # EXACT is stronger/more precise than SUPERSET when both are independently attested.
     admissible.sort(key=lambda x: (0 if x[0] == "EXACT" else 1, x[1]))
-    return admissible[0]
+    relation, receipt = admissible[0]
+    return relation, receipt, None
 
 
 def evaluate(doc: Mapping[str, Any]) -> dict[str, Any]:
@@ -94,7 +95,7 @@ def evaluate(doc: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(witness_scope, str) or not witness_scope:
         return _fail("WITNESS_SCOPE_REF_REQUIRED")
 
-    scope_relation, scope_error = _scope_relation(doc, target_scope, witness_scope)
+    scope_relation, scope_receipt, scope_error = _scope_relation(doc, target_scope, witness_scope)
     if scope_error:
         return _fail(scope_error)
 
@@ -183,6 +184,7 @@ def evaluate(doc: Mapping[str, Any]) -> dict[str, Any]:
         "implies_target": implies,
         "candidate_scope_relation": relation,
         "verified_scope_relation": scope_relation,
+        "verified_scope_relation_receipt": scope_receipt,
         "target_scope_ref": target_scope,
         "witness_scope_ref": witness_scope,
         "target_required_atoms": sorted(target_atoms),
