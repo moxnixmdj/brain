@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CERTIFICATE_FALSIFICATION_OVERLAY_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__ONE_INDEPENDENTLY_VERIFIED_ROUTE_FALSIFICATION__ZERO_CREDIT",
+  "source_frontier": {
+    "path": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "git_blob_sha": "4b5517dbd12978f8ffe481fb775e85592c7790c8"
+  },
+  "falsified_certificate_routes": [
+    {
+      "certificate_id": "TB4_ATTAINABLE_ROUTE_CERTIFICATE",
+      "falsified_requirement": "MACHINE_VERIFIED_TB4_ROUTE_UPPER_BOUND_GE_220",
+      "target_predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "adjudication": "ROUTE_FALSIFIED_TARGET_REMAINS_OPEN",
+      "independent_verified": true,
+      "target_predicate_falsified": false,
+      "independent_verification_receipt": "canonical/governance/TB4_PROOF_ATOM_FALSIFICATION_ADJUDICATION_V1.json",
+      "independent_verification_receipt_git_blob_sha": "9f2831b5daf0bf811a11c322d85906869fdef433"
+    }
+  ],
+  "hard_rules": [
+    "PRUNE_ONLY_EXACT_CERTIFICATE_ID_REQUIREMENT_AND_TARGET_BINDING",
+    "INDEPENDENT_VERIFICATION_REQUIRED",
+    "ROUTE_FALSIFICATION_NEVER_IMPLIES_TARGET_FALSIFICATION",
+    "TARGET_REMAINS_UNRESOLVED_UNTIL_ALTERNATIVE_CERTIFICATE_OR_VERIFIED_ASSUMPTION_CHANGE",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
