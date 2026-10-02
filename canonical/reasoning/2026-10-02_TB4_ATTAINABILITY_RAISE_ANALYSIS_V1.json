@@ -1,0 +1,278 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-02",
+  "decision_id": "2026-10-02_TB4_ATTAINABILITY_RAISE_ANALYSIS_V1",
+  "status": "EXECUTED__NO_ADMISSIBLE_DISCHARGE_INSIDE_FROZEN_RULES__PROTOCOL_RECONCILIATION_REQUIRED__ZERO_CASE_EXPOSURE__ZERO_CREDIT",
+  "canonical_base_commit": "ea4b09a134fcec7761e9070eca76a1c52aa6fc56",
+  "facts_first_gathered_at_commit": "f8c3ffd7ba1fc6725e866ce245c726936dbebe2f",
+  "base_reverification": "All repo sources pinned in material_premises were re-verified byte-identical at canonical_base_commit; newer upstream commits were read for overlap (see relation_to_prior_work where present).",
+  "real_objective": "Truthfully discharge or close the compiled primary action RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE for CODING_TB4_GE_66_4 without exposing any Terminal-Bench case.",
+  "governing_invariants": [
+    "No replay for credit; irreversibly zero tasks stay zero.",
+    "Frozen predicates may not be weakened or silently replaced; a predicate change needs explicit reconciliation.",
+    "Claim scope must not exceed evidence scope; no proxy goal substitution.",
+    "Zero fresh acceptance cases, zero spend, zero credit."
+  ],
+  "material_premises": [
+    {
+      "id": "P1_FROZEN_ACCOUNTING",
+      "fact": "Terminal-Bench 4.0 frozen population is 66 tasks x 5 trials = 330 slots; 220 successes required; 12 tasks are hardware-incompatible, 18 hardware-compatible tasks are irreversibly zero (spent or contaminated), 0 completed; 36 creditable tasks remain, so the maximum attainable is 180 (54.5%) < 220 (66.4%).",
+      "evidence": {
+        "class": "REPO",
+        "path": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+        "git_blob_sha": "36cfd7b29465a2da6c05667b18848bdcabcd22e6"
+      }
+    },
+    {
+      "id": "P2_COMPILER_SEMANTICS",
+      "fact": "The independently verified compiler computes upper = completed successes + remaining creditable tasks x trials; unrun slots of irreversibly zero tasks are forced to zero.",
+      "evidence": {
+        "class": "REPO",
+        "path": "canonical/runtime/attainability_cut_compiler_v1.py",
+        "git_blob_sha": "5bdbbbc7d91830c9f851a3d0b8d129fec6b08ea9",
+        "independent_verification": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json (public runner PR 854)"
+      }
+    },
+    {
+      "id": "P3_SCENARIOS_CARRIER_ONLY",
+      "fact": "Best case for a carrier-only change: if k of the 12 hardware-incompatible tasks became compatible AND creditable (assumes none is contaminated), the bar becomes reachable only at k>=8, where it requires a perfect 220/220; at k=12 it requires 91.7% trial success.",
+      "evidence": {
+        "class": "DERIVED_BY_REPO_COMPILER",
+        "table": [
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 0,
+            "creditable_tasks": 36,
+            "upper_bound_successes": 180,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 122.2
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 1,
+            "creditable_tasks": 37,
+            "upper_bound_successes": 185,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 118.9
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 2,
+            "creditable_tasks": 38,
+            "upper_bound_successes": 190,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 115.8
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 3,
+            "creditable_tasks": 39,
+            "upper_bound_successes": 195,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 112.8
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 4,
+            "creditable_tasks": 40,
+            "upper_bound_successes": 200,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 110.0
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 5,
+            "creditable_tasks": 41,
+            "upper_bound_successes": 205,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 107.3
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 6,
+            "creditable_tasks": 42,
+            "upper_bound_successes": 210,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 104.8
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 7,
+            "creditable_tasks": 43,
+            "upper_bound_successes": 215,
+            "attainability_state": "IMPOSSIBLE",
+            "required_trial_pass_rate_percent": 102.3
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 8,
+            "creditable_tasks": 44,
+            "upper_bound_successes": 220,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 100.0
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 9,
+            "creditable_tasks": 45,
+            "upper_bound_successes": 225,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 97.8
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 10,
+            "creditable_tasks": 46,
+            "upper_bound_successes": 230,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 95.7
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 11,
+            "creditable_tasks": 47,
+            "upper_bound_successes": 235,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 93.6
+          },
+          {
+            "hardware_incompatible_tasks_made_compatible_and_creditable": 12,
+            "creditable_tasks": 48,
+            "upper_bound_successes": 240,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 91.7
+          }
+        ]
+      }
+    },
+    {
+      "id": "P4_SCENARIOS_REVIVAL",
+      "fact": "Even with all 12 hardware-incompatible tasks added, a realistic requirement needs revival of irreversibly zero tasks: reviving 12 of the 18 gives 60 creditable tasks and a 73.3% trial pass-rate requirement; all 18 gives 66 tasks and 66.7%. Revival requires lifting the NO_REPLAY / contamination rule.",
+      "evidence": {
+        "class": "DERIVED_BY_REPO_COMPILER",
+        "table": [
+          {
+            "all_12_incompatible_added_and_irreversibly_zero_tasks_revived": 0,
+            "creditable_tasks": 48,
+            "upper_bound_successes": 240,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 91.7
+          },
+          {
+            "all_12_incompatible_added_and_irreversibly_zero_tasks_revived": 4,
+            "creditable_tasks": 52,
+            "upper_bound_successes": 260,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 84.6
+          },
+          {
+            "all_12_incompatible_added_and_irreversibly_zero_tasks_revived": 8,
+            "creditable_tasks": 56,
+            "upper_bound_successes": 280,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 78.6
+          },
+          {
+            "all_12_incompatible_added_and_irreversibly_zero_tasks_revived": 12,
+            "creditable_tasks": 60,
+            "upper_bound_successes": 300,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 73.3
+          },
+          {
+            "all_12_incompatible_added_and_irreversibly_zero_tasks_revived": 18,
+            "creditable_tasks": 66,
+            "upper_bound_successes": 330,
+            "attainability_state": "OPEN",
+            "required_trial_pass_rate_percent": 66.7
+          }
+        ]
+      }
+    },
+    {
+      "id": "P5_REFERENCE_SYSTEM_CONSISTENCY",
+      "fact": "Anthropic reports Claude Opus 5.5 at 66.4% on Terminal-Bench 4.0 (xhigh effort, standard error +/-2.6 points). A system with that rate, run only on the 36 creditable tasks, is expected to reach about 119.5 of 330 slots (36.2%) against 220 required; the frozen predicate is therefore not satisfiable by its own reference system.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://www.anthropic.com/claude/opus",
+        "retrieved_utc": "2026-10-02",
+        "excerpt": "Terminal-Bench 4.0 results are reported for Claude Opus 5.5 at xhigh effort ... The standard error is +/-2.6 pts for Claude Opus 5.5.",
+        "assumption": "Opus's rate on the 36-task subset equals its overall rate."
+      }
+    },
+    {
+      "id": "P6_POINT_ESTIMATE_COIN_FLIP",
+      "fact": "Even on the full 330-slot population, an exact clone of Opus 5.5 (true rate 66.4%) reaches >=220 successes with probability about 0.485 under an independent-trials binomial model; a point-estimate bar with no margin is close to a coin flip for the reference itself.",
+      "evidence": {
+        "class": "COMPUTED",
+        "model": "Binomial(330, 0.664), P(X>=220)",
+        "caveat": "Independence across trials assumed; task clustering changes the variance but not the ~50% centre."
+      }
+    },
+    {
+      "id": "P7_POPULATION_EXHAUSTED",
+      "fact": "The Terminal-Bench 4.0 population is closed at 66 tasks (12 hardware-incompatible + 18 irreversibly zero + 36 creditable). The creditable set therefore cannot be enlarged by drawing new tasks; only the 12 hardware-incompatible tasks (if clean and runnable on an admissible carrier) or lifting NO_REPLAY for the 18 can enlarge it.",
+      "evidence": {
+        "class": "SECONDARY_AGGREGATOR",
+        "url": "https://llmlearner.com/rankings/terminal-bench-4-0",
+        "excerpt": "Terminal-Bench 4.0 measures complete model-and-agent systems across 66 containerized professional computer tasks",
+        "retrieved_utc": "2026-10-02",
+        "corroboration": "REPO manifest total_task_count=66"
+      }
+    }
+  ],
+  "evidence_refs": [
+    "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+    "canonical/runtime/attainability_cut_compiler_v1.py",
+    "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+  ],
+  "conclusion": "No admissible route, carrier, protocol-equivalence or creditability change INSIDE the frozen rules raises the verified upper bound to a realistic level. Carrier changes alone reach 220 only at 44 creditable tasks and then demand a perfect score; only lifting NO_REPLAY could make the requirement realistic. Independently of capability, the frozen predicate fails its own reference system (Opus 5.5 expected ~36% of slots under this accounting), so it cannot measure 'equal or better than Opus 5.5' and cannot be closed by capability work.",
+  "selected_route": "CLOSE_THE_COMPILED_ACTION_AS_NO_ADMISSIBLE_DISCHARGE_INSIDE_FROZEN_RULES__DO_NOT_EXECUTE_ANY_TB4_CASE__REQUIRE_OWNER_RECONCILIATION_OF_THE_TB4_PROTOCOL_BEFORE_ANY_FURTHER_TB4_EXPOSURE",
+  "candidate_protocol_changes_for_owner_reconciliation_not_adopted": [
+    {
+      "id": "C1_SUBSET_NONINFERIORITY",
+      "change": "Score only the 36 creditable tasks with a precommitted noninferiority margin and a task-clustered confidence bound against Opus 5.5's published rate; state explicitly that scope is the creditable subset.",
+      "cost": "Changes the frozen predicate; comparability to Opus's full-population 66.4% must be argued, not assumed."
+    },
+    {
+      "id": "C2_EXPOSURE_AS_COVARIATE",
+      "change": "Treat disclosed exposure as a covariate instead of irreversible zero.",
+      "cost": "Relaxes anti-contamination; not admissible without an explicit owner change to the no-replay law."
+    },
+    {
+      "id": "C3_NEW_BENCHMARK_REVISION",
+      "change": "Relock on a later official Terminal-Bench revision with fresh tasks.",
+      "cost": "Requires such a revision to exist and a new precommitted sample; P7 shows the 4.0 population is closed at 66 tasks."
+    }
+  ],
+  "rejected_material_alternatives": [
+    {
+      "alternative": "Execute the remaining 36 tasks anyway and hope for >=220.",
+      "decisive_reason": "Mathematically impossible (180 < 220); would burn scarce one-shot exposure for zero credit."
+    },
+    {
+      "alternative": "Re-label contaminated tasks as creditable to reach 220.",
+      "decisive_reason": "Violates no-replay and anti-contamination; false-success route."
+    },
+    {
+      "alternative": "Edit the frozen manifest or compiler to change the inequality.",
+      "decisive_reason": "Silent predicate replacement is forbidden; only explicit reconciliation may change it."
+    }
+  ],
+  "uncertainties": [
+    "Whether the 12 hardware-incompatible tasks are otherwise clean is not recorded in the manifest (identities are opaque hashes).",
+    "Opus 5.5's rate on the 36-task subset is unknown; P5 assumes equality with its overall rate.",
+    "P6 assumes independent trials."
+  ],
+  "assumptions": [
+    "The manifest's counts (12/18/36) are correct as independently verified by public runner PR 854."
+  ],
+  "non_goals": [
+    "Executing any Terminal-Bench case.",
+    "Editing frozen manifests, compilers or the hypergraph.",
+    "Choosing among C1..C3."
+  ],
+  "next_action": "Owner-level reconciliation of the CODING_TB4_GE_66_4 protocol (C1/C2/C3 or another explicit change). Until then keep every TB4 case unexposed. This receipt does not itself change the hypergraph; machine reduction of the action's state must go through the project's guarded path.",
+  "supersession_conditions": [
+    "Independent evidence that >=8 of the 12 hardware-incompatible tasks can run on an admissible carrier and are clean (then re-evaluate with the compiler).",
+    "The owner relocks or replaces the TB4 predicate.",
+    "The manifest blob changes (this receipt is a point-in-time record of blob 36cfd7b29465a2da6c05667b18848bdcabcd22e6)."
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

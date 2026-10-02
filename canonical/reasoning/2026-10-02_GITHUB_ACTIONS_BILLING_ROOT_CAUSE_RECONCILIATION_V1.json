@@ -1,0 +1,170 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-02",
+  "decision_id": "2026-10-02_GITHUB_ACTIONS_BILLING_ROOT_CAUSE_RECONCILIATION_V1",
+  "status": "EXECUTED__BRAIN_ACTIONS_FAILURE_LOCALIZED_TO_ACCOUNT_BILLING_BLOCK__CARRIER_EVIDENCE_ONLY__ZERO_CAPABILITY_INFERENCE",
+  "canonical_base_commit": "ea4b09a134fcec7761e9070eca76a1c52aa6fc56",
+  "facts_first_gathered_at_commit": "f8c3ffd7ba1fc6725e866ce245c726936dbebe2f",
+  "base_reverification": "All repo sources pinned in material_premises were re-verified byte-identical at canonical_base_commit; newer upstream commits were read for overlap (see relation_to_prior_work where present).",
+  "real_objective": "Know exactly why Brain-hosted GitHub Actions cannot act as an independent verification carrier, so red runs are neither misread as capability or test failures nor waited on as transient.",
+  "governing_invariants": [
+    "Unknown, null, unresolved or non-started state fails closed.",
+    "A job that never started is carrier evidence only: it is neither a capability pass nor a capability failure.",
+    "$0 incremental spend and private canonical state remain hard constraints.",
+    "Bare chat has zero canonical authority; a consequential carrier claim needs a repository-backed receipt."
+  ],
+  "material_premises": [
+    {
+      "id": "P1_ANNOTATION_TEXT",
+      "fact": "Zero-step failed Brain jobs carry GitHub's own failure-level check-run annotation: \"The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings\".",
+      "evidence": {
+        "class": "GITHUB_REST_API",
+        "endpoint": "repos/moxnixmdj/brain/check-runs/{job_id}/annotations",
+        "example": {
+          "workflow": "Drift Immunity Guard",
+          "event": "pull_request_target",
+          "run_id": 37020089131,
+          "job_id": 110880658119,
+          "run_created_utc": "2026-10-02T14:28:15Z"
+        }
+      }
+    },
+    {
+      "id": "P2_CONSISTENCY",
+      "fact": "In the 30 most recent runs at query time (2026-10-02T14:29:06Z..15:02:09Z) there were 51 zero-step failed jobs and all 51 carried the identical annotation; no other failure-level annotation text was observed.",
+      "evidence": {
+        "class": "GITHUB_REST_API",
+        "queried_utc": "2026-10-02T15:04:12Z",
+        "structured": {
+          "sampled_runs": 30,
+          "zero_step_failed_jobs": 51,
+          "jobs_with_identical_billing_annotation": 51
+        }
+      }
+    },
+    {
+      "id": "P3_ONSET",
+      "fact": "The last successful Brain Actions run is id 36953084613 ('Verify shared decision primitives', push, main, created 2026-10-02T01:53:44Z). The next run (id 36953101438, same workflow, created 01:53:57Z) already failed with zero steps; the first six runs after the last success all carry the billing annotation. In the 300 runs created 01:53:45Z..03:20:00Z there were 294 failures, 6 cancellations and 0 successes; among the newest 1000 runs after the last success (API result cap) there were 972 failures, 26 cancellations, 2 skipped and 0 successes.",
+      "evidence": {
+        "class": "GITHUB_REST_API",
+        "note": "Onset within 13 seconds of the last success is the signature of an abrupt account-level cutoff, not flaky tests.",
+        "structured": {
+          "last_success_utc": "2026-10-02T01:53:44Z",
+          "last_success_run_id": 36953084613,
+          "first_failure_after_success_utc": "2026-10-02T01:53:57Z",
+          "first_failure_run_id": 36953101438,
+          "runs_in_window_01_53_45_to_03_20_00": {
+            "failure": 294,
+            "cancelled": 6,
+            "success": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "P4_PLATFORM_RULE",
+      "fact": "GitHub documents that private-repository hosted runners 'use your GitHub account's allotment of free minutes, and are then charged at the per minute rates' (Linux: 2 vCPU / 8 GB), while standard hosted runners for public repositories are 'free and unlimited' (Linux: 4 vCPU / 16 GB, 14 GB SSD).",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+        "retrieved_utc": "2026-10-02"
+      }
+    },
+    {
+      "id": "P5_PRIOR_RECEIPT_BOUNDARY",
+      "fact": "canonical/governance/GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE_20261002_V1.json recorded 100/100 failures with null steps and null log URLs and listed EXACT_CAUSE_IS_BILLING_OR_QUOTA under inference_boundary.not_supported. Its observation did not include check-run annotations.",
+      "evidence": {
+        "class": "REPO",
+        "path": "canonical/governance/GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE_20261002_V1.json",
+        "git_blob_sha": "cf34d10a178a3cd71e49703e92b7ab53b48e360a"
+      }
+    },
+    {
+      "id": "P6_PUBLIC_RUNNER_EXECUTES",
+      "fact": "The public repository moxnixmdj/verification-capsule-runner executes workflow steps (for example 'Execution Guard Regression' concluded success on push at 2026-10-02T14:27:15Z), consistent with P4.",
+      "evidence": {
+        "class": "GITHUB_REST_API",
+        "queried_utc": "2026-10-02T14:30Z"
+      }
+    },
+    {
+      "id": "P7_PLAN_SIGNAL",
+      "fact": "The repository rulesets API returned HTTP 403 'Upgrade to GitHub Pro or make this repository public to enable this feature'. This is consistent with, but does not prove, an owning account on a plan without private-repository rulesets.",
+      "evidence": {
+        "class": "GITHUB_REST_API",
+        "endpoint": "repos/moxnixmdj/brain/rulesets"
+      }
+    },
+    {
+      "id": "P8_GUARD_GAP",
+      "fact": "While the carrier is blocked, the pull_request_target Drift Immunity Guard and every Brain-hosted verification workflow cannot report. GitHub search showed 63 PRs merged after 2026-10-02T02:00Z (as of ~14:50Z); in a random sample of 12 recent main commits only 1 belonged to a PR (the rest were direct commits), so changes proceed without guard evidence.",
+      "evidence": {
+        "class": "GITHUB_REST_API",
+        "queried_utc": "2026-10-02T14:50Z"
+      }
+    }
+  ],
+  "evidence_refs": [
+    "canonical/governance/GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE_20261002_V1.json",
+    "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md"
+  ],
+  "conclusion": "Brain-hosted Actions have been blocked at the account level by a GitHub billing/spending-limit condition since 2026-10-02T01:53:44Z..01:53:57Z. The failures are not test-code, workflow-syntax or capability failures. The exact sub-cause (failed payment versus exhausted free allotment under a spending limit) cannot be determined from repository or REST evidence available to this actor; only the account owner's Billing & plans view can settle it.",
+  "selected_route": "RECLASSIFY_BRAIN_ACTIONS_RED_AS_ACCOUNT_BILLING_CARRIER_BLOCK__KEEP_ZERO_CAPABILITY_INFERENCE__KEEP_INDEPENDENT_VERIFICATION_ON_THE_PUBLIC_RUNNER__ESCALATE_THE_BILLING_DECISION_TO_THE_ACCOUNT_OWNER",
+  "supersedes": [
+    {
+      "receipt": "canonical/governance/GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE_20261002_V1.json",
+      "scope": "Only inference_boundary.not_supported[0] (EXACT_CAUSE_IS_BILLING_OR_QUOTA) is superseded, at the coarse level 'account billing/spending-limit block'. All other conclusions of that receipt stand, including: do not read red runs as capability failures; fail closed on Actions as the current verification carrier.",
+      "new_evidence": "P1..P3 (check-run annotations)"
+    }
+  ],
+  "rejected_material_alternatives": [
+    {
+      "alternative": "Wait for self-healing or retry.",
+      "decisive_reason": "Persistent since 01:53:57Z with one identical annotation and zero successes in thousands of subsequent runs."
+    },
+    {
+      "alternative": "Make the private Brain repository public to obtain free unlimited minutes.",
+      "decisive_reason": "Would expose canonical state and violates the private-canonical posture; not this actor's decision."
+    },
+    {
+      "alternative": "Raise the spending limit or pay.",
+      "decisive_reason": "Not available to this actor and conflicts with hard $0 incremental spend unless the owner grants an explicit exception."
+    },
+    {
+      "alternative": "Treat the failed workflows as test or capability failures.",
+      "decisive_reason": "Jobs never started (zero steps); no test body executed."
+    },
+    {
+      "alternative": "Provision a self-hosted runner.",
+      "decisive_reason": "Not evaluated: needs infrastructure and credentials this actor does not have or is not authorized to create."
+    }
+  ],
+  "uncertainties": [
+    "Exact billing sub-cause is unknown (P1 names two possibilities).",
+    "Whether the block lifts at a billing-cycle boundary is unknown.",
+    "Whether other repository policies would also block pull_request_target jobs after billing is restored was not tested.",
+    "The plan inference in P7 is unverified."
+  ],
+  "assumptions": [
+    "GitHub's annotation text is authoritative for the platform-level reason a job was not started."
+  ],
+  "non_goals": [
+    "Changing billing, enabling spend or making any repository public.",
+    "Executing any reality unit or granting capability or family credit.",
+    "Judging whether any workflow's test logic is correct."
+  ],
+  "next_action": "Account owner decides between (a) restoring Brain-hosted Actions by fixing payment or raising the spending limit as an explicit exception to the $0 rule, or (b) formally declaring the public runner the sole independent carrier and relocating guard/consistency enforcement there. Until then: zero-reality actions only, and no Brain-hosted red run is admissible evidence of anything.",
+  "supersession_conditions": [
+    "Brain Actions jobs start executing steps again.",
+    "GitHub changes the annotation semantics or evidence shows a second independent cause.",
+    "The account owner records the exact billing state."
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

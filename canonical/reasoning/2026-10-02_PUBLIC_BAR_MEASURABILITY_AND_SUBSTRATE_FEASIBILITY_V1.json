@@ -1,0 +1,610 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-02",
+  "decision_id": "2026-10-02_PUBLIC_BAR_MEASURABILITY_AND_SUBSTRATE_FEASIBILITY_V1",
+  "status": "EXECUTED__THEORY_FALSIFICATION_EVIDENCE_RECORDED__8_OF_15_PUBLIC_BARS_OWNER_COMPUTED__4_RUNNABLE_NEED_A_PINNED_GENERATOR__3_UNRESOLVED__NO_EVIDENCED_UNILATERAL_ZERO_COST_ROUTE_TO_THE_CONJUNCTION__ZERO_CREDIT",
+  "canonical_base_commit": "ea4b09a134fcec7761e9070eca76a1c52aa6fc56",
+  "facts_first_gathered_at_commit": "f8c3ffd7ba1fc6725e866ce245c726936dbebe2f",
+  "base_reverification": "All repo sources pinned in material_premises were re-verified byte-identical at canonical_base_commit; newer upstream commits were read for overlap (see relation_to_prior_work where present).",
+  "real_objective": "Establish, from primary evidence, which of the 15 PUBLIC_FIXED_BAR acceptance predicates this project can actually measure, and whether any pinned zero-cost donor-independent substrate exists that could produce a score near the bars, so no reality unit is spent on a route that cannot close a predicate.",
+  "governing_invariants": [
+    "Law (Mission Lock V7): if no realizable existing route can be acquired under hard constraints, record unresolved/theory-falsification evidence; this is not invention authority.",
+    "A public bar is executable only if dataset identity, case access, scorer, Brain response/agent adapter, zero-cost carrier and threshold are all bound before any case exposure (readiness matrix rule).",
+    "No proved claim without independent or objective, scope-complete, content-addressed evidence.",
+    "Benchmarks are subordinate to the live capability question; no proxy goal substitution; claim scope must not exceed evidence scope.",
+    "Hard $0 incremental spend; models may be a substrate only if the Brain-owned configuration materially adds the capability (General Cognition Substrate Law V3)."
+  ],
+  "material_premises": [
+    {
+      "id": "P1_PREDICATE_CENSUS",
+      "fact": "The registry defines 15 PUBLIC_FIXED_BAR predicates; all 15 have score_producing_route_ready=false in the readiness matrix.",
+      "evidence": {
+        "class": "REPO",
+        "paths": [
+          {
+            "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+            "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+          },
+          {
+            "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+            "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P2_CLASSIFICATION",
+      "fact": "Source review classifies 8 of the 15 as owner-computed or owner-private (no third-party route to an official score), 4 as third-party runnable in principle, and 3 as unresolved. Per-predicate rows with excerpts are in public_bar_rows.",
+      "evidence": {
+        "class": "MIXED",
+        "see": "public_bar_rows"
+      }
+    },
+    {
+      "id": "P3_BAR_PROVENANCE",
+      "fact": "The bars come from a mix of evaluators: Anthropic's own runs at max (TB4: xhigh) effort (TB4, TB-Science, HLE with tools, OSWorld, Chartography) and benchmark-owner measurements (Artificial Analysis: AA-Briefcase, GDPval-AA, Finance & Accounting Index; Vals: Finance Agent v2, MysteryMechanism; Zapier: AutomationBench; Cursor: CursorBench; Cognition: FrontierCode). Independent-harness measurements can differ materially (HLE: 67.7% with Anthropic's tools vs 61.4% on Artificial Analysis's harness). 'Comparable harness' therefore means reproducing the evaluator's setup, which for several surfaces includes paid frontier LLM graders or judges.",
+      "evidence": {
+        "class": "SECONDARY_AGGREGATOR",
+        "url": "https://emergent.sh/learn/claude-opus-5-5-benchmarks",
+        "retrieved_utc": "2026-10-02"
+      }
+    },
+    {
+      "id": "P4_NO_BOUND_GENERATOR",
+      "fact": "No pinned donor-independent response generator or agent adapter is bound anywhere in the readiness matrix: AutomationBench lacks 'a frozen donor-independent OpenAI-compatible or equivalent Brain endpoint', LiveBench IF is 'SCORER_READY__GENERATOR_MISSING', Terminal-Bench-Science has 'no bound general Brain agent adapter'. Earlier Brain routes with local Qwen3.5 4B/9B and a Pollinations non-frontier planner were falsified.",
+      "evidence": {
+        "class": "REPO",
+        "paths": [
+          {
+            "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+            "git_blob_sha": "4e59e30461c9ff1bee1a9474627d5fb4074844b2"
+          },
+          {
+            "path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+            "events": [
+              "LOCAL_QWEN3_5_4B_REAL_TASK_B_ROUTE_FALSIFIED_20260929",
+              "LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_ROUTE_FALSIFIED_20260929",
+              "POLLINATIONS_NONFRONTIER_PLANNER_ROUTE_FALSIFIED_20260929"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "P5_FREE_CARRIER_ENVELOPE",
+      "fact": "Free unlimited GitHub-hosted runners (public repositories) are Linux 4 vCPU / 16 GB RAM / 14 GB SSD, x64 or arm64; the standard table lists no GPU runner.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+        "retrieved_utc": "2026-10-02"
+      }
+    },
+    {
+      "id": "P6_CPU_HOSTABLE_CEILING",
+      "fact": "The highest-scoring open model that fits in 12 GB at 4-bit (Qwen3.5 9B) scores 9.2% on Terminal-Bench (Epoch data through Apr 2026; benchmark version unspecified), about 57 points below the 66.4% bar.",
+      "evidence": {
+        "class": "SECONDARY_AGGREGATOR",
+        "url": "https://llmrun.dev/benchmark/terminalbench",
+        "retrieved_utc": "2026-10-02"
+      }
+    },
+    {
+      "id": "P7_OPEN_FRONTIER_CEILING",
+      "fact": "On Artificial Analysis's Terminal-Bench 4.0 board (mini-SWE-agent harness) the best open-weights model scores 41.8% (GLM-5.3, #9) against a 70.6% leader; Kimi K3 scores 12.6 and DeepSeek-V4-Pro 14.6 on the same board. Near-frontier open-weights models are 744B-1.6T-parameter MoEs 'realistically deployable only on rented H100s, Mac Ultras, or standard inference nodes', i.e. not on a free CPU carrier. Vendor-reported figures on custom harnesses are higher but unpinned.",
+      "evidence": {
+        "class": "SECONDARY_AGGREGATOR",
+        "urls": [
+          "https://llmlearner.com/rankings/terminal-bench-4-0",
+          "https://agyn.io/blog/top-open-weight-llms-2026"
+        ],
+        "retrieved_utc": "2026-10-02"
+      }
+    },
+    {
+      "id": "P8_FRONTIERCODE_OPEN_GAP",
+      "fact": "On Cognition's own FrontierCode 1.1 Main leaderboard the best open-weights rows are Kimi K3 at 44.2% and GLM 5.3 (max) at 40.1%, against Opus 5.5 (medium) at 54.6% - a gap of about 10 points, far smaller than on Terminal-Bench 4.0 (P7). Open-weights status of those models is from secondary reports.",
+      "evidence": {
+        "class": "OFFICIAL_PRIMARY",
+        "url": "https://cognition.com/frontiercode",
+        "retrieved_utc": "2026-10-02"
+      }
+    },
+    {
+      "id": "P9_REPO_ROUTE_AUDIT_CORROBORATION",
+      "fact": "The project's own frozen route audit reports zero_cost_executable_surface_count = 0 and portfolio_prequalification_pass_count = 0 across 14 surfaces, with five private surfaces already deleted as execution routes and the rule that 'PRIVATE_OR_GATED_OFFICIAL_SURFACES_MUST_BE_REPLACED_BY_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_OR_REMAIN_BLOCKED'.",
+      "evidence": {
+        "class": "REPO",
+        "path": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+        "git_blob_sha": "350d53862db2830dfe91b31f58b0b9590ff2cbc6"
+      }
+    }
+  ],
+  "public_bar_rows": [
+    {
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "registry_acceptance": "Terminal-Bench 4.0 >= 66.4%",
+      "evaluator": "Terminal-Bench 4.0 public leaderboard / Anthropic own setup",
+      "third_party_reproducibility": "THIRD_PARTY_RUNNABLE_IN_PRINCIPLE__NEEDS_A_PINNED_GENERATOR",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://www.anthropic.com/claude/opus",
+          "excerpt": "The public leaderboard (5 trials/task, Claude Code harness) reports Claude Opus 5 at 51.8%; our setup reproduces it at 52.3%, within noise."
+        }
+      ],
+      "note": "Public tasks; bar is Anthropic's own xhigh-effort run (66.4%, SE +/-2.6). Attainability is separately cut by the frozen accounting (see 2026-10-02_TB4_ATTAINABILITY_RAISE_ANALYSIS_V1).",
+      "repo_readiness": {
+        "dataset": "PUBLIC_PREFLIGHT_PASS__FROZEN_66_TASK_POPULATION",
+        "scorer": "FROZEN_LEADERBOARD_METRIC_BOUND__330_MINIMUM_TRIAL_SLOTS__SUCCESS_IFF_REWARD_GT_ZERO",
+        "brain_route": "BRAIN_OWNED_CONFIGURATION_PRESERVED__CURRENT_SCORE_ROUTE_REVOKED_BY_ATTAINABILITY_CUT",
+        "carrier": "HARDWARE_CAPACITY_NOT_CREDITABLE_CAPACITY__MAXIMUM_ATTAINABLE_SUCCESS_UPPER_BOUND_180_LT_220_REQUIRED",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "CODING_FRONTIERCODE_GE_54_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "registry_acceptance": "FrontierCode v1.1 Main >= 54.4%",
+      "evaluator": "Cognition (private task set; owner runs and adds models)",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://cognition.com/frontiercode",
+          "retrieved_utc": "2026-10-02",
+          "excerpt": "Every task is crafted by the open-source maintainers of the repos it comes from ... every task is manually reviewed by a Cognition researcher. ... Changelog: 'Sep 22, 2026 - Added Claude Opus 5.5.'"
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://benchlm.ai/benchmarks/frontiercode",
+          "excerpt": "FrontierCode 1.1 Main uses 100 of the benchmark's 150 private software-engineering tasks ... the private tasks cannot be independently rerun from the public artifact."
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://epoch.ai/benchmarks/frontiercode",
+          "excerpt": "We source results from Cognition's public FrontierCode leaderboard ... Models are run through agent harnesses such as Claude Code, Codex, mini-SWE-agent, and Devin."
+        }
+      ],
+      "note": "Cognition's page shows Cognition itself adding models to the leaderboard and documents no third-party submission or dataset-access process (absence of evidence, not proof). Cognition lists Opus 5.5 (medium) at 54.6% Main score; the registry bar 54.4% matches Anthropic's table.",
+      "repo_readiness": {
+        "dataset": "NO_CANONICAL_BRAIN_ROUTE_RECEIPT_IDENTIFIED",
+        "scorer": "NOT_BOUND",
+        "brain_route": "NOT_BOUND",
+        "carrier": "NOT_BOUND",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "registry_acceptance": "CursorBench 4.0 >= 57.8%",
+      "evaluator": "Cursor (first-party harness, proprietary tasks)",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://cursor.com/blog/cursorbench",
+          "retrieved_utc": "2026-10-02",
+          "excerpt": "CursorBench, our internal eval suite based on real Cursor sessions from our engineering team ... Many tasks come from our internal codebase and controlled sources ... we use agentic graders to reliably score them."
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://benchgen.com/benchmarks/cursor/cursorbench",
+          "excerpt": "Dataset | Proprietary - not publicly released"
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://www.ridgebench.com/benchmarks/cursor-bench",
+          "excerpt": "Ambiguous multi-file coding-agent tasks from real Cursor sessions; first-party Cursor harness. Not comparable to CursorBench 3.x."
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://neuraltrust.ai/blog/cursor-vs-codex-benchmark",
+          "excerpt": "CursorBench runs only inside Cursor."
+        }
+      ],
+      "note": "Bar value 57.8% matches a published Opus 5.5 figure (tosea.ai); the registry value is not in error.",
+      "repo_readiness": {
+        "dataset": "NO_CANONICAL_BRAIN_ROUTE_RECEIPT_IDENTIFIED",
+        "scorer": "NOT_BOUND",
+        "brain_route": "NOT_BOUND",
+        "carrier": "NOT_BOUND",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "PROWORK_GDPVAL_GE_1846",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "registry_acceptance": "GDPval-AA v2.1 >= 1846 Elo",
+      "evaluator": "Artificial Analysis (Elo from LLM judge panel, anchored to its model pool)",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+          "excerpt": "GDPval-AA v2.1 ... 220 tasks ... Pairwise comparison (Elo) by judge panel, anchored to DeepSeek V4.1 Flash (max) at 1600, frozen & scaled ... graded by a panel of three frontier LLM judges (GPT-5.6 Sol, Gemini 3.8 Flash, Claude Opus 5)."
+        }
+      ],
+      "note": "AA's methodology table marks GDPval-AA as not private (the underlying dataset is OpenAI's GDPval), but the Elo is a relative rating computed by AA against its anchor submissions with paid frontier judges; it cannot be reproduced from the dataset alone.",
+      "repo_readiness": {
+        "dataset": "STAGE1_CLEAN_REPLACEMENTS_FROZEN",
+        "scorer": "EVALUATION_PROTOCOL_EXISTS",
+        "brain_route": "STIRRUP_CONFIGURATION_EXISTS__NO_COMPARABLE_1846_ELO_RESULT",
+        "carrier": "NO_FINAL_SCORE_RECEIPT",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "registry_acceptance": "AA-Briefcase v1.1 >= 1822 Elo",
+      "evaluator": "Artificial Analysis (private multi-week scenarios, Elo)",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+          "excerpt": "AA-Briefcase evaluates models across four multi-week knowledge work projects ... 91 tasks in total ... Independent test run by Artificial Analysis on dedicated hardware. ... Submissions and verdicts in this representative scenario do not contribute to a model's AA-Briefcase Elo."
+        }
+      ],
+      "note": "Only a representative week of one scenario is public. Bar 1822 is AA's own measurement of Opus 5.5 (secondary: vellum.ai, emergent.sh).",
+      "repo_readiness": {
+        "dataset": "NO_FINAL_SCORE_RECEIPT",
+        "scorer": "NO_COMPARABLE_BRAIN_SCORE_RECEIPT",
+        "brain_route": "ARTIFACT_MECHANICAL_ROUTE_EXISTS__PROFESSIONAL_QUALITY_RESULT_OPEN",
+        "carrier": "NOT_SCORE_READY",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "AUTOMATIONBENCH_GE_40",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "registry_acceptance": "AutomationBench >= 40.0%",
+      "evaluator": "Zapier (public 600-task set per repo; Opus 5.5 figure run by Zapier)",
+      "third_party_reproducibility": "THIRD_PARTY_RUNNABLE_IN_PRINCIPLE__NEEDS_A_PINNED_GENERATOR",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://www.anthropic.com/claude/opus",
+          "excerpt": "AutomationBench results were run and reported by Zapier ... Claude Opus 5.5 results come from Zapier's own evaluation during early access."
+        }
+      ],
+      "note": "Repo froze the public 600 set and a strict binary assertion metric; the Opus 5.5 number was owner-run in early access, so comparability to a third-party run is plausible but unproven.",
+      "repo_readiness": {
+        "dataset": "PUBLIC_600_TASK_SET_FROZEN",
+        "scorer": "STRICT_BINARY_ASSERTION_METRIC_BOUND",
+        "brain_route": "MISSING_FROZEN_DONOR_INDEPENDENT_OPENAI_COMPATIBLE_OR_EQUIVALENT_BRAIN_ENDPOINT",
+        "carrier": "PUBLIC_ZERO_COST_PREFLIGHT_PASS",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "HLE_TOOLS_GE_67_7",
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "registry_acceptance": "Humanity's Last Exam with tools >= 67.7%",
+      "evaluator": "Anthropic vendor tool harness (67.7%) vs Artificial Analysis harness (61.4%, no tools)",
+      "third_party_reproducibility": "UNRESOLVED__HARNESS_GRADER_OR_ACCESS_NOT_SETTLED",
+      "classification_evidence_strength": "SECONDARY_SOURCES_ONLY",
+      "evidence": [
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://emergent.sh/learn/claude-opus-5-5-benchmarks",
+          "excerpt": "Humanity's Last Exam | 67.7% (with tools) | 61.4% | 6.3 points (Anthropic-reported vs Artificial Analysis)"
+        }
+      ],
+      "note": "The 'with tools' harness is vendor-defined; grader model and dataset access for a comparable run were not verified. Repo status: content access blocked.",
+      "repo_readiness": {
+        "dataset": "CANONICAL_METADATA_FROZEN__CASE_CONTENT_GATED",
+        "scorer": "STRICT_REFERENCE_LOWER_BOUND_SCORER_INDEPENDENT_PASS",
+        "brain_route": "NO_SCORE_EXECUTION_AUTHORIZED",
+        "carrier": "CONTENT_ACCESS_BLOCKED",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "TB_SCIENCE_GE_58_7",
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "registry_acceptance": "Terminal-Bench-Science 0.1 >= 58.7%",
+      "evaluator": "Terminal-Bench-Science public leaderboard / Anthropic own setup",
+      "third_party_reproducibility": "THIRD_PARTY_RUNNABLE_IN_PRINCIPLE__NEEDS_A_PINNED_GENERATOR",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://www.anthropic.com/claude/opus",
+          "excerpt": "Terminal-Bench-Science 0.1: The standard error is +/-3.5-5 pts per model. The public leaderboard (3 trials/task, Claude Code harness) reports Claude Opus 5 at 30.0%."
+        }
+      ],
+      "note": "Public Harbor route and zero-cost Docker preflight pass per repo; the bar's standard error is wide (+/-3.5-5 pts).",
+      "repo_readiness": {
+        "dataset": "PUBLIC_V0_1_0_IDENTITY_FROZEN",
+        "scorer": "HARBOR_ROUTE_AVAILABLE",
+        "brain_route": "NO_BOUND_GENERAL_BRAIN_AGENT_ADAPTER_FOR_TERMINAL_SCIENCE_TASKS",
+        "carrier": "ZERO_COST_DOCKER_PREFLIGHT_PASS",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "registry_acceptance": "Chartography with tools >= 89.0%",
+      "evaluator": "Anthropic-reported (with tools); Surge HQ runs its own Chartography environment",
+      "third_party_reproducibility": "UNRESOLVED__HARNESS_GRADER_OR_ACCESS_NOT_SETTLED",
+      "classification_evidence_strength": "SECONDARY_SOURCES_ONLY",
+      "evidence": [
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://www.vellum.ai/blog/claude-opus-5-5-benchmarks-explained",
+          "excerpt": "On Chartography (visual chart comprehension with tools), Opus 5.5 posts 89.0%"
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://surgehq.ai/benchmarks/chartography",
+          "excerpt": "Leaderboard lists Claude Opus 5.5 (Adaptive/Max) at 66.3% under an unspecified configuration."
+        }
+      ],
+      "note": "The with-tools harness and dataset openness were not verified; the 89.0 vs 66.3 difference is not explained by the sources (likely different tool configuration).",
+      "repo_readiness": {
+        "dataset": "NO_CANONICAL_SCORE_ROUTE_RECEIPT_IDENTIFIED",
+        "scorer": "NOT_BOUND",
+        "brain_route": "NOT_BOUND_FOR_89_PERCENT_BAR",
+        "carrier": "NOT_BOUND",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "registry_acceptance": "OSWorld 2.1 partial >= 81.8% only on the same harness/setup; otherwise the matched fallback remains open.",
+      "evaluator": "Anthropic own runs (partial credit, LLM grader)",
+      "third_party_reproducibility": "UNRESOLVED__HARNESS_GRADER_OR_ACCESS_NOT_SETTLED",
+      "classification_evidence_strength": "SECONDARY_SOURCES_ONLY",
+      "evidence": [
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://github.com/steel-dev/leaderboard/pull/68",
+          "excerpt": "Explain the five single-attempt runs, maximum effort, 500-step budget, Opus 4.8 grader, and context compaction."
+        },
+        {
+          "class": "SECONDARY_AGGREGATOR",
+          "url": "https://aievals.app/benchmarks/osworld-2-1",
+          "excerpt": "Versions are not comparable: the task set changes between them."
+        }
+      ],
+      "note": "Same 81.8% was first labelled OSWorld 2.0 (Sep 22) and relabelled 2.1 (Sep 28); the registry label is consistent with the latest report. A grader that is a paid frontier model cannot be reproduced at $0.",
+      "repo_readiness": {
+        "dataset": "MATCHED_SAME_HARNESS_REQUIRED",
+        "scorer": "NOT_BOUND_TO_COMPARABLE_OPUS_SETUP",
+        "brain_route": "NO_SAME_HARNESS_81_8_RESULT",
+        "carrier": "NOT_BOUND",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "family": "FINANCIAL_ANALYSIS",
+      "registry_acceptance": "Finance & Accounting Index >= 61 on comparable harness/configuration.",
+      "evaluator": "Artificial Analysis composite index",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+          "excerpt": "The Finance & Accounting Index is calculated as a weighted average of its capability sub-scores: Business Knowledge (30%), Agentic Knowledge Work (30%), Reasoning (20%), Agentic Tool Use (10%), Long-Context (5%), and Non-Hallucination (5%)."
+        }
+      ],
+      "note": "Composite of AA-owned evaluations (including the private AA-Briefcase), so not reproducible by a third party.",
+      "repo_readiness": {
+        "dataset": "REFERENCE_BAR_ONLY",
+        "scorer": "NO_SCORE_REPRODUCTION_ROUTE",
+        "brain_route": "COMPONENT_DIRECT_PROOFS_BOUND__PUBLIC_BAR_RESULT_STILL_REQUIRED",
+        "carrier": "NOT_SCORE_READY",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "FINANCE_AGENT_V2_GE_58_59",
+      "family": "FINANCIAL_ANALYSIS",
+      "registry_acceptance": "Finance Agent v2 >= 58.59% on comparable Vals setup.",
+      "evaluator": "Vals AI (private test set)",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://www.vals.ai/methodology",
+          "excerpt": "Scores are based on our privately held test sets ... Test Set: This dataset remains private at all times, and is the only dataset that is used for the benchmarks we publish."
+        }
+      ],
+      "note": "A public validation subset exists for the benchmark family but is not the scored population.",
+      "repo_readiness": {
+        "dataset": "NO_CANONICAL_BRAIN_SCORE_ROUTE_RECEIPT_IDENTIFIED",
+        "scorer": "NOT_BOUND",
+        "brain_route": "NOT_BOUND",
+        "carrier": "NOT_BOUND",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "registry_acceptance": "LiveBench Instruction Following >= 65.7%",
+      "evaluator": "LiveBench (open code, objective ground truth, monthly rotating questions)",
+      "third_party_reproducibility": "THIRD_PARTY_RUNNABLE_IN_PRINCIPLE__NEEDS_A_PINNED_GENERATOR",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://arxiv.org/pdf/2406.19314",
+          "excerpt": "we open-source the leaderboard, all questions, all code to run API and open-source models, all model outputs for 40 models, and all code to score the models ... scored automatically according to the objective ground truth without the use of an LLM judge."
+        }
+      ],
+      "note": "Questions rotate monthly, so a score is comparable only within one pinned release; repo has a hermetic pinned input and 58 checkers (scorer ready, generator missing).",
+      "repo_readiness": {
+        "dataset": "PINNED_HERMETIC_INPUT_BINDING_READY",
+        "scorer": "58_CHECKERS_HERMETIC_AND_MUTATION_PREFLIGHT_PASS",
+        "brain_route": "RESPONSE_FORMAT_ADAPTER_ONLY__NO_DONOR_INDEPENDENT_RESPONSE_GENERATOR_BOUND",
+        "carrier": "SCORER_READY__GENERATOR_MISSING",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "family": "ARTIFACT_CREATION",
+      "registry_acceptance": "AA-Briefcase v1.1 >= 1822 Elo on comparable harness for covered professional deliverable scope.",
+      "evaluator": "Artificial Analysis (same surface as PROWORK_AA_BRIEFCASE_GE_1822)",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+          "excerpt": "Independent test run by Artificial Analysis on dedicated hardware."
+        }
+      ],
+      "note": "Duplicate surface; the predicate additionally restricts to covered professional deliverable scope.",
+      "repo_readiness": {
+        "dataset": "NO_FINAL_SCORE_RECEIPT",
+        "scorer": "NO_COMPARABLE_BRAIN_SCORE_RECEIPT",
+        "brain_route": "ARTIFACT_MECHANICAL_ROUTE_EXISTS__PROFESSIONAL_QUALITY_RESULT_OPEN",
+        "carrier": "NOT_SCORE_READY",
+        "score_producing_route_ready": false
+      }
+    },
+    {
+      "predicate_id": "MYSTERYMECHANISM_GE_49_55",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "registry_acceptance": "MysteryMechanism >= 49.55% on comparable Vals setup.",
+      "evaluator": "Vals AI (private structural probes)",
+      "third_party_reproducibility": "OWNER_COMPUTED_OR_PRIVATE__NO_THIRD_PARTY_ROUTE_TO_AN_OFFICIAL_SCORE",
+      "classification_evidence_strength": "HAS_OFFICIAL_PRIMARY_SOURCE",
+      "evidence": [
+        {
+          "class": "OFFICIAL_PRIMARY",
+          "url": "https://www.vals.ai/benchmarks/mysterymechanism",
+          "excerpt": "The submitted expression is executed on private, continuously sampled structural probes ... three frozen examples expose the exact task shape without revealing any validation or test mechanism. ... The benchmark contains 222 mechanisms."
+        }
+      ],
+      "note": "Task shape is public (three examples) but scored mechanisms and probes are private.",
+      "repo_readiness": {
+        "dataset": "NO_CANONICAL_BRAIN_SCORE_ROUTE_RECEIPT_IDENTIFIED",
+        "scorer": "NOT_BOUND",
+        "brain_route": "NOT_BOUND_FOR_49_55_PERCENT_BAR",
+        "carrier": "NOT_BOUND",
+        "score_producing_route_ready": false
+      }
+    }
+  ],
+  "relation_to_prior_work": [
+    {
+      "artifact": "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+      "relation": "AGREES",
+      "detail": "The owner's frozen audit already finds zero zero-cost-executable surfaces among 14 (P9). This receipt adds a quantified substrate ceiling (P5-P8) and primary-source reasons for each surface's classification."
+    },
+    {
+      "artifact": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+      "relation": "AGREES",
+      "detail": "Same operational conclusion for FrontierCode, CursorBench, AA-Briefcase, Finance Agent v2 and MysteryMechanism: they cannot be execution routes. This receipt supplies official primary-source evidence of why (owner-run private tasks, probes and Elo)."
+    },
+    {
+      "artifact": "canonical/governance/DELETED_PRIVATE_BAR_STRONGER_PROOF_RECONCILIATION_V1.json",
+      "relation": "AGREES_AND_QUESTIONS_DISCHARGEABILITY",
+      "detail": "That candidate keeps the six affected predicates frozen and requires independent scope-complete stronger proofs that imply each unchanged bar; its own nonclaims say behavioral obligation coverage does not establish numeric bar equivalence. No discharge mechanism is visible in the repo. INFERENCE: a numeric bar on a private, unobservable population cannot be implied by finite Brain-side evidence without scope transport, which the project already forbids (OPUS55_SYNTHESIS_ZERO_REALITY_DISCHARGE_EXHAUSTION_V1: finite_empirical_scope_transport = INDEPENDENTLY_FORBIDDEN). Testable by the first BUILD_*_STRONGER_PROOF attempt; the repo's own fallback is 'remain blocked'."
+    },
+    {
+      "artifact": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2.json",
+      "relation": "EXTENDS",
+      "detail": "It lists BIND_GDPVAL_PUBLIC_ROUTE and BIND_FINANCE_ACCOUNTING_INDEX_PUBLIC_ROUTE as live public route candidates. Primary sources show the scored quantities (GDPval-AA Elo, Finance & Accounting Index) are Artificial Analysis computations (judge-panel pairwise Elo anchored to AA's model pool; a composite that includes the private AA-Briefcase), so the numeric bars are not third-party reproducible although GDPval's task data is public. The same deletion logic would apply unless a precise public surrogate with a scope audit is adopted."
+    }
+  ],
+  "evidence_refs": [
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+    "canonical/governance/ZERO_COST_EVALUATION_ROUTE_MATRIX_V1.json",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+    "canonical/reasoning/2026-10-02_OPUS55_PUBLIC_BAR_AND_COMPARATOR_FEASIBILITY_RECONCILIATION_V1.json"
+  ],
+  "conclusion": "No unilateral zero-cost route to the conjunction of the 15 public-bar predicates is currently evidenced, and the project's own route audit agrees (zero_cost_executable_surface_count = 0 of 14 surfaces). Eight predicates are owner-computed or owner-private: the project cannot measure them, and the only candidate route is the owner's stronger-proof substitution, for which no discharge mechanism is visible and which, by the project's own scope-transport prohibition, cannot imply a numeric bar on an unobservable private population from finite Brain-side evidence (an inference to be tested by the first BUILD_*_STRONGER_PROOF attempt; the repo's fallback for such predicates is to remain blocked). Four predicates are third-party runnable but all need a pinned donor-independent generator the repo does not have: the best CPU-hostable open model found scores 9.2% on Terminal-Bench (version unspecified), about 57 points below the TB4 bar, and the best open-weights model on an independent TB4 board (41.8%) needs GPU-class inference that is not zero-cost. Because the terminal certificate requires every predicate, the terminal goal cannot be made true by capability work inside the current constraints unless the owner-computed predicates are re-posed or proven by a mechanism not yet shown, and a pinned generator is bound. This is evidence about the formulation and constraints, not a claim that Opus-level capability is impossible in principle.",
+  "selected_route": "RECORD_THEORY_FALSIFICATION_EVIDENCE__REQUIRE_OWNER_LEVEL_RECONCILIATION_OF_PREDICATES_AND_CONSTRAINTS__SPEND_NO_REALITY_UNIT_ON_THE_8_OWNER_COMPUTED_PREDICATES__CONTINUE_ONLY_ZERO_REALITY_ACTIONS",
+  "owner_level_levers_not_adopted": [
+    {
+      "id": "L1_REPOSE_OWNER_PRIVATE_PREDICATES",
+      "lever": "For each of the 8 owner-computed predicates either obtain an owner-run evaluation of a frozen Brain endpoint, or replace it by an open, scope-equivalent public surrogate with an explicit scope audit, or exhibit a scope-transport-free stronger-proof mechanism for at least one of them as a falsification test of the current substitution plan.",
+      "needs": "Mission-lock reconciliation; some owners may not evaluate unknown systems."
+    },
+    {
+      "id": "L2_SUBSTRATE_BUDGET_EXCEPTION",
+      "lever": "Authorize a bounded, pinned, GPU-class inference budget or credits for a near-frontier open-weights substrate behind a frozen OpenAI-compatible Brain endpoint.",
+      "needs": "An explicit exception to the $0 rule; even then TB4's 66.4% is above the best independent open-weights score (41.8%), so this is necessary but not sufficient."
+    },
+    {
+      "id": "L3_REPOSE_TB4",
+      "lever": "Reconcile the TB4 protocol (see 2026-10-02_TB4_ATTAINABILITY_RAISE_ANALYSIS_V1).",
+      "needs": "Owner decision."
+    },
+    {
+      "id": "L4_RESTORE_A_CARRIER",
+      "lever": "Restore Brain-hosted Actions or formalize the public runner as sole carrier (see 2026-10-02_GITHUB_ACTIONS_BILLING_ROOT_CAUSE_RECONCILIATION_V1).",
+      "needs": "Account owner billing decision."
+    }
+  ],
+  "rejected_material_alternatives": [
+    {
+      "alternative": "Run the available public-bar cases with the best locally hostable model to 'make progress'.",
+      "decisive_reason": "Cannot reach any bar (P6, P7), consumes scarce untouched evidence, and would produce zero credit."
+    },
+    {
+      "alternative": "Substitute Artificial Analysis or Vals proxies computed by the project for the owner-computed bars.",
+      "decisive_reason": "Proxy goal substitution and scope inflation are forbidden unless an explicit owner-level replacement with a scope audit is adopted."
+    },
+    {
+      "alternative": "Use a closed frontier model (donor) as the generator to reach the bars.",
+      "decisive_reason": "That is externalized capability, not Brain ownership (General Cognition Substrate Law V3) and is not zero-cost."
+    },
+    {
+      "alternative": "Declare the owner's stronger-proof substitution impossible.",
+      "decisive_reason": "Unproven either way: no mechanism is shown, so the dischargeability concern is recorded as a testable inference, not a verdict."
+    },
+    {
+      "alternative": "Declare the goal infeasible in principle.",
+      "decisive_reason": "Not supported: the evidence concerns this conjunction under these constraints, not what any system could do."
+    }
+  ],
+  "uncertainties": [
+    "Secondary-aggregator facts (the HLE gap in P3, P6, P7 and the three UNRESOLVED rows) were not cross-checked against primary pages; refresh them before any reliance beyond this receipt. All 8 owner-computed classifications and all 4 runnable classifications rest on at least one official primary source.",
+    "Third-party submission programs at Cognition, Cursor, Vals and Artificial Analysis were not found on their public pages (absence of evidence, not proof); a private arrangement could change a row from OWNER to a viable route.",
+    "HLE, Chartography and OSWorld 2.1 grader/harness facts are unresolved.",
+    "Open-weights scores are harness-sensitive (AA's mini-SWE-agent board vs vendor harnesses differ widely); P7 is a conservative independent ceiling, not a bound on what a tuned harness could achieve.",
+    "The 2026 model and benchmark names come from live sources retrieved 2026-10-02 and are not independently known to this actor."
+  ],
+  "assumptions": [
+    "Bars in the registry equal the published vendor figures cited by the repo (spot-checked: AA-Briefcase 1822, CursorBench 57.8, OSWorld 81.8, FrontierCode 54.4, Chartography 89.0, HLE 67.7 all appear in secondary reports)."
+  ],
+  "non_goals": [
+    "Executing any benchmark case or consuming any reality unit.",
+    "Changing the registry, hypergraph or any predicate.",
+    "Choosing among L1..L4."
+  ],
+  "next_action": "(1) Owner reconciliation of L1..L4. (2) Before more effort goes into any BUILD_*_STRONGER_PROOF action for the 8 owner-computed predicates, require a short dischargeability argument showing how finite Brain-side evidence implies the private numeric bar without scope transport; absent it, mark the predicate blocked as owner-computed. (3) Treat the targets of BIND_GDPVAL_PUBLIC_ROUTE and BIND_FINANCE_ACCOUNTING_INDEX_PUBLIC_ROUTE like the deleted five unless a precise public surrogate with a scope audit is adopted. (4) Zero-reality actions only; refresh the secondary-source facts and probe third-party submission programs (zero-cost, read-only) before any predicate is re-posed.",
+  "supersession_conditions": [
+    "A benchmark owner offers a third-party evaluation route for a frozen Brain endpoint.",
+    "A pinned zero-cost substrate scoring within noise of a bar on an independent harness is found.",
+    "The owner re-poses predicates or relaxes the $0 constraint.",
+    "A primary source contradicts a classification in public_bar_rows."
+  ],
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
