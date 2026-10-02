@@ -1,18 +1,37 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1",
   "date": "2026-10-02",
-  "source_basis_blob_sha": "cfba09f6d2b1badb1aa5f23a95a2d669d581d73e",
-  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "source_basis_blob_sha": "e1f2a1c1f8fa048579423b2fdb0cdc181d1c3f2d",
+  "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "status": "CANONICAL_SCHEDULING_RECEIPT__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
-  "closed_route_count": 2,
-  "open_route_count": 10,
+  "closed_route_count": 1,
+  "open_route_count": 11,
   "closed_behavior_ids": [
-    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
-    "TASK_TO_DELEGATION_GRAPH_001"
+    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001"
   ],
-  "top_priority_behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+  "top_priority_behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
   "queue": [
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "portfolio": "T2",
+      "proof_state": "CURRENT_CANDIDATE_ORACLE_CHANGED__EXACT_BLOB_REVALIDATION_REQUIRED__ZERO_TERMINAL_AUTHORITY",
+      "blockers": [
+        "CURRENT_DELEGATION_CANDIDATE_ORACLE_EXACT_BLOB_REVALIDATION_PENDING"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 0,
+        "external_block": 0,
+        "other": 1
+      },
+      "independent_or_information_safe_preflight_present": false,
+      "portfolio_leverage": 1,
+      "priority_score": 47,
+      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+    },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
       "portfolio": "T2",
@@ -26,6 +45,8 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 0,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 1
       },
       "independent_or_information_safe_preflight_present": true,
@@ -46,6 +67,8 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
@@ -66,6 +89,8 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
@@ -86,6 +111,8 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
@@ -106,6 +133,8 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
@@ -126,6 +155,8 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
@@ -146,33 +177,13 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 1,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
       "portfolio_leverage": 1,
       "priority_score": 100,
-      "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
-    },
-    {
-      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
-      "portfolio": "T0_T2",
-      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL_FREEZE_PENDING__EXACT_COMPARATOR_ZERO_COST_ROUTE_CURRENTLY_BLOCKED",
-      "blockers": [
-        "FREEZE_SELF_VERIFICATION_CAUSAL_INTERVENTION_CHALLENGE_SOURCE_POOL_AND_SCORER",
-        "FREEZE_BRAIN_OWNED_TRAJECTORY_CAPABILITY_PACKAGE_AND_DEPENDENCY_MANIFEST",
-        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
-        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_CAUSAL_RECOVERY_SCOPE",
-        "FREEZE_POST_FREEZE_SELECTOR_ONLY_AFTER_COMPARATOR_OR_SCOPE_EQUIVALENT_PUBLIC_EVIDENCE_ROUTE_EXISTS"
-      ],
-      "blocker_classes": {
-        "binding": 1,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "other": 4
-      },
-      "independent_or_information_safe_preflight_present": true,
-      "portfolio_leverage": 2,
-      "priority_score": 187,
       "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
     },
     {
@@ -190,6 +201,8 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 2,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 1
       },
       "independent_or_information_safe_preflight_present": true,
@@ -212,12 +225,38 @@
         "binding": 1,
         "scope_gate": 1,
         "scope_expansion": 3,
+        "open_domain_protocol": 0,
+        "external_block": 0,
         "other": 0
       },
       "independent_or_information_safe_preflight_present": true,
       "portfolio_leverage": 1,
       "priority_score": 300,
       "next_action_class": "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+    },
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "portfolio": "T0_T2",
+      "proof_state": "BOUNDED_INFORMATION_SAFE_PREFLIGHT_PRESERVED__OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL_FREEZE_PENDING__EXACT_COMPARATOR_ZERO_COST_ROUTE_CURRENTLY_BLOCKED",
+      "blockers": [
+        "FREEZE_SELF_VERIFICATION_CAUSAL_INTERVENTION_CHALLENGE_SOURCE_POOL_AND_SCORER",
+        "FREEZE_BRAIN_OWNED_TRAJECTORY_CAPABILITY_PACKAGE_AND_DEPENDENCY_MANIFEST",
+        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
+        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_CAUSAL_RECOVERY_SCOPE",
+        "FREEZE_POST_FREEZE_SELECTOR_ONLY_AFTER_COMPARATOR_OR_SCOPE_EQUIVALENT_PUBLIC_EVIDENCE_ROUTE_EXISTS"
+      ],
+      "blocker_classes": {
+        "binding": 0,
+        "scope_gate": 0,
+        "scope_expansion": 0,
+        "open_domain_protocol": 4,
+        "external_block": 1,
+        "other": 0
+      },
+      "independent_or_information_safe_preflight_present": true,
+      "portfolio_leverage": 2,
+      "priority_score": 1002,
+      "next_action_class": "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
     }
   ],
   "execution_authority": false,
@@ -226,5 +265,5 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "rule": "SCHEDULING_ONLY__RECOMPUTE_AFTER_EVERY_ACTIVE_BASIS_CHANGE__NO_ROUTE_PROMOTION_WITHOUT_SCOPE_GATE_AND_PREQUALIFICATION_AUTHORITY"
+  "rule": "SCHEDULING_ONLY__OPEN_DOMAIN_MATCHED_PROTOCOLS_NOT_FINITE_SCOPE_SUPERSET_PROOFS__EXTERNAL_COMPARATOR_BLOCKS_DO_NOT_SPEND_CLEAN_CASES"
 }
