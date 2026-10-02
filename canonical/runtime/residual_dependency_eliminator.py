@@ -197,6 +197,34 @@ def eliminate_residual(claim: ResidualClaim) -> dict[str, Any]:
     }
 
 
+def eliminate_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Classify a frozen JSON-style residual batch without silently accepting fields."""
+    if not isinstance(payload, Mapping):
+        return {"status": "FAIL_CLOSED", "reason": "PAYLOAD_NOT_MAPPING"}
+    rows = payload.get("claims")
+    if not isinstance(rows, list):
+        return {"status": "FAIL_CLOSED", "reason": "CLAIMS_NOT_LIST"}
+    allowed = set(ResidualClaim.__dataclass_fields__)
+    claims: list[ResidualClaim] = []
+    for i, row in enumerate(rows):
+        if not isinstance(row, Mapping):
+            return {"status": "FAIL_CLOSED", "reason": f"CLAIM_NOT_MAPPING:{i}"}
+        unknown = sorted(set(row) - allowed)
+        if unknown:
+            return {"status": "FAIL_CLOSED", "reason": f"UNKNOWN_CLAIM_FIELDS:{i}:" + ",".join(unknown)}
+        data = dict(row)
+        deps = data.get("dependency_residual_ids", ())
+        if isinstance(deps, list):
+            data["dependency_residual_ids"] = tuple(deps)
+        try:
+            claims.append(ResidualClaim(**data))
+        except Exception as exc:
+            return {"status": "FAIL_CLOSED", "reason": f"CLAIM_CONSTRUCTION_FAILED:{i}:{type(exc).__name__}"}
+    out = eliminate_batch(claims)
+    out["schema"] = "PROJECT_BRAIN_RESIDUAL_DEPENDENCY_ELIMINATION_VERDICT_V1"
+    return out
+
+
 def eliminate_batch(claims: Sequence[ResidualClaim]) -> dict[str, Any]:
     if not isinstance(claims, Sequence) or isinstance(claims, (str, bytes)):
         return {"status": "FAIL_CLOSED", "reason": "CLAIMS_NOT_SEQUENCE"}
