@@ -6,7 +6,6 @@
   "obligations": [
     "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
     "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
-    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
     "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
     "TASK_TO_DELEGATION_GRAPH_001",
     "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -24,24 +23,6 @@
     },
     {
       "id": "P1_TERMINAL_BINDING",
-      "status": "OPEN",
-      "closable": true,
-      "external_blocked": false,
-      "dependency_depth": 1,
-      "critical_path_wall_clock_units": 1,
-      "new_reality_units": 0
-    },
-    {
-      "id": "P3_SCOPE_EQUIVALENCE",
-      "status": "OPEN",
-      "closable": true,
-      "external_blocked": false,
-      "dependency_depth": 1,
-      "critical_path_wall_clock_units": 1,
-      "new_reality_units": 0
-    },
-    {
-      "id": "P3_TERMINAL_BINDING",
       "status": "OPEN",
       "closable": true,
       "external_blocked": false,
@@ -69,24 +50,6 @@
       "zero_incremental_spend": true,
       "oracle_independent": true,
       "candidate_oracle_hidden": true
-    },
-    {
-      "id": "P3_HIDDEN_SUPPORT_GRAPH_EXHAUSTIVE",
-      "covers": [
-        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
-      ],
-      "proof_mode": "EXHAUSTIVE_FINITE",
-      "blockers": [
-        "P3_SCOPE_EQUIVALENCE",
-        "P3_TERMINAL_BINDING"
-      ],
-      "base_admissible": true,
-      "terminal_scope_authority": false,
-      "terminal_scope_authority_after_blockers": true,
-      "scope_authority_blocker": "P3_SCOPE_EQUIVALENCE",
-      "zero_incremental_spend": true,
-      "finite_domain_frozen": true,
-      "exhaustive": true
     }
   ],
   "execution_authority": false,
@@ -94,5 +57,11 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
-  "note": "Five obligations intentionally have no internally admissible route encoded yet; they remain residual rather than being proxied or guessed."
+  "note": "Live frontier resynchronized to ACTIVE_TERMINAL_PROOF_BASIS_V1: admitted P3 synthesis removed. Five obligations currently have no internally admissible route encoded here; trajectory retains the P1 internal absolute-route candidate. Scheduling only; no terminal credit.",
+  "authority_sync": {
+    "source": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "admitted_contract_removed": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "expected_open_obligation_count": 6,
+    "fail_closed_if_authority_diverges": true
+  }
 }
