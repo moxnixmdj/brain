@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_ROUTE_RESEARCH_INFORMATION_EXPOSURE_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED__TWO_PREVIOUSLY_RECOVERABLE_TASKS_NOW_INELIGIBLE_FOR_CLEAN_PROMOTION_IN_CURRENT_FROZEN_LANE",
+  "exposure_context": "CENTRAL_ROUTE_RESEARCH_AFTER_TASK_IDENTITIES_WERE_KNOWN",
+  "firewall_basis": "canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json",
+  "exposed_sources": [
+    {
+      "rank": 51,
+      "task_identity_sha256": "df7698b70d66821d1ccac06ffcc08e4659ddd199068170b923e981128cd5334d",
+      "source_git_blob_sha": "67ab82e40f9158eb65055db00fb590376f6f80f6",
+      "source_kind": "OFFICIAL_TASK_METADATA",
+      "disqualifying_content_class": "EXPLICIT_SOLUTION_AND_VERIFICATION_EXPLANATION",
+      "clean_credit_eligibility": false
+    },
+    {
+      "rank": 46,
+      "task_identity_sha256": "d5f6f084ac01e8335d3364f5f44d4fb81b558d03a80af97deaa6162163cb19cc",
+      "source_git_blob_sha": "b5b2f072a716b11e3527102ae164a8ae43043e56",
+      "source_kind": "OFFICIAL_TASK_METADATA",
+      "disqualifying_content_class": "EXPLICIT_SOLUTION_AND_VERIFICATION_EXPLANATION",
+      "clean_credit_eligibility": false
+    }
+  ],
+  "rule": "DO_NOT_HIDE_OPERATOR_INFORMATION_EXPOSURE__SOLUTION_BEARING_TASK_METADATA_INVALIDATES_CLEAN_PROMOTION_FOR_THAT_TASK_WITHIN_THE_CURRENT_FROZEN_EVALUATION_LANE",
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
