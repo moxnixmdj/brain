@@ -197,6 +197,26 @@ def build_universe():
     regenerated["counts"] = counts
 
     if open_impl_mech:
+        regenerated["status"] = (
+            "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__"
+            "EXACT_TERMINAL_OBSERVATION_CUT_FROZEN__"
+            + ("LANE_LOCAL_AND_SHARED_IMPLEMENTATION_RESIDUALS_OPEN" if open_lane_mech else "ONLY_SHARED_CROSS_LANE_IMPLEMENTATION_RESIDUALS_OPEN")
+            + "__FRESH_TERMINAL_EVIDENCE_BLOCKED"
+        )
+    elif open_gate_mech:
+        regenerated["status"] = (
+            "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__"
+            "NO_IMPLEMENTATION_RESIDUALS__EXACT_TERMINAL_OBSERVATION_CUT_FROZEN__"
+            "GLOBAL_OWNERSHIP_GATES_OPEN__FRESH_TERMINAL_EVIDENCE_BLOCKED"
+        )
+    else:
+        regenerated["status"] = (
+            "FROZEN_OUTER_UNIVERSE__SPECIFICATION_CLOSED__"
+            "NO_IMPLEMENTATION_OR_MECHANISM_GAPS__EXACT_TERMINAL_OBSERVATION_CUT_FROZEN__"
+            "EXECUTION_READY"
+        )
+
+    if open_impl_mech:
         regenerated["next"] = (
             "CLOSE_OR_EXACTLY_BOUND_ONLY_CURRENT_DERIVED_IMPLEMENTATION_RESIDUALS__"
             "THEN_CLOSE_GLOBAL_OWNERSHIP_GATES__REGENERATE_AND_VERIFY_UNIVERSE__"
