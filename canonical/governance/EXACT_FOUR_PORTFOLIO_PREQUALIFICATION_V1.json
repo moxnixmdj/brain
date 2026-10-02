@@ -103,7 +103,11 @@
       ],
       "background_reference_surfaces": [
         "Vals MysteryMechanism >=49.55% represented scope__BACKGROUND_REFERENCE_ONLY__DIRECT_EXECUTION_ROUTE_DELETED"
-      ]
+      ],
+      "deleted_required_surfaces": [
+        "Vals MysteryMechanism official heldout"
+      ],
+      "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V1.json"
     }
   },
   "public_evidence_checked": [
@@ -215,14 +219,39 @@
   },
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
   "remaining_irreducible_prequalification_blockers": [
-    "PRIVATE_OR_NONPUBLIC_EXACT_TARGET_SURFACES_REQUIRE_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_CONTRACTS",
-    "PUBLIC_RUNNABLE_SURFACES_REQUIRE_PINNED_ZERO_COST_BRAIN_ADAPTER_AND_RESOURCE_PREFLIGHT",
-    "PORTFOLIO_TASK_ORACLE_MUTATION_CONTAMINATION_AND_DEPENDENCY_MANIFESTS_REQUIRE_FREEZE_BEFORE_FIRST_RESULT"
+    "FOUR_UNCOVERED_BEHAVIORAL_PROOF_OBLIGATIONS_REQUIRE_ADMISSIBLE_ZERO_COST_DIRECT_ROUTES",
+    "PUBLIC_RUNNABLE_SURFACES_REQUIRE_PINNED_ZERO_COST_BRAIN_ADAPTER_RESOURCE_SCORER_AND_ASSET_PREFLIGHT",
+    "PORTFOLIO_TASK_ORACLE_MUTATION_CONTAMINATION_AND_DEPENDENCY_MANIFESTS_REQUIRE_FREEZE_BEFORE_FIRST_RESULT",
+    "PREWAVE_CONTROLLER_COMPOSITION_REQUIRES_INDEPENDENT_GREEN_EXECUTION_ON_RELIABLE_CARRIER"
   ],
   "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
   "proof_route_dominance_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "finite_population_proof_verification": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "private_surface_dependency_deletion_map": "canonical/governance/PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1.json",
   "independent_verification_carrier_fallback": "canonical/governance/INDEPENDENT_VERIFICATION_CARRIER_FALLBACK_V1.json",
-  "private_surface_route_deletion_vs_substitution_reconciliation": "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json"
+  "private_surface_route_deletion_vs_substitution_reconciliation": "canonical/governance/PRIVATE_SURFACE_ROUTE_DELETION_VS_SUBSTITUTION_RECONCILIATION_V1.json",
+  "private_surface_dominance_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V1.json",
+  "private_surface_dependency_status": {
+    "independently_verified_runner": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "deleted_required_route": [
+      "Vals MysteryMechanism official heldout"
+    ],
+    "remaining_uncovered_behavioral_obligations": [
+      "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "rule": "PRIVATE_SURFACE_DELETION_CHANGES_REQUIRED_EVIDENCE_ROUTE_ONLY__ZERO_FAMILY_OR_CAPABILITY_CREDIT"
+  },
+  "execution_carrier_state": {
+    "private_brain_github_actions": "FAIL_CLOSED_PRESTEP_CARRIER_FAILURE",
+    "evidence": "canonical/governance/GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE_20261002_V1.json",
+    "alternate_public_runner": "moxnixmdj/verification-capsule-runner",
+    "alternate_runner_proven_for": [
+      "PROOF_ROUTE_DOMINANCE",
+      "FINITE_POPULATION_PROOF"
+    ],
+    "terminal_wave_authority": false
+  }
 }
