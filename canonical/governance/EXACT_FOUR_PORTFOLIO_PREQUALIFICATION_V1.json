@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__LIVEBENCH_MUTATION_AND_HARBOR_ZERO_CASE_CARRIER_PREFLIGHTS_CLOSED__SURFACE_SPECIFIC_BINDINGS_AND_FINAL_PREWAVE_AUDITS_REMAIN",
+  "status": "ACTIVE_FAIL_CLOSED__SCOPE_FREEZES_CLOSED__SURVIVING_PUBLIC_SURFACE_PREFLIGHTS_AND_FINAL_DEPENDENCY_CLEANLINESS_REMAIN",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -70,14 +70,14 @@
       ],
       "blockers": [
         "GDPVAL_PUBLIC_GOLD_SCOPE_TASK_RESOURCE_AND_ABSOLUTE_ACCEPTANCE_BINDING_NOT_YET_FROZEN",
-        "FINANCE_AND_ACCOUNTING_INDEX_COMPOSITE_IDENTITY_RESOLVED__COMPONENT_ROUTE_BINDINGS_REMAIN",
         "CHARTOGRAPHY_PUBLIC_HARNESS_EXISTS__FULL_SCORER_TOOL_EQUIVALENCE_PREFLIGHT_NOT_YET_FROZEN"
       ],
       "deleted_required_surfaces": [
         "AA-Briefcase v1.1 official private route",
         "Finance Agent v2 official private heldout route"
       ],
-      "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json"
+      "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+      "finance_index_component_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
     },
     "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": {
       "status": "PREQUALIFICATION_INCOMPLETE__ROUTE_MATRIX_FROZEN__SURFACE_BINDINGS_REMAIN",
@@ -100,8 +100,7 @@
       ],
       "blockers": [
         "TERMINAL_BENCH_SCIENCE_HARBOR_DOCKER_CARRIER_PASS__PER_CASE_RESOURCE_AND_BRAIN_AGENT_ADAPTER_PREFLIGHT_OPEN",
-        "HLE_DATA_AND_CORE_EVAL_ARE_PUBLIC__TOOLS_HARNESS_AND_ZERO_COST_SHORT_ANSWER_GRADER_NOT_YET_FROZEN",
-        "T3_UNKNOWN_DOMAIN_DIRECT_SYNTHESIS_BINDING_FROZEN__REMAINING_UNKNOWN_DOMAIN_SCOPE_AUDIT_NOT_YET_FROZEN"
+        "HLE_DATA_AND_CORE_EVAL_ARE_PUBLIC__TOOLS_HARNESS_AND_ZERO_COST_SHORT_ANSWER_GRADER_NOT_YET_FROZEN"
       ],
       "background_reference_surfaces": [
         "Vals MysteryMechanism >=49.55% represented scope__BACKGROUND_REFERENCE_ONLY__DIRECT_EXECUTION_ROUTE_DELETED"
@@ -109,7 +108,8 @@
       "deleted_required_surfaces": [
         "Vals MysteryMechanism official heldout"
       ],
-      "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json"
+      "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+      "unknown_domain_scope_audit": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json"
     }
   },
   "public_evidence_checked": [
@@ -238,7 +238,9 @@
     "livebench_if_prequalification_verifier_stack_complete": true,
     "harbor_0_23_local_docker_carrier_pass": "canonical/verification/HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1.json",
     "terminal_bench_4_zero_case_route_preflight": "INDEPENDENT_PASS__canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "harbor_zero_cost_terminal_carrier_preflight": "INDEPENDENT_PASS__canonical/verification/HARBOR_TERMINAL_CARRIERS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "harbor_zero_cost_terminal_carrier_preflight": "INDEPENDENT_PASS__canonical/verification/HARBOR_TERMINAL_CARRIERS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "finance_index_component_route_binding_frozen": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
+    "t3_unknown_domain_scope_audit_frozen": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json"
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -256,7 +258,6 @@
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
   "remaining_irreducible_prequalification_blockers": [
     "SURVIVING_PUBLIC_SURFACES_REQUIRE_ONLY_SURFACE_SPECIFIC_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_OR_SCOPE_EQUIVALENCE_PREFLIGHTS_NOT_ALREADY_INDEPENDENTLY_CLOSED",
-    "FINANCE_INDEX_COMPONENT_ROUTE_BINDINGS_AND_T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_REQUIRE_FREEZE",
     "FINAL_PREWAVE_OPAQUE_PROVIDER_DONOR_COMPOSITION_AND_DEPENDENCY_AUDITS_REQUIRE_PASS"
   ],
   "livebench_if_verifier_binding": "canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json",
