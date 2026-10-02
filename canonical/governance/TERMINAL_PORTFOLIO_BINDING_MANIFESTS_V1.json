@@ -30,7 +30,11 @@
             "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
             "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
           ],
-          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+          "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+          "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "CURSORBENCH_4_0",
@@ -38,7 +42,11 @@
           "proof_routes": [
             "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
           ],
-          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+          "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+          "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
       "metric_thresholds": [
@@ -61,7 +69,17 @@
         {
           "id": "GDPVAL_AA_V2_1",
           "route": "PUBLIC_GDPVAL_SCOPE_EQUIVALENT_OR_EXACT_ROUTE",
-          "binding_state": "ABSOLUTE_ACCEPTANCE_INSTANCE_OPEN"
+          "binding_state": "PUBLIC_GDPVAL_TASK_BINDING_AND_RESOURCE_PREFLIGHT_OPEN__DIRECT_QUALITY_PROOF_BINDING_FROZEN",
+          "proof_routes": [
+            "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
+            "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
+          ],
+          "direct_proof_binding": {
+            "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+            "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+            "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          }
         },
         {
           "id": "AA_BRIEFCASE_V1_1",
@@ -70,7 +88,11 @@
             "P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+          "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+          "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "CHARTOGRAPHY",
@@ -84,7 +106,19 @@
             "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN"
+          "binding_state": "COMPOSITE_IDENTITY_RESOLVED__COMPONENT_ROUTE_BINDINGS_OPEN",
+          "identity": {
+            "authority": "Artificial Analysis Finance & Accounting Index",
+            "target": 61,
+            "methodology": "CAPABILITY_INDEX_V1_1_WEIGHTED_COMPOSITE",
+            "source": "https://artificialanalysis.ai/methodology/capability-indices"
+          },
+          "direct_proof_binding": {
+            "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+            "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+            "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          }
         },
         {
           "id": "FINANCE_AGENT_V2",
@@ -93,7 +127,13 @@
             "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "PUBLIC_SAMPLE_AND_GRADER_PREFLIGHT_OPEN"
+          "binding_state": "PUBLIC_SAMPLE_RESOURCE_AND_GRADER_PREFLIGHT_OPEN__DIRECT_GRAPH_SYNTHESIS_BINDING_FROZEN",
+          "direct_proof_binding": {
+            "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+            "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+            "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          }
         }
       ],
       "mutation_set": [
@@ -132,7 +172,11 @@
           "proof_routes": [
             "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF"
           ],
-          "binding_state": "COMPOSITION_MUTATION_INSTANCE_OPEN"
+          "binding_state": "DIRECT_PROOF_BINDING_FROZEN__TERMINAL_RESULT_PENDING",
+          "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+          "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+          "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
       "mutation_set": [
@@ -165,7 +209,11 @@
           "proof_routes": [
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "SCOPE_AUDIT_AND_INSTRUMENTATION_OPEN"
+          "binding_state": "DIRECT_PROOF_BINDING_FROZEN_FOR_SYNTHESIS_SCOPE__TERMINAL_RESULT_PENDING",
+          "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+          "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
+          "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         }
       ],
       "mutation_set": [
@@ -190,5 +238,21 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "binding_progress": {
+    "direct_proof_surface_bindings_frozen": [
+      "T0/FRONTIERCODE_V1_1",
+      "T0/CURSORBENCH_4_0",
+      "T1/AA_BRIEFCASE_V1_1",
+      "T2/RECOVERY_SCOPE_COMPOSITION",
+      "T3/UNKNOWN_DOMAIN_SYNTHESIS"
+    ],
+    "partial_public_plus_direct_bindings": [
+      "T1/GDPVAL_AA_V2_1",
+      "T1/FINANCE_AGENT_V2",
+      "T1/FINANCE_ACCOUNTING_INDEX"
+    ],
+    "terminal_results_observed": false,
+    "capability_credit_delta": 0
+  }
 }
