@@ -54,9 +54,9 @@
   ],
   "current_execution": null,
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
-  "current_atomic_blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__ONLY_D0_NATIVE_EDIT_AND_SHARED_S0_G0_SEMANTIC_MODEL_ACQUISITION_REMAIN_BEFORE_OPERATIVE_ROUTE_FREEZE",
-  "current_atomic_next_action": "CLOSE_D0_FROM_PINNED_PERMISSIVE_FORMAT_MECHANISMS__CLOSE_OR_BOUND_S0_G0_IMPLICIT_LONG_RANGE_MULTIMODAL_AND_NOVEL_TYPED_STRUCTURE_RESIDUAL__FREEZE_DONOR_INDEPENDENT_M2_ROUTE_AND_SHARED_SEMANTIC_ROUTE__VERIFY_COMPOSITION_MUTATION_AND_DONOR_GATES__THEN_ADMIT_T0_T1_T2_T3_ONE_PARALLEL_WAVE",
-  "current_atomic_progress_event": "D0_S0_G0_CLOSED_OR_EXACT_FAIL_CLOSED_UNSOLVED_BOUNDARY",
+  "current_atomic_blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__ONLY_D0_NATIVE_EDIT_AND_SHARED_S0_SEMANTIC_MODEL_ACQUISITION_REMAIN_BEFORE_OPERATIVE_ROUTE_FREEZE",
+  "current_atomic_next_action": "CLOSE_D0_AT_REQUIRED_NATIVE_EDIT_SCOPE__CLOSE_OR_BOUND_S0__APPLY_G0_PROPOSAL_SUBSTRATE_COLLAPSE__FREEZE_DONOR_INDEPENDENT_M2_D0_AND_S0_ROUTES__VERIFY_COMPOSITION_MUTATION_AND_DONOR_GATES__THEN_ADMIT_T0_T1_T2_T3_ONE_PARALLEL_WAVE",
+  "current_atomic_progress_event": "D0_S0_CLOSED_OR_EXACT_FAIL_CLOSED_UNSOLVED_BOUNDARY",
   "current_atomic_state_source": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
   "rank22_execution_reconciliation": {
     "status": "SPENT_BUILDER_RUNTIME_FAILURE__ZERO_CREDIT__NO_REPLAY",
@@ -71,7 +71,7 @@
     "status": "ACTIVE",
     "rule": "HARDEN_FROM_EXISTING_SPENT_EVIDENCE_BEFORE_NEW_UNTOUCHED_QUALIFICATION_SPEND"
   },
-  "current_target_role": "ACCOUNTING_SURFACE_ONLY_WHILE_GLOBAL_TERMINAL_SCHEDULER_CLOSES_D0_AND_SHARED_S0_G0",
+  "current_target_role": "ACCOUNTING_SURFACE_ONLY_WHILE_GLOBAL_TERMINAL_SCHEDULER_CLOSES_D0_AND_SHARED_S0",
   "global_terminal_proof_cut": {
     "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
     "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
@@ -115,8 +115,7 @@
       "M2"
     ],
     "shared": [
-      "S0",
-      "G0"
+      "S0"
     ],
     "deterministic_tail": [
       "D0"
@@ -127,9 +126,11 @@
       "M3",
       "M4",
       "M5",
-      "S1"
+      "S1",
+      "G0"
     ]
   },
   "m3_dependency_compression": "canonical/governance/M3_DEPENDENCY_COMPRESSION_V1.json",
-  "m5_dependency_compression": "canonical/governance/M5_DEPENDENCY_COMPRESSION_V1.json"
+  "m5_dependency_compression": "canonical/governance/M5_DEPENDENCY_COMPRESSION_V1.json",
+  "g0_dependency_compression": "canonical/governance/G0_PROPOSAL_SUBSTRATE_COLLAPSE_V1.json"
 }
