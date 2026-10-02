@@ -5,6 +5,9 @@ import argparse, hashlib, json, tempfile
 from pathlib import Path
 from typing import Any
 
+ACTIVE_REGISTRY=Path("canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json")
+ACTIVE_BASIS=Path("canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json")
+
 from canonical.runtime import contract_native_proof_suites as c_suite
 from canonical.runtime import contract_native_brain_candidate as c_candidate
 from canonical.runtime import remaining_behavior_proof_suites as r_suite
@@ -14,6 +17,32 @@ SCHEMA="PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_WAVE_RESULT_V1"
 PREFIX=b"PROJECT_BRAIN_TERMINAL_V1\0"
 DIFFICULTIES=(1,2,3,4,5)
 CONTRACTS=tuple(sorted(set(c_suite.CONTRACTS)|set(r_suite.CONTRACTS)))
+
+
+def _preflight_active_basis()->tuple[str,...]:
+    registry=json.loads(ACTIVE_REGISTRY.read_text(encoding="utf-8"))
+    basis=json.loads(ACTIVE_BASIS.read_text(encoding="utf-8"))
+    active=tuple(sorted(
+        row["behavior_id"] for row in registry.get("active_contracted_residuals",[])
+        if isinstance(row,dict) and isinstance(row.get("behavior_id"),str)
+    ))
+    if len(active)!=len(registry.get("active_contracted_residuals",[])) or len(active)!=len(set(active)):
+        raise ValueError("ACTIVE_CONTRACT_REGISTRY_INVALID")
+    rows=basis.get("contracts",[])
+    by_id={row.get("behavior_id"):row for row in rows if isinstance(row,dict) and isinstance(row.get("behavior_id"),str)}
+    if set(by_id)!=set(active):
+        raise ValueError("ACTIVE_TERMINAL_PROOF_BASIS_COVERAGE_MISMATCH")
+    not_ready=sorted(
+        bid for bid,row in by_id.items()
+        if row.get("proof_state")!="TERMINAL_ROUTE_FROZEN_ADMISSIBLE"
+    )
+    if not_ready:
+        raise ValueError("TERMINAL_ROUTES_NOT_ADMISSIBLE:"+",".join(not_ready))
+    if set(CONTRACTS)!=set(active):
+        missing=sorted(set(active)-set(CONTRACTS))
+        extra=sorted(set(CONTRACTS)-set(active))
+        raise ValueError("EXECUTOR_CONTRACT_SET_MISMATCH:missing="+",".join(missing)+";extra="+",".join(extra))
+    return active
 
 
 def derive_seed(candidate_package_commitment:str,post_freeze_beacon:str,case_id:str)->int:
@@ -34,6 +63,7 @@ def execute(
         raise ValueError("SLOTS_INVALID")
     if slots_per_obligation!=12:
         raise ValueError("TERMINAL_PROTOCOL_REQUIRES_EXACTLY_12_SLOTS")
+    active_contracts=_preflight_active_basis()
     root=work_root or Path(tempfile.mkdtemp(prefix="brain-terminal-wave-"))
     root.mkdir(parents=True,exist_ok=True)
     behaviors={}
@@ -79,7 +109,7 @@ def execute(
             "cases":rows,
         }
 
-    all_pass=all(v["pass"] for v in behaviors.values()) and len(behaviors)==10
+    all_pass=all(v["pass"] for v in behaviors.values()) and len(behaviors)==len(active_contracts)==12
     return {
         "schema":SCHEMA,
         "status":"PASS" if all_pass else "FAIL",
@@ -88,9 +118,9 @@ def execute(
         "unique_behavioral_obligation_count":len(behaviors),
         "total_case_count":total,
         "total_failures":failures,
-        "all_ten_behavioral_obligations_pass":all_pass,
+        "all_twelve_behavioral_contracts_pass":all_pass,
         "behaviors":behaviors,
-        "rule":"12_OF_12_PER_BEHAVIOR__10_OF_10_BEHAVIORS__NO_REPLACEMENT__NO_REPLAY_FOR_TUNING",
+        "rule":"12_OF_12_CASES_PER_ACTIVE_CONTRACT__12_OF_12_ACTIVE_CONTRACTS__NO_REPLACEMENT__NO_REPLAY_FOR_TUNING",
         "capability_credit_delta":"DEFER_TO_TERMINAL_REDUCER",
     }
 
