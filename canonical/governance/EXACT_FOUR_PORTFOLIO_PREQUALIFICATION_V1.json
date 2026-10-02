@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_CONTRACT_PROOF_BASIS_RESYNCHRONIZED__4_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_CONTRACT_PROOF_BASIS_RESYNCHRONIZED__5_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -44,7 +44,7 @@
   },
   "portfolio_status": {
     "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_BASIS__CAD_STALE_MECHANISM_BLOCKERS_RECONCILED",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_5_OF_12_BASIS__9_BLOCKERS",
       "known_required_surfaces": [
         "Terminal-Bench 4.0 >=66.4%",
         "FrontierCode v1.1 Main >=54.4%",
@@ -76,7 +76,7 @@
       "cad_remaining_blocker_count": 4
     },
     "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__7_BLOCKERS",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_5_OF_12_BASIS__3_BLOCKERS",
       "known_required_surfaces": [
         "GDPval-AA v2.1 >=1846 Elo",
         "AA-Briefcase v1.1 >=1822 Elo",
@@ -87,11 +87,7 @@
       "blockers": [
         "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001__EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_SUBJECTIVE_SYNTHESIS_QUALITY",
         "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001__FREEZE_BRAIN_OWNED_SYNTHESIS_PACKAGE_AND_DEPENDENCY_MANIFEST",
-        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001__FREEZE_OBJECTIVE_CLAIM_SUPPORT_COVERAGE_UNCERTAINTY_AND_CONSTRAINT_SCORER",
-        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_EXPLICIT_UNCOVERED_ARTIFACT_QUALITY_SCOPE_AUDIT",
-        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_GDPVAL_AA_AND_AA_BRIEFCASE_HARNESS_SCOPE_MAPPING",
-        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_INFORMATION_BOUNDARY_AND_ZERO_COST_ROUTE_FOR_PUBLIC_BAR_SCOPE",
-        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING"
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001__FREEZE_OBJECTIVE_CLAIM_SUPPORT_COVERAGE_UNCERTAINTY_AND_CONSTRAINT_SCORER"
       ],
       "deleted_required_surfaces": [
         "AA-Briefcase v1.1 official private route",
@@ -109,7 +105,7 @@
       ]
     },
     "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__19_BLOCKERS",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_5_OF_12_BASIS__19_BLOCKERS",
       "known_required_surfaces": [
         "AutomationBench >=40%",
         "OSWorld 2.1 matched >=81.8% where comparable",
@@ -150,7 +146,7 @@
       "authority_source": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
     },
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_4_OF_12_BASIS__13_BLOCKERS",
+      "status": "PREQUALIFICATION_INCOMPLETE__LIVE_5_OF_12_BASIS__13_BLOCKERS",
       "known_required_surfaces": [
         "Humanity's Last Exam with tools >=67.7%",
         "Terminal-Bench-Science 0.1 >=58.7%"
@@ -332,7 +328,7 @@
     "remaining_six_candidate_bindings": "NARROW_COMPONENT_PREFLIGHT_ONLY__ALL_SIX_FAIL_FULL_CONTRACT_SCOPE_AUDIT__ZERO_TERMINAL_ROUTE_AUTHORITY__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "active_terminal_proof_basis_current": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
     "active_terminal_contract_count": 12,
-    "admissible_frozen_terminal_route_count": 4,
+    "admissible_frozen_terminal_route_count": 5,
     "global_terminal_surface_dominance_v4_independently_verified": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_CURRENT_FAIL_CLOSED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "remaining_behavior_information_boundary_audit": "canonical/governance/REMAINING_BEHAVIOR_INFORMATION_BOUNDARY_AUDIT_V1.json",
     "terminal_replacement_population_protocol_v2": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
@@ -343,7 +339,7 @@
     "saccr_information_safe_independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "p2_p3_information_safe_independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
     "terminal_prequalification_reducer_12_contract_current_independent_pass": "canonical/verification/TERMINAL_PREQUALIFICATION_12_CONTRACT_CURRENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "active_terminal_proof_basis_blob_sha": "beeddfb8027c3f0712265673cd72bfd493f43ae7",
+    "active_terminal_proof_basis_blob_sha": "d4665e3722bafc7ae6751baa6c9dc0693a3a0ab0",
     "p2_information_safe_independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
     "p3_v2_information_safe_preflight_authority": "INVALIDATED_FOR_P3_BY_STANCE_SUPPORT_LEAK__ZERO_TERMINAL_AUTHORITY",
     "p3_raw_evidence_v3_independent_preflight": "INDEPENDENT_PASS_BOUNDED_ONLY__canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
@@ -370,6 +366,7 @@
       "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
       "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
       "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001"
     ]
   },
@@ -381,12 +378,12 @@
     "public_score_only_no_exact_executable_route_found_count": 2,
     "zero_cost_executable_surface_count": 0,
     "portfolio_prequalification_pass_count": 0,
-    "conclusion": "LIVE_12_CONTRACT_BASIS_IS_TERMINAL_PREWAVE_AUTHORITY__4_ROUTES_FROZEN_ADMISSIBLE__8_REMAIN_OPEN",
+    "conclusion": "LIVE_12_CONTRACT_BASIS_IS_TERMINAL_PREWAVE_AUTHORITY__5_ROUTES_FROZEN_ADMISSIBLE__7_REMAIN_OPEN",
     "unresolved_identity_or_access_count": 1,
     "deleted_required_execution_routes_by_dominance_v2": 5,
     "required_private_or_nonreproducible_execution_route_count": 0,
     "required_named_benchmark_execution_route_count": 0,
-    "global_uncovered_behavioral_obligation_count": 8,
+    "global_uncovered_behavioral_obligation_count": 7,
     "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
     "portfolio_prequalification_input_blocker_count": 40
   },
@@ -409,10 +406,6 @@
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001__FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING",
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001__FREEZE_RESEARCH_QUERY_SOURCE_STOP_INSTRUMENTATION_AND_INFORMATION_BOUNDARY",
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001__FREEZE_ZERO_COST_EXECUTABLE_PUBLIC_BAR_ROUTES_FOR_REPRESENTED_SCOPE",
-    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_EXPLICIT_UNCOVERED_ARTIFACT_QUALITY_SCOPE_AUDIT",
-    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_GDPVAL_AA_AND_AA_BRIEFCASE_HARNESS_SCOPE_MAPPING",
-    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_INFORMATION_BOUNDARY_AND_ZERO_COST_ROUTE_FOR_PUBLIC_BAR_SCOPE",
-    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001__FREEZE_POST_FREEZE_SELECTOR_AND_ACCEPTANCE_ACCOUNTING",
     "TASK_TO_DELEGATION_GRAPH_001__EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
     "TASK_TO_DELEGATION_GRAPH_001__FREEZE_CONTAMINATION_SAFE_DELEGATION_CHALLENGE_SOURCE_POOL_AND_SCORER",
     "TASK_TO_DELEGATION_GRAPH_001__FREEZE_CURRENT_DELEGATION_CANDIDATE_AND_DEPENDENCY_BLOB_PACKAGE",
@@ -484,19 +477,19 @@
     "v4_independent_verification": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_CURRENT_FAIL_CLOSED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
   "active_terminal_proof_basis": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-  "active_terminal_proof_basis_blob_sha": "beeddfb8027c3f0712265673cd72bfd493f43ae7",
+  "active_terminal_proof_basis_blob_sha": "d4665e3722bafc7ae6751baa6c9dc0693a3a0ab0",
   "population_protocol": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
   "superseded_ten_obligation_package": {
     "path": "canonical/governance/TERMINAL_REPLACEMENT_CANDIDATE_PACKAGE_FREEZE_V1.json",
     "status": "HISTORICAL_PREFLIGHT_ONLY__NOT_TERMINAL_AUTHORITY__SUPERSEDED_BY_12_CONTRACT_PROOF_BASIS"
   },
   "controller_defect_audit": "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json",
-  "active_terminal_proof_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__4_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "active_terminal_proof_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__5_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 4,
+  "admissible_frozen_terminal_route_count": 5,
   "last_basis_resynchronization": {
-    "basis_blob_sha": "beeddfb8027c3f0712265673cd72bfd493f43ae7",
-    "method": "MECHANICAL_RECONCILIATION_FROM_ACTIVE_BASIS__NO_PROMOTION",
+    "basis_blob_sha": "d4665e3722bafc7ae6751baa6c9dc0693a3a0ab0",
+    "method": "MECHANICAL_RECONCILIATION_FROM_ACTIVE_BASIS__NO_TERMINAL_CREDIT",
     "date": "2026-10-02"
   }
 }
