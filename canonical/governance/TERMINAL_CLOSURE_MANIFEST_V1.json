@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_MANIFEST_V1",
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "status": "FAIL_CLOSED__TERMINAL_GOAL_NOT_YET_ACHIEVED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "target_envelope": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
@@ -290,7 +290,7 @@
   ],
   "terminal_predicates": {
     "exact_target_family_count_19": true,
-    "every_required_behavior_contracted": false,
+    "every_required_behavior_contracted": true,
     "every_required_behavior_has_admissible_proof": false,
     "donor_dependent_required_behaviors_zero": false,
     "unexplained_required_behaviors_zero": false,
@@ -303,7 +303,7 @@
     "proof_bundle_frozen": false
   },
   "counters": {
-    "uncontracted_required_behaviors": null,
+    "uncontracted_required_behaviors": 0,
     "unproved_required_behaviors": null,
     "donor_dependent_required_behaviors": null,
     "unresolved_verifier_mutations": null,
@@ -321,7 +321,12 @@
   },
   "current_machine_verdict": {
     "achieved": false,
-    "reason": "17_FAMILIES_OPEN_AND_REQUIRED_COUNTERS_OR_TERMINAL_PREDICATES_NOT_YET_CLOSED",
+    "reason": "17_FAMILIES_OPEN__SPECIFICATION_CONTRACT_COMPLETENESS_CLOSED__OWNERSHIP_PROOF_AND_MECHANISM_GATES_REMAIN_OPEN",
     "override_allowed": false
+  },
+  "specification_closure": {
+    "status": "INDEPENDENT_PASS__CLOSED_FOR_CURRENT_19_FAMILY_ENVELOPE",
+    "evidence": "canonical/verification/BEHAVIOR_CONTRACT_COMPLETENESS_VERIFICATION_20261002_V1.json",
+    "invalidation": "ANY_TARGET_ENVELOPE_FAMILY_OR_BEHAVIOR_REGISTRY_CHANGE"
   }
 }
