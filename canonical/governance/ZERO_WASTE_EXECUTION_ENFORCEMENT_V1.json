@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ZERO_WASTE_EXECUTION_ENFORCEMENT_V1",
+  "date": "2026-10-02",
+  "status": "CANONICAL_ACTIVE",
+  "objective": "MINIMIZE_NON_EVIDENCE_WALL_CLOCK_WHILE_PRESERVING_ALL_TERMINAL_TRUTH_GATES",
+  "scheduling_metric": "ADMISSIBLE_TERMINAL_PREDICATES_CLOSED_PER_CRITICAL_PATH_WALL_CLOCK",
+  "current_frontier_metric": {
+    "active_contract_count": 12,
+    "admissible_frozen_terminal_route_count": 1,
+    "remaining_route_count": 11,
+    "terminal_wave_authorized": false
+  },
+  "hard_delete": [
+    "PRIVATE_MAIN_PUSH_CI_RETRY_WHILE_RUNNER_ID_ZERO_HEALTH_UNCHANGED",
+    "MATERIAL_MAIN_MICROCOMMITS",
+    "HAND_MAINTAINED_DUPLICATE_FRONTIER_FACTS",
+    "REACQUISITION_OF_UNINVALIDATED_EVIDENCE",
+    "UNRELATED_CLOSED_FAMILY_CI"
+  ],
+  "preserve": [
+    "INDEPENDENT_VERIFICATION",
+    "PROVENANCE_LICENSE_DEPENDENCY_ACCOUNTING",
+    "CONTAMINATION_AND_INFORMATION_BOUNDARIES",
+    "FAIL_CLOSED_IDENTIFIABILITY",
+    "FINAL_DONOR_DELETION_CLEANROOM",
+    "EXACT_MINIMUM_REALITY_CUT"
+  ],
+  "carrier_quarantine": {
+    "private_brain_actions_health": "DEGRADED__RUNNER_ID_ZERO__NO_STEPS",
+    "automatic_main_push_verification": "QUARANTINED",
+    "pr_and_manual_verification": "PRESERVED",
+    "public_fallback": "moxnixmdj/verification-capsule-runner",
+    "retry_private_only_after": "OBSERVED_HEALTH_CHANGE"
+  },
+  "transaction_rule": "BUFFER_CAUSALLY_ADJACENT_CHANGES__VERIFY_EXACT_BYTES__LAND_ONE_MAIN_COMMIT",
+  "stale_projection_rule": "RECEIPTS_AND_ACTIVE_PROOF_BASIS_DOMINATE_DERIVED_POINTER_SCOREBOARD_QUEUE_MIRRORS",
+  "no_target_weakening": true,
+  "incremental_spend_usd": 0
+}

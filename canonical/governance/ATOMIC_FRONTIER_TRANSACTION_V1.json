@@ -42,6 +42,14 @@
     "fallback": "PUBLIC_VERIFICATION_CAPSULE_RUNNER_FOR_MINIMUM_HASH_BOUND_NONSECRET_CAPSULES",
     "current_primary_health": "DEGRADED__RUNNER_NOT_ASSIGNED_ON_NEW_JOBS",
     "retry_rule": "NO_IDENTICAL_PRIVATE_RETRY_UNTIL_HEALTH_CHANGE",
-    "terminal_case_authority": "UNCHANGED__PREQUALIFICATION_REQUIRED"
+    "terminal_case_authority": "UNCHANGED__PREQUALIFICATION_REQUIRED",
+    "automatic_private_main_push_mode": "QUARANTINED"
+  },
+  "enforcement": {
+    "zero_waste_policy": "canonical/governance/ZERO_WASTE_EXECUTION_ENFORCEMENT_V1.json",
+    "main_microcommit_policy": "FORBIDDEN",
+    "private_main_push_ci": "QUARANTINED_WHILE_RUNNER_ID_ZERO",
+    "main_commit_boundary": "ONE_COMMIT_PER_CAUSAL_OR_TERMINAL_BOUNDARY",
+    "repeated_known_information": "FORBIDDEN_UNLESS_EXPLICITLY_INVALIDATED"
   }
 }
