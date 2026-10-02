@@ -268,7 +268,7 @@
     }
   },
   "compiled_terminal_closure_stack": {
-    "status": "ACTIVE_PENDING_INDEPENDENT_VERIFICATION_OF_NEW_COMPONENTS",
+    "status": "ACTIVE_INDEPENDENT_PASS",
     "activation": "canonical/governance/TERMINAL_CLOSURE_COMPILER_STACK_V1.json",
     "generated_truth": "canonical/runtime/generated_terminal_state_compiler.py",
     "anti_circularity": "canonical/runtime/prewave_anti_circularity_compiler.py",
@@ -287,6 +287,12 @@
       "NO_NEW_GENERIC_MECHANISM_WORK_WHILE_PREPROOF_IMPLEMENTATION_RESIDUAL_COUNT_IS_ZERO",
       "NO_FRESH_TERMINAL_EVIDENCE_OUTSIDE_CURRENT_EXACT_CUT"
     ],
-    "authority_effect": "SCHEDULING_ONLY_UNTIL_INDEPENDENTLY_VERIFIED__NEVER_CAPABILITY_CREDIT"
+    "authority_effect": "PREPROOF_SCHEDULING_RECONCILIATION_AND_ANTI_CIRCULARITY_ONLY__NEVER_CAPABILITY_CREDIT",
+    "independent_verification": {
+      "receipt": "canonical/verification/TERMINAL_CLOSURE_COMPILER_STACK_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "workflow_run_id": 36965606848,
+      "exact_blob_identity": true,
+      "test_count": 12
+    }
   }
 }
