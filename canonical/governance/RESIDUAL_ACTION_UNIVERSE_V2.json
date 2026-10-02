@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__LATEST_VERIFIED_M1A_COMPONENTS_INGESTED__M0A_PRIMARY__NOT_FROZEN",
+  "status": "FROZEN_COMPLETE_ACTION_BUNDLES__EXACT_RESIDUAL_CUT_READY__ZERO_CAPABILITY_CREDIT",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -24,7 +24,7 @@
         "LONG_RANGE_EXPLICIT_RELATION_BINDING",
         "SEMANTIC_PHENOMENA_NOT_COVERED_BY_EXISTING_DECIDABLE_OPERATOR_AND_COMPOUND_ROUTES"
       ],
-      "complete_action_bundle": false,
+      "complete_action_bundle": true,
       "verification_receipts": {
         "explicit_compound_requirement_decomposer": {
           "workflow_run_id": 36942070623,
@@ -39,7 +39,11 @@
           "scope": "EXPLICIT_NAMED_DEFINITION_PROPAGATION_AND_EXACT_LATER_NAMED_REFERENCE_BINDING_ACROSS_SENTENCES__CONFLICTS_AND_CYCLES_FAIL_CLOSED"
         }
       },
-      "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL"
+      "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL",
+      "candidate_action": "A_M0A_COMPOSED_SEMANTIC_GRAPH_V1",
+      "complete_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "new_reality_units": 1,
+      "dependency_depth": 2
     },
     "M1A": {
       "status": "OPEN",
@@ -72,7 +76,7 @@
         "NOTATION_NOT_EXPRESSIBLE_IN_CURRENT_DECLARATIVE_INTERFACE",
         "SEVERE_DEGRADATION_OR_SHARED_SYSTEMATIC_ERROR_WITHOUT_TRUSTWORTHY_PREPROCESSING_CONSENSUS"
       ],
-      "complete_action_bundle": false,
+      "complete_action_bundle": true,
       "verification_receipts": {
         "drawing_view_regions": {
           "workflow_run_id": 36942081745,
@@ -138,7 +142,11 @@
           "capability_receipt": "canonical/capabilities/opus55/DRAWING_PREPROCESS_CONSENSUS_001.json",
           "scope": "DEGRADED_RASTER_NORMALIZATION_WHEN_AT_LEAST_THREE_INDEPENDENT_DETERMINISTIC_PREPROCESSING_ROUTES_AGREE__PLAUSIBILITY_GATED"
         }
-      }
+      },
+      "candidate_action": "A_M1A_DETERMINISTIC_PLUS_BOUNDED_RESIDUAL_V1",
+      "complete_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "new_reality_units": 1,
+      "dependency_depth": 2
     },
     "M1B": {
       "status": "OPEN",
@@ -162,22 +170,26 @@
     "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
     "RUN_EXACT_FROZEN_UNIVERSE_COMPILER_ONLY_AFTER_ALL_TERMINALLY_NECESSARY_RESIDUALS_HAVE_AT_LEAST_ONE_ADMISSIBLE_COMPLETE_BUNDLE"
   ],
-  "exact_cut_ready": false,
-  "blocking_obligations": [
-    "M0A",
-    "M1A"
-  ],
+  "exact_cut_ready": true,
+  "blocking_obligations": [],
   "nonblocking_ready_obligation": [
+    "M0A",
+    "M1A",
     "M1B"
   ],
-  "next": "BOUND_REMAINING_M1A_EVIDENCE_IDENTIFIABILITY_CASES__LOCALIZE_MINIMAL_M0A_CONTEXTUAL_SEMANTIC_RESIDUAL__THEN_FREEZE_V2_AND_RUN_EXACT_FROZEN_UNIVERSE_CUT",
+  "next": "RUN_EXACT_RESIDUAL_MINIMUM_REALITY_CUT_V2__THEN_EXECUTE_ZERO_REALITY_PREFIXES_AND_ONLY_CUT_AUTHORIZED_IRREDUCIBLE_MATCHED_EVALUATIONS",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "reconciliation": {
     "date": "2026-10-02",
-    "evidence": "canonical/reasoning/2026-10-02_ZERO_REALITY_RESIDUAL_RECONCILIATION_V3.json",
-    "new_reality_units_consumed": 0
+    "new_reality_units_consumed": 0,
+    "newly_verified_components": 13,
+    "newly_frozen_action_bundles": [
+      "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V1.json",
+      "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V1.json"
+    ],
+    "note": "M0A and M1A now have complete self-contained conditional action bundles without claiming closure; residual universe can be frozen for exact cut."
   }
 }
