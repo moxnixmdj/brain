@@ -1,0 +1,76 @@
+{
+  "source_private_or_nonexecutable_surface": "FROZEN_ACTIVE_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_CONTRACT",
+  "candidate_proof_route": "STRUCTURED_METHOD_NORMALIZED_GRAPH_V3",
+  "required_behavior_ids": [
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+  ],
+  "candidate_behavior_ids": [
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+  ],
+  "required_interaction_ids": [
+    "NORMALIZED_REQUIREMENTS_TO_APPLICABLE_OR_JUSTIFIED_EXCLUDED_DISPOSITION",
+    "NORMALIZED_RULE_DEPENDENCIES_TO_COMPLETE_ACYCLIC_INTERMEDIATE_DAG",
+    "APPLICABLE_REQUIREMENTS_TO_ONE_OR_MORE_TRACED_CONSUMERS",
+    "DEPENDENCY_METADATA_TO_TYPE_AND_DIMENSION_SIGNATURE_CONSISTENCY",
+    "NORMALIZED_INVARIANTS_TO_VALID_TARGET_BINDINGS",
+    "MATERIAL_GRAPH_EDGES_TO_ACCEPTANCE_BINDINGS",
+    "REQUIRED_OUTPUTS_TO_GRAPH_TRACEABILITY",
+    "FORMULA_CONSTRAINT_SCHEMA_STANDARD_FEATURE_CALLOUT_SOURCE_KINDS_TO_GRAPH"
+  ],
+  "candidate_interaction_ids": [
+    "NORMALIZED_REQUIREMENTS_TO_APPLICABLE_OR_JUSTIFIED_EXCLUDED_DISPOSITION",
+    "NORMALIZED_RULE_DEPENDENCIES_TO_COMPLETE_ACYCLIC_INTERMEDIATE_DAG",
+    "APPLICABLE_REQUIREMENTS_TO_ONE_OR_MORE_TRACED_CONSUMERS",
+    "DEPENDENCY_METADATA_TO_TYPE_AND_DIMENSION_SIGNATURE_CONSISTENCY",
+    "NORMALIZED_INVARIANTS_TO_VALID_TARGET_BINDINGS",
+    "MATERIAL_GRAPH_EDGES_TO_ACCEPTANCE_BINDINGS",
+    "REQUIRED_OUTPUTS_TO_GRAPH_TRACEABILITY",
+    "FORMULA_CONSTRAINT_SCHEMA_STANDARD_FEATURE_CALLOUT_SOURCE_KINDS_TO_GRAPH"
+  ],
+  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "population_relation": "CANDIDATE_SUPERSET_PROVEN",
+  "environment_relation": "EXACT",
+  "oracle_relation": "CANDIDATE_STRONGER_PROVEN",
+  "relation_receipts": {
+    "population": "canonical/governance/STRUCTURED_METHOD_NORMALIZED_GRAPH_SCOPE_EQUIVALENCE_RELATION_V1.json",
+    "oracle": "canonical/verification/STRUCTURED_METHOD_NORMALIZED_GRAPH_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "candidate_information_relation": "EXACT_CANDIDATE_VISIBLE_INFORMATION",
+  "required_inference_ids": [
+    "COMPLETE_ACYCLIC_GRAPH_RESOLUTION",
+    "APPLICABLE_REQUIREMENT_COVERAGE",
+    "TYPE_DIMENSION_CONSISTENCY_VERDICT",
+    "INVARIANT_BINDING_VALIDITY",
+    "REQUIRED_OUTPUT_TRACEABILITY",
+    "EDGE_ACCEPTANCE_COVERAGE"
+  ],
+  "candidate_visible_derived_or_oracle_ids": [],
+  "hidden_oracle_ids": [
+    "COMPLETE_ACYCLIC_GRAPH_RESOLUTION",
+    "APPLICABLE_REQUIREMENT_COVERAGE",
+    "TYPE_DIMENSION_CONSISTENCY_VERDICT",
+    "INVARIANT_BINDING_VALIDITY",
+    "REQUIRED_OUTPUT_TRACEABILITY",
+    "EDGE_ACCEPTANCE_COVERAGE"
+  ],
+  "anti_shortcut_mutation_ids": [
+    "SIGNATURE_MISMATCH",
+    "MISSING_REQUIREMENT_CONSUMER",
+    "CONSUME_EXCLUDED_REQUIREMENT",
+    "DEPENDENCY_CYCLE",
+    "MISSING_REQUIRED_OUTPUT",
+    "INVARIANT_SIGNATURE_MISMATCH",
+    "RULE_ORDER_SHUFFLE"
+  ],
+  "unresolved_required_dimensions": [],
+  "required_subjective_quality_dimensions": [],
+  "candidate_subjective_quality_dimensions": [],
+  "zero_incremental_spend": true,
+  "independent_acceptance": true,
+  "contamination_safe": true,
+  "candidate_route_owned_or_noncapability_jit_only": true,
+  "candidate_does_not_receive_hidden_oracle_payload": true,
+  "candidate_does_not_receive_reference_solution": true,
+  "opaque_target_capability_provider": false,
+  "target_weakened": false
+}
