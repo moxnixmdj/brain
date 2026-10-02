@@ -178,9 +178,7 @@ def build_index(
         out = _fail(*coverage_errors)
         out.update({
             "declared_candidate_file_count": len(files),
-            "declared_candidate_file_count": len(files),
-        "scanned_file_count": len(file_cache),
-        "unsearched_candidate_file_count": 0,
+            "scanned_file_count": len(file_cache),
             "unsearched_candidate_file_count": len(files) - len(file_cache),
         })
         return out
@@ -238,7 +236,9 @@ def build_index(
         "errors": [],
         "canonical_atom_count": len(atom_rows),
         "canonical_atom_manifest_sha256": _atom_manifest_sha256(atoms),
+        "declared_candidate_file_count": len(files),
         "scanned_file_count": len(file_cache),
+        "unsearched_candidate_file_count": 0,
         "scanned_corpus_manifest_sha256": _manifest_sha256(file_cache),
         "candidate_match_count": total_matches,
         "atoms_with_truncated_candidate_lists": sum(
