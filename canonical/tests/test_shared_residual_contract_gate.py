@@ -19,6 +19,12 @@ class Tests(unittest.TestCase):
         out=admit_mechanism_target("B",{"active_contracted_residuals":[row]})
         self.assertTrue(out["admitted"])
 
+    def test_duplicate_registered_behavior_fails_closed(self):
+        row={"behavior_id":"B",**FIELDS}
+        out=admit_mechanism_target("B",{"active_contracted_residuals":[row,dict(row)]})
+        self.assertFalse(out["admitted"])
+        self.assertEqual(out["status"],"SPECIFICATION_REQUIRED")
+
     def test_incomplete_behavior_is_blocked(self):
         row={"behavior_id":"B",**FIELDS}; del row["success_condition"]
         out=admit_mechanism_target("B",{"active_contracted_residuals":[row]})
