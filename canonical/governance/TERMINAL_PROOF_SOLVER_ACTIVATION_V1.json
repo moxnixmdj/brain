@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_SOLVER_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__CI_AND_EXACT_BLOB_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Coordinate already-verified proof rules, learned blocker clauses, route admissibility, and exact minimum declared-cost proof bundles without inventing semantic edges or proof cost.",
+  "runtime": "canonical/runtime/terminal_proof_solver_v1.py",
+  "tests": "canonical/tests/test_terminal_proof_solver_v1.py",
+  "current_integration": {
+    "live_next_action_projection_regression": true,
+    "stale_synthesis_action_must_be_blocked": true,
+    "source_hypergraph_sha": "d37c4e1051429c261717c5091d7a6a5aeff212d8",
+    "synthesis_exhaustion_sha": "e61741612bafd85697635b0fea97bd93812454cd"
+  },
+  "semantics": [
+    "MONOTONE_EXPLICIT_PROPOSITION_CLOSURE_ONLY",
+    "FIXED_CONTEXT_LEARNED_BLOCKER_CLAUSES_ONLY",
+    "EXACT_ALL_ADMISSIBLE_ACTION_MAX_CLOSURE",
+    "EXACT_MINIMUM_DECLARED_COST_ACTION_BUNDLE_WHEN_GOALS_REACHABLE",
+    "SINGLETON_UNREACHABLE_GOAL_CORES_WHEN_MAX_CLOSURE_CANNOT_REACH_GOAL"
+  ],
+  "hard_rules": [
+    "NO_INVENTED_SEMANTIC_IMPLICATION",
+    "NO_UNKNOWN_PROOF_COST_ESTIMATION",
+    "NO_EXECUTION_FROM_SOLVER_OUTPUT_ALONE",
+    "NO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT",
+    "CURRENT_AUTHORITY_PROJECTION_MUST_MATCH_FRESH_NEXT_ACTION_COMPILATION"
+  ],
+  "next": "RUN_CI__VERIFY_LIVE_PROJECTION_CORRECTION__THEN_PROMOTE_AS_SCHEDULING_ONLY_CONTROLLER_IF_GREEN",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
