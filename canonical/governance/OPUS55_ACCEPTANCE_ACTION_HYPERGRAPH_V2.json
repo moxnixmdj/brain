@@ -1,0 +1,540 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__31_PREDICATE_ACTION_COVERAGE_RECONCILED__DELETED_PRIVATE_ROUTE_SAFE__PENDING_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
+  "objective": "Represent blocker-discharge actions for the authority-reconciled 31-predicate frontier without resurrecting independently deleted private benchmark routes.",
+  "actions": [
+    {
+      "id": "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "preconditions": [
+        {
+          "id": "PROOF_COMPRESSION_KERNELS_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "SCOPE_SAFE_ALGEBRA_V2_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "note": "Independent public runner PR906 verified exact v2 blobs and adversarial narrow-scope leakage block."
+        },
+        {
+          "id": "MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "MATCHED_BRAIN_WITNESS_CATALOG_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+          "satisfied": false,
+          "evidence": "canonical/governance/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1.json"
+        },
+        {
+          "id": "MATCHED_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "note": "Independent public runner PR914 verifies all 9 normalized witness sources contamination-admissible over four exact source objects; zero semantic credit."
+        },
+        {
+          "id": "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS",
+          "satisfied": false,
+          "evidence": "canonical/governance/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1.json",
+          "note": "Scope-safe algebra v2 requires an independently verified EXACT or SUPERSET witness-to-target scope relation; no relation may be inferred from names, prose, family labels, or atom overlap."
+        }
+      ],
+      "notes": "Scope-safe implication algebra v2, witness catalog identity, and contamination admissibility are independently verified. Action remains fail-closed on explicit witness-to-target atom/metric bindings AND independently verified EXACT/SUPERSET scope relations. No name/prose analogy, no narrow-to-broad scope leakage, zero credit from compiler readiness alone."
+    },
+    {
+      "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "preconditions": [
+        {
+          "id": "DIFFERENTIAL_DOMINANCE_COMPILER_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/DIFFERENTIAL_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "COMPLETE_FROZEN_FINITE_SHARED_CRITERION_SCOPE_AVAILABLE_PER_TARGET",
+          "satisfied": false
+        }
+      ],
+      "notes": "Target normalization provenance is independently verified. Differential dominance remains unavailable until a complete frozen finite shared-criterion case universe is content-addressed per target; no cases may be generated merely to satisfy this precondition."
+    },
+    {
+      "id": "RUN_EPISTEMIC_CLOSURE_DIRECT_JUDGMENT_SUBTRACTION",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT",
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "preconditions": [
+        {
+          "id": "EXPLICIT_FINITE_WORLD_OR_HYPOTHESIS_SET_AVAILABLE",
+          "satisfied": false
+        }
+      ],
+      "notes": "Subtract exact identifiability, safe unanimity, and minimum-discriminator logic before acquiring a broad judgment source. This action cannot prove semantic interpretation or cross-domain transfer by itself."
+    },
+    {
+      "id": "RUN_COMPOSITION_COMPONENT_PROOF_SLICER",
+      "action_class": "DEPENDENCY_REDUCE",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "preconditions": [
+        {
+          "id": "FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT",
+          "satisfied": true,
+          "evidence": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "manifest": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json"
+        }
+      ],
+      "notes": "The frozen literal composition interface manifest is independently verified. Run the slicer only on exact manifest interfaces and claim-bound acceptance-scoped receipts; family or receipt mappings remain separately fail-closed."
+    },
+    {
+      "id": "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "preconditions": [
+        {
+          "id": "TB4_ATTAINABILITY_INDEPENDENT_PASS__UPPER_180_LT_220",
+          "satisfied": true
+        }
+      ],
+      "notes": "Current score route is mathematically impossible. Search only admissible route, carrier, protocol-equivalence, or preexisting creditability changes that can raise the machine-verified upper bound to at least 220 before any benchmark execution."
+    },
+    {
+      "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
+      "action_class": "PROOF_SEARCH",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "preconditions": [
+        {
+          "id": "TYPED_WITNESS_INDEX_OR_DIRECT_OBJECTIVE_GATE_INPUT_CHANGED_SINCE_LAST_SATURATION",
+          "satisfied": true,
+          "evidence": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+          "reason": "FIVE_CURRENT_OBJECTIVE_BINDING_BLOBS_INDEPENDENTLY_REVALIDATED_AFTER_SATURATION",
+          "derived_evidence": {
+            "path": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+            "field": "status",
+            "equals": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_CURRENT_OBJECTIVE_BINDINGS_EXACT_BYTES__PREWAVE_ONLY__ZERO_TERMINAL_CREDIT"
+          }
+        }
+      ],
+      "notes": "Recompile the admissible witness frontier only for still-unproved matched residuals. Delegation terminal success is removed after independent temporal-transport absolute-ceiling closure; proved predicates must never remain live targets.",
+      "saturation_receipt": "canonical/governance/OPUS55_MATCHED_STRONGER_PROOF_SEARCH_SATURATION_20261002_V1.json",
+      "gate_change_receipt": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json"
+    },
+    {
+      "id": "BIND_SHARED_PUBLIC_BENCHMARK_EXECUTION_ABI",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AUTOMATIONBENCH_GE_40",
+        "TB_SCIENCE_GE_58_7",
+        "LIVEBENCH_IF_GE_65_7"
+      ],
+      "preconditions": [],
+      "notes": "Shared adapter work only. Does not imply underlying cognition exists and grants zero benchmark credit."
+    },
+    {
+      "id": "INTERNALIZE_FINANCE_JUDGMENT_ROUTE",
+      "action_class": "INTERNALIZE",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "preconditions": [],
+      "notes": "Bind a Brain-owned/permissively internalized operative judgment configuration before direct oracle leaves."
+    },
+    {
+      "id": "INTERNALIZE_UNKNOWN_DOMAIN_JUDGMENT_ROUTE",
+      "action_class": "INTERNALIZE",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "preconditions": [],
+      "notes": "Bind operative cross-domain transfer and calibrated-abstention configuration before direct oracle leaves."
+    },
+    {
+      "id": "REDUCE_COMPOSITION_COMPONENT_DEPENDENCY",
+      "action_class": "DEPENDENCY_REDUCE",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "preconditions": [
+        {
+          "id": "ALL_COMPONENT_ACCEPTANCE_PROOFS_COMPLETE",
+          "satisfied": false
+        }
+      ],
+      "notes": "Automatically becomes useful only after upstream component acceptance proofs close."
+    },
+    {
+      "id": "RESOLVE_HLE_PUBLIC_BAR_ROUTE_OR_SCOPE_COMPLETE_REPLACEMENT",
+      "action_class": "ROUTE_BIND_OR_PROOF",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "HLE_TOOLS_GE_67_7"
+      ],
+      "preconditions": [],
+      "notes": "First search for admissible canonical case access or an unchanged-protocol scope-complete stronger witness. Do not treat the research-control direct-objective route as HLE score equivalence."
+    },
+    {
+      "id": "BIND_CHARTOGRAPHY_PUBLIC_BAR_ROUTE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "CHARTOGRAPHY_TOOLS_GE_89"
+      ],
+      "preconditions": [],
+      "notes": "Bind dataset identity, scorer, Brain vision/document route, carrier, threshold, contamination boundary, and attainability before any case exposure."
+    },
+    {
+      "id": "BIND_OSWORLD_COMPARABLE_PUBLIC_ROUTE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "OSWORLD_2_1_PARTIAL_GE_81_8"
+      ],
+      "preconditions": [],
+      "notes": "Bind the same-harness comparable OSWorld 2.1 partial route required by the frozen predicate; otherwise retain the matched fallback. No cross-harness score inheritance."
+    },
+    {
+      "id": "DISCHARGE_SYNTHESIS_EXACT_PROOF_DELTA",
+      "action_class": "PROOF_COMPRESSION",
+      "effect": "REDUCES_OR_CLOSES",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
+      ],
+      "preconditions": [
+        {
+          "id": "SYNTHESIS_PROOF_OBLIGATION_DELTA_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_SYNTHESIS_PROOF_OBLIGATION_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "note": "Independent public runner PR949 proves the exact open residual only: one unmatched target-population scope component, metric:matched_quality, matched_quality_noninferiority, and required_claim_coverage_noninferiority. Zero acceptance credit."
+        },
+        {
+          "id": "SYNTHESIS_MATCHED_TARGET_SCOPE_DISCHARGE_AVAILABLE",
+          "satisfied": false,
+          "evidence": "canonical/governance/OPUS55_SYNTHESIS_ZERO_REALITY_DISCHARGE_EXHAUSTION_V1.json",
+          "note": "Future matched synthesis population is uninstantiated; finite P3 transport is independently forbidden. Reopen only with independently verified universal/exhaustive scope certificate or valid future target instantiation."
+        },
+        {
+          "id": "SYNTHESIS_MATCHED_QUALITY_AND_NONINFERIORITY_BINDINGS_INDEPENDENT_PASS",
+          "satisfied": false,
+          "evidence": "canonical/verification/OPUS55_SYNTHESIS_PROOF_OBLIGATION_DELTA_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "note": "matched_quality atom plus matched_quality_noninferiority and required_claim_coverage_noninferiority remain unbound."
+        }
+      ],
+      "exact_residual": {
+        "missing_scope_components": [
+          "population:frozen_matched_synthesis_portfolio"
+        ],
+        "missing_atoms": [
+          "metric:matched_quality"
+        ],
+        "missing_metric_bindings": [
+          "matched_quality_noninferiority",
+          "required_claim_coverage_noninferiority"
+        ]
+      },
+      "admissible_work": [
+        "WAIT_FOR_OR_CONSTRUCT_INDEPENDENT_UNIVERSAL_FORMAL_OR_EXHAUSTIVE_SCOPE_CERTIFICATE_WITHOUT_CASE_EXPOSURE",
+        "BIND_MATCHED_QUALITY_ATOM_ONLY_FROM_INDEPENDENT_CONTENT_ADDRESSED_EVIDENCE",
+        "BIND_NONINFERIORITY_METRICS_ONLY_FROM_INDEPENDENT_NUMERIC_BOUNDS",
+        "IF_NONE_EXISTS_KEEP_ACTION_BLOCKED_AND_ADVANCE_TO_OTHER_ZERO_REALITY_CRITICAL_ACTIONS"
+      ],
+      "forbidden": [
+        "NO_FRESH_SYNTHESIS_CASE_EXPOSURE_FROM_THIS_ACTION",
+        "NO_SCOPE_INFERENCE_FROM_T1_T3_TO_MATCHED_PORTFOLIO",
+        "NO_CEILING_TRANSPORT_ACROSS_UNPROVED_POPULATIONS",
+        "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_RESIDUAL_REDUCTION_ALONE"
+      ],
+      "notes": "Exact synthesis residual is independently verified, and the current bound zero-reality discharge path is exhausted. Do not infer future matched scope from finite P3 observations or infer matched-quality/noninferiority from seven other atoms. Reopen only when the explicit discharge conditions are independently bound.",
+      "current_disposition": "BLOCKED_ON_EXTERNAL_OR_NEWLY_BOUND_SCOPE_AND_METRIC_CERTIFICATES__ZERO_FRESH_REALITY_AUTHORITY"
+    },
+    {
+      "id": "BUILD_CODING_DELETED_PRIVATE_BAR_STRONGER_PROOFS",
+      "action_class": "STRONGER_PROOF_SUBSTITUTION",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "preconditions": [
+        {
+          "id": "PRIVATE_SURFACE_DOMINANCE_V2_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        }
+      ],
+      "notes": "Do not rediscover or execute deleted FrontierCode/CursorBench private routes. Build independent scope-complete stronger proofs that imply each unchanged frozen bar."
+    },
+    {
+      "id": "BIND_GDPVAL_PUBLIC_ROUTE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "PROWORK_GDPVAL_GE_1846"
+      ],
+      "preconditions": [],
+      "notes": "GDPval remains a live public/scope-equivalent route candidate. Keep it separate from deleted AA-Briefcase."
+    },
+    {
+      "id": "BUILD_AA_BRIEFCASE_DELETED_PRIVATE_BAR_STRONGER_PROOFS",
+      "action_class": "STRONGER_PROOF_SUBSTITUTION",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "PROWORK_AA_BRIEFCASE_GE_1822",
+        "ARTIFACT_AA_BRIEFCASE_GE_1822"
+      ],
+      "preconditions": [
+        {
+          "id": "PRIVATE_SURFACE_DOMINANCE_V2_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        }
+      ],
+      "notes": "Do not execute the deleted AA-Briefcase private route. Preserve both frozen predicates and build independently verified scope-complete stronger proofs for each represented family scope."
+    },
+    {
+      "id": "BIND_FINANCE_ACCOUNTING_INDEX_PUBLIC_ROUTE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "FINANCE_ACCOUNTING_INDEX_GE_61"
+      ],
+      "preconditions": [],
+      "notes": "Finance & Accounting Index identity/access remains live and is not deleted by private-surface dominance."
+    },
+    {
+      "id": "BUILD_FINANCE_AGENT_V2_DELETED_PRIVATE_BAR_STRONGER_PROOF",
+      "action_class": "STRONGER_PROOF_SUBSTITUTION",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "FINANCE_AGENT_V2_GE_58_59"
+      ],
+      "preconditions": [
+        {
+          "id": "PRIVATE_SURFACE_DOMINANCE_V2_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        }
+      ],
+      "notes": "Do not execute the deleted Finance Agent v2 private route. Build a scope-complete stronger proof that implies the unchanged represented-scope bar."
+    },
+    {
+      "id": "BUILD_MYSTERYMECHANISM_DELETED_PRIVATE_BAR_STRONGER_PROOF",
+      "action_class": "STRONGER_PROOF_SUBSTITUTION",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "MYSTERYMECHANISM_GE_49_55"
+      ],
+      "preconditions": [
+        {
+          "id": "PRIVATE_SURFACE_DOMINANCE_V2_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/PRIVATE_SURFACE_DOMINANCE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        }
+      ],
+      "notes": "Do not execute the deleted MysteryMechanism private route. Build a scope-complete stronger proof for the frozen unknown-mechanism acceptance requirement."
+    },
+    {
+      "id": "BUILD_TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "action_class": "PROOF_SEARCH",
+      "effect": "UNLOCKS",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
+      ],
+      "preconditions": [
+        {
+          "id": "FUTURE_MATCHED_SCOPE_NONTRANSPORT_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        }
+      ],
+      "notes": "Finite historical samples cannot transport into the future matched scope. Search only for independent universal formal scope proof, exhaustive finite superset, or later valid frozen target instantiation."
+    },
+    {
+      "id": "BUILD_DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "action_class": "PROOF_SEARCH",
+      "effect": "UNLOCKS",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "preconditions": [
+        {
+          "id": "FUTURE_MATCHED_SCOPE_NONTRANSPORT_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        }
+      ],
+      "notes": "Finite historical samples cannot transport into the future matched scope. Search only for independent universal formal scope proof, exhaustive finite superset, or later valid frozen target instantiation."
+    }
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "last_reconciliation": {
+    "date": "2026-10-02",
+    "rank24": "CONTAMINATED_POST_STAGE_B__NO_STAGE_C__NO_REPLAY",
+    "rank25": "INELIGIBLE_PREEXPOSURE__PRIOR_RUNNER_EXPOSURE",
+    "rank26": "STAGE_B_PASS__STAGE_C_BATCH_REVOKED_BEFORE_EXECUTION_BY_INDEPENDENT_ATTAINABILITY_CUT",
+    "stage_b_receipt": "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_STAGE_B_VERIFICATION_V1.json",
+    "stage_c_batch5_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json",
+    "attainability_verification": "verification-capsule-runner PR854__RUN36998571400__JOB110810813480__PASS",
+    "objective_binding_gate_change": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "matched_proof_frontier": "REOPENED_ON_NEW_ADMISSIBLE_DIRECT_OBJECTIVE_GATE_RECEIPT__ZERO_ACCEPTANCE_CREDIT",
+    "tb4_global_attainability": "IMPOSSIBLE__180_LT_220__EXECUTION_REVOKED",
+    "tool_learning_atomic_acceptance": "PROVED_3_OF_3__canonical/verification/TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "tool_learning_success_route_noninferior": "CLOSED_BY_INDEPENDENT_ABSOLUTE_CEILING_WITNESS__REMOVED_FROM_MATCHED_PROOF_SEARCH_TARGETS",
+    "delegation_terminal_success_noninferior": "CLOSED_BY_INDEPENDENT_TEMPORAL_ABSOLUTE_CEILING_WITNESS__REMOVED_FROM_MATCHED_PROOF_SEARCH_TARGETS",
+    "delegation_transport_verification": "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "delegation_transmutation_verification": "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "proof_compression_kernels": "ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_PRECEDES_COMPARATOR_JUDGMENT_AND_COMPOSITION_WORK",
+    "proof_compression_verification": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "differential_dominance_compiler": "ACTIVE_PENDING_TARGET_NORMALIZATION_AND_SCOPE_INPUTS__INDEPENDENT_IMPLEMENTATION_PASS__ZERO_CREDIT",
+    "differential_dominance_verifier": "verification-capsule-runner PR888__RUN37009287824__JOB110844881495__PASS",
+    "composition_component_interface_manifest": "INDEPENDENT_PUBLIC_RUNNER_PASS__12_LITERAL_INTERFACES__FAMILY_AND_RECEIPT_BINDINGS_OPEN",
+    "composition_component_interface_verification": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "matched_target_normalization": "INDEPENDENT_PUBLIC_RUNNER_PASS__11_TARGETS__47_ATOMS__10_METRICS__SOURCE_PROVENANCE_ONLY",
+    "matched_target_normalization_verification": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "matched_brain_witness_normalization": "OPEN__REQUIRED_BEFORE_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
+    "brain_witness_normalization": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_WITNESSES__ZERO_SEMANTIC_CREDIT",
+    "brain_witness_normalization_verification": "canonical/verification/OPUS55_BRAIN_WITNESS_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "protocol_implication_gate": "FAIL_CLOSED__CATALOG_AND_CONTAMINATION_PASS__TARGET_ATOM_METRIC_BINDINGS_OPEN",
+    "protocol_implication_gate_refinement": "canonical/governance/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1.json",
+    "brain_witness_contamination_admissibility": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_OF_9_WITNESSES__FOUR_EXACT_SOURCE_OBJECTS__ZERO_SEMANTIC_CREDIT",
+    "brain_witness_contamination_admissibility_verification": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "threshold_cut": {
+    "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "full_population_trial_slots": 330,
+    "required_successes": 220,
+    "compatible_trial_capacity": 270,
+    "unavailable_or_unrun_slot_credit": 0,
+    "execution_unit": "FIVE_PRECOMMITTED_RESULT_BLIND_REPLICAS_PER_CLEAN_RESOURCE_COMPATIBLE_TASK",
+    "pass_lock": "SUCCESS_COUNT_GE_220",
+    "fail_lock": "SUCCESS_COUNT_PLUS_REMAINING_EXECUTABLE_SLOTS_LT_220"
+  },
+  "attainability_cut": {
+    "route": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "state": "INDEPENDENT_PASS__IMPOSSIBLE",
+    "maximum_attainable_successes": 180,
+    "required_successes": 220,
+    "reality_execution_authorized": false
+  },
+  "coverage_contract": {
+    "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "evidence_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "rule": "EVERY_CURRENTLY_UNPROVED_ATOMIC_ACCEPTANCE_PREDICATE_MUST_BE_TARGETED_BY_AT_LEAST_ONE_DECLARED_DISCHARGE_ACTION__AND_PROVED_OR_REFUTED_PREDICATES_MUST_NOT_REMAIN_LIVE_TARGETS__COVERAGE_IS_SCHEDULING_BOOKKEEPING_ONLY"
+  },
+  "source_lineage": {
+    "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+    "git_blob_sha": "d37c4e1051429c261717c5091d7a6a5aeff212d8",
+    "reconciliation": "canonical/governance/DELETED_PRIVATE_BAR_STRONGER_PROOF_RECONCILIATION_V1.json"
+  },
+  "hard_rules": [
+    "EVERY_CURRENT_AUTHORITY_UNRESOLVED_PREDICATE_MUST_HAVE_AT_LEAST_ONE_DECLARED_ACTION_EDGE",
+    "NO_ACTION_MAY_RESURRECT_A_PRIVATE_ROUTE_DELETED_BY_INDEPENDENT_DOMINANCE",
+    "ROUTE_DELETION_DOES_NOT_DELETE_OR_PROVE_THE_FROZEN_ACCEPTANCE_PREDICATE"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_ACTION_GRAPH_AGAINST_CURRENT_31_PREDICATE_FRONTIER_AND_DELETED_ROUTE_MATRIX__ONLY_THEN_PROMOTE_AND_RECOMPUTE_ACCEPTANCE_IR_CUT"
+}
