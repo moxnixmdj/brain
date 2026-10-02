@@ -1,4 +1,4 @@
-# replay-trigger: current verified V2 receipt-index bytes; corpus semantics unchanged
+# replay-trigger: independent-v2-index-pass-2026-10-02T19:12+02:00
 name: Verify and run sealed proof-atom receipt snapshot v1
 
 on:
