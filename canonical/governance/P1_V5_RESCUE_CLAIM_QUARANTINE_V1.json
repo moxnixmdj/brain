@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_RESCUE_CLAIM_QUARANTINE_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE__V5_SCOPE_CLASSIFICATION_PRESERVED__HETEROGENEOUS_RESCUE_CLAIM_FALSIFIED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "source_verification": "canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "source_activation": "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5_ACTIVATION_V1.json",
+  "adversarial_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1045,
+    "pull_request_head": "cf67904c88c39ef8912bb2e49af755b5f980ad67",
+    "merge_commit": "7afd38cb36ccf8850e0c2cc18f4737d86eb721cd",
+    "workflow_run_id": 37039651312,
+    "workflow_job_id": 110946328329,
+    "conclusion": "success"
+  },
+  "falsification": {
+    "function": "canonical.runtime.trajectory_failure_typed_ir_proof_v5.evaluate_intervention",
+    "counterexamples": [
+      "SAME_REPAIR_LABELS_RETURN_RESCUED_AFTER_TASK_TRAJECTORY_IS_DELETED",
+      "SAME_REPAIR_LABELS_RETURN_RESCUED_AFTER_ENTIRE_TASK_IS_DELETED",
+      "V5_RESCUE_EVALUATOR_DOES_NOT_READ_TASK_TRAJECTORY_OR_TERMINAL_FAILED_RESOURCES"
+    ],
+    "cause": "ORACLE_DERIVED_REQUIRED_REPAIR_LABEL_MEMBERSHIP_IS_NOT_POST_INTERVENTION_TERMINAL_EXECUTION"
+  },
+  "preserved": [
+    "V5_192_CASE_CAUSAL_CLASSIFICATION_EXECUTION",
+    "V5_24_FIRST_CLASS_SCOPE_CASES",
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS_SUPPORTED",
+    "PROVENANCE_AND_OUTPUT_SCHEMA_ADVERSARIAL_CHECKS"
+  ],
+  "revoked_or_quarantined": [
+    "P1_HETEROGENEOUS_INTERVENTION_RESCUE_DISCHARGE_FROM_V5",
+    "V5_MACHINE_CHECKED_RESCUE_COUNT_AS_TERMINAL_RESCUE_EVIDENCE",
+    "ANY_SCOPE_SUPERSET_OR_QUARANTINE_LIFT_ARGUMENT_RELYING_ON_V5_RESCUE"
+  ],
+  "next": "REPLACE_RESCUE_WITH_EXECUTION_BASED_HIDDEN_INTERVENTION_REPLAY__REVERIFY__RECOMPUTE_ANY_DOWNSTREAM_GATE_THAT_CONSUMED_V5_RESCUE",
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
