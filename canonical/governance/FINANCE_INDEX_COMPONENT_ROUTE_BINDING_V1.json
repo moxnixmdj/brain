@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_COMPONENT_SCOPE_BINDING__ZERO_TERMINAL_RESULT__ZERO_SCORE_INHERITANCE",
+  "family": "FINANCIAL_ANALYSIS",
+  "public_reference": {
+    "surface": "Artificial Analysis Finance & Accounting Index",
+    "opus_5_5_target": 61,
+    "role": "BROAD_FINANCE_ACCOUNTING_REFERENCE_BAR",
+    "terminal_rule": "PUBLIC_BAR_REMAINS_REQUIRED_UNLESS_A_SEPARATELY_VERIFIED_SCOPE_EQUIVALENT_ABSOLUTE_ROUTE_IS_ADMITTED"
+  },
+  "frozen_behavioral_contracts": [
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+  ],
+  "component_routes": [
+    {
+      "behavior": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "route": "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
+      "proof_strength": 3,
+      "spec": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+      "verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "behavior": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "route": "VERIFIED_ACCEPTANCE_COMPILER_DIRECT",
+      "proof_strength": 3,
+      "dominance_authority": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+      "bounded_compiler_verification": "canonical/verification/REQUIREMENT_ACCEPTANCE_COMPILER_VERIFICATION_20261002_V1.json",
+      "terminal_result": "PENDING"
+    },
+    {
+      "behavior": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "route": "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF",
+      "proof_strength": 3,
+      "spec": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json",
+      "verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    }
+  ],
+  "completeness": {
+    "required_contract_count": 3,
+    "bound_contract_count": 3,
+    "zero_unbound_contracts": true,
+    "score_reproduction_claim": false,
+    "capability_credit_delta": 0
+  },
+  "anti_weakening": [
+    "COMPONENT_BINDING_IS_NOT_FINANCE_INDEX_SCORE",
+    "NO_PUBLIC_BAR_CREDIT_FROM_ROUTE_BINDING",
+    "TERMINAL_DIRECT_PROOF_POPULATIONS_MUST_PASS",
+    "PUBLIC_BAR_MAY_BE_DELETED_ONLY_BY_SEPARATE_SCOPE_EQUIVALENCE_OR_DOMINANCE_VERDICT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "family_credit_delta": 0
+}
