@@ -3,7 +3,7 @@ import json,tempfile,unittest
 from pathlib import Path
 from canonical.runtime.native_artifact_t1_multiplex_preflight import evaluate
 class Tests(unittest.TestCase):
-    def run(self,mut=None):
+    def eval_case(self,mut=None):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td)
             for rel in ["canonical/runtime/native_artifact_cross_format_candidate_v1.py","canonical/runtime/native_artifact_cross_format_proof_v1.py","canonical/runtime/native_artifact_render_preservation_proof_v1.py"]:
@@ -12,7 +12,7 @@ class Tests(unittest.TestCase):
             if mut:mut(d)
             p=root/"canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json";p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d),encoding="utf-8")
             return evaluate(root)
-    def test_valid(self):self.assertTrue(self.run()["pass"])
-    def test_oracle_leak(self):self.assertFalse(self.run(lambda d:d["candidate_visible_information"].append("RENDER_PIXEL_DIFF_ORACLE"))["pass"])
-    def test_scope_stretch(self):self.assertFalse(self.run(lambda d:d["terminal_surface"].__setitem__("synthetic_whole_domain_superset_required",True))["pass"])
+    def test_valid(self):self.assertTrue(self.eval_case()["pass"])
+    def test_oracle_leak(self):self.assertFalse(self.eval_case(lambda d:d["candidate_visible_information"].append("RENDER_PIXEL_DIFF_ORACLE"))["pass"])
+    def test_scope_stretch(self):self.assertFalse(self.eval_case(lambda d:d["terminal_surface"].__setitem__("synthetic_whole_domain_superset_required",True))["pass"])
 if __name__=="__main__":unittest.main()
