@@ -10,6 +10,7 @@ class TerminalParentPortfolioRunnerTests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertEqual(len(out["bound_behavior_ids"]), 7)
         self.assertIn(runner.CAD, out["bound_behavior_ids"])
+        self.assertEqual(runner._git_blob_sha(runner.BINDING_PATH), runner.BINDING_BLOB)
 
     def test_seed_is_deterministic_and_case_specific(self):
         a = runner.derive_seed("c", "b", "case-1")
@@ -48,6 +49,31 @@ class TerminalParentPortfolioRunnerTests(unittest.TestCase):
                     }
                 },
             )
+
+
+    def test_real_cad_reuse_rejects_preterminal_stub_even_if_it_claims_pass(self):
+        binding = runner._load(runner.BINDING_PATH)
+        fake = {
+            runner.CAD: {
+                "behavior_id": runner.CAD,
+                "pass": True,
+                "terminal_result": True,
+                "case_count": 128,
+                "cases": [{"case_id": f"FAKE::{i}"} for i in range(128)],
+                "preterminal_stub": True,
+            }
+        }
+        out = runner._run_behavior(
+            runner.CAD,
+            "T0",
+            commitment="REAL_COMMITMENT",
+            beacon="REAL_BEACON",
+            direct_results=fake,
+            schedules=binding["schedules"],
+        )
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["exact_direct_cad_population_bound"])
+
 
 
 if __name__ == "__main__":
