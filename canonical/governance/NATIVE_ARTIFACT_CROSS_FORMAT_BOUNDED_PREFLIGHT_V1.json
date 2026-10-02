@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_NATIVE_ARTIFACT_CROSS_FORMAT_BOUNDED_PREFLIGHT_V1",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_PENDING_INDEPENDENT_CI__BOUNDED_CROSS_FORMAT_PREFLIGHT_ONLY__ZERO_TERMINAL_AUTHORITY",
+  "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+  "candidate": "canonical/runtime/native_artifact_unique_text_edit.py",
+  "proof_population": "canonical/runtime/native_artifact_cross_format_proof.py",
+  "tests": "canonical/tests/test_native_artifact_cross_format.py",
+  "reused_owned_mechanisms": [
+    "canonical/runtime/ooxml_package_transaction.py",
+    "canonical/runtime/ooxml_package_integrity.py",
+    "canonical/runtime/pdf_native_edit_transaction.py"
+  ],
+  "candidate_visible": [
+    "native source artifact",
+    "explicit exact old text",
+    "explicit replacement text"
+  ],
+  "hidden_verifier_state": [
+    "expected unique target location",
+    "source unrelated-member hash snapshot",
+    "expected changed-member set",
+    "round-trip semantic preservation verdict"
+  ],
+  "covered_formats": [
+    "DOCX",
+    "XLSX_INLINE_WORKSHEET_TEXT",
+    "PPTX",
+    "PDF_WHOLE_TEXT_SHOW_OPERAND"
+  ],
+  "preflight_properties": [
+    "TARGET_LOCATION_RESOLVED_BY_CANDIDATE_NOT_SUPPLIED",
+    "AMBIGUOUS_TARGET_FAILS_CLOSED",
+    "OOXML_UNRELATED_MEMBERS_BYTE_PRESERVED",
+    "OOXML_PACKAGE_INTEGRITY_REVALIDATED",
+    "PDF_PAGE_GEOMETRY_AND_OPERATOR_SEQUENCE_PRESERVED",
+    "ROUNDTRIP_TARGET_MUTATION_VERIFIED",
+    "NO_FLATTEN_OR_REBUILD_ROUTE"
+  ],
+  "scope_limitation": "EXACT_UNIQUE_TEXT_REPLACEMENT_ONLY__NO_ARBITRARY_STRUCTURAL_EDIT__NO_SHARED_STRING_XLSX_TARGET__NO_APPLICATION_NATIVE_RENDER_EQUIVALENCE__NO_GENERAL_LAYOUT_JUDGMENT",
+  "terminal_scope_gate_v2_admissible": false,
+  "execution_authority": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
