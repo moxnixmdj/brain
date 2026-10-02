@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_OPEN_DOMAIN_PROOF_MODE_RECONCILIATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "CONTROLLER_DEFECT_CONFIRMED__CAD_FINITE_SCOPE_SUPERSET_PREQUALIFICATION_INVALID__T0_OPEN_DOMAIN_OBJECTIVE_MULTIPLEX_REQUIRED",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "exact_evidence": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "blob_sha": "afa00109031d638fef32cc3fe10be18786605c39"
+    },
+    "prior_proof_mode_classification": {
+      "path": "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json",
+      "blob_sha": "9bd8a3848510e1b450d07bcfd90ce6e6a9f4adbb"
+    },
+    "open_domain_law": {
+      "path": "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json",
+      "blob_sha": "cd50bd39613574583e3f61e644cb959ef46cf29b"
+    },
+    "m1a_bundle": {
+      "path": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json",
+      "blob_sha": "65f4dc24c398c1f49cffde5711776074fc9f89ff"
+    },
+    "m1b_bundle": {
+      "path": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json",
+      "blob_sha": "4e2fde88553a4f9b01ac7c55750c3bc2d393ac15"
+    },
+    "m1_multiplex_bundle": {
+      "path": "canonical/governance/M1_MULTIPLEXED_MATCHED_GEOMETRY_PROOF_BUNDLE_V1.json",
+      "blob_sha": "e9aaef8a7786a19ae265c6fedde04a4a1ecee4b1"
+    },
+    "outer_portfolios": {
+      "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
+      "blob_sha": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5"
+    }
+  },
+  "finding": {
+    "declared_scope": "engineering drawing to CAD solid reconstruction",
+    "finite_domain_enumerated": false,
+    "formal_generative_coverage_theorem_present": false,
+    "prior_mode": "FINITE_OR_FORMAL_SCOPE_EQUIVALENT",
+    "why_prior_mode_is_invalid_as_prequalification": [
+      "THE_DECLARED_ENGINEERING_DRAWING_SCOPE_IS_OPEN_ENDED_NOT_A_FROZEN_FINITE_UNIVERSE",
+      "NO_FORMAL_GENERATIVE_THEOREM_PROVES_THAT_A_FINITE_SYNTHETIC_GEOMETRY_SET_SUPERSETS_THE_DECLARED_SCOPE",
+      "CANONICAL_OPEN_DOMAIN_LAW_FORBIDS_PROMOTING_BOUNDED_PREFLIGHT_POPULATIONS_TO_WHOLE_OPEN_DOMAIN_SCOPE_EQUIVALENCE",
+      "M1A_ALREADY_DECLARED_MATCHED_PARITY_AS_THE_SURVIVING_WHOLE_COMPOSED_ROUTE_PROOF",
+      "M1B_ALREADY_DECLARED_A_MATCHED_GEOMETRY_COVERAGE_BATCH_FOR_ANY_RESIDUAL_CONSTRUCTION_CLASS",
+      "T0_ALREADY_PREDECLARES_DIRECT_M1_INTERMEDIATE_GRAPH_AND_FINAL_GLOBAL_GEOMETRY_INSTRUMENTATION"
+    ]
+  },
+  "corrected_mode": {
+    "mode": "T0_MULTIPLEXED_OPEN_DOMAIN_OBJECTIVE_GEOMETRY_TERMINAL_PROOF",
+    "synthetic_whole_domain_scope_equivalence_required": false,
+    "exact_opus_case_level_comparator_required_for_m1_direct_behavior": false,
+    "family_level_equal_or_better_authority": "T0_ADVANCED_AGENTIC_CODING_PUBLIC_FIXED_BARS_AND_FROZEN_PORTFOLIO_ACCEPTANCE",
+    "direct_behavior_authority": "OBJECTIVE_HIDDEN_REFERENCE_CONSTRAINT_GRAPH_IDENTIFIABILITY_AND_GLOBAL_GEOMETRY_ORACLE_WITHIN_FROZEN_T0_CASES",
+    "terminal_evidence_source": "FROZEN_T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO",
+    "no_cross_behavior_inheritance": true
+  },
+  "prewave_requirements": [
+    "FREEZE_BRAIN_M1A_M1B_COMPONENT_BLOBS",
+    "FREEZE_CANDIDATE_VISIBLE_AND_HIDDEN_EVALUATOR_INFORMATION_BOUNDARY",
+    "FREEZE_EXECUTABLE_M1_SCORER_AND_EVALUATOR_OBSERVATION_SCHEMA",
+    "FREEZE_GEOMETRY_CHALLENGE_SOURCE_POOL_OR_T0_CASE_BINDING_WITH_POST_FREEZE_SELECTOR",
+    "FREEZE_MUTATIONS_FOR_GRAPH_CORRUPTION_GEOMETRY_SHORTCUT_AMBIGUITY_AND_CROSS_STAGE_STATE_LOSS",
+    "FREEZE_ZERO_COST_EXECUTION_AND_DEPENDENCY_MANIFEST",
+    "INDEPENDENTLY_VERIFY_PREWAVE_BINDING_BEFORE_ANY_FRESH_TERMINAL_RESULT"
+  ],
+  "invalidated_prequalification_blocker": "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+  "replacement_blocker": "CAD_T0_OPEN_DOMAIN_OBJECTIVE_GEOMETRY_SCORER_POPULATION_AND_INFORMATION_BOUNDARY_BINDING_PENDING",
+  "no_overclaim": "THIS_RECLASSIFICATION_REMOVES_AN_INVALID_PREWAVE_SUPERSET_PROOF_REQUIREMENT__IT_DOES_NOT_SUPPLY_TERMINAL_EVIDENCE_OR_CLOSE_CAD_BEHAVIOR",
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
