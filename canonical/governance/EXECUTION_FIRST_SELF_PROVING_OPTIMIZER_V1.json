@@ -48,6 +48,7 @@
     "GLOBAL_TERMINAL_PROOF_CUT_REFRESH",
     "EXISTING_EVIDENCE_SATURATION",
     "DEDUCTIVE_CLOSURE",
+    "VERIFIED_ENVELOPE_AND_IMPLICATION_CLOSURE",
     "COUNTERFACTUAL_TERMINAL_COMPILATION",
     "IMPOSSIBILITY_AND_DOMINANCE_DELETION",
     "EXACT_MINIMUM_REALITY_CUT",
@@ -217,5 +218,17 @@
       "brain_commit": "c4099ae1eb2b00dca1614a4efb8dfa472abe2e23",
       "public_runner_commit": "b3c4ad36b097c336e8eafc5f6e6a2a71205f3465"
     }
+  },
+  "counterexample_envelope_compiler": {
+    "status": "ACTIVE_FAIL_CLOSED",
+    "policy": "canonical/governance/TERMINAL_COUNTEREXAMPLE_AND_ENVELOPE_COMPILER_V1.json",
+    "runtime": "canonical/runtime/terminal_counterexample_envelope_compiler.py",
+    "rule": "PROPAGATE_ONLY_VERIFIED_ENVELOPES_FAILURES_AND_IMPLICATIONS__REDUCE_UNKNOWN_TO_MINIMUM_RESIDUAL_PROOF_BASIS__DO_NOT_TREAT_PREDICTION_OR_SEARCH_FAILURE_AS_PROOF",
+    "applies_before": [
+      "COUNTERFACTUAL_TERMINAL_COMPILATION",
+      "EXACT_MINIMUM_REALITY_CUT",
+      "FRESH_TERMINAL_EVIDENCE_SPEND"
+    ],
+    "terminal_credit_from_compiler_alone": false
   }
 }
