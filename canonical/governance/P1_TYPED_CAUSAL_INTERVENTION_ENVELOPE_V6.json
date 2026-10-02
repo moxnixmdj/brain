@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V6",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__FORWARD_CAUSAL_SCOPE_AND_INTERVENTION_RESCUE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Harden P1 V5 so intervention rescue is established by applying proposed repairs to candidate-visible typed dependency semantics and recomputing downstream derived failures, not by comparing repair labels to a hidden required-repair list.",
+  "supersedes_candidate": "canonical/governance/P1_TYPED_INTERVENTION_ENVELOPE_V5.json",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v6.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v6.py",
+  "targeted_residuals": [
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+  ],
+  "inherited_hardening": [
+    "FAILED_CAUSAL_CHECK_REQUIRES_NONEMPTY_VISIBLE_SUPPORTING_RECEIPTS",
+    "EXTRA_UNBOUND_DIAGNOSIS_FIELDS_ARE_REJECTED"
+  ],
+  "forward_causal_hardening": [
+    "SCOPE_IS_FIRST_CLASS_NOT_ALIAS_OF_AUTHORITY",
+    "REPAIR_LABEL_MEMBERSHIP_IS_NOT_RESCUE_EVIDENCE",
+    "INTERVENTION_EXECUTOR_CONSUMES_ONLY_CANDIDATE_VISIBLE_TRAJECTORY_DEPENDENCY_AND_FAILURE_SEMANTICS",
+    "DIRECT_ROOT_FAILURES_CLEAR_ONLY_WHEN_THE_MATCHING_REPAIR_IS_ACTUALLY_APPLIED",
+    "DERIVED_DOWNSTREAM_FAILURES_ARE_RECOMPUTED_FROM_UNREPAIRED_UPSTREAM_DIRECT_FAILURES",
+    "CONJUNCTIVE_INTERACTION_REQUIRES_ALL_CAUSAL_ROOT_REPAIRS",
+    "SYMPTOM_ONLY_REPAIR_CANNOT_CLEAR_AN_UNREPAIRED_ROOT",
+    "AMBIGUOUS_CASES_ABSTAIN_AND_CANNOT_CLAIM_RESCUE",
+    "HIDDEN_ORACLE_NEVER_ENTERS_CANDIDATE_PAYLOAD"
+  ],
+  "envelope": {
+    "domains": 6,
+    "mechanism_classes": 8,
+    "causal_patterns": 4,
+    "cross_product_cases": 192,
+    "nonambiguous_forward_rescue_cases": 144,
+    "ambiguous_abstention_cases": 48
+  },
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V6_BLOBS__THEN_RECOMPILE_P1_SCOPE_QUARANTINE_AGAINST_V6__DO_NOT_LIFT_P1_FROM_V5_LABEL_MATCH_RESCUE"
+}
