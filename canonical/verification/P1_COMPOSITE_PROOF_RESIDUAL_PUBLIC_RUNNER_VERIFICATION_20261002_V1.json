@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_P1_COMPOSITE_PROOF_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_12_BRAIN_BLOBS__P1_RESIDUAL_6_OF_8_CHECKS_SUPPORTED__2_SEMANTIC_GAPS__4_OF_9_MUTATIONS_SUPPORTED__5_MUTATION_GAPS__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "source_brain_branch": "p1-composite-proof-residual-v1-20261002",
+  "source_brain_candidate_head": "ae2eb25775a7566ea86b400c5a1a5c5e5f78a754",
+  "exact_brain_blobs": {
+    "canonical/runtime/p1_composite_proof_residual_compiler_v1.py": "b93fd4674319982a5037827b077be958fac24fe4",
+    "canonical/tests/test_p1_composite_proof_residual_compiler_v1.py": "31f2a7cce17bb678a419261887ae1558af004a50",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json": "700381c22715dbd058370bddc07f99888a9bc97a",
+    "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "ee69a93c45a2b16676c49bfb0a01749a5c4ea1e2",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py": "0c386e6b78a8e97e9c1944e63600047bc4e2849b",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py": "6e1dfaa6b63fc629d55d07b2361bf625f11a5ce3",
+    "canonical/tests/test_trajectory_failure_typed_ir_v4.py": "70a224fec7341775e46bb1bfb8bd2d33b3c355b3",
+    "canonical/runtime/p1_terminal_execution_scope_audit_v1.py": "6793cc98fa8ef767cb6ec8fdd33d8e7d50b2833d",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "431b62e503a6a179f19339ae5e0ab6948424a650",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 942,
+    "pull_request_head": "9f19dea0c112a2aebde21d36279e018455b96253",
+    "merge_commit": "b654d649bceb0d3a6d2f80e76a20c0ad90a04ec0",
+    "workflow_name": "Verify P1 composite residual v1",
+    "workflow_run_id": 37016035576,
+    "workflow_job_id": 110867004787,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_mirrored_blob_count": 12,
+    "residual_compiler_test_count": 5,
+    "required_checks": 8,
+    "supported_checks": 6,
+    "open_semantic_checks": 2,
+    "required_mutations": 9,
+    "supported_mutations": 4,
+    "open_mutations": 5,
+    "whole_p1_contract_restored": false,
+    "recovery_transport_authorized": false,
+    "zero_new_reality": true,
+    "zero_terminal_replay": true
+  },
+  "exact_open_semantic_obligations": [
+    "FAILURE_MECHANISM_CLASSIFICATION_SUPPORTED_BY_VISIBLE_RECEIPTS__INDEPENDENT_V4_SCORER_DOES_NOT_VALIDATE_SUPPORTING_RECEIPTS",
+    "AUTHORITY_SCOPE_TOOL_STATE_PROVENANCE_AND_DEPENDENCY_FAILURE_CLASSES_ARE_LOAD_BEARING_WHEN_PRESENT__SCOPE_AND_TOOL_STATE_HAVE_NO_EXPLICIT_MACHINE_BINDING_IN_V4_ONTOLOGY"
+  ],
+  "exact_open_mutations": [
+    "DROP_CAUSAL_PREDECESSOR_IN_MULTI_STEP_CHAIN",
+    "DROP_PROVENANCE_OR_DEPENDENCY_EDGE",
+    "IGNORE_VIOLATED_AUTHORITY_OR_INVARIANT",
+    "SWAP_TOOL_OR_AUTHORITY_FAILURE_CLASS",
+    "UNFALSIFIABLE_DIAGNOSIS"
+  ],
+  "disposition": {
+    "p1_execution_scope_quarantine": "MUST_REMAIN",
+    "whole_p1_contract_restored": false,
+    "p1_to_recovery_acceptance_transport": "FORBIDDEN",
+    "next": "DISCHARGE_ONLY_THE_SEVEN_EXACT_RESIDUAL_OBLIGATIONS_WITH_STATIC_METAMORPHIC_OR_MACHINE_AUTHORIZED_EVIDENCE__DO_NOT_REPLAY_TERMINAL_V3"
+  },
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
