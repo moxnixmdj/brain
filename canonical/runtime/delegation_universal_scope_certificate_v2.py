@@ -305,7 +305,7 @@ def verify() -> dict[str, Any]:
         "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
     ))
     registry_row = next(
-        x for x in registry["behaviors"]
+        x for x in registry["active_contracted_residuals"]
         if x.get("behavior_id") == "TASK_TO_DELEGATION_GRAPH_001"
     )
     assert "live receipts" in registry_row["allowed_information"].lower()
