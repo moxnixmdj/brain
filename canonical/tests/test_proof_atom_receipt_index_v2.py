@@ -126,6 +126,16 @@ class Tests(unittest.TestCase):
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
             self.assertEqual(row["candidate_match_count"],0)
 
+    def test_receipt_snapshot_self_verification_is_excluded(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/verification/PROOF_ATOM_RECEIPT_SNAPSHOT_20261002_V1.json"
+            p.parent.mkdir(parents=True)
+            p.write_text('{"index":{"atoms":[{"proposition":"R1"}]}}\n',encoding="utf-8")
+            out=build_index(frontier(),overlay(),root=root)
+            row=next(x for x in out["atoms"] if x["proposition"]=="R1")
+            self.assertEqual(row["candidate_match_count"],0)
+
     def test_declared_corpus_restatement_is_excluded(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td)
