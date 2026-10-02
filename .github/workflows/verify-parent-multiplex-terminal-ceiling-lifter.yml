@@ -1,0 +1,23 @@
+name: Verify parent multiplex terminal ceiling lifter
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/parent_multiplex_terminal_ceiling_witness_lifter_v1.py"
+      - "canonical/tests/test_parent_multiplex_terminal_ceiling_witness_lifter_v1.py"
+      - ".github/workflows/verify-parent-multiplex-terminal-ceiling-lifter.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run parent multiplex ceiling lifter tests
+        run: python -m unittest -v canonical.tests.test_parent_multiplex_terminal_ceiling_witness_lifter_v1
