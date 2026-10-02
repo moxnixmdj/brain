@@ -4055,7 +4055,16 @@ def _extract_json_object(text):
 def _planner_post(prompt, timeout_s=20):
     if os.environ.get("ASTRA_DISABLE_MODEL_PLANNER","").strip().lower() in {"1","true","yes","on"}:
         raise Blocker("MODEL_PLANNER_DISABLED_BY_POLICY")
-    models=("openai-fast","openai","mistral")
+    terminal_local_only=os.environ.get("PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_ONLY","").strip().lower() in {"1","true","yes","on"}
+    expected_local_model=os.environ.get(
+        "PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_MODEL",
+        "Qwen3.5-9B-M-Q4_K_M-local",
+    ).strip()
+    expected_local_backend=os.environ.get(
+        "PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_BACKEND",
+        "LOCAL_LLAMA_SERVER",
+    ).strip()
+    models=("local",) if terminal_local_only else ("openai-fast","openai","mistral")
     bridged=_external_tool_bridge("planner",{
       "prompt":str(prompt),
       "models":list(models),
@@ -4066,13 +4075,21 @@ def _planner_post(prompt, timeout_s=20):
         text_value=bridged.get("text")
         if not isinstance(text_value,str) or not text_value.strip():
             raise Blocker("EXTERNAL_PLANNER_RESPONSE_EMPTY")
+        if terminal_local_only:
+            if str(bridged.get("model") or "")!=expected_local_model:
+                raise Blocker("TERMINAL_LOCAL_PLANNER_MODEL_IDENTITY_MISMATCH")
+            if str(bridged.get("backend") or "")!=expected_local_backend:
+                raise Blocker("TERMINAL_LOCAL_PLANNER_BACKEND_IDENTITY_MISMATCH")
         return {
           "text":text_value,
           "model":str(bridged.get("model") or "external-authorized-planner"),
           "duration_s":float(bridged.get("duration_s",0)),
           "errors":list(bridged.get("errors") or []),
           "transport":"EXTERNAL_TOOL_BRIDGE",
+          "backend":str(bridged.get("backend") or ""),
         }
+    if terminal_local_only:
+        raise Blocker("TERMINAL_LOCAL_PLANNER_BRIDGE_REQUIRED")
     endpoint="https://text.pollinations.ai/"
     errors=[]
     for model in models:
