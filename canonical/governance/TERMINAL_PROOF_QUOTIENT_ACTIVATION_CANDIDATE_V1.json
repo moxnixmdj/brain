@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_QUOTIENT_ACTIVATION_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ZERO_CREDIT__INDEPENDENT_OR_CI_VERIFICATION_REQUIRED",
+  "objective": "Install a lossless four-front scheduling quotient and exact composition receipt autobinder before any new reality query.",
+  "runtime": "canonical/runtime/terminal_proof_quotient_v1.py",
+  "manifest": "canonical/governance/TERMINAL_PROOF_QUOTIENT_MANIFEST_V1.json",
+  "composition_autobinder": "canonical/runtime/composition_receipt_autobinder_v1.py",
+  "test": "canonical/tests/test_terminal_proof_quotient_v1.py",
+  "expected_live_projection": {
+    "atomic_predicates_total": 38,
+    "proved": 9,
+    "unresolved": 29,
+    "quotient_fronts": {
+      "MATCHED_AND_SCOPE_PROOF_FRONT": 11,
+      "PUBLIC_BAR_AND_ROUTE_FRONT": 15,
+      "JUDGMENT_SOURCE_FRONT": 2,
+      "COMPOSITION_COMPONENT_PROOF_FRONT": 1
+    },
+    "composition_exact_interface_receipts_bound_now": 0,
+    "composition_exact_interface_receipts_open_now": 12
+  },
+  "hard_rules": [
+    "ZERO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT",
+    "NO_SEMANTIC_EQUIVALENCE_INFERENCE",
+    "NO_OWNERSHIP_MUTATION",
+    "NO_BENCHMARK_OR_MATCHED_CASE_EXPOSURE",
+    "COMPOSITION_RECEIPTS_BIND_ONLY_BY_EXACT_EXPLICIT_METADATA",
+    "PROMOTE_TO_ACTIVE_CONTROL_PLANE_ONLY_AFTER_EXACT_TEST_PASS"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
