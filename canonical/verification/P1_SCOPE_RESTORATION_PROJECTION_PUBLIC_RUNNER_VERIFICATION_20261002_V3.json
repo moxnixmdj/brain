@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SCOPE_RESTORATION_PROJECTION_PUBLIC_RUNNER_VERIFICATION_20261002_V3",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_FINAL_PROJECTION_BLOBS__12_OF_12_CONTRACTS__19_OF_19_PROVISIONAL_BEHAVIORAL_ROWS__2_OF_19_OPUS_ACCEPTANCE_UNCHANGED__7_OF_38_ATOMIC_UNCHANGED__SYNTHESIS_STALE_ACTION_REVOKED__TERMINAL_FALSE",
+  "brain": {
+    "pull_request": 951,
+    "branch": "worker/p1-readjudication-v2-20261002",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json": "b0631614f89fe694ec80ebe52d0a3adb5a13591d",
+      "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json": "0b1db563c7f1c1d0bc90fca025b8576f24d09378",
+      "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json": "5d31f372528421ea022a28b8645fbd696cb87a42",
+      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "c62590c2d7bb6024dd73e56f709645989f79cdb8",
+      "canonical/governance/P1_COMPOSITE_PROOF_RESTORATION_ACTIVATION_V3.json": "f76b3a96c7ac9495c696a44ba2f887ae940d1596",
+      "canonical/verification/P1_COMPOSITE_PROOF_RESTORATION_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json": "0e288acce32d06742db2a7b940820a74f9731073",
+      "canonical/governance/OPUS55_SYNTHESIS_ZERO_REALITY_DISCHARGE_EXHAUSTION_V1.json": "e61741612bafd85697635b0fea97bd93812454cd",
+      "canonical/tests/test_p1_scope_restoration_projection_v3.py": "898edea852a5234e4ca2c2f93b3ed9967022197a"
+    }
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 983,
+    "verified_head_sha": "f193f9a0c188137c71a0e87fe9c01027e8e74381",
+    "merge_commit": "d5a1281bff2b710452c3a4b3f4753bfcbcb244af",
+    "workflow_name": "Verify P1 scope restoration projection v3",
+    "workflow_run_id": 37026289502,
+    "workflow_job_id": 110901649730,
+    "conclusion": "success"
+  },
+  "verified": [
+    "CURRENT_TERMINAL_AUTHORITY_EXACT_BLOB",
+    "TERMINAL_PROJECTION_CONSISTENCY_EXACT_BLOB",
+    "TERMINAL_CLOSURE_MANIFEST_EXACT_BLOB",
+    "OPUS55_OWNERSHIP_MATRIX_EXACT_BLOB",
+    "ACTIVE_P1_RESTORATION_EXACT_BLOB",
+    "P1_RESTORATION_VERIFICATION_EXACT_BLOB",
+    "SYNTHESIS_EXHAUSTION_EXACT_BLOB",
+    "PROJECTION_REGRESSION_EXACT_BLOB",
+    "12_OF_12_WHOLE_SCOPE_CONTRACTS_PASS",
+    "19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILY_ROWS_PASS",
+    "EXACTLY_8_P1_DEPENDENT_ROWS_RESTORED_AND_ZERO_REMAIN_QUARANTINED",
+    "OPUS55_ACCEPTANCE_REMAINS_2_OF_19_CLOSED_17_OPEN",
+    "ATOMIC_ACCEPTANCE_REMAINS_7_OF_38_PROVED_31_UNRESOLVED",
+    "TB4_EXECUTION_REMAINS_REVOKED_AT_180_LT_220",
+    "EXHAUSTED_SYNTHESIS_ZERO_REALITY_ACTION_REMOVED_FROM_SCHEDULE",
+    "TERMINAL_GOAL_REMAINS_FALSE"
+  ],
+  "terminal_results_replayed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "opus55_predicate_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
