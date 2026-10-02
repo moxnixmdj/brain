@@ -15,38 +15,46 @@ class Tests(unittest.TestCase):
             load("canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"),
         ]
 
-    def test_live_effective_calibration_is_exactly_3_of_19(self):
+    def test_live_effective_calibration_is_exactly_2_of_19_after_scope_firewall(self):
         out=evaluate(*self.live())
         self.assertEqual(out["errors"],[])
         self.assertFalse(out["pass"])
         self.assertEqual(out["behavioral_pass_family_count"],19)
-        self.assertEqual(out["acceptance_calibrated_family_count"],3)
-        self.assertEqual(out["acceptance_pending_family_count"],16)
+        self.assertEqual(out["acceptance_calibrated_family_count"],2)
+        self.assertEqual(out["acceptance_pending_family_count"],17)
         self.assertEqual(set(out["acceptance_calibrated_families"]),{
             "EXACT_SYMBOLIC_COMPUTATION",
             "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-            "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
         })
-        row=next(r for r in out["families"] if r["family"]=="TOOL_DISCOVERY_SELECTION_AND_LEARNING")
-        self.assertEqual(row["proof_source"],"VERIFIED_FULL_PROTOCOL_STRONGER_WITNESS")
-        self.assertEqual(row["effective_closure_mode"],"ABSOLUTE_DOMINANCE")
-        self.assertEqual(row["effective_witness_id"],"TOOL_DISCOVERY_TERMINAL_CEILING_ABSOLUTE_DOMINANCE_20261002_V1")
+        for family in ("TOOL_DISCOVERY_SELECTION_AND_LEARNING","SUBAGENT_DELEGATION_AND_COORDINATION"):
+            row=next(r for r in out["families"] if r["family"]==family)
+            self.assertFalse(row["opus_acceptance_calibrated"])
+            self.assertEqual(row["effective_protocol_status"],"DEFINED_RESULT_OPEN")
+            self.assertIsNone(row["proof_source"])
+            self.assertEqual(row["reason"],"EFFECTIVE_FROZEN_OPUS55_PROTOCOL_RESULT_NOT_CLOSED")
 
-    def test_without_transmutation_witness_reverts_to_2_of_19(self):
+    def test_without_transmutation_witnesses_stays_2_of_19(self):
         e,p,r,t=self.live()
         t=copy.deepcopy(t); t["evidence"]=[]
         out=evaluate(e,p,r,t)
         self.assertEqual(out["acceptance_calibrated_family_count"],2)
         self.assertEqual(out["acceptance_pending_family_count"],17)
-        self.assertNotIn("TOOL_DISCOVERY_SELECTION_AND_LEARNING",out["acceptance_calibrated_families"])
+
+    def test_finite_perfect_samples_do_not_reopen_scope_firewall(self):
+        e,p,r,t=self.live()
+        out=evaluate(e,p,r,t)
+        for family in ("TOOL_DISCOVERY_SELECTION_AND_LEARNING","SUBAGENT_DELEGATION_AND_COORDINATION"):
+            row=next(r for r in out["families"] if r["family"]==family)
+            self.assertNotEqual(row["effective_closure_mode"],"ABSOLUTE_DOMINANCE")
+            self.assertFalse(row["opus_acceptance_calibrated"])
 
     def test_behavioral_pass_is_still_required(self):
         e,p,r,t=self.live()
         r=copy.deepcopy(r)
-        r["family_verdict"]["passed_families"].remove("TOOL_DISCOVERY_SELECTION_AND_LEARNING")
+        r["family_verdict"]["passed_families"].remove("EXACT_SYMBOLIC_COMPUTATION")
         out=evaluate(e,p,r,t)
-        self.assertEqual(out["acceptance_calibrated_family_count"],2)
-        self.assertIn("TOOL_DISCOVERY_SELECTION_AND_LEARNING",out["behavioral_missing_families"])
+        self.assertEqual(out["acceptance_calibrated_family_count"],1)
+        self.assertIn("EXACT_SYMBOLIC_COMPUTATION",out["behavioral_missing_families"])
 
     def test_malformed_transmutation_fails_closed(self):
         e,p,r,t=self.live()
