@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_COMMUNICATION_SYNTHESIS_MULTIPLEX_EXHAUSTIVE_WITNESS_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "family": "COMMUNICATION_AND_SYNTHESIS",
+  "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "proof_mode": "EXHAUSTIVE_FINITE",
+  "objective": "Attempt to transmute the already-consumed P3 parent-multiplex terminal proof into a full frozen communication-and-synthesis acceptance witness without replay, fresh cases, Opus access, or target weakening.",
+  "authorities": {
+    "protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "direct_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
+    "binding": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "binding_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "binding_independent_verification": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "executor_manifest": "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json",
+    "terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+    "postwave_reduction": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+    "lifter": "canonical/runtime/multiplex_exhaustive_family_witness_v1.py",
+    "test": "canonical/tests/test_multiplex_exhaustive_family_witness_v1.py"
+  },
+  "candidate_claim": {
+    "mode": "EXHAUSTIVE_FINITE",
+    "sole_family_residual_contract_required": true,
+    "frozen_contract_requires_exhaustive_finite_verification": true,
+    "all_bound_load_bearing_parent_observations_must_pass": true,
+    "independent_postwave_contract_pass_required": true,
+    "independent_postwave_family_pass_required": true,
+    "contamination_clean_required": true,
+    "terminal_replay_forbidden": true
+  },
+  "hard_rules": [
+    "CANDIDATE_ONLY_UNTIL_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_STANDALONE_SYNTHETIC_SCORE_INFERENCE",
+    "NO_CROSS_BEHAVIOR_OR_CROSS_SCOPE_INHERITANCE",
+    "NO_OPUS_PROXY_OR_CASE_LEVEL_RESULT_INFERENCE",
+    "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_ARTIFACT_ALONE",
+    "FAIL_CLOSED_ON_ANY_SOURCE_DRIFT_OR_GUARD_FAILURE"
+  ],
+  "expected_if_verified": "ADD_ONE_TYPED_FULL_PROTOCOL_WITNESS_FOR_COMMUNICATION_AND_SYNTHESIS_TO_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT__RECOMPUTE_5_OF_19_ACCEPTANCE__NO_FAMILY_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
