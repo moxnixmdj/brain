@@ -22,6 +22,7 @@ SEARCH_ROOTS = (
 TEXT_SUFFIXES = {".json", ".md", ".py", ".yml", ".yaml", ".txt"}
 MAX_FILE_BYTES = 5_000_000
 MAX_MATCHES_PER_ATOM = 64
+ACTIVE_BASIS_AUTHORITY = "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json"
 
 EXCLUDED_BASENAMES = {
     "TERMINAL_CERTIFICATE_FRONTIER_V5.json",
@@ -63,6 +64,108 @@ def _fail(*errors: str) -> dict[str, Any]:
 
 def _blob_sha(data: bytes) -> str:
     return hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
+
+
+def _load_json_bytes(root: Path, rel: str) -> tuple[dict[str, Any], bytes]:
+    data = (root / rel).read_bytes()
+    return json.loads(data.decode("utf-8")), data
+
+
+def validate_active_basis_binding(*, root: Path = ROOT) -> dict[str, Any]:
+    """Fail closed unless the scanner consumes the exact independently verified V2 basis world."""
+    errors: list[str] = []
+    try:
+        authority, authority_bytes = _load_json_bytes(root, ACTIVE_BASIS_AUTHORITY)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        return {
+            "status": "FAIL_CLOSED",
+            "errors": [f"ACTIVE_BASIS_AUTHORITY_UNREADABLE:{type(exc).__name__}"],
+        }
+
+    if not str(authority.get("status", "")).startswith("ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS"):
+        errors.append("ACTIVE_BASIS_AUTHORITY_STATUS_NOT_INDEPENDENT_PASS")
+
+    verified = authority.get("verified_candidate")
+    if not isinstance(verified, Mapping):
+        return {"status": "FAIL_CLOSED", "errors": ["ACTIVE_BASIS_VERIFIED_CANDIDATE_MISSING"]}
+
+    bindings = (
+        ("frontier_path", "frontier_git_blob_sha"),
+        ("refinement_overlay_path", "refinement_overlay_git_blob_sha"),
+        ("runtime_path", "runtime_git_blob_sha"),
+        ("tests_path", "tests_git_blob_sha"),
+        ("governance_path", "governance_git_blob_sha"),
+    )
+    exact_blobs: dict[str, str] = {}
+    for path_key, sha_key in bindings:
+        rel = verified.get(path_key)
+        expected = verified.get(sha_key)
+        if not isinstance(rel, str) or not rel or not isinstance(expected, str) or len(expected) != 40:
+            errors.append(f"ACTIVE_BASIS_PIN_INVALID:{path_key}:{sha_key}")
+            continue
+        try:
+            actual = _blob_sha((root / rel).read_bytes())
+        except OSError:
+            errors.append(f"ACTIVE_BASIS_PIN_UNREADABLE:{rel}")
+            continue
+        exact_blobs[rel] = actual
+        if actual != expected:
+            errors.append(f"ACTIVE_BASIS_BLOB_MISMATCH:{rel}:{expected}:{actual}")
+
+    verification_path = verified.get("verification_path")
+    receipt: Mapping[str, Any] = {}
+    if not isinstance(verification_path, str) or not verification_path:
+        errors.append("ACTIVE_BASIS_VERIFICATION_PATH_MISSING")
+    else:
+        try:
+            receipt_obj, _ = _load_json_bytes(root, verification_path)
+            receipt = receipt_obj
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            errors.append(f"ACTIVE_BASIS_VERIFICATION_UNREADABLE:{type(exc).__name__}")
+
+    if receipt:
+        if not str(receipt.get("status", "")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+            errors.append("ACTIVE_BASIS_VERIFICATION_STATUS_NOT_PASS")
+        receipt_blobs = receipt.get("exact_brain_blobs")
+        if not isinstance(receipt_blobs, Mapping):
+            errors.append("ACTIVE_BASIS_VERIFICATION_EXACT_BLOBS_MISSING")
+        else:
+            for rel, actual in exact_blobs.items():
+                if receipt_blobs.get(rel) != actual:
+                    errors.append(f"ACTIVE_BASIS_RECEIPT_PIN_MISMATCH:{rel}")
+
+    if errors:
+        return {
+            "status": "FAIL_CLOSED",
+            "errors": sorted(set(errors)),
+            "authority_path": ACTIVE_BASIS_AUTHORITY,
+            "authority_git_blob_sha": _blob_sha(authority_bytes),
+            "exact_blobs": dict(sorted(exact_blobs.items())),
+        }
+    return {
+        "status": "PASS__EXACT_ACTIVE_INDEPENDENTLY_VERIFIED_V2_BASIS_BOUND",
+        "errors": [],
+        "authority_path": ACTIVE_BASIS_AUTHORITY,
+        "authority_git_blob_sha": _blob_sha(authority_bytes),
+        "verification_path": verification_path,
+        "exact_blobs": dict(sorted(exact_blobs.items())),
+    }
+
+
+def build_active_index(*, root: Path = ROOT) -> dict[str, Any]:
+    binding = validate_active_basis_binding(root=root)
+    if not str(binding.get("status", "")).startswith("PASS"):
+        out = _fail("ACTIVE_BASIS_BINDING_NOT_PASS", *binding.get("errors", []))
+        out["basis_binding"] = binding
+        return out
+
+    authority, _ = _load_json_bytes(root, ACTIVE_BASIS_AUTHORITY)
+    verified = authority["verified_candidate"]
+    global_frontier, _ = _load_json_bytes(root, verified["frontier_path"])
+    refinement_overlay, _ = _load_json_bytes(root, verified["refinement_overlay_path"])
+    out = build_index(global_frontier, refinement_overlay, root=root)
+    out["basis_binding"] = binding
+    return out
 
 
 def _source_class(rel: str) -> str:
@@ -196,13 +299,7 @@ def build_index(
 
 
 def main() -> int:
-    global_frontier = json.loads(
-        (ROOT / "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json").read_text(encoding="utf-8")
-    )
-    refinement_overlay = json.loads(
-        (ROOT / "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text(encoding="utf-8")
-    )
-    out = build_index(global_frontier, refinement_overlay)
+    out = build_active_index()
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if str(out.get("status", "")).startswith("PASS") else 1
 
