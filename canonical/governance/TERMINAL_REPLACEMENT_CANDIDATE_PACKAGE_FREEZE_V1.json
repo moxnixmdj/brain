@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_REPLACEMENT_CANDIDATE_PACKAGE_FREEZE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_BEFORE_POST_FREEZE_BEACON__EXACT_BLOB_PACKAGE__ZERO_TERMINAL_RESULTS",
+  "status": "INVALIDATED__INFORMATION_BOUNDARY_AND_ACTIVE_BASIS_CHANGED__ZERO_EXECUTION_AUTHORITY",
   "package_scope": "TEN_BEHAVIORAL_OBLIGATION_REPLACEMENT_TERMINAL_WAVE",
   "exact_git_blobs": {
     "canonical/runtime/terminal_replacement_wave.py": "589fd2b334b8faefaf71ba0116cc355f639bd76f",
@@ -45,5 +45,22 @@
   "freeze_invalidation": "ANY_EXACT_BLOB_CHANGE_REQUIRES_NEW_PACKAGE_FREEZE_AND_NEW_POST_FREEZE_BEACON",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "invalidation": {
+    "date": "2026-10-02",
+    "reasons": [
+      "PACKAGE_SCOPE_DECLARED_TEN_BEHAVIORAL_OBLIGATIONS_BUT_ACTIVE_TERMINAL_BASIS_HAS_TWELVE",
+      "P1_P2_P3_CONTRACT_NATIVE_SUITES_FAIL_INFORMATION_BOUNDARY_AUDIT",
+      "ALL_SIX_REMAINING_BEHAVIOR_SUITES_FAIL_OR_PARTIALLY_FAIL_FULL_CONTRACT_SCOPE_AUDIT",
+      "SCOPE_EQUIVALENT_PROOF_GATE_V2_POSTDATES_PACKAGE_AND_ADDS_LOAD_BEARING_INFORMATION_RULE",
+      "ACTIVE_TERMINAL_PROOF_BASIS_V1_POSTDATES_PACKAGE"
+    ],
+    "authority": [
+      "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+      "canonical/governance/CONTRACT_NATIVE_INFORMATION_BOUNDARY_AUDIT_V1.json",
+      "canonical/governance/REMAINING_BEHAVIOR_INFORMATION_BOUNDARY_AUDIT_V1.json",
+      "canonical/runtime/scope_equivalent_proof_gate_v2.py"
+    ]
+  },
+  "execution_authority": false
 }
