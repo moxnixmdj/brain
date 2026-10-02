@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__PREQUALIFICATION_ONLY__ZERO_TERMINAL_RESULT",
+  "source_private": {
+    "suite": {
+      "path": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
+      "blob_sha": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860"
+    },
+    "candidate": {
+      "path": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "blob_sha": "ea8057b0eadac210c4f4378298df93ed233c5824"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p2_p3_information_safe_proof_v2.py",
+      "blob_sha": "85ba63152016b141e62bcb50722db7b501a61941"
+    }
+  },
+  "independent_public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 543,
+    "verified_head": "a70c24b9e42a45181c87cbc9ef8bafff2834e605",
+    "workflow_run_id": 36959195802,
+    "workflow_name": "Verify P2 P3 information-safe capsule",
+    "conclusion": "success"
+  },
+  "proves": [
+    "P2_P3_CANDIDATE_EVALUATOR_SEPARATION",
+    "P2_GOLD_QUALITY_FIELDS_HIDDEN_FROM_CANDIDATE",
+    "P3_GOLD_SUPPORT_SALIENCE_AND_DECISION_RELEVANCE_HIDDEN_FROM_CANDIDATE",
+    "CANDIDATE_INTERFACE_EXECUTABLE_ACROSS_PREFLIGHT_SEED_GRID",
+    "HIDDEN_ORACLE_CAN_REJECT_BAD_PLAN_OR_MISSING_UNCERTAINTY"
+  ],
+  "does_not_prove": [
+    "WHOLE_CONTRACT_SCOPE_EQUIVALENCE",
+    "TERMINAL_ACCEPTANCE",
+    "OPUS_5_5_PARITY",
+    "FAMILY_CAPABILITY_OWNERSHIP"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
