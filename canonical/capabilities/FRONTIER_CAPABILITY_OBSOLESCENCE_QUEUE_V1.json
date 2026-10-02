@@ -86,7 +86,7 @@
     "parent_frontier_capability": null,
     "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
     "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "OUTER_GLOBAL_TERMINAL_UNIVERSE_NOT_YET_EXACT_CUT_READY__M2_M3_M4_M5_SURVIVING_MECHANISM_RESIDUALS_AND_TERMINAL_PROOF_MULTIPLEXING_REMAIN",
+    "exact_blocker": "OUTER_GLOBAL_TERMINAL_UNIVERSE_NOT_YET_EXACT_CUT_READY__M2_M3_M5_SURVIVING_MECHANISM_RESIDUALS_AND_TERMINAL_PROOF_MULTIPLEXING_REMAIN",
     "evidence_paths": [
       "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
       "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
@@ -95,7 +95,7 @@
       "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
       "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
     ],
-    "next_action": "SATURATE_M2_M3_M4_M5_SURVIVING_RESIDUALS_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__APPLY_TERMINAL_OBSERVATION_DOMINANCE_AND_SCOPE_EQUIVALENT_PUBLIC_BARS__RECOMPUTE_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
+    "next_action": "SATURATE_M2_M3_M5_SURVIVING_RESIDUALS_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__APPLY_IDENTIFIABILITY_AND_CROSS_LANE_DEDUPLICATION__RECOMPUTE_EXACT_OUTER_GLOBAL_MINIMUM_REALITY_CUT__NO_FRESH_TERMINAL_EVIDENCE",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
@@ -185,8 +185,8 @@
       "status": "SOURCE_READ_AFTER_REVOCATION__ZERO_CREDIT__NO_EXECUTION",
       "evidence_path": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json"
     },
-    "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_EXACT_BLOCKER_VERDICT",
-    "open_mechanism_residual_count": 4,
+    "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_M2_M3_M5_EXACT_BLOCKER_VERDICT",
+    "open_mechanism_residual_count": 3,
     "open_mechanism_residuals": [
       "M0A_ARBITRARY_SOURCE_TO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
       "M1A_DRAWING_TO_NORMALIZED_VIEW_AND_FEATURE_CONSTRAINT_GRAPH",
@@ -514,7 +514,7 @@
     "white_box_capability_capsule_schema": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "whole_model_adoption_default_forbidden": true
   },
-  "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_EXACT_BLOCKER_VERDICT",
+  "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_M2_M3_M5_EXACT_BLOCKER_VERDICT",
   "sqlite_parent_first_spend": {
     "task_id": "PARENT-OPENENDED-SQLITE-BACKUP-CONSISTENCY-REAL-TASK-20260930-001",
     "status": "SPENT__BLOCKED__NO_REPLAY",
