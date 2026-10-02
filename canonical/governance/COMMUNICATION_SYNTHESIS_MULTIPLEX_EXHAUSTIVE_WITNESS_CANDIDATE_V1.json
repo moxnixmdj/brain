@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COMMUNICATION_SYNTHESIS_MULTIPLEX_EXHAUSTIVE_WITNESS_CANDIDATE_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "FALSIFIED_BY_TARGET_METRIC_AUDIT__MATCHED_QUALITY_NONINFERIORITY_NOT_DISCHARGED__ZERO_CREDIT",
   "family": "COMMUNICATION_AND_SYNTHESIS",
   "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
   "proof_mode": "EXHAUSTIVE_FINITE",
@@ -37,11 +37,23 @@
     "NO_ACCEPTANCE_OR_FAMILY_CREDIT_FROM_THIS_ARTIFACT_ALONE",
     "FAIL_CLOSED_ON_ANY_SOURCE_DRIFT_OR_GUARD_FAILURE"
   ],
-  "expected_if_verified": "ADD_ONE_TYPED_FULL_PROTOCOL_WITNESS_FOR_COMMUNICATION_AND_SYNTHESIS_TO_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT__RECOMPUTE_5_OF_19_ACCEPTANCE__NO_FAMILY_PROMOTION_BEFORE_INDEPENDENT_VERIFICATION",
+  "expected_if_verified": "SUPERSEDED_BY_FALSIFICATION__DO_NOT_ADD_TO_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "candidate_claim_full_protocol_valid": false,
+  "falsification": {
+    "target_normalization": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+    "target_predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "missing_atom": "metric:matched_quality",
+    "missing_metric_requirement": "matched_quality_noninferiority",
+    "frozen_protocol_metric": "independent_quality_score",
+    "reason": "P3 exhaustive-finite behavioral checks do not provide a content-addressed matched-quality or independent-quality-score bound against Opus 5.5. Behavioral exhaustiveness may not be promoted into an undefined numeric quality comparator.",
+    "verifier_pr": "https://github.com/moxnixmdj/verification-capsule-runner/pull/923",
+    "verifier_pr_disposition": "CLOSED_UNMERGED_BEFORE_PROMOTION"
+  },
+  "next": "PRESERVE_P3_ATOM_LEVEL_DIMENSION_EVIDENCE__KEEP_MATCHED_QUALITY_NONINFERIORITY_OPEN__SEARCH_ONLY_FOR_SCOPE_COMPLETE_ABSOLUTE_QUALITY_BOUND_OR_EXACT_OPUS55_MATCHED_COMPARATOR"
 }
