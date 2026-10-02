@@ -178,6 +178,25 @@ def _eval(expr: Mapping[str, Any], meta: Mapping[str, Mapping[str, str]], vals: 
         dim = {k: v * power for k, v in _dim_parse(a[1]).items() if v * power}
         return "number", _dim_string(dim), float(a[2]) ** power
 
+    if op in {"exp", "log", "sqrt"}:
+        a = one()
+        if a[0] not in _NUMERIC or a[1] != "dimensionless":
+            raise CompileError("TRANSCENDENTAL_REQUIRES_DIMENSIONLESS:" + op)
+        av = float(a[2])
+        if op == "log":
+            if av <= 0.0:
+                raise CompileError("LOG_DOMAIN")
+            value = math.log(av)
+        elif op == "sqrt":
+            if av < 0.0:
+                raise CompileError("SQRT_DOMAIN")
+            value = math.sqrt(av)
+        else:
+            value = math.exp(av)
+        if not math.isfinite(value):
+            raise CompileError("TRANSCENDENTAL_NONFINITE:" + op)
+        return "number", "dimensionless", value
+
     if op in {"gt", "ge", "lt", "le"}:
         a, b = two()
         if a[0] not in _NUMERIC or b[0] not in _NUMERIC or a[1] != b[1]:
