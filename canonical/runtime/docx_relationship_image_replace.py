@@ -129,13 +129,13 @@ def replace_image_by_relationship(
 
     replacement = bytes(replacement_image)
     signatures = {
-        ".png": lambda b: b.startswith(b"\\x89PNG\\r\\n\\x1a\\n"),
-        ".jpg": lambda b: b.startswith(b"\\xff\\xd8\\xff"),
-        ".jpeg": lambda b: b.startswith(b"\\xff\\xd8\\xff"),
+        ".png": lambda b: b.startswith(b"\x89PNG\r\n\x1a\n"),
+        ".jpg": lambda b: b.startswith(b"\xff\xd8\xff"),
+        ".jpeg": lambda b: b.startswith(b"\xff\xd8\xff"),
         ".gif": lambda b: b.startswith((b"GIF87a", b"GIF89a")),
         ".bmp": lambda b: b.startswith(b"BM"),
-        ".tif": lambda b: b.startswith((b"II*\\x00", b"MM\\x00*")),
-        ".tiff": lambda b: b.startswith((b"II*\\x00", b"MM\\x00*")),
+        ".tif": lambda b: b.startswith((b"II*\x00", b"MM\x00*")),
+        ".tiff": lambda b: b.startswith((b"II*\x00", b"MM\x00*")),
     }
     if not signatures[ext](replacement):
         return {"status": "FAIL_CLOSED", "reason": "REPLACEMENT_IMAGE_SIGNATURE_MISMATCH", "extension": ext}
@@ -183,6 +183,7 @@ def replace_image_by_relationship(
         "output_path": str(dst),
         "source_part": source_part,
         "relationship_id": relationship_id,
+        "relationship_reference_count": reference_count,
         "media_part": target,
         "changed_members": changed,
         "preserved_member_count": len(original) - 1,
