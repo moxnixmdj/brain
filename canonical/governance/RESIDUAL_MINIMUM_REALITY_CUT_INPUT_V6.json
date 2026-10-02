@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6",
+  "date": "2026-10-02",
+  "status": "FROZEN_FOR_EXACT_SOLVER__FAITHFUL_TO_SOURCE_UNIVERSE",
+  "source_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
+  "source_universe_blob_sha": "7664a9373e36a0a867e6eb84d2d6984277a5089e",
+  "distinctions": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "already_resolved": [],
+  "observations": [
+    {
+      "id": "A_M0A_MATCHED_CROSS_DOMAIN_SEMANTIC_PARITY_V2",
+      "covers": [
+        "M0A"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M0A_COMPLETE_ACTION_BUNDLE_V2.json"
+    },
+    {
+      "id": "A_M1A_COMPOSED_ROUTE_MATCHED_PARITY_V2",
+      "covers": [
+        "M1A"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json"
+    },
+    {
+      "id": "A_M1B_MATCHED_GEOMETRY_COVERAGE_V3",
+      "covers": [
+        "M1B"
+      ],
+      "cost": 1,
+      "action_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json"
+    },
+    {
+      "id": "A_M1_END_TO_END_DRAWING_GRAPH_AND_GEOMETRY_PARITY_V1",
+      "covers": [
+        "M1A",
+        "M1B"
+      ],
+      "cost": 1,
+      "source": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json#combined_evaluation_candidates"
+    }
+  ],
+  "cost_model": {
+    "unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_UNIT",
+    "objective": "MINIMIZE_NEW_REALITY_UNITS__THEN_OBSERVATION_COUNT__THEN_LEXICOGRAPHIC_ID",
+    "semantics": "M0A_REQUIRES_ONE_NEW_CLEAN_MATCHED_CROSS_DOMAIN_BATCH__M1A_AND_M1B_MAY_BE_JOINTLY_SCORED_FROM_ONE_NEW_CLEAN_DRAWING_BATCH_WITH_INDEPENDENT_INTERMEDIATE_AND_FINAL_ORACLES"
+  },
+  "freeze": {
+    "frozen": true,
+    "source_universe_exact_blob_required": true,
+    "rule": "ANY_NEW_ADMISSIBLE_ACTION_CHANGED_COST_CHANGED_OBLIGATION_CHANGED_BUNDLE_OR_SOURCE_UNIVERSE_BLOB_INVALIDATES_V6"
+  },
+  "fresh_terminal_evidence_consumed_so_far": 0,
+  "incremental_spend_usd": 0
+}
