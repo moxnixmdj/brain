@@ -1,0 +1,31 @@
+name: Verify native artifact cross-format bounded preflight
+on:
+  push:
+    branches: [obs-native-artifact-cross-format-v1-20261002]
+    paths:
+      - canonical/runtime/native_artifact_unique_text_edit.py
+      - canonical/runtime/native_artifact_cross_format_proof.py
+      - canonical/tests/test_native_artifact_cross_format.py
+      - canonical/governance/NATIVE_ARTIFACT_CROSS_FORMAT_BOUNDED_PREFLIGHT_V1.json
+      - .github/workflows/verify-native-artifact-cross-format-bounded.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/native_artifact_unique_text_edit.py
+      - canonical/runtime/native_artifact_cross_format_proof.py
+      - canonical/tests/test_native_artifact_cross_format.py
+      - canonical/governance/NATIVE_ARTIFACT_CROSS_FORMAT_BOUNDED_PREFLIGHT_V1.json
+      - .github/workflows/verify-native-artifact-cross-format-bounded.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --disable-pip-version-check --no-input pypdf==6.19.0 Pillow==12.3.0
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_native_artifact_cross_format
