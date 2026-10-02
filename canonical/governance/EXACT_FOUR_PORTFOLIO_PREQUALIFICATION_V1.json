@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__ALL_14_NAMED_BENCHMARK_EXECUTION_ROUTES_DELETED_BY_VERIFIED_GLOBAL_DOMINANCE_V3__REPLACEMENT_PROOF_POPULATION_BINDINGS_REMAIN",
+  "status": "ACTIVE_FAIL_CLOSED__V3_GLOBAL_SURFACE_DELETION_SUSPENDED__COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_ROUTE_AND_REPLACEMENT_BINDINGS_REQUIRED",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "portfolios": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
@@ -44,23 +44,26 @@
   },
   "portfolio_status": {
     "T0_CODING_SEMANTIC_GEOMETRY_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
+      "status": "PREQUALIFICATION_INCOMPLETE__GLOBAL_V3_ROUTE_DELETION_SUSPENDED_PENDING_CORRECTED_SCOPE_EQUIVALENCE",
       "known_required_surfaces": [
         "Terminal-Bench 4.0 >=66.4%",
         "FrontierCode v1.1 Main >=54.4%",
         "CursorBench 4.0 >=57.8%"
       ],
-      "blockers": [],
+      "blockers": [
+        "COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_SCOPE_EQUIVALENT_ROUTE_NOT_YET_TERMINALLY_BOUND"
+      ],
       "deleted_required_surfaces": [
         "FrontierCode v1.1 Main official/nonreproducible route",
         "CursorBench 4.0 exact nonreproducible route"
       ],
       "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
       "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
-      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES",
+      "global_v3_route_deletion_authority": false
     },
     "T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
+      "status": "PREQUALIFICATION_INCOMPLETE__GLOBAL_V3_ROUTE_DELETION_SUSPENDED_PENDING_CORRECTED_SCOPE_EQUIVALENCE",
       "known_required_surfaces": [
         "GDPval-AA v2.1 >=1846 Elo",
         "AA-Briefcase v1.1 >=1822 Elo",
@@ -68,7 +71,9 @@
         "Finance & Accounting Index >=61 for represented scope",
         "Finance Agent v2 >=58.59% for represented scope"
       ],
-      "blockers": [],
+      "blockers": [
+        "COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_SCOPE_EQUIVALENT_ROUTE_NOT_YET_TERMINALLY_BOUND"
+      ],
       "deleted_required_surfaces": [
         "AA-Briefcase v1.1 official private route",
         "Finance Agent v2 official private heldout route"
@@ -76,16 +81,19 @@
       "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
       "finance_index_component_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
       "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
-      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES",
+      "global_v3_route_deletion_authority": false
     },
     "T2_INTERACTIVE_AGENCY_RECOVERY_SCOPE_DELEGATION_COMPOSITION_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
+      "status": "PREQUALIFICATION_INCOMPLETE__GLOBAL_V3_ROUTE_DELETION_SUSPENDED_PENDING_CORRECTED_SCOPE_EQUIVALENCE",
       "known_required_surfaces": [
         "AutomationBench >=40%",
         "OSWorld 2.1 matched >=81.8% where comparable",
         "LiveBench Instruction Following >=65.7%"
       ],
-      "blockers": [],
+      "blockers": [
+        "COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_SCOPE_EQUIVALENT_ROUTE_NOT_YET_TERMINALLY_BOUND"
+      ],
       "livebench_if_prequalification": "PASS__ADAPTER_DATASET_DEPENDENCIES_HERMETIC_RUNTIME_AND_58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES_INDEPENDENTLY_VERIFIED",
       "closed_bindings": [
         "LIVEBENCH_IF_VERIFIER_ADAPTER_DATASET_HERMETIC_RUNTIME_AND_58_CHECKER_MUTATION_BOUNDARY_PREFLIGHT_PASS",
@@ -93,15 +101,18 @@
       ],
       "automationbench_public_scope_binding": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
       "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
-      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES",
+      "global_v3_route_deletion_authority": false
     },
     "T3_RESEARCH_UNKNOWN_DOMAIN_PORTFOLIO": {
-      "status": "PREQUALIFICATION_INPUTS_CLOSED__NAMED_BENCHMARK_EXECUTION_ROUTES_REDUNDANT_BY_GLOBAL_SURFACE_DOMINANCE_V3",
+      "status": "PREQUALIFICATION_INCOMPLETE__GLOBAL_V3_ROUTE_DELETION_SUSPENDED_PENDING_CORRECTED_SCOPE_EQUIVALENCE",
       "known_required_surfaces": [
         "Humanity's Last Exam with tools >=67.7%",
         "Terminal-Bench-Science 0.1 >=58.7%"
       ],
-      "blockers": [],
+      "blockers": [
+        "COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_SCOPE_EQUIVALENT_ROUTE_NOT_YET_TERMINALLY_BOUND"
+      ],
       "background_reference_surfaces": [
         "Vals MysteryMechanism >=49.55% represented scope__BACKGROUND_REFERENCE_ONLY__DIRECT_EXECUTION_ROUTE_DELETED"
       ],
@@ -111,7 +122,8 @@
       "deleted_surface_evidence": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
       "unknown_domain_scope_audit": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
       "global_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT.json",
-      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES"
+      "named_benchmark_surfaces": "REFERENCE_TARGETS_ONLY__NOT_REQUIRED_EXECUTION_ROUTES",
+      "global_v3_route_deletion_authority": false
     }
   },
   "public_evidence_checked": [
@@ -174,11 +186,11 @@
   ],
   "execution_authority": false,
   "next": [
-    "PROMOTE_FOUR_CONTRACT_NATIVE_BRAIN_CANDIDATE_ONLY_IF_INDEPENDENT_PUBLIC_RUNNER_PASS",
-    "BIND_FRESH_TERMINAL_POPULATIONS_FOR_REMAINING_SIX_BEHAVIORAL_ROUTES",
-    "FREEZE_POST_FREEZE_SEED_AND_POPULATION_SELECTION_PROTOCOL_FOR_ALL_TEN_OBLIGATIONS",
-    "RUN_CANONICAL_TERMINAL_PREQUALIFICATION_REDUCER",
-    "IF_AND_ONLY_IF_REDUCER_PASS__FREEZE_CANDIDATE_COMMIT_AND_EXECUTE_T0_T1_T2_T3_REPLACEMENT_WAVE_IN_PARALLEL"
+    "FREEZE_COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_ROUTE_AND_FRESH_POST_FREEZE_POPULATION",
+    "RUN_SCOPE_EQUIVALENT_PROOF_GATE_FAIL_CLOSED_FOR_THE_CORRECTED_ROUTE",
+    "RECOMPUTE_GLOBAL_SURFACE_DOMINANCE_AS_V4_WITH_SEMANTIC_SCOPE_COVERAGE",
+    "COMPLETE_REMAINING_REPLACEMENT_CANDIDATE_AND_POPULATION_BINDINGS",
+    "RUN_CANONICAL_TERMINAL_PREQUALIFICATION_REDUCER__AUTHORIZE_ONLY_ON_ZERO_FAILED_PREDICATES"
   ],
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
@@ -192,13 +204,13 @@
     "zero_preproof_implementation_residuals": true,
     "shared_one_shot_contamination_oracle_mutation_protocol_frozen": true,
     "public_evaluation_route_matrix_frozen": true,
-    "every_surface_zero_cost_route_frozen": true,
-    "every_surface_oracle_and_verifier_binding_frozen": true,
+    "every_surface_zero_cost_route_frozen": false,
+    "every_surface_oracle_and_verifier_binding_frozen": false,
     "every_portfolio_task_case_harness_metric_stop_rule_and_mutation_set_frozen": false,
     "brain_route_and_dependency_manifest_frozen": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
     "no_known_opaque_target_capability_provider_in_operative_brain_route": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
     "no_known_unresolved_composition_defect_before_wave": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
-    "four_portfolios_pairwise_execution_independent": "NAMESPACE_LEVEL_PASS__REPLACEMENT_POPULATION_BINDINGS_PENDING",
+    "four_portfolios_pairwise_execution_independent": "NAMESPACE_LEVEL_PASS__CORRECTED_REPLACEMENT_SCOPE_BINDINGS_PENDING",
     "livebench_if_verifier_source_bytes_frozen": true,
     "finance_and_accounting_index_surface_accounted_for": true,
     "proof_route_dominance_independently_verified": "canonical/verification/PREQUALIFICATION_PROOF_PRIMITIVES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -250,7 +262,10 @@
     "required_named_benchmark_execution_route_count": 0,
     "replacement_direct_proof_routes_frozen": true,
     "all_14_named_benchmark_execution_routes_redundant": "INDEPENDENT_PASS__canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "global_terminal_replacement_proof_wave_frozen": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json"
+    "global_terminal_replacement_proof_wave_frozen": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json",
+    "global_terminal_surface_dominance_v3_mechanical_verification_valid": true,
+    "global_terminal_surface_dominance_v3_scope_mapping_valid": false,
+    "global_surface_route_deletion_authority": false
   },
   "route_audit_summary": {
     "surface_count": 14,
@@ -271,6 +286,8 @@
   },
   "surface_executability_audit": "canonical/governance/ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1.json",
   "remaining_irreducible_prequalification_blockers": [
+    "COMPOSED_RAW_SOURCE_TO_ACCEPTANCE_TERMINAL_PROOF_ROUTE_MUST_PASS_SCOPE_EQUIVALENT_PROOF_GATE",
+    "FRESH_POST_FREEZE_CROSS_DOMAIN_RAW_SPEC_POPULATION_WITH_ALTERNATIVE_INTERPRETATION_AND_ACCEPTANCE_CONSEQUENCE_ORACLE_MUST_BE_FROZEN",
     "INDEPENDENT_PASS_REQUIRED_FOR_FOUR_CONTRACT_NATIVE_BRAIN_CANDIDATE_ADAPTERS",
     "FRESH_TERMINAL_CANDIDATE_AND_POPULATION_BINDINGS_REQUIRED_FOR_ACCEPTANCE_ARTIFACT_RESEARCH_TOOL_GROUNDING_AND_DELEGATION_ROUTES",
     "POST_FREEZE_SEED_POPULATION_SELECTION_AND_FULL_FOUR_PORTFOLIO_BINDING_MUST_BE_MACHINE_FROZEN"
@@ -317,5 +334,7 @@
   "livebench_if_adapter_verification": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json",
   "global_terminal_surface_dominance_v3": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3.json",
-  "global_terminal_replacement_proof_wave": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json"
+  "global_terminal_replacement_proof_wave": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_PROOF_WAVE_V1.json",
+  "global_surface_dominance_v3_scope_mapping_invalidation": "canonical/governance/GLOBAL_SURFACE_DOMINANCE_V3_SCOPE_MAPPING_INVALIDATION_V1.json",
+  "scope_equivalent_proof_gate": "canonical/runtime/scope_equivalent_proof_gate.py"
 }
