@@ -1,0 +1,37 @@
+name: Verify terminal proof atom basis
+
+on:
+  push:
+    paths:
+      - "canonical/governance/TERMINAL_PROOF_ATOM_BASIS_ACTIVATION_V1.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
+      - "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json"
+      - "canonical/governance/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_ACTIVATION_V1.json"
+      - "canonical/runtime/terminal_proof_atom_basis_v1.py"
+      - "canonical/tests/test_terminal_proof_atom_basis_v1.py"
+      - ".github/workflows/verify-terminal-proof-atom-basis.yml"
+  pull_request:
+    paths:
+      - "canonical/governance/TERMINAL_PROOF_ATOM_BASIS_ACTIVATION_V1.json"
+      - "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json"
+      - "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json"
+      - "canonical/governance/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_ACTIVATION_V1.json"
+      - "canonical/runtime/terminal_proof_atom_basis_v1.py"
+      - "canonical/tests/test_terminal_proof_atom_basis_v1.py"
+      - ".github/workflows/verify-terminal-proof-atom-basis.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run proof atom adversarial tests
+        run: python -m unittest canonical.tests.test_terminal_proof_atom_basis_v1 -v
+      - name: Compile live proof atom basis
+        run: python canonical/runtime/terminal_proof_atom_basis_v1.py
