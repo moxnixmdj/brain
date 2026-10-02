@@ -1,4 +1,4 @@
-import json, tempfile
+import json, tempfile, unittest
 from pathlib import Path
 from canonical.runtime.prequalification_stage_a_generic import evaluate
 
@@ -105,3 +105,31 @@ def test_later_rank_lease_revalidation_still_passes():
     with tempfile.TemporaryDirectory() as td:
         materialize(td,files)
         assert evaluate(Path(td),LEDGER,TASK,RANK,HASH)["pass"] is True
+
+
+class StageAGenericOracleExecutesUnderUnittest(unittest.TestCase):
+    """Make the ten checks above run under the runner this repository's CI actually uses.
+
+    Every workflow here invokes `python -m unittest`, which collects no module-level test
+    functions. This file therefore reported `Ran 0 tests ... OK` while the guard workflow
+    named it as one of five oracles, so the Stage-A admission checks it holds never
+    executed in CI at all. Green with zero tests is the most dangerous output a suite can
+    produce, because it is indistinguishable from a pass -- the same shape as a predicate
+    that can never fire, one level up, and it is how this branch's own claim that the
+    oracles "are unittest modules" came to be written and published.
+
+    The module-level functions are deliberately kept: pytest still collects them, the
+    published test ids stay valid, and a base-versus-head delta stays comparable instead of
+    counting a rename as a fix. A bare name inside a method resolves to the module global
+    rather than to the method, so these delegate instead of recursing.
+    """
+    def test_clean_complete_exposure_search_passes(self): test_clean_complete_exposure_search_passes()
+    def test_instruction_read_fails(self): test_instruction_read_fails()
+    def test_prior_exposure_hit_fails(self): test_prior_exposure_hit_fails()
+    def test_revocation_guard_missing_fails(self): test_revocation_guard_missing_fails()
+    def test_brain_pr_prior_exposure_fails(self): test_brain_pr_prior_exposure_fails()
+    def test_missing_exposure_surface_fails(self): test_missing_exposure_surface_fails()
+    def test_incomplete_exposure_search_fails(self): test_incomplete_exposure_search_fails()
+    def test_policy_without_eight_surface_requirement_fails(self): test_policy_without_eight_surface_requirement_fails()
+    def test_unmerged_runner_budget_guard_fails(self): test_unmerged_runner_budget_guard_fails()
+    def test_later_rank_lease_revalidation_still_passes(self): test_later_rank_lease_revalidation_still_passes()

@@ -12,10 +12,12 @@ read a path the live surfaces actually carry, and it must still fire when the va
 wrong. An unsatisfiable predicate and an absent one are the same failure -- neither can
 ever report real drift.
 """
+import importlib
 import importlib.util
 import json
 import os
 import pathlib
+import re
 import tempfile
 import unittest
 
@@ -227,6 +229,66 @@ class LiveTreeSoundnessTests(unittest.TestCase):
             "predicate names an authority rather than a mirror, repair the binding instead of "
             "the data")
         self.assertTrue(out.get("pass"))
+
+
+class CIOracleModulesCollectTests(unittest.TestCase):
+    """A test module CI runs must collect tests under the runner CI actually uses.
+
+    Every workflow in this repository invokes ``python -m unittest``, which collects no
+    module-level test functions. ``canonical.runtime.test_prequalification_stage_a_generic``
+    -- named by the guard workflow as one of five oracles -- therefore reported
+    ``Ran 0 tests ... OK`` while holding ten Stage-A admission checks that never executed
+    in CI. Green with zero tests is the most dangerous output a suite can produce, because
+    it is indistinguishable from a pass: the same shape as a predicate that can never fire,
+    one level up.
+
+    This tripwire deliberately lives in a different module from the one it protects. A
+    check cannot detect its own removal, so a tripwire sitting beside the wrappers it
+    guards would be deleted along with them and report nothing.
+
+    Repairing one file does not repair the class: 12 files across this repository carry 65
+    module-level test functions, and 17 modules named by some workflow collect zero tests.
+    The scope here is the workflow this branch owns; the rest is measured and reported.
+    """
+
+    WORKFLOW = ".github/workflows/drift-immunity-guard.yml"
+    SELF = "canonical.runtime.test_prequalification_stage_a_generic"
+
+    def _named_modules(self):
+        root = pathlib.Path(__file__).resolve().parents[2]
+        text = (root / self.WORKFLOW).read_text(encoding="utf-8")
+        return sorted({m for m in re.findall(r"canonical\.[A-Za-z0-9_.]+", text)
+                       if m.rsplit(".", 1)[-1].startswith("test_")})
+
+    def test_every_named_oracle_module_collects_tests(self):
+        mods = self._named_modules()
+        self.assertTrue(mods, "no test module names found in %s: the pattern rotted" % self.WORKFLOW)
+        empty, broken = [], []
+        for m in mods:
+            try:
+                n = unittest.defaultTestLoader.loadTestsFromName(m).countTestCases()
+            except Exception as exc:
+                broken.append("%s (%s)" % (m, type(exc).__name__))
+                continue
+            if n == 0:
+                empty.append(m)
+        self.assertEqual([], broken, "these CI oracle modules do not even import: %s" % broken)
+        self.assertEqual(
+            [], empty,
+            "these CI oracle modules collect ZERO tests under unittest, so their CI step is "
+            "green without executing anything: %s" % empty)
+
+    def test_the_stage_a_oracle_runs_every_check_it_holds(self):
+        """Count, not just non-zero: the module must run as many checks as it defines."""
+        self.assertIn(self.SELF, self._named_modules())
+        mod = importlib.import_module(self.SELF)
+        defined = len([n for n in vars(mod) if n.startswith("test_") and callable(vars(mod)[n])])
+        collected = unittest.defaultTestLoader.loadTestsFromName(self.SELF).countTestCases()
+        self.assertGreater(defined, 0, "the module defines no checks at all")
+        self.assertGreaterEqual(
+            collected, defined,
+            "the module defines %d checks but unittest collects %d, so some are invisible "
+            "to the runner CI uses" % (defined, collected))
 
 
 if __name__ == "__main__":
