@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_PROOF_CUT_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__EXACT_OUTER_TERMINAL_OBSERVATION_CUT_FROZEN__M2_M3_M5_OPERATIVE_ROUTE_CLOSURE_REQUIRED",
+  "status": "ACTIVE_FAIL_CLOSED__EXACT_OUTER_TERMINAL_OBSERVATION_CUT_FROZEN__ONLY_D0_S0_G0_IMPLEMENTATION_RESIDUALS",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
   "evidence_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
@@ -291,7 +291,7 @@
     "disposition": "PRESERVE_SOURCE_AS_SPENT_EVIDENCE__NO_EXECUTION__NO_AUTOMATIC_NEXT_RANK",
     "spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   },
-  "next_action": "CLOSE_D0_S0_S1_FROM_EXISTING_BRAIN_AND_PERMISSIVE_OPEN_MECHANISMS__FREEZE_DONOR_INDEPENDENT_M2_M3_M5_OPERATIVE_ROUTES__VERIFY_COMPOSITION_AND_MUTATION_GATES__THEN_ADMIT_T0_T1_T2_T3_AS_ONE_PARALLEL_TERMINAL_WAVE",
+  "next_action": "CLOSE_D0_FROM_PINNED_PERMISSIVE_FORMAT_MECHANISMS__CLOSE_OR_BOUND_S0_G0_IMPLICIT_LONG_RANGE_MULTIMODAL_AND_NOVEL_TYPED_STRUCTURE_RESIDUAL__FREEZE_DONOR_INDEPENDENT_M2_ROUTE_AND_SHARED_SEMANTIC_ROUTE__VERIFY_COMPOSITION_MUTATION_AND_DONOR_GATES__THEN_ADMIT_T0_T1_T2_T3_ONE_PARALLEL_WAVE",
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
@@ -333,5 +333,25 @@
     "execution_authorized": false
   },
   "shared_semantic_residual_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
-  "shared_semantic_residual_reuse_scan": "canonical/reasoning/2026-10-02_SHARED_SEMANTIC_RESIDUAL_REUSE_SCAN_V1.json"
+  "shared_semantic_residual_reuse_scan": "canonical/reasoning/2026-10-02_SHARED_SEMANTIC_RESIDUAL_REUSE_SCAN_V1.json",
+  "current_mechanism_frontier": {
+    "lane_local": [
+      "M2"
+    ],
+    "shared": [
+      "S0",
+      "G0"
+    ],
+    "deterministic_tail": [
+      "D0"
+    ],
+    "proof_only": [
+      "M0",
+      "M1",
+      "M3",
+      "M4",
+      "M5",
+      "S1"
+    ]
+  }
 }
