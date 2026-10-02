@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V4",
   "date": "2026-10-02",
-  "status": "FROZEN_FOR_EXACT_SOLVER",
+  "status": "INVALIDATED_BY_POST_FREEZE_M1B_EXECUTABLE_BUNDLE_V2",
   "source_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
   "distinctions": [
     "M0A",
@@ -39,7 +39,9 @@
     "unit": "PREDECLARED_NEW_TERMINAL_DISTINCTION_UNIT",
     "objective": "MINIMIZE_NEW_REALITY_UNITS__THEN_OBSERVATION_COUNT"
   },
-  "frozen": true,
+  "frozen": false,
   "new_reality_units_consumed_so_far": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "invalidation_reason": "M1B_COMPLETE_ACTION_BUNDLE_V2_AND_VERIFIED_CONTINUOUS_PLUS_SMOOTH_SURFACE_COMPILERS_WERE_CREATED_AFTER_THIS_FREEZE__ANY_NEW_ADMISSIBLE_ACTION_OR_CHANGED_COST_INVALIDATES_THE_FROZEN_UNIVERSE",
+  "superseding_m1b_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json"
 }
