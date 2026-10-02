@@ -8,7 +8,7 @@
   "current_truth": {
     "behavioral_families": "19/19_PASS",
     "opus55_acceptance": "4/19_CALIBRATED__15_PENDING",
-    "verified_owned": "2/19",
+    "verified_owned": "4/19",
     "atomic_acceptance_frontier": "9/38_PROVED__0_OPEN_DIRECT__29_BLOCKED",
     "authorized_acceptance_case_actions": [],
     "tb4_reality_execution": "REVOKED__180_LT_220",
@@ -16,6 +16,7 @@
   },
   "hard_rules": [
     "ACCEPTANCE_CALIBRATION_NEQ_OWNERSHIP_PROMOTION",
+    "FAMILY_LOCAL_OWNERSHIP_PROMOTION_REQUIRES_INDEPENDENT_EXACT_BLOB_ELIGIBILITY_PROOF",
     "DERIVED_PROJECTIONS_MUST_AGREE_WITH_CURRENT_INDEPENDENT_CALIBRATION_AND_RESIDUAL_RECEIPTS",
     "CURRENT_TERMINAL_AUTHORITY_SOURCE_BLOB_POINTERS_MUST_EQUAL_ACTUAL_GIT_BLOB_IDENTITIES",
     "ZERO_AUTHORIZED_ACCEPTANCE_CASE_ACTIONS_WHILE_RESIDUAL_VERDICT_HAS_ZERO_OPEN_DIRECT_ACTIONS",
@@ -28,5 +29,7 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "promotion_authority": false,
-  "execution_authority": false
+  "execution_authority": false,
+  "ownership_promotion_evidence": "canonical/verification/OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "ownership_promotion_evidence_blob_sha": "23d3d92ebeb8fd34320923ccce1d017b2031ec6e"
 }
