@@ -17,6 +17,8 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime.p1_terminal_execution_scope_audit_v1 import evaluate as scope_audit
+from canonical.runtime import trajectory_failure_typed_ir_candidate_v4 as v4_candidate
+from canonical.runtime import trajectory_failure_typed_ir_proof_v4 as v4_proof
 
 ROOT = Path(__file__).resolve().parents[2]
 CANDIDATE = ROOT / "canonical/governance/P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_V1.json"
@@ -74,6 +76,45 @@ def _flatten_partition(partition: Mapping[str, Any], errors: list[str], label: s
         seen |= s
         by_role[role] = s
     return seen, by_role
+
+
+def _v4_drop_provenance_counterexample() -> dict[str, Any]:
+    """Execute the frozen DROP_PROVENANCE mutation against the exact V4 scorer.
+
+    A role assignment is not proof. If erasing all visible supporting receipts
+    still produces a passing scorer verdict, the assigned mutation is not killed
+    and P1 quarantine cannot lift.
+    """
+    case = v4_proof.generate_case(
+        41001,
+        pattern="SINGLE",
+        domain="RESEARCH",
+        kind="PROVENANCE",
+    )
+    public = copy.deepcopy(v4_proof.public_task(case))
+    erased = 0
+    for row in public["task"]["trajectory"]:
+        for check in row["checks"]:
+            if check.get("pass") is False:
+                check["evidence"] = []
+                erased += 1
+
+    candidate = v4_candidate.solve(public)
+    verdict = v4_proof.score_case(case, candidate)
+    holds = (
+        erased > 0
+        and candidate.get("supporting_receipts") == []
+        and verdict.get("pass") is True
+    )
+    return {
+        "mutation": "DROP_PROVENANCE_OR_DEPENDENCY_EDGE",
+        "mutation_instance": "ERASE_ALL_SUPPORTING_RECEIPTS_ON_FAILED_CHECKS",
+        "failed_check_receipt_lists_erased": erased,
+        "candidate_supporting_receipts": candidate.get("supporting_receipts"),
+        "scorer_pass_after_mutation": verdict.get("pass") is True,
+        "counterexample_holds": holds,
+        "verdict": verdict,
+    }
 
 
 def evaluate(candidate: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -168,6 +209,12 @@ def evaluate(candidate: Mapping[str, Any] | None = None) -> dict[str, Any]:
         if name not in tests_src:
             errors.append("V4_TEST_SEMANTIC_MISSING:" + name)
 
+    # Load-bearing adversarial check: an assigned mutation must actually be
+    # killed by its assigned scorer. Static role/literal presence is insufficient.
+    v4_provenance_counterexample = _v4_drop_provenance_counterexample()
+    if v4_provenance_counterexample["counterexample_holds"]:
+        errors.append("V4_DROP_PROVENANCE_MUTATION_SURVIVES_SCORER")
+
     # The corrected mutation role gives V4 the unfalsifiable-diagnosis mutation.
     v4_mut = mutations_by_role.get("V4_TYPED_CROSS_DOMAIN_PREFLIGHT", set())
     term_mut = mutations_by_role.get("T0_T2_TERMINAL_INTERVENTION_RESCUE", set())
@@ -212,6 +259,7 @@ def evaluate(candidate: Mapping[str, Any] | None = None) -> dict[str, Any]:
         "v4_mutation_count": len(v4_mut),
         "terminal_mutation_count": len(term_mut),
         "quarantine_lift_eligible": not unique,
+        "v4_drop_provenance_counterexample": v4_provenance_counterexample,
         "quarantine_resolved": False,
         "terminal_results_replayed": 0,
         "new_reality_units_consumed": 0,
@@ -221,7 +269,8 @@ def evaluate(candidate: Mapping[str, Any] | None = None) -> dict[str, Any]:
         "execution_authority": False,
         "promotion_authority": False,
         "rule": (
-            "PASS_PROVES_ONLY_PREDECLARED_COMPOSITE_ROLE_SUPPORT_FROM_EXACT_V4_AND_T0_T2_SOURCES__"
+            "PASS_REQUIRES_PREDECLARED_COMPOSITE_ROLE_SUPPORT_AND_EXECUTABLE_KILL_OF_ASSIGNED_LOAD_BEARING_MUTATIONS__"
+            "A_SURVIVING_ASSIGNED_MUTATION_BLOCKS_QUARANTINE_LIFT__"
             "QUARANTINE_MAY_LIFT_ONLY_AFTER_INDEPENDENT_EXACT_BLOB_REVERIFICATION__"
             "RECOVERY_ACCEPTANCE_TRANSPORT_REMAINS_SEPARATE"
         ),
