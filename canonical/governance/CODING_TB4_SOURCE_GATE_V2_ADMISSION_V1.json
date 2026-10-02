@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_TB4_SOURCE_GATE_V2_ADMISSION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_GATE_EVALUATION",
+  "route": {
+    "id": "TERMINAL_BENCH_4_MINI_SWE_SUPERPOWERS_SESSION_ROUTE",
+    "family": "ADVANCED_AGENTIC_CODING",
+    "benchmark_harness_zero_cost": true,
+    "scorer_frozen": true,
+    "brain_candidate_bound": true,
+    "brain_owned_operative_configuration": true,
+    "configuration_materially_constrains_execution": true,
+    "capability_package_contains_configuration": true,
+    "promotion_evaluates_brain_configured_system": true,
+    "external_hidden_target_capability_provider": false,
+    "ownership_claim_relies_on_model_standalone_superiority": false,
+    "future_use_requires_capability_rediscovery": false,
+    "model_role": "GENERAL_COGNITION_SUBSTRATE",
+    "model_dependency_count": 1,
+    "model_dependencies_declared": true,
+    "general_substrate_test_pass": true,
+    "incremental_spend_usd": 0
+  },
+  "evidence": [
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+    "canonical/governance/CODING_GENERAL_SUBSTRATE_MATERIALITY_BINDING_V1.json",
+    "canonical/verification/CODING_SUBSTRATE_MATERIALITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json",
+    "canonical/verification/TERMINAL_BENCH_4_ZERO_CASE_ROUTE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "intended_gate": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+  "clean_case_execution_authority": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
