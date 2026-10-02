@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_NAMESPACE_STOP_RULE_AND_PUBLIC_ROUTE_CLASSIFICATION__SURFACE_RESOURCE_ADAPTER_SCORER_AND_DEPENDENCY_PREFLIGHTS_STILL_FAIL_CLOSED",
+  "status": "FROZEN_EXACT_OBSERVATION_BUNDLES__FINANCE_T3_DEPENDENCY_BINDINGS_CLOSED__PUBLIC_SURFACE_PREFLIGHTS_BLOCK_EXECUTION__ZERO_CAPABILITY_CREDIT",
   "shared_protocol": "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
@@ -11,7 +11,9 @@
     "paid_fallback": "FORBIDDEN",
     "shared_brain_state": "READ_ONLY_DURING_TERMINAL_WAVE",
     "result_compile_rule": "COMPILE_ONLY_AFTER_ALL_STARTED_PORTFOLIOS_TERMINATE",
-    "cross_portfolio_mutation": "FORBIDDEN"
+    "cross_portfolio_mutation": "FORBIDDEN",
+    "dependency_manifest": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V2.json",
+    "prewave_dependency_cleanliness": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json"
   },
   "portfolios": {
     "T0": {
@@ -117,7 +119,7 @@
             "P0_STRUCTURED_METHOD_GRAPH_DIRECT_PROOF",
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "COMPONENT_BEHAVIOR_ROUTES_FROZEN__PUBLIC_BAR_SCOPE_EQUIVALENCE_ADMISSION_AND_TERMINAL_PROOF_PENDING",
+          "binding_state": "COMPONENT_ROUTE_BINDINGS_FROZEN__TERMINAL_PROOF_EXECUTION_PENDING",
           "identity": {
             "authority": "Artificial Analysis Finance & Accounting Index",
             "target": 61,
@@ -130,7 +132,8 @@
             "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
             "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
           },
-          "component_route_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
+          "component_route_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
+          "component_binding": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json"
         },
         {
           "id": "FINANCE_AGENT_V2",
@@ -233,7 +236,7 @@
           "proof_routes": [
             "P3_EVIDENCE_AUDIENCE_SYNTHESIS_DIRECT_PROOF"
           ],
-          "binding_state": "DIRECT_PROOF_MACHINE_MUTATION_PREFLIGHT_AND_UNKNOWN_DOMAIN_SCOPE_AUDIT_FROZEN__TERMINAL_EXECUTION_PENDING",
+          "binding_state": "DIRECT_PROOF_MACHINE_MUTATION_PREFLIGHT_AND_UNKNOWN_DOMAIN_SCOPE_AUDIT_FROZEN__TERMINAL_PROOF_EXECUTION_PENDING",
           "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -285,5 +288,6 @@
   },
   "private_surface_dominance": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
   "direct_proof_mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
+  "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json",
+  "blocker": "EXACT_FOUR_PORTFOLIO_PUBLIC_SURFACE_PREFLIGHTS_REMAIN__PER_CASE_RESOURCE_ADAPTER_SCORER_ASSET_GRADER_AND_SCOPE_EQUIVALENCE_BINDINGS_ONLY"
 }
