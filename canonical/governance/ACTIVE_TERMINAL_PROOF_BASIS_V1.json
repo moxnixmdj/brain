@@ -60,15 +60,15 @@
     {
       "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
       "portfolio": "T1",
-      "proof_state": "INDEPENDENT_INFORMATION_SAFE_PREFLIGHT_PASS__SCOPE_ADMISSION_PENDING",
+      "proof_state": "SCOPE_GATE_V2_INDEPENDENT_PASS__POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING",
       "route_requirement": "FULL_ACTIVE_SA_CCR_SCOPE_WITH_INTERMEDIATE_LINEAGE_AND_AUTHORITATIVE_APPLICABILITY_ORACLE",
       "blockers": [
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
         "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
       ],
       "route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
       "candidate": "canonical/runtime/saccr_credit_information_safe_candidate.py",
-      "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+      "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "scope_gate_v2_receipt": "canonical/verification/SA_CCR_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
