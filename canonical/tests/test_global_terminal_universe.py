@@ -25,6 +25,16 @@ for key in (
 ):
     assert holes[key] == "?M"
 
+gate_holes = {row["id"]: row["hole_type"] for row in u["global_terminal_gates"]}
+for gate in (
+    "G_DONOR_DEPENDENCE_ZERO",
+    "G_UNEXPLAINED_BEHAVIOR_ZERO",
+    "G_COMPOSITION_FAILURES_ZERO",
+):
+    assert gate_holes[gate] == "?P"
+    assert gate not in u["global_cut"]["open_mechanism_holes"]
+    assert gate in u["global_cut"]["open_proof_holes"]
+
 assert "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS" not in u["global_cut"]["open_specification_holes"]
 assert u["counts"]["open_specification_holes"] == 0
 assert u["global_cut"]["exact_cut_ready"] is False
