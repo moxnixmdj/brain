@@ -168,12 +168,13 @@
       "dependency_boundary": "Leases, ownership locks, queues and fanin mechanics are deterministic/partly owned; partition/assignment quality is residual when task structure/capabilities are uncertain",
       "scope": "Adaptive task partition and worker/tool assignment",
       "terminal_acceptance": {
-        "proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
-        "proof_mode_basis": "THEORETICAL_CEILING",
-        "binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_MODE_V2.json",
-        "population_binding": "canonical/governance/DELEGATION_TERMINAL_POPULATION_BINDING_V2.json",
-        "acceptance_rule": "ALL_512_CASES_EXACT_PASS__ALL_SIX_INTERACTION_CLASSES_AND_ALL_FIVE_STRUCTURAL_CLASSES_PRESENT",
-        "ceiling_definition": "100_PERCENT_EXACT_CORRECTNESS_ON_THE_FROZEN_SCOPE_REPAIRED_POST_FREEZE_DELEGATION_POPULATION_WITH_ZERO_FAILED_CASES_AND_COMPLETE_INTERACTION_PLUS_STRUCTURAL_CLASS_COVERAGE",
+        "proof_mode": "PREDECLARED_MATCHED_STATISTICAL_COMPARISON_WITH_BRAIN_LOWER_BOUND_AT_OR_ABOVE_OPUS_5_5_ACCEPTANCE_BOUND",
+        "binding": "canonical/governance/DELEGATION_MATCHED_TERMINAL_ACCEPTANCE_V2.json",
+        "generic_acceptance_runtime": "canonical/runtime/matched_statistical_acceptance.py",
+        "generic_protocol": "canonical/governance/OPEN_ENDED_MATCHED_STATISTICAL_PROOF_PROTOCOL_V1.json",
+        "family_protocol": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json::SUBAGENT_DELEGATION_AND_COORDINATION",
+        "exact_comparator": "Claude Opus 5.5",
+        "comparator_zero_incremental_status": "BLOCKED__CURRENT_FREE_ARENA_DIRECT_GUEST_ROUTE_FALSIFIED",
         "terminal_result_status": "NOT_EXECUTED"
       }
     },
