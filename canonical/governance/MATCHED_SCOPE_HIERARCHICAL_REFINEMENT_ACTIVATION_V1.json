@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_INDEPENDENT_PASS__11_TARGET_SPECIFIC_MATCHED_CHILD_CERTIFICATES__ZERO_CREDIT",
+  "objective": "Activate lossless target-specific refinement beneath MATCHED_SCOPE_BINDING_CERTIFICATE so each matched atomic predicate can close independently when its own semantic binding and exact-or-superset scope certificate become verified.",
+  "subfrontier": {
+    "path": "canonical/governance/MATCHED_SCOPE_BINDING_SUBFRONTIER_V1.json",
+    "git_blob_sha": "89162df13fae66edabaa53ac9c8d95a88829e3ec"
+  },
+  "subhypergraph": {
+    "path": "canonical/governance/MATCHED_SCOPE_BINDING_SUBHYPERGRAPH_V1.json",
+    "git_blob_sha": "e850bb9cd5d6471524686cb463c268591fae778a"
+  },
+  "independent_verification": "canonical/verification/MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "parent": {
+    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "certificate_id": "MATCHED_SCOPE_BINDING_CERTIFICATE",
+    "child_target_count": 11
+  },
+  "execution_rule": "SCHEDULE_AND_VERIFY_CHILD_TARGETS_INDEPENDENTLY__AFTER_EACH_CHILD_CERTIFICATE_RUN_ATOMIC_ACCEPTANCE_FIXED_POINT__DO_NOT_WAIT_FOR_BLOCKED_SIBLINGS",
+  "hard_rules": [
+    "NO_CHILD_CAN_INHERIT_SEMANTIC_ATOMS_METRICS_OR_SCOPE_FROM_A_SIBLING",
+    "P1_QUARANTINED_RECOVERY_TRANSPORT_REMAINS_FORBIDDEN",
+    "FUTURE_MATCHED_SCOPE_NONTRANSPORT_RULE_REMAINS_LOAD_BEARING",
+    "PARTIAL_CHILD_CLOSURE_DOES_NOT_MEAN_PARENT_FULLY_DISCHARGED",
+    "NO_FRESH_REALITY_AUTHORIZED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_FROM_REFINEMENT_ALONE"
+  ],
+  "next": "SEARCH_EXISTING_CONTENT_ADDRESSED_RECEIPTS_PER_CHILD_FOR_EXACT_SEMANTIC_BINDINGS_AND_EXACT_OR_SUPERSET_SCOPE_RELATIONS__INDEPENDENTLY_VERIFY_ANY_CANDIDATE__RUN_SCOPE_SAFE_ALGEBRA_V2_AND_FIXED_POINT_IMMEDIATELY_PER_CHILD",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
