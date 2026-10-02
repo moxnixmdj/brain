@@ -11,8 +11,21 @@ class Tests(unittest.TestCase):
         (g/"ACTIVE_TERMINAL_PROOF_BASIS_V1.json").write_text(json.dumps({
             "contracts":[{"behavior_id":bid,"proof_state":"TERMINAL_ROUTE_FROZEN_ADMISSIBLE" if admitted else "OPEN","blockers":[] if admitted else ["X"]}],
             "admissible_frozen_terminal_route_count":1 if admitted else 0,"execution_authority":admitted}))
-        (g/"GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json").write_text(json.dumps({"active_contracts":[bid],"execution_authority":admitted}))
-        (g/"EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").write_text(json.dumps({"portfolio_status":{"T0":{"blockers":[] if admitted else ["X"]}}}))
+        (g/"GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json").write_text(json.dumps({
+            "active_contracts":[bid],
+            "admissible_frozen_routes":[bid] if admitted else [],
+            "admissible_frozen_route_count":1 if admitted else 0,
+            "execution_authority":admitted
+        }))
+        basis_status="READY" if admitted else "BLOCKED"
+        basis_obj=json.loads((g/"ACTIVE_TERMINAL_PROOF_BASIS_V1.json").read_text())
+        basis_obj["status"]=basis_status
+        (g/"ACTIVE_TERMINAL_PROOF_BASIS_V1.json").write_text(json.dumps(basis_obj))
+        (g/"EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").write_text(json.dumps({
+            "admissible_frozen_terminal_route_count":1 if admitted else 0,
+            "active_terminal_proof_basis_status":basis_status,
+            "portfolio_status":{"T0":{"blockers":[] if admitted else ["X"]}}
+        }))
         (g/"progress.json").write_text(json.dumps({"status":"INDEPENDENT_PASS"}))
         (g/"TERMINAL_PROGRESS_EVIDENCE_INDEX_V1.json").write_text(json.dumps({"entries":[{"behavior_id":bid,"path":"canonical/governance/progress.json"}]}))
         return td,root
@@ -32,11 +45,32 @@ class Tests(unittest.TestCase):
             self.assertEqual(out["reconciliation_candidate_count"],1)
         finally: td.cleanup()
 
+    def test_derived_admission_lag_fails_closed(self):
+        td,root=self.make(True)
+        try:
+            g=root/"canonical/governance"
+            protocol=json.loads((g/"GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json").read_text())
+            protocol["admissible_frozen_routes"]=[]
+            protocol["admissible_frozen_route_count"]=0
+            (g/"GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json").write_text(json.dumps(protocol))
+            preq=json.loads((g/"EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").read_text())
+            preq["admissible_frozen_terminal_route_count"]=0
+            (g/"EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").write_text(json.dumps(preq))
+            out=compile_state(root)
+            self.assertFalse(out["pass"])
+            self.assertTrue(out["derived_state_reconciliation_required"])
+            self.assertTrue(any(x.startswith("PROTOCOL_ADMISSION_MISMATCH:") for x in out["errors"]))
+            self.assertIn("PREQUAL_ADMISSIBLE_COUNT_MISMATCH:0!=1",out["errors"])
+        finally: td.cleanup()
+
     def test_contract_set_mismatch_fails_closed(self):
         td,root=self.make(True)
         try:
             g=root/"canonical/governance"
-            (g/"GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json").write_text(json.dumps({"active_contracts":["OTHER"],"execution_authority":True}))
+            (g/"GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json").write_text(json.dumps({
+                "active_contracts":["OTHER"],"admissible_frozen_routes":["OTHER"],
+                "admissible_frozen_route_count":1,"execution_authority":True
+            }))
             out=compile_state(root); self.assertFalse(out["pass"]); self.assertIn("CONTRACT_SET_MISMATCH",out["errors"])
         finally: td.cleanup()
 
