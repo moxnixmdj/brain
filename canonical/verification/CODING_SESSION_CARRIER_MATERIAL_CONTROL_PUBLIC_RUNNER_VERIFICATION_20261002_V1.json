@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_SESSION_CARRIER_MATERIAL_CONTROL_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FAST_SESSION_CARRIER_MATERIAL_CONTROL__ZERO_BENCHMARK_CASES",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 816,
+  "verified_head_sha": "17afe0742d57d04fac3af1ef9ae0c9dc5abecde9",
+  "merged_verification_commit": "94881d91a925935611e790c6c8cbabb41e801dd3",
+  "workflow_run_id": 36984454041,
+  "workflow_job_id": 110766170204,
+  "conclusion": "success",
+  "exact_carrier_blobs": {
+    "session_bridge/controller_fast.py": "f615e727bf88e9e986e334a3336dc522b3a324b0",
+    "session_bridge/acceptance_contract.py": "9c37c34a5eaf20892ca3e53d0c97f2c6ec09a527",
+    "verification/coding_config_material_control_v1/test_material_control.py": "bae852d954a6fed1d1f46c92b840b6648c02478d"
+  },
+  "verified_counterfactuals": [
+    "COMPLETE_CONFIGURATION_TERMINALLY_ADMISSIBLE",
+    "DELETE_CANONICAL_LEASE__BLOCK",
+    "DELETE_FROZEN_ACCEPTANCE_CONTRACT__BLOCK",
+    "STALE_ACCEPTANCE_HASH__BLOCK",
+    "KNOWN_RELEVANT_FAILURE__BLOCK",
+    "MISSING_FROZEN_CHECK__BLOCK",
+    "FAILED_FROZEN_CHECK__BLOCK",
+    "MISSING_VERIFICATION_COMMANDS__BLOCK",
+    "FAILED_VERIFICATION_COMMAND__BLOCK",
+    "SUBMISSION_FLAG_FALSE__BLOCK"
+  ],
+  "interpretation": "HOLDING_THE_GENERAL_COGNITION_SUBSTRATE_OUTSIDE_THE_PROOF__THE_BRAIN_SESSION_CONFIGURATION_IS_CAUSALLY_LOAD_BEARING_FOR_TERMINAL_CODING_EXECUTION_AND_VERIFIED_COMPLETION",
+  "scope_limit": "MATERIAL_CONTROL_AND_CARRIER_ADMISSIBILITY_ONLY__NO_TERMINAL_BENCH_SCORE_CREDIT",
+  "benchmark_case_content_consumed": false,
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
