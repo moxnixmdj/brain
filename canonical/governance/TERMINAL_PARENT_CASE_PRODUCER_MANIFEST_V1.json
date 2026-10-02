@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "PASS__4_OF_4_REAL_PARENT_CASE_PRODUCERS_EXACTLY_BOUND_AND_INDEPENDENTLY_VERIFIED__ZERO_TERMINAL_RESULTS",
+  "status": "FAIL_CLOSED__PARENT_RUNNER_NO_ABORT_REPAIR_PENDING_INDEPENDENT_VERIFICATION__ZERO_TERMINAL_RESULTS",
   "objective": "BIND_REAL_POST_FREEZE_T0_T1_T2_T3_PARENT_CASE_PRODUCERS_THAT_EMIT_SAME_CASE_MULTIPLEX_INSTRUMENTATION_RECEIPTS",
   "authority": [
     "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
@@ -11,7 +11,7 @@
   "invariant": "A_PARENT_PRODUCER_MUST_GENERATE_OR_EXECUTE_THE_REAL_FROZEN_PARENT_CASES_AND_DERIVE_INSTRUMENTATION_VERDICTS_FROM_THEIR_HIDDEN_ORACLES__A_CALLABLE_STUB_OR_RECEIPT_VALIDATOR_IS_NOT_A_PRODUCER",
   "portfolios": {
     "T0": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "STALE_AFTER_PARENT_NO_ABORT_REPAIR_REQUIRED__INDEPENDENT_REVERIFICATION_PENDING",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
       "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
@@ -27,7 +27,7 @@
       "no_stub_receipts": true
     },
     "T1": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "STALE_AFTER_PARENT_NO_ABORT_REPAIR_REQUIRED__INDEPENDENT_REVERIFICATION_PENDING",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
       "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
@@ -43,7 +43,7 @@
       "no_stub_receipts": true
     },
     "T2": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "STALE_AFTER_PARENT_NO_ABORT_REPAIR_REQUIRED__INDEPENDENT_REVERIFICATION_PENDING",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
       "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
@@ -59,7 +59,7 @@
       "no_stub_receipts": true
     },
     "T3": {
-      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__REAL_PARENT_CASE_PRODUCER_BOUND__ZERO_TERMINAL_RESULTS",
+      "status": "STALE_AFTER_PARENT_NO_ABORT_REPAIR_REQUIRED__INDEPENDENT_REVERIFICATION_PENDING",
       "producer": "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
       "tests": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
       "producer_blob_sha": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449",
@@ -87,9 +87,9 @@
     "ZERO_INCREMENTAL_SPEND",
     "INDEPENDENT_EXACT_BLOB_VERIFICATION"
   ],
-  "bound_parent_producer_count": 4,
+  "bound_parent_producer_count": 0,
   "required_parent_producer_count": 4,
-  "launch_ready": true,
+  "launch_ready": false,
   "terminal_results_observed": 0,
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
