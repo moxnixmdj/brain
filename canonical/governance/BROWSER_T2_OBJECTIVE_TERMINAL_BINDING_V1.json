@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_BINDING__TRANSITIVE_DEPENDENCY_CONE_HARDENED__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREWAVE_BINDING__SELECTION_KERNEL_REBOUND__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
   "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
   "proof_mode": "T2_MULTIPLEXED_PUBLIC_BAR_PLUS_DIRECT_OBJECTIVE_BROWSER_GATE",
   "purpose": "DELETE_UNMEASURED_EXACT_OPUS_BROWSER_COMPARATOR_DEPENDENCY_ONLY_IF_DIRECT_OBJECTIVE_BROWSER_ROUTE_AND_PUBLIC_AUTOMATION_BAR_ARE_FROZEN_INFORMATION_SAFE_AND_INDEPENDENTLY_VERIFIED",
@@ -23,10 +23,6 @@
       "path": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
       "blob_sha": "1cb9b4ca93699e4db965dd2a682017eebd6649be"
     },
-    "population_protocol": {
-      "path": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
-      "blob_sha": "f0a2d64d7c418dbf27f8c0bb5eb2eda8399423fd"
-    },
     "parent_portfolios": {
       "path": "canonical/governance/OUTER_TERMINAL_MULTIPLEX_PORTFOLIOS_V1.json",
       "blob_sha": "7c49e3a44dc9a827e84a12b572ea6b8e9b2fa1f5"
@@ -38,6 +34,10 @@
     "grounding_runtime": {
       "path": "canonical/runtime/consensus_dom_grounding.py",
       "blob_sha": "2849a9eea74c6c595709f77eba23fd40a3be8c9a"
+    },
+    "selection_kernel": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json",
+      "blob_sha": "669afcde50302e76c1b0a1f6b186aaafa8730515"
     }
   },
   "direct_objective_source_pool": {
@@ -60,7 +60,7 @@
     "exact_official_private_score_equivalence_claimed": false
   },
   "selector": {
-    "protocol": "GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2",
+    "protocol": "GLOBAL_TERMINAL_SELECTION_KERNEL_V1",
     "beacon_known_before_freeze": false,
     "adaptive_case_selection": false,
     "case_replacement": false,
@@ -122,5 +122,10 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "selection_semantics": {
+    "kernel": "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json",
+    "kernel_blob_sha": "669afcde50302e76c1b0a1f6b186aaafa8730515",
+    "mutable_global_route_counts_are_route_dependency": false
+  }
 }
