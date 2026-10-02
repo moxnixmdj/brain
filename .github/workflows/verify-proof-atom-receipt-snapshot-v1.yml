@@ -18,6 +18,8 @@ on:
 jobs:
   verify-and-snapshot:
     runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     permissions:
       contents: write
     steps:
