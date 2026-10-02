@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PARENT_LAUNCHER_BINDING_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CONCRETE_PARENT_LAUNCHER_BOUND__ZERO_TERMINAL_RESULTS",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CONCRETE_PARENT_LAUNCHER_EXACTLY_BOUND__ZERO_TERMINAL_RESULTS",
   "launcher": "canonical/runtime/terminal_parent_portfolio_launcher_v1.py",
   "tests": "canonical/tests/test_terminal_parent_portfolio_launcher_v1.py",
   "launcher_blob_sha": "f5a94b07ac48d05ec90aa062ab567e4aa608f2fc",
@@ -20,7 +20,7 @@
     "NO_CASE_REPLACEMENT",
     "NO_TUNING_REPLAY"
   ],
-  "independent_verification": "canonical/verification/TERMINAL_PARENT_LAUNCHER_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_LAUNCHER_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
   "launch_ready": true,
   "execution_authority": false,
   "promotion_authority": false,
