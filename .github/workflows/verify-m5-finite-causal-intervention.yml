@@ -1,0 +1,21 @@
+name: Verify M5 finite causal intervention
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/m5_finite_causal_intervention.py
+      - canonical/runtime/finite_capability_diagnosis.py
+      - canonical/tests/test_m5_finite_causal_intervention.py
+      - .github/workflows/verify-m5-finite-causal-intervention.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: PYTHONPATH=. python -m unittest -v canonical.tests.test_m5_finite_causal_intervention
