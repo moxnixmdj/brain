@@ -1,0 +1,50 @@
+name: Verify recovery T0 T2 ceiling lifter
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/recovery_t0_t2_acceptance_ceiling_lifter_v1.py"
+      - "canonical/tests/test_recovery_t0_t2_acceptance_ceiling_lifter_v1.py"
+      - "canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json"
+      - ".github/workflows/verify-recovery-t0-t2-ceiling-lifter.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify fail-closed recovery ceiling candidate
+        run: |
+          python -m py_compile canonical/runtime/recovery_t0_t2_acceptance_ceiling_lifter_v1.py
+          python -m unittest canonical.tests.test_recovery_t0_t2_acceptance_ceiling_lifter_v1 -v
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.recovery_t0_t2_acceptance_ceiling_lifter_v1 import evaluate
+          root=Path(".")
+          load=lambda p: json.loads((root/p).read_text())
+          out=evaluate(
+              protocols=load("canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"),
+              registry=load("canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"),
+              predicates=load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"),
+              binding=load("canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json"),
+              terminal=load("canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"),
+              relation=load("canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json"),
+          )
+          assert out["pass"], out
+          assert out["status"]=="CANDIDATE_WITNESS_READY__INDEPENDENT_VERIFICATION_REQUIRED", out
+          assert out["source_case_count"]==60, out
+          assert out["candidate_witness"]["result"]["brain_lower_bound"]==1.0, out
+          assert out["candidate_witness"]["result"]["theoretical_upper_bound"]==1.0, out
+          assert out["candidate_witness"]["hard_invariants"]["critical_fail_closed_misses"]["brain_upper_bound"]==0.0, out
+          assert out["candidate_witness"]["hard_invariants"]["critical_fail_closed_misses"]["theoretical_lower_bound"]==0.0, out
+          assert out["capability_credit_delta"]==0 and out["family_credit_delta"]==0, out
+          print(json.dumps(out,sort_keys=True))
+          PY
