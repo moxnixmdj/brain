@@ -1,0 +1,23 @@
+name: Verify M0 portfolio multiplex prewave
+on:
+  push:
+    branches: [main, obs-verify-m0-multiplex-20261002]
+    paths:
+      - canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json
+      - canonical/runtime/m0_portfolio_multiplex_preflight.py
+      - canonical/tests/test_m0_portfolio_multiplex_preflight.py
+      - .github/workflows/verify-m0-portfolio-multiplex-prewave.yml
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_m0_portfolio_multiplex_preflight
