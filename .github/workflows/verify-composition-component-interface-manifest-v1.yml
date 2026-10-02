@@ -21,6 +21,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Capture fail-closed live verdict
+        if: always()
+        run: |
+          python canonical/runtime/opus55_composition_component_interface_manifest_v1.py > composition_manifest_verdict.json || true
+          cat composition_manifest_verdict.json
+      - name: Upload live verdict
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: composition-interface-manifest-verdict
+          path: composition_manifest_verdict.json
       - name: Run adversarial manifest tests
         run: python -m unittest canonical.tests.test_opus55_composition_component_interface_manifest_v1 -v
       - name: Verify live manifest projection
