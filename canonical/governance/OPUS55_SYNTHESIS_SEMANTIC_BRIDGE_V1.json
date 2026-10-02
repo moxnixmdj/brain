@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_SEMANTIC_BRIDGE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PENDING_INDEPENDENT_MACHINE_VERIFICATION__SIX_QUALITATIVE_ATOMS_SUPPORTED__TWO_MATCHED_METRIC_ATOMS_OPEN__ZERO_CREDIT",
+  "objective": "Conservatively bind already-executed load-bearing P3 synthesis evidence to the six qualitative atoms of SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR, while explicitly refusing matched-population metric inheritance.",
+  "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "authority": {
+    "target_normalization": {
+      "path": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1.json",
+      "git_blob_sha": "0910ce3a2351fc439e03a1fa2ae708fb3c6463ef"
+    },
+    "p3_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+    },
+    "terminal_wave": {
+      "path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "git_blob_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc"
+    },
+    "p3_preflight_independent_verification": {
+      "path": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "597854ad2cfffe6b943c8c0c3990071a5d5e5a44"
+    }
+  },
+  "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+  "supported_target_atoms": [
+    "dimension:audience_adaptation",
+    "dimension:claim_to_source_fidelity",
+    "dimension:compression_without_decision_relevant_loss",
+    "dimension:format_and_style_constraints",
+    "dimension:required_evidence_coverage",
+    "dimension:uncertainty_and_disagreement_preservation"
+  ],
+  "open_target_atoms": [
+    "metric:matched_quality",
+    "metric:required_claim_coverage"
+  ],
+  "bindings": [
+    {
+      "target_atom": "dimension:claim_to_source_fidelity",
+      "source_checks": [
+        "ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+        "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS"
+      ],
+      "relation": "JOINT_DIRECT_BEHAVIORAL_SUPPORT"
+    },
+    {
+      "target_atom": "dimension:required_evidence_coverage",
+      "source_checks": [
+        "ALL_REQUIRED_CLAIMS_OR_DECISION_REQUIREMENTS_COVERED"
+      ],
+      "relation": "DIRECT_BEHAVIORAL_SUPPORT"
+    },
+    {
+      "target_atom": "dimension:uncertainty_and_disagreement_preservation",
+      "source_checks": [
+        "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED"
+      ],
+      "relation": "DIRECT_BEHAVIORAL_SUPPORT"
+    },
+    {
+      "target_atom": "dimension:audience_adaptation",
+      "source_checks": [
+        "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS"
+      ],
+      "required_candidate_input": "AUDIENCE",
+      "relation": "DIRECT_BEHAVIORAL_SUPPORT"
+    },
+    {
+      "target_atom": "dimension:format_and_style_constraints",
+      "source_checks": [
+        "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS"
+      ],
+      "required_candidate_input": "FORMAT_AND_STYLE_CONSTRAINTS",
+      "relation": "DIRECT_BEHAVIORAL_SUPPORT"
+    },
+    {
+      "target_atom": "dimension:compression_without_decision_relevant_loss",
+      "source_checks": [
+        "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION"
+      ],
+      "relation": "DIRECT_BEHAVIORAL_SUPPORT"
+    }
+  ],
+  "executed_scope": {
+    "required_portfolios": ["T1", "T3"],
+    "required_receipt_flags": {
+      "direct_instrumentation_pass": true,
+      "load_bearing": true,
+      "parent_terminal_acceptance_pass": true,
+      "case_replaced": false,
+      "result_to_runtime_feedback": false,
+      "tuning_replay": false
+    },
+    "scope_relation": "QUALITATIVE_BEHAVIOR_SUPPORT_ONLY__NOT_MATCHED_SYNTHESIS_POPULATION_EQUIVALENCE"
+  },
+  "source_contamination_admissibility": {
+    "post_freeze_case_specific_tuning": false,
+    "case_replacement": false,
+    "result_to_runtime_feedback_during_wave": false,
+    "evaluator_or_threshold_edit_after_first_terminal_result": false,
+    "terminal_case_selection_before_route_freeze": false,
+    "admissible_for_qualitative_behavior_support": true,
+    "admissible_for_matched_metric_noninferiority": false
+  },
+  "hard_limits": [
+    "NO_MATCHED_QUALITY_NONINFERIORITY_CREDIT",
+    "NO_REQUIRED_CLAIM_COVERAGE_NONINFERIORITY_CREDIT",
+    "NO_CROSS_POPULATION_METRIC_INHERITANCE",
+    "NO_FAMILY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_GLOBAL_PROTOCOL_IMPLICATION_GATE_UNLOCK_FROM_THIS_PARTIAL_BRIDGE"
+  ],
+  "residual_after_bridge": {
+    "target_atom_count": 8,
+    "qualitative_atoms_supported": 6,
+    "matched_metric_atoms_open": 2,
+    "new_reality_needed_for_supported_atoms": 0
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
