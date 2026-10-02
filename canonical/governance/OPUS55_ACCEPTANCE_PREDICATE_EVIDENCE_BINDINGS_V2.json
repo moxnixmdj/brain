@@ -130,7 +130,7 @@
       "supporting_sources": [
         {
           "path": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
-          "sha": "e44ea59464be4f65aead846f5af221be78ba339f"
+          "sha": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
         },
         {
           "path": "canonical/runtime/tool_discovery_information_safe_proof_v2.py",
