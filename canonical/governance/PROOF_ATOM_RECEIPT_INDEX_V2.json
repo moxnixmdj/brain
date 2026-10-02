@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2",
   "date": "2026-10-02",
-  "status": "CANDIDATE__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_INDEX__SELF_REFLECTION_QUARANTINED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
-  "objective": "Index existing evidence against the active V2 40-atom basis while preserving PA1 content addresses and target-specific refinement associations, excluding receipt-index self-verification and declared-corpus lexical restatements from candidate evidence.",
+  "status": "CANDIDATE__V2_REFINEMENT_AWARE_CONTENT_ADDRESSED_40_ATOM_INDEX__RECEIPT_PIPELINE_SELF_REFLECTION_QUARANTINED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Index existing evidence against the active V2 40-atom basis while preserving PA1 content addresses and target-specific refinement associations, excluding receipt-index, sealed-snapshot, and declared-corpus restatements from candidate evidence.",
   "runtime": "canonical/runtime/proof_atom_receipt_index_v2.py",
   "tests": "canonical/tests/test_proof_atom_receipt_index_v2.py",
   "source_basis": {
@@ -34,15 +34,16 @@
     "ZERO_FRESH_REALITY",
     "RECOMPUTE_WHEN_V2_BASIS_REFINEMENT_OVERLAY_OR_SCANNED_EVIDENCE_CHANGES",
     "RECEIPT_INDEX_SELF_VERIFICATION_ARTIFACTS_EXCLUDED_FROM_CANDIDATE_EVIDENCE",
-    "DECLARED_CONTENT_ADDRESSED_EVIDENCE_CORPUS_RESTATEMENTS_EXCLUDED_FROM_CANDIDATE_EVIDENCE"
+    "DECLARED_CONTENT_ADDRESSED_EVIDENCE_CORPUS_RESTATEMENTS_EXCLUDED_FROM_CANDIDATE_EVIDENCE",
+    "RECEIPT_SNAPSHOT_SELF_VERIFICATION_ARTIFACTS_EXCLUDED_FROM_CANDIDATE_EVIDENCE"
   ],
-  "next": "REPINCURRENT_RUNTIME_AND_TEST_BLOBS__INDEPENDENTLY_VERIFY_EXACT_SELF_REFLECTION_QUARANTINED_V2_INDEXER__THEN_FREEZE_ONE_EXACT_REPOSITORY_SCAN_RESULT_AND_REVIEW_ONLY_ORIGINAL_CONTENT_ADDRESSED_CANDIDATES__NO_FRESH_REALITY",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RECEIPT_PIPELINE_SELF_REFLECTION_QUARANTINED_V2_INDEXER__THEN_FREEZE_ONE_EXACT_REPOSITORY_SCAN_RESULT_AND_REVIEW_ONLY_ORIGINAL_CONTENT_ADDRESSED_CANDIDATES__NO_FRESH_REALITY",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
   "promotion_authority": false,
-  "runtime_git_blob_sha": "710071856e15f1561deb17347e7cf9cb0c477322",
-  "tests_git_blob_sha": "80f7a5ca4d4a7c35b0997f3e552c0ee23d3a0bfa"
+  "runtime_git_blob_sha": "5f11b47dc27bfb019bef13cf64a0ef25d7ba1a1f",
+  "tests_git_blob_sha": "14103ef7c96330a281367409a5b76a0a74e7129d"
 }
