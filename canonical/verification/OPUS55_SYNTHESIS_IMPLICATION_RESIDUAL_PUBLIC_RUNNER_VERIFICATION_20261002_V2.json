@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V2",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SCOPE_SAFE_SYNTHESIS_RESIDUAL_IS_SCOPE_RELATION_PLUS_ONE_ATOM_PLUS_TWO_NUMERIC_BOUNDS__ZERO_CREDIT",
+  "objective": "Bind the independent public-runner reproduction of the scope-safe synthesis implication residual and prevent the earlier v1 residual from being used as current scheduling authority.",
+  "exact_brain_blobs": {
+    "canonical/governance/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_INPUT_V2.json": "4e5b944c86b8745083cc9d97fe186aa4b1322747",
+    "canonical/runtime/synthesis_implication_residual_verifier_v2.py": "bd240c74d415372b0a817deedfc4894acc6f15af",
+    "canonical/tests/test_synthesis_implication_residual_verifier_v2.py": "473c2134dba22d50955e17134f1dd5411bc7d68b",
+    "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json": "515f24f3000218d324be4a7c774b42f790a6ebaa",
+    "canonical/governance/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_CANDIDATE_V1.json": "a988b6fa4baf1d753f709c757c97f17185181f0a",
+    "canonical/verification/OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "64ad40c1c10bd01e4c0f4418fac29efafea838fc",
+    "canonical/runtime/protocol_implication_scope_algebra_v2.py": "6aba64c26433b4a8646d5d96bb07e5ba5b46ca1b"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 924,
+    "pull_request_head": "58856a4b6d4f5cbaf9b3601e0732b64751f4b36a",
+    "merge_commit": "4416c03cc44a8767b59e299f057f30fd1e0434e6",
+    "workflow_run_id": 37014895970,
+    "workflow_job_id": 110863240712,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_SEVEN_BRAIN_SOURCE_BLOBS_MATCH_PUBLIC_RUNNER_CAPSULE",
+    "SCOPE_SAFE_ALGEBRA_V2_IS_THE_RESIDUAL_EVALUATOR",
+    "EXACT_SEVEN_SYNTHESIS_OPERATIONAL_ATOMS_RETAINED",
+    "NO_NUMERIC_METRIC_BOUND_INVENTED",
+    "NO_UNVERIFIED_IMPLICATION_EDGE_ADMITTED",
+    "NO_UNVERIFIED_SCOPE_RELATION_ADMITTED",
+    "V1_ALGEBRA_AUTHORITY_IS_REJECTED_BY_ADVERSARIAL_TEST",
+    "INVENTED_SCOPE_RELATION_IS_REJECTED_BY_ADVERSARIAL_TEST",
+    "INVENTED_NUMERIC_BOUND_IS_REJECTED_BY_ADVERSARIAL_TEST",
+    "ZERO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "result": {
+    "target_predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "proved_atom_count": 7,
+    "missing_scope_relation": true,
+    "missing_atoms": [
+      "metric:matched_quality"
+    ],
+    "missing_metric_bounds": [
+      "matched_quality_noninferiority",
+      "required_claim_coverage_noninferiority"
+    ],
+    "implies_target": false
+  },
+  "authority_disposition": {
+    "v1_receipt": "canonical/verification/OPUS55_SYNTHESIS_IMPLICATION_RESIDUAL_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "v1_role": "HISTORICAL_PRE_SCOPE_FIREWALL_RECEIPT__NOT_CURRENT_SCHEDULING_AUTHORITY",
+    "v2_role": "CURRENT_SCOPE_SAFE_SYNTHESIS_RESIDUAL_EVIDENCE",
+    "global_scope_algebra_authority": "canonical/verification/PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
