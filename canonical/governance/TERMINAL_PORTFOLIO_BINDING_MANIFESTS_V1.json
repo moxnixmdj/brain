@@ -41,7 +41,21 @@
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "route_deletion_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
-          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "route_specific_bindings_take_precedence": true,
+          "route_specific_evaluators": {
+            "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": {
+              "binding": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+              "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py",
+              "preflight_population": "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py",
+              "independent_preflight": "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "generic_evaluator_falsification": "canonical/verification/CONTRACT_NATIVE_PROOF_INFORMATION_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "terminal_evaluation_mode": "PARENT_TERMINAL_OBSERVATION_WITH_DIRECT_INTERVENTION_RESCUE_INSTRUMENTATION",
+              "generic_contract_native_evaluator_superseded_for_this_route": true,
+              "execution_authority": false,
+              "terminal_results_observed": 0
+            }
+          }
         },
         {
           "id": "CURSORBENCH_4_0",
@@ -55,7 +69,21 @@
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "route_deletion_verdict": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
-          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "route_specific_bindings_take_precedence": true,
+          "route_specific_evaluators": {
+            "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": {
+              "binding": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+              "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py",
+              "preflight_population": "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py",
+              "independent_preflight": "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "generic_evaluator_falsification": "canonical/verification/CONTRACT_NATIVE_PROOF_INFORMATION_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "terminal_evaluation_mode": "PARENT_TERMINAL_OBSERVATION_WITH_DIRECT_INTERVENTION_RESCUE_INSTRUMENTATION",
+              "generic_contract_native_evaluator_superseded_for_this_route": true,
+              "execution_authority": false,
+              "terminal_results_observed": 0
+            }
+          }
         }
       ],
       "metric_thresholds": [
@@ -198,7 +226,21 @@
           "evaluator": "canonical/governance/CONTRACT_NATIVE_PRIVATE_SURFACE_PROOF_ROUTES_V1.json",
           "evaluator_verification": "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+          "direct_proof_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "route_specific_bindings_take_precedence": true,
+          "route_specific_evaluators": {
+            "P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF": {
+              "binding": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+              "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v4.py",
+              "preflight_population": "canonical/runtime/trajectory_failure_typed_ir_proof_v4.py",
+              "independent_preflight": "canonical/verification/TRAJECTORY_TYPED_IR_V4_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "generic_evaluator_falsification": "canonical/verification/CONTRACT_NATIVE_PROOF_INFORMATION_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+              "terminal_evaluation_mode": "PARENT_TERMINAL_OBSERVATION_WITH_DIRECT_INTERVENTION_RESCUE_INSTRUMENTATION",
+              "generic_contract_native_evaluator_superseded_for_this_route": true,
+              "execution_authority": false,
+              "terminal_results_observed": 0
+            }
+          }
         }
       ],
       "mutation_set": [
