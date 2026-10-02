@@ -192,12 +192,13 @@
       "route_gates": {
         "candidate_package_frozen": true,
         "executable_evaluator_bound": true,
-        "population_or_source_pool_frozen": false,
+        "population_or_source_pool_frozen": true,
         "information_boundary_frozen": true,
-        "post_freeze_selector_frozen": false,
-        "terminal_parent_binding_frozen": false,
-        "independent_verification_pass": false
-      }
+        "post_freeze_selector_frozen": true,
+        "terminal_parent_binding_frozen": true,
+        "independent_verification_pass": true
+      },
+      "route_gate_evidence": "canonical/verification/DELEGATION_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
