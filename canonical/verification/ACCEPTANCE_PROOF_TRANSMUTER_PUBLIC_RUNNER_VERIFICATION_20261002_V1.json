@@ -17,14 +17,16 @@
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 812,
     "merge_commit": "5581a1e6b5fcc49d6f14488288d9cc4137de2b10",
-    "workflow_run_id": 36982809428,
-    "workflow_job_id": 110760951980,
+    "workflow_run_id": 36982841898,
+    "workflow_job_id": 110761056456,
     "conclusion": "success",
     "runtime_mirror_git_blob_sha": "0580f9819b5465c9617f0a1e8ff9a96902eedfc6",
     "protocols_mirror_git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
     "live_input_mirror_git_blob_sha": "0e5f8c66599d12cb5bdc103b6bedb991e460c58f",
     "runner_test_git_blob_sha": "7f1cb866b9a3e51251fa4f303c7bb78318db8904",
-    "workflow_git_blob_sha": "3dc07fafa8e8afdd876edbda62be79955fe9b5df"
+    "workflow_git_blob_sha": "3dc07fafa8e8afdd876edbda62be79955fe9b5df",
+    "pull_request_head_sha": "8feea34c9d43359dd0fd64bca117d77ec6c55a22",
+    "provenance_correction": "BIND_STRENGTHENED_HEAD_THAT_EXECUTED_FROZEN_19_FAMILY_LIVE_INPUT_ASSERTION"
   },
   "verified": [
     "EXACT_BRAIN_RUNTIME_BYTES_EXECUTED_ON_PUBLIC_RUNNER",
