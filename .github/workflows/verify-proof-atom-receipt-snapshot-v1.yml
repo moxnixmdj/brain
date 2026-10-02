@@ -1,4 +1,4 @@
-name: Verify and run sealed proof-atom receipt snapshot v1
+# replay-trigger: 2026-10-02T19:07+02:00; corpus roots unchanged; inspectable PR replay
 
 on:
   push:
