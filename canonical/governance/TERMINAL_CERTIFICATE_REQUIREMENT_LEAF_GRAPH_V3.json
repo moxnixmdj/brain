@@ -396,15 +396,16 @@
       "id": "TB4::ZERO_COST_CARRIER_BOUND",
       "kind": "OR",
       "children": [
-        "TB4_CARRIER::STANDARD_HOSTED_RUNNER_DECLARED_LIMITS",
+        "TB4_CARRIER::PR958_GITHUB_HOSTED_4CPU_DECLARED_LIMITS",
         "TB4_CARRIER::STANDARD_HOSTED_RUNNER_LOWER_RESOURCE_OVERRIDE",
         "TB4_CARRIER::ALTERNATIVE_ZERO_COST_CARRIER"
       ]
     },
     {
-      "id": "TB4_CARRIER::STANDARD_HOSTED_RUNNER_DECLARED_LIMITS",
+      "id": "TB4_CARRIER::PR958_GITHUB_HOSTED_4CPU_DECLARED_LIMITS",
       "kind": "IMPOSSIBLE",
-      "evidence": "verification-capsule-runner PR958 / run 37017338018"
+      "evidence": "verification-capsule-runner PR958 / run 37017338018: the observed 4-CPU GitHub-hosted runner rejected docker create --cpus=8",
+      "note": "Historical route-specific impossibility only; does not assert all future GitHub-hosted runner SKUs are 4 CPU or incompatible."
     },
     {
       "id": "TB4_CARRIER::STANDARD_HOSTED_RUNNER_LOWER_RESOURCE_OVERRIDE",
@@ -468,7 +469,7 @@
       "workflow_run_id": 37017338018,
       "merge_commit": "3a42052bf0ebe37b2619b07449df35c9d09b9598",
       "proved": [
-        "TB4_CARRIER::STANDARD_HOSTED_RUNNER_DECLARED_LIMITS_IMPOSSIBLE"
+        "TB4_CARRIER::PR958_GITHUB_HOSTED_4CPU_DECLARED_LIMITS_IMPOSSIBLE"
       ],
       "note": "Exact probe rejected --cpus=8 on the 4-CPU hosted runner; generic 16384 MiB memory limit was constructible. Lower-resource override comparability remains open."
     }
@@ -480,7 +481,8 @@
     "LOWER_BOUND_ZERO_IS_NOT_SUFFICIENCY",
     "PROVED_DOMAIN_COVERAGE_IS_NOT_UNIVERSAL_PERFORMANCE_PROOF",
     "ONLY_INDEPENDENTLY_VERIFIED_OR_MECHANICALLY_SETTLED_FACTS_MAY_BE_PROVED_OR_IMPOSSIBLE",
-    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "ROUTE_SPECIFIC_INFRASTRUCTURE_FAILURES_MUST_NOT_BE_GENERALIZED_TO_FUTURE_CARRIER_CLASSES"
   ],
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
