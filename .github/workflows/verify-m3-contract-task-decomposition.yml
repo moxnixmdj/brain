@@ -1,5 +1,11 @@
 name: Verify M3 contract task decomposition
 on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/m3_contract_task_decomposition.py
+      - canonical/tests/test_m3_contract_task_decomposition.py
+      - .github/workflows/verify-m3-contract-task-decomposition.yml
   pull_request:
     branches: [main]
     paths:
