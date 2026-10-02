@@ -258,6 +258,13 @@
       "PUBLIC_SAME_CASE_OPUS",
       "MATCHED_EXACT_OPUS"
     ],
-    "no_fresh_terminal_evidence_until": "MINIMUM_INTERNAL_UNBLOCK_CUT_CLOSED_OR_EXTERNAL_IRREDUCIBILITY_PROVEN_AND_EXISTING_TERMINAL_EXECUTION_AUTHORITY_SEPARATELY_PASSES"
+    "no_fresh_terminal_evidence_until": "MINIMUM_INTERNAL_UNBLOCK_CUT_CLOSED_OR_EXTERNAL_IRREDUCIBILITY_PROVEN_AND_EXISTING_TERMINAL_EXECUTION_AUTHORITY_SEPARATELY_PASSES",
+    "independent_verification": {
+      "status": "INDEPENDENT_PASS",
+      "receipt": "canonical/verification/TERMINAL_PROOF_SUPERCOMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "public_runner_pr": 639,
+      "workflow_run_id": 36964597245,
+      "exact_runtime_blob_sha": "d92f37853437e1626d45e79b1da3638d8f943cd4"
+    }
   }
 }
