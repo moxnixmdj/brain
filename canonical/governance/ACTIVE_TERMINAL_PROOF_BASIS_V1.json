@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__2_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__3_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -143,18 +143,17 @@
     {
       "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
       "portfolio": "T1",
-      "proof_state": "INDEPENDENT_CROSS_FORMAT_STRUCTURAL_AND_BOUNDED_RENDER_PRESERVATION_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
+      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
       "route_requirement": "CROSS_FORMAT_DOCX_XLSX_PPTX_PDF_NATIVE_EDIT_PRESERVATION_WITH_HIDDEN_STRUCTURAL_DIFF_ORACLE",
-      "blockers": [
-        "WHOLE_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
-        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
-        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
-      ],
-      "route": "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+      "blockers": [],
+      "route": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
-      "independent_preflight": "canonical/verification/NATIVE_ARTIFACT_CROSS_FORMAT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "independent_preflight": "canonical/verification/NATIVE_ARTIFACT_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "render_preflight": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "render_route": "canonical/runtime/native_artifact_render_preservation_proof_v1.py"
+      "render_route": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+      "prewave_admissible": true,
+      "proof_mode_classification": "T1_MULTIPLEXED_MECHANICAL_GATE_PLUS_PUBLIC_PROFESSIONAL_BAR",
+      "terminal_results_observed": 0
     },
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
@@ -266,9 +265,9 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 2,
+  "admissible_frozen_terminal_route_count": 3,
   "execution_authority": false,
-  "next": "RECOMPUTE_TERMINAL_ROUTE_CLOSURE_QUEUE__CLOSE_NEXT_ACTIONABLE_ZERO_REALITY_ROUTE__EXTERNAL_COMPARATOR_BLOCKED_LANES_DO_NOT_SPEND_CLEAN_CASES",
+  "next": "RECOMPUTE_TERMINAL_ROUTE_CLOSURE_QUEUE__CONTINUE_ZERO_REALITY_PREWAVE_ROUTE_CLOSURE__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
