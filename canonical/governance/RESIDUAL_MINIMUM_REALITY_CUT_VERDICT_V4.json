@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4",
   "date": "2026-10-02",
-  "status": "EXACT_MINIMUM__CURRENT_FROZEN_RESIDUAL_UNIVERSE__ZERO_FRESH_EVIDENCE_SPENT_BY_COMPUTATION",
-  "exact_minimum": true,
+  "status": "INVALIDATED__POST_FREEZE_M1B_V2_CHANGED_ACTION_UNIVERSE",
+  "exact_minimum": false,
   "unresolved_distinctions": [
     "M0A",
     "M1A",
@@ -32,5 +32,7 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "invalidation_reason": "THE_V4_FREEZE_PRECEDES_THE_EXECUTED_M1B_V2_BUNDLE_AND_VERIFIED_SMOOTH_SURFACE_COMPILER__THE_SELECTED_ZERO_COST_M1B_V1_ACTION_IS_NO_LONGER_THE_CURRENT_CANDIDATE",
+  "next": "FINISH_M0A_M1A_ZERO_REALITY_PREFIXES__ADMIT_CURRENT_M1B_V2_COST_FROM_CURRENT_EVIDENCE__FREEZE_V5__RECOMPUTE_EXACT_CUT"
 }
