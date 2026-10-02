@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_BRAIN_GATEWAY_CONFIGURATION_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__SYNTHETIC_MATERIALITY_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "INDEPENDENT_PASS__SOURCE_GATE_V2_ADMISSIBLE__FREE_PLANNER_TRANSPORT_PASS__ZERO_CAPABILITY_CREDIT",
   "family": "BUSINESS_WORKFLOW_AUTOMATION",
   "benchmark": "AutomationBench public 600",
   "runtime": "canonical/runtime/automationbench_brain_gateway_v1.py",
@@ -26,8 +26,10 @@
     "hidden_target_capability_provider_forbidden": true
   },
   "materiality_test": "A deliberately invalid substrate proposal that would request an unknown or schema-invalid tool must be blocked by Brain while an equivalent valid proposal passes.",
-  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_MATERIALITY_TESTS__THEN_RUN_SOURCE_GATE_V2__ONLY_IF_PASS_UPDATE_AUTOMATIONBENCH_SCORE_ROUTE_READINESS__NO_PUBLIC_TASK_CASES_BEFORE_GATE",
+  "next": "BIND_ROUTE_IN_PUBLIC_BAR_READINESS__RERUN_ATOMIC_RESIDUAL_COMPILER__EXECUTE_PUBLIC_600_ONLY_IF_COMPILER_AUTHORIZES",
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "independent_verification": "canonical/verification/AUTOMATIONBENCH_BRAIN_GATEWAY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "free_planner_transport_verification": "canonical/verification/AUTOMATIONBENCH_FREE_PLANNER_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 }
