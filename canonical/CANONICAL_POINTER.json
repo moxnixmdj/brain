@@ -346,7 +346,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_ACTIVE__12_CONTRACT_PROOF_BASIS_HAS_2_OF_12_ADMISSIBLE_FROZEN_TERMINAL_ROUTES__10_REMAINING__ZERO_MECHANISM_HOLES",
+    "highest_leverage_capability_gap": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_ACTIVE__12_CONTRACT_PROOF_BASIS_HAS_4_OF_12_ADMISSIBLE_FROZEN_TERMINAL_ROUTES__8_REMAINING__ZERO_MECHANISM_HOLES",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -900,12 +900,12 @@
       "v4_input": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V4.json",
       "v4_independent_verification": "PENDING"
     },
-    "admissible_frozen_terminal_route_count": 1,
-    "remaining_terminal_route_count": 11,
+    "admissible_frozen_terminal_route_count": 4,
+    "remaining_terminal_route_count": 8,
     "active_terminal_prequalification": {
       "path": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
-      "admissible_routes": 2,
-      "remaining_routes": 10,
+      "admissible_routes": 4,
+      "remaining_routes": 8,
       "execution_authority": false
     }
   },
