@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V2_CANDIDATE_BLOB_MANIFEST_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREBEACON_EXACT_CURRENT",
+  "zero_terminal_results": true,
+  "post_freeze_beacon_known": false,
+  "incremental_spend_usd": 0,
+  "role": "Freeze the exact candidate/executor identity roots used by the 12 active terminal contracts.",
+  "bindings": {
+    "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "28e955d5d593d1de9cfab0f9cdcdae732fd315f1",
+    "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V4.json": "a636d1292e6f92d240fab420a9ee75ced7a05104",
+    "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+    "canonical/governance/M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
+    "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+    "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+    "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+    "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "a7015b12f55fc971233f9fdddf59d50cfc43892b",
+    "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json": "b1f712d61bfa6ad0c77fd55ce909664df3c97c5f",
+    "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
+    "canonical/governance/TERMINAL_PARENT_LAUNCHER_BINDING_V1.json": "eeb258f6376bf06b8b1151d74d9262699fe5202d",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "62e888a0ca582306dc1125521178466767c8cd5e",
+    "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
+    "canonical/runtime/terminal_parent_portfolio_launcher_v1.py": "f5a94b07ac48d05ec90aa062ab567e4aa608f2fc",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "05c9adf60b76a8b2e0ccd139a90c4c7fd9d34449"
+  },
+  "transitive_rule": "Every bound route/executor manifest remains load-bearing; its embedded exact blob identities and independent receipts must still validate at launch."
+}
