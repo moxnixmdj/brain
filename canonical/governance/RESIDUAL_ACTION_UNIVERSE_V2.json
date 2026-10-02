@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "OPEN_DISCOVERY__VERIFIED_ZERO_REALITY_COMPONENTS_PROMOTED__NOT_FROZEN__NO_EXACT_CUT_CLAIM",
+  "status": "OPEN_DISCOVERY__M0A_IMPLICIT_ATOM_RECLASSIFIED__M1A_PROJECTIVE_REGISTRATION_AND_COMPOUND_NOTATION_VERIFIED__NOT_FROZEN",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -9,7 +9,8 @@
       "status": "OPEN",
       "verified_owned": [
         "canonical/capabilities/opus55/BOUNDED_DUAL_ROUTE_SEMANTIC_DECOMPOSITION_001.json",
-        "canonical/runtime/explicit_compound_requirement_decomposer.py"
+        "canonical/runtime/explicit_compound_requirement_decomposer.py",
+        "canonical/reasoning/2026-10-02_M0A_IMPLICIT_REQUIREMENT_RECLASSIFICATION_V1.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -17,10 +18,10 @@
         "explosion/spaCy@c2dabfce56ad2991685ec85783cd59637a5d7b8f"
       ],
       "uncovered": [
-        "MULTI_CLASS_OR_CONTEXT_DEPENDENT_SEMANTICS",
-        "IMPLICIT_REQUIREMENTS",
-        "LONG_RANGE_CROSS_SENTENCE_SEMANTICS",
-        "ARBITRARY_SOURCE_SEMANTIC_GENERATION_OUTSIDE_DECIDABLE_SUBSETS"
+        "MULTI_CLASS_OR_CONTEXT_DEPENDENT_EXPLICIT_SEMANTICS",
+        "CROSS_SENTENCE_REFERENCE_AND_SCOPE_BINDING",
+        "LONG_RANGE_EXPLICIT_RELATION_BINDING",
+        "SEMANTIC_PHENOMENA_NOT_COVERED_BY_EXISTING_DECIDABLE_OPERATOR_AND_COMPOUND_ROUTES"
       ],
       "complete_action_bundle": false,
       "verification_receipts": {
@@ -30,7 +31,8 @@
           "blob_sha": "06da82ccd7cf5ba37b78d1d664b5638caa4e1956",
           "scope": "EXPLICIT_BULLET_LISTS_AND_FLAT_SINGLE_MODAL_AND_COORDINATION_ONLY__AMBIGUOUS_OR_CONTEXTUAL_FORMS_FAIL_CLOSED"
         }
-      }
+      },
+      "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL"
     },
     "M1A": {
       "status": "OPEN",
@@ -43,7 +45,9 @@
         "canonical/runtime/callout_geometry_association.py",
         "canonical/runtime/drawing_view_registration.py",
         "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
-        "canonical/capabilities/opus55/PLANAR_PERSPECTIVE_REGISTRATION_001.json"
+        "canonical/capabilities/opus55/PLANAR_PERSPECTIVE_REGISTRATION_001.json",
+        "canonical/capabilities/opus55/ENGINEERING_FEATURE_NOTATION_001.json",
+        "canonical/capabilities/opus55/DRAWING_PERSPECTIVE_REGISTRATION_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -51,9 +55,8 @@
         "opencv/opencv@adb7afef1512cf3f9846cedc3fc3cf394333791c"
       ],
       "uncovered": [
-        "VIEW_REGISTRATION_OUTSIDE_GLOBAL_ROTATION_OR_EXPLICIT_PLANAR_PROJECTIVE_RECTIFICATION__INCLUDING_LOCAL_NONLINEAR_WARP_AUTOMATIC_QUAD_DISCOVERY_AND_ARBITRARY_NONORTHOGONAL_LAYOUTS",
-        "COMPOUND_VISUAL_FEATURE_SEMANTICS",
-        "GD_AND_T_AND_BROADER_ENGINEERING_NOTATION",
+        "NONPROJECTIVE_LOCAL_WARP_OR_DISTORTION_WITHOUT_DISCRIMINATING_CALIBRATION",
+        "SPECIALIZED_GDT_MODIFIERS_COMPOSITE_FRAMES_AND_AMBIGUOUS_FEATURE_ASSOCIATION",
         "ROBUSTNESS_OUTSIDE_CLEAN_HIGH_CONTRAST_SCOPE"
       ],
       "complete_action_bundle": false,
@@ -95,6 +98,17 @@
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/PLANAR_PERSPECTIVE_REGISTRATION_001.json",
           "scope": "PLANAR_PROJECTIVE_PERSPECTIVE_RECTIFICATION_FROM_EXPLICIT_CONVEX_TL_TR_BR_BL_QUADRILATERAL"
+        },
+        "engineering_feature_notation": {
+          "workflow_run_id": 36943717516,
+          "conclusion": "success",
+          "capability_receipt": "canonical/capabilities/opus55/ENGINEERING_FEATURE_NOTATION_001.json"
+        },
+        "drawing_perspective_registration": {
+          "workflow_run_id": 36943753111,
+          "conclusion": "success",
+          "repair_commit": "b7f1d92b4561d760f02d2bc3dcf91bcfdac9e4bd",
+          "capability_receipt": "canonical/capabilities/opus55/DRAWING_PERSPECTIVE_REGISTRATION_001.json"
         }
       }
     },
@@ -128,7 +142,7 @@
   "nonblocking_ready_obligation": [
     "M1B"
   ],
-  "next": "M0A_REMAINS_BLOCKED_BY_CONTEXTUAL_IMPLICIT_LONG_RANGE_AND_OPEN_SEMANTICS__M1A_OCR_AND_EXPLICIT_PLANAR_PERSPECTIVE_ATOMS_CLOSED__M1A_REMAINS_BLOCKED_BY_LOCAL_NONLINEAR_REGISTRATION_AUTOMATIC_QUAD_DISCOVERY_COMPOUND_VISUAL_SEMANTICS_BROADER_ENGINEERING_NOTATION_AND_ROBUSTNESS__SEARCH_REUSE_SUBSTITUTE_PER_UNCOVERED_ATOM__FREEZE_ONLY_WHEN_COMPLETE",
+  "next": "CLOSE_OR_BOUND_M0A_CONTEXT_REFERENCE_LONG_RANGE_EXPLICIT_SEMANTICS__HARDEN_M1A_DIRTY_SCAN_ROBUSTNESS_AND_ONLY_IDENTIFIABLE_REGISTRATION__FREEZE_ONLY_AFTER_COMPLETE_ACTION_COVERAGE_OR_EXPLICIT_FAIL_CLOSED_UNCOVERED_ATOM",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
