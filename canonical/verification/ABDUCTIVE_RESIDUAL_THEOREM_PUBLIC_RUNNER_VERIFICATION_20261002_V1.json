@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ABDUCTIVE_RESIDUAL_THEOREM_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_3_OF_3_BRAIN_BLOBS__11_ADVERSARIAL_TESTS_PASS__ZERO_CREDIT",
+  "exact_brain_blobs": {
+    "canonical/runtime/abductive_residual_theorem_v1.py": "aef25c462163170defd9d6c81beec628b350b51f",
+    "canonical/tests/test_abductive_residual_theorem_v1.py": "d38ad776500d98dc5e96cd49bfcbfb4ba151ae63",
+    "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_COMPILER_V1.json": "3749962bf9cf4eedcf0f4d50465b5a6b2b415ac3"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 986,
+    "workflow_run_id": 37028380726,
+    "workflow_job_id": 110908709575,
+    "merge_commit": "19166df8613d7f76b81ea9c5bf8a9305d96f518f",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_GIT_BLOB_IDENTITY_FOR_RUNTIME_TEST_AND_GOVERNANCE",
+    "PYTHON_COMPILATION_PASS",
+    "ELEVEN_ADVERSARIAL_UNIT_TESTS_PASS",
+    "UNLISTED_LEAF_RESIDUAL_SYNTHESIS",
+    "TRANSITIVE_BACKWARD_RESIDUAL_SYNTHESIS",
+    "ALTERNATIVE_PROOF_MINIMIZATION",
+    "SHARED_RESIDUAL_QUOTIENT",
+    "JOINT_RESIDUAL_SHARED_FACT_DEDUPLICATION",
+    "CYCLE_DOES_NOT_SELF_PROVE",
+    "UNVERIFIED_EDGE_FAILS_CLOSED",
+    "RECEIPT_REQUIRED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "brain_private_ci_observation": {
+    "pull_request": 963,
+    "workflow_run_id": 37028604270,
+    "workflow_job_id": 110909469722,
+    "conclusion": "failure",
+    "observed_steps": null,
+    "classification": "NON_AUTHORITATIVE_FAILURE_WITH_NO_STEP_RECORDS__DOES_NOT_OVERRIDE_INDEPENDENT_EXACT_BYTE_PASS"
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
