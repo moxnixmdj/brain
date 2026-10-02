@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_19_ACCEPTANCE_CALIBRATED__15_PENDING__TERMINAL_FALSE__ZERO_NEW_REALITY",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+  "result": {
+    "target_family_count": 19,
+    "behavioral_pass_family_count": 19,
+    "acceptance_calibrated_family_count": 4,
+    "acceptance_pending_family_count": 15,
+    "acceptance_calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+    ],
+    "newly_effective_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "terminal_goal_acceptance_closed": false
+  },
+  "basis": {
+    "post_delegation_reconciliation": "canonical/verification/POST_DELEGATION_ACCEPTANCE_RECONCILIATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "frozen_protocols": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "behavioral_reduction": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+    "transmutation_input": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json",
+    "transmuter": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+    "delegation_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 880,
+    "pull_request_head": "481e82164c3c40bbda608a91aea6c08a67c7b56d",
+    "merge_commit": "93a2ae6494ddba7ade68f09c3a4f8673cfabace2",
+    "workflow_run_id": 37007111747,
+    "workflow_job_id": 110837871150,
+    "conclusion": "success"
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "execution_authority": false
+}
