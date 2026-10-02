@@ -5,7 +5,7 @@ from canonical.runtime.terminal_closure_reducer import evaluate_manifest
 
 def passing_manifest():
     families = [
-        {"id": f"FAMILY_{i:02d}", "closure_state": "PASS"}
+        {"id": f"FAMILY_{i:02d}", "closure_state": "PASS", "ownership_status": "VERIFIED_OWNED_EQUAL_OR_BETTER"}
         for i in range(19)
     ]
     counters = {
@@ -98,3 +98,11 @@ def test_duplicate_family_id_fails():
     out = evaluate_manifest(m)
     assert out["achieved"] is False
     assert "DUPLICATE_FAMILY_ID" in out["failed_predicates"]
+
+
+def test_provisional_family_ownership_fails_closed():
+    m = passing_manifest()
+    m["families"][3]["ownership_status"] = "PROVISIONAL_TERMINAL_BEHAVIORAL_PASS__GLOBAL_OWNERSHIP_POSTCONDITIONS_PENDING"
+    out = evaluate_manifest(m)
+    assert out["achieved"] is False
+    assert "FAMILY_NOT_VERIFIED_OWNED:FAMILY_03" in out["failed_predicates"]
