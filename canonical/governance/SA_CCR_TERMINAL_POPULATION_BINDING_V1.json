@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SA_CCR_TERMINAL_POPULATION_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_TERMINAL_POPULATION_BINDING__INDEPENDENT_EXECUTOR_PREFLIGHT_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREWAVE_TERMINAL_POPULATION_BINDING__INDEPENDENT_EXECUTOR_PREFLIGHT_PASS__ZERO_TERMINAL_RESULTS",
   "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
   "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
   "route_population_version": "SA_CCR_ACTIVE_CONTRACT_TERMINAL_POP_V1",
@@ -61,5 +61,7 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "independent_executor_preflight": "canonical/verification/SA_CCR_TERMINAL_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "prewave_admissible": true
 }
