@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_COMPLETE_PREWAVE_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "purpose": "Bind the exact CAD T0 candidate freeze, metadata-only source pool, post-freeze population generator, evaluator-side hidden oracle adapter, information-safe scorer, observation schema and prewave guard without opening clean task content.",
+  "exact_blobs": {
+    "canonical/governance/CAD_T0_GEOMETRY_SOURCE_POOL_V1.json": "baa6c9c1b8a59b3cd28523c18fe8f5e8ef05051b",
+    "canonical/governance/CAD_T0_CANDIDATE_FREEZE_V1.json": "5d1933a210e748d5cc28992cdfdafa6c019d5cce",
+    "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json": "b196acadd2f735a7db2d802b5f8f24c01d2445a3",
+    "canonical/governance/CAD_T0_EVALUATOR_OBSERVATION_SCHEMA_V1.json": "2bc87504a54c76003f715be9a52c6e635c8991a6",
+    "canonical/runtime/cad_t0_geometry_population.py": "64ca276410e2c1dbcd55cfad057e3eec0709790a",
+    "canonical/runtime/cad_t0_oracle_adapter.py": "a6e76e1865b9bd9829dbbcf38886486636f76e8a",
+    "canonical/runtime/cad_t0_multiplex_scorer.py": "89833581dc4ac67498753feb94e2ff69bad3b7f1",
+    "canonical/runtime/cad_t0_prewave_binding_guard.py": "6936b397141fe519f53aee5e8481c56ef7442b6f",
+    "canonical/tests/test_cad_t0_geometry_population_and_oracle.py": "ea98ceda53c8e4a09d72b19bcb4aaaf5874098a5",
+    "canonical/tests/test_cad_t0_prewave_binding_guard.py": "0330370db74484c7a7df4fb3245b3b0f6fc2ccc1"
+  },
+  "selector": {
+    "protocol": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+    "rule": "POST_FREEZE_BEACON_ONLY",
+    "case_replacement": false,
+    "adaptive_selection": false,
+    "tuning_replay": false
+  },
+  "source_pool": {
+    "path": "canonical/governance/CAD_T0_GEOMETRY_SOURCE_POOL_V1.json",
+    "hidden_task_content_opened": false,
+    "metadata_only": true,
+    "exact_current_eligible_task_count": 1,
+    "no_alternate_case_replacement": true
+  },
+  "information_boundary": {
+    "candidate_receives_hidden_oracle": false,
+    "candidate_receives_reference_solid": false,
+    "candidate_receives_reference_metrics": false,
+    "candidate_supplied_geometry_metrics_are_oracle_authority": false,
+    "evaluator_only_hidden_reference_and_measurement": true
+  },
+  "prewave_acceptance": {
+    "guard": "canonical/runtime/cad_t0_prewave_binding_guard.py",
+    "population_and_oracle_regression": "canonical/tests/test_cad_t0_geometry_population_and_oracle.py",
+    "independent_verification": "PENDING_PUBLIC_RUNNER",
+    "admission_rule": "ALL_EXACT_BLOBS_MATCH__PREWAVE_GUARD_PASS__POPULATION_ORACLE_REGRESSIONS_PASS__NO_HIDDEN_TASK_CONTENT_EXPOSED_BEFORE_CANDIDATE_FREEZE"
+  },
+  "terminal_result_status": "NOT_EXECUTED",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
