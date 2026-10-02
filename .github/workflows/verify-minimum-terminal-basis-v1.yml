@@ -1,0 +1,21 @@
+name: Verify minimum terminal basis compiler v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/minimum_terminal_basis_v1.py"
+      - "canonical/tests/test_minimum_terminal_basis_v1.py"
+      - "canonical/governance/MINIMUM_TERMINAL_BASIS_COMPILER_V1.json"
+      - ".github/workflows/verify-minimum-terminal-basis-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m py_compile canonical/runtime/minimum_terminal_basis_v1.py canonical/tests/test_minimum_terminal_basis_v1.py
+      - run: python -m unittest canonical.tests.test_minimum_terminal_basis_v1 -v
