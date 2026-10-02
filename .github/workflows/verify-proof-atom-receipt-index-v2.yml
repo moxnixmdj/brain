@@ -21,3 +21,44 @@ jobs:
           python-version: "3.12"
       - name: Run V2 receipt index tests
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v2 -v
+      - name: Execute live V2 receipt index
+        run: |
+          python -m canonical.runtime.proof_atom_receipt_index_v2 > proof-atom-receipt-index-v2.json
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p = json.loads(Path("proof-atom-receipt-index-v2.json").read_text())
+          assert p["status"].startswith("PASS"), p
+          assert p["canonical_atom_count"] == 40, p["canonical_atom_count"]
+          assert p["capability_credit_delta"] == 0
+          assert p["family_credit_delta"] == 0
+          data = Path("proof-atom-receipt-index-v2.json").read_bytes()
+          summary = {
+              "artifact_sha256": hashlib.sha256(data).hexdigest(),
+              "schema": p["schema"],
+              "status": p["status"],
+              "canonical_atom_count": p["canonical_atom_count"],
+              "scanned_file_count": p["scanned_file_count"],
+              "candidate_match_count": p["candidate_match_count"],
+              "atoms_with_candidate_matches": p["atoms_with_candidate_matches"],
+              "atoms_without_candidate_matches": p["atoms_without_candidate_matches"],
+              "candidate_matches_by_source_class": p["candidate_matches_by_source_class"],
+              "atom_ids_with_candidate_matches": p["atom_ids_with_candidate_matches"],
+              "atom_ids_without_candidate_matches": p["atom_ids_without_candidate_matches"],
+              "capability_credit_delta": p["capability_credit_delta"],
+              "family_credit_delta": p["family_credit_delta"],
+          }
+          Path("proof-atom-receipt-index-v2-summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+      - name: Upload exact live index
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-atom-receipt-index-v2-live
+          path: |
+            proof-atom-receipt-index-v2.json
+            proof-atom-receipt-index-v2-summary.json
+          if-no-files-found: error
