@@ -22,7 +22,7 @@ jobs:
         run: python -m unittest canonical.tests.test_proof_atom_receipt_index_v1 -v
       - name: Execute current 40-atom receipt index
         run: |
-          python canonical/runtime/proof_atom_receipt_index_v1.py > proof-atom-receipt-index.json
+          python -m canonical.runtime.proof_atom_receipt_index_v1 > proof-atom-receipt-index.json
           python - <<'PY'
           import json
           p=json.load(open("proof-atom-receipt-index.json"))
