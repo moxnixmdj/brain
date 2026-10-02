@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_ROUTE_SPECIFIC_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SOURCE_ONLY_CANDIDATE_TWO_CYCLES_ALL_EIGHT_FROZEN_GEOMETRY_FAMILIES__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/cad_t0_route_specific_candidate_v1.py": "4356304e18e1cbe6902feef02f1d1905eb6204a1",
+    "canonical/tests/test_cad_t0_route_specific_candidate_v1.py": "6fa98b0fd04f86097cbd77f8657ba472e5d6b6dd",
+    ".github/workflows/verify-cad-t0-route-specific-candidate.yml": "436177ec8f4c63b0c111f0b5af5d20b9ead309b0"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 702,
+    "head_sha": "94b175e5055b1761cd9b11141572ef707a2b675a",
+    "merge_commit": "a970a015c7796fdae153fe2a28bb159124b0dd2f",
+    "workflow_run_id": 36970732614,
+    "workflow_job_id": 110723961950,
+    "conclusion": "success"
+  },
+  "verified": [
+    "CANDIDATE_VISIBLE_INPUT_LIMITED_TO_PUBLIC_DRAWING_SVG_AND_DECLARED_OUTPUT_SCHEMA",
+    "HIDDEN_ORACLE_NOT_IMPORTED_OR_PASSED_TO_CANDIDATE",
+    "ALL_EIGHT_FROZEN_GEOMETRY_FAMILIES_PASS_END_TO_END_EVALUATOR_SIDE_ORACLE_AND_SCORER",
+    "SECOND_INDEPENDENT_SEED_CYCLE_ALL_EIGHT_FAMILIES_PASS",
+    "NONIDENTIFIABLE_DEPTH_RETURNS_AMBIGUITY_WITNESS_INSTEAD_OF_GUESSING",
+    "SOLID_CASES_MATERIALIZE_THROUGH_BRAIN_OWNED_CONTINUOUS_OR_SMOOTH_M1B_COMPILERS",
+    "NO_POST_FREEZE_BEACON_USED",
+    "ZERO_TERMINAL_CASES_CONSUMED"
+  ],
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
