@@ -1,0 +1,70 @@
+name: Verify exact residual cut v6
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json
+      - canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6.json
+      - canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json
+      - canonical/runtime/minimum_reality_cut.py
+      - .github/workflows/verify-residual-cut-v6.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify source-universe fidelity and recompute exact cut
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          from canonical.runtime.minimum_reality_cut import solve
+
+          up=Path("canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json")
+          ip=Path("canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6.json")
+          vp=Path("canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json")
+          universe=json.loads(up.read_text())
+          inp=json.loads(ip.read_text())
+          expected=json.loads(vp.read_text())
+
+          blob=subprocess.check_output(["git","hash-object",str(up)],text=True).strip()
+          assert blob==inp["source_universe_blob_sha"], (blob,inp["source_universe_blob_sha"])
+          assert universe["exact_cut_ready"] is True
+          assert universe["blocking_obligations"]==[]
+
+          reconstructed=[]
+          for key in ("M0A","M1A","M1B"):
+              row=universe["obligations"][key]
+              reconstructed.append({
+                  "id":row["candidate_action"],
+                  "covers":[key],
+                  "cost":row["new_reality_units"],
+              })
+          for row in universe.get("combined_evaluation_candidates",[]):
+              reconstructed.append({
+                  "id":row["id"],
+                  "covers":row["covers"],
+                  "cost":row["cost"],
+              })
+
+          frozen=[{"id":r["id"],"covers":r["covers"],"cost":r["cost"]} for r in inp["observations"]]
+          key=lambda r:(r["id"],tuple(r["covers"]),float(r["cost"]))
+          assert sorted(frozen,key=key)==sorted(reconstructed,key=key), (frozen,reconstructed)
+
+          out=solve(inp)
+          print(json.dumps(out,sort_keys=True,indent=2))
+          assert out["status"]=="EXACT_MINIMUM", out
+          assert out["exact_minimum"] is True
+          assert out["selected_observations"]==expected["selected_observations"], (out,expected)
+          assert out["observation_count"]==expected["observation_count"]==2, (out,expected)
+          assert out["total_cost"]==expected["total_cost"]==2.0, (out,expected)
+          assert out["unresolved_distinctions"]==expected["unresolved_distinctions"], (out,expected)
+          PY
