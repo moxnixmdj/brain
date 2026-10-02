@@ -6,7 +6,21 @@ evidence relations, and causal support are explicit. Unknown semantics fail clos
 from __future__ import annotations
 from dataclasses import dataclass
 from itertools import combinations
+import math
 from typing import FrozenSet, Iterable, Sequence
+
+
+def _finite_nonnegative(value: float) -> bool:
+    return isinstance(value,(int,float)) and not isinstance(value,bool) and math.isfinite(float(value)) and float(value)>=0.0
+
+
+def _finite01(value: float) -> bool:
+    return _finite_nonnegative(value) and float(value)<=1.0
+
+
+def _unique_nonempty(values) -> bool:
+    vals=list(values)
+    return all(isinstance(x,str) and bool(x.strip()) for x in vals) and len(vals)==len(set(vals))
 
 @dataclass(frozen=True)
 class ToolRoute:
@@ -25,9 +39,13 @@ class ToolDecision:
 
 def select_verified_tool(required: Iterable[str], routes: Sequence[ToolRoute]) -> ToolDecision:
     req=frozenset(required)
+    if not _unique_nonempty(r.route_id for r in routes):
+        return ToolDecision("ESCALATE",None,"ROUTE_IDENTITIES_INVALID_OR_DUPLICATE")
     eligible=[
         r for r in routes
-        if r.available and r.authorized and r.verified and req.issubset(r.capabilities)
+        if r.available and r.authorized and r.verified
+        and _finite_nonnegative(r.cost)
+        and req.issubset(r.capabilities)
     ]
     if not eligible:
         return ToolDecision("ESCALATE",None,"NO_VERIFIED_SUFFICIENT_ROUTE")
@@ -72,6 +90,10 @@ def assign_ready_tasks(
 ) -> dict[str,str]:
     completed=set(completed)
     assigned=set(already_assigned)
+    if not _unique_nonempty(t.task_id for t in tasks):
+        return {}
+    if not _unique_nonempty(w.worker_id for w in workers):
+        return {}
     downstream=_downstream_counts(tasks)
     ready=[
         t for t in tasks
@@ -115,12 +137,14 @@ def next_research_action(
     actions: Sequence[ResearchAction],
 ) -> ResearchDecision:
     unresolved=frozenset(material_requirements)-frozenset(resolved_requirements)
+    if not _unique_nonempty(a.action_id for a in actions):
+        return ResearchDecision("ESCALATE",None,unresolved,"ACTION_IDENTITIES_INVALID_OR_DUPLICATE")
     if not unresolved:
         return ResearchDecision("STOP",None,unresolved,"ALL_MATERIAL_REQUIREMENTS_RESOLVED")
     scored=[]
     for a in actions:
         new=len(a.covers & unresolved)
-        if not a.verified or new==0 or a.cost < 0 or not (0 <= a.reliability <= 1):
+        if not a.verified or new==0 or not _finite_nonnegative(a.cost) or not _finite01(a.reliability):
             continue
         denom=a.cost if a.cost>0 else 1e-12
         score=(new*a.reliability)/denom
@@ -152,7 +176,17 @@ def minimal_support_bundle(required_claims: Iterable[str], units: Sequence[Evide
     n=len(units)
     if n>20:
         return EvidenceDecision("ESCALATE",(),required,"TOO_MANY_UNITS_FOR_EXACT_BOUNDED_SEARCH")
+    if not _unique_nonempty(u.evidence_id for u in units):
+        return EvidenceDecision("ESCALATE",(),required,"EVIDENCE_IDENTITIES_INVALID_OR_DUPLICATE")
+    valid=[
+        u for u in units
+        if _finite_nonnegative(u.cost) and _finite01(u.reliability)
+    ]
+    if len(valid)!=len(units):
+        return EvidenceDecision("ESCALATE",(),required,"EVIDENCE_COST_OR_RELIABILITY_INVALID")
     best=None
+    # Exhaust the bounded subset universe. Objective is truly minimum total cost,
+    # then minimum cardinality, then maximum reliability, then lexical IDs.
     for k in range(n+1):
         for idxs in combinations(range(n),k):
             subset=[units[i] for i in idxs]
@@ -162,13 +196,11 @@ def minimal_support_bundle(required_claims: Iterable[str], units: Sequence[Evide
             covered=frozenset().union(*(u.supports for u in subset)) if subset else frozenset()
             if not required.issubset(covered):
                 continue
-            total_cost=sum(u.cost for u in subset)
-            rel=sum(u.reliability for u in subset)
+            total_cost=sum(float(u.cost) for u in subset)
+            rel=sum(float(u.reliability) for u in subset)
             key=(total_cost,k,-rel,tuple(sorted(ids)))
             if best is None or key<best[0]:
                 best=(key,tuple(sorted(ids)))
-        if best is not None:
-            break
     if best is None:
         covered=frozenset().union(*(u.supports for u in units)) if units else frozenset()
         return EvidenceDecision("ESCALATE",(),required-covered,"REQUIRED_CLAIM_WITHOUT_NONCONFLICTING_SUPPORT")
@@ -194,9 +226,16 @@ def select_repair_target(
     *,
     min_evidence: float = 0.5,
 ) -> RepairDecision:
+    if not _finite01(min_evidence):
+        return RepairDecision("ESCALATE",None,"MIN_EVIDENCE_INVALID")
+    if not _unique_nonempty(c.candidate_id for c in candidates):
+        return RepairDecision("ESCALATE",None,"CANDIDATE_IDENTITIES_INVALID_OR_DUPLICATE")
     eligible=[
         c for c in candidates
-        if c.causal_supported and c.intervenable and c.evidence_strength>=min_evidence and c.predicted_rescue>0
+        if c.causal_supported and c.intervenable
+        and isinstance(c.step_index,int) and not isinstance(c.step_index,bool) and c.step_index>=0
+        and _finite01(c.evidence_strength) and _finite01(c.predicted_rescue)
+        and c.evidence_strength>=min_evidence and c.predicted_rescue>0
     ]
     if not eligible:
         return RepairDecision("ESCALATE",None,"NO_CAUSALLY_SUPPORTED_INTERVENABLE_REPAIR")
