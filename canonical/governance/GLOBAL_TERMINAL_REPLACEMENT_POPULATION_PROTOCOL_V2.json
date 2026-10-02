@@ -146,5 +146,10 @@
     "mode": "T0_MULTIPLEXED_OPEN_DOMAIN_OBJECTIVE_GEOMETRY",
     "prewave_binding": "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json",
     "route_admissibility": "PENDING_EXECUTABLE_SCORER_ORACLE_EXTRACTION_POPULATION_AND_INDEPENDENT_PREWAVE_VERIFICATION"
+  },
+  "selection_kernel": {
+    "path": "canonical/governance/GLOBAL_TERMINAL_SELECTION_KERNEL_V1.json",
+    "blob_sha": "669afcde50302e76c1b0a1f6b186aaafa8730515",
+    "rule": "ROUTE_PROOFS_BIND_KERNEL_NOT_MUTABLE_ROUTE_COUNTS_OR_FROZEN_ROUTE_REGISTRY"
   }
 }
