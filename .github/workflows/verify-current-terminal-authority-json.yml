@@ -1,0 +1,26 @@
+name: Verify current terminal authority JSON integrity
+
+on:
+  push:
+    paths:
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/tests/test_current_terminal_authority_json_integrity.py"
+      - ".github/workflows/verify-current-terminal-authority-json.yml"
+  pull_request:
+    paths:
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+      - "canonical/tests/test_current_terminal_authority_json_integrity.py"
+      - ".github/workflows/verify-current-terminal-authority-json.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python canonical/tests/test_current_terminal_authority_json_integrity.py
