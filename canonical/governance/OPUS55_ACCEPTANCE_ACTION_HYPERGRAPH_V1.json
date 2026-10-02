@@ -55,9 +55,15 @@
           "satisfied": true,
           "evidence": "canonical/verification/OPUS55_BRAIN_WITNESS_CONTAMINATION_ADMISSIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "note": "Independent public runner PR914 verifies all 9 normalized witness sources contamination-admissible over four exact source objects; zero semantic credit."
+        },
+        {
+          "id": "MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS",
+          "satisfied": false,
+          "evidence": "canonical/governance/OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1.json",
+          "note": "Scope-safe algebra v2 requires an independently verified EXACT or SUPERSET witness-to-target scope relation; no relation may be inferred from names, prose, family labels, or atom overlap."
         }
       ],
-      "notes": "Scope-safe implication algebra v2, witness catalog identity, and contamination admissibility are independently verified. Action remains fail-closed on explicit witness-to-target atom/metric and scope bindings. No name/prose analogy, no narrow-to-broad scope leakage, zero credit from compiler readiness alone."
+      "notes": "Scope-safe implication algebra v2, witness catalog identity, and contamination admissibility are independently verified. Action remains fail-closed on explicit witness-to-target atom/metric bindings AND independently verified exact-or-superset scope relations. No name/prose analogy, no narrow-to-broad scope leakage, zero credit from compiler readiness alone."
     },
     {
       "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
