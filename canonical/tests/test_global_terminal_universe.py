@@ -20,10 +20,10 @@ assert holes["M1_STRUCTURED_CONSTRUCTION_AND_GEOMETRIC_REALIZATION"] == "?P"
 for key in (
     "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
     "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
-    "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL",
     "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY",
 ):
     assert holes[key] == "?M"
+assert holes["M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL"] == "?P"
 
 assert "G_REQUIRED_BEHAVIOR_CONTRACT_COMPLETENESS" not in u["global_cut"]["open_specification_holes"]
 assert u["counts"]["open_specification_holes"] == 0
@@ -39,3 +39,11 @@ for lane in graph["shared_mechanism_obligations"]:
         assert "canonical/capabilities/opus55/SHARED_BOUNDED_DECISION_PRIMITIVES_001.json" in lane.get("existing_evidence", [])
 
 print("GLOBAL_TERMINAL_UNIVERSE_V1 verification: PASS")
+
+# A mechanism-saturated lane remains visible as proof-only rather than being
+# silently treated as fully closed.
+m4 = next(x for x in u["shared_mechanism_accounting"]["lanes"] if x["id"]=="M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL")
+assert m4["state"]=="PROOF_ONLY"
+assert m4["hole_type"]=="?P"
+assert "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL" not in u["global_cut"]["open_mechanism_holes"]
+assert "M4_RESEARCH_AND_UNKNOWN_DOMAIN_CONTROL" in u["global_cut"]["open_proof_holes"]
