@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_V2_EVALUATOR_ORACLE_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREBEACON_EXACT_CURRENT",
+  "status": "FROZEN_PREBEACON_EXACT_CURRENT_POST_SA_CCR_REBIND",
   "zero_terminal_results": true,
   "post_freeze_beacon_known": false,
   "incremental_spend_usd": 0,
@@ -20,7 +20,7 @@
     "canonical/governance/STRUCTURED_METHOD_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1.json": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
     "canonical/governance/TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1.json": "5ff24e390056ba8e980ad3b88116149869ee85ce",
     "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "5212f5996dbc83e87a308b8c9d9d1d9ed3da5aab",
-    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "62e888a0ca582306dc1125521178466767c8cd5e",
+    "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json": "3ffc4484ab4ac69f60258859d5d6e2a7cc8024a7",
     "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json": "6bcabc0a7d0525532ce7b80e132278f7c99caa43"
   },
   "hidden_information_rule": "Hidden oracle, reference, target-state, ranking, and acceptance information remains evaluator-only and never candidate-visible.",
