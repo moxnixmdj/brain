@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREWAVE_BINDING__INDEPENDENT_BINDING_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+  "proof_mode": "PUBLIC_FIXED_BAR_MULTIPLEX_PLUS_DIRECT_BEHAVIOR_INSTRUMENTATION",
+  "authority": [
+    "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
+    "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
+    "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "portfolio": "T3",
+  "public_surfaces": [
+    {
+      "id": "HLE_WITH_TOOLS",
+      "role": "PUBLIC_FIXED_BAR",
+      "target_percent": 67.7,
+      "dataset": "cais/hle",
+      "scorer": "canonical/runtime/hle_strict_reference_scorer.py",
+      "scorer_rule": "STRICT_EXACT_REFERENCE_ACCURACY_IS_CONSERVATIVE_LOWER_BOUND_ON_DECLARED_HLE_JUDGE_CORRECTNESS",
+      "scorer_verification": "canonical/verification/HLE_STRICT_LOWER_BOUND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "paid_judge_required": false,
+      "terminal_execution_state": "NOT_EXECUTED"
+    },
+    {
+      "id": "TERMINAL_BENCH_SCIENCE_0_1",
+      "role": "PUBLIC_FIXED_BAR",
+      "target_percent": 58.7,
+      "route": "PUBLIC_HARBOR_HARNESS",
+      "carrier_preflight": "canonical/verification/HARBOR_ZERO_COST_TERMINAL_CARRIER_PREFLIGHT_20261002_V1.json",
+      "terminal_execution_state": "NOT_EXECUTED"
+    }
+  ],
+  "direct_behavior_instrumentation": {
+    "candidate": "canonical/runtime/research_control_information_safe_candidate.py",
+    "preflight_population": "canonical/runtime/research_control_information_safe_proof.py",
+    "independent_preflight": "canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "required_observables": [
+      "QUERY_TARGETS_CURRENT_UNRESOLVED_MATERIAL_REQUIREMENT",
+      "SOURCE_SELECTION_RESPECTS_FROZEN_AUTHORITY_AND_COST_RULE",
+      "FAILED_FETCH_CAN_RECOVER_WITHOUT_REDUNDANT_SEARCH",
+      "PROVENANCE_PRESERVED",
+      "PREMATURE_STOP_REJECTED",
+      "STOP_ONLY_AFTER_ALL_MATERIAL_REQUIREMENTS_SUPPORTED",
+      "NO_REPEATED_RETRIEVAL_WITHOUT_NEW_REQUIREMENT_COVERAGE"
+    ]
+  },
+  "information_boundary": {
+    "candidate_visible": [
+      "QUESTION_OR_RESEARCH_OBJECTIVE",
+      "NORMALIZED_MATERIAL_REQUIREMENT_GRAPH",
+      "PUBLIC_TOOL_SCHEMAS",
+      "PUBLIC_SOURCE_METADATA",
+      "EARNED_SEARCH_RESULTS",
+      "EARNED_FETCH_RECEIPTS",
+      "PRIOR_ACTION_OBSERVATION_HISTORY",
+      "FROZEN_RESOURCE_BUDGET"
+    ],
+    "hidden_from_candidate": [
+      "REFERENCE_ANSWER",
+      "HIDDEN_SOURCE_SUPPORT_TRUTH_BEFORE_FETCH",
+      "TERMINAL_ACCEPTANCE_RESULT",
+      "POST_FREEZE_CASE_SELECTION_INFORMATION",
+      "MUTATION_LABELS"
+    ],
+    "candidate_receives_reference_answer": false,
+    "candidate_receives_hidden_oracle": false
+  },
+  "terminal_acceptance": {
+    "prewave_binding_is_terminal_result": false,
+    "public_bar_rule": "HLE_STRICT_EXACT_REFERENCE_ACCURACY_MUST_MEET_OR_EXCEED_67_7_AND_TERMINAL_BENCH_SCIENCE_ACCEPTANCE_MUST_MEET_OR_EXCEED_58_7_ON_FROZEN_TERMINAL_POPULATIONS",
+    "behavior_rule": "LOAD_BEARING_RESEARCH_CONTROL_INSTRUMENTATION_MUST_PASS_ON_EVERY_APPLICABLE_CASE__PUBLIC_SURFACE_SCORE_CANNOT_HIDE_RESEARCH_CONTROL_FAILURE",
+    "any_load_bearing_behavior_failure_blocks_contract_proof": true,
+    "post_result_tuning": false
+  },
+  "uncovered_scope_audit": {
+    "audit": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
+    "represented_dimensions": [
+      "QUERY_GENERATION_FROM_REQUIREMENT_GAPS",
+      "SOURCE_AUTHORITY_SELECTION_WITH_PROVENANCE",
+      "REQUIREMENT_COVERAGE_AND_STOP_DECISION",
+      "CROSS_DOMAIN_TRANSFER"
+    ],
+    "separate_contracts_not_inherited": [
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+    ]
+  },
+  "contamination": {
+    "terminal_cases_selected_before_route_freeze": false,
+    "result_to_runtime_feedback_during_wave": false,
+    "case_replacement_after_failure": false,
+    "scorer_edit_after_first_terminal_result": false
+  },
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
