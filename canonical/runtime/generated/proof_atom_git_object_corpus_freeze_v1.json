@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_GIT_OBJECT_CORPUS_FREEZE_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_PASS__IMMUTABLE_GIT_OBJECT_CORPUS_FROZEN__ATOM_SEARCH_NOT_YET_CLAIMED__ZERO_CREDIT",
+  "status": "SUPERSEDED_FOR_CURRENT_DISCOVERY__VALID_V2_POLICY_GIT_OBJECT_FREEZE__V3_CORPUS_POLICY_NOW_ACTIVE__ZERO_CREDIT",
   "objective": "Freeze the complete V2 receipt-index candidate universe without depending on the quarantined zero-step private Actions carrier. Git tree/blob identities commit the exact candidate bytes; semantic/literal atom search remains a separate independently replayable stage.",
   "source_repository": "moxnixmdj/brain",
   "source_commit_sha": "0fa5f6864f577174ec876ce363de3d13e0ec6dd0",
@@ -7917,14 +7917,22 @@
     "THIS_FREEZE_ASSERTS_NO_LITERAL_MATCH_NO_SEMANTIC_MATCH_NO_SCOPE_MATCH_AND_NO_ACCEPTANCE",
     "POSITIVE_OR_NEGATIVE_ATOM_SEARCH_CLAIMS_REQUIRE_SEPARATE_REPLAY_AGAINST_THESE_EXACT_BLOBS",
     "NO_FRESH_REALITY",
-    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT",
+    "MUST_NOT_BE_USED_AS_CURRENT_V3_CORPUS_OR_NEGATIVE_SEARCH_AUTHORITY"
   ],
   "private_actions_carrier_status": "QUARANTINED_ZERO_STEP__NOT_A_PROOF_FAILURE",
-  "next": "RUN_CONTENT_ADDRESS_PRESERVING_ATOM_SEARCH_OVER_THIS_EXACT_FROZEN_OBJECT_SET_IN_SLICES__PRIORITIZE_VERIFICATION_RECEIPTS__PROMOTE_ONLY_EXPLICIT_SEMANTICALLY_REVIEWED_CANDIDATES",
+  "next": "PRESERVE_AS_HISTORICAL_V2_POLICY_FREEZE_ONLY__EXECUTE_EXACT_VERIFIED_V3_ON_ONE_EXACT_PRIVATE_BRAIN_COMMIT_OR_EQUIVALENT_CONTENT_ADDRESSED_CARRIER__ZERO_CREDIT",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "superseded_by": {
+    "authority_path": "canonical/governance/PROOF_ATOM_RECEIPT_INDEX_V3_ACTIVE_AUTHORITY_V1.json",
+    "authority_git_blob_sha": "864e5292a163f580e2dc6f676e25bdc7f16a3ef2",
+    "runtime_path": "canonical/runtime/proof_atom_receipt_index_v3.py",
+    "runtime_git_blob_sha": "fef3cc8dd90ade9e270290321b80b987bd05a560",
+    "reason": "V3 was independently verified and promoted after this V2-policy corpus freeze was created; V3 scan policy is now the discovery authority."
+  }
 }
