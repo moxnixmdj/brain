@@ -827,7 +827,7 @@
       "rank23_spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
     },
     "next_progress_event_target": "OUTER_GLOBAL_CUT_EXACT_READY_OR_EXACT_BLOCKER_VERDICT",
-    "open_mechanism_residual_count": 3,
+    "open_mechanism_residual_count": 4,
     "m0b_frozen_envelope_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
     "residual_action_universe_v2": {
       "path": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
