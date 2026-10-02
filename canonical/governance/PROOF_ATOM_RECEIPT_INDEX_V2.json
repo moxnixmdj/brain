@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V2",
+  "date": "2026-10-02",
+  "status": "IMPLEMENTED_CANDIDATE__V2_BASIS_BOUND__SELF_PROOF_EXCLUDED__FULL_CORPUS_MANIFEST_HASHED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Index existing Brain evidence against the active canonical proof-atom basis v2 while preventing circular structural/self-proof matches and binding every scan to the exact basis inputs, indexer bytes, source revision, and a deterministic hash of the full scanned corpus.",
+  "runtime": "canonical/runtime/proof_atom_receipt_index_v2.py",
+  "tests": "canonical/tests/test_proof_atom_receipt_index_v2.py",
+  "source_basis": {
+    "authority": "canonical/governance/CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1.json",
+    "runtime": "canonical/runtime/canonical_proof_atom_basis_v2.py",
+    "frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json",
+    "refinement_overlay": "canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json",
+    "expected_canonical_atoms": 40,
+    "atom_identity_namespace": "PA1"
+  },
+  "breakthroughs": [
+    "REPOINTS_INDEXER_FROM_V1_MATCHED_SUBFRONTIER_COMPILER_TO_ACTIVE_GENERIC_V2_REFINEMENT_COMPILER",
+    "PRESERVES_PA1_ATOM_IDS_AND_FAILS_CLOSED_IF_PA1_CONTINUITY_BREAKS",
+    "EXCLUDES_FRONTIERS_REFINEMENT_OVERLAYS_COMPILER_ACTIVATIONS_AND_COMPILER_VERIFICATION_RECEIPTS_FROM CANDIDATE_EVIDENCE",
+    "HASHES_THE_FULL_SCANNED_CORPUS_MANIFEST_NOT_ONLY_FILES_THAT_HAPPEN_TO_MATCH",
+    "CONTENT_ADDRESSES_FRONTIER_OVERLAY_BASIS_RUNTIME_AND_INDEX_RUNTIME_IN_EVERY_RESULT",
+    "EMITS_DETERMINISTIC_ZERO_REALITY_SEMANTIC_REVIEW_QUEUE_WITHOUT_GRANTING CREDIT"
+  ],
+  "hard_rules": [
+    "EXACT_LITERAL_OCCURRENCE_IS_ONLY_A_CANDIDATE_POINTER",
+    "STRUCTURAL_DEFINITION_OR_COMPILER_VERIFICATION_CANNOT_SELF_PROVE_A_LEAF_FACT",
+    "EVERY_MATCH_MUST_BE_CONTENT_ADDRESSED_BY_GIT_BLOB_SHA",
+    "FULL_SCANNED_CORPUS_MANIFEST_MUST_BE_DETERMINISTICALLY_HASHED",
+    "ACTIVE_V2_BASIS_INPUTS_AND_RUNTIME_BYTES_MUST_BE_CONTENT_ADDRESSED",
+    "NO_SEMANTIC_EQUIVALENCE_FROM_NAMES_OR_PROSE",
+    "NO_SCOPE_RELATION_METRIC_BOUND_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT_FROM_INDEX",
+    "ZERO_FRESH_REALITY",
+    "RECOMPUTE_WHEN_SOURCE_REVISION_BASIS_INDEXER_OR_SCANNED_EVIDENCE_CHANGES"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V2_INDEXER_BYTES_AND_TESTS__RUN_ON_ONE_EXACT_CURRENT_BRAIN_COMMIT__FREEZE_RESULT_WITH_SOURCE_REVISION_CORPUS_MANIFEST_HASH_AND_PAYLOAD_HASH__THEN SEMANTICALLY_DISCHARGE_OR_FALSIFY MATCHED ATOMS BEFORE ANY FRESH REALITY",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
