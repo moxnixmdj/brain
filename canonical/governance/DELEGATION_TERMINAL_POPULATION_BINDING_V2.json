@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_POPULATION_BINDING_V2",
+  "date": "2026-10-02",
+  "status": "PRE_BEACON_FROZEN__CORRECTED_REGISTRY_ACCEPTANCE_AND_COMBINED_POPULATION__INDEPENDENT_BINDING_PREFLIGHT_PENDING__ZERO_TERMINAL_RESULTS",
+  "supersedes": "canonical/governance/DELEGATION_TERMINAL_POPULATION_BINDING_V1.json",
+  "supersession_reason": [
+    "V1_TERMINAL_PROOF_MODE_ABSOLUTE_BEHAVIORAL_PROTOCOL_IS_NOT_A_REGISTRY_TERMINAL_ACCEPTANCE_MODE",
+    "V1_POPULATION_OMITS_INDEPENDENTLY_VERIFIED_V3_STRUCTURAL_TOPOLOGY_CLASSES"
+  ],
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+  "proof_mode_basis": "THEORETICAL_CEILING",
+  "terminal_acceptance_mode_registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json::terminal_acceptance_proof_modes",
+  "route_population_version": "DELEGATION_TERMINAL_POPULATION_V2",
+  "exact_bound_blobs": {
+    "candidate": "9f2c3aa42352cba66967afb1f8a3f45357833c41",
+    "dynamic_oracle": "5785b07f482e38acdf7916e5414d90c2c0c305b7",
+    "structural_population": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+    "terminal_binding_runtime": "ad332ac188644d32aa543934638bceab89a13d6c",
+    "terminal_binding_tests": "7227911fecf3086436f091ee7e7f01901cdc456d",
+    "whole_dimension_preflight_receipt": "ae24117149e6acdcc8c4db977f8460b89480f0b2",
+    "structural_variety_preflight_receipt": "c99c1fba7f006e065937b4a272d346efbbe2cb49",
+    "scope_gate_receipt": "ab1d8d19217fe683b62682c8f7f2ce7800fcfe57",
+    "scope_relation": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "scope_gate_input": "b434c2ad13154f5d4f43a76cfb27d6b492e93e01",
+    "population_protocol": "8d30bb8805be9eef5155f0f31de17dd4bc9e5d1f",
+    "behavior_registry": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84"
+  },
+  "population": {
+    "sample_count": 512,
+    "dynamic_count": 256,
+    "structural_count": 256,
+    "generator": "canonical/runtime/delegation_terminal_population_binding_v2.py",
+    "dynamic_population": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+    "structural_population": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+    "case_id_rule": "TASK_TO_DELEGATION_GRAPH_001::DELEGATION_TERMINAL_POPULATION_V2::slot::<index>",
+    "post_freeze_beacon": null,
+    "seed_rule": "uint64_be(first_8_bytes(SHA256('PROJECT_BRAIN_TERMINAL_V2\\0'+commitment+'\\0'+post_freeze_beacon+'\\0'+case_id)))",
+    "adaptive_case_selection": false,
+    "case_replacement": false,
+    "replay_for_tuning": false,
+    "required_dynamic_classes": [
+      "BASE_PARALLEL",
+      "RESOURCE_CONFLICT",
+      "WORKER_UNAVAILABLE",
+      "STEP_UNAVAILABLE",
+      "WORKER_CAPABILITY_REMOVED",
+      "RESOURCE_CAPACITY_CHANGED"
+    ],
+    "required_structural_classes": [
+      "CHAIN",
+      "FORK_JOIN",
+      "FANOUT_JOIN",
+      "DUAL_ROOT_FANIN",
+      "ALTERNATIVE_PLAN"
+    ]
+  },
+  "acceptance": {
+    "rule": "ALL_512_CASES_PASS_HIDDEN_ORACLE_AND_ALL_11_FROZEN_DYNAMIC_AND_STRUCTURAL_CLASS_FAMILIES_PRESENT",
+    "allowed_failed_cases": 0,
+    "case_local_execution_failure_counts_as_failure": true,
+    "terminal_acceptance_proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF",
+    "ceiling_definition": "100_PERCENT_HIDDEN_ORACLE_CORRECTNESS_WITH_REQUIRED_BASELINE_ADVANTAGE_AND_ZERO_PROVENANCE_RESOURCE_OR_FANIN_FAILURES_ON_THE_FROZEN_SCOPE_EQUIVALENT_POST_FREEZE_POPULATION",
+    "ceiling_reason": "100_PERCENT_CORRECTNESS_WITH_ALL_REQUIRED_CONTRACT_INVARIANTS_IS_THE_MAXIMUM_ATTAINABLE_ACCEPTANCE_SCORE_ON_THIS_OBJECTIVE_FROZEN_SCOPE_EQUIVALENT_POPULATION"
+  },
+  "scope_gate": {
+    "status": "INDEPENDENT_PASS__ADMISSIBLE_SUBSTITUTION__ZERO_TERMINAL_RESULT",
+    "receipt": "canonical/verification/DELEGATION_SCOPE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "unresolved_required_dimensions": []
+  },
+  "information_boundary": {
+    "candidate_receives_hidden_oracle": false,
+    "candidate_receives_reference_solution": false,
+    "load_bearing_oracle_hidden": true
+  },
+  "dependency_mode": "ZERO_INCREMENTAL_SPEND__OWNED_CANDIDATE__INDEPENDENT_HIDDEN_ORACLES",
+  "commitment_canonicalization": "UTF8_JSON_SORT_KEYS_COMPACT_SEPARATORS_OVER_COMMITMENT_COMPONENTS",
+  "commitment_components": {
+    "acceptance": {
+      "allowed_failed_cases": 0,
+      "ceiling_definition": "100_PERCENT_HIDDEN_ORACLE_CORRECTNESS_WITH_REQUIRED_BASELINE_ADVANTAGE_AND_ZERO_PROVENANCE_RESOURCE_OR_FANIN_FAILURES_ON_THE_FROZEN_SCOPE_EQUIVALENT_POST_FREEZE_POPULATION",
+      "rule": "ALL_512_CASES_PASS_HIDDEN_ORACLE_AND_ALL_11_FROZEN_DYNAMIC_AND_STRUCTURAL_CLASS_FAMILIES_PRESENT",
+      "terminal_acceptance_proof_mode": "THEORETICAL_CEILING_OR_MACHINE_CHECKED_FORMAL_PROOF"
+    },
+    "blobs": {
+      "candidate": "9f2c3aa42352cba66967afb1f8a3f45357833c41",
+      "dynamic_oracle": "5785b07f482e38acdf7916e5414d90c2c0c305b7",
+      "structural_population": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+      "terminal_binding_runtime": "ad332ac188644d32aa543934638bceab89a13d6c",
+      "terminal_binding_tests": "7227911fecf3086436f091ee7e7f01901cdc456d",
+      "whole_dimension_preflight_receipt": "ae24117149e6acdcc8c4db977f8460b89480f0b2",
+      "structural_variety_preflight_receipt": "c99c1fba7f006e065937b4a272d346efbbe2cb49",
+      "scope_gate_receipt": "ab1d8d19217fe683b62682c8f7f2ce7800fcfe57",
+      "scope_relation": "52392515cd4de672f82f8afac82a41d3ce442656",
+      "scope_gate_input": "b434c2ad13154f5d4f43a76cfb27d6b492e93e01",
+      "population_protocol": "8d30bb8805be9eef5155f0f31de17dd4bc9e5d1f",
+      "behavior_registry": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84"
+    },
+    "dependency_mode": "ZERO_INCREMENTAL_SPEND__OWNED_CANDIDATE__INDEPENDENT_HIDDEN_ORACLES",
+    "population": {
+      "sample_count": 512,
+      "dynamic_count": 256,
+      "structural_count": 256,
+      "route_population_version": "DELEGATION_TERMINAL_POPULATION_V2",
+      "post_freeze_beacon": null,
+      "adaptive_case_selection": false,
+      "case_replacement": false,
+      "replay_for_tuning": false
+    }
+  },
+  "commitment_components_sha256": "8c3f70f337a1250511ec3b3fd66ad5e175aa0e93a469b503e1a58e6b6fba2c0a",
+  "pre_beacon_frozen": true,
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
