@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_CAUSAL_INTERVENTION_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_PR1041_BLOBS__192_TYPED_CASES__144_FORWARD_CAUSAL_RESCUES__V5_PSEUDO_RESCUE_SHORTCUT_KILLED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v6.py": "18d4de68ee8352410e986c318868642333ec085a",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "canonical/tests/test_trajectory_failure_typed_ir_v6.py": "6961f69cafd718da6dd439765a13f59ffc9790e1",
+    "canonical/governance/P1_TYPED_CAUSAL_INTERVENTION_ENVELOPE_V6.json": "03df530cd77cd834de94b4e3c4588008bf4a8070"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 1050,
+    "pr_head_sha": "a2902848a57193ffe3b376e90a37f36bd9b3dd59",
+    "workflow_run_id": 37039757795,
+    "workflow_job_id": 110946686660,
+    "conclusion": "success"
+  },
+  "verified": {
+    "cross_product_cases": 192,
+    "forward_causal_rescues": 144,
+    "ambiguous_abstentions": 48,
+    "scope_first_class": true,
+    "provenance_erasure_killed": true,
+    "unbound_output_killed": true,
+    "partial_interaction_repair_killed": true,
+    "symptom_only_repair_killed": true,
+    "fake_repair_string_killed": true,
+    "hidden_oracle_isolated": true,
+    "rescue_depends_on_candidate_visible_trajectory_semantics": true
+  },
+  "limitation": "THIS_VERIFIES_THE_V6_FORWARD_CAUSAL_ENVELOPE_ITSELF__IT_DOES_NOT_BY_ITSELF_PROVE_TERMINAL_DIRECT_SURFACE_SCOPE_TRANSPORT_OR_CLEAR_P1_QUARANTINE",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
