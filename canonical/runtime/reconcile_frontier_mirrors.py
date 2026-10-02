@@ -22,6 +22,7 @@ HIERARCHY="canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json"
 POINTER="canonical/CANONICAL_POINTER.json"
 QUEUE="canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json"
 SCOREBOARD="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+UNIVERSE="canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
 COUNTERS=(
     "reusable_capabilities_inherited","verified_real_tasks_completed",
     "fresh_reuse_passes","frontier_dependencies_removed","residual_gaps_localized",
@@ -125,6 +126,22 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool)->int:
     record=Doc(root,target_rel)
 
     counters_before=json.dumps(scoreboard.get("counters_since_epoch_start"),sort_keys=True)
+
+    # --- the pointer's open-mechanism count mirror ---------------------------
+    # current_state_obs_reducer.py compares
+    # pointer.current_frontier.open_mechanism_residual_count against
+    # GLOBAL_TERMINAL_UNIVERSE_V1.json counts.open_mechanism_lanes, and names the
+    # latter expected_..., so the universe artifact is the authority for this one
+    # mirror and the hierarchy is not. It is maintained only when the authority
+    # actually declares a count: a tree with no universe artifact is left alone
+    # rather than refused, because keying a repair to an artifact's presence breaks
+    # hybrid roots that copy the pointer without it, and inventing a count the
+    # authority never declared would be worse than leaving the mirror stale.
+    if (root/UNIVERSE).is_file():
+        lanes=Doc(root,UNIVERSE).get("counts","open_mechanism_lanes")
+        if lanes is not None:
+            changed=pointer.put(lanes,"current_frontier","open_mechanism_residual_count")
+            if changed: changes.append(changed)
 
     # --- the twelve mirror fields -----------------------------------------
     for doc,keys in (

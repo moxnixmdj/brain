@@ -223,6 +223,56 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
                 expected = self.action
             self.assertEqual(value, expected, key)
 
+    UNIVERSE = "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
+
+    def _pointer_count(self):
+        pointer = json.loads((self.root / POINTER).read_text(encoding="utf-8"))
+        return (pointer.get("current_frontier") or {}).get("open_mechanism_residual_count")
+
+    def _set_pointer_count(self, value):
+        path = self.root / POINTER
+        pointer = json.loads(path.read_text(encoding="utf-8"))
+        pointer.setdefault("current_frontier", {})["open_mechanism_residual_count"] = value
+        path.write_text(json.dumps(pointer, indent=2) + "\n", encoding="utf-8")
+
+    def test_pointer_open_mechanism_count_mirror_follows_the_universe(self):
+        """This mirror's authority is the universe artifact, not the hierarchy.
+
+        current_state_obs_reducer.py compares the pointer's count to
+        GLOBAL_TERMINAL_UNIVERSE_V1.json counts.open_mechanism_lanes and names that
+        value expected_..., so recomputing the mirror from the hierarchy would leave
+        the reducer failing on a tree this tool had just declared reconciled.
+        """
+        if not (ROOT / self.UNIVERSE).is_file():
+            self.skipTest("no universe artifact at this base")
+        dst = self.root / self.UNIVERSE
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / self.UNIVERSE, dst)
+        lanes = (json.loads(dst.read_text(encoding="utf-8")).get("counts") or {}).get(
+            "open_mechanism_lanes")
+        if lanes is None:
+            self.skipTest("the authority declares no open_mechanism_lanes count")
+        self._set_pointer_count(lanes + 7)
+        code, out = self.run_tool(write=True, fix_control_paths=False)
+        self.assertEqual(code, 0, out)
+        self.assertEqual(self._pointer_count(), lanes,
+                         "the pointer's count was not recomputed from the universe artifact")
+
+    def test_no_count_is_invented_when_the_authority_declares_none(self):
+        """Keying a repair to an artifact's presence breaks hybrid roots.
+
+        The fixture root deliberately has no universe artifact. The tool must neither
+        refuse nor fabricate a count the authority never declared -- inventing one
+        would be worse than leaving the mirror stale, because a fabricated value
+        reads as reconciled.
+        """
+        self.assertFalse((self.root / self.UNIVERSE).exists(), "fixture should have no universe")
+        self._set_pointer_count("SENTINEL_NOT_A_COUNT")
+        code, out = self.run_tool(write=True, fix_control_paths=False)
+        self.assertNotIn("REFUSED", out)
+        self.assertEqual(self._pointer_count(), "SENTINEL_NOT_A_COUNT",
+                         "a count was written without an authority declaring one")
+
     def test_progress_event_mirror_follows_the_field_the_guard_reads(self):
         # enforce_goal_hierarchy.py compares scoreboard.next_progress_event_target
         # to hierarchy.next_progress_event_target, not to next_required_action_class.

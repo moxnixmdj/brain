@@ -3,7 +3,7 @@
   "action_id": "REPAIR-STAGE-A-ADMISSION-AND-GUARD-VERSION-PINS-20261001-V1",
   "status": "PROPOSED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "e5baf41fbaa20c9aa3a7aa6e481cb218b2ef95a0",
+  "canonical_base_commit": "fb6f31b9cc440efc34833b902e1c3453b941bd15",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
@@ -95,7 +95,7 @@
   "reasoning_receipt": "canonical/reasoning/2026-10-01_STAGE_A_ADMISSION_UNSATISFIABLE_AND_GUARD_VERSION_PIN_ROT_V1.json",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "e5baf41fbaa20c9aa3a7aa6e481cb218b2ef95a0",
+    "canonical_base_commit": "fb6f31b9cc440efc34833b902e1c3453b941bd15",
     "real_outcome": "A policy-compliant eight-surface contamination ledger can be admitted to Stage B again, both Stage-A reducers enforce one contract, recorded admissions are reproducible from canonical code, and the trusted drift guard stops rejecting a correct pointer, so frontier-sensitive PRs stop failing permanently.",
     "required_capability": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
     "obs_goal": {
