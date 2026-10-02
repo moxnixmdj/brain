@@ -90,3 +90,4 @@ jobs:
           assert authority.get("route_count") == 12, authority
           assert authority.get("failed_predicates") == [], authority
           PY
+# reverify-trigger: SA-CCR corrected launcher exact-current authority
