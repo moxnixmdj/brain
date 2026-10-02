@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_ACTION_UNIVERSE_V2",
   "date": "2026-10-02",
-  "status": "FROZEN_COMPLETE_ACTION_BUNDLES__V4_EXACT_CUT_READY__ZERO_CAPABILITY_CREDIT",
+  "status": "OPEN_DISCOVERY__POST_V4_M1B_V2_CANDIDATE_ADMITTED__NOT_FROZEN",
   "source_graph": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
   "reuse_scan": "canonical/reasoning/2026-10-02_ZERO_COST_RESIDUAL_MECHANISM_REUSE_SCAN_V1.json",
   "obligations": {
@@ -183,9 +183,9 @@
     "M1B": {
       "status": "OPEN",
       "complete_action_bundle": true,
-      "candidate_action": "A_M1B_IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_TOLERANCE_V1",
-      "new_reality_units": 0,
-      "dependency_depth": 1,
+      "candidate_action": "A_M1B_KERNEL_CONTINUOUS_GEOMETRY_V2",
+      "new_reality_units": 1,
+      "dependency_depth": 2,
       "scope": "IDENTIFIABLE_CONTINUOUS_GEOMETRY_AND_SUBVOXEL_TOLERANCE_BOUNDED_DETERMINISTIC_ROUTE",
       "source_input": "canonical/governance/RESIDUAL_CUT_INPUT_V1.json",
       "external_specimen_only": [
@@ -194,10 +194,24 @@
       ],
       "source_input_invalidated": "canonical/governance/RESIDUAL_CUT_INPUT_V1.json",
       "uncovered": [
-        "IDENTIFIABLE_CONTINUOUS_CURVE_AND_SURFACE_GEOMETRY_NOT_YET_PROVEN_BY_CURRENT_EXECUTABLE_COMPILER",
-        "SUBVOXEL_DIMENSION_AND_TOLERANCE_SEMANTICS_NOT_YET_PROVEN_END_TO_END"
+        "ONLY_IF_CURRENT_FORMAL_OR_MATCHED_COVERAGE_AUDIT_EXPOSES_AN_IDENTIFIABLE_TERMINAL_GEOMETRY_CLASS_OUTSIDE_THE_VERIFIED_ANALYTIC_CSG_ARC_SPLINE_REVOLVE_AND_LOFT_GRAMMARS"
       ],
-      "complete_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V1.json"
+      "complete_bundle": "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json",
+      "verified_owned": [
+        "canonical/capabilities/opus55/ORTHOGRAPHIC_UNIQUENESS_GATE_001.json",
+        "canonical/capabilities/opus55/M1B_CONTINUOUS_GEOMETRY_COMPILER_001.json",
+        "canonical/capabilities/opus55/M1B_SMOOTH_SURFACE_COMPILER_001.json"
+      ],
+      "verification_receipts": {
+        "continuous_geometry": {
+          "workflow_run_id": 36945551407,
+          "conclusion": "success"
+        },
+        "smooth_surfaces": {
+          "workflow_run_id": 36945814841,
+          "conclusion": "success"
+        }
+      }
     }
   },
   "rules": [
@@ -208,14 +222,17 @@
     "ANY_NEW_CANDIDATE_INVALIDATES_A_PRIOR_FREEZE",
     "RUN_EXACT_FROZEN_UNIVERSE_COMPILER_ONLY_AFTER_ALL_TERMINALLY_NECESSARY_RESIDUALS_HAVE_AT_LEAST_ONE_ADMISSIBLE_COMPLETE_BUNDLE"
   ],
-  "exact_cut_ready": true,
-  "blocking_obligations": [],
-  "nonblocking_ready_obligation": [
+  "exact_cut_ready": false,
+  "blocking_obligations": [
     "M0A",
     "M1A",
     "M1B"
   ],
-  "next": "RUN_EXACT_RESIDUAL_MINIMUM_REALITY_CUT_V4__EXECUTE_ZERO_REALITY_PREFIXES__RECOMPUTE_BEFORE_ANY_FRESH_MATCHED_EVALUATION",
+  "nonblocking_ready_obligation": [
+    "M0A",
+    "M1A"
+  ],
+  "next": "M0A_PRIMARY__FINISH_SPECIALIZED_CONTEXTUAL_SEMANTIC_HARVEST_AND_M1A_REMAINDER__AUDIT_M1B_V2_COVERAGE__FREEZE_V5_ONLY_AFTER_CURRENT_CANDIDATE_UNIVERSE_IS_COMPLETE",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
