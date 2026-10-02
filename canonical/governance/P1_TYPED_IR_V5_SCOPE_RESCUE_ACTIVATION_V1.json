@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_IR_V5_SCOPE_RESCUE_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__TWO_RESIDUAL_P1_SEMANTICS_IMPLEMENTED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Attack both exact residual obligations left by the independently verified P1 V4 scope-safe residual compression without consuming terminal results: make SCOPE a first-class typed failure mechanism and require hidden-oracle post-intervention terminal rescue across the heterogeneous typed causal envelope.",
+  "source_residual_verification": "canonical/verification/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+  "proof_population": "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v5.py",
+  "changes_from_v4": {
+    "mechanism_classes_before": 7,
+    "mechanism_classes_after": 8,
+    "new_mechanism_class": "SCOPE",
+    "cross_product_cases_before": 168,
+    "cross_product_cases_after": 192,
+    "nonambiguous_intervention_rescue_cases": 144,
+    "intervention_semantics": "HIDDEN_ROOT_DEFECT_REMOVAL_PLUS_DECLARED_DEPENDENCY_AND_DATAFLOW_FAILURE_PROPAGATION_TO_TERMINAL_RESOURCES"
+  },
+  "targets": [
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+  ],
+  "hard_rules": [
+    "SCOPE_IS_NOT_AN_ALIAS_FOR_AUTHORITY",
+    "CANDIDATE_MUST_NOT_RECEIVE_HIDDEN_ROOT_ORACLE",
+    "REPAIR_TARGET_NAMING_ALONE_IS_NOT_SUFFICIENT",
+    "EVERY_NONAMBIGUOUS_CASE_MUST_PASS_HIDDEN_ORACLE_POST_INTERVENTION_TERMINAL_RESCUE",
+    "INTERACTION_CASE_MUST_FAIL_RESCUE_IF_ANY_REQUIRED_ROOT_REPAIR_IS_REMOVED",
+    "AMBIGUOUS_CASES_MUST_ABSTAIN_AND_REQUEST_A_DISCRIMINATOR",
+    "NO_TERMINAL_RESULTS_CONSUMED",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT_UNTIL_INDEPENDENT_VERIFICATION_AND_P1_QUARANTINE_RECONCILIATION"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V5_CANDIDATE_PROOF_AND_TEST_BYTES__THEN_COMPILE_THE_TWO_VERIFIED_RESIDUALS_TO_ZERO__ONLY_THEN_RECONCILE_P1_WHOLE_SCOPE_AND_PROPAGATE_ACCEPTANCE_FIXED_POINT",
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
