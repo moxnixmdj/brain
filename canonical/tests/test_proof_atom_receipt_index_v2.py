@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from canonical.runtime.proof_atom_receipt_index_v2 import build_index
+from canonical.runtime.proof_atom_receipt_index_v2 import MAX_MATCHES_PER_ATOM, build_index
 
 
 def frontier():
@@ -53,6 +53,8 @@ class Tests(unittest.TestCase):
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
             self.assertEqual(row["associated_target_predicates"],["T1"])
             self.assertEqual(row["candidate_match_count"],1)
+            self.assertEqual(row["candidate_match_total_count"],1)
+            self.assertFalse(row["candidate_match_truncated"])
             self.assertTrue(row["atom_id"].startswith("PA1:"))
             expected=hashlib.sha1(f"blob {len(content.encode())}\0".encode()+content.encode()).hexdigest()
             self.assertEqual(row["candidate_matches"][0]["git_blob_sha"],expected)
@@ -65,7 +67,7 @@ class Tests(unittest.TestCase):
             p.write_text('{"requires":["R1"]}\n',encoding="utf-8")
             out=build_index(frontier(),overlay(),root=root)
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
-            self.assertEqual(row["candidate_match_count"],0)
+            self.assertEqual(row["candidate_match_total_count"],0)
 
     def test_semantically_unrelated_substring_does_not_match(self):
         with tempfile.TemporaryDirectory() as td:
@@ -75,7 +77,22 @@ class Tests(unittest.TestCase):
             p.write_text('{"claim":"R"}\n',encoding="utf-8")
             out=build_index(frontier(),overlay(),root=root)
             row=next(x for x in out["atoms"] if x["proposition"]=="R1")
-            self.assertEqual(row["candidate_match_count"],0)
+            self.assertEqual(row["candidate_match_total_count"],0)
+
+    def test_match_cap_binding_is_explicitly_incomplete(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            base=root/"canonical/verification"
+            base.mkdir(parents=True)
+            for i in range(MAX_MATCHES_PER_ATOM + 1):
+                (base/f"r{i}.json").write_text('{"claim":"R1"}\n',encoding="utf-8")
+            out=build_index(frontier(),overlay(),root=root)
+            self.assertEqual(out["status"],"BOUNDED_INCOMPLETE__CANDIDATE_MATCH_CAP_BOUND__ZERO_CREDIT")
+            self.assertTrue(out["bounded_incomplete"])
+            row=next(x for x in out["atoms"] if x["proposition"]=="R1")
+            self.assertEqual(row["candidate_match_count"],MAX_MATCHES_PER_ATOM)
+            self.assertEqual(row["candidate_match_total_count"],MAX_MATCHES_PER_ATOM+1)
+            self.assertTrue(row["candidate_match_truncated"])
 
     def test_no_credit_or_authority(self):
         with tempfile.TemporaryDirectory() as td:
