@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_V5_VERIFICATION_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_RECOMPUTATION_PASS",
+  "status": "HISTORICAL_SOLVER_RECOMPUTATION_PASS__SOURCE_INPUT_LATER_INVALIDATED__NOT_SCHEDULING_AUTHORITY",
   "input": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V5.json",
   "verdict": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V5.json",
   "solver": "canonical/runtime/minimum_reality_cut.py",
   "workflow_run_id": 36946222915,
   "conclusion": "success",
-  "verified": {
-    "exact_minimum": true,
+  "verified_at_execution": {
+    "solver_matched_then_frozen_v5_input": true,
     "selected_observations": [
       "A_M0A_SPECIALIZED_WHITE_BOX_COMPOSED_V1",
       "A_M1A_VERIFIED_DETERMINISTIC_FRONTIER_V1",
@@ -17,6 +17,12 @@
     "observation_count": 3,
     "total_cost": 2.0
   },
+  "later_invalidation": {
+    "input_commit": "ec70834f0b556ae0a05e6f4903ba805d208ebe47",
+    "verdict_commit": "ce6812d22a979592e7c81254a36afba9ee55e518",
+    "reason": "V5_INPUT_WAS_NOT_FAITHFUL_TO_ITS_DECLARED_SOURCE_UNIVERSE_M1B_COST_AND_POST_FREEZE_M0A_CANDIDATES_CHANGED_THE_UNIVERSE"
+  },
+  "rule": "A_SUCCESSFUL_EXACT_SOLVER_RUN_PROVES_ONLY_THE_GIVEN_INPUT__IT_DOES_NOT_RESCUE_AN_INVALID_OR_STALE_INPUT",
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0
 }
