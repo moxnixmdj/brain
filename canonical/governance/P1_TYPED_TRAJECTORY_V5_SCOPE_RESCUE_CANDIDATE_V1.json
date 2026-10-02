@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_P1_TYPED_TRAJECTORY_V5_SCOPE_RESCUE_CANDIDATE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_ZERO_REALITY_P1_RESIDUAL_CLOSURE_ROUTE__INDEPENDENT_PUBLIC_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Discharge exactly the two remaining P1 V4 zero-reality residual obligations by adding explicit first-class SCOPE failure classification and machine-verified hidden post-intervention terminal rescue across the heterogeneous typed P1 preflight envelope, including delayed and conjunctive interaction cases.",
+  "source_residual_authority": {
+    "activation": "canonical/governance/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_ACTIVATION_V1.json",
+    "activation_git_blob_sha": "23f7b1cc5dd0a795bf88deb160431ea4528f3f74",
+    "verification": "canonical/verification/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "verification_git_blob_sha": "4dd7cf140e2a5d1c01cfd589d9fb8a69ec4fa24a",
+    "exact_residual_obligations": [
+      "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+      "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+    ]
+  },
+  "v5": {
+    "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+    "candidate_git_blob_sha": "aabac3cc36684862f5fb2388a9a281daa30c24a6",
+    "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py",
+    "proof_git_blob_sha": "bfc0421bd39796d0e0a7434e475fd1d0d7f17774",
+    "tests": "canonical/tests/test_trajectory_failure_typed_ir_v5.py",
+    "tests_git_blob_sha": "7ad1c7fc2e7e5a083501ce8b9034899bce581ee4",
+    "expected_domains": [
+      "BROWSER",
+      "FILESYSTEM",
+      "TOOL_API",
+      "ARTIFACT",
+      "RESEARCH",
+      "CODE"
+    ],
+    "expected_mechanism_classes": [
+      "AUTHORITY",
+      "SCOPE",
+      "SCHEMA",
+      "PROVENANCE",
+      "INVARIANT",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT",
+      "DEPENDENCY"
+    ],
+    "expected_patterns": [
+      "SINGLE",
+      "DELAYED",
+      "INTERACTION",
+      "AMBIGUOUS"
+    ],
+    "expected_cross_product_cases": 192,
+    "expected_machine_checked_nonambiguous_rescues": 144
+  },
+  "closure_conditions": [
+    "EXACT_V5_BLOBS_INDEPENDENTLY_VERIFIED",
+    "ALL_192_CROSS_PRODUCT_CASES_PASS",
+    "SCOPE_CLASSIFIED_DIRECTLY_FROM_EXPLICIT_FAILED_SCOPE_CHECK_NOT_FROM_AUTHORITY_ALIAS",
+    "ALL_144_NONAMBIGUOUS_CASES_REQUIRE_MACHINE_CHECKED_POST_INTERVENTION_TERMINAL_RESCUE",
+    "DELAYED_SCOPE_CASES_RESCUE_ONLY_FROM_CAUSAL_REPAIR",
+    "SYMPTOM_ONLY_REPAIRS_DO_NOT_RESCUE",
+    "INTERACTION_CASES_REQUIRE_COMPLETE_JOINT_CAUSAL_REPAIR_SET",
+    "AMBIGUOUS_CASES_PRESERVE_NONIDENTIFIABILITY",
+    "HIDDEN_CAUSAL_AND_INTERVENTION_ORACLE_NOT_CANDIDATE_VISIBLE"
+  ],
+  "hard_rules": [
+    "V5_PREFLIGHT_DOES_NOT_ITSELF_GRANT_TERMINAL_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT",
+    "NO_T0_T2_TERMINAL_REPLAY",
+    "NO_FRESH_TERMINAL_EVIDENCE",
+    "NO_SCOPE_INFERENCE_FROM_AUTHORITY",
+    "NO_REPAIR_TARGET_NAMING_AS_SUBSTITUTE_FOR_INTERVENTION_RESCUE",
+    "NO_CROSS_SCOPE_INHERITANCE",
+    "P1_QUARANTINE_CAN_CLEAR_ONLY_AFTER_INDEPENDENT_VERIFICATION_AND_EXACT_RESIDUAL_DISCHARGE_RECOMPUTATION"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V5_BYTES_ON_PUBLIC_RUNNER__IF_PASS_BIND_RECEIPT_IN_BRAIN__THEN_RECOMPUTE_P1_RESIDUAL_DISCHARGE_FAIL_CLOSED__ZERO_TERMINAL_REPLAY",
+  "terminal_results_replayed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
