@@ -3,11 +3,12 @@
   "date": "2026-10-02",
   "source_basis_blob_sha": "9e89fe83077fd0397534f100071343063846edb1",
   "source_basis_status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__6_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
-  "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_BASIS__ZERO_PROMOTION_AUTHORITY",
+  "status": "CANONICAL_SCHEDULING_RECEIPT__REBOUND_TO_LIVE_6_OF_12_BASIS__ZERO_PROMOTION_AUTHORITY",
   "active_contract_count": 12,
-  "closed_route_count": 5,
-  "open_route_count": 7,
+  "closed_route_count": 6,
+  "open_route_count": 6,
   "closed_behavior_ids": [
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
     "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
     "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
@@ -69,37 +70,6 @@
       "prewave_binding": "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "synthetic_whole_domain_scope_gate_deleted": true,
       "scorer_independent_verification": "canonical/verification/CAD_T0_MULTIPLEX_SCORER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
-    },
-    {
-      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
-      "portfolio": "T1_T3",
-      "proof_state": "INFORMATION_SAFE_V3_PREFLIGHT_PRESERVED__OBJECTIVE_GROUNDING_BINDING_ACTIONABLE__UNCOVERED_SUBJECTIVE_QUALITY_EXTERNAL_BLOCKED",
-      "blockers": [
-        "FREEZE_OBJECTIVE_CLAIM_SUPPORT_COVERAGE_UNCERTAINTY_AND_CONSTRAINT_SCORER",
-        "FREEZE_BRAIN_OWNED_SYNTHESIS_PACKAGE_AND_DEPENDENCY_MANIFEST",
-        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND_FOR_UNCOVERED_SUBJECTIVE_SYNTHESIS_QUALITY"
-      ],
-      "blocker_classes": {
-        "binding": 0,
-        "scope_gate": 0,
-        "scope_expansion": 0,
-        "open_domain_protocol": 2,
-        "external_block": 1,
-        "other": 0
-      },
-      "portfolio_leverage": 2,
-      "priority_score": 994,
-      "next_action_class": "RESOLVE_STRONGER_ABSOLUTE_ROUTE_SCOPE_EQUIVALENCE_AND_BINDING__THEN_RECOMPUTE__NO_CLEAN_CASE_SPEND",
-      "supercompiler_reconciliation": {
-        "verdict": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
-        "stronger_route": "P3_HIDDEN_SUPPORT_GRAPH_EXHAUSTIVE",
-        "proof_mode": "EXHAUSTIVE_FINITE",
-        "exact_opus_irreducibility": "NOT_PROVEN",
-        "internal_blockers_first": [
-          "P3_SCOPE_EQUIVALENCE",
-          "P3_TERMINAL_BINDING"
-        ]
-      }
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
@@ -214,5 +184,14 @@
     "status": "ACTIVE_FOR_P1_P3__SCHEDULING_ONLY",
     "verdict": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json",
     "rule": "P1_AND_P3_EXTERNAL_COMPARATOR_BLOCKS_MUST_NOT_DOMINATE_SCHEDULING_UNTIL_STRONGER_ABSOLUTE_ROUTE_SCOPE_EQUIVALENCE_IS_RESOLVED"
+  },
+  "derived_state_reconciliation": {
+    "basis_blob_sha": "9e89fe83077fd0397534f100071343063846edb1",
+    "rule": "QUEUE_MEMBERSHIP_DERIVED_FROM_CURRENT_ACTIVE_TERMINAL_PROOF_BASIS__NO_STALE_ADMITTED_CONTRACT_MAY_REMAIN_OPEN",
+    "removed_stale_open_entries": [
+      "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001"
+    ],
+    "current_closed_count": 6,
+    "current_open_count": 6
   }
 }
