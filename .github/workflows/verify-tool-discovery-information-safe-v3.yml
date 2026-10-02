@@ -25,21 +25,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Emit diagnostic batch
+      - name: Capture diagnostic output
+        shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          echo "BEGIN TOOL DISCOVERY V3 DIAGNOSTICS" > tool_v3_diag.txt
+          python -m py_compile canonical/runtime/tool_discovery_information_safe_candidate.py canonical/runtime/tool_discovery_information_safe_proof_v3.py canonical/tests/test_tool_discovery_information_safe_proof_v3.py >> tool_v3_diag.txt 2>&1
+          echo "PYCOMPILE_EXIT=$?" >> tool_v3_diag.txt
+          python - <<'PY' >> tool_v3_diag.txt 2>&1
           import json
           from canonical.runtime.tool_discovery_information_safe_candidate import next_action
           from canonical.runtime import tool_discovery_information_safe_proof_v3 as v3
           out=v3.run_batch(20261002,90,next_action)
-          open("tool_v3_diag.json","w").write(json.dumps(out,indent=2,sort_keys=True))
-          print(json.dumps({"all_pass":out["all_pass"],"failures":out["failures"][:20],"by_class":out["by_class"]},indent=2))
+          print(json.dumps({"all_pass":out["all_pass"],"failures":out["failures"][:20],"by_class":out["by_class"]},indent=2,sort_keys=True))
           PY
-      - name: Run regression suite
-        run: python -m unittest -v canonical.tests.test_tool_discovery_information_safe_proof_v2 canonical.tests.test_tool_discovery_information_safe_proof_v3
+          echo "BATCH_EXIT=$?" >> tool_v3_diag.txt
+          python -m unittest -v canonical.tests.test_tool_discovery_information_safe_proof_v2 canonical.tests.test_tool_discovery_information_safe_proof_v3 >> tool_v3_diag.txt 2>&1
+          echo "UNITTEST_EXIT=$?" >> tool_v3_diag.txt
+          cat tool_v3_diag.txt
+          exit 0
       - name: Upload diagnostics
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: tool-discovery-v3-diagnostics
-          path: tool_v3_diag.json
+          path: tool_v3_diag.txt
+      - name: Enforce tests
+        run: python -m unittest -v canonical.tests.test_tool_discovery_information_safe_proof_v2 canonical.tests.test_tool_discovery_information_safe_proof_v3
