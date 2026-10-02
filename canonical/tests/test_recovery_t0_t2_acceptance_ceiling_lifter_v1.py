@@ -9,7 +9,7 @@ def load(path):
     return json.loads((ROOT/path).read_text())
 
 class RecoveryCeilingLifterTests(unittest.TestCase):
-    def test_live_candidate_is_zero_credit(self):
+    def test_live_candidate_is_quarantined_fail_closed(self):
         out=evaluate(
             protocols=load("canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"),
             registry=load("canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"),
@@ -18,12 +18,12 @@ class RecoveryCeilingLifterTests(unittest.TestCase):
             terminal=load("canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"),
             relation=load("canonical/governance/RECOVERY_T0_T2_ACCEPTANCE_SCOPE_RELATION_V1.json"),
         )
-        self.assertTrue(out["pass"],out)
-        self.assertEqual(out["source_case_count"],60)
-        self.assertFalse(out["candidate_witness"]["verified"])
-        self.assertFalse(out["candidate_witness"]["independent"])
+        self.assertFalse(out["pass"],out)
+        self.assertIsNone(out["candidate_witness"])
+        self.assertIn("P1_EXECUTED_TERMINAL_SCOPE_MISMATCH_QUARANTINE_ACTIVE",out["errors"])
         self.assertEqual(out["capability_credit_delta"],0)
         self.assertEqual(out["family_credit_delta"],0)
+        self.assertFalse(out["promotion_authority"])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
