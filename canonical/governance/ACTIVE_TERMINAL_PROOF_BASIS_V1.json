@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__12_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__4_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__OPEN_FRONTIER_RECONCILED_TO_LATEST_P1_P2_P3_TOOL_T3_BINDINGS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
@@ -138,9 +138,12 @@
     {
       "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
       "portfolio": "T0_T2",
-      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "proof_state": "STRONGER_ABSOLUTE_ROUTE_PREQUALIFICATION_PENDING__P1_SCOPE_EQUIVALENCE_AND_TERMINAL_BINDING_ONLY",
       "route": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
-      "blockers": [],
+      "blockers": [
+        "P1_SCOPE_EQUIVALENCE",
+        "P1_TERMINAL_BINDING"
+      ],
       "candidate": "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py",
       "independent_preflight": "canonical/verification/P1_TRAJECTORY_T0_T2_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "scope_audit": "canonical/governance/TRAJECTORY_WHOLE_SCOPE_AUDIT_V1.json",
@@ -159,14 +162,17 @@
         "terminal_credit": "ZERO_UNTIL_TERMINAL_WAVE"
       },
       "prewave_admissible": true,
-      "terminal_results_observed": 0
+      "terminal_results_observed": 0,
+      "preferred_terminal_route": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json::P1_TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_DIRECT"
     },
     {
       "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "portfolio": "T1",
-      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "proof_state": "FROZEN_PREWAVE_T1_DIRECT_QUALITY_BINDING__INDEPENDENT_VERIFICATION_PENDING",
       "route": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
-      "blockers": [],
+      "blockers": [
+        "P2_T1_MULTIPLEX_INDEPENDENT_VERIFICATION_PENDING"
+      ],
       "candidate": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
       "preflight_verification": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
       "independent_preflight": "canonical/verification/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -175,7 +181,8 @@
       "internal_scope_binding": "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
       "adjacent_native_mechanical_gate": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
       "prewave_admissible": true,
-      "terminal_results_observed": 0
+      "terminal_results_observed": 0,
+      "terminal_binding": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json"
     },
     {
       "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
@@ -195,9 +202,12 @@
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "portfolio": "T1_T3",
-      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "proof_state": "STRONGER_ABSOLUTE_ROUTE_PREQUALIFICATION_PENDING__P3_SCOPE_EQUIVALENCE_AND_TERMINAL_BINDING_ONLY",
       "route": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
-      "blockers": [],
+      "blockers": [
+        "P3_SCOPE_EQUIVALENCE",
+        "P3_TERMINAL_BINDING"
+      ],
       "candidate": "canonical/runtime/p3_information_safe_candidate_v3.py",
       "preflight_verification": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
       "independent_preflight": "canonical/verification/P3_SYNTHESIS_T1_T3_MULTIPLEX_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -213,7 +223,8 @@
         "terminal_credit": "ZERO_UNTIL_TERMINAL_WAVE"
       },
       "prewave_admissible": true,
-      "terminal_results_observed": 0
+      "terminal_results_observed": 0,
+      "preferred_terminal_route": "canonical/governance/CONTRACT_NATIVE_ABSOLUTE_PROOF_SUITES_V1.json::P3_EVIDENCE_TO_AUDIENCE_SYNTHESIS_DIRECT"
     },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
@@ -287,9 +298,16 @@
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "portfolio": "T2_T3",
-      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "proof_state": "PUBLIC_FIXED_BAR_CANDIDATE_FROZEN_PRE_TASK__TOOLATHLON_SCOPE_ZERO_COST_AND_TERMINAL_BINDING_PENDING",
       "route_requirement": "HIDDEN_TOOL_CAPABILITY_ECOSYSTEM_WITH_SAFE_PROBES_SELECTION_COST_AND_SECOND_TASK_TRANSFER",
-      "blockers": [],
+      "blockers": [
+        "MAP_TOOLATHLON_REPRESENTED_DIMENSIONS_TO_FROZEN_TOOL_DISCOVERY_CONTRACT_WITHOUT_SCOPE_WEAKENING",
+        "PROVE_EXACT_ZERO_INCREMENTAL_SPEND_EXECUTION_CARRIER_OR_FAIL_CLOSED",
+        "FREEZE_CHECKER_AND_TASK_POPULATION_IDENTITY_WITHOUT_POST_FREEZE_TUNING",
+        "BIND_OPUS_5_5_77_8_PASS_AT_1_SOURCE_DURABLY_AND_INDEPENDENTLY",
+        "DEFINE_HOW_INTERNAL_TRANSFER_VERSIONING_LEAST_COST_AND_ESCALATION_PROOFS_COMPOSE_WITH_TOOLATHLON_FIXED_BAR",
+        "FREEZE_TERMINAL_ACCEPTANCE_ACCOUNTING_AND_SELECTOR"
+      ],
       "route": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/tool_discovery_information_safe_candidate.py",
       "independent_preflight": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -301,14 +319,19 @@
       "prewave_admissible": true,
       "terminal_results_observed": 0,
       "fresh_terminal_evidence_consumed": 0,
-      "no_overclaim": "PREWAVE_ROUTE_ADMISSION_ONLY__ZERO_TERMINAL_RESULTS__NO_CAPABILITY_OR_FAMILY_CREDIT"
+      "no_overclaim": "PREWAVE_ROUTE_ADMISSION_ONLY__ZERO_TERMINAL_RESULTS__NO_CAPABILITY_OR_FAMILY_CREDIT",
+      "public_fixed_bar_candidate": "canonical/governance/TOOLATHLON_VERIFIED_TOOL_DISCOVERY_ROUTE_FREEZE_V1.json"
     },
     {
       "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
       "portfolio": "T3",
-      "proof_state": "TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
+      "proof_state": "FROZEN_PREWAVE_BINDING__HLE_SCORER_AND_HARBOR_TRANSPORT_VERIFIED__CONTROLLER_RESOURCE_AND_HLE_ACCESS_REMAIN",
       "route_requirement": "HIDDEN_EVIDENCE_WORLD_WITH_QUERY_SOURCE_SELECTION_INFORMATION_GAIN_PROVENANCE_AND_STOP_ORACLE",
-      "blockers": [],
+      "blockers": [
+        "HLE_CANONICAL_CONTENT_ACCESS_AT_ZERO_INCREMENTAL_SPEND",
+        "TB_SCIENCE_ZERO_COST_BRAIN_CONTROLLER_ROUTE_FOR_PUBLIC_RUNNER",
+        "TB_SCIENCE_PER_CASE_RESOURCE_ENVELOPE"
+      ],
       "route": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "candidate": "canonical/runtime/research_control_information_safe_candidate.py",
       "independent_preflight": "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -326,13 +349,14 @@
       "hle_score_equivalence_claimed": false,
       "hle_preaverage_dependency_deleted_by_objective_route": true,
       "no_overclaim": "DIRECT_OBJECTIVE_RESEARCH_CONTROL_PREWAVE_ROUTE_ONLY__NO_HLE_SCORE_EQUIVALENCE__ZERO_TERMINAL_RESULTS",
-      "fresh_terminal_evidence_consumed": 0
+      "fresh_terminal_evidence_consumed": 0,
+      "terminal_binding": "canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json"
     }
   ],
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 12,
   "execution_authority": false,
-  "next": "CLOSE_REMAINING_ACTIVE_TERMINAL_ROUTE_BINDINGS__TOOL_DISCOVERY_REQUIRES_CURRENT_INDEPENDENT_PASS__RESEARCH_REMAINS_HLE_EXTERNAL_BLOCKED__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
+  "next": "RUN_GLOBAL_SUPERCOMPILER_OVER_ALL_EIGHT_OPEN_CONTRACTS__CLOSE_ONLY_MINIMUM_PREWAVE_UNBLOCK_CUT__NO_TERMINAL_WAVE_BEFORE_PREQUALIFICATION_PASS",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
