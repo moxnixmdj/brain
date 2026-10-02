@@ -81,8 +81,11 @@ def evaluate(
 
     if binding.get("behavior_id") != behavior_id:
         errors.append("BINDING_BEHAVIOR_MISMATCH")
-    if binding.get("standalone_terminal_population") is True:
-        errors.append("UNEXPECTED_STANDALONE_POPULATION")
+    terminal_acceptance = binding.get("terminal_acceptance")
+    if not isinstance(terminal_acceptance, Mapping):
+        errors.append("BINDING_TERMINAL_ACCEPTANCE_MISSING")
+    elif terminal_acceptance.get("standalone_synthetic_whole_domain_score_forbidden") is not True:
+        errors.append("STANDALONE_SYNTHETIC_SCORE_NOT_FORBIDDEN")
 
     exact = binding_verification.get("exact_brain_blobs")
     if not isinstance(exact, Mapping) or exact.get(binding_path) != binding_blob_sha:
@@ -112,6 +115,9 @@ def evaluate(
 
     if terminal_result.get("status") != "ONE_SHOT_TERMINAL_WAVE_PASS__IMMUTABLE_PUBLIC_RUNNER_RECEIPT__NO_REPLAY_AUTHORIZED":
         errors.append("TERMINAL_RESULT_NOT_IMMUTABLE_ONE_SHOT_PASS")
+    terminal_runner = terminal_result.get("public_runner")
+    if not isinstance(terminal_runner, Mapping) or terminal_runner.get("conclusion") != "success":
+        errors.append("TERMINAL_PUBLIC_RUNNER_NOT_SUCCESS")
     guards = terminal_result.get("result_guards")
     if not isinstance(guards, Mapping):
         errors.append("RESULT_GUARDS_MISSING")
@@ -158,6 +164,17 @@ def evaluate(
             ):
                 if row.get(k) is not v:
                     errors.append("TERMINAL_ROW_GUARD_FAILED:" + str(portfolio) + ":" + k)
+
+    full_result_sha = (terminal_result.get("artifact") or {}).get("full_result_sha256")
+    if "INDEPENDENT_PUBLIC_RUNNER_PASS" not in str(postwave_reduction.get("status", "")):
+        errors.append("POSTWAVE_NOT_INDEPENDENT_PUBLIC_RUNNER_PASS")
+    postwave_runner = postwave_reduction.get("public_verifier")
+    if not isinstance(postwave_runner, Mapping) or postwave_runner.get("conclusion") != "success":
+        errors.append("POSTWAVE_PUBLIC_VERIFIER_NOT_SUCCESS")
+    if postwave_reduction.get("source_full_result_sha256") != full_result_sha:
+        errors.append("POSTWAVE_TERMINAL_RESULT_IDENTITY_MISMATCH")
+    if postwave_reduction.get("terminal_replay_permitted") is not False:
+        errors.append("POSTWAVE_REPLAY_NOT_FORBIDDEN")
 
     contract_verdict = postwave_reduction.get("contract_verdict")
     passed_contracts = contract_verdict.get("passed_contracts") if isinstance(contract_verdict, Mapping) else None
