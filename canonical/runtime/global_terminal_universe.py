@@ -20,22 +20,21 @@ def build_universe():
     lanes = []
     for row in graph["shared_mechanism_obligations"]:
         key = lane_key(row["id"])
-        hole = "?P" if key in {"M0", "M1"} else ("?M" if row["state"] == "OPEN" else "CLOSED")
-        lane = {
+        state = row["state"]
+        if key in {"M0", "M1"} or state == "PROOF_ONLY":
+            hole = "?P"
+        elif state == "OPEN":
+            hole = "?M"
+        else:
+            hole = "CLOSED"
+        lanes.append({
             "id": row["id"],
             "hole_type": hole,
             "state": row["state"],
             "covers_families": row["covers_families"],
             "remaining": row["remaining"],
             "source": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
-        }
-        # Receipt bindings are canonical evidence metadata, not scheduling logic.
-        # Preserve them in the generated projection so regeneration cannot erase
-        # verified mechanism provenance that was bound into the obligation graph.
-        for name, value in row.items():
-            if str(name).startswith("verified_") and str(name).endswith("_receipt"):
-                lane[name] = value
-        lanes.append(lane)
+        })
 
     proofs = []
     for row in graph["open_family_proof_obligations"]:
