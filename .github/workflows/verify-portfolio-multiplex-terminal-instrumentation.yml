@@ -1,0 +1,24 @@
+name: Verify portfolio multiplex terminal instrumentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py
+      - canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py
+      - .github/workflows/verify-portfolio-multiplex-terminal-instrumentation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_portfolio_multiplex_terminal_instrumentation_v1
