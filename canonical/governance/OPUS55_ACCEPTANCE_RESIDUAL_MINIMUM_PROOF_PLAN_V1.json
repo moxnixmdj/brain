@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__19_BEHAVIORAL_PASS__2_ACCEPTANCE_CLOSED__17_FROZEN_PROTOCOL_RESULTS_OPEN",
+  "status": "ACTIVE_FAIL_CLOSED__CURRENT_SCORE_ROUTE_REVOKED_BY_ATTAINABILITY_CUT__17_FROZEN_PROTOCOL_RESULTS_OPEN",
   "objective": "Close only the frozen Opus 5.5 equal-or-better acceptance residuals with the minimum new reality, preserving the immutable terminal wave and zero incremental spend.",
   "authorities": {
     "protocols": {
@@ -64,6 +64,12 @@
       "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
       "evidence_bindings": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
       "status": "ACTIVE_FAIL_CLOSED__SATURATION_AND_READINESS_AWARE"
+    },
+    "attainability_cut": {
+      "path": "canonical/governance/OPUS55_ATTAINABILITY_CUT_V1.json",
+      "runtime": "canonical/runtime/attainability_cut_compiler_v1.py",
+      "current_verdict": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+      "status": "ACTIVE_FAIL_CLOSED"
     }
   },
   "invariant_truths": [
@@ -290,6 +296,7 @@
     }
   ],
   "execution_order": [
+    "RUN_ATTAINABILITY_CUT_BEFORE_EVERY_REALITY_ACTION__IMPOSSIBLE_ROUTES_MUST_NOT_CONSUME_CASES",
     "RUN_ACCEPTANCE_RESIDUAL_COMPILER_V2__UNTIL_RECEIPT_SATURATION_COMPLETE_THE_ONLY_AUTHORIZED_ACTION_IS_EXISTING_RECEIPT_SATURATION",
     "BIND_CONTENT_ADDRESSED_EXACT_MATCHING_RECEIPTS_TO_THE_38_ATOMIC_PREDICATES__NO_BEHAVIORAL_PASS_INHERITANCE",
     "RUN_ACCEPTANCE_PROOF_TRANSMUTATION_COMPILER_ON_ANY_FULL_SCOPE_WITNESSES_BEFORE_NEW_REALITY",
@@ -312,7 +319,7 @@
   "incremental_spend_usd": 0,
   "terminal_replay_permitted": false,
   "current_execution_frontier": {
-    "clean_case_authorized_public_bar_routes": 1,
+    "clean_case_authorized_public_bar_routes": 0,
     "blocked_ready_routes": [
       {
         "route": "AUTOMATIONBENCH_PUBLIC_600_ROUTE",
@@ -323,22 +330,13 @@
         "reason": "NO_BRAIN_INTERNALIZED_OPERATIVE_INSTRUCTION_FOLLOWING_SCOPE_JUDGMENT_CANDIDATE_BOUND"
       }
     ],
-    "next_exact_action": "EXECUTE_ONLY_TERMINAL_BENCH_4_FRESH_CASES_NEEDED_FOR_THE_OPEN_CODING_PUBLIC_BAR_PREDICATE_UNDER_THE_ADMITTED_CONFIGURED_ROUTE__NO_REPLAY__STOP_ON_MATERIAL_FAILURE",
+    "next_exact_action": "DO_NOT_EXECUTE_CURRENT_SCORE_ROUTE__UPPER_BOUND_180_LT_220__VERIFY_CUT_AND_SEARCH_ONLY_FOR_ROUTE_OR_CREDITABILITY_CHANGES",
     "discovered_reusable_coding_configuration": {
       "path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
       "git_blob_sha": "d63d7656c7da293a7c22c32042a4f03f2d13593d",
       "state": "BRAIN_OWNED_CONFIGURATION_EXISTS__FRESH_TB4_WAL_TASK_PASS__INDEPENDENT_MATERIALITY_PASS__SOURCE_GATE_V2_PASS__EXACT_CURRENT_RUNTIME_PASS__CLEAN_CASE_EXECUTION_AUTHORIZED__SCORE_OPEN"
     },
-    "authorized_routes": [
-      {
-        "route": "TERMINAL_BENCH_4_MINI_SWE_SUPERPOWERS_SESSION_ROUTE",
-        "family": "ADVANCED_AGENTIC_CODING",
-        "source_gate": "INDEPENDENT_PASS",
-        "runtime_verification": "INDEPENDENT_PASS",
-        "score_state": "OPEN",
-        "next": "EXECUTE_DISTINCT_FRESH_TB4_CASES_UNDER_FROZEN_CONFIGURED_ROUTE__NO_REPLAY"
-      }
-    ],
+    "authorized_routes": [],
     "coding_source_gate_evidence": "canonical/verification/CODING_TB4_SOURCE_GATE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "coding_current_runtime_evidence": "canonical/verification/CODING_CONTROL_RUNTIME_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
   },
@@ -348,5 +346,5 @@
     "correction": "MODEL_PRESENCE_ALLOWED_AS_GENERAL_COGNITION_SUBSTRATE__V7_BRAIN_OWNED_OPERATIVE_MECHANISM_REQUIRED__HIDDEN_TARGET_CAPABILITY_PROVIDER_FORBIDDEN",
     "decision_receipt": "canonical/reasoning/2026-10-02_ACCEPTANCE_CAPABILITY_SOURCE_GATE_SUBSTRATE_CORRECTION_V1.json"
   },
-  "next": "RUN_ACCEPTANCE_RESIDUAL_COMPILER_V2__SATURATE_EXISTING_RECEIPTS__THEN_EXECUTE_ONLY_COMPILER_AUTHORIZED_VERDICT_CHANGING_ACTIONS"
+  "next": "RUN_ATTAINABILITY_CUT_FIRST__CURRENT_SCORE_ROUTE_FAIL_CLOSED__CONTINUE_ONLY_ZERO_REALITY_OR_ROUTE_CHANGING_ACTIONS"
 }
