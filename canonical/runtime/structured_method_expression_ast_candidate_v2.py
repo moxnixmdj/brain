@@ -205,6 +205,23 @@ def _eval(expr: Mapping[str, Any], meta: Mapping[str, Mapping[str, str]], vals: 
         value = {"gt": av > bv, "ge": av >= bv, "lt": av < bv, "le": av <= bv}[op]
         return "boolean", "dimensionless", value
 
+    if op == "isclose":
+        a, b = two()
+        if a[0] not in _NUMERIC or b[0] not in _NUMERIC or a[1] != b[1]:
+            raise CompileError("ISCLOSE_TYPE_OR_DIMENSION_INVALID")
+        rel_tol = expr.get("rel_tol", 1e-12)
+        abs_tol = expr.get("abs_tol", 0.0)
+        if (
+            not isinstance(rel_tol, (int, float)) or isinstance(rel_tol, bool)
+            or not isinstance(abs_tol, (int, float)) or isinstance(abs_tol, bool)
+            or not math.isfinite(float(rel_tol)) or not math.isfinite(float(abs_tol))
+            or float(rel_tol) < 0.0 or float(abs_tol) < 0.0
+        ):
+            raise CompileError("ISCLOSE_TOLERANCE_INVALID")
+        return "boolean", "dimensionless", math.isclose(
+            float(a[2]), float(b[2]), rel_tol=float(rel_tol), abs_tol=float(abs_tol)
+        )
+
     if op in {"eq", "neq"}:
         a, b = two()
         if a[0] != b[0] or a[1] != b[1]:
