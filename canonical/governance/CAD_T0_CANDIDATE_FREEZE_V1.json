@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_CAD_T0_CANDIDATE_FREEZE_V1",
+  "date": "2026-10-02",
+  "status": "IMMUTABLE_CAD_DEPENDENCY_CONE_FROZEN_BEFORE_HIDDEN_GRADER_INSPECTION__ZERO_TERMINAL_RESULTS",
+  "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+  "frozen_brain_snapshot": {
+    "head_commit": "4e499ef099fb8f70e4cd80b722fe0b6800a813e7",
+    "canonical_runtime_tree_sha": "b4350200f2bab41ec7587198789ff414afdc101c",
+    "opus55_capability_tree_sha": "f86192f61ac98ce9d190ee7e73bf391c7bb8edff"
+  },
+  "exact_cad_artifacts": {
+    "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json": "c0f55a55091186c5ab785b670f935bbc6a2f9432",
+    "canonical/governance/CAD_T0_EVALUATOR_OBSERVATION_SCHEMA_V1.json": "2bc87504a54c76003f715be9a52c6e635c8991a6",
+    "canonical/governance/CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1.json": "b196acadd2f735a7db2d802b5f8f24c01d2445a3",
+    "canonical/governance/M1A_COMPLETE_ACTION_BUNDLE_V2.json": "65f4dc24c398c1f49cffde5711776074fc9f89ff",
+    "canonical/governance/M1B_COMPLETE_ACTION_BUNDLE_V2.json": "4e2fde88553a4f9b01ac7c55750c3bc2d393ac15",
+    "canonical/governance/M1_MULTIPLEXED_MATCHED_GEOMETRY_PROOF_BUNDLE_V1.json": "e9aaef8a7786a19ae265c6fedde04a4a1ecee4b1",
+    "canonical/runtime/cad_t0_multiplex_scorer.py": "89833581dc4ac67498753feb94e2ff69bad3b7f1"
+  },
+  "post_freeze_rules": [
+    "NO_CHANGE_TO_FROZEN_CANONICAL_RUNTIME_TREE_MAY_BE_USED_BY_THE_CAD_TERMINAL_CANDIDATE",
+    "NO_CHANGE_TO_FROZEN_OPUS55_CAPABILITY_TREE_MAY_BE_USED_BY_THE_CAD_TERMINAL_CANDIDATE",
+    "HIDDEN_TASK_GRADER_OR_REFERENCE_CONTENT_MAY_BE_READ_ONLY_BY_EVALUATOR_SIDE_AFTER_THIS_FREEZE",
+    "POST_FREEZE_WRITES_MAY_DEFINE_ONLY_EVALUATOR_BINDINGS_RECEIPTS_AND_GOVERNANCE__NOT_CAD_CANDIDATE_MECHANISMS",
+    "ANY_REQUIRED_CAD_RUNTIME_CHANGE_AFTER_HIDDEN_GRADER_EXPOSURE_INVALIDATES_THIS_CASE_FOR_CLEAN_PROMOTION",
+    "UNRELATED_BRAIN_CHANGES_OUTSIDE_THE_FROZEN_CAD_DEPENDENCY_CONE_DO_NOT_INVALIDATE_THIS_FREEZE"
+  ],
+  "contamination_state": {
+    "exact_task_id_seen_as_metadata_only": "freecad-platform-drawing",
+    "task_instruction_opened": false,
+    "task_solution_opened": false,
+    "task_reference_model_opened": false,
+    "task_grader_content_opened": false,
+    "current_canonical_brain_exact_task_id_search_hits": 0,
+    "historical_all_deleted_or_external_chat_sources_machine_proven_absent": false,
+    "disposition": "DIRECT_INSTRUMENTATION_CLEANNESS_SUPPORTED_BUT_NOT_UNIVERSAL_HISTORICAL_NONEXPOSURE_THEOREM"
+  },
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
