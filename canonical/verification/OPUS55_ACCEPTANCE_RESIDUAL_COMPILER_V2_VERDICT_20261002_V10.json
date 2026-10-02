@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V10",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__9_PROVED__0_OPEN__29_BLOCKED__DELEGATION_FULLY_PROVED__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 9,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 29,
+  "refuted_predicate_count": 0,
+  "fully_proved_residual_family_count": 2,
+  "newly_proved_predicate": {
+    "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+    "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "proof_kind": "ABSOLUTE_CEILING",
+    "source": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
+  },
+  "blocker_partition": {
+    "current_tb4_public_bar_impossible": 1,
+    "other_public_fixed_bars_not_score_ready": 14,
+    "matched_or_scope_audit_without_exact_comparator_or_full_scope_stronger_proof": 11,
+    "direct_judgment_source_blockers": 2,
+    "composition_dependency_blocker": 1,
+    "total": 29
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 877,
+    "pull_request_head": "2b5a683e581c7b8e35bf82dfc978a4da90134658",
+    "merge_commit": "854c1042e25f6b51e9ef828c271af5cca973b855",
+    "workflow_run_id": 37006626366,
+    "workflow_job_id": 110836313234,
+    "conclusion": "success",
+    "exact_input_blobs_verified": 14,
+    "exact_calibration_recomputed": true,
+    "exact_residual_recomputed": true
+  },
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "CURRENT_EVIDENCE_LEDGER_CONTROLS_ATOMIC_COUNTS__SCOPE_COMPLETE_STRONGER_WITNESS_DELETES_ONLY_PROVED_WORK__NO_CASE_EXECUTION_WHILE_AUTHORIZED_ACTION_SET_EMPTY"
+}
