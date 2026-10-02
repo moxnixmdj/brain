@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_OF_12_TERMINAL_ROUTES_FROZEN_ADMISSIBLE__DELEGATION_MATCHED_PROTOCOL_EXTERNAL_BLOCKED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
-    "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
+    "registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
     "information_boundary_audit": "canonical/governance/CONTRACT_NATIVE_INFORMATION_BOUNDARY_AUDIT_V1.json",
     "scope_gate_v2": "canonical/runtime/scope_equivalent_proof_gate_v2.py",
     "active_contract_gap": "canonical/governance/ACTIVE_TERMINAL_CONTRACT_COVERAGE_GAP_V1.json",
@@ -181,10 +181,14 @@
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
       "portfolio": "T2",
-      "proof_state": "CURRENT_CANDIDATE_ORACLE_CHANGED__EXACT_BLOB_REVALIDATION_REQUIRED__ZERO_TERMINAL_AUTHORITY",
+      "proof_state": "MATCHED_STATISTICAL_TERMINAL_PROTOCOL_INTERNAL_FREEZE_PENDING__EXACT_OPUS_5_5_COMPARATOR_EXTERNAL_BLOCKED",
       "route_requirement": "ARBITRARY_FINITE_EXPLICIT_TASK_GRAPH_PARTITION_ASSIGNMENT_RESOURCE_EVIDENCE_FANIN_BASELINE_AND_RECEIPT_DRIVEN_REPLAN",
       "blockers": [
-        "CURRENT_DELEGATION_CANDIDATE_ORACLE_EXACT_BLOB_REVALIDATION_PENDING"
+        "FREEZE_CURRENT_DELEGATION_CANDIDATE_AND_DEPENDENCY_BLOB_PACKAGE",
+        "FREEZE_CONTAMINATION_SAFE_DELEGATION_CHALLENGE_SOURCE_POOL_AND_SCORER",
+        "FREEZE_MATCHED_HARNESS_INFORMATION_TOOL_RESOURCE_AND_AUTHORITY_SYMMETRY",
+        "EXACT_OPUS_5_5_CASE_LEVEL_COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
+        "FREEZE_POST_FREEZE_SELECTOR_RULE__DO_NOT_SELECT_CHALLENGES_BEFORE_COMPARATOR_ROUTE_EXISTS"
       ],
       "route": "canonical/runtime/delegation_whole_scope_proof_v2.py",
       "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
@@ -205,9 +209,9 @@
       "terminal_population_binding_test": "canonical/tests/test_delegation_terminal_population_binding_v1.py",
       "population_binding_verification": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "population_binding_workflow_run_id": 36962042528,
-      "terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_MODE_V1.json",
-      "terminal_acceptance_mode": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_MODE_V1.json",
-      "terminal_acceptance_mode_verification": "canonical/verification/DELEGATION_TERMINAL_ACCEPTANCE_MODE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "terminal_acceptance_binding": "canonical/governance/DELEGATION_MATCHED_TERMINAL_ACCEPTANCE_V2.json",
+      "terminal_acceptance_mode": "canonical/governance/DELEGATION_MATCHED_TERMINAL_ACCEPTANCE_V2.json",
+      "terminal_acceptance_mode_verification": "PENDING_ROUTE_SPECIFIC_MATCHED_PROTOCOL_FREEZE_AND_EXACT_COMPARATOR",
       "prewave_admissible": false,
       "anti_circularity_reconciliation": "canonical/governance/DELEGATION_PREWAVE_ADMISSION_ANTI_CIRCULARITY_RECONCILIATION_V1.json",
       "terminal_result_status": "NOT_EXECUTED"
