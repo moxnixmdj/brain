@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2",
   "date": "2026-10-02",
-  "status": "FROZEN_SELECTION_AND_INFORMATION_BOUNDARY_PROTOCOL__12_OF_12_ACTIVE_CONTRACTS__10_OF_12_ROUTE_BINDINGS_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_SELECTION_AND_INFORMATION_BOUNDARY_PROTOCOL__12_OF_12_ACTIVE_CONTRACTS__12_OF_12_ROUTE_BINDINGS_ADMISSIBLE__ZERO_TERMINAL_RESULTS__PREQUALIFICATION_REDUCER_PENDING",
   "supersedes": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V1.json",
   "supersession_reason": "V1_FROZE_ONLY_10_OF_12_ACTIVE_CONTRACTS_AND_PREDATED_INFORMATION_SAFE_SCOPE_GATE_V2",
   "authority": [
@@ -64,9 +64,6 @@
   },
   "execution_authority": false,
   "remaining_before_authority": [
-    "FREEZE_INFORMATION_SAFE_ROUTE_AND_ORACLE_BINDING_FOR_ALL_12_CONTRACTS",
-    "FREEZE_ROUTE_SPECIFIC_POPULATION_AND_TRUTHFUL_REGISTERED_ACCEPTANCE_RULE_FOR_ALL_12_CONTRACTS",
-    "USE_SCOPE_EQUIVALENCE_ONLY_FOR_FORMAL_OR_FINITE_ABSOLUTE_ROUTES__USE_MATCHED_PROTOCOL_FOR_OPEN_DOMAIN_ROUTES",
     "RUN_CANONICAL_PREQUALIFICATION_REDUCER_WITH_ZERO_FAILED_PREDICATES"
   ],
   "fresh_terminal_evidence_consumed": 0,
@@ -74,7 +71,7 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "admissible_frozen_route_count": 10,
+  "admissible_frozen_route_count": 12,
   "frozen_route_bindings": {
     "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001": {
       "route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
@@ -121,7 +118,7 @@
       "status": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS"
     },
     "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001": {
-      "route": "canonical/governance/CAD_T0_POST_REFREEZE_BINDING_V2.json",
+      "route": "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json",
       "independent_verification": "canonical/verification/CAD_T0_POST_REFREEZE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "proof_mode": "T0_MULTIPLEXED_OPEN_DOMAIN_OBJECTIVE_GEOMETRY",
       "status": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS"
@@ -135,10 +132,22 @@
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001": {
       "route": "canonical/governance/RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "independent_verification": "canonical/verification/RESEARCH_T3_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "proof_mode": "PUBLIC_FIXED_BAR_MULTIPLEX_PLUS_EXPLICIT_UNCOVERED_SCOPE__DIRECT_OBJECTIVE_RESEARCH_CONTROL_GATE",
+      "proof_mode": "PUBLIC_FIXED_BAR_MULTIPLEX_PLUS_EXPLICIT_UNCOVERED_SCOPE",
       "status": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS",
       "hle_score_equivalence_claimed": false,
       "weaker_hle_prewave_dependency_deleted": true
+    },
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001": {
+      "route": "canonical/governance/BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "independent_verification": "canonical/verification/BROWSER_T2_OBJECTIVE_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "proof_mode": "T2_MULTIPLEXED_PUBLIC_BAR_PLUS_DIRECT_OBJECTIVE_BROWSER_GATE",
+      "status": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS"
+    },
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": {
+      "route": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "independent_verification": "canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "proof_mode": "T2_T3_MULTIPLEXED_DIRECT_OBJECTIVE_TOOL_DISCOVERY_GATE",
+      "status": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_RESULTS"
     }
   },
   "invalidated_route_bindings": {
@@ -153,6 +162,7 @@
     }
   },
   "admissible_frozen_routes": [
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
     "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
     "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
     "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
@@ -162,6 +172,7 @@
     "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
     "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
     "TASK_TO_DELEGATION_GRAPH_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
     "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
   ],
   "cad_proof_mode_reconciliation": {
@@ -177,10 +188,10 @@
   },
   "derived_state_reconciliation": {
     "authority": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
-    "authority_basis_blob_sha": "615fb2d82906fd4f3d2b62afcee133d16a8fc9a7",
+    "authority_basis_blob_sha": "411f054140f25c4b0c71dc7287c48893ff550082",
     "rule": "ADMISSIBLE_ROUTE_REGISTRY_AND_COUNT_ARE_DERIVED_FROM_CURRENT_ACTIVE_BASIS__RECONCILIATION_GRANTS_ZERO_PROMOTION_OR_CAPABILITY_CREDIT",
-    "reconciled_admissible_route_count": 10,
-    "reconciled_open_route_count": 2,
+    "reconciled_admissible_route_count": 12,
+    "reconciled_open_route_count": 0,
     "date": "2026-10-02"
   }
 }
