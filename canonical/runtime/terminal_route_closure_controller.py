@@ -10,9 +10,7 @@ Scheduling law:
 3. Already independently preflighted routes precede routes that still need a
    new whole-scope mechanism.
 4. Shared multi-portfolio contracts get higher leverage.
-5. Open-domain matched protocols are distinct from finite scope-equivalence proofs.
-6. Exact-comparator gaps with no authorized zero-cost route are marked external-blocked and must not consume clean terminal cases.
-7. Unknown state fails closed and is scheduled for reconciliation, not promotion.
+5. Unknown state fails closed and is scheduled for reconciliation, not promotion.
 """
 from __future__ import annotations
 
@@ -22,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 BASIS = "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
+DEADLOCK_AUDIT = "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json"
 
 _BINDING_TOKENS = (
     "POST_FREEZE",
@@ -42,17 +41,6 @@ _SCOPE_EXPANSION_TOKENS = (
     "NATIVE_SOLID_MATERIALIZATION",
     "BOUNDED_SYNTHETIC_ENVELOPE",
 )
-_OPEN_DOMAIN_PROTOCOL_TOKENS = (
-    "FREEZE_MATCHED_HARNESS",
-    "FREEZE_BRAIN_OWNED",
-    "FREEZE_POST_FREEZE_SELECTOR",
-    "CHALLENGE_SOURCE_POOL_AND_SCORER",
-    "OPEN_DOMAIN_MATCHED_TERMINAL_PROTOCOL",
-)
-_EXTERNAL_BLOCK_TOKENS = (
-    "COMPARATOR_UNAVAILABLE_AT_ZERO_INCREMENTAL_SPEND",
-    "EXTERNAL_BLOCKED",
-)
 
 
 def _load(root: Path) -> dict[str, Any]:
@@ -62,6 +50,25 @@ def _load(root: Path) -> dict[str, Any]:
     return data
 
 
+def _open_domain_contracts(root: Path) -> set[str]:
+    """Return contracts canonically classified as open-domain matched routes.
+
+    If the deadlock audit is absent or malformed, fail closed by returning an empty
+    set; the scheduler will retain the older conservative scope-expansion behavior.
+    """
+    path = root / DEADLOCK_AUDIT
+    if not path.is_file():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    rows = data.get("affected_contract_classes")
+    if not isinstance(rows, list) or any(not isinstance(x, str) or not x for x in rows):
+        return set()
+    return set(rows)
+
+
 def _portfolio_count(value: Any) -> int:
     if not isinstance(value, str) or not value:
         return 0
@@ -69,10 +76,6 @@ def _portfolio_count(value: Any) -> int:
 
 
 def _classify(blocker: str) -> str:
-    if any(tok in blocker for tok in _EXTERNAL_BLOCK_TOKENS):
-        return "EXTERNAL_BLOCK"
-    if any(tok in blocker for tok in _OPEN_DOMAIN_PROTOCOL_TOKENS):
-        return "OPEN_DOMAIN_PROTOCOL"
     if any(tok in blocker for tok in _BINDING_TOKENS):
         return "BINDING"
     if any(tok in blocker for tok in _SCOPE_GATE_TOKENS):
@@ -84,6 +87,7 @@ def _classify(blocker: str) -> str:
 
 def evaluate(root: Path) -> dict[str, Any]:
     basis = _load(root)
+    open_domain = _open_domain_contracts(root)
     rows = basis.get("contracts")
     if not isinstance(rows, list):
         return {
@@ -134,9 +138,8 @@ def evaluate(root: Path) -> dict[str, Any]:
         binding = sum(x == "BINDING" for x in classes)
         gate = sum(x == "SCOPE_GATE" for x in classes)
         expansion = sum(x == "SCOPE_EXPANSION" for x in classes)
-        protocol = sum(x == "OPEN_DOMAIN_PROTOCOL" for x in classes)
-        external = sum(x == "EXTERNAL_BLOCK" for x in classes)
         other = sum(x == "OTHER" for x in classes)
+        is_open_domain = bid in open_domain
         preflight = any(
             token in state
             for token in (
@@ -148,13 +151,15 @@ def evaluate(root: Path) -> dict[str, Any]:
         )
         leverage = _portfolio_count(row.get("portfolio"))
 
-        # Lower score closes sooner. Expansion and unknown work are expensive.
+        # Lower score closes sooner. For canonically open-domain matched routes,
+        # synthetic whole-scope expansion is not a valid prequalification target.
+        # Route those to matched-protocol freeze/comparator resolution instead of
+        # rewarding workers for generating ever-larger synthetic populations.
+        effective_expansion = 0 if is_open_domain else expansion
         score = (
-            external * 1000
-            + expansion * 100
+            effective_expansion * 100
             + other * 50
             + gate * 10
-            + protocol * 4
             + binding
             - min(leverage, 4) * 3
             - (8 if preflight else 0)
@@ -168,24 +173,19 @@ def evaluate(root: Path) -> dict[str, Any]:
                 "binding": binding,
                 "scope_gate": gate,
                 "scope_expansion": expansion,
-                "open_domain_protocol": protocol,
-                "external_block": external,
                 "other": other,
             },
             "independent_or_information_safe_preflight_present": preflight,
             "portfolio_leverage": leverage,
+            "proof_route_class": "OPEN_DOMAIN_MATCHED" if is_open_domain else "FINITE_OR_FORMAL",
             "priority_score": score,
             "next_action_class": (
-                "EXTERNAL_BLOCKED__FREEZE_INTERNAL_PROTOCOL_FIELDS_ONLY__DO_NOT_SPEND_CLEAN_CASES"
-                if external
+                "FREEZE_MATCHED_PROTOCOL_AND_RESOLVE_COMPARATOR_ACCESS"
+                if is_open_domain
                 else (
-                    "FREEZE_OPEN_DOMAIN_MATCHED_PROTOCOL"
-                    if protocol and expansion == 0 and other == 0
-                    else (
-                        "FREEZE_BINDING_AND_ACCEPTANCE"
-                        if expansion == 0 and other == 0 and protocol == 0 and (binding or gate)
-                        else "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
-                    )
+                    "FREEZE_BINDING_AND_ACCEPTANCE"
+                    if expansion == 0 and other == 0 and (binding or gate)
+                    else "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
                 )
             ),
         })
@@ -213,6 +213,7 @@ def evaluate(root: Path) -> dict[str, Any]:
         "errors": sorted(set(errors)),
         "rule": (
             "SCHEDULER_ONLY__NO_CAPABILITY_CREDIT__NO_TERMINAL_EXECUTION_AUTHORITY__"
+            "OPEN_DOMAIN_MATCHED_ROUTES_MUST_NOT_BE_PROMOTED_BY_FINITE_SYNTHETIC_SCOPE_SUPERSET__"
             "ACTUAL_PROMOTION_REQUIRES_ACTIVE_BASIS_AND_PREQUALIFICATION_REDUCERS"
         ),
     }
