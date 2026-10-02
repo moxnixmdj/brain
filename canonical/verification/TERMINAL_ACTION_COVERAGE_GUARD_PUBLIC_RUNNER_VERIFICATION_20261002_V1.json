@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ACTION_COVERAGE_GUARD_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__38_TOTAL__9_PROVED__29_UNPROVED__29_OF_29_ACTION_COVERAGE__ZERO_CREDIT",
+  "registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+  "evidence": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+  "hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+  "exact_brain_blobs": {
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
+    "canonical/runtime/terminal_action_coverage_guard_v1.py": "554ab5b928a5f6cf050e43969dae549d887b0845",
+    "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json": "765b101d37d258a23bf9c412f9c6d043dc65e728"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 880,
+    "pull_request_head": "481e82164c3c40bbda608a91aea6c08a67c7b56d",
+    "merge_commit": "93a2ae6494ddba7ade68f09c3a4f8673cfabace2",
+    "workflow_run_id": 37007111747,
+    "workflow_job_id": 110837871150,
+    "conclusion": "success"
+  },
+  "result": {
+    "predicate_count": 38,
+    "proved_predicate_count": 9,
+    "unresolved_predicate_count": 29,
+    "represented_unresolved_predicate_count": 29,
+    "uncovered_unresolved_predicates": []
+  },
+  "proved_predicates_are_not_live_targets": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
