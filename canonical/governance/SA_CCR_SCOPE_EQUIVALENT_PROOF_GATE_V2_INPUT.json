@@ -1,0 +1,85 @@
+{
+  "source_private_or_nonexecutable_surface": "FROZEN_ACTIVE_SA_CCR_CREDIT_CONTRACT",
+  "candidate_proof_route": "SA_CCR_ACTIVE_CONTRACT_INFORMATION_SAFE_PROOF_V1",
+  "required_behavior_ids": [
+    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001"
+  ],
+  "candidate_behavior_ids": [
+    "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001"
+  ],
+  "required_interaction_ids": [
+    "EFFECTIVE_MATURITY_TO_SUPERVISORY_DURATION",
+    "NOTIONAL_AND_DURATION_TO_ADJUSTED_NOTIONAL",
+    "DIRECTION_TO_DELTA",
+    "MARGIN_STATE_AND_MPOR_TO_MATURITY_FACTOR",
+    "ADJUSTED_NOTIONAL_DELTA_MATURITY_TO_EFFECTIVE_NOTIONAL",
+    "RATING_OR_CLASS_TO_SUPERVISORY_FACTOR_AND_CORRELATION",
+    "REFERENCE_ENTITY_TO_EFFECTIVE_NOTIONAL_AGGREGATION",
+    "AGGREGATED_REFERENCE_ENTITY_EXPOSURES_TO_CREDIT_ADDON"
+  ],
+  "candidate_interaction_ids": [
+    "EFFECTIVE_MATURITY_TO_SUPERVISORY_DURATION",
+    "NOTIONAL_AND_DURATION_TO_ADJUSTED_NOTIONAL",
+    "DIRECTION_TO_DELTA",
+    "MARGIN_STATE_AND_MPOR_TO_MATURITY_FACTOR",
+    "ADJUSTED_NOTIONAL_DELTA_MATURITY_TO_EFFECTIVE_NOTIONAL",
+    "RATING_OR_CLASS_TO_SUPERVISORY_FACTOR_AND_CORRELATION",
+    "REFERENCE_ENTITY_TO_EFFECTIVE_NOTIONAL_AGGREGATION",
+    "AGGREGATED_REFERENCE_ENTITY_EXPOSURES_TO_CREDIT_ADDON"
+  ],
+  "proof_mode": "ABSOLUTE_BEHAVIORAL_PROTOCOL",
+  "population_relation": "CANDIDATE_SUPERSET_PROVEN",
+  "environment_relation": "EXACT",
+  "oracle_relation": "CANDIDATE_STRONGER_PROVEN",
+  "relation_receipts": {
+    "population": "canonical/governance/SA_CCR_SCOPE_EQUIVALENCE_RELATION_V1.json",
+    "oracle": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  },
+  "candidate_information_relation": "EXACT_CANDIDATE_VISIBLE_INFORMATION",
+  "required_inference_ids": [
+    "SUPERVISORY_DURATION",
+    "ADJUSTED_NOTIONAL",
+    "DELTA",
+    "MATURITY_FACTOR",
+    "EFFECTIVE_NOTIONAL",
+    "SUPERVISORY_FACTOR",
+    "CORRELATION",
+    "REFERENCE_ENTITY_AGGREGATION",
+    "CREDIT_ADDON"
+  ],
+  "candidate_visible_derived_or_oracle_ids": [],
+  "hidden_oracle_ids": [
+    "SUPERVISORY_DURATION",
+    "ADJUSTED_NOTIONAL",
+    "DELTA",
+    "MATURITY_FACTOR",
+    "EFFECTIVE_NOTIONAL",
+    "SUPERVISORY_FACTOR",
+    "CORRELATION",
+    "REFERENCE_ENTITY_AGGREGATION",
+    "CREDIT_ADDON"
+  ],
+  "anti_shortcut_mutation_ids": [
+    "WRONG_SUPERVISORY_DURATION",
+    "WRONG_ADJUSTED_NOTIONAL",
+    "WRONG_DELTA",
+    "WRONG_MATURITY_FACTOR",
+    "WRONG_EFFECTIVE_NOTIONAL",
+    "WRONG_SUPERVISORY_FACTOR",
+    "WRONG_CORRELATION",
+    "WRONG_REFERENCE_ENTITY_AGGREGATION",
+    "WRONG_FINAL_CREDIT_ADDON",
+    "MISSING_TRADE_LINEAGE"
+  ],
+  "unresolved_required_dimensions": [],
+  "required_subjective_quality_dimensions": [],
+  "candidate_subjective_quality_dimensions": [],
+  "zero_incremental_spend": true,
+  "independent_acceptance": true,
+  "contamination_safe": true,
+  "candidate_route_owned_or_noncapability_jit_only": true,
+  "candidate_does_not_receive_hidden_oracle_payload": true,
+  "candidate_does_not_receive_reference_solution": true,
+  "opaque_target_capability_provider": false,
+  "target_weakened": false
+}
