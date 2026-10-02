@@ -1,0 +1,42 @@
+name: Verify terminal authorization integrity
+
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/terminal_authority_integrity_guard.py
+      - canonical/tests/test_terminal_authority_integrity_guard.py
+      - canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+      - canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json
+      - canonical/verification/TERMINAL_PREQUALIFICATION_AUTHORIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - .github/workflows/verify-terminal-authorization-integrity.yml
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+      - canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json
+      - canonical/verification/TERMINAL_PREQUALIFICATION_AUTHORIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json
+      - canonical/runtime/terminal_authority_integrity_guard.py
+      - canonical/tests/test_terminal_authority_integrity_guard.py
+      - .github/workflows/verify-terminal-authorization-integrity.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_terminal_authority_integrity_guard
+      - run: python canonical/runtime/terminal_authority_integrity_guard.py
