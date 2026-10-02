@@ -102,15 +102,15 @@ class TerminalPrequalificationReducerTests(unittest.TestCase):
         self.assertTrue(any(x.startswith("TERMINAL_ROUTE_NOT_ADMISSIBLE:") for x in out["failed_predicates"]))
         self.assertIn("TERMINAL_ROUTE_COVERAGE_INCOMPLETE:0/2", out["failed_predicates"])
 
-    def test_basis_execution_authority_required(self):
-        out = self.run_fixture(self.fixture(), basis_execution_authority=False)
-        self.assertFalse(out["pass"])
-        self.assertIn("ACTIVE_TERMINAL_PROOF_BASIS_EXECUTION_AUTHORITY_FALSE", out["failed_predicates"])
-
-    def test_population_protocol_execution_authority_required(self):
-        out = self.run_fixture(self.fixture(), protocol_execution_authority=False)
-        self.assertFalse(out["pass"])
-        self.assertIn("TERMINAL_POPULATION_PROTOCOL_EXECUTION_AUTHORITY_FALSE", out["failed_predicates"])
+    def test_prior_authority_flags_do_not_create_circular_gate(self):
+        out = self.run_fixture(
+            self.fixture(),
+            basis_execution_authority=False,
+            protocol_execution_authority=False,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["execution_authority"])
+        self.assertEqual(out["authorization"], "T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE")
 
     def test_surface_blocker_fails_closed(self):
         out = self.run_fixture(self.fixture({"T1": ["SCORER_OPEN"]}))
