@@ -1,0 +1,27 @@
+name: Verify accepted composition component bridges v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/COMPOSITION_ACCEPTED_COMPONENT_SCOPED_BINDINGS_V1.json"
+      - "canonical/runtime/composition_accepted_component_scoped_binder_v1.py"
+      - "canonical/tests/test_composition_accepted_component_scoped_binder_v1.py"
+      - ".github/workflows/verify-composition-accepted-component-bridges-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run bridge tests
+        run: python -m unittest canonical.tests.test_composition_accepted_component_scoped_binder_v1 -v
+      - name: Run live bridge binder
+        run: python canonical/runtime/composition_accepted_component_scoped_binder_v1.py
