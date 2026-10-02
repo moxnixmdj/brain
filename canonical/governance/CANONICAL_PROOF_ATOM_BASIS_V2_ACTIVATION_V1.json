@@ -41,5 +41,7 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "runtime_git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1",
+  "tests_git_blob_sha": "0684ec41a44484361c95c346c9e0692f5eede813"
 }
