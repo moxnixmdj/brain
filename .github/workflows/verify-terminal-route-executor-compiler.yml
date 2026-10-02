@@ -1,0 +1,50 @@
+name: Verify terminal route executor compiler
+
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/terminal_route_executor_compiler.py
+      - canonical/tests/test_terminal_route_executor_compiler.py
+      - canonical/governance/TERMINAL_ROUTE_EXECUTOR_COMPILER_V1.json
+      - canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json
+      - canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/governance/TERMINAL_WAVE_EXECUTION_AUTHORITY_V1.json
+      - .github/workflows/verify-terminal-route-executor-compiler.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Unit tests
+        run: python -m unittest -v canonical.tests.test_terminal_route_executor_compiler
+      - name: Compile live route plan without consuming terminal evidence
+        run: |
+          python canonical/runtime/terminal_route_executor_compiler.py . --output /tmp/terminal-route-plan.json || true
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/terminal-route-plan.json'))
+          assert p['terminal_results_observed']==0
+          assert p['fresh_terminal_evidence_consumed']==0
+          assert p['active_contract_count']==12
+          assert len(p['contracts'])==12
+          assert p['unresolved_contracts']==[], p
+          print(json.dumps({
+            'status':p['status'],
+            'structural_ready':p['structural_ready'],
+            'launch_ready':p['launch_ready'],
+            'direct_population_count':p['direct_population_count'],
+            'multiplex_instrumentation_count':p['multiplex_instrumentation_count'],
+            'unbound_executor_contracts':p['unbound_executor_contracts'],
+          },sort_keys=True))
+          PY
