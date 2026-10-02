@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__ROUTE_IMPOSSIBLE__ZERO_CASES",
+  "manifest": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+  "compiler": "canonical/runtime/attainability_cut_compiler_v1.py",
+  "result": {
+    "lower_bound_successes": 0,
+    "upper_bound_successes": 180,
+    "required_successes": 220,
+    "remaining_creditable_task_count": 36,
+    "attainability_state": "IMPOSSIBLE",
+    "reality_execution_authorized": false,
+    "inequality": "180_LT_220"
+  },
+  "conclusion": "CURRENT_THRESHOLD_ROUTE_CANNOT_REACH_THE_FROZEN_BAR_UNDER_CURRENT_NO_REPLAY_AND_CREDITABILITY_RULES__PENDING_BATCH_MUST_NOT_EXECUTE",
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 854,
+    "merge_commit": "adfbb513ad9c9b6fd79de12ba3837c73d4a2565f",
+    "workflow_run_id": 36998571400,
+    "workflow_job_id": 110810813480,
+    "conclusion": "success",
+    "exact_attainability_replay": true,
+    "exact_residual_replay": true
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}

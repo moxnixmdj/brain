@@ -1,37 +1,25 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__RANK26_STAGE_C_BATCH5_LEASE_ACTIVE__EXECUTION_FRONTIER__NO_CREDIT",
+  "status": "ACTIVE__ATTAINABILITY_INDEPENDENT_FAIL_CLOSED__PENDING_STAGE_C_REVOKED__NO_CREDIT",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
-      "id": "EXECUTE_NEXT_CLEAN_TB4_PRECOMMITTED_TRIAL_BATCH",
-      "action_class": "REALITY_QUERY",
-      "effect": "ADVANCES",
+      "id": "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
       "critical_path": true,
-      "new_reality_units": 5,
-      "consumes_acceptance_case": true,
+      "new_reality_units": 0,
       "target_predicates": [
         "CODING_TB4_GE_66_4"
       ],
       "preconditions": [
         {
-          "id": "CURRENT_CLEAN_SAMPLE_STAGE_C_LEASE_ACTIVE",
-          "satisfied": true
-        },
-        {
-          "id": "CURRENT_CARRIER_RUNTIME_REVALIDATED",
-          "satisfied": true
-        },
-        {
-          "id": "TB4_CONSERVATIVE_THRESHOLD_CUT_INDEPENDENT_PASS",
+          "id": "TB4_ATTAINABILITY_INDEPENDENT_PASS__UPPER_180_LT_220",
           "satisfied": true
         }
       ],
-      "notes": "Rank26 vllm-deepseek-streaming: execute exactly five precommitted result-blind Harbor replicas under canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json. Same frozen Brain route, zero retries, no cross-replica tuning; all five slots consumed regardless of result.",
-      "canonical_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json",
-      "current_task": "vllm-deepseek-streaming",
-      "current_rank": 26
+      "notes": "Current score route is mathematically impossible. Search only admissible route, carrier, protocol-equivalence, or preexisting creditability changes that can raise the machine-verified upper bound to at least 220 before any benchmark execution."
     },
     {
       "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
@@ -139,9 +127,10 @@
     "date": "2026-10-02",
     "rank24": "CONTAMINATED_POST_STAGE_B__NO_STAGE_C__NO_REPLAY",
     "rank25": "INELIGIBLE_PREEXPOSURE__PRIOR_RUNNER_EXPOSURE",
-    "rank26": "INDEPENDENT_STAGE_B_PASS__STAGE_C_BATCH5_LEASE_ACTIVE__FIVE_RESULT_BLIND_REPLICAS_AUTHORIZED",
+    "rank26": "STAGE_B_PASS__STAGE_C_BATCH_REVOKED_BEFORE_EXECUTION_BY_INDEPENDENT_ATTAINABILITY_CUT",
     "stage_b_receipt": "canonical/capabilities/opus55/VLLM_DEEPSEEK_STREAMING_RANK26_STAGE_B_VERIFICATION_V1.json",
-    "stage_c_batch5_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json"
+    "stage_c_batch5_lease": "canonical/governance/LEASE_VLLM_DEEPSEEK_STREAMING_TB4_STAGE_C_BATCH5_20261002_V1.json",
+    "attainability_verification": "verification-capsule-runner PR854__RUN36998571400__JOB110810813480__PASS"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -152,5 +141,12 @@
     "execution_unit": "FIVE_PRECOMMITTED_RESULT_BLIND_REPLICAS_PER_CLEAN_RESOURCE_COMPATIBLE_TASK",
     "pass_lock": "SUCCESS_COUNT_GE_220",
     "fail_lock": "SUCCESS_COUNT_PLUS_REMAINING_EXECUTABLE_SLOTS_LT_220"
+  },
+  "attainability_cut": {
+    "route": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json",
+    "state": "INDEPENDENT_PASS__IMPOSSIBLE",
+    "maximum_attainable_successes": 180,
+    "required_successes": 220,
+    "reality_execution_authorized": false
   }
 }
