@@ -1,6 +1,18 @@
 name: Verify global terminal universe
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/global_terminal_universe.py"
+      - "canonical/tests/test_global_terminal_universe.py"
+      - "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json"
+      - "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json"
+      - "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json"
+      - "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
+      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+      - "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json"
+      - ".github/workflows/verify-global-terminal-universe.yml"
   push:
     paths:
       - "canonical/runtime/global_terminal_universe.py"
