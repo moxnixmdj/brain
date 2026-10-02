@@ -1013,6 +1013,39 @@ def active_target_mirror_errors(hierarchy,target):
         errors.append("FRONTIER_TARGET_NEXT_ACTION_MISMATCH")
     return errors
 
+
+def scoreboard_mirror_errors(hierarchy,scoreboard):
+    """Every scoreboard mirror of the authority: top-level and nested alike.
+
+    reconcile_frontier_mirrors.py has always maintained the nested
+    active_frontier_accounting copies of residual_gap and next_required_action, but
+    nothing compared them, so they could drift silently beside top-level mirrors that
+    agreed with the authority -- and were found drifted on main, both still naming a
+    superseded frontier. Maintaining a mirror nobody checks is how the target record's
+    residual_gap stayed stale for 565 commits; the two nested fields are the same
+    blind spot on a different surface, closed here rather than left documented.
+
+    A missing field is compared as the empty string, so absence disagrees with a
+    populated authority and fails closed instead of reading as a match.
+    """
+    errors=[]
+    accounting=scoreboard.get("active_frontier_accounting") or {}
+    expected_target=str(hierarchy.get("active_capability_target") or "")
+    expected_blocker=str(hierarchy.get("current_parent_blocker") or "")
+    expected_next=str(hierarchy.get("next_required_action_class") or "")
+    expected_event=str(hierarchy.get("next_progress_event_target") or "")
+    if str(accounting.get("parent_frontier_capability") or "")!=expected_target:
+        errors.append("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
+    if str(scoreboard.get("next_required_action") or "")!=expected_next:
+        errors.append("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
+    if str(scoreboard.get("next_progress_event_target") or "")!=expected_event:
+        errors.append("SCOREBOARD_HIERARCHY_NEXT_PROGRESS_EVENT_MISMATCH")
+    if str(accounting.get("residual_gap") or "")!=expected_blocker:
+        errors.append("SCOREBOARD_HIERARCHY_NESTED_RESIDUAL_GAP_MISMATCH")
+    if str(accounting.get("next_required_action") or "")!=expected_next:
+        errors.append("SCOREBOARD_HIERARCHY_NESTED_NEXT_ACTION_MISMATCH")
+    return errors
+
 # A bare predicate name tells an agent that the tree is wrong but not how to make
 # it right, which is how a self-repairable drift becomes a deadlock: twenty
 # consecutive guard failures across many branches were all mirror or control-path
@@ -1069,13 +1102,11 @@ def main():
         fail("QUEUE_HIERARCHY_CRITICAL_BLOCKER_MISMATCH")
     if str(immediate.get("next_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("QUEUE_HIERARCHY_NEXT_ACTION_MISMATCH")
-    accounting=scoreboard.get("active_frontier_accounting") or {}
-    if str(accounting.get("parent_frontier_capability") or "")!=str(hierarchy.get("active_capability_target") or ""):
-        fail("SCOREBOARD_HIERARCHY_ACTIVE_CAPABILITY_TARGET_MISMATCH")
-    if str(scoreboard.get("next_required_action") or "")!=str(hierarchy.get("next_required_action_class") or ""):
-        fail("SCOREBOARD_HIERARCHY_NEXT_ACTION_MISMATCH")
-    if str(scoreboard.get("next_progress_event_target") or "")!=str(hierarchy.get("next_progress_event_target") or ""):
-        fail("SCOREBOARD_HIERARCHY_NEXT_PROGRESS_EVENT_MISMATCH")
+    # Extracted into scoreboard_mirror_errors so the nested mirrors are compared
+    # beside the top-level ones and testable in isolation; predicate names and their
+    # order are unchanged, and the two nested comparisons are new.
+    for error in scoreboard_mirror_errors(hierarchy,scoreboard):
+        fail(error)
 
     target_id=str(hierarchy.get("active_capability_target") or "").strip()
     target_path="canonical/capabilities/frontier/"+target_id+".json" if target_id else ""
