@@ -59,7 +59,12 @@
           "id": "TYPED_WITNESS_INDEX_OR_DIRECT_OBJECTIVE_GATE_INPUT_CHANGED_SINCE_LAST_SATURATION",
           "satisfied": true,
           "evidence": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
-          "reason": "FIVE_CURRENT_OBJECTIVE_BINDING_BLOBS_INDEPENDENTLY_REVALIDATED_AFTER_SATURATION"
+          "reason": "FIVE_CURRENT_OBJECTIVE_BINDING_BLOBS_INDEPENDENTLY_REVALIDATED_AFTER_SATURATION",
+          "derived_evidence": {
+            "path": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+            "field": "status",
+            "equals": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_CURRENT_OBJECTIVE_BINDINGS_EXACT_BYTES__PREWAVE_ONLY__ZERO_TERMINAL_CREDIT"
+          }
         }
       ],
       "notes": "Resume exactly once from the changed direct-objective gate evidence. Recompile the admissible witness frontier against the five independently revalidated current objective bindings; do not grant acceptance credit from prewave evidence alone. Terminal evidence remains required for any direct-objective replacement witness.",
