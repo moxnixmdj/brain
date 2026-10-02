@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PRIVATE_SURFACE_DOMINANCE_VERDICT_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED__FOUR_BEHAVIORAL_OBLIGATIONS_STILL_UNCOVERED__ONE_PRIVATE_SURFACE_REDUNDANT",
+  "input": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_INPUT_V1.json",
+  "compiler": "canonical/runtime/proof_route_dominance.py",
+  "compiler_status": "FAIL_CLOSED_UNCOVERED_OBLIGATIONS",
+  "global_uncovered_obligations": [
+    "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+  ],
+  "admissible_routes": [
+    "VERIFIED_ACCEPTANCE_COMPILER_DIRECT",
+    "VERIFIED_M3_CONSENSUS_DOM_GROUNDING",
+    "VERIFIED_M4_RESEARCH_CONTROL",
+    "VERIFIED_NATIVE_ARTIFACT_TRANSACTIONS",
+    "VERIFIED_TOOL_SELECTION_PRIMITIVES"
+  ],
+  "blocked_route_verdicts": [
+    {
+      "route_id": "BLOCKED_AA_BRIEFCASE_V1_1",
+      "redundant": false,
+      "uncovered_obligations": [
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+      ]
+    },
+    {
+      "route_id": "BLOCKED_CURSORBENCH_4_0",
+      "redundant": false,
+      "uncovered_obligations": [
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ]
+    },
+    {
+      "route_id": "BLOCKED_FINANCE_AGENT_V2_PRIVATE",
+      "redundant": false,
+      "uncovered_obligations": [
+        "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001"
+      ]
+    },
+    {
+      "route_id": "BLOCKED_FRONTIERCODE_1_1",
+      "redundant": false,
+      "uncovered_obligations": [
+        "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+        "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001"
+      ]
+    },
+    {
+      "route_id": "BLOCKED_MYSTERYMECHANISM",
+      "redundant": true,
+      "uncovered_obligations": []
+    }
+  ],
+  "conclusion": {
+    "private_surface_dependency_deleted": [
+      "Vals MysteryMechanism"
+    ],
+    "private_surface_dependencies_still_blocking": [
+      "AA-Briefcase v1.1",
+      "CursorBench 4.0",
+      "Finance Agent v2 heldout official result",
+      "FrontierCode v1.1 Main"
+    ],
+    "rule": "DO_NOT_DELETE_A_BLOCKED_SURFACE_UNLESS_THE_COMPILER_RETURNS_REDUNDANT_TRUE_FROM_FROZEN_SCOPE_AND_ORACLE_INPUTS"
+  },
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
