@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "V7_INTERNALIZATION_WITH_WHITE_BOX_HARVEST_ACTIVE__OPAQUE_MODEL_ROUTES_REMAIN_SPECIMENS",
-  "evaluated_utc": "2026-09-30",
+  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__2_VERIFIED_OWNED__17_OPUS55_PROTOCOL_RESULTS_OPEN",
+  "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
     "incremental_spend_usd": 0,
@@ -60,7 +60,11 @@
         "reward": 1,
         "workflow_run_id": 36803852769,
         "evidence": "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
-      }
+      },
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -89,7 +93,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass."
+      "campaign_next_action": "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "PROFESSIONAL_KNOWLEDGE_WORK",
@@ -122,7 +130,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Reuse Stirrup plus Brain-owned XLSX/PPTX and candidate native DOCX/PDF mechanisms, then run the already-required contamination-safe cross-artifact falsification."
+      "campaign_next_action": "Reuse Stirrup plus Brain-owned XLSX/PPTX and candidate native DOCX/PDF mechanisms, then run the already-required contamination-safe cross-artifact falsification.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "BUSINESS_WORKFLOW_AUTOMATION",
@@ -152,7 +164,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Reuse browser/tool execution mechanisms only where they transfer to multi-app workflows; verify on clean automation tasks."
+      "campaign_next_action": "Reuse browser/tool execution mechanisms only where they transfer to multi-app workflows; verify on clean automation tasks.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
@@ -176,7 +192,11 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Test transfer of the research agent's planning/evidence loop across fresh multidisciplinary tasks; harvest learned residual only after deterministic components are removed."
+      "campaign_next_action": "Test transfer of the research agent's planning/evidence loop across fresh multidisciplinary tasks; harvest learned residual only after deterministic components are removed.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "AGENTIC_SCIENTIFIC_RESEARCH",
@@ -200,7 +220,11 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Reuse the open research framework first; causally isolate learned long-horizon research residual from the open weights only if framework reuse is insufficient."
+      "campaign_next_action": "Reuse the open research framework first; causally isolate learned long-horizon research residual from the open weights only if framework reuse is insufficient.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
@@ -225,7 +249,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Separate deterministic document parsing/rendering from learned visual understanding; internalize deterministic scope first, then localize any remaining learned residual."
+      "campaign_next_action": "Separate deterministic document parsing/rendering from learned visual understanding; internalize deterministic scope first, then localize any remaining learned residual.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "COMPUTER_AND_BROWSER_USE",
@@ -255,7 +283,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Compare candidate runtimes against Brain-owned tool/coordination machinery, internalize only missing browser-control/state/recovery primitives, then run fresh same-harness evaluation."
+      "campaign_next_action": "Compare candidate runtimes against Brain-owned tool/coordination machinery, internalize only missing browser-control/state/recovery primitives, then run fresh same-harness evaluation.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "FINANCIAL_ANALYSIS",
@@ -269,7 +301,11 @@
         "https://openai.com/index/gpt-6-astra/"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
@@ -298,7 +334,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior."
+      "campaign_next_action": "Test whether persisted corrections plus trajectory diagnosis improve scope discipline on fresh tasks without overfitting or weakening fail-closed behavior.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
@@ -318,7 +358,10 @@
       "internalization_required": false,
       "ownership_note": "Brain owns the deterministic continuity mechanism and reached the objective persistence ceiling for the scoped family behavior. Claim excludes autonomous wake and arbitrary semantic-memory quality.",
       "internalized_configuration": "canonical/capabilities/opus55/OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json",
-      "next_required_action": "Use the owned continuity route by default for cross-session work; treat autonomous wake and semantic-memory quality as separate capabilities."
+      "next_required_action": "Use the owned continuity route by default for cross-session work; treat autonomous wake and semantic-memory quality as separate capabilities.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "PASS",
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER"
     },
     {
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
@@ -344,7 +387,11 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Inspect supervisor/researcher decomposition for cognitive delegation mechanisms not covered by Brain's owned mechanical coordination."
+      "campaign_next_action": "Inspect supervisor/researcher decomposition for cognitive delegation mechanisms not covered by Brain's owned mechanical coordination.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -376,7 +423,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Compose Brain's deterministic fail-closed guard with failure diagnosis and reflection/playbook mechanisms; verify root-cause localization and recovery on fresh failures."
+      "campaign_next_action": "Compose Brain's deterministic fail-closed guard with failure diagnosis and reflection/playbook mechanisms; verify root-cause localization and recovery on fresh failures.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "ARTIFACT_CREATION",
@@ -404,7 +455,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Determine the minimum vendorable GenOffice slice that closes DOCX/PDF and advanced-editing gaps; independently verify round-trip preservation and professional quality before credit."
+      "campaign_next_action": "Determine the minimum vendorable GenOffice slice that closes DOCX/PDF and advanced-editing gaps; independently verify round-trip preservation and professional quality before credit.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
@@ -418,7 +473,11 @@
         "https://openai.com/index/gpt-6-astra/"
       ],
       "internalization_required": true,
-      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit."
+      "ownership_note": "External model/system performance is specimen evidence only. Find/acquire an already-existing reusable mechanism/configuration and internalize it into Brain before ownership credit.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
@@ -445,7 +504,11 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay."
+      "campaign_next_action": "Extract any reusable tool-selection/state-feedback primitives that are not already Brain-owned; preserve the existing tool-learning evidence and avoid replay.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "UNKNOWN_DOMAIN_ADAPTATION",
@@ -467,7 +530,11 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Use fresh unseen-domain tasks to distinguish generic research-loop transfer from learned donor behavior; zero credit until donor-independent."
+      "campaign_next_action": "Use fresh unseen-domain tasks to distinguish generic research-loop transfer from learned donor behavior; zero credit until donor-independent.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "MULTI_CAPABILITY_COMPOSITION",
@@ -500,7 +567,11 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Test whether shared orchestration primitives transfer across browser, research and artifact tasks before treating them as a common composition mechanism."
+      "campaign_next_action": "Test whether shared orchestration primitives transfer across browser, research and artifact tasks before treating them as a common composition mechanism.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
+      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json"
     },
     {
       "family": "EXACT_SYMBOLIC_COMPUTATION",
@@ -511,7 +582,10 @@
       ],
       "evidence": "Already canonically obsolete-verified in Brain.",
       "sources": [],
-      "ownership_basis": "Brain-owned SymPy execution configuration plus independent Wolfram verification; target behavior is not hidden solely inside an opaque frontier model."
+      "ownership_basis": "Brain-owned SymPy execution configuration plus independent Wolfram verification; target behavior is not hidden solely inside an opaque frontier model.",
+      "postwave_terminal_behavioral_status": "PASS",
+      "postwave_opus55_acceptance_status": "PASS",
+      "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER"
     }
   ],
   "summary": {
@@ -582,5 +656,36 @@
     "status": "ACTIVE_FAIL_CLOSED",
     "law": "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
     "rule": "OWNERSHIP_CREDIT_ONLY_FOR_OBSERVABLE_CONTRACTED_BEHAVIOR__LABEL_MATCHING_ZERO_CREDIT"
+  },
+  "postwave_terminal_reconciliation": {
+    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+    "authority_blob_sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62",
+    "behavioral_pass_family_count": 19,
+    "verified_owned_equal_or_better_count": 2,
+    "acceptance_protocol_result_open_count": 17,
+    "verified_owned_equal_or_better_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY"
+    ],
+    "acceptance_protocol_result_open_families": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "ARTIFACT_CREATION",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ],
+    "rule": "ROW_MECHANISM_STATUS_BELOW_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_OWNERSHIP_CREDIT_IS_CONTROLLED_BY_POSTWAVE_ACCEPTANCE_CALIBRATION"
   }
 }
