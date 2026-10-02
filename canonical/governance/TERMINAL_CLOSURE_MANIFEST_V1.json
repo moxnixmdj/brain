@@ -350,11 +350,12 @@
   "verdict_rule": "ACHIEVED_ONLY_IF_REDUCER_RETURNS_TRUE__UNKNOWN_OR_NULL_IS_FAILURE",
   "reducer": "canonical/runtime/terminal_closure_reducer.py",
   "reducer_verification": {
-    "status": "STALE__CURRENT_REDUCER_BLOB_NOT_COVERED_BY_REFERENCED_20261001_RECEIPT",
-    "current_reducer_blob_sha": "2732a577b441e8031ee128629410f792bfe36201",
-    "prior_evidence": "canonical/verification/TERMINAL_CLOSURE_REDUCER_VERIFICATION_20261001_V1.json",
-    "prior_verified_blob_sha": "bc1b6c97a2941197553903e49a7b6ad6d1ec5ab7",
-    "independent_reverification_required_before_terminal_true": true
+    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "evidence": "canonical/verification/TERMINAL_CLOSURE_REDUCER_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+    "evidence_blob_sha": "f6f8653d3222de25fa70f03e809624f72848544a",
+    "brain_blob_sha": "2732a577b441e8031ee128629410f792bfe36201",
+    "runner_workflow_run_id": 36981321762,
+    "exact_source_blob_match": true
   },
   "current_machine_verdict": {
     "achieved": false,
@@ -391,7 +392,6 @@
   "postwave_remaining_exact_gates": [
     "CLOSE_17_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_WITH_SCOPE_EQUIVALENT_ADMISSIBLE_EVIDENCE",
     "REBUILD_FINAL_PROOF_BUNDLE_AFTER_ACCEPTANCE_CALIBRATION_CLOSES",
-    "INDEPENDENTLY_VERIFY_EXACT_CURRENT_TERMINAL_CLOSURE_REDUCER",
     "RUN_FINAL_CLOSURE_REDUCER_AND_INDEPENDENT_FINALITY_VERIFICATION"
   ],
   "final_proof_bundle_candidate": "canonical/governance/TERMINAL_FINAL_PROOF_BUNDLE_CANDIDATE_V1.json",
