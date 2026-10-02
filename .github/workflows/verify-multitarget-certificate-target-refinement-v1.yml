@@ -1,0 +1,19 @@
+name: Verify multitarget certificate target refinement v1
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/MULTITARGET_CERTIFICATE_TARGET_REFINEMENT_CANDIDATE_V1.json"
+      - "canonical/tests/test_multitarget_certificate_target_refinement_v1.py"
+      - ".github/workflows/verify-multitarget-certificate-target-refinement-v1.yml"
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_multitarget_certificate_target_refinement_v1 -v
