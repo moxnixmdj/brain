@@ -8,11 +8,11 @@
     "source_snapshot_sha": "74a3b4ff309225456e49a9b1e8a75295aa0f45f1",
     "receipt": "canonical/verification/OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V7.json",
     "receipt_sha": "74a3b4ff309225456e49a9b1e8a75295aa0f45f1",
-    "proved_predicate_count": 8,
+    "proved_predicate_count": 9,
     "bound_blocker_count": 3,
-    "unresolved_predicate_count": 30,
+    "unresolved_predicate_count": 29,
     "new_reality_units_consumed": 0,
-    "rule": "COMPLETE_FOR_LEDGER_AND_REGISTRY_BOUND_IN_V7__INVALIDATE_ON_AUTHORITY_CHANGE"
+    "rule": "COMPLETE_FOR_CURRENT_LEDGER__DELEGATION_TERMINAL_SUCCESS_DISCHARGED_BY_INDEPENDENT_FULL_PROTOCOL_ABSOLUTE_CEILING_WITNESS__INVALIDATE_ON_AUTHORITY_CHANGE"
   },
   "claims": [
     {
@@ -208,6 +208,29 @@
         {
           "path": "canonical/verification/TERMINAL_CEILING_WITNESS_LIFTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
           "sha": "a1c702c79d2b29bfc9c4d5a238f9c260bc204770"
+        }
+      ]
+    },
+    {
+      "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "state": "PROVED",
+      "proof_kind": "ABSOLUTE_CEILING",
+      "source_path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "source_sha": "cb3b7c4b6c4e1f2a0471c6b6be72c4ca9ebddc80",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "brain_value": 1,
+      "objective_ceiling_value": 1,
+      "basis": "INDEPENDENTLY_VERIFIED_TEMPORAL_TRANSPORT_OF_FULL_FROZEN_132_OF_132_DELEGATION_POPULATION__FULL_PROTOCOL_STRONGER_SCOPE__THEORETICAL_BINARY_CEILING",
+      "supporting_sources": [
+        {
+          "path": "canonical/verification/DELEGATION_TEMPORAL_PROOF_TRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "sha": "5278abb7fcaa6b97189b67598c75e4df395e1788"
+        },
+        {
+          "path": "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "sha": "5023cc2228d1c05951df92cc5b412a78c0ecb472"
         }
       ]
     }
