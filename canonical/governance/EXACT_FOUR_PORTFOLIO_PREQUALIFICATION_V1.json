@@ -90,7 +90,7 @@
       ],
       "blockers": [
         "AUTOMATIONBENCH_PUBLIC_600_TASK_ABSOLUTE_ACCEPTANCE_AND_SCOPE_BINDING_NOT_YET_FROZEN",
-        "LIVEBENCH_IF_SOURCE_DATASET_DEPENDENCY_AND_BRAIN_ADAPTER_BINDINGS_FROZEN__58_CHECKER_SYNTHETIC_MUTATION_PREFLIGHT_AND_FULL_VERIFIER_RUNTIME_HERMETIC_SMOKE_REMAIN",
+        "LIVEBENCH_IF_FULL_58_CHECKER_HERMETIC_RUNTIME_INDEPENDENT_PASS__SYNTHETIC_GOOD_BAD_BOUNDARY_MUTATION_PREFLIGHT_REMAINS",
         "OSWORLD_2_1_PUBLIC_RELEASE__ZERO_COST_ENVIRONMENT_AND_ASSET_PREFLIGHT_NOT_YET_FROZEN",
         "T2_P1_CAUSAL_RECOVERY_SCOPE_COMPOSITION_MUTATION_INSTANCE_NOT_YET_FROZEN"
       ]
@@ -213,7 +213,7 @@
     "livebench_if_response_adapter_independently_verified": "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "livebench_if_dataset_revision_hash_frozen_without_case_exposure": true,
     "livebench_if_58_checker_mutation_preflight_pass": false,
-    "livebench_if_full_verifier_runtime_hermetic_smoke_pass": false,
+    "livebench_if_full_verifier_runtime_hermetic_smoke_pass": "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "four_uncovered_behavioral_direct_proof_contracts_frozen": true,
     "four_uncovered_behavioral_direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
     "scope_equivalent_proof_gate_independently_verified": "canonical/verification/PREWAVE_CRITICAL_PATH_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
