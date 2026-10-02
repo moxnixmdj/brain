@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED__0_OF_4_REAL_PARENT_CASE_PRODUCERS_BOUND__ORCHESTRATION_LAUNCHER_ALONE_NOT_A_PRODUCER__ZERO_TERMINAL_RESULTS",
+  "objective": "BIND_REAL_POST_FREEZE_T0_T1_T2_T3_PARENT_CASE_PRODUCERS_THAT_EMIT_SAME_CASE_MULTIPLEX_INSTRUMENTATION_RECEIPTS",
+  "authority": [
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+    "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+    "canonical/runtime/terminal_parent_portfolio_launcher_v1.py"
+  ],
+  "invariant": "A_PARENT_PRODUCER_MUST_GENERATE_OR_EXECUTE_THE_REAL_FROZEN_PARENT_CASES_AND_DERIVE_INSTRUMENTATION_VERDICTS_FROM_THEIR_HIDDEN_ORACLES__A_CALLABLE_STUB_OR_RECEIPT_VALIDATOR_IS_NOT_A_PRODUCER",
+  "portfolios": {
+    "T0": {
+      "status": "UNBOUND_REAL_PARENT_CASE_PRODUCER",
+      "producer": null,
+      "tests": null,
+      "producer_blob_sha": null,
+      "test_blob_sha": null,
+      "independent_verification": null
+    },
+    "T1": {
+      "status": "UNBOUND_REAL_PARENT_CASE_PRODUCER",
+      "producer": null,
+      "tests": null,
+      "producer_blob_sha": null,
+      "test_blob_sha": null,
+      "independent_verification": null
+    },
+    "T2": {
+      "status": "UNBOUND_REAL_PARENT_CASE_PRODUCER",
+      "producer": null,
+      "tests": null,
+      "producer_blob_sha": null,
+      "test_blob_sha": null,
+      "independent_verification": null
+    },
+    "T3": {
+      "status": "UNBOUND_REAL_PARENT_CASE_PRODUCER",
+      "producer": null,
+      "tests": null,
+      "producer_blob_sha": null,
+      "test_blob_sha": null,
+      "independent_verification": null
+    }
+  },
+  "required_properties": [
+    "REAL_FROZEN_PARENT_CASES_NOT_STUB_RECEIPTS",
+    "POST_FREEZE_SELECTION_ONLY",
+    "SAME_CASE_DIRECT_INSTRUMENTATION",
+    "HIDDEN_ORACLE_NEVER_CANDIDATE_VISIBLE",
+    "PARENT_TERMINAL_ACCEPTANCE_DERIVED_NOT_HARDCODED",
+    "DIRECT_INSTRUMENTATION_PASS_DERIVED_NOT_HARDCODED",
+    "NO_CASE_REPLACEMENT",
+    "NO_TUNING_REPLAY",
+    "ZERO_INCREMENTAL_SPEND",
+    "INDEPENDENT_EXACT_BLOB_VERIFICATION"
+  ],
+  "bound_parent_producer_count": 0,
+  "required_parent_producer_count": 4,
+  "launch_ready": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
