@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROJECTION_CONSISTENCY_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__DERIVED_PROJECTION_DRIFT_FIREWALL__ZERO_CREDIT",
+  "objective": "Prevent stale terminal closure, ownership, residual-plan, proof-kernel, or authority pointers from disagreeing with independently verified Opus55 acceptance calibration and residual frontier state.",
+  "runtime": "canonical/runtime/terminal_projection_consistency_v1.py",
+  "tests": "canonical/tests/test_terminal_projection_consistency_v1.py",
+  "current_truth": {
+    "behavioral_families": "19/19_PASS",
+    "opus55_acceptance": "3/19_CALIBRATED__16_PENDING",
+    "verified_owned": "2/19",
+    "atomic_acceptance_frontier": "8/38_PROVED__0_OPEN_DIRECT__30_BLOCKED",
+    "authorized_acceptance_case_actions": [],
+    "tb4_reality_execution": "REVOKED__180_LT_220",
+    "terminal_goal_achieved": false
+  },
+  "hard_rules": [
+    "ACCEPTANCE_CALIBRATION_NEQ_OWNERSHIP_PROMOTION",
+    "DERIVED_PROJECTIONS_MUST_AGREE_WITH_CURRENT_INDEPENDENT_CALIBRATION_AND_RESIDUAL_RECEIPTS",
+    "CURRENT_TERMINAL_AUTHORITY_SOURCE_BLOB_POINTERS_MUST_EQUAL_ACTUAL_GIT_BLOB_IDENTITIES",
+    "ZERO_AUTHORIZED_ACCEPTANCE_CASE_ACTIONS_WHILE_RESIDUAL_VERDICT_HAS_ZERO_OPEN_DIRECT_ACTIONS",
+    "TB4_REALITY_REMAINS_REVOKED_WHILE_MAXIMUM_ATTAINABLE_SUCCESSES_LT_REQUIRED_SUCCESSES",
+    "NO_TERMINAL_REPLAY",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_FIREWALL"
+  ],
+  "invalidation": "ANY_SOURCE_BLOB_OR_ACCEPTANCE_RESIDUAL_AUTHORITY_CHANGE",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "execution_authority": false
+}
