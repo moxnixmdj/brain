@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import importlib.util
 import json
+import os
 import pathlib
 import unittest
 from unittest import mock
@@ -248,6 +249,40 @@ class ModelIndependenceTests(unittest.TestCase):
                     {},
                     {"mission_id":"TEST-MODEL-INDEPENDENCE-NO-PLAN","goal":"No implicit model fallback is allowed."}
                 )
+
+    def test_terminal_local_planner_requires_bridge_and_never_falls_through(self):
+        env={
+            "PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_ONLY":"1",
+            "PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR":"",
+        }
+        with mock.patch.dict(os.environ,env,clear=False), \
+             mock.patch.object(runtime,"_external_tool_bridge",return_value=None), \
+             mock.patch.object(runtime.urllib.request,"urlopen",side_effect=AssertionError("network fallback forbidden")):
+            with self.assertRaisesRegex(runtime.Blocker,"TERMINAL_LOCAL_PLANNER_BRIDGE_REQUIRED"):
+                runtime._planner_post("terminal prompt")
+
+    def test_terminal_local_planner_rejects_wrong_identity(self):
+        wrong={"text":"{}","model":"openai-fast","backend":"REMOTE","duration_s":0,"errors":[]}
+        with mock.patch.dict(os.environ,{"PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_ONLY":"1"},clear=False), \
+             mock.patch.object(runtime,"_external_tool_bridge",return_value=wrong):
+            with self.assertRaisesRegex(runtime.Blocker,"TERMINAL_LOCAL_PLANNER_MODEL_IDENTITY_MISMATCH"):
+                runtime._planner_post("terminal prompt")
+
+    def test_terminal_local_planner_accepts_exact_pinned_identity(self):
+        exact={
+            "text":"{}",
+            "model":"Qwen3.5-9B-M-Q4_K_M-local",
+            "backend":"LOCAL_LLAMA_SERVER",
+            "duration_s":0,
+            "errors":[],
+        }
+        with mock.patch.dict(os.environ,{"PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_ONLY":"1"},clear=False), \
+             mock.patch.object(runtime,"_external_tool_bridge",return_value=exact) as bridge:
+            out=runtime._planner_post("terminal prompt")
+        self.assertEqual(out["model"],"Qwen3.5-9B-M-Q4_K_M-local")
+        self.assertEqual(out["backend"],"LOCAL_LLAMA_SERVER")
+        self.assertEqual(out["transport"],"EXTERNAL_TOOL_BRIDGE")
+        self.assertEqual(bridge.call_args.args[1]["models"],["local"])
 
     def test_model_planner_is_explicit_opt_in_only(self):
         planned = '{"actions":[{"type":"finish","args":{"summary":"OPTIONAL_MODEL_ROUTE_USED"},"why":"explicit opt-in"}]}'
