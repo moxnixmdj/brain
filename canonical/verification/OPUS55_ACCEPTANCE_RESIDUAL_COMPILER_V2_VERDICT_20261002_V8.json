@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_RECEIPT_V8",
+  "date": "2026-10-02",
+  "status": "FAIL_CLOSED_RECONCILIATION__7_PROVED__0_OPEN__31_BLOCKED__ATTAINABILITY_IMPOSSIBLE__INDEPENDENT_REPLAY_PENDING__ZERO_CREDIT",
+  "supersedes": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V7.json",
+  "reconciliation_basis": {
+    "attainability_cut": "canonical/governance/OPUS55_ATTAINABILITY_CUT_V1.json",
+    "attainability_verdict": "canonical/verification/TB4_ATTAINABILITY_CUT_VERDICT_20261002_V1.json"
+  },
+  "receipt_saturation_complete": true,
+  "predicate_count": 38,
+  "proved_predicate_count": 7,
+  "open_predicate_count": 0,
+  "blocked_predicate_count": 31,
+  "newly_reblocked_predicate": {
+    "predicate_id": "CODING_TB4_GE_66_4",
+    "family": "ADVANCED_AGENTIC_CODING",
+    "kind": "PUBLIC_FIXED_BAR",
+    "surface": "Terminal-Bench 4.0",
+    "state": "EXTERNAL_BLOCKED",
+    "blocker_class": "CURRENT_SCORE_ROUTE_MATHEMATICALLY_UNATTAINABLE",
+    "reason": "MAXIMUM_ATTAINABLE_SUCCESSES_180_LT_REQUIRED_220",
+    "discharge_condition": "RAISE_MACHINE_VERIFIED_UPPER_BOUND_TO_AT_LEAST_220_VIA_ADMISSIBLE_ROUTE_OR_CREDITABILITY_CHANGE__THEN_RECOMPUTE_BEFORE_CASE_EXPOSURE"
+  },
+  "authorized_acceptance_case_actions": [],
+  "terminal_promotion_allowed": false,
+  "fresh_acceptance_cases_consumed_by_this_recompile": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "independent_verification": {
+    "status": "PENDING_PUBLIC_RUNNER_REPLAY"
+  },
+  "rule": "ATTAINABILITY_CUT_PRECEDES_REALITY_QUERY__UPPER_BOUND_BELOW_THRESHOLD_REVOKES_EXECUTION"
+}
