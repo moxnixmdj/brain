@@ -1,0 +1,204 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-GLOBAL-TERMINAL-UNIVERSE-VERIFIER-CURRENTBASE-20261002-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT__ZERO_NEW_REALITY",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "8e5a92375e8125b058dfd7f4701460f133402b7f",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "GLOBAL_TERMINAL_UNIVERSE_VERIFIER_STALE_AFTER_SPECIFICATION_CLOSURE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::GLOBAL_TERMINAL_UNIVERSE_VERIFIER_STALE_AFTER_SPECIFICATION_CLOSURE",
+  "expected_parent_frontier_change": "NO_CAPABILITY_OR_FRONTIER_REDEFINITION__RESTORE_EXECUTABLE_EQUIVALENCE_BETWEEN_FROZEN_OUTER_GLOBAL_UNIVERSE_AND_ITS_GENERATOR_VERIFIER_AFTER_EXISTING_CONTRACT_EVIDENCE_CLOSED_THE_SPECIFICATION_GATE__ENABLE_INDEPENDENT_OUTER_UNIVERSE_VERIFICATION__ZERO_NEW_REALITY_ZERO_CREDIT",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "user_authorized_governance_change": false,
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when the outer global universe generator exactly reproduces the frozen current universe, the verifier runs from repository root, the specification-hole assertion reflects the independently recorded closure, the outer-universe verification workflow passes, and the trusted drift guard passes. Do not execute either local V6 clean batch, consume untouched evidence, alter capability ownership, or weaken any guard.",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_WHITE_BOX_DONOR_ONLY_UNTIL_INTERNALIZED",
+    "capability_policy": "DELETE_OR_SUBSTITUTE_SOLVED_FUNCTIONS__REUSE_OR_WHITE_BOX_HARVEST_ONLY_CAUSALLY_NECESSARY_RESIDUAL__VERIFY_BRAIN_ROUTE__SAVE_PERMANENTLY",
+    "capability_invention": "FORBIDDEN__INTEGRATION_AND_ENCODING_GLUE_ONLY",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5"
+  },
+  "ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "receipt_path": "canonical/reasoning/2026-10-02_RECONCILE_GLOBAL_TERMINAL_UNIVERSE_VERIFIER_V1.json",
+    "chat_only_authority": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "8e5a92375e8125b058dfd7f4701460f133402b7f",
+    "real_outcome": "Restore the outer-global-universe verifier so it can independently validate the already-recorded specification closure and global fresh-evidence guard.",
+    "required_capability": "Faithful deterministic regeneration and verification of the frozen outer terminal universe.",
+    "obs_goal": {
+      "real_outcome": "Obtain a trustworthy green or falsifying outer-universe oracle before any local V6 clean evidence is spent.",
+      "proxy_goals_deleted": [
+        "MERGE_FOR_GREEN_BADGE",
+        "REOPEN_SPECIFICATION_HOLE",
+        "EXECUTE_LOCAL_V6_BATCHES"
+      ],
+      "surviving_necessity": "The outer universe must be executable and self-consistent before it can govern the next global minimum-reality cut."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "GLOBAL_TERMINAL_UNIVERSE_V1",
+        "global_terminal_universe.py",
+        "test_global_terminal_universe.py",
+        "BEHAVIOR_CONTRACT_COMPLETENESS_VERIFICATION_20261002_V1"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_REQUIRED_FOR_DETERMINISTIC_RECONCILIATION"
+      ],
+      "capability_work_deleted": [
+        "NO_NEW_MECHANISM",
+        "NO_NEW_MODEL",
+        "NO_FRESH_TASK",
+        "NO_BENCHMARK_EXECUTION"
+      ],
+      "surviving_gap": "Generator/test drift after the specification gate changed from open to closed."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_VERIFIER_DRIFT",
+      "delete_bypass_substitute_options": [
+        "REGENERATE_EXPECTATION_FROM_CURRENT_FROZEN_STATE",
+        "UPDATE_STALE_ASSERTION",
+        "DO_NOT_TOUCH_CAPABILITY_RUNTIME"
+      ],
+      "surviving_causal_blocker": "GLOBAL_TERMINAL_UNIVERSE_VERIFIER_STALE_AFTER_SPECIFICATION_CLOSURE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "RECONCILE_GENERATOR_AND_TEST_TO_FROZEN_CURRENT_STATE",
+        "BYPASS_VERIFIER_REJECTED",
+        "REOPEN_CLOSED_SPECIFICATION_GATE_REJECTED"
+      ],
+      "losing_routes_reason": "Bypassing the verifier weakens proof; reopening a verified specification hole is false; new capability work is unrelated.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The existing deterministic equality oracle is the direct effect for this reconciliation."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "OLD_TEST_ASSERTION_REQUIRING_OPEN_SPECIFICATION_HOLE",
+        "GENERIC_REASON_STRING_AFTER_SPEC_CLOSURE"
+      ],
+      "adjacent_capabilities_absorbed": [],
+      "fresh_reuse_plan": "Reuse the frozen outer universe, proof-cut receipt, and existing verifier unchanged except for stale expectations."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_ROUTE_DISCOVERY",
+        "NO_FRESH_EVIDENCE",
+        "NO_LOCAL_V6_BATCH_PREQUALIFICATION"
+      ],
+      "search_stop_decision": "Failure logs uniquely localized the defects to invocation/import and stale post-closure expectations; no broader search has decision value.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_EXISTING_VERIFIER",
+      "BYPASS_VERIFICATION",
+      "REOPEN_SPECIFICATION_HOLE",
+      "BUILD_NEW_VERIFIER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BYPASS_VERIFICATION",
+      "REOPEN_SPECIFICATION_HOLE",
+      "BUILD_NEW_VERIFIER"
+    ],
+    "selected_surviving_route": "RECONCILE_EXISTING_OUTER_UNIVERSE_GENERATOR_AND_TEST",
+    "why_selected_route_is_fastest_sufficient": "It changes only the two stale deterministic expectations and preserves every proof/evidence boundary.",
+    "expected_parent_level_state_change": "NO_CAPABILITY_OR_FRONTIER_REDEFINITION__RESTORE_EXECUTABLE_EQUIVALENCE_BETWEEN_FROZEN_OUTER_GLOBAL_UNIVERSE_AND_ITS_GENERATOR_VERIFIER_AFTER_EXISTING_CONTRACT_EVIDENCE_CLOSED_THE_SPECIFICATION_GATE__ENABLE_INDEPENDENT_OUTER_UNIVERSE_VERIFICATION__ZERO_NEW_REALITY_ZERO_CREDIT",
+    "stop_condition": "Stop when the outer global universe generator exactly reproduces the frozen current universe, the verifier runs from repository root, the specification-hole assertion reflects the independently recorded closure, the outer-universe verification workflow passes, and the trusted drift guard passes. Do not execute either local V6 clean batch, consume untouched evidence, alter capability ownership, or weaken any guard.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action with deterministic failure localization and no alternative external capability route."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "GLOBAL_TERMINAL_UNIVERSE_SELF_REGENERATION_EQUIVALENCE",
+    "inputs": [
+      "FROZEN_GLOBAL_TERMINAL_UNIVERSE",
+      "CURRENT_BOUND_SOURCE_RECORDS"
+    ],
+    "environment_state": [
+      "REPOSITORY_ROOT_IMPORTABLE"
+    ],
+    "allowed_information": [
+      "EXISTING_CANONICAL_FILES",
+      "WORKFLOW_FAILURE_LOGS"
+    ],
+    "required_output_or_action": "Generator output exactly equals the frozen outer universe and verifier exits zero.",
+    "success_condition": "Independent workflow passes exact equality and guard checks.",
+    "failure_condition": "Any regenerated field differs or evidence authority is weakened.",
+    "terminal_consequence": "Only a verified outer universe may govern subsequent global-cut saturation; no capability credit from this action.",
+    "verification_route": "verify-global-terminal-universe workflow plus trusted drift guard",
+    "dependency_boundary": "No untouched task content, external model, or new terminal evidence.",
+    "scope": "Deterministic verifier reconciliation only."
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_PROMOTION"
+  },
+  "qualification_stage": "NOT_APPLICABLE_NO_EVIDENCE_EXPOSURE",
+  "terminal_proof_control": {
+    "proof_obligation": "OUTER_GLOBAL_UNIVERSE_EXECUTABLE_EQUIVALENCE",
+    "hole_type": "SUPPORT",
+    "expected_certificate_or_receipt": "GREEN_VERIFY_GLOBAL_TERMINAL_UNIVERSE_WORKFLOW",
+    "validator": "canonical/tests/test_global_terminal_universe.py",
+    "maximum_cheap_test_cost": "ONE_DETERMINISTIC_CI_RUN",
+    "prerequisites": [
+      "SPECIFICATION_CLOSURE_RECEIPT_EXISTS"
+    ],
+    "contamination_risk": "NONE_NO_TASK_CONTENT",
+    "reversibility": "FULL",
+    "falsification_condition": "REGENERATED_UNIVERSE_DIFFERS_FROM_FROZEN_UNIVERSE",
+    "critical_path_relation": "STRICTLY_REQUIRED_SUPPORT_FOR_GLOBAL_MINIMUM_REALITY_CUT"
+  },
+  "continuous_obs": {
+    "required": true,
+    "base_commit": "8e5a92375e8125b058dfd7f4701460f133402b7f",
+    "material_unknowns": [],
+    "post_receipt_revalidation_required": true
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "new_reality_units": 0
+  },
+  "global_terminal_proof_cut": {
+    "fresh_evidence": false,
+    "local_v6_execution_authorized": false,
+    "outer_universe_verification_required": true
+  }
+}
