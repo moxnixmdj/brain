@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__4_OF_19_ACCEPTANCE_CALIBRATED__15_PENDING__TERMINAL_FALSE__ZERO_NEW_REALITY",
+  "source_brain_commit": "9167718f20002f966f30c22cf968083a09534bd4",
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 876,
+    "pull_request_head": "5eded38f6a3bf7a418039765ece5306b94ce49b4",
+    "merge_commit": "9ec1c4d04c9fb95b207f95a4b1b517409f5abd07",
+    "workflow_run_id": 37006350326,
+    "workflow_job_id": 110835431302,
+    "conclusion": "success"
+  },
+  "exact_brain_blobs": {
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+    "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json": "96052a6b5178305b37a2526fb25c3f53fa33b9b5",
+    "canonical/runtime/acceptance_proof_transmuter_v1.py": "0580f9819b5465c9617f0a1e8ff9a96902eedfc6",
+    "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py": "73b0b27644e0fa0d89ff8fbdb51005c20eae3632",
+    "canonical/governance/OPUS55_ACCEPTANCE_CALIBRATION_V2.json": "efa25c42412fb411738140fc373559760a00880b"
+  },
+  "verified": [
+    "EXACT_MIRRORED_BRAIN_BLOB_IDENTITIES_MATCH",
+    "TARGET_FAMILY_COUNT_19",
+    "BEHAVIORAL_PASS_FAMILY_COUNT_19",
+    "ACCEPTANCE_CALIBRATED_FAMILY_COUNT_4",
+    "ACCEPTANCE_PENDING_FAMILY_COUNT_15",
+    "CALIBRATED_SET_EXACTLY_SYMBOLIC_MEMORY_TOOL_DISCOVERY_AND_DELEGATION",
+    "TERMINAL_GOAL_ACCEPTANCE_REMAINS_FALSE",
+    "ZERO_NEW_REALITY",
+    "ZERO_EXECUTION_OR_PROMOTION_AUTHORITY"
+  ],
+  "result": {
+    "target_family_count": 19,
+    "behavioral_pass_family_count": 19,
+    "acceptance_calibrated_family_count": 4,
+    "acceptance_pending_family_count": 15,
+    "acceptance_calibrated_families": [
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
+    ],
+    "newly_effective_family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "terminal_goal_acceptance_closed": false
+  },
+  "fresh_acceptance_cases_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
