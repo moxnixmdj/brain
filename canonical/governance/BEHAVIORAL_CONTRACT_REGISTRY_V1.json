@@ -166,7 +166,13 @@
       "terminal_consequence": "Shared residual for delegation, multi-tool agency and composition",
       "verification_route": "Fresh tasks with controlled worker-count/assignment ablations; critical-path and correctness comparison",
       "dependency_boundary": "Leases, ownership locks, queues and fanin mechanics are deterministic/partly owned; partition/assignment quality is residual when task structure/capabilities are uncertain",
-      "scope": "Adaptive task partition and worker/tool assignment"
+      "scope": "Adaptive task partition and worker/tool assignment",
+      "terminal_acceptance": {
+        "proof_mode": "EXHAUSTIVE_FINITE_POST_BEACON_POPULATION_VERIFICATION",
+        "binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1.json",
+        "acceptance_rule": "ALL_512_CASES_EXACT_PASS_AND_ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_PRESENT",
+        "terminal_result_status": "NOT_EXECUTED"
+      }
     },
     {
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
