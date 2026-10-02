@@ -1,14 +1,20 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_FIXED_POINT_ZERO_REALITY_EXECUTION_V1",
   "date": "2026-10-02",
-  "status": "ZERO_REALITY_FIXED_POINT_CUT_COMPUTED__29_UNRESOLVED__28_COVERED_BY_AVAILABLE_ACTIONS__1_STRUCTURALLY_UNCOVERED__ZERO_CREDIT",
+  "status": "ZERO_REALITY_FIXED_POINT_CUT_COMPUTED_ON_INDEPENDENTLY_VERIFIED_ENGINE__29_UNRESOLVED__28_COVERED__1_STRUCTURAL_GAP__ZERO_CREDIT",
   "objective": "Run the independently verified acceptance fixed-point scheduling logic against the current live 38-predicate ledger and compute the exact zero-reality terminal action cut.",
   "engine": {
     "governance": "canonical/governance/ACCEPTANCE_FIXED_POINT_CLOSURE_ENGINE_V1.json",
     "ir_compiler": "canonical/runtime/acceptance_ir_compiler_v1.py",
     "cut_solver": "canonical/runtime/minimum_terminal_cut_solver_v1.py",
     "external_independent_verifier_commit": "eafc7a6e4d7521ab90224c19b56fdc927629ecef",
-    "external_verifier_repository": "moxnixmdj/verification-capsule-runner"
+    "external_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "brain_independent_verification": {
+      "path": "canonical/verification/ACCEPTANCE_FIXED_POINT_CLOSURE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "ae561bc6318197701d50dbe9e5a4a800711ac4c9",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_10_OF_10_BRAIN_BLOBS__RUNTIME_AND_LIVE_LEDGER_TESTS_PASS__ZERO_CREDIT",
+      "public_workflow_run_id": 37009358807
+    }
   },
   "exact_inputs": {
     "predicate_registry": {
@@ -74,14 +80,19 @@
   "decisive_result": {
     "next_structural_gap": "FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT",
     "reason": "This is the only unresolved predicate not covered by any currently available action in the exact cut.",
-    "immediate_rule": "MATERIALIZE_ONLY_THE_EXACT_LOAD_BEARING_COMPONENT_INTERFACES_OF_THE_FROZEN_COMPOSITION_CLAIM__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED"
+    "immediate_rule": "MATERIALIZE_ONLY_THE_EXACT_LOAD_BEARING_COMPONENT_INTERFACES_OF_THE_FROZEN_COMPOSITION_CLAIM__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+    "verified_representation_gaps": [
+      "EXPLICIT_FINITE_WORLD_OR_HYPOTHESIS_SET_AVAILABLE",
+      "FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT"
+    ]
   },
   "hard_rules": [
     "NO_FRESH_REALITY_FROM_THIS_RECEIPT",
     "NO_TERMINAL_V3_REPLAY",
     "NO_ACCEPTANCE_OR_FAMILY_CREDIT",
     "FALSE_PRECONDITIONS_ARE_NOT_BYPASSED",
-    "RECOMPUTE_IF_ANY_INPUT_BLOB_CHANGES"
+    "RECOMPUTE_IF_ANY_INPUT_BLOB_CHANGES",
+    "ENGINE_AND_LIVE_LEDGER_IDENTITIES_INDEPENDENTLY_VERIFIED"
   ],
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
