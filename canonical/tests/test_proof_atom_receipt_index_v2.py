@@ -98,5 +98,37 @@ class Tests(unittest.TestCase):
         self.assertEqual(by["ARTIFACT_AA_BRIEFCASE_FROZEN_BAR_SCOPE_COMPLETE_STRONGER_PROOF_INDEPENDENT_PASS"]["associated_target_predicates"],["ARTIFACT_AA_BRIEFCASE_GE_1822"])
 
 
+    def test_current_repository_receipt_snapshot(self):
+        root=Path(__file__).resolve().parents[2]
+        f=json.loads((root/"canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V5.json").read_text())
+        o=json.loads((root/"canonical/governance/PROOF_ATOM_REFINEMENT_OVERLAY_V1.json").read_text())
+        out=build_index(f,o,root=root)
+        self.assertTrue(out["status"].startswith("PASS"),out)
+        self.assertEqual(out["canonical_atom_count"],40)
+        self.assertEqual(out["capability_credit_delta"],0)
+        self.assertEqual(out["family_credit_delta"],0)
+        snapshot={
+            "canonical_atom_count":out["canonical_atom_count"],
+            "scanned_file_count":out["scanned_file_count"],
+            "candidate_match_count":out["candidate_match_count"],
+            "atoms_with_candidate_matches":out["atoms_with_candidate_matches"],
+            "atoms_without_candidate_matches":out["atoms_without_candidate_matches"],
+            "candidate_matches_by_source_class":out["candidate_matches_by_source_class"],
+            "atoms":[
+                {
+                    "atom_id":row["atom_id"],
+                    "proposition":row["proposition"],
+                    "associated_target_predicates":row["associated_target_predicates"],
+                    "candidate_match_count":row["candidate_match_count"],
+                    "candidate_matches":row["candidate_matches"],
+                }
+                for row in out["atoms"]
+            ],
+        }
+        print("BEGIN_V2_LIVE_CORPUS_INDEX")
+        print(json.dumps(snapshot,sort_keys=True))
+        print("END_V2_LIVE_CORPUS_INDEX")
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
