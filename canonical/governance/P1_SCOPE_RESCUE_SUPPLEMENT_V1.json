@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SCOPE_RESCUE_SUPPLEMENT_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREEXECUTION__IRREDUCIBLE_TWO_OBLIGATION_SUPPLEMENT__ZERO_CREDIT",
+  "objective": "Discharge only the two irreducible P1 whole-scope obligations left after independently verified V4 residual compression, without replaying Terminal V3.",
+  "authority": [
+    "canonical/governance/P1_TERMINAL_EXECUTION_SCOPE_MISMATCH_QUARANTINE_V1.json",
+    "canonical/verification/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json"
+  ],
+  "frozen_residual_obligations": [
+    {
+      "id": "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+      "closure_condition": "SCOPE_IS_A_FIRST_CLASS_VISIBLE_CAUSAL_FAILURE_MECHANISM_AND_IS_CORRECTLY_LOCALIZED_CLASSIFIED_AND_REPAIRED"
+    },
+    {
+      "id": "P1_HETEROGENEOUS_INTERVENTION_RESCUE",
+      "closure_condition": "NOMINATED_ROOT_REPAIRS_MACHINE_VERIFY_TERMINAL_RESCUE_ACROSS_DELAYED_AND_INTERACTION_TYPED_TRACES_WHILE_SYMPTOM_ONLY_AND_PARTIAL_INTERACTION_REPAIRS_FAIL"
+    }
+  ],
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+  "executor": "canonical/runtime/p1_scope_rescue_supplement_v1.py",
+  "tests": "canonical/tests/test_p1_scope_rescue_supplement_v1.py",
+  "frozen_population": {
+    "semantic_cross_product": "6_DOMAINS_X_8_MECHANISM_CLASSES_X_2_CAUSAL_PATTERNS",
+    "domains": [
+      "BROWSER",
+      "FILESYSTEM",
+      "TOOL_API",
+      "ARTIFACT",
+      "RESEARCH",
+      "CODE"
+    ],
+    "mechanism_classes": [
+      "AUTHORITY",
+      "DEPENDENCY",
+      "INVARIANT",
+      "PROVENANCE",
+      "SCHEMA",
+      "SCOPE",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT"
+    ],
+    "causal_patterns": [
+      "DELAYED",
+      "INTERACTION"
+    ],
+    "case_count": 96,
+    "post_freeze_seed_role": "OPAQUE_ACTION_AND_RESOURCE_NAME_RANDOMIZATION_ONLY__NO_CASE_SELECTION_OR_THRESHOLD_CHANGE",
+    "post_freeze_seed_source": "GITHUB_RUN_ID_OF_INDEPENDENT_PUBLIC_RUNNER_STARTED_AFTER_THIS_EXACT_SOURCE_COMMIT_IS_FROZEN"
+  },
+  "rescue_semantics": {
+    "positive": "EVERY_INDEPENDENT_CAUSAL_ROOT_VIOLATION_MUST_BE_REPAIRED_FOR_TERMINAL_PASS",
+    "negative_controls": [
+      "DOWNSTREAM_SYMPTOM_ONLY_REPAIR_MUST_NOT_RESCUE",
+      "DROPPING_ANY_REQUIRED_INTERACTION_ROOT_REPAIR_MUST_NOT_RESCUE"
+    ]
+  },
+  "contamination_guards": [
+    "NO_TERMINAL_V3_REPLAY",
+    "NO_OLD_TERMINAL_CASE_REPLACEMENT",
+    "NO_RESULT_TO_RUNTIME_FEEDBACK",
+    "SOURCE_AND_CASE_DIMENSIONS_FROZEN_BEFORE_POST_FREEZE_SEED_EXISTS",
+    "HIDDEN_ORACLE_NOT_CANDIDATE_VISIBLE"
+  ],
+  "reality_budget": {
+    "new_supplement_cases": 96,
+    "old_terminal_cases_replayed": 0,
+    "incremental_spend_usd": 0
+  },
+  "promotion_rule": "SUPPLEMENT_PASS_MAY_DISCHARGE_ONLY_THE_TWO_FROZEN_P1_RESIDUAL_OBLIGATIONS__P1_QUARANTINE_CLEARANCE_REQUIRES_SEPARATE_FAIL_CLOSED_REDUCER_AND_INDEPENDENT_VERIFICATION",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
