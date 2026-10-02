@@ -18,7 +18,8 @@
         "canonical/capabilities/opus55/EXPLICIT_DISCOURSE_OPERATOR_ALGEBRA_001.json",
         "canonical/capabilities/opus55/BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_001.json",
         "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json",
-        "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json"
+        "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json",
+        "canonical/capabilities/opus55/BOUNDED_CONTEXTUAL_REFERENCE_OPERATORS_001.json"
       ],
       "verification_pending": [],
       "external_candidates": [
@@ -73,6 +74,16 @@
           "conclusion": "success",
           "capability_receipt": "canonical/capabilities/opus55/BOUNDED_PREDICATE_ARGUMENT_SEMANTICS_001.json",
           "scope": "SIMPLE_ACTIVE_PASSIVE_MODAL_PREDICATE_ARGUMENT_CLAUSES_AND_ONE_EXPLICIT_IF_WHEN_CONDITION"
+        },
+        "bounded_contextual_reference_operators": {
+          "workflow_run_id": 36947660225,
+          "conclusion": "success",
+          "verified_head_sha": "d90b0b527939fc898ffd96dbe347469e09d13d19",
+          "runtime_blob_sha": "a437c23cc845637824083dcd50a90ad1f7e09fef",
+          "test_blob_sha": "57af6b9774a1cac5784f100cc73f5ecab7fb49e3",
+          "workflow_blob_sha": "17877507ad95465c0a57031aab44a423396ec42e",
+          "scope": "BOUNDED_CROSS_SENTENCE_SUBJECT_PRONOUN_CONTINUATION__EXPLICIT_THAT_MODE_ANAPHORA__BOUNDED_MODAL_ELLIPSIS_TOO__EXPLICIT_TWO_BY_TWO_RESPECTIVELY_MAPPING",
+          "terminal_semantic_authority": false
         }
       },
       "ontology_correction": "IMPLICIT_REQUIREMENTS_SPLIT__ENTAILED_CONSEQUENCES_ROUTE_TO_M0B__DOMAIN_CONVENTIONS_ROUTE_TO_JIT_KNOWLEDGE__NONENTAILED_PRAGMATIC_INTENT_ROUTES_TO_AMBIGUITY_CONTROL",
@@ -92,7 +103,9 @@
         "branch_result": "canonical/capabilities/opus55/M0A_OLMO_BRANCH_CAUSAL_LOCALIZATION_001.json",
         "contiguous_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_SUBSPACE_CAUSAL_LOCALIZATION_RESULT_001.json",
         "lowrank_result": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json",
-        "consequence": "NO_FURTHER_OLMO_HARVEST__MATCHED_PARITY_ONLY_IF_ADMITTED_BY_EXACT_CUT"
+        "consequence": "NO_FURTHER_OLMO_HARVEST__MATCHED_PARITY_ONLY_IF_ADMITTED_BY_EXACT_CUT",
+        "lowrank_protocol": "canonical/evaluation/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_V1.json",
+        "lowrank_status": "FROZEN_BEFORE_RESULTS__DEV_ONLY__ZERO_CAPABILITY_CREDIT"
       },
       "donor_frontier": {
         "reconciliation": "canonical/reasoning/2026-10-02_M0A_SPECIALIZED_DONOR_FEASIBILITY_RECONCILIATION_V2.json",
@@ -278,7 +291,7 @@
     "M1A",
     "M1B"
   ],
-  "next": "FREEZE_V6_FROM_CURRENT_ACTION_UNIVERSE_WITH_FAITHFUL_COSTS_M0A_1_M1A_1_M1B_1__RUN_EXACT_MINIMUM_REALITY_CUT__AUTHORIZE_NO_FRESH_EVIDENCE_EXCEPT_SELECTED_CUT_MEMBERS",
+  "next": "FINISH_FROZEN_M0A_LOWRANK_CAUSAL_DIAGNOSTIC__COMPOSE_VERIFIED_BRAIN_OWNED_CONTEXTUAL_REFERENCE_AND_DISCOURSE_SLICES__IF_NO_SMALL_CAUSALLY_SUFFICIENT_RESIDUAL_EXISTS_MOVE_M0A_TO_PROOF_ONLY__THEN_FREEZE_V6_AND_RECOMPUTE_EXACT_CUT__NO_FRESH_UNTOUCHED_INFORMATION",
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
@@ -306,5 +319,12 @@
         "NEW_CASES_CLEAN_AND_PREDECLARED"
       ]
     }
+  ],
+  "active_zero_reality_mechanism_blockers": [
+    "M0A"
+  ],
+  "proof_only_obligations": [
+    "M1A",
+    "M1B"
   ]
 }
