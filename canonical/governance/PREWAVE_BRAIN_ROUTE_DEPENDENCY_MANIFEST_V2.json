@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PREWAVE_ROUTE_DEPENDENCY_MANIFEST_V2",
+  "date": "2026-10-02",
+  "status": "FROZEN_HASH_BOUND_PREWAVE_DEPENDENCY_MANIFEST__NO_TERMINAL_CAPABILITY_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "operative_brain_runtime_blobs": {
+    "canonical/runtime/astra_runtime.py": "0ce14dc593c29745b20d83c5f2868cac97e2e80f",
+    "canonical/runtime/capability_planner.py": "64ff65cb184f50d3336326f33cccfcc0a53301a8",
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/runtime/delegation_contract_proof_suite.py": "e75a25f6ed13020ef08e5aa3da92fcfe6217f4c0",
+    "canonical/runtime/finite_identifiability.py": "c2bf32dd1e22f00a2fa08b043aa8275a07c05bed",
+    "canonical/runtime/finite_population_proof.py": "20980ac7ddb4cab713c847ac03e5a6fa40748154",
+    "canonical/runtime/global_terminal_universe.py": "02c3ef80d20128aedca8f091935ada6435376157",
+    "canonical/runtime/livebench_if_response_adapter.py": "eb497ae5585f4f22b06b8088609b6d17714ebc53",
+    "canonical/runtime/m4_research_control.py": "3efb04cde34c344d4c95204b73215249383c46bc",
+    "canonical/runtime/requirement_acceptance_compiler.py": "c306ac6191e2d6f6d84445d7a698eeec8676a0ef",
+    "canonical/runtime/residual_dependency_eliminator.py": "72200764ed748e7de0841dd2152e5a0e7157a795",
+    "canonical/runtime/sharded_finite_population_proof.py": "67e2ed81e17d24618094d8e32a1ffa968a3ef449",
+    "canonical/runtime/shared_decision_primitives.py": "794e8d1ca9525564b592ffc3af899037183ef655",
+    "canonical/runtime/source_contract_compiler.py": "ba53b1f1a3c1d8e63c906eb4952c7e9b6aef1231",
+    "canonical/runtime/source_traceable_semantic_ir.py": "cf40b0b4d8f71f15f0140f009b602ff913db6750",
+    "canonical/runtime/typed_hypothesis_compiler.py": "c52407e8e399edbc7254dddf76f615a4e4136d79"
+  },
+  "general_substrate": {
+    "class": "LOCAL_OPEN_WEIGHT_MODEL__GENERAL_COGNITION_SUBSTRATE_ONLY",
+    "model": "Qwen/Qwen3.5-9B",
+    "quantization_repo": "TheStageAI/Qwen3.5-9B-GGUF",
+    "quantization_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "quantization_bytes": 5060174144,
+    "quantization_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "model_license": "Apache-2.0",
+    "inference_runtime": "llama.cpp",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "transport": "LOCAL_HTTP_PLANNER_BRIDGE",
+    "ownership_authority": false,
+    "opaque_target_capability_provider": false,
+    "replacement_requires_new_manifest": true
+  },
+  "verified_pre_wave_receipts": [
+    "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/CONTRACT_NATIVE_PROOF_SUITES_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/REQUIREMENT_ACCEPTANCE_COMPILER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/SHARDED_FINITE_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/LIVEBENCH_IF_ADAPTER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "canonical/verification/LIVEBENCH_IF_58_CHECKER_HERMETIC_SMOKE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "dependency_policy": {
+    "paid_or_hosted_target_capability_provider": "FORBIDDEN",
+    "opaque_external_target_capability_provider": "NONE_DECLARED_IN_OPERATIVE_ROUTE",
+    "donor_or_substrate_output_alone_has_ownership_authority": false,
+    "frozen_runtime_blob_change_requires_requalification": true,
+    "substrate_change_requires_manifest_refresh": true,
+    "terminal_donor_deletion_or_ablation": "POST_WAVE_REQUIRED__NOT_WAIVED",
+    "terminal_capability_sufficiency": "UNPROVEN_UNTIL_TERMINAL_WAVE"
+  },
+  "prewave_conclusion": {
+    "exact_runtime_dependencies_frozen": true,
+    "no_known_opaque_target_capability_provider": true,
+    "controller_composition_current_independent_pass": true,
+    "known_dependency_identity_complete_for_declared_operative_route": true,
+    "terminal_donor_independence_proven": false,
+    "execution_authority_delta": false
+  },
+  "supersedes_for_pre_wave_dependency_identity": "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V1.json",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0
+}
