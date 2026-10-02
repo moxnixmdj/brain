@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "CANONICAL_PREPROOF_ACCELERATION_CONTROLLER__INDEPENDENTLY_VERIFIED__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
+  "status": "CANONICAL_PREPROOF_ACCELERATION_CONTROLLER__CURRENT_RUNTIME_INDEPENDENTLY_VERIFIED_AS_GLOBAL_RESIDUAL_DEPENDENCY__FAIL_CLOSED__ZERO_TERMINAL_CREDIT",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "runtime": "canonical/runtime/terminal_proof_supercompiler.py",
   "tests": "canonical/tests/test_terminal_proof_supercompiler.py",
@@ -55,11 +55,13 @@
   "execution_authority": false,
   "promotion_authority": false,
   "independent_verification": {
-    "status": "INDEPENDENT_PASS",
-    "receipt": "canonical/verification/TERMINAL_PROOF_SUPERCOMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "public_runner_pr": 639,
-    "workflow_run_id": 36964597245,
-    "exact_runtime_blob_sha": "d92f37853437e1626d45e79b1da3638d8f943cd4"
+    "status": "CURRENT_RUNTIME_INDEPENDENT_PASS_VIA_GLOBAL_RESIDUAL_VERIFICATION",
+    "current_runtime_blob_sha": "c7a4b8bc29d041fcc04fbcfa8a79db44fa9fe370",
+    "current_runtime_verification_receipt": "canonical/verification/GLOBAL_RESIDUAL_PROOF_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "current_runtime_verification_workflow_run_id": 36965447334,
+    "historical_direct_receipt": "canonical/verification/TERMINAL_PROOF_SUPERCOMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "historical_direct_runtime_blob_sha": "d92f37853437e1626d45e79b1da3638d8f943cd4",
+    "note": "HISTORICAL_DIRECT_RECEIPT_DOES_NOT_BIND_CURRENT_RUNTIME__CURRENT_RUNTIME_IS_BOUND_AND_COMPILE_TESTED_AS_EXACT_BASE_SUPERCOMPILER_DEPENDENCY_BY_GLOBAL_RESIDUAL_PUBLIC_RUNNER_RECEIPT"
   },
   "global_residual_partition": {
     "status": "ACTIVE_INDEPENDENT_PASS__SCHEDULING_ONLY",
@@ -67,6 +69,8 @@
     "runtime": "canonical/runtime/global_residual_proof_compiler.py",
     "live_input": "canonical/governance/GLOBAL_RESIDUAL_PROOF_COMPILER_LIVE_INPUT_V1.json",
     "verification": "canonical/verification/GLOBAL_RESIDUAL_PROOF_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "rule": "WHOLE_FRONTIER_EXTERNAL_OR_UNPROVEN_RESIDUALS_CANNOT_STALL_EXACT_INDEPENDENT_INTERNAL_CLOSURE__SEMANTIC_DEDUP_EXPLICIT_ONLY"
+    "rule": "WHOLE_FRONTIER_EXTERNAL_OR_UNPROVEN_RESIDUALS_CANNOT_STALL_EXACT_INDEPENDENT_INTERNAL_CLOSURE__SEMANTIC_DEDUP_EXPLICIT_ONLY",
+    "live_input_verified": false,
+    "live_input_verification_status": "DRIFTED_SINCE_PUBLIC_RUNNER_RECEIPT__REVERIFICATION_REQUIRED"
   }
 }
