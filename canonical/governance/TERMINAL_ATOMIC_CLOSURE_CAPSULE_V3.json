@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3",
   "date": "2026-10-02",
-  "status": "INDEPENDENTLY_VERIFIED_PREBEACON_EXACT_POST_AUTHORITY_GIT_SNAPSHOT__BEACON_SAFE__ZERO_TERMINAL_RESULTS",
+  "status": "SUPERSEDED_BEFORE_BEACON__PARENT_NO_ABORT_REPAIR_REQUIRED__ZERO_TERMINAL_RESULTS",
   "supersedes_for_execution": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V2.json",
   "objective": "Freeze the exact post-authority repaired-launcher terminal execution world before the first post-freeze beacon.",
   "execution_snapshot": {
@@ -82,7 +82,8 @@
     "incremental_spend_usd": 0
   },
   "independent_verification": "canonical/verification/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-  "verified_for_beacon": true,
-  "next": "APPLY_FROZEN_GLOBAL_TERMINAL_SELECTION_KERNEL_V1_TO_OBTAIN_THE_FIRST_AUTHORIZED_POST_FREEZE_UNPREDICTABLE_BEACON__THEN_EXECUTE_EXACT_SNAPSHOT_821712c059b139f3494723dca6e8d0fc82ee59a4_ONCE_WITH_PACKAGE_COMMITMENT_5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
-  "verified_capsule_blob_sha": "05f6c86297a593658aefc84a0905079d0138c129"
+  "verified_for_beacon": false,
+  "next": "REFREEZE_AFTER_PARENT_NO_ABORT_REPAIR_AND_HARDENED_AUTHORITY_REPASS",
+  "verified_capsule_blob_sha": "05f6c86297a593658aefc84a0905079d0138c129",
+  "superseded_reason": "PARENT_PORTFOLIO_FAILURE_COULD_ABORT_LATER_FROZEN_PARENT_OBSERVATIONS__EXECUTE_EACH_CONTRACT_ONCE_REQUIRES_NO_ABORT_REPAIR"
 }
