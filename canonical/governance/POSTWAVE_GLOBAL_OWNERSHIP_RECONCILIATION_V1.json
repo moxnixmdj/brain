@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_POSTWAVE_GLOBAL_OWNERSHIP_RECONCILIATION_V1",
+  "date": "2026-10-02",
+  "status": "PARTIAL_PASS__VERIFIER_AND_COMPOSITION_CLOSED__DONOR_CLEANROOM_REMAINS_OPEN",
+  "terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+  "terminal_reduction": "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json",
+  "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "source_full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+  "conclusions": {
+    "unresolved_verifier_mutations_zero": {
+      "value": true,
+      "counter": 0,
+      "basis": [
+        "12_OF_12_TERMINAL_CONTRACTS_VALID_AND_PASS",
+        "TERMINAL_ACCEPTANCE_INPUTS_HASH_BOUND_BEFORE_RESULT_REDUCTION",
+        "ONE_SHOT_RESULT_IMMUTABLE_AND_NO_REPLAY_AUTHORIZED",
+        "NO_RESULT_TO_RUNTIME_FEEDBACK_DURING_WAVE"
+      ]
+    },
+    "unresolved_composition_failures_zero": {
+      "value": true,
+      "counter": 0,
+      "basis": [
+        "PARENT_REDUCTION_STATUS_PASS",
+        "PARENT_REDUCTION_ERRORS_EMPTY",
+        "MULTIPLEX_BEHAVIOR_FAILURES_ZERO",
+        "12_OF_12_CONTRACTS_PASS"
+      ]
+    },
+    "contaminated_evidence_used_for_promotion_zero": {
+      "value": true,
+      "counter": 0,
+      "basis": [
+        "NO_CASE_REPLACEMENT",
+        "NO_TUNING_REPLAY",
+        "POST_FREEZE_BEACON_BOUND_AFTER_PACKAGE_FREEZE"
+      ]
+    },
+    "resource_or_authority_violations_zero": {
+      "value": true,
+      "counter": 0,
+      "basis": [
+        "ZERO_INCREMENTAL_SPEND",
+        "TERMINAL_EXECUTION_USED_AUTHORIZED_ONE_SHOT_ROUTE",
+        "TERMINAL_REPLAY_PERMITTED_FALSE"
+      ]
+    },
+    "donor_dependent_required_behaviors_zero": {
+      "value": null,
+      "counter": null,
+      "reason": "NOT_PROVED_BY_EXISTING_TERMINAL_DEPENDENCY_MANIFEST",
+      "missing": [
+        "EXHAUSTIVE_RUNTIME_DEPENDENCY_CLASSIFICATION_BY_DONOR_PROTOCOL",
+        "NETWORK_DENIAL_OR_TARGET_DONOR_UNAVAILABILITY_EVIDENCE",
+        "EXPLICIT_UNDECLARED_DONOR_DEPENDENCY_COUNT"
+      ]
+    },
+    "final_donor_deletion_cleanroom_pass": {
+      "value": false,
+      "reason": "NO_DEDICATED_DONOR_DELETION_CLEANROOM_RECEIPT_FOUND"
+    },
+    "proof_bundle_frozen": {
+      "value": false,
+      "reason": "FINAL_BUNDLE_MUST_NOT_FREEZE_AS_ACHIEVED_WHILE_DONOR_CLEANROOM_GATE_IS_OPEN"
+    }
+  },
+  "no_terminal_replay": true,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "PROVE_DONOR_INDEPENDENCE_WITHOUT_REPLAYING_TERMINAL_CASES__THEN_FREEZE_FINAL_PROOF_BUNDLE_AND_RUN_TERMINAL_CLOSURE_REDUCER"
+}
