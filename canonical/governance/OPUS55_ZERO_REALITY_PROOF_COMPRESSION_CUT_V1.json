@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ZERO_REALITY_PROOF_COMPRESSION_CUT_V1",
   "date": "2026-10-02",
-  "status": "EXECUTED_FAIL_CLOSED_ZERO_REALITY_CUT__0_NEW_PREDICATES_CLOSED__FORMAL_INPUT_BLOCKERS_LOCALIZED",
+  "status": "EXECUTED_FAIL_CLOSED_ZERO_REALITY_CUT__0_NEW_PREDICATES_CLOSED__FOUR_FORMAL_INPUT_BLOCKER_CLASSES_LOCALIZED",
   "objective": "Execute the mandatory proof-compression layer over the current 29 blocked Opus 5.5 atomic acceptance predicates without weakening frozen protocols, consuming fresh reality, replaying terminal evidence, or granting unsupported credit.",
-  "source_head": "LIVE_DEFAULT_BRANCH_AT_COMMIT_TIME__SEE_FILE_COMMIT",
+  "source_head": "82d983e4d63736c135e8ed1b46481e36ec793d8b",
   "source_state": {
     "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
     "acceptance_calibration": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
@@ -72,6 +72,27 @@
       "rule": "DO_NOT_INFER_COMPONENT_INTERFACES_FROM_WHOLE_FAMILY_LABELS_OR_BEHAVIORAL_PASS",
       "new_reality_units_consumed": 0,
       "predicate_credit_delta": 0
+    },
+    {
+      "action": "RUN_DIFFERENTIAL_DOMINANCE_COMPILER",
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
+      ],
+      "kernel": "canonical/runtime/differential_dominance_compiler_v1.py",
+      "result": "BLOCKED_BEFORE_KERNEL_EVALUATION",
+      "blocker": "NO_COMPLETE_FROZEN_FINITE_MATCHED_CASE_UNIVERSE_WITH_SHARED_SUCCESS_CRITERION_IS_CURRENTLY_ADMISSIBLE_FOR_THE_REMAINING_MATCHED_PREDICATES",
+      "evidence": [
+        "canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json",
+        "canonical/governance/DIFFERENTIAL_DOMINANCE_COMPILER_V1.json"
+      ],
+      "exact_reason": "THE_MATCHED_SUPERPORTFOLIO_IS_FROZEN_PREEXPOSURE_WITH_ZERO_CASES_GENERATED_AND_COMPARATOR_ADMISSIBILITY_BLOCKED__ABSENCE_OF_COUNTEREXAMPLE_IS_NOT_PROOF",
+      "new_reality_units_consumed": 0,
+      "predicate_credit_delta": 0
     }
   ],
   "minimal_blocker_cut": [
@@ -79,6 +100,11 @@
       "id": "NORMALIZED_MATCHED_PROTOCOL_SCOPE_INPUTS",
       "affects_predicate_count": 11,
       "discharge": "Create independently content-addressed semantic-normalization documents for each target and candidate witness using only existing frozen protocol text and independently verified receipts; then run protocol_implication_scope_algebra_v1. Normalization itself grants zero credit and must be independently verified."
+    },
+    {
+      "id": "COMPLETE_FINITE_MATCHED_SCOPE_FOR_DIFFERENTIAL_DOMINANCE",
+      "affects_predicate_count": 6,
+      "discharge": "Supply a content-addressed complete finite matched case universe with shared success criterion and authority boundary, plus verified Brain outcomes and either verified comparator failures or authoritative comparator-success impossibility per residual case. Current matched superportfolio has zero generated cases and remains comparator-admissibility blocked; do not generate cases merely to feed this compiler."
     },
     {
       "id": "EXPLICIT_FINITE_JUDGMENT_WORLD_MODELS",
@@ -115,7 +141,7 @@
     "ZERO_CAPABILITY_OR_FAMILY_CREDIT_FROM_THIS_CUT",
     "ONLY_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_NORMALIZATION_MAY_FEED_PROOF_COMPRESSION_KERNELS"
   ],
-  "next": "MATERIALIZE_AND_INDEPENDENTLY_VERIFY_THE_THREE_MISSING_FORMAL_INPUT_CLASSES__RERUN_ONLY_THE_RELEVANT_PROOF_COMPRESSION_KERNELS__THEN_RECOMPUTE_ACCEPTANCE_RESIDUAL_COMPILER_V2__DO_NOT_CONSUME_FRESH_REALITY_UNTIL_A_MACHINE_VERIFIED_ACTION_BECOMES_AUTHORIZED",
+  "next": "FIRST_MATERIALIZE_AND_INDEPENDENTLY_VERIFY_NORMALIZED_SCOPE_ATOMS_AND_FROZEN_COMPOSITION_INTERFACES_FROM_EXISTING_EVIDENCE__USE_DIFFERENTIAL_DOMINANCE_ONLY_WHEN_A_COMPLETE_FINITE_SCOPE_ALREADY_EXISTS__KEEP_EPISTEMIC_KERNEL_BLOCKED_UNLESS_A_FAITHFUL_FINITE_WORLD_MODEL_EXISTS__RERUN_ACCEPTANCE_RESIDUAL_COMPILER_AFTER_EACH VERIFIED_ZERO_REALITY_WITNESS__NO_FRESH_REALITY_UNTIL_MACHINE_AUTHORIZED",
   "incremental_spend_usd": 0,
   "new_reality_units_consumed": 0,
   "capability_credit_delta": 0,
