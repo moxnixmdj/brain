@@ -1,0 +1,380 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1",
+  "date": "2026-10-02",
+  "status": "ONE_SHOT_TERMINAL_WAVE_PASS__IMMUTABLE_PUBLIC_RUNNER_RECEIPT__NO_REPLAY_AUTHORIZED",
+  "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+  "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "canonical_beacon": "36977020853",
+  "beacon_reconciliation": "canonical/governance/TERMINAL_V3_BEACON_RECONCILIATION_V1.json",
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 797,
+    "head_sha": "b896e4363f87ea19e023e3ddb95e549a332a5bbb",
+    "workflow_run_id": 36977803089,
+    "workflow_job_id": 110745333159,
+    "conclusion": "success",
+    "closed_without_merge": true
+  },
+  "artifact": {
+    "artifact_id": 11214610934,
+    "name": "terminal-v3-wave-receipts",
+    "artifact_digest": "sha256:e77e935b4612ecbe094e806f1f4da3dff0289552844b29e5a7a7bd99020503f2",
+    "full_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
+    "full_result_bytes": 493749,
+    "summary_sha256": "d460316947d66cf29295387fc44b638ab4a755df3fb190510f4fc9f182050f64"
+  },
+  "direct_terminal_population": {
+    "total_cases": 2770,
+    "total_passes": 2770,
+    "total_failures": 0,
+    "routes": {
+      "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001": {
+        "cases": 2000,
+        "passes": 2000
+      },
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001": {
+        "cases": 128,
+        "passes": 128
+      },
+      "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001": {
+        "cases": 150,
+        "passes": 150
+      },
+      "TASK_TO_DELEGATION_GRAPH_001": {
+        "cases": 132,
+        "passes": 132
+      },
+      "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": {
+        "cases": 180,
+        "passes": 180
+      },
+      "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001": {
+        "cases": 180,
+        "passes": 180
+      }
+    }
+  },
+  "parent_terminal_population": {
+    "fresh_case_executions": 582,
+    "cad_reused_direct_cases": 128,
+    "by_portfolio": {
+      "T0": 146,
+      "T1": 184,
+      "T2": 126,
+      "T3": 126
+    },
+    "parent_reduction_status": "PASS",
+    "parent_reduction_errors": [],
+    "multiplex_behavior_failures": 0
+  },
+  "total_fresh_terminal_case_executions": 3352,
+  "result_guards": {
+    "no_case_replacement": true,
+    "no_tuning_replay": true,
+    "result_to_runtime_feedback_during_wave": false,
+    "direct_route_duplicate_execution_count": 0
+  },
+  "reduction_input": {
+    "purpose": "MINIMUM_LOSSLESS_INPUT_REQUIRED_BY_TERMINAL_CONTRACT_RESULT_REDUCER_V1__CASE_ROWS_ANCHORED_BY_FULL_RESULT_SHA256",
+    "wave": {
+      "schema": "PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_LAUNCHER_V1",
+      "status": "PASS",
+      "pass": true,
+      "terminal_result": true,
+      "direct_results": {
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001": {
+          "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+          "pass": true,
+          "terminal_result": true
+        },
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001": {
+          "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+          "pass": true,
+          "terminal_result": true
+        },
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001": {
+          "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+          "pass": true,
+          "terminal_result": true
+        },
+        "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001": {
+          "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+          "pass": true,
+          "terminal_result": true
+        },
+        "TASK_TO_DELEGATION_GRAPH_001": {
+          "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+          "pass": true,
+          "terminal_result": true
+        },
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001": {
+          "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+          "pass": true,
+          "terminal_result": true
+        }
+      },
+      "direct_routes_executed_once": [
+        "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+        "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+        "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+        "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+        "TASK_TO_DELEGATION_GRAPH_001",
+        "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001"
+      ],
+      "shared_direct_route_duplicate_execution_count": 0,
+      "parent_portfolio_receipts": {
+        "T0": [
+          {
+            "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+            "binding_blob": "c0f55a55091186c5ab785b670f935bbc6a2f9432",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T0::CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001::aggregate::128",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T0",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+            "binding_blob": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T0::SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001::aggregate::96",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T0",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+            "binding_blob": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T0::STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001::aggregate::20",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T0",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+            "binding_blob": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T0::TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::aggregate::30",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T0",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          }
+        ],
+        "T1": [
+          {
+            "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+            "binding_blob": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T1::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T1",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+            "binding_blob": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T1::NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001::aggregate::8",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T1",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+            "binding_blob": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T1::PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001::aggregate::30",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T1",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+            "binding_blob": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T1::SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001::aggregate::96",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T1",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+            "binding_blob": "6d2e9adbd45af41c26c543f69769a6f9c69d52ac",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T1::STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001::aggregate::20",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T1",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          }
+        ],
+        "T2": [
+          {
+            "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+            "binding_blob": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T2::SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001::aggregate::96",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T2",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+            "binding_blob": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T2::TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001::aggregate::30",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T2",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          }
+        ],
+        "T3": [
+          {
+            "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+            "binding_blob": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T3::EVIDENCE_TO_AUDIENCE_SYNTHESIS_001::aggregate::30",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T3",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          },
+          {
+            "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+            "binding_blob": "d34a284f7c1f99fd93d420f3a5aba93851b29ef6",
+            "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+            "candidate_visible_keys": [
+              "PUBLIC_TASK_PAYLOAD_ONLY"
+            ],
+            "case_id": "T3::SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001::aggregate::96",
+            "case_replaced": false,
+            "claims_behavior_credit": false,
+            "direct_instrumentation_pass": true,
+            "load_bearing": true,
+            "parent_terminal_acceptance_pass": true,
+            "portfolio": "T3",
+            "post_freeze_beacon": "36977020853",
+            "result_to_runtime_feedback": false,
+            "tuning_replay": false
+          }
+        ]
+      },
+      "no_case_replacement": true,
+      "no_tuning_replay": true,
+      "result_to_runtime_feedback_during_wave": false
+    }
+  },
+  "terminal_results_observed": 1,
+  "fresh_terminal_evidence_consumed": 3352,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "RUN_EXACT_TERMINAL_CONTRACT_RESULT_REDUCER_V1__THEN_TERMINAL_FAMILY_ADJUDICATION_REDUCER_V1__THEN_GLOBAL_POSTWAVE_CLOSURE_GATES__NO_TERMINAL_REPLAY"
+}
