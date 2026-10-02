@@ -1,0 +1,22 @@
+name: Verify Brain witness semantic refinement v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/brain_witness_semantic_refinement_v1.py"
+      - "canonical/tests/test_brain_witness_semantic_refinement_v1.py"
+      - "canonical/governance/EXECUTABLE_SEMANTIC_REFINEMENT_V1.json"
+      - ".github/workflows/verify-brain-witness-semantic-refinement-v1.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python -m py_compile canonical/runtime/brain_witness_semantic_refinement_v1.py
+          python canonical/tests/test_brain_witness_semantic_refinement_v1.py
