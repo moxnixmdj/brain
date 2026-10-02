@@ -6,6 +6,10 @@ on:
       - canonical/runtime/trajectory_failure_information_safe_proof.py
       - canonical/runtime/trajectory_failure_information_safe_candidate.py
       - canonical/tests/test_trajectory_failure_information_safe.py
+      - canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py
+      - canonical/runtime/trajectory_failure_typed_ir_proof_v5.py
+      - canonical/tests/test_trajectory_failure_typed_ir_v5.py
+      - canonical/governance/P1_V5_SCOPE_RESCUE_COMPOSITION_V1.json
       - .github/workflows/verify-trajectory-failure-information-safe.yml
   pull_request:
     branches: [main]
@@ -13,6 +17,10 @@ on:
       - canonical/runtime/trajectory_failure_information_safe_proof.py
       - canonical/runtime/trajectory_failure_information_safe_candidate.py
       - canonical/tests/test_trajectory_failure_information_safe.py
+      - canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py
+      - canonical/runtime/trajectory_failure_typed_ir_proof_v5.py
+      - canonical/tests/test_trajectory_failure_typed_ir_v5.py
+      - canonical/governance/P1_V5_SCOPE_RESCUE_COMPOSITION_V1.json
       - .github/workflows/verify-trajectory-failure-information-safe.yml
   workflow_dispatch:
 permissions:
@@ -26,3 +34,4 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m unittest -v canonical.tests.test_trajectory_failure_information_safe
+      - run: python -m unittest -v canonical.tests.test_trajectory_failure_typed_ir_v5
