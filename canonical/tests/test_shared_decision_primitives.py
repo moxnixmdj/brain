@@ -65,3 +65,32 @@ for required in caps:
         assert chosen.available and chosen.authorized and chosen.verified and required.issubset(chosen.capabilities)
 
 print("shared_decision_primitives: PASS")
+
+
+# Regression: exact support optimization minimizes COST globally, not cardinality.
+units_cost=[
+    EvidenceUnit("expensive",frozenset({"c1","c2"}),100,1),
+    EvidenceUnit("cheap1",frozenset({"c1"}),1,1),
+    EvidenceUnit("cheap2",frozenset({"c2"}),1,1),
+]
+d=minimal_support_bundle({"c1","c2"},units_cost)
+assert d.status=="PASS" and d.evidence_ids==("cheap1","cheap2"), d
+
+# Duplicate identities and invalid numeric state fail closed.
+assert select_verified_tool({"x"},[
+    ToolRoute("dup",frozenset({"x"}),1),
+    ToolRoute("dup",frozenset({"x"}),0),
+]).status=="ESCALATE"
+assert next_research_action({"r"},set(),[
+    ResearchAction("dup",frozenset({"r"}),1),
+    ResearchAction("dup",frozenset({"r"}),1),
+]).status=="ESCALATE"
+assert minimal_support_bundle({"c"},[
+    EvidenceUnit("e",frozenset({"c"}),-1,1),
+]).status=="ESCALATE"
+assert select_repair_target([
+    FailureCandidate("dup",1,True,True,.9,.9),
+    FailureCandidate("dup",2,True,True,.9,.9),
+]).status=="ESCALATE"
+
+print("shared_decision_primitives_hardening: PASS")
