@@ -1,0 +1,84 @@
+name: Execute terminal wave V3 once
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/execute-terminal-wave-v3-once.yml'
+permissions:
+  contents: read
+jobs:
+  terminal-wave:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact frozen execution snapshot
+        uses: actions/checkout@v4
+        with:
+          ref: '821712c059b139f3494723dca6e8d0fc82ee59a4'
+          fetch-depth: 1
+      - name: Assert immutable snapshot
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "821712c059b139f3494723dca6e8d0fc82ee59a4"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen-route runtime dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-input \
+            "pydantic>=2,<3" "cadquery==2.6.1" \
+            python-docx openpyxl python-pptx pypdf
+      - name: Execute one-shot frozen terminal wave
+        id: execute
+        continue-on-error: true
+        env:
+          PROJECT_BRAIN_PACKAGE_COMMITMENT: '5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a'
+          PROJECT_BRAIN_POST_FREEZE_BEACON: '36977020853'
+        run: |
+          set -euo pipefail
+          PYTHONPATH=.:canonical/runtime python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from canonical.runtime import terminal_parent_portfolio_launcher_v1 as launcher
+          commitment=os.environ['PROJECT_BRAIN_PACKAGE_COMMITMENT']
+          beacon=os.environ['PROJECT_BRAIN_POST_FREEZE_BEACON']
+          out=launcher.execute_wave(
+              commitment=commitment,
+              beacon=beacon,
+              root=Path('.'),
+          )
+          out['execution_snapshot_commit']='821712c059b139f3494723dca6e8d0fc82ee59a4'
+          out['package_commitment']=commitment
+          out['post_freeze_beacon']=beacon
+          out['github_terminal_carrier_run_id']=os.environ.get('GITHUB_RUN_ID')
+          Path('terminal_wave_v3_result.json').write_text(
+              json.dumps(out,indent=2,sort_keys=True),encoding='utf-8'
+          )
+          print(json.dumps(out,sort_keys=True))
+          raise SystemExit(0 if out.get('pass') is True else 2)
+          PY
+      - name: Upload immutable terminal result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminal-wave-v3-result
+          path: terminal_wave_v3_result.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Enforce one-shot verdict
+        if: always()
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          d=json.load(open('terminal_wave_v3_result.json'))
+          assert d['execution_snapshot_commit']=='821712c059b139f3494723dca6e8d0fc82ee59a4'
+          assert d['package_commitment']=='5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a'
+          assert d['post_freeze_beacon']=='36977020853'
+          assert d['no_case_replacement'] is True
+          assert d['no_tuning_replay'] is True
+          assert d['result_to_runtime_feedback_during_wave'] is False
+          assert d['terminal_result'] is True
+          assert d['pass'] is True, d
+          print('TERMINAL_WAVE_V3_PASS')
+          PY
