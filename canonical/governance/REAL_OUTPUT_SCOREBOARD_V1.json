@@ -685,13 +685,13 @@
     "subcapability_status": "BRAIN_CONFIGURED_STAGE1_BREADTH_ACTIVE__ONE_PASS_ONE_CLEAN_FAILURE__SIX_CONTAMINATED_OR_INADMISSIBLE__ONE_SURFACE_SKIP_UNSPENT__RANK9_POLICY_STOPPED__RANK10_LIVE_PRE_VERIFICATION__ZERO_CAPABILITY_CREDIT",
     "frontier_dependency_removed": false,
     "reconciliation_credit": 0,
-    "residual_gap": "ACTIVE_TERMINAL_PROOF_BASIS_HAS_12_CONTRACTS_AND_1_ADMISSIBLE_FROZEN_TERMINAL_ROUTE__11_REMAINING",
-    "next_required_action": "CLOSE_NEXT_NONDOMINATED_ACTIVE_TERMINAL_ROUTE_BINDINGS_IN_PARALLEL__PRIORITIZE_ALREADY_PREFLIGHTED_ROUTES__NO_FRESH_TERMINAL_WAVE_BEFORE_12_OF_12_AND_PREQUALIFICATION_PASS",
+    "residual_gap": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_ACTIVE__12_CONTRACT_PROOF_BASIS_HAS_2_OF_12_ADMISSIBLE_FROZEN_TERMINAL_ROUTES__10_REMAINING__ZERO_MECHANISM_HOLES",
+    "next_required_action": "CLOSE_REMAINING_10_ACTIVE_CONTRACT_TERMINAL_ROUTE_BINDINGS_WITH_ZERO_REALITY_SCOPE_EQUIVALENCE_AND_POPULATION_ACCEPTANCE_PREFLIGHTS__THEN_RUN_CANONICAL_PREQUALIFICATION_REDUCER__NO_FRESH_TERMINAL_EVIDENCE_BEFORE_PASS",
     "internalization_manifest": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
     "falsified_prior_candidate": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPREME_V1",
     "falsification_evidence": "canonical/capabilities/internalized/software_engineering/supreme_c062bec/verification/BUN_SOURCEMAP_LEAK_PREFLIGHT_FALSIFICATION_20260930_V1.json",
     "envelope_parent_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
-    "current_parent_blocker": "ACTIVE_TERMINAL_PROOF_BASIS_HAS_12_CONTRACTS_AND_1_ADMISSIBLE_FROZEN_TERMINAL_ROUTE__11_REMAINING"
+    "current_parent_blocker": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_ACTIVE__12_CONTRACT_PROOF_BASIS_HAS_2_OF_12_ADMISSIBLE_FROZEN_TERMINAL_ROUTES__10_REMAINING__ZERO_MECHANISM_HOLES"
   },
   "events": [
     {
@@ -1273,8 +1273,8 @@
     "t3_scope_audit": "canonical/governance/T3_UNKNOWN_DOMAIN_SCOPE_AUDIT_V1.json",
     "dependency_cleanliness": "canonical/governance/PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1.json",
     "terminal_execution_authority": false,
-    "admissible_frozen_terminal_route_count": 1,
-    "remaining_terminal_route_count": 11
+    "admissible_frozen_terminal_route_count": 2,
+    "remaining_terminal_route_count": 10
   },
   "global_surface_dominance_correction": {
     "v3_status": "INVALID_FOR_EXECUTION_AUTHORITY",

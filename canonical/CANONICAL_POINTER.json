@@ -900,8 +900,8 @@
       "v4_input": "canonical/governance/GLOBAL_TERMINAL_SURFACE_DOMINANCE_INPUT_V4.json",
       "v4_independent_verification": "PENDING"
     },
-    "admissible_frozen_terminal_route_count": 1,
-    "remaining_terminal_route_count": 11,
+    "admissible_frozen_terminal_route_count": 2,
+    "remaining_terminal_route_count": 10,
     "active_terminal_prequalification": {
       "path": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
       "admissible_routes": 2,

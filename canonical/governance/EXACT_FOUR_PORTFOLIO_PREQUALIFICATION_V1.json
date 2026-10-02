@@ -337,7 +337,7 @@
     "remaining_six_candidate_bindings": "NARROW_COMPONENT_PREFLIGHT_ONLY__ALL_SIX_FAIL_FULL_CONTRACT_SCOPE_AUDIT__ZERO_TERMINAL_ROUTE_AUTHORITY__canonical/verification/REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "active_terminal_proof_basis_current": "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
     "active_terminal_contract_count": 12,
-    "admissible_frozen_terminal_route_count": 1,
+    "admissible_frozen_terminal_route_count": 2,
     "global_terminal_surface_dominance_v4_independently_verified": "canonical/verification/GLOBAL_TERMINAL_SURFACE_DOMINANCE_V4_CURRENT_FAIL_CLOSED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "remaining_behavior_information_boundary_audit": "canonical/governance/REMAINING_BEHAVIOR_INFORMATION_BOUNDARY_AUDIT_V1.json",
     "terminal_replacement_population_protocol_v2": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
@@ -348,7 +348,7 @@
     "saccr_information_safe_independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "p2_p3_information_safe_independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
     "terminal_prequalification_reducer_12_contract_current_independent_pass": "canonical/verification/TERMINAL_PREQUALIFICATION_12_CONTRACT_CURRENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "active_terminal_proof_basis_blob_sha": "93e5c03c737d907bf826453c0419f01ebb8b0c54",
+    "active_terminal_proof_basis_blob_sha": "d03487baed0df980858313c571cb6b8a61f4368c",
     "p2_information_safe_independent_preflight": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
     "p3_v2_information_safe_preflight_authority": "INVALIDATED_FOR_P3_BY_STANCE_SUPPORT_LEAK__ZERO_TERMINAL_AUTHORITY",
     "p3_raw_evidence_v3_independent_preflight": "INDEPENDENT_PASS_BOUNDED_ONLY__canonical/verification/P3_INFORMATION_SAFE_V3_PREFLIGHT_VERIFICATION_20261002_V1.json",
@@ -367,10 +367,11 @@
     "delegation_structural_variety_independent_preflight": "canonical/verification/DELEGATION_STRUCTURAL_VARIETY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "tool_discovery_hardened_v2_independent_pass": "canonical/verification/TOOL_DISCOVERY_INFORMATION_SAFE_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
     "delegation_terminal_acceptance_binding": "canonical/governance/DELEGATION_TERMINAL_ACCEPTANCE_BINDING_V1.json",
-    "delegation_terminal_route_frozen_admissible": true,
+    "delegation_terminal_route_frozen_admissible": false,
     "open_domain_scope_superset_deadlock_audit": "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json",
     "open_domain_bounded_synthetic_whole_scope_promotion_forbidden": true,
-    "delegation_current_candidate_oracle_revalidation": "PENDING_AFTER_EXACT_BLOB_CHANGE"
+    "delegation_current_candidate_oracle_revalidation": "canonical/verification/DELEGATION_CURRENT_BLOB_REVALIDATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "specification_to_acceptance_terminal_route_frozen_admissible": true
   },
   "route_audit_summary": {
     "surface_count": 14,
