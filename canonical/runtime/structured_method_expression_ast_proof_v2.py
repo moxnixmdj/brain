@@ -78,6 +78,17 @@ def _eval(expr: Mapping[str, Any], meta: Mapping[str, Mapping[str, str]], vals: 
     if op == "pow_int":
         a=one(); p=expr["power"]; assert a[0] in {"integer","number"} and isinstance(p,int)
         return "number",_dim_string({k:v*p for k,v in _dim_parse(a[1]).items() if v*p}),float(a[2])**p
+    if op in {"exp","log","sqrt"}:
+        a=one(); assert a[0] in {"integer","number"} and a[1]=="dimensionless"
+        av=float(a[2])
+        if op=="log":
+            assert av>0.0; value=math.log(av)
+        elif op=="sqrt":
+            assert av>=0.0; value=math.sqrt(av)
+        else:
+            value=math.exp(av)
+        assert math.isfinite(value)
+        return "number","dimensionless",value
     if op in {"gt","ge","lt","le"}:
         a,b=two(); assert a[0] in {"integer","number"} and b[0] in {"integer","number"} and a[1]==b[1]
         av,bv=float(a[2]),float(b[2])
@@ -187,6 +198,27 @@ def generate_case(seed: int, ordinal: int) -> dict[str, Any]:
             "output":"ratio_sq","output_type":"number","output_dimension":"dimensionless",
             "consumes_requirements":["REQ_CONSTRAINT"],
             "invariants":[{"op":"ge","left":_ref("ratio_sq"),"right":_num(0)}],
+        },
+        {
+            "id":"R_LOG_RATIO",
+            "expr":{"op":"log","arg":_ref("ratio")},
+            "output":"log_ratio","output_type":"number","output_dimension":"dimensionless",
+            "consumes_requirements":["REQ_FORMULA"],
+            "invariants":[],
+        },
+        {
+            "id":"R_EXP_LOG_RATIO",
+            "expr":{"op":"exp","arg":_ref("log_ratio")},
+            "output":"exp_log_ratio","output_type":"number","output_dimension":"dimensionless",
+            "consumes_requirements":["REQ_FORMULA"],
+            "invariants":[],
+        },
+        {
+            "id":"R_SQRT_RATIO_SQ",
+            "expr":{"op":"sqrt","arg":_ref("ratio_sq")},
+            "output":"sqrt_ratio_sq","output_type":"number","output_dimension":"dimensionless",
+            "consumes_requirements":["REQ_FORMULA"],
+            "invariants":[{"op":"ge","left":_ref("sqrt_ratio_sq"),"right":_num(0)}],
         },
         {
             "id":"R_CAPPED",
