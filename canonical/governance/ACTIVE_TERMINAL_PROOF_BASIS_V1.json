@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__NATIVE_ARTIFACT_CROSS_FORMAT_STRUCTURAL_PREFLIGHT_INDEPENDENT_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__1_PREWAVE_ROUTE_FROZEN_ADMISSIBLE__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -60,16 +60,17 @@
     {
       "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
       "portfolio": "T1",
-      "proof_state": "SCOPE_EQUIVALENT_GATE_V2_INDEPENDENT_PASS__TERMINAL_POPULATION_BINDING_PENDING",
+      "proof_state": "PREWAVE_ROUTE_FROZEN_ADMISSIBLE__SCOPE_GATE_V2_AND_TERMINAL_POPULATION_PREFLIGHT_PASS__TERMINAL_EXECUTION_PENDING",
       "route_requirement": "FULL_ACTIVE_SA_CCR_SCOPE_WITH_INTERMEDIATE_LINEAGE_AND_AUTHORITATIVE_APPLICABILITY_ORACLE",
-      "blockers": [
-        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
-      ],
+      "blockers": [],
       "route": "canonical/governance/SA_CCR_INFORMATION_SAFE_TERMINAL_ROUTE_V1.json",
       "candidate": "canonical/runtime/saccr_credit_information_safe_candidate.py",
       "independent_preflight": "canonical/verification/SA_CCR_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
       "scope_gate_verification": "canonical/verification/SA_CCR_SCOPE_GATE_V2_CURRENT_INPUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "scope_gate_input": "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json"
+      "scope_gate_input": "canonical/governance/SA_CCR_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+      "terminal_population_binding": "canonical/governance/SA_CCR_TERMINAL_POPULATION_BINDING_V1.json",
+      "terminal_population_preflight": "canonical/verification/SA_CCR_TERMINAL_POPULATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "prewave_admissible": true
     },
     {
       "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
@@ -199,9 +200,9 @@
     }
   ],
   "active_contract_count": 12,
-  "admissible_frozen_terminal_route_count": 0,
+  "admissible_frozen_terminal_route_count": 1,
   "execution_authority": false,
-  "next": "CLOSE_WHOLE_SCOPE_EQUIVALENCE_AND_REMAINING_UNBUILT_CONTRACT_ROUTES__PASS_SCOPE_EQUIVALENT_PROOF_GATE_V2__FREEZE_POST_FREEZE_POPULATIONS_AND_ACCEPTANCE__THEN_REDUCE",
+  "next": "CLOSE_REMAINING_11_CONTRACT_ROUTES__PASS_SCOPE_EQUIVALENT_PROOF_GATE_V2__FREEZE_POST_FREEZE_POPULATIONS_AND_ACCEPTANCE__THEN_REDUCE",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
