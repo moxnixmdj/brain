@@ -115,46 +115,15 @@ def _completed_state(task:Mapping[str,Any], completed:Sequence[str]):
     return frozenset(facts),evidence_owners
 
 
-def _plan(task:Mapping[str,Any], steps:Mapping[str,Mapping[str,Any]], completed:Sequence[str]):
+def _derive_dependencies(task:Mapping[str,Any], steps:Mapping[str,Mapping[str,Any]], completed:Sequence[str], seq:Sequence[str]):
     initial,_=_completed_state(task,completed)
-    required=frozenset(_ids(task.get("required_outputs",[]),"REQUIRED_OUTPUTS"))
-    if not required:
-        raise DelegationV2Error("REQUIRED_OUTPUTS_EMPTY")
-    eligible=sorted(s for s,x in steps.items() if x["available"])
-    start=frozenset(initial)
-    heap=[(0.0,0,(),start)]
-    best={start:(0.0,0,())}
-    goal=None
-    while heap:
-        cost,count,seq,facts=heappop(heap)
-        if best.get(facts)!=(cost,count,seq):
-            continue
-        if required.issubset(facts):
-            goal=(cost,seq);break
-        used=set(seq)
-        for sid in eligible:
-            if sid in used:
-                continue
-            row=steps[sid]
-            if not row["requires"].issubset(facts):
-                continue
-            nf=facts|row["produces"]
-            if nf==facts:
-                continue
-            ns=seq+(sid,)
-            cand=(cost+row["cost"],count+1,ns)
-            if best.get(nf) is None or cand<best[nf]:
-                best[nf]=cand
-                heappush(heap,(cand[0],cand[1],cand[2],nf))
-    if goal is None:
-        raise DelegationV2Error("NO_EXECUTABLE_PLAN")
-
-    cost,seq=goal
     facts=set(initial)
     producer={}
     deps={}
     for sid in seq:
         row=steps[sid]
+        if not row["requires"].issubset(facts):
+            raise DelegationV2Error("SEQUENCE_PRECONDITION_INVALID:"+sid)
         direct=set()
         for fact in sorted(row["requires"]):
             if fact in initial:
@@ -166,9 +135,54 @@ def _plan(task:Mapping[str,Any], steps:Mapping[str,Mapping[str,Any]], completed:
         for fact in sorted(row["produces"]):
             if fact not in facts:
                 producer[fact]=sid
-            facts.add(fact)
-    return list(seq),deps,float(cost)
+        facts.update(row["produces"])
+    return deps
 
+
+def _plan(task:Mapping[str,Any], steps:Mapping[str,Mapping[str,Any]], workers:Mapping[str,frozenset[str]], caps:Mapping[str,int], completed:Sequence[str]):
+    """Exact minimum feasible plan under the declared finite task model.
+
+    Search order is (total_cost, task_count, lexical_sequence).  Unlike the prior
+    fact-state Dijkstra, feasibility is part of the goal predicate: a cheaper
+    fact-producing sequence that cannot be assigned/scheduled is skipped rather
+    than incorrectly terminating the search.
+    """
+    initial,_=_completed_state(task,completed)
+    required=frozenset(_ids(task.get("required_outputs",[]),"REQUIRED_OUTPUTS"))
+    if not required:
+        raise DelegationV2Error("REQUIRED_OUTPUTS_EMPTY")
+    eligible=sorted(s for s,x in steps.items() if x["available"])
+    heap=[(0.0,0,(),frozenset(initial))]
+    seen_sequences={()}
+
+    while heap:
+        cost,count,seq,facts=heappop(heap)
+        if required.issubset(facts):
+            deps=_derive_dependencies(task,steps,completed,seq)
+            try:
+                _schedule(list(seq),deps,steps,workers,caps)
+            except DelegationV2Error as exc:
+                if str(exc)!="NO_RESOURCE_AND_CAPABILITY_FEASIBLE_SCHEDULE":
+                    raise
+            else:
+                return list(seq),deps,float(cost)
+
+        used=set(seq)
+        for sid in eligible:
+            if sid in used:
+                continue
+            row=steps[sid]
+            if not row["requires"].issubset(facts):
+                continue
+            nf=facts|row["produces"]
+            if nf==facts:
+                continue
+            ns=seq+(sid,)
+            if ns in seen_sequences:
+                continue
+            seen_sequences.add(ns)
+            heappush(heap,(cost+row["cost"],count+1,ns,nf))
+    raise DelegationV2Error("NO_EXECUTABLE_FEASIBLE_PLAN")
 
 def _resource_ok(subset,steps,caps):
     use=defaultdict(int)
@@ -259,7 +273,7 @@ def _evidence(task:Mapping[str,Any], task_ids, deps, steps, completed):
 def _solve(task:Mapping[str,Any], receipt:Mapping[str,Any]|None=None):
     completed=[str(x) for x in ((receipt or {}).get("completed_task_ids") or [])]
     steps,workers,caps=_effective(task,receipt,set(completed))
-    ids,deps,cost=_plan(task,steps,completed)
+    ids,deps,cost=_plan(task,steps,workers,caps,completed)
     waves,assignment=_schedule(ids,deps,steps,workers,caps)
     owners,fanin,terminal_evidence=_evidence(task,ids,deps,steps,completed)
     return {
