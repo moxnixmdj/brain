@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__OBJECTIVE_GATE_INPUT_CHANGED__MATCHED_PROOF_FRONTIER_REOPENED__NO_CREDIT",
+  "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__TOOL_LEARNING_ATOMIC_CEILING_CLOSED__MATCHED_PROOF_FRONTIER_OPEN_FOR_REMAINING_RESIDUALS__NO_CREDIT",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
@@ -38,7 +38,6 @@
         "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
         "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
         "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
-        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
         "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
       ],
@@ -141,7 +140,9 @@
     "attainability_verification": "verification-capsule-runner PR854__RUN36998571400__JOB110810813480__PASS",
     "objective_binding_gate_change": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
     "matched_proof_frontier": "REOPENED_ON_NEW_ADMISSIBLE_DIRECT_OBJECTIVE_GATE_RECEIPT__ZERO_ACCEPTANCE_CREDIT",
-    "tb4_global_attainability": "IMPOSSIBLE__180_LT_220__EXECUTION_REVOKED"
+    "tb4_global_attainability": "IMPOSSIBLE__180_LT_220__EXECUTION_REVOKED",
+    "tool_learning_atomic_acceptance": "PROVED_3_OF_3__canonical/verification/TOOL_LEARNING_ATOMIC_CEILING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "tool_learning_success_route_noninferior": "CLOSED_BY_INDEPENDENT_ABSOLUTE_CEILING_WITNESS__REMOVED_FROM_MATCHED_PROOF_SEARCH_TARGETS"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
