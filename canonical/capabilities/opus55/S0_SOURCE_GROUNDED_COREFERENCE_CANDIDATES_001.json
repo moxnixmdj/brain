@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_SOURCE_GROUNDED_COREFERENCE_CANDIDATES_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_S0_COMPONENT__ZERO_WHOLE_S0_CREDIT",
+  "implementation": "canonical/runtime/source_grounded_coreference.py",
+  "tests": "canonical/tests/test_source_grounded_coreference.py",
+  "verification": {
+    "original_run_id": 36951190396,
+    "case_sensitivity_repair_run_id": 36951289064,
+    "regression_run_id": 36951293058,
+    "conclusion": "success"
+  },
+  "owned_scope": [
+    "EXPLICIT_MENTION_SPANS_TO_SOURCE_GROUNDED_COREFERENCE_CANDIDATE_GRAPH",
+    "PERSON_NONPERSON_AND_NUMBER_COMPATIBILITY_FILTERING_WHEN_EXPLICIT",
+    "ALL_COMPATIBLE_PRIOR_ANTECEDENTS_PRESERVED_WITH_SOURCE_SPANS",
+    "NO_COMPATIBLE_ANTECEDENT_REMAINS_EXPLICIT_UNRESOLVED",
+    "AMBIGUITY_PRESERVED_FOR_DOWNSTREAM_IDENTIFIABILITY_OR_ADJUDICATION",
+    "BOUNDED_SURFACE_MENTION_EXTRACTION_FOR_OBVIOUS_CAPITALIZED_MENTIONS_AND_REFERENCE_FORMS"
+  ],
+  "nonclaims": [
+    "NO_GENERAL_COREFERENCE_RESOLUTION",
+    "NO_IMPLICIT_ENTITY_CLASS_INFERENCE",
+    "NO_LONG_RANGE_DISCOURSE_RELATION_INFERENCE",
+    "NO_SELECTION_BETWEEN_MULTIPLE_SOURCE_CONSISTENT_ANTECEDENTS"
+  ],
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
