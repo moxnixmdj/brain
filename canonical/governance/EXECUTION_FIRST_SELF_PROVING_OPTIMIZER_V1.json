@@ -351,9 +351,10 @@
     "required_before_irreducible_reality_cut": true,
     "runtime": "canonical/runtime/terminal_information_dominance_v1.py",
     "activation": "canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json",
-    "current_projection_status": "STALE_AFTER_FRONTIER_CHANGE_15_TO_17__RECOMPUTATION_REQUIRED_ON_EXACT_V5",
-    "prior_verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "semantic_rule": "SCHEDULING_ONLY__NO_STALE_PROJECTION_REUSE__CERTIFICATE_COVERAGE_IS_NOT_ACCEPTANCE_PROOF__REQUIREMENT_CARDINALITY_IS_NOT_PROOF_DIFFICULTY"
+    "projection": "canonical/governance/TERMINAL_INFORMATION_DOMINANCE_V5_PROJECTION.json",
+    "verification": "canonical/verification/TERMINAL_INFORMATION_DOMINANCE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "status": "ACTIVE_INDEPENDENT_PASS__V5__31_PREDICATES__17_CERTIFICATES__ZERO_STRICT_DOMINANCE__20_UNIQUE_REQUIREMENTS__ZERO_CREDIT",
+    "semantic_rule": "SCHEDULING_ONLY__NO_CURRENT_SINGLE_CERTIFICATE_DOMINANCE_DELETION_AVAILABLE__REQUIREMENT_COUNT_IS_NOT_PROOF_DIFFICULTY"
   },
   "verified_semantic_overlay_compilation": {
     "required_before_new_matched_scope_reality": true,
