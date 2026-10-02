@@ -28,9 +28,18 @@
           "id": "PROOF_COMPRESSION_KERNELS_INDEPENDENT_PASS",
           "satisfied": true,
           "evidence": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS",
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        },
+        {
+          "id": "MATCHED_BRAIN_WITNESS_NORMALIZATION_INDEPENDENT_PASS",
+          "satisfied": false
         }
       ],
-      "notes": "Before generic stronger-proof search or exact comparator work, normalize candidate and target scopes into explicit atoms/bounds and derive only verified implications. No semantic-equivalence claim may be invented by the algebra."
+      "notes": "Target-side matched/scope atoms are independently source-provenance verified. Implication algebra remains unavailable until Brain witness-side atoms/bounds are independently normalized and bound; no semantic equivalence may be invented."
     },
     {
       "id": "RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION",
@@ -54,15 +63,15 @@
         },
         {
           "id": "MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS",
-          "satisfied": false,
-          "evidence": "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V1.json"
+          "satisfied": true,
+          "evidence": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
         },
         {
           "id": "COMPLETE_FROZEN_FINITE_SHARED_CRITERION_SCOPE_AVAILABLE_PER_TARGET",
           "satisfied": false
         }
       ],
-      "notes": "Run only after target normalization is independently verified and a complete frozen finite shared-criterion case universe is content-addressed. Eliminate comparator-success/Brain-failure cases before exact comparator execution. Candidate witness still requires independent exact-scope verification and ordinary acceptance evidence binding. Public bars and separate safety/scope invariants are not substituted."
+      "notes": "Target normalization provenance is independently verified. Differential dominance remains unavailable until a complete frozen finite shared-criterion case universe is content-addressed per target; no cases may be generated merely to satisfy this precondition."
     },
     {
       "id": "RUN_EPISTEMIC_CLOSURE_DIRECT_JUDGMENT_SUBTRACTION",
@@ -322,7 +331,10 @@
     "differential_dominance_compiler": "ACTIVE_PENDING_TARGET_NORMALIZATION_AND_SCOPE_INPUTS__INDEPENDENT_IMPLEMENTATION_PASS__ZERO_CREDIT",
     "differential_dominance_verifier": "verification-capsule-runner PR888__RUN37009287824__JOB110844881495__PASS",
     "composition_component_interface_manifest": "INDEPENDENT_PUBLIC_RUNNER_PASS__12_LITERAL_INTERFACES__FAMILY_AND_RECEIPT_BINDINGS_OPEN",
-    "composition_component_interface_verification": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    "composition_component_interface_verification": "canonical/verification/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "matched_target_normalization": "INDEPENDENT_PUBLIC_RUNNER_PASS__11_TARGETS__47_ATOMS__10_METRICS__SOURCE_PROVENANCE_ONLY",
+    "matched_target_normalization_verification": "canonical/verification/OPUS55_MATCHED_TARGET_NORMALIZATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "matched_brain_witness_normalization": "OPEN__REQUIRED_BEFORE_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"
   },
   "threshold_cut": {
     "route": "canonical/verification/TB4_CONSERVATIVE_THRESHOLD_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
