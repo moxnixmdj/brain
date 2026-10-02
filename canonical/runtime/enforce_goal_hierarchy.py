@@ -782,6 +782,15 @@ def enforce_active_target_record_consistency(hierarchy,target):
         fail("TARGET_RECORD_HIERARCHY_ATOMIC_BLOCKER_MISMATCH")
     if str(atomic_next or "")!=str(hierarchy.get("next_required_action_class") or ""):
         fail("TARGET_RECORD_HIERARCHY_ATOMIC_NEXT_ACTION_MISMATCH")
+    # The target record carries THREE atomic mirrors and only two were compared here,
+    # so the third could drift with the guard silent -- and was found drifted on main,
+    # still naming an earlier phase's progress event. The pairing is not invented:
+    # current_state_obs_reducer.py compares record.current_atomic_progress_event to
+    # hierarchy.next_progress_event_target, and that reducer is the authority every OBS
+    # receipt derives from, so a tree the guard passed could still fail it.
+    atomic_event=target.get("current_atomic_progress_event")
+    if str(atomic_event or "")!=str(hierarchy.get("next_progress_event_target") or ""):
+        fail("TARGET_RECORD_HIERARCHY_ATOMIC_EVENT_MISMATCH")
 
 def _require_existing_paths(values,label):
     if not isinstance(values,list) or not values:

@@ -1,4 +1,4 @@
-import json, pathlib, unittest
+import json, pathlib, shutil, tempfile, unittest
 
 from canonical.runtime import enforce_goal_hierarchy
 
@@ -141,6 +141,148 @@ class ScoreboardMirrorTests(unittest.TestCase):
             "active_frontier_accounting mirrors; recompute them with"
             " python3 canonical/runtime/reconcile_frontier_mirrors.py .",
         )
+
+
+class TargetAtomicEventMirrorTests(unittest.TestCase):
+    """The target record's THIRD atomic mirror, which the guard compared by nothing.
+
+    current_state_obs_reducer.py has always compared
+    record.current_atomic_progress_event to hierarchy.next_progress_event_target, but
+    the guard compared only the atomic blocker and action. So a tree the guard passed
+    could still fail the reducer -- and did: the field was found stale on main, still
+    naming an earlier phase's progress event, with the guard green and the reducer red.
+    """
+
+    def setUp(self):
+        enforce_goal_hierarchy.FAIL.clear()
+        root=pathlib.Path(__file__).resolve().parents[2]
+        self.hierarchy=json.loads((root/"canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json").read_text(encoding="utf-8"))
+        target_id=str(self.hierarchy.get("active_capability_target") or "").strip()
+        self.target=json.loads((root/("canonical/capabilities/frontier/"+target_id+".json")).read_text(encoding="utf-8"))
+        self.predicate="TARGET_RECORD_HIERARCHY_ATOMIC_EVENT_MISMATCH"
+
+    def check(self,target):
+        enforce_goal_hierarchy.FAIL.clear()
+        enforce_goal_hierarchy.enforce_active_target_record_consistency(self.hierarchy,target)
+        return list(enforce_goal_hierarchy.FAIL)
+
+    def test_live_record_matches_the_authority(self):
+        self.assertEqual(self.check(self.target),[],
+                         "the live target record disagrees with the authority; recompute the mirrors "
+                         "with python3 canonical/runtime/reconcile_frontier_mirrors.py .")
+
+    def test_atomic_event_drift_fails_closed(self):
+        bad=json.loads(json.dumps(self.target))
+        bad["current_atomic_progress_event"]="STALE_EVENT_FROM_AN_EARLIER_PHASE"
+        self.assertIn(self.predicate,self.check(bad))
+
+    def test_a_missing_atomic_event_fails_closed(self):
+        bad=json.loads(json.dumps(self.target))
+        bad.pop("current_atomic_progress_event",None)
+        self.assertIn(self.predicate,self.check(bad),
+                      "absence read as agreement; an unknown mirror must fail closed")
+
+    def test_atomic_event_drift_alone_is_still_drift(self):
+        """The other two atomic mirrors agreeing must not mask the third."""
+        bad=json.loads(json.dumps(self.target))
+        bad["current_atomic_progress_event"]="STALE_EVENT_FROM_AN_EARLIER_PHASE"
+        self.assertEqual(self.check(bad),[self.predicate],
+                         "a drift in the third atomic mirror must report exactly that predicate")
+
+
+class ControlPathCurrencyTests(unittest.TestCase):
+    """Teeth for enforce_control_path_currency, the repair for guard version-pin rot.
+
+    The check was wired into main() and nothing in the repository tested it: replacing
+    its whole body with `return None` left all 121 tests across the guard and oracle
+    modules passing. That is the silence in which a check stops being a check -- the same
+    silence that let the frontier mirror fields rot for 565 commits while every run
+    printed PASS. Each case builds its own control surface under a temporary ROOT so the
+    assertions are about the check rather than about whichever artifact versions happen
+    to be canonical on the day the test runs; a test that reads the live tree for this
+    would pass or fail with the frontier instead of with the code.
+    """
+    KEY="example_control_law_path"
+
+    def setUp(self):
+        self.tmp=pathlib.Path(tempfile.mkdtemp(prefix="controlpath"))
+        self._root=enforce_goal_hierarchy.ROOT
+        self._fail=list(enforce_goal_hierarchy.FAIL)
+        enforce_goal_hierarchy.ROOT=self.tmp
+        enforce_goal_hierarchy.FAIL.clear()
+
+    def tearDown(self):
+        enforce_goal_hierarchy.ROOT=self._root
+        enforce_goal_hierarchy.FAIL.clear()
+        enforce_goal_hierarchy.FAIL.extend(self._fail)
+        shutil.rmtree(self.tmp,ignore_errors=True)
+
+    def _write(self,rel,text="{}"):
+        p=self.tmp/rel
+        p.parent.mkdir(parents=True,exist_ok=True)
+        p.write_text(text,encoding="utf-8")
+        return rel
+
+    def _check(self,declared):
+        enforce_goal_hierarchy.FAIL.clear()
+        enforce_goal_hierarchy.enforce_control_path_currency(self.KEY,declared)
+        return list(enforce_goal_hierarchy.FAIL)
+
+    def test_the_highest_version_present_passes(self):
+        rel=self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V3.md","current law")
+        self.assertEqual(self._check(rel),[])
+
+    def test_a_superseded_lower_version_fails_closed_and_names_both_versions(self):
+        self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V3.md","current law")
+        rel=self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V2.md","older law")
+        got=self._check(rel)
+        self.assertEqual(len(got),1,got)
+        self.assertTrue(got[0].startswith("POINTER_CONTROL_PATH_NOT_CURRENT:"+self.KEY),got)
+        self.assertIn("declared_V2",got[0])
+        self.assertIn("current_V3",got[0])
+
+    def test_the_same_declaration_fails_closed_once_the_family_advances(self):
+        """The rot mechanism itself, which an exact-version constant cannot express.
+
+        A guard pinned to `expected == V3` passes this declaration forever, and goes red
+        on every frontier-sensitive PR the day the canonical surface moves to V4 while
+        the pointer is still correct. Comparing against the highest version present makes
+        the identical declaration fail closed the moment a newer sibling lands, so the
+        check cannot itself go stale -- that is the whole reason it exists.
+        """
+        rel=self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V3.md","current law")
+        self.assertEqual(self._check(rel),[])
+        self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V4.md","newer law")
+        got=self._check(rel)
+        self.assertTrue(any(g.startswith("POINTER_CONTROL_PATH_NOT_CURRENT:") for g in got),got)
+
+    def test_a_missing_file_fails_closed(self):
+        got=self._check("canonical/governance/EXAMPLE_CONTROL_LAW_V9.md")
+        self.assertEqual(got,["POINTER_CONTROL_PATH_FILE_MISSING:"+self.KEY])
+
+    def test_an_empty_declaration_fails_closed(self):
+        for declared in ("",None,"   ",3):
+            self.assertEqual(self._check(declared),
+                             ["POINTER_CONTROL_PATH_MISSING:"+self.KEY],declared)
+
+    def test_an_unversioned_path_fails_closed(self):
+        rel=self._write("canonical/governance/EXAMPLE_CONTROL_LAW.md","current law")
+        self.assertEqual(self._check(rel),["POINTER_CONTROL_PATH_NOT_VERSIONED:"+self.KEY])
+
+    def test_a_superseded_artifact_fails_closed_even_at_the_current_version(self):
+        rel=self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V3.md",
+                        "# example\n\n"+enforce_goal_hierarchy.SUPERSEDED_MARKER+"\n")
+        self.assertEqual(self._check(rel),["POINTER_CONTROL_PATH_SUPERSEDED:"+self.KEY])
+
+    def test_families_are_resolved_independently(self):
+        """A newer .md sibling must not excuse a stale .json declaration, or vice versa."""
+        json_rel=self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V2.json","{}")
+        self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V3.md","current law")
+        self.assertEqual(self._check(json_rel),[],
+                         "the .md family advancing must not affect the .json family")
+        self._write("canonical/governance/EXAMPLE_CONTROL_LAW_V7.json","{}")
+        got=self._check(json_rel)
+        self.assertTrue(any(g.startswith("POINTER_CONTROL_PATH_NOT_CURRENT:") for g in got),got)
 
 
 if __name__=="__main__":

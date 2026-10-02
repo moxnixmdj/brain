@@ -170,6 +170,7 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
             "SCOREBOARD_HIERARCHY_NESTED_RESIDUAL_GAP_MISMATCH",
             "SCOREBOARD_HIERARCHY_NESTED_NEXT_ACTION_MISMATCH",
             "TARGET_RECORD_HIERARCHY_ATOMIC_NEXT_ACTION_MISMATCH",
+            "TARGET_RECORD_HIERARCHY_ATOMIC_EVENT_MISMATCH",
             "FRONTIER_TARGET_RESIDUAL_GAP_MISMATCH",
             "FRONTIER_TARGET_NEXT_ACTION_MISMATCH",
             "FRONTIER_TARGET_CAPABILITY_ID_MISMATCH",
@@ -234,6 +235,30 @@ class ReconcileFrontierMirrorsTests(unittest.TestCase):
         pointer = json.loads(path.read_text(encoding="utf-8"))
         pointer.setdefault("current_frontier", {})["open_mechanism_residual_count"] = value
         path.write_text(json.dumps(pointer, indent=2) + "\n", encoding="utf-8")
+
+    def test_third_atomic_mirror_follows_the_authority(self):
+        """The record's atomic progress event is a mirror too, and was the one nobody kept.
+
+        current_state_obs_reducer.py compares record.current_atomic_progress_event to
+        hierarchy.next_progress_event_target, while the guard compared only the atomic
+        blocker and action -- so the third field was found stale on main, still naming an
+        earlier phase's event, with the guard passing and the reducer failing.
+        """
+        record_rel = f"canonical/capabilities/frontier/{self.target}.json"
+        path = self.root / record_rel
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if "current_atomic_progress_event" not in record:
+            self.skipTest("the target record carries no atomic progress event at this base")
+        record["current_atomic_progress_event"] = "STALE_EVENT_FROM_AN_EARLIER_PHASE"
+        path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+        code, out = self.run_tool(write=True, fix_control_paths=False)
+        self.assertEqual(code, 0, out)
+        repaired = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(repaired["current_atomic_progress_event"],
+                         self.hierarchy.get("next_progress_event_target"),
+                         "the atomic progress event was not recomputed from the authority; the "
+                         "event field is mirrored verbatim, with no fallback to the action class, "
+                         "because that is exactly what the reducer compares it against")
 
     def test_pointer_open_mechanism_count_mirror_follows_the_universe(self):
         """This mirror's authority is the universe artifact, not the hierarchy.

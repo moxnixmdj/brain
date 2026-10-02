@@ -130,6 +130,7 @@ HIERARCHY = "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json"
 # Resolved from the module's own pin rather than hardcoded here, so this test follows
 # the frontier to V3 instead of rotting the way the token it replaces did.
 VERDICT = _load_reducer().OUTER_OBSERVATION_CUT
+UNIVERSE = _load_reducer().GLOBAL_UNIVERSE
 
 
 class PostCutBlockerExpectationTests(unittest.TestCase):
@@ -149,15 +150,29 @@ class PostCutBlockerExpectationTests(unittest.TestCase):
         cls.verdict = json.loads((REPO / VERDICT).read_text())
         cls.blocker = str(cls.hierarchy.get("current_parent_blocker") or "")
 
-    def _errors_with_verdict(self, blocker_value):
+    def _errors_with_verdict(self, blocker_value, force_phase=False):
+        """Overlay the verdict, and optionally the cut phase the check is gated on.
+
+        The predicate only runs while the observation cut is exact but not
+        exact_cut_ready. That is a phase, not a constant: the live tree has been on
+        both sides of it during this work, and a teeth test that inherits the live
+        phase silently stops testing anything the day the frontier advances. So the
+        witness constructs its own precondition instead of borrowing one.
+        """
         verdict = json.loads(json.dumps(self.verdict))
         if blocker_value is None:
             verdict.pop("blocker", None)
         else:
             verdict["blocker"] = blocker_value
+        overrides = {VERDICT: json.dumps(verdict, indent=2) + "\n"}
+        if force_phase:
+            universe = json.loads((REPO / UNIVERSE).read_text())
+            cut = universe.setdefault("global_cut", {})
+            cut["terminal_observation_cut_exact"] = True
+            cut["exact_cut_ready"] = False
+            overrides[UNIVERSE] = json.dumps(universe, indent=2) + "\n"
         with tempfile.TemporaryDirectory() as td:
-            root = _overlay_root(pathlib.Path(td) / "tree",
-                                 {VERDICT: json.dumps(verdict, indent=2) + "\n"})
+            root = _overlay_root(pathlib.Path(td) / "tree", overrides)
             return self.reducer.evaluate(root).get("errors") or []
 
     def test_live_tree_does_not_report_post_cut_blocker_drift(self):
@@ -167,7 +182,8 @@ class PostCutBlockerExpectationTests(unittest.TestCase):
 
     def test_a_verdict_blocker_the_hierarchy_ignores_fails_closed(self):
         """Teeth: a declared blocker the hierarchy does not name must still fire."""
-        errors = self._errors_with_verdict("SOME_POST_CUT_PHASE_THE_HIERARCHY_IGNORES__detail")
+        errors = self._errors_with_verdict("SOME_POST_CUT_PHASE_THE_HIERARCHY_IGNORES__detail",
+                                           force_phase=True)
         self.assertIn(POST_CUT_PREDICATE, errors,
                       "the verdict declared a blocker phase and the hierarchy ignored it, but the "
                       "predicate stayed silent: the check has no teeth")
@@ -175,10 +191,11 @@ class PostCutBlockerExpectationTests(unittest.TestCase):
     def test_a_verdict_blocker_the_hierarchy_reflects_passes(self):
         phase = self.blocker.split("__")[0]
         self.assertTrue(phase, "the live hierarchy blocker has no phase segment to test against")
-        self.assertNotIn(POST_CUT_PREDICATE, self._errors_with_verdict(phase + "__some_detail"))
+        self.assertNotIn(POST_CUT_PREDICATE,
+                         self._errors_with_verdict(phase + "__some_detail", force_phase=True))
 
     def test_a_verdict_that_declares_no_blocker_is_not_drift(self):
-        self.assertNotIn(POST_CUT_PREDICATE, self._errors_with_verdict(None),
+        self.assertNotIn(POST_CUT_PREDICATE, self._errors_with_verdict(None, force_phase=True),
                          "a verdict declaring no blocker leaves nothing to enforce; inventing an "
                          "expectation the authority never declared would manufacture drift")
 
@@ -189,6 +206,27 @@ class PostCutBlockerExpectationTests(unittest.TestCase):
                          "moved past V1 and the module is pinned to V2 everywhere else")
         self.assertIn('outer_observation_cut or {}).get("blocker")', src,
                       "the post-cut expectation is no longer resolved from the live verdict artifact")
+
+
+class LiveTreeSoundnessTests(unittest.TestCase):
+    """The authoritative reducer must be sound at this head.
+
+    This is the claim the whole repair arc rests on, so it is asserted rather than
+    described: every OBS receipt in the repository derives from this verdict, and the
+    continuous-obs-runtime CI job runs the same command against the base tree. It has
+    caught fresh drift more than once while this work was in flight, which is the point
+    of shipping it rather than reporting a one-off measurement.
+    """
+
+    def test_live_tree_reduces_to_a_sound_current_state(self):
+        out = _load_reducer().evaluate(REPO)
+        self.assertEqual(
+            out.get("errors") or [], [],
+            "the authoritative current-state reducer reports drift at this head; reconcile the "
+            "mirrors with python3 canonical/runtime/reconcile_frontier_mirrors.py . and, if a "
+            "predicate names an authority rather than a mirror, repair the binding instead of "
+            "the data")
+        self.assertTrue(out.get("pass"))
 
 
 if __name__ == "__main__":

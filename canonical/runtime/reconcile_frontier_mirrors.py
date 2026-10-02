@@ -182,6 +182,18 @@ def reconcile(root:pathlib.Path,*,write:bool,fix_control_paths:bool)->int:
     changed=scoreboard.put(progress_event,"next_progress_event_target")
     if changed: changes.append(changed)
 
+    # The target record's THIRD atomic mirror. current_state_obs_reducer.py compares
+    # record.current_atomic_progress_event to hierarchy.next_progress_event_target with
+    # no fallback, so the authority value is mirrored verbatim here: reusing the
+    # scoreboard's `or action` fallback would write the action class into a field the
+    # reducer expects to hold the event, manufacturing the very drift it then reports.
+    # Written only when the authority declares an event, so a root whose hierarchy
+    # declares none is left alone rather than blanked.
+    authority_event=hierarchy.get("next_progress_event_target")
+    if authority_event:
+        changed=record.put(authority_event,"current_atomic_progress_event")
+        if changed: changes.append(changed)
+
     # --- identity mirrors are reported, never rewritten --------------------
     for doc,keys in (
         (pointer,("current_frontier","active_capability_target")),
