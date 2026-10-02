@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__ADMISSIBLE_TERMINAL_ROUTE_BINDINGS_INCOMPLETE",
+  "authority": {
+    "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
+    "information_boundary_audit": "canonical/governance/CONTRACT_NATIVE_INFORMATION_BOUNDARY_AUDIT_V1.json",
+    "scope_gate_v2": "canonical/runtime/scope_equivalent_proof_gate_v2.py",
+    "active_contract_gap": "canonical/governance/ACTIVE_TERMINAL_CONTRACT_COVERAGE_GAP_V1.json"
+  },
+  "rules": [
+    "TERMINAL_PROOF_BASIS_IS_DEFINED_BY_ACTIVE_BEHAVIORAL_CONTRACTS_NOT_BENCHMARK_NAMES",
+    "EVERY_ACTIVE_CONTRACT_REQUIRES_ONE_OR_MORE_SCOPE_EQUIVALENT_INFORMATION_SAFE_TERMINAL_PROOF_ROUTES",
+    "PROOF_SUITE_PREFLIGHT_IS_NOT_TERMINAL_RESULT",
+    "NARROW_COMPONENT_RECEIPT_CANNOT_STAND_IN_FOR_BROADER_CONTRACT",
+    "LOAD_BEARING_INFERENCES_MUST_NOT_BE_EXPOSED_IN_CANDIDATE_INPUT",
+    "ZERO_INCREMENTAL_SPEND",
+    "UNKNOWN_OR_PARTIAL_SCOPE_FAILS_CLOSED"
+  ],
+  "contracts": [
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "portfolio": "T0",
+      "proof_state": "ROUTE_REQUIRED",
+      "route_requirement": "END_TO_END_DRAWING_TO_SOLID_WITH_HIDDEN_GLOBAL_GEOMETRY_ORACLE_AND_IDENTIFIABILITY_GATE",
+      "blockers": [
+        "END_TO_END_TERMINAL_POPULATION_NOT_YET_FROZEN"
+      ]
+    },
+    {
+      "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "portfolio": "T0_T1_T2_T3",
+      "proof_state": "ROUTE_REDESIGN_REQUIRED",
+      "route_requirement": "RAW_SOURCE_TO_TYPED_REQUIREMENTS_TO_INDEPENDENT_ACCEPTANCE_WITH_HIDDEN_SEMANTIC_GOLD_AND_AMBIGUITY_ORACLE",
+      "blockers": [
+        "NORMALIZED_REQUIREMENT_COMPILER_IS_TOO_NARROW",
+        "RAW_SOURCE_TERMINAL_POPULATION_NOT_YET_FROZEN"
+      ]
+    },
+    {
+      "behavior_id": "SA_CCR_CREDIT_EFFECTIVE_NOTIONAL_AND_ADDON_001",
+      "portfolio": "T1",
+      "proof_state": "ROUTE_REQUIRED",
+      "route_requirement": "FULL_ACTIVE_SA_CCR_SCOPE_WITH_INTERMEDIATE_LINEAGE_AND_AUTHORITATIVE_APPLICABILITY_ORACLE",
+      "blockers": [
+        "OWNED_KERNEL_IS_NARROW_COMPONENT",
+        "OPTIONS_CDO_WHOLE_NETTING_AND_RULE_APPLICABILITY_SCOPE_UNBOUND"
+      ]
+    },
+    {
+      "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+      "portfolio": "T0_T1",
+      "proof_state": "PREWAVE_INFORMATION_BOUNDARY_ADMISSIBLE__TERMINAL_BINDING_PENDING",
+      "route": "P0_STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_DIRECT",
+      "blockers": [
+        "POST_FREEZE_TERMINAL_POPULATION_AND_CANDIDATE_BINDING_PENDING"
+      ]
+    },
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "portfolio": "T0_T2",
+      "proof_state": "ROUTE_REDESIGN_REQUIRED",
+      "route": "P1_TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_DIRECT",
+      "blockers": [
+        "REPAIR_TARGET_MAPPING_LEAK",
+        "CAUSAL_CONFOUNDING_AND_NONIDENTIFIABILITY_CASES_INSUFFICIENT"
+      ]
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "portfolio": "T1",
+      "proof_state": "ROUTE_REDESIGN_REQUIRED",
+      "route": "P2_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_DIRECT",
+      "blockers": [
+        "GOLD_EDIT_QUALITY_SCORES_EXPOSED_TO_CANDIDATE"
+      ]
+    },
+    {
+      "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "portfolio": "T1",
+      "proof_state": "ROUTE_REQUIRED",
+      "route_requirement": "CROSS_FORMAT_DOCX_XLSX_PPTX_PDF_NATIVE_EDIT_PRESERVATION_WITH_HIDDEN_STRUCTURAL_DIFF_ORACLE",
+      "blockers": [
+        "CURRENT_OWNED_COMPONENTS_DO_NOT_PROVE_FULL_CROSS_FORMAT_SCOPE"
+      ]
+    },
+    {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "portfolio": "T1_T3",
+      "proof_state": "ROUTE_REDESIGN_REQUIRED",
+      "route": "P3_EVIDENCE_TO_AUDIENCE_SYNTHESIS_DIRECT",
+      "blockers": [
+        "SALIENCE_AND_SUPPORT_GOLD_LABELS_EXPOSED",
+        "TIGHT_BUDGET_HIDDEN_DECISION_RELEVANCE_NOT_TESTED"
+      ]
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "portfolio": "T2",
+      "proof_state": "ROUTE_REQUIRED",
+      "route_requirement": "FRESH_INTERACTIVE_UI_STATE_TO_ACTION_WITH_HIDDEN_TARGET_STATE_AND_RECOVERY_ORACLE",
+      "blockers": [
+        "CONSENSUS_DOM_GROUNDING_IS_NARROW_COMPONENT"
+      ]
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "portfolio": "T2",
+      "proof_state": "ROUTE_REQUIRED",
+      "route_requirement": "INITIAL_PARTITION_ASSIGNMENT_PLUS_RECEIPT_DRIVEN_REASSIGNMENT_AND_CRITICAL_PATH_ORACLE",
+      "blockers": [
+        "CURRENT_DIRECT_PROOF_DOES_NOT_YET_BIND_FULL_ADAPTIVE_REASSIGNMENT_TERMINAL_POPULATION"
+      ]
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "portfolio": "T2_T3",
+      "proof_state": "ROUTE_REQUIRED",
+      "route_requirement": "HIDDEN_TOOL_CAPABILITY_ECOSYSTEM_WITH_SAFE_PROBES_SELECTION_COST_AND_SECOND_TASK_TRANSFER",
+      "blockers": [
+        "EXPLICIT_VERIFIED_CAPABILITY_SELECTOR_IS_ONLY_A_NARROW_COMPONENT"
+      ]
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "portfolio": "T3",
+      "proof_state": "ROUTE_REQUIRED",
+      "route_requirement": "HIDDEN_EVIDENCE_WORLD_WITH_QUERY_SOURCE_SELECTION_INFORMATION_GAIN_PROVENANCE_AND_STOP_ORACLE",
+      "blockers": [
+        "M4_RESEARCH_CONTROL_REQUIRES_PRENORMALIZED_REQUIREMENTS_AND_PREVERIFIED_ACTION_COVERAGE"
+      ]
+    }
+  ],
+  "active_contract_count": 12,
+  "admissible_frozen_terminal_route_count": 0,
+  "execution_authority": false,
+  "next": "REDESIGN_OR_BIND_ALL_NONADMISSIBLE_CONTRACT_ROUTES__FREEZE_INFORMATION_SAFE_POPULATIONS__THEN_REDUCE",
+  "fresh_terminal_evidence_consumed": 0,
+  "terminal_results_observed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
