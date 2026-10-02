@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6",
+  "date": "2026-10-02",
+  "status": "EXACT_MINIMUM__THREE_PROOF_ONLY_ACTIONS_ADMITTED__ZERO_REALITY_PREFIXES_SATURATED",
+  "source_input": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6.json",
+  "solver": "canonical/runtime/minimum_reality_cut.py",
+  "exact_minimum": true,
+  "unresolved_distinctions": [
+    "M0A",
+    "M1A",
+    "M1B"
+  ],
+  "selected_observations": [
+    "A_M0A_MATCHED_SEMANTIC_PARITY_V2",
+    "A_M1A_COMPOSED_ROUTE_MATCHED_PARITY_V2",
+    "A_M1B_MATCHED_GEOMETRY_COVERAGE_V3"
+  ],
+  "observation_count": 3,
+  "total_cost": 3,
+  "proof": {
+    "reason": "EACH_OF_THE_THREE_UNRESOLVED_DISTINCTIONS_HAS_EXACTLY_ONE_DECLARED_ADMISSIBLE_CURRENT_COMPLETE_BUNDLE_AND_NO_DECLARED_ACTION_COVERS_MORE_THAN_ONE_DISTINCTION__THEREFORE_ALL_THREE_ARE_NECESSARY_AND_SUFFICIENT_IN_THE_FROZEN_UNIVERSE",
+    "exact_solver_limit_ok": true,
+    "distinction_count": 3,
+    "exact_solver_limit": 24
+  },
+  "execution": {
+    "parallelizable": true,
+    "order": "RUN_ALL_THREE_SELECTED_PROOF_ACTIONS_IN_PARALLEL_WHERE_RUNNER_CAPACITY_ALLOWS",
+    "compile_each_receipt_immediately": true,
+    "on_failure": "LOCALIZE_ONLY_THE_CAUSAL_RESIDUAL_EXPOSED_BY_THE_FAILED_PREDECLARED_PROOF__DO_NOT_REOPEN_SATURATED_ZERO_REALITY_PREFIXES_WITHOUT_NEW_CONTRADICTORY_EVIDENCE",
+    "on_success": "PROMOTE_ONLY_EXACT_VERIFIED_SCOPE__THEN_RECOMPUTE_GLOBAL_TERMINAL_PROOF_GRAPH"
+  },
+  "authorization": {
+    "fresh_terminal_evidence_actions_authorized": [
+      "A_M0A_MATCHED_SEMANTIC_PARITY_V2",
+      "A_M1A_COMPOSED_ROUTE_MATCHED_PARITY_V2",
+      "A_M1B_MATCHED_GEOMETRY_COVERAGE_V3"
+    ],
+    "any_other_fresh_action_authorized": false
+  },
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
