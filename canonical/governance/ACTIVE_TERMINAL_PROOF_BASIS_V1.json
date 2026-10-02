@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__TRAJECTORY_INFORMATION_SAFE_PREFLIGHT_INDEPENDENT_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__P1_P2_P3_INFORMATION_SAFE_PREFLIGHTS_ADVANCED__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -93,11 +93,15 @@
     {
       "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
       "portfolio": "T1",
-      "proof_state": "ROUTE_REDESIGN_REQUIRED",
-      "route": "P2_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_DIRECT",
+      "proof_state": "INFORMATION_SAFE_PREQUALIFICATION_INDEPENDENT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
+      "route": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
       "blockers": [
-        "GOLD_EDIT_QUALITY_SCORES_EXPOSED_TO_CANDIDATE"
-      ]
+        "WHOLE_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
+        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+        "POST_FREEZE_TERMINAL_POPULATION_AND_ACCEPTANCE_RULE_NOT_YET_FROZEN"
+      ],
+      "candidate": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "preflight_verification": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
@@ -111,12 +115,15 @@
     {
       "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
       "portfolio": "T1_T3",
-      "proof_state": "ROUTE_REDESIGN_REQUIRED",
-      "route": "P3_EVIDENCE_TO_AUDIENCE_SYNTHESIS_DIRECT",
+      "proof_state": "INFORMATION_SAFE_PREQUALIFICATION_INDEPENDENT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
+      "route": "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
       "blockers": [
-        "SALIENCE_AND_SUPPORT_GOLD_LABELS_EXPOSED",
-        "TIGHT_BUDGET_HIDDEN_DECISION_RELEVANCE_NOT_TESTED"
-      ]
+        "WHOLE_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
+        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+        "POST_FREEZE_TERMINAL_POPULATION_AND_ACCEPTANCE_RULE_NOT_YET_FROZEN"
+      ],
+      "candidate": "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+      "preflight_verification": "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
@@ -158,7 +165,7 @@
   "active_contract_count": 12,
   "admissible_frozen_terminal_route_count": 0,
   "execution_authority": false,
-  "next": "CLOSE_REMAINING_WHOLE_SCOPE_ROUTE_DIMENSIONS__PASS_SCOPE_EQUIVALENT_PROOF_GATE_V2_PER_CONTRACT__FREEZE_ROUTE_SPECIFIC_POPULATIONS_ACCEPTANCE_AND_ORACLES__THEN_REDUCE",
+  "next": "CONTINUE_PER_CONTRACT_INFORMATION_SAFE_ROUTE_AND_POPULATION_PREFLIGHT__PASS_SCOPE_EQUIVALENT_PROOF_GATE_V2__ONLY_THEN_MARK_TERMINAL_ROUTE_FROZEN_ADMISSIBLE",
   "fresh_terminal_evidence_consumed": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
