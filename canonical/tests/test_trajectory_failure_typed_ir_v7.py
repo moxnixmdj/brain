@@ -98,9 +98,9 @@ class Tests(unittest.TestCase):
             x for row in attacked["task"]["trajectory"]
             for x in row["checks"] if x["pass"] is False
         ).pop("failure_semantics")
-        direct_default=candidate.solve(attacked)
-        self.assertEqual(direct_default["status"],"IDENTIFIED")
-        self.assertNotEqual(safe["status"],direct_default["status"])
+        erased=candidate.solve(attacked)
+        self.assertEqual(erased["status"],"FAIL_CLOSED")
+        self.assertNotEqual(safe["status"],erased["status"])
 
 
 if __name__=="__main__":
