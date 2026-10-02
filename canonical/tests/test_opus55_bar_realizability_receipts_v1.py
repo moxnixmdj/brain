@@ -494,6 +494,10 @@ class CensusReceiptTests(unittest.TestCase):
         self.assertTrue(any("matches no release" in c for c in p13["evidence"]["caveats"]))
         self.assertTrue(any(u.startswith("Metric alignment") for u in self.receipt["reconciliation"]["unverified_parts"]))
 
+    def test_census_status_carries_the_bar_definition_caveat(self):
+        self.assertIn("LIVEBENCH_IF_BAR_DEFINITION_DEFECTS_RECORDED", self.receipt["status"])
+        self.assertTrue(self.receipt["status"].endswith("__ZERO_CREDIT"))
+
     def test_census_points_to_the_verified_dev_proxy_not_older_releases(self):
         self.assertIn("IFBench's 300 public test prompts", self.receipt["next_action"])
         self.assertIn("poor proxy", self.receipt["next_action"])
