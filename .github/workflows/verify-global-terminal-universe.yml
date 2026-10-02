@@ -2,6 +2,8 @@ name: Verify global terminal universe
 
 on:
   push:
+  pull_request:
+    branches: [main]
     paths:
       - "canonical/runtime/global_terminal_universe.py"
       - "canonical/tests/test_global_terminal_universe.py"
