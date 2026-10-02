@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_CLOSURE_COMPILER_STACK_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_PREPROOF_CONTROL_STACK__INDEPENDENTLY_VERIFIED__NO_TERMINAL_CREDIT",
+  "status": "ACTIVE_PREPROOF_CONTROL_STACK__CURRENT_COMPONENTS_INDEPENDENTLY_VERIFIED__NO_TERMINAL_CREDIT",
   "objective": "ELIMINATE_ALL_NONCAUSAL_PREWAVE_LATENCY_AND_CLOSE_THE_SMALLEST_TRUTHFUL_GLOBAL_ADMISSION_CUT_BEFORE_ANY_FRESH_TERMINAL_EVIDENCE",
   "components": {
     "generated_truth": {
@@ -82,6 +82,16 @@
     "workflow_run_id": 36965606848,
     "job_id": 110708578158,
     "exact_blob_identity": true,
-    "test_count": 12
+    "test_count": 12,
+    "current_generated_state": {
+      "status": "INDEPENDENT_PASS",
+      "receipt": "canonical/verification/GENERATED_TERMINAL_STATE_LAG_DETECTION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "public_runner_pr": 653,
+      "workflow_run_id": 36965919041,
+      "job_id": 110709522204,
+      "runtime_blob": "713705912a0db83e587b31139374eac745ea2540",
+      "test_blob": "c9c0e17bfea83126fbce64bbd02583bbf1d32737",
+      "stack_test_count": 13
+    }
   }
 }
