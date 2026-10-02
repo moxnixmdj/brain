@@ -8,7 +8,6 @@
     "information_safe_suite": "9d3d9bb837a98a7f78b5794cec0c0ae88bb32860",
     "preflight_receipt": "11a7212c3b54ed130212b3a7d4f4e4386bc590f5",
     "behavioral_registry": "afa00109031d638fef32cc3fe10be18786605c39",
-    "population_protocol": "adc413a2127141a1bc032149967eb07b86e0fde7",
     "scope_equivalence_audit": "51882e456e5e9b2c8dfc95a377ec0fa950693d6a"
   },
   "information_boundary": {
@@ -71,5 +70,20 @@
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "population_protocol_dependency": {
+    "path": "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
+    "binding_mode": "SEMANTIC_INVARIANT_PROJECTION__NOT_WHOLE_FILE_BLOB",
+    "reason": "GLOBAL_PROTOCOL_ROUTE_COUNTS_AND_UNRELATED_ROUTE_BINDINGS_EVOLVE_MONOTONICALLY__ONLY_LOAD_BEARING_SELECTION_AND_INFORMATION_BOUNDARY_RULES_MAY_INVALIDATE_THIS_ROUTE",
+    "required_invariants": [
+      "BEHAVIOR_REMAINS_IN_ACTIVE_CONTRACTS",
+      "POST_FREEZE_BEACON_UNKNOWN_BEFORE_FREEZE",
+      "NO_ADAPTIVE_CASE_SELECTION",
+      "NO_TUNING_REPLAY",
+      "NO_CASE_REPLACEMENT",
+      "REGISTRY_TERMINAL_ACCEPTANCE_MODE_REQUIRED",
+      "ZERO_INCREMENTAL_SPEND_AND_INDEPENDENT_ORACLE_REQUIRED",
+      "GLOBAL_PROTOCOL_HAS_ZERO_EXECUTION_AUTHORITY_AND_ZERO_TERMINAL_RESULTS"
+    ]
+  }
 }

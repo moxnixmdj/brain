@@ -1,8 +1,9 @@
 """Verify internal prewave binding for professional artifact planning.
 
-The verifier fails closed if the binding drops any unresolved professional-artifact
-quality dimension from the canonical P2/P3 scope-equivalence audit. Public-bar
-coverage may not silently inherit or erase uncovered scope.
+Fail closed on dropped unresolved scope or changes to load-bearing global population
+rules. The global protocol itself is intentionally *not* whole-file pinned because
+unrelated route admissions monotonically change its counts/bindings; only the
+semantic invariants this route depends on are authority-bearing here.
 """
 from __future__ import annotations
 import hashlib, json
@@ -10,13 +11,13 @@ from pathlib import Path
 
 BIND="canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json"
 AUDIT="canonical/governance/P2_P3_SCOPE_EQUIVALENCE_AUDIT_V1.json"
+PROTOCOL="canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json"
 BEHAVIOR="PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
 FILES={
  "candidate":"canonical/runtime/p2_p3_information_safe_candidate_v2.py",
  "information_safe_suite":"canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
  "preflight_receipt":"canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
  "behavioral_registry":"canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
- "population_protocol":"canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json",
  "scope_equivalence_audit":AUDIT,
 }
 
@@ -30,6 +31,33 @@ def _professional_audit_row(root:Path):
  if len(rows)!=1:
   raise ValueError("PROFESSIONAL_AUDIT_ROW_COUNT")
  return rows[0]
+
+def _population_protocol_errors(root:Path,b:dict):
+ e=[]
+ dep=b.get("population_protocol_dependency") or {}
+ if dep.get("path")!=PROTOCOL: e.append("POPULATION_PROTOCOL_PATH_INVALID")
+ if dep.get("binding_mode")!="SEMANTIC_INVARIANT_PROJECTION__NOT_WHOLE_FILE_BLOB":
+  e.append("POPULATION_PROTOCOL_BINDING_MODE_INVALID")
+ p=json.loads((root/PROTOCOL).read_text())
+ if p.get("schema")!="PROJECT_BRAIN_GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2":
+  e.append("POPULATION_PROTOCOL_SCHEMA_INVALID")
+ if BEHAVIOR not in (p.get("active_contracts") or []):
+  e.append("BEHAVIOR_NOT_ACTIVE_IN_POPULATION_PROTOCOL")
+ sp=p.get("seed_policy") or {}
+ if sp.get("beacon_known_before_freeze") is not False: e.append("BEACON_KNOWN_BEFORE_FREEZE")
+ if sp.get("adaptive_case_selection") is not False: e.append("PROTOCOL_ADAPTIVE_SELECTION")
+ if sp.get("replay_for_tuning") is not False: e.append("PROTOCOL_TUNING_REPLAY")
+ if sp.get("case_replacement") is not False: e.append("PROTOCOL_CASE_REPLACEMENT")
+ req=p.get("route_specific_requirements") or {}
+ acceptance=str(req.get("acceptance") or "")
+ execution=str(req.get("execution") or "")
+ if "REGISTRY_TERMINAL_ACCEPTANCE_PROOF_MODES" not in acceptance:
+  e.append("REGISTERED_ACCEPTANCE_MODE_NOT_REQUIRED")
+ if "ZERO_INCREMENTAL_SPEND" not in execution or "INDEPENDENT_ORACLE_REQUIRED" not in execution:
+  e.append("ZERO_COST_INDEPENDENT_EXECUTION_NOT_REQUIRED")
+ if p.get("execution_authority") is not False: e.append("GLOBAL_PROTOCOL_EXECUTION_AUTHORITY_TRUE")
+ if p.get("terminal_results_observed")!=0: e.append("GLOBAL_PROTOCOL_TERMINAL_RESULTS_NONZERO")
+ return e
 
 def verify(root:Path):
  b=json.loads((root/BIND).read_text()); e=[]
@@ -66,5 +94,9 @@ def verify(root:Path):
    e.append("BINDING_SCOPE_EQUIVALENCE_FLAG_INVALID")
  except Exception as exc:
   e.append("AUDIT_READ_ERROR:"+type(exc).__name__)
+ try:
+  e.extend(_population_protocol_errors(root,b))
+ except Exception as exc:
+  e.append("POPULATION_PROTOCOL_READ_ERROR:"+type(exc).__name__)
 
  return {"status":"PASS" if not e else "FAIL_CLOSED","errors":sorted(set(e)),"execution_authority":False}
