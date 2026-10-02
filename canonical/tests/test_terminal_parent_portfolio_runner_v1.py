@@ -36,19 +36,24 @@ class TerminalParentPortfolioRunnerTests(unittest.TestCase):
                 self.assertFalse(receipt["tuning_replay"])
 
     def test_real_entrypoint_is_fail_closed_before_launch_authority(self):
-        with self.assertRaises(ValueError):
-            runner.execute_parent_portfolio(
-                "T0",
-                commitment="not-a-real-terminal-commitment",
-                beacon="not-a-real-terminal-beacon",
-                direct_results={
-                    runner.CAD: {
-                        "pass": True,
-                        "terminal_result": True,
-                        "case_count": 128,
-                    }
-                },
-            )
+        with patch.object(
+            runner,
+            "_real_execution_authorized",
+            side_effect=ValueError("GLOBAL_EXECUTION_AUTHORITY_REQUIRED"),
+        ):
+            with self.assertRaises(ValueError):
+                runner.execute_parent_portfolio(
+                    "T0",
+                    commitment="not-a-real-terminal-commitment",
+                    beacon="not-a-real-terminal-beacon",
+                    direct_results={
+                        runner.CAD: {
+                            "pass": True,
+                            "terminal_result": True,
+                            "case_count": 128,
+                        }
+                    },
+                )
 
 
     def test_real_entrypoint_returns_fail_closed_receipts_without_aborting_wave(self):
