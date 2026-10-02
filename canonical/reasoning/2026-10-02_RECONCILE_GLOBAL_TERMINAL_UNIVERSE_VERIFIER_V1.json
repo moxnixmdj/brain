@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_DECISION_RECEIPT_V1",
+  "date": "2026-10-02",
+  "real_objective": "Restore a trustworthy executable outer-global-universe oracle without changing capability state or spending evidence.",
+  "governing_invariants": [
+    "CORRECTNESS_FIRST",
+    "ZERO_NEW_REALITY",
+    "NO_PREMATURE_LOCAL_V6_EXECUTION",
+    "FAIL_CLOSED_VERIFICATION",
+    "MINIMUM_WALL_CLOCK"
+  ],
+  "material_premises": [
+    "Behavior contract completeness is already verified closed.",
+    "Current outer-universe workflow import plumbing was fixed on main.",
+    "Remaining failure is stale generator/test expectation after specification closure."
+  ],
+  "evidence_refs": [
+    "canonical/verification/BEHAVIOR_CONTRACT_COMPLETENESS_VERIFICATION_20261002_V1.json",
+    "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+    "canonical/runtime/global_terminal_universe.py",
+    "canonical/tests/test_global_terminal_universe.py"
+  ],
+  "conclusion": "Reconcile only the stale deterministic reason and assertion, then require independent workflow and drift guard pass.",
+  "selected_route": "RECONCILE_EXISTING_OUTER_UNIVERSE_GENERATOR_AND_TEST",
+  "rejected_material_alternatives": [
+    "BYPASS_VERIFIER",
+    "REOPEN_SPECIFICATION_HOLE",
+    "EXECUTE_LOCAL_V6_BATCHES",
+    "BUILD_NEW_VERIFIER"
+  ],
+  "uncertainties": [],
+  "assumptions": [
+    "Frozen outer universe accurately records the verified specification closure."
+  ],
+  "non_goals": [
+    "CAPABILITY_PROMOTION",
+    "NEW_MECHANISM_ACQUISITION",
+    "FRESH_EVIDENCE_SPEND"
+  ],
+  "next_action": "Run independent verifier and trusted drift guard; stop on either failure.",
+  "supersession_conditions": [
+    "Outer universe or specification closure changes materially before merge."
+  ],
+  "supersedes": null,
+  "incremental_spend_usd": 0
+}
