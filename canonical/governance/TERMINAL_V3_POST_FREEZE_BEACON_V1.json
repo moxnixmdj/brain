@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V3_POST_FREEZE_BEACON_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_POST_FREEZE_BEACON__NO_REROLL__ZERO_TERMINAL_RESULTS",
+  "policy": "canonical/governance/TERMINAL_V3_POST_FREEZE_BEACON_POLICY_V1.json",
+  "terminal_capsule": "canonical/governance/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3.json",
+  "terminal_capsule_verification": "canonical/verification/TERMINAL_ATOMIC_CLOSURE_CAPSULE_V3_INDEPENDENT_VERIFICATION_20261002_V1.json",
+  "execution_snapshot_commit_sha": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+  "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+  "beacon": "GITHUB_ACTIONS_RUN_ID:36977132461",
+  "source": {
+    "provider": "GITHUB_ACTIONS",
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 791,
+    "workflow_path": ".github/workflows/emit-terminal-v3-post-freeze-beacon.yml",
+    "workflow_run_id": 36977132461,
+    "workflow_head_sha": "b0dd8920858b36454b1ad43f0094c920f166be9a",
+    "created_at": "2026-10-02T07:09:53Z",
+    "run_url": "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36977132461"
+  },
+  "selection_rule_satisfied": true,
+  "run_id_known_before_policy_freeze": false,
+  "reroll_allowed": false,
+  "terminal_cases_generated": 0,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "case_replacement": false,
+  "tuning_replay": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "next": "EXECUTE_EXACT_SNAPSHOT_821712C059B139F3494723DCA6E8D0FC82EE59A4_ONCE_WITH_PACKAGE_COMMITMENT_AND_THIS_BEACON__NO_CASE_REPLACEMENT_OR_TUNING"
+}
