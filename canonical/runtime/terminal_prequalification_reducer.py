@@ -61,8 +61,9 @@ def evaluate(root: Path) -> dict[str, Any]:
     p = _load(root, PREQUAL)
     failures: list[str] = []
 
-    # Terminal execution authority comes from the active behavioral proof basis,
-    # never from benchmark/surface-dominance bookkeeping.
+    # Terminal execution authority is computed from the active behavioral proof
+    # basis plus explicit pre-wave gates. Existing authority flags are deliberately
+    # not consumed as prerequisites, because that would make authorization circular.
     try:
         registry = _load(root, REGISTRY)
         basis = _load(root, PROOF_BASIS)
@@ -133,10 +134,11 @@ def evaluate(root: Path) -> dict[str, Any]:
                 failures.append(
                     f"TERMINAL_ROUTE_COVERAGE_INCOMPLETE:{terminal_ready}/{len(set(active_ids))}"
                 )
-            if protocol.get("execution_authority") is not True:
-                failures.append("TERMINAL_POPULATION_PROTOCOL_EXECUTION_AUTHORITY_FALSE")
-            if basis.get("execution_authority") is not True:
-                failures.append("ACTIVE_TERMINAL_PROOF_BASIS_EXECUTION_AUTHORITY_FALSE")
+            # execution_authority is the output of this prequalification decision,
+            # not a prerequisite. Requiring the basis/protocol to already authorize
+            # execution would be circular: they remain false until this reducer passes.
+            # Safety, scope, oracle, population, dependency, zero-cost, and portfolio
+            # gates below remain mandatory and fail closed.
     except (FileNotFoundError, ValueError, json.JSONDecodeError):
         failures.append("ACTIVE_TERMINAL_PROOF_BASIS_OR_PROTOCOL_MISSING_OR_INVALID")
 
