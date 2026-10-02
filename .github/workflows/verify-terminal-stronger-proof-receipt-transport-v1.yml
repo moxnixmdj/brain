@@ -1,0 +1,44 @@
+name: Verify stronger proofs and terminal receipt transport
+
+on:
+  push:
+    paths:
+      - "canonical/runtime/terminal_proof_supercompiler.py"
+      - "canonical/tests/test_terminal_proof_supercompiler.py"
+      - "canonical/tests/test_terminal_proof_supercompiler_stronger_modes_v1.py"
+      - "canonical/governance/TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1.json"
+      - "canonical/runtime/terminal_receipt_transport_v1.py"
+      - "canonical/tests/test_terminal_receipt_transport_v1.py"
+      - "canonical/governance/TERMINAL_RECEIPT_TRANSPORT_V1.json"
+      - "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"
+      - ".github/workflows/verify-terminal-stronger-proof-receipt-transport-v1.yml"
+  pull_request:
+    paths:
+      - "canonical/runtime/terminal_proof_supercompiler.py"
+      - "canonical/tests/test_terminal_proof_supercompiler.py"
+      - "canonical/tests/test_terminal_proof_supercompiler_stronger_modes_v1.py"
+      - "canonical/governance/TERMINAL_PROOF_SUPERCOMPILER_ACTIVATION_V1.json"
+      - "canonical/runtime/terminal_receipt_transport_v1.py"
+      - "canonical/tests/test_terminal_receipt_transport_v1.py"
+      - "canonical/governance/TERMINAL_RECEIPT_TRANSPORT_V1.json"
+      - "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"
+      - ".github/workflows/verify-terminal-stronger-proof-receipt-transport-v1.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run supercompiler and receipt transport tests
+        run: |
+          python -m unittest canonical.tests.test_terminal_proof_supercompiler -v
+          python -m unittest canonical.tests.test_terminal_proof_supercompiler_stronger_modes_v1 -v
+          python -m unittest canonical.tests.test_terminal_receipt_transport_v1 -v
+      - name: Verify live receipt transport classification
+        run: python canonical/runtime/terminal_receipt_transport_v1.py canonical/governance/TERMINAL_RECEIPT_TRANSPORT_V1.json
