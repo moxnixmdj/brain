@@ -1,5 +1,12 @@
 name: Verify Harbor Brain adapter
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/coding_control_kernel_v1.py
+      - canonical/runtime/harbor_brain_agent.py
+      - canonical/tests/test_harbor_brain_agent.py
+      - .github/workflows/verify-harbor-brain-adapter.yml
   push:
     branches: [main]
     paths:
