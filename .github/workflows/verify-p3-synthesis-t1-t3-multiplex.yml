@@ -1,0 +1,22 @@
+name: Verify P3 T1 T3 synthesis multiplex
+on:
+  push:
+    branches: [main]
+    paths:
+      - canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json
+      - canonical/runtime/p3_synthesis_t1_t3_multiplex_preflight.py
+      - canonical/tests/test_p3_synthesis_t1_t3_multiplex_preflight.py
+      - canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json
+      - .github/workflows/verify-p3-synthesis-t1-t3-multiplex.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_p3_synthesis_t1_t3_multiplex_preflight
