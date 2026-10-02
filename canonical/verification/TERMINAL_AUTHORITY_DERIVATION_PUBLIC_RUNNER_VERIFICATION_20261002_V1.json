@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTHORITY_DERIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__LIVE_12_CONTRACT_PREQUALIFICATION_AUTHORIZES_T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_prequalification_reducer.py": "da929015fafabed2b5a134a2e95b6bff2f47349c",
+    "canonical/tests/test_terminal_prequalification_reducer.py": "9b09e96c9bf0340d174b4a752148c0807be9043e",
+    "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json": "d85f90df76db4b6b1650fe40279f33d6a7d9e7b5",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "afa00109031d638fef32cc3fe10be18786605c39",
+    "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json": "2ba39428f0065f0d8739c43935f7026ba6eedcfb",
+    "canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json": "432f1f9122a0a136f71a89eae5c8fb81692e4071"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 694,
+    "pr_head_sha": "119b27425975a5ed0994fe4e8e49ea911eb2eae6",
+    "merge_commit": "d512a56fa2964f78f20dd0c3bba881365bc6c8b3",
+    "workflow_run_id": 36969179751,
+    "workflow_name": "Verify terminal authority derivation v1",
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_CURRENT_BRAIN_BLOBS_BOUND",
+    "REDUCER_REGRESSION_SUITE_PASS",
+    "LIVE_12_CONTRACT_REDUCER_PASS",
+    "FAILED_PREDICATES_EMPTY",
+    "EXECUTION_AUTHORITY_TRUE",
+    "AUTHORIZATION_T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE",
+    "PRIOR_FALSE_EXECUTION_AUTHORITY_FLAGS_DO_NOT_CREATE_CIRCULAR_GATE"
+  ],
+  "reducer_output": {
+    "pass": true,
+    "execution_authority": true,
+    "authorization": "T0_T1_T2_T3_PARALLEL_TERMINAL_WAVE",
+    "failed_predicates": []
+  },
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "rule": "AUTHORITY_PROMOTION_ONLY__NO_TERMINAL_CAPABILITY_CREDIT_UNTIL_AUTHORIZED_WAVE_RESULTS_PASS_POST_WAVE_GATES"
+}
