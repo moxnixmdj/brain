@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_REOPENED_OBJECTIVE_ROUTE_RESIDUAL_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_RECONCILIATION_INPUT__ZERO_TERMINAL_RESULTS__ZERO_CREDIT",
+  "status": "FROZEN_RECONCILIATION_INPUT__HISTORICAL_RECEIPT_TRANSPORT_BOUND__ZERO_CREDIT",
   "objective": "Exploit the independently revalidated direct-objective gates exactly once while preventing prewave evidence from being mistaken for full acceptance evidence.",
   "gate_receipt": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
   "required_gate_status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FIVE_CURRENT_OBJECTIVE_BINDINGS_EXACT_BYTES__PREWAVE_ONLY__ZERO_TERMINAL_CREDIT",
@@ -15,17 +15,21 @@
       "target_predicates": [
         "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR"
       ],
-      "terminal_requirement": "FRESH_SCOPE_VALID_T2_TERMINAL_OBJECTIVE_EVIDENCE_UNDER_CURRENT_EXACT_BINDING"
+      "terminal_requirement": "SATISFIED_BY_FAIL_CLOSED_HISTORICAL_RECEIPT_TRANSPORT_IF_VERDICT_PASSES",
+      "terminal_evidence_state": "TRANSPORTABLE_FROM_IMMUTABLE_132_OF_132_DIRECT_TERMINAL_RECEIPT__NO_REPLAY",
+      "remaining_acceptance_requirement": "EXACT_MATCHED_OPUS55_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+      "transport_route_id": "DELEGATION_CURRENT_BINDING_RECEIPT_TRANSPORT"
     },
     {
       "id": "TOOL_DISCOVERY_DIRECT_OBJECTIVE_REPLACEMENT",
       "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
       "binding": "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json",
       "scope_relation": "FULL_PROTOCOL_REPLACEMENT_CANDIDATE",
-      "target_predicates": [
-        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR"
-      ],
-      "terminal_requirement": "FRESH_SCOPE_VALID_T2_T3_TERMINAL_OBJECTIVE_EVIDENCE_UNDER_CURRENT_EXACT_BINDING"
+      "target_predicates": [],
+      "terminal_requirement": "NONE__ACCEPTANCE_PREDICATE_ALREADY_PROVED",
+      "state": "SUPERSEDED_BY_INDEPENDENT_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS",
+      "closed_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "closure_witness": "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json"
     },
     {
       "id": "TRAJECTORY_CAUSAL_LOCALIZATION_DIRECT_OBJECTIVE_REPLACEMENT",
@@ -35,7 +39,10 @@
       "target_predicates": [
         "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR"
       ],
-      "terminal_requirement": "FRESH_SCOPE_VALID_T0_T2_INTERVENTION_RESCUE_TERMINAL_EVIDENCE_UNDER_CURRENT_EXACT_BINDING"
+      "terminal_requirement": "SATISFIED_BY_FAIL_CLOSED_HISTORICAL_RECEIPT_TRANSPORT_IF_VERDICT_PASSES",
+      "terminal_evidence_state": "TRANSPORTABLE_FROM_IMMUTABLE_T0_T2_LOAD_BEARING_TERMINAL_RECEIPTS__NO_REPLAY",
+      "remaining_acceptance_requirement": "EXACT_MATCHED_OPUS55_COMPARATOR_OR_SCOPE_COMPLETE_STRONGER_PROOF",
+      "transport_route_id": "RECOVERY_CAUSAL_LOCALIZATION_CURRENT_BINDING_RECEIPT_TRANSPORT"
     },
     {
       "id": "BROWSER_DIRECT_OBJECTIVE_ROUTE",
@@ -63,5 +70,10 @@
   ],
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "historical_terminal_receipt_transport": {
+    "path": "canonical/governance/HISTORICAL_TERMINAL_RECEIPT_TRANSPORT_V1.json",
+    "required_verdict_status": "PASS__IMMUTABLE_TERMINAL_EVIDENCE_TRANSPORTED__FULL_SCOPE_ACCEPTANCE_STILL_OPEN__ZERO_CREDIT",
+    "rule": "TRANSPORT_MAY_SATISFY_FRESH_TERMINAL_EVIDENCE_REQUIREMENT_ONLY_WHEN_EXACT_HISTORICAL_AND_CURRENT_BINDING_BLOBS_MATCH__MATCHED_NONINFERIORITY_REMAINS_SEPARATE"
+  }
 }
