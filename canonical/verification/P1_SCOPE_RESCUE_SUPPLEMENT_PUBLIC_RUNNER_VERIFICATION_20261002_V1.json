@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_P1_SCOPE_RESCUE_SUPPLEMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__96_OF_96__EXPLICIT_SCOPE_AND_HETEROGENEOUS_RESCUE_PASS__ZERO_TERMINAL_V3_REPLAY__ZERO_CREDIT",
+  "objective": "Independently execute the frozen two-obligation P1 supplement after source freeze using the workflow run ID as post-freeze opaque-name seed.",
+  "source_brain_pr": 1032,
+  "source_brain_frozen_head": "f29ec2b429b896cf10b22725981208d2e529be21",
+  "exact_brain_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "14e238443a59c32a0e9910a2804fd954e6bcd412",
+    "canonical/runtime/p1_scope_rescue_supplement_v1.py": "4d8a53fc5ddb1955abdd2beb63b13c717b0e9c7a",
+    "canonical/tests/test_p1_scope_rescue_supplement_v1.py": "b799d5660624b3fcc7fdcf31ab10822b39bff11a",
+    "canonical/governance/P1_SCOPE_RESCUE_SUPPLEMENT_V1.json": "e9be806acf370a10ff1f34f8a56107dfd30441f9"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 1039,
+    "pull_request_head": "c197f87cc8fc292cfb3c1ca6a1c86b449afef6c1",
+    "workflow_name": "Verify Brain P1 scope rescue supplement",
+    "workflow_run_id": 37039566326,
+    "workflow_job_id": 110946042536,
+    "conclusion": "success"
+  },
+  "result_artifact": {
+    "artifact_id": 11242680169,
+    "name": "p1-scope-rescue-supplement-result",
+    "artifact_digest": "sha256:f8dcd524af8bd1e3ca25a2c356bbb20f5c04460c7aea312ee17660c959e95c90",
+    "result_sha256": "4c40f5b82c41a852f2eccaf89114d14c80817c6a6ea01185255c7ef5897fc3e0"
+  },
+  "verified_result": {
+    "post_freeze_seed": 37039566326,
+    "case_count": 96,
+    "passes": 96,
+    "failures": 0,
+    "explicit_scope_cases": 18,
+    "candidate_terminal_rescue_passes": 96,
+    "symptom_only_negative_control_passes": 96,
+    "interaction_partial_repair_negative_control_checks": 96,
+    "domains": [
+      "ARTIFACT",
+      "BROWSER",
+      "CODE",
+      "FILESYSTEM",
+      "RESEARCH",
+      "TOOL_API"
+    ],
+    "mechanism_classes": [
+      "AUTHORITY",
+      "DEPENDENCY",
+      "INVARIANT",
+      "PROVENANCE",
+      "SCHEMA",
+      "SCOPE",
+      "STATE_TRANSITION",
+      "TOOL_CONTRACT"
+    ],
+    "patterns": [
+      "IDENTIFIED",
+      "INTERACTION"
+    ],
+    "terminal_v3_replayed": false,
+    "old_terminal_case_executions_consumed": 0,
+    "fresh_supplement_case_executions": 96,
+    "incremental_spend_usd": 0
+  },
+  "residual_obligations_candidate_discharge": [
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "P1_HETEROGENEOUS_INTERVENTION_RESCUE"
+  ],
+  "hard_nonclaim": "THIS_RECEIPT_DOES_NOT_BY_ITSELF_CLEAR_P1_SCOPE_QUARANTINE__ARCHIVE_ADMISSIBILITY_AND_SEPARATE_FAIL_CLOSED_CLEARANCE_REDUCER_REMAIN_REQUIRED",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false
+}
