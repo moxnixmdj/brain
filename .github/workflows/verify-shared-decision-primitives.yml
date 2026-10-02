@@ -17,4 +17,4 @@ jobs:
         with:
           python-version: "3.11"
       - name: Verify bounded cross-lane decision kernel
-        run: python canonical/tests/test_shared_decision_primitives.py
+        run: PYTHONPATH=. python canonical/tests/test_shared_decision_primitives.py

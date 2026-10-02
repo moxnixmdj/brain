@@ -19,4 +19,4 @@ jobs:
         with:
           python-version: "3.11"
       - name: Verify outer universe and evidence guard
-        run: python canonical/tests/test_global_terminal_universe.py
+        run: PYTHONPATH=. python canonical/tests/test_global_terminal_universe.py
