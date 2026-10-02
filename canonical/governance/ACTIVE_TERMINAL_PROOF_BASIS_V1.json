@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_TERMINAL_PROOF_BASIS_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__SA_CCR_SCOPE_GATE_V2_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
+  "status": "ACTIVE_FAIL_CLOSED__12_OF_12_CONTRACTS_ENUMERATED__BROWSER_GOAL_GROUNDING_RECOVERY_PREFLIGHT_INDEPENDENT_PASS__ZERO_TERMINAL_EXECUTION_AUTHORITY",
   "authority": {
     "registry": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "registry_blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84",
@@ -133,11 +133,16 @@
     {
       "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
       "portfolio": "T2",
-      "proof_state": "ROUTE_REQUIRED",
+      "proof_state": "INDEPENDENT_INFORMATION_SAFE_GOAL_TO_TARGET_RECOVERY_PREFLIGHT_PASS__WHOLE_SCOPE_ADMISSION_PENDING",
       "route_requirement": "FRESH_INTERACTIVE_UI_STATE_TO_ACTION_WITH_HIDDEN_TARGET_STATE_AND_RECOVERY_ORACLE",
       "blockers": [
-        "CONSENSUS_DOM_GROUNDING_IS_NARROW_COMPONENT"
-      ]
+        "WHOLE_BROWSER_VISUAL_CONTRACT_SCOPE_EQUIVALENCE_NOT_YET_PROVEN",
+        "SCOPE_EQUIVALENT_PROOF_GATE_V2_NOT_YET_PASS",
+        "POST_FREEZE_TERMINAL_POPULATION_BINDING_PENDING"
+      ],
+      "route": "canonical/runtime/browser_goal_grounding_recovery_proof.py",
+      "candidate": "canonical/runtime/browser_goal_grounding_recovery_candidate.py",
+      "independent_preflight": "canonical/verification/BROWSER_GOAL_GROUNDING_RECOVERY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
     },
     {
       "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
