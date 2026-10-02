@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_GAP_ACTION_COMPILER_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE_FAIL_CLOSED__LIVE_RESIDUAL_RECOMPUTATION__EXACT_GAP_CERTIFICATES__EXPLICIT_ACTION_FRONTIER__ZERO_CREDIT",
+  "objective": "Eliminate stale terminal scheduling by recomputing the 38-predicate residual from canonical inputs, emitting exact per-predicate gap certificates, and selecting only explicitly declared executable actions without guessed wall-clock claims.",
+  "runtime": "canonical/runtime/acceptance_gap_action_compiler_v1.py",
+  "tests": "canonical/tests/test_acceptance_gap_action_compiler_v1.py",
+  "action_hypergraph": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
+  "inputs": [
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+    "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json"
+  ],
+  "rules": [
+    "LIVE_RESIDUAL_IS_RECOMPUTED_EVERY_RUN__NO_STALE_VERDICT_AS_EXECUTION_AUTHORITY",
+    "EVERY_PREDICATE_RECEIVES_EXACTLY_ONE_GAP_CERTIFICATE",
+    "ACTIONS_ARE_EXPLICIT_HYPEREDGES_OVER_REGISTERED_PREDICATES",
+    "REALITY_ACTION_REQUIRES_LIVE_OPEN_PREDICATE_AND_EXISTING_RESIDUAL_EXECUTION_AUTHORITY",
+    "ZERO_REALITY_BLOCKER_DISCHARGE_MAY_TARGET_BLOCKED_PREDICATES",
+    "CRITICAL_PATH_IS_EXPLICITLY_DECLARED_NOT_INFERRED",
+    "NO_GUESSED_WALL_CLOCK_OR_FAKE_NUMERIC_VALUE_FUNCTION",
+    "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_SCHEDULING"
+  ],
+  "current_expected_truth": "7_PROVED__1_OPEN_TB4__30_BLOCKED__TERMINAL_FALSE",
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}

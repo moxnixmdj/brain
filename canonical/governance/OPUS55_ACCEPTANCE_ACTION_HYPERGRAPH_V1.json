@@ -1,0 +1,163 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
+  "date": "2026-10-02",
+  "status": "ACTIVE__EXPLICIT_CURRENT_ACTION_HYPEREDGES__NO_CREDIT",
+  "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
+  "actions": [
+    {
+      "id": "VERIFY_RANK24_RS_ARCHIVE_CLONE_STAGE_B_INDEPENDENTLY",
+      "action_class": "VERIFY_GATE",
+      "effect": "UNLOCKS",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "preconditions": [
+        {
+          "id": "RANK24_STAGE_B_SOURCE_AND_CONTRACT_FROZEN",
+          "satisfied": true
+        },
+        {
+          "id": "RANK24_TASK_EXECUTION_NOT_YET_CONSUMED",
+          "satisfied": true
+        }
+      ],
+      "notes": "Independent structural/mutation verification only. No benchmark task execution and no acceptance credit."
+    },
+    {
+      "id": "ISSUE_RANK24_STAGE_C_ONE_SHOT_LEASE",
+      "action_class": "VERIFY_GATE",
+      "effect": "UNLOCKS",
+      "critical_path": true,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "preconditions": [
+        {
+          "id": "RANK24_STAGE_B_INDEPENDENT_PASS",
+          "satisfied": false
+        }
+      ],
+      "notes": "Becomes executable only after independent Stage-B receipt is canonical."
+    },
+    {
+      "id": "EXECUTE_RANK24_STAGE_C_ONE_SHOT",
+      "action_class": "REALITY_QUERY",
+      "effect": "ADVANCES",
+      "critical_path": true,
+      "new_reality_units": 1,
+      "consumes_acceptance_case": true,
+      "target_predicates": [
+        "CODING_TB4_GE_66_4"
+      ],
+      "preconditions": [
+        {
+          "id": "RANK24_STAGE_C_LEASE_ACTIVE",
+          "satisfied": false
+        },
+        {
+          "id": "CURRENT_CARRIER_RUNTIME_REVALIDATED",
+          "satisfied": false
+        }
+      ],
+      "notes": "One fresh TB4 case advances the frozen Stage-1 score; it does not by itself prove the 66.4% bar."
+    },
+    {
+      "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
+      "action_class": "PROOF_SEARCH",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+        "VISION_DENSE_NONCHART_SCOPE",
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+        "RECOVERY_TERMINAL_NONINFERIOR",
+        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+        "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+        "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+        "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+        "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
+      ],
+      "preconditions": [],
+      "notes": "Search only existing/public admissible evidence for universal, exhaustive, absolute-ceiling or bound-dominance witnesses before any matched case exposure."
+    },
+    {
+      "id": "BIND_SHARED_PUBLIC_BENCHMARK_EXECUTION_ABI",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "AUTOMATIONBENCH_GE_40",
+        "TB_SCIENCE_GE_58_7",
+        "LIVEBENCH_IF_GE_65_7"
+      ],
+      "preconditions": [],
+      "notes": "Shared adapter work only. Does not imply underlying cognition exists and grants zero benchmark credit."
+    },
+    {
+      "id": "DISCOVER_AND_BIND_FRONTIERCODE_CURSORBENCH_ROUTES",
+      "action_class": "ROUTE_BIND",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
+      ],
+      "preconditions": [],
+      "notes": "Reuse the admitted coding configuration where harness semantics permit; no score inheritance from TB4."
+    },
+    {
+      "id": "INTERNALIZE_FINANCE_JUDGMENT_ROUTE",
+      "action_class": "INTERNALIZE",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
+      ],
+      "preconditions": [],
+      "notes": "Bind a Brain-owned/permissively internalized operative judgment configuration before direct oracle leaves."
+    },
+    {
+      "id": "INTERNALIZE_UNKNOWN_DOMAIN_JUDGMENT_ROUTE",
+      "action_class": "INTERNALIZE",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+      ],
+      "preconditions": [],
+      "notes": "Bind operative cross-domain transfer and calibrated-abstention configuration before direct oracle leaves."
+    },
+    {
+      "id": "REDUCE_COMPOSITION_COMPONENT_DEPENDENCY",
+      "action_class": "DEPENDENCY_REDUCE",
+      "effect": "UNLOCKS",
+      "critical_path": false,
+      "new_reality_units": 0,
+      "target_predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "preconditions": [
+        {
+          "id": "ALL_COMPONENT_ACCEPTANCE_PROOFS_COMPLETE",
+          "satisfied": false
+        }
+      ],
+      "notes": "Automatically becomes useful only after upstream component acceptance proofs close."
+    }
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
