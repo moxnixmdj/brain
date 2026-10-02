@@ -25,6 +25,7 @@ FOUR_CONTRACTS="canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V
 V4_RESIDUAL="canonical/verification/P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 V5_RECEIPT="canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
 TERMINAL_WAVE="canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json"
+V6_SUPERSESSION="canonical/governance/P1_V6_VERIFIED_SUPERSESSION_OF_V5_RESCUE_V1.json"
 EXPECTED_SURFACES={
  "T0/FRONTIERCODE_V1_1::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
  "T0/CURSORBENCH_4_0::P1_CAUSAL_FAILURE_LOCALIZATION_DIRECT_PROOF",
@@ -136,10 +137,33 @@ def _mutation_audit()->dict[str,Any]:
  return {"all_frozen_mutations_killed":all(results.values()) and set(results)==EXPECTED_MUTATIONS,
          "mutation_count":len(results),"results":dict(sorted(results.items()))}
 
-def evaluate(binding=None,manifest=None,routes=None,contracts=None,residual=None,v5=None,wave=None)->dict[str,Any]:
+def evaluate(binding=None,manifest=None,routes=None,contracts=None,residual=None,v5=None,wave=None,supersession=None)->dict[str,Any]:
  binding=dict(binding or _load(P1_BINDING)); manifest=dict(manifest or _load(MANIFEST))
  routes=dict(routes or _load(DIRECT_ROUTES)); contracts=dict(contracts or _load(FOUR_CONTRACTS)); residual=dict(residual or _load(V4_RESIDUAL))
  v5=dict(v5 or _load(V5_RECEIPT)); wave=dict(wave or _load(TERMINAL_WAVE))
+ supersession=dict(supersession or _load(V6_SUPERSESSION))
+ supersession_state=supersession.get("supersession") if isinstance(supersession.get("supersession"),Mapping) else {}
+ if (
+  str(supersession.get("status") or "").startswith("ACTIVE_FAIL_CLOSED_SUPERSESSION")
+  and supersession_state.get("v5_heterogeneous_intervention_rescue")=="FALSIFIED"
+ ):
+  return {
+   "schema":SCHEMA,
+   "status":"FAIL_CLOSED__V5_RESCUE_SUPERSEDED_BY_VERIFIED_V6",
+   "pass":False,
+   "errors":["V5_RESCUE_SUPERSEDED_BY_VERIFIED_V6"],
+   "scope_relation":"NOT_PROVED",
+   "claim_bound_relations":[],
+   "quarantine_lift_eligible":False,
+   "terminal_results_replayed":0,
+   "new_reality_units_consumed":0,
+   "incremental_spend_usd":0,
+   "capability_credit_delta":0,
+   "family_credit_delta":0,
+   "execution_authority":False,
+   "promotion_authority":False,
+   "next":"RECOMPILE_SCOPE_RELATIONS_AGAINST_EXACT_VERIFIED_V6",
+  }
  errors=[]
  if binding.get("behavior_id")!=BEHAVIOR: errors.append("P1_BEHAVIOR_DRIFT")
  if set(binding.get("direct_surface_bindings") or [])!=EXPECTED_SURFACES: errors.append("P1_DIRECT_SURFACE_BINDING_DRIFT")
