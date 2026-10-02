@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_GENOFFICE_DOCX_CANDIDATE_SCREEN_V1",
+  "date": "2026-10-02",
+  "status": "PINNED_CANDIDATE__INDEPENDENT_BRAIN_VERIFICATION_PENDING__ZERO_CAPABILITY_CREDIT",
+  "parent_lane": "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
+  "candidate": {
+    "repository": "genspark-ai/genoffice",
+    "resolved_commit": "db347087628281d49e53d009183d2fb506c3a444",
+    "license": "Apache-2.0",
+    "package": "@genoffice/docx-engine",
+    "package_description": "docx parsing with anchored block tree, OOXML fragment generation, paragraph-patch save"
+  },
+  "inspected_surfaces": [
+    "packages/docx-engine/package.json",
+    "packages/docx-engine/tests/hostile-input.test.ts",
+    "packages/docx-engine/tests/text-patch.test.ts",
+    "packages/docx-engine/tests/roundtrip.test.ts",
+    "packages/cli/src/formats/docx.ts"
+  ],
+  "intended_probe": [
+    "PIN_EXACT_UPSTREAM_COMMIT",
+    "INSTALL_WITH_LIFECYCLE_SCRIPTS_DISABLED",
+    "RUN_UPSTREAM_DOCX_ENGINE_HOSTILE_INPUT_TEXT_PATCH_AND_ROUNDTRIP_TESTS"
+  ],
+  "admission_rule": "PASS_ONLY_IF_PINNED_SOURCE_TESTS_COMPLETE_SUCCESSFULLY_IN_BRAIN_CONTROLLED_CI",
+  "promotion_limit": "SUCCESS_PROVES_ZERO_COST_MECHANICAL_FALLBACK_AVAILABILITY_ONLY__NO_BRAIN_OWNERSHIP_UNTIL_MINIMAL_REQUIRED_SLICE_IS_INTERNALIZED_OR_DURABLY_BOUND_AND_REPLAYED__NO_M2_OR_FAMILY_CREDIT",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0
+}
