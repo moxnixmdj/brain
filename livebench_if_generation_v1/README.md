@@ -45,6 +45,11 @@ python livebench_if_generation_v1/generate_responses.py ... --api-style plain \
   --base-url https://text.pollinations.ai/ --model openai-fast --max-total-tokens 2000000
 
 # 2. Score out_*/model_answers.json with the pinned, independently verified scorer (not part of this kit).
+#    Scorer: livebench.if_runner.ifbench.evaluation_lib (test_instruction_following_loose; declared metric =
+#    prompt-level loose accuracy) at upstream LiveBench/LiveBench commit 8f8e5c381a16e3f24257776edd53471fe86f8091,
+#    bound in canonical/governance/LIVEBENCH_IF_VERIFIER_BINDING_V1.json. The public runner already carries the
+#    hermetic setup (capsules/livebench_if_full_verifier, workflows verify-livebench-if-*). A driver that walks a
+#    questions file and aggregates the metric is NOT included: the dataset's field names are unverified here.
 ```
 
 Use **non-frozen** questions for development (earlier LiveBench releases, if present in the dataset). One way to export them, **UNTESTED** (HuggingFace is not reachable from the authoring sandbox, and the field names may differ; override with `--id-field`, `--prompt-field`, `--release-field`):
