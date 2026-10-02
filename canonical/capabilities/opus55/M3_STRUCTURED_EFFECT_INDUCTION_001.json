@@ -36,5 +36,7 @@
   "new_reality_units_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false
 }
