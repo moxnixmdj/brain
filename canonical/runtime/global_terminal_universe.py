@@ -20,7 +20,12 @@ def build_universe():
     lanes = []
     for row in graph["shared_mechanism_obligations"]:
         key = lane_key(row["id"])
-        if key in {"M0", "M1"} or str(row.get("state", "")).startswith("OPEN_PROOF_ONLY"):\n            hole = "?P"\n        elif row.get("state") == "OPEN":\n            hole = "?M"\n        else:\n            hole = "CLOSED"
+        if key in {"M0", "M1"} or str(row.get("state", "")).startswith("OPEN_PROOF_ONLY"):
+            hole = "?P"
+        elif row.get("state") == "OPEN":
+            hole = "?M"
+        else:
+            hole = "CLOSED"
         lane = {
             "id": row["id"],
             "hole_type": hole,
