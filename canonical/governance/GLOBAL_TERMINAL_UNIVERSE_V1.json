@@ -612,5 +612,13 @@
       "G0_NOVEL_PREDICATE_OPERATOR_OR_EMIT_STRUCTURE"
     ],
     "execute_now": false
+  },
+  "controller_reduction": {
+    "reducer": "canonical/runtime/terminal_closure_reducer.py",
+    "reducer_blob_sha": "2732a577b441e8031ee128629410f792bfe36201",
+    "frontier_function": "evaluate_frontier_state",
+    "authority_rule": "RECEIPTS_AUTHORITATIVE__ACTIVE_HIERARCHY_GLOBAL_UNIVERSE_AND_PREQUALIFICATION_ARE_DERIVED_PROJECTIONS",
+    "contradiction_policy": "FAIL_CLOSED__NO_STALE_WORK_EXECUTION",
+    "expected_current_next_action": "COMPLETE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION"
   }
 }
