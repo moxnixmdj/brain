@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_POSTWAVE_DONOR_FREE_TERMINAL_EXECUTION_AUDIT_V1",
+  "date": "2026-10-02",
+  "status": "AUDIT_COMPLETE__TERMINAL_WAVE_EXECUTABLE_CLOSURE_HAS_ZERO_TARGET_CAPABILITY_PROVIDER_OR_GENERAL_MODEL_ROUTE__INDEPENDENT_VERIFICATION_PENDING",
+  "source_terminal_wave": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "runner_head_sha": "b896e4363f87ea19e023e3ddb95e549a332a5bbb",
+    "workflow_run_id": 36977803089,
+    "workflow_job_id": 110745333159,
+    "conclusion": "success",
+    "request_path": "terminal_runs/terminal_v3_wave/request.json",
+    "request_blob_sha": "e48b401923f4f06417a51647a231944efc14faba",
+    "workflow_path": ".github/workflows/execute-terminal-v3-wave-once.yml",
+    "workflow_blob_sha": "9c0ce5052185f930ee77e3578e5bfc55e1218b4e",
+    "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+    "package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
+    "closure_blob_count": 53
+  },
+  "executable_closure_audit": {
+    "python_files_scanned": 33,
+    "all_33_blob_shas_match_frozen_request": true,
+    "forbidden_provider_or_network_tokens": [
+      "anthropic",
+      "openai",
+      "claude",
+      "qwen",
+      "transformers",
+      "requests",
+      "httpx",
+      "urllib",
+      "socket",
+      "aiohttp",
+      "subprocess",
+      "os.system",
+      "popen(",
+      "importlib",
+      "__import__",
+      "ctypes",
+      "curl ",
+      "wget ",
+      "api_key",
+      "base_url"
+    ],
+    "executable_files_with_forbidden_provider_or_network_hits": 0,
+    "dynamic_exec_sites": [
+      {
+        "path": "canonical/runtime/cad_t0_route_specific_candidate_v1.py",
+        "role": "EXECUTE_BRAIN_GENERATED_CADQUERY_SOURCE",
+        "external_provider_route": false
+      },
+      {
+        "path": "canonical/runtime/cad_partspec_generator.py",
+        "role": "EXECUTE_DETERMINISTIC_PARTSPEC_TO_CADQUERY_SOURCE",
+        "external_provider_route": false
+      },
+      {
+        "path": "canonical/runtime/cad_t0_oracle_adapter.py",
+        "role": "EVALUATOR_SIDE_EXECUTE_DETERMINISTIC_HIDDEN_REFERENCE_CADQUERY_SOURCE",
+        "external_provider_route": false
+      }
+    ],
+    "dynamic_exec_external_provider_route_count": 0,
+    "target_capability_provider_client_import_count": 0,
+    "general_cognition_model_import_count": 0
+  },
+  "runner_environment": {
+    "installed_execution_dependencies": [
+      "pydantic>=2,<3",
+      "cadquery==2.6.1",
+      "python-docx",
+      "openpyxl",
+      "python-pptx",
+      "pypdf"
+    ],
+    "target_capability_provider_dependency_installed": false,
+    "general_cognition_model_dependency_installed": false,
+    "target_capability_credentials_declared_in_workflow": false
+  },
+  "declarative_reference_text": {
+    "files_with_target_names": [
+      "canonical/governance/CAD_ACTIVE_CONTRACT_END_TO_END_PROOF_ROUTE_V1.json",
+      "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json",
+      "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
+    ],
+    "interpretation": "TARGET_NAMES_APPEAR_ONLY_AS_DECLARATIVE_PROOF_TARGET_OR_GOVERNANCE_TEXT__NOT_EXECUTABLE_CAPABILITY_ROUTES"
+  },
+  "adjudication": {
+    "target_capability_donor_present_in_terminal_execution_closure": false,
+    "opaque_target_capability_provider_present": false,
+    "general_cognition_substrate_present": false,
+    "terminal_wave_itself_constitutes_donor_absent_execution_for_the_MEASURED_12_CONTRACT_BEHAVIORAL_BASIS": true,
+    "replay_required_for_donor_absence": false,
+    "reason": "THE_SUCCESSFUL_ONE_SHOT_TERMINAL_WAVE_EXECUTED_THE_EXACT_53_BLOB_CLOSURE_ON_A_PUBLIC_RUNNER_WITHOUT_ANY_TARGET_CAPABILITY_PROVIDER_OR_GENERAL_MODEL_ROUTE_IN_THE_EXECUTABLE_CLOSURE"
+  },
+  "limitations": [
+    "THIS_AUDIT_PROVES_RUNTIME_DONOR_ABSENCE_FOR_THE_FROZEN_TERMINAL_EXECUTION_CLOSURE__IT_DOES_NOT_REWRITE_LICENSE_OR_PROVENANCE_HISTORY",
+    "THREE_LOCAL_CAD_EXEC_SITES_REMAIN_AND_ARE_BOUND_TO_DETERMINISTIC_BRAIN_GENERATED_OR_EVALUATOR_GENERATED_GEOMETRY_SOURCE",
+    "INDEPENDENT_REEXECUTION_OF_THIS_AUDIT_LOGIC_IS_REQUIRED_BEFORE_IT_MAY CLOSE_GLOBAL_OWNERSHIP_POSTCONDITIONS"
+  ],
+  "terminal_replay_authorized": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
