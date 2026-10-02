@@ -8,6 +8,7 @@ last-write-wins behavior.
 from __future__ import annotations
 
 import json
+import re
 from typing import Any, Mapping, Sequence
 
 SCHEMA="BRAIN_FEATURE_CONSTRAINT_COMPOSER_V1"
@@ -68,6 +69,11 @@ def _claims_from_annotation(a:Mapping[str,Any])->list[tuple[str,Any]]:
         })]
     if kind=="datum":
         return [("datum_label",a.get("datum"))]
+    if kind=="declarative_claim":
+        prop=a.get("property")
+        if not isinstance(prop,str) or not prop or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.:-]*",prop):
+            raise ValueError("declarative claim property invalid")
+        return [(prop,a.get("value"))]
     raise ValueError(f"unsupported annotation kind: {kind}")
 
 def compose_feature_constraints(rows:Sequence[Mapping[str,Any]])->dict[str,Any]:
