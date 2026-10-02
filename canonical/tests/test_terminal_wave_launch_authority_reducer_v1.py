@@ -33,6 +33,8 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
             producer_sha=f"parent-{portfolio}-sha"
             producer_test_sha=f"parent-{portfolio}-test-sha"
             receipt=f"verify/parent_{portfolio}.json"
+            runner_binding=f"governance/parent_{portfolio}_binding.json"
+            runner_binding_sha=f"parent-{portfolio}-binding-sha"
             parent_producers["portfolios"][portfolio]={
                 "status":"INDEPENDENT_PUBLIC_RUNNER_PASS",
                 "producer":producer,
@@ -40,6 +42,7 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
                 "producer_blob_sha":producer_sha,
                 "test_blob_sha":producer_test_sha,
                 "independent_verification":receipt,
+                "runner_binding":runner_binding,
                 "real_parent_case_producer":True,
                 "post_freeze_selection_only":True,
                 "same_case_instrumentation":True,
@@ -50,7 +53,7 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
             }
             receipts[receipt]={
                 "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_TERMINAL_RESULTS",
-                "exact_brain_blobs":{producer:producer_sha,producer_test:producer_test_sha},
+                "exact_brain_blobs":{producer:producer_sha,producer_test:producer_test_sha,runner_binding:runner_binding_sha},
                 "verified":[
                     "REAL_PARENT_CASE_PRODUCER",
                     "POST_FREEZE_SELECTION_ONLY",
@@ -65,6 +68,7 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
             }
             blobs[producer]=producer_sha
             blobs[producer_test]=producer_test_sha
+            blobs[runner_binding]=runner_binding_sha
         manifest={
             "route_count":12,"implemented_executor_count":12,"bound_executor_count":12,
             "routes":routes,"launch_authority":False,
@@ -121,6 +125,18 @@ class TerminalWaveLaunchAuthorityReducerTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn(
             "PARENT_PRODUCER_SEMANTIC_FLAG_MISSING:T1:no_stub_receipts",
+            out["failed_predicates"],
+        )
+
+
+    def test_parent_runner_binding_drift_fails_closed(self):
+        pre,manifest,basis,parent_producers,receipts,blobs=self._fixture()
+        binding=parent_producers["portfolios"]["T3"]["runner_binding"]
+        blobs[binding]="drifted"
+        out=self._eval(pre,manifest,basis,parent_producers,receipts,blobs)
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "PARENT_PRODUCER_RUNNER_BINDING_BLOB_DRIFT:T3",
             out["failed_predicates"],
         )
 
