@@ -101,6 +101,12 @@ def solve(public: Mapping[str, Any]) -> dict[str, Any]:
     requirements = []
     normalized_for_acceptance = []
     for idx, clause in enumerate(_clauses(rewritten)):
+        condition_override = None
+        conditioned = re.match(r"^\\s*(after|unless)\\s+(.+?),\\s*(.+)$", clause, re.I)
+        if conditioned:
+            marker = conditioned.group(1).lower()
+            condition_override = marker + " " + conditioned.group(2).strip()
+            clause = conditioned.group(3).strip()
         parsed = pas.parse_clause(clause)
         if parsed.get("status") != "RESOLVED":
             return {
@@ -121,8 +127,8 @@ def solve(public: Mapping[str, Any]) -> dict[str, Any]:
                 "requirements": requirements,
                 "terminal_authority": False,
             }
-        condition = None
-        if "condition" in parsed:
+        condition = condition_override
+        if condition is None and "condition" in parsed:
             condition = parsed["condition"]["text"]
         semantic = {
             "subject": g["subject"],
