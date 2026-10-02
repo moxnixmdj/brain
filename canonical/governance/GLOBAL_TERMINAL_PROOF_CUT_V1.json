@@ -291,7 +291,7 @@
     "disposition": "PRESERVE_SOURCE_AS_SPENT_EVIDENCE__NO_EXECUTION__NO_AUTOMATIC_NEXT_RANK",
     "spent_source_verification": "canonical/capabilities/opus55/LAYOUT_CONFIG_RECREATION2_RANK23_SPENT_SOURCE_VERIFICATION_V1.json"
   },
-  "next_action": "COMPLETE_EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_FROM_ZERO_COST_EXECUTABLE_OR_SCOPE_EQUIVALENT_ABSOLUTE_PROOF_ROUTES__FREEZE_ALL_PRE_WAVE_MANIFESTS__THEN_EXECUTE_T0_T1_T2_T3_IN_PARALLEL",
+  "next_action": "RUN_FAIL_CLOSED_RESIDUAL_SUBTRACTION_ON_D0_S0_G0__IMPLEMENT_ONLY_IRREDUCIBLE_SURVIVORS__FREEZE_M2_AND_SHARED_SEMANTIC_ROUTES__VERIFY_DONOR_COMPOSITION_MUTATION_GATES__THEN_RUN_T0_T1_T2_T3_IN_PARALLEL",
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "incremental_spend_usd": 0,
@@ -376,5 +376,10 @@
     "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
   },
   "frontier_boundary": "canonical/governance/S0_IRREDUCIBLE_SEMANTIC_BOUNDARY_V1.json",
-  "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
+  "prequalification": "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json",
+  "terminal_goal_now_execution": "canonical/governance/TERMINAL_GOAL_NOW_EXECUTION_V1.json",
+  "residual_dependency_eliminator": {
+    "runtime": "canonical/runtime/residual_dependency_eliminator.py",
+    "status": "INSTALLED_PENDING_INDEPENDENT_CI_RECEIPT__NO_PROMOTION_AUTHORITY"
+  }
 }
