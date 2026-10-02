@@ -3,7 +3,7 @@
 Owns a deliberately narrow M0A slice:
 - simple active modal clauses: SUBJECT must/shall/should [not] VERB OBJECT
 - simple passive modal clauses: SUBJECT must/shall/should [not] be VERBED by AGENT
-- one explicit leading IF/WHEN condition plus one simple modal consequence
+- one explicit leading IF/WHEN/AFTER/UNLESS condition plus one simple modal consequence
 
 Every emitted subject/predicate/object/condition is source-span bound. Coordination,
 nested clauses, missing arguments, pronoun inference, ellipsis, and world knowledge
@@ -25,7 +25,7 @@ _PASSIVE=re.compile(
     rf"^\s*(?P<subject>.+?)\s+(?P<modal>{_MODAL})\s+(?P<neg>not\s+)?be\s+(?P<verb>{_WORD}(?:ed|en))\s+by\s+(?P<agent>.+?)\s*[.]?\s*$",
     re.I,
 )
-_COND=re.compile(r"^\s*(?P<marker>if|when)\s+(?P<condition>.+?),\s*(?P<consequence>.+)$",re.I)
+_COND=re.compile(r"^\s*(?P<marker>if|when|after|unless)\s+(?P<condition>.+?),\s*(?P<consequence>.+)$",re.I)
 _COORD=re.compile(r"\b(and|or|nor)\b|[;/]",re.I)
 _PRONOUN=re.compile(r"^(he|she|it|they|him|her|them|his|hers|its|their|theirs|this|that|these|those)\b",re.I)
 
@@ -110,7 +110,13 @@ def parse_clause(text:str)->dict[str,Any]:
         consequence_offset=text.find(consequence)
         condition_start=text.find(cm.group("condition"))
         condition_span=[condition_start,condition_start+len(cm.group("condition"))]
-        relation="CONDITION_IF" if cm.group("marker").lower()=="if" else "CONDITION_WHEN"
+        marker=cm.group("marker").lower()
+        relation={
+            "if":"CONDITION_IF",
+            "when":"CONDITION_WHEN",
+            "after":"CONDITION_AFTER",
+            "unless":"CONDITION_UNLESS",
+        }[marker]
         if _COORD.search(condition_text):
             return {
                 "schema":SCHEMA,"status":"UNRESOLVED",
