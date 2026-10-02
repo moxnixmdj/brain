@@ -1,25 +1,31 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__ATTAINABILITY_INDEPENDENT_FAIL_CLOSED__PENDING_STAGE_C_REVOKED__NO_CREDIT",
+  "status": "ACTIVE__TB4_CARRIER_INDEPENDENT_FAIL_LOCKED__STRONGER_PROOF_ONLY__NO_CREDIT",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
-      "id": "RAISE_TB4_ATTAINABILITY_UPPER_BOUND_WITHOUT_CASE_EXPOSURE",
-      "action_class": "ROUTE_BIND",
-      "effect": "UNLOCKS",
+      "id": "SEARCH_FULL_PROTOCOL_STRONGER_WITNESS_FOR_ADVANCED_AGENTIC_CODING",
+      "action_class": "PROOF_SEARCH",
+      "effect": "PROVES",
       "critical_path": true,
       "new_reality_units": 0,
       "target_predicates": [
-        "CODING_TB4_GE_66_4"
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "CODING_CURSORBENCH_GE_57_8"
       ],
       "preconditions": [
         {
-          "id": "TB4_ATTAINABILITY_INDEPENDENT_PASS__UPPER_180_LT_220",
+          "id": "TB4_CARRIER_INDEPENDENT_BOUND_FAIL_LOCKED_215_LT_220",
+          "satisfied": true
+        },
+        {
+          "id": "NO_EXISTING_TYPED_FULL_PROTOCOL_CODING_WITNESS_IN_TRANSMUTATION_INDEX",
           "satisfied": true
         }
       ],
-      "notes": "Current score route is mathematically impossible. Search only admissible route, carrier, protocol-equivalence, or preexisting creditability changes that can raise the machine-verified upper bound to at least 220 before any benchmark execution."
+      "notes": "Direct TB4 case/carrier route is dominated. Search only for a verified independent contamination-clean UNIVERSAL, EXHAUSTIVE_FINITE, or ABSOLUTE_DOMINANCE witness that binds and closes the entire unchanged ADVANCED_AGENTIC_CODING protocol. Partial FrontierCode/CursorBench route work is dominated until this obstruction is removed."
     },
     {
       "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
@@ -64,19 +70,6 @@
       ],
       "preconditions": [],
       "notes": "Shared adapter work only. Does not imply underlying cognition exists and grants zero benchmark credit."
-    },
-    {
-      "id": "DISCOVER_AND_BIND_FRONTIERCODE_CURSORBENCH_ROUTES",
-      "action_class": "ROUTE_BIND",
-      "effect": "UNLOCKS",
-      "critical_path": false,
-      "new_reality_units": 0,
-      "target_predicates": [
-        "CODING_FRONTIERCODE_GE_54_4",
-        "CODING_CURSORBENCH_GE_57_8"
-      ],
-      "preconditions": [],
-      "notes": "Reuse the admitted coding configuration where harness semantics permit; no score inheritance from TB4."
     },
     {
       "id": "INTERNALIZE_FINANCE_JUDGMENT_ROUTE",
@@ -148,5 +141,13 @@
     "maximum_attainable_successes": 180,
     "required_successes": 220,
     "reality_execution_authorized": false
+  },
+  "carrier_independent_bound": {
+    "manifest": "canonical/governance/TB4_CARRIER_INDEPENDENT_BOUND_MANIFEST_V1.json",
+    "verdict": "canonical/verification/TB4_CARRIER_INDEPENDENT_ACCEPTANCE_BOUND_VERDICT_20261002_V1.json",
+    "maximum_successes": 215,
+    "required_successes": 220,
+    "direct_case_or_carrier_route_authorized": false,
+    "escape": "FULL_PROTOCOL_STRONGER_PROOF_ONLY"
   }
 }
