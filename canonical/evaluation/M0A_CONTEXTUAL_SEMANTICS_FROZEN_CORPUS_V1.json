@@ -1,0 +1,336 @@
+{
+  "schema": "PROJECT_BRAIN_M0A_CONTEXTUAL_SEMANTICS_FROZEN_CORPUS_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_BEFORE_DONOR_OUTPUT__SYNTHETIC_ZERO_REALITY_DIAGNOSTIC_ONLY__ZERO_CAPABILITY_CREDIT",
+  "parent_residual": "M0A_ARBITRARY_SOURCE_TO_INDEPENDENT_SEMANTIC_DECOMPOSITIONS",
+  "purpose": "Localize contextual explicit semantic transforms that deterministic bounded routes currently reject; not a promotion benchmark.",
+  "rules": [
+    "EXPECTED_BINDINGS_AND_OBLIGATIONS_FROZEN_BEFORE_ANY_OLMO_DONOR_OUTPUT_IS_READ",
+    "DEV_CASES_MAY_GUIDE_MECHANISM_LOCALIZATION",
+    "HELDOUT_CASES_MUST_NOT_GUIDE_IMPLEMENTATION",
+    "NO_SYNTHETIC_RESULT_ALONE_PROMOTES_M0A_OR_ANY_FAMILY",
+    "AMBIGUOUS_CASES_EXPECT_FAIL_CLOSED_NOT_GUESSING"
+  ],
+  "cases": [
+    {
+      "id": "DEV_PRONOUN_SINGULAR_001",
+      "split": "dev",
+      "phenomenon": "cross_sentence_pronoun",
+      "source": "The backup process shall verify the checksum. It shall abort on any mismatch.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "It",
+            "antecedent": "the backup process"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the backup process",
+            "predicate": "verify the checksum"
+          },
+          {
+            "subject": "the backup process",
+            "predicate": "abort on any mismatch"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV_PLURAL_PRONOUN_001",
+      "split": "dev",
+      "phenomenon": "plural_cross_sentence_pronoun",
+      "source": "The parser and verifier shall record their versions. They shall reject incompatible schemas.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "They",
+            "antecedent": "the parser and verifier"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the parser and verifier",
+            "predicate": "record their versions"
+          },
+          {
+            "subject": "the parser and verifier",
+            "predicate": "reject incompatible schemas"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV_FORMER_LATTER_001",
+      "split": "dev",
+      "phenomenon": "former_latter",
+      "source": "The producer writes candidate.json and the verifier writes verdict.json. The former must not overwrite the latter.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "the former",
+            "antecedent": "the producer"
+          },
+          {
+            "mention": "the latter",
+            "antecedent": "the verifier"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the producer",
+            "predicate": "must not overwrite verifier output"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV_ELLIPSIS_TOO_001",
+      "split": "dev",
+      "phenomenon": "predicate_ellipsis",
+      "source": "The primary node must persist the lease. The replica must, too.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "must, too",
+            "antecedent_predicate": "persist the lease"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the primary node",
+            "predicate": "persist the lease"
+          },
+          {
+            "subject": "the replica",
+            "predicate": "persist the lease"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV_CONDITIONAL_ANAPHORA_001",
+      "split": "dev",
+      "phenomenon": "conditional_anaphora",
+      "source": "If maintenance mode is enabled, the service shall reject writes. In that mode, it may still serve reads.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "that mode",
+            "antecedent": "maintenance mode"
+          },
+          {
+            "mention": "it",
+            "antecedent": "the service"
+          }
+        ],
+        "obligations": [
+          {
+            "condition": "maintenance mode is enabled",
+            "subject": "the service",
+            "predicate": "reject writes"
+          },
+          {
+            "condition": "maintenance mode is enabled",
+            "subject": "the service",
+            "predicate": "may serve reads"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV_DEMONSTRATIVE_EVENT_001",
+      "split": "dev",
+      "phenomenon": "event_anaphora",
+      "source": "The verifier shall recompute the manifest hash. This validation must occur before promotion.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "This validation",
+            "antecedent": "recompute the manifest hash"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the verifier",
+            "predicate": "recompute the manifest hash"
+          },
+          {
+            "predicate": "recompute the manifest hash",
+            "relation": "before",
+            "object": "promotion"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV_RESPECTIVELY_001",
+      "split": "dev",
+      "phenomenon": "respectively_mapping",
+      "source": "The producer and verifier shall write candidate.json and verdict.json, respectively.",
+      "expected": {
+        "bindings": [
+          {
+            "subject": "the producer",
+            "object": "candidate.json"
+          },
+          {
+            "subject": "the verifier",
+            "object": "verdict.json"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the producer",
+            "predicate": "write candidate.json"
+          },
+          {
+            "subject": "the verifier",
+            "predicate": "write verdict.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV_AMBIGUOUS_PRONOUN_001",
+      "split": "dev",
+      "phenomenon": "ambiguous_pronoun",
+      "source": "The loader notified the verifier after the parser failed because it was unavailable.",
+      "expected": {
+        "status": "FAIL_CLOSED",
+        "reason": "AMBIGUOUS_IT_ANTECEDENT"
+      }
+    },
+    {
+      "id": "HOLDOUT_PRONOUN_OBJECT_001",
+      "split": "heldout",
+      "phenomenon": "cross_sentence_pronoun",
+      "source": "The scheduler creates a lease for the worker. It shall expire the lease after ten minutes.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "It",
+            "antecedent": "the scheduler"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the scheduler",
+            "predicate": "create a lease for the worker"
+          },
+          {
+            "subject": "the scheduler",
+            "predicate": "expire the lease after ten minutes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "HOLDOUT_DO_SO_001",
+      "split": "heldout",
+      "phenomenon": "predicate_ellipsis",
+      "source": "The writer shall fsync the journal before acknowledging. The recovery tool shall do so before replay.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "do so",
+            "antecedent_predicate": "fsync the journal"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the writer",
+            "predicate": "fsync the journal before acknowledging"
+          },
+          {
+            "subject": "the recovery tool",
+            "predicate": "fsync the journal before replay"
+          }
+        ]
+      }
+    },
+    {
+      "id": "HOLDOUT_LATTER_001",
+      "split": "heldout",
+      "phenomenon": "former_latter",
+      "source": "The cache feeds the indexer, and the indexer feeds the search service. The latter must reject stale generations.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "The latter",
+            "antecedent": "the indexer"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "the indexer",
+            "predicate": "reject stale generations"
+          }
+        ]
+      }
+    },
+    {
+      "id": "HOLDOUT_CONTEXT_SCOPE_001",
+      "split": "heldout",
+      "phenomenon": "contextual_scope",
+      "source": "When the emergency flag is set, the controller may bypass batching. This exception ends when the flag is cleared.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "This exception",
+            "antecedent": "controller may bypass batching while emergency flag is set"
+          }
+        ],
+        "obligations": [
+          {
+            "condition": "emergency flag is set",
+            "subject": "the controller",
+            "predicate": "may bypass batching"
+          },
+          {
+            "condition": "emergency flag is cleared",
+            "predicate": "bypass-batching exception ends"
+          }
+        ]
+      }
+    },
+    {
+      "id": "HOLDOUT_PLURAL_001",
+      "split": "heldout",
+      "phenomenon": "plural_reference",
+      "source": "The ingest and export workers each own a queue. They must never consume from the other's queue.",
+      "expected": {
+        "bindings": [
+          {
+            "mention": "They",
+            "antecedent": "the ingest and export workers"
+          }
+        ],
+        "obligations": [
+          {
+            "subject": "each worker",
+            "predicate": "must not consume from the other worker's queue"
+          }
+        ]
+      }
+    },
+    {
+      "id": "HOLDOUT_AMBIGUOUS_FORMER_001",
+      "split": "heldout",
+      "phenomenon": "ambiguous_reference",
+      "source": "A producer contacted a verifier and a reviewer. The latter shall archive the result.",
+      "expected": {
+        "status": "FAIL_CLOSED",
+        "reason": "LATTER_HAS_MULTIPLE_PLAUSIBLE_ORDERINGS_OR_GROUPINGS"
+      }
+    }
+  ],
+  "split_counts": {
+    "dev": 8,
+    "heldout": 6
+  },
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
