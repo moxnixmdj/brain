@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_POST_RESIDUAL_PREFIX_RECOMPUTATION_V1",
+  "date": "2026-10-02",
+  "status": "CURRENT_RECEIPT_DERIVED_STATE__ZERO_FRESH_TERMINAL_EVIDENCE_SPENT",
+  "source_cut": "canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V4.json",
+  "recompute_trigger": "V4_REQUIRED_RECOMPUTE_AFTER_ZERO_REALITY_PREFIX_EXECUTION",
+  "residuals": {
+    "M0A": {
+      "state": "MECHANISM_RESIDUAL_OPEN",
+      "hole_type": "?M",
+      "owned": [
+        "EXPLICIT_COMPOUND_DECOMPOSITION",
+        "EXPLICIT_NAMED_DEFINITION_REFERENCE_GRAPH",
+        "SEMANTIC_IDENTIFIABILITY_GATE",
+        "M0B_ACCEPTANCE_CONSEQUENCE_COMPILER"
+      ],
+      "donor_dev_evidence": [
+        "canonical/reasoning/2026-10-02_M0A_OLMO_CONTRASTIVE_DEV_RESULT_V1.json"
+      ],
+      "donor_signal": "OLMO_2_1B_CONTEXTUAL_SIGNAL_PRESENT_6_OF_7_DEV_CONTRASTS__NOT_ORACLE",
+      "active_zero_reality_action": "verification-capsule-runner PR 463__DECODER_LAYER_IDENTITY_ABLATION__NO_HELDOUT",
+      "next_if_material_layers": "BRANCH_LEVEL_ABLATION_ONLY_ON_MATERIAL_LAYERS__THEN_MINIMAL_RESIDUAL_HARVEST",
+      "next_if_distributed": "DO_NOT_INVENT_LAYER_CAPSULE__CONTINUE_SPECIALIZED_WHITE_BOX_COREFERENCE_DISCOURSE_PREDICATE_ARGUMENT_COMPOSITION",
+      "fresh_terminal_evidence_authorized": false
+    },
+    "M1A": {
+      "state": "ZERO_REALITY_PREFIX_EXECUTED_VERIFIED__PROOF_ONLY_RESIDUAL",
+      "hole_type": "?P",
+      "receipt": "canonical/capabilities/opus55/M1A_ZERO_REALITY_PREFIX_EXECUTION_001.json",
+      "falsification": "canonical/capabilities/opus55/M1A_QWEN_VISUAL_DEV_FALSIFICATION_001.json",
+      "deleted_route": "QWEN3_VL_2B_AS_DEFAULT_M1A_VISUAL_RESIDUAL_DONOR",
+      "irreducible_if_still_required": "ONE_PREDECLARED_MATCHED_M1A_DRAWING_EVALUATION",
+      "new_reality_units_if_executed": 1
+    },
+    "M1B": {
+      "state": "BOUNDED_CONTINUOUS_GEOMETRY_PREFIX_VERIFIED__COVERAGE_PROOF_OPEN",
+      "hole_type": "?P/?S",
+      "receipt": "canonical/capabilities/opus55/M1B_CONTINUOUS_GEOMETRY_COMPILER_001.json",
+      "verified": "ANALYTIC_CSG_ARC_REVOLVE_MULTIBODY_PLUS_SUBMILLIMETRE_TOLERANCE_INTERVALS",
+      "pending_candidate": "canonical/runtime/m1b_smooth_surface_compiler.py",
+      "pending_scope": "SPLINE_REVOLVE__CIRCLE_LOFT__POLYGON_LOFT",
+      "rule": "DO_NOT_SPEND_FRESH_TERMINAL_EVIDENCE_TO_PROVE_GEOMETRY_CLASS_COVERAGE_WHILE_ZERO_REALITY_KERNEL_EXTENSION_OR_EXISTING_ENVELOPE_EVIDENCE_CAN_CLOSE_IT"
+    }
+  },
+  "scheduling": {
+    "primary": "M0A_ZERO_REALITY_CAUSAL_LOCALIZATION_AND_SPECIALIZED_HARVEST",
+    "parallel": [
+      "M1B_SMOOTH_SURFACE_REAL_SOLID_VERIFICATION",
+      "M1A_MATCHED_EVALUATION_PREPARATION_ONLY__NO_EXECUTION_UNTIL_RECOMPUTED_CUT_AUTHORIZES"
+    ],
+    "forbidden": [
+      "NEW_UNTOUCHED_TERMINAL_TASK",
+      "M1A_QWEN_DEFAULT_HARVEST",
+      "WHOLE_OPEN_MODEL_IMPORT",
+      "FAMILY_BY_FAMILY_SERIAL_TESTING"
+    ]
+  },
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
