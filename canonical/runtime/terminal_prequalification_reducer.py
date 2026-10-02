@@ -2,8 +2,9 @@
 
 The reducer never grants capability credit. It only decides whether the frozen
 terminal wave may begin, from explicit pre-wave facts already present in the
-canonical prequalification manifest. Unknown, missing, or contradictory state
-fails closed.
+canonical prequalification manifest. Route-level prewave readiness is deliberately
+separate from terminal-wave execution authority so the reducer cannot require its
+own output as an input. Unknown, missing, or contradictory state fails closed.
 """
 from __future__ import annotations
 
