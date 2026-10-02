@@ -48,6 +48,17 @@ class WitnessTargetBindingTotalizerTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertTrue(any("ATOM_BINDING_RECEIPT_MISSING" in e for e in out["errors"]))
 
+
+    def test_positive_atom_even_with_receipt_is_forbidden_in_v1(self):
+        targets, witnesses = self.docs()
+        witnesses = copy.deepcopy(witnesses)
+        atom = "invariant:zero_critical_authority_violations"
+        witnesses["witnesses"][0]["normalized_target_atoms"] = [atom]
+        witnesses["witnesses"][0]["target_atom_binding_receipts"] = {atom: "receipt://not-enough"}
+        out = totalize(targets, witnesses)
+        self.assertFalse(out["pass"])
+        self.assertTrue(any("POSITIVE_SEMANTIC_BINDING_FORBIDDEN_IN_V1" in e for e in out["errors"]))
+
     def test_atom_outside_frozen_target_vocabulary_fails_closed(self):
         targets, witnesses = self.docs()
         witnesses = copy.deepcopy(witnesses)
