@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_TERMINAL_BINDING_V2_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__REPAIRED_EXACT_BLOBS_AND_COMBINED_PREBEACON_POPULATION_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 603,
+    "workflow_run_id": 36962880391,
+    "workflow_name": "Verify delegation terminal binding V2",
+    "conclusion": "success",
+    "head_sha": "476a7dad9358cc7c69a330315a43a885196b0553"
+  },
+  "exact_verified_blobs": {
+    "candidate": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "interaction_oracle": "928466401b36e4f3b09c517950cc050432a0616f",
+    "structural_oracle": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+    "population_runtime": "478b708f0380e6990d19c49d089023bbadf61545",
+    "population_tests": "7f93ad694568e7249a1689e4746bd9242d6d2473",
+    "frozen_candidate_manifest": "a396986a81519448bde53f5f0f0d0943fac9c503",
+    "behavioral_registry": "afa00109031d638fef32cc3fe10be18786605c39",
+    "population_protocol": "18d5fbecd779e7e571842146599a10f031ccccf3",
+    "scope_relation": "52392515cd4de672f82f8afac82a41d3ce442656",
+    "scope_gate_input": "b434c2ad13154f5d4f43a76cfb27d6b492e93e01",
+    "scope_gate_receipt": "ab1d8d19217fe683b62682c8f7f2ce7800fcfe57",
+    "whole_dimension_receipt": "ae24117149e6acdcc8c4db977f8460b89480f0b2",
+    "structural_variety_receipt": "c99c1fba7f006e065937b4a272d346efbbe2cb49"
+  },
+  "verified_checks": [
+    "EXACT_REPAIRED_CANDIDATE_AND_ORACLE_BLOBS",
+    "REGISTRY_ACCEPTANCE_MODE_MEMBERSHIP",
+    "SCOPE_GATE_ZERO_UNRESOLVED_REQUIRED_DIMENSIONS",
+    "ZERO_VISIBLE_HIDDEN_ORACLE_FIELDS",
+    "TARGET_NOT_WEAKENED",
+    "512_CASE_COMBINED_INTERACTION_AND_STRUCTURAL_DEVELOPMENT_SMOKE",
+    "SIX_INTERACTION_CLASSES_PRESENT",
+    "FIVE_STRUCTURAL_CLASSES_PRESENT",
+    "ZERO_CASE_REPLACEMENT",
+    "ZERO_ADAPTIVE_SELECTION",
+    "ZERO_TUNING_REPLAY",
+    "SCHEDULABILITY_COUNTEREXAMPLE_REGRESSION_PASS"
+  ],
+  "terminal_authority": false,
+  "residual_blocker": "OPEN_DOMAIN_EQUAL_OR_BETTER_TERMINAL_COMPARISON_STILL_REQUIRES_TRUTHFUL_SCOPE_EQUIVALENT_OPUS_5_5_BOUND_OR_COMPARATOR_ROUTE",
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
