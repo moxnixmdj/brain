@@ -1,11 +1,11 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE__EXPLICIT_CURRENT_ACTION_HYPEREDGES__NO_CREDIT",
+  "status": "ACTIVE__RANK24_FAIL_CLOSED__RANK26_PREEXPOSURE_STAGE_A_FRONTIER__NO_CREDIT",
   "objective": "Represent the smallest currently known blocker-discharge and qualification actions as explicit hyperedges over the 38 frozen predicates.",
   "actions": [
     {
-      "id": "VERIFY_RANK24_RS_ARCHIVE_CLONE_STAGE_B_INDEPENDENTLY",
+      "id": "VERIFY_RANK26_VLLM_DEEPSEEK_STREAMING_STAGE_A_INDEPENDENTLY",
       "action_class": "VERIFY_GATE",
       "effect": "UNLOCKS",
       "critical_path": true,
@@ -15,18 +15,18 @@
       ],
       "preconditions": [
         {
-          "id": "RANK24_STAGE_B_SOURCE_AND_CONTRACT_FROZEN",
+          "id": "RANK26_PRIOR_EXPOSURE_SEARCH_COMPLETE_ZERO_HITS",
           "satisfied": true
         },
         {
-          "id": "RANK24_TASK_EXECUTION_NOT_YET_CONSUMED",
+          "id": "RANK26_INSTRUCTION_UNREAD",
           "satisfied": true
         }
       ],
-      "notes": "Independent structural/mutation verification only. No benchmark task execution and no acceptance credit."
+      "notes": "Independent pre-exposure Stage-A verification only. PR 833. No task source exposure or acceptance credit."
     },
     {
-      "id": "ISSUE_RANK24_STAGE_C_ONE_SHOT_LEASE",
+      "id": "EXPOSE_RANK26_STAGE_B_ALLOWLISTED_OFFICIAL_SOURCES_ONCE",
       "action_class": "VERIFY_GATE",
       "effect": "UNLOCKS",
       "critical_path": true,
@@ -36,14 +36,14 @@
       ],
       "preconditions": [
         {
-          "id": "RANK24_STAGE_B_INDEPENDENT_PASS",
+          "id": "RANK26_STAGE_A_INDEPENDENT_PASS",
           "satisfied": false
         }
       ],
-      "notes": "Becomes executable only after independent Stage-B receipt is canonical."
+      "notes": "One allowlisted official Stage-B exposure only after independent Stage-A pass. No task execution."
     },
     {
-      "id": "EXECUTE_RANK24_STAGE_C_ONE_SHOT",
+      "id": "EXECUTE_NEXT_CLEAN_TB4_STAGE_C_ONE_SHOT",
       "action_class": "REALITY_QUERY",
       "effect": "ADVANCES",
       "critical_path": true,
@@ -54,15 +54,15 @@
       ],
       "preconditions": [
         {
-          "id": "RANK24_STAGE_C_LEASE_ACTIVE",
+          "id": "CURRENT_CLEAN_SAMPLE_STAGE_C_LEASE_ACTIVE",
           "satisfied": false
         },
         {
           "id": "CURRENT_CARRIER_RUNTIME_REVALIDATED",
-          "satisfied": false
+          "satisfied": true
         }
       ],
-      "notes": "One fresh TB4 case advances the frozen Stage-1 score; it does not by itself prove the 66.4% bar."
+      "notes": "Consumes exactly one fresh TB4 case only after all staged gates. Rank24 is contaminated and forbidden; rank26 is current clean sample candidate."
     },
     {
       "id": "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL",
@@ -159,5 +159,11 @@
   ],
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "last_reconciliation": {
+    "date": "2026-10-02",
+    "rank24": "CONTAMINATED_POST_STAGE_B__NO_STAGE_C__NO_REPLAY",
+    "rank25": "INELIGIBLE_PREEXPOSURE__PRIOR_RUNNER_EXPOSURE",
+    "rank26": "CLEAN_PREEXPOSURE__STAGE_A_INDEPENDENT_VERIFICATION_PENDING__PR833"
+  }
 }
