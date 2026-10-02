@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_DELEGATION_WHOLE_DIMENSION_PREFLIGHT_V2",
   "date": "2026-10-02",
-  "status": "IMPLEMENTED_PENDING_INDEPENDENT_VERIFICATION__ZERO_TERMINAL_AUTHORITY",
+  "status": "INDEPENDENT_WHOLE_DIMENSION_PREFLIGHT_PASS__SCOPE_GATE_AND_POST_FREEZE_TERMINAL_BINDING_PENDING__ZERO_TERMINAL_AUTHORITY",
   "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
   "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
   "proof": "canonical/runtime/delegation_whole_scope_proof_v2.py",
@@ -49,5 +49,10 @@
   "fresh_terminal_evidence_consumed": 0,
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "independent_preflight": "canonical/verification/DELEGATION_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "remaining_before_terminal_authority": [
+    "SCOPE_EQUIVALENT_PROOF_GATE_V2_PASS",
+    "POST_FREEZE_TERMINAL_POPULATION_AND_ACCEPTANCE_BINDING"
+  ]
 }
