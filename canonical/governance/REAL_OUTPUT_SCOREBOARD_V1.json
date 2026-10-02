@@ -94,7 +94,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "D0_S0_CLOSED_OR_EXACT_FAIL_CLOSED_BLOCKER_VERDICT",
+  "next_progress_event_target": "D0_S0_G0_CLOSED_OR_EXACT_FAIL_CLOSED_UNSOLVED_BOUNDARY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
     "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V6.md",
@@ -1003,14 +1003,14 @@
     "incremental_spend_usd": 0
   },
   "last_frontier_reconciliation": {
-    "status": "M5_PROOF_ONLY__S1_DEPENDENCY_COMPRESSED__M2_M3_ONLY_IMPLEMENTATION_LANES__D0_S0_ONLY_OPERATIVE_RESIDUALS",
-    "blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__D0_NATIVE_EDIT_TAIL_AND_S0_SOURCE_TRACEABLE_MODEL_ACQUISITION_REMAIN_FOR_M2_M3__DONOR_INDEPENDENCE_AND_COMPOSITION_GATES_PENDING",
+    "status": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__ONLY_D0_S0_G0_IMPLEMENTATION_RESIDUALS",
+    "blocker": "EXACT_FOUR_PORTFOLIO_CUT_FROZEN__ONLY_D0_NATIVE_EDIT_AND_SHARED_S0_G0_SEMANTIC_MODEL_ACQUISITION_REMAIN_BEFORE_OPERATIVE_ROUTE_FREEZE",
     "parent_capability_promoted": false,
     "whole_envelope_complete": false,
     "evidence_path": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
-    "new_reality_units": 0
+    "next_clean_task_authorized": false
   },
-  "next_required_action": "CLOSE_D0_AND_S0_FOR_SURVIVING_M2_M3_SCOPE__FREEZE_DONOR_INDEPENDENT_M2_M3_OPERATIVE_ROUTES__VERIFY_COMPOSITION_AND_MUTATION_GATES__THEN_ADMIT_T0_T1_T2_T3_AS_ONE_PARALLEL_TERMINAL_WAVE",
+  "next_required_action": "CLOSE_D0_FROM_PINNED_PERMISSIVE_FORMAT_MECHANISMS__CLOSE_OR_BOUND_S0_G0_IMPLICIT_LONG_RANGE_MULTIMODAL_AND_NOVEL_TYPED_STRUCTURE_RESIDUAL__FREEZE_DONOR_INDEPENDENT_M2_ROUTE_AND_SHARED_SEMANTIC_ROUTE__VERIFY_COMPOSITION_MUTATION_AND_DONOR_GATES__THEN_ADMIT_T0_T1_T2_T3_ONE_PARALLEL_WAVE",
   "atomic_causal_strategy_path": "canonical/capabilities/opus55/ATOMIC_CAUSAL_INTELLIGENCE_MAP_V1.json",
   "rank13_fin_saccr_failure": {
     "status": "SPENT__VERIFIED_FAILURE__ZERO_CREDIT",
@@ -1244,16 +1244,25 @@
     "fresh_terminal_evidence_consumed_delta": 0
   },
   "current_mechanism_frontier": {
-    "open_lanes": [
-      "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL",
-      "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
-      "M5_FAILURE_LOCALIZATION_SCOPE_AND_RECOVERY"
+    "lane_local": [
+      "M2_PROFESSIONAL_ARTIFACT_AND_DOCUMENT_CONTROL"
     ],
-    "compressed_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
-    "true_remaining_classes": [
-      "D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_TAIL",
+    "shared": [
       "S0_RAW_CONTEXT_TO_TYPED_FACT_TEMPLATE_AND_EFFECT_MODEL",
-      "S1_IMPLICIT_SEMANTIC_ADJUDICATION_AND_ABSTENTION"
-    ]
+      "G0_NOVEL_TYPED_TEMPLATE_AND_EFFECT_MODEL_SYNTHESIS"
+    ],
+    "deterministic_tail": [
+      "D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_TAIL"
+    ],
+    "proof_only": [
+      "M0",
+      "M1",
+      "M3",
+      "M4",
+      "M5",
+      "S1"
+    ],
+    "m3_compression": "canonical/governance/M3_DEPENDENCY_COMPRESSION_V1.json",
+    "m5_compression": "canonical/governance/M5_DEPENDENCY_COMPRESSION_V1.json"
   }
 }
