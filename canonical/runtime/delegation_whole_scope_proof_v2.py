@@ -158,9 +158,19 @@ def _optimal_plan(task,receipt=None,completed=()):
                     facts|=row["produces"]
                 if not ok or not required.issubset(facts):continue
                 cost=sum(steps[s]["cost"] for s in order)
+                plan={"task_ids":list(order),"dependencies":deps,"total_cost":cost}
+                # Whole-contract optimum is over executable *and schedulable*
+                # plans. A cheaper fact-producing plan that no declared workers
+                # can execute is not a valid optimum.
+                try:
+                    _min_waves(task,plan,receipt,completed)
+                except ValueError as exc:
+                    if str(exc)=="NO_SCHEDULE":
+                        continue
+                    raise
                 key=(cost,len(order),tuple(order))
                 if best is None or key<best[0]:
-                    best=(key,{"task_ids":list(order),"dependencies":deps,"total_cost":cost})
+                    best=(key,plan)
     if best is None:raise ValueError("NO_PLAN")
     return best[1]
 
