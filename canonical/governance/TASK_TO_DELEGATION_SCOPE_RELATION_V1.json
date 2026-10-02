@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_TASK_TO_DELEGATION_SCOPE_RELATION_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_RELATION_CANDIDATE__AWAITING_INDEPENDENT_SCOPE_GATE_VERIFICATION__ZERO_TERMINAL_CREDIT",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "registry": {
+    "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+    "blob_sha": "771a50d2b12f36c953903e0ec4cbe4a95cd24f84"
+  },
+  "candidate": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+  "candidate_blob_sha": "9f2c3aa42352cba66967afb1f8a3f45357833c41",
+  "primary_proof": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+  "primary_proof_blob_sha": "5785b07f482e38acdf7916e5414d90c2c0c305b7",
+  "structural_proof": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+  "structural_proof_blob_sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492",
+  "exact_contract_boundary": {
+    "inputs": [
+      "EXPLICIT_TASK_REQUIREMENT_AND_DEPENDENCY_GRAPH",
+      "DECLARED_WORKER_OR_TOOL_CAPABILITIES",
+      "CURRENT_STATE",
+      "CONCURRENCY_AND_RESOURCE_CONSTRAINTS",
+      "EVIDENCE_OWNERSHIP_RULES",
+      "LIVE_RECEIPTS"
+    ],
+    "required_outputs": [
+      "PARTITION_ONLY_REQUIRED_USEFULLY_PARALLELIZABLE_WORK",
+      "OWNER_ASSIGNMENT",
+      "DEPENDENCY_AND_FANIN_GRAPH",
+      "RECEIPT_DRIVEN_REASSIGNMENT"
+    ],
+    "success_and_failure_dimensions": [
+      "CORRECTNESS",
+      "LOWER_WALL_CLOCK_OR_HIGHER_EVIDENCE_COVERAGE_THAN_CONTROLLED_BASELINE",
+      "NO_DUPLICATE_WORK",
+      "NO_CONFLICTING_WRITES",
+      "NO_LOST_PROVENANCE",
+      "NO_DEPENDENCY_VIOLATION",
+      "NO_IDLE_CRITICAL_PATH",
+      "CAPABILITY_COMPATIBLE_ASSIGNMENT",
+      "COMPLETE_FANIN_EVIDENCE"
+    ]
+  },
+  "route_coverage": {
+    "PARTITION_ONLY_REQUIRED_USEFULLY_PARALLELIZABLE_WORK": "V2 exact minimum-cost required task set plus minimum-wave schedule",
+    "OWNER_ASSIGNMENT": "V2 capability-compatible assignment oracle",
+    "DEPENDENCY_AND_FANIN_GRAPH": "V2 direct dependency derivation plus evidence fanin completeness",
+    "RECEIPT_DRIVEN_REASSIGNMENT": "V2 worker/step/capability/resource receipt replanning",
+    "CONCURRENCY_AND_RESOURCE_CONSTRAINTS": "V2 resource capacities, write conflicts, worker exclusivity and minimum waves",
+    "EVIDENCE_OWNERSHIP_RULES": "V2 evidence owners and terminal fanin lineage",
+    "CONTROLLED_BASELINE_ADVANTAGE": "V2 serial and naive-fanout baseline acceptance",
+    "STRUCTURAL_TASK_GRAPH_VARIETY": "V3 chain, fork-join, fanout-join, dual-root-fanin and alternative-plan populations"
+  },
+  "population_relation": {
+    "relation": "CANDIDATE_SUPERSET_PROVEN",
+    "basis": [
+      "Candidate iterates arbitrary finite explicit task and worker collections rather than fixed task IDs or a frozen topology",
+      "Candidate has no static task-count semantic cutoff; computation may scale with the declared finite graph",
+      "V2 independent oracle consumes arbitrary task dictionaries through generic step/worker/resource/evidence routines",
+      "V3 independently verifies multiple structurally distinct DAG/fanin/fanout/alternative-plan shapes"
+    ],
+    "boundary": "ARBITRARY_FINITE_EXPLICIT_MONOTONIC_FACT_TASK_GRAPHS_WITH_DECLARED_CAPABILITIES_RESOURCES_EVIDENCE_RULES_AND_LIVE_RECEIPTS",
+    "excludes": "IMPLICIT_TASK_DISCOVERY_OR_UNDECLARED_CAPABILITY_INFERENCE__OUTSIDE_FROZEN_CONTRACT_INPUT_BOUNDARY"
+  },
+  "environment_relation": "EXACT",
+  "oracle_relation": {
+    "relation": "CANDIDATE_STRONGER_PROVEN",
+    "basis": [
+      "Independent oracle checks exact minimum-cost executable task set",
+      "Independent oracle checks minimum-wave capability/resource-feasible schedule",
+      "Independent oracle checks evidence ownership and fanin completeness",
+      "Independent oracle checks controlled serial/naive-fanout advantage",
+      "Independent oracle checks receipt provenance and no replay"
+    ]
+  },
+  "candidate_information_relation": "EXACT_CANDIDATE_VISIBLE_INFORMATION",
+  "unresolved_required_dimensions": [],
+  "target_weakened": false,
+  "opaque_target_capability_provider": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
