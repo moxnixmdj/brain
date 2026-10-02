@@ -43,3 +43,5 @@ jobs:
         with:
           name: proof-atom-receipt-index
           path: proof-atom-receipt-index.json
+
+# live full-brain corpus freeze trigger 20261002-v1
