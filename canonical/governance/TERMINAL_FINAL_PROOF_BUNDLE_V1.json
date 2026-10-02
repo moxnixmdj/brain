@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_FINAL_PROOF_BUNDLE_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_CONTENT_ADDRESSED_TERMINAL_PROOF_BUNDLE__PENDING_FINAL_REDUCER_CI",
+  "status": "FROZEN_CONTENT_ADDRESSED_TERMINAL_PROOF_BUNDLE__OWNERSHIP_MATRIX_BOUND__PENDING_FINAL_REDUCER_CI",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "candidate_package_commitment": "5a347e796d124373b557424a51659e8bb69b854d09da0b407a5b30f109d9467a",
   "terminal_result_sha256": "f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2",
@@ -43,8 +43,13 @@
     },
     {
       "path": "canonical/runtime/terminal_closure_reducer.py",
-      "blob_sha": "2732a577b441e8031ee128629410f792bfe36201",
+      "blob_sha": "9b8430faf5e34e8ffc723c1dcd059dd63b3988c1",
       "role": "fail-closed terminal achieved reducer"
+    },
+    {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "blob_sha": "b2bd9ad0165ffb36334601037dfc5bbb2b8eee6e",
+      "role": "19-of-19 ownership promotion candidate bound to terminal evidence"
     }
   ],
   "closed_predicates": [
@@ -63,7 +68,7 @@
   "proof_bundle_frozen": true,
   "terminal_replay_permitted": false,
   "incremental_spend_usd": 0,
-  "finalization_rule": "FINAL_CLOSURE_REDUCER_MUST_RETURN_ACHIEVED_TRUE_ON_MANIFEST_BOUND_TO_THIS_BUNDLE__THEN_FAMILY_OWNERSHIP_PROMOTION_MAY_BE_RECORDED",
+  "finalization_rule": "FINAL_GLOBAL_POSTCONDITIONS_REDUCER_AND_HARDENED_TERMINAL_CLOSURE_REDUCER_MUST_BOTH_PASS_ON_THIS_EXACT_BRANCH_STATE__THEN_PROMOTION_BECOMES_CANONICAL",
   "capability_credit_delta": 0,
   "family_credit_delta": 0
 }
