@@ -1,15 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREWAVE_T1_PROFESSIONAL_QUALITY_BINDING__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
+  "status": "FROZEN_PREWAVE_T1_DIRECT_QUALITY_INSTRUMENTATION__INDEPENDENT_VERIFICATION_PENDING__ZERO_TERMINAL_RESULTS",
   "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
-  "proof_mode": "T1_MULTIPLEXED_PROFESSIONAL_QUALITY_GATE_PLUS_PUBLIC_BAR",
+  "proof_mode": "T1_MULTIPLEXED_DIRECT_PROFESSIONAL_QUALITY_GATE",
   "authority": [
-    "canonical/governance/ACTIVE_CONTRACT_PROOF_MODE_CLASSIFICATION_V1.json",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
     "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
-    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
-    "canonical/governance/P2_P3_SCOPE_EQUIVALENCE_AUDIT_V1.json"
+    "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+    "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json"
   ],
   "decomposition": {
     "owned_behavior": "CHOOSE_CONTENT_ANALYSIS_LAYOUT_AND_REVISION_PLAN_UNDER_EXPLICIT_OBJECTIVE_AUDIENCE_EVIDENCE_RUBRIC_AND_ARTIFACT_STATE",
@@ -22,10 +23,6 @@
   "direct_surface_bindings": [
     "T1/GDPVAL_AA_V2_1::P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF",
     "T1/AA_BRIEFCASE_V1_1::P2_PROFESSIONAL_ARTIFACT_QUALITY_DIRECT_PROOF"
-  ],
-  "public_quality_surfaces": [
-    "GDPval-AA v2.1 >=1846 Elo",
-    "AA-Briefcase v1.1 >=1822 Elo"
   ],
   "candidate_visible_information": [
     "USER_OBJECTIVE",
@@ -77,8 +74,8 @@
   "terminal_acceptance": {
     "prewave_binding_is_terminal_result": false,
     "standalone_synthetic_whole_domain_score_forbidden": true,
-    "terminal_evidence_source": "THE_FROZEN_T1_PROFESSIONAL_FINANCE_ARTIFACT_SYNTHESIS_VISION_PORTFOLIO",
-    "proof_rule": "FOR_EACH_T1_CASE_WHERE_PROFESSIONAL_ARTIFACT_JUDGMENT_IS_LOAD_BEARING__DIRECT_P2_INSTRUMENTATION_MUST_PASS__THE_PARENT_T1_PUBLIC_OR_SCOPE_EQUIVALENT_QUALITY_ACCEPTANCE_MUST_PASS__NO_CROSS_BEHAVIOR_SCORE_INHERITANCE",
+    "terminal_evidence_source": "THE_FROZEN_T1_TERMINAL_OBSERVATIONS_WITH_DIRECT_P2_INSTRUMENTATION",
+    "proof_rule": "FOR_EACH_T1_CASE_WHERE_P2_IS_LOAD_BEARING__DIRECT_P2_INSTRUMENTATION_MUST_PASS__THE_PARENT_T1_TERMINAL_ACCEPTANCE_MUST_PASS_UNDER_ITS_OWN_FROZEN_PROTOCOL__NO_PRIVATE_SCORE_INFERENCE__NO_CROSS_BEHAVIOR_SCORE_INHERITANCE",
     "public_bar_credit_only_for_declared_surface_scope": true,
     "any_load_bearing_p2_failure_blocks_behavior_proof": true
   },
@@ -93,5 +90,25 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "reference_quality_surfaces": [
+    "GDPval-AA v2.1 >=1846 Elo",
+    "AA-Briefcase v1.1 >=1822 Elo"
+  ],
+  "private_or_named_surface_execution": {
+    "required_for_this_prewave_binding": false,
+    "score_inference_forbidden": true,
+    "rule": "P2_PREWAVE_ADMISSION_COMES_FROM_DIRECT_T1_BEHAVIOR_INSTRUMENTATION__NOT_FROM_REPRODUCING_OR_INFERRING_PRIVATE_ELO"
+  },
+  "dependencies": [
+    "canonical/runtime/p2_p3_information_safe_candidate_v2.py",
+    "canonical/runtime/p2_p3_information_safe_proof_suites_v2.py",
+    "canonical/verification/P2_P3_INFORMATION_SAFE_PREFLIGHT_VERIFICATION_20261002_V1.json",
+    "canonical/governance/PROFESSIONAL_ARTIFACT_INTERNAL_PREWAVE_BINDING_V1.json",
+    "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "canonical/governance/TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1.json",
+    "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json"
+  ],
+  "prewave_admissible": false,
+  "independent_verification": null
 }
