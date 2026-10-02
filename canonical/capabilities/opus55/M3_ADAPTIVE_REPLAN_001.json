@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_M3_ADAPTIVE_REPLAN_001",
+  "date": "2026-10-02",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_ADAPTIVE_REPLAN_COMPOSITION__ZERO_WHOLE_LANE_CREDIT",
+  "parent_lane": "M3_INTERACTIVE_AGENCY_TOOL_AND_DELEGATION_CONTROL",
+  "implementation": "canonical/runtime/m3_adaptive_replan.py",
+  "implementation_blob_sha": "83b4ab452b8b17c7ef652add3efb41259c555f3a",
+  "tests": "canonical/tests/test_m3_adaptive_replan.py",
+  "tests_blob_sha": "a9c4809ad65750da686cc6ddba9f27aa8adc9cd9",
+  "workflow": ".github/workflows/verify-m3-adaptive-replan.yml",
+  "workflow_blob_sha": "5625874ca46f58bd56b079f17b1b3537ca20e572",
+  "independent_verification": {
+    "workflow_run_id": 36952094784,
+    "conclusion": "success",
+    "verified_branch_head": "1fba9d4ac951a2c483501966d0290707e0412222",
+    "exact_blob_match_on_main": true,
+    "installation_main_commits": [
+      "24445b0bf3b32e5e68a952c814c2472aa9241960",
+      "31b81bad3e17745dca79f3117b61d828eea46f53",
+      "98007df8029f14b46522f53dd578f50349547d78"
+    ]
+  },
+  "owned_scope": [
+    "EXPLICIT_FACT_RETRACTION_AND_OBSERVATION_ADDITION_TO_UPDATED_STATE",
+    "EXPLICIT_FAILED_OR_UNAVAILABLE_STEP_REMOVAL",
+    "UPDATED_STATE_TO_EXACT_MINIMUM_COST_EXECUTABLE_CONTRACT_REPLAN",
+    "RECOMPUTED_PLAN_TO_FRESH_EXPLICIT_DEPENDENCY_GRAPH",
+    "READY_TASKS_TO_EXPLICIT_CAPABILITY_WORKER_REASSIGNMENT"
+  ],
+  "exclusions": [
+    "NO_IMPLICIT_SEMANTIC_FAILURE_INTERPRETATION",
+    "NO_RAW_NATURAL_LANGUAGE_STEP_CONTRACT_GENERATION",
+    "NO_UNKNOWN_WORKER_CAPABILITY_INFERENCE",
+    "NO_OPEN_ENDED_WORLD_MODEL_GENERATION",
+    "NO_WHOLE_M3_OR_FAMILY_CREDIT"
+  ],
+  "donor_runtime_required": false,
+  "external_model_or_api_required": false,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
