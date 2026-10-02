@@ -67,6 +67,41 @@ class P1V5DirectSurfaceScopeRelationTests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("SYNTHETIC_TERMINAL_SCORE_FIREWALL_MISSING", out["errors"])
 
+
+    def test_surface_contract_pointer_drift_fails_closed(self):
+        b, p, fc, a, nr, v = self.sources()
+        p = copy.deepcopy(p)
+        for surface in p["portfolios"]["T0"]["surfaces"]:
+            if surface["id"] == "CURSORBENCH_4_0":
+                surface["direct_proof_contracts"] = "canonical/governance/WRONG_CONTRACT.json"
+        out = rel.evaluate(binding=b, portfolios=p, four_contracts=fc, absolute_suites=a, native_routes=nr, v5=v)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertTrue(any(x.startswith("P1_SURFACE_CONTRACT_POINTER_DRIFT:") for x in out["errors"]))
+
+    def test_normalization_boundary_drift_fails_closed(self):
+        b, p, fc, a, nr, v = self.sources()
+        b = copy.deepcopy(b)
+        b["decomposition"]["normalization_boundary"] = "RAW_PRIVATE_SURFACE_PAYLOAD"
+        out = rel.evaluate(binding=b, portfolios=p, four_contracts=fc, absolute_suites=a, native_routes=nr, v5=v)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("P1_NORMALIZATION_BOUNDARY_DRIFT", out["errors"])
+
+    def test_full_binding_required_mutation_set_is_load_bearing(self):
+        b, p, fc, a, nr, v = self.sources()
+        b = copy.deepcopy(b)
+        b["evaluator"]["required_mutations"].remove("DROP_CAUSAL_PREDECESSOR_IN_MULTI_STEP_CHAIN")
+        out = rel.evaluate(binding=b, portfolios=p, four_contracts=fc, absolute_suites=a, native_routes=nr, v5=v)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("P1_FULL_REQUIRED_MUTATION_SET_DRIFT", out["errors"])
+
+    def test_exact_v5_independent_receipt_is_required(self):
+        b, p, fc, a, nr, v = self.sources()
+        vv = copy.deepcopy(rel._load(rel.V5_VERIFY))
+        vv["verified"]["drop_provenance_mutation_killed"] = False
+        out = rel.evaluate(binding=b, portfolios=p, four_contracts=fc, absolute_suites=a, native_routes=nr, v5=v, v5_verify=vv)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertTrue(any(x.startswith("P1_REQUIRED_MUTATION_UNVERIFIED:DROP_PROVENANCE_OR_DEPENDENCY_EDGE") for x in out["errors"]))
+
     def test_scope_bridge_never_inherits_adjacent_surface_contracts(self):
         out = rel.evaluate()
         self.assertFalse(out["anti_overclaim"]["adjacent_contract_inheritance"])
