@@ -1,0 +1,225 @@
+{
+  "broad_objective_decomposition": {
+    "invented_facts": [],
+    "invented_source_urls": [],
+    "model_dependency_count": 0,
+    "objective": "Assess whether the maximum permitted HTTP/2 initial stream flow-control window is greater than the protocol's default initial stream flow-control window. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant specification, determine how to extract and interpret the required limits, choose and run a zero-cost verification method, identify material protocol-scope or interpretation limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+    "objective_sha256": "3b24b347debb25c71f80bf89343c4938f0022ec99f63ccbe72c37f0b9f3b8a0a",
+    "question_shape": "BOOLEAN_ASSESSMENT",
+    "role_count": 5,
+    "roles": [
+      {
+        "description": "Identify authoritative source candidates that can supply evidence needed to resolve the objective.",
+        "index": 0,
+        "required_capability_class": "authoritative source discovery",
+        "role": "SOURCE_DISCOVERY",
+        "status": "REQUIRES_GROUNDING"
+      },
+      {
+        "description": "Acquire provenance-bearing evidence for every decision-relevant operand or claim in the objective.",
+        "index": 1,
+        "required_capability_class": "provenance-bearing evidence acquisition",
+        "role": "EVIDENCE_ACQUISITION",
+        "status": "REQUIRES_GROUNDING"
+      },
+      {
+        "description": "Extract typed decision-relevant facts or quantities from the acquired evidence without inventing missing values.",
+        "index": 2,
+        "required_capability_class": "typed evidence extraction",
+        "role": "EVIDENCE_EXTRACTION",
+        "status": "REQUIRES_GROUNDING"
+      },
+      {
+        "description": "Evaluate the relation or comparison requested by the objective using verified deterministic capabilities where applicable.",
+        "index": 3,
+        "required_capability_class": "verified deterministic relation evaluation",
+        "role": "RELATION_EVALUATION",
+        "status": "REQUIRES_GROUNDING"
+      },
+      {
+        "description": "Synthesize the answer from verified evidence while preserving provenance, uncertainty, conflicts, and independent verification requirements.",
+        "index": 4,
+        "required_capability_class": "verified evidence synthesis",
+        "role": "DECISION_SYNTHESIS_AND_VERIFICATION",
+        "status": "REQUIRES_GROUNDING"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_BROAD_OBJECTIVE_DECOMPOSITION_V1",
+    "status": "DECOMPOSED",
+    "task_specific_literals_added": []
+  },
+  "broad_objective_decomposition_available": true,
+  "candidate_capability_ids": [],
+  "clauses": [
+    {
+      "candidates": [],
+      "constraints": [],
+      "end": 152,
+      "index": 0,
+      "output_contract": {
+        "extensions": [],
+        "paths": [
+          "HTTP/2"
+        ]
+      },
+      "rejected_unbindable_candidates": [
+        {
+          "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:extraction_path"
+        },
+        {
+          "capability_id": "http.json.fetch_from_state",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "knowledge.consistency.assess",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:knowledge.consistency.assess:evidence_paths:knowledge.observation.available"
+        },
+        {
+          "capability_id": "web.release.verify.independent_http",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:major"
+        }
+      ],
+      "start": 0,
+      "status": "UNRESOLVED",
+      "text": "Assess whether the maximum permitted HTTP/2 initial stream flow-control window is greater than the protocol's default initial stream flow-control window"
+    },
+    {
+      "candidates": [],
+      "constraints": [],
+      "end": 226,
+      "index": 1,
+      "output_contract": {
+        "extensions": [],
+        "paths": []
+      },
+      "rejected_unbindable_candidates": [
+        {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "decision.synthesis.verify.stdlib",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:decision.synthesis.verify.stdlib:input_path:decision.synthesis.typed"
+        },
+        {
+          "capability_id": "evidence.claim_relation.generic_units.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:extraction_path"
+        },
+        {
+          "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:extraction_path"
+        },
+        {
+          "capability_id": "http.json.fetch_from_state",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "knowledge.json.fetch.external",
+          "error": "CapabilityProposalFailure:GOAL_URL_BINDING_REQUIRED:knowledge.json.fetch.external:0"
+        },
+        {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:plain_goal.bound_capability.grounding.verify.stdlib:result_path:plain_goal.bound_capability.grounding"
+        },
+        {
+          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "source.objective_relevance.rank.bm25",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        }
+      ],
+      "start": 154,
+      "status": "UNRESOLVED",
+      "text": "Use authoritative primary technical evidence and a real executable check"
+    },
+    {
+      "candidates": [],
+      "constraints": [],
+      "end": 249,
+      "index": 2,
+      "output_contract": {
+        "extensions": [],
+        "paths": []
+      },
+      "rejected_unbindable_candidates": [],
+      "start": 228,
+      "status": "UNRESOLVED",
+      "text": "Autonomously discover"
+    },
+    {
+      "candidates": [],
+      "constraints": [
+        "ZERO_INCREMENTAL_SPEND",
+        "INDEPENDENT_VERIFICATION"
+      ],
+      "end": 507,
+      "index": 3,
+      "output_contract": {
+        "extensions": [],
+        "paths": []
+      },
+      "rejected_unbindable_candidates": [
+        {
+          "capability_id": "knowledge.support.materialize",
+          "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:knowledge.support.materialize:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:field_name"
+        }
+      ],
+      "start": 254,
+      "status": "UNRESOLVED",
+      "text": "verify the relevant specification, determine how to extract and interpret the required limits, choose and run a zero-cost verification method, identify material protocol-scope or interpretation limitations, independently verify the consequential result,"
+    },
+    {
+      "candidates": [],
+      "constraints": [],
+      "end": 561,
+      "index": 4,
+      "output_contract": {
+        "extensions": [],
+        "paths": []
+      },
+      "rejected_unbindable_candidates": [
+        {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "decision.synthesis.verify.stdlib",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:decision.synthesis.verify.stdlib:input_path:decision.synthesis.typed"
+        },
+        {
+          "capability_id": "pypi.provenance.audit_live_artifact",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:metadata_path"
+        },
+        {
+          "capability_id": "source.authority.identity.ror",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:discovery_path"
+        },
+        {
+          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        }
+      ],
+      "start": 512,
+      "status": "UNRESOLVED",
+      "text": "produce a decision-quality answer with provenance"
+    }
+  ],
+  "external_discovery_allowed_for_unresolved_only": true,
+  "goal": "Assess whether the maximum permitted HTTP/2 initial stream flow-control window is greater than the protocol's default initial stream flow-control window. Use authoritative primary technical evidence and a real executable check. Autonomously discover and verify the relevant specification, determine how to extract and interpret the required limits, choose and run a zero-cost verification method, identify material protocol-scope or interpretation limitations, independently verify the consequential result, and produce a decision-quality answer with provenance.",
+  "goal_sha256": "3b24b347debb25c71f80bf89343c4938f0022ec99f63ccbe72c37f0b9f3b8a0a",
+  "grounded_clause_count": 0,
+  "input_contract_bindability_enforced": true,
+  "model_dependency_count": 0,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+  "unresolved_clause_indexes": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "whole_goal_external_discovery_forbidden_if_any_bound_grounding": false
+}
