@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_GATE_TYPE_CORRECTION_V1",
+  "date": "2026-10-02",
+  "status": "DEDUCTIVE_TYPE_CORRECTION__TERMINAL_AUDITS_ARE_PROOF_OBLIGATIONS_NOT_INDEPENDENT_MECHANISMS__ZERO_CAPABILITY_CREDIT",
+  "corrected_gates": [
+    {
+      "id": "G_DONOR_DEPENDENCE_ZERO",
+      "predicate": "donor_dependent_required_behaviors_zero",
+      "from": "?M",
+      "to": "?P"
+    },
+    {
+      "id": "G_UNEXPLAINED_BEHAVIOR_ZERO",
+      "predicate": "unexplained_required_behaviors_zero",
+      "from": "?M",
+      "to": "?P"
+    },
+    {
+      "id": "G_COMPOSITION_FAILURES_ZERO",
+      "predicate": "unresolved_composition_failures_zero",
+      "from": "?M",
+      "to": "?P"
+    }
+  ],
+  "rationale": [
+    "THESE_PREDICATES_AUDIT_END_STATE_PROPERTIES_OF_REQUIRED_BEHAVIOR_AND_COMPOSITION",
+    "ANY_CONCRETE_FAILURE_MUST_COMPILE_TO_THE_UNDERLYING_BEHAVIORAL_OR_SHARED_MECHANISM_LEAF",
+    "COUNTING_THE_AUDIT_ITSELF_AS_A_NEW_MECHANISM_DOUBLE_COUNTS_THE_SAME_CAUSAL_GAP",
+    "RECLASSIFICATION_DOES_NOT_CLOSE_OR_PASS_THE_PREDICATES"
+  ],
+  "invariant": "A_FAILED_AUDIT_MAY_REOPEN_OR_LOCALIZE_AN_UNDERLYING_MECHANISM_RESIDUAL__THE_AUDIT_ITSELF_NEVER_CREATES_CAPABILITY_CREDIT",
+  "fresh_terminal_evidence_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
