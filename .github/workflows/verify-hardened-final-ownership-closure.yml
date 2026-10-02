@@ -1,0 +1,106 @@
+name: Verify hardened final ownership closure
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/terminal_closure_reducer.py'
+      - 'canonical/runtime/test_terminal_closure_reducer.py'
+      - 'canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json'
+      - 'canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json'
+      - 'canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_20261002_V1.json'
+      - '.github/workflows/verify-hardened-final-ownership-closure.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run closure regression tests
+        run: |
+          set -euo pipefail
+          python -m pytest -q canonical/runtime/test_terminal_closure_reducer.py
+
+      - name: Verify frozen proof bundle and ownership matrix
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+
+          bundle=json.loads(Path("canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_20261002_V1.json").read_text())
+          matrix=json.loads(Path("canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json").read_text())
+
+          assert bundle["proof_bundle_frozen"] is True
+          assert bundle["terminal_execution"]["replay_authorized"] is False
+          assert bundle["final_closure"]["reducer_blob_sha"]=="9b8430faf5e34e8ffc723c1dcd059dd63b3988c1"
+          assert bundle["final_closure"]["ownership_matrix_blob_sha"]=="50999088fe7b77b404a8d155539649bd61ce28b8"
+
+          def blob(path):
+              b=Path(path).read_bytes()
+              return hashlib.sha1(b"blob "+str(len(b)).encode()+bytes([0])+b).hexdigest()
+
+          rows=sorted(bundle["ordered_evidence"],key=lambda x:x["path"])
+          assert len(rows)==15
+          leaves=[]
+          for row in rows:
+              got=blob(row["path"])
+              assert got==row["git_blob_sha"],("BLOB_DRIFT",row["path"],row["git_blob_sha"],got)
+              leaves.append(hashlib.sha256(("leaf\0"+row["path"]+"\0"+row["git_blob_sha"]).encode()).digest())
+          nodes=leaves
+          while len(nodes)>1:
+              if len(nodes)%2: nodes.append(nodes[-1])
+              nodes=[hashlib.sha256(b"node\0"+nodes[i]+nodes[i+1]).digest() for i in range(0,len(nodes),2)]
+          root=nodes[0].hex()
+          assert root==bundle["merkle_root_sha256"],(root,bundle["merkle_root_sha256"])
+
+          mrows=matrix["rows"]
+          assert len(mrows)==19 and len({r["family"] for r in mrows})==19
+          assert all(r["status"]=="VERIFIED_OWNED_EQUAL_OR_BETTER" for r in mrows)
+          assert matrix["summary"]["full_opus_5_5_envelope_obsoleted"] is True
+          assert len(matrix["summary"]["verified_owned_equal_or_better_capabilities"])==19
+
+          global_receipt=json.loads(Path("canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json").read_text())
+          assert "INDEPENDENT_PUBLIC_RUNNER_PASS" in global_receipt["status"]
+          assert global_receipt["result"]["counters"]=={
+              "donor_dependent_required_behaviors":0,
+              "unresolved_verifier_mutations":0,
+              "unresolved_composition_failures":0,
+          }
+          print("FROZEN_OWNERSHIP_EVIDENCE_PASS")
+          PY
+
+      - name: Run hardened terminal closure reducer
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.terminal_closure_reducer import evaluate_manifest
+          manifest=json.loads(Path("canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json").read_text())
+          verdict=evaluate_manifest(manifest)
+          assert verdict["achieved"] is True,verdict
+          assert verdict["failed_predicates"]==[],verdict
+          assert verdict["family_count"]==19 and verdict["closed_family_count"]==19,verdict
+          print(json.dumps(verdict,sort_keys=True))
+          PY
+
+      - name: Assert finalization does not replay terminal evidence
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          s=Path(".github/workflows/verify-hardened-final-ownership-closure.yml").read_text().lower()
+          forbidden=["execute_wave(","terminal_parent_portfolio_launcher_v1","rerun_url","rerun-failed-jobs"]
+          for x in forbidden:
+              assert x not in s,("TERMINAL_REPLAY_PATH_DETECTED",x)
+          print("NO_TERMINAL_REPLAY_PASS")
+          PY
