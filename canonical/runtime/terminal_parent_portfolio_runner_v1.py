@@ -361,8 +361,10 @@ def execute_parent_portfolio(
         direct_results=direct_results,
         require_authority=True,
     )
-    if out["pass"] is not True:
-        raise RuntimeError("PARENT_PORTFOLIO_FAIL_CLOSED:" + portfolio)
+    # A failing parent observation is terminal evidence, not an orchestration
+    # exception. Return its fail-closed receipts so the launcher can continue
+    # executing the remaining frozen parent portfolios exactly once and reduce
+    # the whole wave without replacement or tuning replay.
     return list(out["receipts"])
 
 
