@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TRAJECTORY_FAILURE_LOCALIZATION_PROOF_SURFACE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_PREWAVE_PROOF_SURFACE__PROTOCOL_VERIFICATION_PENDING__ZERO_TERMINAL_EVIDENCE",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "represented_private_routes": [
+    "FrontierCode v1.1 Main",
+    "CursorBench 4.0"
+  ],
+  "purpose": "FREEZE_INDEPENDENT_MACHINE_CHECKABLE_INTERVENTION_RESCUE_ORACLE_FOR_TERMINAL_LOCALIZATION_PROOF",
+  "operative_brain_input": [
+    "NORMALIZED_VISIBLE_TRAJECTORY",
+    "GOAL_PLAN_TOOL_CONTRACTS",
+    "VISIBLE_INVARIANT_RESULTS",
+    "OBSERVED_TERMINAL_FAILURE"
+  ],
+  "operative_brain_output": "NOMINATED_CRITICAL_REPAIR_STEP",
+  "verifier_hidden_state": [
+    "TRUE_CAUSAL_FAILURE_STEP",
+    "DOWNSTREAM_SYMPTOM_STEP",
+    "COUNTERFACTUAL_REPAIR_OUTCOMES"
+  ],
+  "acceptance": [
+    "NOMINATION_MATCHES_INDEPENDENTLY_ESTABLISHED_CAUSAL_STEP",
+    "REPAIR_OF_NOMINATED_STEP_RESCUES_TERMINAL_OUTCOME",
+    "DOWNSTREAM_SYMPTOM_ONLY_REPAIR_DOES_NOT_RESCUE"
+  ],
+  "existing_brain_components_to_instrument": [
+    "canonical/capabilities/opus55/M5_STRUCTURED_FAILURE_HYPOTHESIS_GENERATION_001.json",
+    "canonical/capabilities/opus55/SHARED_BOUNDED_DECISION_PRIMITIVES_001.json",
+    "canonical/capabilities/opus55/M5_EXPLICIT_RECOVERY_PLANNER_001.json"
+  ],
+  "proof_strength_candidate": 3,
+  "oracle_class": "INDEPENDENT_MACHINE_CHECKABLE_DIRECT_ACCEPTANCE",
+  "prequalification_only": true,
+  "terminal_cases_exposed": false,
+  "admission_remaining": [
+    "INDEPENDENT_PROTOCOL_VERIFICATION",
+    "FREEZE_TERMINAL_CASE_POPULATION_AND_VISIBLE_TRAJECTORY_GENERATION_OR_SOURCE",
+    "FREEZE_BRAIN_ADAPTER_FROM_VISIBLE_TRAJECTORY_TO_NOMINATION",
+    "FREEZE_CONTAMINATION_BOUNDARY_AND_HIDDEN_COUNTERFACTUAL_STATE",
+    "EXECUTE_ONLY_INSIDE_ADMITTED_TERMINAL_PORTFOLIO"
+  ],
+  "nonclaims": [
+    "NO_TERMINAL_BEHAVIOR_PASS",
+    "NO_FRONTIERCODE_OR_CURSORBENCH_SCORE_REPRODUCTION",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
