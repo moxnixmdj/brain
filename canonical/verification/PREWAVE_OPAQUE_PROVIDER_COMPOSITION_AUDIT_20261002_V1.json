@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_PREWAVE_OPAQUE_PROVIDER_COMPOSITION_AUDIT_20261002_V1",
+  "date": "2026-10-02",
+  "status": "PASS__NO_KNOWN_OPAQUE_TARGET_CAPABILITY_PROVIDER__CURRENT_CONTROLLER_COMPOSITION_HASH_BOUND_TO_INDEPENDENT_PASS",
+  "brain_head": "6a1bb6a92a07f6664fba8eb5ab34cfb6c6ab1f64",
+  "authority": [
+    "canonical/governance/PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V1.json",
+    "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  ],
+  "findings": {
+    "general_substrate": "Qwen/Qwen3.5-9B__DECLARED_REPLACEABLE_GENERAL_COGNITION_SUBSTRATE_ONLY",
+    "opaque_target_capability_provider_present": false,
+    "paid_or_hosted_fallback_present": false,
+    "current_controller_tested_blobs_match_independent_receipt": true,
+    "known_unresolved_composition_defect_before_terminal_wave": false
+  },
+  "exact_tested_blob_matches": {
+    "canonical/runtime/astra_runtime.py": "0ce14dc593c29745b20d83c5f2868cac97e2e80f",
+    "canonical/runtime/m4_research_control.py": "3efb04cde34c344d4c95204b73215249383c46bc",
+    "canonical/runtime/shared_decision_primitives.py": "794e8d1ca9525564b592ffc3af899037183ef655",
+    "canonical/runtime/bound_capabilities/research_query_focus.py": "5403e1dc05716fcfc4f9a91b4534f55dc547eb7f",
+    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py": "81f73bca882d35603e5be43e8c40dd57e73ffce0",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "51abc98fd78a895e86600bc4fd7125722013b90d"
+  },
+  "limitations": [
+    "DOES_NOT_PROVE_TERMINAL_CAPABILITY_PARITY",
+    "DOES_NOT_CLOSE_POST_WAVE_DONOR_DELETION",
+    "DOES_NOT_AUTHORIZE_SURFACES_WITH_UNFROZEN_RESOURCE_SCORER_ASSET_OR_ADAPTER_BINDINGS"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
