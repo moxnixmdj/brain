@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 BASIS = "canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
+DEADLOCK_AUDIT = "canonical/governance/OPEN_DOMAIN_PREQUALIFICATION_DEADLOCK_AUDIT_V1.json"
 
 _BINDING_TOKENS = (
     "POST_FREEZE",
@@ -49,6 +50,25 @@ def _load(root: Path) -> dict[str, Any]:
     return data
 
 
+def _open_domain_contracts(root: Path) -> set[str]:
+    """Return contracts canonically classified as open-domain matched routes.
+
+    If the deadlock audit is absent or malformed, fail closed by returning an empty
+    set; the scheduler will retain the older conservative scope-expansion behavior.
+    """
+    path = root / DEADLOCK_AUDIT
+    if not path.is_file():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    rows = data.get("affected_contract_classes")
+    if not isinstance(rows, list) or any(not isinstance(x, str) or not x for x in rows):
+        return set()
+    return set(rows)
+
+
 def _portfolio_count(value: Any) -> int:
     if not isinstance(value, str) or not value:
         return 0
@@ -67,6 +87,7 @@ def _classify(blocker: str) -> str:
 
 def evaluate(root: Path) -> dict[str, Any]:
     basis = _load(root)
+    open_domain = _open_domain_contracts(root)
     rows = basis.get("contracts")
     if not isinstance(rows, list):
         return {
@@ -118,6 +139,7 @@ def evaluate(root: Path) -> dict[str, Any]:
         gate = sum(x == "SCOPE_GATE" for x in classes)
         expansion = sum(x == "SCOPE_EXPANSION" for x in classes)
         other = sum(x == "OTHER" for x in classes)
+        is_open_domain = bid in open_domain
         preflight = any(
             token in state
             for token in (
@@ -129,9 +151,13 @@ def evaluate(root: Path) -> dict[str, Any]:
         )
         leverage = _portfolio_count(row.get("portfolio"))
 
-        # Lower score closes sooner. Expansion and unknown work are expensive.
+        # Lower score closes sooner. For canonically open-domain matched routes,
+        # synthetic whole-scope expansion is not a valid prequalification target.
+        # Route those to matched-protocol freeze/comparator resolution instead of
+        # rewarding workers for generating ever-larger synthetic populations.
+        effective_expansion = 0 if is_open_domain else expansion
         score = (
-            expansion * 100
+            effective_expansion * 100
             + other * 50
             + gate * 10
             + binding
@@ -151,11 +177,16 @@ def evaluate(root: Path) -> dict[str, Any]:
             },
             "independent_or_information_safe_preflight_present": preflight,
             "portfolio_leverage": leverage,
+            "proof_route_class": "OPEN_DOMAIN_MATCHED" if is_open_domain else "FINITE_OR_FORMAL",
             "priority_score": score,
             "next_action_class": (
-                "FREEZE_BINDING_AND_ACCEPTANCE"
-                if expansion == 0 and other == 0 and (binding or gate)
-                else "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+                "FREEZE_MATCHED_PROTOCOL_AND_RESOLVE_COMPARATOR_ACCESS"
+                if is_open_domain
+                else (
+                    "FREEZE_BINDING_AND_ACCEPTANCE"
+                    if expansion == 0 and other == 0 and (binding or gate)
+                    else "CLOSE_SCOPE_EQUIVALENCE_THEN_FREEZE_BINDING"
+                )
             ),
         })
 
@@ -182,6 +213,7 @@ def evaluate(root: Path) -> dict[str, Any]:
         "errors": sorted(set(errors)),
         "rule": (
             "SCHEDULER_ONLY__NO_CAPABILITY_CREDIT__NO_TERMINAL_EXECUTION_AUTHORITY__"
+            "OPEN_DOMAIN_MATCHED_ROUTES_MUST_NOT_BE_PROMOTED_BY_FINITE_SYNTHETIC_SCOPE_SUPERSET__"
             "ACTUAL_PROMOTION_REQUIRES_ACTIVE_BASIS_AND_PREQUALIFICATION_REDUCERS"
         ),
     }
