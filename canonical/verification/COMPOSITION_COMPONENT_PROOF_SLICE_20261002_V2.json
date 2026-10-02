@@ -1,0 +1,185 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_COMPONENT_PROOF_SLICER_V1",
+  "status": "RESIDUAL_COMPONENT_INTERFACE_PROOFS_OPEN",
+  "errors": [],
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "interfaces": [
+    {
+      "component_id": "research",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "tool use",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "artifact creation",
+      "interface_id": "research+tool use+artifact creation",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "browser/computer action",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "memory",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "recovery",
+      "interface_id": "browser/computer action+memory+recovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "coding",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "debugging",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "tool discovery",
+      "interface_id": "coding+debugging+tool discovery",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "missing_properties": [],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [
+        "COMPOSITION_BRIDGE::TOOL_ROUTE_DISCOVERY_AND_SELECTION_001::tool_discovery"
+      ],
+      "state": "SCOPED_PROVED"
+    },
+    {
+      "component_id": "delegation",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "missing_properties": [],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [
+        "COMPOSITION_BRIDGE::TASK_TO_DELEGATION_GRAPH_001::delegation"
+      ],
+      "state": "SCOPED_PROVED"
+    },
+    {
+      "component_id": "evidence synthesis",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    },
+    {
+      "component_id": "artifact production",
+      "interface_id": "delegation+evidence synthesis+artifact production",
+      "required_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "proved_properties": [],
+      "missing_properties": [
+        "SCOPED_ACCEPTANCE_PROOF"
+      ],
+      "extra_receipt_properties_ignored": [],
+      "supporting_receipt_ids": [],
+      "state": "OPEN"
+    }
+  ],
+  "all_used_component_interfaces_scoped_proved": false,
+  "rule": "ONLY_EXACT_DECLARED_LOAD_BEARING_INTERFACES_ARE_REDUCED__NO_WHOLE_FAMILY_PASS_INHERITANCE__NO_UNBOUND_RECEIPT_CREDIT",
+  "new_reality_units_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
