@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_REMAINING_SIX_TERMINAL_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PASS__SIX_REMAINING_BRAIN_OWNED_ROUTES_PASS_90_FRESH_GENERATED_CASES__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pr": 526,
+  "public_merge_commit": "2eab41c1f5bb898ef7dadc3664d2f49bb846260d",
+  "workflow_run_id": 36958101313,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/remaining_behavior_proof_suites.py": "7fad453e5d000435dd4373e125fff52ae6676033",
+    "canonical/runtime/remaining_behavior_brain_candidate.py": "4d7a5e884df8ee0d74fece07baf87e70f64644d9",
+    "canonical/tests/test_remaining_behavior_brain_candidate.py": "f1ce062fd6339fe934db34a9b3d594434fa18c85"
+  },
+  "verified": [
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "TASK_TO_DELEGATION_GRAPH_001"
+  ],
+  "candidate_boundary": "CANDIDATE_IMPORTS_EXISTING_BRAIN_MECHANISMS__NO_REMAINING_BEHAVIOR_EVALUATOR_IMPORT__NO_HIDDEN_ORACLE_REFERENCE",
+  "limitations": [
+    "PREFLIGHT_ONLY__NOT_TERMINAL_POPULATION_RESULT",
+    "NO_FAMILY_OR_CAPABILITY_CREDIT"
+  ],
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
