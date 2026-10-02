@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
   "date": "2026-10-02",
-  "status": "PARTIAL_RECEIPT_SATURATION__3_ATOMIC_PREDICATES_PROVED__NEW_REALITY_STILL_FORBIDDEN",
+  "status": "PARTIAL_RECEIPT_SATURATION__5_ATOMIC_PREDICATES_PROVED__NEW_REALITY_STILL_FORBIDDEN",
   "objective": "Bind only content-addressed atomic acceptance evidence. Until saturation is complete, benchmark and matched-case execution remains forbidden.",
   "saturation": {
     "status": "IN_PROGRESS",
@@ -69,6 +69,50 @@
           "sha": "2450a9644119c9fdf9c43307a1d115098d6ba592"
         }
       ]
+    },
+    {
+      "predicate_id": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "state": "PROVED",
+      "proof_kind": "RECEIPT",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "basis": "T1_AND_T3_LOAD_BEARING_SYNTHESIS_RECEIPTS_PASS__FROZEN_P3_BINDING_REQUIRED_CHECK_INCLUDES_ZERO_UNSUPPORTED_MATERIAL_CLAIMS_AND_ANY_LOAD_BEARING_P3_FAILURE_BLOCKS_BEHAVIOR_PROOF",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+          "sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+        }
+      ]
+    },
+    {
+      "predicate_id": "ARTIFACT_MECHANICAL_GATES_CEILING",
+      "state": "PROVED",
+      "proof_kind": "ABSOLUTE_CEILING",
+      "source_path": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+      "source_sha": "bd86b4c53992b47a4a60b64a60ba03db9a442cfc",
+      "independent_or_objective": true,
+      "scope_complete": true,
+      "objective_ceiling": true,
+      "brain_value": 1,
+      "objective_ceiling_value": 1,
+      "basis": "FROZEN_T1_NATIVE_ARTIFACT_AGGREGATE_8_DIRECT_INSTRUMENTATION_PASS__EXPLICIT_CLAIMED_SCOPE_DOCX_XLSX_PPTX_PDF_LOW_LEVEL_EDITS__BINDING_REQUIRES_FORMAT_REOPEN_STRUCTURE_AND_RENDER_PRESERVATION__STRUCTURAL_ORACLE_VERIFIES_DECLARED_EDIT_AND_NO_UNRELATED_MUTATION",
+      "supporting_sources": [
+        {
+          "path": "canonical/governance/NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+          "sha": "977e18ce2c19f7bb8a429a8f1c99407ff3000e92"
+        },
+        {
+          "path": "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+          "sha": "904eb61171f5ee775ff7824c1be7778d7acc4a23"
+        },
+        {
+          "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+          "sha": "39374e775d54cdc58315d7a1f877d834282a64f7"
+        }
+      ],
+      "scope_limit": "EXPLICIT_LOW_LEVEL_NATIVE_EDIT_PRESERVATION_FOR_DOCX_XLSX_PPTX_PDF_ONLY__NO_PROFESSIONAL_QUALITY_OR_SEMANTIC_TARGET_SELECTION_CREDIT"
     }
   ],
   "rules": [
