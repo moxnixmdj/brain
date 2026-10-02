@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROGRESS_EVIDENCE_INDEX_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_PROGRESS_DISCOVERY_INDEX__NONAUTHORITATIVE__NO_SELF_PROMOTION",
+  "entries": [
+    {
+      "behavior_id": "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+      "path": "canonical/verification/CAD_ORTHOGRAPHIC_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "path": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json"
+    },
+    {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json"
+    },
+    {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "path": "canonical/reasoning/2026-10-02_TERMINAL_PROOF_SUPERCOMPILER_P1_P3_VERDICT_V1.json"
+    },
+    {
+      "behavior_id": "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+      "path": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json"
+    },
+    {
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "path": "canonical/verification/DELEGATION_CURRENT_BLOB_REVALIDATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+    },
+    {
+      "behavior_id": "TOOL_ROUTE_DISCOVERY_AND_SELECTION_001",
+      "path": "canonical/governance/TOOLATHLON_VERIFIED_TOOL_DISCOVERY_ROUTE_FREEZE_V1.json"
+    },
+    {
+      "behavior_id": "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+      "path": "canonical/governance/T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1.json"
+    }
+  ],
+  "rules": [
+    "INDEX_DISCOVERS_PROGRESS_ONLY",
+    "ENTRY_STATUS_NEVER_GRANTS_TERMINAL_AUTHORITY",
+    "ACTIVE_BASIS_PROMOTION_REQUIRES_EXISTING_CANONICAL_ADMISSION_LAW_AND_INDEPENDENT_EVIDENCE",
+    "MISSING_OR_UNREADABLE_INDEX_ENTRY_FAILS_GENERATED_STATE_CLOSED"
+  ],
+  "execution_authority": false,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
