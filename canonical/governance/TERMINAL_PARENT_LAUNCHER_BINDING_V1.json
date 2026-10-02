@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PARENT_LAUNCHER_BINDING_V1",
   "date": "2026-10-02",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__SACCR_CORRECTED_CONCRETE_PARENT_LAUNCHER_EXACTLY_BOUND__ZERO_TERMINAL_RESULTS",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_SA_CCR_ROUTE_SPECIFIC_LAUNCHER_EXACTLY_BOUND__ZERO_TERMINAL_RESULTS",
   "launcher": "canonical/runtime/terminal_parent_portfolio_launcher_v1.py",
   "tests": "canonical/tests/test_terminal_parent_portfolio_launcher_v1.py",
   "launcher_blob_sha": "d7f20a66f1f534b06ea11782cb350a582c07d985",
@@ -21,7 +21,7 @@
     "NO_TUNING_REPLAY",
     "SA_CCR_ROUTE_USES_VERIFIED_ROUTE_SPECIFIC_EXECUTOR"
   ],
-  "independent_verification": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_LAUNCHER_SACCR_CORRECTED_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "independent_verification": "canonical/verification/TERMINAL_PARENT_LAUNCHER_SA_CCR_REBIND_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
   "launch_ready": true,
   "execution_authority": false,
   "promotion_authority": false,
@@ -29,7 +29,5 @@
   "fresh_terminal_evidence_consumed": 0,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "family_credit_delta": 0,
-  "current_reverification_reason": null,
-  "current_reverification_disposition": "CLOSED_BY_INDEPENDENT_EXACT_BLOB_PUBLIC_RUNNER_PASS_36975830681"
+  "family_credit_delta": 0
 }
