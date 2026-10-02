@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_STRUCTURED_METHOD_EXPRESSION_AST_PREFLIGHT_V2",
+  "date": "2026-10-02",
+  "status": "FROZEN_PREFLIGHT_CANDIDATE__INDEPENDENT_PUBLIC_VERIFICATION_PENDING__ZERO_TERMINAL_AUTHORITY",
+  "behavior_id": "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+  "contract_boundary": {
+    "inputs": "structured method/specification requirements plus normalized applicable rules and input schema",
+    "semantic_extraction_of_unstated_rules": "OUTSIDE_THIS_CONTRACT__SEPARATE_RESIDUAL",
+    "authority": "canonical/governance/STRUCTURED_METHOD_SCOPE_AUDIT_V2.json"
+  },
+  "exact_brain_blobs": {
+    "candidate": "be6ab24f165a64d5f3963818fc9f06bbeca7f353",
+    "independent_proof": "7e75e94f71732e07102333bb803c1332d790d518",
+    "tests": "39b3497130d77ba42cb50312d144d16beda591ea"
+  },
+  "normalized_expression_grammar": {
+    "recursive": true,
+    "scalar_types": [
+      "integer",
+      "number",
+      "boolean",
+      "enum"
+    ],
+    "dimension_model": "SYMBOLIC_INTEGER_EXPONENT_PRODUCT_DIMENSIONS",
+    "operations": [
+      "ref",
+      "const",
+      "add",
+      "sub",
+      "min",
+      "max",
+      "mul",
+      "div",
+      "neg",
+      "abs",
+      "pow_int",
+      "exp",
+      "log",
+      "sqrt",
+      "gt",
+      "ge",
+      "lt",
+      "le",
+      "eq",
+      "neq",
+      "and",
+      "or",
+      "not",
+      "if"
+    ],
+    "dag_dependencies": "RULE_ORDER_ARBITRARY__DEPENDENCY_RESOLVED",
+    "applicability": "BOOLEAN_AST",
+    "branch_selection": "BOOLEAN_AST__EXACTLY_ONE_TRUE_BRANCH",
+    "invariants": "BOOLEAN_AST__MUST_EVALUATE_TRUE",
+    "requirement_lineage": "EVERY_APPLICABLE_REQUIREMENT_HAS_ONE_OR_MORE_EXPLICIT_CONSUMERS",
+    "justified_exclusion": "ONLY_FALSE_APPLICABILITY_CONDITIONS",
+    "dimensional_rules": [
+      "ADD_SUB_MIN_MAX_REQUIRE_EQUAL_DIMENSIONS",
+      "MUL_DIV_COMPOSE_DIMENSION_EXPONENTS",
+      "ORDER_COMPARISONS_REQUIRE_EQUAL_DIMENSIONS",
+      "EXP_LOG_SQRT_REQUIRE_DIMENSIONLESS_INPUT",
+      "BOOLEAN_AND_ENUM_VALUES_ARE_DIMENSIONLESS"
+    ]
+  },
+  "preflight_population": {
+    "randomized_case_count": 300,
+    "branch_classes": [
+      "REGULATED",
+      "STANDARD",
+      "STRESS"
+    ],
+    "all_claimed_operators_required_in_coverage": true,
+    "independent_oracle_imports_candidate": false
+  },
+  "anti_shortcut_tests": [
+    "CANDIDATE_PROOF_IMPORT_FORBIDDEN",
+    "NESTED_EXPRESSION_VALUE_MUTATION_REJECTED",
+    "REQUIREMENT_EXCLUSION_MUTATION_REJECTED",
+    "LINEAGE_MUTATION_REJECTED",
+    "DIMENSION_MISMATCH_FAILS_CLOSED",
+    "AMBIGUOUS_BRANCH_FAILS_CLOSED",
+    "UNCONSUMED_REQUIREMENT_FAILS_CLOSED",
+    "FALSE_INVARIANT_FAILS_CLOSED",
+    "UNSUPPORTED_OPERATION_FAILS_CLOSED",
+    "WRONG_TERMINAL_OUTPUT_REJECTED"
+  ],
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 610,
+    "workflow_run_id": 36962920695,
+    "state": "QUEUED"
+  },
+  "limitations": [
+    "PREFLIGHT_ONLY",
+    "DOES_NOT_BY_ITSELF_PROVE_TERMINAL_SCOPE_EQUIVALENCE",
+    "DOES_NOT_PROVE_SEMANTIC_EXTRACTION_OF_UNSTATED_RULES",
+    "NO_POST_FREEZE_TERMINAL_POPULATION",
+    "ZERO_CAPABILITY_OR_FAMILY_CREDIT"
+  ],
+  "execution_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
