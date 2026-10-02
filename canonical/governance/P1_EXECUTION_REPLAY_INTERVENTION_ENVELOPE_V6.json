@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_P1_EXECUTION_REPLAY_INTERVENTION_ENVELOPE_V6",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXECUTION_BASED_HETEROGENEOUS_INTERVENTION_RESCUE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "objective": "Replace the falsified V5 oracle-token rescue check with hidden post-intervention trajectory execution while preserving the independently supported V5 causal classifier and first-class SCOPE mechanism.",
+  "candidate": "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+  "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py",
+  "tests": "canonical/tests/test_trajectory_failure_typed_ir_v6.py",
+  "exact_source_blobs": {
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py": "2a8613ddac7402c7e6d2f349f9d3c32d3fb95e1d",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py": "86fb42c09a12db8a510c9708e2e02205a60b73d1",
+    "canonical/tests/test_trajectory_failure_typed_ir_v6.py": "aec530d93de315fb692a550bda611139f06b83de"
+  },
+  "superseded_rescue_claim": {
+    "source": "canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "adversarial_public_runner_pr": 1045,
+    "adversarial_public_runner_merge": "7afd38cb36ccf8850e0c2cc18f4737d86eb721cd",
+    "workflow_run_id": 37039651312,
+    "workflow_job_id": 110946328329,
+    "finding": "V5_EVALUATE_INTERVENTION_RETURNS_RESCUED_AFTER_TASK_OR_TRAJECTORY_DELETION__HETEROGENEOUS_POST_INTERVENTION_TERMINAL_RESCUE_NOT_PROVED"
+  },
+  "residual_target": "P1_HETEROGENEOUS_INTERVENTION_RESCUE",
+  "preserved_v5_evidence": [
+    "P1_EXPLICIT_SCOPE_FAILURE_CLASS",
+    "FIRST_CLASS_SCOPE_MECHANISM_CLASSIFICATION",
+    "CAUSAL_ROOT_CLASSIFICATION_OVER_SIX_DOMAINS_EIGHT_MECHANISM_CLASSES_FOUR_PATTERNS",
+    "PROVENANCE_ERASURE_FAILS_CLOSED",
+    "UNBOUND_DIAGNOSIS_OUTPUT_IS_REJECTED"
+  ],
+  "execution_replay_requirements": [
+    "REPLAY_MUST_READ_ACTUAL_TASK_TRAJECTORY_AND_TERMINAL_FAILED_RESOURCES",
+    "HIDDEN_FAULT_INJECTION_MUST_BIND_TO_A_VISIBLE_FAILED_CHECK",
+    "REPAIRS_MUST_BIND_TO_VISIBLE_FAILED_CHECKS",
+    "ROOT_REPAIR_MUST_CHANGE_REPLAYED_TERMINAL_HEALTH",
+    "SYMPTOM_ONLY_REPAIR_MUST_NOT_RESCUE",
+    "CONJUNCTIVE_INTERACTION_REQUIRES_ALL_ROOT_REPAIRS",
+    "AMBIGUOUS_ALTERNATIVE_ROOTS_MUST_EACH_RESCUE_WITHOUT_FORCING_UNIQUE_CAUSE",
+    "DELETED_OR_CORRUPTED_TASK_TRAJECTORY_OR_TERMINAL_PRODUCER_MUST_FAIL_CLOSED"
+  ],
+  "scope": {
+    "domains": ["BROWSER", "FILESYSTEM", "TOOL_API", "ARTIFACT", "RESEARCH", "CODE"],
+    "mechanism_classes": ["AUTHORITY", "SCOPE", "SCHEMA", "PROVENANCE", "INVARIANT", "STATE_TRANSITION", "TOOL_CONTRACT", "DEPENDENCY"],
+    "causal_patterns": ["SINGLE", "DELAYED", "INTERACTION", "AMBIGUOUS"],
+    "cross_product_case_count": 192
+  },
+  "hard_rules": [
+    "V5_RESCUE_RECEIPT_MUST_NOT_BE_USED_AS_HETEROGENEOUS_INTERVENTION_RESCUE_EVIDENCE",
+    "V5_SCOPE_CLASSIFICATION_EVIDENCE_MAY_BE_PRESERVED",
+    "V6_MUST_KILL_TASK_DELETION_TRAJECTORY_DELETION_AND_TERMINAL_RESOURCE_CORRUPTION_COUNTEREXAMPLES",
+    "V6_IS_PREWAVE_ONLY_UNTIL_INDEPENDENTLY_VERIFIED",
+    "DIRECT_SURFACE_SCOPE_SUPERSET_OR_RESTORATION_GATES_THAT_DEPEND_ON_V5_RESCUE_MUST_BE_RECOMPUTED_AGAINST_V6",
+    "ZERO_TERMINAL_REPLAY",
+    "ZERO_NEW_REALITY",
+    "ZERO_CAPABILITY_AND_FAMILY_CREDIT"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_V6_BLOBS__THEN_RECOMPUTE_P1_DIRECT_SURFACE_SCOPE_SUPERSET_WITH_V6_EXECUTION_RESCUE__THEN_COMPOSE_WITH_IMMUTABLE_T0_T2_TERMINAL_RECEIPTS__NO_PROMOTION_BEFORE_BOTH_PASS",
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
