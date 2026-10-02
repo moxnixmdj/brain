@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_PORTFOLIO_BINDING_MANIFESTS_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_NAMESPACE_STOP_RULE_AND_PRIVATE_ROUTE_DELETION_BINDINGS__PUBLIC_SURFACE_RESOURCE_PREFLIGHTS_STILL_FAIL_CLOSED",
+  "status": "FROZEN_NAMESPACE_STOP_RULE_AND_PUBLIC_ROUTE_CLASSIFICATION__SURFACE_RESOURCE_ADAPTER_SCORER_AND_DEPENDENCY_PREFLIGHTS_STILL_FAIL_CLOSED",
   "shared_protocol": "canonical/governance/TERMINAL_PORTFOLIO_PREWAVE_PROTOCOL_V1.json",
   "exact_cut": "canonical/governance/OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2.json",
   "direct_proof_contracts": "canonical/governance/FOUR_UNCOVERED_BEHAVIORAL_PROOF_CONTRACTS_V1.json",
@@ -21,7 +21,9 @@
         {
           "id": "TERMINAL_BENCH_4_0",
           "route": "harbor run -d terminal-bench/terminal-bench@4.0.0",
-          "binding_state": "RESOURCE_ADAPTER_PREFLIGHT_OPEN"
+          "binding_state": "PUBLIC_IDENTITY_FROZEN__ZERO_COST_RUNNER_RESOURCE_AND_BRAIN_ADAPTER_PREFLIGHT_OPEN",
+          "public_route_status": "PINNED_PUBLIC_RELEASE__LOCAL_DOCKER_FRAMEWORK_SUPPORTED",
+          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
         },
         {
           "id": "FRONTIERCODE_V1_1",
@@ -103,7 +105,9 @@
         {
           "id": "CHARTOGRAPHY",
           "route": "PUBLIC_HARNESS",
-          "binding_state": "SCORER_TOOL_EQUIVALENCE_PREFLIGHT_OPEN"
+          "binding_state": "PUBLIC_IDENTITY_FROZEN__FULL_SCORER_TOOL_EQUIVALENCE_PREFLIGHT_OPEN",
+          "public_route_status": "PUBLIC_SOURCE_SAMPLE_TASKS_AND_TESTS",
+          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
         },
         {
           "id": "FINANCE_ACCOUNTING_INDEX",
@@ -165,7 +169,9 @@
         {
           "id": "OSWORLD_2_1",
           "route": "PUBLIC_RELEASE",
-          "binding_state": "ZERO_COST_ENVIRONMENT_ASSET_PREFLIGHT_OPEN"
+          "binding_state": "EXACT_ZERO_COST_ROUTE_FAIL_CLOSED__SCOPE_EQUIVALENT_PROOF_OR_PROVEN_ASSET_ACCESS_REQUIRED",
+          "public_route_status": "CODE_AND_TASK_PIPELINE_PUBLIC__COMPLETE_RELEASE_ASSET_ROUTE_GATED",
+          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
         },
         {
           "id": "LIVEBENCH_IF",
@@ -204,12 +210,16 @@
         {
           "id": "HLE_WITH_TOOLS",
           "route": "PUBLIC_DATA_PLUS_FROZEN_BRAIN_TOOL_HARNESS",
-          "binding_state": "TOOLS_AND_SHORT_ANSWER_GRADER_PREFLIGHT_OPEN"
+          "binding_state": "SCOPE_EQUIVALENCE_INSTANCE_OPEN",
+          "public_route_status": "PUBLIC_DATASET_AND_SIMPLE_EVAL__WITH_TOOLS_EQUIVALENCE_NOT_PROVEN",
+          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
         },
         {
           "id": "TERMINAL_BENCH_SCIENCE_0_1",
           "route": "PUBLIC_HARBOR_HARNESS",
-          "binding_state": "ZERO_COST_ENVIRONMENT_RESOURCE_PREFLIGHT_OPEN"
+          "binding_state": "RESOURCE_AND_LOCAL_DOCKER_BRAIN_ADAPTER_PREFLIGHT_OPEN",
+          "public_route_status": "PUBLIC_TASKS_AND_HARBOR_HARNESS",
+          "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
         },
         {
           "id": "UNKNOWN_DOMAIN_SYNTHESIS",
@@ -265,5 +275,6 @@
     "capability_credit_delta": 0
   },
   "private_surface_dominance": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
-  "direct_proof_mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+  "direct_proof_mutation_preflight": "canonical/verification/FOUR_DIRECT_PROOF_MUTATION_PREFLIGHT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+  "public_route_facts": "canonical/governance/PUBLIC_ROUTE_FACTS_20261002_V1.json"
 }
