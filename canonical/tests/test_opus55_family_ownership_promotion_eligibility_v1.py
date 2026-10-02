@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-import copy
 import json
 import unittest
 
 from canonical.runtime.opus55_family_ownership_promotion_eligibility_v1 import (
     ROOT,
-    _assert_witness,
+    _assert_witness_doc,
     verify,
 )
 
@@ -19,20 +18,26 @@ class FamilyOwnershipPromotionEligibilityTests(unittest.TestCase):
         self.assertFalse(out["promotion_authority"])
         self.assertEqual(out["new_reality_units"],0)
 
-    def test_tool_witness_scope_weakened_fails(self):
+    def test_tool_witness_scope_weakened_fails_closed(self):
         p=ROOT/"canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json"
         d=json.loads(p.read_text(encoding="utf-8"))
         d["closes_entire_protocol"]=False
-        original=json.loads
         with self.assertRaises(AssertionError):
-            assert d["closes_entire_protocol"] is True
+            _assert_witness_doc(d,"TOOL_DISCOVERY_SELECTION_AND_LEARNING",180)
 
-    def test_delegation_non_ceiling_fails(self):
+    def test_delegation_non_ceiling_fails_closed(self):
         p=ROOT/"canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
         d=json.loads(p.read_text(encoding="utf-8"))
         d["result"]["brain_lower_bound"]=0.99
         with self.assertRaises(AssertionError):
-            assert d["result"]["brain_lower_bound"] == d["result"]["theoretical_upper_bound"] == 1
+            _assert_witness_doc(d,"SUBAGENT_DELEGATION_AND_COORDINATION",132)
+
+    def test_contamination_fails_closed(self):
+        p=ROOT/"canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json"
+        d=json.loads(p.read_text(encoding="utf-8"))
+        d["contamination_clean"]=False
+        with self.assertRaises(AssertionError):
+            _assert_witness_doc(d,"TOOL_DISCOVERY_SELECTION_AND_LEARNING",180)
 
     def test_verifier_keeps_promotion_separate(self):
         out=verify()
