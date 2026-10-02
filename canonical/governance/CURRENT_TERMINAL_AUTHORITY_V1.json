@@ -14,11 +14,11 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "5dba1cb63e0f73e8ba545c1254512b038b556f63"
+      "git_blob_sha": "ec212d3a8f4bf3c8bbfe0005634a29a5b0434cf4"
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "ea4aec645fc84b2ae4745763c13b65fb1d064f4f"
+      "git_blob_sha": "5ee8b95b337bd6b17a81d4da29ab43a230ff9e31"
     },
     "acceptance_calibration": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
@@ -27,7 +27,7 @@
     },
     "residual_plan": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
-      "git_blob_sha": "d71f3ffb2136dc3265fdbccb31276901827c4602"
+      "git_blob_sha": "03370552a3e73d97da7723ae15cd3fc80cbb4613"
     },
     "global_postconditions": {
       "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
@@ -38,7 +38,8 @@
       "git_blob_sha": "9dfda8e533e0d51985b2b32f709b1b238db1ef19"
     },
     "acceptance_residual_proof_kernel_v2": {
-      "path": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2.json"
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2.json",
+      "git_blob_sha": "c4d58a8e6e0fa47615f0d15fed83c323811e767d"
     },
     "acceptance_residual_verdict_v2": {
       "path": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V2.json",
@@ -101,6 +102,17 @@
     "terminal_closure_basis_v2": {
       "path": "canonical/verification/TERMINAL_CLOSURE_BASIS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
       "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__COMPLETE_AND_NONSTALE_ACTION_FRONTIER__ZERO_CREDIT"
+    },
+    "terminal_projection_consistency": {
+      "governance_path": "canonical/governance/TERMINAL_PROJECTION_CONSISTENCY_V1.json",
+      "governance_git_blob_sha": "69daa6f18f1b5617b948d943988191102182de8e",
+      "runtime_path": "canonical/runtime/terminal_projection_consistency_v1.py",
+      "runtime_git_blob_sha": "322df61ab251f5e19bd0b10fb67727887482aa25",
+      "tests_path": "canonical/tests/test_terminal_projection_consistency_v1.py",
+      "tests_git_blob_sha": "fc1daa3ee8588c1d7eef4537c2f79baa1dcfaaf1",
+      "workflow_path": ".github/workflows/verify-terminal-projection-consistency.yml",
+      "workflow_git_blob_sha": "7dc47098d54e8dbe9bb2e7ada75cecd6b54de1a8",
+      "status": "ACTIVE_FAIL_CLOSED__BRANCH_VERIFICATION_PENDING"
     }
   },
   "residual": [
@@ -117,7 +129,7 @@
   ],
   "no_terminal_replay": true,
   "next": "RECOMPUTE_TERMINAL_PROOF_SUPERCOMPILER_ON_30_BLOCKED_FRONTIER__PRIORITIZE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING__TB4_REALITY_REMAINS_REVOKED_UNTIL_MACHINE_VERIFIED_UPPER_BOUND_GE_220",
-  "rule": "DERIVED_POINTER_ONLY__CURRENT_ACCEPTANCE_CALIBRATION_V2_AND_RESIDUAL_V9_ARE_LOAD_BEARING__RECOMPUTE_IF_ANY_SOURCE_BLOB_CHANGES",
+  "rule": "DERIVED_POINTER_ONLY__CURRENT_ACCEPTANCE_CALIBRATION_V2_AND_RESIDUAL_V9_ARE_LOAD_BEARING__TERMINAL_PROJECTION_CONSISTENCY_FIREWALL_ACTIVE__RECOMPUTE_IF_ANY_SOURCE_BLOB_CHANGES",
   "atomic_acceptance_frontier": {
     "proved": 8,
     "open_direct": 0,
