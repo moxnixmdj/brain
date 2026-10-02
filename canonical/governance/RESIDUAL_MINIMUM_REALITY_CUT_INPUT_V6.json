@@ -1,15 +1,20 @@
 {
   "schema": "PROJECT_BRAIN_RESIDUAL_MINIMUM_REALITY_CUT_INPUT_V6",
   "date": "2026-10-02",
-  "status": "FROZEN_FAITHFUL_CURRENT_SHARED_MECHANISM_FRONTIER",
+  "status": "REFROZEN_FAITHFUL_CURRENT_SHARED_MECHANISM_FRONTIER_AFTER_ATOMIC_M0A_RECONCILIATION",
   "source_universe": "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json",
-  "source_universe_blob_sha": "7664a9373e36a0a867e6eb84d2d6984277a5089e",
-  "source_universe_commit": "e0729cb342358cf08266e3b843967b4b7f740987",
+  "source_universe_blob_sha": "2b294259736152a6eb8953bd9cc5e1a7a465edf0",
+  "source_universe_commit": "f4731a6b09ed4ddf233d557867798c88b7abf02b",
   "supporting_post_freeze_evidence": [
     {
       "path": "canonical/capabilities/opus55/M0A_OLMO_MLP_LOWRANK_CAUSAL_LOCALIZATION_RESULT_001.json",
       "commit": "1fca996c966b5428bb22ca4098137c4ec14f8b3b",
       "consequence": "NO_ACTION_OR_COST_CHANGE__CONFIRMS_OLMO_HARVEST_STOP_AND_M0A_PROOF_ONLY"
+    },
+    {
+      "path": "canonical/governance/ATOMIC_FRONTIER_TRANSACTION_V1.json",
+      "commit": "f4731a6b09ed4ddf233d557867798c88b7abf02b",
+      "consequence": "SOURCE_UNIVERSE_RECONCILED_WITHOUT_CHANGING_M0A_M1_COMBINED_PROOF_COSTS_OR_COVERAGE"
     }
   ],
   "distinctions": [
