@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__P1_WHOLE_SCOPE_QUARANTINE_PROPAGATED__11_UNAFFECTED_FAMILY_PASSES__8_FAMILY_ROWS_QUARANTINED__ZERO_NEW_REALITY",
+  "objective": "Independently propagate the verified P1 whole-scope quarantine through the frozen predeclared family-to-contract mapping without replaying terminal evidence.",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_scope_quarantine_propagation_v1.py": "7b1730010ae821b19a004779a1ef1f61c413f573",
+    "canonical/tests/test_terminal_scope_quarantine_propagation_v1.py": "7d1cf47a86870ccaf4e3c9ce8b03a5d8fc5aca2f",
+    "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "canonical/verification/TERMINAL_V3_POSTWAVE_CONTRACT_AND_FAMILY_REDUCTION_20261002_V1.json": "51e3e7578e9adbeee2168d2223b84481fea16a09",
+    "canonical/verification/P1_TERMINAL_EXECUTION_SCOPE_AUDIT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "89836565c384ac95ac426fe88ffb6200f818496f"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 962,
+    "pull_request_head": "9f13865b333503a186424714a75d38d66ced165c",
+    "merge_commit": "3cc4261808661f6c08d79a6a3ffbc74c725eaa8d",
+    "workflow_run_id": 37017226176,
+    "workflow_job_id": 110870966717,
+    "conclusion": "success"
+  },
+  "verified": [
+    "SOURCE_TERMINAL_REDUCTION_WAS_12_OF_12_CONTRACTS_AND_19_OF_19_PROVISIONAL_FAMILY_ROWS",
+    "P1_WHOLE_FROZEN_SCOPE_IS_INDEPENDENTLY_QUARANTINED",
+    "RAW_NARROW_P1_EXECUTION_EVIDENCE_PRESERVED",
+    "WHOLE_SCOPE_CONTRACT_PASS_COUNT_AFTER_QUARANTINE_11",
+    "WHOLE_SCOPE_QUARANTINED_CONTRACT_COUNT_1",
+    "UNAFFECTED_BEHAVIORAL_FAMILY_PASS_COUNT_11",
+    "P1_DEPENDENT_QUARANTINED_FAMILY_COUNT_8",
+    "INVALIDATION_PROPAGATES_ONLY_THROUGH_PREDECLARED_FAMILY_MAPPING",
+    "ZERO_TERMINAL_REPLAY",
+    "ZERO_NEW_REALITY",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OR_PROMOTION_CREDIT"
+  ],
+  "quarantined_behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "unaffected_behavioral_families": [
+    "ARTIFACT_CREATION",
+    "COMMUNICATION_AND_SYNTHESIS",
+    "EXACT_SYMBOLIC_COMPUTATION",
+    "FINANCIAL_ANALYSIS",
+    "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+    "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+  ],
+  "quarantined_families": [
+    "ADVANCED_AGENTIC_CODING",
+    "AGENTIC_SCIENTIFIC_RESEARCH",
+    "BUSINESS_WORKFLOW_AUTOMATION",
+    "COMPLEX_MULTI_TOOL_AGENCY",
+    "COMPUTER_AND_BROWSER_USE",
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
