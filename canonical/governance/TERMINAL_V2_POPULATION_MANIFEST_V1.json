@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TERMINAL_V2_POPULATION_MANIFEST_V1",
   "date": "2026-10-02",
-  "status": "FROZEN_PREBEACON_EXACT_CURRENT",
+  "status": "FROZEN_PREBEACON_EXACT_CURRENT_POST_SA_CCR_REBIND",
   "zero_terminal_results": true,
   "post_freeze_beacon_known": false,
   "incremental_spend_usd": 0,
