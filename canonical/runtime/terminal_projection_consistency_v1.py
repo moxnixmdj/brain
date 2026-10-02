@@ -18,8 +18,8 @@ PATHS = {
     "authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
     "closure": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-    "calibration": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
-    "residual": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
+    "calibration": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+    "residual": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
     "plan": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1.json",
     "kernel": "canonical/governance/OPUS55_ACCEPTANCE_RESIDUAL_PROOF_KERNEL_V2.json",
 }
@@ -28,6 +28,7 @@ EXPECTED_CALIBRATED = {
     "EXACT_SYMBOLIC_COMPUTATION",
     "LONG_HORIZON_MEMORY_AND_CONTINUITY",
     "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
 }
 
 def _load(rel: str) -> dict[str, Any]:
@@ -59,8 +60,8 @@ def evaluate_documents(
     if not isinstance(truth, Mapping):
         errors.append("AUTHORITY_TRUTH_MISSING")
         truth = {}
-    if truth.get("opus55_acceptance") != "3/19_PASS__16/19_OPEN":
-        errors.append("AUTHORITY_ACCEPTANCE_NOT_3_OF_19")
+    if truth.get("opus55_acceptance") != "4/19_PASS__15/19_OPEN":
+        errors.append("AUTHORITY_ACCEPTANCE_NOT_4_OF_19")
     if truth.get("achieved") is not False:
         errors.append("AUTHORITY_TERMINAL_GOAL_MUST_REMAIN_FALSE")
 
@@ -68,10 +69,10 @@ def evaluate_documents(
     if not isinstance(cres, Mapping):
         errors.append("CALIBRATION_RESULT_MISSING")
         cres = {}
-    if cres.get("acceptance_calibrated_family_count") != 3:
-        errors.append("CALIBRATION_COUNT_NOT_3")
-    if cres.get("acceptance_pending_family_count") != 16:
-        errors.append("CALIBRATION_PENDING_NOT_16")
+    if cres.get("acceptance_calibrated_family_count") != 4:
+        errors.append("CALIBRATION_COUNT_NOT_4")
+    if cres.get("acceptance_pending_family_count") != 15:
+        errors.append("CALIBRATION_PENDING_NOT_15")
     if set(cres.get("acceptance_calibrated_families") or []) != EXPECTED_CALIBRATED:
         errors.append("CALIBRATION_FAMILY_SET_MISMATCH")
     if cres.get("terminal_goal_acceptance_closed") is not False:
@@ -79,12 +80,12 @@ def evaluate_documents(
 
     if residual.get("predicate_count") != 38:
         errors.append("RESIDUAL_PREDICATE_COUNT_NOT_38")
-    if residual.get("proved_predicate_count") != 8:
-        errors.append("RESIDUAL_PROVED_COUNT_NOT_8")
+    if residual.get("proved_predicate_count") != 9:
+        errors.append("RESIDUAL_PROVED_COUNT_NOT_9")
     if residual.get("open_predicate_count") != 0:
         errors.append("RESIDUAL_OPEN_COUNT_NOT_0")
-    if residual.get("blocked_predicate_count") != 30:
-        errors.append("RESIDUAL_BLOCKED_COUNT_NOT_30")
+    if residual.get("blocked_predicate_count") != 29:
+        errors.append("RESIDUAL_BLOCKED_COUNT_NOT_29")
     if residual.get("authorized_acceptance_case_actions") != []:
         errors.append("RESIDUAL_UNAUTHORIZED_CASE_ACTION_PRESENT")
     tb = residual.get("tb4_attainability")
@@ -101,7 +102,7 @@ def evaluate_documents(
     if not isinstance(summary, Mapping):
         errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISSING")
         summary = {}
-    if summary.get("calibrated_family_count") != 3 or summary.get("pending_family_count") != 16:
+    if summary.get("calibrated_family_count") != 4 or summary.get("pending_family_count") != 15:
         errors.append("CLOSURE_ACCEPTANCE_SUMMARY_MISMATCH")
     if set(summary.get("calibrated_families") or []) != EXPECTED_CALIBRATED:
         errors.append("CLOSURE_ACCEPTANCE_FAMILY_SET_MISMATCH")
@@ -118,7 +119,7 @@ def evaluate_documents(
     if not isinstance(msum, Mapping):
         errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISSING")
         msum = {}
-    if msum.get("calibrated_family_count") != 3 or msum.get("pending_acceptance_family_count") != 16:
+    if msum.get("calibrated_family_count") != 4 or msum.get("pending_acceptance_family_count") != 15:
         errors.append("MATRIX_ACCEPTANCE_SUMMARY_MISMATCH")
     if msum.get("verified_owned_family_count") != 2:
         errors.append("MATRIX_VERIFIED_OWNED_COUNT_NOT_2")
@@ -134,27 +135,40 @@ def evaluate_documents(
         if tool.get("postwave_ownership_credit") != "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE":
             errors.append("MATRIX_TOOL_DISCOVERY_PROMOTION_OVERCLAIM")
 
-    if plan.get("residual_family_count") != 16:
-        errors.append("PLAN_PENDING_FAMILY_COUNT_NOT_16")
+    delegation = None
+    if isinstance(rows, list):
+        delegation = next((r for r in rows if isinstance(r, Mapping) and r.get("family") == "SUBAGENT_DELEGATION_AND_COORDINATION"), None)
+    if not isinstance(delegation, Mapping):
+        errors.append("MATRIX_DELEGATION_ROW_MISSING")
+    else:
+        if delegation.get("postwave_opus55_acceptance_status") != "PASS_VIA_TEMPORALLY_TRANSPORTED_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS":
+            errors.append("MATRIX_DELEGATION_ACCEPTANCE_NOT_PASS")
+        if delegation.get("postwave_ownership_credit") != "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE":
+            errors.append("MATRIX_DELEGATION_PROMOTION_OVERCLAIM")
+
+    if plan.get("residual_family_count") != 15:
+        errors.append("PLAN_PENDING_FAMILY_COUNT_NOT_15")
     pf = plan.get("residual_families")
     if not isinstance(pf, list):
         errors.append("PLAN_RESIDUAL_FAMILIES_MISSING")
     else:
-        names = {r.get("family") for r in pf if isinstance(r, Mapping)}
+        names = {r if isinstance(r, str) else r.get("family") for r in pf if isinstance(r, (str, Mapping))}
         if "TOOL_DISCOVERY_SELECTION_AND_LEARNING" in names:
             errors.append("PLAN_RETAINS_ALREADY_CALIBRATED_TOOL_DISCOVERY")
-        if len(names) != 16:
-            errors.append("PLAN_RESIDUAL_FAMILY_SET_NOT_16")
+        if "SUBAGENT_DELEGATION_AND_COORDINATION" in names:
+            errors.append("PLAN_RETAINS_ALREADY_CALIBRATED_DELEGATION")
+        if len(names) != 15:
+            errors.append("PLAN_RESIDUAL_FAMILY_SET_NOT_15")
     state = plan.get("current_acceptance_state")
     if not isinstance(state, Mapping):
         errors.append("PLAN_CURRENT_ACCEPTANCE_STATE_MISSING")
     else:
         expected = {
-            "calibrated_family_count": 3,
-            "pending_family_count": 16,
+            "calibrated_family_count": 4,
+            "pending_family_count": 15,
             "atomic_predicates_total": 38,
-            "proved_atomic_predicates": 8,
-            "blocked_atomic_predicates": 30,
+            "proved_atomic_predicates": 9,
+            "blocked_atomic_predicates": 29,
             "open_direct_atomic_predicates": 0,
         }
         for k, v in expected.items():
@@ -169,12 +183,12 @@ def evaluate_documents(
     else:
         expected = {
             "residual_registry_families": 17,
-            "acceptance_pending_families": 16,
+            "acceptance_pending_families": 15,
             "atomic_predicates": 38,
             "receipt_saturation_complete": True,
-            "proved_predicates": 8,
+            "proved_predicates": 9,
             "open_direct_predicates": 0,
-            "blocked_predicates": 30,
+            "blocked_predicates": 29,
             "authorized_acceptance_case_actions": 0,
             "terminal_promotion_allowed": False,
         }
@@ -186,7 +200,7 @@ def evaluate_documents(
     if not isinstance(af, Mapping):
         errors.append("AUTHORITY_ATOMIC_FRONTIER_MISSING")
     else:
-        if (af.get("proved"), af.get("open_direct"), af.get("blocked"), af.get("total")) != (8, 0, 30, 38):
+        if (af.get("proved"), af.get("open_direct"), af.get("blocked"), af.get("total")) != (9, 0, 29, 38):
             errors.append("AUTHORITY_ATOMIC_FRONTIER_MISMATCH")
         if af.get("authorized_acceptance_case_actions") != []:
             errors.append("AUTHORITY_UNAUTHORIZED_CASE_ACTION_PRESENT")
@@ -212,10 +226,10 @@ def evaluate_documents(
         "status": "PASS" if not errors else "FAIL_CLOSED",
         "pass": not errors,
         "errors": errors,
-        "acceptance_calibrated_families": 3,
-        "acceptance_pending_families": 16,
-        "atomic_predicates_proved": 8,
-        "atomic_predicates_blocked": 30,
+        "acceptance_calibrated_families": 4,
+        "acceptance_pending_families": 15,
+        "atomic_predicates_proved": 9,
+        "atomic_predicates_blocked": 29,
         "authorized_acceptance_case_actions": 0,
         "terminal_goal_achieved": False,
         "capability_credit_delta": 0,

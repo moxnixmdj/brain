@@ -7,9 +7,9 @@
   "tests": "canonical/tests/test_terminal_projection_consistency_v1.py",
   "current_truth": {
     "behavioral_families": "19/19_PASS",
-    "opus55_acceptance": "3/19_CALIBRATED__16_PENDING",
+    "opus55_acceptance": "4/19_CALIBRATED__15_PENDING",
     "verified_owned": "2/19",
-    "atomic_acceptance_frontier": "8/38_PROVED__0_OPEN_DIRECT__30_BLOCKED",
+    "atomic_acceptance_frontier": "9/38_PROVED__0_OPEN_DIRECT__29_BLOCKED",
     "authorized_acceptance_case_actions": [],
     "tb4_reality_execution": "REVOKED__180_LT_220",
     "terminal_goal_achieved": false

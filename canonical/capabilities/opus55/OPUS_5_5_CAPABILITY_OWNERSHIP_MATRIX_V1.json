@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1",
-  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__3_ACCEPTANCE_CALIBRATED__2_VERIFIED_OWNED__16_ACCEPTANCE_OPEN",
+  "status": "POSTWAVE_RECONCILED__19_BEHAVIORAL_PASS__4_ACCEPTANCE_CALIBRATED__2_VERIFIED_OWNED__15_ACCEPTANCE_OPEN",
   "evaluated_utc": "2026-10-02",
   "target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "hard_constraints": {
@@ -374,11 +374,11 @@
         "canonical/capabilities/opus55/OPUS55_SUBAGENT_COORDINATION_FRESH_VERIFICATION_V1.json"
       ],
       "internalization_required": false,
-      "ownership_note": "Scoped mechanical delegation/coordination is Brain-owned and reusable. Whole-family Opus credit remains open for cognitive delegation quality, adaptive worker selection, >2-worker behavior, and autonomous wake.",
+      "ownership_note": "Scoped mechanical delegation/coordination remains Brain-owned and reusable. Full frozen Opus55 family acceptance is now independently calibrated PASS via the temporally transported full-scope absolute-dominance witness; ownership promotion remains separate and ungranted.",
       "internalized_configuration": [
         "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json"
       ],
-      "next_required_action": "Reuse this owned coordination mechanism; separately acquire/verify residual cognitive delegation quality and broader-scale behavior.",
+      "next_required_action": "PRESERVE_ACCEPTANCE_PASS__DO_NOT_REPLAY__CONTINUE_ONLY_GLOBAL_OWNERSHIP_PROMOTION_AFTER_TERMINAL_ACCEPTANCE_CLOSURE",
       "candidate_internalization_routes": [
         {
           "repo": "Alibaba-NLP/DeepResearch",
@@ -387,11 +387,12 @@
           "discovery_status": "FRAMEWORK_AND_WHITE_BOX_DONOR_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Inspect supervisor/researcher decomposition for cognitive delegation mechanisms not covered by Brain's owned mechanical coordination.",
+      "campaign_next_action": "PRESERVE_ACCEPTANCE_PASS__DO_NOT_REPLAY__REMOVE_DELEGATION_FROM_ACCEPTANCE_RESIDUAL_FRONTIER",
       "postwave_terminal_behavioral_status": "PASS",
-      "postwave_opus55_acceptance_status": "DEFINED_RESULT_OPEN",
-      "postwave_ownership_credit": "ZERO_UNTIL_FROZEN_PROTOCOL_RESULT_PASS",
-      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json"
+      "postwave_opus55_acceptance_status": "PASS_VIA_TEMPORALLY_TRANSPORTED_FULL_SCOPE_ABSOLUTE_DOMINANCE_WITNESS",
+      "postwave_ownership_credit": "ZERO_DIRECT_CREDIT__PROMOTION_AUTHORITY_FALSE",
+      "postwave_acceptance_evidence": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
+      "postwave_acceptance_witness": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -690,15 +691,16 @@
     "rule": "ROW_MECHANISM_STATUS_BELOW_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_OWNERSHIP_CREDIT_IS_CONTROLLED_BY_POSTWAVE_ACCEPTANCE_CALIBRATION"
   },
   "postwave_acceptance_summary": {
-    "calibrated_family_count": 3,
+    "calibrated_family_count": 4,
     "verified_owned_family_count": 2,
-    "pending_acceptance_family_count": 16,
+    "pending_acceptance_family_count": 15,
     "calibrated_families": [
       "EXACT_SYMBOLIC_COMPUTATION",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-      "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
     ],
-    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V2.json",
+    "authority": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json",
     "promotion_authority": false
   }
 }

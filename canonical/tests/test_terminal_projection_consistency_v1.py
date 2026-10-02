@@ -51,5 +51,24 @@ class TerminalProjectionConsistencyTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("AUTHORITY_UNAUTHORIZED_CASE_ACTION_PRESENT", out["errors"])
 
+
+    def test_delegation_cannot_reenter_residual_plan(self):
+        docs, shas = self.live()
+        docs = copy.deepcopy(docs)
+        docs["plan"]["residual_families"].append("SUBAGENT_DELEGATION_AND_COORDINATION")
+        docs["plan"]["residual_family_count"] += 1
+        out = self.evaluate(docs, shas)
+        self.assertFalse(out["pass"])
+        self.assertIn("PLAN_RETAINS_ALREADY_CALIBRATED_DELEGATION", out["errors"])
+
+    def test_delegation_acceptance_cannot_be_misreported_as_ownership_promotion(self):
+        docs, shas = self.live()
+        docs = copy.deepcopy(docs)
+        row = next(r for r in docs["matrix"]["rows"] if r.get("family") == "SUBAGENT_DELEGATION_AND_COORDINATION")
+        row["postwave_ownership_credit"] = "PROMOTED"
+        out = self.evaluate(docs, shas)
+        self.assertFalse(out["pass"])
+        self.assertIn("MATRIX_DELEGATION_PROMOTION_OVERCLAIM", out["errors"])
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

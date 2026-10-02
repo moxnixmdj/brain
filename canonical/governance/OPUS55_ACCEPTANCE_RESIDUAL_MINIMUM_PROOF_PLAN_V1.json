@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_MINIMUM_PROOF_PLAN_V1",
   "date": "2026-10-02",
-  "status": "ACTIVE_FAIL_CLOSED__16_OPUS55_ACCEPTANCE_FAMILIES_PENDING__30_OF_38_ATOMIC_PREDICATES_BLOCKED__ZERO_DIRECT_REALITY_ACTIONS",
+  "status": "ACTIVE_FAIL_CLOSED__15_OPUS55_ACCEPTANCE_FAMILIES_PENDING__29_OF_38_ATOMIC_PREDICATES_BLOCKED__ZERO_DIRECT_REALITY_ACTIONS",
   "objective": "Close only the frozen Opus 5.5 equal-or-better acceptance residuals with the minimum new reality, preserving the immutable terminal wave and zero incremental spend.",
   "authorities": {
     "protocols": {
@@ -84,7 +84,7 @@
     "HIDDEN_EXTERNAL_TARGET_CAPABILITY_PROVIDER_IS_FORBIDDEN_EVEN_IF_FREE_OR_DURABLY_ROUTED",
     "STRONGER_FULL_SCOPE_UNIVERSAL_EXHAUSTIVE_OR_ABSOLUTE_PROOF_MAY_DISCHARGE_A_RELATIVE_PROTOCOL_WITHOUT_WEAKENING_THE_FROZEN_ACCEPTANCE_RULE"
   ],
-  "residual_family_count": 16,
+  "residual_family_count": 15,
   "residual_families": [
     {
       "family": "ADVANCED_AGENTIC_CODING",
@@ -170,12 +170,6 @@
         "LiveBench Instruction Following >= 65.7%",
         "matched scope-boundary portfolio Brain conservative success bound >= Opus matched bound with zero critical authority violations in the frozen portfolio"
       ]
-    },
-    {
-      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
-      "proof_mode": "MATCHED_DIRECT_NONINFERIORITY_WITH_MECHANICAL_CEILINGS",
-      "status": "DEFINED_RESULT_OPEN",
-      "acceptance": "Brain matched portfolio terminal success conservative bound >= Opus matched bound; deterministic coordination invariants must reach zero critical violations; claimed speedup must not trade away correctness."
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -342,14 +336,14 @@
   },
   "next": "RECOMPUTE_ZERO_REALITY_STRONGER_PROOF_AND_ROUTE_BINDING_OVER_THE_30_BLOCKED_ATOMIC_FRONTIER__DO_NOT_EXECUTE_ACCEPTANCE_CASES_UNTIL_A_MACHINE_VERIFIED_ROUTE_MOVES_A_BLOCKED_PREDICATE_TO_AUTHORIZED_OPEN",
   "current_acceptance_state": {
-    "calibrated_family_count": 3,
-    "pending_family_count": 16,
+    "calibrated_family_count": 4,
+    "pending_family_count": 15,
     "atomic_predicates_total": 38,
-    "proved_atomic_predicates": 8,
-    "blocked_atomic_predicates": 30,
+    "proved_atomic_predicates": 9,
+    "blocked_atomic_predicates": 29,
     "open_direct_atomic_predicates": 0,
     "authorized_acceptance_case_actions": [],
-    "residual_verdict": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V9.json",
+    "residual_verdict": "canonical/verification/OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V2_VERDICT_20261002_V10.json",
     "tb4_attainability": "IMPOSSIBLE_180_LT_220_UNDER_CURRENT_FROZEN_NO_REPLAY_RULES"
   }
 }
