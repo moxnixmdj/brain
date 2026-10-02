@@ -14,6 +14,7 @@ REGISTRY="canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json"
 BASIS="canonical/governance/ACTIVE_TERMINAL_PROOF_BASIS_V1.json"
 PROTOCOL="canonical/governance/GLOBAL_TERMINAL_REPLACEMENT_POPULATION_PROTOCOL_V2.json"
 PREQUAL="canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
+QUEUE="canonical/governance/TERMINAL_ROUTE_CLOSURE_QUEUE_RECEIPT_V1.json"
 INDEX="canonical/governance/TERMINAL_PROGRESS_EVIDENCE_INDEX_V1.json"
 OUT_SCHEMA="PROJECT_BRAIN_GENERATED_TERMINAL_STATE_V1"
 
@@ -28,7 +29,7 @@ def compile_state(root:Path)->dict[str,Any]:
     try:
         registry,rh=_read(root,REGISTRY); basis,bh=_read(root,BASIS)
         protocol,ph=_read(root,PROTOCOL); prequal,qh=_read(root,PREQUAL)
-        index,ih=_read(root,INDEX)
+        queue,qeh=_read(root,QUEUE); index,ih=_read(root,INDEX)
     except (OSError,ValueError,json.JSONDecodeError) as exc:
         return {"schema":OUT_SCHEMA,"status":"FAIL_CLOSED","pass":False,
                 "errors":["INPUT_READ_FAILURE:"+type(exc).__name__],
