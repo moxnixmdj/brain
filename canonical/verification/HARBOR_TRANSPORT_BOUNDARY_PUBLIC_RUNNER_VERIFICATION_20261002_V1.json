@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_HARBOR_TRANSPORT_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_TRANSPORT_AND_POLICY_BYTES__ZERO_TERMINAL_CREDIT",
+  "public_verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "workflow_run_id": 36964703427,
+  "workflow_conclusion": "success",
+  "exact_brain_blobs": {
+    "canonical/runtime/harbor_command_policy.py": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "canonical/runtime/harbor_environment_transport.py": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "canonical/runtime/harbor_adapter_transport_preflight.py": "1310e5189a1ceb8aa0a0d989bc9ae60c2e782f1c"
+  },
+  "verified": [
+    "SAFE_COMMAND_ACCEPTED",
+    "NETWORK_ACQUISITION_COMMANDS_REJECTED",
+    "PACKAGE_INSTALL_COMMANDS_REJECTED",
+    "GIT_REMOTE_ACQUISITION_REJECTED",
+    "SSH_SCP_REJECTED",
+    "ENVIRONMENT_EXEC_RECEIPT_NORMALIZED",
+    "TIMEOUT_BOUNDARY_PRESERVED",
+    "NO_TERMINAL_TASK_CONTENT_CONSUMED"
+  ],
+  "explicitly_not_verified": [
+    "CONTROLLER_ZERO_COST_AVAILABILITY",
+    "CONTROLLER_DONOR_INDEPENDENCE",
+    "TERMINAL_TASK_SUCCESS",
+    "CAPABILITY_PARITY"
+  ],
+  "implication": "HARBOR_TRANSPORT_AND_COMMAND_POLICY_ARE_NOT_THE_T3_EXECUTION_BLOCKER__ONLY_CONTROLLER_AND_PER_CASE_RESOURCE_OR_CAPABILITY_ROUTE_REMAINS",
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
