@@ -80,8 +80,10 @@ def _source_class(rel: str) -> str:
     return "OTHER"
 
 
-def _candidate_files(root: Path) -> list[Path]:
+def _candidate_files(root: Path) -> tuple[list[Path], list[str]]:
+    """Enumerate eligible evidence files and make every omission explicit."""
     out: list[Path] = []
+    errors: list[str] = []
     for rel_root in SEARCH_ROOTS:
         base = root / rel_root
         if not base.exists():
@@ -95,12 +97,18 @@ def _candidate_files(root: Path) -> list[Path]:
             if any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES):
                 continue
             try:
-                if p.stat().st_size > MAX_FILE_BYTES:
-                    continue
+                size = p.stat().st_size
             except OSError:
+                errors.append(f"STAT_FAILED:{rel}")
+                continue
+            if size > MAX_FILE_BYTES:
+                errors.append(f"FILE_TOO_LARGE:{rel}:{size}")
                 continue
             out.append(p)
-    return sorted(out, key=lambda p: p.relative_to(root).as_posix())
+    return (
+        sorted(out, key=lambda p: p.relative_to(root).as_posix()),
+        sorted(errors),
+    )
 
 
 _IDENTIFIER_NEIGHBOR = r"A-Za-z0-9_:.\\-"
@@ -159,16 +167,34 @@ def build_index(
     if not isinstance(atoms, list) or not atoms:
         return _fail("CANONICAL_ATOMS_MISSING")
 
-    files = _candidate_files(root)
+    files, corpus_scan_errors = _candidate_files(root)
     file_cache: list[tuple[str, str, str, str]] = []
     for path in files:
         rel = path.relative_to(root).as_posix()
         try:
             data = path.read_bytes()
+        except OSError:
+            corpus_scan_errors.append(f"READ_FAILED:{rel}")
+            continue
+        try:
             text = data.decode("utf-8")
-        except (OSError, UnicodeDecodeError):
+        except UnicodeDecodeError:
+            corpus_scan_errors.append(f"UTF8_DECODE_FAILED:{rel}")
             continue
         file_cache.append((rel, _source_class(rel), _blob_sha(data), text))
+
+    if corpus_scan_errors:
+        failed = _fail("CORPUS_SCAN_INCOMPLETE", *corpus_scan_errors)
+        failed.update({
+            "canonical_atom_count": len(atoms),
+            "canonical_atom_manifest_sha256": _atom_manifest_sha256(atoms),
+            "corpus_complete": False,
+            "scanned_file_count": len(file_cache),
+            "scanned_corpus_manifest_sha256": _manifest_sha256(file_cache),
+            "corpus_scan_error_count": len(corpus_scan_errors),
+            "corpus_scan_errors": sorted(corpus_scan_errors),
+        })
+        return failed
 
     atom_rows = []
     total_matches = 0
@@ -223,8 +249,11 @@ def build_index(
         "errors": [],
         "canonical_atom_count": len(atom_rows),
         "canonical_atom_manifest_sha256": _atom_manifest_sha256(atoms),
+        "corpus_complete": True,
         "scanned_file_count": len(file_cache),
         "scanned_corpus_manifest_sha256": _manifest_sha256(file_cache),
+        "corpus_scan_error_count": 0,
+        "corpus_scan_errors": [],
         "candidate_match_count": total_matches,
         "atoms_with_truncated_candidate_lists": sum(
             1 for row in atom_rows if row["candidate_match_truncated"]
@@ -239,6 +268,7 @@ def build_index(
             "EXACT_LITERAL_TOKEN_OCCURRENCE_IS_CANDIDATE_POINTER_ONLY__"
             "REJECT_IDENTIFIER_SUPERSTRING_FALSE_POSITIVES__"
             "CONTENT_ADDRESS_EACH_MATCH__CONTENT_ADDRESS_FULL_SCANNED_CORPUS_MANIFEST__"
+            "ANY_ELIGIBLE_CORPUS_SKIP_FAILS_CLOSED__"
             "REPORT_MATCH_TRUNCATION_EXPLICITLY__"
             "EXCLUDE_FRONTIER_AND_SCHEDULER_RESTATEMENTS__"
             "EXCLUDE_RECEIPT_PIPELINE_SELF_VERIFICATION_AND_DECLARED_CORPUS_RESTATEMENTS__"
