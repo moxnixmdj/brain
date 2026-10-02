@@ -1,0 +1,369 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ATOMIC_RECEIPT_SATURATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "COMPLETE_FAIL_CLOSED__5_OF_38_ATOMIC_PREDICATES_PROVED_FROM_EXISTING_RECEIPTS__33_REMAIN__ZERO_NEW_REALITY",
+  "objective": "Exhaust the canonical acceptance-layer receipt authorities before authorizing any new acceptance reality query.",
+  "source_snapshot": {
+    "note": "Content-addressed authority set; result remains valid only while these exact sources remain authoritative.",
+    "authorities": [
+      {
+        "path": "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V1.json",
+        "sha": "1b73fadfaea4be3eb03d73546ec8f60709db6c62"
+      },
+      {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_MINIMUM_OBSTRUCTION_CERTIFICATE_V1.json",
+        "sha": "540a5d5f6fe5446c4571fe8e95a0e1756b8ac91c"
+      },
+      {
+        "path": "canonical/governance/OPUS55_PUBLIC_BAR_SCORE_READINESS_MATRIX_V1.json",
+        "sha": "9770307c5051a11ed79adefc86c92f91536c3dd4"
+      },
+      {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json",
+        "sha": "0e5f8c66599d12cb5bdc103b6bedb991e460c58f"
+      },
+      {
+        "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+        "sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+      },
+      {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+        "sha": "97014a0580b15165dad8bed1501acfe3b76c5d19"
+      },
+      {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+        "sha": "626eaf55a0c0c89adc9890231a5096ed38a84d90"
+      },
+      {
+        "path": "canonical/reasoning/2026-10-02_EXACT_OPUS55_ZERO_COST_COMPARATOR_ROUTE_RECONCILIATION_V1.json",
+        "sha": "f67e22cee5e6fce1ebfae92ebf0946f78fafcee1"
+      }
+    ]
+  },
+  "targeted_direct_leaf_audits": {
+    "delegation": "132/132 frozen direct cases; scorer explicitly enforces duplicate/dependency/resource/assignment/ownership/fanin invariants and strict baseline advantage with exact correctness.",
+    "tool_transfer": "180/180 frozen direct cases; scorer explicitly requires reuse of valid stage-1 evidence in stage 2 and rejects redundant reprobes absent version change.",
+    "synthesis": "T1/T3 load-bearing P3 binding explicitly requires ZERO_UNSUPPORTED_MATERIAL_CLAIMS; both direct instrumentation components pass.",
+    "native_artifact": "T1 aggregate 8 load-bearing native edit observations pass; frozen binding covers DOCX/XLSX/PPTX/PDF low-level edit preservation, reopen/structure/render gates.",
+    "nonclosures": [
+      "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION_NOT_EXPLICITLY_SCORED_AS_PERSISTENT_CAPABILITY_STATE",
+      "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES_NOT_IDENTICAL_TO_P1_CAUSAL_LOCALIZATION_PREFLIGHT_OR_TERMINAL_COMPONENT",
+      "OTHER_DIRECT_SCOPE_AUDITS_REMAIN_EXPLICITLY_OPEN_IN_FROZEN_PROTOCOLS_OR_OBSTRUCTION_CERTIFICATE"
+    ]
+  },
+  "predicate_count": 38,
+  "proved_predicate_count": 5,
+  "unresolved_predicate_count": 33,
+  "predicates": [
+    {
+      "predicate_id": "CODING_TB4_GE_66_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Terminal-Bench 4.0",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "CODING_FRONTIERCODE_GE_54_4",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "FrontierCode v1.1 Main",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+      "family": "ADVANCED_AGENTIC_CODING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "CursorBench 4.0",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
+      "family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "kind": "MATCHED_SCOPE_AUDIT",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "PROWORK_GDPVAL_GE_1846",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "GDPval-AA v2.1",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "PROWORK_AA_BRIEFCASE_GE_1822",
+      "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "AA-Briefcase v1.1",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "AUTOMATIONBENCH_GE_40",
+      "family": "BUSINESS_WORKFLOW_AUTOMATION",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "AutomationBench public 600",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "HLE_TOOLS_GE_67_7",
+      "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Humanity's Last Exam with tools",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "TB_SCIENCE_GE_58_7",
+      "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Terminal-Bench-Science 0.1",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Chartography with tools",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "VISION_DENSE_NONCHART_SCOPE",
+      "family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "kind": "MATCHED_SCOPE_AUDIT",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "family": "COMPUTER_AND_BROWSER_USE",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "OSWorld 2.1 partial",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "family": "FINANCIAL_ANALYSIS",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Finance & Accounting Index",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "FINANCE_AGENT_V2_GE_58_59",
+      "family": "FINANCIAL_ANALYSIS",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "Finance Agent v2",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "FINANCE_UNCOVERED_SCOPE_AUDIT",
+      "family": "FINANCIAL_ANALYSIS",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    },
+    {
+      "predicate_id": "LIVEBENCH_IF_GE_65_7",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "LiveBench Instruction Following",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "IF_SCOPE_BOUNDARY_NONINFERIOR",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+      "family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "kind": "INVARIANT",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    },
+    {
+      "predicate_id": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "DELEGATION_ZERO_CRITICAL_COORDINATION_VIOLATIONS",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "INVARIANT",
+      "surface": null,
+      "disposition": "PROVED_FROM_EXISTING_IMMUTABLE_RECEIPT",
+      "reason": "BOUND_IN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2"
+    },
+    {
+      "predicate_id": "DELEGATION_SPEEDUP_NO_CORRECTNESS_TRADE",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "disposition": "PROVED_FROM_EXISTING_IMMUTABLE_RECEIPT",
+      "reason": "BOUND_IN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2"
+    },
+    {
+      "predicate_id": "RECOVERY_TERMINAL_NONINFERIOR",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "kind": "INVARIANT",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    },
+    {
+      "predicate_id": "ARTIFACT_MECHANICAL_GATES_CEILING",
+      "family": "ARTIFACT_CREATION",
+      "kind": "ABSOLUTE_CEILING",
+      "surface": null,
+      "disposition": "PROVED_FROM_EXISTING_IMMUTABLE_RECEIPT",
+      "reason": "BOUND_IN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2"
+    },
+    {
+      "predicate_id": "ARTIFACT_AA_BRIEFCASE_GE_1822",
+      "family": "ARTIFACT_CREATION",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "AA-Briefcase v1.1",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+      "family": "ARTIFACT_CREATION",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    },
+    {
+      "predicate_id": "SYNTHESIS_ZERO_UNSUPPORTED_MATERIAL_CLAIMS",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "INVARIANT",
+      "surface": null,
+      "disposition": "PROVED_FROM_EXISTING_IMMUTABLE_RECEIPT",
+      "reason": "BOUND_IN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2"
+    },
+    {
+      "predicate_id": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "family": "COMMUNICATION_AND_SYNTHESIS",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_SECOND_TASK_TRANSFER",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "disposition": "PROVED_FROM_EXISTING_IMMUTABLE_RECEIPT",
+      "reason": "BOUND_IN_OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2"
+    },
+    {
+      "predicate_id": "TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION",
+      "family": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "kind": "INVARIANT",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    },
+    {
+      "predicate_id": "MYSTERYMECHANISM_GE_49_55",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "kind": "PUBLIC_FIXED_BAR",
+      "surface": "MysteryMechanism",
+      "disposition": "OPEN__PUBLIC_BAR_RESULT_OR_SCORE_ROUTE_MISSING",
+      "reason": "CANONICAL_READINESS_MATRIX_HAS_NO_SCORE_PRODUCING_ROUTE_READY_FOR_OPEN_PUBLIC_SURFACES"
+    },
+    {
+      "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "family": "UNKNOWN_DOMAIN_ADAPTATION",
+      "kind": "DIRECT_SCOPE_AUDIT",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    },
+    {
+      "predicate_id": "COMPOSITION_COMPONENT_SCOPED_PROOFS",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "kind": "DEPENDENCY_PROOF",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    },
+    {
+      "predicate_id": "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "kind": "MATCHED_NONINFERIORITY",
+      "surface": null,
+      "disposition": "BLOCKED__EXACT_OPUS55_COMPARATOR_OR_FULL_SCOPE_STRONGER_WITNESS_MISSING",
+      "reason": "ZERO_INCREMENTAL_EXACT_OPUS55_CASE_LEVEL_ROUTE_UNAVAILABLE__TRANSMUTATION_INPUT_HAS_NO_FULL_SCOPE_WITNESS"
+    },
+    {
+      "predicate_id": "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES",
+      "family": "MULTI_CAPABILITY_COMPOSITION",
+      "kind": "INVARIANT",
+      "surface": null,
+      "disposition": "OPEN__NO_SCOPE_COMPLETE_ATOMIC_ACCEPTANCE_RECEIPT_IDENTIFIED",
+      "reason": "TARGETED_DIRECT_LEAF_AUDIT_FOUND_ONLY_PARTIAL_OR_ADJACENT_BEHAVIORAL_EVIDENCE"
+    }
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "rule": "SATURATION_CLOSES_ONLY_ATOMIC_PREDICATES_WITH_SCOPE_COMPLETE_CONTENT_ADDRESSED_EVIDENCE__PARTIAL_BEHAVIORAL_OR_PREFLIGHT_EVIDENCE_IS_PRESERVED_BUT_NOT_PROMOTED"
+}
