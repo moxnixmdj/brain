@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V11",
+  "action_id": "HARDEN-ATOMIC-FRONTIER-VERIFICATION-20261002-V1",
+  "status": "PROPOSED__ZERO_CAPABILITY_CREDIT__ZERO_FRESH_EVIDENCE",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "b12b1e7730ecaeb039c4d391b5d24a57ab9eb3a5",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1",
+  "causal_blocker": "AVOIDABLE_FRONTIER_VERIFICATION_LATENCY_FROM_TRANSIENT_CUT_HARDCODING_AND_UNSCOPED_DRIFT_PR_TRIGGERS",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "explicit_user_authorization": "User explicitly requested: update everything you should update perfectly.",
+  "weakens_existing_guard": false,
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::ADVANCED_AGENTIC_SOFTWARE_ENGINEERING_SUPERPOWERS_V1::AVOIDABLE_FRONTIER_VERIFICATION_LATENCY_FROM_TRANSIENT_CUT_HARDCODING_AND_UNSCOPED_DRIFT_PR_TRIGGERS",
+  "expected_parent_frontier_change": "NO_CAPABILITY_FRONTIER_CHANGE__REPLACE_TRANSIENT_CUT_SPECIFIC_CONSISTENCY_ASSERTIONS_WITH_A_REUSABLE_FAIL_CLOSED_REDUCER_AND_SCOPE_DRIFT_PR_TRIGGERS_TO_RELEVANT_CONTROL_SURFACES",
+  "highest_leverage_now": true,
+  "stop_condition": "FRONTIER_STATE_CONSISTENCY_AND_DRIFT_GUARD_PASS_ON_THE_EXACT_BASE_WITHOUT_TRANSIENT_CUT_CONSTANTS_OR_UNRELATED_PR_RUNS",
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "intentional_route_race": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "b12b1e7730ecaeb039c4d391b5d24a57ab9eb3a5",
+    "real_outcome": "Frontier consistency verification remains fail-closed while becoming independent of transient cut versions, and drift PR runs are limited to relevant control surfaces.",
+    "required_capability": "LOW_LATENCY_FAIL_CLOSED_CANONICAL_FRONTIER_CONSISTENCY",
+    "obs_goal": {
+      "real_outcome": "Preserve truthful frontier authority with less verification churn.",
+      "proxy_goals_deleted": [
+        "WORKFLOW_COUNT",
+        "MICRO_COMMIT_COUNT"
+      ],
+      "surviving_necessity": "Independent consistency and drift verification."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/current_state_obs_reducer.py",
+        "canonical/governance/ATOMIC_FRONTIER_TRANSACTION_V1.json",
+        ".github/workflows/frontier-state-consistency.yml"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": "No terminal capability work is part of this governance repair.",
+      "surviving_gap": "Inline transient cut constants and unscoped PR triggers cause avoidable failures and runs."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CONTROL_PLANE_DEFECT",
+      "delete_bypass_substitute_options": [
+        "DELETE_TRANSIENT_CUT_CONSTANTS",
+        "SUBSTITUTE_REUSABLE_REDUCER",
+        "PATH_SCOPE_PR_TRIGGER"
+      ],
+      "surviving_causal_blocker": "AVOIDABLE_FRONTIER_VERIFICATION_LATENCY_FROM_TRANSIENT_CUT_HARDCODING_AND_UNSCOPED_DRIFT_PR_TRIGGERS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1_REUSABLE_REDUCER_PLUS_PATH_SCOPED_GUARD",
+        "2_KEEP_INLINE_TRANSIENT_ASSERTIONS",
+        "3_ADD_ANOTHER_GOVERNANCE_LAYER"
+      ],
+      "losing_routes_reason": "The incumbent duplicates logic and hard-codes transient facts; another layer adds latency.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Repository-local CI only; no fresh terminal evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "INLINE_TRANSIENT_CUT_CONSTANT_ASSERTIONS",
+        "UNRELATED_PR_DRIFT_RUNS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "CURRENT_STATE_OBS_REDUCER",
+        "ATOMIC_FRONTIER_TRANSACTION_POLICY"
+      ],
+      "fresh_reuse_plan": "Reuse live hierarchy, graph, queue, pointer, scoreboard, and target as consistency surfaces."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Manual recurring cross-surface comparison"
+      ],
+      "search_stop_decision": "Exact defects are directly observed in repository state; external discovery is irrelevant.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "KEEP_CURRENT_INLINE_CHECKS",
+      "ADD_MORE_GOVERNANCE",
+      "REUSABLE_REDUCER_AND_SCOPED_TRIGGER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "KEEP_CURRENT_INLINE_CHECKS",
+      "ADD_MORE_GOVERNANCE"
+    ],
+    "selected_surviving_route": "REUSABLE_REDUCER_AND_SCOPED_TRIGGER",
+    "why_selected_route_is_fastest_sufficient": "Smallest patch that preserves fail-closed verification while deleting transient constants and unrelated PR executions.",
+    "expected_parent_level_state_change": "NO_CAPABILITY_FRONTIER_CHANGE__REPLACE_TRANSIENT_CUT_SPECIFIC_CONSISTENCY_ASSERTIONS_WITH_A_REUSABLE_FAIL_CLOSED_REDUCER_AND_SCOPE_DRIFT_PR_TRIGGERS_TO_RELEVANT_CONTROL_SURFACES",
+    "stop_condition": "FRONTIER_STATE_CONSISTENCY_AND_DRIFT_GUARD_PASS_ON_THE_EXACT_BASE_WITHOUT_TRANSIENT_CUT_CONSTANTS_OR_UNRELATED_PR_RUNS",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Governance-only repair of existing Brain control surfaces; no external capability route selection."
+    }
+  }
+}

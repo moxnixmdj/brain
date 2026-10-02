@@ -2,16 +2,31 @@ name: Frontier State Consistency
 on:
   push:
     branches: [main]
-    paths: [canonical/CANONICAL_POINTER.json, canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json, canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json, canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json, .github/workflows/frontier-state-consistency.yml]
+    paths:
+      - canonical/CANONICAL_POINTER.json
+      - canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json
+      - canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json
+      - canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json
+      - canonical/capabilities/frontier/**
+      - canonical/runtime/frontier_state_consistency.py
+      - .github/workflows/frontier-state-consistency.yml
   pull_request:
     branches: [main]
-    paths: [canonical/CANONICAL_POINTER.json, canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json, canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json, canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json, .github/workflows/frontier-state-consistency.yml]
+    paths:
+      - canonical/CANONICAL_POINTER.json
+      - canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json
+      - canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json
+      - canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json
+      - canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json
+      - canonical/capabilities/frontier/**
+      - canonical/runtime/frontier_state_consistency.py
+      - .github/workflows/frontier-state-consistency.yml
   workflow_dispatch:
 concurrency:
   group: frontier-state-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
-permissions:
-  contents: read
+permissions: {contents: read}
 jobs:
   consistency:
     runs-on: ubuntu-latest
@@ -20,21 +35,5 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with: {python-version: '3.12'}
-      - name: Verify frontier mirrors derive from live authority
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          L=lambda p: json.loads(Path(p).read_text())
-          h=L("canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json"); u=L("canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json")
-          p=L("canonical/CANONICAL_POINTER.json"); s=L("canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json")
-          b=h["current_parent_blocker"]; n=h["next_required_action_class"]; af=s["active_frontier_accounting"]; m=h["residual_action_universe_v2"]
-          assert p["current_frontier"]["critical_blocker"]==b and p["current_frontier"]["highest_leverage_capability_gap"]==b and p["current_frontier"]["next_step"]==n
-          assert af["residual_gap"]==b and af["current_parent_blocker"]==b and af["next_required_action"]==n and s["next_required_action"]==n
-          assert s["next_progress_event_target"]==h["next_progress_event_target"]
-          assert m["status"]==u["status"] and m["exact_cut_ready"]==u["exact_cut_ready"] and m["blocking_obligations"]==u["blocking_obligations"]
-          assert m["blocking_obligations"]==[] and m["exact_cut_ready"] is True
-          assert u["blocking_obligations"]==[] and u["exact_cut_ready"] is True
-          assert h["execution_latency_control"]["status"]=="ACTIVE" and p["boot_requirements"]["atomic_frontier_transaction_required"] is True
-          v=L("canonical/governance/RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6.json"); assert v["status"].startswith("VERIFIED_EXACT_MINIMUM") and v["observation_count"]==2 and v["total_cost"]==2; print("FRONTIER_STATE_CONSISTENT_V6_CUT")
-          PY
+      - run: python -m py_compile canonical/runtime/frontier_state_consistency.py
+      - run: python canonical/runtime/frontier_state_consistency.py
